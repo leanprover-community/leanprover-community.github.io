@@ -12,52 +12,49 @@ permalink: archive/116395maths/31149naivenormnum.html
 
 {% raw %}
 #### [ Kevin Buzzard (Sep 11 2018 at 16:15)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/naive%20norm-num/near/133735274):
-Chris Hughes sent me a message in June containing a very cool naive `norm_num`. I found learning about a naive `ring` very interesting, and `ring` and `norm_num` are two tactics which mathematicians can't live without, so without his permission, here is the message he sent me in full:
+<p>Chris Hughes sent me a message in June containing a very cool naive <code>norm_num</code>. I found learning about a naive <code>ring</code> very interesting, and <code>ring</code> and <code>norm_num</code> are two tactics which mathematicians can't live without, so without his permission, here is the message he sent me in full:</p>
+<hr>
+<p>I wrote a naive <code>norm_num</code>.</p>
+<div class="codehilite"><pre><span></span><span class="kn">variables</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">semiring</span> <span class="n">α</span><span class="o">]</span>
 
-***
-I wrote a naive `norm_num`.
+<span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="kn">lemma</span> <span class="n">bit0_mul_bit0</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">bit0</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">bit0</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">bit0</span> <span class="o">(</span><span class="n">bit0</span> <span class="o">(</span><span class="n">a</span> <span class="bp">*</span> <span class="n">b</span><span class="o">))</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">bit0</span><span class="o">,</span> <span class="n">mul_add</span><span class="o">,</span> <span class="n">add_mul</span><span class="o">]</span>
 
-```lean
-variables {α : Type*} [semiring α]
+<span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="kn">lemma</span> <span class="n">bit1_mul_bit0</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">bit1</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">bit0</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">bit0</span> <span class="o">(</span><span class="n">bit0</span> <span class="o">(</span><span class="n">a</span> <span class="bp">*</span> <span class="n">b</span><span class="o">)</span> <span class="bp">+</span> <span class="n">b</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">bit1</span><span class="o">,</span> <span class="n">bit0</span><span class="o">,</span> <span class="n">mul_add</span><span class="o">,</span> <span class="n">add_mul</span><span class="o">]</span>
 
-@[simp] lemma bit0_mul_bit0 (a b : α) : bit0 a * bit0 b = bit0 (bit0 (a * b)) :=
-by simp [bit0, mul_add, add_mul]
+<span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="kn">lemma</span> <span class="n">bit0_mul_bit1</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">bit0</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">bit1</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">bit0</span> <span class="o">(</span><span class="n">a</span> <span class="bp">+</span> <span class="n">bit0</span> <span class="o">(</span><span class="n">a</span> <span class="bp">*</span> <span class="n">b</span><span class="o">))</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">bit1</span><span class="o">,</span> <span class="n">bit0</span><span class="o">,</span> <span class="n">mul_add</span><span class="o">,</span> <span class="n">add_mul</span><span class="o">]</span>
 
-@[simp] lemma bit1_mul_bit0 (a b : α) : bit1 a * bit0 b = bit0 (bit0 (a * b) + b) :=
-by simp [bit1, bit0, mul_add, add_mul]
+<span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="kn">lemma</span> <span class="n">bit1_mul_bit1</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">bit1</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">bit1</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">bit1</span> <span class="o">(</span><span class="n">a</span> <span class="bp">+</span> <span class="n">b</span> <span class="bp">+</span> <span class="n">bit0</span> <span class="o">(</span><span class="n">a</span> <span class="bp">*</span> <span class="n">b</span><span class="o">))</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">bit1</span><span class="o">,</span> <span class="n">bit0</span><span class="o">,</span> <span class="n">mul_add</span><span class="o">,</span> <span class="n">add_mul</span><span class="o">]</span>
 
-@[simp] lemma bit0_mul_bit1 (a b : α) : bit0 a * bit1 b = bit0 (a + bit0 (a * b)) :=
-by simp [bit1, bit0, mul_add, add_mul]
+<span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="kn">lemma</span> <span class="n">bit0_add_bit0</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">bit0</span> <span class="n">a</span> <span class="bp">+</span> <span class="n">bit0</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">bit0</span> <span class="o">(</span><span class="n">a</span> <span class="bp">+</span> <span class="n">b</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">bit0</span><span class="o">]</span>
 
-@[simp] lemma bit1_mul_bit1 (a b : α) : bit1 a * bit1 b = bit1 (a + b + bit0 (a * b)) :=
-by simp [bit1, bit0, mul_add, add_mul]
+<span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="kn">lemma</span> <span class="n">bit0_add_bit1</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">bit0</span> <span class="n">a</span> <span class="bp">+</span> <span class="n">bit1</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">bit1</span> <span class="o">(</span><span class="n">a</span> <span class="bp">+</span> <span class="n">b</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">bit0</span><span class="o">,</span> <span class="n">bit1</span><span class="o">]</span>
 
-@[simp] lemma bit0_add_bit0 (a b : α) : bit0 a + bit0 b = bit0 (a + b) :=
-by simp [bit0]
+<span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="kn">lemma</span> <span class="n">bit1_add_bit0</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">bit1</span> <span class="n">a</span> <span class="bp">+</span> <span class="n">bit0</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">bit1</span> <span class="o">(</span><span class="n">a</span> <span class="bp">+</span> <span class="n">b</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">bit0</span><span class="o">,</span> <span class="n">bit1</span><span class="o">]</span>
 
-@[simp] lemma bit0_add_bit1 (a b : α) : bit0 a + bit1 b = bit1 (a + b) :=
-by simp [bit0, bit1]
+<span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="kn">lemma</span> <span class="n">bit1_add_bit1</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">bit1</span> <span class="n">a</span> <span class="bp">+</span> <span class="n">bit1</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">bit0</span> <span class="o">(</span><span class="n">a</span> <span class="bp">+</span> <span class="n">b</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">bit0</span><span class="o">,</span> <span class="n">bit1</span><span class="o">]</span>
 
-@[simp] lemma bit1_add_bit0 (a b : α) : bit1 a + bit0 b = bit1 (a + b) :=
-by simp [bit0, bit1]
+<span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="kn">lemma</span> <span class="n">bit0_add_one</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">bit0</span> <span class="n">a</span> <span class="bp">+</span> <span class="mi">1</span> <span class="bp">=</span> <span class="n">bit1</span> <span class="n">a</span> <span class="o">:=</span> <span class="n">rfl</span>
 
-@[simp] lemma bit1_add_bit1 (a b : α) : bit1 a + bit1 b = bit0 (a + b + 1) :=
-by simp [bit0, bit1]
+<span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="kn">lemma</span> <span class="n">one_add_bit0</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="mi">1</span> <span class="bp">+</span> <span class="n">bit0</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">bit1</span> <span class="n">a</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">bit0</span><span class="o">,</span> <span class="n">bit1</span><span class="o">]</span>
 
-@[simp] lemma bit0_add_one (a : α) : bit0 a + 1 = bit1 a := rfl
+<span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="kn">lemma</span> <span class="n">bit1_add_one</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">bit1</span> <span class="n">a</span> <span class="bp">+</span> <span class="mi">1</span> <span class="bp">=</span> <span class="n">bit0</span> <span class="o">(</span><span class="n">a</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">bit0</span><span class="o">,</span> <span class="n">bit1</span><span class="o">]</span>
 
-@[simp] lemma one_add_bit0 (a : α) : 1 + bit0 a = bit1 a :=
-by simp [bit0, bit1]
+<span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="kn">lemma</span> <span class="n">one_add_bit1</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="mi">1</span> <span class="bp">+</span> <span class="n">bit1</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">bit0</span> <span class="o">(</span><span class="mi">1</span> <span class="bp">+</span> <span class="n">a</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">bit0</span><span class="o">,</span> <span class="n">bit1</span><span class="o">]</span>
 
-@[simp] lemma bit1_add_one (a : α) : bit1 a + 1 = bit0 (a + 1) :=
-by simp [bit0, bit1]
-
-@[simp] lemma one_add_bit1 (a : α) : 1 + bit1 a = bit0 (1 + a) :=
-by simp [bit0, bit1]
-
-example : 1231415 * 142341 = 175280842515 :=
-by simp
-```
+<span class="kn">example</span> <span class="o">:</span> <span class="mi">1231415</span> <span class="bp">*</span> <span class="mi">142341</span> <span class="bp">=</span> <span class="mi">175280842515</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">simp</span>
+</pre></div>
 
 
 {% endraw %}

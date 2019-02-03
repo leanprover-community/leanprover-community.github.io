@@ -12,2179 +12,2180 @@ permalink: archive/113488general/97723modulerefactoring.html
 
 {% raw %}
 #### [ Mario Carneiro (Sep 21 2018 at 08:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134359525):
-I'm a bit late for my birthday deadline, but I have enough of the refactoring done that I'm ready to get feedback on it. See [leanprover-community/module](https://github.com/leanprover/mathlib/compare/master...leanprover-community:module). Remarks:
-
-* The main contributions here are the complete bundling of `linear_map` and `submodule`. In fact both of these were already present in mathlib, but making them primary makes everything go so much smoother.
-* The structure of `submodule` and its category-theory-like interactions with `linear_map` are emphasized heavily. In particular, `submodule` is a complete lattice, `map` and `comap` are galois connections, there are tons of theorems about the map of an inf or the comap of fst and so on.
-* The amount of duality here is staggering. I guess someone who is category theory minded will tell me that Mod is its own opposite category or some such thing, but it really shows in the equational theory. Even stuff like `inl` being dual to `fst` causes some nice properties, and some stuff plays even nicer than on Set like `prod p q ⊔ prod p' q' = prod (p ⊔ p') (q ⊔ q')`.
-* Injectivity and surjectivity of linear maps is expressed through `ker` and `range` (should I call it `im`?), and even `linear_independent` and `basis` can be expressed using properties of the `lc.total` function.
-
-On the whole, I'm feeling really good about the results, and the proofs are much cleaner.
+<p>I'm a bit late for my birthday deadline, but I have enough of the refactoring done that I'm ready to get feedback on it. See <a href="https://github.com/leanprover/mathlib/compare/master...leanprover-community:module" target="_blank" title="https://github.com/leanprover/mathlib/compare/master...leanprover-community:module">leanprover-community/module</a>. Remarks:</p>
+<ul>
+<li>The main contributions here are the complete bundling of <code>linear_map</code> and <code>submodule</code>. In fact both of these were already present in mathlib, but making them primary makes everything go so much smoother.</li>
+<li>The structure of <code>submodule</code> and its category-theory-like interactions with <code>linear_map</code> are emphasized heavily. In particular, <code>submodule</code> is a complete lattice, <code>map</code> and <code>comap</code> are galois connections, there are tons of theorems about the map of an inf or the comap of fst and so on.</li>
+<li>The amount of duality here is staggering. I guess someone who is category theory minded will tell me that Mod is its own opposite category or some such thing, but it really shows in the equational theory. Even stuff like <code>inl</code> being dual to <code>fst</code> causes some nice properties, and some stuff plays even nicer than on Set like <code>prod p q ⊔ prod p' q' = prod (p ⊔ p') (q ⊔ q')</code>.</li>
+<li>Injectivity and surjectivity of linear maps is expressed through <code>ker</code> and <code>range</code> (should I call it <code>im</code>?), and even <code>linear_independent</code> and <code>basis</code> can be expressed using properties of the <code>lc.total</code> function.</li>
+</ul>
+<p>On the whole, I'm feeling really good about the results, and the proofs are much cleaner.</p>
 
 #### [ Johan Commelin (Sep 21 2018 at 08:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134359600):
-This is really cool! And yes, please call use `im` :lol:
+<p>This is really cool! And yes, please call use <code>im</code> <span class="emoji emoji-1f606" title="lol">:lol:</span></p>
 
 #### [ Mario Carneiro (Sep 21 2018 at 08:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134359655):
-The name `range` is of course borrowed from terminology on `set`. I would rather not confuse with `image` which is `map` here
+<p>The name <code>range</code> is of course borrowed from terminology on <code>set</code>. I would rather not confuse with <code>image</code> which is <code>map</code> here</p>
 
 #### [ Mario Carneiro (Sep 21 2018 at 08:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134359741):
-`map f p` is the submodule `f[p]` where `p` is a submodule, and `range f = map f \top = f[univ]` which was previously called `im` on linear maps
+<p><code>map f p</code> is the submodule <code>f[p]</code> where <code>p</code> is a submodule, and <code>range f = map f \top = f[univ]</code> which was previously called <code>im</code> on linear maps</p>
 
 #### [ Mario Carneiro (Sep 21 2018 at 08:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134359814):
-What is the common name for the coproduct pairing function? I called it [`copair`](https://github.com/leanprover-community/mathlib/blob/45f72059515083a0ae74567432dfc7853f791235/linear_algebra/basic.lean#L113-L114) since `pair` is used for the product pairing operation
+<p>What is the common name for the coproduct pairing function? I called it <a href="https://github.com/leanprover-community/mathlib/blob/45f72059515083a0ae74567432dfc7853f791235/linear_algebra/basic.lean#L113-L114" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/45f72059515083a0ae74567432dfc7853f791235/linear_algebra/basic.lean#L113-L114"><code>copair</code></a> since <code>pair</code> is used for the product pairing operation</p>
 
 #### [ Kenny Lau (Sep 21 2018 at 08:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134360028):
-but it's the same...
+<p>but it's the same...</p>
 
 #### [ Johan Commelin (Sep 21 2018 at 08:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134360049):
-I think @**Scott Morrison|110087**  and @**Reid Barton** have the most experience with such decisions
+<p>I think <span class="user-mention" data-user-id="110087">@Scott Morrison</span>  and <span class="user-mention" data-user-id="110032">@Reid Barton</span> have the most experience with such decisions</p>
 
 #### [ Johannes Hölzl (Sep 21 2018 at 10:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134363426):
-this is really nice!
+<p>this is really nice!</p>
 
 #### [ Patrick Massot (Sep 21 2018 at 10:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134364133):
-Mario, could you explain how all this solves the trouble we had with instance loops and multiple possible base rings?
+<p>Mario, could you explain how all this solves the trouble we had with instance loops and multiple possible base rings?</p>
 
 #### [ Kevin Buzzard (Sep 21 2018 at 12:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134370222):
-I got caught up with something else this morning but later on today, when I have Lean time, I will just merge the patch and see how Hilbert basis goes with it. Does it compile sorry-free?
+<p>I got caught up with something else this morning but later on today, when I have Lean time, I will just merge the patch and see how Hilbert basis goes with it. Does it compile sorry-free?</p>
 
 #### [ Reid Barton (Sep 21 2018 at 12:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134370418):
-`copair`/`pair` seems as good as anything else.
-Normally we just write an arrow $$A \oplus B \to C$$ and let the reader do the boring work of figuring out what map we are actually talking about.
+<p><code>copair</code>/<code>pair</code> seems as good as anything else.<br>
+Normally we just write an arrow <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>A</mi><mo>⊕</mo><mi>B</mi><mo>→</mo><mi>C</mi></mrow><annotation encoding="application/x-tex">A \oplus B \to C</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.76666em;vertical-align:-0.08333em;"></span><span class="base"><span class="mord mathit">A</span><span class="mbin">⊕</span><span class="mord mathit" style="margin-right:0.05017em;">B</span><span class="mrel">→</span><span class="mord mathit" style="margin-right:0.07153em;">C</span></span></span></span> and let the reader do the boring work of figuring out what map we are actually talking about.</p>
 
 #### [ Kenny Lau (Sep 21 2018 at 12:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134370446):
-how about product or coproduct as a bifunctor?
+<p>how about product or coproduct as a bifunctor?</p>
 
 #### [ Mario Carneiro (Sep 21 2018 at 18:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134388143):
-@**Patrick Massot**  This doesn't address that issue, although it prepares the way a bit. I anticipate that this should be a comparatively simple change, but I didn't want the two refactorings to interact so I'm going to start on it as soon as this is done.
+<p><span class="user-mention" data-user-id="110031">@Patrick Massot</span>  This doesn't address that issue, although it prepares the way a bit. I anticipate that this should be a comparatively simple change, but I didn't want the two refactorings to interact so I'm going to start on it as soon as this is done.</p>
 
 #### [ Mario Carneiro (Sep 21 2018 at 18:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134388211):
-@**Kevin Buzzard** It's not yet building. I finished the main linear algebra files, but I haven't finished up the cleanup of uses outside linear algebra. (There are no sorries, it just breaks.)
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> It's not yet building. I finished the main linear algebra files, but I haven't finished up the cleanup of uses outside linear algebra. (There are no sorries, it just breaks.)</p>
 
 #### [ Johannes Hölzl (Sep 21 2018 at 18:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134388442):
-@**Mario Carneiro** by the way: the introduction of `coe` rewrites broke some proofs in `set_theory/ordinal` and `cofinality`. I fixed this, but you might want to do a different fix
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> by the way: the introduction of <code>coe</code> rewrites broke some proofs in <code>set_theory/ordinal</code> and <code>cofinality</code>. I fixed this, but you might want to do a different fix</p>
 
 #### [ Mario Carneiro (Sep 21 2018 at 18:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134389089):
-yeah, apologies for pushing stuff last night that broke things; my computer was running very slow and I was lacking feedback on whether my fixes worked
+<p>yeah, apologies for pushing stuff last night that broke things; my computer was running very slow and I was lacking feedback on whether my fixes worked</p>
 
 #### [ Johannes Hölzl (Sep 21 2018 at 18:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134389417):
-No problem. But I'm not sure if these are the intended changes. I didn't look too deep how these new simp rules are supposed to work.
+<p>No problem. But I'm not sure if these are the intended changes. I didn't look too deep how these new simp rules are supposed to work.</p>
 
 #### [ Mario Carneiro (Sep 21 2018 at 18:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134389493):
-The idea is that `coe` will infer transitive instances, but since simp rules are only written on single coercions they won't fire on these composite instances. So we unfold them to multiple coe arrows first
+<p>The idea is that <code>coe</code> will infer transitive instances, but since simp rules are only written on single coercions they won't fire on these composite instances. So we unfold them to multiple coe arrows first</p>
 
 #### [ Mario Carneiro (Sep 21 2018 at 18:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134389521):
-I don't think I realized this until lately, but lean will also infer transitive instances for `coe` + `coe_fn` and `coe` + `coe_sort`, and since the instances are different there are more simp lemmas associated to these
+<p>I don't think I realized this until lately, but lean will also infer transitive instances for <code>coe</code> + <code>coe_fn</code> and <code>coe</code> + <code>coe_sort</code>, and since the instances are different there are more simp lemmas associated to these</p>
 
 #### [ Mario Carneiro (Sep 21 2018 at 18:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134389602):
-I think the breakage is because some simp LHSs were written with composite instances, which now break because simp normal form doesn't have any composite instances. The fix is to make sure simp LHSs have multiple coercion in these cases
+<p>I think the breakage is because some simp LHSs were written with composite instances, which now break because simp normal form doesn't have any composite instances. The fix is to make sure simp LHSs have multiple coercion in these cases</p>
 
 #### [ Patrick Massot (Sep 21 2018 at 18:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134390066):
-Ok, I'm less confused then (about modules, I'm still 100% confused about topological groups). I couldn't understand how those changes could help with the lost ring issue
+<p>Ok, I'm less confused then (about modules, I'm still 100% confused about topological groups). I couldn't understand how those changes could help with the lost ring issue</p>
 
 #### [ Chris Hughes (Sep 21 2018 at 19:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134390560):
-Is it worth bundling ideals and subgroups as well?
+<p>Is it worth bundling ideals and subgroups as well?</p>
 
 #### [ Johannes Hölzl (Sep 21 2018 at 19:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134391051):
-I think we should replace ideals by submodules, so yes we want to have them bundled. I'm not sure about subgroups. We surely want a bundled version, but maybe still an unbundled one too
+<p>I think we should replace ideals by submodules, so yes we want to have them bundled. I'm not sure about subgroups. We surely want a bundled version, but maybe still an unbundled one too</p>
 
 #### [ Kevin Buzzard (Sep 21 2018 at 19:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134392526):
-Johannes -- the idea about ideals was that submodule R M makes sense for varying R and M, but ideal R = submodule R R so only one input is needed.
+<p>Johannes -- the idea about ideals was that submodule R M makes sense for varying R and M, but ideal R = submodule R R so only one input is needed.</p>
 
 #### [ Chris Hughes (Sep 21 2018 at 19:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134392890):
-But I think you want lattice and semiring on ideals as well, so you need bundles for that.
+<p>But I think you want lattice and semiring on ideals as well, so you need bundles for that.</p>
 
 #### [ Mario Carneiro (Sep 21 2018 at 20:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134396604):
-I am of the opinion that `subgroup` and other such algebraic classes should also be bundled; almost all of the lattice structure theorems done here hold for anything that fits the structure of a universal algebra. `ideal R := submodule R R` can be defined as reducible so that all the theorems about submodules still apply.
+<p>I am of the opinion that <code>subgroup</code> and other such algebraic classes should also be bundled; almost all of the lattice structure theorems done here hold for anything that fits the structure of a universal algebra. <code>ideal R := submodule R R</code> can be defined as reducible so that all the theorems about submodules still apply.</p>
 
 #### [ Mario Carneiro (Sep 21 2018 at 20:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134396657):
-What are some examples where you think not having `is_sub*` will cause problems?
+<p>What are some examples where you think not having <code>is_sub*</code> will cause problems?</p>
 
 #### [ Johan Commelin (Sep 21 2018 at 22:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134403252):
-```quote
-`ideal R := submodule R R` can be defined as reducible so that all the theorems about submodules still apply.
-```
-@**Mario Carneiro**  I thought you said in Orsay that you couldn't think of any reason why a definition should be reducible. Has that changed? If so, can you explain?
+<blockquote>
+<p><code>ideal R := submodule R R</code> can be defined as reducible so that all the theorems about submodules still apply.</p>
+</blockquote>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span>  I thought you said in Orsay that you couldn't think of any reason why a definition should be reducible. Has that changed? If so, can you explain?</p>
 
 #### [ Kevin Buzzard (Sep 22 2018 at 01:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134412301):
-If I open polynomial.lean (which I need for Hilbert basis) I just get 1000 errors. I think I would be happier to give feedback by trying to write Lean code and then getting stuck or finding things easier than before and reporting back. I find it hard to theorise about changes that I may not fully understand.
+<p>If I open polynomial.lean (which I need for Hilbert basis) I just get 1000 errors. I think I would be happier to give feedback by trying to write Lean code and then getting stuck or finding things easier than before and reporting back. I find it hard to theorise about changes that I may not fully understand.</p>
 
 #### [ Mario Carneiro (Sep 22 2018 at 02:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134414013):
-Yeah, sorry about that. Mostly you can just open and read `algebra.module` and `linear_algebra.basic` for now. I'll let you know when it's really done (by pushing it to `master`, unless someone objects)
+<p>Yeah, sorry about that. Mostly you can just open and read <code>algebra.module</code> and <code>linear_algebra.basic</code> for now. I'll let you know when it's really done (by pushing it to <code>master</code>, unless someone objects)</p>
 
 #### [ Mario Carneiro (Sep 22 2018 at 02:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134414027):
-I just didn't want to get too far afield with a change this sweeping without some input
+<p>I just didn't want to get too far afield with a change this sweeping without some input</p>
 
 #### [ Mario Carneiro (Sep 22 2018 at 02:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134414217):
-@**Johan Commelin** That's a fair point. There are three options here: (1) nonreducible def (2) reducible def (3) notation. In Orsay I argued that either (1) or (3) suffices in most cases where you think you want (2).
-
-In this case, I don't think it matters too much, although (1) will require copying some instances like the `complete_lattice` instance, and possibly some theorems. Doing this would make the cleanest separation, allowing us to present a solid API for ideals that doesn't talk about modules half the time. (2) and (3) will entail some amount of API leakage here, moreso with (3) since it is `submodule R R` that will appear in all your statements. 
-
-The downsides of reducible defs (inconsistent handling in rw and simp) don't really apply when the def is a type since you don't usually do rewrites on a type, you just force it to be defeq to something else.
+<p><span class="user-mention" data-user-id="112680">@Johan Commelin</span> That's a fair point. There are three options here: (1) nonreducible def (2) reducible def (3) notation. In Orsay I argued that either (1) or (3) suffices in most cases where you think you want (2).</p>
+<p>In this case, I don't think it matters too much, although (1) will require copying some instances like the <code>complete_lattice</code> instance, and possibly some theorems. Doing this would make the cleanest separation, allowing us to present a solid API for ideals that doesn't talk about modules half the time. (2) and (3) will entail some amount of API leakage here, moreso with (3) since it is <code>submodule R R</code> that will appear in all your statements. </p>
+<p>The downsides of reducible defs (inconsistent handling in rw and simp) don't really apply when the def is a type since you don't usually do rewrites on a type, you just force it to be defeq to something else.</p>
 
 #### [ Mario Carneiro (Sep 28 2018 at 01:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134781266):
-This is a change I haven't implemented, but I'm considering it and want to get some feedback. Maybe a basis should be an injective function from some type into the module, i.e. the "basis" is really the range of this function, and the function gets to pick its indexing type. The reason is because we often tend to use a basis as an index for a sum, or as the domain of the free vector space to which to express isomorphism, or as the set whose cardinality is the dimension of the space - all of these roles are better accommodated by having an algebra of indexing types (which we already have courtesy of DTT) where measuring cardinality and indexing is more natural. (Also, it allows a basis to carry computational content, which isn't super important but indicates that this might be moving in the right direction.)
+<p>This is a change I haven't implemented, but I'm considering it and want to get some feedback. Maybe a basis should be an injective function from some type into the module, i.e. the "basis" is really the range of this function, and the function gets to pick its indexing type. The reason is because we often tend to use a basis as an index for a sum, or as the domain of the free vector space to which to express isomorphism, or as the set whose cardinality is the dimension of the space - all of these roles are better accommodated by having an algebra of indexing types (which we already have courtesy of DTT) where measuring cardinality and indexing is more natural. (Also, it allows a basis to carry computational content, which isn't super important but indicates that this might be moving in the right direction.)</p>
 
 #### [ Reid Barton (Sep 28 2018 at 01:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134781707):
-From a mathematical perspective this change is very natural. We often write things like "let {b_1, ..., b_n} be a basis of V" but usually (whether we are aware of it or not) we really mean we are working with an indexed collection b_i, i.e., a function {1, ..., n} -> V.
+<p>From a mathematical perspective this change is very natural. We often write things like "let {b_1, ..., b_n} be a basis of V" but usually (whether we are aware of it or not) we really mean we are working with an indexed collection b_i, i.e., a function {1, ..., n} -&gt; V.</p>
 
 #### [ Reid Barton (Sep 28 2018 at 02:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134781777):
-It's easy to say things which are false if taken literally in the "set style". For example: {x, y} is a linearly independent set in a vector space if and only if there do not exist nonzero a, b such that ax + by = 0. Well, not if x = y!
+<p>It's easy to say things which are false if taken literally in the "set style". For example: {x, y} is a linearly independent set in a vector space if and only if there do not exist nonzero a, b such that ax + by = 0. Well, not if x = y!</p>
 
 #### [ Reid Barton (Sep 28 2018 at 02:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134781792):
-On the other hand there are occasionally times when you genuinely need to work with subsets because you want to use the order structure and/or know that the collection of all possible bases is small, for example when proving that every vector space has a basis
+<p>On the other hand there are occasionally times when you genuinely need to work with subsets because you want to use the order structure and/or know that the collection of all possible bases is small, for example when proving that every vector space has a basis</p>
 
 #### [ Mario Carneiro (Sep 28 2018 at 02:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134781797):
-I think the statement about every vector space has a basis will explicitly use subsets
+<p>I think the statement about every vector space has a basis will explicitly use subsets</p>
 
 #### [ Reid Barton (Sep 28 2018 at 02:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134781842):
-I think the function approach is not really restrictive then anyways. You just say "a subset such that the inclusion is a basis".
+<p>I think the function approach is not really restrictive then anyways. You just say "a subset such that the inclusion is a basis".</p>
 
 #### [ Mario Carneiro (Sep 28 2018 at 02:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134781853):
-i.e. every vector space has a basis where the function is the subtype coercion and the indexing set is a subtype of the vector space
+<p>i.e. every vector space has a basis where the function is the subtype coercion and the indexing set is a subtype of the vector space</p>
 
 #### [ Reid Barton (Sep 28 2018 at 02:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134781855):
-(By the way, injectivity of the function is a consequence of being a basis, not a precondition.)
+<p>(By the way, injectivity of the function is a consequence of being a basis, not a precondition.)</p>
 
 #### [ Mario Carneiro (Sep 28 2018 at 02:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134781869):
-I agree, I think under most circumstances you should be able to prove injectivity, except in trivial cases and in those cases you probably don't want to impose it additionally
+<p>I agree, I think under most circumstances you should be able to prove injectivity, except in trivial cases and in those cases you probably don't want to impose it additionally</p>
 
 #### [ Mario Carneiro (Sep 28 2018 at 02:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134781913):
-(bases over the zero ring are weird)
+<p>(bases over the zero ring are weird)</p>
 
 #### [ Reid Barton (Sep 28 2018 at 02:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134781932):
-Hmm... yes
+<p>Hmm... yes</p>
 
 #### [ Mario Carneiro (Sep 28 2018 at 02:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134781956):
-speaking of which... `unit` should be a ring
+<p>speaking of which... <code>unit</code> should be a ring</p>
 
 #### [ Mario Carneiro (Sep 28 2018 at 02:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134781998):
-it would fit nicely with the ring instance for products and Pis
+<p>it would fit nicely with the ring instance for products and Pis</p>
 
 #### [ Reid Barton (Sep 28 2018 at 02:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134782068):
-The nlab definition of basis is: A basis of a free R-module M (possibly a vector space, see basis of a vector space) is a linear isomorphism $$B\colon M \to \oplus_{i\in I}R$$ to a direct sum of copies of the ring R, regarded as a module over itself.
+<p>The nlab definition of basis is: A basis of a free R-module M (possibly a vector space, see basis of a vector space) is a linear isomorphism <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>B</mi><mo separator="true">:</mo><mi>M</mi><mo>→</mo><msub><mo>⊕</mo><mrow><mi>i</mi><mo>∈</mo><mi>I</mi></mrow></msub><mi>R</mi></mrow><annotation encoding="application/x-tex">B\colon M \to \oplus_{i\in I}R</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.8607em;vertical-align:-0.17737em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.05017em;">B</span><span class="mpunct">:</span><span class="mord mathit" style="margin-right:0.10903em;">M</span><span class="mrel">→</span><span class="mord"><span class="mbin">⊕</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathit mtight">i</span><span class="mrel mtight">∈</span><span class="mord mathit mtight" style="margin-right:0.07847em;">I</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.17737em;"></span></span></span></span></span><span class="mord mathit" style="margin-right:0.00773em;">R</span></span></span></span> to a direct sum of copies of the ring R, regarded as a module over itself.</p>
 
 #### [ Reid Barton (Sep 28 2018 at 02:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134782086):
-I think this kind of property is more important than "for all i /= j, b_i /= b_j"
+<p>I think this kind of property is more important than "for all i /= j, b_i /= b_j"</p>
 
 #### [ Reid Barton (Sep 28 2018 at 02:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134782104):
-... if you find yourself having to make some decision regarding the zero ring
+<p>... if you find yourself having to make some decision regarding the zero ring</p>
 
 #### [ Reid Barton (Sep 28 2018 at 02:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134782355):
-Yes okay, now I see you were saying the same thing regarding definition of bases over the zero ring
+<p>Yes okay, now I see you were saying the same thing regarding definition of bases over the zero ring</p>
 
 #### [ Mario Carneiro (Sep 28 2018 at 02:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134783593):
-so what does this say about linearly independent sets?
+<p>so what does this say about linearly independent sets?</p>
 
 #### [ Mario Carneiro (Sep 28 2018 at 02:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134783641):
-I guess these should also be indexed
+<p>I guess these should also be indexed</p>
 
 #### [ Johan Commelin (Sep 28 2018 at 03:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134785061):
-```quote
-speaking of which... `unit` should be a ring
-```
-```lean
-instance : comm_ring unit := by tidy
-```
+<blockquote>
+<p>speaking of which... <code>unit</code> should be a ring</p>
+</blockquote>
+<div class="codehilite"><pre><span></span><span class="kn">instance</span> <span class="o">:</span> <span class="n">comm_ring</span> <span class="n">unit</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">tidy</span>
+</pre></div>
 
 #### [ Johan Commelin (Sep 28 2018 at 03:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134785183):
-Good luck golfing that...
+<p>Good luck golfing that...</p>
 
 #### [ Johan Commelin (Sep 28 2018 at 03:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134785315):
-I'm pretty sure that `tidy` will also prove for you that it is the terminal object in `Ring` and `CRing`
+<p>I'm pretty sure that <code>tidy</code> will also prove for you that it is the terminal object in <code>Ring</code> and <code>CRing</code></p>
 
 #### [ Kevin Buzzard (Sep 28 2018 at 09:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134807675):
-I must confess I was surprised when I first saw that in Lean a basis was a subset. Mulling over this, I realised that it was because I was used to teaching students about bases of *finite-dimensional* vector spaces -- and this is not a conversation about bases, this is also a conversation about the concepts of linear independence and spanning -- and in these cases it seems more convenient when developing the theory to be considering lists of elements rather than subsets (so order matters, and repeats are OK). For a dumb example, consider the zero ring `R`. Then `R^3=R` and hence I want `[0,0,0]` to be a basis for `R`, which it is. This is the only case where bases can have repeated elements and also the only case where bases can have different cardinalities. A less pathological example is that if a basis of a fdvs is a list then a linear map is a matrix, rather than some weird concept of a matrix where we don't mind permuting the rows and columns which we'd get for sets. My students did a bunch of stuff involving this over the summer -- linear maps = matrices and so on -- and although their code is probably not mathlib-ready it would not surprise me if they had worked out some good useful and correct statements.
-
-The only situation I know where subsets are better than maps from a type is in the Zorn proof that every vector space has a basis. But this result is in some sense a bit of a novelty, my impression is that working mathematicians very rarely think about infinite-dimensional vector spaces with no extra structure at all, and if there is extra structure (a topology or whatever) then the abstract notion of a basis is usually not what we want anyway (c.f. "basis" of a Hilbert space = lin ind subset with dense span).
+<p>I must confess I was surprised when I first saw that in Lean a basis was a subset. Mulling over this, I realised that it was because I was used to teaching students about bases of <em>finite-dimensional</em> vector spaces -- and this is not a conversation about bases, this is also a conversation about the concepts of linear independence and spanning -- and in these cases it seems more convenient when developing the theory to be considering lists of elements rather than subsets (so order matters, and repeats are OK). For a dumb example, consider the zero ring <code>R</code>. Then <code>R^3=R</code> and hence I want <code>[0,0,0]</code> to be a basis for <code>R</code>, which it is. This is the only case where bases can have repeated elements and also the only case where bases can have different cardinalities. A less pathological example is that if a basis of a fdvs is a list then a linear map is a matrix, rather than some weird concept of a matrix where we don't mind permuting the rows and columns which we'd get for sets. My students did a bunch of stuff involving this over the summer -- linear maps = matrices and so on -- and although their code is probably not mathlib-ready it would not surprise me if they had worked out some good useful and correct statements.</p>
+<p>The only situation I know where subsets are better than maps from a type is in the Zorn proof that every vector space has a basis. But this result is in some sense a bit of a novelty, my impression is that working mathematicians very rarely think about infinite-dimensional vector spaces with no extra structure at all, and if there is extra structure (a topology or whatever) then the abstract notion of a basis is usually not what we want anyway (c.f. "basis" of a Hilbert space = lin ind subset with dense span).</p>
 
 #### [ Johan Commelin (Oct 04 2018 at 15:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135187101):
-If we are refactoring modules... would it make sense to rename `span` to `generate`? It would be more in line with all the other forms of `generate`...
+<p>If we are refactoring modules... would it make sense to rename <code>span</code> to <code>generate</code>? It would be more in line with all the other forms of <code>generate</code>...</p>
 
 #### [ Mario Carneiro (Oct 04 2018 at 16:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135193289):
-I was actually thinking about going the other way :)
+<p>I was actually thinking about going the other way :)</p>
 
 #### [ Mario Carneiro (Oct 04 2018 at 16:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135193368):
-specifically as relates to other "closure" operations e.g. subgroup closure and normal closure
+<p>specifically as relates to other "closure" operations e.g. subgroup closure and normal closure</p>
 
 #### [ Mario Carneiro (Oct 04 2018 at 16:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135193424):
-For set-of-set operations like `filter` and `topology` I prefer `generate`, but maybe that's not principled enough
+<p>For set-of-set operations like <code>filter</code> and <code>topology</code> I prefer <code>generate</code>, but maybe that's not principled enough</p>
 
 #### [ Mario Carneiro (Oct 04 2018 at 16:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135193452):
-I agree some uniformity of naming would be a good thing
+<p>I agree some uniformity of naming would be a good thing</p>
 
 #### [ Johan Commelin (Oct 04 2018 at 16:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135193845):
-Ok, I don't really care which one gets chosen :lol:
+<p>Ok, I don't really care which one gets chosen <span class="emoji emoji-1f606" title="lol">:lol:</span></p>
 
 #### [ Mario Carneiro (Oct 08 2018 at 05:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135377864):
-So I've got to working on `ideal` now, and I have come to realize that ideal theory is not simply a specialization of submodule theory. It's obvious in hindsight, but as a category the homs are different - a ring hom is not a linear map, and a linear map is not a ring hom
+<p>So I've got to working on <code>ideal</code> now, and I have come to realize that ideal theory is not simply a specialization of submodule theory. It's obvious in hindsight, but as a category the homs are different - a ring hom is not a linear map, and a linear map is not a ring hom</p>
 
 #### [ Mario Carneiro (Oct 08 2018 at 05:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135377912):
-So this means that things like `map` and `comap` don't work the same way on rings
+<p>So this means that things like <code>map</code> and <code>comap</code> don't work the same way on rings</p>
 
 #### [ Mario Carneiro (Oct 08 2018 at 05:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135377924):
-In particular I don't even think there is a notion of `ideal.map` unless you assume the map is surjective
+<p>In particular I don't even think there is a notion of <code>ideal.map</code> unless you assume the map is surjective</p>
 
 #### [ Mario Carneiro (Oct 08 2018 at 05:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135378146):
-Is there a way to make sense of a ring-changing hom from (R,M) to (R',M') modules?
+<p>Is there a way to make sense of a ring-changing hom from (R,M) to (R',M') modules?</p>
 
 #### [ Scott Morrison (Oct 08 2018 at 06:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135378473):
-Perhaps there's a notion of a map (R,M) to (R',M') as a linear map f : M to M', and a ring hom g : R' to R (note this is backwards), satisfying g(r') m = r' f(m).
+<p>Perhaps there's a notion of a map (R,M) to (R',M') as a linear map f : M to M', and a ring hom g : R' to R (note this is backwards), satisfying g(r') m = r' f(m).</p>
 
 #### [ Scott Morrison (Oct 08 2018 at 06:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135378476):
-I'm not sure it's particularly useful.
+<p>I'm not sure it's particularly useful.</p>
 
 #### [ Mario Carneiro (Oct 08 2018 at 06:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135378488):
-yeah I was thinking the ring part might end up contravariant
+<p>yeah I was thinking the ring part might end up contravariant</p>
 
 #### [ Mario Carneiro (Oct 08 2018 at 06:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135378490):
-so I guess this does not generalize ring homs as maps (R,R) -> (R', R')
+<p>so I guess this does not generalize ring homs as maps (R,R) -&gt; (R', R')</p>
 
 #### [ Johan Commelin (Oct 08 2018 at 06:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135378925):
-```quote
-Is there a way to make sense of a ring-changing hom from (R,M) to (R',M') modules?
-```
-@**Mario Carneiro** What exactly do you mean with this question?
+<blockquote>
+<p>Is there a way to make sense of a ring-changing hom from (R,M) to (R',M') modules?</p>
+</blockquote>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> What exactly do you mean with this question?</p>
 
 #### [ Mario Carneiro (Oct 08 2018 at 06:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135378968):
-I wonder if there is a common generalization of ring homs, (R,R) -> (R', R') and linear maps (R,M) -> (R, M')
+<p>I wonder if there is a common generalization of ring homs, (R,R) -&gt; (R', R') and linear maps (R,M) -&gt; (R, M')</p>
 
 #### [ Mario Carneiro (Oct 08 2018 at 06:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135378976):
-is there a category theory operation for taking a "total space" over the categories R-Mod where R is an object in the category Ring?
+<p>is there a category theory operation for taking a "total space" over the categories R-Mod where R is an object in the category Ring?</p>
 
 #### [ Johan Commelin (Oct 08 2018 at 06:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135378980):
-Sure.
+<p>Sure.</p>
 
 #### [ Johan Commelin (Oct 08 2018 at 06:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135378985):
-That's a fibered category
+<p>That's a fibered category</p>
 
 #### [ Johan Commelin (Oct 08 2018 at 06:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135378994):
-And this one is one of the first examples
+<p>And this one is one of the first examples</p>
 
 #### [ Johan Commelin (Oct 08 2018 at 06:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379047):
-A map `(R,M) → (R',M')` is a pair `R → R'` + `R' \otimes_R M → M'`. (Or do I need commutativity for that tensor product?)
+<p>A map <code>(R,M) → (R',M')</code> is a pair <code>R → R'</code> + <code>R' \otimes_R M → M'</code>. (Or do I need commutativity for that tensor product?)</p>
 
 #### [ Johan Commelin (Oct 08 2018 at 06:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379051):
-Yes, I do.
+<p>Yes, I do.</p>
 
 #### [ Johan Commelin (Oct 08 2018 at 06:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379052):
-This doesn't work for arbitrary `R → R'`.
+<p>This doesn't work for arbitrary <code>R → R'</code>.</p>
 
 #### [ Johan Commelin (Oct 08 2018 at 06:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379094):
-@**Mario Carneiro** Were you planning on doing left- right- and two-sided-ideals?
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> Were you planning on doing left- right- and two-sided-ideals?</p>
 
 #### [ Johan Commelin (Oct 08 2018 at 06:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379097):
-Or only ideals in comm_rings?
+<p>Or only ideals in comm_rings?</p>
 
 #### [ Mario Carneiro (Oct 08 2018 at 06:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379102):
-Just comm ring ideals, since that's what's there now
+<p>Just comm ring ideals, since that's what's there now</p>
 
 #### [ Johan Commelin (Oct 08 2018 at 06:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379107):
-Ok, so for comm_ring modules you get this really nice fibered category `Mod`.
+<p>Ok, so for comm_ring modules you get this really nice fibered category <code>Mod</code>.</p>
 
 #### [ Johan Commelin (Oct 08 2018 at 06:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379109):
-Is that what you were looking for?
+<p>Is that what you were looking for?</p>
 
 #### [ Johan Commelin (Oct 08 2018 at 06:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379113):
-Note that by adjunction you can also just give a map `M → M'` that is `R`-linear
+<p>Note that by adjunction you can also just give a map <code>M → M'</code> that is <code>R</code>-linear</p>
 
 #### [ Mario Carneiro (Oct 08 2018 at 06:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379128):
-> `R' \otimes_R M`
-
-what is this
+<blockquote>
+<p><code>R' \otimes_R M</code></p>
+</blockquote>
+<p>what is this</p>
 
 #### [ Johan Commelin (Oct 08 2018 at 06:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379153):
-Tensor product
+<p>Tensor product</p>
 
 #### [ Johan Commelin (Oct 08 2018 at 06:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379154):
-turning `M` into an `R'`-module
+<p>turning <code>M</code> into an <code>R'</code>-module</p>
 
 #### [ Mario Carneiro (Oct 08 2018 at 06:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379155):
-so R' is viewed as a R-module here?
+<p>so R' is viewed as a R-module here?</p>
 
 #### [ Johan Commelin (Oct 08 2018 at 06:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379156):
-Yes
+<p>Yes</p>
 
 #### [ Mario Carneiro (Oct 08 2018 at 06:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379164):
-oh, there's an interesting construction we don't have
+<p>oh, there's an interesting construction we don't have</p>
 
 #### [ Johan Commelin (Oct 08 2018 at 06:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379166):
-Which one?
+<p>Which one?</p>
 
 #### [ Mario Carneiro (Oct 08 2018 at 06:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379169):
-a ring hom `R -> R'` yields a R-module structure on `R'`
+<p>a ring hom <code>R -&gt; R'</code> yields a R-module structure on <code>R'</code></p>
 
 #### [ Johan Commelin (Oct 08 2018 at 06:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379173):
-You mean the forgetful functor?
+<p>You mean the forgetful functor?</p>
 
 #### [ Johan Commelin (Oct 08 2018 at 06:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379176):
-From `R'`-mod to `R`-mod?
+<p>From <code>R'</code>-mod to <code>R</code>-mod?</p>
 
 #### [ Mario Carneiro (Oct 08 2018 at 06:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379216):
-It's not forgetful, right?
+<p>It's not forgetful, right?</p>
 
 #### [ Johan Commelin (Oct 08 2018 at 06:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379218):
-Not really
+<p>Not really</p>
 
 #### [ Mario Carneiro (Oct 08 2018 at 06:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379219):
-The hom could be anything
+<p>The hom could be anything</p>
 
 #### [ Johan Commelin (Oct 08 2018 at 06:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379222):
-I still think of it as "forgetting"
+<p>I still think of it as "forgetting"</p>
 
 #### [ Johan Commelin (Oct 08 2018 at 06:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379229):
-We have `R` is an `R`-mod
+<p>We have <code>R</code> is an <code>R</code>-mod</p>
 
 #### [ Johan Commelin (Oct 08 2018 at 06:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379233):
-So if you chain that to the "forget" instance, you have what you want.
+<p>So if you chain that to the "forget" instance, you have what you want.</p>
 
 #### [ Mario Carneiro (Oct 08 2018 at 06:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379239):
-I don't follow
+<p>I don't follow</p>
 
 #### [ Johan Commelin (Oct 08 2018 at 06:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379242):
-I tried adding "forget" about 3 months ago, and I ran into trouble.
+<p>I tried adding "forget" about 3 months ago, and I ran into trouble.</p>
 
 #### [ Mario Carneiro (Oct 08 2018 at 06:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379244):
-what forget instance?
+<p>what forget instance?</p>
 
 #### [ Johan Commelin (Oct 08 2018 at 06:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379248):
-But maybe with the refactor, you can now do it.
+<p>But maybe with the refactor, you can now do it.</p>
 
 #### [ Johan Commelin (Oct 08 2018 at 06:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379249):
-I mean `R'` is an `R'`-mod + every `R'`-mod is an `R`-mod.
+<p>I mean <code>R'</code> is an <code>R'</code>-mod + every <code>R'</code>-mod is an <code>R</code>-mod.</p>
 
 #### [ Johan Commelin (Oct 08 2018 at 06:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379273):
-I want your instance to be broken into 2 steps.
+<p>I want your instance to be broken into 2 steps.</p>
 
 #### [ Johan Commelin (Oct 08 2018 at 06:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379301):
-```quote
-what forget instance?
-```
-The "forgetful" functor instance
+<blockquote>
+<p>what forget instance?</p>
+</blockquote>
+<p>The "forgetful" functor instance</p>
 
 #### [ Mario Carneiro (Oct 08 2018 at 06:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379302):
-> every R'-mod is an R-mod
-
-This one requires an explicit ring hom input
+<blockquote>
+<p>every R'-mod is an R-mod</p>
+</blockquote>
+<p>This one requires an explicit ring hom input</p>
 
 #### [ Johan Commelin (Oct 08 2018 at 06:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379308):
-Hmmm, it does... unless we turn `R'` into an algebra
+<p>Hmmm, it does... unless we turn <code>R'</code> into an algebra</p>
 
 #### [ Johan Commelin (Oct 08 2018 at 06:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379310):
-over `R`
+<p>over <code>R</code></p>
 
 #### [ Mario Carneiro (Oct 08 2018 at 06:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379318):
-ah, we don't have anything like that yet
+<p>ah, we don't have anything like that yet</p>
 
 #### [ Mario Carneiro (Oct 08 2018 at 06:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379369):
-I needed assoc algebras around this time in metamath, now I forget why
+<p>I needed assoc algebras around this time in metamath, now I forget why</p>
 
 #### [ Mario Carneiro (Oct 08 2018 at 06:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379428):
-Ah - multivariate polynomials are the free assoc algebra
+<p>Ah - multivariate polynomials are the free assoc algebra</p>
 
 #### [ Johan Commelin (Oct 08 2018 at 06:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379457):
-The ones we have are also commutative
+<p>The ones we have are also commutative</p>
 
 #### [ Johan Commelin (Oct 08 2018 at 06:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379496):
-At some point we might want non-commutative polynomials as well
+<p>At some point we might want non-commutative polynomials as well</p>
 
 #### [ Mario Carneiro (Oct 08 2018 at 06:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379511):
-I have never touched noncomm polynomials, but I guess it's not so hard with the group ring construction
+<p>I have never touched noncomm polynomials, but I guess it's not so hard with the group ring construction</p>
 
 #### [ Mario Carneiro (Oct 08 2018 at 06:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379514):
-... + free monoid construction which we already have
+<p>... + free monoid construction which we already have</p>
 
 #### [ Johan Commelin (Oct 08 2018 at 06:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379515):
-So, could we have `f^* M'`?
+<p>So, could we have <code>f^* M'</code>?</p>
 
 #### [ Mario Carneiro (Oct 08 2018 at 06:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379555):
-I think so, what does that mean?
+<p>I think so, what does that mean?</p>
 
 #### [ Johan Commelin (Oct 08 2018 at 06:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379556):
-where `f` is a ring hom `R → R'` and `M'` is an `R'`-mod
+<p>where <code>f</code> is a ring hom <code>R → R'</code> and <code>M'</code> is an <code>R'</code>-mod</p>
 
 #### [ Johan Commelin (Oct 08 2018 at 06:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379559):
-So `f^*` is the functor `R'-mod → R-mod`
+<p>So <code>f^*</code> is the functor <code>R'-mod → R-mod</code></p>
 
 #### [ Mario Carneiro (Oct 08 2018 at 06:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379565):
-ah, okay so this is the contravariant thing that scott mentioned
+<p>ah, okay so this is the contravariant thing that scott mentioned</p>
 
 #### [ Johan Commelin (Oct 08 2018 at 06:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379567):
-Right, and it is adjoint to tensoring.
+<p>Right, and it is adjoint to tensoring.</p>
 
 #### [ Johan Commelin (Oct 08 2018 at 06:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379568):
-Which is covariant
+<p>Which is covariant</p>
 
 #### [ Johan Commelin (Oct 08 2018 at 06:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379570):
-no, that's bullcrap
+<p>no, that's bullcrap</p>
 
 #### [ Johan Commelin (Oct 08 2018 at 06:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379571):
-I'm brainfarting
+<p>I'm brainfarting</p>
 
 #### [ Johan Commelin (Oct 08 2018 at 06:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379609):
-tensor is adjoint to hom
+<p>tensor is adjoint to hom</p>
 
 #### [ Johan Commelin (Oct 08 2018 at 06:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135379614):
-Lol. So you get to choose: either you use `f^*` which is contravariant. Or you use tensor products, and you get something covariant, but "harder to parse".
+<p>Lol. So you get to choose: either you use <code>f^*</code> which is contravariant. Or you use tensor products, and you get something covariant, but "harder to parse".</p>
 
 #### [ Johan Commelin (Oct 08 2018 at 08:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135383276):
-@**Mario Carneiro** How would all this abstract nonsense help with:
-```quote
-So I've got to working on `ideal` now, and I have come to realize that ideal theory is not simply a specialization of submodule theory. It's obvious in hindsight, but as a category the homs are different - a ring hom is not a linear map, and a linear map is not a ring hom
-```
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> How would all this abstract nonsense help with:</p>
+<blockquote>
+<p>So I've got to working on <code>ideal</code> now, and I have come to realize that ideal theory is not simply a specialization of submodule theory. It's obvious in hindsight, but as a category the homs are different - a ring hom is not a linear map, and a linear map is not a ring hom</p>
+</blockquote>
 
 #### [ Kenny Lau (Oct 08 2018 at 08:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135383285):
-And nobody here has pointed out that extensions of ideals exist, c.f. Atiyah-Macdonald P.9
+<p>And nobody here has pointed out that extensions of ideals exist, c.f. Atiyah-Macdonald P.9</p>
 
 #### [ Kenny Lau (Oct 08 2018 at 08:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135383328):
-```quote
-In particular I don't even think there is a notion of `ideal.map` unless you assume the map is surjective
-```
-if f:A->B is a ring hom and L is an ideal in A then L^e is the ideal generated by f(L)
+<blockquote>
+<p>In particular I don't even think there is a notion of <code>ideal.map</code> unless you assume the map is surjective</p>
+</blockquote>
+<p>if f:A-&gt;B is a ring hom and L is an ideal in A then L^e is the ideal generated by f(L)</p>
 
 #### [ Kenny Lau (Oct 08 2018 at 08:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135383339):
-[2018-10-08.png](/user_uploads/3121/OAIFV_UuuBZXylsyoLFs_sUK/2018-10-08.png)
+<p><a href="/user_uploads/3121/OAIFV_UuuBZXylsyoLFs_sUK/2018-10-08.png" target="_blank" title="2018-10-08.png">2018-10-08.png</a></p>
+<div class="message_inline_image"><a href="/user_uploads/3121/OAIFV_UuuBZXylsyoLFs_sUK/2018-10-08.png" target="_blank" title="2018-10-08.png"><img src="/user_uploads/3121/OAIFV_UuuBZXylsyoLFs_sUK/2018-10-08.png"></a></div>
 
 #### [ Mario Carneiro (Oct 08 2018 at 08:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135383404):
-yeah, okay that's a better idea
+<p>yeah, okay that's a better idea</p>
 
 #### [ Mario Carneiro (Oct 08 2018 at 08:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135383408):
-just close the resulting set under ideal operations
+<p>just close the resulting set under ideal operations</p>
 
 #### [ Johan Commelin (Oct 08 2018 at 08:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135383456):
-@**Mario Carneiro** Do you have some sort of todo list of what remains for this refactor?
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> Do you have some sort of todo list of what remains for this refactor?</p>
 
 #### [ Mario Carneiro (Oct 08 2018 at 08:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135383458):
-@**Johan Commelin** It's just some idle speculation on my part, I don't really have any concrete implementation ideas
+<p><span class="user-mention" data-user-id="112680">@Johan Commelin</span> It's just some idle speculation on my part, I don't really have any concrete implementation ideas</p>
 
 #### [ Mario Carneiro (Oct 08 2018 at 08:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135383464):
-I'm currently in "tying up loose ends" mode in the refactor, I don't want to introduce new things
+<p>I'm currently in "tying up loose ends" mode in the refactor, I don't want to introduce new things</p>
 
 #### [ Johan Commelin (Oct 08 2018 at 08:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135383467):
-Great!
+<p>Great!</p>
 
 #### [ Mario Carneiro (Oct 08 2018 at 08:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135383470):
-it's already behind schedule too much
+<p>it's already behind schedule too much</p>
 
 #### [ Mario Carneiro (Oct 08 2018 at 08:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135383513):
-although it has made several other projects come to the fore, which I will probably have to start working on after I'm done
+<p>although it has made several other projects come to the fore, which I will probably have to start working on after I'm done</p>
 
 #### [ Mario Carneiro (Oct 08 2018 at 08:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135383515):
-foremost of which is the multiple scalar field thing
+<p>foremost of which is the multiple scalar field thing</p>
 
 #### [ Johan Commelin (Oct 08 2018 at 08:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135383519):
-After you are done, I think `faster` should be the first thing on your list. :lol:
+<p>After you are done, I think <code>faster</code> should be the first thing on your list. <span class="emoji emoji-1f606" title="lol">:lol:</span></p>
 
 #### [ Mario Carneiro (Oct 08 2018 at 08:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135383522):
-I'm actually working on that ATM
+<p>I'm actually working on that ATM</p>
 
 #### [ Johan Commelin (Oct 08 2018 at 08:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135383525):
-Wonderful! Thanks for doing that!
+<p>Wonderful! Thanks for doing that!</p>
 
 #### [ Kevin Buzzard (Oct 08 2018 at 09:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135384515):
-Here are some thoughts. The fundamental notion in algebraic geometry is an "f-map" -- see 6.21.7 in [the stacks project](https://stacks.math.columbia.edu/tag/008C). Lemma 6.21.8 shows that this is a natural idea. Although it's dressed up in a geometric language, this is something related to the conversation here. The notion of an f-map shows up in the definition of a morphism of ringed spaces in [definition 6.21](https://stacks.math.columbia.edu/tag/0090). In the discussion just below 6.26.3 [here](https://stacks.math.columbia.edu/tag/0094) we see the notion of an f-map of sheaves of modules. Note in particular in that discussion that the f-maps from G to F are in canonical bijection with two other hom sets, one involving only sheaves on X and one involving only sheaves on Y.
-
-Now of course all this needs a lot of unravelling, and the way to unravel is to ask how what de Jong writes translates into the case of affine schemes, which are just commutative rings in disguise. If I got it right, then he says to focus on the following idea: if $$f:A\to B$$ is a map of rings and if $$G$$ is an $$A$$-module and $$F$$ a $$B$$-module, an $$f$$-map $$G\to F$$ is simply an $$A$$-module homomorphism from $$G$$ to $$F$$, and the observation is that such maps naturally biject with the $$B$$-module homomorphisms from $$G\otimes_AB$$ to $$F$$. I think this is different to what Scott suggests -- he went the other way.
+<p>Here are some thoughts. The fundamental notion in algebraic geometry is an "f-map" -- see 6.21.7 in <a href="https://stacks.math.columbia.edu/tag/008C" target="_blank" title="https://stacks.math.columbia.edu/tag/008C">the stacks project</a>. Lemma 6.21.8 shows that this is a natural idea. Although it's dressed up in a geometric language, this is something related to the conversation here. The notion of an f-map shows up in the definition of a morphism of ringed spaces in <a href="https://stacks.math.columbia.edu/tag/0090" target="_blank" title="https://stacks.math.columbia.edu/tag/0090">definition 6.21</a>. In the discussion just below 6.26.3 <a href="https://stacks.math.columbia.edu/tag/0094" target="_blank" title="https://stacks.math.columbia.edu/tag/0094">here</a> we see the notion of an f-map of sheaves of modules. Note in particular in that discussion that the f-maps from G to F are in canonical bijection with two other hom sets, one involving only sheaves on X and one involving only sheaves on Y.</p>
+<p>Now of course all this needs a lot of unravelling, and the way to unravel is to ask how what de Jong writes translates into the case of affine schemes, which are just commutative rings in disguise. If I got it right, then he says to focus on the following idea: if <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>f</mi><mo>:</mo><mi>A</mi><mo>→</mo><mi>B</mi></mrow><annotation encoding="application/x-tex">f:A\to B</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.69444em;"></span><span class="strut bottom" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.10764em;">f</span><span class="mrel">:</span><span class="mord mathit">A</span><span class="mrel">→</span><span class="mord mathit" style="margin-right:0.05017em;">B</span></span></span></span> is a map of rings and if <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>G</mi></mrow><annotation encoding="application/x-tex">G</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.68333em;vertical-align:0em;"></span><span class="base"><span class="mord mathit">G</span></span></span></span> is an <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.68333em;vertical-align:0em;"></span><span class="base"><span class="mord mathit">A</span></span></span></span>-module and <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>F</mi></mrow><annotation encoding="application/x-tex">F</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.68333em;vertical-align:0em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.13889em;">F</span></span></span></span> a <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>B</mi></mrow><annotation encoding="application/x-tex">B</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.68333em;vertical-align:0em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.05017em;">B</span></span></span></span>-module, an <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>f</mi></mrow><annotation encoding="application/x-tex">f</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.69444em;"></span><span class="strut bottom" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.10764em;">f</span></span></span></span>-map <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>G</mi><mo>→</mo><mi>F</mi></mrow><annotation encoding="application/x-tex">G\to F</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.68333em;vertical-align:0em;"></span><span class="base"><span class="mord mathit">G</span><span class="mrel">→</span><span class="mord mathit" style="margin-right:0.13889em;">F</span></span></span></span> is simply an <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.68333em;vertical-align:0em;"></span><span class="base"><span class="mord mathit">A</span></span></span></span>-module homomorphism from <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>G</mi></mrow><annotation encoding="application/x-tex">G</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.68333em;vertical-align:0em;"></span><span class="base"><span class="mord mathit">G</span></span></span></span> to <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>F</mi></mrow><annotation encoding="application/x-tex">F</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.68333em;vertical-align:0em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.13889em;">F</span></span></span></span>, and the observation is that such maps naturally biject with the <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>B</mi></mrow><annotation encoding="application/x-tex">B</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.68333em;vertical-align:0em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.05017em;">B</span></span></span></span>-module homomorphisms from <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>G</mi><msub><mo>⊗</mo><mi>A</mi></msub><mi>B</mi></mrow><annotation encoding="application/x-tex">G\otimes_AB</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="base"><span class="mord mathit">G</span><span class="mbin"><span class="mbin">⊗</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathit mtight">A</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"></span></span></span></span></span><span class="mord mathit" style="margin-right:0.05017em;">B</span></span></span></span> to <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>F</mi></mrow><annotation encoding="application/x-tex">F</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.68333em;vertical-align:0em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.13889em;">F</span></span></span></span>. I think this is different to what Scott suggests -- he went the other way.</p>
 
 #### [ Kevin Buzzard (Oct 08 2018 at 09:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135384772):
-```quote
-I wonder if there is a common generalization of ring homs, (R,R) -> (R', R') and linear maps (R,M) -> (R, M')
-```
-I think $$f$$-maps give this. An $$f$$-map $$(R,M)\to (R',M')$$ is a ring map $$R\to R'$$ and an $$R$$-module map $$M\to M'$$ (note I'm constantly using this trick of, the moment I have a ring map $$R\to R'$$, considering all $$R'$$-modules as $$R$$-modules). If $$R\to R'$$ is the identity then this is just an $$R$$-module homomorphism, and an *example* of an $$f$$-map $$(R,R)\to(R',R')$$ is given by $$(f,f)$$, but given $$f:R\to R'$$ there are $$f$$-maps $$(R,R)\to (R',R')$$ which are not $$(f,f)$$.
+<blockquote>
+<p>I wonder if there is a common generalization of ring homs, (R,R) -&gt; (R', R') and linear maps (R,M) -&gt; (R, M')</p>
+</blockquote>
+<p>I think <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>f</mi></mrow><annotation encoding="application/x-tex">f</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.69444em;"></span><span class="strut bottom" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.10764em;">f</span></span></span></span>-maps give this. An <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>f</mi></mrow><annotation encoding="application/x-tex">f</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.69444em;"></span><span class="strut bottom" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.10764em;">f</span></span></span></span>-map <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>(</mo><mi>R</mi><mo separator="true">,</mo><mi>M</mi><mo>)</mo><mo>→</mo><mo>(</mo><msup><mi>R</mi><mo mathvariant="normal">′</mo></msup><mo separator="true">,</mo><msup><mi>M</mi><mo mathvariant="normal">′</mo></msup><mo>)</mo></mrow><annotation encoding="application/x-tex">(R,M)\to (R',M')</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.751892em;"></span><span class="strut bottom" style="height:1.001892em;vertical-align:-0.25em;"></span><span class="base"><span class="mopen">(</span><span class="mord mathit" style="margin-right:0.00773em;">R</span><span class="mpunct">,</span><span class="mord mathit" style="margin-right:0.10903em;">M</span><span class="mclose">)</span><span class="mrel">→</span><span class="mopen">(</span><span class="mord"><span class="mord mathit" style="margin-right:0.00773em;">R</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.751892em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathrm mtight">′</span></span></span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mord"><span class="mord mathit" style="margin-right:0.10903em;">M</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.751892em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathrm mtight">′</span></span></span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span> is a ring map <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>R</mi><mo>→</mo><msup><mi>R</mi><mo mathvariant="normal">′</mo></msup></mrow><annotation encoding="application/x-tex">R\to R'</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.751892em;"></span><span class="strut bottom" style="height:0.751892em;vertical-align:0em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.00773em;">R</span><span class="mrel">→</span><span class="mord"><span class="mord mathit" style="margin-right:0.00773em;">R</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.751892em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathrm mtight">′</span></span></span></span></span></span></span></span></span></span></span></span> and an <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>R</mi></mrow><annotation encoding="application/x-tex">R</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.68333em;vertical-align:0em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.00773em;">R</span></span></span></span>-module map <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>M</mi><mo>→</mo><msup><mi>M</mi><mo mathvariant="normal">′</mo></msup></mrow><annotation encoding="application/x-tex">M\to M'</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.751892em;"></span><span class="strut bottom" style="height:0.751892em;vertical-align:0em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.10903em;">M</span><span class="mrel">→</span><span class="mord"><span class="mord mathit" style="margin-right:0.10903em;">M</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.751892em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathrm mtight">′</span></span></span></span></span></span></span></span></span></span></span></span> (note I'm constantly using this trick of, the moment I have a ring map <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>R</mi><mo>→</mo><msup><mi>R</mi><mo mathvariant="normal">′</mo></msup></mrow><annotation encoding="application/x-tex">R\to R'</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.751892em;"></span><span class="strut bottom" style="height:0.751892em;vertical-align:0em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.00773em;">R</span><span class="mrel">→</span><span class="mord"><span class="mord mathit" style="margin-right:0.00773em;">R</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.751892em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathrm mtight">′</span></span></span></span></span></span></span></span></span></span></span></span>, considering all <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mi>R</mi><mo mathvariant="normal">′</mo></msup></mrow><annotation encoding="application/x-tex">R'</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.751892em;"></span><span class="strut bottom" style="height:0.751892em;vertical-align:0em;"></span><span class="base"><span class="mord"><span class="mord mathit" style="margin-right:0.00773em;">R</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.751892em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathrm mtight">′</span></span></span></span></span></span></span></span></span></span></span></span>-modules as <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>R</mi></mrow><annotation encoding="application/x-tex">R</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.68333em;vertical-align:0em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.00773em;">R</span></span></span></span>-modules). If <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>R</mi><mo>→</mo><msup><mi>R</mi><mo mathvariant="normal">′</mo></msup></mrow><annotation encoding="application/x-tex">R\to R'</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.751892em;"></span><span class="strut bottom" style="height:0.751892em;vertical-align:0em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.00773em;">R</span><span class="mrel">→</span><span class="mord"><span class="mord mathit" style="margin-right:0.00773em;">R</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.751892em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathrm mtight">′</span></span></span></span></span></span></span></span></span></span></span></span> is the identity then this is just an <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>R</mi></mrow><annotation encoding="application/x-tex">R</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.68333em;vertical-align:0em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.00773em;">R</span></span></span></span>-module homomorphism, and an <em>example</em> of an <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>f</mi></mrow><annotation encoding="application/x-tex">f</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.69444em;"></span><span class="strut bottom" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.10764em;">f</span></span></span></span>-map <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>(</mo><mi>R</mi><mo separator="true">,</mo><mi>R</mi><mo>)</mo><mo>→</mo><mo>(</mo><msup><mi>R</mi><mo mathvariant="normal">′</mo></msup><mo separator="true">,</mo><msup><mi>R</mi><mo mathvariant="normal">′</mo></msup><mo>)</mo></mrow><annotation encoding="application/x-tex">(R,R)\to(R',R')</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.751892em;"></span><span class="strut bottom" style="height:1.001892em;vertical-align:-0.25em;"></span><span class="base"><span class="mopen">(</span><span class="mord mathit" style="margin-right:0.00773em;">R</span><span class="mpunct">,</span><span class="mord mathit" style="margin-right:0.00773em;">R</span><span class="mclose">)</span><span class="mrel">→</span><span class="mopen">(</span><span class="mord"><span class="mord mathit" style="margin-right:0.00773em;">R</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.751892em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathrm mtight">′</span></span></span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mord"><span class="mord mathit" style="margin-right:0.00773em;">R</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.751892em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathrm mtight">′</span></span></span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span> is given by <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>(</mo><mi>f</mi><mo separator="true">,</mo><mi>f</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">(f,f)</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.75em;"></span><span class="strut bottom" style="height:1em;vertical-align:-0.25em;"></span><span class="base"><span class="mopen">(</span><span class="mord mathit" style="margin-right:0.10764em;">f</span><span class="mpunct">,</span><span class="mord mathit" style="margin-right:0.10764em;">f</span><span class="mclose">)</span></span></span></span>, but given <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>f</mi><mo>:</mo><mi>R</mi><mo>→</mo><msup><mi>R</mi><mo mathvariant="normal">′</mo></msup></mrow><annotation encoding="application/x-tex">f:R\to R'</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.751892em;"></span><span class="strut bottom" style="height:0.946332em;vertical-align:-0.19444em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.10764em;">f</span><span class="mrel">:</span><span class="mord mathit" style="margin-right:0.00773em;">R</span><span class="mrel">→</span><span class="mord"><span class="mord mathit" style="margin-right:0.00773em;">R</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.751892em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathrm mtight">′</span></span></span></span></span></span></span></span></span></span></span></span> there are <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>f</mi></mrow><annotation encoding="application/x-tex">f</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.69444em;"></span><span class="strut bottom" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.10764em;">f</span></span></span></span>-maps <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>(</mo><mi>R</mi><mo separator="true">,</mo><mi>R</mi><mo>)</mo><mo>→</mo><mo>(</mo><msup><mi>R</mi><mo mathvariant="normal">′</mo></msup><mo separator="true">,</mo><msup><mi>R</mi><mo mathvariant="normal">′</mo></msup><mo>)</mo></mrow><annotation encoding="application/x-tex">(R,R)\to (R',R')</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.751892em;"></span><span class="strut bottom" style="height:1.001892em;vertical-align:-0.25em;"></span><span class="base"><span class="mopen">(</span><span class="mord mathit" style="margin-right:0.00773em;">R</span><span class="mpunct">,</span><span class="mord mathit" style="margin-right:0.00773em;">R</span><span class="mclose">)</span><span class="mrel">→</span><span class="mopen">(</span><span class="mord"><span class="mord mathit" style="margin-right:0.00773em;">R</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.751892em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathrm mtight">′</span></span></span></span></span></span></span></span></span><span class="mpunct">,</span><span class="mord"><span class="mord mathit" style="margin-right:0.00773em;">R</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.751892em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathrm mtight">′</span></span></span></span></span></span></span></span></span><span class="mclose">)</span></span></span></span> which are not <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>(</mo><mi>f</mi><mo separator="true">,</mo><mi>f</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">(f,f)</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.75em;"></span><span class="strut bottom" style="height:1em;vertical-align:-0.25em;"></span><span class="base"><span class="mopen">(</span><span class="mord mathit" style="margin-right:0.10764em;">f</span><span class="mpunct">,</span><span class="mord mathit" style="margin-right:0.10764em;">f</span><span class="mclose">)</span></span></span></span>.</p>
 
 #### [ Kevin Buzzard (Oct 08 2018 at 09:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135385018):
-OK so Johan has isolated exactly the same idea, but somehow it seems that he has come from a completely different viewpoint (I don't know what a fibred category is). Regarding commutative v non-commutative, I think it's a good idea to push commutative here. Someone impressed on me decades ago that one should not think of commutative ring theory as a special case of non-commutative ring theory but regard them as completely different areas. I don't know anything about research into non-commutative ring theory, but commutative ring theory is very much alive and kicking -- e.g. ideas from the theory of perfectoid spaces were used here https://arxiv.org/abs/1608.08882 to resolve a the direct summand conjecture. Commutative algebra is the foundation of modern algebraic geometry and I have always been of the opinion (even before I knew anything about formal proof verification software) that books like Atiyah--Macdonald and Matsumura (both standard commutative algebra textbooks) somehow "operated close to the axioms" whilst still being of great modern interest. If we want to push Lean as a tool for algebraic geometry, which it one day might become, then there's no harm focussing on commutative algebra. When someone eventually decides to do some basic representation theory of finite groups we might have to plough through basics of semisimple algebras but that is somehow a completely different project.
+<p>OK so Johan has isolated exactly the same idea, but somehow it seems that he has come from a completely different viewpoint (I don't know what a fibred category is). Regarding commutative v non-commutative, I think it's a good idea to push commutative here. Someone impressed on me decades ago that one should not think of commutative ring theory as a special case of non-commutative ring theory but regard them as completely different areas. I don't know anything about research into non-commutative ring theory, but commutative ring theory is very much alive and kicking -- e.g. ideas from the theory of perfectoid spaces were used here <a href="https://arxiv.org/abs/1608.08882" target="_blank" title="https://arxiv.org/abs/1608.08882">https://arxiv.org/abs/1608.08882</a> to resolve a the direct summand conjecture. Commutative algebra is the foundation of modern algebraic geometry and I have always been of the opinion (even before I knew anything about formal proof verification software) that books like Atiyah--Macdonald and Matsumura (both standard commutative algebra textbooks) somehow "operated close to the axioms" whilst still being of great modern interest. If we want to push Lean as a tool for algebraic geometry, which it one day might become, then there's no harm focussing on commutative algebra. When someone eventually decides to do some basic representation theory of finite groups we might have to plough through basics of semisimple algebras but that is somehow a completely different project.</p>
 
 #### [ Johan Commelin (Oct 08 2018 at 09:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135385035):
-@**Kevin Buzzard** A fibered category is the thing that underlies a stack.
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> A fibered category is the thing that underlies a stack.</p>
 
 #### [ Johan Commelin (Oct 08 2018 at 09:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135385039):
-Basically it abstracts $$f$$-maps
+<p>Basically it abstracts <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>f</mi></mrow><annotation encoding="application/x-tex">f</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.69444em;"></span><span class="strut bottom" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.10764em;">f</span></span></span></span>-maps</p>
 
 #### [ Kevin Buzzard (Oct 08 2018 at 09:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135385344):
-```quote
-> every R'-mod is an R-mod
-
-This one requires an explicit ring hom input
-```
-Patrick mentioned recently that sometimes it's best to concentrate on the morphisms, not the objects. In alg geom we even see it in the name -- an $$f$$-map is a construction which depends on a map $$f$$ of rings. In fact Johan is saying all the right things, I need to get up much earlier to get ahead of him. Given $$f:R\to R'$$ there are then adjoint functors $$(R-mod)\to(R'-mod)$$ and $$(R'-mod)\to(R-mod)$$ and hopefully Kenny proved enough about universal property of tensor products to show that these are adjoints. I think that Scott's punt went in the wrong direction. There is a time when you get maps one way and the other way, but that's when you go back to schemes.
+<blockquote>
+<blockquote>
+<p>every R'-mod is an R-mod</p>
+</blockquote>
+<p>This one requires an explicit ring hom input</p>
+</blockquote>
+<p>Patrick mentioned recently that sometimes it's best to concentrate on the morphisms, not the objects. In alg geom we even see it in the name -- an <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>f</mi></mrow><annotation encoding="application/x-tex">f</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.69444em;"></span><span class="strut bottom" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.10764em;">f</span></span></span></span>-map is a construction which depends on a map <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>f</mi></mrow><annotation encoding="application/x-tex">f</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.69444em;"></span><span class="strut bottom" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.10764em;">f</span></span></span></span> of rings. In fact Johan is saying all the right things, I need to get up much earlier to get ahead of him. Given <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>f</mi><mo>:</mo><mi>R</mi><mo>→</mo><msup><mi>R</mi><mo mathvariant="normal">′</mo></msup></mrow><annotation encoding="application/x-tex">f:R\to R'</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.751892em;"></span><span class="strut bottom" style="height:0.946332em;vertical-align:-0.19444em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.10764em;">f</span><span class="mrel">:</span><span class="mord mathit" style="margin-right:0.00773em;">R</span><span class="mrel">→</span><span class="mord"><span class="mord mathit" style="margin-right:0.00773em;">R</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.751892em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathrm mtight">′</span></span></span></span></span></span></span></span></span></span></span></span> there are then adjoint functors <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>(</mo><mi>R</mi><mo>−</mo><mi>m</mi><mi>o</mi><mi>d</mi><mo>)</mo><mo>→</mo><mo>(</mo><msup><mi>R</mi><mo mathvariant="normal">′</mo></msup><mo>−</mo><mi>m</mi><mi>o</mi><mi>d</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">(R-mod)\to(R'-mod)</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.751892em;"></span><span class="strut bottom" style="height:1.001892em;vertical-align:-0.25em;"></span><span class="base"><span class="mopen">(</span><span class="mord mathit" style="margin-right:0.00773em;">R</span><span class="mbin">−</span><span class="mord mathit">m</span><span class="mord mathit">o</span><span class="mord mathit">d</span><span class="mclose">)</span><span class="mrel">→</span><span class="mopen">(</span><span class="mord"><span class="mord mathit" style="margin-right:0.00773em;">R</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.751892em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathrm mtight">′</span></span></span></span></span></span></span></span></span><span class="mbin">−</span><span class="mord mathit">m</span><span class="mord mathit">o</span><span class="mord mathit">d</span><span class="mclose">)</span></span></span></span> and <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>(</mo><msup><mi>R</mi><mo mathvariant="normal">′</mo></msup><mo>−</mo><mi>m</mi><mi>o</mi><mi>d</mi><mo>)</mo><mo>→</mo><mo>(</mo><mi>R</mi><mo>−</mo><mi>m</mi><mi>o</mi><mi>d</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">(R'-mod)\to(R-mod)</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.751892em;"></span><span class="strut bottom" style="height:1.001892em;vertical-align:-0.25em;"></span><span class="base"><span class="mopen">(</span><span class="mord"><span class="mord mathit" style="margin-right:0.00773em;">R</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.751892em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathrm mtight">′</span></span></span></span></span></span></span></span></span><span class="mbin">−</span><span class="mord mathit">m</span><span class="mord mathit">o</span><span class="mord mathit">d</span><span class="mclose">)</span><span class="mrel">→</span><span class="mopen">(</span><span class="mord mathit" style="margin-right:0.00773em;">R</span><span class="mbin">−</span><span class="mord mathit">m</span><span class="mord mathit">o</span><span class="mord mathit">d</span><span class="mclose">)</span></span></span></span> and hopefully Kenny proved enough about universal property of tensor products to show that these are adjoints. I think that Scott's punt went in the wrong direction. There is a time when you get maps one way and the other way, but that's when you go back to schemes.</p>
 
 #### [ Johan Commelin (Oct 08 2018 at 09:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135385406):
-```quote
-In fact Johan is saying all the right things, I need to get up much earlier to get ahead of him. 
-```
-I've got a 2-year old daughter. You can't win.
+<blockquote>
+<p>In fact Johan is saying all the right things, I need to get up much earlier to get ahead of him. </p>
+</blockquote>
+<p>I've got a 2-year old daughter. You can't win.</p>
 
 #### [ Johan Commelin (Oct 08 2018 at 09:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135385439):
-Well, what I think that Scott meant that `f → f^*` is contravariant.
+<p>Well, what I think that Scott meant that <code>f → f^*</code> is contravariant.</p>
 
 #### [ Kevin Buzzard (Oct 08 2018 at 09:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135385440):
-Kenny's construction is something else though. If $$L$$ is an ideal of $$A$$ then $$L^e$$, the pushforward ideal, is less well-behaved. $$L^e$$ is the image of $$L\otimes_AB$$ (the canonical thing when it comes to modules) under the natural map from this guy to $$B$$ corresponding by adjointness to the map $$L\to B$$. So it might satisfy some universal property for ideals, but probably not for modules.
+<p>Kenny's construction is something else though. If <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>L</mi></mrow><annotation encoding="application/x-tex">L</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.68333em;vertical-align:0em;"></span><span class="base"><span class="mord mathit">L</span></span></span></span> is an ideal of <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.68333em;vertical-align:0em;"></span><span class="base"><span class="mord mathit">A</span></span></span></span> then <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mi>L</mi><mi>e</mi></msup></mrow><annotation encoding="application/x-tex">L^e</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.68333em;vertical-align:0em;"></span><span class="base"><span class="mord"><span class="mord mathit">L</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.664392em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathit mtight">e</span></span></span></span></span></span></span></span></span></span></span>, the pushforward ideal, is less well-behaved. <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mi>L</mi><mi>e</mi></msup></mrow><annotation encoding="application/x-tex">L^e</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.68333em;vertical-align:0em;"></span><span class="base"><span class="mord"><span class="mord mathit">L</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.664392em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathit mtight">e</span></span></span></span></span></span></span></span></span></span></span> is the image of <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>L</mi><msub><mo>⊗</mo><mi>A</mi></msub><mi>B</mi></mrow><annotation encoding="application/x-tex">L\otimes_AB</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="base"><span class="mord mathit">L</span><span class="mbin"><span class="mbin">⊗</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathit mtight">A</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"></span></span></span></span></span><span class="mord mathit" style="margin-right:0.05017em;">B</span></span></span></span> (the canonical thing when it comes to modules) under the natural map from this guy to <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>B</mi></mrow><annotation encoding="application/x-tex">B</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.68333em;vertical-align:0em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.05017em;">B</span></span></span></span> corresponding by adjointness to the map <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>L</mi><mo>→</mo><mi>B</mi></mrow><annotation encoding="application/x-tex">L\to B</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.68333em;vertical-align:0em;"></span><span class="base"><span class="mord mathit">L</span><span class="mrel">→</span><span class="mord mathit" style="margin-right:0.05017em;">B</span></span></span></span>. So it might satisfy some universal property for ideals, but probably not for modules.</p>
 
 #### [ Kevin Buzzard (Oct 08 2018 at 09:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135385492):
-OK I think that's all I have to say and I think that most of it had been said already, but at least I caught up.
+<p>OK I think that's all I have to say and I think that most of it had been said already, but at least I caught up.</p>
 
 #### [ Johan Commelin (Oct 08 2018 at 09:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135385493):
-For ideals it will probably give you a Galois connection. Here! I said it. Without checking.
+<p>For ideals it will probably give you a Galois connection. Here! I said it. Without checking.</p>
 
 #### [ Mario Carneiro (Oct 08 2018 at 09:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135385562):
-But I guess $$L^e$$ is the best you can do when you have a ring hom A->B and an ideal L?
+<p>But I guess <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mi>L</mi><mi>e</mi></msup></mrow><annotation encoding="application/x-tex">L^e</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.68333em;vertical-align:0em;"></span><span class="base"><span class="mord"><span class="mord mathit">L</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.664392em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathit mtight">e</span></span></span></span></span></span></span></span></span></span></span> is the best you can do when you have a ring hom A-&gt;B and an ideal L?</p>
 
 #### [ Johan Commelin (Oct 08 2018 at 09:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135385574):
-If you want an ideal of `B`, yes.
+<p>If you want an ideal of <code>B</code>, yes.</p>
 
 #### [ Johan Commelin (Oct 08 2018 at 09:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135385584):
-Otherwise, you could just tensor, and treat it as a module.
+<p>Otherwise, you could just tensor, and treat it as a module.</p>
 
 #### [ Mario Carneiro (Oct 08 2018 at 09:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135385586):
-Is this a thing we can currently do?
+<p>Is this a thing we can currently do?</p>
 
 #### [ Johan Commelin (Oct 08 2018 at 09:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135385590):
-What?
+<p>What?</p>
 
 #### [ Mario Carneiro (Oct 08 2018 at 09:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135385592):
-tensoring like that
+<p>tensoring like that</p>
 
 #### [ Johan Commelin (Oct 08 2018 at 09:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135385594):
-I guess almost
+<p>I guess almost</p>
 
 #### [ Johan Commelin (Oct 08 2018 at 09:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135385634):
-@**Kenny Lau** Did you include extension of scalars in your work on tensor products?
+<p><span class="user-mention" data-user-id="110064">@Kenny Lau</span> Did you include extension of scalars in your work on tensor products?</p>
 
 #### [ Johan Commelin (Oct 08 2018 at 09:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135385647):
-@**Mario Carneiro** Given what we have, it shouldn't be too hard
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> Given what we have, it shouldn't be too hard</p>
 
 #### [ Kenny Lau (Oct 08 2018 at 09:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135385977):
-I don’t think I did.
+<p>I don’t think I did.</p>
 
 #### [ Kevin Buzzard (Oct 08 2018 at 10:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135386823):
-Oh I see. The issue is that if $$M$$ is an $$A$$-module and $$B$$ is an $$A$$-algebra (and hence an $$A$$-module) then $$M\otimes_AB$$ is not just an $$A$$-module but a $$B$$-module.
+<p>Oh I see. The issue is that if <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>M</mi></mrow><annotation encoding="application/x-tex">M</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.68333em;vertical-align:0em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.10903em;">M</span></span></span></span> is an <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.68333em;vertical-align:0em;"></span><span class="base"><span class="mord mathit">A</span></span></span></span>-module and <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>B</mi></mrow><annotation encoding="application/x-tex">B</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.68333em;vertical-align:0em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.05017em;">B</span></span></span></span> is an <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.68333em;vertical-align:0em;"></span><span class="base"><span class="mord mathit">A</span></span></span></span>-algebra (and hence an <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.68333em;vertical-align:0em;"></span><span class="base"><span class="mord mathit">A</span></span></span></span>-module) then <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>M</mi><msub><mo>⊗</mo><mi>A</mi></msub><mi>B</mi></mrow><annotation encoding="application/x-tex">M\otimes_AB</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.10903em;">M</span><span class="mbin"><span class="mbin">⊗</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathit mtight">A</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"></span></span></span></span></span><span class="mord mathit" style="margin-right:0.05017em;">B</span></span></span></span> is not just an <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>A</mi></mrow><annotation encoding="application/x-tex">A</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.68333em;vertical-align:0em;"></span><span class="base"><span class="mord mathit">A</span></span></span></span>-module but a <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>B</mi></mrow><annotation encoding="application/x-tex">B</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.68333em;vertical-align:0em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.05017em;">B</span></span></span></span>-module.</p>
 
 #### [ Johan Commelin (Oct 08 2018 at 10:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135386914):
-Right, we don't have something like that atm
+<p>Right, we don't have something like that atm</p>
 
 #### [ Johan Commelin (Oct 08 2018 at 10:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135386928):
-But it shouldn't be hard to put a `B`-mod structure on the tensor product.
+<p>But it shouldn't be hard to put a <code>B</code>-mod structure on the tensor product.</p>
 
 #### [ Johan Commelin (Oct 08 2018 at 10:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135387004):
-I don't know if it should "extend" the `A`-mod structure, in the sense that if you "restrict" scalars you get an `A`-mod that is defeq to what you started with.
+<p>I don't know if it should "extend" the <code>A</code>-mod structure, in the sense that if you "restrict" scalars you get an <code>A</code>-mod that is defeq to what you started with.</p>
 
 #### [ Patrick Massot (Oct 08 2018 at 20:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/135421783):
-```quote
-foremost of which is the multiple scalar field thing
-```
-I'm completely lost: I thought this module refactor was mostly about multiple scalars
+<blockquote>
+<p>foremost of which is the multiple scalar field thing</p>
+</blockquote>
+<p>I'm completely lost: I thought this module refactor was mostly about multiple scalars</p>
 
 #### [ Kenny Lau (Oct 23 2018 at 01:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/136304439):
-How's it going? @**Mario Carneiro**
+<p>How's it going? <span class="user-mention" data-user-id="110049">@Mario Carneiro</span></p>
 
 #### [ Mario Carneiro (Oct 23 2018 at 02:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/136306139):
-waiting on my school work to decrease in intensity
+<p>waiting on my school work to decrease in intensity</p>
 
 #### [ Mario Carneiro (Oct 23 2018 at 02:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/136306145):
-hopefully I should be able to find some time for it this week
+<p>hopefully I should be able to find some time for it this week</p>
 
 #### [ Kenny Lau (Nov 01 2018 at 10:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/136911662):
-https://github.com/leanprover-community/mathlib/commits/module
+<p><a href="https://github.com/leanprover-community/mathlib/commits/module" target="_blank" title="https://github.com/leanprover-community/mathlib/commits/module">https://github.com/leanprover-community/mathlib/commits/module</a></p>
 
 #### [ Kenny Lau (Nov 01 2018 at 10:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/136911664):
-@**Mario Carneiro** is there anything we can help with?
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> is there anything we can help with?</p>
 
 #### [ Mario Carneiro (Nov 01 2018 at 11:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/136912060):
-Possibly... I'm just short on time these days. The main work is done, I think, but a bunch of files still need to be updated
+<p>Possibly... I'm just short on time these days. The main work is done, I think, but a bunch of files still need to be updated</p>
 
 #### [ Kenny Lau (Nov 01 2018 at 11:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/136912064):
-what can we do?
+<p>what can we do?</p>
 
 #### [ Kenny Lau (Nov 01 2018 at 11:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/136912067):
-should I fix the errors?
+<p>should I fix the errors?</p>
 
 #### [ Mario Carneiro (Nov 01 2018 at 11:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/136912068):
-go in there and make the red squiggles go away
+<p>go in there and make the red squiggles go away</p>
 
 #### [ Kenny Lau (Nov 01 2018 at 11:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/136912116):
-roger that
+<p>roger that</p>
 
 #### [ Mario Carneiro (Nov 01 2018 at 11:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/136912204):
-Don't get too attached to anything that you write there, I'll probably have a look through all the files anyway, but it will be a lot easier if it's not already broken
+<p>Don't get too attached to anything that you write there, I'll probably have a look through all the files anyway, but it will be a lot easier if it's not already broken</p>
 
 #### [ Kenny Lau (Nov 01 2018 at 13:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/136919089):
-@**Mario Carneiro** there are things that you deleted and things that depend on them, right
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> there are things that you deleted and things that depend on them, right</p>
 
 #### [ Kenny Lau (Nov 01 2018 at 13:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/136919093):
-I'll just leave those untouched
+<p>I'll just leave those untouched</p>
 
 #### [ Mario Carneiro (Nov 01 2018 at 13:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/136919165):
-like what? I think all deleted files have equivalents
+<p>like what? I think all deleted files have equivalents</p>
 
 #### [ Kenny Lau (Nov 01 2018 at 13:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/136919191):
-like the order embedding of submodules of submodules, and the prime ideal, and the trivial ideal
+<p>like the order embedding of submodules of submodules, and the prime ideal, and the trivial ideal</p>
 
 #### [ Kenny Lau (Nov 01 2018 at 13:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/136919263):
-and also this:
-```lean
-@[simp] theorem Union_set_of_directed {ι} (hι : nonempty ι)
-  (S : ι → submodule α β)
-  (H : ∀ i j, ∃ k, S i ≤ S k ∧ S j ≤ S k) :
-  ((supr S : submodule α β) : set β) = ⋃ i, S i :=
-```
+<p>and also this:</p>
+<div class="codehilite"><pre><span></span><span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="kn">theorem</span> <span class="n">Union_set_of_directed</span> <span class="o">{</span><span class="n">ι</span><span class="o">}</span> <span class="o">(</span><span class="n">hι</span> <span class="o">:</span> <span class="n">nonempty</span> <span class="n">ι</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">S</span> <span class="o">:</span> <span class="n">ι</span> <span class="bp">→</span> <span class="n">submodule</span> <span class="n">α</span> <span class="n">β</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">i</span> <span class="n">j</span><span class="o">,</span> <span class="bp">∃</span> <span class="n">k</span><span class="o">,</span> <span class="n">S</span> <span class="n">i</span> <span class="bp">≤</span> <span class="n">S</span> <span class="n">k</span> <span class="bp">∧</span> <span class="n">S</span> <span class="n">j</span> <span class="bp">≤</span> <span class="n">S</span> <span class="n">k</span><span class="o">)</span> <span class="o">:</span>
+  <span class="o">((</span><span class="n">supr</span> <span class="n">S</span> <span class="o">:</span> <span class="n">submodule</span> <span class="n">α</span> <span class="n">β</span><span class="o">)</span> <span class="o">:</span> <span class="n">set</span> <span class="n">β</span><span class="o">)</span> <span class="bp">=</span> <span class="err">⋃</span> <span class="n">i</span><span class="o">,</span> <span class="n">S</span> <span class="n">i</span> <span class="o">:=</span>
+</pre></div>
 
 #### [ Mario Carneiro (Nov 01 2018 at 13:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/136919265):
-prime ideals are still there
+<p>prime ideals are still there</p>
 
 #### [ Mario Carneiro (Nov 01 2018 at 13:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/136919287):
-search for that, it moved somewhere else
+<p>search for that, it moved somewhere else</p>
 
 #### [ Mario Carneiro (Nov 01 2018 at 13:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/136919297):
-I think it is Union_coe now
+<p>I think it is Union_coe now</p>
 
 #### [ Kenny Lau (Nov 01 2018 at 13:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/136919305):
-`prime_ideal` doesn't give me anything
+<p><code>prime_ideal</code> doesn't give me anything</p>
 
 #### [ Kenny Lau (Nov 01 2018 at 13:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/136919307):
-and i wouldn't search for `prime`
+<p>and i wouldn't search for <code>prime</code></p>
 
 #### [ Mario Carneiro (Nov 01 2018 at 13:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/136919355):
-the trivial ideal is bottom
+<p>the trivial ideal is bottom</p>
 
 #### [ Kenny Lau (Nov 01 2018 at 13:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/136919360):
-ok I searched for `prime` and I found it
+<p>ok I searched for <code>prime</code> and I found it</p>
 
 #### [ Kenny Lau (Nov 01 2018 at 15:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/136925189):
-@**Mario Carneiro** what about the embedding “submodules of N” -> “submodules of M” where N is a submodule of M?
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> what about the embedding “submodules of N” -&gt; “submodules of M” where N is a submodule of M?</p>
 
 #### [ Mario Carneiro (Nov 01 2018 at 16:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/136928650):
-I think that's `map N.subtype` or `map_subtype.order_iso`
+<p>I think that's <code>map N.subtype</code> or <code>map_subtype.order_iso</code></p>
 
 #### [ Kenny Lau (Nov 01 2018 at 19:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/136942283):
-@**Mario Carneiro** I've pushed a partial fix
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> I've pushed a partial fix</p>
 
 #### [ Kenny Lau (Nov 01 2018 at 19:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/136942285):
-I'll see what more I can do
+<p>I'll see what more I can do</p>
 
 #### [ Kenny Lau (Nov 02 2018 at 10:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/136986811):
-@**Mario Carneiro** for principal ideal domains, the situation is that `{x | a ∣ x}` is a set not an ideal, so these definitions are a bit troublesome:
-```lean
-class is_principal_ideal [comm_ring α] (S : set α) : Prop :=
-(principal : ∃ a : α, S = {x | a ∣ x})
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> for principal ideal domains, the situation is that <code>{x | a ∣ x}</code> is a set not an ideal, so these definitions are a bit troublesome:</p>
+<div class="codehilite"><pre><span></span><span class="n">class</span> <span class="n">is_principal_ideal</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">S</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">principal</span> <span class="o">:</span> <span class="bp">∃</span> <span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">,</span> <span class="n">S</span> <span class="bp">=</span> <span class="o">{</span><span class="n">x</span> <span class="bp">|</span> <span class="n">a</span> <span class="err">∣</span> <span class="n">x</span><span class="o">})</span>
 
-class principal_ideal_domain (α : Type*) extends integral_domain α :=
-(principal : ∀ (S : ideal α), is_principal_ideal (S : set α))
-```
+<span class="n">class</span> <span class="n">principal_ideal_domain</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="kn">extends</span> <span class="n">integral_domain</span> <span class="n">α</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">principal</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">S</span> <span class="o">:</span> <span class="n">ideal</span> <span class="n">α</span><span class="o">),</span> <span class="n">is_principal_ideal</span> <span class="o">(</span><span class="n">S</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span><span class="o">))</span>
+</pre></div>
 
 #### [ Kenny Lau (Nov 02 2018 at 10:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/136986813):
-what should I do?
+<p>what should I do?</p>
 
 #### [ Kenny Lau (Nov 02 2018 at 13:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137008240):
-@**Mario Carneiro** [`ideal.quotient.eq`](https://github.com/leanprover/mathlib/blob/master/ring_theory/ideals.lean#L140) is missing
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> <a href="https://github.com/leanprover/mathlib/blob/master/ring_theory/ideals.lean#L140" target="_blank" title="https://github.com/leanprover/mathlib/blob/master/ring_theory/ideals.lean#L140"><code>ideal.quotient.eq</code></a> is missing</p>
 
 #### [ Kenny Lau (Nov 02 2018 at 13:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137008271):
-(and `submodule.quotient.eq` doesn't count)
+<p>(and <code>submodule.quotient.eq</code> doesn't count)</p>
 
 #### [ Kenny Lau (Nov 02 2018 at 17:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137064504):
-Successfully reduced to 4 errors. Pushed.
+<p>Successfully reduced to 4 errors. Pushed.</p>
 
 #### [ Mario Carneiro (Nov 02 2018 at 20:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137076716):
-the ideal `{x | a ∣ x}` is now spelled `span {a}`
+<p>the ideal <code>{x | a ∣ x}</code> is now spelled <code>span {a}</code></p>
 
 #### [ Kenny Lau (Nov 02 2018 at 21:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137079093):
-@**Mario Carneiro** by "now" do you mean "I've changed that in my private copy" or "I should change that and then push it"?
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> by "now" do you mean "I've changed that in my private copy" or "I should change that and then push it"?</p>
 
 #### [ Mario Carneiro (Nov 02 2018 at 21:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137079105):
-I mean in the module branch that's how it is currently used
+<p>I mean in the module branch that's how it is currently used</p>
 
 #### [ Mario Carneiro (Nov 02 2018 at 21:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137079113):
-so if you find it elsewhere you should use that
+<p>so if you find it elsewhere you should use that</p>
 
 #### [ Kenny Lau (Nov 02 2018 at 21:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137079114):
-so it's the latter?
+<p>so it's the latter?</p>
 
 #### [ Kenny Lau (Nov 02 2018 at 21:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137079118):
-ok
+<p>ok</p>
 
 #### [ Mario Carneiro (Nov 02 2018 at 21:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137079137):
-is_principal_ideal should be a property of S : ideal
+<p>is_principal_ideal should be a property of S : ideal</p>
 
 #### [ Kenny Lau (Nov 02 2018 at 21:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137079292):
-and what is to become of `ideal.quotient.eq`? @**Mario Carneiro**
+<p>and what is to become of <code>ideal.quotient.eq</code>? <span class="user-mention" data-user-id="110049">@Mario Carneiro</span></p>
 
 #### [ Mario Carneiro (Nov 02 2018 at 21:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137079358):
-what does `quotient_ring` look like now?
+<p>what does <code>quotient_ring</code> look like now?</p>
 
 #### [ Kenny Lau (Nov 02 2018 at 21:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137079414):
-it looks like `ideal.quotient` now
+<p>it looks like <code>ideal.quotient</code> now</p>
 
 #### [ Kenny Lau (Nov 02 2018 at 21:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137079430):
-we have `ideal.quotient.mk := submodule.quotient.mk` and we have `submodule.quotient,eq`
+<p>we have <code>ideal.quotient.mk := submodule.quotient.mk</code> and we have <code>submodule.quotient,eq</code></p>
 
 #### [ Kenny Lau (Nov 02 2018 at 21:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137079446):
-but not `ideal.quotient.eq`
+<p>but not <code>ideal.quotient.eq</code></p>
 
 #### [ Mario Carneiro (Nov 02 2018 at 21:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137079455):
-oh sure, you can state `ideal.quotient.eq`
+<p>oh sure, you can state <code>ideal.quotient.eq</code></p>
 
 #### [ Kenny Lau (Nov 02 2018 at 21:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137079458):
-ok
+<p>ok</p>
 
 #### [ Mario Carneiro (Nov 02 2018 at 21:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137079464):
-it's just a defeq copy paste job
+<p>it's just a defeq copy paste job</p>
 
 #### [ Kenny Lau (Nov 02 2018 at 21:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137079476):
-I just thought I wouldn't add things without first asking you
+<p>I just thought I wouldn't add things without first asking you</p>
 
 #### [ Mario Carneiro (Nov 02 2018 at 21:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137079481):
-I have not added all theorems from submodules to ideals, I intended to add them as needed
+<p>I have not added all theorems from submodules to ideals, I intended to add them as needed</p>
 
 #### [ Mario Carneiro (Nov 02 2018 at 21:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137079549):
-you can often just use the submodule version directly, but it is slightly less ergonomic
+<p>you can often just use the submodule version directly, but it is slightly less ergonomic</p>
 
 #### [ Kenny Lau (Nov 02 2018 at 21:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137079650):
-I agree (with the latter statement)
+<p>I agree (with the latter statement)</p>
 
 #### [ Kenny Lau (Nov 02 2018 at 22:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137084347):
-```lean
-lemma mem_span_singleton {x y : α} :
-  x ∈ span ({y} : set α) ↔ ∃ a, a * y = x :=
-```
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">mem_span_singleton</span> <span class="o">{</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">α</span><span class="o">}</span> <span class="o">:</span>
+  <span class="n">x</span> <span class="err">∈</span> <span class="n">span</span> <span class="o">({</span><span class="n">y</span><span class="o">}</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span><span class="o">)</span> <span class="bp">↔</span> <span class="bp">∃</span> <span class="n">a</span><span class="o">,</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">y</span> <span class="bp">=</span> <span class="n">x</span> <span class="o">:=</span>
+</pre></div>
 
 #### [ Kenny Lau (Nov 02 2018 at 22:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137084351):
-@**Mario Carneiro** can I change this to use dvd?
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> can I change this to use dvd?</p>
 
 #### [ Mario Carneiro (Nov 02 2018 at 22:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137084382):
-maybe make another theorem
+<p>maybe make another theorem</p>
 
 #### [ Kenny Lau (Nov 02 2018 at 22:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137084453):
-but nobody uses that theorem
+<p>but nobody uses that theorem</p>
 
 #### [ Kenny Lau (Nov 02 2018 at 22:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137084455):
-you added that theorem yourself
+<p>you added that theorem yourself</p>
 
 #### [ Kenny Lau (Nov 02 2018 at 23:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137085654):
-```lean
-lemma is_maximal_of_irreducible {p : α} (hp : irreducible p) :
-  is_maximal (span ({p} : set α)) :=
-```
-Should this be an instance?
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">is_maximal_of_irreducible</span> <span class="o">{</span><span class="n">p</span> <span class="o">:</span> <span class="n">α</span><span class="o">}</span> <span class="o">(</span><span class="n">hp</span> <span class="o">:</span> <span class="kn">irreducible</span> <span class="n">p</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">is_maximal</span> <span class="o">(</span><span class="n">span</span> <span class="o">({</span><span class="n">p</span><span class="o">}</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span><span class="o">))</span> <span class="o">:=</span>
+</pre></div>
+
+
+<p>Should this be an instance?</p>
 
 #### [ Mario Carneiro (Nov 02 2018 at 23:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137085959):
-oh I see, it's copy pasted from the analogous theorem on submodule, where you can't use dvd
+<p>oh I see, it's copy pasted from the analogous theorem on submodule, where you can't use dvd</p>
 
 #### [ Mario Carneiro (Nov 02 2018 at 23:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137086049):
-as for that last one - probably not. Things like `irreducible` and `maximal` and `nat.prime` are forming a new kind of idiom, where the predicate is a `class` but most of the theorems use it like normal assumptions
+<p>as for that last one - probably not. Things like <code>irreducible</code> and <code>maximal</code> and <code>nat.prime</code> are forming a new kind of idiom, where the predicate is a <code>class</code> but most of the theorems use it like normal assumptions</p>
 
 #### [ Mario Carneiro (Nov 02 2018 at 23:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137086099):
-This is primarily intended to support the few cases where you have to use typeclass inference, like in Z/nZ is a field
+<p>This is primarily intended to support the few cases where you have to use typeclass inference, like in Z/nZ is a field</p>
 
 #### [ Kevin Buzzard (Nov 03 2018 at 00:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137089370):
-I want there to be an "is_an_integer" predicate on eg rat to save me from coercions.
+<p>I want there to be an "is_an_integer" predicate on eg rat to save me from coercions.</p>
 
 #### [ Kenny Lau (Nov 03 2018 at 00:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137089440):
-@**Kevin Buzzard** wrong thread?
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> wrong thread?</p>
 
 #### [ Kevin Buzzard (Nov 03 2018 at 00:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137089490):
-Isn't that a predicate which is a class?
+<p>Isn't that a predicate which is a class?</p>
 
 #### [ Kenny Lau (Nov 03 2018 at 00:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137089518):
-oh well this is going off track
+<p>oh well this is going off track</p>
 
 #### [ Chris Hughes (Nov 03 2018 at 00:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137089626):
-Why is it a class?
+<p>Why is it a class?</p>
 
 #### [ Mario Carneiro (Nov 03 2018 at 00:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137089816):
-I don't just mean a predicate that is a class, we have plenty of those like `first_countable X`. I mean predicates that are classes that we use without instance brackets in most theorems
+<p>I don't just mean a predicate that is a class, we have plenty of those like <code>first_countable X</code>. I mean predicates that are classes that we use without instance brackets in most theorems</p>
 
 #### [ Kenny Lau (Nov 03 2018 at 01:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137090743):
-I feel like there is not enough transparency with the module refactoring, so I've decided to write something about it.
-
-Major changes made:
-
-- `semimodule α β` and `module α β` and `vector_space α β` now take one more argument, that `β` is an `add_comm_group`, i.e. before making an instance of a module, you need to prove that it's an abelian group first.
-- vector space is no longer over a field, but a discrete field.
-- The idiom for making an instance `module α β` (after proving that `β` is an abelian group) is `module.of_core { smul := sorry, smul_add  := sorry, add_smul := sorry, mul_smul := sorry, one_smul := sorry }`.
-- `is_linear_map` and `linear_map` are now both structures, and they are independent, meaning that `linear_map` is no longer defined as `subtype is_linear_map`. The idiom for making `linear_map` from `is_linear_map` is `is_linear_map.mk' (f : M -> N) (sorry : is_linear_map f)`, and the idiom for making `is_linear_map` from `linear_map` is `f.is_linear` (i.e. `linear_map.is_linear f`).
-- `is_linear_map.add` etc no longer exist. instead, you can now add two linear maps together, etc.
-- the class`is_submodule` is gone, replaced by the structure `submodule` which contains a carrier, i.e. if `N : submodule R M` then `N.carrier` is a type. And there is an instance `module R N` in the same situation.
-- similarly, the class `is_ideal` is gone, replaced by the structure `ideal`, which also contains a carrier.
-- endomorphism ring and general linear group are defined.
-- submodules form a complete lattice. the trivial ideal is now idiomatically the bottom element, and the universal ideal the top element.
-- `linear_algebra/quotient_module.lean` is deleted, and it's now `submodule.quotient` (so if `N : submodule R M` then `submodule R N.quotient`) Similarly, `quotient_ring.quotient` is replaced by `ideal.quotient`. The canonical map from `N` to `N.quotient` is `submodule.quotient.mk`, and the canonical map from the ideal `I` to `I.quotient` is `ideal.quotient.mk I`.
-- `linear_equiv` is now based on a linear map and an equiv, and the difference being that now you need to prove that the inverse is also linear, and there is currently no interface to get around that.
-- Everything you want to know about linear independence and basis is now in the newly created file `linear_algebra/basis.lean`.
-- Everything you want to know about linear combinations is now in the newly created file `linear_algebra/lc.lean`.
-- `linear_algebra/linear_map_module.lean` and `linear_algebra/prod_module.lean` and `linear_algebra/quotient_module.lean` and `linear_algebra/submodule.lean` and `linear_algebra/subtype_module.lean` are deleted (with their contents placed elsewhere).
+<p>I feel like there is not enough transparency with the module refactoring, so I've decided to write something about it.</p>
+<p>Major changes made:</p>
+<ul>
+<li><code>semimodule α β</code> and <code>module α β</code> and <code>vector_space α β</code> now take one more argument, that <code>β</code> is an <code>add_comm_group</code>, i.e. before making an instance of a module, you need to prove that it's an abelian group first.</li>
+<li>vector space is no longer over a field, but a discrete field.</li>
+<li>The idiom for making an instance <code>module α β</code> (after proving that <code>β</code> is an abelian group) is <code>module.of_core { smul := sorry, smul_add  := sorry, add_smul := sorry, mul_smul := sorry, one_smul := sorry }</code>.</li>
+<li><code>is_linear_map</code> and <code>linear_map</code> are now both structures, and they are independent, meaning that <code>linear_map</code> is no longer defined as <code>subtype is_linear_map</code>. The idiom for making <code>linear_map</code> from <code>is_linear_map</code> is <code>is_linear_map.mk' (f : M -&gt; N) (sorry : is_linear_map f)</code>, and the idiom for making <code>is_linear_map</code> from <code>linear_map</code> is <code>f.is_linear</code> (i.e. <code>linear_map.is_linear f</code>).</li>
+<li><code>is_linear_map.add</code> etc no longer exist. instead, you can now add two linear maps together, etc.</li>
+<li>the class<code>is_submodule</code> is gone, replaced by the structure <code>submodule</code> which contains a carrier, i.e. if <code>N : submodule R M</code> then <code>N.carrier</code> is a type. And there is an instance <code>module R N</code> in the same situation.</li>
+<li>similarly, the class <code>is_ideal</code> is gone, replaced by the structure <code>ideal</code>, which also contains a carrier.</li>
+<li>endomorphism ring and general linear group are defined.</li>
+<li>submodules form a complete lattice. the trivial ideal is now idiomatically the bottom element, and the universal ideal the top element.</li>
+<li><code>linear_algebra/quotient_module.lean</code> is deleted, and it's now <code>submodule.quotient</code> (so if <code>N : submodule R M</code> then <code>submodule R N.quotient</code>) Similarly, <code>quotient_ring.quotient</code> is replaced by <code>ideal.quotient</code>. The canonical map from <code>N</code> to <code>N.quotient</code> is <code>submodule.quotient.mk</code>, and the canonical map from the ideal <code>I</code> to <code>I.quotient</code> is <code>ideal.quotient.mk I</code>.</li>
+<li><code>linear_equiv</code> is now based on a linear map and an equiv, and the difference being that now you need to prove that the inverse is also linear, and there is currently no interface to get around that.</li>
+<li>Everything you want to know about linear independence and basis is now in the newly created file <code>linear_algebra/basis.lean</code>.</li>
+<li>Everything you want to know about linear combinations is now in the newly created file <code>linear_algebra/lc.lean</code>.</li>
+<li><code>linear_algebra/linear_map_module.lean</code> and <code>linear_algebra/prod_module.lean</code> and <code>linear_algebra/quotient_module.lean</code> and <code>linear_algebra/submodule.lean</code> and <code>linear_algebra/subtype_module.lean</code> are deleted (with their contents placed elsewhere).</li>
+</ul>
 
 #### [ Mario Carneiro (Nov 03 2018 at 01:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137090764):
-Ha, this was my secret plan all along
+<p>Ha, this was my secret plan all along</p>
 
 #### [ Kenny Lau (Nov 03 2018 at 01:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137090808):
-I think one would prefer transparency
+<p>I think one would prefer transparency</p>
 
 #### [ Mario Carneiro (Nov 03 2018 at 01:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137090810):
-now that kenny had to read the stuff he knows what changed
+<p>now that kenny had to read the stuff he knows what changed</p>
 
 #### [ Mario Carneiro (Nov 03 2018 at 01:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137090817):
-and can write a nice summary for us
+<p>and can write a nice summary for us</p>
 
 #### [ Kenny Lau (Nov 03 2018 at 01:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137090822):
-lol
+<p>lol</p>
 
 #### [ Mario Carneiro (Nov 03 2018 at 01:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137090864):
-A remark on `module.of_core`: it's only intended for use when you aren't proving it's a semimodule first
+<p>A remark on <code>module.of_core</code>: it's only intended for use when you aren't proving it's a semimodule first</p>
 
 #### [ Mario Carneiro (Nov 03 2018 at 01:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137090910):
-like if you don't care about semimodules
+<p>like if you don't care about semimodules</p>
 
 #### [ Kenny Lau (Nov 03 2018 at 01:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137090954):
-I'm sure Kevin doesn't
+<p>I'm sure Kevin doesn't</p>
 
 #### [ Mario Carneiro (Nov 03 2018 at 01:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137090961):
-By the way, `is_linear_map` is a late addition. I'm hoping it will not be needed much at all, but it's useful to have as a mixin occasionally
+<p>By the way, <code>is_linear_map</code> is a late addition. I'm hoping it will not be needed much at all, but it's useful to have as a mixin occasionally</p>
 
 #### [ Kenny Lau (Nov 03 2018 at 01:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137091015):
-one would have to refactor `tensor_product` to get rid of all the dependencies thereto, I believe
+<p>one would have to refactor <code>tensor_product</code> to get rid of all the dependencies thereto, I believe</p>
 
 #### [ Mario Carneiro (Nov 03 2018 at 01:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137091016):
-I really want `linear_map` to be the primary one
+<p>I really want <code>linear_map</code> to be the primary one</p>
 
 #### [ Mario Carneiro (Nov 03 2018 at 01:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137091023):
-oh, I may have done that already
+<p>oh, I may have done that already</p>
 
 #### [ Kenny Lau (Nov 03 2018 at 01:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137091025):
-not entirely
+<p>not entirely</p>
 
 #### [ Mario Carneiro (Nov 03 2018 at 01:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137091026):
-shoot, I have an unsaved file in vscode
+<p>shoot, I have an unsaved file in vscode</p>
 
 #### [ Kenny Lau (Nov 03 2018 at 01:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137091030):
-lol
+<p>lol</p>
 
 #### [ Mario Carneiro (Nov 03 2018 at 01:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137091130):
-re: interface for linear_equiv, you don't need to prove the inverse is linear, that's not in the structure
+<p>re: interface for linear_equiv, you don't need to prove the inverse is linear, that's not in the structure</p>
 
 #### [ Mario Carneiro (Nov 03 2018 at 01:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137091149):
-it's just the union (pushout?) of linear_map and equiv
+<p>it's just the union (pushout?) of linear_map and equiv</p>
 
 #### [ Kenny Lau (Nov 03 2018 at 01:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137091304):
-oh, right
+<p>oh, right</p>
 
 #### [ Kenny Lau (Nov 03 2018 at 01:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137091863):
-@**Mario Carneiro** are you going to push your file?
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> are you going to push your file?</p>
 
 #### [ Mario Carneiro (Nov 03 2018 at 01:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137092023):
-oh wait, looks like I already pushed most of it
+<p>oh wait, looks like I already pushed most of it</p>
 
 #### [ Mario Carneiro (Nov 03 2018 at 01:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137092026):
-you already had the important stuff
+<p>you already had the important stuff</p>
 
 #### [ Kenny Lau (Nov 03 2018 at 01:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137092090):
-but tensor product still depends on is_linear_map right?
+<p>but tensor product still depends on is_linear_map right?</p>
 
 #### [ Kenny Lau (Nov 03 2018 at 01:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137092235):
-```lean
-protected def id : R ⊗ M ≃ₗ M :=
-{ inv_fun := (⊗ₜ) 1,
-  left_inv := lift.ext
-    (linear_map.is_linear $ linear_map.comp (is_linear_map.mk' _ $ (bilinear _ _).linear_right 1) (lift _ _))
-    linear_map.id.is_linear
-    (λ x y, by simp; rw [← tmul_smul, ← smul_tmul, smul_eq_mul, mul_one]),
-  right_inv := λ m, by simp,
-  .. (lift (λ c x, c • x)
-    ⟨λ m, linear_map.is_linear (linear_map.smul_right linear_map.id m),
-    λ r, linear_map.is_linear (r • linear_map.id)⟩ : R ⊗ M →ₗ M) }
-```
+<div class="codehilite"><pre><span></span><span class="kn">protected</span> <span class="n">def</span> <span class="n">id</span> <span class="o">:</span> <span class="n">R</span> <span class="err">⊗</span> <span class="n">M</span> <span class="err">≃ₗ</span> <span class="n">M</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">inv_fun</span> <span class="o">:=</span> <span class="o">(</span><span class="err">⊗ₜ</span><span class="o">)</span> <span class="mi">1</span><span class="o">,</span>
+  <span class="n">left_inv</span> <span class="o">:=</span> <span class="n">lift</span><span class="bp">.</span><span class="n">ext</span>
+    <span class="o">(</span><span class="n">linear_map</span><span class="bp">.</span><span class="n">is_linear</span> <span class="err">$</span> <span class="n">linear_map</span><span class="bp">.</span><span class="n">comp</span> <span class="o">(</span><span class="n">is_linear_map</span><span class="bp">.</span><span class="n">mk&#39;</span> <span class="bp">_</span> <span class="err">$</span> <span class="o">(</span><span class="n">bilinear</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">)</span><span class="bp">.</span><span class="n">linear_right</span> <span class="mi">1</span><span class="o">)</span> <span class="o">(</span><span class="n">lift</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">))</span>
+    <span class="n">linear_map</span><span class="bp">.</span><span class="n">id</span><span class="bp">.</span><span class="n">is_linear</span>
+    <span class="o">(</span><span class="bp">λ</span> <span class="n">x</span> <span class="n">y</span><span class="o">,</span> <span class="k">by</span> <span class="n">simp</span><span class="bp">;</span> <span class="n">rw</span> <span class="o">[</span><span class="err">←</span> <span class="n">tmul_smul</span><span class="o">,</span> <span class="err">←</span> <span class="n">smul_tmul</span><span class="o">,</span> <span class="n">smul_eq_mul</span><span class="o">,</span> <span class="n">mul_one</span><span class="o">]),</span>
+  <span class="n">right_inv</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">m</span><span class="o">,</span> <span class="k">by</span> <span class="n">simp</span><span class="o">,</span>
+  <span class="bp">..</span> <span class="o">(</span><span class="n">lift</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">c</span> <span class="n">x</span><span class="o">,</span> <span class="n">c</span> <span class="err">•</span> <span class="n">x</span><span class="o">)</span>
+    <span class="bp">⟨λ</span> <span class="n">m</span><span class="o">,</span> <span class="n">linear_map</span><span class="bp">.</span><span class="n">is_linear</span> <span class="o">(</span><span class="n">linear_map</span><span class="bp">.</span><span class="n">smul_right</span> <span class="n">linear_map</span><span class="bp">.</span><span class="n">id</span> <span class="n">m</span><span class="o">),</span>
+    <span class="bp">λ</span> <span class="n">r</span><span class="o">,</span> <span class="n">linear_map</span><span class="bp">.</span><span class="n">is_linear</span> <span class="o">(</span><span class="n">r</span> <span class="err">•</span> <span class="n">linear_map</span><span class="bp">.</span><span class="n">id</span><span class="o">)</span><span class="bp">⟩</span> <span class="o">:</span> <span class="n">R</span> <span class="err">⊗</span> <span class="n">M</span> <span class="bp">→</span><span class="err">ₗ</span> <span class="n">M</span><span class="o">)</span> <span class="o">}</span>
+</pre></div>
 
 #### [ Kenny Lau (Nov 03 2018 at 01:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137092236):
-I don't think anyone wants to see this
+<p>I don't think anyone wants to see this</p>
 
 #### [ Mario Carneiro (Nov 03 2018 at 01:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137092333):
-what is your objection exactly?
+<p>what is your objection exactly?</p>
 
 #### [ Kenny Lau (Nov 03 2018 at 01:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137092419):
-1. the linear map needs to be put after `..`; 2. lack of `is_linear_map.comp` and the fact that `lift.ext` and most of the things in `tensor_product` depend on `is_linear_map` make proofs very long and cumbersome
+<p>1. the linear map needs to be put after <code>..</code>; 2. lack of <code>is_linear_map.comp</code> and the fact that <code>lift.ext</code> and most of the things in <code>tensor_product</code> depend on <code>is_linear_map</code> make proofs very long and cumbersome</p>
 
 #### [ Mario Carneiro (Nov 03 2018 at 02:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137093199):
-I've only done the first half of that file, so some things may still need to be hashed out
+<p>I've only done the first half of that file, so some things may still need to be hashed out</p>
 
 #### [ Mario Carneiro (Nov 03 2018 at 02:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137093203):
-`lift.ext` should take linear maps as input
+<p><code>lift.ext</code> should take linear maps as input</p>
 
 #### [ Mario Carneiro (Nov 03 2018 at 02:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137093273):
-You shouldn't feel bound to the current way statements of theorems are written, that's what refactoring is about
+<p>You shouldn't feel bound to the current way statements of theorems are written, that's what refactoring is about</p>
 
 #### [ Mario Carneiro (Nov 03 2018 at 02:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137093296):
-Ideally, this construction should be easy, just cobbling together functions we already know are linear
+<p>Ideally, this construction should be easy, just cobbling together functions we already know are linear</p>
 
 #### [ Mario Carneiro (Nov 03 2018 at 02:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137093354):
-I think we need another constructor for is_bilinear_map, or is_linear_map, that takes a linear function and asks you to prove equality to the target function
+<p>I think we need another constructor for is_bilinear_map, or is_linear_map, that takes a linear function and asks you to prove equality to the target function</p>
 
 #### [ Mario Carneiro (Nov 03 2018 at 02:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137093401):
-which corresponds to the alternate definition `def is_linear_map (f : β → γ) := ∃ g : β →ₗ γ, ∀ x, f x = g x`
+<p>which corresponds to the alternate definition <code>def is_linear_map (f : β → γ) := ∃ g : β →ₗ γ, ∀ x, f x = g x</code></p>
 
 #### [ Kenny Lau (Nov 03 2018 at 03:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137096037):
-```quote
-`lift.ext` should take linear maps as input
-```
-I don't think that will work, because there are things that need to be proved to be linear
+<blockquote>
+<p><code>lift.ext</code> should take linear maps as input</p>
+</blockquote>
+<p>I don't think that will work, because there are things that need to be proved to be linear</p>
 
 #### [ Kenny Lau (Nov 03 2018 at 03:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137096098):
-do you think I should change `is_bilinear_map` to `bilinear_map`?
+<p>do you think I should change <code>is_bilinear_map</code> to <code>bilinear_map</code>?</p>
 
 #### [ Mario Carneiro (Nov 03 2018 at 03:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137096203):
-Huh? `lift.ext` takes two functions and proofs that they are linear
+<p>Huh? <code>lift.ext</code> takes two functions and proofs that they are linear</p>
 
 #### [ Mario Carneiro (Nov 03 2018 at 03:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137096204):
-that can always be contracted to a function taking a `linear_map` arg
+<p>that can always be contracted to a function taking a <code>linear_map</code> arg</p>
 
 #### [ Mario Carneiro (Nov 03 2018 at 03:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137096254):
-I thought about it, but do the set of all bilinear maps have a nice structure like linear maps? Like can you add them and such
+<p>I thought about it, but do the set of all bilinear maps have a nice structure like linear maps? Like can you add them and such</p>
 
 #### [ Kenny Lau (Nov 03 2018 at 03:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137096331):
-yes
+<p>yes</p>
 
 #### [ Kenny Lau (Nov 03 2018 at 03:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137096332):
-they're even a module
+<p>they're even a module</p>
 
 #### [ Kenny Lau (Nov 03 2018 at 03:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137096371):
-they're as nice as linear maps
+<p>they're as nice as linear maps</p>
 
 #### [ Kenny Lau (Nov 03 2018 at 03:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137096374):
-(because of the universal property of tensor product :P)
+<p>(because of the universal property of tensor product :P)</p>
 
 #### [ Mario Carneiro (Nov 03 2018 at 04:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137096836):
-well okay then
+<p>well okay then</p>
 
 #### [ Mario Carneiro (Nov 03 2018 at 04:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137096849):
-I think `bilinear_map` still needs to reference `is_linear_map` though
+<p>I think <code>bilinear_map</code> still needs to reference <code>is_linear_map</code> though</p>
 
 #### [ Kenny Lau (Nov 03 2018 at 04:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137096851):
-```lean
-@[reducible] def bilinear_map := M →ₗ N →ₗ P
-```
+<div class="codehilite"><pre><span></span><span class="bp">@</span><span class="o">[</span><span class="kn">reducible</span><span class="o">]</span> <span class="n">def</span> <span class="n">bilinear_map</span> <span class="o">:=</span> <span class="n">M</span> <span class="bp">→</span><span class="err">ₗ</span> <span class="n">N</span> <span class="bp">→</span><span class="err">ₗ</span> <span class="n">P</span>
+</pre></div>
 
 #### [ Kenny Lau (Nov 03 2018 at 04:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137096852):
-how about this
+<p>how about this</p>
 
 #### [ Mario Carneiro (Nov 03 2018 at 04:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137096854):
-oh! does that work?
+<p>oh! does that work?</p>
 
 #### [ Kenny Lau (Nov 03 2018 at 04:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137096856):
-I'm experimenting with it now
+<p>I'm experimenting with it now</p>
 
 #### [ Mario Carneiro (Nov 03 2018 at 04:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137096859):
-is Mod(R) a CCC?
+<p>is Mod(R) a CCC?</p>
 
 #### [ Kenny Lau (Nov 03 2018 at 04:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137096898):
-CCC?
+<p>CCC?</p>
 
 #### [ Mario Carneiro (Nov 03 2018 at 04:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137096899):
-cartesian closed category
+<p>cartesian closed category</p>
 
 #### [ Mario Carneiro (Nov 03 2018 at 04:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137096900):
-i.e. that thing means what you want it to
+<p>i.e. that thing means what you want it to</p>
 
 #### [ Kenny Lau (Nov 03 2018 at 04:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137096901):
-yes
+<p>yes</p>
 
 #### [ Kenny Lau (Nov 03 2018 at 04:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137096910):
-actually I don't know
+<p>actually I don't know</p>
 
 #### [ Kenny Lau (Nov 03 2018 at 04:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137096913):
-I just know that Hom(M tensor N, P) = Hom(M, Hom(N, P))
+<p>I just know that Hom(M tensor N, P) = Hom(M, Hom(N, P))</p>
 
 #### [ Kenny Lau (Nov 03 2018 at 04:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137096914):
-so (- tensor N) is right adjoint to Hom(N, -)
+<p>so (- tensor N) is right adjoint to Hom(N, -)</p>
 
 #### [ Mario Carneiro (Nov 03 2018 at 04:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137096923):
-that looks a lot like the universal property of the exponential
+<p>that looks a lot like the universal property of the exponential</p>
 
 #### [ Mario Carneiro (Nov 03 2018 at 04:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137096963):
-Hom(N,P) there is actually an object of the category
+<p>Hom(N,P) there is actually an object of the category</p>
 
 #### [ Kenny Lau (Nov 03 2018 at 04:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137097797):
-```lean
-import group_theory.free_abelian_group
-import linear_algebra.basic tactic.squeeze
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">group_theory</span><span class="bp">.</span><span class="n">free_abelian_group</span>
+<span class="kn">import</span> <span class="n">linear_algebra</span><span class="bp">.</span><span class="n">basic</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">squeeze</span>
 
-variables (R : Type*) [comm_ring R]
-variables (M : Type*) (N : Type*) (P : Type*) {Q : Type*}
-variables [add_comm_group M] [add_comm_group N] [add_comm_group P] [add_comm_group Q]
-variables [module R M] [module R N] [module R P] [module R Q]
-include R
+<span class="kn">variables</span> <span class="o">(</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">R</span><span class="o">]</span>
+<span class="kn">variables</span> <span class="o">(</span><span class="n">M</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">(</span><span class="n">N</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">(</span><span class="n">P</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">{</span><span class="n">Q</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span>
+<span class="kn">variables</span> <span class="o">[</span><span class="n">add_comm_group</span> <span class="n">M</span><span class="o">]</span> <span class="o">[</span><span class="n">add_comm_group</span> <span class="n">N</span><span class="o">]</span> <span class="o">[</span><span class="n">add_comm_group</span> <span class="n">P</span><span class="o">]</span> <span class="o">[</span><span class="n">add_comm_group</span> <span class="n">Q</span><span class="o">]</span>
+<span class="kn">variables</span> <span class="o">[</span><span class="n">module</span> <span class="n">R</span> <span class="n">M</span><span class="o">]</span> <span class="o">[</span><span class="n">module</span> <span class="n">R</span> <span class="n">N</span><span class="o">]</span> <span class="o">[</span><span class="n">module</span> <span class="n">R</span> <span class="n">P</span><span class="o">]</span> <span class="o">[</span><span class="n">module</span> <span class="n">R</span> <span class="n">Q</span><span class="o">]</span>
+<span class="n">include</span> <span class="n">R</span>
 
-@[reducible] def bilinear_map := M →ₗ N →ₗ P
+<span class="bp">@</span><span class="o">[</span><span class="kn">reducible</span><span class="o">]</span> <span class="n">def</span> <span class="n">bilinear_map</span> <span class="o">:=</span> <span class="n">M</span> <span class="bp">→</span><span class="err">ₗ</span> <span class="n">N</span> <span class="bp">→</span><span class="err">ₗ</span> <span class="n">P</span>
 
-variables {R M N P}
+<span class="kn">variables</span> <span class="o">{</span><span class="n">R</span> <span class="n">M</span> <span class="n">N</span> <span class="n">P</span><span class="o">}</span>
 
-namespace bilinear_map
-variables {M N P Q}
+<span class="kn">namespace</span> <span class="n">bilinear_map</span>
+<span class="kn">variables</span> <span class="o">{</span><span class="n">M</span> <span class="n">N</span> <span class="n">P</span> <span class="n">Q</span><span class="o">}</span>
 
-section mk
-variable (f : M → N → P)
-variable (H1 : ∀ m₁ m₂ n, f (m₁ + m₂) n = f m₁ n + f m₂ n)
-variable (H2 : ∀ c m n, f (c • m) n = c • f m n)
-variable (H3 : ∀ m n₁ n₂, f m (n₁ + n₂) = f m n₁ + f m n₂)
-variable (H4 : ∀ c m n, f m (c • n) = c • f m n)
+<span class="kn">section</span> <span class="n">mk</span>
+<span class="kn">variable</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">M</span> <span class="bp">→</span> <span class="n">N</span> <span class="bp">→</span> <span class="n">P</span><span class="o">)</span>
+<span class="kn">variable</span> <span class="o">(</span><span class="n">H1</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">m₁</span> <span class="n">m₂</span> <span class="n">n</span><span class="o">,</span> <span class="n">f</span> <span class="o">(</span><span class="n">m₁</span> <span class="bp">+</span> <span class="n">m₂</span><span class="o">)</span> <span class="n">n</span> <span class="bp">=</span> <span class="n">f</span> <span class="n">m₁</span> <span class="n">n</span> <span class="bp">+</span> <span class="n">f</span> <span class="n">m₂</span> <span class="n">n</span><span class="o">)</span>
+<span class="kn">variable</span> <span class="o">(</span><span class="n">H2</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">c</span> <span class="n">m</span> <span class="n">n</span><span class="o">,</span> <span class="n">f</span> <span class="o">(</span><span class="n">c</span> <span class="err">•</span> <span class="n">m</span><span class="o">)</span> <span class="n">n</span> <span class="bp">=</span> <span class="n">c</span> <span class="err">•</span> <span class="n">f</span> <span class="n">m</span> <span class="n">n</span><span class="o">)</span>
+<span class="kn">variable</span> <span class="o">(</span><span class="n">H3</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">m</span> <span class="n">n₁</span> <span class="n">n₂</span><span class="o">,</span> <span class="n">f</span> <span class="n">m</span> <span class="o">(</span><span class="n">n₁</span> <span class="bp">+</span> <span class="n">n₂</span><span class="o">)</span> <span class="bp">=</span> <span class="n">f</span> <span class="n">m</span> <span class="n">n₁</span> <span class="bp">+</span> <span class="n">f</span> <span class="n">m</span> <span class="n">n₂</span><span class="o">)</span>
+<span class="kn">variable</span> <span class="o">(</span><span class="n">H4</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">c</span> <span class="n">m</span> <span class="n">n</span><span class="o">,</span> <span class="n">f</span> <span class="n">m</span> <span class="o">(</span><span class="n">c</span> <span class="err">•</span> <span class="n">n</span><span class="o">)</span> <span class="bp">=</span> <span class="n">c</span> <span class="err">•</span> <span class="n">f</span> <span class="n">m</span> <span class="n">n</span><span class="o">)</span>
 
-def bilinear_map.mk :
-  bilinear_map R M N P :=
-⟨λ m, ⟨f m, H3 m, λ c, H4 c m⟩,
-λ m₁ m₂, linear_map.ext $ H1 m₁ m₂,
-λ c m, linear_map.ext $ H2 c m⟩
+<span class="n">def</span> <span class="n">bilinear_map</span><span class="bp">.</span><span class="n">mk</span> <span class="o">:</span>
+  <span class="n">bilinear_map</span> <span class="n">R</span> <span class="n">M</span> <span class="n">N</span> <span class="n">P</span> <span class="o">:=</span>
+<span class="bp">⟨λ</span> <span class="n">m</span><span class="o">,</span> <span class="bp">⟨</span><span class="n">f</span> <span class="n">m</span><span class="o">,</span> <span class="n">H3</span> <span class="n">m</span><span class="o">,</span> <span class="bp">λ</span> <span class="n">c</span><span class="o">,</span> <span class="n">H4</span> <span class="n">c</span> <span class="n">m</span><span class="bp">⟩</span><span class="o">,</span>
+<span class="bp">λ</span> <span class="n">m₁</span> <span class="n">m₂</span><span class="o">,</span> <span class="n">linear_map</span><span class="bp">.</span><span class="n">ext</span> <span class="err">$</span> <span class="n">H1</span> <span class="n">m₁</span> <span class="n">m₂</span><span class="o">,</span>
+<span class="bp">λ</span> <span class="n">c</span> <span class="n">m</span><span class="o">,</span> <span class="n">linear_map</span><span class="bp">.</span><span class="n">ext</span> <span class="err">$</span> <span class="n">H2</span> <span class="n">c</span> <span class="n">m</span><span class="bp">⟩</span>
 
-theorem bilinear_map.mk_apply (m : M) (n : N) :
-  bilinear_map.mk f H1 H2 H3 H4 m n = f m n := rfl
+<span class="kn">theorem</span> <span class="n">bilinear_map</span><span class="bp">.</span><span class="n">mk_apply</span> <span class="o">(</span><span class="n">m</span> <span class="o">:</span> <span class="n">M</span><span class="o">)</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">N</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">bilinear_map</span><span class="bp">.</span><span class="n">mk</span> <span class="n">f</span> <span class="n">H1</span> <span class="n">H2</span> <span class="n">H3</span> <span class="n">H4</span> <span class="n">m</span> <span class="n">n</span> <span class="bp">=</span> <span class="n">f</span> <span class="n">m</span> <span class="n">n</span> <span class="o">:=</span> <span class="n">rfl</span>
 
-end mk
+<span class="kn">end</span> <span class="n">mk</span>
 
-variables (f : bilinear_map R M N P)
+<span class="kn">variables</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">bilinear_map</span> <span class="n">R</span> <span class="n">M</span> <span class="n">N</span> <span class="n">P</span><span class="o">)</span>
 
-def comm : bilinear_map R N M P :=
-bilinear_map.mk (λ n m, f m n)
-  (λ n₁ n₂ m, (f m).map_add _ _)
-  (λ c n m, (f m).map_smul _ _)
-  (λ n m₁ m₂, by rw f.map_add; refl)
-  (λ c n m, by rw f.map_smul; refl)
+<span class="n">def</span> <span class="n">comm</span> <span class="o">:</span> <span class="n">bilinear_map</span> <span class="n">R</span> <span class="n">N</span> <span class="n">M</span> <span class="n">P</span> <span class="o">:=</span>
+<span class="n">bilinear_map</span><span class="bp">.</span><span class="n">mk</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">n</span> <span class="n">m</span><span class="o">,</span> <span class="n">f</span> <span class="n">m</span> <span class="n">n</span><span class="o">)</span>
+  <span class="o">(</span><span class="bp">λ</span> <span class="n">n₁</span> <span class="n">n₂</span> <span class="n">m</span><span class="o">,</span> <span class="o">(</span><span class="n">f</span> <span class="n">m</span><span class="o">)</span><span class="bp">.</span><span class="n">map_add</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">)</span>
+  <span class="o">(</span><span class="bp">λ</span> <span class="n">c</span> <span class="n">n</span> <span class="n">m</span><span class="o">,</span> <span class="o">(</span><span class="n">f</span> <span class="n">m</span><span class="o">)</span><span class="bp">.</span><span class="n">map_smul</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">)</span>
+  <span class="o">(</span><span class="bp">λ</span> <span class="n">n</span> <span class="n">m₁</span> <span class="n">m₂</span><span class="o">,</span> <span class="k">by</span> <span class="n">rw</span> <span class="n">f</span><span class="bp">.</span><span class="n">map_add</span><span class="bp">;</span> <span class="n">refl</span><span class="o">)</span>
+  <span class="o">(</span><span class="bp">λ</span> <span class="n">c</span> <span class="n">n</span> <span class="n">m</span><span class="o">,</span> <span class="k">by</span> <span class="n">rw</span> <span class="n">f</span><span class="bp">.</span><span class="n">map_smul</span><span class="bp">;</span> <span class="n">refl</span><span class="o">)</span>
 
-@[simp] theorem comm_apply (m : M) (n : N) : f.comm n m = f m n := rfl
+<span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="kn">theorem</span> <span class="n">comm_apply</span> <span class="o">(</span><span class="n">m</span> <span class="o">:</span> <span class="n">M</span><span class="o">)</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">N</span><span class="o">)</span> <span class="o">:</span> <span class="n">f</span><span class="bp">.</span><span class="n">comm</span> <span class="n">n</span> <span class="n">m</span> <span class="bp">=</span> <span class="n">f</span> <span class="n">m</span> <span class="n">n</span> <span class="o">:=</span> <span class="n">rfl</span>
 
-def left (y : N) : M →ₗ P := f.comm y
-def right (x : M) : N →ₗ P := f x
+<span class="n">def</span> <span class="n">left</span> <span class="o">(</span><span class="n">y</span> <span class="o">:</span> <span class="n">N</span><span class="o">)</span> <span class="o">:</span> <span class="n">M</span> <span class="bp">→</span><span class="err">ₗ</span> <span class="n">P</span> <span class="o">:=</span> <span class="n">f</span><span class="bp">.</span><span class="n">comm</span> <span class="n">y</span>
+<span class="n">def</span> <span class="n">right</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">M</span><span class="o">)</span> <span class="o">:</span> <span class="n">N</span> <span class="bp">→</span><span class="err">ₗ</span> <span class="n">P</span> <span class="o">:=</span> <span class="n">f</span> <span class="n">x</span>
 
-@[simp] theorem left_apply (x : M) (y : N) : f.left y x = f x y := rfl
-@[simp] theorem right_apply (x : M) (y : N) : f.right x y = f x y := rfl
+<span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="kn">theorem</span> <span class="n">left_apply</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">M</span><span class="o">)</span> <span class="o">(</span><span class="n">y</span> <span class="o">:</span> <span class="n">N</span><span class="o">)</span> <span class="o">:</span> <span class="n">f</span><span class="bp">.</span><span class="n">left</span> <span class="n">y</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">f</span> <span class="n">x</span> <span class="n">y</span> <span class="o">:=</span> <span class="n">rfl</span>
+<span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="kn">theorem</span> <span class="n">right_apply</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">M</span><span class="o">)</span> <span class="o">(</span><span class="n">y</span> <span class="o">:</span> <span class="n">N</span><span class="o">)</span> <span class="o">:</span> <span class="n">f</span><span class="bp">.</span><span class="n">right</span> <span class="n">x</span> <span class="n">y</span> <span class="bp">=</span> <span class="n">f</span> <span class="n">x</span> <span class="n">y</span> <span class="o">:=</span> <span class="n">rfl</span>
 
-theorem zero_left (y) : f 0 y = 0 := (f.left y).map_zero
-theorem zero_right (x) : f x 0 = 0 := (f.right x).map_zero
+<span class="kn">theorem</span> <span class="n">zero_left</span> <span class="o">(</span><span class="n">y</span><span class="o">)</span> <span class="o">:</span> <span class="n">f</span> <span class="mi">0</span> <span class="n">y</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span> <span class="o">(</span><span class="n">f</span><span class="bp">.</span><span class="n">left</span> <span class="n">y</span><span class="o">)</span><span class="bp">.</span><span class="n">map_zero</span>
+<span class="kn">theorem</span> <span class="n">zero_right</span> <span class="o">(</span><span class="n">x</span><span class="o">)</span> <span class="o">:</span> <span class="n">f</span> <span class="n">x</span> <span class="mi">0</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span> <span class="o">(</span><span class="n">f</span><span class="bp">.</span><span class="n">right</span> <span class="n">x</span><span class="o">)</span><span class="bp">.</span><span class="n">map_zero</span>
 
-theorem neg_left (x y) : f (-x) y = -f x y := (f.left y).map_neg _
-theorem neg_right (x y) : f x (-y) = -f x y := (f.right x).map_neg _
+<span class="kn">theorem</span> <span class="n">neg_left</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span><span class="o">)</span> <span class="o">:</span> <span class="n">f</span> <span class="o">(</span><span class="bp">-</span><span class="n">x</span><span class="o">)</span> <span class="n">y</span> <span class="bp">=</span> <span class="bp">-</span><span class="n">f</span> <span class="n">x</span> <span class="n">y</span> <span class="o">:=</span> <span class="o">(</span><span class="n">f</span><span class="bp">.</span><span class="n">left</span> <span class="n">y</span><span class="o">)</span><span class="bp">.</span><span class="n">map_neg</span> <span class="bp">_</span>
+<span class="kn">theorem</span> <span class="n">neg_right</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span><span class="o">)</span> <span class="o">:</span> <span class="n">f</span> <span class="n">x</span> <span class="o">(</span><span class="bp">-</span><span class="n">y</span><span class="o">)</span> <span class="bp">=</span> <span class="bp">-</span><span class="n">f</span> <span class="n">x</span> <span class="n">y</span> <span class="o">:=</span> <span class="o">(</span><span class="n">f</span><span class="bp">.</span><span class="n">right</span> <span class="n">x</span><span class="o">)</span><span class="bp">.</span><span class="n">map_neg</span> <span class="bp">_</span>
 
-theorem add_left (x₁ x₂ y) : f (x₁ + x₂) y = f x₁ y + f x₂ y := (f.left y).map_add _ _
-theorem add_right (x y₁ y₂) : f x (y₁ + y₂) = f x y₁ + f x y₂ := (f.right x).map_add _ _
+<span class="kn">theorem</span> <span class="n">add_left</span> <span class="o">(</span><span class="n">x₁</span> <span class="n">x₂</span> <span class="n">y</span><span class="o">)</span> <span class="o">:</span> <span class="n">f</span> <span class="o">(</span><span class="n">x₁</span> <span class="bp">+</span> <span class="n">x₂</span><span class="o">)</span> <span class="n">y</span> <span class="bp">=</span> <span class="n">f</span> <span class="n">x₁</span> <span class="n">y</span> <span class="bp">+</span> <span class="n">f</span> <span class="n">x₂</span> <span class="n">y</span> <span class="o">:=</span> <span class="o">(</span><span class="n">f</span><span class="bp">.</span><span class="n">left</span> <span class="n">y</span><span class="o">)</span><span class="bp">.</span><span class="n">map_add</span> <span class="bp">_</span> <span class="bp">_</span>
+<span class="kn">theorem</span> <span class="n">add_right</span> <span class="o">(</span><span class="n">x</span> <span class="n">y₁</span> <span class="n">y₂</span><span class="o">)</span> <span class="o">:</span> <span class="n">f</span> <span class="n">x</span> <span class="o">(</span><span class="n">y₁</span> <span class="bp">+</span> <span class="n">y₂</span><span class="o">)</span> <span class="bp">=</span> <span class="n">f</span> <span class="n">x</span> <span class="n">y₁</span> <span class="bp">+</span> <span class="n">f</span> <span class="n">x</span> <span class="n">y₂</span> <span class="o">:=</span> <span class="o">(</span><span class="n">f</span><span class="bp">.</span><span class="n">right</span> <span class="n">x</span><span class="o">)</span><span class="bp">.</span><span class="n">map_add</span> <span class="bp">_</span> <span class="bp">_</span>
 
-theorem smul_left (r x y) : f (r • x) y = r • f x y := (f.left y).map_smul _ _
-theorem smul_right (r x y) : f x (r • y) = r • f x y := (f.right x).map_smul _ _
+<span class="kn">theorem</span> <span class="n">smul_left</span> <span class="o">(</span><span class="n">r</span> <span class="n">x</span> <span class="n">y</span><span class="o">)</span> <span class="o">:</span> <span class="n">f</span> <span class="o">(</span><span class="n">r</span> <span class="err">•</span> <span class="n">x</span><span class="o">)</span> <span class="n">y</span> <span class="bp">=</span> <span class="n">r</span> <span class="err">•</span> <span class="n">f</span> <span class="n">x</span> <span class="n">y</span> <span class="o">:=</span> <span class="o">(</span><span class="n">f</span><span class="bp">.</span><span class="n">left</span> <span class="n">y</span><span class="o">)</span><span class="bp">.</span><span class="n">map_smul</span> <span class="bp">_</span> <span class="bp">_</span>
+<span class="kn">theorem</span> <span class="n">smul_right</span> <span class="o">(</span><span class="n">r</span> <span class="n">x</span> <span class="n">y</span><span class="o">)</span> <span class="o">:</span> <span class="n">f</span> <span class="n">x</span> <span class="o">(</span><span class="n">r</span> <span class="err">•</span> <span class="n">y</span><span class="o">)</span> <span class="bp">=</span> <span class="n">r</span> <span class="err">•</span> <span class="n">f</span> <span class="n">x</span> <span class="n">y</span> <span class="o">:=</span> <span class="o">(</span><span class="n">f</span><span class="bp">.</span><span class="n">right</span> <span class="n">x</span><span class="o">)</span><span class="bp">.</span><span class="n">map_smul</span> <span class="bp">_</span> <span class="bp">_</span>
 
-def comp₁ (g : Q →ₗ M) : bilinear_map R Q N P :=
-linear_map.comp f g
+<span class="n">def</span> <span class="n">comp₁</span> <span class="o">(</span><span class="n">g</span> <span class="o">:</span> <span class="n">Q</span> <span class="bp">→</span><span class="err">ₗ</span> <span class="n">M</span><span class="o">)</span> <span class="o">:</span> <span class="n">bilinear_map</span> <span class="n">R</span> <span class="n">Q</span> <span class="n">N</span> <span class="n">P</span> <span class="o">:=</span>
+<span class="n">linear_map</span><span class="bp">.</span><span class="n">comp</span> <span class="n">f</span> <span class="n">g</span>
 
-@[simp] theorem comp₁_apply (g : Q →ₗ M) (q : Q) (n : N) :
-  f.comp₁ g q n = f (g q) n := rfl
+<span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="kn">theorem</span> <span class="n">comp₁_apply</span> <span class="o">(</span><span class="n">g</span> <span class="o">:</span> <span class="n">Q</span> <span class="bp">→</span><span class="err">ₗ</span> <span class="n">M</span><span class="o">)</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="n">Q</span><span class="o">)</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">N</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">f</span><span class="bp">.</span><span class="n">comp₁</span> <span class="n">g</span> <span class="n">q</span> <span class="n">n</span> <span class="bp">=</span> <span class="n">f</span> <span class="o">(</span><span class="n">g</span> <span class="n">q</span><span class="o">)</span> <span class="n">n</span> <span class="o">:=</span> <span class="n">rfl</span>
 
-def comp₂ (g : Q →ₗ N) : bilinear_map R M Q P :=
-linear_map.comp ⟨λ x, linear_map.comp x g, λ _ _, rfl, λ _ _, rfl⟩ f
+<span class="n">def</span> <span class="n">comp₂</span> <span class="o">(</span><span class="n">g</span> <span class="o">:</span> <span class="n">Q</span> <span class="bp">→</span><span class="err">ₗ</span> <span class="n">N</span><span class="o">)</span> <span class="o">:</span> <span class="n">bilinear_map</span> <span class="n">R</span> <span class="n">M</span> <span class="n">Q</span> <span class="n">P</span> <span class="o">:=</span>
+<span class="n">linear_map</span><span class="bp">.</span><span class="n">comp</span> <span class="bp">⟨λ</span> <span class="n">x</span><span class="o">,</span> <span class="n">linear_map</span><span class="bp">.</span><span class="n">comp</span> <span class="n">x</span> <span class="n">g</span><span class="o">,</span> <span class="bp">λ</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">,</span> <span class="n">rfl</span><span class="o">,</span> <span class="bp">λ</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">,</span> <span class="n">rfl</span><span class="bp">⟩</span> <span class="n">f</span>
 
-@[simp] theorem comp₂_apply (g : Q →ₗ N) (m : M) (q : Q) :
-  f.comp₂ g m q = f m (g q) := rfl
+<span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="kn">theorem</span> <span class="n">comp₂_apply</span> <span class="o">(</span><span class="n">g</span> <span class="o">:</span> <span class="n">Q</span> <span class="bp">→</span><span class="err">ₗ</span> <span class="n">N</span><span class="o">)</span> <span class="o">(</span><span class="n">m</span> <span class="o">:</span> <span class="n">M</span><span class="o">)</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="n">Q</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">f</span><span class="bp">.</span><span class="n">comp₂</span> <span class="n">g</span> <span class="n">m</span> <span class="n">q</span> <span class="bp">=</span> <span class="n">f</span> <span class="n">m</span> <span class="o">(</span><span class="n">g</span> <span class="n">q</span><span class="o">)</span> <span class="o">:=</span> <span class="n">rfl</span>
 
-def comp₃ (g : P →ₗ Q) : bilinear_map R M N Q :=
-linear_map.comp ⟨g.comp, λ x y, linear_map.ext $ λ n, g.map_add _ _,
-  λ c x, linear_map.ext $ λ n, g.map_smul _ _⟩ f
+<span class="n">def</span> <span class="n">comp₃</span> <span class="o">(</span><span class="n">g</span> <span class="o">:</span> <span class="n">P</span> <span class="bp">→</span><span class="err">ₗ</span> <span class="n">Q</span><span class="o">)</span> <span class="o">:</span> <span class="n">bilinear_map</span> <span class="n">R</span> <span class="n">M</span> <span class="n">N</span> <span class="n">Q</span> <span class="o">:=</span>
+<span class="n">linear_map</span><span class="bp">.</span><span class="n">comp</span> <span class="bp">⟨</span><span class="n">g</span><span class="bp">.</span><span class="n">comp</span><span class="o">,</span> <span class="bp">λ</span> <span class="n">x</span> <span class="n">y</span><span class="o">,</span> <span class="n">linear_map</span><span class="bp">.</span><span class="n">ext</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">n</span><span class="o">,</span> <span class="n">g</span><span class="bp">.</span><span class="n">map_add</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">,</span>
+  <span class="bp">λ</span> <span class="n">c</span> <span class="n">x</span><span class="o">,</span> <span class="n">linear_map</span><span class="bp">.</span><span class="n">ext</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">n</span><span class="o">,</span> <span class="n">g</span><span class="bp">.</span><span class="n">map_smul</span> <span class="bp">_</span> <span class="bp">_⟩</span> <span class="n">f</span>
 
-@[simp] theorem comp₃_apply (g : P →ₗ Q) (m : M) (n : N) :
-  f.comp₃ g m n = g (f m n) := rfl
+<span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="kn">theorem</span> <span class="n">comp₃_apply</span> <span class="o">(</span><span class="n">g</span> <span class="o">:</span> <span class="n">P</span> <span class="bp">→</span><span class="err">ₗ</span> <span class="n">Q</span><span class="o">)</span> <span class="o">(</span><span class="n">m</span> <span class="o">:</span> <span class="n">M</span><span class="o">)</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">N</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">f</span><span class="bp">.</span><span class="n">comp₃</span> <span class="n">g</span> <span class="n">m</span> <span class="n">n</span> <span class="bp">=</span> <span class="n">g</span> <span class="o">(</span><span class="n">f</span> <span class="n">m</span> <span class="n">n</span><span class="o">)</span> <span class="o">:=</span> <span class="n">rfl</span>
 
-end bilinear_map
-```
+<span class="kn">end</span> <span class="n">bilinear_map</span>
+</pre></div>
 
 #### [ Kenny Lau (Nov 03 2018 at 04:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137097798):
-looking good
+<p>looking good</p>
 
 #### [ Mario Carneiro (Nov 03 2018 at 04:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137097901):
-maybe I'm spoiled, but I would hope that there was a direct way to get `comm`
+<p>maybe I'm spoiled, but I would hope that there was a direct way to get <code>comm</code></p>
 
 #### [ Mario Carneiro (Nov 03 2018 at 04:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137097902):
-maybe it requires the tensor product though
+<p>maybe it requires the tensor product though</p>
 
 #### [ Mario Carneiro (Nov 03 2018 at 04:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137097943):
-I guess it is equivalent to saying that `left` is a linear map
+<p>I guess it is equivalent to saying that <code>left</code> is a linear map</p>
 
 #### [ Mario Carneiro (Nov 03 2018 at 04:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137098004):
-If `apply : M -> (M ->l N) ->l N` was linear we would have it
+<p>If <code>apply : M -&gt; (M -&gt;l N) -&gt;l N</code> was linear we would have it</p>
 
 #### [ Kenny Lau (Nov 03 2018 at 04:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137098005):
-and if `comp` was also linear.. :P
+<p>and if <code>comp</code> was also linear.. :P</p>
 
 #### [ Mario Carneiro (Nov 03 2018 at 04:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137098051):
-yeah, there should be a principled way to do this using CCCs
+<p>yeah, there should be a principled way to do this using CCCs</p>
 
 #### [ Kenny Lau (Nov 03 2018 at 04:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137098052):
-but that would be too category-theoretical for our purposes
+<p>but that would be too category-theoretical for our purposes</p>
 
 #### [ Mario Carneiro (Nov 03 2018 at 04:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137098057):
-I mean with the categories unfolded away
+<p>I mean with the categories unfolded away</p>
 
 #### [ Mario Carneiro (Nov 03 2018 at 04:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137098062):
-We know that CCCs interpret lambda calculus, so literally anything you can write down that is type correct will be linear
+<p>We know that CCCs interpret lambda calculus, so literally anything you can write down that is type correct will be linear</p>
 
 #### [ Mario Carneiro (Nov 03 2018 at 04:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137098104):
-we just need the right building blocks to get everything else
+<p>we just need the right building blocks to get everything else</p>
 
 #### [ Kenny Lau (Nov 03 2018 at 04:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137098106):
-but we also know that lambda calculus is generated by abstraction and application?
+<p>but we also know that lambda calculus is generated by abstraction and application?</p>
 
 #### [ Mario Carneiro (Nov 03 2018 at 04:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137098113):
-yes
+<p>yes</p>
 
 #### [ Kenny Lau (Nov 03 2018 at 04:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137098114):
-but abstraction isn't a linear map?
+<p>but abstraction isn't a linear map?</p>
 
 #### [ Mario Carneiro (Nov 03 2018 at 04:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137098116):
-That's `apply`
+<p>That's <code>apply</code></p>
 
 #### [ Kenny Lau (Nov 03 2018 at 04:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137098159):
-so what's the conclusion?
+<p>so what's the conclusion?</p>
 
 #### [ Mario Carneiro (Nov 03 2018 at 04:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137098162):
-er, no - abstraction is the UMP of apply
+<p>er, no - abstraction is the UMP of apply</p>
 
 #### [ Mario Carneiro (Nov 03 2018 at 04:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137098170):
-it works because the families we are considering are themselves linear in their free variables
+<p>it works because the families we are considering are themselves linear in their free variables</p>
 
 #### [ Mario Carneiro (Nov 03 2018 at 04:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137098173):
-so you get a "lambda" like operator
+<p>so you get a "lambda" like operator</p>
 
 #### [ Mario Carneiro (Nov 03 2018 at 04:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137098216):
-In this context we wouldn't actually be able to write down lambda, because we have "the wrong lambda", it isn't linear because we don't have the right notion of family for the category
+<p>In this context we wouldn't actually be able to write down lambda, because we have "the wrong lambda", it isn't linear because we don't have the right notion of family for the category</p>
 
 #### [ Mario Carneiro (Nov 03 2018 at 04:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137098221):
-but we can run any lambda term through the CCC translation to get a term using only CCC primitives, and we can prove these are all linear
+<p>but we can run any lambda term through the CCC translation to get a term using only CCC primitives, and we can prove these are all linear</p>
 
 #### [ Johan Commelin (Nov 03 2018 at 08:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137103669):
-I really like where this is going! Keep up the good work!
+<p>I really like where this is going! Keep up the good work!</p>
 
 #### [ Kevin Buzzard (Nov 03 2018 at 09:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137104926):
-Yes many thanks Kenny for trying to get the show back on the road. Does this stuff compile yet? Is it worth going back to Hilbert basis theorem yet?
+<p>Yes many thanks Kenny for trying to get the show back on the road. Does this stuff compile yet? Is it worth going back to Hilbert basis theorem yet?</p>
 
 #### [ Kenny Lau (Nov 03 2018 at 12:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137110271):
-Fixed
+<p>Fixed</p>
 
 #### [ Kenny Lau (Nov 03 2018 at 12:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137110475):
-@**Mario Carneiro** what's the next step?
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> what's the next step?</p>
 
 #### [ Mario Carneiro (Nov 03 2018 at 12:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137110481):
-is it compiling now?
+<p>is it compiling now?</p>
 
 #### [ Kenny Lau (Nov 03 2018 at 12:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137110485):
-yes
+<p>yes</p>
 
 #### [ Mario Carneiro (Nov 03 2018 at 12:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137110524):
-sweet
+<p>sweet</p>
 
 #### [ Mario Carneiro (Nov 03 2018 at 12:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137110532):
-unfortunately I still need to finish and review it myself, so it's in the queue with the other PRs now
+<p>unfortunately I still need to finish and review it myself, so it's in the queue with the other PRs now</p>
 
 #### [ Mario Carneiro (Nov 03 2018 at 12:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137110546):
-If things go well I will have time this weekend for it
+<p>If things go well I will have time this weekend for it</p>
 
 #### [ Kenny Lau (Nov 03 2018 at 12:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137110590):
-nice
+<p>nice</p>
 
 #### [ Mario Carneiro (Nov 03 2018 at 12:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137110591):
-but if you see any other ways to improve it, add more theorems etc, now's the time
+<p>but if you see any other ways to improve it, add more theorems etc, now's the time</p>
 
 #### [ Mario Carneiro (Nov 03 2018 at 12:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137110605):
-the CCC laws seem like a good place to start
+<p>the CCC laws seem like a good place to start</p>
 
 #### [ Mario Carneiro (Nov 03 2018 at 12:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137110608):
-prove that `curry : (A X B -> C) -> (A -> B -> C)` is a linear map
+<p>prove that <code>curry : (A X B -&gt; C) -&gt; (A -&gt; B -&gt; C)</code> is a linear map</p>
 
 #### [ Mario Carneiro (Nov 03 2018 at 12:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137110655):
-an equiv, even
+<p>an equiv, even</p>
 
 #### [ Kenny Lau (Nov 03 2018 at 12:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137110661):
-ok
+<p>ok</p>
 
 #### [ Kenny Lau (Nov 03 2018 at 12:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137110702):
-I don't think that's true
+<p>I don't think that's true</p>
 
 #### [ Mario Carneiro (Nov 03 2018 at 13:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137110907):
-put `l` everywhere
+<p>put <code>l</code> everywhere</p>
 
 #### [ Mario Carneiro (Nov 03 2018 at 13:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137110908):
-that's homs in the category
+<p>that's homs in the category</p>
 
 #### [ Kenny Lau (Nov 03 2018 at 13:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137110950):
-it's `(M tensor N) -> P` equiv `M -> (N -> P)`
+<p>it's <code>(M tensor N) -&gt; P</code> equiv <code>M -&gt; (N -&gt; P)</code></p>
 
 #### [ Kenny Lau (Nov 03 2018 at 13:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137111063):
-```
-1. (M ⊗ N) ⊗ P -> M ⊗ (N ⊗ P)
-2. (M ⊗ N) -> P -> M ⊗ (N ⊗ P)
-3. P -> (M ⊗ N) -> M ⊗ (N ⊗ P)
-4. P -> M -> N -> M ⊗ (N ⊗ P)
-5. M -> P -> N -> M ⊗ (N ⊗ P)
-6. M -> N -> P -> M ⊗ (N ⊗ P)
-7. M -> N ⊗ P -> M ⊗ (N ⊗ P)
+<div class="codehilite"><pre><span></span>1. (M ⊗ N) ⊗ P -&gt; M ⊗ (N ⊗ P)
+2. (M ⊗ N) -&gt; P -&gt; M ⊗ (N ⊗ P)
+3. P -&gt; (M ⊗ N) -&gt; M ⊗ (N ⊗ P)
+4. P -&gt; M -&gt; N -&gt; M ⊗ (N ⊗ P)
+5. M -&gt; P -&gt; N -&gt; M ⊗ (N ⊗ P)
+6. M -&gt; N -&gt; P -&gt; M ⊗ (N ⊗ P)
+7. M -&gt; N ⊗ P -&gt; M ⊗ (N ⊗ P)
 ````
+</pre></div>
 
 #### [ Mario Carneiro (Nov 03 2018 at 13:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137111403):
-yes
+<p>yes</p>
 
 #### [ Mario Carneiro (Nov 03 2018 at 13:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137111408):
-linear equiv I assume
+<p>linear equiv I assume</p>
 
 #### [ Mario Carneiro (Nov 03 2018 at 13:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137111419):
-But I chose that one specifically because it's one of the CCC primitives
+<p>But I chose that one specifically because it's one of the CCC primitives</p>
 
 #### [ Johan Commelin (Nov 03 2018 at 13:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137111422):
-*canonical* linear equiv, even... :grinning_face_with_smiling_eyes:
+<p><em>canonical</em> linear equiv, even... <span class="emoji emoji-1f601" title="grinning face with smiling eyes">:grinning_face_with_smiling_eyes:</span></p>
 
 #### [ Mario Carneiro (Nov 03 2018 at 13:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137111473):
-`apply` is another: `(M -> N) X M -> N`
+<p><code>apply</code> is another: <code>(M -&gt; N) X M -&gt; N</code></p>
 
 #### [ Mario Carneiro (Nov 03 2018 at 13:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137111476):
-it's trivial with that equiv though
+<p>it's trivial with that equiv though</p>
 
 #### [ Mario Carneiro (Nov 03 2018 at 13:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137111486):
-I think the hom adjunction is equivalent to a few terms that you can compose
+<p>I think the hom adjunction is equivalent to a few terms that you can compose</p>
 
 #### [ Mario Carneiro (Nov 03 2018 at 13:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137111490):
-like apply and curry
+<p>like apply and curry</p>
 
 #### [ Mario Carneiro (Nov 03 2018 at 13:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137111532):
-do we have everything we need for the tensor product to be a product?
+<p>do we have everything we need for the tensor product to be a product?</p>
 
 #### [ Mario Carneiro (Nov 03 2018 at 13:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137111538):
-Is it also the coproduct?
+<p>Is it also the coproduct?</p>
 
 #### [ Johan Commelin (Nov 03 2018 at 13:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137111546):
-Nope
+<p>Nope</p>
 
 #### [ Johan Commelin (Nov 03 2018 at 13:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137111550):
-Coproduct is the direct sum, which is also the product
+<p>Coproduct is the direct sum, which is also the product</p>
 
 #### [ Johan Commelin (Nov 03 2018 at 13:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137111594):
-Tensor product is in fact the coproduct in the category of commutative rings
+<p>Tensor product is in fact the coproduct in the category of commutative rings</p>
 
 #### [ Kevin Buzzard (Nov 03 2018 at 13:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137111617):
-Yes but for modules over a commutative ring it's a different story. You can see something funny is going on because there aren't natural maps from M to M tensor N or from M tensor N to M
+<p>Yes but for modules over a commutative ring it's a different story. You can see something funny is going on because there aren't natural maps from M to M tensor N or from M tensor N to M</p>
 
 #### [ Kevin Buzzard (Nov 03 2018 at 13:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137111643):
-Other than the zero map
+<p>Other than the zero map</p>
 
 #### [ Mario Carneiro (Nov 03 2018 at 13:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137111668):
-wait what?
+<p>wait what?</p>
 
 #### [ Mario Carneiro (Nov 03 2018 at 13:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137111674):
-this is a funny product indeed
+<p>this is a funny product indeed</p>
 
 #### [ Kenny Lau (Nov 03 2018 at 13:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137112176):
-```
-1. (M ⊗ N) ⊗ P -> M ⊗ (N ⊗ P)
-2. (M ⊗ N) -> P -> M ⊗ (N ⊗ P)
-3. M -> N -> P -> M ⊗ (N ⊗ P)
-4. M -> N ⊗ P -> M ⊗ (N ⊗ P)
+<div class="codehilite"><pre><span></span>1. (M ⊗ N) ⊗ P -&gt; M ⊗ (N ⊗ P)
+2. (M ⊗ N) -&gt; P -&gt; M ⊗ (N ⊗ P)
+3. M -&gt; N -&gt; P -&gt; M ⊗ (N ⊗ P)
+4. M -&gt; N ⊗ P -&gt; M ⊗ (N ⊗ P)
+</pre></div>
 
 #### [ Kenny Lau (Nov 03 2018 at 14:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137112714):
-`(N ≃ₗ P) -> ((M →ₗ N) ≃ₗ (M →ₗ P))`
+<p><code>(N ≃ₗ P) -&gt; ((M →ₗ N) ≃ₗ (M →ₗ P))</code></p>
 
 #### [ Johan Commelin (Nov 03 2018 at 14:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137112878):
-Are you listing the things that you are currently proving?
+<p>Are you listing the things that you are currently proving?</p>
 
 #### [ Mario Carneiro (Nov 03 2018 at 14:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137113439):
-I think he's just enumerating type correct statements and looking for inhabited types?
+<p>I think he's just enumerating type correct statements and looking for inhabited types?</p>
 
 #### [ Johan Commelin (Nov 03 2018 at 14:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137113487):
-Do we have `dual`?
+<p>Do we have <code>dual</code>?</p>
 
 #### [ Johan Commelin (Nov 03 2018 at 14:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137113493):
-Because `M.dual \otimes N = Hom(M,N)` might be an interesting statement...
+<p>Because <code>M.dual \otimes N = Hom(M,N)</code> might be an interesting statement...</p>
 
 #### [ Kenny Lau (Nov 03 2018 at 14:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137113504):
-that's just `M ->L R`
+<p>that's just <code>M -&gt;L R</code></p>
 
 #### [ Kenny Lau (Nov 03 2018 at 14:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137113549):
-and what you said is only true for M finitely dimensional vector space
+<p>and what you said is only true for M finitely dimensional vector space</p>
 
 #### [ Johan Commelin (Nov 03 2018 at 14:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137113551):
-Of course, but it is a useful concept.
+<p>Of course, but it is a useful concept.</p>
 
 #### [ Johan Commelin (Nov 03 2018 at 14:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137113555):
-I'm probably missing some hypotheses...
+<p>I'm probably missing some hypotheses...</p>
 
 #### [ Mario Carneiro (Nov 03 2018 at 14:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137113557):
-don't let truth get in the way of beauty
+<p>don't let truth get in the way of beauty</p>
 
 #### [ Kenny Lau (Nov 03 2018 at 14:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137114111):
-```lean
-protected def assoc : (M ⊗ N) ⊗ P ≃ₗ M ⊗ (N ⊗ P) :=
-linear_equiv.of_linear
-  (lift $ lift $ comp (unlift' _ _ _ _) $ unlift id)
-  (lift $ comp (lift' _ _ _ _) $ unlift $ unlift id)
-  (lift.ext' $ linear_map.ext $ λ m, lift.ext' $ bilinear_map.ext $ λ n p,
-    by repeat { rw lift.tmul <|> rw comp₃_apply <|> rw comp_apply <|> rw mk_apply <|>
-        rw lift'_apply <|> rw comm'_apply <|> rw unlift_apply <|> rw unlift'_apply <|> rw id_apply })
-  (lift.ext' $ comm_inj $ linear_map.ext $ λ p, lift.ext' $ bilinear_map.ext $ λ m n,
-    by repeat { rw lift.tmul <|> rw comp₃_apply <|> rw comp_apply <|> rw comm_apply <|> rw mk_apply <|>
-        rw lift'_apply <|> rw comm'_apply <|> rw unlift_apply <|> rw unlift'_apply <|> rw id_apply })
-```
+<div class="codehilite"><pre><span></span><span class="kn">protected</span> <span class="n">def</span> <span class="n">assoc</span> <span class="o">:</span> <span class="o">(</span><span class="n">M</span> <span class="err">⊗</span> <span class="n">N</span><span class="o">)</span> <span class="err">⊗</span> <span class="n">P</span> <span class="err">≃ₗ</span> <span class="n">M</span> <span class="err">⊗</span> <span class="o">(</span><span class="n">N</span> <span class="err">⊗</span> <span class="n">P</span><span class="o">)</span> <span class="o">:=</span>
+<span class="n">linear_equiv</span><span class="bp">.</span><span class="n">of_linear</span>
+  <span class="o">(</span><span class="n">lift</span> <span class="err">$</span> <span class="n">lift</span> <span class="err">$</span> <span class="n">comp</span> <span class="o">(</span><span class="n">unlift&#39;</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">)</span> <span class="err">$</span> <span class="n">unlift</span> <span class="n">id</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">lift</span> <span class="err">$</span> <span class="n">comp</span> <span class="o">(</span><span class="n">lift&#39;</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">)</span> <span class="err">$</span> <span class="n">unlift</span> <span class="err">$</span> <span class="n">unlift</span> <span class="n">id</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">lift</span><span class="bp">.</span><span class="n">ext&#39;</span> <span class="err">$</span> <span class="n">linear_map</span><span class="bp">.</span><span class="n">ext</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">m</span><span class="o">,</span> <span class="n">lift</span><span class="bp">.</span><span class="n">ext&#39;</span> <span class="err">$</span> <span class="n">bilinear_map</span><span class="bp">.</span><span class="n">ext</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">n</span> <span class="n">p</span><span class="o">,</span>
+    <span class="k">by</span> <span class="n">repeat</span> <span class="o">{</span> <span class="n">rw</span> <span class="n">lift</span><span class="bp">.</span><span class="n">tmul</span> <span class="bp">&lt;|&gt;</span> <span class="n">rw</span> <span class="n">comp₃_apply</span> <span class="bp">&lt;|&gt;</span> <span class="n">rw</span> <span class="n">comp_apply</span> <span class="bp">&lt;|&gt;</span> <span class="n">rw</span> <span class="n">mk_apply</span> <span class="bp">&lt;|&gt;</span>
+        <span class="n">rw</span> <span class="n">lift&#39;_apply</span> <span class="bp">&lt;|&gt;</span> <span class="n">rw</span> <span class="n">comm&#39;_apply</span> <span class="bp">&lt;|&gt;</span> <span class="n">rw</span> <span class="n">unlift_apply</span> <span class="bp">&lt;|&gt;</span> <span class="n">rw</span> <span class="n">unlift&#39;_apply</span> <span class="bp">&lt;|&gt;</span> <span class="n">rw</span> <span class="n">id_apply</span> <span class="o">})</span>
+  <span class="o">(</span><span class="n">lift</span><span class="bp">.</span><span class="n">ext&#39;</span> <span class="err">$</span> <span class="n">comm_inj</span> <span class="err">$</span> <span class="n">linear_map</span><span class="bp">.</span><span class="n">ext</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">p</span><span class="o">,</span> <span class="n">lift</span><span class="bp">.</span><span class="n">ext&#39;</span> <span class="err">$</span> <span class="n">bilinear_map</span><span class="bp">.</span><span class="n">ext</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">m</span> <span class="n">n</span><span class="o">,</span>
+    <span class="k">by</span> <span class="n">repeat</span> <span class="o">{</span> <span class="n">rw</span> <span class="n">lift</span><span class="bp">.</span><span class="n">tmul</span> <span class="bp">&lt;|&gt;</span> <span class="n">rw</span> <span class="n">comp₃_apply</span> <span class="bp">&lt;|&gt;</span> <span class="n">rw</span> <span class="n">comp_apply</span> <span class="bp">&lt;|&gt;</span> <span class="n">rw</span> <span class="n">comm_apply</span> <span class="bp">&lt;|&gt;</span> <span class="n">rw</span> <span class="n">mk_apply</span> <span class="bp">&lt;|&gt;</span>
+        <span class="n">rw</span> <span class="n">lift&#39;_apply</span> <span class="bp">&lt;|&gt;</span> <span class="n">rw</span> <span class="n">comm&#39;_apply</span> <span class="bp">&lt;|&gt;</span> <span class="n">rw</span> <span class="n">unlift_apply</span> <span class="bp">&lt;|&gt;</span> <span class="n">rw</span> <span class="n">unlift&#39;_apply</span> <span class="bp">&lt;|&gt;</span> <span class="n">rw</span> <span class="n">id_apply</span> <span class="o">})</span>
+</pre></div>
 
 #### [ Johan Commelin (Nov 03 2018 at 14:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137114113):
-@**Kenny Lau** How far are we from defining the category of commutative `R`-algebras?
+<p><span class="user-mention" data-user-id="110064">@Kenny Lau</span> How far are we from defining the category of commutative <code>R</code>-algebras?</p>
 
 #### [ Kenny Lau (Nov 03 2018 at 14:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137114114):
-oh well
+<p>oh well</p>
 
 #### [ Kenny Lau (Nov 03 2018 at 14:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137114116):
-what's the concrete version of your question?
+<p>what's the concrete version of your question?</p>
 
 #### [ Johan Commelin (Nov 03 2018 at 14:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137114155):
-Flat ring homs
+<p>Flat ring homs</p>
 
 #### [ Kenny Lau (Nov 03 2018 at 14:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137114159):
-```lean
-@[reducible] def bilinear_map := M →ₗ N →ₗ P
-```
+<div class="codehilite"><pre><span></span><span class="bp">@</span><span class="o">[</span><span class="kn">reducible</span><span class="o">]</span> <span class="n">def</span> <span class="n">bilinear_map</span> <span class="o">:=</span> <span class="n">M</span> <span class="bp">→</span><span class="err">ₗ</span> <span class="n">N</span> <span class="bp">→</span><span class="err">ₗ</span> <span class="n">P</span>
+</pre></div>
 
 #### [ Kenny Lau (Nov 03 2018 at 14:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137114160):
-should we just remove `bilinear_map` entirely?
+<p>should we just remove <code>bilinear_map</code> entirely?</p>
 
 #### [ Johan Commelin (Nov 03 2018 at 14:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137114169):
-I think we can leave it out till people start complaining.
+<p>I think we can leave it out till people start complaining.</p>
 
 #### [ Johan Commelin (Nov 03 2018 at 14:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137114173):
-I would encourage everyone to use linear maps out of the tensor product.
+<p>I would encourage everyone to use linear maps out of the tensor product.</p>
 
 #### [ Johan Commelin (Nov 03 2018 at 14:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137114231):
-Anyway, I would be really happy if we have flat ring homs. Especially if it is readable, instead of the obfuscated kludge that we sometimes see... I think flat ring homs can be a good test case to see if mathlib is ready for the 25 other properties of ring homs that algebraic geometry depends upon.
+<p>Anyway, I would be really happy if we have flat ring homs. Especially if it is readable, instead of the obfuscated kludge that we sometimes see... I think flat ring homs can be a good test case to see if mathlib is ready for the 25 other properties of ring homs that algebraic geometry depends upon.</p>
 
 #### [ Kenny Lau (Nov 03 2018 at 14:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137114271):
-what are the 25 other properties?
+<p>what are the 25 other properties?</p>
 
 #### [ Kenny Lau (Nov 03 2018 at 14:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137114278):
-```lean
-def map (f : M →ₗ P) (g : N →ₗ Q) : M ⊗ N →ₗ P ⊗ Q :=
-lift $ comp₁ (comp₂ (mk _ _ _) g) f
-```
-man my interface is really good
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">map</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">M</span> <span class="bp">→</span><span class="err">ₗ</span> <span class="n">P</span><span class="o">)</span> <span class="o">(</span><span class="n">g</span> <span class="o">:</span> <span class="n">N</span> <span class="bp">→</span><span class="err">ₗ</span> <span class="n">Q</span><span class="o">)</span> <span class="o">:</span> <span class="n">M</span> <span class="err">⊗</span> <span class="n">N</span> <span class="bp">→</span><span class="err">ₗ</span> <span class="n">P</span> <span class="err">⊗</span> <span class="n">Q</span> <span class="o">:=</span>
+<span class="n">lift</span> <span class="err">$</span> <span class="n">comp₁</span> <span class="o">(</span><span class="n">comp₂</span> <span class="o">(</span><span class="n">mk</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">)</span> <span class="n">g</span><span class="o">)</span> <span class="n">f</span>
+</pre></div>
+
+
+<p>man my interface is really good</p>
 
 #### [ Johan Commelin (Nov 03 2018 at 14:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137114317):
-https://stacks.math.columbia.edu/tag/02WE most of these have an equivalent for rings
+<p><a href="https://stacks.math.columbia.edu/tag/02WE" target="_blank" title="https://stacks.math.columbia.edu/tag/02WE">https://stacks.math.columbia.edu/tag/02WE</a> most of these have an equivalent for rings</p>
 
 #### [ Kenny Lau (Nov 03 2018 at 15:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137114408):
-```lean
-def map (f : M →ₗ P) (g : N →ₗ Q) : M ⊗ N →ₗ P ⊗ Q :=
-lift $ comp₁ (comp₂ (mk _ _ _) g) f
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">map</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">M</span> <span class="bp">→</span><span class="err">ₗ</span> <span class="n">P</span><span class="o">)</span> <span class="o">(</span><span class="n">g</span> <span class="o">:</span> <span class="n">N</span> <span class="bp">→</span><span class="err">ₗ</span> <span class="n">Q</span><span class="o">)</span> <span class="o">:</span> <span class="n">M</span> <span class="err">⊗</span> <span class="n">N</span> <span class="bp">→</span><span class="err">ₗ</span> <span class="n">P</span> <span class="err">⊗</span> <span class="n">Q</span> <span class="o">:=</span>
+<span class="n">lift</span> <span class="err">$</span> <span class="n">comp₁</span> <span class="o">(</span><span class="n">comp₂</span> <span class="o">(</span><span class="n">mk</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">)</span> <span class="n">g</span><span class="o">)</span> <span class="n">f</span>
 
-@[simp] theorem map_tmul (f : M →ₗ P) (g : N →ₗ Q) (m : M) (n : N) :
-  map f g (m ⊗ₜ n) = f m ⊗ₜ g n :=
-rfl
-```
-how on earth is this `rfl`
+<span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="kn">theorem</span> <span class="n">map_tmul</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">M</span> <span class="bp">→</span><span class="err">ₗ</span> <span class="n">P</span><span class="o">)</span> <span class="o">(</span><span class="n">g</span> <span class="o">:</span> <span class="n">N</span> <span class="bp">→</span><span class="err">ₗ</span> <span class="n">Q</span><span class="o">)</span> <span class="o">(</span><span class="n">m</span> <span class="o">:</span> <span class="n">M</span><span class="o">)</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">N</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">map</span> <span class="n">f</span> <span class="n">g</span> <span class="o">(</span><span class="n">m</span> <span class="err">⊗ₜ</span> <span class="n">n</span><span class="o">)</span> <span class="bp">=</span> <span class="n">f</span> <span class="n">m</span> <span class="err">⊗ₜ</span> <span class="n">g</span> <span class="n">n</span> <span class="o">:=</span>
+<span class="n">rfl</span>
+</pre></div>
+
+
+<p>how on earth is this <code>rfl</code></p>
 
 #### [ Mario Carneiro (Nov 03 2018 at 15:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137114472):
-of course it is, it's a quotient
+<p>of course it is, it's a quotient</p>
 
 #### [ Kenny Lau (Nov 03 2018 at 15:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137114480):
-well then why isn't this `rfl`:
-```lean
-@[simp] lemma lift.tmul (x y) :
-  lift f (x ⊗ₜ y) = f x y :=
-```
+<p>well then why isn't this <code>rfl</code>:</p>
+<div class="codehilite"><pre><span></span><span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="kn">lemma</span> <span class="n">lift</span><span class="bp">.</span><span class="n">tmul</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">lift</span> <span class="n">f</span> <span class="o">(</span><span class="n">x</span> <span class="err">⊗ₜ</span> <span class="n">y</span><span class="o">)</span> <span class="bp">=</span> <span class="n">f</span> <span class="n">x</span> <span class="n">y</span> <span class="o">:=</span>
+</pre></div>
 
 #### [ Kenny Lau (Nov 03 2018 at 15:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137114580):
-```lean
-@[simp] lemma lift.tmul (x y) :
-  lift f (x ⊗ₜ y) = f x y :=
-zero_add _
-```
+<div class="codehilite"><pre><span></span><span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="kn">lemma</span> <span class="n">lift</span><span class="bp">.</span><span class="n">tmul</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">lift</span> <span class="n">f</span> <span class="o">(</span><span class="n">x</span> <span class="err">⊗ₜ</span> <span class="n">y</span><span class="o">)</span> <span class="bp">=</span> <span class="n">f</span> <span class="n">x</span> <span class="n">y</span> <span class="o">:=</span>
+<span class="n">zero_add</span> <span class="bp">_</span>
+</pre></div>
 
 #### [ Kenny Lau (Nov 03 2018 at 15:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137114583):
-I guess that's why
+<p>I guess that's why</p>
 
 #### [ Mario Carneiro (Nov 03 2018 at 15:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137114587):
-where'd that come from?
+<p>where'd that come from?</p>
 
 #### [ Kenny Lau (Nov 03 2018 at 15:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137114639):
-the free group
+<p>the free group</p>
 
 #### [ Chris Hughes (Nov 03 2018 at 15:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137114640):
-```quote
-```lean
-@[simp] lemma lift.tmul (x y) :
-  lift f (x ⊗ₜ y) = f x y :=
-zero_add _
-```
-```
-I love proofs like this.
+<blockquote>
+<div class="codehilite"><pre><span></span><span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="kn">lemma</span> <span class="n">lift</span><span class="bp">.</span><span class="n">tmul</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">lift</span> <span class="n">f</span> <span class="o">(</span><span class="n">x</span> <span class="err">⊗ₜ</span> <span class="n">y</span><span class="o">)</span> <span class="bp">=</span> <span class="n">f</span> <span class="n">x</span> <span class="n">y</span> <span class="o">:=</span>
+<span class="n">zero_add</span> <span class="bp">_</span>
+</pre></div>
+
+
+</blockquote>
+<p>I love proofs like this.</p>
 
 #### [ Mario Carneiro (Nov 03 2018 at 15:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137114643):
-`free_abelian_group.lift` also isn't `rfl`
+<p><code>free_abelian_group.lift</code> also isn't <code>rfl</code></p>
 
 #### [ Kenny Lau (Nov 03 2018 at 15:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137114655):
-right
+<p>right</p>
 
 #### [ Kenny Lau (Nov 03 2018 at 15:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137114656):
-it's zero_add as well
+<p>it's zero_add as well</p>
 
 #### [ Mario Carneiro (Nov 03 2018 at 15:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137114700):
-but why? It's built out of pieces that are rfl
+<p>but why? It's built out of pieces that are rfl</p>
 
 #### [ Mario Carneiro (Nov 03 2018 at 15:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137114702):
-is it `free_group.to_group`?
+<p>is it <code>free_group.to_group</code>?</p>
 
 #### [ Mario Carneiro (Nov 03 2018 at 15:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137114716):
-ah yes
+<p>ah yes</p>
 
 #### [ Mario Carneiro (Nov 03 2018 at 15:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137114756):
-```
-def to_group.aux : list (α × bool) → β :=
+<div class="codehilite"><pre><span></span>def to_group.aux : list (α × bool) → β :=
 λ L, list.prod $ L.map $ λ x, cond x.2 (f x.1) (f x.1)⁻¹
 
 def to_group : free_group α → β :=
 quot.lift (to_group.aux f) $ λ L₁ L₂ H, red.step.to_group H
-```
+</pre></div>
 
 #### [ Mario Carneiro (Nov 03 2018 at 15:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137114760):
-```
-@[simp] lemma to_group.of {x} : to_group f (of x) = f x :=
+<div class="codehilite"><pre><span></span>@[simp] lemma to_group.of {x} : to_group f (of x) = f x :=
 one_mul _
-```
+</pre></div>
 
 #### [ Kenny Lau (Nov 03 2018 at 15:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137114810):
-so it's all in `list.prod`
+<p>so it's all in <code>list.prod</code></p>
 
 #### [ Kenny Lau (Nov 03 2018 at 15:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137114879):
-under which semantics is `by simp; simp only [linear_equiv.apply_symm_apply]` supposed to work where `by simp [linear_equiv.apply_symm_apply]` fails?
+<p>under which semantics is <code>by simp; simp only [linear_equiv.apply_symm_apply]</code> supposed to work where <code>by simp [linear_equiv.apply_symm_apply]</code> fails?</p>
 
 #### [ Mario Carneiro (Nov 03 2018 at 15:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137114881):
-lol, now this has got me thinking about rewriting `free_group` again
+<p>lol, now this has got me thinking about rewriting <code>free_group</code> again</p>
 
 #### [ Mario Carneiro (Nov 03 2018 at 15:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137114931):
-one way to get the right defeqs here is to have the actual definition of `free_group` be the quotient of expressions in the language of groups with the group laws, and then prove that this is isomorphic to lists
+<p>one way to get the right defeqs here is to have the actual definition of <code>free_group</code> be the quotient of expressions in the language of groups with the group laws, and then prove that this is isomorphic to lists</p>
 
 #### [ Kenny Lau (Nov 03 2018 at 15:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137114932):
-and how would one implement "expressions"?
+<p>and how would one implement "expressions"?</p>
 
 #### [ Mario Carneiro (Nov 03 2018 at 15:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137114933):
-expressions in the language of groups means trees
+<p>expressions in the language of groups means trees</p>
 
 #### [ Mario Carneiro (Nov 03 2018 at 15:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137114935):
-you just have a symbol for one and inv and mul
+<p>you just have a symbol for one and inv and mul</p>
 
 #### [ Mario Carneiro (Nov 03 2018 at 15:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137114977):
-and the basis elements
+<p>and the basis elements</p>
 
 #### [ Mario Carneiro (Nov 03 2018 at 15:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137114979):
-and you get trees
+<p>and you get trees</p>
 
 #### [ Kenny Lau (Nov 03 2018 at 15:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137114980):
-and what do you mean by tree?
+<p>and what do you mean by tree?</p>
 
 #### [ Mario Carneiro (Nov 03 2018 at 15:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137114987):
-```
-inductive group_expr (A) : Type
+<div class="codehilite"><pre><span></span>inductive group_expr (A) : Type
 | one : group_expr
-| inv : group_expr -> group_expr
-| mul : group_expr -> group_expr -> group_expr
+| inv : group_expr -&gt; group_expr
+| mul : group_expr -&gt; group_expr -&gt; group_expr
+</pre></div>
 
 #### [ Kenny Lau (Nov 03 2018 at 15:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137114999):
-aha
+<p>aha</p>
 
 #### [ Kenny Lau (Nov 03 2018 at 15:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137115007):
-how would that help?
+<p>how would that help?</p>
 
 #### [ Mario Carneiro (Nov 03 2018 at 15:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137115008):
-if you define this as  an inductive, and define the relations as a quotient, you will get really nice defeq
+<p>if you define this as  an inductive, and define the relations as a quotient, you will get really nice defeq</p>
 
 #### [ Mario Carneiro (Nov 03 2018 at 15:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137115051):
-`lift (x * y) = lift x * lift y`, `lift 1 = 1`, `lift x = f x`
+<p><code>lift (x * y) = lift x * lift y</code>, <code>lift 1 = 1</code>, <code>lift x = f x</code></p>
 
 #### [ Kenny Lau (Nov 03 2018 at 15:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137115052):
-I don't see how this is different from redefining `list.prod` so that `list.prod [f]` is definitionally equivalent to `f`?
+<p>I don't see how this is different from redefining <code>list.prod</code> so that <code>list.prod [f]</code> is definitionally equivalent to <code>f</code>?</p>
 
 #### [ Kenny Lau (Nov 03 2018 at 15:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137115054):
-oh
+<p>oh</p>
 
 #### [ Kenny Lau (Nov 03 2018 at 15:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137115056):
-fair enough
+<p>fair enough</p>
 
 #### [ Johan Commelin (Nov 03 2018 at 15:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137115068):
-```quote
-one way to get the right defeqs here is to have the actual definition of `free_group` be the quotient of expressions in the language of groups with the group laws, and then prove that this is isomorphic to lists
-```
-Wait... in the other thread you said we shouldn't focus on getting all the right defeqs... :sad:
+<blockquote>
+<p>one way to get the right defeqs here is to have the actual definition of <code>free_group</code> be the quotient of expressions in the language of groups with the group laws, and then prove that this is isomorphic to lists</p>
+</blockquote>
+<p>Wait... in the other thread you said we shouldn't focus on getting all the right defeqs... <span class="emoji emoji-2639" title="sad">:sad:</span></p>
 
 #### [ Mario Carneiro (Nov 03 2018 at 15:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137115069):
-lol
+<p>lol</p>
 
 #### [ Mario Carneiro (Nov 03 2018 at 15:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137115071):
-sometimes it matters
+<p>sometimes it matters</p>
 
 #### [ Mario Carneiro (Nov 03 2018 at 15:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137115081):
-The reason quotient types exist is because of defeqs
+<p>The reason quotient types exist is because of defeqs</p>
 
 #### [ Mario Carneiro (Nov 03 2018 at 15:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137115116):
-otherwise we would just use sets of sets
+<p>otherwise we would just use sets of sets</p>
 
 #### [ Johan Commelin (Nov 03 2018 at 15:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137115127):
-/me doesn't follow... noob alert...
+<p>/me doesn't follow... noob alert...</p>
 
 #### [ Mario Carneiro (Nov 03 2018 at 15:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137115130):
-there is no way to build quotient types like lean's without an axiom
+<p>there is no way to build quotient types like lean's without an axiom</p>
 
 #### [ Mario Carneiro (Nov 03 2018 at 15:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137115169):
-we can get something provably isomorphic, but it won't have the defeq on lift
+<p>we can get something provably isomorphic, but it won't have the defeq on lift</p>
 
 #### [ Johan Commelin (Nov 03 2018 at 15:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137115173):
-I probably haven't experience the pain of working without lean's quotient types... what is wrong with sets of sets?
+<p>I probably haven't experience the pain of working without lean's quotient types... what is wrong with sets of sets?</p>
 
 #### [ Mario Carneiro (Nov 03 2018 at 15:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137115182):
-It allows you to define functions that have a certain behavior by definition on the basis elements
+<p>It allows you to define functions that have a certain behavior by definition on the basis elements</p>
 
 #### [ Mario Carneiro (Nov 03 2018 at 15:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137115224):
-You can live without defeq, in set theory they do this
+<p>You can live without defeq, in set theory they do this</p>
 
 #### [ Kenny Lau (Nov 03 2018 at 15:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137115225):
-@**Mario Carneiro** so, are you going to do it, or do you intend me to do it? :P
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> so, are you going to do it, or do you intend me to do it? :P</p>
 
 #### [ Mario Carneiro (Nov 03 2018 at 15:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137115226):
-but it is nice to have for computational purposes
+<p>but it is nice to have for computational purposes</p>
 
 #### [ Mario Carneiro (Nov 03 2018 at 15:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137115235):
-I think I have enough major projects to do :) Like Johan says, it's not essential
+<p>I think I have enough major projects to do :) Like Johan says, it's not essential</p>
 
 #### [ Kenny Lau (Nov 03 2018 at 15:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137115237):
-ok
+<p>ok</p>
 
 #### [ Mario Carneiro (Nov 03 2018 at 15:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137115239):
-but if it interests you, feel free
+<p>but if it interests you, feel free</p>
 
 #### [ Johan Commelin (Nov 03 2018 at 15:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137115242):
-I encourage both of you to first get this merged into mathlib before embarking on new projects...
+<p>I encourage both of you to first get this merged into mathlib before embarking on new projects...</p>
 
 #### [ Johan Commelin (Nov 03 2018 at 15:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137115287):
-(or expanding the scope of this refactor)
+<p>(or expanding the scope of this refactor)</p>
 
 #### [ Kenny Lau (Nov 03 2018 at 15:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137115306):
-ok I pushed the tensor product
+<p>ok I pushed the tensor product</p>
 
 #### [ Kenny Lau (Nov 03 2018 at 15:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137115308):
-@**Mario Carneiro** should we PR it now?
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> should we PR it now?</p>
 
 #### [ Mario Carneiro (Nov 03 2018 at 15:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137115350):
-sure, that will give it more exposure
+<p>sure, that will give it more exposure</p>
 
 #### [ Kenny Lau (Nov 03 2018 at 15:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137115356):
-more exposure to what?
+<p>more exposure to what?</p>
 
 #### [ Mario Carneiro (Nov 03 2018 at 15:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137115365):
-people with ideas
+<p>people with ideas</p>
 
 #### [ Mario Carneiro (Nov 03 2018 at 15:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137115406):
-or who like to read about new things on github
+<p>or who like to read about new things on github</p>
 
 #### [ Mario Carneiro (Nov 03 2018 at 15:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137115409):
-obviously I'm already aware of this PR, and I will merge it when ready
+<p>obviously I'm already aware of this PR, and I will merge it when ready</p>
 
 #### [ Kenny Lau (Nov 03 2018 at 15:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137115420):
-and when is it ready?
+<p>and when is it ready?</p>
 
 #### [ Mario Carneiro (Nov 03 2018 at 15:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137115514):
-when I am satisfied with all the changes? It was unfinished when I last reviewed it
+<p>when I am satisfied with all the changes? It was unfinished when I last reviewed it</p>
 
 #### [ Mario Carneiro (Nov 03 2018 at 15:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137115519):
-thank you for fixing the bugs, but some things still take time
+<p>thank you for fixing the bugs, but some things still take time</p>
 
 #### [ Patrick Massot (Nov 03 2018 at 17:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137120657):
-Thank you very much @**Kenny Lau** for the documentation effort (and help with actual Lean)! Should we already copy that to [docs/theories/linear_algebra](https://github.com/leanprover/mathlib/blob/master/docs/theories/linear_algebra.md) or could it still change?
+<p>Thank you very much <span class="user-mention" data-user-id="110064">@Kenny Lau</span> for the documentation effort (and help with actual Lean)! Should we already copy that to <a href="https://github.com/leanprover/mathlib/blob/master/docs/theories/linear_algebra.md" target="_blank" title="https://github.com/leanprover/mathlib/blob/master/docs/theories/linear_algebra.md">docs/theories/linear_algebra</a> or could it still change?</p>
 
 #### [ Kenny Lau (Nov 03 2018 at 17:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137120659):
-It could still change
+<p>It could still change</p>
 
 #### [ Patrick Massot (Nov 03 2018 at 17:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137120699):
-Ok. It would be very useful if you could update it when it will stabilize, so that we'll be able to incorporate it to the docs
+<p>Ok. It would be very useful if you could update it when it will stabilize, so that we'll be able to incorporate it to the docs</p>
 
 #### [ Kenny Lau (Nov 03 2018 at 23:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137130652):
-@**Mario Carneiro** ok I pushed the refactored `free_group.lean`
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> ok I pushed the refactored <code>free_group.lean</code></p>
 
 #### [ Kenny Lau (Nov 03 2018 at 23:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137130654):
-(it won't build now; I'll fix the errors if you like the new `free_group`)
+<p>(it won't build now; I'll fix the errors if you like the new <code>free_group</code>)</p>
 
 #### [ Kenny Lau (Nov 03 2018 at 23:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137131106):
-also, I don't understand why it is ok that `linear_map` doesn't take the ring as an argument
+<p>also, I don't understand why it is ok that <code>linear_map</code> doesn't take the ring as an argument</p>
 
 #### [ Kenny Lau (Nov 03 2018 at 23:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137131918):
-ok I put the free group in [a new branch](https://github.com/leanprover-community/mathlib/tree/module-with-free-group) and resetted the PR'ed branch
+<p>ok I put the free group in <a href="https://github.com/leanprover-community/mathlib/tree/module-with-free-group" target="_blank" title="https://github.com/leanprover-community/mathlib/tree/module-with-free-group">a new branch</a> and resetted the PR'ed branch</p>
 
 #### [ Kevin Buzzard (Nov 04 2018 at 19:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137166041):
-So I thought I'd try and get the hang of modules in Lean. Is this construction somewhere in the module branch:
+<p>So I thought I'd try and get the hang of modules in Lean. Is this construction somewhere in the module branch:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">linear_algebra</span><span class="bp">.</span><span class="n">basic</span>
 
-```lean
-import linear_algebra.basic
+<span class="kn">example</span> <span class="o">(</span><span class="n">R</span> <span class="n">S</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">R</span><span class="o">]</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">S</span><span class="o">]</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">R</span> <span class="bp">→</span> <span class="n">S</span><span class="o">)</span> <span class="o">[</span><span class="n">is_ring_hom</span> <span class="n">f</span><span class="o">]</span> <span class="o">(</span><span class="n">M</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span>
+  <span class="o">[</span><span class="n">add_comm_group</span> <span class="n">M</span><span class="o">]</span> <span class="o">(</span><span class="n">HM</span> <span class="o">:</span> <span class="n">module</span> <span class="n">S</span> <span class="n">M</span><span class="o">)</span> <span class="o">:</span> <span class="n">module</span> <span class="n">R</span> <span class="n">M</span> <span class="o">:=</span> <span class="n">sorry</span>
+</pre></div>
 
-example (R S : Type) [comm_ring R] [comm_ring S] (f : R → S) [is_ring_hom f] (M : Type)
-  [add_comm_group M] (HM : module S M) : module R M := sorry
-```
-?
+
+<p>?</p>
 
 #### [ Kevin Buzzard (Nov 04 2018 at 19:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137166228):
-Idly trying to prove it myself:
-```lean
-import linear_algebra.basic
+<p>Idly trying to prove it myself:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">linear_algebra</span><span class="bp">.</span><span class="n">basic</span>
 
-example (R S : Type) [comm_ring R] [comm_ring S] (f : R → S) [is_ring_hom f] (M : Type)
-  [add_comm_group M] [HM : module S M] : module R M :=
-{ smul_add := sorry,
-  add_smul := sorry,
-  mul_smul := sorry,
-  one_smul := sorry,
-  zero_smul := sorry,
-  smul_zero := sorry
-}
-/-
+<span class="kn">example</span> <span class="o">(</span><span class="n">R</span> <span class="n">S</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">R</span><span class="o">]</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">S</span><span class="o">]</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">R</span> <span class="bp">→</span> <span class="n">S</span><span class="o">)</span> <span class="o">[</span><span class="n">is_ring_hom</span> <span class="n">f</span><span class="o">]</span> <span class="o">(</span><span class="n">M</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span>
+  <span class="o">[</span><span class="n">add_comm_group</span> <span class="n">M</span><span class="o">]</span> <span class="o">[</span><span class="n">HM</span> <span class="o">:</span> <span class="n">module</span> <span class="n">S</span> <span class="n">M</span><span class="o">]</span> <span class="o">:</span> <span class="n">module</span> <span class="n">R</span> <span class="n">M</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">smul_add</span> <span class="o">:=</span> <span class="n">sorry</span><span class="o">,</span>
+  <span class="n">add_smul</span> <span class="o">:=</span> <span class="n">sorry</span><span class="o">,</span>
+  <span class="n">mul_smul</span> <span class="o">:=</span> <span class="n">sorry</span><span class="o">,</span>
+  <span class="n">one_smul</span> <span class="o">:=</span> <span class="n">sorry</span><span class="o">,</span>
+  <span class="n">zero_smul</span> <span class="o">:=</span> <span class="n">sorry</span><span class="o">,</span>
+  <span class="n">smul_zero</span> <span class="o">:=</span> <span class="n">sorry</span>
+<span class="o">}</span>
+<span class="c">/-</span><span class="cm"></span>
 
-failed to synthesize type class instance for
-R S : Type,
-_inst_1 : comm_ring R,
-_inst_2 : comm_ring S,
-f : R → S,
-_inst_3 : is_ring_hom f,
-M : Type,
-_inst_4 : add_comm_group M,
-HM : module S M
-⊢ has_scalar R M
+<span class="cm">failed to synthesize type class instance for</span>
+<span class="cm">R S : Type,</span>
+<span class="cm">_inst_1 : comm_ring R,</span>
+<span class="cm">_inst_2 : comm_ring S,</span>
+<span class="cm">f : R → S,</span>
+<span class="cm">_inst_3 : is_ring_hom f,</span>
+<span class="cm">M : Type,</span>
+<span class="cm">_inst_4 : add_comm_group M,</span>
+<span class="cm">HM : module S M</span>
+<span class="cm">⊢ has_scalar R M</span>
 
--/
-```
+<span class="cm">-/</span>
+</pre></div>
 
 #### [ Chris Hughes (Nov 04 2018 at 19:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137166337):
-It's a new structure. Don't you just have to define a `has_scalar` instance first?
+<p>It's a new structure. Don't you just have to define a <code>has_scalar</code> instance first?</p>
 
 #### [ Kevin Buzzard (Nov 04 2018 at 19:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137166359):
-```lean
-import linear_algebra.basic
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">linear_algebra</span><span class="bp">.</span><span class="n">basic</span>
 
-instance has_scalar_of_ring_hom (R S : Type) [comm_ring R] [comm_ring S] (f : R → S) [is_ring_hom f] (M : Type) [has_scalar S M] :
-has_scalar R M := {
-  smul := λ r m, (f r) • m
-}
+<span class="kn">instance</span> <span class="n">has_scalar_of_ring_hom</span> <span class="o">(</span><span class="n">R</span> <span class="n">S</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">R</span><span class="o">]</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">S</span><span class="o">]</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">R</span> <span class="bp">→</span> <span class="n">S</span><span class="o">)</span> <span class="o">[</span><span class="n">is_ring_hom</span> <span class="n">f</span><span class="o">]</span> <span class="o">(</span><span class="n">M</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">has_scalar</span> <span class="n">S</span> <span class="n">M</span><span class="o">]</span> <span class="o">:</span>
+<span class="n">has_scalar</span> <span class="n">R</span> <span class="n">M</span> <span class="o">:=</span> <span class="o">{</span>
+  <span class="n">smul</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">r</span> <span class="n">m</span><span class="o">,</span> <span class="o">(</span><span class="n">f</span> <span class="n">r</span><span class="o">)</span> <span class="err">•</span> <span class="n">m</span>
+<span class="o">}</span>
 
-example (R S : Type) [comm_ring R] [comm_ring S] (f : R → S) [is_ring_hom f] (M : Type)
-  [add_comm_group M] [HM : module S M] : module R M :=
-{ smul_add := sorry,
-  add_smul := sorry,
-  mul_smul := sorry,
-  one_smul := sorry,
-  zero_smul := sorry,
-  smul_zero := sorry
-}
--- maximum class-instance resolution depth has been reached
-```
+<span class="kn">example</span> <span class="o">(</span><span class="n">R</span> <span class="n">S</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">R</span><span class="o">]</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">S</span><span class="o">]</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">R</span> <span class="bp">→</span> <span class="n">S</span><span class="o">)</span> <span class="o">[</span><span class="n">is_ring_hom</span> <span class="n">f</span><span class="o">]</span> <span class="o">(</span><span class="n">M</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span>
+  <span class="o">[</span><span class="n">add_comm_group</span> <span class="n">M</span><span class="o">]</span> <span class="o">[</span><span class="n">HM</span> <span class="o">:</span> <span class="n">module</span> <span class="n">S</span> <span class="n">M</span><span class="o">]</span> <span class="o">:</span> <span class="n">module</span> <span class="n">R</span> <span class="n">M</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">smul_add</span> <span class="o">:=</span> <span class="n">sorry</span><span class="o">,</span>
+  <span class="n">add_smul</span> <span class="o">:=</span> <span class="n">sorry</span><span class="o">,</span>
+  <span class="n">mul_smul</span> <span class="o">:=</span> <span class="n">sorry</span><span class="o">,</span>
+  <span class="n">one_smul</span> <span class="o">:=</span> <span class="n">sorry</span><span class="o">,</span>
+  <span class="n">zero_smul</span> <span class="o">:=</span> <span class="n">sorry</span><span class="o">,</span>
+  <span class="n">smul_zero</span> <span class="o">:=</span> <span class="n">sorry</span>
+<span class="o">}</span>
+<span class="c1">-- maximum class-instance resolution depth has been reached</span>
+</pre></div>
 
-My question is whether this is already in the module refactoring, which I think was to a certain extent inspired by the fact that this used to be hard to do
+
+<p>My question is whether this is already in the module refactoring, which I think was to a certain extent inspired by the fact that this used to be hard to do</p>
 
 #### [ Chris Hughes (Nov 04 2018 at 19:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137166407):
-I don't think type class inference knows how to infer `f`. Try making the first things a def, and then giving `to_has_scalar` or whatever explicitly. Thinking about it, I don't think the second thing can be an instance with the current setup either.
+<p>I don't think type class inference knows how to infer <code>f</code>. Try making the first things a def, and then giving <code>to_has_scalar</code> or whatever explicitly. Thinking about it, I don't think the second thing can be an instance with the current setup either.</p>
 
 #### [ Kevin Buzzard (Nov 04 2018 at 19:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137166579):
-Oh this is exactly one of those situations where I don't know how to put something into the type class inference machine because I'm in term mode.
+<p>Oh this is exactly one of those situations where I don't know how to put something into the type class inference machine because I'm in term mode.</p>
 
 #### [ Chris Hughes (Nov 04 2018 at 19:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137166582):
-`by haveI := _; exact _`
+<p><code>by haveI := _; exact _</code></p>
 
 #### [ Kevin Buzzard (Nov 04 2018 at 19:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137166634):
-```lean
-import linear_algebra.basic
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">linear_algebra</span><span class="bp">.</span><span class="n">basic</span>
 
-def has_scalar_of_ring_hom (R S : Type) [comm_ring R] [comm_ring S] (f : R → S) [is_ring_hom f] (M : Type) [has_scalar S M] :
-has_scalar R M := {
-  smul := λ r m, (f r) • m
-}
+<span class="n">def</span> <span class="n">has_scalar_of_ring_hom</span> <span class="o">(</span><span class="n">R</span> <span class="n">S</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">R</span><span class="o">]</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">S</span><span class="o">]</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">R</span> <span class="bp">→</span> <span class="n">S</span><span class="o">)</span> <span class="o">[</span><span class="n">is_ring_hom</span> <span class="n">f</span><span class="o">]</span> <span class="o">(</span><span class="n">M</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">has_scalar</span> <span class="n">S</span> <span class="n">M</span><span class="o">]</span> <span class="o">:</span>
+<span class="n">has_scalar</span> <span class="n">R</span> <span class="n">M</span> <span class="o">:=</span> <span class="o">{</span>
+  <span class="n">smul</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">r</span> <span class="n">m</span><span class="o">,</span> <span class="o">(</span><span class="n">f</span> <span class="n">r</span><span class="o">)</span> <span class="err">•</span> <span class="n">m</span>
+<span class="o">}</span>
 
-example (R S : Type) [comm_ring R] [comm_ring S] (f : R → S) [is_ring_hom f] (M : Type)
-  [add_comm_group M] [HM : module S M] : module R M :=
-  begin haveI := has_scalar_of_ring_hom R S f M,
-  exact 
-{ smul_add := sorry,
-  add_smul := sorry,
-  mul_smul := sorry,
-  one_smul := sorry,
-  zero_smul := sorry,
-  smul_zero := sorry
-}
-end
-```
+<span class="kn">example</span> <span class="o">(</span><span class="n">R</span> <span class="n">S</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">R</span><span class="o">]</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">S</span><span class="o">]</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">R</span> <span class="bp">→</span> <span class="n">S</span><span class="o">)</span> <span class="o">[</span><span class="n">is_ring_hom</span> <span class="n">f</span><span class="o">]</span> <span class="o">(</span><span class="n">M</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span>
+  <span class="o">[</span><span class="n">add_comm_group</span> <span class="n">M</span><span class="o">]</span> <span class="o">[</span><span class="n">HM</span> <span class="o">:</span> <span class="n">module</span> <span class="n">S</span> <span class="n">M</span><span class="o">]</span> <span class="o">:</span> <span class="n">module</span> <span class="n">R</span> <span class="n">M</span> <span class="o">:=</span>
+  <span class="k">begin</span> <span class="n">haveI</span> <span class="o">:=</span> <span class="n">has_scalar_of_ring_hom</span> <span class="n">R</span> <span class="n">S</span> <span class="n">f</span> <span class="n">M</span><span class="o">,</span>
+  <span class="n">exact</span>
+<span class="o">{</span> <span class="n">smul_add</span> <span class="o">:=</span> <span class="n">sorry</span><span class="o">,</span>
+  <span class="n">add_smul</span> <span class="o">:=</span> <span class="n">sorry</span><span class="o">,</span>
+  <span class="n">mul_smul</span> <span class="o">:=</span> <span class="n">sorry</span><span class="o">,</span>
+  <span class="n">one_smul</span> <span class="o">:=</span> <span class="n">sorry</span><span class="o">,</span>
+  <span class="n">zero_smul</span> <span class="o">:=</span> <span class="n">sorry</span><span class="o">,</span>
+  <span class="n">smul_zero</span> <span class="o">:=</span> <span class="n">sorry</span>
+<span class="o">}</span>
+<span class="kn">end</span>
+</pre></div>
 
 #### [ Kevin Buzzard (Nov 04 2018 at 19:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137166635):
-no errors :D
+<p>no errors :D</p>
 
 #### [ Kevin Buzzard (Nov 04 2018 at 19:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137166642):
-so I have to go into tactic mode to put something into the type class inference machine?
+<p>so I have to go into tactic mode to put something into the type class inference machine?</p>
 
 #### [ Chris Hughes (Nov 04 2018 at 19:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137166648):
-I think so.
+<p>I think so.</p>
 
 #### [ Chris Hughes (Nov 04 2018 at 19:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137166690):
-This should also work I think.
-```lean
-example (R S : Type) [comm_ring R] [comm_ring S] (f : R → S) [is_ring_hom f] (M : Type)
-  [add_comm_group M] [HM : module S M] : module R M :=
-{ to_has_scalar := has_scalar_of_ring_hom R S f M, 
-  smul_add := sorry,
-  add_smul := sorry,
-  mul_smul := sorry,
-  one_smul := sorry,
-  zero_smul := sorry,
-  smul_zero := sorry }
-end
-```
+<p>This should also work I think.</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">R</span> <span class="n">S</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">R</span><span class="o">]</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">S</span><span class="o">]</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">R</span> <span class="bp">→</span> <span class="n">S</span><span class="o">)</span> <span class="o">[</span><span class="n">is_ring_hom</span> <span class="n">f</span><span class="o">]</span> <span class="o">(</span><span class="n">M</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span>
+  <span class="o">[</span><span class="n">add_comm_group</span> <span class="n">M</span><span class="o">]</span> <span class="o">[</span><span class="n">HM</span> <span class="o">:</span> <span class="n">module</span> <span class="n">S</span> <span class="n">M</span><span class="o">]</span> <span class="o">:</span> <span class="n">module</span> <span class="n">R</span> <span class="n">M</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">to_has_scalar</span> <span class="o">:=</span> <span class="n">has_scalar_of_ring_hom</span> <span class="n">R</span> <span class="n">S</span> <span class="n">f</span> <span class="n">M</span><span class="o">,</span>
+  <span class="n">smul_add</span> <span class="o">:=</span> <span class="n">sorry</span><span class="o">,</span>
+  <span class="n">add_smul</span> <span class="o">:=</span> <span class="n">sorry</span><span class="o">,</span>
+  <span class="n">mul_smul</span> <span class="o">:=</span> <span class="n">sorry</span><span class="o">,</span>
+  <span class="n">one_smul</span> <span class="o">:=</span> <span class="n">sorry</span><span class="o">,</span>
+  <span class="n">zero_smul</span> <span class="o">:=</span> <span class="n">sorry</span><span class="o">,</span>
+  <span class="n">smul_zero</span> <span class="o">:=</span> <span class="n">sorry</span> <span class="o">}</span>
+<span class="kn">end</span>
+</pre></div>
 
 #### [ Kevin Buzzard (Nov 04 2018 at 19:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137166812):
-Now I have problems with two smuls. @**Kenny Lau** Is this done already? I don't want to waste my time if it's already there, but this is exactly what I have always needed for Hilbert basis.
+<p>Now I have problems with two smuls. <span class="user-mention" data-user-id="110064">@Kenny Lau</span> Is this done already? I don't want to waste my time if it's already there, but this is exactly what I have always needed for Hilbert basis.</p>
 
 #### [ Chris Hughes (Nov 04 2018 at 19:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137166821):
-I would wait until after module refactorign
+<p>I would wait until after module refactorign</p>
 
 #### [ Kenny Lau (Nov 04 2018 at 19:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137166822):
-the right thing to do is just say smul := sorry, right
+<p>the right thing to do is just say smul := sorry, right</p>
 
 #### [ Kenny Lau (Nov 04 2018 at 19:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137166823):
-no, this hasn’t been done
+<p>no, this hasn’t been done</p>
 
 #### [ Kevin Buzzard (Nov 04 2018 at 19:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137166867):
-I thought module refactoring had happened
+<p>I thought module refactoring had happened</p>
 
 #### [ Kenny Lau (Nov 04 2018 at 19:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137166871):
-you should also read my summary of the changes, this is mentioned there
+<p>you should also read my summary of the changes, this is mentioned there</p>
 
 #### [ Kenny Lau (Nov 04 2018 at 19:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137166872):
-and also you should use module.of_core
+<p>and also you should use module.of_core</p>
 
 #### [ Kenny Lau (Nov 04 2018 at 19:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137166873):
-and also you should use module.of_core
+<p>and also you should use module.of_core</p>
 
 #### [ Kevin Buzzard (Nov 04 2018 at 19:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137166874):
-I thought I had read your summary of the changes :-/
+<p>I thought I had read your summary of the changes :-/</p>
 
 #### [ Kevin Buzzard (Nov 04 2018 at 19:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137166884):
-Chris your version is better:
-```lean
-example (R S : Type) [comm_ring R] [comm_ring S] (f : R → S) [is_ring_hom f] (M : Type)
-  [add_comm_group M] [HM : module S M] : module R M :=
-{ to_has_scalar := has_scalar_of_ring_hom R S f M,
-  smul_add := λ r x y,smul_add (f r) x y, -- works
-  add_smul := sorry,
-  mul_smul := sorry,
-  one_smul := sorry,
-  zero_smul := sorry,
-  smul_zero := sorry }
+<p>Chris your version is better:</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">R</span> <span class="n">S</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">R</span><span class="o">]</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">S</span><span class="o">]</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">R</span> <span class="bp">→</span> <span class="n">S</span><span class="o">)</span> <span class="o">[</span><span class="n">is_ring_hom</span> <span class="n">f</span><span class="o">]</span> <span class="o">(</span><span class="n">M</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span>
+  <span class="o">[</span><span class="n">add_comm_group</span> <span class="n">M</span><span class="o">]</span> <span class="o">[</span><span class="n">HM</span> <span class="o">:</span> <span class="n">module</span> <span class="n">S</span> <span class="n">M</span><span class="o">]</span> <span class="o">:</span> <span class="n">module</span> <span class="n">R</span> <span class="n">M</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">to_has_scalar</span> <span class="o">:=</span> <span class="n">has_scalar_of_ring_hom</span> <span class="n">R</span> <span class="n">S</span> <span class="n">f</span> <span class="n">M</span><span class="o">,</span>
+  <span class="n">smul_add</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">r</span> <span class="n">x</span> <span class="n">y</span><span class="o">,</span><span class="n">smul_add</span> <span class="o">(</span><span class="n">f</span> <span class="n">r</span><span class="o">)</span> <span class="n">x</span> <span class="n">y</span><span class="o">,</span> <span class="c1">-- works</span>
+  <span class="n">add_smul</span> <span class="o">:=</span> <span class="n">sorry</span><span class="o">,</span>
+  <span class="n">mul_smul</span> <span class="o">:=</span> <span class="n">sorry</span><span class="o">,</span>
+  <span class="n">one_smul</span> <span class="o">:=</span> <span class="n">sorry</span><span class="o">,</span>
+  <span class="n">zero_smul</span> <span class="o">:=</span> <span class="n">sorry</span><span class="o">,</span>
+  <span class="n">smul_zero</span> <span class="o">:=</span> <span class="n">sorry</span> <span class="o">}</span>
 
-example (R S : Type) [comm_ring R] [comm_ring S] (f : R → S) [is_ring_hom f] (M : Type)
-  [add_comm_group M] [HM : module S M] : module R M :=
-by haveI := has_scalar_of_ring_hom R S f M;
-  exact 
-{ smul_add := λ r x y, smul_add (f r) x y, -- fails
-  add_smul := sorry,
-  mul_smul := sorry,
-  one_smul := sorry,
-  zero_smul := sorry,
-  smul_zero := sorry
-}
-```
+<span class="kn">example</span> <span class="o">(</span><span class="n">R</span> <span class="n">S</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">R</span><span class="o">]</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">S</span><span class="o">]</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">R</span> <span class="bp">→</span> <span class="n">S</span><span class="o">)</span> <span class="o">[</span><span class="n">is_ring_hom</span> <span class="n">f</span><span class="o">]</span> <span class="o">(</span><span class="n">M</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span>
+  <span class="o">[</span><span class="n">add_comm_group</span> <span class="n">M</span><span class="o">]</span> <span class="o">[</span><span class="n">HM</span> <span class="o">:</span> <span class="n">module</span> <span class="n">S</span> <span class="n">M</span><span class="o">]</span> <span class="o">:</span> <span class="n">module</span> <span class="n">R</span> <span class="n">M</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">haveI</span> <span class="o">:=</span> <span class="n">has_scalar_of_ring_hom</span> <span class="n">R</span> <span class="n">S</span> <span class="n">f</span> <span class="n">M</span><span class="bp">;</span>
+  <span class="n">exact</span>
+<span class="o">{</span> <span class="n">smul_add</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">r</span> <span class="n">x</span> <span class="n">y</span><span class="o">,</span> <span class="n">smul_add</span> <span class="o">(</span><span class="n">f</span> <span class="n">r</span><span class="o">)</span> <span class="n">x</span> <span class="n">y</span><span class="o">,</span> <span class="c1">-- fails</span>
+  <span class="n">add_smul</span> <span class="o">:=</span> <span class="n">sorry</span><span class="o">,</span>
+  <span class="n">mul_smul</span> <span class="o">:=</span> <span class="n">sorry</span><span class="o">,</span>
+  <span class="n">one_smul</span> <span class="o">:=</span> <span class="n">sorry</span><span class="o">,</span>
+  <span class="n">zero_smul</span> <span class="o">:=</span> <span class="n">sorry</span><span class="o">,</span>
+  <span class="n">smul_zero</span> <span class="o">:=</span> <span class="n">sorry</span>
+<span class="o">}</span>
+</pre></div>
 
 #### [ Kevin Buzzard (Nov 04 2018 at 19:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137167005):
-I see. I think Kenny is pointing out that by "The idiom for making an instance module α β (after proving that β is an abelian group) is module.of_core" he means the strong statement that end users should actually never make modules directly. Is that right Kenny? I still need an instance of `module R M` though -- how do I get it?
+<p>I see. I think Kenny is pointing out that by "The idiom for making an instance module α β (after proving that β is an abelian group) is module.of_core" he means the strong statement that end users should actually never make modules directly. Is that right Kenny? I still need an instance of <code>module R M</code> though -- how do I get it?</p>
 
 #### [ Kevin Buzzard (Nov 04 2018 at 19:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137167057):
-```lean
-example (R S : Type) [comm_ring R] [comm_ring S] (f : R → S) [is_ring_hom f] (M : Type)
-  [add_comm_group M] [HM : module S M] : module R M := module.of_core {
-    smul := sorry,
-    smul_add := sorry,
-    add_smul := sorry,
-    mul_smul := sorry,
-    one_smul := sorry
-  }
-```
-Maybe I'm on the right lines now
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">R</span> <span class="n">S</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">R</span><span class="o">]</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">S</span><span class="o">]</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">R</span> <span class="bp">→</span> <span class="n">S</span><span class="o">)</span> <span class="o">[</span><span class="n">is_ring_hom</span> <span class="n">f</span><span class="o">]</span> <span class="o">(</span><span class="n">M</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span>
+  <span class="o">[</span><span class="n">add_comm_group</span> <span class="n">M</span><span class="o">]</span> <span class="o">[</span><span class="n">HM</span> <span class="o">:</span> <span class="n">module</span> <span class="n">S</span> <span class="n">M</span><span class="o">]</span> <span class="o">:</span> <span class="n">module</span> <span class="n">R</span> <span class="n">M</span> <span class="o">:=</span> <span class="n">module</span><span class="bp">.</span><span class="n">of_core</span> <span class="o">{</span>
+    <span class="n">smul</span> <span class="o">:=</span> <span class="n">sorry</span><span class="o">,</span>
+    <span class="n">smul_add</span> <span class="o">:=</span> <span class="n">sorry</span><span class="o">,</span>
+    <span class="n">add_smul</span> <span class="o">:=</span> <span class="n">sorry</span><span class="o">,</span>
+    <span class="n">mul_smul</span> <span class="o">:=</span> <span class="n">sorry</span><span class="o">,</span>
+    <span class="n">one_smul</span> <span class="o">:=</span> <span class="n">sorry</span>
+  <span class="o">}</span>
+</pre></div>
+
+
+<p>Maybe I'm on the right lines now</p>
 
 #### [ Kenny Lau (Nov 04 2018 at 19:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137167070):
-right
+<p>right</p>
 
 #### [ Kevin Buzzard (Nov 04 2018 at 20:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137167310):
-```lean
-    add_smul := λ r s m, -- (is_ring_hom.map_add f).symm ▸ (add_smul (f r) (f s) m), -- stupid triangle never works for me
-      begin show f (r + s) • m = f r • m + f s • m, rw is_ring_hom.map_add f, exact add_smul (f r) (f s) m,end,
-```
+<div class="codehilite"><pre><span></span>    <span class="n">add_smul</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">r</span> <span class="n">s</span> <span class="n">m</span><span class="o">,</span> <span class="c1">-- (is_ring_hom.map_add f).symm ▸ (add_smul (f r) (f s) m), -- stupid triangle never works for me</span>
+      <span class="k">begin</span> <span class="k">show</span> <span class="n">f</span> <span class="o">(</span><span class="n">r</span> <span class="bp">+</span> <span class="n">s</span><span class="o">)</span> <span class="err">•</span> <span class="n">m</span> <span class="bp">=</span> <span class="n">f</span> <span class="n">r</span> <span class="err">•</span> <span class="n">m</span> <span class="bp">+</span> <span class="n">f</span> <span class="n">s</span> <span class="err">•</span> <span class="n">m</span><span class="o">,</span> <span class="n">rw</span> <span class="n">is_ring_hom</span><span class="bp">.</span><span class="n">map_add</span> <span class="n">f</span><span class="o">,</span> <span class="n">exact</span> <span class="n">add_smul</span> <span class="o">(</span><span class="n">f</span> <span class="n">r</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="n">s</span><span class="o">)</span> <span class="n">m</span><span class="o">,</span><span class="kn">end</span><span class="o">,</span>
+</pre></div>
 
 #### [ Kenny Lau (Nov 04 2018 at 20:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137167371):
-i think you are missing two arguments
+<p>i think you are missing two arguments</p>
 
 #### [ Kevin Buzzard (Nov 04 2018 at 20:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137167450):
-```lean
-import linear_algebra.basic
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">linear_algebra</span><span class="bp">.</span><span class="n">basic</span>
 
-example (R S : Type) [comm_ring R] [comm_ring S] (f : R → S) [is_ring_hom f] (M : Type)
-  [add_comm_group M] [HM : module S M] : module R M := module.of_core {
-    smul := λ r m, (f r) • m,
-    smul_add := λ r, smul_add $ f r,
-    add_smul := λ r s m, -- (is_ring_hom.map_add f).symm ▸ (add_smul (f r) (f s) m), -- stupid triangle never works for me
-      begin show f (r + s) • m = f r • m + f s • m, rw is_ring_hom.map_add f, exact add_smul (f r) (f s) m,end,
-    mul_smul := λ r s m, begin show f (r * s) • m = f r • (f s • m), rw is_ring_hom.map_mul f, exact mul_smul (f r) (f s) m,end,
-    one_smul := λ m, begin show f 1 • m = m, rw is_ring_hom.map_one f, exact one_smul m, end
-  }
-```
-Still haven't lost my touch ;-) [ugh]
+<span class="kn">example</span> <span class="o">(</span><span class="n">R</span> <span class="n">S</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">R</span><span class="o">]</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">S</span><span class="o">]</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">R</span> <span class="bp">→</span> <span class="n">S</span><span class="o">)</span> <span class="o">[</span><span class="n">is_ring_hom</span> <span class="n">f</span><span class="o">]</span> <span class="o">(</span><span class="n">M</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span>
+  <span class="o">[</span><span class="n">add_comm_group</span> <span class="n">M</span><span class="o">]</span> <span class="o">[</span><span class="n">HM</span> <span class="o">:</span> <span class="n">module</span> <span class="n">S</span> <span class="n">M</span><span class="o">]</span> <span class="o">:</span> <span class="n">module</span> <span class="n">R</span> <span class="n">M</span> <span class="o">:=</span> <span class="n">module</span><span class="bp">.</span><span class="n">of_core</span> <span class="o">{</span>
+    <span class="n">smul</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">r</span> <span class="n">m</span><span class="o">,</span> <span class="o">(</span><span class="n">f</span> <span class="n">r</span><span class="o">)</span> <span class="err">•</span> <span class="n">m</span><span class="o">,</span>
+    <span class="n">smul_add</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">r</span><span class="o">,</span> <span class="n">smul_add</span> <span class="err">$</span> <span class="n">f</span> <span class="n">r</span><span class="o">,</span>
+    <span class="n">add_smul</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">r</span> <span class="n">s</span> <span class="n">m</span><span class="o">,</span> <span class="c1">-- (is_ring_hom.map_add f).symm ▸ (add_smul (f r) (f s) m), -- stupid triangle never works for me</span>
+      <span class="k">begin</span> <span class="k">show</span> <span class="n">f</span> <span class="o">(</span><span class="n">r</span> <span class="bp">+</span> <span class="n">s</span><span class="o">)</span> <span class="err">•</span> <span class="n">m</span> <span class="bp">=</span> <span class="n">f</span> <span class="n">r</span> <span class="err">•</span> <span class="n">m</span> <span class="bp">+</span> <span class="n">f</span> <span class="n">s</span> <span class="err">•</span> <span class="n">m</span><span class="o">,</span> <span class="n">rw</span> <span class="n">is_ring_hom</span><span class="bp">.</span><span class="n">map_add</span> <span class="n">f</span><span class="o">,</span> <span class="n">exact</span> <span class="n">add_smul</span> <span class="o">(</span><span class="n">f</span> <span class="n">r</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="n">s</span><span class="o">)</span> <span class="n">m</span><span class="o">,</span><span class="kn">end</span><span class="o">,</span>
+    <span class="n">mul_smul</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">r</span> <span class="n">s</span> <span class="n">m</span><span class="o">,</span> <span class="k">begin</span> <span class="k">show</span> <span class="n">f</span> <span class="o">(</span><span class="n">r</span> <span class="bp">*</span> <span class="n">s</span><span class="o">)</span> <span class="err">•</span> <span class="n">m</span> <span class="bp">=</span> <span class="n">f</span> <span class="n">r</span> <span class="err">•</span> <span class="o">(</span><span class="n">f</span> <span class="n">s</span> <span class="err">•</span> <span class="n">m</span><span class="o">),</span> <span class="n">rw</span> <span class="n">is_ring_hom</span><span class="bp">.</span><span class="n">map_mul</span> <span class="n">f</span><span class="o">,</span> <span class="n">exact</span> <span class="n">mul_smul</span> <span class="o">(</span><span class="n">f</span> <span class="n">r</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="n">s</span><span class="o">)</span> <span class="n">m</span><span class="o">,</span><span class="kn">end</span><span class="o">,</span>
+    <span class="n">one_smul</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">m</span><span class="o">,</span> <span class="k">begin</span> <span class="k">show</span> <span class="n">f</span> <span class="mi">1</span> <span class="err">•</span> <span class="n">m</span> <span class="bp">=</span> <span class="n">m</span><span class="o">,</span> <span class="n">rw</span> <span class="n">is_ring_hom</span><span class="bp">.</span><span class="n">map_one</span> <span class="n">f</span><span class="o">,</span> <span class="n">exact</span> <span class="n">one_smul</span> <span class="n">m</span><span class="o">,</span> <span class="kn">end</span>
+  <span class="o">}</span>
+</pre></div>
+
+
+<p>Still haven't lost my touch ;-) [ugh]</p>
 
 #### [ Kevin Buzzard (Nov 04 2018 at 20:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137167457):
-well so far I got 0% of the way through proving Hilbert basis, but at least I learnt not to use `module`
+<p>well so far I got 0% of the way through proving Hilbert basis, but at least I learnt not to use <code>module</code></p>
 
 #### [ Kevin Buzzard (Nov 04 2018 at 20:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137167736):
-Does this completely fundamental fact have a name?
+<p>Does this completely fundamental fact have a name?</p>
+<p>Current version:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">linear_algebra</span><span class="bp">.</span><span class="n">basic</span>
 
-Current version:
-
-```lean
-import linear_algebra.basic
-
-instance module_of_module_of_ring_hom {R : Type*} [ring R] {S : Type*} [ring S] (f : R → S) [is_ring_hom f] {M : Type*}
-  [add_comm_group M] [HM : module S M] : module R M := module.of_core {
-    smul := λ r m, (f r) • m,
-    smul_add := λ r, smul_add $ f r,
-    add_smul := λ r s m, -- (@is_ring_hom.map_add _ _ _ _ f _ r s) ▸ (add_smul (f r) (f s) m), -- stupid triangle never works for me
-      begin show f (r + s) • m = f r • m + f s • m, rw is_ring_hom.map_add f, exact add_smul (f r) (f s) m,end,
-    mul_smul := λ r s m, begin show f (r * s) • m = f r • (f s • m), rw is_ring_hom.map_mul f, exact mul_smul (f r) (f s) m,end,
-    one_smul := λ m, begin show f 1 • m = m, rw is_ring_hom.map_one f, exact one_smul m, end
-  }
-```
+<span class="kn">instance</span> <span class="n">module_of_module_of_ring_hom</span> <span class="o">{</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">ring</span> <span class="n">R</span><span class="o">]</span> <span class="o">{</span><span class="n">S</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">ring</span> <span class="n">S</span><span class="o">]</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">R</span> <span class="bp">→</span> <span class="n">S</span><span class="o">)</span> <span class="o">[</span><span class="n">is_ring_hom</span> <span class="n">f</span><span class="o">]</span> <span class="o">{</span><span class="n">M</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span>
+  <span class="o">[</span><span class="n">add_comm_group</span> <span class="n">M</span><span class="o">]</span> <span class="o">[</span><span class="n">HM</span> <span class="o">:</span> <span class="n">module</span> <span class="n">S</span> <span class="n">M</span><span class="o">]</span> <span class="o">:</span> <span class="n">module</span> <span class="n">R</span> <span class="n">M</span> <span class="o">:=</span> <span class="n">module</span><span class="bp">.</span><span class="n">of_core</span> <span class="o">{</span>
+    <span class="n">smul</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">r</span> <span class="n">m</span><span class="o">,</span> <span class="o">(</span><span class="n">f</span> <span class="n">r</span><span class="o">)</span> <span class="err">•</span> <span class="n">m</span><span class="o">,</span>
+    <span class="n">smul_add</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">r</span><span class="o">,</span> <span class="n">smul_add</span> <span class="err">$</span> <span class="n">f</span> <span class="n">r</span><span class="o">,</span>
+    <span class="n">add_smul</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">r</span> <span class="n">s</span> <span class="n">m</span><span class="o">,</span> <span class="c1">-- (@is_ring_hom.map_add _ _ _ _ f _ r s) ▸ (add_smul (f r) (f s) m), -- stupid triangle never works for me</span>
+      <span class="k">begin</span> <span class="k">show</span> <span class="n">f</span> <span class="o">(</span><span class="n">r</span> <span class="bp">+</span> <span class="n">s</span><span class="o">)</span> <span class="err">•</span> <span class="n">m</span> <span class="bp">=</span> <span class="n">f</span> <span class="n">r</span> <span class="err">•</span> <span class="n">m</span> <span class="bp">+</span> <span class="n">f</span> <span class="n">s</span> <span class="err">•</span> <span class="n">m</span><span class="o">,</span> <span class="n">rw</span> <span class="n">is_ring_hom</span><span class="bp">.</span><span class="n">map_add</span> <span class="n">f</span><span class="o">,</span> <span class="n">exact</span> <span class="n">add_smul</span> <span class="o">(</span><span class="n">f</span> <span class="n">r</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="n">s</span><span class="o">)</span> <span class="n">m</span><span class="o">,</span><span class="kn">end</span><span class="o">,</span>
+    <span class="n">mul_smul</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">r</span> <span class="n">s</span> <span class="n">m</span><span class="o">,</span> <span class="k">begin</span> <span class="k">show</span> <span class="n">f</span> <span class="o">(</span><span class="n">r</span> <span class="bp">*</span> <span class="n">s</span><span class="o">)</span> <span class="err">•</span> <span class="n">m</span> <span class="bp">=</span> <span class="n">f</span> <span class="n">r</span> <span class="err">•</span> <span class="o">(</span><span class="n">f</span> <span class="n">s</span> <span class="err">•</span> <span class="n">m</span><span class="o">),</span> <span class="n">rw</span> <span class="n">is_ring_hom</span><span class="bp">.</span><span class="n">map_mul</span> <span class="n">f</span><span class="o">,</span> <span class="n">exact</span> <span class="n">mul_smul</span> <span class="o">(</span><span class="n">f</span> <span class="n">r</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="n">s</span><span class="o">)</span> <span class="n">m</span><span class="o">,</span><span class="kn">end</span><span class="o">,</span>
+    <span class="n">one_smul</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">m</span><span class="o">,</span> <span class="k">begin</span> <span class="k">show</span> <span class="n">f</span> <span class="mi">1</span> <span class="err">•</span> <span class="n">m</span> <span class="bp">=</span> <span class="n">m</span><span class="o">,</span> <span class="n">rw</span> <span class="n">is_ring_hom</span><span class="bp">.</span><span class="n">map_one</span> <span class="n">f</span><span class="o">,</span> <span class="n">exact</span> <span class="n">one_smul</span> <span class="n">m</span><span class="o">,</span> <span class="kn">end</span>
+  <span class="o">}</span>
+</pre></div>
 
 #### [ Kevin Buzzard (Nov 04 2018 at 20:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137167788):
-rw doesn't do unfolding (i.e. if I tell it `rw H` with `H : X = Y` and `X` isn't directly in view, it won't start unfolding things in an attempt to find `X`, even if something immediately unfolds to give `X`). Is the same true for the stupid triangle?
+<p>rw doesn't do unfolding (i.e. if I tell it <code>rw H</code> with <code>H : X = Y</code> and <code>X</code> isn't directly in view, it won't start unfolding things in an attempt to find <code>X</code>, even if something immediately unfolds to give <code>X</code>). Is the same true for the stupid triangle?</p>
 
 #### [ Chris Hughes (Nov 04 2018 at 20:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137167790):
-Yes. What about `erw`
+<p>Yes. What about <code>erw</code></p>
 
 #### [ Kevin Buzzard (Nov 04 2018 at 20:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137167798):
-I still seem to need the `show` for `add_smul`.
+<p>I still seem to need the <code>show</code> for <code>add_smul</code>.</p>
 
 #### [ Kevin Buzzard (Nov 04 2018 at 20:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137167925):
-`    add_smul := λ r s m, (((@is_ring_hom.map_add _ _ _ _ f _ r s).symm ▸ (add_smul (f r) (f s) m)) :  f (r + s) • m = f r • m + f s • m),`
+<p><code>    add_smul := λ r s m, (((@is_ring_hom.map_add _ _ _ _ f _ r s).symm ▸ (add_smul (f r) (f s) m)) :  f (r + s) • m = f r • m + f s • m),</code></p>
 
 #### [ Kevin Buzzard (Nov 04 2018 at 20:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137167926):
-longer than the tactic proof ;-)
+<p>longer than the tactic proof ;-)</p>
 
 #### [ Johan Commelin (Nov 04 2018 at 20:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137167940):
-It ought to be `by tidy`.
+<p>It ought to be <code>by tidy</code>.</p>
 
 #### [ Kevin Buzzard (Nov 04 2018 at 20:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137167986):
-does `tidy` know to try a theorem called `add_smul` when proving something called `add_smul`?
+<p>does <code>tidy</code> know to try a theorem called <code>add_smul</code> when proving something called <code>add_smul</code>?</p>
 
 #### [ Johan Commelin (Nov 04 2018 at 20:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137167991):
-Only if it is a simp-lemma
+<p>Only if it is a simp-lemma</p>
 
 #### [ Johan Commelin (Nov 04 2018 at 20:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137168005):
-But maybe, once backwords reasoning is merged, this could realistically done by `tidy`.
+<p>But maybe, once backwords reasoning is merged, this could realistically done by <code>tidy</code>.</p>
 
 #### [ Kevin Buzzard (Nov 04 2018 at 20:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137168971):
-Will this instance ever trigger?
+<p>Will this instance ever trigger?</p>
 
 #### [ Chris Hughes (Nov 04 2018 at 21:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137170222):
-I doubt it. It will have to find a ring hom out of nowhere.
+<p>I doubt it. It will have to find a ring hom out of nowhere.</p>
 
 #### [ Kenny Lau (Nov 04 2018 at 21:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137170360):
-maybe we should make ring_hom just like linear_map
+<p>maybe we should make ring_hom just like linear_map</p>
 
 #### [ David Michael Roberts (Nov 04 2018 at 22:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/137171588):
-```quote
-is Mod(R) a CCC?
-```
-No, because the monoidal structure is not cartesian. What you want is https://ncatlab.org/nlab/show/closed+monoidal+category
+<blockquote>
+<p>is Mod(R) a CCC?</p>
+</blockquote>
+<p>No, because the monoidal structure is not cartesian. What you want is <a href="https://ncatlab.org/nlab/show/closed+monoidal+category" target="_blank" title="https://ncatlab.org/nlab/show/closed+monoidal+category">https://ncatlab.org/nlab/show/closed+monoidal+category</a></p>
 
 #### [ Kenny Lau (Nov 05 2018 at 07:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/145302840):
-(deleted)
+<p>(deleted)</p>
 
 #### [ Kenny Lau (Nov 05 2018 at 07:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/145302841):
-(deleted)
+<p>(deleted)</p>
 
 #### [ Mario Carneiro (Nov 05 2018 at 07:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/145303310):
-okay, my other obligations are done, so I'm working on finishing the refactoring tonight
+<p>okay, my other obligations are done, so I'm working on finishing the refactoring tonight</p>
 
 #### [ Kenny Lau (Nov 05 2018 at 07:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/145303430):
-```lean
-import data.polynomial
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">polynomial</span>
 
-local attribute [instance, priority 1] classical.prop_decidable
+<span class="n">local</span> <span class="n">attribute</span> <span class="o">[</span><span class="kn">instance</span><span class="o">,</span> <span class="n">priority</span> <span class="mi">1</span><span class="o">]</span> <span class="n">classical</span><span class="bp">.</span><span class="n">prop_decidable</span>
 
-universes u v w
+<span class="n">universes</span> <span class="n">u</span> <span class="n">v</span> <span class="n">w</span>
 
-open polynomial
+<span class="kn">open</span> <span class="n">polynomial</span>
 
-theorem leading_term_aux {R} [nonzero_comm_ring R] {f g : polynomial R} (Hle : nat_degree f ≤ nat_degree g)
-  (Hf : f ≠ 0) (Hg : g ≠ 0) (Hh : leading_coeff f + leading_coeff g ≠ 0) :
-leading_coeff (f * X ^ (nat_degree g - nat_degree f) + g) = leading_coeff f + leading_coeff g :=
-sorry
+<span class="kn">theorem</span> <span class="n">leading_term_aux</span> <span class="o">{</span><span class="n">R</span><span class="o">}</span> <span class="o">[</span><span class="n">nonzero_comm_ring</span> <span class="n">R</span><span class="o">]</span> <span class="o">{</span><span class="n">f</span> <span class="n">g</span> <span class="o">:</span> <span class="n">polynomial</span> <span class="n">R</span><span class="o">}</span> <span class="o">(</span><span class="n">Hle</span> <span class="o">:</span> <span class="n">nat_degree</span> <span class="n">f</span> <span class="bp">≤</span> <span class="n">nat_degree</span> <span class="n">g</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">Hf</span> <span class="o">:</span> <span class="n">f</span> <span class="bp">≠</span> <span class="mi">0</span><span class="o">)</span> <span class="o">(</span><span class="n">Hg</span> <span class="o">:</span> <span class="n">g</span> <span class="bp">≠</span> <span class="mi">0</span><span class="o">)</span> <span class="o">(</span><span class="n">Hh</span> <span class="o">:</span> <span class="n">leading_coeff</span> <span class="n">f</span> <span class="bp">+</span> <span class="n">leading_coeff</span> <span class="n">g</span> <span class="bp">≠</span> <span class="mi">0</span><span class="o">)</span> <span class="o">:</span>
+<span class="n">leading_coeff</span> <span class="o">(</span><span class="n">f</span> <span class="bp">*</span> <span class="n">X</span> <span class="err">^</span> <span class="o">(</span><span class="n">nat_degree</span> <span class="n">g</span> <span class="bp">-</span> <span class="n">nat_degree</span> <span class="n">f</span><span class="o">)</span> <span class="bp">+</span> <span class="n">g</span><span class="o">)</span> <span class="bp">=</span> <span class="n">leading_coeff</span> <span class="n">f</span> <span class="bp">+</span> <span class="n">leading_coeff</span> <span class="n">g</span> <span class="o">:=</span>
+<span class="n">sorry</span>
 
-def ideal.leading_coeff {R : Type u} [nonzero_comm_ring R] (I : ideal (polynomial R)) : ideal R :=
-{ carrier := leading_coeff '' I,
-  zero := ⟨0, I.zero_mem, rfl⟩,
-  add := λ a b ⟨f, hf1, hf2⟩ ⟨g, hg1, hg2⟩, sorry/-begin
-    by_cases h0 : a + b = 0, rw h0, exact ⟨0, I.zero_mem, rfl⟩,
-    by_cases hf : f = 0, rw [← hf2, ← hg2, hf, leading_coeff_zero, zero_add], exact ⟨g, hg1, rfl⟩,
-    by_cases hg : g = 0, rw [← hf2, ← hg2, hg, leading_coeff_zero, add_zero], exact ⟨f, hf1, rfl⟩,
-    cases le_total (nat_degree f) (nat_degree g) with hd hd, -- can't get WLOG to work
-    { refine ⟨f * X ^ (nat_degree g - nat_degree f) + g,
-        I.add_mem (I.mul_mem_right hf1) hg1, _⟩,
-      have := leading_term_aux hd hf hg (by rwa [hf2, hg2]),
-      rwa [hf2, hg2] at this },
-    { refine ⟨g * X ^ (nat_degree g - nat_degree f) + f,
-        I.add_mem (I.mul_mem_right hg1) hf1, _⟩,
-      have := leading_term_aux hd hg hf (by rwa [hf2, hg2, add_comm]),
-      rwa [hf2, hg2] at this }
-  end-/,
-  smul := λ c a ⟨f, hf1, hf2⟩, begin
-    by_cases hcr : c • a = 0, rw hcr, exact ⟨0, I.zero_mem, rfl⟩,
-    refine ⟨C c * f, I.mul_mem_left hf1, _⟩,
-    have : leading_coeff (C c) * leading_coeff f ≠ 0,
-    { rwa [leading_coeff_C, hf2, ← smul_eq_mul] },
-    rw [leading_coeff_mul' this, leading_coeff_C, hf2, smul_eq_mul]
-  end }
-```
+<span class="n">def</span> <span class="n">ideal</span><span class="bp">.</span><span class="n">leading_coeff</span> <span class="o">{</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">[</span><span class="n">nonzero_comm_ring</span> <span class="n">R</span><span class="o">]</span> <span class="o">(</span><span class="n">I</span> <span class="o">:</span> <span class="n">ideal</span> <span class="o">(</span><span class="n">polynomial</span> <span class="n">R</span><span class="o">))</span> <span class="o">:</span> <span class="n">ideal</span> <span class="n">R</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">carrier</span> <span class="o">:=</span> <span class="n">leading_coeff</span> <span class="err">&#39;&#39;</span> <span class="n">I</span><span class="o">,</span>
+  <span class="n">zero</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="mi">0</span><span class="o">,</span> <span class="n">I</span><span class="bp">.</span><span class="n">zero_mem</span><span class="o">,</span> <span class="n">rfl</span><span class="bp">⟩</span><span class="o">,</span>
+  <span class="n">add</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">a</span> <span class="n">b</span> <span class="bp">⟨</span><span class="n">f</span><span class="o">,</span> <span class="n">hf1</span><span class="o">,</span> <span class="n">hf2</span><span class="bp">⟩</span> <span class="bp">⟨</span><span class="n">g</span><span class="o">,</span> <span class="n">hg1</span><span class="o">,</span> <span class="n">hg2</span><span class="bp">⟩</span><span class="o">,</span> <span class="n">sorry</span><span class="c">/-</span><span class="cm">begin</span>
+<span class="cm">    by_cases h0 : a + b = 0, rw h0, exact ⟨0, I.zero_mem, rfl⟩,</span>
+<span class="cm">    by_cases hf : f = 0, rw [← hf2, ← hg2, hf, leading_coeff_zero, zero_add], exact ⟨g, hg1, rfl⟩,</span>
+<span class="cm">    by_cases hg : g = 0, rw [← hf2, ← hg2, hg, leading_coeff_zero, add_zero], exact ⟨f, hf1, rfl⟩,</span>
+<span class="cm">    cases le_total (nat_degree f) (nat_degree g) with hd hd, -- can&#39;t get WLOG to work</span>
+<span class="cm">    { refine ⟨f * X ^ (nat_degree g - nat_degree f) + g,</span>
+<span class="cm">        I.add_mem (I.mul_mem_right hf1) hg1, _⟩,</span>
+<span class="cm">      have := leading_term_aux hd hf hg (by rwa [hf2, hg2]),</span>
+<span class="cm">      rwa [hf2, hg2] at this },</span>
+<span class="cm">    { refine ⟨g * X ^ (nat_degree g - nat_degree f) + f,</span>
+<span class="cm">        I.add_mem (I.mul_mem_right hg1) hf1, _⟩,</span>
+<span class="cm">      have := leading_term_aux hd hg hf (by rwa [hf2, hg2, add_comm]),</span>
+<span class="cm">      rwa [hf2, hg2] at this }</span>
+<span class="cm">  end-/</span><span class="o">,</span>
+  <span class="n">smul</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">c</span> <span class="n">a</span> <span class="bp">⟨</span><span class="n">f</span><span class="o">,</span> <span class="n">hf1</span><span class="o">,</span> <span class="n">hf2</span><span class="bp">⟩</span><span class="o">,</span> <span class="k">begin</span>
+    <span class="n">by_cases</span> <span class="n">hcr</span> <span class="o">:</span> <span class="n">c</span> <span class="err">•</span> <span class="n">a</span> <span class="bp">=</span> <span class="mi">0</span><span class="o">,</span> <span class="n">rw</span> <span class="n">hcr</span><span class="o">,</span> <span class="n">exact</span> <span class="bp">⟨</span><span class="mi">0</span><span class="o">,</span> <span class="n">I</span><span class="bp">.</span><span class="n">zero_mem</span><span class="o">,</span> <span class="n">rfl</span><span class="bp">⟩</span><span class="o">,</span>
+    <span class="n">refine</span> <span class="bp">⟨</span><span class="n">C</span> <span class="n">c</span> <span class="bp">*</span> <span class="n">f</span><span class="o">,</span> <span class="n">I</span><span class="bp">.</span><span class="n">mul_mem_left</span> <span class="n">hf1</span><span class="o">,</span> <span class="bp">_⟩</span><span class="o">,</span>
+    <span class="k">have</span> <span class="o">:</span> <span class="n">leading_coeff</span> <span class="o">(</span><span class="n">C</span> <span class="n">c</span><span class="o">)</span> <span class="bp">*</span> <span class="n">leading_coeff</span> <span class="n">f</span> <span class="bp">≠</span> <span class="mi">0</span><span class="o">,</span>
+    <span class="o">{</span> <span class="n">rwa</span> <span class="o">[</span><span class="n">leading_coeff_C</span><span class="o">,</span> <span class="n">hf2</span><span class="o">,</span> <span class="err">←</span> <span class="n">smul_eq_mul</span><span class="o">]</span> <span class="o">},</span>
+    <span class="n">rw</span> <span class="o">[</span><span class="n">leading_coeff_mul&#39;</span> <span class="n">this</span><span class="o">,</span> <span class="n">leading_coeff_C</span><span class="o">,</span> <span class="n">hf2</span><span class="o">,</span> <span class="n">smul_eq_mul</span><span class="o">]</span>
+  <span class="kn">end</span> <span class="o">}</span>
+</pre></div>
 
 #### [ Kenny Lau (Nov 05 2018 at 07:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/145303431):
-@**Mario Carneiro** why does this time out?
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> why does this time out?</p>
 
 #### [ Mario Carneiro (Nov 05 2018 at 07:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/145303491):
-polynomials have had problems with long elaboration in the past
+<p>polynomials have had problems with long elaboration in the past</p>
 
 #### [ Mario Carneiro (Nov 05 2018 at 07:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/145303494):
-check that it isn't doing any crazy typeclass searches?
+<p>check that it isn't doing any crazy typeclass searches?</p>
 
 #### [ Kenny Lau (Nov 05 2018 at 07:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/145303620):
-it's searching for `has_one nat` and `has_add nat` like a billion times
+<p>it's searching for <code>has_one nat</code> and <code>has_add nat</code> like a billion times</p>
 
 #### [ Mario Carneiro (Nov 05 2018 at 07:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/145303719):
-still profiling (slow business, of course) but it looks like the second block takes much longer than the first
+<p>still profiling (slow business, of course) but it looks like the second block takes much longer than the first</p>
 
 #### [ Kenny Lau (Nov 05 2018 at 07:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/145303725):
-oh, thanks
+<p>oh, thanks</p>
 
 #### [ Kenny Lau (Nov 05 2018 at 07:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/145303733):
-@**Kevin Buzzard** should I push what I have in my kmb_hilbert_basis?
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> should I push what I have in my kmb_hilbert_basis?</p>
 
 #### [ Mario Carneiro (Nov 05 2018 at 07:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/145303748):
-it takes 3.5 seconds with the sorry in, which is bad but not that bad so I guess you are worried about the commented out bit
+<p>it takes 3.5 seconds with the sorry in, which is bad but not that bad so I guess you are worried about the commented out bit</p>
 
 #### [ Kenny Lau (Nov 05 2018 at 07:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/145303805):
-but why does `polynomial` have long elaboration time?
+<p>but why does <code>polynomial</code> have long elaboration time?</p>
 
 #### [ Mario Carneiro (Nov 05 2018 at 07:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/145304062):
-If I replace the last `rwa` in the second block with `rw`, the final state is:
-```
-...
+<p>If I replace the last <code>rwa</code> in the second block with <code>rw</code>, the final state is:</p>
+<div class="codehilite"><pre><span></span>...
 this : leading_coeff (g * X ^ (nat_degree f - nat_degree g) + f) = b + a
 ⊢ leading_coeff (g * X ^ (nat_degree g - nat_degree f) + f) = a + b
-```
-I'm not sure how assumption is supposed to close that
+</pre></div>
+
+
+<p>I'm not sure how assumption is supposed to close that</p>
 
 #### [ Kenny Lau (Nov 05 2018 at 08:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/145304145):
-ah
+<p>ah</p>
 
 #### [ Mario Carneiro (Nov 05 2018 at 08:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/145304160):
-it's probably taking forever unfolding all the things to see if those are actually the same
+<p>it's probably taking forever unfolding all the things to see if those are actually the same</p>
 
 #### [ Kenny Lau (Nov 05 2018 at 08:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/145304269):
-should I add two submodules together?
+<p>should I add two submodules together?</p>
 
 #### [ Kenny Lau (Nov 05 2018 at 08:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/145304491):
-```lean
-import algebra.module
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">algebra</span><span class="bp">.</span><span class="n">module</span>
 
-universes u v
+<span class="n">universes</span> <span class="n">u</span> <span class="n">v</span>
 
-variables {R : Type u} [ring R]
-variables {M : Type v} [add_comm_group M] [module R M]
+<span class="kn">variables</span> <span class="o">{</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">[</span><span class="n">ring</span> <span class="n">R</span><span class="o">]</span>
+<span class="kn">variables</span> <span class="o">{</span><span class="n">M</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">}</span> <span class="o">[</span><span class="n">add_comm_group</span> <span class="n">M</span><span class="o">]</span> <span class="o">[</span><span class="n">module</span> <span class="n">R</span> <span class="n">M</span><span class="o">]</span>
 
-instance submodule.has_add' : has_add (submodule R M) :=
-⟨λ N₁ N₂, {
-  carrier := { z | ∃ (x ∈ N₁) (y ∈ N₂), x + y = z },
-  zero := ⟨0, N₁.zero_mem, 0, N₂.zero_mem, add_zero _⟩,
-  add := λ z₁ z₂ ⟨x₁, hx₁, y₁, hy₁, hz₁⟩ ⟨x₂, hx₂, y₂, hy₂, hz₂⟩,
-    ⟨x₁ + x₂, N₁.add_mem hx₁ hx₂, y₁ + y₂, N₂.add_mem hy₁ hy₂,
-    by rw [← hz₁, ← hz₂, add_assoc, add_left_comm x₂, ← add_assoc]⟩,
-  smul := λ c z ⟨x, hx, y, hy, hz⟩,
-    ⟨c • x, N₁.smul_mem c hx, c • y, N₂.smul_mem c hy,
-    by rw [← hz, smul_add]⟩ }⟩
-```
+<span class="kn">instance</span> <span class="n">submodule</span><span class="bp">.</span><span class="n">has_add&#39;</span> <span class="o">:</span> <span class="n">has_add</span> <span class="o">(</span><span class="n">submodule</span> <span class="n">R</span> <span class="n">M</span><span class="o">)</span> <span class="o">:=</span>
+<span class="bp">⟨λ</span> <span class="n">N₁</span> <span class="n">N₂</span><span class="o">,</span> <span class="o">{</span>
+  <span class="n">carrier</span> <span class="o">:=</span> <span class="o">{</span> <span class="n">z</span> <span class="bp">|</span> <span class="bp">∃</span> <span class="o">(</span><span class="n">x</span> <span class="err">∈</span> <span class="n">N₁</span><span class="o">)</span> <span class="o">(</span><span class="n">y</span> <span class="err">∈</span> <span class="n">N₂</span><span class="o">),</span> <span class="n">x</span> <span class="bp">+</span> <span class="n">y</span> <span class="bp">=</span> <span class="n">z</span> <span class="o">},</span>
+  <span class="n">zero</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="mi">0</span><span class="o">,</span> <span class="n">N₁</span><span class="bp">.</span><span class="n">zero_mem</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">N₂</span><span class="bp">.</span><span class="n">zero_mem</span><span class="o">,</span> <span class="n">add_zero</span> <span class="bp">_⟩</span><span class="o">,</span>
+  <span class="n">add</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">z₁</span> <span class="n">z₂</span> <span class="bp">⟨</span><span class="n">x₁</span><span class="o">,</span> <span class="n">hx₁</span><span class="o">,</span> <span class="n">y₁</span><span class="o">,</span> <span class="n">hy₁</span><span class="o">,</span> <span class="n">hz₁</span><span class="bp">⟩</span> <span class="bp">⟨</span><span class="n">x₂</span><span class="o">,</span> <span class="n">hx₂</span><span class="o">,</span> <span class="n">y₂</span><span class="o">,</span> <span class="n">hy₂</span><span class="o">,</span> <span class="n">hz₂</span><span class="bp">⟩</span><span class="o">,</span>
+    <span class="bp">⟨</span><span class="n">x₁</span> <span class="bp">+</span> <span class="n">x₂</span><span class="o">,</span> <span class="n">N₁</span><span class="bp">.</span><span class="n">add_mem</span> <span class="n">hx₁</span> <span class="n">hx₂</span><span class="o">,</span> <span class="n">y₁</span> <span class="bp">+</span> <span class="n">y₂</span><span class="o">,</span> <span class="n">N₂</span><span class="bp">.</span><span class="n">add_mem</span> <span class="n">hy₁</span> <span class="n">hy₂</span><span class="o">,</span>
+    <span class="k">by</span> <span class="n">rw</span> <span class="o">[</span><span class="err">←</span> <span class="n">hz₁</span><span class="o">,</span> <span class="err">←</span> <span class="n">hz₂</span><span class="o">,</span> <span class="n">add_assoc</span><span class="o">,</span> <span class="n">add_left_comm</span> <span class="n">x₂</span><span class="o">,</span> <span class="err">←</span> <span class="n">add_assoc</span><span class="o">]</span><span class="bp">⟩</span><span class="o">,</span>
+  <span class="n">smul</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">c</span> <span class="n">z</span> <span class="bp">⟨</span><span class="n">x</span><span class="o">,</span> <span class="n">hx</span><span class="o">,</span> <span class="n">y</span><span class="o">,</span> <span class="n">hy</span><span class="o">,</span> <span class="n">hz</span><span class="bp">⟩</span><span class="o">,</span>
+    <span class="bp">⟨</span><span class="n">c</span> <span class="err">•</span> <span class="n">x</span><span class="o">,</span> <span class="n">N₁</span><span class="bp">.</span><span class="n">smul_mem</span> <span class="n">c</span> <span class="n">hx</span><span class="o">,</span> <span class="n">c</span> <span class="err">•</span> <span class="n">y</span><span class="o">,</span> <span class="n">N₂</span><span class="bp">.</span><span class="n">smul_mem</span> <span class="n">c</span> <span class="n">hy</span><span class="o">,</span>
+    <span class="k">by</span> <span class="n">rw</span> <span class="o">[</span><span class="err">←</span> <span class="n">hz</span><span class="o">,</span> <span class="n">smul_add</span><span class="o">]</span><span class="bp">⟩</span> <span class="o">}</span><span class="bp">⟩</span>
+</pre></div>
 
 #### [ Mario Carneiro (Nov 05 2018 at 08:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/145304533):
-isn't this `\sup`?
+<p>isn't this <code>\sup</code>?</p>
 
 #### [ Kenny Lau (Nov 05 2018 at 08:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/145304534):
-oh
+<p>oh</p>
 
 #### [ Kenny Lau (Nov 05 2018 at 08:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/145304535):
-lol
+<p>lol</p>
 
 #### [ Mario Carneiro (Nov 05 2018 at 08:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/145304565):
-I realize that ring theorists prefer the notations $$A + B$$ and $$A\cap B$$ to $$A\vee B$$ and $$A\wedge B$$, but I think we should go for more notational uniformity
+<p>I realize that ring theorists prefer the notations <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>A</mi><mo>+</mo><mi>B</mi></mrow><annotation encoding="application/x-tex">A + B</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.76666em;vertical-align:-0.08333em;"></span><span class="base"><span class="mord mathit">A</span><span class="mbin">+</span><span class="mord mathit" style="margin-right:0.05017em;">B</span></span></span></span> and <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>A</mi><mo>∩</mo><mi>B</mi></mrow><annotation encoding="application/x-tex">A\cap B</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.68333em;vertical-align:0em;"></span><span class="base"><span class="mord mathit">A</span><span class="mbin">∩</span><span class="mord mathit" style="margin-right:0.05017em;">B</span></span></span></span> to <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>A</mi><mo>∨</mo><mi>B</mi></mrow><annotation encoding="application/x-tex">A\vee B</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.68333em;vertical-align:0em;"></span><span class="base"><span class="mord mathit">A</span><span class="mbin">∨</span><span class="mord mathit" style="margin-right:0.05017em;">B</span></span></span></span> and <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>A</mi><mo>∧</mo><mi>B</mi></mrow><annotation encoding="application/x-tex">A\wedge B</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.68333em;vertical-align:0em;"></span><span class="base"><span class="mord mathit">A</span><span class="mbin">∧</span><span class="mord mathit" style="margin-right:0.05017em;">B</span></span></span></span>, but I think we should go for more notational uniformity</p>
 
 #### [ Kenny Lau (Nov 05 2018 at 10:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/146784108):
-oh, `coeff_is_linear` uses `is_linear_map`, should I refactor that? @**Mario Carneiro**
+<p>oh, <code>coeff_is_linear</code> uses <code>is_linear_map</code>, should I refactor that? <span class="user-mention" data-user-id="110049">@Mario Carneiro</span></p>
 
 #### [ Kenny Lau (Nov 05 2018 at 10:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/146784560):
-```lean
-def map_mk (I J : ideal α) : ideal I.quotient :=
-{ carrier := mk I '' J,
-  zero := ⟨0, J.zero_mem, rfl⟩,
-  add := by rintro _ _ ⟨x, hx, rfl⟩ ⟨y, hy, rfl⟩;
-    exact ⟨x + y, J.add_mem hx hy, rfl⟩,
-  smul := by rintro ⟨c⟩ _ ⟨x, hx, rfl⟩;
-    exact ⟨c * x, J.mul_mem_left hx, rfl⟩ }
-```
-I think we can generalize this @**Mario Carneiro**
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">map_mk</span> <span class="o">(</span><span class="n">I</span> <span class="n">J</span> <span class="o">:</span> <span class="n">ideal</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">ideal</span> <span class="n">I</span><span class="bp">.</span><span class="n">quotient</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">carrier</span> <span class="o">:=</span> <span class="n">mk</span> <span class="n">I</span> <span class="err">&#39;&#39;</span> <span class="n">J</span><span class="o">,</span>
+  <span class="n">zero</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="mi">0</span><span class="o">,</span> <span class="n">J</span><span class="bp">.</span><span class="n">zero_mem</span><span class="o">,</span> <span class="n">rfl</span><span class="bp">⟩</span><span class="o">,</span>
+  <span class="n">add</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">rintro</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">⟨</span><span class="n">x</span><span class="o">,</span> <span class="n">hx</span><span class="o">,</span> <span class="n">rfl</span><span class="bp">⟩</span> <span class="bp">⟨</span><span class="n">y</span><span class="o">,</span> <span class="n">hy</span><span class="o">,</span> <span class="n">rfl</span><span class="bp">⟩;</span>
+    <span class="n">exact</span> <span class="bp">⟨</span><span class="n">x</span> <span class="bp">+</span> <span class="n">y</span><span class="o">,</span> <span class="n">J</span><span class="bp">.</span><span class="n">add_mem</span> <span class="n">hx</span> <span class="n">hy</span><span class="o">,</span> <span class="n">rfl</span><span class="bp">⟩</span><span class="o">,</span>
+  <span class="n">smul</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">rintro</span> <span class="bp">⟨</span><span class="n">c</span><span class="bp">⟩</span> <span class="bp">_</span> <span class="bp">⟨</span><span class="n">x</span><span class="o">,</span> <span class="n">hx</span><span class="o">,</span> <span class="n">rfl</span><span class="bp">⟩;</span>
+    <span class="n">exact</span> <span class="bp">⟨</span><span class="n">c</span> <span class="bp">*</span> <span class="n">x</span><span class="o">,</span> <span class="n">J</span><span class="bp">.</span><span class="n">mul_mem_left</span> <span class="n">hx</span><span class="o">,</span> <span class="n">rfl</span><span class="bp">⟩</span> <span class="o">}</span>
+</pre></div>
+
+
+<p>I think we can generalize this <span class="user-mention" data-user-id="110049">@Mario Carneiro</span></p>
 
 #### [ Mario Carneiro (Nov 05 2018 at 10:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/146784575):
-to what?
+<p>to what?</p>
 
 #### [ Mario Carneiro (Nov 05 2018 at 10:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/146784617):
-yes on `coeff` btw, you may need a second function though
+<p>yes on <code>coeff</code> btw, you may need a second function though</p>
 
 #### [ Kenny Lau (Nov 05 2018 at 10:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/146785589):
-@**Mario Carneiro** and how far away are we from the refactoring?
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> and how far away are we from the refactoring?</p>
 
 #### [ Mario Carneiro (Nov 05 2018 at 10:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/146785630):
-plan is to finish it today; I am currently rejiggering some stuff with `is_unit` and `nonunits` prompted by some of Rob's applications
+<p>plan is to finish it today; I am currently rejiggering some stuff with <code>is_unit</code> and <code>nonunits</code> prompted by some of Rob's applications</p>
 
 #### [ Kenny Lau (Nov 05 2018 at 11:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/146786349):
-are you working on a separate branch or a private repo or something? i.e. should I just push to that branch?
+<p>are you working on a separate branch or a private repo or something? i.e. should I just push to that branch?</p>
 
 #### [ Mario Carneiro (Nov 05 2018 at 11:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/146786408):
-I'm working locally, feel free to keep committing to the `module` branch and I'll merge when I push
+<p>I'm working locally, feel free to keep committing to the <code>module</code> branch and I'll merge when I push</p>
 
 #### [ Kenny Lau (Nov 05 2018 at 11:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/146786420):
-do you want to push your work to the community branches?
+<p>do you want to push your work to the community branches?</p>
 
 #### [ Kevin Buzzard (Nov 05 2018 at 11:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/146786436):
-Kenny and I are just chatting on Skype
+<p>Kenny and I are just chatting on Skype</p>
 
 #### [ Kevin Buzzard (Nov 05 2018 at 11:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/146786437):
-For Hilbert basis
+<p>For Hilbert basis</p>
 
 #### [ Kevin Buzzard (Nov 05 2018 at 11:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/146786489):
-one perhaps needs that there's some inclusion of lattices -- if R -> S is a ring hom and M is an S-module
+<p>one perhaps needs that there's some inclusion of lattices -- if R -&gt; S is a ring hom and M is an S-module</p>
 
 #### [ Kevin Buzzard (Nov 05 2018 at 11:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/146786501):
-then there's an order preserving injection from the lattice of sub-S-modules to the lattice of sub-R-modules
+<p>then there's an order preserving injection from the lattice of sub-S-modules to the lattice of sub-R-modules</p>
 
 #### [ Mario Carneiro (Nov 05 2018 at 11:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/146786568):
-okay, it's broken tho
+<p>okay, it's broken tho</p>
 
 #### [ Kevin Buzzard (Nov 05 2018 at 11:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/146786582):
-A sub-R-module is just a sub-f(R)-module where f(R) is the subring of S
+<p>A sub-R-module is just a sub-f(R)-module where f(R) is the subring of S</p>
 
 #### [ Kevin Buzzard (Nov 05 2018 at 11:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/146786605):
-If R -> S is an injection with M an S-module then there's an injection from the sub-S-modules to the sub-R-modules
+<p>If R -&gt; S is an injection with M an S-module then there's an injection from the sub-S-modules to the sub-R-modules</p>
 
 #### [ Kevin Buzzard (Nov 05 2018 at 11:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/146786657):
-If R -> S is a surjection and M is an R-module then the submodule of M consisting of stuff which is annihiliated by the kernel of R->S is an S-module
+<p>If R -&gt; S is a surjection and M is an R-module then the submodule of M consisting of stuff which is annihiliated by the kernel of R-&gt;S is an S-module</p>
 
 #### [ Kevin Buzzard (Nov 05 2018 at 11:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/146786709):
-and that way you get an injection from sub-S-modules to sub-R-modules
+<p>and that way you get an injection from sub-S-modules to sub-R-modules</p>
 
 #### [ Kenny Lau (Nov 05 2018 at 11:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/146787850):
-```lean
-import data.polynomial
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">polynomial</span>
 
-universe u
+<span class="kn">universe</span> <span class="n">u</span>
 
-variables {R : Type u} [comm_ring R] [decidable_eq R]
-variable (I : ideal (polynomial R))
+<span class="kn">variables</span> <span class="o">{</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">R</span><span class="o">]</span> <span class="o">[</span><span class="n">decidable_eq</span> <span class="n">R</span><span class="o">]</span>
+<span class="kn">variable</span> <span class="o">(</span><span class="n">I</span> <span class="o">:</span> <span class="n">ideal</span> <span class="o">(</span><span class="n">polynomial</span> <span class="n">R</span><span class="o">))</span>
 
-def ideal.of_polynomial : submodule R (polynomial R) :=
-{ carrier := (@submodule.carrier (polynomial R) (polynomial R) _ _ ring.to_module I : set (polynomial R)),
-  zero := sorry, add := sorry, smul := sorry }
+<span class="n">def</span> <span class="n">ideal</span><span class="bp">.</span><span class="n">of_polynomial</span> <span class="o">:</span> <span class="n">submodule</span> <span class="n">R</span> <span class="o">(</span><span class="n">polynomial</span> <span class="n">R</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">carrier</span> <span class="o">:=</span> <span class="o">(</span><span class="bp">@</span><span class="n">submodule</span><span class="bp">.</span><span class="n">carrier</span> <span class="o">(</span><span class="n">polynomial</span> <span class="n">R</span><span class="o">)</span> <span class="o">(</span><span class="n">polynomial</span> <span class="n">R</span><span class="o">)</span> <span class="bp">_</span> <span class="bp">_</span> <span class="n">ring</span><span class="bp">.</span><span class="n">to_module</span> <span class="n">I</span> <span class="o">:</span> <span class="n">set</span> <span class="o">(</span><span class="n">polynomial</span> <span class="n">R</span><span class="o">)),</span>
+  <span class="n">zero</span> <span class="o">:=</span> <span class="n">sorry</span><span class="o">,</span> <span class="n">add</span> <span class="o">:=</span> <span class="n">sorry</span><span class="o">,</span> <span class="n">smul</span> <span class="o">:=</span> <span class="n">sorry</span> <span class="o">}</span>
 
-def ideal.of_polynomial' : submodule R (polynomial R) :=
-{ carrier := (I.carrier : set (polynomial R)), -- doesn't work
-  zero := sorry, add := sorry, smul := sorry }
-```
-@**Mario Carneiro**
+<span class="n">def</span> <span class="n">ideal</span><span class="bp">.</span><span class="n">of_polynomial&#39;</span> <span class="o">:</span> <span class="n">submodule</span> <span class="n">R</span> <span class="o">(</span><span class="n">polynomial</span> <span class="n">R</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">carrier</span> <span class="o">:=</span> <span class="o">(</span><span class="n">I</span><span class="bp">.</span><span class="n">carrier</span> <span class="o">:</span> <span class="n">set</span> <span class="o">(</span><span class="n">polynomial</span> <span class="n">R</span><span class="o">)),</span> <span class="c1">-- doesn&#39;t work</span>
+  <span class="n">zero</span> <span class="o">:=</span> <span class="n">sorry</span><span class="o">,</span> <span class="n">add</span> <span class="o">:=</span> <span class="n">sorry</span><span class="o">,</span> <span class="n">smul</span> <span class="o">:=</span> <span class="n">sorry</span> <span class="o">}</span>
+</pre></div>
+
+
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span></p>
 
 #### [ Mario Carneiro (Nov 05 2018 at 11:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/146787867):
-it's probably guessing the wrong scalar ring here
+<p>it's probably guessing the wrong scalar ring here</p>
 
 #### [ Kevin Buzzard (Nov 05 2018 at 11:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/146787870):
-I thought it never had to guess anything nowadays?
+<p>I thought it never had to guess anything nowadays?</p>
 
 #### [ Mario Carneiro (Nov 05 2018 at 11:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/146787918):
-that's the next thing on the list after the module refactor
+<p>that's the next thing on the list after the module refactor</p>
 
 #### [ Kevin Buzzard (Nov 05 2018 at 11:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/146787923):
-There's a _list_??
+<p>There's a _list_??</p>
 
 #### [ Johan Commelin (Nov 05 2018 at 11:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/146787928):
-I feel there is a need for module refactor 2.0 :rolling_on_the_floor_laughing:
+<p>I feel there is a need for module refactor 2.0 <span class="emoji emoji-1f923" title="rolling on the floor laughing">:rolling_on_the_floor_laughing:</span></p>
 
 #### [ Kevin Buzzard (Nov 05 2018 at 11:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/146787930):
-I never realised modules were so hard :-)
+<p>I never realised modules were so hard :-)</p>
 
 #### [ Kenny Lau (Nov 05 2018 at 11:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/146787987):
-yeah that's 'coz you're a mathematician
+<p>yeah that's 'coz you're a mathematician</p>
 
 #### [ Mario Carneiro (Nov 05 2018 at 11:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/146788414):
-the list is my todo list, and it's on the list because people want modules to have multiple scalar rings
+<p>the list is my todo list, and it's on the list because people want modules to have multiple scalar rings</p>
 
 #### [ Kevin Buzzard (Nov 05 2018 at 11:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/146788582):
-I am just trying to formalise various standard results in undergraduate algebra like Hilbert basis and reporting back on what mathematicians use
+<p>I am just trying to formalise various standard results in undergraduate algebra like Hilbert basis and reporting back on what mathematicians use</p>
 
 #### [ Mario Carneiro (Nov 05 2018 at 14:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/146794422):
-@**Kenny Lau** @**Johannes Hölzl** The final draft of the module refactor is pushed
+<p><span class="user-mention" data-user-id="110064">@Kenny Lau</span> <span class="user-mention" data-user-id="110294">@Johannes Hölzl</span> The final draft of the module refactor is pushed</p>
 
 #### [ Kenny Lau (Nov 05 2018 at 14:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/146794432):
-so... coeff is linear?
+<p>so... coeff is linear?</p>
 
 #### [ Mario Carneiro (Nov 05 2018 at 14:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/146794653):
-it is now
+<p>it is now</p>
 
 #### [ Kenny Lau (Nov 05 2018 at 14:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/146794754):
-thanks
+<p>thanks</p>
 
 #### [ Kevin Buzzard (Nov 05 2018 at 14:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/146794766):
-So how do I make an S-module into an R-module if I have a ring hom $$f : R \to S$$?
+<p>So how do I make an S-module into an R-module if I have a ring hom <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>f</mi><mo>:</mo><mi>R</mi><mo>→</mo><mi>S</mi></mrow><annotation encoding="application/x-tex">f : R \to S</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.69444em;"></span><span class="strut bottom" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.10764em;">f</span><span class="mrel">:</span><span class="mord mathit" style="margin-right:0.00773em;">R</span><span class="mrel">→</span><span class="mord mathit" style="margin-right:0.05764em;">S</span></span></span></span>?</p>
 
 #### [ Kevin Buzzard (Nov 05 2018 at 14:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/146794771):
-thanks too
+<p>thanks too</p>
 
 #### [ Mario Carneiro (Nov 05 2018 at 14:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/146794880):
-Maybe there should be a way to put chosen ring homs in the typeclass infrastructure?
+<p>Maybe there should be a way to put chosen ring homs in the typeclass infrastructure?</p>
 
 #### [ Mario Carneiro (Nov 05 2018 at 14:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/146794939):
-Otherwise you just have to introduce it locally every time
+<p>Otherwise you just have to introduce it locally every time</p>
 
 #### [ Mario Carneiro (Nov 05 2018 at 14:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/146794957):
-I assume you aren't asking how to define the R-module structure, that's not difficult at all
+<p>I assume you aren't asking how to define the R-module structure, that's not difficult at all</p>
 
 #### [ Johan Commelin (Nov 05 2018 at 14:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/146795078):
-```quote
-Maybe there should be a way to put chosen ring homs in the typeclass infrastructure?
-```
-I think we could also try using a structure `algebra`.
+<blockquote>
+<p>Maybe there should be a way to put chosen ring homs in the typeclass infrastructure?</p>
+</blockquote>
+<p>I think we could also try using a structure <code>algebra</code>.</p>
 
 #### [ Kevin Buzzard (Nov 05 2018 at 14:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/146795319):
-```quote
-I assume you aren't asking how to define the R-module structure, that's not difficult at all
-```
-Right -- I'm asking for the idiomatic way to do it.
+<blockquote>
+<p>I assume you aren't asking how to define the R-module structure, that's not difficult at all</p>
+</blockquote>
+<p>Right -- I'm asking for the idiomatic way to do it.</p>
 
 #### [ Johannes Hölzl (Nov 05 2018 at 14:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/146796014):
-@**Mario Carneiro**  why  is it now a mixing, i.e. why is the group structure not part of modules anymore?
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span>  why  is it now a mixing, i.e. why is the group structure not part of modules anymore?</p>
 
 #### [ Mario Carneiro (Nov 05 2018 at 14:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/146796108):
-Because the parent coercion `module R M => add_comm_group M` was causing much of the module typeclass issues
+<p>Because the parent coercion <code>module R M =&gt; add_comm_group M</code> was causing much of the module typeclass issues</p>
 
 #### [ Mario Carneiro (Nov 05 2018 at 14:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/146796123):
-plus if `R` becomes not an `out_param` then it won't even work
+<p>plus if <code>R</code> becomes not an <code>out_param</code> then it won't even work</p>
 
 #### [ Johannes Hölzl (Nov 05 2018 at 16:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/146802129):
-the module PR looks very good to me
+<p>the module PR looks very good to me</p>
 
 #### [ Johan Commelin (Nov 05 2018 at 16:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/146804978):
-It's merged :tada: :thumbs_up: :octopus:
+<p>It's merged <span class="emoji emoji-1f389" title="tada">:tada:</span> <span class="emoji emoji-1f44d" title="thumbs up">:thumbs_up:</span> <span class="emoji emoji-1f419" title="octopus">:octopus:</span></p>
 
 #### [ Johannes Hölzl (Nov 05 2018 at 16:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/146804983):
-COMMIT 1000
+<p>COMMIT 1000</p>
+
+#### [ Neil Strickland (Feb 01 2019 at 12:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/157346031):
+<p>Bases should <strong>definitely</strong> be maps or lists.  Some treatments of finite-dimensional linear algebra purport to use subsets, but they are almost always wrong if read literally, and would require fiddly side-conditions to make them right.  Also, to talk about the standard algorithms you need efficient translation between bases and matrices, which becomes very awkward if you use subsets.</p>
+
+#### [ Johan Commelin (Feb 01 2019 at 12:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/157346162):
+<p>It isn't too hard to convert between a subset and a map. But maybe there should be a bit more API for this. Is there something specific that you are missing?</p>
+
+#### [ Johan Commelin (Feb 01 2019 at 12:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/157346171):
+<p>Matrices are currently indexed by fintypes (not necessarily ordered).</p>
+
+#### [ Kenny Lau (Feb 01 2019 at 12:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/157346354):
+<p>... is this related to the previous discussion?</p>
+
+#### [ Neil Strickland (Feb 01 2019 at 12:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/157346582):
+<p>I think not, sorry.  Zulip sometimes gets in a funny state where it shows me very old posts mixed in with new ones, and I was accidentally replying to one of those.  I am not quite sure what is going on with that.</p>
 
 
 {% endraw %}

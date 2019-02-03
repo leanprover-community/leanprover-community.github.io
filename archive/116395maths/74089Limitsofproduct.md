@@ -1,0 +1,167 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/116395maths/74089Limitsofproduct.html
+---
+
+## Stream: [maths](index.html)
+### Topic: [Limits of product](74089Limitsofproduct.html)
+
+---
+
+
+{% raw %}
+#### [ Patrick Massot (Jan 29 2019 at 22:54)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Limits%20of%20product/near/157141992):
+<p>I think we should create a stream "Lean for teaching". This message is a follow up to the conversation around <a href="https://github.com/ImperialCollegeLondon/M1P1-lean" target="_blank" title="https://github.com/ImperialCollegeLondon/M1P1-lean">https://github.com/ImperialCollegeLondon/M1P1-lean</a>. The question is: can we write the product rule for limits of sequence in the literate style that we want for writing a bilingual math/Lean elementary analysis textbook. I think Kevin's rule of sticking to the proofs taught at Imperial is a bit too rigid. I think we can still draw inspiration from the mathlib thousands-of-lemmas-style.</p>
+
+#### [ Patrick Massot (Jan 29 2019 at 22:54)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Limits%20of%20product/near/157142038):
+<p>We clearly want to teach that:</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">tendsto_iff_sub_tendsto_zero</span> <span class="o">{</span><span class="n">a</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="n">ℝ</span><span class="o">}</span> <span class="o">{</span><span class="n">l</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">}</span> <span class="o">:</span>
+  <span class="n">is_limit</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">n</span><span class="o">,</span> <span class="n">a</span> <span class="n">n</span> <span class="bp">-</span> <span class="n">l</span><span class="o">)</span> <span class="mi">0</span> <span class="bp">↔</span> <span class="n">is_limit</span> <span class="n">a</span> <span class="n">l</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">split</span> <span class="bp">;</span>
+  <span class="o">{</span> <span class="n">intros</span> <span class="n">h</span> <span class="n">ε</span> <span class="n">εpos</span><span class="o">,</span>
+    <span class="n">rcases</span> <span class="n">h</span> <span class="n">ε</span> <span class="n">εpos</span> <span class="k">with</span> <span class="bp">⟨</span><span class="n">N</span><span class="o">,</span> <span class="n">H</span><span class="bp">⟩</span><span class="o">,</span>
+    <span class="n">use</span> <span class="n">N</span><span class="o">,</span>
+    <span class="n">intros</span> <span class="n">n</span> <span class="n">hn</span><span class="o">,</span>
+    <span class="n">simpa</span> <span class="kn">using</span> <span class="n">H</span> <span class="n">n</span> <span class="n">hn</span> <span class="o">}</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>(sorry that one isn't commented)</p>
+
+#### [ Patrick Massot (Jan 29 2019 at 22:55)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Limits%20of%20product/near/157142095):
+<p>Then a very important trick that can be utterly confusing for beginners, so let's state it openly</p>
+<div class="codehilite"><pre><span></span><span class="c1">-- In the definition of a limit, the final ε can be replaced</span>
+<span class="c1">-- by a constant multiple of ε. We could assume this constant is positive</span>
+<span class="c1">-- but we don&#39;t want to deal with this when applying the lemma.</span>
+<span class="kn">lemma</span> <span class="n">tendsto_of_mul_eps</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">(</span><span class="n">l</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">(</span><span class="n">A</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">ε</span> <span class="bp">&gt;</span> <span class="mi">0</span><span class="o">,</span> <span class="bp">∃</span> <span class="n">N</span><span class="o">,</span> <span class="bp">∀</span> <span class="n">n</span> <span class="bp">≥</span> <span class="n">N</span><span class="o">,</span> <span class="bp">|</span> <span class="n">a</span> <span class="n">n</span> <span class="bp">-</span> <span class="n">l</span> <span class="bp">|</span> <span class="bp">&lt;</span> <span class="n">A</span><span class="bp">*</span><span class="n">ε</span><span class="o">)</span> <span class="o">:</span> <span class="n">is_limit</span> <span class="n">a</span> <span class="n">l</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="c1">-- Let ε be any positive number</span>
+  <span class="n">intros</span> <span class="n">ε</span> <span class="n">εpos</span><span class="o">,</span>
+  <span class="c1">-- A is either non positive or positive</span>
+  <span class="n">cases</span> <span class="n">le_or_gt</span> <span class="n">A</span> <span class="mi">0</span> <span class="k">with</span> <span class="n">Anonpos</span> <span class="n">Apos</span><span class="o">,</span>
+  <span class="o">{</span> <span class="c1">-- If A is non positive then our assumed bound quickly</span>
+    <span class="c1">-- gives a contradiction.</span>
+    <span class="n">exfalso</span><span class="o">,</span>
+    <span class="c1">-- Indeed we can apply our assumption to ε = 1 to get N such that</span>
+    <span class="c1">-- ∀ (n : ℕ), n ≥ N → |a n - l| &lt; A * 1</span>
+    <span class="n">rcases</span> <span class="n">h</span> <span class="mi">1</span> <span class="o">(</span><span class="k">by</span> <span class="n">linarith</span><span class="o">)</span> <span class="k">with</span> <span class="bp">⟨</span><span class="n">N</span><span class="o">,</span> <span class="n">H</span><span class="bp">⟩</span><span class="o">,</span>
+    <span class="c1">-- in particular this holds when n = N</span>
+    <span class="n">specialize</span> <span class="n">H</span> <span class="n">N</span> <span class="o">(</span><span class="k">by</span> <span class="n">linarith</span><span class="o">),</span>
+    <span class="c1">-- but |a N - l| ≥ 0 so we get a contradiction</span>
+    <span class="k">have</span> <span class="o">:</span> <span class="bp">|</span><span class="n">a</span> <span class="n">N</span> <span class="bp">-</span> <span class="n">l</span><span class="bp">|</span> <span class="bp">≥</span> <span class="mi">0</span><span class="o">,</span> <span class="k">from</span> <span class="n">abs_nonneg</span> <span class="bp">_</span><span class="o">,</span>
+    <span class="n">linarith</span> <span class="o">},</span>
+  <span class="o">{</span> <span class="c1">-- Now assume A is positive. Our assumption h gives N such that</span>
+    <span class="c1">-- ∀ n ≥ N, |a n - l| &lt; A * (ε / A)</span>
+    <span class="n">rcases</span> <span class="n">h</span> <span class="o">(</span><span class="n">ε</span><span class="bp">/</span><span class="n">A</span><span class="o">)</span> <span class="o">(</span><span class="n">div_pos</span> <span class="n">εpos</span> <span class="n">Apos</span><span class="o">)</span> <span class="k">with</span> <span class="bp">⟨</span><span class="n">N</span><span class="o">,</span> <span class="n">H</span><span class="bp">⟩</span><span class="o">,</span>
+    <span class="c1">-- we can simplify that A * (ε / A) and we are done.</span>
+    <span class="n">rw</span> <span class="n">mul_div_cancel&#39;</span> <span class="bp">_</span> <span class="o">(</span><span class="n">ne_of_gt</span> <span class="n">Apos</span><span class="o">)</span> <span class="n">at</span> <span class="n">H</span><span class="o">,</span>
+    <span class="n">tauto</span> <span class="o">}</span>
+<span class="kn">end</span>
+</pre></div>
+
+#### [ Kevin Buzzard (Jan 29 2019 at 22:56)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Limits%20of%20product/near/157142203):
+<p>I talked about this product of limits lemmas with the undergrads today in an informal course I'm giving. We reduced product of limits = limit of products to linearity of limits and the assertion that the product of null sequences is null. I think this is a nicer proof than the one I typed up.</p>
+
+#### [ Patrick Massot (Jan 29 2019 at 22:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Limits%20of%20product/near/157142262):
+<p>Yeah, let's move towards the actual goal. Notice how the constant A from the preceding lemma is <em>not</em> instantiated before we get it. But Lean doesn't need to be told at the end!</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">tendsto_bounded_mul_zero</span> <span class="o">{</span><span class="n">a</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="n">ℝ</span><span class="o">}</span> <span class="o">{</span><span class="n">b</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="n">ℝ</span><span class="o">}</span> <span class="o">{</span><span class="n">A</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">}</span> <span class="o">(</span><span class="n">Apos</span> <span class="o">:</span> <span class="n">A</span> <span class="bp">&gt;</span> <span class="mi">0</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">hA</span> <span class="o">:</span> <span class="n">has_bound</span> <span class="n">a</span> <span class="n">A</span><span class="o">)</span> <span class="o">(</span><span class="n">hB</span> <span class="o">:</span> <span class="n">is_limit</span> <span class="n">b</span> <span class="mi">0</span><span class="o">)</span>
+  <span class="o">:</span> <span class="n">is_limit</span> <span class="o">(</span><span class="n">a</span><span class="bp">*</span><span class="n">b</span><span class="o">)</span> <span class="mi">0</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="c1">-- Let&#39;s apply our variant of the definition of limits where the final</span>
+  <span class="c1">-- ε gets multiplied by some constant to be determined</span>
+  <span class="n">apply</span> <span class="n">tendsto_of_mul_eps</span><span class="o">,</span>
+  <span class="c1">-- Let ε be any positive number</span>
+  <span class="n">intros</span> <span class="n">ε</span> <span class="n">εpos</span><span class="o">,</span>
+  <span class="c1">-- by assumption hB, we get some N such that</span>
+  <span class="c1">-- ∀ (n : ℕ), n ≥ N → |b n| &lt; ε</span>
+  <span class="n">cases</span> <span class="n">hB</span> <span class="n">ε</span> <span class="n">εpos</span> <span class="k">with</span> <span class="n">N</span> <span class="n">H</span><span class="o">,</span>
+  <span class="n">simp</span> <span class="n">at</span> <span class="n">H</span><span class="o">,</span>
+  <span class="c1">-- Let&#39;s use that N</span>
+  <span class="n">use</span> <span class="n">N</span><span class="o">,</span>
+  <span class="c1">-- And compute for any n ≥ N</span>
+  <span class="n">intros</span> <span class="n">n</span> <span class="n">nN</span><span class="o">,</span>
+  <span class="k">calc</span>
+  <span class="bp">|</span><span class="o">(</span><span class="n">a</span> <span class="bp">*</span> <span class="n">b</span><span class="o">)</span> <span class="n">n</span> <span class="bp">-</span> <span class="mi">0</span><span class="bp">|</span> <span class="bp">=</span> <span class="bp">|</span><span class="n">a</span> <span class="n">n</span> <span class="bp">*</span> <span class="n">b</span> <span class="n">n</span><span class="bp">|</span>    <span class="o">:</span> <span class="k">by</span> <span class="n">simp</span>
+              <span class="bp">...</span> <span class="bp">=</span> <span class="bp">|</span><span class="n">a</span> <span class="n">n</span><span class="bp">|</span> <span class="bp">*</span> <span class="bp">|</span><span class="n">b</span> <span class="n">n</span><span class="bp">|</span>  <span class="o">:</span> <span class="n">abs_mul</span> <span class="bp">_</span> <span class="bp">_</span>
+              <span class="bp">...</span> <span class="bp">≤</span> <span class="n">A</span><span class="bp">*|</span><span class="n">b</span> <span class="n">n</span><span class="bp">|</span>        <span class="o">:</span> <span class="n">mul_le_mul_of_nonneg_right</span> <span class="o">(</span><span class="n">hA</span> <span class="n">n</span><span class="o">)</span> <span class="o">(</span><span class="n">abs_nonneg</span> <span class="bp">_</span><span class="o">)</span>
+              <span class="bp">...</span> <span class="bp">&lt;</span> <span class="n">A</span><span class="bp">*</span><span class="n">ε</span>            <span class="o">:</span> <span class="n">mul_lt_mul_of_pos_left</span> <span class="o">(</span><span class="n">H</span> <span class="n">n</span> <span class="n">nN</span><span class="o">)</span> <span class="n">Apos</span>
+<span class="kn">end</span>
+</pre></div>
+
+#### [ Patrick Massot (Jan 29 2019 at 22:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Limits%20of%20product/near/157142448):
+<p>Oh crap, I just noticed I left the <code>Apos</code> assumption that I intended to remove. I don't need it to apply <code>tendsto_of_mul_eps</code> but I need it in the last inequality above</p>
+
+#### [ Patrick Massot (Jan 29 2019 at 23:16)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Limits%20of%20product/near/157143677):
+<p>Anyway, I can still prove the multiplication lemma:</p>
+
+#### [ Patrick Massot (Jan 29 2019 at 23:16)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Limits%20of%20product/near/157143697):
+<div class="codehilite"><pre><span></span><span class="c1">-- The limit of the product is the product of the limits.</span>
+<span class="c1">-- If aₙ → l and bₙ → m then aₙ * bₙ → l * m.</span>
+<span class="kn">theorem</span> <span class="n">tendsto_mul</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">(</span><span class="n">b</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">(</span><span class="n">l</span> <span class="n">m</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">h1</span> <span class="o">:</span> <span class="n">is_limit</span> <span class="n">a</span> <span class="n">l</span><span class="o">)</span> <span class="o">(</span><span class="n">h2</span> <span class="o">:</span> <span class="n">is_limit</span> <span class="n">b</span> <span class="n">m</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">is_limit</span> <span class="o">(</span><span class="n">a</span> <span class="bp">*</span> <span class="n">b</span><span class="o">)</span> <span class="o">(</span><span class="n">l</span> <span class="bp">*</span> <span class="n">m</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="c1">-- We apply the difference criterion so we need to prove a*b - l*m goes to zero</span>
+  <span class="n">rw</span> <span class="err">←</span><span class="n">tendsto_iff_sub_tendsto_zero</span><span class="o">,</span>
+
+  <span class="c1">-- The key idea is to introduce (a_n - l) and (b_n - m) in this difference</span>
+  <span class="k">have</span> <span class="n">key</span> <span class="o">:</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">n</span><span class="o">,</span> <span class="o">(</span><span class="n">a</span><span class="bp">*</span><span class="n">b</span><span class="o">)</span> <span class="n">n</span> <span class="bp">-</span> <span class="n">l</span><span class="bp">*</span><span class="n">m</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">n</span><span class="o">,</span> <span class="o">(</span><span class="n">a</span> <span class="n">n</span><span class="o">)</span><span class="bp">*</span><span class="o">(</span><span class="n">b</span> <span class="n">n</span> <span class="bp">-</span> <span class="n">m</span><span class="o">)</span> <span class="bp">+</span> <span class="n">m</span><span class="bp">*</span><span class="o">(</span><span class="n">a</span> <span class="n">n</span> <span class="bp">-</span> <span class="n">l</span><span class="o">)),</span>
+  <span class="k">by</span> <span class="n">simp</span> <span class="bp">;</span> <span class="n">ring</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="n">key</span><span class="o">,</span>
+
+  <span class="c1">-- By addition of limit, it then suffices to prove a_n * (b_n - m) and m*(a_n - l)</span>
+  <span class="c1">-- both go to zero</span>
+  <span class="n">suffices</span> <span class="o">:</span> <span class="n">is_limit</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">n</span><span class="o">,</span> <span class="n">a</span> <span class="n">n</span> <span class="bp">*</span> <span class="o">(</span><span class="n">b</span> <span class="n">n</span> <span class="bp">-</span> <span class="n">m</span><span class="o">))</span> <span class="mi">0</span> <span class="bp">∧</span> <span class="n">is_limit</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">n</span><span class="o">,</span> <span class="n">m</span> <span class="bp">*</span> <span class="o">(</span><span class="n">a</span> <span class="n">n</span> <span class="bp">-</span> <span class="n">l</span><span class="o">))</span> <span class="mi">0</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">rw</span> <span class="o">[</span><span class="k">show</span> <span class="o">(</span><span class="mi">0</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="bp">=</span> <span class="mi">0</span> <span class="bp">+</span> <span class="mi">0</span><span class="o">,</span> <span class="k">by</span> <span class="n">simp</span><span class="o">],</span>
+    <span class="n">exact</span> <span class="n">tendsto_add</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="n">this</span><span class="bp">.</span><span class="n">left</span> <span class="n">this</span><span class="bp">.</span><span class="n">right</span><span class="o">},</span>
+  <span class="c1">-- Let&#39;s tackle one after the other</span>
+  <span class="n">split</span><span class="o">,</span>
+  <span class="o">{</span> <span class="c1">-- Since a is convergent, it&#39;s bounded by some positive A</span>
+    <span class="n">rcases</span> <span class="n">bounded_pos_of_convergent</span> <span class="n">a</span> <span class="bp">⟨</span><span class="n">l</span><span class="o">,</span> <span class="n">h1</span><span class="bp">⟩</span> <span class="k">with</span> <span class="bp">⟨</span><span class="n">A</span><span class="o">,</span> <span class="n">A_pos</span><span class="o">,</span> <span class="n">hA</span><span class="bp">⟩</span><span class="o">,</span>
+    <span class="c1">-- We can reformulate the b convergence assumption as b_n - m goes to zero.</span>
+    <span class="k">have</span> <span class="n">limb</span> <span class="o">:</span> <span class="n">is_limit</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">n</span><span class="o">,</span> <span class="n">b</span> <span class="n">n</span> <span class="bp">-</span> <span class="n">m</span><span class="o">)</span> <span class="mi">0</span><span class="o">,</span>
+     <span class="k">from</span> <span class="n">tendsto_iff_sub_tendsto_zero</span><span class="bp">.</span><span class="mi">2</span> <span class="n">h2</span><span class="o">,</span>
+    <span class="c1">-- So we can conclude using our lemma about product of a bounded sequence and a</span>
+    <span class="c1">-- sequence converging to zero</span>
+    <span class="n">exact</span> <span class="n">tendsto_bounded_mul_zero</span>  <span class="n">A_pos</span> <span class="n">hA</span> <span class="n">limb</span> <span class="o">},</span>
+  <span class="o">{</span> <span class="c1">-- It remains to prove m * (a_n - l) goes to zero</span>
+    <span class="c1">-- If m = 0 this is obvious.</span>
+    <span class="n">by_cases</span> <span class="n">Hm</span> <span class="o">:</span> <span class="n">m</span> <span class="bp">=</span> <span class="mi">0</span><span class="o">,</span>
+    <span class="o">{</span> <span class="n">simp</span> <span class="o">[</span><span class="n">Hm</span><span class="o">,</span> <span class="n">tendsto_const</span><span class="o">]</span> <span class="o">},</span>
+    <span class="c1">-- Otherwise we follow the same strategy as above.</span>
+    <span class="o">{</span> <span class="c1">-- We reformulate our convergence assumption on a as a_n - l goes to zero</span>
+      <span class="k">have</span> <span class="n">lima</span> <span class="o">:</span> <span class="n">is_limit</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">n</span><span class="o">,</span> <span class="n">a</span> <span class="n">n</span> <span class="bp">-</span> <span class="n">l</span><span class="o">)</span> <span class="mi">0</span><span class="o">,</span>
+        <span class="k">from</span> <span class="n">tendsto_iff_sub_tendsto_zero</span><span class="bp">.</span><span class="mi">2</span> <span class="n">h1</span><span class="o">,</span>
+      <span class="c1">-- and conclude using the same lemma</span>
+      <span class="n">exact</span> <span class="n">tendsto_bounded_mul_zero</span> <span class="o">(</span><span class="n">abs_pos_iff</span><span class="bp">.</span><span class="mi">2</span> <span class="n">Hm</span><span class="o">)</span> <span class="o">(</span><span class="n">has_bound_const</span> <span class="n">m</span><span class="o">)</span> <span class="n">lima</span> <span class="o">}</span> <span class="o">}</span>
+<span class="kn">end</span>
+</pre></div>
+
+#### [ Kevin Buzzard (Jan 29 2019 at 23:17)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Limits%20of%20product/near/157143742):
+<p>I am ultimately envisaging the text looking like LaTeX and you can click on it and open up the Lean.</p>
+
+#### [ Patrick Massot (Jan 29 2019 at 23:18)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Limits%20of%20product/near/157143796):
+<p>How do you like my proofs?</p>
+
+#### [ Kevin Buzzard (Jan 29 2019 at 23:28)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Limits%20of%20product/near/157144479):
+<p>I can only understand them if I look at them in Lean and I'm in the middle of something else right now :-) Nat subtraction :-/</p>
+
+#### [ Patrick Massot (Jan 29 2019 at 23:33)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Limits%20of%20product/near/157144802):
+<p><a href="https://github.com/ImperialCollegeLondon/M1P1-lean/pull/1" target="_blank" title="https://github.com/ImperialCollegeLondon/M1P1-lean/pull/1">https://github.com/ImperialCollegeLondon/M1P1-lean/pull/1</a></p>
+
+#### [ Patrick Massot (Jan 29 2019 at 23:33)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Limits%20of%20product/near/157144814):
+<p>I'm a bit disappointed that you can look at them only in Lean. There are so many comments!</p>
+
+#### [ Kevin Buzzard (Jan 29 2019 at 23:34)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Limits%20of%20product/near/157144882):
+<p>Maybe I mean "I'm sort of focussed on something else"</p>
+
+#### [ Kevin Buzzard (Jan 29 2019 at 23:34)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Limits%20of%20product/near/157144904):
+<p>But I'll certainly look later.</p>
+
+
+{% endraw %}

@@ -12,401 +12,389 @@ permalink: archive/113489newmembers/84538intmod.html
 
 {% raw %}
 #### [ petercommand (Nov 01 2018 at 08:47)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136906477):
-Trying to prove `int.mod (int.of_nat a_1) ↑p < ↑p` in lean, but I wasn't able to unfold int.mod.
+<p>Trying to prove <code>int.mod (int.of_nat a_1) ↑p &lt; ↑p</code> in lean, but I wasn't able to unfold int.mod.</p>
 
 #### [ Mario Carneiro (Nov 01 2018 at 08:48)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136906517):
-there should be a theorem called `int.mod_lt` for this
+<p>there should be a theorem called <code>int.mod_lt</code> for this</p>
 
 #### [ Mario Carneiro (Nov 01 2018 at 08:49)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136906523):
-it is `int.mod_lt_of_pos` and it isn't true when `a_1 = 0`
+<p>it is <code>int.mod_lt_of_pos</code> and it isn't true when <code>a_1 = 0</code></p>
 
 #### [ petercommand (Nov 01 2018 at 08:51)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136906589):
-I can't find int.mod_lt in C-c C-d
+<p>I can't find int.mod_lt in C-c C-d</p>
 
 #### [ petercommand (Nov 01 2018 at 08:52)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136906637):
-There is nat.mod_lt though
+<p>There is nat.mod_lt though</p>
 
 #### [ Johan Commelin (Nov 01 2018 at 08:54)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136906692):
-@**petercommand** Welcome! Can you tell if Mario's suggestion works?
+<p><span class="user-mention" data-user-id="127883">@petercommand</span> Welcome! Can you tell if Mario's suggestion works?</p>
 
 #### [ petercommand (Nov 01 2018 at 08:55)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136906699):
-no
+<p>no</p>
 
 #### [ Johan Commelin (Nov 01 2018 at 08:55)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136906705):
-Ok, can you give a more detailed version of what you want to prove? A "minimal working example" (MWE)
+<p>Ok, can you give a more detailed version of what you want to prove? A "minimal working example" (MWE)</p>
 
 #### [ Johan Commelin (Nov 01 2018 at 08:56)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136906750):
-So something of the form
-```lean
-lemma foobar (p : ??) (a_1 : int) : int.mod (int.of_nat a_1) ↑p < ↑p := sorry
-```
+<p>So something of the form</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">foobar</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="err">??</span><span class="o">)</span> <span class="o">(</span><span class="n">a_1</span> <span class="o">:</span> <span class="n">int</span><span class="o">)</span> <span class="o">:</span> <span class="n">int</span><span class="bp">.</span><span class="n">mod</span> <span class="o">(</span><span class="n">int</span><span class="bp">.</span><span class="n">of_nat</span> <span class="n">a_1</span><span class="o">)</span> <span class="err">↑</span><span class="n">p</span> <span class="bp">&lt;</span> <span class="err">↑</span><span class="n">p</span> <span class="o">:=</span> <span class="n">sorry</span>
+</pre></div>
 
 #### [ petercommand (Nov 01 2018 at 08:58)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136906810):
-`def test : Π (a b : ℤ) (p : ℕ), (a + b) % p < p := sorry `
+<p><code>def test : Π (a b : ℤ) (p : ℕ), (a + b) % p &lt; p := sorry </code></p>
 
 #### [ Johan Commelin (Nov 01 2018 at 09:01)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136906902):
-That isn't true if `p = 0`, right?
+<p>That isn't true if <code>p = 0</code>, right?</p>
 
 #### [ Mario Carneiro (Nov 01 2018 at 09:02)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136906960):
-Do you have mathlib? `int.mod_lt_of_pos` is in `data.int.basic`
+<p>Do you have mathlib? <code>int.mod_lt_of_pos</code> is in <code>data.int.basic</code></p>
 
 #### [ petercommand (Nov 01 2018 at 09:03)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136906989):
-@**Johan Commelin**  ah, it should be `def test : Π (a b : ℤ) (p : ℕ) (p >= 2), (a + b) % p < p := sorry`
+<p><span class="user-mention" data-user-id="112680">@Johan Commelin</span>  ah, it should be <code>def test : Π (a b : ℤ) (p : ℕ) (p &gt;= 2), (a + b) % p &lt; p := sorry</code></p>
 
 #### [ petercommand (Nov 01 2018 at 09:04)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136907038):
-@**Mario Carneiro**  Ah..Thanks! I didn't set up mathlib
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span>  Ah..Thanks! I didn't set up mathlib</p>
 
 #### [ petercommand (Nov 01 2018 at 09:07)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136907099):
-why wasn't I able to unfold `int.mod` though
+<p>why wasn't I able to unfold <code>int.mod</code> though</p>
 
 #### [ Johan Commelin (Nov 01 2018 at 09:12)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136907272):
-I guess it is some sort of inductive definition
+<p>I guess it is some sort of inductive definition</p>
 
 #### [ Kevin Buzzard (Nov 01 2018 at 09:12)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136907273):
-`int` is an inductive type with two constructors. `int.mod` eats an `int`, and how it unfolds depends on which constructor you use -- `int.mod` can't unfold unless it knows which it is.
+<p><code>int</code> is an inductive type with two constructors. <code>int.mod</code> eats an <code>int</code>, and how it unfolds depends on which constructor you use -- <code>int.mod</code> can't unfold unless it knows which it is.</p>
 
 #### [ petercommand (Nov 01 2018 at 09:13)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136907290):
-Which, in `int.of_nat a_1`, is `of_nat`
+<p>Which, in <code>int.of_nat a_1</code>, is <code>of_nat</code></p>
 
 #### [ Kevin Buzzard (Nov 01 2018 at 09:13)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136907291):
-But on the other hand you probably don't want to be unfolding `int.mod`. The devs will have made all the infrastructure you need, at least that's the philosophy.
+<p>But on the other hand you probably don't want to be unfolding <code>int.mod</code>. The devs will have made all the infrastructure you need, at least that's the philosophy.</p>
 
 #### [ petercommand (Nov 01 2018 at 09:13)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136907296):
-True
+<p>True</p>
 
 #### [ Kevin Buzzard (Nov 01 2018 at 09:13)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136907297):
-If you post a MWE I can try to help.
+<p>If you post a MWE I can try to help.</p>
 
 #### [ petercommand (Nov 01 2018 at 09:15)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136907354):
-`def test : Π (a p : ℕ) (p > 0) , int.mod (int.of_nat a) ↑p < ↑p := sorry ` something like this
+<p><code>def test : Π (a p : ℕ) (p &gt; 0) , int.mod (int.of_nat a) ↑p &lt; ↑p := sorry </code> something like this</p>
 
 #### [ petercommand (Nov 01 2018 at 09:16)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136907408):
-Thanks
+<p>Thanks</p>
 
 #### [ petercommand (Nov 01 2018 at 09:17)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136907429):
-My first MWE wasn't clear, this one should be a bit better
+<p>My first MWE wasn't clear, this one should be a bit better</p>
 
 #### [ Kevin Buzzard (Nov 01 2018 at 09:18)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136907479):
-the answer appears to be that the exact definition of `int.mod` uses `↑a` instead of `int.of_nat a`
+<p>the answer appears to be that the exact definition of <code>int.mod</code> uses <code>↑a</code> instead of <code>int.of_nat a</code></p>
 
 #### [ Kevin Buzzard (Nov 01 2018 at 09:19)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136907498):
-```lean
-def test : Π (a p : ℕ) (p > 0) , int.mod (int.of_nat a) ↑p < ↑p := 
-begin
---  unfold int.mod, -- fails
-  change Π (a p : ℕ) (p > 0), int.mod (a : ℕ) ↑p < ↑p,
-  unfold int.mod,
-  sorry
-end
-```
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">test</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">(</span><span class="n">a</span> <span class="n">p</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">p</span> <span class="bp">&gt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">,</span> <span class="n">int</span><span class="bp">.</span><span class="n">mod</span> <span class="o">(</span><span class="n">int</span><span class="bp">.</span><span class="n">of_nat</span> <span class="n">a</span><span class="o">)</span> <span class="err">↑</span><span class="n">p</span> <span class="bp">&lt;</span> <span class="err">↑</span><span class="n">p</span> <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="c1">--  unfold int.mod, -- fails</span>
+  <span class="n">change</span> <span class="bp">Π</span> <span class="o">(</span><span class="n">a</span> <span class="n">p</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">p</span> <span class="bp">&gt;</span> <span class="mi">0</span><span class="o">),</span> <span class="n">int</span><span class="bp">.</span><span class="n">mod</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="err">↑</span><span class="n">p</span> <span class="bp">&lt;</span> <span class="err">↑</span><span class="n">p</span><span class="o">,</span>
+  <span class="n">unfold</span> <span class="n">int</span><span class="bp">.</span><span class="n">mod</span><span class="o">,</span>
+  <span class="n">sorry</span>
+<span class="kn">end</span>
+</pre></div>
 
 #### [ Kevin Buzzard (Nov 01 2018 at 09:19)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136907500):
-All the more reason why you shouldn't be unfolding it ;-)
+<p>All the more reason why you shouldn't be unfolding it ;-)</p>
 
 #### [ Kevin Buzzard (Nov 01 2018 at 09:21)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136907578):
-I just wrote `#check int.mod` and then right clicked on `int.mod` and peeked the actual definition.
+<p>I just wrote <code>#check int.mod</code> and then right clicked on <code>int.mod</code> and peeked the actual definition.</p>
 
 #### [ Kevin Buzzard (Nov 01 2018 at 09:23)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136907650):
-Of course the two things are definitionally equal: `example (a : ℕ) : int.of_nat a = ↑a := rfl `
+<p>Of course the two things are definitionally equal: <code>example (a : ℕ) : int.of_nat a = ↑a := rfl </code></p>
 
 #### [ Kevin Buzzard (Nov 01 2018 at 09:23)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136907654):
-But under the hood `unfold` is using `simp`, and I think `simp` can be fussy about not changing things to definitionally equal things.
+<p>But under the hood <code>unfold</code> is using <code>simp</code>, and I think <code>simp</code> can be fussy about not changing things to definitionally equal things.</p>
 
 #### [ Kevin Buzzard (Nov 01 2018 at 09:23)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136907658):
-Well, that's my amateur diagnosis anyway.
+<p>Well, that's my amateur diagnosis anyway.</p>
 
 #### [ Kenny Lau (Nov 01 2018 at 09:26)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136907777):
-```lean
-def test (a b : ℤ) (p : ℕ) (Hp : p ≥ 2) : (a + b) % p < p :=
-match a+b with
-| (n:ℕ) := show ↑(n%p:ℕ) < (p:ℤ), from int.coe_nat_lt_coe_nat_of_lt
-    (nat.mod_lt _ (lt_of_le_of_lt dec_trivial Hp))
-| -[1+ n] := show ↑p + -[1+ n%p] < ↑p, from add_lt_of_le_of_neg
-    (le_refl p) (int.neg_succ_lt_zero (n%p))
-end
-
-```
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">test</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">Hp</span> <span class="o">:</span> <span class="n">p</span> <span class="bp">≥</span> <span class="mi">2</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">a</span> <span class="bp">+</span> <span class="n">b</span><span class="o">)</span> <span class="err">%</span> <span class="n">p</span> <span class="bp">&lt;</span> <span class="n">p</span> <span class="o">:=</span>
+<span class="k">match</span> <span class="n">a</span><span class="bp">+</span><span class="n">b</span> <span class="k">with</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">n</span><span class="o">:</span><span class="bp">ℕ</span><span class="o">)</span> <span class="o">:=</span> <span class="k">show</span> <span class="err">↑</span><span class="o">(</span><span class="n">n</span><span class="err">%</span><span class="n">p</span><span class="o">:</span><span class="bp">ℕ</span><span class="o">)</span> <span class="bp">&lt;</span> <span class="o">(</span><span class="n">p</span><span class="o">:</span><span class="bp">ℤ</span><span class="o">),</span> <span class="k">from</span> <span class="n">int</span><span class="bp">.</span><span class="n">coe_nat_lt_coe_nat_of_lt</span>
+    <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">mod_lt</span> <span class="bp">_</span> <span class="o">(</span><span class="n">lt_of_le_of_lt</span> <span class="n">dec_trivial</span> <span class="n">Hp</span><span class="o">))</span>
+<span class="bp">|</span> <span class="bp">-</span><span class="o">[</span><span class="mi">1</span><span class="bp">+</span> <span class="n">n</span><span class="o">]</span> <span class="o">:=</span> <span class="k">show</span> <span class="err">↑</span><span class="n">p</span> <span class="bp">+</span> <span class="bp">-</span><span class="o">[</span><span class="mi">1</span><span class="bp">+</span> <span class="n">n</span><span class="err">%</span><span class="n">p</span><span class="o">]</span> <span class="bp">&lt;</span> <span class="err">↑</span><span class="n">p</span><span class="o">,</span> <span class="k">from</span> <span class="n">add_lt_of_le_of_neg</span>
+    <span class="o">(</span><span class="n">le_refl</span> <span class="n">p</span><span class="o">)</span> <span class="o">(</span><span class="n">int</span><span class="bp">.</span><span class="n">neg_succ_lt_zero</span> <span class="o">(</span><span class="n">n</span><span class="err">%</span><span class="n">p</span><span class="o">))</span>
+<span class="kn">end</span>
+</pre></div>
 
 #### [ Kevin Buzzard (Nov 01 2018 at 09:27)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136907786):
-A side comment -- I think `test` is not quite what you want to prove (AFK)
+<p>A side comment -- I think <code>test</code> is not quite what you want to prove (AFK)</p>
 
 #### [ Kenny Lau (Nov 01 2018 at 09:27)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136907800):
-```lean
-def test (a b : ℤ) (p : ℕ) (Hp : p > 0) : (a + b) % p < p :=
-match a+b with
-| (n:ℕ) := show ↑(n%p:ℕ) < (p:ℤ), from int.coe_nat_lt_coe_nat_of_lt (nat.mod_lt _ Hp)
-| -[1+ n] := show ↑p + -[1+ n%p] < ↑p, from add_lt_of_le_of_neg
-    (le_refl p) (int.neg_succ_lt_zero (n%p))
-end
-```
-(I just noticed that you changed the condition again)
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">test</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">Hp</span> <span class="o">:</span> <span class="n">p</span> <span class="bp">&gt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">a</span> <span class="bp">+</span> <span class="n">b</span><span class="o">)</span> <span class="err">%</span> <span class="n">p</span> <span class="bp">&lt;</span> <span class="n">p</span> <span class="o">:=</span>
+<span class="k">match</span> <span class="n">a</span><span class="bp">+</span><span class="n">b</span> <span class="k">with</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">n</span><span class="o">:</span><span class="bp">ℕ</span><span class="o">)</span> <span class="o">:=</span> <span class="k">show</span> <span class="err">↑</span><span class="o">(</span><span class="n">n</span><span class="err">%</span><span class="n">p</span><span class="o">:</span><span class="bp">ℕ</span><span class="o">)</span> <span class="bp">&lt;</span> <span class="o">(</span><span class="n">p</span><span class="o">:</span><span class="bp">ℤ</span><span class="o">),</span> <span class="k">from</span> <span class="n">int</span><span class="bp">.</span><span class="n">coe_nat_lt_coe_nat_of_lt</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">mod_lt</span> <span class="bp">_</span> <span class="n">Hp</span><span class="o">)</span>
+<span class="bp">|</span> <span class="bp">-</span><span class="o">[</span><span class="mi">1</span><span class="bp">+</span> <span class="n">n</span><span class="o">]</span> <span class="o">:=</span> <span class="k">show</span> <span class="err">↑</span><span class="n">p</span> <span class="bp">+</span> <span class="bp">-</span><span class="o">[</span><span class="mi">1</span><span class="bp">+</span> <span class="n">n</span><span class="err">%</span><span class="n">p</span><span class="o">]</span> <span class="bp">&lt;</span> <span class="err">↑</span><span class="n">p</span><span class="o">,</span> <span class="k">from</span> <span class="n">add_lt_of_le_of_neg</span>
+    <span class="o">(</span><span class="n">le_refl</span> <span class="n">p</span><span class="o">)</span> <span class="o">(</span><span class="n">int</span><span class="bp">.</span><span class="n">neg_succ_lt_zero</span> <span class="o">(</span><span class="n">n</span><span class="err">%</span><span class="n">p</span><span class="o">))</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>(I just noticed that you changed the condition again)</p>
 
 #### [ petercommand (Nov 01 2018 at 09:29)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136907877):
-hmm, this is quite annoying..I thought `int.mod` was directly matching on the constructor
+<p>hmm, this is quite annoying..I thought <code>int.mod</code> was directly matching on the constructor</p>
 
 #### [ petercommand (Nov 01 2018 at 09:30)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136907942):
-@**Kenny Lau** thanks
+<p><span class="user-mention" data-user-id="110064">@Kenny Lau</span> thanks</p>
 
 #### [ Kenny Lau (Nov 01 2018 at 09:31)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136907960):
-```lean
-def test (a b : ℤ) (p : ℕ) (Hp : p > 0) : (a + b) % p < p :=
-match a+b with
-| (n:ℕ) := show ↑(n%p:ℕ) < (p:ℤ), from int.coe_nat_lt_coe_nat_of_lt (nat.mod_lt _ Hp)
-| -[1+ n] := show ↑p + -[1+ n%p] < ↑p, from int.lt.intro (neg_add_cancel_right (p:ℤ) (n%p+1))
-end
-```
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">test</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">Hp</span> <span class="o">:</span> <span class="n">p</span> <span class="bp">&gt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">a</span> <span class="bp">+</span> <span class="n">b</span><span class="o">)</span> <span class="err">%</span> <span class="n">p</span> <span class="bp">&lt;</span> <span class="n">p</span> <span class="o">:=</span>
+<span class="k">match</span> <span class="n">a</span><span class="bp">+</span><span class="n">b</span> <span class="k">with</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">n</span><span class="o">:</span><span class="bp">ℕ</span><span class="o">)</span> <span class="o">:=</span> <span class="k">show</span> <span class="err">↑</span><span class="o">(</span><span class="n">n</span><span class="err">%</span><span class="n">p</span><span class="o">:</span><span class="bp">ℕ</span><span class="o">)</span> <span class="bp">&lt;</span> <span class="o">(</span><span class="n">p</span><span class="o">:</span><span class="bp">ℤ</span><span class="o">),</span> <span class="k">from</span> <span class="n">int</span><span class="bp">.</span><span class="n">coe_nat_lt_coe_nat_of_lt</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">mod_lt</span> <span class="bp">_</span> <span class="n">Hp</span><span class="o">)</span>
+<span class="bp">|</span> <span class="bp">-</span><span class="o">[</span><span class="mi">1</span><span class="bp">+</span> <span class="n">n</span><span class="o">]</span> <span class="o">:=</span> <span class="k">show</span> <span class="err">↑</span><span class="n">p</span> <span class="bp">+</span> <span class="bp">-</span><span class="o">[</span><span class="mi">1</span><span class="bp">+</span> <span class="n">n</span><span class="err">%</span><span class="n">p</span><span class="o">]</span> <span class="bp">&lt;</span> <span class="err">↑</span><span class="n">p</span><span class="o">,</span> <span class="k">from</span> <span class="n">int</span><span class="bp">.</span><span class="n">lt</span><span class="bp">.</span><span class="n">intro</span> <span class="o">(</span><span class="n">neg_add_cancel_right</span> <span class="o">(</span><span class="n">p</span><span class="o">:</span><span class="bp">ℤ</span><span class="o">)</span> <span class="o">(</span><span class="n">n</span><span class="err">%</span><span class="n">p</span><span class="bp">+</span><span class="mi">1</span><span class="o">))</span>
+<span class="kn">end</span>
+</pre></div>
 
 #### [ Kenny Lau (Nov 01 2018 at 09:31)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136907961):
-it is
+<p>it is</p>
 
 #### [ Kenny Lau (Nov 01 2018 at 09:31)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136907966):
-oh, and it isn't `def`
+<p>oh, and it isn't <code>def</code></p>
 
 #### [ Kenny Lau (Nov 01 2018 at 09:31)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136907967):
-it's `theorem`
+<p>it's <code>theorem</code></p>
 
 #### [ Kenny Lau (Nov 01 2018 at 09:32)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908008):
-```lean
-theorem test (a b : ℤ) (p : ℕ) (Hp : p > 0) : (a + b) % p < p :=
-match a+b with
-| (n:ℕ) := show ↑(n%p:ℕ) < (p:ℤ), from int.coe_nat_lt_coe_nat_of_lt (nat.mod_lt _ Hp)
-| -[1+ n] := show ↑p + -[1+ n%p] < ↑p, from int.lt.intro (neg_add_cancel_right (p:ℤ) (n%p+1))
-end
-```
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">test</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">Hp</span> <span class="o">:</span> <span class="n">p</span> <span class="bp">&gt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">a</span> <span class="bp">+</span> <span class="n">b</span><span class="o">)</span> <span class="err">%</span> <span class="n">p</span> <span class="bp">&lt;</span> <span class="n">p</span> <span class="o">:=</span>
+<span class="k">match</span> <span class="n">a</span><span class="bp">+</span><span class="n">b</span> <span class="k">with</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">n</span><span class="o">:</span><span class="bp">ℕ</span><span class="o">)</span> <span class="o">:=</span> <span class="k">show</span> <span class="err">↑</span><span class="o">(</span><span class="n">n</span><span class="err">%</span><span class="n">p</span><span class="o">:</span><span class="bp">ℕ</span><span class="o">)</span> <span class="bp">&lt;</span> <span class="o">(</span><span class="n">p</span><span class="o">:</span><span class="bp">ℤ</span><span class="o">),</span> <span class="k">from</span> <span class="n">int</span><span class="bp">.</span><span class="n">coe_nat_lt_coe_nat_of_lt</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">mod_lt</span> <span class="bp">_</span> <span class="n">Hp</span><span class="o">)</span>
+<span class="bp">|</span> <span class="bp">-</span><span class="o">[</span><span class="mi">1</span><span class="bp">+</span> <span class="n">n</span><span class="o">]</span> <span class="o">:=</span> <span class="k">show</span> <span class="err">↑</span><span class="n">p</span> <span class="bp">+</span> <span class="bp">-</span><span class="o">[</span><span class="mi">1</span><span class="bp">+</span> <span class="n">n</span><span class="err">%</span><span class="n">p</span><span class="o">]</span> <span class="bp">&lt;</span> <span class="err">↑</span><span class="n">p</span><span class="o">,</span> <span class="k">from</span> <span class="n">int</span><span class="bp">.</span><span class="n">lt</span><span class="bp">.</span><span class="n">intro</span> <span class="o">(</span><span class="n">neg_add_cancel_right</span> <span class="o">(</span><span class="n">p</span><span class="o">:</span><span class="bp">ℤ</span><span class="o">)</span> <span class="o">(</span><span class="n">n</span><span class="err">%</span><span class="n">p</span><span class="bp">+</span><span class="mi">1</span><span class="o">))</span>
+<span class="kn">end</span>
+</pre></div>
 
 #### [ petercommand (Nov 01 2018 at 09:32)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908019):
-aren't they synonyms?
+<p>aren't they synonyms?</p>
 
 #### [ Kenny Lau (Nov 01 2018 at 09:32)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908020):
-no
+<p>no</p>
 
 #### [ petercommand (Nov 01 2018 at 09:33)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908028):
-what's different between def and thoerem?
+<p>what's different between def and thoerem?</p>
 
 #### [ Kenny Lau (Nov 01 2018 at 09:33)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908031):
-def is data
+<p>def is data</p>
 
 #### [ Kenny Lau (Nov 01 2018 at 09:33)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908032):
-theorem is proof
+<p>theorem is proof</p>
 
 #### [ petercommand (Nov 01 2018 at 09:34)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908082):
-I mean, semantically, are they different?
+<p>I mean, semantically, are they different?</p>
 
 #### [ Kenny Lau (Nov 01 2018 at 09:34)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908095):
-yes
+<p>yes</p>
 
 #### [ petercommand (Nov 01 2018 at 09:35)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908114):
-proof irrelevance?
+<p>proof irrelevance?</p>
 
 #### [ petercommand (Nov 01 2018 at 09:36)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908179):
-https://leanprover.github.io/theorem_proving_in_lean/propositions_and_proofs.html
-Ah, it says that 
-`by proof irrelevance, any two proofs of that theorem are definitionally equal.`
+<p><a href="https://leanprover.github.io/theorem_proving_in_lean/propositions_and_proofs.html" target="_blank" title="https://leanprover.github.io/theorem_proving_in_lean/propositions_and_proofs.html">https://leanprover.github.io/theorem_proving_in_lean/propositions_and_proofs.html</a><br>
+Ah, it says that <br>
+<code>by proof irrelevance, any two proofs of that theorem are definitionally equal.</code></p>
 
 #### [ Kenny Lau (Nov 01 2018 at 09:36)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908184):
-```lean
-theorem x : nat := 5
-def test : x=5 := sorry
-```
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">x</span> <span class="o">:</span> <span class="n">nat</span> <span class="o">:=</span> <span class="mi">5</span>
+<span class="n">def</span> <span class="n">test</span> <span class="o">:</span> <span class="n">x</span><span class="bp">=</span><span class="mi">5</span> <span class="o">:=</span> <span class="n">sorry</span>
+</pre></div>
 
 #### [ Kenny Lau (Nov 01 2018 at 09:36)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908186):
-```quote
-https://leanprover.github.io/theorem_proving_in_lean/propositions_and_proofs.html
-Ah, it says that 
-`by proof irrelevance, any two proofs of that theorem are definitionally equal.`
-```
-that's irrelevant
+<blockquote>
+<p><a href="https://leanprover.github.io/theorem_proving_in_lean/propositions_and_proofs.html" target="_blank" title="https://leanprover.github.io/theorem_proving_in_lean/propositions_and_proofs.html">https://leanprover.github.io/theorem_proving_in_lean/propositions_and_proofs.html</a><br>
+Ah, it says that <br>
+<code>by proof irrelevance, any two proofs of that theorem are definitionally equal.</code></p>
+</blockquote>
+<p>that's irrelevant</p>
 
 #### [ Kevin Buzzard (Nov 01 2018 at 09:37)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908209):
-Kenny, independent of that def/theorem business, what's happening below? @**petercommand** 's original formulation of the MWE has something wrong with it I think:
-
-```lean
-def test : Π (a p : ℕ) (p > 0) , int.mod (int.of_nat a) ↑p < ↑p := 
-begin
-  intro a,
-  intro b, -- ??
-  intro p,
-  intro HP,
-  -- ⊢ int.mod (int.of_nat a) ↑p < ↑p
-  sorry
-end
-```
+<p>Kenny, independent of that def/theorem business, what's happening below? <span class="user-mention" data-user-id="127883">@petercommand</span> 's original formulation of the MWE has something wrong with it I think:</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">test</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">(</span><span class="n">a</span> <span class="n">p</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">p</span> <span class="bp">&gt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">,</span> <span class="n">int</span><span class="bp">.</span><span class="n">mod</span> <span class="o">(</span><span class="n">int</span><span class="bp">.</span><span class="n">of_nat</span> <span class="n">a</span><span class="o">)</span> <span class="err">↑</span><span class="n">p</span> <span class="bp">&lt;</span> <span class="err">↑</span><span class="n">p</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">intro</span> <span class="n">a</span><span class="o">,</span>
+  <span class="n">intro</span> <span class="n">b</span><span class="o">,</span> <span class="c1">-- ??</span>
+  <span class="n">intro</span> <span class="n">p</span><span class="o">,</span>
+  <span class="n">intro</span> <span class="n">HP</span><span class="o">,</span>
+  <span class="c1">-- ⊢ int.mod (int.of_nat a) ↑p &lt; ↑p</span>
+  <span class="n">sorry</span>
+<span class="kn">end</span>
+</pre></div>
 
 #### [ Kenny Lau (Nov 01 2018 at 09:38)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908253):
-```lean
-def test : 5=5 := rfl
-#print prefix test
-/-
-test : 5 = 5
-test.equations._eqn_1 : test = rfl
--/
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">test</span> <span class="o">:</span> <span class="mi">5</span><span class="bp">=</span><span class="mi">5</span> <span class="o">:=</span> <span class="n">rfl</span>
+<span class="bp">#</span><span class="kn">print</span> <span class="kn">prefix</span> <span class="n">test</span>
+<span class="c">/-</span><span class="cm"></span>
+<span class="cm">test : 5 = 5</span>
+<span class="cm">test.equations._eqn_1 : test = rfl</span>
+<span class="cm">-/</span>
 
-theorem test2 : 5=5 := rfl
-#print prefix test2
-/-
-test2 : 5 = 5
--/
-```
+<span class="kn">theorem</span> <span class="n">test2</span> <span class="o">:</span> <span class="mi">5</span><span class="bp">=</span><span class="mi">5</span> <span class="o">:=</span> <span class="n">rfl</span>
+<span class="bp">#</span><span class="kn">print</span> <span class="kn">prefix</span> <span class="n">test2</span>
+<span class="c">/-</span><span class="cm"></span>
+<span class="cm">test2 : 5 = 5</span>
+<span class="cm">-/</span>
+</pre></div>
 
 #### [ Kenny Lau (Nov 01 2018 at 09:39)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908274):
-@**Kevin Buzzard** lol the conditions keep changing
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> lol the conditions keep changing</p>
 
 #### [ Kevin Buzzard (Nov 01 2018 at 09:39)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908278):
-I think the `p` in `forall p` isn't the same as the `p` in `p > 0`.
+<p>I think the <code>p</code> in <code>forall p</code> isn't the same as the <code>p</code> in <code>p &gt; 0</code>.</p>
 
 #### [ Kenny Lau (Nov 01 2018 at 09:39)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908282):
-@**petercommand** can you make up your mind?
+<p><span class="user-mention" data-user-id="127883">@petercommand</span> can you make up your mind?</p>
 
 #### [ Kevin Buzzard (Nov 01 2018 at 09:39)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908284):
-I never changed anything, I just copied his MWE.
+<p>I never changed anything, I just copied his MWE.</p>
 
 #### [ Kenny Lau (Nov 01 2018 at 09:39)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908289):
-```quote
-I think the `p` in `forall p` isn't the same as the `p` in `p > 0`.
-```
-I think it's the same
+<blockquote>
+<p>I think the <code>p</code> in <code>forall p</code> isn't the same as the <code>p</code> in <code>p &gt; 0</code>.</p>
+</blockquote>
+<p>I think it's the same</p>
 
 #### [ Kevin Buzzard (Nov 01 2018 at 09:40)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908332):
-Did you look at my tactic mode post?
+<p>Did you look at my tactic mode post?</p>
 
 #### [ Kevin Buzzard (Nov 01 2018 at 09:40)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908334):
-There's an extra nat
+<p>There's an extra nat</p>
 
 #### [ Kevin Buzzard (Nov 01 2018 at 09:40)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908337):
-`-- ??`
+<p><code>-- ??</code></p>
 
 #### [ Kenny Lau (Nov 01 2018 at 09:40)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908349):
-I don't know why you have 4 `intro`s
+<p>I don't know why you have 4 <code>intro</code>s</p>
 
 #### [ Kevin Buzzard (Nov 01 2018 at 09:40)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908354):
-because Lean is asking for 4. That's the point I'm trying to make
+<p>because Lean is asking for 4. That's the point I'm trying to make</p>
 
 #### [ Kenny Lau (Nov 01 2018 at 09:41)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908359):
-what do you mean Lean is asking for 4
+<p>what do you mean Lean is asking for 4</p>
 
 #### [ Kevin Buzzard (Nov 01 2018 at 09:41)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908366):
-What do you mean? The function wants 4 inputs
+<p>What do you mean? The function wants 4 inputs</p>
 
 #### [ Kenny Lau (Nov 01 2018 at 09:41)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908367):
-that's spooky
+<p>that's spooky</p>
 
 #### [ Kevin Buzzard (Nov 01 2018 at 09:41)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908369):
-Must be Halloween.
+<p>Must be Halloween.</p>
 
 #### [ Kenny Lau (Nov 01 2018 at 09:42)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908412):
-oh!
+<p>oh!</p>
 
 #### [ petercommand (Nov 01 2018 at 09:42)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908413):
-o.o
+<p>o.o</p>
 
 #### [ Kenny Lau (Nov 01 2018 at 09:42)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908420):
-lol
+<p>lol</p>
 
 #### [ Kenny Lau (Nov 01 2018 at 09:42)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908427):
-```lean
-theorem test : Π (a : ℕ) (p > 0) , int.mod (int.of_nat a) ↑p < ↑p :=
-```
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">test</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">p</span> <span class="bp">&gt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">,</span> <span class="n">int</span><span class="bp">.</span><span class="n">mod</span> <span class="o">(</span><span class="n">int</span><span class="bp">.</span><span class="n">of_nat</span> <span class="n">a</span><span class="o">)</span> <span class="err">↑</span><span class="n">p</span> <span class="bp">&lt;</span> <span class="err">↑</span><span class="n">p</span> <span class="o">:=</span>
+</pre></div>
 
 #### [ Kenny Lau (Nov 01 2018 at 09:42)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908428):
-`>` is a binder or something
+<p><code>&gt;</code> is a binder or something</p>
 
 #### [ Kevin Buzzard (Nov 01 2018 at 09:43)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908432):
-right
+<p>right</p>
 
 #### [ Kevin Buzzard (Nov 01 2018 at 09:44)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908489):
-@**petercommand** this is fine: `theorem test : ∀ (a p : ℕ), (p > 0) → int.mod (int.of_nat a) ↑p < ↑p :=`
+<p><span class="user-mention" data-user-id="127883">@petercommand</span> this is fine: <code>theorem test : ∀ (a p : ℕ), (p &gt; 0) → int.mod (int.of_nat a) ↑p &lt; ↑p :=</code></p>
 
 #### [ Kevin Buzzard (Nov 01 2018 at 09:44)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908504):
-but `(p > 0)` before the comma gets interpreted as "and there's another variable p, different to the p you just mentioned"
+<p>but <code>(p &gt; 0)</code> before the comma gets interpreted as "and there's another variable p, different to the p you just mentioned"</p>
 
 #### [ Kenny Lau (Nov 01 2018 at 09:45)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908516):
-I don't think @**petercommand** has tested his "MWE" before posting
+<p>I don't think <span class="user-mention" data-user-id="127883">@petercommand</span> has tested his "MWE" before posting</p>
 
 #### [ Kevin Buzzard (Nov 01 2018 at 09:45)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908518):
-`def test' : Π (a : ℕ) (p > 0) , int.mod (int.of_nat a) ↑p < ↑p := ` is OK
+<p><code>def test' : Π (a : ℕ) (p &gt; 0) , int.mod (int.of_nat a) ↑p &lt; ↑p := </code> is OK</p>
 
 #### [ Kevin Buzzard (Nov 01 2018 at 09:45)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908521):
-I just made it a bit more minimal, that's all ;-)
+<p>I just made it a bit more minimal, that's all ;-)</p>
 
 #### [ petercommand (Nov 01 2018 at 09:46)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908569):
-```quote
-I don't think @**petercommand** has tested his "MWE" before posting
-```
-Yeah, I should've tested the MWEs o.o Thought that was simple enough
+<blockquote>
+<p>I don't think <span class="user-mention" data-user-id="127883">@petercommand</span> has tested his "MWE" before posting</p>
+</blockquote>
+<p>Yeah, I should've tested the MWEs o.o Thought that was simple enough</p>
 
 #### [ Kenny Lau (Nov 01 2018 at 09:46)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908575):
-```lean
-theorem test' (a : ℕ) (p > 0) : int.mod (int.of_nat a) ↑p < ↑p :=
-int.coe_nat_lt_coe_nat_of_lt (nat.mod_lt _ H)
-```
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">test&#39;</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">p</span> <span class="bp">&gt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">:</span> <span class="n">int</span><span class="bp">.</span><span class="n">mod</span> <span class="o">(</span><span class="n">int</span><span class="bp">.</span><span class="n">of_nat</span> <span class="n">a</span><span class="o">)</span> <span class="err">↑</span><span class="n">p</span> <span class="bp">&lt;</span> <span class="err">↑</span><span class="n">p</span> <span class="o">:=</span>
+<span class="n">int</span><span class="bp">.</span><span class="n">coe_nat_lt_coe_nat_of_lt</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">mod_lt</span> <span class="bp">_</span> <span class="n">H</span><span class="o">)</span>
+</pre></div>
 
 #### [ petercommand (Nov 01 2018 at 09:48)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908636):
-Hmm, actually, I tested the MWEs, but didn't discover that I got one more variable
+<p>Hmm, actually, I tested the MWEs, but didn't discover that I got one more variable</p>
 
 #### [ petercommand (Nov 01 2018 at 09:48)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908637):
-anyway
+<p>anyway</p>
 
 #### [ Kevin Buzzard (Nov 01 2018 at 09:54)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908828):
-```lean
-import data.int.basic
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">int</span><span class="bp">.</span><span class="n">basic</span>
 
-theorem test' (a p : ℕ) (H : p > 0) : int.mod (int.of_nat a) ↑p < ↑p :=
-int.mod_lt_of_pos a (int.coe_nat_lt_coe_nat_of_lt H)
-```
+<span class="kn">theorem</span> <span class="n">test&#39;</span> <span class="o">(</span><span class="n">a</span> <span class="n">p</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="n">p</span> <span class="bp">&gt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">:</span> <span class="n">int</span><span class="bp">.</span><span class="n">mod</span> <span class="o">(</span><span class="n">int</span><span class="bp">.</span><span class="n">of_nat</span> <span class="n">a</span><span class="o">)</span> <span class="err">↑</span><span class="n">p</span> <span class="bp">&lt;</span> <span class="err">↑</span><span class="n">p</span> <span class="o">:=</span>
+<span class="n">int</span><span class="bp">.</span><span class="n">mod_lt_of_pos</span> <span class="n">a</span> <span class="o">(</span><span class="n">int</span><span class="bp">.</span><span class="n">coe_nat_lt_coe_nat_of_lt</span> <span class="n">H</span><span class="o">)</span>
+</pre></div>
 
 #### [ AHan (Nov 01 2018 at 09:54)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908830):
-@**Kenny Lau**  About the difference between "def" and "theorem", why is there test.eqations._eqn_1 appeared in your example
-`def test : 5=5 := rfl
-#print prefix test`
+<p><span class="user-mention" data-user-id="110064">@Kenny Lau</span>  About the difference between "def" and "theorem", why is there test.eqations._eqn_1 appeared in your example<br>
+<code>def test : 5=5 := rfl
+#print prefix test</code></p>
 
 #### [ Kevin Buzzard (Nov 01 2018 at 09:54)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908835):
-because Kenny (intentionally) wrote bad code
+<p>because Kenny (intentionally) wrote bad code</p>
 
 #### [ Kenny Lau (Nov 01 2018 at 09:55)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908842):
-because `test` is now a definition so it has definitional equations
+<p>because <code>test</code> is now a definition so it has definitional equations</p>
 
 #### [ Kenny Lau (Nov 01 2018 at 09:55)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908844):
-just write any old definition
+<p>just write any old definition</p>
 
 #### [ Kevin Buzzard (Nov 01 2018 at 09:55)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908846):
-If you use def instead of theorem or theorem instead of def, expect random things
+<p>If you use def instead of theorem or theorem instead of def, expect random things</p>
 
 #### [ Kevin Buzzard (Nov 01 2018 at 09:55)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908858):
-because they were not designed to be used in these circumstances
+<p>because they were not designed to be used in these circumstances</p>
 
 #### [ Kenny Lau (Nov 01 2018 at 09:56)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908901):
-undocumented behaviour... lul
+<p>undocumented behaviour... lul</p>
 
 #### [ Kevin Buzzard (Nov 01 2018 at 09:56)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908906):
-I think "garbage in, garbage out" is well documented in the literature
+<p>I think "garbage in, garbage out" is well documented in the literature</p>
 
 #### [ AHan (Nov 01 2018 at 09:58)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136908975):
-What does the definitional equations refers to here?
-And how to use it in a normal def?
+<p>What does the definitional equations refers to here?<br>
+And how to use it in a normal def?</p>
 
 #### [ Kenny Lau (Nov 01 2018 at 10:00)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136909036):
-you don't really use it
+<p>you don't really use it</p>
 
 #### [ Kenny Lau (Nov 01 2018 at 10:00)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136909041):
-it's internal mechanism
+<p>it's internal mechanism</p>
 
 #### [ Kevin Buzzard (Nov 01 2018 at 10:00)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136909042):
-Every time you make a definition (especially a nice complicated one, maybe with pattern matching) Lean creates some secret "equation lemmas"
+<p>Every time you make a definition (especially a nice complicated one, maybe with pattern matching) Lean creates some secret "equation lemmas"</p>
 
 #### [ Kevin Buzzard (Nov 01 2018 at 10:00)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136909043):
-and when you try and unfold the definition, Lean uses these lemmas
+<p>and when you try and unfold the definition, Lean uses these lemmas</p>
 
 #### [ Kevin Buzzard (Nov 01 2018 at 10:01)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136909058):
-As Kenny says, this is all done internally and the user is not supposed to have to worry about it. It's basically the trick which makes "unfold" work.
+<p>As Kenny says, this is all done internally and the user is not supposed to have to worry about it. It's basically the trick which makes "unfold" work.</p>
 
 #### [ Kevin Buzzard (Nov 01 2018 at 10:01)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136909070):
-`unfold X` is `simp only [equation lemmas for X]`
+<p><code>unfold X</code> is <code>simp only [equation lemmas for X]</code></p>
 
 #### [ Kevin Buzzard (Nov 01 2018 at 10:02)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136909131):
-(this is my slightly amateurish understanding of it -- I am a mathematician so shouldn't really be talking about implementation issues)
+<p>(this is my slightly amateurish understanding of it -- I am a mathematician so shouldn't really be talking about implementation issues)</p>
 
 #### [ AHan (Nov 01 2018 at 10:03)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136909163):
-Are they the beta reduction rules?
+<p>Are they the beta reduction rules?</p>
 
 
 {% endraw %}

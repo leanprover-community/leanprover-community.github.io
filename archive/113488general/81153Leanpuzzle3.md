@@ -12,65 +12,64 @@ permalink: archive/113488general/81153Leanpuzzle3.html
 
 {% raw %}
 #### [ Keeley Hoek (Nov 27 2018 at 09:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20puzzle%20%233/near/148625272):
-Next up in my series of lean puzzles, consider the following code snippet:
-````lean
-universe u
+<p>Next up in my series of lean puzzles, consider the following code snippet:</p>
+<div class="codehilite"><pre><span></span><span class="kn">universe</span> <span class="n">u</span>
 
-meta def do_some_nonsense {α : Type u} (t : tactic α) : tactic α :=
-  tactic.down (tactic.up (tactic.trace "ELLO1") >> tactic.up t)
+<span class="n">meta</span> <span class="n">def</span> <span class="n">do_some_nonsense</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">(</span><span class="n">t</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">α</span> <span class="o">:=</span>
+  <span class="n">tactic</span><span class="bp">.</span><span class="n">down</span> <span class="o">(</span><span class="n">tactic</span><span class="bp">.</span><span class="n">up</span> <span class="o">(</span><span class="n">tactic</span><span class="bp">.</span><span class="n">trace</span> <span class="s2">&quot;ELLO1&quot;</span><span class="o">)</span> <span class="bp">&gt;&gt;</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">up</span> <span class="n">t</span><span class="o">)</span>
 
-meta def do_some_nonsense' {α : Type u} (t : tactic α) : tactic α :=
-  (tactic.up (tactic.trace "ELLO2") >> t)
+<span class="n">meta</span> <span class="n">def</span> <span class="n">do_some_nonsense&#39;</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">(</span><span class="n">t</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">α</span> <span class="o">:=</span>
+  <span class="o">(</span><span class="n">tactic</span><span class="bp">.</span><span class="n">up</span> <span class="o">(</span><span class="n">tactic</span><span class="bp">.</span><span class="n">trace</span> <span class="s2">&quot;ELLO2&quot;</span><span class="o">)</span> <span class="bp">&gt;&gt;</span> <span class="n">t</span><span class="o">)</span>
 
-meta def tactic_bind_override {α β : Type u} (t₁ : tactic α) (t₂ : α → tactic β) : tactic β :=
--- do_some_nonsense (t₁ >>= (λ a, t₂ a))
-do_some_nonsense' (t₁ >>= (λ a, t₂ a))
+<span class="n">meta</span> <span class="n">def</span> <span class="n">tactic_bind_override</span> <span class="o">{</span><span class="n">α</span> <span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">(</span><span class="n">t₁</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">t₂</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">tactic</span> <span class="n">β</span><span class="o">)</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">β</span> <span class="o">:=</span>
+<span class="c1">-- do_some_nonsense (t₁ &gt;&gt;= (λ a, t₂ a))</span>
+<span class="n">do_some_nonsense&#39;</span> <span class="o">(</span><span class="n">t₁</span> <span class="bp">&gt;&gt;=</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">a</span><span class="o">,</span> <span class="n">t₂</span> <span class="n">a</span><span class="o">))</span>
 
-@[inline, instance, priority 2000] meta def bind_override : has_bind tactic :=
-⟨@tactic_bind_override⟩
+<span class="bp">@</span><span class="o">[</span><span class="kn">inline</span><span class="o">,</span> <span class="kn">instance</span><span class="o">,</span> <span class="n">priority</span> <span class="mi">2000</span><span class="o">]</span> <span class="n">meta</span> <span class="n">def</span> <span class="n">bind_override</span> <span class="o">:</span> <span class="n">has_bind</span> <span class="n">tactic</span> <span class="o">:=</span>
+<span class="bp">⟨@</span><span class="n">tactic_bind_override</span><span class="bp">⟩</span>
 
-meta def go : tactic unit :=
-tactic.trace "A"
+<span class="n">meta</span> <span class="n">def</span> <span class="n">go</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
+<span class="n">tactic</span><span class="bp">.</span><span class="n">trace</span> <span class="s2">&quot;A&quot;</span>
 
-run_cmd go
-````
+<span class="n">run_cmd</span> <span class="n">go</span>
+</pre></div>
 
 #### [ Keeley Hoek (Nov 27 2018 at 09:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20puzzle%20%233/near/148625276):
-We are just stealing control of the `bind` function associated to the tactic monad, to prepend every single bind with a trace statement by calling `do_some_nonesense` (possibly the primed version). If you run the code as I have given it, the expected
-````
-ELLO2
+<p>We are just stealing control of the <code>bind</code> function associated to the tactic monad, to prepend every single bind with a trace statement by calling <code>do_some_nonesense</code> (possibly the primed version). If you run the code as I have given it, the expected</p>
+<div class="codehilite"><pre><span></span>ELLO2
 A
-````
-will be printed. On the other hand, try uncommenting the commented line and commenting the line below it. This calls a slightly different version of `do_some_nonsense`, but no longer prints `ELLO1` before the `A`. Indeed, if you use `set_option trace.compiler.optimize_bytecode true` to inspect the code emitted for the `go` function, you will see that no call to `tactic_bind_override` is even being made anymore and lean is resorting to the builtin `interaction_monad_bind`.
+</pre></div>
+
+
+<p>will be printed. On the other hand, try uncommenting the commented line and commenting the line below it. This calls a slightly different version of <code>do_some_nonsense</code>, but no longer prints <code>ELLO1</code> before the <code>A</code>. Indeed, if you use <code>set_option trace.compiler.optimize_bytecode true</code> to inspect the code emitted for the <code>go</code> function, you will see that no call to <code>tactic_bind_override</code> is even being made anymore and lean is resorting to the builtin <code>interaction_monad_bind</code>.</p>
 
 #### [ Keeley Hoek (Nov 27 2018 at 09:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20puzzle%20%233/near/148625320):
-The puzzle: determine why this is. (Spoiler, I have no idea)
+<p>The puzzle: determine why this is. (Spoiler, I have no idea)</p>
 
 #### [ Keeley Hoek (Nov 27 2018 at 10:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20puzzle%20%233/near/148625471):
-Serious hint but still what the: replacing `tactic.down` with `tactic.down.{0}` makes it work
+<p>Serious hint but still what the: replacing <code>tactic.down</code> with <code>tactic.down.{0}</code> makes it work</p>
 
 #### [ Sebastian Ullrich (Nov 27 2018 at 10:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20puzzle%20%233/near/148625601):
-what the
+<p>what the</p>
 
 #### [ Gabriel Ebner (Nov 27 2018 at 10:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20puzzle%20%233/near/148626504):
-This is interesting!  You might want to look at the universe parameters of the declarations:
-```lean
-#eval do
-env ← get_env,
-[``tactic_bind_override, ``do_some_nonsense, ``do_some_nonsense']
-  .for_each $ λ n, do
-    decl ← returnex $ env.get n,
-    trace (n, decl.univ_params)
-/-
-scratch20181127.lean:18:0: information trace output
-(tactic_bind_override, [u])
-(do_some_nonsense, [u, u_1])
-(do_some_nonsense', [u])
--/
-```
+<p>This is interesting!  You might want to look at the universe parameters of the declarations:</p>
+<div class="codehilite"><pre><span></span><span class="bp">#</span><span class="kn">eval</span> <span class="n">do</span>
+<span class="n">env</span> <span class="err">←</span> <span class="n">get_env</span><span class="o">,</span>
+<span class="o">[</span><span class="bp">``</span><span class="n">tactic_bind_override</span><span class="o">,</span> <span class="bp">``</span><span class="n">do_some_nonsense</span><span class="o">,</span> <span class="bp">``</span><span class="n">do_some_nonsense&#39;</span><span class="o">]</span>
+  <span class="bp">.</span><span class="n">for_each</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">n</span><span class="o">,</span> <span class="n">do</span>
+    <span class="n">decl</span> <span class="err">←</span> <span class="n">returnex</span> <span class="err">$</span> <span class="n">env</span><span class="bp">.</span><span class="n">get</span> <span class="n">n</span><span class="o">,</span>
+    <span class="n">trace</span> <span class="o">(</span><span class="n">n</span><span class="o">,</span> <span class="n">decl</span><span class="bp">.</span><span class="n">univ_params</span><span class="o">)</span>
+<span class="c">/-</span><span class="cm"></span>
+<span class="cm">scratch20181127.lean:18:0: information trace output</span>
+<span class="cm">(tactic_bind_override, [u])</span>
+<span class="cm">(do_some_nonsense, [u, u_1])</span>
+<span class="cm">(do_some_nonsense&#39;, [u])</span>
+<span class="cm">-/</span>
+</pre></div>
 
 #### [ Sebastian Ullrich (Nov 27 2018 at 10:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20puzzle%20%233/near/148626617):
-There really should be a linter for non-inferable instances :)
+<p>There really should be a linter for non-inferable instances :)</p>
 
 
 {% endraw %}

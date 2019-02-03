@@ -12,58 +12,57 @@ permalink: archive/113488general/02007namingissues.html
 
 {% raw %}
 #### [ Kenny Lau (May 02 2018 at 09:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/naming%20issues/near/125982093):
-```lean
-#check sub_pos_of_lt
--- sub_pos_of_lt : ?M_4 < ?M_3 → 0 < ?M_3 - ?M_4
-#check sub_neg_of_lt
--- sub_neg_of_lt : ?M_3 < ?M_4 → ?M_3 - ?M_4 < 0
-#check sub_nonpos_of_le
--- sub_nonpos_of_le : ?M_3 ≤ ?M_4 → ?M_3 - ?M_4 ≤ 0
-#check sub_nonneg_of_le
--- sub_nonneg_of_le : ?M_4 ≤ ?M_3 → 0 ≤ ?M_3 - ?M_4
-```
+<div class="codehilite"><pre><span></span><span class="bp">#</span><span class="kn">check</span> <span class="n">sub_pos_of_lt</span>
+<span class="c1">-- sub_pos_of_lt : ?M_4 &lt; ?M_3 → 0 &lt; ?M_3 - ?M_4</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="n">sub_neg_of_lt</span>
+<span class="c1">-- sub_neg_of_lt : ?M_3 &lt; ?M_4 → ?M_3 - ?M_4 &lt; 0</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="n">sub_nonpos_of_le</span>
+<span class="c1">-- sub_nonpos_of_le : ?M_3 ≤ ?M_4 → ?M_3 - ?M_4 ≤ 0</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="n">sub_nonneg_of_le</span>
+<span class="c1">-- sub_nonneg_of_le : ?M_4 ≤ ?M_3 → 0 ≤ ?M_3 - ?M_4</span>
+</pre></div>
 
 #### [ Kenny Lau (May 02 2018 at 09:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/naming%20issues/near/125982096):
-but I know the answer already: this is in core so we can't do nothing about it
+<p>but I know the answer already: this is in core so we can't do nothing about it</p>
 
 #### [ Mario Carneiro (May 02 2018 at 10:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/naming%20issues/near/125984462):
-what's the issue?
+<p>what's the issue?</p>
 
 #### [ Kenny Lau (May 02 2018 at 11:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/naming%20issues/near/125985953):
-```quote
-what's the issue?
-```
-shouldn't one be `lt` and the other be `gt`?
+<blockquote>
+<p>what's the issue?</p>
+</blockquote>
+<p>shouldn't one be <code>lt</code> and the other be <code>gt</code>?</p>
 
 #### [ Mario Carneiro (May 02 2018 at 11:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/naming%20issues/near/125986033):
-no? there is no usage of `gt` in those lemmas
+<p>no? there is no usage of <code>gt</code> in those lemmas</p>
 
 #### [ Kenny Lau (May 02 2018 at 11:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/naming%20issues/near/125986036):
-I mean, how can both be lt
+<p>I mean, how can both be lt</p>
 
 #### [ Kenny Lau (May 02 2018 at 11:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/naming%20issues/near/125986038):
-so does lt imply sub_pos or sub_neg?
+<p>so does lt imply sub_pos or sub_neg?</p>
 
 #### [ Mario Carneiro (May 02 2018 at 11:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/naming%20issues/near/125986043):
-both...
+<p>both...</p>
 
 #### [ Mario Carneiro (May 02 2018 at 11:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/naming%20issues/near/125986084):
-it's just a matter of where the variables go
+<p>it's just a matter of where the variables go</p>
 
 #### [ Mario Carneiro (May 02 2018 at 11:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/naming%20issues/near/125986096):
-in mathlib the analogous theorem is just called `sub_pos`
+<p>in mathlib the analogous theorem is just called <code>sub_pos</code></p>
 
 #### [ Kenny Lau (May 02 2018 at 11:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/naming%20issues/near/125986101):
-aha
+<p>aha</p>
 
 #### [ Johan Commelin (May 02 2018 at 11:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/naming%20issues/near/125986144):
-Lol, we need Lean to generate the names for us, given the type. Then we can have *provably correct names*
+<p>Lol, we need Lean to generate the names for us, given the type. Then we can have <em>provably correct names</em></p>
 
 #### [ Mario Carneiro (May 02 2018 at 11:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/naming%20issues/near/125986147):
-although the usage of `pos` and `neg` as names for >0 and <0 is problematic since it overlaps `neg` meaning `-x`
+<p>although the usage of <code>pos</code> and <code>neg</code> as names for &gt;0 and &lt;0 is problematic since it overlaps <code>neg</code> meaning <code>-x</code></p>
 
 #### [ Simon Hudon (May 02 2018 at 14:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/naming%20issues/near/125991698):
-maybe `-x` should be called `minus` instead of `neg`?
+<p>maybe <code>-x</code> should be called <code>minus</code> instead of <code>neg</code>?</p>
 
 
 {% endraw %}

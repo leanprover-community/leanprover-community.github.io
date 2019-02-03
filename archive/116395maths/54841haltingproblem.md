@@ -12,75 +12,75 @@ permalink: archive/116395maths/54841haltingproblem.html
 
 {% raw %}
 #### [ Kenny Lau (May 23 2018 at 09:25)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/halting%20problem/near/126964377):
-https://github.com/leanprover/mathlib/commit/d62bf5605ec8971d446a01af40abf9183447cb42#diff-6650f7dae83be3a52c8eb036a23d7b26R175
+<p><a href="https://github.com/leanprover/mathlib/commit/d62bf5605ec8971d446a01af40abf9183447cb42#diff-6650f7dae83be3a52c8eb036a23d7b26R175" target="_blank" title="https://github.com/leanprover/mathlib/commit/d62bf5605ec8971d446a01af40abf9183447cb42#diff-6650f7dae83be3a52c8eb036a23d7b26R175">https://github.com/leanprover/mathlib/commit/d62bf5605ec8971d446a01af40abf9183447cb42#diff-6650f7dae83be3a52c8eb036a23d7b26R175</a></p>
 
 #### [ Kenny Lau (May 23 2018 at 09:25)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/halting%20problem/near/126964379):
-holy mother you did it @**Mario Carneiro**
+<p>holy mother you did it <span class="user-mention" data-user-id="110049">@Mario Carneiro</span></p>
 
 #### [ Kenny Lau (May 23 2018 at 09:25)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/halting%20problem/near/126964380):
-congratulations
+<p>congratulations</p>
 
 #### [ Mario Carneiro (May 23 2018 at 09:25)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/halting%20problem/near/126964383):
-You can see it's just a corollary of a much stronger theorem
+<p>You can see it's just a corollary of a much stronger theorem</p>
 
 #### [ Kenny Lau (May 23 2018 at 09:26)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/halting%20problem/near/126964401):
-oh and which commit should i checkout?
+<p>oh and which commit should i checkout?</p>
 
 #### [ Kenny Lau (May 23 2018 at 09:26)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/halting%20problem/near/126964425):
-you didn't bother to build any
+<p>you didn't bother to build any</p>
 
 #### [ Mario Carneiro (May 23 2018 at 09:26)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/halting%20problem/near/126964426):
-I think Rice's theorem is cool
+<p>I think Rice's theorem is cool</p>
 
 #### [ Mario Carneiro (May 23 2018 at 09:26)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/halting%20problem/near/126964427):
-?
+<p>?</p>
 
 #### [ Kenny Lau (May 23 2018 at 09:26)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/halting%20problem/near/126964428):
-I eat them every day
+<p>I eat them every day</p>
 
 #### [ Kenny Lau (May 23 2018 at 09:26)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/halting%20problem/near/126964429):
-https://github.com/leanprover/mathlib/commits
+<p><a href="https://github.com/leanprover/mathlib/commits" target="_blank" title="https://github.com/leanprover/mathlib/commits">https://github.com/leanprover/mathlib/commits</a></p>
 
 #### [ Kenny Lau (May 23 2018 at 09:26)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/halting%20problem/near/126964430):
-there are no green ticks after April 29
+<p>there are no green ticks after April 29</p>
 
 #### [ Mario Carneiro (May 23 2018 at 09:26)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/halting%20problem/near/126964434):
-that's weird
+<p>that's weird</p>
 
 #### [ Mario Carneiro (May 23 2018 at 09:27)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/halting%20problem/near/126964442):
-travis usually kicks in automatically
+<p>travis usually kicks in automatically</p>
 
 #### [ Kenny Lau (May 23 2018 at 09:27)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/halting%20problem/near/126964445):
-so which commit should i use?
+<p>so which commit should i use?</p>
 
 #### [ Mario Carneiro (May 23 2018 at 09:27)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/halting%20problem/near/126964450):
-I have been building locally so they should work, but I guess I should find out what's up with travis
+<p>I have been building locally so they should work, but I guess I should find out what's up with travis</p>
 
 #### [ Kenny Lau (May 23 2018 at 09:28)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/halting%20problem/near/126964490):
-and which lean version?
+<p>and which lean version?</p>
 
 #### [ Mario Carneiro (May 23 2018 at 09:28)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/halting%20problem/near/126964491):
-3.4.1
+<p>3.4.1</p>
 
 #### [ Gabriel Ebner (May 23 2018 at 09:28)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/halting%20problem/near/126964492):
-Travis is broken on the other packages as well. "This is not an active repository
-You don't have sufficient rights to enable this repo on Travis. 
-Please contact the admin to enable it or to receive admin rights yourself." @**Sebastian Ullrich** ?
+<p>Travis is broken on the other packages as well. "This is not an active repository<br>
+You don't have sufficient rights to enable this repo on Travis. <br>
+Please contact the admin to enable it or to receive admin rights yourself." <span class="user-mention" data-user-id="110024">@Sebastian Ullrich</span> ?</p>
 
 #### [ Mario Carneiro (May 23 2018 at 09:28)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/halting%20problem/near/126964497):
-I always get that message, but it did not affect the build itself
+<p>I always get that message, but it did not affect the build itself</p>
 
 #### [ Gabriel Ebner (May 23 2018 at 09:29)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/halting%20problem/near/126964505):
-Either way, `super` does not get built by travis either at the moment.
+<p>Either way, <code>super</code> does not get built by travis either at the moment.</p>
 
 #### [ Sebastian Ullrich (May 23 2018 at 10:05)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/halting%20problem/near/126965515):
-I'll have to ask Leo
+<p>I'll have to ask Leo</p>
 
 #### [ Kevin Buzzard (May 23 2018 at 10:06)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/halting%20problem/near/126965572):
-you have a halting problem
+<p>you have a halting problem</p>
 
 #### [ Sebastian Ullrich (May 23 2018 at 16:48)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/halting%20problem/near/126979574):
-https://travis-ci.org/leanprover/mathlib now looks more promising
+<p><a href="https://travis-ci.org/leanprover/mathlib" target="_blank" title="https://travis-ci.org/leanprover/mathlib">https://travis-ci.org/leanprover/mathlib</a> now looks more promising</p>
 
 
 {% endraw %}

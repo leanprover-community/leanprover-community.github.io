@@ -12,676 +12,668 @@ permalink: archive/144837PRreviews/09865443docsforNZQRC.html
 
 {% raw %}
 #### [ Kevin Buzzard (Oct 27 2018 at 15:28)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23443%20docs%20for%20N%20-%3E%20Z%20-%3E%20Q%20-%3E%20R%20-%3E%20C/near/136607409):
-Mathematicians find it frustrating when their goal is "obviously the same" as a hypothesis, except the hypothesis is about integers and the goal is about real numbers. These docs attempt to give some hints about how to deal with this, plus a slightly more in-depth discussion about what is going on for those who are interested. Comments are welcome.
+<p>Mathematicians find it frustrating when their goal is "obviously the same" as a hypothesis, except the hypothesis is about integers and the goal is about real numbers. These docs attempt to give some hints about how to deal with this, plus a slightly more in-depth discussion about what is going on for those who are interested. Comments are welcome.</p>
 
 #### [ Johan Commelin (Oct 27 2018 at 18:54)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23443%20docs%20for%20N%20-%3E%20Z%20-%3E%20Q%20-%3E%20R%20-%3E%20C/near/136614223):
-I suggested to fix two typos, and had two other minor comments. See my review on Github.
+<p>I suggested to fix two typos, and had two other minor comments. See my review on Github.</p>
 
 #### [ Scott Olson (Oct 27 2018 at 18:59)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23443%20docs%20for%20N%20-%3E%20Z%20-%3E%20Q%20-%3E%20R%20-%3E%20C/near/136614403):
-I was struck by the comment "your goal is `↑x * ↑y = ↑z`, something which you suspect is a statement about real numbers", which reminds me that in HoTT they always write `Path ℝ (↑x * ↑y) ↑z`. We can get goals like `⊢ @eq real x y` with `pp` options, but as soon as you throw in coercions or operator syntax, it's unreadable... I'm dreaming of more laser-focused `pp` options that would just show the types of coercions or equalities in a nice way
+<p>I was struck by the comment "your goal is <code>↑x * ↑y = ↑z</code>, something which you suspect is a statement about real numbers", which reminds me that in HoTT they always write <code>Path ℝ (↑x * ↑y) ↑z</code>. We can get goals like <code>⊢ @eq real x y</code> with <code>pp</code> options, but as soon as you throw in coercions or operator syntax, it's unreadable... I'm dreaming of more laser-focused <code>pp</code> options that would just show the types of coercions or equalities in a nice way</p>
 
 #### [ Kevin Buzzard (Oct 27 2018 at 19:24)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23443%20docs%20for%20N%20-%3E%20Z%20-%3E%20Q%20-%3E%20R%20-%3E%20C/near/136615244):
-There might be a way of doing it by switching `pp.implicit` on or something
+<p>There might be a way of doing it by switching <code>pp.implicit</code> on or something</p>
 
 #### [ Kevin Buzzard (Oct 27 2018 at 19:24)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23443%20docs%20for%20N%20-%3E%20Z%20-%3E%20Q%20-%3E%20R%20-%3E%20C/near/136615246):
-I didn't think about it too hard
+<p>I didn't think about it too hard</p>
 
 #### [ Scott Olson (Oct 27 2018 at 19:25)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23443%20docs%20for%20N%20-%3E%20Z%20-%3E%20Q%20-%3E%20R%20-%3E%20C/near/136615271):
-Unfortunately it doesn't work because `pp.notation` (on by default) hides the implicit arguments of the operators, and setting that to false makes up most of the mess that `pp.all` causes
+<p>Unfortunately it doesn't work because <code>pp.notation</code> (on by default) hides the implicit arguments of the operators, and setting that to false makes up most of the mess that <code>pp.all</code> causes</p>
 
 #### [ Kevin Buzzard (Oct 28 2018 at 13:24)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23443%20docs%20for%20N%20-%3E%20Z%20-%3E%20Q%20-%3E%20R%20-%3E%20C/near/136650007):
-Aargh. My PR is not quite ready. My plan was to give a recipe so that undergraduate mathematicians had an algorithm to deal with any such "easy in maths" issues they came up with. But I've just found one that does not seem to be covered by what I wrote:
+<p>Aargh. My PR is not quite ready. My plan was to give a recipe so that undergraduate mathematicians had an algorithm to deal with any such "easy in maths" issues they came up with. But I've just found one that does not seem to be covered by what I wrote:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">real</span><span class="bp">.</span><span class="n">basic</span>
 
-```lean
-import data.real.basic
+<span class="kn">example</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="n">ℚ</span><span class="o">)</span> <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="n">q</span> <span class="bp">=</span> <span class="mi">3</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="bp">=</span> <span class="mi">3</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">rw</span> <span class="n">H</span><span class="o">,</span>
+  <span class="n">simp</span>
+<span class="kn">end</span>
 
-example (q : ℚ) (H : q = 3) : (q : ℝ) = 3 :=
-begin
-  rw H,
-  simp
-end
+<span class="kn">example</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="n">ℚ</span><span class="o">)</span> <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="bp">=</span> <span class="mi">3</span><span class="o">)</span> <span class="o">:</span> <span class="n">q</span> <span class="bp">=</span> <span class="mi">3</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="c1">-- what now?</span>
+  <span class="n">sorry</span>
+<span class="kn">end</span>
+</pre></div>
 
-example (q : ℚ) (H : (q : ℝ) = 3) : q = 3 :=
-begin
-  -- what now?
-  sorry  
-end
-```
 
-The first one is fine. For the second one, I am hoping for a proof which does not require knowing the explicit name of the theorem that says that two rationals are equal iff the corresponding reals are equal. You can see that in the first example I did not need to know the name of any theorem in mathlib; there are 5 choose 2 such theorems and ideally I would like students not to have to know their names explicitly. How do I solve the second goal? I would like to add this to the docs but I don't know myself (in the past I've just found the name of the theorem and applied it directly)
+<p>The first one is fine. For the second one, I am hoping for a proof which does not require knowing the explicit name of the theorem that says that two rationals are equal iff the corresponding reals are equal. You can see that in the first example I did not need to know the name of any theorem in mathlib; there are 5 choose 2 such theorems and ideally I would like students not to have to know their names explicitly. How do I solve the second goal? I would like to add this to the docs but I don't know myself (in the past I've just found the name of the theorem and applied it directly)</p>
 
 #### [ Mario Carneiro (Oct 28 2018 at 13:25)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23443%20docs%20for%20N%20-%3E%20Z%20-%3E%20Q%20-%3E%20R%20-%3E%20C/near/136650021):
-There are not 5 choose 2 theorems, there are 5
+<p>There are not 5 choose 2 theorems, there are 5</p>
 
 #### [ Kevin Buzzard (Oct 28 2018 at 13:25)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23443%20docs%20for%20N%20-%3E%20Z%20-%3E%20Q%20-%3E%20R%20-%3E%20C/near/136650029):
-That sentence does not bode well
+<p>That sentence does not bode well</p>
 
 #### [ Mario Carneiro (Oct 28 2018 at 13:25)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23443%20docs%20for%20N%20-%3E%20Z%20-%3E%20Q%20-%3E%20R%20-%3E%20C/near/136650038):
-I think it would help if rather than speaking vaguely about the coercions you just list all of them and their names
+<p>I think it would help if rather than speaking vaguely about the coercions you just list all of them and their names</p>
 
 #### [ Mario Carneiro (Oct 28 2018 at 13:25)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23443%20docs%20for%20N%20-%3E%20Z%20-%3E%20Q%20-%3E%20R%20-%3E%20C/near/136650039):
-`nat.cast`, `int.cast`, `rat.cast`, `complex.of_real`, `int.coe_nat`
+<p><code>nat.cast</code>, <code>int.cast</code>, <code>rat.cast</code>, <code>complex.of_real</code>, <code>int.coe_nat</code></p>
 
 #### [ Mario Carneiro (Oct 28 2018 at 13:26)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23443%20docs%20for%20N%20-%3E%20Z%20-%3E%20Q%20-%3E%20R%20-%3E%20C/near/136650079):
-all the names are based on these segments
+<p>all the names are based on these segments</p>
 
 #### [ Kenny Lau (Oct 28 2018 at 13:26)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23443%20docs%20for%20N%20-%3E%20Z%20-%3E%20Q%20-%3E%20R%20-%3E%20C/near/136650087):
-```quote
-Aargh. My PR is not quite ready.
-```
-Don't worry, they haven't accepted any PR in 10 days
+<blockquote>
+<p>Aargh. My PR is not quite ready.</p>
+</blockquote>
+<p>Don't worry, they haven't accepted any PR in 10 days</p>
 
 #### [ Mario Carneiro (Oct 28 2018 at 13:27)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23443%20docs%20for%20N%20-%3E%20Z%20-%3E%20Q%20-%3E%20R%20-%3E%20C/near/136650097):
-I was looking at them earlier today FYI... I would have merged Kevin's but there were some outstanding fixes
+<p>I was looking at them earlier today FYI... I would have merged Kevin's but there were some outstanding fixes</p>
 
 #### [ Kevin Buzzard (Oct 28 2018 at 13:27)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23443%20docs%20for%20N%20-%3E%20Z%20-%3E%20Q%20-%3E%20R%20-%3E%20C/near/136650102):
-The point of the docs was to show 1st year mathematicians an algorithm for proving everything of this nature which is "trivial in maths". The algorithm currently only relies on the students knowing `rw` and `simp` but if we cannot do this one with these tools then of course I am going to have to tell them about more tools
+<p>The point of the docs was to show 1st year mathematicians an algorithm for proving everything of this nature which is "trivial in maths". The algorithm currently only relies on the students knowing <code>rw</code> and <code>simp</code> but if we cannot do this one with these tools then of course I am going to have to tell them about more tools</p>
 
 #### [ Mario Carneiro (Oct 28 2018 at 13:28)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23443%20docs%20for%20N%20-%3E%20Z%20-%3E%20Q%20-%3E%20R%20-%3E%20C/near/136650151):
-I mean for the section where you talk about the names of the theorems
+<p>I mean for the section where you talk about the names of the theorems</p>
 
 #### [ Kevin Buzzard (Oct 28 2018 at 13:29)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23443%20docs%20for%20N%20-%3E%20Z%20-%3E%20Q%20-%3E%20R%20-%3E%20C/near/136650167):
-Mario what I need -- what *they* need -- is an algorithm which generates all 5 choose 2 proofs of `example (a b : X) (H : (a : Y) = b) : a = b` for `X` and `Y` running through NZQRC with `X<Y`
+<p>Mario what I need -- what <em>they</em> need -- is an algorithm which generates all 5 choose 2 proofs of <code>example (a b : X) (H : (a : Y) = b) : a = b</code> for <code>X</code> and <code>Y</code> running through NZQRC with <code>X&lt;Y</code></p>
 
 #### [ Kevin Buzzard (Oct 28 2018 at 13:29)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23443%20docs%20for%20N%20-%3E%20Z%20-%3E%20Q%20-%3E%20R%20-%3E%20C/near/136650173):
-If the algorithm is "here are 5 choose 2 proofs" then so be it
+<p>If the algorithm is "here are 5 choose 2 proofs" then so be it</p>
 
 #### [ Kevin Buzzard (Oct 28 2018 at 13:30)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23443%20docs%20for%20N%20-%3E%20Z%20-%3E%20Q%20-%3E%20R%20-%3E%20C/near/136650219):
-I really want to hide the names of the theorems from the students, because we are well into "trivial in maths" territory here.
+<p>I really want to hide the names of the theorems from the students, because we are well into "trivial in maths" territory here.</p>
 
 #### [ Mario Carneiro (Oct 28 2018 at 13:30)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23443%20docs%20for%20N%20-%3E%20Z%20-%3E%20Q%20-%3E%20R%20-%3E%20C/near/136650222):
-This is what that `cast` tactic we talked about would be for
+<p>This is what that <code>cast</code> tactic we talked about would be for</p>
 
 #### [ Kevin Buzzard (Oct 28 2018 at 13:30)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23443%20docs%20for%20N%20-%3E%20Z%20-%3E%20Q%20-%3E%20R%20-%3E%20C/near/136650227):
-And my philosophy is: if it's trivial in maths, make it easy in Lean.
+<p>And my philosophy is: if it's trivial in maths, make it easy in Lean.</p>
 
 #### [ Mario Carneiro (Oct 28 2018 at 13:32)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23443%20docs%20for%20N%20-%3E%20Z%20-%3E%20Q%20-%3E%20R%20-%3E%20C/near/136650288):
-If the theorem is literally `a = b` with variables, simp can figure it out
+<p>If the theorem is literally <code>a = b</code> with variables, simp can figure it out</p>
 
 #### [ Mario Carneiro (Oct 28 2018 at 13:32)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23443%20docs%20for%20N%20-%3E%20Z%20-%3E%20Q%20-%3E%20R%20-%3E%20C/near/136650295):
-the problem is when you have `a + b = c` so that `\u (a + b) = \u c` can simplify in two ways, to `a + b = c` and `\u a + \u b = \u c`
+<p>the problem is when you have <code>a + b = c</code> so that <code>\u (a + b) = \u c</code> can simplify in two ways, to <code>a + b = c</code> and <code>\u a + \u b = \u c</code></p>
 
 #### [ Mario Carneiro (Oct 28 2018 at 13:33)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23443%20docs%20for%20N%20-%3E%20Z%20-%3E%20Q%20-%3E%20R%20-%3E%20C/near/136650310):
-You usually want to convert between those last two, but the path is "uphill" part of the way, to the non-simp normal form `\u (a + b) = \u c`
+<p>You usually want to convert between those last two, but the path is "uphill" part of the way, to the non-simp normal form <code>\u (a + b) = \u c</code></p>
 
 #### [ Kevin Buzzard (Oct 28 2018 at 13:35)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23443%20docs%20for%20N%20-%3E%20Z%20-%3E%20Q%20-%3E%20R%20-%3E%20C/near/136650378):
-```lean
-example (q r : ℚ) (H : (q : ℝ) = 3) : q = 3 :=
-begin
-  have H2 : (3 : ℝ) = (3 : ℚ),
-    simp,
-  rw H2 at H,
-  revert H,
-  simp, --- gaargh dammit
-  sorry
-end
-```
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">q</span> <span class="n">r</span> <span class="o">:</span> <span class="n">ℚ</span><span class="o">)</span> <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="bp">=</span> <span class="mi">3</span><span class="o">)</span> <span class="o">:</span> <span class="n">q</span> <span class="bp">=</span> <span class="mi">3</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="k">have</span> <span class="n">H2</span> <span class="o">:</span> <span class="o">(</span><span class="mi">3</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="mi">3</span> <span class="o">:</span> <span class="n">ℚ</span><span class="o">),</span>
+    <span class="n">simp</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="n">H2</span> <span class="n">at</span> <span class="n">H</span><span class="o">,</span>
+  <span class="n">revert</span> <span class="n">H</span><span class="o">,</span>
+  <span class="n">simp</span><span class="o">,</span> <span class="c1">--- gaargh dammit</span>
+  <span class="n">sorry</span>
+<span class="kn">end</span>
+</pre></div>
 
 #### [ Mario Carneiro (Oct 28 2018 at 13:36)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23443%20docs%20for%20N%20-%3E%20Z%20-%3E%20Q%20-%3E%20R%20-%3E%20C/near/136650432):
-and simp chooses one of them kind of at random, leading to "gaargh dammit" moments
+<p>and simp chooses one of them kind of at random, leading to "gaargh dammit" moments</p>
 
 #### [ Kevin Buzzard (Oct 28 2018 at 13:36)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23443%20docs%20for%20N%20-%3E%20Z%20-%3E%20Q%20-%3E%20R%20-%3E%20C/near/136650433):
-I understand how to get from `\u a + \u b = \u c` to `\u (a + b) = \u c` and hopefully I explain that in the docs. The trick which beginners can use is to prove `\u a + \u b = \u (a + b)` using `simp` and then rewrite.
+<p>I understand how to get from <code>\u a + \u b = \u c</code> to <code>\u (a + b) = \u c</code> and hopefully I explain that in the docs. The trick which beginners can use is to prove <code>\u a + \u b = \u (a + b)</code> using <code>simp</code> and then rewrite.</p>
 
 #### [ Kevin Buzzard (Oct 28 2018 at 13:37)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23443%20docs%20for%20N%20-%3E%20Z%20-%3E%20Q%20-%3E%20R%20-%3E%20C/near/136650435):
-But here I am struggling to do this just using simp and rw
+<p>But here I am struggling to do this just using simp and rw</p>
 
 #### [ Kevin Buzzard (Oct 28 2018 at 13:37)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23443%20docs%20for%20N%20-%3E%20Z%20-%3E%20Q%20-%3E%20R%20-%3E%20C/near/136650441):
-and I would like to put more examples of this in until I never struggle again
+<p>and I would like to put more examples of this in until I never struggle again</p>
 
 #### [ Mario Carneiro (Oct 28 2018 at 13:37)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23443%20docs%20for%20N%20-%3E%20Z%20-%3E%20Q%20-%3E%20R%20-%3E%20C/near/136650444):
-I know how to achieve it using only the explicit lemma `\u a = \u b <-> a = b`
+<p>I know how to achieve it using only the explicit lemma <code>\u a = \u b &lt;-&gt; a = b</code></p>
 
 #### [ Kevin Buzzard (Oct 28 2018 at 13:37)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23443%20docs%20for%20N%20-%3E%20Z%20-%3E%20Q%20-%3E%20R%20-%3E%20C/near/136650456):
-Invoking `real.of_int_inj` or whatever, magical functions with mysterious and inconsistent names, is exactly what I want to avoid
+<p>Invoking <code>real.of_int_inj</code> or whatever, magical functions with mysterious and inconsistent names, is exactly what I want to avoid</p>
 
 #### [ Kevin Buzzard (Oct 28 2018 at 13:38)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23443%20docs%20for%20N%20-%3E%20Z%20-%3E%20Q%20-%3E%20R%20-%3E%20C/near/136650503):
-However if these cannot be avoided then I think they should be explicitly listed in the docs
+<p>However if these cannot be avoided then I think they should be explicitly listed in the docs</p>
 
 #### [ Kevin Buzzard (Oct 28 2018 at 13:38)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23443%20docs%20for%20N%20-%3E%20Z%20-%3E%20Q%20-%3E%20R%20-%3E%20C/near/136650511):
-all 5 choose 2 of them
+<p>all 5 choose 2 of them</p>
 
 #### [ Mario Carneiro (Oct 28 2018 at 13:39)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23443%20docs%20for%20N%20-%3E%20Z%20-%3E%20Q%20-%3E%20R%20-%3E%20C/near/136650515):
-there are not 5 choose 2!
+<p>there are not 5 choose 2!</p>
 
 #### [ Kevin Buzzard (Oct 28 2018 at 13:39)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23443%20docs%20for%20N%20-%3E%20Z%20-%3E%20Q%20-%3E%20R%20-%3E%20C/near/136650518):
-:-)
+<p>:-)</p>
 
 #### [ Kevin Buzzard (Oct 28 2018 at 13:39)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23443%20docs%20for%20N%20-%3E%20Z%20-%3E%20Q%20-%3E%20R%20-%3E%20C/near/136650523):
-there are, it's just that you can't tell some of them apart ;-)
+<p>there are, it's just that you can't tell some of them apart ;-)</p>
 
 #### [ Mario Carneiro (Oct 28 2018 at 13:39)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23443%20docs%20for%20N%20-%3E%20Z%20-%3E%20Q%20-%3E%20R%20-%3E%20C/near/136650526):
-some of them are the same theorem
+<p>some of them are the same theorem</p>
 
 #### [ Kevin Buzzard (Oct 28 2018 at 13:39)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23443%20docs%20for%20N%20-%3E%20Z%20-%3E%20Q%20-%3E%20R%20-%3E%20C/near/136650528):
-not if you fill in the implicit arguments
+<p>not if you fill in the implicit arguments</p>
 
 #### [ Mario Carneiro (Oct 28 2018 at 13:39)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23443%20docs%20for%20N%20-%3E%20Z%20-%3E%20Q%20-%3E%20R%20-%3E%20C/near/136650529):
-like N -> Q and N -> R
+<p>like N -&gt; Q and N -&gt; R</p>
 
 #### [ Kevin Buzzard (Oct 28 2018 at 13:40)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23443%20docs%20for%20N%20-%3E%20Z%20-%3E%20Q%20-%3E%20R%20-%3E%20C/near/136650589):
-I know I know. What I need is an algorithm which takes 5 choose 2 inputs and spits out an output in each case, and you're observing that the underlying function isn't injective.
+<p>I know I know. What I need is an algorithm which takes 5 choose 2 inputs and spits out an output in each case, and you're observing that the underlying function isn't injective.</p>
 
 #### [ Kevin Buzzard (Oct 28 2018 at 13:42)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23443%20docs%20for%20N%20-%3E%20Z%20-%3E%20Q%20-%3E%20R%20-%3E%20C/near/136650651):
-```lean
-example (q r : ℚ) (H : (q : ℝ) = 3) : q = 3 :=
-begin
-  have H2 : (3 : ℝ) = (3 : ℚ),
-    simp,
-  rw H2 at H,
-  revert H,
-  exact rat.cast_inj.1,
-end
-```
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">q</span> <span class="n">r</span> <span class="o">:</span> <span class="n">ℚ</span><span class="o">)</span> <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="bp">=</span> <span class="mi">3</span><span class="o">)</span> <span class="o">:</span> <span class="n">q</span> <span class="bp">=</span> <span class="mi">3</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="k">have</span> <span class="n">H2</span> <span class="o">:</span> <span class="o">(</span><span class="mi">3</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="mi">3</span> <span class="o">:</span> <span class="n">ℚ</span><span class="o">),</span>
+    <span class="n">simp</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="n">H2</span> <span class="n">at</span> <span class="n">H</span><span class="o">,</span>
+  <span class="n">revert</span> <span class="n">H</span><span class="o">,</span>
+  <span class="n">exact</span> <span class="n">rat</span><span class="bp">.</span><span class="n">cast_inj</span><span class="bp">.</span><span class="mi">1</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
 
 #### [ Kevin Buzzard (Oct 28 2018 at 13:42)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23443%20docs%20for%20N%20-%3E%20Z%20-%3E%20Q%20-%3E%20R%20-%3E%20C/near/136650653):
-Mathematician sees : "q = 3 -> q = 3"
+<p>Mathematician sees : "q = 3 -&gt; q = 3"</p>
 
 #### [ Mario Carneiro (Oct 28 2018 at 13:43)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23443%20docs%20for%20N%20-%3E%20Z%20-%3E%20Q%20-%3E%20R%20-%3E%20C/near/136650661):
-If it is the "initial" function for N,Z,Q, it's named after the source (because it can't be named after the target, which is generic) and it's called `cast`. The functions `int.coe_nat` and `complex.of_real` are separate for reasons, and they (and other such specialized functions) are usually named by the target. More generally, the rule of thumb is it's named after whatever is introduced last
+<p>If it is the "initial" function for N,Z,Q, it's named after the source (because it can't be named after the target, which is generic) and it's called <code>cast</code>. The functions <code>int.coe_nat</code> and <code>complex.of_real</code> are separate for reasons, and they (and other such specialized functions) are usually named by the target. More generally, the rule of thumb is it's named after whatever is introduced last</p>
 
 #### [ Kevin Buzzard (Oct 28 2018 at 13:43)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23443%20docs%20for%20N%20-%3E%20Z%20-%3E%20Q%20-%3E%20R%20-%3E%20C/near/136650663):
-Dammit why isn't this easier
+<p>Dammit why isn't this easier</p>
 
 #### [ Kevin Buzzard (Oct 28 2018 at 13:43)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23443%20docs%20for%20N%20-%3E%20Z%20-%3E%20Q%20-%3E%20R%20-%3E%20C/near/136650664):
-it's trivial in maths.
+<p>it's trivial in maths.</p>
 
 #### [ Kevin Buzzard (Oct 28 2018 at 13:43)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23443%20docs%20for%20N%20-%3E%20Z%20-%3E%20Q%20-%3E%20R%20-%3E%20C/near/136650665):
-Did you say something about a `cast` tactic?
+<p>Did you say something about a <code>cast</code> tactic?</p>
 
 #### [ Mario Carneiro (Oct 28 2018 at 13:44)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23443%20docs%20for%20N%20-%3E%20Z%20-%3E%20Q%20-%3E%20R%20-%3E%20C/near/136650704):
-a wishlist tactic, yes
+<p>a wishlist tactic, yes</p>
 
 #### [ Mario Carneiro (Oct 28 2018 at 13:45)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23443%20docs%20for%20N%20-%3E%20Z%20-%3E%20Q%20-%3E%20R%20-%3E%20C/near/136650731):
-The strategy for using the `inj` functions is to take the "smaller" field and lift it to the larger one using `inj` (on the goal or the hypothesis, wherever it is). Then `simp` will bring them together
+<p>The strategy for using the <code>inj</code> functions is to take the "smaller" field and lift it to the larger one using <code>inj</code> (on the goal or the hypothesis, wherever it is). Then <code>simp</code> will bring them together</p>
 
 #### [ Mario Carneiro (Oct 28 2018 at 13:47)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23443%20docs%20for%20N%20-%3E%20Z%20-%3E%20Q%20-%3E%20R%20-%3E%20C/near/136650780):
-does `rat.cast_inj.1 $ by simpa` work for your example?
+<p>does <code>rat.cast_inj.1 $ by simpa</code> work for your example?</p>
 
 #### [ Kevin Buzzard (Oct 28 2018 at 13:47)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23443%20docs%20for%20N%20-%3E%20Z%20-%3E%20Q%20-%3E%20R%20-%3E%20C/near/136650781):
-```lean
-import data.complex.basic
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">complex</span><span class="bp">.</span><span class="n">basic</span>
 
-example (q r : ℕ) : (q : ℤ) = r → q = r := by simp
-example (q r : ℕ) : (q : ℚ) = r → q = r := by simp
-example (q r : ℕ) : (q : ℝ) = r → q = r := by simp
-example (q r : ℕ) : (q : ℂ) = r → q = r := by simp
+<span class="kn">example</span> <span class="o">(</span><span class="n">q</span> <span class="n">r</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="bp">=</span> <span class="n">r</span> <span class="bp">→</span> <span class="n">q</span> <span class="bp">=</span> <span class="n">r</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">simp</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">q</span> <span class="n">r</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="n">ℚ</span><span class="o">)</span> <span class="bp">=</span> <span class="n">r</span> <span class="bp">→</span> <span class="n">q</span> <span class="bp">=</span> <span class="n">r</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">simp</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">q</span> <span class="n">r</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="bp">=</span> <span class="n">r</span> <span class="bp">→</span> <span class="n">q</span> <span class="bp">=</span> <span class="n">r</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">simp</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">q</span> <span class="n">r</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="n">ℂ</span><span class="o">)</span> <span class="bp">=</span> <span class="n">r</span> <span class="bp">→</span> <span class="n">q</span> <span class="bp">=</span> <span class="n">r</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">simp</span>
 
-example (q r : ℤ) : (q : ℚ) = r → q = r := by simp
-example (q r : ℤ) : (q : ℝ) = r → q = r := by simp
-example (q r : ℤ) : (q : ℂ) = r → q = r := by simp
+<span class="kn">example</span> <span class="o">(</span><span class="n">q</span> <span class="n">r</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="n">ℚ</span><span class="o">)</span> <span class="bp">=</span> <span class="n">r</span> <span class="bp">→</span> <span class="n">q</span> <span class="bp">=</span> <span class="n">r</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">simp</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">q</span> <span class="n">r</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="bp">=</span> <span class="n">r</span> <span class="bp">→</span> <span class="n">q</span> <span class="bp">=</span> <span class="n">r</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">simp</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">q</span> <span class="n">r</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="n">ℂ</span><span class="o">)</span> <span class="bp">=</span> <span class="n">r</span> <span class="bp">→</span> <span class="n">q</span> <span class="bp">=</span> <span class="n">r</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">simp</span>
 
-example (q r : ℚ) : (q : ℝ) = r → q = r := by simp
-example (q r : ℚ) : (q : ℂ) = r → q = r := by simp
+<span class="kn">example</span> <span class="o">(</span><span class="n">q</span> <span class="n">r</span> <span class="o">:</span> <span class="n">ℚ</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="bp">=</span> <span class="n">r</span> <span class="bp">→</span> <span class="n">q</span> <span class="bp">=</span> <span class="n">r</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">simp</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">q</span> <span class="n">r</span> <span class="o">:</span> <span class="n">ℚ</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="n">ℂ</span><span class="o">)</span> <span class="bp">=</span> <span class="n">r</span> <span class="bp">→</span> <span class="n">q</span> <span class="bp">=</span> <span class="n">r</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">simp</span>
 
-example (q r : ℝ) : (q : ℂ) = r → q = r := by simp
-```
+<span class="kn">example</span> <span class="o">(</span><span class="n">q</span> <span class="n">r</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="n">ℂ</span><span class="o">)</span> <span class="bp">=</span> <span class="n">r</span> <span class="bp">→</span> <span class="n">q</span> <span class="bp">=</span> <span class="n">r</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">simp</span>
+</pre></div>
 
-Lean scores 9/10 on this one
+
+<p>Lean scores 9/10 on this one</p>
 
 #### [ Mario Carneiro (Oct 28 2018 at 13:48)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23443%20docs%20for%20N%20-%3E%20Z%20-%3E%20Q%20-%3E%20R%20-%3E%20C/near/136650826):
-like I said, try `q + q = r` and lean will score a lot less
+<p>like I said, try <code>q + q = r</code> and lean will score a lot less</p>
 
 #### [ Mario Carneiro (Oct 28 2018 at 13:48)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23443%20docs%20for%20N%20-%3E%20Z%20-%3E%20Q%20-%3E%20R%20-%3E%20C/near/136650827):
-which one fails?
+<p>which one fails?</p>
 
 #### [ Kevin Buzzard (Oct 28 2018 at 13:48)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23443%20docs%20for%20N%20-%3E%20Z%20-%3E%20Q%20-%3E%20R%20-%3E%20C/near/136650828):
-First one
+<p>First one</p>
 
 #### [ Kevin Buzzard (Oct 28 2018 at 13:49)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23443%20docs%20for%20N%20-%3E%20Z%20-%3E%20Q%20-%3E%20R%20-%3E%20C/near/136650831):
-In my notes I explain an algorithm for `q + q = r`; I think `\u q + \u q = \u (q + q)` gets solved by `simp` in all ten cases
+<p>In my notes I explain an algorithm for <code>q + q = r</code>; I think <code>\u q + \u q = \u (q + q)</code> gets solved by <code>simp</code> in all ten cases</p>
 
 #### [ Mario Carneiro (Oct 28 2018 at 13:50)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23443%20docs%20for%20N%20-%3E%20Z%20-%3E%20Q%20-%3E%20R%20-%3E%20C/near/136650893):
-oh, `(@rat.cast_inj ℝ _ _ _ _).1 $ by simpa` works, not so nice
+<p>oh, <code>(@rat.cast_inj ℝ _ _ _ _).1 $ by simpa</code> works, not so nice</p>
 
 #### [ Kevin Buzzard (Oct 28 2018 at 13:51)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23443%20docs%20for%20N%20-%3E%20Z%20-%3E%20Q%20-%3E%20R%20-%3E%20C/near/136650899):
-```lean
-example (q r : ℕ) : ((q + r) : ℤ) = (q + r : ℕ) := by simp
-example (q r : ℕ) : ((q + r) : ℚ) = (q + r : ℕ) := by simp
-example (q r : ℕ) : ((q + r) : ℝ) = (q + r : ℕ) := by simp
-example (q r : ℕ) : ((q + r) : ℂ) = (q + r : ℕ) := by simp
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">q</span> <span class="n">r</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="o">((</span><span class="n">q</span> <span class="bp">+</span> <span class="n">r</span><span class="o">)</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="n">q</span> <span class="bp">+</span> <span class="n">r</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">simp</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">q</span> <span class="n">r</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="o">((</span><span class="n">q</span> <span class="bp">+</span> <span class="n">r</span><span class="o">)</span> <span class="o">:</span> <span class="n">ℚ</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="n">q</span> <span class="bp">+</span> <span class="n">r</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">simp</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">q</span> <span class="n">r</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="o">((</span><span class="n">q</span> <span class="bp">+</span> <span class="n">r</span><span class="o">)</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="n">q</span> <span class="bp">+</span> <span class="n">r</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">simp</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">q</span> <span class="n">r</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="o">((</span><span class="n">q</span> <span class="bp">+</span> <span class="n">r</span><span class="o">)</span> <span class="o">:</span> <span class="n">ℂ</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="n">q</span> <span class="bp">+</span> <span class="n">r</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">simp</span>
 
-example (q r : ℤ) : ((q + r) : ℚ) = (q + r : ℤ) := by simp
-example (q r : ℤ) : ((q + r) : ℝ) = (q + r : ℤ) := by simp
-example (q r : ℤ) : ((q + r) : ℂ) = (q + r : ℤ) := by simp
+<span class="kn">example</span> <span class="o">(</span><span class="n">q</span> <span class="n">r</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">:</span> <span class="o">((</span><span class="n">q</span> <span class="bp">+</span> <span class="n">r</span><span class="o">)</span> <span class="o">:</span> <span class="n">ℚ</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="n">q</span> <span class="bp">+</span> <span class="n">r</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">simp</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">q</span> <span class="n">r</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">:</span> <span class="o">((</span><span class="n">q</span> <span class="bp">+</span> <span class="n">r</span><span class="o">)</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="n">q</span> <span class="bp">+</span> <span class="n">r</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">simp</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">q</span> <span class="n">r</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">:</span> <span class="o">((</span><span class="n">q</span> <span class="bp">+</span> <span class="n">r</span><span class="o">)</span> <span class="o">:</span> <span class="n">ℂ</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="n">q</span> <span class="bp">+</span> <span class="n">r</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">simp</span>
 
-example (q r : ℚ) : ((q + r) : ℝ) = (q + r : ℚ) := by simp
-example (q r : ℚ) : ((q + r) : ℂ) = (q + r : ℚ) := by simp
+<span class="kn">example</span> <span class="o">(</span><span class="n">q</span> <span class="n">r</span> <span class="o">:</span> <span class="n">ℚ</span><span class="o">)</span> <span class="o">:</span> <span class="o">((</span><span class="n">q</span> <span class="bp">+</span> <span class="n">r</span><span class="o">)</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="n">q</span> <span class="bp">+</span> <span class="n">r</span> <span class="o">:</span> <span class="n">ℚ</span><span class="o">)</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">simp</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">q</span> <span class="n">r</span> <span class="o">:</span> <span class="n">ℚ</span><span class="o">)</span> <span class="o">:</span> <span class="o">((</span><span class="n">q</span> <span class="bp">+</span> <span class="n">r</span><span class="o">)</span> <span class="o">:</span> <span class="n">ℂ</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="n">q</span> <span class="bp">+</span> <span class="n">r</span> <span class="o">:</span> <span class="n">ℚ</span><span class="o">)</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">simp</span>
 
-example (q r : ℝ) : ((q + r) : ℂ) = (q + r : ℝ) := by simp
-```
-Lean gets 10/10 for this one
+<span class="kn">example</span> <span class="o">(</span><span class="n">q</span> <span class="n">r</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">:</span> <span class="o">((</span><span class="n">q</span> <span class="bp">+</span> <span class="n">r</span><span class="o">)</span> <span class="o">:</span> <span class="n">ℂ</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="n">q</span> <span class="bp">+</span> <span class="n">r</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">simp</span>
+</pre></div>
+
+
+<p>Lean gets 10/10 for this one</p>
 
 #### [ Mario Carneiro (Oct 28 2018 at 13:51)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23443%20docs%20for%20N%20-%3E%20Z%20-%3E%20Q%20-%3E%20R%20-%3E%20C/near/136650903):
-no, I mean `q + q = r -> q + q = r`
+<p>no, I mean <code>q + q = r -&gt; q + q = r</code></p>
 
 #### [ Mario Carneiro (Oct 28 2018 at 13:52)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23443%20docs%20for%20N%20-%3E%20Z%20-%3E%20Q%20-%3E%20R%20-%3E%20C/near/136650951):
-`q = 3` is the same kind of problem
+<p><code>q = 3</code> is the same kind of problem</p>
 
 #### [ Kevin Buzzard (Oct 28 2018 at 13:52)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23443%20docs%20for%20N%20-%3E%20Z%20-%3E%20Q%20-%3E%20R%20-%3E%20C/near/136650953):
-I know, but this can be reduced to `\u a = \u b -> a = b` by proving the sublemma which I just proved above, and then rewriting it
+<p>I know, but this can be reduced to <code>\u a = \u b -&gt; a = b</code> by proving the sublemma which I just proved above, and then rewriting it</p>
 
 #### [ Mario Carneiro (Oct 28 2018 at 13:52)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23443%20docs%20for%20N%20-%3E%20Z%20-%3E%20Q%20-%3E%20R%20-%3E%20C/near/136650954):
-of course, they are all trivial theorems
+<p>of course, they are all trivial theorems</p>
 
 #### [ Mario Carneiro (Oct 28 2018 at 13:52)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23443%20docs%20for%20N%20-%3E%20Z%20-%3E%20Q%20-%3E%20R%20-%3E%20C/near/136650955):
-like literally two applications of lemmas
+<p>like literally two applications of lemmas</p>
 
 #### [ Mario Carneiro (Oct 28 2018 at 13:53)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23443%20docs%20for%20N%20-%3E%20Z%20-%3E%20Q%20-%3E%20R%20-%3E%20C/near/136650960):
-but you don't want to refer to any lemmas, so it is hard
+<p>but you don't want to refer to any lemmas, so it is hard</p>
 
 #### [ Kevin Buzzard (Oct 28 2018 at 13:53)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23443%20docs%20for%20N%20-%3E%20Z%20-%3E%20Q%20-%3E%20R%20-%3E%20C/near/136650961):
-I know!
+<p>I know!</p>
 
 #### [ Kevin Buzzard (Oct 28 2018 at 13:53)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23443%20docs%20for%20N%20-%3E%20Z%20-%3E%20Q%20-%3E%20R%20-%3E%20C/near/136650962):
-That's the point of the docs.
+<p>That's the point of the docs.</p>
 
 #### [ Kevin Buzzard (Oct 28 2018 at 13:53)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23443%20docs%20for%20N%20-%3E%20Z%20-%3E%20Q%20-%3E%20R%20-%3E%20C/near/136650966):
-To find out if I have to refer to the lemmas, and to spell out explicitly which lemmas to use, so that beginners ultimately have an algorithm for proving any "trivial in maths" statements of this form
+<p>To find out if I have to refer to the lemmas, and to spell out explicitly which lemmas to use, so that beginners ultimately have an algorithm for proving any "trivial in maths" statements of this form</p>
 
 #### [ Kevin Buzzard (Oct 28 2018 at 13:54)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23443%20docs%20for%20N%20-%3E%20Z%20-%3E%20Q%20-%3E%20R%20-%3E%20C/near/136651009):
-Yesterday I thought I had got it down to 0 lemmas but now I realise there is this one glitch
+<p>Yesterday I thought I had got it down to 0 lemmas but now I realise there is this one glitch</p>
 
 #### [ Mario Carneiro (Oct 28 2018 at 13:54)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23443%20docs%20for%20N%20-%3E%20Z%20-%3E%20Q%20-%3E%20R%20-%3E%20C/near/136651011):
-if you want to codify it to this extent, it's better to (prod someone to) write a tactic
+<p>if you want to codify it to this extent, it's better to (prod someone to) write a tactic</p>
 
 #### [ Johan Commelin (Oct 28 2018 at 13:55)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23443%20docs%20for%20N%20-%3E%20Z%20-%3E%20Q%20-%3E%20R%20-%3E%20C/near/136651020):
-All these things ought to be "cast everything to `complex` and run `ring`".
+<p>All these things ought to be "cast everything to <code>complex</code> and run <code>ring</code>".</p>
 
 #### [ Mario Carneiro (Oct 28 2018 at 13:55)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23443%20docs%20for%20N%20-%3E%20Z%20-%3E%20Q%20-%3E%20R%20-%3E%20C/near/136651044):
-you don't need `ring`, `simp` is enough. But "cast everything to `complex`" is the hard part here
+<p>you don't need <code>ring</code>, <code>simp</code> is enough. But "cast everything to <code>complex</code>" is the hard part here</p>
 
 #### [ Kevin Buzzard (Oct 28 2018 at 13:59)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23443%20docs%20for%20N%20-%3E%20Z%20-%3E%20Q%20-%3E%20R%20-%3E%20C/near/136651164):
-```quote
-All these things ought to be "cast everything to `complex` and run `ring`".
-```
-Octonians, surely?
+<blockquote>
+<p>All these things ought to be "cast everything to <code>complex</code> and run <code>ring</code>".</p>
+</blockquote>
+<p>Octonians, surely?</p>
 
 #### [ Mario Carneiro (Oct 28 2018 at 14:00)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23443%20docs%20for%20N%20-%3E%20Z%20-%3E%20Q%20-%3E%20R%20-%3E%20C/near/136651234):
-lol, you complain about `nat` subtraction having poor properties and then you cast to a number field which isn't even associative
+<p>lol, you complain about <code>nat</code> subtraction having poor properties and then you cast to a number field which isn't even associative</p>
 
 #### [ Kevin Buzzard (Oct 28 2018 at 14:02)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23443%20docs%20for%20N%20-%3E%20Z%20-%3E%20Q%20-%3E%20R%20-%3E%20C/near/136651303):
-OK maybe quaternions are better
+<p>OK maybe quaternions are better</p>
 
 #### [ Kevin Buzzard (Oct 28 2018 at 14:02)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23443%20docs%20for%20N%20-%3E%20Z%20-%3E%20Q%20-%3E%20R%20-%3E%20C/near/136651305):
-```lean
-example (q : ℕ) : (q : ℤ) = (3 : ℕ) → q = 3 := by simp
-example (q : ℕ) : (q : ℚ) = (3 : ℕ) → q = 3 := by simp
-example (q : ℕ) : (q : ℝ) = (3 : ℕ) → q = 3 := by simp
-example (q : ℕ) : (q : ℂ) = (3 : ℕ) → q = 3 := by simp
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="mi">3</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="bp">→</span> <span class="n">q</span> <span class="bp">=</span> <span class="mi">3</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">simp</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="n">ℚ</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="mi">3</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="bp">→</span> <span class="n">q</span> <span class="bp">=</span> <span class="mi">3</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">simp</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="mi">3</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="bp">→</span> <span class="n">q</span> <span class="bp">=</span> <span class="mi">3</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">simp</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="n">ℂ</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="mi">3</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="bp">→</span> <span class="n">q</span> <span class="bp">=</span> <span class="mi">3</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">simp</span>
 
-example (q : ℤ) : (q : ℚ) = (3 : ℤ) → q = 3 := by simp
-example (q : ℤ) : (q : ℝ) = (3 : ℤ) → q = 3 := by simp
-example (q : ℤ) : (q : ℂ) = (3 : ℤ) → q = 3 := by simp
+<span class="kn">example</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="n">ℚ</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="mi">3</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="bp">→</span> <span class="n">q</span> <span class="bp">=</span> <span class="mi">3</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">simp</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="mi">3</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="bp">→</span> <span class="n">q</span> <span class="bp">=</span> <span class="mi">3</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">simp</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="n">ℂ</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="mi">3</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="bp">→</span> <span class="n">q</span> <span class="bp">=</span> <span class="mi">3</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">simp</span>
 
-example (q : ℚ) : (q : ℝ) = (3 : ℚ) → q = 3 := by simp
-example (q : ℚ) : (q : ℂ) = (3 : ℚ) → q = 3 := by simp
+<span class="kn">example</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="n">ℚ</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="mi">3</span> <span class="o">:</span> <span class="n">ℚ</span><span class="o">)</span> <span class="bp">→</span> <span class="n">q</span> <span class="bp">=</span> <span class="mi">3</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">simp</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="n">ℚ</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="n">ℂ</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="mi">3</span> <span class="o">:</span> <span class="n">ℚ</span><span class="o">)</span> <span class="bp">→</span> <span class="n">q</span> <span class="bp">=</span> <span class="mi">3</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">simp</span>
 
-example (q : ℝ) : (q : ℂ) = (3 : ℝ) → q = 3 := by simp
-```
+<span class="kn">example</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="n">ℂ</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="mi">3</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="bp">→</span> <span class="n">q</span> <span class="bp">=</span> <span class="mi">3</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">simp</span>
+</pre></div>
 
-0/10 for Lean here
+
+<p>0/10 for Lean here</p>
 
 #### [ Kevin Buzzard (Oct 28 2018 at 14:03)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23443%20docs%20for%20N%20-%3E%20Z%20-%3E%20Q%20-%3E%20R%20-%3E%20C/near/136651313):
-and we also learn that someone thinks that Q R C are a different colour to N and Z, I only just noticed this
+<p>and we also learn that someone thinks that Q R C are a different colour to N and Z, I only just noticed this</p>
 
 #### [ Kevin Buzzard (Oct 28 2018 at 14:07)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23443%20docs%20for%20N%20-%3E%20Z%20-%3E%20Q%20-%3E%20R%20-%3E%20C/near/136651435):
-The reason I am interested in these questions is that they come up in real life and I am being asked them again and again by beginners attempting to do mathematics. Just a simple question such as "prove that the square root of 2 is irrational" is fraught with these difficulties. The numerator of a rational is an int, the denominator is a nat, and getting from `q ^ 2 = 2` to `n ^ 2 = 2 * d ^ 2` (the latter in int) is hard for beginners. And then getting from this to a statement about q not being `sqrt 2`in the reals is hard again. The fact that I've just been teaching this stuff in M1F means that these questions come up, and my docs are an attempt to resolve these issues once and for all. The reason I think this is important is that it's exactly the "trivial in maths, hard in Lean" phenomenon which puts beginners off, and once they're gone, I've lost them.
+<p>The reason I am interested in these questions is that they come up in real life and I am being asked them again and again by beginners attempting to do mathematics. Just a simple question such as "prove that the square root of 2 is irrational" is fraught with these difficulties. The numerator of a rational is an int, the denominator is a nat, and getting from <code>q ^ 2 = 2</code> to <code>n ^ 2 = 2 * d ^ 2</code> (the latter in int) is hard for beginners. And then getting from this to a statement about q not being <code>sqrt 2</code>in the reals is hard again. The fact that I've just been teaching this stuff in M1F means that these questions come up, and my docs are an attempt to resolve these issues once and for all. The reason I think this is important is that it's exactly the "trivial in maths, hard in Lean" phenomenon which puts beginners off, and once they're gone, I've lost them.</p>
 
 #### [ Kevin Buzzard (Oct 28 2018 at 14:08)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23443%20docs%20for%20N%20-%3E%20Z%20-%3E%20Q%20-%3E%20R%20-%3E%20C/near/136651480):
-I realise now however that my docs do not cover all use cases, because I am currently stuck on `example (q : ℚ) (H : (q : ℝ) = 3) : q = 3`.
+<p>I realise now however that my docs do not cover all use cases, because I am currently stuck on <code>example (q : ℚ) (H : (q : ℝ) = 3) : q = 3</code>.</p>
 
 #### [ Mario Carneiro (Oct 28 2018 at 14:09)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23443%20docs%20for%20N%20-%3E%20Z%20-%3E%20Q%20-%3E%20R%20-%3E%20C/near/136651493):
-you don't need to convince me that these problems are important, or come up often. But I am apparently more comfortable than you with asking people to use the theorems that are there expressly for the purpose
+<p>you don't need to convince me that these problems are important, or come up often. But I am apparently more comfortable than you with asking people to use the theorems that are there expressly for the purpose</p>
 
 #### [ Kevin Buzzard (Oct 28 2018 at 14:10)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23443%20docs%20for%20N%20-%3E%20Z%20-%3E%20Q%20-%3E%20R%20-%3E%20C/near/136651543):
-I am too old to remember a big list of theorems, and my users are too new to know the list, so this is two reasons why I really need to write this list down.
+<p>I am too old to remember a big list of theorems, and my users are too new to know the list, so this is two reasons why I really need to write this list down.</p>
 
 #### [ Kevin Buzzard (Oct 28 2018 at 14:10)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23443%20docs%20for%20N%20-%3E%20Z%20-%3E%20Q%20-%3E%20R%20-%3E%20C/near/136651553):
-```lean
-example (q : ℕ) : (q : ℤ) = (3 : ℕ) → q = 3 := by simp
-example (q : ℕ) : (q : ℚ) = (3 : ℕ) → q = 3 := by simp
-example (q : ℕ) : (q : ℝ) = (3 : ℕ) → q = 3 := by simp
-example (q : ℕ) : (q : ℂ) = (3 : ℕ) → q = 3 := by simp
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="mi">3</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="bp">→</span> <span class="n">q</span> <span class="bp">=</span> <span class="mi">3</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">simp</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="n">ℚ</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="mi">3</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="bp">→</span> <span class="n">q</span> <span class="bp">=</span> <span class="mi">3</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">simp</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="mi">3</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="bp">→</span> <span class="n">q</span> <span class="bp">=</span> <span class="mi">3</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">simp</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="n">ℂ</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="mi">3</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="bp">→</span> <span class="n">q</span> <span class="bp">=</span> <span class="mi">3</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">simp</span>
 
-example (q : ℤ) : (q : ℚ) = (3 : ℤ) → q = 3 := by simp
-example (q : ℤ) : (q : ℝ) = (3 : ℤ) → q = 3 := by simp
-example (q : ℤ) : (q : ℂ) = (3 : ℤ) → q = 3 := by simp
+<span class="kn">example</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="n">ℚ</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="mi">3</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="bp">→</span> <span class="n">q</span> <span class="bp">=</span> <span class="mi">3</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">simp</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="mi">3</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="bp">→</span> <span class="n">q</span> <span class="bp">=</span> <span class="mi">3</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">simp</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="n">ℂ</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="mi">3</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="bp">→</span> <span class="n">q</span> <span class="bp">=</span> <span class="mi">3</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">simp</span>
 
-example (q : ℚ) : (q : ℝ) = (3 : ℚ) → q = 3 := rat.cast_inj.1
-example (q : ℚ) : (q : ℂ) = (3 : ℚ) → q = 3 := rat.cast_inj.1
+<span class="kn">example</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="n">ℚ</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="mi">3</span> <span class="o">:</span> <span class="n">ℚ</span><span class="o">)</span> <span class="bp">→</span> <span class="n">q</span> <span class="bp">=</span> <span class="mi">3</span> <span class="o">:=</span> <span class="n">rat</span><span class="bp">.</span><span class="n">cast_inj</span><span class="bp">.</span><span class="mi">1</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="n">ℚ</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="n">ℂ</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="mi">3</span> <span class="o">:</span> <span class="n">ℚ</span><span class="o">)</span> <span class="bp">→</span> <span class="n">q</span> <span class="bp">=</span> <span class="mi">3</span> <span class="o">:=</span> <span class="n">rat</span><span class="bp">.</span><span class="n">cast_inj</span><span class="bp">.</span><span class="mi">1</span>
 
-example (q : ℝ) : (q : ℂ) = (3 : ℝ) → q = 3 := by simp
-```
+<span class="kn">example</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="n">ℂ</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="mi">3</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="bp">→</span> <span class="n">q</span> <span class="bp">=</span> <span class="mi">3</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">simp</span>
+</pre></div>
 
-Two down, eight to go
+
+<p>Two down, eight to go</p>
 
 #### [ Kevin Buzzard (Oct 28 2018 at 14:11)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23443%20docs%20for%20N%20-%3E%20Z%20-%3E%20Q%20-%3E%20R%20-%3E%20C/near/136651559):
-[just to be clear, simp never works here]
+<p>[just to be clear, simp never works here]</p>
 
 #### [ Kevin Buzzard (Oct 28 2018 at 14:13)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23443%20docs%20for%20N%20-%3E%20Z%20-%3E%20Q%20-%3E%20R%20-%3E%20C/near/136651612):
-```lean
-example (q : ℕ) : (q : ℤ) = (3 : ℕ) → q = 3 := int.of_nat_inj
-example (q : ℕ) : (q : ℚ) = (3 : ℕ) → q = 3 := nat.cast_inj.1
-example (q : ℕ) : (q : ℝ) = (3 : ℕ) → q = 3 := nat.cast_inj.1
-example (q : ℕ) : (q : ℂ) = (3 : ℕ) → q = 3 := nat.cast_inj.1
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="mi">3</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="bp">→</span> <span class="n">q</span> <span class="bp">=</span> <span class="mi">3</span> <span class="o">:=</span> <span class="n">int</span><span class="bp">.</span><span class="n">of_nat_inj</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="n">ℚ</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="mi">3</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="bp">→</span> <span class="n">q</span> <span class="bp">=</span> <span class="mi">3</span> <span class="o">:=</span> <span class="n">nat</span><span class="bp">.</span><span class="n">cast_inj</span><span class="bp">.</span><span class="mi">1</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="mi">3</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="bp">→</span> <span class="n">q</span> <span class="bp">=</span> <span class="mi">3</span> <span class="o">:=</span> <span class="n">nat</span><span class="bp">.</span><span class="n">cast_inj</span><span class="bp">.</span><span class="mi">1</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="n">ℂ</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="mi">3</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="bp">→</span> <span class="n">q</span> <span class="bp">=</span> <span class="mi">3</span> <span class="o">:=</span> <span class="n">nat</span><span class="bp">.</span><span class="n">cast_inj</span><span class="bp">.</span><span class="mi">1</span>
 
-example (q : ℤ) : (q : ℚ) = (3 : ℤ) → q = 3 := int.cast_inj.1
-example (q : ℤ) : (q : ℝ) = (3 : ℤ) → q = 3 := int.cast_inj.1
-example (q : ℤ) : (q : ℂ) = (3 : ℤ) → q = 3 := int.cast_inj.1
+<span class="kn">example</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="n">ℚ</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="mi">3</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="bp">→</span> <span class="n">q</span> <span class="bp">=</span> <span class="mi">3</span> <span class="o">:=</span> <span class="n">int</span><span class="bp">.</span><span class="n">cast_inj</span><span class="bp">.</span><span class="mi">1</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="mi">3</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="bp">→</span> <span class="n">q</span> <span class="bp">=</span> <span class="mi">3</span> <span class="o">:=</span> <span class="n">int</span><span class="bp">.</span><span class="n">cast_inj</span><span class="bp">.</span><span class="mi">1</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="n">ℂ</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="mi">3</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="bp">→</span> <span class="n">q</span> <span class="bp">=</span> <span class="mi">3</span> <span class="o">:=</span> <span class="n">int</span><span class="bp">.</span><span class="n">cast_inj</span><span class="bp">.</span><span class="mi">1</span>
 
-example (q : ℚ) : (q : ℝ) = (3 : ℚ) → q = 3 := rat.cast_inj.1
-example (q : ℚ) : (q : ℂ) = (3 : ℚ) → q = 3 := rat.cast_inj.1
+<span class="kn">example</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="n">ℚ</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="mi">3</span> <span class="o">:</span> <span class="n">ℚ</span><span class="o">)</span> <span class="bp">→</span> <span class="n">q</span> <span class="bp">=</span> <span class="mi">3</span> <span class="o">:=</span> <span class="n">rat</span><span class="bp">.</span><span class="n">cast_inj</span><span class="bp">.</span><span class="mi">1</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="n">ℚ</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="n">ℂ</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="mi">3</span> <span class="o">:</span> <span class="n">ℚ</span><span class="o">)</span> <span class="bp">→</span> <span class="n">q</span> <span class="bp">=</span> <span class="mi">3</span> <span class="o">:=</span> <span class="n">rat</span><span class="bp">.</span><span class="n">cast_inj</span><span class="bp">.</span><span class="mi">1</span>
 
-example (q : ℝ) : (q : ℂ) = (3 : ℝ) → q = 3 := complex.of_real_inj.1
-```
+<span class="kn">example</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="n">ℂ</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="mi">3</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="bp">→</span> <span class="n">q</span> <span class="bp">=</span> <span class="mi">3</span> <span class="o">:=</span> <span class="n">complex</span><span class="bp">.</span><span class="n">of_real_inj</span><span class="bp">.</span><span class="mi">1</span>
+</pre></div>
 
 #### [ Mario Carneiro (Oct 28 2018 at 14:14)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23443%20docs%20for%20N%20-%3E%20Z%20-%3E%20Q%20-%3E%20R%20-%3E%20C/near/136651657):
-```lean
-example (q : ℕ) (h : (q : ℤ) = (3 : ℕ)) : q = 3 := int.coe_nat_inj'.1 $ by simpa
-example (q : ℕ) (h : (q : ℚ) = (3 : ℕ)) : q = 3 := (@nat.cast_inj ℚ _ _ _ _ _).1 $ by simpa
-example (q : ℕ) (h : (q : ℝ) = (3 : ℕ)) : q = 3 := (@nat.cast_inj ℝ _ _ _ _ _).1 $ by simpa
-example (q : ℕ) (h : (q : ℂ) = (3 : ℕ)) : q = 3 := (@nat.cast_inj ℂ _ _ _ _ _).1 $ by simpa
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="mi">3</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">))</span> <span class="o">:</span> <span class="n">q</span> <span class="bp">=</span> <span class="mi">3</span> <span class="o">:=</span> <span class="n">int</span><span class="bp">.</span><span class="n">coe_nat_inj&#39;</span><span class="bp">.</span><span class="mi">1</span> <span class="err">$</span> <span class="k">by</span> <span class="n">simpa</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="n">ℚ</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="mi">3</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">))</span> <span class="o">:</span> <span class="n">q</span> <span class="bp">=</span> <span class="mi">3</span> <span class="o">:=</span> <span class="o">(</span><span class="bp">@</span><span class="n">nat</span><span class="bp">.</span><span class="n">cast_inj</span> <span class="n">ℚ</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">)</span><span class="bp">.</span><span class="mi">1</span> <span class="err">$</span> <span class="k">by</span> <span class="n">simpa</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="mi">3</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">))</span> <span class="o">:</span> <span class="n">q</span> <span class="bp">=</span> <span class="mi">3</span> <span class="o">:=</span> <span class="o">(</span><span class="bp">@</span><span class="n">nat</span><span class="bp">.</span><span class="n">cast_inj</span> <span class="n">ℝ</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">)</span><span class="bp">.</span><span class="mi">1</span> <span class="err">$</span> <span class="k">by</span> <span class="n">simpa</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="n">ℂ</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="mi">3</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">))</span> <span class="o">:</span> <span class="n">q</span> <span class="bp">=</span> <span class="mi">3</span> <span class="o">:=</span> <span class="o">(</span><span class="bp">@</span><span class="n">nat</span><span class="bp">.</span><span class="n">cast_inj</span> <span class="n">ℂ</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">)</span><span class="bp">.</span><span class="mi">1</span> <span class="err">$</span> <span class="k">by</span> <span class="n">simpa</span>
 
-example (q : ℤ) (h : (q : ℚ) = (3 : ℤ)) : q = 3 := (@int.cast_inj ℚ _ _ _ _ _).1 $ by simpa
-example (q : ℤ) (h : (q : ℝ) = (3 : ℤ)) : q = 3 := (@int.cast_inj ℝ _ _ _ _ _).1 $ by simpa
-example (q : ℤ) (h : (q : ℂ) = (3 : ℤ)) : q = 3 := (@int.cast_inj ℂ _ _ _ _ _).1 $ by simpa
+<span class="kn">example</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="n">ℚ</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="mi">3</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">))</span> <span class="o">:</span> <span class="n">q</span> <span class="bp">=</span> <span class="mi">3</span> <span class="o">:=</span> <span class="o">(</span><span class="bp">@</span><span class="n">int</span><span class="bp">.</span><span class="n">cast_inj</span> <span class="n">ℚ</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">)</span><span class="bp">.</span><span class="mi">1</span> <span class="err">$</span> <span class="k">by</span> <span class="n">simpa</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="mi">3</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">))</span> <span class="o">:</span> <span class="n">q</span> <span class="bp">=</span> <span class="mi">3</span> <span class="o">:=</span> <span class="o">(</span><span class="bp">@</span><span class="n">int</span><span class="bp">.</span><span class="n">cast_inj</span> <span class="n">ℝ</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">)</span><span class="bp">.</span><span class="mi">1</span> <span class="err">$</span> <span class="k">by</span> <span class="n">simpa</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="n">ℂ</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="mi">3</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">))</span> <span class="o">:</span> <span class="n">q</span> <span class="bp">=</span> <span class="mi">3</span> <span class="o">:=</span> <span class="o">(</span><span class="bp">@</span><span class="n">int</span><span class="bp">.</span><span class="n">cast_inj</span> <span class="n">ℂ</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">)</span><span class="bp">.</span><span class="mi">1</span> <span class="err">$</span> <span class="k">by</span> <span class="n">simpa</span>
 
-example (q : ℚ) (h : (q : ℝ) = (3 : ℚ)) : q = 3 := (@rat.cast_inj ℝ _ _ _ _).1 $ by simpa
-example (q : ℚ) (h : (q : ℂ) = (3 : ℚ)) : q = 3 := (@rat.cast_inj ℂ _ _ _ _).1 $ by simpa
+<span class="kn">example</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="n">ℚ</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="mi">3</span> <span class="o">:</span> <span class="n">ℚ</span><span class="o">))</span> <span class="o">:</span> <span class="n">q</span> <span class="bp">=</span> <span class="mi">3</span> <span class="o">:=</span> <span class="o">(</span><span class="bp">@</span><span class="n">rat</span><span class="bp">.</span><span class="n">cast_inj</span> <span class="n">ℝ</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">)</span><span class="bp">.</span><span class="mi">1</span> <span class="err">$</span> <span class="k">by</span> <span class="n">simpa</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="n">ℚ</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="n">ℂ</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="mi">3</span> <span class="o">:</span> <span class="n">ℚ</span><span class="o">))</span> <span class="o">:</span> <span class="n">q</span> <span class="bp">=</span> <span class="mi">3</span> <span class="o">:=</span> <span class="o">(</span><span class="bp">@</span><span class="n">rat</span><span class="bp">.</span><span class="n">cast_inj</span> <span class="n">ℂ</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">)</span><span class="bp">.</span><span class="mi">1</span> <span class="err">$</span> <span class="k">by</span> <span class="n">simpa</span>
 
-example (q : ℝ) (h : (q : ℂ) = (3 : ℝ)) : q = 3 := complex.of_real_inj.1 $ by simpa
-```
-8/10
+<span class="kn">example</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="n">ℂ</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="mi">3</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">))</span> <span class="o">:</span> <span class="n">q</span> <span class="bp">=</span> <span class="mi">3</span> <span class="o">:=</span> <span class="n">complex</span><span class="bp">.</span><span class="n">of_real_inj</span><span class="bp">.</span><span class="mi">1</span> <span class="err">$</span> <span class="k">by</span> <span class="n">simpa</span>
+</pre></div>
+
+
+<p>8/10</p>
 
 #### [ Mario Carneiro (Oct 28 2018 at 14:15)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23443%20docs%20for%20N%20-%3E%20Z%20-%3E%20Q%20-%3E%20R%20-%3E%20C/near/136651662):
-the `rat.cast_inj` ones don't work for some reason
+<p>the <code>rat.cast_inj</code> ones don't work for some reason</p>
 
 #### [ Kevin Buzzard (Oct 28 2018 at 14:15)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23443%20docs%20for%20N%20-%3E%20Z%20-%3E%20Q%20-%3E%20R%20-%3E%20C/near/136651672):
-?! :-)
+<p>?! :-)</p>
 
 #### [ Mario Carneiro (Oct 28 2018 at 14:16)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23443%20docs%20for%20N%20-%3E%20Z%20-%3E%20Q%20-%3E%20R%20-%3E%20C/near/136651732):
-lol, `by simpa using h` works
+<p>lol, <code>by simpa using h</code> works</p>
 
 #### [ Mario Carneiro (Oct 28 2018 at 14:19)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23443%20docs%20for%20N%20-%3E%20Z%20-%3E%20Q%20-%3E%20R%20-%3E%20C/near/136651813):
-```lean
-example (q : ℕ) (h : (q : ℤ) = (3 : ℕ)) : q = 3 := int.coe_nat_inj'.1 $ by simpa using h
-example (q : ℕ) (h : (q : ℚ) = (3 : ℕ)) : q = 3 := (@nat.cast_inj ℚ _ _ _ _ _).1 $ by simpa using h
-example (q : ℕ) (h : (q : ℝ) = (3 : ℕ)) : q = 3 := (@nat.cast_inj ℝ _ _ _ _ _).1 $ by simpa using h
-example (q : ℕ) (h : (q : ℂ) = (3 : ℕ)) : q = 3 := (@nat.cast_inj ℂ _ _ _ _ _).1 $ by simpa using h
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="mi">3</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">))</span> <span class="o">:</span> <span class="n">q</span> <span class="bp">=</span> <span class="mi">3</span> <span class="o">:=</span> <span class="n">int</span><span class="bp">.</span><span class="n">coe_nat_inj&#39;</span><span class="bp">.</span><span class="mi">1</span> <span class="err">$</span> <span class="k">by</span> <span class="n">simpa</span> <span class="kn">using</span> <span class="n">h</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="n">ℚ</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="mi">3</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">))</span> <span class="o">:</span> <span class="n">q</span> <span class="bp">=</span> <span class="mi">3</span> <span class="o">:=</span> <span class="o">(</span><span class="bp">@</span><span class="n">nat</span><span class="bp">.</span><span class="n">cast_inj</span> <span class="n">ℚ</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">)</span><span class="bp">.</span><span class="mi">1</span> <span class="err">$</span> <span class="k">by</span> <span class="n">simpa</span> <span class="kn">using</span> <span class="n">h</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="mi">3</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">))</span> <span class="o">:</span> <span class="n">q</span> <span class="bp">=</span> <span class="mi">3</span> <span class="o">:=</span> <span class="o">(</span><span class="bp">@</span><span class="n">nat</span><span class="bp">.</span><span class="n">cast_inj</span> <span class="n">ℝ</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">)</span><span class="bp">.</span><span class="mi">1</span> <span class="err">$</span> <span class="k">by</span> <span class="n">simpa</span> <span class="kn">using</span> <span class="n">h</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="n">ℂ</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="mi">3</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">))</span> <span class="o">:</span> <span class="n">q</span> <span class="bp">=</span> <span class="mi">3</span> <span class="o">:=</span> <span class="o">(</span><span class="bp">@</span><span class="n">nat</span><span class="bp">.</span><span class="n">cast_inj</span> <span class="n">ℂ</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">)</span><span class="bp">.</span><span class="mi">1</span> <span class="err">$</span> <span class="k">by</span> <span class="n">simpa</span> <span class="kn">using</span> <span class="n">h</span>
 
-example (q : ℤ) (h : (q : ℚ) = (3 : ℤ)) : q = 3 := (@int.cast_inj ℚ _ _ _ _ _).1 $ by simpa using h
-example (q : ℤ) (h : (q : ℝ) = (3 : ℤ)) : q = 3 := (@int.cast_inj ℝ _ _ _ _ _).1 $ by simpa using h
-example (q : ℤ) (h : (q : ℂ) = (3 : ℤ)) : q = 3 := (@int.cast_inj ℂ _ _ _ _ _).1 $ by simpa using h
+<span class="kn">example</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="n">ℚ</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="mi">3</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">))</span> <span class="o">:</span> <span class="n">q</span> <span class="bp">=</span> <span class="mi">3</span> <span class="o">:=</span> <span class="o">(</span><span class="bp">@</span><span class="n">int</span><span class="bp">.</span><span class="n">cast_inj</span> <span class="n">ℚ</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">)</span><span class="bp">.</span><span class="mi">1</span> <span class="err">$</span> <span class="k">by</span> <span class="n">simpa</span> <span class="kn">using</span> <span class="n">h</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="mi">3</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">))</span> <span class="o">:</span> <span class="n">q</span> <span class="bp">=</span> <span class="mi">3</span> <span class="o">:=</span> <span class="o">(</span><span class="bp">@</span><span class="n">int</span><span class="bp">.</span><span class="n">cast_inj</span> <span class="n">ℝ</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">)</span><span class="bp">.</span><span class="mi">1</span> <span class="err">$</span> <span class="k">by</span> <span class="n">simpa</span> <span class="kn">using</span> <span class="n">h</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="n">ℂ</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="mi">3</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">))</span> <span class="o">:</span> <span class="n">q</span> <span class="bp">=</span> <span class="mi">3</span> <span class="o">:=</span> <span class="o">(</span><span class="bp">@</span><span class="n">int</span><span class="bp">.</span><span class="n">cast_inj</span> <span class="n">ℂ</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">)</span><span class="bp">.</span><span class="mi">1</span> <span class="err">$</span> <span class="k">by</span> <span class="n">simpa</span> <span class="kn">using</span> <span class="n">h</span>
 
-example (q : ℚ) (h : (q : ℝ) = (3 : ℚ)) : q = 3 := (@rat.cast_inj ℝ _ _ _ _).1 $ by simpa using h
-example (q : ℚ) (h : (q : ℂ) = (3 : ℚ)) : q = 3 := (@rat.cast_inj ℂ _ _ _ _).1 $ by simpa using h
+<span class="kn">example</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="n">ℚ</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="mi">3</span> <span class="o">:</span> <span class="n">ℚ</span><span class="o">))</span> <span class="o">:</span> <span class="n">q</span> <span class="bp">=</span> <span class="mi">3</span> <span class="o">:=</span> <span class="o">(</span><span class="bp">@</span><span class="n">rat</span><span class="bp">.</span><span class="n">cast_inj</span> <span class="n">ℝ</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">)</span><span class="bp">.</span><span class="mi">1</span> <span class="err">$</span> <span class="k">by</span> <span class="n">simpa</span> <span class="kn">using</span> <span class="n">h</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="n">ℚ</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="n">ℂ</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="mi">3</span> <span class="o">:</span> <span class="n">ℚ</span><span class="o">))</span> <span class="o">:</span> <span class="n">q</span> <span class="bp">=</span> <span class="mi">3</span> <span class="o">:=</span> <span class="o">(</span><span class="bp">@</span><span class="n">rat</span><span class="bp">.</span><span class="n">cast_inj</span> <span class="n">ℂ</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">)</span><span class="bp">.</span><span class="mi">1</span> <span class="err">$</span> <span class="k">by</span> <span class="n">simpa</span> <span class="kn">using</span> <span class="n">h</span>
 
-example (q : ℝ) (h : (q : ℂ) = (3 : ℝ)) : q = 3 := complex.of_real_inj.1 $ by simpa using h
-```
-10/10
+<span class="kn">example</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="n">ℂ</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="mi">3</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">))</span> <span class="o">:</span> <span class="n">q</span> <span class="bp">=</span> <span class="mi">3</span> <span class="o">:=</span> <span class="n">complex</span><span class="bp">.</span><span class="n">of_real_inj</span><span class="bp">.</span><span class="mi">1</span> <span class="err">$</span> <span class="k">by</span> <span class="n">simpa</span> <span class="kn">using</span> <span class="n">h</span>
+</pre></div>
+
+
+<p>10/10</p>
 
 #### [ Kevin Buzzard (Oct 28 2018 at 14:20)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23443%20docs%20for%20N%20-%3E%20Z%20-%3E%20Q%20-%3E%20R%20-%3E%20C/near/136651866):
-You still need to know the names of the five theorems though :-(
+<p>You still need to know the names of the five theorems though :-(</p>
 
 #### [ Mario Carneiro (Oct 28 2018 at 14:21)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23443%20docs%20for%20N%20-%3E%20Z%20-%3E%20Q%20-%3E%20R%20-%3E%20C/near/136651889):
-that's probably the best you will get unless you write a tactic that applies these five theorems. (It's not that hard, I'm sure your minions can do it)
+<p>that's probably the best you will get unless you write a tactic that applies these five theorems. (It's not that hard, I'm sure your minions can do it)</p>
 
 #### [ Kevin Buzzard (Oct 28 2018 at 14:21)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23443%20docs%20for%20N%20-%3E%20Z%20-%3E%20Q%20-%3E%20R%20-%3E%20C/near/136651891):
-I will fix up the docs giving as much of an algorithm as I can.
+<p>I will fix up the docs giving as much of an algorithm as I can.</p>
 
 #### [ Kevin Buzzard (Oct 28 2018 at 14:22)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23443%20docs%20for%20N%20-%3E%20Z%20-%3E%20Q%20-%3E%20R%20-%3E%20C/near/136651930):
-But I am always looking for challenges for my minions.
+<p>But I am always looking for challenges for my minions.</p>
 
 #### [ Kevin Buzzard (Oct 28 2018 at 14:22)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23443%20docs%20for%20N%20-%3E%20Z%20-%3E%20Q%20-%3E%20R%20-%3E%20C/near/136651933):
-What exactly are you envisaging?
+<p>What exactly are you envisaging?</p>
 
 #### [ Kevin Buzzard (Oct 28 2018 at 14:22)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23443%20docs%20for%20N%20-%3E%20Z%20-%3E%20Q%20-%3E%20R%20-%3E%20C/near/136651937):
-How much can one hope for?
+<p>How much can one hope for?</p>
 
 #### [ Mario Carneiro (Oct 28 2018 at 14:23)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23443%20docs%20for%20N%20-%3E%20Z%20-%3E%20Q%20-%3E%20R%20-%3E%20C/near/136651947):
-look at the type of the equality of the selected hypothesis or the target, if it's real or int or rat you can apply the right theorem by a lookup table
+<p>look at the type of the equality of the selected hypothesis or the target, if it's real or int or rat you can apply the right theorem by a lookup table</p>
 
 #### [ Kevin Buzzard (Oct 28 2018 at 14:25)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23443%20docs%20for%20N%20-%3E%20Z%20-%3E%20Q%20-%3E%20R%20-%3E%20C/near/136652004):
-```lean
-example (a : ℕ) (b : ℤ) (c : ℚ) (d : ℝ) (e : ℂ)
-  (h : ((((a + b) : ℝ) + (c * d)) : ℂ) + e = 53) :
-(a : ℂ) + b + c * d + e = 53 := by cast [h]
-```
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">b</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">(</span><span class="n">c</span> <span class="o">:</span> <span class="n">ℚ</span><span class="o">)</span> <span class="o">(</span><span class="n">d</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">(</span><span class="n">e</span> <span class="o">:</span> <span class="n">ℂ</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="o">((((</span><span class="n">a</span> <span class="bp">+</span> <span class="n">b</span><span class="o">)</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="bp">+</span> <span class="o">(</span><span class="n">c</span> <span class="bp">*</span> <span class="n">d</span><span class="o">))</span> <span class="o">:</span> <span class="n">ℂ</span><span class="o">)</span> <span class="bp">+</span> <span class="n">e</span> <span class="bp">=</span> <span class="mi">53</span><span class="o">)</span> <span class="o">:</span>
+<span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">ℂ</span><span class="o">)</span> <span class="bp">+</span> <span class="n">b</span> <span class="bp">+</span> <span class="n">c</span> <span class="bp">*</span> <span class="n">d</span> <span class="bp">+</span> <span class="n">e</span> <span class="bp">=</span> <span class="mi">53</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">cast</span> <span class="o">[</span><span class="n">h</span><span class="o">]</span>
+</pre></div>
 
 #### [ Kevin Buzzard (Oct 28 2018 at 14:25)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23443%20docs%20for%20N%20-%3E%20Z%20-%3E%20Q%20-%3E%20R%20-%3E%20C/near/136652005):
-Would something like that require Hudon-like powers?
+<p>Would something like that require Hudon-like powers?</p>
 
 #### [ Mario Carneiro (Oct 28 2018 at 14:26)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23443%20docs%20for%20N%20-%3E%20Z%20-%3E%20Q%20-%3E%20R%20-%3E%20C/near/136652052):
-as long as you keep the scope limited it should be fine
+<p>as long as you keep the scope limited it should be fine</p>
 
 #### [ Kevin Buzzard (Oct 28 2018 at 14:26)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23443%20docs%20for%20N%20-%3E%20Z%20-%3E%20Q%20-%3E%20R%20-%3E%20C/near/136652058):
-I am trying to get from you a feeling as to what is reasonable here
+<p>I am trying to get from you a feeling as to what is reasonable here</p>
 
 #### [ Kevin Buzzard (Oct 28 2018 at 14:26)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23443%20docs%20for%20N%20-%3E%20Z%20-%3E%20Q%20-%3E%20R%20-%3E%20C/near/136652060):
-so I can give them an accessible challenge
+<p>so I can give them an accessible challenge</p>
 
 #### [ Mario Carneiro (Oct 28 2018 at 14:26)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23443%20docs%20for%20N%20-%3E%20Z%20-%3E%20Q%20-%3E%20R%20-%3E%20C/near/136652063):
-the hudon powers come in when generalizing it to multiple hypotheses, reverting things, evaluating numerals or something
+<p>the hudon powers come in when generalizing it to multiple hypotheses, reverting things, evaluating numerals or something</p>
 
 #### [ Mario Carneiro (Oct 28 2018 at 14:27)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23443%20docs%20for%20N%20-%3E%20Z%20-%3E%20Q%20-%3E%20R%20-%3E%20C/near/136652072):
-I'm thinking closer to just automating literally those 10 examples
+<p>I'm thinking closer to just automating literally those 10 examples</p>
 
 #### [ Kevin Buzzard (Oct 28 2018 at 14:27)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23443%20docs%20for%20N%20-%3E%20Z%20-%3E%20Q%20-%3E%20R%20-%3E%20C/near/136652075):
-OK! I guess that is already a challenge as far as I am concerned!
+<p>OK! I guess that is already a challenge as far as I am concerned!</p>
 
 #### [ Mario Carneiro (Oct 28 2018 at 14:28)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23443%20docs%20for%20N%20-%3E%20Z%20-%3E%20Q%20-%3E%20R%20-%3E%20C/near/136652124):
-also possibly where the hypothesis and goal are switched
+<p>also possibly where the hypothesis and goal are switched</p>
 
 #### [ Kevin Buzzard (Oct 28 2018 at 14:47)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23443%20docs%20for%20N%20-%3E%20Z%20-%3E%20Q%20-%3E%20R%20-%3E%20C/near/136652751):
-```lean
-example (q r : ℕ) : (q : ℤ) = r → q = r := by simp -- fails
-example (q r : ℕ) : (q : ℚ) = r → q = r := by simp
-example (q r : ℕ) : (q : ℝ) = r → q = r := by simp
-example (q r : ℕ) : (q : ℂ) = r → q = r := by simp
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">q</span> <span class="n">r</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="bp">=</span> <span class="n">r</span> <span class="bp">→</span> <span class="n">q</span> <span class="bp">=</span> <span class="n">r</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">simp</span> <span class="c1">-- fails</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">q</span> <span class="n">r</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="n">ℚ</span><span class="o">)</span> <span class="bp">=</span> <span class="n">r</span> <span class="bp">→</span> <span class="n">q</span> <span class="bp">=</span> <span class="n">r</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">simp</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">q</span> <span class="n">r</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="bp">=</span> <span class="n">r</span> <span class="bp">→</span> <span class="n">q</span> <span class="bp">=</span> <span class="n">r</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">simp</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">q</span> <span class="n">r</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="n">ℂ</span><span class="o">)</span> <span class="bp">=</span> <span class="n">r</span> <span class="bp">→</span> <span class="n">q</span> <span class="bp">=</span> <span class="n">r</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">simp</span>
 
-example (q r : ℤ) : (q : ℚ) = r → q = r := by simp
-example (q r : ℤ) : (q : ℝ) = r → q = r := by simp
-example (q r : ℤ) : (q : ℂ) = r → q = r := by simp
+<span class="kn">example</span> <span class="o">(</span><span class="n">q</span> <span class="n">r</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="n">ℚ</span><span class="o">)</span> <span class="bp">=</span> <span class="n">r</span> <span class="bp">→</span> <span class="n">q</span> <span class="bp">=</span> <span class="n">r</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">simp</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">q</span> <span class="n">r</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="bp">=</span> <span class="n">r</span> <span class="bp">→</span> <span class="n">q</span> <span class="bp">=</span> <span class="n">r</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">simp</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">q</span> <span class="n">r</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="n">ℂ</span><span class="o">)</span> <span class="bp">=</span> <span class="n">r</span> <span class="bp">→</span> <span class="n">q</span> <span class="bp">=</span> <span class="n">r</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">simp</span>
 
-example (q r : ℚ) : (q : ℝ) = r → q = r := by simp
-example (q r : ℚ) : (q : ℂ) = r → q = r := by simp
+<span class="kn">example</span> <span class="o">(</span><span class="n">q</span> <span class="n">r</span> <span class="o">:</span> <span class="n">ℚ</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="bp">=</span> <span class="n">r</span> <span class="bp">→</span> <span class="n">q</span> <span class="bp">=</span> <span class="n">r</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">simp</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">q</span> <span class="n">r</span> <span class="o">:</span> <span class="n">ℚ</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="n">ℂ</span><span class="o">)</span> <span class="bp">=</span> <span class="n">r</span> <span class="bp">→</span> <span class="n">q</span> <span class="bp">=</span> <span class="n">r</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">simp</span>
 
-example (q r : ℝ) : (q : ℂ) = r → q = r := by simp
+<span class="kn">example</span> <span class="o">(</span><span class="n">q</span> <span class="n">r</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="n">ℂ</span><span class="o">)</span> <span class="bp">=</span> <span class="n">r</span> <span class="bp">→</span> <span class="n">q</span> <span class="bp">=</span> <span class="n">r</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">simp</span>
 
-@[simp] theorem should_I_be_a_simp_lemma (q r : ℕ) :
-(q : ℤ) = r ↔ q = r := ⟨int.of_nat_inj,λ h, h ▸ rfl⟩
+<span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="kn">theorem</span> <span class="n">should_I_be_a_simp_lemma</span> <span class="o">(</span><span class="n">q</span> <span class="n">r</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span>
+<span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="bp">=</span> <span class="n">r</span> <span class="bp">↔</span> <span class="n">q</span> <span class="bp">=</span> <span class="n">r</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="n">int</span><span class="bp">.</span><span class="n">of_nat_inj</span><span class="o">,</span><span class="bp">λ</span> <span class="n">h</span><span class="o">,</span> <span class="n">h</span> <span class="bp">▸</span> <span class="n">rfl</span><span class="bp">⟩</span>
 
-example (q r : ℕ) : (q : ℤ) = r → q = r := by simp -- works
-```
+<span class="kn">example</span> <span class="o">(</span><span class="n">q</span> <span class="n">r</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="bp">=</span> <span class="n">r</span> <span class="bp">→</span> <span class="n">q</span> <span class="bp">=</span> <span class="n">r</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">simp</span> <span class="c1">-- works</span>
+</pre></div>
 
-Is that a bad simp lemma? Is it already there if I do the right import?
+
+<p>Is that a bad simp lemma? Is it already there if I do the right import?</p>
 
 #### [ Johan Commelin (Oct 28 2018 at 15:02)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23443%20docs%20for%20N%20-%3E%20Z%20-%3E%20Q%20-%3E%20R%20-%3E%20C/near/136653290):
-@**Keeley Hoek** How would `rewrite_search` fare on these problems?
+<p><span class="user-mention" data-user-id="110111">@Keeley Hoek</span> How would <code>rewrite_search</code> fare on these problems?</p>
 
 #### [ Keeley Hoek (Oct 28 2018 at 15:06)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23443%20docs%20for%20N%20-%3E%20Z%20-%3E%20Q%20-%3E%20R%20-%3E%20C/near/136653417):
-I suspect `rewrite_search!` (bang) will dispatch them using `simp` accidentally, but I'll give `rewrite_search` a try and see if it gets lost.
+<p>I suspect <code>rewrite_search!</code> (bang) will dispatch them using <code>simp</code> accidentally, but I'll give <code>rewrite_search</code> a try and see if it gets lost.</p>
 
 #### [ Johan Commelin (Oct 28 2018 at 15:08)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23443%20docs%20for%20N%20-%3E%20Z%20-%3E%20Q%20-%3E%20R%20-%3E%20C/near/136653478):
-Well, I don't really mind which version you try... it would be nice if some tactic kills these.
+<p>Well, I don't really mind which version you try... it would be nice if some tactic kills these.</p>
 
 #### [ Kevin Buzzard (Oct 28 2018 at 15:13)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23443%20docs%20for%20N%20-%3E%20Z%20-%3E%20Q%20-%3E%20R%20-%3E%20C/near/136653623):
-Here are the 11 examples which `simp` doesn't kill.
+<p>Here are the 11 examples which <code>simp</code> doesn't kill.</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="mi">3</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="bp">→</span> <span class="n">q</span> <span class="bp">=</span> <span class="mi">3</span> <span class="o">:=</span> <span class="n">int</span><span class="bp">.</span><span class="n">of_nat_inj</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="n">ℚ</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="mi">3</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="bp">→</span> <span class="n">q</span> <span class="bp">=</span> <span class="mi">3</span> <span class="o">:=</span> <span class="n">nat</span><span class="bp">.</span><span class="n">cast_inj</span><span class="bp">.</span><span class="mi">1</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="mi">3</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="bp">→</span> <span class="n">q</span> <span class="bp">=</span> <span class="mi">3</span> <span class="o">:=</span> <span class="n">nat</span><span class="bp">.</span><span class="n">cast_inj</span><span class="bp">.</span><span class="mi">1</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="n">ℂ</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="mi">3</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="bp">→</span> <span class="n">q</span> <span class="bp">=</span> <span class="mi">3</span> <span class="o">:=</span> <span class="n">nat</span><span class="bp">.</span><span class="n">cast_inj</span><span class="bp">.</span><span class="mi">1</span>
 
-```lean
-example (q : ℕ) : (q : ℤ) = (3 : ℕ) → q = 3 := int.of_nat_inj
-example (q : ℕ) : (q : ℚ) = (3 : ℕ) → q = 3 := nat.cast_inj.1
-example (q : ℕ) : (q : ℝ) = (3 : ℕ) → q = 3 := nat.cast_inj.1
-example (q : ℕ) : (q : ℂ) = (3 : ℕ) → q = 3 := nat.cast_inj.1
+<span class="kn">example</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="n">ℚ</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="mi">3</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="bp">→</span> <span class="n">q</span> <span class="bp">=</span> <span class="mi">3</span> <span class="o">:=</span> <span class="n">int</span><span class="bp">.</span><span class="n">cast_inj</span><span class="bp">.</span><span class="mi">1</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="mi">3</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="bp">→</span> <span class="n">q</span> <span class="bp">=</span> <span class="mi">3</span> <span class="o">:=</span> <span class="n">int</span><span class="bp">.</span><span class="n">cast_inj</span><span class="bp">.</span><span class="mi">1</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="n">ℂ</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="mi">3</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="bp">→</span> <span class="n">q</span> <span class="bp">=</span> <span class="mi">3</span> <span class="o">:=</span> <span class="n">int</span><span class="bp">.</span><span class="n">cast_inj</span><span class="bp">.</span><span class="mi">1</span>
 
-example (q : ℤ) : (q : ℚ) = (3 : ℤ) → q = 3 := int.cast_inj.1
-example (q : ℤ) : (q : ℝ) = (3 : ℤ) → q = 3 := int.cast_inj.1
-example (q : ℤ) : (q : ℂ) = (3 : ℤ) → q = 3 := int.cast_inj.1
+<span class="kn">example</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="n">ℚ</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="mi">3</span> <span class="o">:</span> <span class="n">ℚ</span><span class="o">)</span> <span class="bp">→</span> <span class="n">q</span> <span class="bp">=</span> <span class="mi">3</span> <span class="o">:=</span> <span class="n">rat</span><span class="bp">.</span><span class="n">cast_inj</span><span class="bp">.</span><span class="mi">1</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="n">ℚ</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="n">ℂ</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="mi">3</span> <span class="o">:</span> <span class="n">ℚ</span><span class="o">)</span> <span class="bp">→</span> <span class="n">q</span> <span class="bp">=</span> <span class="mi">3</span> <span class="o">:=</span> <span class="n">rat</span><span class="bp">.</span><span class="n">cast_inj</span><span class="bp">.</span><span class="mi">1</span>
 
-example (q : ℚ) : (q : ℝ) = (3 : ℚ) → q = 3 := rat.cast_inj.1
-example (q : ℚ) : (q : ℂ) = (3 : ℚ) → q = 3 := rat.cast_inj.1
+<span class="kn">example</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="n">ℂ</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="mi">3</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="bp">→</span> <span class="n">q</span> <span class="bp">=</span> <span class="mi">3</span> <span class="o">:=</span> <span class="n">complex</span><span class="bp">.</span><span class="n">of_real_inj</span><span class="bp">.</span><span class="mi">1</span>
 
-example (q : ℝ) : (q : ℂ) = (3 : ℝ) → q = 3 := complex.of_real_inj.1
-
-example (q r : ℕ) : (q : ℤ) = r → q = r := int.of_nat_inj
-```
+<span class="kn">example</span> <span class="o">(</span><span class="n">q</span> <span class="n">r</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="bp">=</span> <span class="n">r</span> <span class="bp">→</span> <span class="n">q</span> <span class="bp">=</span> <span class="n">r</span> <span class="o">:=</span> <span class="n">int</span><span class="bp">.</span><span class="n">of_nat_inj</span>
+</pre></div>
 
 #### [ Kevin Buzzard (Oct 28 2018 at 15:14)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23443%20docs%20for%20N%20-%3E%20Z%20-%3E%20Q%20-%3E%20R%20-%3E%20C/near/136653673):
-My understanding is that `simp` knows the right lemma in most cases, but applies things in the wrong order and gets stuck (it simplifies `\u 3` to 3). The iff statement corresponding to`int.of_nat_inj` should perhaps be a simp lemma, and if I've got this right then that kills the last example.
+<p>My understanding is that <code>simp</code> knows the right lemma in most cases, but applies things in the wrong order and gets stuck (it simplifies <code>\u 3</code> to 3). The iff statement corresponding to<code>int.of_nat_inj</code> should perhaps be a simp lemma, and if I've got this right then that kills the last example.</p>
 
 #### [ Keeley Hoek (Oct 28 2018 at 15:31)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23443%20docs%20for%20N%20-%3E%20Z%20-%3E%20Q%20-%3E%20R%20-%3E%20C/near/136654313):
-I fed it
-````lean
-import data.complex.basic
-example (a b : ℤ) : ((a + b : ℤ) : ℝ) = a + b := int.cast_add a b
--- set_option trace.simplify.rewrite true
-example (a : ℤ) (b : ℕ) (c : ℚ) (d : ℝ) :
-(a : ℂ) + b * c - d = (((a + ((b * c) : ℚ) : ℚ) - d) : ℝ) :=
-begin
-  rw rat.cast_add,
-  rw rat.cast_coe_int,
-  rw complex.of_real_sub,
-  rw complex.of_real_add,
-  rw rat.cast_mul,
-  rw complex.of_real_mul,
-  rw rat.cast_coe_nat,
-  rw complex.of_real_int_cast,
-  rw complex.of_real_nat_cast,
-  rw complex.of_real_rat_cast,
-end
-````
-and it gives back the proof
-````
-rw complex.of_real_sub,
+<p>I fed it</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">complex</span><span class="bp">.</span><span class="n">basic</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">:</span> <span class="o">((</span><span class="n">a</span> <span class="bp">+</span> <span class="n">b</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="bp">=</span> <span class="n">a</span> <span class="bp">+</span> <span class="n">b</span> <span class="o">:=</span> <span class="n">int</span><span class="bp">.</span><span class="n">cast_add</span> <span class="n">a</span> <span class="n">b</span>
+<span class="c1">-- set_option trace.simplify.rewrite true</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">(</span><span class="n">b</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">c</span> <span class="o">:</span> <span class="n">ℚ</span><span class="o">)</span> <span class="o">(</span><span class="n">d</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">:</span>
+<span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">ℂ</span><span class="o">)</span> <span class="bp">+</span> <span class="n">b</span> <span class="bp">*</span> <span class="n">c</span> <span class="bp">-</span> <span class="n">d</span> <span class="bp">=</span> <span class="o">(((</span><span class="n">a</span> <span class="bp">+</span> <span class="o">((</span><span class="n">b</span> <span class="bp">*</span> <span class="n">c</span><span class="o">)</span> <span class="o">:</span> <span class="n">ℚ</span><span class="o">)</span> <span class="o">:</span> <span class="n">ℚ</span><span class="o">)</span> <span class="bp">-</span> <span class="n">d</span><span class="o">)</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">rw</span> <span class="n">rat</span><span class="bp">.</span><span class="n">cast_add</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="n">rat</span><span class="bp">.</span><span class="n">cast_coe_int</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="n">complex</span><span class="bp">.</span><span class="n">of_real_sub</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="n">complex</span><span class="bp">.</span><span class="n">of_real_add</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="n">rat</span><span class="bp">.</span><span class="n">cast_mul</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="n">complex</span><span class="bp">.</span><span class="n">of_real_mul</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="n">rat</span><span class="bp">.</span><span class="n">cast_coe_nat</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="n">complex</span><span class="bp">.</span><span class="n">of_real_int_cast</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="n">complex</span><span class="bp">.</span><span class="n">of_real_nat_cast</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="n">complex</span><span class="bp">.</span><span class="n">of_real_rat_cast</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>and it gives back the proof</p>
+<div class="codehilite"><pre><span></span>rw complex.of_real_sub,
 rw complex.of_real_rat_cast,
 rw rat.cast_add,
 rw rat.cast_mul,
 rw rat.cast_coe_int,
 rw rat.cast_coe_nat,
-````
-or in short form
-````
-conv_rhs { rw complex.of_real_sub, congr, rw [complex.of_real_rat_cast, rat.cast_add],
+</pre></div>
+
+
+<p>or in short form</p>
+<div class="codehilite"><pre><span></span>conv_rhs { rw complex.of_real_sub, congr, rw [complex.of_real_rat_cast, rat.cast_add],
            congr, rw rat.cast_coe_int, skip, rw rat.cast_mul, congr, rw rat.cast_coe_nat }
-````
+</pre></div>
 
 #### [ Johan Commelin (Oct 28 2018 at 15:35)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23443%20docs%20for%20N%20-%3E%20Z%20-%3E%20Q%20-%3E%20R%20-%3E%20C/near/136654427):
-Ok, I don't understand completely. Did you give it hints, or did it find these proofs all alone?
+<p>Ok, I don't understand completely. Did you give it hints, or did it find these proofs all alone?</p>
 
 #### [ Keeley Hoek (Oct 28 2018 at 15:37)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23443%20docs%20for%20N%20-%3E%20Z%20-%3E%20Q%20-%3E%20R%20-%3E%20C/near/136654501):
-I had to cheat an tell it "use the coersion bundle of lemmas",
-we have a cute little command `suggestion coes` to do this
-
-To get it I just stripped out the body of the `begin...end` block and inserted a call to `rewrite_search {trace_result := tt}` instead
-And yeah `rewrite_search!` just cheats
+<p>I had to cheat an tell it "use the coersion bundle of lemmas",<br>
+we have a cute little command <code>suggestion coes</code> to do this</p>
+<p>To get it I just stripped out the body of the <code>begin...end</code> block and inserted a call to <code>rewrite_search {trace_result := tt}</code> instead<br>
+And yeah <code>rewrite_search!</code> just cheats</p>
 
 #### [ Johan Commelin (Oct 28 2018 at 15:39)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23443%20docs%20for%20N%20-%3E%20Z%20-%3E%20Q%20-%3E%20R%20-%3E%20C/near/136654571):
-Ok, but could we potentially use this as a hammer to kill variants of these lemmas in one line (one word)...
+<p>Ok, but could we potentially use this as a hammer to kill variants of these lemmas in one line (one word)...</p>
 
 #### [ Keeley Hoek (Oct 28 2018 at 15:41)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23443%20docs%20for%20N%20-%3E%20Z%20-%3E%20Q%20-%3E%20R%20-%3E%20C/near/136654660):
-Actually I didn't even need to write `suggestion coes`, I just needed to *create* the coes bundle, which didn't exist until it needed to just now. Rewrite search can detect its getting desperate and searches through its library of things to see if any bundle of things "coersions, category_theory, arithmetic, etc." are applicable and it starts trying the detected most relevant ones. This is still pretty crude though, we want to minimise the amount of handling like this
-
-That's right. I mean, so long as you give it access to `simp` (which it doesn't have without the bang) it is just like a shotgun version of `simp`, which should be at least as strong
+<p>Actually I didn't even need to write <code>suggestion coes</code>, I just needed to <em>create</em> the coes bundle, which didn't exist until it needed to just now. Rewrite search can detect its getting desperate and searches through its library of things to see if any bundle of things "coersions, category_theory, arithmetic, etc." are applicable and it starts trying the detected most relevant ones. This is still pretty crude though, we want to minimise the amount of handling like this</p>
+<p>That's right. I mean, so long as you give it access to <code>simp</code> (which it doesn't have without the bang) it is just like a shotgun version of <code>simp</code>, which should be at least as strong</p>
 
 #### [ Johan Commelin (Oct 28 2018 at 15:42)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23443%20docs%20for%20N%20-%3E%20Z%20-%3E%20Q%20-%3E%20R%20-%3E%20C/near/136654705):
-Cool! @**Kevin Buzzard** What do you think of this?
+<p>Cool! <span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> What do you think of this?</p>
 
 #### [ Kevin Buzzard (Oct 28 2018 at 16:10)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23443%20docs%20for%20N%20-%3E%20Z%20-%3E%20Q%20-%3E%20R%20-%3E%20C/near/136655787):
-I don't really understand what is being said. I generated that long begin end proof with simp. Proving the equalities is not the problem, proving the injectivity of the coercions is the problem
+<p>I don't really understand what is being said. I generated that long begin end proof with simp. Proving the equalities is not the problem, proving the injectivity of the coercions is the problem</p>
 
 #### [ Kenny Lau (Oct 28 2018 at 16:39)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23443%20docs%20for%20N%20-%3E%20Z%20-%3E%20Q%20-%3E%20R%20-%3E%20C/near/136657206):
-https://github.com/leanprover/mathlib/pull/447
+<p><a href="https://github.com/leanprover/mathlib/pull/447" target="_blank" title="https://github.com/leanprover/mathlib/pull/447">https://github.com/leanprover/mathlib/pull/447</a></p>
 
 #### [ Jean Lo (Oct 28 2018 at 19:46)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23443%20docs%20for%20N%20-%3E%20Z%20-%3E%20Q%20-%3E%20R%20-%3E%20C/near/136665415):
-Hi. I'm one of @**Kevin Buzzard**'s minions who's just started learning about Lean. Here's a first attempt at a tactic that obviates the need to remember the names for all the `cast_inj` things by just trying each of them in sequence:
+<p>Hi. I'm one of <span class="user-mention" data-user-id="110038">@Kevin Buzzard</span>'s minions who's just started learning about Lean. Here's a first attempt at a tactic that obviates the need to remember the names for all the <code>cast_inj</code> things by just trying each of them in sequence:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">rat</span> <span class="n">data</span><span class="bp">.</span><span class="n">real</span><span class="bp">.</span><span class="n">basic</span> <span class="n">data</span><span class="bp">.</span><span class="n">complex</span><span class="bp">.</span><span class="n">basic</span>
 
-```lean
-import data.rat data.real.basic data.complex.basic
+<span class="kn">open</span> <span class="n">tactic</span>
 
-open tactic
+<span class="n">meta</span> <span class="n">def</span> <span class="n">nzqrc</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span> <span class="n">do</span>
+  <span class="n">eh</span> <span class="err">←</span> <span class="n">intro</span> <span class="bp">`</span><span class="n">h</span><span class="o">,</span>
+  <span class="n">to_expr</span> <span class="bp">```</span><span class="o">(</span><span class="n">int</span><span class="bp">.</span><span class="n">of_nat_inj</span> <span class="n">h</span><span class="o">)</span> <span class="bp">&gt;&gt;=</span> <span class="n">exact</span> <span class="bp">&lt;|&gt;</span>
+  <span class="n">to_expr</span> <span class="bp">```</span><span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">cast_inj</span><span class="bp">.</span><span class="mi">1</span> <span class="n">h</span><span class="o">)</span> <span class="bp">&gt;&gt;=</span> <span class="n">exact</span> <span class="bp">&lt;|&gt;</span>
+  <span class="n">to_expr</span> <span class="bp">```</span><span class="o">(</span><span class="n">int</span><span class="bp">.</span><span class="n">cast_inj</span><span class="bp">.</span><span class="mi">1</span> <span class="n">h</span><span class="o">)</span> <span class="bp">&gt;&gt;=</span> <span class="n">exact</span> <span class="bp">&lt;|&gt;</span>
+  <span class="n">to_expr</span> <span class="bp">```</span><span class="o">(</span><span class="n">rat</span><span class="bp">.</span><span class="n">cast_inj</span><span class="bp">.</span><span class="mi">1</span> <span class="n">h</span><span class="o">)</span> <span class="bp">&gt;&gt;=</span> <span class="n">exact</span> <span class="bp">&lt;|&gt;</span>
+  <span class="n">to_expr</span> <span class="bp">```</span><span class="o">(</span><span class="n">complex</span><span class="bp">.</span><span class="n">of_real_inj</span><span class="bp">.</span><span class="mi">1</span> <span class="n">h</span><span class="o">)</span> <span class="bp">&gt;&gt;=</span> <span class="n">exact</span> <span class="bp">&lt;|&gt;</span>
+  <span class="n">trace</span> <span class="s2">&quot;failed: no matching coercion&quot;</span>
 
-meta def nzqrc : tactic unit := do
-  eh ← intro `h,
-  to_expr ```(int.of_nat_inj h) >>= exact <|>
-  to_expr ```(nat.cast_inj.1 h) >>= exact <|>
-  to_expr ```(int.cast_inj.1 h) >>= exact <|>
-  to_expr ```(rat.cast_inj.1 h) >>= exact <|>
-  to_expr ```(complex.of_real_inj.1 h) >>= exact <|>
-  trace "failed: no matching coercion"
+<span class="kn">example</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="n">ℂ</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="mi">3</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="bp">→</span> <span class="n">q</span> <span class="bp">=</span> <span class="mi">3</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">nzqrc</span>
+</pre></div>
 
-example (q : ℤ) : (q : ℂ) = (3 : ℤ) → q = 3 := by nzqrc
-```
 
-I mentioned that I suspect the code could be made a lot tidier, and he suggested that I post it again in this stream. Would be very grateful if I could get some guidance with maybe taking something like this further as a tactic that makes dealing with coercions more straightforward for beginners?
+<p>I mentioned that I suspect the code could be made a lot tidier, and he suggested that I post it again in this stream. Would be very grateful if I could get some guidance with maybe taking something like this further as a tactic that makes dealing with coercions more straightforward for beginners?</p>
 
 #### [ Kevin Buzzard (Oct 28 2018 at 19:57)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23443%20docs%20for%20N%20-%3E%20Z%20-%3E%20Q%20-%3E%20R%20-%3E%20C/near/136665750):
-I guess my dream would be a tactic which takes as input a hypothesis which a mathematician would find indistinguishable from the goal (ie the same modulo coercions) and solves the goal. Is that asking too much?
+<p>I guess my dream would be a tactic which takes as input a hypothesis which a mathematician would find indistinguishable from the goal (ie the same modulo coercions) and solves the goal. Is that asking too much?</p>
 
 #### [ Kevin Buzzard (Oct 28 2018 at 19:58)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23443%20docs%20for%20N%20-%3E%20Z%20-%3E%20Q%20-%3E%20R%20-%3E%20C/near/136665790):
-I wouldn't have a clue how to start writing it though
+<p>I wouldn't have a clue how to start writing it though</p>
 
 #### [ Johan Commelin (Oct 28 2018 at 20:01)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23443%20docs%20for%20N%20-%3E%20Z%20-%3E%20Q%20-%3E%20R%20-%3E%20C/near/136665870):
-I think Keeley demonstrated that `rewrite_search!` can do that. So we should just get that tactic into mathlib.
+<p>I think Keeley demonstrated that <code>rewrite_search!</code> can do that. So we should just get that tactic into mathlib.</p>
 
 #### [ Chris Hughes (Oct 28 2018 at 20:03)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23443%20docs%20for%20N%20-%3E%20Z%20-%3E%20Q%20-%3E%20R%20-%3E%20C/near/136665925):
-Can `rewrite_search` simplify this proof from `data.zmod.quadratic_reciprocity`
-```lean
-lemma euler_criterion_units {x : units (zmodp p hp)} :
-  (∃ y : units (zmodp p hp), y ^ 2 = x) ↔ x ^ (p / 2) = 1 := _
+<p>Can <code>rewrite_search</code> simplify this proof from <code>data.zmod.quadratic_reciprocity</code></p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">euler_criterion_units</span> <span class="o">{</span><span class="n">x</span> <span class="o">:</span> <span class="n">units</span> <span class="o">(</span><span class="n">zmodp</span> <span class="n">p</span> <span class="n">hp</span><span class="o">)}</span> <span class="o">:</span>
+  <span class="o">(</span><span class="bp">∃</span> <span class="n">y</span> <span class="o">:</span> <span class="n">units</span> <span class="o">(</span><span class="n">zmodp</span> <span class="n">p</span> <span class="n">hp</span><span class="o">),</span> <span class="n">y</span> <span class="err">^</span> <span class="mi">2</span> <span class="bp">=</span> <span class="n">x</span><span class="o">)</span> <span class="bp">↔</span> <span class="n">x</span> <span class="err">^</span> <span class="o">(</span><span class="n">p</span> <span class="bp">/</span> <span class="mi">2</span><span class="o">)</span> <span class="bp">=</span> <span class="mi">1</span> <span class="o">:=</span> <span class="bp">_</span>
 
-lemma euler_criterion {a : zmodp p hp} (ha : a ≠ 0) :
-  (∃ y : zmodp p hp, y ^ 2 = a) ↔ a ^ (p / 2) = 1 :=
-⟨λ ⟨y, hy⟩,
-  have hy0 : y ≠ 0, from λ h, by simp [h, _root_.zero_pow (succ_pos 1)] at hy; cc,
-  by simpa using (units.ext_iff.1 $ (euler_criterion_units hp).1 ⟨units.mk0 _ hy0, show _ = units.mk0 _ ha,
-    by rw [units.ext_iff]; simpa⟩),
-λ h, let ⟨y, hy⟩ := (euler_criterion_units hp).2 (show units.mk0 _ ha ^ (p / 2) = 1, by simpa [units.ext_iff]) in
-  ⟨y, by simpa [units.ext_iff] using hy⟩⟩
-```
+<span class="kn">lemma</span> <span class="n">euler_criterion</span> <span class="o">{</span><span class="n">a</span> <span class="o">:</span> <span class="n">zmodp</span> <span class="n">p</span> <span class="n">hp</span><span class="o">}</span> <span class="o">(</span><span class="n">ha</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">≠</span> <span class="mi">0</span><span class="o">)</span> <span class="o">:</span>
+  <span class="o">(</span><span class="bp">∃</span> <span class="n">y</span> <span class="o">:</span> <span class="n">zmodp</span> <span class="n">p</span> <span class="n">hp</span><span class="o">,</span> <span class="n">y</span> <span class="err">^</span> <span class="mi">2</span> <span class="bp">=</span> <span class="n">a</span><span class="o">)</span> <span class="bp">↔</span> <span class="n">a</span> <span class="err">^</span> <span class="o">(</span><span class="n">p</span> <span class="bp">/</span> <span class="mi">2</span><span class="o">)</span> <span class="bp">=</span> <span class="mi">1</span> <span class="o">:=</span>
+<span class="bp">⟨λ</span> <span class="bp">⟨</span><span class="n">y</span><span class="o">,</span> <span class="n">hy</span><span class="bp">⟩</span><span class="o">,</span>
+  <span class="k">have</span> <span class="n">hy0</span> <span class="o">:</span> <span class="n">y</span> <span class="bp">≠</span> <span class="mi">0</span><span class="o">,</span> <span class="k">from</span> <span class="bp">λ</span> <span class="n">h</span><span class="o">,</span> <span class="k">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">h</span><span class="o">,</span> <span class="bp">_</span><span class="n">root_</span><span class="bp">.</span><span class="n">zero_pow</span> <span class="o">(</span><span class="n">succ_pos</span> <span class="mi">1</span><span class="o">)]</span> <span class="n">at</span> <span class="n">hy</span><span class="bp">;</span> <span class="n">cc</span><span class="o">,</span>
+  <span class="k">by</span> <span class="n">simpa</span> <span class="kn">using</span> <span class="o">(</span><span class="n">units</span><span class="bp">.</span><span class="n">ext_iff</span><span class="bp">.</span><span class="mi">1</span> <span class="err">$</span> <span class="o">(</span><span class="n">euler_criterion_units</span> <span class="n">hp</span><span class="o">)</span><span class="bp">.</span><span class="mi">1</span> <span class="bp">⟨</span><span class="n">units</span><span class="bp">.</span><span class="n">mk0</span> <span class="bp">_</span> <span class="n">hy0</span><span class="o">,</span> <span class="k">show</span> <span class="bp">_</span> <span class="bp">=</span> <span class="n">units</span><span class="bp">.</span><span class="n">mk0</span> <span class="bp">_</span> <span class="n">ha</span><span class="o">,</span>
+    <span class="k">by</span> <span class="n">rw</span> <span class="o">[</span><span class="n">units</span><span class="bp">.</span><span class="n">ext_iff</span><span class="o">]</span><span class="bp">;</span> <span class="n">simpa</span><span class="bp">⟩</span><span class="o">),</span>
+<span class="bp">λ</span> <span class="n">h</span><span class="o">,</span> <span class="k">let</span> <span class="bp">⟨</span><span class="n">y</span><span class="o">,</span> <span class="n">hy</span><span class="bp">⟩</span> <span class="o">:=</span> <span class="o">(</span><span class="n">euler_criterion_units</span> <span class="n">hp</span><span class="o">)</span><span class="bp">.</span><span class="mi">2</span> <span class="o">(</span><span class="k">show</span> <span class="n">units</span><span class="bp">.</span><span class="n">mk0</span> <span class="bp">_</span> <span class="n">ha</span> <span class="err">^</span> <span class="o">(</span><span class="n">p</span> <span class="bp">/</span> <span class="mi">2</span><span class="o">)</span> <span class="bp">=</span> <span class="mi">1</span><span class="o">,</span> <span class="k">by</span> <span class="n">simpa</span> <span class="o">[</span><span class="n">units</span><span class="bp">.</span><span class="n">ext_iff</span><span class="o">])</span> <span class="k">in</span>
+  <span class="bp">⟨</span><span class="n">y</span><span class="o">,</span> <span class="k">by</span> <span class="n">simpa</span> <span class="o">[</span><span class="n">units</span><span class="bp">.</span><span class="n">ext_iff</span><span class="o">]</span> <span class="kn">using</span> <span class="n">hy</span><span class="bp">⟩⟩</span>
+</pre></div>
 
 #### [ Chris Hughes (Oct 28 2018 at 20:04)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23443%20docs%20for%20N%20-%3E%20Z%20-%3E%20Q%20-%3E%20R%20-%3E%20C/near/136665964):
-6 lines is outrageously long.
+<p>6 lines is outrageously long.</p>
 
 #### [ Chris Hughes (Oct 28 2018 at 20:05)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23443%20docs%20for%20N%20-%3E%20Z%20-%3E%20Q%20-%3E%20R%20-%3E%20C/near/136665992):
-And this certainly fits into the category of indistinguishable to most mathematicians.
+<p>And this certainly fits into the category of indistinguishable to most mathematicians.</p>
 
 #### [ Keeley Hoek (Oct 29 2018 at 04:10)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23443%20docs%20for%20N%20-%3E%20Z%20-%3E%20Q%20-%3E%20R%20-%3E%20C/near/136681427):
-It cannot Chris, but maybe it is just missing a lemma. If you strip the body of that proof and replace it with a call to `tidy` I get two goals (this is with the suped-up `tidy` of Scott's category theory library though, so mathlib tidy might be different). Do the goals you get look reasonable? I just looked very quickly and couldn't tell if they were nonsense or not.
+<p>It cannot Chris, but maybe it is just missing a lemma. If you strip the body of that proof and replace it with a call to <code>tidy</code> I get two goals (this is with the suped-up <code>tidy</code> of Scott's category theory library though, so mathlib tidy might be different). Do the goals you get look reasonable? I just looked very quickly and couldn't tell if they were nonsense or not.</p>
 
 #### [ Kevin Buzzard (Oct 29 2018 at 09:11)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23443%20docs%20for%20N%20-%3E%20Z%20-%3E%20Q%20-%3E%20R%20-%3E%20C/near/136690806):
-@**Johan Commelin** @**Keeley Hoek** @**Jean Lo** if I take a step back and look at the current state of [what I wrote](https://github.com/leanprover-community/mathlib/blob/cast_docs/docs/extras/casts.md), it seems to me that where we are is something like the following:
+<p><span class="user-mention" data-user-id="112680">@Johan Commelin</span> <span class="user-mention" data-user-id="110111">@Keeley Hoek</span> <span class="user-mention" data-user-id="132889">@Jean Lo</span> if I take a step back and look at the current state of <a href="https://github.com/leanprover-community/mathlib/blob/cast_docs/docs/extras/casts.md" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/cast_docs/docs/extras/casts.md">what I wrote</a>, it seems to me that where we are is something like the following:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">complex</span><span class="bp">.</span><span class="n">basic</span>
 
-```lean
-import data.complex.basic
+<span class="kn">example</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="n">ℚ</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="n">ℂ</span><span class="o">)</span> <span class="bp">=</span> <span class="mi">3</span><span class="o">)</span> <span class="o">:</span> <span class="n">q</span> <span class="bp">=</span> <span class="mi">3</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">h</span><span class="o">]</span> <span class="c1">-- fails</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="n">ℚ</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">q</span> <span class="bp">=</span> <span class="mi">3</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="n">ℂ</span><span class="o">)</span> <span class="bp">=</span> <span class="mi">3</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">h</span><span class="o">]</span> <span class="c1">-- works</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">q</span> <span class="n">r</span> <span class="o">:</span> <span class="n">ℚ</span><span class="o">)</span> <span class="o">:</span> <span class="n">q</span> <span class="err">^</span> <span class="mi">2</span> <span class="bp">=</span> <span class="n">r</span> <span class="bp">+</span> <span class="mi">7</span> <span class="bp">↔</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="err">^</span> <span class="mi">2</span> <span class="bp">=</span> <span class="n">r</span> <span class="bp">+</span> <span class="mi">7</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">simp</span> <span class="c1">-- fails</span>
+<span class="c1">-- next one fails but</span>
+<span class="c1">-- attribute [simp] int.of_nat_eq_of_nat_iff</span>
+<span class="c1">-- fixes is it. Is this a good simp lemma?</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">q</span> <span class="n">r</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="bp">=</span> <span class="n">r</span> <span class="bp">→</span> <span class="n">q</span> <span class="bp">=</span> <span class="n">r</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">simp</span> <span class="c1">-- currently fails</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">b</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">(</span><span class="n">c</span> <span class="o">:</span> <span class="n">ℚ</span><span class="o">)</span> <span class="o">(</span><span class="n">d</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">(</span><span class="n">e</span> <span class="o">:</span> <span class="n">ℂ</span><span class="o">)</span> <span class="o">:</span>
+<span class="o">((((</span><span class="n">a</span> <span class="bp">+</span> <span class="n">b</span><span class="o">)</span> <span class="o">:</span> <span class="n">ℚ</span><span class="o">)</span> <span class="bp">*</span> <span class="n">c</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">:</span> <span class="n">ℂ</span><span class="o">)</span><span class="bp">=</span> <span class="n">d</span> <span class="bp">*</span> <span class="n">e</span> <span class="bp">+</span> <span class="mi">12</span> <span class="bp">↔</span> <span class="o">((</span><span class="n">a</span> <span class="o">:</span> <span class="n">ℂ</span><span class="o">)</span> <span class="bp">+</span> <span class="n">b</span><span class="o">)</span> <span class="bp">*</span> <span class="n">c</span> <span class="bp">=</span> <span class="n">d</span> <span class="bp">*</span> <span class="n">e</span> <span class="bp">+</span> <span class="mi">12</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">simp</span> <span class="c1">-- works</span>
+</pre></div>
 
-example (q : ℚ) (h : (q : ℂ) = 3) : q = 3 := by simp [h] -- fails
-example (q : ℚ) (h : q = 3) : (q : ℂ) = 3 := by simp [h] -- works
-example (q r : ℚ) : q ^ 2 = r + 7 ↔ (q : ℝ) ^ 2 = r + 7 := by simp -- fails
--- next one fails but
--- attribute [simp] int.of_nat_eq_of_nat_iff
--- fixes is it. Is this a good simp lemma?
-example (q r : ℕ) : (q : ℤ) = r → q = r := by simp -- currently fails
-example (a : ℕ) (b : ℤ) (c : ℚ) (d : ℝ) (e : ℂ) :
-((((a + b) : ℚ) * c : ℝ) : ℂ)= d * e + 12 ↔ ((a : ℂ) + b) * c = d * e + 12 := by simp -- works
-```
 
-I think beginners would be rightly confused about the randomness of this. I am dreaming of a failsafe `cast_num` tactic which can replace `simp` here and which would solve every case. I do not know anything about `rewrite_search!` other than the fact that it doesn't seem to be in my mathlib -- sorry -- I've not been following these tactic developments. But this post is supposed to be some sort of indication as to what my ~~minions~~clients would be after.
+<p>I think beginners would be rightly confused about the randomness of this. I am dreaming of a failsafe <code>cast_num</code> tactic which can replace <code>simp</code> here and which would solve every case. I do not know anything about <code>rewrite_search!</code> other than the fact that it doesn't seem to be in my mathlib -- sorry -- I've not been following these tactic developments. But this post is supposed to be some sort of indication as to what my <del>minions</del>clients would be after.</p>
 
 #### [ Chris Hughes (Oct 29 2018 at 19:45)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23443%20docs%20for%20N%20-%3E%20Z%20-%3E%20Q%20-%3E%20R%20-%3E%20C/near/136726568):
-```quote
-It cannot Chris, but maybe it is just missing a lemma. If you strip the body of that proof and replace it with a call to `tidy` I get two goals (this is with the suped-up `tidy` of Scott's category theory library though, so mathlib tidy might be different). Do the goals you get look reasonable? I just looked very quickly and couldn't tell if they were nonsense or not.
-```
-I tried it. The second goal was false, it guessed `1` as a solution for the `exists` statement.
+<blockquote>
+<p>It cannot Chris, but maybe it is just missing a lemma. If you strip the body of that proof and replace it with a call to <code>tidy</code> I get two goals (this is with the suped-up <code>tidy</code> of Scott's category theory library though, so mathlib tidy might be different). Do the goals you get look reasonable? I just looked very quickly and couldn't tell if they were nonsense or not.</p>
+</blockquote>
+<p>I tried it. The second goal was false, it guessed <code>1</code> as a solution for the <code>exists</code> statement.</p>
 
 #### [ Johan Commelin (Oct 29 2018 at 19:49)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23443%20docs%20for%20N%20-%3E%20Z%20-%3E%20Q%20-%3E%20R%20-%3E%20C/near/136726817):
-But this is not related to the NZQRC casts, right?
+<p>But this is not related to the NZQRC casts, right?</p>
 
 #### [ Chris Hughes (Oct 29 2018 at 19:58)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23443%20docs%20for%20N%20-%3E%20Z%20-%3E%20Q%20-%3E%20R%20-%3E%20C/near/136727453):
-No
+<p>No</p>
 
 #### [ Chris Hughes (Oct 29 2018 at 19:59)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23443%20docs%20for%20N%20-%3E%20Z%20-%3E%20Q%20-%3E%20R%20-%3E%20C/near/136727490):
-But actually you might find similar problems with more complicated statements involving things like exists.
+<p>But actually you might find similar problems with more complicated statements involving things like exists.</p>
 
 
 {% endraw %}

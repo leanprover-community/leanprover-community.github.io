@@ -12,36 +12,33 @@ permalink: archive/113489newmembers/90813Provingbasicinequalitiesofnaturalnumber
 
 {% raw %}
 #### [ Sebastian Zimmer (Oct 13 2018 at 18:17)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20basic%20inequalities%20of%20natural%20numbers/near/135737118):
-linarith doesn't seem to be good enough to prove this basic inequality
-```lean
-lemma simple_order_lemma (k : ℕ) (h1 : k > 0) (h2 : ¬ k > 1) : k = 1 := begin
-sorry
-end 
-```
+<p>linarith doesn't seem to be good enough to prove this basic inequality</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">simple_order_lemma</span> <span class="o">(</span><span class="n">k</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">h1</span> <span class="o">:</span> <span class="n">k</span> <span class="bp">&gt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">(</span><span class="n">h2</span> <span class="o">:</span> <span class="bp">¬</span> <span class="n">k</span> <span class="bp">&gt;</span> <span class="mi">1</span><span class="o">)</span> <span class="o">:</span> <span class="n">k</span> <span class="bp">=</span> <span class="mi">1</span> <span class="o">:=</span> <span class="k">begin</span>
+<span class="n">sorry</span>
+<span class="kn">end</span>
+</pre></div>
 
 #### [ Sebastian Zimmer (Oct 13 2018 at 18:18)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20basic%20inequalities%20of%20natural%20numbers/near/135737158):
-What's the best way of proving this sort of result?
+<p>What's the best way of proving this sort of result?</p>
 
 #### [ Kenny Lau (Oct 13 2018 at 18:21)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20basic%20inequalities%20of%20natural%20numbers/near/135737269):
-```lean
-import data.nat.basic
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">nat</span><span class="bp">.</span><span class="n">basic</span>
 
-lemma simple_order_lemma (k : ℕ) (h1 : k > 0) (h2 : ¬ k > 1) : k = 1 :=
-(dec_trivial : ∀ k, k ≤ 1 → k > 0 → k = 1) k (le_of_not_gt h2) h1
-```
+<span class="kn">lemma</span> <span class="n">simple_order_lemma</span> <span class="o">(</span><span class="n">k</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">h1</span> <span class="o">:</span> <span class="n">k</span> <span class="bp">&gt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">(</span><span class="n">h2</span> <span class="o">:</span> <span class="bp">¬</span> <span class="n">k</span> <span class="bp">&gt;</span> <span class="mi">1</span><span class="o">)</span> <span class="o">:</span> <span class="n">k</span> <span class="bp">=</span> <span class="mi">1</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">dec_trivial</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">k</span><span class="o">,</span> <span class="n">k</span> <span class="bp">≤</span> <span class="mi">1</span> <span class="bp">→</span> <span class="n">k</span> <span class="bp">&gt;</span> <span class="mi">0</span> <span class="bp">→</span> <span class="n">k</span> <span class="bp">=</span> <span class="mi">1</span><span class="o">)</span> <span class="n">k</span> <span class="o">(</span><span class="n">le_of_not_gt</span> <span class="n">h2</span><span class="o">)</span> <span class="n">h1</span>
+</pre></div>
 
 #### [ Kenny Lau (Oct 13 2018 at 18:22)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20basic%20inequalities%20of%20natural%20numbers/near/135737317):
-```lean
-lemma simple_order_lemma (k : ℕ) (h1 : k > 0) (h2 : ¬ k > 1) : k = 1 :=
-begin
-  have h3 := le_of_not_gt h2,
-  cases h3 with h3 h3, {refl},
-  cases h3, cases h1
-end
-```
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">simple_order_lemma</span> <span class="o">(</span><span class="n">k</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">h1</span> <span class="o">:</span> <span class="n">k</span> <span class="bp">&gt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">(</span><span class="n">h2</span> <span class="o">:</span> <span class="bp">¬</span> <span class="n">k</span> <span class="bp">&gt;</span> <span class="mi">1</span><span class="o">)</span> <span class="o">:</span> <span class="n">k</span> <span class="bp">=</span> <span class="mi">1</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="k">have</span> <span class="n">h3</span> <span class="o">:=</span> <span class="n">le_of_not_gt</span> <span class="n">h2</span><span class="o">,</span>
+  <span class="n">cases</span> <span class="n">h3</span> <span class="k">with</span> <span class="n">h3</span> <span class="n">h3</span><span class="o">,</span> <span class="o">{</span><span class="n">refl</span><span class="o">},</span>
+  <span class="n">cases</span> <span class="n">h3</span><span class="o">,</span> <span class="n">cases</span> <span class="n">h1</span>
+<span class="kn">end</span>
+</pre></div>
 
 #### [ Sebastian Zimmer (Oct 13 2018 at 18:25)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20basic%20inequalities%20of%20natural%20numbers/near/135737406):
-Thanks, I would have never thought of that first solution.
+<p>Thanks, I would have never thought of that first solution.</p>
 
 
 {% endraw %}

@@ -12,13 +12,13 @@ permalink: archive/113488general/81924betameta.html
 
 {% raw %}
 #### [ Patrick Massot (Oct 17 2018 at 21:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/beta%20meta/near/135995670):
-Inside the tactic monad, can I ask Lean to beta-reduce an `expr`?
+<p>Inside the tactic monad, can I ask Lean to beta-reduce an <code>expr</code>?</p>
 
 #### [ Simon Hudon (Oct 17 2018 at 21:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/beta%20meta/near/135995704):
-Yes: `head_beta`
+<p>Yes: <code>head_beta</code></p>
 
 #### [ Patrick Massot (Oct 17 2018 at 21:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/beta%20meta/near/135995974):
-Thanks. It reveals my problem was somewhere else
+<p>Thanks. It reveals my problem was somewhere else</p>
 
 
 {% endraw %}

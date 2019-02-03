@@ -12,44 +12,32 @@ permalink: archive/113488general/83026internshipatOracleLabs.html
 
 {% raw %}
 #### [ Jeremy Avigad (Nov 28 2018 at 16:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/internship%20at%20Oracle%20Labs/near/148718363):
-I just posted this message on the Lean-user mailing list:
-
-Dear all,
-
-I am sharing the following information from Jean-Baptiste Tristan:
-
-*****
-
-My name is Jean-Baptiste Tristan, I am a researcher in the machine
-learning research group at Oracle Labs, located in the Boston area. I
-am looking for an intern who would be interested in doing work at the
-intersection of learning theory and formal verification.
-
-More specifically, we would attempt to formalize one or more
-fundamental results from learning theory using the Coq proof
-assistant. This would require formalizing concepts from probably
-approximately correct learning. We would then attempt to prove one of
-the key theorems in learning theory such as the one that links finite
-VC dimensions with PAC learnability or the one on boosting that shows
-that weak learners can be boosted into strong learners. Such work
-would build the foundations toward accountable machine learning
-algorithms where we can offer strong formal guarantees that a machine
-learning algorithm is behaving as advertised.
-
-I would really appreciate if you could share this short proposal with
-your students, and I would be happy to answer more questions.
-
-*****
-
-This could be a summer internship for a PhD student, but the terms are flexible. Jean-Baptiste tells me that he has been considering Coq in part because of the existence of the MLCert project (http://ace.cs.ohio.edu/~gstewart/mlcert.html), but he is open to considering alternatives, like Lean.
-
-If you are interested, you can e-mail him directly:
-
-Jean-Baptiste Tristan <JEAN.BAPTISTE.TRISTAN@oracle.com> 
-
-Best wishes,
-
-Jeremy
+<p>I just posted this message on the Lean-user mailing list:</p>
+<p>Dear all,</p>
+<p>I am sharing the following information from Jean-Baptiste Tristan:</p>
+<hr>
+<p>My name is Jean-Baptiste Tristan, I am a researcher in the machine<br>
+learning research group at Oracle Labs, located in the Boston area. I<br>
+am looking for an intern who would be interested in doing work at the<br>
+intersection of learning theory and formal verification.</p>
+<p>More specifically, we would attempt to formalize one or more<br>
+fundamental results from learning theory using the Coq proof<br>
+assistant. This would require formalizing concepts from probably<br>
+approximately correct learning. We would then attempt to prove one of<br>
+the key theorems in learning theory such as the one that links finite<br>
+VC dimensions with PAC learnability or the one on boosting that shows<br>
+that weak learners can be boosted into strong learners. Such work<br>
+would build the foundations toward accountable machine learning<br>
+algorithms where we can offer strong formal guarantees that a machine<br>
+learning algorithm is behaving as advertised.</p>
+<p>I would really appreciate if you could share this short proposal with<br>
+your students, and I would be happy to answer more questions.</p>
+<hr>
+<p>This could be a summer internship for a PhD student, but the terms are flexible. Jean-Baptiste tells me that he has been considering Coq in part because of the existence of the MLCert project (<a href="http://ace.cs.ohio.edu/~gstewart/mlcert.html" target="_blank" title="http://ace.cs.ohio.edu/~gstewart/mlcert.html">http://ace.cs.ohio.edu/~gstewart/mlcert.html</a>), but he is open to considering alternatives, like Lean.</p>
+<p>If you are interested, you can e-mail him directly:</p>
+<p>Jean-Baptiste Tristan &lt;<a href="mailto:JEAN.BAPTISTE.TRISTAN@oracle.com" title="mailto:JEAN.BAPTISTE.TRISTAN@oracle.com">JEAN.BAPTISTE.TRISTAN@oracle.com</a>&gt; </p>
+<p>Best wishes,</p>
+<p>Jeremy</p>
 
 
 {% endraw %}

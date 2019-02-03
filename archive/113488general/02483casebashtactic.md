@@ -12,21 +12,22 @@ permalink: archive/113488general/02483casebashtactic.html
 
 {% raw %}
 #### [ Johan Commelin (Oct 19 2018 at 20:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/case%20bash%20tactic/near/136128666):
-@**Scott Morrison|110087** I incorrectly assumed that your `case_bash` tactic was related to the `fin`-bashing tactic. Nevertheless I wonder if there is place for a mechanism as follows:
-* `case_bash` goes into `tactics/`
-* `tidy` takes an optional list of tactics to apply (besides the `local [attribute]` thing that we use nowadays)
-* So we can prove thing with `tidy [case_bash]` or something like that.
-
-Does that make sense?
+<p><span class="user-mention" data-user-id="110087">@Scott Morrison</span> I incorrectly assumed that your <code>case_bash</code> tactic was related to the <code>fin</code>-bashing tactic. Nevertheless I wonder if there is place for a mechanism as follows:</p>
+<ul>
+<li><code>case_bash</code> goes into <code>tactics/</code></li>
+<li><code>tidy</code> takes an optional list of tactics to apply (besides the <code>local [attribute]</code> thing that we use nowadays)</li>
+<li>So we can prove thing with <code>tidy [case_bash]</code> or something like that.</li>
+</ul>
+<p>Does that make sense?</p>
 
 #### [ Scott Morrison (Oct 19 2018 at 23:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/case%20bash%20tactic/near/136139714):
-I think you can already override the list of tactics: `tidy { tactics := tactic.tidy.default_tactics ++ [foo] }`, although `foo` has to be a `tactic string` for this to work.
+<p>I think you can already override the list of tactics: <code>tidy { tactics := tactic.tidy.default_tactics ++ [foo] }</code>, although <code>foo</code> has to be a <code>tactic string</code> for this to work.</p>
 
 #### [ Scott Morrison (Oct 19 2018 at 23:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/case%20bash%20tactic/near/136139744):
-Certainly that can be given nicer syntax, and use some reflection to allow passing more complicated things than just a `tactic string`.
+<p>Certainly that can be given nicer syntax, and use some reflection to allow passing more complicated things than just a <code>tactic string</code>.</p>
 
 #### [ Scott Morrison (Oct 19 2018 at 23:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/case%20bash%20tactic/near/136139757):
-(e.g. a `tactic A` for any A, a function with arguments that have default values, etc.)
+<p>(e.g. a <code>tactic A</code> for any A, a function with arguments that have default values, etc.)</p>
 
 
 {% endraw %}

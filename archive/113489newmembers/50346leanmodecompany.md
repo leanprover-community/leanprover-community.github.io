@@ -12,20 +12,20 @@ permalink: archive/113489newmembers/50346leanmodecompany.html
 
 {% raw %}
 #### [ petercommand (Nov 15 2018 at 06:29)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/lean-mode%20company/near/147721970):
-company-complete isn't working for me..(I can run M-x company-company, but nothing shows up). I am using lean mode + emacs
+<p>company-complete isn't working for me..(I can run M-x company-company, but nothing shows up). I am using lean mode + emacs</p>
 
 #### [ petercommand (Nov 15 2018 at 06:33)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/lean-mode%20company/near/147722111):
-I have company-lean 20171102.1454 installed
+<p>I have company-lean 20171102.1454 installed</p>
 
 #### [ petercommand (Nov 15 2018 at 06:33)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/lean-mode%20company/near/147722116):
-via melpa
+<p>via melpa</p>
 
 #### [ Reid Barton (Nov 15 2018 at 13:39)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/lean-mode%20company/near/147738447):
-@**petercommand** if you have the goal window open, then sometimes it won't work.
-Do you get any error or message?
+<p><span class="user-mention" data-user-id="127883">@petercommand</span> if you have the goal window open, then sometimes it won't work.<br>
+Do you get any error or message?</p>
 
 #### [ petercommand (Nov 15 2018 at 13:48)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/lean-mode%20company/near/147738789):
-I didn't get any errors when I first tried, but I am getting error messages (Company: backend company-lean error "interrupted" with args) now if the goal window is open. And closing the goal window worked :D
+<p>I didn't get any errors when I first tried, but I am getting error messages (Company: backend company-lean error "interrupted" with args) now if the goal window is open. And closing the goal window worked :D</p>
 
 
 {% endraw %}

@@ -12,55 +12,53 @@ permalink: archive/113488general/16519instanceused.html
 
 {% raw %}
 #### [ petercommand (Nov 18 2018 at 17:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/instance%20used/near/147922878):
-is there some way to show which instance (of a class) is actually used in a definition? If I use ```set_option trace.class_instances true```, it lists lots of possible instances, but I only want the actual instance used
+<p>is there some way to show which instance (of a class) is actually used in a definition? If I use <code>set_option trace.class_instances true</code>, it lists lots of possible instances, but I only want the actual instance used</p>
 
 #### [ Mario Carneiro (Nov 18 2018 at 17:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/instance%20used/near/147922929):
-I sometimes grep the output to remove lines immediately followed with `failed defeq`
+<p>I sometimes grep the output to remove lines immediately followed with <code>failed defeq</code></p>
 
 #### [ Mario Carneiro (Nov 18 2018 at 17:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/instance%20used/near/147922937):
-but of course you can always just look at the term
+<p>but of course you can always just look at the term</p>
 
 #### [ petercommand (Nov 18 2018 at 17:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/instance%20used/near/147922940):
-just look at the term?
+<p>just look at the term?</p>
 
 #### [ petercommand (Nov 18 2018 at 17:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/instance%20used/near/147922941):
-yeah, I can grep the output
+<p>yeah, I can grep the output</p>
 
 #### [ Mario Carneiro (Nov 18 2018 at 17:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/instance%20used/near/147922984):
-Just trigger the instance search manually. For example:
-```lean
-set_option pp.implicit true
-#check (by apply_instance : preorder int)
--- @partial_order.to_preorder ℤ
---   (@ordered_comm_group.to_partial_order ℤ
---      (@ordered_ring.to_ordered_comm_group ℤ
---         (@linear_ordered_ring.to_ordered_ring ℤ
---            (@linear_ordered_comm_ring.to_linear_ordered_ring ℤ
---               (@decidable_linear_ordered_comm_ring.to_linear_ordered_comm_ring ℤ
---                  int.decidable_linear_ordered_comm_ring))))) :
---   preorder ℤ
-```
+<p>Just trigger the instance search manually. For example:</p>
+<div class="codehilite"><pre><span></span><span class="kn">set_option</span> <span class="n">pp</span><span class="bp">.</span><span class="n">implicit</span> <span class="n">true</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="o">(</span><span class="k">by</span> <span class="n">apply_instance</span> <span class="o">:</span> <span class="n">preorder</span> <span class="n">int</span><span class="o">)</span>
+<span class="c1">-- @partial_order.to_preorder ℤ</span>
+<span class="c1">--   (@ordered_comm_group.to_partial_order ℤ</span>
+<span class="c1">--      (@ordered_ring.to_ordered_comm_group ℤ</span>
+<span class="c1">--         (@linear_ordered_ring.to_ordered_ring ℤ</span>
+<span class="c1">--            (@linear_ordered_comm_ring.to_linear_ordered_ring ℤ</span>
+<span class="c1">--               (@decidable_linear_ordered_comm_ring.to_linear_ordered_comm_ring ℤ</span>
+<span class="c1">--                  int.decidable_linear_ordered_comm_ring))))) :</span>
+<span class="c1">--   preorder ℤ</span>
+</pre></div>
 
 #### [ petercommand (Nov 18 2018 at 17:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/instance%20used/near/147922996):
-Ah..that works great! Thanks!
+<p>Ah..that works great! Thanks!</p>
 
 #### [ Kenny Lau (Nov 18 2018 at 18:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/instance%20used/near/147923628):
-alternatively:
-```lean
-set_option pp.implicit true
-#check (infer_instance : preorder int)
-/-
-@infer_instance (preorder ℤ)
-  (@partial_order.to_preorder ℤ
-     (@ordered_comm_group.to_partial_order ℤ
-        (@ordered_ring.to_ordered_comm_group ℤ
-           (@linear_ordered_ring.to_ordered_ring ℤ
-              (@linear_ordered_comm_ring.to_linear_ordered_ring ℤ
-                 (@decidable_linear_ordered_comm_ring.to_linear_ordered_comm_ring ℤ
-                    int.decidable_linear_ordered_comm_ring)))))) :
-  preorder ℤ
--/
-```
+<p>alternatively:</p>
+<div class="codehilite"><pre><span></span><span class="kn">set_option</span> <span class="n">pp</span><span class="bp">.</span><span class="n">implicit</span> <span class="n">true</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="o">(</span><span class="n">infer_instance</span> <span class="o">:</span> <span class="n">preorder</span> <span class="n">int</span><span class="o">)</span>
+<span class="c">/-</span><span class="cm"></span>
+<span class="cm">@infer_instance (preorder ℤ)</span>
+<span class="cm">  (@partial_order.to_preorder ℤ</span>
+<span class="cm">     (@ordered_comm_group.to_partial_order ℤ</span>
+<span class="cm">        (@ordered_ring.to_ordered_comm_group ℤ</span>
+<span class="cm">           (@linear_ordered_ring.to_ordered_ring ℤ</span>
+<span class="cm">              (@linear_ordered_comm_ring.to_linear_ordered_ring ℤ</span>
+<span class="cm">                 (@decidable_linear_ordered_comm_ring.to_linear_ordered_comm_ring ℤ</span>
+<span class="cm">                    int.decidable_linear_ordered_comm_ring)))))) :</span>
+<span class="cm">  preorder ℤ</span>
+<span class="cm">-/</span>
+</pre></div>
 
 
 {% endraw %}

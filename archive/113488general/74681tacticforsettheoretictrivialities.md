@@ -12,178 +12,177 @@ permalink: archive/113488general/74681tacticforsettheoretictrivialities.html
 
 {% raw %}
 #### [ Kevin Buzzard (May 21 2018 at 12:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20for%20set-theoretic%20trivialities/near/126866089):
-I am beginning to tire of goals of the form `Ua ∩ Ub ∩ Uc ⊆ Ua ∩ Ub ∩ (Ua ∩ Uc)`
+<p>I am beginning to tire of goals of the form <code>Ua ∩ Ub ∩ Uc ⊆ Ua ∩ Ub ∩ (Ua ∩ Uc)</code></p>
 
 #### [ Kevin Buzzard (May 21 2018 at 12:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20for%20set-theoretic%20trivialities/near/126866091):
-Is there a tactic which solves them?
+<p>Is there a tactic which solves them?</p>
 
 #### [ Kevin Buzzard (May 21 2018 at 12:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20for%20set-theoretic%20trivialities/near/126866093):
-[these are sets]
+<p>[these are sets]</p>
 
 #### [ Kevin Buzzard (May 21 2018 at 12:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20for%20set-theoretic%20trivialities/near/126866107):
-[let me stress that I can solve them, it's just the novelty is wearing off]
+<p>[let me stress that I can solve them, it's just the novelty is wearing off]</p>
 
 #### [ Andrew Ashworth (May 21 2018 at 12:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20for%20set-theoretic%20trivialities/near/126866109):
-`by finish`?
+<p><code>by finish</code>?</p>
 
 #### [ Kevin Buzzard (May 21 2018 at 12:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20for%20set-theoretic%20trivialities/near/126866116):
-didn't work for me for this one
+<p>didn't work for me for this one</p>
 
 #### [ Kevin Buzzard (May 21 2018 at 12:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20for%20set-theoretic%20trivialities/near/126866165):
-cc and simp don't work either
+<p>cc and simp don't work either</p>
 
 #### [ Kevin Buzzard (May 21 2018 at 12:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20for%20set-theoretic%20trivialities/near/126866176):
-[Prediction : in about 8 hours Scott wakes up and remarks that one of his secret tactics does the job immediately]
+<p>[Prediction : in about 8 hours Scott wakes up and remarks that one of his secret tactics does the job immediately]</p>
 
 #### [ Kenny Lau (May 21 2018 at 12:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20for%20set-theoretic%20trivialities/near/126866279):
-`solve_by_elim`?
+<p><code>solve_by_elim</code>?</p>
 
 #### [ Kevin Buzzard (May 21 2018 at 12:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20for%20set-theoretic%20trivialities/near/126866331):
-Note that any such tactic will have to deal with the fact that `exact ⟨Ha,Hb,⟨Ha,Hc⟩⟩` is not a proof of `y ∈ Ua ∩ Ub ∩ (Ua ∩ Uc)` because of stupid left associativity of \cap
+<p>Note that any such tactic will have to deal with the fact that <code>exact ⟨Ha,Hb,⟨Ha,Hc⟩⟩</code> is not a proof of <code>y ∈ Ua ∩ Ub ∩ (Ua ∩ Uc)</code> because of stupid left associativity of \cap</p>
 
 #### [ Kevin Buzzard (May 21 2018 at 12:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20for%20set-theoretic%20trivialities/near/126866342):
-`solve_by_elim` doesn't work
+<p><code>solve_by_elim</code> doesn't work</p>
 
 #### [ Mario Carneiro (May 21 2018 at 12:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20for%20set-theoretic%20trivialities/near/126866351):
-I think `finish` was intended to work on those goals
+<p>I think <code>finish</code> was intended to work on those goals</p>
 
 #### [ Mario Carneiro (May 21 2018 at 12:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20for%20set-theoretic%20trivialities/near/126866401):
-but you may need to use its options
+<p>but you may need to use its options</p>
 
 #### [ Mario Carneiro (May 21 2018 at 12:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20for%20set-theoretic%20trivialities/near/126866429):
-```
-example {α} (Ua Ub Uc : set α) : Ua ∩ Ub ∩ Uc ⊆ Ua ∩ Ub ∩ (Ua ∩ Uc) :=
+<div class="codehilite"><pre><span></span>example {α} (Ua Ub Uc : set α) : Ua ∩ Ub ∩ Uc ⊆ Ua ∩ Ub ∩ (Ua ∩ Uc) :=
 by simp [set.subset_def] {contextual := tt}
-```
+</pre></div>
 
 #### [ Andrew Ashworth (May 21 2018 at 12:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20for%20set-theoretic%20trivialities/near/126866528):
-it reminds me I don't know what `finish` solves. Does it work on any boolean algebra?
+<p>it reminds me I don't know what <code>finish</code> solves. Does it work on any boolean algebra?</p>
 
 #### [ Patrick Massot (May 21 2018 at 12:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20for%20set-theoretic%20trivialities/near/126866532):
-`by finish[set.subset_def]` also works
+<p><code>by finish[set.subset_def]</code> also works</p>
 
 #### [ Mario Carneiro (May 21 2018 at 12:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20for%20set-theoretic%20trivialities/near/126866533):
-it works on the boolean algebra of propositions...
+<p>it works on the boolean algebra of propositions...</p>
 
 #### [ Mario Carneiro (May 21 2018 at 12:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20for%20set-theoretic%20trivialities/near/126866539):
-that's why `subset_def` is needed here
+<p>that's why <code>subset_def</code> is needed here</p>
 
 #### [ Kenny Lau (May 21 2018 at 12:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20for%20set-theoretic%20trivialities/near/126866767):
-people just bloody abusing `finish`
+<p>people just bloody abusing <code>finish</code></p>
 
 #### [ Kevin Buzzard (May 21 2018 at 12:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20for%20set-theoretic%20trivialities/near/126866773):
-We're too classical for you
+<p>We're too classical for you</p>
 
 #### [ Kevin Buzzard (May 21 2018 at 12:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20for%20set-theoretic%20trivialities/near/126866779):
-Do you think it's true in constructive maths?
+<p>Do you think it's true in constructive maths?</p>
 
 #### [ Kevin Buzzard (May 21 2018 at 12:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20for%20set-theoretic%20trivialities/near/126866780):
-I would have no idea :-)
+<p>I would have no idea :-)</p>
 
 #### [ Kenny Lau (May 21 2018 at 12:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20for%20set-theoretic%20trivialities/near/126866782):
-of course it is
+<p>of course it is</p>
 
 #### [ Kevin Buzzard (May 21 2018 at 12:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20for%20set-theoretic%20trivialities/near/126866783):
-:-)
+<p>:-)</p>
 
 #### [ Kenny Lau (May 21 2018 at 12:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20for%20set-theoretic%20trivialities/near/126866784):
-they're literally the same set
+<p>they're literally the same set</p>
 
 #### [ Kevin Buzzard (May 21 2018 at 12:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20for%20set-theoretic%20trivialities/near/126866786):
-yeah but you never know with this constructive maths thing
+<p>yeah but you never know with this constructive maths thing</p>
 
 #### [ Patrick Massot (May 21 2018 at 12:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20for%20set-theoretic%20trivialities/near/126866787):
-Using `finish` does not only finishes the goal. It also conveys the meaning that the goal is now something we don't want to discuss at all
+<p>Using <code>finish</code> does not only finishes the goal. It also conveys the meaning that the goal is now something we don't want to discuss at all</p>
 
 #### [ Kevin Buzzard (May 21 2018 at 12:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20for%20set-theoretic%20trivialities/near/126866789):
-I mean not not P is literally the same as P, right?
+<p>I mean not not P is literally the same as P, right?</p>
 
 #### [ Kenny Lau (May 21 2018 at 12:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20for%20set-theoretic%20trivialities/near/126866830):
-*t r i g g e r e d*
+<p><em>t r i g g e r e d</em></p>
 
 #### [ Kevin Buzzard (May 21 2018 at 12:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20for%20set-theoretic%20trivialities/near/126866833):
-Shouldn't you be revising for mechanics?
+<p>Shouldn't you be revising for mechanics?</p>
 
 #### [ Kenny Lau (May 21 2018 at 12:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20for%20set-theoretic%20trivialities/near/126866836):
-I see that you're proving mul_add
+<p>I see that you're proving mul_add</p>
 
 #### [ Kenny Lau (May 21 2018 at 12:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20for%20set-theoretic%20trivialities/near/126866838):
-can't you prove that the two sets are equal instead?
+<p>can't you prove that the two sets are equal instead?</p>
 
 #### [ Patrick Massot (May 21 2018 at 12:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20for%20set-theoretic%20trivialities/near/126866839):
-Shouldn't you be marking?
+<p>Shouldn't you be marking?</p>
 
 #### [ Kenny Lau (May 21 2018 at 12:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20for%20set-theoretic%20trivialities/near/126866840):
-I think equality is eaiser to prove
+<p>I think equality is eaiser to prove</p>
 
 #### [ Kenny Lau (May 21 2018 at 12:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20for%20set-theoretic%20trivialities/near/126866842):
-```quote
-Shouldn't you be marking?
-```
-oooooooh
+<blockquote>
+<p>Shouldn't you be marking?</p>
+</blockquote>
+<p>oooooooh</p>
 
 #### [ Kevin Buzzard (May 21 2018 at 12:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20for%20set-theoretic%20trivialities/near/126866843):
-I've just proved something is a ring!
+<p>I've just proved something is a ring!</p>
 
 #### [ Kevin Buzzard (May 21 2018 at 12:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20for%20set-theoretic%20trivialities/near/126866848):
-I'm sitting on the tube platform at South Ken, completely elated
+<p>I'm sitting on the tube platform at South Ken, completely elated</p>
 
 #### [ Kevin Buzzard (May 21 2018 at 12:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20for%20set-theoretic%20trivialities/near/126866853):
-[:= v happy]
+<p>[:= v happy]</p>
 
 #### [ Kevin Buzzard (May 21 2018 at 12:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20for%20set-theoretic%20trivialities/near/126866855):
-Now if only someone had proved that a product of rings was a ring
+<p>Now if only someone had proved that a product of rings was a ring</p>
 
 #### [ Kevin Buzzard (May 21 2018 at 12:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20for%20set-theoretic%20trivialities/near/126866886):
-oh wait
+<p>oh wait</p>
 
 #### [ Kevin Buzzard (May 21 2018 at 12:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20for%20set-theoretic%20trivialities/near/126866904):
-I think O_X(U) is a ring!
+<p>I think O_X(U) is a ring!</p>
 
 #### [ Kevin Buzzard (May 21 2018 at 12:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20for%20set-theoretic%20trivialities/near/126866905):
-I still have to prove restriction is a ring homomorphism though
+<p>I still have to prove restriction is a ring homomorphism though</p>
 
 #### [ Kevin Buzzard (May 21 2018 at 12:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20for%20set-theoretic%20trivialities/near/126866906):
-I will save that for after some marking
+<p>I will save that for after some marking</p>
 
 #### [ Kevin Buzzard (May 21 2018 at 12:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20for%20set-theoretic%20trivialities/near/126866918):
-What I am actually pleased about is that I seriously engaged with quotient types for the first time in my life, and I have come out alive
+<p>What I am actually pleased about is that I seriously engaged with quotient types for the first time in my life, and I have come out alive</p>
 
 #### [ Kevin Buzzard (May 21 2018 at 12:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20for%20set-theoretic%20trivialities/near/126866962):
-Why is quot.lift called that?
+<p>Why is quot.lift called that?</p>
 
 #### [ Kevin Buzzard (May 21 2018 at 12:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20for%20set-theoretic%20trivialities/near/126866964):
-It's the opposite of a lift, the way things are set up in my brain
+<p>It's the opposite of a lift, the way things are set up in my brain</p>
 
 #### [ Kevin Buzzard (May 21 2018 at 12:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20for%20set-theoretic%20trivialities/near/126866965):
-It's a descent
+<p>It's a descent</p>
 
 #### [ Patrick Massot (May 21 2018 at 12:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20for%20set-theoretic%20trivialities/near/126866966):
-I remember being puzzled by this terminology while reading TPIL
+<p>I remember being puzzled by this terminology while reading TPIL</p>
 
 #### [ Kevin Buzzard (May 21 2018 at 12:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20for%20set-theoretic%20trivialities/near/126866973):
-I think that this observation was genuinely something which added to my confusion when looking at quotient type stuff
+<p>I think that this observation was genuinely something which added to my confusion when looking at quotient type stuff</p>
 
 #### [ Kevin Buzzard (May 21 2018 at 12:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20for%20set-theoretic%20trivialities/near/126866975):
-This name was not at all intuitive for me
+<p>This name was not at all intuitive for me</p>
 
 #### [ Patrick Massot (May 21 2018 at 12:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20for%20set-theoretic%20trivialities/near/126866976):
-Obviously
+<p>Obviously</p>
 
 #### [ Kevin Buzzard (May 21 2018 at 12:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20for%20set-theoretic%20trivialities/near/126866983):
-Is this a CS thing Patrick?
+<p>Is this a CS thing Patrick?</p>
 
 #### [ Patrick Massot (May 21 2018 at 12:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20for%20set-theoretic%20trivialities/near/126866984):
-No idea
+<p>No idea</p>
 
 #### [ Patrick Massot (May 21 2018 at 12:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20for%20set-theoretic%20trivialities/near/126866985):
-Just crazyness if you ask me
+<p>Just crazyness if you ask me</p>
 
 #### [ Kevin Buzzard (May 21 2018 at 12:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20for%20set-theoretic%20trivialities/near/126867031):
-Anyway, we live and learn, and I've certainly learnt something over the last couple of days. Thanks to everyone that helped. I genuinely feel like a better Leaner.
+<p>Anyway, we live and learn, and I've certainly learnt something over the last couple of days. Thanks to everyone that helped. I genuinely feel like a better Leaner.</p>
 
 #### [ Sean Leather (May 21 2018 at 13:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20for%20set-theoretic%20trivialities/near/126867301):
-~~Leaner~~Lea(r)ner
+<p><del>Leaner</del>Lea(r)ner</p>
 
 
 {% endraw %}

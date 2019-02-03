@@ -12,68 +12,68 @@ permalink: archive/113489newmembers/60254eraseduplicates.html
 
 {% raw %}
 #### [ Keeley Hoek (Nov 24 2018 at 08:54)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/erase_duplicates/near/148267520):
-Does mathlib have a function which erases list duplicates?
+<p>Does mathlib have a function which erases list duplicates?</p>
 
 #### [ Bryan Gin-ge Chen (Nov 24 2018 at 09:03)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/erase_duplicates/near/148267854):
-Maybe `list.pw_filter`?
-```lean
-import data.list.basic
+<p>Maybe <code>list.pw_filter</code>?</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">list</span><span class="bp">.</span><span class="n">basic</span>
 
-#eval list.pw_filter (≠) [1,2,3,5,5,5,5,2,1,4,1] -- [3, 5, 2, 4, 1]
-```
+<span class="bp">#</span><span class="kn">eval</span> <span class="n">list</span><span class="bp">.</span><span class="n">pw_filter</span> <span class="o">(</span><span class="bp">≠</span><span class="o">)</span> <span class="o">[</span><span class="mi">1</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">3</span><span class="o">,</span><span class="mi">5</span><span class="o">,</span><span class="mi">5</span><span class="o">,</span><span class="mi">5</span><span class="o">,</span><span class="mi">5</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">1</span><span class="o">,</span><span class="mi">4</span><span class="o">,</span><span class="mi">1</span><span class="o">]</span> <span class="c1">-- [3, 5, 2, 4, 1]</span>
+</pre></div>
 
 #### [ Bryan Gin-ge Chen (Nov 24 2018 at 09:08)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/erase_duplicates/near/148267993):
-Oh, `list.erase_dup` is defined to be `pw_filter (≠)`. But its docstring is wrong:
-```lean
-/- `erase_dup l` removes duplicates from `l` (taking only the first occurrence).
+<p>Oh, <code>list.erase_dup</code> is defined to be <code>pw_filter (≠)</code>. But its docstring is wrong:</p>
+<div class="codehilite"><pre><span></span><span class="c">/-</span><span class="cm"> `erase_dup l` removes duplicates from `l` (taking only the first occurrence).</span>
 
-     erase_dup [1, 2, 2, 0, 1] = [1, 2, 0] -/
+<span class="cm">     erase_dup [1, 2, 2, 0, 1] = [1, 2, 0] -/</span>
 
-#eval list.erase_dup [1, 2, 2, 0, 1] -- [2, 0, 1]
-```
+<span class="bp">#</span><span class="kn">eval</span> <span class="n">list</span><span class="bp">.</span><span class="n">erase_dup</span> <span class="o">[</span><span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">1</span><span class="o">]</span> <span class="c1">-- [2, 0, 1]</span>
+</pre></div>
 
 #### [ Kevin Buzzard (Nov 24 2018 at 09:15)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/erase_duplicates/near/148268163):
-It removed the first "1" and the first "2"
+<p>It removed the first "1" and the first "2"</p>
 
 #### [ Kevin Buzzard (Nov 24 2018 at 09:16)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/erase_duplicates/near/148268210):
-Should it say "...leaving only the last occurrence"?
+<p>Should it say "...leaving only the last occurrence"?</p>
 
 #### [ Mario Carneiro (Nov 24 2018 at 09:34)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/erase_duplicates/near/148268668):
-yeah, obviously I meant first from the right end ;)
+<p>yeah, obviously I meant first from the right end ;)</p>
 
 #### [ Bryan Gin-ge Chen (Nov 24 2018 at 10:06)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/erase_duplicates/near/148269503):
-I'm putting together a PR that fixes this and also improves the other docstrings in `data.list.basic`. I found that the example given for `list.sigma` is also wrong:
-```lean
-/- `sigma l₁ l₂` is the list of dependent pairs `(a, b)` where `a ∈ l₁` and `b ∈ l₂ a`.
+<p>I'm putting together a PR that fixes this and also improves the other docstrings in <code>data.list.basic</code>. I found that the example given for <code>list.sigma</code> is also wrong:</p>
+<div class="codehilite"><pre><span></span><span class="c">/-</span><span class="cm"> `sigma l₁ l₂` is the list of dependent pairs `(a, b)` where `a ∈ l₁` and `b ∈ l₂ a`.</span>
 
-     sigma [1, 2] (λ_, [5, 6]) = [(1, 5), (1, 6), (2, 5), (2, 6)] -/
+<span class="cm">     sigma [1, 2] (λ_, [5, 6]) = [(1, 5), (1, 6), (2, 5), (2, 6)] -/</span>
 
-#eval list.sigma [1, 2] (λ_, [5, 6]) 
-/- don't know how to synthesize placeholder
-context:
-⊢ ℕ → Type ?
--/
-```
-The following works, but I don't think this would make a good example:
-```lean
-#eval @list.sigma _ (λ_, ℕ) [1, 2] (λ_, [5,6]) --[(1, 5), (1, 6), (2, 5), (2, 6)]
-```
-Any suggestions?
+<span class="bp">#</span><span class="kn">eval</span> <span class="n">list</span><span class="bp">.</span><span class="n">sigma</span> <span class="o">[</span><span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">]</span> <span class="o">(</span><span class="bp">λ_</span><span class="o">,</span> <span class="o">[</span><span class="mi">5</span><span class="o">,</span> <span class="mi">6</span><span class="o">])</span>
+<span class="c">/-</span><span class="cm"> don&#39;t know how to synthesize placeholder</span>
+<span class="cm">context:</span>
+<span class="cm">⊢ ℕ → Type ?</span>
+<span class="cm">-/</span>
+</pre></div>
+
+
+<p>The following works, but I don't think this would make a good example:</p>
+<div class="codehilite"><pre><span></span><span class="bp">#</span><span class="kn">eval</span> <span class="bp">@</span><span class="n">list</span><span class="bp">.</span><span class="n">sigma</span> <span class="bp">_</span> <span class="o">(</span><span class="bp">λ_</span><span class="o">,</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">[</span><span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">]</span> <span class="o">(</span><span class="bp">λ_</span><span class="o">,</span> <span class="o">[</span><span class="mi">5</span><span class="o">,</span><span class="mi">6</span><span class="o">])</span> <span class="c1">--[(1, 5), (1, 6), (2, 5), (2, 6)]</span>
+</pre></div>
+
+
+<p>Any suggestions?</p>
 
 #### [ Mario Carneiro (Nov 24 2018 at 10:10)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/erase_duplicates/near/148269615):
-hm, that's weird
+<p>hm, that's weird</p>
 
 #### [ Mario Carneiro (Nov 24 2018 at 10:10)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/erase_duplicates/near/148269616):
-does a type ascription on `[5,6]` work?
+<p>does a type ascription on <code>[5,6]</code> work?</p>
 
 #### [ Mario Carneiro (Nov 24 2018 at 10:11)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/erase_duplicates/near/148269622):
-or even just on `5`
+<p>or even just on <code>5</code></p>
 
 #### [ Bryan Gin-ge Chen (Nov 24 2018 at 10:12)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/erase_duplicates/near/148269665):
-Ah, yes, that works.
+<p>Ah, yes, that works.</p>
 
 #### [ Bryan Gin-ge Chen (Nov 24 2018 at 10:58)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/erase_duplicates/near/148271040):
-https://github.com/leanprover/mathlib/pull/493
+<p><a href="https://github.com/leanprover/mathlib/pull/493" target="_blank" title="https://github.com/leanprover/mathlib/pull/493">https://github.com/leanprover/mathlib/pull/493</a></p>
 
 
 {% endraw %}

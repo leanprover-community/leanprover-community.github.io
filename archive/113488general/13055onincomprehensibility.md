@@ -12,43 +12,42 @@ permalink: archive/113488general/13055onincomprehensibility.html
 
 {% raw %}
 #### [ Reid Barton (Oct 20 2018 at 04:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/on%20incomprehensibility/near/136149992):
-I managed to turn a screen-long argument (Theorem 4.3 [here](https://ncatlab.org/nlab/show/relational+beta-module#conc)) which I don't really understand into 4 lines of lean which I also don't really understand--the last four lines below. (What I'm formalizing is not exactly the same thing as that page is talking about, but I think it's closely related.)
-```lean
-import analysis.topology.continuity
+<p>I managed to turn a screen-long argument (Theorem 4.3 <a href="https://ncatlab.org/nlab/show/relational+beta-module#conc" target="_blank" title="https://ncatlab.org/nlab/show/relational+beta-module#conc">here</a>) which I don't really understand into 4 lines of lean which I also don't really understand--the last four lines below. (What I'm formalizing is not exactly the same thing as that page is talking about, but I think it's closely related.)</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">analysis</span><span class="bp">.</span><span class="n">topology</span><span class="bp">.</span><span class="n">continuity</span>
 
-open filter
+<span class="kn">open</span> <span class="n">filter</span>
 
-universe u
+<span class="kn">universe</span> <span class="n">u</span>
 
-structure convergence (α : Type u) : Type (u+1) :=
-(r : Π (n : Type u) (ω : ultrafilter n), (n → α) → α → Prop)
-(H : ∀ (n : Type u) (f : n → α) (ω : ultrafilter n) (a : α),
-     r α (ω.map f) id a → r n ω f a)
-(I : ∀ (a : α), r α (pure a) id a)
-(J : ∀ (n m : Type u) (ω : ultrafilter n) (ξ : n → ultrafilter m)
-       (f : n → α) (g : m → α) (a : α),
-     (∀ (i : n), r m (ξ i) g (f i)) ∧ r n ω f a → r m (ω.bind ξ) g a)
+<span class="kn">structure</span> <span class="n">convergence</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Type</span> <span class="o">(</span><span class="n">u</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">r</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">(</span><span class="n">ω</span> <span class="o">:</span> <span class="n">ultrafilter</span> <span class="n">n</span><span class="o">),</span> <span class="o">(</span><span class="n">n</span> <span class="bp">→</span> <span class="n">α</span><span class="o">)</span> <span class="bp">→</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">)</span>
+<span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">→</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">ω</span> <span class="o">:</span> <span class="n">ultrafilter</span> <span class="n">n</span><span class="o">)</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">),</span>
+     <span class="n">r</span> <span class="n">α</span> <span class="o">(</span><span class="n">ω</span><span class="bp">.</span><span class="n">map</span> <span class="n">f</span><span class="o">)</span> <span class="n">id</span> <span class="n">a</span> <span class="bp">→</span> <span class="n">r</span> <span class="n">n</span> <span class="n">ω</span> <span class="n">f</span> <span class="n">a</span><span class="o">)</span>
+<span class="o">(</span><span class="n">I</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">),</span> <span class="n">r</span> <span class="n">α</span> <span class="o">(</span><span class="n">pure</span> <span class="n">a</span><span class="o">)</span> <span class="n">id</span> <span class="n">a</span><span class="o">)</span>
+<span class="o">(</span><span class="n">J</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">n</span> <span class="n">m</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">(</span><span class="n">ω</span> <span class="o">:</span> <span class="n">ultrafilter</span> <span class="n">n</span><span class="o">)</span> <span class="o">(</span><span class="n">ξ</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">→</span> <span class="n">ultrafilter</span> <span class="n">m</span><span class="o">)</span>
+       <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">→</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">g</span> <span class="o">:</span> <span class="n">m</span> <span class="bp">→</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">),</span>
+     <span class="o">(</span><span class="bp">∀</span> <span class="o">(</span><span class="n">i</span> <span class="o">:</span> <span class="n">n</span><span class="o">),</span> <span class="n">r</span> <span class="n">m</span> <span class="o">(</span><span class="n">ξ</span> <span class="n">i</span><span class="o">)</span> <span class="n">g</span> <span class="o">(</span><span class="n">f</span> <span class="n">i</span><span class="o">))</span> <span class="bp">∧</span> <span class="n">r</span> <span class="n">n</span> <span class="n">ω</span> <span class="n">f</span> <span class="n">a</span> <span class="bp">→</span> <span class="n">r</span> <span class="n">m</span> <span class="o">(</span><span class="n">ω</span><span class="bp">.</span><span class="n">bind</span> <span class="n">ξ</span><span class="o">)</span> <span class="n">g</span> <span class="n">a</span><span class="o">)</span>
 
-variables {α : Type u}
+<span class="kn">variables</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span>
 
-def convergence_of_topology (t : topological_space α) : convergence α :=
-{ r := λ n ω f x, ∀ u ∈ (nhds x).sets, {i | f i ∈ u} ∈ ω.val.sets,
-  H := assume n f ω a h, h,
-  I := assume a, pure_le_nhds a,
-  J := assume n m ω ξ f g a ⟨h₁, h₂⟩ u hu,
-    let ⟨v, vu, vo, av⟩ := mem_nhds_sets_iff.mp hu in
-    ω.val.sets_of_superset (h₂ v (mem_nhds_sets vo av))
-      (λ i hi, h₁ _ _ (mem_nhds_sets_iff.mpr ⟨v, vu, vo, hi⟩)) }
-```
+<span class="n">def</span> <span class="n">convergence_of_topology</span> <span class="o">(</span><span class="n">t</span> <span class="o">:</span> <span class="n">topological_space</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">convergence</span> <span class="n">α</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">r</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">n</span> <span class="n">ω</span> <span class="n">f</span> <span class="n">x</span><span class="o">,</span> <span class="bp">∀</span> <span class="n">u</span> <span class="err">∈</span> <span class="o">(</span><span class="n">nhds</span> <span class="n">x</span><span class="o">)</span><span class="bp">.</span><span class="n">sets</span><span class="o">,</span> <span class="o">{</span><span class="n">i</span> <span class="bp">|</span> <span class="n">f</span> <span class="n">i</span> <span class="err">∈</span> <span class="n">u</span><span class="o">}</span> <span class="err">∈</span> <span class="n">ω</span><span class="bp">.</span><span class="n">val</span><span class="bp">.</span><span class="n">sets</span><span class="o">,</span>
+  <span class="n">H</span> <span class="o">:=</span> <span class="k">assume</span> <span class="n">n</span> <span class="n">f</span> <span class="n">ω</span> <span class="n">a</span> <span class="n">h</span><span class="o">,</span> <span class="n">h</span><span class="o">,</span>
+  <span class="n">I</span> <span class="o">:=</span> <span class="k">assume</span> <span class="n">a</span><span class="o">,</span> <span class="n">pure_le_nhds</span> <span class="n">a</span><span class="o">,</span>
+  <span class="n">J</span> <span class="o">:=</span> <span class="k">assume</span> <span class="n">n</span> <span class="n">m</span> <span class="n">ω</span> <span class="n">ξ</span> <span class="n">f</span> <span class="n">g</span> <span class="n">a</span> <span class="bp">⟨</span><span class="n">h₁</span><span class="o">,</span> <span class="n">h₂</span><span class="bp">⟩</span> <span class="n">u</span> <span class="n">hu</span><span class="o">,</span>
+    <span class="k">let</span> <span class="bp">⟨</span><span class="n">v</span><span class="o">,</span> <span class="n">vu</span><span class="o">,</span> <span class="n">vo</span><span class="o">,</span> <span class="n">av</span><span class="bp">⟩</span> <span class="o">:=</span> <span class="n">mem_nhds_sets_iff</span><span class="bp">.</span><span class="n">mp</span> <span class="n">hu</span> <span class="k">in</span>
+    <span class="n">ω</span><span class="bp">.</span><span class="n">val</span><span class="bp">.</span><span class="n">sets_of_superset</span> <span class="o">(</span><span class="n">h₂</span> <span class="n">v</span> <span class="o">(</span><span class="n">mem_nhds_sets</span> <span class="n">vo</span> <span class="n">av</span><span class="o">))</span>
+      <span class="o">(</span><span class="bp">λ</span> <span class="n">i</span> <span class="n">hi</span><span class="o">,</span> <span class="n">h₁</span> <span class="bp">_</span> <span class="bp">_</span> <span class="o">(</span><span class="n">mem_nhds_sets_iff</span><span class="bp">.</span><span class="n">mpr</span> <span class="bp">⟨</span><span class="n">v</span><span class="o">,</span> <span class="n">vu</span><span class="o">,</span> <span class="n">vo</span><span class="o">,</span> <span class="n">hi</span><span class="bp">⟩</span><span class="o">))</span> <span class="o">}</span>
+</pre></div>
 
 #### [ Reid Barton (Oct 20 2018 at 04:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/on%20incomprehensibility/near/136150057):
-I don't really have any point here except to say that sometimes the original math proofs aren't really that much more comprehensible than mathlib-style golfed proofs.
+<p>I don't really have any point here except to say that sometimes the original math proofs aren't really that much more comprehensible than mathlib-style golfed proofs.</p>
 
 #### [ Reid Barton (Oct 20 2018 at 04:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/on%20incomprehensibility/near/136150448):
-Also, I learned "why" this statement `J` is true (it's somehow exactly because the neighborhood filter of a point `a` is generated by sets `v` which are also neighborhoods of all their elements, namely the open sets), but I still don't really understand what the statement *says*
+<p>Also, I learned "why" this statement <code>J</code> is true (it's somehow exactly because the neighborhood filter of a point <code>a</code> is generated by sets <code>v</code> which are also neighborhoods of all their elements, namely the open sets), but I still don't really understand what the statement <em>says</em></p>
 
 #### [ Mario Carneiro (Oct 20 2018 at 05:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/on%20incomprehensibility/near/136152145):
-it might help if you gave things more than one letter names :)
+<p>it might help if you gave things more than one letter names :)</p>
 
 
 {% endraw %}

@@ -12,141 +12,138 @@ permalink: archive/116395maths/70244casesintermmode.html
 
 {% raw %}
 #### [ Johan Commelin (May 01 2018 at 11:40)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cases%20in%20term%20mode/near/125937140):
-I am trying to tell Lean what a path in a quiver is. How do I finish `is_a_path`?
-```lean
-universes u
+<p>I am trying to tell Lean what a path in a quiver is. How do I finish <code>is_a_path</code>?</p>
+<div class="codehilite"><pre><span></span><span class="n">universes</span> <span class="n">u</span>
 
-structure quiver :=
-(V : Type u)
-(E : Type u)
-(s : E → V)
-(t : E → V)
+<span class="kn">structure</span> <span class="n">quiver</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">V</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span>
+<span class="o">(</span><span class="n">E</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span>
+<span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">E</span> <span class="bp">→</span> <span class="n">V</span><span class="o">)</span>
+<span class="o">(</span><span class="n">t</span> <span class="o">:</span> <span class="n">E</span> <span class="bp">→</span> <span class="n">V</span><span class="o">)</span>
 
-variable {Q : quiver}
+<span class="kn">variable</span> <span class="o">{</span><span class="n">Q</span> <span class="o">:</span> <span class="n">quiver</span><span class="o">}</span>
 
-definition is_a_path : (list Q.E) → Prop :=
-λ l, sorry
-```
+<span class="kn">definition</span> <span class="n">is_a_path</span> <span class="o">:</span> <span class="o">(</span><span class="n">list</span> <span class="n">Q</span><span class="bp">.</span><span class="n">E</span><span class="o">)</span> <span class="bp">→</span> <span class="kt">Prop</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="n">l</span><span class="o">,</span> <span class="n">sorry</span>
+</pre></div>
 
 #### [ Mario Carneiro (May 01 2018 at 11:42)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cases%20in%20term%20mode/near/125937192):
-hint: use `list.chain`
+<p>hint: use <code>list.chain</code></p>
 
 #### [ Kenny Lau (May 01 2018 at 11:43)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cases%20in%20term%20mode/near/125937200):
-```lean
-inductive list.chain : Π {α : Type u}, (α → α → Prop) → α → list α → Prop
-constructors:
-list.chain.nil : ∀ {α : Type u} (R : α → α → Prop) (a : α), list.chain R a list.nil
-list.chain.cons : ∀ {α : Type u} {R : α → α → Prop} {a b : α} {l : list α},
-  R a b → list.chain R b l → list.chain R a (b :: l)
-```
+<div class="codehilite"><pre><span></span><span class="kn">inductive</span> <span class="n">list</span><span class="bp">.</span><span class="n">chain</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">},</span> <span class="o">(</span><span class="n">α</span> <span class="bp">→</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">)</span> <span class="bp">→</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">list</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Prop</span>
+<span class="n">constructors</span><span class="o">:</span>
+<span class="n">list</span><span class="bp">.</span><span class="n">chain</span><span class="bp">.</span><span class="n">nil</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">(</span><span class="n">R</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">),</span> <span class="n">list</span><span class="bp">.</span><span class="n">chain</span> <span class="n">R</span> <span class="n">a</span> <span class="n">list</span><span class="bp">.</span><span class="n">nil</span>
+<span class="n">list</span><span class="bp">.</span><span class="n">chain</span><span class="bp">.</span><span class="n">cons</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">{</span><span class="n">R</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">}</span> <span class="o">{</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">α</span><span class="o">}</span> <span class="o">{</span><span class="n">l</span> <span class="o">:</span> <span class="n">list</span> <span class="n">α</span><span class="o">},</span>
+  <span class="n">R</span> <span class="n">a</span> <span class="n">b</span> <span class="bp">→</span> <span class="n">list</span><span class="bp">.</span><span class="n">chain</span> <span class="n">R</span> <span class="n">b</span> <span class="n">l</span> <span class="bp">→</span> <span class="n">list</span><span class="bp">.</span><span class="n">chain</span> <span class="n">R</span> <span class="n">a</span> <span class="o">(</span><span class="n">b</span> <span class="bp">::</span> <span class="n">l</span><span class="o">)</span>
+</pre></div>
 
 #### [ Kenny Lau (May 01 2018 at 11:43)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cases%20in%20term%20mode/near/125937201):
-interesting
+<p>interesting</p>
 
 #### [ Johan Commelin (May 01 2018 at 11:44)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cases%20in%20term%20mode/near/125937248):
-By the way, do you think it is a good idea to use lists to capture paths?
+<p>By the way, do you think it is a good idea to use lists to capture paths?</p>
 
 #### [ Mario Carneiro (May 01 2018 at 11:46)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cases%20in%20term%20mode/near/125937304):
-You may want more complicated inductive structures in some circumstances, but here a list of edges is sufficient
+<p>You may want more complicated inductive structures in some circumstances, but here a list of edges is sufficient</p>
 
 #### [ Kenny Lau (May 01 2018 at 11:46)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cases%20in%20term%20mode/near/125937307):
-```lean
+<div class="codehilite"><pre><span></span><span class="n">universes</span> <span class="n">u</span> <span class="n">v</span>
 
-universes u v
+<span class="kn">structure</span> <span class="n">quiver</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">V</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span>
+<span class="o">(</span><span class="n">E</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">)</span>
+<span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">E</span> <span class="bp">→</span> <span class="n">V</span><span class="o">)</span>
+<span class="o">(</span><span class="n">t</span> <span class="o">:</span> <span class="n">E</span> <span class="bp">→</span> <span class="n">V</span><span class="o">)</span>
 
-structure quiver :=
-(V : Type u)
-(E : Type v)
-(s : E → V)
-(t : E → V)
+<span class="kn">variable</span> <span class="o">{</span><span class="n">Q</span> <span class="o">:</span> <span class="n">quiver</span><span class="o">}</span>
 
-variable {Q : quiver}
-
-definition is_a_path : (list Q.E) → Prop
-| []             := true
-| [x]            := true
-| (hd1::hd2::tl) := Q.t hd1 = Q.s hd2 ∧ is_a_path (hd2::tl)
-```
+<span class="kn">definition</span> <span class="n">is_a_path</span> <span class="o">:</span> <span class="o">(</span><span class="n">list</span> <span class="n">Q</span><span class="bp">.</span><span class="n">E</span><span class="o">)</span> <span class="bp">→</span> <span class="kt">Prop</span>
+<span class="bp">|</span> <span class="o">[]</span>             <span class="o">:=</span> <span class="n">true</span>
+<span class="bp">|</span> <span class="o">[</span><span class="n">x</span><span class="o">]</span>            <span class="o">:=</span> <span class="n">true</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">hd1</span><span class="bp">::</span><span class="n">hd2</span><span class="bp">::</span><span class="n">tl</span><span class="o">)</span> <span class="o">:=</span> <span class="n">Q</span><span class="bp">.</span><span class="n">t</span> <span class="n">hd1</span> <span class="bp">=</span> <span class="n">Q</span><span class="bp">.</span><span class="n">s</span> <span class="n">hd2</span> <span class="bp">∧</span> <span class="n">is_a_path</span> <span class="o">(</span><span class="n">hd2</span><span class="bp">::</span><span class="n">tl</span><span class="o">)</span>
+</pre></div>
 
 #### [ Johan Commelin (May 01 2018 at 11:47)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cases%20in%20term%20mode/near/125937323):
-Aaah, so I should use `|`. Thanks! But now you are not using `list.chain`
+<p>Aaah, so I should use <code>|</code>. Thanks! But now you are not using <code>list.chain</code></p>
 
 #### [ Mario Carneiro (May 01 2018 at 11:47)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cases%20in%20term%20mode/near/125937326):
-you could use `list.chain` for the latter two cases
+<p>you could use <code>list.chain</code> for the latter two cases</p>
 
 #### [ Kenny Lau (May 01 2018 at 11:47)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cases%20in%20term%20mode/near/125937328):
-the definition using `list.chain` is left to the reader as an exercise :P
+<p>the definition using <code>list.chain</code> is left to the reader as an exercise :P</p>
 
 #### [ Mario Carneiro (May 01 2018 at 11:48)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cases%20in%20term%20mode/near/125937371):
-alternatively, you could define it as an inductive type, which may be more natural
+<p>alternatively, you could define it as an inductive type, which may be more natural</p>
 
 #### [ Kenny Lau (May 01 2018 at 11:48)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cases%20in%20term%20mode/near/125937375):
-oh... I just realized I wanted induction-recursion
+<p>oh... I just realized I wanted induction-recursion</p>
 
 #### [ Mario Carneiro (May 01 2018 at 11:48)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cases%20in%20term%20mode/near/125937379):
-not for this...
+<p>not for this...</p>
 
 #### [ Kenny Lau (May 01 2018 at 11:49)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cases%20in%20term%20mode/near/125937383):
-```lean
-mutual inductive path, head
-with path : Type (max u v)
-| A : Q.E → path
-with head : path → Q.V
-| (path.A x) := _
-```
-failed idea
+<div class="codehilite"><pre><span></span><span class="n">mutual</span> <span class="kn">inductive</span> <span class="n">path</span><span class="o">,</span> <span class="n">head</span>
+<span class="k">with</span> <span class="n">path</span> <span class="o">:</span> <span class="kt">Type</span> <span class="o">(</span><span class="n">max</span> <span class="n">u</span> <span class="n">v</span><span class="o">)</span>
+<span class="bp">|</span> <span class="n">A</span> <span class="o">:</span> <span class="n">Q</span><span class="bp">.</span><span class="n">E</span> <span class="bp">→</span> <span class="n">path</span>
+<span class="k">with</span> <span class="n">head</span> <span class="o">:</span> <span class="n">path</span> <span class="bp">→</span> <span class="n">Q</span><span class="bp">.</span><span class="n">V</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">path</span><span class="bp">.</span><span class="n">A</span> <span class="n">x</span><span class="o">)</span> <span class="o">:=</span> <span class="bp">_</span>
+</pre></div>
+
+
+<p>failed idea</p>
 
 #### [ Mario Carneiro (May 01 2018 at 11:49)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cases%20in%20term%20mode/near/125937390):
-you want the head to be a parameter, like in `chain`
+<p>you want the head to be a parameter, like in <code>chain</code></p>
 
 #### [ Kenny Lau (May 01 2018 at 11:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cases%20in%20term%20mode/near/125937446):
-oh what
+<p>oh what</p>
 
 #### [ Johan Commelin (May 01 2018 at 11:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cases%20in%20term%20mode/near/125937459):
-Kenny, I don't understand your last definition. What does `mutual` do?
+<p>Kenny, I don't understand your last definition. What does <code>mutual</code> do?</p>
 
 #### [ Kenny Lau (May 01 2018 at 11:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cases%20in%20term%20mode/near/125937460):
-https://leanprover.github.io/theorem_proving_in_lean/theorem_proving_in_lean.pdf
-P.120, Section 7.9
+<p><a href="https://leanprover.github.io/theorem_proving_in_lean/theorem_proving_in_lean.pdf" target="_blank" title="https://leanprover.github.io/theorem_proving_in_lean/theorem_proving_in_lean.pdf">https://leanprover.github.io/theorem_proving_in_lean/theorem_proving_in_lean.pdf</a><br>
+P.120, Section 7.9</p>
 
 #### [ Kenny Lau (May 01 2018 at 11:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cases%20in%20term%20mode/near/125937499):
-note that I was trying induction-recursion which is not a thing
+<p>note that I was trying induction-recursion which is not a thing</p>
 
 #### [ Kenny Lau (May 01 2018 at 11:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cases%20in%20term%20mode/near/125937501):
-not to confuse you
+<p>not to confuse you</p>
 
 #### [ Johan Commelin (May 01 2018 at 11:53)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cases%20in%20term%20mode/near/125937524):
-But your current definition is not equivalent to mine, right?
+<p>But your current definition is not equivalent to mine, right?</p>
 
 #### [ Kenny Lau (May 01 2018 at 11:53)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cases%20in%20term%20mode/near/125937532):
-yours? I haven't seen your definition
+<p>yours? I haven't seen your definition</p>
 
 #### [ Johan Commelin (May 01 2018 at 11:54)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cases%20in%20term%20mode/near/125937572):
-Hmm, agreed. My bad.
+<p>Hmm, agreed. My bad.</p>
 
 #### [ Johan Commelin (May 01 2018 at 11:54)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cases%20in%20term%20mode/near/125937574):
-Let me try again: your second definition is not equivalent to your first, right?
+<p>Let me try again: your second definition is not equivalent to your first, right?</p>
 
 #### [ Kenny Lau (May 01 2018 at 11:54)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cases%20in%20term%20mode/near/125937576):
-but I haven't finished my second definition
+<p>but I haven't finished my second definition</p>
 
 #### [ Johan Commelin (May 01 2018 at 11:55)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cases%20in%20term%20mode/near/125937591):
-Aaah, ok
+<p>Aaah, ok</p>
 
 #### [ Kenny Lau (May 01 2018 at 11:55)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cases%20in%20term%20mode/near/125937592):
-@**Mario Carneiro** (maybe on its own thread?) if Lean had induction-recursion, would you be able to prove false? would there be a shorter proof than following godel?
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> (maybe on its own thread?) if Lean had induction-recursion, would you be able to prove false? would there be a shorter proof than following godel?</p>
 
 #### [ Mario Carneiro (May 01 2018 at 11:56)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cases%20in%20term%20mode/near/125937643):
-No. Induction recursion would strengthen the system, it wouldn't be able to prove its own consistency because it now has induction-recursion and the simulated lean language would not
+<p>No. Induction recursion would strengthen the system, it wouldn't be able to prove its own consistency because it now has induction-recursion and the simulated lean language would not</p>
 
 #### [ Kenny Lau (May 01 2018 at 11:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cases%20in%20term%20mode/near/125937649):
-why can't you simulate induction-recursion with induction-recursion?
+<p>why can't you simulate induction-recursion with induction-recursion?</p>
 
 #### [ Mario Carneiro (May 01 2018 at 11:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cases%20in%20term%20mode/near/125937654):
-you probably need induction-recursion-recursion or something
+<p>you probably need induction-recursion-recursion or something</p>
 
 #### [ Kenny Lau (May 01 2018 at 11:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cases%20in%20term%20mode/near/125937655):
-hmm
+<p>hmm</p>
 
 
 {% endraw %}

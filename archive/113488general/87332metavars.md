@@ -12,10 +12,10 @@ permalink: archive/113488general/87332metavars.html
 
 {% raw %}
 #### [ Reid Barton (Sep 08 2018 at 02:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/metavars/near/133545829):
-This is probably a confused question, but in a tactic, how do I create a metavariable that can potentially depend on other metavariables?
+<p>This is probably a confused question, but in a tactic, how do I create a metavariable that can potentially depend on other metavariables?</p>
 
 #### [ Reid Barton (Sep 08 2018 at 02:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/metavars/near/133546218):
-oh, I made something that kind of works! Never mind
+<p>oh, I made something that kind of works! Never mind</p>
 
 
 {% endraw %}

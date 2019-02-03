@@ -12,28 +12,28 @@ permalink: archive/113488general/55132Finitedimensionallinearalgebra.html
 
 {% raw %}
 #### [ Blair Shi (Jul 05 2018 at 17:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Finite%20dimensional%20linear%20algebra/near/129146008):
-@**Kenny Lau**  I am currently doing linear algebra on lean. I heard that you already did something on it. Could you plz tell me how far are you?
+<p><span class="user-mention" data-user-id="110064">@Kenny Lau</span>  I am currently doing linear algebra on lean. I heard that you already did something on it. Could you plz tell me how far are you?</p>
 
 #### [ Kenny Lau (Jul 05 2018 at 17:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Finite%20dimensional%20linear%20algebra/near/129146030):
-did I?
+<p>did I?</p>
 
 #### [ Kenny Lau (Jul 05 2018 at 17:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Finite%20dimensional%20linear%20algebra/near/129146044):
-@**Kevin Buzzard** it might be the one from year 2
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> it might be the one from year 2</p>
 
 #### [ Chris Hughes (Jul 05 2018 at 17:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Finite%20dimensional%20linear%20algebra/near/129146165):
-`Authors: Johannes Hölzl, Kenny Lau` from the top of `linear_algebra.linear_map_module`
+<p><code>Authors: Johannes Hölzl, Kenny Lau</code> from the top of <code>linear_algebra.linear_map_module</code></p>
 
 #### [ Kenny Lau (Jul 05 2018 at 17:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Finite%20dimensional%20linear%20algebra/near/129146181):
-but those are in mathlib
+<p>but those are in mathlib</p>
 
 #### [ Blair Shi (Jul 05 2018 at 17:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Finite%20dimensional%20linear%20algebra/near/129146325):
-I found them.
+<p>I found them.</p>
 
 #### [ Kevin Buzzard (Jul 05 2018 at 19:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Finite%20dimensional%20linear%20algebra/near/129150884):
-Is it worth making a new type `finite_dimensional_vector_space`?
+<p>Is it worth making a new type <code>finite_dimensional_vector_space</code>?</p>
 
 #### [ Blair Shi (Jul 06 2018 at 19:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Finite%20dimensional%20linear%20algebra/near/129214320):
-Yup, I think we need to make a new type for it
+<p>Yup, I think we need to make a new type for it</p>
 
 
 {% endraw %}

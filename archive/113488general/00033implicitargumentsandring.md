@@ -12,12 +12,11 @@ permalink: archive/113488general/00033implicitargumentsandring.html
 
 {% raw %}
 #### [ Scott Morrison (Sep 29 2018 at 13:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20arguments%2C%20and%20%60ring%60/near/134878744):
-Hi @**Mario Carneiro**, I noticed an unfortunate feature of `ring`.
+<p>Hi <span class="user-mention" data-user-id="110049">@Mario Carneiro</span>, I noticed an unfortunate feature of <code>ring</code>.</p>
 
 #### [ Scott Morrison (Sep 29 2018 at 13:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20arguments%2C%20and%20%60ring%60/near/134878745):
-I'd got stuck doing this:
-```
-example (x y : ℕ) (h : x ^ 2 + 3 * y ^ 2 = 4) : false :=
+<p>I'd got stuck doing this:</p>
+<div class="codehilite"><pre><span></span>example (x y : ℕ) (h : x ^ 2 + 3 * y ^ 2 = 4) : false :=
 begin
 ring at h,
 simp at h,
@@ -25,75 +24,72 @@ ring at h,
 simp at h,
 -- ...
 end
-```
+</pre></div>
 
 #### [ Scott Morrison (Sep 29 2018 at 13:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20arguments%2C%20and%20%60ring%60/near/134878784):
-where it looks like the goal isn't changing.
+<p>where it looks like the goal isn't changing.</p>
 
 #### [ Scott Morrison (Sep 29 2018 at 13:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20arguments%2C%20and%20%60ring%60/near/134878788):
-It just says 
-```
-x y : ℕ,
+<p>It just says </p>
+<div class="codehilite"><pre><span></span>x y : ℕ,
 h : x ^ 2 + 3 * y ^ 2 = 4
 ⊢ false
-```
+</pre></div>
 
 #### [ Scott Morrison (Sep 29 2018 at 13:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20arguments%2C%20and%20%60ring%60/near/134878791):
-but with pp.all true, you can see if flipping back and forth:
+<p>but with pp.all true, you can see if flipping back and forth:</p>
 
 #### [ Mario Carneiro (Sep 29 2018 at 13:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20arguments%2C%20and%20%60ring%60/near/134878803):
-You shouldn't use `ring` nonterminally
+<p>You shouldn't use <code>ring</code> nonterminally</p>
 
 #### [ Mario Carneiro (Sep 29 2018 at 13:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20arguments%2C%20and%20%60ring%60/near/134878808):
-at least not automatically (i.e. in `tidy`)
+<p>at least not automatically (i.e. in <code>tidy</code>)</p>
 
 #### [ Mario Carneiro (Sep 29 2018 at 13:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20arguments%2C%20and%20%60ring%60/near/134878815):
-if it doesn't close the goal, assume it failed
+<p>if it doesn't close the goal, assume it failed</p>
 
 #### [ Scott Morrison (Sep 29 2018 at 13:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20arguments%2C%20and%20%60ring%60/near/134878817):
-Yes, I know, but I want to for a moment anyway. :-)
+<p>Yes, I know, but I want to for a moment anyway. :-)</p>
 
 #### [ Scott Morrison (Sep 29 2018 at 13:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20arguments%2C%20and%20%60ring%60/near/134878818):
-Ah, okay. :-)
+<p>Ah, okay. :-)</p>
 
 #### [ Scott Morrison (Sep 29 2018 at 13:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20arguments%2C%20and%20%60ring%60/near/134878821):
-But that takes all the fun out of it.
+<p>But that takes all the fun out of it.</p>
 
 #### [ Mario Carneiro (Sep 29 2018 at 13:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20arguments%2C%20and%20%60ring%60/near/134878823):
-`ring` rewrites the goal into sum-of-products form for ease of reading when it fails
+<p><code>ring</code> rewrites the goal into sum-of-products form for ease of reading when it fails</p>
 
 #### [ Scott Morrison (Sep 29 2018 at 13:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20arguments%2C%20and%20%60ring%60/near/134878827):
-Because sometimes `ring at *, exfalso, linarith` can get stuff done.
+<p>Because sometimes <code>ring at *, exfalso, linarith</code> can get stuff done.</p>
 
 #### [ Mario Carneiro (Sep 29 2018 at 13:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20arguments%2C%20and%20%60ring%60/near/134878829):
-this form disagrees with simp normal form in some places
+<p>this form disagrees with simp normal form in some places</p>
 
 #### [ Scott Morrison (Sep 29 2018 at 13:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20arguments%2C%20and%20%60ring%60/near/134878870):
-The problem I was having here is actually just in the implicit arguments flipping back and forth.
+<p>The problem I was having here is actually just in the implicit arguments flipping back and forth.</p>
 
 #### [ Scott Morrison (Sep 29 2018 at 13:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20arguments%2C%20and%20%60ring%60/near/134878874):
-The expression "itself" is not being changed by either `simp` or `ring`.
+<p>The expression "itself" is not being changed by either <code>simp</code> or <code>ring</code>.</p>
 
 #### [ Mario Carneiro (Sep 29 2018 at 13:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20arguments%2C%20and%20%60ring%60/near/134878881):
-wait, maybe I don't understand then
+<p>wait, maybe I don't understand then</p>
 
 #### [ Mario Carneiro (Sep 29 2018 at 13:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20arguments%2C%20and%20%60ring%60/near/134878882):
-what is changing?
+<p>what is changing?</p>
 
 #### [ Scott Morrison (Sep 29 2018 at 13:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20arguments%2C%20and%20%60ring%60/near/134878894):
-With usual pretty printing, neither `simp` nor `ring` do anything, and the goal just looks like
-```
-x y : ℕ,
+<p>With usual pretty printing, neither <code>simp</code> nor <code>ring</code> do anything, and the goal just looks like</p>
+<div class="codehilite"><pre><span></span>x y : ℕ,
 h : x ^ 2 + 3 * y ^ 2 = 4
 ⊢ false
-```
+</pre></div>
 
 #### [ Scott Morrison (Sep 29 2018 at 13:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20arguments%2C%20and%20%60ring%60/near/134878896):
-but with pp.all we get:
+<p>but with pp.all we get:</p>
 
 #### [ Scott Morrison (Sep 29 2018 at 13:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20arguments%2C%20and%20%60ring%60/near/134878898):
-```
-x y : nat,
+<div class="codehilite"><pre><span></span>x y : nat,
 h :
   @eq.{1} nat
     (@has_add.add.{0} nat nat.has_add
@@ -108,20 +104,19 @@ h :
           (@has_pow.pow.{0 0} nat nat nat.has_pow y (@bit0.{0} nat nat.has_add (@has_one.one.{0} nat nat.has_one)))))
     (@bit0.{0} nat nat.has_add (@bit0.{0} nat nat.has_add (@has_one.one.{0} nat nat.has_one)))
 ⊢ false
-```
+</pre></div>
 
 #### [ Scott Morrison (Sep 29 2018 at 13:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20arguments%2C%20and%20%60ring%60/near/134878899):
-after the `simp`
+<p>after the <code>simp</code></p>
 
 #### [ Mario Carneiro (Sep 29 2018 at 13:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20arguments%2C%20and%20%60ring%60/near/134878900):
-oh, it's nat.pow isn't it
+<p>oh, it's nat.pow isn't it</p>
 
 #### [ Scott Morrison (Sep 29 2018 at 13:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20arguments%2C%20and%20%60ring%60/near/134878901):
-and then
+<p>and then</p>
 
 #### [ Scott Morrison (Sep 29 2018 at 13:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20arguments%2C%20and%20%60ring%60/near/134878905):
-```
-x y : nat,
+<div class="codehilite"><pre><span></span>x y : nat,
 h :
   @eq.{1} nat
     (@has_add.add.{0} nat nat.has_add
@@ -150,28 +145,28 @@ h :
              (@bit0.{0} nat nat.has_add (@has_one.one.{0} nat nat.has_one)))))
     (@bit0.{0} nat nat.has_add (@bit0.{0} nat nat.has_add (@has_one.one.{0} nat nat.has_one)))
 ⊢ false
-```
+</pre></div>
 
 #### [ Scott Morrison (Sep 29 2018 at 13:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20arguments%2C%20and%20%60ring%60/near/134878906):
-after the `ring`
+<p>after the <code>ring</code></p>
 
 #### [ Mario Carneiro (Sep 29 2018 at 13:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20arguments%2C%20and%20%60ring%60/near/134878947):
-right, `ring` prefers monoid powers but that's not simp normal form
+<p>right, <code>ring</code> prefers monoid powers but that's not simp normal form</p>
 
 #### [ Scott Morrison (Sep 29 2018 at 13:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20arguments%2C%20and%20%60ring%60/near/134878950):
-Okay, I see.
+<p>Okay, I see.</p>
 
 #### [ Scott Morrison (Sep 29 2018 at 13:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20arguments%2C%20and%20%60ring%60/near/134878951):
-Nothing to be done, then!
+<p>Nothing to be done, then!</p>
 
 #### [ Mario Carneiro (Sep 29 2018 at 13:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20arguments%2C%20and%20%60ring%60/near/134878962):
-`ring ` doesn't make any attempt to be in simp normal form; if you need that you should just call `ring, simp`
+<p><code>ring </code> doesn't make any attempt to be in simp normal form; if you need that you should just call <code>ring, simp</code></p>
 
 #### [ Mario Carneiro (Sep 29 2018 at 13:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20arguments%2C%20and%20%60ring%60/near/134878965):
-but even better is to just ignore the pretty failure mode
+<p>but even better is to just ignore the pretty failure mode</p>
 
 #### [ Kenny Lau (Sep 29 2018 at 13:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20arguments%2C%20and%20%60ring%60/near/134879165):
-it's a feature!
+<p>it's a feature!</p>
 
 
 {% endraw %}

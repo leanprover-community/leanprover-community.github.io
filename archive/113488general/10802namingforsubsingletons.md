@@ -12,13 +12,13 @@ permalink: archive/113488general/10802namingforsubsingletons.html
 
 {% raw %}
 #### [ Reid Barton (Aug 23 2018 at 18:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/naming%20for%20subsingletons/near/132646423):
-Does mathlib have a naming convention for types which are subsingletons? `is_*` suggests a Prop
+<p>Does mathlib have a naming convention for types which are subsingletons? <code>is_*</code> suggests a Prop</p>
 
 #### [ Reid Barton (Aug 23 2018 at 18:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/naming%20for%20subsingletons/near/132646765):
-I've been using `Is_*`, but not really attached to it
+<p>I've been using <code>Is_*</code>, but not really attached to it</p>
 
 #### [ Chris Hughes (Aug 23 2018 at 20:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/naming%20for%20subsingletons/near/132653256):
-The only two examples of this I can think of are `decidable` and `fintype` neither of which follow a convention other than no `is` or `Is`
+<p>The only two examples of this I can think of are <code>decidable</code> and <code>fintype</code> neither of which follow a convention other than no <code>is</code> or <code>Is</code></p>
 
 
 {% endraw %}

@@ -12,67 +12,65 @@ permalink: archive/113488general/45190quotienttypeclassresolution.html
 
 {% raw %}
 #### [ Kenny Lau (Apr 17 2018 at 07:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotient%20typeclass%20resolution/near/125182192):
-here is a working example:
-```lean
-import group_theory.coset
+<p>here is a working example:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">group_theory</span><span class="bp">.</span><span class="n">coset</span>
 
-universes u v
+<span class="n">universes</span> <span class="n">u</span> <span class="n">v</span>
 
-variables (G : Type u) [group G] (X S : Type v)
+<span class="kn">variables</span> <span class="o">(</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">[</span><span class="n">group</span> <span class="n">G</span><span class="o">]</span> <span class="o">(</span><span class="n">X</span> <span class="n">S</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">)</span>
 
-class group_action : Type (max u v) :=
-(fn : G → X → X)
-(one : ∀ x, fn 1 x = x)
-(mul : ∀ g h x, fn (g * h) x = fn g (fn h x))
+<span class="n">class</span> <span class="n">group_action</span> <span class="o">:</span> <span class="kt">Type</span> <span class="o">(</span><span class="n">max</span> <span class="n">u</span> <span class="n">v</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">fn</span> <span class="o">:</span> <span class="n">G</span> <span class="bp">→</span> <span class="n">X</span> <span class="bp">→</span> <span class="n">X</span><span class="o">)</span>
+<span class="o">(</span><span class="n">one</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span><span class="o">,</span> <span class="n">fn</span> <span class="mi">1</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">x</span><span class="o">)</span>
+<span class="o">(</span><span class="n">mul</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">g</span> <span class="n">h</span> <span class="n">x</span><span class="o">,</span> <span class="n">fn</span> <span class="o">(</span><span class="n">g</span> <span class="bp">*</span> <span class="n">h</span><span class="o">)</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">fn</span> <span class="n">g</span> <span class="o">(</span><span class="n">fn</span> <span class="n">h</span> <span class="n">x</span><span class="o">))</span>
 
-variable [group_action G X]
-variables (g h : G) (x y : X)
+<span class="kn">variable</span> <span class="o">[</span><span class="n">group_action</span> <span class="n">G</span> <span class="n">X</span><span class="o">]</span>
+<span class="kn">variables</span> <span class="o">(</span><span class="n">g</span> <span class="n">h</span> <span class="o">:</span> <span class="n">G</span><span class="o">)</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">X</span><span class="o">)</span>
 
-infixr ` ● `:100 := group_action.fn -- \ci
+<span class="kn">infixr</span> <span class="bp">`</span> <span class="err">●</span> <span class="bp">`</span><span class="o">:</span><span class="mi">100</span> <span class="o">:=</span> <span class="n">group_action</span><span class="bp">.</span><span class="n">fn</span> <span class="c1">-- \ci</span>
 
-variables {G X g h x y}
+<span class="kn">variables</span> <span class="o">{</span><span class="n">G</span> <span class="n">X</span> <span class="n">g</span> <span class="n">h</span> <span class="n">x</span> <span class="n">y</span><span class="o">}</span>
 
-@[simp] lemma one_act : (1:G) ● x = x :=
-group_action.one G x
+<span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="kn">lemma</span> <span class="n">one_act</span> <span class="o">:</span> <span class="o">(</span><span class="mi">1</span><span class="o">:</span><span class="n">G</span><span class="o">)</span> <span class="err">●</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">x</span> <span class="o">:=</span>
+<span class="n">group_action</span><span class="bp">.</span><span class="n">one</span> <span class="n">G</span> <span class="n">x</span>
 
-lemma mul_act : (g * h) ● x = g ● h ● x :=
-group_action.mul g h x
+<span class="kn">lemma</span> <span class="n">mul_act</span> <span class="o">:</span> <span class="o">(</span><span class="n">g</span> <span class="bp">*</span> <span class="n">h</span><span class="o">)</span> <span class="err">●</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">g</span> <span class="err">●</span> <span class="n">h</span> <span class="err">●</span> <span class="n">x</span> <span class="o">:=</span>
+<span class="n">group_action</span><span class="bp">.</span><span class="n">mul</span> <span class="n">g</span> <span class="n">h</span> <span class="n">x</span>
 
-lemma act_act : g ● h ● x = (g * h) ● x :=
-eq.symm $ group_action.mul g h x
+<span class="kn">lemma</span> <span class="n">act_act</span> <span class="o">:</span> <span class="n">g</span> <span class="err">●</span> <span class="n">h</span> <span class="err">●</span> <span class="n">x</span> <span class="bp">=</span> <span class="o">(</span><span class="n">g</span> <span class="bp">*</span> <span class="n">h</span><span class="o">)</span> <span class="err">●</span> <span class="n">x</span> <span class="o">:=</span>
+<span class="n">eq</span><span class="bp">.</span><span class="n">symm</span> <span class="err">$</span> <span class="n">group_action</span><span class="bp">.</span><span class="n">mul</span> <span class="n">g</span> <span class="n">h</span> <span class="n">x</span>
 
-lemma inv_act (H : g ● x = y) : g⁻¹ ● y = x :=
-by rw ← H; simp [act_act]
+<span class="kn">lemma</span> <span class="n">inv_act</span> <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="n">g</span> <span class="err">●</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">y</span><span class="o">)</span> <span class="o">:</span> <span class="n">g</span><span class="bp">⁻¹</span> <span class="err">●</span> <span class="n">y</span> <span class="bp">=</span> <span class="n">x</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">rw</span> <span class="err">←</span> <span class="n">H</span><span class="bp">;</span> <span class="n">simp</span> <span class="o">[</span><span class="n">act_act</span><span class="o">]</span>
 
-variables (G X g h x y)
+<span class="kn">variables</span> <span class="o">(</span><span class="n">G</span> <span class="n">X</span> <span class="n">g</span> <span class="n">h</span> <span class="n">x</span> <span class="n">y</span><span class="o">)</span>
 
-def stab : set G :=
-{ g | g ● x = x }
+<span class="n">def</span> <span class="n">stab</span> <span class="o">:</span> <span class="n">set</span> <span class="n">G</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">g</span> <span class="bp">|</span> <span class="n">g</span> <span class="err">●</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">x</span> <span class="o">}</span>
 
-@[simp] lemma mem_stab_iff : g ∈ stab G X x ↔ g ● x = x := iff.rfl
+<span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="kn">lemma</span> <span class="n">mem_stab_iff</span> <span class="o">:</span> <span class="n">g</span> <span class="err">∈</span> <span class="n">stab</span> <span class="n">G</span> <span class="n">X</span> <span class="n">x</span> <span class="bp">↔</span> <span class="n">g</span> <span class="err">●</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">x</span> <span class="o">:=</span> <span class="n">iff</span><span class="bp">.</span><span class="n">rfl</span>
 
-instance stab.is_subgroup : is_subgroup (stab G X x) :=
-{ mul_mem := λ g1 g2 hg1 hg2, by simp at hg1 hg2; simp [mul_act, hg1, hg2],
-  one_mem := by simp,
-  inv_mem := λ g hg, inv_act hg }
+<span class="kn">instance</span> <span class="n">stab</span><span class="bp">.</span><span class="n">is_subgroup</span> <span class="o">:</span> <span class="n">is_subgroup</span> <span class="o">(</span><span class="n">stab</span> <span class="n">G</span> <span class="n">X</span> <span class="n">x</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">mul_mem</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">g1</span> <span class="n">g2</span> <span class="n">hg1</span> <span class="n">hg2</span><span class="o">,</span> <span class="k">by</span> <span class="n">simp</span> <span class="n">at</span> <span class="n">hg1</span> <span class="n">hg2</span><span class="bp">;</span> <span class="n">simp</span> <span class="o">[</span><span class="n">mul_act</span><span class="o">,</span> <span class="n">hg1</span><span class="o">,</span> <span class="n">hg2</span><span class="o">],</span>
+  <span class="n">one_mem</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">simp</span><span class="o">,</span>
+  <span class="n">inv_mem</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">g</span> <span class="n">hg</span><span class="o">,</span> <span class="n">inv_act</span> <span class="n">hg</span> <span class="o">}</span>
 
-example (L : left_cosets (stab G X x)) : false :=
-quotient.induction_on L _
-```
+<span class="kn">example</span> <span class="o">(</span><span class="n">L</span> <span class="o">:</span> <span class="n">left_cosets</span> <span class="o">(</span><span class="n">stab</span> <span class="n">G</span> <span class="n">X</span> <span class="n">x</span><span class="o">))</span> <span class="o">:</span> <span class="n">false</span> <span class="o">:=</span>
+<span class="n">quotient</span><span class="bp">.</span><span class="n">induction_on</span> <span class="n">L</span> <span class="bp">_</span>
+</pre></div>
 
 #### [ Kenny Lau (Apr 17 2018 at 07:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotient%20typeclass%20resolution/near/125182195):
-working but not minimalized
+<p>working but not minimalized</p>
 
 #### [ Kenny Lau (Apr 17 2018 at 07:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotient%20typeclass%20resolution/near/125182198):
-the error is on the last line
+<p>the error is on the last line</p>
 
 #### [ Kenny Lau (Apr 17 2018 at 07:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotient%20typeclass%20resolution/near/125182199):
-I cannot use `quotient.induction_on` because apparently Lean doesn't know that `left_cosets (stab G X x)` is a quotient
+<p>I cannot use <code>quotient.induction_on</code> because apparently Lean doesn't know that <code>left_cosets (stab G X x)</code> is a quotient</p>
 
 #### [ Kenny Lau (Apr 17 2018 at 07:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotient%20typeclass%20resolution/near/125182246):
-error message:
-```
-[class_instances]  class-instance resolution trace
+<p>error message:</p>
+<div class="codehilite"><pre><span></span>[class_instances]  class-instance resolution trace
 [class_instances] (0) ?x_0 : setoid G := @left_rel ?x_1 ?x_2 ?x_3 ?x_4
 [class_instances] (1) ?x_2 : group G := _inst_1
 [class_instances] (1) ?x_4 : @is_subgroup G _inst_1 _inst_1 ?x_3 := @stab.is_subgroup ?x_5 ?x_6 ?x_7 ?x_8 ?x_9
@@ -81,24 +79,26 @@ error message:
 [class_instances] trying next solution, current solution has metavars
 @left_rel G _inst_1 (@stab G _inst_1 X _inst_2 ?x_9) _
 [...]
+</pre></div>
 
 #### [ Kenny Lau (Apr 17 2018 at 07:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotient%20typeclass%20resolution/near/125182252):
-what is this supposed to mean
+<p>what is this supposed to mean</p>
 
 #### [ Kenny Lau (Apr 17 2018 at 07:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotient%20typeclass%20resolution/near/125182316):
-I think the `x` messed up everything
+<p>I think the <code>x</code> messed up everything</p>
 
 #### [ Kenny Lau (Apr 17 2018 at 07:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotient%20typeclass%20resolution/near/125182318):
-How do i solve this problem?
+<p>How do i solve this problem?</p>
 
 #### [ Mario Carneiro (Apr 17 2018 at 07:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotient%20typeclass%20resolution/near/125183528):
-`left_rel` is a bad instance, because it depends on `s` which is not in the output. I made it a `def` and used `local instance` for the proofs in that file. With this modification, you have to write
-```
-example (L : left_cosets (stab G X x)) : false :=
+<p><code>left_rel</code> is a bad instance, because it depends on <code>s</code> which is not in the output. I made it a <code>def</code> and used <code>local instance</code> for the proofs in that file. With this modification, you have to write</p>
+<div class="codehilite"><pre><span></span>example (L : left_cosets (stab G X x)) : false :=
 by letI := left_rel (stab G X x); exact
 quotient.induction_on L _
-```
-but then it works
+</pre></div>
+
+
+<p>but then it works</p>
 
 
 {% endraw %}

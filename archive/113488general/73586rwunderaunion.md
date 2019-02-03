@@ -12,862 +12,855 @@ permalink: archive/113488general/73586rwunderaunion.html
 
 {% raw %}
 #### [ Kevin Buzzard (May 14 2018 at 21:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126553772):
-```lean
-import data.set 
-example (α γ : Type)  (F G : γ → set α)
-  (H : ∀ (i : γ), F i = G i) : (⋃ (i : γ), F i)  = ⋃ (i : γ), G i :=
-begin
-  refine set.subset.antisymm _ _,
-  { apply set.Union_subset_Union,
-    intro i,rw (H i),
-  },
-  { apply set.Union_subset_Union,
-    intro i,rw (H i),
-  },
-end 
-```
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">set</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">α</span> <span class="n">γ</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span>  <span class="o">(</span><span class="n">F</span> <span class="n">G</span> <span class="o">:</span> <span class="n">γ</span> <span class="bp">→</span> <span class="n">set</span> <span class="n">α</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">i</span> <span class="o">:</span> <span class="n">γ</span><span class="o">),</span> <span class="n">F</span> <span class="n">i</span> <span class="bp">=</span> <span class="n">G</span> <span class="n">i</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="err">⋃</span> <span class="o">(</span><span class="n">i</span> <span class="o">:</span> <span class="n">γ</span><span class="o">),</span> <span class="n">F</span> <span class="n">i</span><span class="o">)</span>  <span class="bp">=</span> <span class="err">⋃</span> <span class="o">(</span><span class="n">i</span> <span class="o">:</span> <span class="n">γ</span><span class="o">),</span> <span class="n">G</span> <span class="n">i</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">refine</span> <span class="n">set</span><span class="bp">.</span><span class="n">subset</span><span class="bp">.</span><span class="n">antisymm</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">apply</span> <span class="n">set</span><span class="bp">.</span><span class="n">Union_subset_Union</span><span class="o">,</span>
+    <span class="n">intro</span> <span class="n">i</span><span class="o">,</span><span class="n">rw</span> <span class="o">(</span><span class="n">H</span> <span class="n">i</span><span class="o">),</span>
+  <span class="o">},</span>
+  <span class="o">{</span> <span class="n">apply</span> <span class="n">set</span><span class="bp">.</span><span class="n">Union_subset_Union</span><span class="o">,</span>
+    <span class="n">intro</span> <span class="n">i</span><span class="o">,</span><span class="n">rw</span> <span class="o">(</span><span class="n">H</span> <span class="n">i</span><span class="o">),</span>
+  <span class="o">},</span>
+<span class="kn">end</span>
+</pre></div>
 
 #### [ Kevin Buzzard (May 14 2018 at 21:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126553840):
-Is there a more sensible method to prove that if `F i = G i` for all `i` then the union of the `F i` equals the union of the `G i`? I couldn't figure out how to rewrite within the union.
+<p>Is there a more sensible method to prove that if <code>F i = G i</code> for all <code>i</code> then the union of the <code>F i</code> equals the union of the <code>G i</code>? I couldn't figure out how to rewrite within the union.</p>
 
 #### [ Kevin Buzzard (May 14 2018 at 21:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126553854):
-Sorry, the Union.
+<p>Sorry, the Union.</p>
 
 #### [ Chris Hughes (May 14 2018 at 21:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126553895):
-```lean
-example (α γ : Type)  (F G : γ → set α)
-  (H : ∀ (i : γ), F i = G i) : (⋃ (i : γ), F i)  = ⋃ (i : γ), G i :=
-by rw funext H
-```
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">α</span> <span class="n">γ</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span>  <span class="o">(</span><span class="n">F</span> <span class="n">G</span> <span class="o">:</span> <span class="n">γ</span> <span class="bp">→</span> <span class="n">set</span> <span class="n">α</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">i</span> <span class="o">:</span> <span class="n">γ</span><span class="o">),</span> <span class="n">F</span> <span class="n">i</span> <span class="bp">=</span> <span class="n">G</span> <span class="n">i</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="err">⋃</span> <span class="o">(</span><span class="n">i</span> <span class="o">:</span> <span class="n">γ</span><span class="o">),</span> <span class="n">F</span> <span class="n">i</span><span class="o">)</span>  <span class="bp">=</span> <span class="err">⋃</span> <span class="o">(</span><span class="n">i</span> <span class="o">:</span> <span class="n">γ</span><span class="o">),</span> <span class="n">G</span> <span class="n">i</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">rw</span> <span class="n">funext</span> <span class="n">H</span>
+</pre></div>
 
 #### [ Kevin Buzzard (May 14 2018 at 21:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126553981):
-ha ha that's clever :-)
+<p>ha ha that's clever :-)</p>
 
 #### [ Patrick Massot (May 14 2018 at 21:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126554007):
-```lean
-example (α γ : Type)  (F G : γ → set α)
-  (H : ∀ (i : γ), F i = G i) : (⋃ (i : γ), F i)  = ⋃ (i : γ), G i :=
-by finish
-```
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">α</span> <span class="n">γ</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span>  <span class="o">(</span><span class="n">F</span> <span class="n">G</span> <span class="o">:</span> <span class="n">γ</span> <span class="bp">→</span> <span class="n">set</span> <span class="n">α</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">i</span> <span class="o">:</span> <span class="n">γ</span><span class="o">),</span> <span class="n">F</span> <span class="n">i</span> <span class="bp">=</span> <span class="n">G</span> <span class="n">i</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="err">⋃</span> <span class="o">(</span><span class="n">i</span> <span class="o">:</span> <span class="n">γ</span><span class="o">),</span> <span class="n">F</span> <span class="n">i</span><span class="o">)</span>  <span class="bp">=</span> <span class="err">⋃</span> <span class="o">(</span><span class="n">i</span> <span class="o">:</span> <span class="n">γ</span><span class="o">),</span> <span class="n">G</span> <span class="n">i</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">finish</span>
+</pre></div>
 
 #### [ Patrick Massot (May 14 2018 at 21:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126554017):
-Use automation Luke
+<p>Use automation Luke</p>
 
 #### [ Kevin Buzzard (May 14 2018 at 21:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126554071):
-What does `finish` do?
+<p>What does <code>finish</code> do?</p>
 
 #### [ Patrick Massot (May 14 2018 at 21:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126554073):
-It finishes the proof
+<p>It finishes the proof</p>
 
 #### [ Kevin Buzzard (May 14 2018 at 21:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126554074):
-every time??
+<p>every time??</p>
 
 #### [ Patrick Massot (May 14 2018 at 21:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126554079):
-Yes, nobody told you?
+<p>Yes, nobody told you?</p>
 
 #### [ Patrick Massot (May 14 2018 at 21:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126554083):
-You could also use `congr` here
+<p>You could also use <code>congr</code> here</p>
 
 #### [ Kevin Buzzard (May 14 2018 at 21:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126554095):
-I've seen `congr` do rewrites I couldn't do before, I should have tried this
+<p>I've seen <code>congr</code> do rewrites I couldn't do before, I should have tried this</p>
 
 #### [ Kevin Buzzard (May 14 2018 at 21:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126554101):
-I tried `conv` but I couldn't get that to work either
+<p>I tried <code>conv</code> but I couldn't get that to work either</p>
 
 #### [ Kevin Buzzard (May 14 2018 at 21:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126554103):
-and it was the last line of a 250 line proof :-)
+<p>and it was the last line of a 250 line proof :-)</p>
 
 #### [ Kevin Buzzard (May 14 2018 at 21:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126554104):
-so I cheated and asked here.
+<p>so I cheated and asked here.</p>
 
 #### [ Kevin Buzzard (May 14 2018 at 21:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126554107):
-I should be marking Chris' exam script!
+<p>I should be marking Chris' exam script!</p>
 
 #### [ Kevin Buzzard (May 14 2018 at 21:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126554147):
-But I am sick of affine schemes not being schemes
+<p>But I am sick of affine schemes not being schemes</p>
 
 #### [ Patrick Massot (May 14 2018 at 21:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126554151):
-Recently I got to this situation where the goal is `a = a` (but not if `pp.all`) and `congr` alone finished the proof
+<p>Recently I got to this situation where the goal is <code>a = a</code> (but not if <code>pp.all</code>) and <code>congr</code> alone finished the proof</p>
 
 #### [ Patrick Massot (May 14 2018 at 21:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126554164):
-You should have made that formalization the exam
+<p>You should have made that formalization the exam</p>
 
 #### [ Kevin Buzzard (May 14 2018 at 21:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126554192):
-next year
+<p>next year</p>
 
 #### [ Kevin Buzzard (May 14 2018 at 21:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126554243):
-What would I do without this chat. Things would go so much more slowly.
+<p>What would I do without this chat. Things would go so much more slowly.</p>
 
 #### [ Patrick Massot (May 14 2018 at 21:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126554551):
-I'm always fighting the temptation to post every lemma I need here
+<p>I'm always fighting the temptation to post every lemma I need here</p>
 
 #### [ Patrick Massot (May 14 2018 at 21:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126554597):
-I hope to reduce my dependence a bit
+<p>I hope to reduce my dependence a bit</p>
 
 #### [ Patrick Massot (May 14 2018 at 21:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126554609):
-But I'm still interested in learning better ways. Here are two lemmas I proved tonight. Usual questions: are there already there? What is the proof from the book?
+<p>But I'm still interested in learning better ways. Here are two lemmas I proved tonight. Usual questions: are there already there? What is the proof from the book?</p>
 
 #### [ Patrick Massot (May 14 2018 at 21:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126554618):
-```lean
-lemma foldr_ext {α : Type*} {β : Type*} {l : list α} (f f' : α → β → β) (s : β)
-  (H : ∀ a ∈ l, ∀ b : β, f a b = f' a b) : foldr f s l = foldr f' s l :=
-begin
-  induction l with h t IH,
-  { simp },
-  { have H' := H h (by simp),
-    suffices : foldr f s t = foldr f' s t, by simp [H', this],
-    apply IH,
-    intros a a_t,
-    exact H a (by simp[a_t]) }
-end
-```
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">foldr_ext</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">{</span><span class="n">l</span> <span class="o">:</span> <span class="n">list</span> <span class="n">α</span><span class="o">}</span> <span class="o">(</span><span class="n">f</span> <span class="n">f&#39;</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">β</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">a</span> <span class="err">∈</span> <span class="n">l</span><span class="o">,</span> <span class="bp">∀</span> <span class="n">b</span> <span class="o">:</span> <span class="n">β</span><span class="o">,</span> <span class="n">f</span> <span class="n">a</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">f&#39;</span> <span class="n">a</span> <span class="n">b</span><span class="o">)</span> <span class="o">:</span> <span class="n">foldr</span> <span class="n">f</span> <span class="n">s</span> <span class="n">l</span> <span class="bp">=</span> <span class="n">foldr</span> <span class="n">f&#39;</span> <span class="n">s</span> <span class="n">l</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">induction</span> <span class="n">l</span> <span class="k">with</span> <span class="n">h</span> <span class="n">t</span> <span class="n">IH</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">simp</span> <span class="o">},</span>
+  <span class="o">{</span> <span class="k">have</span> <span class="n">H&#39;</span> <span class="o">:=</span> <span class="n">H</span> <span class="n">h</span> <span class="o">(</span><span class="k">by</span> <span class="n">simp</span><span class="o">),</span>
+    <span class="n">suffices</span> <span class="o">:</span> <span class="n">foldr</span> <span class="n">f</span> <span class="n">s</span> <span class="n">t</span> <span class="bp">=</span> <span class="n">foldr</span> <span class="n">f&#39;</span> <span class="n">s</span> <span class="n">t</span><span class="o">,</span> <span class="k">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">H&#39;</span><span class="o">,</span> <span class="n">this</span><span class="o">],</span>
+    <span class="n">apply</span> <span class="n">IH</span><span class="o">,</span>
+    <span class="n">intros</span> <span class="n">a</span> <span class="n">a_t</span><span class="o">,</span>
+    <span class="n">exact</span> <span class="n">H</span> <span class="n">a</span> <span class="o">(</span><span class="k">by</span> <span class="n">simp</span><span class="o">[</span><span class="n">a_t</span><span class="o">])</span> <span class="o">}</span>
+<span class="kn">end</span>
+</pre></div>
 
 #### [ Patrick Massot (May 14 2018 at 21:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126554683):
-```lean
-lemma filter_ext {α : Type*} {r: list α} (P P') [decidable_pred P] [decidable_pred P'] 
-  (HP : ∀ i ∈ r, P i = P' i) : filter P r = filter P' r :=
-begin
-  induction r with h t IH,
-  { simp },
-  { have HPh : P h = P' h := HP h (by simp),
-    have : ∀ (i : α), i ∈ t → P i = P' i,
-    { intros i i_t,
-      exact (HP i $ by simp [i_t]) },
-    by_cases H : P h, 
-    { have H' : P' h := HPh ▸ H,
-      simp [H, H', IH this] },
-    { have H' : ¬ P' h := HPh ▸ H, 
-      simp [H, H', IH this] } }
-end
-```
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">filter_ext</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">{</span><span class="n">r</span><span class="o">:</span> <span class="n">list</span> <span class="n">α</span><span class="o">}</span> <span class="o">(</span><span class="n">P</span> <span class="n">P&#39;</span><span class="o">)</span> <span class="o">[</span><span class="n">decidable_pred</span> <span class="n">P</span><span class="o">]</span> <span class="o">[</span><span class="n">decidable_pred</span> <span class="n">P&#39;</span><span class="o">]</span>
+  <span class="o">(</span><span class="n">HP</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">i</span> <span class="err">∈</span> <span class="n">r</span><span class="o">,</span> <span class="n">P</span> <span class="n">i</span> <span class="bp">=</span> <span class="n">P&#39;</span> <span class="n">i</span><span class="o">)</span> <span class="o">:</span> <span class="n">filter</span> <span class="n">P</span> <span class="n">r</span> <span class="bp">=</span> <span class="n">filter</span> <span class="n">P&#39;</span> <span class="n">r</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">induction</span> <span class="n">r</span> <span class="k">with</span> <span class="n">h</span> <span class="n">t</span> <span class="n">IH</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">simp</span> <span class="o">},</span>
+  <span class="o">{</span> <span class="k">have</span> <span class="n">HPh</span> <span class="o">:</span> <span class="n">P</span> <span class="n">h</span> <span class="bp">=</span> <span class="n">P&#39;</span> <span class="n">h</span> <span class="o">:=</span> <span class="n">HP</span> <span class="n">h</span> <span class="o">(</span><span class="k">by</span> <span class="n">simp</span><span class="o">),</span>
+    <span class="k">have</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">i</span> <span class="o">:</span> <span class="n">α</span><span class="o">),</span> <span class="n">i</span> <span class="err">∈</span> <span class="n">t</span> <span class="bp">→</span> <span class="n">P</span> <span class="n">i</span> <span class="bp">=</span> <span class="n">P&#39;</span> <span class="n">i</span><span class="o">,</span>
+    <span class="o">{</span> <span class="n">intros</span> <span class="n">i</span> <span class="n">i_t</span><span class="o">,</span>
+      <span class="n">exact</span> <span class="o">(</span><span class="n">HP</span> <span class="n">i</span> <span class="err">$</span> <span class="k">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">i_t</span><span class="o">])</span> <span class="o">},</span>
+    <span class="n">by_cases</span> <span class="n">H</span> <span class="o">:</span> <span class="n">P</span> <span class="n">h</span><span class="o">,</span>
+    <span class="o">{</span> <span class="k">have</span> <span class="n">H&#39;</span> <span class="o">:</span> <span class="n">P&#39;</span> <span class="n">h</span> <span class="o">:=</span> <span class="n">HPh</span> <span class="bp">▸</span> <span class="n">H</span><span class="o">,</span>
+      <span class="n">simp</span> <span class="o">[</span><span class="n">H</span><span class="o">,</span> <span class="n">H&#39;</span><span class="o">,</span> <span class="n">IH</span> <span class="n">this</span><span class="o">]</span> <span class="o">},</span>
+    <span class="o">{</span> <span class="k">have</span> <span class="n">H&#39;</span> <span class="o">:</span> <span class="bp">¬</span> <span class="n">P&#39;</span> <span class="n">h</span> <span class="o">:=</span> <span class="n">HPh</span> <span class="bp">▸</span> <span class="n">H</span><span class="o">,</span>
+      <span class="n">simp</span> <span class="o">[</span><span class="n">H</span><span class="o">,</span> <span class="n">H&#39;</span><span class="o">,</span> <span class="n">IH</span> <span class="n">this</span><span class="o">]</span> <span class="o">}</span> <span class="o">}</span>
+<span class="kn">end</span>
+</pre></div>
 
 #### [ Patrick Massot (May 14 2018 at 21:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126554698):
-I haven't tried to obfuscate the proofs
+<p>I haven't tried to obfuscate the proofs</p>
 
 #### [ Kevin Buzzard (May 14 2018 at 21:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126554707):
-ha ha can you do the first one with Chris' trick?
+<p>ha ha can you do the first one with Chris' trick?</p>
 
 #### [ Patrick Massot (May 14 2018 at 21:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126554754):
-But I'm sure two lines are enough
+<p>But I'm sure two lines are enough</p>
 
 #### [ Patrick Massot (May 14 2018 at 21:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126554775):
-I don't think so, you must not forget we have informations only on elements of the list
+<p>I don't think so, you must not forget we have informations only on elements of the list</p>
 
 #### [ Kevin Buzzard (May 14 2018 at 21:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126554779):
-oh yes
+<p>oh yes</p>
 
 #### [ Patrick Massot (May 14 2018 at 21:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126554780):
-This condition seems a bit too specific
+<p>This condition seems a bit too specific</p>
 
 #### [ Patrick Massot (May 14 2018 at 21:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126554786):
-For instance, start with `congr` and you loose
+<p>For instance, start with <code>congr</code> and you loose</p>
 
 #### [ Kevin Buzzard (May 14 2018 at 21:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126554788):
-Do I need an import for these? I just this minute upgraded mathlib in my project and I'm re-building it
+<p>Do I need an import for these? I just this minute upgraded mathlib in my project and I'm re-building it</p>
 
 #### [ Kevin Buzzard (May 14 2018 at 21:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126554829):
-so maybe I just have to wait
+<p>so maybe I just have to wait</p>
 
 #### [ Kevin Buzzard (May 14 2018 at 21:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126554831):
-but I have complaints about foldr currently
+<p>but I have complaints about foldr currently</p>
 
 #### [ Patrick Massot (May 14 2018 at 21:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126554836):
-`import data.list.basic`
+<p><code>import data.list.basic</code></p>
 
 #### [ Patrick Massot (May 14 2018 at 21:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126554837):
-sorry
+<p>sorry</p>
 
 #### [ Kevin Buzzard (May 14 2018 at 22:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126555316):
-`list.foldr_hom` is too strong
+<p><code>list.foldr_hom</code> is too strong</p>
 
 #### [ Patrick Massot (May 14 2018 at 22:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126555384):
-Too strong?
+<p>Too strong?</p>
 
 #### [ Kevin Buzzard (May 14 2018 at 22:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126555393):
-For your application
+<p>For your application</p>
 
 #### [ Kevin Buzzard (May 14 2018 at 22:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126555398):
-like Chris' idea
+<p>like Chris' idea</p>
 
 #### [ Kevin Buzzard (May 14 2018 at 22:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126555403):
-Same problem
+<p>Same problem</p>
 
 #### [ Patrick Massot (May 14 2018 at 22:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126555410):
-right
+<p>right</p>
 
 #### [ Chris Hughes (May 14 2018 at 22:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126555898):
-```lean
-lemma foldr_ext {α : Type*} {β : Type*} {l : list α} (f f' : α → β → β) (s : β)
-  (H : ∀ a ∈ l, ∀ b : β, f a b = f' a b) : foldr f s l = foldr f' s l :=
-by induction l; simp * {contextual := tt}
-```
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">foldr_ext</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">{</span><span class="n">l</span> <span class="o">:</span> <span class="n">list</span> <span class="n">α</span><span class="o">}</span> <span class="o">(</span><span class="n">f</span> <span class="n">f&#39;</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">β</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">a</span> <span class="err">∈</span> <span class="n">l</span><span class="o">,</span> <span class="bp">∀</span> <span class="n">b</span> <span class="o">:</span> <span class="n">β</span><span class="o">,</span> <span class="n">f</span> <span class="n">a</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">f&#39;</span> <span class="n">a</span> <span class="n">b</span><span class="o">)</span> <span class="o">:</span> <span class="n">foldr</span> <span class="n">f</span> <span class="n">s</span> <span class="n">l</span> <span class="bp">=</span> <span class="n">foldr</span> <span class="n">f&#39;</span> <span class="n">s</span> <span class="n">l</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">induction</span> <span class="n">l</span><span class="bp">;</span> <span class="n">simp</span> <span class="bp">*</span> <span class="o">{</span><span class="n">contextual</span> <span class="o">:=</span> <span class="n">tt</span><span class="o">}</span>
+</pre></div>
 
 #### [ Patrick Massot (May 14 2018 at 22:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126555909):
-:open_mouth:
+<p><span class="emoji emoji-1f62e" title="open mouth">:open_mouth:</span></p>
 
 #### [ Kenny Lau (May 14 2018 at 22:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126555923):
-@**Chris Hughes** can you derive normal and curvature for r=xi+f(x)j?
+<p><span class="user-mention" data-user-id="110044">@Chris Hughes</span> can you derive normal and curvature for r=xi+f(x)j?</p>
 
 #### [ Patrick Massot (May 14 2018 at 22:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126555943):
-@**Kenny Lau** is this the mechanics exam running joke again?
+<p><span class="user-mention" data-user-id="110064">@Kenny Lau</span> is this the mechanics exam running joke again?</p>
 
 #### [ Kenny Lau (May 14 2018 at 22:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126555948):
-is it a joke when the exam is tomorrow?
+<p>is it a joke when the exam is tomorrow?</p>
 
 #### [ Patrick Massot (May 14 2018 at 22:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126556102):
-Thank you Chris for not revising mechanics
+<p>Thank you Chris for not revising mechanics</p>
 
 #### [ Patrick Massot (May 14 2018 at 22:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126556105):
-I disapprove of course
+<p>I disapprove of course</p>
 
 #### [ Patrick Massot (May 14 2018 at 22:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126556108):
-But I still take your proof
+<p>But I still take your proof</p>
 
 #### [ Chris Hughes (May 14 2018 at 22:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126556116):
-I can as of today. @**Kenny Lau**
+<p>I can as of today. <span class="user-mention" data-user-id="110064">@Kenny Lau</span></p>
 
 #### [ Kenny Lau (May 14 2018 at 22:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126556133):
-ok you win
+<p>ok you win</p>
 
 #### [ Chris Hughes (May 14 2018 at 22:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126556183):
-curvature is dn / ds, where s is arc length I think.
+<p>curvature is dn / ds, where s is arc length I think.</p>
 
 #### [ Chris Hughes (May 14 2018 at 22:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126556192):
-and n is normal
+<p>and n is normal</p>
 
 #### [ Patrick Massot (May 14 2018 at 22:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126556199):
-He can golf *and* compute curvature. What a man!
+<p>He can golf <em>and</em> compute curvature. What a man!</p>
 
 #### [ Kevin Buzzard (May 14 2018 at 22:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126556397):
-So what is going on with Chris' proof? I feel like I can learn something important here
+<p>So what is going on with Chris' proof? I feel like I can learn something important here</p>
 
 #### [ Kevin Buzzard (May 14 2018 at 22:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126556399):
-Induction -- sure. Simp does the base case
+<p>Induction -- sure. Simp does the base case</p>
 
 #### [ Kevin Buzzard (May 14 2018 at 22:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126556403):
-simp doesn't do the inductive step.
+<p>simp doesn't do the inductive step.</p>
 
 #### [ Kevin Buzzard (May 14 2018 at 22:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126556405):
-by itself.
+<p>by itself.</p>
 
 #### [ Kenny Lau (May 14 2018 at 22:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126556407):
-it's a semicolon
+<p>it's a semicolon</p>
 
 #### [ Kenny Lau (May 14 2018 at 22:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126556450):
-`simp` is simultaneously applied to both goals
+<p><code>simp</code> is simultaneously applied to both goals</p>
 
 #### [ Kenny Lau (May 14 2018 at 22:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126556451):
-the base case and the inductive step
+<p>the base case and the inductive step</p>
 
 #### [ Patrick Massot (May 14 2018 at 22:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126556453):
-`contextual` seems to do the magic trick
+<p><code>contextual</code> seems to do the magic trick</p>
 
 #### [ Kenny Lau (May 14 2018 at 22:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126556457):
-what does `contextual` do?
+<p>what does <code>contextual</code> do?</p>
 
 #### [ Patrick Massot (May 14 2018 at 22:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126556461):
-uses context
+<p>uses context</p>
 
 #### [ Kenny Lau (May 14 2018 at 22:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126556465):
-isn't that `simp *`?
+<p>isn't that <code>simp *</code>?</p>
 
 #### [ Patrick Massot (May 14 2018 at 22:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126556496):
-I hate natural number arithmetic, so I'm cheating for this one. Who could prove me `b < a` implies `b + 1 - a = 0`?
+<p>I hate natural number arithmetic, so I'm cheating for this one. Who could prove me <code>b &lt; a</code> implies <code>b + 1 - a = 0</code>?</p>
 
 #### [ Kevin Buzzard (May 14 2018 at 22:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126556576):
-maybe b < a -> (b + 1) <= a
+<p>maybe b &lt; a -&gt; (b + 1) &lt;= a</p>
 
 #### [ Kenny Lau (May 14 2018 at 22:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126556581):
-they are equivalent
+<p>they are equivalent</p>
 
 #### [ Kenny Lau (May 14 2018 at 22:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126556584):
-definitionally
+<p>definitionally</p>
 
 #### [ Patrick Massot (May 14 2018 at 22:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126556587):
-That could be a step yes
+<p>That could be a step yes</p>
 
 #### [ Kevin Buzzard (May 14 2018 at 22:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126556590):
-oh they are defeq right? ;-)
+<p>oh they are defeq right? ;-)</p>
 
 #### [ Kenny Lau (May 14 2018 at 22:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126556596):
-so something like `sub_le_zero_of_le`?
+<p>so something like <code>sub_le_zero_of_le</code>?</p>
 
 #### [ Kenny Lau (May 14 2018 at 22:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126556601):
-(deleted)
+<p>(deleted)</p>
 
 #### [ Kenny Lau (May 14 2018 at 22:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126556649):
-oh wait nothing
+<p>oh wait nothing</p>
 
 #### [ Kenny Lau (May 14 2018 at 22:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126556657):
-maybe you want `nat.eq_zero_of_le_zero` if it exists
+<p>maybe you want <code>nat.eq_zero_of_le_zero</code> if it exists</p>
 
 #### [ Kevin Buzzard (May 14 2018 at 22:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126556661):
-```lean
-import data.list.basic
-open list
-lemma foldr_ext {α : Type*} {β : Type*} {l : list α} (f f' : α → β → β) (s : β)
-  (H : ∀ a ∈ l, ∀ b : β, f a b = f' a b) : foldr f s l = foldr f' s l :=
-begin
-  induction l with h t IH,
-  { simp },
-  simp * {contextual := tt},
-end
-```
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">list</span><span class="bp">.</span><span class="n">basic</span>
+<span class="kn">open</span> <span class="n">list</span>
+<span class="kn">lemma</span> <span class="n">foldr_ext</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">{</span><span class="n">l</span> <span class="o">:</span> <span class="n">list</span> <span class="n">α</span><span class="o">}</span> <span class="o">(</span><span class="n">f</span> <span class="n">f&#39;</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">β</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">a</span> <span class="err">∈</span> <span class="n">l</span><span class="o">,</span> <span class="bp">∀</span> <span class="n">b</span> <span class="o">:</span> <span class="n">β</span><span class="o">,</span> <span class="n">f</span> <span class="n">a</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">f&#39;</span> <span class="n">a</span> <span class="n">b</span><span class="o">)</span> <span class="o">:</span> <span class="n">foldr</span> <span class="n">f</span> <span class="n">s</span> <span class="n">l</span> <span class="bp">=</span> <span class="n">foldr</span> <span class="n">f&#39;</span> <span class="n">s</span> <span class="n">l</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">induction</span> <span class="n">l</span> <span class="k">with</span> <span class="n">h</span> <span class="n">t</span> <span class="n">IH</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">simp</span> <span class="o">},</span>
+  <span class="n">simp</span> <span class="bp">*</span> <span class="o">{</span><span class="n">contextual</span> <span class="o">:=</span> <span class="n">tt</span><span class="o">},</span>
+<span class="kn">end</span>
+</pre></div>
 
 #### [ Kevin Buzzard (May 14 2018 at 22:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126556663):
-The semicolon isn't important
+<p>The semicolon isn't important</p>
 
 #### [ Kenny Lau (May 14 2018 at 22:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126556664):
-it is, because it allows you to apply `simp` to both goals
+<p>it is, because it allows you to apply <code>simp</code> to both goals</p>
 
 #### [ Kevin Buzzard (May 14 2018 at 22:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126556669):
-but the contextual is
+<p>but the contextual is</p>
 
 #### [ Kenny Lau (May 14 2018 at 22:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126556671):
-without the semicolon you need to write it twice
+<p>without the semicolon you need to write it twice</p>
 
 #### [ Kevin Buzzard (May 14 2018 at 22:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126556674):
-sure
+<p>sure</p>
 
 #### [ Kevin Buzzard (May 14 2018 at 22:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126556684):
-Oh I see what you're saying -- what I am saying is trivial.
+<p>Oh I see what you're saying -- what I am saying is trivial.</p>
 
 #### [ Kevin Buzzard (May 14 2018 at 22:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126556688):
-I'm just unravelling the semicolon
+<p>I'm just unravelling the semicolon</p>
 
 #### [ Kevin Buzzard (May 14 2018 at 22:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126556692):
-the contextual isn't important for the base case but for the inductive step we have an inductive hypothesis which needs to be used
+<p>the contextual isn't important for the base case but for the inductive step we have an inductive hypothesis which needs to be used</p>
 
 #### [ Kenny Lau (May 14 2018 at 22:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126556700):
-does `simp [*]` work?
+<p>does <code>simp [*]</code> work?</p>
 
 #### [ Gabriel Ebner (May 14 2018 at 22:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126556778):
-Contextual does not refer to context as in "induction hypothesis" but to the left-hand side of implications: in `a = b -> P a`, contextual allows simp to use the equation `a=b` to simplify `P a`.
+<p>Contextual does not refer to context as in "induction hypothesis" but to the left-hand side of implications: in <code>a = b -&gt; P a</code>, contextual allows simp to use the equation <code>a=b</code> to simplify <code>P a</code>.</p>
 
 #### [ Kenny Lau (May 14 2018 at 22:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126556780):
-oh
+<p>oh</p>
 
 #### [ Kevin Buzzard (May 14 2018 at 22:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126556790):
-`nat.sub_eq_zero_iff_le`
+<p><code>nat.sub_eq_zero_iff_le</code></p>
 
 #### [ Kevin Buzzard (May 14 2018 at 22:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126556860):
-`example (a b : ℕ) : b < a → b + 1 - a = 0 := nat.sub_eq_zero_of_le`
+<p><code>example (a b : ℕ) : b &lt; a → b + 1 - a = 0 := nat.sub_eq_zero_of_le</code></p>
 
 #### [ Kenny Lau (May 14 2018 at 22:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126556865):
-aha
+<p>aha</p>
 
 #### [ Kevin Buzzard (May 14 2018 at 22:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126556867):
-using the trick that b < a is by definition b+1 <= a
+<p>using the trick that b &lt; a is by definition b+1 &lt;= a</p>
 
 #### [ Kevin Buzzard (May 14 2018 at 22:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126556869):
-as Kenny pointed out
+<p>as Kenny pointed out</p>
 
 #### [ Kevin Buzzard (May 14 2018 at 22:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126556916):
-(see `#print nat.lt`)
+<p>(see <code>#print nat.lt</code>)</p>
 
 #### [ Patrick Massot (May 14 2018 at 22:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126556928):
-Thank you very much
+<p>Thank you very much</p>
 
 #### [ Kevin Buzzard (May 14 2018 at 22:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126556989):
-This `contextual` thing is not documented in my simp docs -- I looked through the source or the docs (I don't remember, maybe the source), saw it was there and mentioned it but basically also said I didn't know what it di.
+<p>This <code>contextual</code> thing is not documented in my simp docs -- I looked through the source or the docs (I don't remember, maybe the source), saw it was there and mentioned it but basically also said I didn't know what it di.</p>
 
 #### [ Kevin Buzzard (May 14 2018 at 22:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126556990):
-d
+<p>d</p>
 
 #### [ Kevin Buzzard (May 14 2018 at 22:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126557009):
-I don't quite understand Gabriel's explanation -- is `a = b -> P a` supposed to be a hypothesis or a goal?
+<p>I don't quite understand Gabriel's explanation -- is <code>a = b -&gt; P a</code> supposed to be a hypothesis or a goal?</p>
 
 #### [ Kenny Lau (May 14 2018 at 22:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126557013):
-goal
+<p>goal</p>
 
 #### [ Kenny Lau (May 14 2018 at 22:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126557022):
-hmm, but the goal is not an implication
+<p>hmm, but the goal is not an implication</p>
 
 #### [ Kevin Buzzard (May 14 2018 at 22:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126557030):
-```quote
-does `simp [*]` work?
-```
-no
+<blockquote>
+<p>does <code>simp [*]</code> work?</p>
+</blockquote>
+<p>no</p>
 
 #### [ Kevin Buzzard (May 14 2018 at 22:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126557125):
-right -- the implications are in the hypotheses
+<p>right -- the implications are in the hypotheses</p>
 
 #### [ Kevin Buzzard (May 14 2018 at 22:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126557127):
-Maybe it's just magic
+<p>Maybe it's just magic</p>
 
 #### [ Kevin Buzzard (May 14 2018 at 22:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126557131):
-"Lean does not do magic" -- K. Lau, a couple of months ago
+<p>"Lean does not do magic" -- K. Lau, a couple of months ago</p>
 
 #### [ Kevin Buzzard (May 14 2018 at 22:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126557175):
-The comment inspired me to start really thinking about how some of the techniques I had picked up actually worked
+<p>The comment inspired me to start really thinking about how some of the techniques I had picked up actually worked</p>
 
 #### [ Mario Carneiro (May 14 2018 at 22:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126557393):
-```
-lemma filter_congr {p q : α → Prop} [decidable_pred p] [decidable_pred q]
+<div class="codehilite"><pre><span></span>lemma filter_congr {p q : α → Prop} [decidable_pred p] [decidable_pred q]
   : ∀ {l : list α}, (∀ x ∈ l, p x ↔ q x) → filter p l = filter q l
 | [] _     := rfl
 | (a::l) h := by simp at h; by_cases pa : p a;
   [simp [pa, h.1.1 pa, filter_congr h.2],
    simp [pa, mt h.1.2 pa, filter_congr h.2]]
-```
+</pre></div>
 
-Regarding naming: A theorem of the form `a = b -> F a = F b` is a "congruence" theorem, named with `congr` at the end. An "extensionality" theorem has the form `F a = F b -> a = b` where `F` is some appropriate (collection of) projection-like operations
+
+<p>Regarding naming: A theorem of the form <code>a = b -&gt; F a = F b</code> is a "congruence" theorem, named with <code>congr</code> at the end. An "extensionality" theorem has the form <code>F a = F b -&gt; a = b</code> where <code>F</code> is some appropriate (collection of) projection-like operations</p>
 
 #### [ Mario Carneiro (May 14 2018 at 22:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126557415):
-`map_congr` exists in `list.basic` but not all list theorems have congr theorems stated for them
+<p><code>map_congr</code> exists in <code>list.basic</code> but not all list theorems have congr theorems stated for them</p>
 
 #### [ Patrick Massot (May 14 2018 at 22:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126557583):
-Thanks!
+<p>Thanks!</p>
 
 #### [ Patrick Massot (May 14 2018 at 22:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126557592):
-Is there any difference between my `p x = q x` and your `p x ↔ q x` here?
+<p>Is there any difference between my <code>p x = q x</code> and your <code>p x ↔ q x</code> here?</p>
 
 #### [ Mario Carneiro (May 14 2018 at 22:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126557609):
-No, given `propext`, but mathlib convention is to use `iff` instead of `eq` for equivalent propositions
+<p>No, given <code>propext</code>, but mathlib convention is to use <code>iff</code> instead of <code>eq</code> for equivalent propositions</p>
 
 #### [ Mario Carneiro (May 14 2018 at 22:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126557632):
-Otherwise you have to face weird theorems like `(a = b) = c = b`
+<p>Otherwise you have to face weird theorems like <code>(a = b) = c = b</code></p>
 
 #### [ Chris Hughes (May 14 2018 at 22:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126557712):
-It more or less does `intros; simp *` I think
+<p>It more or less does <code>intros; simp *</code> I think</p>
 
 #### [ Chris Hughes (May 14 2018 at 22:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126557713):
-But I just realise that can't be what it does, because my example didn't have anything to intro.
+<p>But I just realise that can't be what it does, because my example didn't have anything to intro.</p>
 
 #### [ Chris Hughes (May 14 2018 at 22:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126557714):
-and `simp *` doesn't work
+<p>and <code>simp *</code> doesn't work</p>
 
 #### [ Patrick Massot (May 14 2018 at 23:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126558301):
-Going from = to iff broke a magic `finish` success
+<p>Going from = to iff broke a magic <code>finish</code> success</p>
 
 #### [ Patrick Massot (May 14 2018 at 23:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126558311):
-Probably by breaking a magic `cc` under the hood
+<p>Probably by breaking a magic <code>cc</code> under the hood</p>
 
 #### [ Patrick Massot (May 14 2018 at 23:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126558380):
-This natural number substraction is really a nightmare. Now I want `b + k + 1 - (a + k) = b + 1 - a`. It's almost the same I had a couple of days ago. But I'm stuck again...
+<p>This natural number substraction is really a nightmare. Now I want <code>b + k + 1 - (a + k) = b + 1 - a</code>. It's almost the same I had a couple of days ago. But I'm stuck again...</p>
 
 #### [ Patrick Massot (May 14 2018 at 23:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126558463):
-It seems like I really need `omega` in the end
+<p>It seems like I really need <code>omega</code> in the end</p>
 
 #### [ Patrick Massot (May 14 2018 at 23:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126558972):
-Is there any hope to use Coq to tell me a proof Lean could understand?
+<p>Is there any hope to use Coq to tell me a proof Lean could understand?</p>
 
 #### [ Andrew Ashworth (May 14 2018 at 23:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126559159):
-No, in general the names of the lemmas used in Coq would be different
+<p>No, in general the names of the lemmas used in Coq would be different</p>
 
 #### [ Patrick Massot (May 14 2018 at 23:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126559200):
-But can you get the sequence of Coq lemmas used by omega?
+<p>But can you get the sequence of Coq lemmas used by omega?</p>
 
 #### [ Andrew Ashworth (May 14 2018 at 23:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126559219):
-I do not have a Coq installation in front of me to look at the output of omega, so I don't know
+<p>I do not have a Coq installation in front of me to look at the output of omega, so I don't know</p>
 
 #### [ Andrew Ashworth (May 14 2018 at 23:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126559407):
-What I did when i had a lot of similar problems was write down a cheat sheet of relevant cancellation lemmas in my notebook... looking them all up was my biggest hurdle
+<p>What I did when i had a lot of similar problems was write down a cheat sheet of relevant cancellation lemmas in my notebook... looking them all up was my biggest hurdle</p>
 
 #### [ Patrick Massot (May 14 2018 at 23:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126559611):
-Now I need `H : a ≤ b ⊢ 2 * a + (b + 1 - a) - i - 1 = a - i + b`. I give up for today
+<p>Now I need <code>H : a ≤ b ⊢ 2 * a + (b + 1 - a) - i - 1 = a - i + b</code>. I give up for today</p>
 
 #### [ Patrick Massot (May 14 2018 at 23:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126559664):
-I have four proofs stuck because of such stupid goals
+<p>I have four proofs stuck because of such stupid goals</p>
 
 #### [ Kenny Lau (May 14 2018 at 23:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126559670):
-I understand your feeling
+<p>I understand your feeling</p>
 
 #### [ Kevin Buzzard (May 15 2018 at 00:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126563181):
-```quote
-Going from = to iff broke a magic `finish` success
-```
-You can just deduce your old version from Mario's version of course...
+<blockquote>
+<p>Going from = to iff broke a magic <code>finish</code> success</p>
+</blockquote>
+<p>You can just deduce your old version from Mario's version of course...</p>
 
 #### [ Kevin Buzzard (May 15 2018 at 00:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126563201):
-```quote
-This natural number substraction is really a nightmare. Now I want `b + k + 1 - (a + k) = b + 1 - a`. It's almost the same I had a couple of days ago. But I'm stuck again...
-```
-I really like doing these. Patrick -- just type nat.sub and then ctrl-space escape ctrl-space to see what Lean has, you can just browse through stuff.
+<blockquote>
+<p>This natural number substraction is really a nightmare. Now I want <code>b + k + 1 - (a + k) = b + 1 - a</code>. It's almost the same I had a couple of days ago. But I'm stuck again...</p>
+</blockquote>
+<p>I really like doing these. Patrick -- just type nat.sub and then ctrl-space escape ctrl-space to see what Lean has, you can just browse through stuff.</p>
 
 #### [ Kevin Buzzard (May 15 2018 at 01:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126563696):
-Actually I don't understand how ctrl-space works at all. I just managed to type `nat.sub` and get it to display `nat.add_sub_add_left` (which is useful for you) and then after esc ctrl-space I don't see it any more
+<p>Actually I don't understand how ctrl-space works at all. I just managed to type <code>nat.sub</code> and get it to display <code>nat.add_sub_add_left</code> (which is useful for you) and then after esc ctrl-space I don't see it any more</p>
 
 #### [ Kevin Buzzard (May 15 2018 at 01:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126563797):
-```lean
-example (a b k : ℕ) : b + k + 1 - (a + k) = b + 1 - a := calc 
-b + k + 1 - (a + k) = k + (b + 1) - (k + a) : by simp [add_assoc,add_comm]
-... = b + 1 - a : by rw nat.add_sub_add_left
-```
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">k</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">b</span> <span class="bp">+</span> <span class="n">k</span> <span class="bp">+</span> <span class="mi">1</span> <span class="bp">-</span> <span class="o">(</span><span class="n">a</span> <span class="bp">+</span> <span class="n">k</span><span class="o">)</span> <span class="bp">=</span> <span class="n">b</span> <span class="bp">+</span> <span class="mi">1</span> <span class="bp">-</span> <span class="n">a</span> <span class="o">:=</span> <span class="k">calc</span>
+<span class="n">b</span> <span class="bp">+</span> <span class="n">k</span> <span class="bp">+</span> <span class="mi">1</span> <span class="bp">-</span> <span class="o">(</span><span class="n">a</span> <span class="bp">+</span> <span class="n">k</span><span class="o">)</span> <span class="bp">=</span> <span class="n">k</span> <span class="bp">+</span> <span class="o">(</span><span class="n">b</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="bp">-</span> <span class="o">(</span><span class="n">k</span> <span class="bp">+</span> <span class="n">a</span><span class="o">)</span> <span class="o">:</span> <span class="k">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">add_assoc</span><span class="o">,</span><span class="n">add_comm</span><span class="o">]</span>
+<span class="bp">...</span> <span class="bp">=</span> <span class="n">b</span> <span class="bp">+</span> <span class="mi">1</span> <span class="bp">-</span> <span class="n">a</span> <span class="o">:</span> <span class="k">by</span> <span class="n">rw</span> <span class="n">nat</span><span class="bp">.</span><span class="n">add_sub_add_left</span>
+</pre></div>
 
 #### [ Kevin Buzzard (May 15 2018 at 01:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126563842):
-```lean
-example (a b k : ℕ) : b + k + 1 - (a + k) = b + 1 - a := calc 
-b + k + 1 - (a + k) = b + 1 + k - (a + k) : by simp
-... = b + 1 - a : by rw nat.add_sub_add_right
-```
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">k</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">b</span> <span class="bp">+</span> <span class="n">k</span> <span class="bp">+</span> <span class="mi">1</span> <span class="bp">-</span> <span class="o">(</span><span class="n">a</span> <span class="bp">+</span> <span class="n">k</span><span class="o">)</span> <span class="bp">=</span> <span class="n">b</span> <span class="bp">+</span> <span class="mi">1</span> <span class="bp">-</span> <span class="n">a</span> <span class="o">:=</span> <span class="k">calc</span>
+<span class="n">b</span> <span class="bp">+</span> <span class="n">k</span> <span class="bp">+</span> <span class="mi">1</span> <span class="bp">-</span> <span class="o">(</span><span class="n">a</span> <span class="bp">+</span> <span class="n">k</span><span class="o">)</span> <span class="bp">=</span> <span class="n">b</span> <span class="bp">+</span> <span class="mi">1</span> <span class="bp">+</span> <span class="n">k</span> <span class="bp">-</span> <span class="o">(</span><span class="n">a</span> <span class="bp">+</span> <span class="n">k</span><span class="o">)</span> <span class="o">:</span> <span class="k">by</span> <span class="n">simp</span>
+<span class="bp">...</span> <span class="bp">=</span> <span class="n">b</span> <span class="bp">+</span> <span class="mi">1</span> <span class="bp">-</span> <span class="n">a</span> <span class="o">:</span> <span class="k">by</span> <span class="n">rw</span> <span class="n">nat</span><span class="bp">.</span><span class="n">add_sub_add_right</span>
+</pre></div>
 
 #### [ Kevin Buzzard (May 15 2018 at 01:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126564406):
-```quote
-Now I need `H : a ≤ b ⊢ 2 * a + (b + 1 - a) - i - 1 = a - i + b`. I give up for today
-```
-If `i > a` but `i <= a + b` then this one won't be true, because `a - i + b` is `(a - i) + b`
+<blockquote>
+<p>Now I need <code>H : a ≤ b ⊢ 2 * a + (b + 1 - a) - i - 1 = a - i + b</code>. I give up for today</p>
+</blockquote>
+<p>If <code>i &gt; a</code> but <code>i &lt;= a + b</code> then this one won't be true, because <code>a - i + b</code> is <code>(a - i) + b</code></p>
 
 #### [ Kevin Buzzard (May 15 2018 at 01:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126564613):
-Here's some true version:
+<p>Here's some true version:</p>
 
 #### [ Kevin Buzzard (May 15 2018 at 01:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126564616):
-```lean
-example (a b i : ℕ) (H : a ≤ b) : 2 * a + (b + 1 - a) - i - 1 = a + b - i := 
-calc 2 * a + (b + 1 - a) - i - 1 = a + (a + (b + 1 - a)) - i - 1 : by simp [two_mul]
-... = a + (b + 1) - i - 1 : by rw nat.add_sub_of_le (le_trans H (nat.le_succ _))
-... = (a + b) + 1 - (i + 1)  : by simp [add_assoc,nat.sub_sub]
-... = a + b - i : by rw nat.add_sub_add_right
-```
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">i</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">≤</span> <span class="n">b</span><span class="o">)</span> <span class="o">:</span> <span class="mi">2</span> <span class="bp">*</span> <span class="n">a</span> <span class="bp">+</span> <span class="o">(</span><span class="n">b</span> <span class="bp">+</span> <span class="mi">1</span> <span class="bp">-</span> <span class="n">a</span><span class="o">)</span> <span class="bp">-</span> <span class="n">i</span> <span class="bp">-</span> <span class="mi">1</span> <span class="bp">=</span> <span class="n">a</span> <span class="bp">+</span> <span class="n">b</span> <span class="bp">-</span> <span class="n">i</span> <span class="o">:=</span>
+<span class="k">calc</span> <span class="mi">2</span> <span class="bp">*</span> <span class="n">a</span> <span class="bp">+</span> <span class="o">(</span><span class="n">b</span> <span class="bp">+</span> <span class="mi">1</span> <span class="bp">-</span> <span class="n">a</span><span class="o">)</span> <span class="bp">-</span> <span class="n">i</span> <span class="bp">-</span> <span class="mi">1</span> <span class="bp">=</span> <span class="n">a</span> <span class="bp">+</span> <span class="o">(</span><span class="n">a</span> <span class="bp">+</span> <span class="o">(</span><span class="n">b</span> <span class="bp">+</span> <span class="mi">1</span> <span class="bp">-</span> <span class="n">a</span><span class="o">))</span> <span class="bp">-</span> <span class="n">i</span> <span class="bp">-</span> <span class="mi">1</span> <span class="o">:</span> <span class="k">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">two_mul</span><span class="o">]</span>
+<span class="bp">...</span> <span class="bp">=</span> <span class="n">a</span> <span class="bp">+</span> <span class="o">(</span><span class="n">b</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="bp">-</span> <span class="n">i</span> <span class="bp">-</span> <span class="mi">1</span> <span class="o">:</span> <span class="k">by</span> <span class="n">rw</span> <span class="n">nat</span><span class="bp">.</span><span class="n">add_sub_of_le</span> <span class="o">(</span><span class="n">le_trans</span> <span class="n">H</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">le_succ</span> <span class="bp">_</span><span class="o">))</span>
+<span class="bp">...</span> <span class="bp">=</span> <span class="o">(</span><span class="n">a</span> <span class="bp">+</span> <span class="n">b</span><span class="o">)</span> <span class="bp">+</span> <span class="mi">1</span> <span class="bp">-</span> <span class="o">(</span><span class="n">i</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span>  <span class="o">:</span> <span class="k">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">add_assoc</span><span class="o">,</span><span class="n">nat</span><span class="bp">.</span><span class="n">sub_sub</span><span class="o">]</span>
+<span class="bp">...</span> <span class="bp">=</span> <span class="n">a</span> <span class="bp">+</span> <span class="n">b</span> <span class="bp">-</span> <span class="n">i</span> <span class="o">:</span> <span class="k">by</span> <span class="n">rw</span> <span class="n">nat</span><span class="bp">.</span><span class="n">add_sub_add_right</span>
+</pre></div>
 
 #### [ Andrew Ashworth (May 15 2018 at 01:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126564908):
-```quote
-```quote
-This natural number substraction is really a nightmare. Now I want `b + k + 1 - (a + k) = b + 1 - a`. It's almost the same I had a couple of days ago. But I'm stuck again...
-```
-I really like doing these. Patrick -- just type nat.sub and then ctrl-space escape ctrl-space to see what Lean has, you can just browse through stuff.
-```
-Ctrl-T and typing sub brings up lemmas with sub inside
+<blockquote>
+<blockquote>
+<p>This natural number substraction is really a nightmare. Now I want <code>b + k + 1 - (a + k) = b + 1 - a</code>. It's almost the same I had a couple of days ago. But I'm stuck again...</p>
+</blockquote>
+<p>I really like doing these. Patrick -- just type nat.sub and then ctrl-space escape ctrl-space to see what Lean has, you can just browse through stuff.</p>
+</blockquote>
+<p>Ctrl-T and typing sub brings up lemmas with sub inside</p>
 
 #### [ Mario Carneiro (May 15 2018 at 06:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126574769):
-By the way patrick, your "stupid goals" are exactly why I wrote `range'` to take a start and length instead of start and end. Remember, the value of a good modeling decision is not in the beauty of the statements but in the beauty of the proofs. When things are done right, the proof is like everything is given to you just as you need it, but when you write things in a cumbersome way the proofs become orders of magnitude more cumbersome.
+<p>By the way patrick, your "stupid goals" are exactly why I wrote <code>range'</code> to take a start and length instead of start and end. Remember, the value of a good modeling decision is not in the beauty of the statements but in the beauty of the proofs. When things are done right, the proof is like everything is given to you just as you need it, but when you write things in a cumbersome way the proofs become orders of magnitude more cumbersome.</p>
 
 #### [ Mario Carneiro (May 15 2018 at 06:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126574827):
-If your desire for clean statements overrides this concern, then just have two versions and write from the "porcelain" version (which looks nice but is hard to work with) to the "plumbing" version (optimized for proofs) before proving anything, and just translate back at the end.
+<p>If your desire for clean statements overrides this concern, then just have two versions and write from the "porcelain" version (which looks nice but is hard to work with) to the "plumbing" version (optimized for proofs) before proving anything, and just translate back at the end.</p>
 
 #### [ Mario Carneiro (May 15 2018 at 06:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126575178):
-But cumbersome is as cumbersome does, here's a proof:
-```
-example (a b k : ℕ) : b + k + 1 - (a + k) = b + 1 - a :=
+<p>But cumbersome is as cumbersome does, here's a proof:</p>
+<div class="codehilite"><pre><span></span>example (a b k : ℕ) : b + k + 1 - (a + k) = b + 1 - a :=
 by rw [add_comm a, ← nat.sub_sub, add_right_comm, nat.add_sub_cancel]
-```
-and a counterexample:
-```
-#eval do
+</pre></div>
+
+
+<p>and a counterexample:</p>
+<div class="codehilite"><pre><span></span>#eval do
   a ← list.range 3,
   b ← list.range 3,
   i ← list.range 3,
   return $ to_bool (∀ (_:a ≤ b), 2 * a + (b + 1 - a) - i - 1 = a - i + b)
  -- [tt, tt, tt, tt, ff, ff, tt, ff, ff, tt, tt, tt, tt, tt, ff, tt, tt, ff, tt, tt, tt, tt, tt, tt, tt, tt, tt]
-```
-That's my version of isabelle quickcheck - I just evaluated the theorem at some small numbers and it sometimes fails.
+</pre></div>
+
+
+<p>That's my version of isabelle quickcheck - I just evaluated the theorem at some small numbers and it sometimes fails.</p>
 
 #### [ Mario Carneiro (May 15 2018 at 06:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126575374):
-Assuming you don't want to learn the beautiful theory of monus on the naturals, but just want to pretend it's regular subtraction, I recommend you treat it like a partial function, in the sense that you never state a theorem about `-` unless the fact that the RHS is less or equal to the LHS is in the context or otherwise deducible. Your second theorem fails this, since it has a variable `i` being subtracted from stuff even though there is no upper bound on it.
+<p>Assuming you don't want to learn the beautiful theory of monus on the naturals, but just want to pretend it's regular subtraction, I recommend you treat it like a partial function, in the sense that you never state a theorem about <code>-</code> unless the fact that the RHS is less or equal to the LHS is in the context or otherwise deducible. Your second theorem fails this, since it has a variable <code>i</code> being subtracted from stuff even though there is no upper bound on it.</p>
 
 #### [ Mario Carneiro (May 15 2018 at 07:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126575537):
-hm, maybe this is a slightly nicer quickcheck:
-```
-#eval do
+<p>hm, maybe this is a slightly nicer quickcheck:</p>
+<div class="codehilite"><pre><span></span>#eval do
   a ← list.range 5,
   b ← list.range 5,
   i ← list.range 5,
   guardb (a ≤ b),
   guardb (2 * a + (b + 1 - a) - i - 1 ≠ a - i + b),
   return (a, b, i)
-```
-it returns a list of counterexample triples
+</pre></div>
+
+
+<p>it returns a list of counterexample triples</p>
 
 #### [ Chris Hughes (May 15 2018 at 09:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126579115):
-```quote
-hmm, but the goal is not an implication
-```
-I think it's because some of the hypotheses are an implication
+<blockquote>
+<p>hmm, but the goal is not an implication</p>
+</blockquote>
+<p>I think it's because some of the hypotheses are an implication</p>
 
 #### [ Gabriel Ebner (May 15 2018 at 09:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126579186):
-Indeed, look at the (condition of the) induction hypothesis.
+<p>Indeed, look at the (condition of the) induction hypothesis.</p>
 
 #### [ Patrick Massot (May 15 2018 at 09:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126579580):
-Sorry I messed up the last statement. What I really need is `2 * a + (b + 1 - a) - i - 1 = a+b-i` assuming `a ≤ b` and `i ∈ range' a (b + 1 - a)`
+<p>Sorry I messed up the last statement. What I really need is <code>2 * a + (b + 1 - a) - i - 1 = a+b-i</code> assuming <code>a ≤ b</code> and <code>i ∈ range' a (b + 1 - a)</code></p>
 
 #### [ Patrick Massot (May 15 2018 at 09:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126579628):
-I do have all the right bounds, that's what my `foldr_congr` and `filter_ext` are made for
+<p>I do have all the right bounds, that's what my <code>foldr_congr</code> and <code>filter_ext</code> are made for</p>
 
 #### [ Patrick Massot (May 15 2018 at 09:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126579681):
-But I should probably think about first proving stuff with cumbersome statements and then try to deduce the natural statements from their twisted versions
+<p>But I should probably think about first proving stuff with cumbersome statements and then try to deduce the natural statements from their twisted versions</p>
 
 #### [ Kevin Buzzard (May 15 2018 at 09:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126579683):
-Patrick I proved what you wanted, right?
+<p>Patrick I proved what you wanted, right?</p>
 
 #### [ Patrick Massot (May 15 2018 at 09:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126579684):
-This is all about summing for n from a to b, instead of n from a to a+k
+<p>This is all about summing for n from a to b, instead of n from a to a+k</p>
 
 #### [ Patrick Massot (May 15 2018 at 09:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126579691):
-You proved one of the things I wanted, thank you very much to you and Mario, but this is another one
+<p>You proved one of the things I wanted, thank you very much to you and Mario, but this is another one</p>
 
 #### [ Kevin Buzzard (May 15 2018 at 09:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126579692):
-The "true version" above
+<p>The "true version" above</p>
 
 #### [ Kevin Buzzard (May 15 2018 at 09:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126579695):
-I thought I'd done everything for oyu
+<p>I thought I'd done everything for oyu</p>
 
 #### [ Kevin Buzzard (May 15 2018 at 09:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126579696):
-what is missing?
+<p>what is missing?</p>
 
 #### [ Patrick Massot (May 15 2018 at 09:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126579697):
-Oh sorry
+<p>Oh sorry</p>
 
 #### [ Kevin Buzzard (May 15 2018 at 09:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126579699):
-:-)
+<p>:-)</p>
 
 #### [ Patrick Massot (May 15 2018 at 09:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126579701):
-I missed that one
+<p>I missed that one</p>
 
 #### [ Kevin Buzzard (May 15 2018 at 09:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126579739):
-I can believe that these things are not to everyone's tastes. I only did it because I quite like them.
+<p>I can believe that these things are not to everyone's tastes. I only did it because I quite like them.</p>
 
 #### [ Patrick Massot (May 15 2018 at 09:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126579742):
-I'm glad you're such a pervert
+<p>I'm glad you're such a pervert</p>
 
 #### [ Patrick Massot (May 15 2018 at 09:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126579744):
-Thank you very much
+<p>Thank you very much</p>
 
 #### [ Kevin Buzzard (May 15 2018 at 09:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126579746):
-What I especially like is that Mario's proof is only about 30% shorter :-)
+<p>What I especially like is that Mario's proof is only about 30% shorter :-)</p>
 
 #### [ Kevin Buzzard (May 15 2018 at 09:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126579755):
-[and that I was aware that something like this would probably work after I finished mine...]
+<p>[and that I was aware that something like this would probably work after I finished mine...]</p>
 
 #### [ Kevin Buzzard (May 15 2018 at 09:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126579799):
-```quote
-Indeed, look at the (condition of the) induction hypothesis.
-```
-Right -- that's what I'm unclear about. Explicitly -- `simp * {contextual := tt}` does something different to `simp` in a situation where there is a _hypothesis_ of the form `X -> Y`, in which case it does...what?
+<blockquote>
+<p>Indeed, look at the (condition of the) induction hypothesis.</p>
+</blockquote>
+<p>Right -- that's what I'm unclear about. Explicitly -- <code>simp * {contextual := tt}</code> does something different to <code>simp</code> in a situation where there is a _hypothesis_ of the form <code>X -&gt; Y</code>, in which case it does...what?</p>
 
 #### [ Kevin Buzzard (May 15 2018 at 09:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126579815):
-Oh -- maybe I do understand.
+<p>Oh -- maybe I do understand.</p>
 
 #### [ Chris Hughes (May 15 2018 at 09:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126579858):
-It's hard to tell because trace.simplify doesn't show you where the rewrites are happening.
+<p>It's hard to tell because trace.simplify doesn't show you where the rewrites are happening.</p>
 
 #### [ Kenny Lau (May 15 2018 at 09:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126579860):
-@**Chris Hughes** can you derive Kepler's laws?
+<p><span class="user-mention" data-user-id="110044">@Chris Hughes</span> can you derive Kepler's laws?</p>
 
 #### [ Kevin Buzzard (May 15 2018 at 09:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126579865):
-Where are the mods? Honestly, this place is going down the pan
+<p>Where are the mods? Honestly, this place is going down the pan</p>
 
 #### [ Mario Carneiro (May 15 2018 at 09:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126579919):
-Hi there, it's your friendly neighborhood mod
+<p>Hi there, it's your friendly neighborhood mod</p>
 
 #### [ Patrick Massot (May 15 2018 at 09:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126579927):
-Are we still rewriting under a union?
+<p>Are we still rewriting under a union?</p>
 
 #### [ Mario Carneiro (May 15 2018 at 09:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126579932):
-It's all connected, I'm sure
+<p>It's all connected, I'm sure</p>
 
 #### [ Patrick Massot (May 15 2018 at 09:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126579933):
-What about this one: `lemma reverse_range' (a b : ℕ) : reverse (range' a b) = map (λ i, 2*a+b-i-1) (range' a b) `?
+<p>What about this one: <code>lemma reverse_range' (a b : ℕ) : reverse (range' a b) = map (λ i, 2*a+b-i-1) (range' a b) </code>?</p>
 
 #### [ Mario Carneiro (May 15 2018 at 09:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126579935):
-even Kepler's laws get involved in some rewrites
+<p>even Kepler's laws get involved in some rewrites</p>
 
 #### [ Patrick Massot (May 15 2018 at 09:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126579936):
-I need a topic "I hate natural numbers"
+<p>I need a topic "I hate natural numbers"</p>
 
 #### [ Mario Carneiro (May 15 2018 at 09:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126579979):
-That statement reminds me a lot of Kevin's theorem on reversing sums
+<p>That statement reminds me a lot of Kevin's theorem on reversing sums</p>
 
 #### [ Patrick Massot (May 15 2018 at 09:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126579982):
-Of course this is what I'm doing
+<p>Of course this is what I'm doing</p>
 
 #### [ Patrick Massot (May 15 2018 at 09:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126579985):
-I'm working on my big_op project
+<p>I'm working on my big_op project</p>
 
 #### [ Patrick Massot (May 15 2018 at 09:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126579992):
-And this statement is partly what motivated my `nth_le_map` question
+<p>And this statement is partly what motivated my <code>nth_le_map</code> question</p>
 
 #### [ Patrick Massot (May 15 2018 at 09:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126579997):
-I wanted to use `ext_le` on that one
+<p>I wanted to use <code>ext_le</code> on that one</p>
 
 #### [ Mario Carneiro (May 15 2018 at 09:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126580039):
-suggestion: don't use `2*a+b-i-1`, use `a-(b+1-a)-i`
+<p>suggestion: don't use <code>2*a+b-i-1</code>, use <code>a-(b+1-a)-i</code></p>
 
 #### [ Mario Carneiro (May 15 2018 at 09:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126580049):
-otherwise you will spend the whole proof showing that the first thing rewrites to the second
+<p>otherwise you will spend the whole proof showing that the first thing rewrites to the second</p>
 
 #### [ Patrick Massot (May 15 2018 at 09:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126580050):
-That's part of the nightmare: each time I change my mind on something like this, I must redo all the natural numbers computations lemmas
+<p>That's part of the nightmare: each time I change my mind on something like this, I must redo all the natural numbers computations lemmas</p>
 
 #### [ Patrick Massot (May 15 2018 at 09:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126580096):
-With `2*a+b-i-1` I can use what Kevin proved last night down the road. Otherwise I return to having nothing
+<p>With <code>2*a+b-i-1</code> I can use what Kevin proved last night down the road. Otherwise I return to having nothing</p>
 
 #### [ Mario Carneiro (May 15 2018 at 09:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126580103):
-We call that cruft
+<p>We call that cruft</p>
 
 #### [ Mario Carneiro (May 15 2018 at 09:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126580112):
-Here's a suggestion: write the theorem so as to minimize the number of rewrites. That is, as soon as you get something technically the same as what you want (in this case, `range' a b = map ... (range' a b)`), go with it, even if it's written in a kind of weird way
+<p>Here's a suggestion: write the theorem so as to minimize the number of rewrites. That is, as soon as you get something technically the same as what you want (in this case, <code>range' a b = map ... (range' a b)</code>), go with it, even if it's written in a kind of weird way</p>
 
 #### [ Mario Carneiro (May 15 2018 at 09:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126580116):
-if you do that for two or three theorems the idioms will stand out
+<p>if you do that for two or three theorems the idioms will stand out</p>
 
 #### [ Mario Carneiro (May 15 2018 at 09:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126580156):
-like in this case keeping `b+1-a` together as a unit
+<p>like in this case keeping <code>b+1-a</code> together as a unit</p>
 
 #### [ Kevin Buzzard (May 15 2018 at 09:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126580158):
-```lean
-import data.list.basic 
-open list 
-lemma foldr_ext {α : Type*} {β : Type*} {l : list α} (f f' : α → β → β) (s : β)
-  (H : ∀ a ∈ l, ∀ b : β, f a b = f' a b) : foldr f s l = foldr f' s l :=
-begin induction l with A B C, {simp}, -- base case}
-  simp at H {contextual := tt},
-  sorry,
-end
-```
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">list</span><span class="bp">.</span><span class="n">basic</span>
+<span class="kn">open</span> <span class="n">list</span>
+<span class="kn">lemma</span> <span class="n">foldr_ext</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">{</span><span class="n">l</span> <span class="o">:</span> <span class="n">list</span> <span class="n">α</span><span class="o">}</span> <span class="o">(</span><span class="n">f</span> <span class="n">f&#39;</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">β</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">a</span> <span class="err">∈</span> <span class="n">l</span><span class="o">,</span> <span class="bp">∀</span> <span class="n">b</span> <span class="o">:</span> <span class="n">β</span><span class="o">,</span> <span class="n">f</span> <span class="n">a</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">f&#39;</span> <span class="n">a</span> <span class="n">b</span><span class="o">)</span> <span class="o">:</span> <span class="n">foldr</span> <span class="n">f</span> <span class="n">s</span> <span class="n">l</span> <span class="bp">=</span> <span class="n">foldr</span> <span class="n">f&#39;</span> <span class="n">s</span> <span class="n">l</span> <span class="o">:=</span>
+<span class="k">begin</span> <span class="n">induction</span> <span class="n">l</span> <span class="k">with</span> <span class="n">A</span> <span class="n">B</span> <span class="n">C</span><span class="o">,</span> <span class="o">{</span><span class="n">simp</span><span class="o">},</span> <span class="c1">-- base case}</span>
+  <span class="n">simp</span> <span class="n">at</span> <span class="n">H</span> <span class="o">{</span><span class="n">contextual</span> <span class="o">:=</span> <span class="n">tt</span><span class="o">},</span>
+  <span class="n">sorry</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
 
 #### [ Kevin Buzzard (May 15 2018 at 09:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126580159):
-I have isolated `contextual := tt` doing something
+<p>I have isolated <code>contextual := tt</code> doing something</p>
 
 #### [ Gabriel Ebner (May 15 2018 at 09:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126580165):
-```quote
-Right -- that's what I'm unclear about. Explicitly -- `simp * {contextual := tt}` does something different to `simp` in a situation where there is a _hypothesis_ of the form `X -> Y`, in which case it does...what?
-```
-Oh no, there is no difference in how simp treats implications in assumptions.  If you have a simp lemma/assumption `forall x, p x -> f x=g x`, then `simp` will try to prove `p a` before rewriting `f a` to `g a`.  And it proves this condition using `simp` itself!  Small demo:
-```lean
-example {n} {q : Prop} (h1 : n=1) (h2 : n*n=n → q) : q := by simp *
-```
-Here `simp` first proves the condition `n*n = n` (using `simp`) before rewriting `q` to `true`.
+<blockquote>
+<p>Right -- that's what I'm unclear about. Explicitly -- <code>simp * {contextual := tt}</code> does something different to <code>simp</code> in a situation where there is a _hypothesis_ of the form <code>X -&gt; Y</code>, in which case it does...what?</p>
+</blockquote>
+<p>Oh no, there is no difference in how simp treats implications in assumptions.  If you have a simp lemma/assumption <code>forall x, p x -&gt; f x=g x</code>, then <code>simp</code> will try to prove <code>p a</code> before rewriting <code>f a</code> to <code>g a</code>.  And it proves this condition using <code>simp</code> itself!  Small demo:</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">{</span><span class="n">n</span><span class="o">}</span> <span class="o">{</span><span class="n">q</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">}</span> <span class="o">(</span><span class="n">h1</span> <span class="o">:</span> <span class="n">n</span><span class="bp">=</span><span class="mi">1</span><span class="o">)</span> <span class="o">(</span><span class="n">h2</span> <span class="o">:</span> <span class="n">n</span><span class="bp">*</span><span class="n">n</span><span class="bp">=</span><span class="n">n</span> <span class="bp">→</span> <span class="n">q</span><span class="o">)</span> <span class="o">:</span> <span class="n">q</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">simp</span> <span class="bp">*</span>
+</pre></div>
+
+
+<p>Here <code>simp</code> first proves the condition <code>n*n = n</code> (using <code>simp</code>) before rewriting <code>q</code> to <code>true</code>.</p>
 
 #### [ Kevin Buzzard (May 15 2018 at 09:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126580167):
-darn no I haven't
+<p>darn no I haven't</p>
 
 #### [ Kevin Buzzard (May 15 2018 at 09:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126580178):
-but Gabriel has. Thanks!
+<p>but Gabriel has. Thanks!</p>
 
 #### [ Kevin Buzzard (May 15 2018 at 09:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126580221):
-Wait -- there is no `contextual` here?
+<p>Wait -- there is no <code>contextual</code> here?</p>
 
 #### [ Gabriel Ebner (May 15 2018 at 09:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126580229):
-No, `simp` can use conditional simp lemmas without `contextual:=tt`.  It uses `simp` to prove the condition.
+<p>No, <code>simp</code> can use conditional simp lemmas without <code>contextual:=tt</code>.  It uses <code>simp</code> to prove the condition.</p>
 
 #### [ Patrick Massot (May 15 2018 at 09:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126580233):
-Mario, the trouble is I want to prove 
-```lean
-lemma big.range_anti_mph {φ : R → R} (P : ℕ → Prop) [decidable_pred P] (F : ℕ → R) (a b : ℕ)
-  (Hop : ∀ a b : R, φ (a ◆ b) = φ b ◆ φ a) (Hnil : φ nil = nil) :
-  φ (big[(◆)/nil]_(i=a..b | (P i)) F i) = big[(◆)/nil]_(i=a..b | (P (a+b-i))) φ (F (a+b-i))
-```
-I don't want the `a+b-i` in the conclusion to be some weird formula which is the same after a dozen rewrites
+<p>Mario, the trouble is I want to prove </p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">big</span><span class="bp">.</span><span class="n">range_anti_mph</span> <span class="o">{</span><span class="n">φ</span> <span class="o">:</span> <span class="n">R</span> <span class="bp">→</span> <span class="n">R</span><span class="o">}</span> <span class="o">(</span><span class="n">P</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">[</span><span class="n">decidable_pred</span> <span class="n">P</span><span class="o">]</span> <span class="o">(</span><span class="n">F</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="n">R</span><span class="o">)</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">Hop</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">R</span><span class="o">,</span> <span class="n">φ</span> <span class="o">(</span><span class="n">a</span> <span class="err">◆</span> <span class="n">b</span><span class="o">)</span> <span class="bp">=</span> <span class="n">φ</span> <span class="n">b</span> <span class="err">◆</span> <span class="n">φ</span> <span class="n">a</span><span class="o">)</span> <span class="o">(</span><span class="n">Hnil</span> <span class="o">:</span> <span class="n">φ</span> <span class="n">nil</span> <span class="bp">=</span> <span class="n">nil</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">φ</span> <span class="o">(</span><span class="n">big</span><span class="o">[(</span><span class="err">◆</span><span class="o">)</span><span class="bp">/</span><span class="n">nil</span><span class="o">]</span><span class="bp">_</span><span class="o">(</span><span class="n">i</span><span class="bp">=</span><span class="n">a</span><span class="bp">..</span><span class="n">b</span> <span class="bp">|</span> <span class="o">(</span><span class="n">P</span> <span class="n">i</span><span class="o">))</span> <span class="n">F</span> <span class="n">i</span><span class="o">)</span> <span class="bp">=</span> <span class="n">big</span><span class="o">[(</span><span class="err">◆</span><span class="o">)</span><span class="bp">/</span><span class="n">nil</span><span class="o">]</span><span class="bp">_</span><span class="o">(</span><span class="n">i</span><span class="bp">=</span><span class="n">a</span><span class="bp">..</span><span class="n">b</span> <span class="bp">|</span> <span class="o">(</span><span class="n">P</span> <span class="o">(</span><span class="n">a</span><span class="bp">+</span><span class="n">b</span><span class="bp">-</span><span class="n">i</span><span class="o">)))</span> <span class="n">φ</span> <span class="o">(</span><span class="n">F</span> <span class="o">(</span><span class="n">a</span><span class="bp">+</span><span class="n">b</span><span class="bp">-</span><span class="n">i</span><span class="o">))</span>
+</pre></div>
+
+
+<p>I don't want the <code>a+b-i</code> in the conclusion to be some weird formula which is the same after a dozen rewrites</p>
 
 #### [ Kevin Buzzard (May 15 2018 at 09:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126580245):
-```lean
-import data.list.basic 
-open list 
-lemma foldr_ext {α : Type*} {β : Type*} {l : list α} (f f' : α → β → β) (s : β)
-  (H : ∀ a ∈ l, ∀ b : β, f a b = f' a b) : foldr f s l = foldr f' s l :=
-begin induction l with A B C, {simp}, -- base case}
-  simp at H,
-  simp *,
-  -- dammit simp, prove it without using contextual
-  simp * {contextual := tt}, -- what just happened?
-end
-```
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">list</span><span class="bp">.</span><span class="n">basic</span>
+<span class="kn">open</span> <span class="n">list</span>
+<span class="kn">lemma</span> <span class="n">foldr_ext</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">{</span><span class="n">l</span> <span class="o">:</span> <span class="n">list</span> <span class="n">α</span><span class="o">}</span> <span class="o">(</span><span class="n">f</span> <span class="n">f&#39;</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">β</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">a</span> <span class="err">∈</span> <span class="n">l</span><span class="o">,</span> <span class="bp">∀</span> <span class="n">b</span> <span class="o">:</span> <span class="n">β</span><span class="o">,</span> <span class="n">f</span> <span class="n">a</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">f&#39;</span> <span class="n">a</span> <span class="n">b</span><span class="o">)</span> <span class="o">:</span> <span class="n">foldr</span> <span class="n">f</span> <span class="n">s</span> <span class="n">l</span> <span class="bp">=</span> <span class="n">foldr</span> <span class="n">f&#39;</span> <span class="n">s</span> <span class="n">l</span> <span class="o">:=</span>
+<span class="k">begin</span> <span class="n">induction</span> <span class="n">l</span> <span class="k">with</span> <span class="n">A</span> <span class="n">B</span> <span class="n">C</span><span class="o">,</span> <span class="o">{</span><span class="n">simp</span><span class="o">},</span> <span class="c1">-- base case}</span>
+  <span class="n">simp</span> <span class="n">at</span> <span class="n">H</span><span class="o">,</span>
+  <span class="n">simp</span> <span class="bp">*</span><span class="o">,</span>
+  <span class="c1">-- dammit simp, prove it without using contextual</span>
+  <span class="n">simp</span> <span class="bp">*</span> <span class="o">{</span><span class="n">contextual</span> <span class="o">:=</span> <span class="n">tt</span><span class="o">},</span> <span class="c1">-- what just happened?</span>
+<span class="kn">end</span>
+</pre></div>
 
 #### [ Kevin Buzzard (May 15 2018 at 09:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126580277):
-That's what I don't get
+<p>That's what I don't get</p>
 
 #### [ Mario Carneiro (May 15 2018 at 09:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126580283):
-I don't either. But I don't see that `2*a+whatever` anywhere in the statement either
+<p>I don't either. But I don't see that <code>2*a+whatever</code> anywhere in the statement either</p>
 
 #### [ Kevin Buzzard (May 15 2018 at 09:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126580284):
-Can I break that last line down into simpler steps?
+<p>Can I break that last line down into simpler steps?</p>
 
 #### [ Patrick Massot (May 15 2018 at 09:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126580286):
-Knowing of course that I proved
-```lean
-lemma big.anti_mph {φ : R → R} 
-  (Hop : ∀ a b : R, φ (a ◆ b) = φ b ◆ φ a) (Hnil : φ nil = nil) :
-  φ (big[(◆)/nil]_(i ∈ r | (P i)) F i) = big[(◆)/nil]_(i ∈ r.reverse | (P i)) φ (F i)
-```
-a long time ago
+<p>Knowing of course that I proved</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">big</span><span class="bp">.</span><span class="n">anti_mph</span> <span class="o">{</span><span class="n">φ</span> <span class="o">:</span> <span class="n">R</span> <span class="bp">→</span> <span class="n">R</span><span class="o">}</span>
+  <span class="o">(</span><span class="n">Hop</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">R</span><span class="o">,</span> <span class="n">φ</span> <span class="o">(</span><span class="n">a</span> <span class="err">◆</span> <span class="n">b</span><span class="o">)</span> <span class="bp">=</span> <span class="n">φ</span> <span class="n">b</span> <span class="err">◆</span> <span class="n">φ</span> <span class="n">a</span><span class="o">)</span> <span class="o">(</span><span class="n">Hnil</span> <span class="o">:</span> <span class="n">φ</span> <span class="n">nil</span> <span class="bp">=</span> <span class="n">nil</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">φ</span> <span class="o">(</span><span class="n">big</span><span class="o">[(</span><span class="err">◆</span><span class="o">)</span><span class="bp">/</span><span class="n">nil</span><span class="o">]</span><span class="bp">_</span><span class="o">(</span><span class="n">i</span> <span class="err">∈</span> <span class="n">r</span> <span class="bp">|</span> <span class="o">(</span><span class="n">P</span> <span class="n">i</span><span class="o">))</span> <span class="n">F</span> <span class="n">i</span><span class="o">)</span> <span class="bp">=</span> <span class="n">big</span><span class="o">[(</span><span class="err">◆</span><span class="o">)</span><span class="bp">/</span><span class="n">nil</span><span class="o">]</span><span class="bp">_</span><span class="o">(</span><span class="n">i</span> <span class="err">∈</span> <span class="n">r</span><span class="bp">.</span><span class="n">reverse</span> <span class="bp">|</span> <span class="o">(</span><span class="n">P</span> <span class="n">i</span><span class="o">))</span> <span class="n">φ</span> <span class="o">(</span><span class="n">F</span> <span class="n">i</span><span class="o">)</span>
+</pre></div>
+
+
+<p>a long time ago</p>
 
 #### [ Patrick Massot (May 15 2018 at 09:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126580300):
-I'm only fighting the `range'` stuff
+<p>I'm only fighting the <code>range'</code> stuff</p>
 
 #### [ Patrick Massot (May 15 2018 at 09:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126580345):
-And I have 
-```lean
-lemma big.map {J : Type*} (f : I → J) (P : J → Prop) [decidable_pred P] (F : J → R) : 
-  (big[(◆)/nil]_(j ∈ map f r | (P j)) (F j)) = (big[(◆)/nil]_(i ∈ r | (P (f i))) (F (f i))) 
-```
+<p>And I have </p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">big</span><span class="bp">.</span><span class="n">map</span> <span class="o">{</span><span class="n">J</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">I</span> <span class="bp">→</span> <span class="n">J</span><span class="o">)</span> <span class="o">(</span><span class="n">P</span> <span class="o">:</span> <span class="n">J</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">[</span><span class="n">decidable_pred</span> <span class="n">P</span><span class="o">]</span> <span class="o">(</span><span class="n">F</span> <span class="o">:</span> <span class="n">J</span> <span class="bp">→</span> <span class="n">R</span><span class="o">)</span> <span class="o">:</span>
+  <span class="o">(</span><span class="n">big</span><span class="o">[(</span><span class="err">◆</span><span class="o">)</span><span class="bp">/</span><span class="n">nil</span><span class="o">]</span><span class="bp">_</span><span class="o">(</span><span class="n">j</span> <span class="err">∈</span> <span class="n">map</span> <span class="n">f</span> <span class="n">r</span> <span class="bp">|</span> <span class="o">(</span><span class="n">P</span> <span class="n">j</span><span class="o">))</span> <span class="o">(</span><span class="n">F</span> <span class="n">j</span><span class="o">))</span> <span class="bp">=</span> <span class="o">(</span><span class="n">big</span><span class="o">[(</span><span class="err">◆</span><span class="o">)</span><span class="bp">/</span><span class="n">nil</span><span class="o">]</span><span class="bp">_</span><span class="o">(</span><span class="n">i</span> <span class="err">∈</span> <span class="n">r</span> <span class="bp">|</span> <span class="o">(</span><span class="n">P</span> <span class="o">(</span><span class="n">f</span> <span class="n">i</span><span class="o">)))</span> <span class="o">(</span><span class="n">F</span> <span class="o">(</span><span class="n">f</span> <span class="n">i</span><span class="o">)))</span>
+</pre></div>
 
 #### [ Patrick Massot (May 15 2018 at 09:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126580348):
-So I wanted to write `reverse (range' ...)` as a `map ... (range' ...)`
+<p>So I wanted to write <code>reverse (range' ...)</code> as a <code>map ... (range' ...)</code></p>
 
 #### [ Mario Carneiro (May 15 2018 at 09:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126580357):
-What are you going to do with the `map` once you have it?
+<p>What are you going to do with the <code>map</code> once you have it?</p>
 
 #### [ Gabriel Ebner (May 15 2018 at 09:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126580362):
-@**Kevin Buzzard**  Look at the left-hand side of the implication in the induction hypothesis in foldr_ext.  Contextual simplification makes a difference here: simp then has the additional assumption `a ∈ l`, which it can use to apply `H`.
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span>  Look at the left-hand side of the implication in the induction hypothesis in foldr_ext.  Contextual simplification makes a difference here: simp then has the additional assumption <code>a ∈ l</code>, which it can use to apply <code>H</code>.</p>
 
 #### [ Mario Carneiro (May 15 2018 at 09:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126580404):
-Okay I think it is time to split this convo in two
+<p>Okay I think it is time to split this convo in two</p>
 
 #### [ Patrick Massot (May 15 2018 at 09:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126580405):
-Yes sorry
+<p>Yes sorry</p>
 
 #### [ Kevin Buzzard (May 15 2018 at 09:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126580428):
-```quote
-Okay I think it is time to split this convo in two
-```
-...given that neither thread is about the topic name ;-)
+<blockquote>
+<p>Okay I think it is time to split this convo in two</p>
+</blockquote>
+<p>...given that neither thread is about the topic name ;-)</p>
 
 #### [ Gabriel Ebner (May 15 2018 at 09:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126580490):
-```lean
-case list.cons
-α : Type u_1,
-β : Type u_2,
-f f' : α → β → β,
-s : β,
-h : α,
-t : list α,
-IH : (∀ (a : α), a ∈ t → ∀ (b : β), f a b = f' a b) → foldr f s t = foldr f' s t,
-H : ∀ (a : α), a ∈ h :: t → ∀ (b : β), f a b = f' a b
-⊢ foldr f s (h :: t) = foldr f' s (h :: t)
-```
-This is the case for cons. ^^   In order to apply `IH`, you need to prove its left-hand side using `H`.  And to prove `a ∈ h :: t`, you need the `a ∈ t` from `IH`.
+<div class="codehilite"><pre><span></span><span class="n">case</span> <span class="n">list</span><span class="bp">.</span><span class="n">cons</span>
+<span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u_1</span><span class="o">,</span>
+<span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u_2</span><span class="o">,</span>
+<span class="n">f</span> <span class="n">f&#39;</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span> <span class="bp">→</span> <span class="n">β</span><span class="o">,</span>
+<span class="n">s</span> <span class="o">:</span> <span class="n">β</span><span class="o">,</span>
+<span class="n">h</span> <span class="o">:</span> <span class="n">α</span><span class="o">,</span>
+<span class="n">t</span> <span class="o">:</span> <span class="n">list</span> <span class="n">α</span><span class="o">,</span>
+<span class="n">IH</span> <span class="o">:</span> <span class="o">(</span><span class="bp">∀</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">),</span> <span class="n">a</span> <span class="err">∈</span> <span class="n">t</span> <span class="bp">→</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">b</span> <span class="o">:</span> <span class="n">β</span><span class="o">),</span> <span class="n">f</span> <span class="n">a</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">f&#39;</span> <span class="n">a</span> <span class="n">b</span><span class="o">)</span> <span class="bp">→</span> <span class="n">foldr</span> <span class="n">f</span> <span class="n">s</span> <span class="n">t</span> <span class="bp">=</span> <span class="n">foldr</span> <span class="n">f&#39;</span> <span class="n">s</span> <span class="n">t</span><span class="o">,</span>
+<span class="n">H</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">),</span> <span class="n">a</span> <span class="err">∈</span> <span class="n">h</span> <span class="bp">::</span> <span class="n">t</span> <span class="bp">→</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">b</span> <span class="o">:</span> <span class="n">β</span><span class="o">),</span> <span class="n">f</span> <span class="n">a</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">f&#39;</span> <span class="n">a</span> <span class="n">b</span>
+<span class="err">⊢</span> <span class="n">foldr</span> <span class="n">f</span> <span class="n">s</span> <span class="o">(</span><span class="n">h</span> <span class="bp">::</span> <span class="n">t</span><span class="o">)</span> <span class="bp">=</span> <span class="n">foldr</span> <span class="n">f&#39;</span> <span class="n">s</span> <span class="o">(</span><span class="n">h</span> <span class="bp">::</span> <span class="n">t</span><span class="o">)</span>
+</pre></div>
+
+
+<p>This is the case for cons. ^^   In order to apply <code>IH</code>, you need to prove its left-hand side using <code>H</code>.  And to prove <code>a ∈ h :: t</code>, you need the <code>a ∈ t</code> from <code>IH</code>.</p>
 
 #### [ Kevin Buzzard (May 15 2018 at 10:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126580729):
-I am beginning to understand now. I'm writing out the proof in full, and I have to apply `IH` and then apply `H`.
+<p>I am beginning to understand now. I'm writing out the proof in full, and I have to apply <code>IH</code> and then apply <code>H</code>.</p>
 
 #### [ Kevin Buzzard (May 15 2018 at 10:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126580768):
-So everything is there but somehow it's all in a bit of a tangle
+<p>So everything is there but somehow it's all in a bit of a tangle</p>
 
 #### [ Kevin Buzzard (May 15 2018 at 10:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126580909):
-I think I have it now
+<p>I think I have it now</p>
 
 #### [ Kevin Buzzard (May 15 2018 at 10:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126580911):
-```lean
-lemma got_it (P Q R S : Prop) (IH : (P → R) → S) (H0 : P → Q) (H' : Q → R) : S := 
-begin
---simp *, -- fails
-simp * {contextual := tt},
-end 
-```
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">got_it</span> <span class="o">(</span><span class="n">P</span> <span class="n">Q</span> <span class="n">R</span> <span class="n">S</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">(</span><span class="n">IH</span> <span class="o">:</span> <span class="o">(</span><span class="n">P</span> <span class="bp">→</span> <span class="n">R</span><span class="o">)</span> <span class="bp">→</span> <span class="n">S</span><span class="o">)</span> <span class="o">(</span><span class="n">H0</span> <span class="o">:</span> <span class="n">P</span> <span class="bp">→</span> <span class="n">Q</span><span class="o">)</span> <span class="o">(</span><span class="n">H&#39;</span> <span class="o">:</span> <span class="n">Q</span> <span class="bp">→</span> <span class="n">R</span><span class="o">)</span> <span class="o">:</span> <span class="n">S</span> <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="c1">--simp *, -- fails</span>
+<span class="n">simp</span> <span class="bp">*</span> <span class="o">{</span><span class="n">contextual</span> <span class="o">:=</span> <span class="n">tt</span><span class="o">},</span>
+<span class="kn">end</span>
+</pre></div>
 
 #### [ Kevin Buzzard (May 15 2018 at 10:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126580956):
-I want to use `IH` to prove `S` but the hypothesis of `IH` isn't immediately true; however simp can prove it using other hypotheses.
+<p>I want to use <code>IH</code> to prove <code>S</code> but the hypothesis of <code>IH</code> isn't immediately true; however simp can prove it using other hypotheses.</p>
 
 #### [ Kevin Buzzard (May 15 2018 at 10:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126580975):
-Thanks Gabriel. To show your time isn't being wasted here I'll add it to the simp docs (once I've done another 8 hours of marking..)
+<p>Thanks Gabriel. To show your time isn't being wasted here I'll add it to the simp docs (once I've done another 8 hours of marking..)</p>
 
 #### [ Kevin Buzzard (May 15 2018 at 10:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126581149):
-All of these conversations (threads about what simp does and doesn't do, threads about how to make type class inference work etc) -- it's in some sense sad that they just appear here and then disappear. The type class inference thread especially contains some really useful tips (in the sense that I was genuinely stuck about three times and then got unstucked by the contents of that thread). I will try to write some notes on that thread too, but I have so much marking at the minute and I have decided that it is time to prove an affine scheme is a scheme so I spend all my spare time on that. I am using the zulip "star" functionality a lot at the minute -- star meaning "get back to this later and write it up properly".
+<p>All of these conversations (threads about what simp does and doesn't do, threads about how to make type class inference work etc) -- it's in some sense sad that they just appear here and then disappear. The type class inference thread especially contains some really useful tips (in the sense that I was genuinely stuck about three times and then got unstucked by the contents of that thread). I will try to write some notes on that thread too, but I have so much marking at the minute and I have decided that it is time to prove an affine scheme is a scheme so I spend all my spare time on that. I am using the zulip "star" functionality a lot at the minute -- star meaning "get back to this later and write it up properly".</p>
 
 #### [ Kevin Buzzard (May 15 2018 at 10:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126581151):
-Thanks to all as ever.
+<p>Thanks to all as ever.</p>
 
 #### [ Patrick Massot (May 15 2018 at 10:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126581273):
-Next year Lean will mark all this for you
+<p>Next year Lean will mark all this for you</p>
 
 #### [ Kevin Buzzard (May 15 2018 at 10:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126581275):
-That's the plan!
+<p>That's the plan!</p>
 
 #### [ Patrick Massot (May 17 2018 at 22:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126718080):
-Because this `{contextual := true}` discussion I'm back to beginner level. Except that, instead of trying `simp` whatever the goal and hope for the best, I try `simp * at * { contextual := true}`
+<p>Because this <code>{contextual := true}</code> discussion I'm back to beginner level. Except that, instead of trying <code>simp</code> whatever the goal and hope for the best, I try <code>simp * at * { contextual := true}</code></p>
 
 #### [ Patrick Massot (May 17 2018 at 22:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126718124):
-And often it works!
+<p>And often it works!</p>
 
 
 {% endraw %}

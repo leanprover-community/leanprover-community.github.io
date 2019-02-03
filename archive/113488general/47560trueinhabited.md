@@ -12,15 +12,14 @@ permalink: archive/113488general/47560trueinhabited.html
 
 {% raw %}
 #### [ Victor Porton (Jul 07 2018 at 17:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/true_inhabited/near/129261476):
-How to prove:
-
-instance true_inhabited : inhabited true := sorry
+<p>How to prove:</p>
+<p>instance true_inhabited : inhabited true := sorry</p>
 
 #### [ Kenny Lau (Jul 07 2018 at 17:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/true_inhabited/near/129261488):
-inhabited.intro trivial
+<p>inhabited.intro trivial</p>
 
 #### [ Kenny Lau (Jul 07 2018 at 17:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/true_inhabited/near/129261496):
-\< trivial \>
+<p>\&lt; trivial \&gt;</p>
 
 
 {% endraw %}

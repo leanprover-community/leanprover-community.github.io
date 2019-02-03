@@ -12,71 +12,69 @@ permalink: archive/116395maths/98386generatefilter.html
 
 {% raw %}
 #### [ Kenny Lau (Apr 28 2018 at 06:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/generate%20filter/near/125807430):
-```lean
-def generate {α : Type u} (s :set (set α)) : filter α :=
-{ sets := { A | ∃ t ⊆ s, ⋂₀ t ⊆ A },
-  univ := ⟨∅, set.empty_subset s, @set.sInter_empty α ▸ set.subset.refl _⟩,
-  up   := λ x ⟨t, ht1, ht2⟩ y H2, ⟨t, ht1, set.subset.trans ht2 H2⟩,
-  down := λ x ⟨t, ht1, ht2⟩ y ⟨u, hu1, hu2⟩, ⟨x ∩ y,
-      ⟨t ∪ u, set.union_subset ht1 hu1, (set.sInter_union t u).symm ▸
-        set.subset_inter
-          (set.subset.trans (set.inter_subset_left _ _) ht2)
-          (set.subset.trans (set.inter_subset_right _ _) hu2)⟩,
-    set.inter_subset_left _ _, set.inter_subset_right _ _⟩ }
-```
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">generate</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span><span class="n">set</span> <span class="o">(</span><span class="n">set</span> <span class="n">α</span><span class="o">))</span> <span class="o">:</span> <span class="n">filter</span> <span class="n">α</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">sets</span> <span class="o">:=</span> <span class="o">{</span> <span class="n">A</span> <span class="bp">|</span> <span class="bp">∃</span> <span class="n">t</span> <span class="err">⊆</span> <span class="n">s</span><span class="o">,</span> <span class="err">⋂₀</span> <span class="n">t</span> <span class="err">⊆</span> <span class="n">A</span> <span class="o">},</span>
+  <span class="n">univ</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="err">∅</span><span class="o">,</span> <span class="n">set</span><span class="bp">.</span><span class="n">empty_subset</span> <span class="n">s</span><span class="o">,</span> <span class="bp">@</span><span class="n">set</span><span class="bp">.</span><span class="n">sInter_empty</span> <span class="n">α</span> <span class="bp">▸</span> <span class="n">set</span><span class="bp">.</span><span class="n">subset</span><span class="bp">.</span><span class="n">refl</span> <span class="bp">_⟩</span><span class="o">,</span>
+  <span class="n">up</span>   <span class="o">:=</span> <span class="bp">λ</span> <span class="n">x</span> <span class="bp">⟨</span><span class="n">t</span><span class="o">,</span> <span class="n">ht1</span><span class="o">,</span> <span class="n">ht2</span><span class="bp">⟩</span> <span class="n">y</span> <span class="n">H2</span><span class="o">,</span> <span class="bp">⟨</span><span class="n">t</span><span class="o">,</span> <span class="n">ht1</span><span class="o">,</span> <span class="n">set</span><span class="bp">.</span><span class="n">subset</span><span class="bp">.</span><span class="n">trans</span> <span class="n">ht2</span> <span class="n">H2</span><span class="bp">⟩</span><span class="o">,</span>
+  <span class="n">down</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">x</span> <span class="bp">⟨</span><span class="n">t</span><span class="o">,</span> <span class="n">ht1</span><span class="o">,</span> <span class="n">ht2</span><span class="bp">⟩</span> <span class="n">y</span> <span class="bp">⟨</span><span class="n">u</span><span class="o">,</span> <span class="n">hu1</span><span class="o">,</span> <span class="n">hu2</span><span class="bp">⟩</span><span class="o">,</span> <span class="bp">⟨</span><span class="n">x</span> <span class="err">∩</span> <span class="n">y</span><span class="o">,</span>
+      <span class="bp">⟨</span><span class="n">t</span> <span class="err">∪</span> <span class="n">u</span><span class="o">,</span> <span class="n">set</span><span class="bp">.</span><span class="n">union_subset</span> <span class="n">ht1</span> <span class="n">hu1</span><span class="o">,</span> <span class="o">(</span><span class="n">set</span><span class="bp">.</span><span class="n">sInter_union</span> <span class="n">t</span> <span class="n">u</span><span class="o">)</span><span class="bp">.</span><span class="n">symm</span> <span class="bp">▸</span>
+        <span class="n">set</span><span class="bp">.</span><span class="n">subset_inter</span>
+          <span class="o">(</span><span class="n">set</span><span class="bp">.</span><span class="n">subset</span><span class="bp">.</span><span class="n">trans</span> <span class="o">(</span><span class="n">set</span><span class="bp">.</span><span class="n">inter_subset_left</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">)</span> <span class="n">ht2</span><span class="o">)</span>
+          <span class="o">(</span><span class="n">set</span><span class="bp">.</span><span class="n">subset</span><span class="bp">.</span><span class="n">trans</span> <span class="o">(</span><span class="n">set</span><span class="bp">.</span><span class="n">inter_subset_right</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">)</span> <span class="n">hu2</span><span class="o">)</span><span class="bp">⟩</span><span class="o">,</span>
+    <span class="n">set</span><span class="bp">.</span><span class="n">inter_subset_left</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">,</span> <span class="n">set</span><span class="bp">.</span><span class="n">inter_subset_right</span> <span class="bp">_</span> <span class="bp">_⟩</span> <span class="o">}</span>
+</pre></div>
 
 #### [ Kenny Lau (Apr 28 2018 at 06:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/generate%20filter/near/125807435):
-in mathlib it's done by taking the infimum of the principal filters lol
+<p>in mathlib it's done by taking the infimum of the principal filters lol</p>
 
 #### [ Kenny Lau (Apr 28 2018 at 06:55)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/generate%20filter/near/125807555):
-aha, that's the wrong definition
+<p>aha, that's the wrong definition</p>
 
 #### [ Reid Barton (Apr 28 2018 at 06:56)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/generate%20filter/near/125807596):
-Those mathlib-style definitions are actually quite convenient because you can immediately use them with lemmas like `vmap_infi`, `vmap_principal`, etc.
+<p>Those mathlib-style definitions are actually quite convenient because you can immediately use them with lemmas like <code>vmap_infi</code>, <code>vmap_principal</code>, etc.</p>
 
 #### [ Kenny Lau (Apr 28 2018 at 07:17)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/generate%20filter/near/125808108):
-```lean
-/-- The filter generated by a set of sets. -/
-def generate (s :set (set α)) : filter α :=
-{ sets  := { A | ∃ t ⊆ s, set.finite t ∧ ⋂₀ t ⊆ A },
-  univ  := ⟨∅, set.empty_subset s, set.finite_empty, @set.sInter_empty α ▸ set.subset.refl _⟩,
-  up    := λ x ⟨t, ht1, ht2, ht3⟩ y H2, ⟨t, ht1, ht2, set.subset.trans ht3 H2⟩,
-  inter := λ x ⟨t, ht1, ht2, ht3⟩ y ⟨u, hu1, hu2, hu3⟩,
-    ⟨t ∪ u, set.union_subset ht1 hu1, set.finite_union ht2 hu2,
-    (set.sInter_union t u).symm ▸ set.subset_inter
-      (set.subset.trans (set.inter_subset_left _ _) ht3)
-      (set.subset.trans (set.inter_subset_right _ _) hu3)⟩ }
+<div class="codehilite"><pre><span></span><span class="c">/-</span><span class="cm">- The filter generated by a set of sets. -/</span>
+<span class="n">def</span> <span class="n">generate</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span><span class="n">set</span> <span class="o">(</span><span class="n">set</span> <span class="n">α</span><span class="o">))</span> <span class="o">:</span> <span class="n">filter</span> <span class="n">α</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">sets</span>  <span class="o">:=</span> <span class="o">{</span> <span class="n">A</span> <span class="bp">|</span> <span class="bp">∃</span> <span class="n">t</span> <span class="err">⊆</span> <span class="n">s</span><span class="o">,</span> <span class="n">set</span><span class="bp">.</span><span class="n">finite</span> <span class="n">t</span> <span class="bp">∧</span> <span class="err">⋂₀</span> <span class="n">t</span> <span class="err">⊆</span> <span class="n">A</span> <span class="o">},</span>
+  <span class="n">univ</span>  <span class="o">:=</span> <span class="bp">⟨</span><span class="err">∅</span><span class="o">,</span> <span class="n">set</span><span class="bp">.</span><span class="n">empty_subset</span> <span class="n">s</span><span class="o">,</span> <span class="n">set</span><span class="bp">.</span><span class="n">finite_empty</span><span class="o">,</span> <span class="bp">@</span><span class="n">set</span><span class="bp">.</span><span class="n">sInter_empty</span> <span class="n">α</span> <span class="bp">▸</span> <span class="n">set</span><span class="bp">.</span><span class="n">subset</span><span class="bp">.</span><span class="n">refl</span> <span class="bp">_⟩</span><span class="o">,</span>
+  <span class="n">up</span>    <span class="o">:=</span> <span class="bp">λ</span> <span class="n">x</span> <span class="bp">⟨</span><span class="n">t</span><span class="o">,</span> <span class="n">ht1</span><span class="o">,</span> <span class="n">ht2</span><span class="o">,</span> <span class="n">ht3</span><span class="bp">⟩</span> <span class="n">y</span> <span class="n">H2</span><span class="o">,</span> <span class="bp">⟨</span><span class="n">t</span><span class="o">,</span> <span class="n">ht1</span><span class="o">,</span> <span class="n">ht2</span><span class="o">,</span> <span class="n">set</span><span class="bp">.</span><span class="n">subset</span><span class="bp">.</span><span class="n">trans</span> <span class="n">ht3</span> <span class="n">H2</span><span class="bp">⟩</span><span class="o">,</span>
+  <span class="n">inter</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">x</span> <span class="bp">⟨</span><span class="n">t</span><span class="o">,</span> <span class="n">ht1</span><span class="o">,</span> <span class="n">ht2</span><span class="o">,</span> <span class="n">ht3</span><span class="bp">⟩</span> <span class="n">y</span> <span class="bp">⟨</span><span class="n">u</span><span class="o">,</span> <span class="n">hu1</span><span class="o">,</span> <span class="n">hu2</span><span class="o">,</span> <span class="n">hu3</span><span class="bp">⟩</span><span class="o">,</span>
+    <span class="bp">⟨</span><span class="n">t</span> <span class="err">∪</span> <span class="n">u</span><span class="o">,</span> <span class="n">set</span><span class="bp">.</span><span class="n">union_subset</span> <span class="n">ht1</span> <span class="n">hu1</span><span class="o">,</span> <span class="n">set</span><span class="bp">.</span><span class="n">finite_union</span> <span class="n">ht2</span> <span class="n">hu2</span><span class="o">,</span>
+    <span class="o">(</span><span class="n">set</span><span class="bp">.</span><span class="n">sInter_union</span> <span class="n">t</span> <span class="n">u</span><span class="o">)</span><span class="bp">.</span><span class="n">symm</span> <span class="bp">▸</span> <span class="n">set</span><span class="bp">.</span><span class="n">subset_inter</span>
+      <span class="o">(</span><span class="n">set</span><span class="bp">.</span><span class="n">subset</span><span class="bp">.</span><span class="n">trans</span> <span class="o">(</span><span class="n">set</span><span class="bp">.</span><span class="n">inter_subset_left</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">)</span> <span class="n">ht3</span><span class="o">)</span>
+      <span class="o">(</span><span class="n">set</span><span class="bp">.</span><span class="n">subset</span><span class="bp">.</span><span class="n">trans</span> <span class="o">(</span><span class="n">set</span><span class="bp">.</span><span class="n">inter_subset_right</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">)</span> <span class="n">hu3</span><span class="o">)</span><span class="bp">⟩</span> <span class="o">}</span>
 
-/-- The filter generated contains the original sets. -/
-theorem generate.subset (s :set (set α)) : s ⊆ (generate s).sets :=
-λ A HA, ⟨{A}, set.singleton_subset_iff.2 HA, set.finite_singleton A,
-  (set.sInter_singleton A).symm ▸ set.subset.refl A⟩
+<span class="c">/-</span><span class="cm">- The filter generated contains the original sets. -/</span>
+<span class="kn">theorem</span> <span class="n">generate</span><span class="bp">.</span><span class="n">subset</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span><span class="n">set</span> <span class="o">(</span><span class="n">set</span> <span class="n">α</span><span class="o">))</span> <span class="o">:</span> <span class="n">s</span> <span class="err">⊆</span> <span class="o">(</span><span class="n">generate</span> <span class="n">s</span><span class="o">)</span><span class="bp">.</span><span class="n">sets</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="n">A</span> <span class="n">HA</span><span class="o">,</span> <span class="bp">⟨</span><span class="o">{</span><span class="n">A</span><span class="o">},</span> <span class="n">set</span><span class="bp">.</span><span class="n">singleton_subset_iff</span><span class="bp">.</span><span class="mi">2</span> <span class="n">HA</span><span class="o">,</span> <span class="n">set</span><span class="bp">.</span><span class="n">finite_singleton</span> <span class="n">A</span><span class="o">,</span>
+  <span class="o">(</span><span class="n">set</span><span class="bp">.</span><span class="n">sInter_singleton</span> <span class="n">A</span><span class="o">)</span><span class="bp">.</span><span class="n">symm</span> <span class="bp">▸</span> <span class="n">set</span><span class="bp">.</span><span class="n">subset</span><span class="bp">.</span><span class="n">refl</span> <span class="n">A</span><span class="bp">⟩</span>
 
-/-- The filter generated is the smallest filter containing the original sets. -/
-theorem generate.min (s :set (set α)) {f : filter α} (H : s ⊆ f.sets) :
-  (generate s).sets ⊆ f.sets :=
-λ A ⟨t, ht1, ht2, ht3⟩, (set.finite.induction_on ht2
-  (λ A _ HA, have H1 : A = set.univ,
-    from set.eq_univ_of_univ_subset $ @set.sInter_empty α ▸ HA,
-    H1.symm ▸ f.univ)
-  (λ B t _ _ ih A ht1 ht3, f.up (⋂₀ insert B t)
-    ((set.sInter_insert B t).symm ▸
-      f.inter B (H $ ht1 $ set.mem_insert _ _)
-      (⋂₀ t) (ih _ (set.insert_subset.1 ht1).2 (set.subset.refl _))) _ ht3)) A ht1 ht3
+<span class="c">/-</span><span class="cm">- The filter generated is the smallest filter containing the original sets. -/</span>
+<span class="kn">theorem</span> <span class="n">generate</span><span class="bp">.</span><span class="n">min</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span><span class="n">set</span> <span class="o">(</span><span class="n">set</span> <span class="n">α</span><span class="o">))</span> <span class="o">{</span><span class="n">f</span> <span class="o">:</span> <span class="n">filter</span> <span class="n">α</span><span class="o">}</span> <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="n">s</span> <span class="err">⊆</span> <span class="n">f</span><span class="bp">.</span><span class="n">sets</span><span class="o">)</span> <span class="o">:</span>
+  <span class="o">(</span><span class="n">generate</span> <span class="n">s</span><span class="o">)</span><span class="bp">.</span><span class="n">sets</span> <span class="err">⊆</span> <span class="n">f</span><span class="bp">.</span><span class="n">sets</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="n">A</span> <span class="bp">⟨</span><span class="n">t</span><span class="o">,</span> <span class="n">ht1</span><span class="o">,</span> <span class="n">ht2</span><span class="o">,</span> <span class="n">ht3</span><span class="bp">⟩</span><span class="o">,</span> <span class="o">(</span><span class="n">set</span><span class="bp">.</span><span class="n">finite</span><span class="bp">.</span><span class="n">induction_on</span> <span class="n">ht2</span>
+  <span class="o">(</span><span class="bp">λ</span> <span class="n">A</span> <span class="bp">_</span> <span class="n">HA</span><span class="o">,</span> <span class="k">have</span> <span class="n">H1</span> <span class="o">:</span> <span class="n">A</span> <span class="bp">=</span> <span class="n">set</span><span class="bp">.</span><span class="n">univ</span><span class="o">,</span>
+    <span class="k">from</span> <span class="n">set</span><span class="bp">.</span><span class="n">eq_univ_of_univ_subset</span> <span class="err">$</span> <span class="bp">@</span><span class="n">set</span><span class="bp">.</span><span class="n">sInter_empty</span> <span class="n">α</span> <span class="bp">▸</span> <span class="n">HA</span><span class="o">,</span>
+    <span class="n">H1</span><span class="bp">.</span><span class="n">symm</span> <span class="bp">▸</span> <span class="n">f</span><span class="bp">.</span><span class="n">univ</span><span class="o">)</span>
+  <span class="o">(</span><span class="bp">λ</span> <span class="n">B</span> <span class="n">t</span> <span class="bp">_</span> <span class="bp">_</span> <span class="n">ih</span> <span class="n">A</span> <span class="n">ht1</span> <span class="n">ht3</span><span class="o">,</span> <span class="n">f</span><span class="bp">.</span><span class="n">up</span> <span class="o">(</span><span class="err">⋂₀</span> <span class="n">insert</span> <span class="n">B</span> <span class="n">t</span><span class="o">)</span>
+    <span class="o">((</span><span class="n">set</span><span class="bp">.</span><span class="n">sInter_insert</span> <span class="n">B</span> <span class="n">t</span><span class="o">)</span><span class="bp">.</span><span class="n">symm</span> <span class="bp">▸</span>
+      <span class="n">f</span><span class="bp">.</span><span class="n">inter</span> <span class="n">B</span> <span class="o">(</span><span class="n">H</span> <span class="err">$</span> <span class="n">ht1</span> <span class="err">$</span> <span class="n">set</span><span class="bp">.</span><span class="n">mem_insert</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">)</span>
+      <span class="o">(</span><span class="err">⋂₀</span> <span class="n">t</span><span class="o">)</span> <span class="o">(</span><span class="n">ih</span> <span class="bp">_</span> <span class="o">(</span><span class="n">set</span><span class="bp">.</span><span class="n">insert_subset</span><span class="bp">.</span><span class="mi">1</span> <span class="n">ht1</span><span class="o">)</span><span class="bp">.</span><span class="mi">2</span> <span class="o">(</span><span class="n">set</span><span class="bp">.</span><span class="n">subset</span><span class="bp">.</span><span class="n">refl</span> <span class="bp">_</span><span class="o">)))</span> <span class="bp">_</span> <span class="n">ht3</span><span class="o">))</span> <span class="n">A</span> <span class="n">ht1</span> <span class="n">ht3</span>
 
-/-- The filter generated by one element. -/
-def principal {α : Type u} (s : set α) : filter α :=
-generate {s}
-```
+<span class="c">/-</span><span class="cm">- The filter generated by one element. -/</span>
+<span class="n">def</span> <span class="n">principal</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">filter</span> <span class="n">α</span> <span class="o">:=</span>
+<span class="n">generate</span> <span class="o">{</span><span class="n">s</span><span class="o">}</span>
+</pre></div>
 
 #### [ Kenny Lau (Apr 28 2018 at 07:18)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/generate%20filter/near/125808120):
-that's the right definition
+<p>that's the right definition</p>
 
 #### [ Kenny Lau (Apr 28 2018 at 07:18)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/generate%20filter/near/125808148):
-and I learnt how to use `set.finite.induction_on` :P
+<p>and I learnt how to use <code>set.finite.induction_on</code> :P</p>
 
 #### [ Kenny Lau (Apr 28 2018 at 07:19)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/generate%20filter/near/125808157):
-@**Kevin Buzzard** do you think that's enough interface?
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> do you think that's enough interface?</p>
 
 
 {% endraw %}

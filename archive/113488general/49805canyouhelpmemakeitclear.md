@@ -12,122 +12,116 @@ permalink: archive/113488general/49805canyouhelpmemakeitclear.html
 
 {% raw %}
 #### [ Truong Nguyen (Sep 10 2018 at 16:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/can%20you%20help%20me%20make%20it%20clear/near/133665638):
-I read the book about lean prover. There is some code like this:
+<p>I read the book about lean prover. There is some code like this:</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">nat</span><span class="bp">.</span><span class="n">dvd</span> <span class="o">(</span><span class="n">m</span> <span class="n">n</span><span class="o">:</span> <span class="bp">ℕ</span> <span class="o">):</span> <span class="kt">Prop</span> <span class="o">:=</span> <span class="bp">∃</span> <span class="n">k</span><span class="o">,</span> <span class="n">n</span> <span class="bp">=</span> <span class="n">m</span> <span class="bp">*</span> <span class="n">k</span>
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">has_dvd</span> <span class="n">nat</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="n">nat</span><span class="bp">.</span><span class="n">dvd</span> <span class="bp">⟩</span>
+<span class="kn">theorem</span> <span class="n">nat</span><span class="bp">.</span><span class="n">dvd_refl</span> <span class="o">(</span><span class="n">n</span><span class="o">:</span> <span class="bp">ℕ</span> <span class="o">)</span> <span class="o">:</span> <span class="n">n</span> <span class="err">∣</span> <span class="n">n</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="mi">1</span><span class="o">,</span> <span class="k">by</span> <span class="n">simp</span> <span class="bp">⟩</span>
+</pre></div>
 
-```lean
 
-def nat.dvd (m n: ℕ ): Prop := ∃ k, n = m * k 
-instance : has_dvd nat := ⟨nat.dvd ⟩ 
-theorem nat.dvd_refl (n: ℕ ) : n ∣ n := ⟨1, by simp ⟩ 
-
-```
-I don't know why this theorem can be proved by <1, simp>. What does number 1 mean?
-Thank you for making it clear,
+<p>I don't know why this theorem can be proved by &lt;1, simp&gt;. What does number 1 mean?<br>
+Thank you for making it clear,</p>
 
 #### [ Johan Commelin (Sep 10 2018 at 16:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/can%20you%20help%20me%20make%20it%20clear/near/133665724):
-You see the `k` on the first line?
+<p>You see the <code>k</code> on the first line?</p>
 
 #### [ Johan Commelin (Sep 10 2018 at 16:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/can%20you%20help%20me%20make%20it%20clear/near/133665742):
-To prove `n | n`, you have to provide a `k`. And this proof provides `1`.
+<p>To prove <code>n | n</code>, you have to provide a <code>k</code>. And this proof provides <code>1</code>.</p>
 
 #### [ Johan Commelin (Sep 10 2018 at 16:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/can%20you%20help%20me%20make%20it%20clear/near/133665778):
-Afterwards, you have to prove `n = m * k`. And in your theorem `m` is `n`, and you just provided `k` is `1`.
+<p>Afterwards, you have to prove <code>n = m * k</code>. And in your theorem <code>m</code> is <code>n</code>, and you just provided <code>k</code> is <code>1</code>.</p>
 
 #### [ Johan Commelin (Sep 10 2018 at 16:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/can%20you%20help%20me%20make%20it%20clear/near/133665788):
-The proof is then `by simp`.
+<p>The proof is then <code>by simp</code>.</p>
 
 #### [ Truong Nguyen (Sep 10 2018 at 16:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/can%20you%20help%20me%20make%20it%20clear/near/133665890):
-Ok, thanks. I see it is trivial now.
+<p>Ok, thanks. I see it is trivial now.</p>
 
 #### [ Truong Nguyen (Sep 10 2018 at 16:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/can%20you%20help%20me%20make%20it%20clear/near/133666052):
-By the way, is there any other way. I mean how can we write the code clearer.
+<p>By the way, is there any other way. I mean how can we write the code clearer.</p>
 
 #### [ Johan Commelin (Sep 10 2018 at 16:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/can%20you%20help%20me%20make%20it%20clear/near/133666084):
-Yes. This is called tactic mode.
+<p>Yes. This is called tactic mode.</p>
 
 #### [ Johan Commelin (Sep 10 2018 at 16:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/can%20you%20help%20me%20make%20it%20clear/near/133666101):
-```lean
-def nat.dvd (m n: ℕ ): Prop := ∃ k, n = m * k
-instance : has_dvd nat := ⟨nat.dvd ⟩
-theorem nat.dvd_refl (n: ℕ ) : n ∣ n :=
-begin
-  existsi 1,
-  simp
-end
-```
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">nat</span><span class="bp">.</span><span class="n">dvd</span> <span class="o">(</span><span class="n">m</span> <span class="n">n</span><span class="o">:</span> <span class="bp">ℕ</span> <span class="o">):</span> <span class="kt">Prop</span> <span class="o">:=</span> <span class="bp">∃</span> <span class="n">k</span><span class="o">,</span> <span class="n">n</span> <span class="bp">=</span> <span class="n">m</span> <span class="bp">*</span> <span class="n">k</span>
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">has_dvd</span> <span class="n">nat</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="n">nat</span><span class="bp">.</span><span class="n">dvd</span> <span class="bp">⟩</span>
+<span class="kn">theorem</span> <span class="n">nat</span><span class="bp">.</span><span class="n">dvd_refl</span> <span class="o">(</span><span class="n">n</span><span class="o">:</span> <span class="bp">ℕ</span> <span class="o">)</span> <span class="o">:</span> <span class="n">n</span> <span class="err">∣</span> <span class="n">n</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">existsi</span> <span class="mi">1</span><span class="o">,</span>
+  <span class="n">simp</span>
+<span class="kn">end</span>
+</pre></div>
 
 #### [ Truong Nguyen (Sep 10 2018 at 16:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/can%20you%20help%20me%20make%20it%20clear/near/133666288):
-Oh, ok. How can we unfold the definition of "|", to make it appear like: 
-```lean
-\exists k, n = m * k
-
-```
+<p>Oh, ok. How can we unfold the definition of "|", to make it appear like: </p>
+<div class="codehilite"><pre><span></span><span class="err">\</span><span class="n">exists</span> <span class="n">k</span><span class="o">,</span> <span class="n">n</span> <span class="bp">=</span> <span class="n">m</span> <span class="bp">*</span> <span class="n">k</span>
+</pre></div>
 
 #### [ Truong Nguyen (Sep 10 2018 at 16:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/can%20you%20help%20me%20make%20it%20clear/near/133666491):
-I mean, to make it look like this:
-``` lean
-example (n: ℕ ): ∃ k, n = n * k := _
-```
+<p>I mean, to make it look like this:</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">n</span><span class="o">:</span> <span class="bp">ℕ</span> <span class="o">):</span> <span class="bp">∃</span> <span class="n">k</span><span class="o">,</span> <span class="n">n</span> <span class="bp">=</span> <span class="n">n</span> <span class="bp">*</span> <span class="n">k</span> <span class="o">:=</span> <span class="bp">_</span>
+</pre></div>
 
 #### [ Reid Barton (Sep 10 2018 at 16:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/can%20you%20help%20me%20make%20it%20clear/near/133666552):
-Do you mean you want to change what the goal looks like, inside the tactic block?
+<p>Do you mean you want to change what the goal looks like, inside the tactic block?</p>
 
 #### [ Truong Nguyen (Sep 10 2018 at 16:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/can%20you%20help%20me%20make%20it%20clear/near/133666565):
-Oh, yes
+<p>Oh, yes</p>
 
 #### [ Reid Barton (Sep 10 2018 at 16:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/can%20you%20help%20me%20make%20it%20clear/near/133666643):
-Two ways. One is that you can use `change` to change the goal to something definitionally equivalent, like
-```lean
-  change ∃ k, n = n * k,
-```
-Of course, that depends on knowing what the unfolded form should be
+<p>Two ways. One is that you can use <code>change</code> to change the goal to something definitionally equivalent, like</p>
+<div class="codehilite"><pre><span></span>  <span class="n">change</span> <span class="bp">∃</span> <span class="n">k</span><span class="o">,</span> <span class="n">n</span> <span class="bp">=</span> <span class="n">n</span> <span class="bp">*</span> <span class="n">k</span><span class="o">,</span>
+</pre></div>
+
+
+<p>Of course, that depends on knowing what the unfolded form should be</p>
 
 #### [ Truong Nguyen (Sep 10 2018 at 16:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/can%20you%20help%20me%20make%20it%20clear/near/133666803):
-WHat is the second way
+<p>WHat is the second way</p>
 
 #### [ Reid Barton (Sep 10 2018 at 16:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/can%20you%20help%20me%20make%20it%20clear/near/133666817):
-The other way is to use `unfold` or `dsimp` or related tactics to unfold the `∣` operation, but because it is notation in this case, you need to know the actual name of the operator, which is `has_dvd.dvd`
+<p>The other way is to use <code>unfold</code> or <code>dsimp</code> or related tactics to unfold the <code>∣</code> operation, but because it is notation in this case, you need to know the actual name of the operator, which is <code>has_dvd.dvd</code></p>
 
 #### [ Reid Barton (Sep 10 2018 at 16:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/can%20you%20help%20me%20make%20it%20clear/near/133666938):
-Then `has_dvd` is a class, so you also need to unfold the actual instance for `nat`. If you start with
-```lean
-  unfold has_dvd.dvd,
-```
-then you'll see what the actual operation is in the goal window -- it's `nat.dvd`
+<p>Then <code>has_dvd</code> is a class, so you also need to unfold the actual instance for <code>nat</code>. If you start with</p>
+<div class="codehilite"><pre><span></span>  <span class="n">unfold</span> <span class="n">has_dvd</span><span class="bp">.</span><span class="n">dvd</span><span class="o">,</span>
+</pre></div>
+
+
+<p>then you'll see what the actual operation is in the goal window -- it's <code>nat.dvd</code></p>
 
 #### [ Truong Nguyen (Sep 10 2018 at 16:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/can%20you%20help%20me%20make%20it%20clear/near/133666955):
-I tried this:
-``` lean
-theorem nat.dvd_refl (n: ℕ ) : n ∣ n := 
-begin
-unfold nat.dvd,
-end
-```
-But, I got error
+<p>I tried this:</p>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">nat</span><span class="bp">.</span><span class="n">dvd_refl</span> <span class="o">(</span><span class="n">n</span><span class="o">:</span> <span class="bp">ℕ</span> <span class="o">)</span> <span class="o">:</span> <span class="n">n</span> <span class="err">∣</span> <span class="n">n</span> <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="n">unfold</span> <span class="n">nat</span><span class="bp">.</span><span class="n">dvd</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>But, I got error</p>
 
 #### [ Reid Barton (Sep 10 2018 at 16:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/can%20you%20help%20me%20make%20it%20clear/near/133666979):
-So then you can unfold both at once with
-```lean
-  unfold has_dvd.dvd nat.dvd,
-```
+<p>So then you can unfold both at once with</p>
+<div class="codehilite"><pre><span></span>  <span class="n">unfold</span> <span class="n">has_dvd</span><span class="bp">.</span><span class="n">dvd</span> <span class="n">nat</span><span class="bp">.</span><span class="n">dvd</span><span class="o">,</span>
+</pre></div>
 
 #### [ Reid Barton (Sep 10 2018 at 16:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/can%20you%20help%20me%20make%20it%20clear/near/133667037):
-Yep, because you have to unfold `has_dvd.dvd` first.
-If you write `set_option pp.notation false` before your theorem, you can see what the notation really represents.
+<p>Yep, because you have to unfold <code>has_dvd.dvd</code> first.<br>
+If you write <code>set_option pp.notation false</code> before your theorem, you can see what the notation really represents.</p>
 
 #### [ Truong Nguyen (Sep 10 2018 at 17:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/can%20you%20help%20me%20make%20it%20clear/near/133667112):
-Oh, I made it works now.
-It run fine
-``` lean
-
-theorem nat.dvd_refl (n: ℕ ) : n ∣ n := 
-begin
-unfold has_dvd.dvd nat.dvd,
-end
-```
+<p>Oh, I made it works now.<br>
+It run fine</p>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">nat</span><span class="bp">.</span><span class="n">dvd_refl</span> <span class="o">(</span><span class="n">n</span><span class="o">:</span> <span class="bp">ℕ</span> <span class="o">)</span> <span class="o">:</span> <span class="n">n</span> <span class="err">∣</span> <span class="n">n</span> <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="n">unfold</span> <span class="n">has_dvd</span><span class="bp">.</span><span class="n">dvd</span> <span class="n">nat</span><span class="bp">.</span><span class="n">dvd</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
 
 #### [ Mario Carneiro (Sep 10 2018 at 17:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/can%20you%20help%20me%20make%20it%20clear/near/133669697):
-you can write `dsimp [(∣)]` too
+<p>you can write <code>dsimp [(∣)]</code> too</p>
 
 
 {% endraw %}

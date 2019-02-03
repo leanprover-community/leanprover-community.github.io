@@ -12,50 +12,50 @@ permalink: archive/113488general/27115listfromktol.html
 
 {% raw %}
 #### [ Patrick Massot (Apr 17 2018 at 12:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/list%20from%20k%20to%20l/near/125191252):
-Is there a built-in way to generate the list of natural numbers from k to l? I can use `def myrange (k n : ℕ) := list.map (λ i, i + k) (list.range $ n-k+1)` but I'd like to know if this is already in
+<p>Is there a built-in way to generate the list of natural numbers from k to l? I can use <code>def myrange (k n : ℕ) := list.map (λ i, i + k) (list.range $ n-k+1)</code> but I'd like to know if this is already in</p>
 
 #### [ Kenny Lau (Apr 17 2018 at 12:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/list%20from%20k%20to%20l/near/125191309):
-```lean
-import data.list
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">list</span>
 
-#reduce list.range' 3 5 -- [3, 4, 5, 6, 7]
-```
+<span class="bp">#</span><span class="n">reduce</span> <span class="n">list</span><span class="bp">.</span><span class="n">range&#39;</span> <span class="mi">3</span> <span class="mi">5</span> <span class="c1">-- [3, 4, 5, 6, 7]</span>
+</pre></div>
 
 #### [ Patrick Massot (Apr 17 2018 at 12:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/list%20from%20k%20to%20l/near/125191349):
-It's almost what I was asking for
+<p>It's almost what I was asking for</p>
 
 #### [ Patrick Massot (Apr 17 2018 at 12:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/list%20from%20k%20to%20l/near/125191352):
-my version would return `[3, 4, 5]`
+<p>my version would return <code>[3, 4, 5]</code></p>
 
 #### [ Mario Carneiro (Apr 17 2018 at 12:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/list%20from%20k%20to%20l/near/125191412):
-you will have to use `n-k+1` as the upper bound for that
+<p>you will have to use <code>n-k+1</code> as the upper bound for that</p>
 
 #### [ Patrick Massot (Apr 17 2018 at 12:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/list%20from%20k%20to%20l/near/125191465):
-Ok, so I still need to define a function. Is there any advantage of using `list.range' k (n+k-1)` instead of my implementation? I guess it's a bit faster, but I would be more interested if there are lemmas about range'
+<p>Ok, so I still need to define a function. Is there any advantage of using <code>list.range' k (n+k-1)</code> instead of my implementation? I guess it's a bit faster, but I would be more interested if there are lemmas about range'</p>
 
 #### [ Patrick Massot (Apr 17 2018 at 12:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/list%20from%20k%20to%20l/near/125191962):
-At least I was able to state the next lemma in my small experimentation:
-```lean
-local notation `Π_{i=` k `..` n `}` f := list.prod ((list.range' k (n-k+1)).map f)
+<p>At least I was able to state the next lemma in my small experimentation:</p>
+<div class="codehilite"><pre><span></span><span class="n">local</span> <span class="kn">notation</span> <span class="bp">`Π_</span><span class="o">{</span><span class="n">i</span><span class="bp">=`</span> <span class="n">k</span> <span class="bp">`..`</span> <span class="n">n</span> <span class="bp">`</span><span class="o">}</span><span class="bp">`</span> <span class="n">f</span> <span class="o">:=</span> <span class="n">list</span><span class="bp">.</span><span class="n">prod</span> <span class="o">((</span><span class="n">list</span><span class="bp">.</span><span class="n">range&#39;</span> <span class="n">k</span> <span class="o">(</span><span class="n">n</span><span class="bp">-</span><span class="n">k</span><span class="bp">+</span><span class="mi">1</span><span class="o">))</span><span class="bp">.</span><span class="n">map</span> <span class="n">f</span><span class="o">)</span>
 
-lemma commutators_crunching (U : set X) (φ f : homeo X X)
-(wandering_hyp : ∀ i j : ℕ, i ≠ j → ⇑(φ^i) '' U ∩ ⇑(φ^j) '' U = ∅)
-(n : ℕ) (a : ℕ → homeo X X) (b : ℕ → homeo X X) 
-(supp_hyp : ∀ k : ℕ, supp (a k) ⊆ U ∧ supp (b k) ⊆ U)
-(comm_hyp : f = Π_{i=1..n} λ i, [[a i, b i]]) :
-∃ A B C D : homeo X X, f = [[A, B]]* [[C, D]] := 
-sorry
-```
-`supp` is the (topological) support of a function, `[[. , .]]` is commutator. This will be a good test to see if I can manipulate products in any non-trivial way.
+<span class="kn">lemma</span> <span class="n">commutators_crunching</span> <span class="o">(</span><span class="n">U</span> <span class="o">:</span> <span class="n">set</span> <span class="n">X</span><span class="o">)</span> <span class="o">(</span><span class="n">φ</span> <span class="n">f</span> <span class="o">:</span> <span class="n">homeo</span> <span class="n">X</span> <span class="n">X</span><span class="o">)</span>
+<span class="o">(</span><span class="n">wandering_hyp</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">i</span> <span class="n">j</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span> <span class="n">i</span> <span class="bp">≠</span> <span class="n">j</span> <span class="bp">→</span> <span class="err">⇑</span><span class="o">(</span><span class="n">φ</span><span class="err">^</span><span class="n">i</span><span class="o">)</span> <span class="err">&#39;&#39;</span> <span class="n">U</span> <span class="err">∩</span> <span class="err">⇑</span><span class="o">(</span><span class="n">φ</span><span class="err">^</span><span class="n">j</span><span class="o">)</span> <span class="err">&#39;&#39;</span> <span class="n">U</span> <span class="bp">=</span> <span class="err">∅</span><span class="o">)</span>
+<span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="n">homeo</span> <span class="n">X</span> <span class="n">X</span><span class="o">)</span> <span class="o">(</span><span class="n">b</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="n">homeo</span> <span class="n">X</span> <span class="n">X</span><span class="o">)</span>
+<span class="o">(</span><span class="n">supp_hyp</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">k</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span> <span class="n">supp</span> <span class="o">(</span><span class="n">a</span> <span class="n">k</span><span class="o">)</span> <span class="err">⊆</span> <span class="n">U</span> <span class="bp">∧</span> <span class="n">supp</span> <span class="o">(</span><span class="n">b</span> <span class="n">k</span><span class="o">)</span> <span class="err">⊆</span> <span class="n">U</span><span class="o">)</span>
+<span class="o">(</span><span class="n">comm_hyp</span> <span class="o">:</span> <span class="n">f</span> <span class="bp">=</span> <span class="bp">Π_</span><span class="o">{</span><span class="n">i</span><span class="bp">=</span><span class="mi">1</span><span class="bp">..</span><span class="n">n</span><span class="o">}</span> <span class="bp">λ</span> <span class="n">i</span><span class="o">,</span> <span class="o">[[</span><span class="n">a</span> <span class="n">i</span><span class="o">,</span> <span class="n">b</span> <span class="n">i</span><span class="o">]])</span> <span class="o">:</span>
+<span class="bp">∃</span> <span class="n">A</span> <span class="n">B</span> <span class="n">C</span> <span class="n">D</span> <span class="o">:</span> <span class="n">homeo</span> <span class="n">X</span> <span class="n">X</span><span class="o">,</span> <span class="n">f</span> <span class="bp">=</span> <span class="o">[[</span><span class="n">A</span><span class="o">,</span> <span class="n">B</span><span class="o">]]</span><span class="bp">*</span> <span class="o">[[</span><span class="n">C</span><span class="o">,</span> <span class="n">D</span><span class="o">]]</span> <span class="o">:=</span>
+<span class="n">sorry</span>
+</pre></div>
+
+
+<p><code>supp</code> is the (topological) support of a function, <code>[[. , .]]</code> is commutator. This will be a good test to see if I can manipulate products in any non-trivial way.</p>
 
 #### [ Patrick Massot (Apr 17 2018 at 12:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/list%20from%20k%20to%20l/near/125192018):
-Stating it was already some fight because I was unsure whether to use `ℕ`, `fin n` or `finset` as the source of `a` and `b` (I use only `a i` and `b i` when `i` is between `1` and `n`)
+<p>Stating it was already some fight because I was unsure whether to use <code>ℕ</code>, <code>fin n</code> or <code>finset</code> as the source of <code>a</code> and <code>b</code> (I use only <code>a i</code> and <code>b i</code> when <code>i</code> is between <code>1</code> and <code>n</code>)</p>
 
 #### [ Patrick Massot (Apr 17 2018 at 12:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/list%20from%20k%20to%20l/near/125192075):
-Only `list` has support for non-commutative product. The above statement is the only combination I could get to work
+<p>Only <code>list</code> has support for non-commutative product. The above statement is the only combination I could get to work</p>
 
 #### [ Kenny Lau (Apr 17 2018 at 14:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/list%20from%20k%20to%20l/near/125195523):
-https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/.60.5Ba.2Ca.2B1.2Ca.2B2.2C.2E.2E.2E.2Cb-1.5D.60.3F
+<p><a href="#narrow/stream/113488-general/topic/.60.5Ba.2Ca.2B1.2Ca.2B2.2C.2E.2E.2E.2Cb-1.5D.60.3F" title="#narrow/stream/113488-general/topic/.60.5Ba.2Ca.2B1.2Ca.2B2.2C.2E.2E.2E.2Cb-1.5D.60.3F">https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/.60.5Ba.2Ca.2B1.2Ca.2B2.2C.2E.2E.2E.2Cb-1.5D.60.3F</a></p>
 
 
 {% endraw %}

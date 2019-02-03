@@ -12,1196 +12,1172 @@ permalink: archive/116395maths/74274Basicfinitegroups.html
 
 {% raw %}
 #### [ Kenny Lau (Jul 27 2018 at 06:24)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130387854):
-Do we have the symmetry group of order n!?
+<p>Do we have the symmetry group of order n!?</p>
 
 #### [ Mario Carneiro (Jul 27 2018 at 07:04)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130389188):
-There is `perm (fin n)`, and you should be able to prove it is finite with the right cardinality using `list.length_permutations`
+<p>There is <code>perm (fin n)</code>, and you should be able to prove it is finite with the right cardinality using <code>list.length_permutations</code></p>
 
 #### [ Kenny Lau (Jul 27 2018 at 07:05)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130389202):
-`equiv.perm (fin n)`
+<p><code>equiv.perm (fin n)</code></p>
 
 #### [ Kenny Lau (Jul 27 2018 at 07:15)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130389504):
-Do we have C_2 and in general C_n?
+<p>Do we have C_2 and in general C_n?</p>
 
 #### [ Kenny Lau (Jul 27 2018 at 07:15)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130389505):
-i.e. the cyclic group of order 2 and n
+<p>i.e. the cyclic group of order 2 and n</p>
 
 #### [ Kenny Lau (Jul 27 2018 at 07:20)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130389653):
-hmm, Lean doesn't know that `equiv.perm` and `list.perm` are the same thing, so it might be hard to use `list.length_permutations`...
+<p>hmm, Lean doesn't know that <code>equiv.perm</code> and <code>list.perm</code> are the same thing, so it might be hard to use <code>list.length_permutations</code>...</p>
 
 #### [ Mario Carneiro (Jul 27 2018 at 07:26)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130389875):
-hm, I'll put that on the todo list
+<p>hm, I'll put that on the todo list</p>
 
 #### [ Johan Commelin (Jul 27 2018 at 09:14)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130393507):
-We have $$\mathbb{Z}/n\mathbb{Z}$$, right?
+<p>We have <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mrow><mi mathvariant="double-struck">Z</mi></mrow><mi mathvariant="normal">/</mi><mi>n</mi><mrow><mi mathvariant="double-struck">Z</mi></mrow></mrow><annotation encoding="application/x-tex">\mathbb{Z}/n\mathbb{Z}</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.75em;"></span><span class="strut bottom" style="height:1em;vertical-align:-0.25em;"></span><span class="base"><span class="mord"><span class="mord mathbb">Z</span></span><span class="mord mathrm">/</span><span class="mord mathit">n</span><span class="mord"><span class="mord mathbb">Z</span></span></span></span></span>, right?</p>
 
 #### [ Kenny Lau (Jul 27 2018 at 09:14)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130393508):
-oh right that's in the not-mathlib
+<p>oh right that's in the not-mathlib</p>
 
 #### [ Kenny Lau (Jul 27 2018 at 09:15)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130393522):
-I don't think they proved that it is a group
+<p>I don't think they proved that it is a group</p>
 
 #### [ Johan Commelin (Jul 27 2018 at 09:15)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130393533):
-Aaah, I didn't keep track of what exactly ended up in mathlib.
+<p>Aaah, I didn't keep track of what exactly ended up in mathlib.</p>
 
 #### [ Kenny Lau (Jul 27 2018 at 09:15)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130393536):
-by "not-mathlib" I mean the initial library
+<p>by "not-mathlib" I mean the initial library</p>
 
 #### [ Johan Commelin (Jul 27 2018 at 09:15)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130393537):
-I assumed it was a ring by now.
+<p>I assumed it was a ring by now.</p>
 
 #### [ Kenny Lau (Jul 27 2018 at 09:16)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130393583):
-no, there's no algebraic structure of `fin n` proven
+<p>no, there's no algebraic structure of <code>fin n</code> proven</p>
 
 #### [ Johan Commelin (Jul 27 2018 at 09:17)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130393593):
-But Chris did a lot of stuff mod `n`, right?
+<p>But Chris did a lot of stuff mod <code>n</code>, right?</p>
 
 #### [ Kenny Lau (Jul 27 2018 at 09:17)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130393594):
-ah
+<p>ah</p>
 
 #### [ Johan Commelin (Jul 27 2018 at 09:17)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130393597):
-Anyway, got to run... some talk on K-theory and motives is calling me.
+<p>Anyway, got to run... some talk on K-theory and motives is calling me.</p>
 
 #### [ Kevin Buzzard (Jul 27 2018 at 10:04)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130395310):
-@**Johan Commelin** The problem with fin n (the subtype of N) is that addition and subtraction are defined in core Lean in...umm...not really the way that a mathematician would expect. Chris Hughes did a bunch of stuff mod n yes, but not with fin n.
+<p><span class="user-mention" data-user-id="112680">@Johan Commelin</span> The problem with fin n (the subtype of N) is that addition and subtraction are defined in core Lean in...umm...not really the way that a mathematician would expect. Chris Hughes did a bunch of stuff mod n yes, but not with fin n.</p>
 
 #### [ Kenny Lau (Jul 27 2018 at 10:06)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130395382):
-@**Kevin Buzzard** I don't really understand the problem with `fin n` though
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> I don't really understand the problem with <code>fin n</code> though</p>
 
 #### [ Kevin Buzzard (Jul 27 2018 at 10:08)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130395464):
-```lean
-definition two : fin 4 := 2
-definition three : fin 4 := 3
-#reduce (two-three).val -- 0
-#reduce (two+three).val -- 1
-```
+<div class="codehilite"><pre><span></span><span class="kn">definition</span> <span class="n">two</span> <span class="o">:</span> <span class="n">fin</span> <span class="mi">4</span> <span class="o">:=</span> <span class="mi">2</span>
+<span class="kn">definition</span> <span class="n">three</span> <span class="o">:</span> <span class="n">fin</span> <span class="mi">4</span> <span class="o">:=</span> <span class="mi">3</span>
+<span class="bp">#</span><span class="n">reduce</span> <span class="o">(</span><span class="n">two</span><span class="bp">-</span><span class="n">three</span><span class="o">)</span><span class="bp">.</span><span class="n">val</span> <span class="c1">-- 0</span>
+<span class="bp">#</span><span class="n">reduce</span> <span class="o">(</span><span class="n">two</span><span class="bp">+</span><span class="n">three</span><span class="o">)</span><span class="bp">.</span><span class="n">val</span> <span class="c1">-- 1</span>
+</pre></div>
 
-Addition rolls over, subtraction stops at 0. It's in core so can never be fixed. But of course one couls just define Zmodn n to be fin n and start again.
+
+<p>Addition rolls over, subtraction stops at 0. It's in core so can never be fixed. But of course one couls just define Zmodn n to be fin n and start again.</p>
 
 #### [ Kenny Lau (Jul 27 2018 at 10:08)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130395470):
-oh, the definition in core is wrong
+<p>oh, the definition in core is wrong</p>
 
 #### [ Kevin Buzzard (Jul 27 2018 at 10:08)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130395471):
-right
+<p>right</p>
 
 #### [ Kenny Lau (Jul 27 2018 at 12:04)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130400454):
-```lean
-import data.fintype data.equiv.basic
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">fintype</span> <span class="n">data</span><span class="bp">.</span><span class="n">equiv</span><span class="bp">.</span><span class="n">basic</span>
 
-namespace list
+<span class="kn">namespace</span> <span class="n">list</span>
 
-@[simp] lemma length_attach {α} (L : list α) :
-  L.attach.length = L.length :=
-length_pmap
+<span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="kn">lemma</span> <span class="n">length_attach</span> <span class="o">{</span><span class="n">α</span><span class="o">}</span> <span class="o">(</span><span class="n">L</span> <span class="o">:</span> <span class="n">list</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">L</span><span class="bp">.</span><span class="n">attach</span><span class="bp">.</span><span class="n">length</span> <span class="bp">=</span> <span class="n">L</span><span class="bp">.</span><span class="n">length</span> <span class="o">:=</span>
+<span class="n">length_pmap</span>
 
-@[simp] lemma nth_le_attach {α} (L : list α) (i) (H : i < L.attach.length) :
-  (L.attach.nth_le i H).1 = L.nth_le i (length_attach L ▸ H) :=
-calc  (L.attach.nth_le i H).1
-    = (L.attach.map subtype.val).nth_le i (by simpa using H) : by rw nth_le_map'
-... = L.nth_le i _ : by congr; apply attach_map_val
+<span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="kn">lemma</span> <span class="n">nth_le_attach</span> <span class="o">{</span><span class="n">α</span><span class="o">}</span> <span class="o">(</span><span class="n">L</span> <span class="o">:</span> <span class="n">list</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">i</span><span class="o">)</span> <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="n">i</span> <span class="bp">&lt;</span> <span class="n">L</span><span class="bp">.</span><span class="n">attach</span><span class="bp">.</span><span class="n">length</span><span class="o">)</span> <span class="o">:</span>
+  <span class="o">(</span><span class="n">L</span><span class="bp">.</span><span class="n">attach</span><span class="bp">.</span><span class="n">nth_le</span> <span class="n">i</span> <span class="n">H</span><span class="o">)</span><span class="bp">.</span><span class="mi">1</span> <span class="bp">=</span> <span class="n">L</span><span class="bp">.</span><span class="n">nth_le</span> <span class="n">i</span> <span class="o">(</span><span class="n">length_attach</span> <span class="n">L</span> <span class="bp">▸</span> <span class="n">H</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">calc</span>  <span class="o">(</span><span class="n">L</span><span class="bp">.</span><span class="n">attach</span><span class="bp">.</span><span class="n">nth_le</span> <span class="n">i</span> <span class="n">H</span><span class="o">)</span><span class="bp">.</span><span class="mi">1</span>
+    <span class="bp">=</span> <span class="o">(</span><span class="n">L</span><span class="bp">.</span><span class="n">attach</span><span class="bp">.</span><span class="n">map</span> <span class="n">subtype</span><span class="bp">.</span><span class="n">val</span><span class="o">)</span><span class="bp">.</span><span class="n">nth_le</span> <span class="n">i</span> <span class="o">(</span><span class="k">by</span> <span class="n">simpa</span> <span class="kn">using</span> <span class="n">H</span><span class="o">)</span> <span class="o">:</span> <span class="k">by</span> <span class="n">rw</span> <span class="n">nth_le_map&#39;</span>
+<span class="bp">...</span> <span class="bp">=</span> <span class="n">L</span><span class="bp">.</span><span class="n">nth_le</span> <span class="n">i</span> <span class="bp">_</span> <span class="o">:</span> <span class="k">by</span> <span class="n">congr</span><span class="bp">;</span> <span class="n">apply</span> <span class="n">attach_map_val</span>
 
-@[simp] lemma nth_le_range {n} (i) (H : i < (range n).length) :
-  nth_le (range n) i H = i :=
-option.some.inj $ by rw [← nth_le_nth _, nth_range (by simpa using H)]
+<span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="kn">lemma</span> <span class="n">nth_le_range</span> <span class="o">{</span><span class="n">n</span><span class="o">}</span> <span class="o">(</span><span class="n">i</span><span class="o">)</span> <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="n">i</span> <span class="bp">&lt;</span> <span class="o">(</span><span class="n">range</span> <span class="n">n</span><span class="o">)</span><span class="bp">.</span><span class="n">length</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">nth_le</span> <span class="o">(</span><span class="n">range</span> <span class="n">n</span><span class="o">)</span> <span class="n">i</span> <span class="n">H</span> <span class="bp">=</span> <span class="n">i</span> <span class="o">:=</span>
+<span class="n">option</span><span class="bp">.</span><span class="n">some</span><span class="bp">.</span><span class="n">inj</span> <span class="err">$</span> <span class="k">by</span> <span class="n">rw</span> <span class="o">[</span><span class="err">←</span> <span class="n">nth_le_nth</span> <span class="bp">_</span><span class="o">,</span> <span class="n">nth_range</span> <span class="o">(</span><span class="k">by</span> <span class="n">simpa</span> <span class="kn">using</span> <span class="n">H</span><span class="o">)]</span>
 
-attribute [simp] length_of_fn
-attribute [simp] nth_le_of_fn
+<span class="n">attribute</span> <span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="n">length_of_fn</span>
+<span class="n">attribute</span> <span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="n">nth_le_of_fn</span>
 
--- Congratulations, I proved that two things which have
--- equally few lemmas are equal.
-theorem of_fn_eq_pmap {α n} {f : fin n → α} :
-  of_fn f = pmap (λ i hi, f ⟨i, hi⟩) (range n) (λ _, mem_range.1) :=
-by rw [pmap_eq_map_attach]; from ext_le (by simp)
-  (λ i hi1 hi2, by simp at hi1; simp [nth_le_of_fn f ⟨i, hi1⟩])
+<span class="c1">-- Congratulations, I proved that two things which have</span>
+<span class="c1">-- equally few lemmas are equal.</span>
+<span class="kn">theorem</span> <span class="n">of_fn_eq_pmap</span> <span class="o">{</span><span class="n">α</span> <span class="n">n</span><span class="o">}</span> <span class="o">{</span><span class="n">f</span> <span class="o">:</span> <span class="n">fin</span> <span class="n">n</span> <span class="bp">→</span> <span class="n">α</span><span class="o">}</span> <span class="o">:</span>
+  <span class="n">of_fn</span> <span class="n">f</span> <span class="bp">=</span> <span class="n">pmap</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">i</span> <span class="n">hi</span><span class="o">,</span> <span class="n">f</span> <span class="bp">⟨</span><span class="n">i</span><span class="o">,</span> <span class="n">hi</span><span class="bp">⟩</span><span class="o">)</span> <span class="o">(</span><span class="n">range</span> <span class="n">n</span><span class="o">)</span> <span class="o">(</span><span class="bp">λ</span> <span class="bp">_</span><span class="o">,</span> <span class="n">mem_range</span><span class="bp">.</span><span class="mi">1</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">rw</span> <span class="o">[</span><span class="n">pmap_eq_map_attach</span><span class="o">]</span><span class="bp">;</span> <span class="k">from</span> <span class="n">ext_le</span> <span class="o">(</span><span class="k">by</span> <span class="n">simp</span><span class="o">)</span>
+  <span class="o">(</span><span class="bp">λ</span> <span class="n">i</span> <span class="n">hi1</span> <span class="n">hi2</span><span class="o">,</span> <span class="k">by</span> <span class="n">simp</span> <span class="n">at</span> <span class="n">hi1</span><span class="bp">;</span> <span class="n">simp</span> <span class="o">[</span><span class="n">nth_le_of_fn</span> <span class="n">f</span> <span class="bp">⟨</span><span class="n">i</span><span class="o">,</span> <span class="n">hi1</span><span class="bp">⟩</span><span class="o">])</span>
 
-theorem nodup_of_fn {α n} {f : fin n → α} (hf : function.injective f) :
-  nodup (of_fn f) :=
-by rw of_fn_eq_pmap; from nodup_pmap
-  (λ _ _ _ _ H, fin.veq_of_eq $ hf H) (nodup_range n)
+<span class="kn">theorem</span> <span class="n">nodup_of_fn</span> <span class="o">{</span><span class="n">α</span> <span class="n">n</span><span class="o">}</span> <span class="o">{</span><span class="n">f</span> <span class="o">:</span> <span class="n">fin</span> <span class="n">n</span> <span class="bp">→</span> <span class="n">α</span><span class="o">}</span> <span class="o">(</span><span class="n">hf</span> <span class="o">:</span> <span class="n">function</span><span class="bp">.</span><span class="n">injective</span> <span class="n">f</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">nodup</span> <span class="o">(</span><span class="n">of_fn</span> <span class="n">f</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">rw</span> <span class="n">of_fn_eq_pmap</span><span class="bp">;</span> <span class="k">from</span> <span class="n">nodup_pmap</span>
+  <span class="o">(</span><span class="bp">λ</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="n">H</span><span class="o">,</span> <span class="n">fin</span><span class="bp">.</span><span class="n">veq_of_eq</span> <span class="err">$</span> <span class="n">hf</span> <span class="n">H</span><span class="o">)</span> <span class="o">(</span><span class="n">nodup_range</span> <span class="n">n</span><span class="o">)</span>
 
-end list
-
+<span class="kn">end</span> <span class="n">list</span>
 
 
-variable (n : ℕ)
 
-def Sym : Type :=
-equiv.perm (fin n)
+<span class="kn">variable</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span>
 
-instance : has_coe_to_fun (Sym n) :=
-equiv.has_coe_to_fun
+<span class="n">def</span> <span class="n">Sym</span> <span class="o">:</span> <span class="kt">Type</span> <span class="o">:=</span>
+<span class="n">equiv</span><span class="bp">.</span><span class="n">perm</span> <span class="o">(</span><span class="n">fin</span> <span class="n">n</span><span class="o">)</span>
 
-@[extensionality] theorem Sym.ext (σ τ : Sym n)
-  (H : ∀ i, σ i = τ i) : σ = τ :=
-equiv.ext _ _ H
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">has_coe_to_fun</span> <span class="o">(</span><span class="n">Sym</span> <span class="n">n</span><span class="o">)</span> <span class="o">:=</span>
+<span class="n">equiv</span><span class="bp">.</span><span class="n">has_coe_to_fun</span>
 
-instance : group (Sym n) :=
-equiv.perm_group
+<span class="bp">@</span><span class="o">[</span><span class="n">extensionality</span><span class="o">]</span> <span class="kn">theorem</span> <span class="n">Sym</span><span class="bp">.</span><span class="n">ext</span> <span class="o">(</span><span class="n">σ</span> <span class="n">τ</span> <span class="o">:</span> <span class="n">Sym</span> <span class="n">n</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">i</span><span class="o">,</span> <span class="n">σ</span> <span class="n">i</span> <span class="bp">=</span> <span class="n">τ</span> <span class="n">i</span><span class="o">)</span> <span class="o">:</span> <span class="n">σ</span> <span class="bp">=</span> <span class="n">τ</span> <span class="o">:=</span>
+<span class="n">equiv</span><span class="bp">.</span><span class="n">ext</span> <span class="bp">_</span> <span class="bp">_</span> <span class="n">H</span>
 
-section perm
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">group</span> <span class="o">(</span><span class="n">Sym</span> <span class="n">n</span><span class="o">)</span> <span class="o">:=</span>
+<span class="n">equiv</span><span class="bp">.</span><span class="n">perm_group</span>
 
-variable {n}
+<span class="kn">section</span> <span class="n">perm</span>
 
-def Sym.to_list (σ : Sym n) : list (fin n) :=
-list.of_fn σ
+<span class="kn">variable</span> <span class="o">{</span><span class="n">n</span><span class="o">}</span>
 
-theorem Sym.to_list_perm (σ : Sym n) :
-  σ.to_list ~ list.of_fn (1 : Sym n) :=
-(list.perm_ext
-  (list.nodup_of_fn $ σ.bijective.1)
-  (list.nodup_of_fn $ (1 : Sym n).bijective.1)).2 $ λ f,
-by rw [list.of_fn_eq_pmap, list.of_fn_eq_pmap, list.mem_pmap, list.mem_pmap]; from
-⟨λ _, ⟨f.1, by simp [f.2], fin.eq_of_veq rfl⟩,
-λ _, ⟨(σ⁻¹ f).1, by simp [(σ⁻¹ f).2], by convert equiv.apply_inverse_apply σ f;
-  from congr_arg _ (fin.eq_of_veq rfl)⟩⟩
+<span class="n">def</span> <span class="n">Sym</span><span class="bp">.</span><span class="n">to_list</span> <span class="o">(</span><span class="n">σ</span> <span class="o">:</span> <span class="n">Sym</span> <span class="n">n</span><span class="o">)</span> <span class="o">:</span> <span class="n">list</span> <span class="o">(</span><span class="n">fin</span> <span class="n">n</span><span class="o">)</span> <span class="o">:=</span>
+<span class="n">list</span><span class="bp">.</span><span class="n">of_fn</span> <span class="n">σ</span>
 
-def list.to_sym (L : list (fin n))
-  (HL : L ~ list.of_fn (1 : Sym n)) : Sym n :=
-{ to_fun := λ f, list.nth_le L f.1 $
-    by rw [list.perm_length HL, list.length_of_fn]; from f.2,
-  inv_fun := λ f, ⟨list.index_of f L,
-    begin
-      convert list.index_of_lt_length.2 _,
-      { rw [list.perm_length HL, list.length_of_fn] },
-      { rw [list.mem_of_perm HL, list.mem_iff_nth_le],
-        refine ⟨f.1, _, _⟩,
-        { rw list.length_of_fn,
-          exact f.2 },
-        { apply list.nth_le_of_fn } }
-    end⟩,
-  left_inv := λ f, fin.eq_of_veq $ list.nth_le_index_of
-    ((list.perm_nodup HL).2 $ list.nodup_of_fn $ λ _ _, id) _ _,
-  right_inv := λ f, list.index_of_nth_le $ list.index_of_lt_length.2 $
-    (list.mem_of_perm HL).2 $ list.mem_iff_nth_le.2 $
-    ⟨f.1, by rw list.length_of_fn; from f.2,
-      list.nth_le_of_fn _ _⟩ }
+<span class="kn">theorem</span> <span class="n">Sym</span><span class="bp">.</span><span class="n">to_list_perm</span> <span class="o">(</span><span class="n">σ</span> <span class="o">:</span> <span class="n">Sym</span> <span class="n">n</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">σ</span><span class="bp">.</span><span class="n">to_list</span> <span class="bp">~</span> <span class="n">list</span><span class="bp">.</span><span class="n">of_fn</span> <span class="o">(</span><span class="mi">1</span> <span class="o">:</span> <span class="n">Sym</span> <span class="n">n</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">list</span><span class="bp">.</span><span class="n">perm_ext</span>
+  <span class="o">(</span><span class="n">list</span><span class="bp">.</span><span class="n">nodup_of_fn</span> <span class="err">$</span> <span class="n">σ</span><span class="bp">.</span><span class="n">bijective</span><span class="bp">.</span><span class="mi">1</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">list</span><span class="bp">.</span><span class="n">nodup_of_fn</span> <span class="err">$</span> <span class="o">(</span><span class="mi">1</span> <span class="o">:</span> <span class="n">Sym</span> <span class="n">n</span><span class="o">)</span><span class="bp">.</span><span class="n">bijective</span><span class="bp">.</span><span class="mi">1</span><span class="o">))</span><span class="bp">.</span><span class="mi">2</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">f</span><span class="o">,</span>
+<span class="k">by</span> <span class="n">rw</span> <span class="o">[</span><span class="n">list</span><span class="bp">.</span><span class="n">of_fn_eq_pmap</span><span class="o">,</span> <span class="n">list</span><span class="bp">.</span><span class="n">of_fn_eq_pmap</span><span class="o">,</span> <span class="n">list</span><span class="bp">.</span><span class="n">mem_pmap</span><span class="o">,</span> <span class="n">list</span><span class="bp">.</span><span class="n">mem_pmap</span><span class="o">]</span><span class="bp">;</span> <span class="k">from</span>
+<span class="bp">⟨λ</span> <span class="bp">_</span><span class="o">,</span> <span class="bp">⟨</span><span class="n">f</span><span class="bp">.</span><span class="mi">1</span><span class="o">,</span> <span class="k">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">f</span><span class="bp">.</span><span class="mi">2</span><span class="o">],</span> <span class="n">fin</span><span class="bp">.</span><span class="n">eq_of_veq</span> <span class="n">rfl</span><span class="bp">⟩</span><span class="o">,</span>
+<span class="bp">λ</span> <span class="bp">_</span><span class="o">,</span> <span class="bp">⟨</span><span class="o">(</span><span class="n">σ</span><span class="bp">⁻¹</span> <span class="n">f</span><span class="o">)</span><span class="bp">.</span><span class="mi">1</span><span class="o">,</span> <span class="k">by</span> <span class="n">simp</span> <span class="o">[(</span><span class="n">σ</span><span class="bp">⁻¹</span> <span class="n">f</span><span class="o">)</span><span class="bp">.</span><span class="mi">2</span><span class="o">],</span> <span class="k">by</span> <span class="n">convert</span> <span class="n">equiv</span><span class="bp">.</span><span class="n">apply_inverse_apply</span> <span class="n">σ</span> <span class="n">f</span><span class="bp">;</span>
+  <span class="k">from</span> <span class="n">congr_arg</span> <span class="bp">_</span> <span class="o">(</span><span class="n">fin</span><span class="bp">.</span><span class="n">eq_of_veq</span> <span class="n">rfl</span><span class="o">)</span><span class="bp">⟩⟩</span>
 
-@[simp] lemma list.to_sym_apply (L : list (fin n))
-  (HL : L ~ list.of_fn (1 : Sym n)) (i) :
-  (L.to_sym HL) i = L.nth_le i.1 (by simp [list.perm_length HL, i.2]) :=
-rfl
+<span class="n">def</span> <span class="n">list</span><span class="bp">.</span><span class="n">to_sym</span> <span class="o">(</span><span class="n">L</span> <span class="o">:</span> <span class="n">list</span> <span class="o">(</span><span class="n">fin</span> <span class="n">n</span><span class="o">))</span>
+  <span class="o">(</span><span class="n">HL</span> <span class="o">:</span> <span class="n">L</span> <span class="bp">~</span> <span class="n">list</span><span class="bp">.</span><span class="n">of_fn</span> <span class="o">(</span><span class="mi">1</span> <span class="o">:</span> <span class="n">Sym</span> <span class="n">n</span><span class="o">))</span> <span class="o">:</span> <span class="n">Sym</span> <span class="n">n</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">to_fun</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">f</span><span class="o">,</span> <span class="n">list</span><span class="bp">.</span><span class="n">nth_le</span> <span class="n">L</span> <span class="n">f</span><span class="bp">.</span><span class="mi">1</span> <span class="err">$</span>
+    <span class="k">by</span> <span class="n">rw</span> <span class="o">[</span><span class="n">list</span><span class="bp">.</span><span class="n">perm_length</span> <span class="n">HL</span><span class="o">,</span> <span class="n">list</span><span class="bp">.</span><span class="n">length_of_fn</span><span class="o">]</span><span class="bp">;</span> <span class="k">from</span> <span class="n">f</span><span class="bp">.</span><span class="mi">2</span><span class="o">,</span>
+  <span class="n">inv_fun</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">f</span><span class="o">,</span> <span class="bp">⟨</span><span class="n">list</span><span class="bp">.</span><span class="n">index_of</span> <span class="n">f</span> <span class="n">L</span><span class="o">,</span>
+    <span class="k">begin</span>
+      <span class="n">convert</span> <span class="n">list</span><span class="bp">.</span><span class="n">index_of_lt_length</span><span class="bp">.</span><span class="mi">2</span> <span class="bp">_</span><span class="o">,</span>
+      <span class="o">{</span> <span class="n">rw</span> <span class="o">[</span><span class="n">list</span><span class="bp">.</span><span class="n">perm_length</span> <span class="n">HL</span><span class="o">,</span> <span class="n">list</span><span class="bp">.</span><span class="n">length_of_fn</span><span class="o">]</span> <span class="o">},</span>
+      <span class="o">{</span> <span class="n">rw</span> <span class="o">[</span><span class="n">list</span><span class="bp">.</span><span class="n">mem_of_perm</span> <span class="n">HL</span><span class="o">,</span> <span class="n">list</span><span class="bp">.</span><span class="n">mem_iff_nth_le</span><span class="o">],</span>
+        <span class="n">refine</span> <span class="bp">⟨</span><span class="n">f</span><span class="bp">.</span><span class="mi">1</span><span class="o">,</span> <span class="bp">_</span><span class="o">,</span> <span class="bp">_⟩</span><span class="o">,</span>
+        <span class="o">{</span> <span class="n">rw</span> <span class="n">list</span><span class="bp">.</span><span class="n">length_of_fn</span><span class="o">,</span>
+          <span class="n">exact</span> <span class="n">f</span><span class="bp">.</span><span class="mi">2</span> <span class="o">},</span>
+        <span class="o">{</span> <span class="n">apply</span> <span class="n">list</span><span class="bp">.</span><span class="n">nth_le_of_fn</span> <span class="o">}</span> <span class="o">}</span>
+    <span class="kn">end</span><span class="bp">⟩</span><span class="o">,</span>
+  <span class="n">left_inv</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">f</span><span class="o">,</span> <span class="n">fin</span><span class="bp">.</span><span class="n">eq_of_veq</span> <span class="err">$</span> <span class="n">list</span><span class="bp">.</span><span class="n">nth_le_index_of</span>
+    <span class="o">((</span><span class="n">list</span><span class="bp">.</span><span class="n">perm_nodup</span> <span class="n">HL</span><span class="o">)</span><span class="bp">.</span><span class="mi">2</span> <span class="err">$</span> <span class="n">list</span><span class="bp">.</span><span class="n">nodup_of_fn</span> <span class="err">$</span> <span class="bp">λ</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">,</span> <span class="n">id</span><span class="o">)</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">,</span>
+  <span class="n">right_inv</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">f</span><span class="o">,</span> <span class="n">list</span><span class="bp">.</span><span class="n">index_of_nth_le</span> <span class="err">$</span> <span class="n">list</span><span class="bp">.</span><span class="n">index_of_lt_length</span><span class="bp">.</span><span class="mi">2</span> <span class="err">$</span>
+    <span class="o">(</span><span class="n">list</span><span class="bp">.</span><span class="n">mem_of_perm</span> <span class="n">HL</span><span class="o">)</span><span class="bp">.</span><span class="mi">2</span> <span class="err">$</span> <span class="n">list</span><span class="bp">.</span><span class="n">mem_iff_nth_le</span><span class="bp">.</span><span class="mi">2</span> <span class="err">$</span>
+    <span class="bp">⟨</span><span class="n">f</span><span class="bp">.</span><span class="mi">1</span><span class="o">,</span> <span class="k">by</span> <span class="n">rw</span> <span class="n">list</span><span class="bp">.</span><span class="n">length_of_fn</span><span class="bp">;</span> <span class="k">from</span> <span class="n">f</span><span class="bp">.</span><span class="mi">2</span><span class="o">,</span>
+      <span class="n">list</span><span class="bp">.</span><span class="n">nth_le_of_fn</span> <span class="bp">_</span> <span class="bp">_⟩</span> <span class="o">}</span>
 
-@[simp] lemma Sym.to_list_to_sym (σ : Sym n) :
-  σ.to_list.to_sym σ.to_list_perm = σ :=
-Sym.ext _ _ _ $ λ i, fin.eq_of_veq $ by simp [Sym.to_list]
+<span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="kn">lemma</span> <span class="n">list</span><span class="bp">.</span><span class="n">to_sym_apply</span> <span class="o">(</span><span class="n">L</span> <span class="o">:</span> <span class="n">list</span> <span class="o">(</span><span class="n">fin</span> <span class="n">n</span><span class="o">))</span>
+  <span class="o">(</span><span class="n">HL</span> <span class="o">:</span> <span class="n">L</span> <span class="bp">~</span> <span class="n">list</span><span class="bp">.</span><span class="n">of_fn</span> <span class="o">(</span><span class="mi">1</span> <span class="o">:</span> <span class="n">Sym</span> <span class="n">n</span><span class="o">))</span> <span class="o">(</span><span class="n">i</span><span class="o">)</span> <span class="o">:</span>
+  <span class="o">(</span><span class="n">L</span><span class="bp">.</span><span class="n">to_sym</span> <span class="n">HL</span><span class="o">)</span> <span class="n">i</span> <span class="bp">=</span> <span class="n">L</span><span class="bp">.</span><span class="n">nth_le</span> <span class="n">i</span><span class="bp">.</span><span class="mi">1</span> <span class="o">(</span><span class="k">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">list</span><span class="bp">.</span><span class="n">perm_length</span> <span class="n">HL</span><span class="o">,</span> <span class="n">i</span><span class="bp">.</span><span class="mi">2</span><span class="o">])</span> <span class="o">:=</span>
+<span class="n">rfl</span>
 
-end perm
+<span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="kn">lemma</span> <span class="n">Sym</span><span class="bp">.</span><span class="n">to_list_to_sym</span> <span class="o">(</span><span class="n">σ</span> <span class="o">:</span> <span class="n">Sym</span> <span class="n">n</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">σ</span><span class="bp">.</span><span class="n">to_list</span><span class="bp">.</span><span class="n">to_sym</span> <span class="n">σ</span><span class="bp">.</span><span class="n">to_list_perm</span> <span class="bp">=</span> <span class="n">σ</span> <span class="o">:=</span>
+<span class="n">Sym</span><span class="bp">.</span><span class="n">ext</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">i</span><span class="o">,</span> <span class="n">fin</span><span class="bp">.</span><span class="n">eq_of_veq</span> <span class="err">$</span> <span class="k">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">Sym</span><span class="bp">.</span><span class="n">to_list</span><span class="o">]</span>
 
-instance : decidable_eq (Sym n) :=
-@function.injective.decidable_eq _ _ Sym.to_list _ $ λ σ τ h,
-Sym.ext n _ _ $ λ i,
-have H1 : σ.to_list.nth_le i.1 _ = _,
-  from list.nth_le_of_fn _ _,
-have H2 : τ.to_list.nth_le i.1 _ = _,
-  from list.nth_le_of_fn _ _,
-by rw [← H1, ← H2]; congr; exact h
+<span class="kn">end</span> <span class="n">perm</span>
 
-instance : fintype (Sym n) :=
-fintype.of_list (list.pmap
-  (λ L HL, list.to_sym L HL)
-  (list.permutations (list.of_fn (1 : Sym n)))
-  (λ _, (list.mem_permutations _ _).1)) $ λ σ,
-list.mem_pmap.2 ⟨σ.to_list,
-  (list.mem_permutations _ _).2 σ.to_list_perm,
-  by simp⟩
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">decidable_eq</span> <span class="o">(</span><span class="n">Sym</span> <span class="n">n</span><span class="o">)</span> <span class="o">:=</span>
+<span class="bp">@</span><span class="n">function</span><span class="bp">.</span><span class="n">injective</span><span class="bp">.</span><span class="n">decidable_eq</span> <span class="bp">_</span> <span class="bp">_</span> <span class="n">Sym</span><span class="bp">.</span><span class="n">to_list</span> <span class="bp">_</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">σ</span> <span class="n">τ</span> <span class="n">h</span><span class="o">,</span>
+<span class="n">Sym</span><span class="bp">.</span><span class="n">ext</span> <span class="n">n</span> <span class="bp">_</span> <span class="bp">_</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">i</span><span class="o">,</span>
+<span class="k">have</span> <span class="n">H1</span> <span class="o">:</span> <span class="n">σ</span><span class="bp">.</span><span class="n">to_list</span><span class="bp">.</span><span class="n">nth_le</span> <span class="n">i</span><span class="bp">.</span><span class="mi">1</span> <span class="bp">_</span> <span class="bp">=</span> <span class="bp">_</span><span class="o">,</span>
+  <span class="k">from</span> <span class="n">list</span><span class="bp">.</span><span class="n">nth_le_of_fn</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">,</span>
+<span class="k">have</span> <span class="n">H2</span> <span class="o">:</span> <span class="n">τ</span><span class="bp">.</span><span class="n">to_list</span><span class="bp">.</span><span class="n">nth_le</span> <span class="n">i</span><span class="bp">.</span><span class="mi">1</span> <span class="bp">_</span> <span class="bp">=</span> <span class="bp">_</span><span class="o">,</span>
+  <span class="k">from</span> <span class="n">list</span><span class="bp">.</span><span class="n">nth_le_of_fn</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">,</span>
+<span class="k">by</span> <span class="n">rw</span> <span class="o">[</span><span class="err">←</span> <span class="n">H1</span><span class="o">,</span> <span class="err">←</span> <span class="n">H2</span><span class="o">]</span><span class="bp">;</span> <span class="n">congr</span><span class="bp">;</span> <span class="n">exact</span> <span class="n">h</span>
 
-/-
-theorem Sym.card : fintype.card (Sym n) = nat.fact n :=
-calc  fintype.card (Sym n)
-    = _ : _
-... = (list.of_fn ((1 : Sym n) : fin n → fin n)).permutations.length : list.to_finset_card_of_nodup sorry
-... = nat.fact (list.of_fn ((1 : Sym n) : fin n → fin n)).length : list.length_permutations _
-... = nat.fact n : by simp
--/
-```
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">fintype</span> <span class="o">(</span><span class="n">Sym</span> <span class="n">n</span><span class="o">)</span> <span class="o">:=</span>
+<span class="n">fintype</span><span class="bp">.</span><span class="n">of_list</span> <span class="o">(</span><span class="n">list</span><span class="bp">.</span><span class="n">pmap</span>
+  <span class="o">(</span><span class="bp">λ</span> <span class="n">L</span> <span class="n">HL</span><span class="o">,</span> <span class="n">list</span><span class="bp">.</span><span class="n">to_sym</span> <span class="n">L</span> <span class="n">HL</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">list</span><span class="bp">.</span><span class="n">permutations</span> <span class="o">(</span><span class="n">list</span><span class="bp">.</span><span class="n">of_fn</span> <span class="o">(</span><span class="mi">1</span> <span class="o">:</span> <span class="n">Sym</span> <span class="n">n</span><span class="o">)))</span>
+  <span class="o">(</span><span class="bp">λ</span> <span class="bp">_</span><span class="o">,</span> <span class="o">(</span><span class="n">list</span><span class="bp">.</span><span class="n">mem_permutations</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">)</span><span class="bp">.</span><span class="mi">1</span><span class="o">))</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">σ</span><span class="o">,</span>
+<span class="n">list</span><span class="bp">.</span><span class="n">mem_pmap</span><span class="bp">.</span><span class="mi">2</span> <span class="bp">⟨</span><span class="n">σ</span><span class="bp">.</span><span class="n">to_list</span><span class="o">,</span>
+  <span class="o">(</span><span class="n">list</span><span class="bp">.</span><span class="n">mem_permutations</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">)</span><span class="bp">.</span><span class="mi">2</span> <span class="n">σ</span><span class="bp">.</span><span class="n">to_list_perm</span><span class="o">,</span>
+  <span class="k">by</span> <span class="n">simp</span><span class="bp">⟩</span>
+
+<span class="c">/-</span><span class="cm"></span>
+<span class="cm">theorem Sym.card : fintype.card (Sym n) = nat.fact n :=</span>
+<span class="cm">calc  fintype.card (Sym n)</span>
+<span class="cm">    = _ : _</span>
+<span class="cm">... = (list.of_fn ((1 : Sym n) : fin n → fin n)).permutations.length : list.to_finset_card_of_nodup sorry</span>
+<span class="cm">... = nat.fact (list.of_fn ((1 : Sym n) : fin n → fin n)).length : list.length_permutations _</span>
+<span class="cm">... = nat.fact n : by simp</span>
+<span class="cm">-/</span>
+</pre></div>
 
 #### [ Kenny Lau (Jul 27 2018 at 12:04)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130400457):
-@**Mario Carneiro** I think this all can go to mathlib
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> I think this all can go to mathlib</p>
 
 #### [ Kenny Lau (Jul 27 2018 at 12:17)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130401051):
-```lean
-theorem Cayley (α : Type*) [group α] [fintype α] :
-  ∃ f : α → Sym (fintype.card α), function.injective f ∧ is_group_hom f :=
-nonempty.rec_on (fintype.card_eq.1 $ fintype.card_fin $ fintype.card α) $ λ φ,
-⟨λ x, ⟨λ i, φ.symm (x * φ i), λ i, φ.symm (x⁻¹ * φ i),
-  λ i, by simp, λ i, by simp⟩,
-λ x y H, have H1 : _ := congr_fun (equiv.mk.inj H).1 (φ.symm 1), by simpa using H1,
-⟨λ x y, Sym.ext _ _ _ $ λ i, by simp [mul_assoc]⟩⟩
-```
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">Cayley</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">[</span><span class="n">group</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">fintype</span> <span class="n">α</span><span class="o">]</span> <span class="o">:</span>
+  <span class="bp">∃</span> <span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">Sym</span> <span class="o">(</span><span class="n">fintype</span><span class="bp">.</span><span class="n">card</span> <span class="n">α</span><span class="o">),</span> <span class="n">function</span><span class="bp">.</span><span class="n">injective</span> <span class="n">f</span> <span class="bp">∧</span> <span class="n">is_group_hom</span> <span class="n">f</span> <span class="o">:=</span>
+<span class="n">nonempty</span><span class="bp">.</span><span class="n">rec_on</span> <span class="o">(</span><span class="n">fintype</span><span class="bp">.</span><span class="n">card_eq</span><span class="bp">.</span><span class="mi">1</span> <span class="err">$</span> <span class="n">fintype</span><span class="bp">.</span><span class="n">card_fin</span> <span class="err">$</span> <span class="n">fintype</span><span class="bp">.</span><span class="n">card</span> <span class="n">α</span><span class="o">)</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">φ</span><span class="o">,</span>
+<span class="bp">⟨λ</span> <span class="n">x</span><span class="o">,</span> <span class="bp">⟨λ</span> <span class="n">i</span><span class="o">,</span> <span class="n">φ</span><span class="bp">.</span><span class="n">symm</span> <span class="o">(</span><span class="n">x</span> <span class="bp">*</span> <span class="n">φ</span> <span class="n">i</span><span class="o">),</span> <span class="bp">λ</span> <span class="n">i</span><span class="o">,</span> <span class="n">φ</span><span class="bp">.</span><span class="n">symm</span> <span class="o">(</span><span class="n">x</span><span class="bp">⁻¹</span> <span class="bp">*</span> <span class="n">φ</span> <span class="n">i</span><span class="o">),</span>
+  <span class="bp">λ</span> <span class="n">i</span><span class="o">,</span> <span class="k">by</span> <span class="n">simp</span><span class="o">,</span> <span class="bp">λ</span> <span class="n">i</span><span class="o">,</span> <span class="k">by</span> <span class="n">simp</span><span class="bp">⟩</span><span class="o">,</span>
+<span class="bp">λ</span> <span class="n">x</span> <span class="n">y</span> <span class="n">H</span><span class="o">,</span> <span class="k">have</span> <span class="n">H1</span> <span class="o">:</span> <span class="bp">_</span> <span class="o">:=</span> <span class="n">congr_fun</span> <span class="o">(</span><span class="n">equiv</span><span class="bp">.</span><span class="n">mk</span><span class="bp">.</span><span class="n">inj</span> <span class="n">H</span><span class="o">)</span><span class="bp">.</span><span class="mi">1</span> <span class="o">(</span><span class="n">φ</span><span class="bp">.</span><span class="n">symm</span> <span class="mi">1</span><span class="o">),</span> <span class="k">by</span> <span class="n">simpa</span> <span class="kn">using</span> <span class="n">H1</span><span class="o">,</span>
+<span class="bp">⟨λ</span> <span class="n">x</span> <span class="n">y</span><span class="o">,</span> <span class="n">Sym</span><span class="bp">.</span><span class="n">ext</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">i</span><span class="o">,</span> <span class="k">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">mul_assoc</span><span class="o">]</span><span class="bp">⟩⟩</span>
+</pre></div>
 
 #### [ Kenny Lau (Jul 27 2018 at 12:17)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130401056):
-Cayley's theorem :P
+<p>Cayley's theorem :P</p>
 
 #### [ Kenny Lau (Jul 27 2018 at 12:19)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130401160):
-TODO: prove that your list of permutations has no duplicates
+<p>TODO: prove that your list of permutations has no duplicates</p>
 
 #### [ Kevin Buzzard (Jul 27 2018 at 12:26)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130401457):
-I think @**Chris Hughes** and @**Morenikeji Neri** were thinking about this sort of thing last week (they were interested in proving that the size of S_n was n!). Chris also defined the signature of a permutation --  it was interesting to think of a workable definition. Eventually we settled on $$sgn(\sigma)=(-1)^{N(\sigma)}$$ where $$N(\sigma)$$ is the number of pairs $$(i,j)$$ with $$i<j$$ and $$\sigma(i)>\sigma(j)$$.
+<p>I think <span class="user-mention" data-user-id="110044">@Chris Hughes</span> and <span class="user-mention" data-user-id="120276">@Morenikeji Neri</span> were thinking about this sort of thing last week (they were interested in proving that the size of S_n was n!). Chris also defined the signature of a permutation --  it was interesting to think of a workable definition. Eventually we settled on <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>s</mi><mi>g</mi><mi>n</mi><mo>(</mo><mi>σ</mi><mo>)</mo><mo>=</mo><mo>(</mo><mo>−</mo><mn>1</mn><msup><mo>)</mo><mrow><mi>N</mi><mo>(</mo><mi>σ</mi><mo>)</mo></mrow></msup></mrow><annotation encoding="application/x-tex">sgn(\sigma)=(-1)^{N(\sigma)}</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.8879999999999999em;"></span><span class="strut bottom" style="height:1.138em;vertical-align:-0.25em;"></span><span class="base"><span class="mord mathit">s</span><span class="mord mathit" style="margin-right:0.03588em;">g</span><span class="mord mathit">n</span><span class="mopen">(</span><span class="mord mathit" style="margin-right:0.03588em;">σ</span><span class="mclose">)</span><span class="mrel">=</span><span class="mopen">(</span><span class="mord">−</span><span class="mord mathrm">1</span><span class="mclose"><span class="mclose">)</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8879999999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathit mtight" style="margin-right:0.10903em;">N</span><span class="mopen mtight">(</span><span class="mord mathit mtight" style="margin-right:0.03588em;">σ</span><span class="mclose mtight">)</span></span></span></span></span></span></span></span></span></span></span></span> where <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>N</mi><mo>(</mo><mi>σ</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">N(\sigma)</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.75em;"></span><span class="strut bottom" style="height:1em;vertical-align:-0.25em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.10903em;">N</span><span class="mopen">(</span><span class="mord mathit" style="margin-right:0.03588em;">σ</span><span class="mclose">)</span></span></span></span> is the number of pairs <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>(</mo><mi>i</mi><mo separator="true">,</mo><mi>j</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">(i,j)</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.75em;"></span><span class="strut bottom" style="height:1em;vertical-align:-0.25em;"></span><span class="base"><span class="mopen">(</span><span class="mord mathit">i</span><span class="mpunct">,</span><span class="mord mathit" style="margin-right:0.05724em;">j</span><span class="mclose">)</span></span></span></span> with <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>i</mi><mo>&lt;</mo><mi>j</mi></mrow><annotation encoding="application/x-tex">i&lt;j</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.65952em;"></span><span class="strut bottom" style="height:0.85396em;vertical-align:-0.19444em;"></span><span class="base"><span class="mord mathit">i</span><span class="mrel">&lt;</span><span class="mord mathit" style="margin-right:0.05724em;">j</span></span></span></span> and <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>σ</mi><mo>(</mo><mi>i</mi><mo>)</mo><mo>&gt;</mo><mi>σ</mi><mo>(</mo><mi>j</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">\sigma(i)&gt;\sigma(j)</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.75em;"></span><span class="strut bottom" style="height:1em;vertical-align:-0.25em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.03588em;">σ</span><span class="mopen">(</span><span class="mord mathit">i</span><span class="mclose">)</span><span class="mrel">&gt;</span><span class="mord mathit" style="margin-right:0.03588em;">σ</span><span class="mopen">(</span><span class="mord mathit" style="margin-right:0.05724em;">j</span><span class="mclose">)</span></span></span></span>.</p>
 
 #### [ Kenny Lau (Jul 27 2018 at 12:26)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130401462):
-did they prove that it is a homomorphism?
+<p>did they prove that it is a homomorphism?</p>
 
 #### [ Johan Commelin (Jul 27 2018 at 12:27)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130401479):
-```quote
-@**Johan Commelin** The problem with fin n (the subtype of N) is that addition and subtraction are defined in core Lean in...umm...not really the way that a mathematician would expect. Chris Hughes did a bunch of stuff mod n yes, but not with fin n.
-```
-Right, but no-one said that C_n needed to have `fin n` as carrier type. I don't know what Chris used as carrier type, but I suppose one could use that. Or, like you suggest, just define C_n to be `fin n`, use that the definition is not reducible, and put new algebraic structures on it that behave properly.
+<blockquote>
+<p><span class="user-mention" data-user-id="112680">@Johan Commelin</span> The problem with fin n (the subtype of N) is that addition and subtraction are defined in core Lean in...umm...not really the way that a mathematician would expect. Chris Hughes did a bunch of stuff mod n yes, but not with fin n.</p>
+</blockquote>
+<p>Right, but no-one said that C_n needed to have <code>fin n</code> as carrier type. I don't know what Chris used as carrier type, but I suppose one could use that. Or, like you suggest, just define C_n to be <code>fin n</code>, use that the definition is not reducible, and put new algebraic structures on it that behave properly.</p>
 
 #### [ Kevin Buzzard (Jul 27 2018 at 12:30)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130401652):
-```quote
-did they prove that it is a homomorphism?
-```
-You need both that, and the fact that the signature of a transposition is -1. Neither are too hard ("in maths") and I would imagine that Chris could manage them in Lean, but I don't know if he did it.
+<blockquote>
+<p>did they prove that it is a homomorphism?</p>
+</blockquote>
+<p>You need both that, and the fact that the signature of a transposition is -1. Neither are too hard ("in maths") and I would imagine that Chris could manage them in Lean, but I don't know if he did it.</p>
 
 #### [ Chris Hughes (Jul 27 2018 at 12:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130402534):
-I
-```quote
-```quote
-did they prove that it is a homomorphism?
-```
-You need both that, and the fact that the signature of a transposition is -1. Neither are too hard ("in maths") and I would imagine that Chris could manage them in Lean, but I don't know if he did it.
-```
-I'm working on it now. After that I plan to find the product of disjoint cycles representation computably.
+<p>I</p>
+<blockquote>
+<blockquote>
+<p>did they prove that it is a homomorphism?</p>
+</blockquote>
+<p>You need both that, and the fact that the signature of a transposition is -1. Neither are too hard ("in maths") and I would imagine that Chris could manage them in Lean, but I don't know if he did it.</p>
+</blockquote>
+<p>I'm working on it now. After that I plan to find the product of disjoint cycles representation computably.</p>
 
 #### [ Kevin Buzzard (Jul 27 2018 at 12:56)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130402699):
-I know that this disjoint cycles result is presented to the first years as one of the highlights of the group theory course, but is it actually useful? I think the only reason they do this is that they have to do something group-ish and for some unknown reason they do not define homomorphisms of groups until the 2nd year at Imperial! All this will change with the new syllabus. This disjoint cycle stuff feels to me to be very much a product of a bygone era, when the classification was an active area of research (I suspect the course was written by one of the old school finite group theorists that used to work here).
+<p>I know that this disjoint cycles result is presented to the first years as one of the highlights of the group theory course, but is it actually useful? I think the only reason they do this is that they have to do something group-ish and for some unknown reason they do not define homomorphisms of groups until the 2nd year at Imperial! All this will change with the new syllabus. This disjoint cycle stuff feels to me to be very much a product of a bygone era, when the classification was an active area of research (I suspect the course was written by one of the old school finite group theorists that used to work here).</p>
 
 #### [ Kevin Buzzard (Jul 27 2018 at 12:56)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130402702):
-OTOH maybe the philosophy is "do everything"
+<p>OTOH maybe the philosophy is "do everything"</p>
 
 #### [ Chris Hughes (Jul 27 2018 at 17:06)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130415994):
-Maybe I won't do that then. I thought it would be cool to do a `has_repr`, for `perm` with disjoint cycle notation. I've proved sign is a hom, but not surjectivity yet.
+<p>Maybe I won't do that then. I thought it would be cool to do a <code>has_repr</code>, for <code>perm</code> with disjoint cycle notation. I've proved sign is a hom, but not surjectivity yet.</p>
 
 #### [ Kevin Buzzard (Jul 27 2018 at 17:54)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130419142):
-```quote
- I thought it would be cool to do a `has_repr`, for `perm` with disjoint cycle notation.
-```
-That is a good point! The other possibility for `has_repr` is just listing `(sigma(1),sigma(2),...,sigma(n))`but that is (a) unnecessarily big and (b) hard to interpret, so I'm not sure it's of much use. Go with disjoint cycles if you can face it -- making stuff look nice is important!
+<blockquote>
+<p>I thought it would be cool to do a <code>has_repr</code>, for <code>perm</code> with disjoint cycle notation.</p>
+</blockquote>
+<p>That is a good point! The other possibility for <code>has_repr</code> is just listing <code>(sigma(1),sigma(2),...,sigma(n))</code>but that is (a) unnecessarily big and (b) hard to interpret, so I'm not sure it's of much use. Go with disjoint cycles if you can face it -- making stuff look nice is important!</p>
 
 #### [ Kenny Lau (Jul 28 2018 at 13:13)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130462095):
-https://github.com/kckennylau/Lean/blob/master/Sym.lean
+<p><a href="https://github.com/kckennylau/Lean/blob/master/Sym.lean" target="_blank" title="https://github.com/kckennylau/Lean/blob/master/Sym.lean">https://github.com/kckennylau/Lean/blob/master/Sym.lean</a></p>
 
 #### [ Kenny Lau (Jul 28 2018 at 13:13)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130462099):
-```lean
-def Sym.equiv : Sym n ≃ fin n.fact :=
-nat.rec_on n Sym.equiv_0 $ λ n ih,
-calc  Sym (n+1)
-    ≃ (fin (n+1) × fin n.fact) : Sym.equiv_succ ih
-... ≃ fin (n+1).fact : fin_prod
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">Sym</span><span class="bp">.</span><span class="n">equiv</span> <span class="o">:</span> <span class="n">Sym</span> <span class="n">n</span> <span class="err">≃</span> <span class="n">fin</span> <span class="n">n</span><span class="bp">.</span><span class="n">fact</span> <span class="o">:=</span>
+<span class="n">nat</span><span class="bp">.</span><span class="n">rec_on</span> <span class="n">n</span> <span class="n">Sym</span><span class="bp">.</span><span class="n">equiv_0</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">n</span> <span class="n">ih</span><span class="o">,</span>
+<span class="k">calc</span>  <span class="n">Sym</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span>
+    <span class="err">≃</span> <span class="o">(</span><span class="n">fin</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="bp">×</span> <span class="n">fin</span> <span class="n">n</span><span class="bp">.</span><span class="n">fact</span><span class="o">)</span> <span class="o">:</span> <span class="n">Sym</span><span class="bp">.</span><span class="n">equiv_succ</span> <span class="n">ih</span>
+<span class="bp">...</span> <span class="err">≃</span> <span class="n">fin</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span><span class="bp">.</span><span class="n">fact</span> <span class="o">:</span> <span class="n">fin_prod</span>
 
-instance : decidable_eq (Sym n) :=
-equiv.decidable_eq_of_equiv Sym.equiv
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">decidable_eq</span> <span class="o">(</span><span class="n">Sym</span> <span class="n">n</span><span class="o">)</span> <span class="o">:=</span>
+<span class="n">equiv</span><span class="bp">.</span><span class="n">decidable_eq_of_equiv</span> <span class="n">Sym</span><span class="bp">.</span><span class="n">equiv</span>
 
-instance : fintype (Sym n) :=
-fintype.of_equiv _ Sym.equiv.symm
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">fintype</span> <span class="o">(</span><span class="n">Sym</span> <span class="n">n</span><span class="o">)</span> <span class="o">:=</span>
+<span class="n">fintype</span><span class="bp">.</span><span class="n">of_equiv</span> <span class="bp">_</span> <span class="n">Sym</span><span class="bp">.</span><span class="n">equiv</span><span class="bp">.</span><span class="n">symm</span>
 
-theorem Sym.card : fintype.card (Sym n) = nat.fact n :=
-(fintype.of_equiv_card Sym.equiv.symm).trans $
-fintype.card_fin _
-```
+<span class="kn">theorem</span> <span class="n">Sym</span><span class="bp">.</span><span class="n">card</span> <span class="o">:</span> <span class="n">fintype</span><span class="bp">.</span><span class="n">card</span> <span class="o">(</span><span class="n">Sym</span> <span class="n">n</span><span class="o">)</span> <span class="bp">=</span> <span class="n">nat</span><span class="bp">.</span><span class="n">fact</span> <span class="n">n</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">fintype</span><span class="bp">.</span><span class="n">of_equiv_card</span> <span class="n">Sym</span><span class="bp">.</span><span class="n">equiv</span><span class="bp">.</span><span class="n">symm</span><span class="o">)</span><span class="bp">.</span><span class="n">trans</span> <span class="err">$</span>
+<span class="n">fintype</span><span class="bp">.</span><span class="n">card_fin</span> <span class="bp">_</span>
+</pre></div>
 
 #### [ Kenny Lau (Jul 28 2018 at 13:28)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130462918):
-@**Mario Carneiro** into which files should the content of my file go?
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> into which files should the content of my file go?</p>
 
 #### [ Kevin Buzzard (Jul 28 2018 at 13:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130463370):
-Mathematicians do a huge amount of work under various finiteness hypotheses. It's very easy to write down the definition of a vector space in Lean, but nobody ever proves theorems about vector spaces other than the most trivial things. The vector spaces that people care about have extra structure on, for example they're finite-dimensional, or they're separable Hilbert spares or whatever -- some extra finiteness assumptions. As a simple example, my students seem to need "order of the element divides the order of the group" a lot at the minute, and this is a theorem about finite groups. As a more complex example, a commutative ring is *Noetherian* if all its ideals are finitely-generated. I have a several-hundred-page-long book about etale cohomology which on page 1, when explaining assumptions and notation, says "all rings are assumed Noetherian". [and they're also all commutative]. 
-
-This makes me wonder whether "finite group" should be promoted in the heierarchy, to be a class of its own, extending `group`, and that theorems about finite groups like "order of the element divides order of the group" and "Sym n is a finite group" could go in there.
+<p>Mathematicians do a huge amount of work under various finiteness hypotheses. It's very easy to write down the definition of a vector space in Lean, but nobody ever proves theorems about vector spaces other than the most trivial things. The vector spaces that people care about have extra structure on, for example they're finite-dimensional, or they're separable Hilbert spares or whatever -- some extra finiteness assumptions. As a simple example, my students seem to need "order of the element divides the order of the group" a lot at the minute, and this is a theorem about finite groups. As a more complex example, a commutative ring is <em>Noetherian</em> if all its ideals are finitely-generated. I have a several-hundred-page-long book about etale cohomology which on page 1, when explaining assumptions and notation, says "all rings are assumed Noetherian". [and they're also all commutative]. </p>
+<p>This makes me wonder whether "finite group" should be promoted in the heierarchy, to be a class of its own, extending <code>group</code>, and that theorems about finite groups like "order of the element divides order of the group" and "Sym n is a finite group" could go in there.</p>
 
 #### [ Chris Hughes (Jul 28 2018 at 13:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130464126):
-What's the advantage of `[finite_group G]` over `[fintype G]` and `[group G]`? Bundling classes only really makes sense when there are fields that depend on both  structures, like `left_distrib` depending on both `monoid` and `add_monoid`
+<p>What's the advantage of <code>[finite_group G]</code> over <code>[fintype G]</code> and <code>[group G]</code>? Bundling classes only really makes sense when there are fields that depend on both  structures, like <code>left_distrib</code> depending on both <code>monoid</code> and <code>add_monoid</code></p>
 
 #### [ Kevin Buzzard (Jul 28 2018 at 14:02)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130464301):
-Well I guess that's what I wanted to discuss. Could one not also ask what the advantage of `[group G]` was over `[monoid G]` and `[has_inv G]` and `[has_mul_left_inv G]` or some such question?
+<p>Well I guess that's what I wanted to discuss. Could one not also ask what the advantage of <code>[group G]</code> was over <code>[monoid G]</code> and <code>[has_inv G]</code> and <code>[has_mul_left_inv G]</code> or some such question?</p>
 
 #### [ Kevin Buzzard (Jul 28 2018 at 14:04)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130464392):
-We decide that `group` is important somehow, important enough to have its own typeclass. I am suggesting that finite-dimensional vector spaces, finite groups and Noetherian rings are also important enough to have their own typeclasses because these are the things that people study in practice. A group is a basic foundational concept in mathematics but there are only a few theorems that you can prove about all groups without any hypotheses because a general group is extremely general.
+<p>We decide that <code>group</code> is important somehow, important enough to have its own typeclass. I am suggesting that finite-dimensional vector spaces, finite groups and Noetherian rings are also important enough to have their own typeclasses because these are the things that people study in practice. A group is a basic foundational concept in mathematics but there are only a few theorems that you can prove about all groups without any hypotheses because a general group is extremely general.</p>
 
 #### [ Kevin Buzzard (Jul 28 2018 at 14:07)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130464489):
-I see. You are arguing that `finite_group G` should be interpreted as "group for which the underlying type is finite" because in some sense these are completely unrelated concepts. But a *theorem* like "order of the element divides the order of the group" depends on both structures. This is not a field though, it's a theorem. So is that the design principle? If you have 100 theorems about finite groups then that's not enough -- the user is expected to say "a group, for which the underlying set is finite" 100 times?
-
-And of course there are 100 theorems about finite groups -- Sylow's theorems are just the tip of the iceberg Chris :-) The 3rd year group theory course (at least the one I took as an UG) was just 24 lectures of definitions and theorems about finite groups. Maybe that's changed now the landscape has changed, I'm not sure, but all our definitions of solvable, nilpotent etc were almost immediately implied to the finite group case, and only applied to that case.
+<p>I see. You are arguing that <code>finite_group G</code> should be interpreted as "group for which the underlying type is finite" because in some sense these are completely unrelated concepts. But a <em>theorem</em> like "order of the element divides the order of the group" depends on both structures. This is not a field though, it's a theorem. So is that the design principle? If you have 100 theorems about finite groups then that's not enough -- the user is expected to say "a group, for which the underlying set is finite" 100 times?</p>
+<p>And of course there are 100 theorems about finite groups -- Sylow's theorems are just the tip of the iceberg Chris :-) The 3rd year group theory course (at least the one I took as an UG) was just 24 lectures of definitions and theorems about finite groups. Maybe that's changed now the landscape has changed, I'm not sure, but all our definitions of solvable, nilpotent etc were almost immediately implied to the finite group case, and only applied to that case.</p>
 
 #### [ Mario Carneiro (Jul 28 2018 at 14:25)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130465381):
-maybe `group_theory`? It's pretty basic, but I'm not sure about the restriction to `fin n` entailed here. Anything that doesn't mention `Sym` can go in its respective files
+<p>maybe <code>group_theory</code>? It's pretty basic, but I'm not sure about the restriction to <code>fin n</code> entailed here. Anything that doesn't mention <code>Sym</code> can go in its respective files</p>
 
 #### [ Kenny Lau (Jul 28 2018 at 16:48)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130470650):
-Let's say we want to define the signature/parity of the permutation. In which type should the signature/parity live?
+<p>Let's say we want to define the signature/parity of the permutation. In which type should the signature/parity live?</p>
 
 #### [ Kevin Buzzard (Jul 28 2018 at 16:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130470896):
-That's an interesting question. I am not sure anyone ever adds signatures together. I would argue that mathematically it lives in an abstract group with two elements called +1 and -1. However the CS people might want to choose a concrete implementation of this group rather than building it from scratch I guess.
+<p>That's an interesting question. I am not sure anyone ever adds signatures together. I would argue that mathematically it lives in an abstract group with two elements called +1 and -1. However the CS people might want to choose a concrete implementation of this group rather than building it from scratch I guess.</p>
 
 #### [ Kevin Buzzard (Jul 28 2018 at 16:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130470938):
-I will remark that the people defining quadratic residues / non-residues in my summer project just defined the values of the Legendre symbol to be integers.
+<p>I will remark that the people defining quadratic residues / non-residues in my summer project just defined the values of the Legendre symbol to be integers.</p>
 
 #### [ Chris Hughes (Jul 28 2018 at 17:05)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130471146):
-I defined it to be an integer mod 2.
+<p>I defined it to be an integer mod 2.</p>
 
 #### [ Chris Hughes (Jul 28 2018 at 17:07)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130471196):
-I imagine you probably want a group structure on the image, so you can prove it's a group_hom, and it's kernel is a subgroup etc.
+<p>I imagine you probably want a group structure on the image, so you can prove it's a group_hom, and it's kernel is a subgroup etc.</p>
 
 #### [ Kenny Lau (Jul 28 2018 at 17:07)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130471198):
-right
+<p>right</p>
 
 #### [ Chris Hughes (Jul 28 2018 at 17:09)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130471244):
-Unfortunately, the add groups not being groups issue comes into play here.
+<p>Unfortunately, the add groups not being groups issue comes into play here.</p>
 
 #### [ Chris Hughes (Jul 28 2018 at 17:10)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130471291):
-And it would be nice if all tactics like `finish` also worked on anything isomorphic to `Prop`
+<p>And it would be nice if all tactics like <code>finish</code> also worked on anything isomorphic to <code>Prop</code></p>
 
 #### [ Kenny Lau (Jul 28 2018 at 17:12)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130471364):
-then which group should i define it on?
+<p>then which group should i define it on?</p>
 
 #### [ Kevin Buzzard (Jul 28 2018 at 17:16)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130471481):
-the subtype of Z consisting of things which square to 1?
+<p>the subtype of Z consisting of things which square to 1?</p>
 
 #### [ Kenny Lau (Jul 28 2018 at 17:16)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130471483):
-is that the best group?
+<p>is that the best group?</p>
 
 #### [ Kevin Buzzard (Jul 28 2018 at 17:16)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130471484):
-What about an abstract group of order 2 equipped with a coercion to Z?
+<p>What about an abstract group of order 2 equipped with a coercion to Z?</p>
 
 #### [ Kenny Lau (Jul 28 2018 at 17:16)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130471485):
-or maybe I should just create an inductive type
+<p>or maybe I should just create an inductive type</p>
 
 #### [ Kevin Buzzard (Jul 28 2018 at 17:17)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130471486):
-right
+<p>right</p>
 
 #### [ Kevin Buzzard (Jul 28 2018 at 17:17)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130471496):
-Maybe forget about the coercion to Z and see how long it takes people to complain.
+<p>Maybe forget about the coercion to Z and see how long it takes people to complain.</p>
 
 #### [ Kenny Lau (Jul 28 2018 at 17:17)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130471500):
-why do we need coercion to Z?
+<p>why do we need coercion to Z?</p>
 
 #### [ Chris Hughes (Jul 28 2018 at 17:18)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130471545):
-It seems like the best thing is to choose a canonical group of order 2, and always use that for anything that requires a group of order 2. That group should be called either C2, or integers mod 2,
+<p>It seems like the best thing is to choose a canonical group of order 2, and always use that for anything that requires a group of order 2. That group should be called either C2, or integers mod 2,</p>
 
 #### [ Kenny Lau (Jul 28 2018 at 17:18)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130471548):
-but we would also need Cn
+<p>but we would also need Cn</p>
 
 #### [ Chris Hughes (Jul 28 2018 at 17:18)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130471551):
-Exactly.
+<p>Exactly.</p>
 
 #### [ Kenny Lau (Jul 28 2018 at 17:19)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130471596):
-and how would we build that?
+<p>and how would we build that?</p>
 
 #### [ Chris Hughes (Jul 28 2018 at 17:19)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130471760):
-But there's no point having C2 and some other group of order 2 with a different name
+<p>But there's no point having C2 and some other group of order 2 with a different name</p>
 
 #### [ Kevin Buzzard (Jul 28 2018 at 17:20)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130472238):
-```lean
-inductive mu2
-| plus_one : mu2
-| minus_one : mu2
+<div class="codehilite"><pre><span></span><span class="kn">inductive</span> <span class="n">mu2</span>
+<span class="bp">|</span> <span class="n">plus_one</span> <span class="o">:</span> <span class="n">mu2</span>
+<span class="bp">|</span> <span class="n">minus_one</span> <span class="o">:</span> <span class="n">mu2</span>
 
-open mu2 
+<span class="kn">open</span> <span class="n">mu2</span>
 
-definition neg : mu2 → mu2
-| plus_one := minus_one 
-| minus_one := plus_one 
+<span class="kn">definition</span> <span class="n">neg</span> <span class="o">:</span> <span class="n">mu2</span> <span class="bp">→</span> <span class="n">mu2</span>
+<span class="bp">|</span> <span class="n">plus_one</span> <span class="o">:=</span> <span class="n">minus_one</span>
+<span class="bp">|</span> <span class="n">minus_one</span> <span class="o">:=</span> <span class="n">plus_one</span>
 
-instance : has_one mu2 := ⟨plus_one⟩ 
-instance : has_neg mu2 := ⟨neg⟩
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">has_one</span> <span class="n">mu2</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="n">plus_one</span><span class="bp">⟩</span>
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">has_neg</span> <span class="n">mu2</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="n">neg</span><span class="bp">⟩</span>
 
-#check (-1 : mu2)
-#check (1 : mu2) 
-```
+<span class="bp">#</span><span class="kn">check</span> <span class="o">(</span><span class="bp">-</span><span class="mi">1</span> <span class="o">:</span> <span class="n">mu2</span><span class="o">)</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="o">(</span><span class="mi">1</span> <span class="o">:</span> <span class="n">mu2</span><span class="o">)</span>
+</pre></div>
 
 #### [ Kenny Lau (Jul 28 2018 at 17:21)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130472246):
-ok
+<p>ok</p>
 
 #### [ Kevin Buzzard (Jul 28 2018 at 17:21)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130472247):
-I think the group law for the target of the signature map is traditionally multiplication
+<p>I think the group law for the target of the signature map is traditionally multiplication</p>
 
 #### [ Chris Hughes (Jul 28 2018 at 17:24)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130472373):
-But I think it's worth breaking with that tradition for the sake of only having one group of order 2 in lean to deal with.
+<p>But I think it's worth breaking with that tradition for the sake of only having one group of order 2 in lean to deal with.</p>
 
 #### [ Kenny Lau (Jul 28 2018 at 17:28)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130472489):
-```lean
-section mu2
+<div class="codehilite"><pre><span></span><span class="kn">section</span> <span class="n">mu2</span>
 
-@[derive decidable_eq]
-inductive mu2 : Type
-| plus_one : mu2
-| minus_one : mu2
+<span class="bp">@</span><span class="o">[</span><span class="n">derive</span> <span class="n">decidable_eq</span><span class="o">]</span>
+<span class="kn">inductive</span> <span class="n">mu2</span> <span class="o">:</span> <span class="kt">Type</span>
+<span class="bp">|</span> <span class="n">plus_one</span> <span class="o">:</span> <span class="n">mu2</span>
+<span class="bp">|</span> <span class="n">minus_one</span> <span class="o">:</span> <span class="n">mu2</span>
 
-open mu2
+<span class="kn">open</span> <span class="n">mu2</span>
 
-definition neg : mu2 → mu2
-| plus_one := minus_one
-| minus_one := plus_one
+<span class="kn">definition</span> <span class="n">neg</span> <span class="o">:</span> <span class="n">mu2</span> <span class="bp">→</span> <span class="n">mu2</span>
+<span class="bp">|</span> <span class="n">plus_one</span> <span class="o">:=</span> <span class="n">minus_one</span>
+<span class="bp">|</span> <span class="n">minus_one</span> <span class="o">:=</span> <span class="n">plus_one</span>
 
-instance : has_one mu2 := ⟨plus_one⟩
-instance : has_neg mu2 := ⟨neg⟩
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">has_one</span> <span class="n">mu2</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="n">plus_one</span><span class="bp">⟩</span>
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">has_neg</span> <span class="n">mu2</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="n">neg</span><span class="bp">⟩</span>
 
-instance : comm_group mu2 :=
-{ mul := λ x y, mu2.rec_on x (mu2.rec_on y 1 (-1)) (mu2.rec_on y (-1) 1),
-  mul_assoc := λ x y z, by cases x; cases y; cases z; refl,
-  mul_one := λ x, by cases x; refl,
-  one_mul := λ x, by cases x; refl,
-  inv := id,
-  mul_left_inv := λ x, by cases x; refl,
-  mul_comm := λ x y, by cases x; cases y; refl,
-  .. mu2.has_one }
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">comm_group</span> <span class="n">mu2</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">mul</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">x</span> <span class="n">y</span><span class="o">,</span> <span class="n">mu2</span><span class="bp">.</span><span class="n">rec_on</span> <span class="n">x</span> <span class="o">(</span><span class="n">mu2</span><span class="bp">.</span><span class="n">rec_on</span> <span class="n">y</span> <span class="mi">1</span> <span class="o">(</span><span class="bp">-</span><span class="mi">1</span><span class="o">))</span> <span class="o">(</span><span class="n">mu2</span><span class="bp">.</span><span class="n">rec_on</span> <span class="n">y</span> <span class="o">(</span><span class="bp">-</span><span class="mi">1</span><span class="o">)</span> <span class="mi">1</span><span class="o">),</span>
+  <span class="n">mul_assoc</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">x</span> <span class="n">y</span> <span class="n">z</span><span class="o">,</span> <span class="k">by</span> <span class="n">cases</span> <span class="n">x</span><span class="bp">;</span> <span class="n">cases</span> <span class="n">y</span><span class="bp">;</span> <span class="n">cases</span> <span class="n">z</span><span class="bp">;</span> <span class="n">refl</span><span class="o">,</span>
+  <span class="n">mul_one</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="k">by</span> <span class="n">cases</span> <span class="n">x</span><span class="bp">;</span> <span class="n">refl</span><span class="o">,</span>
+  <span class="n">one_mul</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="k">by</span> <span class="n">cases</span> <span class="n">x</span><span class="bp">;</span> <span class="n">refl</span><span class="o">,</span>
+  <span class="n">inv</span> <span class="o">:=</span> <span class="n">id</span><span class="o">,</span>
+  <span class="n">mul_left_inv</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="k">by</span> <span class="n">cases</span> <span class="n">x</span><span class="bp">;</span> <span class="n">refl</span><span class="o">,</span>
+  <span class="n">mul_comm</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">x</span> <span class="n">y</span><span class="o">,</span> <span class="k">by</span> <span class="n">cases</span> <span class="n">x</span><span class="bp">;</span> <span class="n">cases</span> <span class="n">y</span><span class="bp">;</span> <span class="n">refl</span><span class="o">,</span>
+  <span class="bp">..</span> <span class="n">mu2</span><span class="bp">.</span><span class="n">has_one</span> <span class="o">}</span>
 
-instance : fintype mu2 :=
-{ elems := {1, -1},
-  complete := λ x, mu2.cases_on x (or.inr $ or.inl rfl) (or.inl rfl) }
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">fintype</span> <span class="n">mu2</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">elems</span> <span class="o">:=</span> <span class="o">{</span><span class="mi">1</span><span class="o">,</span> <span class="bp">-</span><span class="mi">1</span><span class="o">},</span>
+  <span class="n">complete</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="n">mu2</span><span class="bp">.</span><span class="n">cases_on</span> <span class="n">x</span> <span class="o">(</span><span class="n">or</span><span class="bp">.</span><span class="n">inr</span> <span class="err">$</span> <span class="n">or</span><span class="bp">.</span><span class="n">inl</span> <span class="n">rfl</span><span class="o">)</span> <span class="o">(</span><span class="n">or</span><span class="bp">.</span><span class="n">inl</span> <span class="n">rfl</span><span class="o">)</span> <span class="o">}</span>
 
-theorem mu2.card : fintype.card mu2 = 2 :=
-rfl
+<span class="kn">theorem</span> <span class="n">mu2</span><span class="bp">.</span><span class="n">card</span> <span class="o">:</span> <span class="n">fintype</span><span class="bp">.</span><span class="n">card</span> <span class="n">mu2</span> <span class="bp">=</span> <span class="mi">2</span> <span class="o">:=</span>
+<span class="n">rfl</span>
 
-end mu2
-```
+<span class="kn">end</span> <span class="n">mu2</span>
+</pre></div>
 
 #### [ Kenny Lau (Jul 28 2018 at 17:28)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130472494):
-```lean
-theorem mu2.card : fintype.card mu2 = 2 :=
-rfl
-```
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">mu2</span><span class="bp">.</span><span class="n">card</span> <span class="o">:</span> <span class="n">fintype</span><span class="bp">.</span><span class="n">card</span> <span class="n">mu2</span> <span class="bp">=</span> <span class="mi">2</span> <span class="o">:=</span>
+<span class="n">rfl</span>
+</pre></div>
 
 #### [ Kenny Lau (Jul 28 2018 at 17:44)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130473038):
-```lean
-instance : decidable_linear_order (fin n) :=
-{ le_refl := λ ⟨i, hi⟩, nat.le_refl i,
-  le_trans := λ ⟨i, hi⟩ ⟨j, hj⟩ ⟨k, hk⟩ hij hjk, nat.le_trans hij hjk,
-  le_antisymm := λ ⟨i, hi⟩ ⟨j, hj⟩ hij hji, fin.eq_of_veq $ nat.le_antisymm hij hji,
-  le_total := λ ⟨i, hi⟩ ⟨j, hj⟩, or.cases_on (@nat.le_total i j) or.inl or.inr,
-  decidable_le := fin.decidable_le,
-  .. fin.has_le, .. }
-```
+<div class="codehilite"><pre><span></span><span class="kn">instance</span> <span class="o">:</span> <span class="n">decidable_linear_order</span> <span class="o">(</span><span class="n">fin</span> <span class="n">n</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">le_refl</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="bp">⟨</span><span class="n">i</span><span class="o">,</span> <span class="n">hi</span><span class="bp">⟩</span><span class="o">,</span> <span class="n">nat</span><span class="bp">.</span><span class="n">le_refl</span> <span class="n">i</span><span class="o">,</span>
+  <span class="n">le_trans</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="bp">⟨</span><span class="n">i</span><span class="o">,</span> <span class="n">hi</span><span class="bp">⟩</span> <span class="bp">⟨</span><span class="n">j</span><span class="o">,</span> <span class="n">hj</span><span class="bp">⟩</span> <span class="bp">⟨</span><span class="n">k</span><span class="o">,</span> <span class="n">hk</span><span class="bp">⟩</span> <span class="n">hij</span> <span class="n">hjk</span><span class="o">,</span> <span class="n">nat</span><span class="bp">.</span><span class="n">le_trans</span> <span class="n">hij</span> <span class="n">hjk</span><span class="o">,</span>
+  <span class="n">le_antisymm</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="bp">⟨</span><span class="n">i</span><span class="o">,</span> <span class="n">hi</span><span class="bp">⟩</span> <span class="bp">⟨</span><span class="n">j</span><span class="o">,</span> <span class="n">hj</span><span class="bp">⟩</span> <span class="n">hij</span> <span class="n">hji</span><span class="o">,</span> <span class="n">fin</span><span class="bp">.</span><span class="n">eq_of_veq</span> <span class="err">$</span> <span class="n">nat</span><span class="bp">.</span><span class="n">le_antisymm</span> <span class="n">hij</span> <span class="n">hji</span><span class="o">,</span>
+  <span class="n">le_total</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="bp">⟨</span><span class="n">i</span><span class="o">,</span> <span class="n">hi</span><span class="bp">⟩</span> <span class="bp">⟨</span><span class="n">j</span><span class="o">,</span> <span class="n">hj</span><span class="bp">⟩</span><span class="o">,</span> <span class="n">or</span><span class="bp">.</span><span class="n">cases_on</span> <span class="o">(</span><span class="bp">@</span><span class="n">nat</span><span class="bp">.</span><span class="n">le_total</span> <span class="n">i</span> <span class="n">j</span><span class="o">)</span> <span class="n">or</span><span class="bp">.</span><span class="n">inl</span> <span class="n">or</span><span class="bp">.</span><span class="n">inr</span><span class="o">,</span>
+  <span class="n">decidable_le</span> <span class="o">:=</span> <span class="n">fin</span><span class="bp">.</span><span class="n">decidable_le</span><span class="o">,</span>
+  <span class="bp">..</span> <span class="n">fin</span><span class="bp">.</span><span class="n">has_le</span><span class="o">,</span> <span class="bp">..</span> <span class="o">}</span>
+</pre></div>
 
 #### [ Johan Commelin (Jul 28 2018 at 19:36)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130478700):
-We want 2 cyclic groups of order n, one multiplicative, the other additive.
+<p>We want 2 cyclic groups of order n, one multiplicative, the other additive.</p>
 
 #### [ Johan Commelin (Jul 28 2018 at 19:38)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130478772):
-The mu_n example by Kevin will pop up a lot in number theory.
+<p>The mu_n example by Kevin will pop up a lot in number theory.</p>
 
 #### [ Johan Commelin (Jul 28 2018 at 19:38)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130478783):
-I suppose that Lean Forward is going to do quite a bit of number theory pretty soon.
+<p>I suppose that Lean Forward is going to do quite a bit of number theory pretty soon.</p>
 
 #### [ Johan Commelin (Jul 28 2018 at 19:39)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130478789):
-And then additive cyclic groups also show up everywhere (e.g. integers mod n).
+<p>And then additive cyclic groups also show up everywhere (e.g. integers mod n).</p>
 
 #### [ Johan Commelin (Jul 28 2018 at 19:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130478861):
-If R is a ring, do we already know that `units R` is a group? If R is in fact a field, then every finite subgroup of `units R` is a cyclic group. This is a cute theorem about (finite!) groups. And those cyclic groups are pretty multiplicative.
+<p>If R is a ring, do we already know that <code>units R</code> is a group? If R is in fact a field, then every finite subgroup of <code>units R</code> is a cyclic group. This is a cute theorem about (finite!) groups. And those cyclic groups are pretty multiplicative.</p>
 
 #### [ Kenny Lau (Jul 28 2018 at 20:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130482261):
-```lean
-def Sym.is_valid (L : list (Sym n)) : Prop :=
-∀ τ ∈ L, ∃ i j, i ≠ j ∧ τ = Sym.swap i j
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">Sym</span><span class="bp">.</span><span class="n">is_valid</span> <span class="o">(</span><span class="n">L</span> <span class="o">:</span> <span class="n">list</span> <span class="o">(</span><span class="n">Sym</span> <span class="n">n</span><span class="o">))</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span>
+<span class="bp">∀</span> <span class="n">τ</span> <span class="err">∈</span> <span class="n">L</span><span class="o">,</span> <span class="bp">∃</span> <span class="n">i</span> <span class="n">j</span><span class="o">,</span> <span class="n">i</span> <span class="bp">≠</span> <span class="n">j</span> <span class="bp">∧</span> <span class="n">τ</span> <span class="bp">=</span> <span class="n">Sym</span><span class="bp">.</span><span class="n">swap</span> <span class="n">i</span> <span class="n">j</span>
 
-Sym.list_swap_valid : ∀ (σ : Sym ?M_1), Sym.is_valid (Sym.list_swap σ)
+<span class="n">Sym</span><span class="bp">.</span><span class="n">list_swap_valid</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">σ</span> <span class="o">:</span> <span class="n">Sym</span> <span class="err">?</span><span class="n">M_1</span><span class="o">),</span> <span class="n">Sym</span><span class="bp">.</span><span class="n">is_valid</span> <span class="o">(</span><span class="n">Sym</span><span class="bp">.</span><span class="n">list_swap</span> <span class="n">σ</span><span class="o">)</span>
 
-Sym.list_swap_prod : ∀ (σ : Sym ?M_1), list.prod (Sym.list_swap σ) = σ
-```
+<span class="n">Sym</span><span class="bp">.</span><span class="n">list_swap_prod</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">σ</span> <span class="o">:</span> <span class="n">Sym</span> <span class="err">?</span><span class="n">M_1</span><span class="o">),</span> <span class="n">list</span><span class="bp">.</span><span class="n">prod</span> <span class="o">(</span><span class="n">Sym</span><span class="bp">.</span><span class="n">list_swap</span> <span class="n">σ</span><span class="o">)</span> <span class="bp">=</span> <span class="n">σ</span>
+</pre></div>
 
 #### [ Kenny Lau (Jul 28 2018 at 20:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130482264):
-I proved constructively that every permutation can be written as the product of transpositions
+<p>I proved constructively that every permutation can be written as the product of transpositions</p>
 
 #### [ Kenny Lau (Jul 28 2018 at 20:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130482266):
-I actually didn't know that it is possible with at most n transpositions
+<p>I actually didn't know that it is possible with at most n transpositions</p>
 
 #### [ Kenny Lau (Jul 28 2018 at 20:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130482267):
-so I actually learnt (discovered) something new
+<p>so I actually learnt (discovered) something new</p>
 
 #### [ Kenny Lau (Jul 28 2018 at 20:53)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130482280):
-I also learnt how to use `well_founded.fix` and `well_founded.induction`
+<p>I also learnt how to use <code>well_founded.fix</code> and <code>well_founded.induction</code></p>
 
 #### [ Johan Commelin (Jul 28 2018 at 20:56)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130482411):
-You can do it with `\le (n-1)` transpositions, right?
+<p>You can do it with <code>\le (n-1)</code> transpositions, right?</p>
 
 #### [ Kenny Lau (Jul 28 2018 at 20:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130482414):
-yes
+<p>yes</p>
 
 #### [ Kenny Lau (Jul 28 2018 at 20:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130482428):
-https://github.com/kckennylau/Lean/blob/master/Sym.lean
+<p><a href="https://github.com/kckennylau/Lean/blob/master/Sym.lean" target="_blank" title="https://github.com/kckennylau/Lean/blob/master/Sym.lean">https://github.com/kckennylau/Lean/blob/master/Sym.lean</a></p>
 
 #### [ Johan Commelin (Jul 28 2018 at 20:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130482430):
-So now we only need disjoint cycle representation.
+<p>So now we only need disjoint cycle representation.</p>
 
 #### [ Kenny Lau (Jul 28 2018 at 20:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130482431):
-although I didn't prove the bound
+<p>although I didn't prove the bound</p>
 
 #### [ Kenny Lau (Jul 28 2018 at 20:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130482435):
-no, we don't need DCR
+<p>no, we don't need DCR</p>
 
 #### [ Kenny Lau (Jul 28 2018 at 20:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130482436):
-it is way overrated
+<p>it is way overrated</p>
 
 #### [ Johan Commelin (Jul 28 2018 at 20:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130482441):
-It is nice for printing stuff.
+<p>It is nice for printing stuff.</p>
 
 #### [ Kenny Lau (Jul 28 2018 at 21:03)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130482618):
-we should prove the homomorphism first
+<p>we should prove the homomorphism first</p>
 
 #### [ Johan Commelin (Jul 28 2018 at 21:06)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130482714):
-That shouldn't be too hard anymore, right?
+<p>That shouldn't be too hard anymore, right?</p>
 
 #### [ Kenny Lau (Jul 28 2018 at 21:06)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130482715):
-no, that's a whole nother business
+<p>no, that's a whole nother business</p>
 
 #### [ Kenny Lau (Jul 28 2018 at 21:06)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130482716):
-they involve completely different skills
+<p>they involve completely different skills</p>
 
 #### [ Johan Commelin (Jul 28 2018 at 21:07)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130482731):
-What, the homomorphism?
+<p>What, the homomorphism?</p>
 
 #### [ Kenny Lau (Jul 28 2018 at 21:07)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130482732):
-yes
+<p>yes</p>
 
 #### [ Johan Commelin (Jul 28 2018 at 21:07)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130482737):
-Hmmm, does it help if you change the definition of sgn?
+<p>Hmmm, does it help if you change the definition of sgn?</p>
 
 #### [ Johan Commelin (Jul 28 2018 at 21:08)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130482777):
-Maybe not
+<p>Maybe not</p>
 
 #### [ Kenny Lau (Jul 28 2018 at 21:08)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130482782):
-you need to prove that if a bunch of transpositions multiply to 1, then you have an even number of transpositions
+<p>you need to prove that if a bunch of transpositions multiply to 1, then you have an even number of transpositions</p>
 
 #### [ Kenny Lau (Jul 28 2018 at 21:08)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130482784):
-that involves somehow traversing the whole list
+<p>that involves somehow traversing the whole list</p>
 
 #### [ Johan Commelin (Jul 28 2018 at 21:09)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130482797):
-Fair enough
+<p>Fair enough</p>
 
 #### [ Kenny Lau (Jul 28 2018 at 21:10)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130482858):
-which I'm not exactly comfortable with doing in Lean
+<p>which I'm not exactly comfortable with doing in Lean</p>
 
 #### [ Kevin Buzzard (Jul 28 2018 at 21:15)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130482998):
-```quote
-you need to prove that if a bunch of transpositions multiply to 1, then you have an even number of transpositions
-```
-AFAIK the best way to do this is to compute with signatures via the definition Chris used -- signature of sigma is (-1) ^ (the number of pairs (i,j) with i < j and sigma(i) > sigma(j) )
+<blockquote>
+<p>you need to prove that if a bunch of transpositions multiply to 1, then you have an even number of transpositions</p>
+</blockquote>
+<p>AFAIK the best way to do this is to compute with signatures via the definition Chris used -- signature of sigma is (-1) ^ (the number of pairs (i,j) with i &lt; j and sigma(i) &gt; sigma(j) )</p>
 
 #### [ Kenny Lau (Jul 28 2018 at 21:15)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130483008):
-hmm, maybe
+<p>hmm, maybe</p>
 
 #### [ Kevin Buzzard (Jul 28 2018 at 21:34)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130484672):
-It's not so hard to prove that this is multiplicative. You can say that an *un*ordered pair is "switched" if their order is switched -- this is well-defined. if sigma switches a pair and tau switches them back then the composite scores 0 and each of sigma and tau scores 1.
+<p>It's not so hard to prove that this is multiplicative. You can say that an <em>un</em>ordered pair is "switched" if their order is switched -- this is well-defined. if sigma switches a pair and tau switches them back then the composite scores 0 and each of sigma and tau scores 1.</p>
 
 #### [ Chris Hughes (Jul 28 2018 at 21:36)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130484741):
-I have proved it's multiplicative, and that transpositions are odd. My proof that transpositions are conjugate was brilliant, I did `split_ifs` and then solved 84 goals at once with `cc`
+<p>I have proved it's multiplicative, and that transpositions are odd. My proof that transpositions are conjugate was brilliant, I did <code>split_ifs</code> and then solved 84 goals at once with <code>cc</code></p>
 
 #### [ Patrick Massot (Jul 28 2018 at 21:39)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130484843):
-I have a challenge for all the permutation experts. From a permutation of `fin n` (or any version) define a map from a product of  n topological space to the permuted product and prove it's continuous. When n=2, this is `continuous_id` and `continuous_swap`. Part of the challenge is that `A × B × C` is not the type of triple `(x.1, x.2, x.3)`, it's secretely  `A × (B × C)` with elements `(x.1, (x.2.1, x.2.2))`
+<p>I have a challenge for all the permutation experts. From a permutation of <code>fin n</code> (or any version) define a map from a product of  n topological space to the permuted product and prove it's continuous. When n=2, this is <code>continuous_id</code> and <code>continuous_swap</code>. Part of the challenge is that <code>A × B × C</code> is not the type of triple <code>(x.1, x.2, x.3)</code>, it's secretely  <code>A × (B × C)</code> with elements <code>(x.1, (x.2.1, x.2.2))</code></p>
 
 #### [ Patrick Massot (Jul 28 2018 at 21:40)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130484853):
-Note that I don't need this, I only want to make sure you don't get bored
+<p>Note that I don't need this, I only want to make sure you don't get bored</p>
 
 #### [ Kenny Lau (Jul 28 2018 at 21:40)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130484904):
-can you give us the inputs? i.e. how is the n topological space represented?
+<p>can you give us the inputs? i.e. how is the n topological space represented?</p>
 
 #### [ Johan Commelin (Jul 28 2018 at 21:44)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130485013):
-```quote
-I have proved it's multiplicative, and that transpositions are odd. My proof that transpositions are conjugate was brilliant, I did `split_ifs` and then solved **84** goals at once with `cc`
-```
-Hmm, that crazy number 84 really has some special place in mathematics... (https://en.wikipedia.org/wiki/Hurwitz%27s_automorphisms_theorem)
+<blockquote>
+<p>I have proved it's multiplicative, and that transpositions are odd. My proof that transpositions are conjugate was brilliant, I did <code>split_ifs</code> and then solved <strong>84</strong> goals at once with <code>cc</code></p>
+</blockquote>
+<p>Hmm, that crazy number 84 really has some special place in mathematics... (<a href="https://en.wikipedia.org/wiki/Hurwitz%27s_automorphisms_theorem" target="_blank" title="https://en.wikipedia.org/wiki/Hurwitz%27s_automorphisms_theorem">https://en.wikipedia.org/wiki/Hurwitz%27s_automorphisms_theorem</a>)</p>
 
 #### [ Kevin Buzzard (Jul 28 2018 at 22:23)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130487017):
-That's great! Somehow I'm surprised it's quite so many. You have the transposition (a b) and then you're trying to figure out whether the pair (i j) got re-aranged. So you have cases depending on whether i<a,i=a,a<i<b,i=b,i>b and the same with j. The clever thing is to get it so that the goals are solvable afterwards I guess, rather than just counting.
+<p>That's great! Somehow I'm surprised it's quite so many. You have the transposition (a b) and then you're trying to figure out whether the pair (i j) got re-aranged. So you have cases depending on whether i&lt;a,i=a,a&lt;i&lt;b,i=b,i&gt;b and the same with j. The clever thing is to get it so that the goals are solvable afterwards I guess, rather than just counting.</p>
 
 #### [ Chris Hughes (Jul 28 2018 at 22:28)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130487184):
-The proof had nothing to do with sign. This was the proof
-```lean
-lemma transpose_conj {α : Type*} [decidable_eq α] {a b x y : α} 
-  (hab : a ≠ b) (hxy : x ≠ y) :
-  ∃ f : perm α, f * transpose x y * f⁻¹ = transpose a b :=
-⟨if x = b then transpose y a 
-else if y = a then transpose x b
-else transpose x a * transpose y b, equiv.ext _ _ $ λ n, 
-begin 
-  unfold_coes,
-  dsimp [transpose, inv_def, mul_def, equiv.symm, equiv.trans, function.comp],
-  simp only [ite_apply, ite_inv_apply],
-  split_ifs; cc
-end⟩
-```
+<p>The proof had nothing to do with sign. This was the proof</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">transpose_conj</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">decidable_eq</span> <span class="n">α</span><span class="o">]</span> <span class="o">{</span><span class="n">a</span> <span class="n">b</span> <span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">α</span><span class="o">}</span>
+  <span class="o">(</span><span class="n">hab</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">≠</span> <span class="n">b</span><span class="o">)</span> <span class="o">(</span><span class="n">hxy</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">≠</span> <span class="n">y</span><span class="o">)</span> <span class="o">:</span>
+  <span class="bp">∃</span> <span class="n">f</span> <span class="o">:</span> <span class="n">perm</span> <span class="n">α</span><span class="o">,</span> <span class="n">f</span> <span class="bp">*</span> <span class="n">transpose</span> <span class="n">x</span> <span class="n">y</span> <span class="bp">*</span> <span class="n">f</span><span class="bp">⁻¹</span> <span class="bp">=</span> <span class="n">transpose</span> <span class="n">a</span> <span class="n">b</span> <span class="o">:=</span>
+<span class="bp">⟨</span><span class="k">if</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">b</span> <span class="k">then</span> <span class="n">transpose</span> <span class="n">y</span> <span class="n">a</span>
+<span class="k">else</span> <span class="k">if</span> <span class="n">y</span> <span class="bp">=</span> <span class="n">a</span> <span class="k">then</span> <span class="n">transpose</span> <span class="n">x</span> <span class="n">b</span>
+<span class="k">else</span> <span class="n">transpose</span> <span class="n">x</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">transpose</span> <span class="n">y</span> <span class="n">b</span><span class="o">,</span> <span class="n">equiv</span><span class="bp">.</span><span class="n">ext</span> <span class="bp">_</span> <span class="bp">_</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">n</span><span class="o">,</span>
+<span class="k">begin</span>
+  <span class="n">unfold_coes</span><span class="o">,</span>
+  <span class="n">dsimp</span> <span class="o">[</span><span class="n">transpose</span><span class="o">,</span> <span class="n">inv_def</span><span class="o">,</span> <span class="n">mul_def</span><span class="o">,</span> <span class="n">equiv</span><span class="bp">.</span><span class="n">symm</span><span class="o">,</span> <span class="n">equiv</span><span class="bp">.</span><span class="n">trans</span><span class="o">,</span> <span class="n">function</span><span class="bp">.</span><span class="n">comp</span><span class="o">],</span>
+  <span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">ite_apply</span><span class="o">,</span> <span class="n">ite_inv_apply</span><span class="o">],</span>
+  <span class="n">split_ifs</span><span class="bp">;</span> <span class="n">cc</span>
+<span class="kn">end</span><span class="bp">⟩</span>
+</pre></div>
 
 #### [ Kenny Lau (Jul 28 2018 at 22:29)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130487194):
-TIL `unfold_coes`
+<p>TIL <code>unfold_coes</code></p>
 
 #### [ Patrick Massot (Jul 28 2018 at 22:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130487907):
-```quote
-can you give us the inputs? i.e. how is the n topological space represented?
-```
-The example that I actually needed is at https://github.com/PatrickMassot/lean-perfectoid-spaces/blob/652422a5e5dd00f07ef3dc768bc774784904cb00/src/for_mathlib/topological_structures.lean#L7-L19
+<blockquote>
+<p>can you give us the inputs? i.e. how is the n topological space represented?</p>
+</blockquote>
+<p>The example that I actually needed is at <a href="https://github.com/PatrickMassot/lean-perfectoid-spaces/blob/652422a5e5dd00f07ef3dc768bc774784904cb00/src/for_mathlib/topological_structures.lean#L7-L19" target="_blank" title="https://github.com/PatrickMassot/lean-perfectoid-spaces/blob/652422a5e5dd00f07ef3dc768bc774784904cb00/src/for_mathlib/topological_structures.lean#L7-L19">https://github.com/PatrickMassot/lean-perfectoid-spaces/blob/652422a5e5dd00f07ef3dc768bc774784904cb00/src/for_mathlib/topological_structures.lean#L7-L19</a></p>
 
 #### [ Kenny Lau (Jul 29 2018 at 08:30)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130512068):
-@**Kevin Buzzard** unfortunately this theorem is not true: `sgn.inversion (σ * τ) i j = sgn.inversion τ i j * sgn.inversion σ (τ i) (τ j)`
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> unfortunately this theorem is not true: <code>sgn.inversion (σ * τ) i j = sgn.inversion τ i j * sgn.inversion σ (τ i) (τ j)</code></p>
 
 #### [ Kenny Lau (Jul 29 2018 at 08:30)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130512069):
-and it makes my life defining sign using inversion hard
+<p>and it makes my life defining sign using inversion hard</p>
 
 #### [ Kenny Lau (Jul 29 2018 at 08:30)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130512075):
-```lean
-def sgn.inversion (σ : Sym n) (i j : fin n) : mu2 :=
-if i < j ∧ σ i > σ j then -1 else 1
-```
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">sgn</span><span class="bp">.</span><span class="n">inversion</span> <span class="o">(</span><span class="n">σ</span> <span class="o">:</span> <span class="n">Sym</span> <span class="n">n</span><span class="o">)</span> <span class="o">(</span><span class="n">i</span> <span class="n">j</span> <span class="o">:</span> <span class="n">fin</span> <span class="n">n</span><span class="o">)</span> <span class="o">:</span> <span class="n">mu2</span> <span class="o">:=</span>
+<span class="k">if</span> <span class="n">i</span> <span class="bp">&lt;</span> <span class="n">j</span> <span class="bp">∧</span> <span class="n">σ</span> <span class="n">i</span> <span class="bp">&gt;</span> <span class="n">σ</span> <span class="n">j</span> <span class="k">then</span> <span class="bp">-</span><span class="mi">1</span> <span class="k">else</span> <span class="mi">1</span>
+</pre></div>
 
 #### [ Kevin Buzzard (Jul 29 2018 at 11:55)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130518707):
-How about you define it on unordered pairs? Then it's ok
+<p>How about you define it on unordered pairs? Then it's ok</p>
 
 #### [ Kenny Lau (Jul 29 2018 at 11:55)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130518711):
-how do you define unordered pairs?
+<p>how do you define unordered pairs?</p>
 
 #### [ Chris Hughes (Jul 29 2018 at 11:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130518804):
-quotient
+<p>quotient</p>
 
 #### [ Kenny Lau (Jul 29 2018 at 11:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130518807):
-did you use quotient?
+<p>did you use quotient?</p>
 
 #### [ Chris Hughes (Jul 29 2018 at 11:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130518819):
-No. I used pairs such that x.2 > x.1
+<p>No. I used pairs such that x.2 &gt; x.1</p>
 
 #### [ Kenny Lau (Jul 29 2018 at 11:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130518826):
-and you still managed to prove that it is multiplicative? :o
+<p>and you still managed to prove that it is multiplicative? :o</p>
 
 #### [ Chris Hughes (Jul 29 2018 at 11:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130518834):
-A lot of `ite` faffing
+<p>A lot of <code>ite</code> faffing</p>
 
 #### [ Kenny Lau (Jul 29 2018 at 11:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130518841):
-it's mainly the finset prod that I'm uncomfortable with
+<p>it's mainly the finset prod that I'm uncomfortable with</p>
 
 #### [ Kevin Buzzard (Jul 29 2018 at 12:01)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130518916):
-Also allow the possibility that i>j and sigma i < sigma j
+<p>Also allow the possibility that i&gt;j and sigma i &lt; sigma j</p>
 
 #### [ Chris Hughes (Jul 29 2018 at 12:01)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130518919):
-I used `sum_bij` where the `bij` was one of the perms I was multiplying, subject to some `ite` faffing to get the order right.
+<p>I used <code>sum_bij</code> where the <code>bij</code> was one of the perms I was multiplying, subject to some <code>ite</code> faffing to get the order right.</p>
 
 #### [ Kenny Lau (Jul 29 2018 at 12:01)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130518927):
-ok
+<p>ok</p>
 
 #### [ Chris Hughes (Jul 29 2018 at 12:01)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130518928):
-```quote
-Also allow the possibility that i>j and sigma i < sigma j
-```
-Won't you always get even if you do that?
+<blockquote>
+<p>Also allow the possibility that i&gt;j and sigma i &lt; sigma j</p>
+</blockquote>
+<p>Won't you always get even if you do that?</p>
 
 #### [ Kenny Lau (Jul 29 2018 at 12:02)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130518931):
-just prove that it is divisible by 2 and then divide by 2 :P
+<p>just prove that it is divisible by 2 and then divide by 2 :P</p>
 
 #### [ Kevin Buzzard (Jul 29 2018 at 12:03)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130518983):
-Or just count over unordered pairs :-)
+<p>Or just count over unordered pairs :-)</p>
 
 #### [ Chris Hughes (Jul 29 2018 at 20:35)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130534903):
-Done product of transpositions as well. Not sure there was any point making the very last definition computable or not, but it might have some usage. https://github.com/dorhinj/leanstuff/blob/master/signatures.lean
+<p>Done product of transpositions as well. Not sure there was any point making the very last definition computable or not, but it might have some usage. <a href="https://github.com/dorhinj/leanstuff/blob/master/signatures.lean" target="_blank" title="https://github.com/dorhinj/leanstuff/blob/master/signatures.lean">https://github.com/dorhinj/leanstuff/blob/master/signatures.lean</a></p>
 
 #### [ Kenny Lau (Jul 29 2018 at 20:45)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130535153):
-https://github.com/kckennylau/Lean/blob/master/Sym.lean
-```lean
-def sgn (σ : Sym n) : mu2 :=
-(-1) ^ σ.list_step.length
+<p><a href="https://github.com/kckennylau/Lean/blob/master/Sym.lean" target="_blank" title="https://github.com/kckennylau/Lean/blob/master/Sym.lean">https://github.com/kckennylau/Lean/blob/master/Sym.lean</a></p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">sgn</span> <span class="o">(</span><span class="n">σ</span> <span class="o">:</span> <span class="n">Sym</span> <span class="n">n</span><span class="o">)</span> <span class="o">:</span> <span class="n">mu2</span> <span class="o">:=</span>
+<span class="o">(</span><span class="bp">-</span><span class="mi">1</span><span class="o">)</span> <span class="err">^</span> <span class="n">σ</span><span class="bp">.</span><span class="n">list_step</span><span class="bp">.</span><span class="n">length</span>
 
-instance sgn.is_group_hom : is_group_hom (@sgn n) :=
-begin
-  constructor,
-  intros σ τ,
-  unfold sgn,
-  rw [← pow_add, ← list.length_append],
-  rw [mu2.neg_one_pow, eq_comm, mu2.neg_one_pow],
-  refine congr_arg _ _,
-  apply length_mod_two_eq,
-  simp
-end
+<span class="kn">instance</span> <span class="n">sgn</span><span class="bp">.</span><span class="n">is_group_hom</span> <span class="o">:</span> <span class="n">is_group_hom</span> <span class="o">(</span><span class="bp">@</span><span class="n">sgn</span> <span class="n">n</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">constructor</span><span class="o">,</span>
+  <span class="n">intros</span> <span class="n">σ</span> <span class="n">τ</span><span class="o">,</span>
+  <span class="n">unfold</span> <span class="n">sgn</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="o">[</span><span class="err">←</span> <span class="n">pow_add</span><span class="o">,</span> <span class="err">←</span> <span class="n">list</span><span class="bp">.</span><span class="n">length_append</span><span class="o">],</span>
+  <span class="n">rw</span> <span class="o">[</span><span class="n">mu2</span><span class="bp">.</span><span class="n">neg_one_pow</span><span class="o">,</span> <span class="n">eq_comm</span><span class="o">,</span> <span class="n">mu2</span><span class="bp">.</span><span class="n">neg_one_pow</span><span class="o">],</span>
+  <span class="n">refine</span> <span class="n">congr_arg</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">,</span>
+  <span class="n">apply</span> <span class="n">length_mod_two_eq</span><span class="o">,</span>
+  <span class="n">simp</span>
+<span class="kn">end</span>
 
-theorem sgn_step (s : step n) :
-  sgn s.eval = -1 :=
-suffices s.eval.list_step.length % 2 = [s].length % 2,
-  by unfold sgn; rw [mu2.neg_one_pow, this]; refl,
-length_mod_two_eq _ _ $ by simp
-```
+<span class="kn">theorem</span> <span class="n">sgn_step</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">step</span> <span class="n">n</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">sgn</span> <span class="n">s</span><span class="bp">.</span><span class="kn">eval</span> <span class="bp">=</span> <span class="bp">-</span><span class="mi">1</span> <span class="o">:=</span>
+<span class="n">suffices</span> <span class="n">s</span><span class="bp">.</span><span class="kn">eval</span><span class="bp">.</span><span class="n">list_step</span><span class="bp">.</span><span class="n">length</span> <span class="err">%</span> <span class="mi">2</span> <span class="bp">=</span> <span class="o">[</span><span class="n">s</span><span class="o">]</span><span class="bp">.</span><span class="n">length</span> <span class="err">%</span> <span class="mi">2</span><span class="o">,</span>
+  <span class="k">by</span> <span class="n">unfold</span> <span class="n">sgn</span><span class="bp">;</span> <span class="n">rw</span> <span class="o">[</span><span class="n">mu2</span><span class="bp">.</span><span class="n">neg_one_pow</span><span class="o">,</span> <span class="n">this</span><span class="o">]</span><span class="bp">;</span> <span class="n">refl</span><span class="o">,</span>
+<span class="n">length_mod_two_eq</span> <span class="bp">_</span> <span class="bp">_</span> <span class="err">$</span> <span class="k">by</span> <span class="n">simp</span>
+</pre></div>
 
 #### [ Kenny Lau (Jul 29 2018 at 20:46)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130535156):
-10 minutes behind you :-)
+<p>10 minutes behind you :-)</p>
 
 #### [ Kevin Buzzard (Jul 29 2018 at 20:46)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130535197):
-So now you can both define determinant of an n x n matrix!
+<p>So now you can both define determinant of an n x n matrix!</p>
 
 #### [ Kenny Lau (Jul 29 2018 at 20:47)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130535205):
-oh no, we could already define determinant just fine, it's the multiplicative part that needs this result
+<p>oh no, we could already define determinant just fine, it's the multiplicative part that needs this result</p>
 
 #### [ Chris Hughes (Jul 29 2018 at 20:47)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130535210):
-Is your sign defined using the list of transpositions?
+<p>Is your sign defined using the list of transpositions?</p>
 
 #### [ Kenny Lau (Jul 29 2018 at 20:47)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130535211):
-yes
+<p>yes</p>
 
 #### [ Kenny Lau (Jul 29 2018 at 20:47)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130535212):
-oh, and trust me, do not look at Lines 720 - 831
+<p>oh, and trust me, do not look at Lines 720 - 831</p>
 
 #### [ Kenny Lau (Jul 29 2018 at 20:48)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130535252):
-https://github.com/kckennylau/Lean/blob/master/Sym.lean#L720
+<p><a href="https://github.com/kckennylau/Lean/blob/master/Sym.lean#L720" target="_blank" title="https://github.com/kckennylau/Lean/blob/master/Sym.lean#L720">https://github.com/kckennylau/Lean/blob/master/Sym.lean#L720</a></p>
 
 #### [ Kenny Lau (Jul 29 2018 at 20:48)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130535259):
-```quote
-Is your sign defined using the list of transpositions?
-```
-```lean
-def sgn (σ : Sym n) : mu2 :=
-(-1) ^ σ.list_step.length
-```
+<blockquote>
+<p>Is your sign defined using the list of transpositions?</p>
+</blockquote>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">sgn</span> <span class="o">(</span><span class="n">σ</span> <span class="o">:</span> <span class="n">Sym</span> <span class="n">n</span><span class="o">)</span> <span class="o">:</span> <span class="n">mu2</span> <span class="o">:=</span>
+<span class="o">(</span><span class="bp">-</span><span class="mi">1</span><span class="o">)</span> <span class="err">^</span> <span class="n">σ</span><span class="bp">.</span><span class="n">list_step</span><span class="bp">.</span><span class="n">length</span>
+</pre></div>
 
 #### [ Kenny Lau (Jul 29 2018 at 20:48)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130535261):
-and `list_step` is a computable (!) function
+<p>and <code>list_step</code> is a computable (!) function</p>
 
 #### [ Kenny Lau (Jul 29 2018 at 20:49)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130535266):
-```lean
-def list_step (σ : Sym n) : list (step n) :=
-by refine well_founded.fix list_step.aux.wf _ σ; from
-λ σ ih, if H : σ.support = ∅ then []
-  else let ⟨i, hi⟩ := σ.support_choice H in
-    step.mk' (σ i) i (support_def.1 hi)
-    :: ih (swap (σ i) i * σ) (support_swap_mul hi)
-```
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">list_step</span> <span class="o">(</span><span class="n">σ</span> <span class="o">:</span> <span class="n">Sym</span> <span class="n">n</span><span class="o">)</span> <span class="o">:</span> <span class="n">list</span> <span class="o">(</span><span class="n">step</span> <span class="n">n</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">refine</span> <span class="n">well_founded</span><span class="bp">.</span><span class="n">fix</span> <span class="n">list_step</span><span class="bp">.</span><span class="n">aux</span><span class="bp">.</span><span class="n">wf</span> <span class="bp">_</span> <span class="n">σ</span><span class="bp">;</span> <span class="k">from</span>
+<span class="bp">λ</span> <span class="n">σ</span> <span class="n">ih</span><span class="o">,</span> <span class="k">if</span> <span class="n">H</span> <span class="o">:</span> <span class="n">σ</span><span class="bp">.</span><span class="n">support</span> <span class="bp">=</span> <span class="err">∅</span> <span class="k">then</span> <span class="o">[]</span>
+  <span class="k">else</span> <span class="k">let</span> <span class="bp">⟨</span><span class="n">i</span><span class="o">,</span> <span class="n">hi</span><span class="bp">⟩</span> <span class="o">:=</span> <span class="n">σ</span><span class="bp">.</span><span class="n">support_choice</span> <span class="n">H</span> <span class="k">in</span>
+    <span class="n">step</span><span class="bp">.</span><span class="n">mk&#39;</span> <span class="o">(</span><span class="n">σ</span> <span class="n">i</span><span class="o">)</span> <span class="n">i</span> <span class="o">(</span><span class="n">support_def</span><span class="bp">.</span><span class="mi">1</span> <span class="n">hi</span><span class="o">)</span>
+    <span class="bp">::</span> <span class="n">ih</span> <span class="o">(</span><span class="n">swap</span> <span class="o">(</span><span class="n">σ</span> <span class="n">i</span><span class="o">)</span> <span class="n">i</span> <span class="bp">*</span> <span class="n">σ</span><span class="o">)</span> <span class="o">(</span><span class="n">support_swap_mul</span> <span class="n">hi</span><span class="o">)</span>
+</pre></div>
 
 #### [ Kenny Lau (Jul 29 2018 at 20:49)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130535267):
-by induction (recursion) on the support
+<p>by induction (recursion) on the support</p>
 
 #### [ Chris Hughes (Jul 29 2018 at 20:49)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130535268):
-What's it do?
+<p>What's it do?</p>
 
 #### [ Kenny Lau (Jul 29 2018 at 20:49)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130535272):
-it expresses a permutation as a product of transpositions
+<p>it expresses a permutation as a product of transpositions</p>
 
 #### [ Kenny Lau (Jul 29 2018 at 20:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130535324):
-I just realized kernel of group hom is not in mathlib
+<p>I just realized kernel of group hom is not in mathlib</p>
 
 #### [ Kenny Lau (Jul 29 2018 at 20:53)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130535372):
-(btw if anyone is reading my code, all my "choice" functions are computable :P)
+<p>(btw if anyone is reading my code, all my "choice" functions are computable :P)</p>
 
 #### [ Kevin Buzzard (Jul 29 2018 at 21:09)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130535806):
-I think kernel of a group hom is somewhere in mathlib...`is_group_hom.ker`?
+<p>I think kernel of a group hom is somewhere in mathlib...<code>is_group_hom.ker</code>?</p>
 
 #### [ Kenny Lau (Jul 29 2018 at 21:10)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130535849):
-ah right
+<p>ah right</p>
 
 #### [ Kenny Lau (Jul 29 2018 at 21:12)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130535903):
-```lean
-def Alt : Type :=
-is_group_hom.ker (@Sym.sgn n)
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">Alt</span> <span class="o">:</span> <span class="kt">Type</span> <span class="o">:=</span>
+<span class="n">is_group_hom</span><span class="bp">.</span><span class="n">ker</span> <span class="o">(</span><span class="bp">@</span><span class="n">Sym</span><span class="bp">.</span><span class="n">sgn</span> <span class="n">n</span><span class="o">)</span>
 
-instance : group (Alt n) :=
-by unfold Alt; apply_instance
-```
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">group</span> <span class="o">(</span><span class="n">Alt</span> <span class="n">n</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">unfold</span> <span class="n">Alt</span><span class="bp">;</span> <span class="n">apply_instance</span>
+</pre></div>
 
 #### [ Kevin Buzzard (Jul 29 2018 at 21:14)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130535921):
-You can now prove A_5 is simple by counting conjugacy classes.
+<p>You can now prove A_5 is simple by counting conjugacy classes.</p>
 
 #### [ Kenny Lau (Jul 29 2018 at 21:14)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130535960):
-hmm, not the proof of simple that i know
+<p>hmm, not the proof of simple that i know</p>
 
 #### [ Kenny Lau (Jul 29 2018 at 21:14)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130535961):
-is there an easier proof?
+<p>is there an easier proof?</p>
 
 #### [ Kevin Buzzard (Jul 29 2018 at 21:14)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130535963):
-```quote
-oh no, we could already define determinant just fine, it's the multiplicative part that needs this result
-```
-Yes, in fact Keji did it already, by expanding along the top row. He could prove nothing about it from this definition :-)
+<blockquote>
+<p>oh no, we could already define determinant just fine, it's the multiplicative part that needs this result</p>
+</blockquote>
+<p>Yes, in fact Keji did it already, by expanding along the top row. He could prove nothing about it from this definition :-)</p>
 
 #### [ Kenny Lau (Jul 29 2018 at 21:15)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130535974):
-how about Chris proving that any simple group must have order at least 60 lol
+<p>how about Chris proving that any simple group must have order at least 60 lol</p>
 
 #### [ Kevin Buzzard (Jul 29 2018 at 21:16)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130536023):
-```quote
-is there an easier proof?
-```
-You could use Sylow to prove that group of order strictly dividing 60 was solvable, and then there's some crappy trick with 3-cycles (which I used to set on the 2nd year group theory course) which shows that A_5 has no non-trivial cyclic quotients. The counting proof is pretty trivial! Any normal subgroup is a union of conjugacy classes but any non-trivial sum of conj class sizes doesn't even equal a divisor of 60.
+<blockquote>
+<p>is there an easier proof?</p>
+</blockquote>
+<p>You could use Sylow to prove that group of order strictly dividing 60 was solvable, and then there's some crappy trick with 3-cycles (which I used to set on the 2nd year group theory course) which shows that A_5 has no non-trivial cyclic quotients. The counting proof is pretty trivial! Any normal subgroup is a union of conjugacy classes but any non-trivial sum of conj class sizes doesn't even equal a divisor of 60.</p>
 
 #### [ Kenny Lau (Jul 29 2018 at 21:48)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130537317):
-[2018-07-30.png](/user_uploads/3121/tJtctbAOJKrPMftkcpbbkPt3/2018-07-30.png)
+<p><a href="/user_uploads/3121/tJtctbAOJKrPMftkcpbbkPt3/2018-07-30.png" target="_blank" title="2018-07-30.png">2018-07-30.png</a></p>
+<div class="message_inline_image"><a href="/user_uploads/3121/tJtctbAOJKrPMftkcpbbkPt3/2018-07-30.png" target="_blank" title="2018-07-30.png"><img src="/user_uploads/3121/tJtctbAOJKrPMftkcpbbkPt3/2018-07-30.png"></a></div>
 
 #### [ Kenny Lau (Jul 29 2018 at 21:48)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130537318):
-glorious
+<p>glorious</p>
 
 #### [ Kenny Lau (Jul 29 2018 at 21:48)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130537319):
-```lean
-theorem eq_sgn (f : Sym n → mu2) [is_group_hom f]
-  (s : step n) (H1 : f s.eval = -1) (σ : Sym n) :
-  f σ = sgn σ :=
-begin
-  have H2 : ∀ t : step n, f t.eval = -1,
-  { intro t,
-    by_cases H2 : s.1 = t.1,
-    { by_cases H3 : s.2 = t.2,
-      { rw [← step.ext _ _ H2 H3, H1] },
-      have H4 : t.eval = swap s.2 t.2 * s.eval * swap s.2 t.2,
-      { dsimp [step.eval, swap], ext k, dsimp,
-        have := ne_of_lt s.3, have := ne_of_lt t.3,
-        split_ifs; cc },
-      simp [H4, is_group_hom.mul f, H1] },
-    by_cases H3 : s.1 = t.2,
-    { have H4 : t.eval = swap s.2 t.1 * s.eval * swap s.2 t.1,
-      { dsimp [step.eval, swap], ext k, dsimp,
-        have := ne_of_lt s.3, have := ne_of_lt t.3,
-        split_ifs; cc },
-      simp [H4, is_group_hom.mul f, H1] },
-    by_cases H4 : s.2 = t.1,
-    { have H5 : t.eval = swap s.1 t.2 * s.eval * swap s.1 t.2,
-      { dsimp [step.eval, swap], ext k, dsimp,
-        have := ne_of_lt s.3, have := ne_of_lt t.3,
-        split_ifs; cc },
-      simp [H5, is_group_hom.mul f, H1] },
-    by_cases H5 : s.2 = t.2,
-    { have H6 : t.eval = swap s.1 t.1 * s.eval * swap s.1 t.1,
-      { dsimp [step.eval, swap], ext k, dsimp,
-        have := ne_of_lt s.3, have := ne_of_lt t.3,
-        split_ifs; cc },
-      simp [H6, is_group_hom.mul f, H1] },
-    have H6 : t.eval = swap s.1 t.1 * swap s.2 t.2 * s.eval * swap s.2 t.2 * swap s.1 t.1,
-    { dsimp [step.eval, swap], ext k, dsimp,
-      have := ne_of_lt s.3, have := ne_of_lt t.3,
-      split_ifs; cc },
-    rw H6,
-    repeat { rw is_group_hom.mul f },
-    rw [H1, mul_assoc (f (swap s.1 t.1)), mul_assoc (f (swap s.1 t.1))],
-    rw [mu2.mul_neg_one, mu2.neg_mul_self], simp },
-  have H3 := list_step_prod σ,
-  revert H3, generalize : list_step σ = L, intro H3, subst H3,
-  induction L with hd tl ih, { simp [is_group_hom.one f] },
-  simp [is_group_hom.mul f, ih, H2]
-end
-```
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">eq_sgn</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">Sym</span> <span class="n">n</span> <span class="bp">→</span> <span class="n">mu2</span><span class="o">)</span> <span class="o">[</span><span class="n">is_group_hom</span> <span class="n">f</span><span class="o">]</span>
+  <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">step</span> <span class="n">n</span><span class="o">)</span> <span class="o">(</span><span class="n">H1</span> <span class="o">:</span> <span class="n">f</span> <span class="n">s</span><span class="bp">.</span><span class="kn">eval</span> <span class="bp">=</span> <span class="bp">-</span><span class="mi">1</span><span class="o">)</span> <span class="o">(</span><span class="n">σ</span> <span class="o">:</span> <span class="n">Sym</span> <span class="n">n</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">f</span> <span class="n">σ</span> <span class="bp">=</span> <span class="n">sgn</span> <span class="n">σ</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="k">have</span> <span class="n">H2</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">t</span> <span class="o">:</span> <span class="n">step</span> <span class="n">n</span><span class="o">,</span> <span class="n">f</span> <span class="n">t</span><span class="bp">.</span><span class="kn">eval</span> <span class="bp">=</span> <span class="bp">-</span><span class="mi">1</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">intro</span> <span class="n">t</span><span class="o">,</span>
+    <span class="n">by_cases</span> <span class="n">H2</span> <span class="o">:</span> <span class="n">s</span><span class="bp">.</span><span class="mi">1</span> <span class="bp">=</span> <span class="n">t</span><span class="bp">.</span><span class="mi">1</span><span class="o">,</span>
+    <span class="o">{</span> <span class="n">by_cases</span> <span class="n">H3</span> <span class="o">:</span> <span class="n">s</span><span class="bp">.</span><span class="mi">2</span> <span class="bp">=</span> <span class="n">t</span><span class="bp">.</span><span class="mi">2</span><span class="o">,</span>
+      <span class="o">{</span> <span class="n">rw</span> <span class="o">[</span><span class="err">←</span> <span class="n">step</span><span class="bp">.</span><span class="n">ext</span> <span class="bp">_</span> <span class="bp">_</span> <span class="n">H2</span> <span class="n">H3</span><span class="o">,</span> <span class="n">H1</span><span class="o">]</span> <span class="o">},</span>
+      <span class="k">have</span> <span class="n">H4</span> <span class="o">:</span> <span class="n">t</span><span class="bp">.</span><span class="kn">eval</span> <span class="bp">=</span> <span class="n">swap</span> <span class="n">s</span><span class="bp">.</span><span class="mi">2</span> <span class="n">t</span><span class="bp">.</span><span class="mi">2</span> <span class="bp">*</span> <span class="n">s</span><span class="bp">.</span><span class="kn">eval</span> <span class="bp">*</span> <span class="n">swap</span> <span class="n">s</span><span class="bp">.</span><span class="mi">2</span> <span class="n">t</span><span class="bp">.</span><span class="mi">2</span><span class="o">,</span>
+      <span class="o">{</span> <span class="n">dsimp</span> <span class="o">[</span><span class="n">step</span><span class="bp">.</span><span class="kn">eval</span><span class="o">,</span> <span class="n">swap</span><span class="o">],</span> <span class="n">ext</span> <span class="n">k</span><span class="o">,</span> <span class="n">dsimp</span><span class="o">,</span>
+        <span class="k">have</span> <span class="o">:=</span> <span class="n">ne_of_lt</span> <span class="n">s</span><span class="bp">.</span><span class="mi">3</span><span class="o">,</span> <span class="k">have</span> <span class="o">:=</span> <span class="n">ne_of_lt</span> <span class="n">t</span><span class="bp">.</span><span class="mi">3</span><span class="o">,</span>
+        <span class="n">split_ifs</span><span class="bp">;</span> <span class="n">cc</span> <span class="o">},</span>
+      <span class="n">simp</span> <span class="o">[</span><span class="n">H4</span><span class="o">,</span> <span class="n">is_group_hom</span><span class="bp">.</span><span class="n">mul</span> <span class="n">f</span><span class="o">,</span> <span class="n">H1</span><span class="o">]</span> <span class="o">},</span>
+    <span class="n">by_cases</span> <span class="n">H3</span> <span class="o">:</span> <span class="n">s</span><span class="bp">.</span><span class="mi">1</span> <span class="bp">=</span> <span class="n">t</span><span class="bp">.</span><span class="mi">2</span><span class="o">,</span>
+    <span class="o">{</span> <span class="k">have</span> <span class="n">H4</span> <span class="o">:</span> <span class="n">t</span><span class="bp">.</span><span class="kn">eval</span> <span class="bp">=</span> <span class="n">swap</span> <span class="n">s</span><span class="bp">.</span><span class="mi">2</span> <span class="n">t</span><span class="bp">.</span><span class="mi">1</span> <span class="bp">*</span> <span class="n">s</span><span class="bp">.</span><span class="kn">eval</span> <span class="bp">*</span> <span class="n">swap</span> <span class="n">s</span><span class="bp">.</span><span class="mi">2</span> <span class="n">t</span><span class="bp">.</span><span class="mi">1</span><span class="o">,</span>
+      <span class="o">{</span> <span class="n">dsimp</span> <span class="o">[</span><span class="n">step</span><span class="bp">.</span><span class="kn">eval</span><span class="o">,</span> <span class="n">swap</span><span class="o">],</span> <span class="n">ext</span> <span class="n">k</span><span class="o">,</span> <span class="n">dsimp</span><span class="o">,</span>
+        <span class="k">have</span> <span class="o">:=</span> <span class="n">ne_of_lt</span> <span class="n">s</span><span class="bp">.</span><span class="mi">3</span><span class="o">,</span> <span class="k">have</span> <span class="o">:=</span> <span class="n">ne_of_lt</span> <span class="n">t</span><span class="bp">.</span><span class="mi">3</span><span class="o">,</span>
+        <span class="n">split_ifs</span><span class="bp">;</span> <span class="n">cc</span> <span class="o">},</span>
+      <span class="n">simp</span> <span class="o">[</span><span class="n">H4</span><span class="o">,</span> <span class="n">is_group_hom</span><span class="bp">.</span><span class="n">mul</span> <span class="n">f</span><span class="o">,</span> <span class="n">H1</span><span class="o">]</span> <span class="o">},</span>
+    <span class="n">by_cases</span> <span class="n">H4</span> <span class="o">:</span> <span class="n">s</span><span class="bp">.</span><span class="mi">2</span> <span class="bp">=</span> <span class="n">t</span><span class="bp">.</span><span class="mi">1</span><span class="o">,</span>
+    <span class="o">{</span> <span class="k">have</span> <span class="n">H5</span> <span class="o">:</span> <span class="n">t</span><span class="bp">.</span><span class="kn">eval</span> <span class="bp">=</span> <span class="n">swap</span> <span class="n">s</span><span class="bp">.</span><span class="mi">1</span> <span class="n">t</span><span class="bp">.</span><span class="mi">2</span> <span class="bp">*</span> <span class="n">s</span><span class="bp">.</span><span class="kn">eval</span> <span class="bp">*</span> <span class="n">swap</span> <span class="n">s</span><span class="bp">.</span><span class="mi">1</span> <span class="n">t</span><span class="bp">.</span><span class="mi">2</span><span class="o">,</span>
+      <span class="o">{</span> <span class="n">dsimp</span> <span class="o">[</span><span class="n">step</span><span class="bp">.</span><span class="kn">eval</span><span class="o">,</span> <span class="n">swap</span><span class="o">],</span> <span class="n">ext</span> <span class="n">k</span><span class="o">,</span> <span class="n">dsimp</span><span class="o">,</span>
+        <span class="k">have</span> <span class="o">:=</span> <span class="n">ne_of_lt</span> <span class="n">s</span><span class="bp">.</span><span class="mi">3</span><span class="o">,</span> <span class="k">have</span> <span class="o">:=</span> <span class="n">ne_of_lt</span> <span class="n">t</span><span class="bp">.</span><span class="mi">3</span><span class="o">,</span>
+        <span class="n">split_ifs</span><span class="bp">;</span> <span class="n">cc</span> <span class="o">},</span>
+      <span class="n">simp</span> <span class="o">[</span><span class="n">H5</span><span class="o">,</span> <span class="n">is_group_hom</span><span class="bp">.</span><span class="n">mul</span> <span class="n">f</span><span class="o">,</span> <span class="n">H1</span><span class="o">]</span> <span class="o">},</span>
+    <span class="n">by_cases</span> <span class="n">H5</span> <span class="o">:</span> <span class="n">s</span><span class="bp">.</span><span class="mi">2</span> <span class="bp">=</span> <span class="n">t</span><span class="bp">.</span><span class="mi">2</span><span class="o">,</span>
+    <span class="o">{</span> <span class="k">have</span> <span class="n">H6</span> <span class="o">:</span> <span class="n">t</span><span class="bp">.</span><span class="kn">eval</span> <span class="bp">=</span> <span class="n">swap</span> <span class="n">s</span><span class="bp">.</span><span class="mi">1</span> <span class="n">t</span><span class="bp">.</span><span class="mi">1</span> <span class="bp">*</span> <span class="n">s</span><span class="bp">.</span><span class="kn">eval</span> <span class="bp">*</span> <span class="n">swap</span> <span class="n">s</span><span class="bp">.</span><span class="mi">1</span> <span class="n">t</span><span class="bp">.</span><span class="mi">1</span><span class="o">,</span>
+      <span class="o">{</span> <span class="n">dsimp</span> <span class="o">[</span><span class="n">step</span><span class="bp">.</span><span class="kn">eval</span><span class="o">,</span> <span class="n">swap</span><span class="o">],</span> <span class="n">ext</span> <span class="n">k</span><span class="o">,</span> <span class="n">dsimp</span><span class="o">,</span>
+        <span class="k">have</span> <span class="o">:=</span> <span class="n">ne_of_lt</span> <span class="n">s</span><span class="bp">.</span><span class="mi">3</span><span class="o">,</span> <span class="k">have</span> <span class="o">:=</span> <span class="n">ne_of_lt</span> <span class="n">t</span><span class="bp">.</span><span class="mi">3</span><span class="o">,</span>
+        <span class="n">split_ifs</span><span class="bp">;</span> <span class="n">cc</span> <span class="o">},</span>
+      <span class="n">simp</span> <span class="o">[</span><span class="n">H6</span><span class="o">,</span> <span class="n">is_group_hom</span><span class="bp">.</span><span class="n">mul</span> <span class="n">f</span><span class="o">,</span> <span class="n">H1</span><span class="o">]</span> <span class="o">},</span>
+    <span class="k">have</span> <span class="n">H6</span> <span class="o">:</span> <span class="n">t</span><span class="bp">.</span><span class="kn">eval</span> <span class="bp">=</span> <span class="n">swap</span> <span class="n">s</span><span class="bp">.</span><span class="mi">1</span> <span class="n">t</span><span class="bp">.</span><span class="mi">1</span> <span class="bp">*</span> <span class="n">swap</span> <span class="n">s</span><span class="bp">.</span><span class="mi">2</span> <span class="n">t</span><span class="bp">.</span><span class="mi">2</span> <span class="bp">*</span> <span class="n">s</span><span class="bp">.</span><span class="kn">eval</span> <span class="bp">*</span> <span class="n">swap</span> <span class="n">s</span><span class="bp">.</span><span class="mi">2</span> <span class="n">t</span><span class="bp">.</span><span class="mi">2</span> <span class="bp">*</span> <span class="n">swap</span> <span class="n">s</span><span class="bp">.</span><span class="mi">1</span> <span class="n">t</span><span class="bp">.</span><span class="mi">1</span><span class="o">,</span>
+    <span class="o">{</span> <span class="n">dsimp</span> <span class="o">[</span><span class="n">step</span><span class="bp">.</span><span class="kn">eval</span><span class="o">,</span> <span class="n">swap</span><span class="o">],</span> <span class="n">ext</span> <span class="n">k</span><span class="o">,</span> <span class="n">dsimp</span><span class="o">,</span>
+      <span class="k">have</span> <span class="o">:=</span> <span class="n">ne_of_lt</span> <span class="n">s</span><span class="bp">.</span><span class="mi">3</span><span class="o">,</span> <span class="k">have</span> <span class="o">:=</span> <span class="n">ne_of_lt</span> <span class="n">t</span><span class="bp">.</span><span class="mi">3</span><span class="o">,</span>
+      <span class="n">split_ifs</span><span class="bp">;</span> <span class="n">cc</span> <span class="o">},</span>
+    <span class="n">rw</span> <span class="n">H6</span><span class="o">,</span>
+    <span class="n">repeat</span> <span class="o">{</span> <span class="n">rw</span> <span class="n">is_group_hom</span><span class="bp">.</span><span class="n">mul</span> <span class="n">f</span> <span class="o">},</span>
+    <span class="n">rw</span> <span class="o">[</span><span class="n">H1</span><span class="o">,</span> <span class="n">mul_assoc</span> <span class="o">(</span><span class="n">f</span> <span class="o">(</span><span class="n">swap</span> <span class="n">s</span><span class="bp">.</span><span class="mi">1</span> <span class="n">t</span><span class="bp">.</span><span class="mi">1</span><span class="o">)),</span> <span class="n">mul_assoc</span> <span class="o">(</span><span class="n">f</span> <span class="o">(</span><span class="n">swap</span> <span class="n">s</span><span class="bp">.</span><span class="mi">1</span> <span class="n">t</span><span class="bp">.</span><span class="mi">1</span><span class="o">))],</span>
+    <span class="n">rw</span> <span class="o">[</span><span class="n">mu2</span><span class="bp">.</span><span class="n">mul_neg_one</span><span class="o">,</span> <span class="n">mu2</span><span class="bp">.</span><span class="n">neg_mul_self</span><span class="o">],</span> <span class="n">simp</span> <span class="o">},</span>
+  <span class="k">have</span> <span class="n">H3</span> <span class="o">:=</span> <span class="n">list_step_prod</span> <span class="n">σ</span><span class="o">,</span>
+  <span class="n">revert</span> <span class="n">H3</span><span class="o">,</span> <span class="n">generalize</span> <span class="o">:</span> <span class="n">list_step</span> <span class="n">σ</span> <span class="bp">=</span> <span class="n">L</span><span class="o">,</span> <span class="n">intro</span> <span class="n">H3</span><span class="o">,</span> <span class="n">subst</span> <span class="n">H3</span><span class="o">,</span>
+  <span class="n">induction</span> <span class="n">L</span> <span class="k">with</span> <span class="n">hd</span> <span class="n">tl</span> <span class="n">ih</span><span class="o">,</span> <span class="o">{</span> <span class="n">simp</span> <span class="o">[</span><span class="n">is_group_hom</span><span class="bp">.</span><span class="n">one</span> <span class="n">f</span><span class="o">]</span> <span class="o">},</span>
+  <span class="n">simp</span> <span class="o">[</span><span class="n">is_group_hom</span><span class="bp">.</span><span class="n">mul</span> <span class="n">f</span><span class="o">,</span> <span class="n">ih</span><span class="o">,</span> <span class="n">H2</span><span class="o">]</span>
+<span class="kn">end</span>
+</pre></div>
 
 #### [ Kenny Lau (Jul 29 2018 at 21:48)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130537320):
-@**Kevin Buzzard** @**Chris Hughes**
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> <span class="user-mention" data-user-id="110044">@Chris Hughes</span></p>
 
 #### [ Kevin Buzzard (Jul 29 2018 at 21:49)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130537326):
-Ouch
+<p>Ouch</p>
 
 #### [ Kenny Lau (Jul 29 2018 at 22:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130539514):
-I think I just discovered a uniform definition of a permutation that can conjugate (ab) to become (cd)
+<p>I think I just discovered a uniform definition of a permutation that can conjugate (ab) to become (cd)</p>
 
 #### [ Kenny Lau (Jul 29 2018 at 22:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130539519):
-uniform as in doesn't rely on casing
+<p>uniform as in doesn't rely on casing</p>
 
 #### [ Chris Hughes (Jul 29 2018 at 22:53)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130539530):
-How would you manage that?
+<p>How would you manage that?</p>
 
 #### [ Kenny Lau (Jul 29 2018 at 22:53)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130539531):
-exercise to the reader :P
+<p>exercise to the reader :P</p>
 
 #### [ Kenny Lau (Jul 29 2018 at 22:53)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130539533):
-to be fair, I did use `swap`, which relies on casing
+<p>to be fair, I did use <code>swap</code>, which relies on casing</p>
 
 #### [ Kenny Lau (Jul 29 2018 at 22:53)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130539536):
-`swap a b` swaps `a` and `b` regardless of whether they are distinct
+<p><code>swap a b</code> swaps <code>a</code> and <code>b</code> regardless of whether they are distinct</p>
 
 #### [ Chris Hughes (Jul 29 2018 at 22:54)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130539573):
-That's easy then.
+<p>That's easy then.</p>
 
 #### [ Chris Hughes (Jul 29 2018 at 22:54)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130539578):
-Probably
+<p>Probably</p>
 
 #### [ Kenny Lau (Jul 29 2018 at 22:54)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130539579):
-what's your answer?
+<p>what's your answer?</p>
 
 #### [ Kenny Lau (Jul 29 2018 at 22:54)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130539585):
-oh btw a and b are distinct; and c and d are distinct
+<p>oh btw a and b are distinct; and c and d are distinct</p>
 
 #### [ Chris Hughes (Jul 29 2018 at 22:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130539659):
-I give up
+<p>I give up</p>
 
 #### [ Chris Hughes (Jul 29 2018 at 22:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130539660):
-I can shorten a proof by a few lines if I work it out.
+<p>I can shorten a proof by a few lines if I work it out.</p>
 
 #### [ Kenny Lau (Jul 29 2018 at 22:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130539661):
-```lean
-def eq_sgn_aux4 (s t : step n) : Sym n :=
-swap (swap s.1 t.1 s.2) t.2 * swap s.1 t.1
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">eq_sgn_aux4</span> <span class="o">(</span><span class="n">s</span> <span class="n">t</span> <span class="o">:</span> <span class="n">step</span> <span class="n">n</span><span class="o">)</span> <span class="o">:</span> <span class="n">Sym</span> <span class="n">n</span> <span class="o">:=</span>
+<span class="n">swap</span> <span class="o">(</span><span class="n">swap</span> <span class="n">s</span><span class="bp">.</span><span class="mi">1</span> <span class="n">t</span><span class="bp">.</span><span class="mi">1</span> <span class="n">s</span><span class="bp">.</span><span class="mi">2</span><span class="o">)</span> <span class="n">t</span><span class="bp">.</span><span class="mi">2</span> <span class="bp">*</span> <span class="n">swap</span> <span class="n">s</span><span class="bp">.</span><span class="mi">1</span> <span class="n">t</span><span class="bp">.</span><span class="mi">1</span>
 
-theorem eq_sgn_aux3 (s t : step n) :
-  eq_sgn_aux4 s t s.1 = t.1 :=
-begin
-  dsimp [eq_sgn_aux4, swap],
-  have := ne_of_lt s.3,
-  have := ne_of_lt t.3,
-  simp, split_ifs; cc
-end
+<span class="kn">theorem</span> <span class="n">eq_sgn_aux3</span> <span class="o">(</span><span class="n">s</span> <span class="n">t</span> <span class="o">:</span> <span class="n">step</span> <span class="n">n</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">eq_sgn_aux4</span> <span class="n">s</span> <span class="n">t</span> <span class="n">s</span><span class="bp">.</span><span class="mi">1</span> <span class="bp">=</span> <span class="n">t</span><span class="bp">.</span><span class="mi">1</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">dsimp</span> <span class="o">[</span><span class="n">eq_sgn_aux4</span><span class="o">,</span> <span class="n">swap</span><span class="o">],</span>
+  <span class="k">have</span> <span class="o">:=</span> <span class="n">ne_of_lt</span> <span class="n">s</span><span class="bp">.</span><span class="mi">3</span><span class="o">,</span>
+  <span class="k">have</span> <span class="o">:=</span> <span class="n">ne_of_lt</span> <span class="n">t</span><span class="bp">.</span><span class="mi">3</span><span class="o">,</span>
+  <span class="n">simp</span><span class="o">,</span> <span class="n">split_ifs</span><span class="bp">;</span> <span class="n">cc</span>
+<span class="kn">end</span>
 
-theorem eq_sgn_aux2 (s t : step n) :
-  eq_sgn_aux4 s t s.2 = t.2 :=
-begin
-  dsimp [eq_sgn_aux4, swap],
-  simp
-end
-```
+<span class="kn">theorem</span> <span class="n">eq_sgn_aux2</span> <span class="o">(</span><span class="n">s</span> <span class="n">t</span> <span class="o">:</span> <span class="n">step</span> <span class="n">n</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">eq_sgn_aux4</span> <span class="n">s</span> <span class="n">t</span> <span class="n">s</span><span class="bp">.</span><span class="mi">2</span> <span class="bp">=</span> <span class="n">t</span><span class="bp">.</span><span class="mi">2</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">dsimp</span> <span class="o">[</span><span class="n">eq_sgn_aux4</span><span class="o">,</span> <span class="n">swap</span><span class="o">],</span>
+  <span class="n">simp</span>
+<span class="kn">end</span>
+</pre></div>
 
 #### [ Chris Hughes (Jul 29 2018 at 22:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130539698):
-But also probably massively slow down cimpilation time
+<p>But also probably massively slow down cimpilation time</p>
 
 #### [ Kenny Lau (Jul 29 2018 at 22:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130539702):
-looks like I'm finally useful :P
+<p>looks like I'm finally useful :P</p>
 
 #### [ Kevin Buzzard (Jul 29 2018 at 22:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130539708):
-(ac)(bd) conjugates (ab) into (cd). In general conjugating by g sends (abc) to (ga gb gc) and the same for products of cycles
+<p>(ac)(bd) conjugates (ab) into (cd). In general conjugating by g sends (abc) to (ga gb gc) and the same for products of cycles</p>
 
 #### [ Kenny Lau (Jul 29 2018 at 22:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130539710):
-your thing only works when we have more separation axioms
+<p>your thing only works when we have more separation axioms</p>
 
 #### [ Kenny Lau (Jul 29 2018 at 22:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130539711):
-here we only know that `a != b` and `c != d`
+<p>here we only know that <code>a != b</code> and <code>c != d</code></p>
 
 #### [ Kevin Buzzard (Jul 29 2018 at 22:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130539712):
-No
+<p>No</p>
 
 #### [ Kenny Lau (Jul 29 2018 at 23:00)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130539758):
-wait what
+<p>wait what</p>
 
 #### [ Kenny Lau (Jul 29 2018 at 23:01)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130539769):
-ok now I'm shocked
+<p>ok now I'm shocked</p>
 
 #### [ Kenny Lau (Jul 29 2018 at 23:01)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130539770):
-I don't believe it
+<p>I don't believe it</p>
 
 #### [ Kenny Lau (Jul 29 2018 at 23:02)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130539816):
-ah
+<p>ah</p>
 
 #### [ Kenny Lau (Jul 29 2018 at 23:07)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130539942):
-/me finds a hole to hide from his embarrassment
+<p>/me finds a hole to hide from his embarrassment</p>
 
 #### [ Kenny Lau (Jul 29 2018 at 23:14)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130540157):
-in my defense, my definition is easier to work with
+<p>in my defense, my definition is easier to work with</p>
 
 #### [ Kenny Lau (Jul 29 2018 at 23:15)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130540186):
-```lean
-def eq_sgn_aux4 (s t : step n) : Sym n :=
-swap (swap s.1 t.1 s.2) t.2 * swap s.1 t.1
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">eq_sgn_aux4</span> <span class="o">(</span><span class="n">s</span> <span class="n">t</span> <span class="o">:</span> <span class="n">step</span> <span class="n">n</span><span class="o">)</span> <span class="o">:</span> <span class="n">Sym</span> <span class="n">n</span> <span class="o">:=</span>
+<span class="n">swap</span> <span class="o">(</span><span class="n">swap</span> <span class="n">s</span><span class="bp">.</span><span class="mi">1</span> <span class="n">t</span><span class="bp">.</span><span class="mi">1</span> <span class="n">s</span><span class="bp">.</span><span class="mi">2</span><span class="o">)</span> <span class="n">t</span><span class="bp">.</span><span class="mi">2</span> <span class="bp">*</span> <span class="n">swap</span> <span class="n">s</span><span class="bp">.</span><span class="mi">1</span> <span class="n">t</span><span class="bp">.</span><span class="mi">1</span>
 
-theorem eq_sgn_aux3 (s t : step n) :
-  eq_sgn_aux4 s t s.1 = t.1 :=
-begin
-  dsimp [eq_sgn_aux4, swap],
-  have := ne_of_lt s.3,
-  have := ne_of_lt t.3,
-  simp, split_ifs; cc
-end
+<span class="kn">theorem</span> <span class="n">eq_sgn_aux3</span> <span class="o">(</span><span class="n">s</span> <span class="n">t</span> <span class="o">:</span> <span class="n">step</span> <span class="n">n</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">eq_sgn_aux4</span> <span class="n">s</span> <span class="n">t</span> <span class="n">s</span><span class="bp">.</span><span class="mi">1</span> <span class="bp">=</span> <span class="n">t</span><span class="bp">.</span><span class="mi">1</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">dsimp</span> <span class="o">[</span><span class="n">eq_sgn_aux4</span><span class="o">,</span> <span class="n">swap</span><span class="o">],</span>
+  <span class="k">have</span> <span class="o">:=</span> <span class="n">ne_of_lt</span> <span class="n">s</span><span class="bp">.</span><span class="mi">3</span><span class="o">,</span>
+  <span class="k">have</span> <span class="o">:=</span> <span class="n">ne_of_lt</span> <span class="n">t</span><span class="bp">.</span><span class="mi">3</span><span class="o">,</span>
+  <span class="n">simp</span><span class="o">,</span> <span class="n">split_ifs</span><span class="bp">;</span> <span class="n">cc</span>
+<span class="kn">end</span>
 
-theorem eq_sgn_aux2 (s t : step n) :
-  eq_sgn_aux4 s t s.2 = t.2 :=
-begin
-  dsimp [eq_sgn_aux4, swap],
-  simp
-end
+<span class="kn">theorem</span> <span class="n">eq_sgn_aux2</span> <span class="o">(</span><span class="n">s</span> <span class="n">t</span> <span class="o">:</span> <span class="n">step</span> <span class="n">n</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">eq_sgn_aux4</span> <span class="n">s</span> <span class="n">t</span> <span class="n">s</span><span class="bp">.</span><span class="mi">2</span> <span class="bp">=</span> <span class="n">t</span><span class="bp">.</span><span class="mi">2</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">dsimp</span> <span class="o">[</span><span class="n">eq_sgn_aux4</span><span class="o">,</span> <span class="n">swap</span><span class="o">],</span>
+  <span class="n">simp</span>
+<span class="kn">end</span>
 
-theorem eq_sgn_aux (s t : step n) :
-  eq_sgn_aux4 s t * s.eval * (eq_sgn_aux4 s t)⁻¹ = t.eval :=
-begin
-  ext k,
-  by_cases H1 : k = t.1,
-  { subst H1,
-    dsimp [step.eval],
-    simp [equiv.symm_apply_eq.2 (eq_sgn_aux3 s t).symm, eq_sgn_aux2] },
-  by_cases H2 : k = t.2,
-  { subst H2,
-    dsimp [step.eval],
-    simp [equiv.symm_apply_eq.2 (eq_sgn_aux2 s t).symm, eq_sgn_aux3] },
-  dsimp [step.eval, swap],
-  simp [H1, H2, eq_sgn_aux2, eq_sgn_aux3]
-end
+<span class="kn">theorem</span> <span class="n">eq_sgn_aux</span> <span class="o">(</span><span class="n">s</span> <span class="n">t</span> <span class="o">:</span> <span class="n">step</span> <span class="n">n</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">eq_sgn_aux4</span> <span class="n">s</span> <span class="n">t</span> <span class="bp">*</span> <span class="n">s</span><span class="bp">.</span><span class="kn">eval</span> <span class="bp">*</span> <span class="o">(</span><span class="n">eq_sgn_aux4</span> <span class="n">s</span> <span class="n">t</span><span class="o">)</span><span class="bp">⁻¹</span> <span class="bp">=</span> <span class="n">t</span><span class="bp">.</span><span class="kn">eval</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">ext</span> <span class="n">k</span><span class="o">,</span>
+  <span class="n">by_cases</span> <span class="n">H1</span> <span class="o">:</span> <span class="n">k</span> <span class="bp">=</span> <span class="n">t</span><span class="bp">.</span><span class="mi">1</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">subst</span> <span class="n">H1</span><span class="o">,</span>
+    <span class="n">dsimp</span> <span class="o">[</span><span class="n">step</span><span class="bp">.</span><span class="kn">eval</span><span class="o">],</span>
+    <span class="n">simp</span> <span class="o">[</span><span class="n">equiv</span><span class="bp">.</span><span class="n">symm_apply_eq</span><span class="bp">.</span><span class="mi">2</span> <span class="o">(</span><span class="n">eq_sgn_aux3</span> <span class="n">s</span> <span class="n">t</span><span class="o">)</span><span class="bp">.</span><span class="n">symm</span><span class="o">,</span> <span class="n">eq_sgn_aux2</span><span class="o">]</span> <span class="o">},</span>
+  <span class="n">by_cases</span> <span class="n">H2</span> <span class="o">:</span> <span class="n">k</span> <span class="bp">=</span> <span class="n">t</span><span class="bp">.</span><span class="mi">2</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">subst</span> <span class="n">H2</span><span class="o">,</span>
+    <span class="n">dsimp</span> <span class="o">[</span><span class="n">step</span><span class="bp">.</span><span class="kn">eval</span><span class="o">],</span>
+    <span class="n">simp</span> <span class="o">[</span><span class="n">equiv</span><span class="bp">.</span><span class="n">symm_apply_eq</span><span class="bp">.</span><span class="mi">2</span> <span class="o">(</span><span class="n">eq_sgn_aux2</span> <span class="n">s</span> <span class="n">t</span><span class="o">)</span><span class="bp">.</span><span class="n">symm</span><span class="o">,</span> <span class="n">eq_sgn_aux3</span><span class="o">]</span> <span class="o">},</span>
+  <span class="n">dsimp</span> <span class="o">[</span><span class="n">step</span><span class="bp">.</span><span class="kn">eval</span><span class="o">,</span> <span class="n">swap</span><span class="o">],</span>
+  <span class="n">simp</span> <span class="o">[</span><span class="n">H1</span><span class="o">,</span> <span class="n">H2</span><span class="o">,</span> <span class="n">eq_sgn_aux2</span><span class="o">,</span> <span class="n">eq_sgn_aux3</span><span class="o">]</span>
+<span class="kn">end</span>
 
-theorem eq_sgn (f : Sym n → mu2) [is_group_hom f]
-  (s : step n) (H1 : f s.eval = -1) (σ : Sym n) :
-  f σ = sgn σ :=
-begin
-  have H2 : ∀ t : step n, f t.eval = -1,
-  { intro t,
-    rw [← eq_sgn_aux s t],
-    simp [is_group_hom.mul f, is_group_hom.inv f, H1] },
-  have H3 := list_step_prod σ,
-  revert H3, generalize : list_step σ = L, intro H3, subst H3,
-  induction L with hd tl ih, { simp [is_group_hom.one f] },
-  simp [is_group_hom.mul f, ih, H2]
-end
-```
+<span class="kn">theorem</span> <span class="n">eq_sgn</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">Sym</span> <span class="n">n</span> <span class="bp">→</span> <span class="n">mu2</span><span class="o">)</span> <span class="o">[</span><span class="n">is_group_hom</span> <span class="n">f</span><span class="o">]</span>
+  <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">step</span> <span class="n">n</span><span class="o">)</span> <span class="o">(</span><span class="n">H1</span> <span class="o">:</span> <span class="n">f</span> <span class="n">s</span><span class="bp">.</span><span class="kn">eval</span> <span class="bp">=</span> <span class="bp">-</span><span class="mi">1</span><span class="o">)</span> <span class="o">(</span><span class="n">σ</span> <span class="o">:</span> <span class="n">Sym</span> <span class="n">n</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">f</span> <span class="n">σ</span> <span class="bp">=</span> <span class="n">sgn</span> <span class="n">σ</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="k">have</span> <span class="n">H2</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">t</span> <span class="o">:</span> <span class="n">step</span> <span class="n">n</span><span class="o">,</span> <span class="n">f</span> <span class="n">t</span><span class="bp">.</span><span class="kn">eval</span> <span class="bp">=</span> <span class="bp">-</span><span class="mi">1</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">intro</span> <span class="n">t</span><span class="o">,</span>
+    <span class="n">rw</span> <span class="o">[</span><span class="err">←</span> <span class="n">eq_sgn_aux</span> <span class="n">s</span> <span class="n">t</span><span class="o">],</span>
+    <span class="n">simp</span> <span class="o">[</span><span class="n">is_group_hom</span><span class="bp">.</span><span class="n">mul</span> <span class="n">f</span><span class="o">,</span> <span class="n">is_group_hom</span><span class="bp">.</span><span class="n">inv</span> <span class="n">f</span><span class="o">,</span> <span class="n">H1</span><span class="o">]</span> <span class="o">},</span>
+  <span class="k">have</span> <span class="n">H3</span> <span class="o">:=</span> <span class="n">list_step_prod</span> <span class="n">σ</span><span class="o">,</span>
+  <span class="n">revert</span> <span class="n">H3</span><span class="o">,</span> <span class="n">generalize</span> <span class="o">:</span> <span class="n">list_step</span> <span class="n">σ</span> <span class="bp">=</span> <span class="n">L</span><span class="o">,</span> <span class="n">intro</span> <span class="n">H3</span><span class="o">,</span> <span class="n">subst</span> <span class="n">H3</span><span class="o">,</span>
+  <span class="n">induction</span> <span class="n">L</span> <span class="k">with</span> <span class="n">hd</span> <span class="n">tl</span> <span class="n">ih</span><span class="o">,</span> <span class="o">{</span> <span class="n">simp</span> <span class="o">[</span><span class="n">is_group_hom</span><span class="bp">.</span><span class="n">one</span> <span class="n">f</span><span class="o">]</span> <span class="o">},</span>
+  <span class="n">simp</span> <span class="o">[</span><span class="n">is_group_hom</span><span class="bp">.</span><span class="n">mul</span> <span class="n">f</span><span class="o">,</span> <span class="n">ih</span><span class="o">,</span> <span class="n">H2</span><span class="o">]</span>
+<span class="kn">end</span>
+</pre></div>
 
 #### [ Kenny Lau (Jul 29 2018 at 23:15)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130540187):
-@**Chris Hughes** did it help you?
+<p><span class="user-mention" data-user-id="110044">@Chris Hughes</span> did it help you?</p>
 
 #### [ Chris Hughes (Jul 29 2018 at 23:16)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130540227):
-If a = d then (ac)(bd)(ab)(bd)(ac) a = (ac)(ba)(ab)(ba)(ac) a = a != c = (cd) a. What's my mistake? I'm probably being an idiot.
+<p>If a = d then (ac)(bd)(ab)(bd)(ac) a = (ac)(ba)(ab)(ba)(ac) a = a != c = (cd) a. What's my mistake? I'm probably being an idiot.</p>
 
 #### [ Kenny Lau (Jul 29 2018 at 23:17)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130540231):
-hmm...
+<p>hmm...</p>
 
 #### [ Kenny Lau (Jul 29 2018 at 23:21)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130540884):
-@**Chris Hughes** how did you find that counter-example?
+<p><span class="user-mention" data-user-id="110044">@Chris Hughes</span> how did you find that counter-example?</p>
 
 #### [ Kevin Buzzard (Jul 29 2018 at 23:21)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130540885):
-(cd)a=a.
+<p>(cd)a=a.</p>
 
 #### [ Kenny Lau (Jul 29 2018 at 23:21)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130540886):
-(cd)a = (ca)a = c
+<p>(cd)a = (ca)a = c</p>
 
 #### [ Kevin Buzzard (Jul 29 2018 at 23:22)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130540927):
-It's certainly true that if sigma sends x to y, then g sigma g^{-1} sends gx to gy.
+<p>It's certainly true that if sigma sends x to y, then g sigma g^{-1} sends gx to gy.</p>
 
 #### [ Kenny Lau (Jul 29 2018 at 23:22)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130540928):
-yes, that is true
+<p>yes, that is true</p>
 
 #### [ Chris Hughes (Jul 29 2018 at 23:22)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130540929):
-```lean
-example : ∃ x y a b : fin 3, x ≠ y ∧ a ≠ b ∧ 
-  transpose x b * transpose y a * transpose x y * (transpose x b * transpose y a)⁻¹ ≠ 
-  transpose a b := dec_trivial
-```
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">:</span> <span class="bp">∃</span> <span class="n">x</span> <span class="n">y</span> <span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">fin</span> <span class="mi">3</span><span class="o">,</span> <span class="n">x</span> <span class="bp">≠</span> <span class="n">y</span> <span class="bp">∧</span> <span class="n">a</span> <span class="bp">≠</span> <span class="n">b</span> <span class="bp">∧</span>
+  <span class="n">transpose</span> <span class="n">x</span> <span class="n">b</span> <span class="bp">*</span> <span class="n">transpose</span> <span class="n">y</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">transpose</span> <span class="n">x</span> <span class="n">y</span> <span class="bp">*</span> <span class="o">(</span><span class="n">transpose</span> <span class="n">x</span> <span class="n">b</span> <span class="bp">*</span> <span class="n">transpose</span> <span class="n">y</span> <span class="n">a</span><span class="o">)</span><span class="bp">⁻¹</span> <span class="bp">≠</span>
+  <span class="n">transpose</span> <span class="n">a</span> <span class="n">b</span> <span class="o">:=</span> <span class="n">dec_trivial</span>
+</pre></div>
 
 #### [ Kenny Lau (Jul 29 2018 at 23:22)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130540930):
-ah
+<p>ah</p>
 
 #### [ Kenny Lau (Jul 29 2018 at 23:23)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130540933):
-relying on the automation
+<p>relying on the automation</p>
 
 #### [ Kevin Buzzard (Jul 29 2018 at 23:23)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130540940):
-Oh ha ha (ac)(bd) is not the map sending a to c and b to d
+<p>Oh ha ha (ac)(bd) is not the map sending a to c and b to d</p>
 
 #### [ Kevin Buzzard (Jul 29 2018 at 23:24)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130540981):
-The map that conjugates (ab) into (cd) is "anything sending a to c and b to d"
+<p>The map that conjugates (ab) into (cd) is "anything sending a to c and b to d"</p>
 
 #### [ Kevin Buzzard (Jul 29 2018 at 23:24)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130540985):
-In fact the general solution is "either send a to c and b to d, or send a to d and b to c -- and do anything you like with everything else"
+<p>In fact the general solution is "either send a to c and b to d, or send a to d and b to c -- and do anything you like with everything else"</p>
 
 #### [ Chris Hughes (Jul 29 2018 at 23:31)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130541149):
-How briefly can you write down such a function?
+<p>How briefly can you write down such a function?</p>
 
 #### [ Kenny Lau (Jul 29 2018 at 23:31)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130541150):
-I just did
+<p>I just did</p>
 
 #### [ Kenny Lau (Jul 29 2018 at 23:31)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130541151):
-```lean
-def eq_sgn_aux4 (s t : step n) : Sym n :=
-swap (swap s.1 t.1 s.2) t.2 * swap s.1 t.1
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">eq_sgn_aux4</span> <span class="o">(</span><span class="n">s</span> <span class="n">t</span> <span class="o">:</span> <span class="n">step</span> <span class="n">n</span><span class="o">)</span> <span class="o">:</span> <span class="n">Sym</span> <span class="n">n</span> <span class="o">:=</span>
+<span class="n">swap</span> <span class="o">(</span><span class="n">swap</span> <span class="n">s</span><span class="bp">.</span><span class="mi">1</span> <span class="n">t</span><span class="bp">.</span><span class="mi">1</span> <span class="n">s</span><span class="bp">.</span><span class="mi">2</span><span class="o">)</span> <span class="n">t</span><span class="bp">.</span><span class="mi">2</span> <span class="bp">*</span> <span class="n">swap</span> <span class="n">s</span><span class="bp">.</span><span class="mi">1</span> <span class="n">t</span><span class="bp">.</span><span class="mi">1</span>
 
-theorem eq_sgn_aux3 (s t : step n) :
-  eq_sgn_aux4 s t s.1 = t.1 :=
-begin
-  dsimp [eq_sgn_aux4, swap],
-  have := ne_of_lt s.3,
-  have := ne_of_lt t.3,
-  simp, split_ifs; cc
-end
+<span class="kn">theorem</span> <span class="n">eq_sgn_aux3</span> <span class="o">(</span><span class="n">s</span> <span class="n">t</span> <span class="o">:</span> <span class="n">step</span> <span class="n">n</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">eq_sgn_aux4</span> <span class="n">s</span> <span class="n">t</span> <span class="n">s</span><span class="bp">.</span><span class="mi">1</span> <span class="bp">=</span> <span class="n">t</span><span class="bp">.</span><span class="mi">1</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">dsimp</span> <span class="o">[</span><span class="n">eq_sgn_aux4</span><span class="o">,</span> <span class="n">swap</span><span class="o">],</span>
+  <span class="k">have</span> <span class="o">:=</span> <span class="n">ne_of_lt</span> <span class="n">s</span><span class="bp">.</span><span class="mi">3</span><span class="o">,</span>
+  <span class="k">have</span> <span class="o">:=</span> <span class="n">ne_of_lt</span> <span class="n">t</span><span class="bp">.</span><span class="mi">3</span><span class="o">,</span>
+  <span class="n">simp</span><span class="o">,</span> <span class="n">split_ifs</span><span class="bp">;</span> <span class="n">cc</span>
+<span class="kn">end</span>
 
-theorem eq_sgn_aux2 (s t : step n) :
-  eq_sgn_aux4 s t s.2 = t.2 :=
-begin
-  dsimp [eq_sgn_aux4, swap],
-  simp
-end
+<span class="kn">theorem</span> <span class="n">eq_sgn_aux2</span> <span class="o">(</span><span class="n">s</span> <span class="n">t</span> <span class="o">:</span> <span class="n">step</span> <span class="n">n</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">eq_sgn_aux4</span> <span class="n">s</span> <span class="n">t</span> <span class="n">s</span><span class="bp">.</span><span class="mi">2</span> <span class="bp">=</span> <span class="n">t</span><span class="bp">.</span><span class="mi">2</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">dsimp</span> <span class="o">[</span><span class="n">eq_sgn_aux4</span><span class="o">,</span> <span class="n">swap</span><span class="o">],</span>
+  <span class="n">simp</span>
+<span class="kn">end</span>
 
-theorem eq_sgn_aux (s t : step n) :
-  eq_sgn_aux4 s t * s.eval * (eq_sgn_aux4 s t)⁻¹ = t.eval :=
-begin
-  ext k,
-  by_cases H1 : k = t.1,
-  { subst H1,
-    dsimp [step.eval],
-    simp [equiv.symm_apply_eq.2 (eq_sgn_aux3 s t).symm, eq_sgn_aux2] },
-  by_cases H2 : k = t.2,
-  { subst H2,
-    dsimp [step.eval],
-    simp [equiv.symm_apply_eq.2 (eq_sgn_aux2 s t).symm, eq_sgn_aux3] },
-  dsimp [step.eval, swap],
-  simp [H1, H2, eq_sgn_aux2, eq_sgn_aux3]
-end
-```
+<span class="kn">theorem</span> <span class="n">eq_sgn_aux</span> <span class="o">(</span><span class="n">s</span> <span class="n">t</span> <span class="o">:</span> <span class="n">step</span> <span class="n">n</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">eq_sgn_aux4</span> <span class="n">s</span> <span class="n">t</span> <span class="bp">*</span> <span class="n">s</span><span class="bp">.</span><span class="kn">eval</span> <span class="bp">*</span> <span class="o">(</span><span class="n">eq_sgn_aux4</span> <span class="n">s</span> <span class="n">t</span><span class="o">)</span><span class="bp">⁻¹</span> <span class="bp">=</span> <span class="n">t</span><span class="bp">.</span><span class="kn">eval</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">ext</span> <span class="n">k</span><span class="o">,</span>
+  <span class="n">by_cases</span> <span class="n">H1</span> <span class="o">:</span> <span class="n">k</span> <span class="bp">=</span> <span class="n">t</span><span class="bp">.</span><span class="mi">1</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">subst</span> <span class="n">H1</span><span class="o">,</span>
+    <span class="n">dsimp</span> <span class="o">[</span><span class="n">step</span><span class="bp">.</span><span class="kn">eval</span><span class="o">],</span>
+    <span class="n">simp</span> <span class="o">[</span><span class="n">equiv</span><span class="bp">.</span><span class="n">symm_apply_eq</span><span class="bp">.</span><span class="mi">2</span> <span class="o">(</span><span class="n">eq_sgn_aux3</span> <span class="n">s</span> <span class="n">t</span><span class="o">)</span><span class="bp">.</span><span class="n">symm</span><span class="o">,</span> <span class="n">eq_sgn_aux2</span><span class="o">]</span> <span class="o">},</span>
+  <span class="n">by_cases</span> <span class="n">H2</span> <span class="o">:</span> <span class="n">k</span> <span class="bp">=</span> <span class="n">t</span><span class="bp">.</span><span class="mi">2</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">subst</span> <span class="n">H2</span><span class="o">,</span>
+    <span class="n">dsimp</span> <span class="o">[</span><span class="n">step</span><span class="bp">.</span><span class="kn">eval</span><span class="o">],</span>
+    <span class="n">simp</span> <span class="o">[</span><span class="n">equiv</span><span class="bp">.</span><span class="n">symm_apply_eq</span><span class="bp">.</span><span class="mi">2</span> <span class="o">(</span><span class="n">eq_sgn_aux2</span> <span class="n">s</span> <span class="n">t</span><span class="o">)</span><span class="bp">.</span><span class="n">symm</span><span class="o">,</span> <span class="n">eq_sgn_aux3</span><span class="o">]</span> <span class="o">},</span>
+  <span class="n">dsimp</span> <span class="o">[</span><span class="n">step</span><span class="bp">.</span><span class="kn">eval</span><span class="o">,</span> <span class="n">swap</span><span class="o">],</span>
+  <span class="n">simp</span> <span class="o">[</span><span class="n">H1</span><span class="o">,</span> <span class="n">H2</span><span class="o">,</span> <span class="n">eq_sgn_aux2</span><span class="o">,</span> <span class="n">eq_sgn_aux3</span><span class="o">]</span>
+<span class="kn">end</span>
+</pre></div>
 
 #### [ Chris Hughes (Jul 29 2018 at 23:32)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130541190):
-Why does swap have 3 arguments?
+<p>Why does swap have 3 arguments?</p>
 
 #### [ Chris Hughes (Jul 29 2018 at 23:32)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130541192):
-I see
+<p>I see</p>
 
 #### [ Kenny Lau (Jul 29 2018 at 23:32)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130541193):
-it only has 2, then it is coerced to become a function
+<p>it only has 2, then it is coerced to become a function</p>
 
 #### [ Kenny Lau (Jul 29 2018 at 23:38)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130541360):
-I finally proved that my `step` is a fintype
+<p>I finally proved that my <code>step</code> is a fintype</p>
 
 #### [ Kenny Lau (Jul 29 2018 at 23:39)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130541361):
-```lean
-example : ∃ s t : step 3,
-  swap s.1 t.1 * swap s.2 t.2 * s.eval * swap s.2 t.2 * swap s.1 t.1
-  ≠ t.eval :=
-dec_trivial
-```
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">:</span> <span class="bp">∃</span> <span class="n">s</span> <span class="n">t</span> <span class="o">:</span> <span class="n">step</span> <span class="mi">3</span><span class="o">,</span>
+  <span class="n">swap</span> <span class="n">s</span><span class="bp">.</span><span class="mi">1</span> <span class="n">t</span><span class="bp">.</span><span class="mi">1</span> <span class="bp">*</span> <span class="n">swap</span> <span class="n">s</span><span class="bp">.</span><span class="mi">2</span> <span class="n">t</span><span class="bp">.</span><span class="mi">2</span> <span class="bp">*</span> <span class="n">s</span><span class="bp">.</span><span class="kn">eval</span> <span class="bp">*</span> <span class="n">swap</span> <span class="n">s</span><span class="bp">.</span><span class="mi">2</span> <span class="n">t</span><span class="bp">.</span><span class="mi">2</span> <span class="bp">*</span> <span class="n">swap</span> <span class="n">s</span><span class="bp">.</span><span class="mi">1</span> <span class="n">t</span><span class="bp">.</span><span class="mi">1</span>
+  <span class="bp">≠</span> <span class="n">t</span><span class="bp">.</span><span class="kn">eval</span> <span class="o">:=</span>
+<span class="n">dec_trivial</span>
+</pre></div>
 
 #### [ Chris Hughes (Jul 29 2018 at 23:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130541420):
-What is step?
+<p>What is step?</p>
 
 #### [ Kenny Lau (Jul 29 2018 at 23:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130541422):
-```lean
-@[derive decidable_eq]
-structure step : Type :=
-(fst : fin n)
-(snd : fin n)
-(lt  : fst < snd)
-```
+<div class="codehilite"><pre><span></span><span class="bp">@</span><span class="o">[</span><span class="n">derive</span> <span class="n">decidable_eq</span><span class="o">]</span>
+<span class="kn">structure</span> <span class="n">step</span> <span class="o">:</span> <span class="kt">Type</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">fst</span> <span class="o">:</span> <span class="n">fin</span> <span class="n">n</span><span class="o">)</span>
+<span class="o">(</span><span class="n">snd</span> <span class="o">:</span> <span class="n">fin</span> <span class="n">n</span><span class="o">)</span>
+<span class="o">(</span><span class="n">lt</span>  <span class="o">:</span> <span class="n">fst</span> <span class="bp">&lt;</span> <span class="n">snd</span><span class="o">)</span>
+</pre></div>
 
 #### [ Kenny Lau (Jul 29 2018 at 23:42)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130541462):
-it represents a transposition
+<p>it represents a transposition</p>
 
 #### [ Kenny Lau (Jul 29 2018 at 23:42)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130541465):
-https://github.com/kckennylau/Lean/blob/master/Sym.lean
+<p><a href="https://github.com/kckennylau/Lean/blob/master/Sym.lean" target="_blank" title="https://github.com/kckennylau/Lean/blob/master/Sym.lean">https://github.com/kckennylau/Lean/blob/master/Sym.lean</a></p>
 
 #### [ Chris Hughes (Jul 29 2018 at 23:43)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130541473):
-I used something similar 
-```lean
-def fin_pairs_lt (n : ℕ) : finset (Σ a : fin n, fin n) :=
-(univ : finset (fin n)).sigma (λ a, (range a.1).attach_fin
-  (λ m hm, lt_trans (mem_range.1 hm) a.2))
-```
+<p>I used something similar </p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">fin_pairs_lt</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">finset</span> <span class="o">(</span><span class="err">Σ</span> <span class="n">a</span> <span class="o">:</span> <span class="n">fin</span> <span class="n">n</span><span class="o">,</span> <span class="n">fin</span> <span class="n">n</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">univ</span> <span class="o">:</span> <span class="n">finset</span> <span class="o">(</span><span class="n">fin</span> <span class="n">n</span><span class="o">))</span><span class="bp">.</span><span class="n">sigma</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">a</span><span class="o">,</span> <span class="o">(</span><span class="n">range</span> <span class="n">a</span><span class="bp">.</span><span class="mi">1</span><span class="o">)</span><span class="bp">.</span><span class="n">attach_fin</span>
+  <span class="o">(</span><span class="bp">λ</span> <span class="n">m</span> <span class="n">hm</span><span class="o">,</span> <span class="n">lt_trans</span> <span class="o">(</span><span class="n">mem_range</span><span class="bp">.</span><span class="mi">1</span> <span class="n">hm</span><span class="o">)</span> <span class="n">a</span><span class="bp">.</span><span class="mi">2</span><span class="o">))</span>
+</pre></div>
 
 #### [ Kevin Buzzard (Jul 29 2018 at 23:45)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130541533):
-The fact that if sigma sends x to y then g sigma g^{-1} sends gx to gy is a special case of "transport de structure". It's more easily seen if you generalise. If sigma is a permutation of a set X, and if g is a bijection between X and another set Y, then g identifies X and Y, so sigma transports over to a permutation of Y. The explicit formula for the permutation of Y is g sigma g^{-1}. If you think of g as a dictionary identifying X and Y, then a in X gets identified with ga in Y, and b in X gets identified with gb in Y. If sigma sends a to b, then the transported sigma sends ga to gb. The counterintuitive idea now is to imagine that X = Y and that g is not the identity map but perhaps some other bijection. If you think about things this way then the fact that e.g. conjugate permutations have the same cycle type becomes trivial.
+<p>The fact that if sigma sends x to y then g sigma g^{-1} sends gx to gy is a special case of "transport de structure". It's more easily seen if you generalise. If sigma is a permutation of a set X, and if g is a bijection between X and another set Y, then g identifies X and Y, so sigma transports over to a permutation of Y. The explicit formula for the permutation of Y is g sigma g^{-1}. If you think of g as a dictionary identifying X and Y, then a in X gets identified with ga in Y, and b in X gets identified with gb in Y. If sigma sends a to b, then the transported sigma sends ga to gb. The counterintuitive idea now is to imagine that X = Y and that g is not the identity map but perhaps some other bijection. If you think about things this way then the fact that e.g. conjugate permutations have the same cycle type becomes trivial.</p>
 
 #### [ Chris Hughes (Jul 30 2018 at 00:08)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130542126):
-I had to think about it like that when I defined `sign` on an arbitrary `fintype`, and not just `fin`. I used `equiv_fin` to define the `sign`, but I had to prove that `sign` did not depend on which `equiv_fin` I chose, which i used the conjugation property for by combining my two different `equiv_fins` together to make a `perm` and conjugating by that `perm`
+<p>I had to think about it like that when I defined <code>sign</code> on an arbitrary <code>fintype</code>, and not just <code>fin</code>. I used <code>equiv_fin</code> to define the <code>sign</code>, but I had to prove that <code>sign</code> did not depend on which <code>equiv_fin</code> I chose, which i used the conjugation property for by combining my two different <code>equiv_fins</code> together to make a <code>perm</code> and conjugating by that <code>perm</code></p>
 
 #### [ Kenny Lau (Jul 30 2018 at 09:24)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130562395):
-```lean
-theorem inversions_eq_sgn : ∀ σ : Sym n, inversions σ = sgn σ :=
-nat.cases_on n dec_trivial $ λ n,
-nat.cases_on n dec_trivial $ λ n σ,
-eq_sgn inversions (step01 n) inversions_step01 σ
-```
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">inversions_eq_sgn</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">σ</span> <span class="o">:</span> <span class="n">Sym</span> <span class="n">n</span><span class="o">,</span> <span class="n">inversions</span> <span class="n">σ</span> <span class="bp">=</span> <span class="n">sgn</span> <span class="n">σ</span> <span class="o">:=</span>
+<span class="n">nat</span><span class="bp">.</span><span class="n">cases_on</span> <span class="n">n</span> <span class="n">dec_trivial</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">n</span><span class="o">,</span>
+<span class="n">nat</span><span class="bp">.</span><span class="n">cases_on</span> <span class="n">n</span> <span class="n">dec_trivial</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">n</span> <span class="n">σ</span><span class="o">,</span>
+<span class="n">eq_sgn</span> <span class="n">inversions</span> <span class="o">(</span><span class="n">step01</span> <span class="n">n</span><span class="o">)</span> <span class="n">inversions_step01</span> <span class="n">σ</span>
+</pre></div>
 
 #### [ Kevin Buzzard (Jul 30 2018 at 09:28)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130562545):
-```quote
-```lean
-example : ∃ x y a b : fin 3, x ≠ y ∧ a ≠ b ∧ 
-  transpose x b * transpose y a * transpose x y * (transpose x b * transpose y a)⁻¹ ≠ 
-  transpose a b := dec_trivial
-```
-```
-Did this work out of the box? I was going to use it in my talk today! But
+<blockquote>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">:</span> <span class="bp">∃</span> <span class="n">x</span> <span class="n">y</span> <span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">fin</span> <span class="mi">3</span><span class="o">,</span> <span class="n">x</span> <span class="bp">≠</span> <span class="n">y</span> <span class="bp">∧</span> <span class="n">a</span> <span class="bp">≠</span> <span class="n">b</span> <span class="bp">∧</span>
+  <span class="n">transpose</span> <span class="n">x</span> <span class="n">b</span> <span class="bp">*</span> <span class="n">transpose</span> <span class="n">y</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">transpose</span> <span class="n">x</span> <span class="n">y</span> <span class="bp">*</span> <span class="o">(</span><span class="n">transpose</span> <span class="n">x</span> <span class="n">b</span> <span class="bp">*</span> <span class="n">transpose</span> <span class="n">y</span> <span class="n">a</span><span class="o">)</span><span class="bp">⁻¹</span> <span class="bp">≠</span>
+  <span class="n">transpose</span> <span class="n">a</span> <span class="n">b</span> <span class="o">:=</span> <span class="n">dec_trivial</span>
+</pre></div>
 
-```lean
-theorem A : ∃ a b : fin 3, a = b := dec_trivial 
-```
 
-doesn't work for me. Do I need an import?
+</blockquote>
+<p>Did this work out of the box? I was going to use it in my talk today! But</p>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">A</span> <span class="o">:</span> <span class="bp">∃</span> <span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">fin</span> <span class="mi">3</span><span class="o">,</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">b</span> <span class="o">:=</span> <span class="n">dec_trivial</span>
+</pre></div>
+
+
+<p>doesn't work for me. Do I need an import?</p>
 
 #### [ Kenny Lau (Jul 30 2018 at 09:28)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130562550):
-maybe import fintype
+<p>maybe import fintype</p>
 
 #### [ Kenny Lau (Jul 30 2018 at 09:33)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130562722):
-this is interesting. `fintype.decidable_exists_fintype` isn't in the online Lean
+<p>this is interesting. <code>fintype.decidable_exists_fintype</code> isn't in the online Lean</p>
 
 #### [ Kenny Lau (Jul 30 2018 at 09:34)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130562763):
-it was added [18 days ago](https://github.com/leanprover/mathlib/commit/21b918b3083ce42c495ab48b7ea19e486e3eae6b#diff-de2c770e28fdceb296e807697c00ad8a)
+<p>it was added <a href="https://github.com/leanprover/mathlib/commit/21b918b3083ce42c495ab48b7ea19e486e3eae6b#diff-de2c770e28fdceb296e807697c00ad8a" target="_blank" title="https://github.com/leanprover/mathlib/commit/21b918b3083ce42c495ab48b7ea19e486e3eae6b#diff-de2c770e28fdceb296e807697c00ad8a">18 days ago</a></p>
 
 #### [ Kevin Buzzard (Jul 30 2018 at 09:40)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130562986):
-Oh I think that might have been because of some other problem I had, which Chris fixed. Oh I remember -- it was for Ellen's dots and boxes project. She wanted to write basic definitions like "if the number of times this multiset contains 3 is at most 1, and if ..., then blah" and Lean was demanding decidability proofs. I asked why and Chris and Simon just fixed everything up so it worked.
+<p>Oh I think that might have been because of some other problem I had, which Chris fixed. Oh I remember -- it was for Ellen's dots and boxes project. She wanted to write basic definitions like "if the number of times this multiset contains 3 is at most 1, and if ..., then blah" and Lean was demanding decidability proofs. I asked why and Chris and Simon just fixed everything up so it worked.</p>
 
 #### [ Kenny Lau (Jul 30 2018 at 09:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130562995):
-'tis a small world
+<p>'tis a small world</p>
 
 #### [ Kevin Buzzard (Jul 30 2018 at 09:42)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130563038):
-rofl I had a scratch file open with the "not working" theorem A, and I just imported analysis.topology.continuity to think about Patrick's comment about continuous being a class and it fixed my proof :-)
+<p>rofl I had a scratch file open with the "not working" theorem A, and I just imported analysis.topology.continuity to think about Patrick's comment about continuous being a class and it fixed my proof :-)</p>
 
 #### [ Kenny Lau (Jul 30 2018 at 09:42)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130563041):
-lol
+<p>lol</p>
 
 
 {% endraw %}

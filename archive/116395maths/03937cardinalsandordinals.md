@@ -12,147 +12,143 @@ permalink: archive/116395maths/03937cardinalsandordinals.html
 
 {% raw %}
 #### [ Kenny Lau (Aug 22 2018 at 16:21)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cardinals%20and%20ordinals/near/132580778):
-In lean they are not sets? i.e. `set_theory/zfc.lean` and `set_theory/cardinal.lean` are independent?
+<p>In lean they are not sets? i.e. <code>set_theory/zfc.lean</code> and <code>set_theory/cardinal.lean</code> are independent?</p>
 
 #### [ Kenny Lau (Aug 22 2018 at 16:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cardinals%20and%20ordinals/near/132583263):
-so I've written my embedding:
-```lean
-import set_theory.zfc set_theory.ordinal
+<p>so I've written my embedding:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">set_theory</span><span class="bp">.</span><span class="n">zfc</span> <span class="n">set_theory</span><span class="bp">.</span><span class="n">ordinal</span>
 
-universe u
+<span class="kn">universe</span> <span class="n">u</span>
 
-noncomputable def ordinal.to_Set (o : ordinal.{u}) : Set.{u+1} :=
-quotient.mk $ ordinal.limit_rec_on o ∅ (λ _ s, insert s s) $ λ L _ ih,
-pSet.Union $ pSet.mk { o // o < L } $ λ o', ih o'.1 o'.2
-```
+<span class="n">noncomputable</span> <span class="n">def</span> <span class="n">ordinal</span><span class="bp">.</span><span class="n">to_Set</span> <span class="o">(</span><span class="n">o</span> <span class="o">:</span> <span class="n">ordinal</span><span class="bp">.</span><span class="o">{</span><span class="n">u</span><span class="o">})</span> <span class="o">:</span> <span class="n">Set</span><span class="bp">.</span><span class="o">{</span><span class="n">u</span><span class="bp">+</span><span class="mi">1</span><span class="o">}</span> <span class="o">:=</span>
+<span class="n">quotient</span><span class="bp">.</span><span class="n">mk</span> <span class="err">$</span> <span class="n">ordinal</span><span class="bp">.</span><span class="n">limit_rec_on</span> <span class="n">o</span> <span class="err">∅</span> <span class="o">(</span><span class="bp">λ</span> <span class="bp">_</span> <span class="n">s</span><span class="o">,</span> <span class="n">insert</span> <span class="n">s</span> <span class="n">s</span><span class="o">)</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">L</span> <span class="bp">_</span> <span class="n">ih</span><span class="o">,</span>
+<span class="n">pSet</span><span class="bp">.</span><span class="n">Union</span> <span class="err">$</span> <span class="n">pSet</span><span class="bp">.</span><span class="n">mk</span> <span class="o">{</span> <span class="n">o</span> <span class="bp">//</span> <span class="n">o</span> <span class="bp">&lt;</span> <span class="n">L</span> <span class="o">}</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">o&#39;</span><span class="o">,</span> <span class="n">ih</span> <span class="n">o&#39;</span><span class="bp">.</span><span class="mi">1</span> <span class="n">o&#39;</span><span class="bp">.</span><span class="mi">2</span>
+</pre></div>
 
 #### [ Kenny Lau (Aug 22 2018 at 16:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cardinals%20and%20ordinals/near/132583279):
-and I wonder if I can do it in `pSet.{u}`
+<p>and I wonder if I can do it in <code>pSet.{u}</code></p>
 
 #### [ Kenny Lau (Aug 22 2018 at 22:15)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cardinals%20and%20ordinals/near/132599529):
-```lean
-import set_theory.zfc set_theory.ordinal
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">set_theory</span><span class="bp">.</span><span class="n">zfc</span> <span class="n">set_theory</span><span class="bp">.</span><span class="n">ordinal</span>
 
-universe u
+<span class="kn">universe</span> <span class="n">u</span>
 
-attribute [elab_as_eliminator] well_founded.induction
+<span class="n">attribute</span> <span class="o">[</span><span class="n">elab_as_eliminator</span><span class="o">]</span> <span class="n">well_founded</span><span class="bp">.</span><span class="n">induction</span>
 
-def Well_order.to_pSet (w : Well_order.{u}) : pSet.{u} :=
-pSet.mk w.1 $ well_founded.fix (@is_well_order.wf w.1 w.2 w.3) $ λ x ih,
-pSet.mk { y | w.r y x } $ λ p, ih p.1 p.2
+<span class="n">def</span> <span class="n">Well_order</span><span class="bp">.</span><span class="n">to_pSet</span> <span class="o">(</span><span class="n">w</span> <span class="o">:</span> <span class="n">Well_order</span><span class="bp">.</span><span class="o">{</span><span class="n">u</span><span class="o">})</span> <span class="o">:</span> <span class="n">pSet</span><span class="bp">.</span><span class="o">{</span><span class="n">u</span><span class="o">}</span> <span class="o">:=</span>
+<span class="n">pSet</span><span class="bp">.</span><span class="n">mk</span> <span class="n">w</span><span class="bp">.</span><span class="mi">1</span> <span class="err">$</span> <span class="n">well_founded</span><span class="bp">.</span><span class="n">fix</span> <span class="o">(</span><span class="bp">@</span><span class="n">is_well_order</span><span class="bp">.</span><span class="n">wf</span> <span class="n">w</span><span class="bp">.</span><span class="mi">1</span> <span class="n">w</span><span class="bp">.</span><span class="mi">2</span> <span class="n">w</span><span class="bp">.</span><span class="mi">3</span><span class="o">)</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">x</span> <span class="n">ih</span><span class="o">,</span>
+<span class="n">pSet</span><span class="bp">.</span><span class="n">mk</span> <span class="o">{</span> <span class="n">y</span> <span class="bp">|</span> <span class="n">w</span><span class="bp">.</span><span class="n">r</span> <span class="n">y</span> <span class="n">x</span> <span class="o">}</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">p</span><span class="o">,</span> <span class="n">ih</span> <span class="n">p</span><span class="bp">.</span><span class="mi">1</span> <span class="n">p</span><span class="bp">.</span><span class="mi">2</span>
 
-theorem ordinal.to_Set.aux (v w : Well_order.{u}) (e : v.2 ≃o w.2) (x : v.1) :
-  (Well_order.to_pSet v).func x ≈ (Well_order.to_pSet w).func (e x) :=
-show pSet.equiv
-  (well_founded.fix (@is_well_order.wf v.1 v.2 v.3)
-    (λ x ih, pSet.mk { y | v.r y x } $ λ p, ih p.1 p.2) x)
-  (well_founded.fix (@is_well_order.wf w.1 w.2 w.3)
-    (λ x ih, pSet.mk { y | w.r y x } $ λ p, ih p.1 p.2) (e x)),
-from well_founded.induction (@is_well_order.wf v.1 v.2 v.3) x $ λ x ih,
-by rw [well_founded.fix_eq, well_founded.fix_eq];
-from ⟨λ ⟨y, hy⟩, ⟨⟨e y, (order_iso.ord e).1 hy⟩, ih y hy⟩,
-λ ⟨y, hy⟩, ⟨⟨e.symm y, by simpa using (order_iso.ord e.symm).1 hy⟩,
-  by have := ih (e.symm y) (by simpa using (order_iso.ord e.symm).1 hy); rw [order_iso.apply_inverse_apply] at this; from this⟩⟩
+<span class="kn">theorem</span> <span class="n">ordinal</span><span class="bp">.</span><span class="n">to_Set</span><span class="bp">.</span><span class="n">aux</span> <span class="o">(</span><span class="n">v</span> <span class="n">w</span> <span class="o">:</span> <span class="n">Well_order</span><span class="bp">.</span><span class="o">{</span><span class="n">u</span><span class="o">})</span> <span class="o">(</span><span class="n">e</span> <span class="o">:</span> <span class="n">v</span><span class="bp">.</span><span class="mi">2</span> <span class="err">≃</span><span class="n">o</span> <span class="n">w</span><span class="bp">.</span><span class="mi">2</span><span class="o">)</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">v</span><span class="bp">.</span><span class="mi">1</span><span class="o">)</span> <span class="o">:</span>
+  <span class="o">(</span><span class="n">Well_order</span><span class="bp">.</span><span class="n">to_pSet</span> <span class="n">v</span><span class="o">)</span><span class="bp">.</span><span class="n">func</span> <span class="n">x</span> <span class="bp">≈</span> <span class="o">(</span><span class="n">Well_order</span><span class="bp">.</span><span class="n">to_pSet</span> <span class="n">w</span><span class="o">)</span><span class="bp">.</span><span class="n">func</span> <span class="o">(</span><span class="n">e</span> <span class="n">x</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">show</span> <span class="n">pSet</span><span class="bp">.</span><span class="n">equiv</span>
+  <span class="o">(</span><span class="n">well_founded</span><span class="bp">.</span><span class="n">fix</span> <span class="o">(</span><span class="bp">@</span><span class="n">is_well_order</span><span class="bp">.</span><span class="n">wf</span> <span class="n">v</span><span class="bp">.</span><span class="mi">1</span> <span class="n">v</span><span class="bp">.</span><span class="mi">2</span> <span class="n">v</span><span class="bp">.</span><span class="mi">3</span><span class="o">)</span>
+    <span class="o">(</span><span class="bp">λ</span> <span class="n">x</span> <span class="n">ih</span><span class="o">,</span> <span class="n">pSet</span><span class="bp">.</span><span class="n">mk</span> <span class="o">{</span> <span class="n">y</span> <span class="bp">|</span> <span class="n">v</span><span class="bp">.</span><span class="n">r</span> <span class="n">y</span> <span class="n">x</span> <span class="o">}</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">p</span><span class="o">,</span> <span class="n">ih</span> <span class="n">p</span><span class="bp">.</span><span class="mi">1</span> <span class="n">p</span><span class="bp">.</span><span class="mi">2</span><span class="o">)</span> <span class="n">x</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">well_founded</span><span class="bp">.</span><span class="n">fix</span> <span class="o">(</span><span class="bp">@</span><span class="n">is_well_order</span><span class="bp">.</span><span class="n">wf</span> <span class="n">w</span><span class="bp">.</span><span class="mi">1</span> <span class="n">w</span><span class="bp">.</span><span class="mi">2</span> <span class="n">w</span><span class="bp">.</span><span class="mi">3</span><span class="o">)</span>
+    <span class="o">(</span><span class="bp">λ</span> <span class="n">x</span> <span class="n">ih</span><span class="o">,</span> <span class="n">pSet</span><span class="bp">.</span><span class="n">mk</span> <span class="o">{</span> <span class="n">y</span> <span class="bp">|</span> <span class="n">w</span><span class="bp">.</span><span class="n">r</span> <span class="n">y</span> <span class="n">x</span> <span class="o">}</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">p</span><span class="o">,</span> <span class="n">ih</span> <span class="n">p</span><span class="bp">.</span><span class="mi">1</span> <span class="n">p</span><span class="bp">.</span><span class="mi">2</span><span class="o">)</span> <span class="o">(</span><span class="n">e</span> <span class="n">x</span><span class="o">)),</span>
+<span class="k">from</span> <span class="n">well_founded</span><span class="bp">.</span><span class="n">induction</span> <span class="o">(</span><span class="bp">@</span><span class="n">is_well_order</span><span class="bp">.</span><span class="n">wf</span> <span class="n">v</span><span class="bp">.</span><span class="mi">1</span> <span class="n">v</span><span class="bp">.</span><span class="mi">2</span> <span class="n">v</span><span class="bp">.</span><span class="mi">3</span><span class="o">)</span> <span class="n">x</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">x</span> <span class="n">ih</span><span class="o">,</span>
+<span class="k">by</span> <span class="n">rw</span> <span class="o">[</span><span class="n">well_founded</span><span class="bp">.</span><span class="n">fix_eq</span><span class="o">,</span> <span class="n">well_founded</span><span class="bp">.</span><span class="n">fix_eq</span><span class="o">]</span><span class="bp">;</span>
+<span class="k">from</span> <span class="bp">⟨λ</span> <span class="bp">⟨</span><span class="n">y</span><span class="o">,</span> <span class="n">hy</span><span class="bp">⟩</span><span class="o">,</span> <span class="bp">⟨⟨</span><span class="n">e</span> <span class="n">y</span><span class="o">,</span> <span class="o">(</span><span class="n">order_iso</span><span class="bp">.</span><span class="n">ord</span> <span class="n">e</span><span class="o">)</span><span class="bp">.</span><span class="mi">1</span> <span class="n">hy</span><span class="bp">⟩</span><span class="o">,</span> <span class="n">ih</span> <span class="n">y</span> <span class="n">hy</span><span class="bp">⟩</span><span class="o">,</span>
+<span class="bp">λ</span> <span class="bp">⟨</span><span class="n">y</span><span class="o">,</span> <span class="n">hy</span><span class="bp">⟩</span><span class="o">,</span> <span class="bp">⟨⟨</span><span class="n">e</span><span class="bp">.</span><span class="n">symm</span> <span class="n">y</span><span class="o">,</span> <span class="k">by</span> <span class="n">simpa</span> <span class="kn">using</span> <span class="o">(</span><span class="n">order_iso</span><span class="bp">.</span><span class="n">ord</span> <span class="n">e</span><span class="bp">.</span><span class="n">symm</span><span class="o">)</span><span class="bp">.</span><span class="mi">1</span> <span class="n">hy</span><span class="bp">⟩</span><span class="o">,</span>
+  <span class="k">by</span> <span class="k">have</span> <span class="o">:=</span> <span class="n">ih</span> <span class="o">(</span><span class="n">e</span><span class="bp">.</span><span class="n">symm</span> <span class="n">y</span><span class="o">)</span> <span class="o">(</span><span class="k">by</span> <span class="n">simpa</span> <span class="kn">using</span> <span class="o">(</span><span class="n">order_iso</span><span class="bp">.</span><span class="n">ord</span> <span class="n">e</span><span class="bp">.</span><span class="n">symm</span><span class="o">)</span><span class="bp">.</span><span class="mi">1</span> <span class="n">hy</span><span class="o">)</span><span class="bp">;</span> <span class="n">rw</span> <span class="o">[</span><span class="n">order_iso</span><span class="bp">.</span><span class="n">apply_inverse_apply</span><span class="o">]</span> <span class="n">at</span> <span class="n">this</span><span class="bp">;</span> <span class="k">from</span> <span class="n">this</span><span class="bp">⟩⟩</span>
 
-def ordinal.to_Set (o : ordinal.{u}) : Set.{u} :=
-quotient.lift_on o (λ w, ⟦Well_order.to_pSet w⟧) $ λ ⟨v1, v2, v3⟩ ⟨w1, w2, w3⟩ ⟨e⟩, quotient.sound
-⟨λ x, ⟨e x, ordinal.to_Set.aux _ _ e x⟩,
-λ x, ⟨e.symm x, by simpa using ordinal.to_Set.aux ⟨v1, v2, v3⟩ ⟨w1, w2, w3⟩ e (e.symm x)⟩⟩
-```
+<span class="n">def</span> <span class="n">ordinal</span><span class="bp">.</span><span class="n">to_Set</span> <span class="o">(</span><span class="n">o</span> <span class="o">:</span> <span class="n">ordinal</span><span class="bp">.</span><span class="o">{</span><span class="n">u</span><span class="o">})</span> <span class="o">:</span> <span class="n">Set</span><span class="bp">.</span><span class="o">{</span><span class="n">u</span><span class="o">}</span> <span class="o">:=</span>
+<span class="n">quotient</span><span class="bp">.</span><span class="n">lift_on</span> <span class="n">o</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">w</span><span class="o">,</span> <span class="err">⟦</span><span class="n">Well_order</span><span class="bp">.</span><span class="n">to_pSet</span> <span class="n">w</span><span class="err">⟧</span><span class="o">)</span> <span class="err">$</span> <span class="bp">λ</span> <span class="bp">⟨</span><span class="n">v1</span><span class="o">,</span> <span class="n">v2</span><span class="o">,</span> <span class="n">v3</span><span class="bp">⟩</span> <span class="bp">⟨</span><span class="n">w1</span><span class="o">,</span> <span class="n">w2</span><span class="o">,</span> <span class="n">w3</span><span class="bp">⟩</span> <span class="bp">⟨</span><span class="n">e</span><span class="bp">⟩</span><span class="o">,</span> <span class="n">quotient</span><span class="bp">.</span><span class="n">sound</span>
+<span class="bp">⟨λ</span> <span class="n">x</span><span class="o">,</span> <span class="bp">⟨</span><span class="n">e</span> <span class="n">x</span><span class="o">,</span> <span class="n">ordinal</span><span class="bp">.</span><span class="n">to_Set</span><span class="bp">.</span><span class="n">aux</span> <span class="bp">_</span> <span class="bp">_</span> <span class="n">e</span> <span class="n">x</span><span class="bp">⟩</span><span class="o">,</span>
+<span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="bp">⟨</span><span class="n">e</span><span class="bp">.</span><span class="n">symm</span> <span class="n">x</span><span class="o">,</span> <span class="k">by</span> <span class="n">simpa</span> <span class="kn">using</span> <span class="n">ordinal</span><span class="bp">.</span><span class="n">to_Set</span><span class="bp">.</span><span class="n">aux</span> <span class="bp">⟨</span><span class="n">v1</span><span class="o">,</span> <span class="n">v2</span><span class="o">,</span> <span class="n">v3</span><span class="bp">⟩</span> <span class="bp">⟨</span><span class="n">w1</span><span class="o">,</span> <span class="n">w2</span><span class="o">,</span> <span class="n">w3</span><span class="bp">⟩</span> <span class="n">e</span> <span class="o">(</span><span class="n">e</span><span class="bp">.</span><span class="n">symm</span> <span class="n">x</span><span class="o">)</span><span class="bp">⟩⟩</span>
+</pre></div>
 
 #### [ Kenny Lau (Aug 22 2018 at 22:15)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cardinals%20and%20ordinals/near/132599537):
-and I did it in the same universe @**Mario Carneiro**
+<p>and I did it in the same universe <span class="user-mention" data-user-id="110049">@Mario Carneiro</span></p>
 
 #### [ Kenny Lau (Aug 22 2018 at 22:16)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cardinals%20and%20ordinals/near/132599597):
-and I still don't think it's a good idea to destruct the `Well_order` in the definition of the setoid of ordinal
+<p>and I still don't think it's a good idea to destruct the <code>Well_order</code> in the definition of the setoid of ordinal</p>
 
 #### [ Kenny Lau (Aug 22 2018 at 22:54)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cardinals%20and%20ordinals/near/132601476):
-and after 38 minutes, the other direction:
+<p>and after 38 minutes, the other direction:</p>
 
 #### [ Kenny Lau (Aug 22 2018 at 22:54)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cardinals%20and%20ordinals/near/132601478):
-```lean
-def pSet.type.setoid (p : pSet.{u}) : setoid p.type :=
-⟨λ i j, ⟦p.func i⟧ = ⟦p.func j⟧, λ i, rfl, λ i j, eq.symm, λ i j k, eq.trans⟩
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">pSet</span><span class="bp">.</span><span class="n">type</span><span class="bp">.</span><span class="n">setoid</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="n">pSet</span><span class="bp">.</span><span class="o">{</span><span class="n">u</span><span class="o">})</span> <span class="o">:</span> <span class="n">setoid</span> <span class="n">p</span><span class="bp">.</span><span class="n">type</span> <span class="o">:=</span>
+<span class="bp">⟨λ</span> <span class="n">i</span> <span class="n">j</span><span class="o">,</span> <span class="err">⟦</span><span class="n">p</span><span class="bp">.</span><span class="n">func</span> <span class="n">i</span><span class="err">⟧</span> <span class="bp">=</span> <span class="err">⟦</span><span class="n">p</span><span class="bp">.</span><span class="n">func</span> <span class="n">j</span><span class="err">⟧</span><span class="o">,</span> <span class="bp">λ</span> <span class="n">i</span><span class="o">,</span> <span class="n">rfl</span><span class="o">,</span> <span class="bp">λ</span> <span class="n">i</span> <span class="n">j</span><span class="o">,</span> <span class="n">eq</span><span class="bp">.</span><span class="n">symm</span><span class="o">,</span> <span class="bp">λ</span> <span class="n">i</span> <span class="n">j</span> <span class="n">k</span><span class="o">,</span> <span class="n">eq</span><span class="bp">.</span><span class="n">trans</span><span class="bp">⟩</span>
 
-local attribute [instance] pSet.type.setoid
+<span class="n">local</span> <span class="n">attribute</span> <span class="o">[</span><span class="kn">instance</span><span class="o">]</span> <span class="n">pSet</span><span class="bp">.</span><span class="n">type</span><span class="bp">.</span><span class="n">setoid</span>
 
-def Set.cardinal (s : Set.{u}) : cardinal.{u} :=
-quotient.lift_on s (λ p, cardinal.mk $ quotient $ pSet.type.setoid p) $
-λ ⟨p1, p2⟩ ⟨q1, q2⟩ H, quotient.sound $ nonempty.intro
-{ to_fun := λ x, quotient.lift_on x (λ i, @@quotient.mk (pSet.type.setoid $ pSet.mk q1 q2) (classical.some (H.1 i))) $ λ i j H',
-    quotient.sound $
-    calc  ⟦q2 (classical.some (H.1 i))⟧
-        = ⟦p2 i⟧ : eq.symm (quotient.sound $ classical.some_spec (H.1 i))
-    ... = ⟦p2 j⟧ : H'
-    ... = ⟦q2 (classical.some (H.1 j))⟧ : quotient.sound (classical.some_spec (H.1 j)),
-  inv_fun := λ x, quotient.lift_on x (λ i, @@quotient.mk (pSet.type.setoid $ pSet.mk p1 p2) $ classical.some $ H.2 i) $ λ i j H',
-    quotient.sound $
-    calc  ⟦p2 (classical.some (H.2 i))⟧
-        = ⟦q2 i⟧ : quotient.sound (classical.some_spec (H.2 i))
-    ... = ⟦q2 j⟧ : H'
-    ... = ⟦p2 (classical.some (H.2 j))⟧ : eq.symm (quotient.sound $ classical.some_spec (H.2 j)),
-  left_inv := λ i, quotient.induction_on i $ λ i, quotient.sound $
-    calc  ⟦p2 (classical.some (H.2 (classical.some (H.1 i))))⟧
-        = ⟦q2 (classical.some (H.1 i))⟧ : quotient.sound (classical.some_spec (H.2 _))
-    ... = ⟦p2 i⟧ : eq.symm (quotient.sound $ classical.some_spec (H.1 i)),
-  right_inv := λ i, quotient.induction_on i $ λ i, quotient.sound $
-    calc  ⟦q2 (classical.some (H.1 (classical.some (H.2 i))))⟧
-        = ⟦p2 (classical.some (H.2 i))⟧ : eq.symm (quotient.sound $ classical.some_spec (H.1 _))
-    ... = ⟦q2 i⟧ : quotient.sound (classical.some_spec (H.2 i)) }
-```
+<span class="n">def</span> <span class="n">Set</span><span class="bp">.</span><span class="n">cardinal</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">Set</span><span class="bp">.</span><span class="o">{</span><span class="n">u</span><span class="o">})</span> <span class="o">:</span> <span class="n">cardinal</span><span class="bp">.</span><span class="o">{</span><span class="n">u</span><span class="o">}</span> <span class="o">:=</span>
+<span class="n">quotient</span><span class="bp">.</span><span class="n">lift_on</span> <span class="n">s</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">p</span><span class="o">,</span> <span class="n">cardinal</span><span class="bp">.</span><span class="n">mk</span> <span class="err">$</span> <span class="n">quotient</span> <span class="err">$</span> <span class="n">pSet</span><span class="bp">.</span><span class="n">type</span><span class="bp">.</span><span class="n">setoid</span> <span class="n">p</span><span class="o">)</span> <span class="err">$</span>
+<span class="bp">λ</span> <span class="bp">⟨</span><span class="n">p1</span><span class="o">,</span> <span class="n">p2</span><span class="bp">⟩</span> <span class="bp">⟨</span><span class="n">q1</span><span class="o">,</span> <span class="n">q2</span><span class="bp">⟩</span> <span class="n">H</span><span class="o">,</span> <span class="n">quotient</span><span class="bp">.</span><span class="n">sound</span> <span class="err">$</span> <span class="n">nonempty</span><span class="bp">.</span><span class="n">intro</span>
+<span class="o">{</span> <span class="n">to_fun</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="n">quotient</span><span class="bp">.</span><span class="n">lift_on</span> <span class="n">x</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">i</span><span class="o">,</span> <span class="bp">@@</span><span class="n">quotient</span><span class="bp">.</span><span class="n">mk</span> <span class="o">(</span><span class="n">pSet</span><span class="bp">.</span><span class="n">type</span><span class="bp">.</span><span class="n">setoid</span> <span class="err">$</span> <span class="n">pSet</span><span class="bp">.</span><span class="n">mk</span> <span class="n">q1</span> <span class="n">q2</span><span class="o">)</span> <span class="o">(</span><span class="n">classical</span><span class="bp">.</span><span class="n">some</span> <span class="o">(</span><span class="n">H</span><span class="bp">.</span><span class="mi">1</span> <span class="n">i</span><span class="o">)))</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">i</span> <span class="n">j</span> <span class="n">H&#39;</span><span class="o">,</span>
+    <span class="n">quotient</span><span class="bp">.</span><span class="n">sound</span> <span class="err">$</span>
+    <span class="k">calc</span>  <span class="err">⟦</span><span class="n">q2</span> <span class="o">(</span><span class="n">classical</span><span class="bp">.</span><span class="n">some</span> <span class="o">(</span><span class="n">H</span><span class="bp">.</span><span class="mi">1</span> <span class="n">i</span><span class="o">))</span><span class="err">⟧</span>
+        <span class="bp">=</span> <span class="err">⟦</span><span class="n">p2</span> <span class="n">i</span><span class="err">⟧</span> <span class="o">:</span> <span class="n">eq</span><span class="bp">.</span><span class="n">symm</span> <span class="o">(</span><span class="n">quotient</span><span class="bp">.</span><span class="n">sound</span> <span class="err">$</span> <span class="n">classical</span><span class="bp">.</span><span class="n">some_spec</span> <span class="o">(</span><span class="n">H</span><span class="bp">.</span><span class="mi">1</span> <span class="n">i</span><span class="o">))</span>
+    <span class="bp">...</span> <span class="bp">=</span> <span class="err">⟦</span><span class="n">p2</span> <span class="n">j</span><span class="err">⟧</span> <span class="o">:</span> <span class="n">H&#39;</span>
+    <span class="bp">...</span> <span class="bp">=</span> <span class="err">⟦</span><span class="n">q2</span> <span class="o">(</span><span class="n">classical</span><span class="bp">.</span><span class="n">some</span> <span class="o">(</span><span class="n">H</span><span class="bp">.</span><span class="mi">1</span> <span class="n">j</span><span class="o">))</span><span class="err">⟧</span> <span class="o">:</span> <span class="n">quotient</span><span class="bp">.</span><span class="n">sound</span> <span class="o">(</span><span class="n">classical</span><span class="bp">.</span><span class="n">some_spec</span> <span class="o">(</span><span class="n">H</span><span class="bp">.</span><span class="mi">1</span> <span class="n">j</span><span class="o">)),</span>
+  <span class="n">inv_fun</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="n">quotient</span><span class="bp">.</span><span class="n">lift_on</span> <span class="n">x</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">i</span><span class="o">,</span> <span class="bp">@@</span><span class="n">quotient</span><span class="bp">.</span><span class="n">mk</span> <span class="o">(</span><span class="n">pSet</span><span class="bp">.</span><span class="n">type</span><span class="bp">.</span><span class="n">setoid</span> <span class="err">$</span> <span class="n">pSet</span><span class="bp">.</span><span class="n">mk</span> <span class="n">p1</span> <span class="n">p2</span><span class="o">)</span> <span class="err">$</span> <span class="n">classical</span><span class="bp">.</span><span class="n">some</span> <span class="err">$</span> <span class="n">H</span><span class="bp">.</span><span class="mi">2</span> <span class="n">i</span><span class="o">)</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">i</span> <span class="n">j</span> <span class="n">H&#39;</span><span class="o">,</span>
+    <span class="n">quotient</span><span class="bp">.</span><span class="n">sound</span> <span class="err">$</span>
+    <span class="k">calc</span>  <span class="err">⟦</span><span class="n">p2</span> <span class="o">(</span><span class="n">classical</span><span class="bp">.</span><span class="n">some</span> <span class="o">(</span><span class="n">H</span><span class="bp">.</span><span class="mi">2</span> <span class="n">i</span><span class="o">))</span><span class="err">⟧</span>
+        <span class="bp">=</span> <span class="err">⟦</span><span class="n">q2</span> <span class="n">i</span><span class="err">⟧</span> <span class="o">:</span> <span class="n">quotient</span><span class="bp">.</span><span class="n">sound</span> <span class="o">(</span><span class="n">classical</span><span class="bp">.</span><span class="n">some_spec</span> <span class="o">(</span><span class="n">H</span><span class="bp">.</span><span class="mi">2</span> <span class="n">i</span><span class="o">))</span>
+    <span class="bp">...</span> <span class="bp">=</span> <span class="err">⟦</span><span class="n">q2</span> <span class="n">j</span><span class="err">⟧</span> <span class="o">:</span> <span class="n">H&#39;</span>
+    <span class="bp">...</span> <span class="bp">=</span> <span class="err">⟦</span><span class="n">p2</span> <span class="o">(</span><span class="n">classical</span><span class="bp">.</span><span class="n">some</span> <span class="o">(</span><span class="n">H</span><span class="bp">.</span><span class="mi">2</span> <span class="n">j</span><span class="o">))</span><span class="err">⟧</span> <span class="o">:</span> <span class="n">eq</span><span class="bp">.</span><span class="n">symm</span> <span class="o">(</span><span class="n">quotient</span><span class="bp">.</span><span class="n">sound</span> <span class="err">$</span> <span class="n">classical</span><span class="bp">.</span><span class="n">some_spec</span> <span class="o">(</span><span class="n">H</span><span class="bp">.</span><span class="mi">2</span> <span class="n">j</span><span class="o">)),</span>
+  <span class="n">left_inv</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">i</span><span class="o">,</span> <span class="n">quotient</span><span class="bp">.</span><span class="n">induction_on</span> <span class="n">i</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">i</span><span class="o">,</span> <span class="n">quotient</span><span class="bp">.</span><span class="n">sound</span> <span class="err">$</span>
+    <span class="k">calc</span>  <span class="err">⟦</span><span class="n">p2</span> <span class="o">(</span><span class="n">classical</span><span class="bp">.</span><span class="n">some</span> <span class="o">(</span><span class="n">H</span><span class="bp">.</span><span class="mi">2</span> <span class="o">(</span><span class="n">classical</span><span class="bp">.</span><span class="n">some</span> <span class="o">(</span><span class="n">H</span><span class="bp">.</span><span class="mi">1</span> <span class="n">i</span><span class="o">))))</span><span class="err">⟧</span>
+        <span class="bp">=</span> <span class="err">⟦</span><span class="n">q2</span> <span class="o">(</span><span class="n">classical</span><span class="bp">.</span><span class="n">some</span> <span class="o">(</span><span class="n">H</span><span class="bp">.</span><span class="mi">1</span> <span class="n">i</span><span class="o">))</span><span class="err">⟧</span> <span class="o">:</span> <span class="n">quotient</span><span class="bp">.</span><span class="n">sound</span> <span class="o">(</span><span class="n">classical</span><span class="bp">.</span><span class="n">some_spec</span> <span class="o">(</span><span class="n">H</span><span class="bp">.</span><span class="mi">2</span> <span class="bp">_</span><span class="o">))</span>
+    <span class="bp">...</span> <span class="bp">=</span> <span class="err">⟦</span><span class="n">p2</span> <span class="n">i</span><span class="err">⟧</span> <span class="o">:</span> <span class="n">eq</span><span class="bp">.</span><span class="n">symm</span> <span class="o">(</span><span class="n">quotient</span><span class="bp">.</span><span class="n">sound</span> <span class="err">$</span> <span class="n">classical</span><span class="bp">.</span><span class="n">some_spec</span> <span class="o">(</span><span class="n">H</span><span class="bp">.</span><span class="mi">1</span> <span class="n">i</span><span class="o">)),</span>
+  <span class="n">right_inv</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">i</span><span class="o">,</span> <span class="n">quotient</span><span class="bp">.</span><span class="n">induction_on</span> <span class="n">i</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">i</span><span class="o">,</span> <span class="n">quotient</span><span class="bp">.</span><span class="n">sound</span> <span class="err">$</span>
+    <span class="k">calc</span>  <span class="err">⟦</span><span class="n">q2</span> <span class="o">(</span><span class="n">classical</span><span class="bp">.</span><span class="n">some</span> <span class="o">(</span><span class="n">H</span><span class="bp">.</span><span class="mi">1</span> <span class="o">(</span><span class="n">classical</span><span class="bp">.</span><span class="n">some</span> <span class="o">(</span><span class="n">H</span><span class="bp">.</span><span class="mi">2</span> <span class="n">i</span><span class="o">))))</span><span class="err">⟧</span>
+        <span class="bp">=</span> <span class="err">⟦</span><span class="n">p2</span> <span class="o">(</span><span class="n">classical</span><span class="bp">.</span><span class="n">some</span> <span class="o">(</span><span class="n">H</span><span class="bp">.</span><span class="mi">2</span> <span class="n">i</span><span class="o">))</span><span class="err">⟧</span> <span class="o">:</span> <span class="n">eq</span><span class="bp">.</span><span class="n">symm</span> <span class="o">(</span><span class="n">quotient</span><span class="bp">.</span><span class="n">sound</span> <span class="err">$</span> <span class="n">classical</span><span class="bp">.</span><span class="n">some_spec</span> <span class="o">(</span><span class="n">H</span><span class="bp">.</span><span class="mi">1</span> <span class="bp">_</span><span class="o">))</span>
+    <span class="bp">...</span> <span class="bp">=</span> <span class="err">⟦</span><span class="n">q2</span> <span class="n">i</span><span class="err">⟧</span> <span class="o">:</span> <span class="n">quotient</span><span class="bp">.</span><span class="n">sound</span> <span class="o">(</span><span class="n">classical</span><span class="bp">.</span><span class="n">some_spec</span> <span class="o">(</span><span class="n">H</span><span class="bp">.</span><span class="mi">2</span> <span class="n">i</span><span class="o">))</span> <span class="o">}</span>
+</pre></div>
 
 #### [ Kenny Lau (Aug 22 2018 at 23:15)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cardinals%20and%20ordinals/near/132602524):
-@**Mario Carneiro** should I develop on this and then PR?
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> should I develop on this and then PR?</p>
 
 #### [ Kenny Lau (Aug 23 2018 at 00:32)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cardinals%20and%20ordinals/near/132605696):
-```lean
-theorem Well_order.to_pSet.exact (w : Well_order.{u}) (x : w.1) :
-  ∀ y, ⟦w.to_pSet.func x⟧ = ⟦w.to_pSet.func y⟧ → x = y :=
-well_founded.induction (@is_well_order.wf w.1 w.2 w.3) x $ λ x ih y H,
-begin
-  replace H := quotient.exact H,
-  rw [Well_order.to_pSet.def, Well_order.to_pSet.def] at H,
-  letI := w.3,
-  rcases is_trichotomous.trichotomous w.2 x y with h | h | h,
-  { rcases H.2 ⟨x, h⟩ with ⟨⟨z, hzx⟩, h1⟩,
-    specialize ih z hzx x (quotient.sound h1),
-    exfalso,
-    subst ih,
-    exact is_irrefl.irrefl w.r _ hzx },
-  { exact h },
-  { rcases H.1 ⟨y, h⟩ with ⟨⟨z, hzy⟩, h1⟩,
-    specialize ih y h z (quotient.sound h1),
-    exfalso,
-    subst ih,
-    exact is_irrefl.irrefl w.r _ hzy }
-end
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">Well_order</span><span class="bp">.</span><span class="n">to_pSet</span><span class="bp">.</span><span class="n">exact</span> <span class="o">(</span><span class="n">w</span> <span class="o">:</span> <span class="n">Well_order</span><span class="bp">.</span><span class="o">{</span><span class="n">u</span><span class="o">})</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">w</span><span class="bp">.</span><span class="mi">1</span><span class="o">)</span> <span class="o">:</span>
+  <span class="bp">∀</span> <span class="n">y</span><span class="o">,</span> <span class="err">⟦</span><span class="n">w</span><span class="bp">.</span><span class="n">to_pSet</span><span class="bp">.</span><span class="n">func</span> <span class="n">x</span><span class="err">⟧</span> <span class="bp">=</span> <span class="err">⟦</span><span class="n">w</span><span class="bp">.</span><span class="n">to_pSet</span><span class="bp">.</span><span class="n">func</span> <span class="n">y</span><span class="err">⟧</span> <span class="bp">→</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">y</span> <span class="o">:=</span>
+<span class="n">well_founded</span><span class="bp">.</span><span class="n">induction</span> <span class="o">(</span><span class="bp">@</span><span class="n">is_well_order</span><span class="bp">.</span><span class="n">wf</span> <span class="n">w</span><span class="bp">.</span><span class="mi">1</span> <span class="n">w</span><span class="bp">.</span><span class="mi">2</span> <span class="n">w</span><span class="bp">.</span><span class="mi">3</span><span class="o">)</span> <span class="n">x</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">x</span> <span class="n">ih</span> <span class="n">y</span> <span class="n">H</span><span class="o">,</span>
+<span class="k">begin</span>
+  <span class="n">replace</span> <span class="n">H</span> <span class="o">:=</span> <span class="n">quotient</span><span class="bp">.</span><span class="n">exact</span> <span class="n">H</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="o">[</span><span class="n">Well_order</span><span class="bp">.</span><span class="n">to_pSet</span><span class="bp">.</span><span class="n">def</span><span class="o">,</span> <span class="n">Well_order</span><span class="bp">.</span><span class="n">to_pSet</span><span class="bp">.</span><span class="n">def</span><span class="o">]</span> <span class="n">at</span> <span class="n">H</span><span class="o">,</span>
+  <span class="n">letI</span> <span class="o">:=</span> <span class="n">w</span><span class="bp">.</span><span class="mi">3</span><span class="o">,</span>
+  <span class="n">rcases</span> <span class="n">is_trichotomous</span><span class="bp">.</span><span class="n">trichotomous</span> <span class="n">w</span><span class="bp">.</span><span class="mi">2</span> <span class="n">x</span> <span class="n">y</span> <span class="k">with</span> <span class="n">h</span> <span class="bp">|</span> <span class="n">h</span> <span class="bp">|</span> <span class="n">h</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">rcases</span> <span class="n">H</span><span class="bp">.</span><span class="mi">2</span> <span class="bp">⟨</span><span class="n">x</span><span class="o">,</span> <span class="n">h</span><span class="bp">⟩</span> <span class="k">with</span> <span class="bp">⟨⟨</span><span class="n">z</span><span class="o">,</span> <span class="n">hzx</span><span class="bp">⟩</span><span class="o">,</span> <span class="n">h1</span><span class="bp">⟩</span><span class="o">,</span>
+    <span class="n">specialize</span> <span class="n">ih</span> <span class="n">z</span> <span class="n">hzx</span> <span class="n">x</span> <span class="o">(</span><span class="n">quotient</span><span class="bp">.</span><span class="n">sound</span> <span class="n">h1</span><span class="o">),</span>
+    <span class="n">exfalso</span><span class="o">,</span>
+    <span class="n">subst</span> <span class="n">ih</span><span class="o">,</span>
+    <span class="n">exact</span> <span class="n">is_irrefl</span><span class="bp">.</span><span class="n">irrefl</span> <span class="n">w</span><span class="bp">.</span><span class="n">r</span> <span class="bp">_</span> <span class="n">hzx</span> <span class="o">},</span>
+  <span class="o">{</span> <span class="n">exact</span> <span class="n">h</span> <span class="o">},</span>
+  <span class="o">{</span> <span class="n">rcases</span> <span class="n">H</span><span class="bp">.</span><span class="mi">1</span> <span class="bp">⟨</span><span class="n">y</span><span class="o">,</span> <span class="n">h</span><span class="bp">⟩</span> <span class="k">with</span> <span class="bp">⟨⟨</span><span class="n">z</span><span class="o">,</span> <span class="n">hzy</span><span class="bp">⟩</span><span class="o">,</span> <span class="n">h1</span><span class="bp">⟩</span><span class="o">,</span>
+    <span class="n">specialize</span> <span class="n">ih</span> <span class="n">y</span> <span class="n">h</span> <span class="n">z</span> <span class="o">(</span><span class="n">quotient</span><span class="bp">.</span><span class="n">sound</span> <span class="n">h1</span><span class="o">),</span>
+    <span class="n">exfalso</span><span class="o">,</span>
+    <span class="n">subst</span> <span class="n">ih</span><span class="o">,</span>
+    <span class="n">exact</span> <span class="n">is_irrefl</span><span class="bp">.</span><span class="n">irrefl</span> <span class="n">w</span><span class="bp">.</span><span class="n">r</span> <span class="bp">_</span> <span class="n">hzy</span> <span class="o">}</span>
+<span class="kn">end</span>
 
-example (c : cardinal.{u}) : c.ord.to_Set.to_cardinal = c :=
-begin
-  apply quotient.induction_on c,
-  intro c,
-  have := cardinal.ord_eq c,
-  rcases this with ⟨r, wo, H⟩,
-  simp [H, ordinal.type, ordinal.to_Set],
-  rw [Set.mk, Set.to_cardinal, quotient.lift_on_beta],
-  apply quotient.sound,
-  split,
-  fapply equiv.mk,
-  { fapply quotient.lift,
-    { exact id },
-    { intros x y H,
-      exact Well_order.to_pSet.exact _ _ _ H } },
-  { exact quotient.mk },
-  { intro x,
-    apply quotient.induction_on x,
-    intro x,
-    refl },
-  { intro x, refl }
-end
-```
+<span class="kn">example</span> <span class="o">(</span><span class="n">c</span> <span class="o">:</span> <span class="n">cardinal</span><span class="bp">.</span><span class="o">{</span><span class="n">u</span><span class="o">})</span> <span class="o">:</span> <span class="n">c</span><span class="bp">.</span><span class="n">ord</span><span class="bp">.</span><span class="n">to_Set</span><span class="bp">.</span><span class="n">to_cardinal</span> <span class="bp">=</span> <span class="n">c</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">apply</span> <span class="n">quotient</span><span class="bp">.</span><span class="n">induction_on</span> <span class="n">c</span><span class="o">,</span>
+  <span class="n">intro</span> <span class="n">c</span><span class="o">,</span>
+  <span class="k">have</span> <span class="o">:=</span> <span class="n">cardinal</span><span class="bp">.</span><span class="n">ord_eq</span> <span class="n">c</span><span class="o">,</span>
+  <span class="n">rcases</span> <span class="n">this</span> <span class="k">with</span> <span class="bp">⟨</span><span class="n">r</span><span class="o">,</span> <span class="n">wo</span><span class="o">,</span> <span class="n">H</span><span class="bp">⟩</span><span class="o">,</span>
+  <span class="n">simp</span> <span class="o">[</span><span class="n">H</span><span class="o">,</span> <span class="n">ordinal</span><span class="bp">.</span><span class="n">type</span><span class="o">,</span> <span class="n">ordinal</span><span class="bp">.</span><span class="n">to_Set</span><span class="o">],</span>
+  <span class="n">rw</span> <span class="o">[</span><span class="n">Set</span><span class="bp">.</span><span class="n">mk</span><span class="o">,</span> <span class="n">Set</span><span class="bp">.</span><span class="n">to_cardinal</span><span class="o">,</span> <span class="n">quotient</span><span class="bp">.</span><span class="n">lift_on_beta</span><span class="o">],</span>
+  <span class="n">apply</span> <span class="n">quotient</span><span class="bp">.</span><span class="n">sound</span><span class="o">,</span>
+  <span class="n">split</span><span class="o">,</span>
+  <span class="n">fapply</span> <span class="n">equiv</span><span class="bp">.</span><span class="n">mk</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">fapply</span> <span class="n">quotient</span><span class="bp">.</span><span class="n">lift</span><span class="o">,</span>
+    <span class="o">{</span> <span class="n">exact</span> <span class="n">id</span> <span class="o">},</span>
+    <span class="o">{</span> <span class="n">intros</span> <span class="n">x</span> <span class="n">y</span> <span class="n">H</span><span class="o">,</span>
+      <span class="n">exact</span> <span class="n">Well_order</span><span class="bp">.</span><span class="n">to_pSet</span><span class="bp">.</span><span class="n">exact</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="n">H</span> <span class="o">}</span> <span class="o">},</span>
+  <span class="o">{</span> <span class="n">exact</span> <span class="n">quotient</span><span class="bp">.</span><span class="n">mk</span> <span class="o">},</span>
+  <span class="o">{</span> <span class="n">intro</span> <span class="n">x</span><span class="o">,</span>
+    <span class="n">apply</span> <span class="n">quotient</span><span class="bp">.</span><span class="n">induction_on</span> <span class="n">x</span><span class="o">,</span>
+    <span class="n">intro</span> <span class="n">x</span><span class="o">,</span>
+    <span class="n">refl</span> <span class="o">},</span>
+  <span class="o">{</span> <span class="n">intro</span> <span class="n">x</span><span class="o">,</span> <span class="n">refl</span> <span class="o">}</span>
+<span class="kn">end</span>
+</pre></div>
 
 #### [ Kenny Lau (Aug 23 2018 at 00:33)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cardinals%20and%20ordinals/near/132605703):
-that's the round trip in one direction
+<p>that's the round trip in one direction</p>
 
 
 {% endraw %}

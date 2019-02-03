@@ -12,20 +12,18 @@ permalink: archive/113488general/57079confusionwithsigmatypes.html
 
 {% raw %}
 #### [ Scott Morrison (Sep 22 2018 at 05:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/confusion%20with%20sigma%20types/near/134419058):
-Oops... oversimplified my example.
+<p>Oops... oversimplified my example.</p>
 
 #### [ Scott Morrison (Sep 22 2018 at 05:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/confusion%20with%20sigma%20types/near/134419121):
-```
-def f (n : ℕ) : Type := { l : list ℕ // l.length = n }
+<div class="codehilite"><pre><span></span>def f (n : ℕ) : Type := { l : list ℕ // l.length = n }
 
 def foo : Σ n ≥ 5, f n := sorry
-def foo' : Σ n : ℕ, Σ H : n ≥ 5, f n := sorry
-```
+def foo&#39; : Σ n : ℕ, Σ H : n ≥ 5, f n := sorry
+</pre></div>
 
 #### [ Scott Morrison (Sep 22 2018 at 05:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/confusion%20with%20sigma%20types/near/134419163):
-both `foo` and `foo'`error with 
-```
-type mismatch at application
+<p>both <code>foo</code> and <code>foo'</code>error with </p>
+<div class="codehilite"><pre><span></span>type mismatch at application
   Σ (H : n ≥ 5), f n
 term
   λ (H : n ≥ 5), f n
@@ -33,37 +31,37 @@ has type
   n ≥ 5 → Type : Type 1
 but is expected to have type
   ?m_1 → Type : Type (max ? 1)
-```
+</pre></div>
 
 #### [ Scott Morrison (Sep 22 2018 at 05:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/confusion%20with%20sigma%20types/near/134419164):
-what am I doing wrong?
+<p>what am I doing wrong?</p>
 
 #### [ Scott Morrison (Sep 22 2018 at 05:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/confusion%20with%20sigma%20types/near/134419170):
-Can you just not index sigma types by Props?!
+<p>Can you just not index sigma types by Props?!</p>
 
 #### [ Scott Morrison (Sep 22 2018 at 05:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/confusion%20with%20sigma%20types/near/134419171):
-ugh.
+<p>ugh.</p>
 
 #### [ Mario Carneiro (Sep 22 2018 at 05:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/confusion%20with%20sigma%20types/near/134419236):
-use `Σ'` or `subtype`
+<p>use <code>Σ'</code> or <code>subtype</code></p>
 
 #### [ Scott Morrison (Sep 22 2018 at 05:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/confusion%20with%20sigma%20types/near/134419775):
-Thanks.
+<p>Thanks.</p>
 
 #### [ Simon Hudon (Sep 22 2018 at 05:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/confusion%20with%20sigma%20types/near/134420363):
-Does `subtype` do anything that `Σ'` doesn't do?
+<p>Does <code>subtype</code> do anything that <code>Σ'</code> doesn't do?</p>
 
 #### [ Mario Carneiro (Sep 22 2018 at 05:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/confusion%20with%20sigma%20types/near/134420404):
-no, except have easier universe constraints
+<p>no, except have easier universe constraints</p>
 
 #### [ Simon Hudon (Sep 22 2018 at 05:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/confusion%20with%20sigma%20types/near/134420439):
-Could it benefit from a `unit` / `punit` approach?
+<p>Could it benefit from a <code>unit</code> / <code>punit</code> approach?</p>
 
 #### [ Mario Carneiro (Sep 22 2018 at 06:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/confusion%20with%20sigma%20types/near/134421471):
-Huh? It is a `unit`/`punit` approach. I mean it's even called `psigma`
+<p>Huh? It is a <code>unit</code>/<code>punit</code> approach. I mean it's even called <code>psigma</code></p>
 
 #### [ Simon Hudon (Sep 22 2018 at 06:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/confusion%20with%20sigma%20types/near/134421513):
-Right but what happened with `unit` is that it became a synonym for `punit.{0}`
+<p>Right but what happened with <code>unit</code> is that it became a synonym for <code>punit.{0}</code></p>
 
 
 {% endraw %}

@@ -12,141 +12,137 @@ permalink: archive/113488general/06946integersbetween0and3.html
 
 {% raw %}
 #### [ Kevin Buzzard (Oct 20 2018 at 11:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/integers%20between%200%20and%203/near/136162002):
-`example : ∀ (r : ℤ), r ≥ 0 → r < 3 → r = 0 ∨ r = 1 ∨ r = 2 := dec_trivial` doesn't work for me. Is there any easy way of getting from $$0\leq r<3$$ (with `r : int`) to the three cases?
+<p><code>example : ∀ (r : ℤ), r ≥ 0 → r &lt; 3 → r = 0 ∨ r = 1 ∨ r = 2 := dec_trivial</code> doesn't work for me. Is there any easy way of getting from <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>0</mn><mo>≤</mo><mi>r</mi><mo>&lt;</mo><mn>3</mn></mrow><annotation encoding="application/x-tex">0\leq r&lt;3</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.64444em;"></span><span class="strut bottom" style="height:0.78041em;vertical-align:-0.13597em;"></span><span class="base"><span class="mord mathrm">0</span><span class="mrel">≤</span><span class="mord mathit" style="margin-right:0.02778em;">r</span><span class="mrel">&lt;</span><span class="mord mathrm">3</span></span></span></span> (with <code>r : int</code>) to the three cases?</p>
 
 #### [ Kevin Buzzard (Oct 20 2018 at 11:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/integers%20between%200%20and%203/near/136162014):
-(with `nat` it works fine so there's a slightly painful way)
+<p>(with <code>nat</code> it works fine so there's a slightly painful way)</p>
 
 #### [ Kenny Lau (Oct 20 2018 at 11:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/integers%20between%200%20and%203/near/136162377):
-```lean
-example : ∀ (r : ℤ), r ≥ 0 → r < 3 → r = 0 ∨ r = 1 ∨ r = 2
-| (int.of_nat 0) _ _ := dec_trivial
-| (int.of_nat 1) _ _ := dec_trivial
-| (int.of_nat 2) _ _ := dec_trivial
-```
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">r</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">),</span> <span class="n">r</span> <span class="bp">≥</span> <span class="mi">0</span> <span class="bp">→</span> <span class="n">r</span> <span class="bp">&lt;</span> <span class="mi">3</span> <span class="bp">→</span> <span class="n">r</span> <span class="bp">=</span> <span class="mi">0</span> <span class="bp">∨</span> <span class="n">r</span> <span class="bp">=</span> <span class="mi">1</span> <span class="bp">∨</span> <span class="n">r</span> <span class="bp">=</span> <span class="mi">2</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">int</span><span class="bp">.</span><span class="n">of_nat</span> <span class="mi">0</span><span class="o">)</span> <span class="bp">_</span> <span class="bp">_</span> <span class="o">:=</span> <span class="n">dec_trivial</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">int</span><span class="bp">.</span><span class="n">of_nat</span> <span class="mi">1</span><span class="o">)</span> <span class="bp">_</span> <span class="bp">_</span> <span class="o">:=</span> <span class="n">dec_trivial</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">int</span><span class="bp">.</span><span class="n">of_nat</span> <span class="mi">2</span><span class="o">)</span> <span class="bp">_</span> <span class="bp">_</span> <span class="o">:=</span> <span class="n">dec_trivial</span>
+</pre></div>
 
 #### [ Kevin Buzzard (Oct 20 2018 at 11:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/integers%20between%200%20and%203/near/136162649):
-So what is the equation compiler doing that `dec_trivial` can't do? It knows things which aren't decidable?
+<p>So what is the equation compiler doing that <code>dec_trivial</code> can't do? It knows things which aren't decidable?</p>
 
 #### [ Kevin Buzzard (Oct 20 2018 at 11:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/integers%20between%200%20and%203/near/136162650):
-PS thanks
+<p>PS thanks</p>
 
 #### [ Kevin Buzzard (Oct 20 2018 at 11:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/integers%20between%200%20and%203/near/136162733):
-eew how do I sent this into the middle of a tactic proof?
+<p>eew how do I sent this into the middle of a tactic proof?</p>
 
 #### [ Kevin Buzzard (Oct 20 2018 at 12:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/integers%20between%200%20and%203/near/136162829):
-```lean
-example (r : ℤ) (H0 : r ≥ 0) (H3 : r < 3) : r = 0 ∨ r = 1 ∨ r = 2 :=
-begin
-  exact match r, H0, H3 with
-  | (int.of_nat 0), _, _ := dec_trivial
-  | (int.of_nat 1), _, _ := dec_trivial
-  | (int.of_nat 2), _, _ := dec_trivial
-  end,
-end
-```
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">r</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">(</span><span class="n">H0</span> <span class="o">:</span> <span class="n">r</span> <span class="bp">≥</span> <span class="mi">0</span><span class="o">)</span> <span class="o">(</span><span class="n">H3</span> <span class="o">:</span> <span class="n">r</span> <span class="bp">&lt;</span> <span class="mi">3</span><span class="o">)</span> <span class="o">:</span> <span class="n">r</span> <span class="bp">=</span> <span class="mi">0</span> <span class="bp">∨</span> <span class="n">r</span> <span class="bp">=</span> <span class="mi">1</span> <span class="bp">∨</span> <span class="n">r</span> <span class="bp">=</span> <span class="mi">2</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">exact</span> <span class="k">match</span> <span class="n">r</span><span class="o">,</span> <span class="n">H0</span><span class="o">,</span> <span class="n">H3</span> <span class="k">with</span>
+  <span class="bp">|</span> <span class="o">(</span><span class="n">int</span><span class="bp">.</span><span class="n">of_nat</span> <span class="mi">0</span><span class="o">),</span> <span class="bp">_</span><span class="o">,</span> <span class="bp">_</span> <span class="o">:=</span> <span class="n">dec_trivial</span>
+  <span class="bp">|</span> <span class="o">(</span><span class="n">int</span><span class="bp">.</span><span class="n">of_nat</span> <span class="mi">1</span><span class="o">),</span> <span class="bp">_</span><span class="o">,</span> <span class="bp">_</span> <span class="o">:=</span> <span class="n">dec_trivial</span>
+  <span class="bp">|</span> <span class="o">(</span><span class="n">int</span><span class="bp">.</span><span class="n">of_nat</span> <span class="mi">2</span><span class="o">),</span> <span class="bp">_</span><span class="o">,</span> <span class="bp">_</span> <span class="o">:=</span> <span class="n">dec_trivial</span>
+  <span class="kn">end</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
 
 #### [ Kevin Buzzard (Oct 20 2018 at 12:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/integers%20between%200%20and%203/near/136162916):
-got it
+<p>got it</p>
 
 #### [ Mario Carneiro (Oct 20 2018 at 12:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/integers%20between%200%20and%203/near/136162917):
-We need a decidable instance for bounded integer ranges
+<p>We need a decidable instance for bounded integer ranges</p>
 
 #### [ Kevin Buzzard (Oct 20 2018 at 12:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/integers%20between%200%20and%203/near/136162930):
-that too. I was just tripped over by commas by the way. They're sometimes there and sometimes not.
+<p>that too. I was just tripped over by commas by the way. They're sometimes there and sometimes not.</p>
 
 #### [ Mario Carneiro (Oct 20 2018 at 12:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/integers%20between%200%20and%203/near/136162975):
-they are there in `match`, not in `def` patterns
+<p>they are there in <code>match</code>, not in <code>def</code> patterns</p>
 
 #### [ Mario Carneiro (Oct 20 2018 at 12:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/integers%20between%200%20and%203/near/136162980):
-I agree that this is an annoying inconsistency, but it also makes sense locally, if you change it then it doesn't fit something else
+<p>I agree that this is an annoying inconsistency, but it also makes sense locally, if you change it then it doesn't fit something else</p>
 
 #### [ Kenny Lau (Oct 20 2018 at 12:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/integers%20between%200%20and%203/near/136163123):
-```lean
-import data.finset
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">finset</span>
 
-def int.range (m n : ℤ) : finset ℤ :=
-(finset.range (int.to_nat (n-m))).map
-  ⟨λ r, m+r, λ r s H, int.coe_nat_inj $ add_left_cancel H⟩
+<span class="n">def</span> <span class="n">int</span><span class="bp">.</span><span class="n">range</span> <span class="o">(</span><span class="n">m</span> <span class="n">n</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">:</span> <span class="n">finset</span> <span class="bp">ℤ</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">finset</span><span class="bp">.</span><span class="n">range</span> <span class="o">(</span><span class="n">int</span><span class="bp">.</span><span class="n">to_nat</span> <span class="o">(</span><span class="n">n</span><span class="bp">-</span><span class="n">m</span><span class="o">)))</span><span class="bp">.</span><span class="n">map</span>
+  <span class="bp">⟨λ</span> <span class="n">r</span><span class="o">,</span> <span class="n">m</span><span class="bp">+</span><span class="n">r</span><span class="o">,</span> <span class="bp">λ</span> <span class="n">r</span> <span class="n">s</span> <span class="n">H</span><span class="o">,</span> <span class="n">int</span><span class="bp">.</span><span class="n">coe_nat_inj</span> <span class="err">$</span> <span class="n">add_left_cancel</span> <span class="n">H</span><span class="bp">⟩</span>
 
-theorem int.mem_range_iff {m n r : ℤ} : r ∈ int.range m n ↔ m ≤ r ∧ r < n :=
-⟨λ H, let ⟨s, h1, h2⟩ := finset.mem_map.1 H in h2 ▸
-  ⟨le_add_of_nonneg_right trivial,
-  add_lt_of_lt_sub_left $ match n-m, h1 with
-    | (k:ℕ), h1 := by rwa [finset.mem_range, int.to_nat_coe_nat, ← int.coe_nat_lt] at h1
-    end⟩,
-λ ⟨h1, h2⟩, finset.mem_map.2 ⟨int.to_nat (r-m),
-  finset.mem_range.2 $ by rw [← int.coe_nat_lt, int.to_nat_of_nonneg (sub_nonneg_of_le h1),
-      int.to_nat_of_nonneg (sub_nonneg_of_le (le_of_lt (lt_of_le_of_lt h1 h2)))];
-    exact sub_lt_sub_right h2 _,
-  show m + _ = _, by rw [int.to_nat_of_nonneg (sub_nonneg_of_le h1), add_sub_cancel'_right]⟩⟩
+<span class="kn">theorem</span> <span class="n">int</span><span class="bp">.</span><span class="n">mem_range_iff</span> <span class="o">{</span><span class="n">m</span> <span class="n">n</span> <span class="n">r</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">}</span> <span class="o">:</span> <span class="n">r</span> <span class="err">∈</span> <span class="n">int</span><span class="bp">.</span><span class="n">range</span> <span class="n">m</span> <span class="n">n</span> <span class="bp">↔</span> <span class="n">m</span> <span class="bp">≤</span> <span class="n">r</span> <span class="bp">∧</span> <span class="n">r</span> <span class="bp">&lt;</span> <span class="n">n</span> <span class="o">:=</span>
+<span class="bp">⟨λ</span> <span class="n">H</span><span class="o">,</span> <span class="k">let</span> <span class="bp">⟨</span><span class="n">s</span><span class="o">,</span> <span class="n">h1</span><span class="o">,</span> <span class="n">h2</span><span class="bp">⟩</span> <span class="o">:=</span> <span class="n">finset</span><span class="bp">.</span><span class="n">mem_map</span><span class="bp">.</span><span class="mi">1</span> <span class="n">H</span> <span class="k">in</span> <span class="n">h2</span> <span class="bp">▸</span>
+  <span class="bp">⟨</span><span class="n">le_add_of_nonneg_right</span> <span class="n">trivial</span><span class="o">,</span>
+  <span class="n">add_lt_of_lt_sub_left</span> <span class="err">$</span> <span class="k">match</span> <span class="n">n</span><span class="bp">-</span><span class="n">m</span><span class="o">,</span> <span class="n">h1</span> <span class="k">with</span>
+    <span class="bp">|</span> <span class="o">(</span><span class="n">k</span><span class="o">:</span><span class="bp">ℕ</span><span class="o">),</span> <span class="n">h1</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">rwa</span> <span class="o">[</span><span class="n">finset</span><span class="bp">.</span><span class="n">mem_range</span><span class="o">,</span> <span class="n">int</span><span class="bp">.</span><span class="n">to_nat_coe_nat</span><span class="o">,</span> <span class="err">←</span> <span class="n">int</span><span class="bp">.</span><span class="n">coe_nat_lt</span><span class="o">]</span> <span class="n">at</span> <span class="n">h1</span>
+    <span class="kn">end</span><span class="bp">⟩</span><span class="o">,</span>
+<span class="bp">λ</span> <span class="bp">⟨</span><span class="n">h1</span><span class="o">,</span> <span class="n">h2</span><span class="bp">⟩</span><span class="o">,</span> <span class="n">finset</span><span class="bp">.</span><span class="n">mem_map</span><span class="bp">.</span><span class="mi">2</span> <span class="bp">⟨</span><span class="n">int</span><span class="bp">.</span><span class="n">to_nat</span> <span class="o">(</span><span class="n">r</span><span class="bp">-</span><span class="n">m</span><span class="o">),</span>
+  <span class="n">finset</span><span class="bp">.</span><span class="n">mem_range</span><span class="bp">.</span><span class="mi">2</span> <span class="err">$</span> <span class="k">by</span> <span class="n">rw</span> <span class="o">[</span><span class="err">←</span> <span class="n">int</span><span class="bp">.</span><span class="n">coe_nat_lt</span><span class="o">,</span> <span class="n">int</span><span class="bp">.</span><span class="n">to_nat_of_nonneg</span> <span class="o">(</span><span class="n">sub_nonneg_of_le</span> <span class="n">h1</span><span class="o">),</span>
+      <span class="n">int</span><span class="bp">.</span><span class="n">to_nat_of_nonneg</span> <span class="o">(</span><span class="n">sub_nonneg_of_le</span> <span class="o">(</span><span class="n">le_of_lt</span> <span class="o">(</span><span class="n">lt_of_le_of_lt</span> <span class="n">h1</span> <span class="n">h2</span><span class="o">)))]</span><span class="bp">;</span>
+    <span class="n">exact</span> <span class="n">sub_lt_sub_right</span> <span class="n">h2</span> <span class="bp">_</span><span class="o">,</span>
+  <span class="k">show</span> <span class="n">m</span> <span class="bp">+</span> <span class="bp">_</span> <span class="bp">=</span> <span class="bp">_</span><span class="o">,</span> <span class="k">by</span> <span class="n">rw</span> <span class="o">[</span><span class="n">int</span><span class="bp">.</span><span class="n">to_nat_of_nonneg</span> <span class="o">(</span><span class="n">sub_nonneg_of_le</span> <span class="n">h1</span><span class="o">),</span> <span class="n">add_sub_cancel&#39;_right</span><span class="o">]</span><span class="bp">⟩⟩</span>
 
-instance int.decidable_bounded (P : int → Prop) [decidable_pred P] (m n : ℤ) : decidable (∀ r, m ≤ r → r < n → P r) :=
-decidable_of_iff (∀ r ∈ int.range m n, P r) $ by simp only [int.mem_range_iff, and_imp]
-```
+<span class="kn">instance</span> <span class="n">int</span><span class="bp">.</span><span class="n">decidable_bounded</span> <span class="o">(</span><span class="n">P</span> <span class="o">:</span> <span class="n">int</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">[</span><span class="n">decidable_pred</span> <span class="n">P</span><span class="o">]</span> <span class="o">(</span><span class="n">m</span> <span class="n">n</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">:</span> <span class="n">decidable</span> <span class="o">(</span><span class="bp">∀</span> <span class="n">r</span><span class="o">,</span> <span class="n">m</span> <span class="bp">≤</span> <span class="n">r</span> <span class="bp">→</span> <span class="n">r</span> <span class="bp">&lt;</span> <span class="n">n</span> <span class="bp">→</span> <span class="n">P</span> <span class="n">r</span><span class="o">)</span> <span class="o">:=</span>
+<span class="n">decidable_of_iff</span> <span class="o">(</span><span class="bp">∀</span> <span class="n">r</span> <span class="err">∈</span> <span class="n">int</span><span class="bp">.</span><span class="n">range</span> <span class="n">m</span> <span class="n">n</span><span class="o">,</span> <span class="n">P</span> <span class="n">r</span><span class="o">)</span> <span class="err">$</span> <span class="k">by</span> <span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">int</span><span class="bp">.</span><span class="n">mem_range_iff</span><span class="o">,</span> <span class="n">and_imp</span><span class="o">]</span>
+</pre></div>
 
 #### [ Kevin Buzzard (Oct 20 2018 at 12:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/integers%20between%200%20and%203/near/136164321):
-Will this trigger if I have `1<= r <= 5`?
+<p>Will this trigger if I have <code>1&lt;= r &lt;= 5</code>?</p>
 
 #### [ Kenny Lau (Oct 20 2018 at 14:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/integers%20between%200%20and%203/near/136167268):
-you're welcome to write 3 more instances
+<p>you're welcome to write 3 more instances</p>
 
 #### [ Kenny Lau (Oct 20 2018 at 14:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/integers%20between%200%20and%203/near/136167269):
-but the answer is no
+<p>but the answer is no</p>
 
 #### [ Kevin Buzzard (Oct 20 2018 at 14:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/integers%20between%200%20and%203/near/136167496):
-You should PR all four
+<p>You should PR all four</p>
 
 #### [ Kenny Lau (Oct 20 2018 at 14:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/integers%20between%200%20and%203/near/136167500):
-nah I'll wait till they accept my current PR
+<p>nah I'll wait till they accept my current PR</p>
 
 #### [ Kenny Lau (Oct 20 2018 at 14:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/integers%20between%200%20and%203/near/136167501):
-you can PR all four
+<p>you can PR all four</p>
 
 #### [ Kenny Lau (Oct 20 2018 at 15:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/integers%20between%200%20and%203/near/136168035):
-```lean
-import data.finset
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">finset</span>
 
-def int.range (m n : ℤ) : finset ℤ :=
-(finset.range (int.to_nat (n-m))).map
-  ⟨λ r, m+r, λ r s H, int.coe_nat_inj $ add_left_cancel H⟩
+<span class="n">def</span> <span class="n">int</span><span class="bp">.</span><span class="n">range</span> <span class="o">(</span><span class="n">m</span> <span class="n">n</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">:</span> <span class="n">finset</span> <span class="bp">ℤ</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">finset</span><span class="bp">.</span><span class="n">range</span> <span class="o">(</span><span class="n">int</span><span class="bp">.</span><span class="n">to_nat</span> <span class="o">(</span><span class="n">n</span><span class="bp">-</span><span class="n">m</span><span class="o">)))</span><span class="bp">.</span><span class="n">map</span>
+  <span class="bp">⟨λ</span> <span class="n">r</span><span class="o">,</span> <span class="n">m</span><span class="bp">+</span><span class="n">r</span><span class="o">,</span> <span class="bp">λ</span> <span class="n">r</span> <span class="n">s</span> <span class="n">H</span><span class="o">,</span> <span class="n">int</span><span class="bp">.</span><span class="n">coe_nat_inj</span> <span class="err">$</span> <span class="n">add_left_cancel</span> <span class="n">H</span><span class="bp">⟩</span>
 
-theorem int.mem_range_iff {m n r : ℤ} : r ∈ int.range m n ↔ m ≤ r ∧ r < n :=
-⟨λ H, let ⟨s, h1, h2⟩ := finset.mem_map.1 H in h2 ▸
-  ⟨le_add_of_nonneg_right trivial,
-  add_lt_of_lt_sub_left $ match n-m, h1 with
-    | (k:ℕ), h1 := by rwa [finset.mem_range, int.to_nat_coe_nat, ← int.coe_nat_lt] at h1
-    end⟩,
-λ ⟨h1, h2⟩, finset.mem_map.2 ⟨int.to_nat (r-m),
-  finset.mem_range.2 $ by rw [← int.coe_nat_lt, int.to_nat_of_nonneg (sub_nonneg_of_le h1),
-      int.to_nat_of_nonneg (sub_nonneg_of_le (le_of_lt (lt_of_le_of_lt h1 h2)))];
-    exact sub_lt_sub_right h2 _,
-  show m + _ = _, by rw [int.to_nat_of_nonneg (sub_nonneg_of_le h1), add_sub_cancel'_right]⟩⟩
+<span class="kn">theorem</span> <span class="n">int</span><span class="bp">.</span><span class="n">mem_range_iff</span> <span class="o">{</span><span class="n">m</span> <span class="n">n</span> <span class="n">r</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">}</span> <span class="o">:</span> <span class="n">r</span> <span class="err">∈</span> <span class="n">int</span><span class="bp">.</span><span class="n">range</span> <span class="n">m</span> <span class="n">n</span> <span class="bp">↔</span> <span class="n">m</span> <span class="bp">≤</span> <span class="n">r</span> <span class="bp">∧</span> <span class="n">r</span> <span class="bp">&lt;</span> <span class="n">n</span> <span class="o">:=</span>
+<span class="bp">⟨λ</span> <span class="n">H</span><span class="o">,</span> <span class="k">let</span> <span class="bp">⟨</span><span class="n">s</span><span class="o">,</span> <span class="n">h1</span><span class="o">,</span> <span class="n">h2</span><span class="bp">⟩</span> <span class="o">:=</span> <span class="n">finset</span><span class="bp">.</span><span class="n">mem_map</span><span class="bp">.</span><span class="mi">1</span> <span class="n">H</span> <span class="k">in</span> <span class="n">h2</span> <span class="bp">▸</span>
+  <span class="bp">⟨</span><span class="n">le_add_of_nonneg_right</span> <span class="n">trivial</span><span class="o">,</span>
+  <span class="n">add_lt_of_lt_sub_left</span> <span class="err">$</span> <span class="k">match</span> <span class="n">n</span><span class="bp">-</span><span class="n">m</span><span class="o">,</span> <span class="n">h1</span> <span class="k">with</span>
+    <span class="bp">|</span> <span class="o">(</span><span class="n">k</span><span class="o">:</span><span class="bp">ℕ</span><span class="o">),</span> <span class="n">h1</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">rwa</span> <span class="o">[</span><span class="n">finset</span><span class="bp">.</span><span class="n">mem_range</span><span class="o">,</span> <span class="n">int</span><span class="bp">.</span><span class="n">to_nat_coe_nat</span><span class="o">,</span> <span class="err">←</span> <span class="n">int</span><span class="bp">.</span><span class="n">coe_nat_lt</span><span class="o">]</span> <span class="n">at</span> <span class="n">h1</span>
+    <span class="kn">end</span><span class="bp">⟩</span><span class="o">,</span>
+<span class="bp">λ</span> <span class="bp">⟨</span><span class="n">h1</span><span class="o">,</span> <span class="n">h2</span><span class="bp">⟩</span><span class="o">,</span> <span class="n">finset</span><span class="bp">.</span><span class="n">mem_map</span><span class="bp">.</span><span class="mi">2</span> <span class="bp">⟨</span><span class="n">int</span><span class="bp">.</span><span class="n">to_nat</span> <span class="o">(</span><span class="n">r</span><span class="bp">-</span><span class="n">m</span><span class="o">),</span>
+  <span class="n">finset</span><span class="bp">.</span><span class="n">mem_range</span><span class="bp">.</span><span class="mi">2</span> <span class="err">$</span> <span class="k">by</span> <span class="n">rw</span> <span class="o">[</span><span class="err">←</span> <span class="n">int</span><span class="bp">.</span><span class="n">coe_nat_lt</span><span class="o">,</span> <span class="n">int</span><span class="bp">.</span><span class="n">to_nat_of_nonneg</span> <span class="o">(</span><span class="n">sub_nonneg_of_le</span> <span class="n">h1</span><span class="o">),</span>
+      <span class="n">int</span><span class="bp">.</span><span class="n">to_nat_of_nonneg</span> <span class="o">(</span><span class="n">sub_nonneg_of_le</span> <span class="o">(</span><span class="n">le_of_lt</span> <span class="o">(</span><span class="n">lt_of_le_of_lt</span> <span class="n">h1</span> <span class="n">h2</span><span class="o">)))]</span><span class="bp">;</span>
+    <span class="n">exact</span> <span class="n">sub_lt_sub_right</span> <span class="n">h2</span> <span class="bp">_</span><span class="o">,</span>
+  <span class="k">show</span> <span class="n">m</span> <span class="bp">+</span> <span class="bp">_</span> <span class="bp">=</span> <span class="bp">_</span><span class="o">,</span> <span class="k">by</span> <span class="n">rw</span> <span class="o">[</span><span class="n">int</span><span class="bp">.</span><span class="n">to_nat_of_nonneg</span> <span class="o">(</span><span class="n">sub_nonneg_of_le</span> <span class="n">h1</span><span class="o">),</span> <span class="n">add_sub_cancel&#39;_right</span><span class="o">]</span><span class="bp">⟩⟩</span>
 
-instance int.decidable_le_lt (P : int → Prop) [decidable_pred P] (m n : ℤ) : decidable (∀ r, m ≤ r → r < n → P r) :=
-decidable_of_iff (∀ r ∈ int.range m n, P r) $ by simp only [int.mem_range_iff, and_imp]
+<span class="kn">instance</span> <span class="n">int</span><span class="bp">.</span><span class="n">decidable_le_lt</span> <span class="o">(</span><span class="n">P</span> <span class="o">:</span> <span class="n">int</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">[</span><span class="n">decidable_pred</span> <span class="n">P</span><span class="o">]</span> <span class="o">(</span><span class="n">m</span> <span class="n">n</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">:</span> <span class="n">decidable</span> <span class="o">(</span><span class="bp">∀</span> <span class="n">r</span><span class="o">,</span> <span class="n">m</span> <span class="bp">≤</span> <span class="n">r</span> <span class="bp">→</span> <span class="n">r</span> <span class="bp">&lt;</span> <span class="n">n</span> <span class="bp">→</span> <span class="n">P</span> <span class="n">r</span><span class="o">)</span> <span class="o">:=</span>
+<span class="n">decidable_of_iff</span> <span class="o">(</span><span class="bp">∀</span> <span class="n">r</span> <span class="err">∈</span> <span class="n">int</span><span class="bp">.</span><span class="n">range</span> <span class="n">m</span> <span class="n">n</span><span class="o">,</span> <span class="n">P</span> <span class="n">r</span><span class="o">)</span> <span class="err">$</span> <span class="k">by</span> <span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">int</span><span class="bp">.</span><span class="n">mem_range_iff</span><span class="o">,</span> <span class="n">and_imp</span><span class="o">]</span>
 
-instance int.decidable_le_le (P : int → Prop) [decidable_pred P] (m n : ℤ) : decidable (∀ r, m ≤ r → r ≤ n → P r) :=
-decidable_of_iff (∀ r ∈ int.range m (n+1), P r) $ by simp only [int.mem_range_iff, and_imp, int.lt_add_one_iff]
+<span class="kn">instance</span> <span class="n">int</span><span class="bp">.</span><span class="n">decidable_le_le</span> <span class="o">(</span><span class="n">P</span> <span class="o">:</span> <span class="n">int</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">[</span><span class="n">decidable_pred</span> <span class="n">P</span><span class="o">]</span> <span class="o">(</span><span class="n">m</span> <span class="n">n</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">:</span> <span class="n">decidable</span> <span class="o">(</span><span class="bp">∀</span> <span class="n">r</span><span class="o">,</span> <span class="n">m</span> <span class="bp">≤</span> <span class="n">r</span> <span class="bp">→</span> <span class="n">r</span> <span class="bp">≤</span> <span class="n">n</span> <span class="bp">→</span> <span class="n">P</span> <span class="n">r</span><span class="o">)</span> <span class="o">:=</span>
+<span class="n">decidable_of_iff</span> <span class="o">(</span><span class="bp">∀</span> <span class="n">r</span> <span class="err">∈</span> <span class="n">int</span><span class="bp">.</span><span class="n">range</span> <span class="n">m</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">),</span> <span class="n">P</span> <span class="n">r</span><span class="o">)</span> <span class="err">$</span> <span class="k">by</span> <span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">int</span><span class="bp">.</span><span class="n">mem_range_iff</span><span class="o">,</span> <span class="n">and_imp</span><span class="o">,</span> <span class="n">int</span><span class="bp">.</span><span class="n">lt_add_one_iff</span><span class="o">]</span>
 
-instance int.decidable_lt_lt (P : int → Prop) [decidable_pred P] (m n : ℤ) : decidable (∀ r, m < r → r < n → P r) :=
-int.decidable_le_lt P _ _
+<span class="kn">instance</span> <span class="n">int</span><span class="bp">.</span><span class="n">decidable_lt_lt</span> <span class="o">(</span><span class="n">P</span> <span class="o">:</span> <span class="n">int</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">[</span><span class="n">decidable_pred</span> <span class="n">P</span><span class="o">]</span> <span class="o">(</span><span class="n">m</span> <span class="n">n</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">:</span> <span class="n">decidable</span> <span class="o">(</span><span class="bp">∀</span> <span class="n">r</span><span class="o">,</span> <span class="n">m</span> <span class="bp">&lt;</span> <span class="n">r</span> <span class="bp">→</span> <span class="n">r</span> <span class="bp">&lt;</span> <span class="n">n</span> <span class="bp">→</span> <span class="n">P</span> <span class="n">r</span><span class="o">)</span> <span class="o">:=</span>
+<span class="n">int</span><span class="bp">.</span><span class="n">decidable_le_lt</span> <span class="n">P</span> <span class="bp">_</span> <span class="bp">_</span>
 
-instance int.decidable_lt_le (P : int → Prop) [decidable_pred P] (m n : ℤ) : decidable (∀ r, m < r → r ≤ n → P r) :=
-int.decidable_le_le P _ _
-```
+<span class="kn">instance</span> <span class="n">int</span><span class="bp">.</span><span class="n">decidable_lt_le</span> <span class="o">(</span><span class="n">P</span> <span class="o">:</span> <span class="n">int</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">[</span><span class="n">decidable_pred</span> <span class="n">P</span><span class="o">]</span> <span class="o">(</span><span class="n">m</span> <span class="n">n</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">:</span> <span class="n">decidable</span> <span class="o">(</span><span class="bp">∀</span> <span class="n">r</span><span class="o">,</span> <span class="n">m</span> <span class="bp">&lt;</span> <span class="n">r</span> <span class="bp">→</span> <span class="n">r</span> <span class="bp">≤</span> <span class="n">n</span> <span class="bp">→</span> <span class="n">P</span> <span class="n">r</span><span class="o">)</span> <span class="o">:=</span>
+<span class="n">int</span><span class="bp">.</span><span class="n">decidable_le_le</span> <span class="n">P</span> <span class="bp">_</span> <span class="bp">_</span>
+</pre></div>
 
 #### [ Kenny Lau (Oct 28 2018 at 15:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/integers%20between%200%20and%203/near/136655155):
-https://github.com/leanprover/mathlib/pull/445 @**Kevin Buzzard**
+<p><a href="https://github.com/leanprover/mathlib/pull/445" target="_blank" title="https://github.com/leanprover/mathlib/pull/445">https://github.com/leanprover/mathlib/pull/445</a> <span class="user-mention" data-user-id="110038">@Kevin Buzzard</span></p>
 
 #### [ Kevin Buzzard (Oct 28 2018 at 16:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/integers%20between%200%20and%203/near/136655417):
-Thank you Kenny
+<p>Thank you Kenny</p>
 
 #### [ Kenny Lau (Oct 30 2018 at 19:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/integers%20between%200%20and%203/near/136795548):
-Merged @**Kevin Buzzard**
+<p>Merged <span class="user-mention" data-user-id="110038">@Kevin Buzzard</span></p>
 
 #### [ Tobias Grosser (Oct 30 2018 at 20:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/integers%20between%200%20and%203/near/136801131):
-(deleted)
+<p>(deleted)</p>
 
 
 {% endraw %}

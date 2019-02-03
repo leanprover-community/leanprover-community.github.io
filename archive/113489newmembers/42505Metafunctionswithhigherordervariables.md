@@ -12,23 +12,25 @@ permalink: archive/113489newmembers/42505Metafunctionswithhigherordervariables.h
 
 {% raw %}
 #### [ Ken Roe (Jul 29 2018 at 00:42)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Meta%20functions%20with%20higher%20order%20variables/near/130493380):
-How can I get the following to parse:
-```lean
-meta def test : expr → expr
-| `(λ s, %%f s) := `(λ s, %%f (s+1))
-| x := x.
-```
-Currently, I'm getting the error:
-```lean
-function expected at
-  _x_1
-term has type
-  ?m_1
-```
-on the first %%f.
+<p>How can I get the following to parse:</p>
+<div class="codehilite"><pre><span></span><span class="n">meta</span> <span class="n">def</span> <span class="n">test</span> <span class="o">:</span> <span class="n">expr</span> <span class="bp">→</span> <span class="n">expr</span>
+<span class="bp">|</span> <span class="bp">`</span><span class="o">(</span><span class="bp">λ</span> <span class="n">s</span><span class="o">,</span> <span class="err">%%</span><span class="n">f</span> <span class="n">s</span><span class="o">)</span> <span class="o">:=</span> <span class="bp">`</span><span class="o">(</span><span class="bp">λ</span> <span class="n">s</span><span class="o">,</span> <span class="err">%%</span><span class="n">f</span> <span class="o">(</span><span class="n">s</span><span class="bp">+</span><span class="mi">1</span><span class="o">))</span>
+<span class="bp">|</span> <span class="n">x</span> <span class="o">:=</span> <span class="n">x</span><span class="bp">.</span>
+</pre></div>
+
+
+<p>Currently, I'm getting the error:</p>
+<div class="codehilite"><pre><span></span><span class="n">function</span> <span class="n">expected</span> <span class="n">at</span>
+  <span class="bp">_</span><span class="n">x_1</span>
+<span class="n">term</span> <span class="n">has</span> <span class="n">type</span>
+  <span class="err">?</span><span class="n">m_1</span>
+</pre></div>
+
+
+<p>on the first %%f.</p>
 
 #### [ Sebastian Ullrich (Jul 29 2018 at 04:21)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Meta%20functions%20with%20higher%20order%20variables/near/130503396):
-You should use an explicit type annotation `(%%f : ...) s`. Though if you don't statically know the type, you shouldn't use expr quotations.
+<p>You should use an explicit type annotation <code>(%%f : ...) s</code>. Though if you don't statically know the type, you shouldn't use expr quotations.</p>
 
 
 {% endraw %}

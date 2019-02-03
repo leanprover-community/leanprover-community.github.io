@@ -12,100 +12,100 @@ permalink: archive/113488general/39667UnicodeinZulip.html
 
 {% raw %}
 #### [ Johan Commelin (Apr 11 2018 at 20:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unicode%20in%20Zulip/near/124944729):
-Quick question: how do I comfortably input unicode in Zulip? So far I have used copy-paste to write alphas and betas. In VS code these are magically replaced with unicode... in the rest of my life TeX does this for me. How do I get them here?
+<p>Quick question: how do I comfortably input unicode in Zulip? So far I have used copy-paste to write alphas and betas. In VS code these are magically replaced with unicode... in the rest of my life TeX does this for me. How do I get them here?</p>
 
 #### [ Mario Carneiro (Apr 11 2018 at 20:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unicode%20in%20Zulip/near/124944838):
-You can use tex here, although it gets math font: $\alpha$
+<p>You can use tex here, although it gets math font: $\alpha$</p>
 
 #### [ Johan Commelin (Apr 11 2018 at 20:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unicode%20in%20Zulip/near/124945053):
-Ok, thanks.
+<p>Ok, thanks.</p>
 
 #### [ Johan Commelin (Apr 11 2018 at 20:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unicode%20in%20Zulip/near/124945057):
-Test: `$\alpha$` $\alpha$
+<p>Test: <code>$\alpha$</code> $\alpha$</p>
 
 #### [ Johan Commelin (Apr 11 2018 at 20:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unicode%20in%20Zulip/near/124945064):
-Hmm, neither do what I want...
+<p>Hmm, neither do what I want...</p>
 
 #### [ Johan Commelin (Apr 11 2018 at 20:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unicode%20in%20Zulip/near/124945076):
-How do you input an alpha in code? So between back-ticks?
+<p>How do you input an alpha in code? So between back-ticks?</p>
 
 #### [ Johan Commelin (Apr 11 2018 at 20:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unicode%20in%20Zulip/near/124945123):
-Test: $$\alpha$$
+<p>Test: <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>α</mi></mrow><annotation encoding="application/x-tex">\alpha</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.43056em;"></span><span class="strut bottom" style="height:0.43056em;vertical-align:0em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.0037em;">α</span></span></span></span></p>
 
 #### [ Patrick Massot (Apr 11 2018 at 21:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unicode%20in%20Zulip/near/124945238):
-I use https://github.com/docwhat/itsalltext/tree/release-1.9.3#readme It gives me a small "edit" button near textareas in firefox. Clicking this button fires vim and you can type whatever you want
+<p>I use <a href="https://github.com/docwhat/itsalltext/tree/release-1.9.3#readme" target="_blank" title="https://github.com/docwhat/itsalltext/tree/release-1.9.3#readme">https://github.com/docwhat/itsalltext/tree/release-1.9.3#readme</a> It gives me a small "edit" button near textareas in firefox. Clicking this button fires vim and you can type whatever you want</p>
 
 #### [ Patrick Massot (Apr 11 2018 at 21:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unicode%20in%20Zulip/near/124945245):
-Of course you can also configure it to fire emacs if that's your religion
+<p>Of course you can also configure it to fire emacs if that's your religion</p>
 
 #### [ Johan Commelin (Apr 11 2018 at 21:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unicode%20in%20Zulip/near/124945289):
-No, I'm a vimmer. But I never input alphas directly into vim...
+<p>No, I'm a vimmer. But I never input alphas directly into vim...</p>
 
 #### [ Johan Commelin (Apr 11 2018 at 21:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unicode%20in%20Zulip/near/124945292):
-I was an ascii-only guy, until I met Lean
+<p>I was an ascii-only guy, until I met Lean</p>
 
 #### [ Johan Commelin (Apr 11 2018 at 21:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unicode%20in%20Zulip/near/124945364):
-At some point, someone will formalise Fermat's last theorem in Lean
+<p>At some point, someone will formalise Fermat's last theorem in Lean</p>
 
 #### [ Patrick Massot (Apr 11 2018 at 21:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unicode%20in%20Zulip/near/124945365):
-Then you should go and configure your vim to make you a unicode guy
+<p>Then you should go and configure your vim to make you a unicode guy</p>
 
 #### [ Johan Commelin (Apr 11 2018 at 21:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unicode%20in%20Zulip/near/124945366):
-And it will take us 5 years to figure out that they spoofed us with an punycode attack: https://en.wikipedia.org/wiki/IDN_homograph_attack
+<p>And it will take us 5 years to figure out that they spoofed us with an punycode attack: <a href="https://en.wikipedia.org/wiki/IDN_homograph_attack" target="_blank" title="https://en.wikipedia.org/wiki/IDN_homograph_attack">https://en.wikipedia.org/wiki/IDN_homograph_attack</a></p>
 
 #### [ Johan Commelin (Apr 11 2018 at 21:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unicode%20in%20Zulip/near/124945386):
-Importing some library whose name looks completely familiar, but inside the library they do just assume false...
+<p>Importing some library whose name looks completely familiar, but inside the library they do just assume false...</p>
 
 #### [ Patrick Massot (Apr 11 2018 at 21:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unicode%20in%20Zulip/near/124945909):
-I think Kevin decided we weren't formalizing FLT in the end
+<p>I think Kevin decided we weren't formalizing FLT in the end</p>
 
 #### [ Patrick Massot (Apr 11 2018 at 21:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unicode%20in%20Zulip/near/124945950):
-This is too old
+<p>This is too old</p>
 
 #### [ Patrick Massot (Apr 11 2018 at 21:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unicode%20in%20Zulip/near/124945952):
-He works on perfectoid spaces
+<p>He works on perfectoid spaces</p>
 
 #### [ Johan Commelin (Apr 11 2018 at 21:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unicode%20in%20Zulip/near/124946277):
-The problem remains... whether you are formalising the latest hotness in the Langlands program, or some hardcore $$\infty$$-stuff, or something from quantisation-blabla... unicode is ambiguous and susceptible to social attacks...
+<p>The problem remains... whether you are formalising the latest hotness in the Langlands program, or some hardcore <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="normal">∞</mi></mrow><annotation encoding="application/x-tex">\infty</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.43056em;"></span><span class="strut bottom" style="height:0.43056em;vertical-align:0em;"></span><span class="base"><span class="mord mathrm">∞</span></span></span></span>-stuff, or something from quantisation-blabla... unicode is ambiguous and susceptible to social attacks...</p>
 
 #### [ Johan Commelin (Apr 11 2018 at 21:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unicode%20in%20Zulip/near/124946280):
-Anyway, I will stuff away my tinfoil hat... enough other problems to focus on right now (^;
+<p>Anyway, I will stuff away my tinfoil hat... enough other problems to focus on right now (^;</p>
 
 #### [ Kevin Buzzard (Apr 11 2018 at 21:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unicode%20in%20Zulip/near/124946716):
-I don't think it's too difficult to formalise. The proof might be harder though.
+<p>I don't think it's too difficult to formalise. The proof might be harder though.</p>
 
 #### [ Kevin Buzzard (Apr 11 2018 at 21:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unicode%20in%20Zulip/near/124946769):
-The thing about the proof is that there is a huge amount of analysis that goes into the trace formula
+<p>The thing about the proof is that there is a huge amount of analysis that goes into the trace formula</p>
 
 #### [ Kevin Buzzard (Apr 11 2018 at 21:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unicode%20in%20Zulip/near/124946776):
-and I know of no proof which ultimately avoids the trace formula
+<p>and I know of no proof which ultimately avoids the trace formula</p>
 
 #### [ Kevin Buzzard (Apr 11 2018 at 21:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unicode%20in%20Zulip/near/124946781):
-in the non-compact case I should add -- SL(2).
+<p>in the non-compact case I should add -- SL(2).</p>
 
 #### [ Patrick Massot (Apr 11 2018 at 21:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unicode%20in%20Zulip/near/124946789):
-https://github.com/formalabstracts/formalabstracts/blob/master/fabstract/Wiles_A_and_Taylor_R_FermatLast/fabstract.lean
+<p><a href="https://github.com/formalabstracts/formalabstracts/blob/master/fabstract/Wiles_A_and_Taylor_R_FermatLast/fabstract.lean" target="_blank" title="https://github.com/formalabstracts/formalabstracts/blob/master/fabstract/Wiles_A_and_Taylor_R_FermatLast/fabstract.lean">https://github.com/formalabstracts/formalabstracts/blob/master/fabstract/Wiles_A_and_Taylor_R_FermatLast/fabstract.lean</a></p>
 
 #### [ Kevin Buzzard (Apr 11 2018 at 21:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unicode%20in%20Zulip/near/124946791):
-It's the one part of the proof I've not read and it would not surprise me if I went to my grave not having read it.
+<p>It's the one part of the proof I've not read and it would not surprise me if I went to my grave not having read it.</p>
 
 #### [ Kevin Buzzard (Apr 11 2018 at 21:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unicode%20in%20Zulip/near/124946794):
-Unless EPSRC give me several million quid to formalise it.
+<p>Unless EPSRC give me several million quid to formalise it.</p>
 
 #### [ Patrick Massot (Apr 11 2018 at 21:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unicode%20in%20Zulip/near/124946796):
-Statement is already done :smile:
+<p>Statement is already done <span class="emoji emoji-1f604" title="smile">:smile:</span></p>
 
 #### [ Kevin Buzzard (Apr 11 2018 at 21:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unicode%20in%20Zulip/near/124946798):
-Oh OK that's great, we're half way there.
+<p>Oh OK that's great, we're half way there.</p>
 
 #### [ Patrick Massot (Apr 11 2018 at 21:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unicode%20in%20Zulip/near/124946836):
-Indeed
+<p>Indeed</p>
 
 #### [ Johan Commelin (Apr 11 2018 at 21:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unicode%20in%20Zulip/near/124946850):
-Lol, they have a type called `document`
+<p>Lol, they have a type called <code>document</code></p>
 
 #### [ Johan Commelin (Apr 11 2018 at 21:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unicode%20in%20Zulip/near/124946855):
-That's fantastic (^;
+<p>That's fantastic (^;</p>
 
 
 {% endraw %}

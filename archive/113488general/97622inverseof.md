@@ -12,290 +12,290 @@ permalink: archive/113488general/97622inverseof.html
 
 {% raw %}
 #### [ Andrew Ashworth (May 28 2018 at 05:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inverse%20of%20%24/near/127186287):
-is there an inverse of `$`? (the backwards pipe operator`<|`)  i.e. instead of `g (f x)` being written as `g $ f x` I'd like to write `f x <| g`
+<p>is there an inverse of <code>$</code>? (the backwards pipe operator<code>&lt;|</code>)  i.e. instead of <code>g (f x)</code> being written as <code>g $ f x</code> I'd like to write <code>f x &lt;| g</code></p>
 
 #### [ Brendan Zabarauskas (May 28 2018 at 05:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inverse%20of%20%24/near/127186348):
-I though `$` was backwards pipe? Do you mean you'd like to write `x |> f |> g`?
+<p>I though <code>$</code> was backwards pipe? Do you mean you'd like to write <code>x |&gt; f |&gt; g</code>?</p>
 
 #### [ Brendan Zabarauskas (May 28 2018 at 05:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inverse%20of%20%24/near/127186357):
-(big fan of directional composition/application operators at any rate)
+<p>(big fan of directional composition/application operators at any rate)</p>
 
 #### [ Andrew Ashworth (May 28 2018 at 05:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inverse%20of%20%24/near/127186402):
-er, maybe it's a forwards pipe? but yes, I'd like to reverse the order that function arguments appear
+<p>er, maybe it's a forwards pipe? but yes, I'd like to reverse the order that function arguments appear</p>
 
 #### [ Andrew Ashworth (May 28 2018 at 05:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inverse%20of%20%24/near/127186414):
-in fact, I just googled and yeah, seems I have my directions mixed up, whoops
+<p>in fact, I just googled and yeah, seems I have my directions mixed up, whoops</p>
 
 #### [ Brendan Zabarauskas (May 28 2018 at 05:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inverse%20of%20%24/near/127186455):
-To be more precise, I'd also recommend saying 'apply' and 'application' rather than 'pipe', which is a little ambiguous.
+<p>To be more precise, I'd also recommend saying 'apply' and 'application' rather than 'pipe', which is a little ambiguous.</p>
 
 #### [ Mario Carneiro (May 28 2018 at 05:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inverse%20of%20%24/near/127186527):
-short answer: no
+<p>short answer: no</p>
 
 #### [ Mario Carneiro (May 28 2018 at 05:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inverse%20of%20%24/near/127186532):
-I believe that operator is used for `option.lhoare`
+<p>I believe that operator is used for <code>option.lhoare</code></p>
 
 #### [ Andrew Ashworth (May 28 2018 at 05:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inverse%20of%20%24/near/127186590):
-eughhh. `|>` and `<|` have been around for ages  to represent reverse and forward function application.... maybe I can steal them back after Lean 4 releases
+<p>eughhh. <code>|&gt;</code> and <code>&lt;|</code> have been around for ages  to represent reverse and forward function application.... maybe I can steal them back after Lean 4 releases</p>
 
 #### [ Mario Carneiro (May 28 2018 at 05:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inverse%20of%20%24/near/127186593):
-I think that `lhoare` and `rhoare` are surprisingly useless operators
+<p>I think that <code>lhoare</code> and <code>rhoare</code> are surprisingly useless operators</p>
 
 #### [ Brendan Zabarauskas (May 28 2018 at 05:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inverse%20of%20%24/near/127186631):
-what on earth is a `hoare`?
+<p>what on earth is a <code>hoare</code>?</p>
 
 #### [ Mario Carneiro (May 28 2018 at 05:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inverse%20of%20%24/near/127186634):
-I have never seen a use for them
+<p>I have never seen a use for them</p>
 
 #### [ Mario Carneiro (May 28 2018 at 05:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inverse%20of%20%24/near/127186635):
-as in tony
+<p>as in tony</p>
 
 #### [ Brendan Zabarauskas (May 28 2018 at 05:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inverse%20of%20%24/near/127186636):
-hoare logic?
+<p>hoare logic?</p>
 
 #### [ Andrew Ashworth (May 28 2018 at 05:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inverse%20of%20%24/near/127186637):
-i don't have a problem with useless library files, but the problem is you can't unset global notation :(
+<p>i don't have a problem with useless library files, but the problem is you can't unset global notation :(</p>
 
 #### [ Brendan Zabarauskas (May 28 2018 at 05:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inverse%20of%20%24/near/127186688):
-Also a big fan of `>>` and `<<` for composition (as in F#, Elm), but those are often stolen by haskell-like langs for monady stuff. I just say use `*>` and `<*` from applicative instead.
+<p>Also a big fan of <code>&gt;&gt;</code> and <code>&lt;&lt;</code> for composition (as in F#, Elm), but those are often stolen by haskell-like langs for monady stuff. I just say use <code>*&gt;</code> and <code>&lt;*</code> from applicative instead.</p>
 
 #### [ Mario Carneiro (May 28 2018 at 05:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inverse%20of%20%24/near/127186692):
-looks like `lhoare` and `rhoare` are not used anywhere in core either
+<p>looks like <code>lhoare</code> and <code>rhoare</code> are not used anywhere in core either</p>
 
 #### [ Mario Carneiro (May 28 2018 at 05:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inverse%20of%20%24/near/127186700):
-`rhoare` is almost the same as `option.guard` but its logic is reversed
+<p><code>rhoare</code> is almost the same as <code>option.guard</code> but its logic is reversed</p>
 
 #### [ Mario Carneiro (May 28 2018 at 05:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inverse%20of%20%24/near/127186748):
-maybe I can get @**Sebastian Ullrich** to burninate it?
+<p>maybe I can get <span class="user-mention" data-user-id="110024">@Sebastian Ullrich</span> to burninate it?</p>
 
 #### [ Andrew Ashworth (May 28 2018 at 05:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inverse%20of%20%24/near/127186757):
-for symmetry reasons I'd vote for that, `|>` and `<|` is more pleasant to look at than dollar signs
+<p>for symmetry reasons I'd vote for that, <code>|&gt;</code> and <code>&lt;|</code> is more pleasant to look at than dollar signs</p>
 
 #### [ Mario Carneiro (May 28 2018 at 05:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inverse%20of%20%24/near/127186798):
-the dollar's not going anywhere though
+<p>the dollar's not going anywhere though</p>
 
 #### [ Andrew Ashworth (May 28 2018 at 05:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inverse%20of%20%24/near/127186799):
-and whatever arbitrary unicode symbol i would pick to replace `<|`
+<p>and whatever arbitrary unicode symbol i would pick to replace <code>&lt;|</code></p>
 
 #### [ Mario Carneiro (May 28 2018 at 05:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inverse%20of%20%24/near/127186804):
-what about `<$`?
+<p>what about <code>&lt;$</code>?</p>
 
 #### [ Andrew Ashworth (May 28 2018 at 05:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inverse%20of%20%24/near/127186805):
-yea, I know the dollar sign is one character and from haskell
+<p>yea, I know the dollar sign is one character and from haskell</p>
 
 #### [ Mario Carneiro (May 28 2018 at 05:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inverse%20of%20%24/near/127186808):
-that is more obviously related to application
+<p>that is more obviously related to application</p>
 
 #### [ Mario Carneiro (May 28 2018 at 05:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inverse%20of%20%24/near/127186814):
-I assume `<|` and `|>` have something to do with orelse
+<p>I assume <code>&lt;|</code> and <code>|&gt;</code> have something to do with orelse</p>
 
 #### [ Mario Carneiro (May 28 2018 at 05:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inverse%20of%20%24/near/127186815):
-and the hoare things are also orelsey
+<p>and the hoare things are also orelsey</p>
 
 #### [ Andrew Ashworth (May 28 2018 at 05:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inverse%20of%20%24/near/127186818):
-`|>` and `<|` is ocaml notation
+<p><code>|&gt;</code> and <code>&lt;|</code> is ocaml notation</p>
 
 #### [ Andrew Ashworth (May 28 2018 at 05:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inverse%20of%20%24/near/127186864):
-does haskell have a `<|` equiv
+<p>does haskell have a <code>&lt;|</code> equiv</p>
 
 #### [ Mario Carneiro (May 28 2018 at 05:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inverse%20of%20%24/near/127186876):
-I assume that haskell has a meaning for every sequence of <= 3 punctuation chars
+<p>I assume that haskell has a meaning for every sequence of &lt;= 3 punctuation chars</p>
 
 #### [ Andrew Ashworth (May 28 2018 at 05:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inverse%20of%20%24/near/127186921):
-I can get behind `<$` if `$` is sticking around
+<p>I can get behind <code>&lt;$</code> if <code>$</code> is sticking around</p>
 
 #### [ Johan Commelin (May 28 2018 at 05:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inverse%20of%20%24/near/127186928):
-But don't you want `$>` ?
+<p>But don't you want <code>$&gt;</code> ?</p>
 
 #### [ Johan Commelin (May 28 2018 at 05:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inverse%20of%20%24/near/127186929):
-That seems more intuitive to me...
+<p>That seems more intuitive to me...</p>
 
 #### [ Johan Commelin (May 28 2018 at 05:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inverse%20of%20%24/near/127186971):
-But then, I've never used OCaml
+<p>But then, I've never used OCaml</p>
 
 #### [ Andrew Ashworth (May 28 2018 at 05:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inverse%20of%20%24/near/127186977):
-as in `g (f x)` would be written `f x $> g`?
+<p>as in <code>g (f x)</code> would be written <code>f x $&gt; g</code>?</p>
 
 #### [ Johan Commelin (May 28 2018 at 05:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inverse%20of%20%24/near/127186980):
-Yes...
+<p>Yes...</p>
 
 #### [ Johan Commelin (May 28 2018 at 05:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inverse%20of%20%24/near/127186981):
-The `>` conveys in which way the arguments flow
+<p>The <code>&gt;</code> conveys in which way the arguments flow</p>
 
 #### [ Johan Commelin (May 28 2018 at 05:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inverse%20of%20%24/near/127186985):
-Just like in Bash...
+<p>Just like in Bash...</p>
 
 #### [ Johan Commelin (May 28 2018 at 05:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inverse%20of%20%24/near/127187024):
-if you write to a file
+<p>if you write to a file</p>
 
 #### [ Andrew Ashworth (May 28 2018 at 05:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inverse%20of%20%24/near/127187027):
-i can see that some might prefer that, i always thought of it as moving the top function instead of the arguments
+<p>i can see that some might prefer that, i always thought of it as moving the top function instead of the arguments</p>
 
 #### [ Johan Commelin (May 28 2018 at 05:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inverse%20of%20%24/near/127187035):
-Ok, that also makes sense...
+<p>Ok, that also makes sense...</p>
 
 #### [ Mario Carneiro (May 28 2018 at 05:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inverse%20of%20%24/near/127187036):
-I was thinking `$` with a reversal, so a backward arrow to indicate that
+<p>I was thinking <code>$</code> with a reversal, so a backward arrow to indicate that</p>
 
 #### [ Mario Carneiro (May 28 2018 at 05:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inverse%20of%20%24/near/127187038):
-oh, `<$` is taken...
+<p>oh, <code>&lt;$</code> is taken...</p>
 
 #### [ Mario Carneiro (May 28 2018 at 05:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inverse%20of%20%24/near/127187039):
-`functor.map_const`
+<p><code>functor.map_const</code></p>
 
 #### [ Johan Commelin (May 28 2018 at 05:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inverse%20of%20%24/near/127187078):
-What about `$<` ?
+<p>What about <code>$&lt;</code> ?</p>
 
 #### [ Johan Commelin (May 28 2018 at 05:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inverse%20of%20%24/near/127187082):
-(No lean here, atm)
+<p>(No lean here, atm)</p>
 
 #### [ Andrew Ashworth (May 28 2018 at 05:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inverse%20of%20%24/near/127187083):
-i prefer the bracket to be on the correct side of the dollar sign, haha
+<p>i prefer the bracket to be on the correct side of the dollar sign, haha</p>
 
 #### [ Mario Carneiro (May 28 2018 at 05:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inverse%20of%20%24/near/127187089):
-`$<` is clear
+<p><code>$&lt;</code> is clear</p>
 
 #### [ Mario Carneiro (May 28 2018 at 05:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inverse%20of%20%24/near/127187090):
-yeah, that's why it's taken :P
+<p>yeah, that's why it's taken :P</p>
 
 #### [ Mario Carneiro (May 28 2018 at 05:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inverse%20of%20%24/near/127187135):
-I guess `<$` is named similar to `<$>`
+<p>I guess <code>&lt;$</code> is named similar to <code>&lt;$&gt;</code></p>
 
 #### [ Andrew Ashworth (May 28 2018 at 05:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inverse%20of%20%24/near/127187190):
-when lean 4 is released I will have to be very quick and reserve `|>` and `<|` as fast as possible in some large library most users install...
+<p>when lean 4 is released I will have to be very quick and reserve <code>|&gt;</code> and <code>&lt;|</code> as fast as possible in some large library most users install...</p>
 
 #### [ Andrew Ashworth (May 28 2018 at 05:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inverse%20of%20%24/near/127187229):
-since it seems those might have a chance of being deleted anyway
+<p>since it seems those might have a chance of being deleted anyway</p>
 
 #### [ Andrew Ashworth (May 28 2018 at 05:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inverse%20of%20%24/near/127187243):
-or maybe there's some unicode variant of the eq.subst triangle hanging around
+<p>or maybe there's some unicode variant of the eq.subst triangle hanging around</p>
 
 #### [ Mario Carneiro (May 28 2018 at 05:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inverse%20of%20%24/near/127187284):
-there is unicode for everything
+<p>there is unicode for everything</p>
 
 #### [ Mario Carneiro (May 28 2018 at 05:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inverse%20of%20%24/near/127187288):
-`◁ `?
+<p><code>◁ </code>?</p>
 
 #### [ Mario Carneiro (May 28 2018 at 05:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inverse%20of%20%24/near/127187289):
-= \lhd
+<p>= \lhd</p>
 
 #### [ Mario Carneiro (May 28 2018 at 05:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inverse%20of%20%24/near/127187299):
-but mathematicians are also jockeying for these symbols
+<p>but mathematicians are also jockeying for these symbols</p>
 
 #### [ Andrew Ashworth (May 28 2018 at 05:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inverse%20of%20%24/near/127187301):
-this operator is so commonly used I'm boggled nobody has complained about it yet in this chat
+<p>this operator is so commonly used I'm boggled nobody has complained about it yet in this chat</p>
 
 #### [ Johan Commelin (May 28 2018 at 05:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inverse%20of%20%24/near/127187302):
-I hope in Lean 4 there will be a way to selectively import notation
+<p>I hope in Lean 4 there will be a way to selectively import notation</p>
 
 #### [ Johan Commelin (May 28 2018 at 05:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inverse%20of%20%24/near/127187344):
-`import foo with bar as xyzzy`
+<p><code>import foo with bar as xyzzy</code></p>
 
 #### [ Johan Commelin (May 28 2018 at 05:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inverse%20of%20%24/near/127187345):
-Like in python
+<p>Like in python</p>
 
 #### [ Andrew Ashworth (May 28 2018 at 05:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inverse%20of%20%24/near/127187346):
-am I really the first person to miss the dual of `$`
+<p>am I really the first person to miss the dual of <code>$</code></p>
 
 #### [ Mario Carneiro (May 28 2018 at 05:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inverse%20of%20%24/near/127187347):
-for CS things I prefer ascii because mathematicians won't lower themselves to use them
+<p>for CS things I prefer ascii because mathematicians won't lower themselves to use them</p>
 
 #### [ Johan Commelin (May 28 2018 at 05:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inverse%20of%20%24/near/127187354):
-lol
+<p>lol</p>
 
 #### [ Mario Carneiro (May 28 2018 at 05:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inverse%20of%20%24/near/127187355):
-well, it is obviously redundant...
+<p>well, it is obviously redundant...</p>
 
 #### [ Johan Commelin (May 28 2018 at 05:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inverse%20of%20%24/near/127187411):
-@**Andrew Ashworth** So plug a zero-width char in between, an create a keyboard shortcut to type the 3-char-combo. Or does VScode not render 0-width-chars with 0 width?
+<p><span class="user-mention" data-user-id="110025">@Andrew Ashworth</span> So plug a zero-width char in between, an create a keyboard shortcut to type the 3-char-combo. Or does VScode not render 0-width-chars with 0 width?</p>
 
 #### [ Mario Carneiro (May 28 2018 at 05:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inverse%20of%20%24/near/127187414):
-nooo
+<p>nooo</p>
 
 #### [ Johan Commelin (May 28 2018 at 05:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inverse%20of%20%24/near/127187420):
-Or use `local notation` to override the global stuff. I did that with `[n]`.
+<p>Or use <code>local notation</code> to override the global stuff. I did that with <code>[n]</code>.</p>
 
 #### [ Johan Commelin (May 28 2018 at 05:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inverse%20of%20%24/near/127187471):
-Does Lean recognize 0-width space as whitespace?
+<p>Does Lean recognize 0-width space as whitespace?</p>
 
 #### [ Andrew Ashworth (May 28 2018 at 05:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inverse%20of%20%24/near/127187570):
-i guess.. but when people do more actual programming, it's nice to write something like `[1..10] |> map f` (with the arrow the way Johan likes it)
+<p>i guess.. but when people do more actual programming, it's nice to write something like <code>[1..10] |&gt; map f</code> (with the arrow the way Johan likes it)</p>
 
 #### [ Reid Barton (May 28 2018 at 05:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inverse%20of%20%24/near/127187574):
-I was going to say, isn't `|>` the flipped application?
+<p>I was going to say, isn't <code>|&gt;</code> the flipped application?</p>
 
 #### [ Reid Barton (May 28 2018 at 05:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inverse%20of%20%24/near/127187576):
-But in lean, can't you write `[1..10].map f`?
+<p>But in lean, can't you write <code>[1..10].map f</code>?</p>
 
 #### [ Andrew Ashworth (May 28 2018 at 05:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inverse%20of%20%24/near/127187619):
-`[1..10]` might be some arbitrary expression that spans multiple lines
+<p><code>[1..10]</code> might be some arbitrary expression that spans multiple lines</p>
 
 #### [ Mario Carneiro (May 28 2018 at 05:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inverse%20of%20%24/near/127187621):
-```
-def «te​st» := 1
+<div class="codehilite"><pre><span></span>def «te​st» := 1
 #print «te​st»
-```
+</pre></div>
 
 #### [ Mario Carneiro (May 28 2018 at 05:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inverse%20of%20%24/near/127187625):
-it doesn't like it as a space or as an identifier
+<p>it doesn't like it as a space or as an identifier</p>
 
 #### [ Andrew Ashworth (May 28 2018 at 05:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inverse%20of%20%24/near/127187627):
-also I've completely got the application directions mixed up in my head, if I could delete it all I would :)
+<p>also I've completely got the application directions mixed up in my head, if I could delete it all I would :)</p>
 
 #### [ Reid Barton (May 28 2018 at 05:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inverse%20of%20%24/near/127187636):
-I don't really see what you gain over using parentheses or a variety of other options
+<p>I don't really see what you gain over using parentheses or a variety of other options</p>
 
 #### [ Johan Commelin (May 28 2018 at 05:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inverse%20of%20%24/near/127187639):
-/me should prove `fermаt_lаst_theorem` in a couple lines, after importing https://github.com/formalabstracts/formalabstracts/blob/master/fabstract/Wiles_A_and_Taylor_R_FermatLast/fabstract.lean, and some other obscure libraries... :stuck_out_tongue_winking_eye:
+<p>/me should prove <code>fermаt_lаst_theorem</code> in a couple lines, after importing <a href="https://github.com/formalabstracts/formalabstracts/blob/master/fabstract/Wiles_A_and_Taylor_R_FermatLast/fabstract.lean" target="_blank" title="https://github.com/formalabstracts/formalabstracts/blob/master/fabstract/Wiles_A_and_Taylor_R_FermatLast/fabstract.lean">https://github.com/formalabstracts/formalabstracts/blob/master/fabstract/Wiles_A_and_Taylor_R_FermatLast/fabstract.lean</a>, and some other obscure libraries... <span class="emoji emoji-1f61c" title="stuck out tongue winking eye">:stuck_out_tongue_winking_eye:</span></p>
 
 #### [ Reid Barton (May 28 2018 at 06:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inverse%20of%20%24/near/127187684):
-The uses I know of for flipped application are when you have left-to-right type inference / overloading resolution (Haskell doesn't have this, Lean might, not sure) or you want the order of effects to be left-to-right (Haskell has `>>=`)
+<p>The uses I know of for flipped application are when you have left-to-right type inference / overloading resolution (Haskell doesn't have this, Lean might, not sure) or you want the order of effects to be left-to-right (Haskell has <code>&gt;&gt;=</code>)</p>
 
 #### [ Johan Commelin (May 28 2018 at 06:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inverse%20of%20%24/near/127187687):
-No-one will notice that I used a Cyrillic `a` in `fermat`
+<p>No-one will notice that I used a Cyrillic <code>a</code> in <code>fermat</code></p>
 
 #### [ Reid Barton (May 28 2018 at 06:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inverse%20of%20%24/near/127187695):
-And of course it can be a style thing. One can debate the merits of having more styles available versus having fewer styles available
+<p>And of course it can be a style thing. One can debate the merits of having more styles available versus having fewer styles available</p>
 
 #### [ Johan Commelin (May 28 2018 at 06:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inverse%20of%20%24/near/127187696):
-Just want to point out that I am a mathematician who loves ascii
+<p>Just want to point out that I am a mathematician who loves ascii</p>
 
 #### [ Andrew Ashworth (May 28 2018 at 06:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inverse%20of%20%24/near/127187790):
-it is a little redundant, yes, you can argue field notation, `$`, and parens should be all you need, for me it's a stylistic issue v0v
+<p>it is a little redundant, yes, you can argue field notation, <code>$</code>, and parens should be all you need, for me it's a stylistic issue v0v</p>
 
 #### [ Andrew Ashworth (May 28 2018 at 06:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inverse%20of%20%24/near/127187801):
-it's a bigger deal in F# because as you mentioned type checking is done left-to-right
+<p>it's a bigger deal in F# because as you mentioned type checking is done left-to-right</p>
 
 #### [ Andrew Ashworth (May 28 2018 at 06:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inverse%20of%20%24/near/127187845):
-but it enables you to build up nice looking data transformation definitions that look natural
+<p>but it enables you to build up nice looking data transformation definitions that look natural</p>
 
 #### [ Mario Carneiro (May 28 2018 at 06:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inverse%20of%20%24/near/127187851):
-actually the type checking thing is a good point
+<p>actually the type checking thing is a good point</p>
 
 #### [ Andrew Ashworth (May 28 2018 at 06:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inverse%20of%20%24/near/127187891):
-with no parentheses like you might need with Lean's field notation
+<p>with no parentheses like you might need with Lean's field notation</p>
 
 #### [ Andrew Ashworth (May 28 2018 at 06:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inverse%20of%20%24/near/127187900):
-```quote
-actually the type checking thing is a good point
-```
-how so?
+<blockquote>
+<p>actually the type checking thing is a good point</p>
+</blockquote>
+<p>how so?</p>
 
 #### [ Mario Carneiro (May 28 2018 at 06:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inverse%20of%20%24/near/127188224):
-hm, I'm having trouble coming up with an example of a difference from the order change
+<p>hm, I'm having trouble coming up with an example of a difference from the order change</p>
 
 #### [ Mario Carneiro (May 28 2018 at 06:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inverse%20of%20%24/near/127188228):
-but in theory there should be some differences due to the parse order, which does matter
+<p>but in theory there should be some differences due to the parse order, which does matter</p>
 
 #### [ Andrew Ashworth (May 28 2018 at 06:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inverse%20of%20%24/near/127188235):
-consider this F# snippet: 
-```fsharp
-let res = 
-  [ 1 .. 10 ] 
-  |> List.filter isEven
-  |> List.map formatInt
-```
-writing this in Lean using field notation is a little cumbersome, and doesn't look as pretty
+<p>consider this F# snippet: </p>
+<div class="codehilite"><pre><span></span><span class="k">let</span> <span class="nv">res</span> <span class="o">=</span>
+  <span class="o">[</span> <span class="mi">1</span> <span class="o">..</span> <span class="mi">10</span> <span class="o">]</span>
+  <span class="o">|&gt;</span> <span class="nn">List</span><span class="p">.</span><span class="n">filter</span> <span class="n">isEven</span>
+  <span class="o">|&gt;</span> <span class="nn">List</span><span class="p">.</span><span class="n">map</span> <span class="n">formatInt</span>
+</pre></div>
+
+
+<p>writing this in Lean using field notation is a little cumbersome, and doesn't look as pretty</p>
 
 
 {% endraw %}

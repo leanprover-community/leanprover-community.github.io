@@ -12,588 +12,573 @@ permalink: archive/113488general/05051generalizeintermmode.html
 
 {% raw %}
 #### [ Kenny Lau (Apr 21 2018 at 17:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497304):
-```lean
-@[elab_as_eliminator] def generalize
-  {α : Sort*} {β : α → Sort*} (x : α) :
-  (Π x, β x) → β x :=
-λ H, H x
-```
-I have made a `generalize` in term mode
+<div class="codehilite"><pre><span></span><span class="bp">@</span><span class="o">[</span><span class="n">elab_as_eliminator</span><span class="o">]</span> <span class="n">def</span> <span class="n">generalize</span>
+  <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="n">Sort</span><span class="bp">*</span><span class="o">}</span> <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">Sort</span><span class="bp">*</span><span class="o">}</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span>
+  <span class="o">(</span><span class="bp">Π</span> <span class="n">x</span><span class="o">,</span> <span class="n">β</span> <span class="n">x</span><span class="o">)</span> <span class="bp">→</span> <span class="n">β</span> <span class="n">x</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="n">H</span><span class="o">,</span> <span class="n">H</span> <span class="n">x</span>
+</pre></div>
+
+
+<p>I have made a <code>generalize</code> in term mode</p>
 
 #### [ Kenny Lau (Apr 21 2018 at 17:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497307):
-let's say this is the goal:
-```lean
-refl_trans red x z → (∃ (w : α), refl_trans (refl_trans red) y w ∧ refl_trans (refl_trans red) z w)
-```
+<p>let's say this is the goal:</p>
+<div class="codehilite"><pre><span></span><span class="n">refl_trans</span> <span class="n">red</span> <span class="n">x</span> <span class="n">z</span> <span class="bp">→</span> <span class="o">(</span><span class="bp">∃</span> <span class="o">(</span><span class="n">w</span> <span class="o">:</span> <span class="n">α</span><span class="o">),</span> <span class="n">refl_trans</span> <span class="o">(</span><span class="n">refl_trans</span> <span class="n">red</span><span class="o">)</span> <span class="n">y</span> <span class="n">w</span> <span class="bp">∧</span> <span class="n">refl_trans</span> <span class="o">(</span><span class="n">refl_trans</span> <span class="n">red</span><span class="o">)</span> <span class="n">z</span> <span class="n">w</span><span class="o">)</span>
+</pre></div>
 
 #### [ Kenny Lau (Apr 21 2018 at 17:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497313):
-doing `generalize z _` will give you this on the underscore:
+<p>doing <code>generalize z _</code> will give you this on the underscore:</p>
 
 #### [ Kenny Lau (Apr 21 2018 at 17:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497314):
-```lean
-⊢ ∀ (x_1 : α),
-    refl_trans red x x_1 → (∃ (w : α), refl_trans (refl_trans red) y w ∧ refl_trans (refl_trans red) x_1 w)
-```
+<div class="codehilite"><pre><span></span><span class="err">⊢</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">x_1</span> <span class="o">:</span> <span class="n">α</span><span class="o">),</span>
+    <span class="n">refl_trans</span> <span class="n">red</span> <span class="n">x</span> <span class="n">x_1</span> <span class="bp">→</span> <span class="o">(</span><span class="bp">∃</span> <span class="o">(</span><span class="n">w</span> <span class="o">:</span> <span class="n">α</span><span class="o">),</span> <span class="n">refl_trans</span> <span class="o">(</span><span class="n">refl_trans</span> <span class="n">red</span><span class="o">)</span> <span class="n">y</span> <span class="n">w</span> <span class="bp">∧</span> <span class="n">refl_trans</span> <span class="o">(</span><span class="n">refl_trans</span> <span class="n">red</span><span class="o">)</span> <span class="n">x_1</span> <span class="n">w</span><span class="o">)</span>
+</pre></div>
 
 #### [ Kenny Lau (Apr 21 2018 at 17:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497315):
-is this a good idea?
+<p>is this a good idea?</p>
 
 #### [ Kenny Lau (Apr 21 2018 at 17:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497412):
-example:
-```lean
-@[elab_as_eliminator] def generalize
-  {α : Sort*} {β : α → Sort*} (x : α) :
-  (Π x, β x) → β x :=
-λ H, H x
+<p>example:</p>
+<div class="codehilite"><pre><span></span><span class="bp">@</span><span class="o">[</span><span class="n">elab_as_eliminator</span><span class="o">]</span> <span class="n">def</span> <span class="n">generalize</span>
+  <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="n">Sort</span><span class="bp">*</span><span class="o">}</span> <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">Sort</span><span class="bp">*</span><span class="o">}</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span>
+  <span class="o">(</span><span class="bp">Π</span> <span class="n">x</span><span class="o">,</span> <span class="n">β</span> <span class="n">x</span><span class="o">)</span> <span class="bp">→</span> <span class="n">β</span> <span class="n">x</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="n">H</span><span class="o">,</span> <span class="n">H</span> <span class="n">x</span>
 
-variables {α : Type*} (red : α → α → Prop) {x y z : α}
+<span class="kn">variables</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">(</span><span class="n">red</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">{</span><span class="n">x</span> <span class="n">y</span> <span class="n">z</span> <span class="o">:</span> <span class="n">α</span><span class="o">}</span>
 
-inductive refl_trans : α → α → Prop
-| refl {x} : refl_trans x x
-| step_trans {x y z} : red x y → refl_trans y z → refl_trans x z
+<span class="kn">inductive</span> <span class="n">refl_trans</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Prop</span>
+<span class="bp">|</span> <span class="n">refl</span> <span class="o">{</span><span class="n">x</span><span class="o">}</span> <span class="o">:</span> <span class="n">refl_trans</span> <span class="n">x</span> <span class="n">x</span>
+<span class="bp">|</span> <span class="n">step_trans</span> <span class="o">{</span><span class="n">x</span> <span class="n">y</span> <span class="n">z</span><span class="o">}</span> <span class="o">:</span> <span class="n">red</span> <span class="n">x</span> <span class="n">y</span> <span class="bp">→</span> <span class="n">refl_trans</span> <span class="n">y</span> <span class="n">z</span> <span class="bp">→</span> <span class="n">refl_trans</span> <span class="n">x</span> <span class="n">z</span>
 
-@[trans] theorem refl_trans.trans (H : refl_trans red x y) :
-  refl_trans red y z → refl_trans red x z :=
-generalize z $ refl_trans.rec_on H (λ x z H, H) $ λ x y z hxy hyz ih w hzw,
-refl_trans.step_trans hxy $ ih w hzw
-```
+<span class="bp">@</span><span class="o">[</span><span class="n">trans</span><span class="o">]</span> <span class="kn">theorem</span> <span class="n">refl_trans</span><span class="bp">.</span><span class="n">trans</span> <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="n">refl_trans</span> <span class="n">red</span> <span class="n">x</span> <span class="n">y</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">refl_trans</span> <span class="n">red</span> <span class="n">y</span> <span class="n">z</span> <span class="bp">→</span> <span class="n">refl_trans</span> <span class="n">red</span> <span class="n">x</span> <span class="n">z</span> <span class="o">:=</span>
+<span class="n">generalize</span> <span class="n">z</span> <span class="err">$</span> <span class="n">refl_trans</span><span class="bp">.</span><span class="n">rec_on</span> <span class="n">H</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">x</span> <span class="n">z</span> <span class="n">H</span><span class="o">,</span> <span class="n">H</span><span class="o">)</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">x</span> <span class="n">y</span> <span class="n">z</span> <span class="n">hxy</span> <span class="n">hyz</span> <span class="n">ih</span> <span class="n">w</span> <span class="n">hzw</span><span class="o">,</span>
+<span class="n">refl_trans</span><span class="bp">.</span><span class="n">step_trans</span> <span class="n">hxy</span> <span class="err">$</span> <span class="n">ih</span> <span class="n">w</span> <span class="n">hzw</span>
+</pre></div>
 
 #### [ Kenny Lau (Apr 21 2018 at 17:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497413):
-@**Simon Hudon** @**Patrick Massot** what do you guys think?
+<p><span class="user-mention" data-user-id="110026">@Simon Hudon</span> <span class="user-mention" data-user-id="110031">@Patrick Massot</span> what do you guys think?</p>
 
 #### [ Patrick Massot (Apr 21 2018 at 17:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497453):
-I'm afraid I still have to learn what the tactic mode `generalize` is good for
+<p>I'm afraid I still have to learn what the tactic mode <code>generalize</code> is good for</p>
 
 #### [ Patrick Massot (Apr 21 2018 at 17:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497454):
-I'm very curious because it came up a lot recently
+<p>I'm very curious because it came up a lot recently</p>
 
 #### [ Patrick Massot (Apr 21 2018 at 17:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497455):
-But I can't learn everything at the same time
+<p>But I can't learn everything at the same time</p>
 
 #### [ Kenny Lau (Apr 21 2018 at 17:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497456):
-well you know how `induction` works with `generalizing` right
+<p>well you know how <code>induction</code> works with <code>generalizing</code> right</p>
 
 #### [ Patrick Massot (Apr 21 2018 at 17:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497457):
-No I don't
+<p>No I don't</p>
 
 #### [ Kenny Lau (Apr 21 2018 at 17:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497462):
-hmm
+<p>hmm</p>
 
 #### [ Patrick Massot (Apr 21 2018 at 17:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497463):
-I only do induction on natural numbers
+<p>I only do induction on natural numbers</p>
 
 #### [ Kenny Lau (Apr 21 2018 at 17:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497464):
-so when you're proving that natural number addition is commutative
+<p>so when you're proving that natural number addition is commutative</p>
 
 #### [ Kenny Lau (Apr 21 2018 at 17:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497465):
-you want to prove that x+y=y+x
+<p>you want to prove that x+y=y+x</p>
 
 #### [ Kenny Lau (Apr 21 2018 at 17:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497466):
-you induct on the proposition `\forall y, x+y=y+x` instead
+<p>you induct on the proposition <code>\forall y, x+y=y+x</code> instead</p>
 
 #### [ Kenny Lau (Apr 21 2018 at 17:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497467):
-(and you prove the base case and inductive step both by induction)
+<p>(and you prove the base case and inductive step both by induction)</p>
 
 #### [ Kenny Lau (Apr 21 2018 at 17:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497504):
-(I call this "double induction')
+<p>(I call this "double induction')</p>
 
 #### [ Kenny Lau (Apr 21 2018 at 17:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497509):
-the very action of moving the goalpost from `x+y=y+x` to `\forall y, x+y=y+x` is called generalizing
+<p>the very action of moving the goalpost from <code>x+y=y+x</code> to <code>\forall y, x+y=y+x</code> is called generalizing</p>
 
 #### [ Kenny Lau (Apr 21 2018 at 17:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497518):
-https://math.stackexchange.com/a/2438135/328173
+<p><a href="https://math.stackexchange.com/a/2438135/328173" target="_blank" title="https://math.stackexchange.com/a/2438135/328173">https://math.stackexchange.com/a/2438135/328173</a></p>
 
 #### [ Kenny Lau (Apr 21 2018 at 17:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497520):
-here is it in Fitch style (only part 1 is relevant)
+<p>here is it in Fitch style (only part 1 is relevant)</p>
 
 #### [ Simon Hudon (Apr 21 2018 at 18:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497664):
-@**Kenny Lau** I'll have to get back to you a bit later. My nephew just arrived
+<p><span class="user-mention" data-user-id="110064">@Kenny Lau</span> I'll have to get back to you a bit later. My nephew just arrived</p>
 
 #### [ Kenny Lau (Apr 21 2018 at 18:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497665):
-ok
+<p>ok</p>
 
 #### [ Patrick Massot (Apr 21 2018 at 18:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497882):
-I can understand why you used your Kenny identity to post such an answer
+<p>I can understand why you used your Kenny identity to post such an answer</p>
 
 #### [ Patrick Massot (Apr 21 2018 at 18:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497883):
-Thanks for the explanation
+<p>Thanks for the explanation</p>
 
 #### [ Kenny Lau (Apr 21 2018 at 18:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497888):
-```lean
-@[elab_as_eliminator] def generalize
-  {α : Sort*} {β : α → Sort*} (x : α) :
-  (Π x, β x) → β x :=
-λ H, H x
+<div class="codehilite"><pre><span></span><span class="bp">@</span><span class="o">[</span><span class="n">elab_as_eliminator</span><span class="o">]</span> <span class="n">def</span> <span class="n">generalize</span>
+  <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="n">Sort</span><span class="bp">*</span><span class="o">}</span> <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">Sort</span><span class="bp">*</span><span class="o">}</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span>
+  <span class="o">(</span><span class="bp">Π</span> <span class="n">x</span><span class="o">,</span> <span class="n">β</span> <span class="n">x</span><span class="o">)</span> <span class="bp">→</span> <span class="n">β</span> <span class="n">x</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="n">H</span><span class="o">,</span> <span class="n">H</span> <span class="n">x</span>
 
-inductive xnat : Type
-| zero : xnat
-| succ : xnat → xnat
+<span class="kn">inductive</span> <span class="n">xnat</span> <span class="o">:</span> <span class="kt">Type</span>
+<span class="bp">|</span> <span class="n">zero</span> <span class="o">:</span> <span class="n">xnat</span>
+<span class="bp">|</span> <span class="n">succ</span> <span class="o">:</span> <span class="n">xnat</span> <span class="bp">→</span> <span class="n">xnat</span>
 
-namespace xnat
+<span class="kn">namespace</span> <span class="n">xnat</span>
 
-def add : xnat → xnat → xnat
-| x zero := x
-| x (succ y) := succ $ add x y
+<span class="n">def</span> <span class="n">add</span> <span class="o">:</span> <span class="n">xnat</span> <span class="bp">→</span> <span class="n">xnat</span> <span class="bp">→</span> <span class="n">xnat</span>
+<span class="bp">|</span> <span class="n">x</span> <span class="n">zero</span> <span class="o">:=</span> <span class="n">x</span>
+<span class="bp">|</span> <span class="n">x</span> <span class="o">(</span><span class="n">succ</span> <span class="n">y</span><span class="o">)</span> <span class="o">:=</span> <span class="n">succ</span> <span class="err">$</span> <span class="n">add</span> <span class="n">x</span> <span class="n">y</span>
 
-theorem add_comm {x y : xnat} : add x y = add y x :=
-generalize y $ xnat.rec_on x
-  (λ y, xnat.rec_on y rfl $
-     λ y ih, show succ _ = succ _, from congr_arg succ ih)
-  (λ y ih1 z, xnat.rec_on z
-     (show succ _ = succ _, from congr_arg succ $ ih1 zero)
-     (λ z ih2, congr_arg succ $ ih2.trans $ eq.trans
-       (show succ _ = succ _, from congr_arg succ (ih1 z).symm) (ih1 $ succ z)))
+<span class="kn">theorem</span> <span class="n">add_comm</span> <span class="o">{</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">xnat</span><span class="o">}</span> <span class="o">:</span> <span class="n">add</span> <span class="n">x</span> <span class="n">y</span> <span class="bp">=</span> <span class="n">add</span> <span class="n">y</span> <span class="n">x</span> <span class="o">:=</span>
+<span class="n">generalize</span> <span class="n">y</span> <span class="err">$</span> <span class="n">xnat</span><span class="bp">.</span><span class="n">rec_on</span> <span class="n">x</span>
+  <span class="o">(</span><span class="bp">λ</span> <span class="n">y</span><span class="o">,</span> <span class="n">xnat</span><span class="bp">.</span><span class="n">rec_on</span> <span class="n">y</span> <span class="n">rfl</span> <span class="err">$</span>
+     <span class="bp">λ</span> <span class="n">y</span> <span class="n">ih</span><span class="o">,</span> <span class="k">show</span> <span class="n">succ</span> <span class="bp">_</span> <span class="bp">=</span> <span class="n">succ</span> <span class="bp">_</span><span class="o">,</span> <span class="k">from</span> <span class="n">congr_arg</span> <span class="n">succ</span> <span class="n">ih</span><span class="o">)</span>
+  <span class="o">(</span><span class="bp">λ</span> <span class="n">y</span> <span class="n">ih1</span> <span class="n">z</span><span class="o">,</span> <span class="n">xnat</span><span class="bp">.</span><span class="n">rec_on</span> <span class="n">z</span>
+     <span class="o">(</span><span class="k">show</span> <span class="n">succ</span> <span class="bp">_</span> <span class="bp">=</span> <span class="n">succ</span> <span class="bp">_</span><span class="o">,</span> <span class="k">from</span> <span class="n">congr_arg</span> <span class="n">succ</span> <span class="err">$</span> <span class="n">ih1</span> <span class="n">zero</span><span class="o">)</span>
+     <span class="o">(</span><span class="bp">λ</span> <span class="n">z</span> <span class="n">ih2</span><span class="o">,</span> <span class="n">congr_arg</span> <span class="n">succ</span> <span class="err">$</span> <span class="n">ih2</span><span class="bp">.</span><span class="n">trans</span> <span class="err">$</span> <span class="n">eq</span><span class="bp">.</span><span class="n">trans</span>
+       <span class="o">(</span><span class="k">show</span> <span class="n">succ</span> <span class="bp">_</span> <span class="bp">=</span> <span class="n">succ</span> <span class="bp">_</span><span class="o">,</span> <span class="k">from</span> <span class="n">congr_arg</span> <span class="n">succ</span> <span class="o">(</span><span class="n">ih1</span> <span class="n">z</span><span class="o">)</span><span class="bp">.</span><span class="n">symm</span><span class="o">)</span> <span class="o">(</span><span class="n">ih1</span> <span class="err">$</span> <span class="n">succ</span> <span class="n">z</span><span class="o">)))</span>
 
-end xnat
-```
+<span class="kn">end</span> <span class="n">xnat</span>
+</pre></div>
 
 #### [ Kenny Lau (Apr 21 2018 at 18:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497890):
-@**Patrick Massot** somehow it took me a long time to prove this
+<p><span class="user-mention" data-user-id="110031">@Patrick Massot</span> somehow it took me a long time to prove this</p>
 
 #### [ Kenny Lau (Apr 21 2018 at 18:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497891):
-but here you go
+<p>but here you go</p>
 
 #### [ Kenny Lau (Apr 21 2018 at 18:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497892):
-why did I use my Kenny identity to post such an answer?
+<p>why did I use my Kenny identity to post such an answer?</p>
 
 #### [ Kenny Lau (Apr 21 2018 at 18:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497894):
-and you can see that `generalize` is necessary because I used `ih1` twice
+<p>and you can see that <code>generalize</code> is necessary because I used <code>ih1</code> twice</p>
 
 #### [ Kenny Lau (Apr 21 2018 at 18:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497934):
-I should make `show` a term-tactic
+<p>I should make <code>show</code> a term-tactic</p>
 
 #### [ Kenny Lau (Apr 21 2018 at 18:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497935):
-well that won't really be necessary, forget that
+<p>well that won't really be necessary, forget that</p>
 
 #### [ Kenny Lau (Apr 21 2018 at 18:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497936):
-but I like my `generalize`
+<p>but I like my <code>generalize</code></p>
 
 #### [ Kenny Lau (Apr 21 2018 at 18:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497937):
-a tactic in term mode
+<p>a tactic in term mode</p>
 
 #### [ Kenny Lau (Apr 21 2018 at 18:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497938):
-(a tactic, here, is one which converts your goal to something useful)
+<p>(a tactic, here, is one which converts your goal to something useful)</p>
 
 #### [ Kenny Lau (Apr 21 2018 at 18:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497945):
-@**Mario Carneiro** do you think it is a good idea? I have too many `aux` theorems in my `free_group.lean` that can be eliminated by my new invention :P
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> do you think it is a good idea? I have too many <code>aux</code> theorems in my <code>free_group.lean</code> that can be eliminated by my new invention :P</p>
 
 #### [ Kenny Lau (Apr 21 2018 at 18:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497946):
-assuming that it is an invention
+<p>assuming that it is an invention</p>
 
 #### [ Kenny Lau (Apr 21 2018 at 18:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497988):
-bonus points! `generalize` also works as `revert`
+<p>bonus points! <code>generalize</code> also works as <code>revert</code></p>
 
 #### [ Kenny Lau (Apr 21 2018 at 18:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497993):
-```lean
-@[elab_as_eliminator] def generalize
-  {α : Sort*} {β : α → Sort*} (x : α) :
-  (Π x, β x) → β x :=
-λ H, H x
+<div class="codehilite"><pre><span></span><span class="bp">@</span><span class="o">[</span><span class="n">elab_as_eliminator</span><span class="o">]</span> <span class="n">def</span> <span class="n">generalize</span>
+  <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="n">Sort</span><span class="bp">*</span><span class="o">}</span> <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">Sort</span><span class="bp">*</span><span class="o">}</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span>
+  <span class="o">(</span><span class="bp">Π</span> <span class="n">x</span><span class="o">,</span> <span class="n">β</span> <span class="n">x</span><span class="o">)</span> <span class="bp">→</span> <span class="n">β</span> <span class="n">x</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="n">H</span><span class="o">,</span> <span class="n">H</span> <span class="n">x</span>
 
-example (x y : nat) (H : x = y) : false :=
-generalize H _
+<span class="kn">example</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">nat</span><span class="o">)</span> <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">y</span><span class="o">)</span> <span class="o">:</span> <span class="n">false</span> <span class="o">:=</span>
+<span class="n">generalize</span> <span class="n">H</span> <span class="bp">_</span>
 
-/-
-don't know how to synthesize placeholder
-context:
-x y : ℕ,
-H : x = y
-⊢ x = y → false
--/
-```
+<span class="c">/-</span><span class="cm"></span>
+<span class="cm">don&#39;t know how to synthesize placeholder</span>
+<span class="cm">context:</span>
+<span class="cm">x y : ℕ,</span>
+<span class="cm">H : x = y</span>
+<span class="cm">⊢ x = y → false</span>
+<span class="cm">-/</span>
+</pre></div>
 
 #### [ Kenny Lau (Apr 21 2018 at 19:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499063):
-I think I made a mistake. What I have built is really `revert`
+<p>I think I made a mistake. What I have built is really <code>revert</code></p>
 
 #### [ Kenny Lau (Apr 21 2018 at 19:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499065):
-Here's the real `generalize`:
+<p>Here's the real <code>generalize</code>:</p>
 
 #### [ Kenny Lau (Apr 21 2018 at 19:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499066):
-```lean
-@[elab_as_eliminator] def generalize
-  {α : Sort*} {β : α → Sort*} (x : α) :
-  (Π z, x = z → β z) → β x :=
-λ H, H x rfl
+<div class="codehilite"><pre><span></span><span class="bp">@</span><span class="o">[</span><span class="n">elab_as_eliminator</span><span class="o">]</span> <span class="n">def</span> <span class="n">generalize</span>
+  <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="n">Sort</span><span class="bp">*</span><span class="o">}</span> <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">Sort</span><span class="bp">*</span><span class="o">}</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span>
+  <span class="o">(</span><span class="bp">Π</span> <span class="n">z</span><span class="o">,</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">z</span> <span class="bp">→</span> <span class="n">β</span> <span class="n">z</span><span class="o">)</span> <span class="bp">→</span> <span class="n">β</span> <span class="n">x</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="n">H</span><span class="o">,</span> <span class="n">H</span> <span class="n">x</span> <span class="n">rfl</span>
 
-example (m n : nat) : m + n = 0 :=
-generalize (m + n) _
+<span class="kn">example</span> <span class="o">(</span><span class="n">m</span> <span class="n">n</span> <span class="o">:</span> <span class="n">nat</span><span class="o">)</span> <span class="o">:</span> <span class="n">m</span> <span class="bp">+</span> <span class="n">n</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span>
+<span class="n">generalize</span> <span class="o">(</span><span class="n">m</span> <span class="bp">+</span> <span class="n">n</span><span class="o">)</span> <span class="bp">_</span>
 
-/-
-don't know how to synthesize placeholder
-context:
-m n : ℕ
-⊢ ∀ (z : ℕ), m + n = z → z = 0
--/
-```
+<span class="c">/-</span><span class="cm"></span>
+<span class="cm">don&#39;t know how to synthesize placeholder</span>
+<span class="cm">context:</span>
+<span class="cm">m n : ℕ</span>
+<span class="cm">⊢ ∀ (z : ℕ), m + n = z → z = 0</span>
+<span class="cm">-/</span>
+</pre></div>
 
 #### [ Chris Hughes (Apr 21 2018 at 19:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499110):
-I always wondered how to revert in term mode, however not sure I've ever had to do it.
+<p>I always wondered how to revert in term mode, however not sure I've ever had to do it.</p>
 
 #### [ Kenny Lau (Apr 21 2018 at 19:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499111):
-thanks for your appreciation
+<p>thanks for your appreciation</p>
 
 #### [ Kenny Lau (Apr 21 2018 at 19:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499112):
-so, for the sake of completeness:
-```lean
-@[elab_as_eliminator] def revert
-  {α : Sort*} {β : α → Sort*} (x : α) :
-  (Π x, β x) → β x :=
-λ H, H x
+<p>so, for the sake of completeness:</p>
+<div class="codehilite"><pre><span></span><span class="bp">@</span><span class="o">[</span><span class="n">elab_as_eliminator</span><span class="o">]</span> <span class="n">def</span> <span class="n">revert</span>
+  <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="n">Sort</span><span class="bp">*</span><span class="o">}</span> <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">Sort</span><span class="bp">*</span><span class="o">}</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span>
+  <span class="o">(</span><span class="bp">Π</span> <span class="n">x</span><span class="o">,</span> <span class="n">β</span> <span class="n">x</span><span class="o">)</span> <span class="bp">→</span> <span class="n">β</span> <span class="n">x</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="n">H</span><span class="o">,</span> <span class="n">H</span> <span class="n">x</span>
 
-@[elab_as_eliminator] def generalize
-  {α : Sort*} {β : α → Sort*} (x : α) :
-  (Π z, x = z → β z) → β x :=
-λ H, H x rfl
-```
+<span class="bp">@</span><span class="o">[</span><span class="n">elab_as_eliminator</span><span class="o">]</span> <span class="n">def</span> <span class="n">generalize</span>
+  <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="n">Sort</span><span class="bp">*</span><span class="o">}</span> <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">Sort</span><span class="bp">*</span><span class="o">}</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span>
+  <span class="o">(</span><span class="bp">Π</span> <span class="n">z</span><span class="o">,</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">z</span> <span class="bp">→</span> <span class="n">β</span> <span class="n">z</span><span class="o">)</span> <span class="bp">→</span> <span class="n">β</span> <span class="n">x</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="n">H</span><span class="o">,</span> <span class="n">H</span> <span class="n">x</span> <span class="n">rfl</span>
+</pre></div>
 
 #### [ Andrew Ashworth (Apr 21 2018 at 19:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499155):
-in the old days when we didn't have a tactic mode you'd revert using clever `heq` tricks
+<p>in the old days when we didn't have a tactic mode you'd revert using clever <code>heq</code> tricks</p>
 
 #### [ Chris Hughes (Apr 21 2018 at 19:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499158):
-Usually I just do this.
-```lean
-theorem add_comm {x : xnat} : ∀ {y}, add x y = add y x :=
-xnat.rec_on x
-  (λ y, xnat.rec_on y rfl $
-     λ y ih, show succ _ = succ _, from congr_arg succ ih)
-  (λ y ih1 z, xnat.rec_on z
-     (show succ _ = succ _, from congr_arg succ $ @ih1 zero)
-     (λ z ih2, congr_arg succ $ ih2.trans $ eq.trans
-       (show succ _ = succ _, from congr_arg succ (@ih1 z).symm) (@ih1 $ succ z)))
-```
+<p>Usually I just do this.</p>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">add_comm</span> <span class="o">{</span><span class="n">x</span> <span class="o">:</span> <span class="n">xnat</span><span class="o">}</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">y</span><span class="o">},</span> <span class="n">add</span> <span class="n">x</span> <span class="n">y</span> <span class="bp">=</span> <span class="n">add</span> <span class="n">y</span> <span class="n">x</span> <span class="o">:=</span>
+<span class="n">xnat</span><span class="bp">.</span><span class="n">rec_on</span> <span class="n">x</span>
+  <span class="o">(</span><span class="bp">λ</span> <span class="n">y</span><span class="o">,</span> <span class="n">xnat</span><span class="bp">.</span><span class="n">rec_on</span> <span class="n">y</span> <span class="n">rfl</span> <span class="err">$</span>
+     <span class="bp">λ</span> <span class="n">y</span> <span class="n">ih</span><span class="o">,</span> <span class="k">show</span> <span class="n">succ</span> <span class="bp">_</span> <span class="bp">=</span> <span class="n">succ</span> <span class="bp">_</span><span class="o">,</span> <span class="k">from</span> <span class="n">congr_arg</span> <span class="n">succ</span> <span class="n">ih</span><span class="o">)</span>
+  <span class="o">(</span><span class="bp">λ</span> <span class="n">y</span> <span class="n">ih1</span> <span class="n">z</span><span class="o">,</span> <span class="n">xnat</span><span class="bp">.</span><span class="n">rec_on</span> <span class="n">z</span>
+     <span class="o">(</span><span class="k">show</span> <span class="n">succ</span> <span class="bp">_</span> <span class="bp">=</span> <span class="n">succ</span> <span class="bp">_</span><span class="o">,</span> <span class="k">from</span> <span class="n">congr_arg</span> <span class="n">succ</span> <span class="err">$</span> <span class="bp">@</span><span class="n">ih1</span> <span class="n">zero</span><span class="o">)</span>
+     <span class="o">(</span><span class="bp">λ</span> <span class="n">z</span> <span class="n">ih2</span><span class="o">,</span> <span class="n">congr_arg</span> <span class="n">succ</span> <span class="err">$</span> <span class="n">ih2</span><span class="bp">.</span><span class="n">trans</span> <span class="err">$</span> <span class="n">eq</span><span class="bp">.</span><span class="n">trans</span>
+       <span class="o">(</span><span class="k">show</span> <span class="n">succ</span> <span class="bp">_</span> <span class="bp">=</span> <span class="n">succ</span> <span class="bp">_</span><span class="o">,</span> <span class="k">from</span> <span class="n">congr_arg</span> <span class="n">succ</span> <span class="o">(</span><span class="bp">@</span><span class="n">ih1</span> <span class="n">z</span><span class="o">)</span><span class="bp">.</span><span class="n">symm</span><span class="o">)</span> <span class="o">(</span><span class="bp">@</span><span class="n">ih1</span> <span class="err">$</span> <span class="n">succ</span> <span class="n">z</span><span class="o">)))</span>
+</pre></div>
 
 #### [ Kenny Lau (Apr 21 2018 at 19:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499159):
-right, that's what I did in my free group file
+<p>right, that's what I did in my free group file</p>
 
 #### [ Kenny Lau (Apr 21 2018 at 19:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499160):
-until I realized that I can build tactics in term mode
+<p>until I realized that I can build tactics in term mode</p>
 
 #### [ Andrew Ashworth (Apr 21 2018 at 19:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499199):
-does your generalize use `heq` under the hood?
+<p>does your generalize use <code>heq</code> under the hood?</p>
 
 #### [ Chris Hughes (Apr 21 2018 at 19:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499200):
-Are there any examples where you can't just do that?
+<p>Are there any examples where you can't just do that?</p>
 
 #### [ Kenny Lau (Apr 21 2018 at 19:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499201):
-@**Chris Hughes** so my file has a lot of auxiliary theorems
+<p><span class="user-mention" data-user-id="110044">@Chris Hughes</span> so my file has a lot of auxiliary theorems</p>
 
 #### [ Kenny Lau (Apr 21 2018 at 19:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499202):
-```lean
-theorem red.trans.aux (H12 : red L₁ L₂) : ∀ {L₃}, red L₂ L₃ → red L₁ L₃ :=
-red.rec_on H12 (λ _ _, id) $ λ _ _ _ H1 H2 ih L₃ H23,
-red.step_trans H1 $ ih H23
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">red</span><span class="bp">.</span><span class="n">trans</span><span class="bp">.</span><span class="n">aux</span> <span class="o">(</span><span class="n">H12</span> <span class="o">:</span> <span class="n">red</span> <span class="n">L₁</span> <span class="n">L₂</span><span class="o">)</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">L₃</span><span class="o">},</span> <span class="n">red</span> <span class="n">L₂</span> <span class="n">L₃</span> <span class="bp">→</span> <span class="n">red</span> <span class="n">L₁</span> <span class="n">L₃</span> <span class="o">:=</span>
+<span class="n">red</span><span class="bp">.</span><span class="n">rec_on</span> <span class="n">H12</span> <span class="o">(</span><span class="bp">λ</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">,</span> <span class="n">id</span><span class="o">)</span> <span class="err">$</span> <span class="bp">λ</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="n">H1</span> <span class="n">H2</span> <span class="n">ih</span> <span class="n">L₃</span> <span class="n">H23</span><span class="o">,</span>
+<span class="n">red</span><span class="bp">.</span><span class="n">step_trans</span> <span class="n">H1</span> <span class="err">$</span> <span class="n">ih</span> <span class="n">H23</span>
 
-@[trans] theorem red.trans (H12 : red L₁ L₂) (H23 : red L₂ L₃) : red L₁ L₃ :=
-red.trans.aux H12 H23
-```
+<span class="bp">@</span><span class="o">[</span><span class="n">trans</span><span class="o">]</span> <span class="kn">theorem</span> <span class="n">red</span><span class="bp">.</span><span class="n">trans</span> <span class="o">(</span><span class="n">H12</span> <span class="o">:</span> <span class="n">red</span> <span class="n">L₁</span> <span class="n">L₂</span><span class="o">)</span> <span class="o">(</span><span class="n">H23</span> <span class="o">:</span> <span class="n">red</span> <span class="n">L₂</span> <span class="n">L₃</span><span class="o">)</span> <span class="o">:</span> <span class="n">red</span> <span class="n">L₁</span> <span class="n">L₃</span> <span class="o">:=</span>
+<span class="n">red</span><span class="bp">.</span><span class="n">trans</span><span class="bp">.</span><span class="n">aux</span> <span class="n">H12</span> <span class="n">H23</span>
+</pre></div>
 
 #### [ Kenny Lau (Apr 21 2018 at 19:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499203):
-now I can do it in one go:
+<p>now I can do it in one go:</p>
 
 #### [ Kenny Lau (Apr 21 2018 at 19:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499204):
-```lean
-@[trans] theorem red.trans (H12 : red L₁ L₂) (H23 : red L₂ L₃) : red L₁ L₃ :=
-revert H23 $ revert L₃ $
-red.rec_on H12 (λ _ _, id) $ λ _ _ _ H1 H2 ih L₃ H23,
-red.step_trans H1 $ ih _ H23
-```
+<div class="codehilite"><pre><span></span><span class="bp">@</span><span class="o">[</span><span class="n">trans</span><span class="o">]</span> <span class="kn">theorem</span> <span class="n">red</span><span class="bp">.</span><span class="n">trans</span> <span class="o">(</span><span class="n">H12</span> <span class="o">:</span> <span class="n">red</span> <span class="n">L₁</span> <span class="n">L₂</span><span class="o">)</span> <span class="o">(</span><span class="n">H23</span> <span class="o">:</span> <span class="n">red</span> <span class="n">L₂</span> <span class="n">L₃</span><span class="o">)</span> <span class="o">:</span> <span class="n">red</span> <span class="n">L₁</span> <span class="n">L₃</span> <span class="o">:=</span>
+<span class="n">revert</span> <span class="n">H23</span> <span class="err">$</span> <span class="n">revert</span> <span class="n">L₃</span> <span class="err">$</span>
+<span class="n">red</span><span class="bp">.</span><span class="n">rec_on</span> <span class="n">H12</span> <span class="o">(</span><span class="bp">λ</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">,</span> <span class="n">id</span><span class="o">)</span> <span class="err">$</span> <span class="bp">λ</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="n">H1</span> <span class="n">H2</span> <span class="n">ih</span> <span class="n">L₃</span> <span class="n">H23</span><span class="o">,</span>
+<span class="n">red</span><span class="bp">.</span><span class="n">step_trans</span> <span class="n">H1</span> <span class="err">$</span> <span class="n">ih</span> <span class="bp">_</span> <span class="n">H23</span>
+</pre></div>
 
 #### [ Kenny Lau (Apr 21 2018 at 19:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499210):
-@**Andrew Ashworth** are we talking about the same `heq`, i.e. the `heq` as in Lean? I don't know Coq at all. I showed you my code above though.
+<p><span class="user-mention" data-user-id="110025">@Andrew Ashworth</span> are we talking about the same <code>heq</code>, i.e. the <code>heq</code> as in Lean? I don't know Coq at all. I showed you my code above though.</p>
 
 #### [ Kenny Lau (Apr 21 2018 at 19:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499211):
-@**Chris Hughes** not that I'm aware of
+<p><span class="user-mention" data-user-id="110044">@Chris Hughes</span> not that I'm aware of</p>
 
 #### [ Kenny Lau (Apr 21 2018 at 19:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499212):
-I just built that an hour ago, I don't know everything about it
+<p>I just built that an hour ago, I don't know everything about it</p>
 
 #### [ Andrew Ashworth (Apr 21 2018 at 19:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499213):
-yeah, because in Coq it'd be `JMeq`, heh
+<p>yeah, because in Coq it'd be <code>JMeq</code>, heh</p>
 
 #### [ Kenny Lau (Apr 21 2018 at 19:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499214):
-```lean
-@[elab_as_eliminator] def revert
-  {α : Sort*} {β : α → Sort*} (x : α) :
-  (Π x, β x) → β x :=
-λ H, H x
+<div class="codehilite"><pre><span></span><span class="bp">@</span><span class="o">[</span><span class="n">elab_as_eliminator</span><span class="o">]</span> <span class="n">def</span> <span class="n">revert</span>
+  <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="n">Sort</span><span class="bp">*</span><span class="o">}</span> <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">Sort</span><span class="bp">*</span><span class="o">}</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span>
+  <span class="o">(</span><span class="bp">Π</span> <span class="n">x</span><span class="o">,</span> <span class="n">β</span> <span class="n">x</span><span class="o">)</span> <span class="bp">→</span> <span class="n">β</span> <span class="n">x</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="n">H</span><span class="o">,</span> <span class="n">H</span> <span class="n">x</span>
 
-@[elab_as_eliminator] def generalize
-  {α : Sort*} {β : α → Sort*} (x : α) :
-  (Π z, x = z → β z) → β x :=
-λ H, H x rfl
-```
+<span class="bp">@</span><span class="o">[</span><span class="n">elab_as_eliminator</span><span class="o">]</span> <span class="n">def</span> <span class="n">generalize</span>
+  <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="n">Sort</span><span class="bp">*</span><span class="o">}</span> <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">Sort</span><span class="bp">*</span><span class="o">}</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span>
+  <span class="o">(</span><span class="bp">Π</span> <span class="n">z</span><span class="o">,</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">z</span> <span class="bp">→</span> <span class="n">β</span> <span class="n">z</span><span class="o">)</span> <span class="bp">→</span> <span class="n">β</span> <span class="n">x</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="n">H</span><span class="o">,</span> <span class="n">H</span> <span class="n">x</span> <span class="n">rfl</span>
+</pre></div>
 
 #### [ Kenny Lau (Apr 21 2018 at 19:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499237):
-I don't see any `heq` here
+<p>I don't see any <code>heq</code> here</p>
 
 #### [ Andrew Ashworth (Apr 21 2018 at 19:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499254):
-when you print an example that uses generalize
+<p>when you print an example that uses generalize</p>
 
 #### [ Andrew Ashworth (Apr 21 2018 at 19:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499255):
-do you get a `heq` term
+<p>do you get a <code>heq</code> term</p>
 
 #### [ Andrew Ashworth (Apr 21 2018 at 19:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499257):
-it may or may not, i'm just curious
+<p>it may or may not, i'm just curious</p>
 
 #### [ Chris Hughes (Apr 21 2018 at 19:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499259):
-You can just do some extra lambdas. i.e
-`theorem red.trans.aux  : ∀ {L₃}, red L₁ L₂ → red L₂ L₃ → red L₁ L₃`
-What's wrong with that?
+<p>You can just do some extra lambdas. i.e<br>
+<code>theorem red.trans.aux  : ∀ {L₃}, red L₁ L₂ → red L₂ L₃ → red L₁ L₃</code><br>
+What's wrong with that?</p>
 
 #### [ Kenny Lau (Apr 21 2018 at 19:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499262):
-I need to rec on the first red
+<p>I need to rec on the first red</p>
 
 #### [ Chris Hughes (Apr 21 2018 at 19:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499269):
-I see. Makes a lot of sense then.
+<p>I see. Makes a lot of sense then.</p>
 
 #### [ Kenny Lau (Apr 21 2018 at 19:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499270):
-```lean
-@[elab_as_eliminator] def revert
-  {α : Sort*} {β : α → Sort*} (x : α) :
-  (Π x, β x) → β x :=
-λ H, H x
+<div class="codehilite"><pre><span></span><span class="bp">@</span><span class="o">[</span><span class="n">elab_as_eliminator</span><span class="o">]</span> <span class="n">def</span> <span class="n">revert</span>
+  <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="n">Sort</span><span class="bp">*</span><span class="o">}</span> <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">Sort</span><span class="bp">*</span><span class="o">}</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span>
+  <span class="o">(</span><span class="bp">Π</span> <span class="n">x</span><span class="o">,</span> <span class="n">β</span> <span class="n">x</span><span class="o">)</span> <span class="bp">→</span> <span class="n">β</span> <span class="n">x</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="n">H</span><span class="o">,</span> <span class="n">H</span> <span class="n">x</span>
 
-@[elab_as_eliminator] def generalize
-  {α : Sort*} {β : α → Sort*} (x : α) :
-  (Π z, x = z → β z) → β x :=
-λ H, H x rfl
+<span class="bp">@</span><span class="o">[</span><span class="n">elab_as_eliminator</span><span class="o">]</span> <span class="n">def</span> <span class="n">generalize</span>
+  <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="n">Sort</span><span class="bp">*</span><span class="o">}</span> <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">Sort</span><span class="bp">*</span><span class="o">}</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span>
+  <span class="o">(</span><span class="bp">Π</span> <span class="n">z</span><span class="o">,</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">z</span> <span class="bp">→</span> <span class="n">β</span> <span class="n">z</span><span class="o">)</span> <span class="bp">→</span> <span class="n">β</span> <span class="n">x</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="n">H</span><span class="o">,</span> <span class="n">H</span> <span class="n">x</span> <span class="n">rfl</span>
 
-theorem test (m n : nat) : m + n = 0 :=
-generalize (m + n) $ λ z hz, sorry
+<span class="kn">theorem</span> <span class="n">test</span> <span class="o">(</span><span class="n">m</span> <span class="n">n</span> <span class="o">:</span> <span class="n">nat</span><span class="o">)</span> <span class="o">:</span> <span class="n">m</span> <span class="bp">+</span> <span class="n">n</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span>
+<span class="n">generalize</span> <span class="o">(</span><span class="n">m</span> <span class="bp">+</span> <span class="n">n</span><span class="o">)</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">z</span> <span class="n">hz</span><span class="o">,</span> <span class="n">sorry</span>
 
-set_option pp.all true
-#print test
+<span class="kn">set_option</span> <span class="n">pp</span><span class="bp">.</span><span class="n">all</span> <span class="n">true</span>
+<span class="bp">#</span><span class="kn">print</span> <span class="n">test</span>
 
-/-
-theorem test : ∀ (m n : nat), @eq.{1} nat (@has_add.add.{0} nat nat.has_add m n) (@has_zero.zero.{0} nat nat.has_zero) :=
-λ (m n : nat),
-  @generalize.{1 0} nat (λ (_x : nat), @eq.{1} nat _x (@has_zero.zero.{0} nat nat.has_zero))
-    (@has_add.add.{0} nat nat.has_add m n)
-    (λ (z : nat) (hz : @eq.{1} nat (@has_add.add.{0} nat nat.has_add m n) z), sorry)
--/
-```
+<span class="c">/-</span><span class="cm"></span>
+<span class="cm">theorem test : ∀ (m n : nat), @eq.{1} nat (@has_add.add.{0} nat nat.has_add m n) (@has_zero.zero.{0} nat nat.has_zero) :=</span>
+<span class="cm">λ (m n : nat),</span>
+<span class="cm">  @generalize.{1 0} nat (λ (_x : nat), @eq.{1} nat _x (@has_zero.zero.{0} nat nat.has_zero))</span>
+<span class="cm">    (@has_add.add.{0} nat nat.has_add m n)</span>
+<span class="cm">    (λ (z : nat) (hz : @eq.{1} nat (@has_add.add.{0} nat nat.has_add m n) z), sorry)</span>
+<span class="cm">-/</span>
+</pre></div>
 
 #### [ Kenny Lau (Apr 21 2018 at 19:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499271):
-@**Andrew Ashworth** is this what you're talking about?
+<p><span class="user-mention" data-user-id="110025">@Andrew Ashworth</span> is this what you're talking about?</p>
 
 #### [ Chris Hughes (Apr 21 2018 at 19:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499317):
-@**Andrew Ashworth** Are you talking about Kenny's generalize or tactics mode generalize?
+<p><span class="user-mention" data-user-id="110025">@Andrew Ashworth</span> Are you talking about Kenny's generalize or tactics mode generalize?</p>
 
 #### [ Kenny Lau (Apr 21 2018 at 19:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499320):
-in that case:
-```lean
-@[elab_as_eliminator] def revert
-  {α : Sort*} {β : α → Sort*} (x : α) :
-  (Π x, β x) → β x :=
-λ H, H x
+<p>in that case:</p>
+<div class="codehilite"><pre><span></span><span class="bp">@</span><span class="o">[</span><span class="n">elab_as_eliminator</span><span class="o">]</span> <span class="n">def</span> <span class="n">revert</span>
+  <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="n">Sort</span><span class="bp">*</span><span class="o">}</span> <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">Sort</span><span class="bp">*</span><span class="o">}</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span>
+  <span class="o">(</span><span class="bp">Π</span> <span class="n">x</span><span class="o">,</span> <span class="n">β</span> <span class="n">x</span><span class="o">)</span> <span class="bp">→</span> <span class="n">β</span> <span class="n">x</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="n">H</span><span class="o">,</span> <span class="n">H</span> <span class="n">x</span>
 
-@[elab_as_eliminator] def generalize
-  {α : Sort*} {β : α → Sort*} (x : α) :
-  (Π z, x = z → β z) → β x :=
-λ H, H x rfl
+<span class="bp">@</span><span class="o">[</span><span class="n">elab_as_eliminator</span><span class="o">]</span> <span class="n">def</span> <span class="n">generalize</span>
+  <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="n">Sort</span><span class="bp">*</span><span class="o">}</span> <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">Sort</span><span class="bp">*</span><span class="o">}</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span>
+  <span class="o">(</span><span class="bp">Π</span> <span class="n">z</span><span class="o">,</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">z</span> <span class="bp">→</span> <span class="n">β</span> <span class="n">z</span><span class="o">)</span> <span class="bp">→</span> <span class="n">β</span> <span class="n">x</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="n">H</span><span class="o">,</span> <span class="n">H</span> <span class="n">x</span> <span class="n">rfl</span>
 
-theorem test (m n : nat) : m + n = 0 :=
-generalize (m + n) $ λ z hz, sorry
+<span class="kn">theorem</span> <span class="n">test</span> <span class="o">(</span><span class="n">m</span> <span class="n">n</span> <span class="o">:</span> <span class="n">nat</span><span class="o">)</span> <span class="o">:</span> <span class="n">m</span> <span class="bp">+</span> <span class="n">n</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span>
+<span class="n">generalize</span> <span class="o">(</span><span class="n">m</span> <span class="bp">+</span> <span class="n">n</span><span class="o">)</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">z</span> <span class="n">hz</span><span class="o">,</span> <span class="n">sorry</span>
 
-set_option pp.all true
-#print test
+<span class="kn">set_option</span> <span class="n">pp</span><span class="bp">.</span><span class="n">all</span> <span class="n">true</span>
+<span class="bp">#</span><span class="kn">print</span> <span class="n">test</span>
 
-/-
-theorem test : ∀ (m n : nat), @eq.{1} nat (@has_add.add.{0} nat nat.has_add m n) (@has_zero.zero.{0} nat nat.has_zero) :=
-λ (m n : nat),
-  @generalize.{1 0} nat (λ (_x : nat), @eq.{1} nat _x (@has_zero.zero.{0} nat nat.has_zero))
-    (@has_add.add.{0} nat nat.has_add m n)
-    (λ (z : nat) (hz : @eq.{1} nat (@has_add.add.{0} nat nat.has_add m n) z), sorry)
--/
+<span class="c">/-</span><span class="cm"></span>
+<span class="cm">theorem test : ∀ (m n : nat), @eq.{1} nat (@has_add.add.{0} nat nat.has_add m n) (@has_zero.zero.{0} nat nat.has_zero) :=</span>
+<span class="cm">λ (m n : nat),</span>
+<span class="cm">  @generalize.{1 0} nat (λ (_x : nat), @eq.{1} nat _x (@has_zero.zero.{0} nat nat.has_zero))</span>
+<span class="cm">    (@has_add.add.{0} nat nat.has_add m n)</span>
+<span class="cm">    (λ (z : nat) (hz : @eq.{1} nat (@has_add.add.{0} nat nat.has_add m n) z), sorry)</span>
+<span class="cm">-/</span>
 
-theorem test' (m n : nat) : m + n = 0 :=
-begin
-  generalize h : m + n = z,
-  admit
-end
+<span class="kn">theorem</span> <span class="n">test&#39;</span> <span class="o">(</span><span class="n">m</span> <span class="n">n</span> <span class="o">:</span> <span class="n">nat</span><span class="o">)</span> <span class="o">:</span> <span class="n">m</span> <span class="bp">+</span> <span class="n">n</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">generalize</span> <span class="n">h</span> <span class="o">:</span> <span class="n">m</span> <span class="bp">+</span> <span class="n">n</span> <span class="bp">=</span> <span class="n">z</span><span class="o">,</span>
+  <span class="n">admit</span>
+<span class="kn">end</span>
 
-#print test'
+<span class="bp">#</span><span class="kn">print</span> <span class="n">test&#39;</span>
 
-/-
-theorem test' : ∀ (m n : nat), @eq.{1} nat (@has_add.add.{0} nat nat.has_add m n) (@has_zero.zero.{0} nat nat.has_zero) :=
-λ (m n : nat),
-  (λ (z : nat) (h : @eq.{1} nat (@has_add.add.{0} nat nat.has_add m n) z), sorry)
-    (@has_add.add.{0} nat nat.has_add m n)
-    (@rfl.{1} nat (@has_add.add.{0} nat nat.has_add m n))
--/
-```
+<span class="c">/-</span><span class="cm"></span>
+<span class="cm">theorem test&#39; : ∀ (m n : nat), @eq.{1} nat (@has_add.add.{0} nat nat.has_add m n) (@has_zero.zero.{0} nat nat.has_zero) :=</span>
+<span class="cm">λ (m n : nat),</span>
+<span class="cm">  (λ (z : nat) (h : @eq.{1} nat (@has_add.add.{0} nat nat.has_add m n) z), sorry)</span>
+<span class="cm">    (@has_add.add.{0} nat nat.has_add m n)</span>
+<span class="cm">    (@rfl.{1} nat (@has_add.add.{0} nat nat.has_add m n))</span>
+<span class="cm">-/</span>
+</pre></div>
 
 #### [ Andrew Ashworth (Apr 21 2018 at 19:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499409):
-hm, interesting, i'd have to dig further when I have time
+<p>hm, interesting, i'd have to dig further when I have time</p>
 
 #### [ Kenny Lau (Apr 21 2018 at 19:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499416):
-thanks for your appreciation
+<p>thanks for your appreciation</p>
 
 #### [ Andrew Ashworth (Apr 21 2018 at 19:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499417):
-`heq` is important when doing dependent case analysis, which is why i was expecting heq to show up in the term there somewhere
+<p><code>heq</code> is important when doing dependent case analysis, which is why i was expecting heq to show up in the term there somewhere</p>
 
 #### [ Andrew Ashworth (Apr 21 2018 at 19:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499418):
-it's probably buried in there somewhere... maybe... underneath one of the definitions
+<p>it's probably buried in there somewhere... maybe... underneath one of the definitions</p>
 
 #### [ Andrew Ashworth (Apr 21 2018 at 19:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499419):
-it's quite a low-level idea
+<p>it's quite a low-level idea</p>
 
 #### [ Andrew Ashworth (Apr 21 2018 at 19:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499421):
-or i could be really wrong about how lean works, and that also wouldn't surprise me
+<p>or i could be really wrong about how lean works, and that also wouldn't surprise me</p>
 
 #### [ Kenny Lau (Apr 21 2018 at 19:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499422):
-so, eh, which one?
+<p>so, eh, which one?</p>
 
 #### [ Kenny Lau (Apr 21 2018 at 19:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499463):
-`eq` is already an inductive type
+<p><code>eq</code> is already an inductive type</p>
 
 #### [ Andrew Ashworth (Apr 21 2018 at 19:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499464):
-i can't say because i'm a lean scrub
+<p>i can't say because i'm a lean scrub</p>
 
 #### [ Kenny Lau (Apr 21 2018 at 19:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499465):
-it doesn't depend on `heq`
+<p>it doesn't depend on <code>heq</code></p>
 
 #### [ Kenny Lau (Apr 21 2018 at 19:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499467):
-I don't think it uses `heq` anywhere
+<p>I don't think it uses <code>heq</code> anywhere</p>
 
 #### [ Chris Hughes (Apr 21 2018 at 19:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499522):
-Here's an alternative method
-```lean
-theorem add_comm {x y : xnat} : add x y = add y x :=
-xnat.rec_on x
-  (λ y, xnat.rec_on y rfl $
-     λ y ih, show succ _ = succ _, from congr_arg succ ih)
-  (λ y ih1 z, xnat.rec_on z
-     (show succ _ = succ _, from congr_arg succ $ @ih1 zero)
-     (λ z ih2, congr_arg succ $ ih2.trans $ eq.trans
-       (show succ _ = succ _, from congr_arg succ (@ih1 z).symm) (@ih1 $ succ z))) y
-
-```
+<p>Here's an alternative method</p>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">add_comm</span> <span class="o">{</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">xnat</span><span class="o">}</span> <span class="o">:</span> <span class="n">add</span> <span class="n">x</span> <span class="n">y</span> <span class="bp">=</span> <span class="n">add</span> <span class="n">y</span> <span class="n">x</span> <span class="o">:=</span>
+<span class="n">xnat</span><span class="bp">.</span><span class="n">rec_on</span> <span class="n">x</span>
+  <span class="o">(</span><span class="bp">λ</span> <span class="n">y</span><span class="o">,</span> <span class="n">xnat</span><span class="bp">.</span><span class="n">rec_on</span> <span class="n">y</span> <span class="n">rfl</span> <span class="err">$</span>
+     <span class="bp">λ</span> <span class="n">y</span> <span class="n">ih</span><span class="o">,</span> <span class="k">show</span> <span class="n">succ</span> <span class="bp">_</span> <span class="bp">=</span> <span class="n">succ</span> <span class="bp">_</span><span class="o">,</span> <span class="k">from</span> <span class="n">congr_arg</span> <span class="n">succ</span> <span class="n">ih</span><span class="o">)</span>
+  <span class="o">(</span><span class="bp">λ</span> <span class="n">y</span> <span class="n">ih1</span> <span class="n">z</span><span class="o">,</span> <span class="n">xnat</span><span class="bp">.</span><span class="n">rec_on</span> <span class="n">z</span>
+     <span class="o">(</span><span class="k">show</span> <span class="n">succ</span> <span class="bp">_</span> <span class="bp">=</span> <span class="n">succ</span> <span class="bp">_</span><span class="o">,</span> <span class="k">from</span> <span class="n">congr_arg</span> <span class="n">succ</span> <span class="err">$</span> <span class="bp">@</span><span class="n">ih1</span> <span class="n">zero</span><span class="o">)</span>
+     <span class="o">(</span><span class="bp">λ</span> <span class="n">z</span> <span class="n">ih2</span><span class="o">,</span> <span class="n">congr_arg</span> <span class="n">succ</span> <span class="err">$</span> <span class="n">ih2</span><span class="bp">.</span><span class="n">trans</span> <span class="err">$</span> <span class="n">eq</span><span class="bp">.</span><span class="n">trans</span>
+       <span class="o">(</span><span class="k">show</span> <span class="n">succ</span> <span class="bp">_</span> <span class="bp">=</span> <span class="n">succ</span> <span class="bp">_</span><span class="o">,</span> <span class="k">from</span> <span class="n">congr_arg</span> <span class="n">succ</span> <span class="o">(</span><span class="bp">@</span><span class="n">ih1</span> <span class="n">z</span><span class="o">)</span><span class="bp">.</span><span class="n">symm</span><span class="o">)</span> <span class="o">(</span><span class="bp">@</span><span class="n">ih1</span> <span class="err">$</span> <span class="n">succ</span> <span class="n">z</span><span class="o">)))</span> <span class="n">y</span>
+</pre></div>
 
 #### [ Andrew Ashworth (Apr 21 2018 at 19:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499524):
-sure, and why that might be is interesting to me, most other tactics in coq that do this sort of thing use `heq`
+<p>sure, and why that might be is interesting to me, most other tactics in coq that do this sort of thing use <code>heq</code></p>
 
 #### [ Andrew Ashworth (Apr 21 2018 at 19:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499525):
-https://coq.inria.fr/refman/proof-engine/detailed-tactic-examples.html
+<p><a href="https://coq.inria.fr/refman/proof-engine/detailed-tactic-examples.html" target="_blank" title="https://coq.inria.fr/refman/proof-engine/detailed-tactic-examples.html">https://coq.inria.fr/refman/proof-engine/detailed-tactic-examples.html</a></p>
 
 #### [ Kenny Lau (Apr 21 2018 at 19:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499568):
-@**Chris Hughes** interesting. usually it fails if I put `y` at the end
+<p><span class="user-mention" data-user-id="110044">@Chris Hughes</span> interesting. usually it fails if I put <code>y</code> at the end</p>
 
 #### [ Kenny Lau (Apr 21 2018 at 19:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499571):
-I still like my method more :P
+<p>I still like my method more :P</p>
 
 #### [ Chris Hughes (Apr 21 2018 at 19:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499572):
-I was expecting it not to work.
+<p>I was expecting it not to work.</p>
 
 #### [ Kenny Lau (Apr 21 2018 at 19:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499574):
-did you do anything more than my eyes could see
+<p>did you do anything more than my eyes could see</p>
 
 #### [ Kenny Lau (Apr 21 2018 at 19:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499575):
-I can't really tell if you changed anything in the middle
+<p>I can't really tell if you changed anything in the middle</p>
 
 #### [ Chris Hughes (Apr 21 2018 at 19:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499576):
-No.
+<p>No.</p>
 
 #### [ Kenny Lau (Apr 21 2018 at 19:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125499579):
-very curious indeed
+<p>very curious indeed</p>
 
 #### [ Kenny Lau (Apr 21 2018 at 19:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125500272):
-more examples: https://github.com/kckennylau/Lean/commit/c9d0c76f7d807f48f4cea0c6043bcc9caf48e09a#diff-fdee7d198ee1f7316cba5649313e084a
+<p>more examples: <a href="https://github.com/kckennylau/Lean/commit/c9d0c76f7d807f48f4cea0c6043bcc9caf48e09a#diff-fdee7d198ee1f7316cba5649313e084a" target="_blank" title="https://github.com/kckennylau/Lean/commit/c9d0c76f7d807f48f4cea0c6043bcc9caf48e09a#diff-fdee7d198ee1f7316cba5649313e084a">https://github.com/kckennylau/Lean/commit/c9d0c76f7d807f48f4cea0c6043bcc9caf48e09a#diff-fdee7d198ee1f7316cba5649313e084a</a></p>
 
 #### [ Patrick Massot (Apr 21 2018 at 19:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125500481):
-Congratulations!
+<p>Congratulations!</p>
 
 #### [ Patrick Massot (Apr 21 2018 at 19:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125500485):
-Two docstrings is a very good start!
+<p>Two docstrings is a very good start!</p>
 
 #### [ Kenny Lau (Apr 21 2018 at 19:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125500486):
-:P
+<p>:P</p>
 
 #### [ Kenny Lau (Apr 21 2018 at 19:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125500488):
-I was making docstrings
+<p>I was making docstrings</p>
 
 #### [ Kenny Lau (Apr 21 2018 at 19:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125500490):
-and then I got carried away by `revert` and `generalize`
+<p>and then I got carried away by <code>revert</code> and <code>generalize</code></p>
 
 #### [ Kenny Lau (Apr 22 2018 at 09:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125521584):
-@**Mario Carneiro** do you like this?
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> do you like this?</p>
 
 #### [ Kenny Lau (Apr 22 2018 at 09:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125521591):
-recap:
-```lean
-@[elab_as_eliminator] def revert
-  {α : Sort*} {β : α → Sort*} (x : α) :
-  (Π x, β x) → β x :=
-λ H, H x
+<p>recap:</p>
+<div class="codehilite"><pre><span></span><span class="bp">@</span><span class="o">[</span><span class="n">elab_as_eliminator</span><span class="o">]</span> <span class="n">def</span> <span class="n">revert</span>
+  <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="n">Sort</span><span class="bp">*</span><span class="o">}</span> <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">Sort</span><span class="bp">*</span><span class="o">}</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span>
+  <span class="o">(</span><span class="bp">Π</span> <span class="n">x</span><span class="o">,</span> <span class="n">β</span> <span class="n">x</span><span class="o">)</span> <span class="bp">→</span> <span class="n">β</span> <span class="n">x</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="n">H</span><span class="o">,</span> <span class="n">H</span> <span class="n">x</span>
 
-@[elab_as_eliminator] def generalize
-  {α : Sort*} {β : α → Sort*} (x : α) :
-  (Π z, x = z → β z) → β x :=
-λ H, H x rfl
-```
+<span class="bp">@</span><span class="o">[</span><span class="n">elab_as_eliminator</span><span class="o">]</span> <span class="n">def</span> <span class="n">generalize</span>
+  <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="n">Sort</span><span class="bp">*</span><span class="o">}</span> <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">Sort</span><span class="bp">*</span><span class="o">}</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span>
+  <span class="o">(</span><span class="bp">Π</span> <span class="n">z</span><span class="o">,</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">z</span> <span class="bp">→</span> <span class="n">β</span> <span class="n">z</span><span class="o">)</span> <span class="bp">→</span> <span class="n">β</span> <span class="n">x</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="n">H</span><span class="o">,</span> <span class="n">H</span> <span class="n">x</span> <span class="n">rfl</span>
+</pre></div>
 
 #### [ Mario Carneiro (Apr 22 2018 at 09:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125521631):
-I'm not sure I buy the particular applications you've used it for, but this seems okay for `logic.basic`
+<p>I'm not sure I buy the particular applications you've used it for, but this seems okay for <code>logic.basic</code></p>
 
 #### [ Mario Carneiro (Apr 22 2018 at 09:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125521632):
-probably should be `reducible`
+<p>probably should be <code>reducible</code></p>
 
 #### [ Kenny Lau (Apr 22 2018 at 09:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125521633):
-woohoo, tactics in term mode
+<p>woohoo, tactics in term mode</p>
 
 #### [ Mario Carneiro (Apr 22 2018 at 09:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125521638):
-I mean, you can use `match` to the same effect
+<p>I mean, you can use <code>match</code> to the same effect</p>
 
 #### [ Mario Carneiro (Apr 22 2018 at 09:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125521640):
-but I usually just set up my intros in the right order so this isn't needed
+<p>but I usually just set up my intros in the right order so this isn't needed</p>
 
 #### [ Kenny Lau (Apr 22 2018 at 09:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125521641):
-right, but setting up them make for a bunch of auxiliary theorems
+<p>right, but setting up them make for a bunch of auxiliary theorems</p>
 
 #### [ Mario Carneiro (Apr 22 2018 at 09:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125521682):
-not in my experience
+<p>not in my experience</p>
 
 #### [ Kenny Lau (Apr 22 2018 at 09:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125521683):
-https://github.com/kckennylau/Lean/commit/c9d0c76f7d807f48f4cea0c6043bcc9caf48e09a#diff-fdee7d198ee1f7316cba5649313e084a
+<p><a href="https://github.com/kckennylau/Lean/commit/c9d0c76f7d807f48f4cea0c6043bcc9caf48e09a#diff-fdee7d198ee1f7316cba5649313e084a" target="_blank" title="https://github.com/kckennylau/Lean/commit/c9d0c76f7d807f48f4cea0c6043bcc9caf48e09a#diff-fdee7d198ee1f7316cba5649313e084a">https://github.com/kckennylau/Lean/commit/c9d0c76f7d807f48f4cea0c6043bcc9caf48e09a#diff-fdee7d198ee1f7316cba5649313e084a</a></p>
 
 #### [ Kenny Lau (Apr 22 2018 at 09:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125521684):
-here
+<p>here</p>
 
 #### [ Mario Carneiro (Apr 22 2018 at 09:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125521691):
-why don't you use the equation compiler?
+<p>why don't you use the equation compiler?</p>
 
 #### [ Kenny Lau (Apr 22 2018 at 09:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125521693):
-that also needs to be auxiliary
+<p>that also needs to be auxiliary</p>
 
 #### [ Mario Carneiro (Apr 22 2018 at 09:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125521694):
-for `red.trans`
+<p>for <code>red.trans</code></p>
 
 #### [ Kenny Lau (Apr 22 2018 at 09:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125521695):
-because `rec_on` is shorter
+<p>because <code>rec_on</code> is shorter</p>
 
 #### [ Mario Carneiro (Apr 22 2018 at 10:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125521739):
-eww
+<p>eww</p>
 
 #### [ Kenny Lau (Apr 22 2018 at 10:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125521740):
-I thought someone likes short proofs
+<p>I thought someone likes short proofs</p>
 
 #### [ Mario Carneiro (Apr 22 2018 at 10:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125521742):
-I like straightforward proofs
+<p>I like straightforward proofs</p>
 
 #### [ Mario Carneiro (Apr 22 2018 at 10:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125521749):
-the equation compiler makes it really clear how an induction proceeds, and what is the IH
+<p>the equation compiler makes it really clear how an induction proceeds, and what is the IH</p>
 
 #### [ Mario Carneiro (Apr 22 2018 at 10:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125521751):
-plus, I very much doubt you recouped the loss of having to state an auxiliary
+<p>plus, I very much doubt you recouped the loss of having to state an auxiliary</p>
 
 #### [ Mario Carneiro (Apr 22 2018 at 10:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125521794):
-We haven't talked about it much since they appear to be going extinct, but it's possible to write brittle term proofs too
+<p>We haven't talked about it much since they appear to be going extinct, but it's possible to write brittle term proofs too</p>
 
 #### [ Mario Carneiro (Apr 22 2018 at 10:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125521797):
-this was a big problem in lean 2
+<p>this was a big problem in lean 2</p>
 
 #### [ Mario Carneiro (Apr 22 2018 at 10:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125521838):
-when you do a proof with lots of omitted type information relying on lean to pick up the pieces, if something changes in the unification algorithm or something it can be very difficult to understand the broken proof
+<p>when you do a proof with lots of omitted type information relying on lean to pick up the pieces, if something changes in the unification algorithm or something it can be very difficult to understand the broken proof</p>
 
 
 {% endraw %}

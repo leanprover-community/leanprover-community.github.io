@@ -12,60 +12,59 @@ permalink: archive/113488general/32457evaluatingproofs.html
 
 {% raw %}
 #### [ Kenny Lau (Dec 12 2018 at 02:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/evaluating%20proofs%3F/near/151495074):
-@**Mario Carneiro** I think you said that it is possible to evaluate proofs... do you have an example? can we also break proof irrelevance? maybe have an unsound but computable `non-classical.some`?
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> I think you said that it is possible to evaluate proofs... do you have an example? can we also break proof irrelevance? maybe have an unsound but computable <code>non-classical.some</code>?</p>
 
 #### [ Mario Carneiro (Dec 12 2018 at 02:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/evaluating%20proofs%3F/near/151495093):
-the axiom of choice is definitely nonconstructive
+<p>the axiom of choice is definitely nonconstructive</p>
 
 #### [ Mario Carneiro (Dec 12 2018 at 02:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/evaluating%20proofs%3F/near/151495102):
-You can evaluate proofs by using `#reduce`
+<p>You can evaluate proofs by using <code>#reduce</code></p>
 
 #### [ Kenny Lau (Dec 12 2018 at 02:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/evaluating%20proofs%3F/near/151495105):
-```quote
-the axiom of choice is definitely nonconstructive
-```
- even unsound?
+<blockquote>
+<p>the axiom of choice is definitely nonconstructive</p>
+</blockquote>
+<p>even unsound?</p>
 
 #### [ Mario Carneiro (Dec 12 2018 at 02:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/evaluating%20proofs%3F/near/151495107):
-no...
+<p>no...</p>
 
 #### [ Mario Carneiro (Dec 12 2018 at 02:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/evaluating%20proofs%3F/near/151495151):
-wait, I don't think I understand what you are asking
+<p>wait, I don't think I understand what you are asking</p>
 
 #### [ Mario Carneiro (Dec 12 2018 at 02:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/evaluating%20proofs%3F/near/151495165):
-it's easy to compute a value if you are allowed to be wrong
+<p>it's easy to compute a value if you are allowed to be wrong</p>
 
 #### [ Kenny Lau (Dec 12 2018 at 02:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/evaluating%20proofs%3F/near/151495173):
-so I want a function that `reduce`s to `0` when given the input `(⟨0, rfl⟩ : ∃ n, n = n)`
+<p>so I want a function that <code>reduce</code>s to <code>0</code> when given the input <code>(⟨0, rfl⟩ : ∃ n, n = n)</code></p>
 
 #### [ Mario Carneiro (Dec 12 2018 at 02:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/evaluating%20proofs%3F/near/151495179):
-Not in the VM
+<p>Not in the VM</p>
 
 #### [ Kenny Lau (Dec 12 2018 at 02:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/evaluating%20proofs%3F/near/151495180):
-```lean
-#reduce (⟨0, rfl⟩ : ∃ n, n = n) -- Exists.intro 0 (eq.refl 0)
-```
+<div class="codehilite"><pre><span></span><span class="bp">#</span><span class="n">reduce</span> <span class="o">(</span><span class="bp">⟨</span><span class="mi">0</span><span class="o">,</span> <span class="n">rfl</span><span class="bp">⟩</span> <span class="o">:</span> <span class="bp">∃</span> <span class="n">n</span><span class="o">,</span> <span class="n">n</span> <span class="bp">=</span> <span class="n">n</span><span class="o">)</span> <span class="c1">-- Exists.intro 0 (eq.refl 0)</span>
+</pre></div>
 
 #### [ Kenny Lau (Dec 12 2018 at 02:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/evaluating%20proofs%3F/near/151495182):
-why not?
+<p>why not?</p>
 
 #### [ Mario Carneiro (Dec 12 2018 at 02:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/evaluating%20proofs%3F/near/151495187):
-because that term has no representation in the VM
+<p>because that term has no representation in the VM</p>
 
 #### [ Mario Carneiro (Dec 12 2018 at 02:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/evaluating%20proofs%3F/near/151495190):
-it is a neutral value, a "unit"
+<p>it is a neutral value, a "unit"</p>
 
 #### [ Kenny Lau (Dec 12 2018 at 02:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/evaluating%20proofs%3F/near/151495232):
-so `reduce` is not VM?
+<p>so <code>reduce</code> is not VM?</p>
 
 #### [ Mario Carneiro (Dec 12 2018 at 02:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/evaluating%20proofs%3F/near/151495233):
-no
+<p>no</p>
 
 #### [ Mario Carneiro (Dec 12 2018 at 02:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/evaluating%20proofs%3F/near/151495235):
-it is kernel reduction
+<p>it is kernel reduction</p>
 
 #### [ Kenny Lau (Dec 12 2018 at 02:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/evaluating%20proofs%3F/near/151495236):
-interesting
+<p>interesting</p>
 
 
 {% endraw %}

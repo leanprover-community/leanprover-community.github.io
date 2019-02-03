@@ -12,153 +12,157 @@ permalink: archive/113488general/57712inductionwithgeneralize.html
 
 {% raw %}
 #### [ Sarah Mameche (Nov 16 2018 at 23:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/induction%20with%20generalize/near/147851332):
-Hi, I want to do induction over the following predicate `types`:
+<p>Hi, I want to do induction over the following predicate <code>types</code>:</p>
+<div class="codehilite"><pre><span></span><span class="kn">inductive</span> <span class="n">types</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">{</span><span class="n">m</span><span class="o">},</span> <span class="o">(</span><span class="n">fin</span> <span class="n">m</span> <span class="bp">→</span> <span class="n">type</span><span class="o">)</span> <span class="bp">→</span> <span class="n">tm</span> <span class="n">m</span> <span class="bp">→</span> <span class="n">type</span> <span class="bp">→</span> <span class="kt">Prop</span> <span class="o">(</span><span class="bp">...</span><span class="o">)</span>
+</pre></div>
 
-```lean
-inductive types : Π {m}, (fin m → type) → tm m → type → Prop (...)
-```
 
-The predicate expresses `Γ  ⊢ x : A`, where the typing context `Γ` is a function `(fin m→ type) `, and expression `x` has type `tm m` (but I think the details are not important). My induction is over the empty context:
-```lean
-definition empty_ctx : fin 0 → type :=  λ (x : Fin 0), match x with end
-```
-Here's the lemma: 
-```lean
-lemma preservation (A : type) (e₁ : tm 0) : 
-  types empty_ctx e₁ A → 
-      forall e₂, e₁ › e₂ → types empty_ctx e₂ A :=
-begin intros H₁ e H₂, 
-  induction H₁ (...)
-```
-This gives the following error:
-```lean 
-[check] application type mismatch at
-  types ∅
-argument type
-  Fin 0 → type
-expected type
-  Fin _x → type`induction with generalize
-```
-In Coq, the induction works. I assume Lean is more strict about generalizing numbers before doing an induction?  I'm not sure about how to generalize in this case, as 0 appears in the type of the empty context. So the standard way of adding an assumption `h : X = empty_ctx` and substituting X doesn't work because X again has type `fin 0 → type`. Could you give me some details or tell me if I'm on the wrong track?
+<p>The predicate expresses <code>Γ  ⊢ x : A</code>, where the typing context <code>Γ</code> is a function <code>(fin m→ type) </code>, and expression <code>x</code> has type <code>tm m</code> (but I think the details are not important). My induction is over the empty context:</p>
+<div class="codehilite"><pre><span></span><span class="kn">definition</span> <span class="n">empty_ctx</span> <span class="o">:</span> <span class="n">fin</span> <span class="mi">0</span> <span class="bp">→</span> <span class="n">type</span> <span class="o">:=</span>  <span class="bp">λ</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">Fin</span> <span class="mi">0</span><span class="o">),</span> <span class="k">match</span> <span class="n">x</span> <span class="k">with</span> <span class="kn">end</span>
+</pre></div>
+
+
+<p>Here's the lemma: </p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">preservation</span> <span class="o">(</span><span class="n">A</span> <span class="o">:</span> <span class="n">type</span><span class="o">)</span> <span class="o">(</span><span class="n">e₁</span> <span class="o">:</span> <span class="n">tm</span> <span class="mi">0</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">types</span> <span class="n">empty_ctx</span> <span class="n">e₁</span> <span class="n">A</span> <span class="bp">→</span>
+      <span class="k">forall</span> <span class="n">e₂</span><span class="o">,</span> <span class="n">e₁</span> <span class="err">›</span> <span class="n">e₂</span> <span class="bp">→</span> <span class="n">types</span> <span class="n">empty_ctx</span> <span class="n">e₂</span> <span class="n">A</span> <span class="o">:=</span>
+<span class="k">begin</span> <span class="n">intros</span> <span class="n">H₁</span> <span class="n">e</span> <span class="n">H₂</span><span class="o">,</span>
+  <span class="n">induction</span> <span class="n">H₁</span> <span class="o">(</span><span class="bp">...</span><span class="o">)</span>
+</pre></div>
+
+
+<p>This gives the following error:</p>
+<div class="codehilite"><pre><span></span><span class="o">[</span><span class="kn">check</span><span class="o">]</span> <span class="n">application</span> <span class="n">type</span> <span class="n">mismatch</span> <span class="n">at</span>
+  <span class="n">types</span> <span class="err">∅</span>
+<span class="n">argument</span> <span class="n">type</span>
+  <span class="n">Fin</span> <span class="mi">0</span> <span class="bp">→</span> <span class="n">type</span>
+<span class="n">expected</span> <span class="n">type</span>
+  <span class="n">Fin</span> <span class="bp">_</span><span class="n">x</span> <span class="bp">→</span> <span class="n">type</span><span class="bp">`</span><span class="n">induction</span> <span class="k">with</span> <span class="n">generalize</span>
+</pre></div>
+
+
+<p>In Coq, the induction works. I assume Lean is more strict about generalizing numbers before doing an induction?  I'm not sure about how to generalize in this case, as 0 appears in the type of the empty context. So the standard way of adding an assumption <code>h : X = empty_ctx</code> and substituting X doesn't work because X again has type <code>fin 0 → type</code>. Could you give me some details or tell me if I'm on the wrong track?</p>
 
 #### [ Kenny Lau (Nov 16 2018 at 23:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/induction%20with%20generalize/near/147851364):
-what is `Fin`?
+<p>what is <code>Fin</code>?</p>
 
 #### [ Kenny Lau (Nov 16 2018 at 23:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/induction%20with%20generalize/near/147851438):
-could you provide an MWE?
+<p>could you provide an MWE?</p>
 
 #### [ Sarah Mameche (Nov 16 2018 at 23:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/induction%20with%20generalize/near/147851814):
-```lean 
-def Fin : nat → Type
-  | 0 := empty
-  | (n+1) := option (Fin n)
-```
-```lean
-inductive tm  : nat -> Type 
-  | var_tm : Π {ntm : nat}, Fin ntm -> tm ntm
-  | app : Π {ntm : nat}, tm ntm -> tm ntm -> tm ntm
-  | lam : Π {ntm : nat}, tm (nat.succ ntm) -> tm ntm
-open tm
-```
-```lean
-inductive type : Type
-| tint : type
-| tarrow : type → type → type
-open type
-```
-```lean
-inductive types : Π {m}, (Fin m → type) → tm m → type → Prop
-| tvar {m} Γ (x : Fin m) : types Γ (var_tm x) (Γ x)
-| tapp {m} Γ (e₁ : tm m) e₂ (A B) : types Γ e₁ (tarrow A B) → types Γ e₂ A → types Γ (app e₁ e₂) B
---| tlam {m} Γ (e : tm (nat.succ m)) (A B) : types (@scons _ m  A Γ) e B → types Γ (lam e) (tarrow A B) requires some more definitions
-```
-```lean
-definition empty_ctx : Fin 0 → type :=  λ (x : Fin 0), match x with end
-```
-```lean
-def step {n} (t t' : tm n) := tt. --(..)
-```
-```lean
-lemma preservation (A : type) (e₁ : tm 0) : 
-  types empty_ctx e₁ A → 
-      forall e₂, step e₁  e₂ → types empty_ctx e₂ A :=
-begin intros H₁ e H₂, 
-  induction H₁ 
-```
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">Fin</span> <span class="o">:</span> <span class="n">nat</span> <span class="bp">→</span> <span class="kt">Type</span>
+  <span class="bp">|</span> <span class="mi">0</span> <span class="o">:=</span> <span class="n">empty</span>
+  <span class="bp">|</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="o">:=</span> <span class="n">option</span> <span class="o">(</span><span class="n">Fin</span> <span class="n">n</span><span class="o">)</span>
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span><span class="kn">inductive</span> <span class="n">tm</span>  <span class="o">:</span> <span class="n">nat</span> <span class="bp">-&gt;</span> <span class="kt">Type</span>
+  <span class="bp">|</span> <span class="n">var_tm</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">{</span><span class="n">ntm</span> <span class="o">:</span> <span class="n">nat</span><span class="o">},</span> <span class="n">Fin</span> <span class="n">ntm</span> <span class="bp">-&gt;</span> <span class="n">tm</span> <span class="n">ntm</span>
+  <span class="bp">|</span> <span class="n">app</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">{</span><span class="n">ntm</span> <span class="o">:</span> <span class="n">nat</span><span class="o">},</span> <span class="n">tm</span> <span class="n">ntm</span> <span class="bp">-&gt;</span> <span class="n">tm</span> <span class="n">ntm</span> <span class="bp">-&gt;</span> <span class="n">tm</span> <span class="n">ntm</span>
+  <span class="bp">|</span> <span class="n">lam</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">{</span><span class="n">ntm</span> <span class="o">:</span> <span class="n">nat</span><span class="o">},</span> <span class="n">tm</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">ntm</span><span class="o">)</span> <span class="bp">-&gt;</span> <span class="n">tm</span> <span class="n">ntm</span>
+<span class="kn">open</span> <span class="n">tm</span>
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span><span class="kn">inductive</span> <span class="n">type</span> <span class="o">:</span> <span class="kt">Type</span>
+<span class="bp">|</span> <span class="n">tint</span> <span class="o">:</span> <span class="n">type</span>
+<span class="bp">|</span> <span class="n">tarrow</span> <span class="o">:</span> <span class="n">type</span> <span class="bp">→</span> <span class="n">type</span> <span class="bp">→</span> <span class="n">type</span>
+<span class="kn">open</span> <span class="n">type</span>
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span><span class="kn">inductive</span> <span class="n">types</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">{</span><span class="n">m</span><span class="o">},</span> <span class="o">(</span><span class="n">Fin</span> <span class="n">m</span> <span class="bp">→</span> <span class="n">type</span><span class="o">)</span> <span class="bp">→</span> <span class="n">tm</span> <span class="n">m</span> <span class="bp">→</span> <span class="n">type</span> <span class="bp">→</span> <span class="kt">Prop</span>
+<span class="bp">|</span> <span class="n">tvar</span> <span class="o">{</span><span class="n">m</span><span class="o">}</span> <span class="err">Γ</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">Fin</span> <span class="n">m</span><span class="o">)</span> <span class="o">:</span> <span class="n">types</span> <span class="err">Γ</span> <span class="o">(</span><span class="n">var_tm</span> <span class="n">x</span><span class="o">)</span> <span class="o">(</span><span class="err">Γ</span> <span class="n">x</span><span class="o">)</span>
+<span class="bp">|</span> <span class="n">tapp</span> <span class="o">{</span><span class="n">m</span><span class="o">}</span> <span class="err">Γ</span> <span class="o">(</span><span class="n">e₁</span> <span class="o">:</span> <span class="n">tm</span> <span class="n">m</span><span class="o">)</span> <span class="n">e₂</span> <span class="o">(</span><span class="n">A</span> <span class="n">B</span><span class="o">)</span> <span class="o">:</span> <span class="n">types</span> <span class="err">Γ</span> <span class="n">e₁</span> <span class="o">(</span><span class="n">tarrow</span> <span class="n">A</span> <span class="n">B</span><span class="o">)</span> <span class="bp">→</span> <span class="n">types</span> <span class="err">Γ</span> <span class="n">e₂</span> <span class="n">A</span> <span class="bp">→</span> <span class="n">types</span> <span class="err">Γ</span> <span class="o">(</span><span class="n">app</span> <span class="n">e₁</span> <span class="n">e₂</span><span class="o">)</span> <span class="n">B</span>
+<span class="c1">--| tlam {m} Γ (e : tm (nat.succ m)) (A B) : types (@scons _ m  A Γ) e B → types Γ (lam e) (tarrow A B) requires some more definitions</span>
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span><span class="kn">definition</span> <span class="n">empty_ctx</span> <span class="o">:</span> <span class="n">Fin</span> <span class="mi">0</span> <span class="bp">→</span> <span class="n">type</span> <span class="o">:=</span>  <span class="bp">λ</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">Fin</span> <span class="mi">0</span><span class="o">),</span> <span class="k">match</span> <span class="n">x</span> <span class="k">with</span> <span class="kn">end</span>
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">step</span> <span class="o">{</span><span class="n">n</span><span class="o">}</span> <span class="o">(</span><span class="n">t</span> <span class="n">t&#39;</span> <span class="o">:</span> <span class="n">tm</span> <span class="n">n</span><span class="o">)</span> <span class="o">:=</span> <span class="n">tt</span><span class="bp">.</span> <span class="c1">--(..)</span>
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">preservation</span> <span class="o">(</span><span class="n">A</span> <span class="o">:</span> <span class="n">type</span><span class="o">)</span> <span class="o">(</span><span class="n">e₁</span> <span class="o">:</span> <span class="n">tm</span> <span class="mi">0</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">types</span> <span class="n">empty_ctx</span> <span class="n">e₁</span> <span class="n">A</span> <span class="bp">→</span>
+      <span class="k">forall</span> <span class="n">e₂</span><span class="o">,</span> <span class="n">step</span> <span class="n">e₁</span>  <span class="n">e₂</span> <span class="bp">→</span> <span class="n">types</span> <span class="n">empty_ctx</span> <span class="n">e₂</span> <span class="n">A</span> <span class="o">:=</span>
+<span class="k">begin</span> <span class="n">intros</span> <span class="n">H₁</span> <span class="n">e</span> <span class="n">H₂</span><span class="o">,</span>
+  <span class="n">induction</span> <span class="n">H₁</span>
+</pre></div>
 
 #### [ Reid Barton (Nov 17 2018 at 00:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/induction%20with%20generalize/near/147852574):
-I'm not sure how to do it with induction, but I would probably try using the equation compiler
+<p>I'm not sure how to do it with induction, but I would probably try using the equation compiler</p>
 
 #### [ Chris Hughes (Nov 17 2018 at 00:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/induction%20with%20generalize/near/147852628):
-Changing the definition of `types` to this works.
-```lean
-inductive types {m : ℕ} : (Fin m → type) → tm m → type → Prop
-| tvar Γ (x : Fin m) : types Γ (var_tm x) (Γ x)
-| tapp Γ (e₁ : tm m) e₂ (A B) : types Γ e₁ (A ⤏ B) → types Γ e₂ A → types Γ (app e₁ e₂) B
-```
+<p>Changing the definition of <code>types</code> to this works.</p>
+<div class="codehilite"><pre><span></span><span class="kn">inductive</span> <span class="n">types</span> <span class="o">{</span><span class="n">m</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">}</span> <span class="o">:</span> <span class="o">(</span><span class="n">Fin</span> <span class="n">m</span> <span class="bp">→</span> <span class="n">type</span><span class="o">)</span> <span class="bp">→</span> <span class="n">tm</span> <span class="n">m</span> <span class="bp">→</span> <span class="n">type</span> <span class="bp">→</span> <span class="kt">Prop</span>
+<span class="bp">|</span> <span class="n">tvar</span> <span class="err">Γ</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">Fin</span> <span class="n">m</span><span class="o">)</span> <span class="o">:</span> <span class="n">types</span> <span class="err">Γ</span> <span class="o">(</span><span class="n">var_tm</span> <span class="n">x</span><span class="o">)</span> <span class="o">(</span><span class="err">Γ</span> <span class="n">x</span><span class="o">)</span>
+<span class="bp">|</span> <span class="n">tapp</span> <span class="err">Γ</span> <span class="o">(</span><span class="n">e₁</span> <span class="o">:</span> <span class="n">tm</span> <span class="n">m</span><span class="o">)</span> <span class="n">e₂</span> <span class="o">(</span><span class="n">A</span> <span class="n">B</span><span class="o">)</span> <span class="o">:</span> <span class="n">types</span> <span class="err">Γ</span> <span class="n">e₁</span> <span class="o">(</span><span class="n">A</span> <span class="err">⤏</span> <span class="n">B</span><span class="o">)</span> <span class="bp">→</span> <span class="n">types</span> <span class="err">Γ</span> <span class="n">e₂</span> <span class="n">A</span> <span class="bp">→</span> <span class="n">types</span> <span class="err">Γ</span> <span class="o">(</span><span class="n">app</span> <span class="n">e₁</span> <span class="n">e₂</span><span class="o">)</span> <span class="n">B</span>
+</pre></div>
 
 #### [ Reid Barton (Nov 17 2018 at 00:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/induction%20with%20generalize/near/147852765):
-but that won't work for `tlam`, which increases the size of the context
+<p>but that won't work for <code>tlam</code>, which increases the size of the context</p>
 
 #### [ Chris Hughes (Nov 17 2018 at 00:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/induction%20with%20generalize/near/147852773):
-I see.
+<p>I see.</p>
 
 #### [ Chris Hughes (Nov 17 2018 at 00:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/induction%20with%20generalize/near/147853368):
-`destruct H\1` also works.
+<p><code>destruct H\1</code> also works.</p>
 
 #### [ Chris Hughes (Nov 17 2018 at 00:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/induction%20with%20generalize/near/147853439):
-Although I don't think that gives the goal you want. It didn't choose a very good motive.
+<p>Although I don't think that gives the goal you want. It didn't choose a very good motive.</p>
 
 #### [ Chris Hughes (Nov 17 2018 at 00:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/induction%20with%20generalize/near/147853454):
-This is a nasty method that hopefully does get the right goal at least
-```lean
-lemma preservation (A : type) {n} (ctx : Fin n → type) (e₁ : tm 0) :
-  types empty_ctx e₁ A →
-      forall e₂, step e₁ e₂ → types empty_ctx e₂ A :=
-λ H₁, @types.rec_on
-  (λ m ctx e₁ t, m = 0 → ctx == empty_ctx → ∀ e₂ : tm m, step e₁ e₂ → types ctx e₂ A) 0 empty_ctx e₁ A H₁
-    begin
-      intros m Γ _ hm hΓ,
-      subst hm,
-      have := eq_of_heq hΓ,
-      subst this,
+<p>This is a nasty method that hopefully does get the right goal at least</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">preservation</span> <span class="o">(</span><span class="n">A</span> <span class="o">:</span> <span class="n">type</span><span class="o">)</span> <span class="o">{</span><span class="n">n</span><span class="o">}</span> <span class="o">(</span><span class="n">ctx</span> <span class="o">:</span> <span class="n">Fin</span> <span class="n">n</span> <span class="bp">→</span> <span class="n">type</span><span class="o">)</span> <span class="o">(</span><span class="n">e₁</span> <span class="o">:</span> <span class="n">tm</span> <span class="mi">0</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">types</span> <span class="n">empty_ctx</span> <span class="n">e₁</span> <span class="n">A</span> <span class="bp">→</span>
+      <span class="k">forall</span> <span class="n">e₂</span><span class="o">,</span> <span class="n">step</span> <span class="n">e₁</span> <span class="n">e₂</span> <span class="bp">→</span> <span class="n">types</span> <span class="n">empty_ctx</span> <span class="n">e₂</span> <span class="n">A</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="n">H₁</span><span class="o">,</span> <span class="bp">@</span><span class="n">types</span><span class="bp">.</span><span class="n">rec_on</span>
+  <span class="o">(</span><span class="bp">λ</span> <span class="n">m</span> <span class="n">ctx</span> <span class="n">e₁</span> <span class="n">t</span><span class="o">,</span> <span class="n">m</span> <span class="bp">=</span> <span class="mi">0</span> <span class="bp">→</span> <span class="n">ctx</span> <span class="bp">==</span> <span class="n">empty_ctx</span> <span class="bp">→</span> <span class="bp">∀</span> <span class="n">e₂</span> <span class="o">:</span> <span class="n">tm</span> <span class="n">m</span><span class="o">,</span> <span class="n">step</span> <span class="n">e₁</span> <span class="n">e₂</span> <span class="bp">→</span> <span class="n">types</span> <span class="n">ctx</span> <span class="n">e₂</span> <span class="n">A</span><span class="o">)</span> <span class="mi">0</span> <span class="n">empty_ctx</span> <span class="n">e₁</span> <span class="n">A</span> <span class="n">H₁</span>
+    <span class="k">begin</span>
+      <span class="n">intros</span> <span class="n">m</span> <span class="err">Γ</span> <span class="bp">_</span> <span class="n">hm</span> <span class="n">h</span><span class="err">Γ</span><span class="o">,</span>
+      <span class="n">subst</span> <span class="n">hm</span><span class="o">,</span>
+      <span class="k">have</span> <span class="o">:=</span> <span class="n">eq_of_heq</span> <span class="n">h</span><span class="err">Γ</span><span class="o">,</span>
+      <span class="n">subst</span> <span class="n">this</span><span class="o">,</span>
 
-    end sorry rfl (heq.refl _)
-```
+    <span class="kn">end</span> <span class="n">sorry</span> <span class="n">rfl</span> <span class="o">(</span><span class="n">heq</span><span class="bp">.</span><span class="n">refl</span> <span class="bp">_</span><span class="o">)</span>
+</pre></div>
 
 #### [ Mario Carneiro (Nov 17 2018 at 03:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/induction%20with%20generalize/near/147860085):
-here are a few more options:
-```lean
-lemma preservation (A : type) (e₁ : tm 0)
-  (H₁ : types empty_ctx e₁ A) (e₂) (H₂ : step e₁ e₂) : types empty_ctx e₂ A :=
-begin
-  revert e₁ e₂,
-  generalize : empty_ctx = ctx,
-  revert ctx,
-  generalize h : 0 = n,
-  intros,
-  induction H₁ generalizing h; subst h,
-  { cases H₁_x },
-  { sorry }
-end
+<p>here are a few more options:</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">preservation</span> <span class="o">(</span><span class="n">A</span> <span class="o">:</span> <span class="n">type</span><span class="o">)</span> <span class="o">(</span><span class="n">e₁</span> <span class="o">:</span> <span class="n">tm</span> <span class="mi">0</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">H₁</span> <span class="o">:</span> <span class="n">types</span> <span class="n">empty_ctx</span> <span class="n">e₁</span> <span class="n">A</span><span class="o">)</span> <span class="o">(</span><span class="n">e₂</span><span class="o">)</span> <span class="o">(</span><span class="n">H₂</span> <span class="o">:</span> <span class="n">step</span> <span class="n">e₁</span> <span class="n">e₂</span><span class="o">)</span> <span class="o">:</span> <span class="n">types</span> <span class="n">empty_ctx</span> <span class="n">e₂</span> <span class="n">A</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">revert</span> <span class="n">e₁</span> <span class="n">e₂</span><span class="o">,</span>
+  <span class="n">generalize</span> <span class="o">:</span> <span class="n">empty_ctx</span> <span class="bp">=</span> <span class="n">ctx</span><span class="o">,</span>
+  <span class="n">revert</span> <span class="n">ctx</span><span class="o">,</span>
+  <span class="n">generalize</span> <span class="n">h</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">=</span> <span class="n">n</span><span class="o">,</span>
+  <span class="n">intros</span><span class="o">,</span>
+  <span class="n">induction</span> <span class="n">H₁</span> <span class="n">generalizing</span> <span class="n">h</span><span class="bp">;</span> <span class="n">subst</span> <span class="n">h</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">cases</span> <span class="n">H₁_x</span> <span class="o">},</span>
+  <span class="o">{</span> <span class="n">sorry</span> <span class="o">}</span>
+<span class="kn">end</span>
 
-lemma preservation' (A : type) : ∀ (e₁ : tm 0),
-  types empty_ctx e₁ A → ∀ e₂, step e₁ e₂ → types empty_ctx e₂ A :=
-suffices ∀ {n}, n = 0 → ∀ {ctx} (e₁ : tm n), types ctx e₁ A → ∀ e₂, step e₁ e₂ → types ctx e₂ A,
-from this rfl,
-begin
-  introv h H₁ H₂,
-  induction H₁ generalizing h; subst h,
-  { cases H₁_x },
-  { sorry }
-end
-```
+<span class="kn">lemma</span> <span class="n">preservation&#39;</span> <span class="o">(</span><span class="n">A</span> <span class="o">:</span> <span class="n">type</span><span class="o">)</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">e₁</span> <span class="o">:</span> <span class="n">tm</span> <span class="mi">0</span><span class="o">),</span>
+  <span class="n">types</span> <span class="n">empty_ctx</span> <span class="n">e₁</span> <span class="n">A</span> <span class="bp">→</span> <span class="bp">∀</span> <span class="n">e₂</span><span class="o">,</span> <span class="n">step</span> <span class="n">e₁</span> <span class="n">e₂</span> <span class="bp">→</span> <span class="n">types</span> <span class="n">empty_ctx</span> <span class="n">e₂</span> <span class="n">A</span> <span class="o">:=</span>
+<span class="n">suffices</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">n</span><span class="o">},</span> <span class="n">n</span> <span class="bp">=</span> <span class="mi">0</span> <span class="bp">→</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">ctx</span><span class="o">}</span> <span class="o">(</span><span class="n">e₁</span> <span class="o">:</span> <span class="n">tm</span> <span class="n">n</span><span class="o">),</span> <span class="n">types</span> <span class="n">ctx</span> <span class="n">e₁</span> <span class="n">A</span> <span class="bp">→</span> <span class="bp">∀</span> <span class="n">e₂</span><span class="o">,</span> <span class="n">step</span> <span class="n">e₁</span> <span class="n">e₂</span> <span class="bp">→</span> <span class="n">types</span> <span class="n">ctx</span> <span class="n">e₂</span> <span class="n">A</span><span class="o">,</span>
+<span class="k">from</span> <span class="n">this</span> <span class="n">rfl</span><span class="o">,</span>
+<span class="k">begin</span>
+  <span class="n">introv</span> <span class="n">h</span> <span class="n">H₁</span> <span class="n">H₂</span><span class="o">,</span>
+  <span class="n">induction</span> <span class="n">H₁</span> <span class="n">generalizing</span> <span class="n">h</span><span class="bp">;</span> <span class="n">subst</span> <span class="n">h</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">cases</span> <span class="n">H₁_x</span> <span class="o">},</span>
+  <span class="o">{</span> <span class="n">sorry</span> <span class="o">}</span>
+<span class="kn">end</span>
+</pre></div>
 
 #### [ Mario Carneiro (Nov 17 2018 at 03:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/induction%20with%20generalize/near/147860093):
-in this case it doesn't matter that you have `empty_ctx` since it's unique anyway
+<p>in this case it doesn't matter that you have <code>empty_ctx</code> since it's unique anyway</p>
 
 #### [ Sarah Mameche (Nov 17 2018 at 08:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/induction%20with%20generalize/near/147868864):
-Great, thanks!
+<p>Great, thanks!</p>
 
 
 {% endraw %}

@@ -12,97 +12,97 @@ permalink: archive/113488general/75896syntaxsurprises.html
 
 {% raw %}
 #### [ Sebastian Ullrich (Jun 19 2018 at 13:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/syntax%20surprises/near/128299157):
-The Lean 4 parser only understands `prelude`, `import`, and `theory` so far, but I've already learned something surprising: `noncomputable theory` can be used anywhere in a file (also, multiple times)
+<p>The Lean 4 parser only understands <code>prelude</code>, <code>import</code>, and <code>theory</code> so far, but I've already learned something surprising: <code>noncomputable theory</code> can be used anywhere in a file (also, multiple times)</p>
 
 #### [ Sean Leather (Jun 19 2018 at 13:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/syntax%20surprises/near/128299364):
-Can you elucidate on what is surprising about that?
+<p>Can you elucidate on what is surprising about that?</p>
 
 #### [ Sebastian Ullrich (Jun 19 2018 at 13:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/syntax%20surprises/near/128299761):
-I assumed it only worked on the top of a file, since we usually use "theory" synonymously to "file".
+<p>I assumed it only worked on the top of a file, since we usually use "theory" synonymously to "file".</p>
 
 #### [ Sean Leather (Jun 19 2018 at 13:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/syntax%20surprises/near/128300248):
-Ah, `theory`, not `theorem`: I missed that. I also didn't know `theory` was a keyword.
+<p>Ah, <code>theory</code>, not <code>theorem</code>: I missed that. I also didn't know <code>theory</code> was a keyword.</p>
 
 #### [ Sean Leather (Jun 19 2018 at 13:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/syntax%20surprises/near/128300366):
-I've only worked on computable theorems. Looking in the Lean 3 core library and mathlib, I see only `noncomputable theory` used. I don't see `theory` mentioned in the reference manual or TPIL. What purpose does `theory` serve?
+<p>I've only worked on computable theorems. Looking in the Lean 3 core library and mathlib, I see only <code>noncomputable theory</code> used. I don't see <code>theory</code> mentioned in the reference manual or TPIL. What purpose does <code>theory</code> serve?</p>
 
 #### [ Sebastian Ullrich (Jun 19 2018 at 13:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/syntax%20surprises/near/128300531):
-`theory` is a command, like `theorem`. `noncomputable` is a modifier you can apply to either of them. The distinction doesn't really matter in Lean 3 since `theory` can only be used together with`noncomputable`, which marks the remainder of the file as noncomputable.
+<p><code>theory</code> is a command, like <code>theorem</code>. <code>noncomputable</code> is a modifier you can apply to either of them. The distinction doesn't really matter in Lean 3 since <code>theory</code> can only be used together with<code>noncomputable</code>, which marks the remainder of the file as noncomputable.</p>
 
 #### [ Kenny Lau (Jun 19 2018 at 13:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/syntax%20surprises/near/128300541):
-which marks the *appropriate* remainder of the file as noncomputable
+<p>which marks the <em>appropriate</em> remainder of the file as noncomputable</p>
 
 #### [ Sebastian Ullrich (Jun 19 2018 at 13:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/syntax%20surprises/near/128300547):
-yes
+<p>yes</p>
 
 #### [ Kenny Lau (Jun 19 2018 at 13:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/syntax%20surprises/near/128300549):
-computable functions remain computable
+<p>computable functions remain computable</p>
 
 #### [ Sebastian Ullrich (Jun 19 2018 at 13:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/syntax%20surprises/near/128300685):
-Perhaps we'll want to generalize `theory` in Lean 4, though I'm not sure whether there are many sensible combinations. Say, using `private theory`, then negating it using a new keyword `public` on a few declarations.
+<p>Perhaps we'll want to generalize <code>theory</code> in Lean 4, though I'm not sure whether there are many sensible combinations. Say, using <code>private theory</code>, then negating it using a new keyword <code>public</code> on a few declarations.</p>
 
 #### [ Kenny Lau (Jun 19 2018 at 13:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/syntax%20surprises/near/128300690):
-lean -- java remade
+<p>lean -- java remade</p>
 
 #### [ Reid Barton (Jun 19 2018 at 15:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/syntax%20surprises/near/128304668):
-Oh funny, I've used `noncomputable theory` inside a section before and sort of expected it to be scoped, though there's no way I'd ever notice if it wasn't.
+<p>Oh funny, I've used <code>noncomputable theory</code> inside a section before and sort of expected it to be scoped, though there's no way I'd ever notice if it wasn't.</p>
 
 #### [ Johannes Hölzl (Jun 19 2018 at 16:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/syntax%20surprises/near/128308056):
-wasn't there a Github issue the idea of introducing also `meta theory`?
+<p>wasn't there a Github issue the idea of introducing also <code>meta theory</code>?</p>
 
 #### [ Johannes Hölzl (Jun 19 2018 at 16:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/syntax%20surprises/near/128308151):
-@**Sebastian Ullrich** what about changing `theory` to be only allowed at the file header, but extend `section` and `namespace` to take `meta`, `noncomputable`, `private`, `protected`, `public` modifiers?
+<p><span class="user-mention" data-user-id="110024">@Sebastian Ullrich</span> what about changing <code>theory</code> to be only allowed at the file header, but extend <code>section</code> and <code>namespace</code> to take <code>meta</code>, <code>noncomputable</code>, <code>private</code>, <code>protected</code>, <code>public</code> modifiers?</p>
 
 #### [ Kenny Lau (Jun 19 2018 at 16:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/syntax%20surprises/near/128308168):
-how do you define file header?
+<p>how do you define file header?</p>
 
 #### [ Kenny Lau (Jun 19 2018 at 16:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/syntax%20surprises/near/128308172):
-currently `import` must be at the beginning
+<p>currently <code>import</code> must be at the beginning</p>
 
 #### [ Sebastian Ullrich (Jun 19 2018 at 16:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/syntax%20surprises/near/128308179):
-@**Johannes Hölzl**  Yes, that's my plan right now :)
+<p><span class="user-mention" data-user-id="110294">@Johannes Hölzl</span>  Yes, that's my plan right now :)</p>
 
 #### [ Sebastian Ullrich (Jun 19 2018 at 16:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/syntax%20surprises/near/128308183):
-Also, attributes on sections
+<p>Also, attributes on sections</p>
 
 #### [ Johannes Hölzl (Jun 19 2018 at 16:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/syntax%20surprises/near/128308187):
-Nice!
+<p>Nice!</p>
 
 #### [ Sebastian Ullrich (Jun 19 2018 at 16:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/syntax%20surprises/near/128308276):
-@**Kenny Lau** Right now I've defined it as `prelude? (import ...)* (noncomputable theory)?`
+<p><span class="user-mention" data-user-id="110064">@Kenny Lau</span> Right now I've defined it as <code>prelude? (import ...)* (noncomputable theory)?</code></p>
 
 #### [ Kenny Lau (Jun 19 2018 at 16:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/syntax%20surprises/near/128308342):
-are you going to regex the whole file
+<p>are you going to regex the whole file</p>
 
 #### [ Sebastian Ullrich (Jun 19 2018 at 16:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/syntax%20surprises/near/128308362):
-Of course, everyone knows you solve all problems with regexes
+<p>Of course, everyone knows you solve all problems with regexes</p>
 
 #### [ Kenny Lau (Jun 19 2018 at 16:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/syntax%20surprises/near/128308375):
-now you have 2...
+<p>now you have 2...</p>
 
 #### [ Johannes Hölzl (Jun 19 2018 at 16:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/syntax%20surprises/near/128308434):
-modulo whitespace / comments
+<p>modulo whitespace / comments</p>
 
 #### [ Sebastian Ullrich (Jun 19 2018 at 16:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/syntax%20surprises/near/128308458):
-`repeat { all_goals { apply_regex } }`
+<p><code>repeat { all_goals { apply_regex } }</code></p>
 
 #### [ Johannes Hölzl (Jun 19 2018 at 16:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/syntax%20surprises/near/128308841):
-another purpose of theory could be to set parameters, or execute an imported command, like `mathlib theory`. This would setup certain notation, options, namespaces, version checks etc. I guess this could be also solved using `run_cmd`, but `theory` is a nice syntax. Also, what about moving `prelude` to `prelude theory`?
+<p>another purpose of theory could be to set parameters, or execute an imported command, like <code>mathlib theory</code>. This would setup certain notation, options, namespaces, version checks etc. I guess this could be also solved using <code>run_cmd</code>, but <code>theory</code> is a nice syntax. Also, what about moving <code>prelude</code> to <code>prelude theory</code>?</p>
 
 #### [ Sebastian Ullrich (Jun 19 2018 at 16:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/syntax%20surprises/near/128309035):
-`prelude` should logically come before `import` since it suppreses the default imports. We could move `theory` to the front instead, I'm not sure.
+<p><code>prelude</code> should logically come before <code>import</code> since it suppreses the default imports. We could move <code>theory</code> to the front instead, I'm not sure.</p>
 
 #### [ Johannes Hölzl (Jun 19 2018 at 17:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/syntax%20surprises/near/128309284):
-Okay, this makes sense.
+<p>Okay, this makes sense.</p>
 
 #### [ Sebastian Ullrich (Jun 19 2018 at 17:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/syntax%20surprises/near/128309423):
-There shouldn't be any reason to restrict the modifiers applicable to `theory` in Lean 4, no. Though, in the examples so far, it sounded like applying something to `theory` or `section` simply distributes it to all contained declarations (even if, as Kenny pointed out, it will behave differently from e.g. an explicit `noncomputable`). Your `mathlib` example doesn't quite fit in that scheme.
+<p>There shouldn't be any reason to restrict the modifiers applicable to <code>theory</code> in Lean 4, no. Though, in the examples so far, it sounded like applying something to <code>theory</code> or <code>section</code> simply distributes it to all contained declarations (even if, as Kenny pointed out, it will behave differently from e.g. an explicit <code>noncomputable</code>). Your <code>mathlib</code> example doesn't quite fit in that scheme.</p>
 
 #### [ Mario Carneiro (Jun 19 2018 at 17:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/syntax%20surprises/near/128311123):
-Will lean 4 allow for gathering the global file structure? For example: find the open section and namespace names; currently declared variables and parameters, notations and other `local` declarations; finding the "outline" of a given file, i.e. the tree of namespace and section blocks and the definitions in them
+<p>Will lean 4 allow for gathering the global file structure? For example: find the open section and namespace names; currently declared variables and parameters, notations and other <code>local</code> declarations; finding the "outline" of a given file, i.e. the tree of namespace and section blocks and the definitions in them</p>
 
 #### [ Sebastian Ullrich (Jun 19 2018 at 17:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/syntax%20surprises/near/128311421):
-You'll definitely get access to a concrete syntax tree of the entire file. You should also get access to more "dynamic" information like open namespaces (which could be influenced by a `run_cmd`), though it's less clear what that could look like
+<p>You'll definitely get access to a concrete syntax tree of the entire file. You should also get access to more "dynamic" information like open namespaces (which could be influenced by a <code>run_cmd</code>), though it's less clear what that could look like</p>
 
 
 {% endraw %}

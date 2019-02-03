@@ -12,66 +12,65 @@ permalink: archive/113488general/42323variableinsideheaderoroutsideheader.html
 
 {% raw %}
 #### [ Kenny Lau (Jul 25 2018 at 04:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/variable%20inside%20header%20or%20outside%20header/near/130250391):
-```lean
-import algebra.module
-universes u v w u₁
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">algebra</span><span class="bp">.</span><span class="n">module</span>
+<span class="n">universes</span> <span class="n">u</span> <span class="n">v</span> <span class="n">w</span> <span class="n">u₁</span>
 
-namespace hidden1
+<span class="kn">namespace</span> <span class="n">hidden1</span>
 
-variables {R : Type u} [comm_ring R]
-include R
+<span class="kn">variables</span> <span class="o">{</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">R</span><span class="o">]</span>
+<span class="n">include</span> <span class="n">R</span>
 
-structure is_bilinear_map {M N P}
-  [module R M] [module R N] [module R P]
-  (f : M → N → P) : Prop :=
-(add_pair : ∀ x y z, f (x + y) z = f x z + f y z)
-(pair_add : ∀ x y z, f x (y + z) = f x y + f x z)
-(smul_pair : ∀ r x y, f (r • x) y = r • f x y)
-(pair_smul : ∀ r x y, f x (r • y) = r • f x y)
+<span class="kn">structure</span> <span class="n">is_bilinear_map</span> <span class="o">{</span><span class="n">M</span> <span class="n">N</span> <span class="n">P</span><span class="o">}</span>
+  <span class="o">[</span><span class="n">module</span> <span class="n">R</span> <span class="n">M</span><span class="o">]</span> <span class="o">[</span><span class="n">module</span> <span class="n">R</span> <span class="n">N</span><span class="o">]</span> <span class="o">[</span><span class="n">module</span> <span class="n">R</span> <span class="n">P</span><span class="o">]</span>
+  <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">M</span> <span class="bp">→</span> <span class="n">N</span> <span class="bp">→</span> <span class="n">P</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">add_pair</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span> <span class="n">y</span> <span class="n">z</span><span class="o">,</span> <span class="n">f</span> <span class="o">(</span><span class="n">x</span> <span class="bp">+</span> <span class="n">y</span><span class="o">)</span> <span class="n">z</span> <span class="bp">=</span> <span class="n">f</span> <span class="n">x</span> <span class="n">z</span> <span class="bp">+</span> <span class="n">f</span> <span class="n">y</span> <span class="n">z</span><span class="o">)</span>
+<span class="o">(</span><span class="n">pair_add</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span> <span class="n">y</span> <span class="n">z</span><span class="o">,</span> <span class="n">f</span> <span class="n">x</span> <span class="o">(</span><span class="n">y</span> <span class="bp">+</span> <span class="n">z</span><span class="o">)</span> <span class="bp">=</span> <span class="n">f</span> <span class="n">x</span> <span class="n">y</span> <span class="bp">+</span> <span class="n">f</span> <span class="n">x</span> <span class="n">z</span><span class="o">)</span>
+<span class="o">(</span><span class="n">smul_pair</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">r</span> <span class="n">x</span> <span class="n">y</span><span class="o">,</span> <span class="n">f</span> <span class="o">(</span><span class="n">r</span> <span class="err">•</span> <span class="n">x</span><span class="o">)</span> <span class="n">y</span> <span class="bp">=</span> <span class="n">r</span> <span class="err">•</span> <span class="n">f</span> <span class="n">x</span> <span class="n">y</span><span class="o">)</span>
+<span class="o">(</span><span class="n">pair_smul</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">r</span> <span class="n">x</span> <span class="n">y</span><span class="o">,</span> <span class="n">f</span> <span class="n">x</span> <span class="o">(</span><span class="n">r</span> <span class="err">•</span> <span class="n">y</span><span class="o">)</span> <span class="bp">=</span> <span class="n">r</span> <span class="err">•</span> <span class="n">f</span> <span class="n">x</span> <span class="n">y</span><span class="o">)</span>
 
-#check @is_bilinear_map
-/-
-is_bilinear_map :
-  Π {R : Type u_1} [_inst_1 : comm_ring R] {M : Type u_2} {N : Type u_3} {P : Type u_4} [_inst_2 : module R M]
-  [_inst_3 : module R N] [_inst_4 : module R P], (M → N → P) → Prop
--/
+<span class="bp">#</span><span class="kn">check</span> <span class="bp">@</span><span class="n">is_bilinear_map</span>
+<span class="c">/-</span><span class="cm"></span>
+<span class="cm">is_bilinear_map :</span>
+<span class="cm">  Π {R : Type u_1} [_inst_1 : comm_ring R] {M : Type u_2} {N : Type u_3} {P : Type u_4} [_inst_2 : module R M]</span>
+<span class="cm">  [_inst_3 : module R N] [_inst_4 : module R P], (M → N → P) → Prop</span>
+<span class="cm">-/</span>
 
-variables (M : Type v) (N : Type w) (P : Type u₁)
-variables [module R M] [module R N] [module R P]
+<span class="kn">variables</span> <span class="o">(</span><span class="n">M</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">)</span> <span class="o">(</span><span class="n">N</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">w</span><span class="o">)</span> <span class="o">(</span><span class="n">P</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u₁</span><span class="o">)</span>
+<span class="kn">variables</span> <span class="o">[</span><span class="n">module</span> <span class="n">R</span> <span class="n">M</span><span class="o">]</span> <span class="o">[</span><span class="n">module</span> <span class="n">R</span> <span class="n">N</span><span class="o">]</span> <span class="o">[</span><span class="n">module</span> <span class="n">R</span> <span class="n">P</span><span class="o">]</span>
 
-variables {f : M → N → P} (hf : is_bilinear_map f) --works
+<span class="kn">variables</span> <span class="o">{</span><span class="n">f</span> <span class="o">:</span> <span class="n">M</span> <span class="bp">→</span> <span class="n">N</span> <span class="bp">→</span> <span class="n">P</span><span class="o">}</span> <span class="o">(</span><span class="n">hf</span> <span class="o">:</span> <span class="n">is_bilinear_map</span> <span class="n">f</span><span class="o">)</span> <span class="c1">--works</span>
 
-end hidden1
+<span class="kn">end</span> <span class="n">hidden1</span>
 
-namespace hidden2
+<span class="kn">namespace</span> <span class="n">hidden2</span>
 
-variables {R : Type u} [comm_ring R]
-include R
-variables (M : Type v) (N : Type w) (P : Type u₁)
-variables [module R M] [module R N] [module R P]
-variables {M N P}
+<span class="kn">variables</span> <span class="o">{</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">R</span><span class="o">]</span>
+<span class="n">include</span> <span class="n">R</span>
+<span class="kn">variables</span> <span class="o">(</span><span class="n">M</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">)</span> <span class="o">(</span><span class="n">N</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">w</span><span class="o">)</span> <span class="o">(</span><span class="n">P</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u₁</span><span class="o">)</span>
+<span class="kn">variables</span> <span class="o">[</span><span class="n">module</span> <span class="n">R</span> <span class="n">M</span><span class="o">]</span> <span class="o">[</span><span class="n">module</span> <span class="n">R</span> <span class="n">N</span><span class="o">]</span> <span class="o">[</span><span class="n">module</span> <span class="n">R</span> <span class="n">P</span><span class="o">]</span>
+<span class="kn">variables</span> <span class="o">{</span><span class="n">M</span> <span class="n">N</span> <span class="n">P</span><span class="o">}</span>
 
-structure is_bilinear_map (f : M → N → P) : Prop :=
-(add_pair : ∀ x y z, f (x + y) z = f x z + f y z)
-(pair_add : ∀ x y z, f x (y + z) = f x y + f x z)
-(smul_pair : ∀ r x y, f (r • x) y = r • f x y)
-(pair_smul : ∀ r x y, f x (r • y) = r • f x y)
+<span class="kn">structure</span> <span class="n">is_bilinear_map</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">M</span> <span class="bp">→</span> <span class="n">N</span> <span class="bp">→</span> <span class="n">P</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">add_pair</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span> <span class="n">y</span> <span class="n">z</span><span class="o">,</span> <span class="n">f</span> <span class="o">(</span><span class="n">x</span> <span class="bp">+</span> <span class="n">y</span><span class="o">)</span> <span class="n">z</span> <span class="bp">=</span> <span class="n">f</span> <span class="n">x</span> <span class="n">z</span> <span class="bp">+</span> <span class="n">f</span> <span class="n">y</span> <span class="n">z</span><span class="o">)</span>
+<span class="o">(</span><span class="n">pair_add</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span> <span class="n">y</span> <span class="n">z</span><span class="o">,</span> <span class="n">f</span> <span class="n">x</span> <span class="o">(</span><span class="n">y</span> <span class="bp">+</span> <span class="n">z</span><span class="o">)</span> <span class="bp">=</span> <span class="n">f</span> <span class="n">x</span> <span class="n">y</span> <span class="bp">+</span> <span class="n">f</span> <span class="n">x</span> <span class="n">z</span><span class="o">)</span>
+<span class="o">(</span><span class="n">smul_pair</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">r</span> <span class="n">x</span> <span class="n">y</span><span class="o">,</span> <span class="n">f</span> <span class="o">(</span><span class="n">r</span> <span class="err">•</span> <span class="n">x</span><span class="o">)</span> <span class="n">y</span> <span class="bp">=</span> <span class="n">r</span> <span class="err">•</span> <span class="n">f</span> <span class="n">x</span> <span class="n">y</span><span class="o">)</span>
+<span class="o">(</span><span class="n">pair_smul</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">r</span> <span class="n">x</span> <span class="n">y</span><span class="o">,</span> <span class="n">f</span> <span class="n">x</span> <span class="o">(</span><span class="n">r</span> <span class="err">•</span> <span class="n">y</span><span class="o">)</span> <span class="bp">=</span> <span class="n">r</span> <span class="err">•</span> <span class="n">f</span> <span class="n">x</span> <span class="n">y</span><span class="o">)</span>
 
-#check @is_bilinear_map
-/-
-is_bilinear_map :
-  Π {R : Type u_1} [_inst_1 : comm_ring R] {M : Type u_2} {N : Type u_3} {P : Type u_4}
-  [_inst_2 : module R M (comm_ring.to_ring R)] [_inst_3 : module R N (comm_ring.to_ring R)]
-  [_inst_4 : module R P (comm_ring.to_ring R)], (M → N → P) → Prop
--/
+<span class="bp">#</span><span class="kn">check</span> <span class="bp">@</span><span class="n">is_bilinear_map</span>
+<span class="c">/-</span><span class="cm"></span>
+<span class="cm">is_bilinear_map :</span>
+<span class="cm">  Π {R : Type u_1} [_inst_1 : comm_ring R] {M : Type u_2} {N : Type u_3} {P : Type u_4}</span>
+<span class="cm">  [_inst_2 : module R M (comm_ring.to_ring R)] [_inst_3 : module R N (comm_ring.to_ring R)]</span>
+<span class="cm">  [_inst_4 : module R P (comm_ring.to_ring R)], (M → N → P) → Prop</span>
+<span class="cm">-/</span>
 
-variables {f : M → N → P} (hf : is_bilinear_map f) -- fails
+<span class="kn">variables</span> <span class="o">{</span><span class="n">f</span> <span class="o">:</span> <span class="n">M</span> <span class="bp">→</span> <span class="n">N</span> <span class="bp">→</span> <span class="n">P</span><span class="o">}</span> <span class="o">(</span><span class="n">hf</span> <span class="o">:</span> <span class="n">is_bilinear_map</span> <span class="n">f</span><span class="o">)</span> <span class="c1">-- fails</span>
 
-end hidden2
-```
+<span class="kn">end</span> <span class="n">hidden2</span>
+</pre></div>
 
 #### [ Kenny Lau (Jul 25 2018 at 04:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/variable%20inside%20header%20or%20outside%20header/near/130250398):
-why does it make a difference whether the variables are inside or outside the header (the space between the name of the definition and the colon)?
+<p>why does it make a difference whether the variables are inside or outside the header (the space between the name of the definition and the colon)?</p>
 
 
 {% endraw %}

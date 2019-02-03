@@ -12,64 +12,60 @@ permalink: archive/113488general/76294findingafailed.html
 
 {% raw %}
 #### [ Keeley Hoek (Sep 10 2018 at 09:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finding%20a%20failed/near/133643406):
-What's the easiest way to find where a "failed" was generated? I've been resorting to inserting trace statements in multiple files and now its just getting out of hand
+<p>What's the easiest way to find where a "failed" was generated? I've been resorting to inserting trace statements in multiple files and now its just getting out of hand</p>
 
 #### [ Keeley Hoek (Sep 10 2018 at 09:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finding%20a%20failed/near/133643997):
-also, in the tactic monad, is there a way to get a stacktrace?
+<p>also, in the tactic monad, is there a way to get a stacktrace?</p>
 
 #### [ Mario Carneiro (Sep 10 2018 at 09:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finding%20a%20failed/near/133644045):
-There is the `vm` monad, which purports to be a debugger, but I don't know anyone who knows how to use it except possibly @**Sebastian Ullrich**
+<p>There is the <code>vm</code> monad, which purports to be a debugger, but I don't know anyone who knows how to use it except possibly <span class="user-mention" data-user-id="110024">@Sebastian Ullrich</span></p>
 
 #### [ Simon Hudon (Sep 10 2018 at 18:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finding%20a%20failed/near/133671919):
-What I usually do is that, if I have a function with three lines I add the following until I find the error:
+<p>What I usually do is that, if I have a function with three lines I add the following until I find the error:</p>
+<div class="codehilite"><pre><span></span><span class="n">meta</span> <span class="n">def</span> <span class="n">my_fn</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
+<span class="n">do</span> <span class="n">stmt1</span> <span class="bp">&lt;|&gt;</span> <span class="n">fail</span> <span class="s2">&quot;line A&quot;</span><span class="o">,</span>
+   <span class="n">stmt2</span> <span class="bp">&lt;|&gt;</span> <span class="n">fail</span> <span class="s2">&quot;line B&quot;</span><span class="o">,</span>
+   <span class="n">stmt3</span> <span class="bp">&lt;|&gt;</span> <span class="n">fail</span> <span class="s2">&quot;line C&quot;</span>
+</pre></div>
 
-```lean
-meta def my_fn : tactic unit :=
-do stmt1 <|> fail "line A",
-   stmt2 <|> fail "line B",
-   stmt3 <|> fail "line C"
-```
 
-When I have found the function that fails, I repeat in that function.
+<p>When I have found the function that fails, I repeat in that function.</p>
 
 #### [ Sebastian Ullrich (Sep 10 2018 at 18:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finding%20a%20failed/near/133673961):
-I've never used `vm` :sweat_smile: . I suppose it should be possible to write a `vm_monitor` that prints the stack trace whenever `failed` is called.
+<p>I've never used <code>vm</code> <span class="emoji emoji-1f605" title="sweat smile">:sweat_smile:</span> . I suppose it should be possible to write a <code>vm_monitor</code> that prints the stack trace whenever <code>failed</code> is called.</p>
 
 #### [ Mario Carneiro (Sep 10 2018 at 18:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finding%20a%20failed/near/133674025):
-who wrote it?
+<p>who wrote it?</p>
 
 #### [ Simon Hudon (Sep 10 2018 at 21:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finding%20a%20failed/near/133683100):
-I had never used `vm_monitor and I gave it a try. Here's what I did:
+<p>I had never used `vm_monitor and I gave it a try. Here's what I did:</p>
+<div class="codehilite"><pre><span></span><span class="kn">set_option</span> <span class="n">debugger</span> <span class="n">true</span>
 
-```lean
-set_option debugger true
+<span class="bp">@</span><span class="o">[</span><span class="n">vm_monitor</span><span class="o">]</span>
+<span class="n">meta</span> <span class="n">def</span> <span class="n">my_mon</span> <span class="o">:</span> <span class="n">vm_monitor</span> <span class="n">unit</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">init</span> <span class="o">:=</span> <span class="o">(),</span>
+  <span class="n">step</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="bp">_</span><span class="o">,</span>
+  <span class="n">do</span> <span class="n">vm</span><span class="bp">.</span><span class="n">curr_fn</span> <span class="bp">&gt;&gt;=</span> <span class="n">vm</span><span class="bp">.</span><span class="n">trace</span> <span class="o">}</span>
 
-@[vm_monitor]
-meta def my_mon : vm_monitor unit := 
-{ init := (),
-  step := λ _, 
-  do vm.curr_fn >>= vm.trace }
+<span class="n">run_cmd</span> <span class="n">my_tactic</span>
 
-run_cmd my_tactic
+<span class="kn">set_option</span> <span class="n">debugger</span> <span class="n">false</span>
+</pre></div>
 
-set_option debugger false
-```
 
-It sets up a monitor that, before each instruction, prints the name of the enclosing function. It does not seem to be aware of failures but at least, you can figure out where the problem is by looking at the last printout
+<p>It sets up a monitor that, before each instruction, prints the name of the enclosing function. It does not seem to be aware of failures but at least, you can figure out where the problem is by looking at the last printout</p>
 
 #### [ Simon Hudon (Sep 10 2018 at 21:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finding%20a%20failed/near/133684138):
-If you use the following instead, you can get an overview of the call nesting structure:
-
-```lean
-@[vm_monitor]
-meta def my_mon : vm_monitor (nat × option name) := 
-{ init := (0, none),
-  step := λ fn, 
-  do fn' ← vm.curr_fn, 
-     n' ← vm.call_stack_size,
-     when (fn ≠ (n',some fn')) $ vm.trace $ (string.join $ list.repeat "| " n') ++ to_string fn',
-     pure (n',fn') }
-```
+<p>If you use the following instead, you can get an overview of the call nesting structure:</p>
+<div class="codehilite"><pre><span></span><span class="bp">@</span><span class="o">[</span><span class="n">vm_monitor</span><span class="o">]</span>
+<span class="n">meta</span> <span class="n">def</span> <span class="n">my_mon</span> <span class="o">:</span> <span class="n">vm_monitor</span> <span class="o">(</span><span class="n">nat</span> <span class="bp">×</span> <span class="n">option</span> <span class="n">name</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">init</span> <span class="o">:=</span> <span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="n">none</span><span class="o">),</span>
+  <span class="n">step</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">fn</span><span class="o">,</span>
+  <span class="n">do</span> <span class="n">fn&#39;</span> <span class="err">←</span> <span class="n">vm</span><span class="bp">.</span><span class="n">curr_fn</span><span class="o">,</span>
+     <span class="n">n&#39;</span> <span class="err">←</span> <span class="n">vm</span><span class="bp">.</span><span class="n">call_stack_size</span><span class="o">,</span>
+     <span class="n">when</span> <span class="o">(</span><span class="n">fn</span> <span class="bp">≠</span> <span class="o">(</span><span class="n">n&#39;</span><span class="o">,</span><span class="n">some</span> <span class="n">fn&#39;</span><span class="o">))</span> <span class="err">$</span> <span class="n">vm</span><span class="bp">.</span><span class="n">trace</span> <span class="err">$</span> <span class="o">(</span><span class="n">string</span><span class="bp">.</span><span class="n">join</span> <span class="err">$</span> <span class="n">list</span><span class="bp">.</span><span class="n">repeat</span> <span class="s2">&quot;| &quot;</span> <span class="n">n&#39;</span><span class="o">)</span> <span class="bp">++</span> <span class="n">to_string</span> <span class="n">fn&#39;</span><span class="o">,</span>
+     <span class="n">pure</span> <span class="o">(</span><span class="n">n&#39;</span><span class="o">,</span><span class="n">fn&#39;</span><span class="o">)</span> <span class="o">}</span>
+</pre></div>
 
 
 {% endraw %}

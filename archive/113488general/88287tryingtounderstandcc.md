@@ -12,67 +12,62 @@ permalink: archive/113488general/88287tryingtounderstandcc.html
 
 {% raw %}
 #### [ Johan Commelin (Apr 24 2018 at 06:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trying%20to%20understand%20cc/near/125602905):
-I had hoped this would work:
-```lean
-universes u
+<p>I had hoped this would work:</p>
+<div class="codehilite"><pre><span></span><span class="n">universes</span> <span class="n">u</span>
 
-variables
-{A : Type u} [group A]
-{B : Type u} [group B]
-{f : A → B} [is_group_hom f]
+<span class="kn">variables</span>
+<span class="o">{</span><span class="n">A</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">[</span><span class="n">group</span> <span class="n">A</span><span class="o">]</span>
+<span class="o">{</span><span class="n">B</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">[</span><span class="n">group</span> <span class="n">B</span><span class="o">]</span>
+<span class="o">{</span><span class="n">f</span> <span class="o">:</span> <span class="n">A</span> <span class="bp">→</span> <span class="n">B</span><span class="o">}</span> <span class="o">[</span><span class="n">is_group_hom</span> <span class="n">f</span><span class="o">]</span>
 
-lemma test (hf : ∀ x, (f x = 1 → x = 1)) (x : A) (hfx : f x = 1) : x = 1 :=
-begin
-cc
-end 
-```
+<span class="kn">lemma</span> <span class="n">test</span> <span class="o">(</span><span class="n">hf</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span><span class="o">,</span> <span class="o">(</span><span class="n">f</span> <span class="n">x</span> <span class="bp">=</span> <span class="mi">1</span> <span class="bp">→</span> <span class="n">x</span> <span class="bp">=</span> <span class="mi">1</span><span class="o">))</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">A</span><span class="o">)</span> <span class="o">(</span><span class="n">hfx</span> <span class="o">:</span> <span class="n">f</span> <span class="n">x</span> <span class="bp">=</span> <span class="mi">1</span><span class="o">)</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">=</span> <span class="mi">1</span> <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="n">cc</span>
+<span class="kn">end</span>
+</pre></div>
 
 #### [ Johan Commelin (Apr 24 2018 at 06:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trying%20to%20understand%20cc/near/125602950):
-So which tactic do I need here?
+<p>So which tactic do I need here?</p>
 
 #### [ Simon Hudon (Apr 24 2018 at 06:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trying%20to%20understand%20cc/near/125602958):
-That's not the kind of stuff it does. Try:
-
-```
-import tactic -- from mathlib
+<p>That's not the kind of stuff it does. Try:</p>
+<div class="codehilite"><pre><span></span>import tactic -- from mathlib
 
 lemma ... := by solve_by_elim
-```
+</pre></div>
 
 #### [ Johan Commelin (Apr 24 2018 at 06:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trying%20to%20understand%20cc/near/125603006):
-Next goal: just have `hf : function.injective f` as hypothesis
+<p>Next goal: just have <code>hf : function.injective f</code> as hypothesis</p>
 
 #### [ Johan Commelin (Apr 24 2018 at 06:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trying%20to%20understand%20cc/near/125603018):
-Instead of unpacking that definition myself...
+<p>Instead of unpacking that definition myself...</p>
 
 #### [ Simon Hudon (Apr 24 2018 at 06:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trying%20to%20understand%20cc/near/125603023):
-Have you tried it?
+<p>Have you tried it?</p>
 
 #### [ Johan Commelin (Apr 24 2018 at 06:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trying%20to%20understand%20cc/near/125603067):
-Yes. Then it fails:
-```lean
-universes u
+<p>Yes. Then it fails:</p>
+<div class="codehilite"><pre><span></span><span class="n">universes</span> <span class="n">u</span>
 
-variables
-{A : Type u} [group A]
-{B : Type u} [group B]
-{f : A → B} [is_group_hom f]
+<span class="kn">variables</span>
+<span class="o">{</span><span class="n">A</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">[</span><span class="n">group</span> <span class="n">A</span><span class="o">]</span>
+<span class="o">{</span><span class="n">B</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">[</span><span class="n">group</span> <span class="n">B</span><span class="o">]</span>
+<span class="o">{</span><span class="n">f</span> <span class="o">:</span> <span class="n">A</span> <span class="bp">→</span> <span class="n">B</span><span class="o">}</span> <span class="o">[</span><span class="n">is_group_hom</span> <span class="n">f</span><span class="o">]</span>
 
-lemma test (hf : function.injective f) (x : A) (hfx : f x = 1) : x = 1 :=
-begin
-solve_by_elim
-end 
-```
+<span class="kn">lemma</span> <span class="n">test</span> <span class="o">(</span><span class="n">hf</span> <span class="o">:</span> <span class="n">function</span><span class="bp">.</span><span class="n">injective</span> <span class="n">f</span><span class="o">)</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">A</span><span class="o">)</span> <span class="o">(</span><span class="n">hfx</span> <span class="o">:</span> <span class="n">f</span> <span class="n">x</span> <span class="bp">=</span> <span class="mi">1</span><span class="o">)</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">=</span> <span class="mi">1</span> <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="n">solve_by_elim</span>
+<span class="kn">end</span>
+</pre></div>
 
 #### [ Johan Commelin (Apr 24 2018 at 06:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trying%20to%20understand%20cc/near/125603074):
-squiggles under `solve_by_elim`
+<p>squiggles under <code>solve_by_elim</code></p>
 
 #### [ Simon Hudon (Apr 24 2018 at 06:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trying%20to%20understand%20cc/near/125603076):
-What error message does it give you?
+<p>What error message does it give you?</p>
 
 #### [ Johan Commelin (Apr 24 2018 at 06:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trying%20to%20understand%20cc/near/125603130):
-```
-assumption tactic failed
+<div class="codehilite"><pre><span></span>assumption tactic failed
 state:
 A : Type u,
 _inst_1 : group A,
@@ -84,221 +79,213 @@ hf : function.injective f,
 x : A,
 hfx : f x = 1
 ⊢ x = 1
-```
+</pre></div>
 
 #### [ Kenny Lau (Apr 24 2018 at 06:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trying%20to%20understand%20cc/near/125603131):
-to be fair the proof needs to go like f x = f 1 and then x = 1
+<p>to be fair the proof needs to go like f x = f 1 and then x = 1</p>
 
 #### [ Kenny Lau (Apr 24 2018 at 06:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trying%20to%20understand%20cc/near/125603133):
-and it needs is_group_hom.one
+<p>and it needs is_group_hom.one</p>
 
 #### [ Johan Commelin (Apr 24 2018 at 06:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trying%20to%20understand%20cc/near/125603138):
-Yeah, there is a bit more to be done... but I think there should be a tactic that can do that for me
+<p>Yeah, there is a bit more to be done... but I think there should be a tactic that can do that for me</p>
 
 #### [ Johan Commelin (Apr 24 2018 at 06:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trying%20to%20understand%20cc/near/125603146):
-Ideally there is a `diagram_chase` tactic
+<p>Ideally there is a <code>diagram_chase</code> tactic</p>
 
 #### [ Johan Commelin (Apr 24 2018 at 06:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trying%20to%20understand%20cc/near/125603147):
-And I think `cc` is very close to that
+<p>And I think <code>cc</code> is very close to that</p>
 
 #### [ Johan Commelin (Apr 24 2018 at 06:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trying%20to%20understand%20cc/near/125603149):
-It only needs to know little facts like this lemma and some similar stuff.
+<p>It only needs to know little facts like this lemma and some similar stuff.</p>
 
 #### [ Kenny Lau (Apr 24 2018 at 06:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trying%20to%20understand%20cc/near/125603150):
-try mixing is_group_hom.one into the ingredient
+<p>try mixing is_group_hom.one into the ingredient</p>
 
 #### [ Johan Commelin (Apr 24 2018 at 06:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trying%20to%20understand%20cc/near/125603152):
-And then it would be able to prove the five lemma on its own
+<p>And then it would be able to prove the five lemma on its own</p>
 
 #### [ Kenny Lau (Apr 24 2018 at 06:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trying%20to%20understand%20cc/near/125603198):
-have := is_group_hom.one f; solve_by_elim
+<p>have := is_group_hom.one f; solve_by_elim</p>
 
 #### [ Johan Commelin (Apr 24 2018 at 06:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trying%20to%20understand%20cc/near/125603210):
-That's not enough
+<p>That's not enough</p>
 
 #### [ Johan Commelin (Apr 24 2018 at 06:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trying%20to%20understand%20cc/near/125603215):
-Alas
+<p>Alas</p>
 
 #### [ Simon Hudon (Apr 24 2018 at 06:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trying%20to%20understand%20cc/near/125603273):
-This one should work:
-
-```lean
-lemma test (hf : function.injective f) (x : A) (hfx : f x = 1) : x = 1 :=
-begin
-  have := is_group_hom.one f,
-  apply hf, cc,
-end
-```
+<p>This one should work:</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">test</span> <span class="o">(</span><span class="n">hf</span> <span class="o">:</span> <span class="n">function</span><span class="bp">.</span><span class="n">injective</span> <span class="n">f</span><span class="o">)</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">A</span><span class="o">)</span> <span class="o">(</span><span class="n">hfx</span> <span class="o">:</span> <span class="n">f</span> <span class="n">x</span> <span class="bp">=</span> <span class="mi">1</span><span class="o">)</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">=</span> <span class="mi">1</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="k">have</span> <span class="o">:=</span> <span class="n">is_group_hom</span><span class="bp">.</span><span class="n">one</span> <span class="n">f</span><span class="o">,</span>
+  <span class="n">apply</span> <span class="n">hf</span><span class="o">,</span> <span class="n">cc</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
 
 #### [ Johan Commelin (Apr 24 2018 at 06:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trying%20to%20understand%20cc/near/125603276):
-Ok, so `have := \fo x, (fx = 1 \to x = 1)`. How should I prove that? Is it a one-liner?
+<p>Ok, so <code>have := \fo x, (fx = 1 \to x = 1)</code>. How should I prove that? Is it a one-liner?</p>
 
 #### [ Johan Commelin (Apr 24 2018 at 06:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trying%20to%20understand%20cc/near/125603286):
-@**Simon Hudon** Nice!
+<p><span class="user-mention" data-user-id="110026">@Simon Hudon</span> Nice!</p>
 
 #### [ Kenny Lau (Apr 24 2018 at 06:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trying%20to%20understand%20cc/near/125603335):
-@**Simon Hudon** I don’t get it at all
+<p><span class="user-mention" data-user-id="110026">@Simon Hudon</span> I don’t get it at all</p>
 
 #### [ Simon Hudon (Apr 24 2018 at 06:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trying%20to%20understand%20cc/near/125603337):
-If you want to go fully anonymous (not name your assumptions like `this` and `hf`) you can do:
-
-```
-begin
+<p>If you want to go fully anonymous (not name your assumptions like <code>this</code> and <code>hf</code>) you can do:</p>
+<div class="codehilite"><pre><span></span>begin
   have := is_group_hom.one f,
   apply_assumption, cc
 end
-```
+</pre></div>
 
 #### [ Kenny Lau (Apr 24 2018 at 06:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trying%20to%20understand%20cc/near/125603339):
-how does apply hf even succeed
+<p>how does apply hf even succeed</p>
 
 #### [ Kenny Lau (Apr 24 2018 at 06:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trying%20to%20understand%20cc/near/125603349):
-oh nvm I thought wrongly
+<p>oh nvm I thought wrongly</p>
 
 #### [ Simon Hudon (Apr 24 2018 at 06:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trying%20to%20understand%20cc/near/125603401):
-You apply it to `x = 1` and `hf ` is `hf : ∀ x y, f x = f y → x = y`. When you apply it, you instantiate it with `x := x, y := 1` so the antecedent becomes `f x = f 1`. Your idea with `have` gets us `this : f 1 = 1`
+<p>You apply it to <code>x = 1</code> and <code>hf </code> is <code>hf : ∀ x y, f x = f y → x = y</code>. When you apply it, you instantiate it with <code>x := x, y := 1</code> so the antecedent becomes <code>f x = f 1</code>. Your idea with <code>have</code> gets us <code>this : f 1 = 1</code></p>
 
 #### [ Kenny Lau (Apr 24 2018 at 06:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trying%20to%20understand%20cc/near/125603402):
-I mean, I would just write the proof in term mode
+<p>I mean, I would just write the proof in term mode</p>
 
 #### [ Simon Hudon (Apr 24 2018 at 06:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trying%20to%20understand%20cc/near/125603410):
-I think I would keep `cc` at the very least.
+<p>I think I would keep <code>cc</code> at the very least.</p>
 
 #### [ Simon Hudon (Apr 24 2018 at 06:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trying%20to%20understand%20cc/near/125603418):
-```quote
-Ok, so `have := \fo x, (fx = 1 \to x = 1)`. How should I prove that? Is it a one-liner?
-```
-Did you find an answer for this?
+<blockquote>
+<p>Ok, so <code>have := \fo x, (fx = 1 \to x = 1)</code>. How should I prove that? Is it a one-liner?</p>
+</blockquote>
+<p>Did you find an answer for this?</p>
 
 #### [ Johan Commelin (Apr 24 2018 at 06:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trying%20to%20understand%20cc/near/125603474):
-Not yet, Lean doesn't like that expression
+<p>Not yet, Lean doesn't like that expression</p>
 
 #### [ Simon Hudon (Apr 24 2018 at 06:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trying%20to%20understand%20cc/near/125603523):
-Error message?
-
-I would expect it to work but I don't think that's what you're looking for
+<p>Error message?</p>
+<p>I would expect it to work but I don't think that's what you're looking for</p>
 
 #### [ Johan Commelin (Apr 24 2018 at 06:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trying%20to%20understand%20cc/near/125603526):
-And the problem is not `fx`, I changed that to `f x`
+<p>And the problem is not <code>fx</code>, I changed that to <code>f x</code></p>
 
 #### [ Johan Commelin (Apr 24 2018 at 06:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trying%20to%20understand%20cc/near/125603532):
-`invalid expression starting at xx:y`
+<p><code>invalid expression starting at xx:y</code></p>
 
 #### [ Simon Hudon (Apr 24 2018 at 06:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trying%20to%20understand%20cc/near/125603536):
-`have := expr` uses `expr` as a proof of an unnamed proposition. That proposition is just the type of the expression. If `expr` is the proposition you want to prove, you write `have : expr`
+<p><code>have := expr</code> uses <code>expr</code> as a proof of an unnamed proposition. That proposition is just the type of the expression. If <code>expr</code> is the proposition you want to prove, you write <code>have : expr</code></p>
 
 #### [ Simon Hudon (Apr 24 2018 at 06:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trying%20to%20understand%20cc/near/125603582):
-Can you show me the whole proof? Maybe you missed a comma
+<p>Can you show me the whole proof? Maybe you missed a comma</p>
 
 #### [ Johan Commelin (Apr 24 2018 at 06:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trying%20to%20understand%20cc/near/125603594):
-```lean
-universes u
+<div class="codehilite"><pre><span></span><span class="n">universes</span> <span class="n">u</span>
 
-variables
-{A : Type u} [group A]
-{B : Type u} [group B]
-{f : A → B} [is_group_hom f]
+<span class="kn">variables</span>
+<span class="o">{</span><span class="n">A</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">[</span><span class="n">group</span> <span class="n">A</span><span class="o">]</span>
+<span class="o">{</span><span class="n">B</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">[</span><span class="n">group</span> <span class="n">B</span><span class="o">]</span>
+<span class="o">{</span><span class="n">f</span> <span class="o">:</span> <span class="n">A</span> <span class="bp">→</span> <span class="n">B</span><span class="o">}</span> <span class="o">[</span><span class="n">is_group_hom</span> <span class="n">f</span><span class="o">]</span>
 
-lemma test (hf : function.injective f) (x : A) (hx : x ∈ ker f) : x = 1 :=
-begin
-have := is_group_hom.one f,
-have : (∀ x, (f x = 1 → x = 1)),
-```
+<span class="kn">lemma</span> <span class="n">test</span> <span class="o">(</span><span class="n">hf</span> <span class="o">:</span> <span class="n">function</span><span class="bp">.</span><span class="n">injective</span> <span class="n">f</span><span class="o">)</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">A</span><span class="o">)</span> <span class="o">(</span><span class="n">hx</span> <span class="o">:</span> <span class="n">x</span> <span class="err">∈</span> <span class="n">ker</span> <span class="n">f</span><span class="o">)</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">=</span> <span class="mi">1</span> <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="k">have</span> <span class="o">:=</span> <span class="n">is_group_hom</span><span class="bp">.</span><span class="n">one</span> <span class="n">f</span><span class="o">,</span>
+<span class="k">have</span> <span class="o">:</span> <span class="o">(</span><span class="bp">∀</span> <span class="n">x</span><span class="o">,</span> <span class="o">(</span><span class="n">f</span> <span class="n">x</span> <span class="bp">=</span> <span class="mi">1</span> <span class="bp">→</span> <span class="n">x</span> <span class="bp">=</span> <span class="mi">1</span><span class="o">)),</span>
+</pre></div>
 
 #### [ Simon Hudon (Apr 24 2018 at 06:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trying%20to%20understand%20cc/near/125603643):
-Do you have an `end` keyword after that?
+<p>Do you have an <code>end</code> keyword after that?</p>
 
 #### [ Johan Commelin (Apr 24 2018 at 06:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trying%20to%20understand%20cc/near/125603648):
-yes
+<p>yes</p>
 
 #### [ Johan Commelin (Apr 24 2018 at 06:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trying%20to%20understand%20cc/near/125603653):
-several lines lower
+<p>several lines lower</p>
 
 #### [ Simon Hudon (Apr 24 2018 at 06:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trying%20to%20understand%20cc/near/125603719):
-Can you show me what the rest of the proof is?
+<p>Can you show me what the rest of the proof is?</p>
 
 #### [ Simon Hudon (Apr 24 2018 at 06:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trying%20to%20understand%20cc/near/125603720):
-Also, do you have imports?
+<p>Also, do you have imports?</p>
 
 #### [ Johan Commelin (Apr 24 2018 at 07:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trying%20to%20understand%20cc/near/125603992):
-```lean
-import tactic
-import init.function
-import algebra.group
-import group_theory.subgroup
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span>
+<span class="kn">import</span> <span class="n">init</span><span class="bp">.</span><span class="n">function</span>
+<span class="kn">import</span> <span class="n">algebra</span><span class="bp">.</span><span class="n">group</span>
+<span class="kn">import</span> <span class="n">group_theory</span><span class="bp">.</span><span class="n">subgroup</span>
 
-universes u
+<span class="n">universes</span> <span class="n">u</span>
 
-variables
-{A : Type u} [group A]
-{B : Type u} [group B]
-{f : A → B} [is_group_hom f]
+<span class="kn">variables</span>
+<span class="o">{</span><span class="n">A</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">[</span><span class="n">group</span> <span class="n">A</span><span class="o">]</span>
+<span class="o">{</span><span class="n">B</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">[</span><span class="n">group</span> <span class="n">B</span><span class="o">]</span>
+<span class="o">{</span><span class="n">f</span> <span class="o">:</span> <span class="n">A</span> <span class="bp">→</span> <span class="n">B</span><span class="o">}</span> <span class="o">[</span><span class="n">is_group_hom</span> <span class="n">f</span><span class="o">]</span>
 
-lemma test (hf : function.injective f) (x : A) (hx : x ∈ ker f) : x = 1 :=
-begin
-have := is_group_hom.one f,
-have : (∀ x, (f x = 1 → x = 1))
-end
-```
+<span class="kn">lemma</span> <span class="n">test</span> <span class="o">(</span><span class="n">hf</span> <span class="o">:</span> <span class="n">function</span><span class="bp">.</span><span class="n">injective</span> <span class="n">f</span><span class="o">)</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">A</span><span class="o">)</span> <span class="o">(</span><span class="n">hx</span> <span class="o">:</span> <span class="n">x</span> <span class="err">∈</span> <span class="n">ker</span> <span class="n">f</span><span class="o">)</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">=</span> <span class="mi">1</span> <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="k">have</span> <span class="o">:=</span> <span class="n">is_group_hom</span><span class="bp">.</span><span class="n">one</span> <span class="n">f</span><span class="o">,</span>
+<span class="k">have</span> <span class="o">:</span> <span class="o">(</span><span class="bp">∀</span> <span class="n">x</span><span class="o">,</span> <span class="o">(</span><span class="n">f</span> <span class="n">x</span> <span class="bp">=</span> <span class="mi">1</span> <span class="bp">→</span> <span class="n">x</span> <span class="bp">=</span> <span class="mi">1</span><span class="o">))</span>
+<span class="kn">end</span>
+</pre></div>
 
 #### [ Johan Commelin (Apr 24 2018 at 07:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trying%20to%20understand%20cc/near/125604019):
-All the other stuff in that file is wrapped withing a section
+<p>All the other stuff in that file is wrapped withing a section</p>
 
 #### [ Kenny Lau (Apr 24 2018 at 07:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trying%20to%20understand%20cc/near/125604129):
-hf $ hx.trans $ eq.symm $ is_group_hom.one f
+<p>hf $ hx.trans $ eq.symm $ is_group_hom.one f</p>
 
 #### [ Johan Commelin (Apr 24 2018 at 07:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trying%20to%20understand%20cc/near/125604198):
-I first need to get rid of an error message: `invalid expression starting at <coords>`
+<p>I first need to get rid of an error message: <code>invalid expression starting at &lt;coords&gt;</code></p>
 
 #### [ Johan Commelin (Apr 24 2018 at 07:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trying%20to%20understand%20cc/near/125604201):
-the `<coords>` are of the `\fo`
+<p>the <code>&lt;coords&gt;</code> are of the <code>\fo</code></p>
 
 #### [ Simon Hudon (Apr 24 2018 at 07:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trying%20to%20understand%20cc/near/125604257):
-I don't see a problem there. Try restarting your Lean server
+<p>I don't see a problem there. Try restarting your Lean server</p>
 
 #### [ Johan Commelin (Apr 24 2018 at 07:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trying%20to%20understand%20cc/near/125604365):
-Yay, that did it (-;
+<p>Yay, that did it (-;</p>
 
 #### [ Simon Hudon (Apr 24 2018 at 07:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trying%20to%20understand%20cc/near/125604377):
-Unfortunately, that's a common solution to problems :stuck_out_tongue_winking_eye:
+<p>Unfortunately, that's a common solution to problems <span class="emoji emoji-1f61c" title="stuck out tongue winking eye">:stuck_out_tongue_winking_eye:</span></p>
 
 #### [ Johan Commelin (Apr 24 2018 at 07:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trying%20to%20understand%20cc/near/125604527):
-Ok, need to go now
+<p>Ok, need to go now</p>
 
 #### [ Johan Commelin (Apr 24 2018 at 07:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trying%20to%20understand%20cc/near/125604528):
-Thanks!
+<p>Thanks!</p>
 
 #### [ Patrick Massot (Apr 24 2018 at 10:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trying%20to%20understand%20cc/near/125609972):
-I think this happens more frequently since @**Gabriel Ebner** enabled the new "region of interest" thing
+<p>I think this happens more frequently since <span class="user-mention" data-user-id="110043">@Gabriel Ebner</span> enabled the new "region of interest" thing</p>
 
 #### [ Patrick Massot (Apr 24 2018 at 10:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trying%20to%20understand%20cc/near/125610009):
-It's nice to have Lean reacting quicker but I did get quite a lot of those random `invalid expression starting at <coords>` yesterday
+<p>It's nice to have Lean reacting quicker but I did get quite a lot of those random <code>invalid expression starting at &lt;coords&gt;</code> yesterday</p>
 
 #### [ Gabriel Ebner (Apr 24 2018 at 10:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trying%20to%20understand%20cc/near/125610074):
-Do you have a reproducible test case?
+<p>Do you have a reproducible test case?</p>
 
 #### [ Kenny Lau (Apr 25 2018 at 15:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trying%20to%20understand%20cc/near/125672053):
-Oh so `cc` deals with commutativity and associativity also?
+<p>Oh so <code>cc</code> deals with commutativity and associativity also?</p>
 
 #### [ Simon Hudon (Apr 25 2018 at 15:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trying%20to%20understand%20cc/near/125672100):
-No. Why do you say that?
+<p>No. Why do you say that?</p>
 
 #### [ Kenny Lau (Apr 25 2018 at 15:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trying%20to%20understand%20cc/near/125672103):
-apparently it did
+<p>apparently it did</p>
 
 #### [ Kenny Lau (Apr 25 2018 at 15:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trying%20to%20understand%20cc/near/125672486):
-```lean
-theorem test (m n : nat) : m + n = n + m := by cc
-#print test
-/-
-theorem test : ∀ (m n : ℕ), m + n = n + m :=
-λ (m n : ℕ),
-  of_eq_true (eq_true_intro (eq.symm (eq.trans (eq.refl (n + m)) (eq.symm (is_commutative.comm has_add.add m n)))))
--/
-```
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">test</span> <span class="o">(</span><span class="n">m</span> <span class="n">n</span> <span class="o">:</span> <span class="n">nat</span><span class="o">)</span> <span class="o">:</span> <span class="n">m</span> <span class="bp">+</span> <span class="n">n</span> <span class="bp">=</span> <span class="n">n</span> <span class="bp">+</span> <span class="n">m</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">cc</span>
+<span class="bp">#</span><span class="kn">print</span> <span class="n">test</span>
+<span class="c">/-</span><span class="cm"></span>
+<span class="cm">theorem test : ∀ (m n : ℕ), m + n = n + m :=</span>
+<span class="cm">λ (m n : ℕ),</span>
+<span class="cm">  of_eq_true (eq_true_intro (eq.symm (eq.trans (eq.refl (n + m)) (eq.symm (is_commutative.comm has_add.add m n)))))</span>
+<span class="cm">-/</span>
+</pre></div>
 
 #### [ Simon Hudon (Apr 25 2018 at 15:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trying%20to%20understand%20cc/near/125672553):
-Oh interesting! I didn't think it would
+<p>Oh interesting! I didn't think it would</p>
 
 
 {% endraw %}

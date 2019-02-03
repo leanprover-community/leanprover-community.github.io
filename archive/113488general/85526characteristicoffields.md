@@ -12,531 +12,525 @@ permalink: archive/113488general/85526characteristicoffields.html
 
 {% raw %}
 #### [ Kenny Lau (Oct 16 2018 at 20:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135921382):
-@**Mario Carneiro** @**Johan Commelin** @**Kevin Buzzard** how should we define the `char` of a field?
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> <span class="user-mention" data-user-id="112680">@Johan Commelin</span> <span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> how should we define the <code>char</code> of a field?</p>
 
 #### [ Mario Carneiro (Oct 16 2018 at 20:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135921432):
-I think your definition should be on semirings instead of zero/one/mul classes
+<p>I think your definition should be on semirings instead of zero/one/mul classes</p>
 
 #### [ Mario Carneiro (Oct 16 2018 at 20:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135921541):
-I guess it could be on rings, since a nonzero characteristic semiring is a ring
+<p>I guess it could be on rings, since a nonzero characteristic semiring is a ring</p>
 
 #### [ Chris Hughes (Oct 16 2018 at 20:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135921546):
-Should it be a class or just a Prop?
+<p>Should it be a class or just a Prop?</p>
 
 #### [ Mario Carneiro (Oct 16 2018 at 20:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135921574):
-a prop, it is a prop
+<p>a prop, it is a prop</p>
 
 #### [ Mario Carneiro (Oct 16 2018 at 20:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135921587):
-oh wait you aren't asking about `char_p`
+<p>oh wait you aren't asking about <code>char_p</code></p>
 
 #### [ Kenny Lau (Oct 16 2018 at 20:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135921653):
-both
+<p>both</p>
 
 #### [ Chris Hughes (Oct 16 2018 at 20:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135921654):
-I'm asking about `char`.
+<p>I'm asking about <code>char</code>.</p>
 
 #### [ Kenny Lau (Oct 16 2018 at 20:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135921657):
-I'm asking about this thing in general
+<p>I'm asking about this thing in general</p>
 
 #### [ Kenny Lau (Oct 16 2018 at 20:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135921670):
-how did metamath / other languages deal with this?
+<p>how did metamath / other languages deal with this?</p>
 
 #### [ Kenny Lau (Oct 16 2018 at 20:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135921676):
-and is char(Q) 0 or 1?
+<p>and is char(Q) 0 or 1?</p>
 
 #### [ Mario Carneiro (Oct 16 2018 at 20:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135921705):
-char(Q) is 0
+<p>char(Q) is 0</p>
 
 #### [ Kenny Lau (Oct 16 2018 at 20:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135921712):
-in where?
+<p>in where?</p>
 
 #### [ Mario Carneiro (Oct 16 2018 at 20:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135921720):
-in metamath
+<p>in metamath</p>
 
 #### [ Mario Carneiro (Oct 16 2018 at 20:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135921723):
-and in math
+<p>and in math</p>
 
 #### [ Kenny Lau (Oct 16 2018 at 20:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135921730):
-but how is char defined?
+<p>but how is char defined?</p>
 
 #### [ Kenny Lau (Oct 16 2018 at 20:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135921736):
-I feel like there's 1,000,000 subtleties
+<p>I feel like there's 1,000,000 subtleties</p>
 
 #### [ Mario Carneiro (Oct 16 2018 at 21:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135921739):
-the order of 1
+<p>the order of 1</p>
 
 #### [ Kenny Lau (Oct 16 2018 at 21:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135921811):
-how is order defined?
+<p>how is order defined?</p>
 
 #### [ Chris Hughes (Oct 16 2018 at 21:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135921818):
-We don't have `order_of` on non finite groups
+<p>We don't have <code>order_of</code> on non finite groups</p>
 
 #### [ Mario Carneiro (Oct 16 2018 at 21:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135921840):
-and the order of a group element is the smallest nonzero power of the element that is 1
+<p>and the order of a group element is the smallest nonzero power of the element that is 1</p>
 
 #### [ Mario Carneiro (Oct 16 2018 at 21:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135921850):
-or 0 if it doesn't exist
+<p>or 0 if it doesn't exist</p>
 
 #### [ Kenny Lau (Oct 16 2018 at 21:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135921852):
-so that's a `def` not a `prop`?
+<p>so that's a <code>def</code> not a <code>prop</code>?</p>
 
 #### [ Kenny Lau (Oct 16 2018 at 21:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135921861):
-ok I don't like this
+<p>ok I don't like this</p>
 
 #### [ Mario Carneiro (Oct 16 2018 at 21:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135921866):
-metamath doesn't care about computability tho
+<p>metamath doesn't care about computability tho</p>
 
 #### [ Kenny Lau (Oct 16 2018 at 21:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135921867):
-do we have another approach?
+<p>do we have another approach?</p>
 
 #### [ Mario Carneiro (Oct 16 2018 at 21:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135921873):
-there is a computable definition yielding a `roption nat`
+<p>there is a computable definition yielding a <code>roption nat</code></p>
 
 #### [ Mario Carneiro (Oct 16 2018 at 21:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135921939):
-and if we define `get_or_else` for `roption` then we can make it 0 otherwise
+<p>and if we define <code>get_or_else</code> for <code>roption</code> then we can make it 0 otherwise</p>
 
 #### [ Kenny Lau (Oct 16 2018 at 21:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135921988):
-would it be usable?
+<p>would it be usable?</p>
 
 #### [ Mario Carneiro (Oct 16 2018 at 21:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922050):
-I am a fan of `roption` definitions; it would give you a relational interface
+<p>I am a fan of <code>roption</code> definitions; it would give you a relational interface</p>
 
 #### [ Mario Carneiro (Oct 16 2018 at 21:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922054):
-`p \in char R`
+<p><code>p \in char R</code></p>
 
 #### [ Kevin Buzzard (Oct 16 2018 at 21:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922092):
-The characteristic of a ring is the kernel of the canonical ring homomorphism from the integers to the ring.
+<p>The characteristic of a ring is the kernel of the canonical ring homomorphism from the integers to the ring.</p>
 
 #### [ Mario Carneiro (Oct 16 2018 at 21:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922108):
-there is also the ideal option
+<p>there is also the ideal option</p>
 
 #### [ Kenny Lau (Oct 16 2018 at 21:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922114):
-```quote
-The characteristic of a ring is the kernel of the canonical ring homomorphism from the integers to the ring.
-```
-next
+<blockquote>
+<p>The characteristic of a ring is the kernel of the canonical ring homomorphism from the integers to the ring.</p>
+</blockquote>
+<p>next</p>
 
 #### [ Kevin Buzzard (Oct 16 2018 at 21:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922123):
-That's the best definition.
+<p>That's the best definition.</p>
 
 #### [ Mario Carneiro (Oct 16 2018 at 21:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922145):
-that's just restating x^n = 0 though
+<p>that's just restating x^n = 0 though</p>
 
 #### [ Mario Carneiro (Oct 16 2018 at 21:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922199):
-maybe a better question is not what is the characteristic but what is it for
+<p>maybe a better question is not what is the characteristic but what is it for</p>
 
 #### [ Mario Carneiro (Oct 16 2018 at 21:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922241):
-We have PID defined, right? Is it constructive exists?
+<p>We have PID defined, right? Is it constructive exists?</p>
 
 #### [ Kenny Lau (Oct 16 2018 at 21:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922259):
-```lean
-class is_principal_ideal (S : set α) : Prop :=
-(principal : ∃ a : α, S = {x | a ∣ x})
+<div class="codehilite"><pre><span></span><span class="n">class</span> <span class="n">is_principal_ideal</span> <span class="o">(</span><span class="n">S</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">principal</span> <span class="o">:</span> <span class="bp">∃</span> <span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">,</span> <span class="n">S</span> <span class="bp">=</span> <span class="o">{</span><span class="n">x</span> <span class="bp">|</span> <span class="n">a</span> <span class="err">∣</span> <span class="n">x</span><span class="o">})</span>
 
-class principal_ideal_domain (α : Type*) extends integral_domain α :=
-(principal : ∀ (S : set α) [is_ideal S], is_principal_ideal S)
-```
+<span class="n">class</span> <span class="n">principal_ideal_domain</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="kn">extends</span> <span class="n">integral_domain</span> <span class="n">α</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">principal</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">S</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span><span class="o">)</span> <span class="o">[</span><span class="n">is_ideal</span> <span class="n">S</span><span class="o">],</span> <span class="n">is_principal_ideal</span> <span class="n">S</span><span class="o">)</span>
+</pre></div>
 
 #### [ Kenny Lau (Oct 16 2018 at 21:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922262):
-yes
+<p>yes</p>
 
 #### [ Mario Carneiro (Oct 16 2018 at 21:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922273):
-well no
+<p>well no</p>
 
 #### [ Kevin Buzzard (Oct 16 2018 at 21:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922280):
-That looks right to me. Is Mario asking about whether there's a function from ideals to generators though?
+<p>That looks right to me. Is Mario asking about whether there's a function from ideals to generators though?</p>
 
 #### [ Mario Carneiro (Oct 16 2018 at 21:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922284):
-yeah
+<p>yeah</p>
 
 #### [ Kevin Buzzard (Oct 16 2018 at 21:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922332):
-A maths PID is what Kenny just quoted.
+<p>A maths PID is what Kenny just quoted.</p>
 
 #### [ Mario Carneiro (Oct 16 2018 at 21:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922341):
-I guess there is no constructive proof that Z is a PID then?
+<p>I guess there is no constructive proof that Z is a PID then?</p>
 
 #### [ Kevin Buzzard (Oct 16 2018 at 21:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922345):
-Of course the notion of PID was not invented by constructivists.
+<p>Of course the notion of PID was not invented by constructivists.</p>
 
 #### [ Kenny Lau (Oct 16 2018 at 21:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922350):
-nothing involving arbitrary sets can be constructive
+<p>nothing involving arbitrary sets can be constructive</p>
 
 #### [ Kevin Buzzard (Oct 16 2018 at 21:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922351):
-History is written by the victors
+<p>History is written by the victors</p>
 
 #### [ Mario Carneiro (Oct 16 2018 at 21:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922383):
-that's not exactly true kenny, it's possible that the ideal structure can be leveraged to give a generator
+<p>that's not exactly true kenny, it's possible that the ideal structure can be leveraged to give a generator</p>
 
 #### [ Kevin Buzzard (Oct 16 2018 at 21:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922388):
-```quote
-I guess there is no constructive proof that Z is a PID then?
-```
-The standard proof in textbooks ("if the ideal is zero then done, if not then choose the smallest positive integer") is constructive.
+<blockquote>
+<p>I guess there is no constructive proof that Z is a PID then?</p>
+</blockquote>
+<p>The standard proof in textbooks ("if the ideal is zero then done, if not then choose the smallest positive integer") is constructive.</p>
 
 #### [ Mario Carneiro (Oct 16 2018 at 21:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922440):
-well, constructive with LEM
+<p>well, constructive with LEM</p>
 
 #### [ Kenny Lau (Oct 16 2018 at 21:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922465):
-you can't decide if the ideal is zero
+<p>you can't decide if the ideal is zero</p>
 
 #### [ Mario Carneiro (Oct 16 2018 at 21:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922466):
-you can't determine if an arbitrary ideal is zero
+<p>you can't determine if an arbitrary ideal is zero</p>
 
 #### [ Kevin Buzzard (Oct 16 2018 at 21:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922471):
-In Z??
+<p>In Z??</p>
 
 #### [ Mario Carneiro (Oct 16 2018 at 21:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922475):
-that's exactly the problem with defining characteristic
+<p>that's exactly the problem with defining characteristic</p>
 
 #### [ Kenny Lau (Oct 16 2018 at 21:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922477):
-give me an algorithm
+<p>give me an algorithm</p>
 
 #### [ Mario Carneiro (Oct 16 2018 at 21:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922490):
-the set of periods of an element is an ideal of Z
+<p>the set of periods of an element is an ideal of Z</p>
 
 #### [ Mario Carneiro (Oct 16 2018 at 21:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922500):
-but you can't tell if it is zero
+<p>but you can't tell if it is zero</p>
 
 #### [ Kevin Buzzard (Oct 16 2018 at 21:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922506):
-I'm not going to talk about this any more. It's silly.
+<p>I'm not going to talk about this any more. It's silly.</p>
 
 #### [ Mario Carneiro (Oct 16 2018 at 21:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922511):
-I think we have our answer Kenny
+<p>I think we have our answer Kenny</p>
 
 #### [ Kevin Buzzard (Oct 16 2018 at 21:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922516):
-:-)
+<p>:-)</p>
 
 #### [ Mario Carneiro (Oct 16 2018 at 21:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922518):
-totalize it
+<p>totalize it</p>
 
 #### [ Kenny Lau (Oct 16 2018 at 21:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922565):
-could you summarize the answer?
+<p>could you summarize the answer?</p>
 
 #### [ Kevin Buzzard (Oct 16 2018 at 21:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922575):
-Are you going to assume LEM?
+<p>Are you going to assume LEM?</p>
 
 #### [ Mario Carneiro (Oct 16 2018 at 21:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922576):
-char Q = 0
+<p>char Q = 0</p>
 
 #### [ Mario Carneiro (Oct 16 2018 at 21:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922579):
-`noncomputable`
+<p><code>noncomputable</code></p>
 
 #### [ Mario Carneiro (Oct 16 2018 at 21:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922584):
-live with it
+<p>live with it</p>
 
 #### [ Kenny Lau (Oct 16 2018 at 21:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922598):
-no roption?
+<p>no roption?</p>
 
 #### [ Mario Carneiro (Oct 16 2018 at 21:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922599):
-if you insist, you can define `char' A : roption nat`
+<p>if you insist, you can define <code>char' A : roption nat</code></p>
 
 #### [ Mario Carneiro (Oct 16 2018 at 21:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922611):
-and define `char` in terms of it
+<p>and define <code>char</code> in terms of it</p>
 
 #### [ Mario Carneiro (Oct 16 2018 at 21:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922615):
-but most of the theory will be about `char`
+<p>but most of the theory will be about <code>char</code></p>
 
 #### [ Kenny Lau (Oct 16 2018 at 21:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922618):
-it won't be a class then
+<p>it won't be a class then</p>
 
 #### [ Patrick Massot (Oct 16 2018 at 21:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922620):
-`kenny_char : roption Prop` (because who knows?)
+<p><code>kenny_char : roption Prop</code> (because who knows?)</p>
 
 #### [ Mario Carneiro (Oct 16 2018 at 21:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922637):
-also, `char` is a type
+<p>also, <code>char</code> is a type</p>
 
 #### [ Kenny Lau (Oct 16 2018 at 21:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922640):
-but every ring has a unique char
+<p>but every ring has a unique char</p>
 
 #### [ Mario Carneiro (Oct 16 2018 at 21:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922649):
-characters
+<p>characters</p>
 
 #### [ Mario Carneiro (Oct 16 2018 at 21:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922699):
-there is also the ideal definition, dunno how useful it is but that's constructive too
+<p>there is also the ideal definition, dunno how useful it is but that's constructive too</p>
 
 #### [ Patrick Massot (Oct 16 2018 at 21:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922704):
-Let's write it in French then! `car`
+<p>Let's write it in French then! <code>car</code></p>
 
 #### [ Kenny Lau (Oct 16 2018 at 21:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922705):
-I mean, it's useful to make "char A = p" into a class
+<p>I mean, it's useful to make "char A = p" into a class</p>
 
 #### [ Mario Carneiro (Oct 16 2018 at 21:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922710):
-I agree on that
+<p>I agree on that</p>
 
 #### [ Mario Carneiro (Oct 16 2018 at 21:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922715):
-`char_p` is fine and unproblematic
+<p><code>char_p</code> is fine and unproblematic</p>
 
 #### [ Kenny Lau (Oct 16 2018 at 21:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922719):
-oh ok
+<p>oh ok</p>
 
 #### [ Reid Barton (Oct 16 2018 at 21:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922722):
-```quote
-but every ring has a unique char
-```
-isn't this not true constructively? or am I really confused
+<blockquote>
+<p>but every ring has a unique char</p>
+</blockquote>
+<p>isn't this not true constructively? or am I really confused</p>
 
 #### [ Mario Carneiro (Oct 16 2018 at 21:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922744):
-no, that's true
+<p>no, that's true</p>
 
 #### [ Kenny Lau (Oct 16 2018 at 21:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922750):
-I'm talking about the reason to make it into a typeclass
+<p>I'm talking about the reason to make it into a typeclass</p>
 
 #### [ Mario Carneiro (Oct 16 2018 at 21:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922760):
-if a ring has two characteristics then they are equal
+<p>if a ring has two characteristics then they are equal</p>
 
 #### [ Kenny Lau (Oct 16 2018 at 21:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922763):
-```lean
-class char_p (α : Type u) [has_zero α] [has_one α] [has_add α] (p : ℕ) : Prop :=
-(cast_eq_zero : (p:α) = 0)
-```
-Do we all agree that this definition is deficit?
+<div class="codehilite"><pre><span></span><span class="n">class</span> <span class="n">char_p</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">[</span><span class="n">has_zero</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">has_one</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">has_add</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">cast_eq_zero</span> <span class="o">:</span> <span class="o">(</span><span class="n">p</span><span class="o">:</span><span class="n">α</span><span class="o">)</span> <span class="bp">=</span> <span class="mi">0</span><span class="o">)</span>
+</pre></div>
+
+
+<p>Do we all agree that this definition is deficit?</p>
 
 #### [ Reid Barton (Oct 16 2018 at 21:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922770):
-It's the "has" part I am worried about
+<p>It's the "has" part I am worried about</p>
 
 #### [ Reid Barton (Oct 16 2018 at 21:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922780):
-I agree "unique" is okay.
+<p>I agree "unique" is okay.</p>
 
 #### [ Mario Carneiro (Oct 16 2018 at 21:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922831):
-no you can't prove existence of a characteristic (number) in general without LEM
+<p>no you can't prove existence of a characteristic (number) in general without LEM</p>
 
 #### [ Mario Carneiro (Oct 16 2018 at 21:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922835):
-the ideal is fine of course
+<p>the ideal is fine of course</p>
 
 #### [ Reid Barton (Oct 16 2018 at 21:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135922838):
-right, okay
+<p>right, okay</p>
 
 #### [ Reid Barton (Oct 16 2018 at 21:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135923259):
-```quote
-I guess there is no constructive proof that Z is a PID then?
-```
-I think you can even prove constructively that "Z is a PID" => LEM
+<blockquote>
+<p>I guess there is no constructive proof that Z is a PID then?</p>
+</blockquote>
+<p>I think you can even prove constructively that "Z is a PID" =&gt; LEM</p>
 
 #### [ Reid Barton (Oct 16 2018 at 21:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135923313):
-by taking a proposition P and defining the ideal I = {x | x = 0 \/ P}
+<p>by taking a proposition P and defining the ideal I = {x | x = 0 \/ P}</p>
 
 #### [ Reid Barton (Oct 16 2018 at 21:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135923331):
-and then looking at whether its generator is zero or not
+<p>and then looking at whether its generator is zero or not</p>
 
 #### [ Kenny Lau (Oct 16 2018 at 21:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135923475):
-```lean
-class char_p (α : Type u) [semiring α] (p : ℕ) : Prop :=
-(cast_eq_zero_iff : ∀ x:ℕ, (x:α) = 0 ↔ p ∣ x)
-```
+<div class="codehilite"><pre><span></span><span class="n">class</span> <span class="n">char_p</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">[</span><span class="n">semiring</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">cast_eq_zero_iff</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span><span class="o">:</span><span class="bp">ℕ</span><span class="o">,</span> <span class="o">(</span><span class="n">x</span><span class="o">:</span><span class="n">α</span><span class="o">)</span> <span class="bp">=</span> <span class="mi">0</span> <span class="bp">↔</span> <span class="n">p</span> <span class="err">∣</span> <span class="n">x</span><span class="o">)</span>
+</pre></div>
 
 #### [ Kenny Lau (Oct 16 2018 at 21:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135923477):
-how about this
+<p>how about this</p>
 
 #### [ Kenny Lau (Oct 16 2018 at 21:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135923619):
-```lean
-class char_p (α : Type u) [semiring α] (p : ℕ) : Prop :=
-(cast_eq_zero_iff : ∀ x:ℕ, (x:α) = 0 ↔ p ∣ x)
+<div class="codehilite"><pre><span></span><span class="n">class</span> <span class="n">char_p</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">[</span><span class="n">semiring</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">cast_eq_zero_iff</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span><span class="o">:</span><span class="bp">ℕ</span><span class="o">,</span> <span class="o">(</span><span class="n">x</span><span class="o">:</span><span class="n">α</span><span class="o">)</span> <span class="bp">=</span> <span class="mi">0</span> <span class="bp">↔</span> <span class="n">p</span> <span class="err">∣</span> <span class="n">x</span><span class="o">)</span>
 
-theorem char_p.cast_eq_zero {α : Type u} [semiring α] {p : ℕ} [char_p α p] : (p:α) = 0 :=
-(char_p.cast_eq_zero_iff α p p).2 (dvd_refl p)
+<span class="kn">theorem</span> <span class="n">char_p</span><span class="bp">.</span><span class="n">cast_eq_zero</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">[</span><span class="n">semiring</span> <span class="n">α</span><span class="o">]</span> <span class="o">{</span><span class="n">p</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">}</span> <span class="o">[</span><span class="n">char_p</span> <span class="n">α</span> <span class="n">p</span><span class="o">]</span> <span class="o">:</span> <span class="o">(</span><span class="n">p</span><span class="o">:</span><span class="n">α</span><span class="o">)</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">char_p</span><span class="bp">.</span><span class="n">cast_eq_zero_iff</span> <span class="n">α</span> <span class="n">p</span> <span class="n">p</span><span class="o">)</span><span class="bp">.</span><span class="mi">2</span> <span class="o">(</span><span class="n">dvd_refl</span> <span class="n">p</span><span class="o">)</span>
 
-theorem char_p.eq (α : Type u) [semiring α] (p q : ℕ) [char_p α p] [char_p α q] : p = q :=
-nat.dvd_antisymm
-  ((char_p.cast_eq_zero_iff α p q).1 char_p.cast_eq_zero)
-  ((char_p.cast_eq_zero_iff α q p).1 char_p.cast_eq_zero)
-```
+<span class="kn">theorem</span> <span class="n">char_p</span><span class="bp">.</span><span class="n">eq</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">[</span><span class="n">semiring</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">p</span> <span class="n">q</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">[</span><span class="n">char_p</span> <span class="n">α</span> <span class="n">p</span><span class="o">]</span> <span class="o">[</span><span class="n">char_p</span> <span class="n">α</span> <span class="n">q</span><span class="o">]</span> <span class="o">:</span> <span class="n">p</span> <span class="bp">=</span> <span class="n">q</span> <span class="o">:=</span>
+<span class="n">nat</span><span class="bp">.</span><span class="n">dvd_antisymm</span>
+  <span class="o">((</span><span class="n">char_p</span><span class="bp">.</span><span class="n">cast_eq_zero_iff</span> <span class="n">α</span> <span class="n">p</span> <span class="n">q</span><span class="o">)</span><span class="bp">.</span><span class="mi">1</span> <span class="n">char_p</span><span class="bp">.</span><span class="n">cast_eq_zero</span><span class="o">)</span>
+  <span class="o">((</span><span class="n">char_p</span><span class="bp">.</span><span class="n">cast_eq_zero_iff</span> <span class="n">α</span> <span class="n">q</span> <span class="n">p</span><span class="o">)</span><span class="bp">.</span><span class="mi">1</span> <span class="n">char_p</span><span class="bp">.</span><span class="n">cast_eq_zero</span><span class="o">)</span>
+</pre></div>
 
 #### [ Kenny Lau (Oct 16 2018 at 21:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135923715):
-```quote
-I think your definition should be on semirings instead of zero/one/mul classes
-```
-but `char_zero` is defined on `[add_monoid \a] [has_one \a]`?
+<blockquote>
+<p>I think your definition should be on semirings instead of zero/one/mul classes</p>
+</blockquote>
+<p>but <code>char_zero</code> is defined on <code>[add_monoid \a] [has_one \a]</code>?</p>
 
 #### [ Mario Carneiro (Oct 16 2018 at 21:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135924255):
-or that
+<p>or that</p>
 
 #### [ Kenny Lau (Oct 16 2018 at 21:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135924367):
-existe uma diferencia?
+<p>existe uma diferencia?</p>
 
 #### [ Kenny Lau (Oct 16 2018 at 22:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135925799):
-```lean
-class char_p (α : Type u) [semiring α] (p : ℕ) : Prop :=
-(cast_eq_zero_iff : ∀ x:ℕ, (x:α) = 0 ↔ p ∣ x)
+<div class="codehilite"><pre><span></span><span class="n">class</span> <span class="n">char_p</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">[</span><span class="n">semiring</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">cast_eq_zero_iff</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span><span class="o">:</span><span class="bp">ℕ</span><span class="o">,</span> <span class="o">(</span><span class="n">x</span><span class="o">:</span><span class="n">α</span><span class="o">)</span> <span class="bp">=</span> <span class="mi">0</span> <span class="bp">↔</span> <span class="n">p</span> <span class="err">∣</span> <span class="n">x</span><span class="o">)</span>
 
-theorem char_p.cast_eq_zero (α : Type u) [semiring α] (p : ℕ) [char_p α p] : (p:α) = 0 :=
-(char_p.cast_eq_zero_iff α p p).2 (dvd_refl p)
+<span class="kn">theorem</span> <span class="n">char_p</span><span class="bp">.</span><span class="n">cast_eq_zero</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">[</span><span class="n">semiring</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">[</span><span class="n">char_p</span> <span class="n">α</span> <span class="n">p</span><span class="o">]</span> <span class="o">:</span> <span class="o">(</span><span class="n">p</span><span class="o">:</span><span class="n">α</span><span class="o">)</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">char_p</span><span class="bp">.</span><span class="n">cast_eq_zero_iff</span> <span class="n">α</span> <span class="n">p</span> <span class="n">p</span><span class="o">)</span><span class="bp">.</span><span class="mi">2</span> <span class="o">(</span><span class="n">dvd_refl</span> <span class="n">p</span><span class="o">)</span>
 
-theorem char_p.eq (α : Type u) [semiring α] (p q : ℕ) [char_p α p] [char_p α q] : p = q :=
-nat.dvd_antisymm
-  ((char_p.cast_eq_zero_iff α p q).1 (char_p.cast_eq_zero _ _))
-  ((char_p.cast_eq_zero_iff α q p).1 (char_p.cast_eq_zero _ _))
+<span class="kn">theorem</span> <span class="n">char_p</span><span class="bp">.</span><span class="n">eq</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">[</span><span class="n">semiring</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">p</span> <span class="n">q</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">[</span><span class="n">char_p</span> <span class="n">α</span> <span class="n">p</span><span class="o">]</span> <span class="o">[</span><span class="n">char_p</span> <span class="n">α</span> <span class="n">q</span><span class="o">]</span> <span class="o">:</span> <span class="n">p</span> <span class="bp">=</span> <span class="n">q</span> <span class="o">:=</span>
+<span class="n">nat</span><span class="bp">.</span><span class="n">dvd_antisymm</span>
+  <span class="o">((</span><span class="n">char_p</span><span class="bp">.</span><span class="n">cast_eq_zero_iff</span> <span class="n">α</span> <span class="n">p</span> <span class="n">q</span><span class="o">)</span><span class="bp">.</span><span class="mi">1</span> <span class="o">(</span><span class="n">char_p</span><span class="bp">.</span><span class="n">cast_eq_zero</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">))</span>
+  <span class="o">((</span><span class="n">char_p</span><span class="bp">.</span><span class="n">cast_eq_zero_iff</span> <span class="n">α</span> <span class="n">q</span> <span class="n">p</span><span class="o">)</span><span class="bp">.</span><span class="mi">1</span> <span class="o">(</span><span class="n">char_p</span><span class="bp">.</span><span class="n">cast_eq_zero</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">))</span>
 
-instance char_p.of_char_zero (α : Type u) [semiring α] [char_zero α] : char_p α 0 :=
-⟨λ x, by rw [zero_dvd_iff, ← nat.cast_zero, nat.cast_inj]⟩
+<span class="kn">instance</span> <span class="n">char_p</span><span class="bp">.</span><span class="n">of_char_zero</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">[</span><span class="n">semiring</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">char_zero</span> <span class="n">α</span><span class="o">]</span> <span class="o">:</span> <span class="n">char_p</span> <span class="n">α</span> <span class="mi">0</span> <span class="o">:=</span>
+<span class="bp">⟨λ</span> <span class="n">x</span><span class="o">,</span> <span class="k">by</span> <span class="n">rw</span> <span class="o">[</span><span class="n">zero_dvd_iff</span><span class="o">,</span> <span class="err">←</span> <span class="n">nat</span><span class="bp">.</span><span class="n">cast_zero</span><span class="o">,</span> <span class="n">nat</span><span class="bp">.</span><span class="n">cast_inj</span><span class="o">]</span><span class="bp">⟩</span>
 
-theorem char_p.exists (α : Type u) [semiring α] : ∃ p, char_p α p :=
-by letI := classical.dec_eq α; exact
-classical.by_cases
-  (assume H : ∀ p:ℕ, (p:α) = 0 → p = 0, ⟨0,
-    ⟨λ x, by rw [zero_dvd_iff]; exact ⟨H x, by rintro rfl; refl⟩⟩⟩)
-  (λ H, ⟨nat.find (classical.not_forall.1 H), ⟨λ x,
-    ⟨λ H1, nat.dvd_of_mod_eq_zero (by_contradiction $ λ H2,
-      nat.find_min (classical.not_forall.1 H)
-        (nat.mod_lt x $ nat.pos_of_ne_zero $ not_of_not_imp $
-          nat.find_spec (classical.not_forall.1 H))
-        (not_imp_of_and_not ⟨by rwa [← nat.mod_add_div x (nat.find (classical.not_forall.1 H)),
-          nat.cast_add, nat.cast_mul, of_not_not (not_not_of_not_imp $ nat.find_spec (classical.not_forall.1 H)),
-          zero_mul, add_zero] at H1, H2⟩)),
-    λ H1, by rw [← nat.mul_div_cancel' H1, nat.cast_mul,
-      of_not_not (not_not_of_not_imp $ nat.find_spec (classical.not_forall.1 H)), zero_mul]⟩⟩⟩)
+<span class="kn">theorem</span> <span class="n">char_p</span><span class="bp">.</span><span class="n">exists</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">[</span><span class="n">semiring</span> <span class="n">α</span><span class="o">]</span> <span class="o">:</span> <span class="bp">∃</span> <span class="n">p</span><span class="o">,</span> <span class="n">char_p</span> <span class="n">α</span> <span class="n">p</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">letI</span> <span class="o">:=</span> <span class="n">classical</span><span class="bp">.</span><span class="n">dec_eq</span> <span class="n">α</span><span class="bp">;</span> <span class="n">exact</span>
+<span class="n">classical</span><span class="bp">.</span><span class="n">by_cases</span>
+  <span class="o">(</span><span class="k">assume</span> <span class="n">H</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">p</span><span class="o">:</span><span class="bp">ℕ</span><span class="o">,</span> <span class="o">(</span><span class="n">p</span><span class="o">:</span><span class="n">α</span><span class="o">)</span> <span class="bp">=</span> <span class="mi">0</span> <span class="bp">→</span> <span class="n">p</span> <span class="bp">=</span> <span class="mi">0</span><span class="o">,</span> <span class="bp">⟨</span><span class="mi">0</span><span class="o">,</span>
+    <span class="bp">⟨λ</span> <span class="n">x</span><span class="o">,</span> <span class="k">by</span> <span class="n">rw</span> <span class="o">[</span><span class="n">zero_dvd_iff</span><span class="o">]</span><span class="bp">;</span> <span class="n">exact</span> <span class="bp">⟨</span><span class="n">H</span> <span class="n">x</span><span class="o">,</span> <span class="k">by</span> <span class="n">rintro</span> <span class="n">rfl</span><span class="bp">;</span> <span class="n">refl</span><span class="bp">⟩⟩⟩</span><span class="o">)</span>
+  <span class="o">(</span><span class="bp">λ</span> <span class="n">H</span><span class="o">,</span> <span class="bp">⟨</span><span class="n">nat</span><span class="bp">.</span><span class="n">find</span> <span class="o">(</span><span class="n">classical</span><span class="bp">.</span><span class="n">not_forall</span><span class="bp">.</span><span class="mi">1</span> <span class="n">H</span><span class="o">),</span> <span class="bp">⟨λ</span> <span class="n">x</span><span class="o">,</span>
+    <span class="bp">⟨λ</span> <span class="n">H1</span><span class="o">,</span> <span class="n">nat</span><span class="bp">.</span><span class="n">dvd_of_mod_eq_zero</span> <span class="o">(</span><span class="n">by_contradiction</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">H2</span><span class="o">,</span>
+      <span class="n">nat</span><span class="bp">.</span><span class="n">find_min</span> <span class="o">(</span><span class="n">classical</span><span class="bp">.</span><span class="n">not_forall</span><span class="bp">.</span><span class="mi">1</span> <span class="n">H</span><span class="o">)</span>
+        <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">mod_lt</span> <span class="n">x</span> <span class="err">$</span> <span class="n">nat</span><span class="bp">.</span><span class="n">pos_of_ne_zero</span> <span class="err">$</span> <span class="n">not_of_not_imp</span> <span class="err">$</span>
+          <span class="n">nat</span><span class="bp">.</span><span class="n">find_spec</span> <span class="o">(</span><span class="n">classical</span><span class="bp">.</span><span class="n">not_forall</span><span class="bp">.</span><span class="mi">1</span> <span class="n">H</span><span class="o">))</span>
+        <span class="o">(</span><span class="n">not_imp_of_and_not</span> <span class="bp">⟨</span><span class="k">by</span> <span class="n">rwa</span> <span class="o">[</span><span class="err">←</span> <span class="n">nat</span><span class="bp">.</span><span class="n">mod_add_div</span> <span class="n">x</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">find</span> <span class="o">(</span><span class="n">classical</span><span class="bp">.</span><span class="n">not_forall</span><span class="bp">.</span><span class="mi">1</span> <span class="n">H</span><span class="o">)),</span>
+          <span class="n">nat</span><span class="bp">.</span><span class="n">cast_add</span><span class="o">,</span> <span class="n">nat</span><span class="bp">.</span><span class="n">cast_mul</span><span class="o">,</span> <span class="n">of_not_not</span> <span class="o">(</span><span class="n">not_not_of_not_imp</span> <span class="err">$</span> <span class="n">nat</span><span class="bp">.</span><span class="n">find_spec</span> <span class="o">(</span><span class="n">classical</span><span class="bp">.</span><span class="n">not_forall</span><span class="bp">.</span><span class="mi">1</span> <span class="n">H</span><span class="o">)),</span>
+          <span class="n">zero_mul</span><span class="o">,</span> <span class="n">add_zero</span><span class="o">]</span> <span class="n">at</span> <span class="n">H1</span><span class="o">,</span> <span class="n">H2</span><span class="bp">⟩</span><span class="o">)),</span>
+    <span class="bp">λ</span> <span class="n">H1</span><span class="o">,</span> <span class="k">by</span> <span class="n">rw</span> <span class="o">[</span><span class="err">←</span> <span class="n">nat</span><span class="bp">.</span><span class="n">mul_div_cancel&#39;</span> <span class="n">H1</span><span class="o">,</span> <span class="n">nat</span><span class="bp">.</span><span class="n">cast_mul</span><span class="o">,</span>
+      <span class="n">of_not_not</span> <span class="o">(</span><span class="n">not_not_of_not_imp</span> <span class="err">$</span> <span class="n">nat</span><span class="bp">.</span><span class="n">find_spec</span> <span class="o">(</span><span class="n">classical</span><span class="bp">.</span><span class="n">not_forall</span><span class="bp">.</span><span class="mi">1</span> <span class="n">H</span><span class="o">)),</span> <span class="n">zero_mul</span><span class="o">]</span><span class="bp">⟩⟩⟩</span><span class="o">)</span>
 
-theorem char_p.exists_unique (α : Type u) [semiring α] : ∃! p, char_p α p :=
-let ⟨c, H⟩ := char_p.exists α in
-⟨c, H, λ y H2, by resetI; apply char_p.eq α⟩
-```
+<span class="kn">theorem</span> <span class="n">char_p</span><span class="bp">.</span><span class="n">exists_unique</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">[</span><span class="n">semiring</span> <span class="n">α</span><span class="o">]</span> <span class="o">:</span> <span class="bp">∃!</span> <span class="n">p</span><span class="o">,</span> <span class="n">char_p</span> <span class="n">α</span> <span class="n">p</span> <span class="o">:=</span>
+<span class="k">let</span> <span class="bp">⟨</span><span class="n">c</span><span class="o">,</span> <span class="n">H</span><span class="bp">⟩</span> <span class="o">:=</span> <span class="n">char_p</span><span class="bp">.</span><span class="n">exists</span> <span class="n">α</span> <span class="k">in</span>
+<span class="bp">⟨</span><span class="n">c</span><span class="o">,</span> <span class="n">H</span><span class="o">,</span> <span class="bp">λ</span> <span class="n">y</span> <span class="n">H2</span><span class="o">,</span> <span class="k">by</span> <span class="n">resetI</span><span class="bp">;</span> <span class="n">apply</span> <span class="n">char_p</span><span class="bp">.</span><span class="n">eq</span> <span class="n">α</span><span class="bp">⟩</span>
+</pre></div>
 
 #### [ Kenny Lau (Oct 16 2018 at 22:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135925803):
-How does this look? @**Mario Carneiro** @**Patrick Massot**
+<p>How does this look? <span class="user-mention" data-user-id="110049">@Mario Carneiro</span> <span class="user-mention" data-user-id="110031">@Patrick Massot</span></p>
 
 #### [ Kenny Lau (Oct 16 2018 at 22:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135925816):
-@**Kevin Buzzard**
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span></p>
 
 #### [ Kevin Buzzard (Oct 16 2018 at 22:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135925950):
-```quote
-```lean
-class char_p (α : Type u) [semiring α] (p : ℕ) : Prop :=
-(cast_eq_zero_iff : ∀ x:ℕ, (x:α) = 0 ↔ p ∣ x)
-```
-```
-I see you went for the ideal idea after all ;-)
+<blockquote>
+<div class="codehilite"><pre><span></span><span class="n">class</span> <span class="n">char_p</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">[</span><span class="n">semiring</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">cast_eq_zero_iff</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span><span class="o">:</span><span class="bp">ℕ</span><span class="o">,</span> <span class="o">(</span><span class="n">x</span><span class="o">:</span><span class="n">α</span><span class="o">)</span> <span class="bp">=</span> <span class="mi">0</span> <span class="bp">↔</span> <span class="n">p</span> <span class="err">∣</span> <span class="n">x</span><span class="o">)</span>
+</pre></div>
+
+
+</blockquote>
+<p>I see you went for the ideal idea after all ;-)</p>
 
 #### [ Mario Carneiro (Oct 16 2018 at 22:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135925962):
-`char_p.eq` should definitely not have square brackets
+<p><code>char_p.eq</code> should definitely not have square brackets</p>
 
 #### [ Kevin Buzzard (Oct 16 2018 at 22:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135925979):
-`is_char_p`?
+<p><code>is_char_p</code>?</p>
 
 #### [ Mario Carneiro (Oct 16 2018 at 22:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135926065):
-Maybe it should be a property of Z, then you can literally say `is_ideal (char_p A)`
+<p>Maybe it should be a property of Z, then you can literally say <code>is_ideal (char_p A)</code></p>
 
 #### [ Kenny Lau (Oct 16 2018 at 22:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135926427):
-wait I'm confused
+<p>wait I'm confused</p>
 
 #### [ Kenny Lau (Oct 16 2018 at 22:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135926429):
-```lean
-theorem char_p.eq (α : Type u) [semiring α] (p q : ℕ) (c1 : char_p α p) (c2 : char_p α q) : p = q :=
-nat.dvd_antisymm
-  ((char_p.cast_eq_zero_iff α p q).1 (char_p.cast_eq_zero _ _))
-  ((char_p.cast_eq_zero_iff α q p).1 (char_p.cast_eq_zero _ _))
-```
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">char_p</span><span class="bp">.</span><span class="n">eq</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">[</span><span class="n">semiring</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">p</span> <span class="n">q</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">c1</span> <span class="o">:</span> <span class="n">char_p</span> <span class="n">α</span> <span class="n">p</span><span class="o">)</span> <span class="o">(</span><span class="n">c2</span> <span class="o">:</span> <span class="n">char_p</span> <span class="n">α</span> <span class="n">q</span><span class="o">)</span> <span class="o">:</span> <span class="n">p</span> <span class="bp">=</span> <span class="n">q</span> <span class="o">:=</span>
+<span class="n">nat</span><span class="bp">.</span><span class="n">dvd_antisymm</span>
+  <span class="o">((</span><span class="n">char_p</span><span class="bp">.</span><span class="n">cast_eq_zero_iff</span> <span class="n">α</span> <span class="n">p</span> <span class="n">q</span><span class="o">)</span><span class="bp">.</span><span class="mi">1</span> <span class="o">(</span><span class="n">char_p</span><span class="bp">.</span><span class="n">cast_eq_zero</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">))</span>
+  <span class="o">((</span><span class="n">char_p</span><span class="bp">.</span><span class="n">cast_eq_zero_iff</span> <span class="n">α</span> <span class="n">q</span> <span class="n">p</span><span class="o">)</span><span class="bp">.</span><span class="mi">1</span> <span class="o">(</span><span class="n">char_p</span><span class="bp">.</span><span class="n">cast_eq_zero</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">))</span>
+</pre></div>
 
 #### [ Kenny Lau (Oct 16 2018 at 22:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135926434):
-how can the proof still work now that I turned `[]` to `()`?
+<p>how can the proof still work now that I turned <code>[]</code> to <code>()</code>?</p>
 
 #### [ Mario Carneiro (Oct 16 2018 at 22:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135926462):
-maybe kevin knows... I told him the solution to this puzzle a few weeks ago
+<p>maybe kevin knows... I told him the solution to this puzzle a few weeks ago</p>
 
 #### [ Kenny Lau (Oct 16 2018 at 22:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135926477):
-anyway how is this now?
-```lean
-class char_p (α : Type u) [semiring α] (p : ℕ) : Prop :=
-(cast_eq_zero_iff : ∀ x:ℕ, (x:α) = 0 ↔ p ∣ x)
+<p>anyway how is this now?</p>
+<div class="codehilite"><pre><span></span><span class="n">class</span> <span class="n">char_p</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">[</span><span class="n">semiring</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">cast_eq_zero_iff</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span><span class="o">:</span><span class="bp">ℕ</span><span class="o">,</span> <span class="o">(</span><span class="n">x</span><span class="o">:</span><span class="n">α</span><span class="o">)</span> <span class="bp">=</span> <span class="mi">0</span> <span class="bp">↔</span> <span class="n">p</span> <span class="err">∣</span> <span class="n">x</span><span class="o">)</span>
 
-theorem char_p.cast_eq_zero (α : Type u) [semiring α] (p : ℕ) [char_p α p] : (p:α) = 0 :=
-(char_p.cast_eq_zero_iff α p p).2 (dvd_refl p)
+<span class="kn">theorem</span> <span class="n">char_p</span><span class="bp">.</span><span class="n">cast_eq_zero</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">[</span><span class="n">semiring</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">[</span><span class="n">char_p</span> <span class="n">α</span> <span class="n">p</span><span class="o">]</span> <span class="o">:</span> <span class="o">(</span><span class="n">p</span><span class="o">:</span><span class="n">α</span><span class="o">)</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">char_p</span><span class="bp">.</span><span class="n">cast_eq_zero_iff</span> <span class="n">α</span> <span class="n">p</span> <span class="n">p</span><span class="o">)</span><span class="bp">.</span><span class="mi">2</span> <span class="o">(</span><span class="n">dvd_refl</span> <span class="n">p</span><span class="o">)</span>
 
-theorem char_p.eq (α : Type u) [semiring α] {p q : ℕ} (c1 : char_p α p) (c2 : char_p α q) : p = q :=
-nat.dvd_antisymm
-  ((char_p.cast_eq_zero_iff α p q).1 (char_p.cast_eq_zero _ _))
-  ((char_p.cast_eq_zero_iff α q p).1 (char_p.cast_eq_zero _ _))
+<span class="kn">theorem</span> <span class="n">char_p</span><span class="bp">.</span><span class="n">eq</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">[</span><span class="n">semiring</span> <span class="n">α</span><span class="o">]</span> <span class="o">{</span><span class="n">p</span> <span class="n">q</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">}</span> <span class="o">(</span><span class="n">c1</span> <span class="o">:</span> <span class="n">char_p</span> <span class="n">α</span> <span class="n">p</span><span class="o">)</span> <span class="o">(</span><span class="n">c2</span> <span class="o">:</span> <span class="n">char_p</span> <span class="n">α</span> <span class="n">q</span><span class="o">)</span> <span class="o">:</span> <span class="n">p</span> <span class="bp">=</span> <span class="n">q</span> <span class="o">:=</span>
+<span class="n">nat</span><span class="bp">.</span><span class="n">dvd_antisymm</span>
+  <span class="o">((</span><span class="n">char_p</span><span class="bp">.</span><span class="n">cast_eq_zero_iff</span> <span class="n">α</span> <span class="n">p</span> <span class="n">q</span><span class="o">)</span><span class="bp">.</span><span class="mi">1</span> <span class="o">(</span><span class="n">char_p</span><span class="bp">.</span><span class="n">cast_eq_zero</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">))</span>
+  <span class="o">((</span><span class="n">char_p</span><span class="bp">.</span><span class="n">cast_eq_zero_iff</span> <span class="n">α</span> <span class="n">q</span> <span class="n">p</span><span class="o">)</span><span class="bp">.</span><span class="mi">1</span> <span class="o">(</span><span class="n">char_p</span><span class="bp">.</span><span class="n">cast_eq_zero</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">))</span>
 
-instance char_p.of_char_zero (α : Type u) [semiring α] [char_zero α] : char_p α 0 :=
-⟨λ x, by rw [zero_dvd_iff, ← nat.cast_zero, nat.cast_inj]⟩
+<span class="kn">instance</span> <span class="n">char_p</span><span class="bp">.</span><span class="n">of_char_zero</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">[</span><span class="n">semiring</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">char_zero</span> <span class="n">α</span><span class="o">]</span> <span class="o">:</span> <span class="n">char_p</span> <span class="n">α</span> <span class="mi">0</span> <span class="o">:=</span>
+<span class="bp">⟨λ</span> <span class="n">x</span><span class="o">,</span> <span class="k">by</span> <span class="n">rw</span> <span class="o">[</span><span class="n">zero_dvd_iff</span><span class="o">,</span> <span class="err">←</span> <span class="n">nat</span><span class="bp">.</span><span class="n">cast_zero</span><span class="o">,</span> <span class="n">nat</span><span class="bp">.</span><span class="n">cast_inj</span><span class="o">]</span><span class="bp">⟩</span>
 
-theorem char_p.exists (α : Type u) [semiring α] : ∃ p, char_p α p :=
-by letI := classical.dec_eq α; exact
-classical.by_cases
-  (assume H : ∀ p:ℕ, (p:α) = 0 → p = 0, ⟨0,
-    ⟨λ x, by rw [zero_dvd_iff]; exact ⟨H x, by rintro rfl; refl⟩⟩⟩)
-  (λ H, ⟨nat.find (classical.not_forall.1 H), ⟨λ x,
-    ⟨λ H1, nat.dvd_of_mod_eq_zero (by_contradiction $ λ H2,
-      nat.find_min (classical.not_forall.1 H)
-        (nat.mod_lt x $ nat.pos_of_ne_zero $ not_of_not_imp $
-          nat.find_spec (classical.not_forall.1 H))
-        (not_imp_of_and_not ⟨by rwa [← nat.mod_add_div x (nat.find (classical.not_forall.1 H)),
-          nat.cast_add, nat.cast_mul, of_not_not (not_not_of_not_imp $ nat.find_spec (classical.not_forall.1 H)),
-          zero_mul, add_zero] at H1, H2⟩)),
-    λ H1, by rw [← nat.mul_div_cancel' H1, nat.cast_mul,
-      of_not_not (not_not_of_not_imp $ nat.find_spec (classical.not_forall.1 H)), zero_mul]⟩⟩⟩)
+<span class="kn">theorem</span> <span class="n">char_p</span><span class="bp">.</span><span class="n">exists</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">[</span><span class="n">semiring</span> <span class="n">α</span><span class="o">]</span> <span class="o">:</span> <span class="bp">∃</span> <span class="n">p</span><span class="o">,</span> <span class="n">char_p</span> <span class="n">α</span> <span class="n">p</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">letI</span> <span class="o">:=</span> <span class="n">classical</span><span class="bp">.</span><span class="n">dec_eq</span> <span class="n">α</span><span class="bp">;</span> <span class="n">exact</span>
+<span class="n">classical</span><span class="bp">.</span><span class="n">by_cases</span>
+  <span class="o">(</span><span class="k">assume</span> <span class="n">H</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">p</span><span class="o">:</span><span class="bp">ℕ</span><span class="o">,</span> <span class="o">(</span><span class="n">p</span><span class="o">:</span><span class="n">α</span><span class="o">)</span> <span class="bp">=</span> <span class="mi">0</span> <span class="bp">→</span> <span class="n">p</span> <span class="bp">=</span> <span class="mi">0</span><span class="o">,</span> <span class="bp">⟨</span><span class="mi">0</span><span class="o">,</span>
+    <span class="bp">⟨λ</span> <span class="n">x</span><span class="o">,</span> <span class="k">by</span> <span class="n">rw</span> <span class="o">[</span><span class="n">zero_dvd_iff</span><span class="o">]</span><span class="bp">;</span> <span class="n">exact</span> <span class="bp">⟨</span><span class="n">H</span> <span class="n">x</span><span class="o">,</span> <span class="k">by</span> <span class="n">rintro</span> <span class="n">rfl</span><span class="bp">;</span> <span class="n">refl</span><span class="bp">⟩⟩⟩</span><span class="o">)</span>
+  <span class="o">(</span><span class="bp">λ</span> <span class="n">H</span><span class="o">,</span> <span class="bp">⟨</span><span class="n">nat</span><span class="bp">.</span><span class="n">find</span> <span class="o">(</span><span class="n">classical</span><span class="bp">.</span><span class="n">not_forall</span><span class="bp">.</span><span class="mi">1</span> <span class="n">H</span><span class="o">),</span> <span class="bp">⟨λ</span> <span class="n">x</span><span class="o">,</span>
+    <span class="bp">⟨λ</span> <span class="n">H1</span><span class="o">,</span> <span class="n">nat</span><span class="bp">.</span><span class="n">dvd_of_mod_eq_zero</span> <span class="o">(</span><span class="n">by_contradiction</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">H2</span><span class="o">,</span>
+      <span class="n">nat</span><span class="bp">.</span><span class="n">find_min</span> <span class="o">(</span><span class="n">classical</span><span class="bp">.</span><span class="n">not_forall</span><span class="bp">.</span><span class="mi">1</span> <span class="n">H</span><span class="o">)</span>
+        <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">mod_lt</span> <span class="n">x</span> <span class="err">$</span> <span class="n">nat</span><span class="bp">.</span><span class="n">pos_of_ne_zero</span> <span class="err">$</span> <span class="n">not_of_not_imp</span> <span class="err">$</span>
+          <span class="n">nat</span><span class="bp">.</span><span class="n">find_spec</span> <span class="o">(</span><span class="n">classical</span><span class="bp">.</span><span class="n">not_forall</span><span class="bp">.</span><span class="mi">1</span> <span class="n">H</span><span class="o">))</span>
+        <span class="o">(</span><span class="n">not_imp_of_and_not</span> <span class="bp">⟨</span><span class="k">by</span> <span class="n">rwa</span> <span class="o">[</span><span class="err">←</span> <span class="n">nat</span><span class="bp">.</span><span class="n">mod_add_div</span> <span class="n">x</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">find</span> <span class="o">(</span><span class="n">classical</span><span class="bp">.</span><span class="n">not_forall</span><span class="bp">.</span><span class="mi">1</span> <span class="n">H</span><span class="o">)),</span>
+          <span class="n">nat</span><span class="bp">.</span><span class="n">cast_add</span><span class="o">,</span> <span class="n">nat</span><span class="bp">.</span><span class="n">cast_mul</span><span class="o">,</span> <span class="n">of_not_not</span> <span class="o">(</span><span class="n">not_not_of_not_imp</span> <span class="err">$</span> <span class="n">nat</span><span class="bp">.</span><span class="n">find_spec</span> <span class="o">(</span><span class="n">classical</span><span class="bp">.</span><span class="n">not_forall</span><span class="bp">.</span><span class="mi">1</span> <span class="n">H</span><span class="o">)),</span>
+          <span class="n">zero_mul</span><span class="o">,</span> <span class="n">add_zero</span><span class="o">]</span> <span class="n">at</span> <span class="n">H1</span><span class="o">,</span> <span class="n">H2</span><span class="bp">⟩</span><span class="o">)),</span>
+    <span class="bp">λ</span> <span class="n">H1</span><span class="o">,</span> <span class="k">by</span> <span class="n">rw</span> <span class="o">[</span><span class="err">←</span> <span class="n">nat</span><span class="bp">.</span><span class="n">mul_div_cancel&#39;</span> <span class="n">H1</span><span class="o">,</span> <span class="n">nat</span><span class="bp">.</span><span class="n">cast_mul</span><span class="o">,</span>
+      <span class="n">of_not_not</span> <span class="o">(</span><span class="n">not_not_of_not_imp</span> <span class="err">$</span> <span class="n">nat</span><span class="bp">.</span><span class="n">find_spec</span> <span class="o">(</span><span class="n">classical</span><span class="bp">.</span><span class="n">not_forall</span><span class="bp">.</span><span class="mi">1</span> <span class="n">H</span><span class="o">)),</span> <span class="n">zero_mul</span><span class="o">]</span><span class="bp">⟩⟩⟩</span><span class="o">)</span>
 
-theorem char_p.exists_unique (α : Type u) [semiring α] : ∃! p, char_p α p :=
-let ⟨c, H⟩ := char_p.exists α in
-⟨c, H, λ y H2, char_p.eq α H2 H⟩
-```
+<span class="kn">theorem</span> <span class="n">char_p</span><span class="bp">.</span><span class="n">exists_unique</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">[</span><span class="n">semiring</span> <span class="n">α</span><span class="o">]</span> <span class="o">:</span> <span class="bp">∃!</span> <span class="n">p</span><span class="o">,</span> <span class="n">char_p</span> <span class="n">α</span> <span class="n">p</span> <span class="o">:=</span>
+<span class="k">let</span> <span class="bp">⟨</span><span class="n">c</span><span class="o">,</span> <span class="n">H</span><span class="bp">⟩</span> <span class="o">:=</span> <span class="n">char_p</span><span class="bp">.</span><span class="n">exists</span> <span class="n">α</span> <span class="k">in</span>
+<span class="bp">⟨</span><span class="n">c</span><span class="o">,</span> <span class="n">H</span><span class="o">,</span> <span class="bp">λ</span> <span class="n">y</span> <span class="n">H2</span><span class="o">,</span> <span class="n">char_p</span><span class="bp">.</span><span class="n">eq</span> <span class="n">α</span> <span class="n">H2</span> <span class="n">H</span><span class="bp">⟩</span>
+</pre></div>
 
 #### [ Mario Carneiro (Oct 16 2018 at 22:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135926549):
-`char_p.exists` should be defining a function... called `char`
+<p><code>char_p.exists</code> should be defining a function... called <code>char</code></p>
 
 #### [ Kenny Lau (Oct 16 2018 at 22:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135926554):
-we can functionize that
+<p>we can functionize that</p>
 
 #### [ Kevin Buzzard (Oct 16 2018 at 22:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135926587):
-He told Johannes too.
+<p>He told Johannes too.</p>
 
 #### [ Kenny Lau (Oct 16 2018 at 22:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135926599):
-```
-invalid definition, a declaration named 'char' has already been declared
-```
+<div class="codehilite"><pre><span></span>invalid definition, a declaration named &#39;char&#39; has already been declared
+</pre></div>
 
 #### [ Kenny Lau (Oct 16 2018 at 22:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135926600):
-hard luck
+<p>hard luck</p>
 
 #### [ Kenny Lau (Oct 16 2018 at 22:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135926906):
-```lean
-noncomputable def ring_char (α : Type u) [semiring α] : ℕ :=
-classical.some (char_p.exists_unique α)
+<div class="codehilite"><pre><span></span><span class="n">noncomputable</span> <span class="n">def</span> <span class="n">ring_char</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">[</span><span class="n">semiring</span> <span class="n">α</span><span class="o">]</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="o">:=</span>
+<span class="n">classical</span><span class="bp">.</span><span class="n">some</span> <span class="o">(</span><span class="n">char_p</span><span class="bp">.</span><span class="n">exists_unique</span> <span class="n">α</span><span class="o">)</span>
 
-theorem ring_char.spec (α : Type u) [semiring α] : ∀ x:ℕ, (x:α) = 0 ↔ ring_char α ∣ x :=
-by letI := (classical.some_spec (char_p.exists_unique α)).1;
-unfold ring_char; exact char_p.cast_eq_zero_iff α (ring_char α)
+<span class="kn">theorem</span> <span class="n">ring_char</span><span class="bp">.</span><span class="n">spec</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">[</span><span class="n">semiring</span> <span class="n">α</span><span class="o">]</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span><span class="o">:</span><span class="bp">ℕ</span><span class="o">,</span> <span class="o">(</span><span class="n">x</span><span class="o">:</span><span class="n">α</span><span class="o">)</span> <span class="bp">=</span> <span class="mi">0</span> <span class="bp">↔</span> <span class="n">ring_char</span> <span class="n">α</span> <span class="err">∣</span> <span class="n">x</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">letI</span> <span class="o">:=</span> <span class="o">(</span><span class="n">classical</span><span class="bp">.</span><span class="n">some_spec</span> <span class="o">(</span><span class="n">char_p</span><span class="bp">.</span><span class="n">exists_unique</span> <span class="n">α</span><span class="o">))</span><span class="bp">.</span><span class="mi">1</span><span class="bp">;</span>
+<span class="n">unfold</span> <span class="n">ring_char</span><span class="bp">;</span> <span class="n">exact</span> <span class="n">char_p</span><span class="bp">.</span><span class="n">cast_eq_zero_iff</span> <span class="n">α</span> <span class="o">(</span><span class="n">ring_char</span> <span class="n">α</span><span class="o">)</span>
 
-theorem ring_char.eq (α : Type u) [semiring α] {p : ℕ} (C : char_p α p) : p = ring_char α :=
-(classical.some_spec (char_p.exists_unique α)).2 p C
-```
+<span class="kn">theorem</span> <span class="n">ring_char</span><span class="bp">.</span><span class="n">eq</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">[</span><span class="n">semiring</span> <span class="n">α</span><span class="o">]</span> <span class="o">{</span><span class="n">p</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">}</span> <span class="o">(</span><span class="n">C</span> <span class="o">:</span> <span class="n">char_p</span> <span class="n">α</span> <span class="n">p</span><span class="o">)</span> <span class="o">:</span> <span class="n">p</span> <span class="bp">=</span> <span class="n">ring_char</span> <span class="n">α</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">classical</span><span class="bp">.</span><span class="n">some_spec</span> <span class="o">(</span><span class="n">char_p</span><span class="bp">.</span><span class="n">exists_unique</span> <span class="n">α</span><span class="o">))</span><span class="bp">.</span><span class="mi">2</span> <span class="n">p</span> <span class="n">C</span>
+</pre></div>
 
 #### [ Kenny Lau (Oct 16 2018 at 22:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135926909):
-how is this?
+<p>how is this?</p>
 
 #### [ Kevin Buzzard (Oct 16 2018 at 22:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135927432):
-```quote
-how can the proof still work now that I turned `[]` to `()`?
-```
-Type class inference just grabs anything it can find to the left of the colon. The round and square brackets are just for the signature of the theorem, they don't affect how type class inference works in the proof. This is not so well-known because it's not common to put a typeclass left of the colon and not in a square bracket.
+<blockquote>
+<p>how can the proof still work now that I turned <code>[]</code> to <code>()</code>?</p>
+</blockquote>
+<p>Type class inference just grabs anything it can find to the left of the colon. The round and square brackets are just for the signature of the theorem, they don't affect how type class inference works in the proof. This is not so well-known because it's not common to put a typeclass left of the colon and not in a square bracket.</p>
 
 #### [ Kevin Buzzard (Oct 16 2018 at 22:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135927447):
-I discovered it a few weeks ago when I was trying to understand Patrick's type class hell with his completions and had exactly the same reaction.
+<p>I discovered it a few weeks ago when I was trying to understand Patrick's type class hell with his completions and had exactly the same reaction.</p>
 
 #### [ Kevin Buzzard (Oct 16 2018 at 22:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135927490):
-I've had to construct that argument from memory because my search for the conversation failed. Hopefully it's some sort of approximation to the truth.
+<p>I've had to construct that argument from memory because my search for the conversation failed. Hopefully it's some sort of approximation to the truth.</p>
 
 #### [ Bryan Gin-ge Chen (Oct 16 2018 at 22:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135927856):
-I guess it's [this conversation?](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/subject/Separation.20stuff/near/134261338) I found it by searching for "left of colon".
+<p>I guess it's <a href="#narrow/stream/116395-maths/subject/Separation.20stuff/near/134261338" title="#narrow/stream/116395-maths/subject/Separation.20stuff/near/134261338">this conversation?</a> I found it by searching for "left of colon".</p>
 
 #### [ Kenny Lau (Oct 16 2018 at 22:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135927950):
-@**Mario Carneiro** Could you help me with some typeclass problems? It's in L324 here: https://github.com/kckennylau/Lean/blob/master/perfect_closure.lean#L324
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> Could you help me with some typeclass problems? It's in L324 here: <a href="https://github.com/kckennylau/Lean/blob/master/perfect_closure.lean#L324" target="_blank" title="https://github.com/kckennylau/Lean/blob/master/perfect_closure.lean#L324">https://github.com/kckennylau/Lean/blob/master/perfect_closure.lean#L324</a></p>
 
 #### [ Kenny Lau (Oct 16 2018 at 22:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135927966):
-Lean can't figure out the coercion in `(↑x : perfect_closure α p)`
+<p>Lean can't figure out the coercion in <code>(↑x : perfect_closure α p)</code></p>
 
 #### [ Kevin Buzzard (Oct 16 2018 at 22:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135928018):
-https://leanprover.zulipchat.com/#narrow/stream/116395-maths/subject/Separation.20stuff/near/134261591
+<p><a href="#narrow/stream/116395-maths/subject/Separation.20stuff/near/134261591" title="#narrow/stream/116395-maths/subject/Separation.20stuff/near/134261591">https://leanprover.zulipchat.com/#narrow/stream/116395-maths/subject/Separation.20stuff/near/134261591</a></p>
 
 #### [ Kevin Buzzard (Oct 16 2018 at 22:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135928021):
-You owe Mario a light bulb
+<p>You owe Mario a light bulb</p>
 
 #### [ Kenny Lau (Oct 16 2018 at 22:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135928069):
-done
+<p>done</p>
 
 #### [ Kevin Buzzard (Oct 16 2018 at 22:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135928099):
-(thanks Bryan)
+<p>(thanks Bryan)</p>
 
 #### [ Kenny Lau (Oct 16 2018 at 22:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135928788):
-@**Mario Carneiro** never mind it's stupid
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> never mind it's stupid</p>
 
 
 {% endraw %}

@@ -12,10 +12,10 @@ permalink: archive/113488general/12885transfiniteinduction.html
 
 {% raw %}
 #### [ Kenny Lau (Mar 04 2018 at 18:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/transfinite%20induction/near/123268706):
-Just for curiosity, is this a thing in Lean?
+<p>Just for curiosity, is this a thing in Lean?</p>
 
 #### [ Patrick Massot (Mar 04 2018 at 18:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/transfinite%20induction/near/123269021):
-https://gitter.im/leanprover_public/Lobby?at=5a4a3b7a232e79134db2c204
+<p><a href="https://gitter.im/leanprover_public/Lobby?at=5a4a3b7a232e79134db2c204" target="_blank" title="https://gitter.im/leanprover_public/Lobby?at=5a4a3b7a232e79134db2c204">https://gitter.im/leanprover_public/Lobby?at=5a4a3b7a232e79134db2c204</a></p>
 
 
 {% endraw %}

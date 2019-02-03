@@ -10,6 +10,28 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [Mathlib and LEAN_PATH](47969MathlibandLEANPATH.html) (63 messages, latest: Feb 02 2019 at 16:50)
+
+* [Angle brackets](06135Anglebrackets.html) (10 messages, latest: Feb 01 2019 at 21:18)
+
+* [reduce sin](36515reducesin.html) (11 messages, latest: Jan 30 2019 at 19:57)
+
+* [GCD for ideals, fractional field](07195GCDforidealsfractionalfield.html) (8 messages, latest: Jan 29 2019 at 10:50)
+
+* [definition for GCD for ideals, fractional field](52459definitionforGCDforidealsfractionalfield.html) (3 messages, latest: Jan 29 2019 at 09:15)
+
+* [BNF for lean?](81181BNFforlean.html) (4 messages, latest: Jan 27 2019 at 14:16)
+
+* [thanks](01834thanks.html) (1 message, latest: Jan 25 2019 at 12:16)
+
+* [proving trivial facts about types](28546provingtrivialfactsabouttypes.html) (14 messages, latest: Jan 24 2019 at 16:21)
+
+* [rfl vs dec_trivial for inequality example](65068rflvsdectrivialforinequalityexample.html) (3 messages, latest: Jan 24 2019 at 13:02)
+
+* [VS Code terminal popping up](71171VSCodeterminalpoppingup.html) (13 messages, latest: Jan 23 2019 at 23:03)
+
+* [contrapos_final without tactics?](70241contraposfinalwithouttactics.html) (7 messages, latest: Jan 23 2019 at 18:13)
+
 * [noob question(s)](52075noobquestions.html) (147 messages, latest: Jan 23 2019 at 01:37)
 
 * [lagrange theorem](10902lagrangetheorem.html) (4 messages, latest: Jan 22 2019 at 09:08)

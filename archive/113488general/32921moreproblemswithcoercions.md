@@ -12,21 +12,20 @@ permalink: archive/113488general/32921moreproblemswithcoercions.html
 
 {% raw %}
 #### [ Scott Morrison (Aug 06 2018 at 07:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20problems%20with%20coercions/near/130958740):
-So... I've been trying to implement @**Mario Carneiro**'s suggestion that I define the coercion allowing `F X` for a functor `F` on an object `X`, and define a @[simp] lemma unfolding the coercion.
+<p>So... I've been trying to implement <span class="user-mention" data-user-id="110049">@Mario Carneiro</span>'s suggestion that I define the coercion allowing <code>F X</code> for a functor <code>F</code> on an object <code>X</code>, and define a @[simp] lemma unfolding the coercion.</p>
 
 #### [ Scott Morrison (Aug 06 2018 at 07:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20problems%20with%20coercions/near/130958750):
-I immediately run into trouble, however, where `simp` fails to apply the simp lemma, because a `motive is not correct`:
+<p>I immediately run into trouble, however, where <code>simp</code> fails to apply the simp lemma, because a <code>motive is not correct</code>:</p>
 
 #### [ Scott Morrison (Aug 06 2018 at 07:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20problems%20with%20coercions/near/130958756):
-Here's my slightly minimised example:
+<p>Here's my slightly minimised example:</p>
 
 #### [ Scott Morrison (Aug 06 2018 at 07:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20problems%20with%20coercions/near/130958758):
-````
-namespace category_theory
+<div class="codehilite"><pre><span></span>namespace category_theory
 
 universes u v
 
-meta def obviously := `[skip]  
+meta def obviously := `[skip]
 
 class category (Obj : Type u) : Type (max u (v+1)) :=
 (Hom     : Obj → Obj → Type v)
@@ -52,7 +51,7 @@ structure Functor (C : Type u₁) [category.{u₁ v₁} C] (D : Type u₂) [cate
 
 attribute [simp] Functor.map_id Functor.functoriality
 
-infixr ` ↝ `:70 := Functor       -- type as \lea -- unfortunately ⇒ (`\functor`) is taken by core. 
+infixr ` ↝ `:70 := Functor       -- type as \lea -- unfortunately ⇒ (`\functor`) is taken by core.
 
 namespace Functor
 
@@ -73,12 +72,12 @@ include 𝒞 𝒟 ℰ
 
 set_option trace.check true
 
-definition comp (F : C ↝ D) (G : D ↝ E) : C ↝ E := 
+definition comp (F : C ↝ D) (G : D ↝ E) : C ↝ E :=
 { obj    := λ X, G (F X),
   map    := λ _ _ f, G.map (F.map f),
-  map_id := begin 
-             intros, 
-             simp, /- why didn't that unfold the coercion? -/
+  map_id := begin
+             intros,
+             simp, /- why didn&#39;t that unfold the coercion? -/
              rw unfold_obj_coercion F X /- oh. -/
             end,
   functoriality := begin intros, simp end }
@@ -87,76 +86,76 @@ end
 end Functor
 
 end category_theory
-````
+</pre></div>
 
 #### [ Scott Morrison (Aug 06 2018 at 07:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20problems%20with%20coercions/near/130958801):
-(Being told my motive is not correct always makes me feel very guilty.)
+<p>(Being told my motive is not correct always makes me feel very guilty.)</p>
 
 #### [ Scott Morrison (Aug 06 2018 at 07:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20problems%20with%20coercions/near/130958803):
-Hopefully I'm just doing something dumb here...
+<p>Hopefully I'm just doing something dumb here...</p>
 
 #### [ Scott Morrison (Aug 06 2018 at 07:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20problems%20with%20coercions/near/130958904):
------
+<hr>
 
 #### [ Mario Carneiro (Aug 06 2018 at 07:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20problems%20with%20coercions/near/130958979):
-You have to use `dsimp`
+<p>You have to use <code>dsimp</code></p>
 
 #### [ Mario Carneiro (Aug 06 2018 at 07:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20problems%20with%20coercions/near/130958983):
-is there a reason you use `by refl` instead of `rfl` to prove rfl-lemmas?
+<p>is there a reason you use <code>by refl</code> instead of <code>rfl</code> to prove rfl-lemmas?</p>
 
 #### [ Mario Carneiro (Aug 06 2018 at 07:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20problems%20with%20coercions/near/130958989):
-this messes up dsimp
+<p>this messes up dsimp</p>
 
 #### [ Scott Morrison (Aug 06 2018 at 07:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20problems%20with%20coercions/near/130959028):
-ah..
+<p>ah..</p>
 
 #### [ Scott Morrison (Aug 06 2018 at 07:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20problems%20with%20coercions/near/130959029):
-I never knew that.
+<p>I never knew that.</p>
 
 #### [ Scott Morrison (Aug 06 2018 at 07:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20problems%20with%20coercions/near/130959043):
-Okay. That should fix my problems, but wow, gross! :-)
+<p>Okay. That should fix my problems, but wow, gross! :-)</p>
 
 #### [ Mario Carneiro (Aug 06 2018 at 07:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20problems%20with%20coercions/near/130959047):
-You should always prove definitional theorems by `rfl`
+<p>You should always prove definitional theorems by <code>rfl</code></p>
 
 #### [ Mario Carneiro (Aug 06 2018 at 07:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20problems%20with%20coercions/near/130959096):
-because lean reads that specially: `A = B := rfl` means `A === B`
+<p>because lean reads that specially: <code>A = B := rfl</code> means <code>A === B</code></p>
 
 #### [ Scott Morrison (Aug 06 2018 at 07:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20problems%20with%20coercions/near/130959098):
-what does `by refl` do?
+<p>what does <code>by refl</code> do?</p>
 
 #### [ Mario Carneiro (Aug 06 2018 at 07:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20problems%20with%20coercions/near/130959100):
-It proves the theorem normally, so you just end up learning `A = B`
+<p>It proves the theorem normally, so you just end up learning <code>A = B</code></p>
 
 #### [ Scott Morrison (Aug 06 2018 at 07:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20problems%20with%20coercions/near/130959101):
-surely that's the same thing
+<p>surely that's the same thing</p>
 
 #### [ Scott Morrison (Aug 06 2018 at 07:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20problems%20with%20coercions/near/130959109):
-but isn't the proof term the same either way?
+<p>but isn't the proof term the same either way?</p>
 
 #### [ Scott Morrison (Aug 06 2018 at 07:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20problems%20with%20coercions/near/130959111):
-I guess I can check.
+<p>I guess I can check.</p>
 
 #### [ Mario Carneiro (Aug 06 2018 at 07:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20problems%20with%20coercions/near/130959112):
-it is, but the literal token `rfl` is used by the lean parser to add the `@[_refl_lemma]` attribute
+<p>it is, but the literal token <code>rfl</code> is used by the lean parser to add the <code>@[_refl_lemma]</code> attribute</p>
 
 #### [ Johan Commelin (Aug 06 2018 at 07:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20problems%20with%20coercions/near/130959361):
-It really is a pity that `refl` and `rfl` have such important but subtle distinctions, while only differing by one letter.
+<p>It really is a pity that <code>refl</code> and <code>rfl</code> have such important but subtle distinctions, while only differing by one letter.</p>
 
 #### [ Johan Commelin (Aug 06 2018 at 07:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20problems%20with%20coercions/near/130959364):
-And then `rfl` (without `e`) adds `@[_refl_lemma]` (with `e`)!
+<p>And then <code>rfl</code> (without <code>e</code>) adds <code>@[_refl_lemma]</code> (with <code>e</code>)!</p>
 
 #### [ Mario Carneiro (Aug 06 2018 at 08:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20problems%20with%20coercions/near/130960266):
-to be fair, one is a tactic and one is a term, so they differ by more than one letter
+<p>to be fair, one is a tactic and one is a term, so they differ by more than one letter</p>
 
 #### [ Mario Carneiro (Aug 06 2018 at 08:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20problems%20with%20coercions/near/130960280):
-although you shouldn't confuse `rfl` with `eq.refl` either
+<p>although you shouldn't confuse <code>rfl</code> with <code>eq.refl</code> either</p>
 
 #### [ Mario Carneiro (Aug 06 2018 at 08:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20problems%20with%20coercions/near/130960327):
-similarly there is `iff.rfl` and `iff.refl`, etc. The naming convention has `rfl` have an implicit argument and `refl` has an explicit arg
+<p>similarly there is <code>iff.rfl</code> and <code>iff.refl</code>, etc. The naming convention has <code>rfl</code> have an implicit argument and <code>refl</code> has an explicit arg</p>
 
 #### [ Scott Morrison (Aug 06 2018 at 08:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20problems%20with%20coercions/near/130961287):
-Thanks for explaining this `rfl` vs `refl` thing. Switching to `rfl` really helps, both here and elsewhere. :-)
+<p>Thanks for explaining this <code>rfl</code> vs <code>refl</code> thing. Switching to <code>rfl</code> really helps, both here and elsewhere. :-)</p>
 
 
 {% endraw %}

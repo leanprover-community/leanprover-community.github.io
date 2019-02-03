@@ -12,115 +12,112 @@ permalink: archive/113488general/92086computevalueoffunction.html
 
 {% raw %}
 #### [ jmc (Mar 19 2018 at 21:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/compute%20value%20of%20function/near/123932056):
-Hi. Lean-newbie here. I've got a function f : \N \to \Z with a pretty involved definition. I would like to see what Lean thinks that the value of f is on 0,1,2,3 for example.
-My current approach has been:
-```lean
-example : f 0 = n := refl
-```
-and then just trying different values of n, until I am lucky. But there should be a better way...
+<p>Hi. Lean-newbie here. I've got a function f : \N \to \Z with a pretty involved definition. I would like to see what Lean thinks that the value of f is on 0,1,2,3 for example.<br>
+My current approach has been:</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">:</span> <span class="n">f</span> <span class="mi">0</span> <span class="bp">=</span> <span class="n">n</span> <span class="o">:=</span> <span class="n">refl</span>
+</pre></div>
 
-(Ok, I just saw there is a "new members" stream. If someone can move this topic overthere, please feel free to do so.)
+
+<p>and then just trying different values of n, until I am lucky. But there should be a better way...</p>
+<p>(Ok, I just saw there is a "new members" stream. If someone can move this topic overthere, please feel free to do so.)</p>
 
 #### [ Simon Hudon (Mar 19 2018 at 21:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/compute%20value%20of%20function/near/123932203):
-Try:
-
-```lean
-#eval f 0
-#eval f 1
-#eval f 2
-#eval f 3
-```
+<p>Try:</p>
+<div class="codehilite"><pre><span></span><span class="bp">#</span><span class="kn">eval</span> <span class="n">f</span> <span class="mi">0</span>
+<span class="bp">#</span><span class="kn">eval</span> <span class="n">f</span> <span class="mi">1</span>
+<span class="bp">#</span><span class="kn">eval</span> <span class="n">f</span> <span class="mi">2</span>
+<span class="bp">#</span><span class="kn">eval</span> <span class="n">f</span> <span class="mi">3</span>
+</pre></div>
 
 #### [ Moses Schönfinkel (Mar 19 2018 at 21:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/compute%20value%20of%20function/near/123932204):
-You can just `#eval f x`
+<p>You can just <code>#eval f x</code></p>
 
 #### [ jmc (Mar 19 2018 at 21:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/compute%20value%20of%20function/near/123932212):
-Aah, thanks!
+<p>Aah, thanks!</p>
 
 #### [ Simon Hudon (Mar 19 2018 at 21:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/compute%20value%20of%20function/near/123932223):
-It uses the virtual machine so if `f` is computation intensive, this will ensure swift execution
+<p>It uses the virtual machine so if <code>f</code> is computation intensive, this will ensure swift execution</p>
 
 #### [ Moses Schönfinkel (Mar 19 2018 at 21:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/compute%20value%20of%20function/near/123932268):
-If you want slow execution, you can try `#reduce f x` ;).
+<p>If you want slow execution, you can try <code>#reduce f x</code> ;).</p>
 
 #### [ Moses Schönfinkel (Mar 19 2018 at 21:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/compute%20value%20of%20function/near/123932273):
-(Also your `refl` trick made me giggle so you're awarded a pointless internet point.)
+<p>(Also your <code>refl</code> trick made me giggle so you're awarded a pointless internet point.)</p>
 
 #### [ Simon Hudon (Mar 19 2018 at 21:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/compute%20value%20of%20function/near/123932327):
-(I think we can use octopuses to award those internet points)
+<p>(I think we can use octopuses to award those internet points)</p>
 
 #### [ Moses Schönfinkel (Mar 19 2018 at 21:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/compute%20value%20of%20function/near/123932332):
-What an excellent idea.
+<p>What an excellent idea.</p>
 
 #### [ jmc (Mar 19 2018 at 21:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/compute%20value%20of%20function/near/123932348):
-Thanks for the point!
+<p>Thanks for the point!</p>
 
 #### [ Simon Hudon (Mar 19 2018 at 21:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/compute%20value%20of%20function/near/123932349):
-thanks)
+<p>thanks)</p>
 
 #### [ Andrew Ashworth (Mar 19 2018 at 21:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/compute%20value%20of%20function/near/123932352):
-the `rfl` thing is considered good style if you go by "Software Foundations"
+<p>the <code>rfl</code> thing is considered good style if you go by "Software Foundations"</p>
 
 #### [ Andrew Ashworth (Mar 19 2018 at 21:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/compute%20value%20of%20function/near/123932357):
-it's basically inline unit testing
+<p>it's basically inline unit testing</p>
 
 #### [ Moses Schönfinkel (Mar 19 2018 at 21:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/compute%20value%20of%20function/near/123932360):
-I have no recollection of that in SF o_O?
+<p>I have no recollection of that in SF o_O?</p>
 
 #### [ Moses Schönfinkel (Mar 19 2018 at 21:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/compute%20value%20of%20function/near/123932361):
-Aaah right.
+<p>Aaah right.</p>
 
 #### [ Moses Schönfinkel (Mar 19 2018 at 21:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/compute%20value%20of%20function/near/123932362):
-You mean his auto-tests.
+<p>You mean his auto-tests.</p>
 
 #### [ Andrew Ashworth (Mar 19 2018 at 21:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/compute%20value%20of%20function/near/123932423):
-yeah, for ex
+<p>yeah, for ex</p>
 
 #### [ Andrew Ashworth (Mar 19 2018 at 21:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/compute%20value%20of%20function/near/123932425):
-```coq
-Definition hd (default:nat) (l:natlist) : nat :=
-  match l with
-  | nil ⇒ default
-  | h :: t ⇒ h
-  end.
-Definition tl (l:natlist) : natlist :=
-  match l with
-  | nil ⇒ nil
-  | h :: t ⇒ t
-  end.
-Example test_hd1: hd 0 [1;2;3] = 1.
-Proof. reflexivity. Qed.
-Example test_hd2: hd 0 [] = 0.
-Proof. reflexivity. Qed.
-Example test_tl: tl [1;2;3] = [2;3].
-Proof. reflexivity. Qed.
-```
+<div class="codehilite"><pre><span></span><span class="kn">Definition</span> <span class="n">hd</span> <span class="o">(</span><span class="n">default</span><span class="o">:</span><span class="kt">nat</span><span class="o">)</span> <span class="o">(</span><span class="n">l</span><span class="o">:</span><span class="n">natlist</span><span class="o">)</span> <span class="o">:</span> <span class="kt">nat</span> <span class="o">:=</span>
+  <span class="k">match</span> <span class="n">l</span> <span class="k">with</span>
+  <span class="o">|</span> <span class="n">nil</span> <span class="err">⇒</span> <span class="n">default</span>
+  <span class="o">|</span> <span class="n">h</span> <span class="o">::</span> <span class="n">t</span> <span class="err">⇒</span> <span class="n">h</span>
+  <span class="k">end</span><span class="o">.</span>
+<span class="kn">Definition</span> <span class="n">tl</span> <span class="o">(</span><span class="n">l</span><span class="o">:</span><span class="n">natlist</span><span class="o">)</span> <span class="o">:</span> <span class="n">natlist</span> <span class="o">:=</span>
+  <span class="k">match</span> <span class="n">l</span> <span class="k">with</span>
+  <span class="o">|</span> <span class="n">nil</span> <span class="err">⇒</span> <span class="n">nil</span>
+  <span class="o">|</span> <span class="n">h</span> <span class="o">::</span> <span class="n">t</span> <span class="err">⇒</span> <span class="n">t</span>
+  <span class="k">end</span><span class="o">.</span>
+<span class="kn">Example</span> <span class="n">test_hd1</span><span class="o">:</span> <span class="n">hd</span> <span class="mi">0</span> <span class="o">[</span><span class="mi">1</span><span class="o">;</span><span class="mi">2</span><span class="o">;</span><span class="mi">3</span><span class="o">]</span> <span class="o">=</span> <span class="mi">1</span><span class="o">.</span>
+<span class="kn">Proof</span><span class="o">.</span> <span class="kp">reflexivity</span><span class="o">.</span> <span class="kn">Qed</span><span class="o">.</span>
+<span class="kn">Example</span> <span class="n">test_hd2</span><span class="o">:</span> <span class="n">hd</span> <span class="mi">0</span> <span class="bp">[]</span> <span class="o">=</span> <span class="mi">0</span><span class="o">.</span>
+<span class="kn">Proof</span><span class="o">.</span> <span class="kp">reflexivity</span><span class="o">.</span> <span class="kn">Qed</span><span class="o">.</span>
+<span class="kn">Example</span> <span class="n">test_tl</span><span class="o">:</span> <span class="n">tl</span> <span class="o">[</span><span class="mi">1</span><span class="o">;</span><span class="mi">2</span><span class="o">;</span><span class="mi">3</span><span class="o">]</span> <span class="o">=</span> <span class="o">[</span><span class="mi">2</span><span class="o">;</span><span class="mi">3</span><span class="o">].</span>
+<span class="kn">Proof</span><span class="o">.</span> <span class="kp">reflexivity</span><span class="o">.</span> <span class="kn">Qed</span><span class="o">.</span>
+</pre></div>
 
 #### [ Moses Schönfinkel (Mar 19 2018 at 21:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/compute%20value%20of%20function/near/123932428):
-Yeah absolutely.
+<p>Yeah absolutely.</p>
 
 #### [ Moses Schönfinkel (Mar 19 2018 at 21:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/compute%20value%20of%20function/near/123932431):
-Oh boy that book is such an excellent introduction to these things.
+<p>Oh boy that book is such an excellent introduction to these things.</p>
 
 #### [ Moses Schönfinkel (Mar 19 2018 at 21:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/compute%20value%20of%20function/near/123932446):
-Compare that to CPDT... :-\.
+<p>Compare that to CPDT... :-\.</p>
 
 #### [ Moses Schönfinkel (Mar 19 2018 at 21:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/compute%20value%20of%20function/near/123932448):
-(Sorry Adam...)
+<p>(Sorry Adam...)</p>
 
 #### [ Andrew Ashworth (Mar 19 2018 at 21:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/compute%20value%20of%20function/near/123932498):
-yeah, if you do 2 semesters of software foundations
+<p>yeah, if you do 2 semesters of software foundations</p>
 
 #### [ Andrew Ashworth (Mar 19 2018 at 21:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/compute%20value%20of%20function/near/123932500):
-first
+<p>first</p>
 
 #### [ Andrew Ashworth (Mar 19 2018 at 21:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/compute%20value%20of%20function/near/123932503):
-maybe you can understand cpdt, except you still won't
+<p>maybe you can understand cpdt, except you still won't</p>
 
 #### [ jmc (Mar 19 2018 at 21:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/compute%20value%20of%20function/near/123932504):
-Anyway, the function in question is the Ramanujan tau function (https://en.wikipedia.org/wiki/Ramanujan%27s_tau_function)
-Already `#reduce \tau 2` is extremely slow for my implementation.
-But `#eval \tau 4` is pretty fast. And the first 5 values are correct (^;
+<p>Anyway, the function in question is the Ramanujan tau function (<a href="https://en.wikipedia.org/wiki/Ramanujan%27s_tau_function" target="_blank" title="https://en.wikipedia.org/wiki/Ramanujan%27s_tau_function">https://en.wikipedia.org/wiki/Ramanujan%27s_tau_function</a>)<br>
+Already <code>#reduce \tau 2</code> is extremely slow for my implementation.<br>
+But <code>#eval \tau 4</code> is pretty fast. And the first 5 values are correct (^;</p>
 
 
 {% endraw %}

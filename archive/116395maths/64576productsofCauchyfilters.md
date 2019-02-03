@@ -12,210 +12,207 @@ permalink: archive/116395maths/64576productsofCauchyfilters.html
 
 {% raw %}
 #### [ Patrick Massot (Jul 24 2018 at 21:39)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20Cauchy%20filters/near/130232215):
-I need that a product of Cauchy filters is Cauchy. I couldn't see it in mathlib, so I wrote a couple of lines on paper and decided I should be able to brute force Lean to swallow it. The result on https://gist.github.com/PatrickMassot/aca4545c10aa9d96bf37d9231fb3470c is not pretty (even if you cut in half the two redundant parts). Here brutality is to go all the way down to elements of our uniform spaces. I suspect I missed (or mathlib is missing) some support lemmas which would allow to operate at a higher level. @**Mario Carneiro** and @**Johannes Hölzl**, this is probably a good occasion to set a new golfing factor record.
+<p>I need that a product of Cauchy filters is Cauchy. I couldn't see it in mathlib, so I wrote a couple of lines on paper and decided I should be able to brute force Lean to swallow it. The result on <a href="https://gist.github.com/PatrickMassot/aca4545c10aa9d96bf37d9231fb3470c" target="_blank" title="https://gist.github.com/PatrickMassot/aca4545c10aa9d96bf37d9231fb3470c">https://gist.github.com/PatrickMassot/aca4545c10aa9d96bf37d9231fb3470c</a> is not pretty (even if you cut in half the two redundant parts). Here brutality is to go all the way down to elements of our uniform spaces. I suspect I missed (or mathlib is missing) some support lemmas which would allow to operate at a higher level. <span class="user-mention" data-user-id="110049">@Mario Carneiro</span> and <span class="user-mention" data-user-id="110294">@Johannes Hölzl</span>, this is probably a good occasion to set a new golfing factor record.</p>
 
 #### [ Patrick Massot (Jul 24 2018 at 21:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20Cauchy%20filters/near/130232299):
-@**Kevin Buzzard** if we manage to formalize perfectoid spaces, and someone asks me: "Wow, so you know about perfectoid spaces?" I'll answer "Yeah, it's all about filters...".
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> if we manage to formalize perfectoid spaces, and someone asks me: "Wow, so you know about perfectoid spaces?" I'll answer "Yeah, it's all about filters...".</p>
 
 #### [ Kevin Buzzard (Jul 24 2018 at 22:26)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20Cauchy%20filters/near/130234862):
-Oh we'll definitely formalise perfectoid spaces -- although perhaps not before Scholze gets his fields medal. A lot of it is about completions, for sure...
+<p>Oh we'll definitely formalise perfectoid spaces -- although perhaps not before Scholze gets his fields medal. A lot of it is about completions, for sure...</p>
 
 #### [ Patrick Massot (Jul 24 2018 at 22:29)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20Cauchy%20filters/near/130235030):
-We still have one week
+<p>We still have one week</p>
 
 #### [ Patrick Massot (Jul 24 2018 at 22:30)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20Cauchy%20filters/near/130235068):
-How far are you from perfectoid spaces if you assume topological rings have completions?
+<p>How far are you from perfectoid spaces if you assume topological rings have completions?</p>
 
 #### [ Kevin Buzzard (Jul 24 2018 at 22:36)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20Cauchy%20filters/near/130235581):
-I need quotient groups.
+<p>I need quotient groups.</p>
 
 #### [ Patrick Massot (Jul 24 2018 at 22:39)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20Cauchy%20filters/near/130235768):
-Don't you have quotient groups?
+<p>Don't you have quotient groups?</p>
 
 #### [ Kevin Buzzard (Jul 24 2018 at 22:39)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20Cauchy%20filters/near/130235778):
-I wrote something, and then Chris wrote something else which probably contradicts it, and he PR'd his to mathlib. There are just so many stupid things which aren't there. I can't define what it means for a valuation to be continuous without quotient rings, fields of fractions etc. It might be possible to do within a week.
+<p>I wrote something, and then Chris wrote something else which probably contradicts it, and he PR'd his to mathlib. There are just so many stupid things which aren't there. I can't define what it means for a valuation to be continuous without quotient rings, fields of fractions etc. It might be possible to do within a week.</p>
 
 #### [ Kevin Buzzard (Jul 24 2018 at 22:39)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20Cauchy%20filters/near/130235798):
-But with schemes there was a period of several months when I thought it could all be done in a week and then another hitch appeared.
+<p>But with schemes there was a period of several months when I thought it could all be done in a week and then another hitch appeared.</p>
 
 #### [ Kevin Buzzard (Jul 24 2018 at 22:39)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20Cauchy%20filters/near/130235801):
-I'll take a look now.
+<p>I'll take a look now.</p>
 
 #### [ Patrick Massot (Jul 24 2018 at 22:40)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20Cauchy%20filters/near/130235900):
-I hope I'll be done with completions before the end of this week (but I had the same hope one week ago)
+<p>I hope I'll be done with completions before the end of this week (but I had the same hope one week ago)</p>
 
 #### [ Patrick Massot (Jul 24 2018 at 22:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20Cauchy%20filters/near/130235932):
-I had to change my strategy to understand completions of products because I've been too optimistic
+<p>I had to change my strategy to understand completions of products because I've been too optimistic</p>
 
 #### [ Kevin Buzzard (Jul 24 2018 at 22:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20Cauchy%20filters/near/130235942):
-Oh I remember now -- I wrote a list of what I needed in the perfectoid thread. I need that a free group is generated by its generators. Some things are only proved for multiplicative groups and some only for additive.
+<p>Oh I remember now -- I wrote a list of what I needed in the perfectoid thread. I need that a free group is generated by its generators. Some things are only proved for multiplicative groups and some only for additive.</p>
 
 #### [ Patrick Massot (Jul 24 2018 at 22:42)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20Cauchy%20filters/near/130236021):
-Maybe @**Kenny Lau** can help here. He worked a lot on free groups
+<p>Maybe <span class="user-mention" data-user-id="110064">@Kenny Lau</span> can help here. He worked a lot on free groups</p>
 
 #### [ Kevin Buzzard (Jul 24 2018 at 22:45)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20Cauchy%20filters/near/130236195):
-```lean
-import group_theory.coset 
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">group_theory</span><span class="bp">.</span><span class="n">coset</span>
 
--- for images
-import data.set.basic
+<span class="c1">-- for images</span>
+<span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">set</span><span class="bp">.</span><span class="n">basic</span>
 
--- finsupp for free abelian groups
-import data.finsupp 
+<span class="c1">-- finsupp for free abelian groups</span>
+<span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">finsupp</span>
 
-universes u v 
+<span class="n">universes</span> <span class="n">u</span> <span class="n">v</span>
 
-variables (G : Type u) [group G] (H : Type v) [group H] (S : set G)
+<span class="kn">variables</span> <span class="o">(</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">[</span><span class="n">group</span> <span class="n">G</span><span class="o">]</span> <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">)</span> <span class="o">[</span><span class="n">group</span> <span class="n">H</span><span class="o">]</span> <span class="o">(</span><span class="n">S</span> <span class="o">:</span> <span class="n">set</span> <span class="n">G</span><span class="o">)</span>
 
--- maybe use group.in_closure?
-theorem closure_image (f : G → H) [is_group_hom f] : 
-f '' (group.closure (is_group_hom.ker f) ∪ S) = group.closure (f '' S) := sorry 
+<span class="c1">-- maybe use group.in_closure?</span>
+<span class="kn">theorem</span> <span class="n">closure_image</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">G</span> <span class="bp">→</span> <span class="n">H</span><span class="o">)</span> <span class="o">[</span><span class="n">is_group_hom</span> <span class="n">f</span><span class="o">]</span> <span class="o">:</span>
+<span class="n">f</span> <span class="err">&#39;&#39;</span> <span class="o">(</span><span class="n">group</span><span class="bp">.</span><span class="n">closure</span> <span class="o">(</span><span class="n">is_group_hom</span><span class="bp">.</span><span class="n">ker</span> <span class="n">f</span><span class="o">)</span> <span class="err">∪</span> <span class="n">S</span><span class="o">)</span> <span class="bp">=</span> <span class="n">group</span><span class="bp">.</span><span class="n">closure</span> <span class="o">(</span><span class="n">f</span> <span class="err">&#39;&#39;</span> <span class="n">S</span><span class="o">)</span> <span class="o">:=</span> <span class="n">sorry</span>
 
--- don't know why we need decidable equality -- maybe some finsupp reason
-example (X : Type u) [decidable_eq X] : add_comm_group (X →₀ ℤ) := by apply_instance
+<span class="c1">-- don&#39;t know why we need decidable equality -- maybe some finsupp reason</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">[</span><span class="n">decidable_eq</span> <span class="n">X</span><span class="o">]</span> <span class="o">:</span> <span class="n">add_comm_group</span> <span class="o">(</span><span class="n">X</span> <span class="bp">→</span><span class="err">₀</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">apply_instance</span>
 
-definition group.free_ab_gens (X : Type u) [decidable_eq X] : 
-X → (X →₀ ℤ) := λ x, finsupp.single x (1 : ℤ)
+<span class="kn">definition</span> <span class="n">group</span><span class="bp">.</span><span class="n">free_ab_gens</span> <span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">[</span><span class="n">decidable_eq</span> <span class="n">X</span><span class="o">]</span> <span class="o">:</span>
+<span class="n">X</span> <span class="bp">→</span> <span class="o">(</span><span class="n">X</span> <span class="bp">→</span><span class="err">₀</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="n">finsupp</span><span class="bp">.</span><span class="n">single</span> <span class="n">x</span> <span class="o">(</span><span class="mi">1</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span>
 
-#check @group.closure 
+<span class="bp">#</span><span class="kn">check</span> <span class="bp">@</span><span class="n">group</span><span class="bp">.</span><span class="n">closure</span>
 
--- do we have to copy out all of the definitions here?
-definition group.add_closure {G : Type u} [add_group G] (S : set G) : set G := sorry 
+<span class="c1">-- do we have to copy out all of the definitions here?</span>
+<span class="kn">definition</span> <span class="n">group</span><span class="bp">.</span><span class="n">add_closure</span> <span class="o">{</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">[</span><span class="n">add_group</span> <span class="n">G</span><span class="o">]</span> <span class="o">(</span><span class="n">S</span> <span class="o">:</span> <span class="n">set</span> <span class="n">G</span><span class="o">)</span> <span class="o">:</span> <span class="n">set</span> <span class="n">G</span> <span class="o">:=</span> <span class="n">sorry</span>
 
--- maybe use finsupp.induction?
-theorem closure_free_gens (X : Type u) [decidable_eq X] : 
-group.add_closure ((group.free_ab_gens X) '' set.univ) = set.univ := sorry 
+<span class="c1">-- maybe use finsupp.induction?</span>
+<span class="kn">theorem</span> <span class="n">closure_free_gens</span> <span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">[</span><span class="n">decidable_eq</span> <span class="n">X</span><span class="o">]</span> <span class="o">:</span>
+<span class="n">group</span><span class="bp">.</span><span class="n">add_closure</span> <span class="o">((</span><span class="n">group</span><span class="bp">.</span><span class="n">free_ab_gens</span> <span class="n">X</span><span class="o">)</span> <span class="err">&#39;&#39;</span> <span class="n">set</span><span class="bp">.</span><span class="n">univ</span><span class="o">)</span> <span class="bp">=</span> <span class="n">set</span><span class="bp">.</span><span class="n">univ</span> <span class="o">:=</span> <span class="n">sorry</span>
+</pre></div>
 
-```
 
-was what I thought I needed after spending several hours proving that if something happened in universe v then it also happened in universe u.
+<p>was what I thought I needed after spending several hours proving that if something happened in universe v then it also happened in universe u.</p>
 
 #### [ Kenny Lau (Jul 25 2018 at 03:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20Cauchy%20filters/near/130249068):
-```quote
-Oh I remember now -- I wrote a list of what I needed in the perfectoid thread. I need that a free group is generated by its generators. Some things are only proved for multiplicative groups and some only for additive.
-```
-I have a similar theorem for free abelian groups (see the other thread).
+<blockquote>
+<p>Oh I remember now -- I wrote a list of what I needed in the perfectoid thread. I need that a free group is generated by its generators. Some things are only proved for multiplicative groups and some only for additive.</p>
+</blockquote>
+<p>I have a similar theorem for free abelian groups (see the other thread).</p>
 
 #### [ Kenny Lau (Jul 25 2018 at 03:47)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20Cauchy%20filters/near/130249323):
-but actually there's already enough lemmas in `free_group.lean` to prove it:
-```lean
-theorem free_group.gen :
-  set.univ = group.closure (set.range $ @free_group.of α) :=
-calc  set.univ
-    = set.range id : set.range_id.symm
-... = set.range (free_group.to_group free_group.of) : congr_arg _ $ funext $ λ _, eq.symm $ free_group.to_group.of_eq _
-... = group.closure (set.range $ @free_group.of α) : free_group.to_group.range_eq_closure
-```
+<p>but actually there's already enough lemmas in <code>free_group.lean</code> to prove it:</p>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">free_group</span><span class="bp">.</span><span class="n">gen</span> <span class="o">:</span>
+  <span class="n">set</span><span class="bp">.</span><span class="n">univ</span> <span class="bp">=</span> <span class="n">group</span><span class="bp">.</span><span class="n">closure</span> <span class="o">(</span><span class="n">set</span><span class="bp">.</span><span class="n">range</span> <span class="err">$</span> <span class="bp">@</span><span class="n">free_group</span><span class="bp">.</span><span class="n">of</span> <span class="n">α</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">calc</span>  <span class="n">set</span><span class="bp">.</span><span class="n">univ</span>
+    <span class="bp">=</span> <span class="n">set</span><span class="bp">.</span><span class="n">range</span> <span class="n">id</span> <span class="o">:</span> <span class="n">set</span><span class="bp">.</span><span class="n">range_id</span><span class="bp">.</span><span class="n">symm</span>
+<span class="bp">...</span> <span class="bp">=</span> <span class="n">set</span><span class="bp">.</span><span class="n">range</span> <span class="o">(</span><span class="n">free_group</span><span class="bp">.</span><span class="n">to_group</span> <span class="n">free_group</span><span class="bp">.</span><span class="n">of</span><span class="o">)</span> <span class="o">:</span> <span class="n">congr_arg</span> <span class="bp">_</span> <span class="err">$</span> <span class="n">funext</span> <span class="err">$</span> <span class="bp">λ</span> <span class="bp">_</span><span class="o">,</span> <span class="n">eq</span><span class="bp">.</span><span class="n">symm</span> <span class="err">$</span> <span class="n">free_group</span><span class="bp">.</span><span class="n">to_group</span><span class="bp">.</span><span class="n">of_eq</span> <span class="bp">_</span>
+<span class="bp">...</span> <span class="bp">=</span> <span class="n">group</span><span class="bp">.</span><span class="n">closure</span> <span class="o">(</span><span class="n">set</span><span class="bp">.</span><span class="n">range</span> <span class="err">$</span> <span class="bp">@</span><span class="n">free_group</span><span class="bp">.</span><span class="n">of</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">free_group</span><span class="bp">.</span><span class="n">to_group</span><span class="bp">.</span><span class="n">range_eq_closure</span>
+</pre></div>
 
 #### [ Kenny Lau (Jul 25 2018 at 03:49)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20Cauchy%20filters/near/130249394):
-but here's an alternative proof:
+<p>but here's an alternative proof:</p>
 
 #### [ Kenny Lau (Jul 25 2018 at 03:49)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20Cauchy%20filters/near/130249395):
-```lean
-import group_theory.free_group
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">group_theory</span><span class="bp">.</span><span class="n">free_group</span>
 
-universe u
-variable (α : Type u)
+<span class="kn">universe</span> <span class="n">u</span>
+<span class="kn">variable</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span>
 
-@[elab_as_eliminator]
-theorem free_group.induction_on {α : Type u}
-  {C : free_group α → Prop}
-  (z : free_group α)
-  (C0 : C 1)
-  (C1 : ∀ x, C (free_group.of x))
-  (Cn : ∀ x, C (free_group.of x) → C (free_group.of x)⁻¹)
-  (Cp : ∀ x y, C x → C y → C (x * y)) : C z :=
-quot.induction_on z $ λ L,
-list.rec_on L C0 $ λ ⟨x, b⟩ tl ih,
-bool.rec_on b (Cp _ _ (Cn _ (C1 x)) ih) (Cp _ _ (C1 x) ih)
+<span class="bp">@</span><span class="o">[</span><span class="n">elab_as_eliminator</span><span class="o">]</span>
+<span class="kn">theorem</span> <span class="n">free_group</span><span class="bp">.</span><span class="n">induction_on</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span>
+  <span class="o">{</span><span class="n">C</span> <span class="o">:</span> <span class="n">free_group</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">}</span>
+  <span class="o">(</span><span class="n">z</span> <span class="o">:</span> <span class="n">free_group</span> <span class="n">α</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">C0</span> <span class="o">:</span> <span class="n">C</span> <span class="mi">1</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">C1</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span><span class="o">,</span> <span class="n">C</span> <span class="o">(</span><span class="n">free_group</span><span class="bp">.</span><span class="n">of</span> <span class="n">x</span><span class="o">))</span>
+  <span class="o">(</span><span class="n">Cn</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span><span class="o">,</span> <span class="n">C</span> <span class="o">(</span><span class="n">free_group</span><span class="bp">.</span><span class="n">of</span> <span class="n">x</span><span class="o">)</span> <span class="bp">→</span> <span class="n">C</span> <span class="o">(</span><span class="n">free_group</span><span class="bp">.</span><span class="n">of</span> <span class="n">x</span><span class="o">)</span><span class="bp">⁻¹</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">Cp</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span> <span class="n">y</span><span class="o">,</span> <span class="n">C</span> <span class="n">x</span> <span class="bp">→</span> <span class="n">C</span> <span class="n">y</span> <span class="bp">→</span> <span class="n">C</span> <span class="o">(</span><span class="n">x</span> <span class="bp">*</span> <span class="n">y</span><span class="o">))</span> <span class="o">:</span> <span class="n">C</span> <span class="n">z</span> <span class="o">:=</span>
+<span class="n">quot</span><span class="bp">.</span><span class="n">induction_on</span> <span class="n">z</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">L</span><span class="o">,</span>
+<span class="n">list</span><span class="bp">.</span><span class="n">rec_on</span> <span class="n">L</span> <span class="n">C0</span> <span class="err">$</span> <span class="bp">λ</span> <span class="bp">⟨</span><span class="n">x</span><span class="o">,</span> <span class="n">b</span><span class="bp">⟩</span> <span class="n">tl</span> <span class="n">ih</span><span class="o">,</span>
+<span class="n">bool</span><span class="bp">.</span><span class="n">rec_on</span> <span class="n">b</span> <span class="o">(</span><span class="n">Cp</span> <span class="bp">_</span> <span class="bp">_</span> <span class="o">(</span><span class="n">Cn</span> <span class="bp">_</span> <span class="o">(</span><span class="n">C1</span> <span class="n">x</span><span class="o">))</span> <span class="n">ih</span><span class="o">)</span> <span class="o">(</span><span class="n">Cp</span> <span class="bp">_</span> <span class="bp">_</span> <span class="o">(</span><span class="n">C1</span> <span class="n">x</span><span class="o">)</span> <span class="n">ih</span><span class="o">)</span>
 
-theorem free_group.gen :
-  set.univ = group.closure (set.range $ @free_group.of α) :=
-eq.symm $ set.eq_univ_of_forall $ λ x,
-free_group.induction_on x
-  (group.in_closure.one _)
-  (λ x, group.in_closure.basic ⟨_, rfl⟩)
-  (λ x ih, group.in_closure.inv ih)
-  (λ _ _, group.in_closure.mul)
-```
+<span class="kn">theorem</span> <span class="n">free_group</span><span class="bp">.</span><span class="n">gen</span> <span class="o">:</span>
+  <span class="n">set</span><span class="bp">.</span><span class="n">univ</span> <span class="bp">=</span> <span class="n">group</span><span class="bp">.</span><span class="n">closure</span> <span class="o">(</span><span class="n">set</span><span class="bp">.</span><span class="n">range</span> <span class="err">$</span> <span class="bp">@</span><span class="n">free_group</span><span class="bp">.</span><span class="n">of</span> <span class="n">α</span><span class="o">)</span> <span class="o">:=</span>
+<span class="n">eq</span><span class="bp">.</span><span class="n">symm</span> <span class="err">$</span> <span class="n">set</span><span class="bp">.</span><span class="n">eq_univ_of_forall</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">x</span><span class="o">,</span>
+<span class="n">free_group</span><span class="bp">.</span><span class="n">induction_on</span> <span class="n">x</span>
+  <span class="o">(</span><span class="n">group</span><span class="bp">.</span><span class="n">in_closure</span><span class="bp">.</span><span class="n">one</span> <span class="bp">_</span><span class="o">)</span>
+  <span class="o">(</span><span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="n">group</span><span class="bp">.</span><span class="n">in_closure</span><span class="bp">.</span><span class="n">basic</span> <span class="bp">⟨_</span><span class="o">,</span> <span class="n">rfl</span><span class="bp">⟩</span><span class="o">)</span>
+  <span class="o">(</span><span class="bp">λ</span> <span class="n">x</span> <span class="n">ih</span><span class="o">,</span> <span class="n">group</span><span class="bp">.</span><span class="n">in_closure</span><span class="bp">.</span><span class="n">inv</span> <span class="n">ih</span><span class="o">)</span>
+  <span class="o">(</span><span class="bp">λ</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">,</span> <span class="n">group</span><span class="bp">.</span><span class="n">in_closure</span><span class="bp">.</span><span class="n">mul</span><span class="o">)</span>
+</pre></div>
 
 #### [ Kevin Buzzard (Jul 25 2018 at 10:54)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20Cauchy%20filters/near/130263318):
-Sorry -- I need it for free _abelian_ groups, as defined via the finsupp construction :-/
+<p>Sorry -- I need it for free _abelian_ groups, as defined via the finsupp construction :-/</p>
 
 #### [ Kenny Lau (Jul 25 2018 at 10:55)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20Cauchy%20filters/near/130263334):
-1. there is a free abelian group in my new tensor product (the constructive one)
+<p>1. there is a free abelian group in my new tensor product (the constructive one)</p>
 
 #### [ Kenny Lau (Jul 25 2018 at 10:55)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20Cauchy%20filters/near/130263336):
-2. there is a free abelian group in my old tensor product which uses finsupp
+<p>2. there is a free abelian group in my old tensor product which uses finsupp</p>
 
 #### [ Kevin Buzzard (Jul 25 2018 at 10:55)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20Cauchy%20filters/near/130263348):
-I don't want to use random pieces of your random repos :-(
+<p>I don't want to use random pieces of your random repos :-(</p>
 
 #### [ Kenny Lau (Jul 25 2018 at 10:56)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20Cauchy%20filters/near/130263398):
-my old tensor product is in the stacks project
+<p>my old tensor product is in the stacks project</p>
 
 #### [ Kevin Buzzard (Jul 25 2018 at 10:56)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20Cauchy%20filters/near/130263403):
-That's still a random repo :-(
+<p>That's still a random repo :-(</p>
 
 #### [ Kenny Lau (Jul 25 2018 at 10:56)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20Cauchy%20filters/near/130263409):
-:-(
+<p>:-(</p>
 
 #### [ Kevin Buzzard (Jul 25 2018 at 10:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20Cauchy%20filters/near/130263446):
-Although it sounds super-boring I wonder whether after this perfectoid thing I should stop worrying about putting hard maths into Lean and turn my attention to putting easy maths into mathlib. It might teach me a lot about how to write really good Lean code as opposed to just adequate code which runs.
+<p>Although it sounds super-boring I wonder whether after this perfectoid thing I should stop worrying about putting hard maths into Lean and turn my attention to putting easy maths into mathlib. It might teach me a lot about how to write really good Lean code as opposed to just adequate code which runs.</p>
 
 #### [ Johan Commelin (Jul 25 2018 at 11:02)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20Cauchy%20filters/near/130263656):
-Hmm, I don't know... I think you should keep the hat of visionary mathematician. There's enough soldiers in your little army to do the "easy math". There are not many people that can think about the big picture.
+<p>Hmm, I don't know... I think you should keep the hat of visionary mathematician. There's enough soldiers in your little army to do the "easy math". There are not many people that can think about the big picture.</p>
 
 #### [ Patrick Massot (Jul 25 2018 at 11:03)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20Cauchy%20filters/near/130263681):
-At some point we really need to have easy stuff though. Maybe it's because I'm learning so slowly, but I'm a bit pessimistic about Kevin's army learning enough in two summer months to be able to significantly improve the amount of easy maths in mathlib.
+<p>At some point we really need to have easy stuff though. Maybe it's because I'm learning so slowly, but I'm a bit pessimistic about Kevin's army learning enough in two summer months to be able to significantly improve the amount of easy maths in mathlib.</p>
 
 #### [ Johan Commelin (Jul 25 2018 at 11:04)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20Cauchy%20filters/near/130263731):
-True, but Kevin is writing a book. And I hope that will enable a lot of people to do more stuff. You want some exponential growth to happen. That won't happen if Kevin is busy proving stuff about quotient groups.
+<p>True, but Kevin is writing a book. And I hope that will enable a lot of people to do more stuff. You want some exponential growth to happen. That won't happen if Kevin is busy proving stuff about quotient groups.</p>
 
 #### [ Johan Commelin (Jul 25 2018 at 11:05)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20Cauchy%20filters/near/130263741):
-It might happen if every semester 10 UG's from Imperial get interested in Lean and start their own journeys.
+<p>It might happen if every semester 10 UG's from Imperial get interested in Lean and start their own journeys.</p>
 
 #### [ Kevin Buzzard (Jul 25 2018 at 11:05)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20Cauchy%20filters/near/130263742):
-I am pessimistic that by 2 months all the students will be writing mathlib-ready code. However I am very optimistic that some of them will be writing good code, and some of them will be writing code which (perhaps inefficiently) fills in holes in mathlb.
+<p>I am pessimistic that by 2 months all the students will be writing mathlib-ready code. However I am very optimistic that some of them will be writing good code, and some of them will be writing code which (perhaps inefficiently) fills in holes in mathlb.</p>
 
 #### [ Johan Commelin (Jul 25 2018 at 11:05)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20Cauchy%20filters/near/130263743):
-After 5 years...
+<p>After 5 years...</p>
 
 #### [ Johan Commelin (Jul 25 2018 at 11:06)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20Cauchy%20filters/near/130263808):
-I think it is awesome that you guys are now going to teach classes with Lean. I can't pull that off (both because of my Lean-level and career-level).
+<p>I think it is awesome that you guys are now going to teach classes with Lean. I can't pull that off (both because of my Lean-level and career-level).</p>
 
 #### [ Johan Commelin (Jul 25 2018 at 11:07)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20Cauchy%20filters/near/130263816):
-But this hasn't happened before, I think. That *math* students get taught with ITP's
+<p>But this hasn't happened before, I think. That <em>math</em> students get taught with ITP's</p>
 
 #### [ Kevin Buzzard (Jul 25 2018 at 11:07)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20Cauchy%20filters/near/130263822):
-Yes, I am trying to make Lean part of the "culture" here. When I can be bothered to actually go to work I will walk into a room with 10-15 students all doing, and talking about, Lean, and I'll spend the day helping them. I'm hoping it will slowly snowball but I have no idea how realistic this is. I'm pretty sure that in every class of 250 we have I should be able to find 5-10 who are interested and get the hang of it even with no support. The question is how many more I can get in if I make it much easier for them.
+<p>Yes, I am trying to make Lean part of the "culture" here. When I can be bothered to actually go to work I will walk into a room with 10-15 students all doing, and talking about, Lean, and I'll spend the day helping them. I'm hoping it will slowly snowball but I have no idea how realistic this is. I'm pretty sure that in every class of 250 we have I should be able to find 5-10 who are interested and get the hang of it even with no support. The question is how many more I can get in if I make it much easier for them.</p>
 
 #### [ Patrick Massot (Jul 25 2018 at 11:08)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20Cauchy%20filters/near/130263836):
-I'm not even talking of mathlib-ready code (I still can't do it myself!). But it could be close enough so that straightening it would be less work than starting from scratch.
+<p>I'm not even talking of mathlib-ready code (I still can't do it myself!). But it could be close enough so that straightening it would be less work than starting from scratch.</p>
 
 #### [ Johan Commelin (Jul 25 2018 at 11:10)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20Cauchy%20filters/near/130263940):
-Right, but already you told us that these students are starting to help each other. Which is fantastic. And 2 years from now it will be easy to find TA's for the courses you are giving.
+<p>Right, but already you told us that these students are starting to help each other. Which is fantastic. And 2 years from now it will be easy to find TA's for the courses you are giving.</p>
 
 #### [ Patrick Massot (Jul 25 2018 at 11:10)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20Cauchy%20filters/near/130263944):
-I won't have 250 students, rather more like 25 (only the students selected for a combined CS/math program). I'm not as brave as Kevin, I'll wait to see what I can do with few good students before trying to use Lean on everybody.
+<p>I won't have 250 students, rather more like 25 (only the students selected for a combined CS/math program). I'm not as brave as Kevin, I'll wait to see what I can do with few good students before trying to use Lean on everybody.</p>
 
 #### [ Johan Commelin (Jul 25 2018 at 11:11)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20Cauchy%20filters/near/130263955):
-I do agree that if you teach a course to 250 students, you might want to give them some helper-files that they should import.
+<p>I do agree that if you teach a course to 250 students, you might want to give them some helper-files that they should import.</p>
 
 #### [ Kevin Buzzard (Jul 25 2018 at 11:11)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20Cauchy%20filters/near/130263961):
-That's September's job.
+<p>That's September's job.</p>
 
 #### [ Johan Commelin (Jul 25 2018 at 11:11)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20Cauchy%20filters/near/130263963):
-I just hope that it won't eat up all your time, so that the big picture starts to die...
+<p>I just hope that it won't eat up all your time, so that the big picture starts to die...</p>
 
 #### [ Patrick Massot (Jul 25 2018 at 11:12)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20Cauchy%20filters/near/130264013):
-```quote
-I think it is awesome that you guys are now going to teach classes with Lean. I can't pull that off (both because of my Lean-level and career-level).
-```
-I hope Lean-level is irrelevant... Career level clearly is, partly because it allows to fool people into trusting you, but mostly because it allows to potentially waste time.
+<blockquote>
+<p>I think it is awesome that you guys are now going to teach classes with Lean. I can't pull that off (both because of my Lean-level and career-level).</p>
+</blockquote>
+<p>I hope Lean-level is irrelevant... Career level clearly is, partly because it allows to fool people into trusting you, but mostly because it allows to potentially waste time.</p>
 
 #### [ Johan Commelin (Jul 25 2018 at 11:14)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20Cauchy%20filters/near/130264062):
-Well, at my Lean-level, it does become relevant. You are several Lean-levels above me. Your career-level is infinitely beyond mine: tenure vs not
+<p>Well, at my Lean-level, it does become relevant. You are several Lean-levels above me. Your career-level is infinitely beyond mine: tenure vs not</p>
 
 
 {% endraw %}

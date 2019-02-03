@@ -12,146 +12,143 @@ permalink: archive/113488general/49854Lambdacalculus.html
 
 {% raw %}
 #### [ Alexander Bentkamp (Dec 17 2018 at 12:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lambda%20calculus/near/152020148):
-Hello,
-Does anyone know of a formalization of the lambda calculus in Lean?
-In particular termination of beta/eta reduction?
+<p>Hello,<br>
+Does anyone know of a formalization of the lambda calculus in Lean?<br>
+In particular termination of beta/eta reduction?</p>
 
 #### [ Patrick Massot (Dec 17 2018 at 12:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lambda%20calculus/near/152020719):
-I would have a look at https://github.com/leanprover/mathlib/tree/master/computability (but maybe this is something else)
+<p>I would have a look at <a href="https://github.com/leanprover/mathlib/tree/master/computability" target="_blank" title="https://github.com/leanprover/mathlib/tree/master/computability">https://github.com/leanprover/mathlib/tree/master/computability</a> (but maybe this is something else)</p>
 
 #### [ Patrick Massot (Dec 17 2018 at 12:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lambda%20calculus/near/152020807):
-And, if it doesn't exist, maybe having a look at https://github.com/leanprover/mathlib/blob/5613d2ecc92ce8fae9555745bd94756dec61a323/group_theory/free_group.lean#L127 and https://github.com/leanprover/mathlib/blob/57194fa57e76721a517d6969ee88a6007f0722b3/logic/relation.lean#L288 could be a good idea
+<p>And, if it doesn't exist, maybe having a look at <a href="https://github.com/leanprover/mathlib/blob/5613d2ecc92ce8fae9555745bd94756dec61a323/group_theory/free_group.lean#L127" target="_blank" title="https://github.com/leanprover/mathlib/blob/5613d2ecc92ce8fae9555745bd94756dec61a323/group_theory/free_group.lean#L127">https://github.com/leanprover/mathlib/blob/5613d2ecc92ce8fae9555745bd94756dec61a323/group_theory/free_group.lean#L127</a> and <a href="https://github.com/leanprover/mathlib/blob/57194fa57e76721a517d6969ee88a6007f0722b3/logic/relation.lean#L288" target="_blank" title="https://github.com/leanprover/mathlib/blob/57194fa57e76721a517d6969ee88a6007f0722b3/logic/relation.lean#L288">https://github.com/leanprover/mathlib/blob/57194fa57e76721a517d6969ee88a6007f0722b3/logic/relation.lean#L288</a> could be a good idea</p>
 
 #### [ Mario Carneiro (Dec 17 2018 at 12:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lambda%20calculus/near/152021502):
-I don't think lambda calculus has been done, although there are several projects in the same space
+<p>I don't think lambda calculus has been done, although there are several projects in the same space</p>
 
 #### [ Mario Carneiro (Dec 17 2018 at 12:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lambda%20calculus/near/152021571):
-I assume you are talking about simply typed lambda calculus, since of course the regular kind doesn't terminate
+<p>I assume you are talking about simply typed lambda calculus, since of course the regular kind doesn't terminate</p>
 
 #### [ Mario Carneiro (Dec 17 2018 at 12:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lambda%20calculus/near/152021611):
-I believe Jeremy has a formalization of lambda calculus, although he intended it for different purposes and I don't think he proved this property
+<p>I believe Jeremy has a formalization of lambda calculus, although he intended it for different purposes and I don't think he proved this property</p>
 
 #### [ Mario Carneiro (Dec 17 2018 at 12:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lambda%20calculus/near/152021724):
-aha, here it is: https://github.com/avigad/embed/blob/master/src/exp.lean
+<p>aha, here it is: <a href="https://github.com/avigad/embed/blob/master/src/exp.lean" target="_blank" title="https://github.com/avigad/embed/blob/master/src/exp.lean">https://github.com/avigad/embed/blob/master/src/exp.lean</a></p>
 
 #### [ Mario Carneiro (Dec 17 2018 at 12:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lambda%20calculus/near/152021734):
-it's not much more than the definition
+<p>it's not much more than the definition</p>
 
 #### [ Mario Carneiro (Dec 17 2018 at 12:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lambda%20calculus/near/152021811):
-I guess he never defined typechecking for lambda terms, since he was going for FOL
+<p>I guess he never defined typechecking for lambda terms, since he was going for FOL</p>
 
 #### [ Alexander Bentkamp (Dec 17 2018 at 13:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lambda%20calculus/near/152023395):
-Ok, thanks for the pointers. I will think about whether I'd like to work on this then. Actually, I'd like to formalize a unification procedure for lambda-terms, but I will need a formalization of the lambda-calculus for that first :-)
+<p>Ok, thanks for the pointers. I will think about whether I'd like to work on this then. Actually, I'd like to formalize a unification procedure for lambda-terms, but I will need a formalization of the lambda-calculus for that first :-)</p>
 
 #### [ Kenny Lau (Dec 17 2018 at 13:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lambda%20calculus/near/152023686):
-I might be missing something obvious here
+<p>I might be missing something obvious here</p>
 
 #### [ Kenny Lau (Dec 17 2018 at 13:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lambda%20calculus/near/152023688):
-but what happened to the Y-combinator?
+<p>but what happened to the Y-combinator?</p>
 
 #### [ Kenny Lau (Dec 17 2018 at 13:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lambda%20calculus/near/152023697):
-oh, that's what "simply typed" rules out isn't it
+<p>oh, that's what "simply typed" rules out isn't it</p>
 
 #### [ Alexander Bentkamp (Dec 17 2018 at 13:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lambda%20calculus/near/152023793):
-Yes, I wasn't very precise. I meant simply typed lambda calculus.
+<p>Yes, I wasn't very precise. I meant simply typed lambda calculus.</p>
 
 #### [ Wojciech Nawrocki (Dec 19 2018 at 23:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lambda%20calculus/near/152218893):
-Hey, I'm actually working on this right now! Is there any particular formulation that you want to use? I'm trying to figure out inherently typed terms at the moment, but I have a formulation in raw terms with a typechecking procedure and a proof of progress, basically following "Software Foundations".
+<p>Hey, I'm actually working on this right now! Is there any particular formulation that you want to use? I'm trying to figure out inherently typed terms at the moment, but I have a formulation in raw terms with a typechecking procedure and a proof of progress, basically following "Software Foundations".</p>
 
 #### [ Alexander Bentkamp (Dec 20 2018 at 16:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lambda%20calculus/near/152262213):
-Oh, that's great! As I said, I actually would like to formalize a unification procedure for lambda-terms. So if I could build on your library once it's finished, that would be perfect. I find it hard to predict which formulation would be more suitable for this, but I guess it doesn't matter too much.
+<p>Oh, that's great! As I said, I actually would like to formalize a unification procedure for lambda-terms. So if I could build on your library once it's finished, that would be perfect. I find it hard to predict which formulation would be more suitable for this, but I guess it doesn't matter too much.</p>
 
 #### [ Wojciech Nawrocki (Dec 20 2018 at 16:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lambda%20calculus/near/152263621):
-It's not pretty code and definitely not suitable for a library, but I can upload it somewhere like git when I have a bit more time if that helps your project :)
+<p>It's not pretty code and definitely not suitable for a library, but I can upload it somewhere like git when I have a bit more time if that helps your project :)</p>
 
 #### [ Wojciech Nawrocki (Dec 20 2018 at 16:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lambda%20calculus/near/152263723):
-By the way, you mean unification of the entire term assuming some holes on one (or both?) sides, not just types, right?
+<p>By the way, you mean unification of the entire term assuming some holes on one (or both?) sides, not just types, right?</p>
 
 #### [ Alexander Bentkamp (Dec 20 2018 at 18:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lambda%20calculus/near/152271412):
-Yes, with holes on both sides, but the holes are realized as free variables. In addition to that, there are also constant symbols. So for example, one could ask for unifiers of `f (X a) b` and `f c (Y d)`, where uppercase letters are variables and lowercase letters are constants. A unifier would be `{X ↦ λZ. c; Y ↦ λZ. b}`. The procedure is described here: https://www.sciencedirect.com/science/article/pii/0304397576900219
+<p>Yes, with holes on both sides, but the holes are realized as free variables. In addition to that, there are also constant symbols. So for example, one could ask for unifiers of <code>f (X a) b</code> and <code>f c (Y d)</code>, where uppercase letters are variables and lowercase letters are constants. A unifier would be <code>{X ↦ λZ. c; Y ↦ λZ. b}</code>. The procedure is described here: <a href="https://www.sciencedirect.com/science/article/pii/0304397576900219" target="_blank" title="https://www.sciencedirect.com/science/article/pii/0304397576900219">https://www.sciencedirect.com/science/article/pii/0304397576900219</a></p>
 
 #### [ Alexander Bentkamp (Dec 20 2018 at 18:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lambda%20calculus/near/152272457):
-So it sounds like you don't plan / don't have time to improve your code such that it would be usable as a library?  If I decide to formalize lambda calculus myself, I will ask you again for what you've done. But currently, I tend to using Isabelle/HOL instead for this project (Oh, oh, high treason in this chat I suppose).
+<p>So it sounds like you don't plan / don't have time to improve your code such that it would be usable as a library?  If I decide to formalize lambda calculus myself, I will ask you again for what you've done. But currently, I tend to using Isabelle/HOL instead for this project (Oh, oh, high treason in this chat I suppose).</p>
 
 #### [ Wojciech Nawrocki (Dec 20 2018 at 19:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lambda%20calculus/near/152275053):
-Oh, I do hope to make it fairly readable, just not the very partial raw-term formulation, which is what I have currently, but rather the inherently-typed one which I only started on. That said, I'm using quantified type theory to support linear typing, which is more general than simply-typed lambda, but can be instantiated (I think..) to simply-typed lambda.
+<p>Oh, I do hope to make it fairly readable, just not the very partial raw-term formulation, which is what I have currently, but rather the inherently-typed one which I only started on. That said, I'm using quantified type theory to support linear typing, which is more general than simply-typed lambda, but can be instantiated (I think..) to simply-typed lambda.</p>
 
 #### [ Josh Pollock (Dec 20 2018 at 23:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lambda%20calculus/near/152293681):
-We actually did some stlc in lean in the University of Washington's graduate PL class last fall: https://courses.cs.washington.edu/courses/cse505/17au/lec11/lean/stlc.lean
+<p>We actually did some stlc in lean in the University of Washington's graduate PL class last fall: <a href="https://courses.cs.washington.edu/courses/cse505/17au/lec11/lean/stlc.lean" target="_blank" title="https://courses.cs.washington.edu/courses/cse505/17au/lec11/lean/stlc.lean">https://courses.cs.washington.edu/courses/cse505/17au/lec11/lean/stlc.lean</a></p>
 
 #### [ Alexander Bentkamp (Dec 21 2018 at 12:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lambda%20calculus/near/152324240):
-Thanks! I'll have a closer look next year. Happy holidays :-)
+<p>Thanks! I'll have a closer look next year. Happy holidays :-)</p>
 
 #### [ Patrick Thomas (Jan 02 2019 at 21:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lambda%20calculus/near/154197485):
-I just started learning lambda calculus. If you don't mind explaining, I was wondering why the condition ```x2 \notin FV (e1) \/ x1 \notin FV (e)``` is not a part of the definition for ```lam_diff``` in ```is_subst```?
+<p>I just started learning lambda calculus. If you don't mind explaining, I was wondering why the condition <code>x2 \notin FV (e1) \/ x1 \notin FV (e)</code> is not a part of the definition for <code>lam_diff</code> in <code>is_subst</code>?</p>
 
 #### [ Mario Carneiro (Jan 02 2019 at 21:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lambda%20calculus/near/154197511):
-are you referring to a particular formalization?
+<p>are you referring to a particular formalization?</p>
 
 #### [ Patrick Thomas (Jan 02 2019 at 21:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lambda%20calculus/near/154197586):
-Sorry, yes. The one that Josh Pollock posted a link to earlier in the thread.
+<p>Sorry, yes. The one that Josh Pollock posted a link to earlier in the thread.</p>
 
 #### [ Mario Carneiro (Jan 02 2019 at 21:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lambda%20calculus/near/154197839):
-I think you are right. There are variable capturing substitutions that are admitted by `is_subst`
+<p>I think you are right. There are variable capturing substitutions that are admitted by <code>is_subst</code></p>
 
 #### [ Patrick Thomas (Jan 02 2019 at 21:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lambda%20calculus/near/154198088):
-If that is the case, would adding that condition be the simplest fix?
+<p>If that is the case, would adding that condition be the simplest fix?</p>
 
 #### [ Patrick Thomas (Jan 02 2019 at 22:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lambda%20calculus/near/154201289):
-If I try to add connectives like ```∧``` and ```∨``` to the inductive definition, I seem to get an error of "...contains variables that are not parameters". Are these permitted in inductive definitions?
+<p>If I try to add connectives like <code>∧</code> and <code>∨</code> to the inductive definition, I seem to get an error of "...contains variables that are not parameters". Are these permitted in inductive definitions?</p>
 
 #### [ Patrick Thomas (Jan 02 2019 at 22:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lambda%20calculus/near/154202553):
-Would this work?
-
-```lean
-inductive is_subst : expr → string → expr → expr → Prop
--- (λ y . P)[ x := N ] = (λ y . P [ x := N ]) if x ≠ y and y ∉ FV (N) or x ∉ FV (P)
-| lam_diff : ∀ (y : string) (P : expr) (x : string) (N : expr) (e : expr),
-	x ≠ y
-	→ ((¬ is_free N y) ∨ (¬ is_free P x))
-	→ is_subst P x N e
-	→ is_subst (expr.lam y P) x N (expr.lam y e)
-```
+<p>Would this work?</p>
+<div class="codehilite"><pre><span></span><span class="kn">inductive</span> <span class="n">is_subst</span> <span class="o">:</span> <span class="n">expr</span> <span class="bp">→</span> <span class="n">string</span> <span class="bp">→</span> <span class="n">expr</span> <span class="bp">→</span> <span class="n">expr</span> <span class="bp">→</span> <span class="kt">Prop</span>
+<span class="c1">-- (λ y . P)[ x := N ] = (λ y . P [ x := N ]) if x ≠ y and y ∉ FV (N) or x ∉ FV (P)</span>
+<span class="bp">|</span> <span class="n">lam_diff</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">y</span> <span class="o">:</span> <span class="n">string</span><span class="o">)</span> <span class="o">(</span><span class="n">P</span> <span class="o">:</span> <span class="n">expr</span><span class="o">)</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">string</span><span class="o">)</span> <span class="o">(</span><span class="n">N</span> <span class="o">:</span> <span class="n">expr</span><span class="o">)</span> <span class="o">(</span><span class="n">e</span> <span class="o">:</span> <span class="n">expr</span><span class="o">),</span>
+    <span class="n">x</span> <span class="bp">≠</span> <span class="n">y</span>
+    <span class="bp">→</span> <span class="o">((</span><span class="bp">¬</span> <span class="n">is_free</span> <span class="n">N</span> <span class="n">y</span><span class="o">)</span> <span class="bp">∨</span> <span class="o">(</span><span class="bp">¬</span> <span class="n">is_free</span> <span class="n">P</span> <span class="n">x</span><span class="o">))</span>
+    <span class="bp">→</span> <span class="n">is_subst</span> <span class="n">P</span> <span class="n">x</span> <span class="n">N</span> <span class="n">e</span>
+    <span class="bp">→</span> <span class="n">is_subst</span> <span class="o">(</span><span class="n">expr</span><span class="bp">.</span><span class="n">lam</span> <span class="n">y</span> <span class="n">P</span><span class="o">)</span> <span class="n">x</span> <span class="n">N</span> <span class="o">(</span><span class="n">expr</span><span class="bp">.</span><span class="n">lam</span> <span class="n">y</span> <span class="n">e</span><span class="o">)</span>
+</pre></div>
 
 #### [ Kenny Lau (Jan 02 2019 at 22:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lambda%20calculus/near/154203012):
-```lean
-meta constant is_free : expr → string → Prop
+<div class="codehilite"><pre><span></span><span class="n">meta</span> <span class="kn">constant</span> <span class="n">is_free</span> <span class="o">:</span> <span class="n">expr</span> <span class="bp">→</span> <span class="n">string</span> <span class="bp">→</span> <span class="kt">Prop</span>
 
-meta inductive is_subst : expr → string → expr → expr → Prop
--- (λ y . P)[ x := N ] = (λ y . P [ x := N ]) if x ≠ y and y ∉ FV (N) or x ∉ FV (P)
-| lam_diff : ∀ (y : string) (P : expr) (x : string) (N : expr) (e : expr),
-    x ≠ y
-    → ((¬ is_free N y) ∨ (¬ is_free P x))
-    → is_subst P x N e
-    → is_subst (expr.lam y sorry P sorry) x N (expr.lam y sorry e sorry)
-```
+<span class="n">meta</span> <span class="kn">inductive</span> <span class="n">is_subst</span> <span class="o">:</span> <span class="n">expr</span> <span class="bp">→</span> <span class="n">string</span> <span class="bp">→</span> <span class="n">expr</span> <span class="bp">→</span> <span class="n">expr</span> <span class="bp">→</span> <span class="kt">Prop</span>
+<span class="c1">-- (λ y . P)[ x := N ] = (λ y . P [ x := N ]) if x ≠ y and y ∉ FV (N) or x ∉ FV (P)</span>
+<span class="bp">|</span> <span class="n">lam_diff</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">y</span> <span class="o">:</span> <span class="n">string</span><span class="o">)</span> <span class="o">(</span><span class="n">P</span> <span class="o">:</span> <span class="n">expr</span><span class="o">)</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">string</span><span class="o">)</span> <span class="o">(</span><span class="n">N</span> <span class="o">:</span> <span class="n">expr</span><span class="o">)</span> <span class="o">(</span><span class="n">e</span> <span class="o">:</span> <span class="n">expr</span><span class="o">),</span>
+    <span class="n">x</span> <span class="bp">≠</span> <span class="n">y</span>
+    <span class="bp">→</span> <span class="o">((</span><span class="bp">¬</span> <span class="n">is_free</span> <span class="n">N</span> <span class="n">y</span><span class="o">)</span> <span class="bp">∨</span> <span class="o">(</span><span class="bp">¬</span> <span class="n">is_free</span> <span class="n">P</span> <span class="n">x</span><span class="o">))</span>
+    <span class="bp">→</span> <span class="n">is_subst</span> <span class="n">P</span> <span class="n">x</span> <span class="n">N</span> <span class="n">e</span>
+    <span class="bp">→</span> <span class="n">is_subst</span> <span class="o">(</span><span class="n">expr</span><span class="bp">.</span><span class="n">lam</span> <span class="n">y</span> <span class="n">sorry</span> <span class="n">P</span> <span class="n">sorry</span><span class="o">)</span> <span class="n">x</span> <span class="n">N</span> <span class="o">(</span><span class="n">expr</span><span class="bp">.</span><span class="n">lam</span> <span class="n">y</span> <span class="n">sorry</span> <span class="n">e</span> <span class="n">sorry</span><span class="o">)</span>
+</pre></div>
 
 #### [ Kenny Lau (Jan 02 2019 at 22:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lambda%20calculus/near/154203014):
-this works for me verbatim
+<p>this works for me verbatim</p>
 
 #### [ Patrick Thomas (Jan 02 2019 at 22:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lambda%20calculus/near/154203290):
-Thank you. Do you think this would be a good fix for the definition?
+<p>Thank you. Do you think this would be a good fix for the definition?</p>
 
 #### [ Kenny Lau (Jan 02 2019 at 22:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lambda%20calculus/near/154203316):
-no because it has `sorry`
+<p>no because it has <code>sorry</code></p>
 
 #### [ Patrick Thomas (Jan 02 2019 at 22:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lambda%20calculus/near/154203407):
-I'm sorry, I didn't mean verbatim, but if the definition was amended in this manner.
+<p>I'm sorry, I didn't mean verbatim, but if the definition was amended in this manner.</p>
 
 #### [ Kenny Lau (Jan 02 2019 at 22:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lambda%20calculus/near/154203425):
-my point is that I didn't change the part you complained about
+<p>my point is that I didn't change the part you complained about</p>
 
 #### [ Kenny Lau (Jan 02 2019 at 22:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lambda%20calculus/near/154203436):
-i.e. your diagnosis is not very accurate
+<p>i.e. your diagnosis is not very accurate</p>
 
 #### [ Patrick Thomas (Jan 02 2019 at 22:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lambda%20calculus/near/154203689):
-The diagnosis about the error message or about the definition in the link that Josh posted? My post may have been confusing. I don't get error messages for the code I posted, it was changed to avoid them. I was asking if it worked to fix the definition that Josh posted.
+<p>The diagnosis about the error message or about the definition in the link that Josh posted? My post may have been confusing. I don't get error messages for the code I posted, it was changed to avoid them. I was asking if it worked to fix the definition that Josh posted.</p>
 
 #### [ Kenny Lau (Jan 02 2019 at 22:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lambda%20calculus/near/154203786):
-oh... context...
+<p>oh... context...</p>
 
 #### [ Patrick Thomas (Jan 02 2019 at 22:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lambda%20calculus/near/154203800):
-Sorry about that.
+<p>Sorry about that.</p>
 
 
 {% endraw %}

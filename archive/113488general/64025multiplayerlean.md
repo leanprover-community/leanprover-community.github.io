@@ -12,130 +12,127 @@ permalink: archive/113488general/64025multiplayerlean.html
 
 {% raw %}
 #### [ Kevin Buzzard (Nov 29 2018 at 21:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/multiplayer%20lean/near/148818374):
-At Xena today about six people collaborated in CoCalc using mathlib, and they made dihedral groups! @**Amelia Livingston** @**Kenny Lau** @**Jean Lo** @**Chris Hughes** @**Calle Sönne** @**Ken Lee** together wrote the below. It was *really funny* watching it happen, not least at the beginning when people kept changing the definition of multiplication and/or inverse because it wasn't quite right, whilst other people were trying to prove things about these functions at the same time. Once it stabilised things worked quite well. They also implemented https://xenaproject.wordpress.com/2018/04/30/group-theory-revision/ . It's still going, although several of the contributors have left now; they're proving stuff like how dihedral groups aren't abelian etc.
+<p>At Xena today about six people collaborated in CoCalc using mathlib, and they made dihedral groups! <span class="user-mention" data-user-id="118107">@Amelia Livingston</span> <span class="user-mention" data-user-id="110064">@Kenny Lau</span> <span class="user-mention" data-user-id="132889">@Jean Lo</span> <span class="user-mention" data-user-id="110044">@Chris Hughes</span> <span class="user-mention" data-user-id="132603">@Calle Sönne</span> <span class="user-mention" data-user-id="132893">@Ken Lee</span> together wrote the below. It was <em>really funny</em> watching it happen, not least at the beginning when people kept changing the definition of multiplication and/or inverse because it wasn't quite right, whilst other people were trying to prove things about these functions at the same time. Once it stabilised things worked quite well. They also implemented <a href="https://xenaproject.wordpress.com/2018/04/30/group-theory-revision/" target="_blank" title="https://xenaproject.wordpress.com/2018/04/30/group-theory-revision/">https://xenaproject.wordpress.com/2018/04/30/group-theory-revision/</a> . It's still going, although several of the contributors have left now; they're proving stuff like how dihedral groups aren't abelian etc.</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">zmod</span><span class="bp">.</span><span class="n">basic</span> <span class="n">data</span><span class="bp">.</span><span class="n">bool</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">tidy</span> <span class="n">group_theory</span><span class="bp">.</span><span class="n">subgroup</span>
 
-```lean
-import data.zmod.basic data.bool tactic.tidy group_theory.subgroup
+<span class="n">class</span> <span class="n">has_group_notation</span> <span class="o">(</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="kn">extends</span> <span class="n">has_mul</span> <span class="n">G</span><span class="o">,</span> <span class="n">has_one</span> <span class="n">G</span><span class="o">,</span> <span class="n">has_inv</span> <span class="n">G</span>
 
-class has_group_notation (G : Type) extends has_mul G, has_one G, has_inv G
+<span class="kn">structure</span> <span class="n">group_core</span> <span class="o">(</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="kn">extends</span> <span class="n">has_group_notation</span> <span class="n">G</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">mul_assoc</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="n">G</span><span class="o">),</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">b</span> <span class="bp">*</span> <span class="n">c</span> <span class="bp">=</span> <span class="n">a</span> <span class="bp">*</span> <span class="o">(</span><span class="n">b</span> <span class="bp">*</span> <span class="n">c</span><span class="o">))</span>
+<span class="o">(</span><span class="n">one_mul</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">g</span> <span class="o">:</span> <span class="n">G</span><span class="o">),</span> <span class="mi">1</span> <span class="bp">*</span> <span class="n">g</span> <span class="bp">=</span> <span class="n">g</span><span class="o">)</span>
+<span class="o">(</span><span class="n">mul_left_inv</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">g</span> <span class="o">:</span> <span class="n">G</span><span class="o">),</span> <span class="n">g</span><span class="bp">⁻¹</span> <span class="bp">*</span> <span class="n">g</span> <span class="bp">=</span> <span class="mi">1</span><span class="o">)</span>
 
-structure group_core (G : Type*) extends has_group_notation G :=
-(mul_assoc : ∀ (a b c : G), a * b * c = a * (b * c))
-(one_mul : ∀ (g : G), 1 * g = g)
-(mul_left_inv : ∀ (g : G), g⁻¹ * g = 1)
+<span class="kn">private</span> <span class="kn">theorem</span> <span class="n">group_core</span><span class="bp">.</span><span class="n">mul_inv</span> <span class="o">{</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">(</span><span class="n">hg</span> <span class="o">:</span> <span class="n">group_core</span> <span class="n">G</span><span class="o">)</span> <span class="o">(</span><span class="n">g</span> <span class="o">:</span> <span class="n">G</span><span class="o">)</span> <span class="o">:</span>
+  <span class="k">by</span> <span class="n">haveI</span> <span class="o">:=</span> <span class="n">hg</span><span class="bp">.</span><span class="n">to_has_group_notation</span><span class="bp">;</span> <span class="n">exact</span> <span class="n">g</span> <span class="bp">*</span> <span class="n">g</span><span class="bp">⁻¹</span> <span class="bp">=</span> <span class="mi">1</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">letI</span> <span class="o">:=</span> <span class="n">hg</span><span class="bp">.</span><span class="n">to_has_group_notation</span><span class="bp">;</span> <span class="n">exact</span>
+<span class="k">have</span> <span class="n">g</span><span class="bp">⁻¹⁻¹</span> <span class="bp">*</span> <span class="n">g</span><span class="bp">⁻¹</span> <span class="bp">*</span> <span class="n">g</span> <span class="bp">*</span> <span class="n">g</span><span class="bp">⁻¹</span> <span class="bp">=</span> <span class="mi">1</span><span class="o">,</span>
+  <span class="k">by</span> <span class="n">rw</span> <span class="o">[</span><span class="n">hg</span><span class="bp">.</span><span class="n">mul_assoc</span><span class="o">,</span> <span class="n">hg</span><span class="bp">.</span><span class="n">mul_assoc</span><span class="o">,</span> <span class="err">←</span> <span class="n">hg</span><span class="bp">.</span><span class="n">mul_assoc</span> <span class="o">(</span><span class="n">g</span><span class="bp">⁻¹</span><span class="o">),</span> <span class="n">hg</span><span class="bp">.</span><span class="n">mul_left_inv</span><span class="o">,</span> <span class="n">hg</span><span class="bp">.</span><span class="n">one_mul</span><span class="o">,</span> <span class="n">hg</span><span class="bp">.</span><span class="n">mul_left_inv</span><span class="o">],</span>
+<span class="k">by</span> <span class="n">rwa</span> <span class="o">[</span><span class="n">hg</span><span class="bp">.</span><span class="n">mul_left_inv</span><span class="o">,</span> <span class="n">hg</span><span class="bp">.</span><span class="n">one_mul</span><span class="o">]</span> <span class="n">at</span> <span class="n">this</span>
 
-private theorem group_core.mul_inv {G : Type*} (hg : group_core G) (g : G) :
-  by haveI := hg.to_has_group_notation; exact g * g⁻¹ = 1 :=
-by letI := hg.to_has_group_notation; exact
-have g⁻¹⁻¹ * g⁻¹ * g * g⁻¹ = 1,
-  by rw [hg.mul_assoc, hg.mul_assoc, ← hg.mul_assoc (g⁻¹), hg.mul_left_inv, hg.one_mul, hg.mul_left_inv],
-by rwa [hg.mul_left_inv, hg.one_mul] at this
+<span class="kn">private</span> <span class="kn">theorem</span> <span class="n">group_core</span><span class="bp">.</span><span class="n">mul_one</span> <span class="o">{</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">(</span><span class="n">hg</span> <span class="o">:</span> <span class="n">group_core</span> <span class="n">G</span><span class="o">)</span> <span class="o">(</span><span class="n">g</span> <span class="o">:</span> <span class="n">G</span><span class="o">)</span> <span class="o">:</span>
+  <span class="k">by</span> <span class="n">haveI</span> <span class="o">:=</span> <span class="n">hg</span><span class="bp">.</span><span class="n">to_has_group_notation</span><span class="bp">;</span> <span class="n">exact</span> <span class="n">g</span> <span class="bp">*</span> <span class="mi">1</span> <span class="bp">=</span> <span class="n">g</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">letI</span> <span class="o">:=</span> <span class="n">hg</span><span class="bp">.</span><span class="n">to_has_group_notation</span><span class="bp">;</span> <span class="n">exact</span>
+<span class="k">calc</span>  <span class="n">g</span> <span class="bp">*</span> <span class="mi">1</span>
+    <span class="bp">=</span> <span class="n">g</span> <span class="bp">*</span> <span class="o">(</span><span class="n">g</span><span class="bp">⁻¹</span> <span class="bp">*</span> <span class="n">g</span><span class="o">)</span> <span class="o">:</span> <span class="k">by</span> <span class="n">rw</span> <span class="o">[</span><span class="n">hg</span><span class="bp">.</span><span class="n">mul_left_inv</span> <span class="n">g</span><span class="o">]</span>
+<span class="bp">...</span> <span class="bp">=</span> <span class="n">g</span> <span class="o">:</span> <span class="k">by</span> <span class="n">rw</span> <span class="o">[</span><span class="err">←</span> <span class="n">hg</span><span class="bp">.</span><span class="n">mul_assoc</span><span class="o">,</span> <span class="n">group_core</span><span class="bp">.</span><span class="n">mul_inv</span> <span class="n">hg</span> <span class="n">g</span><span class="o">,</span> <span class="n">hg</span><span class="bp">.</span><span class="n">one_mul</span><span class="o">]</span>
 
-private theorem group_core.mul_one {G : Type*} (hg : group_core G) (g : G) :
-  by haveI := hg.to_has_group_notation; exact g * 1 = g :=
-by letI := hg.to_has_group_notation; exact
-calc  g * 1
-    = g * (g⁻¹ * g) : by rw [hg.mul_left_inv g]
-... = g : by rw [← hg.mul_assoc, group_core.mul_inv hg g, hg.one_mul]
+<span class="n">def</span> <span class="n">group</span><span class="bp">.</span><span class="n">of_core</span> <span class="o">{</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">(</span><span class="n">hg</span> <span class="o">:</span> <span class="n">group_core</span> <span class="n">G</span><span class="o">)</span> <span class="o">:</span> <span class="n">group</span> <span class="n">G</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">letI</span> <span class="o">:=</span> <span class="n">hg</span><span class="bp">.</span><span class="n">to_has_group_notation</span><span class="bp">;</span> <span class="n">exact</span>
+<span class="o">{</span> <span class="n">mul</span> <span class="o">:=</span> <span class="o">(</span><span class="bp">*</span><span class="o">),</span>
+  <span class="n">mul_assoc</span> <span class="o">:=</span> <span class="n">hg</span><span class="bp">.</span><span class="n">mul_assoc</span><span class="o">,</span>
+  <span class="n">one</span> <span class="o">:=</span> <span class="mi">1</span><span class="o">,</span>
+  <span class="n">one_mul</span> <span class="o">:=</span> <span class="n">hg</span><span class="bp">.</span><span class="n">one_mul</span><span class="o">,</span>
+  <span class="n">mul_one</span> <span class="o">:=</span> <span class="n">group_core</span><span class="bp">.</span><span class="n">mul_one</span> <span class="n">hg</span><span class="o">,</span>
+  <span class="n">inv</span> <span class="o">:=</span> <span class="n">has_inv</span><span class="bp">.</span><span class="n">inv</span><span class="o">,</span>
+  <span class="n">mul_left_inv</span> <span class="o">:=</span> <span class="n">hg</span><span class="bp">.</span><span class="n">mul_left_inv</span>
+<span class="o">}</span>
 
-def group.of_core {G : Type*} (hg : group_core G) : group G :=
-by letI := hg.to_has_group_notation; exact
-{ mul := (*),
-  mul_assoc := hg.mul_assoc,
-  one := 1,
-  one_mul := hg.one_mul,
-  mul_one := group_core.mul_one hg,
-  inv := has_inv.inv,
-  mul_left_inv := hg.mul_left_inv
-}
+<span class="c1">-- ff,a := ρ^a</span>
+<span class="c1">-- tt,a := σ * ρ^a</span>
+<span class="kn">definition</span> <span class="n">dihedral2</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ+</span><span class="o">)</span> <span class="o">:=</span> <span class="n">bool</span> <span class="bp">×</span> <span class="o">(</span><span class="n">zmod</span> <span class="n">n</span><span class="o">)</span>
 
--- ff,a := ρ^a
--- tt,a := σ * ρ^a
-definition dihedral2 (n : ℕ+) := bool × (zmod n)
+<span class="kn">namespace</span> <span class="n">dihedral2</span>
 
-namespace dihedral2
+<span class="kn">variable</span> <span class="o">{</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ+</span><span class="o">}</span>
 
-variable {n : ℕ+}
+<span class="c1">-- ρ^a * ρ^b = ρ^(a+b)</span>
+<span class="c1">-- (σ * ρ^a) * ρ^b = σ * ρ^(a+b)</span>
+<span class="c1">-- (ρ^a) * (σ ρ^b) = σ * ρ^(b-a)</span>
+<span class="c1">-- (σ ρ^a) * (σ ρ^b) = ρ^(b-a)</span>
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">has_mul</span> <span class="o">(</span><span class="n">dihedral2</span> <span class="n">n</span><span class="o">)</span> <span class="o">:=</span>
+<span class="bp">⟨λ</span> <span class="n">x</span> <span class="n">y</span><span class="o">,</span> <span class="bp">⟨</span><span class="n">bxor</span> <span class="n">x</span><span class="bp">.</span><span class="mi">1</span> <span class="n">y</span><span class="bp">.</span><span class="mi">1</span><span class="o">,</span> <span class="n">cond</span> <span class="n">y</span><span class="bp">.</span><span class="mi">1</span> <span class="o">(</span><span class="n">y</span><span class="bp">.</span><span class="mi">2</span> <span class="bp">-</span> <span class="n">x</span><span class="bp">.</span><span class="mi">2</span><span class="o">)</span> <span class="o">(</span><span class="n">x</span><span class="bp">.</span><span class="mi">2</span> <span class="bp">+</span> <span class="n">y</span><span class="bp">.</span><span class="mi">2</span><span class="o">)</span><span class="bp">⟩⟩</span>
 
--- ρ^a * ρ^b = ρ^(a+b)
--- (σ * ρ^a) * ρ^b = σ * ρ^(a+b)
--- (ρ^a) * (σ ρ^b) = σ * ρ^(b-a)
--- (σ ρ^a) * (σ ρ^b) = ρ^(b-a)
-instance : has_mul (dihedral2 n) :=
-⟨λ x y, ⟨bxor x.1 y.1, cond y.1 (y.2 - x.2) (x.2 + y.2)⟩⟩
+<span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="kn">lemma</span> <span class="n">mul_fst</span> <span class="o">{</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">dihedral2</span> <span class="n">n</span><span class="o">}</span> <span class="o">:</span> <span class="o">(</span><span class="n">x</span> <span class="bp">*</span> <span class="n">y</span><span class="o">)</span><span class="bp">.</span><span class="mi">1</span> <span class="bp">=</span> <span class="n">bxor</span> <span class="n">x</span><span class="bp">.</span><span class="mi">1</span> <span class="n">y</span><span class="bp">.</span><span class="mi">1</span> <span class="o">:=</span> <span class="n">rfl</span>
+<span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="kn">lemma</span> <span class="n">mul_snd</span> <span class="o">{</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">dihedral2</span> <span class="n">n</span><span class="o">}</span> <span class="o">:</span> <span class="o">(</span><span class="n">x</span> <span class="bp">*</span> <span class="n">y</span><span class="o">)</span><span class="bp">.</span><span class="mi">2</span> <span class="bp">=</span> <span class="n">cond</span> <span class="n">y</span><span class="bp">.</span><span class="mi">1</span> <span class="o">(</span><span class="n">y</span><span class="bp">.</span><span class="mi">2</span> <span class="bp">-</span> <span class="n">x</span><span class="bp">.</span><span class="mi">2</span><span class="o">)</span> <span class="o">(</span><span class="n">x</span><span class="bp">.</span><span class="mi">2</span> <span class="bp">+</span> <span class="n">y</span><span class="bp">.</span><span class="mi">2</span><span class="o">)</span> <span class="o">:=</span> <span class="n">rfl</span>
 
-@[simp] lemma mul_fst {x y : dihedral2 n} : (x * y).1 = bxor x.1 y.1 := rfl
-@[simp] lemma mul_snd {x y : dihedral2 n} : (x * y).2 = cond y.1 (y.2 - x.2) (x.2 + y.2) := rfl
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">has_one</span> <span class="o">(</span><span class="n">dihedral2</span> <span class="n">n</span><span class="o">)</span> <span class="o">:=</span> <span class="bp">⟨⟨</span><span class="n">ff</span><span class="o">,</span><span class="mi">0</span><span class="bp">⟩⟩</span>
 
-instance : has_one (dihedral2 n) := ⟨⟨ff,0⟩⟩
+<span class="c1">-- (σ * ρ^a)⁻¹ = σ * ρ^a</span>
+<span class="c1">-- (ρ^a)⁻¹ = ρ^(-a)</span>
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">has_inv</span> <span class="o">(</span><span class="n">dihedral2</span> <span class="n">n</span><span class="o">)</span> <span class="o">:=</span> <span class="bp">⟨λ</span> <span class="n">x</span><span class="o">,</span> <span class="bp">⟨</span><span class="n">x</span><span class="bp">.</span><span class="mi">1</span><span class="o">,</span> <span class="n">cond</span> <span class="n">x</span><span class="bp">.</span><span class="mi">1</span> <span class="n">x</span><span class="bp">.</span><span class="mi">2</span> <span class="o">(</span><span class="bp">-</span><span class="n">x</span><span class="bp">.</span><span class="mi">2</span><span class="o">)</span><span class="bp">⟩⟩</span>
 
--- (σ * ρ^a)⁻¹ = σ * ρ^a
--- (ρ^a)⁻¹ = ρ^(-a)
-instance : has_inv (dihedral2 n) := ⟨λ x, ⟨x.1, cond x.1 x.2 (-x.2)⟩⟩
+<span class="kn">protected</span> <span class="kn">theorem</span> <span class="n">mul_assoc</span> <span class="o">{</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ+</span><span class="o">}</span> <span class="o">(</span><span class="n">g</span> <span class="n">h</span> <span class="n">k</span> <span class="o">:</span> <span class="n">dihedral2</span> <span class="n">n</span><span class="o">)</span> <span class="o">:</span> <span class="n">g</span> <span class="bp">*</span> <span class="n">h</span> <span class="bp">*</span> <span class="n">k</span> <span class="bp">=</span> <span class="n">g</span> <span class="bp">*</span> <span class="o">(</span><span class="n">h</span> <span class="bp">*</span> <span class="n">k</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">apply</span> <span class="n">prod</span><span class="bp">.</span><span class="n">ext</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">exact</span> <span class="n">bool</span><span class="bp">.</span><span class="n">bxor_assoc</span> <span class="n">g</span><span class="bp">.</span><span class="mi">1</span> <span class="n">h</span><span class="bp">.</span><span class="mi">1</span> <span class="n">k</span><span class="bp">.</span><span class="mi">1</span> <span class="o">},</span>
+  <span class="n">rcases</span> <span class="n">g</span> <span class="k">with</span> <span class="bp">⟨_</span><span class="o">,</span><span class="n">a</span><span class="bp">⟩;</span> <span class="n">rcases</span> <span class="n">h</span> <span class="k">with</span> <span class="bp">⟨_|_</span><span class="o">,</span><span class="n">b</span><span class="bp">⟩;</span> <span class="n">rcases</span> <span class="n">k</span> <span class="k">with</span> <span class="bp">⟨_|_</span><span class="o">,</span><span class="n">c</span><span class="bp">⟩</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">exact</span> <span class="n">add_assoc</span> <span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">},</span>
+  <span class="o">{</span> <span class="n">exact</span> <span class="n">sub_add_eq_sub_sub_swap</span> <span class="n">c</span> <span class="n">a</span> <span class="n">b</span> <span class="o">},</span>
+  <span class="o">{</span> <span class="n">exact</span> <span class="n">sub_add_eq_add_sub</span> <span class="n">b</span> <span class="n">a</span> <span class="n">c</span> <span class="o">},</span>
+  <span class="o">{</span> <span class="n">change</span> <span class="n">c</span> <span class="bp">-</span> <span class="o">(</span><span class="n">b</span> <span class="bp">-</span> <span class="n">a</span><span class="o">)</span> <span class="bp">=</span> <span class="n">a</span> <span class="bp">+</span> <span class="o">(</span><span class="n">c</span> <span class="bp">-</span> <span class="n">b</span><span class="o">),</span> <span class="n">rw</span> <span class="o">[</span><span class="err">←</span> <span class="n">sub_add</span><span class="o">,</span> <span class="n">add_comm</span><span class="o">]</span> <span class="o">}</span>
+<span class="kn">end</span>
 
-protected theorem mul_assoc {n : ℕ+} (g h k : dihedral2 n) : g * h * k = g * (h * k) :=
-begin
-  apply prod.ext,
-  { exact bool.bxor_assoc g.1 h.1 k.1 },
-  rcases g with ⟨_,a⟩; rcases h with ⟨_|_,b⟩; rcases k with ⟨_|_,c⟩,
-  { exact add_assoc a b c },
-  { exact sub_add_eq_sub_sub_swap c a b },
-  { exact sub_add_eq_add_sub b a c },
-  { change c - (b - a) = a + (c - b), rw [← sub_add, add_comm] }
-end
+<span class="kn">protected</span> <span class="kn">theorem</span> <span class="n">one_mul</span> <span class="o">{</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ+</span><span class="o">}</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">g</span> <span class="o">:</span> <span class="n">dihedral2</span> <span class="n">n</span><span class="o">,</span> <span class="mi">1</span> <span class="bp">*</span> <span class="n">g</span> <span class="bp">=</span> <span class="n">g</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">ff</span><span class="o">,</span> <span class="n">x</span><span class="o">)</span> <span class="o">:=</span> <span class="n">prod</span><span class="bp">.</span><span class="n">ext</span> <span class="n">rfl</span> <span class="o">(</span><span class="n">zero_add</span> <span class="n">x</span><span class="o">)</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">tt</span><span class="o">,</span> <span class="n">x</span><span class="o">)</span> <span class="o">:=</span> <span class="n">prod</span><span class="bp">.</span><span class="n">ext</span> <span class="n">rfl</span> <span class="o">(</span><span class="n">sub_zero</span> <span class="n">x</span><span class="o">)</span>
 
-protected theorem one_mul {n : ℕ+} : ∀ g : dihedral2 n, 1 * g = g
-| (ff, x) := prod.ext rfl (zero_add x)
-| (tt, x) := prod.ext rfl (sub_zero x)
+<span class="kn">protected</span> <span class="kn">theorem</span> <span class="n">mul_left_inv</span> <span class="o">{</span><span class="n">n</span><span class="o">:</span> <span class="bp">ℕ+</span><span class="o">}</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">g</span> <span class="o">:</span> <span class="n">dihedral2</span> <span class="n">n</span><span class="o">,</span> <span class="n">g</span><span class="bp">⁻¹</span> <span class="bp">*</span> <span class="n">g</span> <span class="bp">=</span> <span class="mi">1</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">ff</span><span class="o">,</span> <span class="n">x</span><span class="o">)</span> <span class="o">:=</span> <span class="n">prod</span><span class="bp">.</span><span class="n">ext</span> <span class="n">rfl</span> <span class="o">(</span><span class="n">add_left_neg</span> <span class="n">x</span><span class="o">)</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">tt</span><span class="o">,</span> <span class="n">x</span><span class="o">)</span> <span class="o">:=</span> <span class="n">prod</span><span class="bp">.</span><span class="n">ext</span> <span class="n">rfl</span> <span class="o">(</span><span class="n">add_right_neg</span> <span class="n">x</span><span class="o">)</span>
 
-protected theorem mul_left_inv {n: ℕ+} : ∀ g : dihedral2 n, g⁻¹ * g = 1
-| (ff, x) := prod.ext rfl (add_left_neg x)
-| (tt, x) := prod.ext rfl (add_right_neg x)
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">group</span> <span class="o">(</span><span class="n">dihedral2</span> <span class="n">n</span><span class="o">)</span> <span class="o">:=</span>
+<span class="n">group</span><span class="bp">.</span><span class="n">of_core</span>
+<span class="o">{</span> <span class="n">mul</span> <span class="o">:=</span> <span class="o">(</span><span class="bp">*</span><span class="o">),</span>
+  <span class="n">inv</span> <span class="o">:=</span> <span class="n">has_inv</span><span class="bp">.</span><span class="n">inv</span><span class="o">,</span>
+  <span class="n">one</span> <span class="o">:=</span> <span class="mi">1</span><span class="o">,</span>
+  <span class="n">mul_assoc</span> <span class="o">:=</span> <span class="n">dihedral2</span><span class="bp">.</span><span class="n">mul_assoc</span><span class="o">,</span>
+  <span class="n">one_mul</span> <span class="o">:=</span> <span class="n">dihedral2</span><span class="bp">.</span><span class="n">one_mul</span><span class="o">,</span>
+  <span class="n">mul_left_inv</span> <span class="o">:=</span> <span class="n">dihedral2</span><span class="bp">.</span><span class="n">mul_left_inv</span>
+<span class="o">}</span>
 
-instance : group (dihedral2 n) :=
-group.of_core
-{ mul := (*),
-  inv := has_inv.inv,
-  one := 1,
-  mul_assoc := dihedral2.mul_assoc,
-  one_mul := dihedral2.one_mul,
-  mul_left_inv := dihedral2.mul_left_inv
-}
+<span class="n">def</span> <span class="n">ρ</span> <span class="o">:</span> <span class="n">dihedral2</span> <span class="n">n</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="n">ff</span><span class="o">,</span> <span class="mi">1</span><span class="bp">⟩</span>
+<span class="n">def</span> <span class="n">σ</span> <span class="o">:</span> <span class="n">dihedral2</span> <span class="n">n</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="n">tt</span><span class="o">,</span> <span class="mi">0</span><span class="bp">⟩</span>
 
-def ρ : dihedral2 n := ⟨ff, 1⟩
-def σ : dihedral2 n := ⟨tt, 0⟩
+<span class="kn">theorem</span> <span class="n">rho_mul_sigma</span> <span class="o">:</span> <span class="o">(</span><span class="n">ρ</span> <span class="bp">*</span> <span class="n">σ</span> <span class="o">:</span> <span class="n">dihedral2</span> <span class="n">n</span><span class="o">)</span> <span class="bp">=</span> <span class="n">σ</span> <span class="bp">*</span> <span class="n">ρ</span><span class="bp">⁻¹</span> <span class="o">:=</span> <span class="n">rfl</span>
 
-theorem rho_mul_sigma : (ρ * σ : dihedral2 n) = σ * ρ⁻¹ := rfl
+<span class="kn">instance</span> <span class="o">{</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ+</span><span class="o">}</span> <span class="o">:</span> <span class="n">fintype</span> <span class="o">(</span><span class="n">dihedral2</span> <span class="n">n</span><span class="o">)</span> <span class="o">:=</span> <span class="n">prod</span><span class="bp">.</span><span class="n">fintype</span> <span class="bp">_</span> <span class="bp">_</span>
+<span class="kn">instance</span> <span class="o">{</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ+</span><span class="o">}</span> <span class="o">:</span> <span class="n">decidable_eq</span> <span class="o">(</span><span class="n">dihedral2</span> <span class="n">n</span><span class="o">)</span> <span class="o">:=</span> <span class="n">prod</span><span class="bp">.</span><span class="n">decidable_eq</span>
 
-instance {n : ℕ+} : fintype (dihedral2 n) := prod.fintype _ _
-instance {n : ℕ+} : decidable_eq (dihedral2 n) := prod.decidable_eq
-
-end dihedral2
-```
+<span class="kn">end</span> <span class="n">dihedral2</span>
+</pre></div>
 
 #### [ Kevin Buzzard (Nov 29 2018 at 22:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/multiplayer%20lean/near/148819305):
-It was the nerdiest thing I'd seen for quite some time. @**William Stein** we didn't use VS Code, we just worked together using the basic editor. It worked really well. Mathlib was really helpful -- without it we would have had to use `fin n` for a set with n elements, but with it we could use `zmod n` with its group structure.
+<p>It was the nerdiest thing I'd seen for quite some time. <span class="user-mention" data-user-id="116034">@William Stein</span> we didn't use VS Code, we just worked together using the basic editor. It worked really well. Mathlib was really helpful -- without it we would have had to use <code>fin n</code> for a set with n elements, but with it we could use <code>zmod n</code> with its group structure.</p>
 
 #### [ Kevin Buzzard (Nov 29 2018 at 22:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/multiplayer%20lean/near/148820730):
-Looking at the code now, the comments were crucial. People tended not to use the chat, they talked using comments. It became clear very early on that we needed comments to explain the conventions we were using, and I see now that whilst people tidied up the chatty comments they left in the comments explaining the mathematics (more precisely the conventions and basic notation), so in some sense it has created more readable Lean code.
+<p>Looking at the code now, the comments were crucial. People tended not to use the chat, they talked using comments. It became clear very early on that we needed comments to explain the conventions we were using, and I see now that whilst people tidied up the chatty comments they left in the comments explaining the mathematics (more precisely the conventions and basic notation), so in some sense it has created more readable Lean code.</p>
 
 #### [ Scott Morrison (Nov 29 2018 at 22:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/multiplayer%20lean/near/148821796):
-This sounds fantastic.
+<p>This sounds fantastic.</p>
 
 #### [ William Stein (Nov 30 2018 at 07:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/multiplayer%20lean/near/148844392):
-Thanks for explaining how the first serious collaborative use of cocalc lean went!  
+<p>Thanks for explaining how the first serious collaborative use of cocalc lean went!  </p>
+<blockquote>
+<p>People tended not to use the chat, they talked using comments.</p>
+</blockquote>
+<p>This is something I've wondered about, since I've experienced this too.  It depends a lot on the sort of document being edited.  I also haven't quite figured out if I should add some extra support for "comments attributed to people".  When collaboratively editing markdown files, we (cocalc devs) often do this sort of thing (to attribute the remark):</p>
+<div class="codehilite"><pre><span></span>&gt; [ws] blah blah
 
->  People tended not to use the chat, they talked using comments.
-
-This is something I've wondered about, since I've experienced this too.  It depends a lot on the sort of document being edited.  I also haven't quite figured out if I should add some extra support for "comments attributed to people".  When collaboratively editing markdown files, we (cocalc devs) often do this sort of thing (to attribute the remark):
-```
-> [ws] blah blah
-
-> [hsy] blah blah
-```
+&gt; [hsy] blah blah
+</pre></div>
 
 #### [ William Stein (Nov 30 2018 at 07:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/multiplayer%20lean/near/148844401):
-@**Kevin Buzzard** I also implemented "run a bash command line in every student project" in case that helps you workaround the path issue more easily.
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> I also implemented "run a bash command line in every student project" in case that helps you workaround the path issue more easily.</p>
 
 
 {% endraw %}

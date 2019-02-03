@@ -12,39 +12,37 @@ permalink: archive/113488general/71245autoderivehastostring.html
 
 {% raw %}
 #### [ Zesen Qian (Jul 21 2018 at 22:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/auto%20derive%20has_to_string/near/130069413):
-RT, something like this in lean?
+<p>RT, something like this in lean?</p>
 
 #### [ Mario Carneiro (Jul 21 2018 at 22:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/auto%20derive%20has_to_string/near/130069676):
-No, I don't think this one has a derive handler, although you could totally write one
+<p>No, I don't think this one has a derive handler, although you could totally write one</p>
 
 #### [ Simon Hudon (Jul 21 2018 at 22:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/auto%20derive%20has_to_string/near/130069770):
-If you don't mind going into `meta`-land, you can derive `has_reflect` for your type and use the following to just pretty-print the Lean expression that corresponds to a value of your type:
-
-```lean
-meta def to_string' {α : Type*} [has_reflect α] (x : α) : string := 
-(to_fmt (reflect x)).to_string
-```
+<p>If you don't mind going into <code>meta</code>-land, you can derive <code>has_reflect</code> for your type and use the following to just pretty-print the Lean expression that corresponds to a value of your type:</p>
+<div class="codehilite"><pre><span></span><span class="n">meta</span> <span class="n">def</span> <span class="n">to_string&#39;</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">has_reflect</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">string</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">to_fmt</span> <span class="o">(</span><span class="n">reflect</span> <span class="n">x</span><span class="o">))</span><span class="bp">.</span><span class="n">to_string</span>
+</pre></div>
 
 #### [ Zesen Qian (Jul 21 2018 at 23:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/auto%20derive%20has_to_string/near/130070006):
-`has_reflect` asks me to provide a `expr` for every value? Not sure how to do it for my type.
+<p><code>has_reflect</code> asks me to provide a <code>expr</code> for every value? Not sure how to do it for my type.</p>
 
 #### [ Zesen Qian (Jul 21 2018 at 23:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/auto%20derive%20has_to_string/near/130070023):
-@**Mario Carneiro** yeah, it's just a very long type.
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> yeah, it's just a very long type.</p>
 
 #### [ Simon Hudon (Jul 21 2018 at 23:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/auto%20derive%20has_to_string/near/130070026):
-You write `@[derive has_reflect]` above your type definition
+<p>You write <code>@[derive has_reflect]</code> above your type definition</p>
 
 #### [ Mario Carneiro (Jul 21 2018 at 23:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/auto%20derive%20has_to_string/near/130070074):
-I meant write a derive handler
+<p>I meant write a derive handler</p>
 
 #### [ Zesen Qian (Jul 21 2018 at 23:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/auto%20derive%20has_to_string/near/130070106):
-@**Simon Hudon** very cool, thanks.
+<p><span class="user-mention" data-user-id="110026">@Simon Hudon</span> very cool, thanks.</p>
 
 #### [ Simon Hudon (Jul 21 2018 at 23:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/auto%20derive%20has_to_string/near/130070171):
-You're welcome
+<p>You're welcome</p>
 
 #### [ Simon Hudon (Jul 21 2018 at 23:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/auto%20derive%20has_to_string/near/130070237):
-@**Mario Carneiro** Such a derive handler seems like a lot of work but I'm wondering if piggy backing on top of `has_reflect` might help us be extra lazy
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> Such a derive handler seems like a lot of work but I'm wondering if piggy backing on top of <code>has_reflect</code> might help us be extra lazy</p>
 
 
 {% endraw %}

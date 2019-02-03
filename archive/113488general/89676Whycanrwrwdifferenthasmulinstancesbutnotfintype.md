@@ -12,87 +12,85 @@ permalink: archive/113488general/89676Whycanrwrwdifferenthasmulinstancesbutnotfi
 
 {% raw %}
 #### [ Chris Hughes (Jun 14 2018 at 21:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Why%20can%20rw%20rw%20different%20has_mul%20instances%2C%20but%20not%20fintype/near/128082489):
-In the following code, `rw` manages to recognize that two different expressions involving different paths of inferring the `has_mul` type class are equal. It can't do this with two definitionally equal `fintype` instances however. What's the difference between `has_mul` and `fintype` that leads to this behaviour?
+<p>In the following code, <code>rw</code> manages to recognize that two different expressions involving different paths of inferring the <code>has_mul</code> type class are equal. It can't do this with two definitionally equal <code>fintype</code> instances however. What's the difference between <code>has_mul</code> and <code>fintype</code> that leads to this behaviour?</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">int2</span> <span class="o">:=</span> <span class="n">int</span>
 
-```lean
-def int2 := int
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">comm_ring</span> <span class="n">int2</span> <span class="o">:=</span> <span class="n">int</span><span class="bp">.</span><span class="n">comm_ring</span>
 
-instance : comm_ring int2 := int.comm_ring
+<span class="kn">set_option</span> <span class="n">pp</span><span class="bp">.</span><span class="n">implicit</span> <span class="n">true</span>
+<span class="kn">set_option</span> <span class="n">pp</span><span class="bp">.</span><span class="kn">notation</span> <span class="n">false</span>
 
-set_option pp.implicit true
-set_option pp.notation false
+<span class="kn">lemma</span> <span class="n">one_times_two</span> <span class="o">:</span> <span class="o">(</span><span class="mi">1</span> <span class="o">:</span> <span class="n">int2</span><span class="o">)</span> <span class="bp">*</span> <span class="mi">2</span> <span class="bp">=</span> <span class="mi">2</span> <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="c">/-</span><span class="cm">@eq int2</span>
+<span class="cm">    (@has_mul.mul int2</span>
+<span class="cm">       (@mul_zero_class.to_has_mul int2</span>
+<span class="cm">          (@semiring.to_mul_zero_class int2 (@ring.to_semiring int2 (@comm_ring.to_ring int2 int2.comm_ring))))</span>
+<span class="cm">       1</span>
+<span class="cm">       2)</span>
+<span class="cm">    2-/</span>
+  <span class="n">refl</span><span class="o">,</span>
+<span class="kn">end</span>
 
-lemma one_times_two : (1 : int2) * 2 = 2 :=
-begin
-/-@eq int2
-    (@has_mul.mul int2
-       (@mul_zero_class.to_has_mul int2
-          (@semiring.to_mul_zero_class int2 (@ring.to_semiring int2 (@comm_ring.to_ring int2 int2.comm_ring))))
-       1
-       2)
-    2-/
-  refl,
-end
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">integral_domain</span> <span class="n">int2</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">unfold</span> <span class="n">int2</span><span class="bp">;</span> <span class="n">apply_instance</span>
+<span class="kn">example</span> <span class="o">:</span> <span class="o">(</span><span class="mi">1</span> <span class="o">:</span> <span class="n">int2</span><span class="o">)</span> <span class="bp">*</span> <span class="mi">2</span> <span class="bp">=</span> <span class="mi">2</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="c">/-</span><span class="cm">@eq int2</span>
+<span class="cm">    (@has_mul.mul int2</span>
+<span class="cm">       (@no_zero_divisors.to_has_mul int2</span>
+<span class="cm">          (@domain.to_no_zero_divisors int2 (@integral_domain.to_domain int2 int2.integral_domain)))</span>
+<span class="cm">       1</span>
+<span class="cm">       2)</span>
+<span class="cm">    2-/</span>
+  <span class="n">rw</span> <span class="n">one_times_two</span><span class="o">,</span> <span class="c1">-- works</span>
+<span class="kn">end</span>
 
-instance : integral_domain int2 := by unfold int2; apply_instance
-example : (1 : int2) * 2 = 2 :=
-begin
-  /-@eq int2
-    (@has_mul.mul int2
-       (@no_zero_divisors.to_has_mul int2
-          (@domain.to_no_zero_divisors int2 (@integral_domain.to_domain int2 int2.integral_domain)))
-       1
-       2)
-    2-/
-  rw one_times_two, -- works
-end
+<span class="n">def</span> <span class="n">bool2</span> <span class="o">:=</span> <span class="n">bool</span>
 
-def bool2 := bool
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">fintype</span> <span class="n">bool2</span> <span class="o">:=</span> <span class="n">bool</span><span class="bp">.</span><span class="n">fintype</span>
 
-instance : fintype bool2 := bool.fintype
+<span class="kn">lemma</span> <span class="n">card_bool1</span> <span class="o">:</span> <span class="n">fintype</span><span class="bp">.</span><span class="n">card</span> <span class="n">bool2</span> <span class="bp">=</span> <span class="mi">2</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">refl</span><span class="o">,</span>
+<span class="kn">end</span>
 
-lemma card_bool1 : fintype.card bool2 = 2 :=
-begin
-  refl,
-end
+<span class="n">def</span> <span class="n">bool2_fintype</span> <span class="o">:</span> <span class="n">fintype</span> <span class="n">bool2</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="o">{</span><span class="n">tt</span><span class="o">,</span> <span class="n">ff</span><span class="o">},</span> <span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="k">by</span> <span class="n">cases</span> <span class="n">x</span><span class="bp">;</span> <span class="n">simp</span><span class="bp">⟩</span>
 
-def bool2_fintype : fintype bool2 := ⟨{tt, ff}, λ x, by cases x; simp⟩
+<span class="n">def</span> <span class="n">bool2_fintype3</span> <span class="o">:</span> <span class="n">fintype</span> <span class="n">bool2</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="o">{</span><span class="n">ff</span><span class="o">,</span> <span class="n">tt</span><span class="o">},</span> <span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="k">by</span> <span class="n">cases</span> <span class="n">x</span><span class="bp">;</span> <span class="n">simp</span><span class="bp">⟩</span>
 
-def bool2_fintype3 : fintype bool2 := ⟨{ff, tt}, λ x, by cases x; simp⟩
+<span class="kn">example</span> <span class="o">:</span> <span class="o">({</span><span class="n">ff</span><span class="o">,</span> <span class="n">tt</span><span class="o">}</span> <span class="o">:</span> <span class="n">finset</span> <span class="n">bool</span><span class="o">)</span> <span class="bp">=</span> <span class="o">({</span><span class="n">tt</span><span class="o">,</span> <span class="n">ff</span><span class="o">}</span> <span class="o">:</span> <span class="n">finset</span> <span class="n">bool</span><span class="o">)</span> <span class="o">:=</span> <span class="n">rfl</span>
 
-example : ({ff, tt} : finset bool) = ({tt, ff} : finset bool) := rfl
+<span class="kn">lemma</span> <span class="n">card_bool2</span> <span class="o">:</span> <span class="bp">@</span><span class="n">fintype</span><span class="bp">.</span><span class="n">card</span> <span class="n">bool2</span> <span class="n">bool2_fintype</span> <span class="bp">=</span> <span class="mi">2</span> <span class="o">:=</span>
+<span class="n">card_bool1</span> <span class="c1">-- They are defeq</span>
 
-lemma card_bool2 : @fintype.card bool2 bool2_fintype = 2 :=
-card_bool1 -- They are defeq
+<span class="kn">lemma</span> <span class="n">card_bool3</span> <span class="o">:</span> <span class="bp">@</span><span class="n">fintype</span><span class="bp">.</span><span class="n">card</span> <span class="n">bool2</span> <span class="n">bool2_fintype</span> <span class="bp">=</span> <span class="mi">2</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">rw</span> <span class="n">card_bool1</span><span class="o">,</span> <span class="c1">--doesn&#39;t work</span>
+<span class="kn">end</span>
 
-lemma card_bool3 : @fintype.card bool2 bool2_fintype = 2 :=
-begin
-  rw card_bool1, --doesn't work
-end
-
-lemma card_bool4 : @fintype.card bool2 bool2_fintype3 = 2 := card_bool1
-```
+<span class="kn">lemma</span> <span class="n">card_bool4</span> <span class="o">:</span> <span class="bp">@</span><span class="n">fintype</span><span class="bp">.</span><span class="n">card</span> <span class="n">bool2</span> <span class="n">bool2_fintype3</span> <span class="bp">=</span> <span class="mi">2</span> <span class="o">:=</span> <span class="n">card_bool1</span>
+</pre></div>
 
 #### [ Simon Hudon (Jun 14 2018 at 21:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Why%20can%20rw%20rw%20different%20has_mul%20instances%2C%20but%20not%20fintype/near/128082839):
-what error do you get?
+<p>what error do you get?</p>
 
 #### [ Chris Hughes (Jun 14 2018 at 21:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Why%20can%20rw%20rw%20different%20has_mul%20instances%2C%20but%20not%20fintype/near/128083025):
-I accidentally gave an example that did work. I've just edited it.
+<p>I accidentally gave an example that did work. I've just edited it.</p>
 
 #### [ Chris Hughes (Jun 14 2018 at 22:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Why%20can%20rw%20rw%20different%20has_mul%20instances%2C%20but%20not%20fintype/near/128083327):
-`card_bool2` works not because they're defeq, but perhaps because it knows fintype is a subsingleton.
+<p><code>card_bool2</code> works not because they're defeq, but perhaps because it knows fintype is a subsingleton.</p>
 
 #### [ Reid Barton (Jun 14 2018 at 22:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Why%20can%20rw%20rw%20different%20has_mul%20instances%2C%20but%20not%20fintype/near/128083559):
-I think it works because it reduced both `card_bool1` and `card_bool2` to `2 = 2`
+<p>I think it works because it reduced both <code>card_bool1</code> and <code>card_bool2</code> to <code>2 = 2</code></p>
 
 #### [ Reid Barton (Jun 14 2018 at 22:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Why%20can%20rw%20rw%20different%20has_mul%20instances%2C%20but%20not%20fintype/near/128083570):
-it = `card_bool2`
+<p>it = <code>card_bool2</code></p>
 
 #### [ Reid Barton (Jun 14 2018 at 22:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Why%20can%20rw%20rw%20different%20has_mul%20instances%2C%20but%20not%20fintype/near/128083640):
-I don't know why your `rw one_times_two` works though.
+<p>I don't know why your <code>rw one_times_two</code> works though.</p>
 
 #### [ Kevin Buzzard (Jun 14 2018 at 22:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Why%20can%20rw%20rw%20different%20has_mul%20instances%2C%20but%20not%20fintype/near/128083660):
-Yeah, rw is usually really snotty about things like this
+<p>Yeah, rw is usually really snotty about things like this</p>
 
 
 {% endraw %}

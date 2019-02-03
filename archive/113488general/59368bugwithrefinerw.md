@@ -12,35 +12,33 @@ permalink: archive/113488general/59368bugwithrefinerw.html
 
 {% raw %}
 #### [ Kenny Lau (Dec 18 2018 at 09:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bug%20with%20refine%20%2B%20rw/near/152093977):
-```lean
-example (H : (0 = 0 → 0 = 1) → true) : true :=
-begin
-  refine H (λ h, _), rw h --fails
-/-
-rewrite tactic failed, lemma is not an equality nor a iff
-state:
-H : (0 = 0 → 0 = 1) → true,
-h : 0 = 0
-⊢ 0 = 1
--/
-end
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="o">(</span><span class="mi">0</span> <span class="bp">=</span> <span class="mi">0</span> <span class="bp">→</span> <span class="mi">0</span> <span class="bp">=</span> <span class="mi">1</span><span class="o">)</span> <span class="bp">→</span> <span class="n">true</span><span class="o">)</span> <span class="o">:</span> <span class="n">true</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">refine</span> <span class="n">H</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">h</span><span class="o">,</span> <span class="bp">_</span><span class="o">),</span> <span class="n">rw</span> <span class="n">h</span> <span class="c1">--fails</span>
+<span class="c">/-</span><span class="cm"></span>
+<span class="cm">rewrite tactic failed, lemma is not an equality nor a iff</span>
+<span class="cm">state:</span>
+<span class="cm">H : (0 = 0 → 0 = 1) → true,</span>
+<span class="cm">h : 0 = 0</span>
+<span class="cm">⊢ 0 = 1</span>
+<span class="cm">-/</span>
+<span class="kn">end</span>
 
 
-example (H : (0 = 0 → 0 = 1) → true) : true :=
-begin
-  refine H _, intro h, rw h --works
-end
-```
+<span class="kn">example</span> <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="o">(</span><span class="mi">0</span> <span class="bp">=</span> <span class="mi">0</span> <span class="bp">→</span> <span class="mi">0</span> <span class="bp">=</span> <span class="mi">1</span><span class="o">)</span> <span class="bp">→</span> <span class="n">true</span><span class="o">)</span> <span class="o">:</span> <span class="n">true</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">refine</span> <span class="n">H</span> <span class="bp">_</span><span class="o">,</span> <span class="n">intro</span> <span class="n">h</span><span class="o">,</span> <span class="n">rw</span> <span class="n">h</span> <span class="c1">--works</span>
+<span class="kn">end</span>
+</pre></div>
 
 #### [ Kenny Lau (Dec 18 2018 at 09:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bug%20with%20refine%20%2B%20rw/near/152094049):
-and also workaround:
-```lean
-example (H : (0 = 0 → 0 = 1) → true) : true :=
-begin
-  refine H (λ h, _),
-  change _ at h, rw h --works
-end
-```
+<p>and also workaround:</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="o">(</span><span class="mi">0</span> <span class="bp">=</span> <span class="mi">0</span> <span class="bp">→</span> <span class="mi">0</span> <span class="bp">=</span> <span class="mi">1</span><span class="o">)</span> <span class="bp">→</span> <span class="n">true</span><span class="o">)</span> <span class="o">:</span> <span class="n">true</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">refine</span> <span class="n">H</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">h</span><span class="o">,</span> <span class="bp">_</span><span class="o">),</span>
+  <span class="n">change</span> <span class="bp">_</span> <span class="n">at</span> <span class="n">h</span><span class="o">,</span> <span class="n">rw</span> <span class="n">h</span> <span class="c1">--works</span>
+<span class="kn">end</span>
+</pre></div>
 
 
 {% endraw %}

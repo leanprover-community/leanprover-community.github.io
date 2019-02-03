@@ -12,23 +12,23 @@ permalink: archive/113488general/39890dsimpsimp.html
 
 {% raw %}
 #### [ Reid Barton (Nov 03 2018 at 22:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dsimp%3B%20simp/near/137130133):
-I think I set a new personal record:
-`by dsimp [is_limit.equiv, adjunction.cone_equivalence]; simp; dsimp; simp`
+<p>I think I set a new personal record:<br>
+<code>by dsimp [is_limit.equiv, adjunction.cone_equivalence]; simp; dsimp; simp</code></p>
 
 #### [ Chris Hughes (Nov 03 2018 at 22:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dsimp%3B%20simp/near/137130203):
-Can we make a `dsimp` and `simp` all in one tactic.
+<p>Can we make a <code>dsimp</code> and <code>simp</code> all in one tactic.</p>
 
 #### [ Scott Morrison (Nov 03 2018 at 23:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dsimp%3B%20simp/near/137131263):
-Yay, and I'm happy seeing `is_limit.equiv` being used moments after I wrote it (again). :-)
+<p>Yay, and I'm happy seeing <code>is_limit.equiv</code> being used moments after I wrote it (again). :-)</p>
 
 #### [ Kenny Lau (Nov 03 2018 at 23:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dsimp%3B%20simp/near/137131270):
-@**Scott Morrison|110087** I think we should expand the category theory library
+<p><span class="user-mention" data-user-id="110087">@Scott Morrison</span> I think we should expand the category theory library</p>
 
 #### [ Kenny Lau (Nov 03 2018 at 23:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dsimp%3B%20simp/near/137131272):
-instead of saying that Lean is not ready for it
+<p>instead of saying that Lean is not ready for it</p>
 
 #### [ Scott Morrison (Nov 03 2018 at 23:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dsimp%3B%20simp/near/137131315):
-Absolutely, I agree it should be expanded massively.
+<p>Absolutely, I agree it should be expanded massively.</p>
 
 
 {% endraw %}

@@ -12,171 +12,171 @@ permalink: archive/113488general/85762equationcompiler.html
 
 {% raw %}
 #### [ Minchao Wu (Jul 24 2018 at 18:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equation%20compiler/near/130222550):
-Hi friends, is there a way to fill up this underscore?
-```lean
-def foo (n : nat) : nat :=
-match n with
-| 0     := 0
-| k     := have k ≠ 0, from _, 
-           0
-end
-```
-Usually `n` is of some complicated inductive types, but I really just need to handle one specific constructor. For all the other constructors the proofs are long but exactly the same.  
-I could use `rec` or `cases` or `if then else` but that would be awkward. So I am wondering how I can refer to the facts that the equation compiler knows but are not listed as hypotheses?
+<p>Hi friends, is there a way to fill up this underscore?</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">foo</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">nat</span><span class="o">)</span> <span class="o">:</span> <span class="n">nat</span> <span class="o">:=</span>
+<span class="k">match</span> <span class="n">n</span> <span class="k">with</span>
+<span class="bp">|</span> <span class="mi">0</span>     <span class="o">:=</span> <span class="mi">0</span>
+<span class="bp">|</span> <span class="n">k</span>     <span class="o">:=</span> <span class="k">have</span> <span class="n">k</span> <span class="bp">≠</span> <span class="mi">0</span><span class="o">,</span> <span class="k">from</span> <span class="bp">_</span><span class="o">,</span>
+           <span class="mi">0</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>Usually <code>n</code> is of some complicated inductive types, but I really just need to handle one specific constructor. For all the other constructors the proofs are long but exactly the same.  <br>
+I could use <code>rec</code> or <code>cases</code> or <code>if then else</code> but that would be awkward. So I am wondering how I can refer to the facts that the equation compiler knows but are not listed as hypotheses?</p>
 
 #### [ Kenny Lau (Jul 24 2018 at 18:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equation%20compiler/near/130222560):
-use k+1 instead of k
+<p>use k+1 instead of k</p>
 
 #### [ Minchao Wu (Jul 24 2018 at 18:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equation%20compiler/near/130222573):
-that works in the case of nat but not other complicated inductive types
+<p>that works in the case of nat but not other complicated inductive types</p>
 
 #### [ Kenny Lau (Jul 24 2018 at 18:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equation%20compiler/near/130222582):
-then you can't
+<p>then you can't</p>
 
 #### [ Minchao Wu (Jul 24 2018 at 18:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equation%20compiler/near/130222696):
-```lean
-def bar : bool → ℕ 
-| tt     := 0
-| b     := have b ≠ tt, from _, 1
-```
-well maybe this one is a better toy example
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">bar</span> <span class="o">:</span> <span class="n">bool</span> <span class="bp">→</span> <span class="bp">ℕ</span>
+<span class="bp">|</span> <span class="n">tt</span>     <span class="o">:=</span> <span class="mi">0</span>
+<span class="bp">|</span> <span class="n">b</span>     <span class="o">:=</span> <span class="k">have</span> <span class="n">b</span> <span class="bp">≠</span> <span class="n">tt</span><span class="o">,</span> <span class="k">from</span> <span class="bp">_</span><span class="o">,</span> <span class="mi">1</span>
+</pre></div>
+
+
+<p>well maybe this one is a better toy example</p>
 
 #### [ Kenny Lau (Jul 24 2018 at 19:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equation%20compiler/near/130222747):
-you can't.
+<p>you can't.</p>
 
 #### [ Minchao Wu (Jul 24 2018 at 19:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equation%20compiler/near/130222758):
-reason?
+<p>reason?</p>
 
 #### [ Kenny Lau (Jul 24 2018 at 19:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equation%20compiler/near/130222768):
-in that environment you do not know that b is not tt
+<p>in that environment you do not know that b is not tt</p>
 
 #### [ Kenny Lau (Jul 24 2018 at 19:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equation%20compiler/near/130222788):
-also how do you use `rec` or `cases`?
+<p>also how do you use <code>rec</code> or <code>cases</code>?</p>
 
 #### [ Minchao Wu (Jul 24 2018 at 19:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equation%20compiler/near/130222792):
-but the equation compiler knows that if it's tt then the thing is not exhaustive
+<p>but the equation compiler knows that if it's tt then the thing is not exhaustive</p>
 
 #### [ Kenny Lau (Jul 24 2018 at 19:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equation%20compiler/near/130222798):
-the `b` is a catch-all clause
+<p>the <code>b</code> is a catch-all clause</p>
 
 #### [ Kenny Lau (Jul 24 2018 at 19:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equation%20compiler/near/130222801):
-it is intended to match everything
+<p>it is intended to match everything</p>
 
 #### [ Minchao Wu (Jul 24 2018 at 19:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equation%20compiler/near/130222804):
-that's true
+<p>that's true</p>
 
 #### [ Minchao Wu (Jul 24 2018 at 19:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equation%20compiler/near/130222864):
-I am saying that the compiler knows that tt will never be matched by b
+<p>I am saying that the compiler knows that tt will never be matched by b</p>
 
 #### [ Kenny Lau (Jul 24 2018 at 19:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equation%20compiler/near/130222869):
-but that's already outside your environment
+<p>but that's already outside your environment</p>
 
 #### [ Minchao Wu (Jul 24 2018 at 19:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equation%20compiler/near/130222890):
-perhaps, so I am asking if there is a clever hack
+<p>perhaps, so I am asking if there is a clever hack</p>
 
 #### [ Kenny Lau (Jul 24 2018 at 19:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equation%20compiler/near/130222892):
-what was your idea with `rec` and `cases`?
+<p>what was your idea with <code>rec</code> and <code>cases</code>?</p>
 
 #### [ Minchao Wu (Jul 24 2018 at 19:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equation%20compiler/near/130222941):
-> also how do you use `rec` or `cases`?
-
-you just don't use `match`
+<blockquote>
+<p>also how do you use <code>rec</code> or <code>cases</code>?</p>
+</blockquote>
+<p>you just don't use <code>match</code></p>
 
 #### [ Kenny Lau (Jul 24 2018 at 19:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equation%20compiler/near/130222950):
-```quote
-that works in the case of nat but not other complicated inductive types
-```
-does using `rec` solve this problem?
+<blockquote>
+<p>that works in the case of nat but not other complicated inductive types</p>
+</blockquote>
+<p>does using <code>rec</code> solve this problem?</p>
 
 #### [ Minchao Wu (Jul 24 2018 at 19:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equation%20compiler/near/130222965):
-it's the same as your suggestion of using `(k+1)`
+<p>it's the same as your suggestion of using <code>(k+1)</code></p>
 
 #### [ Minchao Wu (Jul 24 2018 at 19:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equation%20compiler/near/130222983):
-namely explicitly writing down all the constructors
+<p>namely explicitly writing down all the constructors</p>
 
 #### [ Simon Hudon (Jul 24 2018 at 19:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equation%20compiler/near/130224157):
-What you could do is:
-
-```
-begin
+<p>What you could do is:</p>
+<div class="codehilite"><pre><span></span>begin
   cases n,
-  case 0 : 
+  case 0 :
   { /- proof -/ },
   all_goals { /- proof -/ },
 end
+</pre></div>
 
 #### [ Kenny Lau (Jul 24 2018 at 19:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equation%20compiler/near/130224169):
-but how are you going to prove n != 0?
+<p>but how are you going to prove n != 0?</p>
 
 #### [ Johan Commelin (Jul 24 2018 at 19:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equation%20compiler/near/130224343):
-I think that you don't have to.
+<p>I think that you don't have to.</p>
 
 #### [ Johan Commelin (Jul 24 2018 at 19:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equation%20compiler/near/130224351):
-That is Simon's trick.
+<p>That is Simon's trick.</p>
 
 #### [ Johan Commelin (Jul 24 2018 at 19:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equation%20compiler/near/130224422):
-You just prove it case by case, for all cases. But then, you prove all but one case with a single proof.
+<p>You just prove it case by case, for all cases. But then, you prove all but one case with a single proof.</p>
 
 #### [ Minchao Wu (Jul 24 2018 at 19:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equation%20compiler/near/130224489):
-I forgot to mention that foll all the other cases I need the fact that n!=0
+<p>I forgot to mention that foll all the other cases I need the fact that n!=0</p>
 
 #### [ Minchao Wu (Jul 24 2018 at 19:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equation%20compiler/near/130224536):
-but this trick might work
+<p>but this trick might work</p>
 
 #### [ Johan Commelin (Jul 24 2018 at 19:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equation%20compiler/near/130224585):
-Right, so now you somehow need to know that fact, but now it should be even true in your environment (I hope).
+<p>Right, so now you somehow need to know that fact, but now it should be even true in your environment (I hope).</p>
 
 #### [ Simon Hudon (Jul 24 2018 at 19:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equation%20compiler/near/130224590):
- Off the top of my head, `cases h : n` will preserve the variable n and you can do your proof with `subst n` and `contradiction`
+<p>Off the top of my head, <code>cases h : n</code> will preserve the variable n and you can do your proof with <code>subst n</code> and <code>contradiction</code></p>
 
 #### [ Simon Hudon (Jul 24 2018 at 19:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equation%20compiler/near/130225161):
-concretely, here is how I do it:
-
-```lean
-def foo (n : nat) : nat :=
-begin
-  cases h : n,
-  case nat.zero : 
-  { exact 0 },
-  all_goals
-  { have : n ≠ 0,
-    { subst n, contradiction },
-    exact n },
-end
-```
+<p>concretely, here is how I do it:</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">foo</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">nat</span><span class="o">)</span> <span class="o">:</span> <span class="n">nat</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">cases</span> <span class="n">h</span> <span class="o">:</span> <span class="n">n</span><span class="o">,</span>
+  <span class="n">case</span> <span class="n">nat</span><span class="bp">.</span><span class="n">zero</span> <span class="o">:</span>
+  <span class="o">{</span> <span class="n">exact</span> <span class="mi">0</span> <span class="o">},</span>
+  <span class="n">all_goals</span>
+  <span class="o">{</span> <span class="k">have</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">≠</span> <span class="mi">0</span><span class="o">,</span>
+    <span class="o">{</span> <span class="n">subst</span> <span class="n">n</span><span class="o">,</span> <span class="n">contradiction</span> <span class="o">},</span>
+    <span class="n">exact</span> <span class="n">n</span> <span class="o">},</span>
+<span class="kn">end</span>
+</pre></div>
 
 #### [ Simon Hudon (Jul 24 2018 at 19:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equation%20compiler/near/130225220):
-(deleted)
+<p>(deleted)</p>
 
 #### [ Minchao Wu (Jul 24 2018 at 19:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equation%20compiler/near/130225363):
-when you use `cases 0:` to handle the specific constructor, how do you supply the arguments to that constructor?
+<p>when you use <code>cases 0:</code> to handle the specific constructor, how do you supply the arguments to that constructor?</p>
 
 #### [ Minchao Wu (Jul 24 2018 at 19:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equation%20compiler/near/130225389):
-in the case of nat there is no parameters
+<p>in the case of nat there is no parameters</p>
 
 #### [ Simon Hudon (Jul 24 2018 at 19:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equation%20compiler/near/130225432):
-(note that it's `case nat.zero :`, no s, and full constructor name)
+<p>(note that it's <code>case nat.zero :</code>, no s, and full constructor name)</p>
 
 #### [ Simon Hudon (Jul 24 2018 at 19:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equation%20compiler/near/130225455):
-if we were looking at a list for instance, it would be `case list.cons : x xs { /- my proof -/ }`
+<p>if we were looking at a list for instance, it would be <code>case list.cons : x xs { /- my proof -/ }</code></p>
 
 #### [ Minchao Wu (Jul 24 2018 at 19:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equation%20compiler/near/130226138):
-Very cool, it worked
+<p>Very cool, it worked</p>
 
 #### [ Minchao Wu (Jul 24 2018 at 19:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equation%20compiler/near/130226143):
-Thanks!
+<p>Thanks!</p>
 
 #### [ Minchao Wu (Jul 24 2018 at 20:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equation%20compiler/near/130226210):
-I wasn't aware of the `case` tatic
+<p>I wasn't aware of the <code>case</code> tatic</p>
 
 #### [ Simon Hudon (Jul 24 2018 at 20:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equation%20compiler/near/130226238):
-The more you know :wink:
+<p>The more you know <span class="emoji emoji-1f609" title="wink">:wink:</span></p>
 
 #### [ Minchao Wu (Jul 24 2018 at 20:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equation%20compiler/near/130226248):
-I'm going to embrace it from now on :)
+<p>I'm going to embrace it from now on :)</p>
 
 #### [ Nicholas Scheel (Jul 25 2018 at 01:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equation%20compiler/near/130244135):
-(deleted)
+<p>(deleted)</p>
 
 
 {% endraw %}

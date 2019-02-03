@@ -12,41 +12,40 @@ permalink: archive/116395maths/52606Setsandbooleanreflection.html
 
 {% raw %}
 #### [ Tobias Grosser (Sep 19 2018 at 20:18)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Sets%20and%20boolean%20reflection/near/134259292):
-ssreflect has a pattern `[pick x in A | P] == Some x` (See: http://ssr.msr-inria.inria.fr/doc/ssreflect-1.5/Ssreflect.fintype.html) which is used in a proof that I want to translate from COQ. @**Johannes Hölzl** already showed me how to model other parts of ssreflect in pure lean. I wonder if there is a canonical way to express this pattern in lean?
+<p>ssreflect has a pattern <code>[pick x in A | P] == Some x</code> (See: <a href="http://ssr.msr-inria.inria.fr/doc/ssreflect-1.5/Ssreflect.fintype.html" target="_blank" title="http://ssr.msr-inria.inria.fr/doc/ssreflect-1.5/Ssreflect.fintype.html">http://ssr.msr-inria.inria.fr/doc/ssreflect-1.5/Ssreflect.fintype.html</a>) which is used in a proof that I want to translate from COQ. <span class="user-mention" data-user-id="110294">@Johannes Hölzl</span> already showed me how to model other parts of ssreflect in pure lean. I wonder if there is a canonical way to express this pattern in lean?</p>
 
 #### [ Mario Carneiro (Sep 19 2018 at 20:33)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Sets%20and%20boolean%20reflection/near/134260318):
-There is `classical.some`, although I'm surprised to say there is no option-returning version of this. I guess it hasn't been necessary
+<p>There is <code>classical.some</code>, although I'm surprised to say there is no option-returning version of this. I guess it hasn't been necessary</p>
 
 #### [ Mario Carneiro (Sep 19 2018 at 20:34)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Sets%20and%20boolean%20reflection/near/134260409):
-The usual way we write it is to do `if h : \exists x, p x then classical.some h else default _`
+<p>The usual way we write it is to do <code>if h : \exists x, p x then classical.some h else default _</code></p>
 
 #### [ Mario Carneiro (Sep 19 2018 at 20:34)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Sets%20and%20boolean%20reflection/near/134260430):
-where the branches are usually some more complicated expressions
+<p>where the branches are usually some more complicated expressions</p>
 
 #### [ Tobias Grosser (Sep 19 2018 at 20:56)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Sets%20and%20boolean%20reflection/near/134261730):
-Thank you. Playing with it.
+<p>Thank you. Playing with it.</p>
 
 #### [ Tobias Grosser (Sep 19 2018 at 22:02)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Sets%20and%20boolean%20reflection/near/134265194):
-This seems to not be as easy as I thought:
-```lean
-set_option class.instance_max_depth 200
-def Gaussian_elimination [ordered_ring α] [decidable_eq α]:
-   Π (m n), matrix (fin m) (fin n) α  → α
-| (x+1) (y+1) A :=
-  let S := { x | ¬ ((function.uncurry (A)) x = 0)} in
-  if h: ∃ el, el ∈ S
-  then
-    let el2 := classical.some h in
-    let i := el2.fst in
-    let j := el2.snd in
-    (A i j)
-  else
-  (A 0 0)
-| _ _ A := (0 : α)
-```
+<p>This seems to not be as easy as I thought:</p>
+<div class="codehilite"><pre><span></span><span class="kn">set_option</span> <span class="n">class</span><span class="bp">.</span><span class="n">instance_max_depth</span> <span class="mi">200</span>
+<span class="n">def</span> <span class="n">Gaussian_elimination</span> <span class="o">[</span><span class="n">ordered_ring</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">decidable_eq</span> <span class="n">α</span><span class="o">]:</span>
+   <span class="bp">Π</span> <span class="o">(</span><span class="n">m</span> <span class="n">n</span><span class="o">),</span> <span class="n">matrix</span> <span class="o">(</span><span class="n">fin</span> <span class="n">m</span><span class="o">)</span> <span class="o">(</span><span class="n">fin</span> <span class="n">n</span><span class="o">)</span> <span class="n">α</span>  <span class="bp">→</span> <span class="n">α</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">x</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="o">(</span><span class="n">y</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="n">A</span> <span class="o">:=</span>
+  <span class="k">let</span> <span class="n">S</span> <span class="o">:=</span> <span class="o">{</span> <span class="n">x</span> <span class="bp">|</span> <span class="bp">¬</span> <span class="o">((</span><span class="n">function</span><span class="bp">.</span><span class="n">uncurry</span> <span class="o">(</span><span class="n">A</span><span class="o">))</span> <span class="n">x</span> <span class="bp">=</span> <span class="mi">0</span><span class="o">)}</span> <span class="k">in</span>
+  <span class="k">if</span> <span class="n">h</span><span class="o">:</span> <span class="bp">∃</span> <span class="n">el</span><span class="o">,</span> <span class="n">el</span> <span class="err">∈</span> <span class="n">S</span>
+  <span class="k">then</span>
+    <span class="k">let</span> <span class="n">el2</span> <span class="o">:=</span> <span class="n">classical</span><span class="bp">.</span><span class="n">some</span> <span class="n">h</span> <span class="k">in</span>
+    <span class="k">let</span> <span class="n">i</span> <span class="o">:=</span> <span class="n">el2</span><span class="bp">.</span><span class="n">fst</span> <span class="k">in</span>
+    <span class="k">let</span> <span class="n">j</span> <span class="o">:=</span> <span class="n">el2</span><span class="bp">.</span><span class="n">snd</span> <span class="k">in</span>
+    <span class="o">(</span><span class="n">A</span> <span class="n">i</span> <span class="n">j</span><span class="o">)</span>
+  <span class="k">else</span>
+  <span class="o">(</span><span class="n">A</span> <span class="mi">0</span> <span class="mi">0</span><span class="o">)</span>
+<span class="bp">|</span> <span class="bp">_</span> <span class="bp">_</span> <span class="n">A</span> <span class="o">:=</span> <span class="o">(</span><span class="mi">0</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span>
+</pre></div>
 
 #### [ Tobias Grosser (Sep 19 2018 at 22:02)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Sets%20and%20boolean%20reflection/near/134265203):
-This gives me an error ```maximum class-instance resolution depth has been reached (the limit can be increased by setting option 'class.instance_max_depth') (the class-instance resolution trace can be visualized by setting option 'trace.class_instances')```
+<p>This gives me an error <code>maximum class-instance resolution depth has been reached (the limit can be increased by setting option 'class.instance_max_depth') (the class-instance resolution trace can be visualized by setting option 'trace.class_instances')</code></p>
 
 
 {% endraw %}

@@ -12,21 +12,19 @@ permalink: archive/116395maths/31797centreofpartialorderclosedundersupremum.html
 
 {% raw %}
 #### [ Kenny Lau (Apr 28 2018 at 17:43)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/centre%20of%20partial%20order%20closed%20under%20supremum%3F/near/125823474):
-Let (P, <=) be a partially ordered set.
-
-Say an element x in P is in the "centre" of P if for every y in P we have x <= y or y <= x.
-Is the supremum of a collection of elements in the centre of P also necessarily in the centre of P, assuming that the supremum exists?
+<p>Let (P, &lt;=) be a partially ordered set.</p>
+<p>Say an element x in P is in the "centre" of P if for every y in P we have x &lt;= y or y &lt;= x.<br>
+Is the supremum of a collection of elements in the centre of P also necessarily in the centre of P, assuming that the supremum exists?</p>
 
 #### [ Kenny Lau (Apr 28 2018 at 17:44)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/centre%20of%20partial%20order%20closed%20under%20supremum%3F/near/125823514):
-And is this equivalent to LEM?
+<p>And is this equivalent to LEM?</p>
 
 #### [ Kenny Lau (Apr 28 2018 at 17:44)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/centre%20of%20partial%20order%20closed%20under%20supremum%3F/near/125823516):
-it seems true to me but I have no idea how to prove it
+<p>it seems true to me but I have no idea how to prove it</p>
 
 #### [ Mario Carneiro (Apr 28 2018 at 22:28)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/centre%20of%20partial%20order%20closed%20under%20supremum%3F/near/125830606):
-Here's a proof assuming LEM:
-```
-import logic.basic
+<p>Here's a proof assuming LEM:</p>
+<div class="codehilite"><pre><span></span>import logic.basic
 
 variables {α : Type*} [partial_order α]
 
@@ -45,7 +43,7 @@ by haveI := classical.dec; exact
   or.inr $ le_trans
     ((H sc _).resolve_left hc)
     ((hs _).1 (le_refl _) _ sc)
-```
+</pre></div>
 
 
 {% endraw %}

@@ -12,64 +12,60 @@ permalink: archive/113489newmembers/80390somethingisweird.html
 
 {% raw %}
 #### [ Abhimanyu Pallavi Sudhir (Nov 21 2018 at 16:35)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%60some%60thing%20is%20weird/near/148117675):
-I've been looking at the `classical.lean` file, and `p_implies_uv` strikes me as a very odd theorem. You have a proposition `p`, and you have two propositions, `u` which is `some` proposition such that it is true or `p` is true, and `v` which is `some` proposition such that it is false or `p` is true.  
-
-But now you have `p_implies_uv`, which proves, apparently, that if `p` is true, `u = v`. I have no idea how this can be true. `u` and `v` can be `true` and `false`, for example -- having `p` be true does nothing to change this fact.
-
-What's wrong with this? I'm guessing there's something wrong with my understanding of how `some` works.
+<p>I've been looking at the <code>classical.lean</code> file, and <code>p_implies_uv</code> strikes me as a very odd theorem. You have a proposition <code>p</code>, and you have two propositions, <code>u</code> which is <code>some</code> proposition such that it is true or <code>p</code> is true, and <code>v</code> which is <code>some</code> proposition such that it is false or <code>p</code> is true.  </p>
+<p>But now you have <code>p_implies_uv</code>, which proves, apparently, that if <code>p</code> is true, <code>u = v</code>. I have no idea how this can be true. <code>u</code> and <code>v</code> can be <code>true</code> and <code>false</code>, for example -- having <code>p</code> be true does nothing to change this fact.</p>
+<p>What's wrong with this? I'm guessing there's something wrong with my understanding of how <code>some</code> works.</p>
 
 #### [ Abhimanyu Pallavi Sudhir (Nov 21 2018 at 16:41)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%60some%60thing%20is%20weird/near/148118042):
-I'm reading the proof on [wikipedia](https://en.wikipedia.org/wiki/Diaconescu%27s_theorem) -- and I can understand the set theoretic version.
+<p>I'm reading the proof on <a href="https://en.wikipedia.org/wiki/Diaconescu%27s_theorem" target="_blank" title="https://en.wikipedia.org/wiki/Diaconescu%27s_theorem">wikipedia</a> -- and I can understand the set theoretic version.</p>
 
 #### [ Abhimanyu Pallavi Sudhir (Nov 21 2018 at 16:42)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%60some%60thing%20is%20weird/near/148118122):
-Or well, I can understand their version -- since U and V are sets in their version, all this means is that if P is true then `u` and `v` have the same range of possible values (`true`, `false`).
+<p>Or well, I can understand their version -- since U and V are sets in their version, all this means is that if P is true then <code>u</code> and <code>v</code> have the same range of possible values (<code>true</code>, <code>false</code>).</p>
 
 #### [ Jeremy Avigad (Nov 21 2018 at 16:42)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%60some%60thing%20is%20weird/near/148118128):
-The proof is described in detail here: https://leanprover.github.io/theorem_proving_in_lean/axioms_and_computation.html#the-law-of-the-excluded-middle. You are right that it is a weird proof, a clever trick rather than something deep.
-
-`some` works as follows: given `h : ∃ x : α, p x`, `some h` returns an `x` satisfying `p`.
+<p>The proof is described in detail here: <a href="https://leanprover.github.io/theorem_proving_in_lean/axioms_and_computation.html#the-law-of-the-excluded-middle" target="_blank" title="https://leanprover.github.io/theorem_proving_in_lean/axioms_and_computation.html#the-law-of-the-excluded-middle">https://leanprover.github.io/theorem_proving_in_lean/axioms_and_computation.html#the-law-of-the-excluded-middle</a>. You are right that it is a weird proof, a clever trick rather than something deep.</p>
+<p><code>some</code> works as follows: given <code>h : ∃ x : α, p x</code>, <code>some h</code> returns an <code>x</code> satisfying <code>p</code>.</p>
 
 #### [ Abhimanyu Pallavi Sudhir (Nov 21 2018 at 16:43)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%60some%60thing%20is%20weird/near/148118190):
-Yeah, I get that -- but if it just returns _an_ `x` satisfying `p`, does it really make sense to say two the two `some`s are equal?
+<p>Yeah, I get that -- but if it just returns _an_ <code>x</code> satisfying <code>p</code>, does it really make sense to say two the two <code>some</code>s are equal?</p>
 
 #### [ Abhimanyu Pallavi Sudhir (Nov 21 2018 at 16:43)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%60some%60thing%20is%20weird/near/148118194):
-Oh wait, `some h = some h`.
+<p>Oh wait, <code>some h = some h</code>.</p>
 
 #### [ Abhimanyu Pallavi Sudhir (Nov 21 2018 at 16:43)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%60some%60thing%20is%20weird/near/148118199):
-That's all that's going on.
+<p>That's all that's going on.</p>
 
 #### [ Abhimanyu Pallavi Sudhir (Nov 21 2018 at 16:44)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%60some%60thing%20is%20weird/near/148118268):
-It doesn't mean that anything in `h` is equal to anything else in `h`, it just means a generic element in `h` is equal to a generic element in `h`.
+<p>It doesn't mean that anything in <code>h</code> is equal to anything else in <code>h</code>, it just means a generic element in <code>h</code> is equal to a generic element in <code>h</code>.</p>
 
 #### [ Abhimanyu Pallavi Sudhir (Nov 21 2018 at 16:44)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%60some%60thing%20is%20weird/near/148118274):
-I see. Very weird, but I think I understand.
+<p>I see. Very weird, but I think I understand.</p>
 
 #### [ Jeremy Avigad (Nov 21 2018 at 16:51)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%60some%60thing%20is%20weird/near/148118750):
-Yes, `some` choose a particular though unspecified element with the given property. If `h₀ : ∃ x, odd x`, `some h₀` returns an odd number. If `h₁ : ∃ x, prime x`, `some h₁` returns a prime number. We can ask whether `some h₀ = some h₁`. In this case, Lean's axioms don't allow us to prove or refute this statement. But as you note, sometimes we can prove things about `some`. For example, if `h₂ : ∃ x, even x ∧ prime x`, we can prove `some h₂ = 2`, because `some h₂` has to be both even and prime. For another example, we can prove `even (some h₀ + 1)`, because we know `some h₀` is odd.
+<p>Yes, <code>some</code> choose a particular though unspecified element with the given property. If <code>h₀ : ∃ x, odd x</code>, <code>some h₀</code> returns an odd number. If <code>h₁ : ∃ x, prime x</code>, <code>some h₁</code> returns a prime number. We can ask whether <code>some h₀ = some h₁</code>. In this case, Lean's axioms don't allow us to prove or refute this statement. But as you note, sometimes we can prove things about <code>some</code>. For example, if <code>h₂ : ∃ x, even x ∧ prime x</code>, we can prove <code>some h₂ = 2</code>, because <code>some h₂</code> has to be both even and prime. For another example, we can prove <code>even (some h₀ + 1)</code>, because we know <code>some h₀</code> is odd.</p>
 
 #### [ Abhimanyu Pallavi Sudhir (Nov 21 2018 at 18:29)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%60some%60thing%20is%20weird/near/148125215):
-```quote
-Yes, `some` choose a particular though unspecified element with the given property. If `h₀ : ∃ x, odd x`, `some h₀` returns an odd number. If `h₁ : ∃ x, prime x`, `some h₁` returns a prime number. We can ask whether `some h₀ = some h₁`. In this case, Lean's axioms don't allow us to prove or refute this statement. But as you note, sometimes we can prove things about `some`. For example, if `h₂ : ∃ x, even x ∧ prime x`, we can prove `some h₂ = 2`, because `some h₂` has to be both even and prime. For another example, we can prove `even (some h₀ + 1)`, because we know `some h₀` is odd.
-```
- Those make sense. What wasn't making sense to me -- and is used in the Diaconescu proof -- is the fact that `some h = some h`, i.e.
+<blockquote>
+<p>Yes, <code>some</code> choose a particular though unspecified element with the given property. If <code>h₀ : ∃ x, odd x</code>, <code>some h₀</code> returns an odd number. If <code>h₁ : ∃ x, prime x</code>, <code>some h₁</code> returns a prime number. We can ask whether <code>some h₀ = some h₁</code>. In this case, Lean's axioms don't allow us to prove or refute this statement. But as you note, sometimes we can prove things about <code>some</code>. For example, if <code>h₂ : ∃ x, even x ∧ prime x</code>, we can prove <code>some h₂ = 2</code>, because <code>some h₂</code> has to be both even and prime. For another example, we can prove <code>even (some h₀ + 1)</code>, because we know <code>some h₀</code> is odd.</p>
+</blockquote>
+<p>Those make sense. What wasn't making sense to me -- and is used in the Diaconescu proof -- is the fact that <code>some h = some h</code>, i.e.</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">h</span> <span class="o">:</span> <span class="bp">∃</span> <span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span> <span class="n">n</span> <span class="bp">=</span> <span class="mi">1</span> <span class="bp">∨</span> <span class="n">n</span> <span class="bp">=</span> <span class="mi">2</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="mi">1</span><span class="o">,</span> <span class="n">or</span><span class="bp">.</span><span class="n">inl</span> <span class="n">rfl</span><span class="bp">⟩</span>
 
-```lean
-lemma h : ∃ n : ℕ, n = 1 ∨ n = 2 := ⟨1, or.inl rfl⟩
+<span class="n">noncomputable</span> <span class="n">def</span> <span class="n">h1</span> <span class="o">:=</span> <span class="n">classical</span><span class="bp">.</span><span class="n">some</span> <span class="n">h</span>
+<span class="n">noncomputable</span> <span class="n">def</span> <span class="n">h2</span> <span class="o">:=</span> <span class="n">classical</span><span class="bp">.</span><span class="n">some</span> <span class="n">h</span>
 
-noncomputable def h1 := classical.some h
-noncomputable def h2 := classical.some h
+<span class="kn">theorem</span> <span class="n">something</span> <span class="o">:</span> <span class="n">h1</span> <span class="bp">=</span> <span class="n">h2</span> <span class="o">:=</span> <span class="n">rfl</span>
+</pre></div>
 
-theorem something : h1 = h2 := rfl
-```
-Which is weird, because in my mind, `h1` and `h2` can still be either 1 or 2 -- all we know about them is that they satisfy "it's either 1 or 2", and not all things that are "either 1 or 2" are equal. 
 
-But I guess choice allows Lean to just have some concept of  "a general `some`" so that saying `h1 = h2` is really just extensionality on `some`.
+<p>Which is weird, because in my mind, <code>h1</code> and <code>h2</code> can still be either 1 or 2 -- all we know about them is that they satisfy "it's either 1 or 2", and not all things that are "either 1 or 2" are equal. </p>
+<p>But I guess choice allows Lean to just have some concept of  "a general <code>some</code>" so that saying <code>h1 = h2</code> is really just extensionality on <code>some</code>.</p>
 
 #### [ Johannes Hölzl (Nov 21 2018 at 21:36)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%60some%60thing%20is%20weird/near/148135819):
-this is completely unrelated to `some`, it is just reflexivity of `=` in Lean (internally `h1` and `h2` are unfolded). It is not possible to have a `some` operator where this doesn't hold. With some tricks it is possible to hide this fact. By marking `h1` and/or `h2` as `@[irreducible]`. Then at least one cannot prove it `by refl` anymore (but it is still true in the logic)
+<p>this is completely unrelated to <code>some</code>, it is just reflexivity of <code>=</code> in Lean (internally <code>h1</code> and <code>h2</code> are unfolded). It is not possible to have a <code>some</code> operator where this doesn't hold. With some tricks it is possible to hide this fact. By marking <code>h1</code> and/or <code>h2</code> as <code>@[irreducible]</code>. Then at least one cannot prove it <code>by refl</code> anymore (but it is still true in the logic)</p>
 
 #### [ Kevin Buzzard (Nov 21 2018 at 21:40)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%60some%60thing%20is%20weird/near/148136060):
-A function always produces the same output when presented with the same input.
+<p>A function always produces the same output when presented with the same input.</p>
 
 
 {% endraw %}

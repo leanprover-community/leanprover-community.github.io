@@ -12,10 +12,10 @@ permalink: archive/113488general/06678simplemmaapplicationorder.html
 
 {% raw %}
 #### [ Kenny Lau (Oct 11 2018 at 02:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20lemma%20application%20order/near/135576965):
-What determines the order in which the simp lemmas are applied?
+<p>What determines the order in which the simp lemmas are applied?</p>
 
 #### [ Mario Carneiro (Oct 11 2018 at 03:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20lemma%20application%20order/near/135580269):
-random luck, I think
+<p>random luck, I think</p>
 
 
 {% endraw %}

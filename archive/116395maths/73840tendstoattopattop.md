@@ -12,63 +12,60 @@ permalink: archive/116395maths/73840tendstoattopattop.html
 
 {% raw %}
 #### [ Chris Hughes (Nov 30 2018 at 00:11)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/tendsto%20at_top%20at_top/near/148827429):
-I'm trying to work out how filters work. Is the following true/easy to prove. Which is the better way to state that a function goes to infinity.
+<p>I'm trying to work out how filters work. Is the following true/easy to prove. Which is the better way to state that a function goes to infinity.</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">complex</span><span class="bp">.</span><span class="n">basic</span> <span class="n">order</span><span class="bp">.</span><span class="n">filter</span>
 
-```lean
-import data.complex.basic order.filter
+<span class="kn">open</span> <span class="n">filter</span>
 
-open filter
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">preorder</span> <span class="n">ℂ</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">le</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">x</span> <span class="n">y</span><span class="o">,</span> <span class="n">x</span><span class="bp">.</span><span class="n">abs</span> <span class="bp">≤</span> <span class="n">y</span><span class="bp">.</span><span class="n">abs</span><span class="o">,</span>
+  <span class="n">le_refl</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="n">le_refl</span> <span class="n">x</span><span class="bp">.</span><span class="n">abs</span><span class="o">,</span>
+  <span class="n">le_trans</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">x</span> <span class="n">y</span> <span class="n">z</span><span class="o">,</span> <span class="bp">@</span><span class="n">le_trans</span> <span class="n">ℝ</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="o">}</span>
 
-instance : preorder ℂ :=
-{ le := λ x y, x.abs ≤ y.abs,
-  le_refl := λ x, le_refl x.abs,
-  le_trans := λ x y z, @le_trans ℝ _ _ _ _ }
-
-example (f : ℂ → ℂ) : tendsto f at_top at_top ↔ 
-  ∀ x : ℝ, ∃ r, ∀ z : ℂ, r < z.abs → x < (f z).abs 
-```
+<span class="kn">example</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">ℂ</span> <span class="bp">→</span> <span class="n">ℂ</span><span class="o">)</span> <span class="o">:</span> <span class="n">tendsto</span> <span class="n">f</span> <span class="n">at_top</span> <span class="n">at_top</span> <span class="bp">↔</span>
+  <span class="bp">∀</span> <span class="n">x</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">,</span> <span class="bp">∃</span> <span class="n">r</span><span class="o">,</span> <span class="bp">∀</span> <span class="n">z</span> <span class="o">:</span> <span class="n">ℂ</span><span class="o">,</span> <span class="n">r</span> <span class="bp">&lt;</span> <span class="n">z</span><span class="bp">.</span><span class="n">abs</span> <span class="bp">→</span> <span class="n">x</span> <span class="bp">&lt;</span> <span class="o">(</span><span class="n">f</span> <span class="n">z</span><span class="o">)</span><span class="bp">.</span><span class="n">abs</span>
+</pre></div>
 
 #### [ Chris Hughes (Nov 30 2018 at 02:22)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/tendsto%20at_top%20at_top/near/148833438):
-Okay. I managed to prove this. My first experience dealing with filters.
-```lean
-lemma tendsto_at_top_at_top_iff {α β : Type} [preorder α] [preorder β] 
-  [hα : nonempty α] 
-  (h : directed (@has_le.le α _) id)
-  (f : α → β) : 
-  tendsto f at_top at_top ↔ ∀ (b : β), ∃ (i : α), ∀ (a : α), i ≤ a → b ≤ f a :=
-have directed ge (λ (a : α), principal {b : α | a ≤ b}),
-  from λ a b, let ⟨z, hz⟩ := h b a in 
-    ⟨z, λ s h x hzx, h (le_trans hz.2 hzx), 
-      λ s h x hzx, h (le_trans hz.1 hzx)⟩,
-by rw [tendsto_at_top, at_top, infi_sets_eq this hα]; simp
-```
+<p>Okay. I managed to prove this. My first experience dealing with filters.</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">tendsto_at_top_at_top_iff</span> <span class="o">{</span><span class="n">α</span> <span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">[</span><span class="n">preorder</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">preorder</span> <span class="n">β</span><span class="o">]</span>
+  <span class="o">[</span><span class="n">hα</span> <span class="o">:</span> <span class="n">nonempty</span> <span class="n">α</span><span class="o">]</span>
+  <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">directed</span> <span class="o">(</span><span class="bp">@</span><span class="n">has_le</span><span class="bp">.</span><span class="n">le</span> <span class="n">α</span> <span class="bp">_</span><span class="o">)</span> <span class="n">id</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">tendsto</span> <span class="n">f</span> <span class="n">at_top</span> <span class="n">at_top</span> <span class="bp">↔</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">b</span> <span class="o">:</span> <span class="n">β</span><span class="o">),</span> <span class="bp">∃</span> <span class="o">(</span><span class="n">i</span> <span class="o">:</span> <span class="n">α</span><span class="o">),</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">),</span> <span class="n">i</span> <span class="bp">≤</span> <span class="n">a</span> <span class="bp">→</span> <span class="n">b</span> <span class="bp">≤</span> <span class="n">f</span> <span class="n">a</span> <span class="o">:=</span>
+<span class="k">have</span> <span class="n">directed</span> <span class="n">ge</span> <span class="o">(</span><span class="bp">λ</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">),</span> <span class="n">principal</span> <span class="o">{</span><span class="n">b</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">|</span> <span class="n">a</span> <span class="bp">≤</span> <span class="n">b</span><span class="o">}),</span>
+  <span class="k">from</span> <span class="bp">λ</span> <span class="n">a</span> <span class="n">b</span><span class="o">,</span> <span class="k">let</span> <span class="bp">⟨</span><span class="n">z</span><span class="o">,</span> <span class="n">hz</span><span class="bp">⟩</span> <span class="o">:=</span> <span class="n">h</span> <span class="n">b</span> <span class="n">a</span> <span class="k">in</span>
+    <span class="bp">⟨</span><span class="n">z</span><span class="o">,</span> <span class="bp">λ</span> <span class="n">s</span> <span class="n">h</span> <span class="n">x</span> <span class="n">hzx</span><span class="o">,</span> <span class="n">h</span> <span class="o">(</span><span class="n">le_trans</span> <span class="n">hz</span><span class="bp">.</span><span class="mi">2</span> <span class="n">hzx</span><span class="o">),</span>
+      <span class="bp">λ</span> <span class="n">s</span> <span class="n">h</span> <span class="n">x</span> <span class="n">hzx</span><span class="o">,</span> <span class="n">h</span> <span class="o">(</span><span class="n">le_trans</span> <span class="n">hz</span><span class="bp">.</span><span class="mi">1</span> <span class="n">hzx</span><span class="o">)</span><span class="bp">⟩</span><span class="o">,</span>
+<span class="k">by</span> <span class="n">rw</span> <span class="o">[</span><span class="n">tendsto_at_top</span><span class="o">,</span> <span class="n">at_top</span><span class="o">,</span> <span class="n">infi_sets_eq</span> <span class="n">this</span> <span class="n">hα</span><span class="o">]</span><span class="bp">;</span> <span class="n">simp</span>
+</pre></div>
 
 #### [ Chris Hughes (Nov 30 2018 at 02:27)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/tendsto%20at_top%20at_top/near/148833637):
-Is there a better way of stating `directed has_le.le id`?
+<p>Is there a better way of stating <code>directed has_le.le id</code>?</p>
 
 #### [ Mario Carneiro (Nov 30 2018 at 04:18)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/tendsto%20at_top%20at_top/near/148837870):
-I don't think so; there are directed sets and directed images but directed types haven't come up. Using `directed (<=) (@id a)` should work fine
+<p>I don't think so; there are directed sets and directed images but directed types haven't come up. Using <code>directed (&lt;=) (@id a)</code> should work fine</p>
 
 #### [ Sebastien Gouezel (Nov 30 2018 at 08:14)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/tendsto%20at_top%20at_top/near/148845760):
-If you want to define convergence to infinity in C, or another metric space, it looks strange to introduce an artificial order. It would probably be more natural to introduce a filter `at_infinity`, generated by the complements of closed balls with arbitrary center and radius. Another good exercise with filters :) Even better, show that this filter is trivial if and only if the space is bounded (but you will need #PR464 for the notion of boundedness in a metric space)
+<p>If you want to define convergence to infinity in C, or another metric space, it looks strange to introduce an artificial order. It would probably be more natural to introduce a filter <code>at_infinity</code>, generated by the complements of closed balls with arbitrary center and radius. Another good exercise with filters :) Even better, show that this filter is trivial if and only if the space is bounded (but you will need #PR464 for the notion of boundedness in a metric space)</p>
 
 #### [ Mario Carneiro (Nov 30 2018 at 08:28)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/tendsto%20at_top%20at_top/near/148846186):
-I guess that the usual filter here is the one used in the alexandroff one point compactification - the complements of compact sets
+<p>I guess that the usual filter here is the one used in the alexandroff one point compactification - the complements of compact sets</p>
 
 #### [ Patrick Massot (Nov 30 2018 at 08:29)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/tendsto%20at_top%20at_top/near/148846197):
-I agree the order thing looks very artificial
+<p>I agree the order thing looks very artificial</p>
 
 #### [ Patrick Massot (Nov 30 2018 at 08:31)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/tendsto%20at_top%20at_top/near/148846260):
-We could go straight to https://en.wikipedia.org/wiki/End_(topology) but I guess that the infinity filter in a normed real vector space is a better first target
+<p>We could go straight to <a href="https://en.wikipedia.org/wiki/End_(topology)" target="_blank" title="https://en.wikipedia.org/wiki/End_(topology)">https://en.wikipedia.org/wiki/End_(topology)</a> but I guess that the infinity filter in a normed real vector space is a better first target</p>
 
 #### [ Sebastien Gouezel (Nov 30 2018 at 08:45)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/tendsto%20at_top%20at_top/near/148846681):
-You really have two natural filters, which do not coincide in general (but do coincide in proper spaces): the complements of compact sets, and the complements of bounded sets. I have had more use in my own research for the second one, but both are definitely relevant.
+<p>You really have two natural filters, which do not coincide in general (but do coincide in proper spaces): the complements of compact sets, and the complements of bounded sets. I have had more use in my own research for the second one, but both are definitely relevant.</p>
 
 #### [ Kevin Buzzard (Nov 30 2018 at 08:45)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/tendsto%20at_top%20at_top/near/148846684):
-I guess the preorder looks strange to mathematicians because on the whole they don't usually deal with the concept of a preorder, like semirings look strange. Chris is taking a metric space and a point, and looking at the "distance to that point" real-valued function; and any function from any space to the reals gives a pre-order structure on the the space because in contrast to partial offers you can just pull back a preorder along an arbitrary map. Why this doesn't come up more often I don't know, but I agree that it looks strange.
+<p>I guess the preorder looks strange to mathematicians because on the whole they don't usually deal with the concept of a preorder, like semirings look strange. Chris is taking a metric space and a point, and looking at the "distance to that point" real-valued function; and any function from any space to the reals gives a pre-order structure on the the space because in contrast to partial offers you can just pull back a preorder along an arbitrary map. Why this doesn't come up more often I don't know, but I agree that it looks strange.</p>
 
 #### [ Sebastien Gouezel (Nov 30 2018 at 08:47)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/tendsto%20at_top%20at_top/near/148846741):
-One problem with this order thing is that it depends on the choice of a basepoint, while this can be avoided with the more usual approaches.
+<p>One problem with this order thing is that it depends on the choice of a basepoint, while this can be avoided with the more usual approaches.</p>
 
 
 {% endraw %}

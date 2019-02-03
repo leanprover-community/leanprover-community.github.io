@@ -12,114 +12,114 @@ permalink: archive/113488general/53884casesfailsonexists.html
 
 {% raw %}
 #### [ Nima (Apr 21 2018 at 09:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20fails%20on%20exists/near/125485520):
-Can you explain this error message (it happens when I say `cases hm with aa bb`, but `by_cases number.has_min α with hm` works perfectly fine):
-```lean
-induction tactic failed, recursor 'Exists.dcases_on' can only eliminate into Prop
-state:
-α : Type u_1,
-_inst_1 : number α,
-trvk : triviality_kind,
-strk : strictness_kind,
-bnd : α,
-c : constraint α trvk kupper strk,
-ht : ¬is_trivial c,
-hs : is_strict c,
-hm : ∃ (hm : number.has_min α), number.min hm < get_bound c _
-⊢ α
+<p>Can you explain this error message (it happens when I say <code>cases hm with aa bb</code>, but <code>by_cases number.has_min α with hm</code> works perfectly fine):</p>
+<div class="codehilite"><pre><span></span><span class="n">induction</span> <span class="n">tactic</span> <span class="n">failed</span><span class="o">,</span> <span class="n">recursor</span> <span class="err">&#39;</span><span class="n">Exists</span><span class="bp">.</span><span class="n">dcases_on&#39;</span> <span class="n">can</span> <span class="n">only</span> <span class="n">eliminate</span> <span class="n">into</span> <span class="kt">Prop</span>
+<span class="n">state</span><span class="o">:</span>
+<span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u_1</span><span class="o">,</span>
+<span class="bp">_</span><span class="n">inst_1</span> <span class="o">:</span> <span class="n">number</span> <span class="n">α</span><span class="o">,</span>
+<span class="n">trvk</span> <span class="o">:</span> <span class="n">triviality_kind</span><span class="o">,</span>
+<span class="n">strk</span> <span class="o">:</span> <span class="n">strictness_kind</span><span class="o">,</span>
+<span class="n">bnd</span> <span class="o">:</span> <span class="n">α</span><span class="o">,</span>
+<span class="n">c</span> <span class="o">:</span> <span class="n">constraint</span> <span class="n">α</span> <span class="n">trvk</span> <span class="n">kupper</span> <span class="n">strk</span><span class="o">,</span>
+<span class="n">ht</span> <span class="o">:</span> <span class="bp">¬</span><span class="n">is_trivial</span> <span class="n">c</span><span class="o">,</span>
+<span class="n">hs</span> <span class="o">:</span> <span class="n">is_strict</span> <span class="n">c</span><span class="o">,</span>
+<span class="n">hm</span> <span class="o">:</span> <span class="bp">∃</span> <span class="o">(</span><span class="n">hm</span> <span class="o">:</span> <span class="n">number</span><span class="bp">.</span><span class="n">has_min</span> <span class="n">α</span><span class="o">),</span> <span class="n">number</span><span class="bp">.</span><span class="n">min</span> <span class="n">hm</span> <span class="bp">&lt;</span> <span class="n">get_bound</span> <span class="n">c</span> <span class="bp">_</span>
+<span class="err">⊢</span> <span class="n">α</span>
+</pre></div>
 
 #### [ Mario Carneiro (Apr 21 2018 at 09:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20fails%20on%20exists/near/125485620):
-You can't destruct an exists directly because it's a (small eliminating) Prop. However, in the special case when it is an exists over a prop, you can use `hm.fst` and `hm.snd` to project out the components
+<p>You can't destruct an exists directly because it's a (small eliminating) Prop. However, in the special case when it is an exists over a prop, you can use <code>hm.fst</code> and <code>hm.snd</code> to project out the components</p>
 
 #### [ Nima (Apr 21 2018 at 10:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20fails%20on%20exists/near/125485757):
-Isn't that the same situation as 
-```lean
-example : (∃ a:1>2, false) → false :=
-begin
-  intro h,
-  cases h with a b, -- no problem here
-  assumption
-end
-```
+<p>Isn't that the same situation as </p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">:</span> <span class="o">(</span><span class="bp">∃</span> <span class="n">a</span><span class="o">:</span><span class="mi">1</span><span class="bp">&gt;</span><span class="mi">2</span><span class="o">,</span> <span class="n">false</span><span class="o">)</span> <span class="bp">→</span> <span class="n">false</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">intro</span> <span class="n">h</span><span class="o">,</span>
+  <span class="n">cases</span> <span class="n">h</span> <span class="k">with</span> <span class="n">a</span> <span class="n">b</span><span class="o">,</span> <span class="c1">-- no problem here</span>
+  <span class="n">assumption</span>
+<span class="kn">end</span>
+</pre></div>
 
 #### [ Mario Carneiro (Apr 21 2018 at 10:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20fails%20on%20exists/near/125485763):
-You can use cases on exists to prove a Prop, but not to construct data (something in a type that lives in Type)
+<p>You can use cases on exists to prove a Prop, but not to construct data (something in a type that lives in Type)</p>
 
 #### [ Mario Carneiro (Apr 21 2018 at 10:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20fails%20on%20exists/near/125485803):
-here it's okay because `false : Prop`
+<p>here it's okay because <code>false : Prop</code></p>
 
 #### [ Mario Carneiro (Apr 21 2018 at 10:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20fails%20on%20exists/near/125485804):
-while in the other case `α : Type u_1 != Prop`
+<p>while in the other case <code>α : Type u_1 != Prop</code></p>
 
 #### [ Mario Carneiro (Apr 21 2018 at 10:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20fails%20on%20exists/near/125485850):
-The basic idea is that if you want to use partial functions in your code, you have to write all the actual function calls not dependent on the proof part
+<p>The basic idea is that if you want to use partial functions in your code, you have to write all the actual function calls not dependent on the proof part</p>
 
 #### [ Nima (Apr 21 2018 at 10:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20fails%20on%20exists/near/125485851):
-Are you pointing to the `α` that is used in the goal?
+<p>Are you pointing to the <code>α</code> that is used in the goal?</p>
 
 #### [ Mario Carneiro (Apr 21 2018 at 10:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20fails%20on%20exists/near/125485852):
-yes
+<p>yes</p>
 
 #### [ Mario Carneiro (Apr 21 2018 at 10:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20fails%20on%20exists/near/125485854):
-why are you "proving" alpha?
+<p>why are you "proving" alpha?</p>
 
 #### [ Mario Carneiro (Apr 21 2018 at 10:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20fails%20on%20exists/near/125485861):
-you should write all the functions first, in term mode, and only enter tactic mode to justify the proof part of your partial function
+<p>you should write all the functions first, in term mode, and only enter tactic mode to justify the proof part of your partial function</p>
 
 #### [ Nima (Apr 21 2018 at 10:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20fails%20on%20exists/near/125485862):
-It is supposed to be a function, not a proof.
-I find it easier to go into tactic mode.
+<p>It is supposed to be a function, not a proof.<br>
+I find it easier to go into tactic mode.</p>
 
 #### [ Mario Carneiro (Apr 21 2018 at 10:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20fails%20on%20exists/near/125485904):
-You want to be careful about the dependency structure that the tactic creates
+<p>You want to be careful about the dependency structure that the tactic creates</p>
 
 #### [ Nima (Apr 21 2018 at 10:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20fails%20on%20exists/near/125485948):
-For example, here is a function in term mode.
-```lean
-def has_min : Prop :=
-  if ht : is_trivial c then number.has_min α else
-  match dirk with
-  | klower := is_strict c →
-                ¬number.is_dense α ∧
-                ∀ hm:number.has_max α, 
-                  get_bound c (not_trivial_is_not_ktrv c ht) < number.max hm
-  | kupper := ∃ hm : number.has_min α, 
-                (is_strict c → 
-                  (number.min hm) < (get_bound c (not_trivial_is_not_ktrv c ht)))
-  end 
-```
-Now suppose, `has_min` is true. What is the value of `min`? I have to first check triviality, then direction, then whether or not alpha is dense, then ...
-Every one of these gives me a different function that I should use to find minimum value. So I entered tactic mode.
+<p>For example, here is a function in term mode.</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">has_min</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span>
+  <span class="k">if</span> <span class="n">ht</span> <span class="o">:</span> <span class="n">is_trivial</span> <span class="n">c</span> <span class="k">then</span> <span class="n">number</span><span class="bp">.</span><span class="n">has_min</span> <span class="n">α</span> <span class="k">else</span>
+  <span class="k">match</span> <span class="n">dirk</span> <span class="k">with</span>
+  <span class="bp">|</span> <span class="n">klower</span> <span class="o">:=</span> <span class="n">is_strict</span> <span class="n">c</span> <span class="bp">→</span>
+                <span class="bp">¬</span><span class="n">number</span><span class="bp">.</span><span class="n">is_dense</span> <span class="n">α</span> <span class="bp">∧</span>
+                <span class="bp">∀</span> <span class="n">hm</span><span class="o">:</span><span class="n">number</span><span class="bp">.</span><span class="n">has_max</span> <span class="n">α</span><span class="o">,</span>
+                  <span class="n">get_bound</span> <span class="n">c</span> <span class="o">(</span><span class="n">not_trivial_is_not_ktrv</span> <span class="n">c</span> <span class="n">ht</span><span class="o">)</span> <span class="bp">&lt;</span> <span class="n">number</span><span class="bp">.</span><span class="n">max</span> <span class="n">hm</span>
+  <span class="bp">|</span> <span class="n">kupper</span> <span class="o">:=</span> <span class="bp">∃</span> <span class="n">hm</span> <span class="o">:</span> <span class="n">number</span><span class="bp">.</span><span class="n">has_min</span> <span class="n">α</span><span class="o">,</span>
+                <span class="o">(</span><span class="n">is_strict</span> <span class="n">c</span> <span class="bp">→</span>
+                  <span class="o">(</span><span class="n">number</span><span class="bp">.</span><span class="n">min</span> <span class="n">hm</span><span class="o">)</span> <span class="bp">&lt;</span> <span class="o">(</span><span class="n">get_bound</span> <span class="n">c</span> <span class="o">(</span><span class="n">not_trivial_is_not_ktrv</span> <span class="n">c</span> <span class="n">ht</span><span class="o">)))</span>
+  <span class="kn">end</span>
+</pre></div>
+
+
+<p>Now suppose, <code>has_min</code> is true. What is the value of <code>min</code>? I have to first check triviality, then direction, then whether or not alpha is dense, then ...<br>
+Every one of these gives me a different function that I should use to find minimum value. So I entered tactic mode.</p>
 
 #### [ Mario Carneiro (Apr 21 2018 at 10:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20fails%20on%20exists/near/125485950):
-For example with your if then else function from before:
-```
-def f (c:check) : nat :=
+<p>For example with your if then else function from before:</p>
+<div class="codehilite"><pre><span></span>def f (c:check) : nat :=
 if h : p then
   f₁ (begin ... end)
 else
   f₂ (begin ... end)
-```
-you should enter tactic mode for the proof part but not while determining which function to call
+</pre></div>
+
+
+<p>you should enter tactic mode for the proof part but not while determining which function to call</p>
 
 #### [ Mario Carneiro (Apr 21 2018 at 10:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20fails%20on%20exists/near/125485998):
-I already mentioned before that you are making your life harder with this encoding, you really want to encode this in the structure of your inductive types. You would be better served encoding `has_min` as an inductive type as well
+<p>I already mentioned before that you are making your life harder with this encoding, you really want to encode this in the structure of your inductive types. You would be better served encoding <code>has_min</code> as an inductive type as well</p>
 
 #### [ Mario Carneiro (Apr 21 2018 at 10:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20fails%20on%20exists/near/125486151):
-Have you considered using `roption`? It encodes a pair of a proof and a partial function, which makes it easy to write super dependent partial functions like this
+<p>Have you considered using <code>roption</code>? It encodes a pair of a proof and a partial function, which makes it easy to write super dependent partial functions like this</p>
 
 #### [ Nima (Apr 21 2018 at 10:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20fails%20on%20exists/near/125486261):
-Nope, I have to look into `roption`.
+<p>Nope, I have to look into <code>roption</code>.</p>
 
 #### [ Mario Carneiro (Apr 21 2018 at 10:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20fails%20on%20exists/near/125486627):
-Why do you use so many decidable propositions instead of bools for your work? Usually the answer is convenience but it's clearly not helping you
+<p>Why do you use so many decidable propositions instead of bools for your work? Usually the answer is convenience but it's clearly not helping you</p>
 
 #### [ Nima (Apr 21 2018 at 10:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20fails%20on%20exists/near/125486992):
-Not sure, practice ;) or avoiding coe as much as possible
+<p>Not sure, practice ;) or avoiding coe as much as possible</p>
 
 #### [ Mario Carneiro (Apr 21 2018 at 11:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20fails%20on%20exists/near/125487285):
-What do you think of having the `number` fields like this? I find that using `option` makes the proofs and statements much easier
-```
-def has_in_between {α} [has_lt α] (x y : α) := ∃ z : α, x < z ∧ z < y
+<p>What do you think of having the <code>number</code> fields like this? I find that using <code>option</code> makes the proofs and statements much easier</p>
+<div class="codehilite"><pre><span></span>def has_in_between {α} [has_lt α] (x y : α) := ∃ z : α, x &lt; z ∧ z &lt; y
 
 class number (α:Type*) extends decidable_linear_order α :=
 [nonempty_decidable : decidable (nonempty α)]
@@ -131,15 +131,15 @@ class number (α:Type*) extends decidable_linear_order α :=
 (max_prop : ∀ a, a ∈ max ↔ ∀ m:α, m ≤ a)
 
 (next : α → option α)
-(next_prop : ∀ x y, y ∈ next x ↔ x < y ∧ ∀ z:α, z ≤ x ∨ y ≤ z)
+(next_prop : ∀ x y, y ∈ next x ↔ x &lt; y ∧ ∀ z:α, z ≤ x ∨ y ≤ z)
 (prev : α → option α)
-(prev_prop : ∀ x y, y ∈ next x ↔ x < y ∧ ∀ z:α, z ≤ x ∨ y ≤ z)
+(prev_prop : ∀ x y, y ∈ next x ↔ x &lt; y ∧ ∀ z:α, z ≤ x ∨ y ≤ z)
 (is_dense : bool)
-(is_dense_prop : 
+(is_dense_prop :
     if is_dense then
-      ∀ x y : α, x < y → ∃ z : α, x < z ∧ z < y
+      ∀ x y : α, x &lt; y → ∃ z : α, x &lt; z ∧ z &lt; y
     else
-      (∀ x ∉ max, ∃ y, y ∈ next x) ∧ 
+      (∀ x ∉ max, ∃ y, y ∈ next x) ∧
       (∀ x ∉ min, ∃ y, y ∈ prev x))
 
 [has_in_between_decidable : ∀ x y : α, decidable (has_in_between x y)]
@@ -157,67 +157,64 @@ class number (α:Type*) extends decidable_linear_order α :=
 (mul₁ : α → α → option α)
 (sub₁ : α → α → option α)
 (div₁ : α → α → option α)
-```
+</pre></div>
 
 #### [ Nima (Apr 21 2018 at 11:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20fails%20on%20exists/near/125487469):
-They used to be like this.
-The reason I separated `min` and `has_min` is just for performance of the final **hypothetical** code.
-`has_min` is never slower than `min`, but it is quite possible for it to be faster.
-For example, 
-```lean
-def has_inf : Prop := if is_satisfiable c then is_bounded_left  c else number.has_max α
-def inf (h: has_inf c) : α :=
-  if hsat : is_satisfiable c then 
-    let hbl := eq.mp (if_pos hsat) h in
-    if ht : is_trivial c  then number.min (hbl (or.inl ht)) else
-    if hd : dirk = kupper then number.min (hbl (or.inr hd)) else
-    get_bound c (not_trivial_is_not_ktrv c ht)
-  else
-    number.max (eq.mp (if_neg hsat) h)
-```
+<p>They used to be like this.<br>
+The reason I separated <code>min</code> and <code>has_min</code> is just for performance of the final <strong>hypothetical</strong> code.<br>
+<code>has_min</code> is never slower than <code>min</code>, but it is quite possible for it to be faster.<br>
+For example, </p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">has_inf</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span> <span class="k">if</span> <span class="n">is_satisfiable</span> <span class="n">c</span> <span class="k">then</span> <span class="n">is_bounded_left</span>  <span class="n">c</span> <span class="k">else</span> <span class="n">number</span><span class="bp">.</span><span class="n">has_max</span> <span class="n">α</span>
+<span class="n">def</span> <span class="n">inf</span> <span class="o">(</span><span class="n">h</span><span class="o">:</span> <span class="n">has_inf</span> <span class="n">c</span><span class="o">)</span> <span class="o">:</span> <span class="n">α</span> <span class="o">:=</span>
+  <span class="k">if</span> <span class="n">hsat</span> <span class="o">:</span> <span class="n">is_satisfiable</span> <span class="n">c</span> <span class="k">then</span>
+    <span class="k">let</span> <span class="n">hbl</span> <span class="o">:=</span> <span class="n">eq</span><span class="bp">.</span><span class="n">mp</span> <span class="o">(</span><span class="n">if_pos</span> <span class="n">hsat</span><span class="o">)</span> <span class="n">h</span> <span class="k">in</span>
+    <span class="k">if</span> <span class="n">ht</span> <span class="o">:</span> <span class="n">is_trivial</span> <span class="n">c</span>  <span class="k">then</span> <span class="n">number</span><span class="bp">.</span><span class="n">min</span> <span class="o">(</span><span class="n">hbl</span> <span class="o">(</span><span class="n">or</span><span class="bp">.</span><span class="n">inl</span> <span class="n">ht</span><span class="o">))</span> <span class="k">else</span>
+    <span class="k">if</span> <span class="n">hd</span> <span class="o">:</span> <span class="n">dirk</span> <span class="bp">=</span> <span class="n">kupper</span> <span class="k">then</span> <span class="n">number</span><span class="bp">.</span><span class="n">min</span> <span class="o">(</span><span class="n">hbl</span> <span class="o">(</span><span class="n">or</span><span class="bp">.</span><span class="n">inr</span> <span class="n">hd</span><span class="o">))</span> <span class="k">else</span>
+    <span class="n">get_bound</span> <span class="n">c</span> <span class="o">(</span><span class="n">not_trivial_is_not_ktrv</span> <span class="n">c</span> <span class="n">ht</span><span class="o">)</span>
+  <span class="k">else</span>
+    <span class="n">number</span><span class="bp">.</span><span class="n">max</span> <span class="o">(</span><span class="n">eq</span><span class="bp">.</span><span class="n">mp</span> <span class="o">(</span><span class="n">if_neg</span> <span class="n">hsat</span><span class="o">)</span> <span class="n">h</span><span class="o">)</span>
+</pre></div>
 
 #### [ Mario Carneiro (Apr 21 2018 at 11:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20fails%20on%20exists/near/125487513):
-when will knowing `has_inf` make computation of `inf` faster?
+<p>when will knowing <code>has_inf</code> make computation of <code>inf</code> faster?</p>
 
 #### [ Mario Carneiro (Apr 21 2018 at 11:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20fails%20on%20exists/near/125487560):
-A quick and simple addition to allow for faster implementations of `has_min` is the following extra field:
-```
-[has_min : decidable min.is_some]
-```
+<p>A quick and simple addition to allow for faster implementations of <code>has_min</code> is the following extra field:</p>
+<div class="codehilite"><pre><span></span>[has_min : decidable min.is_some]
+</pre></div>
 
 #### [ Nima (Apr 21 2018 at 11:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20fails%20on%20exists/near/125487566):
-I did not say using `has_inf` makes `inf` faster, suppose all I want is `has_inf`. If I use option, I have to call `inf`. But `has_inf` could have been implemented faster.
+<p>I did not say using <code>has_inf</code> makes <code>inf</code> faster, suppose all I want is <code>has_inf</code>. If I use option, I have to call <code>inf</code>. But <code>has_inf</code> could have been implemented faster.</p>
 
 #### [ Mario Carneiro (Apr 21 2018 at 11:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20fails%20on%20exists/near/125487609):
-or you could do it in two stages with a `bool` function:
-```
-(has_min : bool) (has_min_prop : has_min = min.is_some)
-```
+<p>or you could do it in two stages with a <code>bool</code> function:</p>
+<div class="codehilite"><pre><span></span>(has_min : bool) (has_min_prop : has_min = min.is_some)
+</pre></div>
 
 #### [ Mario Carneiro (Apr 21 2018 at 11:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20fails%20on%20exists/near/125487614):
-that way it won't interfere with the definition of `min` or `inf` or whatever
+<p>that way it won't interfere with the definition of <code>min</code> or <code>inf</code> or whatever</p>
 
 #### [ Nima (Apr 21 2018 at 11:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20fails%20on%20exists/near/125487615):
-May be we mean different things by `implementation`. I mean non-lean code, more specifically C++. If I did not care about performance, I would never consider C++.
+<p>May be we mean different things by <code>implementation</code>. I mean non-lean code, more specifically C++. If I did not care about performance, I would never consider C++.</p>
 
 #### [ Mario Carneiro (Apr 21 2018 at 11:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20fails%20on%20exists/near/125487665):
-I care about performance more than most lean users, indeed I'm writing a compiler and we have to think about these things. But the extra hypothesis parameter is not as erasable as it appears at first
+<p>I care about performance more than most lean users, indeed I'm writing a compiler and we have to think about these things. But the extra hypothesis parameter is not as erasable as it appears at first</p>
 
 #### [ Nima (Apr 21 2018 at 11:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20fails%20on%20exists/near/125487708):
-Are you talking about `(h: has_inf c)` as a parameter to `inf`?
+<p>Are you talking about <code>(h: has_inf c)</code> as a parameter to <code>inf</code>?</p>
 
 #### [ Mario Carneiro (Apr 21 2018 at 11:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20fails%20on%20exists/near/125487709):
-yes
+<p>yes</p>
 
 #### [ Mario Carneiro (Apr 21 2018 at 11:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20fails%20on%20exists/near/125487714):
-How do you intend to relate the lean code you are writing to C++? This affects performance considerations
+<p>How do you intend to relate the lean code you are writing to C++? This affects performance considerations</p>
 
 #### [ Mario Carneiro (Apr 21 2018 at 11:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20fails%20on%20exists/near/125487721):
-Is this code to be `#eval`d? Compiled to C++ and then run? Used only for correctness verification?
+<p>Is this code to be <code>#eval</code>d? Compiled to C++ and then run? Used only for correctness verification?</p>
 
 #### [ Nima (Apr 21 2018 at 11:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20fails%20on%20exists/near/125487859):
-But that is for `inf` and not `has_inf`.
-Right now I know nothing about automatic code generation in lean. I doubt it does exactly what I wish (not sure what exactly that is either). For example, if I have a constraint, I want it to be mutable. If I define addition of two constraints, there is going to be 5 (I guess) additions, but in lean I will have only one. So mostly manual transformation. That could also be a reason why I am not a fan of `match` in lean. I don't know any formal semantics for c++, so not much into verification/validation. But I was thinking about an interval that support both strict and non-strict constraint in both dynamic and static, and realized that is too much for me to verify on my mind. So it would be nice if I can prove the operations first (on a scratch paper) and then at least be sure about the correct behavior.
+<p>But that is for <code>inf</code> and not <code>has_inf</code>.<br>
+Right now I know nothing about automatic code generation in lean. I doubt it does exactly what I wish (not sure what exactly that is either). For example, if I have a constraint, I want it to be mutable. If I define addition of two constraints, there is going to be 5 (I guess) additions, but in lean I will have only one. So mostly manual transformation. That could also be a reason why I am not a fan of <code>match</code> in lean. I don't know any formal semantics for c++, so not much into verification/validation. But I was thinking about an interval that support both strict and non-strict constraint in both dynamic and static, and realized that is too much for me to verify on my mind. So it would be nice if I can prove the operations first (on a scratch paper) and then at least be sure about the correct behavior.</p>
 
 
 {% endraw %}

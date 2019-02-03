@@ -12,16 +12,16 @@ permalink: archive/113489newmembers/14428havevsassume.html
 
 {% raw %}
 #### [ Jeremiah (Oct 04 2018 at 05:57)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/have%20vs%20assume/near/135149874):
-What is the difference between have and assume?
+<p>What is the difference between have and assume?</p>
 
 #### [ Simon Hudon (Oct 04 2018 at 05:59)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/have%20vs%20assume/near/135149938):
-`have` states an assertion that you want to prove. `assume` is something you use when you're trying to prove `p -> q`: you do `assume h : p, show q, ... `
+<p><code>have</code> states an assertion that you want to prove. <code>assume</code> is something you use when you're trying to prove <code>p -&gt; q</code>: you do <code>assume h : p, show q, ... </code></p>
 
 #### [ Jeremiah (Oct 04 2018 at 06:01)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/have%20vs%20assume/near/135150014):
-thanks
+<p>thanks</p>
 
 #### [ Simon Hudon (Oct 04 2018 at 06:01)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/have%20vs%20assume/near/135150017):
-:+1:
+<p><span class="emoji emoji-1f44d" title="+1">:+1:</span></p>
 
 
 {% endraw %}

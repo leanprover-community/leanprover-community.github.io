@@ -12,56 +12,57 @@ permalink: archive/113488general/33035oldstructurecmdinstructureliterals.html
 
 {% raw %}
 #### [ Mario Carneiro (Nov 05 2018 at 21:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/old_structure_cmd%20in%20structure%20literals/near/146821394):
-Here's a strange discovery:
-```lean
-import order.complete_lattice
+<p>Here's a strange discovery:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">order</span><span class="bp">.</span><span class="n">complete_lattice</span>
 
-namespace lattice
-set_option old_structure_cmd false
+<span class="kn">namespace</span> <span class="n">lattice</span>
+<span class="kn">set_option</span> <span class="n">old_structure_cmd</span> <span class="n">false</span>
 
-def complete_lattice.copy {α} (c : complete_lattice α)
-  (le : α → α → Prop) (eq_le : le = @complete_lattice.le α c)
-  (top : α) (eq_top : top = @complete_lattice.top α c)
-  (bot : α) (eq_bot : bot = @complete_lattice.bot α c)
-  (sup : α → α → α) (eq_sup : sup = @complete_lattice.sup α c)
-  (inf : α → α → α) (eq_inf : inf = @complete_lattice.inf α c)
-  (Sup : set α → α) (eq_Sup : Sup = @complete_lattice.Sup α c)
-  (Inf : set α → α) (eq_Inf : Inf = @complete_lattice.Inf α c) :
-  complete_lattice α :=
-begin
-  refine { le := le, top := top, bot := bot, sup := sup, inf := inf, Sup := Sup, Inf := Inf, ..};
-    subst_vars,
-  exact @complete_lattice.le_refl α c,
-  exact @complete_lattice.le_trans α c,
-  exact @complete_lattice.le_antisymm α c,
-  exact @complete_lattice.le_sup_left α c,
-  exact @complete_lattice.le_sup_right α c,
-  exact @complete_lattice.sup_le α c,
-  exact @complete_lattice.inf_le_left α c,
-  exact @complete_lattice.inf_le_right α c,
-  exact @complete_lattice.le_inf α c,
-  exact @complete_lattice.le_top α c,
-  exact @complete_lattice.bot_le α c,
-  exact @complete_lattice.le_Sup α c,
-  exact @complete_lattice.Sup_le α c,
-  exact @complete_lattice.Inf_le α c,
-  exact @complete_lattice.le_Inf α c
-end
-end lattice
-```
-If you put `set_option old_structure_cmd true` instead, this proof times out
+<span class="n">def</span> <span class="n">complete_lattice</span><span class="bp">.</span><span class="n">copy</span> <span class="o">{</span><span class="n">α</span><span class="o">}</span> <span class="o">(</span><span class="n">c</span> <span class="o">:</span> <span class="n">complete_lattice</span> <span class="n">α</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">le</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">(</span><span class="n">eq_le</span> <span class="o">:</span> <span class="n">le</span> <span class="bp">=</span> <span class="bp">@</span><span class="n">complete_lattice</span><span class="bp">.</span><span class="n">le</span> <span class="n">α</span> <span class="n">c</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">top</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">eq_top</span> <span class="o">:</span> <span class="n">top</span> <span class="bp">=</span> <span class="bp">@</span><span class="n">complete_lattice</span><span class="bp">.</span><span class="n">top</span> <span class="n">α</span> <span class="n">c</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">bot</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">eq_bot</span> <span class="o">:</span> <span class="n">bot</span> <span class="bp">=</span> <span class="bp">@</span><span class="n">complete_lattice</span><span class="bp">.</span><span class="n">bot</span> <span class="n">α</span> <span class="n">c</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">sup</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">eq_sup</span> <span class="o">:</span> <span class="n">sup</span> <span class="bp">=</span> <span class="bp">@</span><span class="n">complete_lattice</span><span class="bp">.</span><span class="n">sup</span> <span class="n">α</span> <span class="n">c</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">inf</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">eq_inf</span> <span class="o">:</span> <span class="n">inf</span> <span class="bp">=</span> <span class="bp">@</span><span class="n">complete_lattice</span><span class="bp">.</span><span class="n">inf</span> <span class="n">α</span> <span class="n">c</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">Sup</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">eq_Sup</span> <span class="o">:</span> <span class="n">Sup</span> <span class="bp">=</span> <span class="bp">@</span><span class="n">complete_lattice</span><span class="bp">.</span><span class="n">Sup</span> <span class="n">α</span> <span class="n">c</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">Inf</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">eq_Inf</span> <span class="o">:</span> <span class="n">Inf</span> <span class="bp">=</span> <span class="bp">@</span><span class="n">complete_lattice</span><span class="bp">.</span><span class="n">Inf</span> <span class="n">α</span> <span class="n">c</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">complete_lattice</span> <span class="n">α</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">refine</span> <span class="o">{</span> <span class="n">le</span> <span class="o">:=</span> <span class="n">le</span><span class="o">,</span> <span class="n">top</span> <span class="o">:=</span> <span class="n">top</span><span class="o">,</span> <span class="n">bot</span> <span class="o">:=</span> <span class="n">bot</span><span class="o">,</span> <span class="n">sup</span> <span class="o">:=</span> <span class="n">sup</span><span class="o">,</span> <span class="n">inf</span> <span class="o">:=</span> <span class="n">inf</span><span class="o">,</span> <span class="n">Sup</span> <span class="o">:=</span> <span class="n">Sup</span><span class="o">,</span> <span class="n">Inf</span> <span class="o">:=</span> <span class="n">Inf</span><span class="o">,</span> <span class="bp">..</span><span class="o">}</span><span class="bp">;</span>
+    <span class="n">subst_vars</span><span class="o">,</span>
+  <span class="n">exact</span> <span class="bp">@</span><span class="n">complete_lattice</span><span class="bp">.</span><span class="n">le_refl</span> <span class="n">α</span> <span class="n">c</span><span class="o">,</span>
+  <span class="n">exact</span> <span class="bp">@</span><span class="n">complete_lattice</span><span class="bp">.</span><span class="n">le_trans</span> <span class="n">α</span> <span class="n">c</span><span class="o">,</span>
+  <span class="n">exact</span> <span class="bp">@</span><span class="n">complete_lattice</span><span class="bp">.</span><span class="n">le_antisymm</span> <span class="n">α</span> <span class="n">c</span><span class="o">,</span>
+  <span class="n">exact</span> <span class="bp">@</span><span class="n">complete_lattice</span><span class="bp">.</span><span class="n">le_sup_left</span> <span class="n">α</span> <span class="n">c</span><span class="o">,</span>
+  <span class="n">exact</span> <span class="bp">@</span><span class="n">complete_lattice</span><span class="bp">.</span><span class="n">le_sup_right</span> <span class="n">α</span> <span class="n">c</span><span class="o">,</span>
+  <span class="n">exact</span> <span class="bp">@</span><span class="n">complete_lattice</span><span class="bp">.</span><span class="n">sup_le</span> <span class="n">α</span> <span class="n">c</span><span class="o">,</span>
+  <span class="n">exact</span> <span class="bp">@</span><span class="n">complete_lattice</span><span class="bp">.</span><span class="n">inf_le_left</span> <span class="n">α</span> <span class="n">c</span><span class="o">,</span>
+  <span class="n">exact</span> <span class="bp">@</span><span class="n">complete_lattice</span><span class="bp">.</span><span class="n">inf_le_right</span> <span class="n">α</span> <span class="n">c</span><span class="o">,</span>
+  <span class="n">exact</span> <span class="bp">@</span><span class="n">complete_lattice</span><span class="bp">.</span><span class="n">le_inf</span> <span class="n">α</span> <span class="n">c</span><span class="o">,</span>
+  <span class="n">exact</span> <span class="bp">@</span><span class="n">complete_lattice</span><span class="bp">.</span><span class="n">le_top</span> <span class="n">α</span> <span class="n">c</span><span class="o">,</span>
+  <span class="n">exact</span> <span class="bp">@</span><span class="n">complete_lattice</span><span class="bp">.</span><span class="n">bot_le</span> <span class="n">α</span> <span class="n">c</span><span class="o">,</span>
+  <span class="n">exact</span> <span class="bp">@</span><span class="n">complete_lattice</span><span class="bp">.</span><span class="n">le_Sup</span> <span class="n">α</span> <span class="n">c</span><span class="o">,</span>
+  <span class="n">exact</span> <span class="bp">@</span><span class="n">complete_lattice</span><span class="bp">.</span><span class="n">Sup_le</span> <span class="n">α</span> <span class="n">c</span><span class="o">,</span>
+  <span class="n">exact</span> <span class="bp">@</span><span class="n">complete_lattice</span><span class="bp">.</span><span class="n">Inf_le</span> <span class="n">α</span> <span class="n">c</span><span class="o">,</span>
+  <span class="n">exact</span> <span class="bp">@</span><span class="n">complete_lattice</span><span class="bp">.</span><span class="n">le_Inf</span> <span class="n">α</span> <span class="n">c</span>
+<span class="kn">end</span>
+<span class="kn">end</span> <span class="n">lattice</span>
+</pre></div>
+
+
+<p>If you put <code>set_option old_structure_cmd true</code> instead, this proof times out</p>
 
 #### [ Mario Carneiro (Nov 05 2018 at 21:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/old_structure_cmd%20in%20structure%20literals/near/146821466):
-this despite the fact that there are no structures being declared
+<p>this despite the fact that there are no structures being declared</p>
 
 #### [ Johannes Hölzl (Nov 05 2018 at 22:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/old_structure_cmd%20in%20structure%20literals/near/146826135):
-uff, luckily I didn't run into this. Does the `{ f := _, .. _}` notation depend on `old_structure_cmd`?
+<p>uff, luckily I didn't run into this. Does the <code>{ f := _, .. _}</code> notation depend on <code>old_structure_cmd</code>?</p>
 
 #### [ Sebastian Ullrich (Nov 06 2018 at 09:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/old_structure_cmd%20in%20structure%20literals/near/146851518):
-[It does](https://github.com/leanprover/lean/blob/687745d887ebd89da94ba36d853eff12746af136/src/frontends/lean/elaborator.cpp#L2854). Maybe it shouldn't.
+<p><a href="https://github.com/leanprover/lean/blob/687745d887ebd89da94ba36d853eff12746af136/src/frontends/lean/elaborator.cpp#L2854" target="_blank" title="https://github.com/leanprover/lean/blob/687745d887ebd89da94ba36d853eff12746af136/src/frontends/lean/elaborator.cpp#L2854">It does</a>. Maybe it shouldn't.</p>
 
 #### [ Sebastian Ullrich (Nov 06 2018 at 09:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/old_structure_cmd%20in%20structure%20literals/near/146851533):
-The structure instance notation is pretty complex and fragile in Lean 3. I'm really not sure what we should do with it in Lean 4.
+<p>The structure instance notation is pretty complex and fragile in Lean 3. I'm really not sure what we should do with it in Lean 4.</p>
 
 
 {% endraw %}

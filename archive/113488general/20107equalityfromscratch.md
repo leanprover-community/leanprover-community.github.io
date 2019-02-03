@@ -12,115 +12,111 @@ permalink: archive/113488general/20107equalityfromscratch.html
 
 {% raw %}
 #### [ Adam Kurkiewicz (Aug 07 2018 at 12:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20from%20scratch/near/131035424):
-While looking at Kevin's [great blog post](https://xenaproject.wordpress.com/2017/10/31/building-the-non-negative-integers-from-scratch/) about unsigned integers from scratch I thought to push myself a little bit and I've tried to do them *even more* from scratch, by giving up the existing `eq` or `=`.
-
-So let's say we have an inductive `xnat` and an inductive xnat `equality` like this:
-
-```
-inductive xnat : Type
+<p>While looking at Kevin's <a href="https://xenaproject.wordpress.com/2017/10/31/building-the-non-negative-integers-from-scratch/" target="_blank" title="https://xenaproject.wordpress.com/2017/10/31/building-the-non-negative-integers-from-scratch/">great blog post</a> about unsigned integers from scratch I thought to push myself a little bit and I've tried to do them <em>even more</em> from scratch, by giving up the existing <code>eq</code> or <code>=</code>.</p>
+<p>So let's say we have an inductive <code>xnat</code> and an inductive xnat <code>equality</code> like this:</p>
+<div class="codehilite"><pre><span></span>inductive xnat : Type
 | zero : xnat
 | succ : xnat → xnat
 
 inductive equality (a : xnat): xnat → Prop
     | refl : equality a
-```
+</pre></div>
 
-We're getting reflexivity for free from the type system, but we want to prove transitivity and symmetry. Let's assume we don't know anything about default parameters, universes, etc, but we know about recursors. We might write something like this:
 
-```
-definition equality.symm: Π (a b : xnat), Π eq1 : (equality a b), equality b a :=
+<p>We're getting reflexivity for free from the type system, but we want to prove transitivity and symmetry. Let's assume we don't know anything about default parameters, universes, etc, but we know about recursors. We might write something like this:</p>
+<div class="codehilite"><pre><span></span>definition equality.symm: Π (a b : xnat), Π eq1 : (equality a b), equality b a :=
     λ a b : xnat,
     λ eq1 : (equality a b),
     equality.rec_on eq1 _
-```
+</pre></div>
 
-And now, the strangest thing happens, the placeholder no longer expects a proof of `equality b a`, suddenly `equality a a` suffices. This relieves us, and we proceed, almost automatically, to write `(equality.refl a)` instead of the placeholder, and this typechecks. Phew.
 
-But why does it typecheck? Why suddently a proof of `equality a a` is good enough as a proof of `equality b a`. Is there something special in the type-system that makes it work?
+<p>And now, the strangest thing happens, the placeholder no longer expects a proof of <code>equality b a</code>, suddenly <code>equality a a</code> suffices. This relieves us, and we proceed, almost automatically, to write <code>(equality.refl a)</code> instead of the placeholder, and this typechecks. Phew.</p>
+<p>But why does it typecheck? Why suddently a proof of <code>equality a a</code> is good enough as a proof of <code>equality b a</code>. Is there something special in the type-system that makes it work?</p>
 
 #### [ Mario Carneiro (Aug 07 2018 at 12:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20from%20scratch/near/131035618):
-Look at the type of `equality.rec_on`.
-```lean
-protected def equality.rec_on : Π {a : xnat} {C : xnat → Sort l} {a_1 : xnat}, equality a a_1 → C a → C a_1
-```
-It says that if you want to prove a property `C` of `a_1 : xnat` given `equality a a_1`, it suffices to prove `C a`. In this case we know `equality a b`, so we need a property `C` depending on `b` such that `C a` is easy. In this case we take `\lam b, equality b a` as our `C`, so `C a` is `equality a a` which we prove by `refl`, and `C b` is `equality b a` which is what we wanted to show.
+<p>Look at the type of <code>equality.rec_on</code>.</p>
+<div class="codehilite"><pre><span></span><span class="kn">protected</span> <span class="n">def</span> <span class="n">equality</span><span class="bp">.</span><span class="n">rec_on</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">{</span><span class="n">a</span> <span class="o">:</span> <span class="n">xnat</span><span class="o">}</span> <span class="o">{</span><span class="n">C</span> <span class="o">:</span> <span class="n">xnat</span> <span class="bp">→</span> <span class="n">Sort</span> <span class="n">l</span><span class="o">}</span> <span class="o">{</span><span class="n">a_1</span> <span class="o">:</span> <span class="n">xnat</span><span class="o">},</span> <span class="n">equality</span> <span class="n">a</span> <span class="n">a_1</span> <span class="bp">→</span> <span class="n">C</span> <span class="n">a</span> <span class="bp">→</span> <span class="n">C</span> <span class="n">a_1</span>
+</pre></div>
+
+
+<p>It says that if you want to prove a property <code>C</code> of <code>a_1 : xnat</code> given <code>equality a a_1</code>, it suffices to prove <code>C a</code>. In this case we know <code>equality a b</code>, so we need a property <code>C</code> depending on <code>b</code> such that <code>C a</code> is easy. In this case we take <code>\lam b, equality b a</code> as our <code>C</code>, so <code>C a</code> is <code>equality a a</code> which we prove by <code>refl</code>, and <code>C b</code> is <code>equality b a</code> which is what we wanted to show.</p>
 
 #### [ Mario Carneiro (Aug 07 2018 at 12:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20from%20scratch/near/131035869):
-You should be sure to look at the definition of `equality.symm` with `pp.all true`, so you can see how lean filled in the "motive" `C` in that rec_on application
+<p>You should be sure to look at the definition of <code>equality.symm</code> with <code>pp.all true</code>, so you can see how lean filled in the "motive" <code>C</code> in that rec_on application</p>
 
 #### [ Mario Carneiro (Aug 07 2018 at 12:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20from%20scratch/near/131035878):
-or use `@equality.rec_on` and fill in all the fields yourself
+<p>or use <code>@equality.rec_on</code> and fill in all the fields yourself</p>
 
 #### [ Adam Kurkiewicz (Aug 07 2018 at 12:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20from%20scratch/near/131036133):
-Thanks Mario, this is making it less magical. I'm on your most recent suggestion.
+<p>Thanks Mario, this is making it less magical. I'm on your most recent suggestion.</p>
 
 #### [ Kevin Buzzard (Aug 07 2018 at 12:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20from%20scratch/near/131036339):
-Kenny Lau once said to me "Lean does not do magic", and at that time I thought that lots of things Lean did (simp, type class inference) were magic. Kenny's comment spurred me on to trying to figure out how everything was working; the point is that Lean *never* does magic, and in any given case you can simply look at what it did and how it did it. Figuring out how to do that really helped me to learn Lean better.
+<p>Kenny Lau once said to me "Lean does not do magic", and at that time I thought that lots of things Lean did (simp, type class inference) were magic. Kenny's comment spurred me on to trying to figure out how everything was working; the point is that Lean <em>never</em> does magic, and in any given case you can simply look at what it did and how it did it. Figuring out how to do that really helped me to learn Lean better.</p>
 
 #### [ Adam Kurkiewicz (Aug 07 2018 at 12:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20from%20scratch/near/131036344):
-Ah, of course, it makes sense. `equality a b` is the same as `(equality a) b`. So our `C` becomes `equality a`. Thanks Mario!
+<p>Ah, of course, it makes sense. <code>equality a b</code> is the same as <code>(equality a) b</code>. So our <code>C</code> becomes <code>equality a</code>. Thanks Mario!</p>
 
 #### [ Mario Carneiro (Aug 07 2018 at 12:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20from%20scratch/near/131036376):
-ah, be careful: `equality a` would be a perfect motive to prove `equality a b -> equality a b`, but this is symmetry, so there is a twist
+<p>ah, be careful: <code>equality a</code> would be a perfect motive to prove <code>equality a b -&gt; equality a b</code>, but this is symmetry, so there is a twist</p>
 
 #### [ Adam Kurkiewicz (Aug 07 2018 at 12:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20from%20scratch/near/131036388):
-So the solution is simply `@equality.rec_on a (equality a) b eq1 (equality.refl a)`, and that makes sense.
+<p>So the solution is simply <code>@equality.rec_on a (equality a) b eq1 (equality.refl a)</code>, and that makes sense.</p>
 
 #### [ Adam Kurkiewicz (Aug 07 2018 at 12:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20from%20scratch/near/131036435):
-Is `C` the motif?
+<p>Is <code>C</code> the motif?</p>
 
 #### [ Mario Carneiro (Aug 07 2018 at 12:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20from%20scratch/near/131036451):
-yes, that's the usual terminology
+<p>yes, that's the usual terminology</p>
 
 #### [ Mario Carneiro (Aug 07 2018 at 12:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20from%20scratch/near/131036476):
-sometimes you get an error message talking about a motive, that's what it is referring to
+<p>sometimes you get an error message talking about a motive, that's what it is referring to</p>
 
 #### [ Mario Carneiro (Aug 07 2018 at 12:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20from%20scratch/near/131036675):
-If you use the "flipped" motive `λ b, equality b a`, you have:
-```
-#check λ a b eq1, @equality.rec_on a (λ b, equality b a) b eq1 (equality.refl a)
+<p>If you use the "flipped" motive <code>λ b, equality b a</code>, you have:</p>
+<div class="codehilite"><pre><span></span>#check λ a b eq1, @equality.rec_on a (λ b, equality b a) b eq1 (equality.refl a)
 -- : ∀ (a b : xnat), equality a b → (λ (b : xnat), equality b a) b
-```
-and notice that the conclusion there, `(λ (b : xnat), equality b a) b`, beta reduces to `equality b a` which is the desired symmetrized equality
+</pre></div>
+
+
+<p>and notice that the conclusion there, <code>(λ (b : xnat), equality b a) b</code>, beta reduces to <code>equality b a</code> which is the desired symmetrized equality</p>
 
 #### [ Adam Kurkiewicz (Aug 07 2018 at 13:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20from%20scratch/near/131037522):
-Yes you're right, I didn't notice this wasn't typechecking. This lambda abstraction is a really nice trick, I don't think I would have come up with this myself.
+<p>Yes you're right, I didn't notice this wasn't typechecking. This lambda abstraction is a really nice trick, I don't think I would have come up with this myself.</p>
 
 #### [ Adam Kurkiewicz (Aug 07 2018 at 13:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20from%20scratch/near/131037601):
-Anyway, thank you Mario, I think this is now really clear.
+<p>Anyway, thank you Mario, I think this is now really clear.</p>
 
 #### [ Adam Kurkiewicz (Aug 07 2018 at 13:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20from%20scratch/near/131037619):
-I'll try to work through transitivity in a similar manner
+<p>I'll try to work through transitivity in a similar manner</p>
 
 #### [ Mario Carneiro (Aug 07 2018 at 13:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20from%20scratch/near/131037620):
-the really interesting thing is that lean will automatically do that lambda abstraction trick
+<p>the really interesting thing is that lean will automatically do that lambda abstraction trick</p>
 
 #### [ Adam Kurkiewicz (Aug 07 2018 at 13:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20from%20scratch/near/131037733):
-Now, @**Kevin Buzzard**  if this is not magic I don't know what is.
+<p>Now, <span class="user-mention" data-user-id="110038">@Kevin Buzzard</span>  if this is not magic I don't know what is.</p>
 
 #### [ Kevin Buzzard (Aug 07 2018 at 13:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20from%20scratch/near/131037744):
-I'm not sure it's magic
+<p>I'm not sure it's magic</p>
 
 #### [ Kevin Buzzard (Aug 07 2018 at 13:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20from%20scratch/near/131037799):
-Is it just matching types up?
+<p>Is it just matching types up?</p>
 
 #### [ Kevin Buzzard (Aug 07 2018 at 13:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20from%20scratch/near/131037814):
-I'm not quite following, I'm trying to get on a bus in Majorca
+<p>I'm not quite following, I'm trying to get on a bus in Majorca</p>
 
 #### [ Mario Carneiro (Aug 07 2018 at 13:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20from%20scratch/near/131037826):
-the algorithm is very simple: the goal says `equality b a`, and we just replace every `b` with `a`, then we look at what we changed and replace that with a variable, let's call it `x`. So the motive is `λ x, equality x a`
+<p>the algorithm is very simple: the goal says <code>equality b a</code>, and we just replace every <code>b</code> with <code>a</code>, then we look at what we changed and replace that with a variable, let's call it <code>x</code>. So the motive is <code>λ x, equality x a</code></p>
 
 #### [ Mario Carneiro (Aug 07 2018 at 13:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20from%20scratch/near/131037911):
-this produces a lambda term such that replacing `x` with `b` gives us our original goal, and replacing `x` with `a` gives us our new goal which should be easier, in this case `equality a a`
+<p>this produces a lambda term such that replacing <code>x</code> with <code>b</code> gives us our original goal, and replacing <code>x</code> with <code>a</code> gives us our new goal which should be easier, in this case <code>equality a a</code></p>
 
 #### [ Mario Carneiro (Aug 07 2018 at 13:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20from%20scratch/near/131037993):
-you should try using this algorithm in the proof of transitivity to work out the right motive, then see whether you got it right by letting lean do it for you
+<p>you should try using this algorithm in the proof of transitivity to work out the right motive, then see whether you got it right by letting lean do it for you</p>
 
 #### [ Adam Kurkiewicz (Aug 07 2018 at 13:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20from%20scratch/near/131038529):
-I've actually just done it in my head. It worked:
-
-```
-inductive xnat : Type
+<p>I've actually just done it in my head. It worked:</p>
+<div class="codehilite"><pre><span></span>inductive xnat : Type
 | zero : xnat
 | succ : xnat → xnat
 
@@ -132,18 +128,19 @@ definition equality.trans: Π (a b c : xnat), Π eq1: (equality a b), Π eq2 : (
     λ eq1 : (equality a b),
     λ eq2 : (equality b c),
     @equality.rec_on b (λ x, equality a x) c eq2 eq1
-```
+</pre></div>
 
-I'm sure I'll learn the algorithm one day, but I think I'll go and buy some beef now. Cooking sous vide steaks for friends this evening.
+
+<p>I'm sure I'll learn the algorithm one day, but I think I'll go and buy some beef now. Cooking sous vide steaks for friends this evening.</p>
 
 #### [ Adam Kurkiewicz (Aug 07 2018 at 13:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20from%20scratch/near/131038727):
-Thank you Mario, this was really helpful!
+<p>Thank you Mario, this was really helpful!</p>
 
 #### [ Kevin Buzzard (Aug 07 2018 at 14:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20from%20scratch/near/131041113):
-Warning: sometimes Lean can't generate the right motive. CS people start going on about higher order unification being undecidable when this sort of thing comes up. The problem is that if Lean can figure out that `C b` is supposed to be `f a b c b = 0` then it can't work out if `C x` is supposed to be `f a x c x = 0` or `f a b c x = 0` or ... etc.  So don't expect Lean to do miracles. See https://leanprover.github.io/theorem_proving_in_lean/interacting_with_lean.html#elaboration-hints
+<p>Warning: sometimes Lean can't generate the right motive. CS people start going on about higher order unification being undecidable when this sort of thing comes up. The problem is that if Lean can figure out that <code>C b</code> is supposed to be <code>f a b c b = 0</code> then it can't work out if <code>C x</code> is supposed to be <code>f a x c x = 0</code> or <code>f a b c x = 0</code> or ... etc.  So don't expect Lean to do miracles. See <a href="https://leanprover.github.io/theorem_proving_in_lean/interacting_with_lean.html#elaboration-hints" target="_blank" title="https://leanprover.github.io/theorem_proving_in_lean/interacting_with_lean.html#elaboration-hints">https://leanprover.github.io/theorem_proving_in_lean/interacting_with_lean.html#elaboration-hints</a></p>
 
 #### [ Kevin Buzzard (Aug 07 2018 at 14:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20from%20scratch/near/131041181):
-Remember -- Lean does not do magic. Part of the art is working out when you're asking Lean to do magic :-)
+<p>Remember -- Lean does not do magic. Part of the art is working out when you're asking Lean to do magic :-)</p>
 
 
 {% endraw %}

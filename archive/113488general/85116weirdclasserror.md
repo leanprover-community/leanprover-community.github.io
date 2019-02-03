@@ -12,49 +12,49 @@ permalink: archive/113488general/85116weirdclasserror.html
 
 {% raw %}
 #### [ Reid Barton (Dec 07 2018 at 03:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/weird%20class%20error/near/151060003):
-```lean
-import category_theory.limits.limits
-import category_theory.limits.types
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">limits</span><span class="bp">.</span><span class="n">limits</span>
+<span class="kn">import</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">limits</span><span class="bp">.</span><span class="n">types</span>
 
-universes u v
+<span class="n">universes</span> <span class="n">u</span> <span class="n">v</span>
 
-open category_theory
+<span class="kn">open</span> <span class="n">category_theory</span>
 
-section
-variables (C : Type u) [𝒞 : category.{u v} C] [limits.has_colimits C]
-include 𝒞
-def is_good : Prop := sorry
-lemma is_good_of_has_object (X : C) : is_good C := sorry
-end
+<span class="kn">section</span>
+<span class="kn">variables</span> <span class="o">(</span><span class="n">C</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">[</span><span class="err">𝒞</span> <span class="o">:</span> <span class="n">category</span><span class="bp">.</span><span class="o">{</span><span class="n">u</span> <span class="n">v</span><span class="o">}</span> <span class="n">C</span><span class="o">]</span> <span class="o">[</span><span class="n">limits</span><span class="bp">.</span><span class="n">has_colimits</span> <span class="n">C</span><span class="o">]</span>
+<span class="n">include</span> <span class="err">𝒞</span>
+<span class="n">def</span> <span class="n">is_good</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span> <span class="n">sorry</span>
+<span class="kn">lemma</span> <span class="n">is_good_of_has_object</span> <span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="n">C</span><span class="o">)</span> <span class="o">:</span> <span class="n">is_good</span> <span class="n">C</span> <span class="o">:=</span> <span class="n">sorry</span>
+<span class="kn">end</span>
 
-def MyCat := Type v
-instance : category MyCat := by dunfold MyCat; apply_instance
-instance : limits.has_colimits.{v+1 v} MyCat := by dunfold MyCat; apply_instance
-lemma MyCat_is_good : is_good MyCat.{v} := is_good_of_has_object MyCat.{v} punit.{v+1}
+<span class="n">def</span> <span class="n">MyCat</span> <span class="o">:=</span> <span class="kt">Type</span> <span class="n">v</span>
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">category</span> <span class="n">MyCat</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">dunfold</span> <span class="n">MyCat</span><span class="bp">;</span> <span class="n">apply_instance</span>
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">limits</span><span class="bp">.</span><span class="n">has_colimits</span><span class="bp">.</span><span class="o">{</span><span class="n">v</span><span class="bp">+</span><span class="mi">1</span> <span class="n">v</span><span class="o">}</span> <span class="n">MyCat</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">dunfold</span> <span class="n">MyCat</span><span class="bp">;</span> <span class="n">apply_instance</span>
+<span class="kn">lemma</span> <span class="n">MyCat_is_good</span> <span class="o">:</span> <span class="n">is_good</span> <span class="n">MyCat</span><span class="bp">.</span><span class="o">{</span><span class="n">v</span><span class="o">}</span> <span class="o">:=</span> <span class="n">is_good_of_has_object</span> <span class="n">MyCat</span><span class="bp">.</span><span class="o">{</span><span class="n">v</span><span class="o">}</span> <span class="n">punit</span><span class="bp">.</span><span class="o">{</span><span class="n">v</span><span class="bp">+</span><span class="mi">1</span><span class="o">}</span>
 
-/-
-error: failed to synthesize type class instance for
-⊢ Π (J : Type v) (𝒥 : small_category J) (F : J ⥤ MyCat), limits.has_colimit F
-error: synthesized type class instance is not definitionally equal to expression inferred by typing rules, synthesized
-  ⁇
-inferred
-  λ (J : Type v) (𝒥 : small_category J) (F : J ⥤ MyCat), MyCat.category_theory.limits.has_colimits F
--/
-```
+<span class="c">/-</span><span class="cm"></span>
+<span class="cm">error: failed to synthesize type class instance for</span>
+<span class="cm">⊢ Π (J : Type v) (𝒥 : small_category J) (F : J ⥤ MyCat), limits.has_colimit F</span>
+<span class="cm">error: synthesized type class instance is not definitionally equal to expression inferred by typing rules, synthesized</span>
+<span class="cm">  ⁇</span>
+<span class="cm">inferred</span>
+<span class="cm">  λ (J : Type v) (𝒥 : small_category J) (F : J ⥤ MyCat), MyCat.category_theory.limits.has_colimits F</span>
+<span class="cm">-/</span>
+</pre></div>
 
 #### [ Reid Barton (Dec 07 2018 at 03:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/weird%20class%20error/near/151060023):
-Is my definition
-```lean
-@[class] def has_colimits :=
-Π {J : Type v} {𝒥 : small_category J}, by exactI has_colimits_of_shape J C
-```
-already asking too much of the class system?
+<p>Is my definition</p>
+<div class="codehilite"><pre><span></span><span class="bp">@</span><span class="o">[</span><span class="n">class</span><span class="o">]</span> <span class="n">def</span> <span class="n">has_colimits</span> <span class="o">:=</span>
+<span class="bp">Π</span> <span class="o">{</span><span class="n">J</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">}</span> <span class="o">{</span><span class="err">𝒥</span> <span class="o">:</span> <span class="n">small_category</span> <span class="n">J</span><span class="o">},</span> <span class="k">by</span> <span class="n">exactI</span> <span class="n">has_colimits_of_shape</span> <span class="n">J</span> <span class="n">C</span>
+</pre></div>
+
+
+<p>already asking too much of the class system?</p>
 
 #### [ Reid Barton (Dec 07 2018 at 03:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/weird%20class%20error/near/151060658):
-Also strange: if I change `has_colimits` to a structure, then I need to add universe annotations to many of its use sites, even if I control for all the variables I'm aware of (same syntactic return universe, both assigned `class` after the fact, both given `elab_simple`)
+<p>Also strange: if I change <code>has_colimits</code> to a structure, then I need to add universe annotations to many of its use sites, even if I control for all the variables I'm aware of (same syntactic return universe, both assigned <code>class</code> after the fact, both given <code>elab_simple</code>)</p>
 
 #### [ Johan Commelin (Dec 07 2018 at 16:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/weird%20class%20error/near/151120501):
-I think I witnessed similar problems when I tried to get the stuff on presheaves in line with the merged limits PR. But I didn't investigate further.
+<p>I think I witnessed similar problems when I tried to get the stuff on presheaves in line with the merged limits PR. But I didn't investigate further.</p>
 
 
 {% endraw %}

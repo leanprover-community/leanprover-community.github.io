@@ -12,27 +12,24 @@ permalink: archive/113488general/02870makingisomorphismclassagroup.html
 
 {% raw %}
 #### [ Kenny Lau (Mar 31 2018 at 21:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124464358):
-Let's say I have a bunch of groups, and I use `quotient` to make isomorphism classes. Is there a constructive way to make the isomorphism classes inherit the structure of a group?
+<p>Let's say I have a bunch of groups, and I use <code>quotient</code> to make isomorphism classes. Is there a constructive way to make the isomorphism classes inherit the structure of a group?</p>
 
 #### [ Simon Hudon (Mar 31 2018 at 21:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124464513):
-I don't know but I'd like to find out. Let's say our groups are specified as:
-
-```
-variables {I : Type} (G : I -> Type) [Π i, group (G i)]
-```
+<p>I don't know but I'd like to find out. Let's say our groups are specified as:</p>
+<div class="codehilite"><pre><span></span>variables {I : Type} (G : I -&gt; Type) [Π i, group (G i)]
+</pre></div>
 
 #### [ Simon Hudon (Mar 31 2018 at 21:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124464561):
-Are we also given the isomorphisms between those groups or to you want to construct them somehow?
+<p>Are we also given the isomorphisms between those groups or to you want to construct them somehow?</p>
 
 #### [ Kenny Lau (Mar 31 2018 at 21:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124464564):
-I have already constructed the quotient
+<p>I have already constructed the quotient</p>
 
 #### [ Simon Hudon (Mar 31 2018 at 21:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124464567):
-Can you show it?
+<p>Can you show it?</p>
 
 #### [ Kenny Lau (Mar 31 2018 at 21:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124464607):
-```
-import data.set.basic group_theory.subgroup
+<div class="codehilite"><pre><span></span>import data.set.basic group_theory.subgroup
 
 universe u
 
@@ -113,7 +110,7 @@ noncomputable def rep : something S → Σ G [H : group G], @to_be_named S G H :
 structure funny_structure : Type (u+1) :=
 ( G : something S )
 ( func : S → (rep S G).1 )
-( im_gen : @group.generate _ (rep S G).2.1 (func '' set.univ) = set.univ )
+( im_gen : @group.generate _ (rep S G).2.1 (func &#39;&#39; set.univ) = set.univ )
 
 def some_product : Type (u+1) :=
 Π A : funny_structure S, (rep S A.G).1
@@ -133,581 +130,577 @@ def aux_func : S → some_product S :=
 end free_group
 
 def free_group : Type (u+1) :=
-group.generate (free_group.aux_func S '' set.univ)
+group.generate (free_group.aux_func S &#39;&#39; set.univ)
 
 instance free_group.group : group (free_group S) :=
 is_subgroup.group group.generate.is_subgroup
 
 def free_group.from_S : S → free_group S :=
 λ x, ⟨free_group.aux_func S x, group.generate.basic _ ⟨x, trivial, rfl⟩⟩
+</pre></div>
 
 #### [ Kenny Lau (Mar 31 2018 at 21:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124464610):
-this is WIP so there are errors on the bottom, ignore those
+<p>this is WIP so there are errors on the bottom, ignore those</p>
 
 #### [ Kenny Lau (Mar 31 2018 at 21:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124464612):
-the quotient is appropriately named `something`
+<p>the quotient is appropriately named <code>something</code></p>
 
 #### [ Simon Hudon (Mar 31 2018 at 22:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124464943):
-So you'd like to remove `noncomputable` from your `group` instance?
+<p>So you'd like to remove <code>noncomputable</code> from your <code>group</code> instance?</p>
 
 #### [ Kenny Lau (Mar 31 2018 at 22:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124465033):
-right
+<p>right</p>
 
 #### [ Kevin Buzzard (Mar 31 2018 at 22:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124465035):
-You had to prove that the composite of group homs is a group hom?? That's not there already?
+<p>You had to prove that the composite of group homs is a group hom?? That's not there already?</p>
 
 #### [ Kenny Lau (Mar 31 2018 at 22:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124465038):
-you'll be surprised
+<p>you'll be surprised</p>
 
 #### [ Simon Hudon (Mar 31 2018 at 22:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124465249):
-Instead of `classical.some` and `quotient.exists_rep` in `rep`, can you try and use `quotient.lift`?
+<p>Instead of <code>classical.some</code> and <code>quotient.exists_rep</code> in <code>rep</code>, can you try and use <code>quotient.lift</code>?</p>
 
 #### [ Kenny Lau (Mar 31 2018 at 22:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124465250):
-to where?
+<p>to where?</p>
 
 #### [ Simon Hudon (Mar 31 2018 at 22:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124465316):
-Not sure yet
+<p>Not sure yet</p>
 
 #### [ Simon Hudon (Mar 31 2018 at 22:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124465376):
-You're basically taking the value of a quotient type and sticking it in a sigma type. Because the sigma type is in `Type u` depending on which representative you extract, you will be able to tell members of the quotient sets apart.
+<p>You're basically taking the value of a quotient type and sticking it in a sigma type. Because the sigma type is in <code>Type u</code> depending on which representative you extract, you will be able to tell members of the quotient sets apart.</p>
 
 #### [ Simon Hudon (Mar 31 2018 at 22:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124465422):
-There are two possibilities I can see to stay constructive: instead of using a sigma type, use an existential quantification (not sure if that's workable with the group) or extract something other than the element of one of the group. A representative value that will be the same for every element of a given equivalence class
+<p>There are two possibilities I can see to stay constructive: instead of using a sigma type, use an existential quantification (not sure if that's workable with the group) or extract something other than the element of one of the group. A representative value that will be the same for every element of a given equivalence class</p>
 
 #### [ Simon Hudon (Mar 31 2018 at 22:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124465475):
-Or maybe Mario's `trunc` contraption can make the sigma type into something that isn't data
+<p>Or maybe Mario's <code>trunc</code> contraption can make the sigma type into something that isn't data</p>
 
 #### [ Kenny Lau (Mar 31 2018 at 23:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124467440):
-@**Simon Hudon** do we even need the quotient?
+<p><span class="user-mention" data-user-id="110026">@Simon Hudon</span> do we even need the quotient?</p>
 
 #### [ Simon Hudon (Mar 31 2018 at 23:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124467543):
-I think you're right, you don't need it, at least not there
+<p>I think you're right, you don't need it, at least not there</p>
 
 #### [ Kenny Lau (Mar 31 2018 at 23:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124467547):
-I think the reason the author introduced it is because of some foundational issues with ZFC
+<p>I think the reason the author introduced it is because of some foundational issues with ZFC</p>
 
 #### [ Kenny Lau (Mar 31 2018 at 23:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124467552):
-the paper is here for reference https://www3.nd.edu/~andyp/notes/CategoricalFree.pdf
+<p>the paper is here for reference <a href="https://www3.nd.edu/~andyp/notes/CategoricalFree.pdf" target="_blank" title="https://www3.nd.edu/~andyp/notes/CategoricalFree.pdf">https://www3.nd.edu/~andyp/notes/CategoricalFree.pdf</a></p>
 
 #### [ Kenny Lau (Apr 01 2018 at 01:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124469143):
-@**Kevin Buzzard** this can be viewed in two ways
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> this can be viewed in two ways</p>
 
 #### [ Kenny Lau (Apr 01 2018 at 01:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124469144):
-you will view it as "another reason why ZFC is stupid"
+<p>you will view it as "another reason why ZFC is stupid"</p>
 
 #### [ Kenny Lau (Apr 01 2018 at 01:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124469192):
-I will view it as "another reason why Lean is stupid"
+<p>I will view it as "another reason why Lean is stupid"</p>
 
 #### [ Simon Hudon (Apr 01 2018 at 01:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124469193):
-I'm wondering if you even need the sigma type
+<p>I'm wondering if you even need the sigma type</p>
 
 #### [ Kenny Lau (Apr 01 2018 at 01:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124469228):
-I did it without any quotient
+<p>I did it without any quotient</p>
 
 #### [ Kenny Lau (Apr 01 2018 at 01:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124469233):
-and without injectivity
+<p>and without injectivity</p>
 
 #### [ Kenny Lau (Apr 01 2018 at 01:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124469234):
-the only reason why the paper introduced those is to justify it in ZFC
+<p>the only reason why the paper introduced those is to justify it in ZFC</p>
 
 #### [ Simon Hudon (Apr 01 2018 at 01:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124469235):
-And sigma type?
+<p>And sigma type?</p>
 
 #### [ Kenny Lau (Apr 01 2018 at 01:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124469236):
-well the sigma type has UMP as pi type right
+<p>well the sigma type has UMP as pi type right</p>
 
 #### [ Kenny Lau (Apr 01 2018 at 01:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124469237):
-that means, (Sigma x1 x2) -> x3 is the same as x1 -> x2 -> x3
+<p>that means, (Sigma x1 x2) -&gt; x3 is the same as x1 -&gt; x2 -&gt; x3</p>
 
 #### [ Kenny Lau (Apr 01 2018 at 01:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124469240):
-since they're there, the sigma doesn't need to be there anymore
+<p>since they're there, the sigma doesn't need to be there anymore</p>
 
 #### [ Kenny Lau (Apr 01 2018 at 01:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124469243):
-am I speaking English
+<p>am I speaking English</p>
 
 #### [ Kenny Lau (Apr 01 2018 at 01:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124469244):
-that thing there with that sigma is no longer used
+<p>that thing there with that sigma is no longer used</p>
 
 #### [ Kenny Lau (Apr 01 2018 at 01:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124469245):
-I can't English
+<p>I can't English</p>
 
 #### [ Simon Hudon (Apr 01 2018 at 01:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124469246):
-What's UMP?
+<p>What's UMP?</p>
 
 #### [ Kenny Lau (Apr 01 2018 at 01:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124469247):
-universal mapping property
+<p>universal mapping property</p>
 
 #### [ Kenny Lau (Apr 01 2018 at 01:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124469273):
-or in CS language, "destructor" / "eliminator"
+<p>or in CS language, "destructor" / "eliminator"</p>
 
 #### [ Simon Hudon (Apr 01 2018 at 01:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124469290):
-Ah I see
+<p>Ah I see</p>
 
 #### [ Simon Hudon (Apr 01 2018 at 01:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124469291):
-So why is it that not needing a quotient type makes Lean stupid?
+<p>So why is it that not needing a quotient type makes Lean stupid?</p>
 
 #### [ Kenny Lau (Apr 01 2018 at 01:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124469296):
-well if I need to explain I would have to bring another concept from math philosophy into here :P
+<p>well if I need to explain I would have to bring another concept from math philosophy into here :P</p>
 
 #### [ Kenny Lau (Apr 01 2018 at 01:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124469297):
-called predicativity
+<p>called predicativity</p>
 
 #### [ Simon Hudon (Apr 01 2018 at 01:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124469336):
-Cool, I'm all ears
+<p>Cool, I'm all ears</p>
 
 #### [ Kenny Lau (Apr 01 2018 at 01:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124469337):
-inductive types are predicative
+<p>inductive types are predicative</p>
 
 #### [ Kenny Lau (Apr 01 2018 at 01:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124469338):
-they're philosophically well-founded
+<p>they're philosophically well-founded</p>
 
 #### [ Kenny Lau (Apr 01 2018 at 01:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124469339):
-bigger things are built on top of smaller things
+<p>bigger things are built on top of smaller things</p>
 
 #### [ Kenny Lau (Apr 01 2018 at 01:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124469348):
-like "canonical", this word can't be properly defined, but a common criterion is whether the quantifiers quantify over the object to be constructed
+<p>like "canonical", this word can't be properly defined, but a common criterion is whether the quantifiers quantify over the object to be constructed</p>
 
 #### [ Kenny Lau (Apr 01 2018 at 01:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124469349):
-e.g. in ZFC, omega is constructed to be the intersection of every inductive set
+<p>e.g. in ZFC, omega is constructed to be the intersection of every inductive set</p>
 
 #### [ Kenny Lau (Apr 01 2018 at 01:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124469388):
-instead of building it from below, omega is constructed from above, which makes it philosophically not well-founded, and we call that impredicative
+<p>instead of building it from below, omega is constructed from above, which makes it philosophically not well-founded, and we call that impredicative</p>
 
 #### [ Kenny Lau (Apr 01 2018 at 01:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124469389):
-in ZFC, omega := {x | x in A for every inductive A}
+<p>in ZFC, omega := {x | x in A for every inductive A}</p>
 
 #### [ Kenny Lau (Apr 01 2018 at 01:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124469390):
-but the "for every" quantifier there, quantifiers over omega itself
+<p>but the "for every" quantifier there, quantifiers over omega itself</p>
 
 #### [ Kenny Lau (Apr 01 2018 at 01:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124469399):
-now, the free group construction in the paper is equally impredicative
+<p>now, the free group construction in the paper is equally impredicative</p>
 
 #### [ Kenny Lau (Apr 01 2018 at 01:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124469400):
-in the sense that it takes the product of every possible group and then find the subgroup generated by the image of S
+<p>in the sense that it takes the product of every possible group and then find the subgroup generated by the image of S</p>
 
 #### [ Kenny Lau (Apr 01 2018 at 01:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124469440):
-but that product would have to already include that group to be constructed
+<p>but that product would have to already include that group to be constructed</p>
 
 #### [ Kenny Lau (Apr 01 2018 at 01:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124469442):
-ZFC is an impredicative theory
+<p>ZFC is an impredicative theory</p>
 
 #### [ Kenny Lau (Apr 01 2018 at 01:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124469443):
-but that's unavoidable, because we want a strong foundation theory to do maths
+<p>but that's unavoidable, because we want a strong foundation theory to do maths</p>
 
 #### [ Kenny Lau (Apr 01 2018 at 01:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124469449):
-the common construction of free group is predicative
+<p>the common construction of free group is predicative</p>
 
 #### [ Kenny Lau (Apr 01 2018 at 01:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124469450):
-because it builds on smaller things, i.e. individual words
+<p>because it builds on smaller things, i.e. individual words</p>
 
 #### [ Kenny Lau (Apr 01 2018 at 01:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124469494):
-in ZFC, i.e. in the paper, the author constructed the free product by considering every group generated by a set that injects into S
+<p>in ZFC, i.e. in the paper, the author constructed the free product by considering every group generated by a set that injects into S</p>
 
 #### [ Kenny Lau (Apr 01 2018 at 01:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124469495):
-there's still a limitation on the size
+<p>there's still a limitation on the size</p>
 
 #### [ Kenny Lau (Apr 01 2018 at 01:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124469497):
-in Lean, i.e. in my file, I don't even need to care about the size, since Lean allows it
+<p>in Lean, i.e. in my file, I don't even need to care about the size, since Lean allows it</p>
 
 #### [ Kenny Lau (Apr 01 2018 at 01:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124469498):
-https://github.com/kckennylau/Lean/blob/master/free_group.lean
+<p><a href="https://github.com/kckennylau/Lean/blob/master/free_group.lean" target="_blank" title="https://github.com/kckennylau/Lean/blob/master/free_group.lean">https://github.com/kckennylau/Lean/blob/master/free_group.lean</a></p>
 
 #### [ Simon Hudon (Apr 01 2018 at 01:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124469550):
-Why is that a problem?
+<p>Why is that a problem?</p>
 
 #### [ Kenny Lau (Apr 01 2018 at 01:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124469551):
-it's not very well-founded is it
+<p>it's not very well-founded is it</p>
 
 #### [ Simon Hudon (Apr 01 2018 at 01:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124469644):
-Isn't the "big things built from smaller things" idea supported by the hierarchy of universes?
+<p>Isn't the "big things built from smaller things" idea supported by the hierarchy of universes?</p>
 
 #### [ Kenny Lau (Apr 01 2018 at 01:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124469683):
-well but one universe is already big enough
+<p>well but one universe is already big enough</p>
 
 #### [ Kenny Lau (Apr 01 2018 at 01:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124469696):
-philosophy aside, this construction is quite funny
+<p>philosophy aside, this construction is quite funny</p>
 
 #### [ Kenny Lau (Apr 01 2018 at 01:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124469737):
-what do you think of my file? is it mathematically correct? should I PR it?
+<p>what do you think of my file? is it mathematically correct? should I PR it?</p>
 
 #### [ Kenny Lau (Apr 01 2018 at 01:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124469743):
-I wonder why this construction isn't more well-known
+<p>I wonder why this construction isn't more well-known</p>
 
 #### [ Simon Hudon (Apr 01 2018 at 01:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124469796):
-I don't think I can make a judgement about your construction. Mario and Kevin probably should be the ones to comment
+<p>I don't think I can make a judgement about your construction. Mario and Kevin probably should be the ones to comment</p>
 
 #### [ Kenny Lau (Apr 01 2018 at 01:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124469797):
-ok
+<p>ok</p>
 
 #### [ Simon Hudon (Apr 01 2018 at 01:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124469798):
-Or Johannes
+<p>Or Johannes</p>
 
 #### [ Simon Hudon (Apr 01 2018 at 01:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124469800):
-It looks like a cool construction :)
+<p>It looks like a cool construction :)</p>
 
 #### [ Kenny Lau (Apr 01 2018 at 01:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124470041):
-@**Simon Hudon** https://github.com/kckennylau/Lean/commit/c6eac863b23d58d40deaab62489f6069f860407e#diff-fdee7d198ee1f7316cba5649313e084a
+<p><span class="user-mention" data-user-id="110026">@Simon Hudon</span> <a href="https://github.com/kckennylau/Lean/commit/c6eac863b23d58d40deaab62489f6069f860407e#diff-fdee7d198ee1f7316cba5649313e084a" target="_blank" title="https://github.com/kckennylau/Lean/commit/c6eac863b23d58d40deaab62489f6069f860407e#diff-fdee7d198ee1f7316cba5649313e084a">https://github.com/kckennylau/Lean/commit/c6eac863b23d58d40deaab62489f6069f860407e#diff-fdee7d198ee1f7316cba5649313e084a</a></p>
 
 #### [ Kenny Lau (Apr 01 2018 at 01:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124470042):
-rip universe limitation
+<p>rip universe limitation</p>
 
 #### [ Kenny Lau (Apr 01 2018 at 01:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124470043):
-now it can be in any universe
+<p>now it can be in any universe</p>
 
 #### [ Simon Hudon (Apr 01 2018 at 01:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124470084):
-Yeah, that's universe polymorphism for you ;-)
+<p>Yeah, that's universe polymorphism for you ;-)</p>
 
 #### [ Kenny Lau (Apr 01 2018 at 01:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124470096):
-I wonder if `free_group.{u v} S` and `free_group.{u w} S` are different
+<p>I wonder if <code>free_group.{u v} S</code> and <code>free_group.{u w} S</code> are different</p>
 
 #### [ Kenny Lau (Apr 01 2018 at 01:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124470183):
-@**Simon Hudon** this is such a convenient construction
+<p><span class="user-mention" data-user-id="110026">@Simon Hudon</span> this is such a convenient construction</p>
 
 #### [ Kenny Lau (Apr 01 2018 at 01:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124470185):
-basically constructing an object from its UMP
+<p>basically constructing an object from its UMP</p>
 
 #### [ Kenny Lau (Apr 01 2018 at 01:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124470187):
-I can probably construct the abelianization this way also
+<p>I can probably construct the abelianization this way also</p>
 
 #### [ Simon Hudon (Apr 01 2018 at 01:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124470229):
-That looks like the free objects I've worked with before. I remember being blown away by how cool they are :D
+<p>That looks like the free objects I've worked with before. I remember being blown away by how cool they are :D</p>
 
 #### [ Kenny Lau (Apr 01 2018 at 01:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124470232):
-you've seen this construction before?
+<p>you've seen this construction before?</p>
 
 #### [ Simon Hudon (Apr 01 2018 at 01:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124470238):
-I've seen it in free monads mostly
+<p>I've seen it in free monads mostly</p>
 
 #### [ Kenny Lau (Apr 01 2018 at 01:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124470283):
-do you have any idea how I can fix the file to remove the need for manual typeclassing?
+<p>do you have any idea how I can fix the file to remove the need for manual typeclassing?</p>
 
 #### [ Kenny Lau (Apr 01 2018 at 01:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124470285):
-group to monoid, monoid to semigroup, semigroup to has_mul...
+<p>group to monoid, monoid to semigroup, semigroup to has_mul...</p>
 
 #### [ Simon Hudon (Apr 01 2018 at 01:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124470335):
-What happens when you replace it with an underscore?
+<p>What happens when you replace it with an underscore?</p>
 
 #### [ Kenny Lau (Apr 01 2018 at 01:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124470337):
-can't synthesize that thing
+<p>can't synthesize that thing</p>
 
 #### [ Simon Hudon (Apr 01 2018 at 01:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124470383):
-Right but what instances are in your context?
+<p>Right but what instances are in your context?</p>
 
 #### [ Kenny Lau (Apr 01 2018 at 01:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124470384):
-the thing is that the instances aren't declared to the left of the colon
+<p>the thing is that the instances aren't declared to the left of the colon</p>
 
 #### [ Kenny Lau (Apr 01 2018 at 01:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124470385):
-rather, they're introduced as variables
+<p>rather, they're introduced as variables</p>
 
 #### [ Kenny Lau (Apr 01 2018 at 01:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124470392):
-because of how I defined ambient
+<p>because of how I defined ambient</p>
 
 #### [ Simon Hudon (Apr 01 2018 at 01:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124470433):
-Right, so you can write:
-
-```lean
-λ x y G HG f, by resetI ; exact @has_mul.mul _ _ ... 
-```
+<p>Right, so you can write:</p>
+<div class="codehilite"><pre><span></span><span class="bp">λ</span> <span class="n">x</span> <span class="n">y</span> <span class="n">G</span> <span class="n">HG</span> <span class="n">f</span><span class="o">,</span> <span class="k">by</span> <span class="n">resetI</span> <span class="bp">;</span> <span class="n">exact</span> <span class="bp">@</span><span class="n">has_mul</span><span class="bp">.</span><span class="n">mul</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">...</span>
+</pre></div>
 
 #### [ Kenny Lau (Apr 01 2018 at 01:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124470434):
-I thought definitions shouldn't have any tactics
+<p>I thought definitions shouldn't have any tactics</p>
 
 #### [ Kenny Lau (Apr 01 2018 at 01:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124470435):
-because they're difficult to destruct
+<p>because they're difficult to destruct</p>
 
 #### [ Simon Hudon (Apr 01 2018 at 01:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124470476):
-This tactic won't create a complicated term. But it's also useful to just try it and see if it works. Otherwise, you can also use a separate `def`
+<p>This tactic won't create a complicated term. But it's also useful to just try it and see if it works. Otherwise, you can also use a separate <code>def</code></p>
 
 #### [ Kenny Lau (Apr 01 2018 at 01:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124470479):
-hmm...
+<p>hmm...</p>
 
 #### [ Kenny Lau (Apr 01 2018 at 02:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124470578):
-free functors on steroids
+<p>free functors on steroids</p>
 
 #### [ Kenny Lau (Apr 01 2018 at 02:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124470859):
-https://github.com/kckennylau/Lean/blob/master/abelianization.lean
+<p><a href="https://github.com/kckennylau/Lean/blob/master/abelianization.lean" target="_blank" title="https://github.com/kckennylau/Lean/blob/master/abelianization.lean">https://github.com/kckennylau/Lean/blob/master/abelianization.lean</a></p>
 
 #### [ Kenny Lau (Apr 01 2018 at 02:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124470860):
-comes with commutators for free!
+<p>comes with commutators for free!</p>
 
 #### [ Mario Carneiro (Apr 01 2018 at 03:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124472206):
-I'm familiar with this construction, which is sometimes used as an application of category theory: use the adjoint functor theorem to construct free groups. When you unwind the category theory it's exactly this construction: taking a suitable quotient over all groups
+<p>I'm familiar with this construction, which is sometimes used as an application of category theory: use the adjoint functor theorem to construct free groups. When you unwind the category theory it's exactly this construction: taking a suitable quotient over all groups</p>
 
 #### [ Mario Carneiro (Apr 01 2018 at 03:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124472250):
-The universe issues that arise in ZFC also arise in lean, because they are valid concerns and can cause inconsistency if they are not attended to. In lean this expresses as a bumping up of the universe level of the constructed free group
+<p>The universe issues that arise in ZFC also arise in lean, because they are valid concerns and can cause inconsistency if they are not attended to. In lean this expresses as a bumping up of the universe level of the constructed free group</p>
 
 #### [ Mario Carneiro (Apr 01 2018 at 03:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124472296):
-To prove that the universe doesn't need to increase, you need a size limitation which amounts to doing the standard (internal) free group construction anyway. This is why I'm not a big fan of this approach - it's just shuffling proof obligations around
+<p>To prove that the universe doesn't need to increase, you need a size limitation which amounts to doing the standard (internal) free group construction anyway. This is why I'm not a big fan of this approach - it's just shuffling proof obligations around</p>
 
 #### [ Mario Carneiro (Apr 01 2018 at 03:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124472356):
-When you write the UMP predicatively, it ends up weaker than people want (and use), because the free group you've constructed lives in `max u (v+1)` but is only universal wrt groups in `Type v`, which is strictly lower. In particular, the free group UMP doesn't apply to itself, which we want to be true for it to really be a free group. Otherwise it's only an approximation - if you try proving equivalence to the standard internal definition you will get stuck
+<p>When you write the UMP predicatively, it ends up weaker than people want (and use), because the free group you've constructed lives in <code>max u (v+1)</code> but is only universal wrt groups in <code>Type v</code>, which is strictly lower. In particular, the free group UMP doesn't apply to itself, which we want to be true for it to really be a free group. Otherwise it's only an approximation - if you try proving equivalence to the standard internal definition you will get stuck</p>
 
 #### [ Mario Carneiro (Apr 01 2018 at 03:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124473230):
-Re: making the isomorphism class a group, it is impossible to do this computably for some reasonable definitions of the problem. Suppose we want to take a quotient of all groups (in some universe) with respect to isomorphism. First of all, note that a quotient is with respect to a relation, meaning a Prop, meaning data about the isomorphism itself will be lost. We can define such a quotient, let's call it `Q`. Now each element `q : Q` somehow "represents" a group unique up to isomorphism, but I claim that there is no computable function `rep : Q -> Group` such that `G ~= rep (mk G)` for all groups `G`.
-
-Now one way to define such a function is by applying choice as you've done to just pick one of the groups in the class, but maybe you thought there might be a way of using all the groups at once to form a new group which is isomorphic to each of the groups in the equivalence class. Supposing this is possible, and supposing also that you computably have the isomorphism `f G : G ~= rep (mk G)`, i.e. that's not just an existence statement, then you have `choice` for group isomorphisms, since if `nonempty (G ~= H)` then `mk G = mk H` and hence you can construct `G ~= rep (mk G) = rep (mk H) ~= H`.
-
-To turn this into at least unique choice, we can construct a group `H` which is isomorphic to `G = C_2` iff `α` is nonempty. For example, `H := Σ g : G, g ≠ 0 → trunc α` will do the trick. Then given an isomorphism `f : G ~= H`, we have `f 1 : psum (trunc α) (1 = 0)` from which we obtain an element of `trunc α`. This is not as strong as full choice, but it is known unprovable in lean.
+<p>Re: making the isomorphism class a group, it is impossible to do this computably for some reasonable definitions of the problem. Suppose we want to take a quotient of all groups (in some universe) with respect to isomorphism. First of all, note that a quotient is with respect to a relation, meaning a Prop, meaning data about the isomorphism itself will be lost. We can define such a quotient, let's call it <code>Q</code>. Now each element <code>q : Q</code> somehow "represents" a group unique up to isomorphism, but I claim that there is no computable function <code>rep : Q -&gt; Group</code> such that <code>G ~= rep (mk G)</code> for all groups <code>G</code>.</p>
+<p>Now one way to define such a function is by applying choice as you've done to just pick one of the groups in the class, but maybe you thought there might be a way of using all the groups at once to form a new group which is isomorphic to each of the groups in the equivalence class. Supposing this is possible, and supposing also that you computably have the isomorphism <code>f G : G ~= rep (mk G)</code>, i.e. that's not just an existence statement, then you have <code>choice</code> for group isomorphisms, since if <code>nonempty (G ~= H)</code> then <code>mk G = mk H</code> and hence you can construct <code>G ~= rep (mk G) = rep (mk H) ~= H</code>.</p>
+<p>To turn this into at least unique choice, we can construct a group <code>H</code> which is isomorphic to <code>G = C_2</code> iff <code>α</code> is nonempty. For example, <code>H := Σ g : G, g ≠ 0 → trunc α</code> will do the trick. Then given an isomorphism <code>f : G ~= H</code>, we have <code>f 1 : psum (trunc α) (1 = 0)</code> from which we obtain an element of <code>trunc α</code>. This is not as strong as full choice, but it is known unprovable in lean.</p>
 
 #### [ Kenny Lau (Apr 01 2018 at 06:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124476618):
-@**Mario Carneiro** so what should I do? I'm confused, you keep saying it's unprovable but you're giving an algorithm
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> so what should I do? I'm confused, you keep saying it's unprovable but you're giving an algorithm</p>
 
 #### [ Mario Carneiro (Apr 01 2018 at 06:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124476658):
-I'm showing that if you could construct it you could prove something that is known unprovable
+<p>I'm showing that if you could construct it you could prove something that is known unprovable</p>
 
 #### [ Mario Carneiro (Apr 01 2018 at 06:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124476659):
-thus it's not computable
+<p>thus it's not computable</p>
 
 #### [ Kenny Lau (Apr 01 2018 at 06:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124476664):
-ok, then what should I do?
+<p>ok, then what should I do?</p>
 
 #### [ Mario Carneiro (Apr 01 2018 at 06:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124476675):
-Live with the fact that going from an isomorphism class to a specific group is nonconstructive?
+<p>Live with the fact that going from an isomorphism class to a specific group is nonconstructive?</p>
 
 #### [ Kenny Lau (Apr 01 2018 at 06:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124476715):
-oh well, but I didn't use isomorphism class in the end
+<p>oh well, but I didn't use isomorphism class in the end</p>
 
 #### [ Mario Carneiro (Apr 01 2018 at 06:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124476721):
-maybe you can phrase it independently of the choice then?
+<p>maybe you can phrase it independently of the choice then?</p>
 
 #### [ Kenny Lau (Apr 01 2018 at 06:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124476722):
-phrase what?
+<p>phrase what?</p>
 
 #### [ Mario Carneiro (Apr 01 2018 at 06:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124476723):
-your theorem, whatever it is
+<p>your theorem, whatever it is</p>
 
 #### [ Kenny Lau (Apr 01 2018 at 06:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124476724):
-that free group exists?
+<p>that free group exists?</p>
 
 #### [ Mario Carneiro (Apr 01 2018 at 06:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124476762):
-I'm not sure what you are trying to do now...
+<p>I'm not sure what you are trying to do now...</p>
 
 #### [ Kenny Lau (Apr 01 2018 at 06:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124476765):
-I realized that using isomorphism class is because of some stupid limitation of ZFC
+<p>I realized that using isomorphism class is because of some stupid limitation of ZFC</p>
 
 #### [ Mario Carneiro (Apr 01 2018 at 06:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124476766):
-it's a limitation of lean too, I say
+<p>it's a limitation of lean too, I say</p>
 
 #### [ Kenny Lau (Apr 01 2018 at 06:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124476767):
-I just stopped using it
+<p>I just stopped using it</p>
 
 #### [ Kenny Lau (Apr 01 2018 at 06:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124476768):
-and then I constructed the free group and proved its property
+<p>and then I constructed the free group and proved its property</p>
 
 #### [ Mario Carneiro (Apr 01 2018 at 06:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124476769):
-did you though?
+<p>did you though?</p>
 
 #### [ Mario Carneiro (Apr 01 2018 at 06:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124476770):
-watch your universe levels
+<p>watch your universe levels</p>
 
 #### [ Mario Carneiro (Apr 01 2018 at 06:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124476777):
-I'm claiming you didn't construct the real free group
+<p>I'm claiming you didn't construct the real free group</p>
 
 #### [ Kenny Lau (Apr 01 2018 at 06:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124476778):
-I'm starting to suspect so
+<p>I'm starting to suspect so</p>
 
 #### [ Mario Carneiro (Apr 01 2018 at 06:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124476818):
-Have you ever heard of system F encodings or church encodings?
+<p>Have you ever heard of system F encodings or church encodings?</p>
 
 #### [ Kenny Lau (Apr 01 2018 at 06:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124476824):
-I've heard of church encodings, if you're referring to the numbers
+<p>I've heard of church encodings, if you're referring to the numbers</p>
 
 #### [ Mario Carneiro (Apr 01 2018 at 06:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124476865):
-I'm talking about the types. Something like this:
-```
-def unit := ∀ X : Type, X → X
+<p>I'm talking about the types. Something like this:</p>
+<div class="codehilite"><pre><span></span>def unit := ∀ X : Type, X → X
 def nat := ∀ X : Type, X → (X → X) → X
 def prod (α β) := ∀ X : Type, (α → β → X) → X
-```
+</pre></div>
 
 #### [ Kenny Lau (Apr 01 2018 at 06:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124476870):
-oh
+<p>oh</p>
 
 #### [ Kenny Lau (Apr 01 2018 at 06:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124476871):
-I get it, go on
+<p>I get it, go on</p>
 
 #### [ Mario Carneiro (Apr 01 2018 at 06:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124476912):
-This sort of thing works great in system F, where there is only one impredicative data type `Type`, because then `unit : Type` etc and this has the expected universal property
+<p>This sort of thing works great in system F, where there is only one impredicative data type <code>Type</code>, because then <code>unit : Type</code> etc and this has the expected universal property</p>
 
 #### [ Mario Carneiro (Apr 01 2018 at 06:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124476915):
-But in lean, it's not as strong as you want because the elimination property only goes to `Type 0` in this case while the constructed type lives in `Type 1`
+<p>But in lean, it's not as strong as you want because the elimination property only goes to <code>Type 0</code> in this case while the constructed type lives in <code>Type 1</code></p>
 
 #### [ Mario Carneiro (Apr 01 2018 at 06:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124476923):
-Note that real eliminators such as are generated by `inductive` eliminate to `Sort u` where `u` is independent of the universes involved in the definition of the inductive type itself
+<p>Note that real eliminators such as are generated by <code>inductive</code> eliminate to <code>Sort u</code> where <code>u</code> is independent of the universes involved in the definition of the inductive type itself</p>
 
 #### [ Mario Carneiro (Apr 01 2018 at 06:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124476924):
-This allows creation of type families over the inductive type in very large universes
+<p>This allows creation of type families over the inductive type in very large universes</p>
 
 #### [ Kenny Lau (Apr 01 2018 at 06:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124476963):
-fair enough
+<p>fair enough</p>
 
 #### [ Mario Carneiro (Apr 01 2018 at 06:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124476968):
-There is a curious property about these weak eliminators, though: *If* there exists a real type with the right eliminator, then you can prove that the weak type and the strong type are isomorphic, so the weak type inherits the strong eliminator
+<p>There is a curious property about these weak eliminators, though: <em>If</em> there exists a real type with the right eliminator, then you can prove that the weak type and the strong type are isomorphic, so the weak type inherits the strong eliminator</p>
 
 #### [ Kenny Lau (Apr 01 2018 at 06:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124476969):
-hence what you mean by moving proof obligations around
+<p>hence what you mean by moving proof obligations around</p>
 
 #### [ Mario Carneiro (Apr 01 2018 at 06:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124476970):
-That means that your free group construction is correct if there is a free group
+<p>That means that your free group construction is correct if there is a free group</p>
 
 #### [ Kenny Lau (Apr 01 2018 at 06:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124476971):
-and here am I thinking that it's a brand new construction that nobody knows :P
+<p>and here am I thinking that it's a brand new construction that nobody knows :P</p>
 
 #### [ Mario Carneiro (Apr 01 2018 at 06:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124477010):
-The size limitation thing is really important but manifests in weird ways in ZFC and lean
+<p>The size limitation thing is really important but manifests in weird ways in ZFC and lean</p>
 
 #### [ Mario Carneiro (Apr 01 2018 at 06:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124477057):
-I think it's also related to the "B" in BNF, bounded natural functors used in isabelle for generating arbitrary (co)inductive types
+<p>I think it's also related to the "B" in BNF, bounded natural functors used in isabelle for generating arbitrary (co)inductive types</p>
 
 #### [ Mario Carneiro (Apr 01 2018 at 06:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124477060):
-which literally have an axiom on limitation of size, to prevent universe issues
+<p>which literally have an axiom on limitation of size, to prevent universe issues</p>
 
 #### [ Kenny Lau (Apr 01 2018 at 06:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124477066):
-🅱ounded 🅱atural 🅱unctors
+<p><span class="emoji emoji-1f171" title="b button">:b_button:</span>ounded <span class="emoji emoji-1f171" title="b button">:b_button:</span>atural <span class="emoji emoji-1f171" title="b button">:b_button:</span>unctors</p>
 
 #### [ Mario Carneiro (Apr 01 2018 at 06:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124477111):
-now I need to make a "bounded natural blunders" joke
+<p>now I need to make a "bounded natural blunders" joke</p>
 
 #### [ Kenny Lau (Apr 01 2018 at 06:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124477264):
-I'm thoroughly confused now
+<p>I'm thoroughly confused now</p>
 
 #### [ Kevin Buzzard (Apr 01 2018 at 18:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124493878):
-Well that's really annoying. I thought that type theory was getting around these silly ZFC universe problems
+<p>Well that's really annoying. I thought that type theory was getting around these silly ZFC universe problems</p>
 
 #### [ Kevin Buzzard (Apr 01 2018 at 18:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124493882):
-but it's just moving them to Lean universe problems
+<p>but it's just moving them to Lean universe problems</p>
 
 #### [ Kenny Lau (Apr 01 2018 at 18:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124493885):
-same thought here
+<p>same thought here</p>
 
 #### [ Kevin Buzzard (Apr 01 2018 at 18:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124493886):
-Why do you care about isomorphic groups?
+<p>Why do you care about isomorphic groups?</p>
 
 #### [ Kevin Buzzard (Apr 01 2018 at 18:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124493887):
-Why not just work with all groups?
+<p>Why not just work with all groups?</p>
 
 #### [ Kenny Lau (Apr 01 2018 at 18:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124493888):
-right, I worked with all groups at the end
+<p>right, I worked with all groups at the end</p>
 
 #### [ Kenny Lau (Apr 01 2018 at 18:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124493889):
-I was following the paper, which used isomorphic groups
+<p>I was following the paper, which used isomorphic groups</p>
 
 #### [ Kenny Lau (Apr 01 2018 at 18:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124493891):
-my conjecture is that the author used isomorphism classes to make it justified in ZFC
+<p>my conjecture is that the author used isomorphism classes to make it justified in ZFC</p>
 
 #### [ Kevin Buzzard (Apr 01 2018 at 18:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124493928):
-Similarly you don't need to work with "generated by a subset of S"
+<p>Similarly you don't need to work with "generated by a subset of S"</p>
 
 #### [ Kenny Lau (Apr 01 2018 at 18:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124493931):
-which i take to be a really shitty thing to do
+<p>which i take to be a really shitty thing to do</p>
 
 #### [ Kevin Buzzard (Apr 01 2018 at 18:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124493932):
-That just seemed to be a red herring
+<p>That just seemed to be a red herring</p>
 
 #### [ Kenny Lau (Apr 01 2018 at 18:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124493933):
-right
+<p>right</p>
 
 #### [ Kenny Lau (Apr 01 2018 at 18:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124493934):
-I didn't use that in my construction
+<p>I didn't use that in my construction</p>
 
 #### [ Kenny Lau (Apr 01 2018 at 18:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124493935):
-but then it still depends on the universe
+<p>but then it still depends on the universe</p>
 
 #### [ Kenny Lau (Apr 01 2018 at 18:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124493936):
-since you're quantifying over every group anyway
+<p>since you're quantifying over every group anyway</p>
 
 #### [ Kenny Lau (Apr 01 2018 at 18:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124493984):
-that's the thing with impredicative constructions
+<p>that's the thing with impredicative constructions</p>
 
 #### [ Kevin Buzzard (Apr 01 2018 at 18:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124493986):
-you can send the other elements of $$S$$ to the identity
+<p>you can send the other elements of <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.68333em;vertical-align:0em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.05764em;">S</span></span></span></span> to the identity</p>
 
 #### [ Kevin Buzzard (Apr 01 2018 at 18:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124493987):
-Oh I broke zulip
+<p>Oh I broke zulip</p>
 
 #### [ Kevin Buzzard (Apr 01 2018 at 18:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124493988):
-I can't edit $S$ into $$S$$
+<p>I can't edit $S$ into <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>S</mi></mrow><annotation encoding="application/x-tex">S</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.68333em;vertical-align:0em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.05764em;">S</span></span></span></span></p>
 
 #### [ Kenny Lau (Apr 01 2018 at 18:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124494040):
-you see, in ZFC this is the way you would do it:
+<p>you see, in ZFC this is the way you would do it:</p>
 
 #### [ Kenny Lau (Apr 01 2018 at 18:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124494042):
-firstly you consider only the isomorphism classes
+<p>firstly you consider only the isomorphism classes</p>
 
 #### [ Kevin Buzzard (Apr 01 2018 at 18:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124494043):
-Bingo, I had to reload the page.
+<p>Bingo, I had to reload the page.</p>
 
 #### [ Kenny Lau (Apr 01 2018 at 18:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124494044):
-and you only consider the groups generated by a subset of S
+<p>and you only consider the groups generated by a subset of S</p>
 
 #### [ Kenny Lau (Apr 01 2018 at 18:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124494045):
-because in some sense you can build it from S
+<p>because in some sense you can build it from S</p>
 
 #### [ Kevin Buzzard (Apr 01 2018 at 18:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124494082):
-I don't see where the subset comes in
+<p>I don't see where the subset comes in</p>
 
 #### [ Kevin Buzzard (Apr 01 2018 at 18:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124494085):
-but I do see where the isomorphism classes come in
+<p>but I do see where the isomorphism classes come in</p>
 
 #### [ Kenny Lau (Apr 01 2018 at 18:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124494087):
-well
+<p>well</p>
 
 #### [ Kenny Lau (Apr 01 2018 at 18:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124494088):
-they are both limitations on the size of the set
+<p>they are both limitations on the size of the set</p>
 
 #### [ Kenny Lau (Apr 01 2018 at 18:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124494094):
-after these two restrictions, you can justify the existence of the set by building it from a large enough set that you still build from S
+<p>after these two restrictions, you can justify the existence of the set by building it from a large enough set that you still build from S</p>
 
 #### [ Kevin Buzzard (Apr 01 2018 at 18:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124494096):
-I don't see where they're needed in the ZFC proof.
+<p>I don't see where they're needed in the ZFC proof.</p>
 
 #### [ Kenny Lau (Apr 01 2018 at 18:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124494098):
-if you don't limit the size of the generator, your set is still too big
+<p>if you don't limit the size of the generator, your set is still too big</p>
 
 #### [ Kevin Buzzard (Apr 01 2018 at 18:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124494099):
-I want my generator to have size S
+<p>I want my generator to have size S</p>
 
 #### [ Kevin Buzzard (Apr 01 2018 at 18:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124494100):
-exactly
+<p>exactly</p>
 
 #### [ Kenny Lau (Apr 01 2018 at 18:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124494140):
-ah
+<p>ah</p>
 
 #### [ Kenny Lau (Apr 01 2018 at 18:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124494141):
-hmm
+<p>hmm</p>
 
 #### [ Kenny Lau (Apr 01 2018 at 18:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124494142):
-that's what you meant
+<p>that's what you meant</p>
 
 #### [ Kenny Lau (Apr 01 2018 at 18:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124494143):
-I suppose it's ok then
+<p>I suppose it's ok then</p>
 
 #### [ Kevin Buzzard (Apr 01 2018 at 18:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124494144):
-So in ZFC I start with S and then I choose some cardinal kappa such that in V_kappa there is a copy of every group generated by S
+<p>So in ZFC I start with S and then I choose some cardinal kappa such that in V_kappa there is a copy of every group generated by S</p>
 
 #### [ Kevin Buzzard (Apr 01 2018 at 18:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124494151):
-Lean is better because in Lean I don't think you even need that S generates G
+<p>Lean is better because in Lean I don't think you even need that S generates G</p>
 
 #### [ Kevin Buzzard (Apr 01 2018 at 18:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124494154):
-But as Mario points out, your answer is in the wrong universe.
+<p>But as Mario points out, your answer is in the wrong universe.</p>
 
 #### [ Kenny Lau (Apr 01 2018 at 18:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124494204):
-I think you do need that S generates G if you don't want to run into universe problems
+<p>I think you do need that S generates G if you don't want to run into universe problems</p>
 
 #### [ Kevin Buzzard (Apr 01 2018 at 18:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124494300):
-In ZFC you do, but I don't see where you need it in Lean.
+<p>In ZFC you do, but I don't see where you need it in Lean.</p>
 
 #### [ Kevin Buzzard (Apr 01 2018 at 18:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124494347):
-You just put a group structure on the product of G over all pairs (G,f:S -> G)
+<p>You just put a group structure on the product of G over all pairs (G,f:S -&gt; G)</p>
 
 #### [ Kevin Buzzard (Apr 01 2018 at 18:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124494353):
-and give this a map from S
+<p>and give this a map from S</p>
 
 #### [ Kevin Buzzard (Apr 01 2018 at 18:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124494354):
-and then take the intersection over all the subgroups containing the image of S
+<p>and then take the intersection over all the subgroups containing the image of S</p>
 
 #### [ Kevin Buzzard (Apr 01 2018 at 18:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/making%20isomorphism%20class%20a%20group/near/124494362):
-This should definitely be in #**maths**
+<p>This should definitely be in <a class="stream" data-stream-id="116395" href="/#narrow/stream/116395-maths">#maths</a></p>
 
 
 {% endraw %}

@@ -12,63 +12,58 @@ permalink: archive/113488general/62391Norder0and1.html
 
 {% raw %}
 #### [ Ned Summers (Aug 18 2018 at 19:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/N%2C%20order%2C%200%20and%201/near/132369398):
-Hey, I'm trying to prove the seemingly very simple
-```
-example (n : ℕ) (h : n < 1) : n = 0 := sorry
-```
-It's revealing a lot about what I don't know in lean (like getting stuck getting 1>n from n<1) and would welcome any advice/solutions. I'm not working very much at all with order or N at any other stage so, despite wading through theorems the past couple of days trying to find what I need, I'm giving up a bit. Thanks.
+<p>Hey, I'm trying to prove the seemingly very simple</p>
+<div class="codehilite"><pre><span></span>example (n : ℕ) (h : n &lt; 1) : n = 0 := sorry
+</pre></div>
 
-(Also, I'm using this to show that if you take any `(a : fin 1)` then `a = 0`. I suspect too that this is probably much simpler than what I'm doing.)
+
+<p>It's revealing a lot about what I don't know in lean (like getting stuck getting 1&gt;n from n&lt;1) and would welcome any advice/solutions. I'm not working very much at all with order or N at any other stage so, despite wading through theorems the past couple of days trying to find what I need, I'm giving up a bit. Thanks.</p>
+<p>(Also, I'm using this to show that if you take any <code>(a : fin 1)</code> then <code>a = 0</code>. I suspect too that this is probably much simpler than what I'm doing.)</p>
 
 #### [ Mario Carneiro (Aug 18 2018 at 19:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/N%2C%20order%2C%200%20and%201/near/132369562):
-you should be able to do it by cases
+<p>you should be able to do it by cases</p>
 
 #### [ Mario Carneiro (Aug 18 2018 at 19:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/N%2C%20order%2C%200%20and%201/near/132369628):
-not my favorite proof:
-```
-example (n : ℕ) (h : n < 1) : n = 0 :=
+<p>not my favorite proof:</p>
+<div class="codehilite"><pre><span></span>example (n : ℕ) (h : n &lt; 1) : n = 0 :=
 by cases h with _ h; [refl, cases h]
-```
+</pre></div>
 
 #### [ Mario Carneiro (Aug 18 2018 at 19:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/N%2C%20order%2C%200%20and%201/near/132369681):
-```
-example (n : fin 1) : n = 0 :=
+<div class="codehilite"><pre><span></span>example (n : fin 1) : n = 0 :=
 fin.cases rfl (λ i, i.elim0) n
-```
+</pre></div>
 
 #### [ Mario Carneiro (Aug 18 2018 at 20:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/N%2C%20order%2C%200%20and%201/near/132370212):
-```
-example : ∀ (n : fin 1), n = 0 := dec_trivial
-```
+<div class="codehilite"><pre><span></span>example : ∀ (n : fin 1), n = 0 := dec_trivial
+</pre></div>
 
 #### [ Patrick Massot (Aug 18 2018 at 20:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/N%2C%20order%2C%200%20and%201/near/132371079):
-```quote
-It's revealing a lot about what I don't know in lean (like getting stuck getting 1>n from n<1) and would welcome any advice/solutions. 
-```
-This is literaly the same thing.
-```lean
-example (n : ℕ) (h : 1 > n) : n < 1 := h
+<blockquote>
+<p>It's revealing a lot about what I don't know in lean (like getting stuck getting 1&gt;n from n&lt;1) and would welcome any advice/solutions. </p>
+</blockquote>
+<p>This is literaly the same thing.</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="mi">1</span> <span class="bp">&gt;</span> <span class="n">n</span><span class="o">)</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">&lt;</span> <span class="mi">1</span> <span class="o">:=</span> <span class="n">h</span>
 
-example (n : ℕ) (h : 1 > n) : n < 1 := 
-begin
-change 1 > n,
-assumption
-end
-```
+<span class="kn">example</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="mi">1</span> <span class="bp">&gt;</span> <span class="n">n</span><span class="o">)</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">&lt;</span> <span class="mi">1</span> <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="n">change</span> <span class="mi">1</span> <span class="bp">&gt;</span> <span class="n">n</span><span class="o">,</span>
+<span class="n">assumption</span>
+<span class="kn">end</span>
+</pre></div>
 
 #### [ Patrick Massot (Aug 18 2018 at 20:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/N%2C%20order%2C%200%20and%201/near/132371124):
-Note that the `change` is here so you see it in the interative message window, but it's useless
+<p>Note that the <code>change</code> is here so you see it in the interative message window, but it's useless</p>
 
 #### [ Kenny Lau (Aug 18 2018 at 23:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/N%2C%20order%2C%200%20and%201/near/132376851):
-```lean
-import data.nat.basic
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">nat</span><span class="bp">.</span><span class="n">basic</span>
 
-example : ∀ (n : ℕ), n < 1 → n = 0 :=
-dec_trivial
-```
+<span class="kn">example</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">),</span> <span class="n">n</span> <span class="bp">&lt;</span> <span class="mi">1</span> <span class="bp">→</span> <span class="n">n</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span>
+<span class="n">dec_trivial</span>
+</pre></div>
 
 #### [ Ned Summers (Aug 20 2018 at 12:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/N%2C%20order%2C%200%20and%201/near/132445610):
-Thanks everyone, dec_trivial is a nice thing to know about. Will be using this to ponder where my break in understanding was.
+<p>Thanks everyone, dec_trivial is a nice thing to know about. Will be using this to ponder where my break in understanding was.</p>
 
 
 {% endraw %}

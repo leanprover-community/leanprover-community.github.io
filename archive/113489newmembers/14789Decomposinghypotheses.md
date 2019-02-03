@@ -12,112 +12,109 @@ permalink: archive/113489newmembers/14789Decomposinghypotheses.html
 
 {% raw %}
 #### [ Ken Roe (Jul 25 2018 at 18:46)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Decomposing%20hypotheses/near/130287397):
-```lean
-theorem test_split { P : Prop } { Q : Prop } { R : Prop } { S : Prop } :
-    (P ∧ (Q ∨ R)) → (Q → S) → (R → S) → (P ∧ S) :=
-begin
-    intros, sorry
-end
-```
-Is there a nice way to decompose the hypotheses to prove the above theorem?  What should "sorry" be replaced with?
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">test_split</span> <span class="o">{</span> <span class="n">P</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">}</span> <span class="o">{</span> <span class="n">Q</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">}</span> <span class="o">{</span> <span class="n">R</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">}</span> <span class="o">{</span> <span class="n">S</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">}</span> <span class="o">:</span>
+    <span class="o">(</span><span class="n">P</span> <span class="bp">∧</span> <span class="o">(</span><span class="n">Q</span> <span class="bp">∨</span> <span class="n">R</span><span class="o">))</span> <span class="bp">→</span> <span class="o">(</span><span class="n">Q</span> <span class="bp">→</span> <span class="n">S</span><span class="o">)</span> <span class="bp">→</span> <span class="o">(</span><span class="n">R</span> <span class="bp">→</span> <span class="n">S</span><span class="o">)</span> <span class="bp">→</span> <span class="o">(</span><span class="n">P</span> <span class="bp">∧</span> <span class="n">S</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+    <span class="n">intros</span><span class="o">,</span> <span class="n">sorry</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>Is there a nice way to decompose the hypotheses to prove the above theorem?  What should "sorry" be replaced with?</p>
 
 #### [ Reid Barton (Jul 25 2018 at 18:51)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Decomposing%20hypotheses/near/130287654):
-`tauto` gets the job done in this case
+<p><code>tauto</code> gets the job done in this case</p>
 
 #### [ Reid Barton (Jul 25 2018 at 18:52)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Decomposing%20hypotheses/near/130287735):
-Manually, you could use `cases`, for example
-```lean
-    cases pqr with p qr,
-    refine ⟨p, _⟩,
-    cases qr with q r,
-    { exact qs q },
-    { exact rs r }
-```
+<p>Manually, you could use <code>cases</code>, for example</p>
+<div class="codehilite"><pre><span></span>    <span class="n">cases</span> <span class="n">pqr</span> <span class="k">with</span> <span class="n">p</span> <span class="n">qr</span><span class="o">,</span>
+    <span class="n">refine</span> <span class="bp">⟨</span><span class="n">p</span><span class="o">,</span> <span class="bp">_⟩</span><span class="o">,</span>
+    <span class="n">cases</span> <span class="n">qr</span> <span class="k">with</span> <span class="n">q</span> <span class="n">r</span><span class="o">,</span>
+    <span class="o">{</span> <span class="n">exact</span> <span class="n">qs</span> <span class="n">q</span> <span class="o">},</span>
+    <span class="o">{</span> <span class="n">exact</span> <span class="n">rs</span> <span class="n">r</span> <span class="o">}</span>
+</pre></div>
 
 #### [ Ken Roe (Jul 25 2018 at 18:58)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Decomposing%20hypotheses/near/130288011):
-Where can I find tauto?  It is not in the standard libraries.
+<p>Where can I find tauto?  It is not in the standard libraries.</p>
 
 #### [ Reid Barton (Jul 25 2018 at 18:59)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Decomposing%20hypotheses/near/130288034):
-It's in mathlib
+<p>It's in mathlib</p>
 
 #### [ Ken Roe (Jul 25 2018 at 20:10)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Decomposing%20hypotheses/near/130292466):
-Now for a more complex example,
-```lean
-theorem test_split { P : ℕ → Prop } { Q : ℕ → Prop } { R : ℕ → Prop } { S : ℕ → Prop } :
-    (∀ x, P x ∧ (Q x ∨ R x)) → (∀ x, Q x → S x) → (∀ x, R x → S x) → (∀ x, P x ∧ S x) :=
-begin
-    intros, sorry
-end
-```
-After the intros, is there a nice way to decompose these hypotheses?
+<p>Now for a more complex example,</p>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">test_split</span> <span class="o">{</span> <span class="n">P</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="kt">Prop</span> <span class="o">}</span> <span class="o">{</span> <span class="n">Q</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="kt">Prop</span> <span class="o">}</span> <span class="o">{</span> <span class="n">R</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="kt">Prop</span> <span class="o">}</span> <span class="o">{</span> <span class="n">S</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="kt">Prop</span> <span class="o">}</span> <span class="o">:</span>
+    <span class="o">(</span><span class="bp">∀</span> <span class="n">x</span><span class="o">,</span> <span class="n">P</span> <span class="n">x</span> <span class="bp">∧</span> <span class="o">(</span><span class="n">Q</span> <span class="n">x</span> <span class="bp">∨</span> <span class="n">R</span> <span class="n">x</span><span class="o">))</span> <span class="bp">→</span> <span class="o">(</span><span class="bp">∀</span> <span class="n">x</span><span class="o">,</span> <span class="n">Q</span> <span class="n">x</span> <span class="bp">→</span> <span class="n">S</span> <span class="n">x</span><span class="o">)</span> <span class="bp">→</span> <span class="o">(</span><span class="bp">∀</span> <span class="n">x</span><span class="o">,</span> <span class="n">R</span> <span class="n">x</span> <span class="bp">→</span> <span class="n">S</span> <span class="n">x</span><span class="o">)</span> <span class="bp">→</span> <span class="o">(</span><span class="bp">∀</span> <span class="n">x</span><span class="o">,</span> <span class="n">P</span> <span class="n">x</span> <span class="bp">∧</span> <span class="n">S</span> <span class="n">x</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+    <span class="n">intros</span><span class="o">,</span> <span class="n">sorry</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>After the intros, is there a nice way to decompose these hypotheses?</p>
 
 #### [ Patrick Massot (Jul 25 2018 at 20:14)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Decomposing%20hypotheses/near/130292689):
-I'm not sure what you are looking for, but here is a short proof using `tauto`:
+<p>I'm not sure what you are looking for, but here is a short proof using <code>tauto</code>:</p>
 
 #### [ Patrick Massot (Jul 25 2018 at 20:14)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Decomposing%20hypotheses/near/130292693):
-```lean
-theorem test_split { P : ℕ → Prop } { Q : ℕ → Prop } { R : ℕ → Prop } { S : ℕ → Prop } :
-    (∀ x, P x ∧ (Q x ∨ R x)) → (∀ x, Q x → S x) → (∀ x, R x → S x) → (∀ x, P x ∧ S x) :=
-begin
-    intros h h' h'' x,
-    specialize h x,
-    specialize h' x,
-    specialize h'' x,
-    tauto
-end
-```
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">test_split</span> <span class="o">{</span> <span class="n">P</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="kt">Prop</span> <span class="o">}</span> <span class="o">{</span> <span class="n">Q</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="kt">Prop</span> <span class="o">}</span> <span class="o">{</span> <span class="n">R</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="kt">Prop</span> <span class="o">}</span> <span class="o">{</span> <span class="n">S</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="kt">Prop</span> <span class="o">}</span> <span class="o">:</span>
+    <span class="o">(</span><span class="bp">∀</span> <span class="n">x</span><span class="o">,</span> <span class="n">P</span> <span class="n">x</span> <span class="bp">∧</span> <span class="o">(</span><span class="n">Q</span> <span class="n">x</span> <span class="bp">∨</span> <span class="n">R</span> <span class="n">x</span><span class="o">))</span> <span class="bp">→</span> <span class="o">(</span><span class="bp">∀</span> <span class="n">x</span><span class="o">,</span> <span class="n">Q</span> <span class="n">x</span> <span class="bp">→</span> <span class="n">S</span> <span class="n">x</span><span class="o">)</span> <span class="bp">→</span> <span class="o">(</span><span class="bp">∀</span> <span class="n">x</span><span class="o">,</span> <span class="n">R</span> <span class="n">x</span> <span class="bp">→</span> <span class="n">S</span> <span class="n">x</span><span class="o">)</span> <span class="bp">→</span> <span class="o">(</span><span class="bp">∀</span> <span class="n">x</span><span class="o">,</span> <span class="n">P</span> <span class="n">x</span> <span class="bp">∧</span> <span class="n">S</span> <span class="n">x</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+    <span class="n">intros</span> <span class="n">h</span> <span class="n">h&#39;</span> <span class="n">h&#39;&#39;</span> <span class="n">x</span><span class="o">,</span>
+    <span class="n">specialize</span> <span class="n">h</span> <span class="n">x</span><span class="o">,</span>
+    <span class="n">specialize</span> <span class="n">h&#39;</span> <span class="n">x</span><span class="o">,</span>
+    <span class="n">specialize</span> <span class="n">h&#39;&#39;</span> <span class="n">x</span><span class="o">,</span>
+    <span class="n">tauto</span>
+<span class="kn">end</span>
+</pre></div>
 
 #### [ Patrick Massot (Jul 25 2018 at 20:16)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Decomposing%20hypotheses/near/130292772):
-I'm not sure we currently have any tactic that can guess the `specialize` steps.
+<p>I'm not sure we currently have any tactic that can guess the <code>specialize</code> steps.</p>
 
 #### [ Patrick Massot (Jul 25 2018 at 20:16)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Decomposing%20hypotheses/near/130292790):
-If you really really want one, then the standard procedure is to hope Simon will pity you.
+<p>If you really really want one, then the standard procedure is to hope Simon will pity you.</p>
 
 #### [ Simon Hudon (Jul 25 2018 at 20:36)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Decomposing%20hypotheses/near/130293761):
-Haha! I'm pretty merciful though
+<p>Haha! I'm pretty merciful though</p>
 
 #### [ Simon Hudon (Jul 25 2018 at 20:37)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Decomposing%20hypotheses/near/130293765):
-Have you tried `solve_by_elim`?
+<p>Have you tried <code>solve_by_elim</code>?</p>
 
 #### [ Patrick Massot (Jul 25 2018 at 20:38)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Decomposing%20hypotheses/near/130293837):
-It doesn't work
+<p>It doesn't work</p>
 
 #### [ Patrick Massot (Jul 25 2018 at 20:42)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Decomposing%20hypotheses/near/130294047):
-Btw Simon, how was your tauto lecture?
+<p>Btw Simon, how was your tauto lecture?</p>
 
 #### [ Simon Hudon (Jul 25 2018 at 20:45)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Decomposing%20hypotheses/near/130294182):
-You can shrink the proof down to:
-
-```lean
-theorem test_split { P : ℕ → Prop } { Q : ℕ → Prop } { R : ℕ → Prop } { S : ℕ → Prop } :
-    (∀ x, P x ∧ (Q x ∨ R x)) → (∀ x, Q x → S x) → (∀ x, R x → S x) → (∀ x, P x ∧ S x) :=
-begin
-    intros h h' h'' x,
-    specialize h x, 
-    split; tauto,
-end
-```
+<p>You can shrink the proof down to:</p>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">test_split</span> <span class="o">{</span> <span class="n">P</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="kt">Prop</span> <span class="o">}</span> <span class="o">{</span> <span class="n">Q</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="kt">Prop</span> <span class="o">}</span> <span class="o">{</span> <span class="n">R</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="kt">Prop</span> <span class="o">}</span> <span class="o">{</span> <span class="n">S</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="kt">Prop</span> <span class="o">}</span> <span class="o">:</span>
+    <span class="o">(</span><span class="bp">∀</span> <span class="n">x</span><span class="o">,</span> <span class="n">P</span> <span class="n">x</span> <span class="bp">∧</span> <span class="o">(</span><span class="n">Q</span> <span class="n">x</span> <span class="bp">∨</span> <span class="n">R</span> <span class="n">x</span><span class="o">))</span> <span class="bp">→</span> <span class="o">(</span><span class="bp">∀</span> <span class="n">x</span><span class="o">,</span> <span class="n">Q</span> <span class="n">x</span> <span class="bp">→</span> <span class="n">S</span> <span class="n">x</span><span class="o">)</span> <span class="bp">→</span> <span class="o">(</span><span class="bp">∀</span> <span class="n">x</span><span class="o">,</span> <span class="n">R</span> <span class="n">x</span> <span class="bp">→</span> <span class="n">S</span> <span class="n">x</span><span class="o">)</span> <span class="bp">→</span> <span class="o">(</span><span class="bp">∀</span> <span class="n">x</span><span class="o">,</span> <span class="n">P</span> <span class="n">x</span> <span class="bp">∧</span> <span class="n">S</span> <span class="n">x</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+    <span class="n">intros</span> <span class="n">h</span> <span class="n">h&#39;</span> <span class="n">h&#39;&#39;</span> <span class="n">x</span><span class="o">,</span>
+    <span class="n">specialize</span> <span class="n">h</span> <span class="n">x</span><span class="o">,</span>
+    <span class="n">split</span><span class="bp">;</span> <span class="n">tauto</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
 
 #### [ Simon Hudon (Jul 25 2018 at 20:46)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Decomposing%20hypotheses/near/130294259):
-I'm giving it tonight and I decided to talk about `pi_instances` after all. 5 minutes is so incredibly short :D
+<p>I'm giving it tonight and I decided to talk about <code>pi_instances</code> after all. 5 minutes is so incredibly short :D</p>
 
 #### [ Patrick Massot (Jul 25 2018 at 20:47)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Decomposing%20hypotheses/near/130294306):
-Did you prepare a heavily commented version of the source?
+<p>Did you prepare a heavily commented version of the source?</p>
 
 #### [ Simon Hudon (Jul 25 2018 at 20:53)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Decomposing%20hypotheses/near/130294601):
-What I decided to do is write an instance for `group` and show how automation shrinks it. And then I mention that `refine_struct` is written in Lean
+<p>What I decided to do is write an instance for <code>group</code> and show how automation shrinks it. And then I mention that <code>refine_struct</code> is written in Lean</p>
 
 #### [ Mario Carneiro (Jul 26 2018 at 03:19)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Decomposing%20hypotheses/near/130314506):
-`rintro` is a really nice way of doing all that
-```
-theorem test_split {P Q R S : Prop} :
+<p><code>rintro</code> is a really nice way of doing all that</p>
+<div class="codehilite"><pre><span></span>theorem test_split {P Q R S : Prop} :
   P ∧ (Q ∨ R) → (Q → S) → (R → S) → P ∧ S :=
 begin
   rintro ⟨hp, hq | hr⟩ qs rs,
   { exact ⟨hp, qs hq⟩ },
   { exact ⟨hp, rs hr⟩ }
 end
-```
+</pre></div>
 
 
 {% endraw %}

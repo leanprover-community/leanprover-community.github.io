@@ -12,10 +12,10 @@ permalink: archive/113488general/99873falseelim.html
 
 {% raw %}
 #### [ Kenny Lau (Sep 08 2018 at 19:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/false.elim/near/133574791):
-Why can `false` elim to anything even though it is only a `Prop`?
+<p>Why can <code>false</code> elim to anything even though it is only a <code>Prop</code>?</p>
 
 #### [ Chris Hughes (Sep 08 2018 at 19:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/false.elim/near/133574907):
-More or less because even if it wasn't a Prop it would still be a subsingleton. Same reason for `and` `eq` and `acc`. I think more precisely any constructors whose type is not a `Prop` have to be mentioned in the type of the `Prop`. So `acc` is okay, because it's non-Prop constructor is mentioned in the type.
+<p>More or less because even if it wasn't a Prop it would still be a subsingleton. Same reason for <code>and</code> <code>eq</code> and <code>acc</code>. I think more precisely any constructors whose type is not a <code>Prop</code> have to be mentioned in the type of the <code>Prop</code>. So <code>acc</code> is okay, because it's non-Prop constructor is mentioned in the type.</p>
 
 
 {% endraw %}

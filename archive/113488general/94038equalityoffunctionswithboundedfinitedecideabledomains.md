@@ -12,193 +12,190 @@ permalink: archive/113488general/94038equalityoffunctionswithboundedfinitedecide
 
 {% raw %}
 #### [ Gavid Liebnich (Nov 20 2018 at 12:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20of%20functions%20with%20bounded%20finite%20decideable%20domains/near/148032872):
-Is `eq_of_yield` provable? Do I need to lose computability with functional extensionality? 
-```lean
-import data.vector data.list utils
+<p>Is <code>eq_of_yield</code> provable? Do I need to lose computability with functional extensionality? </p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">vector</span> <span class="n">data</span><span class="bp">.</span><span class="n">list</span> <span class="n">utils</span>
 
-variables {α : Type}
+<span class="kn">variables</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span>
 
-def between [decidable_linear_order α] (a b : α) :=
-  {x : α // a ≤ x ∧ x < b}
+<span class="n">def</span> <span class="n">between</span> <span class="o">[</span><span class="n">decidable_linear_order</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:=</span>
+  <span class="o">{</span><span class="n">x</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">//</span> <span class="n">a</span> <span class="bp">≤</span> <span class="n">x</span> <span class="bp">∧</span> <span class="n">x</span> <span class="bp">&lt;</span> <span class="n">b</span><span class="o">}</span>
 
-class c_mapper (α : Type*) :=
-  (n       : α → ℕ)
-  (h       : Πm, 0 < n m)
-  (data    : Πm, between 0 (n m) → ℕ)
+<span class="n">class</span> <span class="n">c_mapper</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">:=</span>
+  <span class="o">(</span><span class="n">n</span>       <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="bp">ℕ</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">h</span>       <span class="o">:</span> <span class="bp">Π</span><span class="n">m</span><span class="o">,</span> <span class="mi">0</span> <span class="bp">&lt;</span> <span class="n">n</span> <span class="n">m</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">data</span>    <span class="o">:</span> <span class="bp">Π</span><span class="n">m</span><span class="o">,</span> <span class="n">between</span> <span class="mi">0</span> <span class="o">(</span><span class="n">n</span> <span class="n">m</span><span class="o">)</span> <span class="bp">→</span> <span class="bp">ℕ</span><span class="o">)</span>
 
-variables [c_mapper α]
+<span class="kn">variables</span> <span class="o">[</span><span class="n">c_mapper</span> <span class="n">α</span><span class="o">]</span>
 
-def yield (m : α) :=
-  (list.range $ c_mapper.n m).attach.map $ λn,
-  c_mapper.data m ⟨n, nat.zero_le _, list.mem_range.1 n.2⟩
+<span class="n">def</span> <span class="n">yield</span> <span class="o">(</span><span class="n">m</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:=</span>
+  <span class="o">(</span><span class="n">list</span><span class="bp">.</span><span class="n">range</span> <span class="err">$</span> <span class="n">c_mapper</span><span class="bp">.</span><span class="n">n</span> <span class="n">m</span><span class="o">)</span><span class="bp">.</span><span class="n">attach</span><span class="bp">.</span><span class="n">map</span> <span class="err">$</span> <span class="bp">λ</span><span class="n">n</span><span class="o">,</span>
+  <span class="n">c_mapper</span><span class="bp">.</span><span class="n">data</span> <span class="n">m</span> <span class="bp">⟨</span><span class="n">n</span><span class="o">,</span> <span class="n">nat</span><span class="bp">.</span><span class="n">zero_le</span> <span class="bp">_</span><span class="o">,</span> <span class="n">list</span><span class="bp">.</span><span class="n">mem_range</span><span class="bp">.</span><span class="mi">1</span> <span class="n">n</span><span class="bp">.</span><span class="mi">2</span><span class="bp">⟩</span>
 
-theorem eq_of_yield {m₁ m₂ : α} (h : yield m₁ = yield m₂) : m₁ = m₂ := sorry
-```
+<span class="kn">theorem</span> <span class="n">eq_of_yield</span> <span class="o">{</span><span class="n">m₁</span> <span class="n">m₂</span> <span class="o">:</span> <span class="n">α</span><span class="o">}</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">yield</span> <span class="n">m₁</span> <span class="bp">=</span> <span class="n">yield</span> <span class="n">m₂</span><span class="o">)</span> <span class="o">:</span> <span class="n">m₁</span> <span class="bp">=</span> <span class="n">m₂</span> <span class="o">:=</span> <span class="n">sorry</span>
+</pre></div>
 
 #### [ Kenny Lau (Nov 20 2018 at 12:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20of%20functions%20with%20bounded%20finite%20decideable%20domains/near/148033325):
-```lean
-import data.vector data.list data.set.intervals
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">vector</span> <span class="n">data</span><span class="bp">.</span><span class="n">list</span> <span class="n">data</span><span class="bp">.</span><span class="n">set</span><span class="bp">.</span><span class="n">intervals</span>
 
-class c_mapper (α : Type*) :=
-(n : α → ℕ)
-(h : ∀ m, 0 < n m)
-(data : Π m, set.Ico 0 (n m) → ℕ)
+<span class="n">class</span> <span class="n">c_mapper</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="bp">ℕ</span><span class="o">)</span>
+<span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">m</span><span class="o">,</span> <span class="mi">0</span> <span class="bp">&lt;</span> <span class="n">n</span> <span class="n">m</span><span class="o">)</span>
+<span class="o">(</span><span class="n">data</span> <span class="o">:</span> <span class="bp">Π</span> <span class="n">m</span><span class="o">,</span> <span class="n">set</span><span class="bp">.</span><span class="n">Ico</span> <span class="mi">0</span> <span class="o">(</span><span class="n">n</span> <span class="n">m</span><span class="o">)</span> <span class="bp">→</span> <span class="bp">ℕ</span><span class="o">)</span>
 
-def yield {α : Type*} [c_mapper α] (m : α) :=
-(list.range $ c_mapper.n m).attach.map $ λ n,
-c_mapper.data m ⟨n, nat.zero_le n, list.mem_range.1 n.2⟩
+<span class="n">def</span> <span class="n">yield</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">c_mapper</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">m</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">list</span><span class="bp">.</span><span class="n">range</span> <span class="err">$</span> <span class="n">c_mapper</span><span class="bp">.</span><span class="n">n</span> <span class="n">m</span><span class="o">)</span><span class="bp">.</span><span class="n">attach</span><span class="bp">.</span><span class="n">map</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">n</span><span class="o">,</span>
+<span class="n">c_mapper</span><span class="bp">.</span><span class="n">data</span> <span class="n">m</span> <span class="bp">⟨</span><span class="n">n</span><span class="o">,</span> <span class="n">nat</span><span class="bp">.</span><span class="n">zero_le</span> <span class="n">n</span><span class="o">,</span> <span class="n">list</span><span class="bp">.</span><span class="n">mem_range</span><span class="bp">.</span><span class="mi">1</span> <span class="n">n</span><span class="bp">.</span><span class="mi">2</span><span class="bp">⟩</span>
 
-theorem not_yield_inj :
-  ¬ ∀ (α : Type) [c_mapper α] {m₁ m₂ : α} (h : by resetI; exact yield m₁ = yield m₂), m₁ = m₂ :=
-λ H, absurd (@H bool ⟨λ _, 1, λ _, dec_trivial, λ _ _, 0⟩ ff tt rfl) dec_trivial
-```
+<span class="kn">theorem</span> <span class="n">not_yield_inj</span> <span class="o">:</span>
+  <span class="bp">¬</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">c_mapper</span> <span class="n">α</span><span class="o">]</span> <span class="o">{</span><span class="n">m₁</span> <span class="n">m₂</span> <span class="o">:</span> <span class="n">α</span><span class="o">}</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="k">by</span> <span class="n">resetI</span><span class="bp">;</span> <span class="n">exact</span> <span class="n">yield</span> <span class="n">m₁</span> <span class="bp">=</span> <span class="n">yield</span> <span class="n">m₂</span><span class="o">),</span> <span class="n">m₁</span> <span class="bp">=</span> <span class="n">m₂</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="n">H</span><span class="o">,</span> <span class="n">absurd</span> <span class="o">(</span><span class="bp">@</span><span class="n">H</span> <span class="n">bool</span> <span class="bp">⟨λ</span> <span class="bp">_</span><span class="o">,</span> <span class="mi">1</span><span class="o">,</span> <span class="bp">λ</span> <span class="bp">_</span><span class="o">,</span> <span class="n">dec_trivial</span><span class="o">,</span> <span class="bp">λ</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">,</span> <span class="mi">0</span><span class="bp">⟩</span> <span class="n">ff</span> <span class="n">tt</span> <span class="n">rfl</span><span class="o">)</span> <span class="n">dec_trivial</span>
+</pre></div>
 
 #### [ Kenny Lau (Nov 20 2018 at 12:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20of%20functions%20with%20bounded%20finite%20decideable%20domains/near/148033328):
-@**Gavid Liebnich** it's false
+<p><span class="user-mention" data-user-id="137673">@Gavid Liebnich</span> it's false</p>
 
 #### [ Mario Carneiro (Nov 20 2018 at 12:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20of%20functions%20with%20bounded%20finite%20decideable%20domains/near/148033795):
-also function extensionality doesn't affect computability because it's a prop
+<p>also function extensionality doesn't affect computability because it's a prop</p>
 
 #### [ Mario Carneiro (Nov 20 2018 at 12:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20of%20functions%20with%20bounded%20finite%20decideable%20domains/near/148033820):
-unlike some other constructive systems we have a proof irrelevant universe of propositions which are not used in computation
+<p>unlike some other constructive systems we have a proof irrelevant universe of propositions which are not used in computation</p>
 
 #### [ Gavid Liebnich (Nov 20 2018 at 13:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20of%20functions%20with%20bounded%20finite%20decideable%20domains/near/148035327):
-Oh, thanks! I think It's starting to make sense now - of course it's not an injection, the `Πm, between 0 (n m) → ℕ` can be whatever mapping I want.
+<p>Oh, thanks! I think It's starting to make sense now - of course it's not an injection, the <code>Πm, between 0 (n m) → ℕ</code> can be whatever mapping I want.</p>
+<p>So, if I were to define one such concrete mapping, for example:</p>
+<div class="codehilite"><pre><span></span><span class="kn">structure</span> <span class="n">mapper</span> <span class="o">:=</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">&lt;</span> <span class="n">n</span><span class="o">)</span> <span class="o">(</span><span class="n">data</span> <span class="o">:</span> <span class="n">vector</span> <span class="bp">ℕ</span> <span class="n">n</span><span class="o">)</span>
 
-So, if I were to define one such concrete mapping, for example:
-```lean
-structure mapper := (n : ℕ) (h : 0 < n) (data : vector ℕ n)
+<span class="kn">instance</span> <span class="n">indexed_mapper_is_c_mapper</span> <span class="o">:</span>
+  <span class="n">c_mapper</span> <span class="n">mapper</span> <span class="o">:=</span> <span class="o">{</span>
+    <span class="n">n</span>       <span class="o">:=</span> <span class="bp">λ</span><span class="n">m</span><span class="o">,</span> <span class="n">m</span><span class="bp">.</span><span class="n">n</span><span class="o">,</span>
+    <span class="n">h</span>       <span class="o">:=</span> <span class="bp">λ</span><span class="n">m</span><span class="o">,</span> <span class="n">m</span><span class="bp">.</span><span class="n">h</span><span class="o">,</span>
+    <span class="n">data</span>    <span class="o">:=</span> <span class="bp">λ</span><span class="n">m</span> <span class="n">x</span><span class="o">,</span> <span class="n">m</span><span class="bp">.</span><span class="n">data</span><span class="bp">.</span><span class="n">nth</span> <span class="bp">⟨</span><span class="n">x</span><span class="bp">.</span><span class="mi">1</span><span class="o">,</span> <span class="n">x</span><span class="bp">.</span><span class="mi">2</span><span class="bp">.</span><span class="mi">2</span><span class="bp">⟩</span>
+  <span class="o">}</span>
+</pre></div>
 
-instance indexed_mapper_is_c_mapper :
-  c_mapper mapper := {
-    n       := λm, m.n,
-    h       := λm, m.h,
-    data    := λm x, m.data.nth ⟨x.1, x.2.2⟩
-  }
-```
-I could then prove (somehow)
-```lean
-theorem eq_of_yield {m₁ m₂ : mapper} (h : yield m₁ = yield m₂) : m₁ = m₂
-```
-because the `data` of `c_mapper` would be the function `vector.data.nth`?
+
+<p>I could then prove (somehow)</p>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">eq_of_yield</span> <span class="o">{</span><span class="n">m₁</span> <span class="n">m₂</span> <span class="o">:</span> <span class="n">mapper</span><span class="o">}</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">yield</span> <span class="n">m₁</span> <span class="bp">=</span> <span class="n">yield</span> <span class="n">m₂</span><span class="o">)</span> <span class="o">:</span> <span class="n">m₁</span> <span class="bp">=</span> <span class="n">m₂</span>
+</pre></div>
+
+
+<p>because the <code>data</code> of <code>c_mapper</code> would be the function <code>vector.data.nth</code>?</p>
 
 #### [ Gavid Liebnich (Nov 20 2018 at 13:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20of%20functions%20with%20bounded%20finite%20decideable%20domains/near/148035891):
-So the theorem is true if I give it two extensionally equivalent functions as `data`? For example, if I were to define a mapper that completely mirrors the `class`, that would make the theorem true by virtue of the functions used as `data` in `m1` and `m2` being equivalent? As such:
+<p>So the theorem is true if I give it two extensionally equivalent functions as <code>data</code>? For example, if I were to define a mapper that completely mirrors the <code>class</code>, that would make the theorem true by virtue of the functions used as <code>data</code> in <code>m1</code> and <code>m2</code> being equivalent? As such:</p>
+<div class="codehilite"><pre><span></span><span class="kn">structure</span> <span class="n">mapper₂</span> <span class="o">:=</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">&lt;</span> <span class="n">n</span><span class="o">)</span> <span class="o">(</span><span class="n">data</span> <span class="o">:</span> <span class="n">between</span> <span class="mi">0</span> <span class="n">n</span> <span class="bp">→</span> <span class="bp">ℕ</span><span class="o">)</span>
 
-```lean
-structure mapper₂ := (n : ℕ) (h : 0 < n) (data : between 0 n → ℕ)
+<span class="kn">instance</span> <span class="o">:</span>
+  <span class="n">c_mapper</span> <span class="n">mapper₂</span> <span class="o">:=</span> <span class="o">{</span>
+    <span class="n">n</span>    <span class="o">:=</span> <span class="bp">λ</span><span class="n">m</span><span class="o">,</span> <span class="n">m</span><span class="bp">.</span><span class="n">n</span><span class="o">,</span>
+    <span class="n">h</span>    <span class="o">:=</span> <span class="bp">λ</span><span class="n">m</span><span class="o">,</span> <span class="n">m</span><span class="bp">.</span><span class="n">h</span><span class="o">,</span>
+    <span class="n">data</span> <span class="o">:=</span> <span class="bp">λ</span><span class="n">m</span> <span class="n">x</span><span class="o">,</span> <span class="n">x</span><span class="bp">.</span><span class="mi">1</span>
+  <span class="o">}</span>
 
-instance :
-  c_mapper mapper₂ := {
-    n    := λm, m.n,
-    h    := λm, m.h,
-    data := λm x, x.1
-  }
+<span class="kn">theorem</span> <span class="n">eq_of_yield</span> <span class="o">{</span><span class="n">m₁</span> <span class="n">m₂</span> <span class="o">:</span> <span class="n">mapper₂</span><span class="o">}</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">yield</span> <span class="n">m₁</span> <span class="bp">=</span> <span class="n">yield</span> <span class="n">m₂</span><span class="o">)</span> <span class="o">:</span> <span class="n">m₁</span> <span class="bp">=</span> <span class="n">m₂</span> <span class="o">:=</span> <span class="n">sorry</span>
+</pre></div>
 
-theorem eq_of_yield {m₁ m₂ : mapper₂} (h : yield m₁ = yield m₂) : m₁ = m₂ := sorry
-```
-Now the theorem is true?
+
+<p>Now the theorem is true?</p>
 
 #### [ Kenny Lau (Nov 20 2018 at 13:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20of%20functions%20with%20bounded%20finite%20decideable%20domains/near/148036999):
-just because it typechecks doesn't mean it's correct... I've corrected your code:
-```lean
-instance c_mapper_mapper₂ : c_mapper mapper₂ :=
-{ n := λ m, m.n,
-  h := λ m, m.h,
-  data := λ m x, m.data x }
-```
+<p>just because it typechecks doesn't mean it's correct... I've corrected your code:</p>
+<div class="codehilite"><pre><span></span><span class="kn">instance</span> <span class="n">c_mapper_mapper₂</span> <span class="o">:</span> <span class="n">c_mapper</span> <span class="n">mapper₂</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">n</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">m</span><span class="o">,</span> <span class="n">m</span><span class="bp">.</span><span class="n">n</span><span class="o">,</span>
+  <span class="n">h</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">m</span><span class="o">,</span> <span class="n">m</span><span class="bp">.</span><span class="n">h</span><span class="o">,</span>
+  <span class="n">data</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">m</span> <span class="n">x</span><span class="o">,</span> <span class="n">m</span><span class="bp">.</span><span class="n">data</span> <span class="n">x</span> <span class="o">}</span>
+</pre></div>
 
 #### [ Kenny Lau (Nov 20 2018 at 13:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20of%20functions%20with%20bounded%20finite%20decideable%20domains/near/148037009):
-it's `m.data x` not `x.1`
+<p>it's <code>m.data x</code> not <code>x.1</code></p>
 
 #### [ Kenny Lau (Nov 20 2018 at 13:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20of%20functions%20with%20bounded%20finite%20decideable%20domains/near/148037037):
-I think we would appreciate it if you check your questions before asking them
+<p>I think we would appreciate it if you check your questions before asking them</p>
 
 #### [ Kenny Lau (Nov 20 2018 at 13:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20of%20functions%20with%20bounded%20finite%20decideable%20domains/near/148037055):
-I've proved both theorems:
-```lean
-import data.vector data.list data.set.intervals
+<p>I've proved both theorems:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">vector</span> <span class="n">data</span><span class="bp">.</span><span class="n">list</span> <span class="n">data</span><span class="bp">.</span><span class="n">set</span><span class="bp">.</span><span class="n">intervals</span>
 
-open set
+<span class="kn">open</span> <span class="n">set</span>
 
-class c_mapper (α : Type*) :=
-(n : α → ℕ)
-(h : ∀ m, 0 < n m)
-(data : Π m, Ico 0 (n m) → ℕ)
+<span class="n">class</span> <span class="n">c_mapper</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="bp">ℕ</span><span class="o">)</span>
+<span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">m</span><span class="o">,</span> <span class="mi">0</span> <span class="bp">&lt;</span> <span class="n">n</span> <span class="n">m</span><span class="o">)</span>
+<span class="o">(</span><span class="n">data</span> <span class="o">:</span> <span class="bp">Π</span> <span class="n">m</span><span class="o">,</span> <span class="n">Ico</span> <span class="mi">0</span> <span class="o">(</span><span class="n">n</span> <span class="n">m</span><span class="o">)</span> <span class="bp">→</span> <span class="bp">ℕ</span><span class="o">)</span>
 
-structure mapper :=
-(n : ℕ)
-(h : 0 < n)
-(data : vector ℕ n)
+<span class="kn">structure</span> <span class="n">mapper</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span>
+<span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">&lt;</span> <span class="n">n</span><span class="o">)</span>
+<span class="o">(</span><span class="n">data</span> <span class="o">:</span> <span class="n">vector</span> <span class="bp">ℕ</span> <span class="n">n</span><span class="o">)</span>
 
-instance c_mapper_mapper : c_mapper mapper :=
-{ n := λ m, m.n,
-  h := λ m, m.h,
-  data := λ m x, m.data.nth ⟨x.1, x.2.2⟩ }
+<span class="kn">instance</span> <span class="n">c_mapper_mapper</span> <span class="o">:</span> <span class="n">c_mapper</span> <span class="n">mapper</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">n</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">m</span><span class="o">,</span> <span class="n">m</span><span class="bp">.</span><span class="n">n</span><span class="o">,</span>
+  <span class="n">h</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">m</span><span class="o">,</span> <span class="n">m</span><span class="bp">.</span><span class="n">h</span><span class="o">,</span>
+  <span class="n">data</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">m</span> <span class="n">x</span><span class="o">,</span> <span class="n">m</span><span class="bp">.</span><span class="n">data</span><span class="bp">.</span><span class="n">nth</span> <span class="bp">⟨</span><span class="n">x</span><span class="bp">.</span><span class="mi">1</span><span class="o">,</span> <span class="n">x</span><span class="bp">.</span><span class="mi">2</span><span class="bp">.</span><span class="mi">2</span><span class="bp">⟩</span> <span class="o">}</span>
 
-variables {α : Type*} [c_mapper α]
+<span class="kn">variables</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">c_mapper</span> <span class="n">α</span><span class="o">]</span>
 
-def yield (m : α) : list ℕ :=
-(list.range $ c_mapper.n m).attach.map $ λ n,
-c_mapper.data m ⟨n, nat.zero_le n, list.mem_range.1 n.2⟩
+<span class="n">def</span> <span class="n">yield</span> <span class="o">(</span><span class="n">m</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">list</span> <span class="bp">ℕ</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">list</span><span class="bp">.</span><span class="n">range</span> <span class="err">$</span> <span class="n">c_mapper</span><span class="bp">.</span><span class="n">n</span> <span class="n">m</span><span class="o">)</span><span class="bp">.</span><span class="n">attach</span><span class="bp">.</span><span class="n">map</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">n</span><span class="o">,</span>
+<span class="n">c_mapper</span><span class="bp">.</span><span class="n">data</span> <span class="n">m</span> <span class="bp">⟨</span><span class="n">n</span><span class="o">,</span> <span class="n">nat</span><span class="bp">.</span><span class="n">zero_le</span> <span class="n">n</span><span class="o">,</span> <span class="n">list</span><span class="bp">.</span><span class="n">mem_range</span><span class="bp">.</span><span class="mi">1</span> <span class="n">n</span><span class="bp">.</span><span class="mi">2</span><span class="bp">⟩</span>
 
-theorem yield_inj {m₁ m₂ : mapper} (h : yield m₁ = yield m₂) : m₁ = m₂ :=
-begin
-  have hy1 : (yield m₁).length = m₁.n,
-  { rw [yield, list.length_map, list.length_attach, list.length_range]; refl },
-  have hy2 : (yield m₂).length = m₂.n,
-  { rw [yield, list.length_map, list.length_attach, list.length_range]; refl },
-  cases m₁ with n1 h1 d1, cases m₂ with n2 h2 d2,
-  have hn : n1 = n2,
-  { convert congr_arg list.length h, exacts [hy1.symm, hy2.symm] },
-  subst n2, congr' 1, cases d1 with L1 H1, cases d2 with L2 H2, congr' 1,
-  dsimp only at hy1 hy2,
-  refine list.ext_le (H1.trans H2.symm) (λ i hi1 hi2, _),
-  have : ∀ h3, list.nth_le (yield ({n := n1, h := h1, data := ⟨L1, H1⟩} : mapper)) i h3
-    = list.nth_le (yield ({n := n1, h := h2, data := ⟨L2, H2⟩} : mapper)) i (hy2.symm ▸ H2 ▸ hi2),
-  { rw h, intro, refl },
-  specialize this (hy1.symm ▸ H1 ▸ hi1),
-  simp only [yield, list.nth_le_map', c_mapper.data, vector.nth] at this,
-  unfold coe lift_t has_lift_t.lift coe_t has_coe_t.coe coe_b has_coe.coe at this,
-  simpa only [list.nth_le_attach, list.nth_le_range]
-end
+<span class="kn">theorem</span> <span class="n">yield_inj</span> <span class="o">{</span><span class="n">m₁</span> <span class="n">m₂</span> <span class="o">:</span> <span class="n">mapper</span><span class="o">}</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">yield</span> <span class="n">m₁</span> <span class="bp">=</span> <span class="n">yield</span> <span class="n">m₂</span><span class="o">)</span> <span class="o">:</span> <span class="n">m₁</span> <span class="bp">=</span> <span class="n">m₂</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="k">have</span> <span class="n">hy1</span> <span class="o">:</span> <span class="o">(</span><span class="n">yield</span> <span class="n">m₁</span><span class="o">)</span><span class="bp">.</span><span class="n">length</span> <span class="bp">=</span> <span class="n">m₁</span><span class="bp">.</span><span class="n">n</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">rw</span> <span class="o">[</span><span class="n">yield</span><span class="o">,</span> <span class="n">list</span><span class="bp">.</span><span class="n">length_map</span><span class="o">,</span> <span class="n">list</span><span class="bp">.</span><span class="n">length_attach</span><span class="o">,</span> <span class="n">list</span><span class="bp">.</span><span class="n">length_range</span><span class="o">]</span><span class="bp">;</span> <span class="n">refl</span> <span class="o">},</span>
+  <span class="k">have</span> <span class="n">hy2</span> <span class="o">:</span> <span class="o">(</span><span class="n">yield</span> <span class="n">m₂</span><span class="o">)</span><span class="bp">.</span><span class="n">length</span> <span class="bp">=</span> <span class="n">m₂</span><span class="bp">.</span><span class="n">n</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">rw</span> <span class="o">[</span><span class="n">yield</span><span class="o">,</span> <span class="n">list</span><span class="bp">.</span><span class="n">length_map</span><span class="o">,</span> <span class="n">list</span><span class="bp">.</span><span class="n">length_attach</span><span class="o">,</span> <span class="n">list</span><span class="bp">.</span><span class="n">length_range</span><span class="o">]</span><span class="bp">;</span> <span class="n">refl</span> <span class="o">},</span>
+  <span class="n">cases</span> <span class="n">m₁</span> <span class="k">with</span> <span class="n">n1</span> <span class="n">h1</span> <span class="n">d1</span><span class="o">,</span> <span class="n">cases</span> <span class="n">m₂</span> <span class="k">with</span> <span class="n">n2</span> <span class="n">h2</span> <span class="n">d2</span><span class="o">,</span>
+  <span class="k">have</span> <span class="n">hn</span> <span class="o">:</span> <span class="n">n1</span> <span class="bp">=</span> <span class="n">n2</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">convert</span> <span class="n">congr_arg</span> <span class="n">list</span><span class="bp">.</span><span class="n">length</span> <span class="n">h</span><span class="o">,</span> <span class="n">exacts</span> <span class="o">[</span><span class="n">hy1</span><span class="bp">.</span><span class="n">symm</span><span class="o">,</span> <span class="n">hy2</span><span class="bp">.</span><span class="n">symm</span><span class="o">]</span> <span class="o">},</span>
+  <span class="n">subst</span> <span class="n">n2</span><span class="o">,</span> <span class="n">congr&#39;</span> <span class="mi">1</span><span class="o">,</span> <span class="n">cases</span> <span class="n">d1</span> <span class="k">with</span> <span class="n">L1</span> <span class="n">H1</span><span class="o">,</span> <span class="n">cases</span> <span class="n">d2</span> <span class="k">with</span> <span class="n">L2</span> <span class="n">H2</span><span class="o">,</span> <span class="n">congr&#39;</span> <span class="mi">1</span><span class="o">,</span>
+  <span class="n">dsimp</span> <span class="n">only</span> <span class="n">at</span> <span class="n">hy1</span> <span class="n">hy2</span><span class="o">,</span>
+  <span class="n">refine</span> <span class="n">list</span><span class="bp">.</span><span class="n">ext_le</span> <span class="o">(</span><span class="n">H1</span><span class="bp">.</span><span class="n">trans</span> <span class="n">H2</span><span class="bp">.</span><span class="n">symm</span><span class="o">)</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">i</span> <span class="n">hi1</span> <span class="n">hi2</span><span class="o">,</span> <span class="bp">_</span><span class="o">),</span>
+  <span class="k">have</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">h3</span><span class="o">,</span> <span class="n">list</span><span class="bp">.</span><span class="n">nth_le</span> <span class="o">(</span><span class="n">yield</span> <span class="o">({</span><span class="n">n</span> <span class="o">:=</span> <span class="n">n1</span><span class="o">,</span> <span class="n">h</span> <span class="o">:=</span> <span class="n">h1</span><span class="o">,</span> <span class="n">data</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="n">L1</span><span class="o">,</span> <span class="n">H1</span><span class="bp">⟩</span><span class="o">}</span> <span class="o">:</span> <span class="n">mapper</span><span class="o">))</span> <span class="n">i</span> <span class="n">h3</span>
+    <span class="bp">=</span> <span class="n">list</span><span class="bp">.</span><span class="n">nth_le</span> <span class="o">(</span><span class="n">yield</span> <span class="o">({</span><span class="n">n</span> <span class="o">:=</span> <span class="n">n1</span><span class="o">,</span> <span class="n">h</span> <span class="o">:=</span> <span class="n">h2</span><span class="o">,</span> <span class="n">data</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="n">L2</span><span class="o">,</span> <span class="n">H2</span><span class="bp">⟩</span><span class="o">}</span> <span class="o">:</span> <span class="n">mapper</span><span class="o">))</span> <span class="n">i</span> <span class="o">(</span><span class="n">hy2</span><span class="bp">.</span><span class="n">symm</span> <span class="bp">▸</span> <span class="n">H2</span> <span class="bp">▸</span> <span class="n">hi2</span><span class="o">),</span>
+  <span class="o">{</span> <span class="n">rw</span> <span class="n">h</span><span class="o">,</span> <span class="n">intro</span><span class="o">,</span> <span class="n">refl</span> <span class="o">},</span>
+  <span class="n">specialize</span> <span class="n">this</span> <span class="o">(</span><span class="n">hy1</span><span class="bp">.</span><span class="n">symm</span> <span class="bp">▸</span> <span class="n">H1</span> <span class="bp">▸</span> <span class="n">hi1</span><span class="o">),</span>
+  <span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">yield</span><span class="o">,</span> <span class="n">list</span><span class="bp">.</span><span class="n">nth_le_map&#39;</span><span class="o">,</span> <span class="n">c_mapper</span><span class="bp">.</span><span class="n">data</span><span class="o">,</span> <span class="n">vector</span><span class="bp">.</span><span class="n">nth</span><span class="o">]</span> <span class="n">at</span> <span class="n">this</span><span class="o">,</span>
+  <span class="n">unfold</span> <span class="n">coe</span> <span class="n">lift_t</span> <span class="n">has_lift_t</span><span class="bp">.</span><span class="n">lift</span> <span class="n">coe_t</span> <span class="n">has_coe_t</span><span class="bp">.</span><span class="n">coe</span> <span class="n">coe_b</span> <span class="n">has_coe</span><span class="bp">.</span><span class="n">coe</span> <span class="n">at</span> <span class="n">this</span><span class="o">,</span>
+  <span class="n">simpa</span> <span class="n">only</span> <span class="o">[</span><span class="n">list</span><span class="bp">.</span><span class="n">nth_le_attach</span><span class="o">,</span> <span class="n">list</span><span class="bp">.</span><span class="n">nth_le_range</span><span class="o">]</span>
+<span class="kn">end</span>
 
-structure mapper₂ :=
-(n : ℕ)
-(h : 0 < n)
-(data : Ico 0 n → ℕ)
+<span class="kn">structure</span> <span class="n">mapper₂</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span>
+<span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">&lt;</span> <span class="n">n</span><span class="o">)</span>
+<span class="o">(</span><span class="n">data</span> <span class="o">:</span> <span class="n">Ico</span> <span class="mi">0</span> <span class="n">n</span> <span class="bp">→</span> <span class="bp">ℕ</span><span class="o">)</span>
 
-instance c_mapper_mapper₂ : c_mapper mapper₂ :=
-{ n := λ m, m.n,
-  h := λ m, m.h,
-  data := λ m x, m.data x }
+<span class="kn">instance</span> <span class="n">c_mapper_mapper₂</span> <span class="o">:</span> <span class="n">c_mapper</span> <span class="n">mapper₂</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">n</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">m</span><span class="o">,</span> <span class="n">m</span><span class="bp">.</span><span class="n">n</span><span class="o">,</span>
+  <span class="n">h</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">m</span><span class="o">,</span> <span class="n">m</span><span class="bp">.</span><span class="n">h</span><span class="o">,</span>
+  <span class="n">data</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">m</span> <span class="n">x</span><span class="o">,</span> <span class="n">m</span><span class="bp">.</span><span class="n">data</span> <span class="n">x</span> <span class="o">}</span>
 
-theorem yield_inj' {m₁ m₂ : mapper₂} (h : yield m₁ = yield m₂) : m₁ = m₂ :=
-begin
-  have hy1 : (yield m₁).length = m₁.n,
-  { rw [yield, list.length_map, list.length_attach, list.length_range]; refl },
-  have hy2 : (yield m₂).length = m₂.n,
-  { rw [yield, list.length_map, list.length_attach, list.length_range]; refl },
-  cases m₁ with n1 h1 d1, cases m₂ with n2 h2 d2,
-  have hn : n1 = n2,
-  { convert congr_arg list.length h, exacts [hy1.symm, hy2.symm] },
-  subst n2, congr' 1, ext i, rcases i with ⟨i, hi1, hi2⟩,
-  dsimp only at hy1 hy2,
-  have : ∀ h3, list.nth_le (yield ({n := n1, h := h1, data := d1} : mapper₂)) i h3
-    = list.nth_le (yield ({n := n1, h := h2, data := d2} : mapper₂)) i (hy2.symm ▸ hi2),
-  { rw h, intro, refl },
-  specialize this (hy1.symm ▸ hi2),
-  simp only [yield, list.nth_le_map', c_mapper.data, vector.nth] at this,
-  unfold coe lift_t has_lift_t.lift coe_t has_coe_t.coe coe_b has_coe.coe at this,
-  simpa only [list.nth_le_attach, list.nth_le_range]
-end
-```
+<span class="kn">theorem</span> <span class="n">yield_inj&#39;</span> <span class="o">{</span><span class="n">m₁</span> <span class="n">m₂</span> <span class="o">:</span> <span class="n">mapper₂</span><span class="o">}</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">yield</span> <span class="n">m₁</span> <span class="bp">=</span> <span class="n">yield</span> <span class="n">m₂</span><span class="o">)</span> <span class="o">:</span> <span class="n">m₁</span> <span class="bp">=</span> <span class="n">m₂</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="k">have</span> <span class="n">hy1</span> <span class="o">:</span> <span class="o">(</span><span class="n">yield</span> <span class="n">m₁</span><span class="o">)</span><span class="bp">.</span><span class="n">length</span> <span class="bp">=</span> <span class="n">m₁</span><span class="bp">.</span><span class="n">n</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">rw</span> <span class="o">[</span><span class="n">yield</span><span class="o">,</span> <span class="n">list</span><span class="bp">.</span><span class="n">length_map</span><span class="o">,</span> <span class="n">list</span><span class="bp">.</span><span class="n">length_attach</span><span class="o">,</span> <span class="n">list</span><span class="bp">.</span><span class="n">length_range</span><span class="o">]</span><span class="bp">;</span> <span class="n">refl</span> <span class="o">},</span>
+  <span class="k">have</span> <span class="n">hy2</span> <span class="o">:</span> <span class="o">(</span><span class="n">yield</span> <span class="n">m₂</span><span class="o">)</span><span class="bp">.</span><span class="n">length</span> <span class="bp">=</span> <span class="n">m₂</span><span class="bp">.</span><span class="n">n</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">rw</span> <span class="o">[</span><span class="n">yield</span><span class="o">,</span> <span class="n">list</span><span class="bp">.</span><span class="n">length_map</span><span class="o">,</span> <span class="n">list</span><span class="bp">.</span><span class="n">length_attach</span><span class="o">,</span> <span class="n">list</span><span class="bp">.</span><span class="n">length_range</span><span class="o">]</span><span class="bp">;</span> <span class="n">refl</span> <span class="o">},</span>
+  <span class="n">cases</span> <span class="n">m₁</span> <span class="k">with</span> <span class="n">n1</span> <span class="n">h1</span> <span class="n">d1</span><span class="o">,</span> <span class="n">cases</span> <span class="n">m₂</span> <span class="k">with</span> <span class="n">n2</span> <span class="n">h2</span> <span class="n">d2</span><span class="o">,</span>
+  <span class="k">have</span> <span class="n">hn</span> <span class="o">:</span> <span class="n">n1</span> <span class="bp">=</span> <span class="n">n2</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">convert</span> <span class="n">congr_arg</span> <span class="n">list</span><span class="bp">.</span><span class="n">length</span> <span class="n">h</span><span class="o">,</span> <span class="n">exacts</span> <span class="o">[</span><span class="n">hy1</span><span class="bp">.</span><span class="n">symm</span><span class="o">,</span> <span class="n">hy2</span><span class="bp">.</span><span class="n">symm</span><span class="o">]</span> <span class="o">},</span>
+  <span class="n">subst</span> <span class="n">n2</span><span class="o">,</span> <span class="n">congr&#39;</span> <span class="mi">1</span><span class="o">,</span> <span class="n">ext</span> <span class="n">i</span><span class="o">,</span> <span class="n">rcases</span> <span class="n">i</span> <span class="k">with</span> <span class="bp">⟨</span><span class="n">i</span><span class="o">,</span> <span class="n">hi1</span><span class="o">,</span> <span class="n">hi2</span><span class="bp">⟩</span><span class="o">,</span>
+  <span class="n">dsimp</span> <span class="n">only</span> <span class="n">at</span> <span class="n">hy1</span> <span class="n">hy2</span><span class="o">,</span>
+  <span class="k">have</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">h3</span><span class="o">,</span> <span class="n">list</span><span class="bp">.</span><span class="n">nth_le</span> <span class="o">(</span><span class="n">yield</span> <span class="o">({</span><span class="n">n</span> <span class="o">:=</span> <span class="n">n1</span><span class="o">,</span> <span class="n">h</span> <span class="o">:=</span> <span class="n">h1</span><span class="o">,</span> <span class="n">data</span> <span class="o">:=</span> <span class="n">d1</span><span class="o">}</span> <span class="o">:</span> <span class="n">mapper₂</span><span class="o">))</span> <span class="n">i</span> <span class="n">h3</span>
+    <span class="bp">=</span> <span class="n">list</span><span class="bp">.</span><span class="n">nth_le</span> <span class="o">(</span><span class="n">yield</span> <span class="o">({</span><span class="n">n</span> <span class="o">:=</span> <span class="n">n1</span><span class="o">,</span> <span class="n">h</span> <span class="o">:=</span> <span class="n">h2</span><span class="o">,</span> <span class="n">data</span> <span class="o">:=</span> <span class="n">d2</span><span class="o">}</span> <span class="o">:</span> <span class="n">mapper₂</span><span class="o">))</span> <span class="n">i</span> <span class="o">(</span><span class="n">hy2</span><span class="bp">.</span><span class="n">symm</span> <span class="bp">▸</span> <span class="n">hi2</span><span class="o">),</span>
+  <span class="o">{</span> <span class="n">rw</span> <span class="n">h</span><span class="o">,</span> <span class="n">intro</span><span class="o">,</span> <span class="n">refl</span> <span class="o">},</span>
+  <span class="n">specialize</span> <span class="n">this</span> <span class="o">(</span><span class="n">hy1</span><span class="bp">.</span><span class="n">symm</span> <span class="bp">▸</span> <span class="n">hi2</span><span class="o">),</span>
+  <span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">yield</span><span class="o">,</span> <span class="n">list</span><span class="bp">.</span><span class="n">nth_le_map&#39;</span><span class="o">,</span> <span class="n">c_mapper</span><span class="bp">.</span><span class="n">data</span><span class="o">,</span> <span class="n">vector</span><span class="bp">.</span><span class="n">nth</span><span class="o">]</span> <span class="n">at</span> <span class="n">this</span><span class="o">,</span>
+  <span class="n">unfold</span> <span class="n">coe</span> <span class="n">lift_t</span> <span class="n">has_lift_t</span><span class="bp">.</span><span class="n">lift</span> <span class="n">coe_t</span> <span class="n">has_coe_t</span><span class="bp">.</span><span class="n">coe</span> <span class="n">coe_b</span> <span class="n">has_coe</span><span class="bp">.</span><span class="n">coe</span> <span class="n">at</span> <span class="n">this</span><span class="o">,</span>
+  <span class="n">simpa</span> <span class="n">only</span> <span class="o">[</span><span class="n">list</span><span class="bp">.</span><span class="n">nth_le_attach</span><span class="o">,</span> <span class="n">list</span><span class="bp">.</span><span class="n">nth_le_range</span><span class="o">]</span>
+<span class="kn">end</span>
+</pre></div>
 
 #### [ Kenny Lau (Nov 20 2018 at 14:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20of%20functions%20with%20bounded%20finite%20decideable%20domains/near/148037125):
-@**Gavid Liebnich**
+<p><span class="user-mention" data-user-id="137673">@Gavid Liebnich</span></p>
 
 #### [ Gavid Liebnich (Nov 20 2018 at 14:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20of%20functions%20with%20bounded%20finite%20decideable%20domains/near/148037550):
-Thank you, @**Kenny Lau** . I appreciate your help. The transition from nondependent `range` to the bounded mapping is a step I'm having difficulties with. There's a bit of magic in `convert` it would appear, I'll have to take a closer look. Thanks again, I'm going to step over the proofs.
+<p>Thank you, <span class="user-mention" data-user-id="110064">@Kenny Lau</span> . I appreciate your help. The transition from nondependent <code>range</code> to the bounded mapping is a step I'm having difficulties with. There's a bit of magic in <code>convert</code> it would appear, I'll have to take a closer look. Thanks again, I'm going to step over the proofs.</p>
 
 
 {% endraw %}

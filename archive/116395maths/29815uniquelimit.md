@@ -12,40 +12,42 @@ permalink: archive/116395maths/29815uniquelimit.html
 
 {% raw %}
 #### [ Patrick Massot (Jan 19 2019 at 23:20)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/unique%20limit/near/156454309):
-@**Kevin Buzzard** I looked at https://github.com/ImperialCollegeLondon/M1P1-lean/blob/master/src/limits.lean There is a comment saying you don't know how to use `wlog`. I think what you were looking for is:
-```lean
-lemma limits_aux (a : ℕ → ℝ) (l m : ℝ) (hl : is_limit a l)
-(hm : is_limit a m) : l = m :=
-begin
-  by_contradiction h,
-  wlog h' : l < m,
-  { have := lt_trichotomy l m, tauto, },
-```
-and then put the proof exactly as it was (and remove "_aux" from the name of the lemma since it's now directly proving what you want)
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> I looked at <a href="https://github.com/ImperialCollegeLondon/M1P1-lean/blob/master/src/limits.lean" target="_blank" title="https://github.com/ImperialCollegeLondon/M1P1-lean/blob/master/src/limits.lean">https://github.com/ImperialCollegeLondon/M1P1-lean/blob/master/src/limits.lean</a> There is a comment saying you don't know how to use <code>wlog</code>. I think what you were looking for is:</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">limits_aux</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">(</span><span class="n">l</span> <span class="n">m</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">(</span><span class="n">hl</span> <span class="o">:</span> <span class="n">is_limit</span> <span class="n">a</span> <span class="n">l</span><span class="o">)</span>
+<span class="o">(</span><span class="n">hm</span> <span class="o">:</span> <span class="n">is_limit</span> <span class="n">a</span> <span class="n">m</span><span class="o">)</span> <span class="o">:</span> <span class="n">l</span> <span class="bp">=</span> <span class="n">m</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">by_contradiction</span> <span class="n">h</span><span class="o">,</span>
+  <span class="n">wlog</span> <span class="n">h&#39;</span> <span class="o">:</span> <span class="n">l</span> <span class="bp">&lt;</span> <span class="n">m</span><span class="o">,</span>
+  <span class="o">{</span> <span class="k">have</span> <span class="o">:=</span> <span class="n">lt_trichotomy</span> <span class="n">l</span> <span class="n">m</span><span class="o">,</span> <span class="n">tauto</span><span class="o">,</span> <span class="o">},</span>
+</pre></div>
+
+
+<p>and then put the proof exactly as it was (and remove "_aux" from the name of the lemma since it's now directly proving what you want)</p>
 
 #### [ Patrick Massot (Jan 19 2019 at 23:22)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/unique%20limit/near/156454331):
-But your proof is rather contrived. Why not doing:
-```lean
-lemma zero_of_abs_lt_all (x : ℝ) (h : ∀ ε, ε > 0 → |x| < ε) : x = 0 :=
-eq_zero_of_abs_eq_zero $ eq_of_le_of_forall_le_of_dense (abs_nonneg x) $ λ ε ε_pos, le_of_lt (h ε ε_pos)
+<p>But your proof is rather contrived. Why not doing:</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">zero_of_abs_lt_all</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">ε</span><span class="o">,</span> <span class="n">ε</span> <span class="bp">&gt;</span> <span class="mi">0</span> <span class="bp">→</span> <span class="bp">|</span><span class="n">x</span><span class="bp">|</span> <span class="bp">&lt;</span> <span class="n">ε</span><span class="o">)</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span>
+<span class="n">eq_zero_of_abs_eq_zero</span> <span class="err">$</span> <span class="n">eq_of_le_of_forall_le_of_dense</span> <span class="o">(</span><span class="n">abs_nonneg</span> <span class="n">x</span><span class="o">)</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">ε</span> <span class="n">ε_pos</span><span class="o">,</span> <span class="n">le_of_lt</span> <span class="o">(</span><span class="n">h</span> <span class="n">ε</span> <span class="n">ε_pos</span><span class="o">)</span>
 
-theorem limits_are_unique (a : ℕ → ℝ) (l m : ℝ) (hl : is_limit a l)
-(hm : is_limit a m) : l = m :=
-begin
-  suffices : ∀ ε : ℝ, ε > 0 → |l - m| < ε,
-  from eq_of_sub_eq_zero (zero_of_abs_lt_all _ this),
-  intros ε ε_pos,
-  cases hl (ε/2) (by linarith) with Nl H,
-  cases hm (ε/2) (by linarith) with Nm H',
-  let N := max Nl Nm,
-  specialize H  N (le_max_left  _ _),
-  specialize H' N (le_max_right _ _),
-  exact calc |l - m| ≤ |a N - m| + |a N - l| : triangle' _ _ _
-   ... < ε/2 + ε/2 : add_lt_add H' H
-   ... = ε : by ring,
-end
-```
-which seems to obey your stylistic constraints?
+<span class="kn">theorem</span> <span class="n">limits_are_unique</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">(</span><span class="n">l</span> <span class="n">m</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">(</span><span class="n">hl</span> <span class="o">:</span> <span class="n">is_limit</span> <span class="n">a</span> <span class="n">l</span><span class="o">)</span>
+<span class="o">(</span><span class="n">hm</span> <span class="o">:</span> <span class="n">is_limit</span> <span class="n">a</span> <span class="n">m</span><span class="o">)</span> <span class="o">:</span> <span class="n">l</span> <span class="bp">=</span> <span class="n">m</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">suffices</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">ε</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">,</span> <span class="n">ε</span> <span class="bp">&gt;</span> <span class="mi">0</span> <span class="bp">→</span> <span class="bp">|</span><span class="n">l</span> <span class="bp">-</span> <span class="n">m</span><span class="bp">|</span> <span class="bp">&lt;</span> <span class="n">ε</span><span class="o">,</span>
+  <span class="k">from</span> <span class="n">eq_of_sub_eq_zero</span> <span class="o">(</span><span class="n">zero_of_abs_lt_all</span> <span class="bp">_</span> <span class="n">this</span><span class="o">),</span>
+  <span class="n">intros</span> <span class="n">ε</span> <span class="n">ε_pos</span><span class="o">,</span>
+  <span class="n">cases</span> <span class="n">hl</span> <span class="o">(</span><span class="n">ε</span><span class="bp">/</span><span class="mi">2</span><span class="o">)</span> <span class="o">(</span><span class="k">by</span> <span class="n">linarith</span><span class="o">)</span> <span class="k">with</span> <span class="n">Nl</span> <span class="n">H</span><span class="o">,</span>
+  <span class="n">cases</span> <span class="n">hm</span> <span class="o">(</span><span class="n">ε</span><span class="bp">/</span><span class="mi">2</span><span class="o">)</span> <span class="o">(</span><span class="k">by</span> <span class="n">linarith</span><span class="o">)</span> <span class="k">with</span> <span class="n">Nm</span> <span class="n">H&#39;</span><span class="o">,</span>
+  <span class="k">let</span> <span class="n">N</span> <span class="o">:=</span> <span class="n">max</span> <span class="n">Nl</span> <span class="n">Nm</span><span class="o">,</span>
+  <span class="n">specialize</span> <span class="n">H</span>  <span class="n">N</span> <span class="o">(</span><span class="n">le_max_left</span>  <span class="bp">_</span> <span class="bp">_</span><span class="o">),</span>
+  <span class="n">specialize</span> <span class="n">H&#39;</span> <span class="n">N</span> <span class="o">(</span><span class="n">le_max_right</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">),</span>
+  <span class="n">exact</span> <span class="k">calc</span> <span class="bp">|</span><span class="n">l</span> <span class="bp">-</span> <span class="n">m</span><span class="bp">|</span> <span class="bp">≤</span> <span class="bp">|</span><span class="n">a</span> <span class="n">N</span> <span class="bp">-</span> <span class="n">m</span><span class="bp">|</span> <span class="bp">+</span> <span class="bp">|</span><span class="n">a</span> <span class="n">N</span> <span class="bp">-</span> <span class="n">l</span><span class="bp">|</span> <span class="o">:</span> <span class="n">triangle&#39;</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span>
+   <span class="bp">...</span> <span class="bp">&lt;</span> <span class="n">ε</span><span class="bp">/</span><span class="mi">2</span> <span class="bp">+</span> <span class="n">ε</span><span class="bp">/</span><span class="mi">2</span> <span class="o">:</span> <span class="n">add_lt_add</span> <span class="n">H&#39;</span> <span class="n">H</span>
+   <span class="bp">...</span> <span class="bp">=</span> <span class="n">ε</span> <span class="o">:</span> <span class="k">by</span> <span class="n">ring</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>which seems to obey your stylistic constraints?</p>
 
 
 {% endraw %}

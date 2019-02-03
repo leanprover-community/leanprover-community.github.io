@@ -12,19 +12,16 @@ permalink: archive/179818LeanTogether2019/22669smallscalereflection.html
 
 {% raw %}
 #### [ Kevin Buzzard (Jan 10 2019 at 09:47)](https://leanprover.zulipchat.com/#narrow/stream/179818-Lean%20Together%202019/topic/small%20scale%20reflection/near/154824750):
-Assia is talking about small scale reflection. 
-
-The following is reflection. Imagine we have `variable A : Type` and `variable add : A -> A -> A` and a hypothesis that `A` is associative. Then given some term of type `A`, of the form `(a + (b + c)) + d` or whatever, one could ask for a method of moving all the parentheses to the left (with perhaps an added theorem that the original term equals the "normalised" term). But you cannot write Lean code to do this! Lean interprets `(a + (b + c)) + d` as just some term of type `A`.
-
-To write code which moves brackets around, one has to make a new data structure, in this case a tree type with nodes and leaves (leaves indexed by `nat` say), and a "put into normal form" function `norm` which sends `node (t1 (node t2 t3))`to `node (node t1 t2) t3` and generally sends a tree to its "normal form" with all the brackets on the left. "Reification" is the small amount of meta code which one has to write which looks at the actual expression corresponding to a term of type `A` and turns it into a tree. One also has an `eval` evaluation function sending a tree plus some "association list" (saying which elements of `A` the leaves correspond to) to `A`. One then proves a "correctness theorem" that says that given a tree and a list of `A`'s, the evaluation of `t` and its normalisation are equal.
-
-"Reflection" (or "the two level approach" as Henk used to call it) is exactly this situation, where terms of type A constructed using only `+`, and terms of this abstract tree structure, reflect each other.
+<p>Assia is talking about small scale reflection. </p>
+<p>The following is reflection. Imagine we have <code>variable A : Type</code> and <code>variable add : A -&gt; A -&gt; A</code> and a hypothesis that <code>A</code> is associative. Then given some term of type <code>A</code>, of the form <code>(a + (b + c)) + d</code> or whatever, one could ask for a method of moving all the parentheses to the left (with perhaps an added theorem that the original term equals the "normalised" term). But you cannot write Lean code to do this! Lean interprets <code>(a + (b + c)) + d</code> as just some term of type <code>A</code>.</p>
+<p>To write code which moves brackets around, one has to make a new data structure, in this case a tree type with nodes and leaves (leaves indexed by <code>nat</code> say), and a "put into normal form" function <code>norm</code> which sends <code>node (t1 (node t2 t3))</code>to <code>node (node t1 t2) t3</code> and generally sends a tree to its "normal form" with all the brackets on the left. "Reification" is the small amount of meta code which one has to write which looks at the actual expression corresponding to a term of type <code>A</code> and turns it into a tree. One also has an <code>eval</code> evaluation function sending a tree plus some "association list" (saying which elements of <code>A</code> the leaves correspond to) to <code>A</code>. One then proves a "correctness theorem" that says that given a tree and a list of <code>A</code>'s, the evaluation of <code>t</code> and its normalisation are equal.</p>
+<p>"Reflection" (or "the two level approach" as Henk used to call it) is exactly this situation, where terms of type A constructed using only <code>+</code>, and terms of this abstract tree structure, reflect each other.</p>
 
 #### [ Kevin Buzzard (Jan 10 2019 at 10:03)](https://leanprover.zulipchat.com/#narrow/stream/179818-Lean%20Together%202019/topic/small%20scale%20reflection/near/154825434):
-A really cool reflection would be between `Prop` and `bool`! `bool` is a nice easy type and we can calculate with it. There's a nice function from `bool` to `Prop` sending `b` to `b = tt` (which is an equation, which is great because it means we can rewrite). Unfortunately, writing meta code which interprets an arbitrary `Prop` as a `bool` is asking a bit much.
+<p>A really cool reflection would be between <code>Prop</code> and <code>bool</code>! <code>bool</code> is a nice easy type and we can calculate with it. There's a nice function from <code>bool</code> to <code>Prop</code> sending <code>b</code> to <code>b = tt</code> (which is an equation, which is great because it means we can rewrite). Unfortunately, writing meta code which interprets an arbitrary <code>Prop</code> as a <code>bool</code> is asking a bit much.</p>
 
 #### [ Simon Hudon (Jan 10 2019 at 10:15)](https://leanprover.zulipchat.com/#narrow/stream/179818-Lean%20Together%202019/topic/small%20scale%20reflection/near/154825975):
-We actually have a conversion from Prop to bool for decidable Props
+<p>We actually have a conversion from Prop to bool for decidable Props</p>
 
 
 {% endraw %}

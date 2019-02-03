@@ -12,164 +12,160 @@ permalink: archive/113488general/11013Newbieerror.html
 
 {% raw %}
 #### [ Johan Commelin (May 08 2018 at 10:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126254021):
-I've got the following code
-```lean
-import algebra.ring data.finsupp
+<p>I've got the following code</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">algebra</span><span class="bp">.</span><span class="n">ring</span> <span class="n">data</span><span class="bp">.</span><span class="n">finsupp</span>
 
-variables {R : Type*} [ring R]
+<span class="kn">variables</span> <span class="o">{</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">ring</span> <span class="n">R</span><span class="o">]</span>
 
-section free_module
-definition free_module (S : Type*) := finsupp S R
-variables {S : Type*}
+<span class="kn">section</span> <span class="n">free_module</span>
+<span class="kn">definition</span> <span class="n">free_module</span> <span class="o">(</span><span class="n">S</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">:=</span> <span class="n">finsupp</span> <span class="n">S</span> <span class="n">R</span>
+<span class="kn">variables</span> <span class="o">{</span><span class="n">S</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span>
 
-instance : module R (free_module S) := sorry
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">module</span> <span class="n">R</span> <span class="o">(</span><span class="n">free_module</span> <span class="n">S</span><span class="o">)</span> <span class="o">:=</span> <span class="n">sorry</span>
 
-end free_module
-```
+<span class="kn">end</span> <span class="n">free_module</span>
+</pre></div>
 
 #### [ Johan Commelin (May 08 2018 at 10:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126254025):
-And this is the error
-```
-don't know how to synthesize placeholder
+<p>And this is the error</p>
+<div class="codehilite"><pre><span></span>don&#39;t know how to synthesize placeholder
 context:
 R : Type u_1,
 _inst_1 : ring R,
 S : Type u_2
 ⊢ Type ?
-```
+</pre></div>
 
 #### [ Johan Commelin (May 08 2018 at 10:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126254034):
-Aah, I should point out that the red squiggles are under `free_module` in the line with `sorry`
+<p>Aah, I should point out that the red squiggles are under <code>free_module</code> in the line with <code>sorry</code></p>
 
 #### [ Mario Carneiro (May 08 2018 at 10:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126254076):
-Shouldn't `R` be explicit in `free_module`? It is not inferrable
+<p>Shouldn't <code>R</code> be explicit in <code>free_module</code>? It is not inferrable</p>
 
 #### [ Johan Commelin (May 08 2018 at 10:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126254077):
-I think the error means that it can't figure out in which universe `free_module S` lives
+<p>I think the error means that it can't figure out in which universe <code>free_module S</code> lives</p>
 
 #### [ Johan Commelin (May 08 2018 at 10:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126254085):
-Aah, Ok, is that the problem. I thought it was automatically included, since I declared it a variable
+<p>Aah, Ok, is that the problem. I thought it was automatically included, since I declared it a variable</p>
 
 #### [ Johan Commelin (May 08 2018 at 10:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126254090):
-Or should I then use `()` instead of `{}`
+<p>Or should I then use <code>()</code> instead of <code>{}</code></p>
 
 #### [ Kenny Lau (May 08 2018 at 10:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126254096):
-it isn't a parameter
+<p>it isn't a parameter</p>
 
 #### [ Mario Carneiro (May 08 2018 at 10:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126254097):
-it is included, but the later use might refer to a different `R`
+<p>it is included, but the later use might refer to a different <code>R</code></p>
 
 #### [ Johan Commelin (May 08 2018 at 10:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126254154):
-Ok... well, that fixed my problem. Thanks a lot!
+<p>Ok... well, that fixed my problem. Thanks a lot!</p>
 
 #### [ Kenny Lau (May 08 2018 at 10:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126254155):
-no, don't use parameter
+<p>no, don't use parameter</p>
 
 #### [ Kenny Lau (May 08 2018 at 10:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126254158):
-you won't be able to use it once you leave the section
+<p>you won't be able to use it once you leave the section</p>
 
 #### [ Johan Commelin (May 08 2018 at 10:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126254203):
-Hmm, what do you mean?
+<p>Hmm, what do you mean?</p>
 
 #### [ Johan Commelin (May 08 2018 at 10:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126254205):
-I now have
-```lean
-import algebra.ring data.finsupp
+<p>I now have</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">algebra</span><span class="bp">.</span><span class="n">ring</span> <span class="n">data</span><span class="bp">.</span><span class="n">finsupp</span>
 
-variables {R : Type*} [ring R]
+<span class="kn">variables</span> <span class="o">{</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">ring</span> <span class="n">R</span><span class="o">]</span>
 
-section free_module
-definition free_module (R : Type*) [ring R] (S : Type*) := finsupp S R
-variables {S : Type*}
+<span class="kn">section</span> <span class="n">free_module</span>
+<span class="kn">definition</span> <span class="n">free_module</span> <span class="o">(</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">[</span><span class="n">ring</span> <span class="n">R</span><span class="o">]</span> <span class="o">(</span><span class="n">S</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">:=</span> <span class="n">finsupp</span> <span class="n">S</span> <span class="n">R</span>
+<span class="kn">variables</span> <span class="o">{</span><span class="n">S</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span>
 
-instance : module R (free_module R S) :=
-begin
-split, -- tactic fails
-end
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">module</span> <span class="n">R</span> <span class="o">(</span><span class="n">free_module</span> <span class="n">R</span> <span class="n">S</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="n">split</span><span class="o">,</span> <span class="c1">-- tactic fails</span>
+<span class="kn">end</span>
 
-end free_module
-```
+<span class="kn">end</span> <span class="n">free_module</span>
+</pre></div>
 
 #### [ Johan Commelin (May 08 2018 at 10:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126254209):
-Is that wrong?
+<p>Is that wrong?</p>
 
 #### [ Kenny Lau (May 08 2018 at 10:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126254214):
-never mind
+<p>never mind</p>
 
 #### [ Kenny Lau (May 08 2018 at 10:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126254216):
-that isn't wrong
+<p>that isn't wrong</p>
 
 #### [ Johan Commelin (May 08 2018 at 10:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126254219):
-Ok, I don't mind learning a better way (-;
+<p>Ok, I don't mind learning a better way (-;</p>
 
 #### [ Johan Commelin (May 08 2018 at 10:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126254265):
-So, why is `split` failing? I expected to get 4 goals, according to the 4 axioms of a module
+<p>So, why is <code>split</code> failing? I expected to get 4 goals, according to the 4 axioms of a module</p>
 
 #### [ Kenny Lau (May 08 2018 at 10:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126254270):
-constructor
+<p>constructor</p>
 
 #### [ Kenny Lau (May 08 2018 at 10:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126254273):
-but you don't want to use it since it `extends` something
+<p>but you don't want to use it since it <code>extends</code> something</p>
 
 #### [ Kenny Lau (May 08 2018 at 10:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126254279):
-maybe if you really want to stay in tactic mode, do `refine {..}`
+<p>maybe if you really want to stay in tactic mode, do <code>refine {..}</code></p>
 
 #### [ Johan Commelin (May 08 2018 at 10:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126254482):
-Well, I don't *want* to stay in tactic mode. It is just that I have no clue how to do things in term mode. And tactic mode helps me a bit (-;
+<p>Well, I don't <em>want</em> to stay in tactic mode. It is just that I have no clue how to do things in term mode. And tactic mode helps me a bit (-;</p>
 
 #### [ Johan Commelin (May 08 2018 at 10:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126254761):
-So what would be the proper way to prove this `instance`?
+<p>So what would be the proper way to prove this <code>instance</code>?</p>
 
 #### [ Kenny Lau (May 08 2018 at 10:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126254774):
-```lean
-instance : module R (free_module R S) :=
-{ smul := _,
-  smul_add := _ }
-```
-etc
+<div class="codehilite"><pre><span></span><span class="kn">instance</span> <span class="o">:</span> <span class="n">module</span> <span class="n">R</span> <span class="o">(</span><span class="n">free_module</span> <span class="n">R</span> <span class="n">S</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">smul</span> <span class="o">:=</span> <span class="bp">_</span><span class="o">,</span>
+  <span class="n">smul_add</span> <span class="o">:=</span> <span class="bp">_</span> <span class="o">}</span>
+</pre></div>
+
+
+<p>etc</p>
 
 #### [ Johan Commelin (May 08 2018 at 10:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126254830):
-Ok, thanks! I'll try to do that.
+<p>Ok, thanks! I'll try to do that.</p>
 
 #### [ Johan Commelin (May 08 2018 at 10:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126255445):
-Lol, this is already in `finsupp`: `to_module`
+<p>Lol, this is already in <code>finsupp</code>: <code>to_module</code></p>
 
 #### [ Kenny Lau (May 08 2018 at 10:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126255448):
-lol
+<p>lol</p>
 
 #### [ Johan Commelin (May 08 2018 at 11:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126256750):
-The errors continue:
-```lean
-import algebra.ring data.finsupp
+<p>The errors continue:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">algebra</span><span class="bp">.</span><span class="n">ring</span> <span class="n">data</span><span class="bp">.</span><span class="n">finsupp</span>
 
-variables {R : Type*} [decidable_eq R] [ring R]
+<span class="kn">variables</span> <span class="o">{</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">decidable_eq</span> <span class="n">R</span><span class="o">]</span> <span class="o">[</span><span class="n">ring</span> <span class="n">R</span><span class="o">]</span>
 
-section free_module
-definition free_module (R : Type*) [ring R] (S : Type*) := finsupp S R
-variables {S : Type*} [decidable_eq S]
+<span class="kn">section</span> <span class="n">free_module</span>
+<span class="kn">definition</span> <span class="n">free_module</span> <span class="o">(</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">[</span><span class="n">ring</span> <span class="n">R</span><span class="o">]</span> <span class="o">(</span><span class="n">S</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">:=</span> <span class="n">finsupp</span> <span class="n">S</span> <span class="n">R</span>
+<span class="kn">variables</span> <span class="o">{</span><span class="n">S</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">decidable_eq</span> <span class="n">S</span><span class="o">]</span>
 
-instance : add_comm_monoid (free_module R S) := finsupp.add_comm_monoid
-instance : module R (free_module R S) := finsupp.to_module
-end free_module
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">add_comm_monoid</span> <span class="o">(</span><span class="n">free_module</span> <span class="n">R</span> <span class="n">S</span><span class="o">)</span> <span class="o">:=</span> <span class="n">finsupp</span><span class="bp">.</span><span class="n">add_comm_monoid</span>
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">module</span> <span class="n">R</span> <span class="o">(</span><span class="n">free_module</span> <span class="n">R</span> <span class="n">S</span><span class="o">)</span> <span class="o">:=</span> <span class="n">finsupp</span><span class="bp">.</span><span class="n">to_module</span>
+<span class="kn">end</span> <span class="n">free_module</span>
 
-section generators
-variables {M : Type*} [module R M]
+<span class="kn">section</span> <span class="n">generators</span>
+<span class="kn">variables</span> <span class="o">{</span><span class="n">M</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">module</span> <span class="n">R</span> <span class="n">M</span><span class="o">]</span>
 
-definition natural_map (S : set M) : free_module R S → M :=
-λ x, x.sum (λ s r, r • s)
+<span class="kn">definition</span> <span class="n">natural_map</span> <span class="o">(</span><span class="n">S</span> <span class="o">:</span> <span class="n">set</span> <span class="n">M</span><span class="o">)</span> <span class="o">:</span> <span class="n">free_module</span> <span class="n">R</span> <span class="n">S</span> <span class="bp">→</span> <span class="n">M</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="n">x</span><span class="bp">.</span><span class="n">sum</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">s</span> <span class="n">r</span><span class="o">,</span> <span class="n">r</span> <span class="err">•</span> <span class="n">s</span><span class="o">)</span>
 
-definition generated_submodule (S : set M) := set.range (natural_map S) -- fails
+<span class="kn">definition</span> <span class="n">generated_submodule</span> <span class="o">(</span><span class="n">S</span> <span class="o">:</span> <span class="n">set</span> <span class="n">M</span><span class="o">)</span> <span class="o">:=</span> <span class="n">set</span><span class="bp">.</span><span class="n">range</span> <span class="o">(</span><span class="n">natural_map</span> <span class="n">S</span><span class="o">)</span> <span class="c1">-- fails</span>
 
-definition is_finitely_generated (M : Type*) [module R M] : Prop :=
-∃ S : finset M, generated_submodule {x | x ∈ S} = set.univ M -- fails
+<span class="kn">definition</span> <span class="n">is_finitely_generated</span> <span class="o">(</span><span class="n">M</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">[</span><span class="n">module</span> <span class="n">R</span> <span class="n">M</span><span class="o">]</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span>
+<span class="bp">∃</span> <span class="n">S</span> <span class="o">:</span> <span class="n">finset</span> <span class="n">M</span><span class="o">,</span> <span class="n">generated_submodule</span> <span class="o">{</span><span class="n">x</span> <span class="bp">|</span> <span class="n">x</span> <span class="err">∈</span> <span class="n">S</span><span class="o">}</span> <span class="bp">=</span> <span class="n">set</span><span class="bp">.</span><span class="n">univ</span> <span class="n">M</span> <span class="c1">-- fails</span>
 
-end generators
-```
+<span class="kn">end</span> <span class="n">generators</span>
+</pre></div>
 
 #### [ Johan Commelin (May 08 2018 at 11:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126256792):
-Errors:
-```
-generators.lean:19:57: error
+<p>Errors:</p>
+<div class="codehilite"><pre><span></span>generators.lean:19:57: error
 
 failed to synthesize type class instance for
 M : Type u_2,
@@ -177,79 +173,76 @@ S : set M
 ⊢ module ?m_1 M
 generators.lean:19:57: error
 
-don't know how to synthesize placeholder
+don&#39;t know how to synthesize placeholder
 context:
 M : Type u_2,
 S : set M
 ⊢ Type ?
-```
+</pre></div>
 
 #### [ Johan Commelin (May 08 2018 at 11:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126256799):
-But I am telling it that M is a module over R, so why can't it unify `?m_1` with `R`?
+<p>But I am telling it that M is a module over R, so why can't it unify <code>?m_1</code> with <code>R</code>?</p>
 
 #### [ Kevin Buzzard (May 08 2018 at 12:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126258817):
-You started a new section so Lean has forgotten about the variable R
+<p>You started a new section so Lean has forgotten about the variable R</p>
 
 #### [ Kevin Buzzard (May 08 2018 at 12:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126258821):
-wait
+<p>wait</p>
 
 #### [ Kevin Buzzard (May 08 2018 at 12:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126258825):
-that doesn't seem to be true
+<p>that doesn't seem to be true</p>
 
 #### [ Kevin Buzzard (May 08 2018 at 12:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126258898):
-It seems to be because you don't ever mention R so the type class inference doesn't kick in
+<p>It seems to be because you don't ever mention R so the type class inference doesn't kick in</p>
 
 #### [ Kevin Buzzard (May 08 2018 at 12:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126258966):
-`definition generated_submodule (S : set M) [module R M] := set.range (natural_map S) -- works`
+<p><code>definition generated_submodule (S : set M) [module R M] := set.range (natural_map S) -- works</code></p>
 
 #### [ Kevin Buzzard (May 08 2018 at 12:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126258971):
-Type class inference is a strange thing
+<p>Type class inference is a strange thing</p>
 
 #### [ Kenny Lau (May 08 2018 at 12:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126258973):
-include R
+<p>include R</p>
 
 #### [ Kevin Buzzard (May 08 2018 at 12:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126258974):
-I would still not say I had completely got the hang of it
+<p>I would still not say I had completely got the hang of it</p>
 
 #### [ Kevin Buzzard (May 08 2018 at 12:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126258979):
-```lean
-include R
-definition generated_submodule (S : set M) := set.range (natural_map S) -- works
-```
+<div class="codehilite"><pre><span></span><span class="n">include</span> <span class="n">R</span>
+<span class="kn">definition</span> <span class="n">generated_submodule</span> <span class="o">(</span><span class="n">S</span> <span class="o">:</span> <span class="n">set</span> <span class="n">M</span><span class="o">)</span> <span class="o">:=</span> <span class="n">set</span><span class="bp">.</span><span class="n">range</span> <span class="o">(</span><span class="n">natural_map</span> <span class="n">S</span><span class="o">)</span> <span class="c1">-- works</span>
+</pre></div>
 
 #### [ Kevin Buzzard (May 08 2018 at 12:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126259016):
-Kenny's fix
+<p>Kenny's fix</p>
 
 #### [ Kevin Buzzard (May 08 2018 at 12:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126259021):
-What does `include` do?
+<p>What does <code>include</code> do?</p>
 
 #### [ Kevin Buzzard (May 08 2018 at 12:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126259026):
-I thought this was for including variable names in tactic proofs
+<p>I thought this was for including variable names in tactic proofs</p>
 
 #### [ Kevin Buzzard (May 08 2018 at 12:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126259037):
-As for the equality failing
+<p>As for the equality failing</p>
 
 #### [ Kevin Buzzard (May 08 2018 at 12:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126259038):
-`set.univ : Π {α : Type u}, set α`
+<p><code>set.univ : Π {α : Type u}, set α</code></p>
 
 #### [ Kevin Buzzard (May 08 2018 at 12:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126259041):
-`set.univ` doesn't take `M`, it guesses it.
+<p><code>set.univ</code> doesn't take <code>M</code>, it guesses it.</p>
 
 #### [ Kevin Buzzard (May 08 2018 at 12:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126259081):
-```lean
-definition is_finitely_generated (M : Type*) [module R M] : Prop :=
-∃ S : finset M, generated_submodule {x | x ∈ S} = set.univ -- works
-```
+<div class="codehilite"><pre><span></span><span class="kn">definition</span> <span class="n">is_finitely_generated</span> <span class="o">(</span><span class="n">M</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">[</span><span class="n">module</span> <span class="n">R</span> <span class="n">M</span><span class="o">]</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span>
+<span class="bp">∃</span> <span class="n">S</span> <span class="o">:</span> <span class="n">finset</span> <span class="n">M</span><span class="o">,</span> <span class="n">generated_submodule</span> <span class="o">{</span><span class="n">x</span> <span class="bp">|</span> <span class="n">x</span> <span class="err">∈</span> <span class="n">S</span><span class="o">}</span> <span class="bp">=</span> <span class="n">set</span><span class="bp">.</span><span class="n">univ</span> <span class="c1">-- works</span>
+</pre></div>
 
 #### [ Kevin Buzzard (May 08 2018 at 12:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126259083):
-Recently I realised that I pretty fully understood most Lean errors
+<p>Recently I realised that I pretty fully understood most Lean errors</p>
 
 #### [ Kevin Buzzard (May 08 2018 at 12:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126259086):
-i.e. I can look at the error and actually figure out what is wrong with my code, in many cases
+<p>i.e. I can look at the error and actually figure out what is wrong with my code, in many cases</p>
 
 #### [ Kevin Buzzard (May 08 2018 at 12:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126259096):
-```
-type mismatch at application
+<div class="codehilite"><pre><span></span>type mismatch at application
   generated_submodule {x : M | x ∈ S} = set.univ M
 term
   set.univ M
@@ -257,46 +250,46 @@ has type
   Prop : Type
 but is expected to have type
   set M : Type ?
-```
+</pre></div>
 
 #### [ Kevin Buzzard (May 08 2018 at 12:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126259103):
-says "the right hand side is supposed to have type `set M` but it has type `Prop` so you have not written what you meant to write -- it doesn't typecheck."
+<p>says "the right hand side is supposed to have type <code>set M</code> but it has type <code>Prop</code> so you have not written what you meant to write -- it doesn't typecheck."</p>
 
 #### [ Kevin Buzzard (May 08 2018 at 12:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126259146):
-You are attempting to assert that two sets are equal
+<p>You are attempting to assert that two sets are equal</p>
 
 #### [ Kevin Buzzard (May 08 2018 at 12:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126259147):
-so the correct type is `set M`
+<p>so the correct type is <code>set M</code></p>
 
 #### [ Kevin Buzzard (May 08 2018 at 12:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126259149):
-so the problem is that `set.univ M` has type Prop instead of type `set M`
+<p>so the problem is that <code>set.univ M</code> has type Prop instead of type <code>set M</code></p>
 
 #### [ Kevin Buzzard (May 08 2018 at 12:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126259156):
-and now you look at what `set.univ` actually does by hovering your mouse over `set.univ`
+<p>and now you look at what <code>set.univ</code> actually does by hovering your mouse over <code>set.univ</code></p>
 
 #### [ Kevin Buzzard (May 08 2018 at 12:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126259159):
-and you see your error
+<p>and you see your error</p>
 
 #### [ Kevin Buzzard (May 08 2018 at 12:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126259207):
-I would urge you @**Johan Commelin** to learn to read errors so you can find out the problem.
+<p>I would urge you <span class="user-mention" data-user-id="112680">@Johan Commelin</span> to learn to read errors so you can find out the problem.</p>
 
 #### [ Kevin Buzzard (May 08 2018 at 12:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126259211):
-Sometimes the problem is that type class inference has failed. Type class inference is just something you have to get the hang of and I had to ask and ask here about it -- see my typeclass inference woes thread
+<p>Sometimes the problem is that type class inference has failed. Type class inference is just something you have to get the hang of and I had to ask and ask here about it -- see my typeclass inference woes thread</p>
 
 #### [ Kevin Buzzard (May 08 2018 at 12:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126259224):
-But for other errors, try and make it so that there is exactly one error (i.e put sorry everywhere else) and then try and read the error.
+<p>But for other errors, try and make it so that there is exactly one error (i.e put sorry everywhere else) and then try and read the error.</p>
 
 #### [ Kevin Buzzard (May 08 2018 at 12:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126259266):
-And then hope that you can fix it
+<p>And then hope that you can fix it</p>
 
 #### [ Johan Commelin (May 08 2018 at 13:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126259847):
-Ok, thanks! I hope to get the hang of it as well...
+<p>Ok, thanks! I hope to get the hang of it as well...</p>
 
 #### [ Chris Hughes (May 08 2018 at 16:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126266575):
-`set.univ : set M` should help
+<p><code>set.univ : set M</code> should help</p>
 
 #### [ Chris Hughes (May 08 2018 at 16:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newbie%20error/near/126266785):
-Or perhaps `@set.univ M`
+<p>Or perhaps <code>@set.univ M</code></p>
 
 
 {% endraw %}

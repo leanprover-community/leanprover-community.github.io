@@ -12,245 +12,241 @@ permalink: archive/116395maths/85801computabledivisionbynonzeroreal.html
 
 {% raw %}
 #### [ Kevin Buzzard (Aug 09 2018 at 20:12)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/computable%20division%20by%20non-zero%20real/near/131188580):
-If I have a proof that `r : ℝ` is non-zero, can I make `def f : ℝ → ℝ := λ x, x / r` computable?
+<p>If I have a proof that <code>r : ℝ</code> is non-zero, can I make <code>def f : ℝ → ℝ := λ x, x / r</code> computable?</p>
 
 #### [ Mario Carneiro (Aug 09 2018 at 20:13)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/computable%20division%20by%20non-zero%20real/near/131188609):
-if you have `r^-1`, then it's just multiplication
+<p>if you have <code>r^-1</code>, then it's just multiplication</p>
 
 #### [ Kevin Buzzard (Aug 09 2018 at 20:14)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/computable%20division%20by%20non-zero%20real/near/131188681):
-I ask because Luca has a bunch of these, and he's ended up making his entire file `noncomputable theory` to shut Lean up, with the result that we're going to end up with a noncomputable fundamental group. Is that inevitable though?
+<p>I ask because Luca has a bunch of these, and he's ended up making his entire file <code>noncomputable theory</code> to shut Lean up, with the result that we're going to end up with a noncomputable fundamental group. Is that inevitable though?</p>
 
 #### [ Mario Carneiro (Aug 09 2018 at 20:14)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/computable%20division%20by%20non-zero%20real/near/131188692):
-but a proof that r is nonzero is not sufficient to compute a Cauchy sequence, you need a rational lower bound
+<p>but a proof that r is nonzero is not sufficient to compute a Cauchy sequence, you need a rational lower bound</p>
 
 #### [ Kevin Buzzard (Aug 09 2018 at 20:14)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/computable%20division%20by%20non-zero%20real/near/131188698):
-His definition of the topology on [0,1] was noncomputable -- that didn't look like a good start
+<p>His definition of the topology on [0,1] was noncomputable -- that didn't look like a good start</p>
 
 #### [ Mario Carneiro (Aug 09 2018 at 20:15)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/computable%20division%20by%20non-zero%20real/near/131188755):
-topologies are trivially computable
+<p>topologies are trivially computable</p>
 
 #### [ Kevin Buzzard (Aug 09 2018 at 20:16)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/computable%20division%20by%20non-zero%20real/near/131188789):
-I feel like we could fix all this because he wrote a bunch of stuff for general closed intervals `[r,s]`with only the hypothesis `s>r`, however his applications tend to be `[0,1/2]` or `[0,1/4]`
+<p>I feel like we could fix all this because he wrote a bunch of stuff for general closed intervals <code>[r,s]</code>with only the hypothesis <code>s&gt;r</code>, however his applications tend to be <code>[0,1/2]</code> or <code>[0,1/4]</code></p>
 
 #### [ Mario Carneiro (Aug 09 2018 at 20:16)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/computable%20division%20by%20non-zero%20real/near/131188820):
-if you give me a noncomputable definition of a topology, I can define a computable topology that is defeq
+<p>if you give me a noncomputable definition of a topology, I can define a computable topology that is defeq</p>
 
 #### [ Mario Carneiro (Aug 09 2018 at 20:17)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/computable%20division%20by%20non-zero%20real/near/131188832):
-because topologies have no data
+<p>because topologies have no data</p>
 
 #### [ Mario Carneiro (Aug 09 2018 at 20:19)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/computable%20division%20by%20non-zero%20real/near/131188933):
-Why is the fundamental group noncomputable?
+<p>Why is the fundamental group noncomputable?</p>
 
 #### [ Mario Carneiro (Aug 09 2018 at 20:19)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/computable%20division%20by%20non-zero%20real/near/131188944):
-what are the steps of construction that are problematic
+<p>what are the steps of construction that are problematic</p>
 
 #### [ Kevin Buzzard (Aug 09 2018 at 20:20)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/computable%20division%20by%20non-zero%20real/near/131189025):
-```lean
-import analysis.topology.topological_space
-import analysis.real
-import data.real.basic
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">analysis</span><span class="bp">.</span><span class="n">topology</span><span class="bp">.</span><span class="n">topological_space</span>
+<span class="kn">import</span> <span class="n">analysis</span><span class="bp">.</span><span class="n">real</span>
+<span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">real</span><span class="bp">.</span><span class="n">basic</span>
 
-def I01 := {x : ℝ | 0 ≤ x ∧ x ≤ 1}
+<span class="n">def</span> <span class="n">I01</span> <span class="o">:=</span> <span class="o">{</span><span class="n">x</span> <span class="o">:</span> <span class="n">ℝ</span> <span class="bp">|</span> <span class="mi">0</span> <span class="bp">≤</span> <span class="n">x</span> <span class="bp">∧</span> <span class="n">x</span> <span class="bp">≤</span> <span class="mi">1</span><span class="o">}</span>
 
-instance : topological_space I01 := by unfold I01; apply_instance
--- definition 'I01.topological_space' is noncomputable, it depends on 'real.metric_space'
-
-```
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">topological_space</span> <span class="n">I01</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">unfold</span> <span class="n">I01</span><span class="bp">;</span> <span class="n">apply_instance</span>
+<span class="c1">-- definition &#39;I01.topological_space&#39; is noncomputable, it depends on &#39;real.metric_space&#39;</span>
+</pre></div>
 
 #### [ Mario Carneiro (Aug 09 2018 at 20:21)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/computable%20division%20by%20non-zero%20real/near/131189051):
-real.metric_space is noncomputable?
+<p>real.metric_space is noncomputable?</p>
 
 #### [ Mario Carneiro (Aug 09 2018 at 20:21)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/computable%20division%20by%20non-zero%20real/near/131189069):
-oh of course, the distance function is a max
+<p>oh of course, the distance function is a max</p>
 
 #### [ Mario Carneiro (Aug 09 2018 at 20:21)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/computable%20division%20by%20non-zero%20real/near/131189070):
-anyway it doesn't matter
+<p>anyway it doesn't matter</p>
 
 #### [ Kenny Lau (Aug 09 2018 at 20:21)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/computable%20division%20by%20non-zero%20real/near/131189074):
-why is Kevin worrying about computability?
+<p>why is Kevin worrying about computability?</p>
 
 #### [ Mario Carneiro (Aug 09 2018 at 20:22)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/computable%20division%20by%20non-zero%20real/near/131189124):
-let the instance be noncomputable
+<p>let the instance be noncomputable</p>
 
 #### [ Mario Carneiro (Aug 09 2018 at 20:22)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/computable%20division%20by%20non-zero%20real/near/131189134):
-it won't cause any problems
+<p>it won't cause any problems</p>
 
 #### [ Kevin Buzzard (Aug 09 2018 at 20:22)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/computable%20division%20by%20non-zero%20real/near/131189144):
-The fundamental group is noncomputable currently because if you want a map from [0,1/2] to [0,1] you can either define it as lam x, 2 * x, or you can define a general map from [r,s] to [0,1] as lam x, (x-r)/(s-r), and use that function everywhere in your file, and fix all the noncomputable errors by writing `noncomputable theory` at the top, and nobody noticing until the file is 1000 lines long.
+<p>The fundamental group is noncomputable currently because if you want a map from [0,1/2] to [0,1] you can either define it as lam x, 2 * x, or you can define a general map from [r,s] to [0,1] as lam x, (x-r)/(s-r), and use that function everywhere in your file, and fix all the noncomputable errors by writing <code>noncomputable theory</code> at the top, and nobody noticing until the file is 1000 lines long.</p>
 
 #### [ Mario Carneiro (Aug 09 2018 at 20:23)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/computable%20division%20by%20non-zero%20real/near/131189160):
-none of that matters
+<p>none of that matters</p>
 
 #### [ Kevin Buzzard (Aug 09 2018 at 20:23)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/computable%20division%20by%20non-zero%20real/near/131189166):
-oh great :-)
+<p>oh great :-)</p>
 
 #### [ Kevin Buzzard (Aug 09 2018 at 20:23)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/computable%20division%20by%20non-zero%20real/near/131189177):
-The definition of the multiplication on paths is noncomputable
+<p>The definition of the multiplication on paths is noncomputable</p>
 
 #### [ Mario Carneiro (Aug 09 2018 at 20:23)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/computable%20division%20by%20non-zero%20real/near/131189186):
-that checks out
+<p>that checks out</p>
 
 #### [ Kevin Buzzard (Aug 09 2018 at 20:23)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/computable%20division%20by%20non-zero%20real/near/131189191):
-So that's OK?
+<p>So that's OK?</p>
 
 #### [ Mario Carneiro (Aug 09 2018 at 20:24)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/computable%20division%20by%20non-zero%20real/near/131189237):
-you have to define it by cases on whether you are greater or less than 1/2
+<p>you have to define it by cases on whether you are greater or less than 1/2</p>
 
 #### [ Kevin Buzzard (Aug 09 2018 at 20:24)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/computable%20division%20by%20non-zero%20real/near/131189238):
-right
+<p>right</p>
 
 #### [ Kevin Buzzard (Aug 09 2018 at 20:24)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/computable%20division%20by%20non-zero%20real/near/131189246):
-but Luca's implementation uses the map from [r,s] to [0,1] defined using division
+<p>but Luca's implementation uses the map from [r,s] to [0,1] defined using division</p>
 
 #### [ Kevin Buzzard (Aug 09 2018 at 20:24)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/computable%20division%20by%20non-zero%20real/near/131189249):
-with r=0 and s=1/2
+<p>with r=0 and s=1/2</p>
 
 #### [ Kevin Buzzard (Aug 09 2018 at 20:24)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/computable%20division%20by%20non-zero%20real/near/131189253):
-and then with r=1/2 and s=1
+<p>and then with r=1/2 and s=1</p>
 
 #### [ Mario Carneiro (Aug 09 2018 at 20:24)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/computable%20division%20by%20non-zero%20real/near/131189256):
-I often claim that when the function being defined is continuous you can do it without noncomputability, but in a general top space I'm not sure
+<p>I often claim that when the function being defined is continuous you can do it without noncomputability, but in a general top space I'm not sure</p>
 
 #### [ Mario Carneiro (Aug 09 2018 at 20:25)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/computable%20division%20by%20non-zero%20real/near/131189282):
-division by 2?
+<p>division by 2?</p>
 
 #### [ Mario Carneiro (Aug 09 2018 at 20:26)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/computable%20division%20by%20non-zero%20real/near/131189332):
-I thought you meant real division - division by 2 is easy
+<p>I thought you meant real division - division by 2 is easy</p>
 
 #### [ Kevin Buzzard (Aug 09 2018 at 20:26)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/computable%20division%20by%20non-zero%20real/near/131189333):
-```quote
-why is Kevin worrying about computability?
-```
-I don't worry about it in general, I was just surprised to see it here. Were you virtually at my lecture a week last Monday? The example of G(3) made it clear to me what computability was.
+<blockquote>
+<p>why is Kevin worrying about computability?</p>
+</blockquote>
+<p>I don't worry about it in general, I was just surprised to see it here. Were you virtually at my lecture a week last Monday? The example of G(3) made it clear to me what computability was.</p>
 
 #### [ Kevin Buzzard (Aug 09 2018 at 20:26)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/computable%20division%20by%20non-zero%20real/near/131189345):
-we're dividing by s-r
+<p>we're dividing by s-r</p>
 
 #### [ Kevin Buzzard (Aug 09 2018 at 20:26)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/computable%20division%20by%20non-zero%20real/near/131189354):
-using a general function which divides by s-r
+<p>using a general function which divides by s-r</p>
 
 #### [ Kevin Buzzard (Aug 09 2018 at 20:26)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/computable%20division%20by%20non-zero%20real/near/131189359):
-in the special case where s-r=1/2
+<p>in the special case where s-r=1/2</p>
 
 #### [ Kevin Buzzard (Aug 09 2018 at 20:27)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/computable%20division%20by%20non-zero%20real/near/131189391):
-and when doing associativity s-r will be 1/4
+<p>and when doing associativity s-r will be 1/4</p>
 
 #### [ Mario Carneiro (Aug 09 2018 at 20:28)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/computable%20division%20by%20non-zero%20real/near/131189448):
-those could all be rationals
+<p>those could all be rationals</p>
 
 #### [ Mario Carneiro (Aug 09 2018 at 20:28)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/computable%20division%20by%20non-zero%20real/near/131189460):
-just do your s-r trick where s and r are rationals
+<p>just do your s-r trick where s and r are rationals</p>
 
 #### [ Kevin Buzzard (Aug 09 2018 at 20:28)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/computable%20division%20by%20non-zero%20real/near/131189462):
-rofl
+<p>rofl</p>
 
 #### [ Mario Carneiro (Aug 09 2018 at 20:29)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/computable%20division%20by%20non-zero%20real/near/131189501):
-But path multiplication will still be noncomputable because of the pasting you have to do
+<p>But path multiplication will still be noncomputable because of the pasting you have to do</p>
 
 #### [ Mario Carneiro (Aug 09 2018 at 20:30)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/computable%20division%20by%20non-zero%20real/near/131189571):
-if you have f g : [0,1] -> X and you want to concatenate them, you define `(f * g) x = if x < 1/2 then f(2*x) else g(2*x-1)`
+<p>if you have f g : [0,1] -&gt; X and you want to concatenate them, you define <code>(f * g) x = if x &lt; 1/2 then f(2*x) else g(2*x-1)</code></p>
 
 #### [ Kevin Buzzard (Aug 09 2018 at 20:32)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/computable%20division%20by%20non-zero%20real/near/131189662):
-aie you're right
+<p>aie you're right</p>
 
 #### [ Mario Carneiro (Aug 09 2018 at 20:32)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/computable%20division%20by%20non-zero%20real/near/131189663):
-I think if you wanted to do that computably, you could define it by that equation on rationals, then take the limit as the sequence of rationals approaches some real
+<p>I think if you wanted to do that computably, you could define it by that equation on rationals, then take the limit as the sequence of rationals approaches some real</p>
 
 #### [ Mario Carneiro (Aug 09 2018 at 20:32)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/computable%20division%20by%20non-zero%20real/near/131189679):
-but then you have to have a computable limit operation on the target topological space
+<p>but then you have to have a computable limit operation on the target topological space</p>
 
 #### [ Kevin Buzzard (Aug 09 2018 at 20:33)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/computable%20division%20by%20non-zero%20real/near/131189691):
-I think this is all too much for Luca's project, I think we might stick to noncomputable
+<p>I think this is all too much for Luca's project, I think we might stick to noncomputable</p>
 
 #### [ Kevin Buzzard (Aug 09 2018 at 20:33)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/computable%20division%20by%20non-zero%20real/near/131189697):
-I'm glad I mentioned this now, I can go back to thinking computable maths is all a bit silly for a while.
+<p>I'm glad I mentioned this now, I can go back to thinking computable maths is all a bit silly for a while.</p>
 
 #### [ Kevin Buzzard (Aug 09 2018 at 20:33)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/computable%20division%20by%20non-zero%20real/near/131189716):
-What I'm trying to do nowadays is to get some sort of feeling for when I am actually being noncomputable. Like when I was a PhD student and I got some sort of a feeling for when I was actually using the axiom of choice
+<p>What I'm trying to do nowadays is to get some sort of feeling for when I am actually being noncomputable. Like when I was a PhD student and I got some sort of a feeling for when I was actually using the axiom of choice</p>
 
 #### [ Kevin Buzzard (Aug 09 2018 at 20:34)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/computable%20division%20by%20non-zero%20real/near/131189759):
-or when I was a post-doc and I got some sort of a feeling for when I was actually using universes
+<p>or when I was a post-doc and I got some sort of a feeling for when I was actually using universes</p>
 
 #### [ Mario Carneiro (Aug 09 2018 at 20:34)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/computable%20division%20by%20non-zero%20real/near/131189768):
-rule of thumb: if you use anything descendent from `topological_space.lean` or `analysis/real.lean`, just put `noncomputable theory` and don't attempt to get away from it
+<p>rule of thumb: if you use anything descendent from <code>topological_space.lean</code> or <code>analysis/real.lean</code>, just put <code>noncomputable theory</code> and don't attempt to get away from it</p>
 
 #### [ Kevin Buzzard (Aug 09 2018 at 20:34)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/computable%20division%20by%20non-zero%20real/near/131189772):
-[answer: probably never, although it was difficult to find a reference sometimes]
+<p>[answer: probably never, although it was difficult to find a reference sometimes]</p>
 
 #### [ Mario Carneiro (Aug 09 2018 at 20:34)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/computable%20division%20by%20non-zero%20real/near/131189788):
-If all your imports are in `data` you should try to be computable
+<p>If all your imports are in <code>data</code> you should try to be computable</p>
 
 #### [ Kevin Buzzard (Aug 09 2018 at 20:35)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/computable%20division%20by%20non-zero%20real/near/131189817):
-Well Luca's file uses lots of stuff from both of those files, so we'll have to be noncomputable for now. Kenny can fix it all up when he's finished
+<p>Well Luca's file uses lots of stuff from both of those files, so we'll have to be noncomputable for now. Kenny can fix it all up when he's finished</p>
 
 #### [ Mario Carneiro (Aug 09 2018 at 20:35)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/computable%20division%20by%20non-zero%20real/near/131189824):
-topology is 100% classical maths
+<p>topology is 100% classical maths</p>
 
 #### [ Kevin Buzzard (Aug 09 2018 at 20:36)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/computable%20division%20by%20non-zero%20real/near/131189888):
-I'm surprised. I didn't realise that.
+<p>I'm surprised. I didn't realise that.</p>
 
 #### [ Mario Carneiro (Aug 09 2018 at 20:36)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/computable%20division%20by%20non-zero%20real/near/131189893):
-and metric spaces and uniform spaces...
+<p>and metric spaces and uniform spaces...</p>
 
 #### [ Kevin Buzzard (Aug 09 2018 at 20:36)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/computable%20division%20by%20non-zero%20real/near/131189914):
-Metric spaces I can understand because they mention reals.
+<p>Metric spaces I can understand because they mention reals.</p>
 
 #### [ Mario Carneiro (Aug 09 2018 at 20:36)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/computable%20division%20by%20non-zero%20real/near/131189922):
-it could conceivably be different but it would require a major rewrite of the library
+<p>it could conceivably be different but it would require a major rewrite of the library</p>
 
 #### [ Mario Carneiro (Aug 09 2018 at 20:37)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/computable%20division%20by%20non-zero%20real/near/131189937):
-`data.real.basic` is computable, `analysis.real` is not
+<p><code>data.real.basic</code> is computable, <code>analysis.real</code> is not</p>
 
 #### [ Kevin Buzzard (Aug 09 2018 at 20:37)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/computable%20division%20by%20non-zero%20real/near/131189960):
-Metric spaces also often use countable dependent choice, because the two definitions of closure only coincide when you are able to choose a sequence of points in your space tending to a point in the closure, which involves choosing `x_n` at distance at most `1/n` from the boundary point
+<p>Metric spaces also often use countable dependent choice, because the two definitions of closure only coincide when you are able to choose a sequence of points in your space tending to a point in the closure, which involves choosing <code>x_n</code> at distance at most <code>1/n</code> from the boundary point</p>
 
 #### [ Mario Carneiro (Aug 09 2018 at 20:38)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/computable%20division%20by%20non-zero%20real/near/131190030):
-well, that's just first countable spaces in general
+<p>well, that's just first countable spaces in general</p>
 
 #### [ Mario Carneiro (Aug 09 2018 at 20:38)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/computable%20division%20by%20non-zero%20real/near/131190053):
-but there I'm not so worried because all the claims are propositional anyway
+<p>but there I'm not so worried because all the claims are propositional anyway</p>
 
 #### [ Mario Carneiro (Aug 09 2018 at 20:38)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/computable%20division%20by%20non-zero%20real/near/131190069):
-we make no attempt to avoid the axiom of choice in theorems
+<p>we make no attempt to avoid the axiom of choice in theorems</p>
 
 #### [ Chris Hughes (Aug 09 2018 at 20:44)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/computable%20division%20by%20non-zero%20real/near/131190413):
-```lean
-import data.real.basic
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">real</span><span class="bp">.</span><span class="n">basic</span>
 
-def computable_inv (x : ℝ) : x ≠ 0 → ℝ :=
-quotient.hrec_on x 
-(λ x (hx : real.mk x ≠ 0), real.mk 
-  (cau_seq.inv x (mt real.mk_eq_zero.2 hx))) 
-  (λ a b h, begin
-    have : real.mk a = real.mk b := quotient.sound h,
-    refine function.hfunext (by rw this) 
-      (λ h₁ h₂ _, heq_of_eq _),
-    refine (domain.mul_right_inj h₁).1 _,
-    conv {to_rhs, congr, skip, rw this},
-    refine quotient.sound _,
-    refine setoid.trans (cau_seq.inv_mul_cancel (mt real.mk_eq_zero.2 h₁)) 
-      (setoid.symm (cau_seq.inv_mul_cancel (mt real.mk_eq_zero.2 h₂))) 
-  end)
-```
+<span class="n">def</span> <span class="n">computable_inv</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">≠</span> <span class="mi">0</span> <span class="bp">→</span> <span class="n">ℝ</span> <span class="o">:=</span>
+<span class="n">quotient</span><span class="bp">.</span><span class="n">hrec_on</span> <span class="n">x</span>
+<span class="o">(</span><span class="bp">λ</span> <span class="n">x</span> <span class="o">(</span><span class="n">hx</span> <span class="o">:</span> <span class="n">real</span><span class="bp">.</span><span class="n">mk</span> <span class="n">x</span> <span class="bp">≠</span> <span class="mi">0</span><span class="o">),</span> <span class="n">real</span><span class="bp">.</span><span class="n">mk</span>
+  <span class="o">(</span><span class="n">cau_seq</span><span class="bp">.</span><span class="n">inv</span> <span class="n">x</span> <span class="o">(</span><span class="n">mt</span> <span class="n">real</span><span class="bp">.</span><span class="n">mk_eq_zero</span><span class="bp">.</span><span class="mi">2</span> <span class="n">hx</span><span class="o">)))</span>
+  <span class="o">(</span><span class="bp">λ</span> <span class="n">a</span> <span class="n">b</span> <span class="n">h</span><span class="o">,</span> <span class="k">begin</span>
+    <span class="k">have</span> <span class="o">:</span> <span class="n">real</span><span class="bp">.</span><span class="n">mk</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">real</span><span class="bp">.</span><span class="n">mk</span> <span class="n">b</span> <span class="o">:=</span> <span class="n">quotient</span><span class="bp">.</span><span class="n">sound</span> <span class="n">h</span><span class="o">,</span>
+    <span class="n">refine</span> <span class="n">function</span><span class="bp">.</span><span class="n">hfunext</span> <span class="o">(</span><span class="k">by</span> <span class="n">rw</span> <span class="n">this</span><span class="o">)</span>
+      <span class="o">(</span><span class="bp">λ</span> <span class="n">h₁</span> <span class="n">h₂</span> <span class="bp">_</span><span class="o">,</span> <span class="n">heq_of_eq</span> <span class="bp">_</span><span class="o">),</span>
+    <span class="n">refine</span> <span class="o">(</span><span class="n">domain</span><span class="bp">.</span><span class="n">mul_right_inj</span> <span class="n">h₁</span><span class="o">)</span><span class="bp">.</span><span class="mi">1</span> <span class="bp">_</span><span class="o">,</span>
+    <span class="n">conv</span> <span class="o">{</span><span class="n">to_rhs</span><span class="o">,</span> <span class="n">congr</span><span class="o">,</span> <span class="n">skip</span><span class="o">,</span> <span class="n">rw</span> <span class="n">this</span><span class="o">},</span>
+    <span class="n">refine</span> <span class="n">quotient</span><span class="bp">.</span><span class="n">sound</span> <span class="bp">_</span><span class="o">,</span>
+    <span class="n">refine</span> <span class="n">setoid</span><span class="bp">.</span><span class="n">trans</span> <span class="o">(</span><span class="n">cau_seq</span><span class="bp">.</span><span class="n">inv_mul_cancel</span> <span class="o">(</span><span class="n">mt</span> <span class="n">real</span><span class="bp">.</span><span class="n">mk_eq_zero</span><span class="bp">.</span><span class="mi">2</span> <span class="n">h₁</span><span class="o">))</span>
+      <span class="o">(</span><span class="n">setoid</span><span class="bp">.</span><span class="n">symm</span> <span class="o">(</span><span class="n">cau_seq</span><span class="bp">.</span><span class="n">inv_mul_cancel</span> <span class="o">(</span><span class="n">mt</span> <span class="n">real</span><span class="bp">.</span><span class="n">mk_eq_zero</span><span class="bp">.</span><span class="mi">2</span> <span class="n">h₂</span><span class="o">)))</span>
+  <span class="kn">end</span><span class="o">)</span>
+</pre></div>
 
 #### [ Mario Carneiro (Aug 09 2018 at 20:45)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/computable%20division%20by%20non-zero%20real/near/131190434):
-Yeah, I double checked the proof in data.real.basic and it can definitely be defined... I'm not sure why I didn't try
+<p>Yeah, I double checked the proof in data.real.basic and it can definitely be defined... I'm not sure why I didn't try</p>
 
 #### [ Chris Hughes (Aug 09 2018 at 20:47)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/computable%20division%20by%20non-zero%20real/near/131190547):
-```lean
-lemma computable_inv_mul_cancel (x : ℝ) : Π hx : x ≠ 0,
-  computable_inv x hx * x = 1 :=
-quotient.induction_on x (λ x hx, quotient.sound (cau_seq.inv_mul_cancel _))
-```
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">computable_inv_mul_cancel</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">:</span> <span class="bp">Π</span> <span class="n">hx</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">≠</span> <span class="mi">0</span><span class="o">,</span>
+  <span class="n">computable_inv</span> <span class="n">x</span> <span class="n">hx</span> <span class="bp">*</span> <span class="n">x</span> <span class="bp">=</span> <span class="mi">1</span> <span class="o">:=</span>
+<span class="n">quotient</span><span class="bp">.</span><span class="n">induction_on</span> <span class="n">x</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">x</span> <span class="n">hx</span><span class="o">,</span> <span class="n">quotient</span><span class="bp">.</span><span class="n">sound</span> <span class="o">(</span><span class="n">cau_seq</span><span class="bp">.</span><span class="n">inv_mul_cancel</span> <span class="bp">_</span><span class="o">))</span>
+</pre></div>
 
 #### [ Chris Hughes (Aug 09 2018 at 20:49)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/computable%20division%20by%20non-zero%20real/near/131190657):
-@**Kevin Buzzard** you still haven't explained why you care about computable reals?
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> you still haven't explained why you care about computable reals?</p>
 
 #### [ Mario Carneiro (Aug 09 2018 at 20:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/computable%20division%20by%20non-zero%20real/near/131190733):
-Oh, I found a counterexample for the computability claim. Let $$X$$ be a quotient of $$\Bbb R$$ identifying all points in $$[1,2]$$. Let $$f(x)=x$$ and $$g(x)=x+2$$; these are continuous functions on $$[0,1]$$ such that $$f(1)=[1]=[2]=g(0)$$, and both functions are computable. The path concatenation $$f\ast g$$ is discontinuous at $$1/2$$ (in the real topology), so it is not computably definable.
+<p>Oh, I found a counterexample for the computability claim. Let <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.68333em;vertical-align:0em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.07847em;">X</span></span></span></span> be a quotient of <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="double-struck">R</mi></mrow><annotation encoding="application/x-tex">\Bbb R</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.68889em;"></span><span class="strut bottom" style="height:0.68889em;vertical-align:0em;"></span><span class="base"><span class="mord mathbb">R</span></span></span></span> identifying all points in <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>[</mo><mn>1</mn><mo separator="true">,</mo><mn>2</mn><mo>]</mo></mrow><annotation encoding="application/x-tex">[1,2]</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.75em;"></span><span class="strut bottom" style="height:1em;vertical-align:-0.25em;"></span><span class="base"><span class="mopen">[</span><span class="mord mathrm">1</span><span class="mpunct">,</span><span class="mord mathrm">2</span><span class="mclose">]</span></span></span></span>. Let <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>f</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><mi>x</mi></mrow><annotation encoding="application/x-tex">f(x)=x</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.75em;"></span><span class="strut bottom" style="height:1em;vertical-align:-0.25em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span class="mord mathit">x</span><span class="mclose">)</span><span class="mrel">=</span><span class="mord mathit">x</span></span></span></span> and <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>g</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>=</mo><mi>x</mi><mo>+</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">g(x)=x+2</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.75em;"></span><span class="strut bottom" style="height:1em;vertical-align:-0.25em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.03588em;">g</span><span class="mopen">(</span><span class="mord mathit">x</span><span class="mclose">)</span><span class="mrel">=</span><span class="mord mathit">x</span><span class="mbin">+</span><span class="mord mathrm">2</span></span></span></span>; these are continuous functions on <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>[</mo><mn>0</mn><mo separator="true">,</mo><mn>1</mn><mo>]</mo></mrow><annotation encoding="application/x-tex">[0,1]</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.75em;"></span><span class="strut bottom" style="height:1em;vertical-align:-0.25em;"></span><span class="base"><span class="mopen">[</span><span class="mord mathrm">0</span><span class="mpunct">,</span><span class="mord mathrm">1</span><span class="mclose">]</span></span></span></span> such that <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>f</mi><mo>(</mo><mn>1</mn><mo>)</mo><mo>=</mo><mo>[</mo><mn>1</mn><mo>]</mo><mo>=</mo><mo>[</mo><mn>2</mn><mo>]</mo><mo>=</mo><mi>g</mi><mo>(</mo><mn>0</mn><mo>)</mo></mrow><annotation encoding="application/x-tex">f(1)=[1]=[2]=g(0)</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.75em;"></span><span class="strut bottom" style="height:1em;vertical-align:-0.25em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span class="mord mathrm">1</span><span class="mclose">)</span><span class="mrel">=</span><span class="mopen">[</span><span class="mord mathrm">1</span><span class="mclose">]</span><span class="mrel">=</span><span class="mopen">[</span><span class="mord mathrm">2</span><span class="mclose">]</span><span class="mrel">=</span><span class="mord mathit" style="margin-right:0.03588em;">g</span><span class="mopen">(</span><span class="mord mathrm">0</span><span class="mclose">)</span></span></span></span>, and both functions are computable. The path concatenation <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>f</mi><mo>∗</mo><mi>g</mi></mrow><annotation encoding="application/x-tex">f\ast g</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.69444em;"></span><span class="strut bottom" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.10764em;">f</span><span class="mbin">∗</span><span class="mord mathit" style="margin-right:0.03588em;">g</span></span></span></span> is discontinuous at <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>1</mn><mi mathvariant="normal">/</mi><mn>2</mn></mrow><annotation encoding="application/x-tex">1/2</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.75em;"></span><span class="strut bottom" style="height:1em;vertical-align:-0.25em;"></span><span class="base"><span class="mord mathrm">1</span><span class="mord mathrm">/</span><span class="mord mathrm">2</span></span></span></span> (in the real topology), so it is not computably definable.</p>
 
 #### [ Kevin Buzzard (Aug 09 2018 at 20:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/computable%20division%20by%20non-zero%20real/near/131190754):
-Because Luca was dividing by a positive real which I could prove was greater than 1/10 and so I realised that probably I could make some of his noncomputable code computable. I hence wondered whether it would be an easy fix to make his fundamental group computable. But as Mario pointed out, there are other problems with computability, and I've now decided not to worry about it.
+<p>Because Luca was dividing by a positive real which I could prove was greater than 1/10 and so I realised that probably I could make some of his noncomputable code computable. I hence wondered whether it would be an easy fix to make his fundamental group computable. But as Mario pointed out, there are other problems with computability, and I've now decided not to worry about it.</p>
 
 
 {% endraw %}

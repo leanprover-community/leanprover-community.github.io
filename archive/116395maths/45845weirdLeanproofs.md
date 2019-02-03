@@ -12,57 +12,56 @@ permalink: archive/116395maths/45845weirdLeanproofs.html
 
 {% raw %}
 #### [ Reid Barton (Nov 29 2018 at 02:36)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/weird%20Lean%20proofs/near/148758351):
-Lemma. If $$t : (X_j)_{j \in J} \to X$$ is a colimit cocone in Set, then every element of $$X$$ is in the image of $$X_j \to X$$ for some $$j \in J$$.
-
-Proof. Let $$f : X \to \mathtt{Prop}$$ be the function sending `x` to `∃ j y, t.ι.app j y = x` and let $$g$$ be the constant function `true`. Then $$f$$ and $$g$$ agree after precomposition with each $$X_j \to X$$, so they are equal.
+<p>Lemma. If <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>t</mi><mo>:</mo><mo>(</mo><msub><mi>X</mi><mi>j</mi></msub><msub><mo>)</mo><mrow><mi>j</mi><mo>∈</mo><mi>J</mi></mrow></msub><mo>→</mo><mi>X</mi></mrow><annotation encoding="application/x-tex">t : (X_j)_{j \in J} \to X</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.75em;"></span><span class="strut bottom" style="height:1.036108em;vertical-align:-0.286108em;"></span><span class="base"><span class="mord mathit">t</span><span class="mrel">:</span><span class="mopen">(</span><span class="mord"><span class="mord mathit" style="margin-right:0.07847em;">X</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.311664em;"><span style="top:-2.5500000000000003em;margin-left:-0.07847em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathit mtight" style="margin-right:0.05724em;">j</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"></span></span></span></span></span><span class="mclose"><span class="mclose">)</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.328331em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathit mtight" style="margin-right:0.05724em;">j</span><span class="mrel mtight">∈</span><span class="mord mathit mtight" style="margin-right:0.09618em;">J</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"></span></span></span></span></span><span class="mrel">→</span><span class="mord mathit" style="margin-right:0.07847em;">X</span></span></span></span> is a colimit cocone in Set, then every element of <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.68333em;vertical-align:0em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.07847em;">X</span></span></span></span> is in the image of <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>X</mi><mi>j</mi></msub><mo>→</mo><mi>X</mi></mrow><annotation encoding="application/x-tex">X_j \to X</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.969438em;vertical-align:-0.286108em;"></span><span class="base"><span class="mord"><span class="mord mathit" style="margin-right:0.07847em;">X</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.311664em;"><span style="top:-2.5500000000000003em;margin-left:-0.07847em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathit mtight" style="margin-right:0.05724em;">j</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"></span></span></span></span></span><span class="mrel">→</span><span class="mord mathit" style="margin-right:0.07847em;">X</span></span></span></span> for some <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>j</mi><mo>∈</mo><mi>J</mi></mrow><annotation encoding="application/x-tex">j \in J</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.8777699999999999em;vertical-align:-0.19444em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.05724em;">j</span><span class="mrel">∈</span><span class="mord mathit" style="margin-right:0.09618em;">J</span></span></span></span>.</p>
+<p>Proof. Let <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>f</mi><mo>:</mo><mi>X</mi><mo>→</mo><mrow><mi mathvariant="monospace">P</mi><mi mathvariant="monospace">r</mi><mi mathvariant="monospace">o</mi><mi mathvariant="monospace">p</mi></mrow></mrow><annotation encoding="application/x-tex">f : X \to \mathtt{Prop}</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.69444em;"></span><span class="strut bottom" style="height:0.9166599999999999em;vertical-align:-0.22222em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.10764em;">f</span><span class="mrel">:</span><span class="mord mathit" style="margin-right:0.07847em;">X</span><span class="mrel">→</span><span class="mord"><span class="mord mathtt">P</span><span class="mord mathtt">r</span><span class="mord mathtt">o</span><span class="mord mathtt">p</span></span></span></span></span> be the function sending <code>x</code> to <code>∃ j y, t.ι.app j y = x</code> and let <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>g</mi></mrow><annotation encoding="application/x-tex">g</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.43056em;"></span><span class="strut bottom" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.03588em;">g</span></span></span></span> be the constant function <code>true</code>. Then <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>f</mi></mrow><annotation encoding="application/x-tex">f</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.69444em;"></span><span class="strut bottom" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.10764em;">f</span></span></span></span> and <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>g</mi></mrow><annotation encoding="application/x-tex">g</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.43056em;"></span><span class="strut bottom" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.03588em;">g</span></span></span></span> agree after precomposition with each <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>X</mi><mi>j</mi></msub><mo>→</mo><mi>X</mi></mrow><annotation encoding="application/x-tex">X_j \to X</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.969438em;vertical-align:-0.286108em;"></span><span class="base"><span class="mord"><span class="mord mathit" style="margin-right:0.07847em;">X</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.311664em;"><span style="top:-2.5500000000000003em;margin-left:-0.07847em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathit mtight" style="margin-right:0.05724em;">j</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"></span></span></span></span></span><span class="mrel">→</span><span class="mord mathit" style="margin-right:0.07847em;">X</span></span></span></span>, so they are equal.</p>
 
 #### [ Kenny Lau (Nov 29 2018 at 02:37)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/weird%20Lean%20proofs/near/148758376):
-you what
+<p>you what</p>
 
 #### [ Keeley Hoek (Nov 29 2018 at 02:43)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/weird%20Lean%20proofs/near/148758607):
-To a category theorist, on a scale of 1-10, how old is the "I think it's actually called a 'ne'" joke
+<p>To a category theorist, on a scale of 1-10, how old is the "I think it's actually called a 'ne'" joke</p>
 
 #### [ Kenny Lau (Nov 29 2018 at 02:45)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/weird%20Lean%20proofs/near/148758684):
-@**Kevin Buzzard** "lean will revolutionize mathematics"
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> "lean will revolutionize mathematics"</p>
 
 #### [ Johan Commelin (Nov 29 2018 at 06:24)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/weird%20Lean%20proofs/near/148766496):
-```quote
-To a category theorist, on a scale of 1-10, how old is the "I think it's actually called a 'ne'" joke
-```
- I think that joke turned 10 several years ago...
+<blockquote>
+<p>To a category theorist, on a scale of 1-10, how old is the "I think it's actually called a 'ne'" joke</p>
+</blockquote>
+<p>I think that joke turned 10 several years ago...</p>
 
 #### [ Mario Carneiro (Nov 29 2018 at 06:29)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/weird%20Lean%20proofs/near/148766630):
-I don't see why this is a weird proof. Isn't this basically how you prove that epis are surjective in Set?
+<p>I don't see why this is a weird proof. Isn't this basically how you prove that epis are surjective in Set?</p>
 
 #### [ Johan Commelin (Nov 29 2018 at 06:31)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/weird%20Lean%20proofs/near/148766707):
-We don't have Curry-Howard in mathematics, remember (-;
+<p>We don't have Curry-Howard in mathematics, remember (-;</p>
 
 #### [ Johan Commelin (Nov 29 2018 at 06:31)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/weird%20Lean%20proofs/near/148766713):
-So you can't even write this proof down in "mathematics"
+<p>So you can't even write this proof down in "mathematics"</p>
 
 #### [ Mario Carneiro (Nov 29 2018 at 06:32)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/weird%20Lean%20proofs/near/148766766):
-yes you can, just make `f` take values in `{0, 1}` or something, or do equality of sets instead (i.e. `f` denotes a subset of X)
+<p>yes you can, just make <code>f</code> take values in <code>{0, 1}</code> or something, or do equality of sets instead (i.e. <code>f</code> denotes a subset of X)</p>
 
 #### [ Johan Commelin (Nov 29 2018 at 06:36)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/weird%20Lean%20proofs/near/148766902):
-Sure... But I agree with Reid that is just feels a lot different then when you build a map to `Prop`.
+<p>Sure... But I agree with Reid that is just feels a lot different then when you build a map to <code>Prop</code>.</p>
 
 #### [ Johan Commelin (Nov 29 2018 at 06:36)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/weird%20Lean%20proofs/near/148766909):
-Anyway, it's probably just taste.
+<p>Anyway, it's probably just taste.</p>
 
 #### [ Mario Carneiro (Nov 29 2018 at 06:37)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/weird%20Lean%20proofs/near/148766916):
-I think that this is one of the really interesting places where you get a truly nonconstructive exists without choice
+<p>I think that this is one of the really interesting places where you get a truly nonconstructive exists without choice</p>
 
 #### [ Chris Hughes (Dec 03 2018 at 20:03)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/weird%20Lean%20proofs/near/150791933):
-Can you prove the existence of a colimit cocone in Set without choice though?
+<p>Can you prove the existence of a colimit cocone in Set without choice though?</p>
 
 #### [ Reid Barton (Dec 03 2018 at 20:06)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/weird%20Lean%20proofs/near/150792172):
-Yes (https://github.com/leanprover/mathlib/blob/master/category_theory/limits/types.lean#L49), and what I would consider the "normal" proof of the original fact consists of writing down this formula (which one has presumably done already), noting that the fact is obvious in this case, and using essential uniqueness of the colimit
+<p>Yes (<a href="https://github.com/leanprover/mathlib/blob/master/category_theory/limits/types.lean#L49" target="_blank" title="https://github.com/leanprover/mathlib/blob/master/category_theory/limits/types.lean#L49">https://github.com/leanprover/mathlib/blob/master/category_theory/limits/types.lean#L49</a>), and what I would consider the "normal" proof of the original fact consists of writing down this formula (which one has presumably done already), noting that the fact is obvious in this case, and using essential uniqueness of the colimit</p>
 
 #### [ Reid Barton (Dec 03 2018 at 20:12)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/weird%20Lean%20proofs/near/150792703):
-It might actually end up being easier in Lean than the one I outlined above, because I needed to do some juggling to get `Prop` into the correct universe to make that proof actually work
+<p>It might actually end up being easier in Lean than the one I outlined above, because I needed to do some juggling to get <code>Prop</code> into the correct universe to make that proof actually work</p>
 
 #### [ Reid Barton (Dec 03 2018 at 20:16)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/weird%20Lean%20proofs/near/150792953):
-You might be thinking of the situation where you have a type X and some subsets whose union is all of X, and you want to prove that X is some kind of colimit of the subsets
+<p>You might be thinking of the situation where you have a type X and some subsets whose union is all of X, and you want to prove that X is some kind of colimit of the subsets</p>
 
 
 {% endraw %}

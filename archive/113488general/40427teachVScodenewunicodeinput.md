@@ -12,13 +12,13 @@ permalink: archive/113488general/40427teachVScodenewunicodeinput.html
 
 {% raw %}
 #### [ Johan Commelin (Jun 11 2018 at 10:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/teach%20VScode%20new%20unicode%20input/near/127888087):
-How do I teach VScode the fraktur letters?
+<p>How do I teach VScode the fraktur letters?</p>
 
 #### [ Gabriel Ebner (Jun 11 2018 at 10:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/teach%20VScode%20new%20unicode%20input/near/127888155):
-Check out Scott's recent PR on how to add fraktur letters: https://github.com/leanprover/vscode-lean/pull/74/files
+<p>Check out Scott's recent PR on how to add fraktur letters: <a href="https://github.com/leanprover/vscode-lean/pull/74/files" target="_blank" title="https://github.com/leanprover/vscode-lean/pull/74/files">https://github.com/leanprover/vscode-lean/pull/74/files</a></p>
 
 #### [ Johan Commelin (Jun 11 2018 at 10:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/teach%20VScode%20new%20unicode%20input/near/127888387):
-Thanks
+<p>Thanks</p>
 
 
 {% endraw %}

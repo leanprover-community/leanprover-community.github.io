@@ -12,161 +12,155 @@ permalink: archive/113488general/87862liftingthetacticmonad.html
 
 {% raw %}
 #### [ Scott Morrison (Aug 24 2018 at 09:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lifting%20the%20tactic%20monad/near/132682369):
-Several times I have wanted to use a lift of the tactic monad, in order to carry along some additional state. (As a simple example, I would like to carry along a ℕ that limits how much more computation is allowed, that several different subtactics need to respect.)
+<p>Several times I have wanted to use a lift of the tactic monad, in order to carry along some additional state. (As a simple example, I would like to carry along a ℕ that limits how much more computation is allowed, that several different subtactics need to respect.)</p>
 
 #### [ Scott Morrison (Aug 24 2018 at 09:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lifting%20the%20tactic%20monad/near/132682450):
-I've successfully written some infrastructure to do this (essentially, some typeclasses and coercions that let you move up and down from standard `tactic α` to `stateful_tactic β α`), but it was gross and hackish.
+<p>I've successfully written some infrastructure to do this (essentially, some typeclasses and coercions that let you move up and down from standard <code>tactic α</code> to <code>stateful_tactic β α</code>), but it was gross and hackish.</p>
 
 #### [ Scott Morrison (Aug 24 2018 at 09:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lifting%20the%20tactic%20monad/near/132682468):
-Is this something that others would find useful? If so, could we agree on a basic design that everyone would be happy with?
+<p>Is this something that others would find useful? If so, could we agree on a basic design that everyone would be happy with?</p>
 
 #### [ Johan Commelin (Aug 24 2018 at 09:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lifting%20the%20tactic%20monad/near/132682484):
-I think https://github.com/EdAyers/lean-humanproof/blob/a3df90b4ccd1356283e47cf56b986701944f4100/src/robot.lean#L38 might be an example of how to do that...
+<p>I think <a href="https://github.com/EdAyers/lean-humanproof/blob/a3df90b4ccd1356283e47cf56b986701944f4100/src/robot.lean#L38" target="_blank" title="https://github.com/EdAyers/lean-humanproof/blob/a3df90b4ccd1356283e47cf56b986701944f4100/src/robot.lean#L38">https://github.com/EdAyers/lean-humanproof/blob/a3df90b4ccd1356283e47cf56b986701944f4100/src/robot.lean#L38</a> might be an example of how to do that...</p>
 
 #### [ Johan Commelin (Aug 24 2018 at 09:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lifting%20the%20tactic%20monad/near/132682490):
-So you need to use `state_t`...
+<p>So you need to use <code>state_t</code>...</p>
 
 #### [ Scott Morrison (Aug 24 2018 at 09:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lifting%20the%20tactic%20monad/near/132682628):
-Yes --- that's exactly another example of what I have in mind.
+<p>Yes --- that's exactly another example of what I have in mind.</p>
 
 #### [ Scott Morrison (Aug 24 2018 at 09:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lifting%20the%20tactic%20monad/near/132682641):
-The problem is now writing metatactics that are "monad polymorphic".
+<p>The problem is now writing metatactics that are "monad polymorphic".</p>
 
 #### [ Scott Morrison (Aug 24 2018 at 09:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lifting%20the%20tactic%20monad/near/132682671):
-We need a typeclass that you can decorate your lift of `tactic` (e.g. @**Edward Ayers**'s `robot`) with, that says that it really is a lift of `tactic`.
+<p>We need a typeclass that you can decorate your lift of <code>tactic</code> (e.g. <span class="user-mention" data-user-id="121918">@Edward Ayers</span>'s <code>robot</code>) with, that says that it really is a lift of <code>tactic</code>.</p>
 
 #### [ Scott Morrison (Aug 24 2018 at 10:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lifting%20the%20tactic%20monad/near/132682966):
-Ah, there is more in `state_t` than I'd seen before.
+<p>Ah, there is more in <code>state_t</code> than I'd seen before.</p>
 
 #### [ Scott Morrison (Aug 24 2018 at 10:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lifting%20the%20tactic%20monad/near/132684057):
-I think I'm still not understanding how I'm meant to use `state_t`. I want to be able to write something like
-```
-variables {m : Type → Type → Type} [stateful_tactic m]
+<p>I think I'm still not understanding how I'm meant to use <code>state_t</code>. I want to be able to write something like</p>
+<div class="codehilite"><pre><span></span>variables {m : Type → Type → Type} [stateful_tactic m]
 
 meta def my_meta_tactic {α β} (f : α → β) (t : m σ α) : m σ β :=
 do
-  get_state >>= trace, -- prints the current state, a term of type σ
+  get_state &gt;&gt;= trace, -- prints the current state, a term of type σ
   r ← t,
   trace r,             -- prints the result of t, a term of type α
-  get_state >>= trace, -- prints the new state, a term of type σ
+  get_state &gt;&gt;= trace, -- prints the new state, a term of type σ
   done,
   return (f r)
-```
+</pre></div>
 
-Here `trace` and `done` are meant to just be the standard ones from `tactic`, that are being automatically lifted to `stateful_tactic`
-(such that they just preserve the σ state).
+
+<p>Here <code>trace</code> and <code>done</code> are meant to just be the standard ones from <code>tactic</code>, that are being automatically lifted to <code>stateful_tactic</code><br>
+(such that they just preserve the σ state).</p>
 
 #### [ Scott Morrison (Aug 24 2018 at 10:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lifting%20the%20tactic%20monad/near/132684651):
-Clearly `state_t` isn't quite doing this: it doesn't even mention `tactic`.
+<p>Clearly <code>state_t</code> isn't quite doing this: it doesn't even mention <code>tactic</code>.</p>
 
 #### [ Rob Lewis (Aug 24 2018 at 11:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lifting%20the%20tactic%20monad/near/132685496):
-Your `m` is just `λ σ, state_t σ tactic`. I'm not sure if the coercions from `tactic` are in the library, but they're very easy to write.
+<p>Your <code>m</code> is just <code>λ σ, state_t σ tactic</code>. I'm not sure if the coercions from <code>tactic</code> are in the library, but they're very easy to write.</p>
 
 #### [ Edward Ayers (Aug 24 2018 at 12:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lifting%20the%20tactic%20monad/near/132690060):
-```lean
-meta structure my_state :=
-(my_bool : bool)
-(my_nat : nat) 
-@[reducible] meta def state_tactic : Type → Type := state_t my_state tactic
-meta def of_tactic {α} : tactic α → state_tactic α := state_t.lift
-meta instance {α} : has_coe (tactic α) (state_tactic α) := ⟨of_tactic⟩
-open tactic
-meta def my_meta_tactic {α β : Type} (f : α → β) (t : state_tactic α) : state_tactic β :=
-do
-    state ← get, --get the state
-    trace state.my_nat,
-    r ← t,
-    put {my_nat:= 100, ..state}, --set the state
-    done, -- done is a tactic but the coercion converts it to a state_tactic.
-    return $ f r
-
-
-
-```
+<div class="codehilite"><pre><span></span><span class="n">meta</span> <span class="kn">structure</span> <span class="n">my_state</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">my_bool</span> <span class="o">:</span> <span class="n">bool</span><span class="o">)</span>
+<span class="o">(</span><span class="n">my_nat</span> <span class="o">:</span> <span class="n">nat</span><span class="o">)</span>
+<span class="bp">@</span><span class="o">[</span><span class="kn">reducible</span><span class="o">]</span> <span class="n">meta</span> <span class="n">def</span> <span class="n">state_tactic</span> <span class="o">:</span> <span class="kt">Type</span> <span class="bp">→</span> <span class="kt">Type</span> <span class="o">:=</span> <span class="n">state_t</span> <span class="n">my_state</span> <span class="n">tactic</span>
+<span class="n">meta</span> <span class="n">def</span> <span class="n">of_tactic</span> <span class="o">{</span><span class="n">α</span><span class="o">}</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">state_tactic</span> <span class="n">α</span> <span class="o">:=</span> <span class="n">state_t</span><span class="bp">.</span><span class="n">lift</span>
+<span class="n">meta</span> <span class="kn">instance</span> <span class="o">{</span><span class="n">α</span><span class="o">}</span> <span class="o">:</span> <span class="n">has_coe</span> <span class="o">(</span><span class="n">tactic</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">state_tactic</span> <span class="n">α</span><span class="o">)</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="n">of_tactic</span><span class="bp">⟩</span>
+<span class="kn">open</span> <span class="n">tactic</span>
+<span class="n">meta</span> <span class="n">def</span> <span class="n">my_meta_tactic</span> <span class="o">{</span><span class="n">α</span> <span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span> <span class="o">(</span><span class="n">t</span> <span class="o">:</span> <span class="n">state_tactic</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">state_tactic</span> <span class="n">β</span> <span class="o">:=</span>
+<span class="n">do</span>
+    <span class="n">state</span> <span class="err">←</span> <span class="n">get</span><span class="o">,</span> <span class="c1">--get the state</span>
+    <span class="n">trace</span> <span class="n">state</span><span class="bp">.</span><span class="n">my_nat</span><span class="o">,</span>
+    <span class="n">r</span> <span class="err">←</span> <span class="n">t</span><span class="o">,</span>
+    <span class="n">put</span> <span class="o">{</span><span class="n">my_nat</span><span class="o">:=</span> <span class="mi">100</span><span class="o">,</span> <span class="bp">..</span><span class="n">state</span><span class="o">},</span> <span class="c1">--set the state</span>
+    <span class="n">done</span><span class="o">,</span> <span class="c1">-- done is a tactic but the coercion converts it to a state_tactic.</span>
+    <span class="n">return</span> <span class="err">$</span> <span class="n">f</span> <span class="n">r</span>
+</pre></div>
 
 #### [ Edward Ayers (Aug 24 2018 at 13:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lifting%20the%20tactic%20monad/near/132690204):
-All of the `alternative` stuff works out of the box. `<|>`, `guard` and so on.
+<p>All of the <code>alternative</code> stuff works out of the box. <code>&lt;|&gt;</code>, <code>guard</code> and so on.</p>
 
 #### [ Scott Morrison (Aug 24 2018 at 13:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lifting%20the%20tactic%20monad/near/132691315):
-Thanks @**Edward Ayers**. This isn't quite there yet: I still want to abstract over `my_state`. That is, I want to be able to write `my_meta_tactic` so that it works with many different monads, as long as they come with a promise that they contain `my_state`, but possibly may carry additional state as well.
+<p>Thanks <span class="user-mention" data-user-id="121918">@Edward Ayers</span>. This isn't quite there yet: I still want to abstract over <code>my_state</code>. That is, I want to be able to write <code>my_meta_tactic</code> so that it works with many different monads, as long as they come with a promise that they contain <code>my_state</code>, but possibly may carry additional state as well.</p>
 
 #### [ Scott Morrison (Aug 24 2018 at 13:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lifting%20the%20tactic%20monad/near/132691330):
-That is, sometimes I will write tactics that refer to some specific notion of state.
+<p>That is, sometimes I will write tactics that refer to some specific notion of state.</p>
 
 #### [ Scott Morrison (Aug 24 2018 at 13:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lifting%20the%20tactic%20monad/near/132691379):
-But other times I want to write a meta tactic that is merely sufficient polymorphic that is can pass through notions of state that other people might need.
+<p>But other times I want to write a meta tactic that is merely sufficient polymorphic that is can pass through notions of state that other people might need.</p>
 
 #### [ Edward Ayers (Aug 24 2018 at 14:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lifting%20the%20tactic%20monad/near/132692605):
-I guess if you are only storing bools nats and strings you can use `tactic.set_options` as a quick fix.
+<p>I guess if you are only storing bools nats and strings you can use <code>tactic.set_options</code> as a quick fix.</p>
 
 #### [ Edward Ayers (Aug 24 2018 at 14:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lifting%20the%20tactic%20monad/near/132693624):
-I came up with a crazy idea that would solve this. The trouble is the type universes don't work and one would have to implement the `dependent_dict` object!
+<p>I came up with a crazy idea that would solve this. The trouble is the type universes don't work and one would have to implement the <code>dependent_dict</code> object!</p>
+<div class="codehilite"><pre><span></span><span class="c1">--I think that you can implement this as an rbtree but it&#39;s a lot of effort.</span>
+<span class="kn">universe</span> <span class="n">u</span>
+<span class="kn">constant</span> <span class="n">dependent_dict</span> <span class="o">(</span><span class="n">key</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="n">key</span> <span class="bp">→</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span>
+<span class="kn">namespace</span> <span class="n">dependent_dict</span>
+    <span class="kn">variables</span> <span class="o">{</span><span class="n">key</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="n">key</span> <span class="bp">→</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span>
+    <span class="kn">constant</span> <span class="n">get</span> <span class="o">(</span><span class="n">k</span> <span class="o">:</span> <span class="n">key</span><span class="o">)</span> <span class="o">(</span><span class="n">d</span> <span class="o">:</span> <span class="n">dependent_dict</span> <span class="n">key</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">option</span> <span class="o">(</span><span class="n">α</span> <span class="n">k</span><span class="o">)</span>
+    <span class="kn">constant</span> <span class="n">set</span> <span class="o">(</span><span class="n">k</span> <span class="o">:</span> <span class="n">key</span><span class="o">)</span> <span class="o">(</span><span class="n">value</span> <span class="o">:</span> <span class="n">α</span> <span class="n">k</span><span class="o">)</span> <span class="o">(</span><span class="n">d</span> <span class="o">:</span> <span class="n">dependent_dict</span> <span class="n">key</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">dependent_dict</span> <span class="n">key</span> <span class="n">α</span>
+<span class="kn">end</span> <span class="n">dependent_dict</span>
 
-```lean
---I think that you can implement this as an rbtree but it's a lot of effort.
-universe u
-constant dependent_dict (key : Type u) (α : key → Type u) : Type u
-namespace dependent_dict
-    variables {key : Type u} {α : key → Type u}
-    constant get (k : key) (d : dependent_dict key α) : option (α k)
-    constant set (k : key) (value : α k) (d : dependent_dict key α) : dependent_dict key α
-end dependent_dict
-
-meta structure custom_state :=
-(name : string)
-(type : Type)
-(default : type)
--- [TODO] define an ordering according to `name`
-meta def custom_state_tactic := state_t (dependent_dict custom_state (λ c:custom_state, c.type)) tactic
-namespace custom_state_tactic
-    meta def get (st : custom_state) : custom_state_tactic st.type := do
-        d ← state_t.get,
-        pure $ option.get_or_else (dependent_dict.get st.name d) st.default
-    meta def set (st : custom_state) (value : st.type) : (custom_state_tactic unit) := do
-        d ← state_t.get,
-        state_t.put (dependent_dict.set st value d)
-end custom_state_tactic
-```
+<span class="n">meta</span> <span class="kn">structure</span> <span class="n">custom_state</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">name</span> <span class="o">:</span> <span class="n">string</span><span class="o">)</span>
+<span class="o">(</span><span class="n">type</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span>
+<span class="o">(</span><span class="n">default</span> <span class="o">:</span> <span class="n">type</span><span class="o">)</span>
+<span class="c1">-- [TODO] define an ordering according to `name`</span>
+<span class="n">meta</span> <span class="n">def</span> <span class="n">custom_state_tactic</span> <span class="o">:=</span> <span class="n">state_t</span> <span class="o">(</span><span class="n">dependent_dict</span> <span class="n">custom_state</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">c</span><span class="o">:</span><span class="n">custom_state</span><span class="o">,</span> <span class="n">c</span><span class="bp">.</span><span class="n">type</span><span class="o">))</span> <span class="n">tactic</span>
+<span class="kn">namespace</span> <span class="n">custom_state_tactic</span>
+    <span class="n">meta</span> <span class="n">def</span> <span class="n">get</span> <span class="o">(</span><span class="n">st</span> <span class="o">:</span> <span class="n">custom_state</span><span class="o">)</span> <span class="o">:</span> <span class="n">custom_state_tactic</span> <span class="n">st</span><span class="bp">.</span><span class="n">type</span> <span class="o">:=</span> <span class="n">do</span>
+        <span class="n">d</span> <span class="err">←</span> <span class="n">state_t</span><span class="bp">.</span><span class="n">get</span><span class="o">,</span>
+        <span class="n">pure</span> <span class="err">$</span> <span class="n">option</span><span class="bp">.</span><span class="n">get_or_else</span> <span class="o">(</span><span class="n">dependent_dict</span><span class="bp">.</span><span class="n">get</span> <span class="n">st</span><span class="bp">.</span><span class="n">name</span> <span class="n">d</span><span class="o">)</span> <span class="n">st</span><span class="bp">.</span><span class="n">default</span>
+    <span class="n">meta</span> <span class="n">def</span> <span class="n">set</span> <span class="o">(</span><span class="n">st</span> <span class="o">:</span> <span class="n">custom_state</span><span class="o">)</span> <span class="o">(</span><span class="n">value</span> <span class="o">:</span> <span class="n">st</span><span class="bp">.</span><span class="n">type</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">custom_state_tactic</span> <span class="n">unit</span><span class="o">)</span> <span class="o">:=</span> <span class="n">do</span>
+        <span class="n">d</span> <span class="err">←</span> <span class="n">state_t</span><span class="bp">.</span><span class="n">get</span><span class="o">,</span>
+        <span class="n">state_t</span><span class="bp">.</span><span class="n">put</span> <span class="o">(</span><span class="n">dependent_dict</span><span class="bp">.</span><span class="n">set</span> <span class="n">st</span> <span class="n">value</span> <span class="n">d</span><span class="o">)</span>
+<span class="kn">end</span> <span class="n">custom_state_tactic</span>
+</pre></div>
 
 #### [ Edward Ayers (Aug 24 2018 at 14:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lifting%20the%20tactic%20monad/near/132693642):
-So the idea is you would always use `custom_state_tactic` but define your own instance of `custom_state` to get the values that you care about.
+<p>So the idea is you would always use <code>custom_state_tactic</code> but define your own instance of <code>custom_state</code> to get the values that you care about.</p>
 
 #### [ Edward Ayers (Aug 24 2018 at 14:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lifting%20the%20tactic%20monad/near/132693690):
-I don't think this will work but I thought I'd share.
+<p>I don't think this will work but I thought I'd share.</p>
 
 #### [ Edward Ayers (Aug 24 2018 at 14:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lifting%20the%20tactic%20monad/near/132693809):
-It also wouldn't work because you could give two `custom_state`s the same name but different types, and I don't think we have decidable equality for types
+<p>It also wouldn't work because you could give two <code>custom_state</code>s the same name but different types, and I don't think we have decidable equality for types</p>
 
 #### [ Reid Barton (Aug 24 2018 at 17:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lifting%20the%20tactic%20monad/near/132701340):
-@**Scott Morrison** are you familiar with the design of [mtl](http://hackage.haskell.org/package/mtl)?
-[MonadState](http://hackage.haskell.org/package/mtl-2.2.2/docs/Control-Monad-State-Class.html) is your "monad that comes with a promise that it contains `my_state`", I think.
+<p><span class="user-mention" data-user-id="110087">@Scott Morrison</span> are you familiar with the design of <a href="http://hackage.haskell.org/package/mtl" target="_blank" title="http://hackage.haskell.org/package/mtl">mtl</a>?<br>
+<a href="http://hackage.haskell.org/package/mtl-2.2.2/docs/Control-Monad-State-Class.html" target="_blank" title="http://hackage.haskell.org/package/mtl-2.2.2/docs/Control-Monad-State-Class.html">MonadState</a> is your "monad that comes with a promise that it contains <code>my_state</code>", I think.</p>
 
 #### [ Reid Barton (Aug 24 2018 at 17:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lifting%20the%20tactic%20monad/near/132701413):
-But I'm not sure if this encompasses everything you want
+<p>But I'm not sure if this encompasses everything you want</p>
 
 #### [ Sebastian Ullrich (Aug 24 2018 at 17:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lifting%20the%20tactic%20monad/near/132702480):
-`monad_state` is already in Lean 3. A `monad_tactic` might be introduced in Lean 4.
+<p><code>monad_state</code> is already in Lean 3. A <code>monad_tactic</code> might be introduced in Lean 4.</p>
 
 #### [ Reid Barton (Aug 24 2018 at 17:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lifting%20the%20tactic%20monad/near/132703270):
-It would just be `has_monad_lift_t tactic`, right?
+<p>It would just be <code>has_monad_lift_t tactic</code>, right?</p>
 
 #### [ Reid Barton (Aug 24 2018 at 17:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lifting%20the%20tactic%20monad/near/132703274):
-Up to specializing names
+<p>Up to specializing names</p>
 
 #### [ Sebastian Ullrich (Aug 24 2018 at 17:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lifting%20the%20tactic%20monad/near/132703524):
-That is not sufficient for lifting `tactic _ -> tactic _` functions or even more complex ones
+<p>That is not sufficient for lifting <code>tactic _ -&gt; tactic _</code> functions or even more complex ones</p>
 
 #### [ Reid Barton (Aug 24 2018 at 18:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lifting%20the%20tactic%20monad/near/132703985):
-Oh, I've never actually wanted to do that with IO, and I'm not sure I trust any of the packages which claim to solve that problem anyways.
+<p>Oh, I've never actually wanted to do that with IO, and I'm not sure I trust any of the packages which claim to solve that problem anyways.</p>
 
 #### [ Reid Barton (Aug 24 2018 at 18:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lifting%20the%20tactic%20monad/near/132703997):
-Maybe `tactic` has more compelling use cases
+<p>Maybe <code>tactic</code> has more compelling use cases</p>
 
 #### [ Sebastian Ullrich (Aug 24 2018 at 18:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lifting%20the%20tactic%20monad/near/132704242):
-Yeah, it's way more important for `tactic` since it has a bunch of combinators like `try`, `focus`, `any_goals`, ...
+<p>Yeah, it's way more important for <code>tactic</code> since it has a bunch of combinators like <code>try</code>, <code>focus</code>, <code>any_goals</code>, ...</p>
 
 #### [ Edward Ayers (Aug 28 2018 at 13:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lifting%20the%20tactic%20monad/near/132912880):
-Using `monad_state`works really well for me.
+<p>Using <code>monad_state</code>works really well for me.</p>
 
 
 {% endraw %}

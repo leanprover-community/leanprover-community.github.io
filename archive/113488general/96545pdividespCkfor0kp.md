@@ -12,48 +12,46 @@ permalink: archive/113488general/96545pdividespCkfor0kp.html
 
 {% raw %}
 #### [ Kenny Lau (Oct 14 2018 at 19:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/p%20divides%20pCk%20for%200%3Ck%3Cp/near/135785763):
-Do we have this already?
+<p>Do we have this already?</p>
 
 #### [ Kevin Buzzard (Oct 14 2018 at 19:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/p%20divides%20pCk%20for%200%3Ck%3Cp/near/135785907):
-I don't know, but we have p-adic valuations and all the lemmas that go with them, and the easiest proof nowadays might be to compute the p-adic valuation of all the factorials. Another proof is to give a free action of Z/pZ on the set of subsets of Z/pZ of size k (addition) but no doubt this would be much more painful in Lean
+<p>I don't know, but we have p-adic valuations and all the lemmas that go with them, and the easiest proof nowadays might be to compute the p-adic valuation of all the factorials. Another proof is to give a free action of Z/pZ on the set of subsets of Z/pZ of size k (addition) but no doubt this would be much more painful in Lean</p>
 
 #### [ Chris Hughes (Oct 14 2018 at 20:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/p%20divides%20pCk%20for%200%3Ck%3Cp/near/135787440):
-```lean
-import data.nat.choose data.nat.prime
-open nat
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">nat</span><span class="bp">.</span><span class="n">choose</span> <span class="n">data</span><span class="bp">.</span><span class="n">nat</span><span class="bp">.</span><span class="n">prime</span>
+<span class="kn">open</span> <span class="n">nat</span>
 
-lemma dvd_fact_of_le : ∀ {k n : ℕ} (hk : 0 < k) (hkn : k ≤ n), k ∣ fact n
-| k 0     hk0 hkn := absurd hk0 (not_lt_of_le hkn)
-| k (n+1) hk0 hkn := (lt_or_eq_of_le hkn).elim 
-  (λ hkn, dvd.trans (dvd_fact_of_le hk0 (le_of_lt_succ hkn)) ⟨n + 1, mul_comm _ _⟩) 
-  (λ hkn, hkn.symm ▸ ⟨n.fact, rfl⟩)
-  
-lemma prime_dvd_fact_iff : ∀ {n p : ℕ} (hp : prime p), p ∣ n.fact ↔ p ≤ n
-| 0 p hp := by simp [nat.pos_iff_ne_zero.1 hp.pos, ne.symm (ne_of_lt hp.gt_one)]
-| (n+1) p hp := begin
-  rw [fact_succ, hp.dvd_mul, prime_dvd_fact_iff hp],
-  exact ⟨λ h, h.elim (le_of_dvd (succ_pos _)) le_succ_of_le,
-    λ h, (lt_or_eq_of_le h).elim (or.inr ∘ le_of_lt_succ) (λ h, by simp [h])⟩
-end
+<span class="kn">lemma</span> <span class="n">dvd_fact_of_le</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">k</span> <span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">}</span> <span class="o">(</span><span class="n">hk</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">&lt;</span> <span class="n">k</span><span class="o">)</span> <span class="o">(</span><span class="n">hkn</span> <span class="o">:</span> <span class="n">k</span> <span class="bp">≤</span> <span class="n">n</span><span class="o">),</span> <span class="n">k</span> <span class="err">∣</span> <span class="n">fact</span> <span class="n">n</span>
+<span class="bp">|</span> <span class="n">k</span> <span class="mi">0</span>     <span class="n">hk0</span> <span class="n">hkn</span> <span class="o">:=</span> <span class="n">absurd</span> <span class="n">hk0</span> <span class="o">(</span><span class="n">not_lt_of_le</span> <span class="n">hkn</span><span class="o">)</span>
+<span class="bp">|</span> <span class="n">k</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="n">hk0</span> <span class="n">hkn</span> <span class="o">:=</span> <span class="o">(</span><span class="n">lt_or_eq_of_le</span> <span class="n">hkn</span><span class="o">)</span><span class="bp">.</span><span class="n">elim</span>
+  <span class="o">(</span><span class="bp">λ</span> <span class="n">hkn</span><span class="o">,</span> <span class="n">dvd</span><span class="bp">.</span><span class="n">trans</span> <span class="o">(</span><span class="n">dvd_fact_of_le</span> <span class="n">hk0</span> <span class="o">(</span><span class="n">le_of_lt_succ</span> <span class="n">hkn</span><span class="o">))</span> <span class="bp">⟨</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">,</span> <span class="n">mul_comm</span> <span class="bp">_</span> <span class="bp">_⟩</span><span class="o">)</span>
+  <span class="o">(</span><span class="bp">λ</span> <span class="n">hkn</span><span class="o">,</span> <span class="n">hkn</span><span class="bp">.</span><span class="n">symm</span> <span class="bp">▸</span> <span class="bp">⟨</span><span class="n">n</span><span class="bp">.</span><span class="n">fact</span><span class="o">,</span> <span class="n">rfl</span><span class="bp">⟩</span><span class="o">)</span>
 
-example {p k : ℕ} (hk : 0 < k) (hkp : k < p) (hp : prime p) : p ∣ choose p k :=
-(hp.dvd_mul.1 (show p ∣ choose p k * (fact k * fact (p - k)),
-  by rw [← mul_assoc, choose_mul_fact_mul_fact (le_of_lt hkp)]; 
-    exact dvd_fact_of_le hp.pos (le_refl _))).resolve_right
-      (by rw [hp.dvd_mul, prime_dvd_fact_iff hp,
-          prime_dvd_fact_iff hp, not_or_distrib, not_le, not_le];
-        exact ⟨hkp, nat.sub_lt_self hp.pos hk⟩)
+<span class="kn">lemma</span> <span class="n">prime_dvd_fact_iff</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">n</span> <span class="n">p</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">}</span> <span class="o">(</span><span class="n">hp</span> <span class="o">:</span> <span class="n">prime</span> <span class="n">p</span><span class="o">),</span> <span class="n">p</span> <span class="err">∣</span> <span class="n">n</span><span class="bp">.</span><span class="n">fact</span> <span class="bp">↔</span> <span class="n">p</span> <span class="bp">≤</span> <span class="n">n</span>
+<span class="bp">|</span> <span class="mi">0</span> <span class="n">p</span> <span class="n">hp</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">nat</span><span class="bp">.</span><span class="n">pos_iff_ne_zero</span><span class="bp">.</span><span class="mi">1</span> <span class="n">hp</span><span class="bp">.</span><span class="n">pos</span><span class="o">,</span> <span class="n">ne</span><span class="bp">.</span><span class="n">symm</span> <span class="o">(</span><span class="n">ne_of_lt</span> <span class="n">hp</span><span class="bp">.</span><span class="n">gt_one</span><span class="o">)]</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="n">p</span> <span class="n">hp</span> <span class="o">:=</span> <span class="k">begin</span>
+  <span class="n">rw</span> <span class="o">[</span><span class="n">fact_succ</span><span class="o">,</span> <span class="n">hp</span><span class="bp">.</span><span class="n">dvd_mul</span><span class="o">,</span> <span class="n">prime_dvd_fact_iff</span> <span class="n">hp</span><span class="o">],</span>
+  <span class="n">exact</span> <span class="bp">⟨λ</span> <span class="n">h</span><span class="o">,</span> <span class="n">h</span><span class="bp">.</span><span class="n">elim</span> <span class="o">(</span><span class="n">le_of_dvd</span> <span class="o">(</span><span class="n">succ_pos</span> <span class="bp">_</span><span class="o">))</span> <span class="n">le_succ_of_le</span><span class="o">,</span>
+    <span class="bp">λ</span> <span class="n">h</span><span class="o">,</span> <span class="o">(</span><span class="n">lt_or_eq_of_le</span> <span class="n">h</span><span class="o">)</span><span class="bp">.</span><span class="n">elim</span> <span class="o">(</span><span class="n">or</span><span class="bp">.</span><span class="n">inr</span> <span class="err">∘</span> <span class="n">le_of_lt_succ</span><span class="o">)</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">h</span><span class="o">,</span> <span class="k">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">h</span><span class="o">])</span><span class="bp">⟩</span>
+<span class="kn">end</span>
 
-```
+<span class="kn">example</span> <span class="o">{</span><span class="n">p</span> <span class="n">k</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">}</span> <span class="o">(</span><span class="n">hk</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">&lt;</span> <span class="n">k</span><span class="o">)</span> <span class="o">(</span><span class="n">hkp</span> <span class="o">:</span> <span class="n">k</span> <span class="bp">&lt;</span> <span class="n">p</span><span class="o">)</span> <span class="o">(</span><span class="n">hp</span> <span class="o">:</span> <span class="n">prime</span> <span class="n">p</span><span class="o">)</span> <span class="o">:</span> <span class="n">p</span> <span class="err">∣</span> <span class="n">choose</span> <span class="n">p</span> <span class="n">k</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">hp</span><span class="bp">.</span><span class="n">dvd_mul</span><span class="bp">.</span><span class="mi">1</span> <span class="o">(</span><span class="k">show</span> <span class="n">p</span> <span class="err">∣</span> <span class="n">choose</span> <span class="n">p</span> <span class="n">k</span> <span class="bp">*</span> <span class="o">(</span><span class="n">fact</span> <span class="n">k</span> <span class="bp">*</span> <span class="n">fact</span> <span class="o">(</span><span class="n">p</span> <span class="bp">-</span> <span class="n">k</span><span class="o">)),</span>
+  <span class="k">by</span> <span class="n">rw</span> <span class="o">[</span><span class="err">←</span> <span class="n">mul_assoc</span><span class="o">,</span> <span class="n">choose_mul_fact_mul_fact</span> <span class="o">(</span><span class="n">le_of_lt</span> <span class="n">hkp</span><span class="o">)]</span><span class="bp">;</span>
+    <span class="n">exact</span> <span class="n">dvd_fact_of_le</span> <span class="n">hp</span><span class="bp">.</span><span class="n">pos</span> <span class="o">(</span><span class="n">le_refl</span> <span class="bp">_</span><span class="o">)))</span><span class="bp">.</span><span class="n">resolve_right</span>
+      <span class="o">(</span><span class="k">by</span> <span class="n">rw</span> <span class="o">[</span><span class="n">hp</span><span class="bp">.</span><span class="n">dvd_mul</span><span class="o">,</span> <span class="n">prime_dvd_fact_iff</span> <span class="n">hp</span><span class="o">,</span>
+          <span class="n">prime_dvd_fact_iff</span> <span class="n">hp</span><span class="o">,</span> <span class="n">not_or_distrib</span><span class="o">,</span> <span class="n">not_le</span><span class="o">,</span> <span class="n">not_le</span><span class="o">]</span><span class="bp">;</span>
+        <span class="n">exact</span> <span class="bp">⟨</span><span class="n">hkp</span><span class="o">,</span> <span class="n">nat</span><span class="bp">.</span><span class="n">sub_lt_self</span> <span class="n">hp</span><span class="bp">.</span><span class="n">pos</span> <span class="n">hk</span><span class="bp">⟩</span><span class="o">)</span>
+</pre></div>
 
 #### [ Chris Hughes (Oct 14 2018 at 20:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/p%20divides%20pCk%20for%200%3Ck%3Cp/near/135787707):
-The annoying thing about this proof, is that nothing in mathlib imports `data.nat.choose` and `data.nat.prime` at the moment.
+<p>The annoying thing about this proof, is that nothing in mathlib imports <code>data.nat.choose</code> and <code>data.nat.prime</code> at the moment.</p>
 
 #### [ Kenny Lau (Oct 14 2018 at 20:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/p%20divides%20pCk%20for%200%3Ck%3Cp/near/135787893):
-thank you @**Chris Hughes**
+<p>thank you <span class="user-mention" data-user-id="110044">@Chris Hughes</span></p>
 
 #### [ Chris Hughes (Oct 14 2018 at 20:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/p%20divides%20pCk%20for%200%3Ck%3Cp/near/135788049):
-PRed
+<p>PRed</p>
 
 
 {% endraw %}

@@ -12,7 +12,7 @@ permalink: archive/113488general/18673thanksforfinsetsumbij.html
 
 {% raw %}
 #### [ Johan Commelin (May 25 2018 at 18:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/thanks%20for%20%60finset.sum_bij%60/near/127090893):
-I want to thank @**Mario Carneiro** and @**Johannes Hölzl** for `finset.sum_bij`. That theorem is extremely useful! Very prescient. :thumbs_up: :octopus: :muscle:
+<p>I want to thank <span class="user-mention" data-user-id="110049">@Mario Carneiro</span> and <span class="user-mention" data-user-id="110294">@Johannes Hölzl</span> for <code>finset.sum_bij</code>. That theorem is extremely useful! Very prescient. <span class="emoji emoji-1f44d" title="thumbs up">:thumbs_up:</span> <span class="emoji emoji-1f419" title="octopus">:octopus:</span> <span class="emoji emoji-1f4aa" title="muscle">:muscle:</span></p>
 
 
 {% endraw %}

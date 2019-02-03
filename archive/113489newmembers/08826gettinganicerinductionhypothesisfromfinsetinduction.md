@@ -12,64 +12,65 @@ permalink: archive/113489newmembers/08826gettinganicerinductionhypothesisfromfin
 
 {% raw %}
 #### [ Bryan Gin-ge Chen (Sep 24 2018 at 23:35)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/getting%20a%20nicer%20induction%20hypothesis%20from%20finset.induction/near/134558327):
-I'm working on formalizing a proof where the idea is to induct on the size of $$Y \setminus X$$ for two finsets $$X, Y$$. I've currently set up something like the following:
-```lean
-import data.finset
+<p>I'm working on formalizing a proof where the idea is to induct on the size of <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>Y</mi><mo>∖</mo><mi>X</mi></mrow><annotation encoding="application/x-tex">Y \setminus X</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.75em;"></span><span class="strut bottom" style="height:1em;vertical-align:-0.25em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.22222em;">Y</span><span class="mbin">∖</span><span class="mord mathit" style="margin-right:0.07847em;">X</span></span></span></span> for two finsets <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>X</mi><mo separator="true">,</mo><mi>Y</mi></mrow><annotation encoding="application/x-tex">X, Y</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.8777699999999999em;vertical-align:-0.19444em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.07847em;">X</span><span class="mpunct">,</span><span class="mord mathit" style="margin-right:0.22222em;">Y</span></span></span></span>. I've currently set up something like the following:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">finset</span>
 
-open finset
-variables {α : Type*} [decidable_eq α] {E : finset α}
+<span class="kn">open</span> <span class="n">finset</span>
+<span class="kn">variables</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">decidable_eq</span> <span class="n">α</span><span class="o">]</span> <span class="o">{</span><span class="n">E</span> <span class="o">:</span> <span class="n">finset</span> <span class="n">α</span><span class="o">}</span>
 
-def r {X : finset α} (hX : X ⊆ E) : ℕ := sorry
+<span class="n">def</span> <span class="n">r</span> <span class="o">{</span><span class="n">X</span> <span class="o">:</span> <span class="n">finset</span> <span class="n">α</span><span class="o">}</span> <span class="o">(</span><span class="n">hX</span> <span class="o">:</span> <span class="n">X</span> <span class="err">⊆</span> <span class="n">E</span><span class="o">)</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="o">:=</span> <span class="n">sorry</span>
 
-theorem foo {X Y : finset α} (hX : X ⊆ E) (hY : Y ⊆ E) :
-  r (union_subset hX hY) = r hX := 
-begin
-  induction h : (Y \ X) using finset.induction with a S ha ih,
-  /-
-  case h₁
-  α : Type u_1,
-  _inst_1 : decidable_eq α,
-  E X Y : finset α,
-  hX : X ⊆ E,
-  hY : Y ⊆ E,
-  h : Y \ X = ∅
-  ⊢ r _ = r hX
-  -/
-  -- I have handled the empty case
-  sorry,
-  /- 
-  case h₂
-  α : Type u_1,
-  _inst_1 : decidable_eq α,
-  E X Y : finset α,
-  hX : X ⊆ E,
-  hY : Y ⊆ E,
-  a : α,
-  S : finset α,
-  ha : a ∉ S,
-  ih : Y \ X = S → r _ = r hX, -- How do I use this?
-  h : Y \ X = insert a S
-  ⊢ r _ = r hX
-  -/
-  sorry
-end
-```
-The current `ih`, which in full form reads `ih : Y \ X = S → r (union_subset hX hY) = r hX`, seems impossible to for me to apply since it requires `Y \ X = S`, but we have `h : Y \ X = insert a S`. I suspect I'm abusing the tactic here, since the target doesn't contain `Y \ X` in it directly. I would be happy and the theorem would be proved if I had instead `ih : r (union_subset hX hS) = r hX` where `hS : S  ⊆ E` (and the rest of the tactic state the same).  Is there some way to set that up?
+<span class="kn">theorem</span> <span class="n">foo</span> <span class="o">{</span><span class="n">X</span> <span class="n">Y</span> <span class="o">:</span> <span class="n">finset</span> <span class="n">α</span><span class="o">}</span> <span class="o">(</span><span class="n">hX</span> <span class="o">:</span> <span class="n">X</span> <span class="err">⊆</span> <span class="n">E</span><span class="o">)</span> <span class="o">(</span><span class="n">hY</span> <span class="o">:</span> <span class="n">Y</span> <span class="err">⊆</span> <span class="n">E</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">r</span> <span class="o">(</span><span class="n">union_subset</span> <span class="n">hX</span> <span class="n">hY</span><span class="o">)</span> <span class="bp">=</span> <span class="n">r</span> <span class="n">hX</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">induction</span> <span class="n">h</span> <span class="o">:</span> <span class="o">(</span><span class="n">Y</span> <span class="err">\</span> <span class="n">X</span><span class="o">)</span> <span class="kn">using</span> <span class="n">finset</span><span class="bp">.</span><span class="n">induction</span> <span class="k">with</span> <span class="n">a</span> <span class="n">S</span> <span class="n">ha</span> <span class="n">ih</span><span class="o">,</span>
+  <span class="c">/-</span><span class="cm"></span>
+<span class="cm">  case h₁</span>
+<span class="cm">  α : Type u_1,</span>
+<span class="cm">  _inst_1 : decidable_eq α,</span>
+<span class="cm">  E X Y : finset α,</span>
+<span class="cm">  hX : X ⊆ E,</span>
+<span class="cm">  hY : Y ⊆ E,</span>
+<span class="cm">  h : Y \ X = ∅</span>
+<span class="cm">  ⊢ r _ = r hX</span>
+<span class="cm">  -/</span>
+  <span class="c1">-- I have handled the empty case</span>
+  <span class="n">sorry</span><span class="o">,</span>
+  <span class="c">/-</span><span class="cm"></span>
+<span class="cm">  case h₂</span>
+<span class="cm">  α : Type u_1,</span>
+<span class="cm">  _inst_1 : decidable_eq α,</span>
+<span class="cm">  E X Y : finset α,</span>
+<span class="cm">  hX : X ⊆ E,</span>
+<span class="cm">  hY : Y ⊆ E,</span>
+<span class="cm">  a : α,</span>
+<span class="cm">  S : finset α,</span>
+<span class="cm">  ha : a ∉ S,</span>
+<span class="cm">  ih : Y \ X = S → r _ = r hX, -- How do I use this?</span>
+<span class="cm">  h : Y \ X = insert a S</span>
+<span class="cm">  ⊢ r _ = r hX</span>
+<span class="cm">  -/</span>
+  <span class="n">sorry</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>The current <code>ih</code>, which in full form reads <code>ih : Y \ X = S → r (union_subset hX hY) = r hX</code>, seems impossible to for me to apply since it requires <code>Y \ X = S</code>, but we have <code>h : Y \ X = insert a S</code>. I suspect I'm abusing the tactic here, since the target doesn't contain <code>Y \ X</code> in it directly. I would be happy and the theorem would be proved if I had instead <code>ih : r (union_subset hX hS) = r hX</code> where <code>hS : S  ⊆ E</code> (and the rest of the tactic state the same).  Is there some way to set that up?</p>
 
 #### [ Bryan Gin-ge Chen (Sep 25 2018 at 02:12)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/getting%20a%20nicer%20induction%20hypothesis%20from%20finset.induction/near/134565383):
-I managed to massage the goal so that now `ih : Y \ X = S → r hXuY' = r hX` where `hXuY' : X ∪ Y \ X ⊆ E`. This seems closer though I'm still not sure if my current approach is going anywhere or not. Not that I could apply this here yet, but is there any way to take a term of type `a = b → P a`and produce `P b`?
+<p>I managed to massage the goal so that now <code>ih : Y \ X = S → r hXuY' = r hX</code> where <code>hXuY' : X ∪ Y \ X ⊆ E</code>. This seems closer though I'm still not sure if my current approach is going anywhere or not. Not that I could apply this here yet, but is there any way to take a term of type <code>a = b → P a</code>and produce <code>P b</code>?</p>
 
 #### [ Mario Carneiro (Sep 25 2018 at 02:21)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/getting%20a%20nicer%20induction%20hypothesis%20from%20finset.induction/near/134565694):
-You need to generalize `Y` and `X` in the induction
+<p>You need to generalize <code>Y</code> and <code>X</code> in the induction</p>
 
 #### [ Mario Carneiro (Sep 25 2018 at 02:22)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/getting%20a%20nicer%20induction%20hypothesis%20from%20finset.induction/near/134565749):
-Why are you working on subsets of a finset `E` instead of just restricting the type?
+<p>Why are you working on subsets of a finset <code>E</code> instead of just restricting the type?</p>
 
 #### [ Mario Carneiro (Sep 25 2018 at 02:23)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/getting%20a%20nicer%20induction%20hypothesis%20from%20finset.induction/near/134565754):
-You could just assume `fintype α`
+<p>You could just assume <code>fintype α</code></p>
 
 #### [ Bryan Gin-ge Chen (Sep 25 2018 at 02:44)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/getting%20a%20nicer%20induction%20hypothesis%20from%20finset.induction/near/134566466):
-Ah, so that's what `generalizing` does! I wasn't able to make sense of that part of the docstring. As for fintype, I can see that will make things much easier. I just kind of rushed ahead without looking beyond `finset` when I started this. Thanks!
+<p>Ah, so that's what <code>generalizing</code> does! I wasn't able to make sense of that part of the docstring. As for fintype, I can see that will make things much easier. I just kind of rushed ahead without looking beyond <code>finset</code> when I started this. Thanks!</p>
 
 
 {% endraw %}

@@ -12,16 +12,16 @@ permalink: archive/113489newmembers/34322Whydoesmygoalchange.html
 
 {% raw %}
 #### [ Ali Sever (Aug 04 2018 at 12:03)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Why%20does%20my%20goal%20change%3F/near/130885232):
-After using `constructor` my goal was `?m_1 ∉ A`. Then I used `cases h with p hp`, and my goal became `?m_1[_] ∉ A`. What does that mean, and why does it even happen?
+<p>After using <code>constructor</code> my goal was <code>?m_1 ∉ A</code>. Then I used <code>cases h with p hp</code>, and my goal became <code>?m_1[_] ∉ A</code>. What does that mean, and why does it even happen?</p>
 
 #### [ Kenny Lau (Aug 04 2018 at 12:04)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Why%20does%20my%20goal%20change%3F/near/130885281):
-MWE
+<p>MWE</p>
 
 #### [ Mario Carneiro (Aug 04 2018 at 12:24)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Why%20does%20my%20goal%20change%3F/near/130886032):
-That is a representation of a delayed abstraction. It means that the metavariable `?m_1` has been partially instantiated, although it still hasn't figured out what it should be yet
+<p>That is a representation of a delayed abstraction. It means that the metavariable <code>?m_1</code> has been partially instantiated, although it still hasn't figured out what it should be yet</p>
 
 #### [ Kevin Buzzard (Aug 04 2018 at 13:35)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Why%20does%20my%20goal%20change%3F/near/130888106):
-Ali I think it's an unwise idea in general to have metavariables in your goals. Presumably you have more than one goal at this point, and another goal is probably asking you what the metavariable is. You might want to fill in some earlier hole.
+<p>Ali I think it's an unwise idea in general to have metavariables in your goals. Presumably you have more than one goal at this point, and another goal is probably asking you what the metavariable is. You might want to fill in some earlier hole.</p>
 
 
 {% endraw %}

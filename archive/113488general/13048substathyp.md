@@ -12,117 +12,116 @@ permalink: archive/113488general/13048substathyp.html
 
 {% raw %}
 #### [ Johan Commelin (Sep 07 2018 at 10:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subst%20at%20hyp/near/133497289):
-Could we have `subst foobar at hyp` for substituting in the hypotheses of the local context? Currently I am using `repeat {rw foobar at hyp}` which feels a bit verbose...
+<p>Could we have <code>subst foobar at hyp</code> for substituting in the hypotheses of the local context? Currently I am using <code>repeat {rw foobar at hyp}</code> which feels a bit verbose...</p>
 
 #### [ Kenny Lau (Sep 07 2018 at 10:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subst%20at%20hyp/near/133497352):
-`subst foobar`
+<p><code>subst foobar</code></p>
 
 #### [ Chris Hughes (Sep 07 2018 at 10:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subst%20at%20hyp/near/133497411):
-What about `simp only [foobar] at hyp`
+<p>What about <code>simp only [foobar] at hyp</code></p>
 
 #### [ Johan Commelin (Sep 07 2018 at 10:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subst%20at%20hyp/near/133497450):
-aah never mind. `subst` is only for local constants. I wanted to substitute `x = y` where `x = y` was the result of some proposition.
+<p>aah never mind. <code>subst</code> is only for local constants. I wanted to substitute <code>x = y</code> where <code>x = y</code> was the result of some proposition.</p>
 
 #### [ Johan Commelin (Sep 07 2018 at 10:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subst%20at%20hyp/near/133497493):
-`simp only` works!
+<p><code>simp only</code> works!</p>
 
 #### [ Kenny Lau (Sep 07 2018 at 10:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subst%20at%20hyp/near/133497565):
-MWE?
+<p>MWE?</p>
 
 #### [ Johan Commelin (Sep 07 2018 at 10:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subst%20at%20hyp/near/133497570):
-https://gist.github.com/jcommelin/2e031b5446ca54089576ea9f66f12abf
+<p><a href="https://gist.github.com/jcommelin/2e031b5446ca54089576ea9f66f12abf" target="_blank" title="https://gist.github.com/jcommelin/2e031b5446ca54089576ea9f66f12abf">https://gist.github.com/jcommelin/2e031b5446ca54089576ea9f66f12abf</a></p>
 
 #### [ Kenny Lau (Sep 07 2018 at 10:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subst%20at%20hyp/near/133497619):
-?
+<p>?</p>
 
 #### [ Johan Commelin (Sep 07 2018 at 10:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subst%20at%20hyp/near/133497678):
-Right, so now you only see the `simp`s. For the `repeat {rw ...}` you have to look in the history.
+<p>Right, so now you only see the <code>simp</code>s. For the <code>repeat {rw ...}</code> you have to look in the history.</p>
 
 #### [ Johan Commelin (Sep 07 2018 at 10:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subst%20at%20hyp/near/133497681):
-Basically I'm challenging you to golf it :lol:
+<p>Basically I'm challenging you to golf it <span class="emoji emoji-1f606" title="lol">:lol:</span></p>
 
 #### [ Kenny Lau (Sep 07 2018 at 10:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subst%20at%20hyp/near/133497852):
-what import is allowed?
+<p>what import is allowed?</p>
 
 #### [ Johan Commelin (Sep 07 2018 at 10:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subst%20at%20hyp/near/133497883):
-I don't really care
+<p>I don't really care</p>
 
 #### [ Johan Commelin (Sep 07 2018 at 10:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subst%20at%20hyp/near/133497892):
-What would you want to use? `tidy`?
+<p>What would you want to use? <code>tidy</code>?</p>
 
 #### [ Kenny Lau (Sep 07 2018 at 10:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subst%20at%20hyp/near/133497943):
-you didn't import any file from mathlib, so I can't use any mathlib tactic
+<p>you didn't import any file from mathlib, so I can't use any mathlib tactic</p>
 
 #### [ Johan Commelin (Sep 07 2018 at 10:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subst%20at%20hyp/near/133497962):
-Wasnt `have ... simp at this ... exact this` some sort of idiom that can be golfed into a `simpa`-oneliner? I tried but failed.
+<p>Wasnt <code>have ... simp at this ... exact this</code> some sort of idiom that can be golfed into a <code>simpa</code>-oneliner? I tried but failed.</p>
 
 #### [ Reid Barton (Sep 07 2018 at 10:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subst%20at%20hyp/near/133498111):
-`simpa using this`
+<p><code>simpa using this</code></p>
 
 #### [ Reid Barton (Sep 07 2018 at 10:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subst%20at%20hyp/near/133498115):
-Or rather `simpa using ...`
+<p>Or rather <code>simpa using ...</code></p>
 
 #### [ Johan Commelin (Sep 07 2018 at 10:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subst%20at%20hyp/near/133498231):
-And what do I need to import to get `simpa`?
+<p>And what do I need to import to get <code>simpa</code>?</p>
 
 #### [ Reid Barton (Sep 07 2018 at 10:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subst%20at%20hyp/near/133498273):
-My attempt: https://gist.github.com/rwbarton/b79b804e4bff300a5aa2a4ec2951c55e
+<p>My attempt: <a href="https://gist.github.com/rwbarton/b79b804e4bff300a5aa2a4ec2951c55e" target="_blank" title="https://gist.github.com/rwbarton/b79b804e4bff300a5aa2a4ec2951c55e">https://gist.github.com/rwbarton/b79b804e4bff300a5aa2a4ec2951c55e</a></p>
 
 #### [ Reid Barton (Sep 07 2018 at 10:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subst%20at%20hyp/near/133498276):
-Anything in mathlib, but say `tactic.interactive`
+<p>Anything in mathlib, but say <code>tactic.interactive</code></p>
 
 #### [ Kenny Lau (Sep 07 2018 at 10:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subst%20at%20hyp/near/133498303):
-```lean
-import tactic.interactive
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">interactive</span>
 
-universe u
+<span class="kn">universe</span> <span class="n">u</span>
 
-namespace eckmann_hilton
-variables (X : Type u)
+<span class="kn">namespace</span> <span class="n">eckmann_hilton</span>
+<span class="kn">variables</span> <span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span>
 
-local notation a `<`m`>` b := @has_mul.mul X m a b
+<span class="n">local</span> <span class="kn">notation</span> <span class="n">a</span> <span class="bp">`&lt;`</span><span class="n">m</span><span class="bp">`&gt;`</span> <span class="n">b</span> <span class="o">:=</span> <span class="bp">@</span><span class="n">has_mul</span><span class="bp">.</span><span class="n">mul</span> <span class="n">X</span> <span class="n">m</span> <span class="n">a</span> <span class="n">b</span>
 
-class is_unital [m : has_mul X] [e : has_one X] : Prop :=
-(one_mul : ∀ x : X, (e.one <m> x) = x)
-(mul_one : ∀ x : X, (x <m> e.one) = x)
+<span class="n">class</span> <span class="n">is_unital</span> <span class="o">[</span><span class="n">m</span> <span class="o">:</span> <span class="n">has_mul</span> <span class="n">X</span><span class="o">]</span> <span class="o">[</span><span class="n">e</span> <span class="o">:</span> <span class="n">has_one</span> <span class="n">X</span><span class="o">]</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">one_mul</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span> <span class="o">:</span> <span class="n">X</span><span class="o">,</span> <span class="o">(</span><span class="n">e</span><span class="bp">.</span><span class="n">one</span> <span class="bp">&lt;</span><span class="n">m</span><span class="bp">&gt;</span> <span class="n">x</span><span class="o">)</span> <span class="bp">=</span> <span class="n">x</span><span class="o">)</span>
+<span class="o">(</span><span class="n">mul_one</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span> <span class="o">:</span> <span class="n">X</span><span class="o">,</span> <span class="o">(</span><span class="n">x</span> <span class="bp">&lt;</span><span class="n">m</span><span class="bp">&gt;</span> <span class="n">e</span><span class="bp">.</span><span class="n">one</span><span class="o">)</span> <span class="bp">=</span> <span class="n">x</span><span class="o">)</span>
 
-attribute [simp] is_unital.one_mul is_unital.mul_one
+<span class="n">attribute</span> <span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="n">is_unital</span><span class="bp">.</span><span class="n">one_mul</span> <span class="n">is_unital</span><span class="bp">.</span><span class="n">mul_one</span>
 
-variables {X} {m₁ : has_mul X} {e₁ : has_one X} {m₂ : has_mul X} {e₂ : has_one X}
-variables (h₁ : @is_unital X m₁ e₁) (h₂ : @is_unital X m₂ e₂)
-variables (distrib : ∀ a b c d, ((a <m₂> b) <m₁> (c <m₂> d)) = ((a <m₁> c) <m₂> (b <m₁> d)))
-include h₁ h₂ distrib
+<span class="kn">variables</span> <span class="o">{</span><span class="n">X</span><span class="o">}</span> <span class="o">{</span><span class="n">m₁</span> <span class="o">:</span> <span class="n">has_mul</span> <span class="n">X</span><span class="o">}</span> <span class="o">{</span><span class="n">e₁</span> <span class="o">:</span> <span class="n">has_one</span> <span class="n">X</span><span class="o">}</span> <span class="o">{</span><span class="n">m₂</span> <span class="o">:</span> <span class="n">has_mul</span> <span class="n">X</span><span class="o">}</span> <span class="o">{</span><span class="n">e₂</span> <span class="o">:</span> <span class="n">has_one</span> <span class="n">X</span><span class="o">}</span>
+<span class="kn">variables</span> <span class="o">(</span><span class="n">h₁</span> <span class="o">:</span> <span class="bp">@</span><span class="n">is_unital</span> <span class="n">X</span> <span class="n">m₁</span> <span class="n">e₁</span><span class="o">)</span> <span class="o">(</span><span class="n">h₂</span> <span class="o">:</span> <span class="bp">@</span><span class="n">is_unital</span> <span class="n">X</span> <span class="n">m₂</span> <span class="n">e₂</span><span class="o">)</span>
+<span class="kn">variables</span> <span class="o">(</span><span class="n">distrib</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="n">d</span><span class="o">,</span> <span class="o">((</span><span class="n">a</span> <span class="bp">&lt;</span><span class="n">m₂</span><span class="bp">&gt;</span> <span class="n">b</span><span class="o">)</span> <span class="bp">&lt;</span><span class="n">m₁</span><span class="bp">&gt;</span> <span class="o">(</span><span class="n">c</span> <span class="bp">&lt;</span><span class="n">m₂</span><span class="bp">&gt;</span> <span class="n">d</span><span class="o">))</span> <span class="bp">=</span> <span class="o">((</span><span class="n">a</span> <span class="bp">&lt;</span><span class="n">m₁</span><span class="bp">&gt;</span> <span class="n">c</span><span class="o">)</span> <span class="bp">&lt;</span><span class="n">m₂</span><span class="bp">&gt;</span> <span class="o">(</span><span class="n">b</span> <span class="bp">&lt;</span><span class="n">m₁</span><span class="bp">&gt;</span> <span class="n">d</span><span class="o">)))</span>
+<span class="n">include</span> <span class="n">h₁</span> <span class="n">h₂</span> <span class="n">distrib</span>
 
-lemma one : (e₁.one = e₂.one) :=
-by simpa using distrib e₂.one e₁.one e₁.one e₂.one
+<span class="kn">lemma</span> <span class="n">one</span> <span class="o">:</span> <span class="o">(</span><span class="n">e₁</span><span class="bp">.</span><span class="n">one</span> <span class="bp">=</span> <span class="n">e₂</span><span class="bp">.</span><span class="n">one</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">simpa</span> <span class="kn">using</span> <span class="n">distrib</span> <span class="n">e₂</span><span class="bp">.</span><span class="n">one</span> <span class="n">e₁</span><span class="bp">.</span><span class="n">one</span> <span class="n">e₁</span><span class="bp">.</span><span class="n">one</span> <span class="n">e₂</span><span class="bp">.</span><span class="n">one</span>
 
-lemma mul : (m₁.mul = m₂.mul) :=
-by funext a b; have := distrib a e₁.one e₁.one b;
-simp at this; simpa [one h₁ h₂ distrib] using this
+<span class="kn">lemma</span> <span class="n">mul</span> <span class="o">:</span> <span class="o">(</span><span class="n">m₁</span><span class="bp">.</span><span class="n">mul</span> <span class="bp">=</span> <span class="n">m₂</span><span class="bp">.</span><span class="n">mul</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">funext</span> <span class="n">a</span> <span class="n">b</span><span class="bp">;</span> <span class="k">have</span> <span class="o">:=</span> <span class="n">distrib</span> <span class="n">a</span> <span class="n">e₁</span><span class="bp">.</span><span class="n">one</span> <span class="n">e₁</span><span class="bp">.</span><span class="n">one</span> <span class="n">b</span><span class="bp">;</span>
+<span class="n">simp</span> <span class="n">at</span> <span class="n">this</span><span class="bp">;</span> <span class="n">simpa</span> <span class="o">[</span><span class="n">one</span> <span class="n">h₁</span> <span class="n">h₂</span> <span class="n">distrib</span><span class="o">]</span> <span class="kn">using</span> <span class="n">this</span>
 
-lemma mul_comm : is_commutative _ m₂.mul :=
-⟨λ a b, by simpa [mul h₁ h₂ distrib] using distrib e₂.one a b e₂.one⟩
+<span class="kn">lemma</span> <span class="n">mul_comm</span> <span class="o">:</span> <span class="n">is_commutative</span> <span class="bp">_</span> <span class="n">m₂</span><span class="bp">.</span><span class="n">mul</span> <span class="o">:=</span>
+<span class="bp">⟨λ</span> <span class="n">a</span> <span class="n">b</span><span class="o">,</span> <span class="k">by</span> <span class="n">simpa</span> <span class="o">[</span><span class="n">mul</span> <span class="n">h₁</span> <span class="n">h₂</span> <span class="n">distrib</span><span class="o">]</span> <span class="kn">using</span> <span class="n">distrib</span> <span class="n">e₂</span><span class="bp">.</span><span class="n">one</span> <span class="n">a</span> <span class="n">b</span> <span class="n">e₂</span><span class="bp">.</span><span class="n">one</span><span class="bp">⟩</span>
 
-lemma mul_assoc : is_associative _ m₂.mul :=
-⟨λ a b c, by simpa [mul h₁ h₂ distrib] using distrib a b e₂.one c⟩
+<span class="kn">lemma</span> <span class="n">mul_assoc</span> <span class="o">:</span> <span class="n">is_associative</span> <span class="bp">_</span> <span class="n">m₂</span><span class="bp">.</span><span class="n">mul</span> <span class="o">:=</span>
+<span class="bp">⟨λ</span> <span class="n">a</span> <span class="n">b</span> <span class="n">c</span><span class="o">,</span> <span class="k">by</span> <span class="n">simpa</span> <span class="o">[</span><span class="n">mul</span> <span class="n">h₁</span> <span class="n">h₂</span> <span class="n">distrib</span><span class="o">]</span> <span class="kn">using</span> <span class="n">distrib</span> <span class="n">a</span> <span class="n">b</span> <span class="n">e₂</span><span class="bp">.</span><span class="n">one</span> <span class="n">c</span><span class="bp">⟩</span>
 
-instance : comm_monoid X :=
-{ mul_comm := (mul_comm h₁ h₂ distrib).comm,
-  mul_assoc := (mul_assoc h₁ h₂ distrib).assoc,
-  ..m₂, ..e₂, ..h₂ }
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">comm_monoid</span> <span class="n">X</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">mul_comm</span> <span class="o">:=</span> <span class="o">(</span><span class="n">mul_comm</span> <span class="n">h₁</span> <span class="n">h₂</span> <span class="n">distrib</span><span class="o">)</span><span class="bp">.</span><span class="n">comm</span><span class="o">,</span>
+  <span class="n">mul_assoc</span> <span class="o">:=</span> <span class="o">(</span><span class="n">mul_assoc</span> <span class="n">h₁</span> <span class="n">h₂</span> <span class="n">distrib</span><span class="o">)</span><span class="bp">.</span><span class="n">assoc</span><span class="o">,</span>
+  <span class="bp">..</span><span class="n">m₂</span><span class="o">,</span> <span class="bp">..</span><span class="n">e₂</span><span class="o">,</span> <span class="bp">..</span><span class="n">h₂</span> <span class="o">}</span>
 
-end eckmann_hilton
-```
+<span class="kn">end</span> <span class="n">eckmann_hilton</span>
+</pre></div>
 
 #### [ Johan Commelin (Sep 07 2018 at 11:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subst%20at%20hyp/near/133498562):
-Well done!
+<p>Well done!</p>
 
 #### [ Johan Commelin (Sep 07 2018 at 11:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subst%20at%20hyp/near/133498636):
-@**Kenny Lau** https://gist.github.com/jcommelin/2e031b5446ca54089576ea9f66f12abf
-I added your name.
+<p><span class="user-mention" data-user-id="110064">@Kenny Lau</span> <a href="https://gist.github.com/jcommelin/2e031b5446ca54089576ea9f66f12abf" target="_blank" title="https://gist.github.com/jcommelin/2e031b5446ca54089576ea9f66f12abf">https://gist.github.com/jcommelin/2e031b5446ca54089576ea9f66f12abf</a><br>
+I added your name.</p>
 
 #### [ Kenny Lau (Sep 07 2018 at 11:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subst%20at%20hyp/near/133498642):
-lol
+<p>lol</p>
 
 
 {% endraw %}

@@ -12,78 +12,75 @@ permalink: archive/113488general/93871instancemaxdepth.html
 
 {% raw %}
 #### [ Sebastien Gouezel (Nov 10 2018 at 17:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/instance_max_depth/near/147440040):
-I am really proud of me :) Just encountered the famous message `maximum class-instance resolution depth has been reached`. And indeed it worked by increasing it to 38. I can't really figure out why, however, since this looks like a trivial instance to me:
-```lean
-set_option class.instance_max_depth 38
-instance foo [metric_space α] [compact_space α] [metric_space β] [compact_space β]: 
-  compact_space ((α ⊕ β) × (α ⊕ β)) := by apply_instance
-```
-I have already registered the instances that the product and disjoint union of compact spaces are compact spaces.
+<p>I am really proud of me :) Just encountered the famous message <code>maximum class-instance resolution depth has been reached</code>. And indeed it worked by increasing it to 38. I can't really figure out why, however, since this looks like a trivial instance to me:</p>
+<div class="codehilite"><pre><span></span><span class="kn">set_option</span> <span class="n">class</span><span class="bp">.</span><span class="n">instance_max_depth</span> <span class="mi">38</span>
+<span class="kn">instance</span> <span class="n">foo</span> <span class="o">[</span><span class="n">metric_space</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">compact_space</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">metric_space</span> <span class="n">β</span><span class="o">]</span> <span class="o">[</span><span class="n">compact_space</span> <span class="n">β</span><span class="o">]:</span>
+  <span class="n">compact_space</span> <span class="o">((</span><span class="n">α</span> <span class="err">⊕</span> <span class="n">β</span><span class="o">)</span> <span class="bp">×</span> <span class="o">(</span><span class="n">α</span> <span class="err">⊕</span> <span class="n">β</span><span class="o">))</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">apply_instance</span>
+</pre></div>
+
+
+<p>I have already registered the instances that the product and disjoint union of compact spaces are compact spaces.</p>
 
 #### [ Sebastien Gouezel (Nov 10 2018 at 18:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/instance_max_depth/near/147440126):
-Even better: if I replace the metric spaces with topological spaces, I have to increase the depth even more, but in the end there is a failure, with the message
-```lean
-kernel failed to type check declaration 'foo' this is usually due to a buggy tactic or a bug in the builtin elaborator
-elaborated type:
-  ∀ (α : Type u) (β : Type v) [_inst_1 : metric_space α] [_inst_2 : compact_space α] [_inst_3 : inhabited α]
-  [_inst_4 : metric_space β] [_inst_5 : compact_space β] [_inst_6 : inhabited β] [_inst_7 : topological_space α]
-  [_inst_8 : compact_space α] [_inst_9 : topological_space β] [_inst_10 : compact_space β],
-    compact_space ((α ⊕ β) × (α ⊕ β))
-elaborated value:
-  λ (α : Type u) (β : Type v) [_inst_1 : metric_space α] [_inst_2 : compact_space α] [_inst_3 : inhabited α]
-  [_inst_4 : metric_space β] [_inst_5 : compact_space β] [_inst_6 : inhabited β] [_inst_7 : topological_space α]
-  [_inst_8 : compact_space α] [_inst_9 : topological_space β] [_inst_10 : compact_space β], prod.compact_space
-nested exception message:
-type mismatch at application
-  @prod.compact_space (α ⊕ β) (α ⊕ β)
-    (@uniform_space.to_topological_space (α ⊕ β)
-       (@glouglou.sum.uniform_space α β (@metric_space.to_uniform_space' α _inst_1)
-          (@metric_space.to_uniform_space' β _inst_4)
-          (@metric_space.to_uniform_space' α _inst_1)
-          (@metric_space.to_uniform_space' β _inst_4)))
-    (@uniform_space.to_topological_space (α ⊕ β)
-       (@glouglou.sum.uniform_space α β (@metric_space.to_uniform_space' α _inst_1)
-          (@metric_space.to_uniform_space' β _inst_4)
-          (@metric_space.to_uniform_space' α _inst_1)
-          (@metric_space.to_uniform_space' β _inst_4)))
-    (@sum.compact_space α β _inst_7 _inst_9 _inst_8 _inst_10)
-term
-  @sum.compact_space α β _inst_7 _inst_9 _inst_8 _inst_10
-has type
-  @compact_space (α ⊕ β) (@sum.topological_space α β _inst_7 _inst_9)
-but is expected to have type
-  @compact_space (α ⊕ β)
-    (@uniform_space.to_topological_space (α ⊕ β)
-       (@glouglou.sum.uniform_space α β (@metric_space.to_uniform_space' α _inst_1)
-          (@metric_space.to_uniform_space' β _inst_4)
-          (@metric_space.to_uniform_space' α _inst_1)
-          (@metric_space.to_uniform_space' β _inst_4)))
-```
+<p>Even better: if I replace the metric spaces with topological spaces, I have to increase the depth even more, but in the end there is a failure, with the message</p>
+<div class="codehilite"><pre><span></span><span class="n">kernel</span> <span class="n">failed</span> <span class="n">to</span> <span class="n">type</span> <span class="kn">check</span> <span class="n">declaration</span> <span class="err">&#39;</span><span class="n">foo&#39;</span> <span class="n">this</span> <span class="n">is</span> <span class="n">usually</span> <span class="n">due</span> <span class="n">to</span> <span class="n">a</span> <span class="n">buggy</span> <span class="n">tactic</span> <span class="n">or</span> <span class="n">a</span> <span class="n">bug</span> <span class="k">in</span> <span class="n">the</span> <span class="n">builtin</span> <span class="n">elaborator</span>
+<span class="n">elaborated</span> <span class="n">type</span><span class="o">:</span>
+  <span class="bp">∀</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">(</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">)</span> <span class="o">[</span><span class="bp">_</span><span class="n">inst_1</span> <span class="o">:</span> <span class="n">metric_space</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="bp">_</span><span class="n">inst_2</span> <span class="o">:</span> <span class="n">compact_space</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="bp">_</span><span class="n">inst_3</span> <span class="o">:</span> <span class="n">inhabited</span> <span class="n">α</span><span class="o">]</span>
+  <span class="o">[</span><span class="bp">_</span><span class="n">inst_4</span> <span class="o">:</span> <span class="n">metric_space</span> <span class="n">β</span><span class="o">]</span> <span class="o">[</span><span class="bp">_</span><span class="n">inst_5</span> <span class="o">:</span> <span class="n">compact_space</span> <span class="n">β</span><span class="o">]</span> <span class="o">[</span><span class="bp">_</span><span class="n">inst_6</span> <span class="o">:</span> <span class="n">inhabited</span> <span class="n">β</span><span class="o">]</span> <span class="o">[</span><span class="bp">_</span><span class="n">inst_7</span> <span class="o">:</span> <span class="n">topological_space</span> <span class="n">α</span><span class="o">]</span>
+  <span class="o">[</span><span class="bp">_</span><span class="n">inst_8</span> <span class="o">:</span> <span class="n">compact_space</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="bp">_</span><span class="n">inst_9</span> <span class="o">:</span> <span class="n">topological_space</span> <span class="n">β</span><span class="o">]</span> <span class="o">[</span><span class="bp">_</span><span class="n">inst_10</span> <span class="o">:</span> <span class="n">compact_space</span> <span class="n">β</span><span class="o">],</span>
+    <span class="n">compact_space</span> <span class="o">((</span><span class="n">α</span> <span class="err">⊕</span> <span class="n">β</span><span class="o">)</span> <span class="bp">×</span> <span class="o">(</span><span class="n">α</span> <span class="err">⊕</span> <span class="n">β</span><span class="o">))</span>
+<span class="n">elaborated</span> <span class="n">value</span><span class="o">:</span>
+  <span class="bp">λ</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">(</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">)</span> <span class="o">[</span><span class="bp">_</span><span class="n">inst_1</span> <span class="o">:</span> <span class="n">metric_space</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="bp">_</span><span class="n">inst_2</span> <span class="o">:</span> <span class="n">compact_space</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="bp">_</span><span class="n">inst_3</span> <span class="o">:</span> <span class="n">inhabited</span> <span class="n">α</span><span class="o">]</span>
+  <span class="o">[</span><span class="bp">_</span><span class="n">inst_4</span> <span class="o">:</span> <span class="n">metric_space</span> <span class="n">β</span><span class="o">]</span> <span class="o">[</span><span class="bp">_</span><span class="n">inst_5</span> <span class="o">:</span> <span class="n">compact_space</span> <span class="n">β</span><span class="o">]</span> <span class="o">[</span><span class="bp">_</span><span class="n">inst_6</span> <span class="o">:</span> <span class="n">inhabited</span> <span class="n">β</span><span class="o">]</span> <span class="o">[</span><span class="bp">_</span><span class="n">inst_7</span> <span class="o">:</span> <span class="n">topological_space</span> <span class="n">α</span><span class="o">]</span>
+  <span class="o">[</span><span class="bp">_</span><span class="n">inst_8</span> <span class="o">:</span> <span class="n">compact_space</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="bp">_</span><span class="n">inst_9</span> <span class="o">:</span> <span class="n">topological_space</span> <span class="n">β</span><span class="o">]</span> <span class="o">[</span><span class="bp">_</span><span class="n">inst_10</span> <span class="o">:</span> <span class="n">compact_space</span> <span class="n">β</span><span class="o">],</span> <span class="n">prod</span><span class="bp">.</span><span class="n">compact_space</span>
+<span class="n">nested</span> <span class="n">exception</span> <span class="n">message</span><span class="o">:</span>
+<span class="n">type</span> <span class="n">mismatch</span> <span class="n">at</span> <span class="n">application</span>
+  <span class="bp">@</span><span class="n">prod</span><span class="bp">.</span><span class="n">compact_space</span> <span class="o">(</span><span class="n">α</span> <span class="err">⊕</span> <span class="n">β</span><span class="o">)</span> <span class="o">(</span><span class="n">α</span> <span class="err">⊕</span> <span class="n">β</span><span class="o">)</span>
+    <span class="o">(</span><span class="bp">@</span><span class="n">uniform_space</span><span class="bp">.</span><span class="n">to_topological_space</span> <span class="o">(</span><span class="n">α</span> <span class="err">⊕</span> <span class="n">β</span><span class="o">)</span>
+       <span class="o">(</span><span class="bp">@</span><span class="n">glouglou</span><span class="bp">.</span><span class="n">sum</span><span class="bp">.</span><span class="n">uniform_space</span> <span class="n">α</span> <span class="n">β</span> <span class="o">(</span><span class="bp">@</span><span class="n">metric_space</span><span class="bp">.</span><span class="n">to_uniform_space&#39;</span> <span class="n">α</span> <span class="bp">_</span><span class="n">inst_1</span><span class="o">)</span>
+          <span class="o">(</span><span class="bp">@</span><span class="n">metric_space</span><span class="bp">.</span><span class="n">to_uniform_space&#39;</span> <span class="n">β</span> <span class="bp">_</span><span class="n">inst_4</span><span class="o">)</span>
+          <span class="o">(</span><span class="bp">@</span><span class="n">metric_space</span><span class="bp">.</span><span class="n">to_uniform_space&#39;</span> <span class="n">α</span> <span class="bp">_</span><span class="n">inst_1</span><span class="o">)</span>
+          <span class="o">(</span><span class="bp">@</span><span class="n">metric_space</span><span class="bp">.</span><span class="n">to_uniform_space&#39;</span> <span class="n">β</span> <span class="bp">_</span><span class="n">inst_4</span><span class="o">)))</span>
+    <span class="o">(</span><span class="bp">@</span><span class="n">uniform_space</span><span class="bp">.</span><span class="n">to_topological_space</span> <span class="o">(</span><span class="n">α</span> <span class="err">⊕</span> <span class="n">β</span><span class="o">)</span>
+       <span class="o">(</span><span class="bp">@</span><span class="n">glouglou</span><span class="bp">.</span><span class="n">sum</span><span class="bp">.</span><span class="n">uniform_space</span> <span class="n">α</span> <span class="n">β</span> <span class="o">(</span><span class="bp">@</span><span class="n">metric_space</span><span class="bp">.</span><span class="n">to_uniform_space&#39;</span> <span class="n">α</span> <span class="bp">_</span><span class="n">inst_1</span><span class="o">)</span>
+          <span class="o">(</span><span class="bp">@</span><span class="n">metric_space</span><span class="bp">.</span><span class="n">to_uniform_space&#39;</span> <span class="n">β</span> <span class="bp">_</span><span class="n">inst_4</span><span class="o">)</span>
+          <span class="o">(</span><span class="bp">@</span><span class="n">metric_space</span><span class="bp">.</span><span class="n">to_uniform_space&#39;</span> <span class="n">α</span> <span class="bp">_</span><span class="n">inst_1</span><span class="o">)</span>
+          <span class="o">(</span><span class="bp">@</span><span class="n">metric_space</span><span class="bp">.</span><span class="n">to_uniform_space&#39;</span> <span class="n">β</span> <span class="bp">_</span><span class="n">inst_4</span><span class="o">)))</span>
+    <span class="o">(</span><span class="bp">@</span><span class="n">sum</span><span class="bp">.</span><span class="n">compact_space</span> <span class="n">α</span> <span class="n">β</span> <span class="bp">_</span><span class="n">inst_7</span> <span class="bp">_</span><span class="n">inst_9</span> <span class="bp">_</span><span class="n">inst_8</span> <span class="bp">_</span><span class="n">inst_10</span><span class="o">)</span>
+<span class="n">term</span>
+  <span class="bp">@</span><span class="n">sum</span><span class="bp">.</span><span class="n">compact_space</span> <span class="n">α</span> <span class="n">β</span> <span class="bp">_</span><span class="n">inst_7</span> <span class="bp">_</span><span class="n">inst_9</span> <span class="bp">_</span><span class="n">inst_8</span> <span class="bp">_</span><span class="n">inst_10</span>
+<span class="n">has</span> <span class="n">type</span>
+  <span class="bp">@</span><span class="n">compact_space</span> <span class="o">(</span><span class="n">α</span> <span class="err">⊕</span> <span class="n">β</span><span class="o">)</span> <span class="o">(</span><span class="bp">@</span><span class="n">sum</span><span class="bp">.</span><span class="n">topological_space</span> <span class="n">α</span> <span class="n">β</span> <span class="bp">_</span><span class="n">inst_7</span> <span class="bp">_</span><span class="n">inst_9</span><span class="o">)</span>
+<span class="n">but</span> <span class="n">is</span> <span class="n">expected</span> <span class="n">to</span> <span class="k">have</span> <span class="n">type</span>
+  <span class="bp">@</span><span class="n">compact_space</span> <span class="o">(</span><span class="n">α</span> <span class="err">⊕</span> <span class="n">β</span><span class="o">)</span>
+    <span class="o">(</span><span class="bp">@</span><span class="n">uniform_space</span><span class="bp">.</span><span class="n">to_topological_space</span> <span class="o">(</span><span class="n">α</span> <span class="err">⊕</span> <span class="n">β</span><span class="o">)</span>
+       <span class="o">(</span><span class="bp">@</span><span class="n">glouglou</span><span class="bp">.</span><span class="n">sum</span><span class="bp">.</span><span class="n">uniform_space</span> <span class="n">α</span> <span class="n">β</span> <span class="o">(</span><span class="bp">@</span><span class="n">metric_space</span><span class="bp">.</span><span class="n">to_uniform_space&#39;</span> <span class="n">α</span> <span class="bp">_</span><span class="n">inst_1</span><span class="o">)</span>
+          <span class="o">(</span><span class="bp">@</span><span class="n">metric_space</span><span class="bp">.</span><span class="n">to_uniform_space&#39;</span> <span class="n">β</span> <span class="bp">_</span><span class="n">inst_4</span><span class="o">)</span>
+          <span class="o">(</span><span class="bp">@</span><span class="n">metric_space</span><span class="bp">.</span><span class="n">to_uniform_space&#39;</span> <span class="n">α</span> <span class="bp">_</span><span class="n">inst_1</span><span class="o">)</span>
+          <span class="o">(</span><span class="bp">@</span><span class="n">metric_space</span><span class="bp">.</span><span class="n">to_uniform_space&#39;</span> <span class="n">β</span> <span class="bp">_</span><span class="n">inst_4</span><span class="o">)))</span>
+</pre></div>
 
 #### [ Kenny Lau (Nov 10 2018 at 18:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/instance_max_depth/near/147440192):
-I had something like 100 in the tensor product
+<p>I had something like 100 in the tensor product</p>
 
 #### [ Kevin Buzzard (Nov 10 2018 at 19:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/instance_max_depth/near/147442624):
-yeah, thirty eight shmirty eight. I've seen over 100 too. 
+<p>yeah, thirty eight shmirty eight. I've seen over 100 too. </p>
+<p>What I would really like to know is <em>why</em>. I had this vague idea that somehow short cutting type class inference by defining some intermediate instances explicitly was a way to perhaps solve this (indeed I had sort-of suspected that stuff like <a href="https://github.com/leanprover/mathlib/blob/891dfbbebba8a0269072460785172c294935af22/data/real/basic.lean#L26" target="_blank" title="https://github.com/leanprover/mathlib/blob/891dfbbebba8a0269072460785172c294935af22/data/real/basic.lean#L26">this</a> was to stop that sort of thing from happening) but you have what looks like a fairly MWE...wait though, I can't reproduce. What do you have that I don't?</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">analysis</span><span class="bp">.</span><span class="n">metric_space</span>
 
-What I would really like to know is *why*. I had this vague idea that somehow short cutting type class inference by defining some intermediate instances explicitly was a way to perhaps solve this (indeed I had sort-of suspected that stuff like [this](https://github.com/leanprover/mathlib/blob/891dfbbebba8a0269072460785172c294935af22/data/real/basic.lean#L26) was to stop that sort of thing from happening) but you have what looks like a fairly MWE...wait though, I can't reproduce. What do you have that I don't?
+<span class="kn">variables</span> <span class="o">(</span><span class="n">α</span> <span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span>
 
-```lean
-import analysis.metric_space
-
-variables (α β : Type)
-
-set_option class.instance_max_depth 38
-instance foo [metric_space α] [compact_space α] [metric_space β] [compact_space β] :
-compact_space ((α ⊕ β) × (α ⊕ β)) :=
-by apply_instance -- tactic.mk_instance failed to generate instance 
-```
+<span class="kn">set_option</span> <span class="n">class</span><span class="bp">.</span><span class="n">instance_max_depth</span> <span class="mi">38</span>
+<span class="kn">instance</span> <span class="n">foo</span> <span class="o">[</span><span class="n">metric_space</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">compact_space</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">metric_space</span> <span class="n">β</span><span class="o">]</span> <span class="o">[</span><span class="n">compact_space</span> <span class="n">β</span><span class="o">]</span> <span class="o">:</span>
+<span class="n">compact_space</span> <span class="o">((</span><span class="n">α</span> <span class="err">⊕</span> <span class="n">β</span><span class="o">)</span> <span class="bp">×</span> <span class="o">(</span><span class="n">α</span> <span class="err">⊕</span> <span class="n">β</span><span class="o">))</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">apply_instance</span> <span class="c1">-- tactic.mk_instance failed to generate instance</span>
+</pre></div>
 
 #### [ Kevin Buzzard (Nov 10 2018 at 19:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/instance_max_depth/near/147442679):
-https://leanprover.zulipchat.com/#narrow/stream/113488-general/subject/maximum.20class-instance.20resolution.20depth.20has.20been.20reached/near/125643888 ;-)
+<p><a href="#narrow/stream/113488-general/subject/maximum.20class-instance.20resolution.20depth.20has.20been.20reached/near/125643888" title="#narrow/stream/113488-general/subject/maximum.20class-instance.20resolution.20depth.20has.20been.20reached/near/125643888">https://leanprover.zulipchat.com/#narrow/stream/113488-general/subject/maximum.20class-instance.20resolution.20depth.20has.20been.20reached/near/125643888</a> ;-)</p>
 
 #### [ Sebastien Gouezel (Nov 11 2018 at 09:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/instance_max_depth/near/147469609):
-This is not a MWE as the facts that a sum and a product of compact spaces are compact is not in mathlib (yet). I tried to cook up a MWE with just these instances, but then the instance_max_depth is not reached when I deal with the above example of `(α ⊕ β) × (α ⊕ β)` . I guess the problem comes from more clutter in my files...
+<p>This is not a MWE as the facts that a sum and a product of compact spaces are compact is not in mathlib (yet). I tried to cook up a MWE with just these instances, but then the instance_max_depth is not reached when I deal with the above example of <code>(α ⊕ β) × (α ⊕ β)</code> . I guess the problem comes from more clutter in my files...</p>
 
 
 {% endraw %}

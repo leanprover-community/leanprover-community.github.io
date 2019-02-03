@@ -12,2780 +12,2762 @@ permalink: archive/116395maths/85554ZFCequality.html
 
 {% raw %}
 #### [ Kevin Buzzard (May 28 2018 at 11:31)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127197270):
-There were a couple of times in the schemes project when I really had to think "beyond ZFC" -- I had to write down a map, and there were two ways of doing it, and in ZFC they were the *literally the same way* but in Lean they were different. In this example I just chose a random Lean route to model my ZFC thoughts and it got me in to real trouble later.
+<p>There were a couple of times in the schemes project when I really had to think "beyond ZFC" -- I had to write down a map, and there were two ways of doing it, and in ZFC they were the <em>literally the same way</em> but in Lean they were different. In this example I just chose a random Lean route to model my ZFC thoughts and it got me in to real trouble later.</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 11:32)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127197324):
-Here's a naive definition of the image of a morphism in ZFC, translated seamlessly into Lean:
+<p>Here's a naive definition of the image of a morphism in ZFC, translated seamlessly into Lean:</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 11:32)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127197326):
-```lean
-import data.set
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">set</span>
 
--- ZFC-safe! The below code uses only Prop and Type
+<span class="c1">-- ZFC-safe! The below code uses only Prop and Type</span>
 
-variables {X Y : Type} (f : X → Y) (U : set X) 
+<span class="kn">variables</span> <span class="o">{</span><span class="n">X</span> <span class="n">Y</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">X</span> <span class="bp">→</span> <span class="n">Y</span><span class="o">)</span> <span class="o">(</span><span class="n">U</span> <span class="o">:</span> <span class="n">set</span> <span class="n">X</span><span class="o">)</span>
 
-definition image := {y : Y | ∃ x ∈ U, f x = y}
-```
+<span class="kn">definition</span> <span class="n">image</span> <span class="o">:=</span> <span class="o">{</span><span class="n">y</span> <span class="o">:</span> <span class="n">Y</span> <span class="bp">|</span> <span class="bp">∃</span> <span class="n">x</span> <span class="err">∈</span> <span class="n">U</span><span class="o">,</span> <span class="n">f</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">y</span><span class="o">}</span>
+</pre></div>
 
 #### [ Kevin Buzzard (May 28 2018 at 11:33)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127197328):
-And now here's something which doesn't work
+<p>And now here's something which doesn't work</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 11:33)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127197333):
-`theorem they_are_not_defeq : image (@id X) U = U := rfl -- fails`
+<p><code>theorem they_are_not_defeq : image (@id X) U = U := rfl -- fails</code></p>
 
 #### [ Kevin Buzzard (May 28 2018 at 11:33)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127197336):
-Does that mean that my definition of image is wrong?
+<p>Does that mean that my definition of image is wrong?</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 11:33)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127197337):
-Or is there literally no way to make that happen in dependent type theory
+<p>Or is there literally no way to make that happen in dependent type theory</p>
 
 #### [ Kenny Lau (May 28 2018 at 11:34)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127197379):
-they are definitely not defeq
+<p>they are definitely not defeq</p>
 
 #### [ Kenny Lau (May 28 2018 at 11:34)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127197384):
-you see, a set is nothing more than a function to Prop
+<p>you see, a set is nothing more than a function to Prop</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 11:34)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127197385):
-Is that because I am bad at writing the image function?
+<p>Is that because I am bad at writing the image function?</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 11:34)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127197386):
-Can you write a better one for me
+<p>Can you write a better one for me</p>
 
 #### [ Kenny Lau (May 28 2018 at 11:34)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127197387):
-no, it isn't
+<p>no, it isn't</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 11:34)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127197388):
-where they are defeq
+<p>where they are defeq</p>
 
 #### [ Kenny Lau (May 28 2018 at 11:34)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127197391):
-you can't
+<p>you can't</p>
 
 #### [ Kenny Lau (May 28 2018 at 11:34)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127197392):
-you have to have an existential quantifier
+<p>you have to have an existential quantifier</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 11:34)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127197393):
-can you prove that you can't?
+<p>can you prove that you can't?</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 11:34)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127197395):
-in Lean
+<p>in Lean</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 11:35)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127197396):
-3.4.1
+<p>3.4.1</p>
 
 #### [ Mario Carneiro (May 28 2018 at 11:35)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127197403):
-not in lean
+<p>not in lean</p>
 
 #### [ Mario Carneiro (May 28 2018 at 11:35)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127197405):
-it's a metatheorem
+<p>it's a metatheorem</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 11:35)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127197406):
-Great.
+<p>Great.</p>
 
 #### [ Kenny Lau (May 28 2018 at 11:35)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127197408):
-@**Mario Carneiro** can it actually be proved?
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> can it actually be proved?</p>
 
 #### [ Mario Carneiro (May 28 2018 at 11:35)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127197410):
-probably
+<p>probably</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 11:35)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127197411):
-Well you know what
+<p>Well you know what</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 11:35)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127197413):
-I think defeq is rubbish
+<p>I think defeq is rubbish</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 11:35)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127197414):
-because those two sets are *equal*
+<p>because those two sets are <em>equal</em></p>
 
 #### [ Kenny Lau (May 28 2018 at 11:36)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127197452):
-f(x) = x^2 and f(x) = x^2+1-1 are *equal*
+<p>f(x) = x^2 and f(x) = x^2+1-1 are <em>equal</em></p>
 
 #### [ Kevin Buzzard (May 28 2018 at 11:36)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127197453):
-and mathematicians have been thinking of those sets as *equal* since they started formalizing mathematics
+<p>and mathematicians have been thinking of those sets as <em>equal</em> since they started formalizing mathematics</p>
 
 #### [ Kenny Lau (May 28 2018 at 11:36)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127197454):
-but not definitionally equal
+<p>but not definitionally equal</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 11:36)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127197455):
-so what has gone wrong?
+<p>so what has gone wrong?</p>
 
 #### [ Mario Carneiro (May 28 2018 at 11:36)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127197468):
-nothing is wrong
+<p>nothing is wrong</p>
 
 #### [ Mario Carneiro (May 28 2018 at 11:36)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127197470):
-defeq is not ZFC equality
+<p>defeq is not ZFC equality</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 11:36)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127197471):
-Kenny -- the ZFC analogues of the two concepts `U` and `image id U` are *identical*
+<p>Kenny -- the ZFC analogues of the two concepts <code>U</code> and <code>image id U</code> are <em>identical</em></p>
 
 #### [ Kevin Buzzard (May 28 2018 at 11:37)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127197475):
-I mean equal in the purest form
+<p>I mean equal in the purest form</p>
 
 #### [ Kenny Lau (May 28 2018 at 11:37)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127197479):
-are they?
+<p>are they?</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 11:37)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127197480):
-they are indistinguishable with the tools of ZFC
+<p>they are indistinguishable with the tools of ZFC</p>
 
 #### [ Mario Carneiro (May 28 2018 at 11:37)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127197481):
-no, there is more to prove under one definition than the other in ZFC
+<p>no, there is more to prove under one definition than the other in ZFC</p>
 
 #### [ Kenny Lau (May 28 2018 at 11:37)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127197482):
-the latter is `{ y in U | exists x, x = y }`
+<p>the latter is <code>{ y in U | exists x, x = y }</code></p>
 
 #### [ Kevin Buzzard (May 28 2018 at 11:37)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127197483):
-In ZFC they are the same object
+<p>In ZFC they are the same object</p>
 
 #### [ Mario Carneiro (May 28 2018 at 11:37)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127197484):
-in lean they are the same object
+<p>in lean they are the same object</p>
 
 #### [ Kenny Lau (May 28 2018 at 11:37)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127197485):
-sure, but they aren't equal by definition
+<p>sure, but they aren't equal by definition</p>
 
 #### [ Kenny Lau (May 28 2018 at 11:37)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127197486):
-they are equivalent
+<p>they are equivalent</p>
 
 #### [ Kenny Lau (May 28 2018 at 11:37)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127197488):
-`exists x, x = y` is equivalent to `true`
+<p><code>exists x, x = y</code> is equivalent to <code>true</code></p>
 
 #### [ Kevin Buzzard (May 28 2018 at 11:38)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127197531):
-How is one supposed to prove that stupid lemma anyway?
+<p>How is one supposed to prove that stupid lemma anyway?</p>
 
 #### [ Mario Carneiro (May 28 2018 at 11:38)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127197535):
-`ext (by simp)`
+<p><code>ext (by simp)</code></p>
 
 #### [ Mario Carneiro (May 28 2018 at 11:38)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127197539):
-I would guess
+<p>I would guess</p>
 
 #### [ Mario Carneiro (May 28 2018 at 11:38)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127197541):
-actually it's probably already a theorem
+<p>actually it's probably already a theorem</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 11:39)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127197552):
-```lean
--- What actually happens in my head when proving the lemma id(U) = U for sets in Lean.
+<div class="codehilite"><pre><span></span><span class="c1">-- What actually happens in my head when proving the lemma id(U) = U for sets in Lean.</span>
 
-import data.set
+<span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">set</span>
 
--- ZFC-safe! The below code uses only Prop and Type 
--- (I didn't check the imports though)
-variables {X Y : Type} (f : X → Y) (U : set X) 
+<span class="c1">-- ZFC-safe! The below code uses only Prop and Type</span>
+<span class="c1">-- (I didn&#39;t check the imports though)</span>
+<span class="kn">variables</span> <span class="o">{</span><span class="n">X</span> <span class="n">Y</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">X</span> <span class="bp">→</span> <span class="n">Y</span><span class="o">)</span> <span class="o">(</span><span class="n">U</span> <span class="o">:</span> <span class="n">set</span> <span class="n">X</span><span class="o">)</span>
 
-definition image := {y : Y | ∃ x ∈ U, f x = y}
+<span class="kn">definition</span> <span class="n">image</span> <span class="o">:=</span> <span class="o">{</span><span class="n">y</span> <span class="o">:</span> <span class="n">Y</span> <span class="bp">|</span> <span class="bp">∃</span> <span class="n">x</span> <span class="err">∈</span> <span class="n">U</span><span class="o">,</span> <span class="n">f</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">y</span><span class="o">}</span>
 
-theorem are_they_equal : image (@id X) U = U := begin
-/-
-why am I wasting my time proving this stupid theorem. These
-objects are ZFC-equal and thus equal. I will not even try. 
--/
--- rfl, -- fails
--- simp, -- fails -- *rolls eyes*
--- finish, -- I don't even understand what this one does but it sometimes works
--- cc (see comment above)
--- dsimp -- thought unlikely but maybe worth trying
--- can't think of any more tactics
-unfold image,
-apply set.eq_of_subset_of_subset,
-{ intros x Hx,
-  simpa using Hx},
-{ intros x Hx,
-  simpa using Hx,
-}
--- thank goodness it's over
-end
-```
+<span class="kn">theorem</span> <span class="n">are_they_equal</span> <span class="o">:</span> <span class="n">image</span> <span class="o">(</span><span class="bp">@</span><span class="n">id</span> <span class="n">X</span><span class="o">)</span> <span class="n">U</span> <span class="bp">=</span> <span class="n">U</span> <span class="o">:=</span> <span class="k">begin</span>
+<span class="c">/-</span><span class="cm"></span>
+<span class="cm">why am I wasting my time proving this stupid theorem. These</span>
+<span class="cm">objects are ZFC-equal and thus equal. I will not even try.</span>
+<span class="cm">-/</span>
+<span class="c1">-- rfl, -- fails</span>
+<span class="c1">-- simp, -- fails -- *rolls eyes*</span>
+<span class="c1">-- finish, -- I don&#39;t even understand what this one does but it sometimes works</span>
+<span class="c1">-- cc (see comment above)</span>
+<span class="c1">-- dsimp -- thought unlikely but maybe worth trying</span>
+<span class="c1">-- can&#39;t think of any more tactics</span>
+<span class="n">unfold</span> <span class="n">image</span><span class="o">,</span>
+<span class="n">apply</span> <span class="n">set</span><span class="bp">.</span><span class="n">eq_of_subset_of_subset</span><span class="o">,</span>
+<span class="o">{</span> <span class="n">intros</span> <span class="n">x</span> <span class="n">Hx</span><span class="o">,</span>
+  <span class="n">simpa</span> <span class="kn">using</span> <span class="n">Hx</span><span class="o">},</span>
+<span class="o">{</span> <span class="n">intros</span> <span class="n">x</span> <span class="n">Hx</span><span class="o">,</span>
+  <span class="n">simpa</span> <span class="kn">using</span> <span class="n">Hx</span><span class="o">,</span>
+<span class="o">}</span>
+<span class="c1">-- thank goodness it&#39;s over</span>
+<span class="kn">end</span>
+</pre></div>
 
 #### [ Kevin Buzzard (May 28 2018 at 11:39)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127197553):
-That's what actually happened
+<p>That's what actually happened</p>
 
 #### [ Mario Carneiro (May 28 2018 at 11:39)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127197555):
-`set.image_id`
+<p><code>set.image_id</code></p>
 
 #### [ Mario Carneiro (May 28 2018 at 11:39)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127197559):
-why are you proving trivial set theorems?
+<p>why are you proving trivial set theorems?</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 11:39)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127197561):
-It's hard for me to prove that  ZFC-equal things are equal
+<p>It's hard for me to prove that  ZFC-equal things are equal</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 11:40)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127197617):
-because the tools I have honed in my brain to solve these problems
+<p>because the tools I have honed in my brain to solve these problems</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 11:40)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127197618):
-are ZFC tools
+<p>are ZFC tools</p>
 
 #### [ Mario Carneiro (May 28 2018 at 11:40)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127197626):
-that theorem is just as hard in zfc land
+<p>that theorem is just as hard in zfc land</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 11:40)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127197627):
-and here for some reason ZFC tools are not adequate
+<p>and here for some reason ZFC tools are not adequate</p>
 
 #### [ Mario Carneiro (May 28 2018 at 11:40)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127197633):
-the proof is literally no different
+<p>the proof is literally no different</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 11:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127197644):
-why does simp fail?
+<p>why does simp fail?</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 11:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127197646):
-This proof is simple
+<p>This proof is simple</p>
 
 #### [ Kenny Lau (May 28 2018 at 11:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127197647):
-@**Mario Carneiro** I tell you, when a mathematician says they work in ZFC, they actually don't. They won't even be able to name all of the ZFC axioms.
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> I tell you, when a mathematician says they work in ZFC, they actually don't. They won't even be able to name all of the ZFC axioms.</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 11:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127197650):
-That's true for a general mathematician
+<p>That's true for a general mathematician</p>
 
 #### [ Mario Carneiro (May 28 2018 at 11:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127197654):
-I can tell you I have worked in ZFC
+<p>I can tell you I have worked in ZFC</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 11:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127197656):
-but I know the axioms of ZFC and I've been working happily in it for years
+<p>but I know the axioms of ZFC and I've been working happily in it for years</p>
 
 #### [ Mario Carneiro (May 28 2018 at 11:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127197657):
-like for real
+<p>like for real</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 11:42)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127197697):
-You mean "not using pen and paper"
+<p>You mean "not using pen and paper"</p>
 
 #### [ Kenny Lau (May 28 2018 at 11:42)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127197702):
-```lean
-example {α : Type*} (s : set α) : id '' s = s :=
-set.ext (by simp [-set.image_id])
-```
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">id</span> <span class="err">&#39;&#39;</span> <span class="n">s</span> <span class="bp">=</span> <span class="n">s</span> <span class="o">:=</span>
+<span class="n">set</span><span class="bp">.</span><span class="n">ext</span> <span class="o">(</span><span class="k">by</span> <span class="n">simp</span> <span class="o">[</span><span class="bp">-</span><span class="n">set</span><span class="bp">.</span><span class="n">image_id</span><span class="o">])</span>
+</pre></div>
 
 #### [ Mario Carneiro (May 28 2018 at 11:42)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127197707):
-I've done ZFC with pen and paper too, but that gets old fast
+<p>I've done ZFC with pen and paper too, but that gets old fast</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 11:42)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127197709):
-I guess LaTeX is the true home of ZFC.
+<p>I guess LaTeX is the true home of ZFC.</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 11:43)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127197713):
-For most people.
+<p>For most people.</p>
 
 #### [ Andrew Ashworth (May 28 2018 at 11:43)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127197722):
-... isn't metamath basically zfc on pen and paper
+<p>... isn't metamath basically zfc on pen and paper</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 11:43)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127197726):
-OK so I think dependent type theory is stupid and I've decided to go back to ZFC and formulate perfectoid spaces there instead where I don't have to waste my time worrying about whether or not id U is equal to U.
+<p>OK so I think dependent type theory is stupid and I've decided to go back to ZFC and formulate perfectoid spaces there instead where I don't have to waste my time worrying about whether or not id U is equal to U.</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 11:43)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127197727):
-So where do I start?
+<p>So where do I start?</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 11:44)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127197767):
-if I want to do it on a computer
+<p>if I want to do it on a computer</p>
 
 #### [ Kenny Lau (May 28 2018 at 11:44)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127197771):
-I thought Isabelle works in ZFC
+<p>I thought Isabelle works in ZFC</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 11:44)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127197773):
-I don't even know what Isabelle is
+<p>I don't even know what Isabelle is</p>
 
 #### [ Mario Carneiro (May 28 2018 at 11:44)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127197775):
-It uses HOL for all the good stuff
+<p>It uses HOL for all the good stuff</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 11:44)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127197778):
-so Isabelle-ZFC is a thing?
+<p>so Isabelle-ZFC is a thing?</p>
 
 #### [ Mario Carneiro (May 28 2018 at 11:44)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127197779):
-Isabelle/ZFC is more of a proof of concept
+<p>Isabelle/ZFC is more of a proof of concept</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 11:44)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127197780):
-that doesn't sound good
+<p>that doesn't sound good</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 11:44)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127197782):
-does it have number fields?
+<p>does it have number fields?</p>
 
 #### [ Kenny Lau (May 28 2018 at 11:45)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127197788):
-and secondly, nobody works in ZFC. they work in ZFC + definitorial expansion
+<p>and secondly, nobody works in ZFC. they work in ZFC + definitorial expansion</p>
 
 #### [ Mario Carneiro (May 28 2018 at 11:45)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127197791):
-If you want to really use ZFC on the computer, you should use Mizar or Metamath
+<p>If you want to really use ZFC on the computer, you should use Mizar or Metamath</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 11:45)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127197795):
-Why not Isabelle-ZFC?
+<p>Why not Isabelle-ZFC?</p>
 
 #### [ Mario Carneiro (May 28 2018 at 11:45)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127197798):
-because it is not mature enough
+<p>because it is not mature enough</p>
 
 #### [ Mario Carneiro (May 28 2018 at 11:45)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127197810):
-maybe mature is the wrong word, it's been around for a while but it doesn't have enough theorems
+<p>maybe mature is the wrong word, it's been around for a while but it doesn't have enough theorems</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 11:45)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127197811):
-Which of the three possibilities for computer-ZFC is most mathematician-friendly?
+<p>Which of the three possibilities for computer-ZFC is most mathematician-friendly?</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 11:46)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127197852):
-Or is it a case of "learn one of them, you just learned all of them"
+<p>Or is it a case of "learn one of them, you just learned all of them"</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 11:46)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127197857):
-I have no idea
+<p>I have no idea</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 11:46)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127197863):
-I just play ZFC internally on my own emulator
+<p>I just play ZFC internally on my own emulator</p>
 
 #### [ Mario Carneiro (May 28 2018 at 11:46)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127197864):
-Mizar was written by mathematicians for mathematicians
+<p>Mizar was written by mathematicians for mathematicians</p>
 
 #### [ Mario Carneiro (May 28 2018 at 11:46)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127197866):
-this is not necessarily a good thing
+<p>this is not necessarily a good thing</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 11:46)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127197867):
-In ZFC
+<p>In ZFC</p>
 
 #### [ Mario Carneiro (May 28 2018 at 11:46)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127197869):
-in TG set theory
+<p>in TG set theory</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 11:47)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127197879):
-If ZFC and DTT had a race to perfectoid spaces, and you could choose your foundational system, and we started tomorrow, who would win?
+<p>If ZFC and DTT had a race to perfectoid spaces, and you could choose your foundational system, and we started tomorrow, who would win?</p>
 
 #### [ Mario Carneiro (May 28 2018 at 11:47)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127197883):
-ZFC is an axiom system not a program
+<p>ZFC is an axiom system not a program</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 11:47)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127197888):
-I am not CS-wise enough to understand the difference
+<p>I am not CS-wise enough to understand the difference</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 11:47)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127197893):
-I want a program whose only commands are things allowed in ZFC
+<p>I want a program whose only commands are things allowed in ZFC</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 11:48)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127197895):
-and all things allowed in ZFC are commands
+<p>and all things allowed in ZFC are commands</p>
 
 #### [ Mario Carneiro (May 28 2018 at 11:48)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127197933):
-You aren't choosing ZFC or DTT, you're choosing Mizar or Lean or Coq or Isabelle
+<p>You aren't choosing ZFC or DTT, you're choosing Mizar or Lean or Coq or Isabelle</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 11:48)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127197939):
-Does this make sense -- "I choose Mizar, and therefore I choose ZFC"
+<p>Does this make sense -- "I choose Mizar, and therefore I choose ZFC"</p>
 
 #### [ Mario Carneiro (May 28 2018 at 11:48)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127197941):
-sure
+<p>sure</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 11:48)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127197942):
-I don't know what Mizar is
+<p>I don't know what Mizar is</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 11:48)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127197946):
-but I do know what ZFC is
+<p>but I do know what ZFC is</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 11:48)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127197951):
-And "I choose Lean, and therefore I choose dependent type theory"
+<p>And "I choose Lean, and therefore I choose dependent type theory"</p>
 
 #### [ Mario Carneiro (May 28 2018 at 11:49)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127197959):
-right, lean doesn't give you a choice here
+<p>right, lean doesn't give you a choice here</p>
 
 #### [ Mario Carneiro (May 28 2018 at 11:49)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127197963):
-same with most other systems
+<p>same with most other systems</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 11:49)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127197971):
-So who would win the perfectoid space showdown between Lean and "insert computer program which models ZFC in some way"
+<p>So who would win the perfectoid space showdown between Lean and "insert computer program which models ZFC in some way"</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 11:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198017):
-If I got cloned into two people and just had a race with myself
+<p>If I got cloned into two people and just had a race with myself</p>
 
 #### [ Mario Carneiro (May 28 2018 at 11:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198018):
-Isabelle and Metamath are a bit special since they are foundational frameworks, so you can technically pick your favorite axiom system, but in practice all the theorems go to one particular axiom system
+<p>Isabelle and Metamath are a bit special since they are foundational frameworks, so you can technically pick your favorite axiom system, but in practice all the theorems go to one particular axiom system</p>
 
 #### [ Mario Carneiro (May 28 2018 at 11:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198031):
-If you got cloned? Lean of course
+<p>If you got cloned? Lean of course</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 11:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198032):
-Are there more mathematical theorems in Mathlib than in any library for any ZFC system?
+<p>Are there more mathematical theorems in Mathlib than in any library for any ZFC system?</p>
 
 #### [ Mario Carneiro (May 28 2018 at 11:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198036):
-because you know lean better than any other system
+<p>because you know lean better than any other system</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 11:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198040):
-But Mario, I speak *fluent* ZFC
+<p>But Mario, I speak <em>fluent</em> ZFC</p>
 
 #### [ Mario Carneiro (May 28 2018 at 11:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198049):
-and you will find that it doesn't matter
+<p>and you will find that it doesn't matter</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 11:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198051):
-It's my native language
+<p>It's my native language</p>
 
 #### [ Mario Carneiro (May 28 2018 at 11:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198055):
-because you will be struggling with formal details the whole way
+<p>because you will be struggling with formal details the whole way</p>
 
 #### [ Mario Carneiro (May 28 2018 at 11:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198060):
-that's always the way it goes
+<p>that's always the way it goes</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 11:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198063):
-I think this is precisely the point I don't understand
+<p>I think this is precisely the point I don't understand</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 11:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198138):
-let me rephrase that -- the distinction between "Lean" and "Dependent type theory" is quite blurred in my mind
+<p>let me rephrase that -- the distinction between "Lean" and "Dependent type theory" is quite blurred in my mind</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 11:53)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198148):
-I thought I could just define dependent type theory to be Lean
+<p>I thought I could just define dependent type theory to be Lean</p>
 
 #### [ Kenny Lau (May 28 2018 at 11:53)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198151):
-it's one thing to know the theory behind Python
+<p>it's one thing to know the theory behind Python</p>
 
 #### [ Kenny Lau (May 28 2018 at 11:53)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198154):
-it's a completely other thing to use Python
+<p>it's a completely other thing to use Python</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 11:53)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198158):
-I guess
+<p>I guess</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 11:53)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198160):
-I completely understand that
+<p>I completely understand that</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 11:53)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198162):
-I see
+<p>I see</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 11:54)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198205):
-But this is a really easy problem
+<p>But this is a really easy problem</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 11:54)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198206):
-I just get the CS people to write python for me
+<p>I just get the CS people to write python for me</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 11:54)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198207):
-so they are the same thing
+<p>so they are the same thing</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 11:54)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198210):
-Now who wrote ZFC for me?
+<p>Now who wrote ZFC for me?</p>
 
 #### [ Mario Carneiro (May 28 2018 at 11:54)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198214):
-but you don't want ZFC, not really
+<p>but you don't want ZFC, not really</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 11:55)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198218):
-I love ZFC Mario
+<p>I love ZFC Mario</p>
 
 #### [ Mario Carneiro (May 28 2018 at 11:55)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198219):
-you want by schoolkid and tactics and magic
+<p>you want by schoolkid and tactics and magic</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 11:55)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198223):
-Yeah and we _need_ schoolkid
+<p>Yeah and we _need_ schoolkid</p>
 
 #### [ Mario Carneiro (May 28 2018 at 11:55)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198227):
-ZFC is an axiom system, it made no magical promises
+<p>ZFC is an axiom system, it made no magical promises</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 11:55)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198230):
-no but you CS guys will just sort all that out
+<p>no but you CS guys will just sort all that out</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 11:55)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198234):
-that's just some stupid engineering issue
+<p>that's just some stupid engineering issue</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 11:55)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198237):
-I want to do ZFC, like I do Python in Python
+<p>I want to do ZFC, like I do Python in Python</p>
 
 #### [ Mario Carneiro (May 28 2018 at 11:55)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198238):
-but it's a really important engineering issue for you
+<p>but it's a really important engineering issue for you</p>
 
 #### [ Kenny Lau (May 28 2018 at 11:55)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198239):
-@**Kevin Buzzard** how would you prove in ZFC that `id '' U = U`?
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> how would you prove in ZFC that <code>id '' U = U</code>?</p>
 
 #### [ Mario Carneiro (May 28 2018 at 11:56)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198279):
-I dare say it's far more important than the underlying axiom system
+<p>I dare say it's far more important than the underlying axiom system</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 11:56)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198286):
-id(u) is the same as u
+<p>id(u) is the same as u</p>
 
 #### [ Kenny Lau (May 28 2018 at 11:56)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198290):
-no they aren't
+<p>no they aren't</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 11:56)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198292):
-sure it is
+<p>sure it is</p>
 
 #### [ Kenny Lau (May 28 2018 at 11:56)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198294):
-how would you prove it?
+<p>how would you prove it?</p>
 
 #### [ Mario Carneiro (May 28 2018 at 11:56)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198295):
-that's not a proof
+<p>that's not a proof</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 11:56)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198297):
-id is a big set of ordered pairs
+<p>id is a big set of ordered pairs</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 11:56)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198301):
-and they're all just (u,u)
+<p>and they're all just (u,u)</p>
 
 #### [ Kenny Lau (May 28 2018 at 11:56)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198302):
-a proper class
+<p>a proper class</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 11:56)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198303):
-no it's a set
+<p>no it's a set</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 11:56)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198307):
-don't be silly
+<p>don't be silly</p>
 
 #### [ Mario Carneiro (May 28 2018 at 11:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198309):
-wha...
+<p>wha...</p>
 
 #### [ Kenny Lau (May 28 2018 at 11:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198310):
-ok
+<p>ok</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 11:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198312):
-it's a function from U to U
+<p>it's a function from U to U</p>
 
 #### [ Kenny Lau (May 28 2018 at 11:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198319):
-but here it isn't
+<p>but here it isn't</p>
 
 #### [ Mario Carneiro (May 28 2018 at 11:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198324):
-ZFC warning
+<p>ZFC warning</p>
 
 #### [ Kenny Lau (May 28 2018 at 11:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198325):
-it's a function from alpha to alpha, U is just a subset
+<p>it's a function from alpha to alpha, U is just a subset</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 11:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198326):
-but here is stupid. I'm telling you the right way.
+<p>but here is stupid. I'm telling you the right way.</p>
 
 #### [ Mario Carneiro (May 28 2018 at 11:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198328):
-that's doing to make your job messy
+<p>that's doing to make your job messy</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 11:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198329):
-so id(u) is *equal* to u OK
+<p>so id(u) is <em>equal</em> to u OK</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 11:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198331):
-so {id(u) : u in U}
+<p>so {id(u) : u in U}</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 11:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198332):
-EQUALS
+<p>EQUALS</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 11:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198333):
-{u : u in U}
+<p>{u : u in U}</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 11:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198334):
-which
+<p>which</p>
 
 #### [ Kenny Lau (May 28 2018 at 11:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198335):
-```quote
-so id(u) is *equal* to u OK
-```
-you still haven't proved it. what after id being a big set of pairs
+<blockquote>
+<p>so id(u) is <em>equal</em> to u OK</p>
+</blockquote>
+<p>you still haven't proved it. what after id being a big set of pairs</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 11:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198337):
-EQUALS
+<p>EQUALS</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 11:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198339):
-U
+<p>U</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 11:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198382):
-I don't understand which bit I missed
+<p>I don't understand which bit I missed</p>
 
 #### [ Kenny Lau (May 28 2018 at 11:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198384):
-you're abusing notations.
+<p>you're abusing notations.</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 11:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198385):
-oh
+<p>oh</p>
 
 #### [ Mario Carneiro (May 28 2018 at 11:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198389):
-yes, you unfold the definitions, that {id(u) : u in U} thing becomes {y : \ex u, id(u) = y}
+<p>yes, you unfold the definitions, that {id(u) : u in U} thing becomes {y : \ex u, id(u) = y}</p>
 
 #### [ Kenny Lau (May 28 2018 at 11:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198390):
-{u : u in U} isn't equal to {u in U | true}
+<p>{u : u in U} isn't equal to {u in U | true}</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 11:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198393):
-I thought I was using "=" as in the underlying logic or syntax or whatever it's called of ZFC or logic or
+<p>I thought I was using "=" as in the underlying logic or syntax or whatever it's called of ZFC or logic or</p>
 
 #### [ Kenny Lau (May 28 2018 at 11:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198394):
-you mixed comprehension notation and subset notation
+<p>you mixed comprehension notation and subset notation</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 11:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198395):
-I am not clear about what = is in ZFC
+<p>I am not clear about what = is in ZFC</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 11:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198396):
-I forgot the details
+<p>I forgot the details</p>
 
 #### [ Mario Carneiro (May 28 2018 at 11:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198397):
-and then you have a lemma proving that id(u) = u since (u,u) in id
+<p>and then you have a lemma proving that id(u) = u since (u,u) in id</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 11:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198400):
-but it just means they're the same object
+<p>but it just means they're the same object</p>
 
 #### [ Kenny Lau (May 28 2018 at 11:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198401):
-by "isn't equal to" I mean "you haven't proved that they are equal"
+<p>by "isn't equal to" I mean "you haven't proved that they are equal"</p>
 
 #### [ Mario Carneiro (May 28 2018 at 11:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198402):
-and id is a function because ...
+<p>and id is a function because ...</p>
 
 #### [ Kenny Lau (May 28 2018 at 11:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198407):
-```quote
-but it just means they're the same object
-```
-but it needs to be proved
+<blockquote>
+<p>but it just means they're the same object</p>
+</blockquote>
+<p>but it needs to be proved</p>
 
 #### [ Kenny Lau (May 28 2018 at 11:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198412):
-you can't just say "they must be equal"
+<p>you can't just say "they must be equal"</p>
 
 #### [ Kenny Lau (May 28 2018 at 11:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198415):
-you see, the problem is not in the axioms
+<p>you see, the problem is not in the axioms</p>
 
 #### [ Kenny Lau (May 28 2018 at 11:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198416):
-but in the formality
+<p>but in the formality</p>
 
 #### [ Mario Carneiro (May 28 2018 at 11:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198417):
-and then you get \ex u in U, u = y <-> u in U
+<p>and then you get \ex u in U, u = y &lt;-&gt; u in U</p>
 
 #### [ Mario Carneiro (May 28 2018 at 11:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198421):
-and hey presto it's the lean proof
+<p>and hey presto it's the lean proof</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 11:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198425):
-But in the world where proofs are free and can be appealed to at will using good tactics, "simp" would prove this
+<p>But in the world where proofs are free and can be appealed to at will using good tactics, "simp" would prove this</p>
 
 #### [ Kenny Lau (May 28 2018 at 12:00)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198428):
-right, so ZFC isn't the problem at all
+<p>right, so ZFC isn't the problem at all</p>
 
 #### [ Mario Carneiro (May 28 2018 at 12:00)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198429):
-SIMP CAN PROVE THIS
+<p>SIMP CAN PROVE THIS</p>
 
 #### [ Kenny Lau (May 28 2018 at 12:00)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198470):
-yes
+<p>yes</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:00)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198471):
-because my definition of "simp" is the ZFC tactic "this is simple if you use ZFC"
+<p>because my definition of "simp" is the ZFC tactic "this is simple if you use ZFC"</p>
 
 #### [ Mario Carneiro (May 28 2018 at 12:00)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198481):
-That's not a tactic, that's magic
+<p>That's not a tactic, that's magic</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:00)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198482):
-I think that's why my understanding of tactics is so poor
+<p>I think that's why my understanding of tactics is so poor</p>
 
 #### [ Kenny Lau (May 28 2018 at 12:00)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198483):
-```lean
-example {α : Type*} (s : set α) : id '' s = s :=
-set.ext $ by simp [-set.image_id]
-```
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">id</span> <span class="err">&#39;&#39;</span> <span class="n">s</span> <span class="bp">=</span> <span class="n">s</span> <span class="o">:=</span>
+<span class="n">set</span><span class="bp">.</span><span class="n">ext</span> <span class="err">$</span> <span class="k">by</span> <span class="n">simp</span> <span class="o">[</span><span class="bp">-</span><span class="n">set</span><span class="bp">.</span><span class="n">image_id</span><span class="o">]</span>
+</pre></div>
 
 #### [ Kenny Lau (May 28 2018 at 12:00)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198484):
-simp **can** prove this
+<p>simp <strong>can</strong> prove this</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:00)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198488):
-There are a whole bunch of distinct things in dependent type theory which I have truly identified in my head
+<p>There are a whole bunch of distinct things in dependent type theory which I have truly identified in my head</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:01)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198490):
-and the big question is
+<p>and the big question is</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:01)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198497):
-is that going to give you problems down the line
+<p>is that going to give you problems down the line</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:01)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198499):
-by which I mean me
+<p>by which I mean me</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:01)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198500):
-the ZFCist
+<p>the ZFCist</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:01)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198505):
-I got lucky. I needed a map `F U -> F (id '' U)`
+<p>I got lucky. I needed a map <code>F U -&gt; F (id '' U)</code></p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:02)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198545):
-and I chose wrong. I proved `id '' U = U` and then did a rewrite and used id.
+<p>and I chose wrong. I proved <code>id '' U = U</code> and then did a rewrite and used id.</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:02)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198547):
-because they're the SAME OBJECT
+<p>because they're the SAME OBJECT</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:02)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198552):
-and the identity map from an object to itself is called id.
+<p>and the identity map from an object to itself is called id.</p>
 
 #### [ Mario Carneiro (May 28 2018 at 12:02)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198561):
-this is a better argument
+<p>this is a better argument</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:02)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198565):
-So I used id and instantly got into all manner of trouble the moment I tried to prove things
+<p>So I used id and instantly got into all manner of trouble the moment I tried to prove things</p>
 
 #### [ Kenny Lau (May 28 2018 at 12:02)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198567):
-1. you don't really work in pure ZFC. you work in ZFC + definitorial expansion + a whole bunch of other things
+<p>1. you don't really work in pure ZFC. you work in ZFC + definitorial expansion + a whole bunch of other things</p>
 
 #### [ Kenny Lau (May 28 2018 at 12:02)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198584):
-in ZFC `id '' U` isn't even defined
+<p>in ZFC <code>id '' U</code> isn't even defined</p>
 
 #### [ Kenny Lau (May 28 2018 at 12:03)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198597):
-ZFC says that there exists such an object
+<p>ZFC says that there exists such an object</p>
 
 #### [ Mario Carneiro (May 28 2018 at 12:03)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198598):
-The dtt analogue of this is called equality reflection
+<p>The dtt analogue of this is called equality reflection</p>
 
 #### [ Kenny Lau (May 28 2018 at 12:03)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198611):
-you're using the axiom of replacement
+<p>you're using the axiom of replacement</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:03)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198615):
-And then I went back and thought "do you know what -- I could use res!"
+<p>And then I went back and thought "do you know what -- I could use res!"</p>
 
 #### [ Mario Carneiro (May 28 2018 at 12:03)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198618):
-it says that if `x = y` then `x` and `y` are defeq
+<p>it says that if <code>x = y</code> then <code>x</code> and <code>y</code> are defeq</p>
 
 #### [ Kenny Lau (May 28 2018 at 12:03)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198620):
-it begins `forall A exists B`
+<p>it begins <code>forall A exists B</code></p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:03)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198623):
-And I thought "that's funny, because it's an *axiom of a functor* that res U U = id"
+<p>And I thought "that's funny, because it's an <em>axiom of a functor</em> that res U U = id"</p>
 
 #### [ Kenny Lau (May 28 2018 at 12:03)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198624):
-in ZFC everything is Prop
+<p>in ZFC everything is Prop</p>
 
 #### [ Mario Carneiro (May 28 2018 at 12:03)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198626):
-This is needed to typecheck things like `id : F U -> F (id '' U)`
+<p>This is needed to typecheck things like <code>id : F U -&gt; F (id '' U)</code></p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:03)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198629):
-"so res is *the same as* id"
+<p>"so res is <em>the same as</em> id"</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:04)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198674):
-and I tried res
+<p>and I tried res</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:04)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198676):
-and then all my one page long goals were rfl
+<p>and then all my one page long goals were rfl</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:05)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198689):
-because I gave same ZFC answer in two different ways, the first arguably being "more natural for the ZFC-ist", and the second apparently being "more natural for the DTT-ist".
+<p>because I gave same ZFC answer in two different ways, the first arguably being "more natural for the ZFC-ist", and the second apparently being "more natural for the DTT-ist".</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:05)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198694):
-I don't understand why my id is the wrong idea.
+<p>I don't understand why my id is the wrong idea.</p>
 
 #### [ Patrick Massot (May 28 2018 at 12:05)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198695):
-Kevin, formalized maths will be crazy in any system. You can only hope automation will get better at hiding this crazyness. And it seems DTT is better that set theory in order to build automation
+<p>Kevin, formalized maths will be crazy in any system. You can only hope automation will get better at hiding this crazyness. And it seems DTT is better that set theory in order to build automation</p>
 
 #### [ Mario Carneiro (May 28 2018 at 12:05)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198697):
-You can use `id` like you did, but you need a lemma about it
+<p>You can use <code>id</code> like you did, but you need a lemma about it</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:05)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198699):
-I cannot envisage a single problem doing this in ZFC
+<p>I cannot envisage a single problem doing this in ZFC</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:06)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198743):
-The issue is making a computer assert this statement?
+<p>The issue is making a computer assert this statement?</p>
 
 #### [ Mario Carneiro (May 28 2018 at 12:06)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198744):
-this would be WAY harder in metamath because of all the dependencies
+<p>this would be WAY harder in metamath because of all the dependencies</p>
 
 #### [ Kenny Lau (May 28 2018 at 12:06)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198746):
-```quote
-I cannot envisage a single problem doing this in ZFC
-```
-no, you would need as many lemmas
+<blockquote>
+<p>I cannot envisage a single problem doing this in ZFC</p>
+</blockquote>
+<p>no, you would need as many lemmas</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:06)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198747):
-is metamath ZFC?
+<p>is metamath ZFC?</p>
 
 #### [ Kenny Lau (May 28 2018 at 12:06)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198748):
-ZFC / DTT is not the issue at all
+<p>ZFC / DTT is not the issue at all</p>
 
 #### [ Mario Carneiro (May 28 2018 at 12:06)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198749):
-lean is good at hiding complexity, which is not always a good thing
+<p>lean is good at hiding complexity, which is not always a good thing</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:07)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198757):
-I should do a proper survey.
+<p>I should do a proper survey.</p>
 
 #### [ Mario Carneiro (May 28 2018 at 12:07)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198758):
-on the one hand it means you can formalize much bigger statements, on the other it means you don't work as much on parsimony and as a result have to struggle with large goals
+<p>on the one hand it means you can formalize much bigger statements, on the other it means you don't work as much on parsimony and as a result have to struggle with large goals</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:07)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198759):
-Do I have a complete list of "computer programs which help you do ZFC"?
+<p>Do I have a complete list of "computer programs which help you do ZFC"?</p>
 
 #### [ Mario Carneiro (May 28 2018 at 12:08)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198798):
-Of course lean is on that list
+<p>Of course lean is on that list</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:09)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198806):
-@**Kenny Lau** No! Simp didn't prove it! You had to write some .set.image gobble-de-gook theorem as well which probably also says "two identical things are equal"
+<p><span class="user-mention" data-user-id="110064">@Kenny Lau</span> No! Simp didn't prove it! You had to write some .set.image gobble-de-gook theorem as well which probably also says "two identical things are equal"</p>
 
 #### [ Kenny Lau (May 28 2018 at 12:09)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198810):
-@**Kevin Buzzard** no, I had to write `-set.image_id` to show that it isn't automated
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> no, I had to write <code>-set.image_id</code> to show that it isn't automated</p>
 
 #### [ Kenny Lau (May 28 2018 at 12:09)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198811):
-because `set.image_id` is the theorem
+<p>because <code>set.image_id</code> is the theorem</p>
 
 #### [ Mario Carneiro (May 28 2018 at 12:09)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198812):
-the set_image thing is just to avoid an even more trivial proof
+<p>the set_image thing is just to avoid an even more trivial proof</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:09)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198814):
-If simp worked properly, it would solve that goal
+<p>If simp worked properly, it would solve that goal</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:09)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198815):
-just by simp
+<p>just by simp</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:09)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198817):
-because it's simple
+<p>because it's simple</p>
 
 #### [ Kenny Lau (May 28 2018 at 12:09)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198818):
-Kevin.
+<p>Kevin.</p>
 
 #### [ Kenny Lau (May 28 2018 at 12:09)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198819):
-it's a minus.
+<p>it's a minus.</p>
 
 #### [ Kenny Lau (May 28 2018 at 12:09)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198820):
-I'm telling `simp` not to use that theorem.
+<p>I'm telling <code>simp</code> not to use that theorem.</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:10)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198821):
-I know
+<p>I know</p>
 
 #### [ Kenny Lau (May 28 2018 at 12:10)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198861):
-because otherwise the proof would be trivial
+<p>because otherwise the proof would be trivial</p>
 
 #### [ Mario Carneiro (May 28 2018 at 12:10)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198863):
-just `by simp` does prove that theorem
+<p>just <code>by simp</code> does prove that theorem</p>
 
 #### [ Mario Carneiro (May 28 2018 at 12:10)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198866):
-because it's a simp lemma
+<p>because it's a simp lemma</p>
 
 #### [ Mario Carneiro (May 28 2018 at 12:10)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198868):
-and without the theorem, the proof is `ext $ by simp`
+<p>and without the theorem, the proof is <code>ext $ by simp</code></p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:10)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198869):
-```lean
-Tactic State
+<div class="codehilite"><pre><span></span><span class="n">Tactic</span> <span class="n">State</span>
 
-X : Type,
-U : set X
-⊢ image id U = U
-id_U_equals_U.lean:11:51: error
+<span class="n">X</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">,</span>
+<span class="n">U</span> <span class="o">:</span> <span class="n">set</span> <span class="n">X</span>
+<span class="err">⊢</span> <span class="n">image</span> <span class="n">id</span> <span class="n">U</span> <span class="bp">=</span> <span class="n">U</span>
+<span class="n">id_U_equals_U</span><span class="bp">.</span><span class="n">lean</span><span class="o">:</span><span class="mi">11</span><span class="o">:</span><span class="mi">51</span><span class="o">:</span> <span class="n">error</span>
 
-simplify tactic failed to simplify
-state:
-X : Type,
-U : set X
-⊢ image id U = U
-```
+<span class="n">simplify</span> <span class="n">tactic</span> <span class="n">failed</span> <span class="n">to</span> <span class="n">simplify</span>
+<span class="n">state</span><span class="o">:</span>
+<span class="n">X</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">,</span>
+<span class="n">U</span> <span class="o">:</span> <span class="n">set</span> <span class="n">X</span>
+<span class="err">⊢</span> <span class="n">image</span> <span class="n">id</span> <span class="n">U</span> <span class="bp">=</span> <span class="n">U</span>
+</pre></div>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:10)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198872):
-"by simp" doesn't solve it so "by simp" is broken
+<p>"by simp" doesn't solve it so "by simp" is broken</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:10)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198873):
-because it's simple
+<p>because it's simple</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:10)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198874):
-that's all I'm saying
+<p>that's all I'm saying</p>
 
 #### [ Mario Carneiro (May 28 2018 at 12:10)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198875):
-you defined your own image
+<p>you defined your own image</p>
 
 #### [ Mario Carneiro (May 28 2018 at 12:11)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198878):
-it has no simp lemmas like the real one
+<p>it has no simp lemmas like the real one</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:11)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198883):
-you guys are just weirdos
+<p>you guys are just weirdos</p>
 
 #### [ Kenny Lau (May 28 2018 at 12:11)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198885):
-Kevin
+<p>Kevin</p>
 
 #### [ Mario Carneiro (May 28 2018 at 12:11)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198887):
-It's like you shot me in the leg and asked why I can't run as fast
+<p>It's like you shot me in the leg and asked why I can't run as fast</p>
 
 #### [ Kenny Lau (May 28 2018 at 12:11)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198889):
-have we established that in ZFC you still need to prove it
+<p>have we established that in ZFC you still need to prove it</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:11)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198890):
-Maybe it's time I tried Mizar.
+<p>Maybe it's time I tried Mizar.</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:11)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198892):
-I'll come back with egg on my face later
+<p>I'll come back with egg on my face later</p>
 
 #### [ Kenny Lau (May 28 2018 at 12:12)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198929):
-I don't really see the issue
+<p>I don't really see the issue</p>
 
 #### [ Kenny Lau (May 28 2018 at 12:12)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198932):
-I think you're misunderstanding
+<p>I think you're misunderstanding</p>
 
 #### [ Kenny Lau (May 28 2018 at 12:12)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198933):
-you said it's stupid because they aren't defeq
+<p>you said it's stupid because they aren't defeq</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:12)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198935):
-if it's not by simp for some reason
+<p>if it's not by simp for some reason</p>
 
 #### [ Mario Carneiro (May 28 2018 at 12:12)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198936):
-simp requires a whole library of carefully crafted lemmas to work well
+<p>simp requires a whole library of carefully crafted lemmas to work well</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:12)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198937):
-then it should be by schoolkid
+<p>then it should be by schoolkid</p>
 
 #### [ Mario Carneiro (May 28 2018 at 12:12)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198938):
-because it's not magic
+<p>because it's not magic</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:12)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198940):
-How can you claim it works well
+<p>How can you claim it works well</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:12)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198942):
-if it cannot even prove id(U)=U
+<p>if it cannot even prove id(U)=U</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:12)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198945):
-when they're the same object
+<p>when they're the same object</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:13)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198950):
-That's what I'm hearing :-)
+<p>That's what I'm hearing :-)</p>
 
 #### [ Mario Carneiro (May 28 2018 at 12:13)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198951):
-you are being unusually stubborn today
+<p>you are being unusually stubborn today</p>
 
 #### [ Kenny Lau (May 28 2018 at 12:13)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198952):
-1. you said Lean is stupid because `id '' U = U` isn't `rfl`. But they also aren't rfl in ZFC, you also need to prove it (remember how you mixed comprehension notation and subset notation)
+<p>1. you said Lean is stupid because <code>id '' U = U</code> isn't <code>rfl</code>. But they also aren't rfl in ZFC, you also need to prove it (remember how you mixed comprehension notation and subset notation)</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:13)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198956):
-and I know it's not what you're saying
+<p>and I know it's not what you're saying</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:13)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198957):
-but I'm a bit deaf
+<p>but I'm a bit deaf</p>
 
 #### [ Kenny Lau (May 28 2018 at 12:13)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198958):
-2. you said Lean is stupid because `id '' U = u` isn't `by simp`. But it is.
+<p>2. you said Lean is stupid because <code>id '' U = u</code> isn't <code>by simp</code>. But it is.</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:13)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198959):
-I was just doing my ZFC-baiting thing
+<p>I was just doing my ZFC-baiting thing</p>
 
 #### [ Kenny Lau (May 28 2018 at 12:13)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198960):
-3. you said Lean is stupid because `id '' U = U` isn't `ext $ by simp`. But it is.
+<p>3. you said Lean is stupid because <code>id '' U = U</code> isn't <code>ext $ by simp</code>. But it is.</p>
 
 #### [ Kenny Lau (May 28 2018 at 12:13)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127198961):
-so I don't know what your issue is
+<p>so I don't know what your issue is</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:14)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199000):
-by simp doesn't work for me
+<p>by simp doesn't work for me</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:14)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199002):
-does it work for you?
+<p>does it work for you?</p>
 
 #### [ Kenny Lau (May 28 2018 at 12:14)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199004):
-because you're using the wrong image
+<p>because you're using the wrong image</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:14)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199006):
-I'm using the image I wrote
+<p>I'm using the image I wrote</p>
 
 #### [ Kenny Lau (May 28 2018 at 12:14)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199007):
-use the official image and everything will be fine
+<p>use the official image and everything will be fine</p>
 
 #### [ Kenny Lau (May 28 2018 at 12:14)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199011):
-of course your new image doesn't have simp lemmas
+<p>of course your new image doesn't have simp lemmas</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:14)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199012):
-Wait so didn't lots of people tell me that this was impossible or something?
+<p>Wait so didn't lots of people tell me that this was impossible or something?</p>
 
 #### [ Kenny Lau (May 28 2018 at 12:15)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199016):
-4. you said Lean is stupid because `simp` doesn't simplify it with your **new** image definition. But we already established that it is not a rfl theorem, so you have to use the official image if you want to use a simp lemma
+<p>4. you said Lean is stupid because <code>simp</code> doesn't simplify it with your <strong>new</strong> image definition. But we already established that it is not a rfl theorem, so you have to use the official image if you want to use a simp lemma</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:15)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199027):
-that's stupid. What if I can't find the official image so I just make my own image which would then be identical so all the old theorems would work anyway
+<p>that's stupid. What if I can't find the official image so I just make my own image which would then be identical so all the old theorems would work anyway</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:15)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199028):
-hmm
+<p>hmm</p>
 
 #### [ Mario Carneiro (May 28 2018 at 12:15)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199030):
-no
+<p>no</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:15)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199032):
-OK so
+<p>OK so</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:16)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199063):
-I can see there might be issues here
+<p>I can see there might be issues here</p>
 
 #### [ Kenny Lau (May 28 2018 at 12:16)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199071):
-@**Kevin Buzzard** read my point 4 again
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> read my point 4 again</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:16)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199072):
-at least
+<p>at least</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:16)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199075):
-from an engineering point of view
+<p>from an engineering point of view</p>
 
 #### [ Mario Carneiro (May 28 2018 at 12:16)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199079):
-the theorems only "work" if you apply them
+<p>the theorems only "work" if you apply them</p>
 
 #### [ Kenny Lau (May 28 2018 at 12:16)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199081):
-@**Mario Carneiro** it doesn't work
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> it doesn't work</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:16)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199082):
-No
+<p>No</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:16)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199083):
-I'm listening
+<p>I'm listening</p>
 
 #### [ Mario Carneiro (May 28 2018 at 12:17)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199084):
-yeah, I messed up the copy there
+<p>yeah, I messed up the copy there</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:17)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199090):
-I understand that I have to apply my theorems
+<p>I understand that I have to apply my theorems</p>
 
 #### [ Kenny Lau (May 28 2018 at 12:17)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199091):
-@**Kevin Buzzard** so I don't really see where the issue is.
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> so I don't really see where the issue is.</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:17)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199093):
-but in return
+<p>but in return</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:17)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199095):
-here's the thing
+<p>here's the thing</p>
 
 #### [ Kenny Lau (May 28 2018 at 12:17)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199098):
-you're complaining that `simp` doesn't know about your new `image`
+<p>you're complaining that <code>simp</code> doesn't know about your new <code>image</code></p>
 
 #### [ Johan Commelin (May 28 2018 at 12:17)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199099):
-Kevin, don't think of `simp` as "simple", but as "simplify"
+<p>Kevin, don't think of <code>simp</code> as "simple", but as "simplify"</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:17)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199100):
-when I prove a theorem that says that A and B are equal
+<p>when I prove a theorem that says that A and B are equal</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:17)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199101):
-in DTT speak
+<p>in DTT speak</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:18)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199143):
-`theorem they_are_equal : X = Y := by schoolkid`
+<p><code>theorem they_are_equal : X = Y := by schoolkid</code></p>
 
 #### [ Johan Commelin (May 28 2018 at 12:18)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199144):
-So, it's not `simp`'s purpose to prove it. But `schoolkid` or `math_trivial` should be able to prove it
+<p>So, it's not <code>simp</code>'s purpose to prove it. But <code>schoolkid</code> or <code>math_trivial</code> should be able to prove it</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:18)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199146):
-Whenever that happens in dependent type theory
+<p>Whenever that happens in dependent type theory</p>
 
 #### [ Kenny Lau (May 28 2018 at 12:18)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199147):
-@**Kevin Buzzard** Kevin.
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> Kevin.</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:18)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199148):
-I want dependent type theory to now collapse a little
+<p>I want dependent type theory to now collapse a little</p>
 
 #### [ Kenny Lau (May 28 2018 at 12:18)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199149):
-I think this will convince you.
+<p>I think this will convince you.</p>
 
 #### [ Kenny Lau (May 28 2018 at 12:19)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199150):
-```lean
-definition image := {y : Y | ∃ x ∈ U, f x = y}
-example : image (@id X) U = U :=
-by simp [image]
-```
+<div class="codehilite"><pre><span></span><span class="kn">definition</span> <span class="n">image</span> <span class="o">:=</span> <span class="o">{</span><span class="n">y</span> <span class="o">:</span> <span class="n">Y</span> <span class="bp">|</span> <span class="bp">∃</span> <span class="n">x</span> <span class="err">∈</span> <span class="n">U</span><span class="o">,</span> <span class="n">f</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">y</span><span class="o">}</span>
+<span class="kn">example</span> <span class="o">:</span> <span class="n">image</span> <span class="o">(</span><span class="bp">@</span><span class="n">id</span> <span class="n">X</span><span class="o">)</span> <span class="n">U</span> <span class="bp">=</span> <span class="n">U</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">image</span><span class="o">]</span>
+</pre></div>
 
 #### [ Mario Carneiro (May 28 2018 at 12:20)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199214):
-I think you are focusing on the wrong issue Kevin
+<p>I think you are focusing on the wrong issue Kevin</p>
 
 #### [ Kenny Lau (May 28 2018 at 12:20)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199217):
-you broke the silence >_>
+<p>you broke the silence &gt;_&gt;</p>
 
 #### [ Johan Commelin (May 28 2018 at 12:20)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199218):
-So we want `schoolkid_1` which just does `simp [..every definition preceding it in the file..]`
+<p>So we want <code>schoolkid_1</code> which just does <code>simp [..every definition preceding it in the file..]</code></p>
 
 #### [ Mario Carneiro (May 28 2018 at 12:21)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199231):
-There is nothing at all wrong with the proof of id '' U = U, but it caused problems later when you used it as a functor in your presheaf
+<p>There is nothing at all wrong with the proof of id '' U = U, but it caused problems later when you used it as a functor in your presheaf</p>
 
 #### [ Mario Carneiro (May 28 2018 at 12:22)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199275):
-For that you need theorems about the action of `eq.rec` or `cast`
+<p>For that you need theorems about the action of <code>eq.rec</code> or <code>cast</code></p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:22)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199279):
-Is this supposed to be rfl?
+<p>Is this supposed to be rfl?</p>
 
 #### [ Mario Carneiro (May 28 2018 at 12:22)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199280):
- and they aren't free, you have to state them
+<p>and they aren't free, you have to state them</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:22)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199282):
-`theorem X : id '' U = U := sorry `
+<p><code>theorem X : id '' U = U := sorry </code></p>
 
 #### [ Kenny Lau (May 28 2018 at 12:22)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199285):
-```quote
-Is this supposed to be rfl?
-```
-I thought we already established that it is not rfl
+<blockquote>
+<p>Is this supposed to be rfl?</p>
+</blockquote>
+<p>I thought we already established that it is not rfl</p>
 
 #### [ Kenny Lau (May 28 2018 at 12:22)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199286):
-not in ZFC either
+<p>not in ZFC either</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:22)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199287):
-So that is not rfl
+<p>So that is not rfl</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:22)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199288):
-but what was rfl?
+<p>but what was rfl?</p>
 
 #### [ Kenny Lau (May 28 2018 at 12:22)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199290):
-rfl is using "forall x, x = x"
+<p>rfl is using "forall x, x = x"</p>
 
 #### [ Mario Carneiro (May 28 2018 at 12:22)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199292):
-`schoolkid_1` is `simp!`
+<p><code>schoolkid_1</code> is <code>simp!</code></p>
 
 #### [ Kenny Lau (May 28 2018 at 12:23)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199299):
-so in ZFC, you need to do reductions to simplify them to the same expression, and then use that axiom
+<p>so in ZFC, you need to do reductions to simplify them to the same expression, and then use that axiom</p>
 
 #### [ Kenny Lau (May 28 2018 at 12:23)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199301):
-but they can't be reduced to the same thing
+<p>but they can't be reduced to the same thing</p>
 
 #### [ Mario Carneiro (May 28 2018 at 12:23)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199302):
-ZFC has no reductions at all
+<p>ZFC has no reductions at all</p>
 
 #### [ Kenny Lau (May 28 2018 at 12:23)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199304):
-```quote
-`schoolkid_1` is `simp!`
-```
-nope, doesn't work
+<blockquote>
+<p><code>schoolkid_1</code> is <code>simp!</code></p>
+</blockquote>
+<p>nope, doesn't work</p>
 
 #### [ Mario Carneiro (May 28 2018 at 12:23)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199310):
-In fact rfl is much weaker in ZFC
+<p>In fact rfl is much weaker in ZFC</p>
 
 #### [ Kenny Lau (May 28 2018 at 12:24)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199346):
-@**Kevin Buzzard** you aren't working in ZFC. you are working in ZFC + definition expansion + delta reduction
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> you aren't working in ZFC. you are working in ZFC + definition expansion + delta reduction</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:24)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199349):
-Mario quote
-```
-import data.set
+<p>Mario quote</p>
+<div class="codehilite"><pre><span></span>import data.set
 
 -- ZFC-safe! The below code uses only Prop and Type
 
 variables {X Y : Type} (f : X → Y) (U : set X)
 
 theorem they_are_not_defeq : image (@id X) U = U := rfl -- works
-```
-Doesn't work for me
+</pre></div>
+
+
+<p>Doesn't work for me</p>
 
 #### [ Mario Carneiro (May 28 2018 at 12:24)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199355):
-`+` equality reflection
+<p><code>+</code> equality reflection</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:24)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199361):
-`unknown identifier 'image'`
+<p><code>unknown identifier 'image'</code></p>
 
 #### [ Kenny Lau (May 28 2018 at 12:24)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199362):
-@**Kevin Buzzard** I really do not see any problem at all. `id '' U` does not expand to `U`. you have to destruct the definitions and **use extensionality**
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> I really do not see any problem at all. <code>id '' U</code> does not expand to <code>U</code>. you have to destruct the definitions and <strong>use extensionality</strong></p>
 
 #### [ Mario Carneiro (May 28 2018 at 12:24)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199365):
-I didn't say that
+<p>I didn't say that</p>
 
 #### [ Kenny Lau (May 28 2018 at 12:25)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199367):
-that's what I mean
+<p>that's what I mean</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:25)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199373):
-I am just trying to get to the bottom of things
+<p>I am just trying to get to the bottom of things</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:25)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199374):
-but I have never seen refl work for anything
+<p>but I have never seen refl work for anything</p>
 
 #### [ Kenny Lau (May 28 2018 at 12:25)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199377):
-if you need to **use the axiom of extensionality** to prove that they are equal, then they aren't definitionally equal
+<p>if you need to <strong>use the axiom of extensionality</strong> to prove that they are equal, then they aren't definitionally equal</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:25)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199378):
-and I've never seen by simp work either
+<p>and I've never seen by simp work either</p>
 
 #### [ Kenny Lau (May 28 2018 at 12:25)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199380):
-and i'm working in ZFC to say that
+<p>and i'm working in ZFC to say that</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:25)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199381):
-but I'm just trying to put everything together
+<p>but I'm just trying to put everything together</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:25)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199384):
-it's hard trying to distinguish between equal things
+<p>it's hard trying to distinguish between equal things</p>
 
 #### [ Mario Carneiro (May 28 2018 at 12:26)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199440):
-It's not so hard: `id '' U` has more words than `U`, so they aren't the same
+<p>It's not so hard: <code>id '' U</code> has more words than <code>U</code>, so they aren't the same</p>
 
 #### [ Mario Carneiro (May 28 2018 at 12:28)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199502):
-Here's an example of `rfl` working:
-```
-definition image := {y : Y | ∃ x ∈ U, y = f x}
+<p>Here's an example of <code>rfl</code> working:</p>
+<div class="codehilite"><pre><span></span>definition image := {y : Y | ∃ x ∈ U, y = f x}
 
 example : image (@id X) U = {y | ∃ x ∈ U, y = x} := rfl
-```
+</pre></div>
 
 #### [ Mario Carneiro (May 28 2018 at 12:29)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199506):
-that's how definitional expansion is supposed to work
+<p>that's how definitional expansion is supposed to work</p>
 
 #### [ Mario Carneiro (May 28 2018 at 12:29)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199512):
-this is what ZFC gives you (except you would have to work on id(x) = x in the middle there, that's not definitional in ZFC)
+<p>this is what ZFC gives you (except you would have to work on id(x) = x in the middle there, that's not definitional in ZFC)</p>
 
 #### [ Kenny Lau (May 28 2018 at 12:29)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199516):
-@**Kevin Buzzard** here's how I can formalize what I say: if you didn't have `propext` as an axiom, then you won't be able to prove that the two sets are equal, in Lean
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> here's how I can formalize what I say: if you didn't have <code>propext</code> as an axiom, then you won't be able to prove that the two sets are equal, in Lean</p>
 
 #### [ Kenny Lau (May 28 2018 at 12:30)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199557):
-the ZFC version replaces `propext` with the axiom of extensionality
+<p>the ZFC version replaces <code>propext</code> with the axiom of extensionality</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:31)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199573):
-```lean
-import data.set
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">set</span>
 
--- ZFC-safe! The below code uses only Prop and Type
+<span class="c1">-- ZFC-safe! The below code uses only Prop and Type</span>
 
-variables {X Y : Type} (f : X → Y) (U : set X)
+<span class="kn">variables</span> <span class="o">{</span><span class="n">X</span> <span class="n">Y</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">X</span> <span class="bp">→</span> <span class="n">Y</span><span class="o">)</span> <span class="o">(</span><span class="n">U</span> <span class="o">:</span> <span class="n">set</span> <span class="n">X</span><span class="o">)</span>
 
-definition image' := {y : Y | ∃ x ∈ U, f x = y}
+<span class="kn">definition</span> <span class="n">image&#39;</span> <span class="o">:=</span> <span class="o">{</span><span class="n">y</span> <span class="o">:</span> <span class="n">Y</span> <span class="bp">|</span> <span class="bp">∃</span> <span class="n">x</span> <span class="err">∈</span> <span class="n">U</span><span class="o">,</span> <span class="n">f</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">y</span><span class="o">}</span>
 
-theorem they_are_the_same : image' (@id X) U = U := by refl -- fails
-theorem they_are_the_same' : id '' U = U := by refl -- fails
-theorem they_are_all_the_same_thing_ : id '' U = image' (@id X) U := by refl -- fails
-theorem but_they_are_all_the_same : set.image (@id X) U = U := by refl -- fails
-theorem why_are_they_all_different : id '' U = set.image (@id X) U := by refl -- thank god
-
-
-```
+<span class="kn">theorem</span> <span class="n">they_are_the_same</span> <span class="o">:</span> <span class="n">image&#39;</span> <span class="o">(</span><span class="bp">@</span><span class="n">id</span> <span class="n">X</span><span class="o">)</span> <span class="n">U</span> <span class="bp">=</span> <span class="n">U</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">refl</span> <span class="c1">-- fails</span>
+<span class="kn">theorem</span> <span class="n">they_are_the_same&#39;</span> <span class="o">:</span> <span class="n">id</span> <span class="err">&#39;&#39;</span> <span class="n">U</span> <span class="bp">=</span> <span class="n">U</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">refl</span> <span class="c1">-- fails</span>
+<span class="kn">theorem</span> <span class="n">they_are_all_the_same_thing_</span> <span class="o">:</span> <span class="n">id</span> <span class="err">&#39;&#39;</span> <span class="n">U</span> <span class="bp">=</span> <span class="n">image&#39;</span> <span class="o">(</span><span class="bp">@</span><span class="n">id</span> <span class="n">X</span><span class="o">)</span> <span class="n">U</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">refl</span> <span class="c1">-- fails</span>
+<span class="kn">theorem</span> <span class="n">but_they_are_all_the_same</span> <span class="o">:</span> <span class="n">set</span><span class="bp">.</span><span class="n">image</span> <span class="o">(</span><span class="bp">@</span><span class="n">id</span> <span class="n">X</span><span class="o">)</span> <span class="n">U</span> <span class="bp">=</span> <span class="n">U</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">refl</span> <span class="c1">-- fails</span>
+<span class="kn">theorem</span> <span class="n">why_are_they_all_different</span> <span class="o">:</span> <span class="n">id</span> <span class="err">&#39;&#39;</span> <span class="n">U</span> <span class="bp">=</span> <span class="n">set</span><span class="bp">.</span><span class="n">image</span> <span class="o">(</span><span class="bp">@</span><span class="n">id</span> <span class="n">X</span><span class="o">)</span> <span class="n">U</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">refl</span> <span class="c1">-- thank god</span>
+</pre></div>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:31)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199574):
-:-(
+<p>:-(</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:31)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199585):
-They are the same -- you just have the wrong equivalence relation
+<p>They are the same -- you just have the wrong equivalence relation</p>
 
 #### [ Kenny Lau (May 28 2018 at 12:31)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199588):
-I've been repeating the same thing 100 times.
+<p>I've been repeating the same thing 100 times.</p>
 
 #### [ Mario Carneiro (May 28 2018 at 12:32)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199627):
-`set.image` is defined as `{y : Y | ∃ x, x ∈ U ∧ f x = y}`
+<p><code>set.image</code> is defined as <code>{y : Y | ∃ x, x ∈ U ∧ f x = y}</code></p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:32)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199633):
-```quote
-I've been repeating the same thing 100 times.
-```
-I know but you didn't fix it yet
+<blockquote>
+<p>I've been repeating the same thing 100 times.</p>
+</blockquote>
+<p>I know but you didn't fix it yet</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:32)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199634):
-all the proofs are "by schoolkid"
+<p>all the proofs are "by schoolkid"</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:32)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199636):
-Kenny do you want to do that for your 1st year project?
+<p>Kenny do you want to do that for your 1st year project?</p>
 
 #### [ Kenny Lau (May 28 2018 at 12:32)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199637):
-```quote
-```lean
-definition image := {y : Y | ∃ x ∈ U, f x = y}
-example : image (@id X) U = U :=
-by simp [image]
-```
-```
+<blockquote>
+<div class="codehilite"><pre><span></span><span class="kn">definition</span> <span class="n">image</span> <span class="o">:=</span> <span class="o">{</span><span class="n">y</span> <span class="o">:</span> <span class="n">Y</span> <span class="bp">|</span> <span class="bp">∃</span> <span class="n">x</span> <span class="err">∈</span> <span class="n">U</span><span class="o">,</span> <span class="n">f</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">y</span><span class="o">}</span>
+<span class="kn">example</span> <span class="o">:</span> <span class="n">image</span> <span class="o">(</span><span class="bp">@</span><span class="n">id</span> <span class="n">X</span><span class="o">)</span> <span class="n">U</span> <span class="bp">=</span> <span class="n">U</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">image</span><span class="o">]</span>
+</pre></div>
+
+
+</blockquote>
 
 #### [ Kenny Lau (May 28 2018 at 12:32)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199638):
-you must be blind
+<p>you must be blind</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:33)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199643):
-but it never just says "by simp"
+<p>but it never just says "by simp"</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:33)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199648):
-which ones get done by simp
+<p>which ones get done by simp</p>
 
 #### [ Mario Carneiro (May 28 2018 at 12:33)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199649):
-no because that would be horrible in most proofs
+<p>no because that would be horrible in most proofs</p>
 
 #### [ Kenny Lau (May 28 2018 at 12:33)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199651):
-Kevin, you don't want `by simp` to automatically unfold every definition for you.
+<p>Kevin, you don't want <code>by simp</code> to automatically unfold every definition for you.</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:34)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199692):
-```lean
-import data.set
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">set</span>
 
--- ZFC-safe! The below code uses only Prop and Type
+<span class="c1">-- ZFC-safe! The below code uses only Prop and Type</span>
 
-variables {X Y : Type} (f : X → Y) (U : set X)
+<span class="kn">variables</span> <span class="o">{</span><span class="n">X</span> <span class="n">Y</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">X</span> <span class="bp">→</span> <span class="n">Y</span><span class="o">)</span> <span class="o">(</span><span class="n">U</span> <span class="o">:</span> <span class="n">set</span> <span class="n">X</span><span class="o">)</span>
 
-definition image' := {y : Y | ∃ x ∈ U, f x = y}
+<span class="kn">definition</span> <span class="n">image&#39;</span> <span class="o">:=</span> <span class="o">{</span><span class="n">y</span> <span class="o">:</span> <span class="n">Y</span> <span class="bp">|</span> <span class="bp">∃</span> <span class="n">x</span> <span class="err">∈</span> <span class="n">U</span><span class="o">,</span> <span class="n">f</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">y</span><span class="o">}</span>
 
-theorem they_are_the_same : image' (@id X) U = U := by simp -- fails
-theorem they_are_the_same' : id '' U = U := by simp -- fails
-theorem they_are_all_the_same_thing_ : id '' U = image' (@id X) U := by simp -- fails
-theorem but_they_are_all_the_same : set.image (@id X) U = U := by simp -- fails
-theorem why_are_they_all_different : id '' U = set.image (@id X) U := by simp -- I wasn't 100% confident but we got through
-
-
-
-```
+<span class="kn">theorem</span> <span class="n">they_are_the_same</span> <span class="o">:</span> <span class="n">image&#39;</span> <span class="o">(</span><span class="bp">@</span><span class="n">id</span> <span class="n">X</span><span class="o">)</span> <span class="n">U</span> <span class="bp">=</span> <span class="n">U</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">simp</span> <span class="c1">-- fails</span>
+<span class="kn">theorem</span> <span class="n">they_are_the_same&#39;</span> <span class="o">:</span> <span class="n">id</span> <span class="err">&#39;&#39;</span> <span class="n">U</span> <span class="bp">=</span> <span class="n">U</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">simp</span> <span class="c1">-- fails</span>
+<span class="kn">theorem</span> <span class="n">they_are_all_the_same_thing_</span> <span class="o">:</span> <span class="n">id</span> <span class="err">&#39;&#39;</span> <span class="n">U</span> <span class="bp">=</span> <span class="n">image&#39;</span> <span class="o">(</span><span class="bp">@</span><span class="n">id</span> <span class="n">X</span><span class="o">)</span> <span class="n">U</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">simp</span> <span class="c1">-- fails</span>
+<span class="kn">theorem</span> <span class="n">but_they_are_all_the_same</span> <span class="o">:</span> <span class="n">set</span><span class="bp">.</span><span class="n">image</span> <span class="o">(</span><span class="bp">@</span><span class="n">id</span> <span class="n">X</span><span class="o">)</span> <span class="n">U</span> <span class="bp">=</span> <span class="n">U</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">simp</span> <span class="c1">-- fails</span>
+<span class="kn">theorem</span> <span class="n">why_are_they_all_different</span> <span class="o">:</span> <span class="n">id</span> <span class="err">&#39;&#39;</span> <span class="n">U</span> <span class="bp">=</span> <span class="n">set</span><span class="bp">.</span><span class="n">image</span> <span class="o">(</span><span class="bp">@</span><span class="n">id</span> <span class="n">X</span><span class="o">)</span> <span class="n">U</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">simp</span> <span class="c1">-- I wasn&#39;t 100% confident but we got through</span>
+</pre></div>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:34)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199695):
-Why do I have to work, or even *think*, about proving that two objects are the same, when they are the same object?
+<p>Why do I have to work, or even <em>think</em>, about proving that two objects are the same, when they are the same object?</p>
 
 #### [ Kenny Lau (May 28 2018 at 12:34)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199696):
-here we go again
+<p>here we go again</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:34)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199697):
-Why doesn't it do it for me?
+<p>Why doesn't it do it for me?</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:34)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199699):
-That's what I want
+<p>That's what I want</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:34)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199700):
-Make it do it for me
+<p>Make it do it for me</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:34)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199701):
-simp is rubbish
+<p>simp is rubbish</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:34)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199703):
-make a proper one
+<p>make a proper one</p>
 
 #### [ Kenny Lau (May 28 2018 at 12:34)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199704):
-do we have to go through the ZFC proof that they are the same again?
+<p>do we have to go through the ZFC proof that they are the same again?</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:34)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199705):
-make schoolkid
+<p>make schoolkid</p>
 
 #### [ Mario Carneiro (May 28 2018 at 12:35)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199710):
-Stop trolling Kevin
+<p>Stop trolling Kevin</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:35)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199713):
-I don't understand why this can't be done
+<p>I don't understand why this can't be done</p>
 
 #### [ Kenny Lau (May 28 2018 at 12:35)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199715):
-I already explained 100 times
+<p>I already explained 100 times</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:35)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199716):
-Why can my brain do it?
+<p>Why can my brain do it?</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:35)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199717):
-Aren't I just a computer?
+<p>Aren't I just a computer?</p>
 
 #### [ Kenny Lau (May 28 2018 at 12:35)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199718):
-because your brain knows when to expand a definition and when not to
+<p>because your brain knows when to expand a definition and when not to</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:36)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199763):
-I think Lean can also decide when to expand a definition and when not to
+<p>I think Lean can also decide when to expand a definition and when not to</p>
 
 #### [ Kenny Lau (May 28 2018 at 12:36)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199765):
-how?
+<p>how?</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:36)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199768):
-I don't get what I'm so good at that Lean can't do
+<p>I don't get what I'm so good at that Lean can't do</p>
 
 #### [ Kenny Lau (May 28 2018 at 12:36)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199769):
-with 10 definitions that is 1024 choices
+<p>with 10 definitions that is 1024 choices</p>
 
 #### [ Kenny Lau (May 28 2018 at 12:36)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199771):
-humans are good at small things
+<p>humans are good at small things</p>
 
 #### [ Kenny Lau (May 28 2018 at 12:36)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199773):
-humans don't have the guarantee that their algorithm works in every case
+<p>humans don't have the guarantee that their algorithm works in every case</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:36)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199775):
-I guess here's a good analogue.
+<p>I guess here's a good analogue.</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:37)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199784):
-"OK so I'm quite good at go. Why don't you CS guys quickly knock up something that's as good as me at go and then I can retire"
+<p>"OK so I'm quite good at go. Why don't you CS guys quickly knock up something that's as good as me at go and then I can retire"</p>
 
 #### [ Kenny Lau (May 28 2018 at 12:37)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199787):
-a human may be able to square a small number faster than a computer (not really)
+<p>a human may be able to square a small number faster than a computer (not really)</p>
 
 #### [ Kenny Lau (May 28 2018 at 12:37)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199789):
-but as the number gets large, the computer wins by a lot
+<p>but as the number gets large, the computer wins by a lot</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:37)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199793):
-I square small numbers by lookup
+<p>I square small numbers by lookup</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:37)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199794):
-they're hard wired
+<p>they're hard wired</p>
 
 #### [ Kenny Lau (May 28 2018 at 12:37)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199796):
-right
+<p>right</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:37)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199799):
-unlike whatever I said 5 minutes ago
+<p>unlike whatever I said 5 minutes ago</p>
 
 #### [ Kenny Lau (May 28 2018 at 12:37)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199800):
-humans are good at small things
+<p>humans are good at small things</p>
 
 #### [ Kenny Lau (May 28 2018 at 12:37)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199803):
-`id '' U = U` is short
+<p><code>id '' U = U</code> is short</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:37)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199806):
-and true!
+<p>and true!</p>
 
 #### [ Kenny Lau (May 28 2018 at 12:38)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199822):
-here we go again
+<p>here we go again</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:38)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199846):
-The world just became a smaller place!
+<p>The world just became a smaller place!</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:38)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199849):
-Two things became equal!
+<p>Two things became equal!</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:38)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199851):
-They are now the same thing, everyone please update your records
+<p>They are now the same thing, everyone please update your records</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:38)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199852):
-Why doesn't it work like that?
+<p>Why doesn't it work like that?</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:38)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199856):
-Where's the tactic that takes care of this for me?
+<p>Where's the tactic that takes care of this for me?</p>
 
 #### [ Kenny Lau (May 28 2018 at 12:38)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199858):
-you want a tactic to try to expand definitions
+<p>you want a tactic to try to expand definitions</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:39)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199862):
-I have no clear idea what tactics do
+<p>I have no clear idea what tactics do</p>
 
 #### [ Kenny Lau (May 28 2018 at 12:39)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199864):
-that will work for small cases
+<p>that will work for small cases</p>
 
 #### [ Kenny Lau (May 28 2018 at 12:39)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199866):
-that will not work for big cases
+<p>that will not work for big cases</p>
 
 #### [ Mario Carneiro (May 28 2018 at 12:39)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199867):
-In general that's undecidable
+<p>In general that's undecidable</p>
 
 #### [ Kenny Lau (May 28 2018 at 12:39)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199868):
-humans are **only** good at small things
+<p>humans are <strong>only</strong> good at small things</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:39)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199869):
-Maybe learning tactics would help me understand my frustrations better.
+<p>Maybe learning tactics would help me understand my frustrations better.</p>
 
 #### [ Andrew Ashworth (May 28 2018 at 12:39)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199870):
-```quote
-Maybe learning tactics would help me understand my frustrations better.
-```
-yes
+<blockquote>
+<p>Maybe learning tactics would help me understand my frustrations better.</p>
+</blockquote>
+<p>yes</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:39)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199871):
-It's a huge hole in my Lean knowledge
+<p>It's a huge hole in my Lean knowledge</p>
 
 #### [ Kenny Lau (May 28 2018 at 12:39)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199873):
-```lean
-definition image' := {y : Y | ∃ x ∈ U, f x = y}
+<div class="codehilite"><pre><span></span><span class="kn">definition</span> <span class="n">image&#39;</span> <span class="o">:=</span> <span class="o">{</span><span class="n">y</span> <span class="o">:</span> <span class="n">Y</span> <span class="bp">|</span> <span class="bp">∃</span> <span class="n">x</span> <span class="err">∈</span> <span class="n">U</span><span class="o">,</span> <span class="n">f</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">y</span><span class="o">}</span>
 
-attribute [simp] set.image_id
+<span class="n">attribute</span> <span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="n">set</span><span class="bp">.</span><span class="n">image_id</span>
 
-theorem they_are_the_same : image' (@id X) U = U := by simp [image'] -- works
-theorem they_are_the_same' : id '' U = U := by simp -- works
-theorem they_are_all_the_same_thing_ : id '' U = image' (@id X) U := by simp [image'] -- works
-theorem but_they_are_all_the_same : set.image (@id X) U = U := by simp -- works
-theorem why_are_they_all_different : id '' U = set.image (@id X) U := by simp
-```
+<span class="kn">theorem</span> <span class="n">they_are_the_same</span> <span class="o">:</span> <span class="n">image&#39;</span> <span class="o">(</span><span class="bp">@</span><span class="n">id</span> <span class="n">X</span><span class="o">)</span> <span class="n">U</span> <span class="bp">=</span> <span class="n">U</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">image&#39;</span><span class="o">]</span> <span class="c1">-- works</span>
+<span class="kn">theorem</span> <span class="n">they_are_the_same&#39;</span> <span class="o">:</span> <span class="n">id</span> <span class="err">&#39;&#39;</span> <span class="n">U</span> <span class="bp">=</span> <span class="n">U</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">simp</span> <span class="c1">-- works</span>
+<span class="kn">theorem</span> <span class="n">they_are_all_the_same_thing_</span> <span class="o">:</span> <span class="n">id</span> <span class="err">&#39;&#39;</span> <span class="n">U</span> <span class="bp">=</span> <span class="n">image&#39;</span> <span class="o">(</span><span class="bp">@</span><span class="n">id</span> <span class="n">X</span><span class="o">)</span> <span class="n">U</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">image&#39;</span><span class="o">]</span> <span class="c1">-- works</span>
+<span class="kn">theorem</span> <span class="n">but_they_are_all_the_same</span> <span class="o">:</span> <span class="n">set</span><span class="bp">.</span><span class="n">image</span> <span class="o">(</span><span class="bp">@</span><span class="n">id</span> <span class="n">X</span><span class="o">)</span> <span class="n">U</span> <span class="bp">=</span> <span class="n">U</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">simp</span> <span class="c1">-- works</span>
+<span class="kn">theorem</span> <span class="n">why_are_they_all_different</span> <span class="o">:</span> <span class="n">id</span> <span class="err">&#39;&#39;</span> <span class="n">U</span> <span class="bp">=</span> <span class="n">set</span><span class="bp">.</span><span class="n">image</span> <span class="o">(</span><span class="bp">@</span><span class="n">id</span> <span class="n">X</span><span class="o">)</span> <span class="n">U</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">simp</span>
+</pre></div>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:39)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199874):
-All I know is that tactic is a monoid or monad or something
+<p>All I know is that tactic is a monoid or monad or something</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:40)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199920):
-`theorem they_are_the_same' : id '' U = U := by simp -- fails`
+<p><code>theorem they_are_the_same' : id '' U = U := by simp -- fails</code></p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:40)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199921):
-?
+<p>?</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:40)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199923):
-it works for you?
+<p>it works for you?</p>
 
 #### [ Kenny Lau (May 28 2018 at 12:40)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199924):
-@**Mario Carneiro** can I get `simp` to automatically unfold certain definitions? `reducible` doesn't work
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> can I get <code>simp</code> to automatically unfold certain definitions? <code>reducible</code> doesn't work</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:40)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199928):
-oh you CHEATED
+<p>oh you CHEATED</p>
 
 #### [ Mario Carneiro (May 28 2018 at 12:40)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199929):
-`@[simp]` can go on definitions
+<p><code>@[simp]</code> can go on definitions</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:40)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199931):
-You gave simp a hint
+<p>You gave simp a hint</p>
 
 #### [ Mario Carneiro (May 28 2018 at 12:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199934):
-YES
+<p>YES</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199938):
-So that hint should have been there alreadyt
+<p>So that hint should have been there alreadyt</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199939):
-already
+<p>already</p>
 
 #### [ Kenny Lau (May 28 2018 at 12:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199941):
-thanks @**Mario Carneiro**
+<p>thanks <span class="user-mention" data-user-id="110049">@Mario Carneiro</span></p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199942):
-why isn't it a simp lemma?
+<p>why isn't it a simp lemma?</p>
 
 #### [ Kenny Lau (May 28 2018 at 12:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199943):
-now I can convince him:
+<p>now I can convince him:</p>
 
 #### [ Kenny Lau (May 28 2018 at 12:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199944):
-```lean
-@[simp] def image' := {y : Y | ∃ x ∈ U, f x = y}
+<div class="codehilite"><pre><span></span><span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="n">def</span> <span class="n">image&#39;</span> <span class="o">:=</span> <span class="o">{</span><span class="n">y</span> <span class="o">:</span> <span class="n">Y</span> <span class="bp">|</span> <span class="bp">∃</span> <span class="n">x</span> <span class="err">∈</span> <span class="n">U</span><span class="o">,</span> <span class="n">f</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">y</span><span class="o">}</span>
 
-attribute [simp] set.image
+<span class="n">attribute</span> <span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="n">set</span><span class="bp">.</span><span class="n">image</span>
 
-theorem they_are_the_same : image' (@id X) U = U := by simp -- works
-theorem they_are_the_same' : id '' U = U := by simp -- works
-theorem they_are_all_the_same_thing_ : id '' U = image' (@id X) U := by simp -- works
-theorem but_they_are_all_the_same : set.image (@id X) U = U := by simp -- works
-theorem why_are_they_all_different : id '' U = set.image (@id X) U := by simp
-```
+<span class="kn">theorem</span> <span class="n">they_are_the_same</span> <span class="o">:</span> <span class="n">image&#39;</span> <span class="o">(</span><span class="bp">@</span><span class="n">id</span> <span class="n">X</span><span class="o">)</span> <span class="n">U</span> <span class="bp">=</span> <span class="n">U</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">simp</span> <span class="c1">-- works</span>
+<span class="kn">theorem</span> <span class="n">they_are_the_same&#39;</span> <span class="o">:</span> <span class="n">id</span> <span class="err">&#39;&#39;</span> <span class="n">U</span> <span class="bp">=</span> <span class="n">U</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">simp</span> <span class="c1">-- works</span>
+<span class="kn">theorem</span> <span class="n">they_are_all_the_same_thing_</span> <span class="o">:</span> <span class="n">id</span> <span class="err">&#39;&#39;</span> <span class="n">U</span> <span class="bp">=</span> <span class="n">image&#39;</span> <span class="o">(</span><span class="bp">@</span><span class="n">id</span> <span class="n">X</span><span class="o">)</span> <span class="n">U</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">simp</span> <span class="c1">-- works</span>
+<span class="kn">theorem</span> <span class="n">but_they_are_all_the_same</span> <span class="o">:</span> <span class="n">set</span><span class="bp">.</span><span class="n">image</span> <span class="o">(</span><span class="bp">@</span><span class="n">id</span> <span class="n">X</span><span class="o">)</span> <span class="n">U</span> <span class="bp">=</span> <span class="n">U</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">simp</span> <span class="c1">-- works</span>
+<span class="kn">theorem</span> <span class="n">why_are_they_all_different</span> <span class="o">:</span> <span class="n">id</span> <span class="err">&#39;&#39;</span> <span class="n">U</span> <span class="bp">=</span> <span class="n">set</span><span class="bp">.</span><span class="n">image</span> <span class="o">(</span><span class="bp">@</span><span class="n">id</span> <span class="n">X</span><span class="o">)</span> <span class="n">U</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">simp</span>
+</pre></div>
 
 #### [ Mario Carneiro (May 28 2018 at 12:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199945):
-like I said, you shoot me in the leg and ask me to run a marathon
+<p>like I said, you shoot me in the leg and ask me to run a marathon</p>
 
 #### [ Mario Carneiro (May 28 2018 at 12:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199947):
-it should be a simp lemma, I fixed
+<p>it should be a simp lemma, I fixed</p>
 
 #### [ Johan Commelin (May 28 2018 at 12:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199948):
-```quote
-why isn't it a simp lemma?
-```
-you mean a simp definition?
+<blockquote>
+<p>why isn't it a simp lemma?</p>
+</blockquote>
+<p>you mean a simp definition?</p>
 
 #### [ Kenny Lau (May 28 2018 at 12:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199949):
-@**Johan Commelin** no, `set.image_id`
+<p><span class="user-mention" data-user-id="112680">@Johan Commelin</span> no, <code>set.image_id</code></p>
 
 #### [ Kenny Lau (May 28 2018 at 12:42)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199951):
-not a definition
+<p>not a definition</p>
 
 #### [ Johan Commelin (May 28 2018 at 12:42)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199990):
-Aaah, ok, true
+<p>Aaah, ok, true</p>
 
 #### [ Kenny Lau (May 28 2018 at 12:42)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199991):
-now is @**Kevin Buzzard** happy?
+<p>now is <span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> happy?</p>
 
 #### [ Kenny Lau (May 28 2018 at 12:42)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199995):
-after the fix I will be able to remove that line
+<p>after the fix I will be able to remove that line</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:42)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199996):
-Oh!
+<p>Oh!</p>
 
 #### [ Kenny Lau (May 28 2018 at 12:42)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199997):
-```lean
-@[simp] def image' := {y : Y | ∃ x ∈ U, f x = y}
+<div class="codehilite"><pre><span></span><span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="n">def</span> <span class="n">image&#39;</span> <span class="o">:=</span> <span class="o">{</span><span class="n">y</span> <span class="o">:</span> <span class="n">Y</span> <span class="bp">|</span> <span class="bp">∃</span> <span class="n">x</span> <span class="err">∈</span> <span class="n">U</span><span class="o">,</span> <span class="n">f</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">y</span><span class="o">}</span>
 
-attribute [simp] set.image_id
+<span class="n">attribute</span> <span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="n">set</span><span class="bp">.</span><span class="n">image_id</span>
 
-theorem they_are_the_same : image' (@id X) U = U := by simp -- works
-theorem they_are_the_same' : id '' U = U := by simp -- works
-theorem they_are_all_the_same_thing_ : id '' U = image' (@id X) U := by simp -- works
-theorem but_they_are_all_the_same : set.image (@id X) U = U := by simp -- works
-theorem why_are_they_all_different : id '' U = set.image (@id X) U := by simp
-```
+<span class="kn">theorem</span> <span class="n">they_are_the_same</span> <span class="o">:</span> <span class="n">image&#39;</span> <span class="o">(</span><span class="bp">@</span><span class="n">id</span> <span class="n">X</span><span class="o">)</span> <span class="n">U</span> <span class="bp">=</span> <span class="n">U</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">simp</span> <span class="c1">-- works</span>
+<span class="kn">theorem</span> <span class="n">they_are_the_same&#39;</span> <span class="o">:</span> <span class="n">id</span> <span class="err">&#39;&#39;</span> <span class="n">U</span> <span class="bp">=</span> <span class="n">U</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">simp</span> <span class="c1">-- works</span>
+<span class="kn">theorem</span> <span class="n">they_are_all_the_same_thing_</span> <span class="o">:</span> <span class="n">id</span> <span class="err">&#39;&#39;</span> <span class="n">U</span> <span class="bp">=</span> <span class="n">image&#39;</span> <span class="o">(</span><span class="bp">@</span><span class="n">id</span> <span class="n">X</span><span class="o">)</span> <span class="n">U</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">simp</span> <span class="c1">-- works</span>
+<span class="kn">theorem</span> <span class="n">but_they_are_all_the_same</span> <span class="o">:</span> <span class="n">set</span><span class="bp">.</span><span class="n">image</span> <span class="o">(</span><span class="bp">@</span><span class="n">id</span> <span class="n">X</span><span class="o">)</span> <span class="n">U</span> <span class="bp">=</span> <span class="n">U</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">simp</span> <span class="c1">-- works</span>
+<span class="kn">theorem</span> <span class="n">why_are_they_all_different</span> <span class="o">:</span> <span class="n">id</span> <span class="err">&#39;&#39;</span> <span class="n">U</span> <span class="bp">=</span> <span class="n">set</span><span class="bp">.</span><span class="n">image</span> <span class="o">(</span><span class="bp">@</span><span class="n">id</span> <span class="n">X</span><span class="o">)</span> <span class="n">U</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">simp</span>
+</pre></div>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:43)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127199998):
-You see I have *absolutely no idea* about whether this is suitable as a simp lemma.
+<p>You see I have <em>absolutely no idea</em> about whether this is suitable as a simp lemma.</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:43)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127200003):
-All i know is that it passes two basic tests
+<p>All i know is that it passes two basic tests</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:43)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127200004):
-(1) it's an equality
+<p>(1) it's an equality</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:43)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127200005):
-(2) the left hand side has more characters than the right hand side
+<p>(2) the left hand side has more characters than the right hand side</p>
 
 #### [ Mario Carneiro (May 28 2018 at 12:43)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127200007):
-image_id is a good simp lemma
+<p>image_id is a good simp lemma</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:43)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127200009):
-My entry requirements for simp are pretty low
+<p>My entry requirements for simp are pretty low</p>
 
 #### [ Kenny Lau (May 28 2018 at 12:43)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127200010):
-so is @**Kevin Buzzard** satisfied now?
+<p>so is <span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> satisfied now?</p>
 
 #### [ Mario Carneiro (May 28 2018 at 12:43)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127200011):
-most theorems of the form "my_func special_arg = value" are good simp lemmas
+<p>most theorems of the form "my_func special_arg = value" are good simp lemmas</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:43)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127200013):
-```quote
-image_id is a good simp lemma
-```
-I feel I could not say that with confidence
+<blockquote>
+<p>image_id is a good simp lemma</p>
+</blockquote>
+<p>I feel I could not say that with confidence</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:44)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127200051):
-and that's what I mean when I say that I still don't understand simp properly
+<p>and that's what I mean when I say that I still don't understand simp properly</p>
 
 #### [ Mario Carneiro (May 28 2018 at 12:44)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127200058):
-It takes more knowledge to set up good simp lemmas than to use simp of course
+<p>It takes more knowledge to set up good simp lemmas than to use simp of course</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:44)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127200060):
-Exactly.
+<p>Exactly.</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:44)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127200061):
-I want to become a power user
+<p>I want to become a power user</p>
 
 #### [ Mario Carneiro (May 28 2018 at 12:45)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127200062):
-because it's a global problem with some locality
+<p>because it's a global problem with some locality</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:45)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127200072):
-but I don't know anywhere where random nuggets such as
+<p>but I don't know anywhere where random nuggets such as</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:45)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127200074):
-```quote
-most theorems of the form "my_func special_arg = value" are good simp lemmas
-```
+<blockquote>
+<p>most theorems of the form "my_func special_arg = value" are good simp lemmas</p>
+</blockquote>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:45)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127200075):
-appear, other than here
+<p>appear, other than here</p>
 
 #### [ Mario Carneiro (May 28 2018 at 12:45)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127200080):
-You could just look at the many many examples in mathlib
+<p>You could just look at the many many examples in mathlib</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:46)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127200120):
-reading code is so *boring*
+<p>reading code is so <em>boring</em></p>
 
 #### [ Andrew Ashworth (May 28 2018 at 12:46)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127200121):
-only masochistic CS graduate students get interested in software verification
+<p>only masochistic CS graduate students get interested in software verification</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:46)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127200122):
-that's what CS people do
+<p>that's what CS people do</p>
 
 #### [ Andrew Ashworth (May 28 2018 at 12:46)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127200123):
-your tips are folklore in CS departments
+<p>your tips are folklore in CS departments</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:46)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127200126):
-I want to talk to more CS people
+<p>I want to talk to more CS people</p>
 
 #### [ Andrew Ashworth (May 28 2018 at 12:46)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127200127):
-and that textbook I mentioned yesterday
+<p>and that textbook I mentioned yesterday</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:46)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127200128):
-I need simp tips so I can be a power user
+<p>I need simp tips so I can be a power user</p>
 
 #### [ Mario Carneiro (May 28 2018 at 12:46)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127200130):
-term rewriting and all that?
+<p>term rewriting and all that?</p>
 
 #### [ Andrew Ashworth (May 28 2018 at 12:46)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127200131):
-yeah
+<p>yeah</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:46)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127200132):
-I remember a couple of months ago it all dawning on Chris
+<p>I remember a couple of months ago it all dawning on Chris</p>
 
 #### [ Mario Carneiro (May 28 2018 at 12:46)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127200134):
-I'm willing to bet it's full of tips on setting up simp
+<p>I'm willing to bet it's full of tips on setting up simp</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:47)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127200135):
-all of a sudden every other day he was saying to me "wooah simp does much more than you'd expect"
+<p>all of a sudden every other day he was saying to me "wooah simp does much more than you'd expect"</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:47)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127200141):
-and then I knew he'd cracked it
+<p>and then I knew he'd cracked it</p>
 
 #### [ Mario Carneiro (May 28 2018 at 12:47)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127200146):
-and now you are stuck on the other end, where you think simp is magic that solves all problems
+<p>and now you are stuck on the other end, where you think simp is magic that solves all problems</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:48)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127200191):
-I'm still at the novice stage, behind Patrick who can remember the {something = true} stuff that you sometimes have to write at the end of simp for some reason and which you don't have to write in schoolkid
+<p>I'm still at the novice stage, behind Patrick who can remember the {something = true} stuff that you sometimes have to write at the end of simp for some reason and which you don't have to write in schoolkid</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:48)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127200194):
-Actually, how about this for a tactic
+<p>Actually, how about this for a tactic</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:48)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127200200):
-I look through all the permutations and incantations that people have been using with simp recently
+<p>I look through all the permutations and incantations that people have been using with simp recently</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:49)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127200203):
-and I just write a tactic that tries all of them on my goal
+<p>and I just write a tactic that tries all of them on my goal</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:49)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127200204):
-and calls it schoolkid
+<p>and calls it schoolkid</p>
 
 #### [ Mario Carneiro (May 28 2018 at 12:49)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127200215):
-I think you could use some CS education, if only so that your suggestions come with algorithms
+<p>I think you could use some CS education, if only so that your suggestions come with algorithms</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:49)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127200216):
-that way I will never have to remember what comes after the [] in simp
+<p>that way I will never have to remember what comes after the [] in simp</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127200280):
-So I was under the misapprehension that the "your brain is just a big computer" people think that writing tactics to do what we do should be fine
+<p>So I was under the misapprehension that the "your brain is just a big computer" people think that writing tactics to do what we do should be fine</p>
 
 #### [ Kenny Lau (May 28 2018 at 12:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127200283):
-your brain is a big computer that doesn't have to do everything correctly, just the small things
+<p>your brain is a big computer that doesn't have to do everything correctly, just the small things</p>
 
 #### [ Mario Carneiro (May 28 2018 at 12:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127200284):
-That same argument says that general AI is just around the corner
+<p>That same argument says that general AI is just around the corner</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127200289):
-I see
+<p>I see</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127200294):
-So is it possible to isolate "the techniques that I use to solve goals in ZFC"?
+<p>So is it possible to isolate "the techniques that I use to solve goals in ZFC"?</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127200295):
-Is that the question?
+<p>Is that the question?</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127200296):
-Can I code this in a Lean tactic?
+<p>Can I code this in a Lean tactic?</p>
 
 #### [ Kenny Lau (May 28 2018 at 12:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127200297):
-those techniques only work for small cases
+<p>those techniques only work for small cases</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127200303):
-Are you saying that this is hard
+<p>Are you saying that this is hard</p>
 
 #### [ Kenny Lau (May 28 2018 at 12:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127200336):
-they can't be verified
+<p>they can't be verified</p>
 
 #### [ Andrew Ashworth (May 28 2018 at 12:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127200340):
-can you write those techniques down as a sequence of steps in the language of Lean?
+<p>can you write those techniques down as a sequence of steps in the language of Lean?</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127200342):
-I find it so difficult to see how it can be hard when it's just checking that things are all the same
+<p>I find it so difficult to see how it can be hard when it's just checking that things are all the same</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127200344):
-@**Andrew Ashworth** This is exactly the point.
+<p><span class="user-mention" data-user-id="110025">@Andrew Ashworth</span> This is exactly the point.</p>
 
 #### [ Kenny Lau (May 28 2018 at 12:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127200345):
-@**Kevin Buzzard** the techniques include "run upon seeing a theorem with 10000 characters", which can't be one of the things a verified algorithm can do
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> the techniques include "run upon seeing a theorem with 10000 characters", which can't be one of the things a verified algorithm can do</p>
 
 #### [ Mario Carneiro (May 28 2018 at 12:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127200346):
-https://en.wikipedia.org/wiki/Word_problem_for_groups
+<p><a href="https://en.wikipedia.org/wiki/Word_problem_for_groups" target="_blank" title="https://en.wikipedia.org/wiki/Word_problem_for_groups">https://en.wikipedia.org/wiki/Word_problem_for_groups</a></p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127200347):
-When I discovered Lean I realised that it was the computer language I had been waiting for all my life
+<p>When I discovered Lean I realised that it was the computer language I had been waiting for all my life</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127200350):
-and so just thought I'd code my brain up in it
+<p>and so just thought I'd code my brain up in it</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:53)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127200353):
-and I was just assuming it was going to be easy
+<p>and I was just assuming it was going to be easy</p>
 
 #### [ Kenny Lau (May 28 2018 at 12:53)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127200354):
-the world is imperfect
+<p>the world is imperfect</p>
 
 #### [ Kenny Lau (May 28 2018 at 12:53)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127200357):
-computability matters
+<p>computability matters</p>
 
 #### [ Mario Carneiro (May 28 2018 at 12:53)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127200358):
-just checking that things are all the same is undecidable in some simple situations
+<p>just checking that things are all the same is undecidable in some simple situations</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:53)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127200360):
-that's an engineering problem
+<p>that's an engineering problem</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:53)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127200361):
-you CS guys write great algos
+<p>you CS guys write great algos</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:53)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127200363):
-I'm sure you can decide all the stuff I want decided
+<p>I'm sure you can decide all the stuff I want decided</p>
 
 #### [ Mario Carneiro (May 28 2018 at 12:53)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127200364):
-no that's a fundamental limit on progress
+<p>no that's a fundamental limit on progress</p>
 
 #### [ Kenny Lau (May 28 2018 at 12:53)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127200367):
-no, you can't
+<p>no, you can't</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:54)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127200368):
-because I have a *really good feeling* for the provability boundaries of ZFC
+<p>because I have a <em>really good feeling</em> for the provability boundaries of ZFC</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:54)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127200409):
-I know which questions look "weird to me" like CH
+<p>I know which questions look "weird to me" like CH</p>
 
 #### [ Kenny Lau (May 28 2018 at 12:54)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127200410):
-you don't
+<p>you don't</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 12:54)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127200411):
-and which questions look sensible to me like the Langlands Programme
+<p>and which questions look sensible to me like the Langlands Programme</p>
 
 #### [ Kenny Lau (May 28 2018 at 12:54)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127200414):
-there are infinitely many independent theorem in any computable extension of ZFC
+<p>there are infinitely many independent theorem in any computable extension of ZFC</p>
 
 #### [ Kenny Lau (May 28 2018 at 12:54)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127200416):
-and there's no way any algorithm can decide whether a theorem is independent
+<p>and there's no way any algorithm can decide whether a theorem is independent</p>
 
 #### [ Kenny Lau (May 28 2018 at 12:54)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127200418):
-including your brain
+<p>including your brain</p>
 
 #### [ Kenny Lau (May 28 2018 at 12:54)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127200423):
-your brain only knows special cases like CH and AD and AC
+<p>your brain only knows special cases like CH and AD and AC</p>
 
 #### [ Mario Carneiro (May 28 2018 at 12:55)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127200439):
-and it only knows those because it has lots of simp lemmas
+<p>and it only knows those because it has lots of simp lemmas</p>
 
 #### [ Andrew Ashworth (May 28 2018 at 12:55)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127200440):
-hmm, I don't know if you will have long-term success with formal proofs if you don't engage with CS theory and tactic writing. because the tedious bits need to be attacked via automation, and lots of custom automation at that. Remember Bertrand Russell tried to do everything by hand and spent 5 years proving 2+2=4
+<p>hmm, I don't know if you will have long-term success with formal proofs if you don't engage with CS theory and tactic writing. because the tedious bits need to be attacked via automation, and lots of custom automation at that. Remember Bertrand Russell tried to do everything by hand and spent 5 years proving 2+2=4</p>
 
 #### [ Andrew Ashworth (May 28 2018 at 12:55)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127200442):
-and this is my own failing too, it's hard, I haven't learned Lean tactics yet
+<p>and this is my own failing too, it's hard, I haven't learned Lean tactics yet</p>
 
 #### [ Mario Carneiro (May 28 2018 at 12:56)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127200482):
-I could argue that automation is not necessary for getting things done formally
+<p>I could argue that automation is not necessary for getting things done formally</p>
 
 #### [ Mario Carneiro (May 28 2018 at 12:56)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127200484):
-I have plenty of theorems in metamath as evidence
+<p>I have plenty of theorems in metamath as evidence</p>
 
 #### [ Mario Carneiro (May 28 2018 at 12:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127200487):
-but proof engineering is a really important skill
+<p>but proof engineering is a really important skill</p>
 
 #### [ Andrew Ashworth (May 28 2018 at 12:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127200534):
-but there's also evidence from adam chlipala and john harrison that automation is kind of a big deal
+<p>but there's also evidence from adam chlipala and john harrison that automation is kind of a big deal</p>
 
 #### [ Andrew Ashworth (May 28 2018 at 12:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127200547):
-well, and I don't know about math, but software definitely needs automation to discharge repetitive, yet tediously involved goals
+<p>well, and I don't know about math, but software definitely needs automation to discharge repetitive, yet tediously involved goals</p>
 
 #### [ Mario Carneiro (May 28 2018 at 12:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127200548):
-there are multiple styles of proof, and they are all effective in the right hands
+<p>there are multiple styles of proof, and they are all effective in the right hands</p>
 
 #### [ Andrew Ashworth (May 28 2018 at 12:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127200550):
-and i get the feeling from Kevin's worry about schemes that advanced mathematical constructs could also use a large helping of custom automation
+<p>and i get the feeling from Kevin's worry about schemes that advanced mathematical constructs could also use a large helping of custom automation</p>
 
 #### [ Mario Carneiro (May 28 2018 at 12:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127200551):
-I find that good lemmas take most of the brunt of that
+<p>I find that good lemmas take most of the brunt of that</p>
 
 #### [ Mario Carneiro (May 28 2018 at 13:00)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127200599):
-but I grant that working with lean encourages good automation practices
+<p>but I grant that working with lean encourages good automation practices</p>
 
 #### [ Andrew Ashworth (May 28 2018 at 13:01)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127200608):
-there was that whole week long discussion about transporting across equivs and I was thinking "so use `transfer` or write a tactic" bingo problem solved
+<p>there was that whole week long discussion about transporting across equivs and I was thinking "so use <code>transfer</code> or write a tactic" bingo problem solved</p>
 
 #### [ Kenny Lau (May 28 2018 at 13:01)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127200610):
-what was the solution?
+<p>what was the solution?</p>
 
 #### [ Andrew Ashworth (May 28 2018 at 13:03)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127200664):
-to what?
+<p>to what?</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 13:11)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127200954):
-```quote
-in ZFC `id '' U` isn't even defined
-```
-Oh what a bore, you're right
+<blockquote>
+<p>in ZFC <code>id '' U</code> isn't even defined</p>
+</blockquote>
+<p>Oh what a bore, you're right</p>
 
 #### [ Mario Carneiro (May 28 2018 at 13:12)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127201003):
-metamath uses ZFC + classes to get around this
+<p>metamath uses ZFC + classes to get around this</p>
 
 #### [ Mario Carneiro (May 28 2018 at 13:13)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127201012):
-it's a conservative extension, it just lets you express class equalities like this
+<p>it's a conservative extension, it just lets you express class equalities like this</p>
 
 #### [ Mario Carneiro (May 28 2018 at 13:13)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127201028):
-http://us.metamath.org/mpeuni/imai.html
+<p><a href="http://us.metamath.org/mpeuni/imai.html" target="_blank" title="http://us.metamath.org/mpeuni/imai.html">http://us.metamath.org/mpeuni/imai.html</a></p>
 
 #### [ Kevin Buzzard (May 28 2018 at 13:16)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127201134):
-```quote
-that's stupid. What if I can't find the official image so I just make my own image which would then be identical so all the old theorems would work anyway
-```
-This is bad, isn't it? Doesn't it mean that every time I have a terrific new idea for a function, I have to stop what I'm doing and plough through the library to see if someone already wrote it?
+<blockquote>
+<p>that's stupid. What if I can't find the official image so I just make my own image which would then be identical so all the old theorems would work anyway</p>
+</blockquote>
+<p>This is bad, isn't it? Doesn't it mean that every time I have a terrific new idea for a function, I have to stop what I'm doing and plough through the library to see if someone already wrote it?</p>
 
 #### [ Kenny Lau (May 28 2018 at 13:16)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127201143):
-it's called using interface to make your life better
+<p>it's called using interface to make your life better</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 13:24)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127201412):
-```quote
-`schoolkid_1` is `simp!`
-```
-Then why do I even bother using simp? Should I just be using simp! all the time? Is there any case where simp works and simp! doesn't?
+<blockquote>
+<p><code>schoolkid_1</code> is <code>simp!</code></p>
+</blockquote>
+<p>Then why do I even bother using simp? Should I just be using simp! all the time? Is there any case where simp works and simp! doesn't?</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 13:26)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127201465):
-```quote
-@**Kevin Buzzard** I really do not see any problem at all. `id '' U` does not expand to `U`. you have to destruct the definitions and **use extensionality**
-```
-Yes -- you mean the definition of equal, right?
+<blockquote>
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> I really do not see any problem at all. <code>id '' U</code> does not expand to <code>U</code>. you have to destruct the definitions and <strong>use extensionality</strong></p>
+</blockquote>
+<p>Yes -- you mean the definition of equal, right?</p>
 
 #### [ Kenny Lau (May 28 2018 at 13:26)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127201474):
-no, I mean the axiom of extensionality.
+<p>no, I mean the axiom of extensionality.</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 13:27)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127201493):
-```quote
-@**Kevin Buzzard** here's how I can formalize what I say: if you didn't have `propext` as an axiom, then you won't be able to prove that the two sets are equal, in Lean
-```
-But propext is in Lean! Is it a good simp lemma?
+<blockquote>
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> here's how I can formalize what I say: if you didn't have <code>propext</code> as an axiom, then you won't be able to prove that the two sets are equal, in Lean</p>
+</blockquote>
+<p>But propext is in Lean! Is it a good simp lemma?</p>
 
 #### [ Mario Carneiro (May 28 2018 at 13:27)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127201500):
-no
+<p>no</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 13:27)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127201502):
-it looks good to me
+<p>it looks good to me</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 13:27)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127201504):
-simple predicate
+<p>simple predicate</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 13:27)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127201505):
-implies an equality
+<p>implies an equality</p>
 
 #### [ Mario Carneiro (May 28 2018 at 13:28)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127201545):
-it says p = q in the conclusion
+<p>it says p = q in the conclusion</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 13:28)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127201548):
-it got over my simp bar
+<p>it got over my simp bar</p>
 
 #### [ Mario Carneiro (May 28 2018 at 13:28)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127201551):
-that means anything equals anything
+<p>that means anything equals anything</p>
 
 #### [ Mario Carneiro (May 28 2018 at 13:28)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127201553):
-it's too general
+<p>it's too general</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 13:28)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127201555):
-Just apply it sensibly
+<p>Just apply it sensibly</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 13:28)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127201556):
-and stop moaning
+<p>and stop moaning</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 13:28)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127201557):
-don't just apply it randomly
+<p>don't just apply it randomly</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 13:28)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127201558):
-:-/
+<p>:-/</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 13:28)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127201559):
-This is really interesting
+<p>This is really interesting</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 13:29)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127201576):
-this is the hard bit
+<p>this is the hard bit</p>
 
 #### [ Mario Carneiro (May 28 2018 at 13:29)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127201577):
-Here's another constraint: all the variables on the RHS should appear on the LHS
+<p>Here's another constraint: all the variables on the RHS should appear on the LHS</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 13:29)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127201583):
-You can't make all the things I know are obvious yield to one tactic because you haven't worked hard enough
+<p>You can't make all the things I know are obvious yield to one tactic because you haven't worked hard enough</p>
 
 #### [ Mario Carneiro (May 28 2018 at 13:29)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127201584):
-otherwise simp has to be creative when rewriting
+<p>otherwise simp has to be creative when rewriting</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 13:29)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127201586):
-So again this is somehow about can we build a tactic that beats a human at maths
+<p>So again this is somehow about can we build a tactic that beats a human at maths</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 13:30)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127201629):
-Will this happen before I die? Say I live another 30 years
+<p>Will this happen before I die? Say I live another 30 years</p>
 
 #### [ Mario Carneiro (May 28 2018 at 13:30)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127201630):
-I think you should try writing that tactic and get back to me
+<p>I think you should try writing that tactic and get back to me</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 13:30)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127201635):
-That's your job
+<p>That's your job</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 13:30)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127201637):
-you went to math classe
+<p>you went to math classe</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 13:30)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127201638):
-s
+<p>s</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 13:30)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127201640):
-you know how we think
+<p>you know how we think</p>
 
 #### [ Mario Carneiro (May 28 2018 at 13:30)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127201643):
-I want you to fail at it first so you understand what you are asking
+<p>I want you to fail at it first so you understand what you are asking</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 13:30)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127201644):
-can you write a better interface?
+<p>can you write a better interface?</p>
 
 #### [ Johan Commelin (May 28 2018 at 13:30)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127201659):
-Kevin, I completely agree that we need a smarter tactic. But I think that doesn't have to be `simp`. Simp is a very straightforward tool, that shouldn't try to be smart.
+<p>Kevin, I completely agree that we need a smarter tactic. But I think that doesn't have to be <code>simp</code>. Simp is a very straightforward tool, that shouldn't try to be smart.</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 13:30)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127201667):
-Yes, I need to go and play with Mizar and then some things which are conflated in my mind will become more separate
+<p>Yes, I need to go and play with Mizar and then some things which are conflated in my mind will become more separate</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 13:31)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127201677):
-no, we should use schoolkid or whatever you wanted to call it
+<p>no, we should use schoolkid or whatever you wanted to call it</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 13:31)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127201678):
-I think you had a more grown-up name
+<p>I think you had a more grown-up name</p>
 
 #### [ Kenny Lau (May 28 2018 at 13:31)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127201682):
-```quote
-Yes, I need to go and play with Mizar and then some things which are conflated in my mind will become more separate
-```
-I don't see the point going to a weaker foundational system
+<blockquote>
+<p>Yes, I need to go and play with Mizar and then some things which are conflated in my mind will become more separate</p>
+</blockquote>
+<p>I don't see the point going to a weaker foundational system</p>
 
 #### [ Johan Commelin (May 28 2018 at 13:31)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127201689):
-```quote
-I think you had a more grown-up name
-```
-`math_trivial`?
+<blockquote>
+<p>I think you had a more grown-up name</p>
+</blockquote>
+<p><code>math_trivial</code>?</p>
 
 #### [ Mario Carneiro (May 28 2018 at 13:32)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127201726):
-Mizar is actually stronger axiomatically than lean
+<p>Mizar is actually stronger axiomatically than lean</p>
 
 #### [ Kenny Lau (May 28 2018 at 13:32)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127201733):
-why?
+<p>why?</p>
 
 #### [ Mario Carneiro (May 28 2018 at 13:32)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127201734):
-it has a proper class of inaccessibles
+<p>it has a proper class of inaccessibles</p>
 
 #### [ Johan Commelin (May 28 2018 at 13:32)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127201735):
-But I wouldn't mind have `kindergarten` or `schoolkid`
+<p>But I wouldn't mind have <code>kindergarten</code> or <code>schoolkid</code></p>
 
 #### [ Kenny Lau (May 28 2018 at 13:32)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127201750):
-@**Kevin Buzzard** again, your issue is not in the foundational system
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> again, your issue is not in the foundational system</p>
 
 #### [ Kenny Lau (May 28 2018 at 13:32)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127201752):
-but it seems that you are deaf
+<p>but it seems that you are deaf</p>
 
 #### [ Andrew Ashworth (May 28 2018 at 13:33)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127201760):
-it can't hurt to play around with Mizar and Isabelle
+<p>it can't hurt to play around with Mizar and Isabelle</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 13:34)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127201761):
-```quote
-why are you proving trivial set theorems?
-```
-in this case it was because I was trying to understand something. But on other occasions the answer is "because I don't really know a good way of finding it in the library and it's almost certainly in a file which I haven't imported yet"
+<blockquote>
+<p>why are you proving trivial set theorems?</p>
+</blockquote>
+<p>in this case it was because I was trying to understand something. But on other occasions the answer is "because I don't really know a good way of finding it in the library and it's almost certainly in a file which I haven't imported yet"</p>
 
 #### [ Andrew Ashworth (May 28 2018 at 13:34)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127201798):
-most of us here are refugees from Coq / Agda / Isabelle anyway
+<p>most of us here are refugees from Coq / Agda / Isabelle anyway</p>
 
 #### [ Mario Carneiro (May 28 2018 at 13:34)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127201807):
-they are organized fairly logically
+<p>they are organized fairly logically</p>
 
 #### [ Mario Carneiro (May 28 2018 at 13:35)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127201810):
-`set.image_id` is in the `image` section of `data.set.basic`
+<p><code>set.image_id</code> is in the <code>image</code> section of <code>data.set.basic</code></p>
 
 #### [ Kevin Buzzard (May 28 2018 at 13:35)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127201820):
-```quote
-I don't see the point going to a weaker foundational system
-```
-I need to see it, in order to refine my definition of "equality in ZFC".
+<blockquote>
+<p>I don't see the point going to a weaker foundational system</p>
+</blockquote>
+<p>I need to see it, in order to refine my definition of "equality in ZFC".</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 13:37)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127201903):
-```quote
-`set.image_id` is in the `image` section of `data.set.basic`
-```
-I just can't remember all this data.set.basic stuff. I just want to write set.image and hit tab a few times. This is a genuine frustration I have in my lean life
+<blockquote>
+<p><code>set.image_id</code> is in the <code>image</code> section of <code>data.set.basic</code></p>
+</blockquote>
+<p>I just can't remember all this data.set.basic stuff. I just want to write set.image and hit tab a few times. This is a genuine frustration I have in my lean life</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 13:37)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127201904):
-I am not capable of learning all the names of all the library files
+<p>I am not capable of learning all the names of all the library files</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 13:37)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127201907):
-it's init this and data that
+<p>it's init this and data that</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 13:37)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127201908):
-when I want set.image_id
+<p>when I want set.image_id</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 13:38)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127201947):
-I type `#check set.image_id`
+<p>I type <code>#check set.image_id</code></p>
 
 #### [ Kevin Buzzard (May 28 2018 at 13:38)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127201948):
-and it's not there
+<p>and it's not there</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 13:38)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127201951):
-and then I have to stop what I'm doing and start faffing around with the search tool
+<p>and then I have to stop what I'm doing and start faffing around with the search tool</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 13:38)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127201953):
-I have no clue where anything is
+<p>I have no clue where anything is</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 13:38)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127201954):
-they're just all theorems
+<p>they're just all theorems</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 13:38)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127201965):
-Can we have a better search?
+<p>Can we have a better search?</p>
 
 #### [ Mario Carneiro (May 28 2018 at 13:38)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127201974):
-I just type `import set` and the autocomplete is pretty smart about it
+<p>I just type <code>import set</code> and the autocomplete is pretty smart about it</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 13:39)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127201988):
-oh!
+<p>oh!</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 13:39)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127201994):
-Because I know it's set.something I can just import set?
+<p>Because I know it's set.something I can just import set?</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 13:39)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127201996):
-Does that work with everything?
+<p>Does that work with everything?</p>
 
 #### [ Mario Carneiro (May 28 2018 at 13:39)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127202000):
-it's not even set.something
+<p>it's not even set.something</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 13:39)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127202001):
-can I import scheme?
+<p>can I import scheme?</p>
 
 #### [ Mario Carneiro (May 28 2018 at 13:39)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127202002):
-it's data.set.basic
+<p>it's data.set.basic</p>
 
 #### [ Mario Carneiro (May 28 2018 at 13:39)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127202004):
-but vscode will still give it to you
+<p>but vscode will still give it to you</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 13:39)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127202007):
-I see
+<p>I see</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 13:40)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127202054):
-I should "key on set"
+<p>I should "key on set"</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 13:45)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127202211):
-```quote
-there are infinitely many independent theorem in any computable extension of ZFC
-```
-I know but Kenny my point is that those independent theorems are just junk theorems like stupid theorems about how pi can't be a complex manifold.
+<blockquote>
+<p>there are infinitely many independent theorem in any computable extension of ZFC</p>
+</blockquote>
+<p>I know but Kenny my point is that those independent theorems are just junk theorems like stupid theorems about how pi can't be a complex manifold.</p>
 
 #### [ Kenny Lau (May 28 2018 at 13:45)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127202214):
-are they
+<p>are they</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 13:46)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127202215):
-All the undecidable statements about stupid things like sets. [added later] -- that's not what ZFC is even _for_!
+<p>All the undecidable statements about stupid things like sets. [added later] -- that's not what ZFC is even _for_!</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 13:46)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127202255):
-I am only interested in the Langlands Programme
+<p>I am only interested in the Langlands Programme</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 13:48)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127202302):
-```quote
-there was that whole week long discussion about transporting across equivs and I was thinking "so use `transfer` or write a tactic" bingo problem solved
-```
-That's on my todo list. I'm going to write a short paper about my whole scheme experience for the ZFC people and I am going to have to get up to date as to exactly what we think is possible there
+<blockquote>
+<p>there was that whole week long discussion about transporting across equivs and I was thinking "so use <code>transfer</code> or write a tactic" bingo problem solved</p>
+</blockquote>
+<p>That's on my todo list. I'm going to write a short paper about my whole scheme experience for the ZFC people and I am going to have to get up to date as to exactly what we think is possible there</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 13:48)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127202312):
-```quote
-it's called using interface to make your life better
-```
-I need better interface search.
+<blockquote>
+<p>it's called using interface to make your life better</p>
+</blockquote>
+<p>I need better interface search.</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 13:48)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127202315):
-I thought we have google nowadays. Why isn't search easy?
+<p>I thought we have google nowadays. Why isn't search easy?</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 13:49)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127202321):
-Why can't I write set.image_id and something pops up saying "do you want to import data.set.basic"?
+<p>Why can't I write set.image_id and something pops up saying "do you want to import data.set.basic"?</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 13:49)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127202323):
-Can that be a thing one day?
+<p>Can that be a thing one day?</p>
 
 #### [ Sean Leather (May 28 2018 at 13:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127202339):
-Because nobody's written the code to do it. That's usually your answer.
+<p>Because nobody's written the code to do it. That's usually your answer.</p>
 
 #### [ Andrew Ashworth (May 28 2018 at 13:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127202392):
-It could be. Maybe Lean gets tremendously popular, gets a research grant, and somebody gets hired to work on it to make it easier to use for mathematicians
+<p>It could be. Maybe Lean gets tremendously popular, gets a research grant, and somebody gets hired to work on it to make it easier to use for mathematicians</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 13:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127202401):
-```quote
-Here's another constraint: all the variables on the RHS should appear on the LHS
-```
-Is it possible to make a flowchart -- "am I a good simp lemma?"
+<blockquote>
+<p>Here's another constraint: all the variables on the RHS should appear on the LHS</p>
+</blockquote>
+<p>Is it possible to make a flowchart -- "am I a good simp lemma?"</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 13:53)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127202484):
-```quote
-It could be. Maybe Lean gets tremendously popular, gets a research grant, and somebody gets hired to work on it to make it easier to use for mathematicians
-```
-How much does that cost in your CS world?
+<blockquote>
+<p>It could be. Maybe Lean gets tremendously popular, gets a research grant, and somebody gets hired to work on it to make it easier to use for mathematicians</p>
+</blockquote>
+<p>How much does that cost in your CS world?</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 13:53)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127202487):
-I could do all the costings for that other than salary
+<p>I could do all the costings for that other than salary</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 13:53)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127202488):
-I have no idea how much you guys get paid
+<p>I have no idea how much you guys get paid</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 13:53)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127202490):
-the administration would be able to fill in the other boxes
+<p>the administration would be able to fill in the other boxes</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 13:54)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127202537):
-I'm meeting with EPSRC in two weeks
+<p>I'm meeting with EPSRC in two weeks</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 13:54)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127202540):
-I have several hours of meetings with them and I have already pre-warned them that I will be after money to spend on computer scientists
+<p>I have several hours of meetings with them and I have already pre-warned them that I will be after money to spend on computer scientists</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 13:55)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127202557):
-But it would be good to get an idea of how much to pay someone to do that job
+<p>But it would be good to get an idea of how much to pay someone to do that job</p>
 
 #### [ Andrew Ashworth (May 28 2018 at 14:06)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127202970):
-I'm not too familiar with London CS pay, my general instinct is that it ranges from 30 ~ 70 thousand pounds / year
+<p>I'm not too familiar with London CS pay, my general instinct is that it ranges from 30 ~ 70 thousand pounds / year</p>
 
 #### [ Andrew Ashworth (May 28 2018 at 14:10)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127203100):
-you could wait until Lean 4. We've been promised by **Moses Schönfinkel** that he wants to take a look at theorem search in Lean after the parser and tactics framework settles down
+<p>you could wait until Lean 4. We've been promised by <strong>Moses Schönfinkel</strong> that he wants to take a look at theorem search in Lean after the parser and tactics framework settles down</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 14:20)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127203426):
-I just wrote a theorem that was in the library
+<p>I just wrote a theorem that was in the library</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 14:20)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127203427):
-yay me
+<p>yay me</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 14:20)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127203430):
-`#check topological_space.open_immersion_id `
+<p><code>#check topological_space.open_immersion_id </code></p>
 
 #### [ Kevin Buzzard (May 28 2018 at 14:21)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127203433):
-`#check topological_space.id_open_immersion`
+<p><code>#check topological_space.id_open_immersion</code></p>
 
 #### [ Kevin Buzzard (May 28 2018 at 14:21)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127203436):
-what should it be called?
+<p>what should it be called?</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 14:21)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127203444):
-The statement that the identity map is an open immersion
+<p>The statement that the identity map is an open immersion</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 14:21)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127203447):
-I did the other one
+<p>I did the other one</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 14:22)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127203495):
-is there a hard and fast convention for naming that extends beyond my `mul_one` levels?
+<p>is there a hard and fast convention for naming that extends beyond my <code>mul_one</code> levels?</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 14:22)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127203497):
-I get the feeling that there's more of an art to it
+<p>I get the feeling that there's more of an art to it</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 14:22)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127203498):
-What do the artists say about this one?
+<p>What do the artists say about this one?</p>
 
 #### [ Patrick Massot (May 28 2018 at 14:24)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127203562):
-Yeah, Kevin is back to work! I'm amazed how fast he travels those math formalization [DTT stages](https://en.wikipedia.org/wiki/K%C3%BCbler-Ross_model#Stages_of_grief) every month or so.
+<p>Yeah, Kevin is back to work! I'm amazed how fast he travels those math formalization <a href="https://en.wikipedia.org/wiki/K%C3%BCbler-Ross_model#Stages_of_grief" target="_blank" title="https://en.wikipedia.org/wiki/K%C3%BCbler-Ross_model#Stages_of_grief">DTT stages</a> every month or so.</p>
 
 #### [ Patrick Massot (May 28 2018 at 14:25)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127203575):
-I'm much slower
+<p>I'm much slower</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 14:36)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127203932):
-I am trying to write a hard level for these CS guys
+<p>I am trying to write a hard level for these CS guys</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 14:36)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127203934):
-But I am stuck on something
+<p>But I am stuck on something</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 14:36)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127203938):
-If I have `x :
+<p>If I have <code>x :
   (presheaf_of_types_pullback_under_open_immersion ((zariski.structure_presheaf_of_rings R).to_presheaf_of_types) id
      _).F
     HU
-`
+</code></p>
 
 #### [ Kevin Buzzard (May 28 2018 at 14:36)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127203939):
-in my context
+<p>in my context</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 14:36)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127203941):
-oh I can answer my own question
+<p>oh I can answer my own question</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 14:38)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127204007):
-oh no I can't
+<p>oh no I can't</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 14:38)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127204009):
-Ok so there's my x
+<p>Ok so there's my x</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 14:39)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127204015):
-and `presheaf_of_types_pullback_under_open_immersion` just has some definition
+<p>and <code>presheaf_of_types_pullback_under_open_immersion</code> just has some definition</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 14:39)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127204017):
-which explictly says what its F bit is
+<p>which explictly says what its F bit is</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 14:39)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127204021):
-and so probably this expands out to something with no .F in, by rfl
+<p>and so probably this expands out to something with no .F in, by rfl</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 14:39)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127204022):
-but how do I find out what it expands to without having to work it out myself?
+<p>but how do I find out what it expands to without having to work it out myself?</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 14:40)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127204062):
-I can't unfold `presheaf_of_types_pullback_under_open_immersion`
+<p>I can't unfold <code>presheaf_of_types_pullback_under_open_immersion</code></p>
 
 #### [ Kevin Buzzard (May 28 2018 at 14:40)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127204066):
-Do people need more context?
+<p>Do people need more context?</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 14:40)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127204070):
-I can provide a MWE but I just wondered if I'd already said enough for someone to tell me a trick
+<p>I can provide a MWE but I just wondered if I'd already said enough for someone to tell me a trick</p>
 
 #### [ Patrick Massot (May 28 2018 at 14:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127204078):
-Did you try `dsimp at x`?
+<p>Did you try <code>dsimp at x</code>?</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 14:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127204083):
-I did
+<p>I did</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 14:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127204089):
-it wasn't very effective
+<p>it wasn't very effective</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 14:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127204090):
-it turned `presheaf_of_rings_pullback_under_open_immersion`
+<p>it turned <code>presheaf_of_rings_pullback_under_open_immersion</code></p>
 
 #### [ Kevin Buzzard (May 28 2018 at 14:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127204091):
-into `presheaf_of_types_pullback_under_open_immersion`
+<p>into <code>presheaf_of_types_pullback_under_open_immersion</code></p>
 
 #### [ Kevin Buzzard (May 28 2018 at 14:42)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127204093):
-and then stopped
+<p>and then stopped</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 14:43)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127204146):
-Actually I should do it manually and see if it is refl
+<p>Actually I should do it manually and see if it is refl</p>
 
 #### [ Patrick Massot (May 28 2018 at 14:43)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127204154):
-Is it something I can git clone?
+<p>Is it something I can git clone?</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 14:47)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127204298):
-I have just done a bunch of editing to scheme.lean but not committed or pushed or anything
+<p>I have just done a bunch of editing to scheme.lean but not committed or pushed or anything</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 14:47)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127204299):
-I'd rather just move all those edits to a different file
+<p>I'd rather just move all those edits to a different file</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 14:47)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127204303):
-can git help me here?
+<p>can git help me here?</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 14:47)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127204309):
-i.e. I want to push the file I have open
+<p>i.e. I want to push the file I have open</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 14:47)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127204312):
-but unfortunately it's an important file which I just broke
+<p>but unfortunately it's an important file which I just broke</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 14:48)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127204326):
-goofing around
+<p>goofing around</p>
 
 #### [ Patrick Massot (May 28 2018 at 14:48)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127204355):
-you could create a broken branch
+<p>you could create a broken branch</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 14:48)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127204372):
-Can I do that in VS Code?
+<p>Can I do that in VS Code?</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 14:49)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127204380):
-I only have master
+<p>I only have master</p>
 
 #### [ Patrick Massot (May 28 2018 at 14:49)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127204398):
-`git stash`, `git checkout -b experimental`, `git stash pop`, `git commit -a`, `git push --set-upstream experimental`
+<p><code>git stash</code>, <code>git checkout -b experimental</code>, <code>git stash pop</code>, <code>git commit -a</code>, <code>git push --set-upstream experimental</code></p>
 
 #### [ Kevin Buzzard (May 28 2018 at 14:49)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127204401):
-I've got it
+<p>I've got it</p>
 
 #### [ Patrick Massot (May 28 2018 at 14:49)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127204403):
-you can problably do it in VScode but it would be longer
+<p>you can problably do it in VScode but it would be longer</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 14:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127204445):
-Oh crap I didn't stash
+<p>Oh crap I didn't stash</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 14:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127204449):
-is that an issue?
+<p>is that an issue?</p>
 
 #### [ Patrick Massot (May 28 2018 at 14:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127204453):
-maybe not
+<p>maybe not</p>
 
 #### [ Patrick Massot (May 28 2018 at 14:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127204459):
-it wrote that to be on the safe side
+<p>it wrote that to be on the safe side</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 14:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127204471):
-          let y := (presheaf_of_types_pullback_under_open_immersion ((zariski.structure_presheaf_of_rings R).to_presheaf_of_types) id
+<div class="codehilite"><pre><span></span>      let y := (presheaf_of_types_pullback_under_open_immersion ((zariski.structure_presheaf_of_rings R).to_presheaf_of_types) id
+</pre></div>
 
 #### [ Kevin Buzzard (May 28 2018 at 14:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127204473):
-oops
+<p>oops</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 14:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127204479):
-https://github.com/kbuzzard/lean-stacks-project/blob/broken/src/scheme.lean#L495
+<p><a href="https://github.com/kbuzzard/lean-stacks-project/blob/broken/src/scheme.lean#L495" target="_blank" title="https://github.com/kbuzzard/lean-stacks-project/blob/broken/src/scheme.lean#L495">https://github.com/kbuzzard/lean-stacks-project/blob/broken/src/scheme.lean#L495</a></p>
 
 #### [ Kevin Buzzard (May 28 2018 at 14:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127204480):
-was what I meant to say
+<p>was what I meant to say</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 14:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127204485):
-line 495, I want to unfold that presheaf_of_types_pullback_under_open_immersion
+<p>line 495, I want to unfold that presheaf_of_types_pullback_under_open_immersion</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 14:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127204523):
-no
+<p>no</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 14:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127204528):
-I want Lean to unfold it
+<p>I want Lean to unfold it</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 14:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127204532):
-I'm going to try it myself to see what I'm missing
+<p>I'm going to try it myself to see what I'm missing</p>
 
 #### [ Patrick Massot (May 28 2018 at 15:10)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127205165):
-This is really irritating
+<p>This is really irritating</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 15:38)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127206165):
-OK I minimised
+<p>OK I minimised</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 15:38)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127206167):
-https://gist.github.com/kbuzzard/e051858b8e3348e884610ace8cd87c20
+<p><a href="https://gist.github.com/kbuzzard/e051858b8e3348e884610ace8cd87c20" target="_blank" title="https://gist.github.com/kbuzzard/e051858b8e3348e884610ace8cd87c20">https://gist.github.com/kbuzzard/e051858b8e3348e884610ace8cd87c20</a></p>
 
 #### [ Kevin Buzzard (May 28 2018 at 15:39)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127206173):
-That is me setting up the theory of pre-semi-sheaves
+<p>That is me setting up the theory of pre-semi-sheaves</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 15:39)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127206176):
-which are a bit like distribs
+<p>which are a bit like distribs</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 15:39)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127206178):
-and although the objects are a bit silly
+<p>and although the objects are a bit silly</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 15:39)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127206184):
-I have tried to set up the theory in a sensible way
+<p>I have tried to set up the theory in a sensible way</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 15:40)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127206235):
-and to create Line 53 of that script I had to do some work
+<p>and to create Line 53 of that script I had to do some work</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 15:40)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127206236):
-which I am convinced a computer could have done for me
+<p>which I am convinced a computer could have done for me</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 15:40)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127206243):
-I cut and pasted the definition of `pre_semi_sheaf_of_rings_pullback`
+<p>I cut and pasted the definition of <code>pre_semi_sheaf_of_rings_pullback</code></p>
 
 #### [ Kevin Buzzard (May 28 2018 at 15:40)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127206245):
-because I wanted to know what would happen if I unfolded it
+<p>because I wanted to know what would happen if I unfolded it</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 15:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127206254):
-but the problem is that the unfolding is refl
+<p>but the problem is that the unfolding is refl</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 15:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127206257):
-so the lemma has no name and I can't rewrite it to see what the answer is
+<p>so the lemma has no name and I can't rewrite it to see what the answer is</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 15:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127206258):
-I have to work it out myself
+<p>I have to work it out myself</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 15:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127206265):
-This is an independent question
+<p>This is an independent question</p>
 
 #### [ Johan Commelin (May 28 2018 at 15:45)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127206396):
-(Aside: Kevin, you can tell Github that your gist is a lean file. Then you/we have syntax highlighting.)
+<p>(Aside: Kevin, you can tell Github that your gist is a lean file. Then you/we have syntax highlighting.)</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 15:46)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127206440):
-Oh cool
+<p>Oh cool</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 15:46)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127206445):
-but OK I have finally minimised my question
+<p>but OK I have finally minimised my question</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 15:47)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127206468):
-my question is this gist which I'll attempt to highlight properly
+<p>my question is this gist which I'll attempt to highlight properly</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 15:47)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127206469):
-https://gist.github.com/kbuzzard/123384f9132d6db8650c3484e42bda81
+<p><a href="https://gist.github.com/kbuzzard/123384f9132d6db8650c3484e42bda81" target="_blank" title="https://gist.github.com/kbuzzard/123384f9132d6db8650c3484e42bda81">https://gist.github.com/kbuzzard/123384f9132d6db8650c3484e42bda81</a></p>
 
 #### [ Kevin Buzzard (May 28 2018 at 15:48)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127206511):
-That's my challenge to the CS people, I think
+<p>That's my challenge to the CS people, I think</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 15:48)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127206515):
-I'm not sure I can prove that goal
+<p>I'm not sure I can prove that goal</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 15:48)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127206517):
-I'm not even sure that goal is true
+<p>I'm not even sure that goal is true</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 15:48)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127206519):
-but I think it is
+<p>but I think it is</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 15:48)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127206521):
-for some reason it's a pain to prove though
+<p>for some reason it's a pain to prove though</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 15:49)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127206545):
-I'm hoping the file is fairly self-explanatory
+<p>I'm hoping the file is fairly self-explanatory</p>
 
 #### [ Johan Commelin (May 28 2018 at 15:49)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127206550):
-It is "math-true", right?
+<p>It is "math-true", right?</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 15:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127206592):
-exactly Johan
+<p>exactly Johan</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 15:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127206597):
-Before I had something which was math-true
+<p>Before I had something which was math-true</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 15:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127206600):
-and Kenny and Mario kept telling me it could be done by simp
+<p>and Kenny and Mario kept telling me it could be done by simp</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 15:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127206603):
-I would like them to tell me how to do this one
+<p>I would like them to tell me how to do this one</p>
 
 #### [ Johan Commelin (May 28 2018 at 15:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127206673):
-Are the rings essential to the problem?
+<p>Are the rings essential to the problem?</p>
 
 #### [ Johan Commelin (May 28 2018 at 15:53)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127206679):
-Or could you just use semi-quasi-demi-pre-sheaves of types?
+<p>Or could you just use semi-quasi-demi-pre-sheaves of types?</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 15:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127206859):
-No it's crucial they're rings
+<p>No it's crucial they're rings</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 15:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127206863):
-because it's a trivial way to make it even harder
+<p>because it's a trivial way to make it even harder</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 15:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127206876):
-this is a content-free statement from where I'm standing
+<p>this is a content-free statement from where I'm standing</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 15:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127206880):
-and if there aren't algorithms which currently prove content-free statements like this
+<p>and if there aren't algorithms which currently prove content-free statements like this</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 15:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127206883):
-then I think that mathematicians will find it hard to learn Lean
+<p>then I think that mathematicians will find it hard to learn Lean</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 15:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127206885):
-@**Kenny Lau** @**Mario Carneiro** Can you fill in my sorry?
+<p><span class="user-mention" data-user-id="110064">@Kenny Lau</span> <span class="user-mention" data-user-id="110049">@Mario Carneiro</span> Can you fill in my sorry?</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 15:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127206888):
-Am I missing something easy?
+<p>Am I missing something easy?</p>
 
 #### [ Patrick Massot (May 28 2018 at 16:00)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127206939):
-Oh, he went back a couple of stages
+<p>Oh, he went back a couple of stages</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 16:00)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127206941):
-I removed topology
+<p>I removed topology</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 16:00)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127206944):
-and open immersions
+<p>and open immersions</p>
 
 #### [ Kenny Lau (May 28 2018 at 16:00)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127206945):
-```quote
-Am I missing something easy?
-```
-no
+<blockquote>
+<p>Am I missing something easy?</p>
+</blockquote>
+<p>no</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 16:00)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127206948):
-crap
+<p>crap</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 16:00)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127206950):
-is that a provable but hard goal?
+<p>is that a provable but hard goal?</p>
 
 #### [ Kenny Lau (May 28 2018 at 16:00)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127206953):
-well not really hard
+<p>well not really hard</p>
 
 #### [ Kenny Lau (May 28 2018 at 16:00)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127206954):
-i could do it
+<p>i could do it</p>
 
 #### [ Kenny Lau (May 28 2018 at 16:00)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127206957):
-but not exactly easy
+<p>but not exactly easy</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 16:01)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127206958):
-Teach me how to do it
+<p>Teach me how to do it</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 16:01)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127206962):
-I can't do it
+<p>I can't do it</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 16:01)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127206963):
-and it's obvious
+<p>and it's obvious</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 16:01)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127206968):
-and these are my least favourite things in Lean
+<p>and these are my least favourite things in Lean</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 16:01)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127206970):
-teach me how to kill this pokemon
+<p>teach me how to kill this pokemon</p>
 
 #### [ Johan Commelin (May 28 2018 at 16:01)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127206971):
-@**Kevin Buzzard** you don't only want `schoolkid` tactic, you also want `kenny_lau` and `mario_carneiro`
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> you don't only want <code>schoolkid</code> tactic, you also want <code>kenny_lau</code> and <code>mario_carneiro</code></p>
 
 #### [ Kevin Buzzard (May 28 2018 at 16:01)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127206972):
-exactly
+<p>exactly</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 16:01)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127206974):
-Kenny
+<p>Kenny</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 16:01)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127206975):
-I'm up to here
+<p>I'm up to here</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 16:01)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127206977):
-```lean
-theorem pre_semi_sheaves_iso (X : Type) (F : pre_semi_sheaf_of_rings X) : 
-are_isomorphic_pre_semi_sheaves_of_rings
-    (pre_semi_sheaf_of_rings_pullback F id) F
-:= 
-begin
-  constructor,
-  { constructor,tactic.swap,
-    { constructor,tactic.swap,
-      { intros U s,
-        unfold pre_semi_sheaf_of_rings_pullback,
-        suffices : F.F (id '' U), by simpa using this,
-        have reluctant_to_use : id '' U = U := by rw set.image_id,
-        rw reluctant_to_use,
-        exact s,
-      },
-      intro U,
-      simp,
-      sorry
-    },
-    sorry,
-  },
-  sorry,
-end 
-
-```
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">pre_semi_sheaves_iso</span> <span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">(</span><span class="n">F</span> <span class="o">:</span> <span class="n">pre_semi_sheaf_of_rings</span> <span class="n">X</span><span class="o">)</span> <span class="o">:</span>
+<span class="n">are_isomorphic_pre_semi_sheaves_of_rings</span>
+    <span class="o">(</span><span class="n">pre_semi_sheaf_of_rings_pullback</span> <span class="n">F</span> <span class="n">id</span><span class="o">)</span> <span class="n">F</span>
+<span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">constructor</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">constructor</span><span class="o">,</span><span class="n">tactic</span><span class="bp">.</span><span class="n">swap</span><span class="o">,</span>
+    <span class="o">{</span> <span class="n">constructor</span><span class="o">,</span><span class="n">tactic</span><span class="bp">.</span><span class="n">swap</span><span class="o">,</span>
+      <span class="o">{</span> <span class="n">intros</span> <span class="n">U</span> <span class="n">s</span><span class="o">,</span>
+        <span class="n">unfold</span> <span class="n">pre_semi_sheaf_of_rings_pullback</span><span class="o">,</span>
+        <span class="n">suffices</span> <span class="o">:</span> <span class="n">F</span><span class="bp">.</span><span class="n">F</span> <span class="o">(</span><span class="n">id</span> <span class="err">&#39;&#39;</span> <span class="n">U</span><span class="o">),</span> <span class="k">by</span> <span class="n">simpa</span> <span class="kn">using</span> <span class="n">this</span><span class="o">,</span>
+        <span class="k">have</span> <span class="n">reluctant_to_use</span> <span class="o">:</span> <span class="n">id</span> <span class="err">&#39;&#39;</span> <span class="n">U</span> <span class="bp">=</span> <span class="n">U</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">rw</span> <span class="n">set</span><span class="bp">.</span><span class="n">image_id</span><span class="o">,</span>
+        <span class="n">rw</span> <span class="n">reluctant_to_use</span><span class="o">,</span>
+        <span class="n">exact</span> <span class="n">s</span><span class="o">,</span>
+      <span class="o">},</span>
+      <span class="n">intro</span> <span class="n">U</span><span class="o">,</span>
+      <span class="n">simp</span><span class="o">,</span>
+      <span class="n">sorry</span>
+    <span class="o">},</span>
+    <span class="n">sorry</span><span class="o">,</span>
+  <span class="o">},</span>
+  <span class="n">sorry</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
 
 #### [ Kenny Lau (May 28 2018 at 16:02)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127207029):
-I'm trying
+<p>I'm trying</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 16:02)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127207030):
-Thanks
+<p>Thanks</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 16:03)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127207039):
-Are you writing a tactic?
+<p>Are you writing a tactic?</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 16:03)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127207041):
-Don't try to solve the goal
+<p>Don't try to solve the goal</p>
 
 #### [ Kenny Lau (May 28 2018 at 16:03)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127207042):
-no
+<p>no</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 16:03)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127207043):
-try to write a tactic which solves the goal
+<p>try to write a tactic which solves the goal</p>
 
 #### [ Kenny Lau (May 28 2018 at 16:03)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127207045):
-I don't know how to write tactics
+<p>I don't know how to write tactics</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 16:03)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127207046):
-because this goal is solved by math_trivial
+<p>because this goal is solved by math_trivial</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 16:04)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127207095):
-This goal is the nightmare which I could avoid in my case of presheaves
+<p>This goal is the nightmare which I could avoid in my case of presheaves</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 16:04)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127207098):
-but a pre_semi_sheaf does not have res
+<p>but a pre_semi_sheaf does not have res</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 16:04)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127207100):
-so you have to bite the bullet
+<p>so you have to bite the bullet</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 16:05)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127207109):
-@**Simon Hudon** Can you solve my goal with a tactic?
+<p><span class="user-mention" data-user-id="110026">@Simon Hudon</span> Can you solve my goal with a tactic?</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 16:05)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127207122):
-https://gist.github.com/kbuzzard/123384f9132d6db8650c3484e42bda81
+<p><a href="https://gist.github.com/kbuzzard/123384f9132d6db8650c3484e42bda81" target="_blank" title="https://gist.github.com/kbuzzard/123384f9132d6db8650c3484e42bda81">https://gist.github.com/kbuzzard/123384f9132d6db8650c3484e42bda81</a></p>
 
 #### [ Kevin Buzzard (May 28 2018 at 16:05)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127207124):
-Last line
+<p>Last line</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 16:05)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127207128):
-the pre_semi_sheaves are isomorphic via the identity map
+<p>the pre_semi_sheaves are isomorphic via the identity map</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 16:05)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127207134):
-but checking the details is apparently a little tricky
+<p>but checking the details is apparently a little tricky</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 16:06)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127207138):
-Would I have exactly the same problems in Mizar?
+<p>Would I have exactly the same problems in Mizar?</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 16:06)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127207186):
-@**Assia Mahboubi** Would my goal be any easier to solve in Coq?
+<p><span class="user-mention" data-user-id="110172">@Assia Mahboubi</span> Would my goal be any easier to solve in Coq?</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 16:07)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127207194):
-I have isolated a frustration I have with dependent type theory
+<p>I have isolated a frustration I have with dependent type theory</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 16:07)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127207202):
-I need to define a map from `F U` to `F (id '' U)`
+<p>I need to define a map from <code>F U</code> to <code>F (id '' U)</code></p>
 
 #### [ Kevin Buzzard (May 28 2018 at 16:07)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127207205):
-where `id '' U` is the image of the set U under the identity map
+<p>where <code>id '' U</code> is the image of the set U under the identity map</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 16:08)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127207244):
-I define the map by rewriting `id '' U = U` and then using the identity
+<p>I define the map by rewriting <code>id '' U = U</code> and then using the identity</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 16:08)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127207245):
-and I never recover
+<p>and I never recover</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 16:08)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127207253):
-But I don't know any other way of doing it
+<p>But I don't know any other way of doing it</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 16:10)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127207319):
-Is there some sort of reason why I should not be proving this goal at all?
+<p>Is there some sort of reason why I should not be proving this goal at all?</p>
 
 #### [ Simon Hudon (May 28 2018 at 16:14)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127207481):
-How would you prove it without tactics?
+<p>How would you prove it without tactics?</p>
 
 #### [ Kenny Lau (May 28 2018 at 16:15)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127207490):
-he can't function without tactics
+<p>he can't function without tactics</p>
 
 #### [ Kenny Lau (May 28 2018 at 16:15)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127207496):
-you would do `eq.drec` without tactics
+<p>you would do <code>eq.drec</code> without tactics</p>
 
 #### [ Simon Hudon (May 28 2018 at 16:24)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127207893):
-I mean, I don't know any of the context so I'm not sure how the definitions relate to each other
+<p>I mean, I don't know any of the context so I'm not sure how the definitions relate to each other</p>
 
 #### [ Assia Mahboubi (May 28 2018 at 17:06)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127209693):
-@**Kevin Buzzard** It will take me some time to catch up, the thread is long. Why did you use this equality at all? Aren't ``F U`` and ``F (id '' U)`` the exact same thing (aka convertible?). How can I play your formalization?
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> It will take me some time to catch up, the thread is long. Why did you use this equality at all? Aren't <code>F U</code> and <code>F (id '' U)</code> the exact same thing (aka convertible?). How can I play your formalization?</p>
 
 #### [ Kenny Lau (May 28 2018 at 17:07)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127209705):
-https://gist.github.com/kbuzzard/123384f9132d6db8650c3484e42bda81
+<p><a href="https://gist.github.com/kbuzzard/123384f9132d6db8650c3484e42bda81" target="_blank" title="https://gist.github.com/kbuzzard/123384f9132d6db8650c3484e42bda81">https://gist.github.com/kbuzzard/123384f9132d6db8650c3484e42bda81</a></p>
 
 #### [ Kenny Lau (May 28 2018 at 17:07)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127209710):
-@**Assia Mahboubi** just prove the above
+<p><span class="user-mention" data-user-id="110172">@Assia Mahboubi</span> just prove the above</p>
 
 #### [ Kenny Lau (May 28 2018 at 17:09)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127209792):
-@**Kevin Buzzard** you know what, I take back my word, it's harder than I thought
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> you know what, I take back my word, it's harder than I thought</p>
 
 #### [ Assia Mahboubi (May 28 2018 at 17:09)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127209810):
-Hi @**Kenny Lau** ! Thanks! But I am more ignorant than you think : I meant, what install instructions should I follow. I am not a regular Lean user.
+<p>Hi <span class="user-mention" data-user-id="110064">@Kenny Lau</span> ! Thanks! But I am more ignorant than you think : I meant, what install instructions should I follow. I am not a regular Lean user.</p>
 
 #### [ Kenny Lau (May 28 2018 at 17:10)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127209855):
-oh, sorry
+<p>oh, sorry</p>
 
 #### [ Kenny Lau (May 28 2018 at 17:10)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127209865):
-I think you can try it online
+<p>I think you can try it online</p>
 
 #### [ Kenny Lau (May 28 2018 at 17:11)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127209872):
-https://leanprover.github.io/live/latest/
+<p><a href="https://leanprover.github.io/live/latest/" target="_blank" title="https://leanprover.github.io/live/latest/">https://leanprover.github.io/live/latest/</a></p>
 
 #### [ Assia Mahboubi (May 28 2018 at 17:11)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127209873):
-Ok thanks, I am doing that now.
+<p>Ok thanks, I am doing that now.</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 17:13)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127209968):
-Does one run into the same issues in Coq?
+<p>Does one run into the same issues in Coq?</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 17:13)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127209974):
-Does one run into the same issues in Mizar?
+<p>Does one run into the same issues in Mizar?</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 17:14)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127210018):
-Which systems is this easy in?
+<p>Which systems is this easy in?</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 17:14)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127210029):
-@**Assia Mahboubi** I suspect you can see what I'm trying to do
+<p><span class="user-mention" data-user-id="110172">@Assia Mahboubi</span> I suspect you can see what I'm trying to do</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 17:15)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127210064):
-I'm happy to let a lean expert like Mario or Kenny solve the lean one
+<p>I'm happy to let a lean expert like Mario or Kenny solve the lean one</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 17:15)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127210072):
-I am trying to understand to what extent my worldview of mathematics is naive
+<p>I am trying to understand to what extent my worldview of mathematics is naive</p>
 
 #### [ Kenny Lau (May 28 2018 at 17:15)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127210074):
-lol it's been an hour already
+<p>lol it's been an hour already</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 17:16)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127210131):
-The challenge was embedded well in a very long thread and I would imagine many have stopped reading
+<p>The challenge was embedded well in a very long thread and I would imagine many have stopped reading</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 17:17)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127210149):
-One could ask in a new thread, I think this question is sufficiently interesting
+<p>One could ask in a new thread, I think this question is sufficiently interesting</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 17:18)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127210215):
-I am hoping that someone will come up with a curve ball solution of the form "don't prove that, prove something that implies that
+<p>I am hoping that someone will come up with a curve ball solution of the form "don't prove that, prove something that implies that</p>
 
 #### [ Kenny Lau (May 28 2018 at 17:19)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127210220):
-I tried to build up an interface
+<p>I tried to build up an interface</p>
 
 #### [ Kenny Lau (May 28 2018 at 17:19)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127210221):
-didn't work
+<p>didn't work</p>
 
 #### [ Assia Mahboubi (May 28 2018 at 17:21)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127210326):
-Thanks @**Kenny Lau**, it works like a charm. But unfortunately I will have to leave now (and I have not finished to read the problem :disappointed: ).  I will definitely look again later.
+<p>Thanks <span class="user-mention" data-user-id="110064">@Kenny Lau</span>, it works like a charm. But unfortunately I will have to leave now (and I have not finished to read the problem <span class="emoji emoji-1f61e" title="disappointed">:disappointed:</span> ).  I will definitely look again later.</p>
 
 #### [ Kenny Lau (May 28 2018 at 17:21)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127210332):
-see you
+<p>see you</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 17:28)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127210576):
-@**Kenny Lau**
+<p><span class="user-mention" data-user-id="110064">@Kenny Lau</span></p>
 
 #### [ Kevin Buzzard (May 28 2018 at 17:28)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127210577):
-I had an idea
+<p>I had an idea</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 17:28)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127210579):
-but you would be quicker to implement it than me
+<p>but you would be quicker to implement it than me</p>
 
 #### [ Kenny Lau (May 28 2018 at 17:28)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127210581):
-what is it
+<p>what is it</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 17:28)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127210583):
-and I have to tidy the kitchen anyway
+<p>and I have to tidy the kitchen anyway</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 17:28)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127210585):
-I claim that my definition is incomplete
+<p>I claim that my definition is incomplete</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 17:28)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127210586):
-as far as Lean is concerned
+<p>as far as Lean is concerned</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 17:29)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127210587):
-I am missing some extra structure
+<p>I am missing some extra structure</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 17:29)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127210591):
-which can be filled in easily
+<p>which can be filled in easily</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 17:29)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127210600):
-Is the "correct" object a pre_semi_sheaf whatever, but also equipped with maps res : F U -> F V whenever U = V
+<p>Is the "correct" object a pre_semi_sheaf whatever, but also equipped with maps res : F U -&gt; F V whenever U = V</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 17:29)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127210603):
-plus axiom that res U U = id
+<p>plus axiom that res U U = id</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 17:29)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127210604):
-plus axiom of composition
+<p>plus axiom of composition</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 17:30)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127210649):
-res U V then res V W is res U W
+<p>res U V then res V W is res U W</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 17:30)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127210654):
-Given my stupid annoying structure
+<p>Given my stupid annoying structure</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 17:30)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127210655):
-can it be beefed up to such a structure
+<p>can it be beefed up to such a structure</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 17:30)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127210657):
-and for this beefed-up structure
+<p>and for this beefed-up structure</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 17:30)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127210659):
-can the map be defined to be res
+<p>can the map be defined to be res</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 17:30)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127210673):
-and then we deduce the result for the stupid structure
+<p>and then we deduce the result for the stupid structure</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 17:31)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127210679):
-My experience with schemes tells me
+<p>My experience with schemes tells me</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 17:31)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127210680):
-that when the map is res
+<p>that when the map is res</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 17:31)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127210684):
-all the hard proofs become rfl
+<p>all the hard proofs become rfl</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 17:31)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127210688):
-maybe not the ring one
+<p>maybe not the ring one</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 17:31)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127210690):
-the ring one we have to use some equiv tactic thing
+<p>the ring one we have to use some equiv tactic thing</p>
 
 #### [ Reid Barton (May 28 2018 at 20:17)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127216106):
-@**Kevin Buzzard** 
-```lean
-definition pre_semi_sheaf_of_rings_pullback_setmap
-  {α : Type}
-  {β : Type}
-  (PR : pre_semi_sheaf_of_rings β)
-  (f : set α → set β)
-  : pre_semi_sheaf_of_rings α :=
-{ F := λ V,PR.F (f V)
-}
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> </p>
+<div class="codehilite"><pre><span></span><span class="kn">definition</span> <span class="n">pre_semi_sheaf_of_rings_pullback_setmap</span>
+  <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span>
+  <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span>
+  <span class="o">(</span><span class="n">PR</span> <span class="o">:</span> <span class="n">pre_semi_sheaf_of_rings</span> <span class="n">β</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">set</span> <span class="n">β</span><span class="o">)</span>
+  <span class="o">:</span> <span class="n">pre_semi_sheaf_of_rings</span> <span class="n">α</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">F</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">V</span><span class="o">,</span><span class="n">PR</span><span class="bp">.</span><span class="n">F</span> <span class="o">(</span><span class="n">f</span> <span class="n">V</span><span class="o">)</span>
+<span class="o">}</span>
 
-theorem pre_semi_sheaves_iso_setmap (X : Type) (F : pre_semi_sheaf_of_rings X) :
-are_isomorphic_pre_semi_sheaves_of_rings
-    (pre_semi_sheaf_of_rings_pullback_setmap F id) F :=
-⟨⟨λ (U : set X), id, by apply_instance⟩,
- ⟨λ (U : set X), id, by apply_instance⟩,
- λ _, rfl, λ _, rfl⟩
+<span class="kn">theorem</span> <span class="n">pre_semi_sheaves_iso_setmap</span> <span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">(</span><span class="n">F</span> <span class="o">:</span> <span class="n">pre_semi_sheaf_of_rings</span> <span class="n">X</span><span class="o">)</span> <span class="o">:</span>
+<span class="n">are_isomorphic_pre_semi_sheaves_of_rings</span>
+    <span class="o">(</span><span class="n">pre_semi_sheaf_of_rings_pullback_setmap</span> <span class="n">F</span> <span class="n">id</span><span class="o">)</span> <span class="n">F</span> <span class="o">:=</span>
+<span class="bp">⟨⟨λ</span> <span class="o">(</span><span class="n">U</span> <span class="o">:</span> <span class="n">set</span> <span class="n">X</span><span class="o">),</span> <span class="n">id</span><span class="o">,</span> <span class="k">by</span> <span class="n">apply_instance</span><span class="bp">⟩</span><span class="o">,</span>
+ <span class="bp">⟨λ</span> <span class="o">(</span><span class="n">U</span> <span class="o">:</span> <span class="n">set</span> <span class="n">X</span><span class="o">),</span> <span class="n">id</span><span class="o">,</span> <span class="k">by</span> <span class="n">apply_instance</span><span class="bp">⟩</span><span class="o">,</span>
+ <span class="bp">λ</span> <span class="bp">_</span><span class="o">,</span> <span class="n">rfl</span><span class="o">,</span> <span class="bp">λ</span> <span class="bp">_</span><span class="o">,</span> <span class="n">rfl</span><span class="bp">⟩</span>
 
-definition pre_semi_sheaf_of_rings_pullback
-  {α : Type}
-  {β : Type}
-  (PR : pre_semi_sheaf_of_rings β)
-  (f : α → β)
-  : pre_semi_sheaf_of_rings α :=
-{ F := λ V,PR.F (f '' V)
-}
+<span class="kn">definition</span> <span class="n">pre_semi_sheaf_of_rings_pullback</span>
+  <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span>
+  <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span>
+  <span class="o">(</span><span class="n">PR</span> <span class="o">:</span> <span class="n">pre_semi_sheaf_of_rings</span> <span class="n">β</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span>
+  <span class="o">:</span> <span class="n">pre_semi_sheaf_of_rings</span> <span class="n">α</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">F</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">V</span><span class="o">,</span><span class="n">PR</span><span class="bp">.</span><span class="n">F</span> <span class="o">(</span><span class="n">f</span> <span class="err">&#39;&#39;</span> <span class="n">V</span><span class="o">)</span>
+<span class="o">}</span>
 
-theorem pre_semi_sheaves_iso (X : Type) (F : pre_semi_sheaf_of_rings X) :
-are_isomorphic_pre_semi_sheaves_of_rings
-    (pre_semi_sheaf_of_rings_pullback F id) F
-:= begin
-  convert pre_semi_sheaves_iso_setmap X F,
-  change pre_semi_sheaf_of_rings_pullback_setmap F (λ U, id '' U) = _,
-  congr, funext U, simp [set.image_id]
-end
-```
+<span class="kn">theorem</span> <span class="n">pre_semi_sheaves_iso</span> <span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">(</span><span class="n">F</span> <span class="o">:</span> <span class="n">pre_semi_sheaf_of_rings</span> <span class="n">X</span><span class="o">)</span> <span class="o">:</span>
+<span class="n">are_isomorphic_pre_semi_sheaves_of_rings</span>
+    <span class="o">(</span><span class="n">pre_semi_sheaf_of_rings_pullback</span> <span class="n">F</span> <span class="n">id</span><span class="o">)</span> <span class="n">F</span>
+<span class="o">:=</span> <span class="k">begin</span>
+  <span class="n">convert</span> <span class="n">pre_semi_sheaves_iso_setmap</span> <span class="n">X</span> <span class="n">F</span><span class="o">,</span>
+  <span class="n">change</span> <span class="n">pre_semi_sheaf_of_rings_pullback_setmap</span> <span class="n">F</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">U</span><span class="o">,</span> <span class="n">id</span> <span class="err">&#39;&#39;</span> <span class="n">U</span><span class="o">)</span> <span class="bp">=</span> <span class="bp">_</span><span class="o">,</span>
+  <span class="n">congr</span><span class="o">,</span> <span class="n">funext</span> <span class="n">U</span><span class="o">,</span> <span class="n">simp</span> <span class="o">[</span><span class="n">set</span><span class="bp">.</span><span class="n">image_id</span><span class="o">]</span>
+<span class="kn">end</span>
+</pre></div>
 
 #### [ Kevin Buzzard (May 28 2018 at 20:18)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127216158):
-I was hoping you'd show up
+<p>I was hoping you'd show up</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 20:18)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127216160):
-I thought you'd like this one
+<p>I thought you'd like this one</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 20:19)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127216179):
-I am cooking, will look later. Did you do it?
+<p>I am cooking, will look later. Did you do it?</p>
 
 #### [ Reid Barton (May 28 2018 at 20:19)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127216188):
-Yes
+<p>Yes</p>
 
 #### [ Kevin Buzzard (May 28 2018 at 20:19)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127216190):
-Convert? What does that do?
+<p>Convert? What does that do?</p>
 
 #### [ Reid Barton (May 28 2018 at 20:20)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127216241):
-I split your construction into two pieces: pullback of a presheaf by a functor between sites and the functor between sites induced by a map of spaces
+<p>I split your construction into two pieces: pullback of a presheaf by a functor between sites and the functor between sites induced by a map of spaces</p>
 
 #### [ Reid Barton (May 28 2018 at 20:20)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127216251):
-`convert` basically says "this is the term I want to be the proof, aside from some fiddling about the type not being definitionally equal to the desired one"
+<p><code>convert</code> basically says "this is the term I want to be the proof, aside from some fiddling about the type not being definitionally equal to the desired one"</p>
 
 #### [ Reid Barton (May 28 2018 at 20:21)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127216267):
-so it generates a new goal which is that the type of the term you provided is the same as the goal type
+<p>so it generates a new goal which is that the type of the term you provided is the same as the goal type</p>
 
 #### [ Mario Carneiro (May 28 2018 at 21:56)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127219336):
-> https://leanprover.zulipchat.com/#narrow/stream/116395-maths/subject/ZFC.20equality/near/127204479
-
-Here's how you can use `cast` as a morphism without any `res` trickery:
-```
-
-def pre_semi_sheaf_of_rings.cast {α} (FPT : pre_semi_sheaf_of_rings α)
+<blockquote>
+<p><a href="#narrow/stream/116395-maths/subject/ZFC.20equality/near/127204479" title="#narrow/stream/116395-maths/subject/ZFC.20equality/near/127204479">https://leanprover.zulipchat.com/#narrow/stream/116395-maths/subject/ZFC.20equality/near/127204479</a></p>
+</blockquote>
+<p>Here's how you can use <code>cast</code> as a morphism without any <code>res</code> trickery:</p>
+<div class="codehilite"><pre><span></span>def pre_semi_sheaf_of_rings.cast {α} (FPT : pre_semi_sheaf_of_rings α)
   {U V : set α} (e : U = V) : FPT.F U → FPT.F V :=
 cast (congr_arg _ e)
 
@@ -2800,111 +2782,111 @@ theorem pre_semi_sheaf_of_rings.cast_comp
   FPT.cast e₂ (FPT.cast e₁ a) = FPT.cast (e₁.trans e₂) a :=
 by substs e₂ e₁; exact rfl
 
-theorem presheaves_iso (X : Type) (F : pre_semi_sheaf_of_rings X) : 
+theorem presheaves_iso (X : Type) (F : pre_semi_sheaf_of_rings X) :
 are_isomorphic_pre_semi_sheaves_of_rings
     (pre_semi_sheaf_of_rings_pullback F id) F :=
-begin 
+begin
   refine ⟨⟨λ U, F.cast (by simp), by apply_instance⟩,
      ⟨λ U, F.cast (by simp), by apply_instance⟩, _, _⟩;
   { intros U, funext a,
     dsimp [is_identity_morphism_of_pre_semi_sheaves_of_rings,
       composition_of_morphisms_of_pre_semi_sheaves_of_rings],
     rw F.cast_comp, refl }
-end 
-```
+end
+</pre></div>
 
 #### [ Patrick Massot (May 29 2018 at 10:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127241361):
-```quote
-I think you can try it online
-```
-I think it's a bad idea to tell people to use the online version. Maybe it's my computer fault, but I find it too slow to be usable. I think it's very bad advertisement. So let me try something new: https://www.math.u-psud.fr/~pmassot/en/misc/index.html @**Assia Mahboubi** I guess you have a Debian/Ubuntu computer at hand. Could you try using my installation script? It's meant to be a single step, one minute fully setup Lean install  (this obviously includes a compiled mathlib).
+<blockquote>
+<p>I think you can try it online</p>
+</blockquote>
+<p>I think it's a bad idea to tell people to use the online version. Maybe it's my computer fault, but I find it too slow to be usable. I think it's very bad advertisement. So let me try something new: <a href="https://www.math.u-psud.fr/~pmassot/en/misc/index.html" target="_blank" title="https://www.math.u-psud.fr/~pmassot/en/misc/index.html">https://www.math.u-psud.fr/~pmassot/en/misc/index.html</a> <span class="user-mention" data-user-id="110172">@Assia Mahboubi</span> I guess you have a Debian/Ubuntu computer at hand. Could you try using my installation script? It's meant to be a single step, one minute fully setup Lean install  (this obviously includes a compiled mathlib).</p>
 
 #### [ Johan Commelin (May 29 2018 at 10:54)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127241525):
-Does `https://www.math.u-psud.fr/~pmassot/files/lean/install_lean.sh` contain precompiled mathlib nightlies?
+<p>Does <code>https://www.math.u-psud.fr/~pmassot/files/lean/install_lean.sh</code> contain precompiled mathlib nightlies?</p>
 
 #### [ Patrick Massot (May 29 2018 at 10:55)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127241534):
-yes
+<p>yes</p>
 
 #### [ Johan Commelin (May 29 2018 at 10:55)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127241549):
-Nice! I guess in this file, right? `https://www.math.u-psud.fr/~pmassot/files/lean/.lean.tar.gz`
+<p>Nice! I guess in this file, right? <code>https://www.math.u-psud.fr/~pmassot/files/lean/.lean.tar.gz</code></p>
 
 #### [ Patrick Massot (May 29 2018 at 10:55)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127241555):
-yes
+<p>yes</p>
 
 #### [ Johan Commelin (May 29 2018 at 10:55)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127241560):
-Ok, you should change the topic of your anouncement. This deserves more PR.
+<p>Ok, you should change the topic of your anouncement. This deserves more PR.</p>
 
 #### [ Patrick Massot (May 29 2018 at 10:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127241637):
-I think this deserves to be taken up by Mario and Johannes. Right now, I set up an emergency solution. I don't want Assia to go away because Javascript was never meant to run proof assistants
+<p>I think this deserves to be taken up by Mario and Johannes. Right now, I set up an emergency solution. I don't want Assia to go away because Javascript was never meant to run proof assistants</p>
 
 #### [ Patrick Massot (May 29 2018 at 10:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127241710):
-But now I need to stop. This was meant to be a no Lean day. I'll go to my IHES office where I can't install anything on the computer (and nothing Lean related is pre-installed) and get some real work done
+<p>But now I need to stop. This was meant to be a no Lean day. I'll go to my IHES office where I can't install anything on the computer (and nothing Lean related is pre-installed) and get some real work done</p>
 
 #### [ Patrick Massot (May 29 2018 at 10:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127241720):
-Have fun!
+<p>Have fun!</p>
 
 #### [ Assia Mahboubi (May 29 2018 at 10:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127241724):
-Hi @**Patrick Massot** . Yes, it was very slow and I eventually gave up. I was planning to (re)install Lean on my machine today. What is your script doing? Will it be easy for me to update my Lean later? My plan is to look at @**Kevin Buzzard** 's stack project and he says [here](https://github.com/kbuzzard/lean-stacks-project) that I need a version from nightly of 2018-04-06. Does it matter? And yes, I have Debian/Ubuntu OS.
+<p>Hi <span class="user-mention" data-user-id="110031">@Patrick Massot</span> . Yes, it was very slow and I eventually gave up. I was planning to (re)install Lean on my machine today. What is your script doing? Will it be easy for me to update my Lean later? My plan is to look at <span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> 's stack project and he says <a href="https://github.com/kbuzzard/lean-stacks-project" target="_blank" title="https://github.com/kbuzzard/lean-stacks-project">here</a> that I need a version from nightly of 2018-04-06. Does it matter? And yes, I have Debian/Ubuntu OS.</p>
 
 #### [ Patrick Massot (May 29 2018 at 11:00)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127241791):
-It does what it says in https://www.math.u-psud.fr/~pmassot/files/lean/install_lean.sh
+<p>It does what it says in <a href="https://www.math.u-psud.fr/~pmassot/files/lean/install_lean.sh" target="_blank" title="https://www.math.u-psud.fr/~pmassot/files/lean/install_lean.sh">https://www.math.u-psud.fr/~pmassot/files/lean/install_lean.sh</a></p>
 
 #### [ Patrick Massot (May 29 2018 at 11:01)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127241810):
-install VScode using MS debian package, manually install the Lean extension, download Lean 3.4.1 and set the bash path variable, download precompiled mathlib
+<p>install VScode using MS debian package, manually install the Lean extension, download Lean 3.4.1 and set the bash path variable, download precompiled mathlib</p>
 
 #### [ Patrick Massot (May 29 2018 at 11:01)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127241834):
-Let me check you can run Kevin's code using this version of mathlib
+<p>Let me check you can run Kevin's code using this version of mathlib</p>
 
 #### [ Johan Commelin (May 29 2018 at 11:01)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127241835):
-[sorry, wrong topic]
+<p>[sorry, wrong topic]</p>
 
 #### [ Assia Mahboubi (May 29 2018 at 11:06)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127242075):
-@**Patrick Massot** Thanks for the answer to my silly question: I should have open the file first. It looks great. I'll wait from a confirmation (from you or from anyone else) and try (I guess that otherwise it's just a matter of changing a couple of lines in your script). Happy no-Lean day.
+<p><span class="user-mention" data-user-id="110031">@Patrick Massot</span> Thanks for the answer to my silly question: I should have open the file first. It looks great. I'll wait from a confirmation (from you or from anyone else) and try (I guess that otherwise it's just a matter of changing a couple of lines in your script). Happy no-Lean day.</p>
 
 #### [ Johan Commelin (May 29 2018 at 11:08)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127242147):
-@**Assia Mahboubi** It will be super easy to update Lean later.
+<p><span class="user-mention" data-user-id="110172">@Assia Mahboubi</span> It will be super easy to update Lean later.</p>
 
 #### [ Johan Commelin (May 29 2018 at 11:08)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127242154):
-Patrick's script just puts together the steps that you would otherwise perform manually.
+<p>Patrick's script just puts together the steps that you would otherwise perform manually.</p>
 
 #### [ Johan Commelin (May 29 2018 at 11:09)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127242162):
-And he has compiled mathlib for you. Which saves you an hour of coffee breaks :wink:
+<p>And he has compiled mathlib for you. Which saves you an hour of coffee breaks <span class="emoji emoji-1f609" title="wink">:wink:</span></p>
 
 #### [ Assia Mahboubi (May 29 2018 at 11:09)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127242169):
-Hi @**Johan Commelin** , thanks for the help. I am trying it now.
+<p>Hi <span class="user-mention" data-user-id="112680">@Johan Commelin</span> , thanks for the help. I am trying it now.</p>
 
 #### [ Patrick Massot (May 29 2018 at 11:14)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127242352):
-It seems you still need to manually copy mathlib to the stacks directory. Maybe I shouldn't have skipped using Sbeastian's elan. So, after running my script, the next steps are: `git clone https://github.com/kbuzzard/lean-stacks-project.git` then `cp -r ~/.lean/_target/ lean-stacks-project` then `cd lean-stacks-project`, `lean --make`
+<p>It seems you still need to manually copy mathlib to the stacks directory. Maybe I shouldn't have skipped using Sbeastian's elan. So, after running my script, the next steps are: <code>git clone https://github.com/kbuzzard/lean-stacks-project.git</code> then <code>cp -r ~/.lean/_target/ lean-stacks-project</code> then <code>cd lean-stacks-project</code>, <code>lean --make</code></p>
 
 #### [ Patrick Massot (May 29 2018 at 11:14)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127242357):
-There will probably be some errors because this repo is still a messy playground
+<p>There will probably be some errors because this repo is still a messy playground</p>
 
 #### [ Patrick Massot (May 29 2018 at 11:21)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127242554):
-Ok, I confirm I'm able to do that and then open the lean-stacvks-project folder in VScode and open scheme.lean without error. Assia: the first command to learn after opening a Lean file in VScode (and putting the cursor anywhere in that file) is Ctrl-shift-return which opens the Lean message window where all the interesting communication with lean takes place
+<p>Ok, I confirm I'm able to do that and then open the lean-stacvks-project folder in VScode and open scheme.lean without error. Assia: the first command to learn after opening a Lean file in VScode (and putting the cursor anywhere in that file) is Ctrl-shift-return which opens the Lean message window where all the interesting communication with lean takes place</p>
 
 #### [ Patrick Massot (May 29 2018 at 11:22)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127242565):
-Now I'll really go to IHES where I'll probably open Zulip anyway, but not VScode
+<p>Now I'll really go to IHES where I'll probably open Zulip anyway, but not VScode</p>
 
 #### [ Assia Mahboubi (May 29 2018 at 11:27)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127242718):
-Thanks again! Meanwhile I tried the instruction provided in the README.md (using ``leanpkg``) and it is now indeed building stuff. If it goes wrong I''fall back to your suggestion.
+<p>Thanks again! Meanwhile I tried the instruction provided in the README.md (using <code>leanpkg</code>) and it is now indeed building stuff. If it goes wrong I''fall back to your suggestion.</p>
 
 #### [ Assia Mahboubi (May 29 2018 at 11:32)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127242887):
-It's very long (and warms my office) : it seems that a mathlib has been copied and is being re-compiled in a ``_target/dep`` sub-directory...
+<p>It's very long (and warms my office) : it seems that a mathlib has been copied and is being re-compiled in a <code>_target/dep</code> sub-directory...</p>
 
 #### [ Johan Commelin (May 29 2018 at 11:35)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127242954):
-Yes, we know that feeling... (-;
+<p>Yes, we know that feeling... (-;</p>
 
 #### [ Johan Commelin (May 29 2018 at 11:35)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127242957):
-I wasn't joking when I told you about the "hour of coffee breaks"
+<p>I wasn't joking when I told you about the "hour of coffee breaks"</p>
 
 #### [ Patrick Massot (May 29 2018 at 11:37)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127243006):
-This is exactly what I tried to avoid
+<p>This is exactly what I tried to avoid</p>
 
 #### [ Patrick Massot (May 29 2018 at 11:37)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127243011):
-My instructions should bypass mathlib compilation
+<p>My instructions should bypass mathlib compilation</p>
 
 #### [ Patrick Massot (May 29 2018 at 11:39)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127243059):
-(I'm waiting for my train)
+<p>(I'm waiting for my train)</p>
 
 
 {% endraw %}

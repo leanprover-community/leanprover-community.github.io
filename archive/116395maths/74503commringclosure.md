@@ -12,382 +12,377 @@ permalink: archive/116395maths/74503commringclosure.html
 
 {% raw %}
 #### [ Patrick Massot (Oct 09 2018 at 22:16)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/comm_ring.closure/near/135495590):
-@**Kenny Lau** Do you secretely have `comm_ring.closure` with a `subring` instance somewhere in your repositories?
+<p><span class="user-mention" data-user-id="110064">@Kenny Lau</span> Do you secretely have <code>comm_ring.closure</code> with a <code>subring</code> instance somewhere in your repositories?</p>
 
 #### [ Kenny Lau (Oct 09 2018 at 22:16)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/comm_ring.closure/near/135495611):
-I don't think so.
+<p>I don't think so.</p>
 
 #### [ Patrick Massot (Oct 09 2018 at 22:19)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/comm_ring.closure/near/135495859):
-Too bad. Do you want to sprint through it?
+<p>Too bad. Do you want to sprint through it?</p>
 
 #### [ Kenny Lau (Oct 09 2018 at 22:19)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/comm_ring.closure/near/135495873):
-sure
+<p>sure</p>
 
 #### [ Patrick Massot (Oct 09 2018 at 22:20)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/comm_ring.closure/near/135495989):
-I began with
-```lean
-import ring_theory.subring
+<p>I began with</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">ring_theory</span><span class="bp">.</span><span class="n">subring</span>
 
-namespace group
-variables {α : Type*} [group α]
-theorem exists_list_of_mem_closure {s : set α} {a : α} (h : a ∈ closure s) :
-  (∃l:list α, (∀x∈l, x ∈ s ∨ x⁻¹ ∈ s) ∧ l.prod = a) :=
-begin
-  induction h,
-  case in_closure.basic : a ha { existsi ([a]), simp [ha] },
-  case in_closure.one { existsi ([]), simp },
-  case in_closure.mul : a b _ _ ha hb {
-    rcases ha with ⟨la, ha, eqa⟩,
-    rcases hb with ⟨lb, hb, eqb⟩,
-    existsi (la ++ lb),
-    simp [eqa.symm, eqb.symm, or_imp_distrib],
-    exact assume a, ⟨ha a, hb a⟩
-  },
-  case in_closure.inv : a a_in_clo hlist {
-    rcases hlist with ⟨la, ha, eqa⟩,
-    existsi (la.reverse.map (λ x, x⁻¹)),
-    split,
-    { intros x x_in,
-      rw list.mem_map at x_in,
-      rcases x_in with ⟨b, b_in, hb⟩,
-      rw list.mem_reverse at b_in,
-      specialize ha b b_in,
-      have hb' : b = x⁻¹, by rw ←hb ; simp,
-      rw [hb, hb'] at ha,
-      cc },
-    { rw [←eqa, inv_prod la] } }
-end
-end group
+<span class="kn">namespace</span> <span class="n">group</span>
+<span class="kn">variables</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">group</span> <span class="n">α</span><span class="o">]</span>
+<span class="kn">theorem</span> <span class="n">exists_list_of_mem_closure</span> <span class="o">{</span><span class="n">s</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span><span class="o">}</span> <span class="o">{</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">}</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">a</span> <span class="err">∈</span> <span class="n">closure</span> <span class="n">s</span><span class="o">)</span> <span class="o">:</span>
+  <span class="o">(</span><span class="bp">∃</span><span class="n">l</span><span class="o">:</span><span class="n">list</span> <span class="n">α</span><span class="o">,</span> <span class="o">(</span><span class="bp">∀</span><span class="n">x</span><span class="err">∈</span><span class="n">l</span><span class="o">,</span> <span class="n">x</span> <span class="err">∈</span> <span class="n">s</span> <span class="bp">∨</span> <span class="n">x</span><span class="bp">⁻¹</span> <span class="err">∈</span> <span class="n">s</span><span class="o">)</span> <span class="bp">∧</span> <span class="n">l</span><span class="bp">.</span><span class="n">prod</span> <span class="bp">=</span> <span class="n">a</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">induction</span> <span class="n">h</span><span class="o">,</span>
+  <span class="n">case</span> <span class="n">in_closure</span><span class="bp">.</span><span class="n">basic</span> <span class="o">:</span> <span class="n">a</span> <span class="n">ha</span> <span class="o">{</span> <span class="n">existsi</span> <span class="o">([</span><span class="n">a</span><span class="o">]),</span> <span class="n">simp</span> <span class="o">[</span><span class="n">ha</span><span class="o">]</span> <span class="o">},</span>
+  <span class="n">case</span> <span class="n">in_closure</span><span class="bp">.</span><span class="n">one</span> <span class="o">{</span> <span class="n">existsi</span> <span class="o">([]),</span> <span class="n">simp</span> <span class="o">},</span>
+  <span class="n">case</span> <span class="n">in_closure</span><span class="bp">.</span><span class="n">mul</span> <span class="o">:</span> <span class="n">a</span> <span class="n">b</span> <span class="bp">_</span> <span class="bp">_</span> <span class="n">ha</span> <span class="n">hb</span> <span class="o">{</span>
+    <span class="n">rcases</span> <span class="n">ha</span> <span class="k">with</span> <span class="bp">⟨</span><span class="n">la</span><span class="o">,</span> <span class="n">ha</span><span class="o">,</span> <span class="n">eqa</span><span class="bp">⟩</span><span class="o">,</span>
+    <span class="n">rcases</span> <span class="n">hb</span> <span class="k">with</span> <span class="bp">⟨</span><span class="n">lb</span><span class="o">,</span> <span class="n">hb</span><span class="o">,</span> <span class="n">eqb</span><span class="bp">⟩</span><span class="o">,</span>
+    <span class="n">existsi</span> <span class="o">(</span><span class="n">la</span> <span class="bp">++</span> <span class="n">lb</span><span class="o">),</span>
+    <span class="n">simp</span> <span class="o">[</span><span class="n">eqa</span><span class="bp">.</span><span class="n">symm</span><span class="o">,</span> <span class="n">eqb</span><span class="bp">.</span><span class="n">symm</span><span class="o">,</span> <span class="n">or_imp_distrib</span><span class="o">],</span>
+    <span class="n">exact</span> <span class="k">assume</span> <span class="n">a</span><span class="o">,</span> <span class="bp">⟨</span><span class="n">ha</span> <span class="n">a</span><span class="o">,</span> <span class="n">hb</span> <span class="n">a</span><span class="bp">⟩</span>
+  <span class="o">},</span>
+  <span class="n">case</span> <span class="n">in_closure</span><span class="bp">.</span><span class="n">inv</span> <span class="o">:</span> <span class="n">a</span> <span class="n">a_in_clo</span> <span class="n">hlist</span> <span class="o">{</span>
+    <span class="n">rcases</span> <span class="n">hlist</span> <span class="k">with</span> <span class="bp">⟨</span><span class="n">la</span><span class="o">,</span> <span class="n">ha</span><span class="o">,</span> <span class="n">eqa</span><span class="bp">⟩</span><span class="o">,</span>
+    <span class="n">existsi</span> <span class="o">(</span><span class="n">la</span><span class="bp">.</span><span class="n">reverse</span><span class="bp">.</span><span class="n">map</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="n">x</span><span class="bp">⁻¹</span><span class="o">)),</span>
+    <span class="n">split</span><span class="o">,</span>
+    <span class="o">{</span> <span class="n">intros</span> <span class="n">x</span> <span class="n">x_in</span><span class="o">,</span>
+      <span class="n">rw</span> <span class="n">list</span><span class="bp">.</span><span class="n">mem_map</span> <span class="n">at</span> <span class="n">x_in</span><span class="o">,</span>
+      <span class="n">rcases</span> <span class="n">x_in</span> <span class="k">with</span> <span class="bp">⟨</span><span class="n">b</span><span class="o">,</span> <span class="n">b_in</span><span class="o">,</span> <span class="n">hb</span><span class="bp">⟩</span><span class="o">,</span>
+      <span class="n">rw</span> <span class="n">list</span><span class="bp">.</span><span class="n">mem_reverse</span> <span class="n">at</span> <span class="n">b_in</span><span class="o">,</span>
+      <span class="n">specialize</span> <span class="n">ha</span> <span class="n">b</span> <span class="n">b_in</span><span class="o">,</span>
+      <span class="k">have</span> <span class="n">hb&#39;</span> <span class="o">:</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">x</span><span class="bp">⁻¹</span><span class="o">,</span> <span class="k">by</span> <span class="n">rw</span> <span class="err">←</span><span class="n">hb</span> <span class="bp">;</span> <span class="n">simp</span><span class="o">,</span>
+      <span class="n">rw</span> <span class="o">[</span><span class="n">hb</span><span class="o">,</span> <span class="n">hb&#39;</span><span class="o">]</span> <span class="n">at</span> <span class="n">ha</span><span class="o">,</span>
+      <span class="n">cc</span> <span class="o">},</span>
+    <span class="o">{</span> <span class="n">rw</span> <span class="o">[</span><span class="err">←</span><span class="n">eqa</span><span class="o">,</span> <span class="n">inv_prod</span> <span class="n">la</span><span class="o">]</span> <span class="o">}</span> <span class="o">}</span>
+<span class="kn">end</span>
+<span class="kn">end</span> <span class="n">group</span>
 
-namespace add_group
-variables {α : Type*} [add_group α]
+<span class="kn">namespace</span> <span class="n">add_group</span>
+<span class="kn">variables</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">add_group</span> <span class="n">α</span><span class="o">]</span>
 
-theorem exists_list_of_mem_closure {s : set α} {a : α} (h : a ∈ closure s) :
-  (∃l:list α, (∀x∈l, x ∈ s ∨ -x ∈ s) ∧ l.sum = a) :=
-sorry
-end add_group
+<span class="kn">theorem</span> <span class="n">exists_list_of_mem_closure</span> <span class="o">{</span><span class="n">s</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span><span class="o">}</span> <span class="o">{</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">}</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">a</span> <span class="err">∈</span> <span class="n">closure</span> <span class="n">s</span><span class="o">)</span> <span class="o">:</span>
+  <span class="o">(</span><span class="bp">∃</span><span class="n">l</span><span class="o">:</span><span class="n">list</span> <span class="n">α</span><span class="o">,</span> <span class="o">(</span><span class="bp">∀</span><span class="n">x</span><span class="err">∈</span><span class="n">l</span><span class="o">,</span> <span class="n">x</span> <span class="err">∈</span> <span class="n">s</span> <span class="bp">∨</span> <span class="bp">-</span><span class="n">x</span> <span class="err">∈</span> <span class="n">s</span><span class="o">)</span> <span class="bp">∧</span> <span class="n">l</span><span class="bp">.</span><span class="n">sum</span> <span class="bp">=</span> <span class="n">a</span><span class="o">)</span> <span class="o">:=</span>
+<span class="n">sorry</span>
+<span class="kn">end</span> <span class="n">add_group</span>
 
-namespace comm_ring
-variables {R : Type*} [comm_ring R]
+<span class="kn">namespace</span> <span class="n">comm_ring</span>
+<span class="kn">variables</span> <span class="o">{</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">R</span><span class="o">]</span>
 
-def closure (s : set R) := add_group.closure (monoid.closure s)
+<span class="n">def</span> <span class="n">closure</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">set</span> <span class="n">R</span><span class="o">)</span> <span class="o">:=</span> <span class="n">add_group</span><span class="bp">.</span><span class="n">closure</span> <span class="o">(</span><span class="n">monoid</span><span class="bp">.</span><span class="n">closure</span> <span class="n">s</span><span class="o">)</span>
 
-instance {s : set R} : is_subring (closure s) :=
-begin
-  dunfold closure,
-  exact
-    { zero_mem := is_add_submonoid.zero_mem _,
-      add_mem := λ a b ha hb, is_add_submonoid.add_mem ha hb,
-      neg_mem := λ a h, is_add_subgroup.neg_mem h,
-      one_mem := add_group.mem_closure (is_submonoid.one_mem _),
-      mul_mem := begin
-        intros a b a_in b_in,
-        rcases add_group.exists_list_of_mem_closure a_in with ⟨la, hla, sum_a⟩,
-        rcases add_group.exists_list_of_mem_closure b_in with ⟨lb, hlb, sum_b⟩,
-        rw [←sum_a, ←sum_b],
-        sorry,
-      end }
-end
+<span class="kn">instance</span> <span class="o">{</span><span class="n">s</span> <span class="o">:</span> <span class="n">set</span> <span class="n">R</span><span class="o">}</span> <span class="o">:</span> <span class="n">is_subring</span> <span class="o">(</span><span class="n">closure</span> <span class="n">s</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">dunfold</span> <span class="n">closure</span><span class="o">,</span>
+  <span class="n">exact</span>
+    <span class="o">{</span> <span class="n">zero_mem</span> <span class="o">:=</span> <span class="n">is_add_submonoid</span><span class="bp">.</span><span class="n">zero_mem</span> <span class="bp">_</span><span class="o">,</span>
+      <span class="n">add_mem</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">a</span> <span class="n">b</span> <span class="n">ha</span> <span class="n">hb</span><span class="o">,</span> <span class="n">is_add_submonoid</span><span class="bp">.</span><span class="n">add_mem</span> <span class="n">ha</span> <span class="n">hb</span><span class="o">,</span>
+      <span class="n">neg_mem</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">a</span> <span class="n">h</span><span class="o">,</span> <span class="n">is_add_subgroup</span><span class="bp">.</span><span class="n">neg_mem</span> <span class="n">h</span><span class="o">,</span>
+      <span class="n">one_mem</span> <span class="o">:=</span> <span class="n">add_group</span><span class="bp">.</span><span class="n">mem_closure</span> <span class="o">(</span><span class="n">is_submonoid</span><span class="bp">.</span><span class="n">one_mem</span> <span class="bp">_</span><span class="o">),</span>
+      <span class="n">mul_mem</span> <span class="o">:=</span> <span class="k">begin</span>
+        <span class="n">intros</span> <span class="n">a</span> <span class="n">b</span> <span class="n">a_in</span> <span class="n">b_in</span><span class="o">,</span>
+        <span class="n">rcases</span> <span class="n">add_group</span><span class="bp">.</span><span class="n">exists_list_of_mem_closure</span> <span class="n">a_in</span> <span class="k">with</span> <span class="bp">⟨</span><span class="n">la</span><span class="o">,</span> <span class="n">hla</span><span class="o">,</span> <span class="n">sum_a</span><span class="bp">⟩</span><span class="o">,</span>
+        <span class="n">rcases</span> <span class="n">add_group</span><span class="bp">.</span><span class="n">exists_list_of_mem_closure</span> <span class="n">b_in</span> <span class="k">with</span> <span class="bp">⟨</span><span class="n">lb</span><span class="o">,</span> <span class="n">hlb</span><span class="o">,</span> <span class="n">sum_b</span><span class="bp">⟩</span><span class="o">,</span>
+        <span class="n">rw</span> <span class="o">[</span><span class="err">←</span><span class="n">sum_a</span><span class="o">,</span> <span class="err">←</span><span class="n">sum_b</span><span class="o">],</span>
+        <span class="n">sorry</span><span class="o">,</span>
+      <span class="kn">end</span> <span class="o">}</span>
+<span class="kn">end</span>
 
-end comm_ring
-```
+<span class="kn">end</span> <span class="n">comm_ring</span>
+</pre></div>
 
 #### [ Patrick Massot (Oct 09 2018 at 22:21)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/comm_ring.closure/near/135496035):
-But I lost courage because of https://leanprover.zulipchat.com/#narrow/stream/116395-maths/subject/to_additive.20multiplicative/near/135470227 and sum manipulations
+<p>But I lost courage because of <a href="#narrow/stream/116395-maths/subject/to_additive.20multiplicative/near/135470227" title="#narrow/stream/116395-maths/subject/to_additive.20multiplicative/near/135470227">https://leanprover.zulipchat.com/#narrow/stream/116395-maths/subject/to_additive.20multiplicative/near/135470227</a> and sum manipulations</p>
 
 #### [ Patrick Massot (Oct 09 2018 at 22:21)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/comm_ring.closure/near/135496067):
-The trouble is that the big_operator stuff in mathlib is all about sums over finset, not lists
+<p>The trouble is that the big_operator stuff in mathlib is all about sums over finset, not lists</p>
 
 #### [ Patrick Massot (Oct 09 2018 at 22:22)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/comm_ring.closure/near/135496121):
-(here I mean the trouble with the final sorry, the `to_additive` stuff is simply total mystery)
+<p>(here I mean the trouble with the final sorry, the <code>to_additive</code> stuff is simply total mystery)</p>
 
 #### [ Kenny Lau (Oct 09 2018 at 22:40)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/comm_ring.closure/near/135497365):
-```lean
-import ring_theory.subring
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">ring_theory</span><span class="bp">.</span><span class="n">subring</span>
 
-universe u
+<span class="kn">universe</span> <span class="n">u</span>
 
-@[elab_as_eliminator]
-theorem add_monoid.in_closure.rec_on {α : Type u} [add_monoid α] {s : set α} {C : α → Prop}
-  {a : α} (H : a ∈ add_monoid.closure s)
-  (H1 : ∀ {a : α}, a ∈ s → C a) (H2 : C 0)
-  (H3 : ∀ {a b : α}, a ∈ add_monoid.closure s → b ∈ add_monoid.closure s → C a → C b → C (a + b)) :
-  C a :=
-monoid.in_closure.rec_on H (λ _, H1) H2 (λ _ _, H3)
+<span class="bp">@</span><span class="o">[</span><span class="n">elab_as_eliminator</span><span class="o">]</span>
+<span class="kn">theorem</span> <span class="n">add_monoid</span><span class="bp">.</span><span class="n">in_closure</span><span class="bp">.</span><span class="n">rec_on</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">[</span><span class="n">add_monoid</span> <span class="n">α</span><span class="o">]</span> <span class="o">{</span><span class="n">s</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span><span class="o">}</span> <span class="o">{</span><span class="n">C</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">}</span>
+  <span class="o">{</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">}</span> <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="n">a</span> <span class="err">∈</span> <span class="n">add_monoid</span><span class="bp">.</span><span class="n">closure</span> <span class="n">s</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">H1</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">},</span> <span class="n">a</span> <span class="err">∈</span> <span class="n">s</span> <span class="bp">→</span> <span class="n">C</span> <span class="n">a</span><span class="o">)</span> <span class="o">(</span><span class="n">H2</span> <span class="o">:</span> <span class="n">C</span> <span class="mi">0</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">H3</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">α</span><span class="o">},</span> <span class="n">a</span> <span class="err">∈</span> <span class="n">add_monoid</span><span class="bp">.</span><span class="n">closure</span> <span class="n">s</span> <span class="bp">→</span> <span class="n">b</span> <span class="err">∈</span> <span class="n">add_monoid</span><span class="bp">.</span><span class="n">closure</span> <span class="n">s</span> <span class="bp">→</span> <span class="n">C</span> <span class="n">a</span> <span class="bp">→</span> <span class="n">C</span> <span class="n">b</span> <span class="bp">→</span> <span class="n">C</span> <span class="o">(</span><span class="n">a</span> <span class="bp">+</span> <span class="n">b</span><span class="o">))</span> <span class="o">:</span>
+  <span class="n">C</span> <span class="n">a</span> <span class="o">:=</span>
+<span class="n">monoid</span><span class="bp">.</span><span class="n">in_closure</span><span class="bp">.</span><span class="n">rec_on</span> <span class="n">H</span> <span class="o">(</span><span class="bp">λ</span> <span class="bp">_</span><span class="o">,</span> <span class="n">H1</span><span class="o">)</span> <span class="n">H2</span> <span class="o">(</span><span class="bp">λ</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">,</span> <span class="n">H3</span><span class="o">)</span>
 
-@[elab_as_eliminator]
-theorem add_group.in_closure.rec_on {α : Type u} [add_group α] {s : set α} {C : α → Prop}
-  {a : α} (H : a ∈ add_group.closure s)
-  (H1 : ∀ {a : α}, a ∈ s → C a) (H2 : C 0) (H3 : ∀ {a : α}, a ∈ add_group.closure s → C a → C (-a))
-  (H4 : ∀ {a b : α}, a ∈ add_group.closure s → b ∈ add_group.closure s → C a → C b → C (a + b)) :
-  C a :=
-group.in_closure.rec_on H (λ _, H1) H2 (λ _, H3) (λ _ _, H4)
+<span class="bp">@</span><span class="o">[</span><span class="n">elab_as_eliminator</span><span class="o">]</span>
+<span class="kn">theorem</span> <span class="n">add_group</span><span class="bp">.</span><span class="n">in_closure</span><span class="bp">.</span><span class="n">rec_on</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">[</span><span class="n">add_group</span> <span class="n">α</span><span class="o">]</span> <span class="o">{</span><span class="n">s</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span><span class="o">}</span> <span class="o">{</span><span class="n">C</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">}</span>
+  <span class="o">{</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">}</span> <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="n">a</span> <span class="err">∈</span> <span class="n">add_group</span><span class="bp">.</span><span class="n">closure</span> <span class="n">s</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">H1</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">},</span> <span class="n">a</span> <span class="err">∈</span> <span class="n">s</span> <span class="bp">→</span> <span class="n">C</span> <span class="n">a</span><span class="o">)</span> <span class="o">(</span><span class="n">H2</span> <span class="o">:</span> <span class="n">C</span> <span class="mi">0</span><span class="o">)</span> <span class="o">(</span><span class="n">H3</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">},</span> <span class="n">a</span> <span class="err">∈</span> <span class="n">add_group</span><span class="bp">.</span><span class="n">closure</span> <span class="n">s</span> <span class="bp">→</span> <span class="n">C</span> <span class="n">a</span> <span class="bp">→</span> <span class="n">C</span> <span class="o">(</span><span class="bp">-</span><span class="n">a</span><span class="o">))</span>
+  <span class="o">(</span><span class="n">H4</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">α</span><span class="o">},</span> <span class="n">a</span> <span class="err">∈</span> <span class="n">add_group</span><span class="bp">.</span><span class="n">closure</span> <span class="n">s</span> <span class="bp">→</span> <span class="n">b</span> <span class="err">∈</span> <span class="n">add_group</span><span class="bp">.</span><span class="n">closure</span> <span class="n">s</span> <span class="bp">→</span> <span class="n">C</span> <span class="n">a</span> <span class="bp">→</span> <span class="n">C</span> <span class="n">b</span> <span class="bp">→</span> <span class="n">C</span> <span class="o">(</span><span class="n">a</span> <span class="bp">+</span> <span class="n">b</span><span class="o">))</span> <span class="o">:</span>
+  <span class="n">C</span> <span class="n">a</span> <span class="o">:=</span>
+<span class="n">group</span><span class="bp">.</span><span class="n">in_closure</span><span class="bp">.</span><span class="n">rec_on</span> <span class="n">H</span> <span class="o">(</span><span class="bp">λ</span> <span class="bp">_</span><span class="o">,</span> <span class="n">H1</span><span class="o">)</span> <span class="n">H2</span> <span class="o">(</span><span class="bp">λ</span> <span class="bp">_</span><span class="o">,</span> <span class="n">H3</span><span class="o">)</span> <span class="o">(</span><span class="bp">λ</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">,</span> <span class="n">H4</span><span class="o">)</span>
 
-namespace comm_ring
-variables {R : Type u} [comm_ring R]
+<span class="kn">namespace</span> <span class="n">comm_ring</span>
+<span class="kn">variables</span> <span class="o">{</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">R</span><span class="o">]</span>
 
-def closure (s : set R) := add_group.closure (monoid.closure s)
+<span class="n">def</span> <span class="n">closure</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">set</span> <span class="n">R</span><span class="o">)</span> <span class="o">:=</span> <span class="n">add_group</span><span class="bp">.</span><span class="n">closure</span> <span class="o">(</span><span class="n">monoid</span><span class="bp">.</span><span class="n">closure</span> <span class="n">s</span><span class="o">)</span>
 
-local attribute [reducible] closure
+<span class="n">local</span> <span class="n">attribute</span> <span class="o">[</span><span class="kn">reducible</span><span class="o">]</span> <span class="n">closure</span>
 
-instance {s : set R} : is_subring (closure s) :=
-{ zero_mem := is_add_submonoid.zero_mem _,
-  add_mem := λ a b ha hb, is_add_submonoid.add_mem ha hb,
-  neg_mem := λ a h, is_add_subgroup.neg_mem h,
-  one_mem := add_group.mem_closure (is_submonoid.one_mem _),
-  mul_mem := λ a b ha hb, add_group.in_closure.rec_on hb
-    (λ b hb, add_group.in_closure.rec_on ha
-      (λ a ha, add_group.subset_closure (is_submonoid.mul_mem ha hb))
-      ((zero_mul b).symm ▸ is_add_submonoid.zero_mem _)
-      (λ a ha hab, (neg_mul_eq_neg_mul a b) ▸ is_add_subgroup.neg_mem hab)
-      (λ a c ha hc hab hcb, (add_mul a c b).symm ▸ is_add_submonoid.add_mem hab hcb))
-    ((mul_zero a).symm ▸ is_add_submonoid.zero_mem _)
-    (λ b hb hab, (neg_mul_eq_mul_neg a b) ▸ is_add_subgroup.neg_mem hab)
-    (λ b c hb hc hab hac, (mul_add a b c).symm ▸ is_add_submonoid.add_mem hab hac) }
+<span class="kn">instance</span> <span class="o">{</span><span class="n">s</span> <span class="o">:</span> <span class="n">set</span> <span class="n">R</span><span class="o">}</span> <span class="o">:</span> <span class="n">is_subring</span> <span class="o">(</span><span class="n">closure</span> <span class="n">s</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">zero_mem</span> <span class="o">:=</span> <span class="n">is_add_submonoid</span><span class="bp">.</span><span class="n">zero_mem</span> <span class="bp">_</span><span class="o">,</span>
+  <span class="n">add_mem</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">a</span> <span class="n">b</span> <span class="n">ha</span> <span class="n">hb</span><span class="o">,</span> <span class="n">is_add_submonoid</span><span class="bp">.</span><span class="n">add_mem</span> <span class="n">ha</span> <span class="n">hb</span><span class="o">,</span>
+  <span class="n">neg_mem</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">a</span> <span class="n">h</span><span class="o">,</span> <span class="n">is_add_subgroup</span><span class="bp">.</span><span class="n">neg_mem</span> <span class="n">h</span><span class="o">,</span>
+  <span class="n">one_mem</span> <span class="o">:=</span> <span class="n">add_group</span><span class="bp">.</span><span class="n">mem_closure</span> <span class="o">(</span><span class="n">is_submonoid</span><span class="bp">.</span><span class="n">one_mem</span> <span class="bp">_</span><span class="o">),</span>
+  <span class="n">mul_mem</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">a</span> <span class="n">b</span> <span class="n">ha</span> <span class="n">hb</span><span class="o">,</span> <span class="n">add_group</span><span class="bp">.</span><span class="n">in_closure</span><span class="bp">.</span><span class="n">rec_on</span> <span class="n">hb</span>
+    <span class="o">(</span><span class="bp">λ</span> <span class="n">b</span> <span class="n">hb</span><span class="o">,</span> <span class="n">add_group</span><span class="bp">.</span><span class="n">in_closure</span><span class="bp">.</span><span class="n">rec_on</span> <span class="n">ha</span>
+      <span class="o">(</span><span class="bp">λ</span> <span class="n">a</span> <span class="n">ha</span><span class="o">,</span> <span class="n">add_group</span><span class="bp">.</span><span class="n">subset_closure</span> <span class="o">(</span><span class="n">is_submonoid</span><span class="bp">.</span><span class="n">mul_mem</span> <span class="n">ha</span> <span class="n">hb</span><span class="o">))</span>
+      <span class="o">((</span><span class="n">zero_mul</span> <span class="n">b</span><span class="o">)</span><span class="bp">.</span><span class="n">symm</span> <span class="bp">▸</span> <span class="n">is_add_submonoid</span><span class="bp">.</span><span class="n">zero_mem</span> <span class="bp">_</span><span class="o">)</span>
+      <span class="o">(</span><span class="bp">λ</span> <span class="n">a</span> <span class="n">ha</span> <span class="n">hab</span><span class="o">,</span> <span class="o">(</span><span class="n">neg_mul_eq_neg_mul</span> <span class="n">a</span> <span class="n">b</span><span class="o">)</span> <span class="bp">▸</span> <span class="n">is_add_subgroup</span><span class="bp">.</span><span class="n">neg_mem</span> <span class="n">hab</span><span class="o">)</span>
+      <span class="o">(</span><span class="bp">λ</span> <span class="n">a</span> <span class="n">c</span> <span class="n">ha</span> <span class="n">hc</span> <span class="n">hab</span> <span class="n">hcb</span><span class="o">,</span> <span class="o">(</span><span class="n">add_mul</span> <span class="n">a</span> <span class="n">c</span> <span class="n">b</span><span class="o">)</span><span class="bp">.</span><span class="n">symm</span> <span class="bp">▸</span> <span class="n">is_add_submonoid</span><span class="bp">.</span><span class="n">add_mem</span> <span class="n">hab</span> <span class="n">hcb</span><span class="o">))</span>
+    <span class="o">((</span><span class="n">mul_zero</span> <span class="n">a</span><span class="o">)</span><span class="bp">.</span><span class="n">symm</span> <span class="bp">▸</span> <span class="n">is_add_submonoid</span><span class="bp">.</span><span class="n">zero_mem</span> <span class="bp">_</span><span class="o">)</span>
+    <span class="o">(</span><span class="bp">λ</span> <span class="n">b</span> <span class="n">hb</span> <span class="n">hab</span><span class="o">,</span> <span class="o">(</span><span class="n">neg_mul_eq_mul_neg</span> <span class="n">a</span> <span class="n">b</span><span class="o">)</span> <span class="bp">▸</span> <span class="n">is_add_subgroup</span><span class="bp">.</span><span class="n">neg_mem</span> <span class="n">hab</span><span class="o">)</span>
+    <span class="o">(</span><span class="bp">λ</span> <span class="n">b</span> <span class="n">c</span> <span class="n">hb</span> <span class="n">hc</span> <span class="n">hab</span> <span class="n">hac</span><span class="o">,</span> <span class="o">(</span><span class="n">mul_add</span> <span class="n">a</span> <span class="n">b</span> <span class="n">c</span><span class="o">)</span><span class="bp">.</span><span class="n">symm</span> <span class="bp">▸</span> <span class="n">is_add_submonoid</span><span class="bp">.</span><span class="n">add_mem</span> <span class="n">hab</span> <span class="n">hac</span><span class="o">)</span> <span class="o">}</span>
 
-end comm_ring
-```
+<span class="kn">end</span> <span class="n">comm_ring</span>
+</pre></div>
 
 #### [ Kenny Lau (Oct 09 2018 at 22:40)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/comm_ring.closure/near/135497371):
-@**Patrick Massot**
+<p><span class="user-mention" data-user-id="110031">@Patrick Massot</span></p>
 
 #### [ Patrick Massot (Oct 09 2018 at 22:42)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/comm_ring.closure/near/135497490):
-Thanks!
+<p>Thanks!</p>
 
 #### [ Patrick Massot (Oct 09 2018 at 22:42)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/comm_ring.closure/near/135497506):
-Could we still get the list statements analogue to what is already in mathlib for monoids?
+<p>Could we still get the list statements analogue to what is already in mathlib for monoids?</p>
 
 #### [ Patrick Massot (Oct 09 2018 at 22:43)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/comm_ring.closure/near/135497537):
-Is the reducible attribute purely intended to save a couple of `dunfold` in the instance building?
+<p>Is the reducible attribute purely intended to save a couple of <code>dunfold</code> in the instance building?</p>
 
 #### [ Kenny Lau (Oct 09 2018 at 22:46)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/comm_ring.closure/near/135497735):
-```quote
-Is the reducible attribute purely intended to save a couple of `dunfold` in the instance building?
-```
-yes
+<blockquote>
+<p>Is the reducible attribute purely intended to save a couple of <code>dunfold</code> in the instance building?</p>
+</blockquote>
+<p>yes</p>
 
 #### [ Patrick Massot (Oct 09 2018 at 22:49)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/comm_ring.closure/near/135497881):
-Why do you get `monoid.in_closure.rec_on` for free when defining `monoid.in_closure` but need to write `add_monoid.in_closure.rec_on`?
+<p>Why do you get <code>monoid.in_closure.rec_on</code> for free when defining <code>monoid.in_closure</code> but need to write <code>add_monoid.in_closure.rec_on</code>?</p>
 
 #### [ Patrick Massot (Oct 09 2018 at 22:49)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/comm_ring.closure/near/135497906):
-Is it because of the multiplicative to additive magic?
+<p>Is it because of the multiplicative to additive magic?</p>
 
 #### [ Patrick Massot (Oct 09 2018 at 22:49)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/comm_ring.closure/near/135497918):
-which is not magic enough?
+<p>which is not magic enough?</p>
 
 #### [ Kenny Lau (Oct 09 2018 at 22:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/comm_ring.closure/near/135498021):
-because `add_monoid.closure` is not defined using `to_additive`
+<p>because <code>add_monoid.closure</code> is not defined using <code>to_additive</code></p>
 
 #### [ Patrick Massot (Oct 09 2018 at 22:55)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/comm_ring.closure/near/135498278):
-And why isn't it defined using `to_additive`?
+<p>And why isn't it defined using <code>to_additive</code>?</p>
 
 #### [ Patrick Massot (Oct 09 2018 at 22:56)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/comm_ring.closure/near/135498343):
-The definition is really weird. At some point earlier Lean was completely confused and asked me to prove stuff involving 1 in an additive context
+<p>The definition is really weird. At some point earlier Lean was completely confused and asked me to prove stuff involving 1 in an additive context</p>
 
 #### [ Patrick Massot (Oct 09 2018 at 22:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/comm_ring.closure/near/135498464):
-I would have never thought of proving that instance using these nested inductions. The real world proof manipulating sums is so easy, it seems beyond masochistic to write your proof.
+<p>I would have never thought of proving that instance using these nested inductions. The real world proof manipulating sums is so easy, it seems beyond masochistic to write your proof.</p>
 
 #### [ Kenny Lau (Oct 09 2018 at 23:01)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/comm_ring.closure/near/135498625):
-```lean
-theorem exists_list_of_mem_closure {s : set α} {a : α} (h : a ∈ closure s) :
-  (∃l:list α, (∀x∈l, x ∈ s ∨ -x ∈ s) ∧ l.sum = a) :=
-group.exists_list_of_mem_closure h
-```
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">exists_list_of_mem_closure</span> <span class="o">{</span><span class="n">s</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span><span class="o">}</span> <span class="o">{</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">}</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">a</span> <span class="err">∈</span> <span class="n">closure</span> <span class="n">s</span><span class="o">)</span> <span class="o">:</span>
+  <span class="o">(</span><span class="bp">∃</span><span class="n">l</span><span class="o">:</span><span class="n">list</span> <span class="n">α</span><span class="o">,</span> <span class="o">(</span><span class="bp">∀</span><span class="n">x</span><span class="err">∈</span><span class="n">l</span><span class="o">,</span> <span class="n">x</span> <span class="err">∈</span> <span class="n">s</span> <span class="bp">∨</span> <span class="bp">-</span><span class="n">x</span> <span class="err">∈</span> <span class="n">s</span><span class="o">)</span> <span class="bp">∧</span> <span class="n">l</span><span class="bp">.</span><span class="n">sum</span> <span class="bp">=</span> <span class="n">a</span><span class="o">)</span> <span class="o">:=</span>
+<span class="n">group</span><span class="bp">.</span><span class="n">exists_list_of_mem_closure</span> <span class="n">h</span>
+</pre></div>
 
 #### [ Patrick Massot (Oct 09 2018 at 23:01)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/comm_ring.closure/near/135498664):
-this is even more confusing
+<p>this is even more confusing</p>
 
 #### [ Patrick Massot (Oct 09 2018 at 23:03)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/comm_ring.closure/near/135498756):
-I thought you would be using your custom recursor
+<p>I thought you would be using your custom recursor</p>
 
 #### [ Kenny Lau (Oct 09 2018 at 23:03)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/comm_ring.closure/near/135498770):
-me too
+<p>me too</p>
 
 #### [ Kenny Lau (Oct 09 2018 at 23:03)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/comm_ring.closure/near/135498777):
-and halfway I realized
+<p>and halfway I realized</p>
 
 #### [ Patrick Massot (Oct 09 2018 at 23:04)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/comm_ring.closure/near/135498839):
-Do you understand what's going on with this way of turning multiplicative stuff into additive one?
+<p>Do you understand what's going on with this way of turning multiplicative stuff into additive one?</p>
 
 #### [ Kenny Lau (Oct 09 2018 at 23:04)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/comm_ring.closure/near/135498846):
-somewhat.
+<p>somewhat.</p>
 
 #### [ Patrick Massot (Oct 09 2018 at 23:22)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/comm_ring.closure/near/135500038):
-What about the `exists_lists_of_mem_closure` in the ring case?
+<p>What about the <code>exists_lists_of_mem_closure</code> in the ring case?</p>
 
 #### [ Patrick Massot (Oct 09 2018 at 23:22)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/comm_ring.closure/near/135500057):
-something like
-```lean
-theorem exists_list_of_mem_closure {s : set R} {a : R} (h : a ∈ closure s) :
-  (∃ L : list (list R), (∀ l ∈ L, ∀ x ∈ l, x ∈ s ∨ -x ∈ s) ∧ (list.map list.prod L).sum = a) 
-```
+<p>something like</p>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">exists_list_of_mem_closure</span> <span class="o">{</span><span class="n">s</span> <span class="o">:</span> <span class="n">set</span> <span class="n">R</span><span class="o">}</span> <span class="o">{</span><span class="n">a</span> <span class="o">:</span> <span class="n">R</span><span class="o">}</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">a</span> <span class="err">∈</span> <span class="n">closure</span> <span class="n">s</span><span class="o">)</span> <span class="o">:</span>
+  <span class="o">(</span><span class="bp">∃</span> <span class="n">L</span> <span class="o">:</span> <span class="n">list</span> <span class="o">(</span><span class="n">list</span> <span class="n">R</span><span class="o">),</span> <span class="o">(</span><span class="bp">∀</span> <span class="n">l</span> <span class="err">∈</span> <span class="n">L</span><span class="o">,</span> <span class="bp">∀</span> <span class="n">x</span> <span class="err">∈</span> <span class="n">l</span><span class="o">,</span> <span class="n">x</span> <span class="err">∈</span> <span class="n">s</span> <span class="bp">∨</span> <span class="bp">-</span><span class="n">x</span> <span class="err">∈</span> <span class="n">s</span><span class="o">)</span> <span class="bp">∧</span> <span class="o">(</span><span class="n">list</span><span class="bp">.</span><span class="n">map</span> <span class="n">list</span><span class="bp">.</span><span class="n">prod</span> <span class="n">L</span><span class="o">)</span><span class="bp">.</span><span class="n">sum</span> <span class="bp">=</span> <span class="n">a</span><span class="o">)</span>
+</pre></div>
 
 #### [ Patrick Massot (Oct 09 2018 at 23:23)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/comm_ring.closure/near/135500098):
-I guess I would try to use the previous theorems but you'll run crazy inductions...
+<p>I guess I would try to use the previous theorems but you'll run crazy inductions...</p>
 
 #### [ Kenny Lau (Oct 09 2018 at 23:24)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/comm_ring.closure/near/135500174):
-why do we need `list (list R)`?
+<p>why do we need <code>list (list R)</code>?</p>
 
 #### [ Kenny Lau (Oct 09 2018 at 23:24)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/comm_ring.closure/near/135500189):
-ah I see
+<p>ah I see</p>
 
 #### [ Kenny Lau (Oct 09 2018 at 23:25)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/comm_ring.closure/near/135500217):
-maybe we should prove the recursor for comm_ring.closure first
+<p>maybe we should prove the recursor for comm_ring.closure first</p>
 
 #### [ Patrick Massot (Oct 09 2018 at 23:25)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/comm_ring.closure/near/135500248):
-of course the maths proof is not at all by induction
+<p>of course the maths proof is not at all by induction</p>
 
 #### [ Patrick Massot (Oct 09 2018 at 23:26)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/comm_ring.closure/near/135500297):
-but in Lean it would probably be easier by induction
+<p>but in Lean it would probably be easier by induction</p>
 
 #### [ Kenny Lau (Oct 09 2018 at 23:26)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/comm_ring.closure/near/135500313):
-oh how do you prove it in maths?
+<p>oh how do you prove it in maths?</p>
 
 #### [ Patrick Massot (Oct 09 2018 at 23:28)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/comm_ring.closure/near/135500454):
-The maths proof starts with `  rcases add_group.exists_list_of_mem_closure h with ⟨L1, hL1, L1sum⟩,`
+<p>The maths proof starts with <code>  rcases add_group.exists_list_of_mem_closure h with ⟨L1, hL1, L1sum⟩,</code></p>
 
 #### [ Patrick Massot (Oct 09 2018 at 23:29)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/comm_ring.closure/near/135500482):
-Then you need to apply `monoid.exists_list_of_mem_closure` everywhere you see monoid.closure in hL1
+<p>Then you need to apply <code>monoid.exists_list_of_mem_closure</code> everywhere you see monoid.closure in hL1</p>
 
 #### [ Patrick Massot (Oct 09 2018 at 23:29)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/comm_ring.closure/near/135500500):
-of course it's already beyond my Lean fu, because of the binder
+<p>of course it's already beyond my Lean fu, because of the binder</p>
 
 #### [ Patrick Massot (Oct 09 2018 at 23:30)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/comm_ring.closure/near/135500566):
-and this get you get your list of lists
+<p>and this get you get your list of lists</p>
 
 #### [ Patrick Massot (Oct 09 2018 at 23:30)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/comm_ring.closure/near/135500573):
-except for the substractions
+<p>except for the substractions</p>
 
 #### [ Patrick Massot (Oct 09 2018 at 23:30)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/comm_ring.closure/near/135500579):
-I guess my statement is wrong
+<p>I guess my statement is wrong</p>
 
 #### [ Patrick Massot (Oct 09 2018 at 23:31)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/comm_ring.closure/near/135500610):
-no, it's ok
+<p>no, it's ok</p>
 
 #### [ Reid Barton (Oct 09 2018 at 23:32)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/comm_ring.closure/near/135500677):
-I think it is wrong, because of -1. `s` could even be empty.
+<p>I think it is wrong, because of -1. <code>s</code> could even be empty.</p>
 
 #### [ Patrick Massot (Oct 09 2018 at 23:32)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/comm_ring.closure/near/135500702):
-edge cases...
+<p>edge cases...</p>
 
 #### [ Patrick Massot (Oct 09 2018 at 23:32)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/comm_ring.closure/near/135500707):
-who cares about those?
+<p>who cares about those?</p>
 
 #### [ Patrick Massot (Oct 09 2018 at 23:35)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/comm_ring.closure/near/135500809):
-I clearly need to sleep though. I'm sure the `Kenny` tactic can fix the statement while writing the proof
+<p>I clearly need to sleep though. I'm sure the <code>Kenny</code> tactic can fix the statement while writing the proof</p>
 
 #### [ Kenny Lau (Oct 09 2018 at 23:35)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/comm_ring.closure/near/135500845):
-of what?
+<p>of what?</p>
 
 #### [ Patrick Massot (Oct 09 2018 at 23:40)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/comm_ring.closure/near/135501115):
-`ring.exists_list_of_mem_closure`
+<p><code>ring.exists_list_of_mem_closure</code></p>
 
 #### [ Kenny Lau (Oct 26 2018 at 11:00)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/comm_ring.closure/near/136534435):
-```lean
-import ring_theory.subring
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">ring_theory</span><span class="bp">.</span><span class="n">subring</span>
 
-universe u
+<span class="kn">universe</span> <span class="n">u</span>
 
-@[elab_as_eliminator]
-theorem add_monoid.in_closure.rec_on {α : Type u} [add_monoid α] {s : set α} {C : α → Prop}
-  {a : α} (H : a ∈ add_monoid.closure s)
-  (H1 : ∀ {a : α}, a ∈ s → C a) (H2 : C 0)
-  (H3 : ∀ {a b : α}, a ∈ add_monoid.closure s → b ∈ add_monoid.closure s → C a → C b → C (a + b)) :
-  C a :=
-monoid.in_closure.rec_on H (λ _, H1) H2 (λ _ _, H3)
+<span class="bp">@</span><span class="o">[</span><span class="n">elab_as_eliminator</span><span class="o">]</span>
+<span class="kn">theorem</span> <span class="n">add_monoid</span><span class="bp">.</span><span class="n">in_closure</span><span class="bp">.</span><span class="n">rec_on</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">[</span><span class="n">add_monoid</span> <span class="n">α</span><span class="o">]</span> <span class="o">{</span><span class="n">s</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span><span class="o">}</span> <span class="o">{</span><span class="n">C</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">}</span>
+  <span class="o">{</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">}</span> <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="n">a</span> <span class="err">∈</span> <span class="n">add_monoid</span><span class="bp">.</span><span class="n">closure</span> <span class="n">s</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">H1</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">},</span> <span class="n">a</span> <span class="err">∈</span> <span class="n">s</span> <span class="bp">→</span> <span class="n">C</span> <span class="n">a</span><span class="o">)</span> <span class="o">(</span><span class="n">H2</span> <span class="o">:</span> <span class="n">C</span> <span class="mi">0</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">H3</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">α</span><span class="o">},</span> <span class="n">a</span> <span class="err">∈</span> <span class="n">add_monoid</span><span class="bp">.</span><span class="n">closure</span> <span class="n">s</span> <span class="bp">→</span> <span class="n">b</span> <span class="err">∈</span> <span class="n">add_monoid</span><span class="bp">.</span><span class="n">closure</span> <span class="n">s</span> <span class="bp">→</span> <span class="n">C</span> <span class="n">a</span> <span class="bp">→</span> <span class="n">C</span> <span class="n">b</span> <span class="bp">→</span> <span class="n">C</span> <span class="o">(</span><span class="n">a</span> <span class="bp">+</span> <span class="n">b</span><span class="o">))</span> <span class="o">:</span>
+  <span class="n">C</span> <span class="n">a</span> <span class="o">:=</span>
+<span class="n">monoid</span><span class="bp">.</span><span class="n">in_closure</span><span class="bp">.</span><span class="n">rec_on</span> <span class="n">H</span> <span class="o">(</span><span class="bp">λ</span> <span class="bp">_</span><span class="o">,</span> <span class="n">H1</span><span class="o">)</span> <span class="n">H2</span> <span class="o">(</span><span class="bp">λ</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">,</span> <span class="n">H3</span><span class="o">)</span>
 
-@[elab_as_eliminator]
-theorem add_group.in_closure.rec_on {α : Type u} [add_group α] {s : set α} {C : α → Prop}
-  {a : α} (H : a ∈ add_group.closure s)
-  (H1 : ∀ {a : α}, a ∈ s → C a) (H2 : C 0) (H3 : ∀ {a : α}, a ∈ add_group.closure s → C a → C (-a))
-  (H4 : ∀ {a b : α}, a ∈ add_group.closure s → b ∈ add_group.closure s → C a → C b → C (a + b)) :
-  C a :=
-group.in_closure.rec_on H (λ _, H1) H2 (λ _, H3) (λ _ _, H4)
+<span class="bp">@</span><span class="o">[</span><span class="n">elab_as_eliminator</span><span class="o">]</span>
+<span class="kn">theorem</span> <span class="n">add_group</span><span class="bp">.</span><span class="n">in_closure</span><span class="bp">.</span><span class="n">rec_on</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">[</span><span class="n">add_group</span> <span class="n">α</span><span class="o">]</span> <span class="o">{</span><span class="n">s</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span><span class="o">}</span> <span class="o">{</span><span class="n">C</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">}</span>
+  <span class="o">{</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">}</span> <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="n">a</span> <span class="err">∈</span> <span class="n">add_group</span><span class="bp">.</span><span class="n">closure</span> <span class="n">s</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">H1</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">},</span> <span class="n">a</span> <span class="err">∈</span> <span class="n">s</span> <span class="bp">→</span> <span class="n">C</span> <span class="n">a</span><span class="o">)</span> <span class="o">(</span><span class="n">H2</span> <span class="o">:</span> <span class="n">C</span> <span class="mi">0</span><span class="o">)</span> <span class="o">(</span><span class="n">H3</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">},</span> <span class="n">a</span> <span class="err">∈</span> <span class="n">add_group</span><span class="bp">.</span><span class="n">closure</span> <span class="n">s</span> <span class="bp">→</span> <span class="n">C</span> <span class="n">a</span> <span class="bp">→</span> <span class="n">C</span> <span class="o">(</span><span class="bp">-</span><span class="n">a</span><span class="o">))</span>
+  <span class="o">(</span><span class="n">H4</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">α</span><span class="o">},</span> <span class="n">a</span> <span class="err">∈</span> <span class="n">add_group</span><span class="bp">.</span><span class="n">closure</span> <span class="n">s</span> <span class="bp">→</span> <span class="n">b</span> <span class="err">∈</span> <span class="n">add_group</span><span class="bp">.</span><span class="n">closure</span> <span class="n">s</span> <span class="bp">→</span> <span class="n">C</span> <span class="n">a</span> <span class="bp">→</span> <span class="n">C</span> <span class="n">b</span> <span class="bp">→</span> <span class="n">C</span> <span class="o">(</span><span class="n">a</span> <span class="bp">+</span> <span class="n">b</span><span class="o">))</span> <span class="o">:</span>
+  <span class="n">C</span> <span class="n">a</span> <span class="o">:=</span>
+<span class="n">group</span><span class="bp">.</span><span class="n">in_closure</span><span class="bp">.</span><span class="n">rec_on</span> <span class="n">H</span> <span class="o">(</span><span class="bp">λ</span> <span class="bp">_</span><span class="o">,</span> <span class="n">H1</span><span class="o">)</span> <span class="n">H2</span> <span class="o">(</span><span class="bp">λ</span> <span class="bp">_</span><span class="o">,</span> <span class="n">H3</span><span class="o">)</span> <span class="o">(</span><span class="bp">λ</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">,</span> <span class="n">H4</span><span class="o">)</span>
 
-instance int.cast_hom {R : Type u} [comm_ring R] : is_ring_hom (int.cast : ℤ → R) :=
-⟨int.cast_one, int.cast_mul, int.cast_add⟩
+<span class="kn">instance</span> <span class="n">int</span><span class="bp">.</span><span class="n">cast_hom</span> <span class="o">{</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">R</span><span class="o">]</span> <span class="o">:</span> <span class="n">is_ring_hom</span> <span class="o">(</span><span class="n">int</span><span class="bp">.</span><span class="n">cast</span> <span class="o">:</span> <span class="bp">ℤ</span> <span class="bp">→</span> <span class="n">R</span><span class="o">)</span> <span class="o">:=</span>
+<span class="bp">⟨</span><span class="n">int</span><span class="bp">.</span><span class="n">cast_one</span><span class="o">,</span> <span class="n">int</span><span class="bp">.</span><span class="n">cast_mul</span><span class="o">,</span> <span class="n">int</span><span class="bp">.</span><span class="n">cast_add</span><span class="bp">⟩</span>
 
-instance int.coe_hom {R : Type u} [comm_ring R] : is_ring_hom (coe : ℤ → R) :=
-⟨int.cast_one, int.cast_mul, int.cast_add⟩
+<span class="kn">instance</span> <span class="n">int</span><span class="bp">.</span><span class="n">coe_hom</span> <span class="o">{</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">R</span><span class="o">]</span> <span class="o">:</span> <span class="n">is_ring_hom</span> <span class="o">(</span><span class="n">coe</span> <span class="o">:</span> <span class="bp">ℤ</span> <span class="bp">→</span> <span class="n">R</span><span class="o">)</span> <span class="o">:=</span>
+<span class="bp">⟨</span><span class="n">int</span><span class="bp">.</span><span class="n">cast_one</span><span class="o">,</span> <span class="n">int</span><span class="bp">.</span><span class="n">cast_mul</span><span class="o">,</span> <span class="n">int</span><span class="bp">.</span><span class="n">cast_add</span><span class="bp">⟩</span>
 
-namespace comm_ring
-variables {R : Type u} [comm_ring R]
+<span class="kn">namespace</span> <span class="n">comm_ring</span>
+<span class="kn">variables</span> <span class="o">{</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">R</span><span class="o">]</span>
 
-def closure (s : set R) := add_group.closure (monoid.closure s)
+<span class="n">def</span> <span class="n">closure</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">set</span> <span class="n">R</span><span class="o">)</span> <span class="o">:=</span> <span class="n">add_group</span><span class="bp">.</span><span class="n">closure</span> <span class="o">(</span><span class="n">monoid</span><span class="bp">.</span><span class="n">closure</span> <span class="n">s</span><span class="o">)</span>
 
-local attribute [reducible] closure
+<span class="n">local</span> <span class="n">attribute</span> <span class="o">[</span><span class="kn">reducible</span><span class="o">]</span> <span class="n">closure</span>
 
-theorem exists_list_of_mem_closure {s : set R} {a : R} (h : a ∈ closure s) :
-  (∃ L : list (list R), (∀ l ∈ L, ∀ x ∈ l, x ∈ s ∨ -x ∈ s ∨ x = (-1:R)) ∧ (L.map list.prod).sum = a) :=
-add_group.in_closure.rec_on h
-  (λ x hx, match x, monoid.exists_list_of_mem_closure hx with
-    | _, ⟨L, h1, rfl⟩ := ⟨[L], list.forall_mem_singleton.2 (λ r hr, or.inl (h1 r hr)), zero_add _⟩
-    end)
-  ⟨[], list.forall_mem_nil _, rfl⟩
-  (λ b _ ih, match b, ih with
-    | _, ⟨L1, h1, rfl⟩ := ⟨L1.map (list.cons (-1)),
-      λ L2 h2, match L2, list.mem_map.1 h2 with
-        | _, ⟨L3, h3, rfl⟩ := list.forall_mem_cons.2 ⟨or.inr $ or.inr rfl, h1 L3 h3⟩
-        end,
-      by simp only [list.map_map, (∘), list.prod_cons, neg_one_mul];
-      exact list.rec_on L1 neg_zero.symm (λ hd tl ih,
-        by rw [list.map_cons, list.sum_cons, ih, list.map_cons, list.sum_cons, neg_add])⟩
-    end)
-  (λ r1 r2 hr1 hr2 ih1 ih2, match r1, r2, ih1, ih2 with
-    | _, _, ⟨L1, h1, rfl⟩, ⟨L2, h2, rfl⟩ := ⟨L1 ++ L2, list.forall_mem_append.2 ⟨h1, h2⟩,
-      by rw [list.map_append, list.sum_append]⟩
-    end)
+<span class="kn">theorem</span> <span class="n">exists_list_of_mem_closure</span> <span class="o">{</span><span class="n">s</span> <span class="o">:</span> <span class="n">set</span> <span class="n">R</span><span class="o">}</span> <span class="o">{</span><span class="n">a</span> <span class="o">:</span> <span class="n">R</span><span class="o">}</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">a</span> <span class="err">∈</span> <span class="n">closure</span> <span class="n">s</span><span class="o">)</span> <span class="o">:</span>
+  <span class="o">(</span><span class="bp">∃</span> <span class="n">L</span> <span class="o">:</span> <span class="n">list</span> <span class="o">(</span><span class="n">list</span> <span class="n">R</span><span class="o">),</span> <span class="o">(</span><span class="bp">∀</span> <span class="n">l</span> <span class="err">∈</span> <span class="n">L</span><span class="o">,</span> <span class="bp">∀</span> <span class="n">x</span> <span class="err">∈</span> <span class="n">l</span><span class="o">,</span> <span class="n">x</span> <span class="err">∈</span> <span class="n">s</span> <span class="bp">∨</span> <span class="bp">-</span><span class="n">x</span> <span class="err">∈</span> <span class="n">s</span> <span class="bp">∨</span> <span class="n">x</span> <span class="bp">=</span> <span class="o">(</span><span class="bp">-</span><span class="mi">1</span><span class="o">:</span><span class="n">R</span><span class="o">))</span> <span class="bp">∧</span> <span class="o">(</span><span class="n">L</span><span class="bp">.</span><span class="n">map</span> <span class="n">list</span><span class="bp">.</span><span class="n">prod</span><span class="o">)</span><span class="bp">.</span><span class="n">sum</span> <span class="bp">=</span> <span class="n">a</span><span class="o">)</span> <span class="o">:=</span>
+<span class="n">add_group</span><span class="bp">.</span><span class="n">in_closure</span><span class="bp">.</span><span class="n">rec_on</span> <span class="n">h</span>
+  <span class="o">(</span><span class="bp">λ</span> <span class="n">x</span> <span class="n">hx</span><span class="o">,</span> <span class="k">match</span> <span class="n">x</span><span class="o">,</span> <span class="n">monoid</span><span class="bp">.</span><span class="n">exists_list_of_mem_closure</span> <span class="n">hx</span> <span class="k">with</span>
+    <span class="bp">|</span> <span class="bp">_</span><span class="o">,</span> <span class="bp">⟨</span><span class="n">L</span><span class="o">,</span> <span class="n">h1</span><span class="o">,</span> <span class="n">rfl</span><span class="bp">⟩</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="o">[</span><span class="n">L</span><span class="o">],</span> <span class="n">list</span><span class="bp">.</span><span class="n">forall_mem_singleton</span><span class="bp">.</span><span class="mi">2</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">r</span> <span class="n">hr</span><span class="o">,</span> <span class="n">or</span><span class="bp">.</span><span class="n">inl</span> <span class="o">(</span><span class="n">h1</span> <span class="n">r</span> <span class="n">hr</span><span class="o">)),</span> <span class="n">zero_add</span> <span class="bp">_⟩</span>
+    <span class="kn">end</span><span class="o">)</span>
+  <span class="bp">⟨</span><span class="o">[],</span> <span class="n">list</span><span class="bp">.</span><span class="n">forall_mem_nil</span> <span class="bp">_</span><span class="o">,</span> <span class="n">rfl</span><span class="bp">⟩</span>
+  <span class="o">(</span><span class="bp">λ</span> <span class="n">b</span> <span class="bp">_</span> <span class="n">ih</span><span class="o">,</span> <span class="k">match</span> <span class="n">b</span><span class="o">,</span> <span class="n">ih</span> <span class="k">with</span>
+    <span class="bp">|</span> <span class="bp">_</span><span class="o">,</span> <span class="bp">⟨</span><span class="n">L1</span><span class="o">,</span> <span class="n">h1</span><span class="o">,</span> <span class="n">rfl</span><span class="bp">⟩</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="n">L1</span><span class="bp">.</span><span class="n">map</span> <span class="o">(</span><span class="n">list</span><span class="bp">.</span><span class="n">cons</span> <span class="o">(</span><span class="bp">-</span><span class="mi">1</span><span class="o">)),</span>
+      <span class="bp">λ</span> <span class="n">L2</span> <span class="n">h2</span><span class="o">,</span> <span class="k">match</span> <span class="n">L2</span><span class="o">,</span> <span class="n">list</span><span class="bp">.</span><span class="n">mem_map</span><span class="bp">.</span><span class="mi">1</span> <span class="n">h2</span> <span class="k">with</span>
+        <span class="bp">|</span> <span class="bp">_</span><span class="o">,</span> <span class="bp">⟨</span><span class="n">L3</span><span class="o">,</span> <span class="n">h3</span><span class="o">,</span> <span class="n">rfl</span><span class="bp">⟩</span> <span class="o">:=</span> <span class="n">list</span><span class="bp">.</span><span class="n">forall_mem_cons</span><span class="bp">.</span><span class="mi">2</span> <span class="bp">⟨</span><span class="n">or</span><span class="bp">.</span><span class="n">inr</span> <span class="err">$</span> <span class="n">or</span><span class="bp">.</span><span class="n">inr</span> <span class="n">rfl</span><span class="o">,</span> <span class="n">h1</span> <span class="n">L3</span> <span class="n">h3</span><span class="bp">⟩</span>
+        <span class="kn">end</span><span class="o">,</span>
+      <span class="k">by</span> <span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">list</span><span class="bp">.</span><span class="n">map_map</span><span class="o">,</span> <span class="o">(</span><span class="err">∘</span><span class="o">),</span> <span class="n">list</span><span class="bp">.</span><span class="n">prod_cons</span><span class="o">,</span> <span class="n">neg_one_mul</span><span class="o">]</span><span class="bp">;</span>
+      <span class="n">exact</span> <span class="n">list</span><span class="bp">.</span><span class="n">rec_on</span> <span class="n">L1</span> <span class="n">neg_zero</span><span class="bp">.</span><span class="n">symm</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">hd</span> <span class="n">tl</span> <span class="n">ih</span><span class="o">,</span>
+        <span class="k">by</span> <span class="n">rw</span> <span class="o">[</span><span class="n">list</span><span class="bp">.</span><span class="n">map_cons</span><span class="o">,</span> <span class="n">list</span><span class="bp">.</span><span class="n">sum_cons</span><span class="o">,</span> <span class="n">ih</span><span class="o">,</span> <span class="n">list</span><span class="bp">.</span><span class="n">map_cons</span><span class="o">,</span> <span class="n">list</span><span class="bp">.</span><span class="n">sum_cons</span><span class="o">,</span> <span class="n">neg_add</span><span class="o">])</span><span class="bp">⟩</span>
+    <span class="kn">end</span><span class="o">)</span>
+  <span class="o">(</span><span class="bp">λ</span> <span class="n">r1</span> <span class="n">r2</span> <span class="n">hr1</span> <span class="n">hr2</span> <span class="n">ih1</span> <span class="n">ih2</span><span class="o">,</span> <span class="k">match</span> <span class="n">r1</span><span class="o">,</span> <span class="n">r2</span><span class="o">,</span> <span class="n">ih1</span><span class="o">,</span> <span class="n">ih2</span> <span class="k">with</span>
+    <span class="bp">|</span> <span class="bp">_</span><span class="o">,</span> <span class="bp">_</span><span class="o">,</span> <span class="bp">⟨</span><span class="n">L1</span><span class="o">,</span> <span class="n">h1</span><span class="o">,</span> <span class="n">rfl</span><span class="bp">⟩</span><span class="o">,</span> <span class="bp">⟨</span><span class="n">L2</span><span class="o">,</span> <span class="n">h2</span><span class="o">,</span> <span class="n">rfl</span><span class="bp">⟩</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="n">L1</span> <span class="bp">++</span> <span class="n">L2</span><span class="o">,</span> <span class="n">list</span><span class="bp">.</span><span class="n">forall_mem_append</span><span class="bp">.</span><span class="mi">2</span> <span class="bp">⟨</span><span class="n">h1</span><span class="o">,</span> <span class="n">h2</span><span class="bp">⟩</span><span class="o">,</span>
+      <span class="k">by</span> <span class="n">rw</span> <span class="o">[</span><span class="n">list</span><span class="bp">.</span><span class="n">map_append</span><span class="o">,</span> <span class="n">list</span><span class="bp">.</span><span class="n">sum_append</span><span class="o">]</span><span class="bp">⟩</span>
+    <span class="kn">end</span><span class="o">)</span>
 
-instance {s : set R} : is_subring (closure s) :=
-{ zero_mem := is_add_submonoid.zero_mem _,
-  add_mem := λ a b ha hb, is_add_submonoid.add_mem ha hb,
-  neg_mem := λ a h, is_add_subgroup.neg_mem h,
-  one_mem := add_group.mem_closure (is_submonoid.one_mem _),
-  mul_mem := λ a b ha hb, add_group.in_closure.rec_on hb
-    (λ b hb, add_group.in_closure.rec_on ha
-      (λ a ha, add_group.subset_closure (is_submonoid.mul_mem ha hb))
-      ((zero_mul b).symm ▸ is_add_submonoid.zero_mem _)
-      (λ a ha hab, (neg_mul_eq_neg_mul a b) ▸ is_add_subgroup.neg_mem hab)
-      (λ a c ha hc hab hcb, (add_mul a c b).symm ▸ is_add_submonoid.add_mem hab hcb))
-    ((mul_zero a).symm ▸ is_add_submonoid.zero_mem _)
-    (λ b hb hab, (neg_mul_eq_mul_neg a b) ▸ is_add_subgroup.neg_mem hab)
-    (λ b c hb hc hab hac, (mul_add a b c).symm ▸ is_add_submonoid.add_mem hab hac) }
+<span class="kn">instance</span> <span class="o">{</span><span class="n">s</span> <span class="o">:</span> <span class="n">set</span> <span class="n">R</span><span class="o">}</span> <span class="o">:</span> <span class="n">is_subring</span> <span class="o">(</span><span class="n">closure</span> <span class="n">s</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">zero_mem</span> <span class="o">:=</span> <span class="n">is_add_submonoid</span><span class="bp">.</span><span class="n">zero_mem</span> <span class="bp">_</span><span class="o">,</span>
+  <span class="n">add_mem</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">a</span> <span class="n">b</span> <span class="n">ha</span> <span class="n">hb</span><span class="o">,</span> <span class="n">is_add_submonoid</span><span class="bp">.</span><span class="n">add_mem</span> <span class="n">ha</span> <span class="n">hb</span><span class="o">,</span>
+  <span class="n">neg_mem</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">a</span> <span class="n">h</span><span class="o">,</span> <span class="n">is_add_subgroup</span><span class="bp">.</span><span class="n">neg_mem</span> <span class="n">h</span><span class="o">,</span>
+  <span class="n">one_mem</span> <span class="o">:=</span> <span class="n">add_group</span><span class="bp">.</span><span class="n">mem_closure</span> <span class="o">(</span><span class="n">is_submonoid</span><span class="bp">.</span><span class="n">one_mem</span> <span class="bp">_</span><span class="o">),</span>
+  <span class="n">mul_mem</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">a</span> <span class="n">b</span> <span class="n">ha</span> <span class="n">hb</span><span class="o">,</span> <span class="n">add_group</span><span class="bp">.</span><span class="n">in_closure</span><span class="bp">.</span><span class="n">rec_on</span> <span class="n">hb</span>
+    <span class="o">(</span><span class="bp">λ</span> <span class="n">b</span> <span class="n">hb</span><span class="o">,</span> <span class="n">add_group</span><span class="bp">.</span><span class="n">in_closure</span><span class="bp">.</span><span class="n">rec_on</span> <span class="n">ha</span>
+      <span class="o">(</span><span class="bp">λ</span> <span class="n">a</span> <span class="n">ha</span><span class="o">,</span> <span class="n">add_group</span><span class="bp">.</span><span class="n">subset_closure</span> <span class="o">(</span><span class="n">is_submonoid</span><span class="bp">.</span><span class="n">mul_mem</span> <span class="n">ha</span> <span class="n">hb</span><span class="o">))</span>
+      <span class="o">((</span><span class="n">zero_mul</span> <span class="n">b</span><span class="o">)</span><span class="bp">.</span><span class="n">symm</span> <span class="bp">▸</span> <span class="n">is_add_submonoid</span><span class="bp">.</span><span class="n">zero_mem</span> <span class="bp">_</span><span class="o">)</span>
+      <span class="o">(</span><span class="bp">λ</span> <span class="n">a</span> <span class="n">ha</span> <span class="n">hab</span><span class="o">,</span> <span class="o">(</span><span class="n">neg_mul_eq_neg_mul</span> <span class="n">a</span> <span class="n">b</span><span class="o">)</span> <span class="bp">▸</span> <span class="n">is_add_subgroup</span><span class="bp">.</span><span class="n">neg_mem</span> <span class="n">hab</span><span class="o">)</span>
+      <span class="o">(</span><span class="bp">λ</span> <span class="n">a</span> <span class="n">c</span> <span class="n">ha</span> <span class="n">hc</span> <span class="n">hab</span> <span class="n">hcb</span><span class="o">,</span> <span class="o">(</span><span class="n">add_mul</span> <span class="n">a</span> <span class="n">c</span> <span class="n">b</span><span class="o">)</span><span class="bp">.</span><span class="n">symm</span> <span class="bp">▸</span> <span class="n">is_add_submonoid</span><span class="bp">.</span><span class="n">add_mem</span> <span class="n">hab</span> <span class="n">hcb</span><span class="o">))</span>
+    <span class="o">((</span><span class="n">mul_zero</span> <span class="n">a</span><span class="o">)</span><span class="bp">.</span><span class="n">symm</span> <span class="bp">▸</span> <span class="n">is_add_submonoid</span><span class="bp">.</span><span class="n">zero_mem</span> <span class="bp">_</span><span class="o">)</span>
+    <span class="o">(</span><span class="bp">λ</span> <span class="n">b</span> <span class="n">hb</span> <span class="n">hab</span><span class="o">,</span> <span class="o">(</span><span class="n">neg_mul_eq_mul_neg</span> <span class="n">a</span> <span class="n">b</span><span class="o">)</span> <span class="bp">▸</span> <span class="n">is_add_subgroup</span><span class="bp">.</span><span class="n">neg_mem</span> <span class="n">hab</span><span class="o">)</span>
+    <span class="o">(</span><span class="bp">λ</span> <span class="n">b</span> <span class="n">c</span> <span class="n">hb</span> <span class="n">hc</span> <span class="n">hab</span> <span class="n">hac</span><span class="o">,</span> <span class="o">(</span><span class="n">mul_add</span> <span class="n">a</span> <span class="n">b</span> <span class="n">c</span><span class="o">)</span><span class="bp">.</span><span class="n">symm</span> <span class="bp">▸</span> <span class="n">is_add_submonoid</span><span class="bp">.</span><span class="n">add_mem</span> <span class="n">hab</span> <span class="n">hac</span><span class="o">)</span> <span class="o">}</span>
 
-end comm_ring
-```
+<span class="kn">end</span> <span class="n">comm_ring</span>
+</pre></div>
 
 #### [ Kenny Lau (Oct 26 2018 at 11:01)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/comm_ring.closure/near/136534452):
-@**Patrick Massot** will you PR this?
+<p><span class="user-mention" data-user-id="110031">@Patrick Massot</span> will you PR this?</p>
 
 #### [ Patrick Massot (Oct 26 2018 at 11:07)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/comm_ring.closure/near/136534702):
-I can do it if you don't want to do it
+<p>I can do it if you don't want to do it</p>
 
 #### [ Patrick Massot (Oct 26 2018 at 11:07)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/comm_ring.closure/near/136534707):
-But it would make more sense if you do it yourself
+<p>But it would make more sense if you do it yourself</p>
 
 #### [ Patrick Massot (Oct 26 2018 at 11:07)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/comm_ring.closure/near/136534710):
-otherwise git won't credit you
+<p>otherwise git won't credit you</p>
 
 #### [ Kenny Lau (Oct 26 2018 at 11:07)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/comm_ring.closure/near/136534715):
-where should I put it?
+<p>where should I put it?</p>
 
 #### [ Patrick Massot (Oct 26 2018 at 11:08)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/comm_ring.closure/near/136534762):
-Maybe in the subgroup and subring files?
+<p>Maybe in the subgroup and subring files?</p>
 
 #### [ Kenny Lau (Oct 26 2018 at 11:08)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/comm_ring.closure/near/136534767):
-maybe it'll just go to limbo like https://github.com/leanprover/mathlib/pull/425
+<p>maybe it'll just go to limbo like <a href="https://github.com/leanprover/mathlib/pull/425" target="_blank" title="https://github.com/leanprover/mathlib/pull/425">https://github.com/leanprover/mathlib/pull/425</a></p>
 
 #### [ Patrick Massot (Oct 26 2018 at 11:09)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/comm_ring.closure/near/136534791):
-This is much smaller scope
+<p>This is much smaller scope</p>
 
 #### [ Patrick Massot (Oct 26 2018 at 11:09)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/comm_ring.closure/near/136534800):
-It should be an easy merge
+<p>It should be an easy merge</p>
 
 #### [ Kenny Lau (Oct 28 2018 at 11:29)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/comm_ring.closure/near/136646441):
-https://github.com/leanprover/mathlib/pull/444
+<p><a href="https://github.com/leanprover/mathlib/pull/444" target="_blank" title="https://github.com/leanprover/mathlib/pull/444">https://github.com/leanprover/mathlib/pull/444</a></p>
 
 #### [ Kenny Lau (Oct 28 2018 at 11:29)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/comm_ring.closure/near/136646444):
-done @**Patrick Massot**
+<p>done <span class="user-mention" data-user-id="110031">@Patrick Massot</span></p>
 
 
 {% endraw %}

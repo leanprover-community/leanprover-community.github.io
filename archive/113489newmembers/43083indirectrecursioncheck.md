@@ -12,106 +12,99 @@ permalink: archive/113489newmembers/43083indirectrecursioncheck.html
 
 {% raw %}
 #### [ Scott Olson (Sep 27 2018 at 03:03)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/indirect%20recursion%20check/near/134713724):
-A while ago I was porting some code from Coq to Lean and it was going very well, but there was one definition that reduces to something like this:
+<p>A while ago I was porting some code from Coq to Lean and it was going very well, but there was one definition that reduces to something like this:</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">foo</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="n">bool</span><span class="o">)</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">bool</span> <span class="o">:=</span>
+    <span class="n">f</span> <span class="n">n</span>
 
-```lean
-def foo (f : ℕ → bool) (n : ℕ) : bool := 
-    f n
+<span class="n">def</span> <span class="n">bar</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="n">bool</span>
+<span class="bp">|</span> <span class="mi">0</span>     <span class="o">:=</span> <span class="n">true</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="o">:=</span> <span class="n">foo</span> <span class="n">bar</span> <span class="n">n</span>
+</pre></div>
 
-def bar : ℕ → bool
-| 0     := true
-| (n+1) := foo bar n
-```
 
-I get "unexpected occurrence of recursive function" on `bar`. Is there any way to make this kind of definition work, and prove termination? I'm actually kind of surprised it worked in Coq in the first place...
+<p>I get "unexpected occurrence of recursive function" on <code>bar</code>. Is there any way to make this kind of definition work, and prove termination? I'm actually kind of surprised it worked in Coq in the first place...</p>
 
 #### [ Scott Olson (Sep 27 2018 at 03:04)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/indirect%20recursion%20check/near/134713786):
-Effectively, you need to prove that `foo` only calls `bar` with something smaller than `n+1`, which it does in this case. Maybe it's technically possible, but the equation compiler in particular doesn't support it?
+<p>Effectively, you need to prove that <code>foo</code> only calls <code>bar</code> with something smaller than <code>n+1</code>, which it does in this case. Maybe it's technically possible, but the equation compiler in particular doesn't support it?</p>
 
 #### [ Simon Hudon (Sep 27 2018 at 04:45)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/indirect%20recursion%20check/near/134717621):
-It this example, you can inline `foo` but I assume that's not an option with what you're working on ...
+<p>It this example, you can inline <code>foo</code> but I assume that's not an option with what you're working on ...</p>
 
 #### [ Simon Hudon (Sep 27 2018 at 04:47)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/indirect%20recursion%20check/near/134717700):
-Otherwise, you can make `foo` and `bar` into mutually recursive functions
+<p>Otherwise, you can make <code>foo</code> and <code>bar</code> into mutually recursive functions</p>
 
 #### [ Scott Olson (Sep 27 2018 at 05:43)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/indirect%20recursion%20check/near/134719571):
-It is possible but inconvenient to inline `foo` in the real code. It turned out more convenient to use a different approach to defining `bar` entirely.
-
-When I try a mutually recursive approach, I still get the same "unexpected occurrence of recursive function" error (which comes from the pattern compiler, I assume):
-
-```lean
-mutual def foo, bar
-with foo : (ℕ → bool) → ℕ → bool
-| f n := f n
-with bar : ℕ → bool
-| 0     := true
-| (n+1) := foo bar n
-```
+<p>It is possible but inconvenient to inline <code>foo</code> in the real code. It turned out more convenient to use a different approach to defining <code>bar</code> entirely.</p>
+<p>When I try a mutually recursive approach, I still get the same "unexpected occurrence of recursive function" error (which comes from the pattern compiler, I assume):</p>
+<div class="codehilite"><pre><span></span><span class="n">mutual</span> <span class="n">def</span> <span class="n">foo</span><span class="o">,</span> <span class="n">bar</span>
+<span class="k">with</span> <span class="n">foo</span> <span class="o">:</span> <span class="o">(</span><span class="bp">ℕ</span> <span class="bp">→</span> <span class="n">bool</span><span class="o">)</span> <span class="bp">→</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="n">bool</span>
+<span class="bp">|</span> <span class="n">f</span> <span class="n">n</span> <span class="o">:=</span> <span class="n">f</span> <span class="n">n</span>
+<span class="k">with</span> <span class="n">bar</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="n">bool</span>
+<span class="bp">|</span> <span class="mi">0</span>     <span class="o">:=</span> <span class="n">true</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="o">:=</span> <span class="n">foo</span> <span class="n">bar</span> <span class="n">n</span>
+</pre></div>
 
 #### [ Scott Olson (Sep 27 2018 at 05:46)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/indirect%20recursion%20check/near/134719682):
-When I find the time, I'll look up the original Coq example again for comparison.
+<p>When I find the time, I'll look up the original Coq example again for comparison.</p>
 
 #### [ Mario Carneiro (Sep 27 2018 at 05:48)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/indirect%20recursion%20check/near/134719755):
-the idea is to define `bar` and `foo bar` by mutual recursion
+<p>the idea is to define <code>bar</code> and <code>foo bar</code> by mutual recursion</p>
 
 #### [ Mario Carneiro (Sep 27 2018 at 05:48)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/indirect%20recursion%20check/near/134719758):
-so you wouldn't have that first parameter in `foo`
+<p>so you wouldn't have that first parameter in <code>foo</code></p>
 
 #### [ Simon Hudon (Sep 27 2018 at 05:50)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/indirect%20recursion%20check/near/134719838):
-What Mario said
+<p>What Mario said</p>
 
 #### [ Simon Hudon (Sep 27 2018 at 05:59)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/indirect%20recursion%20check/near/134720141):
-So that would look like:
-
-```lean
-mutual def foo, bar
-with foo : ℕ → bool
-| n := bar n -- this will be trouble because `n` doesn't decrease
-with bar : ℕ → bool
-| 0     := true
-| (n+1) := foo n
-```
+<p>So that would look like:</p>
+<div class="codehilite"><pre><span></span><span class="n">mutual</span> <span class="n">def</span> <span class="n">foo</span><span class="o">,</span> <span class="n">bar</span>
+<span class="k">with</span> <span class="n">foo</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="n">bool</span>
+<span class="bp">|</span> <span class="n">n</span> <span class="o">:=</span> <span class="n">bar</span> <span class="n">n</span> <span class="c1">-- this will be trouble because `n` doesn&#39;t decrease</span>
+<span class="k">with</span> <span class="n">bar</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="n">bool</span>
+<span class="bp">|</span> <span class="mi">0</span>     <span class="o">:=</span> <span class="n">true</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="o">:=</span> <span class="n">foo</span> <span class="n">n</span>
+</pre></div>
 
 #### [ Scott Olson (Sep 27 2018 at 05:59)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/indirect%20recursion%20check/near/134720156):
-Hmm, I suspect I still haven't fully understood, but here's my latest attempt:
+<p>Hmm, I suspect I still haven't fully understood, but here's my latest attempt:</p>
+<div class="codehilite"><pre><span></span><span class="c1">-- (To be clear this is elsewhere, can&#39;t be changed, inconvenient to inline.)</span>
+<span class="n">def</span> <span class="n">foo</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="n">bool</span><span class="o">)</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">bool</span> <span class="o">:=</span> <span class="n">f</span> <span class="n">n</span>
 
-```lean
--- (To be clear this is elsewhere, can't be changed, inconvenient to inline.)
-def foo (f : ℕ → bool) (n : ℕ) : bool := f n
+<span class="n">mutual</span> <span class="n">def</span> <span class="n">foo_bar</span><span class="o">,</span> <span class="n">bar</span>
+<span class="k">with</span> <span class="n">foo_bar</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="n">bool</span>
+<span class="bp">|</span> <span class="n">n</span> <span class="o">:=</span> <span class="n">foo</span> <span class="n">bar</span> <span class="n">n</span>
+<span class="k">with</span> <span class="n">bar</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="n">bool</span>
+<span class="bp">|</span> <span class="mi">0</span>     <span class="o">:=</span> <span class="n">true</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="o">:=</span> <span class="n">foo_bar</span> <span class="n">n</span>
+</pre></div>
 
-mutual def foo_bar, bar
-with foo_bar : ℕ → bool
-| n := foo bar n
-with bar : ℕ → bool
-| 0     := true
-| (n+1) := foo_bar n
-```
 
-Which has the same "unexpected occurrence of recursive function" message.
+<p>Which has the same "unexpected occurrence of recursive function" message.</p>
 
 #### [ Mario Carneiro (Sep 27 2018 at 06:00)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/indirect%20recursion%20check/near/134720226):
-that is trouble, because you need to know that `foo` doesn't look at future values of `bar`
+<p>that is trouble, because you need to know that <code>foo</code> doesn't look at future values of <code>bar</code></p>
 
 #### [ Scott Olson (Sep 27 2018 at 06:01)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/indirect%20recursion%20check/near/134720245):
-Yeah, it's definitely fair for Lean to reject it. I think I'll come back to this thread when I've found the Coq example to compare with
+<p>Yeah, it's definitely fair for Lean to reject it. I think I'll come back to this thread when I've found the Coq example to compare with</p>
 
 #### [ Mario Carneiro (Sep 27 2018 at 06:02)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/indirect%20recursion%20check/near/134720292):
-One option, used with things like `list.map`, is to use a theorem like `map_congr` to acquire an assumption that is needed for the recursion, or use a partial function like `list.pmap`
+<p>One option, used with things like <code>list.map</code>, is to use a theorem like <code>map_congr</code> to acquire an assumption that is needed for the recursion, or use a partial function like <code>list.pmap</code></p>
 
 #### [ Scott Olson (Sep 27 2018 at 06:03)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/indirect%20recursion%20check/near/134720313):
-I *think* the difference is Coq allowed the code with an explicit termination proof, whereas Lean's equation compiler won't even touch it
+<p>I <em>think</em> the difference is Coq allowed the code with an explicit termination proof, whereas Lean's equation compiler won't even touch it</p>
 
 #### [ Scott Olson (Sep 27 2018 at 06:03)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/indirect%20recursion%20check/near/134720318):
-Unlike simpler examples where you just need to prove something is decreasing
+<p>Unlike simpler examples where you just need to prove something is decreasing</p>
 
 #### [ Mario Carneiro (Sep 27 2018 at 06:03)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/indirect%20recursion%20check/near/134720321):
-lean allows explicit termination proofs, but you have to thread the proof through in a kind of awkward way
+<p>lean allows explicit termination proofs, but you have to thread the proof through in a kind of awkward way</p>
 
 #### [ Mario Carneiro (Sep 27 2018 at 06:04)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/indirect%20recursion%20check/near/134720365):
-I would need a more concrete example to demonstrate
+<p>I would need a more concrete example to demonstrate</p>
 
 #### [ Scott Olson (Sep 27 2018 at 06:05)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/indirect%20recursion%20check/near/134720386):
-I've got to head out for now but I'll come back to this with more details
+<p>I've got to head out for now but I'll come back to this with more details</p>
 
 
 {% endraw %}

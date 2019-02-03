@@ -12,398 +12,395 @@ permalink: archive/116395maths/23254Splittingfields.html
 
 {% raw %}
 #### [ Chris Hughes (Dec 12 2018 at 17:16)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Splitting%20fields/near/151535820):
-So I thought I'd revive the splitting fields branch on community mathlib. So far I've just updated it to work with current mathlib. This is my definition of splitting fields. It's a bit unusual to write a recursive function like this returning a Type; is this a good approach? Also my definition of `of_field` the embedding from the base field gives me the error `rec_fn_macro only allowed in meta definitions`. What is this?
-```lean
-def splitting_field' : Π {n : ℕ} {α : Type u} [discrete_field α] (f : by exactI polynomial α),
-  by exactI nat_degree f = n → Type u
-| 0 := λ α I f hn, α 
-| 1 := λ α I f hn, α
-| (n + 2) := λ α I f hn, by exactI 
-  have hf : nat_degree (f.map (coe : α → adjoin_root (irr_factor f (by rw hn; exact dec_trivial))) / 
-    (X - C root)) = n + 1, from sorry,
-  splitting_field' (f.map (coe : α → adjoin_root (irr_factor f (by rw hn; exact dec_trivial))) / 
-    (X - C root)) hf
+<p>So I thought I'd revive the splitting fields branch on community mathlib. So far I've just updated it to work with current mathlib. This is my definition of splitting fields. It's a bit unusual to write a recursive function like this returning a Type; is this a good approach? Also my definition of <code>of_field</code> the embedding from the base field gives me the error <code>rec_fn_macro only allowed in meta definitions</code>. What is this?</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">splitting_field&#39;</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">{</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">}</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">[</span><span class="n">discrete_field</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="k">by</span> <span class="n">exactI</span> <span class="n">polynomial</span> <span class="n">α</span><span class="o">),</span>
+  <span class="k">by</span> <span class="n">exactI</span> <span class="n">nat_degree</span> <span class="n">f</span> <span class="bp">=</span> <span class="n">n</span> <span class="bp">→</span> <span class="kt">Type</span> <span class="n">u</span>
+<span class="bp">|</span> <span class="mi">0</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">α</span> <span class="n">I</span> <span class="n">f</span> <span class="n">hn</span><span class="o">,</span> <span class="n">α</span>
+<span class="bp">|</span> <span class="mi">1</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">α</span> <span class="n">I</span> <span class="n">f</span> <span class="n">hn</span><span class="o">,</span> <span class="n">α</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">2</span><span class="o">)</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">α</span> <span class="n">I</span> <span class="n">f</span> <span class="n">hn</span><span class="o">,</span> <span class="k">by</span> <span class="n">exactI</span>
+  <span class="k">have</span> <span class="n">hf</span> <span class="o">:</span> <span class="n">nat_degree</span> <span class="o">(</span><span class="n">f</span><span class="bp">.</span><span class="n">map</span> <span class="o">(</span><span class="n">coe</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">adjoin_root</span> <span class="o">(</span><span class="n">irr_factor</span> <span class="n">f</span> <span class="o">(</span><span class="k">by</span> <span class="n">rw</span> <span class="n">hn</span><span class="bp">;</span> <span class="n">exact</span> <span class="n">dec_trivial</span><span class="o">)))</span> <span class="bp">/</span>
+    <span class="o">(</span><span class="n">X</span> <span class="bp">-</span> <span class="n">C</span> <span class="n">root</span><span class="o">))</span> <span class="bp">=</span> <span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">,</span> <span class="k">from</span> <span class="n">sorry</span><span class="o">,</span>
+  <span class="n">splitting_field&#39;</span> <span class="o">(</span><span class="n">f</span><span class="bp">.</span><span class="n">map</span> <span class="o">(</span><span class="n">coe</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">adjoin_root</span> <span class="o">(</span><span class="n">irr_factor</span> <span class="n">f</span> <span class="o">(</span><span class="k">by</span> <span class="n">rw</span> <span class="n">hn</span><span class="bp">;</span> <span class="n">exact</span> <span class="n">dec_trivial</span><span class="o">)))</span> <span class="bp">/</span>
+    <span class="o">(</span><span class="n">X</span> <span class="bp">-</span> <span class="n">C</span> <span class="n">root</span><span class="o">))</span> <span class="n">hf</span>
 
-def of_field' : Π {n : ℕ} {α : Type u} [discrete_field α] (f : by exactI polynomial α)
-  (hf : by exactI nat_degree f = n), α → by exactI splitting_field' f hf
-| 0     := λ α I f hf a, a
-| 1     := λ α I f hf a, a
-| (n+2) := λ α I f hf a, by exactI of_field' _ _ (↑a : adjoin_root _)
-```
+<span class="n">def</span> <span class="n">of_field&#39;</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">{</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">}</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">[</span><span class="n">discrete_field</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="k">by</span> <span class="n">exactI</span> <span class="n">polynomial</span> <span class="n">α</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">hf</span> <span class="o">:</span> <span class="k">by</span> <span class="n">exactI</span> <span class="n">nat_degree</span> <span class="n">f</span> <span class="bp">=</span> <span class="n">n</span><span class="o">),</span> <span class="n">α</span> <span class="bp">→</span> <span class="k">by</span> <span class="n">exactI</span> <span class="n">splitting_field&#39;</span> <span class="n">f</span> <span class="n">hf</span>
+<span class="bp">|</span> <span class="mi">0</span>     <span class="o">:=</span> <span class="bp">λ</span> <span class="n">α</span> <span class="n">I</span> <span class="n">f</span> <span class="n">hf</span> <span class="n">a</span><span class="o">,</span> <span class="n">a</span>
+<span class="bp">|</span> <span class="mi">1</span>     <span class="o">:=</span> <span class="bp">λ</span> <span class="n">α</span> <span class="n">I</span> <span class="n">f</span> <span class="n">hf</span> <span class="n">a</span><span class="o">,</span> <span class="n">a</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">2</span><span class="o">)</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">α</span> <span class="n">I</span> <span class="n">f</span> <span class="n">hf</span> <span class="n">a</span><span class="o">,</span> <span class="k">by</span> <span class="n">exactI</span> <span class="n">of_field&#39;</span> <span class="bp">_</span> <span class="bp">_</span> <span class="o">(</span><span class="err">↑</span><span class="n">a</span> <span class="o">:</span> <span class="n">adjoin_root</span> <span class="bp">_</span><span class="o">)</span>
+</pre></div>
 
 #### [ Chris Hughes (Dec 12 2018 at 17:32)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Splitting%20fields/near/151536840):
-Okay I still get the error `rec_fn_macro only allowed in meta definitions` even if I make it `meta`
+<p>Okay I still get the error <code>rec_fn_macro only allowed in meta definitions</code> even if I make it <code>meta</code></p>
 
 #### [ Rob Lewis (Dec 12 2018 at 17:34)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Splitting%20fields/near/151536970):
-Could you rearrange the arguments so that ` {α : Type u} [discrete_field α]` are left of the colon? If nothing else it will let you get rid of the `exactI`s.
+<p>Could you rearrange the arguments so that <code> {α : Type u} [discrete_field α]</code> are left of the colon? If nothing else it will let you get rid of the <code>exactI</code>s.</p>
 
 #### [ Rob Lewis (Dec 12 2018 at 17:34)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Splitting%20fields/near/151536981):
-That error sounds like something funny in the equation compiler, so simplifying its job might help.
+<p>That error sounds like something funny in the equation compiler, so simplifying its job might help.</p>
 
 #### [ Chris Hughes (Dec 12 2018 at 17:36)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Splitting%20fields/near/151537095):
-Not without changing my method significantly. I use a different type when I recursively call it.
+<p>Not without changing my method significantly. I use a different type when I recursively call it.</p>
 
 #### [ Rob Lewis (Dec 12 2018 at 17:38)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Splitting%20fields/near/151537161):
-Oh, yeah, sorry. I misread that.
+<p>Oh, yeah, sorry. I misread that.</p>
 
 #### [ Rob Lewis (Dec 12 2018 at 17:40)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Splitting%20fields/near/151537354):
-Where is `adjoin_root` defined?
+<p>Where is <code>adjoin_root</code> defined?</p>
 
 #### [ Rob Lewis (Dec 12 2018 at 17:40)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Splitting%20fields/near/151537395):
-In the splitting field branch on community, I take it.
+<p>In the splitting field branch on community, I take it.</p>
 
 #### [ Rob Lewis (Dec 12 2018 at 17:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Splitting%20fields/near/151537405):
-Think I'm having trouble reading today.
+<p>Think I'm having trouble reading today.</p>
 
 #### [ Johan Commelin (Dec 12 2018 at 17:46)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Splitting%20fields/near/151537835):
-@**Chris Hughes** I think this is exactly the approach that we had in mind when @**Mario Carneiro**, you and me were hacking on this in Orsay. Too bad it's giving troubles.
+<p><span class="user-mention" data-user-id="110044">@Chris Hughes</span> I think this is exactly the approach that we had in mind when <span class="user-mention" data-user-id="110049">@Mario Carneiro</span>, you and me were hacking on this in Orsay. Too bad it's giving troubles.</p>
 
 #### [ Reid Barton (Dec 12 2018 at 17:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Splitting%20fields/near/151538608):
-I'm always tempted to package everything I care about together in a single recursive definition--here the type, its field instance, the map from the base field, the factorization of f
+<p>I'm always tempted to package everything I care about together in a single recursive definition--here the type, its field instance, the map from the base field, the factorization of f</p>
 
 #### [ Reid Barton (Dec 12 2018 at 17:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Splitting%20fields/near/151538615):
-using a big sigma or a structure
+<p>using a big sigma or a structure</p>
 
 #### [ Chris Hughes (Dec 12 2018 at 18:38)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Splitting%20fields/near/151541456):
-I found a work around by using `nat.rec_on` instead of the equation compiler. Seems like it has something to do with this https://github.com/leanprover/lean/issues/1890
+<p>I found a work around by using <code>nat.rec_on</code> instead of the equation compiler. Seems like it has something to do with this <a href="https://github.com/leanprover/lean/issues/1890" target="_blank" title="https://github.com/leanprover/lean/issues/1890">https://github.com/leanprover/lean/issues/1890</a></p>
 
 #### [ Johan Commelin (Dec 12 2018 at 19:32)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Splitting%20fields/near/151552987):
-@**Chris Hughes** I think that this thread should know about this thread: https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/simple.20field.20theory
+<p><span class="user-mention" data-user-id="110044">@Chris Hughes</span> I think that this thread should know about this thread: <a href="#narrow/stream/116395-maths/topic/simple.20field.20theory" title="#narrow/stream/116395-maths/topic/simple.20field.20theory">https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/simple.20field.20theory</a></p>
 
 #### [ Chris Hughes (Dec 14 2018 at 22:27)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Splitting%20fields/near/151806515):
-I've had a new problem, and it's taken me most of the day to figure out what's going on. I think the trouble is that I have an expression where `f : polynomial α` is mentioned and also some stuff of type `adjoin_root f`. When I try to rewrite with `f = _` It tries to rewrite all the types that mention `f` and hangs. I solved it using `conv` but I thought there might be a better way to do this.
+<p>I've had a new problem, and it's taken me most of the day to figure out what's going on. I think the trouble is that I have an expression where <code>f : polynomial α</code> is mentioned and also some stuff of type <code>adjoin_root f</code>. When I try to rewrite with <code>f = _</code> It tries to rewrite all the types that mention <code>f</code> and hangs. I solved it using <code>conv</code> but I thought there might be a better way to do this.</p>
 
 #### [ Johan Commelin (Dec 15 2018 at 10:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Splitting%20fields/near/151831239):
-Isn't this what `conv` is meant for? I think there's nothing wrong with using it here.
+<p>Isn't this what <code>conv</code> is meant for? I think there's nothing wrong with using it here.</p>
 
 #### [ Chris Hughes (Dec 16 2018 at 07:45)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Splitting%20fields/near/151868222):
-So I've some up against a more serious problem. I've defined something of this type
-```lean
-lemma splitting_field_aux : Π {α : Type u} [discrete_field α] (f : by exactI polynomial α),
-  by exactI Σ' (β : Type u) [discrete_field β] (i : α → β) [is_field_hom i]
-  (hs : by exactI splits i f), ∀ {γ : Type u} [discrete_field γ] (j : α → γ)
-  [is_field_hom j] (hj : by exactI splits j f),
-  ∃ k : β → γ, (∀ x, k (i x) = j x) ∧ is_field_hom k
-```
-I bundled everything we needed to know together in one definition because I didn't want to have to deal with `eq.rec` and non definitional equation lemmas. The only trouble with this approach is that the homomorphism from the splitting field into any field that splits only goes into fields in the same universe. The only way around this that I can see is to unbundle the definition, and deal with nasty equation lemmas. Is there any easier way around this?
+<p>So I've some up against a more serious problem. I've defined something of this type</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">splitting_field_aux</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">[</span><span class="n">discrete_field</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="k">by</span> <span class="n">exactI</span> <span class="n">polynomial</span> <span class="n">α</span><span class="o">),</span>
+  <span class="k">by</span> <span class="n">exactI</span> <span class="err">Σ&#39;</span> <span class="o">(</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">[</span><span class="n">discrete_field</span> <span class="n">β</span><span class="o">]</span> <span class="o">(</span><span class="n">i</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span> <span class="o">[</span><span class="n">is_field_hom</span> <span class="n">i</span><span class="o">]</span>
+  <span class="o">(</span><span class="n">hs</span> <span class="o">:</span> <span class="k">by</span> <span class="n">exactI</span> <span class="n">splits</span> <span class="n">i</span> <span class="n">f</span><span class="o">),</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">γ</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">[</span><span class="n">discrete_field</span> <span class="n">γ</span><span class="o">]</span> <span class="o">(</span><span class="n">j</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">γ</span><span class="o">)</span>
+  <span class="o">[</span><span class="n">is_field_hom</span> <span class="n">j</span><span class="o">]</span> <span class="o">(</span><span class="n">hj</span> <span class="o">:</span> <span class="k">by</span> <span class="n">exactI</span> <span class="n">splits</span> <span class="n">j</span> <span class="n">f</span><span class="o">),</span>
+  <span class="bp">∃</span> <span class="n">k</span> <span class="o">:</span> <span class="n">β</span> <span class="bp">→</span> <span class="n">γ</span><span class="o">,</span> <span class="o">(</span><span class="bp">∀</span> <span class="n">x</span><span class="o">,</span> <span class="n">k</span> <span class="o">(</span><span class="n">i</span> <span class="n">x</span><span class="o">)</span> <span class="bp">=</span> <span class="n">j</span> <span class="n">x</span><span class="o">)</span> <span class="bp">∧</span> <span class="n">is_field_hom</span> <span class="n">k</span>
+</pre></div>
+
+
+<p>I bundled everything we needed to know together in one definition because I didn't want to have to deal with <code>eq.rec</code> and non definitional equation lemmas. The only trouble with this approach is that the homomorphism from the splitting field into any field that splits only goes into fields in the same universe. The only way around this that I can see is to unbundle the definition, and deal with nasty equation lemmas. Is there any easier way around this?</p>
 
 #### [ Johan Commelin (Dec 16 2018 at 07:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Splitting%20fields/near/151868598):
-I'm inclined to say that we shouldn't worry about universes here. If universe issues show up, I hope `ulift` will help.
+<p>I'm inclined to say that we shouldn't worry about universes here. If universe issues show up, I hope <code>ulift</code> will help.</p>
 
 #### [ Kenny Lau (Dec 16 2018 at 07:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Splitting%20fields/near/151868614):
-good luck transporting everything to `ulift` :P
+<p>good luck transporting everything to <code>ulift</code> :P</p>
 
 #### [ Mario Carneiro (Dec 16 2018 at 07:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Splitting%20fields/near/151868620):
-what is the problem with unbundling exactly?
+<p>what is the problem with unbundling exactly?</p>
 
 #### [ Mario Carneiro (Dec 16 2018 at 08:00)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Splitting%20fields/near/151868667):
-I guess that would be much more convenient to use if it were unbundled, although maybe you need this for the construction?
+<p>I guess that would be much more convenient to use if it were unbundled, although maybe you need this for the construction?</p>
 
 #### [ Mario Carneiro (Dec 16 2018 at 08:01)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Splitting%20fields/near/151868675):
-I think you should try to stay away from "universal definitions" of universal objects, because they are never universe polymorphic enough
+<p>I think you should try to stay away from "universal definitions" of universal objects, because they are never universe polymorphic enough</p>
 
 #### [ Chris Hughes (Dec 16 2018 at 08:01)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Splitting%20fields/near/151868679):
-Then I'd have to unfold the definition to prove things about it. And the equation lemmas are not definitional, so I'd need eq.rec to turn it into `adjoin_root whatever ` and eq.rec is hard to use.
+<p>Then I'd have to unfold the definition to prove things about it. And the equation lemmas are not definitional, so I'd need eq.rec to turn it into <code>adjoin_root whatever </code> and eq.rec is hard to use.</p>
 
 #### [ Chris Hughes (Dec 16 2018 at 08:02)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Splitting%20fields/near/151868720):
-What do you mean by stay away from universal definitions?
+<p>What do you mean by stay away from universal definitions?</p>
 
 #### [ Mario Carneiro (Dec 16 2018 at 08:02)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Splitting%20fields/near/151868721):
-right, we definitely want to avoid that. But I'm still not following. Could you show a bit of how you get to this point?
+<p>right, we definitely want to avoid that. But I'm still not following. Could you show a bit of how you get to this point?</p>
 
 #### [ Mario Carneiro (Dec 16 2018 at 08:03)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Splitting%20fields/near/151868729):
-For example, you can define `nat := \forall X, {X -> (X -> X) -> X // naturality property}` but it's not a good definition because `X` only lives in one universe
+<p>For example, you can define <code>nat := \forall X, {X -&gt; (X -&gt; X) -&gt; X // naturality property}</code> but it's not a good definition because <code>X</code> only lives in one universe</p>
 
 #### [ Chris Hughes (Dec 16 2018 at 08:04)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Splitting%20fields/near/151868774):
-https://github.com/ChrisHughes24/mathlib/blob/5efef7b26f78b5bcbcbc43d4d3ae32be7aa6018b/field_theory/splitting_field.lean
+<p><a href="https://github.com/ChrisHughes24/mathlib/blob/5efef7b26f78b5bcbcbc43d4d3ae32be7aa6018b/field_theory/splitting_field.lean" target="_blank" title="https://github.com/ChrisHughes24/mathlib/blob/5efef7b26f78b5bcbcbc43d4d3ae32be7aa6018b/field_theory/splitting_field.lean">https://github.com/ChrisHughes24/mathlib/blob/5efef7b26f78b5bcbcbc43d4d3ae32be7aa6018b/field_theory/splitting_field.lean</a></p>
 
 #### [ Mario Carneiro (Dec 16 2018 at 08:04)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Splitting%20fields/near/151868775):
-instead you want some kind of "intrinsic" characterization of the object that implies the universal property, in any universe
+<p>instead you want some kind of "intrinsic" characterization of the object that implies the universal property, in any universe</p>
 
 #### [ Chris Hughes (Dec 16 2018 at 08:05)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Splitting%20fields/near/151868790):
-So in this example, maybe the fact that any proper subfield does not split?
+<p>So in this example, maybe the fact that any proper subfield does not split?</p>
 
 #### [ Chris Hughes (Dec 16 2018 at 08:05)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Splitting%20fields/near/151868793):
-I'll have to think about whether that approach is much harder.
+<p>I'll have to think about whether that approach is much harder.</p>
 
 #### [ Mario Carneiro (Dec 16 2018 at 08:10)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Splitting%20fields/near/151868957):
-In this case, it looks like that is indeed the right "smallness" property
+<p>In this case, it looks like that is indeed the right "smallness" property</p>
 
 #### [ Mario Carneiro (Dec 16 2018 at 08:11)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Splitting%20fields/near/151868963):
-another way to express it is to start from the theorem you just proved, and show that splitting in one universe implies splitting in all the rest
+<p>another way to express it is to start from the theorem you just proved, and show that splitting in one universe implies splitting in all the rest</p>
 
 #### [ Mario Carneiro (Dec 16 2018 at 08:11)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Splitting%20fields/near/151868966):
-by taking a special choice of gamma, namely the subfield isomorphic to the gamma in another universe
+<p>by taking a special choice of gamma, namely the subfield isomorphic to the gamma in another universe</p>
 
 #### [ Chris Hughes (Dec 16 2018 at 08:29)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Splitting%20fields/near/151869580):
-Proving that such a subfield exists is hard though, unless I'm missing a trick?
+<p>Proving that such a subfield exists is hard though, unless I'm missing a trick?</p>
 
 #### [ Mario Carneiro (Dec 16 2018 at 08:29)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Splitting%20fields/near/151869584):
-This is a general fact about fields
+<p>This is a general fact about fields</p>
 
 #### [ Mario Carneiro (Dec 16 2018 at 08:30)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Splitting%20fields/near/151869631):
-Every field hom is injective, so when you restrict to the range you get an isomorphism
+<p>Every field hom is injective, so when you restrict to the range you get an isomorphism</p>
 
 #### [ Mario Carneiro (Dec 16 2018 at 08:31)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Splitting%20fields/near/151869647):
-(the isomorphism is not constructive in the reverse direction)
+<p>(the isomorphism is not constructive in the reverse direction)</p>
 
 #### [ Chris Hughes (Dec 16 2018 at 08:35)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Splitting%20fields/near/151869788):
-I still don't understand. Given a field, which subfield do I choose?
+<p>I still don't understand. Given a field, which subfield do I choose?</p>
 
 #### [ Mario Carneiro (Dec 16 2018 at 08:38)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Splitting%20fields/near/151869922):
-oh wait I had it backwards, you need a field *into* the large universe
+<p>oh wait I had it backwards, you need a field <em>into</em> the large universe</p>
 
 #### [ Mario Carneiro (Dec 16 2018 at 08:39)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Splitting%20fields/near/151869945):
-for that you can take a subfield of gamma sufficiently large to contain all the action from beta
+<p>for that you can take a subfield of gamma sufficiently large to contain all the action from beta</p>
 
 #### [ Mario Carneiro (Dec 16 2018 at 08:39)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Splitting%20fields/near/151869949):
-like the subfield generated by polynomials in alpha
+<p>like the subfield generated by polynomials in alpha</p>
 
 #### [ Mario Carneiro (Dec 16 2018 at 08:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Splitting%20fields/near/151870003):
-this subfield will be isomorphic to a quotient of a polynomial ring etc etc which is in `Type u`
+<p>this subfield will be isomorphic to a quotient of a polynomial ring etc etc which is in <code>Type u</code></p>
 
 #### [ Chris Hughes (Dec 16 2018 at 08:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Splitting%20fields/near/151870007):
-I see.
+<p>I see.</p>
 
 #### [ Mario Carneiro (Dec 16 2018 at 08:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Splitting%20fields/near/151870008):
-and so your lemma applies and the polynomial splits there
+<p>and so your lemma applies and the polynomial splits there</p>
 
 #### [ Mario Carneiro (Dec 16 2018 at 08:43)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Splitting%20fields/near/151870059):
-you should double check with @**Kevin Buzzard** , I walked him through this a few months ago and I think he did almost exactly the same thing in the perfectoid project
+<p>you should double check with <span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> , I walked him through this a few months ago and I think he did almost exactly the same thing in the perfectoid project</p>
 
 #### [ Mario Carneiro (Dec 16 2018 at 08:44)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Splitting%20fields/near/151870110):
-as an alternative, returning to the unbundling problem: I assume the reason it isn't definitional is because you are using wf recursion
+<p>as an alternative, returning to the unbundling problem: I assume the reason it isn't definitional is because you are using wf recursion</p>
 
 #### [ Mario Carneiro (Dec 16 2018 at 08:45)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Splitting%20fields/near/151870112):
-If you define one step of the induction as a lemma, then it will be definitional there
+<p>If you define one step of the induction as a lemma, then it will be definitional there</p>
 
 #### [ Chris Hughes (Dec 16 2018 at 08:46)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Splitting%20fields/near/151870163):
-That sounds easier.
+<p>That sounds easier.</p>
 
 #### [ Mario Carneiro (Dec 16 2018 at 08:46)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Splitting%20fields/near/151870166):
-so you have something like `F : (A : Type u) (h : P.{u} A), Type u` and `prop : (A : Type u) (h : P.{u} A), P.{v} (F A)`
+<p>so you have something like <code>F : (A : Type u) (h : P.{u} A), Type u</code> and <code>prop : (A : Type u) (h : P.{u} A), P.{v} (F A)</code></p>
 
 #### [ Mario Carneiro (Dec 16 2018 at 08:49)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Splitting%20fields/near/151870228):
-and then you have an induction proof putting it together, which does `F /\ P.{u} F`, and a cases proof doing the same thing with conclusion `P.{v} F`
+<p>and then you have an induction proof putting it together, which does <code>F /\ P.{u} F</code>, and a cases proof doing the same thing with conclusion <code>P.{v} F</code></p>
 
 #### [ Chris Hughes (Dec 16 2018 at 08:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Splitting%20fields/near/151870287):
-It's also not definitional because I've got an `ite` on `degree f \le 1`
+<p>It's also not definitional because I've got an <code>ite</code> on <code>degree f \le 1</code></p>
 
 #### [ Mario Carneiro (Dec 16 2018 at 08:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Splitting%20fields/near/151870289):
-Also, before I forget: a very general way of avoiding problems with types defined by complicated rules is to use an inductive type instead
+<p>Also, before I forget: a very general way of avoiding problems with types defined by complicated rules is to use an inductive type instead</p>
 
 #### [ Mario Carneiro (Dec 16 2018 at 08:53)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Splitting%20fields/near/151870347):
-for example, simulating `if x < 2 then nat else unit`:
-```lean
-inductive my_cases (x : ℕ) : Type
-| nat : x < 2 → nat → my_cases
-| unit : x >= 2 → unit → my_cases
-```
+<p>for example, simulating <code>if x &lt; 2 then nat else unit</code>:</p>
+<div class="codehilite"><pre><span></span><span class="kn">inductive</span> <span class="n">my_cases</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Type</span>
+<span class="bp">|</span> <span class="n">nat</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">&lt;</span> <span class="mi">2</span> <span class="bp">→</span> <span class="n">nat</span> <span class="bp">→</span> <span class="n">my_cases</span>
+<span class="bp">|</span> <span class="n">unit</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">&gt;=</span> <span class="mi">2</span> <span class="bp">→</span> <span class="n">unit</span> <span class="bp">→</span> <span class="n">my_cases</span>
+</pre></div>
 
 #### [ Mario Carneiro (Dec 16 2018 at 08:53)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Splitting%20fields/near/151870352):
-You can do similar stuff with crazy well founded definitions
+<p>You can do similar stuff with crazy well founded definitions</p>
 
 #### [ Mario Carneiro (Dec 16 2018 at 08:54)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Splitting%20fields/near/151870393):
-in the inductive case you don't even have to worry about well foundedness
+<p>in the inductive case you don't even have to worry about well foundedness</p>
 
 #### [ Chris Hughes (Dec 16 2018 at 09:10)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Splitting%20fields/near/151870896):
-The other major issue I have is that making it a def gives me the error `rec_fn_macro` only allowed in meta definitions.
+<p>The other major issue I have is that making it a def gives me the error <code>rec_fn_macro</code> only allowed in meta definitions.</p>
 
 #### [ Mario Carneiro (Dec 16 2018 at 09:21)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Splitting%20fields/near/151871212):
-that means there is probably a tactic referencing one of the `_match` type variables in the context by accident
+<p>that means there is probably a tactic referencing one of the <code>_match</code> type variables in the context by accident</p>
 
 #### [ Mario Carneiro (Dec 16 2018 at 09:22)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Splitting%20fields/near/151871259):
-you can fix this by `clear`ing it when you have used it, or even using it right at the start and clearing it then (or if its random junk then just remove it)
+<p>you can fix this by <code>clear</code>ing it when you have used it, or even using it right at the start and clearing it then (or if its random junk then just remove it)</p>
 
 #### [ Chris Hughes (Dec 16 2018 at 09:35)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Splitting%20fields/near/151871614):
-Will `resetI` cause problems with that?
+<p>Will <code>resetI</code> cause problems with that?</p>
 
 #### [ Mario Carneiro (Dec 16 2018 at 09:35)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Splitting%20fields/near/151871616):
-I don't think so
+<p>I don't think so</p>
 
 #### [ Mario Carneiro (Dec 16 2018 at 09:36)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Splitting%20fields/near/151871661):
-At some version of `resetI` I recall it deleting the recursive function variable as a side effect, not sure if that's still the case but I think not
+<p>At some version of <code>resetI</code> I recall it deleting the recursive function variable as a side effect, not sure if that's still the case but I think not</p>
 
 #### [ Kevin Buzzard (Dec 16 2018 at 10:54)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Splitting%20fields/near/151874009):
-I've only just seen this thread. Chris I'll dig out the universe conversation Mario and I had when I'm at a pc
+<p>I've only just seen this thread. Chris I'll dig out the universe conversation Mario and I had when I'm at a pc</p>
 
 #### [ Chris Hughes (Dec 17 2018 at 11:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Splitting%20fields/near/152018880):
-All done and sorry free. @**Mario Carneiro** are you happy for me to push all of this to the splitting fields branch in community?
-```lean
-def splitting_field (f : polynomial α) := splitting_field.type_aux f rfl
+<p>All done and sorry free. <span class="user-mention" data-user-id="110049">@Mario Carneiro</span> are you happy for me to push all of this to the splitting fields branch in community?</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">splitting_field</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">polynomial</span> <span class="n">α</span><span class="o">)</span> <span class="o">:=</span> <span class="n">splitting_field</span><span class="bp">.</span><span class="n">type_aux</span> <span class="n">f</span> <span class="n">rfl</span>
 
-namespace splitting_field
+<span class="kn">namespace</span> <span class="n">splitting_field</span>
 
-instance field (f : polynomial α) : discrete_field (splitting_field f) :=
-by unfold splitting_field; apply_instance
+<span class="kn">instance</span> <span class="n">field</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">polynomial</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">discrete_field</span> <span class="o">(</span><span class="n">splitting_field</span> <span class="n">f</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">unfold</span> <span class="n">splitting_field</span><span class="bp">;</span> <span class="n">apply_instance</span>
 
-def mk (f : polynomial α) : α → splitting_field f := mk_aux f rfl
+<span class="n">def</span> <span class="n">mk</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">polynomial</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">splitting_field</span> <span class="n">f</span> <span class="o">:=</span> <span class="n">mk_aux</span> <span class="n">f</span> <span class="n">rfl</span>
 
-instance (f : polynomial α) : is_field_hom (mk f) :=
-by unfold mk; apply_instance
+<span class="kn">instance</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">polynomial</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">is_field_hom</span> <span class="o">(</span><span class="n">mk</span> <span class="n">f</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">unfold</span> <span class="n">mk</span><span class="bp">;</span> <span class="n">apply_instance</span>
 
-lemma splitting_field_splits (f : polynomial α) : splits (mk f) f :=
-(splitting_field_aux f rfl).2.2.2.2
+<span class="kn">lemma</span> <span class="n">splitting_field_splits</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">polynomial</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">splits</span> <span class="o">(</span><span class="n">mk</span> <span class="n">f</span><span class="o">)</span> <span class="n">f</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">splitting_field_aux</span> <span class="n">f</span> <span class="n">rfl</span><span class="o">)</span><span class="bp">.</span><span class="mi">2</span><span class="bp">.</span><span class="mi">2</span><span class="bp">.</span><span class="mi">2</span><span class="bp">.</span><span class="mi">2</span>
 
-def hom {β : Type v} [discrete_field β] (i : α → β) [is_field_hom i] (f : polynomial α)
-  (hβ : splits i f) : splitting_field f → β :=
-classical.some (exists_hom _ f rfl i hβ)
+<span class="n">def</span> <span class="n">hom</span> <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">}</span> <span class="o">[</span><span class="n">discrete_field</span> <span class="n">β</span><span class="o">]</span> <span class="o">(</span><span class="n">i</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span> <span class="o">[</span><span class="n">is_field_hom</span> <span class="n">i</span><span class="o">]</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">polynomial</span> <span class="n">α</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">hβ</span> <span class="o">:</span> <span class="n">splits</span> <span class="n">i</span> <span class="n">f</span><span class="o">)</span> <span class="o">:</span> <span class="n">splitting_field</span> <span class="n">f</span> <span class="bp">→</span> <span class="n">β</span> <span class="o">:=</span>
+<span class="n">classical</span><span class="bp">.</span><span class="n">some</span> <span class="o">(</span><span class="n">exists_hom</span> <span class="bp">_</span> <span class="n">f</span> <span class="n">rfl</span> <span class="n">i</span> <span class="n">hβ</span><span class="o">)</span>
 
-@[instance] lemma hom_is_field_hom {β : Type v} [discrete_field β] (i : α → β) [is_field_hom i]
-  (f : polynomial α) (hβ : splits i f) : is_field_hom (hom i f hβ) :=
-(classical.some_spec (exists_hom _ f rfl i hβ)).2
+<span class="bp">@</span><span class="o">[</span><span class="kn">instance</span><span class="o">]</span> <span class="kn">lemma</span> <span class="n">hom_is_field_hom</span> <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">}</span> <span class="o">[</span><span class="n">discrete_field</span> <span class="n">β</span><span class="o">]</span> <span class="o">(</span><span class="n">i</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span> <span class="o">[</span><span class="n">is_field_hom</span> <span class="n">i</span><span class="o">]</span>
+  <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">polynomial</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">hβ</span> <span class="o">:</span> <span class="n">splits</span> <span class="n">i</span> <span class="n">f</span><span class="o">)</span> <span class="o">:</span> <span class="n">is_field_hom</span> <span class="o">(</span><span class="n">hom</span> <span class="n">i</span> <span class="n">f</span> <span class="n">hβ</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">classical</span><span class="bp">.</span><span class="n">some_spec</span> <span class="o">(</span><span class="n">exists_hom</span> <span class="bp">_</span> <span class="n">f</span> <span class="n">rfl</span> <span class="n">i</span> <span class="n">hβ</span><span class="o">))</span><span class="bp">.</span><span class="mi">2</span>
 
-@[simp] lemma hom_fixes {β : Type v} [discrete_field β] (i : α → β) [is_field_hom i]
-  (f : polynomial α) (hβ : splits i f) : ∀ x, hom i f hβ (mk f x) = i x :=
-(classical.some_spec (exists_hom _ f rfl i hβ)).1
+<span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="kn">lemma</span> <span class="n">hom_fixes</span> <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">}</span> <span class="o">[</span><span class="n">discrete_field</span> <span class="n">β</span><span class="o">]</span> <span class="o">(</span><span class="n">i</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span> <span class="o">[</span><span class="n">is_field_hom</span> <span class="n">i</span><span class="o">]</span>
+  <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">polynomial</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">hβ</span> <span class="o">:</span> <span class="n">splits</span> <span class="n">i</span> <span class="n">f</span><span class="o">)</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span><span class="o">,</span> <span class="n">hom</span> <span class="n">i</span> <span class="n">f</span> <span class="n">hβ</span> <span class="o">(</span><span class="n">mk</span> <span class="n">f</span> <span class="n">x</span><span class="o">)</span> <span class="bp">=</span> <span class="n">i</span> <span class="n">x</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">classical</span><span class="bp">.</span><span class="n">some_spec</span> <span class="o">(</span><span class="n">exists_hom</span> <span class="bp">_</span> <span class="n">f</span> <span class="n">rfl</span> <span class="n">i</span> <span class="n">hβ</span><span class="o">))</span><span class="bp">.</span><span class="mi">1</span>
 
-attribute [irreducible] hom splitting_field splitting_field.field splitting_field.mk
-```
+<span class="n">attribute</span> <span class="o">[</span><span class="kn">irreducible</span><span class="o">]</span> <span class="n">hom</span> <span class="n">splitting_field</span> <span class="n">splitting_field</span><span class="bp">.</span><span class="n">field</span> <span class="n">splitting_field</span><span class="bp">.</span><span class="n">mk</span>
+</pre></div>
 
 #### [ Kenny Lau (Dec 17 2018 at 11:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Splitting%20fields/near/152018894):
-@**Chris Hughes** so how did you extract an element from `factor_set`?
+<p><span class="user-mention" data-user-id="110044">@Chris Hughes</span> so how did you extract an element from <code>factor_set</code>?</p>
 
 #### [ Chris Hughes (Dec 17 2018 at 11:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Splitting%20fields/near/152018952):
-I proved the irreducible factor lemma for a noetherian domain.
+<p>I proved the irreducible factor lemma for a noetherian domain.</p>
 
 #### [ Kenny Lau (Dec 17 2018 at 11:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Splitting%20fields/near/152018963):
-see @**Mario Carneiro** this is problematic
+<p>see <span class="user-mention" data-user-id="110049">@Mario Carneiro</span> this is problematic</p>
 
 #### [ Chris Hughes (Dec 17 2018 at 12:00)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Splitting%20fields/near/152019049):
-I don't think it's problematic. You shouldn't use UFD for that anyway since it's true in greater generality.
+<p>I don't think it's problematic. You shouldn't use UFD for that anyway since it's true in greater generality.</p>
 
 #### [ Mario Carneiro (Dec 17 2018 at 12:09)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Splitting%20fields/near/152019448):
-Looks good to me, although I would call `hom` `lift` instead
+<p>Looks good to me, although I would call <code>hom</code> <code>lift</code> instead</p>
 
 #### [ Mario Carneiro (Dec 17 2018 at 12:09)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Splitting%20fields/near/152019459):
-what's problematic?
+<p>what's problematic?</p>
 
 #### [ Kenny Lau (Dec 17 2018 at 12:09)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Splitting%20fields/near/152019463):
-that `factor_set` is hard to use
+<p>that <code>factor_set</code> is hard to use</p>
 
 #### [ Mario Carneiro (Dec 17 2018 at 12:11)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Splitting%20fields/near/152019540):
-demo? what's `factor_set` doing here
+<p>demo? what's <code>factor_set</code> doing here</p>
 
 #### [ Kenny Lau (Dec 17 2018 at 12:11)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Splitting%20fields/near/152019543):
-well could you prove that the factor set of a non-unit non-zero element is nonempty?
+<p>well could you prove that the factor set of a non-unit non-zero element is nonempty?</p>
 
 #### [ Mario Carneiro (Dec 17 2018 at 12:12)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Splitting%20fields/near/152019546):
-what is `factor_set`
+<p>what is <code>factor_set</code></p>
 
 #### [ Kenny Lau (Dec 17 2018 at 12:12)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Splitting%20fields/near/152019590):
-`associates.factor_set`
+<p><code>associates.factor_set</code></p>
 
 #### [ Patrick Massot (Dec 17 2018 at 12:12)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Splitting%20fields/near/152019591):
-Kenny, you shouldn't be so negative
+<p>Kenny, you shouldn't be so negative</p>
 
 #### [ Mario Carneiro (Dec 17 2018 at 12:12)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Splitting%20fields/near/152019604):
-it's not in the mathlib version, remind me what it does
+<p>it's not in the mathlib version, remind me what it does</p>
 
 #### [ Kenny Lau (Dec 17 2018 at 12:12)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Splitting%20fields/near/152019613):
-```lean
-associates.factors :
-  Π {α : Type u_1} [_inst_1 : integral_domain α] [_inst_2 : unique_factorization_domain α]
-  [_inst_3 : decidable_eq (associates α)], associates α → associates.factor_set α
-```
+<div class="codehilite"><pre><span></span><span class="n">associates</span><span class="bp">.</span><span class="n">factors</span> <span class="o">:</span>
+  <span class="bp">Π</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u_1</span><span class="o">}</span> <span class="o">[</span><span class="bp">_</span><span class="n">inst_1</span> <span class="o">:</span> <span class="n">integral_domain</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="bp">_</span><span class="n">inst_2</span> <span class="o">:</span> <span class="n">unique_factorization_domain</span> <span class="n">α</span><span class="o">]</span>
+  <span class="o">[</span><span class="bp">_</span><span class="n">inst_3</span> <span class="o">:</span> <span class="n">decidable_eq</span> <span class="o">(</span><span class="n">associates</span> <span class="n">α</span><span class="o">)],</span> <span class="n">associates</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">associates</span><span class="bp">.</span><span class="n">factor_set</span> <span class="n">α</span>
+</pre></div>
 
 #### [ Kenny Lau (Dec 17 2018 at 12:13)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Splitting%20fields/near/152019624):
-@**Patrick Massot** well played
+<p><span class="user-mention" data-user-id="110031">@Patrick Massot</span> well played</p>
 
 #### [ Chris Hughes (Dec 17 2018 at 12:13)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Splitting%20fields/near/152019637):
-If it was empty the product would be one. Seems like it's probably not that hard.
+<p>If it was empty the product would be one. Seems like it's probably not that hard.</p>
 
 #### [ Mario Carneiro (Dec 17 2018 at 12:13)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Splitting%20fields/near/152019643):
-oh it's a ufd thing
+<p>oh it's a ufd thing</p>
 
 #### [ Kenny Lau (Dec 17 2018 at 12:13)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Splitting%20fields/near/152019646):
-how about that any non-zero non-unit is divisible by an irreducible
+<p>how about that any non-zero non-unit is divisible by an irreducible</p>
 
 #### [ Kenny Lau (Dec 17 2018 at 12:14)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Splitting%20fields/near/152019685):
-how do we convert from factors to divisibility
+<p>how do we convert from factors to divisibility</p>
 
 #### [ Mario Carneiro (Dec 17 2018 at 12:14)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Splitting%20fields/near/152019697):
-`dvd_eq_le`
+<p><code>dvd_eq_le</code></p>
 
 #### [ Chris Hughes (Dec 17 2018 at 12:15)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Splitting%20fields/near/152019698):
-Prove that a UFD is noetherian, and use the lemma I proved.
+<p>Prove that a UFD is noetherian, and use the lemma I proved.</p>
 
 #### [ Mario Carneiro (Dec 17 2018 at 12:15)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Splitting%20fields/near/152019702):
-and `factors_le`
+<p>and <code>factors_le</code></p>
 
 #### [ Kenny Lau (Dec 17 2018 at 12:15)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Splitting%20fields/near/152019721):
-I see @**Mario Carneiro**
+<p>I see <span class="user-mention" data-user-id="110049">@Mario Carneiro</span></p>
 
 #### [ Mario Carneiro (Dec 17 2018 at 12:16)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Splitting%20fields/near/152019761):
-it's a bit cumbersome to state, but it looks like the lemmas are there
+<p>it's a bit cumbersome to state, but it looks like the lemmas are there</p>
 
 #### [ Mario Carneiro (Dec 17 2018 at 12:18)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Splitting%20fields/near/152019840):
-Anyway I think you could certainly push this
+<p>Anyway I think you could certainly push this</p>
 
 #### [ Mario Carneiro (Dec 17 2018 at 12:18)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Splitting%20fields/near/152019848):
-next stop algebraic closure?
+<p>next stop algebraic closure?</p>
 
 #### [ Mario Carneiro (Dec 17 2018 at 12:18)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Splitting%20fields/near/152019851):
-I guess that's another messy induction like this
+<p>I guess that's another messy induction like this</p>
 
 #### [ Johan Commelin (Dec 17 2018 at 13:05)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Splitting%20fields/near/152022286):
-Before going towards algebraic closure, I would like to have this PR'd. This is going to be a very useful tool in the theory if finite extensions. I think it makes sense to start defining `separable` and `normal` extensions now. We're pretty close to finite Galois extensions.
+<p>Before going towards algebraic closure, I would like to have this PR'd. This is going to be a very useful tool in the theory if finite extensions. I think it makes sense to start defining <code>separable</code> and <code>normal</code> extensions now. We're pretty close to finite Galois extensions.</p>
 
 #### [ Johan Commelin (Dec 17 2018 at 13:07)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Splitting%20fields/near/152022370):
-@**Chris Hughes** What are your plans now?
+<p><span class="user-mention" data-user-id="110044">@Chris Hughes</span> What are your plans now?</p>
 
 #### [ Johan Commelin (Dec 17 2018 at 13:31)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Splitting%20fields/near/152023539):
-@**Chris Hughes** I merged master into this branch and pushed.
+<p><span class="user-mention" data-user-id="110044">@Chris Hughes</span> I merged master into this branch and pushed.</p>
 
 #### [ Chris Hughes (Dec 17 2018 at 13:38)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Splitting%20fields/near/152023867):
-This branch does now depend on unmerged PRs that I have made.
+<p>This branch does now depend on unmerged PRs that I have made.</p>
 
 #### [ Johan Commelin (Dec 17 2018 at 13:40)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Splitting%20fields/near/152023951):
-The one on multiplicities?
+<p>The one on multiplicities?</p>
 
 #### [ Chris Hughes (Dec 17 2018 at 13:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Splitting%20fields/near/152023975):
-And some others. I have three open to do with polynomials right now I think.
+<p>And some others. I have three open to do with polynomials right now I think.</p>
 
 #### [ Johan Commelin (Dec 17 2018 at 13:42)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Splitting%20fields/near/152024033):
-Yes, I see. Ok, let's hope those get merged soon.
+<p>Yes, I see. Ok, let's hope those get merged soon.</p>
 
 #### [ Johan Commelin (Dec 17 2018 at 13:43)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Splitting%20fields/near/152024064):
-Do you want to do more with this branch? I mean, it's name is `splitting_fields`, so maybe new stuff should happen on a new branch?
+<p>Do you want to do more with this branch? I mean, it's name is <code>splitting_fields</code>, so maybe new stuff should happen on a new branch?</p>
 
 #### [ Chris Hughes (Dec 17 2018 at 13:53)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Splitting%20fields/near/152024628):
-I think new stuff should happen on a new branch. I think it's best to not make PRs too big.
+<p>I think new stuff should happen on a new branch. I think it's best to not make PRs too big.</p>
 
 #### [ Johan Commelin (Dec 17 2018 at 14:18)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Splitting%20fields/near/152025969):
-So, if I'm not mistaken... the first 10 points of https://github.com/kckennylau/Lean/blob/master/algebraic-closure-roadmap.md have now been done. (Although not everything is in mathlib yet.)
+<p>So, if I'm not mistaken... the first 10 points of <a href="https://github.com/kckennylau/Lean/blob/master/algebraic-closure-roadmap.md" target="_blank" title="https://github.com/kckennylau/Lean/blob/master/algebraic-closure-roadmap.md">https://github.com/kckennylau/Lean/blob/master/algebraic-closure-roadmap.md</a> have now been done. (Although not everything is in mathlib yet.)</p>
 
 #### [ Johan Commelin (Dec 17 2018 at 14:23)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Splitting%20fields/near/152026250):
-Kenny, do you mind if I copy-paste that roadmap to the github wiki of the community repo? Then we can start ticking of things that we've done.
+<p>Kenny, do you mind if I copy-paste that roadmap to the github wiki of the community repo? Then we can start ticking of things that we've done.</p>
 
 #### [ Kenny Lau (Dec 17 2018 at 14:24)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Splitting%20fields/near/152026341):
-might want to replace the whole discriminant business with just GCD? ah the beauty of impredicativity
+<p>might want to replace the whole discriminant business with just GCD? ah the beauty of impredicativity</p>
 
 #### [ Johan Commelin (Dec 17 2018 at 14:26)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Splitting%20fields/near/152026448):
-According to wiki, a polynomial is separable if it has just as many roots in its splitting field as its degree. So a square of a separable polynomial is not separable... choices...
+<p>According to wiki, a polynomial is separable if it has just as many roots in its splitting field as its degree. So a square of a separable polynomial is not separable... choices...</p>
 
 #### [ Kenny Lau (Dec 17 2018 at 14:27)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Splitting%20fields/near/152026483):
-I don't think we're talking about the same thing
+<p>I don't think we're talking about the same thing</p>
 
 #### [ Johan Commelin (Dec 17 2018 at 14:27)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Splitting%20fields/near/152026504):
-No, indeed. I was asking if we should copy your roadmap to the github wiki...
+<p>No, indeed. I was asking if we should copy your roadmap to the github wiki...</p>
 
 #### [ Kenny Lau (Dec 17 2018 at 14:36)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Splitting%20fields/near/152027091):
-and I was asking if you might want to change 11-14 to just 14
+<p>and I was asking if you might want to change 11-14 to just 14</p>
 
 #### [ Johan Commelin (Dec 17 2018 at 14:39)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Splitting%20fields/near/152027295):
-That seems like a good plan.
+<p>That seems like a good plan.</p>
 
 #### [ Kenny Lau (Dec 17 2018 at 14:43)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Splitting%20fields/near/152027590):
-@**Johan Commelin** and my only objection would be predicativity
+<p><span class="user-mention" data-user-id="112680">@Johan Commelin</span> and my only objection would be predicativity</p>
 
 #### [ Kenny Lau (Dec 17 2018 at 14:44)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Splitting%20fields/near/152027650):
-which I'm sure less people care about, compared to constructivity...
+<p>which I'm sure less people care about, compared to constructivity...</p>
 
 #### [ Johan Commelin (Dec 17 2018 at 15:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Splitting%20fields/near/152033427):
-https://github.com/leanprover-community/mathlib/wiki/Algebraic-closure-roadmap
+<p><a href="https://github.com/leanprover-community/mathlib/wiki/Algebraic-closure-roadmap" target="_blank" title="https://github.com/leanprover-community/mathlib/wiki/Algebraic-closure-roadmap">https://github.com/leanprover-community/mathlib/wiki/Algebraic-closure-roadmap</a></p>
 
 
 {% endraw %}

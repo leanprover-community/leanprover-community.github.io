@@ -12,10 +12,10 @@ permalink: archive/113488general/40324Leanprovercommunity.html
 
 {% raw %}
 #### [ Tobias Grosser (Nov 07 2018 at 12:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Leanprover%20community/near/146934650):
-Can somebody give me access to leanprover-community (my gh account is https://github.com/tobig)
+<p>Can somebody give me access to leanprover-community (my gh account is <a href="https://github.com/tobig" target="_blank" title="https://github.com/tobig">https://github.com/tobig</a>)</p>
 
 #### [ Mario Carneiro (Nov 07 2018 at 12:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Leanprover%20community/near/146934810):
-done
+<p>done</p>
 
 
 {% endraw %}

@@ -12,41 +12,38 @@ permalink: archive/113488general/97591mutualinductives.html
 
 {% raw %}
 #### [ Chris Hughes (Nov 04 2018 at 00:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mutual%20inductives/near/137132804):
-What's the "canonical" proof that the Types A and B are empty. I proved it by reference to the auxiliary `A._mut_`. Is there a nicer way?
-```lean
-mutual inductive A, B
-with A : Type
-| mk : B → A
-with B : Type
-| mk : A → B
-```
+<p>What's the "canonical" proof that the Types A and B are empty. I proved it by reference to the auxiliary <code>A._mut_</code>. Is there a nicer way?</p>
+<div class="codehilite"><pre><span></span><span class="n">mutual</span> <span class="kn">inductive</span> <span class="n">A</span><span class="o">,</span> <span class="n">B</span>
+<span class="k">with</span> <span class="n">A</span> <span class="o">:</span> <span class="kt">Type</span>
+<span class="bp">|</span> <span class="n">mk</span> <span class="o">:</span> <span class="n">B</span> <span class="bp">→</span> <span class="n">A</span>
+<span class="k">with</span> <span class="n">B</span> <span class="o">:</span> <span class="kt">Type</span>
+<span class="bp">|</span> <span class="n">mk</span> <span class="o">:</span> <span class="n">A</span> <span class="bp">→</span> <span class="n">B</span>
+</pre></div>
 
 #### [ Kenny Lau (Nov 04 2018 at 00:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mutual%20inductives/near/137132957):
-```lean
-mutual inductive A, B
-with A : Type
-| mk : B → A
-with B : Type
-| mk : A → B
+<div class="codehilite"><pre><span></span><span class="n">mutual</span> <span class="kn">inductive</span> <span class="n">A</span><span class="o">,</span> <span class="n">B</span>
+<span class="k">with</span> <span class="n">A</span> <span class="o">:</span> <span class="kt">Type</span>
+<span class="bp">|</span> <span class="n">mk</span> <span class="o">:</span> <span class="n">B</span> <span class="bp">→</span> <span class="n">A</span>
+<span class="k">with</span> <span class="n">B</span> <span class="o">:</span> <span class="kt">Type</span>
+<span class="bp">|</span> <span class="n">mk</span> <span class="o">:</span> <span class="n">A</span> <span class="bp">→</span> <span class="n">B</span>
 
-def A.to_sort (l : Sort*) : A → l
-| (A.mk (B.mk x)) := A.to_sort x
-```
+<span class="n">def</span> <span class="n">A</span><span class="bp">.</span><span class="n">to_sort</span> <span class="o">(</span><span class="n">l</span> <span class="o">:</span> <span class="n">Sort</span><span class="bp">*</span><span class="o">)</span> <span class="o">:</span> <span class="n">A</span> <span class="bp">→</span> <span class="n">l</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">A</span><span class="bp">.</span><span class="n">mk</span> <span class="o">(</span><span class="n">B</span><span class="bp">.</span><span class="n">mk</span> <span class="n">x</span><span class="o">))</span> <span class="o">:=</span> <span class="n">A</span><span class="bp">.</span><span class="n">to_sort</span> <span class="n">x</span>
+</pre></div>
 
 #### [ Chris Hughes (Nov 04 2018 at 00:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mutual%20inductives/near/137132960):
-Of course.
+<p>Of course.</p>
 
 #### [ Chris Hughes (Nov 04 2018 at 00:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mutual%20inductives/near/137133128):
-Are there any recursors that look a bit like this?
-```lean
-def AB.reca : Π {Ca : A → Sort*} {Cb : B → Sort*} 
-  (ha : Π a : A, Ca a → Cb (B.mk a))
-  (hb : Π b : B, Cb b → Ca (A.mk b))
-  (a : A), Ca a
-```
+<p>Are there any recursors that look a bit like this?</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">AB</span><span class="bp">.</span><span class="n">reca</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">{</span><span class="n">Ca</span> <span class="o">:</span> <span class="n">A</span> <span class="bp">→</span> <span class="n">Sort</span><span class="bp">*</span><span class="o">}</span> <span class="o">{</span><span class="n">Cb</span> <span class="o">:</span> <span class="n">B</span> <span class="bp">→</span> <span class="n">Sort</span><span class="bp">*</span><span class="o">}</span>
+  <span class="o">(</span><span class="n">ha</span> <span class="o">:</span> <span class="bp">Π</span> <span class="n">a</span> <span class="o">:</span> <span class="n">A</span><span class="o">,</span> <span class="n">Ca</span> <span class="n">a</span> <span class="bp">→</span> <span class="n">Cb</span> <span class="o">(</span><span class="n">B</span><span class="bp">.</span><span class="n">mk</span> <span class="n">a</span><span class="o">))</span>
+  <span class="o">(</span><span class="n">hb</span> <span class="o">:</span> <span class="bp">Π</span> <span class="n">b</span> <span class="o">:</span> <span class="n">B</span><span class="o">,</span> <span class="n">Cb</span> <span class="n">b</span> <span class="bp">→</span> <span class="n">Ca</span> <span class="o">(</span><span class="n">A</span><span class="bp">.</span><span class="n">mk</span> <span class="n">b</span><span class="o">))</span>
+  <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">A</span><span class="o">),</span> <span class="n">Ca</span> <span class="n">a</span>
+</pre></div>
 
 #### [ Kenny Lau (Nov 04 2018 at 00:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mutual%20inductives/near/137133175):
-you can write one
+<p>you can write one</p>
 
 
 {% endraw %}

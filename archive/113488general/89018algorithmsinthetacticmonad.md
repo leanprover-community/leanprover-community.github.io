@@ -12,116 +12,107 @@ permalink: archive/113488general/89018algorithmsinthetacticmonad.html
 
 {% raw %}
 #### [ Scott Morrison (Sep 09 2018 at 05:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algorithms%20in%20the%20tactic%20monad/near/133593072):
-I need some remedial help with functional programming. 
-
-Say I have `f : X -> tactic X`, and `x : X`. Suppose that `f` is possibly very expensive to compute. I would like to recursively apply `f` to `x`, and produce an iterator-like object that can traversed elsewhere in the program, in such a way that `f` is never needlessly computed twice.
+<p>I need some remedial help with functional programming. </p>
+<p>Say I have <code>f : X -&gt; tactic X</code>, and <code>x : X</code>. Suppose that <code>f</code> is possibly very expensive to compute. I would like to recursively apply <code>f</code> to <code>x</code>, and produce an iterator-like object that can traversed elsewhere in the program, in such a way that <code>f</code> is never needlessly computed twice.</p>
 
 #### [ Scott Morrison (Sep 09 2018 at 05:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algorithms%20in%20the%20tactic%20monad/near/133593112):
-What am I meant to do?
+<p>What am I meant to do?</p>
 
 #### [ Scott Morrison (Sep 09 2018 at 05:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algorithms%20in%20the%20tactic%20monad/near/133593119):
-(Oh, and `f` will eventually fail, and the iterator-like object needs to be able to report termination.)
+<p>(Oh, and <code>f</code> will eventually fail, and the iterator-like object needs to be able to report termination.)</p>
 
 #### [ Scott Morrison (Sep 09 2018 at 05:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algorithms%20in%20the%20tactic%20monad/near/133593162):
-I would love to be able to package this up as merely a `tactic X`, whose every invocation magically produces the next element of the sequence, and handles piping the value of `f f f x` into the calculation of `f f f f x` "behind the scenes".
+<p>I would love to be able to package this up as merely a <code>tactic X</code>, whose every invocation magically produces the next element of the sequence, and handles piping the value of <code>f f f x</code> into the calculation of <code>f f f f x</code> "behind the scenes".</p>
 
 #### [ Scott Morrison (Sep 09 2018 at 05:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algorithms%20in%20the%20tactic%20monad/near/133593166):
-But that seems unlikely. :-)
+<p>But that seems unlikely. :-)</p>
 
 #### [ Mario Carneiro (Sep 09 2018 at 05:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algorithms%20in%20the%20tactic%20monad/near/133593215):
-Use a `lazy_list`
+<p>Use a <code>lazy_list</code></p>
 
 #### [ Scott Morrison (Sep 09 2018 at 05:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algorithms%20in%20the%20tactic%20monad/near/133593221):
-How does that interact with working in the tactic monad?
+<p>How does that interact with working in the tactic monad?</p>
 
 #### [ Simon Hudon (Sep 09 2018 at 05:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algorithms%20in%20the%20tactic%20monad/near/133593223):
-I think something is missing in `lazy_list` to allow this: the function is monadic. But I think we can make a monadic lazy list
+<p>I think something is missing in <code>lazy_list</code> to allow this: the function is monadic. But I think we can make a monadic lazy list</p>
 
 #### [ Mario Carneiro (Sep 09 2018 at 05:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algorithms%20in%20the%20tactic%20monad/near/133593273):
-```
-
-meta inductive mllist (m : Type u → Type u) (α : Type u) : Type u
+<div class="codehilite"><pre><span></span>meta inductive mllist (m : Type u → Type u) (α : Type u) : Type u
 | nil : mllist
 | cons : α → m mllist → mllist
-```
+</pre></div>
 
 #### [ Mario Carneiro (Sep 09 2018 at 05:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algorithms%20in%20the%20tactic%20monad/near/133593274):
-sadly this has to be meta, since it's not necessarily positive
+<p>sadly this has to be meta, since it's not necessarily positive</p>
 
 #### [ Simon Hudon (Sep 09 2018 at 06:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algorithms%20in%20the%20tactic%20monad/near/133593332):
-You could do something like:
-
-```lean
-inductive mlazy_list (m : Type u -> Type u) (a : Type u) : Type (u+1)
-| nil : mlazy_list
-| cons (b : Type u)  : m (a x b) -> (b -> mlazy_list) -> mlazy_list
-```
+<p>You could do something like:</p>
+<div class="codehilite"><pre><span></span><span class="kn">inductive</span> <span class="n">mlazy_list</span> <span class="o">(</span><span class="n">m</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span> <span class="bp">-&gt;</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Type</span> <span class="o">(</span><span class="n">u</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span>
+<span class="bp">|</span> <span class="n">nil</span> <span class="o">:</span> <span class="n">mlazy_list</span>
+<span class="bp">|</span> <span class="n">cons</span> <span class="o">(</span><span class="n">b</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span>  <span class="o">:</span> <span class="n">m</span> <span class="o">(</span><span class="n">a</span> <span class="n">x</span> <span class="n">b</span><span class="o">)</span> <span class="bp">-&gt;</span> <span class="o">(</span><span class="n">b</span> <span class="bp">-&gt;</span> <span class="n">mlazy_list</span><span class="o">)</span> <span class="bp">-&gt;</span> <span class="n">mlazy_list</span>
+</pre></div>
 
 #### [ Scott Morrison (Sep 09 2018 at 06:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algorithms%20in%20the%20tactic%20monad/near/133593374):
-Can you explain your one, Simon? I'm not understanding how to use it. :-)
+<p>Can you explain your one, Simon? I'm not understanding how to use it. :-)</p>
 
 #### [ Mario Carneiro (Sep 09 2018 at 06:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algorithms%20in%20the%20tactic%20monad/near/133593489):
-eww, you have to package up the whole state to use that
+<p>eww, you have to package up the whole state to use that</p>
 
 #### [ Mario Carneiro (Sep 09 2018 at 06:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algorithms%20in%20the%20tactic%20monad/near/133593493):
-also, that in no way resembles a list
+<p>also, that in no way resembles a list</p>
 
 #### [ Scott Morrison (Sep 09 2018 at 06:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algorithms%20in%20the%20tactic%20monad/near/133593536):
-Mario, I'm failing to write `iterates` for your version... A hint?
+<p>Mario, I'm failing to write <code>iterates</code> for your version... A hint?</p>
 
 #### [ Simon Hudon (Sep 09 2018 at 06:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algorithms%20in%20the%20tactic%20monad/near/133593537):
-@**Mario Carneiro** you have to squint and cock your head left
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> you have to squint and cock your head left</p>
 
 #### [ Simon Hudon (Sep 09 2018 at 06:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algorithms%20in%20the%20tactic%20monad/near/133593542):
-@**Scott Morrison** Sure, let's have a look
+<p><span class="user-mention" data-user-id="110524">@Scott Morrison</span> Sure, let's have a look</p>
 
 #### [ Mario Carneiro (Sep 09 2018 at 06:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algorithms%20in%20the%20tactic%20monad/near/133593546):
-```
-meta inductive mllist (m : Type u → Type u) (α : Type u) : Type u
+<div class="codehilite"><pre><span></span>meta inductive mllist (m : Type u → Type u) (α : Type u) : Type u
 | nil {} : mllist
 | cons : α → m mllist → mllist
 
 meta def fix {m : Type u → Type u} [monad m] [alternative m]
   {α} (f : α → m α) : α → m (mllist m α)
-| x := (do a ← f x, return (mllist.cons a (fix a))) <|> pure mllist.nil
-```
+| x := (do a ← f x, return (mllist.cons a (fix a))) &lt;|&gt; pure mllist.nil
+</pre></div>
 
 #### [ Mario Carneiro (Sep 09 2018 at 06:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algorithms%20in%20the%20tactic%20monad/near/133593591):
-the typeclass instances are a bit of a lie since the `monad` and `alternative` instances could potentially be giving different map operations, but since there are no axioms it doesn't matter
+<p>the typeclass instances are a bit of a lie since the <code>monad</code> and <code>alternative</code> instances could potentially be giving different map operations, but since there are no axioms it doesn't matter</p>
 
 #### [ Mario Carneiro (Sep 09 2018 at 06:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algorithms%20in%20the%20tactic%20monad/near/133593598):
-oh wait
-```
-meta def fix {m : Type u → Type u} [alternative m]
+<p>oh wait</p>
+<div class="codehilite"><pre><span></span>meta def fix {m : Type u → Type u} [alternative m]
   {α} (f : α → m α) : α → m (mllist m α)
-| x := (λ a, mllist.cons a (fix a)) <$> f x <|> pure mllist.nil
-```
+| x := (λ a, mllist.cons a (fix a)) &lt;$&gt; f x &lt;|&gt; pure mllist.nil
+</pre></div>
 
 #### [ Scott Morrison (Sep 09 2018 at 06:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algorithms%20in%20the%20tactic%20monad/near/133593629):
-Ah, okay, I'd just worked out a version of `fix`, but forgotten to check for failure...
+<p>Ah, okay, I'd just worked out a version of <code>fix</code>, but forgotten to check for failure...</p>
 
 #### [ Mario Carneiro (Sep 09 2018 at 06:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algorithms%20in%20the%20tactic%20monad/near/133593650):
-if you skip that you have a valid infinite list representation a la haskell
+<p>if you skip that you have a valid infinite list representation a la haskell</p>
 
 #### [ Mario Carneiro (Sep 09 2018 at 06:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algorithms%20in%20the%20tactic%20monad/near/133593869):
-```
-meta def f : nat → tactic nat
+<div class="codehilite"><pre><span></span>meta def f : nat → tactic nat
 | 0 := tactic.failed
-| (n+1) := tactic.trace n $> n
+| (n+1) := tactic.trace n $&gt; n
 
 run_cmd fix f 10 -- prints only 9
 
 meta def mllist.force {m} [monad m] {α} : mllist m α → m (list α)
 | mllist.nil := pure []
-| (mllist.cons a l) := list.cons a <$> (l >>= mllist.force)
+| (mllist.cons a l) := list.cons a &lt;$&gt; (l &gt;&gt;= mllist.force)
 
-run_cmd (fix f 10 >>= mllist.force >>= tactic.trace) -- prints 9,...,0 and [9, ..., 0]
-```
+run_cmd (fix f 10 &gt;&gt;= mllist.force &gt;&gt;= tactic.trace) -- prints 9,...,0 and [9, ..., 0]
+</pre></div>
 
 #### [ Scott Morrison (Sep 09 2018 at 06:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algorithms%20in%20the%20tactic%20monad/near/133593870):
-Oooh, and look at that:
-```
-meta inductive mllist (m : Type u → Type u) (α : Type u) : Type u
+<p>Oooh, and look at that:</p>
+<div class="codehilite"><pre><span></span>meta inductive mllist (m : Type u → Type u) (α : Type u) : Type u
 | nil {} : mllist
 | cons : α → m mllist → mllist
 
@@ -129,7 +120,7 @@ open mllist
 
 meta def fix {m : Type u → Type u} [alternative m]
   {α} (f : α → m α) : α → m (mllist m α)
-| x := (λ a, mllist.cons a (fix a)) <$> f x <|> pure mllist.nil
+| x := (λ a, mllist.cons a (fix a)) &lt;$&gt; f x &lt;|&gt; pure mllist.nil
 
 meta def g (n : ℕ) : tactic ℕ :=
 do trace n,
@@ -138,11 +129,11 @@ do trace n,
 meta def foo : tactic unit :=
 do L ← fix g 2,
    mllist.cons n L ← return L,
-   trace "!",
+   trace &quot;!&quot;,
    mllist.cons n L ← L,
-   trace "!",
+   trace &quot;!&quot;,
    mllist.cons n L ← L,
-   trace "!",
+   trace &quot;!&quot;,
    skip
 
 example : 1 = 1 :=
@@ -150,41 +141,44 @@ begin
   foo,
   refl
 end
-```
-Printing: "2 ! 4 ! 16 !"
+</pre></div>
+
+
+<p>Printing: "2 ! 4 ! 16 !"</p>
 
 #### [ Simon Hudon (Sep 09 2018 at 06:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algorithms%20in%20the%20tactic%20monad/near/133593967):
-If you stay in tactics, Mario's version is simpler. Mine is getting tricky because of universes
+<p>If you stay in tactics, Mario's version is simpler. Mine is getting tricky because of universes</p>
 
 #### [ Scott Morrison (Sep 09 2018 at 06:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algorithms%20in%20the%20tactic%20monad/near/133594092):
-Thanks, Simon. I'm trapped in the bottom universe anyway,, `expr`-munging,  so I'll go with Mario's for now.
+<p>Thanks, Simon. I'm trapped in the bottom universe anyway,, <code>expr</code>-munging,  so I'll go with Mario's for now.</p>
 
 #### [ Mario Carneiro (Sep 09 2018 at 06:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algorithms%20in%20the%20tactic%20monad/near/133594099):
-Basically you get into the standard universe issues with coinductive types. I don't know any way to avoid packing the entire state into the type
+<p>Basically you get into the standard universe issues with coinductive types. I don't know any way to avoid packing the entire state into the type</p>
 
 #### [ Simon Hudon (Sep 09 2018 at 06:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algorithms%20in%20the%20tactic%20monad/near/133594113):
-:) good I wish I could have made something that fits in a short snippet. But now, I have to bring in a whole F-algebra which I haven't implemented yet :)
+<p>:) good I wish I could have made something that fits in a short snippet. But now, I have to bring in a whole F-algebra which I haven't implemented yet :)</p>
 
 #### [ Mario Carneiro (Sep 09 2018 at 06:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algorithms%20in%20the%20tactic%20monad/near/133594114):
-You can mathematically reason about the entire completed infinite process, but this has poor code behavior
+<p>You can mathematically reason about the entire completed infinite process, but this has poor code behavior</p>
 
 #### [ Simon Hudon (Sep 09 2018 at 06:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algorithms%20in%20the%20tactic%20monad/near/133594158):
-Doesn't Lean allow you to substitute pure code with something that will be efficient?
+<p>Doesn't Lean allow you to substitute pure code with something that will be efficient?</p>
 
 #### [ Mario Carneiro (Sep 09 2018 at 06:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algorithms%20in%20the%20tactic%20monad/near/133594162):
-:four_leaf_clover:
+<p><span class="emoji emoji-1f340" title="four leaf clover">:four_leaf_clover:</span></p>
 
 #### [ Simon Hudon (Sep 09 2018 at 06:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algorithms%20in%20the%20tactic%20monad/near/133594222):
-:) since you mention coinductive types, you mentioned bounded natural functors a while back. Now I'm thinking my current approach might be getting out of hand so I think I'll give them a try
+<p>:) since you mention coinductive types, you mentioned bounded natural functors a while back. Now I'm thinking my current approach might be getting out of hand so I think I'll give them a try</p>
 
 #### [ Reid Barton (Sep 09 2018 at 12:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algorithms%20in%20the%20tactic%20monad/near/133603765):
-> bounded natural functors
-
-Interesting. What you need to construct the initial algebra of a functor F : Set -> Set by transfinite induction is that F is accessible, that is, F commutes with $$\kappa$$-filtered colimits for some **regular cardinal** $$\kappa$$. For example, FX = (S -> X) is $$\kappa$$-accessible if $$|S| < \kappa$$. So I guess this "bounded" condition is related. Do CS people use regular cardinals too?
-I found some paper on the topic which contains a lemma which bounds the cardinality of minimal algebras and the formula involves a successor cardinal, so I guess it is the same idea.
+<blockquote>
+<p>bounded natural functors</p>
+</blockquote>
+<p>Interesting. What you need to construct the initial algebra of a functor F : Set -&gt; Set by transfinite induction is that F is accessible, that is, F commutes with <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>κ</mi></mrow><annotation encoding="application/x-tex">\kappa</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.43056em;"></span><span class="strut bottom" style="height:0.43056em;vertical-align:0em;"></span><span class="base"><span class="mord mathit">κ</span></span></span></span>-filtered colimits for some <strong>regular cardinal</strong> <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>κ</mi></mrow><annotation encoding="application/x-tex">\kappa</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.43056em;"></span><span class="strut bottom" style="height:0.43056em;vertical-align:0em;"></span><span class="base"><span class="mord mathit">κ</span></span></span></span>. For example, FX = (S -&gt; X) is <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>κ</mi></mrow><annotation encoding="application/x-tex">\kappa</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.43056em;"></span><span class="strut bottom" style="height:0.43056em;vertical-align:0em;"></span><span class="base"><span class="mord mathit">κ</span></span></span></span>-accessible if <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="normal">∣</mi><mi>S</mi><mi mathvariant="normal">∣</mi><mo>&lt;</mo><mi>κ</mi></mrow><annotation encoding="application/x-tex">|S| &lt; \kappa</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.75em;"></span><span class="strut bottom" style="height:1em;vertical-align:-0.25em;"></span><span class="base"><span class="mord mathrm">∣</span><span class="mord mathit" style="margin-right:0.05764em;">S</span><span class="mord mathrm">∣</span><span class="mrel">&lt;</span><span class="mord mathit">κ</span></span></span></span>. So I guess this "bounded" condition is related. Do CS people use regular cardinals too?<br>
+I found some paper on the topic which contains a lemma which bounds the cardinality of minimal algebras and the formula involves a successor cardinal, so I guess it is the same idea.</p>
 
 #### [ Simon Hudon (Sep 09 2018 at 19:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algorithms%20in%20the%20tactic%20monad/near/133618942):
-Thanks for the attempt at giving me an introduction. I'm afraid I'm more of a noob than that when it comes to category theory
+<p>Thanks for the attempt at giving me an introduction. I'm afraid I'm more of a noob than that when it comes to category theory</p>
 
 
 {% endraw %}

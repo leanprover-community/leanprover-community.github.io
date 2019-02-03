@@ -12,34 +12,34 @@ permalink: archive/113488general/39873copytargetdir.html
 
 {% raw %}
 #### [ Patrick Massot (May 28 2018 at 14:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/copy%20_target%20dir/near/127204618):
-I really don't understand how the `_target` directory works
+<p>I really don't understand how the <code>_target</code> directory works</p>
 
 #### [ Patrick Massot (May 28 2018 at 14:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/copy%20_target%20dir/near/127204620):
-I want to help Kevin so I clone his repo
+<p>I want to help Kevin so I clone his repo</p>
 
 #### [ Patrick Massot (May 28 2018 at 14:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/copy%20_target%20dir/near/127204622):
-Of course it depends on mathlib
+<p>Of course it depends on mathlib</p>
 
 #### [ Patrick Massot (May 28 2018 at 14:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/copy%20_target%20dir/near/127204626):
-So I try to copy `_target` from my own projects to avoid compiling mathlib
+<p>So I try to copy <code>_target</code> from my own projects to avoid compiling mathlib</p>
 
 #### [ Patrick Massot (May 28 2018 at 14:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/copy%20_target%20dir/near/127204629):
-and it doesn't seem to work
+<p>and it doesn't seem to work</p>
 
 #### [ Patrick Massot (May 28 2018 at 14:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/copy%20_target%20dir/near/127204668):
-or maybe it does
+<p>or maybe it does</p>
 
 #### [ Patrick Massot (May 28 2018 at 14:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/copy%20_target%20dir/near/127204676):
-it seemed like VScode was taking forever to compile
+<p>it seemed like VScode was taking forever to compile</p>
 
 #### [ Patrick Massot (May 28 2018 at 14:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/copy%20_target%20dir/near/127204680):
-which seemed like it was compiling lots of files
+<p>which seemed like it was compiling lots of files</p>
 
 #### [ Patrick Massot (May 28 2018 at 14:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/copy%20_target%20dir/near/127204686):
-but maybe it was only Kevin's code
+<p>but maybe it was only Kevin's code</p>
 
 #### [ Johan Commelin (May 28 2018 at 15:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/copy%20_target%20dir/near/127204871):
-I have symlinked the `_target` dir before. It seems to work fine.
+<p>I have symlinked the <code>_target</code> dir before. It seems to work fine.</p>
 
 
 {% endraw %}

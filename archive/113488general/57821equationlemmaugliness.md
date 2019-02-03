@@ -12,32 +12,31 @@ permalink: archive/113488general/57821equationlemmaugliness.html
 
 {% raw %}
 #### [ Kevin Buzzard (Jun 13 2018 at 00:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equation%20lemma%20ugliness/near/127977206):
-```lean
-def poly := list ℤ
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">poly</span> <span class="o">:=</span> <span class="n">list</span> <span class="bp">ℤ</span>
 
-def poly.add : poly → poly → poly 
-| [] g := g
-| f [] := f 
-| (a :: f') (b :: g') := (a + b) :: poly.add f' g' 
+<span class="n">def</span> <span class="n">poly</span><span class="bp">.</span><span class="n">add</span> <span class="o">:</span> <span class="n">poly</span> <span class="bp">→</span> <span class="n">poly</span> <span class="bp">→</span> <span class="n">poly</span>
+<span class="bp">|</span> <span class="o">[]</span> <span class="n">g</span> <span class="o">:=</span> <span class="n">g</span>
+<span class="bp">|</span> <span class="n">f</span> <span class="o">[]</span> <span class="o">:=</span> <span class="n">f</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">a</span> <span class="bp">::</span> <span class="n">f&#39;</span><span class="o">)</span> <span class="o">(</span><span class="n">b</span> <span class="bp">::</span> <span class="n">g&#39;</span><span class="o">)</span> <span class="o">:=</span> <span class="o">(</span><span class="n">a</span> <span class="bp">+</span> <span class="n">b</span><span class="o">)</span> <span class="bp">::</span> <span class="n">poly</span><span class="bp">.</span><span class="n">add</span> <span class="n">f&#39;</span> <span class="n">g&#39;</span>
 
--- example (p : poly) : poly.add [] p = p := rfl -- fails
+<span class="c1">-- example (p : poly) : poly.add [] p = p := rfl -- fails</span>
 
-#print prefix poly.add 
+<span class="bp">#</span><span class="kn">print</span> <span class="kn">prefix</span> <span class="n">poly</span><span class="bp">.</span><span class="n">add</span>
 
-/-
-...
-poly.add.equations._eqn_1 : poly.add list.nil list.nil = list.nil
-poly.add.equations._eqn_2 : ∀ (hd : ℤ) (tl : list ℤ), poly.add list.nil (hd :: tl) = hd :: tl
-...
+<span class="c">/-</span><span class="cm"></span>
+<span class="cm">...</span>
+<span class="cm">poly.add.equations._eqn_1 : poly.add list.nil list.nil = list.nil</span>
+<span class="cm">poly.add.equations._eqn_2 : ∀ (hd : ℤ) (tl : list ℤ), poly.add list.nil (hd :: tl) = hd :: tl</span>
+<span class="cm">...</span>
 
--- it did unnecessary cases on g.
--/
+<span class="cm">-- it did unnecessary cases on g.</span>
+<span class="cm">-/</span>
 
-example (p : poly) : poly.add [] p = p := by cases p;refl 
-```
+<span class="kn">example</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="n">poly</span><span class="o">)</span> <span class="o">:</span> <span class="n">poly</span><span class="bp">.</span><span class="n">add</span> <span class="o">[]</span> <span class="n">p</span> <span class="bp">=</span> <span class="n">p</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">cases</span> <span class="n">p</span><span class="bp">;</span><span class="n">refl</span>
+</pre></div>
 
 #### [ Kevin Buzzard (Jun 13 2018 at 00:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equation%20lemma%20ugliness/near/127977299):
-Is this just "one of those things" -- is my proof of poly.add using cases something which I should be OK with, or should I now start tweaking things to try and make the example rfl? I am about to make it a simp lemma -- is that "good enough"? As you can see, I can prove the result, I am just worried about whether my proof is somehow bad style. It's my fancy recursive definition which is to blame of course, but the definition is recursive (I'm representing a polynomial as a list of its coefficients starting with the constant term)
+<p>Is this just "one of those things" -- is my proof of poly.add using cases something which I should be OK with, or should I now start tweaking things to try and make the example rfl? I am about to make it a simp lemma -- is that "good enough"? As you can see, I can prove the result, I am just worried about whether my proof is somehow bad style. It's my fancy recursive definition which is to blame of course, but the definition is recursive (I'm representing a polynomial as a list of its coefficients starting with the constant term)</p>
 
 
 {% endraw %}

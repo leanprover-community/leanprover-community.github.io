@@ -12,25 +12,26 @@ permalink: archive/113488general/95945howfartogowithjunktheorem.html
 
 {% raw %}
 #### [ Kevin Buzzard (Nov 14 2018 at 20:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20far%20to%20go%20with%20junk%20theorem/near/147692754):
-If `noncomputable definition nth_root (x : ℝ) (n : ℕ) : ℝ :=
-exp (log x / n)` then because log of a non-positive real is explicitly defined to be zero (log going out of its way to not ask for positivity there), we have that
-```lean
-lemma nth_root_pow_left' {x : ℝ} {m n : ℕ} (Hn : 0 < n) : --(Hm : 0 < m) (Hx : 0 < x) :
-(nth_root x (m * n)) ^ n = nth_root x m := sorry
-```
-happens to be true for all m and x. However to prove the result for `x <= 0` I would like to use the fact that if `x <= 0` then `log x = 0`. Should this be a named lemma, even though it's a junk theorem? I can't find it.
+<p>If <code>noncomputable definition nth_root (x : ℝ) (n : ℕ) : ℝ :=
+exp (log x / n)</code> then because log of a non-positive real is explicitly defined to be zero (log going out of its way to not ask for positivity there), we have that</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">nth_root_pow_left&#39;</span> <span class="o">{</span><span class="n">x</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">}</span> <span class="o">{</span><span class="n">m</span> <span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">}</span> <span class="o">(</span><span class="n">Hn</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">&lt;</span> <span class="n">n</span><span class="o">)</span> <span class="o">:</span> <span class="c1">--(Hm : 0 &lt; m) (Hx : 0 &lt; x) :</span>
+<span class="o">(</span><span class="n">nth_root</span> <span class="n">x</span> <span class="o">(</span><span class="n">m</span> <span class="bp">*</span> <span class="n">n</span><span class="o">))</span> <span class="err">^</span> <span class="n">n</span> <span class="bp">=</span> <span class="n">nth_root</span> <span class="n">x</span> <span class="n">m</span> <span class="o">:=</span> <span class="n">sorry</span>
+</pre></div>
+
+
+<p>happens to be true for all m and x. However to prove the result for <code>x &lt;= 0</code> I would like to use the fact that if <code>x &lt;= 0</code> then <code>log x = 0</code>. Should this be a named lemma, even though it's a junk theorem? I can't find it.</p>
 
 #### [ Kevin Buzzard (Nov 14 2018 at 20:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20far%20to%20go%20with%20junk%20theorem/near/147692769):
-Am I supposed to put the effort in to prove the result for `x<=0` even though nobody will ever need this case?
+<p>Am I supposed to put the effort in to prove the result for <code>x&lt;=0</code> even though nobody will ever need this case?</p>
 
 #### [ Mario Carneiro (Nov 14 2018 at 21:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20far%20to%20go%20with%20junk%20theorem/near/147695777):
-yes to both questions
+<p>yes to both questions</p>
 
 #### [ Mario Carneiro (Nov 14 2018 at 21:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20far%20to%20go%20with%20junk%20theorem/near/147695835):
-If you use the fact at least once, there should be a theorem describing "out of domain" behavior of a totalized function (although in general we want to limit the number of such theorems)
+<p>If you use the fact at least once, there should be a theorem describing "out of domain" behavior of a totalized function (although in general we want to limit the number of such theorems)</p>
 
 #### [ Mario Carneiro (Nov 14 2018 at 21:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20far%20to%20go%20with%20junk%20theorem/near/147695912):
-and if it eliminates a hypothesis you should use "out of domain" behavior of functions in the proof
+<p>and if it eliminates a hypothesis you should use "out of domain" behavior of functions in the proof</p>
 
 
 {% endraw %}

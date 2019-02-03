@@ -12,22 +12,22 @@ permalink: archive/113488general/04301roptionname.html
 
 {% raw %}
 #### [ Scott Olson (Nov 04 2018 at 11:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/roption%20name/near/137151183):
-@**Mario Carneiro** What's the meaning behind the name of the type `roption`? Sorry if I'm missing something obvious :p
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> What's the meaning behind the name of the type <code>roption</code>? Sorry if I'm missing something obvious :p</p>
 
 #### [ Mario Carneiro (Nov 04 2018 at 11:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/roption%20name/near/137151189):
-I literally forget. I changed the name to `part` in the recent CPP paper, and I need to update mathlib
+<p>I literally forget. I changed the name to <code>part</code> in the recent CPP paper, and I need to update mathlib</p>
 
 #### [ Mario Carneiro (Nov 04 2018 at 11:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/roption%20name/near/137151241):
-because I didn't want to explain the crazy name
+<p>because I didn't want to explain the crazy name</p>
 
 #### [ Mario Carneiro (Nov 04 2018 at 11:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/roption%20name/near/137151256):
-`r` is for ... raw? right? no idea
+<p><code>r</code> is for ... raw? right? no idea</p>
 
 #### [ Scott Olson (Nov 04 2018 at 11:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/roption%20name/near/137151301):
-haha, fair enough. `part` does seem clearer. A friend of mine guessed "recursive option"
+<p>haha, fair enough. <code>part</code> does seem clearer. A friend of mine guessed "recursive option"</p>
 
 #### [ Simon Hudon (Nov 04 2018 at 19:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/roption%20name/near/137166356):
-I seem to recall raw. Maybe in contrast with pfun which has an argument, roption is more minimalist
+<p>I seem to recall raw. Maybe in contrast with pfun which has an argument, roption is more minimalist</p>
 
 
 {% endraw %}

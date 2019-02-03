@@ -12,10 +12,10 @@ permalink: archive/113488general/35665attributeclassnatprime.html
 
 {% raw %}
 #### [ Kenny Lau (Oct 17 2018 at 09:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/attribute%20%5Bclass%5D%20nat.prime/near/135955991):
-What is `attribute [class] nat.prime` doing in `padic_norm.lean`
+<p>What is <code>attribute [class] nat.prime</code> doing in <code>padic_norm.lean</code></p>
 
 #### [ Johan Commelin (Oct 17 2018 at 09:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/attribute%20%5Bclass%5D%20nat.prime/near/135956065):
-Waiting for someone to move it?
+<p>Waiting for someone to move it?</p>
 
 
 {% endraw %}

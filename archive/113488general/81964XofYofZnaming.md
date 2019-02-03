@@ -12,135 +12,134 @@ permalink: archive/113488general/81964XofYofZnaming.html
 
 {% raw %}
 #### [ Kevin Buzzard (Apr 12 2018 at 00:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/X_of_Y_of_Z%20naming/near/124954801):
-What theorem is called `X_of_Y_of_Z`? Is it `Y -> Z -> X` or `Z -> Y -> X` or even something else? Or are things more fluid than this?
+<p>What theorem is called <code>X_of_Y_of_Z</code>? Is it <code>Y -&gt; Z -&gt; X</code> or <code>Z -&gt; Y -&gt; X</code> or even something else? Or are things more fluid than this?</p>
 
 #### [ Chris Hughes (Apr 12 2018 at 00:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/X_of_Y_of_Z%20naming/near/124954877):
-`Y -> Z -> X`
+<p><code>Y -&gt; Z -&gt; X</code></p>
 
 #### [ Chris Hughes (Apr 12 2018 at 00:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/X_of_Y_of_Z%20naming/near/124954879):
-as in `lt_of_le_of_lt`
+<p>as in <code>lt_of_le_of_lt</code></p>
 
 #### [ Kevin Buzzard (Apr 12 2018 at 00:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/X_of_Y_of_Z%20naming/near/124954882):
-Right, that's why I asked.
+<p>Right, that's why I asked.</p>
 
 #### [ Kevin Buzzard (Apr 12 2018 at 00:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/X_of_Y_of_Z%20naming/near/124954886):
-I just don't understand how the brackets work
+<p>I just don't understand how the brackets work</p>
 
 #### [ Kevin Buzzard (Apr 12 2018 at 00:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/X_of_Y_of_Z%20naming/near/124954890):
-If "of" means "follows from"
+<p>If "of" means "follows from"</p>
 
 #### [ Andrew Ashworth (Apr 12 2018 at 00:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/X_of_Y_of_Z%20naming/near/124954892):
-is `of` right associative
+<p>is <code>of</code> right associative</p>
 
 #### [ Andrew Ashworth (Apr 12 2018 at 00:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/X_of_Y_of_Z%20naming/near/124954929):
-since it represents `->`
+<p>since it represents <code>-&gt;</code></p>
 
 #### [ Kevin Buzzard (Apr 12 2018 at 00:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/X_of_Y_of_Z%20naming/near/124954935):
-then `Y->Z->X` is `Y->(Z->X)`
+<p>then <code>Y-&gt;Z-&gt;X</code> is <code>Y-&gt;(Z-&gt;X)</code></p>
 
 #### [ Kevin Buzzard (Apr 12 2018 at 00:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/X_of_Y_of_Z%20naming/near/124954938):
-which is `(X_of_Z)_of_Y`
+<p>which is <code>(X_of_Z)_of_Y</code></p>
 
 #### [ Andrew Ashworth (Apr 12 2018 at 00:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/X_of_Y_of_Z%20naming/near/124954942):
-it is also a mystery to me, hah
+<p>it is also a mystery to me, hah</p>
 
 #### [ Simon Hudon (Apr 12 2018 at 00:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/X_of_Y_of_Z%20naming/near/124954957):
-I think `X_of_Y_of_Z` is `Y -> Z -> X`: only the consequent is out of order in the name
+<p>I think <code>X_of_Y_of_Z</code> is <code>Y -&gt; Z -&gt; X</code>: only the consequent is out of order in the name</p>
 
 #### [ Kevin Buzzard (Apr 12 2018 at 00:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/X_of_Y_of_Z%20naming/near/124954958):
-well `(X_of_Y)_of_Z` seems to mean `Z->(Y->X)` and `X_of_(Y_of_Z)` seems to mean `(Z->Y)->X`
+<p>well <code>(X_of_Y)_of_Z</code> seems to mean <code>Z-&gt;(Y-&gt;X)</code> and <code>X_of_(Y_of_Z)</code> seems to mean <code>(Z-&gt;Y)-&gt;X</code></p>
 
 #### [ Kevin Buzzard (Apr 12 2018 at 00:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/X_of_Y_of_Z%20naming/near/124955010):
-So are you clear on the logic? What does `A_of_B_of_C_of_D` say?
+<p>So are you clear on the logic? What does <code>A_of_B_of_C_of_D</code> say?</p>
 
 #### [ Kevin Buzzard (Apr 12 2018 at 00:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/X_of_Y_of_Z%20naming/near/124955028):
-I don't know these fancy CS terms like consequent by the way
+<p>I don't know these fancy CS terms like consequent by the way</p>
 
 #### [ Kevin Buzzard (Apr 12 2018 at 00:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/X_of_Y_of_Z%20naming/near/124955031):
-Sorry
+<p>Sorry</p>
 
 #### [ Andrew Ashworth (Apr 12 2018 at 00:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/X_of_Y_of_Z%20naming/near/124955034):
-somewhere, a logician is crying
+<p>somewhere, a logician is crying</p>
 
 #### [ Kevin Buzzard (Apr 12 2018 at 00:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/X_of_Y_of_Z%20naming/near/124955038):
-next you'll be telling me that something is a minor premise
+<p>next you'll be telling me that something is a minor premise</p>
 
 #### [ Simon Hudon (Apr 12 2018 at 00:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/X_of_Y_of_Z%20naming/near/124955076):
-```quote
-well `(X_of_Y)_of_Z` seems to mean `Z->(Y->X)` and `X_of_(Y_of_Z)` seems to mean `(Z->Y)->X`
-```
-I disagree with that assessment. I would say that `A_of_B_of_C_of_D` is `B -> C -> D -> A`
+<blockquote>
+<p>well <code>(X_of_Y)_of_Z</code> seems to mean <code>Z-&gt;(Y-&gt;X)</code> and <code>X_of_(Y_of_Z)</code> seems to mean <code>(Z-&gt;Y)-&gt;X</code></p>
+</blockquote>
+<p>I disagree with that assessment. I would say that <code>A_of_B_of_C_of_D</code> is <code>B -&gt; C -&gt; D -&gt; A</code></p>
 
 #### [ Chris Hughes (Apr 12 2018 at 00:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/X_of_Y_of_Z%20naming/near/124955081):
-I think `of` doesn't follow right or left associativity rules
+<p>I think <code>of</code> doesn't follow right or left associativity rules</p>
 
 #### [ Simon Hudon (Apr 12 2018 at 00:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/X_of_Y_of_Z%20naming/near/124955083):
-Consequent is the only positive term in a chain of implications, i.e. the right-most term.
+<p>Consequent is the only positive term in a chain of implications, i.e. the right-most term.</p>
 
 #### [ Andrew Ashworth (Apr 12 2018 at 00:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/X_of_Y_of_Z%20naming/near/124955144):
-if i had to guess i would think like simon it's right assoc
+<p>if i had to guess i would think like simon it's right assoc</p>
 
 #### [ Andrew Ashworth (Apr 12 2018 at 00:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/X_of_Y_of_Z%20naming/near/124955153):
-so a_of_b... is B -> C -> D -> A
+<p>so a_of_b... is B -&gt; C -&gt; D -&gt; A</p>
 
 #### [ Andrew Ashworth (Apr 12 2018 at 00:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/X_of_Y_of_Z%20naming/near/124955170):
-so how do we put parentheses in our theorem names? who knows
+<p>so how do we put parentheses in our theorem names? who knows</p>
 
 #### [ Andrew Ashworth (Apr 12 2018 at 00:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/X_of_Y_of_Z%20naming/near/124955173):
-oh
+<p>oh</p>
 
 #### [ Andrew Ashworth (Apr 12 2018 at 00:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/X_of_Y_of_Z%20naming/near/124955179):
-i have seen `imp` used in theorem names
+<p>i have seen <code>imp</code> used in theorem names</p>
 
 #### [ Simon Hudon (Apr 12 2018 at 00:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/X_of_Y_of_Z%20naming/near/124955181):
-```quote
-I don't know these fancy CS terms like consequent by the way
-```
-I wonder if we could create a sitcom where a mathematician and a computer scientist share a flat. I'm sure they'd get into lots of crazy (conceptual) hijinks
+<blockquote>
+<p>I don't know these fancy CS terms like consequent by the way</p>
+</blockquote>
+<p>I wonder if we could create a sitcom where a mathematician and a computer scientist share a flat. I'm sure they'd get into lots of crazy (conceptual) hijinks</p>
 
 #### [ Andrew Ashworth (Apr 12 2018 at 00:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/X_of_Y_of_Z%20naming/near/124955184):
-so `(a->b)->c` is `c_of_a_imp_b`
+<p>so <code>(a-&gt;b)-&gt;c</code> is <code>c_of_a_imp_b</code></p>
 
 #### [ Simon Hudon (Apr 12 2018 at 00:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/X_of_Y_of_Z%20naming/near/124955228):
-```quote
-if i had to guess i would think like simon it's right assoc
-```
-I don't think that's an associativity rule actually.
+<blockquote>
+<p>if i had to guess i would think like simon it's right assoc</p>
+</blockquote>
+<p>I don't think that's an associativity rule actually.</p>
 
 #### [ Andrew Ashworth (Apr 12 2018 at 00:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/X_of_Y_of_Z%20naming/near/124955235):
-if it isn't that way, it should be, it should follow the same rules as `->`
+<p>if it isn't that way, it should be, it should follow the same rules as <code>-&gt;</code></p>
 
 #### [ Andrew Ashworth (Apr 12 2018 at 00:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/X_of_Y_of_Z%20naming/near/124955238):
-otherwise my brain may explode
+<p>otherwise my brain may explode</p>
 
 #### [ Simon Hudon (Apr 12 2018 at 00:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/X_of_Y_of_Z%20naming/near/124955256):
-As for `imp`, the difference is that you use `imp` where you would normally use `le` or `lt`: `and_imp_and_of_imp_of_imp` for example to state that conjunction is monotonic in both arguments
+<p>As for <code>imp</code>, the difference is that you use <code>imp</code> where you would normally use <code>le</code> or <code>lt</code>: <code>and_imp_and_of_imp_of_imp</code> for example to state that conjunction is monotonic in both arguments</p>
 
 #### [ Andrew Ashworth (Apr 12 2018 at 00:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/X_of_Y_of_Z%20naming/near/124955306):
-frankly speaking, trying to remember how a theorem should be named is kinda of ridiculous. when lean 4 comes out i'm sure @**Moses Schönfinkel** will write the Lean SearchAbout we've been waiting for :)
+<p>frankly speaking, trying to remember how a theorem should be named is kinda of ridiculous. when lean 4 comes out i'm sure <span class="user-mention" data-user-id="110027">@Moses Schönfinkel</span> will write the Lean SearchAbout we've been waiting for :)</p>
 
 #### [ Andrew Ashworth (Apr 12 2018 at 01:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/X_of_Y_of_Z%20naming/near/124955407):
-i have the same general hatred when it comes to reading C++ qualifiers
+<p>i have the same general hatred when it comes to reading C++ qualifiers</p>
 
 #### [ Andrew Ashworth (Apr 12 2018 at 01:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/X_of_Y_of_Z%20naming/near/124955416):
-the rule is, read it from the right and wrap around, which is terrible
+<p>the rule is, read it from the right and wrap around, which is terrible</p>
 
 #### [ Andrew Ashworth (Apr 12 2018 at 01:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/X_of_Y_of_Z%20naming/near/124955431):
-http://goshdarnfunctionpointers.com
+<p><a href="http://goshdarnfunctionpointers.com" target="_blank" title="http://goshdarnfunctionpointers.com">http://goshdarnfunctionpointers.com</a></p>
 
 #### [ Simon Hudon (Apr 12 2018 at 01:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/X_of_Y_of_Z%20naming/near/124955478):
-Now I remember that fun :)
+<p>Now I remember that fun :)</p>
 
 #### [ Kevin Buzzard (Apr 12 2018 at 01:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/X_of_Y_of_Z%20naming/near/124955781):
-Looking through mathlib it does seem to be consistently using `X_of_Y_of_Z : Y -> Z -> X`
+<p>Looking through mathlib it does seem to be consistently using <code>X_of_Y_of_Z : Y -&gt; Z -&gt; X</code></p>
 
 #### [ Kevin Buzzard (Apr 12 2018 at 01:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/X_of_Y_of_Z%20naming/near/124955786):
-and there was me thinking there would be some sort of logic ;-)
+<p>and there was me thinking there would be some sort of logic ;-)</p>
 
 #### [ Kevin Buzzard (Apr 12 2018 at 01:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/X_of_Y_of_Z%20naming/near/124955852):
-```
-lt_of_lt_of_le 
-lt_of_le_of_lt 
+<div class="codehilite"><pre><span></span>lt_of_lt_of_le
+lt_of_le_of_lt
 pos_of_dvd_of_pos
 decidable_of_decidable_of_iff
 neg_of_nat_of_succ
@@ -158,108 +157,109 @@ eq_of_sorted_of_perm
 heq_of_heq_of_eq
 decidable_of_decidable_of_iff
 div_of_neg_of_pos
-```
+</pre></div>
 
 #### [ Chris Hughes (Apr 12 2018 at 01:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/X_of_Y_of_Z%20naming/near/124956074):
-Does it really matter? If I want `pos_of_dvd_of_pos` and I get `pos_of_pos_of_dvd` they're both the same thing.
+<p>Does it really matter? If I want <code>pos_of_dvd_of_pos</code> and I get <code>pos_of_pos_of_dvd</code> they're both the same thing.</p>
 
 #### [ Kevin Buzzard (Apr 12 2018 at 01:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/X_of_Y_of_Z%20naming/near/124956089):
-oh they are very anal about names here :-)
+<p>oh they are very anal about names here :-)</p>
 
 #### [ Kevin Buzzard (Apr 12 2018 at 01:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/X_of_Y_of_Z%20naming/near/124956144):
-looking through that stacks file you wrote I see `lemma thingy ...` so perhaps you are less fussy than them ;-)
+<p>looking through that stacks file you wrote I see <code>lemma thingy ...</code> so perhaps you are less fussy than them ;-)</p>
 
 #### [ Simon Hudon (Apr 12 2018 at 01:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/X_of_Y_of_Z%20naming/near/124956317):
-The logic I see is: `<something>_of_<list_of_assumptions_separated_by_of>` and that list of assumptions is in the order that you should feed them to a function application if you build the proof term by hand. You could advocate for `<list_of_assumptions_separated_by_of>_of_<something>` so that the name mentions assumptions in the same order as the type but I think it's very useful that the first thing you see in the name is what you can achieve with it.
+<p>The logic I see is: <code>&lt;something&gt;_of_&lt;list_of_assumptions_separated_by_of&gt;</code> and that list of assumptions is in the order that you should feed them to a function application if you build the proof term by hand. You could advocate for <code>&lt;list_of_assumptions_separated_by_of&gt;_of_&lt;something&gt;</code> so that the name mentions assumptions in the same order as the type but I think it's very useful that the first thing you see in the name is what you can achieve with it.</p>
 
 #### [ Kevin Buzzard (Apr 12 2018 at 01:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/X_of_Y_of_Z%20naming/near/124956617):
-Yes that's why they went for of rather than imp, right? I like that, I just can't make any sense of the logic for the rest of it when there are two ofs
+<p>Yes that's why they went for of rather than imp, right? I like that, I just can't make any sense of the logic for the rest of it when there are two ofs</p>
 
 #### [ Simon Hudon (Apr 12 2018 at 01:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/X_of_Y_of_Z%20naming/near/124956706):
-You mean like `lt_of_lt_of_le`? It proves `lt` from two assumptions: 1. `lt`; 2. `le`. The order of those assumptions is the same as in the name
+<p>You mean like <code>lt_of_lt_of_le</code>? It proves <code>lt</code> from two assumptions: 1. <code>lt</code>; 2. <code>le</code>. The order of those assumptions is the same as in the name</p>
 
 #### [ Kevin Buzzard (Apr 12 2018 at 01:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/X_of_Y_of_Z%20naming/near/124956718):
-right, as in `lt_of_lt_and_le`
+<p>right, as in <code>lt_of_lt_and_le</code></p>
 
 #### [ Simon Hudon (Apr 12 2018 at 01:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/X_of_Y_of_Z%20naming/near/124956722):
-Yeah, exactly
+<p>Yeah, exactly</p>
 
 #### [ Kevin Buzzard (Apr 12 2018 at 01:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/X_of_Y_of_Z%20naming/near/124956763):
-but not as in `lt_is_implied_by_lt_which_is_implied_by_le`
+<p>but not as in <code>lt_is_implied_by_lt_which_is_implied_by_le</code></p>
 
 #### [ Kevin Buzzard (Apr 12 2018 at 01:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/X_of_Y_of_Z%20naming/near/124956769):
-i.e. not as in `lt_of_lt_of_le`
+<p>i.e. not as in <code>lt_of_lt_of_le</code></p>
 
 #### [ Kevin Buzzard (Apr 12 2018 at 01:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/X_of_Y_of_Z%20naming/near/124956776):
-if "of" is supposed to mean "is implied by"
+<p>if "of" is supposed to mean "is implied by"</p>
 
 #### [ Kevin Buzzard (Apr 12 2018 at 01:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/X_of_Y_of_Z%20naming/near/124956791):
-and also not as in "(lt_is_implied_by_lt)_is_implied_by_le"
+<p>and also not as in "(lt_is_implied_by_lt)_is_implied_by_le"</p>
 
 #### [ Kevin Buzzard (Apr 12 2018 at 01:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/X_of_Y_of_Z%20naming/near/124956839):
-but actually exactly as in "(lt_is_implied_by_le)_is_implied_by_lt"
+<p>but actually exactly as in "(lt_is_implied_by_le)_is_implied_by_lt"</p>
 
 #### [ Kevin Buzzard (Apr 12 2018 at 01:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/X_of_Y_of_Z%20naming/near/124956842):
-i.e. exactly "(lt_of_le)_of_lt"
+<p>i.e. exactly "(lt_of_le)_of_lt"</p>
 
 #### [ Simon Hudon (Apr 12 2018 at 01:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/X_of_Y_of_Z%20naming/near/124956847):
-Right. I guess that's where the associativity talk is relevant. It's `(lt of lt) of le` with the little twist that the assumptions are shuffled ..
+<p>Right. I guess that's where the associativity talk is relevant. It's <code>(lt of lt) of le</code> with the little twist that the assumptions are shuffled ..</p>
 
 #### [ Kevin Buzzard (Apr 12 2018 at 01:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/X_of_Y_of_Z%20naming/near/124956852):
-Aah
+<p>Aah</p>
 
 #### [ Kevin Buzzard (Apr 12 2018 at 01:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/X_of_Y_of_Z%20naming/near/124956860):
-for you `X -> Y ->Z` and `Y -> X -> Z` are exactly the same
+<p>for you <code>X -&gt; Y -&gt;Z</code> and <code>Y -&gt; X -&gt; Z</code> are exactly the same</p>
 
 #### [ Simon Hudon (Apr 12 2018 at 01:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/X_of_Y_of_Z%20naming/near/124956861):
-Yes. As you said
+<p>Yes. As you said</p>
 
 #### [ Simon Hudon (Apr 12 2018 at 01:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/X_of_Y_of_Z%20naming/near/124956866):
-Because it's equivalent to `lt_of_lt_and_le`, the assumptions commute
+<p>Because it's equivalent to <code>lt_of_lt_and_le</code>, the assumptions commute</p>
 
 #### [ Simon Hudon (Apr 12 2018 at 01:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/X_of_Y_of_Z%20naming/near/124956921):
-They are logically equivalent
+<p>They are logically equivalent</p>
 
 #### [ Kevin Buzzard (Apr 12 2018 at 01:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/X_of_Y_of_Z%20naming/near/124956924):
-so you're saying `lt_of_lt_of_le` and `lt_of_le_of_lt` should be defeq? ;-)
+<p>so you're saying <code>lt_of_lt_of_le</code> and <code>lt_of_le_of_lt</code> should be defeq? ;-)</p>
 
 #### [ Simon Hudon (Apr 12 2018 at 01:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/X_of_Y_of_Z%20naming/near/124956928):
-Nooooooo, no, no, no! :stuck_out_tongue_closed_eyes:
+<p>Nooooooo, no, no, no! <span class="emoji emoji-1f61d" title="stuck out tongue closed eyes">:stuck_out_tongue_closed_eyes:</span></p>
 
 #### [ Kevin Buzzard (Apr 12 2018 at 01:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/X_of_Y_of_Z%20naming/near/124956937):
-then why did you name one after what the other one does? ;-)
+<p>then why did you name one after what the other one does? ;-)</p>
 
 #### [ Simon Hudon (Apr 12 2018 at 01:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/X_of_Y_of_Z%20naming/near/124956942):
-Because I'm a bad person
+<p>Because I'm a bad person</p>
 
 #### [ Simon Hudon (Apr 12 2018 at 01:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/X_of_Y_of_Z%20naming/near/124957006):
-Of course the names leave out important information that we have to rely on your imagination to fill in. The full name should be `x_lt_z_of_x_lt_y_of_y_le_z`. Then swapping the assumptions is not semantically meaningful, it's just confusing.
+<p>Of course the names leave out important information that we have to rely on your imagination to fill in. The full name should be <code>x_lt_z_of_x_lt_y_of_y_le_z</code>. Then swapping the assumptions is not semantically meaningful, it's just confusing.</p>
 
 #### [ Simon Hudon (Apr 12 2018 at 01:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/X_of_Y_of_Z%20naming/near/124957015):
-Note: defeq and logically equivalent, are not the same by the way ;-)
+<p>Note: defeq and logically equivalent, are not the same by the way ;-)</p>
 
 #### [ Mario Carneiro (Apr 12 2018 at 02:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/X_of_Y_of_Z%20naming/near/124958788):
-The `X_of_Y_of_Z` means `Y -> Z -> X` convention is used throughout mathlib, and it was documented a long time ago in Jeremy's style notes
+<p>The <code>X_of_Y_of_Z</code> means <code>Y -&gt; Z -&gt; X</code> convention is used throughout mathlib, and it was documented a long time ago in Jeremy's style notes</p>
 
 #### [ Kevin Buzzard (Apr 12 2018 at 02:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/X_of_Y_of_Z%20naming/near/124958797):
-Yes, I learnt that now, from example
+<p>Yes, I learnt that now, from example</p>
 
 #### [ Kevin Buzzard (Apr 12 2018 at 02:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/X_of_Y_of_Z%20naming/near/124958799):
-I was just querying the logic
+<p>I was just querying the logic</p>
 
 #### [ Mario Carneiro (Apr 12 2018 at 02:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/X_of_Y_of_Z%20naming/near/124958807):
-> The hypotheses are listed in the order they appear, *not* reverse order. For example, the theorem `A → B → C` would be named `C_of_A_of_B`.
-
-https://github.com/leanprover/mathlib/blob/master/docs/naming.md
+<blockquote>
+<p>The hypotheses are listed in the order they appear, <em>not</em> reverse order. For example, the theorem <code>A → B → C</code> would be named <code>C_of_A_of_B</code>.</p>
+</blockquote>
+<p><a href="https://github.com/leanprover/mathlib/blob/master/docs/naming.md" target="_blank" title="https://github.com/leanprover/mathlib/blob/master/docs/naming.md">https://github.com/leanprover/mathlib/blob/master/docs/naming.md</a></p>
 
 #### [ Mario Carneiro (Apr 12 2018 at 02:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/X_of_Y_of_Z%20naming/near/124958868):
-The logic is, the consequent is the most important part, so it comes first (this is important for autocomplete), but otherwise there is no reshuffling of names from the order they appear in the statement or the order you use them
+<p>The logic is, the consequent is the most important part, so it comes first (this is important for autocomplete), but otherwise there is no reshuffling of names from the order they appear in the statement or the order you use them</p>
 
 #### [ Mario Carneiro (Apr 12 2018 at 02:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/X_of_Y_of_Z%20naming/near/124958921):
-Don't think too hard about currying these things, theorems are generally fully applied anyway
+<p>Don't think too hard about currying these things, theorems are generally fully applied anyway</p>
 
 #### [ Moses Schönfinkel (Apr 12 2018 at 10:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/X_of_Y_of_Z%20naming/near/124973894):
-@**Andrew Ashworth** I 100% will.
+<p><span class="user-mention" data-user-id="110025">@Andrew Ashworth</span> I 100% will.</p>
 
 
 {% endraw %}

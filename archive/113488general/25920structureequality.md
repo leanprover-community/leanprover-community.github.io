@@ -12,55 +12,55 @@ permalink: archive/113488general/25920structureequality.html
 
 {% raw %}
 #### [ Patrick Massot (Jul 06 2018 at 20:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/structure%20equality/near/129218426):
-How do we prove equality of two terms whose type is a structure mixing data and Prop? I would like to prove each data holding field matches. I thought this has something to do with `no_confusion` but I can't get it to work.
+<p>How do we prove equality of two terms whose type is a structure mixing data and Prop? I would like to prove each data holding field matches. I thought this has something to do with <code>no_confusion</code> but I can't get it to work.</p>
 
 #### [ Patrick Massot (Jul 06 2018 at 21:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/structure%20equality/near/129218697):
-Hum, it seems I can uses cases to access stuff here again.
+<p>Hum, it seems I can uses cases to access stuff here again.</p>
 
 #### [ Chris Hughes (Jul 06 2018 at 21:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/structure%20equality/near/129218843):
-```lean
-structure thing := (a : ℕ) (b : ℕ) 
+<div class="codehilite"><pre><span></span><span class="kn">structure</span> <span class="n">thing</span> <span class="o">:=</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">b</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span>
 
-example (a b c d : ℕ) : thing.mk a b = thing.mk c d :=
-begin
-   rw thing.mk.inj_eq,
-end
-```
+<span class="kn">example</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="n">d</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">thing</span><span class="bp">.</span><span class="n">mk</span> <span class="n">a</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">thing</span><span class="bp">.</span><span class="n">mk</span> <span class="n">c</span> <span class="n">d</span> <span class="o">:=</span>
+<span class="k">begin</span>
+   <span class="n">rw</span> <span class="n">thing</span><span class="bp">.</span><span class="n">mk</span><span class="bp">.</span><span class="n">inj_eq</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
 
-`simp` also works.
+
+<p><code>simp</code> also works.</p>
 
 #### [ Chris Hughes (Jul 06 2018 at 21:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/structure%20equality/near/129218950):
-I'm not sure what to do if you haven't done cases.
+<p>I'm not sure what to do if you haven't done cases.</p>
 
 #### [ Simon Hudon (Jul 06 2018 at 21:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/structure%20equality/near/129219284):
-You can also use `congr` or `congr'`
+<p>You can also use <code>congr</code> or <code>congr'</code></p>
 
 #### [ Chris Hughes (Jul 06 2018 at 21:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/structure%20equality/near/129219344):
-What's the difference between `congr` and `congr'`?
+<p>What's the difference between <code>congr</code> and <code>congr'</code>?</p>
 
 #### [ Simon Hudon (Jul 06 2018 at 21:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/structure%20equality/near/129219395):
-`congr'` takes an argument like `congr' 3` to ask for three iterations of congruence. `congr` just keeps going until it can't anymore. Often, `congr` goes too far
+<p><code>congr'</code> takes an argument like <code>congr' 3</code> to ask for three iterations of congruence. <code>congr</code> just keeps going until it can't anymore. Often, <code>congr</code> goes too far</p>
 
 #### [ Patrick Massot (Jul 06 2018 at 22:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/structure%20equality/near/129221654):
-Thanks Chris and Simon. `congr` and `simp` do nothing, `cases` both sides and `rw pequiv.mk.inj_eq ; cc` did the trick
+<p>Thanks Chris and Simon. <code>congr</code> and <code>simp</code> do nothing, <code>cases</code> both sides and <code>rw pequiv.mk.inj_eq ; cc</code> did the trick</p>
 
 #### [ Simon Hudon (Jul 06 2018 at 22:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/structure%20equality/near/129221846):
-Sorry, I didn't mention, in either case, you need to `cases` both sides
+<p>Sorry, I didn't mention, in either case, you need to <code>cases</code> both sides</p>
 
 #### [ Patrick Massot (Jul 06 2018 at 22:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/structure%20equality/near/129222086):
-Correction, after cases both sides, `congr ; cc` also works
+<p>Correction, after cases both sides, <code>congr ; cc</code> also works</p>
 
 #### [ Patrick Massot (Jul 06 2018 at 22:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/structure%20equality/near/129222164):
-and `congr ; tauto` of course
+<p>and <code>congr ; tauto</code> of course</p>
 
 #### [ Simon Hudon (Jul 06 2018 at 22:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/structure%20equality/near/129222707):
-I'm wrapping up a round of optimization of `tauto`. When it works, it should be faster than `cc`
+<p>I'm wrapping up a round of optimization of <code>tauto</code>. When it works, it should be faster than <code>cc</code></p>
 
 #### [ Simon Hudon (Jul 06 2018 at 22:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/structure%20equality/near/129222733):
-(and now, it should work more often than before)
+<p>(and now, it should work more often than before)</p>
 
 #### [ Patrick Massot (Jul 06 2018 at 22:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/structure%20equality/near/129222738):
-Great!
+<p>Great!</p>
 
 
 {% endraw %}

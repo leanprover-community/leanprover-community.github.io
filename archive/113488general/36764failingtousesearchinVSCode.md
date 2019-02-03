@@ -12,214 +12,220 @@ permalink: archive/113488general/36764failingtousesearchinVSCode.html
 
 {% raw %}
 #### [ Kevin Buzzard (May 03 2018 at 12:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/failing%20to%20use%20search%20in%20VS%20Code/near/126038688):
-I don't know how to search properly in VS Code. I am just doing something really stupid. I'm writing a new file, I have no imports at all, I type `[group G]` and it works, I type `[is_group_hom f]` and it doesn't. I know that `is_group_hom` is there somewhere. Here's my workflow:
+<p>I don't know how to search properly in VS Code. I am just doing something really stupid. I'm writing a new file, I have no imports at all, I type <code>[group G]</code> and it works, I type <code>[is_group_hom f]</code> and it doesn't. I know that <code>is_group_hom</code> is there somewhere. Here's my workflow:</p>
 
 #### [ Kevin Buzzard (May 03 2018 at 12:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/failing%20to%20use%20search%20in%20VS%20Code/near/126038745):
-1) I click on the magnifying class in VS Code (with a project open which has mathlib as an import) and I search for `is_group_hom`. The only results I get are the instance in the file I just wrote, and two other instances in the *comments* in a file I'm not interested in (so in particular I can't go to this other piece of code and right click on is_group_hom)
+<p>1) I click on the magnifying class in VS Code (with a project open which has mathlib as an import) and I search for <code>is_group_hom</code>. The only results I get are the instance in the file I just wrote, and two other instances in the <em>comments</em> in a file I'm not interested in (so in particular I can't go to this other piece of code and right click on is_group_hom)</p>
 
 #### [ Kevin Buzzard (May 03 2018 at 12:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/failing%20to%20use%20search%20in%20VS%20Code/near/126038749):
-2) Think "I am rubbish at using VS Code search"
+<p>2) Think "I am rubbish at using VS Code search"</p>
 
 #### [ Kevin Buzzard (May 03 2018 at 12:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/failing%20to%20use%20search%20in%20VS%20Code/near/126038752):
-3) grep the source code and find it in seconds.
+<p>3) grep the source code and find it in seconds.</p>
 
 #### [ Kevin Buzzard (May 03 2018 at 12:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/failing%20to%20use%20search%20in%20VS%20Code/near/126038757):
-in mathlib in `algebra.group`. What am I doing wrong?
+<p>in mathlib in <code>algebra.group</code>. What am I doing wrong?</p>
 
 #### [ Kenny Lau (May 03 2018 at 12:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/failing%20to%20use%20search%20in%20VS%20Code/near/126038770):
-[2018-05-03-2.png](/user_uploads/3121/JTu5apknT8ioLvVRLi6qQHM4/2018-05-03-2.png)
+<p><a href="/user_uploads/3121/JTu5apknT8ioLvVRLi6qQHM4/2018-05-03-2.png" target="_blank" title="2018-05-03-2.png">2018-05-03-2.png</a></p>
+<div class="message_inline_image"><a href="/user_uploads/3121/JTu5apknT8ioLvVRLi6qQHM4/2018-05-03-2.png" target="_blank" title="2018-05-03-2.png"><img src="/user_uploads/3121/JTu5apknT8ioLvVRLi6qQHM4/2018-05-03-2.png"></a></div>
 
 #### [ Kevin Buzzard (May 03 2018 at 12:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/failing%20to%20use%20search%20in%20VS%20Code/near/126038814):
-How do I tell my VS Code to look where yours is looking
+<p>How do I tell my VS Code to look where yours is looking</p>
 
 #### [ Kenny Lau (May 03 2018 at 12:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/failing%20to%20use%20search%20in%20VS%20Code/near/126038817):
-what does the search result look like for you?
+<p>what does the search result look like for you?</p>
 
 #### [ Kevin Buzzard (May 03 2018 at 12:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/failing%20to%20use%20search%20in%20VS%20Code/near/126038827):
-[is_group_hom.png](/user_uploads/3121/o4I8ufTMQcIiUYh1cfZQfjoA/is_group_hom.png)
+<p><a href="/user_uploads/3121/o4I8ufTMQcIiUYh1cfZQfjoA/is_group_hom.png" target="_blank" title="is_group_hom.png">is_group_hom.png</a></p>
+<div class="message_inline_image"><a href="/user_uploads/3121/o4I8ufTMQcIiUYh1cfZQfjoA/is_group_hom.png" target="_blank" title="is_group_hom.png"><img src="/user_uploads/3121/o4I8ufTMQcIiUYh1cfZQfjoA/is_group_hom.png"></a></div>
 
 #### [ Chris Hughes (May 03 2018 at 12:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/failing%20to%20use%20search%20in%20VS%20Code/near/126038849):
-Do you have mathlib open as a folder?
+<p>Do you have mathlib open as a folder?</p>
 
 #### [ Kenny Lau (May 03 2018 at 12:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/failing%20to%20use%20search%20in%20VS%20Code/near/126038877):
-ctrl+shift+e
+<p>ctrl+shift+e</p>
 
 #### [ Kenny Lau (May 03 2018 at 12:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/failing%20to%20use%20search%20in%20VS%20Code/near/126038882):
-and screenshot
+<p>and screenshot</p>
 
 #### [ Kenny Lau (May 03 2018 at 12:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/failing%20to%20use%20search%20in%20VS%20Code/near/126038885):
-[2018-05-03-3.png](/user_uploads/3121/2TiT6Be0I94H7YWV1WFKWBlZ/2018-05-03-3.png)
+<p><a href="/user_uploads/3121/2TiT6Be0I94H7YWV1WFKWBlZ/2018-05-03-3.png" target="_blank" title="2018-05-03-3.png">2018-05-03-3.png</a></p>
+<div class="message_inline_image"><a href="/user_uploads/3121/2TiT6Be0I94H7YWV1WFKWBlZ/2018-05-03-3.png" target="_blank" title="2018-05-03-3.png"><img src="/user_uploads/3121/2TiT6Be0I94H7YWV1WFKWBlZ/2018-05-03-3.png"></a></div>
 
 #### [ Sebastian Ullrich (May 03 2018 at 12:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/failing%20to%20use%20search%20in%20VS%20Code/near/126038889):
-"Also note the Use Exclude Settings and Ignore Files toggle button in the files to exclude box. The toggle determines whether to exclude files that are ignored by your .gitignore files [...]"
-`_target` is in `.gitignore`
+<p>"Also note the Use Exclude Settings and Ignore Files toggle button in the files to exclude box. The toggle determines whether to exclude files that are ignored by your .gitignore files [...]"<br>
+<code>_target</code> is in <code>.gitignore</code></p>
 
 #### [ Kevin Buzzard (May 03 2018 at 12:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/failing%20to%20use%20search%20in%20VS%20Code/near/126038902):
-[open_stuff.png](/user_uploads/3121/h7riDfVuoldfp6pyviUn20Io/open_stuff.png)
+<p><a href="/user_uploads/3121/h7riDfVuoldfp6pyviUn20Io/open_stuff.png" target="_blank" title="open_stuff.png">open_stuff.png</a></p>
+<div class="message_inline_image"><a href="/user_uploads/3121/h7riDfVuoldfp6pyviUn20Io/open_stuff.png" target="_blank" title="open_stuff.png"><img src="/user_uploads/3121/h7riDfVuoldfp6pyviUn20Io/open_stuff.png"></a></div>
 
 #### [ Sebastian Ullrich (May 03 2018 at 12:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/failing%20to%20use%20search%20in%20VS%20Code/near/126038903):
-https://code.visualstudio.com/docs/editor/codebasics#_search-across-files
+<p><a href="https://code.visualstudio.com/docs/editor/codebasics#_search-across-files" target="_blank" title="https://code.visualstudio.com/docs/editor/codebasics#_search-across-files">https://code.visualstudio.com/docs/editor/codebasics#_search-across-files</a></p>
 
 #### [ Kenny Lau (May 03 2018 at 12:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/failing%20to%20use%20search%20in%20VS%20Code/near/126038943):
-@**Kevin Buzzard** could you contract all your workspace folders
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> could you contract all your workspace folders</p>
 
 #### [ Kenny Lau (May 03 2018 at 12:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/failing%20to%20use%20search%20in%20VS%20Code/near/126038945):
-and see if mathlib is open
+<p>and see if mathlib is open</p>
 
 #### [ Kenny Lau (May 03 2018 at 12:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/failing%20to%20use%20search%20in%20VS%20Code/near/126038946):
-if not, drag mathlib into your workspace as the bottom folder and things should work fine
+<p>if not, drag mathlib into your workspace as the bottom folder and things should work fine</p>
 
 #### [ Kevin Buzzard (May 03 2018 at 12:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/failing%20to%20use%20search%20in%20VS%20Code/near/126038947):
-I have `_target` and mathlib is in there I promise
+<p>I have <code>_target</code> and mathlib is in there I promise</p>
 
 #### [ Kevin Buzzard (May 03 2018 at 12:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/failing%20to%20use%20search%20in%20VS%20Code/near/126038953):
-I don't understand the advanced options for file include/exclude: it just says "files to include/exclude" and then lets me type in a list of files without explaining how to ensure they are either included or excluded
+<p>I don't understand the advanced options for file include/exclude: it just says "files to include/exclude" and then lets me type in a list of files without explaining how to ensure they are either included or excluded</p>
 
 #### [ Kenny Lau (May 03 2018 at 12:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/failing%20to%20use%20search%20in%20VS%20Code/near/126038956):
-hmm
+<p>hmm</p>
 
 #### [ Kevin Buzzard (May 03 2018 at 12:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/failing%20to%20use%20search%20in%20VS%20Code/near/126038996):
-So I've not needed to play with included/excluded
+<p>So I've not needed to play with included/excluded</p>
 
 #### [ Kevin Buzzard (May 03 2018 at 12:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/failing%20to%20use%20search%20in%20VS%20Code/near/126038997):
-I have just randomly clicked around and opened some directories in the ctrl-shift-E view
+<p>I have just randomly clicked around and opened some directories in the ctrl-shift-E view</p>
 
 #### [ Kevin Buzzard (May 03 2018 at 12:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/failing%20to%20use%20search%20in%20VS%20Code/near/126038998):
-and now it works
+<p>and now it works</p>
 
 #### [ Kenny Lau (May 03 2018 at 12:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/failing%20to%20use%20search%20in%20VS%20Code/near/126038999):
-what?
+<p>what?</p>
 
 #### [ Kevin Buzzard (May 03 2018 at 12:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/failing%20to%20use%20search%20in%20VS%20Code/near/126039007):
-now everything is closed and it works
+<p>now everything is closed and it works</p>
 
 #### [ Kevin Buzzard (May 03 2018 at 12:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/failing%20to%20use%20search%20in%20VS%20Code/near/126039008):
-It is completely hit-and-miss for me
+<p>It is completely hit-and-miss for me</p>
 
 #### [ Chris Hughes (May 03 2018 at 12:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/failing%20to%20use%20search%20in%20VS%20Code/near/126039009):
-!scratch.lean excludes the file scratch.lean includes it
+<p>!scratch.lean excludes the file scratch.lean includes it</p>
 
 #### [ Kenny Lau (May 03 2018 at 12:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/failing%20to%20use%20search%20in%20VS%20Code/near/126039010):
-this is very interesting
+<p>this is very interesting</p>
 
 #### [ Kevin Buzzard (May 03 2018 at 12:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/failing%20to%20use%20search%20in%20VS%20Code/near/126039013):
-I now have what looks to me like exactly the same set-up, with no obvious parameters having been changed, and search works find
+<p>I now have what looks to me like exactly the same set-up, with no obvious parameters having been changed, and search works find</p>
 
 #### [ Kevin Buzzard (May 03 2018 at 12:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/failing%20to%20use%20search%20in%20VS%20Code/near/126039014):
-fine
+<p>fine</p>
 
 #### [ Kevin Buzzard (May 03 2018 at 12:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/failing%20to%20use%20search%20in%20VS%20Code/near/126039053):
-There is some basic thing which I am constantly running into and not spotting.
+<p>There is some basic thing which I am constantly running into and not spotting.</p>
 
 #### [ Sebastian Ullrich (May 03 2018 at 12:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/failing%20to%20use%20search%20in%20VS%20Code/near/126039056):
-"Also note the Use Exclude Settings and Ignore Files **toggle button** in the files to exclude box." :)
+<p>"Also note the Use Exclude Settings and Ignore Files <strong>toggle button</strong> in the files to exclude box." :)</p>
 
 #### [ Kevin Buzzard (May 03 2018 at 12:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/failing%20to%20use%20search%20in%20VS%20Code/near/126039103):
-IT'S THE TOGGLE BUTTON
+<p>IT'S THE TOGGLE BUTTON</p>
 
 #### [ Kenny Lau (May 03 2018 at 12:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/failing%20to%20use%20search%20in%20VS%20Code/near/126039106):
-lmao
+<p>lmao</p>
 
 #### [ Kevin Buzzard (May 03 2018 at 12:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/failing%20to%20use%20search%20in%20VS%20Code/near/126039107):
-I can search!
+<p>I can search!</p>
 
 #### [ Kevin Buzzard (May 03 2018 at 12:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/failing%20to%20use%20search%20in%20VS%20Code/near/126039110):
-I thought that was a settings button opening an empty menu. I hadn't noticed it was changing colour
+<p>I thought that was a settings button opening an empty menu. I hadn't noticed it was changing colour</p>
 
 #### [ Kevin Buzzard (May 03 2018 at 12:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/failing%20to%20use%20search%20in%20VS%20Code/near/126039116):
-the nightmare is over
+<p>the nightmare is over</p>
 
 #### [ Kevin Buzzard (May 03 2018 at 12:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/failing%20to%20use%20search%20in%20VS%20Code/near/126039117):
-Thanks both of you :-)
+<p>Thanks both of you :-)</p>
 
 #### [ Kevin Buzzard (May 03 2018 at 12:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/failing%20to%20use%20search%20in%20VS%20Code/near/126039183):
-I need to start wearing my glasses when I'm doing this stuff :-/
+<p>I need to start wearing my glasses when I'm doing this stuff :-/</p>
 
 #### [ Kevin Buzzard (May 03 2018 at 12:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/failing%20to%20use%20search%20in%20VS%20Code/near/126039223):
-I didn't even see the `!` in the greyed out text. Thanks Chris.
+<p>I didn't even see the <code>!</code> in the greyed out text. Thanks Chris.</p>
 
 #### [ Kevin Buzzard (May 03 2018 at 12:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/failing%20to%20use%20search%20in%20VS%20Code/near/126039431):
-And here's another thing I fail at. If I open `algebra/group.lean` in mathlib
+<p>And here's another thing I fail at. If I open <code>algebra/group.lean</code> in mathlib</p>
 
 #### [ Kevin Buzzard (May 03 2018 at 12:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/failing%20to%20use%20search%20in%20VS%20Code/near/126039441):
-I see on line 497 that there's a theorem called `mul`
+<p>I see on line 497 that there's a theorem called <code>mul</code></p>
 
 #### [ Kevin Buzzard (May 03 2018 at 12:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/failing%20to%20use%20search%20in%20VS%20Code/near/126039446):
-but that `mul` won't be in the root namespace, I'm pretty sure. How do I find out the full name of that function?
+<p>but that <code>mul</code> won't be in the root namespace, I'm pretty sure. How do I find out the full name of that function?</p>
 
 #### [ Kevin Buzzard (May 03 2018 at 12:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/failing%20to%20use%20search%20in%20VS%20Code/near/126039449):
-The problem is that I might be in a namespace
+<p>The problem is that I might be in a namespace</p>
 
 #### [ Kevin Buzzard (May 03 2018 at 12:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/failing%20to%20use%20search%20in%20VS%20Code/near/126039452):
-What I do currently is I simply edit `algebra/group.lean`
+<p>What I do currently is I simply edit <code>algebra/group.lean</code></p>
 
 #### [ Kenny Lau (May 03 2018 at 12:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/failing%20to%20use%20search%20in%20VS%20Code/near/126039453):
-search for `namespace` on the file lol
+<p>search for <code>namespace</code> on the file lol</p>
 
 #### [ Kevin Buzzard (May 03 2018 at 12:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/failing%20to%20use%20search%20in%20VS%20Code/near/126039456):
-which is something I don't really like doing
+<p>which is something I don't really like doing</p>
 
 #### [ Kevin Buzzard (May 03 2018 at 12:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/failing%20to%20use%20search%20in%20VS%20Code/near/126039459):
-I don't want to start searching
+<p>I don't want to start searching</p>
 
 #### [ Kevin Buzzard (May 03 2018 at 12:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/failing%20to%20use%20search%20in%20VS%20Code/near/126039460):
-I just want to know the answer
+<p>I just want to know the answer</p>
 
 #### [ Kevin Buzzard (May 03 2018 at 12:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/failing%20to%20use%20search%20in%20VS%20Code/near/126039461):
-say the file uses 10 namespaces, some within others
+<p>say the file uses 10 namespaces, some within others</p>
 
 #### [ Kevin Buzzard (May 03 2018 at 12:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/failing%20to%20use%20search%20in%20VS%20Code/near/126039463):
-I have to check all their names and when they're closed
+<p>I have to check all their names and when they're closed</p>
 
 #### [ Kevin Buzzard (May 03 2018 at 12:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/failing%20to%20use%20search%20in%20VS%20Code/near/126039465):
-I might have to move around a large file
+<p>I might have to move around a large file</p>
 
 #### [ Kevin Buzzard (May 03 2018 at 12:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/failing%20to%20use%20search%20in%20VS%20Code/near/126039466):
-What I currently do is under the definition of `mul` in the file I just write `#print mul`
+<p>What I currently do is under the definition of <code>mul</code> in the file I just write <code>#print mul</code></p>
 
 #### [ Kevin Buzzard (May 03 2018 at 12:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/failing%20to%20use%20search%20in%20VS%20Code/near/126039504):
-This gives me the prefix
+<p>This gives me the prefix</p>
 
 #### [ Kevin Buzzard (May 03 2018 at 12:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/failing%20to%20use%20search%20in%20VS%20Code/near/126039507):
-then I ctrl-Z to get rid of my edits
+<p>then I ctrl-Z to get rid of my edits</p>
 
 #### [ Kevin Buzzard (May 03 2018 at 12:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/failing%20to%20use%20search%20in%20VS%20Code/near/126039508):
-It strikes me as an amateurish approach
+<p>It strikes me as an amateurish approach</p>
 
 #### [ Kenny Lau (May 03 2018 at 12:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/failing%20to%20use%20search%20in%20VS%20Code/near/126039510):
-@**Sebastian Ullrich**
+<p><span class="user-mention" data-user-id="110024">@Sebastian Ullrich</span></p>
 
 #### [ Kevin Buzzard (May 03 2018 at 12:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/failing%20to%20use%20search%20in%20VS%20Code/near/126039511):
-but mouse hover over mul doesn't do anything
+<p>but mouse hover over mul doesn't do anything</p>
 
 #### [ Kevin Buzzard (May 03 2018 at 12:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/failing%20to%20use%20search%20in%20VS%20Code/near/126039512):
-and right click on mul doesn't work
+<p>and right click on mul doesn't work</p>
 
 #### [ Kevin Buzzard (May 03 2018 at 12:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/failing%20to%20use%20search%20in%20VS%20Code/near/126039516):
-"no definition found for mul"
+<p>"no definition found for mul"</p>
 
 #### [ Kenny Lau (May 03 2018 at 12:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/failing%20to%20use%20search%20in%20VS%20Code/near/126039521):
-I mean, I'll just import that file in a sandbox and type `#check mul` and ctrl+space
+<p>I mean, I'll just import that file in a sandbox and type <code>#check mul</code> and ctrl+space</p>
 
 #### [ Kenny Lau (May 03 2018 at 12:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/failing%20to%20use%20search%20in%20VS%20Code/near/126039523):
-ctrl+space works quite well
+<p>ctrl+space works quite well</p>
 
 #### [ Kevin Buzzard (May 03 2018 at 12:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/failing%20to%20use%20search%20in%20VS%20Code/near/126039524):
-My method has the advantage that I never lose sight of the theorem I want
+<p>My method has the advantage that I never lose sight of the theorem I want</p>
 
 #### [ Kevin Buzzard (May 03 2018 at 12:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/failing%20to%20use%20search%20in%20VS%20Code/near/126039529):
-aah that's an idea which will probably work well in many situations
+<p>aah that's an idea which will probably work well in many situations</p>
 
 #### [ Sebastian Ullrich (May 03 2018 at 12:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/failing%20to%20use%20search%20in%20VS%20Code/near/126039573):
-You're right, it would make sense if the definition had the same mouseover as its references
+<p>You're right, it would make sense if the definition had the same mouseover as its references</p>
 
 #### [ Reid Barton (May 03 2018 at 16:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/failing%20to%20use%20search%20in%20VS%20Code/near/126048674):
-I use emacs, but this is something I've wished for too: the ability to see at a keystroke
-* which namespaces the current location is inside
-* what variables/parameters are in scope at the current location
+<p>I use emacs, but this is something I've wished for too: the ability to see at a keystroke</p>
+<ul>
+<li>which namespaces the current location is inside</li>
+<li>what variables/parameters are in scope at the current location</li>
+</ul>
 
 #### [ Reid Barton (May 03 2018 at 16:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/failing%20to%20use%20search%20in%20VS%20Code/near/126048677):
-I don't know if this can be implemented without extending lean
+<p>I don't know if this can be implemented without extending lean</p>
 
 
 {% endraw %}

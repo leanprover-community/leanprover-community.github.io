@@ -12,43 +12,43 @@ permalink: archive/113489newmembers/62387spotthedifference.html
 
 {% raw %}
 #### [ Kenny Lau (Jan 11 2019 at 13:28)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/spot%20the%20difference/near/154913709):
-```lean
-invalid type ascription, term has type
-  @function.injective.{1 1} (pre_von_Neumann n) (pre_von_Neumann m)
-    (@nat.le_rec_on.{1} (λ (n : nat), pre_von_Neumann n) (λ (n : nat), @pre_von_Neumann.next n) n m H)
-but is expected to have type
-  @function.injective.{1 1} (pre_von_Neumann n) (pre_von_Neumann m)
-    (@nat.le_rec_on.{1} pre_von_Neumann (λ (n : nat), @pre_von_Neumann.next n) n m H)
+<div class="codehilite"><pre><span></span><span class="n">invalid</span> <span class="n">type</span> <span class="n">ascription</span><span class="o">,</span> <span class="n">term</span> <span class="n">has</span> <span class="n">type</span>
+  <span class="bp">@</span><span class="n">function</span><span class="bp">.</span><span class="n">injective</span><span class="bp">.</span><span class="o">{</span><span class="mi">1</span> <span class="mi">1</span><span class="o">}</span> <span class="o">(</span><span class="n">pre_von_Neumann</span> <span class="n">n</span><span class="o">)</span> <span class="o">(</span><span class="n">pre_von_Neumann</span> <span class="n">m</span><span class="o">)</span>
+    <span class="o">(</span><span class="bp">@</span><span class="n">nat</span><span class="bp">.</span><span class="n">le_rec_on</span><span class="bp">.</span><span class="o">{</span><span class="mi">1</span><span class="o">}</span> <span class="o">(</span><span class="bp">λ</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">nat</span><span class="o">),</span> <span class="n">pre_von_Neumann</span> <span class="n">n</span><span class="o">)</span> <span class="o">(</span><span class="bp">λ</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">nat</span><span class="o">),</span> <span class="bp">@</span><span class="n">pre_von_Neumann</span><span class="bp">.</span><span class="n">next</span> <span class="n">n</span><span class="o">)</span> <span class="n">n</span> <span class="n">m</span> <span class="n">H</span><span class="o">)</span>
+<span class="n">but</span> <span class="n">is</span> <span class="n">expected</span> <span class="n">to</span> <span class="k">have</span> <span class="n">type</span>
+  <span class="bp">@</span><span class="n">function</span><span class="bp">.</span><span class="n">injective</span><span class="bp">.</span><span class="o">{</span><span class="mi">1</span> <span class="mi">1</span><span class="o">}</span> <span class="o">(</span><span class="n">pre_von_Neumann</span> <span class="n">n</span><span class="o">)</span> <span class="o">(</span><span class="n">pre_von_Neumann</span> <span class="n">m</span><span class="o">)</span>
+    <span class="o">(</span><span class="bp">@</span><span class="n">nat</span><span class="bp">.</span><span class="n">le_rec_on</span><span class="bp">.</span><span class="o">{</span><span class="mi">1</span><span class="o">}</span> <span class="n">pre_von_Neumann</span> <span class="o">(</span><span class="bp">λ</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">nat</span><span class="o">),</span> <span class="bp">@</span><span class="n">pre_von_Neumann</span><span class="bp">.</span><span class="n">next</span> <span class="n">n</span><span class="o">)</span> <span class="n">n</span> <span class="n">m</span> <span class="n">H</span><span class="o">)</span>
 
-state:
-n m : nat,
-H : @has_le.le.{0} nat nat.has_le n m
-⊢ @function.injective.{1 1} (pre_von_Neumann n) (pre_von_Neumann m)
-    (@nat.le_rec_on.{1} pre_von_Neumann (λ (n : nat), @pre_von_Neumann.next n) n m H)
-```
+<span class="n">state</span><span class="o">:</span>
+<span class="n">n</span> <span class="n">m</span> <span class="o">:</span> <span class="n">nat</span><span class="o">,</span>
+<span class="n">H</span> <span class="o">:</span> <span class="bp">@</span><span class="n">has_le</span><span class="bp">.</span><span class="n">le</span><span class="bp">.</span><span class="o">{</span><span class="mi">0</span><span class="o">}</span> <span class="n">nat</span> <span class="n">nat</span><span class="bp">.</span><span class="n">has_le</span> <span class="n">n</span> <span class="n">m</span>
+<span class="err">⊢</span> <span class="bp">@</span><span class="n">function</span><span class="bp">.</span><span class="n">injective</span><span class="bp">.</span><span class="o">{</span><span class="mi">1</span> <span class="mi">1</span><span class="o">}</span> <span class="o">(</span><span class="n">pre_von_Neumann</span> <span class="n">n</span><span class="o">)</span> <span class="o">(</span><span class="n">pre_von_Neumann</span> <span class="n">m</span><span class="o">)</span>
+    <span class="o">(</span><span class="bp">@</span><span class="n">nat</span><span class="bp">.</span><span class="n">le_rec_on</span><span class="bp">.</span><span class="o">{</span><span class="mi">1</span><span class="o">}</span> <span class="n">pre_von_Neumann</span> <span class="o">(</span><span class="bp">λ</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">nat</span><span class="o">),</span> <span class="bp">@</span><span class="n">pre_von_Neumann</span><span class="bp">.</span><span class="n">next</span> <span class="n">n</span><span class="o">)</span> <span class="n">n</span> <span class="n">m</span> <span class="n">H</span><span class="o">)</span>
+</pre></div>
 
 #### [ Johan Commelin (Jan 11 2019 at 13:30)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/spot%20the%20difference/near/154913801):
-Ouch... that must hurt. `(λ (n : nat), pre_von_Neumann n)` ought to be defeq to `pre_von_Neumann`.
+<p>Ouch... that must hurt. <code>(λ (n : nat), pre_von_Neumann n)</code> ought to be defeq to <code>pre_von_Neumann</code>.</p>
 
 #### [ Kenny Lau (Jan 11 2019 at 13:32)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/spot%20the%20difference/near/154913885):
-ok `convert [...]; ext; refl` worked
+<p>ok <code>convert [...]; ext; refl</code> worked</p>
 
 #### [ Kenny Lau (Jan 11 2019 at 13:36)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/spot%20the%20difference/near/154914109):
-@**Sebastian Ullrich** will this be fixed in Lean 4?
+<p><span class="user-mention" data-user-id="110024">@Sebastian Ullrich</span> will this be fixed in Lean 4?</p>
 
 #### [ Kenny Lau (Jan 11 2019 at 13:55)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/spot%20the%20difference/near/154915053):
-MWE:
-```lean
-def A : ℕ → Type
-| nat.zero     := empty
-| (nat.succ n) := A n → empty
+<p>MWE:</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">A</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="kt">Type</span>
+<span class="bp">|</span> <span class="n">nat</span><span class="bp">.</span><span class="n">zero</span>     <span class="o">:=</span> <span class="n">empty</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">n</span><span class="o">)</span> <span class="o">:=</span> <span class="n">A</span> <span class="n">n</span> <span class="bp">→</span> <span class="n">empty</span>
 
-example : A = λ n, A n := rfl -- fails
-```
-@**Mario Carneiro**
+<span class="kn">example</span> <span class="o">:</span> <span class="n">A</span> <span class="bp">=</span> <span class="bp">λ</span> <span class="n">n</span><span class="o">,</span> <span class="n">A</span> <span class="n">n</span> <span class="o">:=</span> <span class="n">rfl</span> <span class="c1">-- fails</span>
+</pre></div>
+
+
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span></p>
 
 #### [ Kevin Buzzard (Jan 11 2019 at 16:20)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/spot%20the%20difference/near/154923694):
-"Probably a bug", says Sebastian
+<p>"Probably a bug", says Sebastian</p>
 
 
 {% endraw %}

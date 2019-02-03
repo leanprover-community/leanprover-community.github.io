@@ -12,20 +12,19 @@ permalink: archive/113488general/53580calctactic.html
 
 {% raw %}
 #### [ Mario Carneiro (Jan 02 2019 at 15:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/calc%20tactic/near/154178076):
-I just noticed that `calc` is an interactive tactic which somehow unfolds to `exact calc` by magic
-```lean
-example (x : ℕ) : x + 0 = x :=
-begin
-  calc x + 0 = 0 + x : add_comm _ _
-         ... = x : zero_add _
-end
-```
+<p>I just noticed that <code>calc</code> is an interactive tactic which somehow unfolds to <code>exact calc</code> by magic</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">+</span> <span class="mi">0</span> <span class="bp">=</span> <span class="n">x</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="k">calc</span> <span class="n">x</span> <span class="bp">+</span> <span class="mi">0</span> <span class="bp">=</span> <span class="mi">0</span> <span class="bp">+</span> <span class="n">x</span> <span class="o">:</span> <span class="n">add_comm</span> <span class="bp">_</span> <span class="bp">_</span>
+         <span class="bp">...</span> <span class="bp">=</span> <span class="n">x</span> <span class="o">:</span> <span class="n">zero_add</span> <span class="bp">_</span>
+<span class="kn">end</span>
+</pre></div>
 
 #### [ Mario Carneiro (Jan 02 2019 at 15:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/calc%20tactic/near/154178117):
-I'm not sure exactly how this works, since `tactic.interactive.calc` doesn't exist
+<p>I'm not sure exactly how this works, since <code>tactic.interactive.calc</code> doesn't exist</p>
 
 #### [ Mario Carneiro (Jan 02 2019 at 15:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/calc%20tactic/near/154178355):
-yep, it's hardcoded - `calc` turns into `exact calc` (https://github.com/leanprover/lean/blob/master/src/frontends/lean/tactic_notation.cpp#L273-L276)
+<p>yep, it's hardcoded - <code>calc</code> turns into <code>exact calc</code> (<a href="https://github.com/leanprover/lean/blob/master/src/frontends/lean/tactic_notation.cpp#L273-L276" target="_blank" title="https://github.com/leanprover/lean/blob/master/src/frontends/lean/tactic_notation.cpp#L273-L276">https://github.com/leanprover/lean/blob/master/src/frontends/lean/tactic_notation.cpp#L273-L276</a>)</p>
 
 
 {% endraw %}

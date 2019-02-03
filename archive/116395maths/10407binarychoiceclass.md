@@ -12,24 +12,22 @@ permalink: archive/116395maths/10407binarychoiceclass.html
 
 {% raw %}
 #### [ Sean Leather (May 23 2018 at 11:21)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/binary%20choice%20class/near/126968229):
-Any thoughts (e.g. name and possible location in mathlib) on this class and instances? It's useful for the `finset` `max`/`min` stuff.
+<p>Any thoughts (e.g. name and possible location in mathlib) on this class and instances? It's useful for the <code>finset</code> <code>max</code>/<code>min</code> stuff.</p>
+<div class="codehilite"><pre><span></span><span class="n">class</span> <span class="n">has_choice</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="n">Sort</span><span class="bp">*</span><span class="o">}</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">choice</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">a</span> <span class="n">b</span><span class="o">,</span> <span class="n">f</span> <span class="n">a</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">a</span> <span class="bp">∨</span> <span class="n">f</span> <span class="n">a</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">b</span><span class="o">)</span>
 
-```lean
-class has_choice {α : Sort*} (f : α → α → α) : Prop :=
-(choice : ∀ a b, f a b = a ∨ f a b = b)
+<span class="n">def</span> <span class="n">choice</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="n">Sort</span><span class="bp">*</span><span class="o">}</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">α</span><span class="o">)</span> <span class="o">[</span><span class="n">has_choice</span> <span class="n">f</span><span class="o">]</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">α</span><span class="o">),</span> <span class="n">f</span> <span class="n">a</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">a</span> <span class="bp">∨</span> <span class="n">f</span> <span class="n">a</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">b</span> <span class="o">:=</span>
+<span class="n">has_choice</span><span class="bp">.</span><span class="n">choice</span> <span class="n">f</span>
 
-def choice {α : Sort*} (f : α → α → α) [has_choice f] : ∀ (a b : α), f a b = a ∨ f a b = b :=
-has_choice.choice f
+<span class="kn">instance</span> <span class="n">if_choice</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="n">Sort</span><span class="bp">*</span><span class="o">}</span> <span class="o">(</span><span class="n">c</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">[</span><span class="n">d</span> <span class="o">:</span> <span class="n">decidable</span> <span class="n">c</span><span class="o">]</span> <span class="o">:</span> <span class="n">has_choice</span> <span class="o">(</span><span class="bp">@</span><span class="n">ite</span> <span class="n">c</span> <span class="n">d</span> <span class="n">α</span><span class="o">)</span> <span class="o">:=</span>
+<span class="bp">⟨λ</span> <span class="n">a</span> <span class="n">b</span><span class="o">,</span> <span class="k">by</span> <span class="n">by_cases</span> <span class="n">h</span> <span class="o">:</span> <span class="n">c</span><span class="bp">;</span> <span class="n">simp</span> <span class="o">[</span><span class="n">h</span><span class="o">]</span><span class="bp">⟩</span>
 
-instance if_choice {α : Sort*} (c : Prop) [d : decidable c] : has_choice (@ite c d α) :=
-⟨λ a b, by by_cases h : c; simp [h]⟩
+<span class="kn">instance</span> <span class="n">min_choice</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="n">Sort</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">d</span> <span class="o">:</span> <span class="n">decidable_linear_order</span> <span class="n">α</span><span class="o">]</span> <span class="o">:</span> <span class="n">has_choice</span> <span class="o">(</span><span class="bp">@</span><span class="n">min</span> <span class="n">α</span> <span class="n">d</span><span class="o">)</span> <span class="o">:=</span>
+<span class="bp">⟨λ</span> <span class="n">a</span> <span class="n">b</span><span class="o">,</span> <span class="k">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">min</span><span class="o">,</span> <span class="o">(</span><span class="n">if_choice</span> <span class="o">(</span><span class="n">a</span> <span class="bp">≤</span> <span class="n">b</span><span class="o">))</span><span class="bp">.</span><span class="n">choice</span><span class="o">]</span><span class="bp">⟩</span>
 
-instance min_choice {α : Sort*} [d : decidable_linear_order α] : has_choice (@min α d) :=
-⟨λ a b, by simp [min, (if_choice (a ≤ b)).choice]⟩
-
-instance max_choice {α : Sort*} [d : decidable_linear_order α] : has_choice (@max α d) :=
-⟨λ a b, if h : a ≤ b then or.inr (max_eq_right h) else or.inl (max_eq_left_of_lt (lt_of_not_ge h))⟩
-```
+<span class="kn">instance</span> <span class="n">max_choice</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="n">Sort</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">d</span> <span class="o">:</span> <span class="n">decidable_linear_order</span> <span class="n">α</span><span class="o">]</span> <span class="o">:</span> <span class="n">has_choice</span> <span class="o">(</span><span class="bp">@</span><span class="n">max</span> <span class="n">α</span> <span class="n">d</span><span class="o">)</span> <span class="o">:=</span>
+<span class="bp">⟨λ</span> <span class="n">a</span> <span class="n">b</span><span class="o">,</span> <span class="k">if</span> <span class="n">h</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">≤</span> <span class="n">b</span> <span class="k">then</span> <span class="n">or</span><span class="bp">.</span><span class="n">inr</span> <span class="o">(</span><span class="n">max_eq_right</span> <span class="n">h</span><span class="o">)</span> <span class="k">else</span> <span class="n">or</span><span class="bp">.</span><span class="n">inl</span> <span class="o">(</span><span class="n">max_eq_left_of_lt</span> <span class="o">(</span><span class="n">lt_of_not_ge</span> <span class="n">h</span><span class="o">))</span><span class="bp">⟩</span>
+</pre></div>
 
 
 {% endraw %}

@@ -12,103 +12,99 @@ permalink: archive/113488general/25467Figureouttherestbycc.html
 
 {% raw %}
 #### [ Johan Commelin (Aug 02 2018 at 16:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Figure%20out%20the%20rest%20by%20cc/near/130779658):
-Can I tell Lean to work out the rest `by cc`:
-```lean
-import algebra.module
+<p>Can I tell Lean to work out the rest <code>by cc</code>:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">algebra</span><span class="bp">.</span><span class="n">module</span>
 
-variables {R : Type} [ring R]
+<span class="kn">variables</span> <span class="o">{</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">[</span><span class="n">ring</span> <span class="n">R</span><span class="o">]</span>
 
-open punit
+<span class="kn">open</span> <span class="n">punit</span>
 
-def zero_module : module R punit :=
-  { smul := λ _ _, star,
-    zero := star,
-    add  := λ _ _, star,
-    neg  := λ _, star,
-    add_zero := by cc,
-    zero_add := by cc,
-    add_comm := by cc,
-    add_left_neg := by cc,
-    one_smul := by cc,
-    mul_smul := by cc,
-    add_smul := by cc,
-    smul_add := by cc,
-    add_assoc := by cc }
-
-```
+<span class="n">def</span> <span class="n">zero_module</span> <span class="o">:</span> <span class="n">module</span> <span class="n">R</span> <span class="n">punit</span> <span class="o">:=</span>
+  <span class="o">{</span> <span class="n">smul</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">,</span> <span class="n">star</span><span class="o">,</span>
+    <span class="n">zero</span> <span class="o">:=</span> <span class="n">star</span><span class="o">,</span>
+    <span class="n">add</span>  <span class="o">:=</span> <span class="bp">λ</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">,</span> <span class="n">star</span><span class="o">,</span>
+    <span class="n">neg</span>  <span class="o">:=</span> <span class="bp">λ</span> <span class="bp">_</span><span class="o">,</span> <span class="n">star</span><span class="o">,</span>
+    <span class="n">add_zero</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">cc</span><span class="o">,</span>
+    <span class="n">zero_add</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">cc</span><span class="o">,</span>
+    <span class="n">add_comm</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">cc</span><span class="o">,</span>
+    <span class="n">add_left_neg</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">cc</span><span class="o">,</span>
+    <span class="n">one_smul</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">cc</span><span class="o">,</span>
+    <span class="n">mul_smul</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">cc</span><span class="o">,</span>
+    <span class="n">add_smul</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">cc</span><span class="o">,</span>
+    <span class="n">smul_add</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">cc</span><span class="o">,</span>
+    <span class="n">add_assoc</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">cc</span> <span class="o">}</span>
+</pre></div>
 
 #### [ Johan Commelin (Aug 02 2018 at 16:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Figure%20out%20the%20rest%20by%20cc/near/130779703):
-I found that I was repeating myself, while trying to make a point to Lean.
+<p>I found that I was repeating myself, while trying to make a point to Lean.</p>
 
 #### [ Scott Morrison (Aug 02 2018 at 16:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Figure%20out%20the%20rest%20by%20cc/near/130779783):
-sure, something like: 
-```
-begin
-  refine 
+<p>sure, something like: </p>
+<div class="codehilite"><pre><span></span>begin
+  refine
   { smul := λ _ _, star,
     zero := star,
     add  := λ _ _, star,
     neg  := λ _, star,
     .. } ; cc
 end
-```
+</pre></div>
 
 #### [ Johan Commelin (Aug 02 2018 at 16:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Figure%20out%20the%20rest%20by%20cc/near/130779915):
-Aaah, I need to understand `refine`.
+<p>Aaah, I need to understand <code>refine</code>.</p>
 
 #### [ Scott Morrison (Aug 02 2018 at 16:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Figure%20out%20the%20rest%20by%20cc/near/130780063):
-Curiously that doesn't actually work...
+<p>Curiously that doesn't actually work...</p>
 
 #### [ Scott Morrison (Aug 02 2018 at 16:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Figure%20out%20the%20rest%20by%20cc/near/130780069):
-Of course, replacing `cc` with `obviously` does it. :-)
+<p>Of course, replacing <code>cc</code> with <code>obviously</code> does it. :-)</p>
 
 #### [ Scott Morrison (Aug 02 2018 at 16:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Figure%20out%20the%20rest%20by%20cc/near/130780103):
-In fact just `by obviously` should work, except for some reason `split` doesn't work on modules, for some reason I can't see at the moment (type class inference throws an error?)
+<p>In fact just <code>by obviously</code> should work, except for some reason <code>split</code> doesn't work on modules, for some reason I can't see at the moment (type class inference throws an error?)</p>
 
 #### [ Johan Commelin (Aug 02 2018 at 16:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Figure%20out%20the%20rest%20by%20cc/near/130780108):
-`finish` works instead of `cc`.
+<p><code>finish</code> works instead of <code>cc</code>.</p>
 
 #### [ Kenny Lau (Aug 02 2018 at 16:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Figure%20out%20the%20rest%20by%20cc/near/130780164):
-what is `obviously`? is it in mathlib?
+<p>what is <code>obviously</code>? is it in mathlib?</p>
 
 #### [ Johan Commelin (Aug 02 2018 at 16:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Figure%20out%20the%20rest%20by%20cc/near/130780199):
-No, it is Scott's Hammer.
+<p>No, it is Scott's Hammer.</p>
 
 #### [ Johan Commelin (Aug 02 2018 at 16:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Figure%20out%20the%20rest%20by%20cc/near/130780206):
-Well, maybe `tidy` is his hammer.
+<p>Well, maybe <code>tidy</code> is his hammer.</p>
 
 #### [ Sean Leather (Aug 02 2018 at 16:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Figure%20out%20the%20rest%20by%20cc/near/130780270):
-[`obviously`](https://github.com/semorrison/lean-tidy/blob/master/src/tidy/tidy.lean#L81)
+<p><a href="https://github.com/semorrison/lean-tidy/blob/master/src/tidy/tidy.lean#L81" target="_blank" title="https://github.com/semorrison/lean-tidy/blob/master/src/tidy/tidy.lean#L81"><code>obviously</code></a></p>
 
 #### [ Johan Commelin (Aug 02 2018 at 16:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Figure%20out%20the%20rest%20by%20cc/near/130780292):
-So, the current golf record is:
-```lean
-def zero_module' : module R punit :=
-by refine
-{ add := λ x y, punit.star,
-  zero := punit.star,
-  neg := λ x, punit.star,
-  smul := λ c x, punit.star,
-  .. }; finish
-```
+<p>So, the current golf record is:</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">zero_module&#39;</span> <span class="o">:</span> <span class="n">module</span> <span class="n">R</span> <span class="n">punit</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">refine</span>
+<span class="o">{</span> <span class="n">add</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">x</span> <span class="n">y</span><span class="o">,</span> <span class="n">punit</span><span class="bp">.</span><span class="n">star</span><span class="o">,</span>
+  <span class="n">zero</span> <span class="o">:=</span> <span class="n">punit</span><span class="bp">.</span><span class="n">star</span><span class="o">,</span>
+  <span class="n">neg</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="n">punit</span><span class="bp">.</span><span class="n">star</span><span class="o">,</span>
+  <span class="n">smul</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">c</span> <span class="n">x</span><span class="o">,</span> <span class="n">punit</span><span class="bp">.</span><span class="n">star</span><span class="o">,</span>
+  <span class="bp">..</span> <span class="o">}</span><span class="bp">;</span> <span class="n">finish</span>
+</pre></div>
 
 #### [ Kenny Lau (Aug 02 2018 at 16:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Figure%20out%20the%20rest%20by%20cc/near/130780309):
-gadvardammt finish
+<p>gadvardammt finish</p>
 
 #### [ Johan Commelin (Aug 02 2018 at 16:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Figure%20out%20the%20rest%20by%20cc/near/130780310):
-Let's assume we open `punit`.
+<p>Let's assume we open <code>punit</code>.</p>
 
 #### [ Scott Morrison (Aug 02 2018 at 16:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Figure%20out%20the%20rest%20by%20cc/near/130780403):
-If someone can explain to me why you can't `split` when the goal is a module, maybe I can golf the entire proof to `by tidy`.
+<p>If someone can explain to me why you can't <code>split</code> when the goal is a module, maybe I can golf the entire proof to <code>by tidy</code>.</p>
 
 #### [ Kenny Lau (Aug 02 2018 at 16:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Figure%20out%20the%20rest%20by%20cc/near/130780415):
-isn't the right command `constructor`
+<p>isn't the right command <code>constructor</code></p>
 
 #### [ Kenny Lau (Aug 02 2018 at 16:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Figure%20out%20the%20rest%20by%20cc/near/130780432):
-`split` is for inductive types I think
+<p><code>split</code> is for inductive types I think</p>
 
 #### [ Johan Commelin (Aug 02 2018 at 16:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Figure%20out%20the%20rest%20by%20cc/near/130780438):
-`constructor` also fails...
+<p><code>constructor</code> also fails...</p>
 
 
 {% endraw %}

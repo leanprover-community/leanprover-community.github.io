@@ -12,25 +12,24 @@ permalink: archive/116395maths/05189letinstatements.html
 
 {% raw %}
 #### [ Patrick Massot (Dec 19 2018 at 20:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/let%20in%20statements/near/152207819):
-How does mathlib like using `let` in order to unclutter a statement, as in:
-```lean
-lemma uniform_continuous₂_iff [uniform_space α] [uniform_space β] [uniform_space γ]
-{f : α → β → γ}  :
-let π_α : (α × β) × (α × β) → α × α := (λ p, (p.1.1, p.2.1)),
-    π_β : (α × β) × (α × β) → β × β := (λ p, (p.1.2, p.2.2)),
-    F   : (α × β) × (α × β) → γ × γ := (λ p, (f p.1.1 p.1.2, f p.2.1 p.2.2)) in
-uniform_continuous₂ f ↔ map F (comap π_α uniformity ⊓ comap π_β uniformity) ≤ uniformity :=
-by simp [uniform_continuous,uniformity_prod, tendsto]
-```
+<p>How does mathlib like using <code>let</code> in order to unclutter a statement, as in:</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">uniform_continuous₂_iff</span> <span class="o">[</span><span class="n">uniform_space</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">uniform_space</span> <span class="n">β</span><span class="o">]</span> <span class="o">[</span><span class="n">uniform_space</span> <span class="n">γ</span><span class="o">]</span>
+<span class="o">{</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span> <span class="bp">→</span> <span class="n">γ</span><span class="o">}</span>  <span class="o">:</span>
+<span class="k">let</span> <span class="n">π_α</span> <span class="o">:</span> <span class="o">(</span><span class="n">α</span> <span class="bp">×</span> <span class="n">β</span><span class="o">)</span> <span class="bp">×</span> <span class="o">(</span><span class="n">α</span> <span class="bp">×</span> <span class="n">β</span><span class="o">)</span> <span class="bp">→</span> <span class="n">α</span> <span class="bp">×</span> <span class="n">α</span> <span class="o">:=</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">p</span><span class="o">,</span> <span class="o">(</span><span class="n">p</span><span class="bp">.</span><span class="mi">1</span><span class="bp">.</span><span class="mi">1</span><span class="o">,</span> <span class="n">p</span><span class="bp">.</span><span class="mi">2</span><span class="bp">.</span><span class="mi">1</span><span class="o">)),</span>
+    <span class="n">π_β</span> <span class="o">:</span> <span class="o">(</span><span class="n">α</span> <span class="bp">×</span> <span class="n">β</span><span class="o">)</span> <span class="bp">×</span> <span class="o">(</span><span class="n">α</span> <span class="bp">×</span> <span class="n">β</span><span class="o">)</span> <span class="bp">→</span> <span class="n">β</span> <span class="bp">×</span> <span class="n">β</span> <span class="o">:=</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">p</span><span class="o">,</span> <span class="o">(</span><span class="n">p</span><span class="bp">.</span><span class="mi">1</span><span class="bp">.</span><span class="mi">2</span><span class="o">,</span> <span class="n">p</span><span class="bp">.</span><span class="mi">2</span><span class="bp">.</span><span class="mi">2</span><span class="o">)),</span>
+    <span class="n">F</span>   <span class="o">:</span> <span class="o">(</span><span class="n">α</span> <span class="bp">×</span> <span class="n">β</span><span class="o">)</span> <span class="bp">×</span> <span class="o">(</span><span class="n">α</span> <span class="bp">×</span> <span class="n">β</span><span class="o">)</span> <span class="bp">→</span> <span class="n">γ</span> <span class="bp">×</span> <span class="n">γ</span> <span class="o">:=</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">p</span><span class="o">,</span> <span class="o">(</span><span class="n">f</span> <span class="n">p</span><span class="bp">.</span><span class="mi">1</span><span class="bp">.</span><span class="mi">1</span> <span class="n">p</span><span class="bp">.</span><span class="mi">1</span><span class="bp">.</span><span class="mi">2</span><span class="o">,</span> <span class="n">f</span> <span class="n">p</span><span class="bp">.</span><span class="mi">2</span><span class="bp">.</span><span class="mi">1</span> <span class="n">p</span><span class="bp">.</span><span class="mi">2</span><span class="bp">.</span><span class="mi">2</span><span class="o">))</span> <span class="k">in</span>
+<span class="n">uniform_continuous₂</span> <span class="n">f</span> <span class="bp">↔</span> <span class="n">map</span> <span class="n">F</span> <span class="o">(</span><span class="n">comap</span> <span class="n">π_α</span> <span class="n">uniformity</span> <span class="err">⊓</span> <span class="n">comap</span> <span class="n">π_β</span> <span class="n">uniformity</span><span class="o">)</span> <span class="bp">≤</span> <span class="n">uniformity</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">uniform_continuous</span><span class="o">,</span><span class="n">uniformity_prod</span><span class="o">,</span> <span class="n">tendsto</span><span class="o">]</span>
+</pre></div>
 
 #### [ Patrick Massot (Dec 19 2018 at 20:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/let%20in%20statements/near/152207833):
-Of course this is done in a file having `set_option eqn_compiler.zeta true`
+<p>Of course this is done in a file having <code>set_option eqn_compiler.zeta true</code></p>
 
 #### [ Patrick Massot (Dec 19 2018 at 20:53)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/let%20in%20statements/near/152207931):
-Note that the above snippet also use full type ascriptions in lets in order to clarify what are those functions without reading their obscure definition
+<p>Note that the above snippet also use full type ascriptions in lets in order to clarify what are those functions without reading their obscure definition</p>
 
 #### [ Scott Morrison (Dec 19 2018 at 21:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/let%20in%20statements/near/152212620):
-Seems like a good idea.
+<p>Seems like a good idea.</p>
 
 
 {% endraw %}

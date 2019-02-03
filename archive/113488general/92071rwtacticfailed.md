@@ -12,8 +12,7 @@ permalink: archive/113488general/92071rwtacticfailed.html
 
 {% raw %}
 #### [ Kenny Lau (Apr 09 2018 at 17:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20tactic%20failed/near/124840698):
-```
-rewrite tactic failed, did not find instance of the pattern in the target expression
+<div class="codehilite"><pre><span></span>rewrite tactic failed, did not find instance of the pattern in the target expression
   @has_add.add.{?l_1} ?m_2
     (@add_semigroup.to_has_add.{?l_1} ?m_2
        (@add_monoid.to_add_semigroup.{?l_1} ?m_2 (@add_group.to_add_monoid.{?l_1} ?m_2 ?m_3)))
@@ -42,116 +41,117 @@ rewrite tactic failed, did not find instance of the pattern in the target expres
                 n
                 (f (@prod.fst.{v w} β γ (@prod.mk.{v w} β γ x y₂))
                    (@prod.snd.{v w} β γ (@prod.mk.{v w} β γ x y₂)))))
+</pre></div>
 
 #### [ Kenny Lau (Apr 09 2018 at 17:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20tactic%20failed/near/124840702):
-Lean, it's right there
+<p>Lean, it's right there</p>
 
 #### [ Kenny Lau (Apr 09 2018 at 17:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20tactic%20failed/near/124840706):
-I know you want ` (@add_group.to_add_monoid.{?l_1} ?m_2 ?m_3) `
+<p>I know you want <code> (@add_group.to_add_monoid.{?l_1} ?m_2 ?m_3) </code></p>
 
 #### [ Kenny Lau (Apr 09 2018 at 17:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20tactic%20failed/near/124840714):
-but isn't ` (@add_comm_monoid.to_add_monoid.{u₁} α₁
+<p>but isn't <code> (@add_comm_monoid.to_add_monoid.{u₁} α₁
                       (@add_comm_group.to_add_comm_monoid.{u₁} α₁
-                         (@module.to_add_comm_group.{u u₁} α α₁ (@comm_ring.to_ring.{u} α _inst_1) _inst_4)) ` good enough for you
+                         (@module.to_add_comm_group.{u u₁} α α₁ (@comm_ring.to_ring.{u} α _inst_1) _inst_4)) </code> good enough for you</p>
 
 #### [ Kevin Buzzard (Apr 09 2018 at 17:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20tactic%20failed/near/124840765):
-they don't look the same to me
+<p>they don't look the same to me</p>
 
 #### [ Kenny Lau (Apr 09 2018 at 17:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20tactic%20failed/near/124840772):
-they're both justifying why I have addition
+<p>they're both justifying why I have addition</p>
 
 #### [ Kenny Lau (Apr 09 2018 at 17:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20tactic%20failed/near/124840785):
-specifically here they're justifying why I have an add_monoid
+<p>specifically here they're justifying why I have an add_monoid</p>
 
 #### [ Kevin Buzzard (Apr 09 2018 at 17:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20tactic%20failed/near/124840789):
-can you do some BS "change" or "show" beforehand?
+<p>can you do some BS "change" or "show" beforehand?</p>
 
 #### [ Kevin Buzzard (Apr 09 2018 at 17:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20tactic%20failed/near/124840855):
-Is this one of these dreaded diamond things?
+<p>Is this one of these dreaded diamond things?</p>
 
 #### [ Kenny Lau (Apr 09 2018 at 17:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20tactic%20failed/near/124840877):
-yes
+<p>yes</p>
 
 #### [ Kenny Lau (Apr 09 2018 at 17:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20tactic%20failed/near/124840945):
-I think the main concern is the one in the `gsmul` thread
+<p>I think the main concern is the one in the <code>gsmul</code> thread</p>
 
 #### [ Kenny Lau (Apr 09 2018 at 17:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20tactic%20failed/near/124840947):
-overloading is not good
+<p>overloading is not good</p>
 
 #### [ Kevin Buzzard (Apr 09 2018 at 17:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20tactic%20failed/near/124840956):
-This is Mario's doing, right?
+<p>This is Mario's doing, right?</p>
 
 #### [ Kevin Buzzard (Apr 09 2018 at 17:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20tactic%20failed/near/124840967):
-So probably he will have some sensible solution
+<p>So probably he will have some sensible solution</p>
 
 #### [ Kenny Lau (Apr 09 2018 at 17:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20tactic%20failed/near/124840979):
-well but that bullet wasn't in the global namespace before Lean updated
+<p>well but that bullet wasn't in the global namespace before Lean updated</p>
 
 #### [ Kevin Buzzard (Apr 09 2018 at 17:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20tactic%20failed/near/124840988):
-oh so it's Leo's doing?
+<p>oh so it's Leo's doing?</p>
 
 #### [ Kenny Lau (Apr 09 2018 at 17:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20tactic%20failed/near/124840991):
-I would say so
+<p>I would say so</p>
 
 #### [ Kevin Buzzard (Apr 09 2018 at 17:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20tactic%20failed/near/124840993):
-So probably Mario will have some clever workaround.
+<p>So probably Mario will have some clever workaround.</p>
 
 #### [ Kevin Buzzard (Apr 09 2018 at 17:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20tactic%20failed/near/124841050):
-I blame myself for all this
+<p>I blame myself for all this</p>
 
 #### [ Kenny Lau (Apr 09 2018 at 17:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20tactic%20failed/near/124841057):
-you?
+<p>you?</p>
 
 #### [ Kevin Buzzard (Apr 09 2018 at 17:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20tactic%20failed/near/124841059):
-I should never have mentioned that `^` had the wrong associativity
+<p>I should never have mentioned that <code>^</code> had the wrong associativity</p>
 
 #### [ Kenny Lau (Apr 09 2018 at 17:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20tactic%20failed/near/124841066):
-what happened
+<p>what happened</p>
 
 #### [ Kevin Buzzard (Apr 09 2018 at 17:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20tactic%20failed/near/124841075):
-I got annoyed that `2^3^2` was 64 not 512
+<p>I got annoyed that <code>2^3^2</code> was 64 not 512</p>
 
 #### [ Kevin Buzzard (Apr 09 2018 at 17:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20tactic%20failed/near/124841079):
-so I opened an issue
+<p>so I opened an issue</p>
 
 #### [ Kevin Buzzard (Apr 09 2018 at 17:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20tactic%20failed/near/124841091):
-and all of a sudden there were lots of changes to `^`
+<p>and all of a sudden there were lots of changes to <code>^</code></p>
 
 #### [ Kenny Lau (Apr 09 2018 at 17:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20tactic%20failed/near/124841100):
-I see
+<p>I see</p>
 
 #### [ Kevin Buzzard (Apr 09 2018 at 17:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20tactic%20failed/near/124841109):
-https://github.com/leanprover/lean/issues/1951
+<p><a href="https://github.com/leanprover/lean/issues/1951" target="_blank" title="https://github.com/leanprover/lean/issues/1951">https://github.com/leanprover/lean/issues/1951</a></p>
 
 #### [ Kevin Buzzard (Apr 09 2018 at 17:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20tactic%20failed/near/124841168):
-led to https://github.com/leanprover/lean/commit/d387103aa2bebfc98220733d9607a16663ec1ef2
+<p>led to <a href="https://github.com/leanprover/lean/commit/d387103aa2bebfc98220733d9607a16663ec1ef2" target="_blank" title="https://github.com/leanprover/lean/commit/d387103aa2bebfc98220733d9607a16663ec1ef2">https://github.com/leanprover/lean/commit/d387103aa2bebfc98220733d9607a16663ec1ef2</a></p>
 
 #### [ Kevin Buzzard (Apr 09 2018 at 17:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20tactic%20failed/near/124841186):
-and then to https://github.com/leanprover/lean/commit/8f55ec4c50379c612731ced2424fd3eda0cf69a6
+<p>and then to <a href="https://github.com/leanprover/lean/commit/8f55ec4c50379c612731ced2424fd3eda0cf69a6" target="_blank" title="https://github.com/leanprover/lean/commit/8f55ec4c50379c612731ced2424fd3eda0cf69a6">https://github.com/leanprover/lean/commit/8f55ec4c50379c612731ced2424fd3eda0cf69a6</a></p>
 
 #### [ Kevin Buzzard (Apr 09 2018 at 17:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20tactic%20failed/near/124841195):
-and hmm I don't see the bullet
+<p>and hmm I don't see the bullet</p>
 
 #### [ Kevin Buzzard (Apr 09 2018 at 17:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20tactic%20failed/near/124841205):
-maybe it's not my fault after all
+<p>maybe it's not my fault after all</p>
 
 #### [ Kevin Buzzard (Apr 09 2018 at 17:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20tactic%20failed/near/124841287):
-nice to see presheaves being pulled into core lean though
+<p>nice to see presheaves being pulled into core lean though</p>
 
 #### [ Kevin Buzzard (Apr 09 2018 at 17:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20tactic%20failed/near/124841289):
-https://github.com/leanprover/lean/commit/6e0bf8473b1980e6692a61a924b4c6eae195619d
+<p><a href="https://github.com/leanprover/lean/commit/6e0bf8473b1980e6692a61a924b4c6eae195619d" target="_blank" title="https://github.com/leanprover/lean/commit/6e0bf8473b1980e6692a61a924b4c6eae195619d">https://github.com/leanprover/lean/commit/6e0bf8473b1980e6692a61a924b4c6eae195619d</a></p>
 
 #### [ Kenny Lau (Apr 09 2018 at 17:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20tactic%20failed/near/124841295):
-oh
+<p>oh</p>
 
 #### [ Kenny Lau (Apr 09 2018 at 17:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20tactic%20failed/near/124841296):
-what a subversion
+<p>what a subversion</p>
 
 #### [ Kevin Buzzard (Apr 09 2018 at 17:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20tactic%20failed/near/124841420):
-Talking of presheaves, thanks for trying to fix that tensor product file. Presumably that's where this issue arose.
+<p>Talking of presheaves, thanks for trying to fix that tensor product file. Presumably that's where this issue arose.</p>
 
 #### [ Mario Carneiro (Apr 09 2018 at 20:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20tactic%20failed/near/124849118):
-I removed the `has_smul` typeclass from `group_power`, which should fix the notation overloading problem. This puts us back at square one `local infix` type solutions for using `gsmul`, but it shouldn't interfere with the module smul notation now. I'm not sure about registering every abelian group as a Z-module with an instance, since module still uses an `out_param` for the scalar ring which might get stuck on `int`
+<p>I removed the <code>has_smul</code> typeclass from <code>group_power</code>, which should fix the notation overloading problem. This puts us back at square one <code>local infix</code> type solutions for using <code>gsmul</code>, but it shouldn't interfere with the module smul notation now. I'm not sure about registering every abelian group as a Z-module with an instance, since module still uses an <code>out_param</code> for the scalar ring which might get stuck on <code>int</code></p>
 
 
 {% endraw %}

@@ -12,290 +12,283 @@ permalink: archive/113489newmembers/68895Provingsomethingisasubfield.html
 
 {% raw %}
 #### [ Abhimanyu Pallavi Sudhir (Jan 10 2019 at 22:21)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/154872747):
-I'm trying to prove that the intersection of two subfields is a subfield -- the problem with using `subfield.mk`, or just using `{...}` directly, is that `subfield` is defined using `extends`, so I need to prove that it's a subring -- and by extension that it is an additive subgroup and a submonoid. What's the notation for this?
+<p>I'm trying to prove that the intersection of two subfields is a subfield -- the problem with using <code>subfield.mk</code>, or just using <code>{...}</code> directly, is that <code>subfield</code> is defined using <code>extends</code>, so I need to prove that it's a subring -- and by extension that it is an additive subgroup and a submonoid. What's the notation for this?</p>
 
 #### [ Abhimanyu Pallavi Sudhir (Jan 10 2019 at 22:21)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/154872763):
-This is what I have:
+<p>This is what I have:</p>
 
 #### [ Abhimanyu Pallavi Sudhir (Jan 10 2019 at 22:21)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/154872773):
-```lean
-import algebra.field 
-import field_theory.subfield
-theorem field_intersect (F1 F2 : set K) [h1 : is_subfield F1] [h2 : is_subfield F2] : is_subfield (F1 ∩ F2) :=
-{   --do I need to put something here?
-    inv_mem := (λ x ⟨hx1, hx2⟩, and.intro (is_subfield.inv_mem hx1) (is_subfield.inv_mem hx2))
-}
-```
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">algebra</span><span class="bp">.</span><span class="n">field</span>
+<span class="kn">import</span> <span class="n">field_theory</span><span class="bp">.</span><span class="n">subfield</span>
+<span class="kn">theorem</span> <span class="n">field_intersect</span> <span class="o">(</span><span class="n">F1</span> <span class="n">F2</span> <span class="o">:</span> <span class="n">set</span> <span class="n">K</span><span class="o">)</span> <span class="o">[</span><span class="n">h1</span> <span class="o">:</span> <span class="n">is_subfield</span> <span class="n">F1</span><span class="o">]</span> <span class="o">[</span><span class="n">h2</span> <span class="o">:</span> <span class="n">is_subfield</span> <span class="n">F2</span><span class="o">]</span> <span class="o">:</span> <span class="n">is_subfield</span> <span class="o">(</span><span class="n">F1</span> <span class="err">∩</span> <span class="n">F2</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">{</span>   <span class="c1">--do I need to put something here?</span>
+    <span class="n">inv_mem</span> <span class="o">:=</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">x</span> <span class="bp">⟨</span><span class="n">hx1</span><span class="o">,</span> <span class="n">hx2</span><span class="bp">⟩</span><span class="o">,</span> <span class="n">and</span><span class="bp">.</span><span class="n">intro</span> <span class="o">(</span><span class="n">is_subfield</span><span class="bp">.</span><span class="n">inv_mem</span> <span class="n">hx1</span><span class="o">)</span> <span class="o">(</span><span class="n">is_subfield</span><span class="bp">.</span><span class="n">inv_mem</span> <span class="n">hx2</span><span class="o">))</span>
+<span class="o">}</span>
+</pre></div>
 
 #### [ Abhimanyu Pallavi Sudhir (Jan 10 2019 at 22:37)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/154874067):
-Got it, it's `to_is_subring`.
+<p>Got it, it's <code>to_is_subring</code>.</p>
 
 #### [ Abhimanyu Pallavi Sudhir (Jan 10 2019 at 23:10)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/154876299):
-Ok, I suppose one could do without that, too.
+<p>Ok, I suppose one could do without that, too.</p>
 
 #### [ Abhimanyu Pallavi Sudhir (Jan 10 2019 at 23:10)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/154876309):
-```lean
-theorem field_intersect (F1 F2 : set K) [h1 : is_subfield F1] [h2 : is_subfield F2] : is_subfield (F1 ∩ F2) := {
-    zero_mem := and.intro h1.zero_mem h2.zero_mem,
-    one_mem := and.intro h1.one_mem h2.one_mem,
-    add_mem := λ a b ⟨ha1, ha2⟩ ⟨hb1, hb2⟩, and.intro 
-        (by {have k := h1.add_mem, exact @k a b ha1 hb1}) 
-        (by {have k := h2.add_mem, exact @k a b ha2 hb2}),
-    mul_mem := λ a b ⟨ha1, ha2⟩ ⟨hb1, hb2⟩, and.intro 
-        (by {have k := h1.mul_mem, exact @k a b ha1 hb1})
-        (by {have k := h2.mul_mem, exact @k a b ha2 hb2}),
-    neg_mem := λ a ⟨ha1, ha2⟩, and.intro 
-        (by {have k := h1.neg_mem, exact @k a ha1})
-        (by {have k := h2.neg_mem, exact @k a ha2}), 
-    inv_mem := (λ x ⟨hx1, hx2⟩, and.intro (is_subfield.inv_mem hx1) (is_subfield.inv_mem hx2))
-}
-```
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">field_intersect</span> <span class="o">(</span><span class="n">F1</span> <span class="n">F2</span> <span class="o">:</span> <span class="n">set</span> <span class="n">K</span><span class="o">)</span> <span class="o">[</span><span class="n">h1</span> <span class="o">:</span> <span class="n">is_subfield</span> <span class="n">F1</span><span class="o">]</span> <span class="o">[</span><span class="n">h2</span> <span class="o">:</span> <span class="n">is_subfield</span> <span class="n">F2</span><span class="o">]</span> <span class="o">:</span> <span class="n">is_subfield</span> <span class="o">(</span><span class="n">F1</span> <span class="err">∩</span> <span class="n">F2</span><span class="o">)</span> <span class="o">:=</span> <span class="o">{</span>
+    <span class="n">zero_mem</span> <span class="o">:=</span> <span class="n">and</span><span class="bp">.</span><span class="n">intro</span> <span class="n">h1</span><span class="bp">.</span><span class="n">zero_mem</span> <span class="n">h2</span><span class="bp">.</span><span class="n">zero_mem</span><span class="o">,</span>
+    <span class="n">one_mem</span> <span class="o">:=</span> <span class="n">and</span><span class="bp">.</span><span class="n">intro</span> <span class="n">h1</span><span class="bp">.</span><span class="n">one_mem</span> <span class="n">h2</span><span class="bp">.</span><span class="n">one_mem</span><span class="o">,</span>
+    <span class="n">add_mem</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">a</span> <span class="n">b</span> <span class="bp">⟨</span><span class="n">ha1</span><span class="o">,</span> <span class="n">ha2</span><span class="bp">⟩</span> <span class="bp">⟨</span><span class="n">hb1</span><span class="o">,</span> <span class="n">hb2</span><span class="bp">⟩</span><span class="o">,</span> <span class="n">and</span><span class="bp">.</span><span class="n">intro</span>
+        <span class="o">(</span><span class="k">by</span> <span class="o">{</span><span class="k">have</span> <span class="n">k</span> <span class="o">:=</span> <span class="n">h1</span><span class="bp">.</span><span class="n">add_mem</span><span class="o">,</span> <span class="n">exact</span> <span class="bp">@</span><span class="n">k</span> <span class="n">a</span> <span class="n">b</span> <span class="n">ha1</span> <span class="n">hb1</span><span class="o">})</span>
+        <span class="o">(</span><span class="k">by</span> <span class="o">{</span><span class="k">have</span> <span class="n">k</span> <span class="o">:=</span> <span class="n">h2</span><span class="bp">.</span><span class="n">add_mem</span><span class="o">,</span> <span class="n">exact</span> <span class="bp">@</span><span class="n">k</span> <span class="n">a</span> <span class="n">b</span> <span class="n">ha2</span> <span class="n">hb2</span><span class="o">}),</span>
+    <span class="n">mul_mem</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">a</span> <span class="n">b</span> <span class="bp">⟨</span><span class="n">ha1</span><span class="o">,</span> <span class="n">ha2</span><span class="bp">⟩</span> <span class="bp">⟨</span><span class="n">hb1</span><span class="o">,</span> <span class="n">hb2</span><span class="bp">⟩</span><span class="o">,</span> <span class="n">and</span><span class="bp">.</span><span class="n">intro</span>
+        <span class="o">(</span><span class="k">by</span> <span class="o">{</span><span class="k">have</span> <span class="n">k</span> <span class="o">:=</span> <span class="n">h1</span><span class="bp">.</span><span class="n">mul_mem</span><span class="o">,</span> <span class="n">exact</span> <span class="bp">@</span><span class="n">k</span> <span class="n">a</span> <span class="n">b</span> <span class="n">ha1</span> <span class="n">hb1</span><span class="o">})</span>
+        <span class="o">(</span><span class="k">by</span> <span class="o">{</span><span class="k">have</span> <span class="n">k</span> <span class="o">:=</span> <span class="n">h2</span><span class="bp">.</span><span class="n">mul_mem</span><span class="o">,</span> <span class="n">exact</span> <span class="bp">@</span><span class="n">k</span> <span class="n">a</span> <span class="n">b</span> <span class="n">ha2</span> <span class="n">hb2</span><span class="o">}),</span>
+    <span class="n">neg_mem</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">a</span> <span class="bp">⟨</span><span class="n">ha1</span><span class="o">,</span> <span class="n">ha2</span><span class="bp">⟩</span><span class="o">,</span> <span class="n">and</span><span class="bp">.</span><span class="n">intro</span>
+        <span class="o">(</span><span class="k">by</span> <span class="o">{</span><span class="k">have</span> <span class="n">k</span> <span class="o">:=</span> <span class="n">h1</span><span class="bp">.</span><span class="n">neg_mem</span><span class="o">,</span> <span class="n">exact</span> <span class="bp">@</span><span class="n">k</span> <span class="n">a</span> <span class="n">ha1</span><span class="o">})</span>
+        <span class="o">(</span><span class="k">by</span> <span class="o">{</span><span class="k">have</span> <span class="n">k</span> <span class="o">:=</span> <span class="n">h2</span><span class="bp">.</span><span class="n">neg_mem</span><span class="o">,</span> <span class="n">exact</span> <span class="bp">@</span><span class="n">k</span> <span class="n">a</span> <span class="n">ha2</span><span class="o">}),</span>
+    <span class="n">inv_mem</span> <span class="o">:=</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">x</span> <span class="bp">⟨</span><span class="n">hx1</span><span class="o">,</span> <span class="n">hx2</span><span class="bp">⟩</span><span class="o">,</span> <span class="n">and</span><span class="bp">.</span><span class="n">intro</span> <span class="o">(</span><span class="n">is_subfield</span><span class="bp">.</span><span class="n">inv_mem</span> <span class="n">hx1</span><span class="o">)</span> <span class="o">(</span><span class="n">is_subfield</span><span class="bp">.</span><span class="n">inv_mem</span> <span class="n">hx2</span><span class="o">))</span>
+<span class="o">}</span>
+</pre></div>
 
 #### [ Abhimanyu Pallavi Sudhir (Jan 10 2019 at 23:11)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/154876361):
-I got confused because Lean doesn't point out which fields are to be provided when something extends something.
+<p>I got confused because Lean doesn't point out which fields are to be provided when something extends something.</p>
 
 #### [ Abhimanyu Pallavi Sudhir (Jan 10 2019 at 23:14)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/154876596):
-On a related note, why doesn't this work?
-```lean
-theorem field_intersect (F1 F2 : set K) [h1 : is_subfield F1] [h2 : is_subfield F2] : is_subfield (F1 ∩ F2) := {
-    zero_mem := and.intro h1.zero_mem h2.zero_mem,
-    one_mem := and.intro h1.one_mem h2.one_mem,
-    add_mem := λ a b ⟨ha1, ha2⟩ ⟨hb1, hb2⟩, and.intro (h1.add_mem ha1 hb1) (h2.add_mem ha2 hb2),
-    mul_mem := λ a b ⟨ha1, ha2⟩ ⟨hb1, hb2⟩, and.intro (h1.mul_mem ha1 hb1) (h2.mul_mem ha2 hb2),
-    neg_mem := λ a ⟨ha1, ha2⟩, and.intro (h1.neg_mem ha1) (h2.neg_mem ha2),
-    inv_mem := (λ x ⟨hx1, hx2⟩, and.intro (is_subfield.inv_mem hx1) (is_subfield.inv_mem hx2))
-}
-```
-Or even this:
-```lean
-theorem field_intersect (F1 F2 : set K) [h1 : is_subfield F1] [h2 : is_subfield F2] : is_subfield (F1 ∩ F2) := {
-    zero_mem := and.intro h1.zero_mem h2.zero_mem,
-    one_mem := and.intro h1.one_mem h2.one_mem,
-    add_mem := λ a b ⟨ha1, ha2⟩ ⟨hb1, hb2⟩, and.intro (@h1.add_mem a b ha1 hb1) (@h2.add_mem a b ha2 hb2),
-    mul_mem := λ a b ⟨ha1, ha2⟩ ⟨hb1, hb2⟩, and.intro (@h1.mul_mem ha1 hb1) (@h2.mul_mem a b ha2 hb2),
-    neg_mem := λ a ⟨ha1, ha2⟩, and.intro (@h1.neg_mem a ha1) (@h2.neg_mem a ha2),
-    inv_mem := (λ x ⟨hx1, hx2⟩, and.intro (is_subfield.inv_mem hx1) (is_subfield.inv_mem hx2))
-}
-```
-One has to do a `have` statement and then construct the statement with the local instance of `neg_mem`, etc. Why?
+<p>On a related note, why doesn't this work?</p>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">field_intersect</span> <span class="o">(</span><span class="n">F1</span> <span class="n">F2</span> <span class="o">:</span> <span class="n">set</span> <span class="n">K</span><span class="o">)</span> <span class="o">[</span><span class="n">h1</span> <span class="o">:</span> <span class="n">is_subfield</span> <span class="n">F1</span><span class="o">]</span> <span class="o">[</span><span class="n">h2</span> <span class="o">:</span> <span class="n">is_subfield</span> <span class="n">F2</span><span class="o">]</span> <span class="o">:</span> <span class="n">is_subfield</span> <span class="o">(</span><span class="n">F1</span> <span class="err">∩</span> <span class="n">F2</span><span class="o">)</span> <span class="o">:=</span> <span class="o">{</span>
+    <span class="n">zero_mem</span> <span class="o">:=</span> <span class="n">and</span><span class="bp">.</span><span class="n">intro</span> <span class="n">h1</span><span class="bp">.</span><span class="n">zero_mem</span> <span class="n">h2</span><span class="bp">.</span><span class="n">zero_mem</span><span class="o">,</span>
+    <span class="n">one_mem</span> <span class="o">:=</span> <span class="n">and</span><span class="bp">.</span><span class="n">intro</span> <span class="n">h1</span><span class="bp">.</span><span class="n">one_mem</span> <span class="n">h2</span><span class="bp">.</span><span class="n">one_mem</span><span class="o">,</span>
+    <span class="n">add_mem</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">a</span> <span class="n">b</span> <span class="bp">⟨</span><span class="n">ha1</span><span class="o">,</span> <span class="n">ha2</span><span class="bp">⟩</span> <span class="bp">⟨</span><span class="n">hb1</span><span class="o">,</span> <span class="n">hb2</span><span class="bp">⟩</span><span class="o">,</span> <span class="n">and</span><span class="bp">.</span><span class="n">intro</span> <span class="o">(</span><span class="n">h1</span><span class="bp">.</span><span class="n">add_mem</span> <span class="n">ha1</span> <span class="n">hb1</span><span class="o">)</span> <span class="o">(</span><span class="n">h2</span><span class="bp">.</span><span class="n">add_mem</span> <span class="n">ha2</span> <span class="n">hb2</span><span class="o">),</span>
+    <span class="n">mul_mem</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">a</span> <span class="n">b</span> <span class="bp">⟨</span><span class="n">ha1</span><span class="o">,</span> <span class="n">ha2</span><span class="bp">⟩</span> <span class="bp">⟨</span><span class="n">hb1</span><span class="o">,</span> <span class="n">hb2</span><span class="bp">⟩</span><span class="o">,</span> <span class="n">and</span><span class="bp">.</span><span class="n">intro</span> <span class="o">(</span><span class="n">h1</span><span class="bp">.</span><span class="n">mul_mem</span> <span class="n">ha1</span> <span class="n">hb1</span><span class="o">)</span> <span class="o">(</span><span class="n">h2</span><span class="bp">.</span><span class="n">mul_mem</span> <span class="n">ha2</span> <span class="n">hb2</span><span class="o">),</span>
+    <span class="n">neg_mem</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">a</span> <span class="bp">⟨</span><span class="n">ha1</span><span class="o">,</span> <span class="n">ha2</span><span class="bp">⟩</span><span class="o">,</span> <span class="n">and</span><span class="bp">.</span><span class="n">intro</span> <span class="o">(</span><span class="n">h1</span><span class="bp">.</span><span class="n">neg_mem</span> <span class="n">ha1</span><span class="o">)</span> <span class="o">(</span><span class="n">h2</span><span class="bp">.</span><span class="n">neg_mem</span> <span class="n">ha2</span><span class="o">),</span>
+    <span class="n">inv_mem</span> <span class="o">:=</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">x</span> <span class="bp">⟨</span><span class="n">hx1</span><span class="o">,</span> <span class="n">hx2</span><span class="bp">⟩</span><span class="o">,</span> <span class="n">and</span><span class="bp">.</span><span class="n">intro</span> <span class="o">(</span><span class="n">is_subfield</span><span class="bp">.</span><span class="n">inv_mem</span> <span class="n">hx1</span><span class="o">)</span> <span class="o">(</span><span class="n">is_subfield</span><span class="bp">.</span><span class="n">inv_mem</span> <span class="n">hx2</span><span class="o">))</span>
+<span class="o">}</span>
+</pre></div>
+
+
+<p>Or even this:</p>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">field_intersect</span> <span class="o">(</span><span class="n">F1</span> <span class="n">F2</span> <span class="o">:</span> <span class="n">set</span> <span class="n">K</span><span class="o">)</span> <span class="o">[</span><span class="n">h1</span> <span class="o">:</span> <span class="n">is_subfield</span> <span class="n">F1</span><span class="o">]</span> <span class="o">[</span><span class="n">h2</span> <span class="o">:</span> <span class="n">is_subfield</span> <span class="n">F2</span><span class="o">]</span> <span class="o">:</span> <span class="n">is_subfield</span> <span class="o">(</span><span class="n">F1</span> <span class="err">∩</span> <span class="n">F2</span><span class="o">)</span> <span class="o">:=</span> <span class="o">{</span>
+    <span class="n">zero_mem</span> <span class="o">:=</span> <span class="n">and</span><span class="bp">.</span><span class="n">intro</span> <span class="n">h1</span><span class="bp">.</span><span class="n">zero_mem</span> <span class="n">h2</span><span class="bp">.</span><span class="n">zero_mem</span><span class="o">,</span>
+    <span class="n">one_mem</span> <span class="o">:=</span> <span class="n">and</span><span class="bp">.</span><span class="n">intro</span> <span class="n">h1</span><span class="bp">.</span><span class="n">one_mem</span> <span class="n">h2</span><span class="bp">.</span><span class="n">one_mem</span><span class="o">,</span>
+    <span class="n">add_mem</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">a</span> <span class="n">b</span> <span class="bp">⟨</span><span class="n">ha1</span><span class="o">,</span> <span class="n">ha2</span><span class="bp">⟩</span> <span class="bp">⟨</span><span class="n">hb1</span><span class="o">,</span> <span class="n">hb2</span><span class="bp">⟩</span><span class="o">,</span> <span class="n">and</span><span class="bp">.</span><span class="n">intro</span> <span class="o">(</span><span class="bp">@</span><span class="n">h1</span><span class="bp">.</span><span class="n">add_mem</span> <span class="n">a</span> <span class="n">b</span> <span class="n">ha1</span> <span class="n">hb1</span><span class="o">)</span> <span class="o">(</span><span class="bp">@</span><span class="n">h2</span><span class="bp">.</span><span class="n">add_mem</span> <span class="n">a</span> <span class="n">b</span> <span class="n">ha2</span> <span class="n">hb2</span><span class="o">),</span>
+    <span class="n">mul_mem</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">a</span> <span class="n">b</span> <span class="bp">⟨</span><span class="n">ha1</span><span class="o">,</span> <span class="n">ha2</span><span class="bp">⟩</span> <span class="bp">⟨</span><span class="n">hb1</span><span class="o">,</span> <span class="n">hb2</span><span class="bp">⟩</span><span class="o">,</span> <span class="n">and</span><span class="bp">.</span><span class="n">intro</span> <span class="o">(</span><span class="bp">@</span><span class="n">h1</span><span class="bp">.</span><span class="n">mul_mem</span> <span class="n">ha1</span> <span class="n">hb1</span><span class="o">)</span> <span class="o">(</span><span class="bp">@</span><span class="n">h2</span><span class="bp">.</span><span class="n">mul_mem</span> <span class="n">a</span> <span class="n">b</span> <span class="n">ha2</span> <span class="n">hb2</span><span class="o">),</span>
+    <span class="n">neg_mem</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">a</span> <span class="bp">⟨</span><span class="n">ha1</span><span class="o">,</span> <span class="n">ha2</span><span class="bp">⟩</span><span class="o">,</span> <span class="n">and</span><span class="bp">.</span><span class="n">intro</span> <span class="o">(</span><span class="bp">@</span><span class="n">h1</span><span class="bp">.</span><span class="n">neg_mem</span> <span class="n">a</span> <span class="n">ha1</span><span class="o">)</span> <span class="o">(</span><span class="bp">@</span><span class="n">h2</span><span class="bp">.</span><span class="n">neg_mem</span> <span class="n">a</span> <span class="n">ha2</span><span class="o">),</span>
+    <span class="n">inv_mem</span> <span class="o">:=</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">x</span> <span class="bp">⟨</span><span class="n">hx1</span><span class="o">,</span> <span class="n">hx2</span><span class="bp">⟩</span><span class="o">,</span> <span class="n">and</span><span class="bp">.</span><span class="n">intro</span> <span class="o">(</span><span class="n">is_subfield</span><span class="bp">.</span><span class="n">inv_mem</span> <span class="n">hx1</span><span class="o">)</span> <span class="o">(</span><span class="n">is_subfield</span><span class="bp">.</span><span class="n">inv_mem</span> <span class="n">hx2</span><span class="o">))</span>
+<span class="o">}</span>
+</pre></div>
+
+
+<p>One has to do a <code>have</code> statement and then construct the statement with the local instance of <code>neg_mem</code>, etc. Why?</p>
 
 #### [ Reid Barton (Jan 10 2019 at 23:15)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/154876635):
-What exactly did you write the first time? with `to_is_subring`
+<p>What exactly did you write the first time? with <code>to_is_subring</code></p>
 
 #### [ Abhimanyu Pallavi Sudhir (Jan 10 2019 at 23:15)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/154876664):
-Oh, I just nested them all in:
-```lean
-theorem field_intersect (F1 F2 : set K) [h1 : is_subfield F1] [h2 : is_subfield F2] : is_subfield (F1 ∩ F2) := {
-    to_is_subring := {
-        to_is_add_subgroup := {
-            to_is_add_submonoid := {
-                zero_mem := and.intro h1.zero_mem h2.zero_mem,
-                add_mem := λ a b ⟨ha1, ha2⟩ ⟨hb1, hb2⟩, and.intro 
-                    (by {have k := h1.add_mem, exact @k a b ha1 hb1}) 
-                    (by {have k := h2.add_mem, exact @k a b ha2 hb2}),
-            },
-            neg_mem := λ a ⟨ha1, ha2⟩, and.intro 
-                (by {have k := h1.neg_mem, exact @k a ha1})
-                (by {have k := h2.neg_mem, exact @k a ha2}), 
-            },
-        to_is_submonoid := {
-            one_mem := and.intro h1.one_mem h2.one_mem,
-            mul_mem := λ a b ⟨ha1, ha2⟩ ⟨hb1, hb2⟩, and.intro 
-                (by {have k := h1.mul_mem, exact @k a b ha1 hb1})
-                (by {have k := h2.mul_mem, exact @k a b ha2 hb2}),
-        },
-    },
-    inv_mem := (λ x ⟨hx1, hx2⟩, and.intro (is_subfield.inv_mem hx1) (is_subfield.inv_mem hx2))
-}
-```
+<p>Oh, I just nested them all in:</p>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">field_intersect</span> <span class="o">(</span><span class="n">F1</span> <span class="n">F2</span> <span class="o">:</span> <span class="n">set</span> <span class="n">K</span><span class="o">)</span> <span class="o">[</span><span class="n">h1</span> <span class="o">:</span> <span class="n">is_subfield</span> <span class="n">F1</span><span class="o">]</span> <span class="o">[</span><span class="n">h2</span> <span class="o">:</span> <span class="n">is_subfield</span> <span class="n">F2</span><span class="o">]</span> <span class="o">:</span> <span class="n">is_subfield</span> <span class="o">(</span><span class="n">F1</span> <span class="err">∩</span> <span class="n">F2</span><span class="o">)</span> <span class="o">:=</span> <span class="o">{</span>
+    <span class="n">to_is_subring</span> <span class="o">:=</span> <span class="o">{</span>
+        <span class="n">to_is_add_subgroup</span> <span class="o">:=</span> <span class="o">{</span>
+            <span class="n">to_is_add_submonoid</span> <span class="o">:=</span> <span class="o">{</span>
+                <span class="n">zero_mem</span> <span class="o">:=</span> <span class="n">and</span><span class="bp">.</span><span class="n">intro</span> <span class="n">h1</span><span class="bp">.</span><span class="n">zero_mem</span> <span class="n">h2</span><span class="bp">.</span><span class="n">zero_mem</span><span class="o">,</span>
+                <span class="n">add_mem</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">a</span> <span class="n">b</span> <span class="bp">⟨</span><span class="n">ha1</span><span class="o">,</span> <span class="n">ha2</span><span class="bp">⟩</span> <span class="bp">⟨</span><span class="n">hb1</span><span class="o">,</span> <span class="n">hb2</span><span class="bp">⟩</span><span class="o">,</span> <span class="n">and</span><span class="bp">.</span><span class="n">intro</span>
+                    <span class="o">(</span><span class="k">by</span> <span class="o">{</span><span class="k">have</span> <span class="n">k</span> <span class="o">:=</span> <span class="n">h1</span><span class="bp">.</span><span class="n">add_mem</span><span class="o">,</span> <span class="n">exact</span> <span class="bp">@</span><span class="n">k</span> <span class="n">a</span> <span class="n">b</span> <span class="n">ha1</span> <span class="n">hb1</span><span class="o">})</span>
+                    <span class="o">(</span><span class="k">by</span> <span class="o">{</span><span class="k">have</span> <span class="n">k</span> <span class="o">:=</span> <span class="n">h2</span><span class="bp">.</span><span class="n">add_mem</span><span class="o">,</span> <span class="n">exact</span> <span class="bp">@</span><span class="n">k</span> <span class="n">a</span> <span class="n">b</span> <span class="n">ha2</span> <span class="n">hb2</span><span class="o">}),</span>
+            <span class="o">},</span>
+            <span class="n">neg_mem</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">a</span> <span class="bp">⟨</span><span class="n">ha1</span><span class="o">,</span> <span class="n">ha2</span><span class="bp">⟩</span><span class="o">,</span> <span class="n">and</span><span class="bp">.</span><span class="n">intro</span>
+                <span class="o">(</span><span class="k">by</span> <span class="o">{</span><span class="k">have</span> <span class="n">k</span> <span class="o">:=</span> <span class="n">h1</span><span class="bp">.</span><span class="n">neg_mem</span><span class="o">,</span> <span class="n">exact</span> <span class="bp">@</span><span class="n">k</span> <span class="n">a</span> <span class="n">ha1</span><span class="o">})</span>
+                <span class="o">(</span><span class="k">by</span> <span class="o">{</span><span class="k">have</span> <span class="n">k</span> <span class="o">:=</span> <span class="n">h2</span><span class="bp">.</span><span class="n">neg_mem</span><span class="o">,</span> <span class="n">exact</span> <span class="bp">@</span><span class="n">k</span> <span class="n">a</span> <span class="n">ha2</span><span class="o">}),</span>
+            <span class="o">},</span>
+        <span class="n">to_is_submonoid</span> <span class="o">:=</span> <span class="o">{</span>
+            <span class="n">one_mem</span> <span class="o">:=</span> <span class="n">and</span><span class="bp">.</span><span class="n">intro</span> <span class="n">h1</span><span class="bp">.</span><span class="n">one_mem</span> <span class="n">h2</span><span class="bp">.</span><span class="n">one_mem</span><span class="o">,</span>
+            <span class="n">mul_mem</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">a</span> <span class="n">b</span> <span class="bp">⟨</span><span class="n">ha1</span><span class="o">,</span> <span class="n">ha2</span><span class="bp">⟩</span> <span class="bp">⟨</span><span class="n">hb1</span><span class="o">,</span> <span class="n">hb2</span><span class="bp">⟩</span><span class="o">,</span> <span class="n">and</span><span class="bp">.</span><span class="n">intro</span>
+                <span class="o">(</span><span class="k">by</span> <span class="o">{</span><span class="k">have</span> <span class="n">k</span> <span class="o">:=</span> <span class="n">h1</span><span class="bp">.</span><span class="n">mul_mem</span><span class="o">,</span> <span class="n">exact</span> <span class="bp">@</span><span class="n">k</span> <span class="n">a</span> <span class="n">b</span> <span class="n">ha1</span> <span class="n">hb1</span><span class="o">})</span>
+                <span class="o">(</span><span class="k">by</span> <span class="o">{</span><span class="k">have</span> <span class="n">k</span> <span class="o">:=</span> <span class="n">h2</span><span class="bp">.</span><span class="n">mul_mem</span><span class="o">,</span> <span class="n">exact</span> <span class="bp">@</span><span class="n">k</span> <span class="n">a</span> <span class="n">b</span> <span class="n">ha2</span> <span class="n">hb2</span><span class="o">}),</span>
+        <span class="o">},</span>
+    <span class="o">},</span>
+    <span class="n">inv_mem</span> <span class="o">:=</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">x</span> <span class="bp">⟨</span><span class="n">hx1</span><span class="o">,</span> <span class="n">hx2</span><span class="bp">⟩</span><span class="o">,</span> <span class="n">and</span><span class="bp">.</span><span class="n">intro</span> <span class="o">(</span><span class="n">is_subfield</span><span class="bp">.</span><span class="n">inv_mem</span> <span class="n">hx1</span><span class="o">)</span> <span class="o">(</span><span class="n">is_subfield</span><span class="bp">.</span><span class="n">inv_mem</span> <span class="n">hx2</span><span class="o">))</span>
+<span class="o">}</span>
+</pre></div>
 
 #### [ Mario Carneiro (Jan 10 2019 at 23:22)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/154877108):
-`@h1.neg_mem` doesn't work because you can't mix field notation and `@` notation
+<p><code>@h1.neg_mem</code> doesn't work because you can't mix field notation and <code>@</code> notation</p>
 
 #### [ Mario Carneiro (Jan 10 2019 at 23:22)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/154877121):
-you have to write `@neg_mem h1`
+<p>you have to write <code>@neg_mem h1</code></p>
 
 #### [ Mario Carneiro (Jan 10 2019 at 23:24)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/154877252):
-also you shouldn't project out of a typeclass argument, because it's implicit
+<p>also you shouldn't project out of a typeclass argument, because it's implicit</p>
 
 #### [ Abhimanyu Pallavi Sudhir (Jan 10 2019 at 23:24)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/154877259):
-Re:(@,.) -- I thought so, but I tried that and it doesn't work either -- it just doesn't find `is_subfield.neg_mem`
+<p>Re:(@,.) -- I thought so, but I tried that and it doesn't work either -- it just doesn't find <code>is_subfield.neg_mem</code></p>
 
 #### [ Abhimanyu Pallavi Sudhir (Jan 10 2019 at 23:25)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/154877297):
-```quote
-also you shouldn't project out of a typeclass argument, because it's implicit
-```
- What do you mean?
+<blockquote>
+<p>also you shouldn't project out of a typeclass argument, because it's implicit</p>
+</blockquote>
+<p>What do you mean?</p>
 
 #### [ Mario Carneiro (Jan 10 2019 at 23:25)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/154877317):
-what do you get when you try it?
+<p>what do you get when you try it?</p>
 
 #### [ Abhimanyu Pallavi Sudhir (Jan 10 2019 at 23:26)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/154877398):
-`unknown identifier 'is_subfield.add_mem'`
+<p><code>unknown identifier 'is_subfield.add_mem'</code></p>
 
 #### [ Mario Carneiro (Jan 10 2019 at 23:26)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/154877407):
-that means it's not called that
+<p>that means it's not called that</p>
 
 #### [ Mario Carneiro (Jan 10 2019 at 23:27)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/154877424):
-what is the def of `is_subfield`?
+<p>what is the def of <code>is_subfield</code>?</p>
 
 #### [ Abhimanyu Pallavi Sudhir (Jan 10 2019 at 23:27)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/154877432):
-I tried with `is_add_submonoid` too.
+<p>I tried with <code>is_add_submonoid</code> too.</p>
 
 #### [ Abhimanyu Pallavi Sudhir (Jan 10 2019 at 23:27)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/154877442):
-```lean
-type mismatch at application
-  is_add_submonoid.add_mem
-term
-  h1
-has type
-  is_subfield F1 : Type
-but is expected to have type
-  Type ? : Type (?+1)
-```
+<div class="codehilite"><pre><span></span><span class="n">type</span> <span class="n">mismatch</span> <span class="n">at</span> <span class="n">application</span>
+  <span class="n">is_add_submonoid</span><span class="bp">.</span><span class="n">add_mem</span>
+<span class="n">term</span>
+  <span class="n">h1</span>
+<span class="n">has</span> <span class="n">type</span>
+  <span class="n">is_subfield</span> <span class="n">F1</span> <span class="o">:</span> <span class="kt">Type</span>
+<span class="n">but</span> <span class="n">is</span> <span class="n">expected</span> <span class="n">to</span> <span class="k">have</span> <span class="n">type</span>
+  <span class="kt">Type</span> <span class="err">?</span> <span class="o">:</span> <span class="kt">Type</span> <span class="o">(</span><span class="err">?</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span>
+</pre></div>
 
 #### [ Mario Carneiro (Jan 10 2019 at 23:27)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/154877453):
-you don't pass in `h1` at all
+<p>you don't pass in <code>h1</code> at all</p>
 
 #### [ Abhimanyu Pallavi Sudhir (Jan 10 2019 at 23:28)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/154877513):
-I did.
+<p>I did.</p>
 
 #### [ Abhimanyu Pallavi Sudhir (Jan 10 2019 at 23:28)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/154877517):
-This is what I'm trying:
-```lean
-theorem field_intersect (F1 F2 : set K) [h1 : is_subfield F1] [h2 : is_subfield F2] : is_subfield (F1 ∩ F2) := {
-    zero_mem := and.intro h1.zero_mem h2.zero_mem,
-    one_mem := and.intro h1.one_mem h2.one_mem,
-    add_mem := λ a b ⟨ha1, ha2⟩ ⟨hb1, hb2⟩, and.intro ((@is_add_submonoid.add_mem h1) a b ha1 hb1) (@h2.add_mem a b ha2 hb2),
-    mul_mem := λ a b ⟨ha1, ha2⟩ ⟨hb1, hb2⟩, and.intro (@h1.mul_mem ha1 hb1) (@h2.mul_mem a b ha2 hb2),
-    neg_mem := λ a ⟨ha1, ha2⟩, and.intro (@h1.neg_mem a ha1) (@h2.neg_mem a ha2),
-    inv_mem := (λ x ⟨hx1, hx2⟩, and.intro (is_subfield.inv_mem hx1) (is_subfield.inv_mem hx2))
-}
-```
+<p>This is what I'm trying:</p>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">field_intersect</span> <span class="o">(</span><span class="n">F1</span> <span class="n">F2</span> <span class="o">:</span> <span class="n">set</span> <span class="n">K</span><span class="o">)</span> <span class="o">[</span><span class="n">h1</span> <span class="o">:</span> <span class="n">is_subfield</span> <span class="n">F1</span><span class="o">]</span> <span class="o">[</span><span class="n">h2</span> <span class="o">:</span> <span class="n">is_subfield</span> <span class="n">F2</span><span class="o">]</span> <span class="o">:</span> <span class="n">is_subfield</span> <span class="o">(</span><span class="n">F1</span> <span class="err">∩</span> <span class="n">F2</span><span class="o">)</span> <span class="o">:=</span> <span class="o">{</span>
+    <span class="n">zero_mem</span> <span class="o">:=</span> <span class="n">and</span><span class="bp">.</span><span class="n">intro</span> <span class="n">h1</span><span class="bp">.</span><span class="n">zero_mem</span> <span class="n">h2</span><span class="bp">.</span><span class="n">zero_mem</span><span class="o">,</span>
+    <span class="n">one_mem</span> <span class="o">:=</span> <span class="n">and</span><span class="bp">.</span><span class="n">intro</span> <span class="n">h1</span><span class="bp">.</span><span class="n">one_mem</span> <span class="n">h2</span><span class="bp">.</span><span class="n">one_mem</span><span class="o">,</span>
+    <span class="n">add_mem</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">a</span> <span class="n">b</span> <span class="bp">⟨</span><span class="n">ha1</span><span class="o">,</span> <span class="n">ha2</span><span class="bp">⟩</span> <span class="bp">⟨</span><span class="n">hb1</span><span class="o">,</span> <span class="n">hb2</span><span class="bp">⟩</span><span class="o">,</span> <span class="n">and</span><span class="bp">.</span><span class="n">intro</span> <span class="o">((</span><span class="bp">@</span><span class="n">is_add_submonoid</span><span class="bp">.</span><span class="n">add_mem</span> <span class="n">h1</span><span class="o">)</span> <span class="n">a</span> <span class="n">b</span> <span class="n">ha1</span> <span class="n">hb1</span><span class="o">)</span> <span class="o">(</span><span class="bp">@</span><span class="n">h2</span><span class="bp">.</span><span class="n">add_mem</span> <span class="n">a</span> <span class="n">b</span> <span class="n">ha2</span> <span class="n">hb2</span><span class="o">),</span>
+    <span class="n">mul_mem</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">a</span> <span class="n">b</span> <span class="bp">⟨</span><span class="n">ha1</span><span class="o">,</span> <span class="n">ha2</span><span class="bp">⟩</span> <span class="bp">⟨</span><span class="n">hb1</span><span class="o">,</span> <span class="n">hb2</span><span class="bp">⟩</span><span class="o">,</span> <span class="n">and</span><span class="bp">.</span><span class="n">intro</span> <span class="o">(</span><span class="bp">@</span><span class="n">h1</span><span class="bp">.</span><span class="n">mul_mem</span> <span class="n">ha1</span> <span class="n">hb1</span><span class="o">)</span> <span class="o">(</span><span class="bp">@</span><span class="n">h2</span><span class="bp">.</span><span class="n">mul_mem</span> <span class="n">a</span> <span class="n">b</span> <span class="n">ha2</span> <span class="n">hb2</span><span class="o">),</span>
+    <span class="n">neg_mem</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">a</span> <span class="bp">⟨</span><span class="n">ha1</span><span class="o">,</span> <span class="n">ha2</span><span class="bp">⟩</span><span class="o">,</span> <span class="n">and</span><span class="bp">.</span><span class="n">intro</span> <span class="o">(</span><span class="bp">@</span><span class="n">h1</span><span class="bp">.</span><span class="n">neg_mem</span> <span class="n">a</span> <span class="n">ha1</span><span class="o">)</span> <span class="o">(</span><span class="bp">@</span><span class="n">h2</span><span class="bp">.</span><span class="n">neg_mem</span> <span class="n">a</span> <span class="n">ha2</span><span class="o">),</span>
+    <span class="n">inv_mem</span> <span class="o">:=</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">x</span> <span class="bp">⟨</span><span class="n">hx1</span><span class="o">,</span> <span class="n">hx2</span><span class="bp">⟩</span><span class="o">,</span> <span class="n">and</span><span class="bp">.</span><span class="n">intro</span> <span class="o">(</span><span class="n">is_subfield</span><span class="bp">.</span><span class="n">inv_mem</span> <span class="n">hx1</span><span class="o">)</span> <span class="o">(</span><span class="n">is_subfield</span><span class="bp">.</span><span class="n">inv_mem</span> <span class="n">hx2</span><span class="o">))</span>
+<span class="o">}</span>
+</pre></div>
 
 #### [ Mario Carneiro (Jan 10 2019 at 23:28)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/154877518):
-i know, stop
+<p>i know, stop</p>
 
 #### [ Mario Carneiro (Jan 10 2019 at 23:28)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/154877523):
-just call it without passing in `h1`
+<p>just call it without passing in <code>h1</code></p>
 
 #### [ Abhimanyu Pallavi Sudhir (Jan 10 2019 at 23:29)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/154877543):
-Ah.
+<p>Ah.</p>
 
 #### [ Mario Carneiro (Jan 10 2019 at 23:29)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/154877546):
-like `is_add_submonoid.add_mem ha1 hb1`
+<p>like <code>is_add_submonoid.add_mem ha1 hb1</code></p>
 
 #### [ Abhimanyu Pallavi Sudhir (Jan 10 2019 at 23:30)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/154877642):
-I see, yes this works.
+<p>I see, yes this works.</p>
 
 #### [ Abhimanyu Pallavi Sudhir (Jan 10 2019 at 23:30)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/154877652):
-But why? What's wrong with trying to feed Lean the class?
+<p>But why? What's wrong with trying to feed Lean the class?</p>
 
 #### [ Mario Carneiro (Jan 10 2019 at 23:31)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/154877684):
-the class is implicit, you aren't supposed to give it, lean finds it by typeclass inference
+<p>the class is implicit, you aren't supposed to give it, lean finds it by typeclass inference</p>
 
 #### [ Mario Carneiro (Jan 10 2019 at 23:31)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/154877696):
-you can give it if you use `@`
+<p>you can give it if you use <code>@</code></p>
 
 #### [ Abhimanyu Pallavi Sudhir (Jan 10 2019 at 23:32)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/154877758):
-Yes, why wasn't that working?
+<p>Yes, why wasn't that working?</p>
 
 #### [ Abhimanyu Pallavi Sudhir (Jan 10 2019 at 23:32)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/154877771):
-Using `@` and feeding the class?
+<p>Using <code>@</code> and feeding the class?</p>
 
 #### [ Mario Carneiro (Jan 10 2019 at 23:32)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/154877782):
-that should work, you just need a few more arguments that way, like the types
+<p>that should work, you just need a few more arguments that way, like the types</p>
 
 #### [ Mario Carneiro (Jan 10 2019 at 23:33)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/154877802):
-I guess it looks something like `@is_add_submonoid.add_mem F1 h1 a b ha1 hb1`
+<p>I guess it looks something like <code>@is_add_submonoid.add_mem F1 h1 a b ha1 hb1</code></p>
 
 #### [ Mario Carneiro (Jan 10 2019 at 23:34)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/154877891):
-oh wait, no it should be something more complicated than just `h1` there
+<p>oh wait, no it should be something more complicated than just <code>h1</code> there</p>
 
 #### [ Mario Carneiro (Jan 10 2019 at 23:35)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/154877921):
-because `h1` is a `is_subfield` and it needs a `is_add_monoid`, it does some typeclass inference to fill the gap
+<p>because <code>h1</code> is a <code>is_subfield</code> and it needs a <code>is_add_monoid</code>, it does some typeclass inference to fill the gap</p>
 
 #### [ Abhimanyu Pallavi Sudhir (Jan 10 2019 at 23:36)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/154878002):
-Oh ok. I think I see why it's best to leave things to Lean's class inference.
+<p>Oh ok. I think I see why it's best to leave things to Lean's class inference.</p>
 
 #### [ Abhimanyu Pallavi Sudhir (Jan 16 2019 at 20:28)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/155280441):
-I'm proving a similar theorem and having the same problem again, except this time just leaving Lean to do its type class inference doesn't work (only `zero_mem` and `one_mem` work):
+<p>I'm proving a similar theorem and having the same problem again, except this time just leaving Lean to do its type class inference doesn't work (only <code>zero_mem</code> and <code>one_mem</code> work):</p>
+<div class="codehilite"><pre><span></span><span class="kn">variables</span> <span class="o">{</span><span class="n">K</span> <span class="n">L</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">[</span><span class="n">discrete_field</span> <span class="n">K</span><span class="o">]</span> <span class="o">[</span><span class="n">discrete_field</span> <span class="n">L</span><span class="o">]</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">K</span> <span class="bp">→</span> <span class="n">L</span><span class="o">)</span>
+<span class="kn">theorem</span> <span class="n">field_intersect&#39;</span> <span class="o">(</span><span class="n">PL</span> <span class="o">:</span> <span class="n">set</span> <span class="o">(</span><span class="n">set</span> <span class="n">L</span><span class="o">))</span> <span class="o">[</span><span class="n">H</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">J</span> <span class="err">∈</span> <span class="n">PL</span><span class="o">,</span> <span class="n">is_subfield</span> <span class="n">J</span><span class="o">]</span> <span class="o">:</span> <span class="n">is_subfield</span> <span class="o">(</span><span class="n">set</span><span class="bp">.</span><span class="n">sInter</span> <span class="n">PL</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">{</span>   <span class="n">zero_mem</span> <span class="o">:=</span> <span class="k">by</span> <span class="o">{</span> <span class="n">simp</span><span class="o">,</span> <span class="n">exact</span> <span class="bp">λ</span> <span class="n">J</span> <span class="n">HJ</span><span class="o">,</span> <span class="o">(</span><span class="n">H</span> <span class="n">J</span> <span class="n">HJ</span><span class="o">)</span><span class="bp">.</span><span class="n">zero_mem</span> <span class="o">},</span>
+    <span class="n">one_mem</span> <span class="o">:=</span> <span class="k">by</span> <span class="o">{</span> <span class="n">simp</span><span class="o">,</span> <span class="n">exact</span> <span class="bp">λ</span> <span class="n">J</span> <span class="n">HJ</span><span class="o">,</span> <span class="o">(</span><span class="n">H</span> <span class="n">J</span> <span class="n">HJ</span><span class="o">)</span><span class="bp">.</span><span class="n">one_mem</span> <span class="o">},</span>
+    <span class="n">add_mem</span> <span class="o">:=</span> <span class="k">by</span> <span class="o">{</span> <span class="n">simp</span><span class="o">,</span> <span class="n">exact</span> <span class="bp">λ</span> <span class="n">a</span> <span class="n">b</span> <span class="n">ha</span> <span class="n">hb</span> <span class="n">J</span> <span class="n">HJ</span><span class="o">,</span> <span class="n">is_add_submonoid</span><span class="bp">.</span><span class="n">add_mem</span> <span class="o">(</span><span class="n">ha</span> <span class="n">J</span> <span class="n">HJ</span><span class="o">)</span> <span class="o">(</span><span class="n">hb</span> <span class="n">J</span> <span class="n">HJ</span><span class="o">)</span> <span class="o">},</span>
+    <span class="n">mul_mem</span> <span class="o">:=</span> <span class="k">by</span> <span class="o">{</span> <span class="n">simp</span><span class="o">,</span> <span class="n">exact</span> <span class="bp">λ</span> <span class="n">a</span> <span class="n">b</span> <span class="n">ha</span> <span class="n">hb</span> <span class="n">J</span> <span class="n">HJ</span><span class="o">,</span> <span class="n">is_submonoid</span><span class="bp">.</span><span class="n">mul_mem</span> <span class="o">(</span><span class="n">ha</span> <span class="n">J</span> <span class="n">HJ</span><span class="o">)</span> <span class="o">(</span><span class="n">hb</span> <span class="n">J</span> <span class="n">HJ</span><span class="o">)</span> <span class="o">},</span>
+    <span class="n">neg_mem</span> <span class="o">:=</span> <span class="k">by</span> <span class="o">{</span> <span class="n">simp</span><span class="o">,</span> <span class="n">exact</span> <span class="bp">λ</span> <span class="n">a</span> <span class="n">h</span> <span class="n">J</span> <span class="n">HJ</span><span class="o">,</span> <span class="n">is_add_subgroup</span><span class="bp">.</span><span class="n">neg_mem</span> <span class="o">(</span><span class="n">h</span> <span class="n">J</span> <span class="n">HJ</span><span class="o">)</span> <span class="o">},</span>
+    <span class="n">inv_mem</span> <span class="o">:=</span> <span class="k">by</span> <span class="o">{</span> <span class="n">simp</span><span class="o">,</span> <span class="n">exact</span> <span class="bp">λ</span> <span class="n">a</span> <span class="n">h</span> <span class="n">J</span> <span class="n">HJ</span><span class="o">,</span> <span class="n">is_subfield</span><span class="bp">.</span><span class="n">inv_mem</span> <span class="o">(</span><span class="n">h</span> <span class="n">J</span> <span class="n">HJ</span><span class="o">)</span> <span class="o">}</span> <span class="o">}</span>
+</pre></div>
 
-```lean
-variables {K L : Type} [discrete_field K] [discrete_field L] (f : K → L) 
-theorem field_intersect' (PL : set (set L)) [H : ∀ J ∈ PL, is_subfield J] : is_subfield (set.sInter PL) :=
-{   zero_mem := by { simp, exact λ J HJ, (H J HJ).zero_mem },
-    one_mem := by { simp, exact λ J HJ, (H J HJ).one_mem },
-    add_mem := by { simp, exact λ a b ha hb J HJ, is_add_submonoid.add_mem (ha J HJ) (hb J HJ) },
-    mul_mem := by { simp, exact λ a b ha hb J HJ, is_submonoid.mul_mem (ha J HJ) (hb J HJ) },
-    neg_mem := by { simp, exact λ a h J HJ, is_add_subgroup.neg_mem (h J HJ) },
-    inv_mem := by { simp, exact λ a h J HJ, is_subfield.inv_mem (h J HJ) } }
-```
 
-It worked with `set.Inter`:
-
-```lean
-theorem field_intersect (Fi : ι → set K) [hi : ∀ i, is_subfield (Fi i)] : is_subfield (set.Inter Fi) := 
-{   zero_mem := by { simp, exact λ i, (hi i).zero_mem },
-    one_mem := by { simp, exact λ i, (hi i).one_mem },
-    add_mem := by { simp, exact λ a b ha hb i, is_add_submonoid.add_mem (ha i) (hb i) },
-    mul_mem := by { simp, exact λ a b ha hb i, is_submonoid.mul_mem (ha i) (hb i) },
-    neg_mem := by { simp, exact λ a h i, is_add_subgroup.neg_mem (h i) },
-    inv_mem := by { simp, exact λ a h i, is_subfield.inv_mem (h i) } }
-```
+<p>It worked with <code>set.Inter</code>:</p>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">field_intersect</span> <span class="o">(</span><span class="n">Fi</span> <span class="o">:</span> <span class="n">ι</span> <span class="bp">→</span> <span class="n">set</span> <span class="n">K</span><span class="o">)</span> <span class="o">[</span><span class="n">hi</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">i</span><span class="o">,</span> <span class="n">is_subfield</span> <span class="o">(</span><span class="n">Fi</span> <span class="n">i</span><span class="o">)]</span> <span class="o">:</span> <span class="n">is_subfield</span> <span class="o">(</span><span class="n">set</span><span class="bp">.</span><span class="n">Inter</span> <span class="n">Fi</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">{</span>   <span class="n">zero_mem</span> <span class="o">:=</span> <span class="k">by</span> <span class="o">{</span> <span class="n">simp</span><span class="o">,</span> <span class="n">exact</span> <span class="bp">λ</span> <span class="n">i</span><span class="o">,</span> <span class="o">(</span><span class="n">hi</span> <span class="n">i</span><span class="o">)</span><span class="bp">.</span><span class="n">zero_mem</span> <span class="o">},</span>
+    <span class="n">one_mem</span> <span class="o">:=</span> <span class="k">by</span> <span class="o">{</span> <span class="n">simp</span><span class="o">,</span> <span class="n">exact</span> <span class="bp">λ</span> <span class="n">i</span><span class="o">,</span> <span class="o">(</span><span class="n">hi</span> <span class="n">i</span><span class="o">)</span><span class="bp">.</span><span class="n">one_mem</span> <span class="o">},</span>
+    <span class="n">add_mem</span> <span class="o">:=</span> <span class="k">by</span> <span class="o">{</span> <span class="n">simp</span><span class="o">,</span> <span class="n">exact</span> <span class="bp">λ</span> <span class="n">a</span> <span class="n">b</span> <span class="n">ha</span> <span class="n">hb</span> <span class="n">i</span><span class="o">,</span> <span class="n">is_add_submonoid</span><span class="bp">.</span><span class="n">add_mem</span> <span class="o">(</span><span class="n">ha</span> <span class="n">i</span><span class="o">)</span> <span class="o">(</span><span class="n">hb</span> <span class="n">i</span><span class="o">)</span> <span class="o">},</span>
+    <span class="n">mul_mem</span> <span class="o">:=</span> <span class="k">by</span> <span class="o">{</span> <span class="n">simp</span><span class="o">,</span> <span class="n">exact</span> <span class="bp">λ</span> <span class="n">a</span> <span class="n">b</span> <span class="n">ha</span> <span class="n">hb</span> <span class="n">i</span><span class="o">,</span> <span class="n">is_submonoid</span><span class="bp">.</span><span class="n">mul_mem</span> <span class="o">(</span><span class="n">ha</span> <span class="n">i</span><span class="o">)</span> <span class="o">(</span><span class="n">hb</span> <span class="n">i</span><span class="o">)</span> <span class="o">},</span>
+    <span class="n">neg_mem</span> <span class="o">:=</span> <span class="k">by</span> <span class="o">{</span> <span class="n">simp</span><span class="o">,</span> <span class="n">exact</span> <span class="bp">λ</span> <span class="n">a</span> <span class="n">h</span> <span class="n">i</span><span class="o">,</span> <span class="n">is_add_subgroup</span><span class="bp">.</span><span class="n">neg_mem</span> <span class="o">(</span><span class="n">h</span> <span class="n">i</span><span class="o">)</span> <span class="o">},</span>
+    <span class="n">inv_mem</span> <span class="o">:=</span> <span class="k">by</span> <span class="o">{</span> <span class="n">simp</span><span class="o">,</span> <span class="n">exact</span> <span class="bp">λ</span> <span class="n">a</span> <span class="n">h</span> <span class="n">i</span><span class="o">,</span> <span class="n">is_subfield</span><span class="bp">.</span><span class="n">inv_mem</span> <span class="o">(</span><span class="n">h</span> <span class="n">i</span><span class="o">)</span> <span class="o">}</span> <span class="o">}</span>
+</pre></div>
 
 #### [ Kevin Buzzard (Jan 16 2019 at 20:46)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/155281908):
-Can you post working code so I can cut and paste?
+<p>Can you post working code so I can cut and paste?</p>
 
 #### [ Kevin Buzzard (Jan 16 2019 at 20:46)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/155281909):
-PS this "simp, ..." style is discouraged. There are always ways around it.
+<p>PS this "simp, ..." style is discouraged. There are always ways around it.</p>
 
 #### [ Abhimanyu Pallavi Sudhir (Jan 16 2019 at 20:53)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/155282381):
-```lean
-import algebra.field
-import field_theory.subfield
-import data.polynomial
-variables {K L : Type} [discrete_field K] [discrete_field L] (f : K → L)
-theorem field_intersect' (PL : set (set L)) [H : ∀ J ∈ PL, is_subfield J] : is_subfield (set.sInter PL) :=
-{   zero_mem := by { simp, exact λ J HJ, (H J HJ).zero_mem },
-    one_mem := by { simp, exact λ J HJ, (H J HJ).one_mem },
-    add_mem := by { simp, exact λ a b ha hb J HJ, is_add_submonoid.add_mem (ha J HJ) (hb J HJ) },
-    mul_mem := by { simp, exact λ a b ha hb J HJ, is_submonoid.mul_mem (ha J HJ) (hb J HJ) },
-    neg_mem := by { simp, exact λ a h J HJ, is_add_subgroup.neg_mem (h J HJ) },
-    inv_mem := by { simp, exact λ a h J HJ, is_subfield.inv_mem (h J HJ) } }
-```
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">algebra</span><span class="bp">.</span><span class="n">field</span>
+<span class="kn">import</span> <span class="n">field_theory</span><span class="bp">.</span><span class="n">subfield</span>
+<span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">polynomial</span>
+<span class="kn">variables</span> <span class="o">{</span><span class="n">K</span> <span class="n">L</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">[</span><span class="n">discrete_field</span> <span class="n">K</span><span class="o">]</span> <span class="o">[</span><span class="n">discrete_field</span> <span class="n">L</span><span class="o">]</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">K</span> <span class="bp">→</span> <span class="n">L</span><span class="o">)</span>
+<span class="kn">theorem</span> <span class="n">field_intersect&#39;</span> <span class="o">(</span><span class="n">PL</span> <span class="o">:</span> <span class="n">set</span> <span class="o">(</span><span class="n">set</span> <span class="n">L</span><span class="o">))</span> <span class="o">[</span><span class="n">H</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">J</span> <span class="err">∈</span> <span class="n">PL</span><span class="o">,</span> <span class="n">is_subfield</span> <span class="n">J</span><span class="o">]</span> <span class="o">:</span> <span class="n">is_subfield</span> <span class="o">(</span><span class="n">set</span><span class="bp">.</span><span class="n">sInter</span> <span class="n">PL</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">{</span>   <span class="n">zero_mem</span> <span class="o">:=</span> <span class="k">by</span> <span class="o">{</span> <span class="n">simp</span><span class="o">,</span> <span class="n">exact</span> <span class="bp">λ</span> <span class="n">J</span> <span class="n">HJ</span><span class="o">,</span> <span class="o">(</span><span class="n">H</span> <span class="n">J</span> <span class="n">HJ</span><span class="o">)</span><span class="bp">.</span><span class="n">zero_mem</span> <span class="o">},</span>
+    <span class="n">one_mem</span> <span class="o">:=</span> <span class="k">by</span> <span class="o">{</span> <span class="n">simp</span><span class="o">,</span> <span class="n">exact</span> <span class="bp">λ</span> <span class="n">J</span> <span class="n">HJ</span><span class="o">,</span> <span class="o">(</span><span class="n">H</span> <span class="n">J</span> <span class="n">HJ</span><span class="o">)</span><span class="bp">.</span><span class="n">one_mem</span> <span class="o">},</span>
+    <span class="n">add_mem</span> <span class="o">:=</span> <span class="k">by</span> <span class="o">{</span> <span class="n">simp</span><span class="o">,</span> <span class="n">exact</span> <span class="bp">λ</span> <span class="n">a</span> <span class="n">b</span> <span class="n">ha</span> <span class="n">hb</span> <span class="n">J</span> <span class="n">HJ</span><span class="o">,</span> <span class="n">is_add_submonoid</span><span class="bp">.</span><span class="n">add_mem</span> <span class="o">(</span><span class="n">ha</span> <span class="n">J</span> <span class="n">HJ</span><span class="o">)</span> <span class="o">(</span><span class="n">hb</span> <span class="n">J</span> <span class="n">HJ</span><span class="o">)</span> <span class="o">},</span>
+    <span class="n">mul_mem</span> <span class="o">:=</span> <span class="k">by</span> <span class="o">{</span> <span class="n">simp</span><span class="o">,</span> <span class="n">exact</span> <span class="bp">λ</span> <span class="n">a</span> <span class="n">b</span> <span class="n">ha</span> <span class="n">hb</span> <span class="n">J</span> <span class="n">HJ</span><span class="o">,</span> <span class="n">is_submonoid</span><span class="bp">.</span><span class="n">mul_mem</span> <span class="o">(</span><span class="n">ha</span> <span class="n">J</span> <span class="n">HJ</span><span class="o">)</span> <span class="o">(</span><span class="n">hb</span> <span class="n">J</span> <span class="n">HJ</span><span class="o">)</span> <span class="o">},</span>
+    <span class="n">neg_mem</span> <span class="o">:=</span> <span class="k">by</span> <span class="o">{</span> <span class="n">simp</span><span class="o">,</span> <span class="n">exact</span> <span class="bp">λ</span> <span class="n">a</span> <span class="n">h</span> <span class="n">J</span> <span class="n">HJ</span><span class="o">,</span> <span class="n">is_add_subgroup</span><span class="bp">.</span><span class="n">neg_mem</span> <span class="o">(</span><span class="n">h</span> <span class="n">J</span> <span class="n">HJ</span><span class="o">)</span> <span class="o">},</span>
+    <span class="n">inv_mem</span> <span class="o">:=</span> <span class="k">by</span> <span class="o">{</span> <span class="n">simp</span><span class="o">,</span> <span class="n">exact</span> <span class="bp">λ</span> <span class="n">a</span> <span class="n">h</span> <span class="n">J</span> <span class="n">HJ</span><span class="o">,</span> <span class="n">is_subfield</span><span class="bp">.</span><span class="n">inv_mem</span> <span class="o">(</span><span class="n">h</span> <span class="n">J</span> <span class="n">HJ</span><span class="o">)</span> <span class="o">}</span> <span class="o">}</span>
+</pre></div>
 
 #### [ Abhimanyu Pallavi Sudhir (Jan 16 2019 at 20:53)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/155282401):
-Doesn't that work (for copy-pasting, I mean)?
+<p>Doesn't that work (for copy-pasting, I mean)?</p>
 
 #### [ Kevin Buzzard (Jan 16 2019 at 21:04)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/155283329):
-```lean
-import field_theory.subfield
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">field_theory</span><span class="bp">.</span><span class="n">subfield</span>
 
-variables {K L : Type} [discrete_field K] [discrete_field L] (f : K → L)
-theorem field_intersect' (PL : set (set L)) [H : ∀ J ∈ PL, is_subfield J] : is_subfield (set.sInter PL) :=
-{   zero_mem := λ J HJ, (H J HJ).zero_mem,
-    one_mem := λ J HJ, (H J HJ).one_mem,
-    add_mem := λ a b ha hb J HJ, let X := (H J HJ).add_mem in X (ha J HJ) (hb J HJ),
-    mul_mem := sorry,
-    neg_mem := sorry,
-    inv_mem := sorry,
-}
-```
+<span class="kn">variables</span> <span class="o">{</span><span class="n">K</span> <span class="n">L</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">[</span><span class="n">discrete_field</span> <span class="n">K</span><span class="o">]</span> <span class="o">[</span><span class="n">discrete_field</span> <span class="n">L</span><span class="o">]</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">K</span> <span class="bp">→</span> <span class="n">L</span><span class="o">)</span>
+<span class="kn">theorem</span> <span class="n">field_intersect&#39;</span> <span class="o">(</span><span class="n">PL</span> <span class="o">:</span> <span class="n">set</span> <span class="o">(</span><span class="n">set</span> <span class="n">L</span><span class="o">))</span> <span class="o">[</span><span class="n">H</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">J</span> <span class="err">∈</span> <span class="n">PL</span><span class="o">,</span> <span class="n">is_subfield</span> <span class="n">J</span><span class="o">]</span> <span class="o">:</span> <span class="n">is_subfield</span> <span class="o">(</span><span class="n">set</span><span class="bp">.</span><span class="n">sInter</span> <span class="n">PL</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">{</span>   <span class="n">zero_mem</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">J</span> <span class="n">HJ</span><span class="o">,</span> <span class="o">(</span><span class="n">H</span> <span class="n">J</span> <span class="n">HJ</span><span class="o">)</span><span class="bp">.</span><span class="n">zero_mem</span><span class="o">,</span>
+    <span class="n">one_mem</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">J</span> <span class="n">HJ</span><span class="o">,</span> <span class="o">(</span><span class="n">H</span> <span class="n">J</span> <span class="n">HJ</span><span class="o">)</span><span class="bp">.</span><span class="n">one_mem</span><span class="o">,</span>
+    <span class="n">add_mem</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">a</span> <span class="n">b</span> <span class="n">ha</span> <span class="n">hb</span> <span class="n">J</span> <span class="n">HJ</span><span class="o">,</span> <span class="k">let</span> <span class="n">X</span> <span class="o">:=</span> <span class="o">(</span><span class="n">H</span> <span class="n">J</span> <span class="n">HJ</span><span class="o">)</span><span class="bp">.</span><span class="n">add_mem</span> <span class="k">in</span> <span class="n">X</span> <span class="o">(</span><span class="n">ha</span> <span class="n">J</span> <span class="n">HJ</span><span class="o">)</span> <span class="o">(</span><span class="n">hb</span> <span class="n">J</span> <span class="n">HJ</span><span class="o">),</span>
+    <span class="n">mul_mem</span> <span class="o">:=</span> <span class="n">sorry</span><span class="o">,</span>
+    <span class="n">neg_mem</span> <span class="o">:=</span> <span class="n">sorry</span><span class="o">,</span>
+    <span class="n">inv_mem</span> <span class="o">:=</span> <span class="n">sorry</span><span class="o">,</span>
+<span class="o">}</span>
+</pre></div>
 
-You don't need `simp` for stuff like this, you can just spell it out. Although I struggled with `add_mem` and I don't know why, it's something to do with classes that I don't understand properly.
+
+<p>You don't need <code>simp</code> for stuff like this, you can just spell it out. Although I struggled with <code>add_mem</code> and I don't know why, it's something to do with classes that I don't understand properly.</p>
 
 #### [ Abhimanyu Pallavi Sudhir (Jan 16 2019 at 21:07)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/155283540):
-Yeah, the `simp` was a legacy from my code for `field_intersect` with indexed subsets.
+<p>Yeah, the <code>simp</code> was a legacy from my code for <code>field_intersect</code> with indexed subsets.</p>
 
 #### [ Abhimanyu Pallavi Sudhir (Jan 16 2019 at 21:07)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/155283598):
-Interesting that the `let ... in` thing works, though -- I did notice that going `have` the `add_mem` statement (without feeding it any parameters) in tactic mode worked.
+<p>Interesting that the <code>let ... in</code> thing works, though -- I did notice that going <code>have</code> the <code>add_mem</code> statement (without feeding it any parameters) in tactic mode worked.</p>
 
 #### [ Patrick Massot (Jan 16 2019 at 21:30)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/155285644):
-This is pretty weird. A more understandable solution would be `λ a b ha hb J HJ, by haveI := H J HJ ; exact is_add_submonoid.add_mem (ha J HJ) (hb J HJ),`
+<p>This is pretty weird. A more understandable solution would be <code>λ a b ha hb J HJ, by haveI := H J HJ ; exact is_add_submonoid.add_mem (ha J HJ) (hb J HJ),</code></p>
 
 #### [ Patrick Massot (Jan 16 2019 at 21:33)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20something%20is%20a%20subfield/near/155285877):
-Of course you can also use the ugly direct term `@is_add_submonoid.add_mem _ _ _ (H J HJ).to_is_add_submonoid _ _ (ha J HJ) (hb J HJ)`
+<p>Of course you can also use the ugly direct term <code>@is_add_submonoid.add_mem _ _ _ (H J HJ).to_is_add_submonoid _ _ (ha J HJ) (hb J HJ)</code></p>
 
 
 {% endraw %}

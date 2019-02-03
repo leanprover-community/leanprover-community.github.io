@@ -12,37 +12,34 @@ permalink: archive/113488general/07922reflectbool.html
 
 {% raw %}
 #### [ Simon Hudon (Aug 03 2018 at 08:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/reflect%20bool/near/130821232):
-I'm running the following code:
+<p>I'm running the following code:</p>
+<div class="codehilite"><pre><span></span><span class="n">run_cmd</span> <span class="n">eval_expr</span> <span class="n">bool</span> <span class="o">(</span><span class="n">reflect</span> <span class="n">tt</span><span class="o">)</span> <span class="bp">&gt;&gt;=</span> <span class="n">trace</span>
+</pre></div>
 
-```lean
-run_cmd eval_expr bool (reflect tt) >>= trace
-```
 
-`bool` has an instance of `has_reflect` and the above is type correct but when I run it I get the following error:
+<p><code>bool</code> has an instance of <code>has_reflect</code> and the above is type correct but when I run it I get the following error:</p>
+<div class="codehilite"><pre><span></span>VM does not have code for &#39;bool.tt&#39;
+</pre></div>
 
-```
-VM does not have code for 'bool.tt'
-```
 
-What can I do?
+<p>What can I do?</p>
 
 #### [ Mario Carneiro (Aug 03 2018 at 12:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/reflect%20bool/near/130830241):
-There is definitely a bug somewhere in the workings of `eval_expr`
+<p>There is definitely a bug somewhere in the workings of <code>eval_expr</code></p>
 
 #### [ Mario Carneiro (Aug 03 2018 at 12:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/reflect%20bool/near/130830284):
-workaround:
-```
-run_cmd eval_expr bool (reflect (id tt)) >>= trace
-```
+<p>workaround:</p>
+<div class="codehilite"><pre><span></span>run_cmd eval_expr bool (reflect (id tt)) &gt;&gt;= trace
+</pre></div>
 
 #### [ Minchao Wu (Aug 03 2018 at 12:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/reflect%20bool/near/130830305):
-looks like magic
+<p>looks like magic</p>
 
 #### [ Simon Hudon (Aug 03 2018 at 15:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/reflect%20bool/near/130839532):
-Thanks! I was able to use this trick with `user_attribute.get_param_untyped` to replace `user_attribute.get_param`
+<p>Thanks! I was able to use this trick with <code>user_attribute.get_param_untyped</code> to replace <code>user_attribute.get_param</code></p>
 
 #### [ Simon Hudon (Aug 03 2018 at 15:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/reflect%20bool/near/130839561):
-(by wrapping the return with `id`: ```to_expr ``(id %%r)```)
+<p>(by wrapping the return with <code>id</code>: <code>to_expr ``(id %%r)</code>)</p>
 
 
 {% endraw %}

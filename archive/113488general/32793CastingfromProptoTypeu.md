@@ -12,16 +12,16 @@ permalink: archive/113488general/32793CastingfromProptoTypeu.html
 
 {% raw %}
 #### [ Johan Commelin (Jul 31 2018 at 11:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Casting%20from%20Prop%20to%20Type%20u/near/130632449):
-I've got a prop `P : Prop`, but now I need to view `P` as  a term of `Type u`. How do I cast/lift it like that?
+<p>I've got a prop <code>P : Prop</code>, but now I need to view <code>P</code> as  a term of <code>Type u</code>. How do I cast/lift it like that?</p>
 
 #### [ Kenny Lau (Jul 31 2018 at 11:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Casting%20from%20Prop%20to%20Type%20u/near/130632457):
-`plift`
+<p><code>plift</code></p>
 
 #### [ Chris Hughes (Jul 31 2018 at 11:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Casting%20from%20Prop%20to%20Type%20u/near/130632495):
-`plift`?
+<p><code>plift</code>?</p>
 
 #### [ Johan Commelin (Jul 31 2018 at 11:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Casting%20from%20Prop%20to%20Type%20u/near/130632507):
-You're end bosses!
+<p>You're end bosses!</p>
 
 
 {% endraw %}

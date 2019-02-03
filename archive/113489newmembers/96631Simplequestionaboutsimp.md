@@ -12,119 +12,115 @@ permalink: archive/113489newmembers/96631Simplequestionaboutsimp.html
 
 {% raw %}
 #### [ Kevin Sullivan (Dec 11 2018 at 18:09)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Simple%20question%20about%20simp/near/151460730):
-The behavior of simp depends on how the rules for computing function values are presented, in a way I don't quite understand. What follows are two ways of writing a list append function. The first case is verbose, as it lists rules for all four combinations of nil and non-nil values. The second is more concise and is the usual way one would see this function defined. Following the alternative implementations is part of a proof that a length function distributes over append. When the first definition of append is used, the simp in the last line of the proof fails, while if the second, simp succeeds. The expressions to be simplified are the same in both cases. Thanks for enlightening me as to why this is so. I know this is an easy one. --ks
+<p>The behavior of simp depends on how the rules for computing function values are presented, in a way I don't quite understand. What follows are two ways of writing a list append function. The first case is verbose, as it lists rules for all four combinations of nil and non-nil values. The second is more concise and is the usual way one would see this function defined. Following the alternative implementations is part of a proof that a length function distributes over append. When the first definition of append is used, the simp in the last line of the proof fails, while if the second, simp succeeds. The expressions to be simplified are the same in both cases. Thanks for enlightening me as to why this is so. I know this is an easy one. --ks</p>
+<div class="codehilite"><pre><span></span><span class="kn">inductive</span> <span class="n">nlist</span> <span class="o">:</span> <span class="kt">Type</span>
+<span class="bp">|</span> <span class="n">nil</span> <span class="o">:</span> <span class="n">nlist</span>
+<span class="bp">|</span> <span class="n">cons</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="n">nlist</span> <span class="bp">→</span> <span class="n">nlist</span>
 
-``` lean
-inductive nlist : Type 
-| nil : nlist
-| cons : ℕ → nlist → nlist
+<span class="bp">```</span> <span class="n">lean</span>
+<span class="n">def</span> <span class="n">len</span> <span class="o">:</span> <span class="n">nlist</span> <span class="bp">→</span> <span class="bp">ℕ</span>
+<span class="bp">|</span> <span class="n">nlist</span><span class="bp">.</span><span class="n">nil</span> <span class="o">:=</span> <span class="mi">0</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">nlist</span><span class="bp">.</span><span class="n">cons</span> <span class="n">h</span> <span class="n">t</span><span class="o">)</span> <span class="o">:=</span> <span class="mi">1</span> <span class="bp">+</span> <span class="n">len</span> <span class="n">t</span>
 
-``` lean
-def len : nlist → ℕ
-| nlist.nil := 0
-| (nlist.cons h t) := 1 + len t
+<span class="bp">```</span> <span class="n">lean</span>
+<span class="n">def</span> <span class="n">app</span> <span class="o">:</span> <span class="n">nlist</span> <span class="bp">→</span> <span class="n">nlist</span> <span class="bp">→</span> <span class="n">nlist</span>
+<span class="bp">|</span> <span class="n">nlist</span><span class="bp">.</span><span class="n">nil</span> <span class="n">nlist</span><span class="bp">.</span><span class="n">nil</span>  <span class="o">:=</span> <span class="n">nlist</span><span class="bp">.</span><span class="n">nil</span>
+<span class="bp">|</span> <span class="n">nlist</span><span class="bp">.</span><span class="n">nil</span> <span class="n">l2</span> <span class="o">:=</span> <span class="n">l2</span>
+<span class="bp">|</span> <span class="n">l1</span> <span class="n">nlist</span><span class="bp">.</span><span class="n">nil</span> <span class="o">:=</span> <span class="n">l1</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">nlist</span><span class="bp">.</span><span class="n">cons</span> <span class="n">h</span> <span class="n">t</span><span class="o">)</span> <span class="n">l2</span> <span class="o">:=</span> <span class="n">nlist</span><span class="bp">.</span><span class="n">cons</span> <span class="n">h</span> <span class="o">(</span><span class="n">app</span> <span class="n">t</span> <span class="n">l2</span><span class="o">)</span>
+</pre></div>
 
-``` lean
-def app : nlist → nlist → nlist
-| nlist.nil nlist.nil  := nlist.nil 
-| nlist.nil l2 := l2
-| l1 nlist.nil := l1
-| (nlist.cons h t) l2 := nlist.cons h (app t l2)
-```
 
-``` lean
-def app  : nlist → nlist → nlist
-| nlist.nil l2  := l2
-| (nlist.cons h t) l2 := nlist.cons h (app t l2)
-```
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">app</span>  <span class="o">:</span> <span class="n">nlist</span> <span class="bp">→</span> <span class="n">nlist</span> <span class="bp">→</span> <span class="n">nlist</span>
+<span class="bp">|</span> <span class="n">nlist</span><span class="bp">.</span><span class="n">nil</span> <span class="n">l2</span>  <span class="o">:=</span> <span class="n">l2</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">nlist</span><span class="bp">.</span><span class="n">cons</span> <span class="n">h</span> <span class="n">t</span><span class="o">)</span> <span class="n">l2</span> <span class="o">:=</span> <span class="n">nlist</span><span class="bp">.</span><span class="n">cons</span> <span class="n">h</span> <span class="o">(</span><span class="n">app</span> <span class="n">t</span> <span class="n">l2</span><span class="o">)</span>
+</pre></div>
 
-``` lean
-example : 
-    ∀ l1 l2 : nlist, 
-        len (app l1 l2) = (len l1) + (len l2) :=
-begin
-intros l1 l2,
-induction l1,
-simp [len],
--- len (app nlist.nil l2) = len l2
-simp [app], 
-_
-end
-```
+
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">:</span>
+    <span class="bp">∀</span> <span class="n">l1</span> <span class="n">l2</span> <span class="o">:</span> <span class="n">nlist</span><span class="o">,</span>
+        <span class="n">len</span> <span class="o">(</span><span class="n">app</span> <span class="n">l1</span> <span class="n">l2</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="n">len</span> <span class="n">l1</span><span class="o">)</span> <span class="bp">+</span> <span class="o">(</span><span class="n">len</span> <span class="n">l2</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="n">intros</span> <span class="n">l1</span> <span class="n">l2</span><span class="o">,</span>
+<span class="n">induction</span> <span class="n">l1</span><span class="o">,</span>
+<span class="n">simp</span> <span class="o">[</span><span class="n">len</span><span class="o">],</span>
+<span class="c1">-- len (app nlist.nil l2) = len l2</span>
+<span class="n">simp</span> <span class="o">[</span><span class="n">app</span><span class="o">],</span>
+<span class="bp">_</span>
+<span class="kn">end</span>
+</pre></div>
 
 #### [ Rob Lewis (Dec 11 2018 at 18:26)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Simple%20question%20about%20simp/near/151461827):
-@**Kevin Sullivan** It's easier to answer these questions if you can post a full example -- we can't try that out without definitions for `nlist` and `len`. But you can see the difference between the two by comparing the outputs of `#print prefix app`. The simp lemmas that are generated for the first definition will only fire when argument 2 is either `nil` or `cons` because you've defined those cases differently. You'd need to do something like `cases l2; simp [app]` to use that definition.
+<p><span class="user-mention" data-user-id="124175">@Kevin Sullivan</span> It's easier to answer these questions if you can post a full example -- we can't try that out without definitions for <code>nlist</code> and <code>len</code>. But you can see the difference between the two by comparing the outputs of <code>#print prefix app</code>. The simp lemmas that are generated for the first definition will only fire when argument 2 is either <code>nil</code> or <code>cons</code> because you've defined those cases differently. You'd need to do something like <code>cases l2; simp [app]</code> to use that definition.</p>
 
 #### [ Kevin Sullivan (Dec 11 2018 at 18:29)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Simple%20question%20about%20simp/near/151462030):
-```quote
-@**Kevin Sullivan** It's easier to answer these questions if you can post a full example -- we can't try that out without definitions for `nlist` and `len`. But you can see the difference between the two by comparing the outputs of `#print prefix app`. The simp lemmas that are generated for the first definition will only fire when argument 2 is either `nil` or `cons` because you've defined those cases differently. You'd need to do something like `cases l2; simp [app]` to use that definition.
-```
- 
-Yes, just added previous defs to message above. Will evaluate your answer. Thank you, Rob.
+<blockquote>
+<p><span class="user-mention" data-user-id="124175">@Kevin Sullivan</span> It's easier to answer these questions if you can post a full example -- we can't try that out without definitions for <code>nlist</code> and <code>len</code>. But you can see the difference between the two by comparing the outputs of <code>#print prefix app</code>. The simp lemmas that are generated for the first definition will only fire when argument 2 is either <code>nil</code> or <code>cons</code> because you've defined those cases differently. You'd need to do something like <code>cases l2; simp [app]</code> to use that definition.</p>
+</blockquote>
+<p>Yes, just added previous defs to message above. Will evaluate your answer. Thank you, Rob.</p>
 
 #### [ Kevin Buzzard (Dec 12 2018 at 09:41)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Simple%20question%20about%20simp/near/151510730):
-```quote
-Yes, just added previous defs to message above. Will evaluate your answer. Thank you, Rob.
-```
-Logically equivalent definitions can sometimes create different equation lemmas which would affect the behaviour of `simp`. I am not a computer scientist, but I *think* that what `simp [len]`actually does it that it tells Lean to use the so-called equation lemmas for `len`, which you can see yourself by typing `#print prefix len.equations`.
+<blockquote>
+<p>Yes, just added previous defs to message above. Will evaluate your answer. Thank you, Rob.</p>
+</blockquote>
+<p>Logically equivalent definitions can sometimes create different equation lemmas which would affect the behaviour of <code>simp</code>. I am not a computer scientist, but I <em>think</em> that what <code>simp [len]</code>actually does it that it tells Lean to use the so-called equation lemmas for <code>len</code>, which you can see yourself by typing <code>#print prefix len.equations</code>.</p>
 
 #### [ Kevin Buzzard (Dec 12 2018 at 09:49)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Simple%20question%20about%20simp/near/151511099):
-OK so this is the question, I think:
+<p>OK so this is the question, I think:</p>
+<div class="codehilite"><pre><span></span><span class="kn">inductive</span> <span class="n">nlist</span> <span class="o">:</span> <span class="kt">Type</span>
+<span class="bp">|</span> <span class="n">nil</span> <span class="o">:</span> <span class="n">nlist</span>
+<span class="bp">|</span> <span class="n">cons</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="n">nlist</span> <span class="bp">→</span> <span class="n">nlist</span>
 
-```lean
-inductive nlist : Type
-| nil : nlist
-| cons : ℕ → nlist → nlist
+<span class="n">def</span> <span class="n">len</span> <span class="o">:</span> <span class="n">nlist</span> <span class="bp">→</span> <span class="bp">ℕ</span>
+<span class="bp">|</span> <span class="n">nlist</span><span class="bp">.</span><span class="n">nil</span> <span class="o">:=</span> <span class="mi">0</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">nlist</span><span class="bp">.</span><span class="n">cons</span> <span class="n">h</span> <span class="n">t</span><span class="o">)</span> <span class="o">:=</span> <span class="mi">1</span> <span class="bp">+</span> <span class="n">len</span> <span class="n">t</span>
 
-def len : nlist → ℕ
-| nlist.nil := 0
-| (nlist.cons h t) := 1 + len t
+<span class="n">def</span> <span class="n">app1</span> <span class="o">:</span> <span class="n">nlist</span> <span class="bp">→</span> <span class="n">nlist</span> <span class="bp">→</span> <span class="n">nlist</span>
+<span class="bp">|</span> <span class="n">nlist</span><span class="bp">.</span><span class="n">nil</span> <span class="n">nlist</span><span class="bp">.</span><span class="n">nil</span>  <span class="o">:=</span> <span class="n">nlist</span><span class="bp">.</span><span class="n">nil</span>
+<span class="bp">|</span> <span class="n">nlist</span><span class="bp">.</span><span class="n">nil</span> <span class="n">l2</span> <span class="o">:=</span> <span class="n">l2</span>
+<span class="bp">|</span> <span class="n">l1</span> <span class="n">nlist</span><span class="bp">.</span><span class="n">nil</span> <span class="o">:=</span> <span class="n">l1</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">nlist</span><span class="bp">.</span><span class="n">cons</span> <span class="n">h</span> <span class="n">t</span><span class="o">)</span> <span class="n">l2</span> <span class="o">:=</span> <span class="n">nlist</span><span class="bp">.</span><span class="n">cons</span> <span class="n">h</span> <span class="o">(</span><span class="n">app1</span> <span class="n">t</span> <span class="n">l2</span><span class="o">)</span>
 
-def app1 : nlist → nlist → nlist
-| nlist.nil nlist.nil  := nlist.nil
-| nlist.nil l2 := l2
-| l1 nlist.nil := l1
-| (nlist.cons h t) l2 := nlist.cons h (app1 t l2)
+<span class="n">def</span> <span class="n">app2</span>  <span class="o">:</span> <span class="n">nlist</span> <span class="bp">→</span> <span class="n">nlist</span> <span class="bp">→</span> <span class="n">nlist</span>
+<span class="bp">|</span> <span class="n">nlist</span><span class="bp">.</span><span class="n">nil</span> <span class="n">l2</span>  <span class="o">:=</span> <span class="n">l2</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">nlist</span><span class="bp">.</span><span class="n">cons</span> <span class="n">h</span> <span class="n">t</span><span class="o">)</span> <span class="n">l2</span> <span class="o">:=</span> <span class="n">nlist</span><span class="bp">.</span><span class="n">cons</span> <span class="n">h</span> <span class="o">(</span><span class="n">app2</span> <span class="n">t</span> <span class="n">l2</span><span class="o">)</span>
 
-def app2  : nlist → nlist → nlist
-| nlist.nil l2  := l2
-| (nlist.cons h t) l2 := nlist.cons h (app2 t l2)
+<span class="kn">example</span> <span class="o">:</span>
+  <span class="bp">∀</span> <span class="n">l1</span> <span class="n">l2</span> <span class="o">:</span> <span class="n">nlist</span><span class="o">,</span>
+    <span class="n">len</span> <span class="o">(</span><span class="n">app1</span> <span class="n">l1</span> <span class="n">l2</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="n">len</span> <span class="n">l1</span><span class="o">)</span> <span class="bp">+</span> <span class="o">(</span><span class="n">len</span> <span class="n">l2</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">intros</span> <span class="n">l1</span> <span class="n">l2</span><span class="o">,</span>
+  <span class="n">induction</span> <span class="n">l1</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">len</span><span class="o">],</span>
+    <span class="n">simp</span> <span class="o">[</span><span class="n">app1</span><span class="o">],</span>
+    <span class="c1">-- goal len (app1 nlist.nil l2) = len l2</span>
+    <span class="n">sorry</span>
+  <span class="o">},</span>
+  <span class="n">sorry</span>
+<span class="kn">end</span>
 
-example :
-  ∀ l1 l2 : nlist,
-    len (app1 l1 l2) = (len l1) + (len l2) :=
-begin
-  intros l1 l2,
-  induction l1,
-  { simp only [len],
-    simp [app1],
-    -- goal len (app1 nlist.nil l2) = len l2
-    sorry
-  },
-  sorry
-end
+<span class="kn">example</span> <span class="o">:</span>
+  <span class="bp">∀</span> <span class="n">l1</span> <span class="n">l2</span> <span class="o">:</span> <span class="n">nlist</span><span class="o">,</span>
+    <span class="n">len</span> <span class="o">(</span><span class="n">app2</span> <span class="n">l1</span> <span class="n">l2</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="n">len</span> <span class="n">l1</span><span class="o">)</span> <span class="bp">+</span> <span class="o">(</span><span class="n">len</span> <span class="n">l2</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">intros</span> <span class="n">l1</span> <span class="n">l2</span><span class="o">,</span>
+  <span class="n">induction</span> <span class="n">l1</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">len</span><span class="o">],</span>
+    <span class="n">simp</span> <span class="o">[</span><span class="n">app2</span><span class="o">],</span>
+    <span class="c1">-- no goals this time</span>
+  <span class="o">},</span>
+  <span class="n">sorry</span>
+<span class="kn">end</span>
+</pre></div>
 
-example :
-  ∀ l1 l2 : nlist,
-    len (app2 l1 l2) = (len l1) + (len l2) :=
-begin
-  intros l1 l2,
-  induction l1,
-  { simp only [len],
-    simp [app2],
-    -- no goals this time
-  },
-  sorry
-end
-```
 
-Trying to prove the same thing with the two equivalent definitions, but a technique succeeds with `app2` and fails with `app1`.
+<p>Trying to prove the same thing with the two equivalent definitions, but a technique succeeds with <code>app2</code> and fails with <code>app1</code>.</p>
 
 #### [ Kevin Buzzard (Dec 12 2018 at 09:50)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Simple%20question%20about%20simp/near/151511168):
-I changed your `simp [len]` to `simp only [len]` because you are not supposed to use `simp` in the middle of a proof -- people can add and remove simp lemmas whenever they like, which makes the behaviour unpredictable, so the general rule is to only use it to close a goal or else you are writing code which is hard to maintain.
+<p>I changed your <code>simp [len]</code> to <code>simp only [len]</code> because you are not supposed to use <code>simp</code> in the middle of a proof -- people can add and remove simp lemmas whenever they like, which makes the behaviour unpredictable, so the general rule is to only use it to close a goal or else you are writing code which is hard to maintain.</p>
 
 #### [ Kevin Buzzard (Dec 12 2018 at 09:57)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Simple%20question%20about%20simp/near/151511471):
-So the problem is exactly what Rob says: at the crucial moment where the stories diverge you are faced with a goal containing `app nlist.nil l2` and if you want to use `simp` then you are going to be hoping that the equation lemmas for `app` can deal with this. Now the equation lemmas aren't a big secret here -- they are the things you used to define `app`. So if you use `app1` then there are four equation lemmas, saying what to do in the nil/nil, nil/cons, cons/nil and cons/cons case, as you can see with `#print prefix app1.equations`. But none of these are any use to you if your goal is `app1 nlist.nil l2` because we don't know whether `l2` is a nil or a cons, so none of the lemmas apply! You can guess the rest. The equation lemmas for `app2` explicitly mention this nil/l2 case, so `simp` works. And as Rob also said, the way to fix this in the app1 situation is to branch on whether `l2` is a nil or a cons using induction or cases.
+<p>So the problem is exactly what Rob says: at the crucial moment where the stories diverge you are faced with a goal containing <code>app nlist.nil l2</code> and if you want to use <code>simp</code> then you are going to be hoping that the equation lemmas for <code>app</code> can deal with this. Now the equation lemmas aren't a big secret here -- they are the things you used to define <code>app</code>. So if you use <code>app1</code> then there are four equation lemmas, saying what to do in the nil/nil, nil/cons, cons/nil and cons/cons case, as you can see with <code>#print prefix app1.equations</code>. But none of these are any use to you if your goal is <code>app1 nlist.nil l2</code> because we don't know whether <code>l2</code> is a nil or a cons, so none of the lemmas apply! You can guess the rest. The equation lemmas for <code>app2</code> explicitly mention this nil/l2 case, so <code>simp</code> works. And as Rob also said, the way to fix this in the app1 situation is to branch on whether <code>l2</code> is a nil or a cons using induction or cases.</p>
 
 
 {% endraw %}

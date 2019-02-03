@@ -12,142 +12,137 @@ permalink: archive/113489newmembers/82236Instanceaffectsothersections.html
 
 {% raw %}
 #### [ AHan (Jan 01 2019 at 13:34)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Instance%20affects%20other%20sections/near/154128043):
-```lean
-import data.finsupp
-variables {σ : Type*} {α : Type*}
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">finsupp</span>
+<span class="kn">variables</span> <span class="o">{</span><span class="n">σ</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span>
 
-section a
-variables [comm_semiring α] [decidable_eq σ] [decidable_eq α] [linear_order (σ →₀ ℕ)] [@decidable_rel (σ →₀ ℕ) (≤)]
+<span class="kn">section</span> <span class="n">a</span>
+<span class="kn">variables</span> <span class="o">[</span><span class="n">comm_semiring</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">decidable_eq</span> <span class="n">σ</span><span class="o">]</span> <span class="o">[</span><span class="n">decidable_eq</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">linear_order</span> <span class="o">(</span><span class="n">σ</span> <span class="bp">→</span><span class="err">₀</span> <span class="bp">ℕ</span><span class="o">)]</span> <span class="o">[</span><span class="bp">@</span><span class="n">decidable_rel</span> <span class="o">(</span><span class="n">σ</span> <span class="bp">→</span><span class="err">₀</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="bp">≤</span><span class="o">)]</span>
 
-instance : decidable_linear_order (σ →₀ ℕ) := {
-    decidable_le := _inst_5,
-    decidable_eq := by apply_instance,
-    .._inst_4
-}
-end a
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">decidable_linear_order</span> <span class="o">(</span><span class="n">σ</span> <span class="bp">→</span><span class="err">₀</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:=</span> <span class="o">{</span>
+    <span class="n">decidable_le</span> <span class="o">:=</span> <span class="bp">_</span><span class="n">inst_5</span><span class="o">,</span>
+    <span class="n">decidable_eq</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">apply_instance</span><span class="o">,</span>
+    <span class="bp">.._</span><span class="n">inst_4</span>
+<span class="o">}</span>
+<span class="kn">end</span> <span class="n">a</span>
 
-section b
-variables [integral_domain α] [decidable_eq σ] [decidable_eq α] [linear_order (σ →₀ ℕ)] [@decidable_rel (σ →₀ ℕ) (≤)]
+<span class="kn">section</span> <span class="n">b</span>
+<span class="kn">variables</span> <span class="o">[</span><span class="n">integral_domain</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">decidable_eq</span> <span class="n">σ</span><span class="o">]</span> <span class="o">[</span><span class="n">decidable_eq</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">linear_order</span> <span class="o">(</span><span class="n">σ</span> <span class="bp">→</span><span class="err">₀</span> <span class="bp">ℕ</span><span class="o">)]</span> <span class="o">[</span><span class="bp">@</span><span class="n">decidable_rel</span> <span class="o">(</span><span class="n">σ</span> <span class="bp">→</span><span class="err">₀</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="bp">≤</span><span class="o">)]</span>
 
-end b
-```
+<span class="kn">end</span> <span class="n">b</span>
+</pre></div>
 
-The error message : "is maximum class-instance resolution depth has been reached (the limit can be increased by setting option 'class.instance_max_depth') (the class-instance resolution trace can be visualized by setting option 'trace.class_instances')" at the `(≤)` in `section b`
-seems like `section b` is affected by the `decidable_linear_order` instance in `section a`, but I don't understand why, and how to fix this...
+
+<p>The error message : "is maximum class-instance resolution depth has been reached (the limit can be increased by setting option 'class.instance_max_depth') (the class-instance resolution trace can be visualized by setting option 'trace.class_instances')" at the <code>(≤)</code> in <code>section b</code><br>
+seems like <code>section b</code> is affected by the <code>decidable_linear_order</code> instance in <code>section a</code>, but I don't understand why, and how to fix this...</p>
 
 #### [ Kevin Buzzard (Jan 01 2019 at 14:02)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Instance%20affects%20other%20sections/near/154128780):
-I don't have access to Lean right now but is the issue that the instance gives you a linear order on the finsupp and then in section b you are putting another unrelated order on the finsupp and hence breaking the golden rule of typeclasses -- one instance per type?
+<p>I don't have access to Lean right now but is the issue that the instance gives you a linear order on the finsupp and then in section b you are putting another unrelated order on the finsupp and hence breaking the golden rule of typeclasses -- one instance per type?</p>
 
 #### [ Reid Barton (Jan 01 2019 at 14:33)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Instance%20affects%20other%20sections/near/154129611):
-instances are not scoped to sections
+<p>instances are not scoped to sections</p>
 
 #### [ Reid Barton (Jan 01 2019 at 14:34)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Instance%20affects%20other%20sections/near/154129654):
-It's just as though you wrote `instance <long string of variables> : decidable_linear_order (σ →₀ ℕ)` at the top level.
+<p>It's just as though you wrote <code>instance &lt;long string of variables&gt; : decidable_linear_order (σ →₀ ℕ)</code> at the top level.</p>
 
 #### [ Reid Barton (Jan 01 2019 at 14:35)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Instance%20affects%20other%20sections/near/154129664):
-If you want to make a scoped instance, you can write an ordinary definition and then give it `local attribute [instance]` inside a `section`
+<p>If you want to make a scoped instance, you can write an ordinary definition and then give it <code>local attribute [instance]</code> inside a <code>section</code></p>
 
 #### [ Chris Hughes (Jan 01 2019 at 14:39)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Instance%20affects%20other%20sections/near/154129771):
-Leaving aside the `section` issue, I think this is a bad instance, because there's a cycle, there's a `linear_order` to `decidable_linear_order` instance, and a `decidable_linear_order` to `linear_order` instance somewhere in the library. This sort of thing can cause type class inference to get stuck.
+<p>Leaving aside the <code>section</code> issue, I think this is a bad instance, because there's a cycle, there's a <code>linear_order</code> to <code>decidable_linear_order</code> instance, and a <code>decidable_linear_order</code> to <code>linear_order</code> instance somewhere in the library. This sort of thing can cause type class inference to get stuck.</p>
 
 #### [ AHan (Jan 01 2019 at 14:44)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Instance%20affects%20other%20sections/near/154129920):
-@**Kevin Buzzard**  actually the order in `section a` and `section b` are the same in my case, but some functions in `section a` are only depend on `comm_semiring α`, while functions in `section b` are depend on `integral_domain α`. I can only think of using seperate sections like this to avoid confilict between `comm_semiring α` and `integral_domain α`
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span>  actually the order in <code>section a</code> and <code>section b</code> are the same in my case, but some functions in <code>section a</code> are only depend on <code>comm_semiring α</code>, while functions in <code>section b</code> are depend on <code>integral_domain α</code>. I can only think of using seperate sections like this to avoid confilict between <code>comm_semiring α</code> and <code>integral_domain α</code></p>
 
 #### [ Reid Barton (Jan 01 2019 at 14:47)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Instance%20affects%20other%20sections/near/154129984):
-From what you've provided so far it looks like the hypotheses involving $$\alpha$$ are independent of the hypotheses involving $$\sigma$$
+<p>From what you've provided so far it looks like the hypotheses involving <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>α</mi></mrow><annotation encoding="application/x-tex">\alpha</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.43056em;"></span><span class="strut bottom" style="height:0.43056em;vertical-align:0em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.0037em;">α</span></span></span></span> are independent of the hypotheses involving <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>σ</mi></mrow><annotation encoding="application/x-tex">\sigma</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.43056em;"></span><span class="strut bottom" style="height:0.43056em;vertical-align:0em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.03588em;">σ</span></span></span></span></p>
 
 #### [ Reid Barton (Jan 01 2019 at 14:47)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Instance%20affects%20other%20sections/near/154129987):
-that is, no hypothesis involves both
+<p>that is, no hypothesis involves both</p>
 
 #### [ AHan (Jan 01 2019 at 14:49)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Instance%20affects%20other%20sections/near/154130045):
-@**Reid Barton**  you mean like ?
-```lean
-def x [decidable_eq σ] [linear_order (σ →₀ ℕ)] [@decidable_rel (σ →₀ ℕ) (≤)]
-: decidable_linear_order (σ →₀ ℕ) := {
-    decidable_le := _inst_3,
-    decidable_eq := by apply_instance,
-    .._inst_2
-}
-```
+<p><span class="user-mention" data-user-id="110032">@Reid Barton</span>  you mean like ?</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">x</span> <span class="o">[</span><span class="n">decidable_eq</span> <span class="n">σ</span><span class="o">]</span> <span class="o">[</span><span class="n">linear_order</span> <span class="o">(</span><span class="n">σ</span> <span class="bp">→</span><span class="err">₀</span> <span class="bp">ℕ</span><span class="o">)]</span> <span class="o">[</span><span class="bp">@</span><span class="n">decidable_rel</span> <span class="o">(</span><span class="n">σ</span> <span class="bp">→</span><span class="err">₀</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="bp">≤</span><span class="o">)]</span>
+<span class="o">:</span> <span class="n">decidable_linear_order</span> <span class="o">(</span><span class="n">σ</span> <span class="bp">→</span><span class="err">₀</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:=</span> <span class="o">{</span>
+    <span class="n">decidable_le</span> <span class="o">:=</span> <span class="bp">_</span><span class="n">inst_3</span><span class="o">,</span>
+    <span class="n">decidable_eq</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">apply_instance</span><span class="o">,</span>
+    <span class="bp">.._</span><span class="n">inst_2</span>
+<span class="o">}</span>
+</pre></div>
 
 #### [ Reid Barton (Jan 01 2019 at 14:52)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Instance%20affects%20other%20sections/near/154130110):
-Yes, or using `variables` the way you do now is also fine.
+<p>Yes, or using <code>variables</code> the way you do now is also fine.</p>
 
 #### [ AHan (Jan 01 2019 at 14:55)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Instance%20affects%20other%20sections/near/154130249):
-Then when a lemma needs this decidable_linear_order instance, it won't automatically infer this instance right?
+<p>Then when a lemma needs this decidable_linear_order instance, it won't automatically infer this instance right?</p>
 
 #### [ Reid Barton (Jan 01 2019 at 14:57)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Instance%20affects%20other%20sections/near/154130299):
-That's right, but you can "install" the instance locally in a proof using `letI`
+<p>That's right, but you can "install" the instance locally in a proof using <code>letI</code></p>
 
 #### [ AHan (Jan 01 2019 at 14:58)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Instance%20affects%20other%20sections/near/154130345):
-@**Chris Hughes**  Yeah..you're right...
-but I can't just add an instance `[decidable_linear_order (σ →₀ ℕ)]`,  as it might cause conflict between `finsupp.decidable_eq` and `decidable_linear_order.decidable_eq`
+<p><span class="user-mention" data-user-id="110044">@Chris Hughes</span>  Yeah..you're right...<br>
+but I can't just add an instance <code>[decidable_linear_order (σ →₀ ℕ)]</code>,  as it might cause conflict between <code>finsupp.decidable_eq</code> and <code>decidable_linear_order.decidable_eq</code></p>
 
 #### [ Chris Hughes (Jan 01 2019 at 15:05)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Instance%20affects%20other%20sections/near/154130587):
-`decidable_linear_order.decidable_eq` isn't an instance, so it's okay.
+<p><code>decidable_linear_order.decidable_eq</code> isn't an instance, so it's okay.</p>
 
 #### [ AHan (Jan 01 2019 at 15:21)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Instance%20affects%20other%20sections/near/154130992):
-But I do encounter such kind of error... some term looks just the same, and I couldn't use `rw` tactic
+<p>But I do encounter such kind of error... some term looks just the same, and I couldn't use <code>rw</code> tactic</p>
 
 #### [ AHan (Jan 01 2019 at 15:41)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Instance%20affects%20other%20sections/near/154131487):
-This is the minimal example I can figure out so far...
-there is a type mismatch at `rw union_min'` which says `h₁` uses `finsupp.decidable_eq` but the third parameter of `union_min'` is expected to use `eq.decidable`
-
-```lean
-
-import linear_algebra.multivariate_polynomial
-import data.finset
-variables {σ : Type*} {α : Type*} {β : Type*}
+<p>This is the minimal example I can figure out so far...<br>
+there is a type mismatch at <code>rw union_min'</code> which says <code>h₁</code> uses <code>finsupp.decidable_eq</code> but the third parameter of <code>union_min'</code> is expected to use <code>eq.decidable</code></p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">linear_algebra</span><span class="bp">.</span><span class="n">multivariate_polynomial</span>
+<span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">finset</span>
+<span class="kn">variables</span> <span class="o">{</span><span class="n">σ</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span>
 
 
-lemma ne_empty_union [decidable_eq α] {s₁ s₂ : finset α} : ¬ (s₁ = ∅ ∧ s₂ = ∅) ↔ s₁ ∪ s₂ ≠ ∅ := sorry
+<span class="kn">lemma</span> <span class="n">ne_empty_union</span> <span class="o">[</span><span class="n">decidable_eq</span> <span class="n">α</span><span class="o">]</span> <span class="o">{</span><span class="n">s₁</span> <span class="n">s₂</span> <span class="o">:</span> <span class="n">finset</span> <span class="n">α</span><span class="o">}</span> <span class="o">:</span> <span class="bp">¬</span> <span class="o">(</span><span class="n">s₁</span> <span class="bp">=</span> <span class="err">∅</span> <span class="bp">∧</span> <span class="n">s₂</span> <span class="bp">=</span> <span class="err">∅</span><span class="o">)</span> <span class="bp">↔</span> <span class="n">s₁</span> <span class="err">∪</span> <span class="n">s₂</span> <span class="bp">≠</span> <span class="err">∅</span> <span class="o">:=</span> <span class="n">sorry</span>
 
-section a
-variables [has_zero β] [decidable_eq α] [decidable_eq β]
-lemma support_ne_empty (a : α →₀ β) : a ≠ 0 ↔ a.support ≠ ∅ := by finish
+<span class="kn">section</span> <span class="n">a</span>
+<span class="kn">variables</span> <span class="o">[</span><span class="n">has_zero</span> <span class="n">β</span><span class="o">]</span> <span class="o">[</span><span class="n">decidable_eq</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">decidable_eq</span> <span class="n">β</span><span class="o">]</span>
+<span class="kn">lemma</span> <span class="n">support_ne_empty</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span><span class="err">₀</span> <span class="n">β</span><span class="o">)</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">≠</span> <span class="mi">0</span> <span class="bp">↔</span> <span class="n">a</span><span class="bp">.</span><span class="n">support</span> <span class="bp">≠</span> <span class="err">∅</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">finish</span>
 
-end a
+<span class="kn">end</span> <span class="n">a</span>
 
-section b
-variables [decidable_linear_order α]
-lemma union_min' {s₁ s₂ : finset α} (hs₁ : s₁ ≠ ∅) (hs₂ : s₂ ≠ ∅) (hs₃ : s₁ ∪ s₂ ≠ ∅):
-(s₁ ∪ s₂).min' hs₃ = min (s₁.min' hs₁) (s₂.min' hs₂) := sorry
+<span class="kn">section</span> <span class="n">b</span>
+<span class="kn">variables</span> <span class="o">[</span><span class="n">decidable_linear_order</span> <span class="n">α</span><span class="o">]</span>
+<span class="kn">lemma</span> <span class="n">union_min&#39;</span> <span class="o">{</span><span class="n">s₁</span> <span class="n">s₂</span> <span class="o">:</span> <span class="n">finset</span> <span class="n">α</span><span class="o">}</span> <span class="o">(</span><span class="n">hs₁</span> <span class="o">:</span> <span class="n">s₁</span> <span class="bp">≠</span> <span class="err">∅</span><span class="o">)</span> <span class="o">(</span><span class="n">hs₂</span> <span class="o">:</span> <span class="n">s₂</span> <span class="bp">≠</span> <span class="err">∅</span><span class="o">)</span> <span class="o">(</span><span class="n">hs₃</span> <span class="o">:</span> <span class="n">s₁</span> <span class="err">∪</span> <span class="n">s₂</span> <span class="bp">≠</span> <span class="err">∅</span><span class="o">):</span>
+<span class="o">(</span><span class="n">s₁</span> <span class="err">∪</span> <span class="n">s₂</span><span class="o">)</span><span class="bp">.</span><span class="n">min&#39;</span> <span class="n">hs₃</span> <span class="bp">=</span> <span class="n">min</span> <span class="o">(</span><span class="n">s₁</span><span class="bp">.</span><span class="n">min&#39;</span> <span class="n">hs₁</span><span class="o">)</span> <span class="o">(</span><span class="n">s₂</span><span class="bp">.</span><span class="n">min&#39;</span> <span class="n">hs₂</span><span class="o">)</span> <span class="o">:=</span> <span class="n">sorry</span>
 
-end b
+<span class="kn">end</span> <span class="n">b</span>
 
-section c
-variables [decidable_eq σ] [decidable_eq α] [decidable_linear_order (σ →₀ ℕ)]
-variables [comm_semiring α] 
+<span class="kn">section</span> <span class="n">c</span>
+<span class="kn">variables</span> <span class="o">[</span><span class="n">decidable_eq</span> <span class="n">σ</span><span class="o">]</span> <span class="o">[</span><span class="n">decidable_eq</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">decidable_linear_order</span> <span class="o">(</span><span class="n">σ</span> <span class="bp">→</span><span class="err">₀</span> <span class="bp">ℕ</span><span class="o">)]</span>
+<span class="kn">variables</span> <span class="o">[</span><span class="n">comm_semiring</span> <span class="n">α</span><span class="o">]</span>
 
-lemma x {p q : mv_polynomial σ α} (hp : p ≠ 0) (hq : q ≠ 0) (hpq : p + q ≠ 0) : p + q ≠ 0 :=
-begin
-    have h₁ := (ne_empty_union.1 (not_and_of_not_left (q.support = ∅) ((support_ne_empty p).1 hp))),
-    let h : finset.min' _ h₁ = finset.min' _ h₁ := by refl,
-    rw union_min' ((support_ne_empty p).1 hp) ((support_ne_empty q).1 hq) h₁ at h,
-end
+<span class="kn">lemma</span> <span class="n">x</span> <span class="o">{</span><span class="n">p</span> <span class="n">q</span> <span class="o">:</span> <span class="n">mv_polynomial</span> <span class="n">σ</span> <span class="n">α</span><span class="o">}</span> <span class="o">(</span><span class="n">hp</span> <span class="o">:</span> <span class="n">p</span> <span class="bp">≠</span> <span class="mi">0</span><span class="o">)</span> <span class="o">(</span><span class="n">hq</span> <span class="o">:</span> <span class="n">q</span> <span class="bp">≠</span> <span class="mi">0</span><span class="o">)</span> <span class="o">(</span><span class="n">hpq</span> <span class="o">:</span> <span class="n">p</span> <span class="bp">+</span> <span class="n">q</span> <span class="bp">≠</span> <span class="mi">0</span><span class="o">)</span> <span class="o">:</span> <span class="n">p</span> <span class="bp">+</span> <span class="n">q</span> <span class="bp">≠</span> <span class="mi">0</span> <span class="o">:=</span>
+<span class="k">begin</span>
+    <span class="k">have</span> <span class="n">h₁</span> <span class="o">:=</span> <span class="o">(</span><span class="n">ne_empty_union</span><span class="bp">.</span><span class="mi">1</span> <span class="o">(</span><span class="n">not_and_of_not_left</span> <span class="o">(</span><span class="n">q</span><span class="bp">.</span><span class="n">support</span> <span class="bp">=</span> <span class="err">∅</span><span class="o">)</span> <span class="o">((</span><span class="n">support_ne_empty</span> <span class="n">p</span><span class="o">)</span><span class="bp">.</span><span class="mi">1</span> <span class="n">hp</span><span class="o">))),</span>
+    <span class="k">let</span> <span class="n">h</span> <span class="o">:</span> <span class="n">finset</span><span class="bp">.</span><span class="n">min&#39;</span> <span class="bp">_</span> <span class="n">h₁</span> <span class="bp">=</span> <span class="n">finset</span><span class="bp">.</span><span class="n">min&#39;</span> <span class="bp">_</span> <span class="n">h₁</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">refl</span><span class="o">,</span>
+    <span class="n">rw</span> <span class="n">union_min&#39;</span> <span class="o">((</span><span class="n">support_ne_empty</span> <span class="n">p</span><span class="o">)</span><span class="bp">.</span><span class="mi">1</span> <span class="n">hp</span><span class="o">)</span> <span class="o">((</span><span class="n">support_ne_empty</span> <span class="n">q</span><span class="o">)</span><span class="bp">.</span><span class="mi">1</span> <span class="n">hq</span><span class="o">)</span> <span class="n">h₁</span> <span class="n">at</span> <span class="n">h</span><span class="o">,</span>
+<span class="kn">end</span>
 
-end c
-```
+<span class="kn">end</span> <span class="n">c</span>
+</pre></div>
 
 #### [ Patrick Massot (Jan 01 2019 at 18:14)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Instance%20affects%20other%20sections/near/154135743):
-I'm not sure I understand your question, but you may like:
-```lean
-lemma x {p q : mv_polynomial σ α} (hp : p ≠ 0) (hq : q ≠ 0) (hpq : p + q ≠ 0) : p + q ≠ 0 :=
-begin
-    have h₁ := ne_empty_union.1 (not_and_of_not_left (q.support = ∅) $ (support_ne_empty p).1 hp),
-    have := union_min' ((support_ne_empty p).1 hp) ((support_ne_empty q).1 hq) (by convert h₁),
-    exact hpq
-end
-```
+<p>I'm not sure I understand your question, but you may like:</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">x</span> <span class="o">{</span><span class="n">p</span> <span class="n">q</span> <span class="o">:</span> <span class="n">mv_polynomial</span> <span class="n">σ</span> <span class="n">α</span><span class="o">}</span> <span class="o">(</span><span class="n">hp</span> <span class="o">:</span> <span class="n">p</span> <span class="bp">≠</span> <span class="mi">0</span><span class="o">)</span> <span class="o">(</span><span class="n">hq</span> <span class="o">:</span> <span class="n">q</span> <span class="bp">≠</span> <span class="mi">0</span><span class="o">)</span> <span class="o">(</span><span class="n">hpq</span> <span class="o">:</span> <span class="n">p</span> <span class="bp">+</span> <span class="n">q</span> <span class="bp">≠</span> <span class="mi">0</span><span class="o">)</span> <span class="o">:</span> <span class="n">p</span> <span class="bp">+</span> <span class="n">q</span> <span class="bp">≠</span> <span class="mi">0</span> <span class="o">:=</span>
+<span class="k">begin</span>
+    <span class="k">have</span> <span class="n">h₁</span> <span class="o">:=</span> <span class="n">ne_empty_union</span><span class="bp">.</span><span class="mi">1</span> <span class="o">(</span><span class="n">not_and_of_not_left</span> <span class="o">(</span><span class="n">q</span><span class="bp">.</span><span class="n">support</span> <span class="bp">=</span> <span class="err">∅</span><span class="o">)</span> <span class="err">$</span> <span class="o">(</span><span class="n">support_ne_empty</span> <span class="n">p</span><span class="o">)</span><span class="bp">.</span><span class="mi">1</span> <span class="n">hp</span><span class="o">),</span>
+    <span class="k">have</span> <span class="o">:=</span> <span class="n">union_min&#39;</span> <span class="o">((</span><span class="n">support_ne_empty</span> <span class="n">p</span><span class="o">)</span><span class="bp">.</span><span class="mi">1</span> <span class="n">hp</span><span class="o">)</span> <span class="o">((</span><span class="n">support_ne_empty</span> <span class="n">q</span><span class="o">)</span><span class="bp">.</span><span class="mi">1</span> <span class="n">hq</span><span class="o">)</span> <span class="o">(</span><span class="k">by</span> <span class="n">convert</span> <span class="n">h₁</span><span class="o">),</span>
+    <span class="n">exact</span> <span class="n">hpq</span>
+<span class="kn">end</span>
+</pre></div>
 
 #### [ Patrick Massot (Jan 01 2019 at 18:36)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Instance%20affects%20other%20sections/near/154136362):
-and I suspect that filling in the decidable_linear_order instance would help avoiding the problem
+<p>and I suspect that filling in the decidable_linear_order instance would help avoiding the problem</p>
 
 #### [ Chris Hughes (Jan 01 2019 at 18:46)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Instance%20affects%20other%20sections/near/154136639):
-It's not a nice solution, but adding this line before `x` works `local attribute [instance, priority 0] finsupp.decidable_eq`. There's not a good solution for this sort of thing in general at the moment.
+<p>It's not a nice solution, but adding this line before <code>x</code> works <code>local attribute [instance, priority 0] finsupp.decidable_eq</code>. There's not a good solution for this sort of thing in general at the moment.</p>
 
 #### [ AHan (Jan 01 2019 at 19:22)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Instance%20affects%20other%20sections/near/154137734):
-@**Patrick Massot**  @**Chris Hughes**  Thanks a lot! Both solutions seems to solve my problem.
+<p><span class="user-mention" data-user-id="110031">@Patrick Massot</span>  <span class="user-mention" data-user-id="110044">@Chris Hughes</span>  Thanks a lot! Both solutions seems to solve my problem.</p>
 
 
 {% endraw %}

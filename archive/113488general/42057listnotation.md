@@ -12,32 +12,29 @@ permalink: archive/113488general/42057listnotation.html
 
 {% raw %}
 #### [ Jason Dagit (Aug 23 2018 at 19:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/list%20notation/near/132651314):
-I saw this snippet in the tutorial in the "inductive types" section:
+<p>I saw this snippet in the tutorial in the "inductive types" section:</p>
+<div class="codehilite"><pre><span></span>notation `[` l:(foldr `,` (h t, cons h t) nil) `]` := l
+</pre></div>
 
-```
-notation `[` l:(foldr `,` (h t, cons h t) nil) `]` := l
-```
 
-I'm used to functional programming (but still very new to lean) so I think I understand what the above is morally doing, but I'm really struggling to parse it and make sense of it beyond a high-level understanding. Is there a reference for understanding `notation`? Or even a one-off explanation of this case.
-
-Some example questions I have: How does `notation` bring things into scope? What does `:` mean in the above context? The backticks appear where I would expect an argument to `foldr` to go, so I guess `notation` supports mixing of syntactic elements and the expression you're defining?
+<p>I'm used to functional programming (but still very new to lean) so I think I understand what the above is morally doing, but I'm really struggling to parse it and make sense of it beyond a high-level understanding. Is there a reference for understanding <code>notation</code>? Or even a one-off explanation of this case.</p>
+<p>Some example questions I have: How does <code>notation</code> bring things into scope? What does <code>:</code> mean in the above context? The backticks appear where I would expect an argument to <code>foldr</code> to go, so I guess <code>notation</code> supports mixing of syntactic elements and the expression you're defining?</p>
 
 #### [ Simon Hudon (Aug 23 2018 at 19:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/list%20notation/near/132651483):
-I don't believe such a reference exists. I should probably write one. 
-
-The back ticks are only for delimiting tokens. `foldl` and `foldr` are special keywords in the `notation` syntax. You can look at it as: `v:(foldr _ (v v, e) e)`. I used `v` to denote bound variables and `e` as expressions. `_` stands for tokens that you use to separate expressions in the list.
+<p>I don't believe such a reference exists. I should probably write one. </p>
+<p>The back ticks are only for delimiting tokens. <code>foldl</code> and <code>foldr</code> are special keywords in the <code>notation</code> syntax. You can look at it as: <code>v:(foldr _ (v v, e) e)</code>. I used <code>v</code> to denote bound variables and <code>e</code> as expressions. <code>_</code> stands for tokens that you use to separate expressions in the list.</p>
 
 #### [ Simon Hudon (Aug 23 2018 at 19:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/list%20notation/near/132651948):
-In `(v0 v1, e)`, you can see it as a lambda abstraction that you are forced to use (you don't have a choice to use different functions). In this case `v0` stands for the expression most recently parsed `v1` is an accumulator. `e` should be the next value of the accumulator and, eventually, the final value of that accumulator will be bound to `l` (in your example)
+<p>In <code>(v0 v1, e)</code>, you can see it as a lambda abstraction that you are forced to use (you don't have a choice to use different functions). In this case <code>v0</code> stands for the expression most recently parsed <code>v1</code> is an accumulator. <code>e</code> should be the next value of the accumulator and, eventually, the final value of that accumulator will be bound to <code>l</code> (in your example)</p>
 
 #### [ Jason Dagit (Aug 23 2018 at 20:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/list%20notation/near/132652176):
-Ah. Interesting. It didn't occur to me that it might be a special `foldr`.
+<p>Ah. Interesting. It didn't occur to me that it might be a special <code>foldr</code>.</p>
 
 #### [ Jason Dagit (Aug 23 2018 at 20:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/list%20notation/near/132652251):
-Thanks for the explanation, I think that makes sense and answers all the questions I have right now.
+<p>Thanks for the explanation, I think that makes sense and answers all the questions I have right now.</p>
 
 #### [ Simon Hudon (Aug 23 2018 at 20:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/list%20notation/near/132652449):
-Let me know if you need more. It might be useful if you find other information I could include in the documentation.
+<p>Let me know if you need more. It might be useful if you find other information I could include in the documentation.</p>
 
 
 {% endraw %}

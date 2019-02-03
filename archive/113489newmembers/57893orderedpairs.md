@@ -12,300 +12,296 @@ permalink: archive/113489newmembers/57893orderedpairs.html
 
 {% raw %}
 #### [ Abhimanyu Pallavi Sudhir (Oct 19 2018 at 00:53)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136077221):
-I'm defining a subset of the Cartesian product of two types, specifically: 
+<p>I'm defining a subset of the Cartesian product of two types, specifically: </p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">graph</span> <span class="o">:</span> <span class="n">set</span> <span class="n">X</span> <span class="bp">×</span> <span class="n">Y</span> <span class="o">:=</span>
+    <span class="o">{(</span><span class="n">x</span> <span class="o">:</span> <span class="n">X</span><span class="o">,</span> <span class="n">f</span> <span class="n">x</span><span class="o">)</span> <span class="bp">|</span> <span class="n">x</span> <span class="o">:</span> <span class="n">X</span><span class="o">}</span>
+</pre></div>
 
-```lean
-def graph : set X × Y :=
-    {(x : X, f x) | x : X}
-```
 
-(`f` is a function, `x` has not been separately defined) What's the right notation for this (the ordered pairs, and also the set builder itself)?
+<p>(<code>f</code> is a function, <code>x</code> has not been separately defined) What's the right notation for this (the ordered pairs, and also the set builder itself)?</p>
 
 #### [ Kenny Lau (Oct 19 2018 at 00:54)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136077285):
-what do you mean by "right notation"?
+<p>what do you mean by "right notation"?</p>
 
 #### [ Abhimanyu Pallavi Sudhir (Oct 19 2018 at 00:54)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136077288):
-A notation that works in Lean.
+<p>A notation that works in Lean.</p>
 
 #### [ Kenny Lau (Oct 19 2018 at 00:54)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136077300):
-do you mean `set (X × Y)`?
+<p>do you mean <code>set (X × Y)</code>?</p>
 
 #### [ Kenny Lau (Oct 19 2018 at 00:54)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136077303):
-oh
+<p>oh</p>
 
 #### [ Abhimanyu Pallavi Sudhir (Oct 19 2018 at 00:55)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136077304):
-No, I mean for the ordered pairs.
+<p>No, I mean for the ordered pairs.</p>
 
 #### [ Kenny Lau (Oct 19 2018 at 00:56)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136077370):
-```lean
-universes u v
-variables {X : Type u} {Y : Type v} (f : X → Y)
-def graph : set (X × Y) :=
-{ z | z.2 = f z.1 }
-```
+<div class="codehilite"><pre><span></span><span class="n">universes</span> <span class="n">u</span> <span class="n">v</span>
+<span class="kn">variables</span> <span class="o">{</span><span class="n">X</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">{</span><span class="n">Y</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">}</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">X</span> <span class="bp">→</span> <span class="n">Y</span><span class="o">)</span>
+<span class="n">def</span> <span class="n">graph</span> <span class="o">:</span> <span class="n">set</span> <span class="o">(</span><span class="n">X</span> <span class="bp">×</span> <span class="n">Y</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">z</span> <span class="bp">|</span> <span class="n">z</span><span class="bp">.</span><span class="mi">2</span> <span class="bp">=</span> <span class="n">f</span> <span class="n">z</span><span class="bp">.</span><span class="mi">1</span> <span class="o">}</span>
+</pre></div>
 
 #### [ Abhimanyu Pallavi Sudhir (Oct 19 2018 at 00:57)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136077386):
-Ah.
+<p>Ah.</p>
 
 #### [ Abhimanyu Pallavi Sudhir (Oct 19 2018 at 00:57)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136077387):
-Thanks.
+<p>Thanks.</p>
 
 #### [ Kevin Buzzard (Oct 19 2018 at 00:58)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136077411):
-It's kind of annoying that you can't write `{⟨x,y⟩ : X × Y | y = f x}`
+<p>It's kind of annoying that you can't write <code>{⟨x,y⟩ : X × Y | y = f x}</code></p>
 
 #### [ Kenny Lau (Oct 19 2018 at 00:58)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136077469):
-you can't define that in ZFC either
+<p>you can't define that in ZFC either</p>
 
 #### [ Kenny Lau (Oct 19 2018 at 00:58)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136077470):
-you need to use specification and an existential
+<p>you need to use specification and an existential</p>
 
 #### [ Kevin Buzzard (Oct 19 2018 at 00:59)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136077487):
-I guess you could use `set.image` or `set.range`, whatever it's called
+<p>I guess you could use <code>set.image</code> or <code>set.range</code>, whatever it's called</p>
 
 #### [ Kevin Buzzard (Oct 19 2018 at 01:02)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136077650):
-`def graph' : set (X × Y) := set.range (λ x, ⟨x,f x⟩) `
+<p><code>def graph' : set (X × Y) := set.range (λ x, ⟨x,f x⟩) </code></p>
 
 #### [ Kevin Buzzard (Oct 19 2018 at 01:03)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136077661):
-(after `import data.set.basic`)
+<p>(after <code>import data.set.basic</code>)</p>
 
 #### [ Kenny Lau (Oct 19 2018 at 01:04)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136077723):
-```lean
-import data.set.lattice
-universes u v
-variables {X : Type u} {Y : Type v} (f : X → Y)
-def graph : set (X × Y) :=
-⨆ x : X, {(x, f x)}
-```
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">set</span><span class="bp">.</span><span class="n">lattice</span>
+<span class="n">universes</span> <span class="n">u</span> <span class="n">v</span>
+<span class="kn">variables</span> <span class="o">{</span><span class="n">X</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">{</span><span class="n">Y</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">}</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">X</span> <span class="bp">→</span> <span class="n">Y</span><span class="o">)</span>
+<span class="n">def</span> <span class="n">graph</span> <span class="o">:</span> <span class="n">set</span> <span class="o">(</span><span class="n">X</span> <span class="bp">×</span> <span class="n">Y</span><span class="o">)</span> <span class="o">:=</span>
+<span class="err">⨆</span> <span class="n">x</span> <span class="o">:</span> <span class="n">X</span><span class="o">,</span> <span class="o">{(</span><span class="n">x</span><span class="o">,</span> <span class="n">f</span> <span class="n">x</span><span class="o">)}</span>
+</pre></div>
 
 #### [ Abhimanyu Pallavi Sudhir (Oct 19 2018 at 01:07)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136077827):
-What's `⨆`?
+<p>What's <code>⨆</code>?</p>
 
 #### [ Kevin Buzzard (Oct 19 2018 at 01:08)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136077886):
-```lean
-import data.set.basic
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">set</span><span class="bp">.</span><span class="n">basic</span>
 
-variables (X Y : Type) (f : X → Y)
+<span class="kn">variables</span> <span class="o">(</span><span class="n">X</span> <span class="n">Y</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">X</span> <span class="bp">→</span> <span class="n">Y</span><span class="o">)</span>
 
-def graph  : set (X × Y) := {z : X × Y | z.2 = f z.1}
+<span class="n">def</span> <span class="n">graph</span>  <span class="o">:</span> <span class="n">set</span> <span class="o">(</span><span class="n">X</span> <span class="bp">×</span> <span class="n">Y</span><span class="o">)</span> <span class="o">:=</span> <span class="o">{</span><span class="n">z</span> <span class="o">:</span> <span class="n">X</span> <span class="bp">×</span> <span class="n">Y</span> <span class="bp">|</span> <span class="n">z</span><span class="bp">.</span><span class="mi">2</span> <span class="bp">=</span> <span class="n">f</span> <span class="n">z</span><span class="bp">.</span><span class="mi">1</span><span class="o">}</span>
 
-def graph' : set (X × Y) := set.range (λ x, ⟨x,f x⟩) 
+<span class="n">def</span> <span class="n">graph&#39;</span> <span class="o">:</span> <span class="n">set</span> <span class="o">(</span><span class="n">X</span> <span class="bp">×</span> <span class="n">Y</span><span class="o">)</span> <span class="o">:=</span> <span class="n">set</span><span class="bp">.</span><span class="n">range</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="bp">⟨</span><span class="n">x</span><span class="o">,</span><span class="n">f</span> <span class="n">x</span><span class="bp">⟩</span><span class="o">)</span>
 
-example : graph = graph' := sorry
-```
+<span class="kn">example</span> <span class="o">:</span> <span class="n">graph</span> <span class="bp">=</span> <span class="n">graph&#39;</span> <span class="o">:=</span> <span class="n">sorry</span>
+</pre></div>
 
 #### [ Kenny Lau (Oct 19 2018 at 01:08)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136077894):
-`set X` is a complete lattice
+<p><code>set X</code> is a complete lattice</p>
 
 #### [ Kevin Buzzard (Oct 19 2018 at 01:08)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136077913):
-Abhi: `⨆` is notation so you can start with `#print notation ⨆`
+<p>Abhi: <code>⨆</code> is notation so you can start with <code>#print notation ⨆</code></p>
 
 #### [ Kevin Buzzard (Oct 19 2018 at 01:09)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136077923):
-but if you don't want to go down the lattice rabbithole you could try my homework :-)
+<p>but if you don't want to go down the lattice rabbithole you could try my homework :-)</p>
 
 #### [ Kevin Buzzard (Oct 19 2018 at 01:11)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136077997):
-I'd be able to do the homework myself if I knew how to prove `A = B iff B = A` :-/
+<p>I'd be able to do the homework myself if I knew how to prove <code>A = B iff B = A</code> :-/</p>
 
 #### [ Kevin Buzzard (Oct 19 2018 at 01:11)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136077999):
-`eq.symm` only goes one way
+<p><code>eq.symm</code> only goes one way</p>
 
 #### [ Kenny Lau (Oct 19 2018 at 01:11)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136078000):
-eq_comm
+<p>eq_comm</p>
 
 #### [ Abhimanyu Pallavi Sudhir (Oct 19 2018 at 01:11)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136078007):
-I'm not sure how to interpret the results of #print notation. All I get is `'⨆':1024 binders ',':0 (scoped 0) := #0` What's a binder?
+<p>I'm not sure how to interpret the results of #print notation. All I get is <code>'⨆':1024 binders ',':0 (scoped 0) := #0</code> What's a binder?</p>
 
 #### [ Kevin Buzzard (Oct 19 2018 at 01:12)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136078057):
-oh oops
+<p>oh oops</p>
 
 #### [ Kevin Buzzard (Oct 19 2018 at 01:12)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136078060):
-yes that is impossible to interpret
+<p>yes that is impossible to interpret</p>
 
 #### [ Kevin Buzzard (Oct 19 2018 at 01:13)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136078085):
-A binder is something like forall or exists or lambda I think
+<p>A binder is something like forall or exists or lambda I think</p>
 
 #### [ Kevin Buzzard (Oct 19 2018 at 01:13)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136078094):
-Kenny is using `⨆` in the same sort of way that one would use those things.
+<p>Kenny is using <code>⨆</code> in the same sort of way that one would use those things.</p>
 
 #### [ Abhimanyu Pallavi Sudhir (Oct 19 2018 at 01:14)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136078137):
-Yeah, I can tell it's something like forall, but I'm not sure what the difference is.
+<p>Yeah, I can tell it's something like forall, but I'm not sure what the difference is.</p>
 
 #### [ Mario Carneiro (Oct 19 2018 at 01:14)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136078141):
-I think you can click on the sup to go to definition
+<p>I think you can click on the sup to go to definition</p>
 
 #### [ Abhimanyu Pallavi Sudhir (Oct 19 2018 at 01:14)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136078143):
-I get "no definition found"
+<p>I get "no definition found"</p>
 
 #### [ Mario Carneiro (Oct 19 2018 at 01:14)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136078144):
-It's the analogue of `\bigcup` for lattices
+<p>It's the analogue of <code>\bigcup</code> for lattices</p>
 
 #### [ Kevin Buzzard (Oct 19 2018 at 01:14)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136078146):
-It's in `order/complete_lattice.lean`
+<p>It's in <code>order/complete_lattice.lean</code></p>
 
 #### [ Kevin Buzzard (Oct 19 2018 at 01:14)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136078149):
-`notation `⨆` binders `, ` r:(scoped f, supr f) := r`
+<p><code>notation </code>⨆<code> binders </code>, <code> r:(scoped f, supr f) := r</code></p>
 
 #### [ Kevin Buzzard (Oct 19 2018 at 01:15)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136078169):
-I taught Abhi about bigcup today in lectures :-)
+<p>I taught Abhi about bigcup today in lectures :-)</p>
 
 #### [ Kevin Buzzard (Oct 19 2018 at 01:16)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136078211):
-Glad to see my lectures are coming in handy in his day to day life
+<p>Glad to see my lectures are coming in handy in his day to day life</p>
 
 #### [ Mario Carneiro (Oct 19 2018 at 01:17)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136078237):
-"day to day life"
+<p>"day to day life"</p>
 
 #### [ Kevin Buzzard (Oct 19 2018 at 01:17)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136078244):
-I don't understand that notation line at all. I think notation in Lean is somehow evil; most of it is fine and then there are some weird hacks which I don't get at all. The key point is `supr` somehow, and then everything else is some notation mantra I guess
+<p>I don't understand that notation line at all. I think notation in Lean is somehow evil; most of it is fine and then there are some weird hacks which I don't get at all. The key point is <code>supr</code> somehow, and then everything else is some notation mantra I guess</p>
 
 #### [ Kevin Buzzard (Oct 19 2018 at 01:18)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136078294):
-`def supr [complete_lattice α] (s : ι → α) : α := Sup {a : α | ∃i : ι, a = s i}`
+<p><code>def supr [complete_lattice α] (s : ι → α) : α := Sup {a : α | ∃i : ι, a = s i}</code></p>
 
 #### [ Kevin Buzzard (Oct 19 2018 at 01:19)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136078339):
-so `supr s` is the supremum of the range of `s`
+<p>so <code>supr s</code> is the supremum of the range of <code>s</code></p>
 
 #### [ Abhimanyu Pallavi Sudhir (Oct 19 2018 at 01:22)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136078511):
-Btw I'm trying `def p1 (g : graph) : X := g.1` based on the earlier definition of `graph`, but it doesn't work:
+<p>Btw I'm trying <code>def p1 (g : graph) : X := g.1</code> based on the earlier definition of <code>graph</code>, but it doesn't work:</p>
+<div class="codehilite"><pre><span></span><span class="n">invalid</span> <span class="n">field</span> <span class="kn">notation</span><span class="o">,</span> <span class="n">type</span> <span class="n">is</span> <span class="n">not</span> <span class="n">of</span> <span class="n">the</span> <span class="n">form</span> <span class="o">(</span><span class="n">C</span> <span class="bp">...</span><span class="o">)</span> <span class="n">where</span> <span class="n">C</span> <span class="n">is</span> <span class="n">a</span> <span class="kn">constant</span>
+  <span class="n">g</span>
+<span class="n">has</span> <span class="n">type</span>
+  <span class="err">⁇</span>
+</pre></div>
 
-```lean
-invalid field notation, type is not of the form (C ...) where C is a constant
-  g
-has type
-  ⁇
-```
 
-```lean
-universe u
-variable {X : Type u}
-variable {Y : Type u}
-variable {f : X → Y}
-def graph : set (X × Y) := { g | g.2 = f g.1 }
-def p1 (g : graph) : X := g.1
-```
+<div class="codehilite"><pre><span></span><span class="kn">universe</span> <span class="n">u</span>
+<span class="kn">variable</span> <span class="o">{</span><span class="n">X</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span>
+<span class="kn">variable</span> <span class="o">{</span><span class="n">Y</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span>
+<span class="kn">variable</span> <span class="o">{</span><span class="n">f</span> <span class="o">:</span> <span class="n">X</span> <span class="bp">→</span> <span class="n">Y</span><span class="o">}</span>
+<span class="n">def</span> <span class="n">graph</span> <span class="o">:</span> <span class="n">set</span> <span class="o">(</span><span class="n">X</span> <span class="bp">×</span> <span class="n">Y</span><span class="o">)</span> <span class="o">:=</span> <span class="o">{</span> <span class="n">g</span> <span class="bp">|</span> <span class="n">g</span><span class="bp">.</span><span class="mi">2</span> <span class="bp">=</span> <span class="n">f</span> <span class="n">g</span><span class="bp">.</span><span class="mi">1</span> <span class="o">}</span>
+<span class="n">def</span> <span class="n">p1</span> <span class="o">(</span><span class="n">g</span> <span class="o">:</span> <span class="n">graph</span><span class="o">)</span> <span class="o">:</span> <span class="n">X</span> <span class="o">:=</span> <span class="n">g</span><span class="bp">.</span><span class="mi">1</span>
+</pre></div>
 
-I guess part of the problem is that `G` is not a type -- I tried coercing it as `↑G`, but that just produces more errors.
+
+<p>I guess part of the problem is that <code>G</code> is not a type -- I tried coercing it as <code>↑G</code>, but that just produces more errors.</p>
 
 #### [ Reid Barton (Oct 19 2018 at 01:23)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136078535):
-I think the bigger problem is Lean doesn't know what you want to take the graph of
+<p>I think the bigger problem is Lean doesn't know what you want to take the graph of</p>
 
 #### [ Mario Carneiro (Oct 19 2018 at 01:23)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136078541):
-I can't make sense of that definition
+<p>I can't make sense of that definition</p>
 
 #### [ Reid Barton (Oct 19 2018 at 01:23)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136078543):
-I would make `f` an explicit argument and then pass it in `p1`
+<p>I would make <code>f</code> an explicit argument and then pass it in <code>p1</code></p>
 
 #### [ Mario Carneiro (Oct 19 2018 at 01:24)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136078594):
-what does `g : graph` mean?
+<p>what does <code>g : graph</code> mean?</p>
 
 #### [ Mario Carneiro (Oct 19 2018 at 01:24)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136078596):
-it's not a type
+<p>it's not a type</p>
 
 #### [ Abhimanyu Pallavi Sudhir (Oct 19 2018 at 01:25)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136078618):
-```quote
-what does `g : graph` mean?
-```
-Yeah, I realise that, but I want to show (separately from the definition) it's a bijection from `graph` to `X`.
+<blockquote>
+<p>what does <code>g : graph</code> mean?</p>
+</blockquote>
+<p>Yeah, I realise that, but I want to show (separately from the definition) it's a bijection from <code>graph</code> to <code>X</code>.</p>
 
 #### [ Abhimanyu Pallavi Sudhir (Oct 19 2018 at 01:26)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136078677):
-```quote
-I would make `f` an explicit argument and then pass it in `p1`
-```
-Indeed that removes the first error. How, though?
+<blockquote>
+<p>I would make <code>f</code> an explicit argument and then pass it in <code>p1</code></p>
+</blockquote>
+<p>Indeed that removes the first error. How, though?</p>
 
 #### [ Mario Carneiro (Oct 19 2018 at 01:26)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136078690):
-Keep in mind that `graph f`is not a type either, it's a set
+<p>Keep in mind that <code>graph f</code>is not a type either, it's a set</p>
 
 #### [ Mario Carneiro (Oct 19 2018 at 01:27)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136078699):
-lean knows to coerce from a set to a type, but maybe you want the subtype instead?
+<p>lean knows to coerce from a set to a type, but maybe you want the subtype instead?</p>
 
 #### [ Kevin Buzzard (Oct 19 2018 at 01:27)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136078706):
-a set is a term not a Type Abhi. Did you come to my lecture today?
+<p>a set is a term not a Type Abhi. Did you come to my lecture today?</p>
 
 #### [ Abhimanyu Pallavi Sudhir (Oct 19 2018 at 01:28)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136078759):
-```quote
-a set is a term not a Type Abhi. Did you come to my lecture today?
-```
-I realise that -- but how else would I later show it to be a bijection from graph to X?
+<blockquote>
+<p>a set is a term not a Type Abhi. Did you come to my lecture today?</p>
+</blockquote>
+<p>I realise that -- but how else would I later show it to be a bijection from graph to X?</p>
 
 #### [ Kevin Buzzard (Oct 19 2018 at 01:28)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136078760):
-If `X` is a type and `p : X -> Prop` then in Lean there are two very different ways to express what in set theory is just "the subset of X consisting of elements `a` for which `p a` is true"
+<p>If <code>X</code> is a type and <code>p : X -&gt; Prop</code> then in Lean there are two very different ways to express what in set theory is just "the subset of X consisting of elements <code>a</code> for which <code>p a</code> is true"</p>
 
 #### [ Kenny Lau (Oct 19 2018 at 01:28)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136078763):
-it did took me some time to figure out that Kevin wants us to prove that the two big big functions `graph` and `graph'` are equal
+<p>it did took me some time to figure out that Kevin wants us to prove that the two big big functions <code>graph</code> and <code>graph'</code> are equal</p>
 
 #### [ Kenny Lau (Oct 19 2018 at 01:28)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136078770):
-so you should start with `ext X Y f`
+<p>so you should start with <code>ext X Y f</code></p>
 
 #### [ Kevin Buzzard (Oct 19 2018 at 01:28)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136078772):
-One is the set `{x : X | p x}` and one is the subtype `{x : X // p x}`
+<p>One is the set <code>{x : X | p x}</code> and one is the subtype <code>{x : X // p x}</code></p>
 
 #### [ Kevin Buzzard (Oct 19 2018 at 01:29)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136078800):
-I am in the middle of showing my `graph` is Kenny's `supr` thing
+<p>I am in the middle of showing my <code>graph</code> is Kenny's <code>supr</code> thing</p>
 
 #### [ Kenny Lau (Oct 19 2018 at 01:30)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136078861):
-I bet `example : graph = graph' :=` isn't what Kevin wanted us to prove
+<p>I bet <code>example : graph = graph' :=</code> isn't what Kevin wanted us to prove</p>
 
 #### [ Kevin Buzzard (Oct 19 2018 at 01:30)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136078867):
-I proved that using `eq.comm`
+<p>I proved that using <code>eq.comm</code></p>
 
 #### [ Kenny Lau (Oct 19 2018 at 01:30)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136078880):
-`example : graph X Y f = graph' X Y f :=`
+<p><code>example : graph X Y f = graph' X Y f :=</code></p>
 
 #### [ Kevin Buzzard (Oct 19 2018 at 01:34)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136079017):
-```lean
-import data.set.basic
-import data.set.lattice
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">set</span><span class="bp">.</span><span class="n">basic</span>
+<span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">set</span><span class="bp">.</span><span class="n">lattice</span>
 
-variables (X Y : Type) (f : X → Y)
+<span class="kn">variables</span> <span class="o">(</span><span class="n">X</span> <span class="n">Y</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">X</span> <span class="bp">→</span> <span class="n">Y</span><span class="o">)</span>
 
-def graph  : set (X × Y) := {z : X × Y | z.2 = f z.1}
+<span class="n">def</span> <span class="n">graph</span>  <span class="o">:</span> <span class="n">set</span> <span class="o">(</span><span class="n">X</span> <span class="bp">×</span> <span class="n">Y</span><span class="o">)</span> <span class="o">:=</span> <span class="o">{</span><span class="n">z</span> <span class="o">:</span> <span class="n">X</span> <span class="bp">×</span> <span class="n">Y</span> <span class="bp">|</span> <span class="n">z</span><span class="bp">.</span><span class="mi">2</span> <span class="bp">=</span> <span class="n">f</span> <span class="n">z</span><span class="bp">.</span><span class="mi">1</span><span class="o">}</span>
 
-def graph' : set (X × Y) := set.range (λ x, ⟨x,f x⟩) 
+<span class="n">def</span> <span class="n">graph&#39;</span> <span class="o">:</span> <span class="n">set</span> <span class="o">(</span><span class="n">X</span> <span class="bp">×</span> <span class="n">Y</span><span class="o">)</span> <span class="o">:=</span> <span class="n">set</span><span class="bp">.</span><span class="n">range</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="bp">⟨</span><span class="n">x</span><span class="o">,</span><span class="n">f</span> <span class="n">x</span><span class="bp">⟩</span><span class="o">)</span>
 
-def graph'' : set (X × Y) := ⨆ x : X, {(x, f x)}
+<span class="n">def</span> <span class="n">graph&#39;&#39;</span> <span class="o">:</span> <span class="n">set</span> <span class="o">(</span><span class="n">X</span> <span class="bp">×</span> <span class="n">Y</span><span class="o">)</span> <span class="o">:=</span> <span class="err">⨆</span> <span class="n">x</span> <span class="o">:</span> <span class="n">X</span><span class="o">,</span> <span class="o">{(</span><span class="n">x</span><span class="o">,</span> <span class="n">f</span> <span class="n">x</span><span class="o">)}</span>
 
-example : graph = graph' := sorry
+<span class="kn">example</span> <span class="o">:</span> <span class="n">graph</span> <span class="bp">=</span> <span class="n">graph&#39;</span> <span class="o">:=</span> <span class="n">sorry</span>
 
-example : graph = graph'' := sorry
-```
-I did them both :-)
+<span class="kn">example</span> <span class="o">:</span> <span class="n">graph</span> <span class="bp">=</span> <span class="n">graph&#39;&#39;</span> <span class="o">:=</span> <span class="n">sorry</span>
+</pre></div>
+
+
+<p>I did them both :-)</p>
 
 #### [ Kevin Buzzard (Oct 19 2018 at 01:34)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136079020):
-I am not proud of the second one though.
+<p>I am not proud of the second one though.</p>
 
 #### [ Abhimanyu Pallavi Sudhir (Oct 19 2018 at 01:36)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136079102):
-Re:the bijection, I *can* write `def p1 (g : graph f) := g.1`(still defining `graph` as a set because subtype gives me even more errors), but then `p1` for some reason has the wrong type. Apparently `g.1` isn't processed correctly (it still has type `X × Y` and not `X`).
+<p>Re:the bijection, I <em>can</em> write <code>def p1 (g : graph f) := g.1</code>(still defining <code>graph</code> as a set because subtype gives me even more errors), but then <code>p1</code> for some reason has the wrong type. Apparently <code>g.1</code> isn't processed correctly (it still has type <code>X × Y</code> and not <code>X</code>).</p>
 
 #### [ Mario Carneiro (Oct 19 2018 at 01:37)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136079129):
-that has to do with the fact that it is a subtype
+<p>that has to do with the fact that it is a subtype</p>
 
 #### [ Mario Carneiro (Oct 19 2018 at 01:38)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136079183):
-`g` is a pair of an element of `X x Y` and a proof that this element satisfies `z.2 = f z.1`
+<p><code>g</code> is a pair of an element of <code>X x Y</code> and a proof that this element satisfies <code>z.2 = f z.1</code></p>
 
 #### [ Abhimanyu Pallavi Sudhir (Oct 19 2018 at 01:38)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136079184):
-Is the notation for ordered pairs different for subtypes?
+<p>Is the notation for ordered pairs different for subtypes?</p>
 
 #### [ Mario Carneiro (Oct 19 2018 at 01:38)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136079190):
-so the X value is `g.1.1`
+<p>so the X value is <code>g.1.1</code></p>
 
 #### [ Abhimanyu Pallavi Sudhir (Oct 19 2018 at 01:39)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136079202):
-That works, but I don't get why.
+<p>That works, but I don't get why.</p>
 
 #### [ Abhimanyu Pallavi Sudhir (Oct 19 2018 at 01:39)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136079207):
-(deleted)
+<p>(deleted)</p>
 
 #### [ Reid Barton (Oct 19 2018 at 01:39)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136079216):
-or `g.val.fst`
+<p>or <code>g.val.fst</code></p>
 
 #### [ Abhimanyu Pallavi Sudhir (Oct 19 2018 at 01:40)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136079275):
-Ok, I get the argument, but I'm not sure why it's defined that way (to include a proof).
+<p>Ok, I get the argument, but I'm not sure why it's defined that way (to include a proof).</p>
 
 #### [ Reid Barton (Oct 19 2018 at 01:43)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136079360):
-If you didn't have to provide a proof when constructing a value of the subtype, then it would just be the same as the entire original type.
+<p>If you didn't have to provide a proof when constructing a value of the subtype, then it would just be the same as the entire original type.</p>
 
 #### [ Abhimanyu Pallavi Sudhir (Oct 19 2018 at 01:46)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136079477):
-Why does the same convention not apply to sets?
+<p>Why does the same convention not apply to sets?</p>
 
 #### [ Reid Barton (Oct 19 2018 at 01:49)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136079571):
-I don't really understand the question. A set is not a type; perhaps that's the answer
+<p>I don't really understand the question. A set is not a type; perhaps that's the answer</p>
 
 
 {% endraw %}

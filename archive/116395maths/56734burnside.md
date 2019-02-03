@@ -12,8 +12,7 @@ permalink: archive/116395maths/56734burnside.html
 
 {% raw %}
 #### [ Kenny Lau (Apr 16 2018 at 07:03)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/burnside%21/near/125134940):
-```
-theorem burnside : nonempty ((Σ g, fixed G X g) ≃ (orbits G X × G)) :=
+<div class="codehilite"><pre><span></span>theorem burnside : nonempty ((Σ g, fixed G X g) ≃ (orbits G X × G)) :=
 ⟨calc  (Σ g, fixed G X g)
     ≃ (Σ x, stab G X x) :
   ⟨λ z, ⟨z.2.1, z.1, z.2.2⟩, λ z, ⟨z.2.1, z.1, z.2.2⟩, λ ⟨g, x, h⟩, rfl, λ ⟨x, g, h⟩, rfl⟩
@@ -30,44 +29,45 @@ theorem burnside : nonempty ((Σ g, fixed G X g) ≃ (orbits G X × G)) :=
   equiv.sigma_congr_right (λ A, classical.choice $ orbit_stab G X _)
 ... ≃ (orbits G X × G) :
   equiv.sigma_equiv_prod _ _⟩
+</pre></div>
 
 #### [ Kenny Lau (Apr 16 2018 at 07:03)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/burnside%21/near/125134941):
-@**Kevin Buzzard**
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span></p>
 
 #### [ Kevin Buzzard (Apr 16 2018 at 08:37)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/burnside%21/near/125137378):
-Now you could do Sylow's theorems :-) but they might not be to your taste. I wonder if there's anything to learn from the Coq presentation of all this. I would imagine they use this sort of stuff everywhere in the odd order theorem.
+<p>Now you could do Sylow's theorems :-) but they might not be to your taste. I wonder if there's anything to learn from the Coq presentation of all this. I would imagine they use this sort of stuff everywhere in the odd order theorem.</p>
 
 #### [ Kenny Lau (Apr 16 2018 at 08:39)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/burnside%21/near/125137426):
-@**Kevin Buzzard** sylow uses burnside?
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> sylow uses burnside?</p>
 
 #### [ Kevin Buzzard (Apr 16 2018 at 08:49)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/burnside%21/near/125137704):
-One proof I've seen does. I'm sure there are others :-) but it wouldn't surprise me if all of them used "counting" in some way.
+<p>One proof I've seen does. I'm sure there are others :-) but it wouldn't surprise me if all of them used "counting" in some way.</p>
 
 #### [ Johannes Hölzl (Apr 16 2018 at 09:11)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/burnside%21/near/125138288):
-There is also Sylow's first theorem in Lean2 https://github.com/leanprover/lean2/tree/master/library/theories/finite_group_theory/pgroup.lean
-We never did the effort to port this development to Lean 3, and a lot of stuff changed since them. But I think it would be worthwhile to take a look.
+<p>There is also Sylow's first theorem in Lean2 <a href="https://github.com/leanprover/lean2/tree/master/library/theories/finite_group_theory/pgroup.lean" target="_blank" title="https://github.com/leanprover/lean2/tree/master/library/theories/finite_group_theory/pgroup.lean">https://github.com/leanprover/lean2/tree/master/library/theories/finite_group_theory/pgroup.lean</a><br>
+We never did the effort to port this development to Lean 3, and a lot of stuff changed since them. But I think it would be worthwhile to take a look.</p>
 
 #### [ Kenny Lau (Apr 16 2018 at 09:11)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/burnside%21/near/125138291):
-I say, the theory of (finite) cardinality in Lean is not well-developed
+<p>I say, the theory of (finite) cardinality in Lean is not well-developed</p>
 
 #### [ Johannes Hölzl (Apr 16 2018 at 09:20)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/burnside%21/near/125138541):
-Come on, you know that mathlib is a open source project. It's only as developed, as people put an effort into developing it.
-This includes by the way answering comments on pull requests ;-)
+<p>Come on, you know that mathlib is a open source project. It's only as developed, as people put an effort into developing it.<br>
+This includes by the way answering comments on pull requests ;-)</p>
 
 #### [ Kenny Lau (Apr 16 2018 at 09:23)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/burnside%21/near/125138590):
-well
+<p>well</p>
 
 #### [ Kenny Lau (Apr 16 2018 at 09:23)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/burnside%21/near/125138596):
-fixing those things created more error for me, so I need time to de-frustrate myself and to fix those errors
+<p>fixing those things created more error for me, so I need time to de-frustrate myself and to fix those errors</p>
 
 #### [ Kevin Buzzard (Apr 16 2018 at 09:25)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/burnside%21/near/125138654):
-...and revise for mechanics. I might soon need some other localization facts which aren't there yet, but I still didn't finish wrestling with compactness. Is Johannes talking about localization or something else?
+<p>...and revise for mechanics. I might soon need some other localization facts which aren't there yet, but I still didn't finish wrestling with compactness. Is Johannes talking about localization or something else?</p>
 
 #### [ Kenny Lau (Apr 16 2018 at 09:25)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/burnside%21/near/125138658):
-free group
+<p>free group</p>
 
 #### [ Kenny Lau (Apr 16 2018 at 09:25)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/burnside%21/near/125138659):
-https://github.com/leanprover/mathlib/pull/89#discussion_r179398893
+<p><a href="https://github.com/leanprover/mathlib/pull/89#discussion_r179398893" target="_blank" title="https://github.com/leanprover/mathlib/pull/89#discussion_r179398893">https://github.com/leanprover/mathlib/pull/89#discussion_r179398893</a></p>
 
 
 {% endraw %}

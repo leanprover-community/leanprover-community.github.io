@@ -12,103 +12,104 @@ permalink: archive/179818LeanTogether2019/74251Videos.html
 
 {% raw %}
 #### [ Rob Lewis (Jan 07 2019 at 09:32)](https://leanprover.zulipchat.com/#narrow/stream/179818-Lean%20Together%202019/topic/Videos/near/154553849):
-Videos of the lectures will be available here: https://lean-forward.github.io/lean-together/2019/#videos
-Of course, the university A/V people are having trouble setting up the streaming. It will be working eventually. Hopefully before this afternoon.
+<p>Videos of the lectures will be available here: <a href="https://lean-forward.github.io/lean-together/2019/#videos" target="_blank" title="https://lean-forward.github.io/lean-together/2019/#videos">https://lean-forward.github.io/lean-together/2019/#videos</a><br>
+Of course, the university A/V people are having trouble setting up the streaming. It will be working eventually. Hopefully before this afternoon.</p>
 
 #### [ Koundinya Vajjha (Jan 07 2019 at 09:44)](https://leanprover.zulipchat.com/#narrow/stream/179818-Lean%20Together%202019/topic/Videos/near/154554293):
-Will there be videos of just the lectures or the tutorial sessions as well?
+<p>Will there be videos of just the lectures or the tutorial sessions as well?</p>
 
 #### [ Rob Lewis (Jan 07 2019 at 11:10)](https://leanprover.zulipchat.com/#narrow/stream/179818-Lean%20Together%202019/topic/Videos/near/154558361):
-Lectures and tutorials.
+<p>Lectures and tutorials.</p>
 
 #### [ Rob Lewis (Jan 07 2019 at 13:54)](https://leanprover.zulipchat.com/#narrow/stream/179818-Lean%20Together%202019/topic/Videos/near/154565679):
-The stream has been fixed.
+<p>The stream has been fixed.</p>
 
 #### [ Rob Lewis (Jan 07 2019 at 15:35)](https://leanprover.zulipchat.com/#narrow/stream/179818-Lean%20Together%202019/topic/Videos/near/154572689):
-If anyone is watching the stream/videos: is the sound from questions being captured?
+<p>If anyone is watching the stream/videos: is the sound from questions being captured?</p>
 
 #### [ Koundinya Vajjha (Jan 07 2019 at 16:50)](https://leanprover.zulipchat.com/#narrow/stream/179818-Lean%20Together%202019/topic/Videos/near/154578390):
-I was trying to watch the stream but it wouldn't load.
+<p>I was trying to watch the stream but it wouldn't load.</p>
 
 #### [ Koundinya Vajjha (Jan 07 2019 at 16:50)](https://leanprover.zulipchat.com/#narrow/stream/179818-Lean%20Together%202019/topic/Videos/near/154578410):
-But I didn't try after your message that it was fixed.
-I'll try again tomorrow!
+<p>But I didn't try after your message that it was fixed.<br>
+I'll try again tomorrow!</p>
 
 #### [ Koundinya Vajjha (Jan 07 2019 at 16:50)](https://leanprover.zulipchat.com/#narrow/stream/179818-Lean%20Together%202019/topic/Videos/near/154578416):
-Were the talks recorded?
+<p>Were the talks recorded?</p>
 
 #### [ Johan Commelin (Jan 07 2019 at 16:51)](https://leanprover.zulipchat.com/#narrow/stream/179818-Lean%20Together%202019/topic/Videos/near/154578428):
-Yes, all talks have been recorded.
+<p>Yes, all talks have been recorded.</p>
 
 #### [ Johan Commelin (Jan 07 2019 at 16:51)](https://leanprover.zulipchat.com/#narrow/stream/179818-Lean%20Together%202019/topic/Videos/near/154578434):
-You could try right now.
+<p>You could try right now.</p>
 
 #### [ Rob Lewis (Jan 07 2019 at 16:51)](https://leanprover.zulipchat.com/#narrow/stream/179818-Lean%20Together%202019/topic/Videos/near/154578438):
-The morning wasn't streamed because the A/V people were struggling with the internet. It was recorded but I don't think they've uploaded it.
+<p>The morning wasn't streamed because the A/V people were struggling with the internet. It was recorded but I don't think they've uploaded it.</p>
 
 #### [ Rob Lewis (Jan 07 2019 at 16:51)](https://leanprover.zulipchat.com/#narrow/stream/179818-Lean%20Together%202019/topic/Videos/near/154578444):
-The current session is streaming.
+<p>The current session is streaming.</p>
 
 #### [ Koundinya Vajjha (Jan 07 2019 at 16:56)](https://leanprover.zulipchat.com/#narrow/stream/179818-Lean%20Together%202019/topic/Videos/near/154578771):
-Sound's coming through loud and clear. Will report on audience questions when they happen :grinning:
+<p>Sound's coming through loud and clear. Will report on audience questions when they happen <span class="emoji emoji-1f600" title="grinning">:grinning:</span></p>
 
 #### [ Koundinya Vajjha (Jan 07 2019 at 17:13)](https://leanprover.zulipchat.com/#narrow/stream/179818-Lean%20Together%202019/topic/Videos/near/154580077):
-Can't really hear audience questions - Mario's was fairly clear, probably because he was sitting closest to the mike.
+<p>Can't really hear audience questions - Mario's was fairly clear, probably because he was sitting closest to the mike.</p>
 
 #### [ Koundinya Vajjha (Jan 07 2019 at 17:39)](https://leanprover.zulipchat.com/#narrow/stream/179818-Lean%20Together%202019/topic/Videos/near/154581992):
-Can we have the speaker repeat the audience questions, if possible?
+<p>Can we have the speaker repeat the audience questions, if possible?</p>
 
 #### [ Koundinya Vajjha (Jan 08 2019 at 14:05)](https://leanprover.zulipchat.com/#narrow/stream/179818-Lean%20Together%202019/topic/Videos/near/154642763):
-Is the stream active?
+<p>Is the stream active?</p>
 
 #### [ Rob Lewis (Jan 08 2019 at 14:06)](https://leanprover.zulipchat.com/#narrow/stream/179818-Lean%20Together%202019/topic/Videos/near/154642864):
-By request of the speaker, this talk isn't being recorded.
+<p>By request of the speaker, this talk isn't being recorded.</p>
 
 #### [ Rob Lewis (Jan 08 2019 at 14:20)](https://leanprover.zulipchat.com/#narrow/stream/179818-Lean%20Together%202019/topic/Videos/near/154643684):
-Assia Mahboubi's talk at 4:00pm will not be recorded either.
+<p>Assia Mahboubi's talk at 4:00pm will not be recorded either.</p>
 
 #### [ Rob Lewis (Jan 14 2019 at 18:17)](https://leanprover.zulipchat.com/#narrow/stream/179818-Lean%20Together%202019/topic/Videos/near/155099558):
-Right now the videos are streaming from the VU A/V department's site. @**Kevin Buzzard**  had asked me about getting copies of the videos for teaching purposes. They would also be nice to archive. The A/V people just quoted me €35 to send the video files... anyone have a clever idea how to extract the video from the stream instead?
+<p>Right now the videos are streaming from the VU A/V department's site. <span class="user-mention" data-user-id="110038">@Kevin Buzzard</span>  had asked me about getting copies of the videos for teaching purposes. They would also be nice to archive. The A/V people just quoted me €35 to send the video files... anyone have a clever idea how to extract the video from the stream instead?</p>
 
 #### [ Kevin Buzzard (Jan 14 2019 at 18:18)](https://leanprover.zulipchat.com/#narrow/stream/179818-Lean%20Together%202019/topic/Videos/near/155099683):
-Hah! I don't need copies of the videos, I have been talking to some A/V people here and we're going to make something better; being able to access the videos like I can now currently do, is fine for me.
+<p>Hah! I don't need copies of the videos, I have been talking to some A/V people here and we're going to make something better; being able to access the videos like I can now currently do, is fine for me.</p>
 
 #### [ Rob Lewis (Jan 14 2019 at 18:20)](https://leanprover.zulipchat.com/#narrow/stream/179818-Lean%20Together%202019/topic/Videos/near/155099839):
-I mean, I'd like the videos, if only for insurance against them disappearing from the university servers. But €35 seems steep!
+<p>I mean, I'd like the videos, if only for insurance against them disappearing from the university servers. But €35 seems steep!</p>
 
 #### [ Sebastian Ullrich (Jan 14 2019 at 18:35)](https://leanprover.zulipchat.com/#narrow/stream/179818-Lean%20Together%202019/topic/Videos/near/155100971):
-You can open the following links in VLC (Ctrl+N):
-* Monday morning https://av-stream.vu.nl/MediasiteDeliver/AVC/SSVideo/27894c3a-8a4d-4768-a042-1f62e5345a6c/30f3dac8-9226-4b73-8da5-2ecec7d24e43.ism/manifest
-* Monday afternoon https://av-stream.vu.nl/MediasiteDeliver/AVC/SSVideo/28f18def-dd72-4013-af8b-2e45fa0ac4bb/5749e718-eb52-4ee2-8285-2b5b9e46134c.ism/manifest
-* Tuesday morning https://av-stream.vu.nl/MediasiteDeliver/AVC/SSVideo/20200bf0-83dd-4327-b398-2ea02146e8dd/791e7f75-c6d1-459f-9528-d5b7c8a31c9b.ism/manifest
-* Tuesday afternoon https://av-stream.vu.nl/MediasiteDeliver/AVC/SSVideo/1979034f-91b6-4022-9bff-abdecd4eae5c/fe4351d8-b7d7-4c6f-8ba9-79263f65f025.ism/manifest
-* Wednesday morning https://av-stream.vu.nl/MediasiteDeliver/AVC/SSVideo/fff2ff4c-cf13-4dbc-9cce-bffcd03d917c/1e8e50fe-8c30-4cca-9780-235df98e11d0.ism/manifest
-
-You can also save them via Ctrl+R
+<p>You can open the following links in VLC (Ctrl+N):</p>
+<ul>
+<li>Monday morning <a href="https://av-stream.vu.nl/MediasiteDeliver/AVC/SSVideo/27894c3a-8a4d-4768-a042-1f62e5345a6c/30f3dac8-9226-4b73-8da5-2ecec7d24e43.ism/manifest" target="_blank" title="https://av-stream.vu.nl/MediasiteDeliver/AVC/SSVideo/27894c3a-8a4d-4768-a042-1f62e5345a6c/30f3dac8-9226-4b73-8da5-2ecec7d24e43.ism/manifest">https://av-stream.vu.nl/MediasiteDeliver/AVC/SSVideo/27894c3a-8a4d-4768-a042-1f62e5345a6c/30f3dac8-9226-4b73-8da5-2ecec7d24e43.ism/manifest</a></li>
+<li>Monday afternoon <a href="https://av-stream.vu.nl/MediasiteDeliver/AVC/SSVideo/28f18def-dd72-4013-af8b-2e45fa0ac4bb/5749e718-eb52-4ee2-8285-2b5b9e46134c.ism/manifest" target="_blank" title="https://av-stream.vu.nl/MediasiteDeliver/AVC/SSVideo/28f18def-dd72-4013-af8b-2e45fa0ac4bb/5749e718-eb52-4ee2-8285-2b5b9e46134c.ism/manifest">https://av-stream.vu.nl/MediasiteDeliver/AVC/SSVideo/28f18def-dd72-4013-af8b-2e45fa0ac4bb/5749e718-eb52-4ee2-8285-2b5b9e46134c.ism/manifest</a></li>
+<li>Tuesday morning <a href="https://av-stream.vu.nl/MediasiteDeliver/AVC/SSVideo/20200bf0-83dd-4327-b398-2ea02146e8dd/791e7f75-c6d1-459f-9528-d5b7c8a31c9b.ism/manifest" target="_blank" title="https://av-stream.vu.nl/MediasiteDeliver/AVC/SSVideo/20200bf0-83dd-4327-b398-2ea02146e8dd/791e7f75-c6d1-459f-9528-d5b7c8a31c9b.ism/manifest">https://av-stream.vu.nl/MediasiteDeliver/AVC/SSVideo/20200bf0-83dd-4327-b398-2ea02146e8dd/791e7f75-c6d1-459f-9528-d5b7c8a31c9b.ism/manifest</a></li>
+<li>Tuesday afternoon <a href="https://av-stream.vu.nl/MediasiteDeliver/AVC/SSVideo/1979034f-91b6-4022-9bff-abdecd4eae5c/fe4351d8-b7d7-4c6f-8ba9-79263f65f025.ism/manifest" target="_blank" title="https://av-stream.vu.nl/MediasiteDeliver/AVC/SSVideo/1979034f-91b6-4022-9bff-abdecd4eae5c/fe4351d8-b7d7-4c6f-8ba9-79263f65f025.ism/manifest">https://av-stream.vu.nl/MediasiteDeliver/AVC/SSVideo/1979034f-91b6-4022-9bff-abdecd4eae5c/fe4351d8-b7d7-4c6f-8ba9-79263f65f025.ism/manifest</a></li>
+<li>Wednesday morning <a href="https://av-stream.vu.nl/MediasiteDeliver/AVC/SSVideo/fff2ff4c-cf13-4dbc-9cce-bffcd03d917c/1e8e50fe-8c30-4cca-9780-235df98e11d0.ism/manifest" target="_blank" title="https://av-stream.vu.nl/MediasiteDeliver/AVC/SSVideo/fff2ff4c-cf13-4dbc-9cce-bffcd03d917c/1e8e50fe-8c30-4cca-9780-235df98e11d0.ism/manifest">https://av-stream.vu.nl/MediasiteDeliver/AVC/SSVideo/fff2ff4c-cf13-4dbc-9cce-bffcd03d917c/1e8e50fe-8c30-4cca-9780-235df98e11d0.ism/manifest</a></li>
+</ul>
+<p>You can also save them via Ctrl+R</p>
 
 #### [ Kevin Buzzard (Jan 14 2019 at 18:36)](https://leanprover.zulipchat.com/#narrow/stream/179818-Lean%20Together%202019/topic/Videos/near/155101060):
-Presumably you're going to bill him €35 for this information.
+<p>Presumably you're going to bill him €35 for this information.</p>
 
 #### [ Sebastian Ullrich (Jan 14 2019 at 18:39)](https://leanprover.zulipchat.com/#narrow/stream/179818-Lean%20Together%202019/topic/Videos/near/155101253):
-30€, mates' rates
+<p>30€, mates' rates</p>
 
 #### [ Amin Bandali (Jan 14 2019 at 21:21)](https://leanprover.zulipchat.com/#narrow/stream/179818-Lean%20Together%202019/topic/Videos/near/155113354):
-Thanks for the links, Sebastian. I'm able to stream the video using VLC, but for some reason it doesn't pick up the audio tracks, and the Audio Track submenu in the Audio menu is grayed out
+<p>Thanks for the links, Sebastian. I'm able to stream the video using VLC, but for some reason it doesn't pick up the audio tracks, and the Audio Track submenu in the Audio menu is grayed out</p>
 
 #### [ Amin Bandali (Jan 14 2019 at 21:21)](https://leanprover.zulipchat.com/#narrow/stream/179818-Lean%20Together%202019/topic/Videos/near/155113361):
-Any thoughts?
+<p>Any thoughts?</p>
 
 #### [ Rob Lewis (Jan 14 2019 at 21:57)](https://leanprover.zulipchat.com/#narrow/stream/179818-Lean%20Together%202019/topic/Videos/near/155117505):
-How about €30 worth of beer next time you're in Amsterdam?
+<p>How about €30 worth of beer next time you're in Amsterdam?</p>
 
 #### [ William Whistler (Jan 14 2019 at 22:03)](https://leanprover.zulipchat.com/#narrow/stream/179818-Lean%20Together%202019/topic/Videos/near/155118430):
-I had the same issue with VLC. If you append (format=mpd-isoff) to Sebastian's URLs, you get the audio as well. For example: https://av-stream.vu.nl/MediasiteDeliver/AVC/SSVideo/27894c3a-8a4d-4768-a042-1f62e5345a6c/30f3dac8-9226-4b73-8da5-2ecec7d24e43.ism/manifest(format=mpd-isoff)
+<p>I had the same issue with VLC. If you append (format=mpd-isoff) to Sebastian's URLs, you get the audio as well. For example: <a href="https://av-stream.vu.nl/MediasiteDeliver/AVC/SSVideo/27894c3a-8a4d-4768-a042-1f62e5345a6c/30f3dac8-9226-4b73-8da5-2ecec7d24e43.ism/manifest(format=mpd-isoff)" target="_blank" title="https://av-stream.vu.nl/MediasiteDeliver/AVC/SSVideo/27894c3a-8a4d-4768-a042-1f62e5345a6c/30f3dac8-9226-4b73-8da5-2ecec7d24e43.ism/manifest(format=mpd-isoff)">https://av-stream.vu.nl/MediasiteDeliver/AVC/SSVideo/27894c3a-8a4d-4768-a042-1f62e5345a6c/30f3dac8-9226-4b73-8da5-2ecec7d24e43.ism/manifest(format=mpd-isoff)</a></p>
 
 #### [ Simon Hudon (Jan 14 2019 at 23:47)](https://leanprover.zulipchat.com/#narrow/stream/179818-Lean%20Together%202019/topic/Videos/near/155126448):
-@**Rob Lewis** Isn't €30 worth of beer one sad shooter of beer in Amsterdam?
+<p><span class="user-mention" data-user-id="110596">@Rob Lewis</span> Isn't €30 worth of beer one sad shooter of beer in Amsterdam?</p>
 
 #### [ Rob Lewis (Jan 15 2019 at 00:27)](https://leanprover.zulipchat.com/#narrow/stream/179818-Lean%20Together%202019/topic/Videos/near/155129028):
-Maybe two sad shooters or one okay bottle.
+<p>Maybe two sad shooters or one okay bottle.</p>
 
 
 {% endraw %}

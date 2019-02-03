@@ -12,316 +12,314 @@ permalink: archive/116395maths/05512Transferhomomorphism.html
 
 {% raw %}
 #### [ Kenny Lau (Jun 15 2018 at 18:15)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Transfer%20homomorphism/near/128127678):
-Let G be a group and H a subgroup of finite index. Then, pick a set-theoretic section s:G/H->G where G/H is the right cosets. Then, the transfer homomorphism G^ab -> H^ab is defined by sending [[g]] to prod[x in G/H] s(x) g s(xg)^-1.
+<p>Let G be a group and H a subgroup of finite index. Then, pick a set-theoretic section s:G/H-&gt;G where G/H is the right cosets. Then, the transfer homomorphism G^ab -&gt; H^ab is defined by sending [[g]] to prod[x in G/H] s(x) g s(xg)^-1.</p>
 
 #### [ Kenny Lau (Jun 15 2018 at 18:15)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Transfer%20homomorphism/near/128127688):
-The wonderful thing about this homomorphism is that it is independent of the section s
+<p>The wonderful thing about this homomorphism is that it is independent of the section s</p>
 
 #### [ Kenny Lau (Jun 15 2018 at 18:16)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Transfer%20homomorphism/near/128127734):
-but this also means that I will be lifting arbitrarily many quotients.
+<p>but this also means that I will be lifting arbitrarily many quotients.</p>
 
 #### [ Kenny Lau (Jun 15 2018 at 18:16)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Transfer%20homomorphism/near/128127738):
-How should I do that?
+<p>How should I do that?</p>
 
 #### [ Mario Carneiro (Jun 15 2018 at 18:16)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Transfer%20homomorphism/near/128127753):
-using choice
+<p>using choice</p>
 
 #### [ Kenny Lau (Jun 15 2018 at 18:16)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Transfer%20homomorphism/near/128127757):
-but it will be noncomputable
+<p>but it will be noncomputable</p>
 
 #### [ Mario Carneiro (Jun 15 2018 at 18:17)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Transfer%20homomorphism/near/128127765):
-obviously
+<p>obviously</p>
 
 #### [ Kenny Lau (Jun 15 2018 at 18:17)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Transfer%20homomorphism/near/128127769):
-can I make it computable?
+<p>can I make it computable?</p>
 
 #### [ Mario Carneiro (Jun 15 2018 at 18:17)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Transfer%20homomorphism/near/128127773):
-nothing about what you said sounds remotely computable
+<p>nothing about what you said sounds remotely computable</p>
 
 #### [ Kenny Lau (Jun 15 2018 at 18:17)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Transfer%20homomorphism/near/128127776):
-it seems computable to me
+<p>it seems computable to me</p>
 
 #### [ Kenny Lau (Jun 15 2018 at 18:17)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Transfer%20homomorphism/near/128127781):
-the map is independent of s
+<p>the map is independent of s</p>
 
 #### [ Kenny Lau (Jun 15 2018 at 18:17)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Transfer%20homomorphism/near/128127784):
-there is only finitely many choices to make
+<p>there is only finitely many choices to make</p>
 
 #### [ Mario Carneiro (Jun 15 2018 at 18:17)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Transfer%20homomorphism/near/128127789):
-How do you even know such a function `s` exists?
+<p>How do you even know such a function <code>s</code> exists?</p>
 
 #### [ Kenny Lau (Jun 15 2018 at 18:18)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Transfer%20homomorphism/near/128127833):
-you don't need the function s. you just need to lift finitely many quotients
+<p>you don't need the function s. you just need to lift finitely many quotients</p>
 
 #### [ Kenny Lau (Jun 15 2018 at 18:18)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Transfer%20homomorphism/near/128127837):
-obviously s is noncomputable
+<p>obviously s is noncomputable</p>
 
 #### [ Kenny Lau (Jun 15 2018 at 18:18)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Transfer%20homomorphism/near/128127839):
-but the transfer homomorphism should be computable
+<p>but the transfer homomorphism should be computable</p>
 
 #### [ Mario Carneiro (Jun 15 2018 at 18:18)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Transfer%20homomorphism/near/128127843):
-How is G^ab defined
+<p>How is G^ab defined</p>
 
 #### [ Kenny Lau (Jun 15 2018 at 18:18)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Transfer%20homomorphism/near/128127847):
-G quotient G commutator
+<p>G quotient G commutator</p>
 
 #### [ Kenny Lau (Jun 15 2018 at 18:18)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Transfer%20homomorphism/near/128127851):
-G/[G,G]
+<p>G/[G,G]</p>
 
 #### [ Mario Carneiro (Jun 15 2018 at 18:19)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Transfer%20homomorphism/near/128127866):
-And in what sense is G/H finite
+<p>And in what sense is G/H finite</p>
 
 #### [ Kenny Lau (Jun 15 2018 at 18:19)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Transfer%20homomorphism/near/128127881):
-in the sense that H is a finite-index subgroup of G
+<p>in the sense that H is a finite-index subgroup of G</p>
 
 #### [ Kenny Lau (Jun 15 2018 at 18:19)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Transfer%20homomorphism/near/128127885):
-so G/H is a fintype
+<p>so G/H is a fintype</p>
 
 #### [ Mario Carneiro (Jun 15 2018 at 18:20)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Transfer%20homomorphism/near/128127954):
-I mean, how are you expressing "finite index"
+<p>I mean, how are you expressing "finite index"</p>
 
 #### [ Kenny Lau (Jun 15 2018 at 18:20)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Transfer%20homomorphism/near/128127956):
-[fintype G/H]
+<p>[fintype G/H]</p>
 
 #### [ Mario Carneiro (Jun 15 2018 at 18:21)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Transfer%20homomorphism/near/128127976):
-And how do you construct a section?
+<p>And how do you construct a section?</p>
 
 #### [ Kenny Lau (Jun 15 2018 at 18:21)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Transfer%20homomorphism/near/128127978):
-I don't
+<p>I don't</p>
 
 #### [ Mario Carneiro (Jun 15 2018 at 18:21)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Transfer%20homomorphism/near/128127979):
-Any section at all
+<p>Any section at all</p>
 
 #### [ Kenny Lau (Jun 15 2018 at 18:22)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Transfer%20homomorphism/near/128127982):
-section is noncomputable
+<p>section is noncomputable</p>
 
 #### [ Kenny Lau (Jun 15 2018 at 18:22)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Transfer%20homomorphism/near/128128022):
-but the transfer homomorphism is independent of section
+<p>but the transfer homomorphism is independent of section</p>
 
 #### [ Kenny Lau (Jun 15 2018 at 18:22)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Transfer%20homomorphism/near/128128025):
-so I need finitely many lifts
+<p>so I need finitely many lifts</p>
 
 #### [ Mario Carneiro (Jun 15 2018 at 18:22)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Transfer%20homomorphism/near/128128034):
-Even ignoring the lifts
+<p>Even ignoring the lifts</p>
 
 #### [ Kenny Lau (Jun 15 2018 at 18:22)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Transfer%20homomorphism/near/128128046):
-I can't construct any section computably
+<p>I can't construct any section computably</p>
 
 #### [ Kenny Lau (Jun 15 2018 at 18:23)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Transfer%20homomorphism/near/128128053):
-if that's what you mean
+<p>if that's what you mean</p>
 
 #### [ Mario Carneiro (Jun 15 2018 at 18:24)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Transfer%20homomorphism/near/128128081):
-I think I see what you mean with iterating lifts, that might be possible
+<p>I think I see what you mean with iterating lifts, that might be possible</p>
 
 #### [ Kenny Lau (Jun 15 2018 at 18:24)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Transfer%20homomorphism/near/128128113):
-hmm
+<p>hmm</p>
 
 #### [ Kenny Lau (Jun 15 2018 at 18:24)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Transfer%20homomorphism/near/128128118):
-but it will be very hard
+<p>but it will be very hard</p>
 
 #### [ Mario Carneiro (Jun 15 2018 at 18:24)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Transfer%20homomorphism/near/128128119):
-But you will have to redo the work of `finset.pi`
+<p>But you will have to redo the work of <code>finset.pi</code></p>
 
 #### [ Kenny Lau (Jun 15 2018 at 18:24)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Transfer%20homomorphism/near/128128120):
-each element of the product is not well-defined
+<p>each element of the product is not well-defined</p>
 
 #### [ Kenny Lau (Jun 15 2018 at 18:24)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Transfer%20homomorphism/near/128128123):
-it is the product itself which is well-defined
+<p>it is the product itself which is well-defined</p>
 
 #### [ Mario Carneiro (Jun 15 2018 at 18:24)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Transfer%20homomorphism/near/128128127):
-You have a single quotient in the output
+<p>You have a single quotient in the output</p>
 
 #### [ Mario Carneiro (Jun 15 2018 at 18:25)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Transfer%20homomorphism/near/128128148):
-or even a `trunc`, if you express the section property in a subtype
+<p>or even a <code>trunc</code>, if you express the section property in a subtype</p>
 
 #### [ Mario Carneiro (Jun 15 2018 at 18:26)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Transfer%20homomorphism/near/128128197):
-Do you have decidable equality on G/H?
+<p>Do you have decidable equality on G/H?</p>
 
 #### [ Kenny Lau (Jun 15 2018 at 18:26)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Transfer%20homomorphism/near/128128202):
-is that necessary?
+<p>is that necessary?</p>
 
 #### [ Kenny Lau (Jun 15 2018 at 18:26)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Transfer%20homomorphism/near/128128210):
-I feel that it is already computable
+<p>I feel that it is already computable</p>
 
 #### [ Mario Carneiro (Jun 15 2018 at 18:26)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Transfer%20homomorphism/near/128128212):
-it comes up in the construction of the functions
+<p>it comes up in the construction of the functions</p>
 
 #### [ Kenny Lau (Jun 15 2018 at 18:27)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Transfer%20homomorphism/near/128128247):
-how would you do it?
+<p>how would you do it?</p>
 
 #### [ Mario Carneiro (Jun 15 2018 at 18:28)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Transfer%20homomorphism/near/128128310):
-I am reminded of a discussion with @**Gabriel Ebner** about generalizing the quotient axioms to allow for indexed families of quotients
+<p>I am reminded of a discussion with <span class="user-mention" data-user-id="110043">@Gabriel Ebner</span> about generalizing the quotient axioms to allow for indexed families of quotients</p>
 
 #### [ Kenny Lau (Jun 15 2018 at 18:29)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Transfer%20homomorphism/near/128128314):
-but everything is finite here
+<p>but everything is finite here</p>
 
 #### [ Kenny Lau (Jun 15 2018 at 18:29)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Transfer%20homomorphism/near/128128321):
-the axioms should be enough
+<p>the axioms should be enough</p>
 
 #### [ Mario Carneiro (Jun 15 2018 at 18:29)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Transfer%20homomorphism/near/128128324):
-But it's provable in the finite case, and that's what I would prove
+<p>But it's provable in the finite case, and that's what I would prove</p>
 
 #### [ Kenny Lau (Jun 15 2018 at 18:29)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Transfer%20homomorphism/near/128128328):
-hmm
+<p>hmm</p>
 
 #### [ Kenny Lau (Jun 15 2018 at 18:29)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Transfer%20homomorphism/near/128128330):
-this is very hard
+<p>this is very hard</p>
 
 #### [ Kenny Lau (Jun 15 2018 at 18:29)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Transfer%20homomorphism/near/128128332):
-can I even do this in 3 days
+<p>can I even do this in 3 days</p>
 
 #### [ Mario Carneiro (Jun 15 2018 at 18:29)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Transfer%20homomorphism/near/128128339):
-It's less than 100 lines for sure
+<p>It's less than 100 lines for sure</p>
 
 #### [ Mario Carneiro (Jun 15 2018 at 18:31)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Transfer%20homomorphism/near/128128430):
-Also, decidable equality is definitely necessary for constructing sections
+<p>Also, decidable equality is definitely necessary for constructing sections</p>
 
 #### [ Kenny Lau (Jun 15 2018 at 18:31)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Transfer%20homomorphism/near/128128439):
-I don't want to construct any section
+<p>I don't want to construct any section</p>
 
 #### [ Mario Carneiro (Jun 15 2018 at 18:31)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Transfer%20homomorphism/near/128128445):
-You do, that's the whole point
+<p>You do, that's the whole point</p>
 
 #### [ Mario Carneiro (Jun 15 2018 at 18:31)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Transfer%20homomorphism/near/128128453):
-You are lifting stuff from a quotient but that's not so important
+<p>You are lifting stuff from a quotient but that's not so important</p>
 
 #### [ Kenny Lau (Jun 15 2018 at 18:32)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Transfer%20homomorphism/near/128128510):
-hmm
+<p>hmm</p>
 
 #### [ Mario Carneiro (Jun 15 2018 at 18:33)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Transfer%20homomorphism/near/128128520):
-Are you suggesting that there is a way to define the transfer that avoids reference to any section?
+<p>Are you suggesting that there is a way to define the transfer that avoids reference to any section?</p>
 
 #### [ Kenny Lau (Jun 15 2018 at 18:33)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Transfer%20homomorphism/near/128128525):
-If I do a product indexed by a fintype do I need decidable equality?
+<p>If I do a product indexed by a fintype do I need decidable equality?</p>
 
 #### [ Mario Carneiro (Jun 15 2018 at 18:33)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Transfer%20homomorphism/near/128128530):
-I assume you have to make coordinated choices in order to define the sums
+<p>I assume you have to make coordinated choices in order to define the sums</p>
 
 #### [ Kenny Lau (Jun 15 2018 at 18:33)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Transfer%20homomorphism/near/128128535):
-but everything is finite
+<p>but everything is finite</p>
 
 #### [ Mario Carneiro (Jun 15 2018 at 18:35)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Transfer%20homomorphism/near/128128620):
-No, products of elements in a commutative group over a finset does not require decidable_eq
+<p>No, products of elements in a commutative group over a finset does not require decidable_eq</p>
 
 #### [ Kenny Lau (Jun 15 2018 at 18:35)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Transfer%20homomorphism/near/128128626):
-then why do I need it now
+<p>then why do I need it now</p>
 
 #### [ Kenny Lau (Jun 15 2018 at 18:35)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Transfer%20homomorphism/near/128128629):
-even if the choice is coordinated
+<p>even if the choice is coordinated</p>
 
 #### [ Kenny Lau (Jun 15 2018 at 18:35)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Transfer%20homomorphism/near/128128631):
-it's still finite
+<p>it's still finite</p>
 
 #### [ Mario Carneiro (Jun 15 2018 at 18:35)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Transfer%20homomorphism/near/128128637):
-to define the section that coordinates the choices
+<p>to define the section that coordinates the choices</p>
 
 #### [ Kenny Lau (Jun 15 2018 at 18:35)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Transfer%20homomorphism/near/128128642):
-but everything is well-defined
+<p>but everything is well-defined</p>
 
 #### [ Mario Carneiro (Jun 15 2018 at 18:36)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Transfer%20homomorphism/near/128128690):
-How are you going to remember your finitely many choices if not with a function? And how is that function indexed?
+<p>How are you going to remember your finitely many choices if not with a function? And how is that function indexed?</p>
 
 #### [ Kenny Lau (Jun 15 2018 at 18:36)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Transfer%20homomorphism/near/128128694):
-isn't it the philosophy of quotient that if your choices are well-defined then you are computable?
+<p>isn't it the philosophy of quotient that if your choices are well-defined then you are computable?</p>
 
 #### [ Mario Carneiro (Jun 15 2018 at 18:36)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Transfer%20homomorphism/near/128128703):
-That's not the problem
+<p>That's not the problem</p>
 
 #### [ Mario Carneiro (Jun 15 2018 at 18:36)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Transfer%20homomorphism/near/128128708):
-You want a function G/H -> G
+<p>You want a function G/H -&gt; G</p>
 
 #### [ Kenny Lau (Jun 15 2018 at 18:37)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Transfer%20homomorphism/near/128128717):
-list.rec is computable
+<p>list.rec is computable</p>
 
 #### [ Kenny Lau (Jun 15 2018 at 18:37)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Transfer%20homomorphism/near/128128718):
-multiset.rec is computable
+<p>multiset.rec is computable</p>
 
 #### [ Mario Carneiro (Jun 15 2018 at 18:37)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Transfer%20homomorphism/near/128128719):
-that means distinguishing elements of G/H when they are sent to different members of G
+<p>that means distinguishing elements of G/H when they are sent to different members of G</p>
 
 #### [ Kenny Lau (Jun 15 2018 at 18:37)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Transfer%20homomorphism/near/128128721):
-finset.rec is computable
+<p>finset.rec is computable</p>
 
 #### [ Kenny Lau (Jun 15 2018 at 18:39)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Transfer%20homomorphism/near/128128806):
-hmm
+<p>hmm</p>
 
 #### [ Mario Carneiro (Jun 15 2018 at 18:55)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Transfer%20homomorphism/near/128129541):
-Here's a way to state the section property without groups:
-```
-def choices {ι : Type*} [fintype ι] {α : ι → Type*} (R : ∀ i, α i → α i → Prop)
+<p>Here's a way to state the section property without groups:</p>
+<div class="codehilite"><pre><span></span>def choices {ι : Type*} [fintype ι] {α : ι → Type*} (R : ∀ i, α i → α i → Prop)
     (f : ∀ i, quot (R i)) : quot (λ (a b : Π i, α i), ∀ i, R i (a i) (b i)) := sorry
-```
+</pre></div>
 
 #### [ Kenny Lau (Jun 15 2018 at 18:56)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Transfer%20homomorphism/near/128129595):
-I only have one quotient though
+<p>I only have one quotient though</p>
 
 #### [ Kenny Lau (Jun 15 2018 at 18:56)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Transfer%20homomorphism/near/128129601):
-it's just G/H
+<p>it's just G/H</p>
 
 #### [ Mario Carneiro (Jun 15 2018 at 18:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Transfer%20homomorphism/near/128129610):
-That doesn't make too much of a difference
+<p>That doesn't make too much of a difference</p>
 
 #### [ Mario Carneiro (Jun 15 2018 at 18:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Transfer%20homomorphism/near/128129673):
-The point here is the interchanging of pi and quot
+<p>The point here is the interchanging of pi and quot</p>
 
 #### [ Kenny Lau (Jun 15 2018 at 18:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Transfer%20homomorphism/near/128129683):
-I see
+<p>I see</p>
 
 #### [ Mario Carneiro (Jun 15 2018 at 19:00)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Transfer%20homomorphism/near/128129782):
-It seems reasonable to have that function as a computable axiom, this is what Gabriel and I discussed
+<p>It seems reasonable to have that function as a computable axiom, this is what Gabriel and I discussed</p>
 
 #### [ Kenny Lau (Jun 15 2018 at 19:00)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Transfer%20homomorphism/near/128129786):
-I see
+<p>I see</p>
 
 #### [ Mario Carneiro (Jun 15 2018 at 19:00)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Transfer%20homomorphism/near/128129787):
-because it has an obvious VM interpretation
+<p>because it has an obvious VM interpretation</p>
 
 #### [ Kenny Lau (Jun 15 2018 at 19:01)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Transfer%20homomorphism/near/128129793):
-but is it provable?
+<p>but is it provable?</p>
 
 #### [ Mario Carneiro (Jun 15 2018 at 19:01)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Transfer%20homomorphism/near/128129794):
-but you can only prove it for I finite
+<p>but you can only prove it for I finite</p>
 
 #### [ Mario Carneiro (Jun 15 2018 at 19:01)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Transfer%20homomorphism/near/128129806):
-and even then I believe it implies decidable equality of I
+<p>and even then I believe it implies decidable equality of I</p>
 
 #### [ Kevin Buzzard (Jun 15 2018 at 19:14)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Transfer%20homomorphism/near/128130433):
-Kenny, if you are under time constraints, why not just make it noncomputable, make sure everything else is done, and come back to it later if you have time?
+<p>Kenny, if you are under time constraints, why not just make it noncomputable, make sure everything else is done, and come back to it later if you have time?</p>
 
 #### [ Mario Carneiro (Jun 15 2018 at 19:16)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Transfer%20homomorphism/near/128130542):
-I will look into this theorem, and report back if I can prove it. Feel free to assume it
+<p>I will look into this theorem, and report back if I can prove it. Feel free to assume it</p>
 
 #### [ Reid Barton (Jun 15 2018 at 19:17)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Transfer%20homomorphism/near/128130568):
-This version is not quite right though, because for example one of the `R i` could be the empty relation, and then the "product relation" is also empty
+<p>This version is not quite right though, because for example one of the <code>R i</code> could be the empty relation, and then the "product relation" is also empty</p>
 
 #### [ Reid Barton (Jun 15 2018 at 19:19)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Transfer%20homomorphism/near/128130653):
-You need to assume the `R i` are at least reflexive, or build the "product relation" differently, like the Cartesian product of graphs
+<p>You need to assume the <code>R i</code> are at least reflexive, or build the "product relation" differently, like the Cartesian product of graphs</p>
 
 #### [ Mario Carneiro (Jun 15 2018 at 19:21)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Transfer%20homomorphism/near/128130733):
-That's fine, `quot` implicitly takes the equivalence closure of the given relation
+<p>That's fine, <code>quot</code> implicitly takes the equivalence closure of the given relation</p>
 
 #### [ Mario Carneiro (Jun 15 2018 at 19:21)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Transfer%20homomorphism/near/128130750):
-`quotient` is the variant that explicitly assumes the relation is an equivalence already
+<p><code>quotient</code> is the variant that explicitly assumes the relation is an equivalence already</p>
 
 #### [ Reid Barton (Jun 15 2018 at 19:22)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Transfer%20homomorphism/near/128130797):
-But, say, `R 1` might be nontrivial, while `R 2` is empty, and then `λ (a b : Π i, α i), ∀ i, R i (a i) (b i)` is empty, so we haven't made any identifications in `\a 1 \x \a 2`
+<p>But, say, <code>R 1</code> might be nontrivial, while <code>R 2</code> is empty, and then <code>λ (a b : Π i, α i), ∀ i, R i (a i) (b i)</code> is empty, so we haven't made any identifications in <code>\a 1 \x \a 2</code></p>
 
 #### [ Reid Barton (Jun 15 2018 at 19:23)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Transfer%20homomorphism/near/128130830):
-then we'd have a map `quot (R 1) \to \a 1`. Or is that okay?
+<p>then we'd have a map <code>quot (R 1) \to \a 1</code>. Or is that okay?</p>
 
 #### [ Mario Carneiro (Jun 15 2018 at 19:24)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Transfer%20homomorphism/near/128130903):
-I see, yes that's bad
+<p>I see, yes that's bad</p>
 
 #### [ Mario Carneiro (Jun 15 2018 at 19:25)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Transfer%20homomorphism/near/128130919):
-So maybe just replace`quot` with `quotient` everywhere
+<p>So maybe just replace<code>quot</code> with <code>quotient</code> everywhere</p>
 
 #### [ Mario Carneiro (Jun 15 2018 at 19:25)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Transfer%20homomorphism/near/128130929):
-although then I have to show that the pi of equivalences is an equivalence
+<p>although then I have to show that the pi of equivalences is an equivalence</p>
 
 #### [ Mario Carneiro (Jun 15 2018 at 19:39)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Transfer%20homomorphism/near/128131542):
-Here's the noncomputable version:
-```
-instance pi_setoid {ι : Type*} {α : ι → Type*} [∀ i, setoid (α i)] : setoid (Π i, α i) :=
+<p>Here's the noncomputable version:</p>
+<div class="codehilite"><pre><span></span>instance pi_setoid {ι : Type*} {α : ι → Type*} [∀ i, setoid (α i)] : setoid (Π i, α i) :=
 { r := λ a b, ∀ i, a i ≈ b i,
   iseqv := ⟨
     λ a i, setoid.refl _,
@@ -335,56 +333,56 @@ noncomputable def quotient.choice {ι : Type*} {α : ι → Type*} [S : ∀ i, s
 theorem quotient.choice_eq {ι : Type*} {α : ι → Type*} [∀ i, setoid (α i)]
   (f : ∀ i, α i) : quotient.choice (λ i, ⟦f i⟧) = ⟦f⟧ :=
 quotient.sound $ λ i, quotient.mk_out _
-```
+</pre></div>
 
 #### [ Mario Carneiro (Jun 15 2018 at 21:24)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Transfer%20homomorphism/near/128136633):
-> Let G be a group and H a subgroup of finite index. Then, pick a set-theoretic section s:G/H->G where G/H is the right cosets. Then, the transfer homomorphism G^ab -> H^ab is defined by sending [[g]] to prod[x in G/H] s(x) g s(xg)^-1.
-
-Shouldn't there be a [[]] in the definition there somewhere?
+<blockquote>
+<p>Let G be a group and H a subgroup of finite index. Then, pick a set-theoretic section s:G/H-&gt;G where G/H is the right cosets. Then, the transfer homomorphism G^ab -&gt; H^ab is defined by sending [[g]] to prod[x in G/H] s(x) g s(xg)^-1.</p>
+</blockquote>
+<p>Shouldn't there be a [[]] in the definition there somewhere?</p>
 
 #### [ Kenny Lau (Jun 15 2018 at 21:24)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Transfer%20homomorphism/near/128136644):
-by sending [[g]] to [[prod[x in G/H] s(x) g s(xg)^-1]].
+<p>by sending [[g]] to [[prod[x in G/H] s(x) g s(xg)^-1]].</p>
 
 #### [ Mario Carneiro (Jun 15 2018 at 21:24)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Transfer%20homomorphism/near/128136655):
-Does `[[g h]] = [[g]][[h]]`?
+<p>Does <code>[[g h]] = [[g]][[h]]</code>?</p>
 
 #### [ Kenny Lau (Jun 15 2018 at 21:25)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Transfer%20homomorphism/near/128136663):
-yes
+<p>yes</p>
 
 #### [ Mario Carneiro (Jun 15 2018 at 21:25)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Transfer%20homomorphism/near/128136679):
-Then don't the `s(x)` parts cancel?
+<p>Then don't the <code>s(x)</code> parts cancel?</p>
 
 #### [ Kenny Lau (Jun 15 2018 at 21:25)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Transfer%20homomorphism/near/128136684):
-@**Kevin Buzzard**
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span></p>
 
 #### [ Mario Carneiro (Jun 15 2018 at 21:26)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Transfer%20homomorphism/near/128136736):
-`[[prod[x in G/H] s(x) g s(xg)^-1]] = (prod[x in G/H] [[s(x)]]) (prod[x in G/H] [[g]]) (prod[x in G/H] [[s(xg)]]^-1)`
+<p><code>[[prod[x in G/H] s(x) g s(xg)^-1]] = (prod[x in G/H] [[s(x)]]) (prod[x in G/H] [[g]]) (prod[x in G/H] [[s(xg)]]^-1)</code></p>
 
 #### [ Mario Carneiro (Jun 15 2018 at 21:26)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Transfer%20homomorphism/near/128136747):
-and `prod[x in G/H] [[s(xg)]]^-1 = prod[x in G/H] [[s(x)]]^-1` by reindexing
+<p>and <code>prod[x in G/H] [[s(xg)]]^-1 = prod[x in G/H] [[s(x)]]^-1</code> by reindexing</p>
 
 #### [ Kenny Lau (Jun 15 2018 at 21:26)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Transfer%20homomorphism/near/128136748):
-oh you can't do that, g is not in H
+<p>oh you can't do that, g is not in H</p>
 
 #### [ Kenny Lau (Jun 15 2018 at 21:27)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Transfer%20homomorphism/near/128136762):
-s(x) g s(xg)^-1 is in H
+<p>s(x) g s(xg)^-1 is in H</p>
 
 #### [ Mario Carneiro (Jun 15 2018 at 21:27)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Transfer%20homomorphism/near/128136768):
-I know, but they should still be equal as members of G
+<p>I know, but they should still be equal as members of G</p>
 
 #### [ Kenny Lau (Jun 15 2018 at 21:27)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Transfer%20homomorphism/near/128136779):
-no, because H^ab is H/[H,H]
+<p>no, because H^ab is H/[H,H]</p>
 
 #### [ Mario Carneiro (Jun 15 2018 at 21:46)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Transfer%20homomorphism/near/128137621):
-Okay, I think I have something close to a proof that decidable_eq of the coset relation is necessary. Suppose you know `fintype G/H`. Ignoring quotients for a moment, thinking "computationally", this is essentially a list of elements of G which chooses exactly one element of every coset (or, if you prefer, a bijection (not an equiv) from fin n to G/H). Now that looks like the section we want, but the problem is the computation of s(xg) that we need later. The function x |-> xg is a permutation of G/H which corresponds to a permutation of the list s, but computationally it's not that easy since if we take our representative s(x) and multiply by g we get s(x)g, which is in the same coset as s(xg) but is not usually the same. So we need a way of searching our list s to find the value that is in the same coset as s(x)g, and there is no way to do this from the given data.
+<p>Okay, I think I have something close to a proof that decidable_eq of the coset relation is necessary. Suppose you know <code>fintype G/H</code>. Ignoring quotients for a moment, thinking "computationally", this is essentially a list of elements of G which chooses exactly one element of every coset (or, if you prefer, a bijection (not an equiv) from fin n to G/H). Now that looks like the section we want, but the problem is the computation of s(xg) that we need later. The function x |-&gt; xg is a permutation of G/H which corresponds to a permutation of the list s, but computationally it's not that easy since if we take our representative s(x) and multiply by g we get s(x)g, which is in the same coset as s(xg) but is not usually the same. So we need a way of searching our list s to find the value that is in the same coset as s(x)g, and there is no way to do this from the given data.</p>
 
 #### [ Kenny Lau (Jun 15 2018 at 23:17)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Transfer%20homomorphism/near/128141785):
-I see. Then I'll just come up with a section noncomputably then.
+<p>I see. Then I'll just come up with a section noncomputably then.</p>
 
 #### [ Mario Carneiro (Jun 15 2018 at 23:19)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Transfer%20homomorphism/near/128141854):
-Here's the computable version of that theorem:
-```
-def quotient.fin_choice_aux {ι : Type*} [decidable_eq ι]
+<p>Here's the computable version of that theorem:</p>
+<div class="codehilite"><pre><span></span>def quotient.fin_choice_aux {ι : Type*} [decidable_eq ι]
   {α : ι → Type*} [S : ∀ i, setoid (α i)] :
   ∀ (l : list ι), (∀ i ∈ l, quotient (S i)) → @quotient (Π i ∈ l, α i) (by apply_instance)
 | []     f := ⟦λ i, false.elim⟧
@@ -425,7 +423,7 @@ quotient.lift_on (@quotient.rec_on _ _ (λ l : multiset ι,
       simp [this],
       let g := λ a:multiset ι, ⟦λ (i : ι) (h : i ∈ a), quotient.out (f i)⟧,
       refine eq_of_heq ((eq_rec_heq _ _).trans (_ : g a == g b)),
-      congr' 1, exact quotient.sound h,
+      congr&#39; 1, exact quotient.sound h,
     end))
   (λ f, ⟦λ i, f i (finset.mem_univ _)⟧)
   (λ a b h, quotient.sound $ λ i, h _ _)
@@ -442,13 +440,13 @@ begin
       (@finset.univ ι _).1 (λ l, quotient.fin_choice_aux_eq _ _) },
   simp [this], exact setoid.refl _
 end
-```
+</pre></div>
 
 #### [ Kenny Lau (Jun 15 2018 at 23:19)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Transfer%20homomorphism/near/128141861):
-:o
+<p>:o</p>
 
 #### [ Kevin Buzzard (Jun 16 2018 at 12:24)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Transfer%20homomorphism/near/128164386):
-Canceling s -- [[]] is being used for both the map G->Gab and H->Hab so they don't cancel. Spending the weekend in a field without much internet so don't expect too much from me until sun pm
+<p>Canceling s -- [[]] is being used for both the map G-&gt;Gab and H-&gt;Hab so they don't cancel. Spending the weekend in a field without much internet so don't expect too much from me until sun pm</p>
 
 
 {% endraw %}

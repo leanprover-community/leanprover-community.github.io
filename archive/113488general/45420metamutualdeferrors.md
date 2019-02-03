@@ -12,59 +12,55 @@ permalink: archive/113488general/45420metamutualdeferrors.html
 
 {% raw %}
 #### [ Mario Carneiro (Aug 24 2018 at 15:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/meta%20mutual%20def%20errors/near/132697613):
-Does anyone know the source of this error? I get `unexpected error, failed to generate equational lemmas in the front-end` even though it's a meta def so it shouldn't have equations
-```lean
-meta mutual def A, B
-with A : unit → tactic unit | _ := return ()
-with B : unit → tactic unit | _ := return ()
-```
+<p>Does anyone know the source of this error? I get <code>unexpected error, failed to generate equational lemmas in the front-end</code> even though it's a meta def so it shouldn't have equations</p>
+<div class="codehilite"><pre><span></span><span class="n">meta</span> <span class="n">mutual</span> <span class="n">def</span> <span class="n">A</span><span class="o">,</span> <span class="n">B</span>
+<span class="k">with</span> <span class="n">A</span> <span class="o">:</span> <span class="n">unit</span> <span class="bp">→</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="bp">|</span> <span class="bp">_</span> <span class="o">:=</span> <span class="n">return</span> <span class="o">()</span>
+<span class="k">with</span> <span class="n">B</span> <span class="o">:</span> <span class="n">unit</span> <span class="bp">→</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="bp">|</span> <span class="bp">_</span> <span class="o">:=</span> <span class="n">return</span> <span class="o">()</span>
+</pre></div>
 
 #### [ Scott Morrison (Aug 24 2018 at 15:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/meta%20mutual%20def%20errors/near/132697723):
-(Mario and I are sitting next to each other and just discovered the curious answer. I'll explain while he does something useful. :-)
+<p>(Mario and I are sitting next to each other and just discovered the curious answer. I'll explain while he does something useful. :-)</p>
 
 #### [ Scott Morrison (Aug 24 2018 at 15:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/meta%20mutual%20def%20errors/near/132697746):
-This doesn't work:
-```
-meta mutual def A, B
-with A : ℕ → ℕ  
+<p>This doesn't work:</p>
+<div class="codehilite"><pre><span></span>meta mutual def A, B
+with A : ℕ → ℕ
 | n := 0
-with B : ℕ → ℕ  
+with B : ℕ → ℕ
 | n := 0
-```
+</pre></div>
 
 #### [ Scott Morrison (Aug 24 2018 at 15:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/meta%20mutual%20def%20errors/near/132697747):
-with the same error.
+<p>with the same error.</p>
 
 #### [ Scott Morrison (Aug 24 2018 at 15:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/meta%20mutual%20def%20errors/near/132697787):
-However
-```
-meta mutual def A, B
-with A : ℕ → ℕ  
+<p>However</p>
+<div class="codehilite"><pre><span></span>meta mutual def A, B
+with A : ℕ → ℕ
 | 0 := 0
 | (n+1) := B 0
-with B : ℕ → ℕ  
+with B : ℕ → ℕ
 | n := 0
-```
+</pre></div>
 
 #### [ Scott Morrison (Aug 24 2018 at 15:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/meta%20mutual%20def%20errors/near/132697792):
-or even 
-```
-meta mutual def A, B
-with A : ℕ → ℕ  
+<p>or even </p>
+<div class="codehilite"><pre><span></span>meta mutual def A, B
+with A : ℕ → ℕ
 | 0 := 0
 | (n+1) := A 0
-with B : ℕ → ℕ  
+with B : ℕ → ℕ
 | n := 0
-```
+</pre></div>
 
 #### [ Scott Morrison (Aug 24 2018 at 15:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/meta%20mutual%20def%20errors/near/132697840):
-Somehow the compiler is insisting that the definitions actually refer to either themselves or each other.
+<p>Somehow the compiler is insisting that the definitions actually refer to either themselves or each other.</p>
 
 #### [ Scott Morrison (Aug 24 2018 at 15:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/meta%20mutual%20def%20errors/near/132697844):
-And this only happens in `meta`.
+<p>And this only happens in <code>meta</code>.</p>
 
 #### [ Scott Morrison (Aug 24 2018 at 16:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/meta%20mutual%20def%20errors/near/132697846):
-Oh well! :-)
+<p>Oh well! :-)</p>
 
 
 {% endraw %}

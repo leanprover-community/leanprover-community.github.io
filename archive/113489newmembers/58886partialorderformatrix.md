@@ -12,178 +12,173 @@ permalink: archive/113489newmembers/58886partialorderformatrix.html
 
 {% raw %}
 #### [ Tobias Grosser (Sep 18 2018 at 21:02)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134185883):
-Dear all, as you know I just get up-to-speed on lean (and theorem proving) and don't do it fulltime for now. However, I picked as first toy-project to get started the extension of matrix as an instance of partial_order. (See https://github.com/tobig/lean-polyhedra/blob/master/src/polyhedra.lean)
+<p>Dear all, as you know I just get up-to-speed on lean (and theorem proving) and don't do it fulltime for now. However, I picked as first toy-project to get started the extension of matrix as an instance of partial_order. (See <a href="https://github.com/tobig/lean-polyhedra/blob/master/src/polyhedra.lean" target="_blank" title="https://github.com/tobig/lean-polyhedra/blob/master/src/polyhedra.lean">https://github.com/tobig/lean-polyhedra/blob/master/src/polyhedra.lean</a>)</p>
 
 #### [ Andrew Ashworth (Sep 18 2018 at 21:03)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134185923):
-Hi Tobias, you may want to post this in the #maths channel so people who are interested in this sort of stuff see it!
+<p>Hi Tobias, you may want to post this in the #maths channel so people who are interested in this sort of stuff see it!</p>
 
 #### [ Andrew Ashworth (Sep 18 2018 at 21:04)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134186016):
-or you may post in #general if this is a concrete matrix implementation meant for use in computation
+<p>or you may post in #general if this is a concrete matrix implementation meant for use in computation</p>
 
 #### [ Tobias Grosser (Sep 18 2018 at 21:11)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134186420):
-Honestly, I don't even know how to post to the #maths channel. I see a "general" and a "new members" stream, but no "#maths" channel. I know streams and topics from https://zulipchat.com/help/about-streams-and-topics, but have no ideas of channels. I can obviously move this topic to the general stream if this helps. Would also post it to a math channel, if you can explain what a math channel is? Are you refering to "stream:general topic:#maths"?
+<p>Honestly, I don't even know how to post to the #maths channel. I see a "general" and a "new members" stream, but no "#maths" channel. I know streams and topics from <a href="https://zulipchat.com/help/about-streams-and-topics" target="_blank" title="https://zulipchat.com/help/about-streams-and-topics">https://zulipchat.com/help/about-streams-and-topics</a>, but have no ideas of channels. I can obviously move this topic to the general stream if this helps. Would also post it to a math channel, if you can explain what a math channel is? Are you refering to "stream:general topic:#maths"?</p>
 
 #### [ Tobias Grosser (Sep 18 2018 at 21:11)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134186434):
-I posted it in new members, as my questions are for now still very simple.
+<p>I posted it in new members, as my questions are for now still very simple.</p>
 
 #### [ Reid Barton (Sep 18 2018 at 21:12)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134186514):
-"Channel" means stream in this context I think.
+<p>"Channel" means stream in this context I think.</p>
 
 #### [ Andrew Ashworth (Sep 18 2018 at 21:13)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134186540):
-whew, yes, I forgot Zulip isn't IRC
+<p>whew, yes, I forgot Zulip isn't IRC</p>
 
 #### [ Reid Barton (Sep 18 2018 at 21:13)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134186549):
-#**maths**
+<p><a class="stream" data-stream-id="116395" href="/#narrow/stream/116395-maths">#maths</a></p>
 
 #### [ Tobias Grosser (Sep 18 2018 at 21:13)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134186552):
-OK, got it. Had to subscribe to #maths explicitly
+<p>OK, got it. Had to subscribe to #maths explicitly</p>
 
 #### [ Tobias Grosser (Sep 18 2018 at 21:14)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134186634):
-My questions still remain simple. I mostly would like to know how to destruct an equality: https://github.com/tobig/lean-polyhedra/blob/master/src/polyhedra.lean#L51
+<p>My questions still remain simple. I mostly would like to know how to destruct an equality: <a href="https://github.com/tobig/lean-polyhedra/blob/master/src/polyhedra.lean#L51" target="_blank" title="https://github.com/tobig/lean-polyhedra/blob/master/src/polyhedra.lean#L51">https://github.com/tobig/lean-polyhedra/blob/master/src/polyhedra.lean#L51</a></p>
 
 #### [ Tobias Grosser (Sep 18 2018 at 21:16)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134186752):
-I spend some time looking and will probably figure it out eventually, but maybe somebody has a pointer.
+<p>I spend some time looking and will probably figure it out eventually, but maybe somebody has a pointer.</p>
 
 #### [ Reid Barton (Sep 18 2018 at 21:17)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134186772):
-Don't you need to construct an equality?
+<p>Don't you need to construct an equality?</p>
 
 #### [ Reid Barton (Sep 18 2018 at 21:17)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134186781):
-I guess you mean: "destruct" the goal
+<p>I guess you mean: "destruct" the goal</p>
 
 #### [ Tobias Grosser (Sep 18 2018 at 21:17)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134186787):
-Exactly.
+<p>Exactly.</p>
 
 #### [ Tobias Grosser (Sep 18 2018 at 21:18)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134186843):
-I had the same problem with the <=, but there I could just "assume i" and lean would auto-destruct it.
+<p>I had the same problem with the &lt;=, but there I could just "assume i" and lean would auto-destruct it.</p>
 
 #### [ Reid Barton (Sep 18 2018 at 21:18)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134186872):
-I'm assuming your matrices are functions (of two variables), so the low-level way is to apply `funext` (twice)
+<p>I'm assuming your matrices are functions (of two variables), so the low-level way is to apply <code>funext</code> (twice)</p>
 
 #### [ Andrew Ashworth (Sep 18 2018 at 21:19)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134186888):
-you will probably want `ext_iff ` in `ring_theory.matrix`
+<p>you will probably want <code>ext_iff </code> in <code>ring_theory.matrix</code></p>
 
 #### [ Andrew Ashworth (Sep 18 2018 at 21:20)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134186956):
-this will allow you to turn `M = N` into ` (∀ i j, M i j = N i j)`
+<p>this will allow you to turn <code>M = N</code> into <code> (∀ i j, M i j = N i j)</code></p>
 
 #### [ Tobias Grosser (Sep 18 2018 at 21:24)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134187198):
-Right. ext_iff looks good. Now I need to figure out how to apply it.
+<p>Right. ext_iff looks good. Now I need to figure out how to apply it.</p>
 
 #### [ Tobias Grosser (Sep 18 2018 at 21:25)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134187201):
-Reid's proposal also worked.
+<p>Reid's proposal also worked.</p>
 
 #### [ Tobias Grosser (Sep 18 2018 at 21:25)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134187220):
-But from there I would not know how to proceed.
+<p>But from there I would not know how to proceed.</p>
 
 #### [ Johan Commelin (Sep 18 2018 at 21:25)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134187234):
-Either `ext` or `rw ext_iff` probably works
+<p>Either <code>ext</code> or <code>rw ext_iff</code> probably works</p>
 
 #### [ Andrew Ashworth (Sep 18 2018 at 21:25)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134187236):
-indeed, `ext_iff` is defined using multiple `funext` applications
+<p>indeed, <code>ext_iff</code> is defined using multiple <code>funext</code> applications</p>
 
 #### [ Tobias Grosser (Sep 18 2018 at 21:26)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134187309):
-Perfect. All works.
+<p>Perfect. All works.</p>
 
 #### [ Tobias Grosser (Sep 18 2018 at 21:26)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134187314):
-So easy. I tried rw, but had missed a comma before. Thought I needed more magic.
+<p>So easy. I tried rw, but had missed a comma before. Thought I needed more magic.</p>
 
 #### [ Tobias Grosser (Sep 18 2018 at 21:26)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134187329):
-Thanks guys. This got me over a slow phase. Will finish my proofs and get back. Very nice community here.
+<p>Thanks guys. This got me over a slow phase. Will finish my proofs and get back. Very nice community here.</p>
 
 #### [ Tobias Grosser (Sep 18 2018 at 21:39)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134187979):
-Just to report back, my proof went through and I know have the partial_order I wanted to define on matrix.
+<p>Just to report back, my proof went through and I know have the partial_order I wanted to define on matrix.</p>
 
 #### [ Kevin Buzzard (Sep 18 2018 at 21:39)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134187985):
-```lean
-protected def matrix.le_antisymm [partial_order α] (a b: matrix n m α) :
-a ≤ b → b ≤ a → a = b :=
-begin
-  assume h1: a ≤ b,
-  assume h2: b ≤ a,
-  apply funext, intro i, apply funext, intro j,
--- or   funext i,funext j,
--- or  ext i j,
-  exact le_antisymm (h1 i j) (h2 i j),
-end
-```
+<div class="codehilite"><pre><span></span><span class="kn">protected</span> <span class="n">def</span> <span class="n">matrix</span><span class="bp">.</span><span class="n">le_antisymm</span> <span class="o">[</span><span class="n">partial_order</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span><span class="o">:</span> <span class="n">matrix</span> <span class="n">n</span> <span class="n">m</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span>
+<span class="n">a</span> <span class="bp">≤</span> <span class="n">b</span> <span class="bp">→</span> <span class="n">b</span> <span class="bp">≤</span> <span class="n">a</span> <span class="bp">→</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">b</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="k">assume</span> <span class="n">h1</span><span class="o">:</span> <span class="n">a</span> <span class="bp">≤</span> <span class="n">b</span><span class="o">,</span>
+  <span class="k">assume</span> <span class="n">h2</span><span class="o">:</span> <span class="n">b</span> <span class="bp">≤</span> <span class="n">a</span><span class="o">,</span>
+  <span class="n">apply</span> <span class="n">funext</span><span class="o">,</span> <span class="n">intro</span> <span class="n">i</span><span class="o">,</span> <span class="n">apply</span> <span class="n">funext</span><span class="o">,</span> <span class="n">intro</span> <span class="n">j</span><span class="o">,</span>
+<span class="c1">-- or   funext i,funext j,</span>
+<span class="c1">-- or  ext i j,</span>
+  <span class="n">exact</span> <span class="n">le_antisymm</span> <span class="o">(</span><span class="n">h1</span> <span class="n">i</span> <span class="n">j</span><span class="o">)</span> <span class="o">(</span><span class="n">h2</span> <span class="n">i</span> <span class="n">j</span><span class="o">),</span>
+<span class="kn">end</span>
+</pre></div>
 
 #### [ Tobias Grosser (Sep 18 2018 at 21:39)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134187996):
-Ah, even better.
+<p>Ah, even better.</p>
 
 #### [ Tobias Grosser (Sep 18 2018 at 21:39)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134188004):
-Thanks @**Kevin Buzzard**
+<p>Thanks <span class="user-mention" data-user-id="110038">@Kevin Buzzard</span></p>
 
 #### [ Tobias Grosser (Sep 18 2018 at 21:40)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134188071):
-@**Kevin Buzzard**, I used this for a proof on polyhedra. Would it make sense to add such defintions to your recent mathlib changes?
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span>, I used this for a proof on polyhedra. Would it make sense to add such defintions to your recent mathlib changes?</p>
 
 #### [ Mario Carneiro (Sep 18 2018 at 21:41)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134188081):
-golfed:
-```
-protected lemma matrix.le_antisymm [partial_order α] (a b: matrix n m α)
+<p>golfed:</p>
+<div class="codehilite"><pre><span></span>protected lemma matrix.le_antisymm [partial_order α] (a b: matrix n m α)
   (h1 : a ≤ b) (h2 : b ≤ a) : a = b :=
 by ext i j; exact le_antisymm (h1 i j) (h2 i j)
-```
+</pre></div>
 
 #### [ Mario Carneiro (Sep 18 2018 at 21:41)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134188096):
-(also I don't have your definitions, so I had to guess if that's right)
+<p>(also I don't have your definitions, so I had to guess if that's right)</p>
 
 #### [ Kevin Buzzard (Sep 18 2018 at 21:43)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134188203):
-It would not surprise me if the Pi_instance tactic did this automatically, but it might not do.
+<p>It would not surprise me if the Pi_instance tactic did this automatically, but it might not do.</p>
 
 #### [ Kenny Lau (Sep 18 2018 at 21:43)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134188206):
-golfeded:
-```lean
-protected lemma matrix.le_antisymm [partial_order α] (a b: matrix n m α)
-  (h1 : a ≤ b) (h2 : b ≤ a) : a = b :=
-by ext i j; from le_antisymm (h1 i j) (h2 i j)
-```
+<p>golfeded:</p>
+<div class="codehilite"><pre><span></span><span class="kn">protected</span> <span class="kn">lemma</span> <span class="n">matrix</span><span class="bp">.</span><span class="n">le_antisymm</span> <span class="o">[</span><span class="n">partial_order</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span><span class="o">:</span> <span class="n">matrix</span> <span class="n">n</span> <span class="n">m</span> <span class="n">α</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">h1</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">≤</span> <span class="n">b</span><span class="o">)</span> <span class="o">(</span><span class="n">h2</span> <span class="o">:</span> <span class="n">b</span> <span class="bp">≤</span> <span class="n">a</span><span class="o">)</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">b</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">ext</span> <span class="n">i</span> <span class="n">j</span><span class="bp">;</span> <span class="k">from</span> <span class="n">le_antisymm</span> <span class="o">(</span><span class="n">h1</span> <span class="n">i</span> <span class="n">j</span><span class="o">)</span> <span class="o">(</span><span class="n">h2</span> <span class="n">i</span> <span class="n">j</span><span class="o">)</span>
+</pre></div>
 
 #### [ Tobias Grosser (Sep 18 2018 at 21:47)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134188431):
-Nice, this lean golf.
+<p>Nice, this lean golf.</p>
 
 #### [ Tobias Grosser (Sep 18 2018 at 21:47)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134188437):
-The two solutions from Mario and Kenny don't work in my editor.
+<p>The two solutions from Mario and Kenny don't work in my editor.</p>
 
 #### [ Tobias Grosser (Sep 18 2018 at 21:47)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134188444):
-Need to replace "by" with "begin .. end"
+<p>Need to replace "by" with "begin .. end"</p>
 
 #### [ Tobias Grosser (Sep 18 2018 at 21:48)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134188491):
-Not yet sure why, but this proofs starts to look really nice. And you are all fast in golfing. ;-)
+<p>Not yet sure why, but this proofs starts to look really nice. And you are all fast in golfing. ;-)</p>
 
 #### [ Tobias Grosser (Sep 18 2018 at 21:51)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134188689):
-Got it, need a semicolon for 'by'.
+<p>Got it, need a semicolon for 'by'.</p>
 
 #### [ Kevin Buzzard (Sep 18 2018 at 21:52)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134188751):
-yes, `by` takes only one tactic, so you can either do `{tactic 1, tactic 2}` or `tactic 1;tactic 2`
+<p>yes, <code>by</code> takes only one tactic, so you can either do <code>{tactic 1, tactic 2}</code> or <code>tactic 1;tactic 2</code></p>
 
 #### [ Kevin Buzzard (Sep 18 2018 at 21:53)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134188801):
-Did you notice that they both moved the hypotheses to the left of the colon? That's standard Lean style, so it seems; put as many hypotheses as possible on the left of the colon unless you can't do this for some reason (e.g. you're using the equation compiler).
+<p>Did you notice that they both moved the hypotheses to the left of the colon? That's standard Lean style, so it seems; put as many hypotheses as possible on the left of the colon unless you can't do this for some reason (e.g. you're using the equation compiler).</p>
 
 #### [ Kevin Buzzard (Sep 18 2018 at 21:54)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134188858):
-It makes your tactic proof two lines shorter at no extra cost
+<p>It makes your tactic proof two lines shorter at no extra cost</p>
 
 #### [ Tobias Grosser (Sep 18 2018 at 21:55)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134188885):
-I noticed and changed my code, but lacked the explanation. Thanks for providing it.
+<p>I noticed and changed my code, but lacked the explanation. Thanks for providing it.</p>
 
 #### [ Mario Carneiro (Sep 18 2018 at 21:55)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134188910):
-basically, if the very first thing in your proof is a lambda/`intro`, you should probably shift your colon
+<p>basically, if the very first thing in your proof is a lambda/<code>intro</code>, you should probably shift your colon</p>
 
 #### [ Kevin Buzzard (Sep 18 2018 at 21:55)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134188921):
-my partner does that for a living
+<p>my partner does that for a living</p>
 
 #### [ Kevin Buzzard (Sep 18 2018 at 21:55)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134188934):
-she's a colorectal surgeon
+<p>she's a colorectal surgeon</p>
 
 #### [ Mario Carneiro (Sep 18 2018 at 21:56)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134188980):
-I need an emoji for this
+<p>I need an emoji for this</p>
 
 #### [ Tobias Grosser (Sep 18 2018 at 21:58)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134189102):
-Meanwhile, things look a lot better: https://github.com/tobig/lean-polyhedra/blob/master/src/polyhedra.lean
+<p>Meanwhile, things look a lot better: <a href="https://github.com/tobig/lean-polyhedra/blob/master/src/polyhedra.lean" target="_blank" title="https://github.com/tobig/lean-polyhedra/blob/master/src/polyhedra.lean">https://github.com/tobig/lean-polyhedra/blob/master/src/polyhedra.lean</a></p>
 
 #### [ Tobias Grosser (Sep 18 2018 at 21:58)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134189125):
-In case you have more suggestions:
-
-```
-protected def matrix.le_trans [partial_order α] (a b c: matrix n m α)
+<p>In case you have more suggestions:</p>
+<div class="codehilite"><pre><span></span>protected def matrix.le_trans [partial_order α] (a b c: matrix n m α)
   (h1 : a ≤ b) (h2 : b ≤ c) : a ≤ c :=
 begin
   assume i: n,
@@ -194,125 +189,119 @@ begin
   apply h1l,
   apply h2l,
 end
-```
+</pre></div>
 
-and
 
-```
-protected def matrix.le_refl [partial_order α] (A: matrix n m α) :
+<p>and</p>
+<div class="codehilite"><pre><span></span>protected def matrix.le_refl [partial_order α] (A: matrix n m α) :
 A ≤ A :=
 begin
   assume i: n,
   assume j: m,
   refl
 end
-```
+</pre></div>
 
-are also open for golfing. ;-)
+
+<p>are also open for golfing. ;-)</p>
 
 #### [ Tobias Grosser (Sep 18 2018 at 21:59)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134189147):
-I will golf myself a little browsing mathlib code.
+<p>I will golf myself a little browsing mathlib code.</p>
 
 #### [ Kenny Lau (Sep 18 2018 at 21:59)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134189154):
-```lean
-protected def matrix.le_trans [partial_order α] (a b c: matrix n m α)
-  (h1 : a ≤ b) (h2 : b ≤ c) : a ≤ c :=
-by intros i j; from le_trans (h1 i j) (h2 i j)
+<div class="codehilite"><pre><span></span><span class="kn">protected</span> <span class="n">def</span> <span class="n">matrix</span><span class="bp">.</span><span class="n">le_trans</span> <span class="o">[</span><span class="n">partial_order</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span><span class="o">:</span> <span class="n">matrix</span> <span class="n">n</span> <span class="n">m</span> <span class="n">α</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">h1</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">≤</span> <span class="n">b</span><span class="o">)</span> <span class="o">(</span><span class="n">h2</span> <span class="o">:</span> <span class="n">b</span> <span class="bp">≤</span> <span class="n">c</span><span class="o">)</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">≤</span> <span class="n">c</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">intros</span> <span class="n">i</span> <span class="n">j</span><span class="bp">;</span> <span class="k">from</span> <span class="n">le_trans</span> <span class="o">(</span><span class="n">h1</span> <span class="n">i</span> <span class="n">j</span><span class="o">)</span> <span class="o">(</span><span class="n">h2</span> <span class="n">i</span> <span class="n">j</span><span class="o">)</span>
 
-protected def matrix.le_refl [partial_order α] (A: matrix n m α) :
-  A ≤ A :=
-by intros i j; refl
-```
+<span class="kn">protected</span> <span class="n">def</span> <span class="n">matrix</span><span class="bp">.</span><span class="n">le_refl</span> <span class="o">[</span><span class="n">partial_order</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">A</span><span class="o">:</span> <span class="n">matrix</span> <span class="n">n</span> <span class="n">m</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">A</span> <span class="bp">≤</span> <span class="n">A</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">intros</span> <span class="n">i</span> <span class="n">j</span><span class="bp">;</span> <span class="n">refl</span>
+</pre></div>
 
 #### [ Kenny Lau (Sep 18 2018 at 22:00)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134189245):
-```lean
-protected def matrix.le_trans [partial_order α] (a b c: matrix n m α)
-  (h1 : a ≤ b) (h2 : b ≤ c) : a ≤ c :=
-by intros i j; transitivity; solve_by_elim
-```
+<div class="codehilite"><pre><span></span><span class="kn">protected</span> <span class="n">def</span> <span class="n">matrix</span><span class="bp">.</span><span class="n">le_trans</span> <span class="o">[</span><span class="n">partial_order</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span><span class="o">:</span> <span class="n">matrix</span> <span class="n">n</span> <span class="n">m</span> <span class="n">α</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">h1</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">≤</span> <span class="n">b</span><span class="o">)</span> <span class="o">(</span><span class="n">h2</span> <span class="o">:</span> <span class="n">b</span> <span class="bp">≤</span> <span class="n">c</span><span class="o">)</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">≤</span> <span class="n">c</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">intros</span> <span class="n">i</span> <span class="n">j</span><span class="bp">;</span> <span class="n">transitivity</span><span class="bp">;</span> <span class="n">solve_by_elim</span>
+</pre></div>
 
 #### [ Kenny Lau (Sep 18 2018 at 22:01)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134189264):
-hmm the last one may not work
+<p>hmm the last one may not work</p>
 
 #### [ Tobias Grosser (Sep 18 2018 at 22:03)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134189409):
-They all work.
+<p>They all work.</p>
 
 #### [ Kevin Buzzard (Sep 18 2018 at 22:03)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134189412):
-```lean
-protected def matrix.le_refl [partial_order α] (A: matrix n m α) :
-A ≤ A := λ i j, le_refl _
-```
+<div class="codehilite"><pre><span></span><span class="kn">protected</span> <span class="n">def</span> <span class="n">matrix</span><span class="bp">.</span><span class="n">le_refl</span> <span class="o">[</span><span class="n">partial_order</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">A</span><span class="o">:</span> <span class="n">matrix</span> <span class="n">n</span> <span class="n">m</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span>
+<span class="n">A</span> <span class="bp">≤</span> <span class="n">A</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">i</span> <span class="n">j</span><span class="o">,</span> <span class="n">le_refl</span> <span class="bp">_</span>
+</pre></div>
 
 #### [ Tobias Grosser (Sep 18 2018 at 22:03)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134189417):
-I learned a lot. So much fun.
+<p>I learned a lot. So much fun.</p>
 
 #### [ Kevin Buzzard (Sep 18 2018 at 22:04)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134189468):
-```lean
-protected def matrix.le_refl [partial_order α] (A: matrix n m α) :
-A ≤ A := λ_ _, le_refl _
-```
+<div class="codehilite"><pre><span></span><span class="kn">protected</span> <span class="n">def</span> <span class="n">matrix</span><span class="bp">.</span><span class="n">le_refl</span> <span class="o">[</span><span class="n">partial_order</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">A</span><span class="o">:</span> <span class="n">matrix</span> <span class="n">n</span> <span class="n">m</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span>
+<span class="n">A</span> <span class="bp">≤</span> <span class="n">A</span> <span class="o">:=</span> <span class="bp">λ_</span> <span class="bp">_</span><span class="o">,</span> <span class="n">le_refl</span> <span class="bp">_</span>
+</pre></div>
 
 #### [ Kevin Buzzard (Sep 18 2018 at 22:05)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134189479):
-bad style (should be a space after the lambda)
+<p>bad style (should be a space after the lambda)</p>
 
 #### [ Kevin Buzzard (Sep 18 2018 at 22:05)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134189493):
-but I'm just trying to beat Kenny
+<p>but I'm just trying to beat Kenny</p>
 
 #### [ Tobias Grosser (Sep 18 2018 at 22:05)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134189508):
-Now I am unsure which ones to commit.
+<p>Now I am unsure which ones to commit.</p>
 
 #### [ Kevin Buzzard (Sep 18 2018 at 22:06)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134189560):
-`set_option profiler true` and see which one is quickest :-)
+<p><code>set_option profiler true</code> and see which one is quickest :-)</p>
 
 #### [ Tobias Grosser (Sep 18 2018 at 22:06)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134189566):
-I feel the last ones are a little too tight. What's the stylistic preferred solution?
+<p>I feel the last ones are a little too tight. What's the stylistic preferred solution?</p>
 
 #### [ Kevin Buzzard (Sep 18 2018 at 22:06)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134189584):
-```lean
-protected def matrix.le_refl [partial_order α] (A: matrix n m α) :
-A ≤ A := λ _ _, le_refl _
-```
-would probably be fine for mathlib I suspect
+<div class="codehilite"><pre><span></span><span class="kn">protected</span> <span class="n">def</span> <span class="n">matrix</span><span class="bp">.</span><span class="n">le_refl</span> <span class="o">[</span><span class="n">partial_order</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">A</span><span class="o">:</span> <span class="n">matrix</span> <span class="n">n</span> <span class="n">m</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span>
+<span class="n">A</span> <span class="bp">≤</span> <span class="n">A</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">,</span> <span class="n">le_refl</span> <span class="bp">_</span>
+</pre></div>
+
+
+<p>would probably be fine for mathlib I suspect</p>
 
 #### [ Chris Hughes (Sep 18 2018 at 22:09)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134189797):
-Shouldn't all of this be `by pi_instance`?
+<p>Shouldn't all of this be <code>by pi_instance</code>?</p>
 
 #### [ Kevin Buzzard (Sep 18 2018 at 22:09)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134189804):
-right
+<p>right</p>
 
 #### [ Kevin Buzzard (Sep 18 2018 at 22:10)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134189858):
-but I don't know if they did partial orders and I didn't look.
+<p>but I don't know if they did partial orders and I didn't look.</p>
 
 #### [ Kenny Lau (Sep 18 2018 at 22:10)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134189876):
-I believe they did
+<p>I believe they did</p>
 
 #### [ Kenny Lau (Sep 18 2018 at 22:10)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134189882):
-though I too did not look
+<p>though I too did not look</p>
 
 #### [ Kevin Buzzard (Sep 18 2018 at 22:11)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134189931):
-@**Tobias Grosser** The original matrix add_comm_group code was written by Ellen Arlt and I was rewriting it in a live Lean coding session with an audience of undergrads, and Chris pointed out that pi_instances just did everything immediately.
+<p><span class="user-mention" data-user-id="122318">@Tobias Grosser</span> The original matrix add_comm_group code was written by Ellen Arlt and I was rewriting it in a live Lean coding session with an audience of undergrads, and Chris pointed out that pi_instances just did everything immediately.</p>
 
 #### [ Tobias Grosser (Sep 18 2018 at 22:15)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134190187):
-Interesting. I don't know how to use pi_instance(s)
+<p>Interesting. I don't know how to use pi_instance(s)</p>
 
 #### [ Tobias Grosser (Sep 18 2018 at 22:17)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134190270):
-If I just write pi_instance, I get "too many constructors" for the first two lemmas, and "failed" for the last.
+<p>If I just write pi_instance, I get "too many constructors" for the first two lemmas, and "failed" for the last.</p>
 
 #### [ Tobias Grosser (Sep 19 2018 at 07:41)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134212318):
-I made some good progress, but got stuck in type class resolution. I try to do dependent pattern matching in the following code:
-
-```
-#check matrix
+<p>I made some good progress, but got stuck in type class resolution. I try to do dependent pattern matching in the following code:</p>
+<div class="codehilite"><pre><span></span>#check matrix
 universe v
 def Gaussian_elimination {α : Type v} [ordered_ring α] :
    Π {x y : Type u}  [fintype x] [fintype y], matrix x y α →  α
 | _ _ _ := 1
-```
+</pre></div>
 
-Unfortunately, I get the following error at location 'matrix':
 
-```
-polyhedra.lean:104:46: error
+<p>Unfortunately, I get the following error at location 'matrix':</p>
+<div class="codehilite"><pre><span></span>polyhedra.lean:104:46: error
 
 failed to synthesize type class instance for
 α : Type v,
@@ -322,48 +311,47 @@ _inst_5 : fintype x,
 _inst_6 : fintype y
 ⊢ fintype x
 polyhedra.lean:104:46: error
-```
+</pre></div>
 
 #### [ Tobias Grosser (Sep 19 2018 at 07:43)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134212376):
-I modeled this according to https://leanprover.github.io/theorem_proving_in_lean/induction_and_recursion.html#dependent-pattern-matching, and therae the example on vector works without problems. In case anybody has some flyby ideas.
+<p>I modeled this according to <a href="https://leanprover.github.io/theorem_proving_in_lean/induction_and_recursion.html#dependent-pattern-matching" target="_blank" title="https://leanprover.github.io/theorem_proving_in_lean/induction_and_recursion.html#dependent-pattern-matching">https://leanprover.github.io/theorem_proving_in_lean/induction_and_recursion.html#dependent-pattern-matching</a>, and therae the example on vector works without problems. In case anybody has some flyby ideas.</p>
 
 #### [ Mario Carneiro (Sep 19 2018 at 08:03)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134213060):
-`by exactI 1`
+<p><code>by exactI 1</code></p>
 
 #### [ Tobias Grosser (Sep 19 2018 at 08:23)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134213712):
-Is this in reply to the type class issue?
+<p>Is this in reply to the type class issue?</p>
 
 #### [ Tobias Grosser (Sep 19 2018 at 08:24)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134213766):
-```lean
-def Gaussian_elimination {α : Type v} [ordered_ring α] :
-   Π {x y : Type u}  [fintype x] [fintype y], matrix x y α →  α
-| _ _ _ := by exactI 1
-```
-does not work for me.
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">Gaussian_elimination</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">}</span> <span class="o">[</span><span class="n">ordered_ring</span> <span class="n">α</span><span class="o">]</span> <span class="o">:</span>
+   <span class="bp">Π</span> <span class="o">{</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span>  <span class="o">[</span><span class="n">fintype</span> <span class="n">x</span><span class="o">]</span> <span class="o">[</span><span class="n">fintype</span> <span class="n">y</span><span class="o">],</span> <span class="n">matrix</span> <span class="n">x</span> <span class="n">y</span> <span class="n">α</span> <span class="bp">→</span>  <span class="n">α</span>
+<span class="bp">|</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">exactI</span> <span class="mi">1</span>
+</pre></div>
+
+
+<p>does not work for me.</p>
 
 #### [ Tobias Grosser (Sep 19 2018 at 08:24)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134213773):
-I still get an error at 'matrix x y \a'
+<p>I still get an error at 'matrix x y \a'</p>
 
 #### [ Tobias Grosser (Sep 19 2018 at 08:27)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134213854):
-I also don't see why I would add a tactics proof at a definition of a value. This seems to not make a lot of sense to me.
+<p>I also don't see why I would add a tactics proof at a definition of a value. This seems to not make a lot of sense to me.</p>
 
 #### [ Kenny Lau (Sep 19 2018 at 08:28)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134213905):
-```lean
-def Gaussian_elimination {α : Type v} [ordered_ring α] :
-   Π {x y : Type u}  [fintype x] [fintype y], matrix x y α →  α
-| _ _ _ _ _ := by exactI 1
-```
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">Gaussian_elimination</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">}</span> <span class="o">[</span><span class="n">ordered_ring</span> <span class="n">α</span><span class="o">]</span> <span class="o">:</span>
+   <span class="bp">Π</span> <span class="o">{</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span>  <span class="o">[</span><span class="n">fintype</span> <span class="n">x</span><span class="o">]</span> <span class="o">[</span><span class="n">fintype</span> <span class="n">y</span><span class="o">],</span> <span class="n">matrix</span> <span class="n">x</span> <span class="n">y</span> <span class="n">α</span> <span class="bp">→</span>  <span class="n">α</span>
+<span class="bp">|</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">exactI</span> <span class="mi">1</span>
+</pre></div>
 
 #### [ Tobias Grosser (Sep 19 2018 at 08:31)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134213986):
-Thanks, now I know how to use syntax highlighting.
+<p>Thanks, now I know how to use syntax highlighting.</p>
 
 #### [ Tobias Grosser (Sep 19 2018 at 08:31)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134213988):
-But your code does not work either.
+<p>But your code does not work either.</p>
 
 #### [ Tobias Grosser (Sep 19 2018 at 08:31)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134213990):
-I still get:
-```
-polyhedra.lean:108:46: error
+<p>I still get:</p>
+<div class="codehilite"><pre><span></span>polyhedra.lean:108:46: error
 
 failed to synthesize type class instance for
 α : Type v,
@@ -372,55 +360,52 @@ x y : Type u,
 _inst_5 : fintype x,
 _inst_6 : fintype y
 ⊢ fintype x
-```
+</pre></div>
 
 #### [ Kenny Lau (Sep 19 2018 at 08:32)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134214030):
-is that the whole error?
+<p>is that the whole error?</p>
 
 #### [ Kenny Lau (Sep 19 2018 at 08:32)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134214037):
-oh, the error is in the type
+<p>oh, the error is in the type</p>
 
 #### [ Tobias Grosser (Sep 19 2018 at 08:32)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134214038):
-I get it 4 times in a row at the same location.
+<p>I get it 4 times in a row at the same location.</p>
 
 #### [ Tobias Grosser (Sep 19 2018 at 08:32)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134214041):
-Yes, something is broken. I just don't know how to interpret the error message.
+<p>Yes, something is broken. I just don't know how to interpret the error message.</p>
 
 #### [ Tobias Grosser (Sep 19 2018 at 08:33)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134214046):
-It seems to derive fintype x, but I feel I provided all information.
+<p>It seems to derive fintype x, but I feel I provided all information.</p>
 
 #### [ Kenny Lau (Sep 19 2018 at 08:33)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134214050):
-```lean
-def Gaussian_elimination {α : Type v} [ordered_ring α] :
-   Π {x y : Type u}  [hx : fintype x] [hy : fintype y], @matrix x y α hx hy _ →  α
-| _ _ _ _ _ := by exactI 1
-```
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">Gaussian_elimination</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">}</span> <span class="o">[</span><span class="n">ordered_ring</span> <span class="n">α</span><span class="o">]</span> <span class="o">:</span>
+   <span class="bp">Π</span> <span class="o">{</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span>  <span class="o">[</span><span class="n">hx</span> <span class="o">:</span> <span class="n">fintype</span> <span class="n">x</span><span class="o">]</span> <span class="o">[</span><span class="n">hy</span> <span class="o">:</span> <span class="n">fintype</span> <span class="n">y</span><span class="o">],</span> <span class="bp">@</span><span class="n">matrix</span> <span class="n">x</span> <span class="n">y</span> <span class="n">α</span> <span class="n">hx</span> <span class="n">hy</span> <span class="bp">_</span> <span class="bp">→</span>  <span class="n">α</span>
+<span class="bp">|</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">exactI</span> <span class="mi">1</span>
+</pre></div>
 
 #### [ Kenny Lau (Sep 19 2018 at 08:33)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134214051):
-something like that
+<p>something like that</p>
 
 #### [ Kenny Lau (Sep 19 2018 at 08:33)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134214055):
-the order of the arguments may be wrong
+<p>the order of the arguments may be wrong</p>
 
 #### [ Kenny Lau (Sep 19 2018 at 08:34)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134214096):
-I don't see why you would need pattern matching
+<p>I don't see why you would need pattern matching</p>
 
 #### [ Kenny Lau (Sep 19 2018 at 08:35)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134214107):
-```lean
-def Gaussian_elimination {α : Type v} [ordered_ring α] {x y : Type u} [fintype x] [fintype y] :
-  matrix x y α →  α
-| _ := 1
-```
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">Gaussian_elimination</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">}</span> <span class="o">[</span><span class="n">ordered_ring</span> <span class="n">α</span><span class="o">]</span> <span class="o">{</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">[</span><span class="n">fintype</span> <span class="n">x</span><span class="o">]</span> <span class="o">[</span><span class="n">fintype</span> <span class="n">y</span><span class="o">]</span> <span class="o">:</span>
+  <span class="n">matrix</span> <span class="n">x</span> <span class="n">y</span> <span class="n">α</span> <span class="bp">→</span>  <span class="n">α</span>
+<span class="bp">|</span> <span class="bp">_</span> <span class="o">:=</span> <span class="mi">1</span>
+</pre></div>
 
 #### [ Tobias Grosser (Sep 19 2018 at 08:36)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134214156):
-The one without pattern matching works (I managed to write sth similar myself).
+<p>The one without pattern matching works (I managed to write sth similar myself).</p>
 
 #### [ Tobias Grosser (Sep 19 2018 at 08:36)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134214161):
-The @matrix one breaks with:
+<p>The @matrix one breaks with:</p>
 
 #### [ Tobias Grosser (Sep 19 2018 at 08:37)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134214168):
-```
-polyhedra.lean:192:57: error
+<div class="codehilite"><pre><span></span>polyhedra.lean:192:57: error
 
 type mismatch at application
   matrix x y
@@ -430,23 +415,19 @@ has type
   Type v : Type (v+1)
 but is expected to have type
   fintype x : Type u
-```
+</pre></div>
 
 #### [ Kenny Lau (Sep 19 2018 at 08:37)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134214176):
-```lean
-def Gaussian_elimination {α : Type v} [ordered_ring α] :
-   Π {x y : Type u}  [hx : fintype x] [hy : fintype y], @matrix x y hx hy α _ → α
-| _ _ _ _ _ := by exactI 1
-```
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">Gaussian_elimination</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">}</span> <span class="o">[</span><span class="n">ordered_ring</span> <span class="n">α</span><span class="o">]</span> <span class="o">:</span>
+   <span class="bp">Π</span> <span class="o">{</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span>  <span class="o">[</span><span class="n">hx</span> <span class="o">:</span> <span class="n">fintype</span> <span class="n">x</span><span class="o">]</span> <span class="o">[</span><span class="n">hy</span> <span class="o">:</span> <span class="n">fintype</span> <span class="n">y</span><span class="o">],</span> <span class="bp">@</span><span class="n">matrix</span> <span class="n">x</span> <span class="n">y</span> <span class="n">hx</span> <span class="n">hy</span> <span class="n">α</span> <span class="bp">_</span> <span class="bp">→</span> <span class="n">α</span>
+<span class="bp">|</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">exactI</span> <span class="mi">1</span>
+</pre></div>
 
 #### [ Tobias Grosser (Sep 19 2018 at 08:37)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134214177):
-I want to implement something similar to
-```
-
-
-Fixpoint Gaussian_elimination {m n} : 'M_(m, n) → 'M_m × 'M_n × nat :=
+<p>I want to implement something similar to</p>
+<div class="codehilite"><pre><span></span>Fixpoint Gaussian_elimination {m n} : &#39;M_(m, n) → &#39;M_m × &#39;M_n × nat :=
   match m, n with
-  | _.+1, _.+1 ⇒ fun A : 'M_(1 + _, 1 + _) ⇒
+  | _.+1, _.+1 ⇒ fun A : &#39;M_(1 + _, 1 + _) ⇒
     if [pick ij | A ij.1 ij.2 != 0] is Some (i, j) then
       let a := A i j in let A1 := xrow i 0 (xcol j 0 A) in
       let u := ursubmx A1 in let v := a^-1 *: dlsubmx A1 in
@@ -455,634 +436,620 @@ Fixpoint Gaussian_elimination {m n} : 'M_(m, n) → 'M_m × 'M_n × nat :=
     else (1%:M, 1%:M, 0%N)
   | _, _ ⇒ fun _ ⇒ (1%:M, 1%:M, 0%N)
   end.
-```
+</pre></div>
 
 #### [ Tobias Grosser (Sep 19 2018 at 08:38)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134214224):
-As implemented in mathcomp.
+<p>As implemented in mathcomp.</p>
 
 #### [ Tobias Grosser (Sep 19 2018 at 08:38)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134214229):
-Need it to compute the matrix rank.
+<p>Need it to compute the matrix rank.</p>
 
 #### [ Tobias Grosser (Sep 19 2018 at 08:40)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134214302):
-```
-polyhedra.lean:196:57: error
+<div class="codehilite"><pre><span></span>polyhedra.lean:196:57: error
 
 function expected at
   matrix x y α
 term has type
   Type (max u v)
-```
+</pre></div>
 
-for the last one.
+
+<p>for the last one.</p>
 
 #### [ Tobias Grosser (Sep 19 2018 at 08:41)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134214312):
-Matrix is defined as `matrix : Π (m n : Type u_1) [_inst_1 : fintype m] [_inst_2 : fintype n], Type u_2 → Type (max u_1 u_2)`
+<p>Matrix is defined as <code>matrix : Π (m n : Type u_1) [_inst_1 : fintype m] [_inst_2 : fintype n], Type u_2 → Type (max u_1 u_2)</code></p>
 
 #### [ Tobias Grosser (Sep 19 2018 at 08:42)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134214362):
-This one works:
-```lean
-
-def Gaussian_elimination5 {α : Type v} [ordered_ring α] :
-   Π {x y : Type u}  [hx : fintype x] [hy : fintype y], @matrix x y hx hy α → α
-| _ _ _ _ _ := by exactI 1
-```
+<p>This one works:</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">Gaussian_elimination5</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">}</span> <span class="o">[</span><span class="n">ordered_ring</span> <span class="n">α</span><span class="o">]</span> <span class="o">:</span>
+   <span class="bp">Π</span> <span class="o">{</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span>  <span class="o">[</span><span class="n">hx</span> <span class="o">:</span> <span class="n">fintype</span> <span class="n">x</span><span class="o">]</span> <span class="o">[</span><span class="n">hy</span> <span class="o">:</span> <span class="n">fintype</span> <span class="n">y</span><span class="o">],</span> <span class="bp">@</span><span class="n">matrix</span> <span class="n">x</span> <span class="n">y</span> <span class="n">hx</span> <span class="n">hy</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">α</span>
+<span class="bp">|</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">exactI</span> <span class="mi">1</span>
+</pre></div>
 
 #### [ Tobias Grosser (Sep 19 2018 at 08:43)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134214378):
-Thanks.
+<p>Thanks.</p>
 
 #### [ Tobias Grosser (Sep 19 2018 at 08:43)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134214379):
-Need to read up what all this stuff does.
+<p>Need to read up what all this stuff does.</p>
 
 #### [ Tobias Grosser (Sep 19 2018 at 08:43)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134214390):
-I am especially surprised that I need to pass the hx, hy as parameters.
+<p>I am especially surprised that I need to pass the hx, hy as parameters.</p>
 
 #### [ Kevin Buzzard (Sep 19 2018 at 08:54)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134214768):
-I never answered your question about how to use `pi_instances`. It was used at some point in the code defining matrices, but this was in a branch of mathlib-community in code that got rewritten and then I think the branch was deleted? I couldn't find it anyway. In short, it's a tactic whereby if `f x` has a certain structure (e.g. that of an additive group) then`Pi x, f x` gets it too. For matrices over a ring it would immediately give them the structure of an additive commutative group by just guessing addition and zero and then figuring out the proofs itself. Of course it can't guess multiplication (if you asked it to, I guess it would guess pointwise multiplication of matrices).
+<p>I never answered your question about how to use <code>pi_instances</code>. It was used at some point in the code defining matrices, but this was in a branch of mathlib-community in code that got rewritten and then I think the branch was deleted? I couldn't find it anyway. In short, it's a tactic whereby if <code>f x</code> has a certain structure (e.g. that of an additive group) then<code>Pi x, f x</code> gets it too. For matrices over a ring it would immediately give them the structure of an additive commutative group by just guessing addition and zero and then figuring out the proofs itself. Of course it can't guess multiplication (if you asked it to, I guess it would guess pointwise multiplication of matrices).</p>
 
 #### [ Tobias Grosser (Sep 19 2018 at 08:58)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134214936):
-Thanks.
+<p>Thanks.</p>
 
 #### [ Tobias Grosser (Sep 19 2018 at 09:01)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134215050):
-Ok, the last one for this morning:
-```
-def Gaussian_elimination5 {α : Type v} [ordered_ring α] {x y} [has_one x] [has_one y]:
+<p>Ok, the last one for this morning:</p>
+<div class="codehilite"><pre><span></span>def Gaussian_elimination5 {α : Type v} [ordered_ring α] {x y} [has_one x] [has_one y]:
    Π {x y}  [hx : fintype x] [hy : fintype y], @matrix x y hx hy α  → α
 | (x+1) _ _ _ _ := by exactI 1
-```
+</pre></div>
 
 #### [ Tobias Grosser (Sep 19 2018 at 09:02)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134215121):
-Gives me "equation compiler failed (use 'set_option trace.eqn_compiler.elim_match true' for additional details)".
-Setting this option does not give me more details.
+<p>Gives me "equation compiler failed (use 'set_option trace.eqn_compiler.elim_match true' for additional details)".<br>
+Setting this option does not give me more details.</p>
 
 #### [ Kenny Lau (Sep 19 2018 at 09:03)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134215131):
-1. you have two `x` and two `y`, which would cause much confusion, although it is not the source of the error
+<p>1. you have two <code>x</code> and two <code>y</code>, which would cause much confusion, although it is not the source of the error</p>
 
 #### [ Tobias Grosser (Sep 19 2018 at 09:03)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134215133):
-I wanted x to be both a fintype and a type with has_one.
+<p>I wanted x to be both a fintype and a type with has_one.</p>
 
 #### [ Kenny Lau (Sep 19 2018 at 09:03)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134215140):
-the source of the error is that the type of `(x+1)`, whatever it is, is not an inductive type with `_+1` as one of the constructors
+<p>the source of the error is that the type of <code>(x+1)</code>, whatever it is, is not an inductive type with <code>_+1</code> as one of the constructors</p>
 
 #### [ Tobias Grosser (Sep 19 2018 at 09:04)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134215193):
- Right. It's a fintype.
+<p>Right. It's a fintype.</p>
 
 #### [ Tobias Grosser (Sep 19 2018 at 09:04)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134215195):
-I also want to make it to satisfy has_one.
+<p>I also want to make it to satisfy has_one.</p>
 
 #### [ Tobias Grosser (Sep 19 2018 at 09:04)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134215198):
-That's why I added additional constraints.
+<p>That's why I added additional constraints.</p>
 
 #### [ Kenny Lau (Sep 19 2018 at 09:05)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134215204):
-you have two `x` and two `y`. Lean treats those as separate objects.
+<p>you have two <code>x</code> and two <code>y</code>. Lean treats those as separate objects.</p>
 
 #### [ Tobias Grosser (Sep 19 2018 at 09:05)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134215212):
-Right, I lack the notation how to add more constraints on x.
+<p>Right, I lack the notation how to add more constraints on x.</p>
 
 #### [ Tobias Grosser (Sep 19 2018 at 09:05)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134215215):
-I tried this one before:
-```
-
-def Gaussian_elimination5 {α : Type v} [ordered_ring α]  :
+<p>I tried this one before:</p>
+<div class="codehilite"><pre><span></span>def Gaussian_elimination5 {α : Type v} [ordered_ring α]  :
    Π {x y} [has_one x] [has_one y]  [hx : fintype x] [hy : fintype y], @matrix x y hx hy α  → α
 | (x+1) _ _ _ _ := by exactI 1
-```
+</pre></div>
 
 #### [ Mario Carneiro (Sep 19 2018 at 09:06)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134215256):
-`x` is not a number, it's a type
+<p><code>x</code> is not a number, it's a type</p>
 
 #### [ Kenny Lau (Sep 19 2018 at 09:06)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134215257):
-I don't know what `x+1` is supposed to mean
+<p>I don't know what <code>x+1</code> is supposed to mean</p>
 
 #### [ Mario Carneiro (Sep 19 2018 at 09:06)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134215259):
-This differs from the Coq development because matrices are not defined with indices in 1..n, they are drawn from an arbitrary finite type
+<p>This differs from the Coq development because matrices are not defined with indices in 1..n, they are drawn from an arbitrary finite type</p>
 
 #### [ Tobias Grosser (Sep 19 2018 at 09:07)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134215271):
-Right.
+<p>Right.</p>
 
 #### [ Tobias Grosser (Sep 19 2018 at 09:08)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134215277):
-I assumed I can fix this by defining my algorithm to only work if x and y are both finite _and_ satisfy has_one.
+<p>I assumed I can fix this by defining my algorithm to only work if x and y are both finite _and_ satisfy has_one.</p>
 
 #### [ Mario Carneiro (Sep 19 2018 at 09:08)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134215317):
-You could define your function on `matrix (fin m) (fin n) α` if you want to do induction on m and n
+<p>You could define your function on <code>matrix (fin m) (fin n) α</code> if you want to do induction on m and n</p>
 
 #### [ Mario Carneiro (Sep 19 2018 at 09:08)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134215322):
-there is no problem with assuming your type has a one, but that doesn't license you to write `x+1`
+<p>there is no problem with assuming your type has a one, but that doesn't license you to write <code>x+1</code></p>
 
 #### [ Tobias Grosser (Sep 19 2018 at 09:09)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134215328):
-That's what I tried ( I forgot that fin m exists, Johannes mentioned it at some point)
+<p>That's what I tried ( I forgot that fin m exists, Johannes mentioned it at some point)</p>
 
 #### [ Mario Carneiro (Sep 19 2018 at 09:09)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134215331):
-if `x` is a type containing a `1`, then `1 : x` is okay
+<p>if <code>x</code> is a type containing a <code>1</code>, then <code>1 : x</code> is okay</p>
 
 #### [ Tobias Grosser (Sep 19 2018 at 09:09)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134215334):
-```lean
-def Gaussian_elimination5 {α : Type v} [ordered_ring α]  :
-   Π {x y} [hx : fin x] [hy : fin y], @matrix x y hx hy α  → α
-| (_+1) _ _ _ _ := by exactI 1
-```
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">Gaussian_elimination5</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">}</span> <span class="o">[</span><span class="n">ordered_ring</span> <span class="n">α</span><span class="o">]</span>  <span class="o">:</span>
+   <span class="bp">Π</span> <span class="o">{</span><span class="n">x</span> <span class="n">y</span><span class="o">}</span> <span class="o">[</span><span class="n">hx</span> <span class="o">:</span> <span class="n">fin</span> <span class="n">x</span><span class="o">]</span> <span class="o">[</span><span class="n">hy</span> <span class="o">:</span> <span class="n">fin</span> <span class="n">y</span><span class="o">],</span> <span class="bp">@</span><span class="n">matrix</span> <span class="n">x</span> <span class="n">y</span> <span class="n">hx</span> <span class="n">hy</span> <span class="n">α</span>  <span class="bp">→</span> <span class="n">α</span>
+<span class="bp">|</span> <span class="o">(</span><span class="bp">_+</span><span class="mi">1</span><span class="o">)</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">exactI</span> <span class="mi">1</span>
+</pre></div>
 
 #### [ Tobias Grosser (Sep 19 2018 at 09:10)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134215411):
-Now I am here. This works so far, but gives the error:
-```
-polyhedra.lean:201:46: error
+<p>Now I am here. This works so far, but gives the error:</p>
+<div class="codehilite"><pre><span></span>polyhedra.lean:201:46: error
 
-maximum class-instance resolution depth has been reached (the limit can be increased by setting option 'class.instance_max_depth') (the class-instance resolution trace can be visualized by setting option 'trace.class_instances')
-```
+maximum class-instance resolution depth has been reached (the limit can be increased by setting option &#39;class.instance_max_depth&#39;) (the class-instance resolution trace can be visualized by setting option &#39;trace.class_instances&#39;)
+</pre></div>
 
 #### [ Mario Carneiro (Sep 19 2018 at 09:10)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134215418):
-`fin` is not a typeclass, it is an actual type
-```
-def Gaussian_elimination5 {α : Type v} [ordered_ring α]  :
+<p><code>fin</code> is not a typeclass, it is an actual type</p>
+<div class="codehilite"><pre><span></span>def Gaussian_elimination5 {α : Type v} [ordered_ring α]  :
    Π (m n : ℕ), matrix (fin m) (fin n) α  → α
 | (m+1) (n+1) := 1
-```
+</pre></div>
 
 #### [ Tobias Grosser (Sep 19 2018 at 09:13)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134215562):
-Amazing: 
-```lean
-def Gaussian_elimination6 {α : Type v} [ordered_ring α]  :
-   Π (m n), matrix (fin m) (fin n) α  → α
-| (m+1) (n+1) A := A 0 0
-| _ _ A := (0 : α)
-```
+<p>Amazing: </p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">Gaussian_elimination6</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">}</span> <span class="o">[</span><span class="n">ordered_ring</span> <span class="n">α</span><span class="o">]</span>  <span class="o">:</span>
+   <span class="bp">Π</span> <span class="o">(</span><span class="n">m</span> <span class="n">n</span><span class="o">),</span> <span class="n">matrix</span> <span class="o">(</span><span class="n">fin</span> <span class="n">m</span><span class="o">)</span> <span class="o">(</span><span class="n">fin</span> <span class="n">n</span><span class="o">)</span> <span class="n">α</span>  <span class="bp">→</span> <span class="n">α</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">m</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="n">A</span> <span class="o">:=</span> <span class="n">A</span> <span class="mi">0</span> <span class="mi">0</span>
+<span class="bp">|</span> <span class="bp">_</span> <span class="bp">_</span> <span class="n">A</span> <span class="o">:=</span> <span class="o">(</span><span class="mi">0</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span>
+</pre></div>
 
 #### [ Tobias Grosser (Sep 19 2018 at 09:14)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134215623):
-That type checks and does what I want. Thanks guys for getting me started.
+<p>That type checks and does what I want. Thanks guys for getting me started.</p>
 
 #### [ Kevin Buzzard (Sep 19 2018 at 09:31)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134216363):
-`has_one` only means there's some term in your type called `1`. You need `has_add` too to make sense of `x + 1`.
+<p><code>has_one</code> only means there's some term in your type called <code>1</code>. You need <code>has_add</code> too to make sense of <code>x + 1</code>.</p>
 
 #### [ Johan Commelin (Sep 19 2018 at 09:33)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134216462):
-Right, so you want `has_one Type` and `has_add Type` (-;
+<p>Right, so you want <code>has_one Type</code> and <code>has_add Type</code> (-;</p>
 
 #### [ Tobias Grosser (Sep 19 2018 at 09:53)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134217164):
-That's what I understand.
+<p>That's what I understand.</p>
 
 #### [ Tobias Grosser (Sep 19 2018 at 09:53)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134217168):
-Now I don't understand how torequest such a type in a pattern match.
+<p>Now I don't understand how torequest such a type in a pattern match.</p>
 
 #### [ Tobias Grosser (Sep 19 2018 at 09:53)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134217171):
-```lean
-def Gaussian_elimination5 {α : Type v} [ordered_ring α] :
-   Π {x y : Type u} [has_one x] [has_add x] [has_one y] [has_add y] [hx : fintype x] [hy : fintype y], @matrix x y hx hy α → α
-| a b c d e f g h i := 
-```
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">Gaussian_elimination5</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">}</span> <span class="o">[</span><span class="n">ordered_ring</span> <span class="n">α</span><span class="o">]</span> <span class="o">:</span>
+   <span class="bp">Π</span> <span class="o">{</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">[</span><span class="n">has_one</span> <span class="n">x</span><span class="o">]</span> <span class="o">[</span><span class="n">has_add</span> <span class="n">x</span><span class="o">]</span> <span class="o">[</span><span class="n">has_one</span> <span class="n">y</span><span class="o">]</span> <span class="o">[</span><span class="n">has_add</span> <span class="n">y</span><span class="o">]</span> <span class="o">[</span><span class="n">hx</span> <span class="o">:</span> <span class="n">fintype</span> <span class="n">x</span><span class="o">]</span> <span class="o">[</span><span class="n">hy</span> <span class="o">:</span> <span class="n">fintype</span> <span class="n">y</span><span class="o">],</span> <span class="bp">@</span><span class="n">matrix</span> <span class="n">x</span> <span class="n">y</span> <span class="n">hx</span> <span class="n">hy</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">α</span>
+<span class="bp">|</span> <span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="n">d</span> <span class="n">e</span> <span class="n">f</span> <span class="n">g</span> <span class="n">h</span> <span class="n">i</span> <span class="o">:=</span>
+</pre></div>
 
 #### [ Tobias Grosser (Sep 19 2018 at 09:53)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134217173):
-This is what I came up with.
+<p>This is what I came up with.</p>
 
 #### [ Mario Carneiro (Sep 19 2018 at 09:54)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134217219):
-you can't pattern match on types
+<p>you can't pattern match on types</p>
 
 #### [ Kevin Buzzard (Sep 19 2018 at 09:54)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134217222):
-As a general rule you shouldn't need to name variables which are showing up in `[boxes like this]`
+<p>As a general rule you shouldn't need to name variables which are showing up in <code>[boxes like this]</code></p>
 
 #### [ Kevin Buzzard (Sep 19 2018 at 09:54)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134217225):
-The system is supposed to do that for you
+<p>The system is supposed to do that for you</p>
 
 #### [ Tobias Grosser (Sep 19 2018 at 09:54)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134217232):
-I don't want to match  on types.
+<p>I don't want to match  on types.</p>
 
 #### [ Tobias Grosser (Sep 19 2018 at 09:54)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134217236):
-It seems I need to match on all the boxes for this to type check.
+<p>It seems I need to match on all the boxes for this to type check.</p>
 
 #### [ Tobias Grosser (Sep 19 2018 at 09:55)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134217239):
-What I would like is something like
+<p>What I would like is something like</p>
 
 #### [ Kevin Buzzard (Sep 19 2018 at 09:55)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134217247):
-You could move stuff to the left of the colon
+<p>You could move stuff to the left of the colon</p>
 
 #### [ Mario Carneiro (Sep 19 2018 at 09:55)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134217251):
-this line is almost certainly not what you want
+<p>this line is almost certainly not what you want</p>
 
 #### [ Kevin Buzzard (Sep 19 2018 at 09:55)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134217254):
-the equation compiler only matches on stuff to the right of the colon
+<p>the equation compiler only matches on stuff to the right of the colon</p>
 
 #### [ Kevin Buzzard (Sep 19 2018 at 09:56)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134217307):
-and similarly in general you should be able to avoid using `@`
+<p>and similarly in general you should be able to avoid using <code>@</code></p>
 
 #### [ Kevin Buzzard (Sep 19 2018 at 09:56)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134217314):
-because Lean is supposed to guess correctly
+<p>because Lean is supposed to guess correctly</p>
 
 #### [ Mario Carneiro (Sep 19 2018 at 09:57)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134217326):
-Also, in case it wasn't clear Johan's suggestion above was not serious
+<p>Also, in case it wasn't clear Johan's suggestion above was not serious</p>
 
 #### [ Mario Carneiro (Sep 19 2018 at 09:57)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134217332):
-you don't actually want `has_add Type`
+<p>you don't actually want <code>has_add Type</code></p>
 
 #### [ Mario Carneiro (Sep 19 2018 at 09:57)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134217339):
-Perhaps you could explain what you are trying to do informally?
+<p>Perhaps you could explain what you are trying to do informally?</p>
 
 #### [ Kevin Buzzard (Sep 19 2018 at 09:58)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134217376):
-You're more likely to want `has_add X` with `X : Type`
+<p>You're more likely to want <code>has_add X</code> with <code>X : Type</code></p>
 
 #### [ Mario Carneiro (Sep 19 2018 at 09:58)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134217383):
-I'm not sure you want that either though, in this case
+<p>I'm not sure you want that either though, in this case</p>
 
 #### [ Kevin Buzzard (Sep 19 2018 at 09:58)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134217388):
-On the other hand, I am pretty sure we want Gaussian Elimination
+<p>On the other hand, I am pretty sure we want Gaussian Elimination</p>
 
 #### [ Tobias Grosser (Sep 19 2018 at 09:59)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134217402):
-I want a function that takes a (matrix n m \a) and returns an alpha (for now)
+<p>I want a function that takes a (matrix n m \a) and returns an alpha (for now)</p>
 
 #### [ Kevin Buzzard (Sep 19 2018 at 09:59)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134217403):
-It's kind of a disgrace that we only just got matrices and that we still don't have differentiation of functions from R to R
+<p>It's kind of a disgrace that we only just got matrices and that we still don't have differentiation of functions from R to R</p>
 
 #### [ Tobias Grosser (Sep 19 2018 at 09:59)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134217404):
-I also want to do induction over n and m
+<p>I also want to do induction over n and m</p>
 
 #### [ Tobias Grosser (Sep 19 2018 at 09:59)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134217406):
-So I looked at dependent type pattern matching
+<p>So I looked at dependent type pattern matching</p>
 
 #### [ Kevin Buzzard (Sep 19 2018 at 09:59)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134217408):
-@**Tobias Grosser** your two goals sound very achievable
+<p><span class="user-mention" data-user-id="122318">@Tobias Grosser</span> your two goals sound very achievable</p>
 
 #### [ Mario Carneiro (Sep 19 2018 at 09:59)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134217409):
-In that case you should go with the version I stated with `fin m` and `fin n`
+<p>In that case you should go with the version I stated with <code>fin m</code> and <code>fin n</code></p>
 
 #### [ Tobias Grosser (Sep 19 2018 at 09:59)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134217410):
-And my understanding is that I need to constrain n and m to satisfy has_add and has_one.
+<p>And my understanding is that I need to constrain n and m to satisfy has_add and has_one.</p>
 
 #### [ Kevin Buzzard (Sep 19 2018 at 09:59)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134217413):
-if `fin n` makes sense
+<p>if <code>fin n</code> makes sense</p>
 
 #### [ Kevin Buzzard (Sep 19 2018 at 10:00)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134217415):
-then `n : nat`
+<p>then <code>n : nat</code></p>
 
 #### [ Tobias Grosser (Sep 19 2018 at 10:00)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134217458):
-Right. That one works perfectly.
+<p>Right. That one works perfectly.</p>
 
 #### [ Mario Carneiro (Sep 19 2018 at 10:00)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134217463):
-`fin m` is a type, which already has a one and an add
+<p><code>fin m</code> is a type, which already has a one and an add</p>
 
 #### [ Kevin Buzzard (Sep 19 2018 at 10:00)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134217464):
-and `nat` already has a 1 and an +
+<p>and <code>nat</code> already has a 1 and an +</p>
 
 #### [ Kevin Buzzard (Sep 19 2018 at 10:00)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134217467):
-as does `fin n`
+<p>as does <code>fin n</code></p>
 
 #### [ Tobias Grosser (Sep 19 2018 at 10:00)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134217472):
-I have a variant that works
+<p>I have a variant that works</p>
 
 #### [ Kevin Buzzard (Sep 19 2018 at 10:01)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134217505):
-feel free to post code
+<p>feel free to post code</p>
 
 #### [ Tobias Grosser (Sep 19 2018 at 10:01)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134217506):
-Which is:
-```lean
-def Gaussian_elimination6 {α : Type v} [ordered_ring α]  :
-   Π (m n), matrix (fin m) (fin n) α  → α
-| (m+1) (n+1) A := A 0 0
-| _ _ A := (0 : α)
-```
+<p>Which is:</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">Gaussian_elimination6</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">}</span> <span class="o">[</span><span class="n">ordered_ring</span> <span class="n">α</span><span class="o">]</span>  <span class="o">:</span>
+   <span class="bp">Π</span> <span class="o">(</span><span class="n">m</span> <span class="n">n</span><span class="o">),</span> <span class="n">matrix</span> <span class="o">(</span><span class="n">fin</span> <span class="n">m</span><span class="o">)</span> <span class="o">(</span><span class="n">fin</span> <span class="n">n</span><span class="o">)</span> <span class="n">α</span>  <span class="bp">→</span> <span class="n">α</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">m</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="n">A</span> <span class="o">:=</span> <span class="n">A</span> <span class="mi">0</span> <span class="mi">0</span>
+<span class="bp">|</span> <span class="bp">_</span> <span class="bp">_</span> <span class="n">A</span> <span class="o">:=</span> <span class="o">(</span><span class="mi">0</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span>
+</pre></div>
 
 #### [ Tobias Grosser (Sep 19 2018 at 10:02)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134217554):
-(I mean the pattern match, not the gaussian elimination yet)
+<p>(I mean the pattern match, not the gaussian elimination yet)</p>
 
 #### [ Kevin Buzzard (Sep 19 2018 at 10:02)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134217556):
-gotcha
+<p>gotcha</p>
 
 #### [ Kevin Buzzard (Sep 19 2018 at 10:02)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134217558):
-You use m and n to mean two different things
+<p>You use m and n to mean two different things</p>
 
 #### [ Kevin Buzzard (Sep 19 2018 at 10:02)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134217560):
-you were doing this with x and y earlier
+<p>you were doing this with x and y earlier</p>
 
 #### [ Kevin Buzzard (Sep 19 2018 at 10:02)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134217562):
-I find it quite confusing
+<p>I find it quite confusing</p>
 
 #### [ Mario Carneiro (Sep 19 2018 at 10:02)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134217563):
-I think it was a bad idea to call the types `m` and `n` in the definition of `matrix`
+<p>I think it was a bad idea to call the types <code>m</code> and <code>n</code> in the definition of <code>matrix</code></p>
 
 #### [ Tobias Grosser (Sep 19 2018 at 10:03)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134217565):
-I was asking for has_one has_add out of curiosity (and also it seemed it would be preferable)
+<p>I was asking for has_one has_add out of curiosity (and also it seemed it would be preferable)</p>
 
 #### [ Mario Carneiro (Sep 19 2018 at 10:03)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134217569):
-we never use lowercase latin for types
+<p>we never use lowercase latin for types</p>
 
 #### [ Tobias Grosser (Sep 19 2018 at 10:03)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134217572):
-```lean
-def Gaussian_elimination6 {α : Type v} [ordered_ring α]  :
-   Π (m n), matrix (fin m) (fin n) α  → α
-| (x+1) (y+1) A := A 0 0
-| _ _ A := (0 : α)
-```
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">Gaussian_elimination6</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">}</span> <span class="o">[</span><span class="n">ordered_ring</span> <span class="n">α</span><span class="o">]</span>  <span class="o">:</span>
+   <span class="bp">Π</span> <span class="o">(</span><span class="n">m</span> <span class="n">n</span><span class="o">),</span> <span class="n">matrix</span> <span class="o">(</span><span class="n">fin</span> <span class="n">m</span><span class="o">)</span> <span class="o">(</span><span class="n">fin</span> <span class="n">n</span><span class="o">)</span> <span class="n">α</span>  <span class="bp">→</span> <span class="n">α</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">x</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="o">(</span><span class="n">y</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="n">A</span> <span class="o">:=</span> <span class="n">A</span> <span class="mi">0</span> <span class="mi">0</span>
+<span class="bp">|</span> <span class="bp">_</span> <span class="bp">_</span> <span class="n">A</span> <span class="o">:=</span> <span class="o">(</span><span class="mi">0</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span>
+</pre></div>
 
 #### [ Kevin Buzzard (Sep 19 2018 at 10:03)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134217573):
-The matching only matches stuff to the right of the colon, so you're writing "let m = m + 1".
+<p>The matching only matches stuff to the right of the colon, so you're writing "let m = m + 1".</p>
 
 #### [ Kevin Buzzard (Sep 19 2018 at 10:04)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134217618):
-I used to do this in mathematics when I was younger -- "I have a quadratic equation x^2+bx+c=0 -- now let's complete the square by setting x=x+b/2"
+<p>I used to do this in mathematics when I was younger -- "I have a quadratic equation x^2+bx+c=0 -- now let's complete the square by setting x=x+b/2"</p>
 
 #### [ Tobias Grosser (Sep 19 2018 at 10:04)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134217623):
-I am aware that 'n' and 'm' in my original example mean different things.
+<p>I am aware that 'n' and 'm' in my original example mean different things.</p>
 
 #### [ Mario Carneiro (Sep 19 2018 at 10:04)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134217624):
-where would you want to perform an addition, where you can't already?
+<p>where would you want to perform an addition, where you can't already?</p>
 
 #### [ Tobias Grosser (Sep 19 2018 at 10:04)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134217634):
-All is good in this example.
+<p>All is good in this example.</p>
 
 #### [ Kevin Buzzard (Sep 19 2018 at 10:04)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134217638):
-I never write that now because it's so easy to lose track of whether you're using the old x or the new x. Now I write "let y = x+b/2"
+<p>I never write that now because it's so easy to lose track of whether you're using the old x or the new x. Now I write "let y = x+b/2"</p>
 
 #### [ Tobias Grosser (Sep 19 2018 at 10:04)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134217639):
-Things work fo rme.
+<p>Things work fo rme.</p>
 
 #### [ Kevin Buzzard (Sep 19 2018 at 10:05)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134217663):
-The only time I let "x=x+1" nowadays is in procedural programming when I actually want the old value to be forgotten forever
+<p>The only time I let "x=x+1" nowadays is in procedural programming when I actually want the old value to be forgotten forever</p>
 
 #### [ Mario Carneiro (Sep 19 2018 at 10:06)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134217710):
-Here is a working version that doesn't use fin:
-```
-def Gaussian_elimination6 {α : Type v} [ordered_ring α] 
+<p>Here is a working version that doesn't use fin:</p>
+<div class="codehilite"><pre><span></span>def Gaussian_elimination6 {α : Type v} [ordered_ring α]
   (M N) [fintype M] [fintype N] : matrix M N α  → α
 | A := A 0 0
-```
-But you can't do induction on `m : nat` in this case, since there is no `m`
+</pre></div>
+
+
+<p>But you can't do induction on <code>m : nat</code> in this case, since there is no <code>m</code></p>
 
 #### [ Tobias Grosser (Sep 19 2018 at 10:06)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134217715):
-Right.
+<p>Right.</p>
 
 #### [ Kevin Buzzard (Sep 19 2018 at 10:06)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134217716):
-```quote
-```lean
-def Gaussian_elimination6 {α : Type v} [ordered_ring α]  :
-   Π (m n), matrix (fin m) (fin n) α  → α
-| (x+1) (y+1) A := A 0 0
-| _ _ A := (0 : α)
-```
-```
-Do you see that you're also using the fact that `fin (x+1)` has a zero here.
+<blockquote>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">Gaussian_elimination6</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">}</span> <span class="o">[</span><span class="n">ordered_ring</span> <span class="n">α</span><span class="o">]</span>  <span class="o">:</span>
+   <span class="bp">Π</span> <span class="o">(</span><span class="n">m</span> <span class="n">n</span><span class="o">),</span> <span class="n">matrix</span> <span class="o">(</span><span class="n">fin</span> <span class="n">m</span><span class="o">)</span> <span class="o">(</span><span class="n">fin</span> <span class="n">n</span><span class="o">)</span> <span class="n">α</span>  <span class="bp">→</span> <span class="n">α</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">x</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="o">(</span><span class="n">y</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="n">A</span> <span class="o">:=</span> <span class="n">A</span> <span class="mi">0</span> <span class="mi">0</span>
+<span class="bp">|</span> <span class="bp">_</span> <span class="bp">_</span> <span class="n">A</span> <span class="o">:=</span> <span class="o">(</span><span class="mi">0</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span>
+</pre></div>
+
+
+</blockquote>
+<p>Do you see that you're also using the fact that <code>fin (x+1)</code> has a zero here.</p>
 
 #### [ Kevin Buzzard (Sep 19 2018 at 10:07)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134217722):
-Type class inference figured that out for you and let you use it
+<p>Type class inference figured that out for you and let you use it</p>
 
 #### [ Tobias Grosser (Sep 19 2018 at 10:07)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134217730):
-Yes.
+<p>Yes.</p>
 
 #### [ Tobias Grosser (Sep 19 2018 at 10:07)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134217736):
-That's why I had to write (0:\a) in the second match.
+<p>That's why I had to write (0:\a) in the second match.</p>
 
 #### [ Tobias Grosser (Sep 19 2018 at 10:07)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134217741):
-I think.
+<p>I think.</p>
 
 #### [ Kevin Buzzard (Sep 19 2018 at 10:07)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134217744):
-`0` by itself means "the zero of something"
+<p><code>0</code> by itself means "the zero of something"</p>
 
 #### [ Tobias Grosser (Sep 19 2018 at 10:07)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134217745):
-Because in that case it is not known that a zero exists.
+<p>Because in that case it is not known that a zero exists.</p>
 
 #### [ Mario Carneiro (Sep 19 2018 at 10:07)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134217746):
-Kevin means the `0` in `A 0 0`
+<p>Kevin means the <code>0</code> in <code>A 0 0</code></p>
 
 #### [ Kevin Buzzard (Sep 19 2018 at 10:07)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134217751):
-Lean was expecting something of type "fin (x+1)" and you wrote "0"
+<p>Lean was expecting something of type "fin (x+1)" and you wrote "0"</p>
 
 #### [ Tobias Grosser (Sep 19 2018 at 10:08)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134217798):
-Right.
+<p>Right.</p>
 
 #### [ Kevin Buzzard (Sep 19 2018 at 10:08)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134217801):
-and Lean figured "aah, this must be one of those types that has a zero, let me find an instance of has_zero (fin (x+1)) behind the scenes
+<p>and Lean figured "aah, this must be one of those types that has a zero, let me find an instance of has_zero (fin (x+1)) behind the scenes</p>
 
 #### [ Tobias Grosser (Sep 19 2018 at 10:08)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134217812):
-I wrote
-```lean
-def Gaussian_elimination6 {α : Type v} [ordered_ring α]  :
-   Π (m n), matrix (fin m) (fin n) α  → α
-| (x+1) (y+1) A := A 0 0
-| _ _ A := A 0 0 
-```
+<p>I wrote</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">Gaussian_elimination6</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">}</span> <span class="o">[</span><span class="n">ordered_ring</span> <span class="n">α</span><span class="o">]</span>  <span class="o">:</span>
+   <span class="bp">Π</span> <span class="o">(</span><span class="n">m</span> <span class="n">n</span><span class="o">),</span> <span class="n">matrix</span> <span class="o">(</span><span class="n">fin</span> <span class="n">m</span><span class="o">)</span> <span class="o">(</span><span class="n">fin</span> <span class="n">n</span><span class="o">)</span> <span class="n">α</span>  <span class="bp">→</span> <span class="n">α</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">x</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="o">(</span><span class="n">y</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="n">A</span> <span class="o">:=</span> <span class="n">A</span> <span class="mi">0</span> <span class="mi">0</span>
+<span class="bp">|</span> <span class="bp">_</span> <span class="bp">_</span> <span class="n">A</span> <span class="o">:=</span> <span class="n">A</span> <span class="mi">0</span> <span class="mi">0</span>
+</pre></div>
 
 #### [ Tobias Grosser (Sep 19 2018 at 10:08)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134217815):
-Initially
+<p>Initially</p>
 
 #### [ Kevin Buzzard (Sep 19 2018 at 10:09)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134217828):
-Lean's typeclass magic: `example (x : ℕ) : has_zero (fin (x+1)) := by apply_instance`
+<p>Lean's typeclass magic: <code>example (x : ℕ) : has_zero (fin (x+1)) := by apply_instance</code></p>
 
 #### [ Kevin Buzzard (Sep 19 2018 at 10:09)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134217835):
-your initial approach doesn't work becasue `fin 0` is the empty type and in particular has no zero
+<p>your initial approach doesn't work becasue <code>fin 0</code> is the empty type and in particular has no zero</p>
 
 #### [ Tobias Grosser (Sep 19 2018 at 10:09)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134217838):
-Right.
+<p>Right.</p>
 
 #### [ Tobias Grosser (Sep 19 2018 at 10:09)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134217841):
-I understood this.
+<p>I understood this.</p>
 
 #### [ Tobias Grosser (Sep 19 2018 at 10:09)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134217843):
-That's very interesting.
+<p>That's very interesting.</p>
 
 #### [ Kevin Buzzard (Sep 19 2018 at 10:10)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134217898):
-`example : has_zero (fin 0) := by apply_instance -- "failed to generate instance" error`
+<p><code>example : has_zero (fin 0) := by apply_instance -- "failed to generate instance" error</code></p>
 
 #### [ Kevin Buzzard (Sep 19 2018 at 10:10)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134217911):
-This black magic is related to the square bracket stuff and it took me a very long time before I got comfortable with it.
+<p>This black magic is related to the square bracket stuff and it took me a very long time before I got comfortable with it.</p>
 
 #### [ Tobias Grosser (Sep 19 2018 at 10:10)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134217914):
-I see.
+<p>I see.</p>
 
 #### [ Kevin Buzzard (Sep 19 2018 at 10:11)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134217924):
-In retrospect I wish that people had stressed earlier how basic notation like `0` and `+` worked in Lean
+<p>In retrospect I wish that people had stressed earlier how basic notation like <code>0</code> and <code>+</code> worked in Lean</p>
 
 #### [ Tobias Grosser (Sep 19 2018 at 10:11)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134217927):
-The only thing I do not understand is if it is possible to take Mario's stuff, but expose n and m without introducing 'fin n', but instead just use has_one and has_add.
+<p>The only thing I do not understand is if it is possible to take Mario's stuff, but expose n and m without introducing 'fin n', but instead just use has_one and has_add.</p>
 
 #### [ Kevin Buzzard (Sep 19 2018 at 10:11)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134217928):
-because it seems to me that this is a very good introduction to the type class system
+<p>because it seems to me that this is a very good introduction to the type class system</p>
 
 #### [ Tobias Grosser (Sep 19 2018 at 10:11)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134217935):
-I feel this should work, but seems to be far beyond my type_class capabilities.
+<p>I feel this should work, but seems to be far beyond my type_class capabilities.</p>
 
 #### [ Kevin Buzzard (Sep 19 2018 at 10:11)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134217937):
-I'm afraid I'm not a computer scientist and I don't know what "expose" means
+<p>I'm afraid I'm not a computer scientist and I don't know what "expose" means</p>
 
 #### [ Tobias Grosser (Sep 19 2018 at 10:12)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134217970):
-As I have a solution, that's not needed. But would be nice to understand this eventually.
+<p>As I have a solution, that's not needed. But would be nice to understand this eventually.</p>
 
 #### [ Kevin Buzzard (Sep 19 2018 at 10:12)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134217983):
-`matrix` eats something of type `fin n`
+<p><code>matrix</code> eats something of type <code>fin n</code></p>
 
 #### [ Kevin Buzzard (Sep 19 2018 at 10:12)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134217987):
-so you have to give it something of type `fin n`
+<p>so you have to give it something of type <code>fin n</code></p>
 
 #### [ Mario Carneiro (Sep 19 2018 at 10:12)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134217989):
-actually it eats a fintype
+<p>actually it eats a fintype</p>
 
 #### [ Tobias Grosser (Sep 19 2018 at 10:12)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134217992):
-"expose" means pattern match on n and m to be able to do induction on n and m
+<p>"expose" means pattern match on n and m to be able to do induction on n and m</p>
 
 #### [ Tobias Grosser (Sep 19 2018 at 10:12)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134217994):
-Right. I can pass it a fin n and all is good.
+<p>Right. I can pass it a fin n and all is good.</p>
 
 #### [ Kevin Buzzard (Sep 19 2018 at 10:13)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134218002):
-wait, that's not even true any more
+<p>wait, that's not even true any more</p>
 
 #### [ Tobias Grosser (Sep 19 2018 at 10:13)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134218005):
-I was wondering if I could pass it a fintype x, where I know that x has_add and has_one.
+<p>I was wondering if I could pass it a fintype x, where I know that x has_add and has_one.</p>
 
 #### [ Mario Carneiro (Sep 19 2018 at 10:13)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134218006):
-any fintype has a cardinality, `fintype.card X`, and you can do induction on that
+<p>any fintype has a cardinality, <code>fintype.card X</code>, and you can do induction on that</p>
 
 #### [ Kevin Buzzard (Sep 19 2018 at 10:13)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134218012):
-sorry, I seem to be behind the times
+<p>sorry, I seem to be behind the times</p>
 
 #### [ Kevin Buzzard (Sep 19 2018 at 10:13)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134218023):
-`#check @matrix -- matrix : Π (m n : Type u_1) [_inst_1 : fintype m] [_inst_2 : fintype n], Type u_2 → Type (max u_1 u_2)`
+<p><code>#check @matrix -- matrix : Π (m n : Type u_1) [_inst_1 : fintype m] [_inst_2 : fintype n], Type u_2 → Type (max u_1 u_2)</code></p>
 
 #### [ Mario Carneiro (Sep 19 2018 at 10:13)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134218026):
-You don't usually need a one and an add on the index type
+<p>You don't usually need a one and an add on the index type</p>
 
 #### [ Mario Carneiro (Sep 19 2018 at 10:13)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134218035):
-what is this needed for?
+<p>what is this needed for?</p>
 
 #### [ Tobias Grosser (Sep 19 2018 at 10:14)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134218072):
-So how can I do induction over card? That's what I am trying to figure out.
+<p>So how can I do induction over card? That's what I am trying to figure out.</p>
 
 #### [ Mario Carneiro (Sep 19 2018 at 10:14)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134218079):
-It's a bit messy
+<p>It's a bit messy</p>
 
 #### [ Kevin Buzzard (Sep 19 2018 at 10:14)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134218084):
-Do you want to prove things for matrices indexed by random finite types?
+<p>Do you want to prove things for matrices indexed by random finite types?</p>
 
 #### [ Tobias Grosser (Sep 19 2018 at 10:14)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134218085):
-I just want to do induction on my dimensionality to do gaussion elimination.
+<p>I just want to do induction on my dimensionality to do gaussion elimination.</p>
 
 #### [ Tobias Grosser (Sep 19 2018 at 10:14)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134218090):
-No. If you tell me 'fin x' is enough, we are done.
+<p>No. If you tell me 'fin x' is enough, we are done.</p>
 
 #### [ Kevin Buzzard (Sep 19 2018 at 10:15)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134218103):
-I guess this is a design decision
+<p>I guess this is a design decision</p>
 
 #### [ Tobias Grosser (Sep 19 2018 at 10:15)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134218104):
-Just got curious about the type classes. Seems matlib likes to generalize things.
+<p>Just got curious about the type classes. Seems matlib likes to generalize things.</p>
 
 #### [ Tobias Grosser (Sep 19 2018 at 10:15)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134218111):
-I am fine being in 'fin x'. That seems a lot less messy.
+<p>I am fine being in 'fin x'. That seems a lot less messy.</p>
 
 #### [ Kevin Buzzard (Sep 19 2018 at 10:15)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134218113):
-Yes, if mathlib did Gaussian Elimination it would almost certainly do it for random types which are fintypes
+<p>Yes, if mathlib did Gaussian Elimination it would almost certainly do it for random types which are fintypes</p>
 
 #### [ Tobias Grosser (Sep 19 2018 at 10:15)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134218114):
-Let's leave it at this for now.
+<p>Let's leave it at this for now.</p>
 
 #### [ Mario Carneiro (Sep 19 2018 at 10:15)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134218116):
-```
-def Gaussian_elimination6 {α : Type v} [ordered_ring α] 
+<div class="codehilite"><pre><span></span>def Gaussian_elimination6 {α : Type v} [ordered_ring α]
   : ∀ (m n M N) [fintype M] [fintype N], fintype.card M = m → fintype.card N = n → matrix M N α  → α
 | m n M N _ _ h1 h2 A := A 0 0
-```
-You will need some `@`'s in there, my typechecker isn't running
+</pre></div>
+
+
+<p>You will need some <code>@</code>'s in there, my typechecker isn't running</p>
 
 #### [ Kevin Buzzard (Sep 19 2018 at 10:16)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134218164):
-If you do it like that then you can induct on m and n
+<p>If you do it like that then you can induct on m and n</p>
 
 #### [ Mario Carneiro (Sep 19 2018 at 10:16)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134218173):
-More likely, I would just do it on `fin m` by induction and then use equivalence lemmas to transfer to the original fintype
+<p>More likely, I would just do it on <code>fin m</code> by induction and then use equivalence lemmas to transfer to the original fintype</p>
 
 #### [ Kevin Buzzard (Sep 19 2018 at 10:17)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134218187):
-```lean
-failed to synthesize type class instance for
-α : Type v,
-_inst_1 : ordered_ring α,
-m : ?m_1,
-n : ?m_2,
-M : Type ?,
-N : Type ?,
-_inst_2 : fintype M,
-_inst_3 : fintype N
-⊢ fintype M
-```
+<div class="codehilite"><pre><span></span><span class="n">failed</span> <span class="n">to</span> <span class="n">synthesize</span> <span class="n">type</span> <span class="n">class</span> <span class="kn">instance</span> <span class="n">for</span>
+<span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">,</span>
+<span class="bp">_</span><span class="n">inst_1</span> <span class="o">:</span> <span class="n">ordered_ring</span> <span class="n">α</span><span class="o">,</span>
+<span class="n">m</span> <span class="o">:</span> <span class="err">?</span><span class="n">m_1</span><span class="o">,</span>
+<span class="n">n</span> <span class="o">:</span> <span class="err">?</span><span class="n">m_2</span><span class="o">,</span>
+<span class="n">M</span> <span class="o">:</span> <span class="kt">Type</span> <span class="err">?</span><span class="o">,</span>
+<span class="n">N</span> <span class="o">:</span> <span class="kt">Type</span> <span class="err">?</span><span class="o">,</span>
+<span class="bp">_</span><span class="n">inst_2</span> <span class="o">:</span> <span class="n">fintype</span> <span class="n">M</span><span class="o">,</span>
+<span class="bp">_</span><span class="n">inst_3</span> <span class="o">:</span> <span class="n">fintype</span> <span class="n">N</span>
+<span class="err">⊢</span> <span class="n">fintype</span> <span class="n">M</span>
+</pre></div>
 
 #### [ Kevin Buzzard (Sep 19 2018 at 10:17)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134218188):
-boo
+<p>boo</p>
 
 #### [ Mario Carneiro (Sep 19 2018 at 10:17)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134218189):
-Or find a way to work with subsets of a fixed type of size `m`
+<p>Or find a way to work with subsets of a fixed type of size <code>m</code></p>
 
 #### [ Mario Carneiro (Sep 19 2018 at 10:17)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134218193):
-you have to put a `by exactI` in there
+<p>you have to put a <code>by exactI</code> in there</p>
 
 #### [ Kevin Buzzard (Sep 19 2018 at 10:17)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134218199):
-in the statement??
+<p>in the statement??</p>
 
 #### [ Mario Carneiro (Sep 19 2018 at 10:17)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134218200):
-yeah
+<p>yeah</p>
 
 #### [ Mario Carneiro (Sep 19 2018 at 10:18)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134218244):
-because there are typeclass args right of the colon
+<p>because there are typeclass args right of the colon</p>
 
 #### [ Mario Carneiro (Sep 19 2018 at 10:18)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134218249):
-either that or use `@` a lot
+<p>either that or use <code>@</code> a lot</p>
 
 #### [ Kenny Lau (Sep 19 2018 at 10:18)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134218261):
-deja vu
+<p>deja vu</p>
 
 #### [ Kevin Buzzard (Sep 19 2018 at 10:19)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134218284):
-```lean
-def Gaussian_elimination6 {α : Type v} [ordered_ring α]
-  : ∀ (m n M N) [fintype M] [fintype N],
-      by exactI fintype.card M = m → fintype.card N = n → matrix M N α  → α
-| m n M N _ _ h1 h2 A := sorry
-```
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">Gaussian_elimination6</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">}</span> <span class="o">[</span><span class="n">ordered_ring</span> <span class="n">α</span><span class="o">]</span>
+  <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">m</span> <span class="n">n</span> <span class="n">M</span> <span class="n">N</span><span class="o">)</span> <span class="o">[</span><span class="n">fintype</span> <span class="n">M</span><span class="o">]</span> <span class="o">[</span><span class="n">fintype</span> <span class="n">N</span><span class="o">],</span>
+      <span class="k">by</span> <span class="n">exactI</span> <span class="n">fintype</span><span class="bp">.</span><span class="n">card</span> <span class="n">M</span> <span class="bp">=</span> <span class="n">m</span> <span class="bp">→</span> <span class="n">fintype</span><span class="bp">.</span><span class="n">card</span> <span class="n">N</span> <span class="bp">=</span> <span class="n">n</span> <span class="bp">→</span> <span class="n">matrix</span> <span class="n">M</span> <span class="n">N</span> <span class="n">α</span>  <span class="bp">→</span> <span class="n">α</span>
+<span class="bp">|</span> <span class="n">m</span> <span class="n">n</span> <span class="n">M</span> <span class="n">N</span> <span class="bp">_</span> <span class="bp">_</span> <span class="n">h1</span> <span class="n">h2</span> <span class="n">A</span> <span class="o">:=</span> <span class="n">sorry</span>
+</pre></div>
 
 #### [ Kevin Buzzard (Sep 19 2018 at 10:19)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134218287):
-eew
+<p>eew</p>
 
 #### [ Kevin Buzzard (Sep 19 2018 at 10:19)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134218289):
-soon to be not fixed in Lean 4
+<p>soon to be not fixed in Lean 4</p>
 
 #### [ Kevin Buzzard (Sep 19 2018 at 10:20)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134218347):
-that looks fine, not at all confusing for beginners
+<p>that looks fine, not at all confusing for beginners</p>
 
 #### [ Mario Carneiro (Sep 19 2018 at 10:20)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134218357):
-like I said, messy
+<p>like I said, messy</p>
 
 #### [ Kevin Buzzard (Sep 19 2018 at 10:20)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134218362):
-Isn't there some pre-rolled `fintype.induction_on`?
+<p>Isn't there some pre-rolled <code>fintype.induction_on</code>?</p>
 
 #### [ Mario Carneiro (Sep 19 2018 at 10:21)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134218371):
-not to mention that this is not going to be a nice inductive proof since you have to build a recursive subtype
+<p>not to mention that this is not going to be a nice inductive proof since you have to build a recursive subtype</p>
 
 #### [ Mario Carneiro (Sep 19 2018 at 10:21)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134218392):
-It's probably better to do induction over the finsets on a fixed type
+<p>It's probably better to do induction over the finsets on a fixed type</p>
 
 #### [ Tobias Grosser (Sep 19 2018 at 10:21)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134218397):
-Cool. At least it works.
+<p>Cool. At least it works.</p>
 
 #### [ Tobias Grosser (Sep 19 2018 at 10:22)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134218450):
-I feel I can do induction by using x+1 and y+1
-```lean
-def Gaussian_elimination6 {α : Type v} [ordered_ring α]
-  : ∀ (m n M N) [fintype M] [fintype N],
-      by exactI fintype.card M = m → fintype.card N = n → matrix M N α  → α
-| (x+1) (y+1) M N _ _ h1 h2 A := (0 : α)
-| _ _ M N _ _ h1 h2 A := (0 : α)
-```
+<p>I feel I can do induction by using x+1 and y+1</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">Gaussian_elimination6</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">}</span> <span class="o">[</span><span class="n">ordered_ring</span> <span class="n">α</span><span class="o">]</span>
+  <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">m</span> <span class="n">n</span> <span class="n">M</span> <span class="n">N</span><span class="o">)</span> <span class="o">[</span><span class="n">fintype</span> <span class="n">M</span><span class="o">]</span> <span class="o">[</span><span class="n">fintype</span> <span class="n">N</span><span class="o">],</span>
+      <span class="k">by</span> <span class="n">exactI</span> <span class="n">fintype</span><span class="bp">.</span><span class="n">card</span> <span class="n">M</span> <span class="bp">=</span> <span class="n">m</span> <span class="bp">→</span> <span class="n">fintype</span><span class="bp">.</span><span class="n">card</span> <span class="n">N</span> <span class="bp">=</span> <span class="n">n</span> <span class="bp">→</span> <span class="n">matrix</span> <span class="n">M</span> <span class="n">N</span> <span class="n">α</span>  <span class="bp">→</span> <span class="n">α</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">x</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="o">(</span><span class="n">y</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="n">M</span> <span class="n">N</span> <span class="bp">_</span> <span class="bp">_</span> <span class="n">h1</span> <span class="n">h2</span> <span class="n">A</span> <span class="o">:=</span> <span class="o">(</span><span class="mi">0</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span>
+<span class="bp">|</span> <span class="bp">_</span> <span class="bp">_</span> <span class="n">M</span> <span class="n">N</span> <span class="bp">_</span> <span class="bp">_</span> <span class="n">h1</span> <span class="n">h2</span> <span class="n">A</span> <span class="o">:=</span> <span class="o">(</span><span class="mi">0</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span>
+</pre></div>
 
 #### [ Tobias Grosser (Sep 19 2018 at 10:22)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134218453):
-Not sure what recursive subtypes mean.
+<p>Not sure what recursive subtypes mean.</p>
 
 #### [ Tobias Grosser (Sep 19 2018 at 10:22)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134218458):
-I will start with the (fin n) stuff, which is sth I certainly understand.
+<p>I will start with the (fin n) stuff, which is sth I certainly understand.</p>
 
 #### [ Tobias Grosser (Sep 19 2018 at 10:23)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134218467):
-If all works, I can see if I can generalize things.
+<p>If all works, I can see if I can generalize things.</p>
 
 #### [ Mario Carneiro (Sep 19 2018 at 10:23)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134218488):
-when applying the induction hypothesis, you will need to build a type that contains one fewer element than the type you started with
+<p>when applying the induction hypothesis, you will need to build a type that contains one fewer element than the type you started with</p>
 
 #### [ Tobias Grosser (Sep 19 2018 at 10:23)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134218503):
-I see. That's annoying. I will certainly stay with (fin n)
+<p>I see. That's annoying. I will certainly stay with (fin n)</p>
 
 #### [ Tobias Grosser (Sep 19 2018 at 10:24)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134218568):
-Thanks again. Now I learned quite a bit. Will need to read up on exactI in type definitions.
+<p>Thanks again. Now I learned quite a bit. Will need to read up on exactI in type definitions.</p>
 
 #### [ Sean Leather (Sep 19 2018 at 10:26)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134218604):
-```quote
-Will need to read up on exactI in type definitions.
-```
-
-Note that tactics are simply ways of generating code. They can appear in definitions or proofs. It's just that they are most useful in proofs.
+<blockquote>
+<p>Will need to read up on exactI in type definitions.</p>
+</blockquote>
+<p>Note that tactics are simply ways of generating code. They can appear in definitions or proofs. It's just that they are most useful in proofs.</p>
 
 
 {% endraw %}

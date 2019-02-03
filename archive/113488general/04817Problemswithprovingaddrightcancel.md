@@ -12,30 +12,27 @@ permalink: archive/113488general/04817Problemswithprovingaddrightcancel.html
 
 {% raw %}
 #### [ Lyle Kopnicky (Nov 28 2018 at 21:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Problems%20with%20proving%20add_right_cancel/near/148741055):
-Hi folks, I'm a beginner at lean and I was trying my hand at proving one of the arithmetic identities, `add_right_cancel`. Here's my attempt (please note this is done within a hidden namespace so it does not conflict with the usual definition):
+<p>Hi folks, I'm a beginner at lean and I was trying my hand at proving one of the arithmetic identities, <code>add_right_cancel</code>. Here's my attempt (please note this is done within a hidden namespace so it does not conflict with the usual definition):</p>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">add_right_cancel</span> <span class="o">(</span><span class="n">n</span> <span class="n">m</span> <span class="n">k</span> <span class="o">:</span> <span class="n">nat</span><span class="o">)</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">+</span> <span class="n">k</span> <span class="bp">=</span> <span class="n">m</span> <span class="bp">+</span> <span class="n">k</span> <span class="bp">→</span> <span class="n">n</span> <span class="bp">=</span> <span class="n">m</span> <span class="o">:=</span>
+<span class="n">nat</span><span class="bp">.</span><span class="n">rec_on</span> <span class="n">k</span>
+    <span class="o">(</span><span class="k">assume</span> <span class="n">h</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">+</span> <span class="mi">0</span> <span class="bp">=</span> <span class="n">m</span> <span class="bp">+</span> <span class="mi">0</span><span class="o">,</span>
+        <span class="k">show</span> <span class="n">n</span> <span class="bp">=</span> <span class="n">m</span><span class="o">,</span> <span class="k">from</span> <span class="k">calc</span>
+            <span class="n">n</span> <span class="bp">=</span> <span class="n">n</span> <span class="bp">+</span> <span class="mi">0</span> <span class="o">:</span> <span class="k">by</span> <span class="n">rw</span> <span class="n">add_zero</span>
+          <span class="bp">...</span> <span class="bp">=</span> <span class="n">m</span> <span class="bp">+</span> <span class="mi">0</span> <span class="o">:</span> <span class="k">by</span> <span class="n">rw</span> <span class="n">h</span>
+          <span class="bp">...</span> <span class="bp">=</span> <span class="n">m</span>     <span class="o">:</span> <span class="k">by</span> <span class="n">rw</span> <span class="n">add_zero</span><span class="o">)</span>
+    <span class="o">(</span><span class="k">assume</span> <span class="n">k</span><span class="o">,</span>
+        <span class="k">assume</span> <span class="n">ih</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">+</span> <span class="n">k</span> <span class="bp">=</span> <span class="n">m</span> <span class="bp">+</span> <span class="n">k</span> <span class="bp">→</span> <span class="n">n</span> <span class="bp">=</span> <span class="n">m</span><span class="o">,</span>
+        <span class="k">assume</span> <span class="n">h</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">+</span> <span class="n">succ</span> <span class="n">k</span> <span class="bp">=</span> <span class="n">m</span> <span class="bp">+</span> <span class="n">succ</span> <span class="n">k</span><span class="o">,</span>
+        <span class="k">have</span> <span class="n">s1</span> <span class="o">:</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="n">succ</span> <span class="n">k</span> <span class="bp">=</span> <span class="n">m</span> <span class="bp">+</span> <span class="n">succ</span> <span class="n">k</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="n">k</span> <span class="bp">=</span> <span class="n">m</span> <span class="bp">+</span> <span class="n">k</span><span class="o">),</span> <span class="k">from</span> <span class="k">calc</span>
+            <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="n">succ</span> <span class="n">k</span> <span class="bp">=</span> <span class="n">m</span> <span class="bp">+</span> <span class="n">succ</span> <span class="n">k</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="n">succ</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="n">k</span><span class="o">)</span> <span class="bp">=</span> <span class="n">succ</span> <span class="o">(</span><span class="n">m</span> <span class="bp">+</span> <span class="n">k</span><span class="o">))</span> <span class="o">:</span> <span class="k">by</span> <span class="n">rw</span> <span class="o">[</span><span class="n">add_succ</span><span class="o">,</span> <span class="n">add_succ</span><span class="o">]</span>
+                                  <span class="bp">...</span> <span class="bp">=</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="n">k</span> <span class="bp">=</span> <span class="n">m</span> <span class="bp">+</span> <span class="n">k</span><span class="o">)</span> <span class="o">:</span> <span class="k">by</span> <span class="n">simp</span><span class="o">,</span>
+        <span class="k">show</span> <span class="n">n</span> <span class="bp">=</span> <span class="n">m</span><span class="o">,</span> <span class="k">from</span> <span class="n">ih</span> <span class="o">(</span><span class="n">s1</span> <span class="bp">▸</span> <span class="n">h</span><span class="o">))</span>
+</pre></div>
 
-```lean
-theorem add_right_cancel (n m k : nat) : n + k = m + k → n = m :=
-nat.rec_on k
-    (assume h : n + 0 = m + 0,
-        show n = m, from calc
-            n = n + 0 : by rw add_zero
-          ... = m + 0 : by rw h
-          ... = m     : by rw add_zero)
-    (assume k,
-        assume ih : n + k = m + k → n = m,
-        assume h : n + succ k = m + succ k,
-        have s1 : (n + succ k = m + succ k) = (n + k = m + k), from calc
-            (n + succ k = m + succ k) = (succ (n + k) = succ (m + k)) : by rw [add_succ, add_succ]
-                                  ... = (n + k = m + k) : by simp,
-        show n = m, from ih (s1 ▸ h))
-```
 
-There are a few problems here. One is that it doesn't type check. I get the following error:
-
-```
-[Lean]
-"eliminator" elaborator type mismatch, term
+<p>There are a few problems here. One is that it doesn't type check. I get the following error:</p>
+<div class="codehilite"><pre><span></span>[Lean]
+&quot;eliminator&quot; elaborator type mismatch, term
   λ (h : n + 0 = m + 0),
     show n = m, from
       eq.trans
@@ -50,291 +47,277 @@ Additional information:
 /Users/lyle/Sync/devel/lean/logic_and_proof/ch18-exercises.lean:95:0: context: the inferred motive for the eliminator-like application is
   λ (_x : ℕ), (?m_3 * ?m_4 = ?m_5 * ?m_4 → ?m_3 = ?m_5) → n + _x = m + _x → n = m
 nat.rec_on : ∀ {C : ℕ → Prop} (n : ℕ), C 0 → (∀ (n : ℕ), C n → C (succ n)) → C n
-```
+</pre></div>
 
-Clearly this relates to the base case of the induction. I'm not sure what it's missing, though. 
 
-As for the inductive step, it seemed a bit awkward that I had to have nested equalities in the calc mode, but perhaps that's normal? I suppose I can prove a hypothesis and then apply an equivalence using `▸`, e.g. `from add_succ ▸ h1`?
-
-Then, I didn't like the fact that I had to use the `simp` strategy. Perhaps that's fine normally but for this exercise I wanted to be more explicit. It seems that `succ.inj` ought to apply, but I can't figure out how to apply it. I can't use that as a rewrite rule because it's an implication, not an equivalence.
-
-Finally, it bugged me that I had to have that last line to make the `s1` substitution within `h`. Because in the calc mode I've only proven `(n + succ k = m + succ k) = (n + k = m + k)`, so I have to take an extra step outside of calc mode to get `n = m`. I feel that perhaps I'm going about this the wrong way.
-
-Any tips? Thanks.
+<p>Clearly this relates to the base case of the induction. I'm not sure what it's missing, though. </p>
+<p>As for the inductive step, it seemed a bit awkward that I had to have nested equalities in the calc mode, but perhaps that's normal? I suppose I can prove a hypothesis and then apply an equivalence using <code>▸</code>, e.g. <code>from add_succ ▸ h1</code>?</p>
+<p>Then, I didn't like the fact that I had to use the <code>simp</code> strategy. Perhaps that's fine normally but for this exercise I wanted to be more explicit. It seems that <code>succ.inj</code> ought to apply, but I can't figure out how to apply it. I can't use that as a rewrite rule because it's an implication, not an equivalence.</p>
+<p>Finally, it bugged me that I had to have that last line to make the <code>s1</code> substitution within <code>h</code>. Because in the calc mode I've only proven <code>(n + succ k = m + succ k) = (n + k = m + k)</code>, so I have to take an extra step outside of calc mode to get <code>n = m</code>. I feel that perhaps I'm going about this the wrong way.</p>
+<p>Any tips? Thanks.</p>
 
 #### [ Kenny Lau (Nov 28 2018 at 21:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Problems%20with%20proving%20add_right_cancel/near/148741455):
-It typechecks for me
+<p>It typechecks for me</p>
 
 #### [ Mario Carneiro (Nov 28 2018 at 21:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Problems%20with%20proving%20add_right_cancel/near/148741515):
-Do you maybe have a `mul_right_cancel` on the line following this theorem?
+<p>Do you maybe have a <code>mul_right_cancel</code> on the line following this theorem?</p>
 
 #### [ Kenny Lau (Nov 28 2018 at 21:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Problems%20with%20proving%20add_right_cancel/near/148741587):
-I don't like how you use `calc` for equality of propositions
+<p>I don't like how you use <code>calc</code> for equality of propositions</p>
 
 #### [ Kenny Lau (Nov 28 2018 at 21:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Problems%20with%20proving%20add_right_cancel/near/148741644):
-```lean
-theorem add_right_cancel (n m k : nat) : n + k = m + k → n = m :=
-nat.rec_on k id $ λ k ih h, ih $ succ_inj h
-```
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">add_right_cancel</span> <span class="o">(</span><span class="n">n</span> <span class="n">m</span> <span class="n">k</span> <span class="o">:</span> <span class="n">nat</span><span class="o">)</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">+</span> <span class="n">k</span> <span class="bp">=</span> <span class="n">m</span> <span class="bp">+</span> <span class="n">k</span> <span class="bp">→</span> <span class="n">n</span> <span class="bp">=</span> <span class="n">m</span> <span class="o">:=</span>
+<span class="n">nat</span><span class="bp">.</span><span class="n">rec_on</span> <span class="n">k</span> <span class="n">id</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">k</span> <span class="n">ih</span> <span class="n">h</span><span class="o">,</span> <span class="n">ih</span> <span class="err">$</span> <span class="n">succ_inj</span> <span class="n">h</span>
+</pre></div>
 
 #### [ Reid Barton (Nov 28 2018 at 21:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Problems%20with%20proving%20add_right_cancel/near/148741673):
-You can probably replace all the equalities between equations with `\iff`s
+<p>You can probably replace all the equalities between equations with <code>\iff</code>s</p>
 
 #### [ Reid Barton (Nov 28 2018 at 21:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Problems%20with%20proving%20add_right_cancel/near/148741739):
-and the weird triangle with `s1.mp h`
+<p>and the weird triangle with <code>s1.mp h</code></p>
 
 #### [ Kevin Buzzard (Nov 28 2018 at 21:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Problems%20with%20proving%20add_right_cancel/near/148742052):
-```quote
-Do you maybe have a `mul_right_cancel` on the line following this theorem?
-```
- Top Lean tip : stick `#exit` directly after the code you're writing, and make sure there are no red errors earlier in the file -- any random stuff before or after your code can interfere with your code.
+<blockquote>
+<p>Do you maybe have a <code>mul_right_cancel</code> on the line following this theorem?</p>
+</blockquote>
+<p>Top Lean tip : stick <code>#exit</code> directly after the code you're writing, and make sure there are no red errors earlier in the file -- any random stuff before or after your code can interfere with your code.</p>
 
 #### [ Lyle Kopnicky (Nov 28 2018 at 22:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Problems%20with%20proving%20add_right_cancel/near/148744233):
-@**Kenny Lau** , @**Mario Carneiro**: Ah yes, you're right it does type check. When I copy-pasted it, I noticed it had an extra `mul_right_cancel` at the end and thought I had just made a mistake in copying it. But the mistake was there in the source file, and when I got rid of that, it type checked.
-
-And I don't like how I use `calc` for equality of propositions, either. Wondering how I can reformulate that.
-
-@**Reid Barton** : I will try using `\iff`s, thanks. Weird triangle? It's `\t` and is used for substituting via equivalences. I learned that from *Logic & Proof*. E.g. if you have `h1 : s = t` and `h2: s * x  = 4` you can derive `have t * x = 4, from h1 ▸ h2`. Haven't heard of `.mp`, I'll try that, thanks.
+<p><span class="user-mention" data-user-id="110064">@Kenny Lau</span> , <span class="user-mention" data-user-id="110049">@Mario Carneiro</span>: Ah yes, you're right it does type check. When I copy-pasted it, I noticed it had an extra <code>mul_right_cancel</code> at the end and thought I had just made a mistake in copying it. But the mistake was there in the source file, and when I got rid of that, it type checked.</p>
+<p>And I don't like how I use <code>calc</code> for equality of propositions, either. Wondering how I can reformulate that.</p>
+<p><span class="user-mention" data-user-id="110032">@Reid Barton</span> : I will try using <code>\iff</code>s, thanks. Weird triangle? It's <code>\t</code> and is used for substituting via equivalences. I learned that from <em>Logic &amp; Proof</em>. E.g. if you have <code>h1 : s = t</code> and <code>h2: s * x  = 4</code> you can derive <code>have t * x = 4, from h1 ▸ h2</code>. Haven't heard of <code>.mp</code>, I'll try that, thanks.</p>
 
 #### [ Kenny Lau (Nov 28 2018 at 22:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Problems%20with%20proving%20add_right_cancel/near/148744246):
-@**Lyle Kopnicky** did you see my one-liner?
+<p><span class="user-mention" data-user-id="113073">@Lyle Kopnicky</span> did you see my one-liner?</p>
 
 #### [ Lyle Kopnicky (Nov 28 2018 at 22:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Problems%20with%20proving%20add_right_cancel/near/148744336):
-@**Kenny Lau** Ah I missed that, it was so short. Thanks. I'll try that out. I may want to expand a bit because for pedagogical reasons I want to be able to see the steps.
+<p><span class="user-mention" data-user-id="110064">@Kenny Lau</span> Ah I missed that, it was so short. Thanks. I'll try that out. I may want to expand a bit because for pedagogical reasons I want to be able to see the steps.</p>
 
 #### [ Kevin Buzzard (Nov 28 2018 at 22:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Problems%20with%20proving%20add_right_cancel/near/148744872):
-I think tactic mode is much better for seeing the steps. Here's my effort:
+<p>I think tactic mode is much better for seeing the steps. Here's my effort:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">interactive</span> <span class="c1">-- to get simpa</span>
 
-```lean
-import tactic.interactive -- to get simpa
+<span class="kn">namespace</span> <span class="n">random</span>
 
-namespace random
+<span class="kn">open</span> <span class="n">nat</span>
 
-open nat
+<span class="kn">theorem</span> <span class="n">add_right_cancel</span> <span class="o">(</span><span class="n">n</span> <span class="n">m</span> <span class="n">k</span> <span class="o">:</span> <span class="n">nat</span><span class="o">)</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">+</span> <span class="n">k</span> <span class="bp">=</span> <span class="n">m</span> <span class="bp">+</span> <span class="n">k</span> <span class="bp">→</span> <span class="n">n</span> <span class="bp">=</span> <span class="n">m</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">induction</span> <span class="n">k</span> <span class="k">with</span> <span class="n">k</span> <span class="n">ih</span><span class="o">,</span>
+  <span class="o">{</span> <span class="c1">-- base case</span>
+    <span class="n">exact</span> <span class="n">id</span><span class="o">,</span> <span class="c1">-- n = n + 0 is true by definition</span>
+  <span class="o">},</span>
+  <span class="o">{</span> <span class="c1">-- inductive step</span>
+    <span class="k">show</span> <span class="n">succ</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="n">k</span><span class="o">)</span> <span class="bp">=</span> <span class="n">succ</span> <span class="o">(</span><span class="n">m</span> <span class="bp">+</span> <span class="n">k</span><span class="o">)</span> <span class="bp">→</span> <span class="bp">_</span><span class="o">,</span> <span class="c1">-- again true by definition</span>
+    <span class="n">intro</span> <span class="n">H</span><span class="o">,</span>
+    <span class="n">apply</span> <span class="n">ih</span><span class="o">,</span>
+    <span class="n">simpa</span> <span class="kn">using</span> <span class="n">H</span>
+  <span class="o">}</span>
+<span class="kn">end</span>
 
-theorem add_right_cancel (n m k : nat) : n + k = m + k → n = m :=
-begin
-  induction k with k ih,
-  { -- base case
-    exact id, -- n = n + 0 is true by definition
-  },
-  { -- inductive step
-    show succ (n + k) = succ (m + k) → _, -- again true by definition
-    intro H,
-    apply ih,
-    simpa using H
-  }
-end
-
-end random
-```
+<span class="kn">end</span> <span class="n">random</span>
+</pre></div>
 
 #### [ Kenny Lau (Nov 28 2018 at 22:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Problems%20with%20proving%20add_right_cancel/near/148744972):
-```lean
-namespace random
+<div class="codehilite"><pre><span></span><span class="kn">namespace</span> <span class="n">random</span>
 
-open nat
+<span class="kn">open</span> <span class="n">nat</span>
 
-meta def add_right_cancel (n m k : nat) : n + k = m + k → n = m :=
-add_right_cancel
+<span class="n">meta</span> <span class="n">def</span> <span class="n">add_right_cancel</span> <span class="o">(</span><span class="n">n</span> <span class="n">m</span> <span class="n">k</span> <span class="o">:</span> <span class="n">nat</span><span class="o">)</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">+</span> <span class="n">k</span> <span class="bp">=</span> <span class="n">m</span> <span class="bp">+</span> <span class="n">k</span> <span class="bp">→</span> <span class="n">n</span> <span class="bp">=</span> <span class="n">m</span> <span class="o">:=</span>
+<span class="n">add_right_cancel</span>
 
-end random
-```
-lol
+<span class="kn">end</span> <span class="n">random</span>
+</pre></div>
+
+
+<p>lol</p>
 
 #### [ Lyle Kopnicky (Nov 28 2018 at 22:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Problems%20with%20proving%20add_right_cancel/near/148746236):
-Thanks, folks. I guess there are some steps in there that seem a little too magic to me.
-
-E.g., `succ_inj` is being applied to `n + succ k = m + succ k` but it's supposed to be applied to something of the form `succ a = succ b`. So how does it get from `n + succ k = m + succ k` to `succ (n + k) = succ (m + k)`? This is where I was trying to apply `succ_add` twice to make that transformation. But I guess since that's part of the definition of `succ`, it's considered definitionally equivalent and doesn't need a proof step. For a beginner it's a little hard to follow when multiple steps are happening at the same time.
-
-Similarly with the leap from `n + 0 = m + 0` to `n + m`. I guess there's no proof step because it's just a definitional equivalence.
-
-What about when you really *do* need to make substitutions (`eq.subst`) on both sides of the equation?
+<p>Thanks, folks. I guess there are some steps in there that seem a little too magic to me.</p>
+<p>E.g., <code>succ_inj</code> is being applied to <code>n + succ k = m + succ k</code> but it's supposed to be applied to something of the form <code>succ a = succ b</code>. So how does it get from <code>n + succ k = m + succ k</code> to <code>succ (n + k) = succ (m + k)</code>? This is where I was trying to apply <code>succ_add</code> twice to make that transformation. But I guess since that's part of the definition of <code>succ</code>, it's considered definitionally equivalent and doesn't need a proof step. For a beginner it's a little hard to follow when multiple steps are happening at the same time.</p>
+<p>Similarly with the leap from <code>n + 0 = m + 0</code> to <code>n + m</code>. I guess there's no proof step because it's just a definitional equivalence.</p>
+<p>What about when you really <em>do</em> need to make substitutions (<code>eq.subst</code>) on both sides of the equation?</p>
 
 #### [ Kenny Lau (Nov 28 2018 at 22:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Problems%20with%20proving%20add_right_cancel/near/148746273):
-it's not definiton of `succ`, it's definition of `+`
+<p>it's not definiton of <code>succ</code>, it's definition of <code>+</code></p>
 
 #### [ Lyle Kopnicky (Nov 28 2018 at 22:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Problems%20with%20proving%20add_right_cancel/near/148746289):
-Ah, right.
+<p>Ah, right.</p>
 
 #### [ Kenny Lau (Nov 28 2018 at 22:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Problems%20with%20proving%20add_right_cancel/near/148746387):
-what's your background?
+<p>what's your background?</p>
 
 #### [ Kenny Lau (Nov 28 2018 at 22:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Problems%20with%20proving%20add_right_cancel/near/148746555):
-```lean
-namespace random
+<div class="codehilite"><pre><span></span><span class="kn">namespace</span> <span class="n">random</span>
 
-open nat
+<span class="kn">open</span> <span class="n">nat</span>
 
-theorem add_right_cancel (n m k : nat) : n + k = m + k → n = m :=
-nat.rec_on k
-  (assume h : n + 0 = m + 0, calc
-      n = n + 0 : by rw add_zero
-    ... = m + 0 : h
-    ... = m     : by rw add_zero)
-  (assume k : ℕ,
-    assume ih : n + k = m + k → n = m,
-    assume h : n + succ k = m + succ k,
-    have succ (n + k) = succ (m + k), from calc
-          succ (n + k)
-        = n + succ k   : by rw add_succ
-    ... = m + succ k   : h
-    ... = succ (m + k) : by rw add_succ,
-    show n = m, from ih (succ_inj this))
+<span class="kn">theorem</span> <span class="n">add_right_cancel</span> <span class="o">(</span><span class="n">n</span> <span class="n">m</span> <span class="n">k</span> <span class="o">:</span> <span class="n">nat</span><span class="o">)</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">+</span> <span class="n">k</span> <span class="bp">=</span> <span class="n">m</span> <span class="bp">+</span> <span class="n">k</span> <span class="bp">→</span> <span class="n">n</span> <span class="bp">=</span> <span class="n">m</span> <span class="o">:=</span>
+<span class="n">nat</span><span class="bp">.</span><span class="n">rec_on</span> <span class="n">k</span>
+  <span class="o">(</span><span class="k">assume</span> <span class="n">h</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">+</span> <span class="mi">0</span> <span class="bp">=</span> <span class="n">m</span> <span class="bp">+</span> <span class="mi">0</span><span class="o">,</span> <span class="k">calc</span>
+      <span class="n">n</span> <span class="bp">=</span> <span class="n">n</span> <span class="bp">+</span> <span class="mi">0</span> <span class="o">:</span> <span class="k">by</span> <span class="n">rw</span> <span class="n">add_zero</span>
+    <span class="bp">...</span> <span class="bp">=</span> <span class="n">m</span> <span class="bp">+</span> <span class="mi">0</span> <span class="o">:</span> <span class="n">h</span>
+    <span class="bp">...</span> <span class="bp">=</span> <span class="n">m</span>     <span class="o">:</span> <span class="k">by</span> <span class="n">rw</span> <span class="n">add_zero</span><span class="o">)</span>
+  <span class="o">(</span><span class="k">assume</span> <span class="n">k</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span>
+    <span class="k">assume</span> <span class="n">ih</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">+</span> <span class="n">k</span> <span class="bp">=</span> <span class="n">m</span> <span class="bp">+</span> <span class="n">k</span> <span class="bp">→</span> <span class="n">n</span> <span class="bp">=</span> <span class="n">m</span><span class="o">,</span>
+    <span class="k">assume</span> <span class="n">h</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">+</span> <span class="n">succ</span> <span class="n">k</span> <span class="bp">=</span> <span class="n">m</span> <span class="bp">+</span> <span class="n">succ</span> <span class="n">k</span><span class="o">,</span>
+    <span class="k">have</span> <span class="n">succ</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="n">k</span><span class="o">)</span> <span class="bp">=</span> <span class="n">succ</span> <span class="o">(</span><span class="n">m</span> <span class="bp">+</span> <span class="n">k</span><span class="o">),</span> <span class="k">from</span> <span class="k">calc</span>
+          <span class="n">succ</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="n">k</span><span class="o">)</span>
+        <span class="bp">=</span> <span class="n">n</span> <span class="bp">+</span> <span class="n">succ</span> <span class="n">k</span>   <span class="o">:</span> <span class="k">by</span> <span class="n">rw</span> <span class="n">add_succ</span>
+    <span class="bp">...</span> <span class="bp">=</span> <span class="n">m</span> <span class="bp">+</span> <span class="n">succ</span> <span class="n">k</span>   <span class="o">:</span> <span class="n">h</span>
+    <span class="bp">...</span> <span class="bp">=</span> <span class="n">succ</span> <span class="o">(</span><span class="n">m</span> <span class="bp">+</span> <span class="n">k</span><span class="o">)</span> <span class="o">:</span> <span class="k">by</span> <span class="n">rw</span> <span class="n">add_succ</span><span class="o">,</span>
+    <span class="k">show</span> <span class="n">n</span> <span class="bp">=</span> <span class="n">m</span><span class="o">,</span> <span class="k">from</span> <span class="n">ih</span> <span class="o">(</span><span class="n">succ_inj</span> <span class="n">this</span><span class="o">))</span>
 
-end random
-```
+<span class="kn">end</span> <span class="n">random</span>
+</pre></div>
 
 #### [ Patrick Massot (Nov 28 2018 at 22:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Problems%20with%20proving%20add_right_cancel/near/148746594):
-Kevin, using `simpa` in this situation is cheating, it probably uses `simp` lemmas of the same level as what we try to prove by hand
+<p>Kevin, using <code>simpa</code> in this situation is cheating, it probably uses <code>simp</code> lemmas of the same level as what we try to prove by hand</p>
 
 #### [ Lyle Kopnicky (Nov 28 2018 at 22:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Problems%20with%20proving%20add_right_cancel/near/148746600):
-BS and MS in computer science, have done a lot of Haskell programming, have done quite a few proofs by hand but have been working through *Logic & Proof* and learning how to do proofs with a proof assistant.
+<p>BS and MS in computer science, have done a lot of Haskell programming, have done quite a few proofs by hand but have been working through <em>Logic &amp; Proof</em> and learning how to do proofs with a proof assistant.</p>
 
 #### [ Patrick Massot (Nov 28 2018 at 22:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Problems%20with%20proving%20add_right_cancel/near/148746758):
-Lyle, if you want to see more explicitly where definitional equality is used, you can try to follow that version:
-```lean
-theorem add_right_cancel (n m k : nat) : n + k = m + k → n = m :=
-begin
-  induction k with k ih ; intro h,
-  { -- base case
-    exact h -- n = n + 0 is true by definition
-  },
-  { -- inductive step
-    change succ (n + k) = succ (m + k) at h, -- again true by definition
-    apply ih,
-    exact succ_inj h
-  }
-end
-```
+<p>Lyle, if you want to see more explicitly where definitional equality is used, you can try to follow that version:</p>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">add_right_cancel</span> <span class="o">(</span><span class="n">n</span> <span class="n">m</span> <span class="n">k</span> <span class="o">:</span> <span class="n">nat</span><span class="o">)</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">+</span> <span class="n">k</span> <span class="bp">=</span> <span class="n">m</span> <span class="bp">+</span> <span class="n">k</span> <span class="bp">→</span> <span class="n">n</span> <span class="bp">=</span> <span class="n">m</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">induction</span> <span class="n">k</span> <span class="k">with</span> <span class="n">k</span> <span class="n">ih</span> <span class="bp">;</span> <span class="n">intro</span> <span class="n">h</span><span class="o">,</span>
+  <span class="o">{</span> <span class="c1">-- base case</span>
+    <span class="n">exact</span> <span class="n">h</span> <span class="c1">-- n = n + 0 is true by definition</span>
+  <span class="o">},</span>
+  <span class="o">{</span> <span class="c1">-- inductive step</span>
+    <span class="n">change</span> <span class="n">succ</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="n">k</span><span class="o">)</span> <span class="bp">=</span> <span class="n">succ</span> <span class="o">(</span><span class="n">m</span> <span class="bp">+</span> <span class="n">k</span><span class="o">)</span> <span class="n">at</span> <span class="n">h</span><span class="o">,</span> <span class="c1">-- again true by definition</span>
+    <span class="n">apply</span> <span class="n">ih</span><span class="o">,</span>
+    <span class="n">exact</span> <span class="n">succ_inj</span> <span class="n">h</span>
+  <span class="o">}</span>
+<span class="kn">end</span>
+</pre></div>
 
 #### [ Patrick Massot (Nov 28 2018 at 22:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Problems%20with%20proving%20add_right_cancel/near/148746839):
-When you call `exact` and see what `h` looks like in the info view, you see what defintional reduction occurred. Same with the `change` tactic
+<p>When you call <code>exact</code> and see what <code>h</code> looks like in the info view, you see what defintional reduction occurred. Same with the <code>change</code> tactic</p>
 
 #### [ Patrick Massot (Nov 28 2018 at 22:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Problems%20with%20proving%20add_right_cancel/near/148746853):
-I also used `;` to do `intro h` in both cases
+<p>I also used <code>;</code> to do <code>intro h</code> in both cases</p>
 
 #### [ Patrick Massot (Nov 28 2018 at 22:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Problems%20with%20proving%20add_right_cancel/near/148746880):
-Definitional equality vs usual equality is clearly the single most confusing point of type theory
+<p>Definitional equality vs usual equality is clearly the single most confusing point of type theory</p>
 
 #### [ Patrick Massot (Nov 28 2018 at 22:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Problems%20with%20proving%20add_right_cancel/near/148746889):
-you'll need time to get used to it
+<p>you'll need time to get used to it</p>
 
 #### [ Lyle Kopnicky (Nov 28 2018 at 22:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Problems%20with%20proving%20add_right_cancel/near/148747036):
-@**Kenny Lau** , I see, nice trick, using `h` in the middle of the `calc`. Thanks.
-
-@**Patrick Massot** : I haven't really gotten into tactic mode yet. Trying to do proofs without tactics at first because that's closer to how they are proven by hand. Once I get comfortable with that I will move on to tactics. I know, I'm using them a bit with `by rw`.
-
-I'll load your example up in the editor though and hover the cursor over things and see what happens. I'm using VS Code. Thanks for the pointers.
+<p><span class="user-mention" data-user-id="110064">@Kenny Lau</span> , I see, nice trick, using <code>h</code> in the middle of the <code>calc</code>. Thanks.</p>
+<p><span class="user-mention" data-user-id="110031">@Patrick Massot</span> : I haven't really gotten into tactic mode yet. Trying to do proofs without tactics at first because that's closer to how they are proven by hand. Once I get comfortable with that I will move on to tactics. I know, I'm using them a bit with <code>by rw</code>.</p>
+<p>I'll load your example up in the editor though and hover the cursor over things and see what happens. I'm using VS Code. Thanks for the pointers.</p>
 
 #### [ Patrick Massot (Nov 28 2018 at 22:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Problems%20with%20proving%20add_right_cancel/near/148747145):
-```quote
- Trying to do proofs without tactics at first because that's closer to how they are proven by hand.
-```
- This may be the weirdest thing I read on this chat. I guess it's the background difference (CS vs pure maths training)
+<blockquote>
+<p>Trying to do proofs without tactics at first because that's closer to how they are proven by hand.</p>
+</blockquote>
+<p>This may be the weirdest thing I read on this chat. I guess it's the background difference (CS vs pure maths training)</p>
 
 #### [ Lyle Kopnicky (Nov 28 2018 at 22:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Problems%20with%20proving%20add_right_cancel/near/148747191):
-Hmm, I can hover over the tactic names and get nice detailed description of what the tactic means. But I don't have an "info view".
+<p>Hmm, I can hover over the tactic names and get nice detailed description of what the tactic means. But I don't have an "info view".</p>
 
 #### [ Patrick Massot (Nov 28 2018 at 22:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Problems%20with%20proving%20add_right_cancel/near/148747204):
-Ctrl-Shift-Enter
+<p>Ctrl-Shift-Enter</p>
 
 #### [ Lyle Kopnicky (Nov 28 2018 at 22:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Problems%20with%20proving%20add_right_cancel/near/148747210):
-One reason I'm studying Lean instead of Coq is because all the training materials for Coq seem to use tactics right away. I can't follow what's going on in the proof.
+<p>One reason I'm studying Lean instead of Coq is because all the training materials for Coq seem to use tactics right away. I can't follow what's going on in the proof.</p>
 
 #### [ Patrick Massot (Nov 28 2018 at 22:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Problems%20with%20proving%20add_right_cancel/near/148747222):
-And suddenly you'll discover why tactic mode is *way easier* than term mode
+<p>And suddenly you'll discover why tactic mode is <em>way easier</em> than term mode</p>
 
 #### [ Patrick Massot (Nov 28 2018 at 22:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Problems%20with%20proving%20add_right_cancel/near/148747246):
-Tactic mode proofs can be hard to read without the view you just unlocked with Ctrl-Shift-Enter
+<p>Tactic mode proofs can be hard to read without the view you just unlocked with Ctrl-Shift-Enter</p>
 
 #### [ Patrick Massot (Nov 28 2018 at 23:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Problems%20with%20proving%20add_right_cancel/near/148747306):
-But with this view they are infinitely easier to read
+<p>But with this view they are infinitely easier to read</p>
 
 #### [ Lyle Kopnicky (Nov 28 2018 at 23:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Problems%20with%20proving%20add_right_cancel/near/148747366):
-Yeah, I want to be able to read them off a piece of paper or a text file, without having to use a special viewer.
+<p>Yeah, I want to be able to read them off a piece of paper or a text file, without having to use a special viewer.</p>
 
 #### [ Lyle Kopnicky (Nov 28 2018 at 23:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Problems%20with%20proving%20add_right_cancel/near/148747379):
-But I'll give it a try
+<p>But I'll give it a try</p>
 
 #### [ Lyle Kopnicky (Nov 28 2018 at 23:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Problems%20with%20proving%20add_right_cancel/near/148747442):
-I'm used to reading proofs out of textbooks.
+<p>I'm used to reading proofs out of textbooks.</p>
 
 #### [ Patrick Massot (Nov 28 2018 at 23:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Problems%20with%20proving%20add_right_cancel/near/148747485):
-It's very difficult to write proofs in Lean that are readable on paper and, unfortunately, this is not at all a goal of mathlib
+<p>It's very difficult to write proofs in Lean that are readable on paper and, unfortunately, this is not at all a goal of mathlib</p>
 
 #### [ Patrick Massot (Nov 28 2018 at 23:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Problems%20with%20proving%20add_right_cancel/near/148747507):
-It's doable, but pretty verbose
+<p>It's doable, but pretty verbose</p>
 
 #### [ Lyle Kopnicky (Nov 28 2018 at 23:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Problems%20with%20proving%20add_right_cancel/near/148747616):
-I have taken a lot of math classes but we always did proofs on paper too.
+<p>I have taken a lot of math classes but we always did proofs on paper too.</p>
 
 #### [ Scott Morrison (Nov 28 2018 at 23:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Problems%20with%20proving%20add_right_cancel/near/148747627):
-> I'm used to reading proofs out of textbooks.
-
-Proofs in textbooks explain the steps (just like a tactic proof). The idea that there is a "proof term" is pretty alien to most mathematicians. :-)
+<blockquote>
+<p>I'm used to reading proofs out of textbooks.</p>
+</blockquote>
+<p>Proofs in textbooks explain the steps (just like a tactic proof). The idea that there is a "proof term" is pretty alien to most mathematicians. :-)</p>
 
 #### [ Scott Morrison (Nov 28 2018 at 23:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Problems%20with%20proving%20add_right_cancel/near/148747691):
-Mathematicians' paper proofs do use `show` a lot ("Next, we need..."), and this makes a big improvement in readability.
+<p>Mathematicians' paper proofs do use <code>show</code> a lot ("Next, we need..."), and this makes a big improvement in readability.</p>
 
 #### [ Lyle Kopnicky (Nov 28 2018 at 23:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Problems%20with%20proving%20add_right_cancel/near/148747735):
-By "proof term" you mean the goal that we are trying to prove? My understanding is that the tactic proofs work backwards from the goal. I'm used to working forwards from the hypotheses.
+<p>By "proof term" you mean the goal that we are trying to prove? My understanding is that the tactic proofs work backwards from the goal. I'm used to working forwards from the hypotheses.</p>
 
 #### [ Patrick Massot (Nov 28 2018 at 23:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Problems%20with%20proving%20add_right_cancel/near/148747738):
-The thing which could be readable would be a sequence of `have` and `suffices` stating all steps that would be mentioned on paper, with automation crushing the proof of each step. But automation is not ready yet
+<p>The thing which could be readable would be a sequence of <code>have</code> and <code>suffices</code> stating all steps that would be mentioned on paper, with automation crushing the proof of each step. But automation is not ready yet</p>
 
 #### [ Patrick Massot (Nov 28 2018 at 23:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Problems%20with%20proving%20add_right_cancel/near/148747755):
-No, you don't have to go backward in tactic mode, both directions are allowed
+<p>No, you don't have to go backward in tactic mode, both directions are allowed</p>
 
 #### [ Lyle Kopnicky (Nov 28 2018 at 23:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Problems%20with%20proving%20add_right_cancel/near/148747794):
-OK, interesting
+<p>OK, interesting</p>
 
 #### [ Patrick Massot (Nov 28 2018 at 23:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Problems%20with%20proving%20add_right_cancel/near/148747816):
-And I think you use backward reasoning on paper more than you are aware
+<p>And I think you use backward reasoning on paper more than you are aware</p>
 
 #### [ Scott Morrison (Nov 28 2018 at 23:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Problems%20with%20proving%20add_right_cancel/near/148747837):
-Working backwards means using the `apply` tactic, but there are other tactics!
+<p>Working backwards means using the <code>apply</code> tactic, but there are other tactics!</p>
 
 #### [ Patrick Massot (Nov 28 2018 at 23:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Problems%20with%20proving%20add_right_cancel/near/148747840):
-Especially when you write "We can now apply the ... theorem because ..." (first naming the theorem and then explaining why assumptions are satisfied)
+<p>Especially when you write "We can now apply the ... theorem because ..." (first naming the theorem and then explaining why assumptions are satisfied)</p>
 
 #### [ Patrick Massot (Nov 28 2018 at 23:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Problems%20with%20proving%20add_right_cancel/near/148747845):
-And indeed this is the `apply` tactic
+<p>And indeed this is the <code>apply</code> tactic</p>
 
 #### [ Lyle Kopnicky (Nov 28 2018 at 23:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Problems%20with%20proving%20add_right_cancel/near/148749147):
-I would think you could still write that in forward mode by writing:
-
-`the_theorem h1 h2 h3 h4`
-
-But maybe I am still too stuck in that mode of thinking.
+<p>I would think you could still write that in forward mode by writing:</p>
+<p><code>the_theorem h1 h2 h3 h4</code></p>
+<p>But maybe I am still too stuck in that mode of thinking.</p>
 
 #### [ Lyle Kopnicky (Nov 28 2018 at 23:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Problems%20with%20proving%20add_right_cancel/near/148749232):
-Anyway, thanks for the help, folks. I run a meetup where we are going through *Logic & Proof*, so we're all on the same page and I can't just say "let's use tactics for all the proofs from now on" when the examples in the book don't use tactic mode. If it were just me I could diverge and study tactics. I will show the example code you folks created in the meeting tonight.
+<p>Anyway, thanks for the help, folks. I run a meetup where we are going through <em>Logic &amp; Proof</em>, so we're all on the same page and I can't just say "let's use tactics for all the proofs from now on" when the examples in the book don't use tactic mode. If it were just me I could diverge and study tactics. I will show the example code you folks created in the meeting tonight.</p>
 
 #### [ Lyle Kopnicky (Nov 28 2018 at 23:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Problems%20with%20proving%20add_right_cancel/near/148749268):
-*Logic & Proof* being what's linked to at the bottom of https://leanprover.github.io/publications/
+<p><em>Logic &amp; Proof</em> being what's linked to at the bottom of <a href="https://leanprover.github.io/publications/" target="_blank" title="https://leanprover.github.io/publications/">https://leanprover.github.io/publications/</a></p>
 
 #### [ Lyle Kopnicky (Nov 28 2018 at 23:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Problems%20with%20proving%20add_right_cancel/near/148749310):
-It's a goal of our study to learn mathematical logic, but also to learn to use a proof assistant. Which makes the book perfect.
+<p>It's a goal of our study to learn mathematical logic, but also to learn to use a proof assistant. Which makes the book perfect.</p>
 
 #### [ Andrew Ashworth (Nov 29 2018 at 04:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Problems%20with%20proving%20add_right_cancel/near/148762910):
-FWIW, I like proof terms for readability too. You do you! That's why we have both options.
+<p>FWIW, I like proof terms for readability too. You do you! That's why we have both options.</p>
 
 #### [ Andrew Ashworth (Nov 29 2018 at 04:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Problems%20with%20proving%20add_right_cancel/near/148762983):
-Although, it is possible to write incomprehensible code in either mode pretty easily
+<p>Although, it is possible to write incomprehensible code in either mode pretty easily</p>
 
 #### [ Andrew Ashworth (Nov 29 2018 at 04:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Problems%20with%20proving%20add_right_cancel/near/148763035):
-The most important thing for comprehension is using lots of show, have, and suffices
+<p>The most important thing for comprehension is using lots of show, have, and suffices</p>
 
 #### [ Andrew Ashworth (Nov 29 2018 at 04:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Problems%20with%20proving%20add_right_cancel/near/148763037):
-As Patrick mentioned
+<p>As Patrick mentioned</p>
 
 #### [ Kevin Buzzard (Nov 29 2018 at 09:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Problems%20with%20proving%20add_right_cancel/near/148772700):
-Proof terms are highly unreadable to me. One can't inspect them without having to do some work. @**Lyle Kopnicky** I just want to check you've understood Patrick's comment. When I am looking through my tactic proof in VS Code after ctrl-shift-enter, my session looks like the attached pic. [vscode.png](/user_uploads/3121/-ce0o2nYwcGCB9e_XvSMqgjI/vscode.png) . Clicking on different lines in the tactic proof shows me the exact state that Lean is in on every line. When I was a beginner I found this *completely indispensable*. One can attempt to mimic this in term mode, to try and understand someone else's term mode proof, but it involves actually deleting terms and replacing them with `_` which is much more of a pain.
+<p>Proof terms are highly unreadable to me. One can't inspect them without having to do some work. <span class="user-mention" data-user-id="113073">@Lyle Kopnicky</span> I just want to check you've understood Patrick's comment. When I am looking through my tactic proof in VS Code after ctrl-shift-enter, my session looks like the attached pic. <a href="/user_uploads/3121/-ce0o2nYwcGCB9e_XvSMqgjI/vscode.png" target="_blank" title="vscode.png">vscode.png</a> . Clicking on different lines in the tactic proof shows me the exact state that Lean is in on every line. When I was a beginner I found this <em>completely indispensable</em>. One can attempt to mimic this in term mode, to try and understand someone else's term mode proof, but it involves actually deleting terms and replacing them with <code>_</code> which is much more of a pain.</p>
+<div class="message_inline_image"><a href="/user_uploads/3121/-ce0o2nYwcGCB9e_XvSMqgjI/vscode.png" target="_blank" title="vscode.png"><img src="/user_uploads/3121/-ce0o2nYwcGCB9e_XvSMqgjI/vscode.png"></a></div>
 
 #### [ Johan Commelin (Nov 29 2018 at 09:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Problems%20with%20proving%20add_right_cancel/near/148773031):
-Exactly!
-I've somewhat gotten the hang of writing term mode proofs by keeping a sufficient number of `_` to the right of my cursor. But inspecting a term-mode proof is a nightmare.
+<p>Exactly!<br>
+I've somewhat gotten the hang of writing term mode proofs by keeping a sufficient number of <code>_</code> to the right of my cursor. But inspecting a term-mode proof is a nightmare.</p>
 
 
 {% endraw %}

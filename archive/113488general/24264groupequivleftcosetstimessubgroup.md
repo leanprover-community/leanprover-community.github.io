@@ -12,8 +12,7 @@ permalink: archive/113488general/24264groupequivleftcosetstimessubgroup.html
 
 {% raw %}
 #### [ Kenny Lau (Apr 16 2018 at 10:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/group_equiv_left_cosets_times_subgroup/near/125140026):
-```
-import data.equiv group_theory.coset
+<div class="codehilite"><pre><span></span>import data.equiv group_theory.coset
 
 universe u
 
@@ -44,66 +43,66 @@ instance left_rel : setoid G :=
  λ x y hxy, have _ := is_subgroup.inv_mem hxy, by simpa using this,
  λ x y z hxy hyz, have _ := is_submonoid.mul_mem hxy hyz, by simpa [mul_assoc] using this⟩
 
-def left_cosets' : Type u := quotient (left_rel S)
+def left_cosets&#39; : Type u := quotient (left_rel S)
 
 namespace is_subgroup
 
-theorem fibre_equiv (L : left_cosets' S) : nonempty (quotient.fibre L ≃ S) :=
+theorem fibre_equiv (L : left_cosets&#39; S) : nonempty (quotient.fibre L ≃ S) :=
 ⟨⟨λ x, ⟨(quotient.out L)⁻¹ * x.1, quotient.exact ((quotient.out_eq L).trans x.2.symm)⟩,
   λ x, ⟨quotient.out L * x.1, eq.trans (eq.symm $ quotient.sound $ by simpa [(≈), setoid.r] using x.2) (quotient.out_eq L)⟩,
   λ ⟨x, hx⟩, subtype.eq $ by simp,
   λ ⟨x, hx⟩, subtype.eq $ by simp⟩⟩
 
-theorem group_equiv_left_cosets_times_subgroup' : nonempty (G ≃ (left_cosets' S × S)) :=
+theorem group_equiv_left_cosets_times_subgroup&#39; : nonempty (G ≃ (left_cosets&#39; S × S)) :=
 ⟨calc G
-    ≃ Σ L : left_cosets' S, quotient.fibre L :
+    ≃ Σ L : left_cosets&#39; S, quotient.fibre L :
   equiv.equiv_fibre
-... ≃ Σ L : left_cosets' S, S :
+... ≃ Σ L : left_cosets&#39; S, S :
   equiv.sigma_congr_right (λ L, classical.choice $ fibre_equiv _ _)
-... ≃ (left_cosets' S × S) :
+... ≃ (left_cosets&#39; S × S) :
   equiv.sigma_equiv_prod _ _ ⟩
 
 end is_subgroup
+</pre></div>
 
 #### [ Kenny Lau (Apr 16 2018 at 10:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/group_equiv_left_cosets_times_subgroup/near/125140057):
-@**Mario Carneiro** @**Johannes Hölzl** do you think this is better than the one in mathlib?
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> <span class="user-mention" data-user-id="110294">@Johannes Hölzl</span> do you think this is better than the one in mathlib?</p>
 
 #### [ Kenny Lau (Apr 16 2018 at 10:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/group_equiv_left_cosets_times_subgroup/near/125140116):
-https://github.com/leanprover/mathlib/blob/master/group_theory/coset.lean
+<p><a href="https://github.com/leanprover/mathlib/blob/master/group_theory/coset.lean" target="_blank" title="https://github.com/leanprover/mathlib/blob/master/group_theory/coset.lean">https://github.com/leanprover/mathlib/blob/master/group_theory/coset.lean</a></p>
 
 #### [ Mario Carneiro (Apr 16 2018 at 10:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/group_equiv_left_cosets_times_subgroup/near/125140219):
-I suggest skipping the `nonempty` here, there's not much point to it
+<p>I suggest skipping the <code>nonempty</code> here, there's not much point to it</p>
 
 #### [ Kenny Lau (Apr 16 2018 at 10:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/group_equiv_left_cosets_times_subgroup/near/125140222):
-it is uncomputable
+<p>it is uncomputable</p>
 
 #### [ Mario Carneiro (Apr 16 2018 at 10:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/group_equiv_left_cosets_times_subgroup/near/125140223):
-ok
+<p>ok</p>
 
 #### [ Kenny Lau (Apr 16 2018 at 10:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/group_equiv_left_cosets_times_subgroup/near/125140224):
-but I'm making verseion 2 where that is computable
+<p>but I'm making verseion 2 where that is computable</p>
 
 #### [ Mario Carneiro (Apr 16 2018 at 10:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/group_equiv_left_cosets_times_subgroup/near/125140231):
-just use `noncomputable def` instead
+<p>just use <code>noncomputable def</code> instead</p>
 
 #### [ Kenny Lau (Apr 16 2018 at 10:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/group_equiv_left_cosets_times_subgroup/near/125140234):
-oh?
+<p>oh?</p>
 
 #### [ Kenny Lau (Apr 16 2018 at 10:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/group_equiv_left_cosets_times_subgroup/near/125140235):
-@**Johannes Hölzl** what do you think
+<p><span class="user-mention" data-user-id="110294">@Johannes Hölzl</span> what do you think</p>
 
 #### [ Mario Carneiro (Apr 16 2018 at 10:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/group_equiv_left_cosets_times_subgroup/near/125140237):
-it's definitely a classical theorem, but wrapping in `nonempty` just means using `choice` later
+<p>it's definitely a classical theorem, but wrapping in <code>nonempty</code> just means using <code>choice</code> later</p>
 
 #### [ Johannes Hölzl (Apr 16 2018 at 10:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/group_equiv_left_cosets_times_subgroup/near/125140276):
-I agree with Mario, using nonempty was a bad idea on my side.
+<p>I agree with Mario, using nonempty was a bad idea on my side.</p>
 
 #### [ Kenny Lau (Apr 16 2018 at 10:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/group_equiv_left_cosets_times_subgroup/near/125140277):
-ok
+<p>ok</p>
 
 #### [ Kenny Lau (Apr 16 2018 at 10:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/group_equiv_left_cosets_times_subgroup/near/125140433):
-```
-import data.equiv group_theory.coset
+<div class="codehilite"><pre><span></span>import data.equiv group_theory.coset
 
 universe u
 
@@ -134,7 +133,7 @@ instance left_rel : setoid G :=
  λ x y hxy, have _ := is_subgroup.inv_mem hxy, by simpa using this,
  λ x y z hxy hyz, have _ := is_submonoid.mul_mem hxy hyz, by simpa [mul_assoc] using this⟩
 
-def left_cosets' : Type u := quotient (left_rel S)
+def left_cosets&#39; : Type u := quotient (left_rel S)
 
 namespace is_subgroup
 
@@ -144,251 +143,248 @@ def fibre_equiv (g : G) : quotient.fibre ⟦g⟧ ≃ S :=
  λ ⟨x, hx⟩, subtype.eq $ by simp,
  λ ⟨g, hg⟩, subtype.eq $ by simp⟩
 
-noncomputable def group_equiv_left_cosets_times_subgroup' :
-  G ≃ (left_cosets' S × S) :=
-calc G ≃ Σ L : left_cosets' S, quotient.fibre L :
+noncomputable def group_equiv_left_cosets_times_subgroup&#39; :
+  G ≃ (left_cosets&#39; S × S) :=
+calc G ≃ Σ L : left_cosets&#39; S, quotient.fibre L :
   equiv.equiv_fibre
-    ... ≃ Σ L : left_cosets' S, quotient.fibre ⟦quotient.out L⟧ :
+    ... ≃ Σ L : left_cosets&#39; S, quotient.fibre ⟦quotient.out L⟧ :
   equiv.sigma_congr_right (λ L, by simp)
-    ... ≃ Σ L : left_cosets' S, S :
+    ... ≃ Σ L : left_cosets&#39; S, S :
   equiv.sigma_congr_right (λ L, fibre_equiv _ _)
-    ... ≃ (left_cosets' S × S) :
+    ... ≃ (left_cosets&#39; S × S) :
   equiv.sigma_equiv_prod _ _
 
 end is_subgroup
+</pre></div>
 
 #### [ Kenny Lau (Apr 16 2018 at 10:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/group_equiv_left_cosets_times_subgroup/near/125140434):
-version 2
+<p>version 2</p>
 
 #### [ Kenny Lau (Apr 16 2018 at 10:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/group_equiv_left_cosets_times_subgroup/near/125140441):
-who is Mitchell Rowett?
+<p>who is Mitchell Rowett?</p>
 
 #### [ Kevin Buzzard (Apr 16 2018 at 10:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/group_equiv_left_cosets_times_subgroup/near/125140442):
-Student of Scott?
+<p>Student of Scott?</p>
 
 #### [ Kevin Buzzard (Apr 16 2018 at 10:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/group_equiv_left_cosets_times_subgroup/near/125140443):
-UG I think
+<p>UG I think</p>
 
 #### [ Kenny Lau (Apr 16 2018 at 10:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/group_equiv_left_cosets_times_subgroup/near/125140486):
-would he/she mind if, you know, I basically refactor the whole thing
+<p>would he/she mind if, you know, I basically refactor the whole thing</p>
 
 #### [ Kevin Buzzard (Apr 16 2018 at 10:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/group_equiv_left_cosets_times_subgroup/near/125140487):
-Isn't the logic of doing the non-empty version that you can go from that to the noncomputable version but you can't go back?
+<p>Isn't the logic of doing the non-empty version that you can go from that to the noncomputable version but you can't go back?</p>
 
 #### [ Kenny Lau (Apr 16 2018 at 10:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/group_equiv_left_cosets_times_subgroup/near/125140495):
-I don't get you
+<p>I don't get you</p>
 
 #### [ Mario Carneiro (Apr 16 2018 at 10:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/group_equiv_left_cosets_times_subgroup/near/125140498):
-full file refactorings are permitted in mathlib, you don't need permission from the original author (and conversely, be prepared for your work to be refactored to unrecognizability in the future)
+<p>full file refactorings are permitted in mathlib, you don't need permission from the original author (and conversely, be prepared for your work to be refactored to unrecognizability in the future)</p>
 
 #### [ Kenny Lau (Apr 16 2018 at 10:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/group_equiv_left_cosets_times_subgroup/near/125140537):
-@**Mario Carneiro** should I refactor coset?
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> should I refactor coset?</p>
 
 #### [ Johannes Hölzl (Apr 16 2018 at 10:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/group_equiv_left_cosets_times_subgroup/near/125140538):
-Mitchel did the coset theory, the things your changing were mine. I think we can add a more general version of `equiv_fibre`:
-```lean
-namespace equiv
+<p>Mitchel did the coset theory, the things your changing were mine. I think we can add a more general version of <code>equiv_fibre</code>:</p>
+<div class="codehilite"><pre><span></span><span class="kn">namespace</span> <span class="n">equiv</span>
 
-def equiv_fibre {α : Type*} {β : Type*} {f : α → β} : α ≃ Σb:β, f ⁻¹' {b} :=
-⟨λa, ⟨f a, a, by simp⟩, λ x, x.2.1, λ x, rfl,
- λ ⟨b, a, hx⟩, have f a = b, by simpa using hx, sigma.eq this (by subst this; refl)⟩
+<span class="n">def</span> <span class="n">equiv_fibre</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">{</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">}</span> <span class="o">:</span> <span class="n">α</span> <span class="err">≃</span> <span class="err">Σ</span><span class="n">b</span><span class="o">:</span><span class="n">β</span><span class="o">,</span> <span class="n">f</span> <span class="bp">⁻¹</span><span class="err">&#39;</span> <span class="o">{</span><span class="n">b</span><span class="o">}</span> <span class="o">:=</span>
+<span class="bp">⟨λ</span><span class="n">a</span><span class="o">,</span> <span class="bp">⟨</span><span class="n">f</span> <span class="n">a</span><span class="o">,</span> <span class="n">a</span><span class="o">,</span> <span class="k">by</span> <span class="n">simp</span><span class="bp">⟩</span><span class="o">,</span> <span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="n">x</span><span class="bp">.</span><span class="mi">2</span><span class="bp">.</span><span class="mi">1</span><span class="o">,</span> <span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="n">rfl</span><span class="o">,</span>
+ <span class="bp">λ</span> <span class="bp">⟨</span><span class="n">b</span><span class="o">,</span> <span class="n">a</span><span class="o">,</span> <span class="n">hx</span><span class="bp">⟩</span><span class="o">,</span> <span class="k">have</span> <span class="n">f</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">b</span><span class="o">,</span> <span class="k">by</span> <span class="n">simpa</span> <span class="kn">using</span> <span class="n">hx</span><span class="o">,</span> <span class="n">sigma</span><span class="bp">.</span><span class="n">eq</span> <span class="n">this</span> <span class="o">(</span><span class="k">by</span> <span class="n">subst</span> <span class="n">this</span><span class="bp">;</span> <span class="n">refl</span><span class="o">)</span><span class="bp">⟩</span>
 
-end equiv
-```
+<span class="kn">end</span> <span class="n">equiv</span>
+</pre></div>
 
 #### [ Kenny Lau (Apr 16 2018 at 10:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/group_equiv_left_cosets_times_subgroup/near/125140540):
-how do you make those red rectangles?
+<p>how do you make those red rectangles?</p>
 
 #### [ Mario Carneiro (Apr 16 2018 at 10:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/group_equiv_left_cosets_times_subgroup/near/125140543):
-```` ```lean ... ``` ````
+<p><code> ```lean ... ``` </code></p>
 
 #### [ Johannes Hölzl (Apr 16 2018 at 10:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/group_equiv_left_cosets_times_subgroup/near/125140548):
-I don't know were they come from. I just copied stuff from vs code.
+<p>I don't know were they come from. I just copied stuff from vs code.</p>
 
 #### [ Kenny Lau (Apr 16 2018 at 10:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/group_equiv_left_cosets_times_subgroup/near/125140550):
-I mean red rectangles
+<p>I mean red rectangles</p>
 
 #### [ Kenny Lau (Apr 16 2018 at 10:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/group_equiv_left_cosets_times_subgroup/near/125140551):
-oh, lean
+<p>oh, lean</p>
 
 #### [ Mario Carneiro (Apr 16 2018 at 10:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/group_equiv_left_cosets_times_subgroup/near/125140553):
-the red rectangles are what happens when the syntax highlighter gets confused
+<p>the red rectangles are what happens when the syntax highlighter gets confused</p>
 
 #### [ Kenny Lau (Apr 16 2018 at 10:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/group_equiv_left_cosets_times_subgroup/near/125140556):
-@**Johannes Hölzl** did I tell you how much I hate `{b}`?
+<p><span class="user-mention" data-user-id="110294">@Johannes Hölzl</span> did I tell you how much I hate <code>{b}</code>?</p>
 
 #### [ Mario Carneiro (Apr 16 2018 at 10:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/group_equiv_left_cosets_times_subgroup/near/125140601):
-On further review, I'm not sure it can be changed, the definition `singleton a = insert a empty` is in core.lean
+<p>On further review, I'm not sure it can be changed, the definition <code>singleton a = insert a empty</code> is in core.lean</p>
 
 #### [ Johannes Hölzl (Apr 16 2018 at 10:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/group_equiv_left_cosets_times_subgroup/near/125140650):
-@**Kenny Lau**  you shouldn't depend too much on definitional equality. It breaks modularity of the library.
+<p><span class="user-mention" data-user-id="110064">@Kenny Lau</span>  you shouldn't depend too much on definitional equality. It breaks modularity of the library.</p>
 
 #### [ Kenny Lau (Apr 16 2018 at 10:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/group_equiv_left_cosets_times_subgroup/near/125140692):
-don't you like it when every theorem is just `rfl`?
+<p>don't you like it when every theorem is just <code>rfl</code>?</p>
 
 #### [ Johannes Hölzl (Apr 16 2018 at 10:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/group_equiv_left_cosets_times_subgroup/near/125140694):
-Of course I like it, but I also hate it to not be able to change a definition because it would break 1000 places in mathlib.
+<p>Of course I like it, but I also hate it to not be able to change a definition because it would break 1000 places in mathlib.</p>
 
 #### [ Kenny Lau (Apr 16 2018 at 10:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/group_equiv_left_cosets_times_subgroup/near/125140699):
-```lean
-import data.equiv group_theory.coset
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">equiv</span> <span class="n">group_theory</span><span class="bp">.</span><span class="n">coset</span>
 
-universes u v
+<span class="n">universes</span> <span class="n">u</span> <span class="n">v</span>
 
-variables {α : Type u} {β : Type v} (f : α → β)
+<span class="kn">variables</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">}</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span>
 
-def fibre (y : β) : set α :=
-{x | f x = y}
+<span class="n">def</span> <span class="n">fibre</span> <span class="o">(</span><span class="n">y</span> <span class="o">:</span> <span class="n">β</span><span class="o">)</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span> <span class="o">:=</span>
+<span class="o">{</span><span class="n">x</span> <span class="bp">|</span> <span class="n">f</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">y</span><span class="o">}</span>
 
-namespace equiv
+<span class="kn">namespace</span> <span class="n">equiv</span>
 
-def equiv_fibre : α ≃ Σ y : β, fibre f y :=
-⟨λ x, ⟨f x, x, rfl⟩, λ x, x.2.1, λ x, rfl,
- λ ⟨y, x, (hx : f x = y)⟩, sigma.eq hx $ by subst hx⟩
+<span class="n">def</span> <span class="n">equiv_fibre</span> <span class="o">:</span> <span class="n">α</span> <span class="err">≃</span> <span class="err">Σ</span> <span class="n">y</span> <span class="o">:</span> <span class="n">β</span><span class="o">,</span> <span class="n">fibre</span> <span class="n">f</span> <span class="n">y</span> <span class="o">:=</span>
+<span class="bp">⟨λ</span> <span class="n">x</span><span class="o">,</span> <span class="bp">⟨</span><span class="n">f</span> <span class="n">x</span><span class="o">,</span> <span class="n">x</span><span class="o">,</span> <span class="n">rfl</span><span class="bp">⟩</span><span class="o">,</span> <span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="n">x</span><span class="bp">.</span><span class="mi">2</span><span class="bp">.</span><span class="mi">1</span><span class="o">,</span> <span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="n">rfl</span><span class="o">,</span>
+ <span class="bp">λ</span> <span class="bp">⟨</span><span class="n">y</span><span class="o">,</span> <span class="n">x</span><span class="o">,</span> <span class="o">(</span><span class="n">hx</span> <span class="o">:</span> <span class="n">f</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">y</span><span class="o">)</span><span class="bp">⟩</span><span class="o">,</span> <span class="n">sigma</span><span class="bp">.</span><span class="n">eq</span> <span class="n">hx</span> <span class="err">$</span> <span class="k">by</span> <span class="n">subst</span> <span class="n">hx</span><span class="bp">⟩</span>
 
-end equiv
+<span class="kn">end</span> <span class="n">equiv</span>
 
-variables {G : Type u} [group G] (S : set G) [is_subgroup S]
+<span class="kn">variables</span> <span class="o">{</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">[</span><span class="n">group</span> <span class="n">G</span><span class="o">]</span> <span class="o">(</span><span class="n">S</span> <span class="o">:</span> <span class="n">set</span> <span class="n">G</span><span class="o">)</span> <span class="o">[</span><span class="n">is_subgroup</span> <span class="n">S</span><span class="o">]</span>
 
-instance left_rel : setoid G :=
-⟨λ x y, x⁻¹ * y ∈ S,
- λ x, by simp [is_submonoid.one_mem],
- λ x y hxy, have _ := is_subgroup.inv_mem hxy, by simpa using this,
- λ x y z hxy hyz, have _ := is_submonoid.mul_mem hxy hyz, by simpa [mul_assoc] using this⟩
+<span class="kn">instance</span> <span class="n">left_rel</span> <span class="o">:</span> <span class="n">setoid</span> <span class="n">G</span> <span class="o">:=</span>
+<span class="bp">⟨λ</span> <span class="n">x</span> <span class="n">y</span><span class="o">,</span> <span class="n">x</span><span class="bp">⁻¹</span> <span class="bp">*</span> <span class="n">y</span> <span class="err">∈</span> <span class="n">S</span><span class="o">,</span>
+ <span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="k">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">is_submonoid</span><span class="bp">.</span><span class="n">one_mem</span><span class="o">],</span>
+ <span class="bp">λ</span> <span class="n">x</span> <span class="n">y</span> <span class="n">hxy</span><span class="o">,</span> <span class="k">have</span> <span class="bp">_</span> <span class="o">:=</span> <span class="n">is_subgroup</span><span class="bp">.</span><span class="n">inv_mem</span> <span class="n">hxy</span><span class="o">,</span> <span class="k">by</span> <span class="n">simpa</span> <span class="kn">using</span> <span class="n">this</span><span class="o">,</span>
+ <span class="bp">λ</span> <span class="n">x</span> <span class="n">y</span> <span class="n">z</span> <span class="n">hxy</span> <span class="n">hyz</span><span class="o">,</span> <span class="k">have</span> <span class="bp">_</span> <span class="o">:=</span> <span class="n">is_submonoid</span><span class="bp">.</span><span class="n">mul_mem</span> <span class="n">hxy</span> <span class="n">hyz</span><span class="o">,</span> <span class="k">by</span> <span class="n">simpa</span> <span class="o">[</span><span class="n">mul_assoc</span><span class="o">]</span> <span class="kn">using</span> <span class="n">this</span><span class="bp">⟩</span>
 
-def left_cosets' : Type u := quotient (left_rel S)
+<span class="n">def</span> <span class="n">left_cosets&#39;</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span> <span class="o">:=</span> <span class="n">quotient</span> <span class="o">(</span><span class="n">left_rel</span> <span class="n">S</span><span class="o">)</span>
 
-namespace is_subgroup
+<span class="kn">namespace</span> <span class="n">is_subgroup</span>
 
-def fibre_equiv (g : G) : fibre quotient.mk ⟦g⟧ ≃ S :=
-⟨λ x, ⟨x.1⁻¹ * g, quotient.exact x.2⟩,
- λ x, ⟨g * x⁻¹, quotient.sound $ by simpa [(≈), setoid.r] using x.2⟩,
- λ ⟨x, hx⟩, subtype.eq $ by simp,
- λ ⟨g, hg⟩, subtype.eq $ by simp⟩
+<span class="n">def</span> <span class="n">fibre_equiv</span> <span class="o">(</span><span class="n">g</span> <span class="o">:</span> <span class="n">G</span><span class="o">)</span> <span class="o">:</span> <span class="n">fibre</span> <span class="n">quotient</span><span class="bp">.</span><span class="n">mk</span> <span class="err">⟦</span><span class="n">g</span><span class="err">⟧</span> <span class="err">≃</span> <span class="n">S</span> <span class="o">:=</span>
+<span class="bp">⟨λ</span> <span class="n">x</span><span class="o">,</span> <span class="bp">⟨</span><span class="n">x</span><span class="bp">.</span><span class="mi">1</span><span class="bp">⁻¹</span> <span class="bp">*</span> <span class="n">g</span><span class="o">,</span> <span class="n">quotient</span><span class="bp">.</span><span class="n">exact</span> <span class="n">x</span><span class="bp">.</span><span class="mi">2</span><span class="bp">⟩</span><span class="o">,</span>
+ <span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="bp">⟨</span><span class="n">g</span> <span class="bp">*</span> <span class="n">x</span><span class="bp">⁻¹</span><span class="o">,</span> <span class="n">quotient</span><span class="bp">.</span><span class="n">sound</span> <span class="err">$</span> <span class="k">by</span> <span class="n">simpa</span> <span class="o">[(</span><span class="bp">≈</span><span class="o">),</span> <span class="n">setoid</span><span class="bp">.</span><span class="n">r</span><span class="o">]</span> <span class="kn">using</span> <span class="n">x</span><span class="bp">.</span><span class="mi">2</span><span class="bp">⟩</span><span class="o">,</span>
+ <span class="bp">λ</span> <span class="bp">⟨</span><span class="n">x</span><span class="o">,</span> <span class="n">hx</span><span class="bp">⟩</span><span class="o">,</span> <span class="n">subtype</span><span class="bp">.</span><span class="n">eq</span> <span class="err">$</span> <span class="k">by</span> <span class="n">simp</span><span class="o">,</span>
+ <span class="bp">λ</span> <span class="bp">⟨</span><span class="n">g</span><span class="o">,</span> <span class="n">hg</span><span class="bp">⟩</span><span class="o">,</span> <span class="n">subtype</span><span class="bp">.</span><span class="n">eq</span> <span class="err">$</span> <span class="k">by</span> <span class="n">simp</span><span class="bp">⟩</span>
 
-noncomputable def group_equiv_left_cosets_times_subgroup' :
-  G ≃ (left_cosets' S × S) :=
-calc G ≃ Σ L : left_cosets' S, fibre quotient.mk L :
-  equiv.equiv_fibre quotient.mk
-    ... ≃ Σ L : left_cosets' S, fibre quotient.mk ⟦quotient.out L⟧ :
-  equiv.sigma_congr_right (λ L, by simp)
-    ... ≃ Σ L : left_cosets' S, S :
-  equiv.sigma_congr_right (λ L, fibre_equiv _ _)
-    ... ≃ (left_cosets' S × S) :
-  equiv.sigma_equiv_prod _ _
+<span class="n">noncomputable</span> <span class="n">def</span> <span class="n">group_equiv_left_cosets_times_subgroup&#39;</span> <span class="o">:</span>
+  <span class="n">G</span> <span class="err">≃</span> <span class="o">(</span><span class="n">left_cosets&#39;</span> <span class="n">S</span> <span class="bp">×</span> <span class="n">S</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">calc</span> <span class="n">G</span> <span class="err">≃</span> <span class="err">Σ</span> <span class="n">L</span> <span class="o">:</span> <span class="n">left_cosets&#39;</span> <span class="n">S</span><span class="o">,</span> <span class="n">fibre</span> <span class="n">quotient</span><span class="bp">.</span><span class="n">mk</span> <span class="n">L</span> <span class="o">:</span>
+  <span class="n">equiv</span><span class="bp">.</span><span class="n">equiv_fibre</span> <span class="n">quotient</span><span class="bp">.</span><span class="n">mk</span>
+    <span class="bp">...</span> <span class="err">≃</span> <span class="err">Σ</span> <span class="n">L</span> <span class="o">:</span> <span class="n">left_cosets&#39;</span> <span class="n">S</span><span class="o">,</span> <span class="n">fibre</span> <span class="n">quotient</span><span class="bp">.</span><span class="n">mk</span> <span class="err">⟦</span><span class="n">quotient</span><span class="bp">.</span><span class="n">out</span> <span class="n">L</span><span class="err">⟧</span> <span class="o">:</span>
+  <span class="n">equiv</span><span class="bp">.</span><span class="n">sigma_congr_right</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">L</span><span class="o">,</span> <span class="k">by</span> <span class="n">simp</span><span class="o">)</span>
+    <span class="bp">...</span> <span class="err">≃</span> <span class="err">Σ</span> <span class="n">L</span> <span class="o">:</span> <span class="n">left_cosets&#39;</span> <span class="n">S</span><span class="o">,</span> <span class="n">S</span> <span class="o">:</span>
+  <span class="n">equiv</span><span class="bp">.</span><span class="n">sigma_congr_right</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">L</span><span class="o">,</span> <span class="n">fibre_equiv</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">)</span>
+    <span class="bp">...</span> <span class="err">≃</span> <span class="o">(</span><span class="n">left_cosets&#39;</span> <span class="n">S</span> <span class="bp">×</span> <span class="n">S</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">equiv</span><span class="bp">.</span><span class="n">sigma_equiv_prod</span> <span class="bp">_</span> <span class="bp">_</span>
 
-end is_subgroup
-```
+<span class="kn">end</span> <span class="n">is_subgroup</span>
+</pre></div>
 
 #### [ Johannes Hölzl (Apr 16 2018 at 10:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/group_equiv_left_cosets_times_subgroup/near/125140701):
-In Isabelle one can always change a definition, make it more general. And then just prove that it is the same.
+<p>In Isabelle one can always change a definition, make it more general. And then just prove that it is the same.</p>
 
 #### [ Kenny Lau (Apr 16 2018 at 10:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/group_equiv_left_cosets_times_subgroup/near/125140703):
-Isabelle is crap
+<p>Isabelle is crap</p>
 
 #### [ Mario Carneiro (Apr 16 2018 at 10:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/group_equiv_left_cosets_times_subgroup/near/125140750):
-be sure to have good reasons to make invective statements
+<p>be sure to have good reasons to make invective statements</p>
 
 #### [ Kenny Lau (Apr 16 2018 at 10:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/group_equiv_left_cosets_times_subgroup/near/125140751):
-it's nonconstructive
+<p>it's nonconstructive</p>
 
 #### [ Johannes Hölzl (Apr 16 2018 at 10:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/group_equiv_left_cosets_times_subgroup/near/125140757):
-Well, your claim is also nonconstructive
+<p>Well, your claim is also nonconstructive</p>
 
 #### [ Kenny Lau (Apr 16 2018 at 10:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/group_equiv_left_cosets_times_subgroup/near/125140758):
-so how is version 3?
+<p>so how is version 3?</p>
 
 #### [ Johannes Hölzl (Apr 16 2018 at 10:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/group_equiv_left_cosets_times_subgroup/near/125140802):
-I think we should stay with `f ⁻¹' {b}`.
+<p>I think we should stay with <code>f ⁻¹' {b}</code>.</p>
 
 #### [ Mario Carneiro (Apr 16 2018 at 10:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/group_equiv_left_cosets_times_subgroup/near/125140854):
-the other advantage of not giving the definition a name is we don't need to debate if it should be `fibre` or `fiber` :upside_down_face:
+<p>the other advantage of not giving the definition a name is we don't need to debate if it should be <code>fibre</code> or <code>fiber</code> <span class="emoji emoji-1f643" title="upside down face">:upside_down_face:</span></p>
 
 #### [ Kenny Lau (Apr 16 2018 at 10:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/group_equiv_left_cosets_times_subgroup/near/125140857):
-who cares about cosets of sub-not-groups?
+<p>who cares about cosets of sub-not-groups?</p>
 
 #### [ Mario Carneiro (Apr 16 2018 at 10:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/group_equiv_left_cosets_times_subgroup/near/125140863):
-I guess Patrick might, that is the same as the translate of a set
+<p>I guess Patrick might, that is the same as the translate of a set</p>
 
 #### [ Kenny Lau (Apr 16 2018 at 10:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/group_equiv_left_cosets_times_subgroup/near/125140905):
-why would he care?
+<p>why would he care?</p>
 
 #### [ Mario Carneiro (Apr 16 2018 at 10:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/group_equiv_left_cosets_times_subgroup/near/125140998):
-it relates to affine spaces and the group conjugation action. It also comes up with "neighborhoods of zero" in a topological group
+<p>it relates to affine spaces and the group conjugation action. It also comes up with "neighborhoods of zero" in a topological group</p>
 
 #### [ Kenny Lau (Apr 16 2018 at 10:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/group_equiv_left_cosets_times_subgroup/near/125141009):
-singleton is really unusable
+<p>singleton is really unusable</p>
 
 #### [ Kenny Lau (Apr 16 2018 at 10:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/group_equiv_left_cosets_times_subgroup/near/125141102):
-```lean
-import data.equiv group_theory.coset
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">equiv</span> <span class="n">group_theory</span><span class="bp">.</span><span class="n">coset</span>
 
-universes u v
+<span class="n">universes</span> <span class="n">u</span> <span class="n">v</span>
 
-namespace equiv
+<span class="kn">namespace</span> <span class="n">equiv</span>
 
-def equiv_fib {α : Type u} {β : Type v} (f : α → β) :
-  α ≃ Σ y : β, {x // f x = y} :=
-⟨λ x, ⟨f x, x, rfl⟩, λ x, x.2.1, λ x, rfl,
- λ ⟨y, x, (hx : f x = y)⟩, sigma.eq hx $ by subst hx⟩
+<span class="n">def</span> <span class="n">equiv_fib</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">}</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">α</span> <span class="err">≃</span> <span class="err">Σ</span> <span class="n">y</span> <span class="o">:</span> <span class="n">β</span><span class="o">,</span> <span class="o">{</span><span class="n">x</span> <span class="bp">//</span> <span class="n">f</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">y</span><span class="o">}</span> <span class="o">:=</span>
+<span class="bp">⟨λ</span> <span class="n">x</span><span class="o">,</span> <span class="bp">⟨</span><span class="n">f</span> <span class="n">x</span><span class="o">,</span> <span class="n">x</span><span class="o">,</span> <span class="n">rfl</span><span class="bp">⟩</span><span class="o">,</span> <span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="n">x</span><span class="bp">.</span><span class="mi">2</span><span class="bp">.</span><span class="mi">1</span><span class="o">,</span> <span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="n">rfl</span><span class="o">,</span>
+ <span class="bp">λ</span> <span class="bp">⟨</span><span class="n">y</span><span class="o">,</span> <span class="n">x</span><span class="o">,</span> <span class="o">(</span><span class="n">hx</span> <span class="o">:</span> <span class="n">f</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">y</span><span class="o">)</span><span class="bp">⟩</span><span class="o">,</span> <span class="n">sigma</span><span class="bp">.</span><span class="n">eq</span> <span class="n">hx</span> <span class="err">$</span> <span class="k">by</span> <span class="n">subst</span> <span class="n">hx</span><span class="bp">⟩</span>
 
-end equiv
+<span class="kn">end</span> <span class="n">equiv</span>
 
-variables {G : Type u} [group G] (S : set G) [is_subgroup S]
+<span class="kn">variables</span> <span class="o">{</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">[</span><span class="n">group</span> <span class="n">G</span><span class="o">]</span> <span class="o">(</span><span class="n">S</span> <span class="o">:</span> <span class="n">set</span> <span class="n">G</span><span class="o">)</span> <span class="o">[</span><span class="n">is_subgroup</span> <span class="n">S</span><span class="o">]</span>
 
-instance left_rel : setoid G :=
-⟨λ x y, x⁻¹ * y ∈ S,
- λ x, by simp [is_submonoid.one_mem],
- λ x y hxy, have _ := is_subgroup.inv_mem hxy, by simpa using this,
- λ x y z hxy hyz, have _ := is_submonoid.mul_mem hxy hyz, by simpa [mul_assoc] using this⟩
+<span class="kn">instance</span> <span class="n">left_rel</span> <span class="o">:</span> <span class="n">setoid</span> <span class="n">G</span> <span class="o">:=</span>
+<span class="bp">⟨λ</span> <span class="n">x</span> <span class="n">y</span><span class="o">,</span> <span class="n">x</span><span class="bp">⁻¹</span> <span class="bp">*</span> <span class="n">y</span> <span class="err">∈</span> <span class="n">S</span><span class="o">,</span>
+ <span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="k">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">is_submonoid</span><span class="bp">.</span><span class="n">one_mem</span><span class="o">],</span>
+ <span class="bp">λ</span> <span class="n">x</span> <span class="n">y</span> <span class="n">hxy</span><span class="o">,</span> <span class="k">have</span> <span class="bp">_</span> <span class="o">:=</span> <span class="n">is_subgroup</span><span class="bp">.</span><span class="n">inv_mem</span> <span class="n">hxy</span><span class="o">,</span> <span class="k">by</span> <span class="n">simpa</span> <span class="kn">using</span> <span class="n">this</span><span class="o">,</span>
+ <span class="bp">λ</span> <span class="n">x</span> <span class="n">y</span> <span class="n">z</span> <span class="n">hxy</span> <span class="n">hyz</span><span class="o">,</span> <span class="k">have</span> <span class="bp">_</span> <span class="o">:=</span> <span class="n">is_submonoid</span><span class="bp">.</span><span class="n">mul_mem</span> <span class="n">hxy</span> <span class="n">hyz</span><span class="o">,</span> <span class="k">by</span> <span class="n">simpa</span> <span class="o">[</span><span class="n">mul_assoc</span><span class="o">]</span> <span class="kn">using</span> <span class="n">this</span><span class="bp">⟩</span>
 
-def left_cosets' : Type u := quotient (left_rel S)
+<span class="n">def</span> <span class="n">left_cosets&#39;</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span> <span class="o">:=</span> <span class="n">quotient</span> <span class="o">(</span><span class="n">left_rel</span> <span class="n">S</span><span class="o">)</span>
 
-namespace is_subgroup
+<span class="kn">namespace</span> <span class="n">is_subgroup</span>
 
-def fib_equiv (g : G) : {x // ⟦x⟧ = ⟦g⟧} ≃ S :=
-⟨λ x, ⟨x.1⁻¹ * g, quotient.exact x.2⟩,
- λ x, ⟨g * x⁻¹, quotient.sound $ by simpa [(≈), setoid.r] using x.2⟩,
- λ ⟨x, hx⟩, subtype.eq $ by simp,
- λ ⟨g, hg⟩, subtype.eq $ by simp⟩
+<span class="n">def</span> <span class="n">fib_equiv</span> <span class="o">(</span><span class="n">g</span> <span class="o">:</span> <span class="n">G</span><span class="o">)</span> <span class="o">:</span> <span class="o">{</span><span class="n">x</span> <span class="bp">//</span> <span class="err">⟦</span><span class="n">x</span><span class="err">⟧</span> <span class="bp">=</span> <span class="err">⟦</span><span class="n">g</span><span class="err">⟧</span><span class="o">}</span> <span class="err">≃</span> <span class="n">S</span> <span class="o">:=</span>
+<span class="bp">⟨λ</span> <span class="n">x</span><span class="o">,</span> <span class="bp">⟨</span><span class="n">x</span><span class="bp">.</span><span class="mi">1</span><span class="bp">⁻¹</span> <span class="bp">*</span> <span class="n">g</span><span class="o">,</span> <span class="n">quotient</span><span class="bp">.</span><span class="n">exact</span> <span class="n">x</span><span class="bp">.</span><span class="mi">2</span><span class="bp">⟩</span><span class="o">,</span>
+ <span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="bp">⟨</span><span class="n">g</span> <span class="bp">*</span> <span class="n">x</span><span class="bp">⁻¹</span><span class="o">,</span> <span class="n">quotient</span><span class="bp">.</span><span class="n">sound</span> <span class="err">$</span> <span class="k">by</span> <span class="n">simpa</span> <span class="o">[(</span><span class="bp">≈</span><span class="o">),</span> <span class="n">setoid</span><span class="bp">.</span><span class="n">r</span><span class="o">]</span> <span class="kn">using</span> <span class="n">x</span><span class="bp">.</span><span class="mi">2</span><span class="bp">⟩</span><span class="o">,</span>
+ <span class="bp">λ</span> <span class="bp">⟨</span><span class="n">x</span><span class="o">,</span> <span class="n">hx</span><span class="bp">⟩</span><span class="o">,</span> <span class="n">subtype</span><span class="bp">.</span><span class="n">eq</span> <span class="err">$</span> <span class="k">by</span> <span class="n">simp</span><span class="o">,</span>
+ <span class="bp">λ</span> <span class="bp">⟨</span><span class="n">g</span><span class="o">,</span> <span class="n">hg</span><span class="bp">⟩</span><span class="o">,</span> <span class="n">subtype</span><span class="bp">.</span><span class="n">eq</span> <span class="err">$</span> <span class="k">by</span> <span class="n">simp</span><span class="bp">⟩</span>
 
-noncomputable def group_equiv_left_cosets_times_subgroup' :
-  G ≃ (left_cosets' S × S) :=
-calc G ≃ Σ L : left_cosets' S, {x // ⟦x⟧ = L} :
-  equiv.equiv_fib quotient.mk
-    ... ≃ Σ L : left_cosets' S, {x // ⟦x⟧ = ⟦quotient.out L⟧} :
-  equiv.sigma_congr_right (λ L, by simp)
-    ... ≃ Σ L : left_cosets' S, S :
-  equiv.sigma_congr_right (λ L, fib_equiv _ _)
-    ... ≃ (left_cosets' S × S) :
-  equiv.sigma_equiv_prod _ _
+<span class="n">noncomputable</span> <span class="n">def</span> <span class="n">group_equiv_left_cosets_times_subgroup&#39;</span> <span class="o">:</span>
+  <span class="n">G</span> <span class="err">≃</span> <span class="o">(</span><span class="n">left_cosets&#39;</span> <span class="n">S</span> <span class="bp">×</span> <span class="n">S</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">calc</span> <span class="n">G</span> <span class="err">≃</span> <span class="err">Σ</span> <span class="n">L</span> <span class="o">:</span> <span class="n">left_cosets&#39;</span> <span class="n">S</span><span class="o">,</span> <span class="o">{</span><span class="n">x</span> <span class="bp">//</span> <span class="err">⟦</span><span class="n">x</span><span class="err">⟧</span> <span class="bp">=</span> <span class="n">L</span><span class="o">}</span> <span class="o">:</span>
+  <span class="n">equiv</span><span class="bp">.</span><span class="n">equiv_fib</span> <span class="n">quotient</span><span class="bp">.</span><span class="n">mk</span>
+    <span class="bp">...</span> <span class="err">≃</span> <span class="err">Σ</span> <span class="n">L</span> <span class="o">:</span> <span class="n">left_cosets&#39;</span> <span class="n">S</span><span class="o">,</span> <span class="o">{</span><span class="n">x</span> <span class="bp">//</span> <span class="err">⟦</span><span class="n">x</span><span class="err">⟧</span> <span class="bp">=</span> <span class="err">⟦</span><span class="n">quotient</span><span class="bp">.</span><span class="n">out</span> <span class="n">L</span><span class="err">⟧</span><span class="o">}</span> <span class="o">:</span>
+  <span class="n">equiv</span><span class="bp">.</span><span class="n">sigma_congr_right</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">L</span><span class="o">,</span> <span class="k">by</span> <span class="n">simp</span><span class="o">)</span>
+    <span class="bp">...</span> <span class="err">≃</span> <span class="err">Σ</span> <span class="n">L</span> <span class="o">:</span> <span class="n">left_cosets&#39;</span> <span class="n">S</span><span class="o">,</span> <span class="n">S</span> <span class="o">:</span>
+  <span class="n">equiv</span><span class="bp">.</span><span class="n">sigma_congr_right</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">L</span><span class="o">,</span> <span class="n">fib_equiv</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">)</span>
+    <span class="bp">...</span> <span class="err">≃</span> <span class="o">(</span><span class="n">left_cosets&#39;</span> <span class="n">S</span> <span class="bp">×</span> <span class="n">S</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">equiv</span><span class="bp">.</span><span class="n">sigma_equiv_prod</span> <span class="bp">_</span> <span class="bp">_</span>
 
-end is_subgroup
-```
+<span class="kn">end</span> <span class="n">is_subgroup</span>
+</pre></div>
 
 #### [ Kenny Lau (Apr 16 2018 at 10:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/group_equiv_left_cosets_times_subgroup/near/125141108):
-conflict between `fibre` and `fiber` resolved :P
+<p>conflict between <code>fibre</code> and <code>fiber</code> resolved :P</p>
 
 #### [ Chris Hughes (Apr 16 2018 at 10:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/group_equiv_left_cosets_times_subgroup/near/125141154):
-Slightly shortened.
-```lean
-def equiv_fib {α : Type u} {β : Type v} (f : α → β) :
-  α ≃ Σ y : β, {x // f x = y} :=
-⟨λ x, ⟨f x, x, rfl⟩, λ x, x.2.1, λ x, rfl,
- λ ⟨y, x, ⟨hx⟩⟩, rfl⟩
-```
+<p>Slightly shortened.</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">equiv_fib</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">}</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">α</span> <span class="err">≃</span> <span class="err">Σ</span> <span class="n">y</span> <span class="o">:</span> <span class="n">β</span><span class="o">,</span> <span class="o">{</span><span class="n">x</span> <span class="bp">//</span> <span class="n">f</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">y</span><span class="o">}</span> <span class="o">:=</span>
+<span class="bp">⟨λ</span> <span class="n">x</span><span class="o">,</span> <span class="bp">⟨</span><span class="n">f</span> <span class="n">x</span><span class="o">,</span> <span class="n">x</span><span class="o">,</span> <span class="n">rfl</span><span class="bp">⟩</span><span class="o">,</span> <span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="n">x</span><span class="bp">.</span><span class="mi">2</span><span class="bp">.</span><span class="mi">1</span><span class="o">,</span> <span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="n">rfl</span><span class="o">,</span>
+ <span class="bp">λ</span> <span class="bp">⟨</span><span class="n">y</span><span class="o">,</span> <span class="n">x</span><span class="o">,</span> <span class="bp">⟨</span><span class="n">hx</span><span class="bp">⟩⟩</span><span class="o">,</span> <span class="n">rfl</span><span class="bp">⟩</span>
+</pre></div>
 
 #### [ Kenny Lau (Apr 16 2018 at 10:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/group_equiv_left_cosets_times_subgroup/near/125141160):
-you win
+<p>you win</p>
 
 #### [ Mario Carneiro (Apr 16 2018 at 10:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/group_equiv_left_cosets_times_subgroup/near/125141203):
-it's a bit weird to write ` ⟨hx⟩` in the last bit there, since it's refl. Use `λ ⟨_, x, rfl⟩, rfl` instead
+<p>it's a bit weird to write <code> ⟨hx⟩</code> in the last bit there, since it's refl. Use <code>λ ⟨_, x, rfl⟩, rfl</code> instead</p>
 
 #### [ Kenny Lau (Apr 16 2018 at 11:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/group_equiv_left_cosets_times_subgroup/near/125141322):
-wait, how does that also work :o
+<p>wait, how does that also work :o</p>
 
 #### [ Kenny Lau (Apr 16 2018 at 11:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/group_equiv_left_cosets_times_subgroup/near/125141327):
-oh, automatic casing
+<p>oh, automatic casing</p>
 
 
 {% endraw %}

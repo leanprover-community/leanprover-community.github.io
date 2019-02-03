@@ -12,54 +12,50 @@ permalink: archive/113488general/77009AccessingNattypewithininductiveTyp.html
 
 {% raw %}
 #### [ Cameron Crossman (Dec 13 2018 at 19:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Accessing%20Nat%20type%20within%20inductive%20Typ/near/151722800):
-I have the following inductive definition
-inductive Typ
-  | Nat
-  | Fun : Typ → Typ → Typ
-
-and I am trying to write a theorem and start by assuming some variable p is of type Typ.Nat, how do I go about doing so?  I get  
-
-type expected at
-  Typ.Nat
-term has type
-  Typ
-
-error from assume p : Typ.Nat or something similar. Thanks!
+<p>I have the following inductive definition<br>
+inductive Typ<br>
+  | Nat<br>
+  | Fun : Typ → Typ → Typ</p>
+<p>and I am trying to write a theorem and start by assuming some variable p is of type Typ.Nat, how do I go about doing so?  I get  </p>
+<p>type expected at<br>
+  Typ.Nat<br>
+term has type<br>
+  Typ</p>
+<p>error from assume p : Typ.Nat or something similar. Thanks!</p>
 
 #### [ Chris Hughes (Dec 13 2018 at 19:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Accessing%20Nat%20type%20within%20inductive%20Typ/near/151723856):
-Something like this might be what you want
-```lean
-inductive Typ
-| Nat : nat → Typ
-| Fun : Typ → Typ → Typ
-```
+<p>Something like this might be what you want</p>
+<div class="codehilite"><pre><span></span><span class="kn">inductive</span> <span class="n">Typ</span>
+<span class="bp">|</span> <span class="n">Nat</span> <span class="o">:</span> <span class="n">nat</span> <span class="bp">→</span> <span class="n">Typ</span>
+<span class="bp">|</span> <span class="n">Fun</span> <span class="o">:</span> <span class="n">Typ</span> <span class="bp">→</span> <span class="n">Typ</span> <span class="bp">→</span> <span class="n">Typ</span>
+</pre></div>
 
 #### [ Chris Hughes (Dec 13 2018 at 19:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Accessing%20Nat%20type%20within%20inductive%20Typ/near/151723870):
-Hang on.
+<p>Hang on.</p>
 
 #### [ Chris Hughes (Dec 13 2018 at 19:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Accessing%20Nat%20type%20within%20inductive%20Typ/near/151723876):
-Typ.Nat is not a Type, it's a constructor.
+<p>Typ.Nat is not a Type, it's a constructor.</p>
 
 #### [ Cameron Crossman (Dec 13 2018 at 20:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Accessing%20Nat%20type%20within%20inductive%20Typ/near/151723976):
-Oh okay :+1:
+<p>Oh okay <span class="emoji emoji-1f44d" title="+1">:+1:</span></p>
 
 #### [ Cameron Crossman (Dec 13 2018 at 20:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Accessing%20Nat%20type%20within%20inductive%20Typ/near/151724023):
-So I just construct of that type with variable p : Typ.Nat or something along those lines
+<p>So I just construct of that type with variable p : Typ.Nat or something along those lines</p>
 
 #### [ Chris Hughes (Dec 13 2018 at 20:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Accessing%20Nat%20type%20within%20inductive%20Typ/near/151724050):
-`Typ.nat : Typ`
+<p><code>Typ.nat : Typ</code></p>
 
 #### [ Reid Barton (Dec 13 2018 at 20:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Accessing%20Nat%20type%20within%20inductive%20Typ/near/151724057):
-`Typ` has nothing to do with actual types, despite the name
+<p><code>Typ</code> has nothing to do with actual types, despite the name</p>
 
 #### [ Chris Hughes (Dec 13 2018 at 20:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Accessing%20Nat%20type%20within%20inductive%20Typ/near/151724064):
-(deleted)
+<p>(deleted)</p>
 
 #### [ Reid Barton (Dec 13 2018 at 20:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Accessing%20Nat%20type%20within%20inductive%20Typ/near/151724065):
-Maybe you want to define an interpretation `Typ -> Type`
+<p>Maybe you want to define an interpretation <code>Typ -&gt; Type</code></p>
 
 #### [ Cameron Crossman (Dec 13 2018 at 20:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Accessing%20Nat%20type%20within%20inductive%20Typ/near/151724268):
-thanks!
+<p>thanks!</p>
 
 
 {% endraw %}

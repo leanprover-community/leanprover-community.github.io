@@ -12,283 +12,281 @@ permalink: archive/113489newmembers/85969beginnerproofbyinductionquestion.html
 
 {% raw %}
 #### [ Bryan Gin-ge Chen (Aug 30 2018 at 05:52)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/beginner%20proof%20by%20induction%20question/near/133037403):
-I'm trying to prove that $$ \sum_{k=0}^{n-1}F_k = F_{2k-1} $$, where $$F_{k}$$ is the kth Fibonacci number. Here's my attempt so far:
-```lean
-import algebra.big_operators
+<p>I'm trying to prove that <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msubsup><mo>∑</mo><mrow><mi>k</mi><mo>=</mo><mn>0</mn></mrow><mrow><mi>n</mi><mo>−</mo><mn>1</mn></mrow></msubsup><msub><mi>F</mi><mi>k</mi></msub><mo>=</mo><msub><mi>F</mi><mrow><mn>2</mn><mi>k</mi><mo>−</mo><mn>1</mn></mrow></msub></mrow><annotation encoding="application/x-tex"> \sum_{k=0}^{n-1}F_k = F_{2k-1} </annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.954008em;"></span><span class="strut bottom" style="height:1.253718em;vertical-align:-0.29971000000000003em;"></span><span class="base"><span class="mop"><span class="mop op-symbol small-op" style="position:relative;top:-0.0000050000000000050004em;">∑</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.954008em;"><span style="top:-2.40029em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathit mtight" style="margin-right:0.03148em;">k</span><span class="mrel mtight">=</span><span class="mord mathrm mtight">0</span></span></span></span><span style="top:-3.2029em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathit mtight">n</span><span class="mbin mtight">−</span><span class="mord mathrm mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.29971000000000003em;"></span></span></span></span></span><span class="mord"><span class="mord mathit" style="margin-right:0.13889em;">F</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:-0.13889em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathit mtight" style="margin-right:0.03148em;">k</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"></span></span></span></span></span><span class="mrel">=</span><span class="mord"><span class="mord mathit" style="margin-right:0.13889em;">F</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361079999999999em;"><span style="top:-2.5500000000000003em;margin-left:-0.13889em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathrm mtight">2</span><span class="mord mathit mtight" style="margin-right:0.03148em;">k</span><span class="mbin mtight">−</span><span class="mord mathrm mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.208331em;"></span></span></span></span></span></span></span></span>, where <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>F</mi><mi>k</mi></msub></mrow><annotation encoding="application/x-tex">F_{k}</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="base"><span class="mord"><span class="mord mathit" style="margin-right:0.13889em;">F</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.33610799999999996em;"><span style="top:-2.5500000000000003em;margin-left:-0.13889em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathit mtight" style="margin-right:0.03148em;">k</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"></span></span></span></span></span></span></span></span> is the kth Fibonacci number. Here's my attempt so far:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">algebra</span><span class="bp">.</span><span class="n">big_operators</span>
 
-def fibonacci : ℕ → ℕ
-| 0 := 0
-| 1 := 1
-| (n+2) := fibonacci n + fibonacci (n+1)
+<span class="n">def</span> <span class="n">fibonacci</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="bp">ℕ</span>
+<span class="bp">|</span> <span class="mi">0</span> <span class="o">:=</span> <span class="mi">0</span>
+<span class="bp">|</span> <span class="mi">1</span> <span class="o">:=</span> <span class="mi">1</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">2</span><span class="o">)</span> <span class="o">:=</span> <span class="n">fibonacci</span> <span class="n">n</span> <span class="bp">+</span> <span class="n">fibonacci</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span>
 
-def fib_even_sum : ℕ → ℕ := λ n, (finset.range n).sum (λ m, fibonacci (2*m))
+<span class="n">def</span> <span class="n">fib_even_sum</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="bp">ℕ</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">n</span><span class="o">,</span> <span class="o">(</span><span class="n">finset</span><span class="bp">.</span><span class="n">range</span> <span class="n">n</span><span class="o">)</span><span class="bp">.</span><span class="n">sum</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">m</span><span class="o">,</span> <span class="n">fibonacci</span> <span class="o">(</span><span class="mi">2</span><span class="bp">*</span><span class="n">m</span><span class="o">))</span>
 
-theorem sum_even_fib_eq_fib_double_sub_one: ∀ (n : ℕ),
-fib_even_sum n = fibonacci (2*n - 1)
-| 0 := rfl
-| (nat.succ n) := 
-have f1 : (finset.range n).sum (λ m, fibonacci (2*m)) = fib_even_sum n, by refl,
-begin
-unfold fib_even_sum,
-rw [finset.sum_range_succ, f1, sum_even_fib_eq_fib_double_sub_one, 
-add_comm, nat.succ_eq_add_one, mul_add],
-sorry
-end
-```
-As you can see, my goal looks like this:
-```lean
-⊢ fibonacci (2 * n - 1) + fibonacci (2 * n) = fibonacci (2 * n + 2 * 1 - 1)
-```
-But I can't figure out how to simplify `2*n + 2*1 -1` inside `fibonacci` to `2*n - 1`. If I could do that then I would happily finish with `refl`.
+<span class="kn">theorem</span> <span class="n">sum_even_fib_eq_fib_double_sub_one</span><span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">),</span>
+<span class="n">fib_even_sum</span> <span class="n">n</span> <span class="bp">=</span> <span class="n">fibonacci</span> <span class="o">(</span><span class="mi">2</span><span class="bp">*</span><span class="n">n</span> <span class="bp">-</span> <span class="mi">1</span><span class="o">)</span>
+<span class="bp">|</span> <span class="mi">0</span> <span class="o">:=</span> <span class="n">rfl</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">n</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">have</span> <span class="n">f1</span> <span class="o">:</span> <span class="o">(</span><span class="n">finset</span><span class="bp">.</span><span class="n">range</span> <span class="n">n</span><span class="o">)</span><span class="bp">.</span><span class="n">sum</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">m</span><span class="o">,</span> <span class="n">fibonacci</span> <span class="o">(</span><span class="mi">2</span><span class="bp">*</span><span class="n">m</span><span class="o">))</span> <span class="bp">=</span> <span class="n">fib_even_sum</span> <span class="n">n</span><span class="o">,</span> <span class="k">by</span> <span class="n">refl</span><span class="o">,</span>
+<span class="k">begin</span>
+<span class="n">unfold</span> <span class="n">fib_even_sum</span><span class="o">,</span>
+<span class="n">rw</span> <span class="o">[</span><span class="n">finset</span><span class="bp">.</span><span class="n">sum_range_succ</span><span class="o">,</span> <span class="n">f1</span><span class="o">,</span> <span class="n">sum_even_fib_eq_fib_double_sub_one</span><span class="o">,</span>
+<span class="n">add_comm</span><span class="o">,</span> <span class="n">nat</span><span class="bp">.</span><span class="n">succ_eq_add_one</span><span class="o">,</span> <span class="n">mul_add</span><span class="o">],</span>
+<span class="n">sorry</span>
+<span class="kn">end</span>
+</pre></div>
 
-Other style or efficiency suggestions would also be appreciated. Is there a smart way to apply `simp`? I haven't managed that either.
+
+<p>As you can see, my goal looks like this:</p>
+<div class="codehilite"><pre><span></span><span class="err">⊢</span> <span class="n">fibonacci</span> <span class="o">(</span><span class="mi">2</span> <span class="bp">*</span> <span class="n">n</span> <span class="bp">-</span> <span class="mi">1</span><span class="o">)</span> <span class="bp">+</span> <span class="n">fibonacci</span> <span class="o">(</span><span class="mi">2</span> <span class="bp">*</span> <span class="n">n</span><span class="o">)</span> <span class="bp">=</span> <span class="n">fibonacci</span> <span class="o">(</span><span class="mi">2</span> <span class="bp">*</span> <span class="n">n</span> <span class="bp">+</span> <span class="mi">2</span> <span class="bp">*</span> <span class="mi">1</span> <span class="bp">-</span> <span class="mi">1</span><span class="o">)</span>
+</pre></div>
+
+
+<p>But I can't figure out how to simplify <code>2*n + 2*1 -1</code> inside <code>fibonacci</code> to <code>2*n - 1</code>. If I could do that then I would happily finish with <code>refl</code>.</p>
+<p>Other style or efficiency suggestions would also be appreciated. Is there a smart way to apply <code>simp</code>? I haven't managed that either.</p>
 
 #### [ Kenny Lau (Aug 30 2018 at 07:19)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/beginner%20proof%20by%20induction%20question/near/133040385):
-what you wrote at the beginning of this message is false
+<p>what you wrote at the beginning of this message is false</p>
 
 #### [ Kenny Lau (Aug 30 2018 at 07:29)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/beginner%20proof%20by%20induction%20question/near/133040681):
-also what you stated in your lean code is false
+<p>also what you stated in your lean code is false</p>
 
 #### [ Kenny Lau (Aug 30 2018 at 07:30)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/beginner%20proof%20by%20induction%20question/near/133040726):
-```lean
-import algebra.big_operators
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">algebra</span><span class="bp">.</span><span class="n">big_operators</span>
 
-def fibonacci : ℕ → ℕ
-| 0 := 0
-| 1 := 1
-| (n+2) := fibonacci n + fibonacci (n+1)
+<span class="n">def</span> <span class="n">fibonacci</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="bp">ℕ</span>
+<span class="bp">|</span> <span class="mi">0</span> <span class="o">:=</span> <span class="mi">0</span>
+<span class="bp">|</span> <span class="mi">1</span> <span class="o">:=</span> <span class="mi">1</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">2</span><span class="o">)</span> <span class="o">:=</span> <span class="n">fibonacci</span> <span class="n">n</span> <span class="bp">+</span> <span class="n">fibonacci</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span>
 
-def fib_even_sum : ℕ → ℕ := λ n, (finset.range n).sum (λ m, fibonacci (2*m))
+<span class="n">def</span> <span class="n">fib_even_sum</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="bp">ℕ</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">n</span><span class="o">,</span> <span class="o">(</span><span class="n">finset</span><span class="bp">.</span><span class="n">range</span> <span class="n">n</span><span class="o">)</span><span class="bp">.</span><span class="n">sum</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">m</span><span class="o">,</span> <span class="n">fibonacci</span> <span class="o">(</span><span class="mi">2</span><span class="bp">*</span><span class="n">m</span><span class="o">))</span>
 
-theorem not_sum_even_fib_eq_fib_double_sub_one: ¬∀ (n : ℕ),
-fib_even_sum n = fibonacci (2*n - 1) :=
-λ H, absurd (H 1) dec_trivial
-```
+<span class="kn">theorem</span> <span class="n">not_sum_even_fib_eq_fib_double_sub_one</span><span class="o">:</span> <span class="bp">¬∀</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">),</span>
+<span class="n">fib_even_sum</span> <span class="n">n</span> <span class="bp">=</span> <span class="n">fibonacci</span> <span class="o">(</span><span class="mi">2</span><span class="bp">*</span><span class="n">n</span> <span class="bp">-</span> <span class="mi">1</span><span class="o">)</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="n">H</span><span class="o">,</span> <span class="n">absurd</span> <span class="o">(</span><span class="n">H</span> <span class="mi">1</span><span class="o">)</span> <span class="n">dec_trivial</span>
+</pre></div>
 
 #### [ Kenny Lau (Aug 30 2018 at 08:10)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/beginner%20proof%20by%20induction%20question/near/133042012):
-```lean
-import algebra.big_operators
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">algebra</span><span class="bp">.</span><span class="n">big_operators</span>
 
-def fibonacci : ℕ → ℕ
-| 0 := 0
-| 1 := 1
-| (n+2) := fibonacci n + fibonacci (n+1)
+<span class="n">def</span> <span class="n">fibonacci</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="bp">ℕ</span>
+<span class="bp">|</span> <span class="mi">0</span> <span class="o">:=</span> <span class="mi">0</span>
+<span class="bp">|</span> <span class="mi">1</span> <span class="o">:=</span> <span class="mi">1</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">2</span><span class="o">)</span> <span class="o">:=</span> <span class="n">fibonacci</span> <span class="n">n</span> <span class="bp">+</span> <span class="n">fibonacci</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span>
 
-def fib_even_sum : ℕ → ℕ := λ n, (finset.range n).sum (λ m, fibonacci (2*m))
+<span class="n">def</span> <span class="n">fib_even_sum</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="bp">ℕ</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">n</span><span class="o">,</span> <span class="o">(</span><span class="n">finset</span><span class="bp">.</span><span class="n">range</span> <span class="n">n</span><span class="o">)</span><span class="bp">.</span><span class="n">sum</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">m</span><span class="o">,</span> <span class="n">fibonacci</span> <span class="o">(</span><span class="mi">2</span><span class="bp">*</span><span class="n">m</span><span class="o">))</span>
 
-theorem sum_even_fib_eq_fib_double_sub_three (n : ℕ) :
-  fib_even_sum n = fibonacci (2*n - 1) - 1 :=
-begin
-  cases n with n, {refl},
-  change _ = fibonacci (2 * n + 2 - 1) - 1,
-  rw [nat.add_sub_assoc],
-  change _ = fibonacci (2 * n + 1) - 1,
-  unfold fib_even_sum,
-  rw [finset.sum_range_succ],
-  induction n with n ih, {refl},
-  rw [finset.sum_range_succ, ih, add_comm],
-  change fibonacci (2*n+1) - 1 + fibonacci (2*n+2) = fibonacci (2*n+3) - 1,
-  rw [← nat.sub_add_comm], refl,
-  { clear ih,
-    induction n with n ih, {refl},
-    change 1 ≤ fibonacci (2*n+3),
-    unfold fibonacci,
-    transitivity, {exact ih},
-    apply nat.le_add_right },
-  from dec_trivial
-end
-```
+<span class="kn">theorem</span> <span class="n">sum_even_fib_eq_fib_double_sub_three</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">fib_even_sum</span> <span class="n">n</span> <span class="bp">=</span> <span class="n">fibonacci</span> <span class="o">(</span><span class="mi">2</span><span class="bp">*</span><span class="n">n</span> <span class="bp">-</span> <span class="mi">1</span><span class="o">)</span> <span class="bp">-</span> <span class="mi">1</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">cases</span> <span class="n">n</span> <span class="k">with</span> <span class="n">n</span><span class="o">,</span> <span class="o">{</span><span class="n">refl</span><span class="o">},</span>
+  <span class="n">change</span> <span class="bp">_</span> <span class="bp">=</span> <span class="n">fibonacci</span> <span class="o">(</span><span class="mi">2</span> <span class="bp">*</span> <span class="n">n</span> <span class="bp">+</span> <span class="mi">2</span> <span class="bp">-</span> <span class="mi">1</span><span class="o">)</span> <span class="bp">-</span> <span class="mi">1</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="o">[</span><span class="n">nat</span><span class="bp">.</span><span class="n">add_sub_assoc</span><span class="o">],</span>
+  <span class="n">change</span> <span class="bp">_</span> <span class="bp">=</span> <span class="n">fibonacci</span> <span class="o">(</span><span class="mi">2</span> <span class="bp">*</span> <span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="bp">-</span> <span class="mi">1</span><span class="o">,</span>
+  <span class="n">unfold</span> <span class="n">fib_even_sum</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="o">[</span><span class="n">finset</span><span class="bp">.</span><span class="n">sum_range_succ</span><span class="o">],</span>
+  <span class="n">induction</span> <span class="n">n</span> <span class="k">with</span> <span class="n">n</span> <span class="n">ih</span><span class="o">,</span> <span class="o">{</span><span class="n">refl</span><span class="o">},</span>
+  <span class="n">rw</span> <span class="o">[</span><span class="n">finset</span><span class="bp">.</span><span class="n">sum_range_succ</span><span class="o">,</span> <span class="n">ih</span><span class="o">,</span> <span class="n">add_comm</span><span class="o">],</span>
+  <span class="n">change</span> <span class="n">fibonacci</span> <span class="o">(</span><span class="mi">2</span><span class="bp">*</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="bp">-</span> <span class="mi">1</span> <span class="bp">+</span> <span class="n">fibonacci</span> <span class="o">(</span><span class="mi">2</span><span class="bp">*</span><span class="n">n</span><span class="bp">+</span><span class="mi">2</span><span class="o">)</span> <span class="bp">=</span> <span class="n">fibonacci</span> <span class="o">(</span><span class="mi">2</span><span class="bp">*</span><span class="n">n</span><span class="bp">+</span><span class="mi">3</span><span class="o">)</span> <span class="bp">-</span> <span class="mi">1</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="o">[</span><span class="err">←</span> <span class="n">nat</span><span class="bp">.</span><span class="n">sub_add_comm</span><span class="o">],</span> <span class="n">refl</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">clear</span> <span class="n">ih</span><span class="o">,</span>
+    <span class="n">induction</span> <span class="n">n</span> <span class="k">with</span> <span class="n">n</span> <span class="n">ih</span><span class="o">,</span> <span class="o">{</span><span class="n">refl</span><span class="o">},</span>
+    <span class="n">change</span> <span class="mi">1</span> <span class="bp">≤</span> <span class="n">fibonacci</span> <span class="o">(</span><span class="mi">2</span><span class="bp">*</span><span class="n">n</span><span class="bp">+</span><span class="mi">3</span><span class="o">),</span>
+    <span class="n">unfold</span> <span class="n">fibonacci</span><span class="o">,</span>
+    <span class="n">transitivity</span><span class="o">,</span> <span class="o">{</span><span class="n">exact</span> <span class="n">ih</span><span class="o">},</span>
+    <span class="n">apply</span> <span class="n">nat</span><span class="bp">.</span><span class="n">le_add_right</span> <span class="o">},</span>
+  <span class="k">from</span> <span class="n">dec_trivial</span>
+<span class="kn">end</span>
+</pre></div>
 
 #### [ Kevin Buzzard (Aug 30 2018 at 13:30)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/beginner%20proof%20by%20induction%20question/near/133053991):
-Note that your goal about `fibonacci (2 * n - 1) + fibonacci (2 * n) = fibonacci (2 * n + 2* 1 - 1)` is false if `n = 0`, because `0 - 1 = 0`.
+<p>Note that your goal about <code>fibonacci (2 * n - 1) + fibonacci (2 * n) = fibonacci (2 * n + 2* 1 - 1)</code> is false if <code>n = 0</code>, because <code>0 - 1 = 0</code>.</p>
 
 #### [ Bryan Gin-ge Chen (Aug 30 2018 at 14:21)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/beginner%20proof%20by%20induction%20question/near/133056271):
-Ah, thanks! That was  really silly of me... I got lazy because I had previously proved this:
-```lean
-def odd : ℕ → ℕ := λ n, 2*n+1
+<p>Ah, thanks! That was  really silly of me... I got lazy because I had previously proved this:</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">odd</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="bp">ℕ</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">n</span><span class="o">,</span> <span class="mi">2</span><span class="bp">*</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span>
 
-def fib_odd_sum : ℕ → ℕ := λ n, (finset.range n).sum (λ m, fibonacci (odd m))
+<span class="n">def</span> <span class="n">fib_odd_sum</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="bp">ℕ</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">n</span><span class="o">,</span> <span class="o">(</span><span class="n">finset</span><span class="bp">.</span><span class="n">range</span> <span class="n">n</span><span class="o">)</span><span class="bp">.</span><span class="n">sum</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">m</span><span class="o">,</span> <span class="n">fibonacci</span> <span class="o">(</span><span class="n">odd</span> <span class="n">m</span><span class="o">))</span>
 
-theorem sum_odd_fib_eq_fib_double : ∀ (n : ℕ), 
-fib_odd_sum n = fibonacci (2*n) 
-| 0 := rfl
-| (nat.succ n) := 
-have f1 : (finset.range n).sum (λ m, fibonacci (odd m)) = fib_odd_sum n, by refl,
-begin
-unfold fib_odd_sum, 
-rw [finset.sum_range_succ, f1, sum_odd_fib_eq_fib_double, add_comm],
-refl
-end
-```
-and I just wanted to copy and paste stuff. Granted, I should still have checked what I was trying to prove...
+<span class="kn">theorem</span> <span class="n">sum_odd_fib_eq_fib_double</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">),</span>
+<span class="n">fib_odd_sum</span> <span class="n">n</span> <span class="bp">=</span> <span class="n">fibonacci</span> <span class="o">(</span><span class="mi">2</span><span class="bp">*</span><span class="n">n</span><span class="o">)</span>
+<span class="bp">|</span> <span class="mi">0</span> <span class="o">:=</span> <span class="n">rfl</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">n</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">have</span> <span class="n">f1</span> <span class="o">:</span> <span class="o">(</span><span class="n">finset</span><span class="bp">.</span><span class="n">range</span> <span class="n">n</span><span class="o">)</span><span class="bp">.</span><span class="n">sum</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">m</span><span class="o">,</span> <span class="n">fibonacci</span> <span class="o">(</span><span class="n">odd</span> <span class="n">m</span><span class="o">))</span> <span class="bp">=</span> <span class="n">fib_odd_sum</span> <span class="n">n</span><span class="o">,</span> <span class="k">by</span> <span class="n">refl</span><span class="o">,</span>
+<span class="k">begin</span>
+<span class="n">unfold</span> <span class="n">fib_odd_sum</span><span class="o">,</span>
+<span class="n">rw</span> <span class="o">[</span><span class="n">finset</span><span class="bp">.</span><span class="n">sum_range_succ</span><span class="o">,</span> <span class="n">f1</span><span class="o">,</span> <span class="n">sum_odd_fib_eq_fib_double</span><span class="o">,</span> <span class="n">add_comm</span><span class="o">],</span>
+<span class="n">refl</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>and I just wanted to copy and paste stuff. Granted, I should still have checked what I was trying to prove...</p>
 
 #### [ Patrick Massot (Aug 30 2018 at 14:33)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/beginner%20proof%20by%20induction%20question/near/133056881):
-We will soon have tools to avoid such kind of mistakes
+<p>We will soon have tools to avoid such kind of mistakes</p>
 
 #### [ Kevin Buzzard (Aug 30 2018 at 14:37)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/beginner%20proof%20by%20induction%20question/near/133057027):
-You mean Kenny?
+<p>You mean Kenny?</p>
 
 #### [ Patrick Massot (Aug 30 2018 at 14:41)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/beginner%20proof%20by%20induction%20question/near/133057171):
-I mean the tactic [sanity_check](https://github.com/robertylewis/mathematica_examples/blob/master/src/sanity_check.lean) that Rob showed in Orsay, Simon's [SlimCheck](https://github.com/cipher1024/slim_check), and [Nunchaku](https://arxiv.org/abs/1606.05945) in Lean
+<p>I mean the tactic <a href="https://github.com/robertylewis/mathematica_examples/blob/master/src/sanity_check.lean" target="_blank" title="https://github.com/robertylewis/mathematica_examples/blob/master/src/sanity_check.lean">sanity_check</a> that Rob showed in Orsay, Simon's <a href="https://github.com/cipher1024/slim_check" target="_blank" title="https://github.com/cipher1024/slim_check">SlimCheck</a>, and <a href="https://arxiv.org/abs/1606.05945" target="_blank" title="https://arxiv.org/abs/1606.05945">Nunchaku</a> in Lean</p>
 
 #### [ Johannes Hölzl (Aug 30 2018 at 15:05)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/beginner%20proof%20by%20induction%20question/near/133058279):
-You find Pablo's Nunchaku-Lean prototype in https://gitlab.binets.fr/pablo.le-henaff/nunchaku-lean
+<p>You find Pablo's Nunchaku-Lean prototype in <a href="https://gitlab.binets.fr/pablo.le-henaff/nunchaku-lean" target="_blank" title="https://gitlab.binets.fr/pablo.le-henaff/nunchaku-lean">https://gitlab.binets.fr/pablo.le-henaff/nunchaku-lean</a></p>
 
 #### [ Johannes Hölzl (Aug 30 2018 at 15:06)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/beginner%20proof%20by%20induction%20question/near/133058343):
-it doesn't yet implement the dependent type as proposed by the arxiv paper, but hopefully in the future it does
+<p>it doesn't yet implement the dependent type as proposed by the arxiv paper, but hopefully in the future it does</p>
 
 #### [ Patrick Massot (Aug 30 2018 at 15:09)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/beginner%20proof%20by%20induction%20question/near/133058502):
-is there any documentation explaining how to use it?
+<p>is there any documentation explaining how to use it?</p>
 
 #### [ Johannes Hölzl (Aug 30 2018 at 15:23)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/beginner%20proof%20by%20induction%20question/near/133059392):
-Not yet. It is only a prototype. Currently, it doesn't even have a `leanpkg.toml`.
-What should work is:
-```lean
-import nunchaku
+<p>Not yet. It is only a prototype. Currently, it doesn't even have a <code>leanpkg.toml</code>.<br>
+What should work is:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">nunchaku</span>
 
-example (n : nat) : n > 1  := by nunchaku
-```
-and it should report n = 0 as counterexample.
+<span class="kn">example</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">nat</span><span class="o">)</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">&gt;</span> <span class="mi">1</span>  <span class="o">:=</span> <span class="k">by</span> <span class="n">nunchaku</span>
+</pre></div>
+
+
+<p>and it should report n = 0 as counterexample.</p>
 
 #### [ Patrick Massot (Aug 30 2018 at 16:44)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/beginner%20proof%20by%20induction%20question/near/133064702):
-Thanks. I guess I'll need to see more documentation (including how to install all the dependencies)
+<p>Thanks. I guess I'll need to see more documentation (including how to install all the dependencies)</p>
 
 #### [ Bryan Gin-ge Chen (Aug 30 2018 at 18:16)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/beginner%20proof%20by%20induction%20question/near/133069870):
-Returning to my original problem, here's my fixed up proof:
-```lean
-import algebra.big_operators
+<p>Returning to my original problem, here's my fixed up proof:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">algebra</span><span class="bp">.</span><span class="n">big_operators</span>
 
-def fibonacci : ℕ → ℕ
-| 0 := 0
-| 1 := 1
-| (n+2) := fibonacci n + fibonacci (n+1)
+<span class="n">def</span> <span class="n">fibonacci</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="bp">ℕ</span>
+<span class="bp">|</span> <span class="mi">0</span> <span class="o">:=</span> <span class="mi">0</span>
+<span class="bp">|</span> <span class="mi">1</span> <span class="o">:=</span> <span class="mi">1</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">2</span><span class="o">)</span> <span class="o">:=</span> <span class="n">fibonacci</span> <span class="n">n</span> <span class="bp">+</span> <span class="n">fibonacci</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span>
 
-def fib_even_sum : ℕ → ℕ := λ n, (finset.range n).sum (λ m, fibonacci (2*m))
+<span class="n">def</span> <span class="n">fib_even_sum</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="bp">ℕ</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">n</span><span class="o">,</span> <span class="o">(</span><span class="n">finset</span><span class="bp">.</span><span class="n">range</span> <span class="n">n</span><span class="o">)</span><span class="bp">.</span><span class="n">sum</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">m</span><span class="o">,</span> <span class="n">fibonacci</span> <span class="o">(</span><span class="mi">2</span><span class="bp">*</span><span class="n">m</span><span class="o">))</span>
 
-lemma succ_gt_zero (n : ℕ): nat.succ n > 0 := dec_trivial
+<span class="kn">lemma</span> <span class="n">succ_gt_zero</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">):</span> <span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">n</span> <span class="bp">&gt;</span> <span class="mi">0</span> <span class="o">:=</span> <span class="n">dec_trivial</span>
 
-theorem sum_even_fib_eq_fib_double_sub_one: ∀ (n : ℕ),
-n>0 → fib_even_sum n + 1 = fibonacci (2*n - 1)
-| 0 := begin
-intro h,
-exact false.elim ((gt_irrefl 0) h)
-end
-| 1 := begin
-intro h,
-refl
-end
-| (nat.succ (n+1)) := 
-have f1 : (finset.range (n+1)).sum (λ m, fibonacci (2*m)) = fib_even_sum (n+1), by refl,
-have f2 : fib_even_sum (n+1) + 1 = fibonacci (2*(n+1) - 1), by exact sum_even_fib_eq_fib_double_sub_one (n+1) (succ_gt_zero n),
-begin
-intro h,
-unfold fib_even_sum,
-rw [finset.sum_range_succ, f1, add_assoc, add_comm, f2, add_comm, nat.succ_eq_add_one, mul_add, add_comm],
-change fibonacci (2 * n + 1) + fibonacci (2 * n + 2) = fibonacci (2 * n + 3),
-refl
-end
-```
+<span class="kn">theorem</span> <span class="n">sum_even_fib_eq_fib_double_sub_one</span><span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">),</span>
+<span class="n">n</span><span class="bp">&gt;</span><span class="mi">0</span> <span class="bp">→</span> <span class="n">fib_even_sum</span> <span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span> <span class="bp">=</span> <span class="n">fibonacci</span> <span class="o">(</span><span class="mi">2</span><span class="bp">*</span><span class="n">n</span> <span class="bp">-</span> <span class="mi">1</span><span class="o">)</span>
+<span class="bp">|</span> <span class="mi">0</span> <span class="o">:=</span> <span class="k">begin</span>
+<span class="n">intro</span> <span class="n">h</span><span class="o">,</span>
+<span class="n">exact</span> <span class="n">false</span><span class="bp">.</span><span class="n">elim</span> <span class="o">((</span><span class="n">gt_irrefl</span> <span class="mi">0</span><span class="o">)</span> <span class="n">h</span><span class="o">)</span>
+<span class="kn">end</span>
+<span class="bp">|</span> <span class="mi">1</span> <span class="o">:=</span> <span class="k">begin</span>
+<span class="n">intro</span> <span class="n">h</span><span class="o">,</span>
+<span class="n">refl</span>
+<span class="kn">end</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">))</span> <span class="o">:=</span>
+<span class="k">have</span> <span class="n">f1</span> <span class="o">:</span> <span class="o">(</span><span class="n">finset</span><span class="bp">.</span><span class="n">range</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">))</span><span class="bp">.</span><span class="n">sum</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">m</span><span class="o">,</span> <span class="n">fibonacci</span> <span class="o">(</span><span class="mi">2</span><span class="bp">*</span><span class="n">m</span><span class="o">))</span> <span class="bp">=</span> <span class="n">fib_even_sum</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">),</span> <span class="k">by</span> <span class="n">refl</span><span class="o">,</span>
+<span class="k">have</span> <span class="n">f2</span> <span class="o">:</span> <span class="n">fib_even_sum</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="bp">+</span> <span class="mi">1</span> <span class="bp">=</span> <span class="n">fibonacci</span> <span class="o">(</span><span class="mi">2</span><span class="bp">*</span><span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="bp">-</span> <span class="mi">1</span><span class="o">),</span> <span class="k">by</span> <span class="n">exact</span> <span class="n">sum_even_fib_eq_fib_double_sub_one</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="o">(</span><span class="n">succ_gt_zero</span> <span class="n">n</span><span class="o">),</span>
+<span class="k">begin</span>
+<span class="n">intro</span> <span class="n">h</span><span class="o">,</span>
+<span class="n">unfold</span> <span class="n">fib_even_sum</span><span class="o">,</span>
+<span class="n">rw</span> <span class="o">[</span><span class="n">finset</span><span class="bp">.</span><span class="n">sum_range_succ</span><span class="o">,</span> <span class="n">f1</span><span class="o">,</span> <span class="n">add_assoc</span><span class="o">,</span> <span class="n">add_comm</span><span class="o">,</span> <span class="n">f2</span><span class="o">,</span> <span class="n">add_comm</span><span class="o">,</span> <span class="n">nat</span><span class="bp">.</span><span class="n">succ_eq_add_one</span><span class="o">,</span> <span class="n">mul_add</span><span class="o">,</span> <span class="n">add_comm</span><span class="o">],</span>
+<span class="n">change</span> <span class="n">fibonacci</span> <span class="o">(</span><span class="mi">2</span> <span class="bp">*</span> <span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="bp">+</span> <span class="n">fibonacci</span> <span class="o">(</span><span class="mi">2</span> <span class="bp">*</span> <span class="n">n</span> <span class="bp">+</span> <span class="mi">2</span><span class="o">)</span> <span class="bp">=</span> <span class="n">fibonacci</span> <span class="o">(</span><span class="mi">2</span> <span class="bp">*</span> <span class="n">n</span> <span class="bp">+</span> <span class="mi">3</span><span class="o">),</span>
+<span class="n">refl</span>
+<span class="kn">end</span>
+</pre></div>
 
 #### [ Bryan Gin-ge Chen (Aug 30 2018 at 18:17)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/beginner%20proof%20by%20induction%20question/near/133069890):
-Thanks to Kenny for his proof as well, which was very instructive.
+<p>Thanks to Kenny for his proof as well, which was very instructive.</p>
 
 #### [ Bryan Gin-ge Chen (Sep 04 2018 at 22:04)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/beginner%20proof%20by%20induction%20question/near/133333244):
-If anyone has a strong stomach, I'd appreciate feedback on this ugly proof of yet another silly Fibonacci fact (this time, $$F_{n+1}^2-F_nF_{n+2}=(-1)^n $$):
-```lean
-import algebra.big_operators algebra.group_power
+<p>If anyone has a strong stomach, I'd appreciate feedback on this ugly proof of yet another silly Fibonacci fact (this time, <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msubsup><mi>F</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow><mn>2</mn></msubsup><mo>−</mo><msub><mi>F</mi><mi>n</mi></msub><msub><mi>F</mi><mrow><mi>n</mi><mo>+</mo><mn>2</mn></mrow></msub><mo>=</mo><mo>(</mo><mo>−</mo><mn>1</mn><msup><mo>)</mo><mi>n</mi></msup></mrow><annotation encoding="application/x-tex">F_{n+1}^2-F_nF_{n+2}=(-1)^n </annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.8141079999999998em;"></span><span class="strut bottom" style="height:1.1205469999999997em;vertical-align:-0.30643899999999996em;"></span><span class="base"><span class="mord"><span class="mord mathit" style="margin-right:0.13889em;">F</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999998em;"><span style="top:-2.451892em;margin-left:-0.13889em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathit mtight">n</span><span class="mbin mtight">+</span><span class="mord mathrm mtight">1</span></span></span></span><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathrm mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.30643899999999996em;"></span></span></span></span></span><span class="mbin">−</span><span class="mord"><span class="mord mathit" style="margin-right:0.13889em;">F</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.13889em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathit mtight">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"></span></span></span></span></span><span class="mord"><span class="mord mathit" style="margin-right:0.13889em;">F</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.301108em;"><span style="top:-2.5500000000000003em;margin-left:-0.13889em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathit mtight">n</span><span class="mbin mtight">+</span><span class="mord mathrm mtight">2</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.208331em;"></span></span></span></span></span><span class="mrel">=</span><span class="mopen">(</span><span class="mord">−</span><span class="mord mathrm">1</span><span class="mclose"><span class="mclose">)</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.664392em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathit mtight">n</span></span></span></span></span></span></span></span></span></span></span>):</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">algebra</span><span class="bp">.</span><span class="n">big_operators</span> <span class="n">algebra</span><span class="bp">.</span><span class="n">group_power</span>
 
-def F : ℕ → ℕ
-| 0 := 0
-| 1 := 1
-| (n+2) := F n + F (n+1)
+<span class="n">def</span> <span class="n">F</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="bp">ℕ</span>
+<span class="bp">|</span> <span class="mi">0</span> <span class="o">:=</span> <span class="mi">0</span>
+<span class="bp">|</span> <span class="mi">1</span> <span class="o">:=</span> <span class="mi">1</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">2</span><span class="o">)</span> <span class="o">:=</span> <span class="n">F</span> <span class="n">n</span> <span class="bp">+</span> <span class="n">F</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span>
 
-variables (a b c d e:ℤ)
-lemma abcde : a*b + c*d - (e + d*c) = (-1)*(e - b*a) :=
-begin
-  rw [add_comm, sub_eq_add_neg, neg_add,
-  ←add_assoc, add_comm, mul_comm,
-  ←add_assoc, ←add_assoc, neg_add_self, zero_add],
-  simp [mul_comm]
-end
+<span class="kn">variables</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="n">d</span> <span class="n">e</span><span class="o">:</span><span class="bp">ℤ</span><span class="o">)</span>
+<span class="kn">lemma</span> <span class="n">abcde</span> <span class="o">:</span> <span class="n">a</span><span class="bp">*</span><span class="n">b</span> <span class="bp">+</span> <span class="n">c</span><span class="bp">*</span><span class="n">d</span> <span class="bp">-</span> <span class="o">(</span><span class="n">e</span> <span class="bp">+</span> <span class="n">d</span><span class="bp">*</span><span class="n">c</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="bp">-</span><span class="mi">1</span><span class="o">)</span><span class="bp">*</span><span class="o">(</span><span class="n">e</span> <span class="bp">-</span> <span class="n">b</span><span class="bp">*</span><span class="n">a</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">rw</span> <span class="o">[</span><span class="n">add_comm</span><span class="o">,</span> <span class="n">sub_eq_add_neg</span><span class="o">,</span> <span class="n">neg_add</span><span class="o">,</span>
+  <span class="err">←</span><span class="n">add_assoc</span><span class="o">,</span> <span class="n">add_comm</span><span class="o">,</span> <span class="n">mul_comm</span><span class="o">,</span>
+  <span class="err">←</span><span class="n">add_assoc</span><span class="o">,</span> <span class="err">←</span><span class="n">add_assoc</span><span class="o">,</span> <span class="n">neg_add_self</span><span class="o">,</span> <span class="n">zero_add</span><span class="o">],</span>
+  <span class="n">simp</span> <span class="o">[</span><span class="n">mul_comm</span><span class="o">]</span>
+<span class="kn">end</span>
 
-open nat
+<span class="kn">open</span> <span class="n">nat</span>
 
-variable n : ℕ
-local notation [parsing_only] `F_n` := ↑(F n)
-local notation [parsing_only] `F_n1` := ↑(F (succ n))
-local notation [parsing_only] `F_n2` := ↑(F (succ n+1))
+<span class="kn">variable</span> <span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span>
+<span class="n">local</span> <span class="kn">notation</span> <span class="o">[</span><span class="n">parsing_only</span><span class="o">]</span> <span class="bp">`</span><span class="n">F_n</span><span class="bp">`</span> <span class="o">:=</span> <span class="err">↑</span><span class="o">(</span><span class="n">F</span> <span class="n">n</span><span class="o">)</span>
+<span class="n">local</span> <span class="kn">notation</span> <span class="o">[</span><span class="n">parsing_only</span><span class="o">]</span> <span class="bp">`</span><span class="n">F_n1</span><span class="bp">`</span> <span class="o">:=</span> <span class="err">↑</span><span class="o">(</span><span class="n">F</span> <span class="o">(</span><span class="n">succ</span> <span class="n">n</span><span class="o">))</span>
+<span class="n">local</span> <span class="kn">notation</span> <span class="o">[</span><span class="n">parsing_only</span><span class="o">]</span> <span class="bp">`</span><span class="n">F_n2</span><span class="bp">`</span> <span class="o">:=</span> <span class="err">↑</span><span class="o">(</span><span class="n">F</span> <span class="o">(</span><span class="n">succ</span> <span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">))</span>
 
-theorem ex10 : ((F (n+1) ^ 2):ℤ) - (F n) * (F (n+2)) = (-1) ^ n :=
-begin
-  induction n with n ih, {refl},
-  unfold pow monoid.pow,
-  unfold pow monoid.pow at ih,
-  rw [←ih, mul_one, mul_one],
-  change ↑((F (succ n + 1)) * (F n + F (succ n)))
-    - (F_n1 * (F_n1 + F_n2))
-    = (-1:ℤ) * (F_n1 * F_n1 - F_n * F_n2),
-  rw [mul_add, mul_add, int.coe_nat_add],
-  change F_n2 * F_n + F_n2 * F_n1
-    -(F_n1 * F_n1 + F_n1 * F_n2)
-    = (-1:ℤ) * (F_n1 * F_n1 - F_n * F_n2),
-  rw [abcde]
-end
-```
-Is there a better tactic to use for proving `abcde` (or better, getting around it entirely)? Constructing these long sequences of `rw`s is very tiresome but I don't have a good idea of when I can throw in `simp`.
+<span class="kn">theorem</span> <span class="n">ex10</span> <span class="o">:</span> <span class="o">((</span><span class="n">F</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="err">^</span> <span class="mi">2</span><span class="o">):</span><span class="bp">ℤ</span><span class="o">)</span> <span class="bp">-</span> <span class="o">(</span><span class="n">F</span> <span class="n">n</span><span class="o">)</span> <span class="bp">*</span> <span class="o">(</span><span class="n">F</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">2</span><span class="o">))</span> <span class="bp">=</span> <span class="o">(</span><span class="bp">-</span><span class="mi">1</span><span class="o">)</span> <span class="err">^</span> <span class="n">n</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">induction</span> <span class="n">n</span> <span class="k">with</span> <span class="n">n</span> <span class="n">ih</span><span class="o">,</span> <span class="o">{</span><span class="n">refl</span><span class="o">},</span>
+  <span class="n">unfold</span> <span class="n">pow</span> <span class="n">monoid</span><span class="bp">.</span><span class="n">pow</span><span class="o">,</span>
+  <span class="n">unfold</span> <span class="n">pow</span> <span class="n">monoid</span><span class="bp">.</span><span class="n">pow</span> <span class="n">at</span> <span class="n">ih</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="o">[</span><span class="err">←</span><span class="n">ih</span><span class="o">,</span> <span class="n">mul_one</span><span class="o">,</span> <span class="n">mul_one</span><span class="o">],</span>
+  <span class="n">change</span> <span class="err">↑</span><span class="o">((</span><span class="n">F</span> <span class="o">(</span><span class="n">succ</span> <span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">))</span> <span class="bp">*</span> <span class="o">(</span><span class="n">F</span> <span class="n">n</span> <span class="bp">+</span> <span class="n">F</span> <span class="o">(</span><span class="n">succ</span> <span class="n">n</span><span class="o">)))</span>
+    <span class="bp">-</span> <span class="o">(</span><span class="n">F_n1</span> <span class="bp">*</span> <span class="o">(</span><span class="n">F_n1</span> <span class="bp">+</span> <span class="n">F_n2</span><span class="o">))</span>
+    <span class="bp">=</span> <span class="o">(</span><span class="bp">-</span><span class="mi">1</span><span class="o">:</span><span class="bp">ℤ</span><span class="o">)</span> <span class="bp">*</span> <span class="o">(</span><span class="n">F_n1</span> <span class="bp">*</span> <span class="n">F_n1</span> <span class="bp">-</span> <span class="n">F_n</span> <span class="bp">*</span> <span class="n">F_n2</span><span class="o">),</span>
+  <span class="n">rw</span> <span class="o">[</span><span class="n">mul_add</span><span class="o">,</span> <span class="n">mul_add</span><span class="o">,</span> <span class="n">int</span><span class="bp">.</span><span class="n">coe_nat_add</span><span class="o">],</span>
+  <span class="n">change</span> <span class="n">F_n2</span> <span class="bp">*</span> <span class="n">F_n</span> <span class="bp">+</span> <span class="n">F_n2</span> <span class="bp">*</span> <span class="n">F_n1</span>
+    <span class="bp">-</span><span class="o">(</span><span class="n">F_n1</span> <span class="bp">*</span> <span class="n">F_n1</span> <span class="bp">+</span> <span class="n">F_n1</span> <span class="bp">*</span> <span class="n">F_n2</span><span class="o">)</span>
+    <span class="bp">=</span> <span class="o">(</span><span class="bp">-</span><span class="mi">1</span><span class="o">:</span><span class="bp">ℤ</span><span class="o">)</span> <span class="bp">*</span> <span class="o">(</span><span class="n">F_n1</span> <span class="bp">*</span> <span class="n">F_n1</span> <span class="bp">-</span> <span class="n">F_n</span> <span class="bp">*</span> <span class="n">F_n2</span><span class="o">),</span>
+  <span class="n">rw</span> <span class="o">[</span><span class="n">abcde</span><span class="o">]</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>Is there a better tactic to use for proving <code>abcde</code> (or better, getting around it entirely)? Constructing these long sequences of <code>rw</code>s is very tiresome but I don't have a good idea of when I can throw in <code>simp</code>.</p>
 
 #### [ Patrick Massot (Sep 04 2018 at 22:06)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/beginner%20proof%20by%20induction%20question/near/133333346):
-abcde is `by ring`
+<p>abcde is <code>by ring</code></p>
 
 #### [ Patrick Massot (Sep 04 2018 at 22:07)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/beginner%20proof%20by%20induction%20question/near/133333369):
-don't forget `import tactic.ring` at top
+<p>don't forget <code>import tactic.ring</code> at top</p>
 
 #### [ Chris Hughes (Sep 04 2018 at 22:08)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/beginner%20proof%20by%20induction%20question/near/133333488):
-```lean
-theorem ex10 : ((F (n+1) ^ 2):ℤ) - (F n) * (F (n+2)) = (-1) ^ n :=
-begin
-  induction n with n ih, 
-  { refl },
-  { simp [F, _root_.pow_succ, ih.symm],
-    ring },
-end
-```
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">ex10</span> <span class="o">:</span> <span class="o">((</span><span class="n">F</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="err">^</span> <span class="mi">2</span><span class="o">):</span><span class="bp">ℤ</span><span class="o">)</span> <span class="bp">-</span> <span class="o">(</span><span class="n">F</span> <span class="n">n</span><span class="o">)</span> <span class="bp">*</span> <span class="o">(</span><span class="n">F</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">2</span><span class="o">))</span> <span class="bp">=</span> <span class="o">(</span><span class="bp">-</span><span class="mi">1</span><span class="o">)</span> <span class="err">^</span> <span class="n">n</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">induction</span> <span class="n">n</span> <span class="k">with</span> <span class="n">n</span> <span class="n">ih</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">refl</span> <span class="o">},</span>
+  <span class="o">{</span> <span class="n">simp</span> <span class="o">[</span><span class="n">F</span><span class="o">,</span> <span class="bp">_</span><span class="n">root_</span><span class="bp">.</span><span class="n">pow_succ</span><span class="o">,</span> <span class="n">ih</span><span class="bp">.</span><span class="n">symm</span><span class="o">],</span>
+    <span class="n">ring</span> <span class="o">},</span>
+<span class="kn">end</span>
+</pre></div>
 
 #### [ Bryan Gin-ge Chen (Sep 04 2018 at 22:09)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/beginner%20proof%20by%20induction%20question/near/133333501):
-Ah, right. I could have sworn I tried that..
-
-Indeed, I can just delete `abcde` entirely and finish with `ring`.
+<p>Ah, right. I could have sworn I tried that..</p>
+<p>Indeed, I can just delete <code>abcde</code> entirely and finish with <code>ring</code>.</p>
 
 #### [ Bryan Gin-ge Chen (Sep 04 2018 at 22:11)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/beginner%20proof%20by%20induction%20question/near/133333626):
-@**Chris Hughes** that's not working for me, unfortunately...
+<p><span class="user-mention" data-user-id="110044">@Chris Hughes</span> that's not working for me, unfortunately...</p>
 
 #### [ Patrick Massot (Sep 04 2018 at 22:11)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/beginner%20proof%20by%20induction%20question/near/133333634):
-works here
+<p>works here</p>
 
 #### [ Chris Hughes (Sep 04 2018 at 22:11)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/beginner%20proof%20by%20induction%20question/near/133333646):
-Did you import `tactic.ring`?
+<p>Did you import <code>tactic.ring</code>?</p>
 
 #### [ Patrick Massot (Sep 04 2018 at 22:12)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/beginner%20proof%20by%20induction%20question/near/133333708):
-Chris, can you also golf my limit computation?
+<p>Chris, can you also golf my limit computation?</p>
 
 #### [ Chris Hughes (Sep 04 2018 at 22:13)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/beginner%20proof%20by%20induction%20question/near/133333726):
-Probably not. I know nothing about analysis in lean.
+<p>Probably not. I know nothing about analysis in lean.</p>
 
 #### [ Bryan Gin-ge Chen (Sep 04 2018 at 22:14)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/beginner%20proof%20by%20induction%20question/near/133333816):
-OK, it works now. I had some other notation in my main file that was interfering somehow.
+<p>OK, it works now. I had some other notation in my main file that was interfering somehow.</p>
 
 #### [ Bryan Gin-ge Chen (Sep 04 2018 at 22:24)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/beginner%20proof%20by%20induction%20question/near/133334372):
-@**Chris Hughes** If you don't mind, could you explain your thought process when you came up with that? For instance, did you peek at my ugly proof first, or did those lemmas immediately jump into your head.
-
-Is the take-away that `simp`, then `ring`should be my go-to for this sort of thing?
+<p><span class="user-mention" data-user-id="110044">@Chris Hughes</span> If you don't mind, could you explain your thought process when you came up with that? For instance, did you peek at my ugly proof first, or did those lemmas immediately jump into your head.</p>
+<p>Is the take-away that <code>simp</code>, then <code>ring</code>should be my go-to for this sort of thing?</p>
 
 #### [ Mario Carneiro (Sep 04 2018 at 22:25)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/beginner%20proof%20by%20induction%20question/near/133334439):
-`ring` does equalities between ring expressions, i.e. addition, subtraction, multiplication and powers by constants
+<p><code>ring</code> does equalities between ring expressions, i.e. addition, subtraction, multiplication and powers by constants</p>
 
 #### [ Chris Hughes (Sep 04 2018 at 22:26)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/beginner%20proof%20by%20induction%20question/near/133334506):
-I used your proof a little bit, to see that I needed induction. Other than that, it's just unfold everything, find some way of substituting in the induction hypothesis, and then hope `ring` works.
+<p>I used your proof a little bit, to see that I needed induction. Other than that, it's just unfold everything, find some way of substituting in the induction hypothesis, and then hope <code>ring</code> works.</p>
 
 #### [ Bryan Gin-ge Chen (Sep 04 2018 at 22:27)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/beginner%20proof%20by%20induction%20question/near/133334537):
-Thanks, that's very helpful!
+<p>Thanks, that's very helpful!</p>
 
 
 {% endraw %}

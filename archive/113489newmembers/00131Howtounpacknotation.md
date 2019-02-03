@@ -12,107 +12,101 @@ permalink: archive/113489newmembers/00131Howtounpacknotation.html
 
 {% raw %}
 #### [ Abhimanyu Pallavi Sudhir (Oct 14 2018 at 18:31)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20%22unpack%22%20notation%3F/near/135784139):
-How can I "unpack" notation like `∉`, `∩`, etc.? I want to convert a proposition of the form `x ∉ S` to `x ∈ S → false`. Is this possible just definitionally or do I need to apply some lemma?
+<p>How can I "unpack" notation like <code>∉</code>, <code>∩</code>, etc.? I want to convert a proposition of the form <code>x ∉ S</code> to <code>x ∈ S → false</code>. Is this possible just definitionally or do I need to apply some lemma?</p>
 
 #### [ Abhimanyu Pallavi Sudhir (Oct 14 2018 at 18:33)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20%22unpack%22%20notation%3F/near/135784203):
-You'd think just `change` should work, but it doesn't seem to do anything.
+<p>You'd think just <code>change</code> should work, but it doesn't seem to do anything.</p>
 
 #### [ Bryan Gin-ge Chen (Oct 14 2018 at 18:37)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20%22unpack%22%20notation%3F/near/135784328):
-This doesn't directly answer your question (which I think might be more a matter of how to get lean to avoid printing certain notation), but given `h : x ∉ S` and `H : x ∈ S`, the term `h H` is `false`. For this reason I don't think I've ever needed to change things like you're describing.
+<p>This doesn't directly answer your question (which I think might be more a matter of how to get lean to avoid printing certain notation), but given <code>h : x ∉ S</code> and <code>H : x ∈ S</code>, the term <code>h H</code> is <code>false</code>. For this reason I don't think I've ever needed to change things like you're describing.</p>
 
 #### [ Abhimanyu Pallavi Sudhir (Oct 14 2018 at 18:38)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20%22unpack%22%20notation%3F/near/135784372):
-But in that case, shouldn't `not_forall_not` work on something of the form `¬∀ (x : S), x ∉ T`? It gives me an error `invalid rewrite tactic, failed to synthesize type class instance`.
+<p>But in that case, shouldn't <code>not_forall_not</code> work on something of the form <code>¬∀ (x : S), x ∉ T</code>? It gives me an error <code>invalid rewrite tactic, failed to synthesize type class instance</code>.</p>
 
 #### [ Rob Lewis (Oct 14 2018 at 18:41)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20%22unpack%22%20notation%3F/near/135784458):
-`not_forall_not` requires the predicate to be decidable. Try putting `local attribute [instance] classical.prop_decidable` somewhere above your proof.
+<p><code>not_forall_not</code> requires the predicate to be decidable. Try putting <code>local attribute [instance] classical.prop_decidable</code> somewhere above your proof.</p>
 
 #### [ Abhimanyu Pallavi Sudhir (Oct 14 2018 at 18:42)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20%22unpack%22%20notation%3F/near/135784508):
-That works, thanks. But what exactly does it do? Does it just tell Lean that all propositions are decidable or is there something more? (If so, is it really any different from classical.em?)
+<p>That works, thanks. But what exactly does it do? Does it just tell Lean that all propositions are decidable or is there something more? (If so, is it really any different from classical.em?)</p>
 
 #### [ Rob Lewis (Oct 14 2018 at 18:53)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20%22unpack%22%20notation%3F/near/135784952):
-Yes, it adds a (local) type class instance that tells Lean all propositions are decidable. It's derived from classical.em.
+<p>Yes, it adds a (local) type class instance that tells Lean all propositions are decidable. It's derived from classical.em.</p>
 
 #### [ Rob Lewis (Oct 14 2018 at 18:55)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20%22unpack%22%20notation%3F/near/135785028):
-A lot of things are written using decidability instances, like the `if p then _ else _` notation. If you're working classically and don't care about decidability, you need that line at the top of your file.
+<p>A lot of things are written using decidability instances, like the <code>if p then _ else _</code> notation. If you're working classically and don't care about decidability, you need that line at the top of your file.</p>
 
 #### [ Abhimanyu Pallavi Sudhir (Oct 14 2018 at 18:56)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20%22unpack%22%20notation%3F/near/135785089):
-Ah ok -- so both em and prop-decidable follow from the same mathematical law, but have different types.
+<p>Ah ok -- so both em and prop-decidable follow from the same mathematical law, but have different types.</p>
 
 #### [ Rob Lewis (Oct 14 2018 at 18:59)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20%22unpack%22%20notation%3F/near/135785202):
-Exactly. `em` produces a proof, `prop_decidable` produces data.
+<p>Exactly. <code>em</code> produces a proof, <code>prop_decidable</code> produces data.</p>
 
 #### [ Kevin Buzzard (Oct 14 2018 at 19:39)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20%22unpack%22%20notation%3F/near/135786589):
-Abhi -- whenever you see a `failed to synthesize type class instance` error this means that the type class inference machine (the square bracket machine) has failed. The error often shows exactly what it has failed to construct (it was trying to fill in a variable you did not give it explicitly because it was in square brackets, and the goal in the error is the type of the term it failed to construct). 
+<p>Abhi -- whenever you see a <code>failed to synthesize type class instance</code> error this means that the type class inference machine (the square bracket machine) has failed. The error often shows exactly what it has failed to construct (it was trying to fill in a variable you did not give it explicitly because it was in square brackets, and the goal in the error is the type of the term it failed to construct). </p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">logic</span><span class="bp">.</span><span class="n">basic</span>
 
-```lean
-import logic.basic
+<span class="bp">#</span><span class="kn">check</span> <span class="bp">@</span><span class="n">not_forall_not</span>
+</pre></div>
 
-#check @not_forall_not
-```
 
-shows you that for this function to run in the usual way (i.e. without any messing around with `@`) Lean needs to get the type class machine to produce a proof of `decidable (∃ (x : α), p x)`. If `p` is random then Lean can't do this (because there are examples in computer science where this sort of this really is not decidable). But note that ` (∃ (x : α), p x)` is a proposition, so if you decide to be a mathematician and work in our wonderful world where every proposition is decidable (indeed, in classical mathematics there is no notion of decidability), then you can tell the type class inference machine that this is what you want to do by feeding  the relevant definition into the machine. 
-
-Now if you were making the definition "all propositions are decidable" from scratch you could just use the `instance` keyword instead of the `definition` one, but in this case the relevant claim that all propositions are decidable is already a definition (`classical.prop_decidable`) and it's in core Lean. The issue is hence that this definition is not something which the machine knows about. Rob's trick `local attribute [instance] classical.prop_decidable` (and actually from experience I would recommend instead `local attribute [instance, priority 0] classical.prop_decidable`) tags the definition with the "instance" tag, which is exactly what you need to do to make the type class inference machine notice it.
-
-You can learn more about type class inference in [chapter 10 of Theorem Proving In Lean](https://leanprover.github.io/theorem_proving_in_lean/type_classes.html)
+<p>shows you that for this function to run in the usual way (i.e. without any messing around with <code>@</code>) Lean needs to get the type class machine to produce a proof of <code>decidable (∃ (x : α), p x)</code>. If <code>p</code> is random then Lean can't do this (because there are examples in computer science where this sort of this really is not decidable). But note that <code> (∃ (x : α), p x)</code> is a proposition, so if you decide to be a mathematician and work in our wonderful world where every proposition is decidable (indeed, in classical mathematics there is no notion of decidability), then you can tell the type class inference machine that this is what you want to do by feeding  the relevant definition into the machine. </p>
+<p>Now if you were making the definition "all propositions are decidable" from scratch you could just use the <code>instance</code> keyword instead of the <code>definition</code> one, but in this case the relevant claim that all propositions are decidable is already a definition (<code>classical.prop_decidable</code>) and it's in core Lean. The issue is hence that this definition is not something which the machine knows about. Rob's trick <code>local attribute [instance] classical.prop_decidable</code> (and actually from experience I would recommend instead <code>local attribute [instance, priority 0] classical.prop_decidable</code>) tags the definition with the "instance" tag, which is exactly what you need to do to make the type class inference machine notice it.</p>
+<p>You can learn more about type class inference in <a href="https://leanprover.github.io/theorem_proving_in_lean/type_classes.html" target="_blank" title="https://leanprover.github.io/theorem_proving_in_lean/type_classes.html">chapter 10 of Theorem Proving In Lean</a></p>
 
 #### [ Kevin Buzzard (Oct 14 2018 at 19:46)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20%22unpack%22%20notation%3F/near/135786805):
-But back to the original question -- I remember well wanting to know exactly the same as what you want to know now. Here are some tips. 
+<p>But back to the original question -- I remember well wanting to know exactly the same as what you want to know now. Here are some tips. </p>
+<p>1) Before the statement of whatever you are working on, you can switch notation off completely, by writing <code>set_option pp.notation false</code>. Example:</p>
+<div class="codehilite"><pre><span></span><span class="kn">set_option</span> <span class="n">pp</span><span class="bp">.</span><span class="kn">notation</span> <span class="n">false</span>
 
-1) Before the statement of whatever you are working on, you can switch notation off completely, by writing `set_option pp.notation false`. Example:
+<span class="bp">#</span><span class="kn">check</span> <span class="mi">1</span> <span class="err">∈</span> <span class="o">(</span><span class="bp">@</span><span class="n">set</span><span class="bp">.</span><span class="n">univ</span> <span class="bp">ℕ</span><span class="o">)</span>
+<span class="c1">-- has_mem.mem 1 set.univ : Prop</span>
+</pre></div>
 
-```lean
-set_option pp.notation false 
 
-#check 1 ∈ (@set.univ ℕ)
--- has_mem.mem 1 set.univ : Prop
-```
+<p>If you want to unfold even further, there is a command for that: the <code>unfold</code> command. </p>
+<div class="codehilite"><pre><span></span><span class="kn">set_option</span> <span class="n">pp</span><span class="bp">.</span><span class="kn">notation</span> <span class="n">false</span>
 
-If you want to unfold even further, there is a command for that: the `unfold` command. 
+<span class="kn">example</span> <span class="o">:</span> <span class="mi">1</span> <span class="err">∈</span> <span class="o">(</span><span class="bp">@</span><span class="n">set</span><span class="bp">.</span><span class="n">univ</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="bp">→</span> <span class="n">false</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">unfold</span> <span class="n">has_mem</span><span class="bp">.</span><span class="n">mem</span><span class="o">,</span>
+  <span class="n">unfold</span> <span class="n">set</span><span class="bp">.</span><span class="n">mem</span><span class="o">,</span>
+  <span class="n">unfold</span> <span class="n">set</span><span class="bp">.</span><span class="n">univ</span><span class="o">,</span>
+  <span class="n">sorry</span>
+<span class="kn">end</span>
+</pre></div>
 
-```lean
-set_option pp.notation false 
 
-example : 1 ∈ (@set.univ ℕ) → false :=
-begin
-  unfold has_mem.mem,
-  unfold set.mem,
-  unfold set.univ,
-  sorry
-end
-```
-
-When I was trying to figure out what the hell was going on, I wrote a lot of code which looked like this. You can write each line after you've seen the goal at the end of the line before. The `unfolds` do not change the goal at all (I think), they just change the way it is displayed. So once you've unfolded enough to figure out what's going on you can actually just delete all the `unfolds`. Also you can write them all in one line (`unfold X Y Z ...`) (no commas).
+<p>When I was trying to figure out what the hell was going on, I wrote a lot of code which looked like this. You can write each line after you've seen the goal at the end of the line before. The <code>unfolds</code> do not change the goal at all (I think), they just change the way it is displayed. So once you've unfolded enough to figure out what's going on you can actually just delete all the <code>unfolds</code>. Also you can write them all in one line (<code>unfold X Y Z ...</code>) (no commas).</p>
 
 #### [ Abhimanyu Pallavi Sudhir (Oct 14 2018 at 19:57)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20%22unpack%22%20notation%3F/near/135787136):
-@**Kevin Buzzard** "The unfolds do not change the goal at all" -- the same applies to `change`, doesn't it? Except you need to actually supply what you want to change things to. I've been using that to clarify things so far. `unfold` is nice, but with `change` I can actually figure out the answer without Lean telling me.
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> "The unfolds do not change the goal at all" -- the same applies to <code>change</code>, doesn't it? Except you need to actually supply what you want to change things to. I've been using that to clarify things so far. <code>unfold</code> is nice, but with <code>change</code> I can actually figure out the answer without Lean telling me.</p>
 
 #### [ Patrick Massot (Oct 14 2018 at 20:08)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20%22unpack%22%20notation%3F/near/135787506):
-`unfold` does change the goal, there are proofs where you cannot remove an `unfold`
+<p><code>unfold</code> does change the goal, there are proofs where you cannot remove an <code>unfold</code></p>
 
 #### [ Kevin Buzzard (Oct 14 2018 at 21:44)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20%22unpack%22%20notation%3F/near/135790655):
-For goals you use `show`, for hypotheses you use `change`. I have no idea why different words are used for these.
+<p>For goals you use <code>show</code>, for hypotheses you use <code>change</code>. I have no idea why different words are used for these.</p>
 
 #### [ Abhimanyu Pallavi Sudhir (Oct 14 2018 at 21:45)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20%22unpack%22%20notation%3F/near/135790724):
-Wait, what? `change` works on goals too -- just don't put an `at` clause.
+<p>Wait, what? <code>change</code> works on goals too -- just don't put an <code>at</code> clause.</p>
 
 #### [ Patrick Massot (Oct 14 2018 at 21:46)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20%22unpack%22%20notation%3F/near/135790769):
-Yes
+<p>Yes</p>
 
 #### [ Patrick Massot (Oct 14 2018 at 21:46)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20%22unpack%22%20notation%3F/near/135790782):
-I never understood the difference between this use of `show` and `change`. I always use `change` since it's more descriptive
+<p>I never understood the difference between this use of <code>show</code> and <code>change</code>. I always use <code>change</code> since it's more descriptive</p>
 
 #### [ Kevin Buzzard (Oct 14 2018 at 22:03)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20%22unpack%22%20notation%3F/near/135791318):
-```quote
-Wait, what? `change` works on goals too -- just don't put an `at` clause.
-```
-o_O?
+<blockquote>
+<p>Wait, what? <code>change</code> works on goals too -- just don't put an <code>at</code> clause.</p>
+</blockquote>
+<p>o_O?</p>
 
 #### [ Mario Carneiro (Oct 14 2018 at 22:07)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20%22unpack%22%20notation%3F/near/135791450):
-`change` and `show` are almost exactly the same. One difference is that `show` will also switch to another goal if it matches what you say when the first goal doesn't
+<p><code>change</code> and <code>show</code> are almost exactly the same. One difference is that <code>show</code> will also switch to another goal if it matches what you say when the first goal doesn't</p>
 
 #### [ Mario Carneiro (Oct 14 2018 at 22:08)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20%22unpack%22%20notation%3F/near/135791495):
-`change` also has `change with` which is like definitional `rw`
+<p><code>change</code> also has <code>change with</code> which is like definitional <code>rw</code></p>
 
 
 {% endraw %}

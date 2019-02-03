@@ -12,31 +12,31 @@ permalink: archive/113489newmembers/89394Writingrationals.html
 
 {% raw %}
 #### [ Abhimanyu Pallavi Sudhir (Oct 17 2018 at 18:42)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Writing%20rationals/near/135984699):
-How can I rewrite a known rational `r : \Q` in the form `rat.mk (...) (...)`?
+<p>How can I rewrite a known rational <code>r : \Q</code> in the form <code>rat.mk (...) (...)</code>?</p>
 
 #### [ Abhimanyu Pallavi Sudhir (Oct 17 2018 at 18:44)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Writing%20rationals/near/135984779):
-I expected something like `change rat.mk (rat.num) (rat.denom) at r,` but that doesn't work.
+<p>I expected something like <code>change rat.mk (rat.num) (rat.denom) at r,</code> but that doesn't work.</p>
 
 #### [ Kevin Buzzard (Oct 17 2018 at 18:44)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Writing%20rationals/near/135984790):
-Try cases on r?
+<p>Try cases on r?</p>
 
 #### [ Abhimanyu Pallavi Sudhir (Oct 17 2018 at 18:44)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Writing%20rationals/near/135984796):
-Yep, just tried that, works.
+<p>Yep, just tried that, works.</p>
 
 #### [ Kevin Buzzard (Oct 17 2018 at 18:45)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Writing%20rationals/near/135984816):
-I agree that `rat.num / rat.denom = r` but that looks to me like a theorem rather than something which is true by definition.
+<p>I agree that <code>rat.num / rat.denom = r</code> but that looks to me like a theorem rather than something which is true by definition.</p>
 
 #### [ Kevin Buzzard (Oct 17 2018 at 18:45)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Writing%20rationals/near/135984846):
-\Q is an inductive type, so you can always do cases on it. It only has one constructor so the number of goals won't change.
+<p>\Q is an inductive type, so you can always do cases on it. It only has one constructor so the number of goals won't change.</p>
 
 #### [ Scott Olson (Oct 17 2018 at 18:46)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Writing%20rationals/near/135984872):
-I just found `theorem rat.num_denom : ∀ (a : ℚ), a = rat.mk (a.num) ↑(a.denom)`
+<p>I just found <code>theorem rat.num_denom : ∀ (a : ℚ), a = rat.mk (a.num) ↑(a.denom)</code></p>
 
 #### [ Kevin Buzzard (Oct 17 2018 at 19:03)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Writing%20rationals/near/135985882):
-If you want _anything_ other than what `cases` provides (and you might well find that you want what @**Scott Olson** says rather than what I said -- I am breaking the interface) then my advice to you is to open `data/rat.lean` and pore through it until you spot what you need. Either that or get good at guessing the names of theorems (there are tips for doing this).
+<p>If you want _anything_ other than what <code>cases</code> provides (and you might well find that you want what <span class="user-mention" data-user-id="130491">@Scott Olson</span> says rather than what I said -- I am breaking the interface) then my advice to you is to open <code>data/rat.lean</code> and pore through it until you spot what you need. Either that or get good at guessing the names of theorems (there are tips for doing this).</p>
 
 #### [ Kevin Buzzard (Oct 17 2018 at 19:03)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Writing%20rationals/near/135985883):
-By the way, the actual construtor `rat.mk'` needs a couple of proofs, and that's what you'll get with `cases`. The reason the initial constructor is so inconvenient is that it guarantees that two rationals are equal if and only if they're made with the same data (remember that all proofs of a proposition are equal by definition).
+<p>By the way, the actual construtor <code>rat.mk'</code> needs a couple of proofs, and that's what you'll get with <code>cases</code>. The reason the initial constructor is so inconvenient is that it guarantees that two rationals are equal if and only if they're made with the same data (remember that all proofs of a proposition are equal by definition).</p>
 
 
 {% endraw %}

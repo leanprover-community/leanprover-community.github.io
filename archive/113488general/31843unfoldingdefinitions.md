@@ -12,38 +12,38 @@ permalink: archive/113488general/31843unfoldingdefinitions.html
 
 {% raw %}
 #### [ Guy Leroy (Aug 22 2018 at 13:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unfolding%20definitions/near/132573040):
-I have the following def:
-```lean
-def jacobi_sym : ℤ → ℤ → ℤ
-| a          1 := 1
-| a          b := if b % 2 = 1 then jacobi_sym_aux a b else 0
+<p>I have the following def:</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">jacobi_sym</span> <span class="o">:</span> <span class="bp">ℤ</span> <span class="bp">→</span> <span class="bp">ℤ</span> <span class="bp">→</span> <span class="bp">ℤ</span>
+<span class="bp">|</span> <span class="n">a</span>          <span class="mi">1</span> <span class="o">:=</span> <span class="mi">1</span>
+<span class="bp">|</span> <span class="n">a</span>          <span class="n">b</span> <span class="o">:=</span> <span class="k">if</span> <span class="n">b</span> <span class="err">%</span> <span class="mi">2</span> <span class="bp">=</span> <span class="mi">1</span> <span class="k">then</span> <span class="n">jacobi_sym_aux</span> <span class="n">a</span> <span class="n">b</span> <span class="k">else</span> <span class="mi">0</span>
 
-local notation {a|b} := jacobi_sym a b 
-```
-and I am trying to prove 
+<span class="n">local</span> <span class="kn">notation</span> <span class="o">{</span><span class="n">a</span><span class="bp">|</span><span class="n">b</span><span class="o">}</span> <span class="o">:=</span> <span class="n">jacobi_sym</span> <span class="n">a</span> <span class="n">b</span>
+</pre></div>
 
-```lean
-h : ¬n = 1
-⊢ {a|n} = ite (quadratic_res a n ∧ ¬n ∣ a) 1 (ite (¬quadratic_res a n) (-1) 0)
-```
 
-How can I unfold ``` jacoby_sym ``` such that it shows ``` if b % 2 = 1 then jacobi_sym_aux a b else 0``` ? 
-If I write ```unfold jacobi_sym``` the tactic fails
+<p>and I am trying to prove </p>
+<div class="codehilite"><pre><span></span><span class="n">h</span> <span class="o">:</span> <span class="bp">¬</span><span class="n">n</span> <span class="bp">=</span> <span class="mi">1</span>
+<span class="err">⊢</span> <span class="o">{</span><span class="n">a</span><span class="bp">|</span><span class="n">n</span><span class="o">}</span> <span class="bp">=</span> <span class="n">ite</span> <span class="o">(</span><span class="n">quadratic_res</span> <span class="n">a</span> <span class="n">n</span> <span class="bp">∧</span> <span class="bp">¬</span><span class="n">n</span> <span class="err">∣</span> <span class="n">a</span><span class="o">)</span> <span class="mi">1</span> <span class="o">(</span><span class="n">ite</span> <span class="o">(</span><span class="bp">¬</span><span class="n">quadratic_res</span> <span class="n">a</span> <span class="n">n</span><span class="o">)</span> <span class="o">(</span><span class="bp">-</span><span class="mi">1</span><span class="o">)</span> <span class="mi">0</span><span class="o">)</span>
+</pre></div>
+
+
+<p>How can I unfold <code> jacoby_sym </code> such that it shows <code> if b % 2 = 1 then jacobi_sym_aux a b else 0</code> ? <br>
+If I write <code>unfold jacobi_sym</code> the tactic fails</p>
 
 #### [ Kenny Lau (Aug 22 2018 at 13:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unfolding%20definitions/near/132573174):
-MWE please
+<p>MWE please</p>
 
 #### [ Kenny Lau (Aug 22 2018 at 13:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unfolding%20definitions/near/132573310):
-but `rw [jacobi_sym.equations._eqn_2 a n h]` should work
+<p>but <code>rw [jacobi_sym.equations._eqn_2 a n h]</code> should work</p>
 
 #### [ Kenny Lau (Aug 22 2018 at 13:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unfolding%20definitions/near/132573444):
-but a better solution would be to not use the equation compiler to define `jacobi_sym`, but rather use ite
+<p>but a better solution would be to not use the equation compiler to define <code>jacobi_sym</code>, but rather use ite</p>
 
 #### [ Guy Leroy (Aug 22 2018 at 13:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unfolding%20definitions/near/132573551):
-Thank you very much!
+<p>Thank you very much!</p>
 
 #### [ Simon Hudon (Aug 22 2018 at 17:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unfolding%20definitions/near/132583964):
-Out of curiosity, have you tried `dunfold`? It is based on `dsimp` which is more careful about preserving definitional equality.
+<p>Out of curiosity, have you tried <code>dunfold</code>? It is based on <code>dsimp</code> which is more careful about preserving definitional equality.</p>
 
 
 {% endraw %}

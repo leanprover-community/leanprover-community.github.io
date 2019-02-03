@@ -12,117 +12,112 @@ permalink: archive/113488general/03821isthereatactic.html
 
 {% raw %}
 #### [ Sean Leather (Sep 12 2018 at 10:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is%20there%20a%20tactic%3F/near/133785751):
-Is there a tactic for (part of) this?
-
-```lean
-by cases l; apply exists.intro; assumption; assumption
-```
+<p>Is there a tactic for (part of) this?</p>
+<div class="codehilite"><pre><span></span><span class="k">by</span> <span class="n">cases</span> <span class="n">l</span><span class="bp">;</span> <span class="n">apply</span> <span class="n">exists</span><span class="bp">.</span><span class="n">intro</span><span class="bp">;</span> <span class="n">assumption</span><span class="bp">;</span> <span class="n">assumption</span>
+</pre></div>
 
 #### [ Johan Commelin (Sep 12 2018 at 10:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is%20there%20a%20tactic%3F/near/133785823):
-Will `tidy` do this? Or can it not yet do `exists.intro`?
+<p>Will <code>tidy</code> do this? Or can it not yet do <code>exists.intro</code>?</p>
 
 #### [ Sean Leather (Sep 12 2018 at 10:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is%20there%20a%20tactic%3F/near/133785841):
-I've never used `tidy`.
+<p>I've never used <code>tidy</code>.</p>
 
 #### [ Johan Commelin (Sep 12 2018 at 10:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is%20there%20a%20tactic%3F/near/133785855):
-It is really cool. You'll need `import tactic.tidy`.
+<p>It is really cool. You'll need <code>import tactic.tidy</code>.</p>
 
 #### [ Kenny Lau (Sep 12 2018 at 10:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is%20there%20a%20tactic%3F/near/133785901):
-I'd just write the whole thing in term mode
+<p>I'd just write the whole thing in term mode</p>
 
 #### [ Sean Leather (Sep 12 2018 at 10:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is%20there%20a%20tactic%3F/near/133786086):
-Kenny: I had that, but the tactic is more robust to changes in `l`, which are happening.
+<p>Kenny: I had that, but the tactic is more robust to changes in <code>l</code>, which are happening.</p>
 
 #### [ Sean Leather (Sep 12 2018 at 10:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is%20there%20a%20tactic%3F/near/133786206):
-Also, `l` has a lot of fields, so either using pattern matching or `cases l with ...` is annoyingly long.
+<p>Also, <code>l</code> has a lot of fields, so either using pattern matching or <code>cases l with ...</code> is annoyingly long.</p>
 
 #### [ Johan Commelin (Sep 12 2018 at 10:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is%20there%20a%20tactic%3F/near/133786220):
-Does `tidy` work?
+<p>Does <code>tidy</code> work?</p>
 
 #### [ Sean Leather (Sep 12 2018 at 10:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is%20there%20a%20tactic%3F/near/133786279):
-` by cases l; tidy` works
+<p><code> by cases l; tidy</code> works</p>
 
 #### [ Sean Leather (Sep 12 2018 at 10:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is%20there%20a%20tactic%3F/near/133786383):
-` by cases l; tidy {trace_result:=tt}` doesn't print anything. :concerned:
+<p><code> by cases l; tidy {trace_result:=tt}</code> doesn't print anything. <span class="emoji emoji-1f615" title="concerned">:concerned:</span></p>
 
 #### [ Johan Commelin (Sep 12 2018 at 11:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is%20there%20a%20tactic%3F/near/133786679):
-Huh, so `tidy` won't do the `cases` for you? I expected that it would try that, as some last resort...
+<p>Huh, so <code>tidy</code> won't do the <code>cases</code> for you? I expected that it would try that, as some last resort...</p>
 
 #### [ Johan Commelin (Sep 12 2018 at 11:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is%20there%20a%20tactic%3F/near/133786702):
-@**Sean Leather** You can use hole commands to let VScode replace `tidy` with the proof it generated.
+<p><span class="user-mention" data-user-id="110045">@Sean Leather</span> You can use hole commands to let VScode replace <code>tidy</code> with the proof it generated.</p>
 
 #### [ Sean Leather (Sep 12 2018 at 11:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is%20there%20a%20tactic%3F/near/133786713):
-I suppose that would be listed here if it did:
-
-```lean
-meta def default_tactics : list (tactic string) :=
-[ reflexivity                                 >> pure "refl", 
-  `[exact dec_trivial]                        >> pure "exact dec_trivial",
-  propositional_goal >> assumption            >> pure "assumption",
-  `[ext1]                                     >> pure "ext1",
-  intros1                                     >>= λ ns, pure ("intros " ++ (" ".intercalate (ns.map (λ e, e.to_string)))),
-  auto_cases,
-  `[apply_auto_param]                         >> pure "apply_auto_param",
-  `[dsimp at *]                               >> pure "dsimp at *",
-  `[simp at *]                                >> pure "simp at *",
-  fsplit                                      >> pure "fsplit", 
-  injections_and_clear                        >> pure "injections_and_clear",
-  propositional_goal >> (`[solve_by_elim])    >> pure "solve_by_elim",
-  `[unfold_aux]                               >> pure "unfold_aux",
-  tidy.run_tactics ]
-```
+<p>I suppose that would be listed here if it did:</p>
+<div class="codehilite"><pre><span></span><span class="n">meta</span> <span class="n">def</span> <span class="n">default_tactics</span> <span class="o">:</span> <span class="n">list</span> <span class="o">(</span><span class="n">tactic</span> <span class="n">string</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">[</span> <span class="n">reflexivity</span>                                 <span class="bp">&gt;&gt;</span> <span class="n">pure</span> <span class="s2">&quot;refl&quot;</span><span class="o">,</span>
+  <span class="bp">`</span><span class="o">[</span><span class="n">exact</span> <span class="n">dec_trivial</span><span class="o">]</span>                        <span class="bp">&gt;&gt;</span> <span class="n">pure</span> <span class="s2">&quot;exact dec_trivial&quot;</span><span class="o">,</span>
+  <span class="n">propositional_goal</span> <span class="bp">&gt;&gt;</span> <span class="n">assumption</span>            <span class="bp">&gt;&gt;</span> <span class="n">pure</span> <span class="s2">&quot;assumption&quot;</span><span class="o">,</span>
+  <span class="bp">`</span><span class="o">[</span><span class="n">ext1</span><span class="o">]</span>                                     <span class="bp">&gt;&gt;</span> <span class="n">pure</span> <span class="s2">&quot;ext1&quot;</span><span class="o">,</span>
+  <span class="n">intros1</span>                                     <span class="bp">&gt;&gt;=</span> <span class="bp">λ</span> <span class="n">ns</span><span class="o">,</span> <span class="n">pure</span> <span class="o">(</span><span class="s2">&quot;intros &quot;</span> <span class="bp">++</span> <span class="o">(</span><span class="s2">&quot; &quot;</span><span class="bp">.</span><span class="n">intercalate</span> <span class="o">(</span><span class="n">ns</span><span class="bp">.</span><span class="n">map</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">e</span><span class="o">,</span> <span class="n">e</span><span class="bp">.</span><span class="n">to_string</span><span class="o">)))),</span>
+  <span class="n">auto_cases</span><span class="o">,</span>
+  <span class="bp">`</span><span class="o">[</span><span class="n">apply_auto_param</span><span class="o">]</span>                         <span class="bp">&gt;&gt;</span> <span class="n">pure</span> <span class="s2">&quot;apply_auto_param&quot;</span><span class="o">,</span>
+  <span class="bp">`</span><span class="o">[</span><span class="n">dsimp</span> <span class="n">at</span> <span class="bp">*</span><span class="o">]</span>                               <span class="bp">&gt;&gt;</span> <span class="n">pure</span> <span class="s2">&quot;dsimp at *&quot;</span><span class="o">,</span>
+  <span class="bp">`</span><span class="o">[</span><span class="n">simp</span> <span class="n">at</span> <span class="bp">*</span><span class="o">]</span>                                <span class="bp">&gt;&gt;</span> <span class="n">pure</span> <span class="s2">&quot;simp at *&quot;</span><span class="o">,</span>
+  <span class="n">fsplit</span>                                      <span class="bp">&gt;&gt;</span> <span class="n">pure</span> <span class="s2">&quot;fsplit&quot;</span><span class="o">,</span>
+  <span class="n">injections_and_clear</span>                        <span class="bp">&gt;&gt;</span> <span class="n">pure</span> <span class="s2">&quot;injections_and_clear&quot;</span><span class="o">,</span>
+  <span class="n">propositional_goal</span> <span class="bp">&gt;&gt;</span> <span class="o">(</span><span class="bp">`</span><span class="o">[</span><span class="n">solve_by_elim</span><span class="o">])</span>    <span class="bp">&gt;&gt;</span> <span class="n">pure</span> <span class="s2">&quot;solve_by_elim&quot;</span><span class="o">,</span>
+  <span class="bp">`</span><span class="o">[</span><span class="n">unfold_aux</span><span class="o">]</span>                               <span class="bp">&gt;&gt;</span> <span class="n">pure</span> <span class="s2">&quot;unfold_aux&quot;</span><span class="o">,</span>
+  <span class="n">tidy</span><span class="bp">.</span><span class="n">run_tactics</span> <span class="o">]</span>
+</pre></div>
 
 #### [ Johan Commelin (Sep 12 2018 at 11:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is%20there%20a%20tactic%3F/near/133786720):
-what does `auto_cases` do?
+<p>what does <code>auto_cases</code> do?</p>
 
 #### [ Sean Leather (Sep 12 2018 at 11:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is%20there%20a%20tactic%3F/near/133786728):
-No idea. :slight_smile:
+<p>No idea. <span class="emoji emoji-1f642" title="slight smile">:slight_smile:</span></p>
 
 #### [ Sean Leather (Sep 12 2018 at 11:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is%20there%20a%20tactic%3F/near/133786771):
-```lean
-  t' ← whnf t',
-  let use_cases := match t' with
-  | `(empty)     := tt
-  | `(pempty)    := tt
-  | `(unit)      := tt
-  | `(punit)     := tt
-  | `(ulift _)   := tt
-  | `(plift _)   := tt
-  | `(prod _ _)  := tt
-  | `(and _ _)   := tt
-  | `(sigma _)   := tt
-  | `(subtype _) := tt
-  | `(Exists _)  := tt
-  | `(fin 0)     := tt
-  | `(sum _ _)   := tt -- This is perhaps dangerous!
-  | `(or _ _)    := tt -- This is perhaps dangerous!
-  | _            := ff
-```
+<div class="codehilite"><pre><span></span>  <span class="n">t&#39;</span> <span class="err">←</span> <span class="n">whnf</span> <span class="n">t&#39;</span><span class="o">,</span>
+  <span class="k">let</span> <span class="n">use_cases</span> <span class="o">:=</span> <span class="k">match</span> <span class="n">t&#39;</span> <span class="k">with</span>
+  <span class="bp">|</span> <span class="bp">`</span><span class="o">(</span><span class="n">empty</span><span class="o">)</span>     <span class="o">:=</span> <span class="n">tt</span>
+  <span class="bp">|</span> <span class="bp">`</span><span class="o">(</span><span class="n">pempty</span><span class="o">)</span>    <span class="o">:=</span> <span class="n">tt</span>
+  <span class="bp">|</span> <span class="bp">`</span><span class="o">(</span><span class="n">unit</span><span class="o">)</span>      <span class="o">:=</span> <span class="n">tt</span>
+  <span class="bp">|</span> <span class="bp">`</span><span class="o">(</span><span class="n">punit</span><span class="o">)</span>     <span class="o">:=</span> <span class="n">tt</span>
+  <span class="bp">|</span> <span class="bp">`</span><span class="o">(</span><span class="n">ulift</span> <span class="bp">_</span><span class="o">)</span>   <span class="o">:=</span> <span class="n">tt</span>
+  <span class="bp">|</span> <span class="bp">`</span><span class="o">(</span><span class="n">plift</span> <span class="bp">_</span><span class="o">)</span>   <span class="o">:=</span> <span class="n">tt</span>
+  <span class="bp">|</span> <span class="bp">`</span><span class="o">(</span><span class="n">prod</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">)</span>  <span class="o">:=</span> <span class="n">tt</span>
+  <span class="bp">|</span> <span class="bp">`</span><span class="o">(</span><span class="n">and</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">)</span>   <span class="o">:=</span> <span class="n">tt</span>
+  <span class="bp">|</span> <span class="bp">`</span><span class="o">(</span><span class="n">sigma</span> <span class="bp">_</span><span class="o">)</span>   <span class="o">:=</span> <span class="n">tt</span>
+  <span class="bp">|</span> <span class="bp">`</span><span class="o">(</span><span class="n">subtype</span> <span class="bp">_</span><span class="o">)</span> <span class="o">:=</span> <span class="n">tt</span>
+  <span class="bp">|</span> <span class="bp">`</span><span class="o">(</span><span class="n">Exists</span> <span class="bp">_</span><span class="o">)</span>  <span class="o">:=</span> <span class="n">tt</span>
+  <span class="bp">|</span> <span class="bp">`</span><span class="o">(</span><span class="n">fin</span> <span class="mi">0</span><span class="o">)</span>     <span class="o">:=</span> <span class="n">tt</span>
+  <span class="bp">|</span> <span class="bp">`</span><span class="o">(</span><span class="n">sum</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">)</span>   <span class="o">:=</span> <span class="n">tt</span> <span class="c1">-- This is perhaps dangerous!</span>
+  <span class="bp">|</span> <span class="bp">`</span><span class="o">(</span><span class="n">or</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">)</span>    <span class="o">:=</span> <span class="n">tt</span> <span class="c1">-- This is perhaps dangerous!</span>
+  <span class="bp">|</span> <span class="bp">_</span>            <span class="o">:=</span> <span class="n">ff</span>
+</pre></div>
 
 #### [ Sean Leather (Sep 12 2018 at 11:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is%20there%20a%20tactic%3F/near/133786777):
-Looks like it's restricted to certain patterns.
+<p>Looks like it's restricted to certain patterns.</p>
 
 #### [ Johan Commelin (Sep 12 2018 at 11:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is%20there%20a%20tactic%3F/near/133786786):
-Right... I guess that makes sense.
+<p>Right... I guess that makes sense.</p>
 
 #### [ Johan Commelin (Sep 12 2018 at 11:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is%20there%20a%20tactic%3F/near/133786795):
-Anyway, we still golfed your proof (-;
+<p>Anyway, we still golfed your proof (-;</p>
 
 #### [ Johan Commelin (Sep 12 2018 at 11:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is%20there%20a%20tactic%3F/near/133786812):
-It makes sense that `cases l` remains in the proof. It is probably an "idea". After that it is "follow your nose"
+<p>It makes sense that <code>cases l</code> remains in the proof. It is probably an "idea". After that it is "follow your nose"</p>
 
 #### [ Sean Leather (Sep 12 2018 at 11:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is%20there%20a%20tactic%3F/near/133786813):
-Yep, thanks! I learned something new.
+<p>Yep, thanks! I learned something new.</p>
 
 #### [ Sean Leather (Sep 12 2018 at 11:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is%20there%20a%20tactic%3F/near/133786871):
-It would be nice to see what `tidy` is doing, though.
+<p>It would be nice to see what <code>tidy</code> is doing, though.</p>
 
 #### [ Keeley Hoek (Sep 12 2018 at 11:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is%20there%20a%20tactic%3F/near/133786948):
-Sean, are you using a version of mathlib which incorporates this commit?
-https://github.com/leanprover/mathlib/commit/e95111d38c0b2d666f70624ce25a5d728e0db376
+<p>Sean, are you using a version of mathlib which incorporates this commit?<br>
+<a href="https://github.com/leanprover/mathlib/commit/e95111d38c0b2d666f70624ce25a5d728e0db376" target="_blank" title="https://github.com/leanprover/mathlib/commit/e95111d38c0b2d666f70624ce25a5d728e0db376">https://github.com/leanprover/mathlib/commit/e95111d38c0b2d666f70624ce25a5d728e0db376</a></p>
 
 #### [ Sean Leather (Sep 12 2018 at 11:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is%20there%20a%20tactic%3F/near/133787037):
-@**Keeley Hoek** No, certainly not. Thanks!
+<p><span class="user-mention" data-user-id="110111">@Keeley Hoek</span> No, certainly not. Thanks!</p>
 
 
 {% endraw %}

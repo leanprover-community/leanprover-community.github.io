@@ -12,231 +12,229 @@ permalink: archive/116395maths/68348Liealgebras.html
 
 {% raw %}
 #### [ Johan Commelin (Jun 13 2018 at 10:43)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Lie%20algebras/near/127997275):
-I am completely stuck on the sorried definition. Is this just to ambitious at the moment?
-```lean
-import algebra.module
+<p>I am completely stuck on the sorried definition. Is this just to ambitious at the moment?</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">algebra</span><span class="bp">.</span><span class="n">module</span>
 
-class has_bracket (α : Type*) := (bracket : α → α → α)
+<span class="n">class</span> <span class="n">has_bracket</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">:=</span> <span class="o">(</span><span class="n">bracket</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">α</span><span class="o">)</span>
 
-local notation `[` a `,` b `]` := has_bracket.bracket a b
+<span class="n">local</span> <span class="kn">notation</span> <span class="bp">`</span><span class="o">[</span><span class="bp">`</span> <span class="n">a</span> <span class="bp">`</span><span class="o">,</span><span class="bp">`</span> <span class="n">b</span> <span class="bp">`</span><span class="o">]</span><span class="bp">`</span> <span class="o">:=</span> <span class="n">has_bracket</span><span class="bp">.</span><span class="n">bracket</span> <span class="n">a</span> <span class="n">b</span>
 
-class lie_algebra (R : out_param $ Type*) (𝔤 : Type*) [out_param $ comm_ring R]
-extends module R 𝔤, has_bracket 𝔤 :=
-(left_linear  := ∀ y : 𝔤, is_linear_map (λ x : 𝔤, [x,y]))
-(right_linear := ∀ x : 𝔤, is_linear_map (λ y : 𝔤, [x,y]))
-(alternating  := ∀ x : 𝔤, [x,x] = 0)
-(Jacobi_identity := ∀ x y z : 𝔤, [x,[y,z]] + [z,[x,y]] + [y,[z,x]] = 0)
-(anti_comm    := ∀ x y : 𝔤, [x,y] = -([y,x]))
+<span class="n">class</span> <span class="n">lie_algebra</span> <span class="o">(</span><span class="n">R</span> <span class="o">:</span> <span class="n">out_param</span> <span class="err">$</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">(</span><span class="err">𝔤</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">[</span><span class="n">out_param</span> <span class="err">$</span> <span class="n">comm_ring</span> <span class="n">R</span><span class="o">]</span>
+<span class="kn">extends</span> <span class="n">module</span> <span class="n">R</span> <span class="err">𝔤</span><span class="o">,</span> <span class="n">has_bracket</span> <span class="err">𝔤</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">left_linear</span>  <span class="o">:=</span> <span class="bp">∀</span> <span class="n">y</span> <span class="o">:</span> <span class="err">𝔤</span><span class="o">,</span> <span class="n">is_linear_map</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">x</span> <span class="o">:</span> <span class="err">𝔤</span><span class="o">,</span> <span class="o">[</span><span class="n">x</span><span class="o">,</span><span class="n">y</span><span class="o">]))</span>
+<span class="o">(</span><span class="n">right_linear</span> <span class="o">:=</span> <span class="bp">∀</span> <span class="n">x</span> <span class="o">:</span> <span class="err">𝔤</span><span class="o">,</span> <span class="n">is_linear_map</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">y</span> <span class="o">:</span> <span class="err">𝔤</span><span class="o">,</span> <span class="o">[</span><span class="n">x</span><span class="o">,</span><span class="n">y</span><span class="o">]))</span>
+<span class="o">(</span><span class="n">alternating</span>  <span class="o">:=</span> <span class="bp">∀</span> <span class="n">x</span> <span class="o">:</span> <span class="err">𝔤</span><span class="o">,</span> <span class="o">[</span><span class="n">x</span><span class="o">,</span><span class="n">x</span><span class="o">]</span> <span class="bp">=</span> <span class="mi">0</span><span class="o">)</span>
+<span class="o">(</span><span class="n">Jacobi_identity</span> <span class="o">:=</span> <span class="bp">∀</span> <span class="n">x</span> <span class="n">y</span> <span class="n">z</span> <span class="o">:</span> <span class="err">𝔤</span><span class="o">,</span> <span class="o">[</span><span class="n">x</span><span class="o">,[</span><span class="n">y</span><span class="o">,</span><span class="n">z</span><span class="o">]]</span> <span class="bp">+</span> <span class="o">[</span><span class="n">z</span><span class="o">,[</span><span class="n">x</span><span class="o">,</span><span class="n">y</span><span class="o">]]</span> <span class="bp">+</span> <span class="o">[</span><span class="n">y</span><span class="o">,[</span><span class="n">z</span><span class="o">,</span><span class="n">x</span><span class="o">]]</span> <span class="bp">=</span> <span class="mi">0</span><span class="o">)</span>
+<span class="o">(</span><span class="n">anti_comm</span>    <span class="o">:=</span> <span class="bp">∀</span> <span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="err">𝔤</span><span class="o">,</span> <span class="o">[</span><span class="n">x</span><span class="o">,</span><span class="n">y</span><span class="o">]</span> <span class="bp">=</span> <span class="bp">-</span><span class="o">([</span><span class="n">y</span><span class="o">,</span><span class="n">x</span><span class="o">]))</span>
 
-variables {R : Type*} [ri : comm_ring R]
-variables {𝔤 : Type*} [la : lie_algebra R 𝔤]
-include ri la
+<span class="kn">variables</span> <span class="o">{</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">ri</span> <span class="o">:</span> <span class="n">comm_ring</span> <span class="n">R</span><span class="o">]</span>
+<span class="kn">variables</span> <span class="o">{</span><span class="err">𝔤</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">la</span> <span class="o">:</span> <span class="n">lie_algebra</span> <span class="n">R</span> <span class="err">𝔤</span><span class="o">]</span>
+<span class="n">include</span> <span class="n">ri</span> <span class="n">la</span>
 
-section from_ring
+<span class="kn">section</span> <span class="n">from_ring</span>
 
-variables {S : Type*} [ring S]
-variables {f : R → S}  [is_ring_hom f]
+<span class="kn">variables</span> <span class="o">{</span><span class="n">S</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">ring</span> <span class="n">S</span><span class="o">]</span>
+<span class="kn">variables</span> <span class="o">{</span><span class="n">f</span> <span class="o">:</span> <span class="n">R</span> <span class="bp">→</span> <span class="n">S</span><span class="o">}</span>  <span class="o">[</span><span class="n">is_ring_hom</span> <span class="n">f</span><span class="o">]</span>
 
-instance commutator_bracket : has_bracket S := ⟨λ x y, x*y - y*x⟩
+<span class="kn">instance</span> <span class="n">commutator_bracket</span> <span class="o">:</span> <span class="n">has_bracket</span> <span class="n">S</span> <span class="o">:=</span> <span class="bp">⟨λ</span> <span class="n">x</span> <span class="n">y</span><span class="o">,</span> <span class="n">x</span><span class="bp">*</span><span class="n">y</span> <span class="bp">-</span> <span class="n">y</span><span class="bp">*</span><span class="n">x</span><span class="bp">⟩</span>
 
-definition ring.to_lie_algebra : lie_algebra R S := sorry
--- { sorry,
---   ..ring.to_module }
+<span class="kn">definition</span> <span class="n">ring</span><span class="bp">.</span><span class="n">to_lie_algebra</span> <span class="o">:</span> <span class="n">lie_algebra</span> <span class="n">R</span> <span class="n">S</span> <span class="o">:=</span> <span class="n">sorry</span>
+<span class="c1">-- { sorry,</span>
+<span class="c1">--   ..ring.to_module }</span>
 
-end from_ring
-```
+<span class="kn">end</span> <span class="n">from_ring</span>
+</pre></div>
 
 #### [ Kevin Buzzard (Jun 13 2018 at 10:47)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Lie%20algebras/near/127997433):
-```lean
-definition ring.to_lie_algebra : lie_algebra R S := 
-begin
-constructor, -- fails
-end 
-```
+<div class="codehilite"><pre><span></span><span class="kn">definition</span> <span class="n">ring</span><span class="bp">.</span><span class="n">to_lie_algebra</span> <span class="o">:</span> <span class="n">lie_algebra</span> <span class="n">R</span> <span class="n">S</span> <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="n">constructor</span><span class="o">,</span> <span class="c1">-- fails</span>
+<span class="kn">end</span>
+</pre></div>
 
 #### [ Kevin Buzzard (Jun 13 2018 at 10:47)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Lie%20algebras/near/127997434):
-I am a bit surprised about this.
+<p>I am a bit surprised about this.</p>
 
 #### [ Kevin Buzzard (Jun 13 2018 at 10:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Lie%20algebras/near/127997547):
-`{}` is more instructive
+<p><code>{}</code> is more instructive</p>
 
 #### [ Kevin Buzzard (Jun 13 2018 at 10:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Lie%20algebras/near/127997549):
-It says it can't prove `module R S`
+<p>It says it can't prove <code>module R S</code></p>
 
 #### [ Kevin Buzzard (Jun 13 2018 at 10:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Lie%20algebras/near/127997556):
-which is fair enough because you never mentioned `f`
+<p>which is fair enough because you never mentioned <code>f</code></p>
 
 #### [ Kevin Buzzard (Jun 13 2018 at 10:53)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Lie%20algebras/near/127997636):
-and `ring.to_module` is only the statement that `R` is an `R`-module
+<p>and <code>ring.to_module</code> is only the statement that <code>R</code> is an <code>R</code>-module</p>
 
 #### [ Johan Commelin (Jun 13 2018 at 10:54)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Lie%20algebras/near/127997692):
-Right. Thanks a lot!
+<p>Right. Thanks a lot!</p>
 
 #### [ Kevin Buzzard (Jun 13 2018 at 10:54)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Lie%20algebras/near/127997693):
-I think when I was in your position a few months ago, wrestling with the type class inference system (but in a much less complex situation) Sebastian just pointed out that I could over-ride everything.
+<p>I think when I was in your position a few months ago, wrestling with the type class inference system (but in a much less complex situation) Sebastian just pointed out that I could over-ride everything.</p>
 
 #### [ Kevin Buzzard (Jun 13 2018 at 10:55)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Lie%20algebras/near/127997709):
-so I would just go and make my own explicit instances of everything
+<p>so I would just go and make my own explicit instances of everything</p>
 
 #### [ Kevin Buzzard (Jun 13 2018 at 10:55)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Lie%20algebras/near/127997714):
-and this got me a bit further
+<p>and this got me a bit further</p>
 
 #### [ Kevin Buzzard (Jun 13 2018 at 10:56)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Lie%20algebras/near/127997734):
-I guess `constructor` doesn't work because it didn't even get round to thinking about how to construct the extra fields, it just gets hung up with the fact that it can't even make the extension
+<p>I guess <code>constructor</code> doesn't work because it didn't even get round to thinking about how to construct the extra fields, it just gets hung up with the fact that it can't even make the extension</p>
 
 #### [ Johan Commelin (Jun 13 2018 at 10:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Lie%20algebras/near/127997822):
-Ok, so I've got a proof of `module R S`. How do I feed it to the system?
+<p>Ok, so I've got a proof of <code>module R S</code>. How do I feed it to the system?</p>
 
 #### [ Johan Commelin (Jun 13 2018 at 10:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Lie%20algebras/near/127997830):
-Because `@lie_algebra` is not interested in such a proof...
+<p>Because <code>@lie_algebra</code> is not interested in such a proof...</p>
 
 #### [ Johan Commelin (Jun 13 2018 at 10:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Lie%20algebras/near/127997887):
-Is the `extends module R _` giving me trouble? Does that `extends` imply that it wants do deduce the module structure by type class inference?
+<p>Is the <code>extends module R _</code> giving me trouble? Does that <code>extends</code> imply that it wants do deduce the module structure by type class inference?</p>
 
 #### [ Kevin Buzzard (Jun 13 2018 at 11:00)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Lie%20algebras/near/127997963):
-I used to ask this sort of question all the time. If you search for type class woes you'll find my thread where I asked about 10 questions of this nature.
+<p>I used to ask this sort of question all the time. If you search for type class woes you'll find my thread where I asked about 10 questions of this nature.</p>
 
 #### [ Kevin Buzzard (Jun 13 2018 at 11:02)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Lie%20algebras/near/127998035):
-Unfortunately I can't keep all the answers in my head and I still have not found the time to go through that thread and write down all the tips in a proper doc
+<p>Unfortunately I can't keep all the answers in my head and I still have not found the time to go through that thread and write down all the tips in a proper doc</p>
 
 #### [ Johan Commelin (Jun 13 2018 at 11:12)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Lie%20algebras/near/127998455):
-@**Kevin Buzzard** Misa stupid! In the definition of the class I shouldn't use `:=` but `:` for the axioms... it should be
-```lean
-class lie_algebra (R : out_param $ Type*) (𝔤 : Type*) [out_param $ comm_ring R]
-extends module R 𝔤, has_bracket 𝔤 :=
-(left_linear  : ∀ y : 𝔤, is_linear_map (λ x : 𝔤, [x,y]))
-(right_linear : ∀ x : 𝔤, is_linear_map (λ y : 𝔤, [x,y]))
-(alternating  : ∀ x : 𝔤, [x,x] = 0)
-(Jacobi_identity : ∀ x y z : 𝔤, [x,[y,z]] + [z,[x,y]] + [y,[z,x]] = 0)
-(anti_comm    : ∀ x y : 𝔤, [x,y] = -([y,x]))
-```
-That messed up everything. Now that I've fixed it, all of a sudden problems vanish!
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> Misa stupid! In the definition of the class I shouldn't use <code>:=</code> but <code>:</code> for the axioms... it should be</p>
+<div class="codehilite"><pre><span></span><span class="n">class</span> <span class="n">lie_algebra</span> <span class="o">(</span><span class="n">R</span> <span class="o">:</span> <span class="n">out_param</span> <span class="err">$</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">(</span><span class="err">𝔤</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">[</span><span class="n">out_param</span> <span class="err">$</span> <span class="n">comm_ring</span> <span class="n">R</span><span class="o">]</span>
+<span class="kn">extends</span> <span class="n">module</span> <span class="n">R</span> <span class="err">𝔤</span><span class="o">,</span> <span class="n">has_bracket</span> <span class="err">𝔤</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">left_linear</span>  <span class="o">:</span> <span class="bp">∀</span> <span class="n">y</span> <span class="o">:</span> <span class="err">𝔤</span><span class="o">,</span> <span class="n">is_linear_map</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">x</span> <span class="o">:</span> <span class="err">𝔤</span><span class="o">,</span> <span class="o">[</span><span class="n">x</span><span class="o">,</span><span class="n">y</span><span class="o">]))</span>
+<span class="o">(</span><span class="n">right_linear</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span> <span class="o">:</span> <span class="err">𝔤</span><span class="o">,</span> <span class="n">is_linear_map</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">y</span> <span class="o">:</span> <span class="err">𝔤</span><span class="o">,</span> <span class="o">[</span><span class="n">x</span><span class="o">,</span><span class="n">y</span><span class="o">]))</span>
+<span class="o">(</span><span class="n">alternating</span>  <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span> <span class="o">:</span> <span class="err">𝔤</span><span class="o">,</span> <span class="o">[</span><span class="n">x</span><span class="o">,</span><span class="n">x</span><span class="o">]</span> <span class="bp">=</span> <span class="mi">0</span><span class="o">)</span>
+<span class="o">(</span><span class="n">Jacobi_identity</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span> <span class="n">y</span> <span class="n">z</span> <span class="o">:</span> <span class="err">𝔤</span><span class="o">,</span> <span class="o">[</span><span class="n">x</span><span class="o">,[</span><span class="n">y</span><span class="o">,</span><span class="n">z</span><span class="o">]]</span> <span class="bp">+</span> <span class="o">[</span><span class="n">z</span><span class="o">,[</span><span class="n">x</span><span class="o">,</span><span class="n">y</span><span class="o">]]</span> <span class="bp">+</span> <span class="o">[</span><span class="n">y</span><span class="o">,[</span><span class="n">z</span><span class="o">,</span><span class="n">x</span><span class="o">]]</span> <span class="bp">=</span> <span class="mi">0</span><span class="o">)</span>
+<span class="o">(</span><span class="n">anti_comm</span>    <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="err">𝔤</span><span class="o">,</span> <span class="o">[</span><span class="n">x</span><span class="o">,</span><span class="n">y</span><span class="o">]</span> <span class="bp">=</span> <span class="bp">-</span><span class="o">([</span><span class="n">y</span><span class="o">,</span><span class="n">x</span><span class="o">]))</span>
+</pre></div>
+
+
+<p>That messed up everything. Now that I've fixed it, all of a sudden problems vanish!</p>
 
 #### [ Kevin Buzzard (Jun 13 2018 at 11:42)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Lie%20algebras/near/127999527):
-Oh yeah. Sorry, I should have caught that.
+<p>Oh yeah. Sorry, I should have caught that.</p>
 
 #### [ Johan Commelin (Jun 13 2018 at 11:55)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Lie%20algebras/near/128000028):
-Yoohoo!
-```lean
-section from_ring
+<p>Yoohoo!</p>
+<div class="codehilite"><pre><span></span><span class="kn">section</span> <span class="n">from_ring</span>
 
-variables {S : Type*} [ring S]
-variables {f : R → S}  [is_ring_hom f]
-variable  {central : ∀ (r : R) (s : S), f(r) * s = s * f(r)}
+<span class="kn">variables</span> <span class="o">{</span><span class="n">S</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">ring</span> <span class="n">S</span><span class="o">]</span>
+<span class="kn">variables</span> <span class="o">{</span><span class="n">f</span> <span class="o">:</span> <span class="n">R</span> <span class="bp">→</span> <span class="n">S</span><span class="o">}</span>  <span class="o">[</span><span class="n">is_ring_hom</span> <span class="n">f</span><span class="o">]</span>
+<span class="kn">variable</span>  <span class="o">{</span><span class="n">central</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">r</span> <span class="o">:</span> <span class="n">R</span><span class="o">)</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">S</span><span class="o">),</span> <span class="n">f</span><span class="o">(</span><span class="n">r</span><span class="o">)</span> <span class="bp">*</span> <span class="n">s</span> <span class="bp">=</span> <span class="n">s</span> <span class="bp">*</span> <span class="n">f</span><span class="o">(</span><span class="n">r</span><span class="o">)}</span>
 
-instance commutator_bracket : has_bracket S := ⟨λ x y, x*y - y*x⟩
+<span class="kn">instance</span> <span class="n">commutator_bracket</span> <span class="o">:</span> <span class="n">has_bracket</span> <span class="n">S</span> <span class="o">:=</span> <span class="bp">⟨λ</span> <span class="n">x</span> <span class="n">y</span><span class="o">,</span> <span class="n">x</span><span class="bp">*</span><span class="n">y</span> <span class="bp">-</span> <span class="n">y</span><span class="bp">*</span><span class="n">x</span><span class="bp">⟩</span>
 
-include central
-definition ring.to_lie_algebra : lie_algebra R S :=
-{ left_linear  := begin
-    intro y,
-    dsimp [commutator_bracket],
-    constructor,
-    { intros x₁ x₂,
-      simp [left_distrib,right_distrib,mul_assoc] },
-    { intros r x,
-      show f r * x * y + -(y * (f r * x)) = f r * (x * y + -(y * x)),
-      simp [left_distrib,right_distrib,mul_assoc,central] }
-  end,
-  right_linear := begin
-    intro x,
-    dsimp [commutator_bracket],
-    constructor,
-    { intros x₁ x₂,
-      simp [left_distrib,right_distrib,mul_assoc] },
-    { intros r y,
-      show x * (f r * y) + -(f r * y * x) = f r * (x * y + -(y * x)),
-      simp [left_distrib,right_distrib,mul_assoc,central] }
-  end,
-  alternating  := begin
-    intro x,
-    dsimp [commutator_bracket],
-    simp
-  end,
-  Jacobi_identity := begin
-    intros x y z,
-    dsimp [commutator_bracket],
-    simp [left_distrib,right_distrib,mul_assoc],
-  end,
-  anti_comm := begin
-    intros x y,
-    dsimp [commutator_bracket],
-    simp
-  end,
-  ..restriction_of_scalars.restriction_of_scalars f S
-}
+<span class="n">include</span> <span class="n">central</span>
+<span class="kn">definition</span> <span class="n">ring</span><span class="bp">.</span><span class="n">to_lie_algebra</span> <span class="o">:</span> <span class="n">lie_algebra</span> <span class="n">R</span> <span class="n">S</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">left_linear</span>  <span class="o">:=</span> <span class="k">begin</span>
+    <span class="n">intro</span> <span class="n">y</span><span class="o">,</span>
+    <span class="n">dsimp</span> <span class="o">[</span><span class="n">commutator_bracket</span><span class="o">],</span>
+    <span class="n">constructor</span><span class="o">,</span>
+    <span class="o">{</span> <span class="n">intros</span> <span class="n">x₁</span> <span class="n">x₂</span><span class="o">,</span>
+      <span class="n">simp</span> <span class="o">[</span><span class="n">left_distrib</span><span class="o">,</span><span class="n">right_distrib</span><span class="o">,</span><span class="n">mul_assoc</span><span class="o">]</span> <span class="o">},</span>
+    <span class="o">{</span> <span class="n">intros</span> <span class="n">r</span> <span class="n">x</span><span class="o">,</span>
+      <span class="k">show</span> <span class="n">f</span> <span class="n">r</span> <span class="bp">*</span> <span class="n">x</span> <span class="bp">*</span> <span class="n">y</span> <span class="bp">+</span> <span class="bp">-</span><span class="o">(</span><span class="n">y</span> <span class="bp">*</span> <span class="o">(</span><span class="n">f</span> <span class="n">r</span> <span class="bp">*</span> <span class="n">x</span><span class="o">))</span> <span class="bp">=</span> <span class="n">f</span> <span class="n">r</span> <span class="bp">*</span> <span class="o">(</span><span class="n">x</span> <span class="bp">*</span> <span class="n">y</span> <span class="bp">+</span> <span class="bp">-</span><span class="o">(</span><span class="n">y</span> <span class="bp">*</span> <span class="n">x</span><span class="o">)),</span>
+      <span class="n">simp</span> <span class="o">[</span><span class="n">left_distrib</span><span class="o">,</span><span class="n">right_distrib</span><span class="o">,</span><span class="n">mul_assoc</span><span class="o">,</span><span class="n">central</span><span class="o">]</span> <span class="o">}</span>
+  <span class="kn">end</span><span class="o">,</span>
+  <span class="n">right_linear</span> <span class="o">:=</span> <span class="k">begin</span>
+    <span class="n">intro</span> <span class="n">x</span><span class="o">,</span>
+    <span class="n">dsimp</span> <span class="o">[</span><span class="n">commutator_bracket</span><span class="o">],</span>
+    <span class="n">constructor</span><span class="o">,</span>
+    <span class="o">{</span> <span class="n">intros</span> <span class="n">x₁</span> <span class="n">x₂</span><span class="o">,</span>
+      <span class="n">simp</span> <span class="o">[</span><span class="n">left_distrib</span><span class="o">,</span><span class="n">right_distrib</span><span class="o">,</span><span class="n">mul_assoc</span><span class="o">]</span> <span class="o">},</span>
+    <span class="o">{</span> <span class="n">intros</span> <span class="n">r</span> <span class="n">y</span><span class="o">,</span>
+      <span class="k">show</span> <span class="n">x</span> <span class="bp">*</span> <span class="o">(</span><span class="n">f</span> <span class="n">r</span> <span class="bp">*</span> <span class="n">y</span><span class="o">)</span> <span class="bp">+</span> <span class="bp">-</span><span class="o">(</span><span class="n">f</span> <span class="n">r</span> <span class="bp">*</span> <span class="n">y</span> <span class="bp">*</span> <span class="n">x</span><span class="o">)</span> <span class="bp">=</span> <span class="n">f</span> <span class="n">r</span> <span class="bp">*</span> <span class="o">(</span><span class="n">x</span> <span class="bp">*</span> <span class="n">y</span> <span class="bp">+</span> <span class="bp">-</span><span class="o">(</span><span class="n">y</span> <span class="bp">*</span> <span class="n">x</span><span class="o">)),</span>
+      <span class="n">simp</span> <span class="o">[</span><span class="n">left_distrib</span><span class="o">,</span><span class="n">right_distrib</span><span class="o">,</span><span class="n">mul_assoc</span><span class="o">,</span><span class="n">central</span><span class="o">]</span> <span class="o">}</span>
+  <span class="kn">end</span><span class="o">,</span>
+  <span class="n">alternating</span>  <span class="o">:=</span> <span class="k">begin</span>
+    <span class="n">intro</span> <span class="n">x</span><span class="o">,</span>
+    <span class="n">dsimp</span> <span class="o">[</span><span class="n">commutator_bracket</span><span class="o">],</span>
+    <span class="n">simp</span>
+  <span class="kn">end</span><span class="o">,</span>
+  <span class="n">Jacobi_identity</span> <span class="o">:=</span> <span class="k">begin</span>
+    <span class="n">intros</span> <span class="n">x</span> <span class="n">y</span> <span class="n">z</span><span class="o">,</span>
+    <span class="n">dsimp</span> <span class="o">[</span><span class="n">commutator_bracket</span><span class="o">],</span>
+    <span class="n">simp</span> <span class="o">[</span><span class="n">left_distrib</span><span class="o">,</span><span class="n">right_distrib</span><span class="o">,</span><span class="n">mul_assoc</span><span class="o">],</span>
+  <span class="kn">end</span><span class="o">,</span>
+  <span class="n">anti_comm</span> <span class="o">:=</span> <span class="k">begin</span>
+    <span class="n">intros</span> <span class="n">x</span> <span class="n">y</span><span class="o">,</span>
+    <span class="n">dsimp</span> <span class="o">[</span><span class="n">commutator_bracket</span><span class="o">],</span>
+    <span class="n">simp</span>
+  <span class="kn">end</span><span class="o">,</span>
+  <span class="bp">..</span><span class="n">restriction_of_scalars</span><span class="bp">.</span><span class="n">restriction_of_scalars</span> <span class="n">f</span> <span class="n">S</span>
+<span class="o">}</span>
 
-end from_ring
-```
+<span class="kn">end</span> <span class="n">from_ring</span>
+</pre></div>
 
 #### [ Johan Commelin (Jun 13 2018 at 11:55)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Lie%20algebras/near/128000036):
-I like `simp`!
+<p>I like <code>simp</code>!</p>
 
 #### [ Johan Commelin (Jun 13 2018 at 11:56)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Lie%20algebras/near/128000082):
-It's a pity I can't use `ring` because I'm not in a commutative setting...
+<p>It's a pity I can't use <code>ring</code> because I'm not in a commutative setting...</p>
 
 #### [ Kevin Buzzard (Jun 13 2018 at 12:04)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Lie%20algebras/near/128000416):
-```quote
-It's a pity I can't use `ring` because I'm not in a commutative setting...
-```
-I can tell you how to write the non-commutative version :-)
+<blockquote>
+<p>It's a pity I can't use <code>ring</code> because I'm not in a commutative setting...</p>
+</blockquote>
+<p>I can tell you how to write the non-commutative version :-)</p>
 
 #### [ Johan Commelin (Jun 13 2018 at 12:05)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Lie%20algebras/near/128000429):
-Lol
+<p>Lol</p>
 
 #### [ Kevin Buzzard (Jun 13 2018 at 12:05)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Lie%20algebras/near/128000435):
-actually there would be an issue
+<p>actually there would be an issue</p>
 
 #### [ Johan Commelin (Jun 13 2018 at 12:05)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Lie%20algebras/near/128000446):
-Yes, I wouldn't be surprised if commutativity is essential [also: lunch]
+<p>Yes, I wouldn't be surprised if commutativity is essential [also: lunch]</p>
 
 #### [ Kevin Buzzard (Jun 13 2018 at 12:06)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Lie%20algebras/near/128000491):
-There's even an issue with my baby ring tactic -- one needs to be able to put every polynomial into a "canonical form", so that two polynomials (e.g. x^2+1 and 0*x^3+x^2+1) are equal if and only if their canonical forms are equal.
+<p>There's even an issue with my baby ring tactic -- one needs to be able to put every polynomial into a "canonical form", so that two polynomials (e.g. x^2+1 and 0*x^3+x^2+1) are equal if and only if their canonical forms are equal.</p>
 
 #### [ Chris Hughes (Jun 13 2018 at 12:07)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Lie%20algebras/near/128000502):
-Make your polynomials a subtype, with a proof that the leading coeff is not zero
+<p>Make your polynomials a subtype, with a proof that the leading coeff is not zero</p>
 
 #### [ Chris Hughes (Jun 13 2018 at 12:07)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Lie%20algebras/near/128000509):
-Like finsets.
+<p>Like finsets.</p>
 
 #### [ Kevin Buzzard (Jun 13 2018 at 12:07)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Lie%20algebras/near/128000510):
-In my baby ring tactic this isn't even present (yet). In the grown-up ring tactic Mario uses Gregoire-Mahboubi's strategy of writing everything in "horner form" because this is much more efficient for sparse polys
+<p>In my baby ring tactic this isn't even present (yet). In the grown-up ring tactic Mario uses Gregoire-Mahboubi's strategy of writing everything in "horner form" because this is much more efficient for sparse polys</p>
 
 #### [ Kevin Buzzard (Jun 13 2018 at 12:07)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Lie%20algebras/near/128000519):
-but in the non-comm case you would have to figure out a canonical form I guess, at least if you wanted to maximise the chance that the tactic worked.
+<p>but in the non-comm case you would have to figure out a canonical form I guess, at least if you wanted to maximise the chance that the tactic worked.</p>
 
 #### [ Kevin Buzzard (Jun 13 2018 at 12:08)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Lie%20algebras/near/128000560):
-Chris -- this doesn't work for zero
+<p>Chris -- this doesn't work for zero</p>
 
 #### [ Kevin Buzzard (Jun 13 2018 at 12:08)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Lie%20algebras/near/128000566):
-I was going to go for the following:
+<p>I was going to go for the following:</p>
 
 #### [ Kevin Buzzard (Jun 13 2018 at 12:08)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Lie%20algebras/near/128000571):
-either an empty list, or a non-empty list with last element non-zero
+<p>either an empty list, or a non-empty list with last element non-zero</p>
 
 #### [ Kevin Buzzard (Jun 13 2018 at 12:09)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Lie%20algebras/near/128000588):
-One would have to check non-zero-ness in the ground ring (which might be Z/2Z)
+<p>One would have to check non-zero-ness in the ground ring (which might be Z/2Z)</p>
 
 #### [ Chris Hughes (Jun 13 2018 at 12:09)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Lie%20algebras/near/128000589):
-What's the last element function?
+<p>What's the last element function?</p>
 
 #### [ Kevin Buzzard (Jun 13 2018 at 12:09)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Lie%20algebras/near/128000593):
-I've seen one before
+<p>I've seen one before</p>
 
 #### [ Kevin Buzzard (Jun 13 2018 at 12:09)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Lie%20algebras/near/128000595):
-I've seen an n'th element function somewhere in list.lean
+<p>I've seen an n'th element function somewhere in list.lean</p>
 
 #### [ Chris Hughes (Jun 13 2018 at 12:09)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Lie%20algebras/near/128000596):
-How does it habdle the empty list? If it's option you're okay.
+<p>How does it habdle the empty list? If it's option you're okay.</p>
 
 #### [ Kevin Buzzard (Jun 13 2018 at 12:09)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Lie%20algebras/near/128000599):
-unsurprisingly, there are all sorts of variants
+<p>unsurprisingly, there are all sorts of variants</p>
 
 #### [ Kevin Buzzard (Jun 13 2018 at 12:10)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Lie%20algebras/near/128000646):
-e.g. one which asks for a proof that n < length before giving you a non-option n'th element
+<p>e.g. one which asks for a proof that n &lt; length before giving you a non-option n'th element</p>
 
 #### [ Chris Hughes (Jun 13 2018 at 12:11)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Lie%20algebras/near/128000696):
-`list.head'` looks like the best one, depending on the order of your lists.
+<p><code>list.head'</code> looks like the best one, depending on the order of your lists.</p>
 
 
 {% endraw %}

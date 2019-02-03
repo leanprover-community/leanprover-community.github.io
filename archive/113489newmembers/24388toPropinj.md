@@ -12,14 +12,13 @@ permalink: archive/113489newmembers/24388toPropinj.html
 
 {% raw %}
 #### [ Kenny Lau (Jan 11 2019 at 11:31)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/to_Prop_inj/near/154908038):
-```lean
-lemma to_Prop_inj : Π {a b : bool} (H : (a : Prop) ↔ (b : Prop)), a = b
-| a tt H := H.2 rfl
-| a ff H := bool.eq_ff_of_ne_tt $ λ h, absurd (H.1 h) dec_trivial
-```
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">to_Prop_inj</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">{</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">bool</span><span class="o">}</span> <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">)</span> <span class="bp">↔</span> <span class="o">(</span><span class="n">b</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">)),</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">b</span>
+<span class="bp">|</span> <span class="n">a</span> <span class="n">tt</span> <span class="n">H</span> <span class="o">:=</span> <span class="n">H</span><span class="bp">.</span><span class="mi">2</span> <span class="n">rfl</span>
+<span class="bp">|</span> <span class="n">a</span> <span class="n">ff</span> <span class="n">H</span> <span class="o">:=</span> <span class="n">bool</span><span class="bp">.</span><span class="n">eq_ff_of_ne_tt</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">h</span><span class="o">,</span> <span class="n">absurd</span> <span class="o">(</span><span class="n">H</span><span class="bp">.</span><span class="mi">1</span> <span class="n">h</span><span class="o">)</span> <span class="n">dec_trivial</span>
+</pre></div>
 
 #### [ Kenny Lau (Jan 11 2019 at 11:31)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/to_Prop_inj/near/154908043):
-@**Mario Carneiro** is this currently in mathlib?
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> is this currently in mathlib?</p>
 
 
 {% endraw %}

@@ -12,22 +12,22 @@ permalink: archive/113488general/88059Stubbornunify.html
 
 {% raw %}
 #### [ Keeley Hoek (Sep 21 2018 at 13:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Stubborn%20unify/near/134372143):
-I've been experimenting with some of the `tactic.*` namespace, which I'm admittedly pretty scared of since some of it seems like magic. In trying to accomplish my nefarious goals, I'm running into quite a wall with `unify` and friends. It's seeming more and more like `unify` is more stubborn (an idiot?) than I first thought; for example, the following happens when I try to `unify` two metavar-containing types (which I think is sensible?)
-````
-unify tactic failed, failed to unify
+<p>I've been experimenting with some of the <code>tactic.*</code> namespace, which I'm admittedly pretty scared of since some of it seems like magic. In trying to accomplish my nefarious goals, I'm running into quite a wall with <code>unify</code> and friends. It's seeming more and more like <code>unify</code> is more stubborn (an idiot?) than I first thought; for example, the following happens when I try to <code>unify</code> two metavar-containing types (which I think is sensible?)</p>
+<div class="codehilite"><pre><span></span>unify tactic failed, failed to unify
   ?m_1 ⥤ ?m_3 : Type (max ? ? ? ?)
 and
   D ⥤ C : Type (max (?+1) ? (?+1))
-````
-(There are hypotheses `D` and `C` with type `Type (?+1)` .)
+</pre></div>
 
-Why is `unify` not compelled to assign the values of `?m_1` and `?m_3` in this situation?
+
+<p>(There are hypotheses <code>D</code> and <code>C</code> with type <code>Type (?+1)</code> .)</p>
+<p>Why is <code>unify</code> not compelled to assign the values of <code>?m_1</code> and <code>?m_3</code> in this situation?</p>
 
 #### [ Simon Hudon (Sep 21 2018 at 19:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Stubborn%20unify/near/134390656):
-Unifying complex universe terms is often a mess. If you can manage to avoid `max` and `imax` in your universe terms, I would go for that. Otherwise, you may need to specifying universes explicitly when resolving constants.
+<p>Unifying complex universe terms is often a mess. If you can manage to avoid <code>max</code> and <code>imax</code> in your universe terms, I would go for that. Otherwise, you may need to specifying universes explicitly when resolving constants.</p>
 
 #### [ Scott Morrison (Sep 22 2018 at 02:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Stubborn%20unify/near/134414211):
-Yeah, get rid of all your ?s in exchange for explicit named universes, and you'll probably see what the obstruction is.
+<p>Yeah, get rid of all your ?s in exchange for explicit named universes, and you'll probably see what the obstruction is.</p>
 
 
 {% endraw %}

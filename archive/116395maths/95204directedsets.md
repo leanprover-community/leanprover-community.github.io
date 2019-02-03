@@ -12,25 +12,23 @@ permalink: archive/116395maths/95204directedsets.html
 
 {% raw %}
 #### [ Scott Morrison (Sep 01 2018 at 12:11)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/directed%20sets/near/133171891):
-I was expecting to find a type `[directed α]`, to go along with `preorder`, `partial_order`, etc. Instead I can only find these:
-
-```
-/-- A family of elements of α is directed (with respect to a relation `≼` on α)
+<p>I was expecting to find a type <code>[directed α]</code>, to go along with <code>preorder</code>, <code>partial_order</code>, etc. Instead I can only find these:</p>
+<div class="codehilite"><pre><span></span>/-- A family of elements of α is directed (with respect to a relation `≼` on α)
   if there is a member of the family `≼`-above any pair in the family.  -/
 def directed {ι : Sort v} (f : ι → α) := ∀x y, ∃z, f z ≼ f x ∧ f z ≼ f y
 /-- A subset of α is directed if there is an element of the set `≼`-above any
   pair of elements in the set. -/
 def directed_on (s : set α) := ∀ (x ∈ s) (y ∈ s), ∃z ∈ s, z ≼ x ∧ z ≼ y
-```
+</pre></div>
 
 #### [ Scott Morrison (Sep 01 2018 at 12:11)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/directed%20sets/near/133171897):
-Am I just mean to use `directed (id α)`? It seems strange that the simplest thing isn't there.
+<p>Am I just mean to use <code>directed (id α)</code>? It seems strange that the simplest thing isn't there.</p>
 
 #### [ Reid Barton (Sep 01 2018 at 13:13)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/directed%20sets/near/133173805):
-Beware also `directed` does not include nonempty
+<p>Beware also <code>directed</code> does not include nonempty</p>
 
 #### [ Reid Barton (Sep 01 2018 at 13:14)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/directed%20sets/near/133173849):
-AFAIK, those are the only directed set-related things in mathlib
+<p>AFAIK, those are the only directed set-related things in mathlib</p>
 
 
 {% endraw %}

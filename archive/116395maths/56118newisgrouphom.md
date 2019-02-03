@@ -12,80 +12,81 @@ permalink: archive/116395maths/56118newisgrouphom.html
 
 {% raw %}
 #### [ Patrick Massot (Apr 16 2018 at 17:14)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/new%20is_group_hom/near/125152694):
-Recently `is_group_hom` became a class. Previously we had 
-```lean
-def is_group_anti_hom (f : α → β) : Prop := ∀ a b : α, f (a * b) = f b * f a
+<p>Recently <code>is_group_hom</code> became a class. Previously we had </p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">is_group_anti_hom</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span> <span class="bp">∀</span> <span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">α</span><span class="o">,</span> <span class="n">f</span> <span class="o">(</span><span class="n">a</span> <span class="bp">*</span> <span class="n">b</span><span class="o">)</span> <span class="bp">=</span> <span class="n">f</span> <span class="n">b</span> <span class="bp">*</span> <span class="n">f</span> <span class="n">a</span>
 
-namespace is_group_anti_hom
-variables {f : α → β} (H : is_group_anti_hom f)
-include H
+<span class="kn">namespace</span> <span class="n">is_group_anti_hom</span>
+<span class="kn">variables</span> <span class="o">{</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">}</span> <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="n">is_group_anti_hom</span> <span class="n">f</span><span class="o">)</span>
+<span class="n">include</span> <span class="n">H</span>
 
-theorem inv (a : α) : (f a)⁻¹ = f a⁻¹ := ...
-```
-and I could then write
-```lean
-variables {α : Type} [group α]
-def conj (a b : α) := a*b*a⁻¹
+<span class="kn">theorem</span> <span class="n">inv</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">f</span> <span class="n">a</span><span class="o">)</span><span class="bp">⁻¹</span> <span class="bp">=</span> <span class="n">f</span> <span class="n">a</span><span class="bp">⁻¹</span> <span class="o">:=</span> <span class="bp">...</span>
+</pre></div>
 
-lemma inv_conj : (conj b a)⁻¹ = conj b (a⁻¹) := 
-conj_is_mph.inv a
-```
-Is there such a compact way to write the proof of inv_conj with the new `is_group_hom`? I'm not talking about the LHS/RHS switch. I'm talking about the ability to use projection notation instead of writing `(is_group_hom.inv (conj b) a).symm`
+
+<p>and I could then write</p>
+<div class="codehilite"><pre><span></span><span class="kn">variables</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">[</span><span class="n">group</span> <span class="n">α</span><span class="o">]</span>
+<span class="n">def</span> <span class="n">conj</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:=</span> <span class="n">a</span><span class="bp">*</span><span class="n">b</span><span class="bp">*</span><span class="n">a</span><span class="bp">⁻¹</span>
+
+<span class="kn">lemma</span> <span class="n">inv_conj</span> <span class="o">:</span> <span class="o">(</span><span class="n">conj</span> <span class="n">b</span> <span class="n">a</span><span class="o">)</span><span class="bp">⁻¹</span> <span class="bp">=</span> <span class="n">conj</span> <span class="n">b</span> <span class="o">(</span><span class="n">a</span><span class="bp">⁻¹</span><span class="o">)</span> <span class="o">:=</span>
+<span class="n">conj_is_mph</span><span class="bp">.</span><span class="n">inv</span> <span class="n">a</span>
+</pre></div>
+
+
+<p>Is there such a compact way to write the proof of inv_conj with the new <code>is_group_hom</code>? I'm not talking about the LHS/RHS switch. I'm talking about the ability to use projection notation instead of writing <code>(is_group_hom.inv (conj b) a).symm</code></p>
 
 #### [ Kenny Lau (Apr 16 2018 at 17:14)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/new%20is_group_hom/near/125152701):
-I already complained about this :P
+<p>I already complained about this :P</p>
 
 #### [ Patrick Massot (Apr 16 2018 at 17:14)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/new%20is_group_hom/near/125152704):
-I'm not really complaining
+<p>I'm not really complaining</p>
 
 #### [ Kenny Lau (Apr 16 2018 at 17:15)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/new%20is_group_hom/near/125152712):
-right, but the answer is still you can't use projection
+<p>right, but the answer is still you can't use projection</p>
 
 #### [ Patrick Massot (Apr 16 2018 at 17:15)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/new%20is_group_hom/near/125152719):
-I slightly prefer the old way in this case but I'm open to learning about advantages of the new way
+<p>I slightly prefer the old way in this case but I'm open to learning about advantages of the new way</p>
 
 #### [ Kenny Lau (Apr 16 2018 at 17:18)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/new%20is_group_hom/near/125152841):
-```quote
-Now you do `is_group_hom.one f` I think
-```
-:point_up: https://leanprover.zulipchat.com/#narrow/stream/113488-general/subject/is_group_hom.2Emul/near/124970169
+<blockquote>
+<p>Now you do <code>is_group_hom.one f</code> I think</p>
+</blockquote>
+<p><span class="emoji emoji-261d" title="point up">:point_up:</span> <a href="#narrow/stream/113488-general/subject/is_group_hom.2Emul/near/124970169" title="#narrow/stream/113488-general/subject/is_group_hom.2Emul/near/124970169">https://leanprover.zulipchat.com/#narrow/stream/113488-general/subject/is_group_hom.2Emul/near/124970169</a></p>
 
 #### [ Mario Carneiro (Apr 16 2018 at 17:20)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/new%20is_group_hom/near/125152927):
-You should be using `inv_conj` in your proofs anyways, so this is a one-time cost
+<p>You should be using <code>inv_conj</code> in your proofs anyways, so this is a one-time cost</p>
 
 #### [ Kenny Lau (Apr 16 2018 at 17:21)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/new%20is_group_hom/near/125152943):
-but what is `conj_is_mph`?
+<p>but what is <code>conj_is_mph</code>?</p>
 
 #### [ Patrick Massot (Apr 16 2018 at 17:21)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/new%20is_group_hom/near/125152945):
-Hm, I didn't realize it was almost exactly the same question (I was vaguely aware of Kenny asking something about this change but didn't check)
+<p>Hm, I didn't realize it was almost exactly the same question (I was vaguely aware of Kenny asking something about this change but didn't check)</p>
 
 #### [ Mario Carneiro (Apr 16 2018 at 17:21)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/new%20is_group_hom/near/125152946):
-also you should probably swap `inv_conj` for the same reason `is_group_hom.inv`  was swapped
+<p>also you should probably swap <code>inv_conj</code> for the same reason <code>is_group_hom.inv</code>  was swapped</p>
 
 #### [ Patrick Massot (Apr 16 2018 at 17:22)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/new%20is_group_hom/near/125153006):
-Indeed my only use of this lemma was a `rw [<-invconj]`
+<p>Indeed my only use of this lemma was a <code>rw [&lt;-invconj]</code></p>
 
 #### [ Patrick Massot (Apr 16 2018 at 17:23)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/new%20is_group_hom/near/125153022):
-I'm trying (once more...) to get back to old stuff because I hope I'll have time to resume
+<p>I'm trying (once more...) to get back to old stuff because I hope I'll have time to resume</p>
 
 #### [ Patrick Massot (Apr 16 2018 at 17:24)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/new%20is_group_hom/near/125153069):
-I tried to work on the pi instance PR. But I failed in the preparatory work
+<p>I tried to work on the pi instance PR. But I failed in the preparatory work</p>
 
 #### [ Patrick Massot (Apr 16 2018 at 17:24)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/new%20is_group_hom/near/125153077):
-I wanted to properly dispatch the content of Johannes' `prod_module.lean`
+<p>I wanted to properly dispatch the content of Johannes' <code>prod_module.lean</code></p>
 
 #### [ Patrick Massot (Apr 16 2018 at 17:24)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/new%20is_group_hom/near/125153084):
-But trying to move stuff always gets Lean to go crazy
+<p>But trying to move stuff always gets Lean to go crazy</p>
 
 #### [ Patrick Massot (Apr 16 2018 at 17:25)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/new%20is_group_hom/near/125153093):
-everything gets frozen in VSCode and I only end up with a broken mathlib
+<p>everything gets frozen in VSCode and I only end up with a broken mathlib</p>
 
 #### [ Patrick Massot (Apr 16 2018 at 17:26)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/new%20is_group_hom/near/125153141):
-Maybe I should PR everything into the `prod_module` black-hole and then let you or Johannes decide when this becomes a problem
+<p>Maybe I should PR everything into the <code>prod_module</code> black-hole and then let you or Johannes decide when this becomes a problem</p>
 
 #### [ Kenny Lau (Apr 16 2018 at 17:27)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/new%20is_group_hom/near/125153171):
-```
-import algebra.group
+<div class="codehilite"><pre><span></span>import algebra.group
 
 variables {α : Type} [group α] (a b : α)
 
@@ -96,15 +97,16 @@ instance conj.is_group_hom : is_group_hom (conj a) :=
 
 lemma inv_conj : conj a (b⁻¹) = (conj a b)⁻¹ :=
 is_group_hom.inv (conj a) b
+</pre></div>
 
 #### [ Kenny Lau (Apr 16 2018 at 17:28)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/new%20is_group_hom/near/125153213):
-@**Patrick Massot** c'est c'que tu veux?
+<p><span class="user-mention" data-user-id="110031">@Patrick Massot</span> c'est c'que tu veux?</p>
 
 #### [ Patrick Massot (Apr 16 2018 at 17:29)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/new%20is_group_hom/near/125153251):
-I know how to do this (except I went with `by finish [is_group_hom, conj]` in the instance proof. I was only asking how to properly use the new interface
+<p>I know how to do this (except I went with <code>by finish [is_group_hom, conj]</code> in the instance proof. I was only asking how to properly use the new interface</p>
 
 #### [ Kenny Lau (Apr 16 2018 at 17:30)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/new%20is_group_hom/near/125153261):
-right, which I demonstrated
+<p>right, which I demonstrated</p>
 
 
 {% endraw %}

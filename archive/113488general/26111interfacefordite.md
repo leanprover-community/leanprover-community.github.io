@@ -12,94 +12,91 @@ permalink: archive/113488general/26111interfacefordite.html
 
 {% raw %}
 #### [ Kenny Lau (Apr 28 2018 at 10:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/interface%20for%20dite/near/125812949):
-```lean
-noncomputable def succ (C : set (set α)) : set (set α) :=
-if H : ∃ A, A ∈ (hat S C) \ C then insert (classical.some H) C else C
+<div class="codehilite"><pre><span></span><span class="n">noncomputable</span> <span class="n">def</span> <span class="n">succ</span> <span class="o">(</span><span class="n">C</span> <span class="o">:</span> <span class="n">set</span> <span class="o">(</span><span class="n">set</span> <span class="n">α</span><span class="o">))</span> <span class="o">:</span> <span class="n">set</span> <span class="o">(</span><span class="n">set</span> <span class="n">α</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">if</span> <span class="n">H</span> <span class="o">:</span> <span class="bp">∃</span> <span class="n">A</span><span class="o">,</span> <span class="n">A</span> <span class="err">∈</span> <span class="o">(</span><span class="n">hat</span> <span class="n">S</span> <span class="n">C</span><span class="o">)</span> <span class="err">\</span> <span class="n">C</span> <span class="k">then</span> <span class="n">insert</span> <span class="o">(</span><span class="n">classical</span><span class="bp">.</span><span class="n">some</span> <span class="n">H</span><span class="o">)</span> <span class="n">C</span> <span class="k">else</span> <span class="n">C</span>
 
-@[elab_as_eliminator] noncomputable def succ.rec {C : set (set α) → set (set α) → Sort*}
-  (H1 : ∀ t, ∀ A ∈ (hat S t) \ t, C t (insert (classical.some (⟨A, H⟩ : ∃ A, A ∈ (hat S t) \ t)) t))
-  (H2 : ∀ t, (∀ A ∈ (hat S t) \ t, false) → C t t)
-  (t : set (set α)) : C t (succ S t) :=
-if H : ∃ A, A ∈ (hat S t) \ t then
-  have succ S t = insert (classical.some H) t, from dif_pos H,
-  eq.drec_on this.symm $ H1 _ (classical.some H) (classical.some_spec H)
-else
-  have succ S t = t, from dif_neg H,
-  eq.drec_on this.symm $ H2 t $ λ A h, H ⟨A, h⟩
+<span class="bp">@</span><span class="o">[</span><span class="n">elab_as_eliminator</span><span class="o">]</span> <span class="n">noncomputable</span> <span class="n">def</span> <span class="n">succ</span><span class="bp">.</span><span class="n">rec</span> <span class="o">{</span><span class="n">C</span> <span class="o">:</span> <span class="n">set</span> <span class="o">(</span><span class="n">set</span> <span class="n">α</span><span class="o">)</span> <span class="bp">→</span> <span class="n">set</span> <span class="o">(</span><span class="n">set</span> <span class="n">α</span><span class="o">)</span> <span class="bp">→</span> <span class="n">Sort</span><span class="bp">*</span><span class="o">}</span>
+  <span class="o">(</span><span class="n">H1</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">t</span><span class="o">,</span> <span class="bp">∀</span> <span class="n">A</span> <span class="err">∈</span> <span class="o">(</span><span class="n">hat</span> <span class="n">S</span> <span class="n">t</span><span class="o">)</span> <span class="err">\</span> <span class="n">t</span><span class="o">,</span> <span class="n">C</span> <span class="n">t</span> <span class="o">(</span><span class="n">insert</span> <span class="o">(</span><span class="n">classical</span><span class="bp">.</span><span class="n">some</span> <span class="o">(</span><span class="bp">⟨</span><span class="n">A</span><span class="o">,</span> <span class="n">H</span><span class="bp">⟩</span> <span class="o">:</span> <span class="bp">∃</span> <span class="n">A</span><span class="o">,</span> <span class="n">A</span> <span class="err">∈</span> <span class="o">(</span><span class="n">hat</span> <span class="n">S</span> <span class="n">t</span><span class="o">)</span> <span class="err">\</span> <span class="n">t</span><span class="o">))</span> <span class="n">t</span><span class="o">))</span>
+  <span class="o">(</span><span class="n">H2</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">t</span><span class="o">,</span> <span class="o">(</span><span class="bp">∀</span> <span class="n">A</span> <span class="err">∈</span> <span class="o">(</span><span class="n">hat</span> <span class="n">S</span> <span class="n">t</span><span class="o">)</span> <span class="err">\</span> <span class="n">t</span><span class="o">,</span> <span class="n">false</span><span class="o">)</span> <span class="bp">→</span> <span class="n">C</span> <span class="n">t</span> <span class="n">t</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">t</span> <span class="o">:</span> <span class="n">set</span> <span class="o">(</span><span class="n">set</span> <span class="n">α</span><span class="o">))</span> <span class="o">:</span> <span class="n">C</span> <span class="n">t</span> <span class="o">(</span><span class="n">succ</span> <span class="n">S</span> <span class="n">t</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">if</span> <span class="n">H</span> <span class="o">:</span> <span class="bp">∃</span> <span class="n">A</span><span class="o">,</span> <span class="n">A</span> <span class="err">∈</span> <span class="o">(</span><span class="n">hat</span> <span class="n">S</span> <span class="n">t</span><span class="o">)</span> <span class="err">\</span> <span class="n">t</span> <span class="k">then</span>
+  <span class="k">have</span> <span class="n">succ</span> <span class="n">S</span> <span class="n">t</span> <span class="bp">=</span> <span class="n">insert</span> <span class="o">(</span><span class="n">classical</span><span class="bp">.</span><span class="n">some</span> <span class="n">H</span><span class="o">)</span> <span class="n">t</span><span class="o">,</span> <span class="k">from</span> <span class="n">dif_pos</span> <span class="n">H</span><span class="o">,</span>
+  <span class="n">eq</span><span class="bp">.</span><span class="n">drec_on</span> <span class="n">this</span><span class="bp">.</span><span class="n">symm</span> <span class="err">$</span> <span class="n">H1</span> <span class="bp">_</span> <span class="o">(</span><span class="n">classical</span><span class="bp">.</span><span class="n">some</span> <span class="n">H</span><span class="o">)</span> <span class="o">(</span><span class="n">classical</span><span class="bp">.</span><span class="n">some_spec</span> <span class="n">H</span><span class="o">)</span>
+<span class="k">else</span>
+  <span class="k">have</span> <span class="n">succ</span> <span class="n">S</span> <span class="n">t</span> <span class="bp">=</span> <span class="n">t</span><span class="o">,</span> <span class="k">from</span> <span class="n">dif_neg</span> <span class="n">H</span><span class="o">,</span>
+  <span class="n">eq</span><span class="bp">.</span><span class="n">drec_on</span> <span class="n">this</span><span class="bp">.</span><span class="n">symm</span> <span class="err">$</span> <span class="n">H2</span> <span class="n">t</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">A</span> <span class="n">h</span><span class="o">,</span> <span class="n">H</span> <span class="bp">⟨</span><span class="n">A</span><span class="o">,</span> <span class="n">h</span><span class="bp">⟩</span>
 
-@[elab_as_eliminator] noncomputable def succ.rec_on {C : set (set α) → set (set α) → Sort*}
-  (t : set (set α))
-  (H1 : ∀ t, ∀ A ∈ (hat S t) \ t, C t (insert (classical.some (⟨A, H⟩ : ∃ A, A ∈ (hat S t) \ t)) t))
-  (H2 : ∀ t, (∀ A ∈ (hat S t) \ t, false) → C t t) :
-  C t (succ S t) :=
-succ.rec S H1 H2 t
+<span class="bp">@</span><span class="o">[</span><span class="n">elab_as_eliminator</span><span class="o">]</span> <span class="n">noncomputable</span> <span class="n">def</span> <span class="n">succ</span><span class="bp">.</span><span class="n">rec_on</span> <span class="o">{</span><span class="n">C</span> <span class="o">:</span> <span class="n">set</span> <span class="o">(</span><span class="n">set</span> <span class="n">α</span><span class="o">)</span> <span class="bp">→</span> <span class="n">set</span> <span class="o">(</span><span class="n">set</span> <span class="n">α</span><span class="o">)</span> <span class="bp">→</span> <span class="n">Sort</span><span class="bp">*</span><span class="o">}</span>
+  <span class="o">(</span><span class="n">t</span> <span class="o">:</span> <span class="n">set</span> <span class="o">(</span><span class="n">set</span> <span class="n">α</span><span class="o">))</span>
+  <span class="o">(</span><span class="n">H1</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">t</span><span class="o">,</span> <span class="bp">∀</span> <span class="n">A</span> <span class="err">∈</span> <span class="o">(</span><span class="n">hat</span> <span class="n">S</span> <span class="n">t</span><span class="o">)</span> <span class="err">\</span> <span class="n">t</span><span class="o">,</span> <span class="n">C</span> <span class="n">t</span> <span class="o">(</span><span class="n">insert</span> <span class="o">(</span><span class="n">classical</span><span class="bp">.</span><span class="n">some</span> <span class="o">(</span><span class="bp">⟨</span><span class="n">A</span><span class="o">,</span> <span class="n">H</span><span class="bp">⟩</span> <span class="o">:</span> <span class="bp">∃</span> <span class="n">A</span><span class="o">,</span> <span class="n">A</span> <span class="err">∈</span> <span class="o">(</span><span class="n">hat</span> <span class="n">S</span> <span class="n">t</span><span class="o">)</span> <span class="err">\</span> <span class="n">t</span><span class="o">))</span> <span class="n">t</span><span class="o">))</span>
+  <span class="o">(</span><span class="n">H2</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">t</span><span class="o">,</span> <span class="o">(</span><span class="bp">∀</span> <span class="n">A</span> <span class="err">∈</span> <span class="o">(</span><span class="n">hat</span> <span class="n">S</span> <span class="n">t</span><span class="o">)</span> <span class="err">\</span> <span class="n">t</span><span class="o">,</span> <span class="n">false</span><span class="o">)</span> <span class="bp">→</span> <span class="n">C</span> <span class="n">t</span> <span class="n">t</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">C</span> <span class="n">t</span> <span class="o">(</span><span class="n">succ</span> <span class="n">S</span> <span class="n">t</span><span class="o">)</span> <span class="o">:=</span>
+<span class="n">succ</span><span class="bp">.</span><span class="n">rec</span> <span class="n">S</span> <span class="n">H1</span> <span class="n">H2</span> <span class="n">t</span>
 
-theorem succ.subset (C : set (set α)) : C ⊆ succ S C :=
-succ.rec_on S C
-  (λ t A H, show t ⊆ insert (classical.some _) t, from λ z, or.inr)
-  (λ t H z, id)
-```
+<span class="kn">theorem</span> <span class="n">succ</span><span class="bp">.</span><span class="n">subset</span> <span class="o">(</span><span class="n">C</span> <span class="o">:</span> <span class="n">set</span> <span class="o">(</span><span class="n">set</span> <span class="n">α</span><span class="o">))</span> <span class="o">:</span> <span class="n">C</span> <span class="err">⊆</span> <span class="n">succ</span> <span class="n">S</span> <span class="n">C</span> <span class="o">:=</span>
+<span class="n">succ</span><span class="bp">.</span><span class="n">rec_on</span> <span class="n">S</span> <span class="n">C</span>
+  <span class="o">(</span><span class="bp">λ</span> <span class="n">t</span> <span class="n">A</span> <span class="n">H</span><span class="o">,</span> <span class="k">show</span> <span class="n">t</span> <span class="err">⊆</span> <span class="n">insert</span> <span class="o">(</span><span class="n">classical</span><span class="bp">.</span><span class="n">some</span> <span class="bp">_</span><span class="o">)</span> <span class="n">t</span><span class="o">,</span> <span class="k">from</span> <span class="bp">λ</span> <span class="n">z</span><span class="o">,</span> <span class="n">or</span><span class="bp">.</span><span class="n">inr</span><span class="o">)</span>
+  <span class="o">(</span><span class="bp">λ</span> <span class="n">t</span> <span class="n">H</span> <span class="n">z</span><span class="o">,</span> <span class="n">id</span><span class="o">)</span>
+</pre></div>
 
 #### [ Kenny Lau (Apr 28 2018 at 10:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/interface%20for%20dite/near/125813006):
-```lean
-noncomputable def succ (C : set (set α)) : set (set α) :=
-if H : ∃ A, A ∈ (hat S C) \ C then insert (classical.some H) C else C
+<div class="codehilite"><pre><span></span><span class="n">noncomputable</span> <span class="n">def</span> <span class="n">succ</span> <span class="o">(</span><span class="n">C</span> <span class="o">:</span> <span class="n">set</span> <span class="o">(</span><span class="n">set</span> <span class="n">α</span><span class="o">))</span> <span class="o">:</span> <span class="n">set</span> <span class="o">(</span><span class="n">set</span> <span class="n">α</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">if</span> <span class="n">H</span> <span class="o">:</span> <span class="bp">∃</span> <span class="n">A</span><span class="o">,</span> <span class="n">A</span> <span class="err">∈</span> <span class="o">(</span><span class="n">hat</span> <span class="n">S</span> <span class="n">C</span><span class="o">)</span> <span class="err">\</span> <span class="n">C</span> <span class="k">then</span> <span class="n">insert</span> <span class="o">(</span><span class="n">classical</span><span class="bp">.</span><span class="n">some</span> <span class="n">H</span><span class="o">)</span> <span class="n">C</span> <span class="k">else</span> <span class="n">C</span>
 
-@[elab_as_eliminator] noncomputable def succ.rec {C : set (set α) → set (set α) → Sort*}
-  (H1 : ∀ t, ∀ A ∈ (hat S t) \ t, C t (insert A t))
-  (H2 : ∀ t, (∀ A ∈ (hat S t) \ t, false) → C t t)
-  (t : set (set α)) : C t (succ S t) :=
-if H : ∃ A, A ∈ (hat S t) \ t then
-  have succ S t = insert (classical.some H) t, from dif_pos H,
-  eq.drec_on this.symm $ H1 _ (classical.some H) (classical.some_spec H)
-else
-  have succ S t = t, from dif_neg H,
-  eq.drec_on this.symm $ H2 t $ λ A h, H ⟨A, h⟩
+<span class="bp">@</span><span class="o">[</span><span class="n">elab_as_eliminator</span><span class="o">]</span> <span class="n">noncomputable</span> <span class="n">def</span> <span class="n">succ</span><span class="bp">.</span><span class="n">rec</span> <span class="o">{</span><span class="n">C</span> <span class="o">:</span> <span class="n">set</span> <span class="o">(</span><span class="n">set</span> <span class="n">α</span><span class="o">)</span> <span class="bp">→</span> <span class="n">set</span> <span class="o">(</span><span class="n">set</span> <span class="n">α</span><span class="o">)</span> <span class="bp">→</span> <span class="n">Sort</span><span class="bp">*</span><span class="o">}</span>
+  <span class="o">(</span><span class="n">H1</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">t</span><span class="o">,</span> <span class="bp">∀</span> <span class="n">A</span> <span class="err">∈</span> <span class="o">(</span><span class="n">hat</span> <span class="n">S</span> <span class="n">t</span><span class="o">)</span> <span class="err">\</span> <span class="n">t</span><span class="o">,</span> <span class="n">C</span> <span class="n">t</span> <span class="o">(</span><span class="n">insert</span> <span class="n">A</span> <span class="n">t</span><span class="o">))</span>
+  <span class="o">(</span><span class="n">H2</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">t</span><span class="o">,</span> <span class="o">(</span><span class="bp">∀</span> <span class="n">A</span> <span class="err">∈</span> <span class="o">(</span><span class="n">hat</span> <span class="n">S</span> <span class="n">t</span><span class="o">)</span> <span class="err">\</span> <span class="n">t</span><span class="o">,</span> <span class="n">false</span><span class="o">)</span> <span class="bp">→</span> <span class="n">C</span> <span class="n">t</span> <span class="n">t</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">t</span> <span class="o">:</span> <span class="n">set</span> <span class="o">(</span><span class="n">set</span> <span class="n">α</span><span class="o">))</span> <span class="o">:</span> <span class="n">C</span> <span class="n">t</span> <span class="o">(</span><span class="n">succ</span> <span class="n">S</span> <span class="n">t</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">if</span> <span class="n">H</span> <span class="o">:</span> <span class="bp">∃</span> <span class="n">A</span><span class="o">,</span> <span class="n">A</span> <span class="err">∈</span> <span class="o">(</span><span class="n">hat</span> <span class="n">S</span> <span class="n">t</span><span class="o">)</span> <span class="err">\</span> <span class="n">t</span> <span class="k">then</span>
+  <span class="k">have</span> <span class="n">succ</span> <span class="n">S</span> <span class="n">t</span> <span class="bp">=</span> <span class="n">insert</span> <span class="o">(</span><span class="n">classical</span><span class="bp">.</span><span class="n">some</span> <span class="n">H</span><span class="o">)</span> <span class="n">t</span><span class="o">,</span> <span class="k">from</span> <span class="n">dif_pos</span> <span class="n">H</span><span class="o">,</span>
+  <span class="n">eq</span><span class="bp">.</span><span class="n">drec_on</span> <span class="n">this</span><span class="bp">.</span><span class="n">symm</span> <span class="err">$</span> <span class="n">H1</span> <span class="bp">_</span> <span class="o">(</span><span class="n">classical</span><span class="bp">.</span><span class="n">some</span> <span class="n">H</span><span class="o">)</span> <span class="o">(</span><span class="n">classical</span><span class="bp">.</span><span class="n">some_spec</span> <span class="n">H</span><span class="o">)</span>
+<span class="k">else</span>
+  <span class="k">have</span> <span class="n">succ</span> <span class="n">S</span> <span class="n">t</span> <span class="bp">=</span> <span class="n">t</span><span class="o">,</span> <span class="k">from</span> <span class="n">dif_neg</span> <span class="n">H</span><span class="o">,</span>
+  <span class="n">eq</span><span class="bp">.</span><span class="n">drec_on</span> <span class="n">this</span><span class="bp">.</span><span class="n">symm</span> <span class="err">$</span> <span class="n">H2</span> <span class="n">t</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">A</span> <span class="n">h</span><span class="o">,</span> <span class="n">H</span> <span class="bp">⟨</span><span class="n">A</span><span class="o">,</span> <span class="n">h</span><span class="bp">⟩</span>
 
-@[elab_as_eliminator] noncomputable def succ.rec_on {C : set (set α) → set (set α) → Sort*}
-  (t : set (set α))
-  (H1 : ∀ t, ∀ A ∈ (hat S t) \ t, C t (insert A t))
-  (H2 : ∀ t, (∀ A ∈ (hat S t) \ t, false) → C t t) :
-  C t (succ S t) :=
-succ.rec S H1 H2 t
+<span class="bp">@</span><span class="o">[</span><span class="n">elab_as_eliminator</span><span class="o">]</span> <span class="n">noncomputable</span> <span class="n">def</span> <span class="n">succ</span><span class="bp">.</span><span class="n">rec_on</span> <span class="o">{</span><span class="n">C</span> <span class="o">:</span> <span class="n">set</span> <span class="o">(</span><span class="n">set</span> <span class="n">α</span><span class="o">)</span> <span class="bp">→</span> <span class="n">set</span> <span class="o">(</span><span class="n">set</span> <span class="n">α</span><span class="o">)</span> <span class="bp">→</span> <span class="n">Sort</span><span class="bp">*</span><span class="o">}</span>
+  <span class="o">(</span><span class="n">t</span> <span class="o">:</span> <span class="n">set</span> <span class="o">(</span><span class="n">set</span> <span class="n">α</span><span class="o">))</span>
+  <span class="o">(</span><span class="n">H1</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">t</span><span class="o">,</span> <span class="bp">∀</span> <span class="n">A</span> <span class="err">∈</span> <span class="o">(</span><span class="n">hat</span> <span class="n">S</span> <span class="n">t</span><span class="o">)</span> <span class="err">\</span> <span class="n">t</span><span class="o">,</span> <span class="n">C</span> <span class="n">t</span> <span class="o">(</span><span class="n">insert</span> <span class="n">A</span> <span class="n">t</span><span class="o">))</span>
+  <span class="o">(</span><span class="n">H2</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">t</span><span class="o">,</span> <span class="o">(</span><span class="bp">∀</span> <span class="n">A</span> <span class="err">∈</span> <span class="o">(</span><span class="n">hat</span> <span class="n">S</span> <span class="n">t</span><span class="o">)</span> <span class="err">\</span> <span class="n">t</span><span class="o">,</span> <span class="n">false</span><span class="o">)</span> <span class="bp">→</span> <span class="n">C</span> <span class="n">t</span> <span class="n">t</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">C</span> <span class="n">t</span> <span class="o">(</span><span class="n">succ</span> <span class="n">S</span> <span class="n">t</span><span class="o">)</span> <span class="o">:=</span>
+<span class="n">succ</span><span class="bp">.</span><span class="n">rec</span> <span class="n">S</span> <span class="n">H1</span> <span class="n">H2</span> <span class="n">t</span>
 
-theorem succ.subset (C : set (set α)) : C ⊆ succ S C :=
-succ.rec_on S C
-  (λ t A H, show t ⊆ insert A t, from λ z, or.inr)
-  (λ t H z, id)
-```
+<span class="kn">theorem</span> <span class="n">succ</span><span class="bp">.</span><span class="n">subset</span> <span class="o">(</span><span class="n">C</span> <span class="o">:</span> <span class="n">set</span> <span class="o">(</span><span class="n">set</span> <span class="n">α</span><span class="o">))</span> <span class="o">:</span> <span class="n">C</span> <span class="err">⊆</span> <span class="n">succ</span> <span class="n">S</span> <span class="n">C</span> <span class="o">:=</span>
+<span class="n">succ</span><span class="bp">.</span><span class="n">rec_on</span> <span class="n">S</span> <span class="n">C</span>
+  <span class="o">(</span><span class="bp">λ</span> <span class="n">t</span> <span class="n">A</span> <span class="n">H</span><span class="o">,</span> <span class="k">show</span> <span class="n">t</span> <span class="err">⊆</span> <span class="n">insert</span> <span class="n">A</span> <span class="n">t</span><span class="o">,</span> <span class="k">from</span> <span class="bp">λ</span> <span class="n">z</span><span class="o">,</span> <span class="n">or</span><span class="bp">.</span><span class="n">inr</span><span class="o">)</span>
+  <span class="o">(</span><span class="bp">λ</span> <span class="n">t</span> <span class="n">H</span> <span class="n">z</span><span class="o">,</span> <span class="n">id</span><span class="o">)</span>
+</pre></div>
 
 #### [ Kenny Lau (Apr 28 2018 at 10:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/interface%20for%20dite/near/125813007):
-which one is better?
+<p>which one is better?</p>
 
 #### [ Kenny Lau (Apr 28 2018 at 10:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/interface%20for%20dite/near/125813201):
-why does elaborator fail for this one?
-```lean
-type mismatch, term
-  succ.rec_on S C ?m_2 ?m_3
-has type
-  ?m_1 C (succ S C) : Sort ?
-but is expected to have type
-  is_chain C → is_chain (succ S C) : Prop
-```
+<p>why does elaborator fail for this one?</p>
+<div class="codehilite"><pre><span></span><span class="n">type</span> <span class="n">mismatch</span><span class="o">,</span> <span class="n">term</span>
+  <span class="n">succ</span><span class="bp">.</span><span class="n">rec_on</span> <span class="n">S</span> <span class="n">C</span> <span class="err">?</span><span class="n">m_2</span> <span class="err">?</span><span class="n">m_3</span>
+<span class="n">has</span> <span class="n">type</span>
+  <span class="err">?</span><span class="n">m_1</span> <span class="n">C</span> <span class="o">(</span><span class="n">succ</span> <span class="n">S</span> <span class="n">C</span><span class="o">)</span> <span class="o">:</span> <span class="n">Sort</span> <span class="err">?</span>
+<span class="n">but</span> <span class="n">is</span> <span class="n">expected</span> <span class="n">to</span> <span class="k">have</span> <span class="n">type</span>
+  <span class="n">is_chain</span> <span class="n">C</span> <span class="bp">→</span> <span class="n">is_chain</span> <span class="o">(</span><span class="n">succ</span> <span class="n">S</span> <span class="n">C</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Prop</span>
+</pre></div>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 16:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/interface%20for%20dite/near/125821121):
-`dite` stinks and I would strongly encourage you to work on this until it stinks less.
+<p><code>dite</code> stinks and I would strongly encourage you to work on this until it stinks less.</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 16:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/interface%20for%20dite/near/125821160):
-`dite` is such a normal thing coming from procedural languages
+<p><code>dite</code> is such a normal thing coming from procedural languages</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 16:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/interface%20for%20dite/near/125821164):
-and it's so hard to eliminate
+<p>and it's so hard to eliminate</p>
 
 #### [ Kenny Lau (Apr 28 2018 at 16:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/interface%20for%20dite/near/125821165):
-I did write an interface
+<p>I did write an interface</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 16:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/interface%20for%20dite/near/125821166):
-I know
+<p>I know</p>
 
 #### [ Kenny Lau (Apr 28 2018 at 16:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/interface%20for%20dite/near/125821167):
-but the elaborator fails lol
+<p>but the elaborator fails lol</p>
 
 
 {% endraw %}

@@ -12,15 +12,16 @@ permalink: archive/113488general/93941erased.html
 
 {% raw %}
 #### [ Mario Carneiro (Apr 05 2018 at 19:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/erased/near/124681873):
-@**Gabriel Ebner** What would be the best way to define the following type:
-* `erased A` is a type with a computable function `A -> erased A` and a noncomputable function `erased A -> A`
-* `A` and `erased A` are (noncomputably) equivalent with those functions
-* `erased A` is VM-erased, meaning elements of this type are stored as the "proof object" / "neutral element"
+<p><span class="user-mention" data-user-id="110043">@Gabriel Ebner</span> What would be the best way to define the following type:</p>
+<ul>
+<li><code>erased A</code> is a type with a computable function <code>A -&gt; erased A</code> and a noncomputable function <code>erased A -&gt; A</code></li>
+<li><code>A</code> and <code>erased A</code> are (noncomputably) equivalent with those functions</li>
+<li><code>erased A</code> is VM-erased, meaning elements of this type are stored as the "proof object" / "neutral element"</li>
+</ul>
 
 #### [ Mario Carneiro (Apr 05 2018 at 19:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/erased/near/124681928):
-Attempt 1:
-```
-import data.set.basic data.equiv
+<p>Attempt 1:</p>
+<div class="codehilite"><pre><span></span>import data.set.basic data.equiv
 
 def erased (α : Type*) : Type* := set.range (singleton : α → set α)
 
@@ -43,43 +44,43 @@ noncomputable def equiv (α) : erased α ≃ α :=
 ⟨out, mk, out_mk, mk_out⟩
 
 end erased
-```
+</pre></div>
 
 #### [ Mario Carneiro (Apr 05 2018 at 20:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/erased/near/124682307):
-The problem with this encoding is that `erased A` is essentially a `set A`, which is a `A -> Prop`, which is stored as a closure returning a proof object. Thus it isn't fully erased, so it still causes its arguments to be evaluated:
-```
-#eval erased.mk (2+2) -- (erased.mk 4)
-```
-Do you know why type families aren't erased like types are?
+<p>The problem with this encoding is that <code>erased A</code> is essentially a <code>set A</code>, which is a <code>A -&gt; Prop</code>, which is stored as a closure returning a proof object. Thus it isn't fully erased, so it still causes its arguments to be evaluated:</p>
+<div class="codehilite"><pre><span></span>#eval erased.mk (2+2) -- (erased.mk 4)
+</pre></div>
+
+
+<p>Do you know why type families aren't erased like types are?</p>
 
 #### [ Simon Hudon (Apr 05 2018 at 20:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/erased/near/124682380):
-Why not use `nonempty`?
+<p>Why not use <code>nonempty</code>?</p>
 
 #### [ Mario Carneiro (Apr 05 2018 at 20:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/erased/near/124682407):
-it's not noncomputably equivalent to `A`
+<p>it's not noncomputably equivalent to <code>A</code></p>
 
 #### [ Simon Hudon (Apr 05 2018 at 20:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/erased/near/124682408):
-I withdraw my question, I get it
+<p>I withdraw my question, I get it</p>
 
 #### [ Mario Carneiro (Apr 05 2018 at 20:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/erased/near/124682469):
-The goal is to have a piece of "data" that is actually erased but still exists from the lean modeling POV
+<p>The goal is to have a piece of "data" that is actually erased but still exists from the lean modeling POV</p>
 
 #### [ Simon Hudon (Apr 05 2018 at 20:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/erased/near/124682497):
-I see
+<p>I see</p>
 
 #### [ Gabriel Ebner (Apr 05 2018 at 20:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/erased/near/124682565):
-Wait, this no longer works?  Let me check.
+<p>Wait, this no longer works?  Let me check.</p>
 
 #### [ Gabriel Ebner (Apr 05 2018 at 20:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/erased/near/124682890):
-Mmmh, I can't reproduce this here.  The 2+2 computation is completely erased.  Let me upgrade Lean.
+<p>Mmmh, I can't reproduce this here.  The 2+2 computation is completely erased.  Let me upgrade Lean.</p>
 
 #### [ Gabriel Ebner (Apr 05 2018 at 20:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/erased/near/124683007):
-Still can't reproduce.
+<p>Still can't reproduce.</p>
 
 #### [ Mario Carneiro (Apr 05 2018 at 20:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/erased/near/124683060):
-Actually that `#eval` doesn't work, lean complains about too few arguments since it's a closure which is waiting for an argument. This shows the closure creation:
-```
-set_option trace.compiler.code_gen true
+<p>Actually that <code>#eval</code> doesn't work, lean complains about too few arguments since it's a closure which is waiting for an argument. This shows the closure creation:</p>
+<div class="codehilite"><pre><span></span>set_option trace.compiler.code_gen true
 def f := let x := erased.mk (2+2) in x
 -- [compiler.code_gen]  f._lambda_1 1
 -- 0: scnstr #0
@@ -90,87 +91,85 @@ def f := let x := erased.mk (2+2) in x
 -- 2: push 0
 -- 3: drop 1
 -- 4: ret
-```
+</pre></div>
 
 #### [ Gabriel Ebner (Apr 05 2018 at 20:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/erased/near/124683063):
-What do you get with these changes (added `has_repr` and the `set_option`):
-```lean
-set_option trace.compiler.optimize_bytecode true
+<p>What do you get with these changes (added <code>has_repr</code> and the <code>set_option</code>):</p>
+<div class="codehilite"><pre><span></span><span class="kn">set_option</span> <span class="n">trace</span><span class="bp">.</span><span class="n">compiler</span><span class="bp">.</span><span class="n">optimize_bytecode</span> <span class="n">true</span>
 
-def erased (α : Type*) : Type* := set.range (singleton : α → set α)
+<span class="n">def</span> <span class="n">erased</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span> <span class="o">:=</span> <span class="n">set</span><span class="bp">.</span><span class="n">range</span> <span class="o">(</span><span class="n">singleton</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">set</span> <span class="n">α</span><span class="o">)</span>
 
-namespace erased
+<span class="kn">namespace</span> <span class="n">erased</span>
 
-@[inline] def mk {α} (a : α) : erased α := ⟨_, a, rfl⟩
+<span class="bp">@</span><span class="o">[</span><span class="kn">inline</span><span class="o">]</span> <span class="n">def</span> <span class="n">mk</span> <span class="o">{</span><span class="n">α</span><span class="o">}</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">erased</span> <span class="n">α</span> <span class="o">:=</span> <span class="bp">⟨_</span><span class="o">,</span> <span class="n">a</span><span class="o">,</span> <span class="n">rfl</span><span class="bp">⟩</span>
 
-noncomputable def out {α} (a : erased α) : α :=
-classical.some a.2
+<span class="n">noncomputable</span> <span class="n">def</span> <span class="n">out</span> <span class="o">{</span><span class="n">α</span><span class="o">}</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">erased</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">α</span> <span class="o">:=</span>
+<span class="n">classical</span><span class="bp">.</span><span class="n">some</span> <span class="n">a</span><span class="bp">.</span><span class="mi">2</span>
 
-theorem mk_out {α} (a : α) : (mk a).out = a :=
-eq.symm $ (set.mem_singleton_iff _ _).1 $
-by unfold out; rw [classical.some_spec (mk a).2]; simp [mk]
+<span class="kn">theorem</span> <span class="n">mk_out</span> <span class="o">{</span><span class="n">α</span><span class="o">}</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">mk</span> <span class="n">a</span><span class="o">)</span><span class="bp">.</span><span class="n">out</span> <span class="bp">=</span> <span class="n">a</span> <span class="o">:=</span>
+<span class="n">eq</span><span class="bp">.</span><span class="n">symm</span> <span class="err">$</span> <span class="o">(</span><span class="n">set</span><span class="bp">.</span><span class="n">mem_singleton_iff</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">)</span><span class="bp">.</span><span class="mi">1</span> <span class="err">$</span>
+<span class="k">by</span> <span class="n">unfold</span> <span class="n">out</span><span class="bp">;</span> <span class="n">rw</span> <span class="o">[</span><span class="n">classical</span><span class="bp">.</span><span class="n">some_spec</span> <span class="o">(</span><span class="n">mk</span> <span class="n">a</span><span class="o">)</span><span class="bp">.</span><span class="mi">2</span><span class="o">]</span><span class="bp">;</span> <span class="n">simp</span> <span class="o">[</span><span class="n">mk</span><span class="o">]</span>
 
-theorem out_mk {α} (a : erased α) : mk (out a) = a :=
-subtype.eq $ set.ext $ λ b,
-by simp [out, mk, classical.some_spec a.2]
+<span class="kn">theorem</span> <span class="n">out_mk</span> <span class="o">{</span><span class="n">α</span><span class="o">}</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">erased</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">mk</span> <span class="o">(</span><span class="n">out</span> <span class="n">a</span><span class="o">)</span> <span class="bp">=</span> <span class="n">a</span> <span class="o">:=</span>
+<span class="n">subtype</span><span class="bp">.</span><span class="n">eq</span> <span class="err">$</span> <span class="n">set</span><span class="bp">.</span><span class="n">ext</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">b</span><span class="o">,</span>
+<span class="k">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">out</span><span class="o">,</span> <span class="n">mk</span><span class="o">,</span> <span class="n">classical</span><span class="bp">.</span><span class="n">some_spec</span> <span class="n">a</span><span class="bp">.</span><span class="mi">2</span><span class="o">]</span>
 
-noncomputable def equiv (α) : erased α ≃ α :=
-⟨out, mk, out_mk, mk_out⟩
+<span class="n">noncomputable</span> <span class="n">def</span> <span class="n">equiv</span> <span class="o">(</span><span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">erased</span> <span class="n">α</span> <span class="err">≃</span> <span class="n">α</span> <span class="o">:=</span>
+<span class="bp">⟨</span><span class="n">out</span><span class="o">,</span> <span class="n">mk</span><span class="o">,</span> <span class="n">out_mk</span><span class="o">,</span> <span class="n">mk_out</span><span class="bp">⟩</span>
 
-instance (α): has_repr (erased α) := ⟨λ _, "erased"⟩
+<span class="kn">instance</span> <span class="o">(</span><span class="n">α</span><span class="o">):</span> <span class="n">has_repr</span> <span class="o">(</span><span class="n">erased</span> <span class="n">α</span><span class="o">)</span> <span class="o">:=</span> <span class="bp">⟨λ</span> <span class="bp">_</span><span class="o">,</span> <span class="s2">&quot;erased&quot;</span><span class="bp">⟩</span>
 
-end erased
+<span class="kn">end</span> <span class="n">erased</span>
 
-#eval (erased.mk (2+2)) -- (erased.mk 4)
-
-```
+<span class="bp">#</span><span class="kn">eval</span> <span class="o">(</span><span class="n">erased</span><span class="bp">.</span><span class="n">mk</span> <span class="o">(</span><span class="mi">2</span><span class="bp">+</span><span class="mi">2</span><span class="o">))</span> <span class="c1">-- (erased.mk 4)</span>
+</pre></div>
 
 #### [ Gabriel Ebner (Apr 05 2018 at 20:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/erased/near/124683113):
-Hmm, as a workaround you can use `have ..., from ..., ...` instead of let.
+<p>Hmm, as a workaround you can use <code>have ..., from ..., ...</code> instead of let.</p>
 
 #### [ Mario Carneiro (Apr 05 2018 at 20:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/erased/near/124683168):
-Well, the let was just to force the closure creation out of tail call position
+<p>Well, the let was just to force the closure creation out of tail call position</p>
 
 #### [ Mario Carneiro (Apr 05 2018 at 20:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/erased/near/124683177):
-if you use `have` instead it just adds an additional argument to the main function
+<p>if you use <code>have</code> instead it just adds an additional argument to the main function</p>
 
 #### [ Gabriel Ebner (Apr 05 2018 at 20:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/erased/near/124683278):
-I think the problem is just that prop-erasure is not implemented for `let`, because nobody ever uses lets except for data.
+<p>I think the problem is just that prop-erasure is not implemented for <code>let</code>, because nobody ever uses lets except for data.</p>
 
 #### [ Mario Carneiro (Apr 05 2018 at 20:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/erased/near/124683920):
-Hm, you can still clearly tell the difference between these two pieces of code:
-```
-set_option trace.compiler.code_gen true
+<p>Hm, you can still clearly tell the difference between these two pieces of code:</p>
+<div class="codehilite"><pre><span></span>set_option trace.compiler.code_gen true
 #eval let x := 2 + 2 = 4 in x
 #eval let x := erased.mk (2+2) in x
-```
-I'm glad to see that `2+2` is not evaluated anywhere in the generated code, but it is still creating a closure returning `#0` rather than `#0` itself
+</pre></div>
+
+
+<p>I'm glad to see that <code>2+2</code> is not evaluated anywhere in the generated code, but it is still creating a closure returning <code>#0</code> rather than <code>#0</code> itself</p>
 
 #### [ Gabriel Ebner (Apr 05 2018 at 20:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/erased/near/124684479):
-Now I remember: we can't erase type families to `#0`.  We need to erase them to a function type, but I don't think such an erasure is implemented.  If `mk` is not inlined, then we actually compute `2+2` here.
+<p>Now I remember: we can't erase type families to <code>#0</code>.  We need to erase them to a function type, but I don't think such an erasure is implemented.  If <code>mk</code> is not inlined, then we actually compute <code>2+2</code> here.</p>
 
 #### [ Mario Carneiro (Apr 05 2018 at 20:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/erased/near/124684551):
-Here's attempt number 2, which tries to encode each element of erased A as a straight type:
-```
-import set_theory.ordinal
+<p>Here's attempt number 2, which tries to encode each element of erased A as a straight type:</p>
+<div class="codehilite"><pre><span></span>import set_theory.ordinal
 
 universe u
 def erased (α : Type u) : Type (u+1) :=
-{o // o < cardinal.ord (cardinal.mk α)}
+{o // o &lt; cardinal.ord (cardinal.mk α)}
 
 namespace erased
 open cardinal ordinal
 
-noncomputable def wo' (α : Type u) :
+noncomputable def wo&#39; (α : Type u) :
   {r : α → α → Prop // ∃ [wo : is_well_order α r],
   ord (mk α) = @ordinal.type α r wo} :=
 classical.choice $ let ⟨r, wo⟩ := cardinal.ord_eq α in ⟨⟨r, wo⟩⟩
 
-def wo (α : Type u) (x y) := (wo' α).1 x y
+def wo (α : Type u) (x y) := (wo&#39; α).1 x y
 
-instance {α} : is_well_order α (wo α) := (wo' α).2.fst
+instance {α} : is_well_order α (wo α) := (wo&#39; α).2.fst
 
-theorem wo_eq (α : Type u) : ord (mk α) = type (wo α) := (wo' α).2.snd
+theorem wo_eq (α : Type u) : ord (mk α) = type (wo α) := (wo&#39; α).2.snd
 
 @[inline] def type {α} (r : α → α → Prop) [wo : is_well_order α r] : ordinal :=
 quot.mk _ ⟨α, r, wo⟩
@@ -192,65 +191,63 @@ noncomputable def equiv (α) : erased α ≃ α :=
 ⟨out, mk, mk_out, out_mk⟩
 
 end erased
-```
+</pre></div>
 
 #### [ Mario Carneiro (Apr 05 2018 at 20:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/erased/near/124684600):
-Since you can't really (provably) distinguish types except by their cardinality, this approach is rather more involved
+<p>Since you can't really (provably) distinguish types except by their cardinality, this approach is rather more involved</p>
 
 #### [ Mario Carneiro (Apr 05 2018 at 20:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/erased/near/124684622):
-It also requires a lot of inlining; I had to restate the definitions of `ordinal.type` and `ordinal.typein` so they would be inlined
+<p>It also requires a lot of inlining; I had to restate the definitions of <code>ordinal.type</code> and <code>ordinal.typein</code> so they would be inlined</p>
 
 #### [ Gabriel Ebner (Apr 05 2018 at 21:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/erased/near/124684756):
-Anything that relies on inlining will have the closure problem.
+<p>Anything that relies on inlining will have the closure problem.</p>
 
 #### [ Mario Carneiro (Apr 05 2018 at 21:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/erased/near/124684912):
-Not true:
-```
-set_option trace.compiler.code_gen true
+<p>Not true:</p>
+<div class="codehilite"><pre><span></span>set_option trace.compiler.code_gen true
 def f := @erased.mk ℕ
 #eval let x := f (2+2) in x
-```
-Note that even though `f` is not inlined `2+2` is not evaluated
+</pre></div>
+
+
+<p>Note that even though <code>f</code> is not inlined <code>2+2</code> is not evaluated</p>
 
 #### [ Gabriel Ebner (Apr 05 2018 at 21:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/erased/near/124684913):
-If you're okay with a bit of extra ugliness, you can define an `erase` function in both versions:
-```lean
-@[inline]
-def erase {α} (a : erased α) : erased α :=
-⟨λ x, a.1 x, a.2⟩
+<p>If you're okay with a bit of extra ugliness, you can define an <code>erase</code> function in both versions:</p>
+<div class="codehilite"><pre><span></span><span class="bp">@</span><span class="o">[</span><span class="kn">inline</span><span class="o">]</span>
+<span class="n">def</span> <span class="n">erase</span> <span class="o">{</span><span class="n">α</span><span class="o">}</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">erased</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">erased</span> <span class="n">α</span> <span class="o">:=</span>
+<span class="bp">⟨λ</span> <span class="n">x</span><span class="o">,</span> <span class="n">a</span><span class="bp">.</span><span class="mi">1</span> <span class="n">x</span><span class="o">,</span> <span class="n">a</span><span class="bp">.</span><span class="mi">2</span><span class="bp">⟩</span>
 
--- 👌
-def f' := let x := erased.mk (2+2) in x.erase
-```
+<span class="c1">-- 👌</span>
+<span class="n">def</span> <span class="n">f&#39;</span> <span class="o">:=</span> <span class="k">let</span> <span class="n">x</span> <span class="o">:=</span> <span class="n">erased</span><span class="bp">.</span><span class="n">mk</span> <span class="o">(</span><span class="mi">2</span><span class="bp">+</span><span class="mi">2</span><span class="o">)</span> <span class="k">in</span> <span class="n">x</span><span class="bp">.</span><span class="n">erase</span>
+</pre></div>
 
 #### [ Gabriel Ebner (Apr 05 2018 at 21:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/erased/near/124684994):
-Mmh, I still get a call to `erased.mk` and `2+2`, but no call to `f` since it is (of course) inlined.
+<p>Mmh, I still get a call to <code>erased.mk</code> and <code>2+2</code>, but no call to <code>f</code> since it is (of course) inlined.</p>
 
 #### [ Gabriel Ebner (Apr 05 2018 at 21:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/erased/near/124685031):
-You should set the `optimize_bytecode` option instead of `code_gen`, otherwise you miss out on all the optimizations.
+<p>You should set the <code>optimize_bytecode</code> option instead of <code>code_gen</code>, otherwise you miss out on all the optimizations.</p>
 
 #### [ Mario Carneiro (Apr 05 2018 at 21:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/erased/near/124685258):
-I'm confused: why does `erase` work? The argument count goes down, but it still returns `#0`. I thought you said type/proof lambdas can't be implemented as `#0`?
+<p>I'm confused: why does <code>erase</code> work? The argument count goes down, but it still returns <code>#0</code>. I thought you said type/proof lambdas can't be implemented as <code>#0</code>?</p>
 
 #### [ Mario Carneiro (Apr 05 2018 at 21:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/erased/near/124685263):
-```
-set_option trace.compiler.optimize_bytecode true
+<div class="codehilite"><pre><span></span>set_option trace.compiler.optimize_bytecode true
 def f1 : erased ℕ := (erased.mk (2+2))
 def f2 : erased ℕ := (erased.mk (2+2)).erase
-```
+</pre></div>
 
 #### [ Gabriel Ebner (Apr 05 2018 at 21:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/erased/near/124685972):
-I'm a bit lost as well.  Apparently the `apply` operation is special-cased to also work on `#0`.
+<p>I'm a bit lost as well.  Apparently the <code>apply</code> operation is special-cased to also work on <code>#0</code>.</p>
 
 #### [ Mario Carneiro (Apr 05 2018 at 21:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/erased/near/124686074):
-That's why I would expect that type families should also compile as `#0` rather than `lam x, #0`
+<p>That's why I would expect that type families should also compile as <code>#0</code> rather than <code>lam x, #0</code></p>
 
 #### [ Gabriel Ebner (Apr 05 2018 at 21:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/erased/near/124686214):
-You know, type families are actually erased, it's just that subtypes aren't because they haven't been erased yet....:
-```lean
-def f (x : set ℕ) := x
-def g (x : { s : set ℕ // true }) := x
-```
+<p>You know, type families are actually erased, it's just that subtypes aren't because they haven't been erased yet....:</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">f</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">set</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:=</span> <span class="n">x</span>
+<span class="n">def</span> <span class="n">g</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="o">{</span> <span class="n">s</span> <span class="o">:</span> <span class="n">set</span> <span class="bp">ℕ</span> <span class="bp">//</span> <span class="n">true</span> <span class="o">})</span> <span class="o">:=</span> <span class="n">x</span>
+</pre></div>
 
 
 {% endraw %}

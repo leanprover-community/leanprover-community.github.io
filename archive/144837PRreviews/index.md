@@ -10,17 +10,35 @@ permalink: archive/144837PRreviews/index.html
 
 ### Topics:
 
+* [#664 subalgebra_of_subring](57737664subalgebraofsubring.html) (3 messages, latest: Feb 02 2019 at 19:40)
+
+* [#666 div_zero](13992666divzero.html) (14 messages, latest: Feb 02 2019 at 03:37)
+
+* [#665 lcm](90049665lcm.html) (9 messages, latest: Feb 01 2019 at 10:55)
+
+* [#658 multiplication of submodules](74189658multiplicationofsubmodules.html) (5 messages, latest: Jan 31 2019 at 23:18)
+
+* [#461 integral closure](12978461integralclosure.html) (19 messages, latest: Jan 30 2019 at 09:55)
+
+* [#528 splitting fields](13816528splittingfields.html) (4 messages, latest: Jan 29 2019 at 20:45)
+
+* [#567](39974567.html) (2 messages, latest: Jan 29 2019 at 20:09)
+
+* [#410 backwards reasoning](59921410backwardsreasoning.html) (175 messages, latest: Jan 26 2019 at 18:27)
+
+* [#376 foldl](06197376foldl.html) (4 messages, latest: Jan 26 2019 at 18:26)
+
+* [#536 algebra over comm_ring](17703536algebraovercommring.html) (58 messages, latest: Jan 24 2019 at 18:06)
+
+* [#619 adjunctions: defs](29122619adjunctionsdefs.html) (1 message, latest: Jan 23 2019 at 16:30)
+
+* [#538 opposites](43082538opposites.html) (167 messages, latest: Jan 23 2019 at 16:04)
+
 * [#593 Add default setup for VS Code](63887593AdddefaultsetupforVSCode.html) (11 messages, latest: Jan 23 2019 at 12:52)
-
-* [#536 algebra over comm_ring](17703536algebraovercommring.html) (43 messages, latest: Jan 23 2019 at 11:52)
-
-* [#538 opposites](43082538opposites.html) (163 messages, latest: Jan 23 2019 at 00:36)
 
 * [#510 opposite categories](09235510oppositecategories.html) (30 messages, latest: Jan 22 2019 at 15:14)
 
 * [#610](22459610.html) (16 messages, latest: Jan 20 2019 at 21:24)
-
-* [#567](39974567.html) (1 message, latest: Jan 19 2019 at 22:21)
 
 * [#605 unique](68918605unique.html) (3 messages, latest: Jan 18 2019 at 22:40)
 
@@ -29,8 +47,6 @@ permalink: archive/144837PRreviews/index.html
 * [#489 where](32132489where.html) (83 messages, latest: Jan 17 2019 at 11:21)
 
 * [#583 move everything into `src`](63394583moveeverythingintosrc.html) (25 messages, latest: Jan 16 2019 at 19:29)
-
-* [#528 splitting fields](13816528splittingfields.html) (2 messages, latest: Jan 16 2019 at 13:19)
 
 * [#568 metric namespace](84184568metricnamespace.html) (14 messages, latest: Jan 13 2019 at 22:59)
 
@@ -56,13 +72,9 @@ permalink: archive/144837PRreviews/index.html
 
 * [#495 multiplicity](58383495multiplicity.html) (24 messages, latest: Dec 17 2018 at 15:06)
 
-* [#461 integral closure](12978461integralclosure.html) (17 messages, latest: Dec 17 2018 at 14:13)
-
 * [#484 miscellaneous topology](90517484miscellaneoustopology.html) (7 messages, latest: Dec 10 2018 at 10:09)
 
 * [#507 functoriality of (co)cones](73085507functorialityofcocones.html) (4 messages, latest: Dec 07 2018 at 18:49)
-
-* [#410 backwards reasoning](59921410backwardsreasoning.html) (174 messages, latest: Dec 05 2018 at 14:45)
 
 * [#494 limits-2](63126494limits2.html) (45 messages, latest: Dec 02 2018 at 23:39)
 

@@ -12,16 +12,16 @@ permalink: archive/113488general/73128aredsimpandsimpidempontent.html
 
 {% raw %}
 #### [ Kenny Lau (Apr 02 2018 at 15:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/are%20dsimp%20and%20simp%20idempontent%3F/near/124526028):
-Are dsimp and simp idempontent?
+<p>Are dsimp and simp idempontent?</p>
 
 #### [ Kenny Lau (Apr 02 2018 at 15:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/are%20dsimp%20and%20simp%20idempontent%3F/near/124526032):
-I think we know that `ring` isn't idempotent
+<p>I think we know that <code>ring</code> isn't idempotent</p>
 
 #### [ Kevin Buzzard (Apr 02 2018 at 15:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/are%20dsimp%20and%20simp%20idempontent%3F/near/124527307):
-I've never seen simp work twice in a row
+<p>I've never seen simp work twice in a row</p>
 
 #### [ Kenny Lau (Apr 02 2018 at 15:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/are%20dsimp%20and%20simp%20idempontent%3F/near/124527378):
-you're right
+<p>you're right</p>
 
 
 {% endraw %}

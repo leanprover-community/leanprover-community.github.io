@@ -12,70 +12,68 @@ permalink: archive/113488general/31595typemismatchforfinn.html
 
 {% raw %}
 #### [ Kevin Buzzard (Mar 11 2018 at 20:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20mismatch%20for%20fin%20n/near/123579325):
-I am surprised that this doesn't typecheck:
+<p>I am surprised that this doesn't typecheck:</p>
 
 #### [ Kevin Buzzard (Mar 11 2018 at 20:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20mismatch%20for%20fin%20n/near/123579326):
-```
-def subtypeadd {m : ℕ} {n : ℕ} (A : fin m) (B : fin n) : fin (m+n) := 
+<div class="codehilite"><pre><span></span>def subtypeadd {m : ℕ} {n : ℕ} (A : fin m) (B : fin n) : fin (m+n) :=
   ⟨A.val+B.val,add_lt_add A.is_lt B.is_lt⟩
 
-example (A : fin 3) (B : fin 4) (C : fin 7) 
+example (A : fin 3) (B : fin 4) (C : fin 7)
   : A = ⟨2,dec_trivial⟩ → B = ⟨0,dec_trivial⟩ → C = subtypeadd A B → C = ⟨2,dec_trivial⟩ := sorry
-```
+</pre></div>
 
 #### [ Kevin Buzzard (Mar 11 2018 at 20:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20mismatch%20for%20fin%20n/near/123579333):
-It complains at `subtypeadd` that `A` has type `fin 3` and it expects it to have type `fin 6`??
+<p>It complains at <code>subtypeadd</code> that <code>A</code> has type <code>fin 3</code> and it expects it to have type <code>fin 6</code>??</p>
 
 #### [ Mario Carneiro (Mar 11 2018 at 20:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20mismatch%20for%20fin%20n/near/123579423):
-I think this is the default elaboration strategy's fault
+<p>I think this is the default elaboration strategy's fault</p>
 
 #### [ Kevin Buzzard (Mar 11 2018 at 20:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20mismatch%20for%20fin%20n/near/123579425):
-It's hard for me to see what's going on because it doesn't typecheck so I don't have any term to work with
+<p>It's hard for me to see what's going on because it doesn't typecheck so I don't have any term to work with</p>
 
 #### [ Kevin Buzzard (Mar 11 2018 at 20:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20mismatch%20for%20fin%20n/near/123579430):
-Obviously I can fix it with @
+<p>Obviously I can fix it with @</p>
 
 #### [ Kevin Buzzard (Mar 11 2018 at 20:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20mismatch%20for%20fin%20n/near/123579431):
-but here -- hey -- can you be the elaborator like you sometimes do?
+<p>but here -- hey -- can you be the elaborator like you sometimes do?</p>
 
 #### [ Mario Carneiro (Mar 11 2018 at 20:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20mismatch%20for%20fin%20n/near/123579432):
-You can make it typecheck by writing `@subtypeadd _ _ A B` or adding `@[elab_simple]` to the definition of subtypeadd
+<p>You can make it typecheck by writing <code>@subtypeadd _ _ A B</code> or adding <code>@[elab_simple]</code> to the definition of subtypeadd</p>
 
 #### [ Kevin Buzzard (Mar 11 2018 at 20:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20mismatch%20for%20fin%20n/near/123579433):
-You have to figure out what m and n are
+<p>You have to figure out what m and n are</p>
 
 #### [ Kevin Buzzard (Mar 11 2018 at 20:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20mismatch%20for%20fin%20n/near/123579434):
-and the only clues you have are that A : fin m and A : fin 3
+<p>and the only clues you have are that A : fin m and A : fin 3</p>
 
 #### [ Kevin Buzzard (Mar 11 2018 at 20:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20mismatch%20for%20fin%20n/near/123579435):
-what do you think
+<p>what do you think</p>
 
 #### [ Kevin Buzzard (Mar 11 2018 at 20:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20mismatch%20for%20fin%20n/near/123579472):
-mr elaborator
+<p>mr elaborator</p>
 
 #### [ Mario Carneiro (Mar 11 2018 at 20:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20mismatch%20for%20fin%20n/near/123579497):
-It sees that the goal is `fin 7` and so has to solve `7 =?= ?m1 + ?m2`. I think if you unfold 7 enough (`bit1 (bit1 one)`) you get `bit0 (bit1 one) + 1`, i.e. `6+1`. So it's the most obvious split and lean takes it
+<p>It sees that the goal is <code>fin 7</code> and so has to solve <code>7 =?= ?m1 + ?m2</code>. I think if you unfold 7 enough (<code>bit1 (bit1 one)</code>) you get <code>bit0 (bit1 one) + 1</code>, i.e. <code>6+1</code>. So it's the most obvious split and lean takes it</p>
 
 #### [ Kevin Buzzard (Mar 11 2018 at 20:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20mismatch%20for%20fin%20n/near/123579501):
-Aah excellent!
+<p>Aah excellent!</p>
 
 #### [ Kevin Buzzard (Mar 11 2018 at 20:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20mismatch%20for%20fin%20n/near/123579541):
-so in fact this is a fun game
+<p>so in fact this is a fun game</p>
 
 #### [ Kevin Buzzard (Mar 11 2018 at 20:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20mismatch%20for%20fin%20n/near/123579542):
-guess the error
+<p>guess the error</p>
 
 #### [ Kevin Buzzard (Mar 11 2018 at 20:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20mismatch%20for%20fin%20n/near/123579543):
-```
-example (A : fin 3) (B : fin 5) (C : fin 8) 
+<div class="codehilite"><pre><span></span>example (A : fin 3) (B : fin 5) (C : fin 8)
   : A = ⟨2,dec_trivial⟩ → B = ⟨0,dec_trivial⟩ → C = subtypeadd A B → C = ⟨2,dec_trivial⟩ := sorry
-```
+</pre></div>
 
 #### [ Kevin Buzzard (Mar 11 2018 at 20:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20mismatch%20for%20fin%20n/near/123579544):
-you have to guess the spurious complaint that Lean makes
+<p>you have to guess the spurious complaint that Lean makes</p>
 
 #### [ Kevin Buzzard (Mar 11 2018 at 20:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20mismatch%20for%20fin%20n/near/123579594):
-for `fin 2n` it wants `A : fin n` and for `fin (2n+1)` it wants `A : fin (2n)`
+<p>for <code>fin 2n</code> it wants <code>A : fin n</code> and for <code>fin (2n+1)</code> it wants <code>A : fin (2n)</code></p>
 
 
 {% endraw %}

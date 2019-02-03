@@ -12,24 +12,21 @@ permalink: archive/113488general/74195substsandreflexivity.html
 
 {% raw %}
 #### [ Sean Leather (Aug 20 2018 at 10:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/substs%20and%20reflexivity/near/132442829):
-It seems like `subst` solves a reflexive goal but `substs` does not. If I replace `subst p, subst q`with `substs p q`, I have to add `refl` to solve the goal.
+<p>It seems like <code>subst</code> solves a reflexive goal but <code>substs</code> does not. If I replace <code>subst p, subst q</code>with <code>substs p q</code>, I have to add <code>refl</code> to solve the goal.</p>
+<p>Looking at the definition of the interactive <code>subst</code>, I can see why:</p>
+<div class="codehilite"><pre><span></span><span class="n">meta</span> <span class="n">def</span> <span class="n">subst</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="n">parse</span> <span class="n">texpr</span><span class="o">)</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
+<span class="n">i_to_expr</span> <span class="n">q</span> <span class="bp">&gt;&gt;=</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">subst</span> <span class="bp">&gt;&gt;</span> <span class="n">try</span> <span class="o">(</span><span class="n">tactic</span><span class="bp">.</span><span class="n">reflexivity</span> <span class="kn">reducible</span><span class="o">)</span>
+</pre></div>
 
-Looking at the definition of the interactive `subst`, I can see why:
 
-```lean
-meta def subst (q : parse texpr) : tactic unit :=
-i_to_expr q >>= tactic.subst >> try (tactic.reflexivity reducible)
-```
+<p>So the documentation on <code>substs</code> is not quite correct:</p>
+<div class="codehilite"><pre><span></span><span class="c">/-</span><span class="cm">- Multiple subst. `substs x y z` is the same as `subst x, subst y, subst z`. -/</span>
+<span class="n">meta</span> <span class="n">def</span> <span class="n">substs</span> <span class="o">(</span><span class="n">l</span> <span class="o">:</span> <span class="n">parse</span> <span class="n">ident</span><span class="bp">*</span><span class="o">)</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
+<span class="n">l</span><span class="bp">.</span><span class="n">mmap&#39;</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">h</span><span class="o">,</span> <span class="n">get_local</span> <span class="n">h</span> <span class="bp">&gt;&gt;=</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">subst</span><span class="o">)</span>
+</pre></div>
 
-So the documentation on `substs` is not quite correct:
 
-```lean
-/-- Multiple subst. `substs x y z` is the same as `subst x, subst y, subst z`. -/
-meta def substs (l : parse ident*) : tactic unit :=
-l.mmap' (λ h, get_local h >>= tactic.subst)
-```
-
-Is it enough to add ` >> try (tactic.reflexivity reducible)` to the end of the `substs` definition to recoup this feature? Is there any reason why we shouldn't do this?
+<p>Is it enough to add <code> &gt;&gt; try (tactic.reflexivity reducible)</code> to the end of the <code>substs</code> definition to recoup this feature? Is there any reason why we shouldn't do this?</p>
 
 
 {% endraw %}

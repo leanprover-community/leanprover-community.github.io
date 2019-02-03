@@ -12,52 +12,51 @@ permalink: archive/116395maths/96209canonicalringhomfrominttoR.html
 
 {% raw %}
 #### [ Johan Commelin (Jul 23 2018 at 08:56)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/canonical%20ring%20hom%20from%20int%20to%20R/near/130132971):
-Does the canonical ring homomorphism from `int` to a ring `R` already have a name in Lean?
+<p>Does the canonical ring homomorphism from <code>int</code> to a ring <code>R</code> already have a name in Lean?</p>
 
 #### [ Kenny Lau (Jul 23 2018 at 08:56)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/canonical%20ring%20hom%20from%20int%20to%20R/near/130132977):
-something something `int.coe`
+<p>something something <code>int.coe</code></p>
 
 #### [ Mario Carneiro (Jul 23 2018 at 08:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/canonical%20ring%20hom%20from%20int%20to%20R/near/130132982):
-`int.cast`
+<p><code>int.cast</code></p>
 
 #### [ Johan Commelin (Jul 23 2018 at 09:04)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/canonical%20ring%20hom%20from%20int%20to%20R/near/130133232):
-Aah, of course. And do we already know that this is a ring hom?
+<p>Aah, of course. And do we already know that this is a ring hom?</p>
 
 #### [ Kenny Lau (Jul 23 2018 at 09:14)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/canonical%20ring%20hom%20from%20int%20to%20R/near/130133599):
-```lean
-import data.int.basic
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">int</span><span class="bp">.</span><span class="n">basic</span>
 
-universe u
+<span class="kn">universe</span> <span class="n">u</span>
 
-instance int.cast.is_ring_hom (α : Type u) [ring α] : is_ring_hom (int.cast : ℤ → α) :=
-{ map_add := int.cast_add,
-  map_mul := int.cast_mul,
-  map_one := int.cast_one }
-```
+<span class="kn">instance</span> <span class="n">int</span><span class="bp">.</span><span class="n">cast</span><span class="bp">.</span><span class="n">is_ring_hom</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">[</span><span class="n">ring</span> <span class="n">α</span><span class="o">]</span> <span class="o">:</span> <span class="n">is_ring_hom</span> <span class="o">(</span><span class="n">int</span><span class="bp">.</span><span class="n">cast</span> <span class="o">:</span> <span class="bp">ℤ</span> <span class="bp">→</span> <span class="n">α</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">map_add</span> <span class="o">:=</span> <span class="n">int</span><span class="bp">.</span><span class="n">cast_add</span><span class="o">,</span>
+  <span class="n">map_mul</span> <span class="o">:=</span> <span class="n">int</span><span class="bp">.</span><span class="n">cast_mul</span><span class="o">,</span>
+  <span class="n">map_one</span> <span class="o">:=</span> <span class="n">int</span><span class="bp">.</span><span class="n">cast_one</span> <span class="o">}</span>
+</pre></div>
 
 #### [ Kenny Lau (Jul 23 2018 at 09:14)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/canonical%20ring%20hom%20from%20int%20to%20R/near/130133600):
-now you know
+<p>now you know</p>
 
 #### [ Johan Commelin (Jul 23 2018 at 09:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/canonical%20ring%20hom%20from%20int%20to%20R/near/130135077):
-(Sorry, I got distracted by other stuff.) Anyway, I'm not surprised that it is a 4-liner. It is just that I don't know how to figure out if this is somewhere in mathlib or not...
+<p>(Sorry, I got distracted by other stuff.) Anyway, I'm not surprised that it is a 4-liner. It is just that I don't know how to figure out if this is somewhere in mathlib or not...</p>
 
 #### [ Mario Carneiro (Jul 23 2018 at 10:00)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/canonical%20ring%20hom%20from%20int%20to%20R/near/130135209):
-it is not, but kenny is pointing out that all the theorems are already there
+<p>it is not, but kenny is pointing out that all the theorems are already there</p>
 
 #### [ Kevin Buzzard (Jul 23 2018 at 10:19)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/canonical%20ring%20hom%20from%20int%20to%20R/near/130135926):
-```quote
-(Sorry, I got distracted by other stuff.) Anyway, I'm not surprised that it is a 4-liner. It is just that I don't know how to figure out if this is somewhere in mathlib or not...
-```
-You can check to see if Lean's type class inference system already knows a fact by seeing if you can prove it with `by apply_instance`. Of course this does not tell you whether the proof is in mathlib in a file you didn't import yet...
+<blockquote>
+<p>(Sorry, I got distracted by other stuff.) Anyway, I'm not surprised that it is a 4-liner. It is just that I don't know how to figure out if this is somewhere in mathlib or not...</p>
+</blockquote>
+<p>You can check to see if Lean's type class inference system already knows a fact by seeing if you can prove it with <code>by apply_instance</code>. Of course this does not tell you whether the proof is in mathlib in a file you didn't import yet...</p>
 
 #### [ Johan Commelin (Jul 23 2018 at 10:22)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/canonical%20ring%20hom%20from%20int%20to%20R/near/130136073):
-True, I keep forgetting that trick.
+<p>True, I keep forgetting that trick.</p>
 
 #### [ Kevin Buzzard (Jul 23 2018 at 10:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/canonical%20ring%20hom%20from%20int%20to%20R/near/130137120):
-I used it extensively over the weekend in the middle of code just to make sure that type class inference was keeping up with what I was trying to do
+<p>I used it extensively over the weekend in the middle of code just to make sure that type class inference was keeping up with what I was trying to do</p>
 
 #### [ Kevin Buzzard (Jul 23 2018 at 10:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/canonical%20ring%20hom%20from%20int%20to%20R/near/130137155):
-Just debugging lines which I'd delete after, checking my quotient group instances were working
+<p>Just debugging lines which I'd delete after, checking my quotient group instances were working</p>
 
 
 {% endraw %}

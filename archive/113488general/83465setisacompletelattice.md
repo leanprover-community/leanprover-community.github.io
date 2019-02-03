@@ -12,9 +12,8 @@ permalink: archive/113488general/83465setisacompletelattice.html
 
 {% raw %}
 #### [ Kenny Lau (Apr 13 2018 at 16:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/set%20is%20a%20complete%20lattice/near/125037337):
-mathlib proof:
-```
-instance lattice_set : complete_lattice (set α) :=
+<p>mathlib proof:</p>
+<div class="codehilite"><pre><span></span>instance lattice_set : complete_lattice (set α) :=
 { lattice.complete_lattice .
   le           := (⊆),
   le_refl      := subset.refl,
@@ -42,56 +41,57 @@ instance lattice_set : complete_lattice (set α) :=
 
   Sup          := λs, {a | ∃ t ∈ s, a ∈ t },
   le_Sup       := assume s t t_in a a_in, ⟨t, ⟨t_in, a_in⟩⟩,
-  Sup_le       := assume s t h a ⟨t', ⟨t'_in, a_in⟩⟩, h t' t'_in a_in,
+  Sup_le       := assume s t h a ⟨t&#39;, ⟨t&#39;_in, a_in⟩⟩, h t&#39; t&#39;_in a_in,
 
   Inf          := λs, {a | ∀ t ∈ s, a ∈ t },
-  le_Inf       := assume s t h a a_in t' t'_in, h t' t'_in a_in,
+  le_Inf       := assume s t h a a_in t&#39; t&#39;_in, h t&#39; t&#39;_in a_in,
   Inf_le       := assume s t t_in a h, h _ t_in }
-```
-my proof:
-```
-instance lattice_set : complete_lattice (set α) :=
+</pre></div>
+
+
+<p>my proof:</p>
+<div class="codehilite"><pre><span></span>instance lattice_set : complete_lattice (set α) :=
 lattice.complete_lattice_fun
-```
+</pre></div>
 
 #### [ Kenny Lau (Apr 13 2018 at 16:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/set%20is%20a%20complete%20lattice/near/125037338):
-I win
+<p>I win</p>
 
 #### [ Gabriel Ebner (Apr 13 2018 at 17:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/set%20is%20a%20complete%20lattice/near/125037562):
-I guess `Sup` and `Inf` are defined differently now?
+<p>I guess <code>Sup</code> and <code>Inf</code> are defined differently now?</p>
 
 #### [ Kenny Lau (Apr 13 2018 at 17:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/set%20is%20a%20complete%20lattice/near/125037602):
-really?
+<p>really?</p>
 
 #### [ Gabriel Ebner (Apr 13 2018 at 17:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/set%20is%20a%20complete%20lattice/near/125037907):
-They should be equal.   However I don't think they are definitionally equal.  `Sup s a = (∃ b ∈ set.image (λ f, f a) s, b) = (∃ b, (∃ c, s c ∧ s c a = b) → b)` which is different
+<p>They should be equal.   However I don't think they are definitionally equal.  <code>Sup s a = (∃ b ∈ set.image (λ f, f a) s, b) = (∃ b, (∃ c, s c ∧ s c a = b) → b)</code> which is different</p>
 
 #### [ Kenny Lau (Apr 13 2018 at 17:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/set%20is%20a%20complete%20lattice/near/125037929):
-well one could prove that they are equal
+<p>well one could prove that they are equal</p>
 
 #### [ Kenny Lau (Apr 13 2018 at 17:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/set%20is%20a%20complete%20lattice/near/125037930):
-simp lemma
+<p>simp lemma</p>
 
 #### [ Gabriel Ebner (Apr 13 2018 at 17:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/set%20is%20a%20complete%20lattice/near/125037988):
-This still doesn't give you definitional reduction.  If you want to prove `a ∈ Sup s`, you'll now always need to `simp` first.  There are quite a few places where we accept some additional complexity in order to guarantee good definitional reduction, the `lt` in preorder is another place.  We can define `lt` in terms of `le`, but we want it to reduce differently for natural numbers.
+<p>This still doesn't give you definitional reduction.  If you want to prove <code>a ∈ Sup s</code>, you'll now always need to <code>simp</code> first.  There are quite a few places where we accept some additional complexity in order to guarantee good definitional reduction, the <code>lt</code> in preorder is another place.  We can define <code>lt</code> in terms of <code>le</code>, but we want it to reduce differently for natural numbers.</p>
 
 #### [ Kenny Lau (Apr 13 2018 at 17:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/set%20is%20a%20complete%20lattice/near/125037998):
-I see
+<p>I see</p>
 
 #### [ Kevin Buzzard (Apr 13 2018 at 17:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/set%20is%20a%20complete%20lattice/near/125038503):
-Yes, for nat, `a<b` is _defined_ to be `succ a <= b` and if you know this you can write some neat obfuscated code :-)
+<p>Yes, for nat, <code>a&lt;b</code> is _defined_ to be <code>succ a &lt;= b</code> and if you know this you can write some neat obfuscated code :-)</p>
 
 #### [ Kenny Lau (Apr 13 2018 at 17:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/set%20is%20a%20complete%20lattice/near/125038512):
-such as?
+<p>such as?</p>
 
 #### [ Kevin Buzzard (Apr 13 2018 at 17:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/set%20is%20a%20complete%20lattice/near/125038557):
-I believe I used this to do some golf question here a week or two ago. Either a question of Chris or of Nima.
+<p>I believe I used this to do some golf question here a week or two ago. Either a question of Chris or of Nima.</p>
 
 #### [ Chris Hughes (Apr 13 2018 at 17:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/set%20is%20a%20complete%20lattice/near/125038813):
-It just means that you never have to use the lemma `succ_le_of_lt`
+<p>It just means that you never have to use the lemma <code>succ_le_of_lt</code></p>
 
 #### [ Johannes Hölzl (Apr 13 2018 at 17:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/set%20is%20a%20complete%20lattice/near/125039063):
-you can `match` or use the equation compiler to do case analysis and inductionon `<`, with the definition following the default setup this would be not possible.
+<p>you can <code>match</code> or use the equation compiler to do case analysis and inductionon <code>&lt;</code>, with the definition following the default setup this would be not possible.</p>
 
 
 {% endraw %}

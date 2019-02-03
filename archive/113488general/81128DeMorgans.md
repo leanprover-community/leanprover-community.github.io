@@ -12,322 +12,323 @@ permalink: archive/113488general/81128DeMorgans.html
 
 {% raw %}
 #### [ Ken Lee (Oct 23 2018 at 00:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/De%20Morgan%27s/near/136299566):
-Just proved $$\neg (P \lor Q ) \iff \neg P \land \neg Q$$ and $$\neg P \lor \neg Q \to \neg (P \land Q)$$ in Lean. I don't see why the converse would require classical logic though. Can someone please explain?
+<p>Just proved <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="normal">¬</mi><mo>(</mo><mi>P</mi><mo>∨</mo><mi>Q</mi><mo>)</mo><mspace width="0.277778em"></mspace><mo>⟺</mo><mspace width="0.277778em"></mspace><mi mathvariant="normal">¬</mi><mi>P</mi><mo>∧</mo><mi mathvariant="normal">¬</mi><mi>Q</mi></mrow><annotation encoding="application/x-tex">\neg (P \lor Q ) \iff \neg P \land \neg Q</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.75em;"></span><span class="strut bottom" style="height:1em;vertical-align:-0.25em;"></span><span class="base"><span class="mord mathrm">¬</span><span class="mopen">(</span><span class="mord mathit" style="margin-right:0.13889em;">P</span><span class="mbin">∨</span><span class="mord mathit">Q</span><span class="mclose">)</span><span class="mrel"><span class="mspace thickspace"></span><span class="mrel">⟺</span></span><span class="mord mathrm"><span class="mspace thickspace"></span><span class="mord mathrm">¬</span></span><span class="mord mathit" style="margin-right:0.13889em;">P</span><span class="mbin">∧</span><span class="mord mathrm">¬</span><span class="mord mathit">Q</span></span></span></span> and <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="normal">¬</mi><mi>P</mi><mo>∨</mo><mi mathvariant="normal">¬</mi><mi>Q</mi><mo>→</mo><mi mathvariant="normal">¬</mi><mo>(</mo><mi>P</mi><mo>∧</mo><mi>Q</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">\neg P \lor \neg Q \to \neg (P \land Q)</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.75em;"></span><span class="strut bottom" style="height:1em;vertical-align:-0.25em;"></span><span class="base"><span class="mord mathrm">¬</span><span class="mord mathit" style="margin-right:0.13889em;">P</span><span class="mbin">∨</span><span class="mord mathrm">¬</span><span class="mord mathit">Q</span><span class="mrel">→</span><span class="mord mathrm">¬</span><span class="mopen">(</span><span class="mord mathit" style="margin-right:0.13889em;">P</span><span class="mbin">∧</span><span class="mord mathit">Q</span><span class="mclose">)</span></span></span></span> in Lean. I don't see why the converse would require classical logic though. Can someone please explain?</p>
 
 #### [ Ken Lee (Oct 23 2018 at 00:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/De%20Morgan%27s/near/136299609):
-```quote
-Just proved $$\not (P \and Q ) \iff \not P \and \not Q$$ and $$\not P \or \not Q \to \not (P \and Q)$$ in Lean. I don't see why the converse would require classical logic though. Can someone please explain?
-```
-Oh no. It didn't format the inline maths.
+<blockquote>
+<p>Just proved <span class="tex-error">$$\not (P \and Q ) \iff \not P \and \not Q$$</span> and <span class="tex-error">$$\not P \or \not Q \to \not (P \and Q)$$</span> in Lean. I don't see why the converse would require classical logic though. Can someone please explain?</p>
+</blockquote>
+<p>Oh no. It didn't format the inline maths.</p>
 
 #### [ Kenny Lau (Oct 23 2018 at 00:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/De%20Morgan%27s/near/136299662):
-$$\neg (P \land Q ) \iff \neg P \land \neg Q$$ and $$\neg P \lor \neg Q \to \neg (P \land Q)$$
+<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="normal">¬</mi><mo>(</mo><mi>P</mi><mo>∧</mo><mi>Q</mi><mo>)</mo><mspace width="0.277778em"></mspace><mo>⟺</mo><mspace width="0.277778em"></mspace><mi mathvariant="normal">¬</mi><mi>P</mi><mo>∧</mo><mi mathvariant="normal">¬</mi><mi>Q</mi></mrow><annotation encoding="application/x-tex">\neg (P \land Q ) \iff \neg P \land \neg Q</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.75em;"></span><span class="strut bottom" style="height:1em;vertical-align:-0.25em;"></span><span class="base"><span class="mord mathrm">¬</span><span class="mopen">(</span><span class="mord mathit" style="margin-right:0.13889em;">P</span><span class="mbin">∧</span><span class="mord mathit">Q</span><span class="mclose">)</span><span class="mrel"><span class="mspace thickspace"></span><span class="mrel">⟺</span></span><span class="mord mathrm"><span class="mspace thickspace"></span><span class="mord mathrm">¬</span></span><span class="mord mathit" style="margin-right:0.13889em;">P</span><span class="mbin">∧</span><span class="mord mathrm">¬</span><span class="mord mathit">Q</span></span></span></span> and <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="normal">¬</mi><mi>P</mi><mo>∨</mo><mi mathvariant="normal">¬</mi><mi>Q</mi><mo>→</mo><mi mathvariant="normal">¬</mi><mo>(</mo><mi>P</mi><mo>∧</mo><mi>Q</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">\neg P \lor \neg Q \to \neg (P \land Q)</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.75em;"></span><span class="strut bottom" style="height:1em;vertical-align:-0.25em;"></span><span class="base"><span class="mord mathrm">¬</span><span class="mord mathit" style="margin-right:0.13889em;">P</span><span class="mbin">∨</span><span class="mord mathrm">¬</span><span class="mord mathit">Q</span><span class="mrel">→</span><span class="mord mathrm">¬</span><span class="mopen">(</span><span class="mord mathit" style="margin-right:0.13889em;">P</span><span class="mbin">∧</span><span class="mord mathit">Q</span><span class="mclose">)</span></span></span></span></p>
 
 #### [ Kenny Lau (Oct 23 2018 at 00:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/De%20Morgan%27s/near/136299665):
-`\neg (P \land Q ) \iff \neg P \land \neg Q$$ and $$\neg P \lor \neg Q \to \neg (P \land Q)`
+<p><code>\neg (P \land Q ) \iff \neg P \land \neg Q$$ and $$\neg P \lor \neg Q \to \neg (P \land Q)</code></p>
 
 #### [ Ken Lee (Oct 23 2018 at 00:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/De%20Morgan%27s/near/136299713):
-```quote
-$$\neg (P \land Q ) \iff \neg P \land \neg Q$$ and $$\neg P \lor \neg Q \to \neg (P \land Q)$$
-```
-Thanks!
+<blockquote>
+<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="normal">¬</mi><mo>(</mo><mi>P</mi><mo>∧</mo><mi>Q</mi><mo>)</mo><mspace width="0.277778em"></mspace><mo>⟺</mo><mspace width="0.277778em"></mspace><mi mathvariant="normal">¬</mi><mi>P</mi><mo>∧</mo><mi mathvariant="normal">¬</mi><mi>Q</mi></mrow><annotation encoding="application/x-tex">\neg (P \land Q ) \iff \neg P \land \neg Q</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.75em;"></span><span class="strut bottom" style="height:1em;vertical-align:-0.25em;"></span><span class="base"><span class="mord mathrm">¬</span><span class="mopen">(</span><span class="mord mathit" style="margin-right:0.13889em;">P</span><span class="mbin">∧</span><span class="mord mathit">Q</span><span class="mclose">)</span><span class="mrel"><span class="mspace thickspace"></span><span class="mrel">⟺</span></span><span class="mord mathrm"><span class="mspace thickspace"></span><span class="mord mathrm">¬</span></span><span class="mord mathit" style="margin-right:0.13889em;">P</span><span class="mbin">∧</span><span class="mord mathrm">¬</span><span class="mord mathit">Q</span></span></span></span> and <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="normal">¬</mi><mi>P</mi><mo>∨</mo><mi mathvariant="normal">¬</mi><mi>Q</mi><mo>→</mo><mi mathvariant="normal">¬</mi><mo>(</mo><mi>P</mi><mo>∧</mo><mi>Q</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">\neg P \lor \neg Q \to \neg (P \land Q)</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.75em;"></span><span class="strut bottom" style="height:1em;vertical-align:-0.25em;"></span><span class="base"><span class="mord mathrm">¬</span><span class="mord mathit" style="margin-right:0.13889em;">P</span><span class="mbin">∨</span><span class="mord mathrm">¬</span><span class="mord mathit">Q</span><span class="mrel">→</span><span class="mord mathrm">¬</span><span class="mopen">(</span><span class="mord mathit" style="margin-right:0.13889em;">P</span><span class="mbin">∧</span><span class="mord mathit">Q</span><span class="mclose">)</span></span></span></span></p>
+</blockquote>
+<p>Thanks!</p>
 
 #### [ Jean Lo (Oct 23 2018 at 00:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/De%20Morgan%27s/near/136301162):
-related question: more generally, how does one go about determining whether a proof can be done constructively?
+<p>related question: more generally, how does one go about determining whether a proof can be done constructively?</p>
 
 #### [ Chris Hughes (Oct 23 2018 at 00:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/De%20Morgan%27s/near/136301256):
-If it implies excluded middle then it can't be done constructively. There's an exercise somewhere proving a whole load of things imply excluded middle.
+<p>If it implies excluded middle then it can't be done constructively. There's an exercise somewhere proving a whole load of things imply excluded middle.</p>
 
 #### [ Kenny Lau (Oct 23 2018 at 00:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/De%20Morgan%27s/near/136301345):
-but that is not necessary.
+<p>but that is not necessary.</p>
 
 #### [ Kenny Lau (Oct 23 2018 at 00:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/De%20Morgan%27s/near/136301420):
-you can't check every Kripke model though... is there some finite subset that we can check
+<p>you can't check every Kripke model though... is there some finite subset that we can check</p>
 
 #### [ Mario Carneiro (Oct 23 2018 at 00:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/De%20Morgan%27s/near/136301599):
-there is a completeness result that says any intuitionistically invalid statement is false on a finite kripke model
+<p>there is a completeness result that says any intuitionistically invalid statement is false on a finite kripke model</p>
 
 #### [ Kenny Lau (Oct 23 2018 at 00:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/De%20Morgan%27s/near/136301662):
-that makes set of intuitionstically valid theorems a Π1 set, thus a Δ1 set?
+<p>that makes set of intuitionstically valid theorems a Π1 set, thus a Δ1 set?</p>
 
 #### [ Mario Carneiro (Oct 23 2018 at 00:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/De%20Morgan%27s/near/136301672):
-yes, so it is decidable
+<p>yes, so it is decidable</p>
 
 #### [ Kevin Buzzard (Oct 23 2018 at 00:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/De%20Morgan%27s/near/136301676):
-@**Jean Lo**  Here is a basic strategy for checking that various simple things can't be done constructively. First observe that all the rules of constructive logic apply when "truth values" are...something like...open sets in a topological space (I hope I remembered this right). You model "not" as "interior of the complement" and "implies" as "is a subset of". Then some stuff like "P or not P" simply isn't true in this interpretation, because the union of an open set and the interior of its complement might not be the whole space.
+<p><span class="user-mention" data-user-id="132889">@Jean Lo</span>  Here is a basic strategy for checking that various simple things can't be done constructively. First observe that all the rules of constructive logic apply when "truth values" are...something like...open sets in a topological space (I hope I remembered this right). You model "not" as "interior of the complement" and "implies" as "is a subset of". Then some stuff like "P or not P" simply isn't true in this interpretation, because the union of an open set and the interior of its complement might not be the whole space.</p>
 
 #### [ Kenny Lau (Oct 23 2018 at 00:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/De%20Morgan%27s/near/136301727):
-does this together with the 14-theorem give you a fast(er) way of determining stuff?
+<p>does this together with the 14-theorem give you a fast(er) way of determining stuff?</p>
 
 #### [ Kenny Lau (Oct 23 2018 at 00:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/De%20Morgan%27s/near/136301729):
-https://en.wikipedia.org/wiki/Kuratowski%27s_closure-complement_problem
+<p><a href="https://en.wikipedia.org/wiki/Kuratowski%27s_closure-complement_problem" target="_blank" title="https://en.wikipedia.org/wiki/Kuratowski%27s_closure-complement_problem">https://en.wikipedia.org/wiki/Kuratowski%27s_closure-complement_problem</a></p>
 
 #### [ Mario Carneiro (Oct 23 2018 at 00:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/De%20Morgan%27s/near/136301731):
-It's not complete, unfortunately
+<p>It's not complete, unfortunately</p>
 
 #### [ Mario Carneiro (Oct 23 2018 at 00:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/De%20Morgan%27s/near/136301735):
-at least not unless you consider all topologies
+<p>at least not unless you consider all topologies</p>
 
 #### [ Kevin Buzzard (Oct 23 2018 at 00:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/De%20Morgan%27s/near/136301744):
-I don't know, but I don't know what a Kripke model is and yet I've used this way of thinking about things to convince myself that certain propositions can't be proved in classical logic and basically it's the only way I know to do such a thing.
+<p>I don't know, but I don't know what a Kripke model is and yet I've used this way of thinking about things to convince myself that certain propositions can't be proved in classical logic and basically it's the only way I know to do such a thing.</p>
 
 #### [ Kenny Lau (Oct 23 2018 at 00:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/De%20Morgan%27s/near/136301745):
-just consider the Kuratowski algebra?
+<p>just consider the Kuratowski algebra?</p>
 
 #### [ Mario Carneiro (Oct 23 2018 at 00:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/De%20Morgan%27s/near/136301848):
-A Kripke model is based on a kind of epistemological interpretation of the formulas. There are a bunch of points called "worlds", and at each point there are things that are known to be true at that world, but the things that are not known to be true are just unknowns. There is a "in the future" accessibility relation to other worlds where more things may be known (but previously known things are still known), and things are known to be false only if they are never known in the future
+<p>A Kripke model is based on a kind of epistemological interpretation of the formulas. There are a bunch of points called "worlds", and at each point there are things that are known to be true at that world, but the things that are not known to be true are just unknowns. There is a "in the future" accessibility relation to other worlds where more things may be known (but previously known things are still known), and things are known to be false only if they are never known in the future</p>
 
 #### [ Kenny Lau (Oct 23 2018 at 00:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/De%20Morgan%27s/near/136301894):
-I don't think Kevin cares
+<p>I don't think Kevin cares</p>
 
 #### [ Mario Carneiro (Oct 23 2018 at 00:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/De%20Morgan%27s/near/136301904):
-For example, suppose we have time 0 and time 1, and at time 0 nothing is known and at time 1 $$p$$ is known. Then at time 0 neither $$p$$ or $$\neg p$$ is known
+<p>For example, suppose we have time 0 and time 1, and at time 0 nothing is known and at time 1 <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>p</mi></mrow><annotation encoding="application/x-tex">p</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.43056em;"></span><span class="strut bottom" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="base"><span class="mord mathit">p</span></span></span></span> is known. Then at time 0 neither <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>p</mi></mrow><annotation encoding="application/x-tex">p</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.43056em;"></span><span class="strut bottom" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="base"><span class="mord mathit">p</span></span></span></span> or <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="normal">¬</mi><mi>p</mi></mrow><annotation encoding="application/x-tex">\neg p</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.43056em;"></span><span class="strut bottom" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="base"><span class="mord mathrm">¬</span><span class="mord mathit">p</span></span></span></span> is known</p>
 
 #### [ Mario Carneiro (Oct 23 2018 at 01:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/De%20Morgan%27s/near/136302025):
-This semantics generalizes nicely to modal logic as well, where $$\Box A$$ means A is known now and henceforth in the future
+<p>This semantics generalizes nicely to modal logic as well, where <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="normal">□</mi><mi>A</mi></mrow><annotation encoding="application/x-tex">\Box A</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.68333em;vertical-align:0em;"></span><span class="base"><span class="mord amsrm">□</span><span class="mord mathit">A</span></span></span></span> means A is known now and henceforth in the future</p>
 
 #### [ Kenny Lau (Oct 23 2018 at 01:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/De%20Morgan%27s/near/136302083):
-$$\square$$ `\square`
+<p><span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="normal">□</mi></mrow><annotation encoding="application/x-tex">\square</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.675em;"></span><span class="strut bottom" style="height:0.675em;vertical-align:0em;"></span><span class="base"><span class="mord amsrm">□</span></span></span></span> <code>\square</code></p>
 
 #### [ Scott Olson (Oct 23 2018 at 01:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/De%20Morgan%27s/near/136302094):
-My intuition regarding `¬(p ∧ q) → ¬p ∨ ¬q` is that, as my assumption, I know "`p` and `q` aren't *both* true", but I don't know *which one* is false, and the conclusion requires me to pick one of the two and prove it's false, which I cannot do
+<p>My intuition regarding <code>¬(p ∧ q) → ¬p ∨ ¬q</code> is that, as my assumption, I know "<code>p</code> and <code>q</code> aren't <em>both</em> true", but I don't know <em>which one</em> is false, and the conclusion requires me to pick one of the two and prove it's false, which I cannot do</p>
 
 #### [ Kenny Lau (Oct 23 2018 at 01:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/De%20Morgan%27s/near/136302122):
-ah, is that the program interpretation
+<p>ah, is that the program interpretation</p>
 
 #### [ Scott Olson (Oct 23 2018 at 01:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/De%20Morgan%27s/near/136302208):
-yeah, interpreting `∧` as a pair type and `∨` as a sum type
+<p>yeah, interpreting <code>∧</code> as a pair type and <code>∨</code> as a sum type</p>
 
 #### [ Kenny Lau (Oct 23 2018 at 01:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/De%20Morgan%27s/near/136302213):
-I think the corresponding model is where at time 0 nothing is known, at time 1a we know q, and at time 1b we know p.
+<p>I think the corresponding model is where at time 0 nothing is known, at time 1a we know q, and at time 1b we know p.</p>
 
 #### [ Mario Carneiro (Oct 23 2018 at 01:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/De%20Morgan%27s/near/136302267):
-The kripke model for this one has three points, with time 0 where nothing is known and a branching future. In world 1, p is known, and in world 2 q is known. Then since $$p\land q$$ is true in no world, $$\neg(p\land q)$$ is true in every world, but neither $$\neg p$$ nor $$\neg q$$ is true in world 0
+<p>The kripke model for this one has three points, with time 0 where nothing is known and a branching future. In world 1, p is known, and in world 2 q is known. Then since <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>p</mi><mo>∧</mo><mi>q</mi></mrow><annotation encoding="application/x-tex">p\land q</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.55556em;"></span><span class="strut bottom" style="height:0.75em;vertical-align:-0.19444em;"></span><span class="base"><span class="mord mathit">p</span><span class="mbin">∧</span><span class="mord mathit" style="margin-right:0.03588em;">q</span></span></span></span> is true in no world, <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="normal">¬</mi><mo>(</mo><mi>p</mi><mo>∧</mo><mi>q</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">\neg(p\land q)</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.75em;"></span><span class="strut bottom" style="height:1em;vertical-align:-0.25em;"></span><span class="base"><span class="mord mathrm">¬</span><span class="mopen">(</span><span class="mord mathit">p</span><span class="mbin">∧</span><span class="mord mathit" style="margin-right:0.03588em;">q</span><span class="mclose">)</span></span></span></span> is true in every world, but neither <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="normal">¬</mi><mi>p</mi></mrow><annotation encoding="application/x-tex">\neg p</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.43056em;"></span><span class="strut bottom" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="base"><span class="mord mathrm">¬</span><span class="mord mathit">p</span></span></span></span> nor <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="normal">¬</mi><mi>q</mi></mrow><annotation encoding="application/x-tex">\neg q</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.43056em;"></span><span class="strut bottom" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="base"><span class="mord mathrm">¬</span><span class="mord mathit" style="margin-right:0.03588em;">q</span></span></span></span> is true in world 0</p>
 
 #### [ Kenny Lau (Oct 23 2018 at 01:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/De%20Morgan%27s/near/136302274):
-:)
+<p>:)</p>
 
 #### [ Scott Olson (Oct 23 2018 at 01:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/De%20Morgan%27s/near/136302330):
-Interesting, I've never heard of that stuff but it lines up really well with what I did in my head
+<p>Interesting, I've never heard of that stuff but it lines up really well with what I did in my head</p>
 
 #### [ Kenny Lau (Oct 23 2018 at 01:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/De%20Morgan%27s/near/136302335):
-I think you can consider the more general `((p ∧ q) → r) → (p → r) ∨ (q → r)` and use the same model
+<p>I think you can consider the more general <code>((p ∧ q) → r) → (p → r) ∨ (q → r)</code> and use the same model</p>
 
 #### [ Mario Carneiro (Oct 23 2018 at 01:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/De%20Morgan%27s/near/136302374):
-yes
+<p>yes</p>
 
 #### [ Kenny Lau (Oct 23 2018 at 01:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/De%20Morgan%27s/near/136302405):
-cool
+<p>cool</p>
 
 #### [ Mario Carneiro (Oct 23 2018 at 01:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/De%20Morgan%27s/near/136302409):
-There is no single finite model complete for intuitionistic logic though, or equivalently there is an infinite family of truth values over one proposition
+<p>There is no single finite model complete for intuitionistic logic though, or equivalently there is an infinite family of truth values over one proposition</p>
 
 #### [ Kenny Lau (Oct 23 2018 at 01:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/De%20Morgan%27s/near/136302427):
-or maybe "truth values" just don't make sense
+<p>or maybe "truth values" just don't make sense</p>
 
 #### [ Scott Olson (Oct 23 2018 at 01:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/De%20Morgan%27s/near/136302429):
-```
-h : (p ∧ q) → false
+<div class="codehilite"><pre><span></span>h : (p ∧ q) → false
 ⊢ (p → false) ∨ (q → false)
-```
+</pre></div>
 
-(expanding the \not to the function to false)
 
-I can either assume `p` or assume `q` (the two worlds) and then prove `false`, but I can't apply the function `h` with just one of them
+<p>(expanding the \not to the function to false)</p>
+<p>I can either assume <code>p</code> or assume <code>q</code> (the two worlds) and then prove <code>false</code>, but I can't apply the function <code>h</code> with just one of them</p>
 
 #### [ Mario Carneiro (Oct 23 2018 at 01:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/De%20Morgan%27s/near/136302449):
-https://upload.wikimedia.org/wikipedia/commons/5/5c/Rieger-Nishimura.svg
+<p><a href="https://upload.wikimedia.org/wikipedia/commons/5/5c/Rieger-Nishimura.svg" target="_blank" title="https://upload.wikimedia.org/wikipedia/commons/5/5c/Rieger-Nishimura.svg">https://upload.wikimedia.org/wikipedia/commons/5/5c/Rieger-Nishimura.svg</a></p>
 
 #### [ Kenny Lau (Oct 23 2018 at 01:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/De%20Morgan%27s/near/136302461):
-what is thsi
+<p>what is thsi</p>
 
 #### [ Reid Barton (Oct 23 2018 at 01:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/De%20Morgan%27s/near/136302472):
-I saw this image for the first time like three days ago and I was very confused about how I had never seen it before
+<p>I saw this image for the first time like three days ago and I was very confused about how I had never seen it before</p>
 
 #### [ Mario Carneiro (Oct 23 2018 at 01:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/De%20Morgan%27s/near/136302478):
-it is the lattice of propositions over one variable
+<p>it is the lattice of propositions over one variable</p>
 
 #### [ Mario Carneiro (Oct 23 2018 at 01:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/De%20Morgan%27s/near/136302485):
-up to equivalence
+<p>up to equivalence</p>
 
 #### [ Mario Carneiro (Oct 23 2018 at 01:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/De%20Morgan%27s/near/136302539):
-in classical logic it is much less interesting, $$\bot < p,\neg p < \top$$
+<p>in classical logic it is much less interesting, <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="normal">⊥</mi><mo>&lt;</mo><mi>p</mi><mo separator="true">,</mo><mi mathvariant="normal">¬</mi><mi>p</mi><mo>&lt;</mo><mi mathvariant="normal">⊤</mi></mrow><annotation encoding="application/x-tex">\bot &lt; p,\neg p &lt; \top</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.69444em;"></span><span class="strut bottom" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="base"><span class="mord mathrm">⊥</span><span class="mrel">&lt;</span><span class="mord mathit">p</span><span class="mpunct">,</span><span class="mord mathrm">¬</span><span class="mord mathit">p</span><span class="mrel">&lt;</span><span class="mord mathrm">⊤</span></span></span></span></p>
 
 #### [ Kenny Lau (Oct 23 2018 at 01:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/De%20Morgan%27s/near/136302543):
-interesting
+<p>interesting</p>
 
 #### [ Kenny Lau (Oct 23 2018 at 01:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/De%20Morgan%27s/near/136302586):
-the program interpretation is to let `p` to mean `X contains 1` and `q` to mean `X contains no 1` where `X` is an arbitrary (computable) binary sequence, right?
+<p>the program interpretation is to let <code>p</code> to mean <code>X contains 1</code> and <code>q</code> to mean <code>X contains no 1</code> where <code>X</code> is an arbitrary (computable) binary sequence, right?</p>
 
 #### [ Mario Carneiro (Oct 23 2018 at 01:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/De%20Morgan%27s/near/136302662):
-that's one way to do it
+<p>that's one way to do it</p>
 
 #### [ Mario Carneiro (Oct 23 2018 at 01:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/De%20Morgan%27s/near/136302766):
-But if you like the program (aka BHK) formulation of intuitionistic semantics, then you might like the computational interpretation of peirce's law as call with continuation
+<p>But if you like the program (aka BHK) formulation of intuitionistic semantics, then you might like the computational interpretation of peirce's law as call with continuation</p>
 
 #### [ Kenny Lau (Oct 23 2018 at 01:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/De%20Morgan%27s/near/136302777):
-I never understood what call/cc means
+<p>I never understood what call/cc means</p>
 
 #### [ Mario Carneiro (Oct 23 2018 at 01:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/De%20Morgan%27s/near/136302993):
-The type is `callcc : ((p -> q) -> p) -> p`. Suppose we are building something of type N, say, and in the course of it we want to do double negation elimination on some proposition `p`, like say "this TM halts". Then that means we are going to do something with this value of type `p`, so that's a function `p -> N`, and so callcc steals this "continuation" and passes it to the enclosed function of type `(p -> N) -> p`
+<p>The type is <code>callcc : ((p -&gt; q) -&gt; p) -&gt; p</code>. Suppose we are building something of type N, say, and in the course of it we want to do double negation elimination on some proposition <code>p</code>, like say "this TM halts". Then that means we are going to do something with this value of type <code>p</code>, so that's a function <code>p -&gt; N</code>, and so callcc steals this "continuation" and passes it to the enclosed function of type <code>(p -&gt; N) -&gt; p</code></p>
 
 #### [ Mario Carneiro (Oct 23 2018 at 01:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/De%20Morgan%27s/near/136303945):
-For example, consider the following implementation of `em`:
-```lean
-constant callcc {p q : Type} : ((p -> q) -> p) -> p
+<p>For example, consider the following implementation of <code>em</code>:</p>
+<div class="codehilite"><pre><span></span><span class="kn">constant</span> <span class="n">callcc</span> <span class="o">{</span><span class="n">p</span> <span class="n">q</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">:</span> <span class="o">((</span><span class="n">p</span> <span class="bp">-&gt;</span> <span class="n">q</span><span class="o">)</span> <span class="bp">-&gt;</span> <span class="n">p</span><span class="o">)</span> <span class="bp">-&gt;</span> <span class="n">p</span>
 
-def em (p : Type) : p ⊕ (p → empty) :=
-@callcc _ empty $ λ H,
-show p ⊕ (p → empty), from sum.inr $ λ hp, H $
-show p ⊕ (p → empty), from sum.inl hp
-```
-This function looks like magic when you see it for the first time. It's a computational interpretation of EM! So we can just put in our favorite nondecidable proposition to this oracle, like the Riemann hypothesis, and find out the answer. It calls `callcc` at this point, which remembers our position in the code, and then calls the `sum.inr` constructor. So the oracle says: RH is false! We are happy until we find out maybe that RH is actually true, and in justified anger return to our function to prove a contradiction. When we call the function though, it calls `H` with `sum.inl hp`. What happened? The function `H` remembers when we called callcc the first time, and "rewinds time" with our proof of RH in hand. So the oracle says: RH is true! and it stole our proof.
+<span class="n">def</span> <span class="n">em</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">:</span> <span class="n">p</span> <span class="err">⊕</span> <span class="o">(</span><span class="n">p</span> <span class="bp">→</span> <span class="n">empty</span><span class="o">)</span> <span class="o">:=</span>
+<span class="bp">@</span><span class="n">callcc</span> <span class="bp">_</span> <span class="n">empty</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">H</span><span class="o">,</span>
+<span class="k">show</span> <span class="n">p</span> <span class="err">⊕</span> <span class="o">(</span><span class="n">p</span> <span class="bp">→</span> <span class="n">empty</span><span class="o">),</span> <span class="k">from</span> <span class="n">sum</span><span class="bp">.</span><span class="n">inr</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">hp</span><span class="o">,</span> <span class="n">H</span> <span class="err">$</span>
+<span class="k">show</span> <span class="n">p</span> <span class="err">⊕</span> <span class="o">(</span><span class="n">p</span> <span class="bp">→</span> <span class="n">empty</span><span class="o">),</span> <span class="k">from</span> <span class="n">sum</span><span class="bp">.</span><span class="n">inl</span> <span class="n">hp</span>
+</pre></div>
+
+
+<p>This function looks like magic when you see it for the first time. It's a computational interpretation of EM! So we can just put in our favorite nondecidable proposition to this oracle, like the Riemann hypothesis, and find out the answer. It calls <code>callcc</code> at this point, which remembers our position in the code, and then calls the <code>sum.inr</code> constructor. So the oracle says: RH is false! We are happy until we find out maybe that RH is actually true, and in justified anger return to our function to prove a contradiction. When we call the function though, it calls <code>H</code> with <code>sum.inl hp</code>. What happened? The function <code>H</code> remembers when we called callcc the first time, and "rewinds time" with our proof of RH in hand. So the oracle says: RH is true! and it stole our proof.</p>
 
 #### [ Kenny Lau (Oct 23 2018 at 01:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/De%20Morgan%27s/near/136304147):
-> our favorite nondecidable proposition to this oracle, like the Riemann hypothesis
-
-hmm...
+<blockquote>
+<p>our favorite nondecidable proposition to this oracle, like the Riemann hypothesis</p>
+</blockquote>
+<p>hmm...</p>
 
 #### [ Mario Carneiro (Oct 23 2018 at 01:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/De%20Morgan%27s/near/136304242):
-I guess this is like "innocent until proven guilty", we have "false until proven true"
+<p>I guess this is like "innocent until proven guilty", we have "false until proven true"</p>
 
 #### [ Kenny Lau (Oct 23 2018 at 01:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/De%20Morgan%27s/near/136304249):
-I still don't understand what it does... thanks for your lengthy explanation though
+<p>I still don't understand what it does... thanks for your lengthy explanation though</p>
 
 #### [ Mario Carneiro (Oct 23 2018 at 01:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/De%20Morgan%27s/near/136304262):
-The semantics is a bit tricky to explain without a notion of "continuation"
+<p>The semantics is a bit tricky to explain without a notion of "continuation"</p>
 
 #### [ Mario Carneiro (Oct 23 2018 at 01:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/De%20Morgan%27s/near/136304322):
-the idea is that every expression exists in a context, where you are evaluating an expression *in order to pass it to something else*
+<p>the idea is that every expression exists in a context, where you are evaluating an expression <em>in order to pass it to something else</em></p>
 
 #### [ Mario Carneiro (Oct 23 2018 at 01:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/De%20Morgan%27s/near/136304335):
-and this something else can be thought of as a function from the type of the expr to the "final output"
+<p>and this something else can be thought of as a function from the type of the expr to the "final output"</p>
 
 #### [ Mario Carneiro (Oct 23 2018 at 01:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/De%20Morgan%27s/near/136304340):
-which can be whatever, it doesn't really matter
+<p>which can be whatever, it doesn't really matter</p>
 
 #### [ Mario Carneiro (Oct 23 2018 at 01:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/De%20Morgan%27s/near/136304349):
-it's like an expression with a hole in it where our expr goes
+<p>it's like an expression with a hole in it where our expr goes</p>
 
 #### [ Mario Carneiro (Oct 23 2018 at 01:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/De%20Morgan%27s/near/136304376):
-and `callcc` saves this expr-with-hole that surrounds the `callcc f` expression itself, and calls `f` on it
+<p>and <code>callcc</code> saves this expr-with-hole that surrounds the <code>callcc f</code> expression itself, and calls <code>f</code> on it</p>
 
 #### [ Mario Carneiro (Oct 23 2018 at 01:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/De%20Morgan%27s/near/136304463):
-This enables bizarre behavior like returning twice from a function or functions that call each other as coroutines, or exception handling
+<p>This enables bizarre behavior like returning twice from a function or functions that call each other as coroutines, or exception handling</p>
 
 #### [ Mario Carneiro (Oct 23 2018 at 01:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/De%20Morgan%27s/near/136304470):
-lots of control flow can be expressed using continuations
+<p>lots of control flow can be expressed using continuations</p>
 
 #### [ Kenny Lau (Oct 23 2018 at 01:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/De%20Morgan%27s/near/136304536):
-what kind of thing is call/cc?
+<p>what kind of thing is call/cc?</p>
 
 #### [ Kenny Lau (Oct 23 2018 at 01:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/De%20Morgan%27s/near/136304544):
-is it a function that we can implement? is it a function that only exists in some alternate programming language?
+<p>is it a function that we can implement? is it a function that only exists in some alternate programming language?</p>
 
 #### [ Mario Carneiro (Oct 23 2018 at 02:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/De%20Morgan%27s/near/136306080):
-it isn't a function you can implement in lean, but it is a function that could conceivably be supported in the VM as a primitive
+<p>it isn't a function you can implement in lean, but it is a function that could conceivably be supported in the VM as a primitive</p>
 
 #### [ Kenny Lau (Oct 23 2018 at 08:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/De%20Morgan%27s/near/136318157):
-Could you write your RH thing in say `Scheme`?
+<p>Could you write your RH thing in say <code>Scheme</code>?</p>
 
 #### [ Mario Carneiro (Oct 23 2018 at 08:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/De%20Morgan%27s/near/136318356):
-yes
+<p>yes</p>
 
 #### [ Mario Carneiro (Oct 23 2018 at 08:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/De%20Morgan%27s/near/136318362):
-I think they are the pioneers of callcc
+<p>I think they are the pioneers of callcc</p>
 
 #### [ Kenny Lau (Oct 23 2018 at 08:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/De%20Morgan%27s/near/136318441):
-then what would it return?
+<p>then what would it return?</p>
 
 #### [ Mario Carneiro (Oct 23 2018 at 08:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/De%20Morgan%27s/near/136318449):
-like I said, "false" until you prove it wrong
+<p>like I said, "false" until you prove it wrong</p>
 
 #### [ Mario Carneiro (Oct 23 2018 at 08:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/De%20Morgan%27s/near/136318453):
-and then it goes back in time with your proof and says "true"
+<p>and then it goes back in time with your proof and says "true"</p>
 
 #### [ Kenny Lau (Oct 23 2018 at 08:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/De%20Morgan%27s/near/136318501):
-do you have actual Scheme code?
+<p>do you have actual Scheme code?</p>
 
 #### [ Mario Carneiro (Oct 23 2018 at 08:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/De%20Morgan%27s/near/136318508):
-no, but you should just be able to use `callcc` in a term like I've shown
+<p>no, but you should just be able to use <code>callcc</code> in a term like I've shown</p>
 
 #### [ Mario Carneiro (Oct 23 2018 at 08:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/De%20Morgan%27s/near/136318521):
-the lean code should translate without issue to scheme
+<p>the lean code should translate without issue to scheme</p>
 
 #### [ Mario Carneiro (Oct 23 2018 at 08:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/De%20Morgan%27s/near/136318583):
-there is also the matter of scheme not being a typed language
+<p>there is also the matter of scheme not being a typed language</p>
 
 #### [ Mario Carneiro (Oct 23 2018 at 08:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/De%20Morgan%27s/near/136318709):
-if the time travel is the part that is surprising, a more pedestrian explanation is that it just saves the current state of the VM - the call stack and values of the variables, then we can later "reset" to this execution state
+<p>if the time travel is the part that is surprising, a more pedestrian explanation is that it just saves the current state of the VM - the call stack and values of the variables, then we can later "reset" to this execution state</p>
 
 #### [ Kenny Lau (Oct 23 2018 at 08:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/De%20Morgan%27s/near/136318715):
-how does the program "take" our proof?
+<p>how does the program "take" our proof?</p>
 
 #### [ Mario Carneiro (Oct 23 2018 at 08:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/De%20Morgan%27s/near/136318717):
-you pass it to the function in an attempt to derive false
+<p>you pass it to the function in an attempt to derive false</p>
 
 #### [ Mario Carneiro (Oct 23 2018 at 08:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/De%20Morgan%27s/near/136318761):
-and rather than producing a proof of false, it abandons the entire execution of the rest of the program and resets with this proof in hand
+<p>and rather than producing a proof of false, it abandons the entire execution of the rest of the program and resets with this proof in hand</p>
 
 #### [ Kenny Lau (Oct 23 2018 at 08:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/De%20Morgan%27s/near/136318779):
-does `callcc` have any equational lemmas?
+<p>does <code>callcc</code> have any equational lemmas?</p>
 
 #### [ Mario Carneiro (Oct 23 2018 at 08:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/De%20Morgan%27s/near/136318784):
-yes, but they are a bit weird because they depend on the execution context
+<p>yes, but they are a bit weird because they depend on the execution context</p>
 
 #### [ Mario Carneiro (Oct 23 2018 at 08:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/De%20Morgan%27s/near/136318985):
-You have to set up the idea of a dynamic semantics. Let's say we want to evaluate `e1 + e2`, we can write this as `e1 + e2 < K`where `K` is the call stack. It is expecting a value of type `nat` say, here. So we first evaluate `e1`, that is, `e1 < _ + e2, K` where we have pushed `_ + e2` on the stack. We get to a value `v > _ + e2, K` (the arrow is reversed to indicate that the value is done computing) which steps to `e2 < v + _, K`. That is we are evaluating `e2` now. This finishes to `v2 > v + _, K` which steps to `v' > K` where `v'` is the actual result of adding numbers `v` and `v2`
+<p>You have to set up the idea of a dynamic semantics. Let's say we want to evaluate <code>e1 + e2</code>, we can write this as <code>e1 + e2 &lt; K</code>where <code>K</code> is the call stack. It is expecting a value of type <code>nat</code> say, here. So we first evaluate <code>e1</code>, that is, <code>e1 &lt; _ + e2, K</code> where we have pushed <code>_ + e2</code> on the stack. We get to a value <code>v &gt; _ + e2, K</code> (the arrow is reversed to indicate that the value is done computing) which steps to <code>e2 &lt; v + _, K</code>. That is we are evaluating <code>e2</code> now. This finishes to <code>v2 &gt; v + _, K</code> which steps to <code>v' &gt; K</code> where <code>v'</code> is the actual result of adding numbers <code>v</code> and <code>v2</code></p>
 
 #### [ Kenny Lau (Oct 23 2018 at 08:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/De%20Morgan%27s/near/136319003):
-I don't understand how you can pass the proof to the function
+<p>I don't understand how you can pass the proof to the function</p>
 
 #### [ Kenny Lau (Oct 23 2018 at 08:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/De%20Morgan%27s/near/136319008):
-the function doesn't accept things of type `p` right
+<p>the function doesn't accept things of type <code>p</code> right</p>
 
 #### [ Kenny Lau (Oct 23 2018 at 08:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/De%20Morgan%27s/near/136319009):
-it wants a thing of type `(p -> q) -> p`
+<p>it wants a thing of type <code>(p -&gt; q) -&gt; p</code></p>
 
 #### [ Mario Carneiro (Oct 23 2018 at 08:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/De%20Morgan%27s/near/136319021):
-In the `em` example I define a particular function of type `(p -> false) -> p`
+<p>In the <code>em</code> example I define a particular function of type <code>(p -&gt; false) -&gt; p</code></p>
 
 #### [ Mario Carneiro (Oct 23 2018 at 08:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/De%20Morgan%27s/near/136319037):
-or rather `(p + not p -> false) -> p + not p`
+<p>or rather <code>(p + not p -&gt; false) -&gt; p + not p</code></p>
 
 #### [ Mario Carneiro (Oct 23 2018 at 08:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/De%20Morgan%27s/near/136319085):
-so when the callcc is called it evaluates this function giving it a kind of magic function which has type `p + not p -> false`
+<p>so when the callcc is called it evaluates this function giving it a kind of magic function which has type <code>p + not p -&gt; false</code></p>
 
 #### [ Mario Carneiro (Oct 23 2018 at 08:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/De%20Morgan%27s/near/136319152):
-this function should not ever be called, because it "destroys the universe" rather than producing a proof of false
+<p>this function should not ever be called, because it "destroys the universe" rather than producing a proof of false</p>
 
 #### [ Mario Carneiro (Oct 23 2018 at 08:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/De%20Morgan%27s/near/136319316):
-Here's another example. If `f : (N -> false) -> N` is the constant function 42, then `callcc f` just returns 42. Nothing special happens as long as `f` never uses its argument
+<p>Here's another example. If <code>f : (N -&gt; false) -&gt; N</code> is the constant function 42, then <code>callcc f</code> just returns 42. Nothing special happens as long as <code>f</code> never uses its argument</p>
 
 #### [ Mario Carneiro (Oct 23 2018 at 08:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/De%20Morgan%27s/near/136319330):
-But if `f = \lam g, false.elim (g 12)`, then `callcc f` returns 12
+<p>But if <code>f = \lam g, false.elim (g 12)</code>, then <code>callcc f</code> returns 12</p>
 
 #### [ Kenny Lau (Oct 23 2018 at 08:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/De%20Morgan%27s/near/136319335):
-how?
+<p>how?</p>
 
 #### [ Kenny Lau (Oct 23 2018 at 08:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/De%20Morgan%27s/near/136319377):
-and if `f = \lam g, false.elim (g 12) + false.elim (g 13)`?
+<p>and if <code>f = \lam g, false.elim (g 12) + false.elim (g 13)</code>?</p>
 
 #### [ Mario Carneiro (Oct 23 2018 at 08:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/De%20Morgan%27s/near/136319379):
-returns 12
+<p>returns 12</p>
 
 #### [ Mario Carneiro (Oct 23 2018 at 08:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/De%20Morgan%27s/near/136319386):
-the rest of the computation is abandoned once `g` is called
+<p>the rest of the computation is abandoned once <code>g</code> is called</p>
 
 #### [ Kenny Lau (Oct 23 2018 at 08:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/De%20Morgan%27s/near/136319394):
-hmm...
+<p>hmm...</p>
 
 #### [ Mario Carneiro (Oct 23 2018 at 08:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/De%20Morgan%27s/near/136319395):
-The function `g` given to `f` is actually the expr-with-hole that `callcc f` is situated in
+<p>The function <code>g</code> given to <code>f</code> is actually the expr-with-hole that <code>callcc f</code> is situated in</p>
 
 #### [ Mario Carneiro (Oct 23 2018 at 08:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/De%20Morgan%27s/near/136319465):
-it might make more sense if `g` is called `throw` instead
+<p>it might make more sense if <code>g</code> is called <code>throw</code> instead</p>
 
 #### [ Mario Carneiro (Oct 23 2018 at 08:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/De%20Morgan%27s/near/136319468):
-and `callcc` is `catch`
+<p>and <code>callcc</code> is <code>catch</code></p>
 
 
 {% endraw %}

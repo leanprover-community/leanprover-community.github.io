@@ -12,38 +12,38 @@ permalink: archive/113488general/91772mypolynomialperformance.html
 
 {% raw %}
 #### [ Reid Barton (Nov 17 2018 at 20:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/my_polynomial%20performance/near/147887874):
-I tried proving that the polynomial ring functor is left adjoint to the forgetful functor CommRing -> Set but I gave up because doing anything with `mv_polynomial` was so slow. @**Kenny Lau** you were having similar problems with `mv_polynomial` right?
-I think something is wrong there, but I couldn't figure out what.
+<p>I tried proving that the polynomial ring functor is left adjoint to the forgetful functor CommRing -&gt; Set but I gave up because doing anything with <code>mv_polynomial</code> was so slow. <span class="user-mention" data-user-id="110064">@Kenny Lau</span> you were having similar problems with <code>mv_polynomial</code> right?<br>
+I think something is wrong there, but I couldn't figure out what.</p>
 
 #### [ Kenny Lau (Nov 17 2018 at 20:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/my_polynomial%20performance/near/147887984):
-yes, something is wrong
+<p>yes, something is wrong</p>
 
 #### [ Kenny Lau (Nov 17 2018 at 20:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/my_polynomial%20performance/near/147887985):
-@**Mario Carneiro** what do you think?
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> what do you think?</p>
 
 #### [ Mario Carneiro (Nov 18 2018 at 00:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/my_polynomial%20performance/near/147895390):
-I think something is wrong
+<p>I think something is wrong</p>
 
 #### [ Kenny Lau (Nov 18 2018 at 00:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/my_polynomial%20performance/near/147895486):
-...
+<p>...</p>
 
 #### [ Mario Carneiro (Nov 18 2018 at 00:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/my_polynomial%20performance/near/147895501):
-my impression is that lean is having to solve enormous typeclass problems, I'm not sure if that's the whole problem
+<p>my impression is that lean is having to solve enormous typeclass problems, I'm not sure if that's the whole problem</p>
 
 #### [ Kenny Lau (Nov 18 2018 at 00:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/my_polynomial%20performance/near/147895542):
-would you know specifically what is the problem with mv_polynomial and polynomial?
+<p>would you know specifically what is the problem with mv_polynomial and polynomial?</p>
 
 #### [ Mario Carneiro (Nov 18 2018 at 00:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/my_polynomial%20performance/near/147895552):
-if you look at the pp.all versions of any of the theorem statements, what looks like five tokens fills several pages
+<p>if you look at the pp.all versions of any of the theorem statements, what looks like five tokens fills several pages</p>
 
 #### [ Kenny Lau (Nov 18 2018 at 00:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/my_polynomial%20performance/near/147895597):
-I don't think `pp.all` tells us *all* about the situation
+<p>I don't think <code>pp.all</code> tells us <em>all</em> about the situation</p>
 
 #### [ Kenny Lau (Nov 18 2018 at 00:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/my_polynomial%20performance/near/147895603):
-but sure it tells us a lot
+<p>but sure it tells us a lot</p>
 
 #### [ Mario Carneiro (Nov 18 2018 at 00:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/my_polynomial%20performance/near/147895604):
-yeah it doesn't know when to shut up
+<p>yeah it doesn't know when to shut up</p>
 
 
 {% endraw %}

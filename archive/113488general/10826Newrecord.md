@@ -12,51 +12,52 @@ permalink: archive/113488general/10826Newrecord.html
 
 {% raw %}
 #### [ Patrick Massot (Jan 05 2019 at 14:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/New%20record/near/154473192):
-I think we have a new record:
-[50_PR.png](/user_uploads/3121/J7QL1y-Fi-LLiwjUiJbZUq5J/50_PR.png) 
-It's a bit unfair to take advantage of Mario traveling to add five more PR...
+<p>I think we have a new record:<br>
+<a href="/user_uploads/3121/J7QL1y-Fi-LLiwjUiJbZUq5J/50_PR.png" target="_blank" title="50_PR.png">50_PR.png</a> <br>
+It's a bit unfair to take advantage of Mario traveling to add five more PR...</p>
+<div class="message_inline_image"><a href="/user_uploads/3121/J7QL1y-Fi-LLiwjUiJbZUq5J/50_PR.png" target="_blank" title="50_PR.png"><img src="/user_uploads/3121/J7QL1y-Fi-LLiwjUiJbZUq5J/50_PR.png"></a></div>
 
 #### [ Patrick Massot (Jan 05 2019 at 14:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/New%20record/near/154473468):
-@**Johannes Hölzl** an easy way to make sure Mario won't be depressed by this when landing  would be to  incorporate #573 into #568, merge the later and close the former
+<p><span class="user-mention" data-user-id="110294">@Johannes Hölzl</span> an easy way to make sure Mario won't be depressed by this when landing  would be to  incorporate <a href="https://github.com/leanprover/mathlib/issues/573" target="_blank" title="https://github.com/leanprover/mathlib/issues/573">#573</a> into <a href="https://github.com/leanprover/mathlib/issues/568" target="_blank" title="https://github.com/leanprover/mathlib/issues/568">#568</a>, merge the later and close the former</p>
 
 #### [ Chris Hughes (Jan 05 2019 at 15:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/New%20record/near/154475852):
-I've been making gazillions of hopefully quite easy ones, so it's not that bad.
+<p>I've been making gazillions of hopefully quite easy ones, so it's not that bad.</p>
 
 #### [ Johannes Hölzl (Jan 05 2019 at 16:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/New%20record/near/154476613):
-I'm not sure about the namespace `metric`, newly introduced namespaces are usually type oriented
+<p>I'm not sure about the namespace <code>metric</code>, newly introduced namespaces are usually type oriented</p>
 
 #### [ Mario Carneiro (Jan 05 2019 at 16:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/New%20record/near/154477440):
-I agree. Although some of the theorems could benefit from a namespace, most are already disambiguated in the name by referring to `dist` or `metric`
+<p>I agree. Although some of the theorems could benefit from a namespace, most are already disambiguated in the name by referring to <code>dist</code> or <code>metric</code></p>
 
 #### [ Mario Carneiro (Jan 05 2019 at 16:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/New%20record/near/154477453):
-and the basic algebraic theorems in groups and rings are all in the root namespace
+<p>and the basic algebraic theorems in groups and rings are all in the root namespace</p>
 
 #### [ Mario Carneiro (Jan 05 2019 at 16:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/New%20record/near/154477455):
-In particular, `metric_space` should *not* be in a namespace
+<p>In particular, <code>metric_space</code> should <em>not</em> be in a namespace</p>
 
 #### [ Mario Carneiro (Jan 05 2019 at 18:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/New%20record/near/154480237):
-I put a counter proposal at https://github.com/leanprover/mathlib/compare/master...leanprover-community:metric_namespace . @**Johannes Hölzl** @**Sebastien Gouezel** @**Patrick Massot**  Let me know what you think - I'm not planning on forcing this if people don't like it. The gist of it is: stuff about `dist` and `edist` are in the root namespace, stuff about topological characterizations in a metric space are in `metric` namespace, `ball`, `closed_ball`, `bounded` are all in the `metric` namespace. Similar for the `emetric` namespace.
+<p>I put a counter proposal at <a href="https://github.com/leanprover/mathlib/compare/master...leanprover-community:metric_namespace" target="_blank" title="https://github.com/leanprover/mathlib/compare/master...leanprover-community:metric_namespace">https://github.com/leanprover/mathlib/compare/master...leanprover-community:metric_namespace</a> . <span class="user-mention" data-user-id="110294">@Johannes Hölzl</span> <span class="user-mention" data-user-id="110050">@Sebastien Gouezel</span> <span class="user-mention" data-user-id="110031">@Patrick Massot</span>  Let me know what you think - I'm not planning on forcing this if people don't like it. The gist of it is: stuff about <code>dist</code> and <code>edist</code> are in the root namespace, stuff about topological characterizations in a metric space are in <code>metric</code> namespace, <code>ball</code>, <code>closed_ball</code>, <code>bounded</code> are all in the <code>metric</code> namespace. Similar for the <code>emetric</code> namespace.</p>
 
 #### [ Mario Carneiro (Jan 05 2019 at 18:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/New%20record/near/154480284):
-I tried putting stuff in the `metric_space` namespace instead, but then there are collisions with metric space axioms
+<p>I tried putting stuff in the <code>metric_space</code> namespace instead, but then there are collisions with metric space axioms</p>
 
 #### [ Mario Carneiro (Jan 05 2019 at 18:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/New%20record/near/154480297):
-things like `cauchy_of_metric` are renamed to `metric.cauchy_iff`
+<p>things like <code>cauchy_of_metric</code> are renamed to <code>metric.cauchy_iff</code></p>
 
 #### [ Sebastien Gouezel (Jan 05 2019 at 18:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/New%20record/near/154480731):
-Looks very good to me. I felt the need for a `metric` namespace when I started introducing more concepts, like isometries: it felt wrong to put them in the root namespace. Things that could have a different meaning in a different context, like bounded or balls, should also definitely go in the namespace, just like you do in your proposal. I also tried first with a `metric_space` namespace, but it created collisions as you just mentioned.
+<p>Looks very good to me. I felt the need for a <code>metric</code> namespace when I started introducing more concepts, like isometries: it felt wrong to put them in the root namespace. Things that could have a different meaning in a different context, like bounded or balls, should also definitely go in the namespace, just like you do in your proposal. I also tried first with a <code>metric_space</code> namespace, but it created collisions as you just mentioned.</p>
 
 #### [ Patrick Massot (Jan 05 2019 at 18:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/New%20record/near/154481527):
-I think the root namespace should be really clean. But of course it's much less important in mathlib than in core's `init` since you can always choose what to import (especially after we'll split those huge files). And `metric_space` sounds uncontroversial, so Mario's version looks good to me.
+<p>I think the root namespace should be really clean. But of course it's much less important in mathlib than in core's <code>init</code> since you can always choose what to import (especially after we'll split those huge files). And <code>metric_space</code> sounds uncontroversial, so Mario's version looks good to me.</p>
 
 #### [ Patrick Massot (Jan 05 2019 at 20:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/New%20record/near/154484507):
-Hoho, a big merging wave is in progress!
+<p>Hoho, a big merging wave is in progress!</p>
 
 #### [ Johan Commelin (Jan 05 2019 at 22:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/New%20record/near/154487485):
-Oops, we're down to 38...
+<p>Oops, we're down to 38...</p>
 
 #### [ Patrick Massot (Jan 05 2019 at 22:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/New%20record/near/154487497):
-But I still can't shuffle files because the metric namespace PR is not merged. @**Johannes Hölzl** ?
+<p>But I still can't shuffle files because the metric namespace PR is not merged. <span class="user-mention" data-user-id="110294">@Johannes Hölzl</span> ?</p>
 
 
 {% endraw %}

@@ -12,17 +12,17 @@ permalink: archive/179818LeanTogether2019/08283SlidesforFlypitchtalk.html
 
 {% raw %}
 #### [ Jesse Michael Han (Jan 07 2019 at 23:12)](https://leanprover.zulipchat.com/#narrow/stream/179818-Lean%20Together%202019/topic/Slides%20for%20Flypitch%20talk/near/154605847):
-A couple people asked me to post my slides to the Zulip chat. It was nice seeing you all today! [lean-together-2019.pdf](/user_uploads/3121/unUMGa3U-jn8fN9hXOKSOoHa/lean-together-2019.pdf)
+<p>A couple people asked me to post my slides to the Zulip chat. It was nice seeing you all today! <a href="/user_uploads/3121/unUMGa3U-jn8fN9hXOKSOoHa/lean-together-2019.pdf" target="_blank" title="lean-together-2019.pdf">lean-together-2019.pdf</a></p>
 
 #### [ Zans Mihejevs (Jan 08 2019 at 12:00)](https://leanprover.zulipchat.com/#narrow/stream/179818-Lean%20Together%202019/topic/Slides%20for%20Flypitch%20talk/near/154637170):
-```quote
-A couple people asked me to post my slides to the Zulip chat. It was nice seeing you all today! [lean-together-2019.pdf](/user_uploads/3121/unUMGa3U-jn8fN9hXOKSOoHa/lean-together-2019.pdf)
-```
- Thanks! 
-It would be nice to see all the slides listed somewhere :)
+<blockquote>
+<p>A couple people asked me to post my slides to the Zulip chat. It was nice seeing you all today! <a href="/user_uploads/3121/unUMGa3U-jn8fN9hXOKSOoHa/lean-together-2019.pdf" target="_blank" title="lean-together-2019.pdf">lean-together-2019.pdf</a></p>
+</blockquote>
+<p>Thanks! <br>
+It would be nice to see all the slides listed somewhere :)</p>
 
 #### [ Rob Lewis (Jan 08 2019 at 12:01)](https://leanprover.zulipchat.com/#narrow/stream/179818-Lean%20Together%202019/topic/Slides%20for%20Flypitch%20talk/near/154637211):
-This will happen. They need to be collected.
+<p>This will happen. They need to be collected.</p>
 
 
 {% endraw %}

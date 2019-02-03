@@ -12,58 +12,55 @@ permalink: archive/113488general/08893setindefinitedescription.html
 
 {% raw %}
 #### [ Kenny Lau (Dec 04 2018 at 23:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/set.indefinite_description/near/150884816):
-Is it possible to fill in this sorry?
-```lean
-universes u
-protected def set.indefinite_description {α : Type u}
-  {p : set α → Prop} (h : ∃ s, p s) : { s : set α // p s} := sorry
-```
+<p>Is it possible to fill in this sorry?</p>
+<div class="codehilite"><pre><span></span><span class="n">universes</span> <span class="n">u</span>
+<span class="kn">protected</span> <span class="n">def</span> <span class="n">set</span><span class="bp">.</span><span class="n">indefinite_description</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span>
+  <span class="o">{</span><span class="n">p</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">}</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="bp">∃</span> <span class="n">s</span><span class="o">,</span> <span class="n">p</span> <span class="n">s</span><span class="o">)</span> <span class="o">:</span> <span class="o">{</span> <span class="n">s</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span> <span class="bp">//</span> <span class="n">p</span> <span class="n">s</span><span class="o">}</span> <span class="o">:=</span> <span class="n">sorry</span>
+</pre></div>
 
 #### [ Reid Barton (Dec 04 2018 at 23:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/set.indefinite_description/near/150885388):
-I guess you mean without adding `noncomputable`? Interesting question
+<p>I guess you mean without adding <code>noncomputable</code>? Interesting question</p>
 
 #### [ Mario Carneiro (Dec 05 2018 at 01:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/set.indefinite_description/near/150890461):
-yes
-```lean
-universes u
-protected def set.indefinite_description {α : Type u}
-  {p : set α → Prop} (h : ∃ s, p s) : { s : set α // p s} :=
-⟨{x : α | x ∈ classical.some h}, classical.some_spec h⟩
-```
+<p>yes</p>
+<div class="codehilite"><pre><span></span><span class="n">universes</span> <span class="n">u</span>
+<span class="kn">protected</span> <span class="n">def</span> <span class="n">set</span><span class="bp">.</span><span class="n">indefinite_description</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span>
+  <span class="o">{</span><span class="n">p</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">}</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="bp">∃</span> <span class="n">s</span><span class="o">,</span> <span class="n">p</span> <span class="n">s</span><span class="o">)</span> <span class="o">:</span> <span class="o">{</span> <span class="n">s</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span> <span class="bp">//</span> <span class="n">p</span> <span class="n">s</span><span class="o">}</span> <span class="o">:=</span>
+<span class="bp">⟨</span><span class="o">{</span><span class="n">x</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">|</span> <span class="n">x</span> <span class="err">∈</span> <span class="n">classical</span><span class="bp">.</span><span class="n">some</span> <span class="n">h</span><span class="o">},</span> <span class="n">classical</span><span class="bp">.</span><span class="n">some_spec</span> <span class="n">h</span><span class="bp">⟩</span>
+</pre></div>
 
 #### [ Mario Carneiro (Dec 05 2018 at 01:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/set.indefinite_description/near/150890503):
-I've mentioned before about "trivially computable" types, which includes subtypes of functions returning Prop
+<p>I've mentioned before about "trivially computable" types, which includes subtypes of functions returning Prop</p>
 
 #### [ Mario Carneiro (Dec 05 2018 at 01:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/set.indefinite_description/near/150890525):
-Any term of such a type can be made computable with appropriate wrapping
+<p>Any term of such a type can be made computable with appropriate wrapping</p>
 
 #### [ Mario Carneiro (Dec 05 2018 at 01:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/set.indefinite_description/near/150890612):
-If you meant "without axioms", then no it's not possible, it would imply the axiom of choice
+<p>If you meant "without axioms", then no it's not possible, it would imply the axiom of choice</p>
 
 #### [ Mario Carneiro (Dec 05 2018 at 01:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/set.indefinite_description/near/150890927):
-However there is an interesting construction here for *definite* description with no axioms (well extensionality)
-```lean
-import data.set.basic
+<p>However there is an interesting construction here for <em>definite</em> description with no axioms (well extensionality)</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">set</span><span class="bp">.</span><span class="n">basic</span>
 
-universes u
-protected def set.definite_description {α : Type u}
-  {p : set α → Prop} (h : ∃! s, p s) : { s : set α // p s} :=
-⟨{x : α | ∃ s, x ∈ s ∧ p s ∧ ∀ y, p y → y = s},
-let ⟨s, ps, al⟩ := h in
-have s = {x : α | ∃ s, x ∈ s ∧ p s ∧ ∀ y, p y → y = s},
-from set.ext $ λ x, ⟨λ xs, ⟨_, xs, ps, al⟩,
-  λ ⟨s', xs', ps', al'⟩, (al' _ ps).symm ▸ xs'⟩,
-this ▸ ps⟩
-```
+<span class="n">universes</span> <span class="n">u</span>
+<span class="kn">protected</span> <span class="n">def</span> <span class="n">set</span><span class="bp">.</span><span class="n">definite_description</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span>
+  <span class="o">{</span><span class="n">p</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">}</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="bp">∃!</span> <span class="n">s</span><span class="o">,</span> <span class="n">p</span> <span class="n">s</span><span class="o">)</span> <span class="o">:</span> <span class="o">{</span> <span class="n">s</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span> <span class="bp">//</span> <span class="n">p</span> <span class="n">s</span><span class="o">}</span> <span class="o">:=</span>
+<span class="bp">⟨</span><span class="o">{</span><span class="n">x</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">|</span> <span class="bp">∃</span> <span class="n">s</span><span class="o">,</span> <span class="n">x</span> <span class="err">∈</span> <span class="n">s</span> <span class="bp">∧</span> <span class="n">p</span> <span class="n">s</span> <span class="bp">∧</span> <span class="bp">∀</span> <span class="n">y</span><span class="o">,</span> <span class="n">p</span> <span class="n">y</span> <span class="bp">→</span> <span class="n">y</span> <span class="bp">=</span> <span class="n">s</span><span class="o">},</span>
+<span class="k">let</span> <span class="bp">⟨</span><span class="n">s</span><span class="o">,</span> <span class="n">ps</span><span class="o">,</span> <span class="n">al</span><span class="bp">⟩</span> <span class="o">:=</span> <span class="n">h</span> <span class="k">in</span>
+<span class="k">have</span> <span class="n">s</span> <span class="bp">=</span> <span class="o">{</span><span class="n">x</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">|</span> <span class="bp">∃</span> <span class="n">s</span><span class="o">,</span> <span class="n">x</span> <span class="err">∈</span> <span class="n">s</span> <span class="bp">∧</span> <span class="n">p</span> <span class="n">s</span> <span class="bp">∧</span> <span class="bp">∀</span> <span class="n">y</span><span class="o">,</span> <span class="n">p</span> <span class="n">y</span> <span class="bp">→</span> <span class="n">y</span> <span class="bp">=</span> <span class="n">s</span><span class="o">},</span>
+<span class="k">from</span> <span class="n">set</span><span class="bp">.</span><span class="n">ext</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="bp">⟨λ</span> <span class="n">xs</span><span class="o">,</span> <span class="bp">⟨_</span><span class="o">,</span> <span class="n">xs</span><span class="o">,</span> <span class="n">ps</span><span class="o">,</span> <span class="n">al</span><span class="bp">⟩</span><span class="o">,</span>
+  <span class="bp">λ</span> <span class="bp">⟨</span><span class="n">s&#39;</span><span class="o">,</span> <span class="n">xs&#39;</span><span class="o">,</span> <span class="n">ps&#39;</span><span class="o">,</span> <span class="n">al&#39;</span><span class="bp">⟩</span><span class="o">,</span> <span class="o">(</span><span class="n">al&#39;</span> <span class="bp">_</span> <span class="n">ps</span><span class="o">)</span><span class="bp">.</span><span class="n">symm</span> <span class="bp">▸</span> <span class="n">xs&#39;</span><span class="bp">⟩</span><span class="o">,</span>
+<span class="n">this</span> <span class="bp">▸</span> <span class="n">ps</span><span class="bp">⟩</span>
+</pre></div>
 
 #### [ Kenny Lau (Dec 05 2018 at 01:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/set.indefinite_description/near/150891656):
-@**Mario Carneiro** so... we can have a "computable" basis?
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> so... we can have a "computable" basis?</p>
 
 #### [ Mario Carneiro (Dec 05 2018 at 01:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/set.indefinite_description/near/150891676):
-"computable" but not computable
+<p>"computable" but not computable</p>
 
 #### [ Mario Carneiro (Dec 05 2018 at 01:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/set.indefinite_description/near/150891740):
-when I revisited bases recently, we discussed changing the definition of a basis from a set to a family over a type. In that case it wouldn't be computationally irrelevant
+<p>when I revisited bases recently, we discussed changing the definition of a basis from a set to a family over a type. In that case it wouldn't be computationally irrelevant</p>
 
 
 {% endraw %}

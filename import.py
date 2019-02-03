@@ -14,10 +14,6 @@ from pathlib import Path
 from zlib import adler32
 from operator import attrgetter
 import zulip, string, os, time, json, urllib
-#import os
-#import time
-#import json
-#import urllib
 
 json_root = Path("./_json")
 md_root = Path("archive")
@@ -25,7 +21,7 @@ md_index = Path("index.md")
 html_root = Path("archive")
 stream_blacklist = ['rss', 'travis', 'announce']
 
-# confic_file should point to a Zulip api config
+# config_file should point to a Zulip api config
 client = zulip.Client(config_file="./.zuliprc")
 
 def sanitize(s):
@@ -80,7 +76,7 @@ def populate_all():
                 'narrow': [{'operator': 'stream', 'operand': s['name']},
                            {'operator': 'topic', 'operand': t['name']}],
                 'client_gravatar': True,
-                'apply_markdown': False
+                'apply_markdown': True
             }
             m = request_all(request)
             tpmap[t['name']] = {'size': len(m['messages']), 'latest_date':m['messages'][-1]['timestamp']}
@@ -106,8 +102,6 @@ def write_topic(messages, stream_name, stream_id, topic_name, outfile):
         name = c['sender_full_name']
         date = datetime.fromtimestamp(c['timestamp']).strftime('%b %d %Y at %H:%M')
         msg = c['content']
-        #if '{{' in msg:
-        #    msg = "{% raw %}\n" + msg + "{% endraw %}"
         link = structure_link(stream_id, stream_name, topic_name, c['id'])
         outfile.write(format_message(name, date, msg, link))
         outfile.write('\n\n')
@@ -166,5 +160,5 @@ def write_markdown():
         for t in s['topics']:
             get_topic_and_write(s, t)
 
-#populate_all()
+populate_all()
 write_markdown()

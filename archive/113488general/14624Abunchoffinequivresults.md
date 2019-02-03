@@ -12,174 +12,172 @@ permalink: archive/113488general/14624Abunchoffinequivresults.html
 
 {% raw %}
 #### [ Kenny Lau (Apr 22 2018 at 09:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/A%20bunch%20of%20fin%20equiv%20results/near/125521488):
-```lean
-import data.equiv data.fin
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">equiv</span> <span class="n">data</span><span class="bp">.</span><span class="n">fin</span>
 
-variables (m n : ℕ)
+<span class="kn">variables</span> <span class="o">(</span><span class="n">m</span> <span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span>
 
-def fin_zero_elim {C : Sort*} : fin 0 → C :=
-λ x, false.elim $ nat.not_lt_zero x.1 x.2
+<span class="n">def</span> <span class="n">fin_zero_elim</span> <span class="o">{</span><span class="n">C</span> <span class="o">:</span> <span class="n">Sort</span><span class="bp">*</span><span class="o">}</span> <span class="o">:</span> <span class="n">fin</span> <span class="mi">0</span> <span class="bp">→</span> <span class="n">C</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="n">false</span><span class="bp">.</span><span class="n">elim</span> <span class="err">$</span> <span class="n">nat</span><span class="bp">.</span><span class="n">not_lt_zero</span> <span class="n">x</span><span class="bp">.</span><span class="mi">1</span> <span class="n">x</span><span class="bp">.</span><span class="mi">2</span>
 
-def fin_sum  : (fin m ⊕ fin n) ≃ fin (m + n) :=
-{ to_fun := λ x, sum.rec_on x
-    (λ y, ⟨y.1, nat.lt_of_lt_of_le y.2 $ nat.le_add_right m n⟩)
-    (λ y, ⟨m + y.1, nat.add_lt_add_left y.2 m⟩),
-  inv_fun := λ x, if H : x.1 < m
-    then sum.inl ⟨x.1, H⟩
-    else sum.inr ⟨x.1 - m, nat.lt_of_add_lt_add_left $
-      show m + (x.1 - m) < m + n,
-      from (nat.add_sub_of_le $ le_of_not_gt H).symm ▸ x.2⟩,
-  left_inv := λ x, sum.cases_on x
-    (λ y, by simp [y.2]; from fin.eq_of_veq rfl)
-    (λ y, have H : ¬m + y.val < m, by simp [nat.zero_le],
-       by simp [H, nat.add_sub_cancel_left];
-       from fin.eq_of_veq rfl),
-  right_inv := λ x, begin
-    by_cases H : x.1 < m,
-    { dsimp; rw [dif_pos H]; simp,
-      exact fin.eq_of_veq rfl },
-    { dsimp; rw [dif_neg H]; simp,
-      apply fin.eq_of_veq; simp,
-      rw [nat.add_sub_of_le (le_of_not_gt H)] }
-  end }
+<span class="n">def</span> <span class="n">fin_sum</span>  <span class="o">:</span> <span class="o">(</span><span class="n">fin</span> <span class="n">m</span> <span class="err">⊕</span> <span class="n">fin</span> <span class="n">n</span><span class="o">)</span> <span class="err">≃</span> <span class="n">fin</span> <span class="o">(</span><span class="n">m</span> <span class="bp">+</span> <span class="n">n</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">to_fun</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="n">sum</span><span class="bp">.</span><span class="n">rec_on</span> <span class="n">x</span>
+    <span class="o">(</span><span class="bp">λ</span> <span class="n">y</span><span class="o">,</span> <span class="bp">⟨</span><span class="n">y</span><span class="bp">.</span><span class="mi">1</span><span class="o">,</span> <span class="n">nat</span><span class="bp">.</span><span class="n">lt_of_lt_of_le</span> <span class="n">y</span><span class="bp">.</span><span class="mi">2</span> <span class="err">$</span> <span class="n">nat</span><span class="bp">.</span><span class="n">le_add_right</span> <span class="n">m</span> <span class="n">n</span><span class="bp">⟩</span><span class="o">)</span>
+    <span class="o">(</span><span class="bp">λ</span> <span class="n">y</span><span class="o">,</span> <span class="bp">⟨</span><span class="n">m</span> <span class="bp">+</span> <span class="n">y</span><span class="bp">.</span><span class="mi">1</span><span class="o">,</span> <span class="n">nat</span><span class="bp">.</span><span class="n">add_lt_add_left</span> <span class="n">y</span><span class="bp">.</span><span class="mi">2</span> <span class="n">m</span><span class="bp">⟩</span><span class="o">),</span>
+  <span class="n">inv_fun</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="k">if</span> <span class="n">H</span> <span class="o">:</span> <span class="n">x</span><span class="bp">.</span><span class="mi">1</span> <span class="bp">&lt;</span> <span class="n">m</span>
+    <span class="k">then</span> <span class="n">sum</span><span class="bp">.</span><span class="n">inl</span> <span class="bp">⟨</span><span class="n">x</span><span class="bp">.</span><span class="mi">1</span><span class="o">,</span> <span class="n">H</span><span class="bp">⟩</span>
+    <span class="k">else</span> <span class="n">sum</span><span class="bp">.</span><span class="n">inr</span> <span class="bp">⟨</span><span class="n">x</span><span class="bp">.</span><span class="mi">1</span> <span class="bp">-</span> <span class="n">m</span><span class="o">,</span> <span class="n">nat</span><span class="bp">.</span><span class="n">lt_of_add_lt_add_left</span> <span class="err">$</span>
+      <span class="k">show</span> <span class="n">m</span> <span class="bp">+</span> <span class="o">(</span><span class="n">x</span><span class="bp">.</span><span class="mi">1</span> <span class="bp">-</span> <span class="n">m</span><span class="o">)</span> <span class="bp">&lt;</span> <span class="n">m</span> <span class="bp">+</span> <span class="n">n</span><span class="o">,</span>
+      <span class="k">from</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">add_sub_of_le</span> <span class="err">$</span> <span class="n">le_of_not_gt</span> <span class="n">H</span><span class="o">)</span><span class="bp">.</span><span class="n">symm</span> <span class="bp">▸</span> <span class="n">x</span><span class="bp">.</span><span class="mi">2</span><span class="bp">⟩</span><span class="o">,</span>
+  <span class="n">left_inv</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="n">sum</span><span class="bp">.</span><span class="n">cases_on</span> <span class="n">x</span>
+    <span class="o">(</span><span class="bp">λ</span> <span class="n">y</span><span class="o">,</span> <span class="k">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">y</span><span class="bp">.</span><span class="mi">2</span><span class="o">]</span><span class="bp">;</span> <span class="k">from</span> <span class="n">fin</span><span class="bp">.</span><span class="n">eq_of_veq</span> <span class="n">rfl</span><span class="o">)</span>
+    <span class="o">(</span><span class="bp">λ</span> <span class="n">y</span><span class="o">,</span> <span class="k">have</span> <span class="n">H</span> <span class="o">:</span> <span class="bp">¬</span><span class="n">m</span> <span class="bp">+</span> <span class="n">y</span><span class="bp">.</span><span class="n">val</span> <span class="bp">&lt;</span> <span class="n">m</span><span class="o">,</span> <span class="k">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">nat</span><span class="bp">.</span><span class="n">zero_le</span><span class="o">],</span>
+       <span class="k">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">H</span><span class="o">,</span> <span class="n">nat</span><span class="bp">.</span><span class="n">add_sub_cancel_left</span><span class="o">]</span><span class="bp">;</span>
+       <span class="k">from</span> <span class="n">fin</span><span class="bp">.</span><span class="n">eq_of_veq</span> <span class="n">rfl</span><span class="o">),</span>
+  <span class="n">right_inv</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="k">begin</span>
+    <span class="n">by_cases</span> <span class="n">H</span> <span class="o">:</span> <span class="n">x</span><span class="bp">.</span><span class="mi">1</span> <span class="bp">&lt;</span> <span class="n">m</span><span class="o">,</span>
+    <span class="o">{</span> <span class="n">dsimp</span><span class="bp">;</span> <span class="n">rw</span> <span class="o">[</span><span class="n">dif_pos</span> <span class="n">H</span><span class="o">]</span><span class="bp">;</span> <span class="n">simp</span><span class="o">,</span>
+      <span class="n">exact</span> <span class="n">fin</span><span class="bp">.</span><span class="n">eq_of_veq</span> <span class="n">rfl</span> <span class="o">},</span>
+    <span class="o">{</span> <span class="n">dsimp</span><span class="bp">;</span> <span class="n">rw</span> <span class="o">[</span><span class="n">dif_neg</span> <span class="n">H</span><span class="o">]</span><span class="bp">;</span> <span class="n">simp</span><span class="o">,</span>
+      <span class="n">apply</span> <span class="n">fin</span><span class="bp">.</span><span class="n">eq_of_veq</span><span class="bp">;</span> <span class="n">simp</span><span class="o">,</span>
+      <span class="n">rw</span> <span class="o">[</span><span class="n">nat</span><span class="bp">.</span><span class="n">add_sub_of_le</span> <span class="o">(</span><span class="n">le_of_not_gt</span> <span class="n">H</span><span class="o">)]</span> <span class="o">}</span>
+  <span class="kn">end</span> <span class="o">}</span>
 
-def fin_prod : (fin m × fin n) ≃ fin (m * n) :=
-{ to_fun := λ x, ⟨x.2.1 + n * x.1.1, calc
-          x.2.1 + n * x.1.1 + 1
-        = x.1.1 * n + x.2.1 + 1 : by ac_refl
-    ... ≤ x.1.1 * n + n : nat.add_le_add_left x.2.2 _
-    ... = (x.1.1 + 1) * n : eq.symm $ nat.succ_mul _ _
-    ... ≤ m * n : nat.mul_le_mul_right _ x.1.2⟩,
-  inv_fun := λ x, have H : n > 0,
-      from nat.pos_of_ne_zero $ λ H,
-        nat.not_lt_zero x.1 $ by subst H; from x.2,
-    (⟨x.1 / n, (nat.div_lt_iff_lt_mul _ _ H).2 x.2⟩,
-     ⟨x.1 % n, nat.mod_lt _ H⟩),
-  left_inv := λ ⟨x, y⟩, have H : n > 0,
-      from nat.pos_of_ne_zero $ λ H,
-        nat.not_lt_zero y.1 $ H ▸ y.2,
-    prod.ext.2
-    ⟨fin.eq_of_veq $ calc
-            (y.1 + n * x.1) / n
-          = y.1 / n + x.1 : nat.add_mul_div_left _ _ H
-      ... = 0 + x.1 : by rw nat.div_eq_of_lt y.2
-      ... = x.1 : nat.zero_add x.1,
-     fin.eq_of_veq $ calc
-            (y.1 + n * x.1) % n
-          = y.1 % n : nat.add_mul_mod_self_left _ _ _
-      ... = y.1 : nat.mod_eq_of_lt y.2⟩,
-    right_inv := λ x, fin.eq_of_veq $ nat.mod_add_div _ _ }
+<span class="n">def</span> <span class="n">fin_prod</span> <span class="o">:</span> <span class="o">(</span><span class="n">fin</span> <span class="n">m</span> <span class="bp">×</span> <span class="n">fin</span> <span class="n">n</span><span class="o">)</span> <span class="err">≃</span> <span class="n">fin</span> <span class="o">(</span><span class="n">m</span> <span class="bp">*</span> <span class="n">n</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">to_fun</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="bp">⟨</span><span class="n">x</span><span class="bp">.</span><span class="mi">2</span><span class="bp">.</span><span class="mi">1</span> <span class="bp">+</span> <span class="n">n</span> <span class="bp">*</span> <span class="n">x</span><span class="bp">.</span><span class="mi">1</span><span class="bp">.</span><span class="mi">1</span><span class="o">,</span> <span class="k">calc</span>
+          <span class="n">x</span><span class="bp">.</span><span class="mi">2</span><span class="bp">.</span><span class="mi">1</span> <span class="bp">+</span> <span class="n">n</span> <span class="bp">*</span> <span class="n">x</span><span class="bp">.</span><span class="mi">1</span><span class="bp">.</span><span class="mi">1</span> <span class="bp">+</span> <span class="mi">1</span>
+        <span class="bp">=</span> <span class="n">x</span><span class="bp">.</span><span class="mi">1</span><span class="bp">.</span><span class="mi">1</span> <span class="bp">*</span> <span class="n">n</span> <span class="bp">+</span> <span class="n">x</span><span class="bp">.</span><span class="mi">2</span><span class="bp">.</span><span class="mi">1</span> <span class="bp">+</span> <span class="mi">1</span> <span class="o">:</span> <span class="k">by</span> <span class="n">ac_refl</span>
+    <span class="bp">...</span> <span class="bp">≤</span> <span class="n">x</span><span class="bp">.</span><span class="mi">1</span><span class="bp">.</span><span class="mi">1</span> <span class="bp">*</span> <span class="n">n</span> <span class="bp">+</span> <span class="n">n</span> <span class="o">:</span> <span class="n">nat</span><span class="bp">.</span><span class="n">add_le_add_left</span> <span class="n">x</span><span class="bp">.</span><span class="mi">2</span><span class="bp">.</span><span class="mi">2</span> <span class="bp">_</span>
+    <span class="bp">...</span> <span class="bp">=</span> <span class="o">(</span><span class="n">x</span><span class="bp">.</span><span class="mi">1</span><span class="bp">.</span><span class="mi">1</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="bp">*</span> <span class="n">n</span> <span class="o">:</span> <span class="n">eq</span><span class="bp">.</span><span class="n">symm</span> <span class="err">$</span> <span class="n">nat</span><span class="bp">.</span><span class="n">succ_mul</span> <span class="bp">_</span> <span class="bp">_</span>
+    <span class="bp">...</span> <span class="bp">≤</span> <span class="n">m</span> <span class="bp">*</span> <span class="n">n</span> <span class="o">:</span> <span class="n">nat</span><span class="bp">.</span><span class="n">mul_le_mul_right</span> <span class="bp">_</span> <span class="n">x</span><span class="bp">.</span><span class="mi">1</span><span class="bp">.</span><span class="mi">2</span><span class="bp">⟩</span><span class="o">,</span>
+  <span class="n">inv_fun</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="k">have</span> <span class="n">H</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">&gt;</span> <span class="mi">0</span><span class="o">,</span>
+      <span class="k">from</span> <span class="n">nat</span><span class="bp">.</span><span class="n">pos_of_ne_zero</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">H</span><span class="o">,</span>
+        <span class="n">nat</span><span class="bp">.</span><span class="n">not_lt_zero</span> <span class="n">x</span><span class="bp">.</span><span class="mi">1</span> <span class="err">$</span> <span class="k">by</span> <span class="n">subst</span> <span class="n">H</span><span class="bp">;</span> <span class="k">from</span> <span class="n">x</span><span class="bp">.</span><span class="mi">2</span><span class="o">,</span>
+    <span class="o">(</span><span class="bp">⟨</span><span class="n">x</span><span class="bp">.</span><span class="mi">1</span> <span class="bp">/</span> <span class="n">n</span><span class="o">,</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">div_lt_iff_lt_mul</span> <span class="bp">_</span> <span class="bp">_</span> <span class="n">H</span><span class="o">)</span><span class="bp">.</span><span class="mi">2</span> <span class="n">x</span><span class="bp">.</span><span class="mi">2</span><span class="bp">⟩</span><span class="o">,</span>
+     <span class="bp">⟨</span><span class="n">x</span><span class="bp">.</span><span class="mi">1</span> <span class="err">%</span> <span class="n">n</span><span class="o">,</span> <span class="n">nat</span><span class="bp">.</span><span class="n">mod_lt</span> <span class="bp">_</span> <span class="n">H</span><span class="bp">⟩</span><span class="o">),</span>
+  <span class="n">left_inv</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="bp">⟨</span><span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="bp">⟩</span><span class="o">,</span> <span class="k">have</span> <span class="n">H</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">&gt;</span> <span class="mi">0</span><span class="o">,</span>
+      <span class="k">from</span> <span class="n">nat</span><span class="bp">.</span><span class="n">pos_of_ne_zero</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">H</span><span class="o">,</span>
+        <span class="n">nat</span><span class="bp">.</span><span class="n">not_lt_zero</span> <span class="n">y</span><span class="bp">.</span><span class="mi">1</span> <span class="err">$</span> <span class="n">H</span> <span class="bp">▸</span> <span class="n">y</span><span class="bp">.</span><span class="mi">2</span><span class="o">,</span>
+    <span class="n">prod</span><span class="bp">.</span><span class="n">ext</span><span class="bp">.</span><span class="mi">2</span>
+    <span class="bp">⟨</span><span class="n">fin</span><span class="bp">.</span><span class="n">eq_of_veq</span> <span class="err">$</span> <span class="k">calc</span>
+            <span class="o">(</span><span class="n">y</span><span class="bp">.</span><span class="mi">1</span> <span class="bp">+</span> <span class="n">n</span> <span class="bp">*</span> <span class="n">x</span><span class="bp">.</span><span class="mi">1</span><span class="o">)</span> <span class="bp">/</span> <span class="n">n</span>
+          <span class="bp">=</span> <span class="n">y</span><span class="bp">.</span><span class="mi">1</span> <span class="bp">/</span> <span class="n">n</span> <span class="bp">+</span> <span class="n">x</span><span class="bp">.</span><span class="mi">1</span> <span class="o">:</span> <span class="n">nat</span><span class="bp">.</span><span class="n">add_mul_div_left</span> <span class="bp">_</span> <span class="bp">_</span> <span class="n">H</span>
+      <span class="bp">...</span> <span class="bp">=</span> <span class="mi">0</span> <span class="bp">+</span> <span class="n">x</span><span class="bp">.</span><span class="mi">1</span> <span class="o">:</span> <span class="k">by</span> <span class="n">rw</span> <span class="n">nat</span><span class="bp">.</span><span class="n">div_eq_of_lt</span> <span class="n">y</span><span class="bp">.</span><span class="mi">2</span>
+      <span class="bp">...</span> <span class="bp">=</span> <span class="n">x</span><span class="bp">.</span><span class="mi">1</span> <span class="o">:</span> <span class="n">nat</span><span class="bp">.</span><span class="n">zero_add</span> <span class="n">x</span><span class="bp">.</span><span class="mi">1</span><span class="o">,</span>
+     <span class="n">fin</span><span class="bp">.</span><span class="n">eq_of_veq</span> <span class="err">$</span> <span class="k">calc</span>
+            <span class="o">(</span><span class="n">y</span><span class="bp">.</span><span class="mi">1</span> <span class="bp">+</span> <span class="n">n</span> <span class="bp">*</span> <span class="n">x</span><span class="bp">.</span><span class="mi">1</span><span class="o">)</span> <span class="err">%</span> <span class="n">n</span>
+          <span class="bp">=</span> <span class="n">y</span><span class="bp">.</span><span class="mi">1</span> <span class="err">%</span> <span class="n">n</span> <span class="o">:</span> <span class="n">nat</span><span class="bp">.</span><span class="n">add_mul_mod_self_left</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span>
+      <span class="bp">...</span> <span class="bp">=</span> <span class="n">y</span><span class="bp">.</span><span class="mi">1</span> <span class="o">:</span> <span class="n">nat</span><span class="bp">.</span><span class="n">mod_eq_of_lt</span> <span class="n">y</span><span class="bp">.</span><span class="mi">2</span><span class="bp">⟩</span><span class="o">,</span>
+    <span class="n">right_inv</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="n">fin</span><span class="bp">.</span><span class="n">eq_of_veq</span> <span class="err">$</span> <span class="n">nat</span><span class="bp">.</span><span class="n">mod_add_div</span> <span class="bp">_</span> <span class="bp">_</span> <span class="o">}</span>
 
-def fin_zero_pi : (fin 0 → fin m) ≃ fin (m ^ 0) :=
-{ to_fun := λ _, ⟨0, dec_trivial⟩,
-  inv_fun := λ _ x, false.elim $ nat.not_lt_zero x.1 x.2,
-  left_inv := λ _, funext $ λ x, fin_zero_elim x,
-  right_inv := λ ⟨x, hx⟩, fin.eq_of_veq $ eq.symm $
-    nat.eq_zero_of_le_zero $ nat.le_of_lt_succ hx }
+<span class="n">def</span> <span class="n">fin_zero_pi</span> <span class="o">:</span> <span class="o">(</span><span class="n">fin</span> <span class="mi">0</span> <span class="bp">→</span> <span class="n">fin</span> <span class="n">m</span><span class="o">)</span> <span class="err">≃</span> <span class="n">fin</span> <span class="o">(</span><span class="n">m</span> <span class="err">^</span> <span class="mi">0</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">to_fun</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="bp">_</span><span class="o">,</span> <span class="bp">⟨</span><span class="mi">0</span><span class="o">,</span> <span class="n">dec_trivial</span><span class="bp">⟩</span><span class="o">,</span>
+  <span class="n">inv_fun</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="bp">_</span> <span class="n">x</span><span class="o">,</span> <span class="n">false</span><span class="bp">.</span><span class="n">elim</span> <span class="err">$</span> <span class="n">nat</span><span class="bp">.</span><span class="n">not_lt_zero</span> <span class="n">x</span><span class="bp">.</span><span class="mi">1</span> <span class="n">x</span><span class="bp">.</span><span class="mi">2</span><span class="o">,</span>
+  <span class="n">left_inv</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="bp">_</span><span class="o">,</span> <span class="n">funext</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="n">fin_zero_elim</span> <span class="n">x</span><span class="o">,</span>
+  <span class="n">right_inv</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="bp">⟨</span><span class="n">x</span><span class="o">,</span> <span class="n">hx</span><span class="bp">⟩</span><span class="o">,</span> <span class="n">fin</span><span class="bp">.</span><span class="n">eq_of_veq</span> <span class="err">$</span> <span class="n">eq</span><span class="bp">.</span><span class="n">symm</span> <span class="err">$</span>
+    <span class="n">nat</span><span class="bp">.</span><span class="n">eq_zero_of_le_zero</span> <span class="err">$</span> <span class="n">nat</span><span class="bp">.</span><span class="n">le_of_lt_succ</span> <span class="n">hx</span> <span class="o">}</span>
 
-def fin_succ_pi : (fin (n + 1) → fin m) ≃ ((fin n → fin m) × fin m) :=
-{ to_fun := λ f, (f ∘ raise_fin, f ⟨n, nat.lt_succ_self n⟩),
-  inv_fun := λ f x, if H : x.1 < n then f.1 ⟨x.1, H⟩ else f.2,
-  left_inv := λ f, funext $ λ x, if H : x.1 < n
-    then by dsimp [raise_fin]; rw [dif_pos H];
-      from congr_arg f (fin.eq_of_veq rfl)
-    else by dsimp; rw [dif_neg H];
-      from congr_arg f (fin.eq_of_veq $ nat.le_antisymm
-        (le_of_not_gt H) (nat.le_of_lt_succ x.2)),
-  right_inv := λ ⟨f, x⟩, prod.ext.2
-    ⟨funext $ λ y, by dsimp [raise_fin]; rw [dif_pos y.2];
-       from congr_arg f (fin.eq_of_veq rfl),
-     by simp⟩ }
+<span class="n">def</span> <span class="n">fin_succ_pi</span> <span class="o">:</span> <span class="o">(</span><span class="n">fin</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="bp">→</span> <span class="n">fin</span> <span class="n">m</span><span class="o">)</span> <span class="err">≃</span> <span class="o">((</span><span class="n">fin</span> <span class="n">n</span> <span class="bp">→</span> <span class="n">fin</span> <span class="n">m</span><span class="o">)</span> <span class="bp">×</span> <span class="n">fin</span> <span class="n">m</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">to_fun</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">f</span><span class="o">,</span> <span class="o">(</span><span class="n">f</span> <span class="err">∘</span> <span class="n">raise_fin</span><span class="o">,</span> <span class="n">f</span> <span class="bp">⟨</span><span class="n">n</span><span class="o">,</span> <span class="n">nat</span><span class="bp">.</span><span class="n">lt_succ_self</span> <span class="n">n</span><span class="bp">⟩</span><span class="o">),</span>
+  <span class="n">inv_fun</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">f</span> <span class="n">x</span><span class="o">,</span> <span class="k">if</span> <span class="n">H</span> <span class="o">:</span> <span class="n">x</span><span class="bp">.</span><span class="mi">1</span> <span class="bp">&lt;</span> <span class="n">n</span> <span class="k">then</span> <span class="n">f</span><span class="bp">.</span><span class="mi">1</span> <span class="bp">⟨</span><span class="n">x</span><span class="bp">.</span><span class="mi">1</span><span class="o">,</span> <span class="n">H</span><span class="bp">⟩</span> <span class="k">else</span> <span class="n">f</span><span class="bp">.</span><span class="mi">2</span><span class="o">,</span>
+  <span class="n">left_inv</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">f</span><span class="o">,</span> <span class="n">funext</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="k">if</span> <span class="n">H</span> <span class="o">:</span> <span class="n">x</span><span class="bp">.</span><span class="mi">1</span> <span class="bp">&lt;</span> <span class="n">n</span>
+    <span class="k">then</span> <span class="k">by</span> <span class="n">dsimp</span> <span class="o">[</span><span class="n">raise_fin</span><span class="o">]</span><span class="bp">;</span> <span class="n">rw</span> <span class="o">[</span><span class="n">dif_pos</span> <span class="n">H</span><span class="o">]</span><span class="bp">;</span>
+      <span class="k">from</span> <span class="n">congr_arg</span> <span class="n">f</span> <span class="o">(</span><span class="n">fin</span><span class="bp">.</span><span class="n">eq_of_veq</span> <span class="n">rfl</span><span class="o">)</span>
+    <span class="k">else</span> <span class="k">by</span> <span class="n">dsimp</span><span class="bp">;</span> <span class="n">rw</span> <span class="o">[</span><span class="n">dif_neg</span> <span class="n">H</span><span class="o">]</span><span class="bp">;</span>
+      <span class="k">from</span> <span class="n">congr_arg</span> <span class="n">f</span> <span class="o">(</span><span class="n">fin</span><span class="bp">.</span><span class="n">eq_of_veq</span> <span class="err">$</span> <span class="n">nat</span><span class="bp">.</span><span class="n">le_antisymm</span>
+        <span class="o">(</span><span class="n">le_of_not_gt</span> <span class="n">H</span><span class="o">)</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">le_of_lt_succ</span> <span class="n">x</span><span class="bp">.</span><span class="mi">2</span><span class="o">)),</span>
+  <span class="n">right_inv</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="bp">⟨</span><span class="n">f</span><span class="o">,</span> <span class="n">x</span><span class="bp">⟩</span><span class="o">,</span> <span class="n">prod</span><span class="bp">.</span><span class="n">ext</span><span class="bp">.</span><span class="mi">2</span>
+    <span class="bp">⟨</span><span class="n">funext</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">y</span><span class="o">,</span> <span class="k">by</span> <span class="n">dsimp</span> <span class="o">[</span><span class="n">raise_fin</span><span class="o">]</span><span class="bp">;</span> <span class="n">rw</span> <span class="o">[</span><span class="n">dif_pos</span> <span class="n">y</span><span class="bp">.</span><span class="mi">2</span><span class="o">]</span><span class="bp">;</span>
+       <span class="k">from</span> <span class="n">congr_arg</span> <span class="n">f</span> <span class="o">(</span><span class="n">fin</span><span class="bp">.</span><span class="n">eq_of_veq</span> <span class="n">rfl</span><span class="o">),</span>
+     <span class="k">by</span> <span class="n">simp</span><span class="bp">⟩</span> <span class="o">}</span>
 
-def fin_pi : (fin n → fin m) ≃ fin (m ^ n) :=
-nat.rec_on n (fin_zero_pi m) $ λ n ih, calc
-      (fin (n + 1) → fin m)
-    ≃ ((fin n → fin m) × fin m) : fin_succ_pi _ _
-... ≃ ((fin (m ^ n)) × fin m) : equiv.prod_congr ih $ equiv.refl _
-... ≃ fin (m ^ (n + 1)) : fin_prod _ _
-```
+<span class="n">def</span> <span class="n">fin_pi</span> <span class="o">:</span> <span class="o">(</span><span class="n">fin</span> <span class="n">n</span> <span class="bp">→</span> <span class="n">fin</span> <span class="n">m</span><span class="o">)</span> <span class="err">≃</span> <span class="n">fin</span> <span class="o">(</span><span class="n">m</span> <span class="err">^</span> <span class="n">n</span><span class="o">)</span> <span class="o">:=</span>
+<span class="n">nat</span><span class="bp">.</span><span class="n">rec_on</span> <span class="n">n</span> <span class="o">(</span><span class="n">fin_zero_pi</span> <span class="n">m</span><span class="o">)</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">n</span> <span class="n">ih</span><span class="o">,</span> <span class="k">calc</span>
+      <span class="o">(</span><span class="n">fin</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="bp">→</span> <span class="n">fin</span> <span class="n">m</span><span class="o">)</span>
+    <span class="err">≃</span> <span class="o">((</span><span class="n">fin</span> <span class="n">n</span> <span class="bp">→</span> <span class="n">fin</span> <span class="n">m</span><span class="o">)</span> <span class="bp">×</span> <span class="n">fin</span> <span class="n">m</span><span class="o">)</span> <span class="o">:</span> <span class="n">fin_succ_pi</span> <span class="bp">_</span> <span class="bp">_</span>
+<span class="bp">...</span> <span class="err">≃</span> <span class="o">((</span><span class="n">fin</span> <span class="o">(</span><span class="n">m</span> <span class="err">^</span> <span class="n">n</span><span class="o">))</span> <span class="bp">×</span> <span class="n">fin</span> <span class="n">m</span><span class="o">)</span> <span class="o">:</span> <span class="n">equiv</span><span class="bp">.</span><span class="n">prod_congr</span> <span class="n">ih</span> <span class="err">$</span> <span class="n">equiv</span><span class="bp">.</span><span class="n">refl</span> <span class="bp">_</span>
+<span class="bp">...</span> <span class="err">≃</span> <span class="n">fin</span> <span class="o">(</span><span class="n">m</span> <span class="err">^</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">))</span> <span class="o">:</span> <span class="n">fin_prod</span> <span class="bp">_</span> <span class="bp">_</span>
+</pre></div>
 
-Are these already in mathlib?
+
+<p>Are these already in mathlib?</p>
 
 #### [ Kenny Lau (Apr 22 2018 at 09:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/A%20bunch%20of%20fin%20equiv%20results/near/125521581):
-I just built myself a digit converter accidentally
-```lean
-#eval (fin_pi 5 6).symm ⟨300, dec_trivial⟩ 0 --0
-#eval (fin_pi 5 6).symm ⟨300, dec_trivial⟩ 1 --0
-#eval (fin_pi 5 6).symm ⟨300, dec_trivial⟩ 2 --2
-#eval (fin_pi 5 6).symm ⟨300, dec_trivial⟩ 3 --2
-#eval (fin_pi 5 6).symm ⟨300, dec_trivial⟩ 4 --0
-#eval (fin_pi 5 6).symm ⟨300, dec_trivial⟩ 5 --0
-#eval nat.to_digits 5 300 --[0,0,2,2]
-```
+<p>I just built myself a digit converter accidentally</p>
+<div class="codehilite"><pre><span></span><span class="bp">#</span><span class="kn">eval</span> <span class="o">(</span><span class="n">fin_pi</span> <span class="mi">5</span> <span class="mi">6</span><span class="o">)</span><span class="bp">.</span><span class="n">symm</span> <span class="bp">⟨</span><span class="mi">300</span><span class="o">,</span> <span class="n">dec_trivial</span><span class="bp">⟩</span> <span class="mi">0</span> <span class="c1">--0</span>
+<span class="bp">#</span><span class="kn">eval</span> <span class="o">(</span><span class="n">fin_pi</span> <span class="mi">5</span> <span class="mi">6</span><span class="o">)</span><span class="bp">.</span><span class="n">symm</span> <span class="bp">⟨</span><span class="mi">300</span><span class="o">,</span> <span class="n">dec_trivial</span><span class="bp">⟩</span> <span class="mi">1</span> <span class="c1">--0</span>
+<span class="bp">#</span><span class="kn">eval</span> <span class="o">(</span><span class="n">fin_pi</span> <span class="mi">5</span> <span class="mi">6</span><span class="o">)</span><span class="bp">.</span><span class="n">symm</span> <span class="bp">⟨</span><span class="mi">300</span><span class="o">,</span> <span class="n">dec_trivial</span><span class="bp">⟩</span> <span class="mi">2</span> <span class="c1">--2</span>
+<span class="bp">#</span><span class="kn">eval</span> <span class="o">(</span><span class="n">fin_pi</span> <span class="mi">5</span> <span class="mi">6</span><span class="o">)</span><span class="bp">.</span><span class="n">symm</span> <span class="bp">⟨</span><span class="mi">300</span><span class="o">,</span> <span class="n">dec_trivial</span><span class="bp">⟩</span> <span class="mi">3</span> <span class="c1">--2</span>
+<span class="bp">#</span><span class="kn">eval</span> <span class="o">(</span><span class="n">fin_pi</span> <span class="mi">5</span> <span class="mi">6</span><span class="o">)</span><span class="bp">.</span><span class="n">symm</span> <span class="bp">⟨</span><span class="mi">300</span><span class="o">,</span> <span class="n">dec_trivial</span><span class="bp">⟩</span> <span class="mi">4</span> <span class="c1">--0</span>
+<span class="bp">#</span><span class="kn">eval</span> <span class="o">(</span><span class="n">fin_pi</span> <span class="mi">5</span> <span class="mi">6</span><span class="o">)</span><span class="bp">.</span><span class="n">symm</span> <span class="bp">⟨</span><span class="mi">300</span><span class="o">,</span> <span class="n">dec_trivial</span><span class="bp">⟩</span> <span class="mi">5</span> <span class="c1">--0</span>
+<span class="bp">#</span><span class="kn">eval</span> <span class="n">nat</span><span class="bp">.</span><span class="n">to_digits</span> <span class="mi">5</span> <span class="mi">300</span> <span class="c1">--[0,0,2,2]</span>
+</pre></div>
 
 #### [ Mario Carneiro (Apr 22 2018 at 09:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/A%20bunch%20of%20fin%20equiv%20results/near/125521582):
-Not exactly, but `fintype.card_sum` seems really similar, and not nearly as complicated of a proof
+<p>Not exactly, but <code>fintype.card_sum</code> seems really similar, and not nearly as complicated of a proof</p>
 
 #### [ Kenny Lau (Apr 22 2018 at 10:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/A%20bunch%20of%20fin%20equiv%20results/near/125521927):
-```quote
-Not exactly, but `fintype.card_sum` seems really similar, and not nearly as complicated of a proof
-```
-well, that depends on a lot of lemmas (and I still can't trace where the main proof is), whereas this one builds everything from "scratch"
+<blockquote>
+<p>Not exactly, but <code>fintype.card_sum</code> seems really similar, and not nearly as complicated of a proof</p>
+</blockquote>
+<p>well, that depends on a lot of lemmas (and I still can't trace where the main proof is), whereas this one builds everything from "scratch"</p>
 
 #### [ Kenny Lau (Apr 22 2018 at 10:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/A%20bunch%20of%20fin%20equiv%20results/near/125521931):
-(ignoring lemmas about natural numbers)
+<p>(ignoring lemmas about natural numbers)</p>
 
 #### [ Mario Carneiro (Apr 22 2018 at 10:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/A%20bunch%20of%20fin%20equiv%20results/near/125521988):
-that's what I mean by not nearly as complicated
+<p>that's what I mean by not nearly as complicated</p>
 
 #### [ Mario Carneiro (Apr 22 2018 at 10:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/A%20bunch%20of%20fin%20equiv%20results/near/125521989):
-them giants have shoulders, use them
+<p>them giants have shoulders, use them</p>
 
 #### [ Kenny Lau (Apr 22 2018 at 10:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/A%20bunch%20of%20fin%20equiv%20results/near/125522030):
-hmm
+<p>hmm</p>
 
 #### [ Mario Carneiro (Apr 22 2018 at 10:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/A%20bunch%20of%20fin%20equiv%20results/near/125522077):
-It's possible that a refactoring is necessary, but this is clearly repeating work that already exists and I would want there to be only one proof from which both facts follow
+<p>It's possible that a refactoring is necessary, but this is clearly repeating work that already exists and I would want there to be only one proof from which both facts follow</p>
 
 #### [ Mario Carneiro (Apr 22 2018 at 10:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/A%20bunch%20of%20fin%20equiv%20results/near/125522078):
-Also there are some similar statements in `cardinal`
+<p>Also there are some similar statements in <code>cardinal</code></p>
 
 #### [ Kenny Lau (Apr 22 2018 at 10:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/A%20bunch%20of%20fin%20equiv%20results/near/125522084):
-right but that's cardinals
+<p>right but that's cardinals</p>
 
 #### [ Mario Carneiro (Apr 22 2018 at 10:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/A%20bunch%20of%20fin%20equiv%20results/near/125522086):
-I'm pretty sure `nat_cast_pow` unfolds to exactly `fin_pi`
+<p>I'm pretty sure <code>nat_cast_pow</code> unfolds to exactly <code>fin_pi</code></p>
 
 #### [ Mario Carneiro (Apr 22 2018 at 10:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/A%20bunch%20of%20fin%20equiv%20results/near/125522126):
-it's talking about cardinality of finite sets in terms of `fin`
+<p>it's talking about cardinality of finite sets in terms of <code>fin</code></p>
 
 #### [ Kenny Lau (Apr 22 2018 at 10:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/A%20bunch%20of%20fin%20equiv%20results/near/125522134):
-interesting
+<p>interesting</p>
 
 #### [ Mario Carneiro (Apr 22 2018 at 10:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/A%20bunch%20of%20fin%20equiv%20results/near/125522135):
-and relating it to the cardinal power which is the function space
+<p>and relating it to the cardinal power which is the function space</p>
 
 #### [ Kenny Lau (Apr 22 2018 at 10:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/A%20bunch%20of%20fin%20equiv%20results/near/125522136):
-I wonder how my digit extraction will work
+<p>I wonder how my digit extraction will work</p>
 
 #### [ Kenny Lau (Apr 22 2018 at 10:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/A%20bunch%20of%20fin%20equiv%20results/near/125522137):
-```lean
-#eval (fin_pi 5 6).symm ⟨300, dec_trivial⟩ 0 --0
-#eval (fin_pi 5 6).symm ⟨300, dec_trivial⟩ 1 --0
-#eval (fin_pi 5 6).symm ⟨300, dec_trivial⟩ 2 --2
-#eval (fin_pi 5 6).symm ⟨300, dec_trivial⟩ 3 --2
-#eval (fin_pi 5 6).symm ⟨300, dec_trivial⟩ 4 --0
-#eval (fin_pi 5 6).symm ⟨300, dec_trivial⟩ 5 --0
-#eval nat.to_digits 5 300 --[0,0,2,2]
-```
+<div class="codehilite"><pre><span></span><span class="bp">#</span><span class="kn">eval</span> <span class="o">(</span><span class="n">fin_pi</span> <span class="mi">5</span> <span class="mi">6</span><span class="o">)</span><span class="bp">.</span><span class="n">symm</span> <span class="bp">⟨</span><span class="mi">300</span><span class="o">,</span> <span class="n">dec_trivial</span><span class="bp">⟩</span> <span class="mi">0</span> <span class="c1">--0</span>
+<span class="bp">#</span><span class="kn">eval</span> <span class="o">(</span><span class="n">fin_pi</span> <span class="mi">5</span> <span class="mi">6</span><span class="o">)</span><span class="bp">.</span><span class="n">symm</span> <span class="bp">⟨</span><span class="mi">300</span><span class="o">,</span> <span class="n">dec_trivial</span><span class="bp">⟩</span> <span class="mi">1</span> <span class="c1">--0</span>
+<span class="bp">#</span><span class="kn">eval</span> <span class="o">(</span><span class="n">fin_pi</span> <span class="mi">5</span> <span class="mi">6</span><span class="o">)</span><span class="bp">.</span><span class="n">symm</span> <span class="bp">⟨</span><span class="mi">300</span><span class="o">,</span> <span class="n">dec_trivial</span><span class="bp">⟩</span> <span class="mi">2</span> <span class="c1">--2</span>
+<span class="bp">#</span><span class="kn">eval</span> <span class="o">(</span><span class="n">fin_pi</span> <span class="mi">5</span> <span class="mi">6</span><span class="o">)</span><span class="bp">.</span><span class="n">symm</span> <span class="bp">⟨</span><span class="mi">300</span><span class="o">,</span> <span class="n">dec_trivial</span><span class="bp">⟩</span> <span class="mi">3</span> <span class="c1">--2</span>
+<span class="bp">#</span><span class="kn">eval</span> <span class="o">(</span><span class="n">fin_pi</span> <span class="mi">5</span> <span class="mi">6</span><span class="o">)</span><span class="bp">.</span><span class="n">symm</span> <span class="bp">⟨</span><span class="mi">300</span><span class="o">,</span> <span class="n">dec_trivial</span><span class="bp">⟩</span> <span class="mi">4</span> <span class="c1">--0</span>
+<span class="bp">#</span><span class="kn">eval</span> <span class="o">(</span><span class="n">fin_pi</span> <span class="mi">5</span> <span class="mi">6</span><span class="o">)</span><span class="bp">.</span><span class="n">symm</span> <span class="bp">⟨</span><span class="mi">300</span><span class="o">,</span> <span class="n">dec_trivial</span><span class="bp">⟩</span> <span class="mi">5</span> <span class="c1">--0</span>
+<span class="bp">#</span><span class="kn">eval</span> <span class="n">nat</span><span class="bp">.</span><span class="n">to_digits</span> <span class="mi">5</span> <span class="mi">300</span> <span class="c1">--[0,0,2,2]</span>
+</pre></div>
 
 #### [ Kenny Lau (Apr 22 2018 at 10:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/A%20bunch%20of%20fin%20equiv%20results/near/125522138):
-will this code run?
+<p>will this code run?</p>
 
 #### [ Mario Carneiro (Apr 22 2018 at 10:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/A%20bunch%20of%20fin%20equiv%20results/near/125522188):
-Neither the cardinal version nor the finset version gives you this explicitly, since the finset is unordered and the cardinal is nonconstructive (the proof is probably constructive but it's buried in a nonconstructive statement)
+<p>Neither the cardinal version nor the finset version gives you this explicitly, since the finset is unordered and the cardinal is nonconstructive (the proof is probably constructive but it's buried in a nonconstructive statement)</p>
 
 #### [ Kenny Lau (Apr 22 2018 at 10:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/A%20bunch%20of%20fin%20equiv%20results/near/125522189):
-exactly
+<p>exactly</p>
 
 #### [ Mario Carneiro (Apr 22 2018 at 10:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/A%20bunch%20of%20fin%20equiv%20results/near/125522190):
-but `multiset.pi` should be generalized to `list.pi` and that is your digit calculator
+<p>but <code>multiset.pi</code> should be generalized to <code>list.pi</code> and that is your digit calculator</p>
 
 
 {% endraw %}

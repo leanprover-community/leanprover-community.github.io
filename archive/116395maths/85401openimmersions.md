@@ -12,10 +12,10 @@ permalink: archive/116395maths/85401openimmersions.html
 
 {% raw %}
 #### [ Johan Commelin (Jan 03 2019 at 09:46)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/open%20immersions/near/154227749):
-Do we have open immersions in mathlib? We have `embedding`, but do we also have open maps?
+<p>Do we have open immersions in mathlib? We have <code>embedding</code>, but do we also have open maps?</p>
 
 #### [ Patrick Massot (Jan 03 2019 at 10:02)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/open%20immersions/near/154228249):
-we have open maps, yes https://github.com/leanprover/mathlib/blob/a04c7e20c8a19018201bc772c414f7b2cd0d00b9/analysis/topology/continuity.lean#L412
+<p>we have open maps, yes <a href="https://github.com/leanprover/mathlib/blob/a04c7e20c8a19018201bc772c414f7b2cd0d00b9/analysis/topology/continuity.lean#L412" target="_blank" title="https://github.com/leanprover/mathlib/blob/a04c7e20c8a19018201bc772c414f7b2cd0d00b9/analysis/topology/continuity.lean#L412">https://github.com/leanprover/mathlib/blob/a04c7e20c8a19018201bc772c414f7b2cd0d00b9/analysis/topology/continuity.lean#L412</a></p>
 
 
 {% endraw %}

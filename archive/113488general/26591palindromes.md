@@ -12,332 +12,325 @@ permalink: archive/113488general/26591palindromes.html
 
 {% raw %}
 #### [ Kevin Buzzard (Apr 03 2018 at 22:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124591860):
-For recreational reasons I was interested in working with lists which were palindromes, i.e. lists `G` satisfying `G = list.reverse G`. I wanted to prove a bunch of stuff about these things but I couldn't prove anything by induction because lists don't decompose like that. I wanted to write a general `G` of length 2 or more as `G=[head G] ++ middle G ++ [head G]` and have a recursor of the form `C [] -> C [x] -> forall palindromes H, C H -> C ([a] ++ H ++ [a]) -> forall palindromes G, C G`
+<p>For recreational reasons I was interested in working with lists which were palindromes, i.e. lists <code>G</code> satisfying <code>G = list.reverse G</code>. I wanted to prove a bunch of stuff about these things but I couldn't prove anything by induction because lists don't decompose like that. I wanted to write a general <code>G</code> of length 2 or more as <code>G=[head G] ++ middle G ++ [head G]</code> and have a recursor of the form <code>C [] -&gt; C [x] -&gt; forall palindromes H, C H -&gt; C ([a] ++ H ++ [a]) -&gt; forall palindromes G, C G</code></p>
 
 #### [ Kevin Buzzard (Apr 03 2018 at 22:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124591884):
-What is the idiomatic way to do this in Lean? I am at the stage now where I could probably get several methods to go through
+<p>What is the idiomatic way to do this in Lean? I am at the stage now where I could probably get several methods to go through</p>
 
 #### [ Kevin Buzzard (Apr 03 2018 at 22:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124591886):
-but I would like to choose the one with the least pain.
+<p>but I would like to choose the one with the least pain.</p>
 
 #### [ Kevin Buzzard (Apr 03 2018 at 22:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124591890):
-Should I actually make a new inductive type?
+<p>Should I actually make a new inductive type?</p>
 
 #### [ Mario Carneiro (Apr 03 2018 at 22:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124593010):
-You should look at `list.reverse_rec_on` for a similar eliminator. You could encode it as an inductive predicate, and then prove that it is equivalent to `g = list.reverse g`, or you could prove the eliminator you wrote with `palindromes` defined using reverse
+<p>You should look at <code>list.reverse_rec_on</code> for a similar eliminator. You could encode it as an inductive predicate, and then prove that it is equivalent to <code>g = list.reverse g</code>, or you could prove the eliminator you wrote with <code>palindromes</code> defined using reverse</p>
 
 #### [ Chris Hughes (Apr 03 2018 at 22:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124593011):
-I stopped as soon as it got hard
-```lean
-inductive  palindrome : list α →  Prop
-| nil : palindrome []
-| singleton : ∀ a, palindrome [a]
-| cons : ∀ (a) (l), palindrome l → palindrome ([a] ++ l ++ [a])
+<p>I stopped as soon as it got hard</p>
+<div class="codehilite"><pre><span></span><span class="kn">inductive</span>  <span class="n">palindrome</span> <span class="o">:</span> <span class="n">list</span> <span class="n">α</span> <span class="bp">→</span>  <span class="kt">Prop</span>
+<span class="bp">|</span> <span class="n">nil</span> <span class="o">:</span> <span class="n">palindrome</span> <span class="o">[]</span>
+<span class="bp">|</span> <span class="n">singleton</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">a</span><span class="o">,</span> <span class="n">palindrome</span> <span class="o">[</span><span class="n">a</span><span class="o">]</span>
+<span class="bp">|</span> <span class="n">cons</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">a</span><span class="o">)</span> <span class="o">(</span><span class="n">l</span><span class="o">),</span> <span class="n">palindrome</span> <span class="n">l</span> <span class="bp">→</span> <span class="n">palindrome</span> <span class="o">([</span><span class="n">a</span><span class="o">]</span> <span class="bp">++</span> <span class="n">l</span> <span class="bp">++</span> <span class="o">[</span><span class="n">a</span><span class="o">])</span>
 
-lemma  palindrome_iff_eq_reverse {l : list α} : palindrome l ↔ l = list.reverse l :=
-⟨λ h, palindrome.rec_on h rfl (λ a, rfl) (λ a l h₁ h₂,
-begin
-conv {to_lhs, rw h₂},
-rw ← list.reverse_singleton a,
-simp,
-end), list.rec_on l (λ h, palindrome.nil)
-(λ a l h, begin apply list.reverse_rec_on l, end)⟩
-```
+<span class="kn">lemma</span>  <span class="n">palindrome_iff_eq_reverse</span> <span class="o">{</span><span class="n">l</span> <span class="o">:</span> <span class="n">list</span> <span class="n">α</span><span class="o">}</span> <span class="o">:</span> <span class="n">palindrome</span> <span class="n">l</span> <span class="bp">↔</span> <span class="n">l</span> <span class="bp">=</span> <span class="n">list</span><span class="bp">.</span><span class="n">reverse</span> <span class="n">l</span> <span class="o">:=</span>
+<span class="bp">⟨λ</span> <span class="n">h</span><span class="o">,</span> <span class="n">palindrome</span><span class="bp">.</span><span class="n">rec_on</span> <span class="n">h</span> <span class="n">rfl</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">a</span><span class="o">,</span> <span class="n">rfl</span><span class="o">)</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">a</span> <span class="n">l</span> <span class="n">h₁</span> <span class="n">h₂</span><span class="o">,</span>
+<span class="k">begin</span>
+<span class="n">conv</span> <span class="o">{</span><span class="n">to_lhs</span><span class="o">,</span> <span class="n">rw</span> <span class="n">h₂</span><span class="o">},</span>
+<span class="n">rw</span> <span class="err">←</span> <span class="n">list</span><span class="bp">.</span><span class="n">reverse_singleton</span> <span class="n">a</span><span class="o">,</span>
+<span class="n">simp</span><span class="o">,</span>
+<span class="kn">end</span><span class="o">),</span> <span class="n">list</span><span class="bp">.</span><span class="n">rec_on</span> <span class="n">l</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">h</span><span class="o">,</span> <span class="n">palindrome</span><span class="bp">.</span><span class="n">nil</span><span class="o">)</span>
+<span class="o">(</span><span class="bp">λ</span> <span class="n">a</span> <span class="n">l</span> <span class="n">h</span><span class="o">,</span> <span class="k">begin</span> <span class="n">apply</span> <span class="n">list</span><span class="bp">.</span><span class="n">reverse_rec_on</span> <span class="n">l</span><span class="o">,</span> <span class="kn">end</span><span class="o">)</span><span class="bp">⟩</span>
+</pre></div>
 
 #### [ Mario Carneiro (Apr 03 2018 at 22:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124593343):
-In the cons case you have `a::l = list.reverse (a::l) = l.reverse ++ [a]`. By cases on `l.reverse`, if `l.reverse = []` then `a::l = [a]` is a palindrome, and if `l.reverse = b::l'` then `a::l = b::l'++[a]` so `a = b` and `l = l' ++ [a]`, so `a :: l'.reverse = l.reverse = a::l'` and hence `l' = l'.reverse`, so `l'` is a palindrome by IH and hence `a::l` is a palindrome
+<p>In the cons case you have <code>a::l = list.reverse (a::l) = l.reverse ++ [a]</code>. By cases on <code>l.reverse</code>, if <code>l.reverse = []</code> then <code>a::l = [a]</code> is a palindrome, and if <code>l.reverse = b::l'</code> then <code>a::l = b::l'++[a]</code> so <code>a = b</code> and <code>l = l' ++ [a]</code>, so <code>a :: l'.reverse = l.reverse = a::l'</code> and hence <code>l' = l'.reverse</code>, so <code>l'</code> is a palindrome by IH and hence <code>a::l</code> is a palindrome</p>
 
 #### [ Chris Hughes (Apr 03 2018 at 23:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124594253):
-Is there a lemma saying `a :: l = b :: m -> a = b`?
+<p>Is there a lemma saying <code>a :: l = b :: m -&gt; a = b</code>?</p>
 
 #### [ Kevin Buzzard (Apr 03 2018 at 23:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124594260):
-no_confusion
+<p>no_confusion</p>
 
 #### [ Kevin Buzzard (Apr 03 2018 at 23:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124594271):
-or cons_inj or whatever
+<p>or cons_inj or whatever</p>
 
 #### [ Chris Hughes (Apr 03 2018 at 23:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124594377):
-cons_inj tells me about the lists being equal.
+<p>cons_inj tells me about the lists being equal.</p>
 
 #### [ Sebastian Ullrich (Apr 03 2018 at 23:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124594398):
-or the `injection` tactic
+<p>or the <code>injection</code> tactic</p>
 
 #### [ Chris Hughes (Apr 03 2018 at 23:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124594462):
-Thanks @**Sebastian Ullrich** I'd never used injection successfully before.
+<p>Thanks <span class="user-mention" data-user-id="110024">@Sebastian Ullrich</span> I'd never used injection successfully before.</p>
 
 #### [ Kevin Buzzard (Apr 03 2018 at 23:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124595081):
-`example {β : Type*} (a b : β) (l m : list β) : a :: l = b :: m -> a = b :=  λ H, (list.cons.inj H).1`
+<p><code>example {β : Type*} (a b : β) (l m : list β) : a :: l = b :: m -&gt; a = b :=  λ H, (list.cons.inj H).1</code></p>
 
 #### [ Kevin Buzzard (Apr 03 2018 at 23:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124595142):
-I feel confident with this sort of stuff now I've seen how it all works.
+<p>I feel confident with this sort of stuff now I've seen how it all works.</p>
 
 #### [ Kevin Buzzard (Apr 03 2018 at 23:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124595241):
-`example {β : Type*} (a b : β) (l m : list β) : a :: l = b :: m -> a = b := λ H, @list.no_confusion _ _ (a::l) (b::m) H (λ x y,x)`
+<p><code>example {β : Type*} (a b : β) (l m : list β) : a :: l = b :: m -&gt; a = b := λ H, @list.no_confusion _ _ (a::l) (b::m) H (λ x y,x)</code></p>
 
 #### [ Kevin Buzzard (Apr 03 2018 at 23:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124595265):
-Chris, it was your questioning a week last Thurs which pushed me to learn this stuff. We didn't quite go as far as we should have done. We looked at no_confusion for bool and nat, but if you look at it for list you see how all the terms involved in the constructors are used.
+<p>Chris, it was your questioning a week last Thurs which pushed me to learn this stuff. We didn't quite go as far as we should have done. We looked at no_confusion for bool and nat, but if you look at it for list you see how all the terms involved in the constructors are used.</p>
 
 #### [ Kevin Buzzard (Apr 03 2018 at 23:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124595342):
-``` 
-variables {a b : β} {L M : list β} {P : Type}
+<div class="codehilite"><pre><span></span>variables {a b : β} {L M : list β} {P : Type}
 #reduce list.no_confusion_type P (a::L) (b::M) -- (a = b → L = M → P) → P
-```
+</pre></div>
 
 #### [ Kevin Buzzard (Apr 03 2018 at 23:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124595391):
-You use no_confusion to make an instance of that type.
+<p>You use no_confusion to make an instance of that type.</p>
 
 #### [ Kevin Buzzard (Apr 03 2018 at 23:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124595732):
-```quote
-In the cons case you have `a::l = list.reverse (a::l) = l.reverse ++ [a]`. By cases on `l.reverse`, if `l.reverse = []` then `a::l = [a]` is a palindrome, and if `l.reverse = b::l'` then `a::l = b::l'++[a]` so `a = b` and `l = l' ++ [a]`, so `a :: l'.reverse = l.reverse = a::l'` and hence `l' = l'.reverse`, so `l'` is a palindrome by IH and hence `a::l` is a palindrome
-```
-For me, I can prove l' = l'.reverse but the inductive hypothesis doesn't let me conclude l' is a palindrome, the inductive hypothesis the way I've set it up says at this point that if (a::l') is its own reverse then (a::l') is a palindrome.
+<blockquote>
+<p>In the cons case you have <code>a::l = list.reverse (a::l) = l.reverse ++ [a]</code>. By cases on <code>l.reverse</code>, if <code>l.reverse = []</code> then <code>a::l = [a]</code> is a palindrome, and if <code>l.reverse = b::l'</code> then <code>a::l = b::l'++[a]</code> so <code>a = b</code> and <code>l = l' ++ [a]</code>, so <code>a :: l'.reverse = l.reverse = a::l'</code> and hence <code>l' = l'.reverse</code>, so <code>l'</code> is a palindrome by IH and hence <code>a::l</code> is a palindrome</p>
+</blockquote>
+<p>For me, I can prove l' = l'.reverse but the inductive hypothesis doesn't let me conclude l' is a palindrome, the inductive hypothesis the way I've set it up says at this point that if (a::l') is its own reverse then (a::l') is a palindrome.</p>
 
 #### [ Kevin Buzzard (Apr 03 2018 at 23:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124595764):
-Somehow this is exactly the issue I keep running into: list has the wrong recursor for me.
+<p>Somehow this is exactly the issue I keep running into: list has the wrong recursor for me.</p>
 
 #### [ Kevin Buzzard (Apr 03 2018 at 23:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124595820):
-I can see that because I have `list.rec_on` and `list.reverse_rec_on` I should have all I need, but I don't know what `C` should be in some sense (what is `C` called? The motive?)
+<p>I can see that because I have <code>list.rec_on</code> and <code>list.reverse_rec_on</code> I should have all I need, but I don't know what <code>C</code> should be in some sense (what is <code>C</code> called? The motive?)</p>
 
 #### [ Chris Hughes (Apr 04 2018 at 00:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124596524):
-I've been struggling with this too. I think the best would be some sort of strong induction on the list.
+<p>I've been struggling with this too. I think the best would be some sort of strong induction on the list.</p>
 
 #### [ Mario Carneiro (Apr 04 2018 at 00:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124597147):
-You should do strong induction on the length of the list
+<p>You should do strong induction on the length of the list</p>
 
 #### [ Kenny Lau (Apr 04 2018 at 00:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124597485):
-@**Kevin Buzzard** you could use a custom recursor
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> you could use a custom recursor</p>
 
 #### [ Kenny Lau (Apr 04 2018 at 00:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124597486):
-see https://github.com/kckennylau/Lean/blob/master/recursion.lean
+<p>see <a href="https://github.com/kckennylau/Lean/blob/master/recursion.lean" target="_blank" title="https://github.com/kckennylau/Lean/blob/master/recursion.lean">https://github.com/kckennylau/Lean/blob/master/recursion.lean</a></p>
 
 #### [ Kenny Lau (Apr 04 2018 at 00:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124597487):
-for an example
+<p>for an example</p>
 
 #### [ Ching-Tsun Chou (Apr 04 2018 at 01:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124599343):
-The trick to prove the lemma Chris wants to prove is to consider the two cases (a) length l = 2*n and (b) length l = 2*n + 1 separately and then use induction on n in each case.
+<p>The trick to prove the lemma Chris wants to prove is to consider the two cases (a) length l = 2<em>n and (b) length l = 2</em>n + 1 separately and then use induction on n in each case.</p>
 
 #### [ Kenny Lau (Apr 04 2018 at 01:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124599350):
-omg someone from hong kong
+<p>omg someone from hong kong</p>
 
 #### [ Chris Hughes (Apr 04 2018 at 21:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124638255):
-Finally did it. 
-```lean
-inductive palindrome : list α → Prop
-| nil       : palindrome []
-| singleton : ∀ a, palindrome [a]
-| cons      : ∀ (a) (l), palindrome l → palindrome ([a] ++ l ++ [a])
+<p>Finally did it. </p>
+<div class="codehilite"><pre><span></span><span class="kn">inductive</span> <span class="n">palindrome</span> <span class="o">:</span> <span class="n">list</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Prop</span>
+<span class="bp">|</span> <span class="n">nil</span>       <span class="o">:</span> <span class="n">palindrome</span> <span class="o">[]</span>
+<span class="bp">|</span> <span class="n">singleton</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">a</span><span class="o">,</span> <span class="n">palindrome</span> <span class="o">[</span><span class="n">a</span><span class="o">]</span>
+<span class="bp">|</span> <span class="n">cons</span>      <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">a</span><span class="o">)</span> <span class="o">(</span><span class="n">l</span><span class="o">),</span> <span class="n">palindrome</span> <span class="n">l</span> <span class="bp">→</span> <span class="n">palindrome</span> <span class="o">([</span><span class="n">a</span><span class="o">]</span> <span class="bp">++</span> <span class="n">l</span> <span class="bp">++</span> <span class="o">[</span><span class="n">a</span><span class="o">])</span>
 
-lemma eq_reverse_of_palindrome {l : list α} : palindrome l → l = list.reverse l :=
-λ h, palindrome.rec_on h rfl (λ a, rfl) (λ a l h₁ h₂, 
-begin 
-  conv {to_lhs, rw h₂},
-  rw ← list.reverse_singleton a,
-  simp,
-end)
+<span class="kn">lemma</span> <span class="n">eq_reverse_of_palindrome</span> <span class="o">{</span><span class="n">l</span> <span class="o">:</span> <span class="n">list</span> <span class="n">α</span><span class="o">}</span> <span class="o">:</span> <span class="n">palindrome</span> <span class="n">l</span> <span class="bp">→</span> <span class="n">l</span> <span class="bp">=</span> <span class="n">list</span><span class="bp">.</span><span class="n">reverse</span> <span class="n">l</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="n">h</span><span class="o">,</span> <span class="n">palindrome</span><span class="bp">.</span><span class="n">rec_on</span> <span class="n">h</span> <span class="n">rfl</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">a</span><span class="o">,</span> <span class="n">rfl</span><span class="o">)</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">a</span> <span class="n">l</span> <span class="n">h₁</span> <span class="n">h₂</span><span class="o">,</span>
+<span class="k">begin</span>
+  <span class="n">conv</span> <span class="o">{</span><span class="n">to_lhs</span><span class="o">,</span> <span class="n">rw</span> <span class="n">h₂</span><span class="o">},</span>
+  <span class="n">rw</span> <span class="err">←</span> <span class="n">list</span><span class="bp">.</span><span class="n">reverse_singleton</span> <span class="n">a</span><span class="o">,</span>
+  <span class="n">simp</span><span class="o">,</span>
+<span class="kn">end</span><span class="o">)</span>
 
-open list
-lemma palindrome_of_eq_reverse  : ∀ {l : list α}, l = list.reverse l → palindrome l 
-| list.nil := λ _, palindrome.nil
-| (a :: l) := begin
-  rw reverse_cons',
-  generalize hl' : l.reverse = l',
-  cases l'  with b l',
-  { assume h,
-    rw h,
-    exact palindrome.singleton _  },
-  { assume h,
-    have : a = b := by injection h,
-    rw this at *,
-    have h₁ : l = l' ++ [b] := by injection h,
-    have h₂ :  b :: l' = reverse [b] ++ reverse l' := 
-      by rwa  [← reverse_inj, hl', reverse_append] at h₁, 
-    have : l' = l'.reverse := by injection h₂,
-    rw h,
-    exact have h₂ : length l' < 1 + length l := 
-      by rw [h₁, add_comm, length_append];
-        exact lt_trans (lt_succ_self _) (lt_succ_self _),
-      palindrome.cons _ _ (palindrome_of_eq_reverse this) }
-end
-using_well_founded {rel_tac := λ _ _, `[exact ⟨_, measure_wf length⟩]}
-```
+<span class="kn">open</span> <span class="n">list</span>
+<span class="kn">lemma</span> <span class="n">palindrome_of_eq_reverse</span>  <span class="o">:</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">l</span> <span class="o">:</span> <span class="n">list</span> <span class="n">α</span><span class="o">},</span> <span class="n">l</span> <span class="bp">=</span> <span class="n">list</span><span class="bp">.</span><span class="n">reverse</span> <span class="n">l</span> <span class="bp">→</span> <span class="n">palindrome</span> <span class="n">l</span>
+<span class="bp">|</span> <span class="n">list</span><span class="bp">.</span><span class="n">nil</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="bp">_</span><span class="o">,</span> <span class="n">palindrome</span><span class="bp">.</span><span class="n">nil</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">a</span> <span class="bp">::</span> <span class="n">l</span><span class="o">)</span> <span class="o">:=</span> <span class="k">begin</span>
+  <span class="n">rw</span> <span class="n">reverse_cons&#39;</span><span class="o">,</span>
+  <span class="n">generalize</span> <span class="n">hl&#39;</span> <span class="o">:</span> <span class="n">l</span><span class="bp">.</span><span class="n">reverse</span> <span class="bp">=</span> <span class="n">l&#39;</span><span class="o">,</span>
+  <span class="n">cases</span> <span class="n">l&#39;</span>  <span class="k">with</span> <span class="n">b</span> <span class="n">l&#39;</span><span class="o">,</span>
+  <span class="o">{</span> <span class="k">assume</span> <span class="n">h</span><span class="o">,</span>
+    <span class="n">rw</span> <span class="n">h</span><span class="o">,</span>
+    <span class="n">exact</span> <span class="n">palindrome</span><span class="bp">.</span><span class="n">singleton</span> <span class="bp">_</span>  <span class="o">},</span>
+  <span class="o">{</span> <span class="k">assume</span> <span class="n">h</span><span class="o">,</span>
+    <span class="k">have</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">b</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">injection</span> <span class="n">h</span><span class="o">,</span>
+    <span class="n">rw</span> <span class="n">this</span> <span class="n">at</span> <span class="bp">*</span><span class="o">,</span>
+    <span class="k">have</span> <span class="n">h₁</span> <span class="o">:</span> <span class="n">l</span> <span class="bp">=</span> <span class="n">l&#39;</span> <span class="bp">++</span> <span class="o">[</span><span class="n">b</span><span class="o">]</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">injection</span> <span class="n">h</span><span class="o">,</span>
+    <span class="k">have</span> <span class="n">h₂</span> <span class="o">:</span>  <span class="n">b</span> <span class="bp">::</span> <span class="n">l&#39;</span> <span class="bp">=</span> <span class="n">reverse</span> <span class="o">[</span><span class="n">b</span><span class="o">]</span> <span class="bp">++</span> <span class="n">reverse</span> <span class="n">l&#39;</span> <span class="o">:=</span>
+      <span class="k">by</span> <span class="n">rwa</span>  <span class="o">[</span><span class="err">←</span> <span class="n">reverse_inj</span><span class="o">,</span> <span class="n">hl&#39;</span><span class="o">,</span> <span class="n">reverse_append</span><span class="o">]</span> <span class="n">at</span> <span class="n">h₁</span><span class="o">,</span>
+    <span class="k">have</span> <span class="o">:</span> <span class="n">l&#39;</span> <span class="bp">=</span> <span class="n">l&#39;</span><span class="bp">.</span><span class="n">reverse</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">injection</span> <span class="n">h₂</span><span class="o">,</span>
+    <span class="n">rw</span> <span class="n">h</span><span class="o">,</span>
+    <span class="n">exact</span> <span class="k">have</span> <span class="n">h₂</span> <span class="o">:</span> <span class="n">length</span> <span class="n">l&#39;</span> <span class="bp">&lt;</span> <span class="mi">1</span> <span class="bp">+</span> <span class="n">length</span> <span class="n">l</span> <span class="o">:=</span>
+      <span class="k">by</span> <span class="n">rw</span> <span class="o">[</span><span class="n">h₁</span><span class="o">,</span> <span class="n">add_comm</span><span class="o">,</span> <span class="n">length_append</span><span class="o">]</span><span class="bp">;</span>
+        <span class="n">exact</span> <span class="n">lt_trans</span> <span class="o">(</span><span class="n">lt_succ_self</span> <span class="bp">_</span><span class="o">)</span> <span class="o">(</span><span class="n">lt_succ_self</span> <span class="bp">_</span><span class="o">),</span>
+      <span class="n">palindrome</span><span class="bp">.</span><span class="n">cons</span> <span class="bp">_</span> <span class="bp">_</span> <span class="o">(</span><span class="n">palindrome_of_eq_reverse</span> <span class="n">this</span><span class="o">)</span> <span class="o">}</span>
+<span class="kn">end</span>
+<span class="n">using_well_founded</span> <span class="o">{</span><span class="n">rel_tac</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">,</span> <span class="bp">`</span><span class="o">[</span><span class="n">exact</span> <span class="bp">⟨_</span><span class="o">,</span> <span class="n">measure_wf</span> <span class="n">length</span><span class="bp">⟩</span><span class="o">]}</span>
+</pre></div>
 
 #### [ Kevin Buzzard (Apr 04 2018 at 21:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124638434):
-Yes, I did it too. Here's the reason I was asking: Q1(c) of http://www.olympiad.org.uk/papers/2015/bio/round_one.html
+<p>Yes, I did it too. Here's the reason I was asking: Q1(c) of <a href="http://www.olympiad.org.uk/papers/2015/bio/round_one.html" target="_blank" title="http://www.olympiad.org.uk/papers/2015/bio/round_one.html">http://www.olympiad.org.uk/papers/2015/bio/round_one.html</a></p>
 
 #### [ Kevin Buzzard (Apr 04 2018 at 21:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124638445):
-My son wrote code to do Q1(a) so I thought I'd write code to do Q1(c) because I thought that the idea of writing code to do 1c would be interesting to him.
+<p>My son wrote code to do Q1(a) so I thought I'd write code to do Q1(c) because I thought that the idea of writing code to do 1c would be interesting to him.</p>
 
 #### [ Kevin Buzzard (Apr 04 2018 at 22:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124639841):
-FWIW:
-```lean
-import data.list
-open list 
-universes u v
-variables {α : Type u} {β : Type v}
-inductive palindrome : list α → Prop
-| nil : palindrome []
-| one : ∀ a, palindrome [a] 
-| cons : ∀ a L, palindrome L → palindrome ((a :: L) ++ [a])
+<p>FWIW:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">list</span>
+<span class="kn">open</span> <span class="n">list</span>
+<span class="n">universes</span> <span class="n">u</span> <span class="n">v</span>
+<span class="kn">variables</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">}</span>
+<span class="kn">inductive</span> <span class="n">palindrome</span> <span class="o">:</span> <span class="n">list</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Prop</span>
+<span class="bp">|</span> <span class="n">nil</span> <span class="o">:</span> <span class="n">palindrome</span> <span class="o">[]</span>
+<span class="bp">|</span> <span class="n">one</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">a</span><span class="o">,</span> <span class="n">palindrome</span> <span class="o">[</span><span class="n">a</span><span class="o">]</span>
+<span class="bp">|</span> <span class="n">cons</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">a</span> <span class="n">L</span><span class="o">,</span> <span class="n">palindrome</span> <span class="n">L</span> <span class="bp">→</span> <span class="n">palindrome</span> <span class="o">((</span><span class="n">a</span> <span class="bp">::</span> <span class="n">L</span><span class="o">)</span> <span class="bp">++</span> <span class="o">[</span><span class="n">a</span><span class="o">])</span>
 
-namespace palindrome
-open palindrome 
+<span class="kn">namespace</span> <span class="n">palindrome</span>
+<span class="kn">open</span> <span class="n">palindrome</span>
 
-def is_rev_self (L : list β) : Prop := L = reverse L 
+<span class="n">def</span> <span class="n">is_rev_self</span> <span class="o">(</span><span class="n">L</span> <span class="o">:</span> <span class="n">list</span> <span class="n">β</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span> <span class="n">L</span> <span class="bp">=</span> <span class="n">reverse</span> <span class="n">L</span>
 
-lemma rev_aux (a b : β) (L : list β) : is_rev_self (a :: (L ++ [b])) → a = b ∧ is_rev_self L :=
-begin
-unfold is_rev_self,intro H,
-rw reverse_cons' at H,
-rw reverse_append at H,
-have H2 : a = b ∧ L ++ [b] = reverse L ++ [a],
-  simpa using H,
-split,exact H2.1,
-rw H2.1 at H2,
-have H3 := H2.2,
-rw H2.1 at H3,
-exact append_inj_left' H3 rfl,
-end 
+<span class="kn">lemma</span> <span class="n">rev_aux</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">β</span><span class="o">)</span> <span class="o">(</span><span class="n">L</span> <span class="o">:</span> <span class="n">list</span> <span class="n">β</span><span class="o">)</span> <span class="o">:</span> <span class="n">is_rev_self</span> <span class="o">(</span><span class="n">a</span> <span class="bp">::</span> <span class="o">(</span><span class="n">L</span> <span class="bp">++</span> <span class="o">[</span><span class="n">b</span><span class="o">]))</span> <span class="bp">→</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">b</span> <span class="bp">∧</span> <span class="n">is_rev_self</span> <span class="n">L</span> <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="n">unfold</span> <span class="n">is_rev_self</span><span class="o">,</span><span class="n">intro</span> <span class="n">H</span><span class="o">,</span>
+<span class="n">rw</span> <span class="n">reverse_cons&#39;</span> <span class="n">at</span> <span class="n">H</span><span class="o">,</span>
+<span class="n">rw</span> <span class="n">reverse_append</span> <span class="n">at</span> <span class="n">H</span><span class="o">,</span>
+<span class="k">have</span> <span class="n">H2</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">b</span> <span class="bp">∧</span> <span class="n">L</span> <span class="bp">++</span> <span class="o">[</span><span class="n">b</span><span class="o">]</span> <span class="bp">=</span> <span class="n">reverse</span> <span class="n">L</span> <span class="bp">++</span> <span class="o">[</span><span class="n">a</span><span class="o">],</span>
+  <span class="n">simpa</span> <span class="kn">using</span> <span class="n">H</span><span class="o">,</span>
+<span class="n">split</span><span class="o">,</span><span class="n">exact</span> <span class="n">H2</span><span class="bp">.</span><span class="mi">1</span><span class="o">,</span>
+<span class="n">rw</span> <span class="n">H2</span><span class="bp">.</span><span class="mi">1</span> <span class="n">at</span> <span class="n">H2</span><span class="o">,</span>
+<span class="k">have</span> <span class="n">H3</span> <span class="o">:=</span> <span class="n">H2</span><span class="bp">.</span><span class="mi">2</span><span class="o">,</span>
+<span class="n">rw</span> <span class="n">H2</span><span class="bp">.</span><span class="mi">1</span> <span class="n">at</span> <span class="n">H3</span><span class="o">,</span>
+<span class="n">exact</span> <span class="n">append_inj_left&#39;</span> <span class="n">H3</span> <span class="n">rfl</span><span class="o">,</span>
+<span class="kn">end</span>
 
 
-theorem palindrome_of_is_rev_self.aux (n : ℕ) : ∀ L : list β, L.length = n → is_rev_self L → palindrome L :=
-begin
-  unfold is_rev_self,
-  apply nat.strong_induction_on n,
-  clear n,intro n,
-  intro IH,
-  intro L,
-  cases L with a M,
-  { intros _ _,exact nil },
-  apply list.reverse_rec_on M,
-  { intros _ _, exact one a},
-  intros L b X,clear X,
-  intros HLL HRL,
-  have H2 := rev_aux a b L HRL,
-  rw ←cons_append,
-  rw H2.1,
-  apply cons,
-  have H3 : 1 + (1 + length L) = n,
-    simpa using HLL,
-  rw [←add_assoc,add_comm] at H3,
-  have H4 : length L < n,
-  rw ←H3,exact nat.lt_add_of_zero_lt_left (length L) 2 dec_trivial,
-  exact IH (length L) H4 L rfl H2.2,
-end 
+<span class="kn">theorem</span> <span class="n">palindrome_of_is_rev_self</span><span class="bp">.</span><span class="n">aux</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">L</span> <span class="o">:</span> <span class="n">list</span> <span class="n">β</span><span class="o">,</span> <span class="n">L</span><span class="bp">.</span><span class="n">length</span> <span class="bp">=</span> <span class="n">n</span> <span class="bp">→</span> <span class="n">is_rev_self</span> <span class="n">L</span> <span class="bp">→</span> <span class="n">palindrome</span> <span class="n">L</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">unfold</span> <span class="n">is_rev_self</span><span class="o">,</span>
+  <span class="n">apply</span> <span class="n">nat</span><span class="bp">.</span><span class="n">strong_induction_on</span> <span class="n">n</span><span class="o">,</span>
+  <span class="n">clear</span> <span class="n">n</span><span class="o">,</span><span class="n">intro</span> <span class="n">n</span><span class="o">,</span>
+  <span class="n">intro</span> <span class="n">IH</span><span class="o">,</span>
+  <span class="n">intro</span> <span class="n">L</span><span class="o">,</span>
+  <span class="n">cases</span> <span class="n">L</span> <span class="k">with</span> <span class="n">a</span> <span class="n">M</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">intros</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">,</span><span class="n">exact</span> <span class="n">nil</span> <span class="o">},</span>
+  <span class="n">apply</span> <span class="n">list</span><span class="bp">.</span><span class="n">reverse_rec_on</span> <span class="n">M</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">intros</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">,</span> <span class="n">exact</span> <span class="n">one</span> <span class="n">a</span><span class="o">},</span>
+  <span class="n">intros</span> <span class="n">L</span> <span class="n">b</span> <span class="n">X</span><span class="o">,</span><span class="n">clear</span> <span class="n">X</span><span class="o">,</span>
+  <span class="n">intros</span> <span class="n">HLL</span> <span class="n">HRL</span><span class="o">,</span>
+  <span class="k">have</span> <span class="n">H2</span> <span class="o">:=</span> <span class="n">rev_aux</span> <span class="n">a</span> <span class="n">b</span> <span class="n">L</span> <span class="n">HRL</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="err">←</span><span class="n">cons_append</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="n">H2</span><span class="bp">.</span><span class="mi">1</span><span class="o">,</span>
+  <span class="n">apply</span> <span class="n">cons</span><span class="o">,</span>
+  <span class="k">have</span> <span class="n">H3</span> <span class="o">:</span> <span class="mi">1</span> <span class="bp">+</span> <span class="o">(</span><span class="mi">1</span> <span class="bp">+</span> <span class="n">length</span> <span class="n">L</span><span class="o">)</span> <span class="bp">=</span> <span class="n">n</span><span class="o">,</span>
+    <span class="n">simpa</span> <span class="kn">using</span> <span class="n">HLL</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="o">[</span><span class="err">←</span><span class="n">add_assoc</span><span class="o">,</span><span class="n">add_comm</span><span class="o">]</span> <span class="n">at</span> <span class="n">H3</span><span class="o">,</span>
+  <span class="k">have</span> <span class="n">H4</span> <span class="o">:</span> <span class="n">length</span> <span class="n">L</span> <span class="bp">&lt;</span> <span class="n">n</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="err">←</span><span class="n">H3</span><span class="o">,</span><span class="n">exact</span> <span class="n">nat</span><span class="bp">.</span><span class="n">lt_add_of_zero_lt_left</span> <span class="o">(</span><span class="n">length</span> <span class="n">L</span><span class="o">)</span> <span class="mi">2</span> <span class="n">dec_trivial</span><span class="o">,</span>
+  <span class="n">exact</span> <span class="n">IH</span> <span class="o">(</span><span class="n">length</span> <span class="n">L</span><span class="o">)</span> <span class="n">H4</span> <span class="n">L</span> <span class="n">rfl</span> <span class="n">H2</span><span class="bp">.</span><span class="mi">2</span><span class="o">,</span>
+<span class="kn">end</span>
 
-theorem palindrome_of_rev_self (L : list α) : is_rev_self L → palindrome L := 
-  palindrome_of_is_rev_self.aux (length L) L rfl 
+<span class="kn">theorem</span> <span class="n">palindrome_of_rev_self</span> <span class="o">(</span><span class="n">L</span> <span class="o">:</span> <span class="n">list</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">is_rev_self</span> <span class="n">L</span> <span class="bp">→</span> <span class="n">palindrome</span> <span class="n">L</span> <span class="o">:=</span>
+  <span class="n">palindrome_of_is_rev_self</span><span class="bp">.</span><span class="n">aux</span> <span class="o">(</span><span class="n">length</span> <span class="n">L</span><span class="o">)</span> <span class="n">L</span> <span class="n">rfl</span>
 
-theorem is_rev_self_of_palindrome (L : list α) : palindrome L → is_rev_self L :=
-begin
-  intro H,
-  induction H with a b M HPM HRM,
-  { unfold is_rev_self,refl},
-  { unfold is_rev_self,refl},
-  { unfold is_rev_self,unfold is_rev_self at HRM,
-    rw reverse_append,
-    rw reverse_singleton,
-    rw cons_append,
-    rw reverse_cons',
-    rw ←HRM,
-    simp,
-  }
-end
-end palindrome
-```
+<span class="kn">theorem</span> <span class="n">is_rev_self_of_palindrome</span> <span class="o">(</span><span class="n">L</span> <span class="o">:</span> <span class="n">list</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">palindrome</span> <span class="n">L</span> <span class="bp">→</span> <span class="n">is_rev_self</span> <span class="n">L</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">intro</span> <span class="n">H</span><span class="o">,</span>
+  <span class="n">induction</span> <span class="n">H</span> <span class="k">with</span> <span class="n">a</span> <span class="n">b</span> <span class="n">M</span> <span class="n">HPM</span> <span class="n">HRM</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">unfold</span> <span class="n">is_rev_self</span><span class="o">,</span><span class="n">refl</span><span class="o">},</span>
+  <span class="o">{</span> <span class="n">unfold</span> <span class="n">is_rev_self</span><span class="o">,</span><span class="n">refl</span><span class="o">},</span>
+  <span class="o">{</span> <span class="n">unfold</span> <span class="n">is_rev_self</span><span class="o">,</span><span class="n">unfold</span> <span class="n">is_rev_self</span> <span class="n">at</span> <span class="n">HRM</span><span class="o">,</span>
+    <span class="n">rw</span> <span class="n">reverse_append</span><span class="o">,</span>
+    <span class="n">rw</span> <span class="n">reverse_singleton</span><span class="o">,</span>
+    <span class="n">rw</span> <span class="n">cons_append</span><span class="o">,</span>
+    <span class="n">rw</span> <span class="n">reverse_cons&#39;</span><span class="o">,</span>
+    <span class="n">rw</span> <span class="err">←</span><span class="n">HRM</span><span class="o">,</span>
+    <span class="n">simp</span><span class="o">,</span>
+  <span class="o">}</span>
+<span class="kn">end</span>
+<span class="kn">end</span> <span class="n">palindrome</span>
+</pre></div>
 
 #### [ Kevin Buzzard (Apr 04 2018 at 22:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124639896):
-My code didn't get highlighted. Possibly because the FWIW was in the same post.
+<p>My code didn't get highlighted. Possibly because the FWIW was in the same post.</p>
 
 #### [ Kevin Buzzard (Apr 04 2018 at 22:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124639900):
-No wait Chris also didn't post a pure code post
+<p>No wait Chris also didn't post a pure code post</p>
 
 #### [ Kevin Buzzard (Apr 04 2018 at 22:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124639914):
-Aah got it, you have to write `lean` after the three backticks
+<p>Aah got it, you have to write <code>lean</code> after the three backticks</p>
 
 #### [ Kevin Buzzard (Apr 04 2018 at 22:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124640132):
-Oh Chris you didn't use strong induction for the main theorem! (`palindrome_of_eq_reverse`). I made an aux lemma saying "forall n, if list length is n then blah" and applied strong induction to n, and then deduced the statement we wanted as a trivial corollary.
+<p>Oh Chris you didn't use strong induction for the main theorem! (<code>palindrome_of_eq_reverse</code>). I made an aux lemma saying "forall n, if list length is n then blah" and applied strong induction to n, and then deduced the statement we wanted as a trivial corollary.</p>
 
 #### [ Chris Hughes (Apr 04 2018 at 22:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124640484):
-I did use strong induction, note ` using_well_founded {rel_tac := λ _ _, ``[exact ⟨_, measure_wf length⟩]} `
+<p>I did use strong induction, note <code> using_well_founded {rel_tac := λ _ _, ``[exact ⟨_, measure_wf length⟩]} </code></p>
+<p>I also did question 1a, although in 2^(2^n) time, so I might lose some points for that.</p>
+<div class="codehilite"><pre><span></span><span class="kn">instance</span> <span class="o">[</span><span class="n">decidable_eq</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">l</span> <span class="o">:</span> <span class="n">list</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">decidable</span> <span class="o">(</span><span class="n">palindrome</span> <span class="n">l</span><span class="o">)</span> <span class="o">:=</span>
+<span class="n">decidable_of_iff</span> <span class="o">(</span><span class="n">l</span> <span class="bp">=</span> <span class="n">l</span><span class="bp">.</span><span class="n">reverse</span><span class="o">)</span> <span class="bp">⟨λ</span> <span class="n">h</span><span class="o">,</span> <span class="n">palindrome_of_eq_reverse</span> <span class="n">h</span><span class="o">,</span> <span class="bp">λ</span> <span class="n">h</span><span class="o">,</span> <span class="n">eq_reverse_of_palindrome</span> <span class="n">h</span><span class="bp">⟩</span>
 
-I also did question 1a, although in 2^(2^n) time, so I might lose some points for that.
-```lean
-instance [decidable_eq α] (l : list α) : decidable (palindrome l) :=
-decidable_of_iff (l = l.reverse) ⟨λ h, palindrome_of_eq_reverse h, λ h, eq_reverse_of_palindrome h⟩
-
-def  block_palindromes (l : list α) [decidable_eq α] := (sublists (sublists l)).filter
-(λ m : list (list α), palindrome m ∧ m.foldl (++) nil = l)
-```
+<span class="n">def</span>  <span class="n">block_palindromes</span> <span class="o">(</span><span class="n">l</span> <span class="o">:</span> <span class="n">list</span> <span class="n">α</span><span class="o">)</span> <span class="o">[</span><span class="n">decidable_eq</span> <span class="n">α</span><span class="o">]</span> <span class="o">:=</span> <span class="o">(</span><span class="n">sublists</span> <span class="o">(</span><span class="n">sublists</span> <span class="n">l</span><span class="o">))</span><span class="bp">.</span><span class="n">filter</span>
+<span class="o">(</span><span class="bp">λ</span> <span class="n">m</span> <span class="o">:</span> <span class="n">list</span> <span class="o">(</span><span class="n">list</span> <span class="n">α</span><span class="o">),</span> <span class="n">palindrome</span> <span class="n">m</span> <span class="bp">∧</span> <span class="n">m</span><span class="bp">.</span><span class="n">foldl</span> <span class="o">(</span><span class="bp">++</span><span class="o">)</span> <span class="n">nil</span> <span class="bp">=</span> <span class="n">l</span><span class="o">)</span>
+</pre></div>
 
 #### [ Mario Carneiro (Apr 04 2018 at 23:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124641990):
-haha that solution
+<p>haha that solution</p>
 
 #### [ Mario Carneiro (Apr 04 2018 at 23:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124642031):
-You should write the deterministic bogosort, which enumerates permutations until it finds the sorted one
+<p>You should write the deterministic bogosort, which enumerates permutations until it finds the sorted one</p>
 
 #### [ Kevin Buzzard (Apr 04 2018 at 23:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124642035):
-The mark scheme is just a bunch of tests, and you have to pass each one in under a second to get the marks.
+<p>The mark scheme is just a bunch of tests, and you have to pass each one in under a second to get the marks.</p>
 
 #### [ Kevin Buzzard (Apr 05 2018 at 00:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124644819):
-So I finished the proof that the word has to have an even number of letters.
+<p>So I finished the proof that the word has to have an even number of letters.</p>
 
 #### [ Kevin Buzzard (Apr 05 2018 at 00:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124644823):
-My proof was 240 lines, longer than my son's program to do 1(a).
+<p>My proof was 240 lines, longer than my son's program to do 1(a).</p>
 
 #### [ Kevin Buzzard (Apr 05 2018 at 00:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124644873):
-But I had to develop some concepts from scratch; in a parallel universe they would have already been in some library.
+<p>But I had to develop some concepts from scratch; in a parallel universe they would have already been in some library.</p>
 
 #### [ Kevin Buzzard (Apr 05 2018 at 00:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124644889):
-It was quite an interesting task. The question is about the following definition:
+<p>It was quite an interesting task. The question is about the following definition:</p>
 
 #### [ Kevin Buzzard (Apr 05 2018 at 00:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124644891):
-```lean
-definition  listunfold : list (list α) → list α
-| [] := []
-| (a :: L) := a ++ (listunfold L)
-```
+<div class="codehilite"><pre><span></span><span class="kn">definition</span>  <span class="n">listunfold</span> <span class="o">:</span> <span class="n">list</span> <span class="o">(</span><span class="n">list</span> <span class="n">α</span><span class="o">)</span> <span class="bp">→</span> <span class="n">list</span> <span class="n">α</span>
+<span class="bp">|</span> <span class="o">[]</span> <span class="o">:=</span> <span class="o">[]</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">a</span> <span class="bp">::</span> <span class="n">L</span><span class="o">)</span> <span class="o">:=</span> <span class="n">a</span> <span class="bp">++</span> <span class="o">(</span><span class="n">listunfold</span> <span class="n">L</span><span class="o">)</span>
+</pre></div>
 
 #### [ Kevin Buzzard (Apr 05 2018 at 00:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124644939):
-but then I had to write `listunfold_append : listunfold (G1 ++ G2) = listunfold G1 ++ listunfold G2` and `listunfold_singleton`and so on
+<p>but then I had to write <code>listunfold_append : listunfold (G1 ++ G2) = listunfold G1 ++ listunfold G2</code> and <code>listunfold_singleton</code>and so on</p>
 
 #### [ Kevin Buzzard (Apr 05 2018 at 00:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124644960):
-And similarly for `palindrome` (the inductive prop) I had to prove palindrome iff L = reverse L
+<p>And similarly for <code>palindrome</code> (the inductive prop) I had to prove palindrome iff L = reverse L</p>
 
 #### [ Chris Hughes (Apr 05 2018 at 00:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124644967):
-Listunfold could also be defined as a fold. Then those two lemmas are probably there already because of associativity
+<p>Listunfold could also be defined as a fold. Then those two lemmas are probably there already because of associativity</p>
 
 #### [ Kevin Buzzard (Apr 05 2018 at 00:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124645013):
-Is that right?
+<p>Is that right?</p>
 
 #### [ Kevin Buzzard (Apr 05 2018 at 00:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124645022):
-I feel like if I defined it as a fold then I would then have to prove the two things I've used for my definition immediately afterwards
+<p>I feel like if I defined it as a fold then I would then have to prove the two things I've used for my definition immediately afterwards</p>
 
 #### [ Chris Hughes (Apr 05 2018 at 00:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124645024):
-Not in that exact form, but they'd be quite easy.
+<p>Not in that exact form, but they'd be quite easy.</p>
 
 #### [ Kevin Buzzard (Apr 05 2018 at 00:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124645025):
-and then the same proof for my append and singleton :-)
+<p>and then the same proof for my append and singleton :-)</p>
 
 #### [ Kevin Buzzard (Apr 05 2018 at 00:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124645031):
-Oh everything was easy, but of course because this was recreational I did it all in tactic mode so my proofs go on for ages :-)
+<p>Oh everything was easy, but of course because this was recreational I did it all in tactic mode so my proofs go on for ages :-)</p>
 
 #### [ Chris Hughes (Apr 05 2018 at 00:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124645032):
-Those two things are lemmas about fold probably
+<p>Those two things are lemmas about fold probably</p>
 
 #### [ Kevin Buzzard (Apr 05 2018 at 00:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124645079):
-You might well be right. I feel like I know enough Lean to write the definitions and basic properties of these new concepts like listunfold or palindrome
+<p>You might well be right. I feel like I know enough Lean to write the definitions and basic properties of these new concepts like listunfold or palindrome</p>
 
 #### [ Kevin Buzzard (Apr 05 2018 at 00:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124645080):
-but
+<p>but</p>
 
 #### [ Kevin Buzzard (Apr 05 2018 at 00:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124645084):
-I feel like if I really knew everything that was already there, properly, then I would write things far more efficiently.
+<p>I feel like if I really knew everything that was already there, properly, then I would write things far more efficiently.</p>
 
 #### [ Chris Hughes (Apr 05 2018 at 00:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124645097):
-It's not about knowing what's there, it's knowing what's probably there.
+<p>It's not about knowing what's there, it's knowing what's probably there.</p>
 
 #### [ Mario Carneiro (Apr 05 2018 at 03:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124650234):
-Your `listunfold` is defined in core and proven in mathlib, by the name `list.join`. It is the monad "flattening" operation for lists
+<p>Your <code>listunfold</code> is defined in core and proven in mathlib, by the name <code>list.join</code>. It is the monad "flattening" operation for lists</p>
 
 
 {% endraw %}

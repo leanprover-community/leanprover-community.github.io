@@ -12,311 +12,312 @@ permalink: archive/116395maths/80189weirdtypeclassissue.html
 
 {% raw %}
 #### [ Johan Commelin (Oct 18 2018 at 09:44)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/weird%20type%20class%20issue/near/136026131):
-Consider this code:
-```lean
-import category_theory.category
+<p>Consider this code:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">category</span>
 
-open category_theory
+<span class="kn">open</span> <span class="n">category_theory</span>
 
-universes u u₁ u₂ v v₁ v₂ w w₁ w₂
+<span class="n">universes</span> <span class="n">u</span> <span class="n">u₁</span> <span class="n">u₂</span> <span class="n">v</span> <span class="n">v₁</span> <span class="n">v₂</span> <span class="n">w</span> <span class="n">w₁</span> <span class="n">w₂</span>
 
-variables {C : Type u₁} [𝒞 : category.{u₁ u₂} C] --[@has_limits.{u₁ u₂} C 𝒞]
-include 𝒞
+<span class="kn">variables</span> <span class="o">{</span><span class="n">C</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u₁</span><span class="o">}</span> <span class="o">[</span><span class="err">𝒞</span> <span class="o">:</span> <span class="n">category</span><span class="bp">.</span><span class="o">{</span><span class="n">u₁</span> <span class="n">u₂</span><span class="o">}</span> <span class="n">C</span><span class="o">]</span> <span class="c1">--[@has_limits.{u₁ u₂} C 𝒞]</span>
+<span class="n">include</span> <span class="err">𝒞</span>
 
--- todo should this be done as a subfunctor?
-structure covering_family (U : C) :=
-(I : Type u₂)
-(obj : I → C)
-(hom : Π {i : I}, obj i ⟶ U)
+<span class="c1">-- todo should this be done as a subfunctor?</span>
+<span class="kn">structure</span> <span class="n">covering_family</span> <span class="o">(</span><span class="n">U</span> <span class="o">:</span> <span class="n">C</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">I</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u₂</span><span class="o">)</span>
+<span class="o">(</span><span class="n">obj</span> <span class="o">:</span> <span class="n">I</span> <span class="bp">→</span> <span class="n">C</span><span class="o">)</span>
+<span class="o">(</span><span class="n">hom</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">{</span><span class="n">i</span> <span class="o">:</span> <span class="n">I</span><span class="o">},</span> <span class="n">obj</span> <span class="n">i</span> <span class="err">⟶</span> <span class="n">U</span><span class="o">)</span>
 
-#print covering_family
+<span class="bp">#</span><span class="kn">print</span> <span class="n">covering_family</span>
 
-structure coverage :=
-(covers : Π {U : C}, set (covering_family U)) -- red squiggles under "covering_family"
-```
-I get the following error:
-```lean
-failed to synthesize type class instance for
-C : Type u₁,
-𝒞 : category C,
-C : Type u₁,
-𝒞 : category C,
-U : C
-⊢ category C
-```
+<span class="kn">structure</span> <span class="n">coverage</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">covers</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">{</span><span class="n">U</span> <span class="o">:</span> <span class="n">C</span><span class="o">},</span> <span class="n">set</span> <span class="o">(</span><span class="n">covering_family</span> <span class="n">U</span><span class="o">))</span> <span class="c1">-- red squiggles under &quot;covering_family&quot;</span>
+</pre></div>
+
+
+<p>I get the following error:</p>
+<div class="codehilite"><pre><span></span><span class="n">failed</span> <span class="n">to</span> <span class="n">synthesize</span> <span class="n">type</span> <span class="n">class</span> <span class="kn">instance</span> <span class="n">for</span>
+<span class="n">C</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u₁</span><span class="o">,</span>
+<span class="err">𝒞</span> <span class="o">:</span> <span class="n">category</span> <span class="n">C</span><span class="o">,</span>
+<span class="n">C</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u₁</span><span class="o">,</span>
+<span class="err">𝒞</span> <span class="o">:</span> <span class="n">category</span> <span class="n">C</span><span class="o">,</span>
+<span class="n">U</span> <span class="o">:</span> <span class="n">C</span>
+<span class="err">⊢</span> <span class="n">category</span> <span class="n">C</span>
+</pre></div>
 
 #### [ Johan Commelin (Oct 18 2018 at 09:45)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/weird%20type%20class%20issue/near/136026148):
-Why are `C` and the category structure duplicated there? And why can't it resolve the type class issue?
+<p>Why are <code>C</code> and the category structure duplicated there? And why can't it resolve the type class issue?</p>
 
 #### [ Johannes Hölzl (Oct 18 2018 at 09:46)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/weird%20type%20class%20issue/near/136026219):
-what happens if you remove the `include` and write the variables directly as parameters for `coverage`?
+<p>what happens if you remove the <code>include</code> and write the variables directly as parameters for <code>coverage</code>?</p>
 
 #### [ Johan Commelin (Oct 18 2018 at 09:47)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/weird%20type%20class%20issue/near/136026236):
-These includes are all over the place in Scott's library. If you remove it you get red squiggles under the `⟶` in `obj i ⟶ U`.
+<p>These includes are all over the place in Scott's library. If you remove it you get red squiggles under the <code>⟶</code> in <code>obj i ⟶ U</code>.</p>
 
 #### [ Johan Commelin (Oct 18 2018 at 09:49)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/weird%20type%20class%20issue/near/136026298):
-```lean
-def coverage := Π {U : C}, set (covering_family U)
-```
-gives the error
-```lean
-failed to synthesize type class instance for
-C : Type u₁,
-𝒞 : category C,
-U : C
-⊢ category C
-```
-So now the duplication is gone. But it still can't resolve the type class...
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">coverage</span> <span class="o">:=</span> <span class="bp">Π</span> <span class="o">{</span><span class="n">U</span> <span class="o">:</span> <span class="n">C</span><span class="o">},</span> <span class="n">set</span> <span class="o">(</span><span class="n">covering_family</span> <span class="n">U</span><span class="o">)</span>
+</pre></div>
+
+
+<p>gives the error</p>
+<div class="codehilite"><pre><span></span><span class="n">failed</span> <span class="n">to</span> <span class="n">synthesize</span> <span class="n">type</span> <span class="n">class</span> <span class="kn">instance</span> <span class="n">for</span>
+<span class="n">C</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u₁</span><span class="o">,</span>
+<span class="err">𝒞</span> <span class="o">:</span> <span class="n">category</span> <span class="n">C</span><span class="o">,</span>
+<span class="n">U</span> <span class="o">:</span> <span class="n">C</span>
+<span class="err">⊢</span> <span class="n">category</span> <span class="n">C</span>
+</pre></div>
+
+
+<p>So now the duplication is gone. But it still can't resolve the type class...</p>
 
 #### [ Johan Commelin (Oct 18 2018 at 09:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/weird%20type%20class%20issue/near/136026368):
-The following works but is very ugly.
-```lean
-def coverage := Π {U : C}, set (@covering_family _ 𝒞 U)
-```
+<p>The following works but is very ugly.</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">coverage</span> <span class="o">:=</span> <span class="bp">Π</span> <span class="o">{</span><span class="n">U</span> <span class="o">:</span> <span class="n">C</span><span class="o">},</span> <span class="n">set</span> <span class="o">(</span><span class="bp">@</span><span class="n">covering_family</span> <span class="bp">_</span> <span class="err">𝒞</span> <span class="n">U</span><span class="o">)</span>
+</pre></div>
 
 #### [ Johan Commelin (Oct 18 2018 at 13:20)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/weird%20type%20class%20issue/near/136034898):
-In general I think the fact that we need `include 𝒞` all the time is a sign that something is wrong. But I have no clue what is wrong and how to fix it.
+<p>In general I think the fact that we need <code>include 𝒞</code> all the time is a sign that something is wrong. But I have no clue what is wrong and how to fix it.</p>
 
 #### [ Reid Barton (Oct 18 2018 at 14:45)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/weird%20type%20class%20issue/near/136039835):
-I usually include the universe parameters when I run into this kind of issue, like `covering_family.{u\1 u\2}`. (BTW, usually we use a `v`-type letter for the morphism universe.)
-I have no idea about the duplicate display in the error message though.
+<p>I usually include the universe parameters when I run into this kind of issue, like <code>covering_family.{u\1 u\2}</code>. (BTW, usually we use a <code>v</code>-type letter for the morphism universe.)<br>
+I have no idea about the duplicate display in the error message though.</p>
 
 #### [ Johan Commelin (Oct 18 2018 at 14:56)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/weird%20type%20class%20issue/near/136040495):
-I currently have
-```lean
-import category_theory.examples.topological_spaces
-import category_theory.opposites
-import category_theory.yoneda
-import category_theory.limits.equalizers
-import category_theory.limits.products
+<p>I currently have</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">examples</span><span class="bp">.</span><span class="n">topological_spaces</span>
+<span class="kn">import</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">opposites</span>
+<span class="kn">import</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">yoneda</span>
+<span class="kn">import</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">limits</span><span class="bp">.</span><span class="n">equalizers</span>
+<span class="kn">import</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">limits</span><span class="bp">.</span><span class="n">products</span>
 
-open category_theory
+<span class="kn">open</span> <span class="n">category_theory</span>
 
-universes u u₁ u₂ v v₁ v₂ w w₁ w₂
+<span class="n">universes</span> <span class="n">u</span> <span class="n">u₁</span> <span class="n">u₂</span> <span class="n">v</span> <span class="n">v₁</span> <span class="n">v₂</span> <span class="n">w</span> <span class="n">w₁</span> <span class="n">w₂</span>
 
-namespace category_theory.limits
-variables {C : Type u₁} [𝒞 : category.{u₁ u₂} C]
-include 𝒞
+<span class="kn">namespace</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">limits</span>
+<span class="kn">variables</span> <span class="o">{</span><span class="n">C</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u₁</span><span class="o">}</span> <span class="o">[</span><span class="err">𝒞</span> <span class="o">:</span> <span class="n">category</span><span class="bp">.</span><span class="o">{</span><span class="n">u₁</span> <span class="n">u₂</span><span class="o">}</span> <span class="n">C</span><span class="o">]</span>
+<span class="n">include</span> <span class="err">𝒞</span>
 
-variables [has_coequalizers.{u₁ u₂} C] {Y Z : C} (f g : Y ⟶ Z)
+<span class="kn">variables</span> <span class="o">[</span><span class="n">has_coequalizers</span><span class="bp">.</span><span class="o">{</span><span class="n">u₁</span> <span class="n">u₂</span><span class="o">}</span> <span class="n">C</span><span class="o">]</span> <span class="o">{</span><span class="n">Y</span> <span class="n">Z</span> <span class="o">:</span> <span class="n">C</span><span class="o">}</span> <span class="o">(</span><span class="n">f</span> <span class="n">g</span> <span class="o">:</span> <span class="n">Y</span> <span class="err">⟶</span> <span class="n">Z</span><span class="o">)</span>
 
-def coequalizer.cofork := has_coequalizers.coequalizer.{u₁ u₂} f g
-def coequalizer := (coequalizer.cofork f g).X
-def coequalizer.π : Z ⟶ (coequalizer f g) := (coequalizer.cofork f g).π
-@[search] def coequalizer.w : f ≫ (coequalizer.π f g) = g ≫ (coequalizer.π f g) := (coequalizer.cofork f g).w
-def coequalizer.universal_property : is_coequalizer (coequalizer.cofork f g) :=
-has_coequalizers.is_coequalizer.{u₁ u₂} C f g
+<span class="n">def</span> <span class="n">coequalizer</span><span class="bp">.</span><span class="n">cofork</span> <span class="o">:=</span> <span class="n">has_coequalizers</span><span class="bp">.</span><span class="n">coequalizer</span><span class="bp">.</span><span class="o">{</span><span class="n">u₁</span> <span class="n">u₂</span><span class="o">}</span> <span class="n">f</span> <span class="n">g</span>
+<span class="n">def</span> <span class="n">coequalizer</span> <span class="o">:=</span> <span class="o">(</span><span class="n">coequalizer</span><span class="bp">.</span><span class="n">cofork</span> <span class="n">f</span> <span class="n">g</span><span class="o">)</span><span class="bp">.</span><span class="n">X</span>
+<span class="n">def</span> <span class="n">coequalizer</span><span class="bp">.</span><span class="n">π</span> <span class="o">:</span> <span class="n">Z</span> <span class="err">⟶</span> <span class="o">(</span><span class="n">coequalizer</span> <span class="n">f</span> <span class="n">g</span><span class="o">)</span> <span class="o">:=</span> <span class="o">(</span><span class="n">coequalizer</span><span class="bp">.</span><span class="n">cofork</span> <span class="n">f</span> <span class="n">g</span><span class="o">)</span><span class="bp">.</span><span class="n">π</span>
+<span class="bp">@</span><span class="o">[</span><span class="n">search</span><span class="o">]</span> <span class="n">def</span> <span class="n">coequalizer</span><span class="bp">.</span><span class="n">w</span> <span class="o">:</span> <span class="n">f</span> <span class="err">≫</span> <span class="o">(</span><span class="n">coequalizer</span><span class="bp">.</span><span class="n">π</span> <span class="n">f</span> <span class="n">g</span><span class="o">)</span> <span class="bp">=</span> <span class="n">g</span> <span class="err">≫</span> <span class="o">(</span><span class="n">coequalizer</span><span class="bp">.</span><span class="n">π</span> <span class="n">f</span> <span class="n">g</span><span class="o">)</span> <span class="o">:=</span> <span class="o">(</span><span class="n">coequalizer</span><span class="bp">.</span><span class="n">cofork</span> <span class="n">f</span> <span class="n">g</span><span class="o">)</span><span class="bp">.</span><span class="n">w</span>
+<span class="n">def</span> <span class="n">coequalizer</span><span class="bp">.</span><span class="n">universal_property</span> <span class="o">:</span> <span class="n">is_coequalizer</span> <span class="o">(</span><span class="n">coequalizer</span><span class="bp">.</span><span class="n">cofork</span> <span class="n">f</span> <span class="n">g</span><span class="o">)</span> <span class="o">:=</span>
+<span class="n">has_coequalizers</span><span class="bp">.</span><span class="n">is_coequalizer</span><span class="bp">.</span><span class="o">{</span><span class="n">u₁</span> <span class="n">u₂</span><span class="o">}</span> <span class="n">C</span> <span class="n">f</span> <span class="n">g</span>
 
-def coequalizer.desc (P : C) (h : Z ⟶ P) (w : f ≫ h = g ≫ h) : coequalizer f g ⟶ P :=
-(coequalizer.universal_property f g).desc { X := P, π := h, w := w }
+<span class="n">def</span> <span class="n">coequalizer</span><span class="bp">.</span><span class="n">desc</span> <span class="o">(</span><span class="n">P</span> <span class="o">:</span> <span class="n">C</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">Z</span> <span class="err">⟶</span> <span class="n">P</span><span class="o">)</span> <span class="o">(</span><span class="n">w</span> <span class="o">:</span> <span class="n">f</span> <span class="err">≫</span> <span class="n">h</span> <span class="bp">=</span> <span class="n">g</span> <span class="err">≫</span> <span class="n">h</span><span class="o">)</span> <span class="o">:</span> <span class="n">coequalizer</span> <span class="n">f</span> <span class="n">g</span> <span class="err">⟶</span> <span class="n">P</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">coequalizer</span><span class="bp">.</span><span class="n">universal_property</span> <span class="n">f</span> <span class="n">g</span><span class="o">)</span><span class="bp">.</span><span class="n">desc</span> <span class="o">{</span> <span class="n">X</span> <span class="o">:=</span> <span class="n">P</span><span class="o">,</span> <span class="n">π</span> <span class="o">:=</span> <span class="n">h</span><span class="o">,</span> <span class="n">w</span> <span class="o">:=</span> <span class="n">w</span> <span class="o">}</span>
 
-@[extensionality] lemma coequalizer.hom_ext {Y Z : C} {f g : Y ⟶ Z} {X : C}
-(h k : coequalizer f g ⟶ X) (w : coequalizer.π f g ≫ h = coequalizer.π f g ≫ k) : h = k :=
-begin
-  let s : cofork f g := ⟨ ⟨ X ⟩, coequalizer.π f g ≫ h ⟩,
-  have q := (coequalizer.universal_property f g).uniq s h,
-  have p := (coequalizer.universal_property f g).uniq s k,
-  rw [q, ←p],
-  solve_by_elim, refl
-end
+<span class="bp">@</span><span class="o">[</span><span class="n">extensionality</span><span class="o">]</span> <span class="kn">lemma</span> <span class="n">coequalizer</span><span class="bp">.</span><span class="n">hom_ext</span> <span class="o">{</span><span class="n">Y</span> <span class="n">Z</span> <span class="o">:</span> <span class="n">C</span><span class="o">}</span> <span class="o">{</span><span class="n">f</span> <span class="n">g</span> <span class="o">:</span> <span class="n">Y</span> <span class="err">⟶</span> <span class="n">Z</span><span class="o">}</span> <span class="o">{</span><span class="n">X</span> <span class="o">:</span> <span class="n">C</span><span class="o">}</span>
+<span class="o">(</span><span class="n">h</span> <span class="n">k</span> <span class="o">:</span> <span class="n">coequalizer</span> <span class="n">f</span> <span class="n">g</span> <span class="err">⟶</span> <span class="n">X</span><span class="o">)</span> <span class="o">(</span><span class="n">w</span> <span class="o">:</span> <span class="n">coequalizer</span><span class="bp">.</span><span class="n">π</span> <span class="n">f</span> <span class="n">g</span> <span class="err">≫</span> <span class="n">h</span> <span class="bp">=</span> <span class="n">coequalizer</span><span class="bp">.</span><span class="n">π</span> <span class="n">f</span> <span class="n">g</span> <span class="err">≫</span> <span class="n">k</span><span class="o">)</span> <span class="o">:</span> <span class="n">h</span> <span class="bp">=</span> <span class="n">k</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="k">let</span> <span class="n">s</span> <span class="o">:</span> <span class="n">cofork</span> <span class="n">f</span> <span class="n">g</span> <span class="o">:=</span> <span class="bp">⟨</span> <span class="bp">⟨</span> <span class="n">X</span> <span class="bp">⟩</span><span class="o">,</span> <span class="n">coequalizer</span><span class="bp">.</span><span class="n">π</span> <span class="n">f</span> <span class="n">g</span> <span class="err">≫</span> <span class="n">h</span> <span class="bp">⟩</span><span class="o">,</span>
+  <span class="k">have</span> <span class="n">q</span> <span class="o">:=</span> <span class="o">(</span><span class="n">coequalizer</span><span class="bp">.</span><span class="n">universal_property</span> <span class="n">f</span> <span class="n">g</span><span class="o">)</span><span class="bp">.</span><span class="n">uniq</span> <span class="n">s</span> <span class="n">h</span><span class="o">,</span>
+  <span class="k">have</span> <span class="n">p</span> <span class="o">:=</span> <span class="o">(</span><span class="n">coequalizer</span><span class="bp">.</span><span class="n">universal_property</span> <span class="n">f</span> <span class="n">g</span><span class="o">)</span><span class="bp">.</span><span class="n">uniq</span> <span class="n">s</span> <span class="n">k</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="o">[</span><span class="n">q</span><span class="o">,</span> <span class="err">←</span><span class="n">p</span><span class="o">],</span>
+  <span class="n">solve_by_elim</span><span class="o">,</span> <span class="n">refl</span>
+<span class="kn">end</span>
 
-end category_theory.limits
+<span class="kn">end</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">limits</span>
 
-section presheaf
-open category_theory.limits
-variables (X : Type u₁) [𝒳 : category.{u₁ v₁} X] (C : Type u₂) [𝒞 : category.{u₂ v₂} C]
-include 𝒳 𝒞
+<span class="kn">section</span> <span class="n">presheaf</span>
+<span class="kn">open</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">limits</span>
+<span class="kn">variables</span> <span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u₁</span><span class="o">)</span> <span class="o">[</span><span class="err">𝒳</span> <span class="o">:</span> <span class="n">category</span><span class="bp">.</span><span class="o">{</span><span class="n">u₁</span> <span class="n">v₁</span><span class="o">}</span> <span class="n">X</span><span class="o">]</span> <span class="o">(</span><span class="n">C</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u₂</span><span class="o">)</span> <span class="o">[</span><span class="err">𝒞</span> <span class="o">:</span> <span class="n">category</span><span class="bp">.</span><span class="o">{</span><span class="n">u₂</span> <span class="n">v₂</span><span class="o">}</span> <span class="n">C</span><span class="o">]</span>
+<span class="n">include</span> <span class="err">𝒳</span> <span class="err">𝒞</span>
 
-def presheaf := Xᵒᵖ ⥤ C
+<span class="n">def</span> <span class="n">presheaf</span> <span class="o">:=</span> <span class="n">X</span><span class="err">ᵒᵖ</span> <span class="err">⥤</span> <span class="n">C</span>
 
-variables {X} {C}
+<span class="kn">variables</span> <span class="o">{</span><span class="n">X</span><span class="o">}</span> <span class="o">{</span><span class="n">C</span><span class="o">}</span>
 
-instance : category (presheaf X C) := by unfold presheaf; apply_instance
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">category</span> <span class="o">(</span><span class="n">presheaf</span> <span class="n">X</span> <span class="n">C</span><span class="o">)</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">unfold</span> <span class="n">presheaf</span><span class="bp">;</span> <span class="n">apply_instance</span>
 
-omit 𝒞
-instance : has_coproducts (presheaf X (Type v₂)) := sorry
+<span class="n">omit</span> <span class="err">𝒞</span>
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">has_coproducts</span> <span class="o">(</span><span class="n">presheaf</span> <span class="n">X</span> <span class="o">(</span><span class="kt">Type</span> <span class="n">v₂</span><span class="o">))</span> <span class="o">:=</span> <span class="n">sorry</span>
 
-#print presheaf.category_theory.category
+<span class="bp">#</span><span class="kn">print</span> <span class="n">presheaf</span><span class="bp">.</span><span class="n">category_theory</span><span class="bp">.</span><span class="n">category</span>
 
-end presheaf
+<span class="kn">end</span> <span class="n">presheaf</span>
 
--- todo should this be done as a subfunctor?
-structure covering_family {X : Type u₁} [category.{u₁ v₁} X] (U : X) :=
-(index : Type v₁)
-(obj : index → X)
-(hom : Π (i : index), obj i ⟶ U)
+<span class="c1">-- todo should this be done as a subfunctor?</span>
+<span class="kn">structure</span> <span class="n">covering_family</span> <span class="o">{</span><span class="n">X</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u₁</span><span class="o">}</span> <span class="o">[</span><span class="n">category</span><span class="bp">.</span><span class="o">{</span><span class="n">u₁</span> <span class="n">v₁</span><span class="o">}</span> <span class="n">X</span><span class="o">]</span> <span class="o">(</span><span class="n">U</span> <span class="o">:</span> <span class="n">X</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">index</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v₁</span><span class="o">)</span>
+<span class="o">(</span><span class="n">obj</span> <span class="o">:</span> <span class="n">index</span> <span class="bp">→</span> <span class="n">X</span><span class="o">)</span>
+<span class="o">(</span><span class="n">hom</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">(</span><span class="n">i</span> <span class="o">:</span> <span class="n">index</span><span class="o">),</span> <span class="n">obj</span> <span class="n">i</span> <span class="err">⟶</span> <span class="n">U</span><span class="o">)</span>
 
-namespace covering_family
-open category_theory.limits
-variables {X : Type u₁} [𝒳 : category.{u₁ v₁} X]
-include 𝒳
+<span class="kn">namespace</span> <span class="n">covering_family</span>
+<span class="kn">open</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">limits</span>
+<span class="kn">variables</span> <span class="o">{</span><span class="n">X</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u₁</span><span class="o">}</span> <span class="o">[</span><span class="err">𝒳</span> <span class="o">:</span> <span class="n">category</span><span class="bp">.</span><span class="o">{</span><span class="n">u₁</span> <span class="n">v₁</span><span class="o">}</span> <span class="n">X</span><span class="o">]</span>
+<span class="n">include</span> <span class="err">𝒳</span>
 
-variables {U : X}
+<span class="kn">variables</span> <span class="o">{</span><span class="n">U</span> <span class="o">:</span> <span class="n">X</span><span class="o">}</span>
 
-def sieve (f : covering_family U) : presheaf X (Type v₁) :=
-@coequalizer _ _ (sorry)
-(@Sigma _ _ _ (f.index × f.index) (λ p, _))
-(@Sigma _ _ _ f.index (((yoneda X) : X → presheaf X (Type v₁)) ∘ f.obj))
-_ _
+<span class="n">def</span> <span class="n">sieve</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">covering_family</span> <span class="n">U</span><span class="o">)</span> <span class="o">:</span> <span class="n">presheaf</span> <span class="n">X</span> <span class="o">(</span><span class="kt">Type</span> <span class="n">v₁</span><span class="o">)</span> <span class="o">:=</span>
+<span class="bp">@</span><span class="n">coequalizer</span> <span class="bp">_</span> <span class="bp">_</span> <span class="o">(</span><span class="n">sorry</span><span class="o">)</span>
+<span class="o">(</span><span class="bp">@</span><span class="n">Sigma</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="o">(</span><span class="n">f</span><span class="bp">.</span><span class="n">index</span> <span class="bp">×</span> <span class="n">f</span><span class="bp">.</span><span class="n">index</span><span class="o">)</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">p</span><span class="o">,</span> <span class="bp">_</span><span class="o">))</span>
+<span class="o">(</span><span class="bp">@</span><span class="n">Sigma</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="n">f</span><span class="bp">.</span><span class="n">index</span> <span class="o">(((</span><span class="n">yoneda</span> <span class="n">X</span><span class="o">)</span> <span class="o">:</span> <span class="n">X</span> <span class="bp">→</span> <span class="n">presheaf</span> <span class="n">X</span> <span class="o">(</span><span class="kt">Type</span> <span class="n">v₁</span><span class="o">))</span> <span class="err">∘</span> <span class="n">f</span><span class="bp">.</span><span class="n">obj</span><span class="o">))</span>
+<span class="bp">_</span> <span class="bp">_</span>
 
-def sheaf_condition (f : (covering_family U)) {C : Type u₂} [category.{u₂ v₂} C] (F : presheaf X C) : Prop := sorry
+<span class="n">def</span> <span class="n">sheaf_condition</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="o">(</span><span class="n">covering_family</span> <span class="n">U</span><span class="o">))</span> <span class="o">{</span><span class="n">C</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u₂</span><span class="o">}</span> <span class="o">[</span><span class="n">category</span><span class="bp">.</span><span class="o">{</span><span class="n">u₂</span> <span class="n">v₂</span><span class="o">}</span> <span class="n">C</span><span class="o">]</span> <span class="o">(</span><span class="n">F</span> <span class="o">:</span> <span class="n">presheaf</span> <span class="n">X</span> <span class="n">C</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span> <span class="n">sorry</span>
 
-end covering_family
+<span class="kn">end</span> <span class="n">covering_family</span>
 
-structure coverage {X : Type u₁} [category.{u₁ u₂} X] :=
-(covers   : Π (U : X), set (covering_family U))
-(property : ∀ {U V : X} (g : V ⟶ U) (f : (covering_family U)),
-            ∃ h : (covering_family V), ∀ j : h.index, ∃ {i : f.index} {k : h.obj j ⟶ f.obj i},
-            h.hom j ≫ g = k ≫ f.hom i)
+<span class="kn">structure</span> <span class="n">coverage</span> <span class="o">{</span><span class="n">X</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u₁</span><span class="o">}</span> <span class="o">[</span><span class="n">category</span><span class="bp">.</span><span class="o">{</span><span class="n">u₁</span> <span class="n">u₂</span><span class="o">}</span> <span class="n">X</span><span class="o">]</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">covers</span>   <span class="o">:</span> <span class="bp">Π</span> <span class="o">(</span><span class="n">U</span> <span class="o">:</span> <span class="n">X</span><span class="o">),</span> <span class="n">set</span> <span class="o">(</span><span class="n">covering_family</span> <span class="n">U</span><span class="o">))</span>
+<span class="o">(</span><span class="n">property</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">U</span> <span class="n">V</span> <span class="o">:</span> <span class="n">X</span><span class="o">}</span> <span class="o">(</span><span class="n">g</span> <span class="o">:</span> <span class="n">V</span> <span class="err">⟶</span> <span class="n">U</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="o">(</span><span class="n">covering_family</span> <span class="n">U</span><span class="o">)),</span>
+            <span class="bp">∃</span> <span class="n">h</span> <span class="o">:</span> <span class="o">(</span><span class="n">covering_family</span> <span class="n">V</span><span class="o">),</span> <span class="bp">∀</span> <span class="n">j</span> <span class="o">:</span> <span class="n">h</span><span class="bp">.</span><span class="n">index</span><span class="o">,</span> <span class="bp">∃</span> <span class="o">{</span><span class="n">i</span> <span class="o">:</span> <span class="n">f</span><span class="bp">.</span><span class="n">index</span><span class="o">}</span> <span class="o">{</span><span class="n">k</span> <span class="o">:</span> <span class="n">h</span><span class="bp">.</span><span class="n">obj</span> <span class="n">j</span> <span class="err">⟶</span> <span class="n">f</span><span class="bp">.</span><span class="n">obj</span> <span class="n">i</span><span class="o">},</span>
+            <span class="n">h</span><span class="bp">.</span><span class="n">hom</span> <span class="n">j</span> <span class="err">≫</span> <span class="n">g</span> <span class="bp">=</span> <span class="n">k</span> <span class="err">≫</span> <span class="n">f</span><span class="bp">.</span><span class="n">hom</span> <span class="n">i</span><span class="o">)</span>
 
-class site (X : Type u₁) extends category.{u₁ u₂} X :=
-(coverage : @coverage X (by assumption))
+<span class="n">class</span> <span class="n">site</span> <span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u₁</span><span class="o">)</span> <span class="kn">extends</span> <span class="n">category</span><span class="bp">.</span><span class="o">{</span><span class="n">u₁</span> <span class="n">u₂</span><span class="o">}</span> <span class="n">X</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">coverage</span> <span class="o">:</span> <span class="bp">@</span><span class="n">coverage</span> <span class="n">X</span> <span class="o">(</span><span class="k">by</span> <span class="n">assumption</span><span class="o">))</span>
 
-section sheaf
-variables (X : Type u₁) [𝒳 : site.{u₁ v₁} X] (C : Type u₂) [𝒞 : category.{u₂ v₂} C]
-include 𝒳 𝒞
+<span class="kn">section</span> <span class="n">sheaf</span>
+<span class="kn">variables</span> <span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u₁</span><span class="o">)</span> <span class="o">[</span><span class="err">𝒳</span> <span class="o">:</span> <span class="n">site</span><span class="bp">.</span><span class="o">{</span><span class="n">u₁</span> <span class="n">v₁</span><span class="o">}</span> <span class="n">X</span><span class="o">]</span> <span class="o">(</span><span class="n">C</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u₂</span><span class="o">)</span> <span class="o">[</span><span class="err">𝒞</span> <span class="o">:</span> <span class="n">category</span><span class="bp">.</span><span class="o">{</span><span class="n">u₂</span> <span class="n">v₂</span><span class="o">}</span> <span class="n">C</span><span class="o">]</span>
+<span class="n">include</span> <span class="err">𝒳</span> <span class="err">𝒞</span>
 
-structure sheaf :=
-(presheaf : presheaf X C)
-(sheaf_condition : ∀ {U : X} (f : (@covering_family _ 𝒳.to_category U)), f.sheaf_condition presheaf)
+<span class="kn">structure</span> <span class="n">sheaf</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">presheaf</span> <span class="o">:</span> <span class="n">presheaf</span> <span class="n">X</span> <span class="n">C</span><span class="o">)</span>
+<span class="o">(</span><span class="n">sheaf_condition</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">U</span> <span class="o">:</span> <span class="n">X</span><span class="o">}</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="o">(</span><span class="bp">@</span><span class="n">covering_family</span> <span class="bp">_</span> <span class="err">𝒳</span><span class="bp">.</span><span class="n">to_category</span> <span class="n">U</span><span class="o">)),</span> <span class="n">f</span><span class="bp">.</span><span class="n">sheaf_condition</span> <span class="n">presheaf</span><span class="o">)</span>
 
-end sheaf
-
+<span class="kn">end</span> <span class="n">sheaf</span>
 
 
-namespace topological_space
 
-variables {X : Type u} [topological_space X]
+<span class="kn">namespace</span> <span class="n">topological_space</span>
 
-instance : site (opens X) :=
-{ coverage :=
-  { covers := λ U, λ Us, begin sorry -- the union of the Ui should be U
-    end,
-    property := sorry } }
+<span class="kn">variables</span> <span class="o">{</span><span class="n">X</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">[</span><span class="n">topological_space</span> <span class="n">X</span><span class="o">]</span>
 
-end topological_space
-```
-Lean is especially unhappy about the part where I try to define the `sieve`.
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">site</span> <span class="o">(</span><span class="n">opens</span> <span class="n">X</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">coverage</span> <span class="o">:=</span>
+  <span class="o">{</span> <span class="n">covers</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">U</span><span class="o">,</span> <span class="bp">λ</span> <span class="n">Us</span><span class="o">,</span> <span class="k">begin</span> <span class="n">sorry</span> <span class="c1">-- the union of the Ui should be U</span>
+    <span class="kn">end</span><span class="o">,</span>
+    <span class="n">property</span> <span class="o">:=</span> <span class="n">sorry</span> <span class="o">}</span> <span class="o">}</span>
+
+<span class="kn">end</span> <span class="n">topological_space</span>
+</pre></div>
+
+
+<p>Lean is especially unhappy about the part where I try to define the <code>sieve</code>.</p>
 
 #### [ Johan Commelin (Oct 18 2018 at 14:56)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/weird%20type%20class%20issue/near/136040514):
-Currently I'm just going to wait till some PR's get merged.
+<p>Currently I'm just going to wait till some PR's get merged.</p>
 
 #### [ Reid Barton (Oct 18 2018 at 15:05)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/weird%20type%20class%20issue/near/136041150):
-Lots of those `_`s in sieve still need to be filled in, right?
+<p>Lots of those <code>_</code>s in sieve still need to be filled in, right?</p>
 
 #### [ Reid Barton (Oct 18 2018 at 15:05)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/weird%20type%20class%20issue/near/136041176):
-Or at least... 3 I guess?
+<p>Or at least... 3 I guess?</p>
 
 #### [ Johan Commelin (Oct 18 2018 at 15:14)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/weird%20type%20class%20issue/near/136041777):
-Yes, that is right. But I need fibre products for the for the `_` in the first `Sigma`. :sad:
+<p>Yes, that is right. But I need fibre products for the for the <code>_</code> in the first <code>Sigma</code>. <span class="emoji emoji-2639" title="sad">:sad:</span></p>
 
 #### [ Reid Barton (Oct 18 2018 at 15:36)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/weird%20type%20class%20issue/near/136043495):
-```quote
-In general I think the fact that we need `include 𝒞` all the time is a sign that something is wrong. But I have no clue what is wrong and how to fix it.
-```
-So there are two issues which come up a lot due to the way category theory uses universe variables.
-1. The `include 𝒞` thing is a workaround for a specific elaborator bug where it doesn't correctly account for universe parameters of variables that have been included by the "square bracket rule". If you hit this bug then you will see an error about something like "bad tactic or buggy elaborator".
-2. It also often happens that you have to help Lean out with some explicit universe parameters. I think what is going on is that one of the parameters is not constrained by anything (usually the `v`), and so Lean is looking for a `category.{u ?u_1} C` instance. Apparently it's unwilling to take an instance `category.{u v} C` for some specific `v` and specialize `?u_1` to `v`. I'm not sure whether this is a bug or just something where the system doesn't work in the way we would usually prefer.
+<blockquote>
+<p>In general I think the fact that we need <code>include 𝒞</code> all the time is a sign that something is wrong. But I have no clue what is wrong and how to fix it.</p>
+</blockquote>
+<p>So there are two issues which come up a lot due to the way category theory uses universe variables.<br>
+1. The <code>include 𝒞</code> thing is a workaround for a specific elaborator bug where it doesn't correctly account for universe parameters of variables that have been included by the "square bracket rule". If you hit this bug then you will see an error about something like "bad tactic or buggy elaborator".<br>
+2. It also often happens that you have to help Lean out with some explicit universe parameters. I think what is going on is that one of the parameters is not constrained by anything (usually the <code>v</code>), and so Lean is looking for a <code>category.{u ?u_1} C</code> instance. Apparently it's unwilling to take an instance <code>category.{u v} C</code> for some specific <code>v</code> and specialize <code>?u_1</code> to <code>v</code>. I'm not sure whether this is a bug or just something where the system doesn't work in the way we would usually prefer.</p>
 
 #### [ Johan Commelin (Oct 18 2018 at 15:37)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/weird%20type%20class%20issue/near/136043564):
-I see. I wouldn't mind if universe unification was slightly more greedy in this case.
+<p>I see. I wouldn't mind if universe unification was slightly more greedy in this case.</p>
 
 #### [ Reid Barton (Oct 18 2018 at 15:38)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/weird%20type%20class%20issue/near/136043615):
-Your `covering_family` thing is the second issue.
+<p>Your <code>covering_family</code> thing is the second issue.</p>
 
 #### [ Reid Barton (Oct 18 2018 at 15:43)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/weird%20type%20class%20issue/near/136043903):
-Maybe we would like to have something like `out_param` on the universe parameter `v`, but that's not currently possible
+<p>Maybe we would like to have something like <code>out_param</code> on the universe parameter <code>v</code>, but that's not currently possible</p>
 
 #### [ Reid Barton (Oct 18 2018 at 15:44)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/weird%20type%20class%20issue/near/136043980):
-Also I don't really understand how `out_param` works, so I could be way off-base.
+<p>Also I don't really understand how <code>out_param</code> works, so I could be way off-base.</p>
 
 #### [ Reid Barton (Oct 18 2018 at 15:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/weird%20type%20class%20issue/near/136044517):
-Maybe the clearest example of this is something like `terminal_object (C : Type u) [category.{u v} C] [has_terminal_object.{u v} C] : C` where you could have a type `C : Type u` equipped with two totally different `category.{u v}` and `category.{u w}` structures with different terminal objects. The type of `terminal_object C` is just `C` which has `Type u` so there is no way you could ever constrain the `v` parameter.
+<p>Maybe the clearest example of this is something like <code>terminal_object (C : Type u) [category.{u v} C] [has_terminal_object.{u v} C] : C</code> where you could have a type <code>C : Type u</code> equipped with two totally different <code>category.{u v}</code> and <code>category.{u w}</code> structures with different terminal objects. The type of <code>terminal_object C</code> is just <code>C</code> which has <code>Type u</code> so there is no way you could ever constrain the <code>v</code> parameter.</p>
 
 #### [ Johan Commelin (Oct 19 2018 at 14:21)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/weird%20type%20class%20issue/near/136107468):
-The issues aren't gone, but my definition of `sieve` is converging onto something far more readable then I had before:
-```lean
-import category_theory.examples.topological_spaces
-import category_theory.opposites
-import category_theory.yoneda
-import category_theory.limits
+<p>The issues aren't gone, but my definition of <code>sieve</code> is converging onto something far more readable then I had before:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">examples</span><span class="bp">.</span><span class="n">topological_spaces</span>
+<span class="kn">import</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">opposites</span>
+<span class="kn">import</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">yoneda</span>
+<span class="kn">import</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">limits</span>
 
-open category_theory
+<span class="kn">open</span> <span class="n">category_theory</span>
 
-universes u u₁ u₂ v v₁ v₂ w w₁ w₂
+<span class="n">universes</span> <span class="n">u</span> <span class="n">u₁</span> <span class="n">u₂</span> <span class="n">v</span> <span class="n">v₁</span> <span class="n">v₂</span> <span class="n">w</span> <span class="n">w₁</span> <span class="n">w₂</span>
 
-namespace category_theory.limits
-variables {C : Type u₁} [𝒞 : category.{u₁ u₂} C]
-include 𝒞
+<span class="kn">namespace</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">limits</span>
+<span class="kn">variables</span> <span class="o">{</span><span class="n">C</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u₁</span><span class="o">}</span> <span class="o">[</span><span class="err">𝒞</span> <span class="o">:</span> <span class="n">category</span><span class="bp">.</span><span class="o">{</span><span class="n">u₁</span> <span class="n">u₂</span><span class="o">}</span> <span class="n">C</span><span class="o">]</span>
+<span class="n">include</span> <span class="err">𝒞</span>
 
-variables [has_coequalizers.{u₁ u₂} C] {Y Z : C} (f g : Y ⟶ Z)
+<span class="kn">variables</span> <span class="o">[</span><span class="n">has_coequalizers</span><span class="bp">.</span><span class="o">{</span><span class="n">u₁</span> <span class="n">u₂</span><span class="o">}</span> <span class="n">C</span><span class="o">]</span> <span class="o">{</span><span class="n">Y</span> <span class="n">Z</span> <span class="o">:</span> <span class="n">C</span><span class="o">}</span> <span class="o">(</span><span class="n">f</span> <span class="n">g</span> <span class="o">:</span> <span class="n">Y</span> <span class="err">⟶</span> <span class="n">Z</span><span class="o">)</span>
 
-def coequalizer.cofork := has_coequalizers.coequalizer.{u₁ u₂} f g
-def coequalizer := (coequalizer.cofork f g).X
-def coequalizer.π : Z ⟶ (coequalizer f g) := (coequalizer.cofork f g).π
-@[search] def coequalizer.w : f ≫ (coequalizer.π f g) = g ≫ (coequalizer.π f g) := (coequalizer.cofork f g).w
-def coequalizer.universal_property : is_coequalizer (coequalizer.cofork f g) :=
-has_coequalizers.is_coequalizer.{u₁ u₂} C f g
+<span class="n">def</span> <span class="n">coequalizer</span><span class="bp">.</span><span class="n">cofork</span> <span class="o">:=</span> <span class="n">has_coequalizers</span><span class="bp">.</span><span class="n">coequalizer</span><span class="bp">.</span><span class="o">{</span><span class="n">u₁</span> <span class="n">u₂</span><span class="o">}</span> <span class="n">f</span> <span class="n">g</span>
+<span class="n">def</span> <span class="n">coequalizer</span> <span class="o">:=</span> <span class="o">(</span><span class="n">coequalizer</span><span class="bp">.</span><span class="n">cofork</span> <span class="n">f</span> <span class="n">g</span><span class="o">)</span><span class="bp">.</span><span class="n">X</span>
+<span class="n">def</span> <span class="n">coequalizer</span><span class="bp">.</span><span class="n">π</span> <span class="o">:</span> <span class="n">Z</span> <span class="err">⟶</span> <span class="o">(</span><span class="n">coequalizer</span> <span class="n">f</span> <span class="n">g</span><span class="o">)</span> <span class="o">:=</span> <span class="o">(</span><span class="n">coequalizer</span><span class="bp">.</span><span class="n">cofork</span> <span class="n">f</span> <span class="n">g</span><span class="o">)</span><span class="bp">.</span><span class="n">π</span>
+<span class="bp">@</span><span class="o">[</span><span class="n">search</span><span class="o">]</span> <span class="n">def</span> <span class="n">coequalizer</span><span class="bp">.</span><span class="n">w</span> <span class="o">:</span> <span class="n">f</span> <span class="err">≫</span> <span class="o">(</span><span class="n">coequalizer</span><span class="bp">.</span><span class="n">π</span> <span class="n">f</span> <span class="n">g</span><span class="o">)</span> <span class="bp">=</span> <span class="n">g</span> <span class="err">≫</span> <span class="o">(</span><span class="n">coequalizer</span><span class="bp">.</span><span class="n">π</span> <span class="n">f</span> <span class="n">g</span><span class="o">)</span> <span class="o">:=</span> <span class="o">(</span><span class="n">coequalizer</span><span class="bp">.</span><span class="n">cofork</span> <span class="n">f</span> <span class="n">g</span><span class="o">)</span><span class="bp">.</span><span class="n">w</span>
+<span class="n">def</span> <span class="n">coequalizer</span><span class="bp">.</span><span class="n">universal_property</span> <span class="o">:</span> <span class="n">is_coequalizer</span> <span class="o">(</span><span class="n">coequalizer</span><span class="bp">.</span><span class="n">cofork</span> <span class="n">f</span> <span class="n">g</span><span class="o">)</span> <span class="o">:=</span>
+<span class="n">has_coequalizers</span><span class="bp">.</span><span class="n">is_coequalizer</span><span class="bp">.</span><span class="o">{</span><span class="n">u₁</span> <span class="n">u₂</span><span class="o">}</span> <span class="n">C</span> <span class="n">f</span> <span class="n">g</span>
 
-def coequalizer.desc (P : C) (h : Z ⟶ P) (w : f ≫ h = g ≫ h) : coequalizer f g ⟶ P :=
-(coequalizer.universal_property f g).desc { X := P, π := h, w := w }
+<span class="n">def</span> <span class="n">coequalizer</span><span class="bp">.</span><span class="n">desc</span> <span class="o">(</span><span class="n">P</span> <span class="o">:</span> <span class="n">C</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">Z</span> <span class="err">⟶</span> <span class="n">P</span><span class="o">)</span> <span class="o">(</span><span class="n">w</span> <span class="o">:</span> <span class="n">f</span> <span class="err">≫</span> <span class="n">h</span> <span class="bp">=</span> <span class="n">g</span> <span class="err">≫</span> <span class="n">h</span><span class="o">)</span> <span class="o">:</span> <span class="n">coequalizer</span> <span class="n">f</span> <span class="n">g</span> <span class="err">⟶</span> <span class="n">P</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">coequalizer</span><span class="bp">.</span><span class="n">universal_property</span> <span class="n">f</span> <span class="n">g</span><span class="o">)</span><span class="bp">.</span><span class="n">desc</span> <span class="o">{</span> <span class="n">X</span> <span class="o">:=</span> <span class="n">P</span><span class="o">,</span> <span class="n">π</span> <span class="o">:=</span> <span class="n">h</span><span class="o">,</span> <span class="n">w</span> <span class="o">:=</span> <span class="n">w</span> <span class="o">}</span>
 
-@[extensionality] lemma coequalizer.hom_ext {Y Z : C} {f g : Y ⟶ Z} {X : C}
-(h k : coequalizer f g ⟶ X) (w : coequalizer.π f g ≫ h = coequalizer.π f g ≫ k) : h = k :=
-begin
-  let s : cofork f g := ⟨ ⟨ X ⟩, coequalizer.π f g ≫ h ⟩,
-  have q := (coequalizer.universal_property f g).uniq s h,
-  have p := (coequalizer.universal_property f g).uniq s k,
-  rw [q, ←p],
-  solve_by_elim, refl
-end
+<span class="bp">@</span><span class="o">[</span><span class="n">extensionality</span><span class="o">]</span> <span class="kn">lemma</span> <span class="n">coequalizer</span><span class="bp">.</span><span class="n">hom_ext</span> <span class="o">{</span><span class="n">Y</span> <span class="n">Z</span> <span class="o">:</span> <span class="n">C</span><span class="o">}</span> <span class="o">{</span><span class="n">f</span> <span class="n">g</span> <span class="o">:</span> <span class="n">Y</span> <span class="err">⟶</span> <span class="n">Z</span><span class="o">}</span> <span class="o">{</span><span class="n">X</span> <span class="o">:</span> <span class="n">C</span><span class="o">}</span>
+<span class="o">(</span><span class="n">h</span> <span class="n">k</span> <span class="o">:</span> <span class="n">coequalizer</span> <span class="n">f</span> <span class="n">g</span> <span class="err">⟶</span> <span class="n">X</span><span class="o">)</span> <span class="o">(</span><span class="n">w</span> <span class="o">:</span> <span class="n">coequalizer</span><span class="bp">.</span><span class="n">π</span> <span class="n">f</span> <span class="n">g</span> <span class="err">≫</span> <span class="n">h</span> <span class="bp">=</span> <span class="n">coequalizer</span><span class="bp">.</span><span class="n">π</span> <span class="n">f</span> <span class="n">g</span> <span class="err">≫</span> <span class="n">k</span><span class="o">)</span> <span class="o">:</span> <span class="n">h</span> <span class="bp">=</span> <span class="n">k</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="k">let</span> <span class="n">s</span> <span class="o">:</span> <span class="n">cofork</span> <span class="n">f</span> <span class="n">g</span> <span class="o">:=</span> <span class="bp">⟨</span> <span class="bp">⟨</span> <span class="n">X</span> <span class="bp">⟩</span><span class="o">,</span> <span class="n">coequalizer</span><span class="bp">.</span><span class="n">π</span> <span class="n">f</span> <span class="n">g</span> <span class="err">≫</span> <span class="n">h</span> <span class="bp">⟩</span><span class="o">,</span>
+  <span class="k">have</span> <span class="n">q</span> <span class="o">:=</span> <span class="o">(</span><span class="n">coequalizer</span><span class="bp">.</span><span class="n">universal_property</span> <span class="n">f</span> <span class="n">g</span><span class="o">)</span><span class="bp">.</span><span class="n">uniq</span> <span class="n">s</span> <span class="n">h</span><span class="o">,</span>
+  <span class="k">have</span> <span class="n">p</span> <span class="o">:=</span> <span class="o">(</span><span class="n">coequalizer</span><span class="bp">.</span><span class="n">universal_property</span> <span class="n">f</span> <span class="n">g</span><span class="o">)</span><span class="bp">.</span><span class="n">uniq</span> <span class="n">s</span> <span class="n">k</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="o">[</span><span class="n">q</span><span class="o">,</span> <span class="err">←</span><span class="n">p</span><span class="o">],</span>
+  <span class="n">solve_by_elim</span><span class="o">,</span> <span class="n">refl</span>
+<span class="kn">end</span>
 
-end category_theory.limits
+<span class="kn">end</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">limits</span>
 
-section presheaf
-open category_theory.limits
-variables (X : Type u₁) [𝒳 : category.{u₁ v₁} X] (C : Type u₂) [𝒞 : category.{u₂ v₂} C]
-include 𝒳 𝒞
+<span class="kn">section</span> <span class="n">presheaf</span>
+<span class="kn">open</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">limits</span>
+<span class="kn">variables</span> <span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u₁</span><span class="o">)</span> <span class="o">[</span><span class="err">𝒳</span> <span class="o">:</span> <span class="n">category</span><span class="bp">.</span><span class="o">{</span><span class="n">u₁</span> <span class="n">v₁</span><span class="o">}</span> <span class="n">X</span><span class="o">]</span> <span class="o">(</span><span class="n">C</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u₂</span><span class="o">)</span> <span class="o">[</span><span class="err">𝒞</span> <span class="o">:</span> <span class="n">category</span><span class="bp">.</span><span class="o">{</span><span class="n">u₂</span> <span class="n">v₂</span><span class="o">}</span> <span class="n">C</span><span class="o">]</span>
+<span class="n">include</span> <span class="err">𝒳</span> <span class="err">𝒞</span>
 
-def presheaf := Xᵒᵖ ⥤ C
+<span class="n">def</span> <span class="n">presheaf</span> <span class="o">:=</span> <span class="n">X</span><span class="err">ᵒᵖ</span> <span class="err">⥤</span> <span class="n">C</span>
 
-variables {X} {C}
+<span class="kn">variables</span> <span class="o">{</span><span class="n">X</span><span class="o">}</span> <span class="o">{</span><span class="n">C</span><span class="o">}</span>
 
-instance : category (presheaf X C) := by unfold presheaf; apply_instance
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">category</span> <span class="o">(</span><span class="n">presheaf</span> <span class="n">X</span> <span class="n">C</span><span class="o">)</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">unfold</span> <span class="n">presheaf</span><span class="bp">;</span> <span class="n">apply_instance</span>
 
-omit 𝒞
-instance presheaf.has_coequalizers : @has_coequalizers (presheaf X (Type v₁)) presheaf.category_theory.category := sorry
-instance presheaf.has_coproducts : @has_coproducts (presheaf X (Type v₁)) presheaf.category_theory.category := sorry
-instance presheaf.has_pullbacks : @has_pullbacks (presheaf X (Type v₁)) presheaf.category_theory.category := sorry
+<span class="n">omit</span> <span class="err">𝒞</span>
+<span class="kn">instance</span> <span class="n">presheaf</span><span class="bp">.</span><span class="n">has_coequalizers</span> <span class="o">:</span> <span class="bp">@</span><span class="n">has_coequalizers</span> <span class="o">(</span><span class="n">presheaf</span> <span class="n">X</span> <span class="o">(</span><span class="kt">Type</span> <span class="n">v₁</span><span class="o">))</span> <span class="n">presheaf</span><span class="bp">.</span><span class="n">category_theory</span><span class="bp">.</span><span class="n">category</span> <span class="o">:=</span> <span class="n">sorry</span>
+<span class="kn">instance</span> <span class="n">presheaf</span><span class="bp">.</span><span class="n">has_coproducts</span> <span class="o">:</span> <span class="bp">@</span><span class="n">has_coproducts</span> <span class="o">(</span><span class="n">presheaf</span> <span class="n">X</span> <span class="o">(</span><span class="kt">Type</span> <span class="n">v₁</span><span class="o">))</span> <span class="n">presheaf</span><span class="bp">.</span><span class="n">category_theory</span><span class="bp">.</span><span class="n">category</span> <span class="o">:=</span> <span class="n">sorry</span>
+<span class="kn">instance</span> <span class="n">presheaf</span><span class="bp">.</span><span class="n">has_pullbacks</span> <span class="o">:</span> <span class="bp">@</span><span class="n">has_pullbacks</span> <span class="o">(</span><span class="n">presheaf</span> <span class="n">X</span> <span class="o">(</span><span class="kt">Type</span> <span class="n">v₁</span><span class="o">))</span> <span class="n">presheaf</span><span class="bp">.</span><span class="n">category_theory</span><span class="bp">.</span><span class="n">category</span> <span class="o">:=</span> <span class="n">sorry</span>
 
-end presheaf
+<span class="kn">end</span> <span class="n">presheaf</span>
 
--- todo should this be done as a subfunctor?
-structure covering_family {X : Type u₁} [category.{u₁ v₁} X] (U : X) :=
-(index : Type v₁)
-(obj : index → X)
-(map : Π (i : index), obj i ⟶ U)
+<span class="c1">-- todo should this be done as a subfunctor?</span>
+<span class="kn">structure</span> <span class="n">covering_family</span> <span class="o">{</span><span class="n">X</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u₁</span><span class="o">}</span> <span class="o">[</span><span class="n">category</span><span class="bp">.</span><span class="o">{</span><span class="n">u₁</span> <span class="n">v₁</span><span class="o">}</span> <span class="n">X</span><span class="o">]</span> <span class="o">(</span><span class="n">U</span> <span class="o">:</span> <span class="n">X</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">index</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v₁</span><span class="o">)</span>
+<span class="o">(</span><span class="n">obj</span> <span class="o">:</span> <span class="n">index</span> <span class="bp">→</span> <span class="n">X</span><span class="o">)</span>
+<span class="o">(</span><span class="n">map</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">(</span><span class="n">i</span> <span class="o">:</span> <span class="n">index</span><span class="o">),</span> <span class="n">obj</span> <span class="n">i</span> <span class="err">⟶</span> <span class="n">U</span><span class="o">)</span>
 
-namespace covering_family
-open category_theory.limits
-variables {X : Type u₁} [𝒳 : category.{u₁ v₁} X]
-include 𝒳
+<span class="kn">namespace</span> <span class="n">covering_family</span>
+<span class="kn">open</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">limits</span>
+<span class="kn">variables</span> <span class="o">{</span><span class="n">X</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u₁</span><span class="o">}</span> <span class="o">[</span><span class="err">𝒳</span> <span class="o">:</span> <span class="n">category</span><span class="bp">.</span><span class="o">{</span><span class="n">u₁</span> <span class="n">v₁</span><span class="o">}</span> <span class="n">X</span><span class="o">]</span>
+<span class="n">include</span> <span class="err">𝒳</span>
 
-variables {U : X}
+<span class="kn">variables</span> <span class="o">{</span><span class="n">U</span> <span class="o">:</span> <span class="n">X</span><span class="o">}</span>
 
-def sieve (f : covering_family U) : presheaf X (Type v₁) :=
-let CP := (((yoneda X) : X → presheaf X (Type v₁)) ∘ f.obj) in
-coequalizer
-  (Sigma.desc (λ p : (f.index × f.index), (Sigma.ι CP p.1) ∘ (pullback.π₁ ((yoneda X).map (f.map p.1)) ((yoneda X).map (f.map p.2)))))
-  (Sigma.desc (λ p : (f.index × f.index), (Sigma.ι CP p.2) ∘ (pullback.π₂ ((yoneda X).map (f.map p.1)) ((yoneda X).map (f.map p.2)))))
+<span class="n">def</span> <span class="n">sieve</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">covering_family</span> <span class="n">U</span><span class="o">)</span> <span class="o">:</span> <span class="n">presheaf</span> <span class="n">X</span> <span class="o">(</span><span class="kt">Type</span> <span class="n">v₁</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">let</span> <span class="n">CP</span> <span class="o">:=</span> <span class="o">(((</span><span class="n">yoneda</span> <span class="n">X</span><span class="o">)</span> <span class="o">:</span> <span class="n">X</span> <span class="bp">→</span> <span class="n">presheaf</span> <span class="n">X</span> <span class="o">(</span><span class="kt">Type</span> <span class="n">v₁</span><span class="o">))</span> <span class="err">∘</span> <span class="n">f</span><span class="bp">.</span><span class="n">obj</span><span class="o">)</span> <span class="k">in</span>
+<span class="n">coequalizer</span>
+  <span class="o">(</span><span class="n">Sigma</span><span class="bp">.</span><span class="n">desc</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">p</span> <span class="o">:</span> <span class="o">(</span><span class="n">f</span><span class="bp">.</span><span class="n">index</span> <span class="bp">×</span> <span class="n">f</span><span class="bp">.</span><span class="n">index</span><span class="o">),</span> <span class="o">(</span><span class="n">Sigma</span><span class="bp">.</span><span class="n">ι</span> <span class="n">CP</span> <span class="n">p</span><span class="bp">.</span><span class="mi">1</span><span class="o">)</span> <span class="err">∘</span> <span class="o">(</span><span class="n">pullback</span><span class="bp">.</span><span class="n">π₁</span> <span class="o">((</span><span class="n">yoneda</span> <span class="n">X</span><span class="o">)</span><span class="bp">.</span><span class="n">map</span> <span class="o">(</span><span class="n">f</span><span class="bp">.</span><span class="n">map</span> <span class="n">p</span><span class="bp">.</span><span class="mi">1</span><span class="o">))</span> <span class="o">((</span><span class="n">yoneda</span> <span class="n">X</span><span class="o">)</span><span class="bp">.</span><span class="n">map</span> <span class="o">(</span><span class="n">f</span><span class="bp">.</span><span class="n">map</span> <span class="n">p</span><span class="bp">.</span><span class="mi">2</span><span class="o">)))))</span>
+  <span class="o">(</span><span class="n">Sigma</span><span class="bp">.</span><span class="n">desc</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">p</span> <span class="o">:</span> <span class="o">(</span><span class="n">f</span><span class="bp">.</span><span class="n">index</span> <span class="bp">×</span> <span class="n">f</span><span class="bp">.</span><span class="n">index</span><span class="o">),</span> <span class="o">(</span><span class="n">Sigma</span><span class="bp">.</span><span class="n">ι</span> <span class="n">CP</span> <span class="n">p</span><span class="bp">.</span><span class="mi">2</span><span class="o">)</span> <span class="err">∘</span> <span class="o">(</span><span class="n">pullback</span><span class="bp">.</span><span class="n">π₂</span> <span class="o">((</span><span class="n">yoneda</span> <span class="n">X</span><span class="o">)</span><span class="bp">.</span><span class="n">map</span> <span class="o">(</span><span class="n">f</span><span class="bp">.</span><span class="n">map</span> <span class="n">p</span><span class="bp">.</span><span class="mi">1</span><span class="o">))</span> <span class="o">((</span><span class="n">yoneda</span> <span class="n">X</span><span class="o">)</span><span class="bp">.</span><span class="n">map</span> <span class="o">(</span><span class="n">f</span><span class="bp">.</span><span class="n">map</span> <span class="n">p</span><span class="bp">.</span><span class="mi">2</span><span class="o">)))))</span>
 
-def sheaf_condition (f : (covering_family U)) {C : Type u₂} [category.{u₂ v₂} C] (F : presheaf X C) : Prop := sorry
+<span class="n">def</span> <span class="n">sheaf_condition</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="o">(</span><span class="n">covering_family</span> <span class="n">U</span><span class="o">))</span> <span class="o">{</span><span class="n">C</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u₂</span><span class="o">}</span> <span class="o">[</span><span class="n">category</span><span class="bp">.</span><span class="o">{</span><span class="n">u₂</span> <span class="n">v₂</span><span class="o">}</span> <span class="n">C</span><span class="o">]</span> <span class="o">(</span><span class="n">F</span> <span class="o">:</span> <span class="n">presheaf</span> <span class="n">X</span> <span class="n">C</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span> <span class="n">sorry</span>
 
-end covering_family
-```
+<span class="kn">end</span> <span class="n">covering_family</span>
+</pre></div>
 
 #### [ Johan Commelin (Oct 19 2018 at 14:22)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/weird%20type%20class%20issue/near/136107519):
-But there are still a lot of typeclass issues.
+<p>But there are still a lot of typeclass issues.</p>
 
 
 {% endraw %}

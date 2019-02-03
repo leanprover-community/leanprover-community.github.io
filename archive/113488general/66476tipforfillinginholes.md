@@ -12,73 +12,72 @@ permalink: archive/113488general/66476tipforfillinginholes.html
 
 {% raw %}
 #### [ Kevin Buzzard (Apr 20 2018 at 12:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tip%20for%20filling%20in%20holes/near/125425455):
-Sometimes in Lean you sit down to write a definition or a theorem, knowing that it will be really easy and fun. I was just in that situation. I need to write down some maps between localized rings and prove that they have some properties, but now I know that the localization interface is excellent and that pretty much every single one of my proofs will look like `name_of_function _ _ _ _ _`.
+<p>Sometimes in Lean you sit down to write a definition or a theorem, knowing that it will be really easy and fun. I was just in that situation. I need to write down some maps between localized rings and prove that they have some properties, but now I know that the localization interface is excellent and that pretty much every single one of my proofs will look like <code>name_of_function _ _ _ _ _</code>.</p>
 
 #### [ Kevin Buzzard (Apr 20 2018 at 12:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tip%20for%20filling%20in%20holes/near/125425597):
-However, I have run into an unexpected annoyance.
+<p>However, I have run into an unexpected annoyance.</p>
 
 #### [ Kevin Buzzard (Apr 20 2018 at 12:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tip%20for%20filling%20in%20holes/near/125425716):
-Here is my skeleton set-up.
+<p>Here is my skeleton set-up.</p>
 
 #### [ Kevin Buzzard (Apr 20 2018 at 12:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tip%20for%20filling%20in%20holes/near/125425811):
-```lean
-definition localization.loc_loc_is_loc {R : Type u} [comm_ring R] {f g : R} (H : Spec.D' g ⊆ Spec.D' f) :
-(localization.away g) ≃ᵣ localization.away (localization.of_comm_ring R (powers f) g) := 
-{ to_fun := _,
-  inv_fun := _,
-  left_inv := _,
-  right_inv := _,
-  is_ring_hom := _
-}
-```
+<div class="codehilite"><pre><span></span><span class="kn">definition</span> <span class="n">localization</span><span class="bp">.</span><span class="n">loc_loc_is_loc</span> <span class="o">{</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">R</span><span class="o">]</span> <span class="o">{</span><span class="n">f</span> <span class="n">g</span> <span class="o">:</span> <span class="n">R</span><span class="o">}</span> <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="n">Spec</span><span class="bp">.</span><span class="n">D&#39;</span> <span class="n">g</span> <span class="err">⊆</span> <span class="n">Spec</span><span class="bp">.</span><span class="n">D&#39;</span> <span class="n">f</span><span class="o">)</span> <span class="o">:</span>
+<span class="o">(</span><span class="n">localization</span><span class="bp">.</span><span class="n">away</span> <span class="n">g</span><span class="o">)</span> <span class="err">≃ᵣ</span> <span class="n">localization</span><span class="bp">.</span><span class="n">away</span> <span class="o">(</span><span class="n">localization</span><span class="bp">.</span><span class="n">of_comm_ring</span> <span class="n">R</span> <span class="o">(</span><span class="n">powers</span> <span class="n">f</span><span class="o">)</span> <span class="n">g</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">to_fun</span> <span class="o">:=</span> <span class="bp">_</span><span class="o">,</span>
+  <span class="n">inv_fun</span> <span class="o">:=</span> <span class="bp">_</span><span class="o">,</span>
+  <span class="n">left_inv</span> <span class="o">:=</span> <span class="bp">_</span><span class="o">,</span>
+  <span class="n">right_inv</span> <span class="o">:=</span> <span class="bp">_</span><span class="o">,</span>
+  <span class="n">is_ring_hom</span> <span class="o">:=</span> <span class="bp">_</span>
+<span class="o">}</span>
+</pre></div>
 
 #### [ Kevin Buzzard (Apr 20 2018 at 12:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tip%20for%20filling%20in%20holes/near/125426022):
-The idea now is that I just fill in all the holes one by one.
+<p>The idea now is that I just fill in all the holes one by one.</p>
 
 #### [ Kevin Buzzard (Apr 20 2018 at 12:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tip%20for%20filling%20in%20holes/near/125426090):
-But I want the holes to have red squiggles under them!
+<p>But I want the holes to have red squiggles under them!</p>
 
 #### [ Kevin Buzzard (Apr 20 2018 at 12:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tip%20for%20filling%20in%20holes/near/125426138):
-And for some reason, only the last one does
+<p>And for some reason, only the last one does</p>
 
 #### [ Kevin Buzzard (Apr 20 2018 at 12:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tip%20for%20filling%20in%20holes/near/125426449):
-and the associated complaint is full of metavariables
+<p>and the associated complaint is full of metavariables</p>
 
 #### [ Kevin Buzzard (Apr 20 2018 at 12:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tip%20for%20filling%20in%20holes/near/125426465):
-because it depends on some earlier holes
+<p>because it depends on some earlier holes</p>
 
 #### [ Kenny Lau (Apr 20 2018 at 12:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tip%20for%20filling%20in%20holes/near/125426472):
-begin end
+<p>begin end</p>
 
 #### [ Kevin Buzzard (Apr 20 2018 at 12:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tip%20for%20filling%20in%20holes/near/125426501):
-and then remove it later?
+<p>and then remove it later?</p>
 
 #### [ Kevin Buzzard (Apr 20 2018 at 12:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tip%20for%20filling%20in%20holes/near/125426565):
-because it's a def
+<p>because it's a def</p>
 
 #### [ Kenny Lau (Apr 20 2018 at 12:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tip%20for%20filling%20in%20holes/near/125426587):
-i just fill in stuff in front of begin end
+<p>i just fill in stuff in front of begin end</p>
 
 #### [ Kenny Lau (Apr 20 2018 at 12:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tip%20for%20filling%20in%20holes/near/125426641):
-I mean, replace your _ with begin end
+<p>I mean, replace your _ with begin end</p>
 
 #### [ Kenny Lau (Apr 20 2018 at 12:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tip%20for%20filling%20in%20holes/near/125426744):
-I can show you that in person next week ^^
+<p>I can show you that in person next week ^^</p>
 
 #### [ Kevin Buzzard (Apr 20 2018 at 12:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tip%20for%20filling%20in%20holes/near/125426832):
-`begin exact _ end`
+<p><code>begin exact _ end</code></p>
 
 #### [ Kevin Buzzard (Apr 20 2018 at 12:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tip%20for%20filling%20in%20holes/near/125426834):
-:-)
+<p>:-)</p>
 
 #### [ Kevin Buzzard (Apr 20 2018 at 12:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tip%20for%20filling%20in%20holes/near/125426835):
-Many thanks Kenny!
+<p>Many thanks Kenny!</p>
 
 #### [ Kevin Buzzard (Apr 20 2018 at 12:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tip%20for%20filling%20in%20holes/near/125427174):
-I feel like there are so many little tips like this, and it's unclear to me where they should be put.
+<p>I feel like there are so many little tips like this, and it's unclear to me where they should be put.</p>
 
 #### [ Kenny Lau (Apr 20 2018 at 12:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tip%20for%20filling%20in%20holes/near/125427447):
-you don’t need exact _
+<p>you don’t need exact _</p>
 
 
 {% endraw %}

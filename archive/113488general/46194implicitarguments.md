@@ -12,29 +12,29 @@ permalink: archive/113488general/46194implicitarguments.html
 
 {% raw %}
 #### [ petercommand (Jan 10 2019 at 09:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20arguments/near/154824603):
-Is there any way to tell lean to show all the implicit arguments in an error message?
-For example, sometimes when rewrite fails, I would want to know if there are different implicit args that caused the rewrite to fail
+<p>Is there any way to tell lean to show all the implicit arguments in an error message?<br>
+For example, sometimes when rewrite fails, I would want to know if there are different implicit args that caused the rewrite to fail</p>
 
 #### [ petercommand (Jan 10 2019 at 09:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20arguments/near/154824649):
-Or in a type mismatch error
+<p>Or in a type mismatch error</p>
 
 #### [ petercommand (Jan 10 2019 at 09:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20arguments/near/154824655):
-Sometimes it shows all the implicit arguments sometimes it doesn't
+<p>Sometimes it shows all the implicit arguments sometimes it doesn't</p>
 
 #### [ Johan Commelin (Jan 10 2019 at 09:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20arguments/near/154824659):
-`set_option pp.all true` will show you everything... that might be too much though...
+<p><code>set_option pp.all true</code> will show you everything... that might be too much though...</p>
 
 #### [ Rob Lewis (Jan 10 2019 at 09:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20arguments/near/154824660):
-`set_option pp.implicit true` before the declaration.
+<p><code>set_option pp.implicit true</code> before the declaration.</p>
 
 #### [ Johan Commelin (Jan 10 2019 at 09:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20arguments/near/154824663):
-Aah, there you go.
+<p>Aah, there you go.</p>
 
 #### [ petercommand (Jan 10 2019 at 09:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20arguments/near/154824664):
-Thanks
+<p>Thanks</p>
 
 #### [ Rob Lewis (Jan 10 2019 at 09:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20arguments/near/154824669):
-There are other `pp` options that autocomplete should show you. `all` is difficult to read.
+<p>There are other <code>pp</code> options that autocomplete should show you. <code>all</code> is difficult to read.</p>
 
 
 {% endraw %}

@@ -12,18 +12,18 @@ permalink: archive/113488general/04385Ismathlibtoobig.html
 
 {% raw %}
 #### [ Chris Hughes (Jun 02 2018 at 12:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Is%20mathlib%20too%20big%3F/near/127461008):
-https://travis-ci.org/leanprover/mathlib/builds/386048419
-https://travis-ci.org/leanprover/mathlib/builds/386808487
-`The job exceeded the maximum time limit for jobs, and has been terminated.`
+<p><a href="https://travis-ci.org/leanprover/mathlib/builds/386048419" target="_blank" title="https://travis-ci.org/leanprover/mathlib/builds/386048419">https://travis-ci.org/leanprover/mathlib/builds/386048419</a><br>
+<a href="https://travis-ci.org/leanprover/mathlib/builds/386808487" target="_blank" title="https://travis-ci.org/leanprover/mathlib/builds/386808487">https://travis-ci.org/leanprover/mathlib/builds/386808487</a><br>
+<code>The job exceeded the maximum time limit for jobs, and has been terminated.</code></p>
 
 #### [ Gabriel Ebner (Jun 02 2018 at 12:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Is%20mathlib%20too%20big%3F/near/127461053):
-See discussion in the travis caching thread: https://leanprover.zulipchat.com/#narrow/stream/113488-general/subject/travis.20caching/near/127367872
+<p>See discussion in the travis caching thread: <a href="#narrow/stream/113488-general/subject/travis.20caching/near/127367872" title="#narrow/stream/113488-general/subject/travis.20caching/near/127367872">https://leanprover.zulipchat.com/#narrow/stream/113488-general/subject/travis.20caching/near/127367872</a></p>
 
 #### [ Gabriel Ebner (Jun 02 2018 at 12:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Is%20mathlib%20too%20big%3F/near/127461055):
-And yes, unfortunately mathlib is too successful.
+<p>And yes, unfortunately mathlib is too successful.</p>
 
 #### [ Kenny Lau (Jun 02 2018 at 12:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Is%20mathlib%20too%20big%3F/near/127461093):
-curious
+<p>curious</p>
 
 
 {% endraw %}

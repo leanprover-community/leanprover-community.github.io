@@ -12,38 +12,39 @@ permalink: archive/113488general/98316haveIbug.html
 
 {% raw %}
 #### [ Chris Hughes (Sep 12 2018 at 18:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/haveI%20bug/near/133810460):
-There's a bug in `haveI` when the type is not given, but can be inferred, and the user has more than one goal.
-Here's an MWE
-```lean
-inductive T : Type
-| t : T
+<p>There's a bug in <code>haveI</code> when the type is not given, but can be inferred, and the user has more than one goal.<br>
+Here's an MWE</p>
+<div class="codehilite"><pre><span></span><span class="kn">inductive</span> <span class="n">T</span> <span class="o">:</span> <span class="kt">Type</span>
+<span class="bp">|</span> <span class="n">t</span> <span class="o">:</span> <span class="n">T</span>
 
-lemma subsingleton_T : subsingleton T := ⟨λ x y, by cases x; cases y; refl⟩
+<span class="kn">lemma</span> <span class="n">subsingleton_T</span> <span class="o">:</span> <span class="n">subsingleton</span> <span class="n">T</span> <span class="o">:=</span> <span class="bp">⟨λ</span> <span class="n">x</span> <span class="n">y</span><span class="o">,</span> <span class="k">by</span> <span class="n">cases</span> <span class="n">x</span><span class="bp">;</span> <span class="n">cases</span> <span class="n">y</span><span class="bp">;</span> <span class="n">refl</span><span class="bp">⟩</span>
 
-lemma foo (x y : T) : x = y ∧ x = y :=
-begin
-  split,
-  haveI := subsingleton_T,
-  exact subsingleton.elim _ _, -- failed to synthesize type class instance
-end
+<span class="kn">lemma</span> <span class="n">foo</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">T</span><span class="o">)</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">y</span> <span class="bp">∧</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">y</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">split</span><span class="o">,</span>
+  <span class="n">haveI</span> <span class="o">:=</span> <span class="n">subsingleton_T</span><span class="o">,</span>
+  <span class="n">exact</span> <span class="n">subsingleton</span><span class="bp">.</span><span class="n">elim</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">,</span> <span class="c1">-- failed to synthesize type class instance</span>
+<span class="kn">end</span>
 
 
-lemma bar (x y : T) : x = y :=
-begin
-  haveI := subsingleton_T,
-  exact subsingleton.elim _ _, -- no errors
-end
+<span class="kn">lemma</span> <span class="n">bar</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">T</span><span class="o">)</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">y</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">haveI</span> <span class="o">:=</span> <span class="n">subsingleton_T</span><span class="o">,</span>
+  <span class="n">exact</span> <span class="n">subsingleton</span><span class="bp">.</span><span class="n">elim</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">,</span> <span class="c1">-- no errors</span>
+<span class="kn">end</span>
 
-lemma baz (x y : T) : x = y ∧ x = y :=
-begin
-  have := subsingleton_T,
-  split,
-  haveI := subsingleton_T,
-  admit,
-  exact subsingleton.elim _ _, -- works, instance cache has been reset for second goal
-end
-```
-I think it's something to do with the line `swap >> reset_instance_cache >> swap` in the definition of `haveI`, if it inferred the type successfully, but you have another goal anyway, it resets the instance cache for your second goal, but not the first.
+<span class="kn">lemma</span> <span class="n">baz</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">T</span><span class="o">)</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">y</span> <span class="bp">∧</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">y</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="k">have</span> <span class="o">:=</span> <span class="n">subsingleton_T</span><span class="o">,</span>
+  <span class="n">split</span><span class="o">,</span>
+  <span class="n">haveI</span> <span class="o">:=</span> <span class="n">subsingleton_T</span><span class="o">,</span>
+  <span class="n">admit</span><span class="o">,</span>
+  <span class="n">exact</span> <span class="n">subsingleton</span><span class="bp">.</span><span class="n">elim</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">,</span> <span class="c1">-- works, instance cache has been reset for second goal</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>I think it's something to do with the line <code>swap &gt;&gt; reset_instance_cache &gt;&gt; swap</code> in the definition of <code>haveI</code>, if it inferred the type successfully, but you have another goal anyway, it resets the instance cache for your second goal, but not the first.</p>
 
 
 {% endraw %}

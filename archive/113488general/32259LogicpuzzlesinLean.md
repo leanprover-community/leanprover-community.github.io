@@ -12,71 +12,89 @@ permalink: archive/113488general/32259LogicpuzzlesinLean.html
 
 {% raw %}
 #### [ Patrick Massot (Jan 22 2019 at 21:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Logic%20puzzles%20in%20Lean/near/156635984):
-I'm considering include a couple of small logic puzzles in my Lean exercises. But I realize I don't know how to do that. Probably I should have paid more attention to some of Kevin's messages. Say I want to formalize the solution to the first question in http://www.johnpratt.com/items/puzzles/logic_puzzles.html Say I define `inductive people : Type | Brown | Jones | Smith`. I'd like to do case disjunctions according to whether some term of type people is Brown, Jones or Smith. But `cases` is very disappointing. It replaces only in the current goal. What is the workflow here?
+<p>I'm considering include a couple of small logic puzzles in my Lean exercises. But I realize I don't know how to do that. Probably I should have paid more attention to some of Kevin's messages. Say I want to formalize the solution to the first question in <a href="http://www.johnpratt.com/items/puzzles/logic_puzzles.html" target="_blank" title="http://www.johnpratt.com/items/puzzles/logic_puzzles.html">http://www.johnpratt.com/items/puzzles/logic_puzzles.html</a> Say I define <code>inductive people : Type | Brown | Jones | Smith</code>. I'd like to do case disjunctions according to whether some term of type people is Brown, Jones or Smith. But <code>cases</code> is very disappointing. It replaces only in the current goal. What is the workflow here?</p>
 
 #### [ Kevin Buzzard (Jan 22 2019 at 21:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Logic%20puzzles%20in%20Lean/near/156638799):
-Answer to second one: https://xkcd.com/1134/ . For the first one, Chris would prove it using `dec_trivial` somehow.
+<p>Answer to second one: <a href="https://xkcd.com/1134/" target="_blank" title="https://xkcd.com/1134/">https://xkcd.com/1134/</a> . For the first one, Chris would prove it using <code>dec_trivial</code> somehow.</p>
 
 #### [ Kenny Lau (Jan 22 2019 at 21:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Logic%20puzzles%20in%20Lean/near/156638953):
-@**Patrick Massot** you should `derive decidable_eq` (can we derive fintype?) and then just `dec_trivial` everything
+<p><span class="user-mention" data-user-id="110031">@Patrick Massot</span> you should <code>derive decidable_eq</code> (can we derive fintype?) and then just <code>dec_trivial</code> everything</p>
 
 #### [ Patrick Massot (Jan 22 2019 at 22:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Logic%20puzzles%20in%20Lean/near/156640009):
-I don't want a nice hi-tech proof. The question is whether I could do a logic exercise using those questions, not a `dec_trivial` exercise.
+<p>I don't want a nice hi-tech proof. The question is whether I could do a logic exercise using those questions, not a <code>dec_trivial</code> exercise.</p>
 
 #### [ Rob Lewis (Jan 22 2019 at 22:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Logic%20puzzles%20in%20Lean/near/156641666):
-I'm not sure exactly what you're trying to do, could you post some code where `cases` doesn't do quite what you want?
+<p>I'm not sure exactly what you're trying to do, could you post some code where <code>cases</code> doesn't do quite what you want?</p>
 
 #### [ Patrick Massot (Jan 22 2019 at 23:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Logic%20puzzles%20in%20Lean/near/156644035):
-Rob, say I start with:
-```lean
-attribute [instance] classical.prop_decidable
+<p>Rob, say I start with:</p>
+<div class="codehilite"><pre><span></span><span class="n">attribute</span> <span class="o">[</span><span class="kn">instance</span><span class="o">]</span> <span class="n">classical</span><span class="bp">.</span><span class="n">prop_decidable</span>
 
-inductive people : Type | Brown | Jones | Smith
+<span class="kn">inductive</span> <span class="n">people</span> <span class="o">:</span> <span class="kt">Type</span> <span class="bp">|</span> <span class="n">Brown</span> <span class="bp">|</span> <span class="n">Jones</span> <span class="bp">|</span> <span class="n">Smith</span>
 
-variables (only_child : people → Prop) (salary : people → ℕ)
+<span class="kn">variables</span> <span class="o">(</span><span class="n">only_child</span> <span class="o">:</span> <span class="n">people</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">(</span><span class="n">salary</span> <span class="o">:</span> <span class="n">people</span> <span class="bp">→</span> <span class="bp">ℕ</span><span class="o">)</span>
 
-inductive job : Type | doctor | lawyer | teacher
-variable (P : job → people)
-variable (J : people → job)
-variable (PJ : ∀ x, P (J x) = x)
-variable (JP : ∀ x, J (P x) = x)
-include PJ JP
+<span class="kn">inductive</span> <span class="n">job</span> <span class="o">:</span> <span class="kt">Type</span> <span class="bp">|</span> <span class="n">doctor</span> <span class="bp">|</span> <span class="n">lawyer</span> <span class="bp">|</span> <span class="n">teacher</span>
+<span class="kn">variable</span> <span class="o">(</span><span class="n">P</span> <span class="o">:</span> <span class="n">job</span> <span class="bp">→</span> <span class="n">people</span><span class="o">)</span>
+<span class="kn">variable</span> <span class="o">(</span><span class="n">J</span> <span class="o">:</span> <span class="n">people</span> <span class="bp">→</span> <span class="n">job</span><span class="o">)</span>
+<span class="kn">variable</span> <span class="o">(</span><span class="n">PJ</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span><span class="o">,</span> <span class="n">P</span> <span class="o">(</span><span class="n">J</span> <span class="n">x</span><span class="o">)</span> <span class="bp">=</span> <span class="n">x</span><span class="o">)</span>
+<span class="kn">variable</span> <span class="o">(</span><span class="n">JP</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span><span class="o">,</span> <span class="n">J</span> <span class="o">(</span><span class="n">P</span> <span class="n">x</span><span class="o">)</span> <span class="bp">=</span> <span class="n">x</span><span class="o">)</span>
+<span class="n">include</span> <span class="n">PJ</span> <span class="n">JP</span>
 
-open people job
+<span class="kn">open</span> <span class="n">people</span> <span class="n">job</span>
 
-example (h₁ : only_child (P teacher)) 
- (h₂ : salary (P teacher) < salary (P lawyer))
- (h₃ : salary (P teacher) < salary (P doctor))
- (h₄ : ¬ only_child Brown)
- (h₅ : salary Smith > salary (P lawyer))
-: J Smith = doctor ∧ J Brown = lawyer ∧ J Jones = teacher:=
-begin
-   sorry
-end
-```
-I'd like to say: let's examine in turn all three possibilities for `J Smith`, derive contradictions in two cases, deduce the value of `J Smith` and move on. But `cases J Smith` does not do that. It does spawn 3 cases, but with no extra assumption, simply replacing `J Smith` in the goal.
+<span class="kn">example</span> <span class="o">(</span><span class="n">h₁</span> <span class="o">:</span> <span class="n">only_child</span> <span class="o">(</span><span class="n">P</span> <span class="n">teacher</span><span class="o">))</span>
+ <span class="o">(</span><span class="n">h₂</span> <span class="o">:</span> <span class="n">salary</span> <span class="o">(</span><span class="n">P</span> <span class="n">teacher</span><span class="o">)</span> <span class="bp">&lt;</span> <span class="n">salary</span> <span class="o">(</span><span class="n">P</span> <span class="n">lawyer</span><span class="o">))</span>
+ <span class="o">(</span><span class="n">h₃</span> <span class="o">:</span> <span class="n">salary</span> <span class="o">(</span><span class="n">P</span> <span class="n">teacher</span><span class="o">)</span> <span class="bp">&lt;</span> <span class="n">salary</span> <span class="o">(</span><span class="n">P</span> <span class="n">doctor</span><span class="o">))</span>
+ <span class="o">(</span><span class="n">h₄</span> <span class="o">:</span> <span class="bp">¬</span> <span class="n">only_child</span> <span class="n">Brown</span><span class="o">)</span>
+ <span class="o">(</span><span class="n">h₅</span> <span class="o">:</span> <span class="n">salary</span> <span class="n">Smith</span> <span class="bp">&gt;</span> <span class="n">salary</span> <span class="o">(</span><span class="n">P</span> <span class="n">lawyer</span><span class="o">))</span>
+<span class="o">:</span> <span class="n">J</span> <span class="n">Smith</span> <span class="bp">=</span> <span class="n">doctor</span> <span class="bp">∧</span> <span class="n">J</span> <span class="n">Brown</span> <span class="bp">=</span> <span class="n">lawyer</span> <span class="bp">∧</span> <span class="n">J</span> <span class="n">Jones</span> <span class="bp">=</span> <span class="n">teacher</span><span class="o">:=</span>
+<span class="k">begin</span>
+   <span class="n">sorry</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>I'd like to say: let's examine in turn all three possibilities for <code>J Smith</code>, derive contradictions in two cases, deduce the value of <code>J Smith</code> and move on. But <code>cases J Smith</code> does not do that. It does spawn 3 cases, but with no extra assumption, simply replacing <code>J Smith</code> in the goal.</p>
 
 #### [ Patrick Massot (Jan 22 2019 at 23:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Logic%20puzzles%20in%20Lean/near/156644203):
-Of course I can use `by_cases H : J Smith = doctor,` but this gives me two goals, not three, and only the first goal has the shape I'd like to see
+<p>Of course I can use <code>by_cases H : J Smith = doctor,</code> but this gives me two goals, not three, and only the first goal has the shape I'd like to see</p>
 
 #### [ Rob Lewis (Jan 22 2019 at 23:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Logic%20puzzles%20in%20Lean/near/156644220):
-`cases h : J Smith`?
+<p><code>cases h : J Smith</code>?</p>
 
 #### [ Rob Lewis (Jan 22 2019 at 23:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Logic%20puzzles%20in%20Lean/near/156644278):
-That will give you the three goals, each with an additional hypothesis `h : J Smith = ...`
+<p>That will give you the three goals, each with an additional hypothesis <code>h : J Smith = ...</code></p>
 
 #### [ Patrick Massot (Jan 22 2019 at 23:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Logic%20puzzles%20in%20Lean/near/156644299):
-Thanks!
+<p>Thanks!</p>
 
 #### [ Kenny Lau (Jan 22 2019 at 23:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Logic%20puzzles%20in%20Lean/near/156644327):
-btw
-```lean
-@[derive decidable_eq]
-inductive people : Type | Brown | Jones | Smith
+<p>btw</p>
+<div class="codehilite"><pre><span></span><span class="bp">@</span><span class="o">[</span><span class="n">derive</span> <span class="n">decidable_eq</span><span class="o">]</span>
+<span class="kn">inductive</span> <span class="n">people</span> <span class="o">:</span> <span class="kt">Type</span> <span class="bp">|</span> <span class="n">Brown</span> <span class="bp">|</span> <span class="n">Jones</span> <span class="bp">|</span> <span class="n">Smith</span>
 
-@[derive decidable_eq]
-inductive job : Type | doctor | lawyer | teacher
-```
+<span class="bp">@</span><span class="o">[</span><span class="n">derive</span> <span class="n">decidable_eq</span><span class="o">]</span>
+<span class="kn">inductive</span> <span class="n">job</span> <span class="o">:</span> <span class="kt">Type</span> <span class="bp">|</span> <span class="n">doctor</span> <span class="bp">|</span> <span class="n">lawyer</span> <span class="bp">|</span> <span class="n">teacher</span>
+</pre></div>
+
+#### [ Patrick Massot (Jan 25 2019 at 10:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Logic%20puzzles%20in%20Lean/near/156840630):
+<p>I think I manage to turn that logic puzzle into something that could be an exercise in my "proof by case analysis" lecture. Remember the context: I'm trying to get a usable exercise from the first item in <a href="http://www.johnpratt.com/items/puzzles/logic_puzzles.html" target="_blank" title="http://www.johnpratt.com/items/puzzles/logic_puzzles.html">http://www.johnpratt.com/items/puzzles/logic_puzzles.html</a>. My attempt lives at <a href="https://gist.github.com/PatrickMassot/232210a83f193ea4a2caafb9b0e4245c" target="_blank" title="https://gist.github.com/PatrickMassot/232210a83f193ea4a2caafb9b0e4245c">https://gist.github.com/PatrickMassot/232210a83f193ea4a2caafb9b0e4245c</a> you should scroll down to line 38 before reading the beginning if curious</p>
+
+#### [ Kevin Buzzard (Jan 25 2019 at 10:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Logic%20puzzles%20in%20Lean/near/156840949):
+<p>+1 for use of <code>linarith</code>. <span class="user-mention" data-user-id="110596">@Rob Lewis</span> can mention this application in his next grant proposal.</p>
+
+#### [ Patrick Massot (Jan 25 2019 at 11:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Logic%20puzzles%20in%20Lean/near/156841631):
+<p>By the way, <span class="user-mention" data-user-id="130500">@Abhimanyu Pallavi Sudhir</span> you should have a look at the tactic I created in this gist, in case you are still stuck on yesterday's question.</p>
+
+#### [ Abhimanyu Pallavi Sudhir (Jan 25 2019 at 11:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Logic%20puzzles%20in%20Lean/near/156843274):
+<p>Thanks -- I'm guessing the <code>%%</code> is the key? I'll try it out.</p>
+
+#### [ Patrick Massot (Jan 25 2019 at 11:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Logic%20puzzles%20in%20Lean/near/156844439):
+<p>Yes, this is explained in the tactic tutorial I referred to</p>
+
+#### [ Rob Lewis (Jan 25 2019 at 12:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Logic%20puzzles%20in%20Lean/near/156846816):
+<p>Using <code>%%</code> is called "antiquotation." AFAIK you can't antiquote identifiers, so you won't be able to write something like `[simp at %%a].</p>
 
 
 {% endraw %}

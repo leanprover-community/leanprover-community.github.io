@@ -12,16 +12,16 @@ permalink: archive/116395maths/82737grouphom.html
 
 {% raw %}
 #### [ Chris Hughes (Dec 12 2018 at 07:17)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/group_hom/near/151505639):
-Can we define `is_group_hom` to be `is_monoid_hom` and make it reducible? It would avoid cycles.
+<p>Can we define <code>is_group_hom</code> to be <code>is_monoid_hom</code> and make it reducible? It would avoid cycles.</p>
 
 #### [ Johan Commelin (Dec 12 2018 at 09:30)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/group_hom/near/151510233):
-I would like this too. Especially if we could fill in the condition `f 1 = 1` using some default argument or auto_param. (Because for groups, as opposed to monoid, you can derive this condition from the multiplicativity.)
+<p>I would like this too. Especially if we could fill in the condition <code>f 1 = 1</code> using some default argument or auto_param. (Because for groups, as opposed to monoid, you can derive this condition from the multiplicativity.)</p>
 
 #### [ Johan Commelin (Dec 12 2018 at 09:30)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/group_hom/near/151510242):
-Whether it should be reducible, I don't know.
+<p>Whether it should be reducible, I don't know.</p>
 
 #### [ Chris Hughes (Dec 12 2018 at 09:40)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/group_hom/near/151510669):
-If it's reducible then every  group hom is automatically a monoid hom and vice versa
+<p>If it's reducible then every  group hom is automatically a monoid hom and vice versa</p>
 
 
 {% endraw %}

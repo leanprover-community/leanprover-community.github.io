@@ -12,59 +12,58 @@ permalink: archive/113488general/52136slashesinleanpkgpath.html
 
 {% raw %}
 #### [ Kevin Buzzard (Jul 06 2018 at 18:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/slashes%20in%20leanpkg.path/near/129212544):
-What does leanpkg.path look like on windows? I have about 20 minutes to get mathlib up and running on a win7 machine with no admin access and hence no git (apparently!). Are they `/` or `\`, and one or two?
+<p>What does leanpkg.path look like on windows? I have about 20 minutes to get mathlib up and running on a win7 machine with no admin access and hence no git (apparently!). Are they <code>/</code> or <code>\</code>, and one or two?</p>
 
 #### [ Kevin Buzzard (Jul 06 2018 at 18:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/slashes%20in%20leanpkg.path/near/129212550):
-I have lean and mathlib and VS code
+<p>I have lean and mathlib and VS code</p>
 
 #### [ Kevin Buzzard (Jul 06 2018 at 18:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/slashes%20in%20leanpkg.path/near/129212564):
-I have no msys2 and no command line
+<p>I have no msys2 and no command line</p>
 
 #### [ Kevin Buzzard (Jul 06 2018 at 18:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/slashes%20in%20leanpkg.path/near/129212570):
-I have notepad :-)
+<p>I have notepad :-)</p>
 
 #### [ Andrew Ashworth (Jul 06 2018 at 18:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/slashes%20in%20leanpkg.path/near/129212629):
-```
-builtin_path
+<div class="codehilite"><pre><span></span>builtin_path
 path _target/deps/mathlib/.
 path ./src
-```
+</pre></div>
 
 #### [ Kevin Buzzard (Jul 06 2018 at 18:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/slashes%20in%20leanpkg.path/near/129212661):
-thanks
+<p>thanks</p>
 
 #### [ Kevin Buzzard (Jul 06 2018 at 18:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/slashes%20in%20leanpkg.path/near/129212685):
-works!
+<p>works!</p>
 
 #### [ Kevin Buzzard (Jul 06 2018 at 18:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/slashes%20in%20leanpkg.path/near/129212689):
-hmm
+<p>hmm</p>
 
 #### [ Kevin Buzzard (Jul 06 2018 at 18:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/slashes%20in%20leanpkg.path/near/129212690):
-now need to make .olean files
+<p>now need to make .olean files</p>
 
 #### [ Kevin Buzzard (Jul 06 2018 at 18:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/slashes%20in%20leanpkg.path/near/129212732):
-with no command line :-/
+<p>with no command line :-/</p>
 
 #### [ Kenny Lau (Jul 06 2018 at 18:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/slashes%20in%20leanpkg.path/near/129212740):
-how about just use the online version
+<p>how about just use the online version</p>
 
 #### [ Chris Hughes (Jul 06 2018 at 19:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/slashes%20in%20leanpkg.path/near/129212976):
-download someone elses oleans?
+<p>download someone elses oleans?</p>
 
 #### [ Kenny Lau (Jul 06 2018 at 19:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/slashes%20in%20leanpkg.path/near/129212986):
-where from?
+<p>where from?</p>
 
 #### [ Chris Hughes (Jul 06 2018 at 19:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/slashes%20in%20leanpkg.path/near/129213000):
-I could upload mine.
+<p>I could upload mine.</p>
 
 #### [ Chris Hughes (Jul 06 2018 at 19:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/slashes%20in%20leanpkg.path/near/129213092):
-Or Kevin could upload his.
+<p>Or Kevin could upload his.</p>
 
 #### [ Kevin Buzzard (Jul 06 2018 at 19:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/slashes%20in%20leanpkg.path/near/129213106):
-I have some here for unix :-)
+<p>I have some here for unix :-)</p>
 
 #### [ Chris Hughes (Jul 06 2018 at 19:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/slashes%20in%20leanpkg.path/near/129213107):
-I don't know if Windows oleans are any different
+<p>I don't know if Windows oleans are any different</p>
 
 
 {% endraw %}

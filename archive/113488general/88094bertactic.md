@@ -12,357 +12,355 @@ permalink: archive/113488general/88094bertactic.html
 
 {% raw %}
 #### [ Patrick Massot (Oct 03 2018 at 14:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135098666):
-I'm trying to automate my demo file, for comparison. Is there any reason not to try to write a monster tactic trying all automation we have (except speed reason)? Something like:
-```lean
-meta def tactic.interactive.do_it : tactic unit := do
-`[try {ext}],
-`[try {split}],
-`[apply_eq],
-`[all_goals {finish <|> tauto <|> tidy}] <|> failure
-```
-can do everything that should be automatic in my demo file. It could even do more without the tidy bug.
+<p>I'm trying to automate my demo file, for comparison. Is there any reason not to try to write a monster tactic trying all automation we have (except speed reason)? Something like:</p>
+<div class="codehilite"><pre><span></span><span class="n">meta</span> <span class="n">def</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">interactive</span><span class="bp">.</span><span class="n">do_it</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span> <span class="n">do</span>
+<span class="bp">`</span><span class="o">[</span><span class="n">try</span> <span class="o">{</span><span class="n">ext</span><span class="o">}],</span>
+<span class="bp">`</span><span class="o">[</span><span class="n">try</span> <span class="o">{</span><span class="n">split</span><span class="o">}],</span>
+<span class="bp">`</span><span class="o">[</span><span class="n">apply_eq</span><span class="o">],</span>
+<span class="bp">`</span><span class="o">[</span><span class="n">all_goals</span> <span class="o">{</span><span class="n">finish</span> <span class="bp">&lt;|&gt;</span> <span class="n">tauto</span> <span class="bp">&lt;|&gt;</span> <span class="n">tidy</span><span class="o">}]</span> <span class="bp">&lt;|&gt;</span> <span class="n">failure</span>
+</pre></div>
+
+
+<p>can do everything that should be automatic in my demo file. It could even do more without the tidy bug.</p>
 
 #### [ Patrick Massot (Oct 03 2018 at 14:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135098676):
-It uses Simon's apply function equalities tactic
-```lean
-open tactic 
-meta def tactic.interactive.apply_eq : tactic unit :=
-do l ← local_context,
-   l.mmap $ λ h, try $ do {
-     `(%%x = %%y) ← infer_type h,
-     (vs,t) ← infer_type x >>= mk_local_pis,
-     p' ← mk_app `eq [x.mk_app vs, y.mk_app vs],
-     p' ← pis vs p',
-     assert (to_string h.local_pp_name ++ "_ev" : string) p',
-     vs ← intros,
-     vs.reverse.mmap (λ v,
-       do revert v,
-          applyc ``congr_fun),
-     exact h },
-  return ()
-```
+<p>It uses Simon's apply function equalities tactic</p>
+<div class="codehilite"><pre><span></span><span class="kn">open</span> <span class="n">tactic</span>
+<span class="n">meta</span> <span class="n">def</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">interactive</span><span class="bp">.</span><span class="n">apply_eq</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
+<span class="n">do</span> <span class="n">l</span> <span class="err">←</span> <span class="n">local_context</span><span class="o">,</span>
+   <span class="n">l</span><span class="bp">.</span><span class="n">mmap</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">h</span><span class="o">,</span> <span class="n">try</span> <span class="err">$</span> <span class="n">do</span> <span class="o">{</span>
+     <span class="bp">`</span><span class="o">(</span><span class="err">%%</span><span class="n">x</span> <span class="bp">=</span> <span class="err">%%</span><span class="n">y</span><span class="o">)</span> <span class="err">←</span> <span class="n">infer_type</span> <span class="n">h</span><span class="o">,</span>
+     <span class="o">(</span><span class="n">vs</span><span class="o">,</span><span class="n">t</span><span class="o">)</span> <span class="err">←</span> <span class="n">infer_type</span> <span class="n">x</span> <span class="bp">&gt;&gt;=</span> <span class="n">mk_local_pis</span><span class="o">,</span>
+     <span class="n">p&#39;</span> <span class="err">←</span> <span class="n">mk_app</span> <span class="bp">`</span><span class="n">eq</span> <span class="o">[</span><span class="n">x</span><span class="bp">.</span><span class="n">mk_app</span> <span class="n">vs</span><span class="o">,</span> <span class="n">y</span><span class="bp">.</span><span class="n">mk_app</span> <span class="n">vs</span><span class="o">],</span>
+     <span class="n">p&#39;</span> <span class="err">←</span> <span class="n">pis</span> <span class="n">vs</span> <span class="n">p&#39;</span><span class="o">,</span>
+     <span class="n">assert</span> <span class="o">(</span><span class="n">to_string</span> <span class="n">h</span><span class="bp">.</span><span class="n">local_pp_name</span> <span class="bp">++</span> <span class="s2">&quot;_ev&quot;</span> <span class="o">:</span> <span class="n">string</span><span class="o">)</span> <span class="n">p&#39;</span><span class="o">,</span>
+     <span class="n">vs</span> <span class="err">←</span> <span class="n">intros</span><span class="o">,</span>
+     <span class="n">vs</span><span class="bp">.</span><span class="n">reverse</span><span class="bp">.</span><span class="n">mmap</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">v</span><span class="o">,</span>
+       <span class="n">do</span> <span class="n">revert</span> <span class="n">v</span><span class="o">,</span>
+          <span class="n">applyc</span> <span class="bp">``</span><span class="n">congr_fun</span><span class="o">),</span>
+     <span class="n">exact</span> <span class="n">h</span> <span class="o">},</span>
+  <span class="n">return</span> <span class="o">()</span>
+</pre></div>
 
 #### [ Scott Morrison (Oct 03 2018 at 14:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135098839):
-Patrick, you should investigate whether we could put `finish` or `tauto` inside `tidy`. I suspect they would be fine, I've actually never used them!
+<p>Patrick, you should investigate whether we could put <code>finish</code> or <code>tauto</code> inside <code>tidy</code>. I suspect they would be fine, I've actually never used them!</p>
 
 #### [ Johan Commelin (Oct 03 2018 at 14:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135098888):
-While you're at it, you should also add `cc` and `linarith` to `über`.
+<p>While you're at it, you should also add <code>cc</code> and <code>linarith</code> to <code>über</code>.</p>
 
 #### [ Scott Morrison (Oct 03 2018 at 14:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135098891):
-(A big downside, by the way, of using `tidy` merely as a tactic script writing tool is that we don't build up a library of test cases for it, making it harder to safely tweak.)
+<p>(A big downside, by the way, of using <code>tidy</code> merely as a tactic script writing tool is that we don't build up a library of test cases for it, making it harder to safely tweak.)</p>
 
 #### [ Simon Hudon (Oct 03 2018 at 14:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135098893):
-@**Scott Morrison|110087**, didn't you add congr_fun to `solve_by_elim` recently?
+<p><span class="user-mention" data-user-id="110087">@Scott Morrison</span>, didn't you add congr_fun to <code>solve_by_elim</code> recently?</p>
 
 #### [ Scott Morrison (Oct 03 2018 at 14:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135098899):
-@**Simon Hudon**, yes, but the PR hasn't landed yet.
+<p><span class="user-mention" data-user-id="110026">@Simon Hudon</span>, yes, but the PR hasn't landed yet.</p>
 
 #### [ Simon Hudon (Oct 03 2018 at 14:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135098908):
-Aaaaah! That's why!
+<p>Aaaaah! That's why!</p>
 
 #### [ Johan Commelin (Oct 03 2018 at 14:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135098947):
-```quote
-(A big downside, by the way, of using `tidy` merely as a tactic script writing tool is that we don't build up a library of test cases for it, making it harder to safely tweak.)
-```
-We need caching.
+<blockquote>
+<p>(A big downside, by the way, of using <code>tidy</code> merely as a tactic script writing tool is that we don't build up a library of test cases for it, making it harder to safely tweak.)</p>
+</blockquote>
+<p>We need caching.</p>
 
 #### [ Scott Morrison (Oct 03 2018 at 14:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135098949):
-(I need to deal with your suggestion to use `with` when passing attributes.)
+<p>(I need to deal with your suggestion to use <code>with</code> when passing attributes.)</p>
 
 #### [ Scott Morrison (Oct 03 2018 at 14:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135098965):
-(I've also realised there is a mistake in `solve_by_elim` when dealing with multiple sub-goals, more on that later :-)
+<p>(I've also realised there is a mistake in <code>solve_by_elim</code> when dealing with multiple sub-goals, more on that later :-)</p>
 
 #### [ Simon Hudon (Oct 03 2018 at 14:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135098977):
-I keep getting confused with the PRs that haven't been merged yet
+<p>I keep getting confused with the PRs that haven't been merged yet</p>
 
 #### [ Simon Hudon (Oct 03 2018 at 14:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135099176):
-```quote
-I'm trying to automate my demo file, for comparison. Is there any reason not to try to write a monster tactic trying all automation we have (except speed reason)?
-```
-
-Because proofs in first order logic and anything more expressive is undecidable, you can't build a tactic so that, when it fails, you can say "it tried everything". You could always try a little harder, maybe one more call to `ext` and then `simp` will do it.
+<blockquote>
+<p>I'm trying to automate my demo file, for comparison. Is there any reason not to try to write a monster tactic trying all automation we have (except speed reason)?</p>
+</blockquote>
+<p>Because proofs in first order logic and anything more expressive is undecidable, you can't build a tactic so that, when it fails, you can say "it tried everything". You could always try a little harder, maybe one more call to <code>ext</code> and then <code>simp</code> will do it.</p>
 
 #### [ Scott Morrison (Oct 03 2018 at 14:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135099531):
-@**Patrick Massot**, another way to achieve this is to add the @[tidy] annotation to tactics that you want to try.
+<p><span class="user-mention" data-user-id="110031">@Patrick Massot</span>, another way to achieve this is to add the @[tidy] annotation to tactics that you want to try.</p>
 
 #### [ Johan Commelin (Oct 03 2018 at 14:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135099543):
-Well, maybe if it fails we could conclude "it tried everything that is straightforward up to a reasonable depth". And then "probably this proof needs an *idea*".
+<p>Well, maybe if it fails we could conclude "it tried everything that is straightforward up to a reasonable depth". And then "probably this proof needs an <em>idea</em>".</p>
 
 #### [ Scott Morrison (Oct 03 2018 at 14:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135099562):
-For example, if you write ``@[tidy] meta def la := `[linarith]``, then after that `tidy` will also try calling linarith.
+<p>For example, if you write <code>@[tidy] meta def la := `[linarith]</code>, then after that <code>tidy</code> will also try calling linarith.</p>
 
 #### [ Scott Morrison (Oct 03 2018 at 14:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135099620):
-You could make an import, for example, that super-charged `tidy` with all these other things.
+<p>You could make an import, for example, that super-charged <code>tidy</code> with all these other things.</p>
 
 #### [ Johan Commelin (Oct 03 2018 at 14:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135099623):
-Can you just `local attibute [tidy] linarith`?
+<p>Can you just <code>local attibute [tidy] linarith</code>?</p>
 
 #### [ Scott Morrison (Oct 03 2018 at 14:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135099636):
-Probably not quite that: the `[tidy]` attribute has to be on a `tactic unit` or `tactic string`.
+<p>Probably not quite that: the <code>[tidy]</code> attribute has to be on a <code>tactic unit</code> or <code>tactic string</code>.</p>
 
 #### [ Scott Morrison (Oct 03 2018 at 14:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135099643):
-Any arguments (e.g. to interactive tactics) will break it.
+<p>Any arguments (e.g. to interactive tactics) will break it.</p>
 
 #### [ Scott Morrison (Oct 03 2018 at 14:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135099649):
-Although this is completely fixable.
+<p>Although this is completely fixable.</p>
 
 #### [ Scott Morrison (Oct 03 2018 at 14:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135099666):
-(and we should do so at some point...)
+<p>(and we should do so at some point...)</p>
 
 #### [ Mario Carneiro (Oct 03 2018 at 14:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135099892):
-I think super-tactics like this are not uncommon
+<p>I think super-tactics like this are not uncommon</p>
 
 #### [ Mario Carneiro (Oct 03 2018 at 14:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135099919):
-Everyone wants to be the one tactic to rule them all
+<p>Everyone wants to be the one tactic to rule them all</p>
 
 #### [ Mario Carneiro (Oct 03 2018 at 14:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135099975):
-I think `tidy` has too unassuming a name for a supertactic
+<p>I think <code>tidy</code> has too unassuming a name for a supertactic</p>
 
 #### [ Mario Carneiro (Oct 03 2018 at 14:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135100008):
-It should be called `crush` or `blast` or some similarly violent thing
+<p>It should be called <code>crush</code> or <code>blast</code> or some similarly violent thing</p>
 
 #### [ Simon Hudon (Oct 03 2018 at 14:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135100025):
-What about `nuke`?
+<p>What about <code>nuke</code>?</p>
 
 #### [ Simon Hudon (Oct 03 2018 at 14:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135100094):
-Either that or `solve_violently`
+<p>Either that or <code>solve_violently</code></p>
 
 #### [ Johan Commelin (Oct 03 2018 at 14:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135100271):
-We're all still waiting for Mjölnir
+<p>We're all still waiting for Mjölnir</p>
 
 #### [ Simon Hudon (Oct 03 2018 at 14:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135100412):
-I was always disappointed by what `destruct` does because it feels like a synonym to `destroy`. And now we can't use `destroy` as the name of a super tactic.
+<p>I was always disappointed by what <code>destruct</code> does because it feels like a synonym to <code>destroy</code>. And now we can't use <code>destroy</code> as the name of a super tactic.</p>
 
 #### [ Simon Hudon (Oct 03 2018 at 14:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135100421):
-But we can use `annihilate`
+<p>But we can use <code>annihilate</code></p>
 
 #### [ Johan Commelin (Oct 03 2018 at 14:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135100510):
-You know Grothendieck's parable about proving strategies?
+<p>You know Grothendieck's parable about proving strategies?</p>
 
 #### [ Johan Commelin (Oct 03 2018 at 14:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135100516):
-We should also have `soak`
+<p>We should also have <code>soak</code></p>
 
 #### [ Johan Commelin (Oct 03 2018 at 14:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135100524):
-But it is very time-expensive
+<p>But it is very time-expensive</p>
 
 #### [ Simon Hudon (Oct 03 2018 at 14:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135100529):
-I do not. Please educate me
+<p>I do not. Please educate me</p>
 
 #### [ Johan Commelin (Oct 03 2018 at 14:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135100536):
-Might take a couple of years to run. But it will produce a couple 1000 pages of beautiful math in the end....
+<p>Might take a couple of years to run. But it will produce a couple 1000 pages of beautiful math in the end....</p>
 
 #### [ Johan Commelin (Oct 03 2018 at 14:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135100575):
-I'm searching for it... give me a second
+<p>I'm searching for it... give me a second</p>
 
 #### [ Simon Hudon (Oct 03 2018 at 14:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135100632):
-:D
+<p>:D</p>
 
 #### [ Simon Hudon (Oct 03 2018 at 14:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135100648):
-A similar approach to `by grad_student`
+<p>A similar approach to <code>by grad_student</code></p>
 
 #### [ Johan Commelin (Oct 03 2018 at 14:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135100679):
-https://mathoverflow.net/a/7156
+<p><a href="https://mathoverflow.net/a/7156" target="_blank" title="https://mathoverflow.net/a/7156">https://mathoverflow.net/a/7156</a></p>
 
 #### [ Johan Commelin (Oct 03 2018 at 14:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135100757):
-I think `soak` or `immerse` is different from `grad_student`. It is even more expensive...
+<p>I think <code>soak</code> or <code>immerse</code> is different from <code>grad_student</code>. It is even more expensive...</p>
 
 #### [ Scott Morrison (Oct 03 2018 at 14:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135100786):
-:avocado:
+<p><span class="emoji emoji-1f951" title="avocado">:avocado:</span></p>
 
 #### [ Simon Hudon (Oct 03 2018 at 14:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135100881):
-I love it :D That's what I call putting a problem on the back burner
+<p>I love it :D That's what I call putting a problem on the back burner</p>
 
 #### [ Patrick Massot (Oct 03 2018 at 15:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135104489):
-Blindly adding the tidy attribute to tactics only gives me deterministic timeout
+<p>Blindly adding the tidy attribute to tactics only gives me deterministic timeout</p>
 
 #### [ Patrick Massot (Oct 03 2018 at 15:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135104631):
-especially with norm_num
+<p>especially with norm_num</p>
 
 #### [ Patrick Massot (Oct 03 2018 at 15:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135104661):
-and apply_eq
+<p>and apply_eq</p>
 
 #### [ Simon Hudon (Oct 03 2018 at 15:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135104737):
-`apply_eq` never fails and I believe neither does `norm_num`. Does `tidy` repeated try its tactics?
+<p><code>apply_eq</code> never fails and I believe neither does <code>norm_num</code>. Does <code>tidy</code> repeated try its tactics?</p>
 
 #### [ Patrick Massot (Oct 03 2018 at 15:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135104776):
-Wow, you're still not sleeping? Did you decide to simply skip that step?
+<p>Wow, you're still not sleeping? Did you decide to simply skip that step?</p>
 
 #### [ Simon Hudon (Oct 03 2018 at 15:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135104850):
-Yeah, I'll pick it up later. I have an appointment this morning so at some point I got afraid I would sleep right passed it if I managed to fall asleep so I got out of bed
+<p>Yeah, I'll pick it up later. I have an appointment this morning so at some point I got afraid I would sleep right passed it if I managed to fall asleep so I got out of bed</p>
 
 #### [ Scott Morrison (Oct 03 2018 at 15:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135104875):
-Yes, tidy relies on the "do something or fail" model for tactics.
+<p>Yes, tidy relies on the "do something or fail" model for tactics.</p>
 
 #### [ Scott Morrison (Oct 03 2018 at 15:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135104876):
-Speaking of sleeping.
+<p>Speaking of sleeping.</p>
 
 #### [ Patrick Massot (Oct 03 2018 at 16:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135104959):
-Do you still see a way to make use of norm_num inside tidy?
+<p>Do you still see a way to make use of norm_num inside tidy?</p>
 
 #### [ Simon Hudon (Oct 03 2018 at 16:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135105003):
-You can write a tactic that checks if progress was made and fails if none was made
+<p>You can write a tactic that checks if progress was made and fails if none was made</p>
 
 #### [ Patrick Massot (Oct 03 2018 at 16:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135105026):
-how? comparing the new goal with previous goal?
+<p>how? comparing the new goal with previous goal?</p>
 
 #### [ Scott Morrison (Oct 03 2018 at 16:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135105072):
-And a better solution is to change the behaviour of norm_num... Who wants tactics to silently fail, anyway? :-)
+<p>And a better solution is to change the behaviour of norm_num... Who wants tactics to silently fail, anyway? :-)</p>
 
 #### [ Scott Morrison (Oct 03 2018 at 16:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135105092):
-Exactly. It's a fun exercise, perhaps the first tactic I ever wrote. :-)
+<p>Exactly. It's a fun exercise, perhaps the first tactic I ever wrote. :-)</p>
 
 #### [ Simon Hudon (Oct 03 2018 at 16:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135105096):
-```lean
-meta def guard_progress (tac : tactic unit) : tactic unit :=
-do gs <- get_goals,
-   tac,
-   gs' <- get_goals,
-   guard (gs ≠ gs')
-```
+<div class="codehilite"><pre><span></span><span class="n">meta</span> <span class="n">def</span> <span class="n">guard_progress</span> <span class="o">(</span><span class="n">tac</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span><span class="o">)</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
+<span class="n">do</span> <span class="n">gs</span> <span class="bp">&lt;-</span> <span class="n">get_goals</span><span class="o">,</span>
+   <span class="n">tac</span><span class="o">,</span>
+   <span class="n">gs&#39;</span> <span class="bp">&lt;-</span> <span class="n">get_goals</span><span class="o">,</span>
+   <span class="n">guard</span> <span class="o">(</span><span class="n">gs</span> <span class="bp">≠</span> <span class="n">gs&#39;</span><span class="o">)</span>
+</pre></div>
 
 #### [ Patrick Massot (Oct 03 2018 at 16:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135105120):
-It was too fun for Simon to resist
+<p>It was too fun for Simon to resist</p>
 
 #### [ Simon Hudon (Oct 03 2018 at 16:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135105126):
-```quote
-Exactly. It's a fun exercise, perhaps the first tactic I ever wrote. :-)
-```
-Which one?
+<blockquote>
+<p>Exactly. It's a fun exercise, perhaps the first tactic I ever wrote. :-)</p>
+</blockquote>
+<p>Which one?</p>
 
 #### [ Simon Hudon (Oct 03 2018 at 16:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135105132):
-I'm so greedy. Sorry
+<p>I'm so greedy. Sorry</p>
 
 #### [ Patrick Massot (Oct 03 2018 at 16:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135105229):
-But you are both maligning norm_num, it can actually fail
+<p>But you are both maligning norm_num, it can actually fail</p>
 
 #### [ Simon Hudon (Oct 03 2018 at 16:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135105261):
-I can make up for this theft. @**Patrick Massot** If you didn't have `assert`, `assertv`, `define`, `definev`, `note` or `pose`, how to you create a new goal and an associated assumption?
+<p>I can make up for this theft. <span class="user-mention" data-user-id="110031">@Patrick Massot</span> If you didn't have <code>assert</code>, <code>assertv</code>, <code>define</code>, <code>definev</code>, <code>note</code> or <code>pose</code>, how to you create a new goal and an associated assumption?</p>
 
 #### [ Johan Commelin (Oct 03 2018 at 16:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135105355):
-What are `note` and `pose`?
+<p>What are <code>note</code> and <code>pose</code>?</p>
 
 #### [ Patrick Massot (Oct 03 2018 at 16:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135105364):
-I don't even understand the question
+<p>I don't even understand the question</p>
 
 #### [ Johan Commelin (Oct 03 2018 at 16:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135105380):
-Actually, I don't recognise any of those tactics.
+<p>Actually, I don't recognise any of those tactics.</p>
 
 #### [ Johan Commelin (Oct 03 2018 at 16:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135105394):
-I only use `have foo : blah,`
+<p>I only use <code>have foo : blah,</code></p>
 
 #### [ Johan Commelin (Oct 03 2018 at 16:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135105405):
-Or `suffices`
+<p>Or <code>suffices</code></p>
 
 #### [ Patrick Massot (Oct 03 2018 at 16:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135105407):
-Johan, this is all meta
+<p>Johan, this is all meta</p>
 
 #### [ Patrick Massot (Oct 03 2018 at 16:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135105428):
-we are discussing tactic writing here, not plebeian proof writing
+<p>we are discussing tactic writing here, not plebeian proof writing</p>
 
 #### [ Simon Hudon (Oct 03 2018 at 16:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135105524):
-You got it. There's also a non-condescending way to put it :P
+<p>You got it. There's also a non-condescending way to put it :P</p>
 
 #### [ Patrick Massot (Oct 03 2018 at 16:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135105640):
-Hopefully the fact *I* wrote this (instead of Scott, you or any other tactic writer) was a clear enough hint about how to read it :wink:
+<p>Hopefully the fact <em>I</em> wrote this (instead of Scott, you or any other tactic writer) was a clear enough hint about how to read it <span class="emoji emoji-1f609" title="wink">:wink:</span></p>
 
 #### [ Simon Hudon (Oct 03 2018 at 16:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135105736):
-I thought so too. I just had to react to the tone :laughing:
+<p>I thought so too. I just had to react to the tone <span class="emoji emoji-1f606" title="laughing">:laughing:</span></p>
 
 #### [ Mario Carneiro (Oct 03 2018 at 16:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135105831):
-By the way, those all used to be interactive tactics. I was the one who advocated for simplifying it all down to `have` and `let`
+<p>By the way, those all used to be interactive tactics. I was the one who advocated for simplifying it all down to <code>have</code> and <code>let</code></p>
 
 #### [ Mario Carneiro (Oct 03 2018 at 16:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135105852):
-and `suffices` because why not
+<p>and <code>suffices</code> because why not</p>
 
 #### [ Simon Hudon (Oct 03 2018 at 16:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135105990):
-That's a nice improvement
+<p>That's a nice improvement</p>
 
 #### [ Simon Hudon (Oct 03 2018 at 16:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135106008):
-It's especially nice that the same keywords work in tactic mode and in term mode
+<p>It's especially nice that the same keywords work in tactic mode and in term mode</p>
 
 #### [ Patrick Massot (Oct 03 2018 at 16:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135106062):
-it's also slightly confusing that the accepted syntaxes are not quite the same
+<p>it's also slightly confusing that the accepted syntaxes are not quite the same</p>
 
 #### [ Patrick Massot (Oct 03 2018 at 16:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135106078):
-fortunately that issue is easily fixed by working only in tactic mode
+<p>fortunately that issue is easily fixed by working only in tactic mode</p>
 
 #### [ Patrick Massot (Oct 03 2018 at 16:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135106213):
-Returning to norm_num and tidy, I'm not able to make any progress on getting `example : (0 : ℝ) < (1 : ℝ) := by tidy` to work. I tried adding norm_num to the tidy set, either with or without progress guard but no luck
+<p>Returning to norm_num and tidy, I'm not able to make any progress on getting <code>example : (0 : ℝ) &lt; (1 : ℝ) := by tidy</code> to work. I tried adding norm_num to the tidy set, either with or without progress guard but no luck</p>
 
 #### [ Simon Hudon (Oct 03 2018 at 16:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135106356):
-That's annoying
+<p>That's annoying</p>
 
 #### [ Patrick Massot (Oct 03 2018 at 16:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135106366):
-That's probably only me
+<p>That's probably only me</p>
 
 #### [ Simon Hudon (Oct 03 2018 at 16:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135106393):
-That's what I meant, you keep complaining ... :stuck_out_tongue_wink:
+<p>That's what I meant, you keep complaining ... <span class="emoji emoji-1f61c" title="stuck out tongue wink">:stuck_out_tongue_wink:</span></p>
 
 #### [ Patrick Massot (Oct 03 2018 at 16:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135106409):
-What's fun is that the guard_progress trick works with apply_eq which is not meant to modify the goal
+<p>What's fun is that the guard_progress trick works with apply_eq which is not meant to modify the goal</p>
 
 #### [ Patrick Massot (Oct 03 2018 at 16:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135106424):
-My tactic writing is pure Brownian motion
+<p>My tactic writing is pure Brownian motion</p>
 
 #### [ Simon Hudon (Oct 03 2018 at 16:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135106468):
-Ah! It's time for the next lesson
+<p>Ah! It's time for the next lesson</p>
 
 #### [ Johan Commelin (Oct 03 2018 at 16:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135106484):
-If we have Brownian motions in mathlib, would this help you with tactic writing :stuck_out_tongue_wink: ?
+<p>If we have Brownian motions in mathlib, would this help you with tactic writing <span class="emoji emoji-1f61c" title="stuck out tongue wink">:stuck_out_tongue_wink:</span> ?</p>
 
 #### [ Simon Hudon (Oct 03 2018 at 16:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135106499):
-When you use `get_goals`, what exactly does it give you? First wrong assumption: it tells you the proposition that the goal aims to prove.
+<p>When you use <code>get_goals</code>, what exactly does it give you? First wrong assumption: it tells you the proposition that the goal aims to prove.</p>
 
 #### [ Simon Hudon (Oct 03 2018 at 16:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135106574):
-```quote
-If we have Brownian motions in mathlib, would this help you with tactic writing :stuck_out_tongue_wink: ?
-```
-Sorry to disappoint: my research area is scheduling in distributed and cyber-physical systems (keyword: scheduling) and I'm still constantly procrastinating and arriving late
+<blockquote>
+<p>If we have Brownian motions in mathlib, would this help you with tactic writing <span class="emoji emoji-1f61c" title="stuck out tongue wink">:stuck_out_tongue_wink:</span> ?</p>
+</blockquote>
+<p>Sorry to disappoint: my research area is scheduling in distributed and cyber-physical systems (keyword: scheduling) and I'm still constantly procrastinating and arriving late</p>
 
 #### [ Simon Hudon (Oct 03 2018 at 16:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135106597):
-You may know all the theory there is on a subject, that doesn't mean that you can do the thing yourself
+<p>You may know all the theory there is on a subject, that doesn't mean that you can do the thing yourself</p>
 
 #### [ Simon Hudon (Oct 03 2018 at 16:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135106704):
-```quote
-When you use `get_goals`, what exactly does it give you? First wrong assumption: it tells you the proposition that the goal aims to prove.
-```
-What it actually gives you is a list of unassigned meta variables. An unassigned meta variable has a type and a set of local constants that it can see. It doesn't have a value yet. Just like a proof goal: you know what you have to prove but you don't have a proof yet.
+<blockquote>
+<p>When you use <code>get_goals</code>, what exactly does it give you? First wrong assumption: it tells you the proposition that the goal aims to prove.</p>
+</blockquote>
+<p>What it actually gives you is a list of unassigned meta variables. An unassigned meta variable has a type and a set of local constants that it can see. It doesn't have a value yet. Just like a proof goal: you know what you have to prove but you don't have a proof yet.</p>
 
 #### [ Simon Hudon (Oct 03 2018 at 16:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135106832):
-If your goal is `⊢ succ x < succ y`, you have a meta variable `?m_1 : succ x < succ y`. If you want to apply `succ_lt_succ`, It
+<p>If your goal is <code>⊢ succ x &lt; succ y</code>, you have a meta variable <code>?m_1 : succ x &lt; succ y</code>. If you want to apply <code>succ_lt_succ</code>, It</p>
 
 #### [ Simon Hudon (Oct 03 2018 at 16:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135106985):
-it's like creating a meta variable `?m_2 : x < y` and then you construct an expression `succ_lt_succ ?m_2` which you assign to `?m_1`. Then, you remove `?m_1` from the list of goals and you put `?m_2` instead. The goal changes because you have a different meta variable in the list of goals now.
+<p>it's like creating a meta variable <code>?m_2 : x &lt; y</code> and then you construct an expression <code>succ_lt_succ ?m_2</code> which you assign to <code>?m_1</code>. Then, you remove <code>?m_1</code> from the list of goals and you put <code>?m_2</code> instead. The goal changes because you have a different meta variable in the list of goals now.</p>
 
 #### [ Patrick Massot (Oct 03 2018 at 16:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135107297):
-so the short version is: the goal comes with its local context, right?
+<p>so the short version is: the goal comes with its local context, right?</p>
 
 #### [ Simon Hudon (Oct 03 2018 at 16:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135107588):
-That is correct
+<p>That is correct</p>
 
 #### [ Patrick Massot (Oct 03 2018 at 16:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135107927):
-I should stop playing, and focus on the archaic manual referee process, but I have https://github.com/PatrickMassot/lean-scratchpad/blob/master/src/auto_demo.lean
+<p>I should stop playing, and focus on the archaic manual referee process, but I have <a href="https://github.com/PatrickMassot/lean-scratchpad/blob/master/src/auto_demo.lean" target="_blank" title="https://github.com/PatrickMassot/lean-scratchpad/blob/master/src/auto_demo.lean">https://github.com/PatrickMassot/lean-scratchpad/blob/master/src/auto_demo.lean</a></p>
 
 #### [ Patrick Massot (Oct 03 2018 at 16:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135108002):
-This is part of my demo file with tidy everywhere
+<p>This is part of my demo file with tidy everywhere</p>
 
 #### [ Patrick Massot (Oct 03 2018 at 16:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135108465):
-Thanks for all your help!
+<p>Thanks for all your help!</p>
 
 #### [ Edward Ayers (Oct 03 2018 at 17:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135111366):
-```quote
-What about `nuke`?
-```
-Can emoji be tactic names?
+<blockquote>
+<p>What about <code>nuke</code>?</p>
+</blockquote>
+<p>Can emoji be tactic names?</p>
 
 #### [ Kevin Buzzard (Oct 03 2018 at 17:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135113179):
-This has come up before
+<p>This has come up before</p>
 
 #### [ Kevin Buzzard (Oct 03 2018 at 17:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135113199):
-and I believe there was a trick using quotations somehow
+<p>and I believe there was a trick using quotations somehow</p>
 
 #### [ Patrick Massot (Oct 03 2018 at 17:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135113247):
-https://leanprover.zulipchat.com/#narrow/stream/116395-maths/subject/algebra.20on.20subtypes/near/129927817
+<p><a href="#narrow/stream/116395-maths/subject/algebra.20on.20subtypes/near/129927817" title="#narrow/stream/116395-maths/subject/algebra.20on.20subtypes/near/129927817">https://leanprover.zulipchat.com/#narrow/stream/116395-maths/subject/algebra.20on.20subtypes/near/129927817</a></p>
 
 
 {% endraw %}

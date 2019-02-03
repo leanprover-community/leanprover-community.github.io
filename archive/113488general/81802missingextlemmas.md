@@ -12,199 +12,198 @@ permalink: archive/113488general/81802missingextlemmas.html
 
 {% raw %}
 #### [ Johan Commelin (Oct 03 2018 at 10:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135088491):
-How many of the following should be marked with `@[extensionality]`?
-```lean
-data/buffer/basic.lean:lemma ext : ∀ {b₁ b₂ : buffer α}, to_list b₁ = to_list b₂ → b₁ = b₂
-data/equiv/basic.lean:lemma ext (f g : equiv α β) (H : ∀ x, f x = g x) : f = g :=
-data/finsupp.lean:lemma ext : ∀{f g : α →₀ β}, (∀a, f a = g a) → f = g
-data/list/basic.lean:lemma foldl_ext (f g : α → β → α) (a : α)
-data/list/basic.lean:lemma foldr_ext (f g : α → β → β) (b : β)
-data/prod.lean:lemma ext {α β} {p q : α × β} : p.1 = q.1 → p.2 = q.2 → p = q :=
-data/subtype.lean:lemma subtype.ext {a1 a2 : {x // β x}} : a1 = a2 ↔ a1.val = a2.val :=
-data/subtype.lean:lemma subtype.coe_ext {a1 a2 : {x // β x}} : a1 = a2 ↔ (a1 : α) = a2 :=
-logic/function.lean:lemma hfunext {α α': Sort u} {β : α → Sort v} {β' : α' → Sort v} {f : Πa, β a} {f' : Πa, β' a}
-order/filter.lean:protected lemma ext : (∀ s, s ∈ f.sets ↔ s ∈ g.sets) → f = g :=
-category/applicative.lean:theorem applicative.ext {F} : ∀ {A1 : applicative F} {A2 : applicative F}
-category/functor.lean:theorem functor.ext {F} : ∀ {F1 : functor F} {F2 : functor F}
-data/analysis/topology.lean:theorem ext [T : topological_space α] {σ : Type*} {F : ctop α σ}
-data/complex/basic.lean:theorem ext : ∀ {z w : ℂ}, z.re = w.re → z.im = w.im → z = w
-data/finset.lean:theorem ext {s₁ s₂ : finset α} : s₁ = s₂ ↔ ∀ a, a ∈ s₁ ↔ a ∈ s₂ :=
-data/list/basic.lean:theorem ext : ∀ {l₁ l₂ : list α}, (∀n, nth l₁ n = nth l₂ n) → l₁ = l₂
-data/list/perm.lean:theorem perm_ext {l₁ l₂ : list α} (d₁ : nodup l₁) (d₂ : nodup l₂) : l₁ ~ l₂ ↔ ∀a, a ∈ l₁ ↔ a ∈ l₂ :=
-data/multiset.lean:theorem ext {s t : multiset α} : s = t ↔ ∀ a, count a s = count a t :=
-data/multiset.lean:theorem nodup_ext {s t : multiset α} : nodup s → nodup t → (s = t ↔ ∀ a, a ∈ s ↔ a ∈ t) :=
-data/multiset.lean:theorem erase_dup_ext {s t : multiset α} : erase_dup s = erase_dup t ↔ ∀ a, a ∈ s ↔ a ∈ t :=
-data/option.lean:theorem ext : ∀ {o₁ o₂ : option α}, (∀ a, a ∈ o₁ ↔ a ∈ o₂) → o₁ = o₂
-data/real/cau_seq.lean:theorem ext {f g : cau_seq β abv} (h : ∀ i, f i = g i) : f = g :=
-data/semiquot.lean:theorem ext {q₁ q₂ : semiquot α} : q₁ = q₂ ↔ ∀ a, a ∈ q₁ ↔ a ∈ q₂ :=
-data/seq/wseq.lean:theorem equiv.ext {s t : wseq α} (h : ∀ n, nth s n ~ nth t n) : s ~ t :=
-data/set/basic.lean:theorem set_coe.ext {s : set α} {a b : s} : (↑a : α) = ↑b → a = b :=
-data/set/basic.lean:theorem ext {a b : set α} (h : ∀ x, x ∈ a ↔ x ∈ b) : a = b :=
-group_theory/free_abelian_group.lean:protected theorem ext (g h : free_abelian_group α → β)
-linear_algebra/linear_map_module.lean:theorem ext (h : ∀ x, A x = B x) : A = B := subtype.eq $ funext h
-linear_algebra/tensor_product.lean:theorem to_module.ext {g h : M ⊗ N → P}
-number_theory/dioph.lean:  theorem ext {S S' : set (α → ℕ)} (d : dioph S) (H : ∀v, S v ↔ S' v) : dioph S' :=
-number_theory/pell.lean:  theorem ext : ∀ {z w : ℤ√d}, z = w ↔ z.re = w.re ∧ z.im = w.im
-order/basic.lean:theorem preorder.ext {α} {A B : preorder α}
-order/basic.lean:theorem partial_order.ext {α} {A B : partial_order α}
-order/basic.lean:theorem linear_order.ext {α} {A B : linear_order α}
-order/bounded_lattice.lean:theorem order_top.ext {α} {A B : order_top α}
-order/bounded_lattice.lean:theorem order_bot.ext {α} {A B : order_bot α}
-order/bounded_lattice.lean:theorem bounded_lattice.ext {α} {A B : bounded_lattice α}
-order/lattice.lean:theorem semilattice_sup.ext {α} {A B : semilattice_sup α}
-order/lattice.lean:theorem semilattice_inf.ext {α} {A B : semilattice_inf α}
-order/lattice.lean:theorem lattice.ext {α} {A B : lattice α}
-set_theory/zfc.lean:theorem equiv.ext : Π (x y : pSet), equiv x y ↔ (x ⊆ y ∧ y ⊆ x)
-set_theory/zfc.lean:theorem mem.ext : Π {x y : pSet.{u}}, (∀w:pSet.{u}, w ∈ x ↔ w ∈ y) → equiv x y
-set_theory/zfc.lean:theorem ext {x y : Set.{u}} : (∀z:Set.{u}, z ∈ x ↔ z ∈ y) → x = y :=
-```
+<p>How many of the following should be marked with <code>@[extensionality]</code>?</p>
+<div class="codehilite"><pre><span></span><span class="n">data</span><span class="bp">/</span><span class="n">buffer</span><span class="bp">/</span><span class="n">basic</span><span class="bp">.</span><span class="n">lean</span><span class="o">:</span><span class="kn">lemma</span> <span class="n">ext</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">b₁</span> <span class="n">b₂</span> <span class="o">:</span> <span class="n">buffer</span> <span class="n">α</span><span class="o">},</span> <span class="n">to_list</span> <span class="n">b₁</span> <span class="bp">=</span> <span class="n">to_list</span> <span class="n">b₂</span> <span class="bp">→</span> <span class="n">b₁</span> <span class="bp">=</span> <span class="n">b₂</span>
+<span class="n">data</span><span class="bp">/</span><span class="n">equiv</span><span class="bp">/</span><span class="n">basic</span><span class="bp">.</span><span class="n">lean</span><span class="o">:</span><span class="kn">lemma</span> <span class="n">ext</span> <span class="o">(</span><span class="n">f</span> <span class="n">g</span> <span class="o">:</span> <span class="n">equiv</span> <span class="n">α</span> <span class="n">β</span><span class="o">)</span> <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span><span class="o">,</span> <span class="n">f</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">g</span> <span class="n">x</span><span class="o">)</span> <span class="o">:</span> <span class="n">f</span> <span class="bp">=</span> <span class="n">g</span> <span class="o">:=</span>
+<span class="n">data</span><span class="bp">/</span><span class="n">finsupp</span><span class="bp">.</span><span class="n">lean</span><span class="o">:</span><span class="kn">lemma</span> <span class="n">ext</span> <span class="o">:</span> <span class="bp">∀</span><span class="o">{</span><span class="n">f</span> <span class="n">g</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span><span class="err">₀</span> <span class="n">β</span><span class="o">},</span> <span class="o">(</span><span class="bp">∀</span><span class="n">a</span><span class="o">,</span> <span class="n">f</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">g</span> <span class="n">a</span><span class="o">)</span> <span class="bp">→</span> <span class="n">f</span> <span class="bp">=</span> <span class="n">g</span>
+<span class="n">data</span><span class="bp">/</span><span class="n">list</span><span class="bp">/</span><span class="n">basic</span><span class="bp">.</span><span class="n">lean</span><span class="o">:</span><span class="kn">lemma</span> <span class="n">foldl_ext</span> <span class="o">(</span><span class="n">f</span> <span class="n">g</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span> <span class="bp">→</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span>
+<span class="n">data</span><span class="bp">/</span><span class="n">list</span><span class="bp">/</span><span class="n">basic</span><span class="bp">.</span><span class="n">lean</span><span class="o">:</span><span class="kn">lemma</span> <span class="n">foldr_ext</span> <span class="o">(</span><span class="n">f</span> <span class="n">g</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span> <span class="o">(</span><span class="n">b</span> <span class="o">:</span> <span class="n">β</span><span class="o">)</span>
+<span class="n">data</span><span class="bp">/</span><span class="n">prod</span><span class="bp">.</span><span class="n">lean</span><span class="o">:</span><span class="kn">lemma</span> <span class="n">ext</span> <span class="o">{</span><span class="n">α</span> <span class="n">β</span><span class="o">}</span> <span class="o">{</span><span class="n">p</span> <span class="n">q</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">×</span> <span class="n">β</span><span class="o">}</span> <span class="o">:</span> <span class="n">p</span><span class="bp">.</span><span class="mi">1</span> <span class="bp">=</span> <span class="n">q</span><span class="bp">.</span><span class="mi">1</span> <span class="bp">→</span> <span class="n">p</span><span class="bp">.</span><span class="mi">2</span> <span class="bp">=</span> <span class="n">q</span><span class="bp">.</span><span class="mi">2</span> <span class="bp">→</span> <span class="n">p</span> <span class="bp">=</span> <span class="n">q</span> <span class="o">:=</span>
+<span class="n">data</span><span class="bp">/</span><span class="n">subtype</span><span class="bp">.</span><span class="n">lean</span><span class="o">:</span><span class="kn">lemma</span> <span class="n">subtype</span><span class="bp">.</span><span class="n">ext</span> <span class="o">{</span><span class="n">a1</span> <span class="n">a2</span> <span class="o">:</span> <span class="o">{</span><span class="n">x</span> <span class="bp">//</span> <span class="n">β</span> <span class="n">x</span><span class="o">}}</span> <span class="o">:</span> <span class="n">a1</span> <span class="bp">=</span> <span class="n">a2</span> <span class="bp">↔</span> <span class="n">a1</span><span class="bp">.</span><span class="n">val</span> <span class="bp">=</span> <span class="n">a2</span><span class="bp">.</span><span class="n">val</span> <span class="o">:=</span>
+<span class="n">data</span><span class="bp">/</span><span class="n">subtype</span><span class="bp">.</span><span class="n">lean</span><span class="o">:</span><span class="kn">lemma</span> <span class="n">subtype</span><span class="bp">.</span><span class="n">coe_ext</span> <span class="o">{</span><span class="n">a1</span> <span class="n">a2</span> <span class="o">:</span> <span class="o">{</span><span class="n">x</span> <span class="bp">//</span> <span class="n">β</span> <span class="n">x</span><span class="o">}}</span> <span class="o">:</span> <span class="n">a1</span> <span class="bp">=</span> <span class="n">a2</span> <span class="bp">↔</span> <span class="o">(</span><span class="n">a1</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="bp">=</span> <span class="n">a2</span> <span class="o">:=</span>
+<span class="n">logic</span><span class="bp">/</span><span class="n">function</span><span class="bp">.</span><span class="n">lean</span><span class="o">:</span><span class="kn">lemma</span> <span class="n">hfunext</span> <span class="o">{</span><span class="n">α</span> <span class="n">α&#39;</span><span class="o">:</span> <span class="n">Sort</span> <span class="n">u</span><span class="o">}</span> <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">Sort</span> <span class="n">v</span><span class="o">}</span> <span class="o">{</span><span class="n">β&#39;</span> <span class="o">:</span> <span class="n">α&#39;</span> <span class="bp">→</span> <span class="n">Sort</span> <span class="n">v</span><span class="o">}</span> <span class="o">{</span><span class="n">f</span> <span class="o">:</span> <span class="bp">Π</span><span class="n">a</span><span class="o">,</span> <span class="n">β</span> <span class="n">a</span><span class="o">}</span> <span class="o">{</span><span class="n">f&#39;</span> <span class="o">:</span> <span class="bp">Π</span><span class="n">a</span><span class="o">,</span> <span class="n">β&#39;</span> <span class="n">a</span><span class="o">}</span>
+<span class="n">order</span><span class="bp">/</span><span class="n">filter</span><span class="bp">.</span><span class="n">lean</span><span class="o">:</span><span class="kn">protected</span> <span class="kn">lemma</span> <span class="n">ext</span> <span class="o">:</span> <span class="o">(</span><span class="bp">∀</span> <span class="n">s</span><span class="o">,</span> <span class="n">s</span> <span class="err">∈</span> <span class="n">f</span><span class="bp">.</span><span class="n">sets</span> <span class="bp">↔</span> <span class="n">s</span> <span class="err">∈</span> <span class="n">g</span><span class="bp">.</span><span class="n">sets</span><span class="o">)</span> <span class="bp">→</span> <span class="n">f</span> <span class="bp">=</span> <span class="n">g</span> <span class="o">:=</span>
+<span class="n">category</span><span class="bp">/</span><span class="n">applicative</span><span class="bp">.</span><span class="n">lean</span><span class="o">:</span><span class="kn">theorem</span> <span class="n">applicative</span><span class="bp">.</span><span class="n">ext</span> <span class="o">{</span><span class="n">F</span><span class="o">}</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">A1</span> <span class="o">:</span> <span class="n">applicative</span> <span class="n">F</span><span class="o">}</span> <span class="o">{</span><span class="n">A2</span> <span class="o">:</span> <span class="n">applicative</span> <span class="n">F</span><span class="o">}</span>
+<span class="n">category</span><span class="bp">/</span><span class="n">functor</span><span class="bp">.</span><span class="n">lean</span><span class="o">:</span><span class="kn">theorem</span> <span class="n">functor</span><span class="bp">.</span><span class="n">ext</span> <span class="o">{</span><span class="n">F</span><span class="o">}</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">F1</span> <span class="o">:</span> <span class="n">functor</span> <span class="n">F</span><span class="o">}</span> <span class="o">{</span><span class="n">F2</span> <span class="o">:</span> <span class="n">functor</span> <span class="n">F</span><span class="o">}</span>
+<span class="n">data</span><span class="bp">/</span><span class="n">analysis</span><span class="bp">/</span><span class="n">topology</span><span class="bp">.</span><span class="n">lean</span><span class="o">:</span><span class="kn">theorem</span> <span class="n">ext</span> <span class="o">[</span><span class="n">T</span> <span class="o">:</span> <span class="n">topological_space</span> <span class="n">α</span><span class="o">]</span> <span class="o">{</span><span class="n">σ</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">{</span><span class="n">F</span> <span class="o">:</span> <span class="n">ctop</span> <span class="n">α</span> <span class="n">σ</span><span class="o">}</span>
+<span class="n">data</span><span class="bp">/</span><span class="n">complex</span><span class="bp">/</span><span class="n">basic</span><span class="bp">.</span><span class="n">lean</span><span class="o">:</span><span class="kn">theorem</span> <span class="n">ext</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">z</span> <span class="n">w</span> <span class="o">:</span> <span class="n">ℂ</span><span class="o">},</span> <span class="n">z</span><span class="bp">.</span><span class="n">re</span> <span class="bp">=</span> <span class="n">w</span><span class="bp">.</span><span class="n">re</span> <span class="bp">→</span> <span class="n">z</span><span class="bp">.</span><span class="n">im</span> <span class="bp">=</span> <span class="n">w</span><span class="bp">.</span><span class="n">im</span> <span class="bp">→</span> <span class="n">z</span> <span class="bp">=</span> <span class="n">w</span>
+<span class="n">data</span><span class="bp">/</span><span class="n">finset</span><span class="bp">.</span><span class="n">lean</span><span class="o">:</span><span class="kn">theorem</span> <span class="n">ext</span> <span class="o">{</span><span class="n">s₁</span> <span class="n">s₂</span> <span class="o">:</span> <span class="n">finset</span> <span class="n">α</span><span class="o">}</span> <span class="o">:</span> <span class="n">s₁</span> <span class="bp">=</span> <span class="n">s₂</span> <span class="bp">↔</span> <span class="bp">∀</span> <span class="n">a</span><span class="o">,</span> <span class="n">a</span> <span class="err">∈</span> <span class="n">s₁</span> <span class="bp">↔</span> <span class="n">a</span> <span class="err">∈</span> <span class="n">s₂</span> <span class="o">:=</span>
+<span class="n">data</span><span class="bp">/</span><span class="n">list</span><span class="bp">/</span><span class="n">basic</span><span class="bp">.</span><span class="n">lean</span><span class="o">:</span><span class="kn">theorem</span> <span class="n">ext</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">l₁</span> <span class="n">l₂</span> <span class="o">:</span> <span class="n">list</span> <span class="n">α</span><span class="o">},</span> <span class="o">(</span><span class="bp">∀</span><span class="n">n</span><span class="o">,</span> <span class="n">nth</span> <span class="n">l₁</span> <span class="n">n</span> <span class="bp">=</span> <span class="n">nth</span> <span class="n">l₂</span> <span class="n">n</span><span class="o">)</span> <span class="bp">→</span> <span class="n">l₁</span> <span class="bp">=</span> <span class="n">l₂</span>
+<span class="n">data</span><span class="bp">/</span><span class="n">list</span><span class="bp">/</span><span class="n">perm</span><span class="bp">.</span><span class="n">lean</span><span class="o">:</span><span class="kn">theorem</span> <span class="n">perm_ext</span> <span class="o">{</span><span class="n">l₁</span> <span class="n">l₂</span> <span class="o">:</span> <span class="n">list</span> <span class="n">α</span><span class="o">}</span> <span class="o">(</span><span class="n">d₁</span> <span class="o">:</span> <span class="n">nodup</span> <span class="n">l₁</span><span class="o">)</span> <span class="o">(</span><span class="n">d₂</span> <span class="o">:</span> <span class="n">nodup</span> <span class="n">l₂</span><span class="o">)</span> <span class="o">:</span> <span class="n">l₁</span> <span class="bp">~</span> <span class="n">l₂</span> <span class="bp">↔</span> <span class="bp">∀</span><span class="n">a</span><span class="o">,</span> <span class="n">a</span> <span class="err">∈</span> <span class="n">l₁</span> <span class="bp">↔</span> <span class="n">a</span> <span class="err">∈</span> <span class="n">l₂</span> <span class="o">:=</span>
+<span class="n">data</span><span class="bp">/</span><span class="n">multiset</span><span class="bp">.</span><span class="n">lean</span><span class="o">:</span><span class="kn">theorem</span> <span class="n">ext</span> <span class="o">{</span><span class="n">s</span> <span class="n">t</span> <span class="o">:</span> <span class="n">multiset</span> <span class="n">α</span><span class="o">}</span> <span class="o">:</span> <span class="n">s</span> <span class="bp">=</span> <span class="n">t</span> <span class="bp">↔</span> <span class="bp">∀</span> <span class="n">a</span><span class="o">,</span> <span class="n">count</span> <span class="n">a</span> <span class="n">s</span> <span class="bp">=</span> <span class="n">count</span> <span class="n">a</span> <span class="n">t</span> <span class="o">:=</span>
+<span class="n">data</span><span class="bp">/</span><span class="n">multiset</span><span class="bp">.</span><span class="n">lean</span><span class="o">:</span><span class="kn">theorem</span> <span class="n">nodup_ext</span> <span class="o">{</span><span class="n">s</span> <span class="n">t</span> <span class="o">:</span> <span class="n">multiset</span> <span class="n">α</span><span class="o">}</span> <span class="o">:</span> <span class="n">nodup</span> <span class="n">s</span> <span class="bp">→</span> <span class="n">nodup</span> <span class="n">t</span> <span class="bp">→</span> <span class="o">(</span><span class="n">s</span> <span class="bp">=</span> <span class="n">t</span> <span class="bp">↔</span> <span class="bp">∀</span> <span class="n">a</span><span class="o">,</span> <span class="n">a</span> <span class="err">∈</span> <span class="n">s</span> <span class="bp">↔</span> <span class="n">a</span> <span class="err">∈</span> <span class="n">t</span><span class="o">)</span> <span class="o">:=</span>
+<span class="n">data</span><span class="bp">/</span><span class="n">multiset</span><span class="bp">.</span><span class="n">lean</span><span class="o">:</span><span class="kn">theorem</span> <span class="n">erase_dup_ext</span> <span class="o">{</span><span class="n">s</span> <span class="n">t</span> <span class="o">:</span> <span class="n">multiset</span> <span class="n">α</span><span class="o">}</span> <span class="o">:</span> <span class="n">erase_dup</span> <span class="n">s</span> <span class="bp">=</span> <span class="n">erase_dup</span> <span class="n">t</span> <span class="bp">↔</span> <span class="bp">∀</span> <span class="n">a</span><span class="o">,</span> <span class="n">a</span> <span class="err">∈</span> <span class="n">s</span> <span class="bp">↔</span> <span class="n">a</span> <span class="err">∈</span> <span class="n">t</span> <span class="o">:=</span>
+<span class="n">data</span><span class="bp">/</span><span class="n">option</span><span class="bp">.</span><span class="n">lean</span><span class="o">:</span><span class="kn">theorem</span> <span class="n">ext</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">o₁</span> <span class="n">o₂</span> <span class="o">:</span> <span class="n">option</span> <span class="n">α</span><span class="o">},</span> <span class="o">(</span><span class="bp">∀</span> <span class="n">a</span><span class="o">,</span> <span class="n">a</span> <span class="err">∈</span> <span class="n">o₁</span> <span class="bp">↔</span> <span class="n">a</span> <span class="err">∈</span> <span class="n">o₂</span><span class="o">)</span> <span class="bp">→</span> <span class="n">o₁</span> <span class="bp">=</span> <span class="n">o₂</span>
+<span class="n">data</span><span class="bp">/</span><span class="n">real</span><span class="bp">/</span><span class="n">cau_seq</span><span class="bp">.</span><span class="n">lean</span><span class="o">:</span><span class="kn">theorem</span> <span class="n">ext</span> <span class="o">{</span><span class="n">f</span> <span class="n">g</span> <span class="o">:</span> <span class="n">cau_seq</span> <span class="n">β</span> <span class="n">abv</span><span class="o">}</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">i</span><span class="o">,</span> <span class="n">f</span> <span class="n">i</span> <span class="bp">=</span> <span class="n">g</span> <span class="n">i</span><span class="o">)</span> <span class="o">:</span> <span class="n">f</span> <span class="bp">=</span> <span class="n">g</span> <span class="o">:=</span>
+<span class="n">data</span><span class="bp">/</span><span class="n">semiquot</span><span class="bp">.</span><span class="n">lean</span><span class="o">:</span><span class="kn">theorem</span> <span class="n">ext</span> <span class="o">{</span><span class="n">q₁</span> <span class="n">q₂</span> <span class="o">:</span> <span class="n">semiquot</span> <span class="n">α</span><span class="o">}</span> <span class="o">:</span> <span class="n">q₁</span> <span class="bp">=</span> <span class="n">q₂</span> <span class="bp">↔</span> <span class="bp">∀</span> <span class="n">a</span><span class="o">,</span> <span class="n">a</span> <span class="err">∈</span> <span class="n">q₁</span> <span class="bp">↔</span> <span class="n">a</span> <span class="err">∈</span> <span class="n">q₂</span> <span class="o">:=</span>
+<span class="n">data</span><span class="bp">/</span><span class="n">seq</span><span class="bp">/</span><span class="n">wseq</span><span class="bp">.</span><span class="n">lean</span><span class="o">:</span><span class="kn">theorem</span> <span class="n">equiv</span><span class="bp">.</span><span class="n">ext</span> <span class="o">{</span><span class="n">s</span> <span class="n">t</span> <span class="o">:</span> <span class="n">wseq</span> <span class="n">α</span><span class="o">}</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">n</span><span class="o">,</span> <span class="n">nth</span> <span class="n">s</span> <span class="n">n</span> <span class="bp">~</span> <span class="n">nth</span> <span class="n">t</span> <span class="n">n</span><span class="o">)</span> <span class="o">:</span> <span class="n">s</span> <span class="bp">~</span> <span class="n">t</span> <span class="o">:=</span>
+<span class="n">data</span><span class="bp">/</span><span class="n">set</span><span class="bp">/</span><span class="n">basic</span><span class="bp">.</span><span class="n">lean</span><span class="o">:</span><span class="kn">theorem</span> <span class="n">set_coe</span><span class="bp">.</span><span class="n">ext</span> <span class="o">{</span><span class="n">s</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span><span class="o">}</span> <span class="o">{</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">s</span><span class="o">}</span> <span class="o">:</span> <span class="o">(</span><span class="err">↑</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="bp">=</span> <span class="err">↑</span><span class="n">b</span> <span class="bp">→</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">b</span> <span class="o">:=</span>
+<span class="n">data</span><span class="bp">/</span><span class="n">set</span><span class="bp">/</span><span class="n">basic</span><span class="bp">.</span><span class="n">lean</span><span class="o">:</span><span class="kn">theorem</span> <span class="n">ext</span> <span class="o">{</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span><span class="o">}</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span><span class="o">,</span> <span class="n">x</span> <span class="err">∈</span> <span class="n">a</span> <span class="bp">↔</span> <span class="n">x</span> <span class="err">∈</span> <span class="n">b</span><span class="o">)</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">b</span> <span class="o">:=</span>
+<span class="n">group_theory</span><span class="bp">/</span><span class="n">free_abelian_group</span><span class="bp">.</span><span class="n">lean</span><span class="o">:</span><span class="kn">protected</span> <span class="kn">theorem</span> <span class="n">ext</span> <span class="o">(</span><span class="n">g</span> <span class="n">h</span> <span class="o">:</span> <span class="n">free_abelian_group</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span>
+<span class="n">linear_algebra</span><span class="bp">/</span><span class="n">linear_map_module</span><span class="bp">.</span><span class="n">lean</span><span class="o">:</span><span class="kn">theorem</span> <span class="n">ext</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span><span class="o">,</span> <span class="n">A</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">B</span> <span class="n">x</span><span class="o">)</span> <span class="o">:</span> <span class="n">A</span> <span class="bp">=</span> <span class="n">B</span> <span class="o">:=</span> <span class="n">subtype</span><span class="bp">.</span><span class="n">eq</span> <span class="err">$</span> <span class="n">funext</span> <span class="n">h</span>
+<span class="n">linear_algebra</span><span class="bp">/</span><span class="n">tensor_product</span><span class="bp">.</span><span class="n">lean</span><span class="o">:</span><span class="kn">theorem</span> <span class="n">to_module</span><span class="bp">.</span><span class="n">ext</span> <span class="o">{</span><span class="n">g</span> <span class="n">h</span> <span class="o">:</span> <span class="n">M</span> <span class="err">⊗</span> <span class="n">N</span> <span class="bp">→</span> <span class="n">P</span><span class="o">}</span>
+<span class="n">number_theory</span><span class="bp">/</span><span class="n">dioph</span><span class="bp">.</span><span class="n">lean</span><span class="o">:</span>  <span class="kn">theorem</span> <span class="n">ext</span> <span class="o">{</span><span class="n">S</span> <span class="n">S&#39;</span> <span class="o">:</span> <span class="n">set</span> <span class="o">(</span><span class="n">α</span> <span class="bp">→</span> <span class="bp">ℕ</span><span class="o">)}</span> <span class="o">(</span><span class="n">d</span> <span class="o">:</span> <span class="n">dioph</span> <span class="n">S</span><span class="o">)</span> <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="bp">∀</span><span class="n">v</span><span class="o">,</span> <span class="n">S</span> <span class="n">v</span> <span class="bp">↔</span> <span class="n">S&#39;</span> <span class="n">v</span><span class="o">)</span> <span class="o">:</span> <span class="n">dioph</span> <span class="n">S&#39;</span> <span class="o">:=</span>
+<span class="n">number_theory</span><span class="bp">/</span><span class="n">pell</span><span class="bp">.</span><span class="n">lean</span><span class="o">:</span>  <span class="kn">theorem</span> <span class="n">ext</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">z</span> <span class="n">w</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="err">√</span><span class="n">d</span><span class="o">},</span> <span class="n">z</span> <span class="bp">=</span> <span class="n">w</span> <span class="bp">↔</span> <span class="n">z</span><span class="bp">.</span><span class="n">re</span> <span class="bp">=</span> <span class="n">w</span><span class="bp">.</span><span class="n">re</span> <span class="bp">∧</span> <span class="n">z</span><span class="bp">.</span><span class="n">im</span> <span class="bp">=</span> <span class="n">w</span><span class="bp">.</span><span class="n">im</span>
+<span class="n">order</span><span class="bp">/</span><span class="n">basic</span><span class="bp">.</span><span class="n">lean</span><span class="o">:</span><span class="kn">theorem</span> <span class="n">preorder</span><span class="bp">.</span><span class="n">ext</span> <span class="o">{</span><span class="n">α</span><span class="o">}</span> <span class="o">{</span><span class="n">A</span> <span class="n">B</span> <span class="o">:</span> <span class="n">preorder</span> <span class="n">α</span><span class="o">}</span>
+<span class="n">order</span><span class="bp">/</span><span class="n">basic</span><span class="bp">.</span><span class="n">lean</span><span class="o">:</span><span class="kn">theorem</span> <span class="n">partial_order</span><span class="bp">.</span><span class="n">ext</span> <span class="o">{</span><span class="n">α</span><span class="o">}</span> <span class="o">{</span><span class="n">A</span> <span class="n">B</span> <span class="o">:</span> <span class="n">partial_order</span> <span class="n">α</span><span class="o">}</span>
+<span class="n">order</span><span class="bp">/</span><span class="n">basic</span><span class="bp">.</span><span class="n">lean</span><span class="o">:</span><span class="kn">theorem</span> <span class="n">linear_order</span><span class="bp">.</span><span class="n">ext</span> <span class="o">{</span><span class="n">α</span><span class="o">}</span> <span class="o">{</span><span class="n">A</span> <span class="n">B</span> <span class="o">:</span> <span class="n">linear_order</span> <span class="n">α</span><span class="o">}</span>
+<span class="n">order</span><span class="bp">/</span><span class="n">bounded_lattice</span><span class="bp">.</span><span class="n">lean</span><span class="o">:</span><span class="kn">theorem</span> <span class="n">order_top</span><span class="bp">.</span><span class="n">ext</span> <span class="o">{</span><span class="n">α</span><span class="o">}</span> <span class="o">{</span><span class="n">A</span> <span class="n">B</span> <span class="o">:</span> <span class="n">order_top</span> <span class="n">α</span><span class="o">}</span>
+<span class="n">order</span><span class="bp">/</span><span class="n">bounded_lattice</span><span class="bp">.</span><span class="n">lean</span><span class="o">:</span><span class="kn">theorem</span> <span class="n">order_bot</span><span class="bp">.</span><span class="n">ext</span> <span class="o">{</span><span class="n">α</span><span class="o">}</span> <span class="o">{</span><span class="n">A</span> <span class="n">B</span> <span class="o">:</span> <span class="n">order_bot</span> <span class="n">α</span><span class="o">}</span>
+<span class="n">order</span><span class="bp">/</span><span class="n">bounded_lattice</span><span class="bp">.</span><span class="n">lean</span><span class="o">:</span><span class="kn">theorem</span> <span class="n">bounded_lattice</span><span class="bp">.</span><span class="n">ext</span> <span class="o">{</span><span class="n">α</span><span class="o">}</span> <span class="o">{</span><span class="n">A</span> <span class="n">B</span> <span class="o">:</span> <span class="n">bounded_lattice</span> <span class="n">α</span><span class="o">}</span>
+<span class="n">order</span><span class="bp">/</span><span class="n">lattice</span><span class="bp">.</span><span class="n">lean</span><span class="o">:</span><span class="kn">theorem</span> <span class="n">semilattice_sup</span><span class="bp">.</span><span class="n">ext</span> <span class="o">{</span><span class="n">α</span><span class="o">}</span> <span class="o">{</span><span class="n">A</span> <span class="n">B</span> <span class="o">:</span> <span class="n">semilattice_sup</span> <span class="n">α</span><span class="o">}</span>
+<span class="n">order</span><span class="bp">/</span><span class="n">lattice</span><span class="bp">.</span><span class="n">lean</span><span class="o">:</span><span class="kn">theorem</span> <span class="n">semilattice_inf</span><span class="bp">.</span><span class="n">ext</span> <span class="o">{</span><span class="n">α</span><span class="o">}</span> <span class="o">{</span><span class="n">A</span> <span class="n">B</span> <span class="o">:</span> <span class="n">semilattice_inf</span> <span class="n">α</span><span class="o">}</span>
+<span class="n">order</span><span class="bp">/</span><span class="n">lattice</span><span class="bp">.</span><span class="n">lean</span><span class="o">:</span><span class="kn">theorem</span> <span class="n">lattice</span><span class="bp">.</span><span class="n">ext</span> <span class="o">{</span><span class="n">α</span><span class="o">}</span> <span class="o">{</span><span class="n">A</span> <span class="n">B</span> <span class="o">:</span> <span class="n">lattice</span> <span class="n">α</span><span class="o">}</span>
+<span class="n">set_theory</span><span class="bp">/</span><span class="n">zfc</span><span class="bp">.</span><span class="n">lean</span><span class="o">:</span><span class="kn">theorem</span> <span class="n">equiv</span><span class="bp">.</span><span class="n">ext</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">pSet</span><span class="o">),</span> <span class="n">equiv</span> <span class="n">x</span> <span class="n">y</span> <span class="bp">↔</span> <span class="o">(</span><span class="n">x</span> <span class="err">⊆</span> <span class="n">y</span> <span class="bp">∧</span> <span class="n">y</span> <span class="err">⊆</span> <span class="n">x</span><span class="o">)</span>
+<span class="n">set_theory</span><span class="bp">/</span><span class="n">zfc</span><span class="bp">.</span><span class="n">lean</span><span class="o">:</span><span class="kn">theorem</span> <span class="n">mem</span><span class="bp">.</span><span class="n">ext</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">{</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">pSet</span><span class="bp">.</span><span class="o">{</span><span class="n">u</span><span class="o">}},</span> <span class="o">(</span><span class="bp">∀</span><span class="n">w</span><span class="o">:</span><span class="n">pSet</span><span class="bp">.</span><span class="o">{</span><span class="n">u</span><span class="o">},</span> <span class="n">w</span> <span class="err">∈</span> <span class="n">x</span> <span class="bp">↔</span> <span class="n">w</span> <span class="err">∈</span> <span class="n">y</span><span class="o">)</span> <span class="bp">→</span> <span class="n">equiv</span> <span class="n">x</span> <span class="n">y</span>
+<span class="n">set_theory</span><span class="bp">/</span><span class="n">zfc</span><span class="bp">.</span><span class="n">lean</span><span class="o">:</span><span class="kn">theorem</span> <span class="n">ext</span> <span class="o">{</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">Set</span><span class="bp">.</span><span class="o">{</span><span class="n">u</span><span class="o">}}</span> <span class="o">:</span> <span class="o">(</span><span class="bp">∀</span><span class="n">z</span><span class="o">:</span><span class="n">Set</span><span class="bp">.</span><span class="o">{</span><span class="n">u</span><span class="o">},</span> <span class="n">z</span> <span class="err">∈</span> <span class="n">x</span> <span class="bp">↔</span> <span class="n">z</span> <span class="err">∈</span> <span class="n">y</span><span class="o">)</span> <span class="bp">→</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">y</span> <span class="o">:=</span>
+</pre></div>
 
 #### [ Johan Commelin (Oct 03 2018 at 10:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135088502):
-Is it worth going through this list. Or have people done that before, and decided that this should not get the `extensionality` attribute?
+<p>Is it worth going through this list. Or have people done that before, and decided that this should not get the <code>extensionality</code> attribute?</p>
 
 #### [ Kenny Lau (Oct 03 2018 at 10:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135089015):
-thanks for bringing this up
+<p>thanks for bringing this up</p>
 
 #### [ Patrick Massot (Oct 03 2018 at 10:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135089062):
-I think it's worth going through the list
+<p>I think it's worth going through the list</p>
 
 #### [ Simon Hudon (Oct 03 2018 at 10:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135089070):
-I, for one, have not done it and I was working on the basis of "let's add them when we need them" after I added the most obvious ones.
+<p>I, for one, have not done it and I was working on the basis of "let's add them when we need them" after I added the most obvious ones.</p>
 
 #### [ Johan Commelin (Oct 03 2018 at 10:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135089396):
-Can someone give an entry on the list that should *not* be tagged with the `extensionality` attribute? If I understand the reason, then I might be able to go through the list myself.
+<p>Can someone give an entry on the list that should <em>not</em> be tagged with the <code>extensionality</code> attribute? If I understand the reason, then I might be able to go through the list myself.</p>
 
 #### [ Simon Hudon (Oct 03 2018 at 10:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135089575):
-`set_theory/zfc.lean:theorem equiv.ext`
+<p><code>set_theory/zfc.lean:theorem equiv.ext</code></p>
 
 #### [ Scott Morrison (Oct 03 2018 at 10:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135089902):
-You missed `yoneda.ext` :-). (Perhaps because it's a `def`?)  Anyway, it probably shouldn't have `@[extensionality]`.
+<p>You missed <code>yoneda.ext</code> :-). (Perhaps because it's a <code>def</code>?)  Anyway, it probably shouldn't have <code>@[extensionality]</code>.</p>
 
 #### [ Simon Hudon (Oct 03 2018 at 10:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135089964):
-Also, I wouldn't tag `semilattice_sup.ext_sup`
+<p>Also, I wouldn't tag <code>semilattice_sup.ext_sup</code></p>
 
 #### [ Johan Commelin (Oct 03 2018 at 11:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135090054):
-Can you explain why?
+<p>Can you explain why?</p>
 
 #### [ Johan Commelin (Oct 03 2018 at 11:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135090064):
-@**Scott Morrison|110087** Indeed, I only looked for lemmas and theorems
+<p><span class="user-mention" data-user-id="110087">@Scott Morrison</span> Indeed, I only looked for lemmas and theorems</p>
 
 #### [ Simon Hudon (Oct 03 2018 at 11:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135090608):
-It's a comparison of class instances rather than the objects themselves. It seems like it could produce surprising results
+<p>It's a comparison of class instances rather than the objects themselves. It seems like it could produce surprising results</p>
 
 #### [ Johan Commelin (Oct 03 2018 at 11:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135090806):
-Ok, I see. @**Johannes Hölzl** Does it make sense to create an `extensionality` PR that adds about 40 `extensionality` attributes?
+<p>Ok, I see. <span class="user-mention" data-user-id="110294">@Johannes Hölzl</span> Does it make sense to create an <code>extensionality</code> PR that adds about 40 <code>extensionality</code> attributes?</p>
 
 #### [ Johannes Hölzl (Oct 03 2018 at 11:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135090874):
-Do we have 40 types? Are sensible? Also be careful that they don't overlap.
+<p>Do we have 40 types? Are sensible? Also be careful that they don't overlap.</p>
 
 #### [ Johan Commelin (Oct 03 2018 at 11:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135090907):
-See the list I posted above.
+<p>See the list I posted above.</p>
 
 #### [ Johan Commelin (Oct 03 2018 at 11:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135090923):
-Simon mentioned a couple that shouldn't be tagged, but I think a lot of them could reasonably be tagged.
+<p>Simon mentioned a couple that shouldn't be tagged, but I think a lot of them could reasonably be tagged.</p>
 
 #### [ Simon Hudon (Oct 03 2018 at 11:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135091116):
-Some of them are equivalences while `ext` uses implications. When I encounter such lemma, I rename them `ext_iff` so that I can add a `ext` lemma as an implication
+<p>Some of them are equivalences while <code>ext</code> uses implications. When I encounter such lemma, I rename them <code>ext_iff</code> so that I can add a <code>ext</code> lemma as an implication</p>
 
 #### [ Johannes Hölzl (Oct 03 2018 at 13:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135097606):
-also before you add the extensionality lemmas we should change the semantics of `ext`. Instead of applying all possible extensionality lemmas it should only work along the names given by the user, or accept `*` to apply all.
+<p>also before you add the extensionality lemmas we should change the semantics of <code>ext</code>. Instead of applying all possible extensionality lemmas it should only work along the names given by the user, or accept <code>*</code> to apply all.</p>
 
 #### [ Johan Commelin (Oct 03 2018 at 13:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135097698):
-Hmm, ok. Do you mean you want people to write `ext set` or `ext subtype` etc...?
+<p>Hmm, ok. Do you mean you want people to write <code>ext set</code> or <code>ext subtype</code> etc...?</p>
 
 #### [ Simon Hudon (Oct 03 2018 at 13:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135097745):
-Right now, `ext` detects the type of the arguments (e.g. set) and only tries relevant extensionality lemmas
+<p>Right now, <code>ext</code> detects the type of the arguments (e.g. set) and only tries relevant extensionality lemmas</p>
 
 #### [ Simon Hudon (Oct 03 2018 at 13:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135097758):
-It used to be that functional extensionality might be selected for the equality of two sets. It's no longer the case.
+<p>It used to be that functional extensionality might be selected for the equality of two sets. It's no longer the case.</p>
 
 #### [ Patrick Massot (Oct 03 2018 at 13:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135097764):
-Johannes, that would be very sad
+<p>Johannes, that would be very sad</p>
 
 #### [ Patrick Massot (Oct 03 2018 at 13:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135097769):
-I like to type `ext` and Lean figures out what I mean
+<p>I like to type <code>ext</code> and Lean figures out what I mean</p>
 
 #### [ Johannes Hölzl (Oct 03 2018 at 13:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135097780):
-and I hate it to add an attribute and half of mathlib breaks
+<p>and I hate it to add an attribute and half of mathlib breaks</p>
 
 #### [ Mario Carneiro (Oct 03 2018 at 13:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135097781):
-Johannes this was implemented recently, like simon says
+<p>Johannes this was implemented recently, like simon says</p>
 
 #### [ Johannes Hölzl (Oct 03 2018 at 13:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135097790):
-okay, thats good!
+<p>okay, thats good!</p>
 
 #### [ Mario Carneiro (Oct 03 2018 at 13:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135097800):
-You don't need to say `ext set`, it looks at the type of the objects in the equality in the goal
+<p>You don't need to say <code>ext set</code>, it looks at the type of the objects in the equality in the goal</p>
 
 #### [ Simon Hudon (Oct 03 2018 at 13:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135097851):
-It's also tolerant on the kind of relation you can prove but I think sticking close to `=` is a good idea.
+<p>It's also tolerant on the kind of relation you can prove but I think sticking close to <code>=</code> is a good idea.</p>
 
 #### [ Mario Carneiro (Oct 03 2018 at 13:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135097866):
-But this also means that you essentially want one extensionality lemma for each type, so no multiples, and no equalities over generic types
+<p>But this also means that you essentially want one extensionality lemma for each type, so no multiples, and no equalities over generic types</p>
 
 #### [ Johan Commelin (Oct 03 2018 at 13:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135097868):
-Right, but `functor.ext` seems like a good exception
+<p>Right, but <code>functor.ext</code> seems like a good exception</p>
 
 #### [ Mario Carneiro (Oct 03 2018 at 13:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135097939):
-If there are multiple candidates for extensionality, e.g. `roption.ext` vs `roption.ext'` then you have to think about which one is better general-purpose and pick one
+<p>If there are multiple candidates for extensionality, e.g. <code>roption.ext</code> vs <code>roption.ext'</code> then you have to think about which one is better general-purpose and pick one</p>
 
 #### [ Simon Hudon (Oct 03 2018 at 13:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135097970):
-@**Johan Commelin** I'm tempted to agree with you but technically, there's no reason why `functor.ext` wouldn't work as an extensionality lemma
+<p><span class="user-mention" data-user-id="112680">@Johan Commelin</span> I'm tempted to agree with you but technically, there's no reason why <code>functor.ext</code> wouldn't work as an extensionality lemma</p>
 
 #### [ Johan Commelin (Oct 03 2018 at 13:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135097992):
-@**Simon Hudon** I meant that it is an exception to sticking to `=`
+<p><span class="user-mention" data-user-id="110026">@Simon Hudon</span> I meant that it is an exception to sticking to <code>=</code></p>
 
 #### [ Mario Carneiro (Oct 03 2018 at 13:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135097994):
-Also keep in mind that `ext` will apply all extensionality lemmas it can all the way down so you don't want loopable hypotheses
+<p>Also keep in mind that <code>ext</code> will apply all extensionality lemmas it can all the way down so you don't want loopable hypotheses</p>
 
 #### [ Simon Hudon (Oct 03 2018 at 14:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135098052):
-@**Mario Carneiro** You can also give the most general one a lower priority
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> You can also give the most general one a lower priority</p>
 
 #### [ Johan Commelin (Oct 03 2018 at 14:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135098057):
-Or we want `ext` to take an optional `small_nat` argument like `congr`
+<p>Or we want <code>ext</code> to take an optional <code>small_nat</code> argument like <code>congr</code></p>
 
 #### [ Johan Commelin (Oct 03 2018 at 14:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135098062):
-Or `congr'`, whatever
+<p>Or <code>congr'</code>, whatever</p>
 
 #### [ Simon Hudon (Oct 03 2018 at 14:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135098066):
-It already does: `ext : 3`
+<p>It already does: <code>ext : 3</code></p>
 
 #### [ Mario Carneiro (Oct 03 2018 at 14:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135098081):
-AFAIK competing extensionality lemmas always apply in the same generality, they just have different hypotheses, so giving priority wouldn't help
+<p>AFAIK competing extensionality lemmas always apply in the same generality, they just have different hypotheses, so giving priority wouldn't help</p>
 
 #### [ Simon Hudon (Oct 03 2018 at 14:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135098082):
-But I think Mario is right. There has to be a sense that something decreases as we keep applying `ext`, for instance the complexity of the objects being compared
+<p>But I think Mario is right. There has to be a sense that something decreases as we keep applying <code>ext</code>, for instance the complexity of the objects being compared</p>
 
 #### [ Simon Hudon (Oct 03 2018 at 14:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135098144):
-@**Mario Carneiro** I don't understand what you mean by "in the same generality"
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> I don't understand what you mean by "in the same generality"</p>
 
 #### [ Mario Carneiro (Oct 03 2018 at 14:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135098185):
-Most theorems that could qualify as `@[extensionality]` have a conclusion `(a : T) = b`, so if this is the goal then all extensionalities for T will apply
+<p>Most theorems that could qualify as <code>@[extensionality]</code> have a conclusion <code>(a : T) = b</code>, so if this is the goal then all extensionalities for T will apply</p>
 
 #### [ Mario Carneiro (Oct 03 2018 at 14:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135098270):
-With other kinds of theorems there might be a difference in generality like if one theorem only has say `F a = G b` in the conclusion, but with extensionality lemmas it's always `a = b` where `a` and `b` match anything in the type
+<p>With other kinds of theorems there might be a difference in generality like if one theorem only has say <code>F a = G b</code> in the conclusion, but with extensionality lemmas it's always <code>a = b</code> where <code>a</code> and <code>b</code> match anything in the type</p>
 
 #### [ Simon Hudon (Oct 03 2018 at 14:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135098278):
-You could see one lemma being `(a : set α) = b` and another be `(a : set (list α)) = b`. The first one is the most general one although both would be attempted
+<p>You could see one lemma being <code>(a : set α) = b</code> and another be <code>(a : set (list α)) = b</code>. The first one is the most general one although both would be attempted</p>
 
 #### [ Mario Carneiro (Oct 03 2018 at 14:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135098339):
-I suppose that is a possibility, but so far I don't think we have any such "composite extensionality lemmas"
+<p>I suppose that is a possibility, but so far I don't think we have any such "composite extensionality lemmas"</p>
 
 #### [ Mario Carneiro (Oct 03 2018 at 14:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135098348):
-it's always a constant or type constructor applied to variables
+<p>it's always a constant or type constructor applied to variables</p>
 
 #### [ Mario Carneiro (Oct 03 2018 at 14:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135098445):
-Looking at the list, I see `free_abelian_group.ext` and `to_module.ext` have composite types, and `dioph` has something that isn't an extensionality at all
+<p>Looking at the list, I see <code>free_abelian_group.ext</code> and <code>to_module.ext</code> have composite types, and <code>dioph</code> has something that isn't an extensionality at all</p>
 
 #### [ Mario Carneiro (Oct 03 2018 at 14:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135098492):
-I don't think `free_abelian_group.ext` qualifies as an extensionality, this is some kind of yoneda thing
+<p>I don't think <code>free_abelian_group.ext</code> qualifies as an extensionality, this is some kind of yoneda thing</p>
 
 #### [ Patrick Massot (Oct 03 2018 at 22:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135133090):
-what about `topological_space_eq`?
+<p>what about <code>topological_space_eq</code>?</p>
 
 #### [ Patrick Massot (Oct 03 2018 at 22:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135133135):
-yes
+<p>yes</p>
 
 
 {% endraw %}

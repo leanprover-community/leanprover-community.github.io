@@ -12,563 +12,563 @@ permalink: archive/116395maths/55375additivegrouphoms.html
 
 {% raw %}
 #### [ Johan Commelin (May 23 2018 at 20:36)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/126990085):
-This has come up before. I need additive group homs. I can duplicate Patrick's work on group homs, but I also saw `@[to_additive finsupp.sum_map_range_index]` in `data/finsupp.lean`. Can someone explain to me how that magic works? Would it be enough to sprinkle some `@[to_additive ...]`'s into `algebra/group.lean` to have everything work?
+<p>This has come up before. I need additive group homs. I can duplicate Patrick's work on group homs, but I also saw <code>@[to_additive finsupp.sum_map_range_index]</code> in <code>data/finsupp.lean</code>. Can someone explain to me how that magic works? Would it be enough to sprinkle some <code>@[to_additive ...]</code>'s into <code>algebra/group.lean</code> to have everything work?</p>
 
 #### [ Kevin Buzzard (May 23 2018 at 20:53)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/126990781):
-There are additive group homs in the scheme stuff
+<p>There are additive group homs in the scheme stuff</p>
 
 #### [ Kevin Buzzard (May 23 2018 at 20:53)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/126990782):
-Kenny wrote them
+<p>Kenny wrote them</p>
 
 #### [ Kevin Buzzard (May 23 2018 at 20:53)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/126990787):
-you could cut and paste for some basic stuff
+<p>you could cut and paste for some basic stuff</p>
 
 #### [ Kevin Buzzard (May 23 2018 at 20:53)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/126990789):
-if you just want a solution
+<p>if you just want a solution</p>
 
 #### [ Johan Commelin (May 23 2018 at 20:54)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/126990833):
-Sure, but I'm also interested in the long-term approach
+<p>Sure, but I'm also interested in the long-term approach</p>
 
 #### [ Kevin Buzzard (May 23 2018 at 20:54)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/126990842):
-lines 47 onwards at https://github.com/kbuzzard/lean-stacks-project/blob/master/src/canonical_isomorphism_nonsense.lean
+<p>lines 47 onwards at <a href="https://github.com/kbuzzard/lean-stacks-project/blob/master/src/canonical_isomorphism_nonsense.lean" target="_blank" title="https://github.com/kbuzzard/lean-stacks-project/blob/master/src/canonical_isomorphism_nonsense.lean">https://github.com/kbuzzard/lean-stacks-project/blob/master/src/canonical_isomorphism_nonsense.lean</a></p>
 
 #### [ Kevin Buzzard (May 23 2018 at 20:55)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/126990862):
-already there is a little magic going on
+<p>already there is a little magic going on</p>
 
 #### [ Andrew Ashworth (May 23 2018 at 21:04)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/126991426):
-the long term approach would be to learn a bit about tactics and understand how to_additive works, which is for automatically moving theorems from multiplicative groups to additive groups... unfortunately, learning tactics in Lean is a bit of a chore right now since Programming in Lean is unfinished
+<p>the long term approach would be to learn a bit about tactics and understand how to_additive works, which is for automatically moving theorems from multiplicative groups to additive groups... unfortunately, learning tactics in Lean is a bit of a chore right now since Programming in Lean is unfinished</p>
 
 #### [ Andrew Ashworth (May 23 2018 at 21:07)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/126991559):
-well, actually, now that I'm looking at `algebra/group.lean`, you don't need to know much about tactics to understand what's going on there
+<p>well, actually, now that I'm looking at <code>algebra/group.lean</code>, you don't need to know much about tactics to understand what's going on there</p>
 
 #### [ Johan Commelin (May 23 2018 at 21:11)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/126991753):
-But then... I know next to nothing...
+<p>But then... I know next to nothing...</p>
 
 #### [ Andrew Ashworth (May 23 2018 at 21:25)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/126992374):
-hmm, have you worked through TPIL by chance?
+<p>hmm, have you worked through TPIL by chance?</p>
 
 #### [ Andrew Ashworth (May 23 2018 at 21:26)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/126992434):
-The first eleven chapters of Software Foundations is in Coq, but also quite good
+<p>The first eleven chapters of Software Foundations is in Coq, but also quite good</p>
 
 #### [ Andrew Ashworth (May 23 2018 at 21:26)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/126992443):
-I am the kind of person who learns by grabbing a textbook and doing the exercises...
+<p>I am the kind of person who learns by grabbing a textbook and doing the exercises...</p>
 
 #### [ Johan Commelin (May 23 2018 at 21:34)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/126992799):
-Yes, maybe I should do that as well... but trying to define singular homology seems like a lot more fun...
+<p>Yes, maybe I should do that as well... but trying to define singular homology seems like a lot more fun...</p>
 
 #### [ Johan Commelin (May 23 2018 at 21:35)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/126992815):
-I am the kind of person who learns by cargo cult hacking
+<p>I am the kind of person who learns by cargo cult hacking</p>
 
 #### [ Andrew Ashworth (May 23 2018 at 21:40)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/126993051):
-this is also valid, but unfortunately if you get stuck there is no solutions manual available to unstuck you, whereas such a thing exists for Software Foundations... the solutions manual known as Mario is asleep right now
+<p>this is also valid, but unfortunately if you get stuck there is no solutions manual available to unstuck you, whereas such a thing exists for Software Foundations... the solutions manual known as Mario is asleep right now</p>
 
 #### [ Johannes Hölzl (May 23 2018 at 21:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/126993084):
-the magic of `to_additive` is a search and replace of all `to_additive` constants in the definition of the constant. Afterwards the additive, multiplicative constant pair is added to the `to_additive` database. By using `attribute [to_additive a_c] m_c` you add a new relation. The requirement is that the additive constants are an exact mirror of the multiplicative ones.
+<p>the magic of <code>to_additive</code> is a search and replace of all <code>to_additive</code> constants in the definition of the constant. Afterwards the additive, multiplicative constant pair is added to the <code>to_additive</code> database. By using <code>attribute [to_additive a_c] m_c</code> you add a new relation. The requirement is that the additive constants are an exact mirror of the multiplicative ones.</p>
 
 #### [ Johan Commelin (May 23 2018 at 21:43)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/126993161):
-So, if I understand you correctly, it shouldn't be too complicated to sprinkle `@to_additive` in `algebra/group.lean`. Is that right?
+<p>So, if I understand you correctly, it shouldn't be too complicated to sprinkle <code>@to_additive</code> in <code>algebra/group.lean</code>. Is that right?</p>
 
 #### [ Johan Commelin (May 25 2018 at 06:07)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127063451):
-Ok, so here is something that I am a bit worried about: in mathematics the notion of an "additive" group is really just notation (though pretty useful!). In Lean we have "groups" and "additive groups" and now we have `is_group_hom` and `is_add_group_hom`. But we also need mixed homomorphisms (from a multiplicative group to an additive group, and vice versa). For example, exp and log are such mixed homomorphisms. So all of a sudden, we have 4 notions of group homomorphisms. And now we want to compose these guys. So we need 8 composition lemmas. And I proved the 5 lemma some time ago: it has 10 groups in its statements. But any of those can be an "additive" group (and this occurs in nature!). Does that mean we need 1024 statements of the Five Lemma?
+<p>Ok, so here is something that I am a bit worried about: in mathematics the notion of an "additive" group is really just notation (though pretty useful!). In Lean we have "groups" and "additive groups" and now we have <code>is_group_hom</code> and <code>is_add_group_hom</code>. But we also need mixed homomorphisms (from a multiplicative group to an additive group, and vice versa). For example, exp and log are such mixed homomorphisms. So all of a sudden, we have 4 notions of group homomorphisms. And now we want to compose these guys. So we need 8 composition lemmas. And I proved the 5 lemma some time ago: it has 10 groups in its statements. But any of those can be an "additive" group (and this occurs in nature!). Does that mean we need 1024 statements of the Five Lemma?</p>
 
 #### [ Mario Carneiro (May 25 2018 at 06:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127064340):
-Use `multiplicative` to do these kind of things
+<p>Use <code>multiplicative</code> to do these kind of things</p>
 
 #### [ Johan Commelin (May 25 2018 at 06:42)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127064381):
-But, doesn't that mean we should use `multiplicative` all the time?
+<p>But, doesn't that mean we should use <code>multiplicative</code> all the time?</p>
 
 #### [ Mario Carneiro (May 25 2018 at 06:42)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127064392):
-The additive / multiplicative group thing has a long history, and we are still debating the best way to do it
+<p>The additive / multiplicative group thing has a long history, and we are still debating the best way to do it</p>
 
 #### [ Johan Commelin (May 25 2018 at 06:43)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127064404):
-Ok, I see. I can understand that it might be delicate to pick the correct approach
+<p>Ok, I see. I can understand that it might be delicate to pick the correct approach</p>
 
 #### [ Mario Carneiro (May 25 2018 at 06:45)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127064456):
-`multiplicative` is useful for post hoc fitting a multiplicative theorem in an additive or mixed-additive use case
+<p><code>multiplicative</code> is useful for post hoc fitting a multiplicative theorem in an additive or mixed-additive use case</p>
 
 #### [ Johan Commelin (May 25 2018 at 06:45)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127064464):
-I feel like I would rather just remove `add_group` entirely. But I don't see through all the ramifications
+<p>I feel like I would rather just remove <code>add_group</code> entirely. But I don't see through all the ramifications</p>
 
 #### [ Mario Carneiro (May 25 2018 at 06:45)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127064467):
-`to_additive` is useful for preparing theorems up front *with new names* and statements
+<p><code>to_additive</code> is useful for preparing theorems up front <em>with new names</em> and statements</p>
 
 #### [ Mario Carneiro (May 25 2018 at 06:46)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127064508):
-It's very confusing to apply `mul_one` when you want to simplify `x + 0 = x`
+<p>It's very confusing to apply <code>mul_one</code> when you want to simplify <code>x + 0 = x</code></p>
 
 #### [ Johan Commelin (May 25 2018 at 06:46)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127064513):
-Yes, but I think that that `to_additive` magic will replace *all* occurences of mul with add
+<p>Yes, but I think that that <code>to_additive</code> magic will replace <em>all</em> occurences of mul with add</p>
 
 #### [ Mario Carneiro (May 25 2018 at 06:46)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127064515):
-yes, that's the idea
+<p>yes, that's the idea</p>
 
 #### [ Johan Commelin (May 25 2018 at 06:46)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127064516):
-Or can you also use it to create mixed statements?
+<p>Or can you also use it to create mixed statements?</p>
 
 #### [ Mario Carneiro (May 25 2018 at 06:47)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127064522):
-it's not very smart, it usually fails on mixed statements
+<p>it's not very smart, it usually fails on mixed statements</p>
 
 #### [ Mario Carneiro (May 25 2018 at 06:48)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127064551):
-like `gpow`, which has an interplay between the additive semiring N and the group in question
+<p>like <code>gpow</code>, which has an interplay between the additive semiring N and the group in question</p>
 
 #### [ Mario Carneiro (May 25 2018 at 06:48)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127064565):
-those translations had to be done manually, and in that case usually `multiplicative` is easier
+<p>those translations had to be done manually, and in that case usually <code>multiplicative</code> is easier</p>
 
 #### [ Johan Commelin (May 25 2018 at 06:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127064577):
-So, if we didn't have all the "multiplicative" connotations with our groups... but just `op_neu` instead of `mul_one`. Would that be helpful?
+<p>So, if we didn't have all the "multiplicative" connotations with our groups... but just <code>op_neu</code> instead of <code>mul_one</code>. Would that be helpful?</p>
 
 #### [ Mario Carneiro (May 25 2018 at 06:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127064621):
-Jeremy likes this idea. I think it's the worst of both worlds
+<p>Jeremy likes this idea. I think it's the worst of both worlds</p>
 
 #### [ Johan Commelin (May 25 2018 at 06:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127064630):
-If you could somehow have some magic that infers whether you use `*` or `+` notation, I feel like it would give a very nice fusion.
+<p>If you could somehow have some magic that infers whether you use <code>*</code> or <code>+</code> notation, I feel like it would give a very nice fusion.</p>
 
 #### [ Mario Carneiro (May 25 2018 at 06:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127064633):
-(Jeremy Avigad has been testing out a bunch of solutions in this space the past few months)
+<p>(Jeremy Avigad has been testing out a bunch of solutions in this space the past few months)</p>
 
 #### [ Johan Commelin (May 25 2018 at 06:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127064635):
-But why do you think it is worse?
+<p>But why do you think it is worse?</p>
 
 #### [ Mario Carneiro (May 25 2018 at 06:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127064638):
-It's less mnemonic than either add_zero or mul_one
+<p>It's less mnemonic than either add_zero or mul_one</p>
 
 #### [ Mario Carneiro (May 25 2018 at 06:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127064679):
-some of that magic goes beyond what lean will currently do on its own
+<p>some of that magic goes beyond what lean will currently do on its own</p>
 
 #### [ Johan Commelin (May 25 2018 at 06:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127064681):
-Yes, but having a lot of `gsmul` sprinkled through your goal is also not very helpful
+<p>Yes, but having a lot of <code>gsmul</code> sprinkled through your goal is also not very helpful</p>
 
 #### [ Mario Carneiro (May 25 2018 at 06:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127064683):
-but then it gets into extending lean, which gets messy
+<p>but then it gets into extending lean, which gets messy</p>
 
 #### [ Mario Carneiro (May 25 2018 at 06:53)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127064691):
-What do you mean?
+<p>What do you mean?</p>
 
 #### [ Johan Commelin (May 25 2018 at 06:53)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127064696):
-Well, I was playing around with `multiplicative` a bit. And I think it gave me those `gsmul`'s
+<p>Well, I was playing around with <code>multiplicative</code> a bit. And I think it gave me those <code>gsmul</code>'s</p>
 
 #### [ Johan Commelin (May 25 2018 at 06:54)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127064735):
-But maybe I just used it wrong
+<p>But maybe I just used it wrong</p>
 
 #### [ Johan Commelin (May 25 2018 at 06:56)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127064768):
-I think I will just wait to see what you and Jeremy work out.
+<p>I think I will just wait to see what you and Jeremy work out.</p>
 
 #### [ Mario Carneiro (May 25 2018 at 06:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127064811):
-What are you trying to do exactly?
+<p>What are you trying to do exactly?</p>
 
 #### [ Johan Commelin (May 25 2018 at 06:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127064812):
-If I understand you correctly, you say that a class `is_add_group_hom` is fine. But we shouldn't have classes for mixed homomorphisms. If one of those pops up, just turn it into an `is_group_hom`with `multiplicative`. Is that correct?
+<p>If I understand you correctly, you say that a class <code>is_add_group_hom</code> is fine. But we shouldn't have classes for mixed homomorphisms. If one of those pops up, just turn it into an <code>is_group_hom</code>with <code>multiplicative</code>. Is that correct?</p>
 
 #### [ Mario Carneiro (May 25 2018 at 06:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127064852):
-yes
+<p>yes</p>
 
 #### [ Johan Commelin (May 25 2018 at 06:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127064853):
-Because if we also have classes for the mixed homomorphisms, then you do need 8 composition rules. And I feel like you run head first into some cambrian explosion.
+<p>Because if we also have classes for the mixed homomorphisms, then you do need 8 composition rules. And I feel like you run head first into some cambrian explosion.</p>
 
 #### [ Mario Carneiro (May 25 2018 at 06:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127064855):
-we don't
+<p>we don't</p>
 
 #### [ Johan Commelin (May 25 2018 at 06:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127064865):
-So, shouldn't I just get rid of `is_add_group_hom` as well? And just use `multiplicative` immediately?
+<p>So, shouldn't I just get rid of <code>is_add_group_hom</code> as well? And just use <code>multiplicative</code> immediately?</p>
 
 #### [ Mario Carneiro (May 25 2018 at 07:00)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127064914):
-I should hope there isn't too much theory on `is_add_group_hom`
+<p>I should hope there isn't too much theory on <code>is_add_group_hom</code></p>
 
 #### [ Mario Carneiro (May 25 2018 at 07:00)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127064917):
-seeing as it can usually be rephrased in terms of `is_group_hom`
+<p>seeing as it can usually be rephrased in terms of <code>is_group_hom</code></p>
 
 #### [ Johan Commelin (May 25 2018 at 07:01)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127064929):
-But still, I don't see why you draw the line there...
+<p>But still, I don't see why you draw the line there...</p>
 
 #### [ Mario Carneiro (May 25 2018 at 07:02)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127064933):
-two is manageable, 2^n isn't?
+<p>two is manageable, 2^n isn't?</p>
 
 #### [ Johan Commelin (May 25 2018 at 07:02)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127064969):
-Anyway, what I am trying to do, is to prove that the boundary operator on the simplicial complex satisfies `d \circ d = 0`
+<p>Anyway, what I am trying to do, is to prove that the boundary operator on the simplicial complex satisfies <code>d \circ d = 0</code></p>
 
 #### [ Johan Commelin (May 25 2018 at 07:02)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127064975):
-Yes, but one is even more manageable... (-;
+<p>Yes, but one is even more manageable... (-;</p>
 
 #### [ Mario Carneiro (May 25 2018 at 07:02)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127064979):
-so use `is_group_hom` and call it a day
+<p>so use <code>is_group_hom</code> and call it a day</p>
 
 #### [ Johan Commelin (May 25 2018 at 07:03)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127064980):
-And this complex consists of an additive group for each `n : nat`. And an additive hom between succesive groups.
+<p>And this complex consists of an additive group for each <code>n : nat</code>. And an additive hom between succesive groups.</p>
 
 #### [ Mario Carneiro (May 25 2018 at 07:03)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127064989):
-what makes them additive?
+<p>what makes them additive?</p>
 
 #### [ Johan Commelin (May 25 2018 at 07:03)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127064991):
-Those groups are all `finsupp (X n) int`
+<p>Those groups are all <code>finsupp (X n) int</code></p>
 
 #### [ Johan Commelin (May 25 2018 at 07:03)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127064992):
-where `X n` is a Type; depending on `n` (duh)
+<p>where <code>X n</code> is a Type; depending on <code>n</code> (duh)</p>
 
 #### [ Mario Carneiro (May 25 2018 at 07:04)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127065036):
-okay, so where is the mixed group hom?
+<p>okay, so where is the mixed group hom?</p>
 
 #### [ Johan Commelin (May 25 2018 at 07:05)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127065048):
-And the homomorphisms between them are somehow a bit involved... You take an alternating sum of (n+1) maps from `X (n+1)` to `X n`, and those induce maps between those additive groups.
+<p>And the homomorphisms between them are somehow a bit involved... You take an alternating sum of (n+1) maps from <code>X (n+1)</code> to <code>X n</code>, and those induce maps between those additive groups.</p>
 
 #### [ Johan Commelin (May 25 2018 at 07:05)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127065051):
-Aah, there is no mixed group hom in this picture yet.
+<p>Aah, there is no mixed group hom in this picture yet.</p>
 
 #### [ Johan Commelin (May 25 2018 at 07:05)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127065052):
-But I was thinking about other stuff in maths, where they do pop up.
+<p>But I was thinking about other stuff in maths, where they do pop up.</p>
 
 #### [ Johan Commelin (May 25 2018 at 07:05)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127065055):
-In all sorts of exponential sequences
+<p>In all sorts of exponential sequences</p>
 
 #### [ Mario Carneiro (May 25 2018 at 07:06)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127065098):
-So you can use `is_group_hom` + `multiplicative` to define `is_add_group_hom`, and then most of the theorems will defeq carry over (although they may need to be restated)
+<p>So you can use <code>is_group_hom</code> + <code>multiplicative</code> to define <code>is_add_group_hom</code>, and then most of the theorems will defeq carry over (although they may need to be restated)</p>
 
 #### [ Johan Commelin (May 25 2018 at 07:07)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127065121):
-Ok, but I think I will try to just use `multiplicative` directly.
+<p>Ok, but I think I will try to just use <code>multiplicative</code> directly.</p>
 
 #### [ Johan Commelin (May 25 2018 at 07:08)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127065163):
-So instead of proving `is_add_group_hom d` I prove `@is_group_hom (multiplicate _) (multiplicative _) d`
+<p>So instead of proving <code>is_add_group_hom d</code> I prove <code>@is_group_hom (multiplicate _) (multiplicative _) d</code></p>
 
 #### [ Johan Commelin (May 25 2018 at 07:08)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127065164):
-Or something like that.
+<p>Or something like that.</p>
 
 #### [ Mario Carneiro (May 25 2018 at 07:10)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127065222):
-they should be the same, but yes unfold if necessary
+<p>they should be the same, but yes unfold if necessary</p>
 
 #### [ Johan Commelin (May 25 2018 at 07:10)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127065227):
-Ok, thanks for this discussion! I learned something (-;
+<p>Ok, thanks for this discussion! I learned something (-;</p>
 
 #### [ Johan Commelin (May 25 2018 at 07:11)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127065234):
-Ooh, and if I locally make every instance of `add_group` into an instance of `group`, I think I run into the same trouble with ugly notation and names, right?
+<p>Ooh, and if I locally make every instance of <code>add_group</code> into an instance of <code>group</code>, I think I run into the same trouble with ugly notation and names, right?</p>
 
 #### [ Mario Carneiro (May 25 2018 at 07:12)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127065235):
-Oh don't do that
+<p>Oh don't do that</p>
 
 #### [ Mario Carneiro (May 25 2018 at 07:12)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127065275):
-that's a recipe for disaster because the notations get all mixed up
+<p>that's a recipe for disaster because the notations get all mixed up</p>
 
 #### [ Johan Commelin (May 25 2018 at 07:12)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127065277):
-ok
+<p>ok</p>
 
 #### [ Mario Carneiro (May 25 2018 at 07:12)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127065281):
-next you know it you write `1 + 1 : nat` and get `0` :/
+<p>next you know it you write <code>1 + 1 : nat</code> and get <code>0</code> :/</p>
 
 #### [ Johan Commelin (May 25 2018 at 07:13)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127065286):
-got it
+<p>got it</p>
 
 #### [ Johan Commelin (May 25 2018 at 08:32)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127067503):
-Ok, so here is another ignorant question:
-The reason we have infix notation `*` for every `group` is because they are instances of `has_mul`, right?
+<p>Ok, so here is another ignorant question:<br>
+The reason we have infix notation <code>*</code> for every <code>group</code> is because they are instances of <code>has_mul</code>, right?</p>
 
 #### [ Johan Commelin (May 25 2018 at 08:32)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127067516):
-So what if we made abstract groups, with `op` and `neu` etc...
+<p>So what if we made abstract groups, with <code>op</code> and <code>neu</code> etc...</p>
 
 #### [ Johan Commelin (May 25 2018 at 08:33)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127067520):
-And we don't have infix notation for those
+<p>And we don't have infix notation for those</p>
 
 #### [ Johan Commelin (May 25 2018 at 08:33)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127067526):
-And then we have concrete groups (like the units in `rat`, or `int`) and we make those instances of `has_mul` resp. `has_add`
+<p>And then we have concrete groups (like the units in <code>rat</code>, or <code>int</code>) and we make those instances of <code>has_mul</code> resp. <code>has_add</code></p>
 
 #### [ Johan Commelin (May 25 2018 at 08:33)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127067527):
-Then we still have our beloved infix notation.
+<p>Then we still have our beloved infix notation.</p>
 
 #### [ Johan Commelin (May 25 2018 at 08:34)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127067568):
-And then we can have some `to_multiplicate` resp. `to_additive` magic, that will turn `op_neu` into `mul_one` resp. `add_zero`
+<p>And then we can have some <code>to_multiplicate</code> resp. <code>to_additive</code> magic, that will turn <code>op_neu</code> into <code>mul_one</code> resp. <code>add_zero</code></p>
 
 #### [ Johan Commelin (May 25 2018 at 08:34)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127067569):
-So the proofs remain readable and intuitive
+<p>So the proofs remain readable and intuitive</p>
 
 #### [ Johan Commelin (May 25 2018 at 08:36)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127067616):
-If you want to prove something about an abstract group, and you would like to use infix `*` notation, then inside the proof you can make the group into an instance of `has_mul` (I hope) and voila, you have your `*`. But the statement that you proved is all of a sudden also valid in the context of additive notation.
+<p>If you want to prove something about an abstract group, and you would like to use infix <code>*</code> notation, then inside the proof you can make the group into an instance of <code>has_mul</code> (I hope) and voila, you have your <code>*</code>. But the statement that you proved is all of a sudden also valid in the context of additive notation.</p>
 
 #### [ Johan Commelin (May 25 2018 at 08:36)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127067619):
-Does this idea make any sense at all?
+<p>Does this idea make any sense at all?</p>
 
 #### [ Mario Carneiro (May 25 2018 at 08:37)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127067625):
-If you use `has_mul` then it gets involved in the statements of the theorems you prove, so there is some unfolding to apply it in a given context
+<p>If you use <code>has_mul</code> then it gets involved in the statements of the theorems you prove, so there is some unfolding to apply it in a given context</p>
 
 #### [ Johan Commelin (May 25 2018 at 08:37)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127067629):
-Well, I hope to keep it out of the statements.
+<p>Well, I hope to keep it out of the statements.</p>
 
 #### [ Mario Carneiro (May 25 2018 at 08:37)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127067631):
-then you can't use notation with abstract group theory
+<p>then you can't use notation with abstract group theory</p>
 
 #### [ Mario Carneiro (May 25 2018 at 08:38)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127067669):
-which is a thing people want
+<p>which is a thing people want</p>
 
 #### [ Johan Commelin (May 25 2018 at 08:38)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127067672):
-So you would have some statement `theorem {G : Type} [group G] : blabla := begin ... end`
+<p>So you would have some statement <code>theorem {G : Type} [group G] : blabla := begin ... end</code></p>
 
 #### [ Johan Commelin (May 25 2018 at 08:38)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127067677):
-and between the `begin` and `end` you do some sort of `have_instance : has_mul G := { mul := op }`
+<p>and between the <code>begin</code> and <code>end</code> you do some sort of <code>have_instance : has_mul G := { mul := op }</code></p>
 
 #### [ Johan Commelin (May 25 2018 at 08:39)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127067683):
-and then you can use multiplicative notation in the rest of the proof.
+<p>and then you can use multiplicative notation in the rest of the proof.</p>
 
 #### [ Johan Commelin (May 25 2018 at 08:39)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127067685):
-But it does not affect the statement
+<p>But it does not affect the statement</p>
 
 #### [ Mario Carneiro (May 25 2018 at 08:39)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127067690):
-so `blabla` there has no notation?
+<p>so <code>blabla</code> there has no notation?</p>
 
 #### [ Johan Commelin (May 25 2018 at 08:40)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127067733):
-Yes, that is correct
+<p>Yes, that is correct</p>
 
 #### [ Johan Commelin (May 25 2018 at 08:40)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127067734):
-Unless we can somehow sugar that in... but I guess then we run into trouble again (which was your point)
+<p>Unless we can somehow sugar that in... but I guess then we run into trouble again (which was your point)</p>
 
 #### [ Mario Carneiro (May 25 2018 at 08:40)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127067735):
-right
+<p>right</p>
 
 #### [ Mario Carneiro (May 25 2018 at 08:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127067742):
-Also, without `mul` constants in that statement `simp`  gets lost in higher order unification
+<p>Also, without <code>mul</code> constants in that statement <code>simp</code>  gets lost in higher order unification</p>
 
 #### [ Johan Commelin (May 25 2018 at 08:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127067743):
-I think there is quite a lot of interesting `blabla` that does not have very much notation
+<p>I think there is quite a lot of interesting <code>blabla</code> that does not have very much notation</p>
 
 #### [ Mario Carneiro (May 25 2018 at 08:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127067745):
-for example if you have the theorem `op x id = x` where `op` and `id` are variables, `simp` can't use it
+<p>for example if you have the theorem <code>op x id = x</code> where <code>op</code> and <code>id</code> are variables, <code>simp</code> can't use it</p>
 
 #### [ Mario Carneiro (May 25 2018 at 08:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127067748):
-but if the theorem is `x + 0 = x` then it can
+<p>but if the theorem is <code>x + 0 = x</code> then it can</p>
 
 #### [ Johan Commelin (May 25 2018 at 08:42)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127067788):
-You could wrap the statement with `local notation x' \bullet 'y := op x y`
+<p>You could wrap the statement with <code>local notation x' \bullet 'y := op x y</code></p>
 
 #### [ Johan Commelin (May 25 2018 at 08:42)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127067789):
-If you really want infix notation in the statement
+<p>If you really want infix notation in the statement</p>
 
 #### [ Mario Carneiro (May 25 2018 at 08:42)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127067790):
-that doesn't solve the problem I just mentioned though
+<p>that doesn't solve the problem I just mentioned though</p>
 
 #### [ Johan Commelin (May 25 2018 at 08:43)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127067797):
-Hmmm, so why can't `simp` use the former? (Newbie alert!)
+<p>Hmmm, so why can't <code>simp</code> use the former? (Newbie alert!)</p>
 
 #### [ Mario Carneiro (May 25 2018 at 08:43)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127067800):
-the expression `?M1 x ?M2` matches almost anything
+<p>the expression <code>?M1 x ?M2</code> matches almost anything</p>
 
 #### [ Mario Carneiro (May 25 2018 at 08:44)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127067835):
-because you can have some lambda term for `?M1`
+<p>because you can have some lambda term for <code>?M1</code></p>
 
 #### [ Mario Carneiro (May 25 2018 at 08:44)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127067842):
-unification up to beta reduction is called higher order unification and it's undecidable
+<p>unification up to beta reduction is called higher order unification and it's undecidable</p>
 
 #### [ Mario Carneiro (May 25 2018 at 08:44)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127067843):
-and lean only does a very limited subset of it
+<p>and lean only does a very limited subset of it</p>
 
 #### [ Johan Commelin (May 25 2018 at 08:45)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127067849):
-Ok, so then we don't have `simp` for abstract groups.
+<p>Ok, so then we don't have <code>simp</code> for abstract groups.</p>
 
 #### [ Mario Carneiro (May 25 2018 at 08:45)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127067850):
-sad face
+<p>sad face</p>
 
 #### [ Johan Commelin (May 25 2018 at 08:45)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127067851):
-But as soon as you are in a multiplicate of additive setting, you have it back
+<p>But as soon as you are in a multiplicate of additive setting, you have it back</p>
 
 #### [ Mario Carneiro (May 25 2018 at 08:45)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127067854):
-then I always want to be in a multiplicative or additive setting
+<p>then I always want to be in a multiplicative or additive setting</p>
 
 #### [ Johan Commelin (May 25 2018 at 08:45)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127067855):
-and if inside the proof you do the `have instance` thing that I suggested above, then you also have it back (I hope)
+<p>and if inside the proof you do the <code>have instance</code> thing that I suggested above, then you also have it back (I hope)</p>
 
 #### [ Johan Commelin (May 25 2018 at 08:46)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127067895):
-So (I hope, once again) inside proofs you can always assume that you are inside the multiplicative setting
+<p>So (I hope, once again) inside proofs you can always assume that you are inside the multiplicative setting</p>
 
 #### [ Johan Commelin (May 25 2018 at 08:46)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127067898):
-even if you prove something for an abstract group
+<p>even if you prove something for an abstract group</p>
 
 #### [ Mario Carneiro (May 25 2018 at 08:47)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127067908):
-no, you still have that `simp` can only *use* groups with notation regardless of whether the goal uses notation
+<p>no, you still have that <code>simp</code> can only <em>use</em> groups with notation regardless of whether the goal uses notation</p>
 
 #### [ Johan Commelin (May 25 2018 at 08:48)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127067918):
-Yes, but you will *have* a group with notation. Because the first thing you prove inside your proof is that you have notation. And then you continue with the actual proof.
+<p>Yes, but you will <em>have</em> a group with notation. Because the first thing you prove inside your proof is that you have notation. And then you continue with the actual proof.</p>
 
 #### [ Johan Commelin (May 25 2018 at 08:48)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127067957):
-I really hope something like that is possible
+<p>I really hope something like that is possible</p>
 
 #### [ Mario Carneiro (May 25 2018 at 08:48)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127067959):
-I mean, if you have a theorem whose statement is neutral but whose proof uses notation, it can't be used with simp
+<p>I mean, if you have a theorem whose statement is neutral but whose proof uses notation, it can't be used with simp</p>
 
 #### [ Johan Commelin (May 25 2018 at 08:48)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127067961):
-Hmmz, that is very sad
+<p>Hmmz, that is very sad</p>
 
 #### [ Mario Carneiro (May 25 2018 at 08:48)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127067962):
-because only the statement matters for simp
+<p>because only the statement matters for simp</p>
 
 #### [ Johan Commelin (May 25 2018 at 08:49)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127067971):
-But you can change the statement inside the proof, right? By some `apply to_multiplicative`, or something
+<p>But you can change the statement inside the proof, right? By some <code>apply to_multiplicative</code>, or something</p>
 
 #### [ Mario Carneiro (May 25 2018 at 08:49)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127067975):
-So I just use multiplicative notation for "generic" group theory, and use `multiplicative` for transferring to additive
+<p>So I just use multiplicative notation for "generic" group theory, and use <code>multiplicative</code> for transferring to additive</p>
 
 #### [ Mario Carneiro (May 25 2018 at 08:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127068019):
-I don't see any reason to avoid some kind of primacy between the notations
+<p>I don't see any reason to avoid some kind of primacy between the notations</p>
 
 #### [ Johan Commelin (May 25 2018 at 08:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127068020):
-Ok, maybe I just need to get used to that (-;
+<p>Ok, maybe I just need to get used to that (-;</p>
 
 #### [ Johan Commelin (May 25 2018 at 08:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127068042):
-But let me try to understand Lean better: if I have a "generic" statement, and I start my proof with `apply multiplicative`. Would I be able to use `simp` after that?
+<p>But let me try to understand Lean better: if I have a "generic" statement, and I start my proof with <code>apply multiplicative</code>. Would I be able to use <code>simp</code> after that?</p>
 
 #### [ Mario Carneiro (May 25 2018 at 08:53)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127068094):
-`simp` can be used on any statement, but it can only use simp lemmas that are stated with notation
+<p><code>simp</code> can be used on any statement, but it can only use simp lemmas that are stated with notation</p>
 
 #### [ Mario Carneiro (May 25 2018 at 08:54)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127068133):
-I guess if you want to use `simp` on a generic statement you will need to change your goal to one that uses notation for the lemmas to match though
+<p>I guess if you want to use <code>simp</code> on a generic statement you will need to change your goal to one that uses notation for the lemmas to match though</p>
 
 #### [ Johan Commelin (May 25 2018 at 08:54)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127068143):
-Right, and I think a tactic could do that change for me
+<p>Right, and I think a tactic could do that change for me</p>
 
 #### [ Mario Carneiro (May 25 2018 at 08:54)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127068145):
-yes
+<p>yes</p>
 
 #### [ Mario Carneiro (May 25 2018 at 08:54)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127068152):
-no such tactic exists, but it could be done
+<p>no such tactic exists, but it could be done</p>
 
 #### [ Johan Commelin (May 25 2018 at 08:55)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127068154):
-Great. Then I prefer that approach to group theory. But I respect your choice.
+<p>Great. Then I prefer that approach to group theory. But I respect your choice.</p>
 
 #### [ Johan Commelin (May 25 2018 at 08:55)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127068160):
-It would solve all the `group_hom` hassle
+<p>It would solve all the <code>group_hom</code> hassle</p>
 
 #### [ Johan Commelin (May 25 2018 at 08:55)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127068161):
-I think in the end, the code would be shorter, less duplication, and less `multiplicative` for end users.
+<p>I think in the end, the code would be shorter, less duplication, and less <code>multiplicative</code> for end users.</p>
 
 #### [ Mario Carneiro (May 25 2018 at 08:55)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127068162):
-but it would still have the problem of not being registerable with simp, as a lemma on its own right
+<p>but it would still have the problem of not being registerable with simp, as a lemma on its own right</p>
 
 #### [ Johan Commelin (May 25 2018 at 08:56)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127068202):
-True, but I believe that the bulk of generic group theory is not simp lemmas
+<p>True, but I believe that the bulk of generic group theory is not simp lemmas</p>
 
 #### [ Johan Commelin (May 25 2018 at 08:56)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127068205):
-So we would need to state a couple of simp lemmas for groups with notation.
+<p>So we would need to state a couple of simp lemmas for groups with notation.</p>
 
 #### [ Johan Commelin (May 25 2018 at 08:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127068212):
-We don't want the five lemma to be a simp lemma, right?
+<p>We don't want the five lemma to be a simp lemma, right?</p>
 
 #### [ Mario Carneiro (May 25 2018 at 08:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127068214):
-more complicated theorems, proving existence of things or what not, can often be opened up to defeq anyway so it doesn't matter
+<p>more complicated theorems, proving existence of things or what not, can often be opened up to defeq anyway so it doesn't matter</p>
 
 #### [ Johan Commelin (May 25 2018 at 08:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127068216):
-But I wouldn't mind if end users could use it, without figuring out to which of the 10 groups they first need to apply `multiplicative`
+<p>But I wouldn't mind if end users could use it, without figuring out to which of the 10 groups they first need to apply <code>multiplicative</code></p>
 
 #### [ Mario Carneiro (May 25 2018 at 08:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127068266):
-Why don't you just state a version where everything is group, and another where everything is add_group, and let users deal with it themselves if they have mixed groups
+<p>Why don't you just state a version where everything is group, and another where everything is add_group, and let users deal with it themselves if they have mixed groups</p>
 
 #### [ Johan Commelin (May 25 2018 at 08:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127068274):
-Because I really think that means I won't have many users...
+<p>Because I really think that means I won't have many users...</p>
 
 #### [ Johan Commelin (May 25 2018 at 08:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127068287):
-The conversion between `group` and `add_group` should be completely transparent
+<p>The conversion between <code>group</code> and <code>add_group</code> should be completely transparent</p>
 
 #### [ Johan Commelin (May 25 2018 at 08:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127068299):
-Otherwise we won't convert much mathematicians to formalisation
+<p>Otherwise we won't convert much mathematicians to formalisation</p>
 
 #### [ Mario Carneiro (May 25 2018 at 09:00)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127068346):
-Not completely transparent, if it's too transparent then `*` and `+` become the same and that's bad
+<p>Not completely transparent, if it's too transparent then <code>*</code> and <code>+</code> become the same and that's bad</p>
 
 #### [ Mario Carneiro (May 25 2018 at 09:00)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127068348):
-it's really not an easy problem
+<p>it's really not an easy problem</p>
 
 #### [ Mario Carneiro (May 25 2018 at 09:00)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127068356):
-I think `multiplicative` strikes the right balance, you have to explicitly state what you want but otherwise lean does the proof for free
+<p>I think <code>multiplicative</code> strikes the right balance, you have to explicitly state what you want but otherwise lean does the proof for free</p>
 
 #### [ Johan Commelin (May 25 2018 at 09:01)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127068370):
-Hmmm, would still like to have groups without notation
+<p>Hmmm, would still like to have groups without notation</p>
 
 #### [ Mario Carneiro (May 25 2018 at 09:01)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127068371):
-why?
+<p>why?</p>
 
 #### [ Mario Carneiro (May 25 2018 at 09:02)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127068397):
-it's not easier to read
+<p>it's not easier to read</p>
 
 #### [ Mario Carneiro (May 25 2018 at 09:02)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127068412):
-it's not easier to use
+<p>it's not easier to use</p>
 
 #### [ Mario Carneiro (May 25 2018 at 09:02)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127068415):
-the names are less obvious
+<p>the names are less obvious</p>
 
 #### [ Johan Commelin (May 25 2018 at 09:02)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127068416):
-For the generic theorems. Because those can be applied transparently to both settings
+<p>For the generic theorems. Because those can be applied transparently to both settings</p>
 
 #### [ Mario Carneiro (May 25 2018 at 09:02)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127068418):
-I see no advantages
+<p>I see no advantages</p>
 
 #### [ Mario Carneiro (May 25 2018 at 09:02)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127068425):
-it can't be applied transparently though
+<p>it can't be applied transparently though</p>
 
 #### [ Johan Commelin (May 25 2018 at 09:02)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127068426):
-I think they are just as easy to use (or easier, in the mixed setting).
+<p>I think they are just as easy to use (or easier, in the mixed setting).</p>
 
 #### [ Mario Carneiro (May 25 2018 at 09:03)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127068433):
-it is as easy to apply a neutral theorem to an additive setting as it is to apply a multiplicative theorem in an additive setting
+<p>it is as easy to apply a neutral theorem to an additive setting as it is to apply a multiplicative theorem in an additive setting</p>
 
 #### [ Johan Commelin (May 25 2018 at 09:03)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127068434):
-If every `add_group` is an instance of `generic_group`, and I prove the five lemma for generic groups, then I can just apply it to additive groups, right?
+<p>If every <code>add_group</code> is an instance of <code>generic_group</code>, and I prove the five lemma for generic groups, then I can just apply it to additive groups, right?</p>
 
 #### [ Johan Commelin (May 25 2018 at 09:03)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127068435):
-Without any `multiplicative` stuff
+<p>Without any <code>multiplicative</code> stuff</p>
 
 #### [ Johan Commelin (May 25 2018 at 09:04)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127068479):
-You see, when I have my mathematician hat on I never think about whether my group is additive or multiplicative. I just use it. And I just use theorems. And it works.
+<p>You see, when I have my mathematician hat on I never think about whether my group is additive or multiplicative. I just use it. And I just use theorems. And it works.</p>
 
 #### [ Mario Carneiro (May 25 2018 at 09:05)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127068491):
-I never had to deal with this in metamath either
+<p>I never had to deal with this in metamath either</p>
 
 #### [ Johan Commelin (May 25 2018 at 09:05)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127068492):
-So I don't want end users to have to figure out themselves where they need to use `multiplicative` to make some generic theorem work
+<p>So I don't want end users to have to figure out themselves where they need to use <code>multiplicative</code> to make some generic theorem work</p>
 
 #### [ Kenny Lau (May 25 2018 at 09:05)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127068493):
-```quote
-You see, when I have my mathematician hat on I never think about whether my group is additive or multiplicative. I just use it. And I just use theorems. And it works.
-```
-hear hear
+<blockquote>
+<p>You see, when I have my mathematician hat on I never think about whether my group is additive or multiplicative. I just use it. And I just use theorems. And it works.</p>
+</blockquote>
+<p>hear hear</p>
 
 #### [ Mario Carneiro (May 25 2018 at 09:05)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127068496):
-it was all local notation
+<p>it was all local notation</p>
 
 #### [ Kenny Lau (May 25 2018 at 09:05)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127068497):
-we do have an algebra hierarchy that mario doesn't use though
+<p>we do have an algebra hierarchy that mario doesn't use though</p>
 
 #### [ Kenny Lau (May 25 2018 at 09:05)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127068498):
-in that hierarchy this problem is avoided, I think
+<p>in that hierarchy this problem is avoided, I think</p>
 
 #### [ Mario Carneiro (May 25 2018 at 09:06)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127068537):
-Leo has his own ideas about generic groups. Like I said, this issue has a long history
+<p>Leo has his own ideas about generic groups. Like I said, this issue has a long history</p>
 
 #### [ Mario Carneiro (May 25 2018 at 09:07)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127068539):
-The core lean impl is unfinished though, maybe lean 4 will have something workable
+<p>The core lean impl is unfinished though, maybe lean 4 will have something workable</p>
 
 #### [ Mario Carneiro (May 25 2018 at 09:08)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127068588):
-Honestly I have had more conversations on this topic than I would like, and things have not changed as a result
+<p>Honestly I have had more conversations on this topic than I would like, and things have not changed as a result</p>
 
 #### [ Mario Carneiro (May 25 2018 at 09:08)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127068601):
-I just want to prove theorems and use what's there
+<p>I just want to prove theorems and use what's there</p>
 
 #### [ Johan Commelin (May 25 2018 at 09:09)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127068613):
-Ok. Got that.
+<p>Ok. Got that.</p>
 
 #### [ Johan Commelin (May 25 2018 at 09:09)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127068617):
-I really don't want to start any fights of course. I really love what you have done so far.
+<p>I really don't want to start any fights of course. I really love what you have done so far.</p>
 
 #### [ Mario Carneiro (May 25 2018 at 09:10)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127068660):
-I don't mean to be short with you, but everyone has an idea and every solution has pros and cons
+<p>I don't mean to be short with you, but everyone has an idea and every solution has pros and cons</p>
 
 #### [ Mario Carneiro (May 25 2018 at 09:11)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127068669):
-I would suggest not entering the ring unless you have a large amount of testing to support your claims
+<p>I would suggest not entering the ring unless you have a large amount of testing to support your claims</p>
 
 #### [ Johan Commelin (May 25 2018 at 09:15)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127068765):
-Yeah, that's good advice.
+<p>Yeah, that's good advice.</p>
 
 #### [ Kevin Buzzard (May 26 2018 at 00:18)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127104639):
-```quote
-I don't see any reason to avoid some kind of primacy between the notations
-```
-This is a concept alien to mathematicians, that's why Johan is talking about it. But, like division by zero, it's just something we have to learn.
+<blockquote>
+<p>I don't see any reason to avoid some kind of primacy between the notations</p>
+</blockquote>
+<p>This is a concept alien to mathematicians, that's why Johan is talking about it. But, like division by zero, it's just something we have to learn.</p>
 
 #### [ Kevin Buzzard (May 26 2018 at 00:20)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/127104713):
-They have different customs here.
+<p>They have different customs here.</p>
 
 #### [ Patrick Massot (Jul 10 2018 at 10:42)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/129399170):
-Did we get anywhere with this additive group homs thread? @**Mario Carneiro** what is the definition you recommend in the end?
+<p>Did we get anywhere with this additive group homs thread? <span class="user-mention" data-user-id="110049">@Mario Carneiro</span> what is the definition you recommend in the end?</p>
 
 
 {% endraw %}

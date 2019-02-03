@@ -12,394 +12,388 @@ permalink: archive/113489newmembers/13245Whichruletouseforarithmeticcalculations
 
 {% raw %}
 #### [ Yufan Lou (Oct 12 2018 at 00:59)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Which%20rule%20to%20use%20for%20arithmetic%20calculations%20in%20calc%20mode%3F/near/135641895):
-I am trying to prove for any odd number n, 3n + 5 is even as a practice. In the calc steps I have:
-3 * n + 5 = ...
-            ... = 3 * 2 * k + 3 + 5 : by rw mul_assoc
-            ... = 3 * 2 * k + 8        : by ?
-
-What do I need to put in place of the question mark? I wrote the proof this way so as to closely track how I would write it manually, in hope I may introduce this to my classmates as a tool, so I don’t need to simplify it further.
+<p>I am trying to prove for any odd number n, 3n + 5 is even as a practice. In the calc steps I have:<br>
+3 * n + 5 = ...<br>
+            ... = 3 * 2 * k + 3 + 5 : by rw mul_assoc<br>
+            ... = 3 * 2 * k + 8        : by ?</p>
+<p>What do I need to put in place of the question mark? I wrote the proof this way so as to closely track how I would write it manually, in hope I may introduce this to my classmates as a tool, so I don’t need to simplify it further.</p>
 
 #### [ Kenny Lau (Oct 12 2018 at 00:59)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Which%20rule%20to%20use%20for%20arithmetic%20calculations%20in%20calc%20mode%3F/near/135641906):
-by rw add_assoc
+<p>by rw add_assoc</p>
 
 #### [ Mario Carneiro (Oct 12 2018 at 01:02)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Which%20rule%20to%20use%20for%20arithmetic%20calculations%20in%20calc%20mode%3F/near/135642081):
-`rfl`
+<p><code>rfl</code></p>
 
 #### [ Mario Carneiro (Oct 12 2018 at 01:02)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Which%20rule%20to%20use%20for%20arithmetic%20calculations%20in%20calc%20mode%3F/near/135642100):
-`norm_num` is the correct answer though
+<p><code>norm_num</code> is the correct answer though</p>
 
 #### [ Yufan Lou (Oct 12 2018 at 01:09)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Which%20rule%20to%20use%20for%20arithmetic%20calculations%20in%20calc%20mode%3F/near/135642393):
-norm_num is unknown identifier tho
+<p>norm_num is unknown identifier tho</p>
 
 #### [ Yufan Lou (Oct 12 2018 at 01:09)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Which%20rule%20to%20use%20for%20arithmetic%20calculations%20in%20calc%20mode%3F/near/135642396):
-I am using the online version
+<p>I am using the online version</p>
 
 #### [ Abhimanyu Pallavi Sudhir (Oct 12 2018 at 01:10)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Which%20rule%20to%20use%20for%20arithmetic%20calculations%20in%20calc%20mode%3F/near/135642442):
-```quote
-norm_num is unknown identifier tho
-```
-Just import tactic.norm_num
+<blockquote>
+<p>norm_num is unknown identifier tho</p>
+</blockquote>
+<p>Just import tactic.norm_num</p>
 
 #### [ Mario Carneiro (Oct 12 2018 at 01:12)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Which%20rule%20to%20use%20for%20arithmetic%20calculations%20in%20calc%20mode%3F/near/135642532):
-I'm not sure if the online version has `tactic.norm_num`, it's got a quite old version of mathlib
+<p>I'm not sure if the online version has <code>tactic.norm_num</code>, it's got a quite old version of mathlib</p>
 
 #### [ Yufan Lou (Oct 12 2018 at 01:12)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Which%20rule%20to%20use%20for%20arithmetic%20calculations%20in%20calc%20mode%3F/near/135642552):
-import went through
+<p>import went through</p>
 
 #### [ Yufan Lou (Oct 12 2018 at 01:13)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Which%20rule%20to%20use%20for%20arithmetic%20calculations%20in%20calc%20mode%3F/near/135642587):
-curiously it still doesn't work. rw add_assoc works btw
+<p>curiously it still doesn't work. rw add_assoc works btw</p>
 
 #### [ Yufan Lou (Oct 12 2018 at 01:14)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Which%20rule%20to%20use%20for%20arithmetic%20calculations%20in%20calc%20mode%3F/near/135642644):
-Given by norm_num: `⊢ 3 + (5 + 6 * k) = 8 + 6 * k`
+<p>Given by norm_num: <code>⊢ 3 + (5 + 6 * k) = 8 + 6 * k</code></p>
 
 #### [ Mario Carneiro (Oct 12 2018 at 01:14)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Which%20rule%20to%20use%20for%20arithmetic%20calculations%20in%20calc%20mode%3F/near/135642649):
-You have to reassociate first
+<p>You have to reassociate first</p>
 
 #### [ Kenny Lau (Oct 12 2018 at 01:14)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Which%20rule%20to%20use%20for%20arithmetic%20calculations%20in%20calc%20mode%3F/near/135642651):
-```quote
-`norm_num` is the correct answer though
-```
-I would prefer `rfl` over `norm_num`
+<blockquote>
+<p><code>norm_num</code> is the correct answer though</p>
+</blockquote>
+<p>I would prefer <code>rfl</code> over <code>norm_num</code></p>
 
 #### [ Mario Carneiro (Oct 12 2018 at 01:15)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Which%20rule%20to%20use%20for%20arithmetic%20calculations%20in%20calc%20mode%3F/near/135642664):
-`norm_num` will evaluate closed term expressions but they have to all be gathered together
+<p><code>norm_num</code> will evaluate closed term expressions but they have to all be gathered together</p>
 
 #### [ Mario Carneiro (Oct 12 2018 at 01:15)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Which%20rule%20to%20use%20for%20arithmetic%20calculations%20in%20calc%20mode%3F/near/135642673):
-`rfl` works in small cases, especially on `nat`
+<p><code>rfl</code> works in small cases, especially on <code>nat</code></p>
 
 #### [ Yufan Lou (Oct 12 2018 at 01:15)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Which%20rule%20to%20use%20for%20arithmetic%20calculations%20in%20calc%20mode%3F/near/135642678):
-Problem I have with rfl is that the error is not helpful at all
+<p>Problem I have with rfl is that the error is not helpful at all</p>
 
 #### [ Mario Carneiro (Oct 12 2018 at 01:16)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Which%20rule%20to%20use%20for%20arithmetic%20calculations%20in%20calc%20mode%3F/near/135642734):
-But stuff like `3 + 5 = 8` on `real` needs `norm_num`
+<p>But stuff like <code>3 + 5 = 8</code> on <code>real</code> needs <code>norm_num</code></p>
 
 #### [ Kenny Lau (Oct 12 2018 at 01:16)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Which%20rule%20to%20use%20for%20arithmetic%20calculations%20in%20calc%20mode%3F/near/135642744):
-```quote
-Problem I have with rfl is that the error is not helpful at all
-```
-it just means they are not definitionally equal
+<blockquote>
+<p>Problem I have with rfl is that the error is not helpful at all</p>
+</blockquote>
+<p>it just means they are not definitionally equal</p>
 
 #### [ Yufan Lou (Oct 12 2018 at 01:16)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Which%20rule%20to%20use%20for%20arithmetic%20calculations%20in%20calc%20mode%3F/near/135642753):
-oh for my case I only work with int and nat
+<p>oh for my case I only work with int and nat</p>
 
 #### [ Yufan Lou (Oct 12 2018 at 01:16)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Which%20rule%20to%20use%20for%20arithmetic%20calculations%20in%20calc%20mode%3F/near/135642759):
-no need for real here
+<p>no need for real here</p>
 
 #### [ Mario Carneiro (Oct 12 2018 at 01:17)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Which%20rule%20to%20use%20for%20arithmetic%20calculations%20in%20calc%20mode%3F/near/135642768):
-Also stuff like `100 * 35 = 3500` should not be done by `rfl`
+<p>Also stuff like <code>100 * 35 = 3500</code> should not be done by <code>rfl</code></p>
 
 #### [ Kenny Lau (Oct 12 2018 at 01:17)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Which%20rule%20to%20use%20for%20arithmetic%20calculations%20in%20calc%20mode%3F/near/135642770):
-sure
+<p>sure</p>
 
 #### [ Mario Carneiro (Oct 12 2018 at 01:17)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Which%20rule%20to%20use%20for%20arithmetic%20calculations%20in%20calc%20mode%3F/near/135642782):
-but for numbers less than 10 you should be fine
+<p>but for numbers less than 10 you should be fine</p>
 
 #### [ Yufan Lou (Oct 12 2018 at 01:18)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Which%20rule%20to%20use%20for%20arithmetic%20calculations%20in%20calc%20mode%3F/near/135642836):
-cuz `rfl` does induction?
+<p>cuz <code>rfl</code> does induction?</p>
 
 #### [ Mario Carneiro (Oct 12 2018 at 01:18)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Which%20rule%20to%20use%20for%20arithmetic%20calculations%20in%20calc%20mode%3F/near/135642841):
-It calculates both sides to a normal form in unary
+<p>It calculates both sides to a normal form in unary</p>
 
 #### [ Mario Carneiro (Oct 12 2018 at 01:19)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Which%20rule%20to%20use%20for%20arithmetic%20calculations%20in%20calc%20mode%3F/near/135642842):
-so it's exponentially slower than `norm_num` in large cases
+<p>so it's exponentially slower than <code>norm_num</code> in large cases</p>
 
 #### [ Yufan Lou (Oct 12 2018 at 01:19)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Which%20rule%20to%20use%20for%20arithmetic%20calculations%20in%20calc%20mode%3F/near/135642851):
-gotcha
+<p>gotcha</p>
 
 #### [ Yufan Lou (Oct 12 2018 at 01:25)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Which%20rule%20to%20use%20for%20arithmetic%20calculations%20in%20calc%20mode%3F/near/135643128):
-```quote
-You have to reassociate first
-```
-this kinda beats the purpose of replacing `rw add_assoc` tho
+<blockquote>
+<p>You have to reassociate first</p>
+</blockquote>
+<p>this kinda beats the purpose of replacing <code>rw add_assoc</code> tho</p>
 
 #### [ Mario Carneiro (Oct 12 2018 at 01:26)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Which%20rule%20to%20use%20for%20arithmetic%20calculations%20in%20calc%20mode%3F/near/135643205):
-that's true
+<p>that's true</p>
 
 #### [ Mario Carneiro (Oct 12 2018 at 01:26)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Which%20rule%20to%20use%20for%20arithmetic%20calculations%20in%20calc%20mode%3F/near/135643207):
-`ring` will actually solve the whole goal in this case
+<p><code>ring</code> will actually solve the whole goal in this case</p>
 
 #### [ Yufan Lou (Oct 12 2018 at 01:26)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Which%20rule%20to%20use%20for%20arithmetic%20calculations%20in%20calc%20mode%3F/near/135643211):
-```
-... = 3 * 2 * k + 8            : by rw add_assoc
+<div class="codehilite"><pre><span></span>... = 3 * 2 * k + 8            : by rw add_assoc
  ... = 2 * 3 * k + 8            : by rw mul_comm
-```
-gives me `⊢ k * (3 * 2) + 8 = 2 * 3 * k + 8`
+</pre></div>
+
+
+<p>gives me <code>⊢ k * (3 * 2) + 8 = 2 * 3 * k + 8</code></p>
 
 #### [ Mario Carneiro (Oct 12 2018 at 01:26)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Which%20rule%20to%20use%20for%20arithmetic%20calculations%20in%20calc%20mode%3F/near/135643221):
-you can do `mul_comm 2`
+<p>you can do <code>mul_comm 2</code></p>
 
 #### [ Mario Carneiro (Oct 12 2018 at 01:27)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Which%20rule%20to%20use%20for%20arithmetic%20calculations%20in%20calc%20mode%3F/near/135643229):
-to give lean a bit of a hint of which mul to comm
+<p>to give lean a bit of a hint of which mul to comm</p>
 
 #### [ Yufan Lou (Oct 12 2018 at 01:27)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Which%20rule%20to%20use%20for%20arithmetic%20calculations%20in%20calc%20mode%3F/near/135643233):
-gotcha
+<p>gotcha</p>
 
 #### [ Mario Carneiro (Oct 12 2018 at 01:27)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Which%20rule%20to%20use%20for%20arithmetic%20calculations%20in%20calc%20mode%3F/near/135643244):
-that's one that `norm_num` can solve btw... or `rfl`
+<p>that's one that <code>norm_num</code> can solve btw... or <code>rfl</code></p>
 
 #### [ Kenny Lau (Oct 12 2018 at 01:28)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Which%20rule%20to%20use%20for%20arithmetic%20calculations%20in%20calc%20mode%3F/near/135643287):
-```lean
-import data.real.basic tactic.norm_num
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">real</span><span class="bp">.</span><span class="n">basic</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">norm_num</span>
 
-theorem test : (3:ℝ) + 5 = 8 :=
-by norm_num
+<span class="kn">theorem</span> <span class="n">test</span> <span class="o">:</span> <span class="o">(</span><span class="mi">3</span><span class="o">:</span><span class="n">ℝ</span><span class="o">)</span> <span class="bp">+</span> <span class="mi">5</span> <span class="bp">=</span> <span class="mi">8</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">norm_num</span>
 
-#print test
+<span class="bp">#</span><span class="kn">print</span> <span class="n">test</span>
 
-theorem test1 : (3:ℝ) + 5 = 8 :=
-by rw [norm_num.bit1_add_bit1, norm_num.one_add_bit0,
-norm_num.add1_bit1, norm_num.add1_one]
+<span class="kn">theorem</span> <span class="n">test1</span> <span class="o">:</span> <span class="o">(</span><span class="mi">3</span><span class="o">:</span><span class="n">ℝ</span><span class="o">)</span> <span class="bp">+</span> <span class="mi">5</span> <span class="bp">=</span> <span class="mi">8</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">rw</span> <span class="o">[</span><span class="n">norm_num</span><span class="bp">.</span><span class="n">bit1_add_bit1</span><span class="o">,</span> <span class="n">norm_num</span><span class="bp">.</span><span class="n">one_add_bit0</span><span class="o">,</span>
+<span class="n">norm_num</span><span class="bp">.</span><span class="n">add1_bit1</span><span class="o">,</span> <span class="n">norm_num</span><span class="bp">.</span><span class="n">add1_one</span><span class="o">]</span>
 
-#print test1
+<span class="bp">#</span><span class="kn">print</span> <span class="n">test1</span>
 
-theorem test2 : (3:ℝ) + 5 = 8 :=
-calc  (3:ℝ) + 5
-    = bit0 (norm_num.add1 ((1:ℝ) + 2)) : norm_num.bit1_add_bit1 _ _
-... = bit0 (norm_num.add1 (bit1 (1:ℝ))) : congr_arg _ (congr_arg _ (norm_num.one_add_bit0 _))
-... = bit0 (bit0 (norm_num.add1 (1:ℝ))) : congr_arg _ (norm_num.add1_bit1 _)
-... = bit0 (bit0 (bit0 (1:ℝ))) : congr_arg _ (congr_arg _ norm_num.add1_one)
+<span class="kn">theorem</span> <span class="n">test2</span> <span class="o">:</span> <span class="o">(</span><span class="mi">3</span><span class="o">:</span><span class="n">ℝ</span><span class="o">)</span> <span class="bp">+</span> <span class="mi">5</span> <span class="bp">=</span> <span class="mi">8</span> <span class="o">:=</span>
+<span class="k">calc</span>  <span class="o">(</span><span class="mi">3</span><span class="o">:</span><span class="n">ℝ</span><span class="o">)</span> <span class="bp">+</span> <span class="mi">5</span>
+    <span class="bp">=</span> <span class="n">bit0</span> <span class="o">(</span><span class="n">norm_num</span><span class="bp">.</span><span class="n">add1</span> <span class="o">((</span><span class="mi">1</span><span class="o">:</span><span class="n">ℝ</span><span class="o">)</span> <span class="bp">+</span> <span class="mi">2</span><span class="o">))</span> <span class="o">:</span> <span class="n">norm_num</span><span class="bp">.</span><span class="n">bit1_add_bit1</span> <span class="bp">_</span> <span class="bp">_</span>
+<span class="bp">...</span> <span class="bp">=</span> <span class="n">bit0</span> <span class="o">(</span><span class="n">norm_num</span><span class="bp">.</span><span class="n">add1</span> <span class="o">(</span><span class="n">bit1</span> <span class="o">(</span><span class="mi">1</span><span class="o">:</span><span class="n">ℝ</span><span class="o">)))</span> <span class="o">:</span> <span class="n">congr_arg</span> <span class="bp">_</span> <span class="o">(</span><span class="n">congr_arg</span> <span class="bp">_</span> <span class="o">(</span><span class="n">norm_num</span><span class="bp">.</span><span class="n">one_add_bit0</span> <span class="bp">_</span><span class="o">))</span>
+<span class="bp">...</span> <span class="bp">=</span> <span class="n">bit0</span> <span class="o">(</span><span class="n">bit0</span> <span class="o">(</span><span class="n">norm_num</span><span class="bp">.</span><span class="n">add1</span> <span class="o">(</span><span class="mi">1</span><span class="o">:</span><span class="n">ℝ</span><span class="o">)))</span> <span class="o">:</span> <span class="n">congr_arg</span> <span class="bp">_</span> <span class="o">(</span><span class="n">norm_num</span><span class="bp">.</span><span class="n">add1_bit1</span> <span class="bp">_</span><span class="o">)</span>
+<span class="bp">...</span> <span class="bp">=</span> <span class="n">bit0</span> <span class="o">(</span><span class="n">bit0</span> <span class="o">(</span><span class="n">bit0</span> <span class="o">(</span><span class="mi">1</span><span class="o">:</span><span class="n">ℝ</span><span class="o">)))</span> <span class="o">:</span> <span class="n">congr_arg</span> <span class="bp">_</span> <span class="o">(</span><span class="n">congr_arg</span> <span class="bp">_</span> <span class="n">norm_num</span><span class="bp">.</span><span class="n">add1_one</span><span class="o">)</span>
 
-#print test2
-```
-```lean
-theorem test : 3 + 5 = 8 :=
-eq.mpr
-  (id
-     (eq.trans
-        ((λ (a a_1 : ℝ) (e_1 : a = a_1) (a_2 a_3 : ℝ) (e_2 : a_2 = a_3), congr (congr_arg eq e_1) e_2) (3 + 5) 8
-           (norm_num.subst_into_sum 3 5 3 5 8 (eq.refl 3) (eq.refl 5)
-              (norm_num.bit1_add_bit1_helper 1 2 3 4 (norm_num.one_add_bit0 1)
-                 (norm_num.add1_bit1_helper 1 2 norm_num.add1_one)))
-           8
-           8
-           (eq.refl 8))
-        (eq_true_intro (eq.refl 8))))
-  trivial
+<span class="bp">#</span><span class="kn">print</span> <span class="n">test2</span>
+</pre></div>
 
-theorem test1 : 3 + 5 = 8 :=
-eq.mpr (id (eq.rec (eq.refl (3 + 5 = 8)) (norm_num.bit1_add_bit1 1 2)))
-  (eq.mpr (id (eq.rec (eq.refl (bit0 (norm_num.add1 (1 + 2)) = 8)) (norm_num.one_add_bit0 1)))
-     (eq.mpr (id (eq.rec (eq.refl (bit0 (norm_num.add1 3) = 8)) (norm_num.add1_bit1 1)))
-        (eq.mpr (id (eq.rec (eq.refl (bit0 (bit0 (norm_num.add1 1)) = 8)) norm_num.add1_one)) (eq.refl 8))))
 
-theorem test2 : 3 + 5 = 8 :=
-eq.trans
-  (eq.trans (eq.trans (norm_num.bit1_add_bit1 1 2) (congr_arg bit0 (congr_arg norm_num.add1 (norm_num.one_add_bit0 1))))
-     (congr_arg bit0 (norm_num.add1_bit1 1)))
-  (congr_arg bit0 (congr_arg bit0 norm_num.add1_one))
-```
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">test</span> <span class="o">:</span> <span class="mi">3</span> <span class="bp">+</span> <span class="mi">5</span> <span class="bp">=</span> <span class="mi">8</span> <span class="o">:=</span>
+<span class="n">eq</span><span class="bp">.</span><span class="n">mpr</span>
+  <span class="o">(</span><span class="n">id</span>
+     <span class="o">(</span><span class="n">eq</span><span class="bp">.</span><span class="n">trans</span>
+        <span class="o">((</span><span class="bp">λ</span> <span class="o">(</span><span class="n">a</span> <span class="n">a_1</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">(</span><span class="n">e_1</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">a_1</span><span class="o">)</span> <span class="o">(</span><span class="n">a_2</span> <span class="n">a_3</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">(</span><span class="n">e_2</span> <span class="o">:</span> <span class="n">a_2</span> <span class="bp">=</span> <span class="n">a_3</span><span class="o">),</span> <span class="n">congr</span> <span class="o">(</span><span class="n">congr_arg</span> <span class="n">eq</span> <span class="n">e_1</span><span class="o">)</span> <span class="n">e_2</span><span class="o">)</span> <span class="o">(</span><span class="mi">3</span> <span class="bp">+</span> <span class="mi">5</span><span class="o">)</span> <span class="mi">8</span>
+           <span class="o">(</span><span class="n">norm_num</span><span class="bp">.</span><span class="n">subst_into_sum</span> <span class="mi">3</span> <span class="mi">5</span> <span class="mi">3</span> <span class="mi">5</span> <span class="mi">8</span> <span class="o">(</span><span class="n">eq</span><span class="bp">.</span><span class="n">refl</span> <span class="mi">3</span><span class="o">)</span> <span class="o">(</span><span class="n">eq</span><span class="bp">.</span><span class="n">refl</span> <span class="mi">5</span><span class="o">)</span>
+              <span class="o">(</span><span class="n">norm_num</span><span class="bp">.</span><span class="n">bit1_add_bit1_helper</span> <span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span> <span class="mi">4</span> <span class="o">(</span><span class="n">norm_num</span><span class="bp">.</span><span class="n">one_add_bit0</span> <span class="mi">1</span><span class="o">)</span>
+                 <span class="o">(</span><span class="n">norm_num</span><span class="bp">.</span><span class="n">add1_bit1_helper</span> <span class="mi">1</span> <span class="mi">2</span> <span class="n">norm_num</span><span class="bp">.</span><span class="n">add1_one</span><span class="o">)))</span>
+           <span class="mi">8</span>
+           <span class="mi">8</span>
+           <span class="o">(</span><span class="n">eq</span><span class="bp">.</span><span class="n">refl</span> <span class="mi">8</span><span class="o">))</span>
+        <span class="o">(</span><span class="n">eq_true_intro</span> <span class="o">(</span><span class="n">eq</span><span class="bp">.</span><span class="n">refl</span> <span class="mi">8</span><span class="o">))))</span>
+  <span class="n">trivial</span>
+
+<span class="kn">theorem</span> <span class="n">test1</span> <span class="o">:</span> <span class="mi">3</span> <span class="bp">+</span> <span class="mi">5</span> <span class="bp">=</span> <span class="mi">8</span> <span class="o">:=</span>
+<span class="n">eq</span><span class="bp">.</span><span class="n">mpr</span> <span class="o">(</span><span class="n">id</span> <span class="o">(</span><span class="n">eq</span><span class="bp">.</span><span class="n">rec</span> <span class="o">(</span><span class="n">eq</span><span class="bp">.</span><span class="n">refl</span> <span class="o">(</span><span class="mi">3</span> <span class="bp">+</span> <span class="mi">5</span> <span class="bp">=</span> <span class="mi">8</span><span class="o">))</span> <span class="o">(</span><span class="n">norm_num</span><span class="bp">.</span><span class="n">bit1_add_bit1</span> <span class="mi">1</span> <span class="mi">2</span><span class="o">)))</span>
+  <span class="o">(</span><span class="n">eq</span><span class="bp">.</span><span class="n">mpr</span> <span class="o">(</span><span class="n">id</span> <span class="o">(</span><span class="n">eq</span><span class="bp">.</span><span class="n">rec</span> <span class="o">(</span><span class="n">eq</span><span class="bp">.</span><span class="n">refl</span> <span class="o">(</span><span class="n">bit0</span> <span class="o">(</span><span class="n">norm_num</span><span class="bp">.</span><span class="n">add1</span> <span class="o">(</span><span class="mi">1</span> <span class="bp">+</span> <span class="mi">2</span><span class="o">))</span> <span class="bp">=</span> <span class="mi">8</span><span class="o">))</span> <span class="o">(</span><span class="n">norm_num</span><span class="bp">.</span><span class="n">one_add_bit0</span> <span class="mi">1</span><span class="o">)))</span>
+     <span class="o">(</span><span class="n">eq</span><span class="bp">.</span><span class="n">mpr</span> <span class="o">(</span><span class="n">id</span> <span class="o">(</span><span class="n">eq</span><span class="bp">.</span><span class="n">rec</span> <span class="o">(</span><span class="n">eq</span><span class="bp">.</span><span class="n">refl</span> <span class="o">(</span><span class="n">bit0</span> <span class="o">(</span><span class="n">norm_num</span><span class="bp">.</span><span class="n">add1</span> <span class="mi">3</span><span class="o">)</span> <span class="bp">=</span> <span class="mi">8</span><span class="o">))</span> <span class="o">(</span><span class="n">norm_num</span><span class="bp">.</span><span class="n">add1_bit1</span> <span class="mi">1</span><span class="o">)))</span>
+        <span class="o">(</span><span class="n">eq</span><span class="bp">.</span><span class="n">mpr</span> <span class="o">(</span><span class="n">id</span> <span class="o">(</span><span class="n">eq</span><span class="bp">.</span><span class="n">rec</span> <span class="o">(</span><span class="n">eq</span><span class="bp">.</span><span class="n">refl</span> <span class="o">(</span><span class="n">bit0</span> <span class="o">(</span><span class="n">bit0</span> <span class="o">(</span><span class="n">norm_num</span><span class="bp">.</span><span class="n">add1</span> <span class="mi">1</span><span class="o">))</span> <span class="bp">=</span> <span class="mi">8</span><span class="o">))</span> <span class="n">norm_num</span><span class="bp">.</span><span class="n">add1_one</span><span class="o">))</span> <span class="o">(</span><span class="n">eq</span><span class="bp">.</span><span class="n">refl</span> <span class="mi">8</span><span class="o">))))</span>
+
+<span class="kn">theorem</span> <span class="n">test2</span> <span class="o">:</span> <span class="mi">3</span> <span class="bp">+</span> <span class="mi">5</span> <span class="bp">=</span> <span class="mi">8</span> <span class="o">:=</span>
+<span class="n">eq</span><span class="bp">.</span><span class="n">trans</span>
+  <span class="o">(</span><span class="n">eq</span><span class="bp">.</span><span class="n">trans</span> <span class="o">(</span><span class="n">eq</span><span class="bp">.</span><span class="n">trans</span> <span class="o">(</span><span class="n">norm_num</span><span class="bp">.</span><span class="n">bit1_add_bit1</span> <span class="mi">1</span> <span class="mi">2</span><span class="o">)</span> <span class="o">(</span><span class="n">congr_arg</span> <span class="n">bit0</span> <span class="o">(</span><span class="n">congr_arg</span> <span class="n">norm_num</span><span class="bp">.</span><span class="n">add1</span> <span class="o">(</span><span class="n">norm_num</span><span class="bp">.</span><span class="n">one_add_bit0</span> <span class="mi">1</span><span class="o">))))</span>
+     <span class="o">(</span><span class="n">congr_arg</span> <span class="n">bit0</span> <span class="o">(</span><span class="n">norm_num</span><span class="bp">.</span><span class="n">add1_bit1</span> <span class="mi">1</span><span class="o">)))</span>
+  <span class="o">(</span><span class="n">congr_arg</span> <span class="n">bit0</span> <span class="o">(</span><span class="n">congr_arg</span> <span class="n">bit0</span> <span class="n">norm_num</span><span class="bp">.</span><span class="n">add1_one</span><span class="o">))</span>
+</pre></div>
 
 #### [ Kenny Lau (Oct 12 2018 at 01:28)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Which%20rule%20to%20use%20for%20arithmetic%20calculations%20in%20calc%20mode%3F/near/135643290):
-@**Mario Carneiro** Can Lean be better at golfing?
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> Can Lean be better at golfing?</p>
 
 #### [ Kenny Lau (Oct 12 2018 at 01:28)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Which%20rule%20to%20use%20for%20arithmetic%20calculations%20in%20calc%20mode%3F/near/135643294):
-or is that actually pointless?
+<p>or is that actually pointless?</p>
 
 #### [ Mario Carneiro (Oct 12 2018 at 01:29)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Which%20rule%20to%20use%20for%20arithmetic%20calculations%20in%20calc%20mode%3F/near/135643310):
-Lean doesn't make it easy to golf proofs in tactics
+<p>Lean doesn't make it easy to golf proofs in tactics</p>
 
 #### [ Kenny Lau (Oct 12 2018 at 01:29)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Which%20rule%20to%20use%20for%20arithmetic%20calculations%20in%20calc%20mode%3F/near/135643315):
-I see
+<p>I see</p>
 
 #### [ Yufan Lou (Oct 12 2018 at 01:29)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Which%20rule%20to%20use%20for%20arithmetic%20calculations%20in%20calc%20mode%3F/near/135643321):
-nevermind... the import seems successful but norm_num is not actually imported
+<p>nevermind... the import seems successful but norm_num is not actually imported</p>
 
 #### [ Mario Carneiro (Oct 12 2018 at 01:30)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Which%20rule%20to%20use%20for%20arithmetic%20calculations%20in%20calc%20mode%3F/near/135643376):
-I would prefer that lean produced kind of short proofs (i.e. not obviously stupid things) but unfortunately `dsimp` ignores proof arguments
+<p>I would prefer that lean produced kind of short proofs (i.e. not obviously stupid things) but unfortunately <code>dsimp</code> ignores proof arguments</p>
 
 #### [ Yufan Lou (Oct 12 2018 at 01:32)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Which%20rule%20to%20use%20for%20arithmetic%20calculations%20in%20calc%20mode%3F/near/135643444):
-btw `rfl` didn't work on the replacement of `rw mul_comm 2`either
+<p>btw <code>rfl</code> didn't work on the replacement of <code>rw mul_comm 2</code>either</p>
 
 #### [ Yufan Lou (Oct 12 2018 at 01:32)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Which%20rule%20to%20use%20for%20arithmetic%20calculations%20in%20calc%20mode%3F/near/135643450):
-`rfl` is less powerful than I thought
+<p><code>rfl</code> is less powerful than I thought</p>
 
 #### [ Yufan Lou (Oct 12 2018 at 01:32)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Which%20rule%20to%20use%20for%20arithmetic%20calculations%20in%20calc%20mode%3F/near/135643457):
-or is it just in calc mode
+<p>or is it just in calc mode</p>
 
 #### [ Mario Carneiro (Oct 12 2018 at 01:32)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Which%20rule%20to%20use%20for%20arithmetic%20calculations%20in%20calc%20mode%3F/near/135643458):
-that's surprising
+<p>that's surprising</p>
 
 #### [ Mario Carneiro (Oct 12 2018 at 01:33)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Which%20rule%20to%20use%20for%20arithmetic%20calculations%20in%20calc%20mode%3F/near/135643471):
-this works for me in the web editor:
-```lean
-import tactic.norm_num
-example : 3 + 5 = 8 := by norm_num
-```
+<p>this works for me in the web editor:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">norm_num</span>
+<span class="kn">example</span> <span class="o">:</span> <span class="mi">3</span> <span class="bp">+</span> <span class="mi">5</span> <span class="bp">=</span> <span class="mi">8</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">norm_num</span>
+</pre></div>
 
 #### [ Mario Carneiro (Oct 12 2018 at 01:33)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Which%20rule%20to%20use%20for%20arithmetic%20calculations%20in%20calc%20mode%3F/near/135643482):
-do you have a MWE with your unrflable proof?
+<p>do you have a MWE with your unrflable proof?</p>
 
 #### [ Yufan Lou (Oct 12 2018 at 01:36)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Which%20rule%20to%20use%20for%20arithmetic%20calculations%20in%20calc%20mode%3F/near/135643603):
-Maybe I had a typo... a minute
+<p>Maybe I had a typo... a minute</p>
 
 #### [ Yufan Lou (Oct 12 2018 at 01:40)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Which%20rule%20to%20use%20for%20arithmetic%20calculations%20in%20calc%20mode%3F/near/135643691):
-```lean
-example {n : nat} (h1 : is_odd n) : is_even (n + 1) :=
-exists.elim h1 (assume k, assume hw : n = 2 * k + 1,
-  exists.intro (k + 1)
-    (calc
-      n + 1 = 2 * k + 1 + 1 : by rw [hw]
-        ... = 2 * k + 2     : by rw rfl
-        ... = 2 * (k + 1)   : by rfl)
-```
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">{</span><span class="n">n</span> <span class="o">:</span> <span class="n">nat</span><span class="o">}</span> <span class="o">(</span><span class="n">h1</span> <span class="o">:</span> <span class="n">is_odd</span> <span class="n">n</span><span class="o">)</span> <span class="o">:</span> <span class="n">is_even</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="o">:=</span>
+<span class="n">exists</span><span class="bp">.</span><span class="n">elim</span> <span class="n">h1</span> <span class="o">(</span><span class="k">assume</span> <span class="n">k</span><span class="o">,</span> <span class="k">assume</span> <span class="n">hw</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">=</span> <span class="mi">2</span> <span class="bp">*</span> <span class="n">k</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">,</span>
+  <span class="n">exists</span><span class="bp">.</span><span class="n">intro</span> <span class="o">(</span><span class="n">k</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span>
+    <span class="o">(</span><span class="k">calc</span>
+      <span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span> <span class="bp">=</span> <span class="mi">2</span> <span class="bp">*</span> <span class="n">k</span> <span class="bp">+</span> <span class="mi">1</span> <span class="bp">+</span> <span class="mi">1</span> <span class="o">:</span> <span class="k">by</span> <span class="n">rw</span> <span class="o">[</span><span class="n">hw</span><span class="o">]</span>
+        <span class="bp">...</span> <span class="bp">=</span> <span class="mi">2</span> <span class="bp">*</span> <span class="n">k</span> <span class="bp">+</span> <span class="mi">2</span>     <span class="o">:</span> <span class="k">by</span> <span class="n">rw</span> <span class="n">rfl</span>
+        <span class="bp">...</span> <span class="bp">=</span> <span class="mi">2</span> <span class="bp">*</span> <span class="o">(</span><span class="n">k</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span>   <span class="o">:</span> <span class="k">by</span> <span class="n">rfl</span><span class="o">)</span>
+</pre></div>
 
 #### [ Yufan Lou (Oct 12 2018 at 01:42)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Which%20rule%20to%20use%20for%20arithmetic%20calculations%20in%20calc%20mode%3F/near/135643806):
-`rfl` doesn't work anytime I need to adjust association right
+<p><code>rfl</code> doesn't work anytime I need to adjust association right</p>
 
 #### [ Yufan Lou (Oct 12 2018 at 01:42)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Which%20rule%20to%20use%20for%20arithmetic%20calculations%20in%20calc%20mode%3F/near/135643807):
-same as `norm_num`
+<p>same as <code>norm_num</code></p>
 
 #### [ Kenny Lau (Oct 12 2018 at 01:43)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Which%20rule%20to%20use%20for%20arithmetic%20calculations%20in%20calc%20mode%3F/near/135643819):
-`rfl` works iff the two expressions are definitionally equal
+<p><code>rfl</code> works iff the two expressions are definitionally equal</p>
 
 #### [ Kenny Lau (Oct 12 2018 at 01:43)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Which%20rule%20to%20use%20for%20arithmetic%20calculations%20in%20calc%20mode%3F/near/135643823):
-`2*(n+1)` for natural numbers is defined to be `2*n+2`
+<p><code>2*(n+1)</code> for natural numbers is defined to be <code>2*n+2</code></p>
 
 #### [ Kenny Lau (Oct 12 2018 at 01:43)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Which%20rule%20to%20use%20for%20arithmetic%20calculations%20in%20calc%20mode%3F/near/135643826):
-that's unfolding definition of natural number multiplication
+<p>that's unfolding definition of natural number multiplication</p>
 
 #### [ Yufan Lou (Oct 12 2018 at 01:45)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Which%20rule%20to%20use%20for%20arithmetic%20calculations%20in%20calc%20mode%3F/near/135643888):
-it doesn't work tho
+<p>it doesn't work tho</p>
 
 #### [ Yufan Lou (Oct 12 2018 at 01:46)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Which%20rule%20to%20use%20for%20arithmetic%20calculations%20in%20calc%20mode%3F/near/135643945):
-```lean
-example {n : nat} (h1 : is_odd n) : is_even (n + 1) :=
-exists.elim h1 (assume k, assume hw : n = 2 * k + 1,
-  exists.intro (k + 1)
-    (calc
-      n + 1 = 2 * k + 1 + 1 : by rw [hw]
-        ... = 2 * k + 2     : by rw add_assoc
-        ... = 2 * k + 2 * 1 : by rw mul_one
-        ... = 2 * (k + 1)   : by rw mul_add
-        ))
-```
-without `rfl` this works, but I can't seem to replace any of them with `rw rfl`or `rfl`
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">{</span><span class="n">n</span> <span class="o">:</span> <span class="n">nat</span><span class="o">}</span> <span class="o">(</span><span class="n">h1</span> <span class="o">:</span> <span class="n">is_odd</span> <span class="n">n</span><span class="o">)</span> <span class="o">:</span> <span class="n">is_even</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="o">:=</span>
+<span class="n">exists</span><span class="bp">.</span><span class="n">elim</span> <span class="n">h1</span> <span class="o">(</span><span class="k">assume</span> <span class="n">k</span><span class="o">,</span> <span class="k">assume</span> <span class="n">hw</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">=</span> <span class="mi">2</span> <span class="bp">*</span> <span class="n">k</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">,</span>
+  <span class="n">exists</span><span class="bp">.</span><span class="n">intro</span> <span class="o">(</span><span class="n">k</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span>
+    <span class="o">(</span><span class="k">calc</span>
+      <span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span> <span class="bp">=</span> <span class="mi">2</span> <span class="bp">*</span> <span class="n">k</span> <span class="bp">+</span> <span class="mi">1</span> <span class="bp">+</span> <span class="mi">1</span> <span class="o">:</span> <span class="k">by</span> <span class="n">rw</span> <span class="o">[</span><span class="n">hw</span><span class="o">]</span>
+        <span class="bp">...</span> <span class="bp">=</span> <span class="mi">2</span> <span class="bp">*</span> <span class="n">k</span> <span class="bp">+</span> <span class="mi">2</span>     <span class="o">:</span> <span class="k">by</span> <span class="n">rw</span> <span class="n">add_assoc</span>
+        <span class="bp">...</span> <span class="bp">=</span> <span class="mi">2</span> <span class="bp">*</span> <span class="n">k</span> <span class="bp">+</span> <span class="mi">2</span> <span class="bp">*</span> <span class="mi">1</span> <span class="o">:</span> <span class="k">by</span> <span class="n">rw</span> <span class="n">mul_one</span>
+        <span class="bp">...</span> <span class="bp">=</span> <span class="mi">2</span> <span class="bp">*</span> <span class="o">(</span><span class="n">k</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span>   <span class="o">:</span> <span class="k">by</span> <span class="n">rw</span> <span class="n">mul_add</span>
+        <span class="o">))</span>
+</pre></div>
+
+
+<p>without <code>rfl</code> this works, but I can't seem to replace any of them with <code>rw rfl</code>or <code>rfl</code></p>
 
 #### [ Mario Carneiro (Oct 12 2018 at 01:49)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Which%20rule%20to%20use%20for%20arithmetic%20calculations%20in%20calc%20mode%3F/near/135644025):
-`rfl` is a term not a tactic
+<p><code>rfl</code> is a term not a tactic</p>
 
 #### [ Mario Carneiro (Oct 12 2018 at 01:49)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Which%20rule%20to%20use%20for%20arithmetic%20calculations%20in%20calc%20mode%3F/near/135644031):
-so there is no `by`
+<p>so there is no <code>by</code></p>
 
 #### [ Mario Carneiro (Oct 12 2018 at 01:49)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Which%20rule%20to%20use%20for%20arithmetic%20calculations%20in%20calc%20mode%3F/near/135644036):
-also `by rw rfl` is always redundant (does nothing)
+<p>also <code>by rw rfl</code> is always redundant (does nothing)</p>
 
 #### [ Yufan Lou (Oct 12 2018 at 01:49)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Which%20rule%20to%20use%20for%20arithmetic%20calculations%20in%20calc%20mode%3F/near/135644042):
-ah i see
+<p>ah i see</p>
 
 #### [ Yufan Lou (Oct 12 2018 at 01:50)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Which%20rule%20to%20use%20for%20arithmetic%20calculations%20in%20calc%20mode%3F/near/135644080):
-didn't think to replace by as well
+<p>didn't think to replace by as well</p>
 
 #### [ Yufan Lou (Oct 12 2018 at 01:50)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Which%20rule%20to%20use%20for%20arithmetic%20calculations%20in%20calc%20mode%3F/near/135644090):
-works now
+<p>works now</p>
 
 #### [ Mario Carneiro (Oct 12 2018 at 01:50)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Which%20rule%20to%20use%20for%20arithmetic%20calculations%20in%20calc%20mode%3F/near/135644091):
-there is a tactic version, called `refl`
+<p>there is a tactic version, called <code>refl</code></p>
 
 #### [ Mario Carneiro (Oct 12 2018 at 01:50)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Which%20rule%20to%20use%20for%20arithmetic%20calculations%20in%20calc%20mode%3F/near/135644093):
-so `by refl` and `rfl` are usually interchangeable
+<p>so <code>by refl</code> and <code>rfl</code> are usually interchangeable</p>
 
 #### [ Yufan Lou (Oct 12 2018 at 01:52)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Which%20rule%20to%20use%20for%20arithmetic%20calculations%20in%20calc%20mode%3F/near/135644154):
-okay for simple calc proofs I can just put `: rfl` after each step nice
+<p>okay for simple calc proofs I can just put <code>: rfl</code> after each step nice</p>
 
 #### [ Yufan Lou (Oct 12 2018 at 01:52)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Which%20rule%20to%20use%20for%20arithmetic%20calculations%20in%20calc%20mode%3F/near/135644160):
-thx y'all
+<p>thx y'all</p>
 
 #### [ Mario Carneiro (Oct 12 2018 at 01:53)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Which%20rule%20to%20use%20for%20arithmetic%20calculations%20in%20calc%20mode%3F/near/135644176):
-actually a `: rfl` calc step can usually just be deleted entirely
+<p>actually a <code>: rfl</code> calc step can usually just be deleted entirely</p>
 
 #### [ Yufan Lou (Oct 12 2018 at 01:54)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Which%20rule%20to%20use%20for%20arithmetic%20calculations%20in%20calc%20mode%3F/near/135644221):
-I know, writing out just for demonstration
+<p>I know, writing out just for demonstration</p>
 
 #### [ Mario Carneiro (Oct 12 2018 at 01:54)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Which%20rule%20to%20use%20for%20arithmetic%20calculations%20in%20calc%20mode%3F/near/135644224):
-right
+<p>right</p>
 
 #### [ Yufan Lou (Oct 12 2018 at 02:02)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Which%20rule%20to%20use%20for%20arithmetic%20calculations%20in%20calc%20mode%3F/near/135644568):
-while we are at it is there a one-line proof of that theorem
+<p>while we are at it is there a one-line proof of that theorem</p>
 
 #### [ Mario Carneiro (Oct 12 2018 at 02:04)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Which%20rule%20to%20use%20for%20arithmetic%20calculations%20in%20calc%20mode%3F/near/135644653):
-what are the definitions?
+<p>what are the definitions?</p>
 
 #### [ Mario Carneiro (Oct 12 2018 at 02:04)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Which%20rule%20to%20use%20for%20arithmetic%20calculations%20in%20calc%20mode%3F/near/135644664):
-MWE please
+<p>MWE please</p>
 
 #### [ Yufan Lou (Oct 12 2018 at 02:04)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Which%20rule%20to%20use%20for%20arithmetic%20calculations%20in%20calc%20mode%3F/near/135644674):
-```lean
-def is_even (a : nat) := ∃ b, a = 2 * b
-def is_odd (a: nat) := ∃ b, a = 2 * b + 1
-example {n : nat} (h1 : is_odd n) : is_even (n + 1)
-```
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">is_even</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">nat</span><span class="o">)</span> <span class="o">:=</span> <span class="bp">∃</span> <span class="n">b</span><span class="o">,</span> <span class="n">a</span> <span class="bp">=</span> <span class="mi">2</span> <span class="bp">*</span> <span class="n">b</span>
+<span class="n">def</span> <span class="n">is_odd</span> <span class="o">(</span><span class="n">a</span><span class="o">:</span> <span class="n">nat</span><span class="o">)</span> <span class="o">:=</span> <span class="bp">∃</span> <span class="n">b</span><span class="o">,</span> <span class="n">a</span> <span class="bp">=</span> <span class="mi">2</span> <span class="bp">*</span> <span class="n">b</span> <span class="bp">+</span> <span class="mi">1</span>
+<span class="kn">example</span> <span class="o">{</span><span class="n">n</span> <span class="o">:</span> <span class="n">nat</span><span class="o">}</span> <span class="o">(</span><span class="n">h1</span> <span class="o">:</span> <span class="n">is_odd</span> <span class="n">n</span><span class="o">)</span> <span class="o">:</span> <span class="n">is_even</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span>
+</pre></div>
 
 #### [ Mario Carneiro (Oct 12 2018 at 02:05)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Which%20rule%20to%20use%20for%20arithmetic%20calculations%20in%20calc%20mode%3F/near/135644698):
-```lean
-example : ∀ {n : nat}, is_odd n → is_even (n + 1)
-| _ ⟨n, rfl⟩ := ⟨n+1, rfl⟩
-```
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">n</span> <span class="o">:</span> <span class="n">nat</span><span class="o">},</span> <span class="n">is_odd</span> <span class="n">n</span> <span class="bp">→</span> <span class="n">is_even</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span>
+<span class="bp">|</span> <span class="bp">_</span> <span class="bp">⟨</span><span class="n">n</span><span class="o">,</span> <span class="n">rfl</span><span class="bp">⟩</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">,</span> <span class="n">rfl</span><span class="bp">⟩</span>
+</pre></div>
 
 #### [ Mario Carneiro (Oct 12 2018 at 02:06)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Which%20rule%20to%20use%20for%20arithmetic%20calculations%20in%20calc%20mode%3F/near/135644753):
-turns out the important part of the theorem is `2 * n + 1 + 1 = 2 * (n + 1)` which is true by definition
+<p>turns out the important part of the theorem is <code>2 * n + 1 + 1 = 2 * (n + 1)</code> which is true by definition</p>
 
 #### [ Yufan Lou (Oct 12 2018 at 02:06)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Which%20rule%20to%20use%20for%20arithmetic%20calculations%20in%20calc%20mode%3F/near/135644768):
-cool
+<p>cool</p>
 
 #### [ Yufan Lou (Oct 12 2018 at 02:07)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Which%20rule%20to%20use%20for%20arithmetic%20calculations%20in%20calc%20mode%3F/near/135644777):
-what does `|` do and why `_` following it?
+<p>what does <code>|</code> do and why <code>_</code> following it?</p>
 
 #### [ Mario Carneiro (Oct 12 2018 at 02:07)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Which%20rule%20to%20use%20for%20arithmetic%20calculations%20in%20calc%20mode%3F/near/135644786):
-I'm using the equation compiler to pattern match on the exists
+<p>I'm using the equation compiler to pattern match on the exists</p>
 
 #### [ Mario Carneiro (Oct 12 2018 at 02:08)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Which%20rule%20to%20use%20for%20arithmetic%20calculations%20in%20calc%20mode%3F/near/135644831):
-the `_` is the `n` from the statement
+<p>the <code>_</code> is the <code>n</code> from the statement</p>
 
 #### [ Yufan Lou (Oct 12 2018 at 02:08)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Which%20rule%20to%20use%20for%20arithmetic%20calculations%20in%20calc%20mode%3F/near/135644838):
-ahh pattern matching thx
+<p>ahh pattern matching thx</p>
 
 #### [ Mario Carneiro (Oct 12 2018 at 02:08)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Which%20rule%20to%20use%20for%20arithmetic%20calculations%20in%20calc%20mode%3F/near/135644851):
-but it is matched against `2*n+1` because I matched on the equality too
+<p>but it is matched against <code>2*n+1</code> because I matched on the equality too</p>
 
 #### [ Yufan Lou (Oct 12 2018 at 02:10)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Which%20rule%20to%20use%20for%20arithmetic%20calculations%20in%20calc%20mode%3F/near/135644929):
-using `rfl` in pattern matching is pretty eye opening
+<p>using <code>rfl</code> in pattern matching is pretty eye opening</p>
 
 #### [ Yufan Lou (Oct 12 2018 at 02:16)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Which%20rule%20to%20use%20for%20arithmetic%20calculations%20in%20calc%20mode%3F/near/135645149):
-Could you explain the pattern matching more thoroughly?
+<p>Could you explain the pattern matching more thoroughly?</p>
 
 #### [ Yufan Lou (Oct 12 2018 at 02:16)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Which%20rule%20to%20use%20for%20arithmetic%20calculations%20in%20calc%20mode%3F/near/135645163):
-```lean
-| _ ⟨n, rfl⟩ := ⟨n + 1, rfl⟩
-```
+<div class="codehilite"><pre><span></span><span class="bp">|</span> <span class="bp">_</span> <span class="bp">⟨</span><span class="n">n</span><span class="o">,</span> <span class="n">rfl</span><span class="bp">⟩</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">,</span> <span class="n">rfl</span><span class="bp">⟩</span>
+</pre></div>
 
 #### [ Mario Carneiro (Oct 12 2018 at 02:28)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Which%20rule%20to%20use%20for%20arithmetic%20calculations%20in%20calc%20mode%3F/near/135645594):
-Since exists and eq are both inductive types, you can match on them, meaning you have to give a case for each constructor. Both only have one constructor, so there is only one case, where the exists is the `Exists.mk` function (which can also be written using the angle pair bracket) and the eq has the contstructor for equality which is `rfl`. If you put in both of those for the second argument, the first argument is forced to be `(2*n+1)` (Lean can figure this out, but if you want you can replace the `_` with `.(2*n+1)`, where the dot means that this argument's value is forced by later arguments.)
-
-So in this case of the match, we have to prove the statement with `n` replaced with `2*n+1`, that is, `is_even (2 * n + 1 + 1)`. This is defeq to an exists, so I use the angle brackets to supply the witness, which is `n+1`, and the proof of equality, of type `2 * n + 1 + 1 = 2 * (n + 1)`, which as I said is true by reflexivity because both sides are defeq.
+<p>Since exists and eq are both inductive types, you can match on them, meaning you have to give a case for each constructor. Both only have one constructor, so there is only one case, where the exists is the <code>Exists.mk</code> function (which can also be written using the angle pair bracket) and the eq has the contstructor for equality which is <code>rfl</code>. If you put in both of those for the second argument, the first argument is forced to be <code>(2*n+1)</code> (Lean can figure this out, but if you want you can replace the <code>_</code> with <code>.(2*n+1)</code>, where the dot means that this argument's value is forced by later arguments.)</p>
+<p>So in this case of the match, we have to prove the statement with <code>n</code> replaced with <code>2*n+1</code>, that is, <code>is_even (2 * n + 1 + 1)</code>. This is defeq to an exists, so I use the angle brackets to supply the witness, which is <code>n+1</code>, and the proof of equality, of type <code>2 * n + 1 + 1 = 2 * (n + 1)</code>, which as I said is true by reflexivity because both sides are defeq.</p>
 
 #### [ Mario Carneiro (Oct 12 2018 at 02:31)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Which%20rule%20to%20use%20for%20arithmetic%20calculations%20in%20calc%20mode%3F/near/135645685):
-the defeq chain looks like this btw:
-```
-2 * (n + 1)
+<p>the defeq chain looks like this btw:</p>
+<div class="codehilite"><pre><span></span>2 * (n + 1)
 = 2 * succ n
 = 2 * n + 2
 = 2 * n + succ 1
 = succ (2 * n + 1)
 = succ (succ (2 * n))
-```
-```
-2 * n + 1 + 1
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span>2 * n + 1 + 1
 = succ (2 * n + 1)
 = succ (succ (2 * n))
-```
+</pre></div>
 
 #### [ Kenny Lau (Oct 12 2018 at 02:32)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Which%20rule%20to%20use%20for%20arithmetic%20calculations%20in%20calc%20mode%3F/near/135645733):
-```
-2 * (n + 1)
+<div class="codehilite"><pre><span></span>2 * (n + 1)
 = 2 * (succ (n + 0))
 = 2 * (succ n)
 = 2 * n + 2
 = ...
-```
+</pre></div>
 
 #### [ Mario Carneiro (Oct 12 2018 at 02:32)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Which%20rule%20to%20use%20for%20arithmetic%20calculations%20in%20calc%20mode%3F/near/135645741):
-I'll omit the steps that unfold the definition of `+`. :)
+<p>I'll omit the steps that unfold the definition of <code>+</code>. :)</p>
 
 
 {% endraw %}

@@ -12,19 +12,19 @@ permalink: archive/113488general/02379extractimpfromiff.html
 
 {% raw %}
 #### [ Scott Morrison (Oct 07 2018 at 02:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/extract%20%60imp%60%20from%20%60iff%60/near/135330842):
-I'd like a function `meta imp_of_iff : expr -> tactic expr`, that takes a lemma that says, `\Pi (...), P \iff Q`, and gives me instead the lemma `\Pi (...), P \to Q`. Has anyone seen this lying around somewhere in mathlib? It's probably not too hard, I'm just hoping it's already done!
+<p>I'd like a function <code>meta imp_of_iff : expr -&gt; tactic expr</code>, that takes a lemma that says, <code>\Pi (...), P \iff Q</code>, and gives me instead the lemma <code>\Pi (...), P \to Q</code>. Has anyone seen this lying around somewhere in mathlib? It's probably not too hard, I'm just hoping it's already done!</p>
 
 #### [ Scott Morrison (Oct 07 2018 at 02:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/extract%20%60imp%60%20from%20%60iff%60/near/135331375):
-Ugh, okay, I revise that, I'm finding it hard. :-)
+<p>Ugh, okay, I revise that, I'm finding it hard. :-)</p>
 
 #### [ Scott Morrison (Oct 07 2018 at 02:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/extract%20%60imp%60%20from%20%60iff%60/near/135331435):
-Ah, maybw `tactic/alias.lean` has `mk_iff_mp_app`, which seems promising.
+<p>Ah, maybw <code>tactic/alias.lean</code> has <code>mk_iff_mp_app</code>, which seems promising.</p>
 
 #### [ Scott Morrison (Oct 07 2018 at 02:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/extract%20%60imp%60%20from%20%60iff%60/near/135331537):
-Hmm, not clear that helps, it seems tied to actual declarations.
+<p>Hmm, not clear that helps, it seems tied to actual declarations.</p>
 
 #### [ Scott Morrison (Oct 07 2018 at 02:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/extract%20%60imp%60%20from%20%60iff%60/near/135331975):
-Sorted it out. `tactic/alias.lean` has everything I need.
+<p>Sorted it out. <code>tactic/alias.lean</code> has everything I need.</p>
 
 
 {% endraw %}

@@ -12,40 +12,40 @@ permalink: archive/113488general/08445fibreofamap.html
 
 {% raw %}
 #### [ Kenny Lau (Apr 16 2018 at 09:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/fibre%20of%20a%20map/near/125139016):
-I wish we have preimage of a point, whatever its use is
+<p>I wish we have preimage of a point, whatever its use is</p>
 
 #### [ Mario Carneiro (Apr 16 2018 at 09:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/fibre%20of%20a%20map/near/125139300):
-Why not use `f ⁻¹' {x}`?
+<p>Why not use <code>f ⁻¹' {x}</code>?</p>
 
 #### [ Kenny Lau (Apr 16 2018 at 09:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/fibre%20of%20a%20map/near/125139349):
-because they don't defintionally expand well
+<p>because they don't defintionally expand well</p>
 
 #### [ Mario Carneiro (Apr 16 2018 at 09:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/fibre%20of%20a%20map/near/125139609):
-it doesn't expand any worse than `{x}` itself does. Just make a simp lemma (but actually the existing simp lemmas should compose to get what you want)
+<p>it doesn't expand any worse than <code>{x}</code> itself does. Just make a simp lemma (but actually the existing simp lemmas should compose to get what you want)</p>
 
 #### [ Kenny Lau (Apr 16 2018 at 09:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/fibre%20of%20a%20map/near/125139613):
-that isn't definitional expansion
+<p>that isn't definitional expansion</p>
 
 #### [ Kenny Lau (Apr 16 2018 at 09:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/fibre%20of%20a%20map/near/125139618):
-I mean `{x}` doesn't expand well
+<p>I mean <code>{x}</code> doesn't expand well</p>
 
 #### [ Mario Carneiro (Apr 16 2018 at 09:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/fibre%20of%20a%20map/near/125139619):
-so?
+<p>so?</p>
 
 #### [ Kenny Lau (Apr 16 2018 at 09:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/fibre%20of%20a%20map/near/125139622):
-so I don't like it
+<p>so I don't like it</p>
 
 #### [ Kenny Lau (Apr 16 2018 at 09:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/fibre%20of%20a%20map/near/125139624):
-nao gosto isso
+<p>nao gosto isso</p>
 
 #### [ Mario Carneiro (Apr 16 2018 at 10:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/fibre%20of%20a%20map/near/125139666):
-;P
+<p>;P</p>
 
 #### [ Mario Carneiro (Apr 16 2018 at 10:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/fibre%20of%20a%20map/near/125139671):
-It is conceivable that we can change the definition there but it doesn't affect whether to have a definition of fiber
+<p>It is conceivable that we can change the definition there but it doesn't affect whether to have a definition of fiber</p>
 
 #### [ Kenny Lau (Apr 16 2018 at 10:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/fibre%20of%20a%20map/near/125139724):
-ok, let's just change the definition of singleton then
+<p>ok, let's just change the definition of singleton then</p>
 
 
 {% endraw %}

@@ -12,9 +12,8 @@ permalink: archive/144837PRreviews/29941478associatorsandunitorsforfunctorcompos
 
 {% raw %}
 #### [ Scott Morrison (Nov 15 2018 at 21:49)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23478%20associators%20and%20unitors%20for%20functor%20composition/near/147772304):
-https://github.com/leanprover/mathlib/pull/478
-
-Pretty boring and straightforward. @**Johan Commelin** wanted this, and it was lying around in `lean-category-theory`.
+<p><a href="https://github.com/leanprover/mathlib/pull/478" target="_blank" title="https://github.com/leanprover/mathlib/pull/478">https://github.com/leanprover/mathlib/pull/478</a></p>
+<p>Pretty boring and straightforward. <span class="user-mention" data-user-id="112680">@Johan Commelin</span> wanted this, and it was lying around in <code>lean-category-theory</code>.</p>
 
 
 {% endraw %}

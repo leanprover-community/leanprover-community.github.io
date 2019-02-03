@@ -12,81 +12,74 @@ permalink: archive/113488general/00190recordstub.html
 
 {% raw %}
 #### [ Reid Barton (Oct 20 2018 at 15:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/record%20stub/near/136169584):
-The hole command to create a record stub is really nice!
-Can any emacs gurus (@**Simon Hudon**?) tell me how I can write an emacs command that will insert `{! !}` at the point, navigate inside it (if necessary), and then invoke the Instance Stub hole command?
+<p>The hole command to create a record stub is really nice!<br>
+Can any emacs gurus (<span class="user-mention" data-user-id="110026">@Simon Hudon</span>?) tell me how I can write an emacs command that will insert <code>{! !}</code> at the point, navigate inside it (if necessary), and then invoke the Instance Stub hole command?</p>
 
 #### [ Simon Hudon (Oct 20 2018 at 22:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/record%20stub/near/136183553):
-Sure :) Let's go step by step. In your configuration file (`.emacs` or `.emacs.d/init.el`), create a function, let's say:
-
-```emacs-lisp
-(defun lean-insert-stub ()
-  (print "hello world"))
-```
+<p>Sure :) Let's go step by step. In your configuration file (<code>.emacs</code> or <code>.emacs.d/init.el</code>), create a function, let's say:</p>
+<div class="codehilite"><pre><span></span><span class="p">(</span><span class="nb">defun</span> <span class="nv">lean-insert-stub</span> <span class="p">()</span>
+  <span class="p">(</span><span class="nf">print</span> <span class="s">&quot;hello world&quot;</span><span class="p">))</span>
+</pre></div>
 
 #### [ Simon Hudon (Oct 20 2018 at 22:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/record%20stub/near/136183684):
-You can change it a little so that you can invoke it from anywhere in emacs:
+<p>You can change it a little so that you can invoke it from anywhere in emacs:</p>
+<div class="codehilite"><pre><span></span><span class="p">(</span><span class="nb">defun</span> <span class="nv">lean-insert-stub</span> <span class="p">()</span>
+  <span class="p">(</span><span class="k">interactive</span><span class="p">)</span>
+  <span class="p">(</span><span class="nf">print</span> <span class="s">&quot;hello world&quot;</span><span class="p">))</span>
+</pre></div>
 
-```emacs-lisp
-(defun lean-insert-stub ()
-  (interactive)
-  (print "hello world"))
-```
 
-Then, you just need `M-x lean-insert-stub` to invoke it.
+<p>Then, you just need <code>M-x lean-insert-stub</code> to invoke it.</p>
 
 #### [ Simon Hudon (Oct 20 2018 at 22:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/record%20stub/near/136183728):
-And if you want it to actually do something: 
-
-```emacs-lisp
-(defun lean-insert-stub ()
-  (interactive)
-  (insert "{!  !}"))
-```
+<p>And if you want it to actually do something: </p>
+<div class="codehilite"><pre><span></span><span class="p">(</span><span class="nb">defun</span> <span class="nv">lean-insert-stub</span> <span class="p">()</span>
+  <span class="p">(</span><span class="k">interactive</span><span class="p">)</span>
+  <span class="p">(</span><span class="nf">insert</span> <span class="s">&quot;{!  !}&quot;</span><span class="p">))</span>
+</pre></div>
 
 #### [ Reid Barton (Oct 20 2018 at 22:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/record%20stub/near/136183809):
-I tried having it call `(lean-hole)` next but I got an error even though repositioning the cursor after the insert isn't necessary interactively
+<p>I tried having it call <code>(lean-hole)</code> next but I got an error even though repositioning the cursor after the insert isn't necessary interactively</p>
 
 #### [ Reid Barton (Oct 20 2018 at 22:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/record%20stub/near/136183855):
-```
-error in lean-server command handler: (wrong-type-argument number-or-marker-p nil)
+<div class="codehilite"><pre><span></span>error in lean-server command handler: (wrong-type-argument number-or-marker-p nil)
 Server response was:
-```
+</pre></div>
 
 #### [ Simon Hudon (Oct 20 2018 at 22:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/record%20stub/near/136183867):
-I'm looking at `lean-hole--command` instead
+<p>I'm looking at <code>lean-hole--command</code> instead</p>
 
 #### [ Reid Barton (Oct 20 2018 at 22:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/record%20stub/near/136183935):
-It kind of looks like the lean mode is not designed to handle selecting a hole command non-interactively, in terms of the code structure
+<p>It kind of looks like the lean mode is not designed to handle selecting a hole command non-interactively, in terms of the code structure</p>
 
 #### [ Reid Barton (Oct 20 2018 at 22:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/record%20stub/near/136184005):
-Am I supposed to locally set this thing `completing-read-function`? Is that the "emacs way"?
+<p>Am I supposed to locally set this thing <code>completing-read-function</code>? Is that the "emacs way"?</p>
 
 #### [ Reid Barton (Oct 20 2018 at 22:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/record%20stub/near/136184014):
-not that that helps, when it is not getting that far yet
+<p>not that that helps, when it is not getting that far yet</p>
 
 #### [ Simon Hudon (Oct 20 2018 at 22:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/record%20stub/near/136184074):
-Yeah, now that I look more closely, it's not obvious
+<p>Yeah, now that I look more closely, it's not obvious</p>
 
 #### [ Simon Hudon (Oct 20 2018 at 23:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/record%20stub/near/136184663):
-To be fair, I'm still new to emacs. Maybe @**Sebastian Ullrich** can shed some light. What I got so far is:
+<p>To be fair, I'm still new to emacs. Maybe <span class="user-mention" data-user-id="110024">@Sebastian Ullrich</span> can shed some light. What I got so far is:</p>
+<div class="codehilite"><pre><span></span><span class="p">(</span><span class="nb">defun</span> <span class="nv">lean-insert-stub</span> <span class="p">()</span>
+  <span class="p">(</span><span class="k">interactive</span><span class="p">)</span>
+  <span class="p">(</span><span class="nf">insert</span> <span class="s">&quot;{!  !}&quot;</span><span class="p">)</span>
+  <span class="p">(</span><span class="nf">forward-char</span> <span class="mi">-3</span><span class="p">)</span>
+  <span class="p">(</span><span class="k">let</span> <span class="p">((</span><span class="nv">p</span> <span class="p">(</span><span class="nf">point</span><span class="p">)))</span>
+  <span class="p">(</span><span class="k">let</span> <span class="p">((</span><span class="nv">start-pos</span> <span class="nv">p</span><span class="p">)</span>
+        <span class="p">(</span><span class="nv">end-pos</span> <span class="nv">p</span><span class="p">))</span>
+    <span class="p">(</span><span class="k">let</span> <span class="p">((</span><span class="nv">start-marker</span> <span class="p">(</span><span class="nf">make-marker</span><span class="p">))</span>
+          <span class="p">(</span><span class="nv">end-marker</span> <span class="p">(</span><span class="nf">make-marker</span><span class="p">)))</span>
+      <span class="p">(</span><span class="nf">set-marker</span> <span class="nv">start-marker</span> <span class="nv">start-pos</span> <span class="p">(</span><span class="nf">current-buffer</span><span class="p">))</span>
+      <span class="p">(</span><span class="nf">set-marker</span> <span class="nv">end-marker</span> <span class="nv">end-pos</span> <span class="p">(</span><span class="nf">current-buffer</span><span class="p">))</span>
+      <span class="p">(</span><span class="nv">lean-hole--command</span> <span class="s">&quot;Instance Stub&quot;</span> <span class="nv">start-marker</span> <span class="nv">end-marker</span><span class="p">))))</span>
+  <span class="p">)</span>
+</pre></div>
 
-```emacs-lisp
-(defun lean-insert-stub ()
-  (interactive)
-  (insert "{!  !}")
-  (forward-char -3)
-  (let ((p (point)))
-  (let ((start-pos p)
-        (end-pos p))
-    (let ((start-marker (make-marker))
-          (end-marker (make-marker)))
-      (set-marker start-marker start-pos (current-buffer))
-      (set-marker end-marker end-pos (current-buffer))
-      (lean-hole--command "Instance Stub" start-marker end-marker))))
-  )
-```
 
-which I built from copying bits from `lean-hole`
+<p>which I built from copying bits from <code>lean-hole</code></p>
 
 
 {% endraw %}

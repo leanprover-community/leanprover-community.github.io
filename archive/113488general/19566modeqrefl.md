@@ -12,52 +12,52 @@ permalink: archive/113488general/19566modeqrefl.html
 
 {% raw %}
 #### [ Kevin Buzzard (Apr 30 2018 at 22:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/modeq.refl/near/125911585):
-`@[refl] protected theorem refl (a : ℕ) : a ≡ a [MOD n] := @rfl _ _`
+<p><code>@[refl] protected theorem refl (a : ℕ) : a ≡ a [MOD n] := @rfl _ _</code></p>
 
 #### [ Kevin Buzzard (Apr 30 2018 at 22:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/modeq.refl/near/125911591):
-looks funny because `rfl` unfolds to exactly `@rfl _ _`
+<p>looks funny because <code>rfl</code> unfolds to exactly <code>@rfl _ _</code></p>
 
 #### [ Kevin Buzzard (Apr 30 2018 at 22:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/modeq.refl/near/125911637):
-but it's one of those situations where you can't prove the result by the exact three letter combination `rfl`
+<p>but it's one of those situations where you can't prove the result by the exact three letter combination <code>rfl</code></p>
 
 #### [ Kevin Buzzard (Apr 30 2018 at 22:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/modeq.refl/near/125911646):
-because you get the error `not a rfl-lemma, even though marked as rfl`
+<p>because you get the error <code>not a rfl-lemma, even though marked as rfl</code></p>
 
 #### [ Kenny Lau (Apr 30 2018 at 22:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/modeq.refl/near/125911647):
-do you know what the `@[refl]` `@[symm]` `@[trans]` are for (as a sidenote)?
+<p>do you know what the <code>@[refl]</code> <code>@[symm]</code> <code>@[trans]</code> are for (as a sidenote)?</p>
 
 #### [ Kevin Buzzard (Apr 30 2018 at 22:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/modeq.refl/near/125911658):
-but the funny thing is, it is tagged `[refl]` anyway
+<p>but the funny thing is, it is tagged <code>[refl]</code> anyway</p>
 
 #### [ Kevin Buzzard (Apr 30 2018 at 22:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/modeq.refl/near/125911673):
-what is the difference between being `a rfl-lemma` and being tagged with `@[refl]`?
+<p>what is the difference between being <code>a rfl-lemma</code> and being tagged with <code>@[refl]</code>?</p>
 
 #### [ Kevin Buzzard (Apr 30 2018 at 22:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/modeq.refl/near/125911678):
-Kenny here are some ramblings
+<p>Kenny here are some ramblings</p>
 
 #### [ Kenny Lau (Apr 30 2018 at 22:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/modeq.refl/near/125911683):
-they are for the reflexivity symmetry transitivty tactics respectively
+<p>they are for the reflexivity symmetry transitivty tactics respectively</p>
 
 #### [ Kenny Lau (Apr 30 2018 at 22:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/modeq.refl/near/125911686):
-(refl = reflexivity)
+<p>(refl = reflexivity)</p>
 
 #### [ Kevin Buzzard (Apr 30 2018 at 22:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/modeq.refl/near/125911688):
-If you are in calc mode then calc will use any lemma tagged `trans`
+<p>If you are in calc mode then calc will use any lemma tagged <code>trans</code></p>
 
 #### [ Kenny Lau (Apr 30 2018 at 22:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/modeq.refl/near/125911732):
-that also
+<p>that also</p>
 
 #### [ Kevin Buzzard (Apr 30 2018 at 22:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/modeq.refl/near/125911735):
-to concatenate `a R b` and `b R c`
+<p>to concatenate <code>a R b</code> and <code>b R c</code></p>
 
 #### [ Kevin Buzzard (Apr 30 2018 at 22:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/modeq.refl/near/125911738):
-or even `b S c`
+<p>or even <code>b S c</code></p>
 
 #### [ Chris Hughes (Apr 30 2018 at 22:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/modeq.refl/near/125911741):
-le_refl is refl but not rfl
+<p>le_refl is refl but not rfl</p>
 
 #### [ Gabriel Ebner (May 01 2018 at 10:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/modeq.refl/near/125934512):
-`rfl`-lemmas show definitional equalities (i.e. `a = b` where `a` and `b` are def-eq).  The three letters `rfl` are essentially hardcoded into the parser for this purpose.  The reason is that typically lemmas are completely independent of their proofs, (well-founded recursion aside) it should not matter what proof you use for a lemma.  However whether an equality is proved by definitional equality has important consequences: for example, `dsimp` can only use definitional equalities.  Hence we have an easy syntactic criterion to determine whether a lemma is proven by definitional equality.
+<p><code>rfl</code>-lemmas show definitional equalities (i.e. <code>a = b</code> where <code>a</code> and <code>b</code> are def-eq).  The three letters <code>rfl</code> are essentially hardcoded into the parser for this purpose.  The reason is that typically lemmas are completely independent of their proofs, (well-founded recursion aside) it should not matter what proof you use for a lemma.  However whether an equality is proved by definitional equality has important consequences: for example, <code>dsimp</code> can only use definitional equalities.  Hence we have an easy syntactic criterion to determine whether a lemma is proven by definitional equality.</p>
 
 
 {% endraw %}

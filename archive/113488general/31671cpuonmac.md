@@ -12,67 +12,67 @@ permalink: archive/113488general/31671cpuonmac.html
 
 {% raw %}
 #### [ Yulia Zaplatina (Aug 13 2018 at 11:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cpu%20on%20mac/near/132034358):
-Anyone had an issue with lean using > 95% cpu on mac?
+<p>Anyone had an issue with lean using &gt; 95% cpu on mac?</p>
 
 #### [ Mario Carneiro (Aug 13 2018 at 11:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cpu%20on%20mac/near/132034433):
-lean often takes up as much cpu as it can. It depends on what you are doing
+<p>lean often takes up as much cpu as it can. It depends on what you are doing</p>
 
 #### [ Yulia Zaplatina (Aug 13 2018 at 11:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cpu%20on%20mac/near/132034448):
-Just opened the workspace
+<p>Just opened the workspace</p>
 
 #### [ Mario Carneiro (Aug 13 2018 at 11:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cpu%20on%20mac/near/132034604):
-If you import a heavy theory, it may take a few minutes
+<p>If you import a heavy theory, it may take a few minutes</p>
 
 #### [ Mario Carneiro (Aug 13 2018 at 11:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cpu%20on%20mac/near/132034617):
-You can also try building the lean files with `lean --make` to help speed it up
+<p>You can also try building the lean files with <code>lean --make</code> to help speed it up</p>
 
 #### [ Yulia Zaplatina (Aug 13 2018 at 11:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cpu%20on%20mac/near/132034639):
-thanks, I'll try
+<p>thanks, I'll try</p>
 
 #### [ Kevin Buzzard (Aug 13 2018 at 11:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cpu%20on%20mac/near/132034729):
-Yulia -- I'll be in the MLC in about an hour. You might want to build your mathlib (make all the .olean files) if this is constantly happening.
+<p>Yulia -- I'll be in the MLC in about an hour. You might want to build your mathlib (make all the .olean files) if this is constantly happening.</p>
 
 #### [ Yulia Zaplatina (Aug 13 2018 at 11:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cpu%20on%20mac/near/132034783):
-it went down to 20%, but now that i've open
+<p>it went down to 20%, but now that i've open</p>
 
 #### [ Yulia Zaplatina (Aug 13 2018 at 11:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cpu%20on%20mac/near/132034787):
-*opened a file, it's back up to over 300%
+<p>*opened a file, it's back up to over 300%</p>
 
 #### [ Yulia Zaplatina (Aug 13 2018 at 11:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cpu%20on%20mac/near/132034805):
-@**Kevin Buzzard** I'll do that now 👍🏼
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> I'll do that now <span class="emoji emoji-1f44d" title="+1">:+1:</span>🏼</p>
 
 #### [ Kevin Buzzard (Aug 13 2018 at 11:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cpu%20on%20mac/near/132035136):
-This is not abnormal behaviour -- the first time Lean starts up it might have to do a lot of work. It could be building the real numbers from the axioms of mathematics, for example. It only needs to do this once though.
+<p>This is not abnormal behaviour -- the first time Lean starts up it might have to do a lot of work. It could be building the real numbers from the axioms of mathematics, for example. It only needs to do this once though.</p>
 
 #### [ Yulia Zaplatina (Aug 13 2018 at 12:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cpu%20on%20mac/near/132036385):
-Ok, so I've built lean and the cpu remains around 90% - is that normal? or is there a way of decreasing it even more?
+<p>Ok, so I've built lean and the cpu remains around 90% - is that normal? or is there a way of decreasing it even more?</p>
 
 #### [ Mario Carneiro (Aug 13 2018 at 12:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cpu%20on%20mac/near/132036480):
-are there yellow bars in the gutter of vscode?
+<p>are there yellow bars in the gutter of vscode?</p>
 
 #### [ Yulia Zaplatina (Aug 13 2018 at 12:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cpu%20on%20mac/near/132036563):
-nope
+<p>nope</p>
 
 #### [ Yulia Zaplatina (Aug 13 2018 at 12:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cpu%20on%20mac/near/132036614):
-only green, blue and red
+<p>only green, blue and red</p>
 
 #### [ Mario Carneiro (Aug 13 2018 at 12:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cpu%20on%20mac/near/132036632):
-does lean have the :check: in the status bar?
+<p>does lean have the <span class="emoji emoji-2705" title="check">:check:</span> in the status bar?</p>
 
 #### [ Yulia Zaplatina (Aug 13 2018 at 12:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cpu%20on%20mac/near/132036633):
-oh actually, yes, in some files
+<p>oh actually, yes, in some files</p>
 
 #### [ Yulia Zaplatina (Aug 13 2018 at 12:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cpu%20on%20mac/near/132036698):
-yep, there's a :check: but some files are highlighted yellow
+<p>yep, there's a <span class="emoji emoji-2705" title="check">:check:</span> but some files are highlighted yellow</p>
 
 #### [ Mario Carneiro (Aug 13 2018 at 12:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cpu%20on%20mac/near/132036726):
-maybe it would be best to wait for Kevin
+<p>maybe it would be best to wait for Kevin</p>
 
 #### [ Yulia Zaplatina (Aug 13 2018 at 12:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cpu%20on%20mac/near/132036829):
-O
+<p>O</p>
 
 #### [ Yulia Zaplatina (Aug 13 2018 at 12:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cpu%20on%20mac/near/132036883):
-it's down to 10 now :sweat_smile: I think it should be fine, thank you!
+<p>it's down to 10 now <span class="emoji emoji-1f605" title="sweat smile">:sweat_smile:</span> I think it should be fine, thank you!</p>
 
 
 {% endraw %}

@@ -12,91 +12,86 @@ permalink: archive/113488general/78620Simplifyditestatements.html
 
 {% raw %}
 #### [ Rob Lewis (Aug 10 2018 at 14:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Simplify%20dite%20statements/near/131233579):
-I've noticed the following:
-```lean
-def p : ℕ → ℕ := λ n, if h : n > 5 then 10 else 0
+<p>I've noticed the following:</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">p</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="bp">ℕ</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">n</span><span class="o">,</span> <span class="k">if</span> <span class="n">h</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">&gt;</span> <span class="mi">5</span> <span class="k">then</span> <span class="mi">10</span> <span class="k">else</span> <span class="mi">0</span>
 
-example (n : ℕ) (hn : n > 5) : p n = 10 :=
-begin simp only [dif_pos, hn, p] end -- works
+<span class="kn">example</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">hn</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">&gt;</span> <span class="mi">5</span><span class="o">)</span> <span class="o">:</span> <span class="n">p</span> <span class="n">n</span> <span class="bp">=</span> <span class="mi">10</span> <span class="o">:=</span>
+<span class="k">begin</span> <span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">dif_pos</span><span class="o">,</span> <span class="n">hn</span><span class="o">,</span> <span class="n">p</span><span class="o">]</span> <span class="kn">end</span> <span class="c1">-- works</span>
 
-example (n : ℕ) (hn : ¬n > 5) : p n = 0 :=
-begin simp only [dif_neg, hn, p] end -- fails 
-```
+<span class="kn">example</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">hn</span> <span class="o">:</span> <span class="bp">¬</span><span class="n">n</span> <span class="bp">&gt;</span> <span class="mi">5</span><span class="o">)</span> <span class="o">:</span> <span class="n">p</span> <span class="n">n</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span>
+<span class="k">begin</span> <span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">dif_neg</span><span class="o">,</span> <span class="n">hn</span><span class="o">,</span> <span class="n">p</span><span class="o">]</span> <span class="kn">end</span> <span class="c1">-- fails</span>
+</pre></div>
 
-What additional simp lemmas are needed to solve the second example? And is there a tactic in Mathlib with roughly this behavior, reducing dite statements where the positive or negative proof is in the context?
+
+<p>What additional simp lemmas are needed to solve the second example? And is there a tactic in Mathlib with roughly this behavior, reducing dite statements where the positive or negative proof is in the context?</p>
 
 #### [ Gabriel Ebner (Aug 10 2018 at 14:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Simplify%20dite%20statements/near/131233746):
-There is `split_ifs`:
-```lean
-import tactic.split_ifs
+<p>There is <code>split_ifs</code>:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">split_ifs</span>
 
-def p : ℕ → ℕ := λ n, if h : n > 5 then 10 else 0
+<span class="n">def</span> <span class="n">p</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="bp">ℕ</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">n</span><span class="o">,</span> <span class="k">if</span> <span class="n">h</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">&gt;</span> <span class="mi">5</span> <span class="k">then</span> <span class="mi">10</span> <span class="k">else</span> <span class="mi">0</span>
 
-example (n : ℕ) (hn : n > 5) : p n = 10 :=
-by unfold p; split_ifs; refl
+<span class="kn">example</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">hn</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">&gt;</span> <span class="mi">5</span><span class="o">)</span> <span class="o">:</span> <span class="n">p</span> <span class="n">n</span> <span class="bp">=</span> <span class="mi">10</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">unfold</span> <span class="n">p</span><span class="bp">;</span> <span class="n">split_ifs</span><span class="bp">;</span> <span class="n">refl</span>
 
-example (n : ℕ) (hn : ¬n > 5) : p n = 0 :=
-by unfold p; split_ifs; refl
-```
+<span class="kn">example</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">hn</span> <span class="o">:</span> <span class="bp">¬</span><span class="n">n</span> <span class="bp">&gt;</span> <span class="mi">5</span><span class="o">)</span> <span class="o">:</span> <span class="n">p</span> <span class="n">n</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">unfold</span> <span class="n">p</span><span class="bp">;</span> <span class="n">split_ifs</span><span class="bp">;</span> <span class="n">refl</span>
+</pre></div>
 
 #### [ Mario Carneiro (Aug 10 2018 at 14:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Simplify%20dite%20statements/near/131233821):
-interestingly, this works:
-```
-example (n : ℕ) (hn : ¬n > 5) : p n = 0 :=
+<p>interestingly, this works:</p>
+<div class="codehilite"><pre><span></span>example (n : ℕ) (hn : ¬n &gt; 5) : p n = 0 :=
 begin simp only [dif_neg hn, p] end
-```
+</pre></div>
 
 #### [ Kenny Lau (Aug 10 2018 at 14:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Simplify%20dite%20statements/near/131233827):
-is it so interesting that it works?
+<p>is it so interesting that it works?</p>
 
 #### [ Mario Carneiro (Aug 10 2018 at 14:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Simplify%20dite%20statements/near/131233877):
-it is interesting that `simp` won't connect the two parts together in the original version
+<p>it is interesting that <code>simp</code> won't connect the two parts together in the original version</p>
 
 #### [ Mario Carneiro (Aug 10 2018 at 14:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Simplify%20dite%20statements/near/131233890):
-I suppose it is because `¬n > 5` is not in simp normal form, so it gets rewritten and then the assumption `hn` doesn't match
+<p>I suppose it is because <code>¬n &gt; 5</code> is not in simp normal form, so it gets rewritten and then the assumption <code>hn</code> doesn't match</p>
 
 #### [ Rob Lewis (Aug 10 2018 at 14:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Simplify%20dite%20statements/near/131233938):
-No? What is its simp normal form?
+<p>No? What is its simp normal form?</p>
 
 #### [ Rob Lewis (Aug 10 2018 at 14:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Simplify%20dite%20statements/near/131233988):
-It still fails if you make the > a <.
+<p>It still fails if you make the &gt; a &lt;.</p>
 
 #### [ Rob Lewis (Aug 10 2018 at 14:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Simplify%20dite%20statements/near/131234002):
-@**Gabriel Ebner** Thanks, that's useful! Somehow I assumed `split_ifs` did something different based on its name.
+<p><span class="user-mention" data-user-id="110043">@Gabriel Ebner</span> Thanks, that's useful! Somehow I assumed <code>split_ifs</code> did something different based on its name.</p>
 
 #### [ Mario Carneiro (Aug 10 2018 at 14:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Simplify%20dite%20statements/near/131234008):
-in mathlib it will rewrite to `n <= 5`
+<p>in mathlib it will rewrite to <code>n &lt;= 5</code></p>
 
 #### [ Rob Lewis (Aug 10 2018 at 14:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Simplify%20dite%20statements/near/131234091):
-```lean 
-constant A : ℕ → Prop 
-constant had : decidable_pred A 
-attribute [instance] had
+<div class="codehilite"><pre><span></span><span class="kn">constant</span> <span class="n">A</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="kt">Prop</span>
+<span class="kn">constant</span> <span class="n">had</span> <span class="o">:</span> <span class="n">decidable_pred</span> <span class="n">A</span>
+<span class="n">attribute</span> <span class="o">[</span><span class="kn">instance</span><span class="o">]</span> <span class="n">had</span>
 
-noncomputable def p : ℕ → ℕ := λ n, if h : A n then 10 else 0
+<span class="n">noncomputable</span> <span class="n">def</span> <span class="n">p</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="bp">ℕ</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">n</span><span class="o">,</span> <span class="k">if</span> <span class="n">h</span> <span class="o">:</span> <span class="n">A</span> <span class="n">n</span> <span class="k">then</span> <span class="mi">10</span> <span class="k">else</span> <span class="mi">0</span>
 
-example (n : ℕ) (hn : A n) : p n = 10 :=
-begin simp only [dif_pos, hn, p] end -- works
+<span class="kn">example</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">hn</span> <span class="o">:</span> <span class="n">A</span> <span class="n">n</span><span class="o">)</span> <span class="o">:</span> <span class="n">p</span> <span class="n">n</span> <span class="bp">=</span> <span class="mi">10</span> <span class="o">:=</span>
+<span class="k">begin</span> <span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">dif_pos</span><span class="o">,</span> <span class="n">hn</span><span class="o">,</span> <span class="n">p</span><span class="o">]</span> <span class="kn">end</span> <span class="c1">-- works</span>
 
-example (n : ℕ) (hn : ¬ A n) : p n = 0 :=
-begin simp only [dif_neg, hn, p] end -- fails 
-```
+<span class="kn">example</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">hn</span> <span class="o">:</span> <span class="bp">¬</span> <span class="n">A</span> <span class="n">n</span><span class="o">)</span> <span class="o">:</span> <span class="n">p</span> <span class="n">n</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span>
+<span class="k">begin</span> <span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">dif_neg</span><span class="o">,</span> <span class="n">hn</span><span class="o">,</span> <span class="n">p</span><span class="o">]</span> <span class="kn">end</span> <span class="c1">-- fails</span>
+</pre></div>
 
 #### [ Gabriel Ebner (Aug 10 2018 at 14:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Simplify%20dite%20statements/near/131234151):
-Even better, it works without `only`:
-```lean
-example (n : ℕ) (hn : ¬n > 5) : p n = 0 := by simp [p, hn]
-```
+<p>Even better, it works without <code>only</code>:</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">hn</span> <span class="o">:</span> <span class="bp">¬</span><span class="n">n</span> <span class="bp">&gt;</span> <span class="mi">5</span><span class="o">)</span> <span class="o">:</span> <span class="n">p</span> <span class="n">n</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">p</span><span class="o">,</span> <span class="n">hn</span><span class="o">]</span>
+</pre></div>
 
 #### [ Gabriel Ebner (Aug 10 2018 at 14:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Simplify%20dite%20statements/near/131234161):
-It needs one extra lemma:
-```lean
-example (n : ℕ) (hn : ¬n > 5) : p n = 0 :=
-by simp only [p, hn, dif_neg, not_false_iff]
-```
+<p>It needs one extra lemma:</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">hn</span> <span class="o">:</span> <span class="bp">¬</span><span class="n">n</span> <span class="bp">&gt;</span> <span class="mi">5</span><span class="o">)</span> <span class="o">:</span> <span class="n">p</span> <span class="n">n</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">p</span><span class="o">,</span> <span class="n">hn</span><span class="o">,</span> <span class="n">dif_neg</span><span class="o">,</span> <span class="n">not_false_iff</span><span class="o">]</span>
+</pre></div>
 
 #### [ Rob Lewis (Aug 10 2018 at 14:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Simplify%20dite%20statements/near/131234265):
-Aha! Thanks.
+<p>Aha! Thanks.</p>
 
 
 {% endraw %}

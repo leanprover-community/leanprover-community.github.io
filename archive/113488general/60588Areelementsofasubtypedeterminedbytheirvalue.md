@@ -12,122 +12,122 @@ permalink: archive/113488general/60588Areelementsofasubtypedeterminedbytheirvalu
 
 {% raw %}
 #### [ Johan Commelin (May 22 2018 at 11:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Are%20elements%20of%20a%20subtype%20determined%20by%20their%20value%3F/near/126915156):
-```lean
-import order.bounds algebra.ordered_group analysis.real analysis.topology.infinite_sum
-noncomputable theory
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">order</span><span class="bp">.</span><span class="n">bounds</span> <span class="n">algebra</span><span class="bp">.</span><span class="n">ordered_group</span> <span class="n">analysis</span><span class="bp">.</span><span class="n">real</span> <span class="n">analysis</span><span class="bp">.</span><span class="n">topology</span><span class="bp">.</span><span class="n">infinite_sum</span>
+<span class="n">noncomputable</span> <span class="n">theory</span>
 
-definition nnreal := {r : ℝ // 0 ≤ r}
-notation ` ℝ≥0 ` := nnreal
+<span class="kn">definition</span> <span class="n">nnreal</span> <span class="o">:=</span> <span class="o">{</span><span class="n">r</span> <span class="o">:</span> <span class="n">ℝ</span> <span class="bp">//</span> <span class="mi">0</span> <span class="bp">≤</span> <span class="n">r</span><span class="o">}</span>
+<span class="kn">notation</span> <span class="bp">`</span> <span class="n">ℝ</span><span class="bp">≥</span><span class="mi">0</span> <span class="bp">`</span> <span class="o">:=</span> <span class="n">nnreal</span>
 
-lemma val_eq_val (r₁ r₂ : ℝ≥0) : r₁ = r₂ ↔ r₁.val = r₂.val := sorry
-```
-I want to mutter something about proof-irrelevance... and of course I'm working classical
+<span class="kn">lemma</span> <span class="n">val_eq_val</span> <span class="o">(</span><span class="n">r₁</span> <span class="n">r₂</span> <span class="o">:</span> <span class="n">ℝ</span><span class="bp">≥</span><span class="mi">0</span><span class="o">)</span> <span class="o">:</span> <span class="n">r₁</span> <span class="bp">=</span> <span class="n">r₂</span> <span class="bp">↔</span> <span class="n">r₁</span><span class="bp">.</span><span class="n">val</span> <span class="bp">=</span> <span class="n">r₂</span><span class="bp">.</span><span class="n">val</span> <span class="o">:=</span> <span class="n">sorry</span>
+</pre></div>
+
+
+<p>I want to mutter something about proof-irrelevance... and of course I'm working classical</p>
 
 #### [ Kenny Lau (May 22 2018 at 11:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Are%20elements%20of%20a%20subtype%20determined%20by%20their%20value%3F/near/126915217):
-yes. `subtype.eq`
+<p>yes. <code>subtype.eq</code></p>
 
 #### [ Johan Commelin (May 22 2018 at 11:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Are%20elements%20of%20a%20subtype%20determined%20by%20their%20value%3F/near/126915243):
-Ok, thanks!
+<p>Ok, thanks!</p>
 
 #### [ Johan Commelin (May 22 2018 at 11:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Are%20elements%20of%20a%20subtype%20determined%20by%20their%20value%3F/near/126915244):
-That is helpful
+<p>That is helpful</p>
 
 #### [ Johan Commelin (May 22 2018 at 11:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Are%20elements%20of%20a%20subtype%20determined%20by%20their%20value%3F/near/126915299):
-I expected that to be right after the definition of a subtype, but I should have thought of looking for a separate file
+<p>I expected that to be right after the definition of a subtype, but I should have thought of looking for a separate file</p>
 
 #### [ Kenny Lau (May 22 2018 at 11:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Are%20elements%20of%20a%20subtype%20determined%20by%20their%20value%3F/near/126915302):
-mathlib vs core :)
+<p>mathlib vs core :)</p>
 
 #### [ Johan Commelin (May 22 2018 at 11:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Are%20elements%20of%20a%20subtype%20determined%20by%20their%20value%3F/near/126915312):
-I see
+<p>I see</p>
 
 #### [ Kevin Buzzard (May 22 2018 at 11:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Are%20elements%20of%20a%20subtype%20determined%20by%20their%20value%3F/near/126915354):
-All methods have advantages and disadvantages but the reason I'm mentioning this is that it's important to get into the right mindset.
+<p>All methods have advantages and disadvantages but the reason I'm mentioning this is that it's important to get into the right mindset.</p>
 
 #### [ Kevin Buzzard (May 22 2018 at 11:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Are%20elements%20of%20a%20subtype%20determined%20by%20their%20value%3F/near/126915355):
-The logic is "it's important, so it's probably there already, so I could either plough through subtype.lean, or guess what the theorem might be called and try and find it with the ctrl-space dance, or just ask here"
+<p>The logic is "it's important, so it's probably there already, so I could either plough through subtype.lean, or guess what the theorem might be called and try and find it with the ctrl-space dance, or just ask here"</p>
 
 #### [ Kevin Buzzard (May 22 2018 at 11:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Are%20elements%20of%20a%20subtype%20determined%20by%20their%20value%3F/near/126915364):
-my posts are appearing in random orders
+<p>my posts are appearing in random orders</p>
 
 #### [ Kevin Buzzard (May 22 2018 at 11:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Are%20elements%20of%20a%20subtype%20determined%20by%20their%20value%3F/near/126915428):
-I asked here too much in the early days and it took me a while to figure out the other algorithms, it's a sort of "give a man a fish" thing, and of course asking here is a super-helpful resource, but somehow I understand the other possibilities better now and once you understand them you become more powerful.
+<p>I asked here too much in the early days and it took me a while to figure out the other algorithms, it's a sort of "give a man a fish" thing, and of course asking here is a super-helpful resource, but somehow I understand the other possibilities better now and once you understand them you become more powerful.</p>
 
 #### [ Kevin Buzzard (May 22 2018 at 11:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Are%20elements%20of%20a%20subtype%20determined%20by%20their%20value%3F/near/126915432):
-And of course from where you're sitting you have no idea about what will be in core and what will be in mathlib, so sometimes it's just less frustrating to ask
+<p>And of course from where you're sitting you have no idea about what will be in core and what will be in mathlib, so sometimes it's just less frustrating to ask</p>
 
 #### [ Kevin Buzzard (May 22 2018 at 11:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Are%20elements%20of%20a%20subtype%20determined%20by%20their%20value%3F/near/126915441):
-What it took me a long time to understand was "if it's natural, it's already there, and is almost certainly named well"
+<p>What it took me a long time to understand was "if it's natural, it's already there, and is almost certainly named well"</p>
 
 #### [ Johan Commelin (May 22 2018 at 12:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Are%20elements%20of%20a%20subtype%20determined%20by%20their%20value%3F/near/126916503):
-Ok, so I applied your strategy, and expected there to be a `subtype.neq`. But it's not there...
+<p>Ok, so I applied your strategy, and expected there to be a <code>subtype.neq</code>. But it's not there...</p>
 
 #### [ Kenny Lau (May 22 2018 at 12:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Are%20elements%20of%20a%20subtype%20determined%20by%20their%20value%3F/near/126916508):
-someone is being too classical
+<p>someone is being too classical</p>
 
 #### [ Kenny Lau (May 22 2018 at 12:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Are%20elements%20of%20a%20subtype%20determined%20by%20their%20value%3F/near/126916512):
-it's just a `rw` for the other direction
+<p>it's just a <code>rw</code> for the other direction</p>
 
 #### [ Kevin Buzzard (May 22 2018 at 12:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Are%20elements%20of%20a%20subtype%20determined%20by%20their%20value%3F/near/126916574):
-You should add it :-)
+<p>You should add it :-)</p>
 
 #### [ Kevin Buzzard (May 22 2018 at 12:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Are%20elements%20of%20a%20subtype%20determined%20by%20their%20value%3F/near/126916577):
-subtype.eq is an iff
+<p>subtype.eq is an iff</p>
 
 #### [ Johan Commelin (May 22 2018 at 12:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Are%20elements%20of%20a%20subtype%20determined%20by%20their%20value%3F/near/126916584):
-Hmm, so I should `rw`, instead of `apply`...?
+<p>Hmm, so I should <code>rw</code>, instead of <code>apply</code>...?</p>
 
 #### [ Mario Carneiro (May 22 2018 at 12:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Are%20elements%20of%20a%20subtype%20determined%20by%20their%20value%3F/near/126916595):
-There aren't a lot of negated theorems like that, since `mt` is literally two characters and turns any A -> B into \not B -> \not A
+<p>There aren't a lot of negated theorems like that, since <code>mt</code> is literally two characters and turns any A -&gt; B into \not B -&gt; \not A</p>
 
 #### [ Kenny Lau (May 22 2018 at 12:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Are%20elements%20of%20a%20subtype%20determined%20by%20their%20value%3F/near/126916596):
-`congr_arg subtype.val`, whatever
+<p><code>congr_arg subtype.val</code>, whatever</p>
 
 #### [ Kevin Buzzard (May 22 2018 at 12:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Are%20elements%20of%20a%20subtype%20determined%20by%20their%20value%3F/near/126916652):
-If H is A <-> B then H.1 is A -> B and H.2 is B -> A, if this helps
+<p>If H is A &lt;-&gt; B then H.1 is A -&gt; B and H.2 is B -&gt; A, if this helps</p>
 
 #### [ Kevin Buzzard (May 22 2018 at 12:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Are%20elements%20of%20a%20subtype%20determined%20by%20their%20value%3F/near/126916657):
-(this is because the _definition_ of <-> is what you think it is)
+<p>(this is because the _definition_ of &lt;-&gt; is what you think it is)</p>
 
 #### [ Johan Commelin (May 22 2018 at 12:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Are%20elements%20of%20a%20subtype%20determined%20by%20their%20value%3F/near/126916672):
-Wait, how do I use `mt`?
+<p>Wait, how do I use <code>mt</code>?</p>
 
 #### [ Kevin Buzzard (May 22 2018 at 12:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Are%20elements%20of%20a%20subtype%20determined%20by%20their%20value%3F/near/126916716):
-`#print mt`
+<p><code>#print mt</code></p>
 
 #### [ Johan Commelin (May 22 2018 at 12:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Are%20elements%20of%20a%20subtype%20determined%20by%20their%20value%3F/near/126916718):
-Hmmz, I see
+<p>Hmmz, I see</p>
 
 #### [ Kevin Buzzard (May 22 2018 at 12:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Are%20elements%20of%20a%20subtype%20determined%20by%20their%20value%3F/near/126916720):
-or `#check mt` if you just want to see the type
+<p>or <code>#check mt</code> if you just want to see the type</p>
 
 #### [ Kevin Buzzard (May 22 2018 at 12:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Are%20elements%20of%20a%20subtype%20determined%20by%20their%20value%3F/near/126916727):
-Some questions of the form "how do I use X" are really "what is its type?" and some are "what is its definition?"
+<p>Some questions of the form "how do I use X" are really "what is its type?" and some are "what is its definition?"</p>
 
 #### [ Johan Commelin (May 22 2018 at 12:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Are%20elements%20of%20a%20subtype%20determined%20by%20their%20value%3F/near/126916728):
-Stuff isn't typechecking over here... I'll have to work a bit
+<p>Stuff isn't typechecking over here... I'll have to work a bit</p>
 
 #### [ Kevin Buzzard (May 22 2018 at 12:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Are%20elements%20of%20a%20subtype%20determined%20by%20their%20value%3F/near/126916729):
-so you use `#check` or `#print`
+<p>so you use <code>#check</code> or <code>#print</code></p>
 
 #### [ Kevin Buzzard (May 22 2018 at 12:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Are%20elements%20of%20a%20subtype%20determined%20by%20their%20value%3F/near/126916730):
-That's another thing I learnt -- when I get errors now I read them carefully
+<p>That's another thing I learnt -- when I get errors now I read them carefully</p>
 
 #### [ Kevin Buzzard (May 22 2018 at 12:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Are%20elements%20of%20a%20subtype%20determined%20by%20their%20value%3F/near/126916733):
-because they tell you exactly what you have got wrong
+<p>because they tell you exactly what you have got wrong</p>
 
 #### [ Johan Commelin (May 22 2018 at 12:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Are%20elements%20of%20a%20subtype%20determined%20by%20their%20value%3F/near/126916842):
-Ok, so my subtype.eq is not an iff, it's something from core saying
-```lean
-protected lemma eq : ∀ {a1 a2 : {x // p x}}, val a1 = val a2 → a1 = a2
-| ⟨x, h1⟩ ⟨.(x), h2⟩ rfl := rfl
-```
+<p>Ok, so my subtype.eq is not an iff, it's something from core saying</p>
+<div class="codehilite"><pre><span></span><span class="kn">protected</span> <span class="kn">lemma</span> <span class="n">eq</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">a1</span> <span class="n">a2</span> <span class="o">:</span> <span class="o">{</span><span class="n">x</span> <span class="bp">//</span> <span class="n">p</span> <span class="n">x</span><span class="o">}},</span> <span class="n">val</span> <span class="n">a1</span> <span class="bp">=</span> <span class="n">val</span> <span class="n">a2</span> <span class="bp">→</span> <span class="n">a1</span> <span class="bp">=</span> <span class="n">a2</span>
+<span class="bp">|</span> <span class="bp">⟨</span><span class="n">x</span><span class="o">,</span> <span class="n">h1</span><span class="bp">⟩</span> <span class="bp">⟨.</span><span class="o">(</span><span class="n">x</span><span class="o">),</span> <span class="n">h2</span><span class="bp">⟩</span> <span class="n">rfl</span> <span class="o">:=</span> <span class="n">rfl</span>
+</pre></div>
 
 #### [ Kevin Buzzard (May 22 2018 at 14:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Are%20elements%20of%20a%20subtype%20determined%20by%20their%20value%3F/near/126921269):
-OK great -- I just assumed it was an iff from something someone said earlier
+<p>OK great -- I just assumed it was an iff from something someone said earlier</p>
 
 #### [ Kevin Buzzard (May 22 2018 at 14:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Are%20elements%20of%20a%20subtype%20determined%20by%20their%20value%3F/near/126921310):
-I guess it's protected because if you open subtype then all of a sudden you have clobbered the definition of eq
+<p>I guess it's protected because if you open subtype then all of a sudden you have clobbered the definition of eq</p>
 
 
 {% endraw %}

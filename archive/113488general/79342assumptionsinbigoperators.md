@@ -12,55 +12,56 @@ permalink: archive/113488general/79342assumptionsinbigoperators.html
 
 {% raw %}
 #### [ Johan Commelin (Oct 02 2018 at 15:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/assumptions%20in%20big_operators/near/135034421):
-I was browsing through big_operators and found:
-```lean
-#print finset.sum_nat_cast
--- gives
-theorem finset.sum_nat_cast : ∀ {α : Type u} {β : Type v} [_inst_1 : comm_monoid β] [_inst_2 : add_comm_monoid β] [_inst_3 : has_one β]
-(s : finset α) (f : α → ℕ), ↑(sum s f) = sum s (λ (a : α), ↑(f a)) :=
-λ {α : Type u} {β : Type v} [_inst_1 : comm_monoid β] [_inst_2 : add_comm_monoid β] [_inst_3 : has_one β]
-(s : finset α) (f : α → ℕ), eq.symm (sum_hom coe nat.cast_zero nat.cast_add)
-```
-Is this bad? I assume `[_inst_1 : comm_monoid β] [_inst_2 : add_comm_monoid β]` is not intended.
+<p>I was browsing through big_operators and found:</p>
+<div class="codehilite"><pre><span></span><span class="bp">#</span><span class="kn">print</span> <span class="n">finset</span><span class="bp">.</span><span class="n">sum_nat_cast</span>
+<span class="c1">-- gives</span>
+<span class="kn">theorem</span> <span class="n">finset</span><span class="bp">.</span><span class="n">sum_nat_cast</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">}</span> <span class="o">[</span><span class="bp">_</span><span class="n">inst_1</span> <span class="o">:</span> <span class="n">comm_monoid</span> <span class="n">β</span><span class="o">]</span> <span class="o">[</span><span class="bp">_</span><span class="n">inst_2</span> <span class="o">:</span> <span class="n">add_comm_monoid</span> <span class="n">β</span><span class="o">]</span> <span class="o">[</span><span class="bp">_</span><span class="n">inst_3</span> <span class="o">:</span> <span class="n">has_one</span> <span class="n">β</span><span class="o">]</span>
+<span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">finset</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="bp">ℕ</span><span class="o">),</span> <span class="err">↑</span><span class="o">(</span><span class="n">sum</span> <span class="n">s</span> <span class="n">f</span><span class="o">)</span> <span class="bp">=</span> <span class="n">sum</span> <span class="n">s</span> <span class="o">(</span><span class="bp">λ</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">),</span> <span class="err">↑</span><span class="o">(</span><span class="n">f</span> <span class="n">a</span><span class="o">))</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">}</span> <span class="o">[</span><span class="bp">_</span><span class="n">inst_1</span> <span class="o">:</span> <span class="n">comm_monoid</span> <span class="n">β</span><span class="o">]</span> <span class="o">[</span><span class="bp">_</span><span class="n">inst_2</span> <span class="o">:</span> <span class="n">add_comm_monoid</span> <span class="n">β</span><span class="o">]</span> <span class="o">[</span><span class="bp">_</span><span class="n">inst_3</span> <span class="o">:</span> <span class="n">has_one</span> <span class="n">β</span><span class="o">]</span>
+<span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">finset</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="bp">ℕ</span><span class="o">),</span> <span class="n">eq</span><span class="bp">.</span><span class="n">symm</span> <span class="o">(</span><span class="n">sum_hom</span> <span class="n">coe</span> <span class="n">nat</span><span class="bp">.</span><span class="n">cast_zero</span> <span class="n">nat</span><span class="bp">.</span><span class="n">cast_add</span><span class="o">)</span>
+</pre></div>
+
+
+<p>Is this bad? I assume <code>[_inst_1 : comm_monoid β] [_inst_2 : add_comm_monoid β]</code> is not intended.</p>
 
 #### [ Kevin Buzzard (Oct 02 2018 at 15:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/assumptions%20in%20big_operators/near/135035071):
-How does Lean know that the up-arrows mean "coerce to beta"?
+<p>How does Lean know that the up-arrows mean "coerce to beta"?</p>
 
 #### [ Johan Commelin (Oct 02 2018 at 15:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/assumptions%20in%20big_operators/near/135035165):
-I don't know. Probably `nat.cast`
+<p>I don't know. Probably <code>nat.cast</code></p>
 
 #### [ Chris Hughes (Oct 02 2018 at 15:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/assumptions%20in%20big_operators/near/135035363):
-Johan just posted the output of `#print`. In the actual theorem, the type is given explicitly
+<p>Johan just posted the output of <code>#print</code>. In the actual theorem, the type is given explicitly</p>
 
 #### [ Johan Commelin (Oct 02 2018 at 15:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/assumptions%20in%20big_operators/near/135035637):
-Sorry, I could have been clearer about that...
+<p>Sorry, I could have been clearer about that...</p>
 
 #### [ Johan Commelin (Oct 02 2018 at 15:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/assumptions%20in%20big_operators/near/135035695):
-Is there a way to see if this happens more often in mathlib?
+<p>Is there a way to see if this happens more often in mathlib?</p>
 
 #### [ Johan Commelin (Oct 02 2018 at 15:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/assumptions%20in%20big_operators/near/135035707):
-Chris, you can probably use your tools to figure out if this theorem is actually ever used.
+<p>Chris, you can probably use your tools to figure out if this theorem is actually ever used.</p>
 
 #### [ Johan Commelin (Oct 02 2018 at 15:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/assumptions%20in%20big_operators/near/135035716):
-I predict it isn't. Because otherwise this double instance problem would have been noticed before.
+<p>I predict it isn't. Because otherwise this double instance problem would have been noticed before.</p>
 
 #### [ Patrick Massot (Oct 02 2018 at 15:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/assumptions%20in%20big_operators/near/135035754):
-I'm not sure. As  I already pointed out, there are theorems with redundant instances in mathlib
+<p>I'm not sure. As  I already pointed out, there are theorems with redundant instances in mathlib</p>
 
 #### [ Kevin Buzzard (Oct 02 2018 at 15:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/assumptions%20in%20big_operators/near/135035756):
-```quote
-Johan just posted the output of `#print`. In the actual theorem, the type is given explicitly
-```
-Oh -- I'm an idiot. Thanks Chris.
+<blockquote>
+<p>Johan just posted the output of <code>#print</code>. In the actual theorem, the type is given explicitly</p>
+</blockquote>
+<p>Oh -- I'm an idiot. Thanks Chris.</p>
 
 #### [ Johan Commelin (Oct 02 2018 at 15:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/assumptions%20in%20big_operators/near/135036066):
-@**Patrick Massot** hmmm... can your tools help to discover this? Of course not very automatically. But maybe generate a list of all theorems that assume `[blah X]` and `[add_blah X]`. I guess it almost never happens that this is intended.
+<p><span class="user-mention" data-user-id="110031">@Patrick Massot</span> hmmm... can your tools help to discover this? Of course not very automatically. But maybe generate a list of all theorems that assume <code>[blah X]</code> and <code>[add_blah X]</code>. I guess it almost never happens that this is intended.</p>
 
 #### [ Patrick Massot (Oct 02 2018 at 15:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/assumptions%20in%20big_operators/near/135036552):
-doing this is in my long TODO list, but it's very low priority
+<p>doing this is in my long TODO list, but it's very low priority</p>
 
 #### [ Chris Hughes (Oct 02 2018 at 15:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/assumptions%20in%20big_operators/near/135036869):
-Searching `sum_nat_cast` in VScode tells me it's used once in `probability mass function`. It's casting to $$\mathbb{R}$$ there, so no problems synthesizing the `comm_monoid` instance. It is a mistake though and should be changed.
+<p>Searching <code>sum_nat_cast</code> in VScode tells me it's used once in <code>probability mass function</code>. It's casting to <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mrow><mi mathvariant="double-struck">R</mi></mrow></mrow><annotation encoding="application/x-tex">\mathbb{R}</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.68889em;"></span><span class="strut bottom" style="height:0.68889em;vertical-align:0em;"></span><span class="base"><span class="mord"><span class="mord mathbb">R</span></span></span></span></span> there, so no problems synthesizing the <code>comm_monoid</code> instance. It is a mistake though and should be changed.</p>
 
 
 {% endraw %}

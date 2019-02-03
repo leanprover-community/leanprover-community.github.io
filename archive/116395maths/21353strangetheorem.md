@@ -12,28 +12,27 @@ permalink: archive/116395maths/21353strangetheorem.html
 
 {% raw %}
 #### [ Kenny Lau (Apr 28 2018 at 07:27)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/strange%20theorem/near/125808366):
-```lean
-α : Type u,
-A B : set α,
-t : set (set α),
+<div class="codehilite"><pre><span></span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">,</span>
+<span class="n">A</span> <span class="n">B</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span><span class="o">,</span>
+<span class="n">t</span> <span class="o">:</span> <span class="n">set</span> <span class="o">(</span><span class="n">set</span> <span class="n">α</span><span class="o">),</span>
 
-ht1 : t ⊆ {A},
-ht2 : set.finite t,
-ht3 : ⋂₀ t ⊆ B
-⊢ A ⊆ B
-```
+<span class="n">ht1</span> <span class="o">:</span> <span class="n">t</span> <span class="err">⊆</span> <span class="o">{</span><span class="n">A</span><span class="o">},</span>
+<span class="n">ht2</span> <span class="o">:</span> <span class="n">set</span><span class="bp">.</span><span class="n">finite</span> <span class="n">t</span><span class="o">,</span>
+<span class="n">ht3</span> <span class="o">:</span> <span class="err">⋂₀</span> <span class="n">t</span> <span class="err">⊆</span> <span class="n">B</span>
+<span class="err">⊢</span> <span class="n">A</span> <span class="err">⊆</span> <span class="n">B</span>
+</pre></div>
 
 #### [ Kenny Lau (Apr 28 2018 at 07:27)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/strange%20theorem/near/125808368):
-claim: you can't prove it without using ht2
+<p>claim: you can't prove it without using ht2</p>
 
 #### [ Kenny Lau (Apr 28 2018 at 07:29)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/strange%20theorem/near/125808416):
-I mean, constructively, of course
+<p>I mean, constructively, of course</p>
 
 #### [ Reid Barton (Apr 28 2018 at 07:29)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/strange%20theorem/near/125808417):
-I was going to say, I'm pretty sure *I* can prove it, since I can use LEM :simple_smile:
+<p>I was going to say, I'm pretty sure <em>I</em> can prove it, since I can use LEM <span class="emoji emoji-1f642" title="simple smile">:simple_smile:</span></p>
 
 #### [ Kenny Lau (Apr 28 2018 at 07:29)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/strange%20theorem/near/125808418):
-:D
+<p>:D</p>
 
 
 {% endraw %}

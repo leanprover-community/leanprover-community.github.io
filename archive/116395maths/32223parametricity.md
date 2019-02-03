@@ -12,16 +12,16 @@ permalink: archive/116395maths/32223parametricity.html
 
 {% raw %}
 #### [ Patrick Massot (Nov 08 2018 at 10:56)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/parametricity/near/147288928):
-The parametricity stuff is at https://github.com/leanprover-community/mathlib/tree/param
+<p>The parametricity stuff is at <a href="https://github.com/leanprover-community/mathlib/tree/param" target="_blank" title="https://github.com/leanprover-community/mathlib/tree/param">https://github.com/leanprover-community/mathlib/tree/param</a></p>
 
 #### [ Mario Carneiro (Nov 08 2018 at 10:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/parametricity/near/147289013):
-hm, we should have a thread about this
+<p>hm, we should have a thread about this</p>
 
 #### [ Patrick Massot (Nov 08 2018 at 11:56)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/parametricity/near/147291365):
-done
+<p>done</p>
 
 #### [ Patrick Massot (Nov 08 2018 at 11:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/parametricity/near/147291389):
-(except Zulip doesn't seem to allow changing stream here)
+<p>(except Zulip doesn't seem to allow changing stream here)</p>
 
 
 {% endraw %}

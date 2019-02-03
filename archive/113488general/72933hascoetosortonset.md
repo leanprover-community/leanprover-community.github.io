@@ -12,79 +12,77 @@ permalink: archive/113488general/72933hascoetosortonset.html
 
 {% raw %}
 #### [ Kevin Buzzard (Jul 16 2018 at 14:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60has_coe_to_sort%60%20on%20set/near/129747338):
-What am I doing wrong:
+<p>What am I doing wrong:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">set</span><span class="bp">.</span><span class="n">basic</span>
 
-```lean
-import data.set.basic
+<span class="kn">example</span> <span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">:</span> <span class="n">has_coe_to_sort</span> <span class="o">(</span><span class="n">set</span> <span class="n">X</span><span class="o">)</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">apply_instance</span> <span class="c1">-- works</span>
+<span class="kn">theorem</span> <span class="n">foo</span> <span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">:</span> <span class="n">has_coe_to_sort</span> <span class="o">(</span><span class="n">set</span> <span class="n">X</span><span class="o">)</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">apply_instance</span> <span class="c1">-- error</span>
+<span class="c">/-</span><span class="cm"></span>
+<span class="cm">tactic.mk_instance failed to generate instance for</span>
+<span class="cm">  has_coe_to_sort (set X)</span>
+<span class="cm">state:</span>
+<span class="cm">X : Type</span>
+<span class="cm">⊢ has_coe_to_sort (set X)</span>
+<span class="cm">-/</span>
+</pre></div>
 
-example (X : Type) : has_coe_to_sort (set X) := by apply_instance -- works
-theorem foo (X : Type) : has_coe_to_sort (set X) := by apply_instance -- error
-/-
-tactic.mk_instance failed to generate instance for
-  has_coe_to_sort (set X)
-state:
-X : Type
-⊢ has_coe_to_sort (set X)
--/
-```
 
-?
+<p>?</p>
 
 #### [ Mario Carneiro (Jul 16 2018 at 14:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60has_coe_to_sort%60%20on%20set/near/129747359):
-check your universe variables
+<p>check your universe variables</p>
 
 #### [ Kevin Buzzard (Jul 16 2018 at 14:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60has_coe_to_sort%60%20on%20set/near/129747379):
-*boggle*
+<p><em>boggle</em></p>
 
 #### [ Kevin Buzzard (Jul 16 2018 at 14:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60has_coe_to_sort%60%20on%20set/near/129747752):
-I remember now, I've seen this before. `definition foo...` works, `example` works, `theorem` doesn't. Thanks!
+<p>I remember now, I've seen this before. <code>definition foo...</code> works, <code>example</code> works, <code>theorem</code> doesn't. Thanks!</p>
 
 #### [ Mario Carneiro (Jul 16 2018 at 14:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60has_coe_to_sort%60%20on%20set/near/129747757):
-`theorem` works too if you assign the universe variables first
+<p><code>theorem</code> works too if you assign the universe variables first</p>
 
 #### [ Kenny Lau (Jul 16 2018 at 14:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60has_coe_to_sort%60%20on%20set/near/129747806):
-```lean
-import data.set.basic
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">set</span><span class="bp">.</span><span class="n">basic</span>
 
-example (X : Type) : has_coe_to_sort (set X) := by apply_instance -- works
-theorem foo (X : Type) : has_coe_to_sort.{1 2} (set X) := by apply_instance -- works
-```
+<span class="kn">example</span> <span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">:</span> <span class="n">has_coe_to_sort</span> <span class="o">(</span><span class="n">set</span> <span class="n">X</span><span class="o">)</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">apply_instance</span> <span class="c1">-- works</span>
+<span class="kn">theorem</span> <span class="n">foo</span> <span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">:</span> <span class="n">has_coe_to_sort</span><span class="bp">.</span><span class="o">{</span><span class="mi">1</span> <span class="mi">2</span><span class="o">}</span> <span class="o">(</span><span class="n">set</span> <span class="n">X</span><span class="o">)</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">apply_instance</span> <span class="c1">-- works</span>
+</pre></div>
 
 #### [ Mario Carneiro (Jul 16 2018 at 14:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60has_coe_to_sort%60%20on%20set/near/129747807):
-but `has_coe_to_fun` is an instance so it's best to use `instance` or `def`
+<p>but <code>has_coe_to_fun</code> is an instance so it's best to use <code>instance</code> or <code>def</code></p>
 
 #### [ Kenny Lau (Jul 16 2018 at 14:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60has_coe_to_sort%60%20on%20set/near/129747808):
-you mean this?
+<p>you mean this?</p>
 
 #### [ Mario Carneiro (Jul 16 2018 at 14:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60has_coe_to_sort%60%20on%20set/near/129747812):
-yes
+<p>yes</p>
 
 #### [ Kenny Lau (Jul 16 2018 at 14:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60has_coe_to_sort%60%20on%20set/near/129747820):
-because the default Sort is Sort 0?
+<p>because the default Sort is Sort 0?</p>
 
 #### [ Kenny Lau (Jul 16 2018 at 14:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60has_coe_to_sort%60%20on%20set/near/129747825):
-so I have to say 2?
+<p>so I have to say 2?</p>
 
 #### [ Mario Carneiro (Jul 16 2018 at 14:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60has_coe_to_sort%60%20on%20set/near/129747889):
-I think you only need to state the second one, which is the universe level of the target type, which must be `Sort u` for some `u`
+<p>I think you only need to state the second one, which is the universe level of the target type, which must be <code>Sort u</code> for some <code>u</code></p>
 
 #### [ Kenny Lau (Jul 16 2018 at 14:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60has_coe_to_sort%60%20on%20set/near/129747899):
-how do I state the second one without stating the first one?
+<p>how do I state the second one without stating the first one?</p>
 
 #### [ Mario Carneiro (Jul 16 2018 at 14:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60has_coe_to_sort%60%20on%20set/near/129747902):
-`.{_ 2}`
+<p><code>.{_ 2}</code></p>
 
 #### [ Kenny Lau (Jul 16 2018 at 14:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60has_coe_to_sort%60%20on%20set/near/129747911):
-well
+<p>well</p>
 
 #### [ Mario Carneiro (Jul 16 2018 at 14:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60has_coe_to_sort%60%20on%20set/near/129747932):
-I realize it doesn't save any chars, but it does save some working-out
+<p>I realize it doesn't save any chars, but it does save some working-out</p>
 
 #### [ Sean Leather (Jul 16 2018 at 14:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60has_coe_to_sort%60%20on%20set/near/129747981):
-```quote
-I realize it doesn't save any chars, but it does save some working-out
-```
-But one should work out to stay Lean... :thinking_face:
+<blockquote>
+<p>I realize it doesn't save any chars, but it does save some working-out</p>
+</blockquote>
+<p>But one should work out to stay Lean... <span class="emoji emoji-1f914" title="thinking face">:thinking_face:</span></p>
 
 
 {% endraw %}

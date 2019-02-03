@@ -12,104 +12,106 @@ permalink: archive/113489newmembers/11831defsyntax.html
 
 {% raw %}
 #### [ Alexandru-Andrei Bosinta (Nov 21 2018 at 21:04)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/def%20syntax/near/148134203):
-Is there a way to make a definition with a condition that is not decidable? I need something like 
-```
-def my_def := if p then sorry
+<p>Is there a way to make a definition with a condition that is not decidable? I need something like </p>
+<div class="codehilite"><pre><span></span>def my_def := if p then sorry
 else sorry
-```
-but with `p` not decidable.
+</pre></div>
+
+
+<p>but with <code>p</code> not decidable.</p>
 
 #### [ Johannes Hölzl (Nov 21 2018 at 21:39)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/def%20syntax/near/148135957):
-the easiest option is to activate classical logic in your `section` or on the module level:
-```lean
-local attribute [instance] classical.prop_decidable
-```
-add this to the top of your file
+<p>the easiest option is to activate classical logic in your <code>section</code> or on the module level:</p>
+<div class="codehilite"><pre><span></span><span class="n">local</span> <span class="n">attribute</span> <span class="o">[</span><span class="kn">instance</span><span class="o">]</span> <span class="n">classical</span><span class="bp">.</span><span class="n">prop_decidable</span>
+</pre></div>
+
+
+<p>add this to the top of your file</p>
 
 #### [ Kevin Buzzard (Nov 21 2018 at 21:39)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/def%20syntax/near/148135962):
-```lean
-local attribute [instance, priority 0] classical.prop_decidable
+<div class="codehilite"><pre><span></span><span class="n">local</span> <span class="n">attribute</span> <span class="o">[</span><span class="kn">instance</span><span class="o">,</span> <span class="n">priority</span> <span class="mi">0</span><span class="o">]</span> <span class="n">classical</span><span class="bp">.</span><span class="n">prop_decidable</span>
 
-noncomputable def my_def (p : Prop) : ℕ := if p then sorry
-else sorry
-```
+<span class="n">noncomputable</span> <span class="n">def</span> <span class="n">my_def</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="o">:=</span> <span class="k">if</span> <span class="n">p</span> <span class="k">then</span> <span class="n">sorry</span>
+<span class="k">else</span> <span class="n">sorry</span>
+</pre></div>
 
 #### [ Johannes Hölzl (Nov 21 2018 at 21:39)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/def%20syntax/near/148135985):
-ah yes, `priority 0` is a good idea
+<p>ah yes, <code>priority 0</code> is a good idea</p>
 
 #### [ Alexandru-Andrei Bosinta (Nov 21 2018 at 21:51)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/def%20syntax/near/148136595):
-Thanks for the idea, but also how do I give my condition a name so I can use it in the definition?
-```
-protected noncomputable def neg (α : ℝ) : ℝ := if ∃ (p : ℚ), α = lt_rat_r p then sorry
+<p>Thanks for the idea, but also how do I give my condition a name so I can use it in the definition?</p>
+<div class="codehilite"><pre><span></span>protected noncomputable def neg (α : ℝ) : ℝ := if ∃ (p : ℚ), α = lt_rat_r p then sorry
 else sorry
-```
-This is what I am trying to do, and I need to give a name to my condition so I can use it in the definition.
+</pre></div>
+
+
+<p>This is what I am trying to do, and I need to give a name to my condition so I can use it in the definition.</p>
 
 #### [ Kevin Buzzard (Nov 21 2018 at 21:52)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/def%20syntax/near/148136656):
-Maybe you want `dite`? "dependent if/then/else"
+<p>Maybe you want <code>dite</code>? "dependent if/then/else"</p>
 
 #### [ Rob Lewis (Nov 21 2018 at 21:53)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/def%20syntax/near/148136673):
-`if h : p then _ else _`
+<p><code>if h : p then _ else _</code></p>
 
 #### [ Alexandru-Andrei Bosinta (Nov 21 2018 at 22:10)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/def%20syntax/near/148137486):
-```quote
-`if h : p then _ else _`
-```
- Oh, thanks. I was trying to do something like this but I was putting too many parenthesis and Lean was complaining. (I was trying to use `(h : p)`)
+<blockquote>
+<p><code>if h : p then _ else _</code></p>
+</blockquote>
+<p>Oh, thanks. I was trying to do something like this but I was putting too many parenthesis and Lean was complaining. (I was trying to use <code>(h : p)</code>)</p>
 
 #### [ Alexandru-Andrei Bosinta (Nov 21 2018 at 22:13)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/def%20syntax/near/148137657):
-```quote
-Maybe you want `dite`? "dependent if/then/else"
-```
- `dite` also works, but I think I will use @**Rob Lewis**'s version for this. Also thanks for this function, I didn't know about it. It seems it can be pretty useful.
+<blockquote>
+<p>Maybe you want <code>dite</code>? "dependent if/then/else"</p>
+</blockquote>
+<p><code>dite</code> also works, but I think I will use <span class="user-mention" data-user-id="110596">@Rob Lewis</span>'s version for this. Also thanks for this function, I didn't know about it. It seems it can be pretty useful.</p>
 
 #### [ Rob Lewis (Nov 21 2018 at 22:21)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/def%20syntax/near/148138067):
-`if h : p then _ else _` is actually just nicer syntax for `dite`.
+<p><code>if h : p then _ else _</code> is actually just nicer syntax for <code>dite</code>.</p>
 
 #### [ Alexandru-Andrei Bosinta (Nov 21 2018 at 23:14)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/def%20syntax/near/148140541):
-Is there a way to make the conditional an `∃` and then extract the element? It seems like `exists.elim` will not work here because it expects a `Prop` at the end (so it only works for proving propositions).
+<p>Is there a way to make the conditional an <code>∃</code> and then extract the element? It seems like <code>exists.elim</code> will not work here because it expects a <code>Prop</code> at the end (so it only works for proving propositions).</p>
 
 #### [ Patrick Massot (Nov 21 2018 at 23:18)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/def%20syntax/near/148140724):
-use `classical.some`
+<p>use <code>classical.some</code></p>
 
 #### [ Patrick Massot (Nov 21 2018 at 23:18)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/def%20syntax/near/148140739):
-but beware that you don't get much control over which element will be returned
+<p>but beware that you don't get much control over which element will be returned</p>
 
 #### [ Patrick Massot (Nov 21 2018 at 23:20)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/def%20syntax/near/148140835):
-and of course your function won't be computable
+<p>and of course your function won't be computable</p>
 
 #### [ Patrick Massot (Nov 21 2018 at 23:21)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/def%20syntax/near/148140845):
-Maybe it would help, if you could tell us more about what you are actually trying to do
+<p>Maybe it would help, if you could tell us more about what you are actually trying to do</p>
 
 #### [ Alexandru-Andrei Bosinta (Nov 21 2018 at 23:24)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/def%20syntax/near/148140975):
-Thanks! `classical.some` worked. I did notice the problem that you don't get much control over which element will be returned (so my first attempt to use it failed), but I managed to make it work.
+<p>Thanks! <code>classical.some</code> worked. I did notice the problem that you don't get much control over which element will be returned (so my first attempt to use it failed), but I managed to make it work.</p>
 
 #### [ Patrick Massot (Nov 21 2018 at 23:25)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/def%20syntax/near/148141013):
-It's important to understand that proof irrelevance makes it impossible to prove existence using some witness and hope to get back this witness using `some`. But that wouldn't make much sense in real world math either
+<p>It's important to understand that proof irrelevance makes it impossible to prove existence using some witness and hope to get back this witness using <code>some</code>. But that wouldn't make much sense in real world math either</p>
 
 #### [ Patrick Massot (Nov 21 2018 at 23:28)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/def%20syntax/near/148141147):
-I mean
-```lean
-import tactic.norm_num
-open classical
-def h : ∃ a : ℕ, a ≠ 0 := ⟨42, by norm_num⟩
+<p>I mean</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">norm_num</span>
+<span class="kn">open</span> <span class="n">classical</span>
+<span class="n">def</span> <span class="n">h</span> <span class="o">:</span> <span class="bp">∃</span> <span class="n">a</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span> <span class="n">a</span> <span class="bp">≠</span> <span class="mi">0</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="mi">42</span><span class="o">,</span> <span class="k">by</span> <span class="n">norm_num</span><span class="bp">⟩</span>
 
-example : some h = 42 := sorry -- no hope
-```
-is hopeless (and honestly it wouldn't make sense)
+<span class="kn">example</span> <span class="o">:</span> <span class="n">some</span> <span class="n">h</span> <span class="bp">=</span> <span class="mi">42</span> <span class="o">:=</span> <span class="n">sorry</span> <span class="c1">-- no hope</span>
+</pre></div>
+
+
+<p>is hopeless (and honestly it wouldn't make sense)</p>
 
 #### [ Alexandru-Andrei Bosinta (Nov 21 2018 at 23:37)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/def%20syntax/near/148141536):
-I understand what you mean, but I don't need to prove an existence. I am only doing the law of the excluded middle over a proposition of the type ` ∃ (x : ℚ), p x` with `p : ℚ → Prop`. So I am only using `some` to get the witness and use it in the proof, but I don't care what is the witness, so I won't use `some` to get it back.
+<p>I understand what you mean, but I don't need to prove an existence. I am only doing the law of the excluded middle over a proposition of the type <code> ∃ (x : ℚ), p x</code> with <code>p : ℚ → Prop</code>. So I am only using <code>some</code> to get the witness and use it in the proof, but I don't care what is the witness, so I won't use <code>some</code> to get it back.</p>
 
 #### [ Patrick Massot (Nov 21 2018 at 23:43)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/def%20syntax/near/148141768):
-Good. I still advise you to post your code when you'll be done. It's easy to do suboptimal things in this area, and you may learn useful stuff from reactions here.
+<p>Good. I still advise you to post your code when you'll be done. It's easy to do suboptimal things in this area, and you may learn useful stuff from reactions here.</p>
 
 #### [ Alexandru-Andrei Bosinta (Nov 21 2018 at 23:45)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/def%20syntax/near/148141840):
-Ok, I will post it here when I am done.
+<p>Ok, I will post it here when I am done.</p>
 
 #### [ Alexandru-Andrei Bosinta (Nov 22 2018 at 02:18)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/def%20syntax/near/148147423):
-```
-import data.rat data.set.basic order.bounds tactic.ring
+<div class="codehilite"><pre><span></span>import data.rat data.set.basic order.bounds tactic.ring
 open classical
 local attribute [instance, priority 0] classical.prop_decidable
 
@@ -118,7 +120,7 @@ structure Dedekind_real :=
 (nonemp : ∃ a, a ∈ carrier)
 (nonrat : ∃ a, a ∉ carrier)
 (down : ∀ (p : ℚ), p ∈ carrier → ∀ (q : ℚ), q ≤ p → q ∈ carrier)
-(nomax : ∀ (p : ℚ), p ∈ carrier → ∃ (q : ℚ), q ∈ carrier ∧ p < q)
+(nomax : ∀ (p : ℚ), p ∈ carrier → ∃ (q : ℚ), q ∈ carrier ∧ p &lt; q)
 
 notation `ℝ` := Dedekind_real
 
@@ -134,7 +136,7 @@ end Dedekind_real
 
 open Dedekind_real
 
-lemma bounded_by_non_elements (α : ℝ) (x : ℚ): x ∉ α.carrier ↔ (∀ (q : ℚ), q ∈ α.carrier → q < x) := sorry
+lemma bounded_by_non_elements (α : ℝ) (x : ℚ): x ∉ α.carrier ↔ (∀ (q : ℚ), q ∈ α.carrier → q &lt; x) := sorry
 
 lemma real_intro : ∀ {a b : ℝ}, a.carrier = b.carrier → a = b := sorry
 
@@ -142,32 +144,33 @@ theorem not_exists_not_c {α : Type} {p : α → Prop} : (¬∃ (x : α), ¬p x)
 
 namespace Dedekind_real
 
-def lt_rat_r (p : ℚ) : ℝ := ⟨{q | q < p}, sorry, sorry, sorry, sorry ⟩
+def lt_rat_r (p : ℚ) : ℝ := ⟨{q | q &lt; p}, sorry, sorry, sorry, sorry ⟩
 
 protected noncomputable def neg (α : ℝ) : ℝ := if h : ∃ (p : ℚ), α = lt_rat_r p then lt_rat_r (some h)
-else ⟨{p : ℚ | ∀ (q : ℚ), q ∈ α.carrier → p + q < 0}, 
-exists.elim α.nonrat (λ r hr, ⟨-r, (λ q hq, neg_add_lt_of_lt_add (trans_rel_left rat.has_lt.lt 
-( (bounded_by_non_elements α r).mp hr q hq) (eq.symm (add_zero r) ) ) ) ⟩ ),    
+else ⟨{p : ℚ | ∀ (q : ℚ), q ∈ α.carrier → p + q &lt; 0},
+exists.elim α.nonrat (λ r hr, ⟨-r, (λ q hq, neg_add_lt_of_lt_add (trans_rel_left rat.has_lt.lt
+( (bounded_by_non_elements α r).mp hr q hq) (eq.symm (add_zero r) ) ) ) ⟩ ),
 (classical.by_contradiction (λ h, exists.elim α.nonemp (λ q0 hq0, (not_lt_of_lt (trans_rel_left rat.has_lt.lt
-(lt_add_one 0) (zero_add 1) ) ) (trans_rel_right rat.has_lt.lt (eq.symm (sub_add_cancel 1 q0) ) 
-(not_exists_not_c.mp h (1-q0) q0 hq0) ) ) ) ), 
+(lt_add_one 0) (zero_add 1) ) ) (trans_rel_right rat.has_lt.lt (eq.symm (sub_add_cancel 1 q0) )
+(not_exists_not_c.mp h (1-q0) q0 hq0) ) ) ) ),
 (λ p hp q hqp r hrα, lt_of_le_of_lt ((add_le_add_iff_right r).mpr hqp) (hp r hrα) ),
-(λ p hp, dite (∃ (ε : ℚ), (ε < 0 ∧ ∀ (q : ℚ), q ∈ α.carrier → p + q < ε) ) 
+(λ p hp, dite (∃ (ε : ℚ), (ε &lt; 0 ∧ ∀ (q : ℚ), q ∈ α.carrier → p + q &lt; ε) )
 (λ hε, exists.elim hε (λ ε hε, ⟨p-ε/2, (λ q hq, sorry), sorry⟩))
-(λ hε, false.elim (h ⟨-p, real_intro (set.ext (λ x, 
+(λ hε, false.elim (h ⟨-p, real_intro (set.ext (λ x,
 ⟨(λ hx, by calc x = -p + (p + x) : by ring
-... < -p + 0 : add_lt_add_left (hp x hx) (-p)
+... &lt; -p + 0 : add_lt_add_left (hp x hx) (-p)
 ... = -p : by ring),
 (λ hx, sorry)⟩ ) ) ⟩ ) ) ) ⟩
 
 end Dedekind_real
-```
-I am not done yet (I skipped some tedious calculations: the three `sorry` in the definition of `neg`; I know how to do them, but it seems extremely tedious to do in Lean), but this is what I have. To remove clutter, I removed most of the things irrelevant to this particular definition and added `sorry` instead of my written proofs for other theorems which are required.
+</pre></div>
 
-I am starting to think that I am doing something wrong because this is getting way too tedious.
+
+<p>I am not done yet (I skipped some tedious calculations: the three <code>sorry</code> in the definition of <code>neg</code>; I know how to do them, but it seems extremely tedious to do in Lean), but this is what I have. To remove clutter, I removed most of the things irrelevant to this particular definition and added <code>sorry</code> instead of my written proofs for other theorems which are required.</p>
+<p>I am starting to think that I am doing something wrong because this is getting way too tedious.</p>
 
 #### [ Kenny Lau (Nov 22 2018 at 16:41)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/def%20syntax/near/148182360):
-There is a way to make this computable.
+<p>There is a way to make this computable.</p>
 
 
 {% endraw %}

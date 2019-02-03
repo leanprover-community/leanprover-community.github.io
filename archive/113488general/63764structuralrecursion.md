@@ -12,53 +12,51 @@ permalink: archive/113488general/63764structuralrecursion.html
 
 {% raw %}
 #### [ Simon Hudon (Aug 29 2018 at 03:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/structural%20recursion/near/132971116):
-I have the following code for which Lean cannot prove termination because it's trying to use well-founded recursion:
+<p>I have the following code for which Lean cannot prove termination because it's trying to use well-founded recursion:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">equiv</span><span class="bp">.</span><span class="n">basic</span>
 
-```lean
-import data.equiv.basic
+<span class="n">universes</span> <span class="n">u</span> <span class="n">v</span>
 
-universes u v
+<span class="kn">inductive</span> <span class="n">get_m</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span> <span class="bp">→</span> <span class="kt">Type</span> <span class="o">(</span><span class="n">u</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span>
+<span class="bp">|</span> <span class="n">fail</span> <span class="o">{</span><span class="n">α</span><span class="o">}</span> <span class="o">:</span> <span class="n">get_m</span> <span class="n">α</span>
+<span class="bp">|</span> <span class="n">pure</span> <span class="o">{</span><span class="n">α</span><span class="o">}</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">get_m</span> <span class="n">α</span>
+<span class="bp">|</span> <span class="n">read</span> <span class="o">{</span><span class="n">α</span><span class="o">}</span> <span class="o">:</span> <span class="o">(</span><span class="n">unsigned</span> <span class="bp">→</span> <span class="n">get_m</span> <span class="n">α</span><span class="o">)</span> <span class="bp">→</span> <span class="n">get_m</span> <span class="n">α</span>
+<span class="bp">|</span> <span class="n">loop</span> <span class="o">{</span><span class="n">α</span> <span class="n">β</span> <span class="n">γ</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">:</span> <span class="n">β</span> <span class="bp">→</span> <span class="o">(</span><span class="n">β</span> <span class="bp">→</span> <span class="n">unsigned</span> <span class="bp">→</span> <span class="n">get_m</span> <span class="o">(</span><span class="n">α</span> <span class="err">⊕</span> <span class="n">β</span><span class="o">))</span> <span class="bp">→</span> <span class="o">(</span><span class="n">α</span> <span class="bp">→</span> <span class="n">get_m</span> <span class="n">γ</span><span class="o">)</span> <span class="bp">→</span> <span class="n">get_m</span> <span class="n">γ</span>
 
-inductive get_m : Type u → Type (u+1)
-| fail {α} : get_m α
-| pure {α} : α → get_m α
-| read {α} : (unsigned → get_m α) → get_m α
-| loop {α β γ : Type u} : β → (β → unsigned → get_m (α ⊕ β)) → (α → get_m γ) → get_m γ
+<span class="kn">open</span> <span class="n">ulift</span>
 
-open ulift
+<span class="n">def</span> <span class="n">sum_ulift</span> <span class="o">(</span><span class="n">α</span> <span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">α</span> <span class="err">⊕</span> <span class="n">β</span><span class="o">)</span> <span class="err">≃</span> <span class="o">(</span><span class="n">ulift</span><span class="bp">.</span><span class="o">{</span><span class="n">v</span><span class="o">}</span> <span class="n">α</span> <span class="err">⊕</span> <span class="n">ulift</span><span class="bp">.</span><span class="o">{</span><span class="n">v</span><span class="o">}</span> <span class="n">β</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">equiv</span><span class="bp">.</span><span class="n">sum_congr</span> <span class="n">equiv</span><span class="bp">.</span><span class="n">ulift</span><span class="bp">.</span><span class="n">symm</span> <span class="n">equiv</span><span class="bp">.</span><span class="n">ulift</span><span class="bp">.</span><span class="n">symm</span><span class="o">)</span>
 
-def sum_ulift (α β : Type u) : (α ⊕ β) ≃ (ulift.{v} α ⊕ ulift.{v} β) :=
-(equiv.sum_congr equiv.ulift.symm equiv.ulift.symm)
+<span class="n">def</span> <span class="n">get_m</span><span class="bp">.</span><span class="n">up</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">.</span><span class="o">{</span><span class="n">max</span> <span class="n">u</span> <span class="n">v</span><span class="o">}}</span> <span class="o">(</span><span class="n">Heq</span> <span class="o">:</span> <span class="n">α</span> <span class="err">≃</span> <span class="n">β</span><span class="o">),</span> <span class="n">get_m</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">get_m</span> <span class="n">β</span>
+<span class="bp">|</span> <span class="bp">_</span> <span class="bp">_</span> <span class="n">Heq</span> <span class="o">(</span><span class="n">get_m</span><span class="bp">.</span><span class="n">pure</span> <span class="n">x</span><span class="o">)</span> <span class="o">:=</span> <span class="n">get_m</span><span class="bp">.</span><span class="n">pure</span> <span class="err">$</span> <span class="n">Heq</span> <span class="n">x</span>
+<span class="bp">|</span> <span class="bp">_</span> <span class="bp">_</span> <span class="n">Heq</span> <span class="o">(</span><span class="n">get_m</span><span class="bp">.</span><span class="n">fail</span><span class="o">)</span> <span class="o">:=</span> <span class="n">get_m</span><span class="bp">.</span><span class="n">fail</span>
+<span class="bp">|</span> <span class="bp">_</span> <span class="bp">_</span> <span class="n">Heq</span> <span class="o">(</span><span class="n">get_m</span><span class="bp">.</span><span class="n">read</span> <span class="n">f</span><span class="o">)</span> <span class="o">:=</span> <span class="n">get_m</span><span class="bp">.</span><span class="n">read</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">w</span><span class="o">,</span> <span class="n">get_m</span><span class="bp">.</span><span class="n">up</span> <span class="n">Heq</span> <span class="o">(</span><span class="n">f</span> <span class="n">w</span><span class="o">))</span>
+<span class="bp">|</span> <span class="bp">_</span> <span class="n">β&#39;</span> <span class="n">Heq</span> <span class="o">(</span><span class="bp">@</span><span class="n">get_m</span><span class="bp">.</span><span class="n">loop</span> <span class="n">α</span> <span class="n">β</span> <span class="n">γ</span> <span class="n">x</span> <span class="n">f</span> <span class="n">g</span><span class="o">)</span> <span class="o">:=</span>
+  <span class="n">get_m</span><span class="bp">.</span><span class="n">loop</span> <span class="o">(</span><span class="n">up</span><span class="bp">.</span><span class="o">{</span><span class="n">v</span><span class="o">}</span> <span class="n">x</span><span class="o">)</span>
+    <span class="o">(</span><span class="bp">λ</span> <span class="n">a</span> <span class="n">b</span><span class="o">,</span> <span class="n">get_m</span><span class="bp">.</span><span class="n">up</span> <span class="o">(</span><span class="n">sum_ulift</span> <span class="n">α</span> <span class="n">β</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="o">(</span><span class="n">down</span><span class="bp">.</span><span class="o">{</span><span class="n">v</span><span class="o">}</span> <span class="n">a</span><span class="o">)</span> <span class="n">b</span><span class="o">))</span>
+    <span class="o">(</span><span class="bp">λ</span> <span class="n">w</span><span class="o">,</span> <span class="n">get_m</span><span class="bp">.</span><span class="n">up</span> <span class="n">Heq</span> <span class="o">(</span><span class="n">g</span> <span class="err">$</span> <span class="n">down</span> <span class="n">w</span><span class="o">))</span>
+</pre></div>
 
-def get_m.up : Π {α : Type u} {β : Type.{max u v}} (Heq : α ≃ β), get_m α → get_m β
-| _ _ Heq (get_m.pure x) := get_m.pure $ Heq x
-| _ _ Heq (get_m.fail) := get_m.fail
-| _ _ Heq (get_m.read f) := get_m.read (λ w, get_m.up Heq (f w))
-| _ β' Heq (@get_m.loop α β γ x f g) :=
-  get_m.loop (up.{v} x)
-    (λ a b, get_m.up (sum_ulift α β) (f (down.{v} a) b))
-    (λ w, get_m.up Heq (g $ down w))
-```
 
-How can I fix that?
+<p>How can I fix that?</p>
 
 #### [ Simon Hudon (Aug 29 2018 at 05:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/structural%20recursion/near/132974185):
-Here's my fix:
+<p>Here's my fix:</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">get_m</span><span class="bp">.</span><span class="n">up&#39;</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">.</span><span class="o">{</span><span class="n">max</span> <span class="n">u</span> <span class="n">v</span><span class="o">}}</span> <span class="o">(</span><span class="n">Heq</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">),</span> <span class="n">get_m</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">get_m</span> <span class="n">β</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="n">α</span> <span class="n">β</span> <span class="n">f</span> <span class="n">x</span><span class="o">,</span> <span class="o">(</span><span class="bp">@</span><span class="n">get_m</span><span class="bp">.</span><span class="n">rec_on</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">α</span> <span class="bp">_</span><span class="o">,</span> <span class="bp">Π</span> <span class="n">β</span><span class="o">,</span> <span class="o">(</span><span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span> <span class="bp">→</span> <span class="n">get_m</span> <span class="n">β</span><span class="o">)</span> <span class="n">α</span> <span class="n">x</span>
+<span class="o">(</span><span class="bp">λ</span> <span class="n">α</span> <span class="n">β</span> <span class="n">f</span><span class="o">,</span> <span class="n">get_m</span><span class="bp">.</span><span class="n">fail</span><span class="o">)</span>
+<span class="o">(</span><span class="bp">λ</span> <span class="n">α</span> <span class="n">x</span> <span class="n">β</span> <span class="n">f</span><span class="o">,</span> <span class="n">get_m</span><span class="bp">.</span><span class="n">pure</span> <span class="err">$</span> <span class="n">f</span> <span class="n">x</span><span class="o">)</span>
+<span class="o">(</span><span class="bp">λ</span> <span class="n">α</span> <span class="n">next</span> <span class="n">get_m_up</span> <span class="n">β</span> <span class="n">f</span><span class="o">,</span> <span class="n">get_m</span><span class="bp">.</span><span class="n">read</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">w</span><span class="o">,</span> <span class="n">get_m_up</span> <span class="n">w</span> <span class="bp">_</span> <span class="n">f</span><span class="o">)</span>
+<span class="o">(</span><span class="bp">λ</span> <span class="n">α</span> <span class="n">β</span> <span class="n">γ</span> <span class="n">x₀</span> <span class="n">body</span> <span class="n">rest</span> <span class="n">get_m_up₀</span> <span class="n">get_m_up₁</span> <span class="n">β&#39;</span> <span class="n">f</span><span class="o">,</span>
+  <span class="n">get_m</span><span class="bp">.</span><span class="n">loop</span> <span class="o">(</span><span class="n">up</span> <span class="n">x₀</span><span class="o">)</span>
+    <span class="o">(</span><span class="bp">λ</span> <span class="n">a</span> <span class="n">b</span><span class="o">,</span> <span class="n">get_m_up₀</span> <span class="o">(</span><span class="n">down</span> <span class="n">a</span><span class="o">)</span> <span class="n">b</span> <span class="o">(</span><span class="n">ulift</span><span class="bp">.</span><span class="o">{</span><span class="n">v</span><span class="o">}</span> <span class="n">α</span> <span class="err">⊕</span> <span class="n">ulift</span><span class="bp">.</span><span class="o">{</span><span class="n">v</span><span class="o">}</span> <span class="n">β</span><span class="o">)</span>
+                      <span class="o">(</span><span class="n">sum_ulift</span> <span class="n">α</span> <span class="n">β</span><span class="o">))</span>
+    <span class="o">(</span><span class="bp">λ</span> <span class="n">r</span><span class="o">,</span> <span class="n">get_m_up₁</span> <span class="o">(</span><span class="n">down</span> <span class="n">r</span><span class="o">)</span> <span class="bp">_</span> <span class="n">f</span><span class="o">)</span> <span class="o">))</span> <span class="n">β</span> <span class="n">f</span>
+</pre></div>
 
-```lean
-def get_m.up' : Π {α : Type u} {β : Type.{max u v}} (Heq : α → β), get_m α → get_m β :=
-λ α β f x, (@get_m.rec_on (λ α _, Π β, (α → β) → get_m β) α x 
-(λ α β f, get_m.fail) 
-(λ α x β f, get_m.pure $ f x)  
-(λ α next get_m_up β f, get_m.read $ λ w, get_m_up w _ f) 
-(λ α β γ x₀ body rest get_m_up₀ get_m_up₁ β' f, 
-  get_m.loop (up x₀) 
-    (λ a b, get_m_up₀ (down a) b (ulift.{v} α ⊕ ulift.{v} β) 
-                      (sum_ulift α β)) 
-    (λ r, get_m_up₁ (down r) _ f) )) β f
-```
 
-I really don't like it but it type checks.
+<p>I really don't like it but it type checks.</p>
 
 
 {% endraw %}

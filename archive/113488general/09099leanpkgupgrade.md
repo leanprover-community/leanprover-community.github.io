@@ -12,37 +12,37 @@ permalink: archive/113488general/09099leanpkgupgrade.html
 
 {% raw %}
 #### [ Patrick Massot (Sep 13 2018 at 21:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leanpkg%20upgrade/near/133906249):
-It seems `leanpkg upgrade` doesn't want to upgrade mathlib past 120635628368ec261e031cefc6d30e0304088b03 Is someone else seeing this?
+<p>It seems <code>leanpkg upgrade</code> doesn't want to upgrade mathlib past 120635628368ec261e031cefc6d30e0304088b03 Is someone else seeing this?</p>
 
 #### [ Kevin Buzzard (Sep 13 2018 at 21:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leanpkg%20upgrade/near/133906305):
-Is your Lean 3.4.1?
+<p>Is your Lean 3.4.1?</p>
 
 #### [ Patrick Massot (Sep 13 2018 at 21:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leanpkg%20upgrade/near/133906317):
-yes
+<p>yes</p>
 
 #### [ Kevin Buzzard (Sep 13 2018 at 21:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leanpkg%20upgrade/near/133906323):
-then I think it upgrades to mathlib branch 3.4.1
+<p>then I think it upgrades to mathlib branch 3.4.1</p>
 
 #### [ Patrick Massot (Sep 13 2018 at 21:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leanpkg%20upgrade/near/133906338):
-no
+<p>no</p>
 
 #### [ Patrick Massot (Sep 13 2018 at 21:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leanpkg%20upgrade/near/133906339):
-things would be much worse then
+<p>things would be much worse then</p>
 
 #### [ Reid Barton (Sep 13 2018 at 21:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leanpkg%20upgrade/near/133906352):
-maybe your upstream is leanprover-community, that one is still at the commit you mention
+<p>maybe your upstream is leanprover-community, that one is still at the commit you mention</p>
 
 #### [ Patrick Massot (Sep 13 2018 at 21:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leanpkg%20upgrade/near/133906406):
-Indeed
+<p>Indeed</p>
 
 #### [ Patrick Massot (Sep 13 2018 at 21:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leanpkg%20upgrade/near/133906412):
-That's silly
+<p>That's silly</p>
 
 #### [ Patrick Massot (Sep 13 2018 at 21:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leanpkg%20upgrade/near/133906421):
-Someone messed up
+<p>Someone messed up</p>
 
 #### [ Patrick Massot (Sep 13 2018 at 21:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leanpkg%20upgrade/near/133906467):
-I took the opportunity to update community mathlib
+<p>I took the opportunity to update community mathlib</p>
 
 
 {% endraw %}

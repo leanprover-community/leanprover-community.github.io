@@ -12,46 +12,45 @@ permalink: archive/113488general/88283funnyerror.html
 
 {% raw %}
 #### [ Kenny Lau (May 31 2018 at 05:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/funny%20error/near/127342120):
-I could not minimize this error.
+<p>I could not minimize this error.</p>
 
 #### [ Kenny Lau (May 31 2018 at 05:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/funny%20error/near/127342121):
-https://gist.github.com/kckennylau/a62295136d2daf48146f6fcdb8e37a49
+<p><a href="https://gist.github.com/kckennylau/a62295136d2daf48146f6fcdb8e37a49" target="_blank" title="https://gist.github.com/kckennylau/a62295136d2daf48146f6fcdb8e37a49">https://gist.github.com/kckennylau/a62295136d2daf48146f6fcdb8e37a49</a></p>
 
 #### [ Kenny Lau (May 31 2018 at 05:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/funny%20error/near/127342122):
-error:
+<p>error:</p>
 
 #### [ Kenny Lau (May 31 2018 at 05:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/funny%20error/near/127342123):
-```lean
-type mismatch at field 'right_inv'
-  ?m_1
-has type
-  function.right_inverse (λ (φ : alg_hom (polynomial R) A), φ.val (finsupp.single 1 1))
-    (λ (r : A),
-       ⟨λ (f : polynomial R),
-          finsupp.sum f (λ (n : ℕ) (c : R), (λ (r : R) (x : A), algebra.f A r * x) c (monoid.pow r n)),
-        _⟩)
-but is expected to have type
-  function.right_inverse (λ (φ : alg_hom (polynomial R) A), φ.val (finsupp.single 1 1))
-    (λ (r : A), ⟨λ (f : polynomial R), finsupp.sum f (λ (n : ℕ) (c : R), c • r ^ n), _⟩)
-```
+<div class="codehilite"><pre><span></span><span class="n">type</span> <span class="n">mismatch</span> <span class="n">at</span> <span class="n">field</span> <span class="err">&#39;</span><span class="n">right_inv&#39;</span>
+  <span class="err">?</span><span class="n">m_1</span>
+<span class="n">has</span> <span class="n">type</span>
+  <span class="n">function</span><span class="bp">.</span><span class="n">right_inverse</span> <span class="o">(</span><span class="bp">λ</span> <span class="o">(</span><span class="n">φ</span> <span class="o">:</span> <span class="n">alg_hom</span> <span class="o">(</span><span class="n">polynomial</span> <span class="n">R</span><span class="o">)</span> <span class="n">A</span><span class="o">),</span> <span class="n">φ</span><span class="bp">.</span><span class="n">val</span> <span class="o">(</span><span class="n">finsupp</span><span class="bp">.</span><span class="n">single</span> <span class="mi">1</span> <span class="mi">1</span><span class="o">))</span>
+    <span class="o">(</span><span class="bp">λ</span> <span class="o">(</span><span class="n">r</span> <span class="o">:</span> <span class="n">A</span><span class="o">),</span>
+       <span class="bp">⟨λ</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">polynomial</span> <span class="n">R</span><span class="o">),</span>
+          <span class="n">finsupp</span><span class="bp">.</span><span class="n">sum</span> <span class="n">f</span> <span class="o">(</span><span class="bp">λ</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">c</span> <span class="o">:</span> <span class="n">R</span><span class="o">),</span> <span class="o">(</span><span class="bp">λ</span> <span class="o">(</span><span class="n">r</span> <span class="o">:</span> <span class="n">R</span><span class="o">)</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">A</span><span class="o">),</span> <span class="n">algebra</span><span class="bp">.</span><span class="n">f</span> <span class="n">A</span> <span class="n">r</span> <span class="bp">*</span> <span class="n">x</span><span class="o">)</span> <span class="n">c</span> <span class="o">(</span><span class="n">monoid</span><span class="bp">.</span><span class="n">pow</span> <span class="n">r</span> <span class="n">n</span><span class="o">)),</span>
+        <span class="bp">_⟩</span><span class="o">)</span>
+<span class="n">but</span> <span class="n">is</span> <span class="n">expected</span> <span class="n">to</span> <span class="k">have</span> <span class="n">type</span>
+  <span class="n">function</span><span class="bp">.</span><span class="n">right_inverse</span> <span class="o">(</span><span class="bp">λ</span> <span class="o">(</span><span class="n">φ</span> <span class="o">:</span> <span class="n">alg_hom</span> <span class="o">(</span><span class="n">polynomial</span> <span class="n">R</span><span class="o">)</span> <span class="n">A</span><span class="o">),</span> <span class="n">φ</span><span class="bp">.</span><span class="n">val</span> <span class="o">(</span><span class="n">finsupp</span><span class="bp">.</span><span class="n">single</span> <span class="mi">1</span> <span class="mi">1</span><span class="o">))</span>
+    <span class="o">(</span><span class="bp">λ</span> <span class="o">(</span><span class="n">r</span> <span class="o">:</span> <span class="n">A</span><span class="o">),</span> <span class="bp">⟨λ</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">polynomial</span> <span class="n">R</span><span class="o">),</span> <span class="n">finsupp</span><span class="bp">.</span><span class="n">sum</span> <span class="n">f</span> <span class="o">(</span><span class="bp">λ</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">c</span> <span class="o">:</span> <span class="n">R</span><span class="o">),</span> <span class="n">c</span> <span class="err">•</span> <span class="n">r</span> <span class="err">^</span> <span class="n">n</span><span class="o">),</span> <span class="bp">_⟩</span><span class="o">)</span>
+</pre></div>
 
 #### [ Kenny Lau (May 31 2018 at 05:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/funny%20error/near/127342164):
-where `?m_1` was a literal underscore
+<p>where <code>?m_1</code> was a literal underscore</p>
 
 #### [ Kenny Lau (May 31 2018 at 05:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/funny%20error/near/127342165):
-that's it folks, an underscore has a type error
+<p>that's it folks, an underscore has a type error</p>
 
 #### [ Kenny Lau (May 31 2018 at 05:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/funny%20error/near/127342171):
-@**Mario Carneiro**
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span></p>
 
 #### [ Kevin Buzzard (May 31 2018 at 06:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/funny%20error/near/127344095):
-I think we've seen this happen before
+<p>I think we've seen this happen before</p>
 
 #### [ Kevin Buzzard (May 31 2018 at 06:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/funny%20error/near/127344099):
-were you making a big structure and doing crazy stuff like sorrying out constants?
+<p>were you making a big structure and doing crazy stuff like sorrying out constants?</p>
 
 #### [ Kevin Buzzard (May 31 2018 at 06:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/funny%20error/near/127344193):
-I find these sorts of things a bit annoying to do for reasons like this
+<p>I find these sorts of things a bit annoying to do for reasons like this</p>
 
 
 {% endraw %}

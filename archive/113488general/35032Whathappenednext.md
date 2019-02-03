@@ -12,46 +12,44 @@ permalink: archive/113488general/35032Whathappenednext.html
 
 {% raw %}
 #### [ Kevin Buzzard (Apr 04 2018 at 21:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20happened%20next%3F/near/124638598):
-```
-example (d : ℕ) (H : 1  =  2  * nat.succ d) : 1  =  2  * d +  2  :=
+<div class="codehilite"><pre><span></span>example (d : ℕ) (H : 1  =  2  * nat.succ d) : 1  =  2  * d +  2  :=
 begin
 rw H,
 -- goal now?
 admit,
 end
-```
+</pre></div>
 
 #### [ Kevin Buzzard (Apr 04 2018 at 21:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20happened%20next%3F/near/124638609):
-Took me slightly by surprise at the time.
+<p>Took me slightly by surprise at the time.</p>
 
 #### [ Mario Carneiro (Apr 04 2018 at 22:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20happened%20next%3F/near/124639398):
-heh, I assume `2` got rewritten?
+<p>heh, I assume <code>2</code> got rewritten?</p>
 
 #### [ Kevin Buzzard (Apr 04 2018 at 22:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20happened%20next%3F/near/124640156):
-That was part of it.
+<p>That was part of it.</p>
 
 #### [ Kevin Buzzard (Apr 04 2018 at 22:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20happened%20next%3F/near/124640252):
-The other phenomenon shows itself here:
-```lean
-example (x y : ℕ) (H : 1 = x) : 2 = y :=
-begin
-rw H,
--- goal now?
-admit,
-end
-```
+<p>The other phenomenon shows itself here:</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="mi">1</span> <span class="bp">=</span> <span class="n">x</span><span class="o">)</span> <span class="o">:</span> <span class="mi">2</span> <span class="bp">=</span> <span class="n">y</span> <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="n">rw</span> <span class="n">H</span><span class="o">,</span>
+<span class="c1">-- goal now?</span>
+<span class="n">admit</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
 
 #### [ Kevin Buzzard (Apr 04 2018 at 22:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20happened%20next%3F/near/124640326):
-Oh I have just realised what is going on.
+<p>Oh I have just realised what is going on.</p>
 
 #### [ Kevin Buzzard (Apr 04 2018 at 22:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20happened%20next%3F/near/124640331):
-So the goal becomes
+<p>So the goal becomes</p>
 
 #### [ Kevin Buzzard (Apr 04 2018 at 22:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20happened%20next%3F/near/124640335):
-` bit0 x = y `
+<p><code> bit0 x = y </code></p>
 
 #### [ Kevin Buzzard (Apr 04 2018 at 22:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20happened%20next%3F/near/124640345):
-but that's because `2` isn't defined to be `succ 1` here, it's defined to be `bit0 1`
+<p>but that's because <code>2</code> isn't defined to be <code>succ 1</code> here, it's defined to be <code>bit0 1</code></p>
 
 
 {% endraw %}

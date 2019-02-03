@@ -12,79 +12,78 @@ permalink: archive/113488general/98253areproofsirrelevant.html
 
 {% raw %}
 #### [ Kenny Lau (Jun 15 2018 at 16:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/are%20proofs%20irrelevant%3F/near/128121844):
-(working example, far from minimal, sorry for that)
-https://gist.github.com/kckennylau/4a009e228980fdbe9f6c879f9fa0eca5
-Excerpt:
-```lean
-instance abelianization.topological_group (G : Type*) [topological_space G] [group G]
-  [topological_group G] : topological_group (abelianization G) :=
+<p>(working example, far from minimal, sorry for that)<br>
+<a href="https://gist.github.com/kckennylau/4a009e228980fdbe9f6c879f9fa0eca5" target="_blank" title="https://gist.github.com/kckennylau/4a009e228980fdbe9f6c879f9fa0eca5">https://gist.github.com/kckennylau/4a009e228980fdbe9f6c879f9fa0eca5</a><br>
+Excerpt:</p>
+<div class="codehilite"><pre><span></span><span class="kn">instance</span> <span class="n">abelianization</span><span class="bp">.</span><span class="n">topological_group</span> <span class="o">(</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">[</span><span class="n">topological_space</span> <span class="n">G</span><span class="o">]</span> <span class="o">[</span><span class="n">group</span> <span class="n">G</span><span class="o">]</span>
+  <span class="o">[</span><span class="n">topological_group</span> <span class="n">G</span><span class="o">]</span> <span class="o">:</span> <span class="n">topological_group</span> <span class="o">(</span><span class="n">abelianization</span> <span class="n">G</span><span class="o">)</span> <span class="o">:=</span>
 
-topological_group.coinduced (quot.mk (rel G)) quot.exists_rep $ λ S hs,
-have (⋃ x : { x // quot.mk (rel G) x = 1}, (λ y, x.1 * y) ⁻¹' S)
-    = quot.mk (rel G) ⁻¹' (quot.mk (rel G) '' S),
-  from set.ext $ λ z,
-  ⟨λ ⟨S, ⟨⟨g, h1⟩, rfl⟩, h2⟩, ⟨g * z, h2, by simp [is_group_hom.mul (quot.mk (rel G)), h1]⟩,
-  λ ⟨g, h1, h2⟩, ⟨_, ⟨⟨g * z⁻¹, by simp [is_group_hom.mul (quot.mk (rel G)), is_group_hom.inv (quot.mk (rel G)), h2]⟩, rfl⟩, by simp [h1]⟩⟩,
-this ▸ is_open_Union $ λ x : {x // quot.mk (rel G) x = 1},
-continuous_mul continuous_const continuous_id _ hs
+<span class="n">topological_group</span><span class="bp">.</span><span class="n">coinduced</span> <span class="o">(</span><span class="n">quot</span><span class="bp">.</span><span class="n">mk</span> <span class="o">(</span><span class="n">rel</span> <span class="n">G</span><span class="o">))</span> <span class="n">quot</span><span class="bp">.</span><span class="n">exists_rep</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">S</span> <span class="n">hs</span><span class="o">,</span>
+<span class="k">have</span> <span class="o">(</span><span class="err">⋃</span> <span class="n">x</span> <span class="o">:</span> <span class="o">{</span> <span class="n">x</span> <span class="bp">//</span> <span class="n">quot</span><span class="bp">.</span><span class="n">mk</span> <span class="o">(</span><span class="n">rel</span> <span class="n">G</span><span class="o">)</span> <span class="n">x</span> <span class="bp">=</span> <span class="mi">1</span><span class="o">},</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">y</span><span class="o">,</span> <span class="n">x</span><span class="bp">.</span><span class="mi">1</span> <span class="bp">*</span> <span class="n">y</span><span class="o">)</span> <span class="bp">⁻¹</span><span class="err">&#39;</span> <span class="n">S</span><span class="o">)</span>
+    <span class="bp">=</span> <span class="n">quot</span><span class="bp">.</span><span class="n">mk</span> <span class="o">(</span><span class="n">rel</span> <span class="n">G</span><span class="o">)</span> <span class="bp">⁻¹</span><span class="err">&#39;</span> <span class="o">(</span><span class="n">quot</span><span class="bp">.</span><span class="n">mk</span> <span class="o">(</span><span class="n">rel</span> <span class="n">G</span><span class="o">)</span> <span class="err">&#39;&#39;</span> <span class="n">S</span><span class="o">),</span>
+  <span class="k">from</span> <span class="n">set</span><span class="bp">.</span><span class="n">ext</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">z</span><span class="o">,</span>
+  <span class="bp">⟨λ</span> <span class="bp">⟨</span><span class="n">S</span><span class="o">,</span> <span class="bp">⟨⟨</span><span class="n">g</span><span class="o">,</span> <span class="n">h1</span><span class="bp">⟩</span><span class="o">,</span> <span class="n">rfl</span><span class="bp">⟩</span><span class="o">,</span> <span class="n">h2</span><span class="bp">⟩</span><span class="o">,</span> <span class="bp">⟨</span><span class="n">g</span> <span class="bp">*</span> <span class="n">z</span><span class="o">,</span> <span class="n">h2</span><span class="o">,</span> <span class="k">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">is_group_hom</span><span class="bp">.</span><span class="n">mul</span> <span class="o">(</span><span class="n">quot</span><span class="bp">.</span><span class="n">mk</span> <span class="o">(</span><span class="n">rel</span> <span class="n">G</span><span class="o">)),</span> <span class="n">h1</span><span class="o">]</span><span class="bp">⟩</span><span class="o">,</span>
+  <span class="bp">λ</span> <span class="bp">⟨</span><span class="n">g</span><span class="o">,</span> <span class="n">h1</span><span class="o">,</span> <span class="n">h2</span><span class="bp">⟩</span><span class="o">,</span> <span class="bp">⟨_</span><span class="o">,</span> <span class="bp">⟨⟨</span><span class="n">g</span> <span class="bp">*</span> <span class="n">z</span><span class="bp">⁻¹</span><span class="o">,</span> <span class="k">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">is_group_hom</span><span class="bp">.</span><span class="n">mul</span> <span class="o">(</span><span class="n">quot</span><span class="bp">.</span><span class="n">mk</span> <span class="o">(</span><span class="n">rel</span> <span class="n">G</span><span class="o">)),</span> <span class="n">is_group_hom</span><span class="bp">.</span><span class="n">inv</span> <span class="o">(</span><span class="n">quot</span><span class="bp">.</span><span class="n">mk</span> <span class="o">(</span><span class="n">rel</span> <span class="n">G</span><span class="o">)),</span> <span class="n">h2</span><span class="o">]</span><span class="bp">⟩</span><span class="o">,</span> <span class="n">rfl</span><span class="bp">⟩</span><span class="o">,</span> <span class="k">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">h1</span><span class="o">]</span><span class="bp">⟩⟩</span><span class="o">,</span>
+<span class="n">this</span> <span class="bp">▸</span> <span class="n">is_open_Union</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">x</span> <span class="o">:</span> <span class="o">{</span><span class="n">x</span> <span class="bp">//</span> <span class="n">quot</span><span class="bp">.</span><span class="n">mk</span> <span class="o">(</span><span class="n">rel</span> <span class="n">G</span><span class="o">)</span> <span class="n">x</span> <span class="bp">=</span> <span class="mi">1</span><span class="o">},</span>
+<span class="n">continuous_mul</span> <span class="n">continuous_const</span> <span class="n">continuous_id</span> <span class="bp">_</span> <span class="n">hs</span>
 
-/-{ continuous_mul := λ S hs1, is_open_prod_iff.2 $
-    have _ := is_open_prod_iff.1 (topological_monoid.continuous_mul G _ hs1),
-    by refine quot.ind (λ x, _); refine quot.ind (λ y, _);
-    from λ h, let ⟨u, v, hu, hv, hxu, hyv, H⟩ := this x y h in
-    ⟨quot.mk _ '' u, quot.mk _ '' v,
-    show is_open (quot.mk (rel G) ⁻¹' (quot.mk (rel G) '' u)),
-      from have (⋃ x : { x // quot.mk (rel G) x = 1}, (λ y, x.1 * y) ⁻¹' u)
-          = quot.mk (rel G) ⁻¹' (quot.mk (rel G) '' u),
-        from set.ext $ λ z,
-        ⟨λ ⟨S, ⟨⟨g, h1⟩, rfl⟩, h2⟩, ⟨g * z, h2, by simp [is_group_hom.mul (quot.mk (rel G)), h1]⟩,
-        λ ⟨g, h1, h2⟩, ⟨_, ⟨⟨g * z⁻¹, by simp [is_group_hom.mul (quot.mk (rel G)), is_group_hom.inv (quot.mk (rel G)), h2]⟩, rfl⟩, by simp [h1]⟩⟩,
-      this ▸ is_open_Union $ λ x : {x // quot.mk (rel G) x = 1},
-      (continuous_mul continuous_const continuous_id) _ hu,
-    show is_open (quot.mk (rel G) ⁻¹' (quot.mk (rel G) '' v)),
-      from have (⋃ x : { x // quot.mk (rel G) x = 1}, (λ y, x.1 * y) ⁻¹' v)
-          = quot.mk (rel G) ⁻¹' (quot.mk (rel G) '' v),
-        from set.ext $ λ z,
-        ⟨λ ⟨S, ⟨⟨g, h1⟩, rfl⟩, h2⟩, ⟨g * z, h2, by simp [is_group_hom.mul (quot.mk (rel G)), h1]⟩,
-        λ ⟨g, h1, h2⟩, ⟨_, ⟨⟨g * z⁻¹, by simp [is_group_hom.mul (quot.mk (rel G)), is_group_hom.inv (quot.mk (rel G)), h2]⟩, rfl⟩, by simp [h1]⟩⟩,
-      this ▸ is_open_Union $ λ x : {x // quot.mk (rel G) x = 1},
-      (continuous_mul continuous_const continuous_id) _ hv,
-    ⟨x, hxu, rfl⟩, ⟨y, hyv, rfl⟩,
-    λ ⟨p, q⟩, by refine quot.induction_on p (λ m, _);
-      refine quot.induction_on q (λ n, _);
-      from λ ⟨⟨P, hp1, hp2⟩, ⟨Q, hq1, hq2⟩⟩,
-      suffices quot.mk (rel G) P * quot.mk (rel G) Q ∈ S,
-      by rw [hp2, hq2] at this; simpa using this,
-      @H (P, Q) ⟨hp1, hq1⟩⟩,
-  continuous_inv := λ S hs,
-    show is_open (quot.mk (rel G) ⁻¹' ((λ p : abelianization G, p⁻¹) ⁻¹' S)),
-    from have (λ p : G, p⁻¹) ⁻¹' (quot.mk (rel G) ⁻¹' S)
-        = quot.mk (rel G) ⁻¹' ((λ p : abelianization G, p⁻¹) ⁻¹' S),
-      from set.ext $ λ z, by simp [is_group_hom.inv (quot.mk (rel G))],
-    this ▸ (topological_group.continuous_inv G _ $
-      continuous_coinduced_rng _ hs) }-/
-```
+<span class="c">/-</span><span class="cm">{ continuous_mul := λ S hs1, is_open_prod_iff.2 $</span>
+<span class="cm">    have _ := is_open_prod_iff.1 (topological_monoid.continuous_mul G _ hs1),</span>
+<span class="cm">    by refine quot.ind (λ x, _); refine quot.ind (λ y, _);</span>
+<span class="cm">    from λ h, let ⟨u, v, hu, hv, hxu, hyv, H⟩ := this x y h in</span>
+<span class="cm">    ⟨quot.mk _ &#39;&#39; u, quot.mk _ &#39;&#39; v,</span>
+<span class="cm">    show is_open (quot.mk (rel G) ⁻¹&#39; (quot.mk (rel G) &#39;&#39; u)),</span>
+<span class="cm">      from have (⋃ x : { x // quot.mk (rel G) x = 1}, (λ y, x.1 * y) ⁻¹&#39; u)</span>
+<span class="cm">          = quot.mk (rel G) ⁻¹&#39; (quot.mk (rel G) &#39;&#39; u),</span>
+<span class="cm">        from set.ext $ λ z,</span>
+<span class="cm">        ⟨λ ⟨S, ⟨⟨g, h1⟩, rfl⟩, h2⟩, ⟨g * z, h2, by simp [is_group_hom.mul (quot.mk (rel G)), h1]⟩,</span>
+<span class="cm">        λ ⟨g, h1, h2⟩, ⟨_, ⟨⟨g * z⁻¹, by simp [is_group_hom.mul (quot.mk (rel G)), is_group_hom.inv (quot.mk (rel G)), h2]⟩, rfl⟩, by simp [h1]⟩⟩,</span>
+<span class="cm">      this ▸ is_open_Union $ λ x : {x // quot.mk (rel G) x = 1},</span>
+<span class="cm">      (continuous_mul continuous_const continuous_id) _ hu,</span>
+<span class="cm">    show is_open (quot.mk (rel G) ⁻¹&#39; (quot.mk (rel G) &#39;&#39; v)),</span>
+<span class="cm">      from have (⋃ x : { x // quot.mk (rel G) x = 1}, (λ y, x.1 * y) ⁻¹&#39; v)</span>
+<span class="cm">          = quot.mk (rel G) ⁻¹&#39; (quot.mk (rel G) &#39;&#39; v),</span>
+<span class="cm">        from set.ext $ λ z,</span>
+<span class="cm">        ⟨λ ⟨S, ⟨⟨g, h1⟩, rfl⟩, h2⟩, ⟨g * z, h2, by simp [is_group_hom.mul (quot.mk (rel G)), h1]⟩,</span>
+<span class="cm">        λ ⟨g, h1, h2⟩, ⟨_, ⟨⟨g * z⁻¹, by simp [is_group_hom.mul (quot.mk (rel G)), is_group_hom.inv (quot.mk (rel G)), h2]⟩, rfl⟩, by simp [h1]⟩⟩,</span>
+<span class="cm">      this ▸ is_open_Union $ λ x : {x // quot.mk (rel G) x = 1},</span>
+<span class="cm">      (continuous_mul continuous_const continuous_id) _ hv,</span>
+<span class="cm">    ⟨x, hxu, rfl⟩, ⟨y, hyv, rfl⟩,</span>
+<span class="cm">    λ ⟨p, q⟩, by refine quot.induction_on p (λ m, _);</span>
+<span class="cm">      refine quot.induction_on q (λ n, _);</span>
+<span class="cm">      from λ ⟨⟨P, hp1, hp2⟩, ⟨Q, hq1, hq2⟩⟩,</span>
+<span class="cm">      suffices quot.mk (rel G) P * quot.mk (rel G) Q ∈ S,</span>
+<span class="cm">      by rw [hp2, hq2] at this; simpa using this,</span>
+<span class="cm">      @H (P, Q) ⟨hp1, hq1⟩⟩,</span>
+<span class="cm">  continuous_inv := λ S hs,</span>
+<span class="cm">    show is_open (quot.mk (rel G) ⁻¹&#39; ((λ p : abelianization G, p⁻¹) ⁻¹&#39; S)),</span>
+<span class="cm">    from have (λ p : G, p⁻¹) ⁻¹&#39; (quot.mk (rel G) ⁻¹&#39; S)</span>
+<span class="cm">        = quot.mk (rel G) ⁻¹&#39; ((λ p : abelianization G, p⁻¹) ⁻¹&#39; S),</span>
+<span class="cm">      from set.ext $ λ z, by simp [is_group_hom.inv (quot.mk (rel G))],</span>
+<span class="cm">    this ▸ (topological_group.continuous_inv G _ $</span>
+<span class="cm">      continuous_coinduced_rng _ hs) }-/</span>
+</pre></div>
 
 #### [ Kenny Lau (Jun 15 2018 at 16:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/are%20proofs%20irrelevant%3F/near/128121848):
-Problem: If I use the first proof, then there is error below; if I use the second proof, then there is no error.
+<p>Problem: If I use the first proof, then there is error below; if I use the second proof, then there is no error.</p>
 
 #### [ Kenny Lau (Jun 15 2018 at 16:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/are%20proofs%20irrelevant%3F/near/128121852):
-@**Mario Carneiro** please help
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> please help</p>
 
 #### [ Mario Carneiro (Jun 15 2018 at 16:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/are%20proofs%20irrelevant%3F/near/128122041):
-why would they be the same?
+<p>why would they be the same?</p>
 
 #### [ Kenny Lau (Jun 15 2018 at 16:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/are%20proofs%20irrelevant%3F/near/128122048):
-because they're just proofs?
+<p>because they're just proofs?</p>
 
 #### [ Mario Carneiro (Jun 15 2018 at 16:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/are%20proofs%20irrelevant%3F/near/128122055):
-it's an instance
+<p>it's an instance</p>
 
 #### [ Kenny Lau (Jun 15 2018 at 16:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/are%20proofs%20irrelevant%3F/near/128122058):
-what should I do?
+<p>what should I do?</p>
 
 #### [ Kenny Lau (Jun 15 2018 at 16:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/are%20proofs%20irrelevant%3F/near/128122146):
-ah I solved it by making `topological_group.coinduced` a theorem
+<p>ah I solved it by making <code>topological_group.coinduced</code> a theorem</p>
 
 
 {% endraw %}

@@ -12,65 +12,64 @@ permalink: archive/144837PRreviews/84184568metricnamespace.html
 
 {% raw %}
 #### [ Sebastien Gouezel (Jan 13 2019 at 21:28)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23568%20metric%20namespace/near/155045224):
-After Mario's alternative proposition for the metric namespace, I fixed the build. The following line in `normed_space.lean`
-```lean
-by simpa using tendsto_mul limf' limg',
-```
-became a timeout. I can fix the build by replacing this line with
-```lean
-{ have := tendsto_mul limf' limg',
-  simp at this,
-  exact this },
-```
-(which should be essentially equivalent if I understand what `simpa` does) but this is not really satisfactory.
+<p>After Mario's alternative proposition for the metric namespace, I fixed the build. The following line in <code>normed_space.lean</code></p>
+<div class="codehilite"><pre><span></span><span class="k">by</span> <span class="n">simpa</span> <span class="kn">using</span> <span class="n">tendsto_mul</span> <span class="n">limf&#39;</span> <span class="n">limg&#39;</span><span class="o">,</span>
+</pre></div>
 
-If I understand what is going on, the problem is that I have a fact `limg' : tendsto (λ (x : γ), ∥g x∥) e (nhds ∥b∥)` in the context. The `simpa` call tries to close the goal using `by assumption`, which tries all the things in the context to close the goal. In particular, it tries `limg'`, but the unifier is not able to realize that it does not match the goal, and times out while trying. Indeed, if I replace the last line `exact this` with `exact limg'`, I get a timeout.
 
-My guess is that the namespace change has changed the order in which things are tried by `by assumption` (alphabetical order or something?): before the change, `limg'` was tried after `this` and everything went smoothly, and now this is not the case any more, but only by accident. It seems to me that the change only reveals a problem that was already there before.
+<p>became a timeout. I can fix the build by replacing this line with</p>
+<div class="codehilite"><pre><span></span><span class="o">{</span> <span class="k">have</span> <span class="o">:=</span> <span class="n">tendsto_mul</span> <span class="n">limf&#39;</span> <span class="n">limg&#39;</span><span class="o">,</span>
+  <span class="n">simp</span> <span class="n">at</span> <span class="n">this</span><span class="o">,</span>
+  <span class="n">exact</span> <span class="n">this</span> <span class="o">},</span>
+</pre></div>
 
-Mario has already written on this chat that `by assumption`is not always safe, and this is another instance. Is there anything to be done here (marking something as irreducible somewhere?), or should we just accept this as a fact of life?
+
+<p>(which should be essentially equivalent if I understand what <code>simpa</code> does) but this is not really satisfactory.</p>
+<p>If I understand what is going on, the problem is that I have a fact <code>limg' : tendsto (λ (x : γ), ∥g x∥) e (nhds ∥b∥)</code> in the context. The <code>simpa</code> call tries to close the goal using <code>by assumption</code>, which tries all the things in the context to close the goal. In particular, it tries <code>limg'</code>, but the unifier is not able to realize that it does not match the goal, and times out while trying. Indeed, if I replace the last line <code>exact this</code> with <code>exact limg'</code>, I get a timeout.</p>
+<p>My guess is that the namespace change has changed the order in which things are tried by <code>by assumption</code> (alphabetical order or something?): before the change, <code>limg'</code> was tried after <code>this</code> and everything went smoothly, and now this is not the case any more, but only by accident. It seems to me that the change only reveals a problem that was already there before.</p>
+<p>Mario has already written on this chat that <code>by assumption</code>is not always safe, and this is another instance. Is there anything to be done here (marking something as irreducible somewhere?), or should we just accept this as a fact of life?</p>
 
 #### [ Chris Hughes (Jan 13 2019 at 21:31)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23568%20metric%20namespace/near/155045311):
-`clear limg'` first. A long term solution is to stop assumption unfolding things quite as aggressively, I think it even unfold irreducibles at the moment.
+<p><code>clear limg'</code> first. A long term solution is to stop assumption unfolding things quite as aggressively, I think it even unfold irreducibles at the moment.</p>
 
 #### [ Reid Barton (Jan 13 2019 at 21:32)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23568%20metric%20namespace/near/155045370):
-Why does the `using` form of `simpa` need to use assumption though? Shouldn't it just use `exact`?
+<p>Why does the <code>using</code> form of <code>simpa</code> need to use assumption though? Shouldn't it just use <code>exact</code>?</p>
 
 #### [ Reid Barton (Jan 13 2019 at 21:34)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23568%20metric%20namespace/near/155045432):
-I see it is documented that it uses `assumption`, but I don't understand the purpose--surely we always want to use the thing specified with `using` when it is present
+<p>I see it is documented that it uses <code>assumption</code>, but I don't understand the purpose--surely we always want to use the thing specified with <code>using</code> when it is present</p>
 
 #### [ Sebastien Gouezel (Jan 13 2019 at 21:35)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23568%20metric%20namespace/near/155045449):
-I can not clear `limg'`, I need it below. Replacing one line by three lines is not too bad, as a workaround, but fixing `simpa` or `assumption` would definitely be better.
+<p>I can not clear <code>limg'</code>, I need it below. Replacing one line by three lines is not too bad, as a workaround, but fixing <code>simpa</code> or <code>assumption</code> would definitely be better.</p>
 
 #### [ Sebastien Gouezel (Jan 13 2019 at 21:39)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23568%20metric%20namespace/near/155045580):
-```quote
-I see it is documented that it uses `assumption`, but I don't understand the purpose--surely we always want to use the thing specified with `using` when it is present
-```
- My guess is that it is for implementation purposes: it makes it possible to use the same code for the versions with and without `using`.
+<blockquote>
+<p>I see it is documented that it uses <code>assumption</code>, but I don't understand the purpose--surely we always want to use the thing specified with <code>using</code> when it is present</p>
+</blockquote>
+<p>My guess is that it is for implementation purposes: it makes it possible to use the same code for the versions with and without <code>using</code>.</p>
 
 #### [ Reid Barton (Jan 13 2019 at 21:42)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23568%20metric%20namespace/near/155045703):
-I'll try to make it use the provided term to close the goal and see whether it breaks everything.
+<p>I'll try to make it use the provided term to close the goal and see whether it breaks everything.</p>
 
 #### [ Patrick Massot (Jan 13 2019 at 21:43)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23568%20metric%20namespace/near/155045718):
-I guess you could probably use `have lim1 : tendsto (λ x, ∥f x - s∥ * ∥g x∥) e (nhds 0) := (zero_mul ∥b∥) ▸ tendsto_mul limf' limg', ` but this is very annoying. I think that every single time I used `tendsto_add` or `tendsto_mul` I was frustrated by having to care about such trivial computation, either explicitly or using `simp`. It probably means we need a limit computation tactic.
+<p>I guess you could probably use <code>have lim1 : tendsto (λ x, ∥f x - s∥ * ∥g x∥) e (nhds 0) := (zero_mul ∥b∥) ▸ tendsto_mul limf' limg', </code> but this is very annoying. I think that every single time I used <code>tendsto_add</code> or <code>tendsto_mul</code> I was frustrated by having to care about such trivial computation, either explicitly or using <code>simp</code>. It probably means we need a limit computation tactic.</p>
 
 #### [ Sebastien Gouezel (Jan 13 2019 at 21:50)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23568%20metric%20namespace/near/155045954):
-A one-liner, yeah!
+<p>A one-liner, yeah!</p>
 
 #### [ Sebastien Gouezel (Jan 13 2019 at 21:52)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23568%20metric%20namespace/near/155046024):
-Normally, `back` (together with marking most limit lemmas with, say, `limit_rules`) should make limits much less painful, but it will not work before Lean 4 as `apply` unfolds too much...
+<p>Normally, <code>back</code> (together with marking most limit lemmas with, say, <code>limit_rules</code>) should make limits much less painful, but it will not work before Lean 4 as <code>apply</code> unfolds too much...</p>
 
 #### [ Patrick Massot (Jan 13 2019 at 21:54)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23568%20metric%20namespace/near/155046081):
-It should still be possible to write some tactic, even in Lean 3, but I have too much to do. For instance I need to prepare a lecture for tomorrow  morning...
+<p>It should still be possible to write some tactic, even in Lean 3, but I have too much to do. For instance I need to prepare a lecture for tomorrow  morning...</p>
 
 #### [ Chris Hughes (Jan 13 2019 at 22:01)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23568%20metric%20namespace/near/155046281):
-I think `clear` only clears for the current goal, so it should be possible to use it.
+<p>I think <code>clear</code> only clears for the current goal, so it should be possible to use it.</p>
 
 #### [ Reid Barton (Jan 13 2019 at 22:23)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23568%20metric%20namespace/near/155046969):
-@**Sebastien Gouezel** , try with https://github.com/leanprover-community/mathlib/tree/rwbarton-simpa?
+<p><span class="user-mention" data-user-id="110050">@Sebastien Gouezel</span> , try with <a href="https://github.com/leanprover-community/mathlib/tree/rwbarton-simpa" target="_blank" title="https://github.com/leanprover-community/mathlib/tree/rwbarton-simpa">https://github.com/leanprover-community/mathlib/tree/rwbarton-simpa</a>?</p>
 
 #### [ Sebastien Gouezel (Jan 13 2019 at 22:59)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23568%20metric%20namespace/near/155048122):
-Works like a charm! And it should be a definitive improvement on all points on view, including clarity (the proof in padics you had to fix was probably a mistake) and speed (no need to check everything in the context).
+<p>Works like a charm! And it should be a definitive improvement on all points on view, including clarity (the proof in padics you had to fix was probably a mistake) and speed (no need to check everything in the context).</p>
 
 
 {% endraw %}

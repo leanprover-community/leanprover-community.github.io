@@ -12,452 +12,407 @@ permalink: archive/113488general/52230tacticforapplyingatappropriateassumptions.
 
 {% raw %}
 #### [ Sean Leather (May 03 2018 at 10:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20for%20applying%20at%20appropriate%20assumptions/near/126035144):
-I've got a theorem:
+<p>I've got a theorem:</p>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">lc_value</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">e</span> <span class="o">:</span> <span class="n">exp</span> <span class="n">V</span><span class="o">},</span> <span class="n">e</span><span class="bp">.</span><span class="n">value</span> <span class="bp">→</span> <span class="n">e</span><span class="bp">.</span><span class="n">lc</span>
+</pre></div>
 
-```lean
-theorem lc_value : ∀ {e : exp V}, e.value → e.lc
-```
 
-Is there a tactical way to apply this theorem to all assumptions matching `_.value` to produce more assumptions `_.lc`?
+<p>Is there a tactical way to apply this theorem to all assumptions matching <code>_.value</code> to produce more assumptions <code>_.lc</code>?</p>
 
 #### [ Sean Leather (May 03 2018 at 14:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20for%20applying%20at%20appropriate%20assumptions/near/126043003):
-How's this for my first attempt at writing a tactic? It can be improved, of course.
-
-```lean
-meta def apply_matching (p : parse texpr) : tactic expr :=
-  do e ← to_expr p,
-     et ← infer_type e,
-     guard et.is_arrow <|> fail format!"'apply_matching' expected a function, got '{et}'",
-     any_hyp $ λ h, do
-       ht ← infer_type h,
-       unify ht et.binding_domain,
-       n ← mk_fresh_name,
-       note n none (expr.mk_app e [h])
-```
+<p>How's this for my first attempt at writing a tactic? It can be improved, of course.</p>
+<div class="codehilite"><pre><span></span><span class="n">meta</span> <span class="n">def</span> <span class="n">apply_matching</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="n">parse</span> <span class="n">texpr</span><span class="o">)</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">expr</span> <span class="o">:=</span>
+  <span class="n">do</span> <span class="n">e</span> <span class="err">←</span> <span class="n">to_expr</span> <span class="n">p</span><span class="o">,</span>
+     <span class="n">et</span> <span class="err">←</span> <span class="n">infer_type</span> <span class="n">e</span><span class="o">,</span>
+     <span class="n">guard</span> <span class="n">et</span><span class="bp">.</span><span class="n">is_arrow</span> <span class="bp">&lt;|&gt;</span> <span class="n">fail</span> <span class="n">format</span><span class="bp">!</span><span class="s2">&quot;&#39;apply_matching&#39; expected a function, got &#39;{et}&#39;&quot;</span><span class="o">,</span>
+     <span class="n">any_hyp</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">h</span><span class="o">,</span> <span class="n">do</span>
+       <span class="n">ht</span> <span class="err">←</span> <span class="n">infer_type</span> <span class="n">h</span><span class="o">,</span>
+       <span class="n">unify</span> <span class="n">ht</span> <span class="n">et</span><span class="bp">.</span><span class="n">binding_domain</span><span class="o">,</span>
+       <span class="n">n</span> <span class="err">←</span> <span class="n">mk_fresh_name</span><span class="o">,</span>
+       <span class="n">note</span> <span class="n">n</span> <span class="n">none</span> <span class="o">(</span><span class="n">expr</span><span class="bp">.</span><span class="n">mk_app</span> <span class="n">e</span> <span class="o">[</span><span class="n">h</span><span class="o">])</span>
+</pre></div>
 
 #### [ Sean Leather (May 03 2018 at 14:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20for%20applying%20at%20appropriate%20assumptions/near/126043088):
-That is, I know some ways in which it can be improved, but comments to that effect are most welcome.
+<p>That is, I know some ways in which it can be improved, but comments to that effect are most welcome.</p>
 
 #### [ Sean Leather (May 03 2018 at 14:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20for%20applying%20at%20appropriate%20assumptions/near/126043239):
-I believe I've jumped into the rabbit hole now.
+<p>I believe I've jumped into the rabbit hole now.</p>
 
 #### [ Simon Hudon (May 03 2018 at 19:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20for%20applying%20at%20appropriate%20assumptions/near/126055842):
-If I understand correctly, given a rule `r : p -> q` (where you call my `r` `p`) you're looking for an assumption `h : p` which would allow you to add an assumption `h' : q`. 
-
-First question: do you expect the user to see the name of that new assumption? If so, I doubt `mk_fresh_name` will give you appealing names. Maybe you should give at least the option of specifying the name.
+<p>If I understand correctly, given a rule <code>r : p -&gt; q</code> (where you call my <code>r</code> <code>p</code>) you're looking for an assumption <code>h : p</code> which would allow you to add an assumption <code>h' : q</code>. </p>
+<p>First question: do you expect the user to see the name of that new assumption? If so, I doubt <code>mk_fresh_name</code> will give you appealing names. Maybe you should give at least the option of specifying the name.</p>
 
 #### [ Simon Hudon (May 03 2018 at 19:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20for%20applying%20at%20appropriate%20assumptions/near/126055958):
-Second question: is there a reason that your rule wouldn't be desirable if you had a pi type where the bound variable occurs in the term?
+<p>Second question: is there a reason that your rule wouldn't be desirable if you had a pi type where the bound variable occurs in the term?</p>
 
 #### [ Simon Hudon (May 03 2018 at 19:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20for%20applying%20at%20appropriate%20assumptions/near/126056021):
-Third question:  could it not be useful to repeat the process a certain number of times (if the user provides a list of names for the new assumptions, repeat until you run out of names; otherwise, repeat as many times as you can).
+<p>Third question:  could it not be useful to repeat the process a certain number of times (if the user provides a list of names for the new assumptions, repeat until you run out of names; otherwise, repeat as many times as you can).</p>
 
 #### [ Sean Leather (May 04 2018 at 08:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20for%20applying%20at%20appropriate%20assumptions/near/126083155):
-@**Simon Hudon** Thanks for looking at it!
-
-```quote
-If I understand correctly, given a rule `r : p -> q` (where you call my `r` `p`) you're looking for an assumption `h : p` which would allow you to add an assumption `h' : q`. 
-```
-
-That's almost correct. My current thinking is to look for all assumptions `h_i : p` and create all possible new assumptions `h_i' : q` where `h_i' = r h_i`.
-
-```quote
-First question: do you expect the user to see the name of that new assumption? If so, I doubt `mk_fresh_name` will give you appealing names. Maybe you should give at least the option of specifying the name.
-```
-
-In general, I would expect the new assumptions to be used in something like `tauto` or possibly just `assumption`. But I would certainly like to have useful fresh names and not the stuff spit out by `mk_fresh_name`. (I'm now using `get_unused_name`, but that doesn't seem much better.) Since multiple fresh names may be created, I think the option of specifying one name is not enough. I thought about doing something like adding a suffix to the name of `h`. How do I get the name of the hypothesis from the `expr`?  What do you think?
-
-```quote
-Second question: is there a reason that your rule wouldn't be desirable if you had a pi type where the bound variable occurs in the term?
-```
-
-Perhaps not. Are you suggesting I use `is_pi` instead of `is_arrow`?
-
-```quote
-Third question:  could it not be useful to repeat the process a certain number of times (if the user provides a list of names for the new assumptions, repeat until you run out of names; otherwise, repeat as many times as you can).
-```
-
-Repeating is indeed my intention. Is it not doing that? I haven't yet tested. But, looking again at `any_hyp_aux`, it looks like it does stop at the first success. Is there an existing function for iterating over all of the local context or `list expr`, or should I write one?
+<p><span class="user-mention" data-user-id="110026">@Simon Hudon</span> Thanks for looking at it!</p>
+<blockquote>
+<p>If I understand correctly, given a rule <code>r : p -&gt; q</code> (where you call my <code>r</code> <code>p</code>) you're looking for an assumption <code>h : p</code> which would allow you to add an assumption <code>h' : q</code>. </p>
+</blockquote>
+<p>That's almost correct. My current thinking is to look for all assumptions <code>h_i : p</code> and create all possible new assumptions <code>h_i' : q</code> where <code>h_i' = r h_i</code>.</p>
+<blockquote>
+<p>First question: do you expect the user to see the name of that new assumption? If so, I doubt <code>mk_fresh_name</code> will give you appealing names. Maybe you should give at least the option of specifying the name.</p>
+</blockquote>
+<p>In general, I would expect the new assumptions to be used in something like <code>tauto</code> or possibly just <code>assumption</code>. But I would certainly like to have useful fresh names and not the stuff spit out by <code>mk_fresh_name</code>. (I'm now using <code>get_unused_name</code>, but that doesn't seem much better.) Since multiple fresh names may be created, I think the option of specifying one name is not enough. I thought about doing something like adding a suffix to the name of <code>h</code>. How do I get the name of the hypothesis from the <code>expr</code>?  What do you think?</p>
+<blockquote>
+<p>Second question: is there a reason that your rule wouldn't be desirable if you had a pi type where the bound variable occurs in the term?</p>
+</blockquote>
+<p>Perhaps not. Are you suggesting I use <code>is_pi</code> instead of <code>is_arrow</code>?</p>
+<blockquote>
+<p>Third question:  could it not be useful to repeat the process a certain number of times (if the user provides a list of names for the new assumptions, repeat until you run out of names; otherwise, repeat as many times as you can).</p>
+</blockquote>
+<p>Repeating is indeed my intention. Is it not doing that? I haven't yet tested. But, looking again at <code>any_hyp_aux</code>, it looks like it does stop at the first success. Is there an existing function for iterating over all of the local context or <code>list expr</code>, or should I write one?</p>
 
 #### [ Sean Leather (May 04 2018 at 08:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20for%20applying%20at%20appropriate%20assumptions/near/126083607):
-```quote
-Is there an existing function for iterating over all of the local context or `list expr`, or should I write one?
-```
-
-Answering my own question: `list.mfoldl`/`list.mfoldr`
+<blockquote>
+<p>Is there an existing function for iterating over all of the local context or <code>list expr</code>, or should I write one?</p>
+</blockquote>
+<p>Answering my own question: <code>list.mfoldl</code>/<code>list.mfoldr</code></p>
 
 #### [ Sean Leather (May 04 2018 at 10:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20for%20applying%20at%20appropriate%20assumptions/near/126085893):
-The latest version with `expr.is_pi` and `list.mfoldl`:
-
-```lean
-meta def apply_matching (p : parse texpr) : tactic unit :=
-  do e ← to_expr p,
-     et ← infer_type e,
-     guard et.is_pi <|> fail format!"'apply_matching' expected a function, got '{et}'",
-     local_context >>= mfoldl
-       (λ a h, do
-         ht ← infer_type h,
-         tactic.try (do
-           unify ht et.binding_domain,
-           n ← get_unused_name,
-           note n none (expr.mk_app e [h])))
-       ()
-```
+<p>The latest version with <code>expr.is_pi</code> and <code>list.mfoldl</code>:</p>
+<div class="codehilite"><pre><span></span><span class="n">meta</span> <span class="n">def</span> <span class="n">apply_matching</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="n">parse</span> <span class="n">texpr</span><span class="o">)</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
+  <span class="n">do</span> <span class="n">e</span> <span class="err">←</span> <span class="n">to_expr</span> <span class="n">p</span><span class="o">,</span>
+     <span class="n">et</span> <span class="err">←</span> <span class="n">infer_type</span> <span class="n">e</span><span class="o">,</span>
+     <span class="n">guard</span> <span class="n">et</span><span class="bp">.</span><span class="n">is_pi</span> <span class="bp">&lt;|&gt;</span> <span class="n">fail</span> <span class="n">format</span><span class="bp">!</span><span class="s2">&quot;&#39;apply_matching&#39; expected a function, got &#39;{et}&#39;&quot;</span><span class="o">,</span>
+     <span class="n">local_context</span> <span class="bp">&gt;&gt;=</span> <span class="n">mfoldl</span>
+       <span class="o">(</span><span class="bp">λ</span> <span class="n">a</span> <span class="n">h</span><span class="o">,</span> <span class="n">do</span>
+         <span class="n">ht</span> <span class="err">←</span> <span class="n">infer_type</span> <span class="n">h</span><span class="o">,</span>
+         <span class="n">tactic</span><span class="bp">.</span><span class="n">try</span> <span class="o">(</span><span class="n">do</span>
+           <span class="n">unify</span> <span class="n">ht</span> <span class="n">et</span><span class="bp">.</span><span class="n">binding_domain</span><span class="o">,</span>
+           <span class="n">n</span> <span class="err">←</span> <span class="n">get_unused_name</span><span class="o">,</span>
+           <span class="n">note</span> <span class="n">n</span> <span class="n">none</span> <span class="o">(</span><span class="n">expr</span><span class="bp">.</span><span class="n">mk_app</span> <span class="n">e</span> <span class="o">[</span><span class="n">h</span><span class="o">])))</span>
+       <span class="o">()</span>
+</pre></div>
 
 #### [ Sean Leather (May 04 2018 at 10:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20for%20applying%20at%20appropriate%20assumptions/near/126085942):
-It's funny and annoying that I keep forgetting the commas in Lean `do`-notation.
+<p>It's funny and annoying that I keep forgetting the commas in Lean <code>do</code>-notation.</p>
 
 #### [ Sean Leather (May 04 2018 at 11:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20for%20applying%20at%20appropriate%20assumptions/near/126088409):
-Now with a `'` appended to the name of the source hypothesis:
+<p>Now with a <code>'</code> appended to the name of the source hypothesis:</p>
+<div class="codehilite"><pre><span></span><span class="n">meta</span> <span class="n">def</span> <span class="n">name</span><span class="bp">.</span><span class="n">update_suffix</span> <span class="o">:</span> <span class="n">name</span> <span class="bp">→</span> <span class="o">(</span><span class="n">string</span> <span class="bp">→</span> <span class="n">string</span><span class="o">)</span> <span class="bp">→</span> <span class="n">name</span>
+<span class="bp">|</span> <span class="n">name</span><span class="bp">.</span><span class="n">anonymous</span>        <span class="bp">_</span> <span class="o">:=</span> <span class="n">name</span><span class="bp">.</span><span class="n">anonymous</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">name</span><span class="bp">.</span><span class="n">mk_string</span> <span class="n">s</span> <span class="n">p</span><span class="o">)</span>  <span class="n">f</span> <span class="o">:=</span> <span class="n">name</span><span class="bp">.</span><span class="n">mk_string</span> <span class="o">(</span><span class="n">f</span> <span class="n">s</span><span class="o">)</span> <span class="n">p</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">name</span><span class="bp">.</span><span class="n">mk_numeral</span> <span class="n">n</span> <span class="n">p</span><span class="o">)</span> <span class="bp">_</span> <span class="o">:=</span> <span class="n">name</span><span class="bp">.</span><span class="n">mk_numeral</span> <span class="n">n</span> <span class="n">p</span>
 
-```lean
-meta def name.update_suffix : name → (string → string) → name
-| name.anonymous        _ := name.anonymous
-| (name.mk_string s p)  f := name.mk_string (f s) p
-| (name.mk_numeral n p) _ := name.mk_numeral n p
-
-meta def apply_matching (p : parse texpr) : tactic unit :=
-  do e ← to_expr p,
-     et ← infer_type e,
-     guard et.is_pi <|> fail format!"'apply_matching' expected a function, got '{et}'",
-     local_context >>= mfoldl
-       (λ a h, do
-         ht ← infer_type h,
-         tactic.try $ do
-           unify ht et.binding_domain,
-           note (h.local_pp_name.update_suffix (flip append "'")) none (expr.mk_app e [h]))
-       ()
-```
+<span class="n">meta</span> <span class="n">def</span> <span class="n">apply_matching</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="n">parse</span> <span class="n">texpr</span><span class="o">)</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
+  <span class="n">do</span> <span class="n">e</span> <span class="err">←</span> <span class="n">to_expr</span> <span class="n">p</span><span class="o">,</span>
+     <span class="n">et</span> <span class="err">←</span> <span class="n">infer_type</span> <span class="n">e</span><span class="o">,</span>
+     <span class="n">guard</span> <span class="n">et</span><span class="bp">.</span><span class="n">is_pi</span> <span class="bp">&lt;|&gt;</span> <span class="n">fail</span> <span class="n">format</span><span class="bp">!</span><span class="s2">&quot;&#39;apply_matching&#39; expected a function, got &#39;{et}&#39;&quot;</span><span class="o">,</span>
+     <span class="n">local_context</span> <span class="bp">&gt;&gt;=</span> <span class="n">mfoldl</span>
+       <span class="o">(</span><span class="bp">λ</span> <span class="n">a</span> <span class="n">h</span><span class="o">,</span> <span class="n">do</span>
+         <span class="n">ht</span> <span class="err">←</span> <span class="n">infer_type</span> <span class="n">h</span><span class="o">,</span>
+         <span class="n">tactic</span><span class="bp">.</span><span class="n">try</span> <span class="err">$</span> <span class="n">do</span>
+           <span class="n">unify</span> <span class="n">ht</span> <span class="n">et</span><span class="bp">.</span><span class="n">binding_domain</span><span class="o">,</span>
+           <span class="n">note</span> <span class="o">(</span><span class="n">h</span><span class="bp">.</span><span class="n">local_pp_name</span><span class="bp">.</span><span class="n">update_suffix</span> <span class="o">(</span><span class="n">flip</span> <span class="n">append</span> <span class="s2">&quot;&#39;&quot;</span><span class="o">))</span> <span class="n">none</span> <span class="o">(</span><span class="n">expr</span><span class="bp">.</span><span class="n">mk_app</span> <span class="n">e</span> <span class="o">[</span><span class="n">h</span><span class="o">]))</span>
+       <span class="o">()</span>
+</pre></div>
 
 #### [ Sean Leather (May 04 2018 at 11:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20for%20applying%20at%20appropriate%20assumptions/near/126088722):
-Hmm. I thought perhaps I could remove `ht ← infer_type h` and `unify ht et.binding_domain` because `note` would type check the expression `expr.mk_app e [h])`, but I ended up generating a new hypothesis for every existing hypothesis. `note` is defined with `assertv_core`, but it didn't do what I would expect from a cursory reading.
+<p>Hmm. I thought perhaps I could remove <code>ht ← infer_type h</code> and <code>unify ht et.binding_domain</code> because <code>note</code> would type check the expression <code>expr.mk_app e [h])</code>, but I ended up generating a new hypothesis for every existing hypothesis. <code>note</code> is defined with <code>assertv_core</code>, but it didn't do what I would expect from a cursory reading.</p>
 
 #### [ Simon Hudon (May 04 2018 at 14:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20for%20applying%20at%20appropriate%20assumptions/near/126093166):
-Sorry I missed the first question. At least, you didn't miss it
+<p>Sorry I missed the first question. At least, you didn't miss it</p>
 
 #### [ Simon Hudon (May 04 2018 at 14:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20for%20applying%20at%20appropriate%20assumptions/near/126093228):
-I would change:
+<p>I would change:</p>
+<div class="codehilite"><pre><span></span> et ← infer_type e,
+ guard et.is_pi &lt;|&gt; fail format!&quot;&#39;apply_matching&#39; expected a function, got &#39;{et}&#39;&quot;,
+</pre></div>
 
-```
- et ← infer_type e,
- guard et.is_pi <|> fail format!"'apply_matching' expected a function, got '{et}'",
-```
 
-to
-
-```
- (expr.pi _ _ ed _) <- infer_type | fail format!"'apply_matching' expected a function, got '{et}'",
-```
+<p>to</p>
+<div class="codehilite"><pre><span></span> (expr.pi _ _ ed _) &lt;- infer_type | fail format!&quot;&#39;apply_matching&#39; expected a function, got &#39;{et}&#39;&quot;,
+</pre></div>
 
 #### [ Simon Hudon (May 04 2018 at 14:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20for%20applying%20at%20appropriate%20assumptions/near/126093239):
-and `.local_pp_name.update_suffix (flip append "'")` to `.local_pp_name.update_suffix (++ "'")`
+<p>and <code>.local_pp_name.update_suffix (flip append "'")</code> to <code>.local_pp_name.update_suffix (++ "'")</code></p>
 
 #### [ Simon Hudon (May 04 2018 at 14:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20for%20applying%20at%20appropriate%20assumptions/near/126093335):
-```quote
-`note` is defined with `assertv_core`, but it didn't do what I would expect from a cursory reading.
-```
-
-Care to elaborate?
+<blockquote>
+<p><code>note</code> is defined with <code>assertv_core</code>, but it didn't do what I would expect from a cursory reading.</p>
+</blockquote>
+<p>Care to elaborate?</p>
 
 #### [ Sean Leather (May 04 2018 at 14:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20for%20applying%20at%20appropriate%20assumptions/near/126093336):
-```quote
-```lean
- (expr.pi _ _ ed _) <- infer_type | fail format!"'apply_matching' expected a function, got '{et}'",
-```
-```
+<blockquote>
+<div class="codehilite"><pre><span></span> <span class="o">(</span><span class="n">expr</span><span class="bp">.</span><span class="n">pi</span> <span class="bp">_</span> <span class="bp">_</span> <span class="n">ed</span> <span class="bp">_</span><span class="o">)</span> <span class="bp">&lt;-</span> <span class="n">infer_type</span> <span class="bp">|</span> <span class="n">fail</span> <span class="n">format</span><span class="bp">!</span><span class="s2">&quot;&#39;apply_matching&#39; expected a function, got &#39;{et}&#39;&quot;</span><span class="o">,</span>
+</pre></div>
 
-What is `|` here? Is this equivalent to the following bracketing (assuming said bracketing is valid)?
 
-```lean
-((expr.pi _ _ ed _) <- infer_type) | (fail format!"'apply_matching' expected a function, got '{et}'"),
-```
+</blockquote>
+<p>What is <code>|</code> here? Is this equivalent to the following bracketing (assuming said bracketing is valid)?</p>
+<div class="codehilite"><pre><span></span><span class="o">((</span><span class="n">expr</span><span class="bp">.</span><span class="n">pi</span> <span class="bp">_</span> <span class="bp">_</span> <span class="n">ed</span> <span class="bp">_</span><span class="o">)</span> <span class="bp">&lt;-</span> <span class="n">infer_type</span><span class="o">)</span> <span class="bp">|</span> <span class="o">(</span><span class="n">fail</span> <span class="n">format</span><span class="bp">!</span><span class="s2">&quot;&#39;apply_matching&#39; expected a function, got &#39;{et}&#39;&quot;</span><span class="o">),</span>
+</pre></div>
 
 #### [ Sean Leather (May 04 2018 at 14:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20for%20applying%20at%20appropriate%20assumptions/near/126093350):
-```quote
-and `.local_pp_name.update_suffix (flip append "'")` to `.local_pp_name.update_suffix (++ "'")`
-```
-Ah, sections are supported. I wasn't sure and didn't try.
+<blockquote>
+<p>and <code>.local_pp_name.update_suffix (flip append "'")</code> to <code>.local_pp_name.update_suffix (++ "'")</code></p>
+</blockquote>
+<p>Ah, sections are supported. I wasn't sure and didn't try.</p>
 
 #### [ Simon Hudon (May 04 2018 at 14:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20for%20applying%20at%20appropriate%20assumptions/near/126093403):
-No, I don't think that's syntactically valid. It's because `(expr.pi _ _ ed _) <- infer_type` is an incomplete pattern matching statement. `|` comes in to say "here's what you do if it doesn't match ..."
+<p>No, I don't think that's syntactically valid. It's because <code>(expr.pi _ _ ed _) &lt;- infer_type</code> is an incomplete pattern matching statement. <code>|</code> comes in to say "here's what you do if it doesn't match ..."</p>
 
 #### [ Sean Leather (May 04 2018 at 14:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20for%20applying%20at%20appropriate%20assumptions/near/126093486):
-```quote
-```quote
-`note` is defined with `assertv_core`, but it didn't do what I would expect from a cursory reading.
-```
-
-Care to elaborate?
-```
-About? :simple_smile:
+<blockquote>
+<blockquote>
+<p><code>note</code> is defined with <code>assertv_core</code>, but it didn't do what I would expect from a cursory reading.</p>
+</blockquote>
+<p>Care to elaborate?</p>
+</blockquote>
+<p>About? <span class="emoji emoji-1f642" title="simple smile">:simple_smile:</span></p>
 
 #### [ Sean Leather (May 04 2018 at 14:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20for%20applying%20at%20appropriate%20assumptions/near/126093504):
-```quote
-No, I don't think that's syntactically valid. It's because `(expr.pi _ _ ed _) <- infer_type` is an incomplete pattern matching statement. `|` comes in to say "here's what you do if it doesn't match ..."
-```
-I see. Is this `|` strictly for pattern-matching in `do`-notation? Is it notation defined somewhere, or is it built in?
+<blockquote>
+<p>No, I don't think that's syntactically valid. It's because <code>(expr.pi _ _ ed _) &lt;- infer_type</code> is an incomplete pattern matching statement. <code>|</code> comes in to say "here's what you do if it doesn't match ..."</p>
+</blockquote>
+<p>I see. Is this <code>|</code> strictly for pattern-matching in <code>do</code>-notation? Is it notation defined somewhere, or is it built in?</p>
 
 #### [ Simon Hudon (May 04 2018 at 14:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20for%20applying%20at%20appropriate%20assumptions/near/126093554):
-And there's a subtle difference with `<|>`. While `do x <- a <|> b, c` means `a <|> b >>= λ x, c`, `do x <- a | b, c` means:
-
-```
-a >>= λ x₀, 
+<p>And there's a subtle difference with <code>&lt;|&gt;</code>. While <code>do x &lt;- a &lt;|&gt; b, c</code> means <code>a &lt;|&gt; b &gt;&gt;= λ x, c</code>, <code>do x &lt;- a | b, c</code> means:</p>
+<div class="codehilite"><pre><span></span>a &gt;&gt;= λ x₀,
 match x₀ with
- | x := c 
+ | x := c
  | _ := b
 end
-```
+</pre></div>
 
 #### [ Simon Hudon (May 04 2018 at 14:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20for%20applying%20at%20appropriate%20assumptions/near/126093560):
-i.e. when you run `b`, you exit immediately. If `b` is not a fail statement but a statement like `return none`, the whole function returns `non`.
+<p>i.e. when you run <code>b</code>, you exit immediately. If <code>b</code> is not a fail statement but a statement like <code>return none</code>, the whole function returns <code>non</code>.</p>
 
 #### [ Sean Leather (May 04 2018 at 14:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20for%20applying%20at%20appropriate%20assumptions/near/126093665):
-```quote
-```lean
- (expr.pi _ _ ed _) <- infer_type | fail format!"'apply_matching' expected a function, got '{et}'",
-```
-```
-Except that, with this, I no longer have `et`. :wink:
+<blockquote>
+<div class="codehilite"><pre><span></span> <span class="o">(</span><span class="n">expr</span><span class="bp">.</span><span class="n">pi</span> <span class="bp">_</span> <span class="bp">_</span> <span class="n">ed</span> <span class="bp">_</span><span class="o">)</span> <span class="bp">&lt;-</span> <span class="n">infer_type</span> <span class="bp">|</span> <span class="n">fail</span> <span class="n">format</span><span class="bp">!</span><span class="s2">&quot;&#39;apply_matching&#39; expected a function, got &#39;{et}&#39;&quot;</span><span class="o">,</span>
+</pre></div>
+
+
+</blockquote>
+<p>Except that, with this, I no longer have <code>et</code>. <span class="emoji emoji-1f609" title="wink">:wink:</span></p>
 
 #### [ Simon Hudon (May 04 2018 at 14:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20for%20applying%20at%20appropriate%20assumptions/near/126093722):
-```quote
-```quote
-```quote
-note is defined with assertv_core, but it didn't do what I would expect from a cursory reading.
-```
-Care to elaborate?
-```
-About? 
-```
-
-Hoping to break records of quotes within quotes, here's my answer. Please, let's make this an Inception of quotes.
-
-What did you expect from `assertv_core` and how did the reality differ?
+<blockquote>
+<blockquote>
+<blockquote>
+<p>note is defined with assertv_core, but it didn't do what I would expect from a cursory reading.</p>
+</blockquote>
+<p>Care to elaborate?</p>
+</blockquote>
+<p>About? </p>
+</blockquote>
+<p>Hoping to break records of quotes within quotes, here's my answer. Please, let's make this an Inception of quotes.</p>
+<p>What did you expect from <code>assertv_core</code> and how did the reality differ?</p>
 
 #### [ Simon Hudon (May 04 2018 at 14:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20for%20applying%20at%20appropriate%20assumptions/near/126093796):
-```quote
-```quote
-```lean
- (expr.pi _ _ ed _) <- infer_type | fail format!"'apply_matching' expected a function, got '{et}'",
-```
-```
-Except that, with this, I no longer have `et`. :wink:
-```
-I missed the occurrence in the error message. What a bummer! I thought we could get rid of it. Let's go with:
+<blockquote>
+<blockquote>
+<div class="codehilite"><pre><span></span> <span class="o">(</span><span class="n">expr</span><span class="bp">.</span><span class="n">pi</span> <span class="bp">_</span> <span class="bp">_</span> <span class="n">ed</span> <span class="bp">_</span><span class="o">)</span> <span class="bp">&lt;-</span> <span class="n">infer_type</span> <span class="bp">|</span> <span class="n">fail</span> <span class="n">format</span><span class="bp">!</span><span class="s2">&quot;&#39;apply_matching&#39; expected a function, got &#39;{et}&#39;&quot;</span><span class="o">,</span>
+</pre></div>
 
-```lean
- et <- infer_type,
- (expr.pi _ _ ed _) <- pure et | fail format!"'apply_matching' expected a function, got '{et}'",
-```
+
+</blockquote>
+<p>Except that, with this, I no longer have <code>et</code>. <span class="emoji emoji-1f609" title="wink">:wink:</span></p>
+</blockquote>
+<p>I missed the occurrence in the error message. What a bummer! I thought we could get rid of it. Let's go with:</p>
+<div class="codehilite"><pre><span></span> <span class="n">et</span> <span class="bp">&lt;-</span> <span class="n">infer_type</span><span class="o">,</span>
+ <span class="o">(</span><span class="n">expr</span><span class="bp">.</span><span class="n">pi</span> <span class="bp">_</span> <span class="bp">_</span> <span class="n">ed</span> <span class="bp">_</span><span class="o">)</span> <span class="bp">&lt;-</span> <span class="n">pure</span> <span class="n">et</span> <span class="bp">|</span> <span class="n">fail</span> <span class="n">format</span><span class="bp">!</span><span class="s2">&quot;&#39;apply_matching&#39; expected a function, got &#39;{et}&#39;&quot;</span><span class="o">,</span>
+</pre></div>
 
 #### [ Sean Leather (May 04 2018 at 14:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20for%20applying%20at%20appropriate%20assumptions/near/126093802):
-```quote
-What did you expect from `assertv_core` and how did the reality differ?
-```
-As I said, I expected it to type-check the expression.
+<blockquote>
+<p>What did you expect from <code>assertv_core</code> and how did the reality differ?</p>
+</blockquote>
+<p>As I said, I expected it to type-check the expression.</p>
 
 #### [ Sean Leather (May 04 2018 at 14:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20for%20applying%20at%20appropriate%20assumptions/near/126093848):
-```quote
-Let's go with:
+<blockquote>
+<p>Let's go with:</p>
+<div class="codehilite"><pre><span></span> <span class="n">et</span> <span class="bp">&lt;-</span> <span class="n">infer_type</span><span class="o">,</span>
+ <span class="o">(</span><span class="n">expr</span><span class="bp">.</span><span class="n">pi</span> <span class="bp">_</span> <span class="bp">_</span> <span class="n">ed</span> <span class="bp">_</span><span class="o">)</span> <span class="bp">&lt;-</span> <span class="n">pure</span> <span class="n">et</span> <span class="bp">|</span> <span class="n">fail</span> <span class="n">format</span><span class="bp">!</span><span class="s2">&quot;&#39;apply_matching&#39; expected a function, got &#39;{et}&#39;&quot;</span><span class="o">,</span>
+</pre></div>
 
-```lean
- et <- infer_type,
- (expr.pi _ _ ed _) <- pure et | fail format!"'apply_matching' expected a function, got '{et}'",
-```
-```
 
-Hmm, I'm not convinced that's better. :wink:
+</blockquote>
+<p>Hmm, I'm not convinced that's better. <span class="emoji emoji-1f609" title="wink">:wink:</span></p>
 
 #### [ Simon Hudon (May 04 2018 at 14:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20for%20applying%20at%20appropriate%20assumptions/near/126093923):
-Oh I see. I would think that too. But as the developers keep pointing out, they are very aggressive in their optimization. They try to never type check by default. The whole proof will be type checked at the end so that's not unsafe but it does mean that you have to `unify` or `type_check` when you think you need it.
+<p>Oh I see. I would think that too. But as the developers keep pointing out, they are very aggressive in their optimization. They try to never type check by default. The whole proof will be type checked at the end so that's not unsafe but it does mean that you have to <code>unify</code> or <code>type_check</code> when you think you need it.</p>
 
 #### [ Sean Leather (May 04 2018 at 14:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20for%20applying%20at%20appropriate%20assumptions/near/126093981):
-```quote
-Oh I see. I would think that too. But as the developers keep pointing out, they are very aggressive in their optimization. They try to never type check by default. The whole proof will be type checked at the end so that's not unsafe but it does mean that you have to `unify` or `type_check` when you think you need it.
-```
-Oh, interesting. So, you can introduce badly typed hypotheses?
+<blockquote>
+<p>Oh I see. I would think that too. But as the developers keep pointing out, they are very aggressive in their optimization. They try to never type check by default. The whole proof will be type checked at the end so that's not unsafe but it does mean that you have to <code>unify</code> or <code>type_check</code> when you think you need it.</p>
+</blockquote>
+<p>Oh, interesting. So, you can introduce badly typed hypotheses?</p>
 
 #### [ Sean Leather (May 04 2018 at 14:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20for%20applying%20at%20appropriate%20assumptions/near/126093988):
-```quote
-Oh, interesting. So, you can introduce badly typed hypotheses?
-```
-... and goals?
+<blockquote>
+<p>Oh, interesting. So, you can introduce badly typed hypotheses?</p>
+</blockquote>
+<p>... and goals?</p>
 
 #### [ Simon Hudon (May 04 2018 at 14:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20for%20applying%20at%20appropriate%20assumptions/near/126093993):
-```quote
-```quote
-Let's go with:
+<blockquote>
+<blockquote>
+<p>Let's go with:</p>
+<div class="codehilite"><pre><span></span> <span class="n">et</span> <span class="bp">&lt;-</span> <span class="n">infer_type</span><span class="o">,</span>
+ <span class="o">(</span><span class="n">expr</span><span class="bp">.</span><span class="n">pi</span> <span class="bp">_</span> <span class="bp">_</span> <span class="n">ed</span> <span class="bp">_</span><span class="o">)</span> <span class="bp">&lt;-</span> <span class="n">pure</span> <span class="n">et</span> <span class="bp">|</span> <span class="n">fail</span> <span class="n">format</span><span class="bp">!</span><span class="s2">&quot;&#39;apply_matching&#39; expected a function, got &#39;{et}&#39;&quot;</span><span class="o">,</span>
+</pre></div>
 
-```lean
- et <- infer_type,
- (expr.pi _ _ ed _) <- pure et | fail format!"'apply_matching' expected a function, got '{et}'",
-```
-```
 
-Hmm, I'm not convinced that's better. :wink:
-```
-Yeah, that's less of an improvement
+</blockquote>
+<p>Hmm, I'm not convinced that's better. <span class="emoji emoji-1f609" title="wink">:wink:</span></p>
+</blockquote>
+<p>Yeah, that's less of an improvement</p>
 
 #### [ Simon Hudon (May 04 2018 at 14:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20for%20applying%20at%20appropriate%20assumptions/near/126094048):
-```quote
-```quote
-Oh, interesting. So, you can introduce badly typed hypotheses?
-```
-... and goals?
-```
-The expressions and goals are still type checked from time to time but you can find a way.
+<blockquote>
+<blockquote>
+<p>Oh, interesting. So, you can introduce badly typed hypotheses?</p>
+</blockquote>
+<p>... and goals?</p>
+</blockquote>
+<p>The expressions and goals are still type checked from time to time but you can find a way.</p>
 
 #### [ Simon Hudon (May 04 2018 at 14:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20for%20applying%20at%20appropriate%20assumptions/near/126094114):
-I think `to_expr` type checks the expression so that already filters out a lot of nonsense
+<p>I think <code>to_expr</code> type checks the expression so that already filters out a lot of nonsense</p>
 
 #### [ Sean Leather (May 04 2018 at 14:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20for%20applying%20at%20appropriate%20assumptions/near/126094120):
-```quote
-```quote
-```quote
-```quote
-note is defined with assertv_core, but it didn't do what I would expect from a cursory reading.
-```
-Care to elaborate?
-```
-About? 
-```
-
-Hoping to break records of quotes within quotes, here's my answer. Please, let's make this an Inception of quotes.
-```
-I think Zulip needs threads within topics within streams... :house_buildings:
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>note is defined with assertv_core, but it didn't do what I would expect from a cursory reading.</p>
+</blockquote>
+<p>Care to elaborate?</p>
+</blockquote>
+<p>About? </p>
+</blockquote>
+<p>Hoping to break records of quotes within quotes, here's my answer. Please, let's make this an Inception of quotes.</p>
+</blockquote>
+<p>I think Zulip needs threads within topics within streams... <span class="emoji emoji-1f3d8" title="house buildings">:house_buildings:</span></p>
 
 #### [ Sean Leather (May 04 2018 at 14:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20for%20applying%20at%20appropriate%20assumptions/near/126094324):
-Current version:
+<p>Current version:</p>
+<div class="codehilite"><pre><span></span><span class="n">meta</span> <span class="n">def</span> <span class="n">note_all_applied</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="n">parse</span> <span class="n">texpr</span><span class="o">)</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
+  <span class="n">do</span> <span class="n">e</span> <span class="err">←</span> <span class="n">to_expr</span> <span class="n">p</span><span class="o">,</span>
+     <span class="n">et</span> <span class="err">←</span> <span class="n">infer_type</span> <span class="n">e</span><span class="o">,</span>
+     <span class="n">guard</span> <span class="n">et</span><span class="bp">.</span><span class="n">is_pi</span> <span class="bp">&lt;|&gt;</span> <span class="n">fail</span> <span class="n">format</span><span class="bp">!</span><span class="s2">&quot;&#39;note_all_applied&#39; expected a function, got &#39;{et}&#39;&quot;</span><span class="o">,</span>
+     <span class="n">local_context</span> <span class="bp">&gt;&gt;=</span> <span class="n">mfoldl</span>
+       <span class="o">(</span><span class="bp">λ</span> <span class="n">a</span> <span class="n">h</span><span class="o">,</span> <span class="n">do</span>
+         <span class="n">ht</span> <span class="err">←</span> <span class="n">infer_type</span> <span class="n">h</span><span class="o">,</span>
+         <span class="n">tactic</span><span class="bp">.</span><span class="n">try</span> <span class="err">$</span> <span class="n">do</span>
+           <span class="n">unify</span> <span class="n">ht</span> <span class="n">et</span><span class="bp">.</span><span class="n">binding_domain</span><span class="o">,</span>
+           <span class="n">note</span> <span class="o">(</span><span class="n">h</span><span class="bp">.</span><span class="n">local_pp_name</span><span class="bp">.</span><span class="n">update_suffix</span> <span class="o">(</span><span class="bp">++</span> <span class="s2">&quot;&#39;&quot;</span><span class="o">))</span> <span class="n">none</span> <span class="o">(</span><span class="n">e</span><span class="bp">.</span><span class="n">mk_app</span> <span class="o">[</span><span class="n">h</span><span class="o">]))</span>
+       <span class="o">()</span>
+</pre></div>
 
-```lean
-meta def note_all_applied (p : parse texpr) : tactic unit :=
-  do e ← to_expr p,
-     et ← infer_type e,
-     guard et.is_pi <|> fail format!"'note_all_applied' expected a function, got '{et}'",
-     local_context >>= mfoldl
-       (λ a h, do
-         ht ← infer_type h,
-         tactic.try $ do
-           unify ht et.binding_domain,
-           note (h.local_pp_name.update_suffix (++ "'")) none (e.mk_app [h]))
-       ()
-```
 
-I'm not really sure about a good name. `apply_matching` is certainly not good: too much of a connection to `apply`.
+<p>I'm not really sure about a good name. <code>apply_matching</code> is certainly not good: too much of a connection to <code>apply</code>.</p>
 
 #### [ Simon Hudon (May 04 2018 at 14:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20for%20applying%20at%20appropriate%20assumptions/near/126094606):
-how about `have_spec` (for specialization)?
+<p>how about <code>have_spec</code> (for specialization)?</p>
 
 #### [ Simon Hudon (May 04 2018 at 14:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20for%20applying%20at%20appropriate%20assumptions/near/126094623):
-I think you you should check if the domain of `e` is a proposition. If it is, having multiple specializations will only be noisy
+<p>I think you you should check if the domain of <code>e</code> is a proposition. If it is, having multiple specializations will only be noisy</p>
 
 #### [ Sean Leather (May 04 2018 at 14:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20for%20applying%20at%20appropriate%20assumptions/near/126094786):
-```quote
-how about `have_spec` (for specialization)?
-```
-
-1. My immediate thought is to expand `spec` to `specification`.
-2. I would not naturally think of this as specialization. The resulting type depends on the argument.
+<blockquote>
+<p>how about <code>have_spec</code> (for specialization)?</p>
+</blockquote>
+<p>1. My immediate thought is to expand <code>spec</code> to <code>specification</code>.<br>
+2. I would not naturally think of this as specialization. The resulting type depends on the argument.</p>
 
 #### [ Johan Commelin (May 04 2018 at 15:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20for%20applying%20at%20appropriate%20assumptions/near/126094897):
-and Kevin is defining the `spec`trum of a ring... although that will probably be called `Spec`.
+<p>and Kevin is defining the <code>spec</code>trum of a ring... although that will probably be called <code>Spec</code>.</p>
 
 #### [ Sean Leather (May 04 2018 at 15:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20for%20applying%20at%20appropriate%20assumptions/near/126095717):
-```quote
-I think you you should check if the domain of `e` is a proposition. If it is, having multiple specializations will only be noisy
-```
+<blockquote>
+<p>I think you you should check if the domain of <code>e</code> is a proposition. If it is, having multiple specializations will only be noisy</p>
+</blockquote>
+<p>I don't follow. If I have this:</p>
+<div class="codehilite"><pre><span></span><span class="k">have</span> <span class="n">h</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span> <span class="n">true</span><span class="o">,</span>
+<span class="n">note_all_applied</span> <span class="n">or_true</span>
+</pre></div>
 
-I don't follow. If I have this:
 
-```lean
-have h : Prop := true,
-note_all_applied or_true
-```
-
-I see this:
-
-```lean
-h : Prop,
-h' : h ∨ true ↔ true
-```
+<p>I see this:</p>
+<div class="codehilite"><pre><span></span><span class="n">h</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">,</span>
+<span class="n">h&#39;</span> <span class="o">:</span> <span class="n">h</span> <span class="bp">∨</span> <span class="n">true</span> <span class="bp">↔</span> <span class="n">true</span>
+</pre></div>
 
 #### [ Simon Hudon (May 04 2018 at 15:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20for%20applying%20at%20appropriate%20assumptions/near/126096992):
-*a proposition*
+<p><em>a proposition</em></p>
+<div class="codehilite"><pre><span></span><span class="k">assume</span> <span class="n">h</span> <span class="o">:</span>  <span class="n">x</span> <span class="bp">≤</span> <span class="n">y</span><span class="o">,</span>
+<span class="k">assume</span> <span class="n">h&#39;</span> <span class="o">:</span>  <span class="n">x</span> <span class="bp">≤</span> <span class="n">y</span><span class="o">,</span>
+<span class="n">note_all_applied</span> <span class="o">(</span><span class="n">not_lt_of_ge</span> <span class="n">x</span> <span class="n">y</span><span class="o">)</span>
+</pre></div>
 
-```lean
-assume h :  x ≤ y,
-assume h' :  x ≤ y,
-note_all_applied (not_lt_of_ge x y)
-```
 
-The above should only produce one more assumption, not two.
+<p>The above should only produce one more assumption, not two.</p>
 
 #### [ Sean Leather (May 06 2018 at 11:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20for%20applying%20at%20appropriate%20assumptions/near/126170825):
-@**Simon Hudon** I'm sorry, but I'm still not getting what you're saying.
+<p><span class="user-mention" data-user-id="110026">@Simon Hudon</span> I'm sorry, but I'm still not getting what you're saying.</p>
+<p>What do you mean by a proposition? I used <code>h : Prop</code>, but you may be thinking of something else.</p>
+<p>I tried to make a working example out of your code, and this is what I have:</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">{</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">}</span> <span class="o">(</span><span class="n">h</span> <span class="n">h&#39;</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">≤</span> <span class="n">y</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">note_all_applied</span> <span class="n">not_lt_of_ge</span>
+</pre></div>
 
-What do you mean by a proposition? I used `h : Prop`, but you may be thinking of something else.
 
-I tried to make a working example out of your code, and this is what I have:
+<p>The state:</p>
+<div class="codehilite"><pre><span></span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span>
+<span class="n">h</span> <span class="n">h&#39;</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">≤</span> <span class="n">y</span><span class="o">,</span>
+<span class="n">h&#39;</span> <span class="n">h&#39;&#39;</span> <span class="o">:</span> <span class="bp">¬</span><span class="n">y</span> <span class="bp">&lt;</span> <span class="n">x</span>
+<span class="err">⊢</span> <span class="err">?</span><span class="n">m_1</span>
+</pre></div>
 
-```lean
-example {x y : ℕ} (h h' : x ≤ y) : Prop := by note_all_applied not_lt_of_ge
-```
 
-The state:
+<p>So, two things are clearly problematic here:</p>
+<ul>
+<li>Output hypotheses (<code>h'</code>, <code>h''</code>) with the same type (<code>¬y &lt; x</code>). However, there are input hypotheses with the same type. I'm not sure this is something the tactic should handle because:<ul>
+<li>Handling duplicate outputs adds complexity when the duplicate inputs already exist, and, consequently, this complexity appears unnecessary.</li>
+<li>If the tactic did something else, what would it be, and would it still be predictable?</li>
+</ul>
+</li>
+<li>Duplicate <code>h'</code> hypotheses. The output hypothesis naming could certainly be better. It would be nice to have fresh, readable, predictable names, perhaps similar to what <code>cases</code> and <code>induction</code> do. Do you have any suggestions for this?</li>
+</ul>
+<p>That said, I'm not sure what the above has to do with propositions. The same issues can be shown with non-<code>Prop</code> types:</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">note_all_applied</span> <span class="n">nat</span><span class="bp">.</span><span class="n">succ</span>
+</pre></div>
 
-```lean
-x y : ℕ,
-h h' : x ≤ y,
-h' h'' : ¬y < x
-⊢ ?m_1
-```
 
-So, two things are clearly problematic here:
-
-* Output hypotheses (`h'`, `h''`) with the same type (`¬y < x`). However, there are input hypotheses with the same type. I'm not sure this is something the tactic should handle because:
-  * Handling duplicate outputs adds complexity when the duplicate inputs already exist, and, consequently, this complexity appears unnecessary.
-  * If the tactic did something else, what would it be, and would it still be predictable?
-* Duplicate `h'` hypotheses. The output hypothesis naming could certainly be better. It would be nice to have fresh, readable, predictable names, perhaps similar to what `cases` and `induction` do. Do you have any suggestions for this?
-
-That said, I'm not sure what the above has to do with propositions. The same issues can be shown with non-`Prop` types:
-
-```lean
-example (x y : ℕ) : Prop := by note_all_applied nat.succ
-```
-
-```lean
-x y x' y' : ℕ
-⊢ Prop
-```
+<div class="codehilite"><pre><span></span><span class="n">x</span> <span class="n">y</span> <span class="n">x&#39;</span> <span class="n">y&#39;</span> <span class="o">:</span> <span class="bp">ℕ</span>
+<span class="err">⊢</span> <span class="kt">Prop</span>
+</pre></div>
 
 #### [ Simon Hudon (May 06 2018 at 19:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20for%20applying%20at%20appropriate%20assumptions/near/126183355):
-What I was trying to point out is that the types of `h`,`h'`,`h'` and `h''` themselves have type `Prop`. Maybe I should have called them proofs instead of proposition. Sorry for the confusion.
-
-I was saying that using many of them in your tactic would result in repetition because of proof irrelevant.
+<p>What I was trying to point out is that the types of <code>h</code>,<code>h'</code>,<code>h'</code> and <code>h''</code> themselves have type <code>Prop</code>. Maybe I should have called them proofs instead of proposition. Sorry for the confusion.</p>
+<p>I was saying that using many of them in your tactic would result in repetition because of proof irrelevant.</p>
 
 #### [ Simon Hudon (May 06 2018 at 19:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20for%20applying%20at%20appropriate%20assumptions/near/126183363):
-As you point out, that might make for a highly redundant tactic code.
+<p>As you point out, that might make for a highly redundant tactic code.</p>
 
 #### [ Simon Hudon (May 06 2018 at 20:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20for%20applying%20at%20appropriate%20assumptions/near/126183637):
-If you decide to adopt that more aggressive simplification, you can replace `mfold` or `for_each` with:
-
-```
-meta def for_each_considering_proof_irrelevance {α : Type}
+<p>If you decide to adopt that more aggressive simplification, you can replace <code>mfold</code> or <code>for_each</code> with:</p>
+<div class="codehilite"><pre><span></span>meta def for_each_considering_proof_irrelevance {α : Type}
   (irrel : bool) (f : α → tactic unit) (xs : list α) : tactic unit :=
 if irrel then
   xs.any_of f
 else
   xs.for_each f
-```
+</pre></div>
 
 #### [ Sean Leather (May 07 2018 at 08:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20for%20applying%20at%20appropriate%20assumptions/near/126202657):
-Thanks for pointing at `for_each` and `any_of`. Funny that they don't seem to be used at all in the Lean core library.
+<p>Thanks for pointing at <code>for_each</code> and <code>any_of</code>. Funny that they don't seem to be used at all in the Lean core library.</p>
 
 #### [ Scott Morrison (Aug 09 2018 at 08:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20for%20applying%20at%20appropriate%20assumptions/near/131154182):
-Hi @**Sean Leather**, what happened to this tactic? I think I want it now, and I'm not sure where to look for it.
+<p>Hi <span class="user-mention" data-user-id="110045">@Sean Leather</span>, what happened to this tactic? I think I want it now, and I'm not sure where to look for it.</p>
 
 #### [ Sean Leather (Aug 09 2018 at 09:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20for%20applying%20at%20appropriate%20assumptions/near/131155526):
-You mean the one and only tactic I ever wrote? It's [here](https://github.com/spl/tts/blob/69893255c64e407f3b3ca6e9ff6242f7120177d8/src/tactics.lean#L15-L24). I think I use it in the same repository, but I'm not convinced it is actually that useful.
+<p>You mean the one and only tactic I ever wrote? It's <a href="https://github.com/spl/tts/blob/69893255c64e407f3b3ca6e9ff6242f7120177d8/src/tactics.lean#L15-L24" target="_blank" title="https://github.com/spl/tts/blob/69893255c64e407f3b3ca6e9ff6242f7120177d8/src/tactics.lean#L15-L24">here</a>. I think I use it in the same repository, but I'm not convinced it is actually that useful.</p>
 
 
 {% endraw %}

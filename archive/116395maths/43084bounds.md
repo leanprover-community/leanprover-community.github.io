@@ -12,177 +12,172 @@ permalink: archive/116395maths/43084bounds.html
 
 {% raw %}
 #### [ Kevin Buzzard (Nov 17 2018 at 12:23)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bounds/near/147874320):
-This is more of a funny story than anything else.
+<p>This is more of a funny story than anything else.</p>
+<p>This week just gone at Imperial, we were looking at the real numbers and the completeness axiom in my class. Some of the students were involved in a (maths not Lean) project of constructing the real numbers as Dedekind cuts. The sheet started by defining totally ordered sets (the <code>linear_order</code> class in Lean) and the "least upper bound property" -- any non-empty bounded-above subset has a least upper bound. The sheet then remarked something I'd never realised -- there is no point defining also the "greatest lower bound property", because this follows from the least upper bound property. For the reals I had always imagined that this was proved by just considering <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>{</mo><mo>−</mo><mi>x</mi><mspace width="0.16667em"></mspace><mo>∣</mo><mspace width="0.16667em"></mspace><mi>x</mi><mo>∈</mo><mi>S</mi><mo>}</mo></mrow><annotation encoding="application/x-tex">\{-x\,\mid\,x\in S\}</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.75em;"></span><span class="strut bottom" style="height:1em;vertical-align:-0.25em;"></span><span class="base"><span class="mopen">{</span><span class="mord">−</span><span class="mord mathit">x</span><span class="mrel"><span class="mspace thinspace"></span><span class="mrel">∣</span></span><span class="mord mathit"><span class="mspace thinspace"></span><span class="mord mathit">x</span></span><span class="mrel">∈</span><span class="mord mathit" style="margin-right:0.05764em;">S</span><span class="mclose">}</span></span></span></span> but actually there is a direct proof which only uses total orders. </p>
+<div class="codehilite"><pre><span></span><span class="c1">-- from order/bounds.lean</span>
 
-This week just gone at Imperial, we were looking at the real numbers and the completeness axiom in my class. Some of the students were involved in a (maths not Lean) project of constructing the real numbers as Dedekind cuts. The sheet started by defining totally ordered sets (the `linear_order` class in Lean) and the "least upper bound property" -- any non-empty bounded-above subset has a least upper bound. The sheet then remarked something I'd never realised -- there is no point defining also the "greatest lower bound property", because this follows from the least upper bound property. For the reals I had always imagined that this was proved by just considering $$\{-x\,\mid\,x\in S\}$$ but actually there is a direct proof which only uses total orders. 
+<span class="kn">variables</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">preorder</span> <span class="n">α</span><span class="o">]</span>
+<span class="n">def</span> <span class="n">upper_bounds</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span> <span class="o">:=</span> <span class="o">{</span> <span class="n">x</span> <span class="bp">|</span> <span class="bp">∀</span><span class="n">a</span> <span class="err">∈</span> <span class="n">s</span><span class="o">,</span> <span class="n">a</span> <span class="bp">≤</span> <span class="n">x</span> <span class="o">}</span>
+<span class="n">def</span> <span class="n">lower_bounds</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span> <span class="o">:=</span> <span class="o">{</span> <span class="n">x</span> <span class="bp">|</span> <span class="bp">∀</span><span class="n">a</span> <span class="err">∈</span> <span class="n">s</span><span class="o">,</span> <span class="n">x</span> <span class="bp">≤</span> <span class="n">a</span> <span class="o">}</span>
+<span class="n">def</span> <span class="n">is_least</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span> <span class="n">a</span> <span class="err">∈</span> <span class="n">s</span> <span class="bp">∧</span> <span class="n">a</span> <span class="err">∈</span> <span class="n">lower_bounds</span> <span class="n">s</span>
+<span class="n">def</span> <span class="n">is_greatest</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span> <span class="n">a</span> <span class="err">∈</span> <span class="n">s</span> <span class="bp">∧</span> <span class="n">a</span> <span class="err">∈</span> <span class="n">upper_bounds</span> <span class="n">s</span>
+<span class="n">def</span> <span class="n">is_lub</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Prop</span> <span class="o">:=</span> <span class="n">is_least</span> <span class="o">(</span><span class="n">upper_bounds</span> <span class="n">s</span><span class="o">)</span>
+<span class="n">def</span> <span class="n">is_glb</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Prop</span> <span class="o">:=</span> <span class="n">is_greatest</span> <span class="o">(</span><span class="n">lower_bounds</span> <span class="n">s</span><span class="o">)</span>
 
-```lean
--- from order/bounds.lean
+<span class="kn">theorem</span> <span class="n">warm_up</span> <span class="o">(</span><span class="n">S</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">linear_order</span> <span class="n">S</span><span class="o">]</span> <span class="o">:</span>
+<span class="o">(</span><span class="bp">∀</span> <span class="n">E</span> <span class="o">:</span> <span class="n">set</span> <span class="n">S</span><span class="o">,</span> <span class="o">(</span><span class="bp">∃</span> <span class="n">a</span><span class="o">,</span> <span class="n">a</span> <span class="err">∈</span> <span class="n">E</span><span class="o">)</span> <span class="bp">∧</span> <span class="o">(</span><span class="bp">∃</span> <span class="n">b</span><span class="o">,</span> <span class="n">b</span> <span class="err">∈</span> <span class="n">upper_bounds</span> <span class="n">E</span><span class="o">)</span> <span class="bp">→</span> <span class="bp">∃</span> <span class="n">s</span> <span class="o">:</span> <span class="n">S</span><span class="o">,</span> <span class="n">is_lub</span> <span class="n">E</span> <span class="n">s</span><span class="o">)</span> <span class="bp">→</span>
+<span class="o">(</span><span class="bp">∀</span> <span class="n">E</span> <span class="o">:</span> <span class="n">set</span> <span class="n">S</span><span class="o">,</span> <span class="o">(</span><span class="bp">∃</span> <span class="n">a</span><span class="o">,</span> <span class="n">a</span> <span class="err">∈</span> <span class="n">E</span><span class="o">)</span> <span class="bp">∧</span> <span class="o">(</span><span class="bp">∃</span> <span class="n">b</span><span class="o">,</span> <span class="n">b</span> <span class="err">∈</span> <span class="n">lower_bounds</span> <span class="n">E</span><span class="o">)</span> <span class="bp">→</span> <span class="bp">∃</span> <span class="n">s</span> <span class="o">:</span> <span class="n">S</span><span class="o">,</span> <span class="n">is_glb</span> <span class="n">E</span> <span class="n">s</span><span class="o">)</span> <span class="o">:=</span> <span class="n">sorry</span>
+</pre></div>
 
-variables {α : Type*} [preorder α]
-def upper_bounds (s : set α) : set α := { x | ∀a ∈ s, a ≤ x }
-def lower_bounds (s : set α) : set α := { x | ∀a ∈ s, x ≤ a }
-def is_least (s : set α) (a : α) : Prop := a ∈ s ∧ a ∈ lower_bounds s
-def is_greatest (s : set α) (a : α) : Prop := a ∈ s ∧ a ∈ upper_bounds s
-def is_lub (s : set α) : α → Prop := is_least (upper_bounds s)
-def is_glb (s : set α) : α → Prop := is_greatest (lower_bounds s)
 
-theorem warm_up (S : Type) [linear_order S] :
-(∀ E : set S, (∃ a, a ∈ E) ∧ (∃ b, b ∈ upper_bounds E) → ∃ s : S, is_lub E s) →
-(∀ E : set S, (∃ a, a ∈ E) ∧ (∃ b, b ∈ lower_bounds E) → ∃ s : S, is_glb E s) := sorry
-```
-
-Of course the proof requires a mathematical idea -- knowing any non-empty bounded-above set has a sup, and given a non-empty bounded-below set, we need to produce an inf without this involution which we have on the reals.
+<p>Of course the proof requires a mathematical idea -- knowing any non-empty bounded-above set has a sup, and given a non-empty bounded-below set, we need to produce an inf without this involution which we have on the reals.</p>
 
 #### [ Kevin Buzzard (Nov 17 2018 at 12:26)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bounds/near/147874402):
-So I could see what the idea must be, and knocked up a tactic proof without too much trouble.
-
-And then because the bounds definitions applied not just to `linear_order` but to `preorder`, Chris asked whether my proof also worked for partial orders or preorders. So the question became -- what do you actually need to assume about your order to prove this warm-up question? I'll post our conclusions later on today if nobody else fancies trying to figure this out :-)
+<p>So I could see what the idea must be, and knocked up a tactic proof without too much trouble.</p>
+<p>And then because the bounds definitions applied not just to <code>linear_order</code> but to <code>preorder</code>, Chris asked whether my proof also worked for partial orders or preorders. So the question became -- what do you actually need to assume about your order to prove this warm-up question? I'll post our conclusions later on today if nobody else fancies trying to figure this out :-)</p>
 
 #### [ Kevin Buzzard (Nov 17 2018 at 12:26)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bounds/near/147874403):
-No spoilers Kenny/Chris, if you're reading :-)
+<p>No spoilers Kenny/Chris, if you're reading :-)</p>
 
 #### [ Johannes Hölzl (Nov 17 2018 at 12:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bounds/near/147875349):
-This is a standard construction at least for complete lattices, there often one defines the supremum or infimum and derives the other exterma. And these structures where the extrema only exists for non-empty bounded sets are called "conditionally complete lattices"
+<p>This is a standard construction at least for complete lattices, there often one defines the supremum or infimum and derives the other exterma. And these structures where the extrema only exists for non-empty bounded sets are called "conditionally complete lattices"</p>
 
 #### [ Kevin Buzzard (Nov 17 2018 at 14:54)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bounds/near/147878523):
-Right. So the question is: you might well know already that if, in a lattice, all non-empty bounded-above sets have a sup, then all non-empty bounded-below sets have an inf. This is a pleasant exercise. The question is whether you can get away with less than a lattice.
+<p>Right. So the question is: you might well know already that if, in a lattice, all non-empty bounded-above sets have a sup, then all non-empty bounded-below sets have an inf. This is a pleasant exercise. The question is whether you can get away with less than a lattice.</p>
 
 #### [ Mario Carneiro (Nov 17 2018 at 14:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bounds/near/147878636):
-if every set has a least upper bound, then it's already a lattice
+<p>if every set has a least upper bound, then it's already a lattice</p>
 
 #### [ Kevin Buzzard (Nov 17 2018 at 14:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bounds/near/147878638):
-I am only demanding on my order that every non-empty bounded above set has a least upper bound.
+<p>I am only demanding on my order that every non-empty bounded above set has a least upper bound.</p>
 
 #### [ Mario Carneiro (Nov 17 2018 at 15:00)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bounds/near/147878687):
-then you get a conditionally complete lattice
+<p>then you get a conditionally complete lattice</p>
 
 #### [ Kevin Buzzard (Nov 17 2018 at 15:00)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bounds/near/147878690):
-but I need enough from my order to be able to deduce from this that every non-empty bounded-below set has a greatest lower bound.
+<p>but I need enough from my order to be able to deduce from this that every non-empty bounded-below set has a greatest lower bound.</p>
 
 #### [ Mario Carneiro (Nov 17 2018 at 15:01)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bounds/near/147878699):
-You might have to be careful about how you say bounded below, but the usual proof should go through
+<p>You might have to be careful about how you say bounded below, but the usual proof should go through</p>
 
 #### [ Kevin Buzzard (Nov 17 2018 at 15:01)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bounds/near/147878709):
-I explain exactly what I mean by all of these terms in the original post
+<p>I explain exactly what I mean by all of these terms in the original post</p>
 
 #### [ Kevin Buzzard (Nov 17 2018 at 15:01)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bounds/near/147878711):
-The question is how much you can relax the typeclasses and still be able to fill in the sorry
+<p>The question is how much you can relax the typeclasses and still be able to fill in the sorry</p>
 
 #### [ Kevin Buzzard (Nov 17 2018 at 15:02)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bounds/near/147878753):
-e.g. can you prove
+<p>e.g. can you prove</p>
+<div class="codehilite"><pre><span></span><span class="kn">variables</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">preorder</span> <span class="n">α</span><span class="o">]</span>
+<span class="n">def</span> <span class="n">upper_bounds</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span> <span class="o">:=</span> <span class="o">{</span> <span class="n">x</span> <span class="bp">|</span> <span class="bp">∀</span><span class="n">a</span> <span class="err">∈</span> <span class="n">s</span><span class="o">,</span> <span class="n">a</span> <span class="bp">≤</span> <span class="n">x</span> <span class="o">}</span>
+<span class="n">def</span> <span class="n">lower_bounds</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span> <span class="o">:=</span> <span class="o">{</span> <span class="n">x</span> <span class="bp">|</span> <span class="bp">∀</span><span class="n">a</span> <span class="err">∈</span> <span class="n">s</span><span class="o">,</span> <span class="n">x</span> <span class="bp">≤</span> <span class="n">a</span> <span class="o">}</span>
+<span class="n">def</span> <span class="n">is_least</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span> <span class="n">a</span> <span class="err">∈</span> <span class="n">s</span> <span class="bp">∧</span> <span class="n">a</span> <span class="err">∈</span> <span class="n">lower_bounds</span> <span class="n">s</span>
+<span class="n">def</span> <span class="n">is_greatest</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span> <span class="n">a</span> <span class="err">∈</span> <span class="n">s</span> <span class="bp">∧</span> <span class="n">a</span> <span class="err">∈</span> <span class="n">upper_bounds</span> <span class="n">s</span>
+<span class="n">def</span> <span class="n">is_lub</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Prop</span> <span class="o">:=</span> <span class="n">is_least</span> <span class="o">(</span><span class="n">upper_bounds</span> <span class="n">s</span><span class="o">)</span>
+<span class="n">def</span> <span class="n">is_glb</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Prop</span> <span class="o">:=</span> <span class="n">is_greatest</span> <span class="o">(</span><span class="n">lower_bounds</span> <span class="n">s</span><span class="o">)</span>
 
-```lean
-variables {α : Type*} [preorder α]
-def upper_bounds (s : set α) : set α := { x | ∀a ∈ s, a ≤ x }
-def lower_bounds (s : set α) : set α := { x | ∀a ∈ s, x ≤ a }
-def is_least (s : set α) (a : α) : Prop := a ∈ s ∧ a ∈ lower_bounds s
-def is_greatest (s : set α) (a : α) : Prop := a ∈ s ∧ a ∈ upper_bounds s
-def is_lub (s : set α) : α → Prop := is_least (upper_bounds s)
-def is_glb (s : set α) : α → Prop := is_greatest (lower_bounds s)
-
-theorem warm_up (S : Type) [preorder S] :
-(∀ E : set S, (∃ a, a ∈ E) ∧ (∃ b, b ∈ upper_bounds E) → ∃ s : S, is_lub E s) →
-(∀ E : set S, (∃ a, a ∈ E) ∧ (∃ b, b ∈ lower_bounds E) → ∃ s : S, is_glb E s) := sorry
+<span class="kn">theorem</span> <span class="n">warm_up</span> <span class="o">(</span><span class="n">S</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">preorder</span> <span class="n">S</span><span class="o">]</span> <span class="o">:</span>
+<span class="o">(</span><span class="bp">∀</span> <span class="n">E</span> <span class="o">:</span> <span class="n">set</span> <span class="n">S</span><span class="o">,</span> <span class="o">(</span><span class="bp">∃</span> <span class="n">a</span><span class="o">,</span> <span class="n">a</span> <span class="err">∈</span> <span class="n">E</span><span class="o">)</span> <span class="bp">∧</span> <span class="o">(</span><span class="bp">∃</span> <span class="n">b</span><span class="o">,</span> <span class="n">b</span> <span class="err">∈</span> <span class="n">upper_bounds</span> <span class="n">E</span><span class="o">)</span> <span class="bp">→</span> <span class="bp">∃</span> <span class="n">s</span> <span class="o">:</span> <span class="n">S</span><span class="o">,</span> <span class="n">is_lub</span> <span class="n">E</span> <span class="n">s</span><span class="o">)</span> <span class="bp">→</span>
+<span class="o">(</span><span class="bp">∀</span> <span class="n">E</span> <span class="o">:</span> <span class="n">set</span> <span class="n">S</span><span class="o">,</span> <span class="o">(</span><span class="bp">∃</span> <span class="n">a</span><span class="o">,</span> <span class="n">a</span> <span class="err">∈</span> <span class="n">E</span><span class="o">)</span> <span class="bp">∧</span> <span class="o">(</span><span class="bp">∃</span> <span class="n">b</span><span class="o">,</span> <span class="n">b</span> <span class="err">∈</span> <span class="n">lower_bounds</span> <span class="n">E</span><span class="o">)</span> <span class="bp">→</span> <span class="bp">∃</span> <span class="n">s</span> <span class="o">:</span> <span class="n">S</span><span class="o">,</span> <span class="n">is_glb</span> <span class="n">E</span> <span class="n">s</span><span class="o">)</span> <span class="o">:=</span> <span class="n">sorry</span>
+</pre></div>
 
 #### [ Mario Carneiro (Nov 17 2018 at 15:04)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bounds/near/147878808):
-I think so
+<p>I think so</p>
 
 #### [ Kevin Buzzard (Nov 17 2018 at 15:04)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bounds/near/147878810):
-so now begin dropping the axioms of a preorder
+<p>so now begin dropping the axioms of a preorder</p>
 
 #### [ Kevin Buzzard (Nov 17 2018 at 15:05)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bounds/near/147878818):
-and how far can you get?
+<p>and how far can you get?</p>
 
 #### [ Mario Carneiro (Nov 17 2018 at 15:05)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bounds/near/147878822):
-if you take `E := lower_bounds E` then it's nonempty, and an element of `E` is an upper bound for `lower_bounds E`
+<p>if you take <code>E := lower_bounds E</code> then it's nonempty, and an element of <code>E</code> is an upper bound for <code>lower_bounds E</code></p>
 
 #### [ Kevin Buzzard (Nov 17 2018 at 15:05)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bounds/near/147878825):
-right. And which axioms for a preorder do you use in this proof?
+<p>right. And which axioms for a preorder do you use in this proof?</p>
 
 #### [ Mario Carneiro (Nov 17 2018 at 15:06)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bounds/near/147878866):
-if `a in E` and `b in lower_bounds E` then `b <= a` so `a` is an upper bound of `lower_bounds E`
+<p>if <code>a in E</code> and <code>b in lower_bounds E</code> then <code>b &lt;= a</code> so <code>a</code> is an upper bound of <code>lower_bounds E</code></p>
 
 #### [ Mario Carneiro (Nov 17 2018 at 15:06)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bounds/near/147878867):
-it uses nothing
+<p>it uses nothing</p>
 
 #### [ Kevin Buzzard (Nov 17 2018 at 15:07)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bounds/near/147878872):
-```lean
-variables {α : Type*} [has_le α]
-def upper_bounds (s : set α) : set α := { x | ∀a ∈ s, a ≤ x }
-def lower_bounds (s : set α) : set α := { x | ∀a ∈ s, x ≤ a }
-def is_least (s : set α) (a : α) : Prop := a ∈ s ∧ a ∈ lower_bounds s
-def is_greatest (s : set α) (a : α) : Prop := a ∈ s ∧ a ∈ upper_bounds s
-def is_lub (s : set α) : α → Prop := is_least (upper_bounds s)
-def is_glb (s : set α) : α → Prop := is_greatest (lower_bounds s)
+<div class="codehilite"><pre><span></span><span class="kn">variables</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">has_le</span> <span class="n">α</span><span class="o">]</span>
+<span class="n">def</span> <span class="n">upper_bounds</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span> <span class="o">:=</span> <span class="o">{</span> <span class="n">x</span> <span class="bp">|</span> <span class="bp">∀</span><span class="n">a</span> <span class="err">∈</span> <span class="n">s</span><span class="o">,</span> <span class="n">a</span> <span class="bp">≤</span> <span class="n">x</span> <span class="o">}</span>
+<span class="n">def</span> <span class="n">lower_bounds</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span> <span class="o">:=</span> <span class="o">{</span> <span class="n">x</span> <span class="bp">|</span> <span class="bp">∀</span><span class="n">a</span> <span class="err">∈</span> <span class="n">s</span><span class="o">,</span> <span class="n">x</span> <span class="bp">≤</span> <span class="n">a</span> <span class="o">}</span>
+<span class="n">def</span> <span class="n">is_least</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span> <span class="n">a</span> <span class="err">∈</span> <span class="n">s</span> <span class="bp">∧</span> <span class="n">a</span> <span class="err">∈</span> <span class="n">lower_bounds</span> <span class="n">s</span>
+<span class="n">def</span> <span class="n">is_greatest</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span> <span class="n">a</span> <span class="err">∈</span> <span class="n">s</span> <span class="bp">∧</span> <span class="n">a</span> <span class="err">∈</span> <span class="n">upper_bounds</span> <span class="n">s</span>
+<span class="n">def</span> <span class="n">is_lub</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Prop</span> <span class="o">:=</span> <span class="n">is_least</span> <span class="o">(</span><span class="n">upper_bounds</span> <span class="n">s</span><span class="o">)</span>
+<span class="n">def</span> <span class="n">is_glb</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Prop</span> <span class="o">:=</span> <span class="n">is_greatest</span> <span class="o">(</span><span class="n">lower_bounds</span> <span class="n">s</span><span class="o">)</span>
 
-theorem warm_up (S : Type) [has_le S] :
-(∀ E : set S, (∃ a, a ∈ E) ∧ (∃ b, b ∈ upper_bounds E) → ∃ s : S, is_lub E s) →
-(∀ E : set S, (∃ a, a ∈ E) ∧ (∃ b, b ∈ lower_bounds E) → ∃ s : S, is_glb E s) :=
-λ H E ⟨⟨a, haE⟩, ⟨b, hbuE⟩⟩,
-let ⟨s, hs1, hs2⟩ := H (lower_bounds E) ⟨⟨b, hbuE⟩, ⟨a, λ s hs, hs a haE⟩⟩ in
-⟨s, λ t htE, hs2 t (λ z hzLE, hzLE t htE), hs1⟩
-```
+<span class="kn">theorem</span> <span class="n">warm_up</span> <span class="o">(</span><span class="n">S</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">has_le</span> <span class="n">S</span><span class="o">]</span> <span class="o">:</span>
+<span class="o">(</span><span class="bp">∀</span> <span class="n">E</span> <span class="o">:</span> <span class="n">set</span> <span class="n">S</span><span class="o">,</span> <span class="o">(</span><span class="bp">∃</span> <span class="n">a</span><span class="o">,</span> <span class="n">a</span> <span class="err">∈</span> <span class="n">E</span><span class="o">)</span> <span class="bp">∧</span> <span class="o">(</span><span class="bp">∃</span> <span class="n">b</span><span class="o">,</span> <span class="n">b</span> <span class="err">∈</span> <span class="n">upper_bounds</span> <span class="n">E</span><span class="o">)</span> <span class="bp">→</span> <span class="bp">∃</span> <span class="n">s</span> <span class="o">:</span> <span class="n">S</span><span class="o">,</span> <span class="n">is_lub</span> <span class="n">E</span> <span class="n">s</span><span class="o">)</span> <span class="bp">→</span>
+<span class="o">(</span><span class="bp">∀</span> <span class="n">E</span> <span class="o">:</span> <span class="n">set</span> <span class="n">S</span><span class="o">,</span> <span class="o">(</span><span class="bp">∃</span> <span class="n">a</span><span class="o">,</span> <span class="n">a</span> <span class="err">∈</span> <span class="n">E</span><span class="o">)</span> <span class="bp">∧</span> <span class="o">(</span><span class="bp">∃</span> <span class="n">b</span><span class="o">,</span> <span class="n">b</span> <span class="err">∈</span> <span class="n">lower_bounds</span> <span class="n">E</span><span class="o">)</span> <span class="bp">→</span> <span class="bp">∃</span> <span class="n">s</span> <span class="o">:</span> <span class="n">S</span><span class="o">,</span> <span class="n">is_glb</span> <span class="n">E</span> <span class="n">s</span><span class="o">)</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="n">H</span> <span class="n">E</span> <span class="bp">⟨⟨</span><span class="n">a</span><span class="o">,</span> <span class="n">haE</span><span class="bp">⟩</span><span class="o">,</span> <span class="bp">⟨</span><span class="n">b</span><span class="o">,</span> <span class="n">hbuE</span><span class="bp">⟩⟩</span><span class="o">,</span>
+<span class="k">let</span> <span class="bp">⟨</span><span class="n">s</span><span class="o">,</span> <span class="n">hs1</span><span class="o">,</span> <span class="n">hs2</span><span class="bp">⟩</span> <span class="o">:=</span> <span class="n">H</span> <span class="o">(</span><span class="n">lower_bounds</span> <span class="n">E</span><span class="o">)</span> <span class="bp">⟨⟨</span><span class="n">b</span><span class="o">,</span> <span class="n">hbuE</span><span class="bp">⟩</span><span class="o">,</span> <span class="bp">⟨</span><span class="n">a</span><span class="o">,</span> <span class="bp">λ</span> <span class="n">s</span> <span class="n">hs</span><span class="o">,</span> <span class="n">hs</span> <span class="n">a</span> <span class="n">haE</span><span class="bp">⟩⟩</span> <span class="k">in</span>
+<span class="bp">⟨</span><span class="n">s</span><span class="o">,</span> <span class="bp">λ</span> <span class="n">t</span> <span class="n">htE</span><span class="o">,</span> <span class="n">hs2</span> <span class="n">t</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">z</span> <span class="n">hzLE</span><span class="o">,</span> <span class="n">hzLE</span> <span class="n">t</span> <span class="n">htE</span><span class="o">),</span> <span class="n">hs1</span><span class="bp">⟩</span>
+</pre></div>
 
 #### [ Kevin Buzzard (Nov 17 2018 at 15:07)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bounds/near/147878874):
-punchline achieved
+<p>punchline achieved</p>
 
 #### [ Mario Carneiro (Nov 17 2018 at 15:07)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bounds/near/147878877):
-it could be any relation
+<p>it could be any relation</p>
 
 #### [ Kevin Buzzard (Nov 17 2018 at 15:07)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bounds/near/147878878):
-This made me wonder why preorder was assumed in bounds.lean
+<p>This made me wonder why preorder was assumed in bounds.lean</p>
 
 #### [ Mario Carneiro (Nov 17 2018 at 15:08)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bounds/near/147878922):
-because preorder is our weakest "lawful" order class
+<p>because preorder is our weakest "lawful" order class</p>
 
 #### [ Kevin Buzzard (Nov 17 2018 at 15:08)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bounds/near/147878923):
-surely has_le is weaker?
+<p>surely has_le is weaker?</p>
 
 #### [ Kevin Buzzard (Nov 17 2018 at 15:08)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bounds/near/147878925):
-It's surely an order class
+<p>It's surely an order class</p>
 
 #### [ Kevin Buzzard (Nov 17 2018 at 15:08)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bounds/near/147878926):
-because of the notation
+<p>because of the notation</p>
 
 #### [ Kevin Buzzard (Nov 17 2018 at 15:09)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bounds/near/147878938):
-you yourself know that has_add and has_mul are two completely different classes
+<p>you yourself know that has_add and has_mul are two completely different classes</p>
 
 #### [ Kevin Buzzard (Nov 17 2018 at 15:09)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bounds/near/147878939):
-that's why you had to define groups twice
+<p>that's why you had to define groups twice</p>
 
 #### [ Mario Carneiro (Nov 17 2018 at 15:10)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bounds/near/147878994):
-if it's not a preorder, you probably shouldn't be using `<=`
+<p>if it's not a preorder, you probably shouldn't be using <code>&lt;=</code></p>
 
 #### [ Mario Carneiro (Nov 17 2018 at 15:11)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bounds/near/147879007):
-plus all the terminology there doesn't really make sense without some transitivity
+<p>plus all the terminology there doesn't really make sense without some transitivity</p>
 
 #### [ Kevin Buzzard (Nov 17 2018 at 15:29)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bounds/near/147879514):
-I am surprised that this is your attitude. I think the notation implies a "way of thinking" about the structure, but why can't I define the "upper bounds" of a set with has_le to be the obvious things? I thought that this was the mathlib philosophy -- you define things in the max generality that they parse, and for these definitions like upper_bounds we need nothing more than the predicate.
+<p>I am surprised that this is your attitude. I think the notation implies a "way of thinking" about the structure, but why can't I define the "upper bounds" of a set with has_le to be the obvious things? I thought that this was the mathlib philosophy -- you define things in the max generality that they parse, and for these definitions like upper_bounds we need nothing more than the predicate.</p>
 
 #### [ Kevin Buzzard (Nov 17 2018 at 15:29)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bounds/near/147879519):
-Octonians aren't associative, and yet people still use `*` to multiply them
+<p>Octonians aren't associative, and yet people still use <code>*</code> to multiply them</p>
 
 #### [ Mario Carneiro (Nov 17 2018 at 15:32)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bounds/near/147879616):
-octonions aren't completely lawless though
+<p>octonions aren't completely lawless though</p>
 
 #### [ Mario Carneiro (Nov 17 2018 at 15:33)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bounds/near/147879619):
-If we cared about them we would define loops or power-associative monoids or whatever
+<p>If we cared about them we would define loops or power-associative monoids or whatever</p>
 
 #### [ Mario Carneiro (Nov 17 2018 at 15:35)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bounds/near/147879676):
-I think it helps to be at least a little application-driven here. If it's only ever used on preorders then why the suprious generalization?
+<p>I think it helps to be at least a little application-driven here. If it's only ever used on preorders then why the suprious generalization?</p>
 
 #### [ Mario Carneiro (Nov 17 2018 at 15:35)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bounds/near/147879678):
-note also that typeclass inference is a bit longer for lower classes, although this is probably a small effect
+<p>note also that typeclass inference is a bit longer for lower classes, although this is probably a small effect</p>
 
 #### [ Mario Carneiro (Nov 17 2018 at 15:36)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bounds/near/147879731):
-I would recommend using pure notation classes only in lawless situations like `meta` programming
+<p>I would recommend using pure notation classes only in lawless situations like <code>meta</code> programming</p>
 
 #### [ Kevin Buzzard (Nov 17 2018 at 15:49)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bounds/near/147880123):
-Oh that's an interesting comment. So there is a place for the has_lt typeclass beyond just a notational trick?
+<p>Oh that's an interesting comment. So there is a place for the has_lt typeclass beyond just a notational trick?</p>
 
 #### [ Kevin Buzzard (Nov 17 2018 at 15:49)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bounds/near/147880125):
-It's just in lawless metaland :-)
+<p>It's just in lawless metaland :-)</p>
 
 
 {% endraw %}

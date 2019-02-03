@@ -12,28 +12,28 @@ permalink: archive/113488general/57153mathlibnightly.html
 
 {% raw %}
 #### [ Kenny Lau (Mar 31 2018 at 07:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20nightly/near/124444305):
-Is this possible? @**Mario Carneiro** (or maybe I could host it myself?)
+<p>Is this possible? <span class="user-mention" data-user-id="110049">@Mario Carneiro</span> (or maybe I could host it myself?)</p>
 
 #### [ Mario Carneiro (Mar 31 2018 at 08:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20nightly/near/124444435):
-I'm not seeing the gain. Mathlib doesn't change that fast
+<p>I'm not seeing the gain. Mathlib doesn't change that fast</p>
 
 #### [ Kenny Lau (Mar 31 2018 at 08:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20nightly/near/124444959):
-But there are no built versions of mathlib @**Mario Carneiro**
+<p>But there are no built versions of mathlib <span class="user-mention" data-user-id="110049">@Mario Carneiro</span></p>
 
 #### [ Mario Carneiro (Mar 31 2018 at 08:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20nightly/near/124444960):
-What is there to build? There are no mathlib build artifacts unless you mean `olean`s
+<p>What is there to build? There are no mathlib build artifacts unless you mean <code>olean</code>s</p>
 
 #### [ Mario Carneiro (Mar 31 2018 at 08:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20nightly/near/124444966):
-and I'm not sure how portable those files are
+<p>and I'm not sure how portable those files are</p>
 
 #### [ Kenny Lau (Mar 31 2018 at 08:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20nightly/near/124445237):
-actually, what does o stand for
+<p>actually, what does o stand for</p>
 
 #### [ Andrew Ashworth (Mar 31 2018 at 08:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20nightly/near/124445259):
-probably object
+<p>probably object</p>
 
 #### [ Andrew Ashworth (Mar 31 2018 at 08:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20nightly/near/124445261):
-https://en.wikipedia.org/wiki/Object_file
+<p><a href="https://en.wikipedia.org/wiki/Object_file" target="_blank" title="https://en.wikipedia.org/wiki/Object_file">https://en.wikipedia.org/wiki/Object_file</a></p>
 
 
 {% endraw %}

@@ -12,64 +12,64 @@ permalink: archive/113488general/29908simpdocumentation.html
 
 {% raw %}
 #### [ Simon Hudon (Mar 15 2018 at 01:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20documentation/near/123728672):
-@**Kevin Buzzard** I'm having a look at your recent PR. In "When it is unadvisable to use simp", why not use `show` instead of `suffices`?
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> I'm having a look at your recent PR. In "When it is unadvisable to use simp", why not use <code>show</code> instead of <code>suffices</code>?</p>
 
 #### [ Kevin Buzzard (Mar 15 2018 at 01:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20documentation/near/123728716):
-I think that's kind of backwards
+<p>I think that's kind of backwards</p>
 
 #### [ Kevin Buzzard (Mar 15 2018 at 01:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20documentation/near/123728718):
-let's say you're a long way from a goal
+<p>let's say you're a long way from a goal</p>
 
 #### [ Kevin Buzzard (Mar 15 2018 at 01:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20documentation/near/123728719):
-and simp makes tiny progress
+<p>and simp makes tiny progress</p>
 
 #### [ Kevin Buzzard (Mar 15 2018 at 01:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20documentation/near/123728727):
-no wait
+<p>no wait</p>
 
 #### [ Kevin Buzzard (Mar 15 2018 at 01:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20documentation/near/123728728):
-simp changes your goal slightly
+<p>simp changes your goal slightly</p>
 
 #### [ Kevin Buzzard (Mar 15 2018 at 01:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20documentation/near/123728729):
-it makes it into X
+<p>it makes it into X</p>
 
 #### [ Kevin Buzzard (Mar 15 2018 at 01:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20documentation/near/123728730):
-then `suffices X, simpa [this]` does the same thing
+<p>then <code>suffices X, simpa [this]</code> does the same thing</p>
 
 #### [ Kevin Buzzard (Mar 15 2018 at 01:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20documentation/near/123728731):
-but show won't work
+<p>but show won't work</p>
 
 #### [ Kevin Buzzard (Mar 15 2018 at 01:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20documentation/near/123728734):
-becuase X isn't defeq to the original goal
+<p>becuase X isn't defeq to the original goal</p>
 
 #### [ Kevin Buzzard (Mar 15 2018 at 01:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20documentation/near/123728777):
-The idiom (is that the right word?) is that if simp changes your goal to X, then why not make a new goal and instantly close it with simp.
+<p>The idiom (is that the right word?) is that if simp changes your goal to X, then why not make a new goal and instantly close it with simp.</p>
 
 #### [ Simon Hudon (Mar 15 2018 at 01:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20documentation/near/123728825):
-Good point. Then you can only choose `show` in the special case where the new goal is `defeq` to the old one.
+<p>Good point. Then you can only choose <code>show</code> in the special case where the new goal is <code>defeq</code> to the old one.</p>
 
 #### [ Simon Hudon (Mar 15 2018 at 01:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20documentation/near/123728831):
-It might be worth having a shortcut for `suffices : (simplified thing), by simpa [this]`
+<p>It might be worth having a shortcut for <code>suffices : (simplified thing), by simpa [this]</code></p>
 
 #### [ Kevin Buzzard (Mar 15 2018 at 01:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20documentation/near/123728985):
-yeah, it's `simp` ;-)
+<p>yeah, it's <code>simp</code> ;-)</p>
 
 #### [ Kevin Buzzard (Mar 15 2018 at 01:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20documentation/near/123728992):
-`simp to (simplified thing)`?
+<p><code>simp to (simplified thing)</code>?</p>
 
 #### [ Mario Carneiro (Mar 15 2018 at 01:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20documentation/near/123728999):
-`simpa` was intended for basically exactly that use case. It's not exactly wasting that many keywords as it is
+<p><code>simpa</code> was intended for basically exactly that use case. It's not exactly wasting that many keywords as it is</p>
 
 #### [ Kevin Buzzard (Mar 15 2018 at 01:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20documentation/near/123729000):
-yeah but golf
+<p>yeah but golf</p>
 
 #### [ Mario Carneiro (Mar 15 2018 at 01:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20documentation/near/123729002):
-for golf, `simpa [bla] using bla` is even more effective
+<p>for golf, <code>simpa [bla] using bla</code> is even more effective</p>
 
 #### [ Kevin Buzzard (Mar 15 2018 at 01:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20documentation/near/123729041):
-`simp {answer := simplified thing}`
+<p><code>simp {answer := simplified thing}</code></p>
 
 #### [ Mario Carneiro (Mar 15 2018 at 01:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20documentation/near/123729053):
-also, you can just write `suffices : (simplified thing), {simpa}`
+<p>also, you can just write <code>suffices : (simplified thing), {simpa}</code></p>
 
 
 {% endraw %}

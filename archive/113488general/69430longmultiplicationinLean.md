@@ -12,62 +12,56 @@ permalink: archive/113488general/69430longmultiplicationinLean.html
 
 {% raw %}
 #### [ Kevin Buzzard (Jan 12 2019 at 13:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/long%20multiplication%20in%20Lean/near/154983199):
-`nat` is great for proving things, but is computationally inefficient because it uses O(n) memory to store the natural number n:
+<p><code>nat</code> is great for proving things, but is computationally inefficient because it uses O(n) memory to store the natural number n:</p>
+<p><code>#reduce 10000 * 10000 -- deep recursion error</code></p>
+<p><code>pos_num</code> is a computationally efficient implementation of the positive integers in Lean.</p>
+<div class="codehilite"><pre><span></span><span class="kn">inductive</span> <span class="n">pos_num</span> <span class="o">:</span> <span class="kt">Type</span>
+<span class="bp">|</span> <span class="n">one</span>  <span class="o">:</span> <span class="n">pos_num</span>
+<span class="bp">|</span> <span class="n">bit1</span> <span class="o">:</span> <span class="n">pos_num</span> <span class="bp">→</span> <span class="n">pos_num</span>
+<span class="bp">|</span> <span class="n">bit0</span> <span class="o">:</span> <span class="n">pos_num</span> <span class="bp">→</span> <span class="n">pos_num</span>
+</pre></div>
 
-`#reduce 10000 * 10000 -- deep recursion error`
 
-`pos_num` is a computationally efficient implementation of the positive integers in Lean.
+<p>Now we only need O(log n) memory to store n. But I must be using it incorrectly because I see performance issues:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">num</span><span class="bp">.</span><span class="n">basic</span>
 
-```lean
-inductive pos_num : Type
-| one  : pos_num
-| bit1 : pos_num → pos_num
-| bit0 : pos_num → pos_num
-```
+<span class="c1">-- takes a few seconds on my machine</span>
+<span class="bp">#</span><span class="n">reduce</span> <span class="o">(</span><span class="mi">10000</span> <span class="o">:</span> <span class="n">pos_num</span><span class="o">)</span> <span class="bp">*</span> <span class="mi">10000</span> <span class="c1">-- binary repn of 10^8</span>
 
-Now we only need O(log n) memory to store n. But I must be using it incorrectly because I see performance issues:
+<span class="c1">-- (deterministic) timeout</span>
+<span class="bp">#</span><span class="n">reduce</span> <span class="o">(</span><span class="mi">1000000</span> <span class="o">:</span> <span class="n">pos_num</span><span class="o">)</span> <span class="bp">*</span> <span class="mi">1000000</span>
+</pre></div>
 
-```lean
-import data.num.basic
 
--- takes a few seconds on my machine 
-#reduce (10000 : pos_num) * 10000 -- binary repn of 10^8
+<p>Why are these things not instantaneous, like they would be in a computer algebra system? Lean has clearly solved these problems somehow, because computationally efficient types are presumably at the root of why these proofs work:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">norm_num</span>
 
--- (deterministic) timeout
-#reduce (1000000 : pos_num) * 1000000
-```
+<span class="c1">-- all this is immediate</span>
+<span class="kn">example</span> <span class="o">:</span> <span class="o">(</span><span class="mi">10000</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="bp">*</span> <span class="mi">10000</span> <span class="bp">=</span> <span class="mi">100000000</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">norm_num</span>
+<span class="kn">example</span> <span class="o">:</span> <span class="o">(</span><span class="mi">1000000</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="bp">*</span> <span class="mi">1000000</span> <span class="bp">=</span> <span class="mi">1000000000000</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">norm_num</span>
+</pre></div>
 
-Why are these things not instantaneous, like they would be in a computer algebra system? Lean has clearly solved these problems somehow, because computationally efficient types are presumably at the root of why these proofs work:
 
-```lean
-import tactic.norm_num
-
--- all this is immediate
-example : (10000 : ℕ) * 10000 = 100000000 := by norm_num
-example : (1000000 : ℕ) * 1000000 = 1000000000000 := by norm_num
-```
-
-Oh! `tactic.norm_num` does not even seem to import `data.num.basic`! So it must be using something else. The `norm_num.lean` file looks much less scary to me than it did a year ago, but I still can't see how it is doing multiplication (maybe because there is no 50 line module docstring ;-) )
+<p>Oh! <code>tactic.norm_num</code> does not even seem to import <code>data.num.basic</code>! So it must be using something else. The <code>norm_num.lean</code> file looks much less scary to me than it did a year ago, but I still can't see how it is doing multiplication (maybe because there is no 50 line module docstring ;-) )</p>
 
 #### [ Mario Carneiro (Jan 12 2019 at 14:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/long%20multiplication%20in%20Lean/near/154983632):
-The norm_num interactive tactic actually delegates addition, subtraction and multiplication to `tactic.norm_num` in core
+<p>The norm_num interactive tactic actually delegates addition, subtraction and multiplication to <code>tactic.norm_num</code> in core</p>
 
 #### [ Kevin Buzzard (Jan 12 2019 at 14:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/long%20multiplication%20in%20Lean/near/154983812):
-Oh! And am I right in thinking that this is written in C++?
+<p>Oh! And am I right in thinking that this is written in C++?</p>
 
 #### [ Kevin Buzzard (Jan 12 2019 at 14:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/long%20multiplication%20in%20Lean/near/154983814):
-`meta constant norm_num : expr → tactic (expr × expr)`
-
-meta constants are in some sense invisible to me.
+<p><code>meta constant norm_num : expr → tactic (expr × expr)</code></p>
+<p>meta constants are in some sense invisible to me.</p>
 
 #### [ Rob Lewis (Jan 12 2019 at 14:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/long%20multiplication%20in%20Lean/near/154984074):
-Yes, the core `norm_num` is in C++. For addition and multiplication it works basically like a special purpose simplifier: `bit0 a + bit0 b` simplifies to `bit0 (a + b)`, etc. But it does this in the context of proving an equality, so it really changes `bit0 a + bit0 b = c` to `bit0 (a + b) = c` where `c` is in normal form. This makes it easy to reduce `-` and `/` to `+` and `*`.
+<p>Yes, the core <code>norm_num</code> is in C++. For addition and multiplication it works basically like a special purpose simplifier: <code>bit0 a + bit0 b</code> simplifies to <code>bit0 (a + b)</code>, etc. But it does this in the context of proving an equality, so it really changes <code>bit0 a + bit0 b = c</code> to <code>bit0 (a + b) = c</code> where <code>c</code> is in normal form. This makes it easy to reduce <code>-</code> and <code>/</code> to <code>+</code> and <code>*</code>.</p>
 
 #### [ Mario Carneiro (Jan 12 2019 at 15:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/long%20multiplication%20in%20Lean/near/154986513):
-The reason why `#reduce (10000 : pos_num)` is slow is because the parser produces `bit0` and `bit1` applications, which could be defined in terms of the constructors of the `pos_num` type but instead uses the fixed definition `_root_.bit0` which is defined using self-addition. As a result the `bit0` operation is linear time instead of O(1), and a full numeral should be O(n^2) to evaluate (rather than O(n)). But it is still much better than the exponential time implementation for `nat`. This could be solved if there was a typeclass like `has_bit` providing the bit operations directly
+<p>The reason why <code>#reduce (10000 : pos_num)</code> is slow is because the parser produces <code>bit0</code> and <code>bit1</code> applications, which could be defined in terms of the constructors of the <code>pos_num</code> type but instead uses the fixed definition <code>_root_.bit0</code> which is defined using self-addition. As a result the <code>bit0</code> operation is linear time instead of O(1), and a full numeral should be O(n^2) to evaluate (rather than O(n)). But it is still much better than the exponential time implementation for <code>nat</code>. This could be solved if there was a typeclass like <code>has_bit</code> providing the bit operations directly</p>
 
 #### [ Mario Carneiro (Jan 12 2019 at 15:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/long%20multiplication%20in%20Lean/near/154986619):
-It looks like the equation compiler definitions of `pos_num.add` and `pos_num.succ` are also significant factors. If I define the functions using `pos_num.rec` or the induction tactic then it goes much faster
+<p>It looks like the equation compiler definitions of <code>pos_num.add</code> and <code>pos_num.succ</code> are also significant factors. If I define the functions using <code>pos_num.rec</code> or the induction tactic then it goes much faster</p>
 
 
 {% endraw %}

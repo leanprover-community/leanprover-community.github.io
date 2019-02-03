@@ -12,227 +12,218 @@ permalink: archive/113488general/17362equationlemmasandsimp.html
 
 {% raw %}
 #### [ Sean Leather (Mar 01 2018 at 08:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equation%20lemmas%20and%20simp/near/123126635):
-What is the effect of putting `@[simp]` on a `def` defined with pattern-matching equations? Does it annotate the equation lemmas with `@[simp]`?
+<p>What is the effect of putting <code>@[simp]</code> on a <code>def</code> defined with pattern-matching equations? Does it annotate the equation lemmas with <code>@[simp]</code>?</p>
 
 #### [ Sean Leather (Mar 01 2018 at 08:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equation%20lemmas%20and%20simp/near/123126899):
-When I look at `#print <def-name>._main.equations._eqn_1`, it only has `@[_refl_lemma]`.
+<p>When I look at <code>#print &lt;def-name&gt;._main.equations._eqn_1</code>, it only has <code>@[_refl_lemma]</code>.</p>
 
 #### [ Simon Hudon (Mar 01 2018 at 08:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equation%20lemmas%20and%20simp/near/123126955):
-what do you see if you look at the other equations? (see them listed in `#print prefix <def-name>`)
+<p>what do you see if you look at the other equations? (see them listed in <code>#print prefix &lt;def-name&gt;</code>)</p>
 
 #### [ Sean Leather (Mar 01 2018 at 08:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equation%20lemmas%20and%20simp/near/123127031):
-I had to use a fully-qualified `<def-name>`, but that's a useful command:
+<p>I had to use a fully-qualified <code>&lt;def-name&gt;</code>, but that's a useful command:</p>
+<div class="codehilite"><pre><span></span><span class="bp">#</span><span class="kn">print</span> <span class="kn">prefix</span> <span class="n">tts</span><span class="bp">.</span><span class="n">typ</span><span class="bp">.</span><span class="kn">open</span>
+</pre></div>
 
-```lean
-#print prefix tts.typ.open
-```
-```lean
-tts.typ.open : Π {V : Type}, list (typ V) → typ V → typ V
-tts.typ.open._main : Π {V : Type}, list (typ V) → typ V → typ V
-tts.typ.open._main._meta_aux : Π {V : Type}, list (typ V) → typ V → typ V
-tts.typ.open._main.equations._eqn_1 : ∀ {V : Type} (ts : list (typ V)) (i : ℕ), typ.open._main ts (varb i) = option.get_or_else (list.nth ts i) (varb 0)
-tts.typ.open._main.equations._eqn_2 : ∀ {V : Type} (ts : list (typ V)) (x : V), typ.open._main ts (varf x) = varf x
-tts.typ.open._main.equations._eqn_3 : ∀ {V : Type} (ts : list (typ V)) (t₁ t₂ : typ V),
-  typ.open._main ts (arr t₁ t₂) = arr (typ.open._main ts t₁) (typ.open._main ts t₂)
-tts.typ.open._sunfold : Π {V : Type}, list (typ V) → typ V → typ V
-tts.typ.open.equations._eqn_1 : ∀ {V : Type} (ts : list (typ V)) (i : ℕ), typ.open ts (varb i) = option.get_or_else (list.nth ts i) (varb 0)
-tts.typ.open.equations._eqn_2 : ∀ {V : Type} (ts : list (typ V)) (x : V), typ.open ts (varf x) = varf x
-tts.typ.open.equations._eqn_3 : ∀ {V : Type} (ts : list (typ V)) (t₁ t₂ : typ V),
-  typ.open ts (arr t₁ t₂) = arr (typ.open ts t₁) (typ.open ts t₂)
-```
+
+<div class="codehilite"><pre><span></span><span class="n">tts</span><span class="bp">.</span><span class="n">typ</span><span class="bp">.</span><span class="kn">open</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">{</span><span class="n">V</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">},</span> <span class="n">list</span> <span class="o">(</span><span class="n">typ</span> <span class="n">V</span><span class="o">)</span> <span class="bp">→</span> <span class="n">typ</span> <span class="n">V</span> <span class="bp">→</span> <span class="n">typ</span> <span class="n">V</span>
+<span class="n">tts</span><span class="bp">.</span><span class="n">typ</span><span class="bp">.</span><span class="kn">open</span><span class="bp">._</span><span class="n">main</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">{</span><span class="n">V</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">},</span> <span class="n">list</span> <span class="o">(</span><span class="n">typ</span> <span class="n">V</span><span class="o">)</span> <span class="bp">→</span> <span class="n">typ</span> <span class="n">V</span> <span class="bp">→</span> <span class="n">typ</span> <span class="n">V</span>
+<span class="n">tts</span><span class="bp">.</span><span class="n">typ</span><span class="bp">.</span><span class="kn">open</span><span class="bp">._</span><span class="n">main</span><span class="bp">._</span><span class="n">meta_aux</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">{</span><span class="n">V</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">},</span> <span class="n">list</span> <span class="o">(</span><span class="n">typ</span> <span class="n">V</span><span class="o">)</span> <span class="bp">→</span> <span class="n">typ</span> <span class="n">V</span> <span class="bp">→</span> <span class="n">typ</span> <span class="n">V</span>
+<span class="n">tts</span><span class="bp">.</span><span class="n">typ</span><span class="bp">.</span><span class="kn">open</span><span class="bp">._</span><span class="n">main</span><span class="bp">.</span><span class="n">equations</span><span class="bp">._</span><span class="n">eqn_1</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">V</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">(</span><span class="n">ts</span> <span class="o">:</span> <span class="n">list</span> <span class="o">(</span><span class="n">typ</span> <span class="n">V</span><span class="o">))</span> <span class="o">(</span><span class="n">i</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">),</span> <span class="n">typ</span><span class="bp">.</span><span class="kn">open</span><span class="bp">._</span><span class="n">main</span> <span class="n">ts</span> <span class="o">(</span><span class="n">varb</span> <span class="n">i</span><span class="o">)</span> <span class="bp">=</span> <span class="n">option</span><span class="bp">.</span><span class="n">get_or_else</span> <span class="o">(</span><span class="n">list</span><span class="bp">.</span><span class="n">nth</span> <span class="n">ts</span> <span class="n">i</span><span class="o">)</span> <span class="o">(</span><span class="n">varb</span> <span class="mi">0</span><span class="o">)</span>
+<span class="n">tts</span><span class="bp">.</span><span class="n">typ</span><span class="bp">.</span><span class="kn">open</span><span class="bp">._</span><span class="n">main</span><span class="bp">.</span><span class="n">equations</span><span class="bp">._</span><span class="n">eqn_2</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">V</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">(</span><span class="n">ts</span> <span class="o">:</span> <span class="n">list</span> <span class="o">(</span><span class="n">typ</span> <span class="n">V</span><span class="o">))</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">V</span><span class="o">),</span> <span class="n">typ</span><span class="bp">.</span><span class="kn">open</span><span class="bp">._</span><span class="n">main</span> <span class="n">ts</span> <span class="o">(</span><span class="n">varf</span> <span class="n">x</span><span class="o">)</span> <span class="bp">=</span> <span class="n">varf</span> <span class="n">x</span>
+<span class="n">tts</span><span class="bp">.</span><span class="n">typ</span><span class="bp">.</span><span class="kn">open</span><span class="bp">._</span><span class="n">main</span><span class="bp">.</span><span class="n">equations</span><span class="bp">._</span><span class="n">eqn_3</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">V</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">(</span><span class="n">ts</span> <span class="o">:</span> <span class="n">list</span> <span class="o">(</span><span class="n">typ</span> <span class="n">V</span><span class="o">))</span> <span class="o">(</span><span class="n">t₁</span> <span class="n">t₂</span> <span class="o">:</span> <span class="n">typ</span> <span class="n">V</span><span class="o">),</span>
+  <span class="n">typ</span><span class="bp">.</span><span class="kn">open</span><span class="bp">._</span><span class="n">main</span> <span class="n">ts</span> <span class="o">(</span><span class="n">arr</span> <span class="n">t₁</span> <span class="n">t₂</span><span class="o">)</span> <span class="bp">=</span> <span class="n">arr</span> <span class="o">(</span><span class="n">typ</span><span class="bp">.</span><span class="kn">open</span><span class="bp">._</span><span class="n">main</span> <span class="n">ts</span> <span class="n">t₁</span><span class="o">)</span> <span class="o">(</span><span class="n">typ</span><span class="bp">.</span><span class="kn">open</span><span class="bp">._</span><span class="n">main</span> <span class="n">ts</span> <span class="n">t₂</span><span class="o">)</span>
+<span class="n">tts</span><span class="bp">.</span><span class="n">typ</span><span class="bp">.</span><span class="kn">open</span><span class="bp">._</span><span class="n">sunfold</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">{</span><span class="n">V</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">},</span> <span class="n">list</span> <span class="o">(</span><span class="n">typ</span> <span class="n">V</span><span class="o">)</span> <span class="bp">→</span> <span class="n">typ</span> <span class="n">V</span> <span class="bp">→</span> <span class="n">typ</span> <span class="n">V</span>
+<span class="n">tts</span><span class="bp">.</span><span class="n">typ</span><span class="bp">.</span><span class="kn">open</span><span class="bp">.</span><span class="n">equations</span><span class="bp">._</span><span class="n">eqn_1</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">V</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">(</span><span class="n">ts</span> <span class="o">:</span> <span class="n">list</span> <span class="o">(</span><span class="n">typ</span> <span class="n">V</span><span class="o">))</span> <span class="o">(</span><span class="n">i</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">),</span> <span class="n">typ</span><span class="bp">.</span><span class="kn">open</span> <span class="n">ts</span> <span class="o">(</span><span class="n">varb</span> <span class="n">i</span><span class="o">)</span> <span class="bp">=</span> <span class="n">option</span><span class="bp">.</span><span class="n">get_or_else</span> <span class="o">(</span><span class="n">list</span><span class="bp">.</span><span class="n">nth</span> <span class="n">ts</span> <span class="n">i</span><span class="o">)</span> <span class="o">(</span><span class="n">varb</span> <span class="mi">0</span><span class="o">)</span>
+<span class="n">tts</span><span class="bp">.</span><span class="n">typ</span><span class="bp">.</span><span class="kn">open</span><span class="bp">.</span><span class="n">equations</span><span class="bp">._</span><span class="n">eqn_2</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">V</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">(</span><span class="n">ts</span> <span class="o">:</span> <span class="n">list</span> <span class="o">(</span><span class="n">typ</span> <span class="n">V</span><span class="o">))</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">V</span><span class="o">),</span> <span class="n">typ</span><span class="bp">.</span><span class="kn">open</span> <span class="n">ts</span> <span class="o">(</span><span class="n">varf</span> <span class="n">x</span><span class="o">)</span> <span class="bp">=</span> <span class="n">varf</span> <span class="n">x</span>
+<span class="n">tts</span><span class="bp">.</span><span class="n">typ</span><span class="bp">.</span><span class="kn">open</span><span class="bp">.</span><span class="n">equations</span><span class="bp">._</span><span class="n">eqn_3</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">V</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">(</span><span class="n">ts</span> <span class="o">:</span> <span class="n">list</span> <span class="o">(</span><span class="n">typ</span> <span class="n">V</span><span class="o">))</span> <span class="o">(</span><span class="n">t₁</span> <span class="n">t₂</span> <span class="o">:</span> <span class="n">typ</span> <span class="n">V</span><span class="o">),</span>
+  <span class="n">typ</span><span class="bp">.</span><span class="kn">open</span> <span class="n">ts</span> <span class="o">(</span><span class="n">arr</span> <span class="n">t₁</span> <span class="n">t₂</span><span class="o">)</span> <span class="bp">=</span> <span class="n">arr</span> <span class="o">(</span><span class="n">typ</span><span class="bp">.</span><span class="kn">open</span> <span class="n">ts</span> <span class="n">t₁</span><span class="o">)</span> <span class="o">(</span><span class="n">typ</span><span class="bp">.</span><span class="kn">open</span> <span class="n">ts</span> <span class="n">t₂</span><span class="o">)</span>
+</pre></div>
 
 #### [ Simon Hudon (Mar 01 2018 at 08:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equation%20lemmas%20and%20simp/near/123127074):
-What if you look at `#print tts.typ.open.equations._eqn_1 `?
+<p>What if you look at <code>#print tts.typ.open.equations._eqn_1 </code>?</p>
 
 #### [ Sean Leather (Mar 01 2018 at 08:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equation%20lemmas%20and%20simp/near/123127075):
-```lean
-#print tts.typ.open.equations._eqn_1
-```
-```lean
-@[_refl_lemma]
-theorem tts.typ.open.equations._eqn_1 : ∀ {V : Type} (ts : list (typ V)) (i : ℕ), typ.open ts (varb i) = option.get_or_else (list.nth ts i) (varb 0) :=
-λ {V : Type} (ts : list (typ V)), typ.open._main.equations._eqn_1 ts
-```
+<div class="codehilite"><pre><span></span><span class="bp">#</span><span class="kn">print</span> <span class="n">tts</span><span class="bp">.</span><span class="n">typ</span><span class="bp">.</span><span class="kn">open</span><span class="bp">.</span><span class="n">equations</span><span class="bp">._</span><span class="n">eqn_1</span>
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span><span class="bp">@</span><span class="o">[</span><span class="bp">_</span><span class="n">refl_lemma</span><span class="o">]</span>
+<span class="kn">theorem</span> <span class="n">tts</span><span class="bp">.</span><span class="n">typ</span><span class="bp">.</span><span class="kn">open</span><span class="bp">.</span><span class="n">equations</span><span class="bp">._</span><span class="n">eqn_1</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">V</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">(</span><span class="n">ts</span> <span class="o">:</span> <span class="n">list</span> <span class="o">(</span><span class="n">typ</span> <span class="n">V</span><span class="o">))</span> <span class="o">(</span><span class="n">i</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">),</span> <span class="n">typ</span><span class="bp">.</span><span class="kn">open</span> <span class="n">ts</span> <span class="o">(</span><span class="n">varb</span> <span class="n">i</span><span class="o">)</span> <span class="bp">=</span> <span class="n">option</span><span class="bp">.</span><span class="n">get_or_else</span> <span class="o">(</span><span class="n">list</span><span class="bp">.</span><span class="n">nth</span> <span class="n">ts</span> <span class="n">i</span><span class="o">)</span> <span class="o">(</span><span class="n">varb</span> <span class="mi">0</span><span class="o">)</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="o">{</span><span class="n">V</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">(</span><span class="n">ts</span> <span class="o">:</span> <span class="n">list</span> <span class="o">(</span><span class="n">typ</span> <span class="n">V</span><span class="o">)),</span> <span class="n">typ</span><span class="bp">.</span><span class="kn">open</span><span class="bp">._</span><span class="n">main</span><span class="bp">.</span><span class="n">equations</span><span class="bp">._</span><span class="n">eqn_1</span> <span class="n">ts</span>
+</pre></div>
 
 #### [ Simon Hudon (Mar 01 2018 at 08:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equation%20lemmas%20and%20simp/near/123127129):
-That's curious. The effect I see is as if those equations were labeled with `simp`. I wonder if `simp` is implied by `_refl_lemma`
+<p>That's curious. The effect I see is as if those equations were labeled with <code>simp</code>. I wonder if <code>simp</code> is implied by <code>_refl_lemma</code></p>
 
 #### [ Sean Leather (Mar 01 2018 at 08:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equation%20lemmas%20and%20simp/near/123127137):
-`@[_refl_lemma]` is there whether or not I use `@[simp]`.
+<p><code>@[_refl_lemma]</code> is there whether or not I use <code>@[simp]</code>.</p>
 
 #### [ Simon Hudon (Mar 01 2018 at 08:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equation%20lemmas%20and%20simp/near/123127138):
-We can check something else:
-
-```
-run_cmd attribute.get_instances `simp >>= trace
-```
+<p>We can check something else:</p>
+<div class="codehilite"><pre><span></span>run_cmd attribute.get_instances `simp &gt;&gt;= trace
+</pre></div>
 
 #### [ Simon Hudon (Mar 01 2018 at 08:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equation%20lemmas%20and%20simp/near/123127182):
-Correction: 
-
-```
-run_cmd attribute.get_instances `simp >>= tactic.trace ∘ list.take 3
-```
+<p>Correction: </p>
+<div class="codehilite"><pre><span></span>run_cmd attribute.get_instances `simp &gt;&gt;= tactic.trace ∘ list.take 3
+</pre></div>
 
 #### [ Sean Leather (Mar 01 2018 at 08:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equation%20lemmas%20and%20simp/near/123127192):
-```
-parsing at line 7[tts.typ.open, finset.sort_to_finset, finset.sort_nodup]
-```
+<div class="codehilite"><pre><span></span>parsing at line 7[tts.typ.open, finset.sort_to_finset, finset.sort_nodup]
+</pre></div>
 
 #### [ Sean Leather (Mar 01 2018 at 08:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equation%20lemmas%20and%20simp/near/123127237):
-@**Simon Hudon**: What does that mean?
+<p><span class="user-mention" data-user-email="simon.hudon@gmail.com" data-user-id="110026">@Simon Hudon</span>: What does that mean?</p>
 
 #### [ Simon Hudon (Mar 01 2018 at 08:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equation%20lemmas%20and%20simp/near/123127248):
-so the whole thing is labelled as `simp`. The `simp` tactic must have some logic to retrieve the equations related to a definition.
+<p>so the whole thing is labelled as <code>simp</code>. The <code>simp</code> tactic must have some logic to retrieve the equations related to a definition.</p>
 
 #### [ Sean Leather (Mar 01 2018 at 08:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equation%20lemmas%20and%20simp/near/123127256):
-Could be.
+<p>Could be.</p>
 
 #### [ Simon Hudon (Mar 01 2018 at 08:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equation%20lemmas%20and%20simp/near/123127303):
-`attribute.get_instance ```simp``` ` gives you the list of the names that are labelled with `simp`. It works with any attribute. Every definition is appended at the beginning so taking only 3 of them was enough and I wanted to see if more than one name was being labelled
+<p><code>attribute.get_instance ```simp``` </code> gives you the list of the names that are labelled with <code>simp</code>. It works with any attribute. Every definition is appended at the beginning so taking only 3 of them was enough and I wanted to see if more than one name was being labelled</p>
 
 #### [ Sean Leather (Mar 01 2018 at 08:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equation%20lemmas%20and%20simp/near/123127356):
-`library/init/meta/simp_tactic.lean`:
-```lean
-/-- `get_eqn_lemmas_for deps d` returns the automatically generated equational lemmas for definition d.
-   If deps is tt, then lemmas for automatically generated auxiliary declarations used to define d are also included. -/
-meta constant get_eqn_lemmas_for : bool → name → tactic (list name)
-```
+<p><code>library/init/meta/simp_tactic.lean</code>:</p>
+<div class="codehilite"><pre><span></span><span class="c">/-</span><span class="cm">- `get_eqn_lemmas_for deps d` returns the automatically generated equational lemmas for definition d.</span>
+<span class="cm">   If deps is tt, then lemmas for automatically generated auxiliary declarations used to define d are also included. -/</span>
+<span class="n">meta</span> <span class="kn">constant</span> <span class="n">get_eqn_lemmas_for</span> <span class="o">:</span> <span class="n">bool</span> <span class="bp">→</span> <span class="n">name</span> <span class="bp">→</span> <span class="n">tactic</span> <span class="o">(</span><span class="n">list</span> <span class="n">name</span><span class="o">)</span>
+</pre></div>
 
 #### [ Simon Hudon (Mar 01 2018 at 08:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equation%20lemmas%20and%20simp/near/123127357):
-```quote
-Could be.
-```
-It could mean that the behavior can differ from that of using `simp` lemma or it could just be a way of compressing the list of `simp` lemmas.
+<blockquote>
+<p>Could be.</p>
+</blockquote>
+<p>It could mean that the behavior can differ from that of using <code>simp</code> lemma or it could just be a way of compressing the list of <code>simp</code> lemmas.</p>
 
 #### [ Simon Hudon (Mar 01 2018 at 08:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equation%20lemmas%20and%20simp/near/123127361):
-Nice! Thanks!
+<p>Nice! Thanks!</p>
 
 #### [ Sean Leather (Mar 01 2018 at 08:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equation%20lemmas%20and%20simp/near/123127419):
-This is with `set_option trace.simplify true`:
-
-```
-3. [simplify.rewrite] [tts.typ.open.equations._eqn_3]: typ.open ts (arr t₁_a t₁_a_1) ==> arr (typ.open ts t₁_a) (typ.open ts t₁_a_1)
+<p>This is with <code>set_option trace.simplify true</code>:</p>
+<div class="codehilite"><pre><span></span>3. [simplify.rewrite] [tts.typ.open.equations._eqn_3]: typ.open ts (arr t₁_a t₁_a_1) ==&gt; arr (typ.open ts t₁_a) (typ.open ts t₁_a_1)
 [simplify] eq: typ.open ts t₁_a
 [simplify] eq: ts
 [simplify] eq: t₁_a
 [simplify] eq: typ.open
-```
+</pre></div>
 
 #### [ Sean Leather (Mar 01 2018 at 08:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equation%20lemmas%20and%20simp/near/123127526):
-So, it seems to be that `simp` uses the equation lemmas if a `def` is annotated with `@[simp]`. This makes me wonder why more definitions in the standard library and mathlib aren't `@[simp]`. It also makes me wonder if I should use `@[simp] def` more instead of writing equation lemmas myself.
+<p>So, it seems to be that <code>simp</code> uses the equation lemmas if a <code>def</code> is annotated with <code>@[simp]</code>. This makes me wonder why more definitions in the standard library and mathlib aren't <code>@[simp]</code>. It also makes me wonder if I should use <code>@[simp] def</code> more instead of writing equation lemmas myself.</p>
 
 #### [ Sean Leather (Mar 01 2018 at 08:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equation%20lemmas%20and%20simp/near/123127584):
-`library/init/meta/interactive.lean`:
-```lean
-private meta def simp_lemmas.resolve_and_add (s : simp_lemmas) (u : list name) (n : name) (ref : pexpr) : tactic (simp_lemmas × list name) :=
-do
-  p ← resolve_name n,
-  check_no_overload p,
-  -- unpack local refs
-  let e := p.erase_annotations.get_app_fn.erase_annotations,
-  match e with
-  | const n _           :=
-    (do b ← is_valid_simp_lemma_cnst n, guard b, save_const_type_info n ref, s ← s.add_simp n, return (s, u))
-    <|>
-    (do eqns ← get_eqn_lemmas_for tt n, guard (eqns.length > 0), save_const_type_info n ref, s ← add_simps s eqns, return (s, u))
-    <|>
-    (do env ← get_env, guard (env.is_projection n).is_some, return (s, n::u))
-    <|>
-    report_invalid_simp_lemma n
-  | _ :=
-    (do e ← i_to_expr_no_subgoals p, b ← is_valid_simp_lemma e, guard b, try (save_type_info e ref), s ← s.add e, return (s, u))
-    <|>
-    report_invalid_simp_lemma n
-  end
-```
+<p><code>library/init/meta/interactive.lean</code>:</p>
+<div class="codehilite"><pre><span></span><span class="kn">private</span> <span class="n">meta</span> <span class="n">def</span> <span class="n">simp_lemmas</span><span class="bp">.</span><span class="n">resolve_and_add</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">simp_lemmas</span><span class="o">)</span> <span class="o">(</span><span class="n">u</span> <span class="o">:</span> <span class="n">list</span> <span class="n">name</span><span class="o">)</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">name</span><span class="o">)</span> <span class="o">(</span><span class="n">ref</span> <span class="o">:</span> <span class="n">pexpr</span><span class="o">)</span> <span class="o">:</span> <span class="n">tactic</span> <span class="o">(</span><span class="n">simp_lemmas</span> <span class="bp">×</span> <span class="n">list</span> <span class="n">name</span><span class="o">)</span> <span class="o">:=</span>
+<span class="n">do</span>
+  <span class="n">p</span> <span class="err">←</span> <span class="n">resolve_name</span> <span class="n">n</span><span class="o">,</span>
+  <span class="n">check_no_overload</span> <span class="n">p</span><span class="o">,</span>
+  <span class="c1">-- unpack local refs</span>
+  <span class="k">let</span> <span class="n">e</span> <span class="o">:=</span> <span class="n">p</span><span class="bp">.</span><span class="n">erase_annotations</span><span class="bp">.</span><span class="n">get_app_fn</span><span class="bp">.</span><span class="n">erase_annotations</span><span class="o">,</span>
+  <span class="k">match</span> <span class="n">e</span> <span class="k">with</span>
+  <span class="bp">|</span> <span class="n">const</span> <span class="n">n</span> <span class="bp">_</span>           <span class="o">:=</span>
+    <span class="o">(</span><span class="n">do</span> <span class="n">b</span> <span class="err">←</span> <span class="n">is_valid_simp_lemma_cnst</span> <span class="n">n</span><span class="o">,</span> <span class="n">guard</span> <span class="n">b</span><span class="o">,</span> <span class="n">save_const_type_info</span> <span class="n">n</span> <span class="n">ref</span><span class="o">,</span> <span class="n">s</span> <span class="err">←</span> <span class="n">s</span><span class="bp">.</span><span class="n">add_simp</span> <span class="n">n</span><span class="o">,</span> <span class="n">return</span> <span class="o">(</span><span class="n">s</span><span class="o">,</span> <span class="n">u</span><span class="o">))</span>
+    <span class="bp">&lt;|&gt;</span>
+    <span class="o">(</span><span class="n">do</span> <span class="n">eqns</span> <span class="err">←</span> <span class="n">get_eqn_lemmas_for</span> <span class="n">tt</span> <span class="n">n</span><span class="o">,</span> <span class="n">guard</span> <span class="o">(</span><span class="n">eqns</span><span class="bp">.</span><span class="n">length</span> <span class="bp">&gt;</span> <span class="mi">0</span><span class="o">),</span> <span class="n">save_const_type_info</span> <span class="n">n</span> <span class="n">ref</span><span class="o">,</span> <span class="n">s</span> <span class="err">←</span> <span class="n">add_simps</span> <span class="n">s</span> <span class="n">eqns</span><span class="o">,</span> <span class="n">return</span> <span class="o">(</span><span class="n">s</span><span class="o">,</span> <span class="n">u</span><span class="o">))</span>
+    <span class="bp">&lt;|&gt;</span>
+    <span class="o">(</span><span class="n">do</span> <span class="n">env</span> <span class="err">←</span> <span class="n">get_env</span><span class="o">,</span> <span class="n">guard</span> <span class="o">(</span><span class="n">env</span><span class="bp">.</span><span class="n">is_projection</span> <span class="n">n</span><span class="o">)</span><span class="bp">.</span><span class="n">is_some</span><span class="o">,</span> <span class="n">return</span> <span class="o">(</span><span class="n">s</span><span class="o">,</span> <span class="n">n</span><span class="bp">::</span><span class="n">u</span><span class="o">))</span>
+    <span class="bp">&lt;|&gt;</span>
+    <span class="n">report_invalid_simp_lemma</span> <span class="n">n</span>
+  <span class="bp">|</span> <span class="bp">_</span> <span class="o">:=</span>
+    <span class="o">(</span><span class="n">do</span> <span class="n">e</span> <span class="err">←</span> <span class="n">i_to_expr_no_subgoals</span> <span class="n">p</span><span class="o">,</span> <span class="n">b</span> <span class="err">←</span> <span class="n">is_valid_simp_lemma</span> <span class="n">e</span><span class="o">,</span> <span class="n">guard</span> <span class="n">b</span><span class="o">,</span> <span class="n">try</span> <span class="o">(</span><span class="n">save_type_info</span> <span class="n">e</span> <span class="n">ref</span><span class="o">),</span> <span class="n">s</span> <span class="err">←</span> <span class="n">s</span><span class="bp">.</span><span class="n">add</span> <span class="n">e</span><span class="o">,</span> <span class="n">return</span> <span class="o">(</span><span class="n">s</span><span class="o">,</span> <span class="n">u</span><span class="o">))</span>
+    <span class="bp">&lt;|&gt;</span>
+    <span class="n">report_invalid_simp_lemma</span> <span class="n">n</span>
+  <span class="kn">end</span>
+</pre></div>
 
 #### [ Simon Hudon (Mar 01 2018 at 08:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equation%20lemmas%20and%20simp/near/123127639):
-To your second question: I think you should, it's often less repetitive
+<p>To your second question: I think you should, it's often less repetitive</p>
 
 #### [ Simon Hudon (Mar 01 2018 at 08:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equation%20lemmas%20and%20simp/near/123127642):
-I don't know how to answer your first question
+<p>I don't know how to answer your first question</p>
 
 #### [ Sebastian Ullrich (Mar 01 2018 at 11:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equation%20lemmas%20and%20simp/near/123131391):
-There's also `#print attribute simp`
+<p>There's also <code>#print attribute simp</code></p>
 
 #### [ Sebastian Ullrich (Mar 01 2018 at 11:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equation%20lemmas%20and%20simp/near/123131399):
-I believe Leo rather wants us to use `simp!` than to tag every single def with `[simp]`
+<p>I believe Leo rather wants us to use <code>simp!</code> than to tag every single def with <code>[simp]</code></p>
 
 #### [ Sean Leather (Mar 01 2018 at 11:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equation%20lemmas%20and%20simp/near/123131449):
-```quote
-There's also `#print attribute simp`
-```
-`error: invalid #print command`
+<blockquote>
+<p>There's also <code>#print attribute simp</code></p>
+</blockquote>
+<p><code>error: invalid #print command</code></p>
 
 #### [ Sebastian Ullrich (Mar 01 2018 at 11:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equation%20lemmas%20and%20simp/near/123131615):
-Ah, this is fun. You can do `#print [refl]`, but not `#print [simp]`.
+<p>Ah, this is fun. You can do <code>#print [refl]</code>, but not <code>#print [simp]</code>.</p>
 
 #### [ Sean Leather (Mar 01 2018 at 11:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equation%20lemmas%20and%20simp/near/123131630):
-[`simp!`](https://github.com/leanprover/lean/commit/368f17d0b1392a5a72c9eb974f15b14462cc1475#diff-f5ed07a9ca7e18052989b6ce28b7eb30):
-```quote
-* Add `iota_eqn : bool` field to `simp_config`. `simp {iota_eqn := tt}` uses all non trivial equation lemmas generated by equation/pattern-matching compiler. A lemma is considered non trivial if it is not of the form `forall x_1 ... x_n, f x_1 ... x_n = t` and a proof by reflexivity. `simp!` is a shorthand for `simp {iota_eqn := tt}`. For example, given the goal `... |- [1,2].map nat.succ = t`, `simp!` reduces the left-hand-side of the equation to `[nat.succ 1, nat.succ 2]`. In this example, `simp!` is equivalent to `simp [list.map]`.
-```
+<p><a href="https://github.com/leanprover/lean/commit/368f17d0b1392a5a72c9eb974f15b14462cc1475#diff-f5ed07a9ca7e18052989b6ce28b7eb30" target="_blank" title="https://github.com/leanprover/lean/commit/368f17d0b1392a5a72c9eb974f15b14462cc1475#diff-f5ed07a9ca7e18052989b6ce28b7eb30"><code>simp!</code></a>:</p>
+<blockquote>
+<ul>
+<li>Add <code>iota_eqn : bool</code> field to <code>simp_config</code>. <code>simp {iota_eqn := tt}</code> uses all non trivial equation lemmas generated by equation/pattern-matching compiler. A lemma is considered non trivial if it is not of the form <code>forall x_1 ... x_n, f x_1 ... x_n = t</code> and a proof by reflexivity. <code>simp!</code> is a shorthand for <code>simp {iota_eqn := tt}</code>. For example, given the goal <code>... |- [1,2].map nat.succ = t</code>, <code>simp!</code> reduces the left-hand-side of the equation to <code>[nat.succ 1, nat.succ 2]</code>. In this example, <code>simp!</code> is equivalent to <code>simp [list.map]</code>.</li>
+</ul>
+</blockquote>
 
 #### [ Moses Schönfinkel (Mar 01 2018 at 11:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equation%20lemmas%20and%20simp/near/123131668):
-Getting closer to Coq `cbn` :).
+<p>Getting closer to Coq <code>cbn</code> :).</p>
 
 #### [ Sean Leather (Mar 01 2018 at 11:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equation%20lemmas%20and%20simp/near/123131694):
-“non-trivial equation lemmas” - What does this imply about the trivial equation lemmas, which all of mine probably are?
+<p>“non-trivial equation lemmas” - What does this imply about the trivial equation lemmas, which all of mine probably are?</p>
 
 #### [ Sean Leather (Mar 01 2018 at 11:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equation%20lemmas%20and%20simp/near/123131778):
-```quote
-Ah, this is fun. You can do `#print [refl]`, but not `#print [simp]`.
-```
-Is that just a matter of forgetting to include `simp` somewhere?
+<blockquote>
+<p>Ah, this is fun. You can do <code>#print [refl]</code>, but not <code>#print [simp]</code>.</p>
+</blockquote>
+<p>Is that just a matter of forgetting to include <code>simp</code> somewhere?</p>
 
 #### [ Sean Leather (Mar 01 2018 at 11:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equation%20lemmas%20and%20simp/near/123131796):
-`#print [_refl_lemma]` works.
+<p><code>#print [_refl_lemma]</code> works.</p>
 
 #### [ Sebastian Ullrich (Mar 01 2018 at 11:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equation%20lemmas%20and%20simp/near/123131840):
-No, `#print [simp]` is just a different syntax https://github.com/leanprover/lean/blob/39270fd46f49fecb30649f5ec527da7bbd4cdb13/tests/lean/run/simplifier_custom_relations.lean#L23
+<p>No, <code>#print [simp]</code> is just a different syntax <a href="https://github.com/leanprover/lean/blob/39270fd46f49fecb30649f5ec527da7bbd4cdb13/tests/lean/run/simplifier_custom_relations.lean#L23" target="_blank" title="https://github.com/leanprover/lean/blob/39270fd46f49fecb30649f5ec527da7bbd4cdb13/tests/lean/run/simplifier_custom_relations.lean#L23">https://github.com/leanprover/lean/blob/39270fd46f49fecb30649f5ec527da7bbd4cdb13/tests/lean/run/simplifier_custom_relations.lean#L23</a></p>
 
 #### [ Sebastian Ullrich (Mar 01 2018 at 11:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equation%20lemmas%20and%20simp/near/123131843):
-So yeah, `#print [simp] default` works
+<p>So yeah, <code>#print [simp] default</code> works</p>
 
 #### [ Sean Leather (Mar 01 2018 at 11:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equation%20lemmas%20and%20simp/near/123131887):
-```quote
-“non-trivial equation lemmas” - What does this imply about the trivial equation lemmas, which all of mine probably are?
-```
-Considering [this comment](httpsf//github.com/leanprover/lean/commit/368f17d0b1392a5a72c9eb974f15b14462cc1475#diff-f3c3d54612bd08c035a1578e952b2aeaR216), I think the description in `doc/changes.md` above is either confusing or misleading:
-```diff
-+(iota_eqn : bool           := ff) -- reduce using all equation lemmas generated by equation/pattern-matching compiler
-```
+<blockquote>
+<p>“non-trivial equation lemmas” - What does this imply about the trivial equation lemmas, which all of mine probably are?</p>
+</blockquote>
+<p>Considering <a href="http://httpsf//github.com/leanprover/lean/commit/368f17d0b1392a5a72c9eb974f15b14462cc1475#diff-f3c3d54612bd08c035a1578e952b2aeaR216" target="_blank" title="http://httpsf//github.com/leanprover/lean/commit/368f17d0b1392a5a72c9eb974f15b14462cc1475#diff-f3c3d54612bd08c035a1578e952b2aeaR216">this comment</a>, I think the description in <code>doc/changes.md</code> above is either confusing or misleading:</p>
+<div class="codehilite"><pre><span></span><span class="gi">+(iota_eqn : bool           := ff) -- reduce using all equation lemmas generated by equation/pattern-matching compiler</span>
+</pre></div>
 
 #### [ Sebastian Ullrich (Mar 01 2018 at 11:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equation%20lemmas%20and%20simp/near/123131894):
-No, "non-trivial" basically means "defined by pattern matching"
+<p>No, "non-trivial" basically means "defined by pattern matching"</p>
 
 #### [ Sebastian Ullrich (Mar 01 2018 at 11:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equation%20lemmas%20and%20simp/near/123131895):
-I.e. "more than one equation"
+<p>I.e. "more than one equation"</p>
 
 #### [ Sean Leather (Mar 01 2018 at 11:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equation%20lemmas%20and%20simp/near/123131966):
-So, could you replace “*non trivial equation lemmas generated by equation/pattern-matching compiler. A lemma is considered non trivial if it is not of the form `forall x_1 ... x_n, f x_1 ... x_n = t` and a proof by reflexivity*” above with “*equation lemmas generated by equation/pattern-matching compiler*” and the statement would be the same?
+<p>So, could you replace “<em>non trivial equation lemmas generated by equation/pattern-matching compiler. A lemma is considered non trivial if it is not of the form <code>forall x_1 ... x_n, f x_1 ... x_n = t</code> and a proof by reflexivity</em>” above with “<em>equation lemmas generated by equation/pattern-matching compiler</em>” and the statement would be the same?</p>
 
 #### [ Sebastian Ullrich (Mar 01 2018 at 11:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equation%20lemmas%20and%20simp/near/123132241):
-I'm not sure anymore. Perhaps the `iota_eqn` comment should instead be extended with a "non-trivial"
+<p>I'm not sure anymore. Perhaps the <code>iota_eqn</code> comment should instead be extended with a "non-trivial"</p>
 
 #### [ Sean Leather (Mar 01 2018 at 11:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equation%20lemmas%20and%20simp/near/123132382):
-```quote
-So yeah, `#print [simp] default` works
-```
-Yeah, it's nice to see my equation lemmas appear in that list after adding `@[simp]` to a `def`.
+<blockquote>
+<p>So yeah, <code>#print [simp] default</code> works</p>
+</blockquote>
+<p>Yeah, it's nice to see my equation lemmas appear in that list after adding <code>@[simp]</code> to a <code>def</code>.</p>
 
 #### [ Sean Leather (Mar 01 2018 at 11:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equation%20lemmas%20and%20simp/near/123132395):
-I'm not sure if there are any alternative arguments to `#print [simp]`. It doesn't appear to take a prefix or identifier name: `unknown simp_lemmas collection`.
+<p>I'm not sure if there are any alternative arguments to <code>#print [simp]</code>. It doesn't appear to take a prefix or identifier name: <code>unknown simp_lemmas collection</code>.</p>
 
 #### [ Sean Leather (Mar 01 2018 at 11:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equation%20lemmas%20and%20simp/near/123133132):
-I get syntax errors on the second `simp!` in `induction xs; [simp!, {cases ts, simp!}]`.
+<p>I get syntax errors on the second <code>simp!</code> in <code>induction xs; [simp!, {cases ts, simp!}]</code>.</p>
 
 #### [ Sean Leather (Mar 01 2018 at 12:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equation%20lemmas%20and%20simp/near/123133208):
-But `induction xs; [simp!, {cases ts, simp {iota_eqn := tt}}]` works.
+<p>But <code>induction xs; [simp!, {cases ts, simp {iota_eqn := tt}}]</code> works.</p>
 
 #### [ Sebastian Ullrich (Mar 01 2018 at 12:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equation%20lemmas%20and%20simp/near/123133979):
-`!}` is a separate token used for hole commands
+<p><code>!}</code> is a separate token used for hole commands</p>
 
 
 {% endraw %}

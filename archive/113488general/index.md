@@ -10,11 +10,105 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Lean + LaTeX?](57481LeanLaTeX.html) (4 messages, latest: Jan 23 2019 at 12:56)
+* [subst](25330subst.html) (24 messages, latest: Feb 03 2019 at 16:44)
 
-* [cast woes](88074castwoes.html) (41 messages, latest: Jan 23 2019 at 11:34)
+* [A Counting Argument](57356ACountingArgument.html) (23 messages, latest: Feb 03 2019 at 16:01)
 
-* [Indexing Zulip](45931IndexingZulip.html) (45 messages, latest: Jan 23 2019 at 11:25)
+* [mathlib PR's](53790mathlibPRs.html) (3 messages, latest: Feb 02 2019 at 17:40)
+
+* [reference manual after mathlib move](91992referencemanualaftermathlibmove.html) (2 messages, latest: Feb 02 2019 at 17:18)
+
+* [Tactic block caching example](09501Tacticblockcachingexample.html) (10 messages, latest: Feb 02 2019 at 13:42)
+
+* [Inductive type compilation error](19895Inductivetypecompilationerror.html) (9 messages, latest: Feb 02 2019 at 06:24)
+
+* [please minimize tactic changes](31822pleaseminimizetacticchanges.html) (21 messages, latest: Feb 02 2019 at 04:53)
+
+* [github](15396github.html) (12 messages, latest: Feb 01 2019 at 23:46)
+
+* [import everything](61377importeverything.html) (9 messages, latest: Feb 01 2019 at 23:10)
+
+* [Lean + LaTeX?](57481LeanLaTeX.html) (48 messages, latest: Feb 01 2019 at 22:57)
+
+* [tactic wishlist](23792tacticwishlist.html) (17 messages, latest: Feb 01 2019 at 21:43)
+
+* [normalize](75954normalize.html) (18 messages, latest: Feb 01 2019 at 15:59)
+
+* [module refactoring](97723modulerefactoring.html) (561 messages, latest: Feb 01 2019 at 12:30)
+
+* [dot notation confusion](91816dotnotationconfusion.html) (30 messages, latest: Feb 01 2019 at 11:45)
+
+* [finset vs finite](40978finsetvsfinite.html) (6 messages, latest: Jan 31 2019 at 22:29)
+
+* [Dependent types](51149Dependenttypes.html) (12 messages, latest: Jan 31 2019 at 21:09)
+
+* [IMPORTANT NOTICE: github and mathlib](47634IMPORTANTNOTICEgithubandmathlib.html) (78 messages, latest: Jan 31 2019 at 20:36)
+
+* [stats](32112stats.html) (12 messages, latest: Jan 31 2019 at 20:22)
+
+* [documentation view](40246documentationview.html) (26 messages, latest: Jan 31 2019 at 12:46)
+
+* [travis caching](16807traviscaching.html) (66 messages, latest: Jan 30 2019 at 23:00)
+
+* [weird structure](69965weirdstructure.html) (6 messages, latest: Jan 30 2019 at 21:41)
+
+* [instance obfuscation](27699instanceobfuscation.html) (5 messages, latest: Jan 30 2019 at 19:53)
+
+* [golf challenge](25036golfchallenge.html) (11 messages, latest: Jan 30 2019 at 16:23)
+
+* [Lean 3.4.2](37206Lean342.html) (119 messages, latest: Jan 30 2019 at 13:39)
+
+* [polynomial elaboration](58261polynomialelaboration.html) (7 messages, latest: Jan 29 2019 at 09:28)
+
+* [summer school](48706summerschool.html) (2 messages, latest: Jan 28 2019 at 12:49)
+
+* [guards](18791guards.html) (3 messages, latest: Jan 28 2019 at 01:08)
+
+* [using induction hypothesis in match](86728usinginductionhypothesisinmatch.html) (6 messages, latest: Jan 27 2019 at 22:48)
+
+* [What's new in mathlib](80721Whatsnewinmathlib.html) (45 messages, latest: Jan 27 2019 at 18:24)
+
+* [non-persistent attributes](10577nonpersistentattributes.html) (4 messages, latest: Jan 27 2019 at 00:06)
+
+* [binding powers](07324bindingpowers.html) (46 messages, latest: Jan 26 2019 at 23:43)
+
+* [Lean in the wild](43625Leaninthewild.html) (8 messages, latest: Jan 26 2019 at 23:02)
+
+* [Module refactor](28061Modulerefactor.html) (15 messages, latest: Jan 26 2019 at 22:40)
+
+* [not_forall](84913notforall.html) (2 messages, latest: Jan 26 2019 at 22:33)
+
+* [#find](50981find.html) (12 messages, latest: Jan 26 2019 at 22:05)
+
+* [squarish bracket](40525squarishbracket.html) (2 messages, latest: Jan 26 2019 at 01:21)
+
+* [preimage](28555preimage.html) (4 messages, latest: Jan 25 2019 at 23:43)
+
+* [SMT Integration](16953SMTIntegration.html) (12 messages, latest: Jan 25 2019 at 22:57)
+
+* [6 cases](680066cases.html) (69 messages, latest: Jan 25 2019 at 20:48)
+
+* [Logic puzzles in Lean](32259LogicpuzzlesinLean.html) (17 messages, latest: Jan 25 2019 at 12:40)
+
+* [unification](58202unification.html) (55 messages, latest: Jan 25 2019 at 11:25)
+
+* [Teaching setup](27349Teachingsetup.html) (4 messages, latest: Jan 24 2019 at 21:57)
+
+* [Pass local hypotheses to tactic](42410Passlocalhypothesestotactic.html) (8 messages, latest: Jan 24 2019 at 21:42)
+
+* [clean up old files](73211cleanupoldfiles.html) (2 messages, latest: Jan 24 2019 at 21:06)
+
+* [parsing question](94829parsingquestion.html) (9 messages, latest: Jan 24 2019 at 11:12)
+
+* [cheap Windows install](22596cheapWindowsinstall.html) (13 messages, latest: Jan 24 2019 at 10:52)
+
+* [lean hangs](79634leanhangs.html) (3 messages, latest: Jan 24 2019 at 09:46)
+
+* [Indexing Zulip](45931IndexingZulip.html) (57 messages, latest: Jan 24 2019 at 02:03)
+
+* [cast woes](88074castwoes.html) (43 messages, latest: Jan 24 2019 at 00:53)
+
+* [merge sprint](83665mergesprint.html) (2 messages, latest: Jan 23 2019 at 16:38)
 
 * [constructive polynomial](16078constructivepolynomial.html) (2 messages, latest: Jan 23 2019 at 10:48)
 
@@ -24,19 +118,9 @@ permalink: archive/113488general/index.html
 
 * [simp canonize](76625simpcanonize.html) (7 messages, latest: Jan 23 2019 at 00:22)
 
-* [Logic puzzles in Lean](32259LogicpuzzlesinLean.html) (11 messages, latest: Jan 22 2019 at 23:07)
-
 * [mathlib olean files](80964mathliboleanfiles.html) (18 messages, latest: Jan 22 2019 at 21:57)
 
-* [Lean 3.4.2](37206Lean342.html) (89 messages, latest: Jan 22 2019 at 18:36)
-
-* [clean up old files](73211cleanupoldfiles.html) (1 message, latest: Jan 22 2019 at 15:21)
-
 * [notation in structures](99336notationinstructures.html) (6 messages, latest: Jan 22 2019 at 13:16)
-
-* [parsing question](94829parsingquestion.html) (7 messages, latest: Jan 19 2019 at 21:48)
-
-* [Teaching setup](27349Teachingsetup.html) (2 messages, latest: Jan 19 2019 at 17:51)
 
 * [writing unicode to file](74703writingunicodetofile.html) (20 messages, latest: Jan 19 2019 at 01:43)
 
@@ -65,8 +149,6 @@ permalink: archive/113488general/index.html
 * [Abel tactic problem](37726Abeltacticproblem.html) (4 messages, latest: Jan 16 2019 at 12:11)
 
 * [mathlib files](31957mathlibfiles.html) (107 messages, latest: Jan 16 2019 at 09:34)
-
-* [Documentation view](91478Documentationview.html) (10 messages, latest: Jan 16 2019 at 03:51)
 
 * [pygments](17208pygments.html) (47 messages, latest: Jan 15 2019 at 18:28)
 
@@ -115,8 +197,6 @@ permalink: archive/113488general/index.html
 * [eta for records](10228etaforrecords.html) (4 messages, latest: Jan 09 2019 at 09:11)
 
 * [Lean in Beamer](50628LeaninBeamer.html) (60 messages, latest: Jan 08 2019 at 22:01)
-
-* [Module refactor](28061Modulerefactor.html) (1 message, latest: Jan 08 2019 at 15:29)
 
 * [List of lean repositories](47066Listofleanrepositories.html) (2 messages, latest: Jan 08 2019 at 15:12)
 
@@ -181,8 +261,6 @@ permalink: archive/113488general/index.html
 * [linarith nat](80127linarithnat.html) (3 messages, latest: Dec 23 2018 at 18:56)
 
 * [equation compiler and dependent types](68737equationcompileranddependenttypes.html) (4 messages, latest: Dec 23 2018 at 18:07)
-
-* [What's new in mathlib](80721Whatsnewinmathlib.html) (42 messages, latest: Dec 22 2018 at 19:21)
 
 * [expr.replace](72810exprreplace.html) (71 messages, latest: Dec 22 2018 at 08:09)
 
@@ -275,8 +353,6 @@ permalink: archive/113488general/index.html
 * [algebra over a ring](28764algebraoveraring.html) (9 messages, latest: Dec 08 2018 at 21:41)
 
 * [Dijkstra's algorithm in Lean](64309DijkstrasalgorithminLean.html) (10 messages, latest: Dec 08 2018 at 21:32)
-
-* [Lean in the wild](43625Leaninthewild.html) (7 messages, latest: Dec 08 2018 at 11:54)
 
 * [extensionality](79105extensionality.html) (188 messages, latest: Dec 07 2018 at 19:02)
 
@@ -383,8 +459,6 @@ permalink: archive/113488general/index.html
 * [finset.sum](35885finsetsum.html) (144 messages, latest: Nov 26 2018 at 15:48)
 
 * [order of simp lemmas](72682orderofsimplemmas.html) (1 message, latest: Nov 25 2018 at 17:38)
-
-* [6 cases](680066cases.html) (16 messages, latest: Nov 24 2018 at 23:27)
 
 * [rw fails](55897rwfails.html) (8 messages, latest: Nov 24 2018 at 19:37)
 
@@ -557,8 +631,6 @@ permalink: archive/113488general/index.html
 * [apply in expression](52686applyinexpression.html) (1 message, latest: Nov 06 2018 at 09:08)
 
 * [tidy](52187tidy.html) (119 messages, latest: Nov 06 2018 at 05:32)
-
-* [module refactoring](97723modulerefactoring.html) (556 messages, latest: Nov 05 2018 at 16:59)
 
 * [expr](83264expr.html) (52 messages, latest: Nov 05 2018 at 04:00)
 
@@ -838,8 +910,6 @@ permalink: archive/113488general/index.html
 
 * [data.fintype imports big_operators](82566datafintypeimportsbigoperators.html) (2 messages, latest: Oct 02 2018 at 15:36)
 
-* [merge sprint](83665mergesprint.html) (1 message, latest: Oct 01 2018 at 20:59)
-
 * [readable subquotients](17447readablesubquotients.html) (7 messages, latest: Oct 01 2018 at 16:45)
 
 * [request](03626request.html) (2 messages, latest: Oct 01 2018 at 15:04)
@@ -878,8 +948,6 @@ permalink: archive/113488general/index.html
 
 * ["finset.singleton x" vs "{x}"](84452finsetsingletonxvsx.html) (7 messages, latest: Sep 28 2018 at 19:27)
 
-* [finset vs finite](40978finsetvsfinite.html) (2 messages, latest: Sep 28 2018 at 15:43)
-
 * [monotonicity lemma](52473monotonicitylemma.html) (1 message, latest: Sep 28 2018 at 15:00)
 
 * [simp list.map id](82287simplistmapid.html) (3 messages, latest: Sep 28 2018 at 11:00)
@@ -903,8 +971,6 @@ permalink: archive/113488general/index.html
 * [quotients](67981quotients.html) (107 messages, latest: Sep 26 2018 at 13:20)
 
 * [slogan](74693slogan.html) (1 message, latest: Sep 25 2018 at 22:13)
-
-* [cheap Windows install](22596cheapWindowsinstall.html) (8 messages, latest: Sep 25 2018 at 17:59)
 
 * [reflection](27916reflection.html) (4 messages, latest: Sep 25 2018 at 14:16)
 
@@ -1360,8 +1426,6 @@ permalink: archive/113488general/index.html
 
 * [quotient.hrec_on₂](87308quotienthrecon.html) (93 messages, latest: Aug 08 2018 at 14:04)
 
-* [stats](32112stats.html) (1 message, latest: Aug 08 2018 at 13:32)
-
 * [design of products/equalizers/kernels/pullbacks](82635designofproductsequalizerskernelspullbacks.html) (20 messages, latest: Aug 08 2018 at 13:01)
 
 * [Category theory PR](85628CategorytheoryPR.html) (72 messages, latest: Aug 08 2018 at 12:52)
@@ -1783,8 +1847,6 @@ permalink: archive/113488general/index.html
 * [infix notation precedence](83865infixnotationprecedence.html) (8 messages, latest: Jun 08 2018 at 08:07)
 
 * [coercion and too simp](46161coercionandtoosimp.html) (8 messages, latest: Jun 07 2018 at 10:46)
-
-* [travis caching](16807traviscaching.html) (57 messages, latest: Jun 07 2018 at 07:31)
 
 * [auto deriving instances](24698autoderivinginstances.html) (7 messages, latest: Jun 07 2018 at 03:27)
 

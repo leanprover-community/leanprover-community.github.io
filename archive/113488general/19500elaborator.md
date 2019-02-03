@@ -12,161 +12,157 @@ permalink: archive/113488general/19500elaborator.html
 
 {% raw %}
 #### [ Kevin Buzzard (Apr 01 2018 at 16:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491100):
-Over the last few months I have been idly writing something called "from unicode to bytecode", which is some (still extremely incomplete) documentation as to how Lean turns a string of unicode characters (the input file) into bytecode. One reason it's incomplete currently is that I have no real idea what bytecode is. But when I started this project I had no idea what a scanner / parser / token / etc was either, so I'm definitely moving forwards.
+<p>Over the last few months I have been idly writing something called "from unicode to bytecode", which is some (still extremely incomplete) documentation as to how Lean turns a string of unicode characters (the input file) into bytecode. One reason it's incomplete currently is that I have no real idea what bytecode is. But when I started this project I had no idea what a scanner / parser / token / etc was either, so I'm definitely moving forwards.</p>
 
 #### [ Kevin Buzzard (Apr 01 2018 at 16:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491140):
-I am now trying to understand the elaborator better. Here is a very basic question.
+<p>I am now trying to understand the elaborator better. Here is a very basic question.</p>
 
 #### [ Kevin Buzzard (Apr 01 2018 at 16:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491183):
-This works (by which I think I mean "Lean's kernel manages to fully parse and elaborate the string of characters and add a new term `easy` to the environment"):
+<p>This works (by which I think I mean "Lean's kernel manages to fully parse and elaborate the string of characters and add a new term <code>easy</code> to the environment"):</p>
 
 #### [ Kevin Buzzard (Apr 01 2018 at 16:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491186):
-`theorem  easy {i : ℕ} {n : ℕ} : i < n → i < nat.succ n :=  λ H, lt.trans H $ nat.lt_succ_self n`
+<p><code>theorem  easy {i : ℕ} {n : ℕ} : i &lt; n → i &lt; nat.succ n :=  λ H, lt.trans H $ nat.lt_succ_self n</code></p>
 
 #### [ Kevin Buzzard (Apr 01 2018 at 16:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491187):
-If I replace the `n` with an underscore, it still works
+<p>If I replace the <code>n</code> with an underscore, it still works</p>
 
 #### [ Kevin Buzzard (Apr 01 2018 at 16:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491188):
-`theorem  easy {i : ℕ} {n : ℕ} : i < n → i < nat.succ n :=  λ H, lt.trans H $ nat.lt_succ_self _`
+<p><code>theorem  easy {i : ℕ} {n : ℕ} : i &lt; n → i &lt; nat.succ n :=  λ H, lt.trans H $ nat.lt_succ_self _</code></p>
 
 #### [ Kevin Buzzard (Apr 01 2018 at 16:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491196):
-Somehow Lean knows from the type of everything that it wants `nat.lt_succ_self _` to have type `n  < nat.succ n` and hence it knows `_` should be `n`
+<p>Somehow Lean knows from the type of everything that it wants <code>nat.lt_succ_self _</code> to have type <code>n  &lt; nat.succ n</code> and hence it knows <code>_</code> should be <code>n</code></p>
 
 #### [ Kevin Buzzard (Apr 01 2018 at 16:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491197):
-But this doesn't work:
+<p>But this doesn't work:</p>
 
 #### [ Kevin Buzzard (Apr 01 2018 at 16:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491238):
-`theorem  easy {i : ℕ} {n : ℕ} : i < n → i < nat.succ n :=  λ H, lt.trans _ $ nat.lt_succ_self n`
+<p><code>theorem  easy {i : ℕ} {n : ℕ} : i &lt; n → i &lt; nat.succ n :=  λ H, lt.trans _ $ nat.lt_succ_self n</code></p>
 
 #### [ Kevin Buzzard (Apr 01 2018 at 16:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491239):
-Here Lean knows from type theory that it wants `_` to be a proof of `i < n`
+<p>Here Lean knows from type theory that it wants <code>_</code> to be a proof of <code>i &lt; n</code></p>
 
 #### [ Kevin Buzzard (Apr 01 2018 at 16:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491245):
-and even though `H : i < n` is in the local context, it won't take it and insert it.
+<p>and even though <code>H : i &lt; n</code> is in the local context, it won't take it and insert it.</p>
 
 #### [ Kevin Buzzard (Apr 01 2018 at 16:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491246):
-We get an error which, if you don't understand magic, looks silly:
+<p>We get an error which, if you don't understand magic, looks silly:</p>
 
 #### [ Kevin Buzzard (Apr 01 2018 at 16:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491248):
-```
-don't know how to synthesize placeholder
+<div class="codehilite"><pre><span></span>don&#39;t know how to synthesize placeholder
 context:
 i n : ℕ,
-H : i < n
-⊢ i < n 
-```
+H : i &lt; n
+⊢ i &lt; n
+</pre></div>
 
 #### [ Kevin Buzzard (Apr 01 2018 at 16:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491289):
-"Well, you knew how to synthesize `n` when that was in the local context..."
+<p>"Well, you knew how to synthesize <code>n</code> when that was in the local context..."</p>
 
 #### [ Kevin Buzzard (Apr 01 2018 at 16:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491296):
-I think that as a learner (as I still am, but I am thinking more about people who are like I was last October, i.e. complete beginners), you have to just trust some stuff to magic.
+<p>I think that as a learner (as I still am, but I am thinking more about people who are like I was last October, i.e. complete beginners), you have to just trust some stuff to magic.</p>
 
 #### [ Kevin Buzzard (Apr 01 2018 at 16:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491297):
-You type "simp" and sometimes it works and sometimes it doesn't, but if it does, then you'll take it.
+<p>You type "simp" and sometimes it works and sometimes it doesn't, but if it does, then you'll take it.</p>
 
 #### [ Gabriel Ebner (Apr 01 2018 at 16:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491338):
-Maybe your confusion comes from the fact that the two situations are in fact very different.  In the first one, Lean doesn't just guess and take a natural number from the local context.  The reason that the placeholder gets filled in is because `n` is *the only possible choice* if you want the theorem to type-check.
+<p>Maybe your confusion comes from the fact that the two situations are in fact very different.  In the first one, Lean doesn't just guess and take a natural number from the local context.  The reason that the placeholder gets filled in is because <code>n</code> is <em>the only possible choice</em> if you want the theorem to type-check.</p>
 
 #### [ Gabriel Ebner (Apr 01 2018 at 16:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491339):
-In the second case, *any value* of type `i < n` would work.
+<p>In the second case, <em>any value</em> of type <code>i &lt; n</code> would work.</p>
 
 #### [ Kevin Buzzard (Apr 01 2018 at 16:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491340):
-I think that whilst initially this way of thinking -- "sometimes it just works by magic" -- is initially the only way to proceed.  But now I want to start understanding Lean properly and in particular I want to know exactly what I can expect the elaborator to do.
+<p>I think that whilst initially this way of thinking -- "sometimes it just works by magic" -- is initially the only way to proceed.  But now I want to start understanding Lean properly and in particular I want to know exactly what I can expect the elaborator to do.</p>
 
 #### [ Kevin Buzzard (Apr 01 2018 at 16:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491345):
-Thanks Gabriel, I could see that the situations somehow felt different but you have very quickly got to the heart of the matter.
+<p>Thanks Gabriel, I could see that the situations somehow felt different but you have very quickly got to the heart of the matter.</p>
 
 #### [ Sebastian Ullrich (Apr 01 2018 at 16:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491396):
-In other words, the first placeholder can be solved by unification while type checking the right-hand side. The second one cannot.
+<p>In other words, the first placeholder can be solved by unification while type checking the right-hand side. The second one cannot.</p>
 
 #### [ Kevin Buzzard (Apr 01 2018 at 16:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491445):
-I think that the `_` (when it is representing `n`) gets filled in initially as something like `?m_1`
+<p>I think that the <code>_</code> (when it is representing <code>n</code>) gets filled in initially as something like <code>?m_1</code></p>
 
 #### [ Kevin Buzzard (Apr 01 2018 at 16:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491451):
-Oh it perhaps even initially gets filled in as `(?m_1 : nat)`
+<p>Oh it perhaps even initially gets filled in as <code>(?m_1 : nat)</code></p>
 
 #### [ Kevin Buzzard (Apr 01 2018 at 16:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491492):
-and then we have to solve `nat.lt_succ_self (?m_1 : nat) : n < nat.succ n`
+<p>and then we have to solve <code>nat.lt_succ_self (?m_1 : nat) : n &lt; nat.succ n</code></p>
 
 #### [ Kevin Buzzard (Apr 01 2018 at 16:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491499):
-and we know the type of `nat.lt.succ_self` is `?m_1 < nat.succ ?m_1`
+<p>and we know the type of <code>nat.lt.succ_self</code> is <code>?m_1 &lt; nat.succ ?m_1</code></p>
 
 #### [ Kevin Buzzard (Apr 01 2018 at 16:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491541):
-and those two types really now have to be _equal_. I realise now I am slightly unsure what it means for two types to be equal. For example if `?m_1` was equal to `m` and it was a theorem that `m = n`, would these two types be equal?
+<p>and those two types really now have to be _equal_. I realise now I am slightly unsure what it means for two types to be equal. For example if <code>?m_1</code> was equal to <code>m</code> and it was a theorem that <code>m = n</code>, would these two types be equal?</p>
 
 #### [ Gabriel Ebner (Apr 01 2018 at 16:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491542):
-Pretty much in this order.  You essentially start with `?m_1: ?m_2` and `?m_2: Sort ?u_3` for the underscore. Then the elaborator wants to construct the application `nat.lt_succ_self ?m_1`, so it needs to make sure that the type of `?m_1` is `nat`, and you get the unification constraint `?m_2 =?= nat`.
+<p>Pretty much in this order.  You essentially start with <code>?m_1: ?m_2</code> and <code>?m_2: Sort ?u_3</code> for the underscore. Then the elaborator wants to construct the application <code>nat.lt_succ_self ?m_1</code>, so it needs to make sure that the type of <code>?m_1</code> is <code>nat</code>, and you get the unification constraint <code>?m_2 =?= nat</code>.</p>
 
 #### [ Kevin Buzzard (Apr 01 2018 at 16:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491547):
-I have seen Mario writing these `=?=`s
+<p>I have seen Mario writing these <code>=?=</code>s</p>
 
 #### [ Gabriel Ebner (Apr 01 2018 at 16:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491548):
->   it was a theorem that m = n, would these two types be equal?
-
-No, only definitional equality is used in unification.
+<blockquote>
+<p>it was a theorem that m = n, would these two types be equal?</p>
+</blockquote>
+<p>No, only definitional equality is used in unification.</p>
 
 #### [ Kevin Buzzard (Apr 01 2018 at 16:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491549):
-And these types would be equal because of some theorem
+<p>And these types would be equal because of some theorem</p>
 
 #### [ Gabriel Ebner (Apr 01 2018 at 16:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491551):
-`=?=` is just the notation for "should unify with"
+<p><code>=?=</code> is just the notation for "should unify with"</p>
 
 #### [ Kevin Buzzard (Apr 01 2018 at 16:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491552):
-I could probably answer these questions myself now
+<p>I could probably answer these questions myself now</p>
 
 #### [ Gabriel Ebner (Apr 01 2018 at 16:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491587):
-unification = assign the ?m_1, ..., ?m_n in such a way that the two sides are definitionally equal
+<p>unification = assign the ?m_1, ..., ?m_n in such a way that the two sides are definitionally equal</p>
 
 #### [ Kevin Buzzard (Apr 01 2018 at 16:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491593):
-if I could get Lean to print out these `=?=` constraints myself.
+<p>if I could get Lean to print out these <code>=?=</code> constraints myself.</p>
 
 #### [ Kevin Buzzard (Apr 01 2018 at 16:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491595):
-Is there some set_option I can turn on
+<p>Is there some set_option I can turn on</p>
 
 #### [ Kevin Buzzard (Apr 01 2018 at 16:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491596):
-so I can just watch it all happening?
+<p>so I can just watch it all happening?</p>
 
 #### [ Kevin Buzzard (Apr 01 2018 at 16:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491597):
-I remember when I discovered set_option pp.all true and very quickly developed a much better understanding of what a term was
+<p>I remember when I discovered set_option pp.all true and very quickly developed a much better understanding of what a term was</p>
 
 #### [ Kevin Buzzard (Apr 01 2018 at 16:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491605):
-and when I discovered various set_option things for simp and very quickly got a much better understanding of what simp di.
+<p>and when I discovered various set_option things for simp and very quickly got a much better understanding of what simp di.</p>
 
 #### [ Kevin Buzzard (Apr 01 2018 at 16:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491606):
-did
+<p>did</p>
 
 #### [ Gabriel Ebner (Apr 01 2018 at 16:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491607):
-```lean
-set_option trace.type_context.is_def_eq true
-```
+<div class="codehilite"><pre><span></span><span class="kn">set_option</span> <span class="n">trace</span><span class="bp">.</span><span class="n">type_context</span><span class="bp">.</span><span class="n">is_def_eq</span> <span class="n">true</span>
+</pre></div>
 
 #### [ Kevin Buzzard (Apr 01 2018 at 17:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491660):
-oh gosh
+<p>oh gosh</p>
 
 #### [ Kevin Buzzard (Apr 01 2018 at 17:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491661):
-even when I fill in all the `_`
+<p>even when I fill in all the <code>_</code></p>
 
 #### [ Kevin Buzzard (Apr 01 2018 at 17:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491662):
-I still get outputs
+<p>I still get outputs</p>
 
 #### [ Kevin Buzzard (Apr 01 2018 at 17:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491702):
-This must be because of `@`
+<p>This must be because of <code>@</code></p>
 
 #### [ Kevin Buzzard (Apr 01 2018 at 17:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491709):
-`theorem  easy {i : ℕ} {n : ℕ} : i < n → i < nat.succ n :=  λ H, lt.trans H $ nat.lt_succ_self n`
+<p><code>theorem  easy {i : ℕ} {n : ℕ} : i &lt; n → i &lt; nat.succ n :=  λ H, lt.trans H $ nat.lt_succ_self n</code></p>
 
 #### [ Gabriel Ebner (Apr 01 2018 at 17:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491712):
-The output also includes all the unification you get for type-checking, even if there are no underscores.
+<p>The output also includes all the unification you get for type-checking, even if there are no underscores.</p>
 
 #### [ Kevin Buzzard (Apr 01 2018 at 17:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491713):
-produces two bursts of excitement:
+<p>produces two bursts of excitement:</p>
 
 #### [ Kevin Buzzard (Apr 01 2018 at 17:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491714):
-```
-
-
-[type_context.is_def_eq] ℕ =?= ?m_1 ... success  (approximate mode)
+<div class="codehilite"><pre><span></span>[type_context.is_def_eq] ℕ =?= ?m_1 ... success  (approximate mode)
 [type_context.is_def_eq] ℕ =?= ?m_1 ... success  (approximate mode)
 [type_context.is_def_eq] ℕ =?= ?m_1 ... success  (approximate mode)
 [type_context.is_def_eq] ℕ =?= ?m_1 ... success  (approximate mode)
@@ -179,267 +175,260 @@ produces two bursts of excitement:
 [type_context.is_def_eq] ℕ =?= ?m_1 ... success  (approximate mode)
 [type_context.is_def_eq] ?m_1 =?= nat.has_lt ... success  (approximate mode)
 [type_context.is_def_eq] ?m_1 =?= nat.has_lt ... success  (approximate mode)
-
-
- 
-```
+</pre></div>
 
 #### [ Kevin Buzzard (Apr 01 2018 at 17:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491755):
-and
+<p>and</p>
 
 #### [ Gabriel Ebner (Apr 01 2018 at 17:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491757):
-Yes, I'm not sure how much you can learn from the output.
+<p>Yes, I'm not sure how much you can learn from the output.</p>
 
 #### [ Kevin Buzzard (Apr 01 2018 at 17:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491758):
-```
-[type_context.is_def_eq] ?m_1 =?= i < n ... success  (approximate mode)
-[type_context.is_def_eq] i < nat.succ n =?= ?m_3 < ?m_4 ... success  (approximate mode)
+<div class="codehilite"><pre><span></span>[type_context.is_def_eq] ?m_1 =?= i &lt; n ... success  (approximate mode)
+[type_context.is_def_eq] i &lt; nat.succ n =?= ?m_3 &lt; ?m_4 ... success  (approximate mode)
 [type_context.is_def_eq] partial_order.to_preorder ℕ =?= partial_order.to_preorder ℕ ... success  (approximate mode)
-[type_context.is_def_eq] i < n =?= ?m_3 < ?m_4 ... success  (approximate mode)
-[type_context.is_def_eq] ?m_1 =?= ?m_4 < ?m_5 ... success  (approximate mode)
+[type_context.is_def_eq] i &lt; n =?= ?m_3 &lt; ?m_4 ... success  (approximate mode)
+[type_context.is_def_eq] ?m_1 =?= ?m_4 &lt; ?m_5 ... success  (approximate mode)
 [type_context.is_def_eq] ?m_1 =?= H ... success  (approximate mode)
-[type_context.is_def_eq] ?m_3 < ?m_4 =?= ?m_5 < nat.succ ?m_5 ... success  (approximate mode)
+[type_context.is_def_eq] ?m_3 &lt; ?m_4 =?= ?m_5 &lt; nat.succ ?m_5 ... success  (approximate mode)
 [type_context.is_def_eq] ℕ =?= ℕ ... success  (approximate mode)
 [type_context.is_def_eq] ℕ =?= ℕ ... success  (approximate mode)
 [type_context.is_def_eq] ?m_1 =?= n ... success  (approximate mode)
-[type_context.is_def_eq] n < nat.succ n =?= ?m_3 < ?m_4 ... success  (approximate mode)
+[type_context.is_def_eq] n &lt; nat.succ n =?= ?m_3 &lt; ?m_4 ... success  (approximate mode)
 [type_context.is_def_eq] ?m_1 =?= nat.lt_succ_self n ... success  (approximate mode)
-[type_context.is_def_eq] i < n → i < nat.succ n =?= i < n → i < nat.succ n ... success  (approximate mode) 
-```
+[type_context.is_def_eq] i &lt; n → i &lt; nat.succ n =?= i &lt; n → i &lt; nat.succ n ... success  (approximate mode)
+</pre></div>
 
 #### [ Kevin Buzzard (Apr 01 2018 at 17:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491760):
-In my current state I can probably learn quite a bit
+<p>In my current state I can probably learn quite a bit</p>
 
 #### [ Kevin Buzzard (Apr 01 2018 at 17:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491810):
-I think the guilty party is `lt.trans`
+<p>I think the guilty party is <code>lt.trans</code></p>
 
 #### [ Kevin Buzzard (Apr 01 2018 at 17:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491811):
-or, as it should really be known
+<p>or, as it should really be known</p>
 
 #### [ Kevin Buzzard (Apr 01 2018 at 17:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491813):
-[rips mask off in Scooby-doo like manner]
+<p>[rips mask off in Scooby-doo like manner]</p>
 
 #### [ Kevin Buzzard (Apr 01 2018 at 17:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491815):
-`@lt_trans _ _ _ _ _`
+<p><code>@lt_trans _ _ _ _ _</code></p>
 
 #### [ Kevin Buzzard (Apr 01 2018 at 17:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491865):
-Hmm
+<p>Hmm</p>
 
 #### [ Kevin Buzzard (Apr 01 2018 at 17:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491866):
-```
-definition  Npreorder : preorder ℕ :=  by apply_instance
+<div class="codehilite"><pre><span></span>definition  Npreorder : preorder ℕ :=  by apply_instance
 
-theorem  easy' {i : ℕ} {n : ℕ} : i < n → i < nat.succ n :=
+theorem  easy&#39; {i : ℕ} {n : ℕ} : i &lt; n → i &lt; nat.succ n :=
 λ H, @lt.trans ℕ Npreorder i n (nat.succ n) H $ nat.lt_succ_self n
-```
+</pre></div>
 
 #### [ Kevin Buzzard (Apr 01 2018 at 17:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491911):
-I still get a bunch of output from ` set_option trace.type_context.is_def_eq true `
+<p>I still get a bunch of output from <code> set_option trace.type_context.is_def_eq true </code></p>
 
 #### [ Kevin Buzzard (Apr 01 2018 at 17:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491913):
-aargh it's the notation
+<p>aargh it's the notation</p>
 
 #### [ Kevin Buzzard (Apr 01 2018 at 17:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491958):
-` [type_context.is_def_eq] ?m_1 =?= n ... success  (approximate mode)`
+<p><code> [type_context.is_def_eq] ?m_1 =?= n ... success  (approximate mode)</code></p>
 
 #### [ Kevin Buzzard (Apr 01 2018 at 17:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491959):
-Nice to see we're in "approximate mode"
+<p>Nice to see we're in "approximate mode"</p>
 
 #### [ Kevin Buzzard (Apr 01 2018 at 17:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491960):
-Doesn't fill me with confidence
+<p>Doesn't fill me with confidence</p>
 
 #### [ Gabriel Ebner (Apr 01 2018 at 17:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491965):
-Checking the equality of two terms without metavariables is a special case of unification.  That's also why it's called `is_def_eq`.  So whenever the elaborator makes sure that a term type-checks, it will produce unification constraints.
+<p>Checking the equality of two terms without metavariables is a special case of unification.  That's also why it's called <code>is_def_eq</code>.  So whenever the elaborator makes sure that a term type-checks, it will produce unification constraints.</p>
 
 #### [ Kevin Buzzard (Apr 01 2018 at 17:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124492018):
-Am I "being the elaborator" at the minute? So far I am up to
+<p>Am I "being the elaborator" at the minute? So far I am up to</p>
 
 #### [ Kevin Buzzard (Apr 01 2018 at 17:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124492020):
-``` 
-definition  Npreorder : preorder ℕ :=  by apply_instance
+<div class="codehilite"><pre><span></span>definition  Npreorder : preorder ℕ :=  by apply_instance
 definition  Nhas_lt : has_lt ℕ :=  by apply_instance
 
-theorem  easy' {i : ℕ} {n : ℕ} : @has_lt.lt ℕ Nhas_lt i n →  @has_lt.lt ℕ Nhas_lt i (nat.succ n) :=
+theorem  easy&#39; {i : ℕ} {n : ℕ} : @has_lt.lt ℕ Nhas_lt i n →  @has_lt.lt ℕ Nhas_lt i (nat.succ n) :=
 λ H, @lt.trans ℕ Npreorder i n (nat.succ n) H $ nat.lt_succ_self n
-```
+</pre></div>
 
 #### [ Kevin Buzzard (Apr 01 2018 at 17:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124492021):
-I am having real trouble elaborating this any more.
+<p>I am having real trouble elaborating this any more.</p>
 
 #### [ Kevin Buzzard (Apr 01 2018 at 17:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124492068):
-In fact I would go so far to say that this term can't be elaborated any more.
+<p>In fact I would go so far to say that this term can't be elaborated any more.</p>
 
 #### [ Kevin Buzzard (Apr 01 2018 at 17:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124492070):
-although of course things could be unfolded.
+<p>although of course things could be unfolded.</p>
 
 #### [ Kevin Buzzard (Apr 01 2018 at 17:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124492081):
-What does the unfolding? Is that still the elaborator? Does the elaborator have to think about the actual definition of the term `@has_lt.lt` or does it just check its type?
+<p>What does the unfolding? Is that still the elaborator? Does the elaborator have to think about the actual definition of the term <code>@has_lt.lt</code> or does it just check its type?</p>
 
 #### [ Kevin Buzzard (Apr 01 2018 at 17:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124492125):
-I am not sure I care at all about the definition of `@has_lt.lt nat Nhas_lt`, all I need to know is that N is a preorder.
+<p>I am not sure I care at all about the definition of <code>@has_lt.lt nat Nhas_lt</code>, all I need to know is that N is a preorder.</p>
 
 #### [ Gabriel Ebner (Apr 01 2018 at 17:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124492126):
-If you need to unify `has_lt.lt a b c d` and `nat.lt c d`, then yes, the elaborator will unfold `has_lt.lt`.
+<p>If you need to unify <code>has_lt.lt a b c d</code> and <code>nat.lt c d</code>, then yes, the elaborator will unfold <code>has_lt.lt</code>.</p>
 
 #### [ Gabriel Ebner (Apr 01 2018 at 17:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124492128):
-In this case, I don't think we unfold `has_lt.lt` anywhere.  (At least we don't need to.)
+<p>In this case, I don't think we unfold <code>has_lt.lt</code> anywhere.  (At least we don't need to.)</p>
 
 #### [ Gabriel Ebner (Apr 01 2018 at 17:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124492180):
-The `easy'` theorem is still missing the domain of the lambda, if you want to write down a "fully elaborated" term.
+<p>The <code>easy'</code> theorem is still missing the domain of the lambda, if you want to write down a "fully elaborated" term.</p>
 
 #### [ Gabriel Ebner (Apr 01 2018 at 17:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124492235):
-BTW, I believe it's a mistake to think of elaboration as "filling things in" (even though that may be literal meaning of the word).  From a big picture point of view elaboration is the translation of pre-expressions (which are close to what you write down) to type-correct terms in the core type theory.  Personally I think of a pre-expression more like a recipe that tells the elaborator to do what you want.
+<p>BTW, I believe it's a mistake to think of elaboration as "filling things in" (even though that may be literal meaning of the word).  From a big picture point of view elaboration is the translation of pre-expressions (which are close to what you write down) to type-correct terms in the core type theory.  Personally I think of a pre-expression more like a recipe that tells the elaborator to do what you want.</p>
 
 #### [ Kevin Buzzard (Apr 01 2018 at 17:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124492240):
-Oh! Yes, I forgot about the lambda.
+<p>Oh! Yes, I forgot about the lambda.</p>
 
 #### [ Kevin Buzzard (Apr 01 2018 at 17:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124492245):
-So am I changing a `pexpr` to an `expr`?
+<p>So am I changing a <code>pexpr</code> to an <code>expr</code>?</p>
 
 #### [ Gabriel Ebner (Apr 01 2018 at 17:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124492248):
-No, you're changing one `pexpr` into another `pexpr`.
+<p>No, you're changing one <code>pexpr</code> into another <code>pexpr</code>.</p>
 
 #### [ Kevin Buzzard (Apr 01 2018 at 17:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124492254):
-dammit I want an expr
+<p>dammit I want an expr</p>
 
 #### [ Kevin Buzzard (Apr 01 2018 at 17:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124492259):
-I read about them in the manual
+<p>I read about them in the manual</p>
 
 #### [ Kevin Buzzard (Apr 01 2018 at 17:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124492267):
-I am concerned that I might have more than one `<=` on my `nat`
+<p>I am concerned that I might have more than one <code>&lt;=</code> on my <code>nat</code></p>
 
 #### [ Kevin Buzzard (Apr 01 2018 at 17:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124492279):
-`Npreorder` says that `nat` has the structure of a `preorder`
+<p><code>Npreorder</code> says that <code>nat</code> has the structure of a <code>preorder</code></p>
 
 #### [ Gabriel Ebner (Apr 01 2018 at 17:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124492310):
-I guess as an exercise you could write down the proof of `easy` using the `expr` constructors:
-```lean
-open tactic expr
-theorem easy {i n} : i < n -> i < nat.succ n :=
-by do exact $ lam /- fill in here -/
-```
+<p>I guess as an exercise you could write down the proof of <code>easy</code> using the <code>expr</code> constructors:</p>
+<div class="codehilite"><pre><span></span><span class="kn">open</span> <span class="n">tactic</span> <span class="n">expr</span>
+<span class="kn">theorem</span> <span class="n">easy</span> <span class="o">{</span><span class="n">i</span> <span class="n">n</span><span class="o">}</span> <span class="o">:</span> <span class="n">i</span> <span class="bp">&lt;</span> <span class="n">n</span> <span class="bp">-&gt;</span> <span class="n">i</span> <span class="bp">&lt;</span> <span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">n</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">do</span> <span class="n">exact</span> <span class="err">$</span> <span class="n">lam</span> <span class="c">/-</span><span class="cm"> fill in here -/</span>
+</pre></div>
 
 #### [ Kevin Buzzard (Apr 01 2018 at 17:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124492323):
-and the `<` on it is I think called something like `Npreorder.lt`
+<p>and the <code>&lt;</code> on it is I think called something like <code>Npreorder.lt</code></p>
 
 #### [ Kevin Buzzard (Apr 01 2018 at 17:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124492331):
-but the `<` I want is called `has_lt.lt`
+<p>but the <code>&lt;</code> I want is called <code>has_lt.lt</code></p>
 
 #### [ Kevin Buzzard (Apr 01 2018 at 17:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124492373):
-Actually I don't even know what it's called
+<p>Actually I don't even know what it's called</p>
 
 #### [ Gabriel Ebner (Apr 01 2018 at 17:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124492379):
-Yes, they are many `lt`s on `nat` and they all mean the same in the end.  AFAICT you have `has_lt.lt` everywhere though, as you should.
+<p>Yes, they are many <code>lt</code>s on <code>nat</code> and they all mean the same in the end.  AFAICT you have <code>has_lt.lt</code> everywhere though, as you should.</p>
 
 #### [ Kevin Buzzard (Apr 01 2018 at 17:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124492380):
-it's called `Nhas_lt` I guess
+<p>it's called <code>Nhas_lt</code> I guess</p>
 
 #### [ Kevin Buzzard (Apr 01 2018 at 17:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124492383):
-I am not so sure about the `lt` coming from the preorder
+<p>I am not so sure about the <code>lt</code> coming from the preorder</p>
 
 #### [ Kevin Buzzard (Apr 01 2018 at 17:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124492391):
-I used type class inference to define the preorder on `nat`
+<p>I used type class inference to define the preorder on <code>nat</code></p>
 
 #### [ Gabriel Ebner (Apr 01 2018 at 17:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124492433):
-Ah, I understand now.  The question is about the relation between `Npreorder` and `Nhas_lt`: the terms `@preorder.to_has_lt nat Npreorder` and `Nhas_lt` are definitionally equal.  (And type-checking actually needs to verify this equality.)
+<p>Ah, I understand now.  The question is about the relation between <code>Npreorder</code> and <code>Nhas_lt</code>: the terms <code>@preorder.to_has_lt nat Npreorder</code> and <code>Nhas_lt</code> are definitionally equal.  (And type-checking actually needs to verify this equality.)</p>
 
 #### [ Kevin Buzzard (Apr 01 2018 at 17:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124492439):
-The more I elaborate, the greater the output of ` set_option trace.type_context.is_def_eq true` becomes!
+<p>The more I elaborate, the greater the output of <code> set_option trace.type_context.is_def_eq true</code> becomes!</p>
 
 #### [ Kevin Buzzard (Apr 01 2018 at 17:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124492993):
-```quote
-I guess as an exercise you could write down the proof of `easy` using the `expr` constructors:
-```lean
-open tactic expr
-theorem easy {i n} : i < n -> i < nat.succ n :=
-by do exact $ lam /- fill in here -/
-```
-```
-Oh I like this comment. Thanks! I might start with something easier than `easy` but this looks like a fun game :-)
+<blockquote>
+<p>I guess as an exercise you could write down the proof of <code>easy</code> using the <code>expr</code> constructors:</p>
+<div class="codehilite"><pre><span></span><span class="kn">open</span> <span class="n">tactic</span> <span class="n">expr</span>
+<span class="kn">theorem</span> <span class="n">easy</span> <span class="o">{</span><span class="n">i</span> <span class="n">n</span><span class="o">}</span> <span class="o">:</span> <span class="n">i</span> <span class="bp">&lt;</span> <span class="n">n</span> <span class="bp">-&gt;</span> <span class="n">i</span> <span class="bp">&lt;</span> <span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">n</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">do</span> <span class="n">exact</span> <span class="err">$</span> <span class="n">lam</span> <span class="c">/-</span><span class="cm"> fill in here -/</span>
+</pre></div>
+
+
+</blockquote>
+<p>Oh I like this comment. Thanks! I might start with something easier than <code>easy</code> but this looks like a fun game :-)</p>
 
 #### [ Kevin Buzzard (Apr 01 2018 at 17:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124493033):
-I might well find it a challenge to prove `1 + 1 = 2` in this mode
+<p>I might well find it a challenge to prove <code>1 + 1 = 2</code> in this mode</p>
 
 #### [ Kevin Buzzard (Apr 01 2018 at 18:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124493239):
-woo I made Prop
+<p>woo I made Prop</p>
 
 #### [ Kevin Buzzard (Apr 01 2018 at 18:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124493240):
-`meta  definition  prop : expr (ff) := expr.sort level.zero`
+<p><code>meta  definition  prop : expr (ff) := expr.sort level.zero</code></p>
 
 #### [ Kevin Buzzard (Apr 01 2018 at 18:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124493279):
-That's the proof that `expr` is inhabited
+<p>That's the proof that <code>expr</code> is inhabited</p>
 
 #### [ Sebastian Ullrich (Apr 01 2018 at 18:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124493342):
-Note that `expr ff = pexpr`
+<p>Note that <code>expr ff = pexpr</code></p>
 
 #### [ Kevin Buzzard (Apr 01 2018 at 18:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124493495):
-I just noticed that expr was demanding a bool so I gave it one
+<p>I just noticed that expr was demanding a bool so I gave it one</p>
 
 #### [ Kevin Buzzard (Apr 01 2018 at 18:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124493541):
-Hmm, that's funny. `pexpr.lean` says ` @[reducible]  meta  def  pexpr  := expr ff`
+<p>Hmm, that's funny. <code>pexpr.lean</code> says <code> @[reducible]  meta  def  pexpr  := expr ff</code></p>
 
 #### [ Kevin Buzzard (Apr 01 2018 at 18:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124493545):
-but `#print pexpr` says that it's ` id_rhs Type (expr ff) `
+<p>but <code>#print pexpr</code> says that it's <code> id_rhs Type (expr ff) </code></p>
 
 #### [ Kevin Buzzard (Apr 01 2018 at 18:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124493584):
-rofl and `id_rhs` is an abbreviation. @**Kenny Lau** here's when you should use reducible, apparently, and abbreviations too.
+<p>rofl and <code>id_rhs</code> is an abbreviation. <span class="user-mention" data-user-id="110064">@Kenny Lau</span> here's when you should use reducible, apparently, and abbreviations too.</p>
 
 #### [ Kenny Lau (Apr 01 2018 at 18:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124493591):
-so when exactly?
+<p>so when exactly?</p>
 
 #### [ Kevin Buzzard (Apr 01 2018 at 18:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124494493):
-Oh this is all much too hard. I don't know how to turn anything at all into an expr. How do I turn a nat into an expr? How do I turn a Prop into an expr? How do I turn a proof into an expr? How do I turn a Type into an expr? Oh -- are these questions too general?
+<p>Oh this is all much too hard. I don't know how to turn anything at all into an expr. How do I turn a nat into an expr? How do I turn a Prop into an expr? How do I turn a proof into an expr? How do I turn a Type into an expr? Oh -- are these questions too general?</p>
 
 #### [ Kevin Buzzard (Apr 01 2018 at 18:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124494496):
-How do I turn a constructor into an expr? Is that a sensible question?
+<p>How do I turn a constructor into an expr? Is that a sensible question?</p>
 
 #### [ Kevin Buzzard (Apr 01 2018 at 18:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124494501):
-How do I turn` nat.zero` into an expr?
+<p>How do I turn<code> nat.zero</code> into an expr?</p>
 
 #### [ Kevin Buzzard (Apr 01 2018 at 18:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124494542):
-If `f : X -> Y` and I have an expr `ex` representing the...name? `x : X` , how do I create an expr corresponding to `f x`?
+<p>If <code>f : X -&gt; Y</code> and I have an expr <code>ex</code> representing the...name? <code>x : X</code> , how do I create an expr corresponding to <code>f x</code>?</p>
 
 #### [ Kevin Buzzard (Apr 01 2018 at 18:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124494550):
-How do I turn `eq.refl` into an expr?
+<p>How do I turn <code>eq.refl</code> into an expr?</p>
 
 #### [ Kevin Buzzard (Apr 01 2018 at 18:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124494589):
-This sort of exercise might be a really good bridge to the Programming In Lean book.
+<p>This sort of exercise might be a really good bridge to the Programming In Lean book.</p>
 
 #### [ Kevin Buzzard (Apr 01 2018 at 18:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124494590):
-All this expr stuff is introduced at the same time as everything else somehow
+<p>All this expr stuff is introduced at the same time as everything else somehow</p>
 
 #### [ Kevin Buzzard (Apr 01 2018 at 18:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124494592):
-Perhaps one can abstract it away first
+<p>Perhaps one can abstract it away first</p>
 
 #### [ Kevin Buzzard (Apr 01 2018 at 18:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124494598):
-and think about making exprs from usual Lean terms rather than letting the elaborator do it
+<p>and think about making exprs from usual Lean terms rather than letting the elaborator do it</p>
 
 #### [ Kevin Buzzard (Apr 01 2018 at 18:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124494647):
-Does the elaborator take a list of tokens and return an expr?
+<p>Does the elaborator take a list of tokens and return an expr?</p>
 
 #### [ Kevin Buzzard (Apr 01 2018 at 18:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124494686):
-I am still at the stage where I don't know if I have the words right
+<p>I am still at the stage where I don't know if I have the words right</p>
 
 #### [ Kevin Buzzard (Apr 01 2018 at 19:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124494741):
-I feel like this could be a cute blog post, explaining how to get from a string of unicode characters to an expr, even a really stupid string like `theorem  X : unit = unit := eq.refl unit`
+<p>I feel like this could be a cute blog post, explaining how to get from a string of unicode characters to an expr, even a really stupid string like <code>theorem  X : unit = unit := eq.refl unit</code></p>
 
 #### [ Kevin Buzzard (Apr 01 2018 at 19:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124494748):
-I don't know how to turn this into an expr
+<p>I don't know how to turn this into an expr</p>
 
 #### [ Kevin Buzzard (Apr 01 2018 at 21:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124498667):
-```
-theorem  very_easy : unit = unit :=
-by  do to_expr ```(eq.refl unit) >>= exact
-```
+<div class="codehilite"><pre><span></span>theorem  very_easy : unit = unit :=
+by  do to_expr ```(eq.refl unit) &gt;&gt;= exact
+</pre></div>
 
 #### [ Kevin Buzzard (Apr 01 2018 at 21:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124498669):
-that's kind of a cheat because I didn't start ` by do exact $ `
+<p>that's kind of a cheat because I didn't start <code> by do exact $ </code></p>
 
 #### [ Kevin Buzzard (Apr 01 2018 at 21:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124498712):
-but all this stuff like `get_local` and `to_expr`, all these functions return `tactic` something.
+<p>but all this stuff like <code>get_local</code> and <code>to_expr</code>, all these functions return <code>tactic</code> something.</p>
 
 #### [ Kevin Buzzard (Apr 01 2018 at 21:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124498724):
-Do I have to use the tactic monad?
+<p>Do I have to use the tactic monad?</p>
 
 
 {% endraw %}

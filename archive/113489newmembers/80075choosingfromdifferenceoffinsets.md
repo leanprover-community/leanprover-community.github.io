@@ -12,185 +12,182 @@ permalink: archive/113489newmembers/80075choosingfromdifferenceoffinsets.html
 
 {% raw %}
 #### [ Bryan Gin-ge Chen (Sep 09 2018 at 19:57)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/choosing%20from%20difference%20of%20finsets/near/133619465):
-Here's my "Tactic State":
-```lean
-α : Type u_1,
-_inst_1 : decidable_eq α,
-x y S : finset α,
-hx : x ⊆ S,
-hy : y ⊆ S,
-hcard : finset.card x < finset.card y
-⊢ ∃ (e : α), e ∈ y \ x
-```
-I've been digging through `finset` and am not sure what I need to do to kill this goal. Any pointers? It looks like I need to invoke `classical.choice`, but does that mean I need to turn things into `fintype`s?
+<p>Here's my "Tactic State":</p>
+<div class="codehilite"><pre><span></span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u_1</span><span class="o">,</span>
+<span class="bp">_</span><span class="n">inst_1</span> <span class="o">:</span> <span class="n">decidable_eq</span> <span class="n">α</span><span class="o">,</span>
+<span class="n">x</span> <span class="n">y</span> <span class="n">S</span> <span class="o">:</span> <span class="n">finset</span> <span class="n">α</span><span class="o">,</span>
+<span class="n">hx</span> <span class="o">:</span> <span class="n">x</span> <span class="err">⊆</span> <span class="n">S</span><span class="o">,</span>
+<span class="n">hy</span> <span class="o">:</span> <span class="n">y</span> <span class="err">⊆</span> <span class="n">S</span><span class="o">,</span>
+<span class="n">hcard</span> <span class="o">:</span> <span class="n">finset</span><span class="bp">.</span><span class="n">card</span> <span class="n">x</span> <span class="bp">&lt;</span> <span class="n">finset</span><span class="bp">.</span><span class="n">card</span> <span class="n">y</span>
+<span class="err">⊢</span> <span class="bp">∃</span> <span class="o">(</span><span class="n">e</span> <span class="o">:</span> <span class="n">α</span><span class="o">),</span> <span class="n">e</span> <span class="err">∈</span> <span class="n">y</span> <span class="err">\</span> <span class="n">x</span>
+</pre></div>
+
+
+<p>I've been digging through <code>finset</code> and am not sure what I need to do to kill this goal. Any pointers? It looks like I need to invoke <code>classical.choice</code>, but does that mean I need to turn things into <code>fintype</code>s?</p>
 
 #### [ Mario Carneiro (Sep 09 2018 at 20:10)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/choosing%20from%20difference%20of%20finsets/near/133619814):
-You could prove that `finset.card (y \ x) != 0`
+<p>You could prove that <code>finset.card (y \ x) != 0</code></p>
 
 #### [ Bryan Gin-ge Chen (Sep 09 2018 at 20:44)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/choosing%20from%20difference%20of%20finsets/near/133620757):
-Oops, I should have showed that `S` is nonempty before this point. But I'm still not seeing how to easily work with `finset.card`. Perhaps I should be working with `multiset.card` instead?
+<p>Oops, I should have showed that <code>S</code> is nonempty before this point. But I'm still not seeing how to easily work with <code>finset.card</code>. Perhaps I should be working with <code>multiset.card</code> instead?</p>
 
 #### [ Kevin Buzzard (Sep 09 2018 at 21:58)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/choosing%20from%20difference%20of%20finsets/near/133622733):
-The interface should all be there, although it might require reading `finset.lean`...
+<p>The interface should all be there, although it might require reading <code>finset.lean</code>...</p>
 
 #### [ Kevin Buzzard (Sep 09 2018 at 22:01)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/choosing%20from%20difference%20of%20finsets/near/133622824):
-So my algorithm for doing questions like this is to type `import finset`, see what auto-complete suggests, find that `finset.lean` is in `data/`, then open finset.lean and search the file for `card` to see what's there.
+<p>So my algorithm for doing questions like this is to type <code>import finset</code>, see what auto-complete suggests, find that <code>finset.lean</code> is in <code>data/</code>, then open finset.lean and search the file for <code>card</code> to see what's there.</p>
 
 #### [ Kevin Buzzard (Sep 09 2018 at 22:04)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/choosing%20from%20difference%20of%20finsets/near/133622922):
-`theorem eq_of_subset_of_card_le {s t : finset α} (h : s ⊆ t) (h₂ : card t ≤ card s) : s = t := ...`. Can I work classically?
+<p><code>theorem eq_of_subset_of_card_le {s t : finset α} (h : s ⊆ t) (h₂ : card t ≤ card s) : s = t := ...</code>. Can I work classically?</p>
 
 #### [ Patrick Massot (Sep 09 2018 at 22:04)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/choosing%20from%20difference%20of%20finsets/near/133622924):
-Yes!
+<p>Yes!</p>
 
 #### [ Patrick Massot (Sep 09 2018 at 22:05)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/choosing%20from%20difference%20of%20finsets/near/133622930):
-(didn't read the code part)
+<p>(didn't read the code part)</p>
 
 #### [ Mario Carneiro (Sep 09 2018 at 22:05)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/choosing%20from%20difference%20of%20finsets/near/133622931):
-You should have decidable whatever in this context
+<p>You should have decidable whatever in this context</p>
 
 #### [ Kevin Buzzard (Sep 09 2018 at 22:22)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/choosing%20from%20difference%20of%20finsets/near/133623442):
-```lean
-import data.finset
-import logic.basic
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">finset</span>
+<span class="kn">import</span> <span class="n">logic</span><span class="bp">.</span><span class="n">basic</span>
 
-local attribute [instance, priority 0] classical.prop_decidable
+<span class="n">local</span> <span class="n">attribute</span> <span class="o">[</span><span class="kn">instance</span><span class="o">,</span> <span class="n">priority</span> <span class="mi">0</span><span class="o">]</span> <span class="n">classical</span><span class="bp">.</span><span class="n">prop_decidable</span>
 
-example (α) [decidable_eq α] (x y : finset α) (hcard : finset.card x < finset.card y)
-: ∃ (e : α), e ∈ y \ x :=
-begin
-  have hnsub : ¬ (y ⊆ x),
-    intro hsub,
-    have Heq := finset.eq_of_subset_of_card_le hsub (le_of_lt hcard),
-    rw Heq at hcard,
-    revert hcard,simp,
-  by_contra hnotex,
-  have h2 := forall_not_of_not_exists hnotex,
-  apply hnsub,
-  intros b Hb,
-  have h3 := h2 b,
-  revert Hb,
-  revert h3,
-  simp, 
-end
-```
+<span class="kn">example</span> <span class="o">(</span><span class="n">α</span><span class="o">)</span> <span class="o">[</span><span class="n">decidable_eq</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">finset</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">hcard</span> <span class="o">:</span> <span class="n">finset</span><span class="bp">.</span><span class="n">card</span> <span class="n">x</span> <span class="bp">&lt;</span> <span class="n">finset</span><span class="bp">.</span><span class="n">card</span> <span class="n">y</span><span class="o">)</span>
+<span class="o">:</span> <span class="bp">∃</span> <span class="o">(</span><span class="n">e</span> <span class="o">:</span> <span class="n">α</span><span class="o">),</span> <span class="n">e</span> <span class="err">∈</span> <span class="n">y</span> <span class="err">\</span> <span class="n">x</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="k">have</span> <span class="n">hnsub</span> <span class="o">:</span> <span class="bp">¬</span> <span class="o">(</span><span class="n">y</span> <span class="err">⊆</span> <span class="n">x</span><span class="o">),</span>
+    <span class="n">intro</span> <span class="n">hsub</span><span class="o">,</span>
+    <span class="k">have</span> <span class="n">Heq</span> <span class="o">:=</span> <span class="n">finset</span><span class="bp">.</span><span class="n">eq_of_subset_of_card_le</span> <span class="n">hsub</span> <span class="o">(</span><span class="n">le_of_lt</span> <span class="n">hcard</span><span class="o">),</span>
+    <span class="n">rw</span> <span class="n">Heq</span> <span class="n">at</span> <span class="n">hcard</span><span class="o">,</span>
+    <span class="n">revert</span> <span class="n">hcard</span><span class="o">,</span><span class="n">simp</span><span class="o">,</span>
+  <span class="n">by_contra</span> <span class="n">hnotex</span><span class="o">,</span>
+  <span class="k">have</span> <span class="n">h2</span> <span class="o">:=</span> <span class="n">forall_not_of_not_exists</span> <span class="n">hnotex</span><span class="o">,</span>
+  <span class="n">apply</span> <span class="n">hnsub</span><span class="o">,</span>
+  <span class="n">intros</span> <span class="n">b</span> <span class="n">Hb</span><span class="o">,</span>
+  <span class="k">have</span> <span class="n">h3</span> <span class="o">:=</span> <span class="n">h2</span> <span class="n">b</span><span class="o">,</span>
+  <span class="n">revert</span> <span class="n">Hb</span><span class="o">,</span>
+  <span class="n">revert</span> <span class="n">h3</span><span class="o">,</span>
+  <span class="n">simp</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
 
-Amateurish approach. I don't know if I need decidability.
+
+<p>Amateurish approach. I don't know if I need decidability.</p>
 
 #### [ Mario Carneiro (Sep 09 2018 at 22:24)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/choosing%20from%20difference%20of%20finsets/near/133623456):
-does removing the local instance break the proof?
+<p>does removing the local instance break the proof?</p>
 
 #### [ Chris Hughes (Sep 09 2018 at 22:25)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/choosing%20from%20difference%20of%20finsets/near/133623508):
-I think the `by_contra` will break.
+<p>I think the <code>by_contra</code> will break.</p>
 
 #### [ Kevin Buzzard (Sep 09 2018 at 22:25)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/choosing%20from%20difference%20of%20finsets/near/133623509):
-`by_contra hnotex` breaks
+<p><code>by_contra hnotex</code> breaks</p>
 
 #### [ Bryan Gin-ge Chen (Sep 09 2018 at 22:25)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/choosing%20from%20difference%20of%20finsets/near/133623511):
-I tried to do the following as a warmup for the above:
-```lean
-import data.fintype
-variable {α : Type*}
-variable [decidable_eq α]
+<p>I tried to do the following as a warmup for the above:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">fintype</span>
+<span class="kn">variable</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span>
+<span class="kn">variable</span> <span class="o">[</span><span class="n">decidable_eq</span> <span class="n">α</span><span class="o">]</span>
 
-noncomputable def chosen {S : finset α} (h : ¬(S = ∅)) : α := begin
-rw [←ne] at h,
-have SS : fintype (↑S : set α) := finset_coe.fintype S,
-have hSS : nonempty (↑S : set α) := set.nonempty_iff_univ_ne_empty.mpr _,
-exact (↑(classical.choice hSS) : α)
-end
-```
-I'm having trouble turning `h : S ≠ ∅` into `⊢ @set.univ ↥↑S ≠ ∅`. Probably I'm just scared by the `↥↑` since I'm not too comfortable with coercions. 
+<span class="n">noncomputable</span> <span class="n">def</span> <span class="n">chosen</span> <span class="o">{</span><span class="n">S</span> <span class="o">:</span> <span class="n">finset</span> <span class="n">α</span><span class="o">}</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="bp">¬</span><span class="o">(</span><span class="n">S</span> <span class="bp">=</span> <span class="err">∅</span><span class="o">))</span> <span class="o">:</span> <span class="n">α</span> <span class="o">:=</span> <span class="k">begin</span>
+<span class="n">rw</span> <span class="o">[</span><span class="err">←</span><span class="n">ne</span><span class="o">]</span> <span class="n">at</span> <span class="n">h</span><span class="o">,</span>
+<span class="k">have</span> <span class="n">SS</span> <span class="o">:</span> <span class="n">fintype</span> <span class="o">(</span><span class="err">↑</span><span class="n">S</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span><span class="o">)</span> <span class="o">:=</span> <span class="n">finset_coe</span><span class="bp">.</span><span class="n">fintype</span> <span class="n">S</span><span class="o">,</span>
+<span class="k">have</span> <span class="n">hSS</span> <span class="o">:</span> <span class="n">nonempty</span> <span class="o">(</span><span class="err">↑</span><span class="n">S</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span><span class="o">)</span> <span class="o">:=</span> <span class="n">set</span><span class="bp">.</span><span class="n">nonempty_iff_univ_ne_empty</span><span class="bp">.</span><span class="n">mpr</span> <span class="bp">_</span><span class="o">,</span>
+<span class="n">exact</span> <span class="o">(</span><span class="err">↑</span><span class="o">(</span><span class="n">classical</span><span class="bp">.</span><span class="n">choice</span> <span class="n">hSS</span><span class="o">)</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span>
+<span class="kn">end</span>
+</pre></div>
 
-I've also been following something like your algorithm @**Kevin Buzzard** but I wanted to check in and make sure I wasn't missing some obscure lemma elsewhere. Thanks for your solution, I'll study it carefully now!
+
+<p>I'm having trouble turning <code>h : S ≠ ∅</code> into <code>⊢ @set.univ ↥↑S ≠ ∅</code>. Probably I'm just scared by the <code>↥↑</code> since I'm not too comfortable with coercions. </p>
+<p>I've also been following something like your algorithm <span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> but I wanted to check in and make sure I wasn't missing some obscure lemma elsewhere. Thanks for your solution, I'll study it carefully now!</p>
 
 #### [ Kenny Lau (Sep 09 2018 at 22:26)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/choosing%20from%20difference%20of%20finsets/near/133623556):
-if you make the statement bounded then by_contra will not break
+<p>if you make the statement bounded then by_contra will not break</p>
 
 #### [ Mario Carneiro (Sep 09 2018 at 22:26)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/choosing%20from%20difference%20of%20finsets/near/133623557):
-`chosen` is definitely noncomputable, but you can use `finset.exists_mem_of_ne_empty` to prove that easily
+<p><code>chosen</code> is definitely noncomputable, but you can use <code>finset.exists_mem_of_ne_empty</code> to prove that easily</p>
 
 #### [ Chris Hughes (Sep 09 2018 at 22:27)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/choosing%20from%20difference%20of%20finsets/near/133623565):
-`classical.sone (exists_mem_of_ne_empty h)`
+<p><code>classical.sone (exists_mem_of_ne_empty h)</code></p>
 
 #### [ Kevin Buzzard (Sep 09 2018 at 22:27)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/choosing%20from%20difference%20of%20finsets/near/133623568):
-@**Bryan Gin-ge Chen** you should try and understand Kenny's golfed solution :-)
+<p><span class="user-mention" data-user-id="123965">@Bryan Gin-ge Chen</span> you should try and understand Kenny's golfed solution :-)</p>
 
 #### [ Bryan Gin-ge Chen (Sep 09 2018 at 22:28)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/choosing%20from%20difference%20of%20finsets/near/133623615):
-Thanks Mario and Chris!
+<p>Thanks Mario and Chris!</p>
 
 #### [ Kevin Buzzard (Sep 09 2018 at 22:29)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/choosing%20from%20difference%20of%20finsets/near/133623627):
-I'm having trouble getting your warm-up to compile. What are the imports and variables?
+<p>I'm having trouble getting your warm-up to compile. What are the imports and variables?</p>
 
 #### [ Bryan Gin-ge Chen (Sep 09 2018 at 22:31)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/choosing%20from%20difference%20of%20finsets/near/133623705):
-Sorry about that, see the edit.
+<p>Sorry about that, see the edit.</p>
 
 #### [ Kevin Buzzard (Sep 09 2018 at 22:32)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/choosing%20from%20difference%20of%20finsets/near/133623756):
-My Lean has never heard of `set.nonempty_iff_univ_ne_empty.mpr`
+<p>My Lean has never heard of <code>set.nonempty_iff_univ_ne_empty.mpr</code></p>
 
 #### [ Mario Carneiro (Sep 09 2018 at 22:33)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/choosing%20from%20difference%20of%20finsets/near/133623769):
-```
-example (α) [decidable_eq α] (x y : finset α) (hcard : finset.card x < finset.card y) : ∃ (e : α), e ∈ y \ x :=
+<div class="codehilite"><pre><span></span>example (α) [decidable_eq α] (x y : finset α) (hcard : finset.card x &lt; finset.card y) : ∃ (e : α), e ∈ y \ x :=
 classical.by_contradiction $ λ h,
 not_le_of_lt hcard (finset.card_le_of_subset $ by simpa using h)
-```
+</pre></div>
 
 #### [ Kevin Buzzard (Sep 09 2018 at 22:34)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/choosing%20from%20difference%20of%20finsets/near/133623814):
-Oh sorry, I meant Mario's golfed solution.
+<p>Oh sorry, I meant Mario's golfed solution.</p>
 
 #### [ Mario Carneiro (Sep 09 2018 at 22:34)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/choosing%20from%20difference%20of%20finsets/near/133623821):
-there is a way to prove it without classical stuff, but I will let kenny do that
+<p>there is a way to prove it without classical stuff, but I will let kenny do that</p>
 
 #### [ Bryan Gin-ge Chen (Sep 09 2018 at 22:34)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/choosing%20from%20difference%20of%20finsets/near/133623824):
-it's in data.set.basic; I guess it was added quite recently https://github.com/leanprover/mathlib/pull/295
+<p>it's in data.set.basic; I guess it was added quite recently <a href="https://github.com/leanprover/mathlib/pull/295" target="_blank" title="https://github.com/leanprover/mathlib/pull/295">https://github.com/leanprover/mathlib/pull/295</a></p>
 
 #### [ Kevin Buzzard (Sep 09 2018 at 22:34)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/choosing%20from%20difference%20of%20finsets/near/133623831):
-Oh yes, I have an old project open. Thanks!
+<p>Oh yes, I have an old project open. Thanks!</p>
 
 #### [ Kevin Buzzard (Sep 09 2018 at 22:40)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/choosing%20from%20difference%20of%20finsets/near/133624004):
-I guess `↥↑S` means the subtype corresponding to the set corresponding to `S`.
+<p>I guess <code>↥↑S</code> means the subtype corresponding to the set corresponding to <code>S</code>.</p>
 
 #### [ Kenny Lau (Sep 09 2018 at 22:41)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/choosing%20from%20difference%20of%20finsets/near/133624012):
-```quote
-there is a way to prove it without classical stuff, but I will let kenny do that
-```
-roger that
-```lean
-example (α) [decidable_eq α] (x y : finset α) (hcard : finset.card x < finset.card y) : ∃ (e : α), e ∈ y \ x :=
-suffices ∃ e ∈ y, e ∉ x, by simpa,
-by_contradiction $ λ H, not_le_of_lt hcard (finset.card_le_of_subset $ by simpa using H)
-```
+<blockquote>
+<p>there is a way to prove it without classical stuff, but I will let kenny do that</p>
+</blockquote>
+<p>roger that</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">α</span><span class="o">)</span> <span class="o">[</span><span class="n">decidable_eq</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">finset</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">hcard</span> <span class="o">:</span> <span class="n">finset</span><span class="bp">.</span><span class="n">card</span> <span class="n">x</span> <span class="bp">&lt;</span> <span class="n">finset</span><span class="bp">.</span><span class="n">card</span> <span class="n">y</span><span class="o">)</span> <span class="o">:</span> <span class="bp">∃</span> <span class="o">(</span><span class="n">e</span> <span class="o">:</span> <span class="n">α</span><span class="o">),</span> <span class="n">e</span> <span class="err">∈</span> <span class="n">y</span> <span class="err">\</span> <span class="n">x</span> <span class="o">:=</span>
+<span class="n">suffices</span> <span class="bp">∃</span> <span class="n">e</span> <span class="err">∈</span> <span class="n">y</span><span class="o">,</span> <span class="n">e</span> <span class="err">∉</span> <span class="n">x</span><span class="o">,</span> <span class="k">by</span> <span class="n">simpa</span><span class="o">,</span>
+<span class="n">by_contradiction</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">H</span><span class="o">,</span> <span class="n">not_le_of_lt</span> <span class="n">hcard</span> <span class="o">(</span><span class="n">finset</span><span class="bp">.</span><span class="n">card_le_of_subset</span> <span class="err">$</span> <span class="k">by</span> <span class="n">simpa</span> <span class="kn">using</span> <span class="n">H</span><span class="o">)</span>
+</pre></div>
 
 #### [ Mario Carneiro (Sep 09 2018 at 22:44)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/choosing%20from%20difference%20of%20finsets/near/133624124):
-lol, that was easy
+<p>lol, that was easy</p>
 
 #### [ Kevin Buzzard (Sep 09 2018 at 22:50)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/choosing%20from%20difference%20of%20finsets/near/133624311):
-```lean
-noncomputable def chosen {S : finset α} (h : ¬(S = ∅)) : α := begin
-  rw [←ne] at h,
-  rw ←finset.card_pos at h,
-  change 0 < multiset.card S.val at h, -- switching to multisets
-  rw multiset.card_pos_iff_exists_mem at h, -- there's now a one-liner that I forgot
-  have hinhabited := classical.inhabited_of_exists h,
-  cases hinhabited with a,
-  exact a
-end
-```
+<div class="codehilite"><pre><span></span><span class="n">noncomputable</span> <span class="n">def</span> <span class="n">chosen</span> <span class="o">{</span><span class="n">S</span> <span class="o">:</span> <span class="n">finset</span> <span class="n">α</span><span class="o">}</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="bp">¬</span><span class="o">(</span><span class="n">S</span> <span class="bp">=</span> <span class="err">∅</span><span class="o">))</span> <span class="o">:</span> <span class="n">α</span> <span class="o">:=</span> <span class="k">begin</span>
+  <span class="n">rw</span> <span class="o">[</span><span class="err">←</span><span class="n">ne</span><span class="o">]</span> <span class="n">at</span> <span class="n">h</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="err">←</span><span class="n">finset</span><span class="bp">.</span><span class="n">card_pos</span> <span class="n">at</span> <span class="n">h</span><span class="o">,</span>
+  <span class="n">change</span> <span class="mi">0</span> <span class="bp">&lt;</span> <span class="n">multiset</span><span class="bp">.</span><span class="n">card</span> <span class="n">S</span><span class="bp">.</span><span class="n">val</span> <span class="n">at</span> <span class="n">h</span><span class="o">,</span> <span class="c1">-- switching to multisets</span>
+  <span class="n">rw</span> <span class="n">multiset</span><span class="bp">.</span><span class="n">card_pos_iff_exists_mem</span> <span class="n">at</span> <span class="n">h</span><span class="o">,</span> <span class="c1">-- there&#39;s now a one-liner that I forgot</span>
+  <span class="k">have</span> <span class="n">hinhabited</span> <span class="o">:=</span> <span class="n">classical</span><span class="bp">.</span><span class="n">inhabited_of_exists</span> <span class="n">h</span><span class="o">,</span>
+  <span class="n">cases</span> <span class="n">hinhabited</span> <span class="k">with</span> <span class="n">a</span><span class="o">,</span>
+  <span class="n">exact</span> <span class="n">a</span>
+<span class="kn">end</span>
+</pre></div>
 
 #### [ Kevin Buzzard (Sep 09 2018 at 22:51)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/choosing%20from%20difference%20of%20finsets/near/133624321):
-```quote
-lol, that was easy
-```
-oh come on, he just copied your answer ;-)
+<blockquote>
+<p>lol, that was easy</p>
+</blockquote>
+<p>oh come on, he just copied your answer ;-)</p>
 
 #### [ Patrick Massot (Sep 09 2018 at 22:57)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/choosing%20from%20difference%20of%20finsets/near/133624505):
-the last three lines can be abbreviated to `exact (classical.inhabited_of_exists h).default`
+<p>the last three lines can be abbreviated to <code>exact (classical.inhabited_of_exists h).default</code></p>
 
 #### [ Kenny Lau (Sep 09 2018 at 23:04)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/choosing%20from%20difference%20of%20finsets/near/133624762):
-```lean
-noncomputable def chosen {α} {S : finset α} (h : ¬(S = ∅)) : α :=
-classical.some $ classical.not_forall.1 $
-mt finset.eq_empty_of_forall_not_mem h
-```
+<div class="codehilite"><pre><span></span><span class="n">noncomputable</span> <span class="n">def</span> <span class="n">chosen</span> <span class="o">{</span><span class="n">α</span><span class="o">}</span> <span class="o">{</span><span class="n">S</span> <span class="o">:</span> <span class="n">finset</span> <span class="n">α</span><span class="o">}</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="bp">¬</span><span class="o">(</span><span class="n">S</span> <span class="bp">=</span> <span class="err">∅</span><span class="o">))</span> <span class="o">:</span> <span class="n">α</span> <span class="o">:=</span>
+<span class="n">classical</span><span class="bp">.</span><span class="n">some</span> <span class="err">$</span> <span class="n">classical</span><span class="bp">.</span><span class="n">not_forall</span><span class="bp">.</span><span class="mi">1</span> <span class="err">$</span>
+<span class="n">mt</span> <span class="n">finset</span><span class="bp">.</span><span class="n">eq_empty_of_forall_not_mem</span> <span class="n">h</span>
+</pre></div>
 
 
 {% endraw %}

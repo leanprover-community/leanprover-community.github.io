@@ -12,66 +12,67 @@ permalink: archive/113488general/48727customizingtidy.html
 
 {% raw %}
 #### [ Reid Barton (Jun 03 2018 at 16:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/customizing%20tidy/near/127504066):
-@**Scott Morrison** I used your `tidy` tactic to automatically generate a bunch of continuity proofs that I was formerly writing out manually like
-```lean
-continuous_subtype_mk _ $                                                                                                                                                     
-  continuous_max                                                                                                                                                              
-    (continuous_mul continuous_const (continuous.comp (continuous.comp continuous_fst continuous_subtype_val) continuous_norm))                                               
-    (continuous_sub continuous_const (continuous.comp continuous_snd continuous_subtype_val))                                                                                 
-```
-However, in order to make it run in a reasonable amount of time, I had to create a custom version of `tidy` that only uses a small number of the tactics (I don't need anything even as fancy as `dsimp`).
+<p><span class="user-mention" data-user-id="110087">@Scott Morrison</span> I used your <code>tidy</code> tactic to automatically generate a bunch of continuity proofs that I was formerly writing out manually like</p>
+<div class="codehilite"><pre><span></span><span class="n">continuous_subtype_mk</span> <span class="bp">_</span> <span class="err">$</span>
+  <span class="n">continuous_max</span>
+    <span class="o">(</span><span class="n">continuous_mul</span> <span class="n">continuous_const</span> <span class="o">(</span><span class="n">continuous</span><span class="bp">.</span><span class="n">comp</span> <span class="o">(</span><span class="n">continuous</span><span class="bp">.</span><span class="n">comp</span> <span class="n">continuous_fst</span> <span class="n">continuous_subtype_val</span><span class="o">)</span> <span class="n">continuous_norm</span><span class="o">))</span>
+    <span class="o">(</span><span class="n">continuous_sub</span> <span class="n">continuous_const</span> <span class="o">(</span><span class="n">continuous</span><span class="bp">.</span><span class="n">comp</span> <span class="n">continuous_snd</span> <span class="n">continuous_subtype_val</span><span class="o">))</span>
+</pre></div>
+
+
+<p>However, in order to make it run in a reasonable amount of time, I had to create a custom version of <code>tidy</code> that only uses a small number of the tactics (I don't need anything even as fancy as <code>dsimp</code>).</p>
 
 #### [ Reid Barton (Jun 03 2018 at 16:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/customizing%20tidy/near/127504112):
-Do you have any thoughts about making `tidy` easier to customize like this? I see that there's an option for adding tactics to the list that `tidy` uses, but to remove tactics I had to copy the definition of `tidy`.
+<p>Do you have any thoughts about making <code>tidy</code> easier to customize like this? I see that there's an option for adding tactics to the list that <code>tidy</code> uses, but to remove tactics I had to copy the definition of <code>tidy</code>.</p>
 
 #### [ Reid Barton (Jun 03 2018 at 16:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/customizing%20tidy/near/127504531):
-Maybe just a matter of making `tidy` a bit more modular at the source level
+<p>Maybe just a matter of making <code>tidy</code> a bit more modular at the source level</p>
 
 #### [ Scott Morrison (Jun 04 2018 at 01:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/customizing%20tidy/near/127520034):
-That's a good idea. How about I just pass the list of tactics as a configuration variable, and then in different contexts people can provide a wrapper tactic that installs their preferred list?
+<p>That's a good idea. How about I just pass the list of tactics as a configuration variable, and then in different contexts people can provide a wrapper tactic that installs their preferred list?</p>
 
 #### [ Reid Barton (Jun 04 2018 at 01:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/customizing%20tidy/near/127520036):
-Yes, I think that would be simplest.
+<p>Yes, I think that would be simplest.</p>
 
 #### [ Scott Morrison (Jun 04 2018 at 01:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/customizing%20tidy/near/127520084):
-Maybe I'll rename it `generic_tidy`, to allow specialised variants to still be called `tidy`. (An alternative would be that specialised variations be called `category_tidy` or `topology_tidy`, etc.)
+<p>Maybe I'll rename it <code>generic_tidy</code>, to allow specialised variants to still be called <code>tidy</code>. (An alternative would be that specialised variations be called <code>category_tidy</code> or <code>topology_tidy</code>, etc.)</p>
 
 #### [ Reid Barton (Jun 04 2018 at 01:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/customizing%20tidy/near/127520091):
-Another feature I can imagine wanting is to have separate `applicable` and `tidy`attributes for different "instances" of `tidy` (e.g., I might want my `continuity` tactic to only apply the lemmas that prove continuity), but I haven't found just having a single set to be an actual problem yet.
+<p>Another feature I can imagine wanting is to have separate <code>applicable</code> and <code>tidy</code>attributes for different "instances" of <code>tidy</code> (e.g., I might want my <code>continuity</code> tactic to only apply the lemmas that prove continuity), but I haven't found just having a single set to be an actual problem yet.</p>
 
 #### [ Scott Morrison (Jun 04 2018 at 01:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/customizing%20tidy/near/127520135):
-My plan with my Lean time at the moment is to 1) get a PR for a small fraction of my category theory library ready, with no automation, 2) try to get my automation into mathlib, 3) get the rest of the category theory library in, with automation
+<p>My plan with my Lean time at the moment is to 1) get a PR for a small fraction of my category theory library ready, with no automation, 2) try to get my automation into mathlib, 3) get the rest of the category theory library in, with automation</p>
 
 #### [ Scott Morrison (Jun 04 2018 at 01:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/customizing%20tidy/near/127520139):
-Okay --- are there parameters for attributes? I haven't really explored this.
+<p>Okay --- are there parameters for attributes? I haven't really explored this.</p>
 
 #### [ Reid Barton (Jun 04 2018 at 01:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/customizing%20tidy/near/127520145):
-I've seen attributes that appear to take arguments
+<p>I've seen attributes that appear to take arguments</p>
 
 #### [ Scott Morrison (Jun 04 2018 at 01:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/customizing%20tidy/near/127520148):
-My inclination though is that this can wait, and namespacing is a better solution: just make sure only the things you want to have tidy use are actually in scope.
+<p>My inclination though is that this can wait, and namespacing is a better solution: just make sure only the things you want to have tidy use are actually in scope.</p>
 
 #### [ Scott Morrison (Jun 04 2018 at 02:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/customizing%20tidy/near/127520170):
-Also -- a lot of `applicable` will be removed after I get to my "use `ext`" TODO.
+<p>Also -- a lot of <code>applicable</code> will be removed after I get to my "use <code>ext</code>" TODO.</p>
 
 #### [ Scott Morrison (Jun 04 2018 at 02:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/customizing%20tidy/near/127520215):
-But it will still be needed in places.
+<p>But it will still be needed in places.</p>
 
 #### [ Reid Barton (Jun 04 2018 at 02:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/customizing%20tidy/near/127520227):
-Definitely it can wait.
-Is `applicable` affected by namespacing? I hadn't realized that
+<p>Definitely it can wait.<br>
+Is <code>applicable</code> affected by namespacing? I hadn't realized that</p>
 
 #### [ Reid Barton (Jun 04 2018 at 02:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/customizing%20tidy/near/127520234):
-I mean, by which namespaces are open; as opposed to just what files have been imported (which is generally "pretty much everything")
+<p>I mean, by which namespaces are open; as opposed to just what files have been imported (which is generally "pretty much everything")</p>
 
 #### [ Scott Morrison (Jun 04 2018 at 02:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/customizing%20tidy/near/127520460):
-Oh, actually you're probably right, and that it ignores namespacing. At some point I'll investigate whether that is good or bad!
+<p>Oh, actually you're probably right, and that it ignores namespacing. At some point I'll investigate whether that is good or bad!</p>
 
 #### [ Scott Morrison (Jun 04 2018 at 02:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/customizing%20tidy/near/127521929):
-Okay, there's a new commit of `lean-tidy`, that now allows calling `tidy { tactics := [ ... ] }`, to replace my default (carefully curated!) list of tactics.
+<p>Okay, there's a new commit of <code>lean-tidy</code>, that now allows calling <code>tidy { tactics := [ ... ] }</code>, to replace my default (carefully curated!) list of tactics.</p>
 
 #### [ Scott Morrison (Jun 04 2018 at 02:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/customizing%20tidy/near/127521936):
-I'd also be very happy to try to improve my list so it also works on your continuity problems. Having the best possible "out of the box" tidying is nice. :-)
+<p>I'd also be very happy to try to improve my list so it also works on your continuity problems. Having the best possible "out of the box" tidying is nice. :-)</p>
 
 
 {% endraw %}

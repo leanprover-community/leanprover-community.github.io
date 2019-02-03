@@ -12,47 +12,46 @@ permalink: archive/113488general/58529prettyprintingunderscores.html
 
 {% raw %}
 #### [ Scott Morrison (Nov 27 2018 at 00:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/pretty%20printing%20underscores/near/148406464):
-Is there a good way to pretty print expressions, so metavariables get replaced by `_` characters?
+<p>Is there a good way to pretty print expressions, so metavariables get replaced by <code>_</code> characters?</p>
 
 #### [ Scott Morrison (Nov 27 2018 at 00:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/pretty%20printing%20underscores/near/148406530):
-I see there is `pp.use_holes` which prints metavariables as `{! !}`.
+<p>I see there is <code>pp.use_holes</code> which prints metavariables as <code>{! !}</code>.</p>
 
 #### [ Scott Morrison (Nov 27 2018 at 00:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/pretty%20printing%20underscores/near/148406776):
-or perhaps more simply --- does anyone know how I do substring replacement? (e.g. `{! !}` to `_`)
+<p>or perhaps more simply --- does anyone know how I do substring replacement? (e.g. <code>{! !}</code> to <code>_</code>)</p>
 
 #### [ Rob Lewis (Nov 27 2018 at 00:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/pretty%20printing%20underscores/near/148406884):
-It might be easier to replace the metavars with `pexpr.mk_placeholder` before printing.
+<p>It might be easier to replace the metavars with <code>pexpr.mk_placeholder</code> before printing.</p>
 
 #### [ Scott Morrison (Nov 27 2018 at 00:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/pretty%20printing%20underscores/near/148407075):
-I see. Any suggestions on how to do the replacement? I tried just folding, but I need to turn `expr`s back into `pexpr`s.
+<p>I see. Any suggestions on how to do the replacement? I tried just folding, but I need to turn <code>expr</code>s back into <code>pexpr</code>s.</p>
 
 #### [ Scott Morrison (Nov 27 2018 at 00:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/pretty%20printing%20underscores/near/148407086):
-of, pexpr.of_expr
+<p>of, pexpr.of_expr</p>
 
 #### [ Rob Lewis (Nov 27 2018 at 00:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/pretty%20printing%20underscores/near/148407113):
-No promises that this works beyond the two little examples I just tried, but give it a shot.
-```lean
-meta def replace_mvars (e : expr) : expr :=
-e.replace (λ e' _, if e'.is_meta_var then some (unchecked_cast pexpr.mk_placeholder) else none)
-```
+<p>No promises that this works beyond the two little examples I just tried, but give it a shot.</p>
+<div class="codehilite"><pre><span></span><span class="n">meta</span> <span class="n">def</span> <span class="n">replace_mvars</span> <span class="o">(</span><span class="n">e</span> <span class="o">:</span> <span class="n">expr</span><span class="o">)</span> <span class="o">:</span> <span class="n">expr</span> <span class="o">:=</span>
+<span class="n">e</span><span class="bp">.</span><span class="n">replace</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">e&#39;</span> <span class="bp">_</span><span class="o">,</span> <span class="k">if</span> <span class="n">e&#39;</span><span class="bp">.</span><span class="n">is_meta_var</span> <span class="k">then</span> <span class="n">some</span> <span class="o">(</span><span class="n">unchecked_cast</span> <span class="n">pexpr</span><span class="bp">.</span><span class="n">mk_placeholder</span><span class="o">)</span> <span class="k">else</span> <span class="n">none</span><span class="o">)</span>
+</pre></div>
 
 #### [ Scott Morrison (Nov 27 2018 at 00:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/pretty%20printing%20underscores/near/148407167):
-Looking good!!
+<p>Looking good!!</p>
 
 #### [ Scott Morrison (Nov 27 2018 at 00:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/pretty%20printing%20underscores/near/148407267):
-I still need to learn how to do string munging in Lean, I'm flailing about trying to decide is a string contains a given character... :-(
+<p>I still need to learn how to do string munging in Lean, I'm flailing about trying to decide is a string contains a given character... :-(</p>
 
 #### [ Scott Morrison (Nov 27 2018 at 00:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/pretty%20printing%20underscores/near/148407316):
-`'_' ∈ s.to_list`?
+<p><code>'_' ∈ s.to_list</code>?</p>
 
 #### [ Scott Morrison (Nov 27 2018 at 00:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/pretty%20printing%20underscores/near/148407320):
-Seems to work, but presumably there's something more natural.
+<p>Seems to work, but presumably there's something more natural.</p>
 
 #### [ Keeley Hoek (Nov 27 2018 at 01:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/pretty%20printing%20underscores/near/148408767):
-Just on the strings scott
-Resist the temptation to use `string.iterator`s
-I thought they were the future (they are VM implemented), and changed the `expr` deserialiser to use them
-About a 5% slowdown
+<p>Just on the strings scott<br>
+Resist the temptation to use <code>string.iterator</code>s<br>
+I thought they were the future (they are VM implemented), and changed the <code>expr</code> deserialiser to use them<br>
+About a 5% slowdown</p>
 
 
 {% endraw %}

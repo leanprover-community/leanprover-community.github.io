@@ -12,14 +12,14 @@ permalink: archive/113488general/51171oleanfiles.html
 
 {% raw %}
 #### [ Reid Barton (Sep 06 2018 at 19:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/olean%20files/near/133457869):
-If I invoke lean on a single file like `lean src/category_theory/rel.lean`, then it should write out an `.olean` file if it finishes and succeeds, right? (Let's say there is no existing `.olean` file to start with.)
+<p>If I invoke lean on a single file like <code>lean src/category_theory/rel.lean</code>, then it should write out an <code>.olean</code> file if it finishes and succeeds, right? (Let's say there is no existing <code>.olean</code> file to start with.)</p>
 
 #### [ Sebastian Ullrich (Sep 06 2018 at 19:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/olean%20files/near/133457924):
-No, you need `--make` as well
+<p>No, you need <code>--make</code> as well</p>
 
 #### [ Reid Barton (Sep 06 2018 at 19:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/olean%20files/near/133458106):
-Oh okay. Well that's one mystery solved.
-I still have a situation where `leanpkg build` is doing a build which is running out of memory, but I'm pretty sure it has finished building a lot of other files first, and it's not writing `.olean` files for them. But I should at least be able to work around that now
+<p>Oh okay. Well that's one mystery solved.<br>
+I still have a situation where <code>leanpkg build</code> is doing a build which is running out of memory, but I'm pretty sure it has finished building a lot of other files first, and it's not writing <code>.olean</code> files for them. But I should at least be able to work around that now</p>
 
 
 {% endraw %}

@@ -12,425 +12,404 @@ permalink: archive/113488general/48009leangolf.html
 
 {% raw %}
 #### [ Sean Leather (Feb 28 2018 at 14:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/123089630):
-Shortest proof of this?
-
-```lean
-a ∧ b ∧ c ∧ d ∧ e ↔ a ∧ b ∧ c ∧ c ∧ d ∧ e
-```
+<p>Shortest proof of this?</p>
+<div class="codehilite"><pre><span></span><span class="n">a</span> <span class="bp">∧</span> <span class="n">b</span> <span class="bp">∧</span> <span class="n">c</span> <span class="bp">∧</span> <span class="n">d</span> <span class="bp">∧</span> <span class="n">e</span> <span class="bp">↔</span> <span class="n">a</span> <span class="bp">∧</span> <span class="n">b</span> <span class="bp">∧</span> <span class="n">c</span> <span class="bp">∧</span> <span class="n">c</span> <span class="bp">∧</span> <span class="n">d</span> <span class="bp">∧</span> <span class="n">e</span>
+</pre></div>
 
 #### [ Sebastian Ullrich (Feb 28 2018 at 14:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/123089805):
-Let's start with the basics
-```lean
-by split;intro;simp*
-```
+<p>Let's start with the basics</p>
+<div class="codehilite"><pre><span></span><span class="k">by</span> <span class="n">split</span><span class="bp">;</span><span class="n">intro</span><span class="bp">;</span><span class="n">simp</span><span class="bp">*</span>
+</pre></div>
 
 #### [ Sean Leather (Feb 28 2018 at 14:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/123090043):
-That's like a sledgehammer using sledgehammers to hit small nails. For some reason, I never think to try `simp *`.
+<p>That's like a sledgehammer using sledgehammers to hit small nails. For some reason, I never think to try <code>simp *</code>.</p>
 
 #### [ Sebastian Ullrich (Feb 28 2018 at 14:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/123090128):
-Well, I don't really need `*` here, but naming the hypothesis obviously is a golf no-go :P
+<p>Well, I don't really need <code>*</code> here, but naming the hypothesis obviously is a golf no-go :P</p>
 
 #### [ Sean Leather (Feb 28 2018 at 14:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/123090420):
-Is it? If the proof is short, I don't see why. :simple_smile:
+<p>Is it? If the proof is short, I don't see why. <span class="emoji emoji-1f642" title="simple smile">:simple_smile:</span></p>
 
 #### [ Scott Morrison (Feb 28 2018 at 14:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/123090434):
-I was happy to see `by tidy` works too. Maybe one day I'll get up the courage to PR it.
+<p>I was happy to see <code>by tidy</code> works too. Maybe one day I'll get up the courage to PR it.</p>
 
 #### [ Kevin Buzzard (Feb 28 2018 at 22:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/123109866):
-I wondered whether `by cc` would work -- but it doesn't. I still don't really know what to expect with cc but I think I've seen it prove other goals of this nature.
+<p>I wondered whether <code>by cc</code> would work -- but it doesn't. I still don't really know what to expect with cc but I think I've seen it prove other goals of this nature.</p>
 
 #### [ Sean Leather (Mar 01 2018 at 10:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/123129844):
-I'm slowly learning how to use `simp *`:
-```lean
-namespace list
-variables {α : Type} {l : list α} {n : ℕ}
+<p>I'm slowly learning how to use <code>simp *</code>:</p>
+<div class="codehilite"><pre><span></span><span class="kn">namespace</span> <span class="n">list</span>
+<span class="kn">variables</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">{</span><span class="n">l</span> <span class="o">:</span> <span class="n">list</span> <span class="n">α</span><span class="o">}</span> <span class="o">{</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">}</span>
 
-theorem nth_of_map {f : α → α} {a : α} (p : f a = a) :
-  option.get_or_else (nth (map f l) n) a = f (option.get_or_else (nth l n) a) :=
-by induction l generalizing n; [skip, cases n]; simp [*, option.get_or_else]
+<span class="kn">theorem</span> <span class="n">nth_of_map</span> <span class="o">{</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">α</span><span class="o">}</span> <span class="o">{</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">}</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="n">f</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">a</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">option</span><span class="bp">.</span><span class="n">get_or_else</span> <span class="o">(</span><span class="n">nth</span> <span class="o">(</span><span class="n">map</span> <span class="n">f</span> <span class="n">l</span><span class="o">)</span> <span class="n">n</span><span class="o">)</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">f</span> <span class="o">(</span><span class="n">option</span><span class="bp">.</span><span class="n">get_or_else</span> <span class="o">(</span><span class="n">nth</span> <span class="n">l</span> <span class="n">n</span><span class="o">)</span> <span class="n">a</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">induction</span> <span class="n">l</span> <span class="n">generalizing</span> <span class="n">n</span><span class="bp">;</span> <span class="o">[</span><span class="n">skip</span><span class="o">,</span> <span class="n">cases</span> <span class="n">n</span><span class="o">]</span><span class="bp">;</span> <span class="n">simp</span> <span class="o">[</span><span class="bp">*</span><span class="o">,</span> <span class="n">option</span><span class="bp">.</span><span class="n">get_or_else</span><span class="o">]</span>
 
-end list
-```
+<span class="kn">end</span> <span class="n">list</span>
+</pre></div>
 
 #### [ Johannes Hölzl (Mar 02 2018 at 12:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/123179941):
-I guess `cc` doesn't work as it currently doesn't handle idempotent laws (i.e. `c ∧ c`).
+<p>I guess <code>cc</code> doesn't work as it currently doesn't handle idempotent laws (i.e. <code>c ∧ c</code>).</p>
 
 #### [ Kevin Buzzard (Mar 13 2018 at 16:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/123658195):
-Curry:
+<p>Curry:</p>
 
 #### [ Kevin Buzzard (Mar 13 2018 at 16:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/123658197):
-`example (P Q R : Prop) : (P ∧ Q → R) ↔ (P → (Q → R)) := sorry`
+<p><code>example (P Q R : Prop) : (P ∧ Q → R) ↔ (P → (Q → R)) := sorry</code></p>
 
 #### [ Kevin Buzzard (Mar 13 2018 at 16:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/123658245):
-Doing this one taught me something, although it was arguably not very useful
+<p>Doing this one taught me something, although it was arguably not very useful</p>
 
 #### [ Kevin Buzzard (Mar 13 2018 at 16:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/123658252):
-Actually it taught me 2 things, one being that bash shell is not very good at counting unicode characters
+<p>Actually it taught me 2 things, one being that bash shell is not very good at counting unicode characters</p>
 
 #### [ Sean Leather (May 24 2018 at 08:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/127015438):
-I'm sure I've asked this before, but I don't remember the answer. Better/shorter way to do this?
+<p>I'm sure I've asked this before, but I don't remember the answer. Better/shorter way to do this?</p>
+<div class="codehilite"><pre><span></span><span class="n">intro</span> <span class="n">h</span><span class="o">,</span> <span class="n">simp</span> <span class="n">at</span> <span class="n">h</span><span class="o">,</span> <span class="n">simp</span> <span class="o">[</span><span class="n">h</span><span class="o">]</span>
+</pre></div>
 
-```lean
-intro h, simp at h, simp [h]
-```
 
-Note that `simp` by itself doesn't work.
+<p>Note that <code>simp</code> by itself doesn't work.</p>
 
 #### [ Johannes Hölzl (May 24 2018 at 08:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/127016063):
-`simp {contextual:=tt}` should do it.
+<p><code>simp {contextual:=tt}</code> should do it.</p>
 
 #### [ Sean Leather (May 24 2018 at 08:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/127016150):
-Yep, that did it. Thanks!
+<p>Yep, that did it. Thanks!</p>
 
 #### [ Sean Leather (May 24 2018 at 09:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/127017262):
-`simp` doesn't solve this. Is there a theorem I can use with `simp` to solve it?
-
-```lean
-⟨a, b⟩ ∈ l ↔ a = a₁ ∧ b == b₁ ∨ ⟨a, b⟩ ∈ l
-```
+<p><code>simp</code> doesn't solve this. Is there a theorem I can use with <code>simp</code> to solve it?</p>
+<div class="codehilite"><pre><span></span><span class="bp">⟨</span><span class="n">a</span><span class="o">,</span> <span class="n">b</span><span class="bp">⟩</span> <span class="err">∈</span> <span class="n">l</span> <span class="bp">↔</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">a₁</span> <span class="bp">∧</span> <span class="n">b</span> <span class="bp">==</span> <span class="n">b₁</span> <span class="bp">∨</span> <span class="bp">⟨</span><span class="n">a</span><span class="o">,</span> <span class="n">b</span><span class="bp">⟩</span> <span class="err">∈</span> <span class="n">l</span>
+</pre></div>
 
 #### [ Johannes Hölzl (May 24 2018 at 09:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/127017535):
-I guess you have `⟨a₁, b₁⟩ ∈ l`?
+<p>I guess you have <code>⟨a₁, b₁⟩ ∈ l</code>?</p>
 
 #### [ Johannes Hölzl (May 24 2018 at 09:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/127017583):
-But I also don't see how to solve it with the simplifier.
+<p>But I also don't see how to solve it with the simplifier.</p>
 
 #### [ Sean Leather (May 24 2018 at 09:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/127017645):
-Oh wait, I'm stupid. Let me actually think. :simple_smile:
+<p>Oh wait, I'm stupid. Let me actually think. <span class="emoji emoji-1f642" title="simple smile">:simple_smile:</span></p>
 
 #### [ Kevin Buzzard (May 24 2018 at 09:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/127017653):
-Do you CS people know how to parse that sort of statement?
+<p>Do you CS people know how to parse that sort of statement?</p>
 
 #### [ Kevin Buzzard (May 24 2018 at 09:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/127017685):
-I look at it (away from Lean) and have no idea about the relative priorities of and, or and iff. Is this just all some standard convention that you CS people know and we maths people just avoid by adding brackets?
+<p>I look at it (away from Lean) and have no idea about the relative priorities of and, or and iff. Is this just all some standard convention that you CS people know and we maths people just avoid by adding brackets?</p>
 
 #### [ Kevin Buzzard (May 24 2018 at 09:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/127017716):
-I mean -- I know I can go and check them -- my question is whether there are uniform standards or whether Lean made some random choice and you find different choices in other systems.
+<p>I mean -- I know I can go and check them -- my question is whether there are uniform standards or whether Lean made some random choice and you find different choices in other systems.</p>
 
 #### [ Kevin Buzzard (May 24 2018 at 09:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/127017741):
-obviously I can guess the answer in this situation from the context, but in the past I have written statements without brackets and then later on gone "oh crap, that doesn't mean what I wanted it to mean at all"
+<p>obviously I can guess the answer in this situation from the context, but in the past I have written statements without brackets and then later on gone "oh crap, that doesn't mean what I wanted it to mean at all"</p>
 
 #### [ Gabriel Ebner (May 24 2018 at 09:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/127017785):
-The precedence is pretty standard.  In most (all?) programming languages as well as logic, and binds more tightly than or.  C doesn't have iff, so its hard to compare.
+<p>The precedence is pretty standard.  In most (all?) programming languages as well as logic, and binds more tightly than or.  C doesn't have iff, so its hard to compare.</p>
 
 #### [ Sean Leather (May 24 2018 at 09:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/127017792):
-The “usual conventions:” https://groups.google.com/d/msg/lean-user/lbFwVL21Az4/1erXpLqBAwAJ
+<p>The “usual conventions:” <a href="https://groups.google.com/d/msg/lean-user/lbFwVL21Az4/1erXpLqBAwAJ" target="_blank" title="https://groups.google.com/d/msg/lean-user/lbFwVL21Az4/1erXpLqBAwAJ">https://groups.google.com/d/msg/lean-user/lbFwVL21Az4/1erXpLqBAwAJ</a></p>
 
 #### [ Gabriel Ebner (May 24 2018 at 09:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/127017838):
-Excerpt from a proof theory textbook lying around here (Troelstra & Schwichtenberg):
-
-> Notation (Saving on parentheses) In writing formulas we save on parentheses by assuming that ∀, ∃,  ¬ bind more strongly than ∧, ∨, and that in turn ∨, ∧ bind more strongly than →, ↔. [...]
+<p>Excerpt from a proof theory textbook lying around here (Troelstra &amp; Schwichtenberg):</p>
+<blockquote>
+<p>Notation (Saving on parentheses) In writing formulas we save on parentheses by assuming that ∀, ∃,  ¬ bind more strongly than ∧, ∨, and that in turn ∨, ∧ bind more strongly than →, ↔. [...]</p>
+</blockquote>
 
 #### [ Gabriel Ebner (May 24 2018 at 09:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/127017848):
-I guess you will find similar boilerplate in most texts that deal with logical formulas.
+<p>I guess you will find similar boilerplate in most texts that deal with logical formulas.</p>
 
 #### [ Sean Leather (May 24 2018 at 09:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/127017854):
-One that I struggled with was `=` vs. `↔`, but now I'm used to it.
+<p>One that I struggled with was <code>=</code> vs. <code>↔</code>, but now I'm used to it.</p>
 
 #### [ Kevin Buzzard (May 24 2018 at 10:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/127018118):
-```quote
-I guess you will find similar boilerplate in most texts that deal with logical formulas.
-```
-I follow a text which deals with logical formulas in my introduction to proof class and I can find no mention of binding preferences anywhere!
+<blockquote>
+<p>I guess you will find similar boilerplate in most texts that deal with logical formulas.</p>
+</blockquote>
+<p>I follow a text which deals with logical formulas in my introduction to proof class and I can find no mention of binding preferences anywhere!</p>
 
 #### [ Kevin Buzzard (May 24 2018 at 10:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/127018119):
-But I do see a lot of brackets :-)
+<p>But I do see a lot of brackets :-)</p>
 
 #### [ Kevin Buzzard (May 24 2018 at 10:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/127018159):
-I conclude that the guy who wrote it (who is in the office a few doors down from me) was also a mathematician who had no idea of standard CS conventions :-)
+<p>I conclude that the guy who wrote it (who is in the office a few doors down from me) was also a mathematician who had no idea of standard CS conventions :-)</p>
 
 #### [ Gabriel Ebner (May 24 2018 at 10:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/127018330):
-There is one confusing difference between proof theory and CS though: the precedence of ∀, ∃ is different.
-```
-  ∃x P(x) → Q     means:
+<p>There is one confusing difference between proof theory and CS though: the precedence of ∀, ∃ is different.</p>
+<div class="codehilite"><pre><span></span>  ∃x P(x) → Q     means:
 
   (∃x P(x)) → Q       for everyone in my research group
   ∃x (P(x) → Q)       in Lean, Coq, etc.
-```
+</pre></div>
 
 #### [ Chris Hughes (May 24 2018 at 10:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/127018489):
-`(∃x P(x)) → Q` seems like really stupid precedence, since you would usually write `∀ x , P x → Q` instead of that.
+<p><code>(∃x P(x)) → Q</code> seems like really stupid precedence, since you would usually write <code>∀ x , P x → Q</code> instead of that.</p>
 
 #### [ Sean Leather (May 24 2018 at 10:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/127018550):
-Interesting. Pierce (Types and Programming Languages) uses explicit bracketing : `{∃x, P(x)}`
+<p>Interesting. Pierce (Types and Programming Languages) uses explicit bracketing : <code>{∃x, P(x)}</code></p>
 
 #### [ Gabriel Ebner (May 24 2018 at 10:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/127018815):
-@**Chris Hughes** The same precedence is also used for ∀: `(∀x P(x)) → Q` vs. `∀x (P(x) → Q)`, which is just as confusing.
+<p><span class="user-mention" data-user-id="110044">@Chris Hughes</span> The same precedence is also used for ∀: <code>(∀x P(x)) → Q</code> vs. <code>∀x (P(x) → Q)</code>, which is just as confusing.</p>
 
 #### [ Kevin Buzzard (May 24 2018 at 10:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/127019269):
-In fact it was exactly this forall point which I was referring to in my earlier "that doesn't mean what I wanted it to mean" comment
+<p>In fact it was exactly this forall point which I was referring to in my earlier "that doesn't mean what I wanted it to mean" comment</p>
 
 #### [ Sean Leather (Aug 20 2018 at 15:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/132455368):
-Shortest proof of this?
-
-```lean
-a : ℕ
-b : ℕ
-p : a < b + 1,
-q : a ≠ b
-⊢ a < b
-```
+<p>Shortest proof of this?</p>
+<div class="codehilite"><pre><span></span><span class="n">a</span> <span class="o">:</span> <span class="bp">ℕ</span>
+<span class="n">b</span> <span class="o">:</span> <span class="bp">ℕ</span>
+<span class="n">p</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">&lt;</span> <span class="n">b</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">,</span>
+<span class="n">q</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">≠</span> <span class="n">b</span>
+<span class="err">⊢</span> <span class="n">a</span> <span class="bp">&lt;</span> <span class="n">b</span>
+</pre></div>
 
 #### [ Sean Leather (Aug 20 2018 at 15:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/132455921):
-This is what I came up with:
-
-```lean
-nat.lt_of_le_and_ne (nat.le_of_lt_succ p) q
-```
+<p>This is what I came up with:</p>
+<div class="codehilite"><pre><span></span><span class="n">nat</span><span class="bp">.</span><span class="n">lt_of_le_and_ne</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">le_of_lt_succ</span> <span class="n">p</span><span class="o">)</span> <span class="n">q</span>
+</pre></div>
 
 #### [ Kenny Lau (Aug 20 2018 at 15:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/132456748):
-```lean
-example (a b : ℕ) (p : a < b + 1) (q : a ≠ b) : a < b :=
-by cases p; [cc, assumption]
-```
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">&lt;</span> <span class="n">b</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">≠</span> <span class="n">b</span><span class="o">)</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">&lt;</span> <span class="n">b</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">cases</span> <span class="n">p</span><span class="bp">;</span> <span class="o">[</span><span class="n">cc</span><span class="o">,</span> <span class="n">assumption</span><span class="o">]</span>
+</pre></div>
 
 #### [ Johan Commelin (Aug 20 2018 at 16:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/132457185):
-I'm not on a Lean machine atm, but could `cooper` or `tidy` kill this one?
+<p>I'm not on a Lean machine atm, but could <code>cooper</code> or <code>tidy</code> kill this one?</p>
 
 #### [ Kenny Lau (Aug 21 2018 at 19:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/132529548):
-```lean
-import data.fintype
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">fintype</span>
 
-universe u
+<span class="kn">universe</span> <span class="n">u</span>
 
-variables (α : Type u) [decidable_eq α] (S T : finset α)
+<span class="kn">variables</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">[</span><span class="n">decidable_eq</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">S</span> <span class="n">T</span> <span class="o">:</span> <span class="n">finset</span> <span class="n">α</span><span class="o">)</span>
 
-example (H1 : S ⊆ T) (H2 : T.card ≤ S.card) : S = T :=
-have H3 : disjoint S (T \ S), by simp [disjoint],
-have H4 : _, from finset.card_disjoint_union H3,
-have H5 : S ∪ T \ S = T, from finset.ext' $ λ x,
-  ⟨λ H, or.cases_on (finset.mem_union.1 H) (finset.mem_of_subset H1) (and.left ∘ finset.mem_sdiff.1),
-  λ H, classical.by_cases (finset.mem_union_left _) (λ H', finset.mem_union_right _ $ finset.mem_sdiff.2 ⟨H, H'⟩)⟩,
-have H6 : S.card = T.card, from le_antisymm (finset.card_le_of_subset H1) H2,
-have H7 : T \ S = ∅, from finset.card_eq_zero.1 $
-  nat.add_left_cancel $ eq.symm $ by rwa [H5, H6] at H4,
-have H8 : T ⊆ S, from finset.subset_iff.2 $ λ x H,
-  classical.by_contradiction $ λ H',
-  finset.ne_empty_of_mem (finset.mem_sdiff.2 ⟨H, H'⟩) H7,
-finset.subset.antisymm H1 H8
-```
+<span class="kn">example</span> <span class="o">(</span><span class="n">H1</span> <span class="o">:</span> <span class="n">S</span> <span class="err">⊆</span> <span class="n">T</span><span class="o">)</span> <span class="o">(</span><span class="n">H2</span> <span class="o">:</span> <span class="n">T</span><span class="bp">.</span><span class="n">card</span> <span class="bp">≤</span> <span class="n">S</span><span class="bp">.</span><span class="n">card</span><span class="o">)</span> <span class="o">:</span> <span class="n">S</span> <span class="bp">=</span> <span class="n">T</span> <span class="o">:=</span>
+<span class="k">have</span> <span class="n">H3</span> <span class="o">:</span> <span class="n">disjoint</span> <span class="n">S</span> <span class="o">(</span><span class="n">T</span> <span class="err">\</span> <span class="n">S</span><span class="o">),</span> <span class="k">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">disjoint</span><span class="o">],</span>
+<span class="k">have</span> <span class="n">H4</span> <span class="o">:</span> <span class="bp">_</span><span class="o">,</span> <span class="k">from</span> <span class="n">finset</span><span class="bp">.</span><span class="n">card_disjoint_union</span> <span class="n">H3</span><span class="o">,</span>
+<span class="k">have</span> <span class="n">H5</span> <span class="o">:</span> <span class="n">S</span> <span class="err">∪</span> <span class="n">T</span> <span class="err">\</span> <span class="n">S</span> <span class="bp">=</span> <span class="n">T</span><span class="o">,</span> <span class="k">from</span> <span class="n">finset</span><span class="bp">.</span><span class="n">ext&#39;</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">x</span><span class="o">,</span>
+  <span class="bp">⟨λ</span> <span class="n">H</span><span class="o">,</span> <span class="n">or</span><span class="bp">.</span><span class="n">cases_on</span> <span class="o">(</span><span class="n">finset</span><span class="bp">.</span><span class="n">mem_union</span><span class="bp">.</span><span class="mi">1</span> <span class="n">H</span><span class="o">)</span> <span class="o">(</span><span class="n">finset</span><span class="bp">.</span><span class="n">mem_of_subset</span> <span class="n">H1</span><span class="o">)</span> <span class="o">(</span><span class="n">and</span><span class="bp">.</span><span class="n">left</span> <span class="err">∘</span> <span class="n">finset</span><span class="bp">.</span><span class="n">mem_sdiff</span><span class="bp">.</span><span class="mi">1</span><span class="o">),</span>
+  <span class="bp">λ</span> <span class="n">H</span><span class="o">,</span> <span class="n">classical</span><span class="bp">.</span><span class="n">by_cases</span> <span class="o">(</span><span class="n">finset</span><span class="bp">.</span><span class="n">mem_union_left</span> <span class="bp">_</span><span class="o">)</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">H&#39;</span><span class="o">,</span> <span class="n">finset</span><span class="bp">.</span><span class="n">mem_union_right</span> <span class="bp">_</span> <span class="err">$</span> <span class="n">finset</span><span class="bp">.</span><span class="n">mem_sdiff</span><span class="bp">.</span><span class="mi">2</span> <span class="bp">⟨</span><span class="n">H</span><span class="o">,</span> <span class="n">H&#39;</span><span class="bp">⟩</span><span class="o">)</span><span class="bp">⟩</span><span class="o">,</span>
+<span class="k">have</span> <span class="n">H6</span> <span class="o">:</span> <span class="n">S</span><span class="bp">.</span><span class="n">card</span> <span class="bp">=</span> <span class="n">T</span><span class="bp">.</span><span class="n">card</span><span class="o">,</span> <span class="k">from</span> <span class="n">le_antisymm</span> <span class="o">(</span><span class="n">finset</span><span class="bp">.</span><span class="n">card_le_of_subset</span> <span class="n">H1</span><span class="o">)</span> <span class="n">H2</span><span class="o">,</span>
+<span class="k">have</span> <span class="n">H7</span> <span class="o">:</span> <span class="n">T</span> <span class="err">\</span> <span class="n">S</span> <span class="bp">=</span> <span class="err">∅</span><span class="o">,</span> <span class="k">from</span> <span class="n">finset</span><span class="bp">.</span><span class="n">card_eq_zero</span><span class="bp">.</span><span class="mi">1</span> <span class="err">$</span>
+  <span class="n">nat</span><span class="bp">.</span><span class="n">add_left_cancel</span> <span class="err">$</span> <span class="n">eq</span><span class="bp">.</span><span class="n">symm</span> <span class="err">$</span> <span class="k">by</span> <span class="n">rwa</span> <span class="o">[</span><span class="n">H5</span><span class="o">,</span> <span class="n">H6</span><span class="o">]</span> <span class="n">at</span> <span class="n">H4</span><span class="o">,</span>
+<span class="k">have</span> <span class="n">H8</span> <span class="o">:</span> <span class="n">T</span> <span class="err">⊆</span> <span class="n">S</span><span class="o">,</span> <span class="k">from</span> <span class="n">finset</span><span class="bp">.</span><span class="n">subset_iff</span><span class="bp">.</span><span class="mi">2</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">x</span> <span class="n">H</span><span class="o">,</span>
+  <span class="n">classical</span><span class="bp">.</span><span class="n">by_contradiction</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">H&#39;</span><span class="o">,</span>
+  <span class="n">finset</span><span class="bp">.</span><span class="n">ne_empty_of_mem</span> <span class="o">(</span><span class="n">finset</span><span class="bp">.</span><span class="n">mem_sdiff</span><span class="bp">.</span><span class="mi">2</span> <span class="bp">⟨</span><span class="n">H</span><span class="o">,</span> <span class="n">H&#39;</span><span class="bp">⟩</span><span class="o">)</span> <span class="n">H7</span><span class="o">,</span>
+<span class="n">finset</span><span class="bp">.</span><span class="n">subset</span><span class="bp">.</span><span class="n">antisymm</span> <span class="n">H1</span> <span class="n">H8</span>
+</pre></div>
 
 #### [ Kenny Lau (Aug 21 2018 at 19:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/132529552):
-is there a shorter proof?
+<p>is there a shorter proof?</p>
 
 #### [ Mario Carneiro (Aug 21 2018 at 19:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/132531216):
-```
-example (H1 : S ⊆ T) (H2 : T.card ≤ S.card) : S = T :=
+<div class="codehilite"><pre><span></span>example (H1 : S ⊆ T) (H2 : T.card ≤ S.card) : S = T :=
 finset.eq_of_veq $ multiset.eq_of_le_of_card_le (finset.val_le_iff.2 H1) H2
-```
+</pre></div>
 
 #### [ Mario Carneiro (Aug 21 2018 at 19:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/132531244):
-this should be in mathlib though
+<p>this should be in mathlib though</p>
 
 #### [ Kenny Lau (Aug 21 2018 at 19:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/132531591):
-ah it's in multiset lol
+<p>ah it's in multiset lol</p>
 
 #### [ Chris Hughes (Aug 21 2018 at 19:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/132531934):
-Pretty sure it's there for finsets. I remember seeing it.
+<p>Pretty sure it's there for finsets. I remember seeing it.</p>
 
 #### [ Chris Hughes (Aug 21 2018 at 20:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/132532050):
-`finset.eq_of_subset_of_card_le`
+<p><code>finset.eq_of_subset_of_card_le</code></p>
 
 #### [ Kenny Lau (Aug 21 2018 at 20:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/132532088):
-genius
+<p>genius</p>
 
 #### [ Kenny Lau (Aug 21 2018 at 20:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/132533414):
-```lean
-import data.fintype
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">fintype</span>
 
-universe u
+<span class="kn">universe</span> <span class="n">u</span>
 
-variables (α : Type u) [decidable_eq α]
+<span class="kn">variables</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">[</span><span class="n">decidable_eq</span> <span class="n">α</span><span class="o">]</span>
 
-example [fintype α] (f : α → α) (H : function.injective f) : function.surjective f :=
-have H : _ := finset.eq_univ_iff_forall.1 $ finset.eq_of_subset_of_card_le (finset.subset_univ _)
-  (le_of_eq $ eq.symm $ finset.card_image_of_injective _ H),
-λ y, let ⟨x, _, H2⟩ := finset.mem_image.1 (H y) in ⟨x, H2⟩
-```
+<span class="kn">example</span> <span class="o">[</span><span class="n">fintype</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="n">function</span><span class="bp">.</span><span class="n">injective</span> <span class="n">f</span><span class="o">)</span> <span class="o">:</span> <span class="n">function</span><span class="bp">.</span><span class="n">surjective</span> <span class="n">f</span> <span class="o">:=</span>
+<span class="k">have</span> <span class="n">H</span> <span class="o">:</span> <span class="bp">_</span> <span class="o">:=</span> <span class="n">finset</span><span class="bp">.</span><span class="n">eq_univ_iff_forall</span><span class="bp">.</span><span class="mi">1</span> <span class="err">$</span> <span class="n">finset</span><span class="bp">.</span><span class="n">eq_of_subset_of_card_le</span> <span class="o">(</span><span class="n">finset</span><span class="bp">.</span><span class="n">subset_univ</span> <span class="bp">_</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">le_of_eq</span> <span class="err">$</span> <span class="n">eq</span><span class="bp">.</span><span class="n">symm</span> <span class="err">$</span> <span class="n">finset</span><span class="bp">.</span><span class="n">card_image_of_injective</span> <span class="bp">_</span> <span class="n">H</span><span class="o">),</span>
+<span class="bp">λ</span> <span class="n">y</span><span class="o">,</span> <span class="k">let</span> <span class="bp">⟨</span><span class="n">x</span><span class="o">,</span> <span class="bp">_</span><span class="o">,</span> <span class="n">H2</span><span class="bp">⟩</span> <span class="o">:=</span> <span class="n">finset</span><span class="bp">.</span><span class="n">mem_image</span><span class="bp">.</span><span class="mi">1</span> <span class="o">(</span><span class="n">H</span> <span class="n">y</span><span class="o">)</span> <span class="k">in</span> <span class="bp">⟨</span><span class="n">x</span><span class="o">,</span> <span class="n">H2</span><span class="bp">⟩</span>
+</pre></div>
 
 #### [ Kenny Lau (Aug 21 2018 at 20:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/132533415):
-how about this?
+<p>how about this?</p>
 
 #### [ Chris Hughes (Aug 21 2018 at 20:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/132533791):
-Already in mathlib. `fintype.injective_iff_surjective` Your proof  is shorter though
+<p>Already in mathlib. <code>fintype.injective_iff_surjective</code> Your proof  is shorter though</p>
 
 #### [ Kenny Lau (Aug 21 2018 at 20:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/132534113):
-```lean
-import data.fintype
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">fintype</span>
 
-universe u
+<span class="kn">universe</span> <span class="n">u</span>
 
-variables (α : Type u) [fintype α] [decidable_eq α]
+<span class="kn">variables</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">[</span><span class="n">fintype</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">decidable_eq</span> <span class="n">α</span><span class="o">]</span>
 
-theorem something (f : α → α) (H : function.injective f) : function.surjective f :=
-have H : _ := finset.eq_univ_iff_forall.1 $ finset.eq_of_subset_of_card_le (finset.subset_univ _)
-  (le_of_eq $ eq.symm $ finset.card_image_of_injective _ H),
-λ y, let ⟨x, _, H2⟩ := finset.mem_image.1 (H y) in ⟨x, H2⟩
+<span class="kn">theorem</span> <span class="n">something</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="n">function</span><span class="bp">.</span><span class="n">injective</span> <span class="n">f</span><span class="o">)</span> <span class="o">:</span> <span class="n">function</span><span class="bp">.</span><span class="n">surjective</span> <span class="n">f</span> <span class="o">:=</span>
+<span class="k">have</span> <span class="n">H</span> <span class="o">:</span> <span class="bp">_</span> <span class="o">:=</span> <span class="n">finset</span><span class="bp">.</span><span class="n">eq_univ_iff_forall</span><span class="bp">.</span><span class="mi">1</span> <span class="err">$</span> <span class="n">finset</span><span class="bp">.</span><span class="n">eq_of_subset_of_card_le</span> <span class="o">(</span><span class="n">finset</span><span class="bp">.</span><span class="n">subset_univ</span> <span class="bp">_</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">le_of_eq</span> <span class="err">$</span> <span class="n">eq</span><span class="bp">.</span><span class="n">symm</span> <span class="err">$</span> <span class="n">finset</span><span class="bp">.</span><span class="n">card_image_of_injective</span> <span class="bp">_</span> <span class="n">H</span><span class="o">),</span>
+<span class="bp">λ</span> <span class="n">y</span><span class="o">,</span> <span class="k">let</span> <span class="bp">⟨</span><span class="n">x</span><span class="o">,</span> <span class="bp">_</span><span class="o">,</span> <span class="n">H2</span><span class="bp">⟩</span> <span class="o">:=</span> <span class="n">finset</span><span class="bp">.</span><span class="n">mem_image</span><span class="bp">.</span><span class="mi">1</span> <span class="o">(</span><span class="n">H</span> <span class="n">y</span><span class="o">)</span> <span class="k">in</span> <span class="bp">⟨</span><span class="n">x</span><span class="o">,</span> <span class="n">H2</span><span class="bp">⟩</span>
 
-theorem something2 [integral_domain α] (x : α) (H : x ≠ 0) : ∃ r , r * x = 1 :=
-something α (λ r, r * x)
-  (λ r s (H' : r * x = s * x), eq_of_sub_eq_zero $ or.resolve_right
-    (eq_zero_or_eq_zero_of_mul_eq_zero $ show (r - s) * x = 0, by rw [sub_mul, H', sub_self]) H) 1
+<span class="kn">theorem</span> <span class="n">something2</span> <span class="o">[</span><span class="n">integral_domain</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">≠</span> <span class="mi">0</span><span class="o">)</span> <span class="o">:</span> <span class="bp">∃</span> <span class="n">r</span> <span class="o">,</span> <span class="n">r</span> <span class="bp">*</span> <span class="n">x</span> <span class="bp">=</span> <span class="mi">1</span> <span class="o">:=</span>
+<span class="n">something</span> <span class="n">α</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">r</span><span class="o">,</span> <span class="n">r</span> <span class="bp">*</span> <span class="n">x</span><span class="o">)</span>
+  <span class="o">(</span><span class="bp">λ</span> <span class="n">r</span> <span class="n">s</span> <span class="o">(</span><span class="n">H&#39;</span> <span class="o">:</span> <span class="n">r</span> <span class="bp">*</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">s</span> <span class="bp">*</span> <span class="n">x</span><span class="o">),</span> <span class="n">eq_of_sub_eq_zero</span> <span class="err">$</span> <span class="n">or</span><span class="bp">.</span><span class="n">resolve_right</span>
+    <span class="o">(</span><span class="n">eq_zero_or_eq_zero_of_mul_eq_zero</span> <span class="err">$</span> <span class="k">show</span> <span class="o">(</span><span class="n">r</span> <span class="bp">-</span> <span class="n">s</span><span class="o">)</span> <span class="bp">*</span> <span class="n">x</span> <span class="bp">=</span> <span class="mi">0</span><span class="o">,</span> <span class="k">by</span> <span class="n">rw</span> <span class="o">[</span><span class="n">sub_mul</span><span class="o">,</span> <span class="n">H&#39;</span><span class="o">,</span> <span class="n">sub_self</span><span class="o">])</span> <span class="n">H</span><span class="o">)</span> <span class="mi">1</span>
 
-noncomputable instance field_of_fintype_of_integral_domain [integral_domain α] : field α :=
-{ inv := λ x, if H : x = 0 then 0 else classical.some $ something2 α x H,
-  mul_inv_cancel := λ x H, by unfold has_inv.inv; rw [dif_neg H, mul_comm, classical.some_spec (something2 α x H)],
-  inv_mul_cancel := λ x H, by unfold has_inv.inv; rw [dif_neg H, classical.some_spec (something2 α x H)],
-  .. (by apply_instance : integral_domain α) }
-```
+<span class="n">noncomputable</span> <span class="kn">instance</span> <span class="n">field_of_fintype_of_integral_domain</span> <span class="o">[</span><span class="n">integral_domain</span> <span class="n">α</span><span class="o">]</span> <span class="o">:</span> <span class="n">field</span> <span class="n">α</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">inv</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="k">if</span> <span class="n">H</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">=</span> <span class="mi">0</span> <span class="k">then</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">classical</span><span class="bp">.</span><span class="n">some</span> <span class="err">$</span> <span class="n">something2</span> <span class="n">α</span> <span class="n">x</span> <span class="n">H</span><span class="o">,</span>
+  <span class="n">mul_inv_cancel</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">x</span> <span class="n">H</span><span class="o">,</span> <span class="k">by</span> <span class="n">unfold</span> <span class="n">has_inv</span><span class="bp">.</span><span class="n">inv</span><span class="bp">;</span> <span class="n">rw</span> <span class="o">[</span><span class="n">dif_neg</span> <span class="n">H</span><span class="o">,</span> <span class="n">mul_comm</span><span class="o">,</span> <span class="n">classical</span><span class="bp">.</span><span class="n">some_spec</span> <span class="o">(</span><span class="n">something2</span> <span class="n">α</span> <span class="n">x</span> <span class="n">H</span><span class="o">)],</span>
+  <span class="n">inv_mul_cancel</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">x</span> <span class="n">H</span><span class="o">,</span> <span class="k">by</span> <span class="n">unfold</span> <span class="n">has_inv</span><span class="bp">.</span><span class="n">inv</span><span class="bp">;</span> <span class="n">rw</span> <span class="o">[</span><span class="n">dif_neg</span> <span class="n">H</span><span class="o">,</span> <span class="n">classical</span><span class="bp">.</span><span class="n">some_spec</span> <span class="o">(</span><span class="n">something2</span> <span class="n">α</span> <span class="n">x</span> <span class="n">H</span><span class="o">)],</span>
+  <span class="bp">..</span> <span class="o">(</span><span class="k">by</span> <span class="n">apply_instance</span> <span class="o">:</span> <span class="n">integral_domain</span> <span class="n">α</span><span class="o">)</span> <span class="o">}</span>
+</pre></div>
 
 #### [ Kenny Lau (Aug 21 2018 at 20:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/132534118):
-```quote
-Already in mathlib. `fintype.injective_iff_surjective` Your proof  is shorter though
-```
-well I didn't prove the other direction
+<blockquote>
+<p>Already in mathlib. <code>fintype.injective_iff_surjective</code> Your proof  is shorter though</p>
+</blockquote>
+<p>well I didn't prove the other direction</p>
 
 #### [ Chris Hughes (Aug 21 2018 at 20:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/132534147):
-Don't make that an instance or we have a cycle.
+<p>Don't make that an instance or we have a cycle.</p>
 
 #### [ Kenny Lau (Aug 21 2018 at 20:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/132534161):
-also I can't find `injective_iff_surjective`
+<p>also I can't find <code>injective_iff_surjective</code></p>
 
 #### [ Chris Hughes (Aug 21 2018 at 20:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/132534228):
-It's quite new. Last month or so.
+<p>It's quite new. Last month or so.</p>
 
 #### [ Kevin Buzzard (Aug 22 2018 at 22:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/132601084):
-```lean
-example (α : Type) (a b : α) : a = b = (b = a) := sorry
-```
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">b</span> <span class="bp">=</span> <span class="o">(</span><span class="n">b</span> <span class="bp">=</span> <span class="n">a</span><span class="o">)</span> <span class="o">:=</span> <span class="n">sorry</span>
+</pre></div>
 
-Too embarrassed to post my effort. @**Chris Hughes** this came up with that countp v count thing. The proof isn't refl even though the predicates are whatever they call it -- eta equivalent or something.
+
+<p>Too embarrassed to post my effort. <span class="user-mention" data-user-id="110044">@Chris Hughes</span> this came up with that countp v count thing. The proof isn't refl even though the predicates are whatever they call it -- eta equivalent or something.</p>
 
 #### [ Patrick Massot (Aug 22 2018 at 22:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/132601170):
-`by cc`
+<p><code>by cc</code></p>
 
 #### [ Mario Carneiro (Aug 22 2018 at 22:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/132601195):
-`propext eq_comm`
+<p><code>propext eq_comm</code></p>
 
 #### [ Patrick Massot (Aug 22 2018 at 22:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/132601255):
-Mine is shorter! :trophy:
+<p>Mine is shorter! <span class="emoji emoji-1f3c6" title="trophy">:trophy:</span></p>
 
 #### [ Patrick Massot (Aug 22 2018 at 22:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/132601261):
-I know, yours is probably faster
+<p>I know, yours is probably faster</p>
 
 #### [ Mario Carneiro (Aug 22 2018 at 22:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/132601274):
-Mine is smaller with `pp.all` :)
+<p>Mine is smaller with <code>pp.all</code> :)</p>
 
 #### [ Kevin Buzzard (Aug 22 2018 at 23:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/132603490):
-Here's the context this came up in:
+<p>Here's the context this came up in:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">multiset</span>
 
-```lean
-import data.multiset
+<span class="kn">open</span> <span class="n">multiset</span>
 
-open multiset 
+<span class="kn">example</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">decidable_eq</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">multiset</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">count</span> <span class="n">a</span> <span class="n">s</span> <span class="bp">=</span> <span class="n">card</span> <span class="o">(</span><span class="n">filter</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">b</span><span class="o">,</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">a</span><span class="o">)</span> <span class="n">s</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">rw</span> <span class="err">←</span><span class="n">countp_eq_card_filter</span><span class="o">,</span>
+  <span class="n">unfold</span> <span class="n">count</span><span class="o">,</span>
+  <span class="n">congr</span><span class="o">,</span>
+  <span class="n">funext</span><span class="o">,</span>
+  <span class="k">by</span> <span class="n">cc</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
 
-example (α : Type) [decidable_eq α] (s : multiset α) (a : α) : count a s = card (filter (λ b, b = a) s) :=
-begin
-  rw ←countp_eq_card_filter,
-  unfold count,
-  congr,
-  funext,
-  by cc,
-end 
-```
 
-I was surprised this wasn't there, but perhaps the issue is that you can filter on `λ b, b = a` or `λ b, a = b`
+<p>I was surprised this wasn't there, but perhaps the issue is that you can filter on <code>λ b, b = a</code> or <code>λ b, a = b</code></p>
 
 #### [ Kenny Lau (Aug 22 2018 at 23:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/132603835):
-```lean
-import data.multiset
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">multiset</span>
 
-open multiset
+<span class="kn">open</span> <span class="n">multiset</span>
 
-example (α : Type) [decidable_eq α] (s : multiset α) (a : α) : count a s = card (filter (λ b, b = a) s) :=
-begin
-  convert countp_eq_card_filter s,
-  funext b,
-  cc
-end
-```
+<span class="kn">example</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">decidable_eq</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">multiset</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">count</span> <span class="n">a</span> <span class="n">s</span> <span class="bp">=</span> <span class="n">card</span> <span class="o">(</span><span class="n">filter</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">b</span><span class="o">,</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">a</span><span class="o">)</span> <span class="n">s</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">convert</span> <span class="n">countp_eq_card_filter</span> <span class="n">s</span><span class="o">,</span>
+  <span class="n">funext</span> <span class="n">b</span><span class="o">,</span>
+  <span class="n">cc</span>
+<span class="kn">end</span>
+</pre></div>
 
 #### [ Mario Carneiro (Aug 22 2018 at 23:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/132603896):
-`by simp [count, countp_eq_card_filter, eq_comm]; congr`
+<p><code>by simp [count, countp_eq_card_filter, eq_comm]; congr</code></p>
 
 #### [ Kenny Lau (Aug 22 2018 at 23:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/132604013):
-`by convert countp_eq_card_filter s; simp [eq_comm]`
+<p><code>by convert countp_eq_card_filter s; simp [eq_comm]</code></p>
 
 #### [ Kevin Buzzard (Aug 23 2018 at 00:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/132604473):
-If I hover over `convert` in VS Code I get "convert <- expr <error while executing interactive.param_desc: don't know how to pretty print lean.parser.small_nat>  Similar to `refine` but generates equality proof obligations for every discrepancy between the goal and the type of the rule"
+<p>If I hover over <code>convert</code> in VS Code I get "convert &lt;- expr &lt;error while executing interactive.param_desc: don't know how to pretty print lean.parser.small_nat&gt;  Similar to <code>refine</code> but generates equality proof obligations for every discrepancy between the goal and the type of the rule"</p>
 
 #### [ Mario Carneiro (Aug 23 2018 at 00:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/132604528):
-that's because `small_nat` doesn't have a description - compare with `congr'`
+<p>that's because <code>small_nat</code> doesn't have a description - compare with <code>congr'</code></p>
 
 #### [ Sean Leather (Sep 12 2018 at 14:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/133795530):
-```lean
-example (m n : ℕ) : m < 1 + max m n := _
-```
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">m</span> <span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">m</span> <span class="bp">&lt;</span> <span class="mi">1</span> <span class="bp">+</span> <span class="n">max</span> <span class="n">m</span> <span class="n">n</span> <span class="o">:=</span> <span class="bp">_</span>
+</pre></div>
 
 #### [ Reid Barton (Sep 12 2018 at 14:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/133796099):
-not very creative, but `by rw [add_comm, nat.lt_succ_iff]; apply le_max_left`
+<p>not very creative, but <code>by rw [add_comm, nat.lt_succ_iff]; apply le_max_left</code></p>
 
 #### [ Kenny Lau (Oct 18 2018 at 18:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/136055689):
-```lean
-import analysis.topology.topological_space
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">analysis</span><span class="bp">.</span><span class="n">topology</span><span class="bp">.</span><span class="n">topological_space</span>
 
-example (α : Type*) [topological_space α] [t1_space α] [fintype α] (s : set α) : is_open s :=
-by letI := classical.dec_pred (λ x, x ∈ -s); exact
-(is_closed_compl_iff.1 $ set.bUnion_of_singleton (-s) ▸ is_closed_Union
-  ⟨set.fintype_of_finset (finset.univ.filter (λ x, x ∈ -s))
-    (λ x, by simp only [finset.mem_filter, finset.mem_univ, true_and])⟩
-  (λ _ _, is_closed_singleton))
-```
+<span class="kn">example</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">[</span><span class="n">topological_space</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">t1_space</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">fintype</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">is_open</span> <span class="n">s</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">letI</span> <span class="o">:=</span> <span class="n">classical</span><span class="bp">.</span><span class="n">dec_pred</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="n">x</span> <span class="err">∈</span> <span class="bp">-</span><span class="n">s</span><span class="o">)</span><span class="bp">;</span> <span class="n">exact</span>
+<span class="o">(</span><span class="n">is_closed_compl_iff</span><span class="bp">.</span><span class="mi">1</span> <span class="err">$</span> <span class="n">set</span><span class="bp">.</span><span class="n">bUnion_of_singleton</span> <span class="o">(</span><span class="bp">-</span><span class="n">s</span><span class="o">)</span> <span class="bp">▸</span> <span class="n">is_closed_Union</span>
+  <span class="bp">⟨</span><span class="n">set</span><span class="bp">.</span><span class="n">fintype_of_finset</span> <span class="o">(</span><span class="n">finset</span><span class="bp">.</span><span class="n">univ</span><span class="bp">.</span><span class="n">filter</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="n">x</span> <span class="err">∈</span> <span class="bp">-</span><span class="n">s</span><span class="o">))</span>
+    <span class="o">(</span><span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="k">by</span> <span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">finset</span><span class="bp">.</span><span class="n">mem_filter</span><span class="o">,</span> <span class="n">finset</span><span class="bp">.</span><span class="n">mem_univ</span><span class="o">,</span> <span class="n">true_and</span><span class="o">])</span><span class="bp">⟩</span>
+  <span class="o">(</span><span class="bp">λ</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">,</span> <span class="n">is_closed_singleton</span><span class="o">))</span>
+</pre></div>
 
 #### [ Mario Carneiro (Oct 18 2018 at 19:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/136059466):
-I think this theorem could also be stated as `t = \top`
+<p>I think this theorem could also be stated as <code>t = \top</code></p>
 
 #### [ Mario Carneiro (Oct 18 2018 at 19:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/136060001):
-```lean
-class t2_space' (α : Type u) [topological_space α] :=
-(t2 : ∀x y, (∀ u v : set α, is_open u → is_open v →
-   x ∈ u → y ∈ v → ∃ z, z ∈ u ∧ z ∈ v) → x = y)
+<div class="codehilite"><pre><span></span><span class="n">class</span> <span class="n">t2_space&#39;</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">[</span><span class="n">topological_space</span> <span class="n">α</span><span class="o">]</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">t2</span> <span class="o">:</span> <span class="bp">∀</span><span class="n">x</span> <span class="n">y</span><span class="o">,</span> <span class="o">(</span><span class="bp">∀</span> <span class="n">u</span> <span class="n">v</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span><span class="o">,</span> <span class="n">is_open</span> <span class="n">u</span> <span class="bp">→</span> <span class="n">is_open</span> <span class="n">v</span> <span class="bp">→</span>
+   <span class="n">x</span> <span class="err">∈</span> <span class="n">u</span> <span class="bp">→</span> <span class="n">y</span> <span class="err">∈</span> <span class="n">v</span> <span class="bp">→</span> <span class="bp">∃</span> <span class="n">z</span><span class="o">,</span> <span class="n">z</span> <span class="err">∈</span> <span class="n">u</span> <span class="bp">∧</span> <span class="n">z</span> <span class="err">∈</span> <span class="n">v</span><span class="o">)</span> <span class="bp">→</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">y</span><span class="o">)</span>
 
-variables (α : Type u) [t : topological_space α]
-include t
+<span class="kn">variables</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">[</span><span class="n">t</span> <span class="o">:</span> <span class="n">topological_space</span> <span class="n">α</span><span class="o">]</span>
+<span class="n">include</span> <span class="n">t</span>
 
-def Hausdorffification.setoid : setoid α :=
-{ r := λ x y, ∀ (s : setoid α) [t2_space' (quotient s)], @setoid.r α s x y,
-  iseqv := ⟨λ _ s _, s.2.1 _, λ _ _ H s ht2, s.2.2.1 (@H s ht2),
-    λ _ _ _ H1 H2 s ht2, s.2.2.2 (@H1 s ht2) (@H2 s ht2)⟩ }
+<span class="n">def</span> <span class="n">Hausdorffification</span><span class="bp">.</span><span class="n">setoid</span> <span class="o">:</span> <span class="n">setoid</span> <span class="n">α</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">r</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">x</span> <span class="n">y</span><span class="o">,</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">setoid</span> <span class="n">α</span><span class="o">)</span> <span class="o">[</span><span class="n">t2_space&#39;</span> <span class="o">(</span><span class="n">quotient</span> <span class="n">s</span><span class="o">)],</span> <span class="bp">@</span><span class="n">setoid</span><span class="bp">.</span><span class="n">r</span> <span class="n">α</span> <span class="n">s</span> <span class="n">x</span> <span class="n">y</span><span class="o">,</span>
+  <span class="n">iseqv</span> <span class="o">:=</span> <span class="bp">⟨λ</span> <span class="bp">_</span> <span class="n">s</span> <span class="bp">_</span><span class="o">,</span> <span class="n">s</span><span class="bp">.</span><span class="mi">2</span><span class="bp">.</span><span class="mi">1</span> <span class="bp">_</span><span class="o">,</span> <span class="bp">λ</span> <span class="bp">_</span> <span class="bp">_</span> <span class="n">H</span> <span class="n">s</span> <span class="n">ht2</span><span class="o">,</span> <span class="n">s</span><span class="bp">.</span><span class="mi">2</span><span class="bp">.</span><span class="mi">2</span><span class="bp">.</span><span class="mi">1</span> <span class="o">(</span><span class="bp">@</span><span class="n">H</span> <span class="n">s</span> <span class="n">ht2</span><span class="o">),</span>
+    <span class="bp">λ</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="n">H1</span> <span class="n">H2</span> <span class="n">s</span> <span class="n">ht2</span><span class="o">,</span> <span class="n">s</span><span class="bp">.</span><span class="mi">2</span><span class="bp">.</span><span class="mi">2</span><span class="bp">.</span><span class="mi">2</span> <span class="o">(</span><span class="bp">@</span><span class="n">H1</span> <span class="n">s</span> <span class="n">ht2</span><span class="o">)</span> <span class="o">(</span><span class="bp">@</span><span class="n">H2</span> <span class="n">s</span> <span class="n">ht2</span><span class="o">)</span><span class="bp">⟩</span> <span class="o">}</span>
 
-local attribute [instance] Hausdorffification.setoid
+<span class="n">local</span> <span class="n">attribute</span> <span class="o">[</span><span class="kn">instance</span><span class="o">]</span> <span class="n">Hausdorffification</span><span class="bp">.</span><span class="n">setoid</span>
 
-@[reducible] def Hausdorffification : Type u :=
-quotient (Hausdorffification.setoid α)
+<span class="bp">@</span><span class="o">[</span><span class="kn">reducible</span><span class="o">]</span> <span class="n">def</span> <span class="n">Hausdorffification</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span> <span class="o">:=</span>
+<span class="n">quotient</span> <span class="o">(</span><span class="n">Hausdorffification</span><span class="bp">.</span><span class="n">setoid</span> <span class="n">α</span><span class="o">)</span>
 
-instance Hausdorffification.t2_space' :
-  t2_space' (Hausdorffification α) :=
-{ t2 := λ x y, quotient.induction_on₂ x y $ λ m n H,
-    quot.sound $ λ r ht2, begin
-      resetI,
-      let f : Hausdorffification α → quotient r,
-      { refine λ e, quotient.lift_on' e quotient.mk _,
-        intros a b H, apply quotient.sound, apply H },
-      have hf : continuous f,
-      { intros s hs,
-        change is_open (quotient.mk ⁻¹' _),
-        rw ← set.preimage_comp,
-        exact hs },
-      refine quotient.exact (t2_space'.t2 _ _ $ λ u v h1 h2 h3 h4, _),
-      rcases H _ _ (hf _ h1) (hf _ h2) h3 h4 with ⟨z, zu, zv⟩,
-      exact ⟨fz, zu, zv⟩
-    end }
-```
+<span class="kn">instance</span> <span class="n">Hausdorffification</span><span class="bp">.</span><span class="n">t2_space&#39;</span> <span class="o">:</span>
+  <span class="n">t2_space&#39;</span> <span class="o">(</span><span class="n">Hausdorffification</span> <span class="n">α</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">t2</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">x</span> <span class="n">y</span><span class="o">,</span> <span class="n">quotient</span><span class="bp">.</span><span class="n">induction_on₂</span> <span class="n">x</span> <span class="n">y</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">m</span> <span class="n">n</span> <span class="n">H</span><span class="o">,</span>
+    <span class="n">quot</span><span class="bp">.</span><span class="n">sound</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">r</span> <span class="n">ht2</span><span class="o">,</span> <span class="k">begin</span>
+      <span class="n">resetI</span><span class="o">,</span>
+      <span class="k">let</span> <span class="n">f</span> <span class="o">:</span> <span class="n">Hausdorffification</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">quotient</span> <span class="n">r</span><span class="o">,</span>
+      <span class="o">{</span> <span class="n">refine</span> <span class="bp">λ</span> <span class="n">e</span><span class="o">,</span> <span class="n">quotient</span><span class="bp">.</span><span class="n">lift_on&#39;</span> <span class="n">e</span> <span class="n">quotient</span><span class="bp">.</span><span class="n">mk</span> <span class="bp">_</span><span class="o">,</span>
+        <span class="n">intros</span> <span class="n">a</span> <span class="n">b</span> <span class="n">H</span><span class="o">,</span> <span class="n">apply</span> <span class="n">quotient</span><span class="bp">.</span><span class="n">sound</span><span class="o">,</span> <span class="n">apply</span> <span class="n">H</span> <span class="o">},</span>
+      <span class="k">have</span> <span class="n">hf</span> <span class="o">:</span> <span class="n">continuous</span> <span class="n">f</span><span class="o">,</span>
+      <span class="o">{</span> <span class="n">intros</span> <span class="n">s</span> <span class="n">hs</span><span class="o">,</span>
+        <span class="n">change</span> <span class="n">is_open</span> <span class="o">(</span><span class="n">quotient</span><span class="bp">.</span><span class="n">mk</span> <span class="bp">⁻¹</span><span class="err">&#39;</span> <span class="bp">_</span><span class="o">),</span>
+        <span class="n">rw</span> <span class="err">←</span> <span class="n">set</span><span class="bp">.</span><span class="n">preimage_comp</span><span class="o">,</span>
+        <span class="n">exact</span> <span class="n">hs</span> <span class="o">},</span>
+      <span class="n">refine</span> <span class="n">quotient</span><span class="bp">.</span><span class="n">exact</span> <span class="o">(</span><span class="n">t2_space&#39;</span><span class="bp">.</span><span class="n">t2</span> <span class="bp">_</span> <span class="bp">_</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">u</span> <span class="n">v</span> <span class="n">h1</span> <span class="n">h2</span> <span class="n">h3</span> <span class="n">h4</span><span class="o">,</span> <span class="bp">_</span><span class="o">),</span>
+      <span class="n">rcases</span> <span class="n">H</span> <span class="bp">_</span> <span class="bp">_</span> <span class="o">(</span><span class="n">hf</span> <span class="bp">_</span> <span class="n">h1</span><span class="o">)</span> <span class="o">(</span><span class="n">hf</span> <span class="bp">_</span> <span class="n">h2</span><span class="o">)</span> <span class="n">h3</span> <span class="n">h4</span> <span class="k">with</span> <span class="bp">⟨</span><span class="n">z</span><span class="o">,</span> <span class="n">zu</span><span class="o">,</span> <span class="n">zv</span><span class="bp">⟩</span><span class="o">,</span>
+      <span class="n">exact</span> <span class="bp">⟨</span><span class="n">fz</span><span class="o">,</span> <span class="n">zu</span><span class="o">,</span> <span class="n">zv</span><span class="bp">⟩</span>
+    <span class="kn">end</span> <span class="o">}</span>
+</pre></div>
 
 #### [ Johannes Hölzl (Oct 18 2018 at 20:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/136060806):
-By the way: this T2 space definition is equal to `not (disjoint (nhds x) (nhds y)) -> x = y`.
+<p>By the way: this T2 space definition is equal to <code>not (disjoint (nhds x) (nhds y)) -&gt; x = y</code>.</p>
 
 #### [ Mario Carneiro (Oct 18 2018 at 20:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/136061226):
-not constructively
+<p>not constructively</p>
 
 #### [ Mario Carneiro (Oct 18 2018 at 20:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/136061506):
-(oops, wrong thread, this should be in [Hausdorffification](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/subject/Hausdorffification/near/136026443))
+<p>(oops, wrong thread, this should be in <a href="#narrow/stream/116395-maths/subject/Hausdorffification/near/136026443" title="#narrow/stream/116395-maths/subject/Hausdorffification/near/136026443">Hausdorffification</a>)</p>
 
 
 {% endraw %}

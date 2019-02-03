@@ -12,108 +12,106 @@ permalink: archive/113488general/11191Mutualinductionproblem.html
 
 {% raw %}
 #### [ Neil Strickland (Nov 02 2018 at 18:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Mutual%20induction%20problem/near/137068101):
-Here is an attempt at a mutually inductive definition, which is a bit more intricate than the ones in the book.  
-```lean
-open nat
+<p>Here is an attempt at a mutually inductive definition, which is a bit more intricate than the ones in the book.  </p>
+<div class="codehilite"><pre><span></span><span class="kn">open</span> <span class="n">nat</span>
 
-mutual inductive partition,blocks
-with partition : ∀ (n : ℕ), Type
-| null : partition 0
-| add (n : ℕ) (p : partition n) : partition (succ n)
-| join (n : ℕ) (p : partition n) (b : blocks n p) : partition (succ n)
-with blocks : ∀ (n : ℕ), ∀ (p : partition n),Type
-| old_block (n : ℕ) (p : partition n) (b : blocks n p): blocks (succ n) (add n p)
-| new_block (n : ℕ) (p : partition n) : blocks (succ n) (add n p)
-| join_block (n : ℕ) (p : partition n) (b : blocks n p) (c : blocks n p) :
-                blocks (succ n) (join n p b)
-```
-Lean rejects it with the following message:
-```
-mutually inductive types compiled to invalid basic inductive type
+<span class="n">mutual</span> <span class="kn">inductive</span> <span class="n">partition</span><span class="o">,</span><span class="n">blocks</span>
+<span class="k">with</span> <span class="n">partition</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">),</span> <span class="kt">Type</span>
+<span class="bp">|</span> <span class="n">null</span> <span class="o">:</span> <span class="n">partition</span> <span class="mi">0</span>
+<span class="bp">|</span> <span class="n">add</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="n">partition</span> <span class="n">n</span><span class="o">)</span> <span class="o">:</span> <span class="n">partition</span> <span class="o">(</span><span class="n">succ</span> <span class="n">n</span><span class="o">)</span>
+<span class="bp">|</span> <span class="n">join</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="n">partition</span> <span class="n">n</span><span class="o">)</span> <span class="o">(</span><span class="n">b</span> <span class="o">:</span> <span class="n">blocks</span> <span class="n">n</span> <span class="n">p</span><span class="o">)</span> <span class="o">:</span> <span class="n">partition</span> <span class="o">(</span><span class="n">succ</span> <span class="n">n</span><span class="o">)</span>
+<span class="k">with</span> <span class="n">blocks</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">),</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="n">partition</span> <span class="n">n</span><span class="o">),</span><span class="kt">Type</span>
+<span class="bp">|</span> <span class="n">old_block</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="n">partition</span> <span class="n">n</span><span class="o">)</span> <span class="o">(</span><span class="n">b</span> <span class="o">:</span> <span class="n">blocks</span> <span class="n">n</span> <span class="n">p</span><span class="o">):</span> <span class="n">blocks</span> <span class="o">(</span><span class="n">succ</span> <span class="n">n</span><span class="o">)</span> <span class="o">(</span><span class="n">add</span> <span class="n">n</span> <span class="n">p</span><span class="o">)</span>
+<span class="bp">|</span> <span class="n">new_block</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="n">partition</span> <span class="n">n</span><span class="o">)</span> <span class="o">:</span> <span class="n">blocks</span> <span class="o">(</span><span class="n">succ</span> <span class="n">n</span><span class="o">)</span> <span class="o">(</span><span class="n">add</span> <span class="n">n</span> <span class="n">p</span><span class="o">)</span>
+<span class="bp">|</span> <span class="n">join_block</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="n">partition</span> <span class="n">n</span><span class="o">)</span> <span class="o">(</span><span class="n">b</span> <span class="o">:</span> <span class="n">blocks</span> <span class="n">n</span> <span class="n">p</span><span class="o">)</span> <span class="o">(</span><span class="n">c</span> <span class="o">:</span> <span class="n">blocks</span> <span class="n">n</span> <span class="n">p</span><span class="o">)</span> <span class="o">:</span>
+                <span class="n">blocks</span> <span class="o">(</span><span class="n">succ</span> <span class="n">n</span><span class="o">)</span> <span class="o">(</span><span class="n">join</span> <span class="n">n</span> <span class="n">p</span> <span class="n">b</span><span class="o">)</span>
+</pre></div>
+
+
+<p>Lean rejects it with the following message:</p>
+<div class="codehilite"><pre><span></span>mutually inductive types compiled to invalid basic inductive type
 nested exception message:
-universe level of type_of(arg #3) of 'partition._mut_.join_0' is too big for the corresponding inductive datatype
-```
-Is there a way to fix this?  I have not really absorbed much of the story about universe levels so I do not know whether this is hard or not.
+universe level of type_of(arg #3) of &#39;partition._mut_.join_0&#39; is too big for the corresponding inductive datatype
+</pre></div>
 
-(The intended interpretation is as follows.  `partitions n` is supposed to represent the set of partitions of the set $$\{0,\ldots,n-1\}$$, and `blocks n p` is supposed to represent the set of blocks of the partition `p`.  Obviously `n` should be implicit here but I am leaving it explicit until I have fixed the other issues. In the case $$n=0$$ there is a unique partition which we call `null`.   One way to partition $$\{0,\ldots,n\}$$ is to take a partition `p` of $$\{0,\ldots,n-1\}$$ and add $$\{n\}$$ as an extra block; we call this `add n p`.  Another way is to take `p` and a block `b` of `p` and use $$b \cup \{n\}$$ as one block of a new partition which we call `join n p b`.  )
+
+<p>Is there a way to fix this?  I have not really absorbed much of the story about universe levels so I do not know whether this is hard or not.</p>
+<p>(The intended interpretation is as follows.  <code>partitions n</code> is supposed to represent the set of partitions of the set <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>{</mo><mn>0</mn><mo separator="true">,</mo><mo>…</mo><mo separator="true">,</mo><mi>n</mi><mo>−</mo><mn>1</mn><mo>}</mo></mrow><annotation encoding="application/x-tex">\{0,\ldots,n-1\}</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.75em;"></span><span class="strut bottom" style="height:1em;vertical-align:-0.25em;"></span><span class="base"><span class="mopen">{</span><span class="mord mathrm">0</span><span class="mpunct">,</span><span class="minner">…</span><span class="mpunct">,</span><span class="mord mathit">n</span><span class="mbin">−</span><span class="mord mathrm">1</span><span class="mclose">}</span></span></span></span>, and <code>blocks n p</code> is supposed to represent the set of blocks of the partition <code>p</code>.  Obviously <code>n</code> should be implicit here but I am leaving it explicit until I have fixed the other issues. In the case <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>n</mi><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">n=0</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.64444em;"></span><span class="strut bottom" style="height:0.64444em;vertical-align:0em;"></span><span class="base"><span class="mord mathit">n</span><span class="mrel">=</span><span class="mord mathrm">0</span></span></span></span> there is a unique partition which we call <code>null</code>.   One way to partition <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>{</mo><mn>0</mn><mo separator="true">,</mo><mo>…</mo><mo separator="true">,</mo><mi>n</mi><mo>}</mo></mrow><annotation encoding="application/x-tex">\{0,\ldots,n\}</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.75em;"></span><span class="strut bottom" style="height:1em;vertical-align:-0.25em;"></span><span class="base"><span class="mopen">{</span><span class="mord mathrm">0</span><span class="mpunct">,</span><span class="minner">…</span><span class="mpunct">,</span><span class="mord mathit">n</span><span class="mclose">}</span></span></span></span> is to take a partition <code>p</code> of <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>{</mo><mn>0</mn><mo separator="true">,</mo><mo>…</mo><mo separator="true">,</mo><mi>n</mi><mo>−</mo><mn>1</mn><mo>}</mo></mrow><annotation encoding="application/x-tex">\{0,\ldots,n-1\}</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.75em;"></span><span class="strut bottom" style="height:1em;vertical-align:-0.25em;"></span><span class="base"><span class="mopen">{</span><span class="mord mathrm">0</span><span class="mpunct">,</span><span class="minner">…</span><span class="mpunct">,</span><span class="mord mathit">n</span><span class="mbin">−</span><span class="mord mathrm">1</span><span class="mclose">}</span></span></span></span> and add <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>{</mo><mi>n</mi><mo>}</mo></mrow><annotation encoding="application/x-tex">\{n\}</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.75em;"></span><span class="strut bottom" style="height:1em;vertical-align:-0.25em;"></span><span class="base"><span class="mopen">{</span><span class="mord mathit">n</span><span class="mclose">}</span></span></span></span> as an extra block; we call this <code>add n p</code>.  Another way is to take <code>p</code> and a block <code>b</code> of <code>p</code> and use <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>b</mi><mo>∪</mo><mo>{</mo><mi>n</mi><mo>}</mo></mrow><annotation encoding="application/x-tex">b \cup \{n\}</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.75em;"></span><span class="strut bottom" style="height:1em;vertical-align:-0.25em;"></span><span class="base"><span class="mord mathit">b</span><span class="mbin">∪</span><span class="mopen">{</span><span class="mord mathit">n</span><span class="mclose">}</span></span></span></span> as one block of a new partition which we call <code>join n p b</code>.  )</p>
 
 #### [ Reid Barton (Nov 02 2018 at 18:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Mutual%20induction%20problem/near/137068768):
-I think this is an [inductive-inductive type](https://ncatlab.org/nlab/show/inductive-inductive+type), which I think Lean doesn't support.
-Sometimes you get that error about universe levels when the real issue is that Lean got confused for another reason--here there's also an error on the use of `partition` in the declaration of `blocks`; it looks like Lean doesn't know what `partition` is yet.
+<p>I think this is an <a href="https://ncatlab.org/nlab/show/inductive-inductive+type" target="_blank" title="https://ncatlab.org/nlab/show/inductive-inductive+type">inductive-inductive type</a>, which I think Lean doesn't support.<br>
+Sometimes you get that error about universe levels when the real issue is that Lean got confused for another reason--here there's also an error on the use of <code>partition</code> in the declaration of <code>blocks</code>; it looks like Lean doesn't know what <code>partition</code> is yet.</p>
 
 #### [ Reid Barton (Nov 02 2018 at 18:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Mutual%20induction%20problem/near/137068999):
-A less innocuous-looking example of an inductive-inductive type:
-```lean
-mutual inductive code,el
-with code : Type
-| cempty : code
-| cnat : code
-| csigma (a : code) (b : el a → code) : code
-| cpi (a : code) (b : el a → code) : code
-with el : Π (c : code), Type
-| enat (n : ℕ) : el cnat
-| esigma (a : code) (b : el a → code) (x : el a) (y : el (b x)) : el (csigma a b)
-| epi (a : code) (b : el a → code) (x : Π (i : el a), el (b i)) : el (cpi a b)
-```
+<p>A less innocuous-looking example of an inductive-inductive type:</p>
+<div class="codehilite"><pre><span></span><span class="n">mutual</span> <span class="kn">inductive</span> <span class="n">code</span><span class="o">,</span><span class="n">el</span>
+<span class="k">with</span> <span class="n">code</span> <span class="o">:</span> <span class="kt">Type</span>
+<span class="bp">|</span> <span class="n">cempty</span> <span class="o">:</span> <span class="n">code</span>
+<span class="bp">|</span> <span class="n">cnat</span> <span class="o">:</span> <span class="n">code</span>
+<span class="bp">|</span> <span class="n">csigma</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">code</span><span class="o">)</span> <span class="o">(</span><span class="n">b</span> <span class="o">:</span> <span class="n">el</span> <span class="n">a</span> <span class="bp">→</span> <span class="n">code</span><span class="o">)</span> <span class="o">:</span> <span class="n">code</span>
+<span class="bp">|</span> <span class="n">cpi</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">code</span><span class="o">)</span> <span class="o">(</span><span class="n">b</span> <span class="o">:</span> <span class="n">el</span> <span class="n">a</span> <span class="bp">→</span> <span class="n">code</span><span class="o">)</span> <span class="o">:</span> <span class="n">code</span>
+<span class="k">with</span> <span class="n">el</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">(</span><span class="n">c</span> <span class="o">:</span> <span class="n">code</span><span class="o">),</span> <span class="kt">Type</span>
+<span class="bp">|</span> <span class="n">enat</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">el</span> <span class="n">cnat</span>
+<span class="bp">|</span> <span class="n">esigma</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">code</span><span class="o">)</span> <span class="o">(</span><span class="n">b</span> <span class="o">:</span> <span class="n">el</span> <span class="n">a</span> <span class="bp">→</span> <span class="n">code</span><span class="o">)</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">el</span> <span class="n">a</span><span class="o">)</span> <span class="o">(</span><span class="n">y</span> <span class="o">:</span> <span class="n">el</span> <span class="o">(</span><span class="n">b</span> <span class="n">x</span><span class="o">))</span> <span class="o">:</span> <span class="n">el</span> <span class="o">(</span><span class="n">csigma</span> <span class="n">a</span> <span class="n">b</span><span class="o">)</span>
+<span class="bp">|</span> <span class="n">epi</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">code</span><span class="o">)</span> <span class="o">(</span><span class="n">b</span> <span class="o">:</span> <span class="n">el</span> <span class="n">a</span> <span class="bp">→</span> <span class="n">code</span><span class="o">)</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">(</span><span class="n">i</span> <span class="o">:</span> <span class="n">el</span> <span class="n">a</span><span class="o">),</span> <span class="n">el</span> <span class="o">(</span><span class="n">b</span> <span class="n">i</span><span class="o">))</span> <span class="o">:</span> <span class="n">el</span> <span class="o">(</span><span class="n">cpi</span> <span class="n">a</span> <span class="n">b</span><span class="o">)</span>
+</pre></div>
 
 #### [ Reid Barton (Nov 02 2018 at 18:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Mutual%20induction%20problem/near/137069482):
-Though my example involves recursion in negative positions in a few places, so maybe I've got the example wrong
+<p>Though my example involves recursion in negative positions in a few places, so maybe I've got the example wrong</p>
 
 #### [ Reid Barton (Nov 02 2018 at 19:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Mutual%20induction%20problem/near/137071550):
-I tried defining `partition` and `blocks` by mutual recursion, rather than making them inductive types, but Lean wasn't happy with my attempt either.
+<p>I tried defining <code>partition</code> and <code>blocks</code> by mutual recursion, rather than making them inductive types, but Lean wasn't happy with my attempt either.</p>
 
 #### [ Reid Barton (Nov 02 2018 at 19:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Mutual%20induction%20problem/near/137071648):
-I think the best you can do is define the types by some other means and then try to approximate the interface you would get from an inductive definition, for example by defining your own "induction principle".
+<p>I think the best you can do is define the types by some other means and then try to approximate the interface you would get from an inductive definition, for example by defining your own "induction principle".</p>
 
 #### [ Mario Carneiro (Nov 02 2018 at 20:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Mutual%20induction%20problem/near/137077383):
-@**Neil Strickland** Another way to read "this is inductive-inductive" is "lean does not have the axioms to justify that this is a valid construction". So you have to find another way to justify it to lean. In this case, the important part is that `n` increases in all the constructors, so this is actually a mutually recursive definition of a family of types, which lean can do well enough. We have
-```
-partition 0 = unit
+<p><span class="user-mention" data-user-id="130308">@Neil Strickland</span> Another way to read "this is inductive-inductive" is "lean does not have the axioms to justify that this is a valid construction". So you have to find another way to justify it to lean. In this case, the important part is that <code>n</code> increases in all the constructors, so this is actually a mutually recursive definition of a family of types, which lean can do well enough. We have</p>
+<div class="codehilite"><pre><span></span>partition 0 = unit
 partition (succ n) = partition n + Σ p : partition n, blocks n p
 blocks 0 p = empty
 blocks (succ n) (inl p) = blocks n p + 1
-blocks (succ n) (inr <p, b>) = blocks n p
-```
+blocks (succ n) (inr &lt;p, b&gt;) = blocks n p
+</pre></div>
 
 #### [ Reid Barton (Nov 02 2018 at 20:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Mutual%20induction%20problem/near/137077658):
-This looks a lot like my attempt which Lean rejected, so I'm curious to see how you convince it the definition is valid...
+<p>This looks a lot like my attempt which Lean rejected, so I'm curious to see how you convince it the definition is valid...</p>
 
 #### [ Mario Carneiro (Nov 02 2018 at 20:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Mutual%20induction%20problem/near/137077666):
-and you can define the pair <partition n, blocks n> by plain primitive recursion
+<p>and you can define the pair &lt;partition n, blocks n&gt; by plain primitive recursion</p>
 
 #### [ Neil Strickland (Nov 02 2018 at 20:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Mutual%20induction%20problem/near/137078327):
-Thanks, I will try that approach.
+<p>Thanks, I will try that approach.</p>
 
 #### [ Mario Carneiro (Nov 02 2018 at 20:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Mutual%20induction%20problem/near/137078422):
-```lean
-def partblock : ℕ → Σ T : Type, T → Type
-| 0 := ⟨unit, λ _, empty⟩
-| (n+1) := ⟨(partblock n).1 ⊕ Σ p : (partblock n).1, (partblock n).2 p,
-  λ x, sum.cases_on x
-    (λ p, option ((partblock n).2 p))
-    (λ p, (partblock n).2 p.1)⟩
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">partblock</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="err">Σ</span> <span class="n">T</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">,</span> <span class="n">T</span> <span class="bp">→</span> <span class="kt">Type</span>
+<span class="bp">|</span> <span class="mi">0</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="n">unit</span><span class="o">,</span> <span class="bp">λ</span> <span class="bp">_</span><span class="o">,</span> <span class="n">empty</span><span class="bp">⟩</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="o">(</span><span class="n">partblock</span> <span class="n">n</span><span class="o">)</span><span class="bp">.</span><span class="mi">1</span> <span class="err">⊕</span> <span class="err">Σ</span> <span class="n">p</span> <span class="o">:</span> <span class="o">(</span><span class="n">partblock</span> <span class="n">n</span><span class="o">)</span><span class="bp">.</span><span class="mi">1</span><span class="o">,</span> <span class="o">(</span><span class="n">partblock</span> <span class="n">n</span><span class="o">)</span><span class="bp">.</span><span class="mi">2</span> <span class="n">p</span><span class="o">,</span>
+  <span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="n">sum</span><span class="bp">.</span><span class="n">cases_on</span> <span class="n">x</span>
+    <span class="o">(</span><span class="bp">λ</span> <span class="n">p</span><span class="o">,</span> <span class="n">option</span> <span class="o">((</span><span class="n">partblock</span> <span class="n">n</span><span class="o">)</span><span class="bp">.</span><span class="mi">2</span> <span class="n">p</span><span class="o">))</span>
+    <span class="o">(</span><span class="bp">λ</span> <span class="n">p</span><span class="o">,</span> <span class="o">(</span><span class="n">partblock</span> <span class="n">n</span><span class="o">)</span><span class="bp">.</span><span class="mi">2</span> <span class="n">p</span><span class="bp">.</span><span class="mi">1</span><span class="o">)</span><span class="bp">⟩</span>
 
-def partition (n : ℕ) := (partblock n).1
-def blocks {n : ℕ} : partition n → Type := (partblock n).2
-def partition.null : partition 0 := unit.star
-def partition.add {n} : partition n → partition (n+1) := sum.inl
-def partition.join {n} (p : partition n) (b : blocks p) : partition (n+1) := sum.inr ⟨p, b⟩
-def old_block {n} {p : partition n} : blocks p → blocks p.add := option.some
-def new_block {n} {p : partition n} : blocks p.add := option.none
-def join_block {n} {p : partition n} (b : blocks p) : blocks p → blocks (p.join b) := id
-```
+<span class="n">def</span> <span class="n">partition</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:=</span> <span class="o">(</span><span class="n">partblock</span> <span class="n">n</span><span class="o">)</span><span class="bp">.</span><span class="mi">1</span>
+<span class="n">def</span> <span class="n">blocks</span> <span class="o">{</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">}</span> <span class="o">:</span> <span class="n">partition</span> <span class="n">n</span> <span class="bp">→</span> <span class="kt">Type</span> <span class="o">:=</span> <span class="o">(</span><span class="n">partblock</span> <span class="n">n</span><span class="o">)</span><span class="bp">.</span><span class="mi">2</span>
+<span class="n">def</span> <span class="n">partition</span><span class="bp">.</span><span class="n">null</span> <span class="o">:</span> <span class="n">partition</span> <span class="mi">0</span> <span class="o">:=</span> <span class="n">unit</span><span class="bp">.</span><span class="n">star</span>
+<span class="n">def</span> <span class="n">partition</span><span class="bp">.</span><span class="n">add</span> <span class="o">{</span><span class="n">n</span><span class="o">}</span> <span class="o">:</span> <span class="n">partition</span> <span class="n">n</span> <span class="bp">→</span> <span class="n">partition</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="o">:=</span> <span class="n">sum</span><span class="bp">.</span><span class="n">inl</span>
+<span class="n">def</span> <span class="n">partition</span><span class="bp">.</span><span class="n">join</span> <span class="o">{</span><span class="n">n</span><span class="o">}</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="n">partition</span> <span class="n">n</span><span class="o">)</span> <span class="o">(</span><span class="n">b</span> <span class="o">:</span> <span class="n">blocks</span> <span class="n">p</span><span class="o">)</span> <span class="o">:</span> <span class="n">partition</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="o">:=</span> <span class="n">sum</span><span class="bp">.</span><span class="n">inr</span> <span class="bp">⟨</span><span class="n">p</span><span class="o">,</span> <span class="n">b</span><span class="bp">⟩</span>
+<span class="n">def</span> <span class="n">old_block</span> <span class="o">{</span><span class="n">n</span><span class="o">}</span> <span class="o">{</span><span class="n">p</span> <span class="o">:</span> <span class="n">partition</span> <span class="n">n</span><span class="o">}</span> <span class="o">:</span> <span class="n">blocks</span> <span class="n">p</span> <span class="bp">→</span> <span class="n">blocks</span> <span class="n">p</span><span class="bp">.</span><span class="n">add</span> <span class="o">:=</span> <span class="n">option</span><span class="bp">.</span><span class="n">some</span>
+<span class="n">def</span> <span class="n">new_block</span> <span class="o">{</span><span class="n">n</span><span class="o">}</span> <span class="o">{</span><span class="n">p</span> <span class="o">:</span> <span class="n">partition</span> <span class="n">n</span><span class="o">}</span> <span class="o">:</span> <span class="n">blocks</span> <span class="n">p</span><span class="bp">.</span><span class="n">add</span> <span class="o">:=</span> <span class="n">option</span><span class="bp">.</span><span class="n">none</span>
+<span class="n">def</span> <span class="n">join_block</span> <span class="o">{</span><span class="n">n</span><span class="o">}</span> <span class="o">{</span><span class="n">p</span> <span class="o">:</span> <span class="n">partition</span> <span class="n">n</span><span class="o">}</span> <span class="o">(</span><span class="n">b</span> <span class="o">:</span> <span class="n">blocks</span> <span class="n">p</span><span class="o">)</span> <span class="o">:</span> <span class="n">blocks</span> <span class="n">p</span> <span class="bp">→</span> <span class="n">blocks</span> <span class="o">(</span><span class="n">p</span><span class="bp">.</span><span class="n">join</span> <span class="n">b</span><span class="o">)</span> <span class="o">:=</span> <span class="n">id</span>
+</pre></div>
 
 #### [ Mario Carneiro (Nov 02 2018 at 20:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Mutual%20induction%20problem/near/137078448):
-the recursion principle is left as an exercise for the reader ;)
+<p>the recursion principle is left as an exercise for the reader ;)</p>
 
 #### [ Reid Barton (Nov 02 2018 at 20:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Mutual%20induction%20problem/near/137078522):
-Interesting--I wonder if eliminating the mutual recursion by hand is essential, then
+<p>Interesting--I wonder if eliminating the mutual recursion by hand is essential, then</p>
 
 #### [ Mario Carneiro (Nov 02 2018 at 20:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Mutual%20induction%20problem/near/137078554):
-Unfortunately, since `blocks n` refers to `partitions n` the default well founded metric for mutual recursion fails
+<p>Unfortunately, since <code>blocks n</code> refers to <code>partitions n</code> the default well founded metric for mutual recursion fails</p>
 
 #### [ Mario Carneiro (Nov 02 2018 at 20:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Mutual%20induction%20problem/near/137078619):
-you can hack together the right well founded relation, but dealing with that relation will dominate the size of the definition itself
+<p>you can hack together the right well founded relation, but dealing with that relation will dominate the size of the definition itself</p>
 
 
 {% endraw %}

@@ -12,14 +12,14 @@ permalink: archive/113488general/43203mulvsmapmul.html
 
 {% raw %}
 #### [ Johan Commelin (Sep 05 2018 at 12:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mul%20vs%20map_mul/near/133366536):
-I noticed that `is_group_hom` has a field called `mul`, whereas I would expect it to be called `map_mul`. Similarly, in that namespace there is a lemma called `one`, and I would expect `map_one`. Etc...
-Can/should these be renamed?
+<p>I noticed that <code>is_group_hom</code> has a field called <code>mul</code>, whereas I would expect it to be called <code>map_mul</code>. Similarly, in that namespace there is a lemma called <code>one</code>, and I would expect <code>map_one</code>. Etc...<br>
+Can/should these be renamed?</p>
 
 #### [ Chris Hughes (Sep 05 2018 at 12:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mul%20vs%20map_mul/near/133366679):
-I think yes. Same for linear map, group action etc.
+<p>I think yes. Same for linear map, group action etc.</p>
 
 #### [ Johan Commelin (Sep 05 2018 at 12:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mul%20vs%20map_mul/near/133366690):
-Or maybe I have wrong expectations...
+<p>Or maybe I have wrong expectations...</p>
 
 
 {% endraw %}

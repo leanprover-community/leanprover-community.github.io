@@ -12,18 +12,19 @@ permalink: archive/113488general/26581puniteqpunit.html
 
 {% raw %}
 #### [ Reid Barton (Apr 23 2018 at 05:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/punit_eq_punit/near/125550617):
-This definition (from `library/init/data/punit.lean`) is less general than probably intended because `()` is (apparently) built-in notation for `unit.star` only, and so the full inferred type is actually `punit_eq_punit : ∀ (a : punit.{1}), @eq.{1} punit.{1} a unit.star`.
-```lean
-lemma punit_eq_punit (a : punit) : a = () :=
-punit_eq a ()
-```
-Since this is in the core Lean library, is there any hope to change it?
+<p>This definition (from <code>library/init/data/punit.lean</code>) is less general than probably intended because <code>()</code> is (apparently) built-in notation for <code>unit.star</code> only, and so the full inferred type is actually <code>punit_eq_punit : ∀ (a : punit.{1}), @eq.{1} punit.{1} a unit.star</code>.</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">punit_eq_punit</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">punit</span><span class="o">)</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">=</span> <span class="o">()</span> <span class="o">:=</span>
+<span class="n">punit_eq</span> <span class="n">a</span> <span class="o">()</span>
+</pre></div>
+
+
+<p>Since this is in the core Lean library, is there any hope to change it?</p>
 
 #### [ Patrick Massot (Apr 23 2018 at 09:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/punit_eq_punit/near/125558322):
-```quote
-Since this is in the core Lean library, is there any hope to change it?
-```
-Someone should really read that Zulip bot documentation. Programming a bot to detect this question and answer "no" is probably a nice exercise then.
+<blockquote>
+<p>Since this is in the core Lean library, is there any hope to change it?</p>
+</blockquote>
+<p>Someone should really read that Zulip bot documentation. Programming a bot to detect this question and answer "no" is probably a nice exercise then.</p>
 
 
 {% endraw %}

@@ -12,8 +12,8 @@ permalink: archive/113488general/21076hiding.html
 
 {% raw %}
 #### [ Reid Barton (Mar 06 2018 at 18:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hiding/near/123359129):
-I imported tactic.ring to handle an identity and now as a result I have a lemma `pow_two` in the root namespace which conflicts with my own lemma `pow_two`, which I use about a dozen times in various proofs.
-Is there a way to hide imported identifiers?
+<p>I imported tactic.ring to handle an identity and now as a result I have a lemma <code>pow_two</code> in the root namespace which conflicts with my own lemma <code>pow_two</code>, which I use about a dozen times in various proofs.<br>
+Is there a way to hide imported identifiers?</p>
 
 
 {% endraw %}

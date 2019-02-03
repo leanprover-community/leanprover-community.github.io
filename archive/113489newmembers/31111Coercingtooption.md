@@ -12,82 +12,82 @@ permalink: archive/113489newmembers/31111Coercingtooption.html
 
 {% raw %}
 #### [ Abhimanyu Pallavi Sudhir (Jan 15 2019 at 22:14)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coercing%20to%20option/near/155204948):
-Where can I find lemmas about coercing to option (e.g. `ℕ` to `option ℕ`)? I want basic things like `↑(n - m) = ↑n - ↑m`.
+<p>Where can I find lemmas about coercing to option (e.g. <code>ℕ</code> to <code>option ℕ</code>)? I want basic things like <code>↑(n - m) = ↑n - ↑m</code>.</p>
 
 #### [ Mario Carneiro (Jan 15 2019 at 22:15)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coercing%20to%20option/near/155204961):
-what does subtraction mean?
+<p>what does subtraction mean?</p>
 
 #### [ Mario Carneiro (Jan 15 2019 at 22:15)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coercing%20to%20option/near/155204982):
-I don't think option has a `has_sub` instance
+<p>I don't think option has a <code>has_sub</code> instance</p>
 
 #### [ Abhimanyu Pallavi Sudhir (Jan 15 2019 at 22:17)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coercing%20to%20option/near/155205154):
-But option N does.
+<p>But option N does.</p>
 
 #### [ Abhimanyu Pallavi Sudhir (Jan 15 2019 at 22:18)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coercing%20to%20option/near/155205221):
-Oh wait, you mean `↑n - ↑m` won't be defined at all.
+<p>Oh wait, you mean <code>↑n - ↑m</code> won't be defined at all.</p>
 
 #### [ Abhimanyu Pallavi Sudhir (Jan 15 2019 at 22:18)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coercing%20to%20option/near/155205251):
-What about something like `1 + ↑(n - 1) = ↑n`? That's what I actually need to prove.
+<p>What about something like <code>1 + ↑(n - 1) = ↑n</code>? That's what I actually need to prove.</p>
 
 #### [ Mario Carneiro (Jan 15 2019 at 22:18)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coercing%20to%20option/near/155205270):
-option doesn't have an add or 1 either
+<p>option doesn't have an add or 1 either</p>
 
 #### [ Mario Carneiro (Jan 15 2019 at 22:18)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coercing%20to%20option/near/155205286):
-what are you doing?
+<p>what are you doing?</p>
 
 #### [ Abhimanyu Pallavi Sudhir (Jan 15 2019 at 22:19)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coercing%20to%20option/near/155205303):
-Degrees of polynomials.
+<p>Degrees of polynomials.</p>
 
 #### [ Abhimanyu Pallavi Sudhir (Jan 15 2019 at 22:19)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coercing%20to%20option/near/155205315):
-You can add degrees of polynomials, but they're defined via option.
+<p>You can add degrees of polynomials, but they're defined via option.</p>
 
 #### [ Mario Carneiro (Jan 15 2019 at 22:19)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coercing%20to%20option/near/155205329):
-Isn't it `with_bot N` or something?
+<p>Isn't it <code>with_bot N</code> or something?</p>
 
 #### [ Abhimanyu Pallavi Sudhir (Jan 15 2019 at 22:19)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coercing%20to%20option/near/155205336):
-Yeah.
+<p>Yeah.</p>
 
 #### [ Mario Carneiro (Jan 15 2019 at 22:19)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coercing%20to%20option/near/155205346):
-that's a different thing
+<p>that's a different thing</p>
 
 #### [ Abhimanyu Pallavi Sudhir (Jan 15 2019 at 22:20)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coercing%20to%20option/near/155205412):
-Ok, because `with_bot` has additional structure.
+<p>Ok, because <code>with_bot</code> has additional structure.</p>
 
 #### [ Mario Carneiro (Jan 15 2019 at 22:20)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coercing%20to%20option/near/155205415):
-`with_bot` has an addition, `option` doesn't
+<p><code>with_bot</code> has an addition, <code>option</code> doesn't</p>
 
 #### [ Abhimanyu Pallavi Sudhir (Jan 15 2019 at 22:20)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coercing%20to%20option/near/155205416):
-But how do I coerce to `with_bot`?
+<p>But how do I coerce to <code>with_bot</code>?</p>
 
 #### [ Abhimanyu Pallavi Sudhir (Jan 15 2019 at 22:20)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coercing%20to%20option/near/155205423):
-I mean, are there lemmas about it in mathlib?
+<p>I mean, are there lemmas about it in mathlib?</p>
 
 #### [ Mario Carneiro (Jan 15 2019 at 22:22)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coercing%20to%20option/near/155205548):
-I think you want `with_bot.coe_add`
+<p>I think you want <code>with_bot.coe_add</code></p>
 
 #### [ Abhimanyu Pallavi Sudhir (Jan 15 2019 at 22:22)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coercing%20to%20option/near/155205551):
-Ah, I see.
+<p>Ah, I see.</p>
 
 #### [ Mario Carneiro (Jan 15 2019 at 22:22)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coercing%20to%20option/near/155205560):
-the lemmas are in `algebra.ordered_group`
+<p>the lemmas are in <code>algebra.ordered_group</code></p>
 
 #### [ Mario Carneiro (Jan 15 2019 at 22:22)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coercing%20to%20option/near/155205587):
-but if `n : nat` then `1 + \u(n - 1) = \u n` is false at 0
+<p>but if <code>n : nat</code> then <code>1 + \u(n - 1) = \u n</code> is false at 0</p>
 
 #### [ Abhimanyu Pallavi Sudhir (Jan 15 2019 at 22:23)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coercing%20to%20option/near/155205616):
-Yeah, I have an `n > 1` hypothesis, that's alright.
+<p>Yeah, I have an <code>n &gt; 1</code> hypothesis, that's alright.</p>
 
 #### [ Mario Carneiro (Jan 15 2019 at 22:23)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coercing%20to%20option/near/155205634):
-if you cases on `n` then the zero case is impossible and the succ case is by refl
+<p>if you cases on <code>n</code> then the zero case is impossible and the succ case is by refl</p>
 
 #### [ Mario Carneiro (Jan 15 2019 at 22:24)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coercing%20to%20option/near/155205704):
-oh wait, not refl, you have to commute the 1+ first
+<p>oh wait, not refl, you have to commute the 1+ first</p>
 
 #### [ Kevin Buzzard (Jan 15 2019 at 22:36)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coercing%20to%20option/near/155206605):
-```quote
-that's a different thing
-```
- It's a definitionally equal thing. Definitional equality is a subtle beast. At times you should just treat definitionally equal things as the same, but at other times you shouldn't, and this is one of those times. This came up today in my M1P1 talk. We tried `linarith` to finish the proof that any two limits of a sequence were equal, and it failed, because we had hypotheses of the form `l < m -> false`. When we changed them to the definitionally equal `\not (l < m)` linarith suddenly worked! What is going on, I guess, is that linarith is looking at what "kind" of an expression it can see, and `l < m -> false` is "just some function" to linarith, whereas `\not (l < m)` is "a linear inequality that I can use". Similarly type class inference for + is going to trigger on `with_bot nat` but perhaps not on `option nat` even though they're definitionally equal. I hope I've got this mostly right. These things might be definitionally equal, but they are different expressions so tactics or other bits of Lean might treat them in different ways. For unification they will be the same but for rewrites they won't. etc etc.
+<blockquote>
+<p>that's a different thing</p>
+</blockquote>
+<p>It's a definitionally equal thing. Definitional equality is a subtle beast. At times you should just treat definitionally equal things as the same, but at other times you shouldn't, and this is one of those times. This came up today in my M1P1 talk. We tried <code>linarith</code> to finish the proof that any two limits of a sequence were equal, and it failed, because we had hypotheses of the form <code>l &lt; m -&gt; false</code>. When we changed them to the definitionally equal <code>\not (l &lt; m)</code> linarith suddenly worked! What is going on, I guess, is that linarith is looking at what "kind" of an expression it can see, and <code>l &lt; m -&gt; false</code> is "just some function" to linarith, whereas <code>\not (l &lt; m)</code> is "a linear inequality that I can use". Similarly type class inference for + is going to trigger on <code>with_bot nat</code> but perhaps not on <code>option nat</code> even though they're definitionally equal. I hope I've got this mostly right. These things might be definitionally equal, but they are different expressions so tactics or other bits of Lean might treat them in different ways. For unification they will be the same but for rewrites they won't. etc etc.</p>
 
 
 {% endraw %}

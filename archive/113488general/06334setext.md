@@ -12,229 +12,229 @@ permalink: archive/113488general/06334setext.html
 
 {% raw %}
 #### [ Patrick Massot (Apr 16 2018 at 18:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125155122):
-Core lib has a `funext` tactic which allows to replace `apply funext, intro x` by `funext x`. Would it be a good idea to copy the definition of this tactic to get a `setext` tactic?
+<p>Core lib has a <code>funext</code> tactic which allows to replace <code>apply funext, intro x</code> by <code>funext x</code>. Would it be a good idea to copy the definition of this tactic to get a <code>setext</code> tactic?</p>
 
 #### [ Kenny Lau (Apr 16 2018 at 18:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125155142):
-the `funext` tactic is really `repeat {apply funext, intro x}` though
+<p>the <code>funext</code> tactic is really <code>repeat {apply funext, intro x}</code> though</p>
 
 #### [ Kenny Lau (Apr 16 2018 at 18:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125155159):
-but right, `set.ext` can only be used once
+<p>but right, <code>set.ext</code> can only be used once</p>
 
 #### [ Kenny Lau (Apr 16 2018 at 18:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125155166):
-well you can just set `setext` to be `apply set.ext; intro x`
+<p>well you can just set <code>setext</code> to be <code>apply set.ext; intro x</code></p>
 
 #### [ Patrick Massot (Apr 16 2018 at 18:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125155173):
-I want `x` to be an argument of the tactic
+<p>I want <code>x</code> to be an argument of the tactic</p>
 
 #### [ Kenny Lau (Apr 16 2018 at 18:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125155215):
-sure
+<p>sure</p>
 
 #### [ Patrick Massot (Apr 16 2018 at 18:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125155220):
-It's mostly a cosmetic question, but also about consistency
+<p>It's mostly a cosmetic question, but also about consistency</p>
 
 #### [ Patrick Massot (Apr 16 2018 at 18:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125155225):
-Because I keep trying `setext x` before remembering it doesn't work yet
+<p>Because I keep trying <code>setext x</code> before remembering it doesn't work yet</p>
 
 #### [ Mario Carneiro (Apr 16 2018 at 19:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125158190):
-@**Simon Hudon** I recall discussing a generic `ext` tactic as a complement to the `monotonicity` tactic, perhaps it would help here
+<p><span class="user-mention" data-user-id="110026">@Simon Hudon</span> I recall discussing a generic <code>ext</code> tactic as a complement to the <code>monotonicity</code> tactic, perhaps it would help here</p>
 
 #### [ Simon Hudon (Apr 16 2018 at 19:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125158338):
-Yes, I have it in `lean-lib`. I can create a pull request. I have a `extensionality` attribute that I used to tag extentionality on sets, stream and maybe other things too
+<p>Yes, I have it in <code>lean-lib</code>. I can create a pull request. I have a <code>extensionality</code> attribute that I used to tag extentionality on sets, stream and maybe other things too</p>
 
 #### [ Patrick Massot (Apr 16 2018 at 22:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125164007):
-nice
+<p>nice</p>
 
 #### [ Simon Hudon (Apr 16 2018 at 22:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125166265):
-I just submitted a pull request: https://github.com/leanprover/mathlib/pull/104
+<p>I just submitted a pull request: <a href="https://github.com/leanprover/mathlib/pull/104" target="_blank" title="https://github.com/leanprover/mathlib/pull/104">https://github.com/leanprover/mathlib/pull/104</a></p>
 
 #### [ Simon Hudon (Apr 16 2018 at 22:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125166322):
-In tests/examples.lean you should see a bunch of situations where `ext` is useful.
+<p>In tests/examples.lean you should see a bunch of situations where <code>ext</code> is useful.</p>
 
 #### [ Simon Hudon (Apr 16 2018 at 22:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125166324):
-Let me know if you think there should be more extensionality lemmas
+<p>Let me know if you think there should be more extensionality lemmas</p>
 
 #### [ Patrick Massot (Apr 16 2018 at 22:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125166339):
-Thanks!
+<p>Thanks!</p>
 
 #### [ Patrick Massot (Apr 16 2018 at 22:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125166347):
-Can you give it names like with funext?
+<p>Can you give it names like with funext?</p>
 
 #### [ Patrick Massot (Apr 16 2018 at 22:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125166423):
-Oh, you put sorries in tests again :disappointed:
+<p>Oh, you put sorries in tests again <span class="emoji emoji-1f61e" title="disappointed">:disappointed:</span></p>
 
 #### [ Simon Hudon (Apr 16 2018 at 22:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125166431):
-Yes. `ext` will apply all extensionality lemmas that make sense while `ext a b c` will only apply three (not necessarily the same) and name the introduced locals `a`,`b`, `c`,
+<p>Yes. <code>ext</code> will apply all extensionality lemmas that make sense while <code>ext a b c</code> will only apply three (not necessarily the same) and name the introduced locals <code>a</code>,<code>b</code>, <code>c</code>,</p>
 
 #### [ Patrick Massot (Apr 16 2018 at 22:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125166439):
-What is this `ext1` I see in tests? Apply it only once?
+<p>What is this <code>ext1</code> I see in tests? Apply it only once?</p>
 
 #### [ Patrick Massot (Apr 16 2018 at 22:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125166442):
-like `congr_n 1`?
+<p>like <code>congr_n 1</code>?</p>
 
 #### [ Simon Hudon (Apr 16 2018 at 22:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125166443):
-It shouldn't affect the built because the final proof is just `trivial`
+<p>It shouldn't affect the built because the final proof is just <code>trivial</code></p>
 
 #### [ Patrick Massot (Apr 16 2018 at 22:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125166448):
-Ahah
+<p>Ahah</p>
 
 #### [ Simon Hudon (Apr 16 2018 at 22:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125166506):
-I don't know of `congr_n 1` but it sounds like you got the right idea
+<p>I don't know of <code>congr_n 1</code> but it sounds like you got the right idea</p>
 
 #### [ Simon Hudon (Apr 16 2018 at 22:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125166536):
-(I'm so glad `congr_n` exists! I'll be able to use that now!)
+<p>(I'm so glad <code>congr_n</code> exists! I'll be able to use that now!)</p>
 
 #### [ Patrick Massot (Apr 16 2018 at 23:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125166606):
-I was looking to my mathlib tactics docs to point to and, shame on me, I didn't include congr_n! :disappointed:
+<p>I was looking to my mathlib tactics docs to point to and, shame on me, I didn't include congr_n! <span class="emoji emoji-1f61e" title="disappointed">:disappointed:</span></p>
 
 #### [ Simon Hudon (Apr 16 2018 at 23:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125166620):
-*shake head in  disapproval*
+<p><em>shake head in  disapproval</em></p>
 
 #### [ Simon Hudon (Apr 16 2018 at 23:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125166733):
-Would it be useful to have a `monoid` and `add_monoid` instance for `fin n` in `mathlib`?
+<p>Would it be useful to have a <code>monoid</code> and <code>add_monoid</code> instance for <code>fin n</code> in <code>mathlib</code>?</p>
 
 #### [ Patrick Massot (Apr 16 2018 at 23:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125166871):
-What would be the law? Again some truncation thing?
+<p>What would be the law? Again some truncation thing?</p>
 
 #### [ Simon Hudon (Apr 16 2018 at 23:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125166894):
-Yes. It would be modulo arithmetic with the modulo baked into the type
+<p>Yes. It would be modulo arithmetic with the modulo baked into the type</p>
 
 #### [ Patrick Massot (Apr 16 2018 at 23:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125166943):
-Oh, modulo
+<p>Oh, modulo</p>
 
 #### [ Patrick Massot (Apr 16 2018 at 23:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125166948):
-That's a bit sneaky
+<p>That's a bit sneaky</p>
 
 #### [ Patrick Massot (Apr 16 2018 at 23:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125166951):
-https://github.com/leanprover/mathlib/pull/105
+<p><a href="https://github.com/leanprover/mathlib/pull/105" target="_blank" title="https://github.com/leanprover/mathlib/pull/105">https://github.com/leanprover/mathlib/pull/105</a></p>
 
 #### [ Simon Hudon (Apr 16 2018 at 23:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125166987):
-What kind of sneaky? Evil-sneaky or just effective-sneaky?
+<p>What kind of sneaky? Evil-sneaky or just effective-sneaky?</p>
 
 #### [ Patrick Massot (Apr 16 2018 at 23:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125167052):
-I don't know. People could be taken off guard. But who would want to add elements of `fin n` anyway?
+<p>I don't know. People could be taken off guard. But who would want to add elements of <code>fin n</code> anyway?</p>
 
 #### [ Simon Hudon (Apr 16 2018 at 23:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125167066):
-After a quick survey, there's me
+<p>After a quick survey, there's me</p>
 
 #### [ Simon Hudon (Apr 16 2018 at 23:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125167146):
-The other alternative I see is the `p ≡ q [MOD k]` notation but that looks more restricted. `fin n` is usable in other contexts that congruences or equalities.
+<p>The other alternative I see is the <code>p ≡ q [MOD k]</code> notation but that looks more restricted. <code>fin n</code> is usable in other contexts that congruences or equalities.</p>
 
 #### [ Patrick Massot (Apr 16 2018 at 23:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125167210):
-I notice your ext PR doesn't include documentation :unamused:
+<p>I notice your ext PR doesn't include documentation <span class="emoji emoji-1f612" title="unamused">:unamused:</span></p>
 
 #### [ Simon Hudon (Apr 16 2018 at 23:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125167238):
-What's this `documentation` thing?
+<p>What's this <code>documentation</code> thing?</p>
 
 #### [ Simon Hudon (Apr 16 2018 at 23:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125167272):
-Alright, I'll add a comment :)
+<p>Alright, I'll add a comment :)</p>
 
 #### [ Simon Hudon (Apr 16 2018 at 23:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125167274):
-Is that better?
+<p>Is that better?</p>
 
 #### [ Patrick Massot (Apr 16 2018 at 23:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125167328):
-By the way, you told me we found a bug in `wlog` when I asked questions about it. Did you manage to fix it?
+<p>By the way, you told me we found a bug in <code>wlog</code> when I asked questions about it. Did you manage to fix it?</p>
 
 #### [ Simon Hudon (Apr 16 2018 at 23:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125167358):
-That's true! I forgot about it. It was pretty tricky. I'll get back to it.
+<p>That's true! I forgot about it. It was pretty tricky. I'll get back to it.</p>
 
 #### [ Simon Hudon (Apr 16 2018 at 23:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125167362):
-Sorry for the delay
+<p>Sorry for the delay</p>
 
 #### [ Patrick Massot (Apr 16 2018 at 23:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125167372):
-Adding a docstring to `tactic/interactive.lean` would be good enough. Then I can copy it to tactic.md
+<p>Adding a docstring to <code>tactic/interactive.lean</code> would be good enough. Then I can copy it to tactic.md</p>
 
 #### [ Patrick Massot (Apr 16 2018 at 23:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125167378):
-But in this case I could also write the docstring I guess
+<p>But in this case I could also write the docstring I guess</p>
 
 #### [ Patrick Massot (Apr 16 2018 at 23:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125167422):
-The problem is I could write nonsense
+<p>The problem is I could write nonsense</p>
 
 #### [ Patrick Massot (Apr 16 2018 at 23:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125167447):
-There is no delay problem with wlog, I was only asking so you don't forget
+<p>There is no delay problem with wlog, I was only asking so you don't forget</p>
 
 #### [ Simon Hudon (Apr 16 2018 at 23:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125167472):
-Thanks for reminding me
+<p>Thanks for reminding me</p>
 
 #### [ Patrick Massot (Apr 16 2018 at 23:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125167513):
-Speaking of documentation, I wonder if @**Sebastian Ullrich**  of @**Gabriel Ebner**  could answer Kevin's questions in https://github.com/leanprover/mathlib/blob/master/docs/extras/calc.md (you only need to search for "Kevin" in this file)
+<p>Speaking of documentation, I wonder if <span class="user-mention" data-user-id="110024">@Sebastian Ullrich</span>  of <span class="user-mention" data-user-id="110043">@Gabriel Ebner</span>  could answer Kevin's questions in <a href="https://github.com/leanprover/mathlib/blob/master/docs/extras/calc.md" target="_blank" title="https://github.com/leanprover/mathlib/blob/master/docs/extras/calc.md">https://github.com/leanprover/mathlib/blob/master/docs/extras/calc.md</a> (you only need to search for "Kevin" in this file)</p>
 
 #### [ Simon Hudon (Apr 16 2018 at 23:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125167526):
-I'll write both no worries. I was joking.
+<p>I'll write both no worries. I was joking.</p>
 
 #### [ Kevin Buzzard (Apr 16 2018 at 23:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125167620):
-I'm not at a computer right now, but IIRC I think `fin n` already has an `+` but it is not very well behaved!
+<p>I'm not at a computer right now, but IIRC I think <code>fin n</code> already has an <code>+</code> but it is not very well behaved!</p>
 
 #### [ Simon Hudon (Apr 16 2018 at 23:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125167632):
-Actually, I think `-` is more problematic. And we don't have laws for them
+<p>Actually, I think <code>-</code> is more problematic. And we don't have laws for them</p>
 
 #### [ Kevin Buzzard (Apr 16 2018 at 23:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125167676):
-My memory is that these structures on `fin n` are defined in core and didn't make it into a sensible mathematical object
+<p>My memory is that these structures on <code>fin n</code> are defined in core and didn't make it into a sensible mathematical object</p>
 
 #### [ Kevin Buzzard (Apr 16 2018 at 23:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125167682):
-I think 2+2 wasn't 2-2 in fin 4 for example
+<p>I think 2+2 wasn't 2-2 in fin 4 for example</p>
 
 #### [ Kevin Buzzard (Apr 16 2018 at 23:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125167702):
-Docs -- yes I'd forgotten I'd left those in!
+<p>Docs -- yes I'd forgotten I'd left those in!</p>
 
 #### [ Patrick Massot (Apr 16 2018 at 23:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125167708):
-`#reduce (2 : fin 4) - (2 : fin 4)  -- ⟨0, _⟩`
+<p><code>#reduce (2 : fin 4) - (2 : fin 4)  -- ⟨0, _⟩</code></p>
 
 #### [ Patrick Massot (Apr 16 2018 at 23:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125167749):
-`#reduce (2 : fin 4) + (2 : fin 4)  -- ⟨0, _⟩`
+<p><code>#reduce (2 : fin 4) + (2 : fin 4)  -- ⟨0, _⟩</code></p>
 
 #### [ Kevin Buzzard (Apr 16 2018 at 23:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125167753):
-Try 1+2 and 1-2
+<p>Try 1+2 and 1-2</p>
 
 #### [ Kevin Buzzard (Apr 16 2018 at 23:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125167755):
-Maybe that was it
+<p>Maybe that was it</p>
 
 #### [ Patrick Massot (Apr 16 2018 at 23:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125167764):
-1+2 is 3 and 1 - 2 is 0
+<p>1+2 is 3 and 1 - 2 is 0</p>
 
 #### [ Kevin Buzzard (Apr 16 2018 at 23:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125167765):
-2+2=0 so adding 2 and subtracting 2 should be the same
+<p>2+2=0 so adding 2 and subtracting 2 should be the same</p>
 
 #### [ Kevin Buzzard (Apr 16 2018 at 23:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125167772):
-Thanks
+<p>Thanks</p>
 
 #### [ Patrick Massot (Apr 16 2018 at 23:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125167773):
-hard to tell what is the rule here
+<p>hard to tell what is the rule here</p>
 
 #### [ Patrick Massot (Apr 16 2018 at 23:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125167779):
-it seems substration is truncated at zero
+<p>it seems substration is truncated at zero</p>
 
 #### [ Kevin Buzzard (Apr 16 2018 at 23:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125167781):
-Subtracting is just subtraction on nat I think
+<p>Subtracting is just subtraction on nat I think</p>
 
 #### [ Patrick Massot (Apr 16 2018 at 23:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125167782):
-and addition wraps
+<p>and addition wraps</p>
 
 #### [ Kevin Buzzard (Apr 16 2018 at 23:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125167821):
-Right
+<p>Right</p>
 
 #### [ Kevin Buzzard (Apr 16 2018 at 23:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125167829):
-Does that make it a monoid?
+<p>Does that make it a monoid?</p>
 
 #### [ Kevin Buzzard (Apr 16 2018 at 23:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125167831):
-🙂
+<p><span class="emoji emoji-1f642" title="simple smile">:simple_smile:</span></p>
 
 #### [ Patrick Massot (Apr 16 2018 at 23:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125167835):
-I think I remember reading this discussion in the past
+<p>I think I remember reading this discussion in the past</p>
 
 #### [ Kevin Buzzard (Apr 16 2018 at 23:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125167837):
-Right
+<p>Right</p>
 
 #### [ Simon Hudon (Apr 16 2018 at 23:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125167845):
-What was the conclusion?
+<p>What was the conclusion?</p>
 
 #### [ Patrick Massot (Apr 16 2018 at 23:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125167896):
-Current definitions are... odd
+<p>Current definitions are... odd</p>
 
 #### [ Kenny Lau (Apr 20 2018 at 07:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125341724):
-https://github.com/leanprover/mathlib/pull/109/commits
+<p><a href="https://github.com/leanprover/mathlib/pull/109/commits" target="_blank" title="https://github.com/leanprover/mathlib/pull/109/commits">https://github.com/leanprover/mathlib/pull/109/commits</a></p>
 
 #### [ Kenny Lau (Apr 20 2018 at 07:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125341725):
-ext is in PR
+<p>ext is in PR</p>
 
 
 {% endraw %}

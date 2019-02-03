@@ -12,9 +12,8 @@ permalink: archive/113489newmembers/87119Failtogenerateequationlemmas.html
 
 {% raw %}
 #### [ Andrew Tindall (Jan 12 2019 at 01:23)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Fail%20to%20generate%20equation%20lemmas%3F/near/154958586):
-I have [a function](https://github.com/flypitch/flypitch/blob/f73127c3ad36e6c2f074a26518dc333f07c1ab85/src/fol.lean#L2071-L2077) that I defined recursively by cases on an inductive type. If i `set_option eqn_compiler.lemmas false` it compiles, but `simp` cannot use it ( [simp debug](https://pastebin.com/Hv6Q2TGW) ). if I `set_option eqn_compiler.lemmas true` it does not compile ( [eqn_compiler debug](https://pastebin.com/fMhF8scv) ). I can't tell from either of these where the error is - is there some other `trace` option I can turn on, maybe? 
-
-(@**Mario Carneiro** , I am also thinking this is a problem that might just disappear when Jesse OKs your pull request defining inductive `dfin`s instead of `fin`s)
+<p>I have <a href="https://github.com/flypitch/flypitch/blob/f73127c3ad36e6c2f074a26518dc333f07c1ab85/src/fol.lean#L2071-L2077" target="_blank" title="https://github.com/flypitch/flypitch/blob/f73127c3ad36e6c2f074a26518dc333f07c1ab85/src/fol.lean#L2071-L2077">a function</a> that I defined recursively by cases on an inductive type. If i <code>set_option eqn_compiler.lemmas false</code> it compiles, but <code>simp</code> cannot use it ( <a href="https://pastebin.com/Hv6Q2TGW" target="_blank" title="https://pastebin.com/Hv6Q2TGW">simp debug</a> ). if I <code>set_option eqn_compiler.lemmas true</code> it does not compile ( <a href="https://pastebin.com/fMhF8scv" target="_blank" title="https://pastebin.com/fMhF8scv">eqn_compiler debug</a> ). I can't tell from either of these where the error is - is there some other <code>trace</code> option I can turn on, maybe? </p>
+<p>(<span class="user-mention" data-user-id="110049">@Mario Carneiro</span> , I am also thinking this is a problem that might just disappear when Jesse OKs your pull request defining inductive <code>dfin</code>s instead of <code>fin</code>s)</p>
 
 
 {% endraw %}

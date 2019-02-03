@@ -12,52 +12,49 @@ permalink: archive/113488general/04116cardnonempty.html
 
 {% raw %}
 #### [ Johan Commelin (Sep 08 2018 at 20:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/card_nonempty/near/133577651):
-Is there some easy way to tackle this goal:
-```lean
-n : Type u,
-_inst_1 : fintype n,
-h : nonempty n
-⊢ 0 < fintype.card n
-```
+<p>Is there some easy way to tackle this goal:</p>
+<div class="codehilite"><pre><span></span><span class="n">n</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">,</span>
+<span class="bp">_</span><span class="n">inst_1</span> <span class="o">:</span> <span class="n">fintype</span> <span class="n">n</span><span class="o">,</span>
+<span class="n">h</span> <span class="o">:</span> <span class="n">nonempty</span> <span class="n">n</span>
+<span class="err">⊢</span> <span class="mi">0</span> <span class="bp">&lt;</span> <span class="n">fintype</span><span class="bp">.</span><span class="n">card</span> <span class="n">n</span>
+</pre></div>
 
 #### [ Kenny Lau (Sep 08 2018 at 20:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/card_nonempty/near/133577761):
-```lean
-import data.fintype
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">fintype</span>
 
-universe u
-variables (n : Type u) [fintype n]
-example (h : nonempty n) : 0 < fintype.card n :=
-begin
-  by_contra H,
-  rw [not_lt, nat.le_zero_iff, fintype.card_eq_zero_iff] at H,
-  exact h.rec_on H
-end
-```
+<span class="kn">universe</span> <span class="n">u</span>
+<span class="kn">variables</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">[</span><span class="n">fintype</span> <span class="n">n</span><span class="o">]</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">nonempty</span> <span class="n">n</span><span class="o">)</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">&lt;</span> <span class="n">fintype</span><span class="bp">.</span><span class="n">card</span> <span class="n">n</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">by_contra</span> <span class="n">H</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="o">[</span><span class="n">not_lt</span><span class="o">,</span> <span class="n">nat</span><span class="bp">.</span><span class="n">le_zero_iff</span><span class="o">,</span> <span class="n">fintype</span><span class="bp">.</span><span class="n">card_eq_zero_iff</span><span class="o">]</span> <span class="n">at</span> <span class="n">H</span><span class="o">,</span>
+  <span class="n">exact</span> <span class="n">h</span><span class="bp">.</span><span class="n">rec_on</span> <span class="n">H</span>
+<span class="kn">end</span>
+</pre></div>
 
 #### [ Johan Commelin (Sep 08 2018 at 20:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/card_nonempty/near/133577817):
-I guess this could be a simp lemma in mathlib?
+<p>I guess this could be a simp lemma in mathlib?</p>
 
 #### [ Johan Commelin (Sep 08 2018 at 20:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/card_nonempty/near/133577822):
-Ooh, and thanks!
+<p>Ooh, and thanks!</p>
 
 #### [ Kenny Lau (Sep 08 2018 at 20:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/card_nonempty/near/133577926):
-```lean
-import set_theory.cardinal
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">set_theory</span><span class="bp">.</span><span class="n">cardinal</span>
 
-universe u
-variables (n : Type u)
-example (h : nonempty n) : 0 < cardinal.mk n :=
-by rwa [cardinal.pos_iff_ne_zero, cardinal.ne_zero_iff_nonempty]
-```
+<span class="kn">universe</span> <span class="n">u</span>
+<span class="kn">variables</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">nonempty</span> <span class="n">n</span><span class="o">)</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">&lt;</span> <span class="n">cardinal</span><span class="bp">.</span><span class="n">mk</span> <span class="n">n</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">rwa</span> <span class="o">[</span><span class="n">cardinal</span><span class="bp">.</span><span class="n">pos_iff_ne_zero</span><span class="o">,</span> <span class="n">cardinal</span><span class="bp">.</span><span class="n">ne_zero_iff_nonempty</span><span class="o">]</span>
+</pre></div>
 
 #### [ Kenny Lau (Sep 08 2018 at 20:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/card_nonempty/near/133577929):
-I think Mario likes cardinal.mk more than fintype.card
+<p>I think Mario likes <a href="http://cardinal.mk" target="_blank" title="http://cardinal.mk">cardinal.mk</a> more than fintype.card</p>
 
 #### [ Chris Hughes (Sep 08 2018 at 20:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/card_nonempty/near/133578072):
-It is in mathlib. `fintype.card_pos_iff` I believe.
+<p>It is in mathlib. <code>fintype.card_pos_iff</code> I believe.</p>
 
 #### [ Johan Commelin (Sep 08 2018 at 21:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/card_nonempty/near/133578180):
-Aaah, thanks! (Sorry, Kenny)
+<p>Aaah, thanks! (Sorry, Kenny)</p>
 
 
 {% endraw %}

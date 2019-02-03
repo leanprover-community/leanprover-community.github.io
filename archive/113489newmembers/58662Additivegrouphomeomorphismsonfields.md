@@ -12,90 +12,89 @@ permalink: archive/113489newmembers/58662Additivegrouphomeomorphismsonfields.htm
 
 {% raw %}
 #### [ Abhimanyu Pallavi Sudhir (Jan 11 2019 at 11:16)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Additive%20group%20homeomorphisms%20on%20fields/near/154907204):
-Since fields extend additive groups , I thought that something `hom_int_to_field` below should work:
+<p>Since fields extend additive groups , I thought that something <code>hom_int_to_field</code> below should work:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">algebra</span><span class="bp">.</span><span class="n">field</span>
+<span class="kn">import</span> <span class="n">field_theory</span><span class="bp">.</span><span class="n">subfield</span>
+<span class="kn">variables</span> <span class="o">{</span><span class="n">K</span> <span class="n">L</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">[</span><span class="n">field</span> <span class="n">K</span><span class="o">]</span> <span class="o">[</span><span class="n">field</span> <span class="n">L</span><span class="o">]</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">K</span> <span class="bp">→</span> <span class="n">L</span><span class="o">)</span>
 
-```lean
-import algebra.field 
-import field_theory.subfield
-variables {K L : Type} [field K] [field L] (f : K → L) 
+<span class="n">def</span> <span class="n">nat_to_field</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="n">K</span>
+<span class="bp">|</span> <span class="mi">0</span> <span class="o">:=</span> <span class="mi">0</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">n</span><span class="o">)</span> <span class="o">:=</span> <span class="n">nat_to_field</span><span class="o">(</span><span class="n">n</span><span class="o">)</span> <span class="bp">+</span> <span class="mi">1</span>
 
-def nat_to_field : ℕ → K
-| 0 := 0
-| (nat.succ n) := nat_to_field(n) + 1
+<span class="n">def</span> <span class="n">int_to_field</span> <span class="o">:</span> <span class="bp">ℤ</span> <span class="bp">→</span> <span class="n">K</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">int</span><span class="bp">.</span><span class="n">of_nat</span> <span class="n">n</span><span class="o">)</span> <span class="o">:=</span> <span class="n">nat_to_field</span> <span class="n">n</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">int</span><span class="bp">.</span><span class="n">neg_succ_of_nat</span> <span class="n">n</span><span class="o">)</span> <span class="o">:=</span> <span class="bp">-</span><span class="o">(</span><span class="mi">1</span> <span class="bp">+</span> <span class="n">nat_to_field</span><span class="o">(</span><span class="n">n</span><span class="o">))</span>
 
-def int_to_field : ℤ → K
-| (int.of_nat n) := nat_to_field n
-| (int.neg_succ_of_nat n) := -(1 + nat_to_field(n))
+<span class="kn">theorem</span> <span class="n">hom_int_to_field</span> <span class="o">:</span> <span class="n">is_add_group_hom</span> <span class="n">int_to_field</span> <span class="o">:=</span> <span class="n">sorry</span>
+</pre></div>
 
-theorem hom_int_to_field : is_add_group_hom int_to_field := sorry
-```
-But it doesn't -- it tells me it can't synthesise the instance. Instead, I need to create a proof that `K` is an additive group, give it a name:
 
-```lean
-instance AK : add_group K :=
-{   add := has_add.add,
-    add_assoc := add_monoid.add_assoc,
-    zero := 0,
-    zero_add := add_monoid.zero_add,
-    add_zero := add_monoid.add_zero,
-    neg := add_group.neg,
-    add_left_neg := add_group.add_left_neg }
-```
-And then use it:
+<p>But it doesn't -- it tells me it can't synthesise the instance. Instead, I need to create a proof that <code>K</code> is an additive group, give it a name:</p>
+<div class="codehilite"><pre><span></span><span class="kn">instance</span> <span class="n">AK</span> <span class="o">:</span> <span class="n">add_group</span> <span class="n">K</span> <span class="o">:=</span>
+<span class="o">{</span>   <span class="n">add</span> <span class="o">:=</span> <span class="n">has_add</span><span class="bp">.</span><span class="n">add</span><span class="o">,</span>
+    <span class="n">add_assoc</span> <span class="o">:=</span> <span class="n">add_monoid</span><span class="bp">.</span><span class="n">add_assoc</span><span class="o">,</span>
+    <span class="n">zero</span> <span class="o">:=</span> <span class="mi">0</span><span class="o">,</span>
+    <span class="n">zero_add</span> <span class="o">:=</span> <span class="n">add_monoid</span><span class="bp">.</span><span class="n">zero_add</span><span class="o">,</span>
+    <span class="n">add_zero</span> <span class="o">:=</span> <span class="n">add_monoid</span><span class="bp">.</span><span class="n">add_zero</span><span class="o">,</span>
+    <span class="n">neg</span> <span class="o">:=</span> <span class="n">add_group</span><span class="bp">.</span><span class="n">neg</span><span class="o">,</span>
+    <span class="n">add_left_neg</span> <span class="o">:=</span> <span class="n">add_group</span><span class="bp">.</span><span class="n">add_left_neg</span> <span class="o">}</span>
+</pre></div>
 
-```lean
-theorem hom_int_to_field : @is_add_group_hom _ _ _ (AK : add_group K) int_to_field := sorry
-```
 
-Can't I use the fact that fields are -- by definition -- additive groups?
+<p>And then use it:</p>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">hom_int_to_field</span> <span class="o">:</span> <span class="bp">@</span><span class="n">is_add_group_hom</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="o">(</span><span class="n">AK</span> <span class="o">:</span> <span class="n">add_group</span> <span class="n">K</span><span class="o">)</span> <span class="n">int_to_field</span> <span class="o">:=</span> <span class="n">sorry</span>
+</pre></div>
+
+
+<p>Can't I use the fact that fields are -- by definition -- additive groups?</p>
 
 #### [ Johan Commelin (Jan 11 2019 at 11:18)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Additive%20group%20homeomorphisms%20on%20fields/near/154907306):
-You know about `int.cast`?
+<p>You know about <code>int.cast</code>?</p>
 
 #### [ Johan Commelin (Jan 11 2019 at 11:19)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Additive%20group%20homeomorphisms%20on%20fields/near/154907333):
-It is your `int_to_field`, for arbitrary rings
+<p>It is your <code>int_to_field</code>, for arbitrary rings</p>
 
 #### [ Abhimanyu Pallavi Sudhir (Jan 11 2019 at 11:19)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Additive%20group%20homeomorphisms%20on%20fields/near/154907334):
-Oh, I didn't know it casted to a general field. Yes, `int.cast.is_ring_hom`
+<p>Oh, I didn't know it casted to a general field. Yes, <code>int.cast.is_ring_hom</code></p>
 
 #### [ Johan Commelin (Jan 11 2019 at 11:20)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Additive%20group%20homeomorphisms%20on%20fields/near/154907414):
-And somewhere there must be a proof that it is a ring hom
+<p>And somewhere there must be a proof that it is a ring hom</p>
 
 #### [ Johan Commelin (Jan 11 2019 at 11:20)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Additive%20group%20homeomorphisms%20on%20fields/near/154907423):
-But that doesn't answer why your instance can't be found.
+<p>But that doesn't answer why your instance can't be found.</p>
 
 #### [ Johan Commelin (Jan 11 2019 at 11:20)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Additive%20group%20homeomorphisms%20on%20fields/near/154907425):
-I don't know what's wrong there.
+<p>I don't know what's wrong there.</p>
 
 #### [ Johan Commelin (Jan 11 2019 at 11:21)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Additive%20group%20homeomorphisms%20on%20fields/near/154907451):
-(Also, mathematician's field is `discrete_field`. For reasons that I don't get. Since I'm a mathematician :see_no_evil:)
+<p>(Also, mathematician's field is <code>discrete_field</code>. For reasons that I don't get. Since I'm a mathematician <span class="emoji emoji-1f648" title="see no evil">:see_no_evil:</span>)</p>
 
 #### [ Abhimanyu Pallavi Sudhir (Jan 11 2019 at 11:23)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Additive%20group%20homeomorphisms%20on%20fields/near/154907550):
-Oh -- what about subfields? Is there a "discrete subfield"?
+<p>Oh -- what about subfields? Is there a "discrete subfield"?</p>
 
 #### [ Johan Commelin (Jan 11 2019 at 11:23)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Additive%20group%20homeomorphisms%20on%20fields/near/154907558):
-@**Kenny Lau** :up:
+<p><span class="user-mention" data-user-id="110064">@Kenny Lau</span> <span class="emoji emoji-2b06" title="up">:up:</span></p>
 
 #### [ Kenny Lau (Jan 11 2019 at 11:23)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Additive%20group%20homeomorphisms%20on%20fields/near/154907566):
-I think every subfield of a discrete field is discrete by default
+<p>I think every subfield of a discrete field is discrete by default</p>
 
 #### [ Kenny Lau (Jan 11 2019 at 11:23)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Additive%20group%20homeomorphisms%20on%20fields/near/154907568):
-but I don't think this is in mathlib yet
+<p>but I don't think this is in mathlib yet</p>
 
 #### [ Abhimanyu Pallavi Sudhir (Jan 11 2019 at 11:25)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Additive%20group%20homeomorphisms%20on%20fields/near/154907673):
-And discrete field homeomorphisms? Can I just use `is_field_hom`?
+<p>And discrete field homeomorphisms? Can I just use <code>is_field_hom</code>?</p>
 
 #### [ Kenny Lau (Jan 11 2019 at 11:26)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Additive%20group%20homeomorphisms%20on%20fields/near/154907740):
-yes
+<p>yes</p>
 
 #### [ Abhimanyu Pallavi Sudhir (Jan 11 2019 at 11:35)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Additive%20group%20homeomorphisms%20on%20fields/near/154908228):
-```quote
-But that doesn't answer why your instance can't be found.
-```
-If I change `theorem` to `instance`, it works.
+<blockquote>
+<p>But that doesn't answer why your instance can't be found.</p>
+</blockquote>
+<p>If I change <code>theorem</code> to <code>instance</code>, it works.</p>
 
 #### [ Abhimanyu Pallavi Sudhir (Jan 11 2019 at 11:35)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Additive%20group%20homeomorphisms%20on%20fields/near/154908234):
-That's how they do it in mathlib.
+<p>That's how they do it in mathlib.</p>
 
 
 {% endraw %}

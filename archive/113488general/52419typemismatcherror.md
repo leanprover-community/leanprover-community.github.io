@@ -12,36 +12,36 @@ permalink: archive/113488general/52419typemismatcherror.html
 
 {% raw %}
 #### [ Johan Commelin (Nov 09 2018 at 15:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20mismatch%20error/near/147375133):
-I don't have a good strategy for debugging errors like this:
-```lean
-type mismatch at application
-  galois_connection.l_supr opens.gc
-term
-  opens.gc
-has type
-  galois_connection subtype.val opens.interior
-but is expected to have type
-  galois_connection ?m_5 ?m_6
-```
-My initial reaction is: Hey Lean, look, you just figured out what `?m_5` and `?m_6` are. Unify, and move on.
-But apparently Lean thinks otherwise...
+<p>I don't have a good strategy for debugging errors like this:</p>
+<div class="codehilite"><pre><span></span><span class="n">type</span> <span class="n">mismatch</span> <span class="n">at</span> <span class="n">application</span>
+  <span class="n">galois_connection</span><span class="bp">.</span><span class="n">l_supr</span> <span class="n">opens</span><span class="bp">.</span><span class="n">gc</span>
+<span class="n">term</span>
+  <span class="n">opens</span><span class="bp">.</span><span class="n">gc</span>
+<span class="n">has</span> <span class="n">type</span>
+  <span class="n">galois_connection</span> <span class="n">subtype</span><span class="bp">.</span><span class="n">val</span> <span class="n">opens</span><span class="bp">.</span><span class="n">interior</span>
+<span class="n">but</span> <span class="n">is</span> <span class="n">expected</span> <span class="n">to</span> <span class="k">have</span> <span class="n">type</span>
+  <span class="n">galois_connection</span> <span class="err">?</span><span class="n">m_5</span> <span class="err">?</span><span class="n">m_6</span>
+</pre></div>
+
+
+<p>My initial reaction is: Hey Lean, look, you just figured out what <code>?m_5</code> and <code>?m_6</code> are. Unify, and move on.<br>
+But apparently Lean thinks otherwise...</p>
 
 #### [ Kenny Lau (Nov 09 2018 at 15:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20mismatch%20error/near/147375216):
-I would `set_option pp.all true`, but that's me
+<p>I would <code>set_option pp.all true</code>, but that's me</p>
 
 #### [ Johan Commelin (Nov 09 2018 at 15:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20mismatch%20error/near/147375240):
-I'll try, but I fear that I get something extremely long and complicated.
+<p>I'll try, but I fear that I get something extremely long and complicated.</p>
 
 #### [ Kenny Lau (Nov 09 2018 at 15:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20mismatch%20error/near/147375263):
-I'm not afraid of that
+<p>I'm not afraid of that</p>
 
 #### [ Rob Lewis (Nov 09 2018 at 15:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20mismatch%20error/near/147375316):
-This pattern shows up a lot when there's a type class argument to `galois_connection.l_supr` that `opens.gc` doesn't satisfy.
+<p>This pattern shows up a lot when there's a type class argument to <code>galois_connection.l_supr</code> that <code>opens.gc</code> doesn't satisfy.</p>
 
 #### [ Johan Commelin (Nov 09 2018 at 15:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20mismatch%20error/near/147375361):
-Hmmm, it's even reasonable short:
-```
-type mismatch at application
+<p>Hmmm, it's even reasonable short:</p>
+<div class="codehilite"><pre><span></span>type mismatch at application
   @galois_connection.l_supr.{?l_1 ?l_2 ?l_3} ?m_4 ?m_5 ?m_6 ?m_7 ?m_8 ?m_9 ?m_10
     (@topological_space.opens.gc.{?l_11} ?m_12 ?m_13)
 term
@@ -73,158 +73,156 @@ but is expected to have type
        (@lattice.order_bot.to_partial_order.{?l_2} ?m_4
           (@lattice.bounded_lattice.to_order_bot.{?l_2} ?m_4
              (@lattice.complete_lattice.to_bounded_lattice.{?l_2} ?m_4 ?m_6))))
-```
+</pre></div>
 
 #### [ Johan Commelin (Nov 09 2018 at 15:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20mismatch%20error/near/147375378):
-@**Rob Lewis** That's probably what's going on here.
+<p><span class="user-mention" data-user-id="110596">@Rob Lewis</span> That's probably what's going on here.</p>
 
 #### [ Kenny Lau (Nov 09 2018 at 15:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20mismatch%20error/near/147375392):
-when I can't handle it, I use https://text-compare.com
+<p>when I can't handle it, I use <a href="https://text-compare.com" target="_blank" title="https://text-compare.com">https://text-compare.com</a></p>
 
 #### [ Kenny Lau (Nov 09 2018 at 15:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20mismatch%20error/near/147375456):
-and in some rare cases it's some universe issues
+<p>and in some rare cases it's some universe issues</p>
 
 #### [ Johan Commelin (Nov 09 2018 at 15:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20mismatch%20error/near/147375481):
-Otoh, I think all typeclass instances ought to be satisfied.
+<p>Otoh, I think all typeclass instances ought to be satisfied.</p>
 
 #### [ Johan Commelin (Nov 09 2018 at 15:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20mismatch%20error/near/147375700):
-@**Kenny Lau** There are two `sorry`s in `sheaf.lean`. They are math-trivial, but I find them Lean-hard.
+<p><span class="user-mention" data-user-id="110064">@Kenny Lau</span> There are two <code>sorry</code>s in <code>sheaf.lean</code>. They are math-trivial, but I find them Lean-hard.</p>
 
 #### [ Kenny Lau (Nov 09 2018 at 15:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20mismatch%20error/near/147375716):
-link?
+<p>link?</p>
 
 #### [ Johan Commelin (Nov 09 2018 at 15:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20mismatch%20error/near/147375725):
-If you have some time, I would be really happy if you could take a look.
+<p>If you have some time, I would be really happy if you could take a look.</p>
 
 #### [ Johan Commelin (Nov 09 2018 at 15:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20mismatch%20error/near/147375762):
-https://github.com/leanprover-community/mathlib/blob/sheaf/category_theory/sheaf.lean#L262
+<p><a href="https://github.com/leanprover-community/mathlib/blob/sheaf/category_theory/sheaf.lean#L262" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/sheaf/category_theory/sheaf.lean#L262">https://github.com/leanprover-community/mathlib/blob/sheaf/category_theory/sheaf.lean#L262</a></p>
 
 #### [ Kenny Lau (Nov 09 2018 at 15:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20mismatch%20error/near/147375817):
-I think you have a rather different definition of "math-trivial"
+<p>I think you have a rather different definition of "math-trivial"</p>
 
 #### [ Johan Commelin (Nov 09 2018 at 15:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20mismatch%20error/near/147375819):
-What this is saying is, you've got an open set `V` and a cover `Us` of an open set `U`. And `V ⊆ U`.
+<p>What this is saying is, you've got an open set <code>V</code> and a cover <code>Us</code> of an open set <code>U</code>. And <code>V ⊆ U</code>.</p>
 
 #### [ Johan Commelin (Nov 09 2018 at 15:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20mismatch%20error/near/147375831):
-Now you intersect all the `Ui` in `Us` with `V`, and the result covers `V`.
+<p>Now you intersect all the <code>Ui</code> in <code>Us</code> with <code>V</code>, and the result covers <code>V</code>.</p>
 
 #### [ Kenny Lau (Nov 09 2018 at 15:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20mismatch%20error/near/147375838):
-can you show me the context?
+<p>can you show me the context?</p>
 
 #### [ Johan Commelin (Nov 09 2018 at 15:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20mismatch%20error/near/147375850):
-You mean explain the context?
+<p>You mean explain the context?</p>
 
 #### [ Kenny Lau (Nov 09 2018 at 15:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20mismatch%20error/near/147375853):
-no, the context
+<p>no, the context</p>
 
 #### [ Johan Commelin (Nov 09 2018 at 15:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20mismatch%20error/near/147375866):
-Aaah
+<p>Aaah</p>
 
 #### [ Johan Commelin (Nov 09 2018 at 15:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20mismatch%20error/near/147375878):
-```lean
-X : Type u,
-_inst_1 : topological_space X,
-U V : opens X,
-i : V ⟶ U,
-Us : covering_family U,
-Us_cover : U = ⨆ (u : over U) (H : u ∈ Us), u.left
-⊢ V.val ≤ (⨆ (Ui : over U) (H : Ui ∈ Us), ((over.comap i).obj Ui).left).val
-```
+<div class="codehilite"><pre><span></span><span class="n">X</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">,</span>
+<span class="bp">_</span><span class="n">inst_1</span> <span class="o">:</span> <span class="n">topological_space</span> <span class="n">X</span><span class="o">,</span>
+<span class="n">U</span> <span class="n">V</span> <span class="o">:</span> <span class="n">opens</span> <span class="n">X</span><span class="o">,</span>
+<span class="n">i</span> <span class="o">:</span> <span class="n">V</span> <span class="err">⟶</span> <span class="n">U</span><span class="o">,</span>
+<span class="n">Us</span> <span class="o">:</span> <span class="n">covering_family</span> <span class="n">U</span><span class="o">,</span>
+<span class="n">Us_cover</span> <span class="o">:</span> <span class="n">U</span> <span class="bp">=</span> <span class="err">⨆</span> <span class="o">(</span><span class="n">u</span> <span class="o">:</span> <span class="n">over</span> <span class="n">U</span><span class="o">)</span> <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="n">u</span> <span class="err">∈</span> <span class="n">Us</span><span class="o">),</span> <span class="n">u</span><span class="bp">.</span><span class="n">left</span>
+<span class="err">⊢</span> <span class="n">V</span><span class="bp">.</span><span class="n">val</span> <span class="bp">≤</span> <span class="o">(</span><span class="err">⨆</span> <span class="o">(</span><span class="n">Ui</span> <span class="o">:</span> <span class="n">over</span> <span class="n">U</span><span class="o">)</span> <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="n">Ui</span> <span class="err">∈</span> <span class="n">Us</span><span class="o">),</span> <span class="o">((</span><span class="n">over</span><span class="bp">.</span><span class="n">comap</span> <span class="n">i</span><span class="o">)</span><span class="bp">.</span><span class="n">obj</span> <span class="n">Ui</span><span class="o">)</span><span class="bp">.</span><span class="n">left</span><span class="o">)</span><span class="bp">.</span><span class="n">val</span>
+</pre></div>
 
 #### [ Johan Commelin (Nov 09 2018 at 15:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20mismatch%20error/near/147375942):
-So I want to show that `V ⊆ ⨆ Ui, (V ∩ Ui)`.
+<p>So I want to show that <code>V ⊆ ⨆ Ui, (V ∩ Ui)</code>.</p>
 
 #### [ Johan Commelin (Nov 09 2018 at 15:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20mismatch%20error/near/147375950):
-That is the math version of the goal.
+<p>That is the math version of the goal.</p>
 
 #### [ Kenny Lau (Nov 09 2018 at 15:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20mismatch%20error/near/147375958):
-where is V on the right hand side?
+<p>where is V on the right hand side?</p>
 
 #### [ Johan Commelin (Nov 09 2018 at 15:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20mismatch%20error/near/147375972):
-`V : opens X`
+<p><code>V : opens X</code></p>
 
 #### [ Johan Commelin (Nov 09 2018 at 15:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20mismatch%20error/near/147375980):
-Aah, it is hidden in `comap i`
+<p>Aah, it is hidden in <code>comap i</code></p>
 
 #### [ Johan Commelin (Nov 09 2018 at 15:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20mismatch%20error/near/147375990):
-Which in this setting just means: `V ∩ _`
+<p>Which in this setting just means: <code>V ∩ _</code></p>
 
 #### [ Johan Commelin (Nov 09 2018 at 15:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20mismatch%20error/near/147376084):
-Now I would think that `opens.gc` should let me transform the right hand side from
-`(⨆ (Ui : over U) (H : Ui ∈ Us), ((over.comap i).obj Ui).left).val` into
-`⨆ (Ui : over U) (H : Ui ∈ Us), (((over.comap i).obj Ui).left).val`.
-(I moved a parentheses to before `over.comap`.)
+<p>Now I would think that <code>opens.gc</code> should let me transform the right hand side from<br>
+<code>(⨆ (Ui : over U) (H : Ui ∈ Us), ((over.comap i).obj Ui).left).val</code> into<br>
+<code>⨆ (Ui : over U) (H : Ui ∈ Us), (((over.comap i).obj Ui).left).val</code>.<br>
+(I moved a parentheses to before <code>over.comap</code>.)</p>
 
 #### [ Kenny Lau (Nov 09 2018 at 15:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20mismatch%20error/near/147376244):
-do you know what it is definitionally equivalent to?
+<p>do you know what it is definitionally equivalent to?</p>
 
 #### [ Kenny Lau (Nov 09 2018 at 15:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20mismatch%20error/near/147376250):
-if not can you just unfold everything?
+<p>if not can you just unfold everything?</p>
 
 #### [ Johan Commelin (Nov 09 2018 at 15:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20mismatch%20error/near/147376252):
-If this goal could be transformed into `V.val ∩ Ui.left.val ≤ (over.comap i) blah).val` for all `Ui`, then I could take it from there.
+<p>If this goal could be transformed into <code>V.val ∩ Ui.left.val ≤ (over.comap i) blah).val</code> for all <code>Ui</code>, then I could take it from there.</p>
 
 #### [ Kenny Lau (Nov 09 2018 at 15:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20mismatch%20error/near/147376399):
-if you `intro x`, then `i x` says that `x \in U` right
+<p>if you <code>intro x</code>, then <code>i x</code> says that <code>x \in U</code> right</p>
 
 #### [ Kenny Lau (Nov 09 2018 at 15:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20mismatch%20error/near/147376408):
-then you rewrite `Us_cover`
+<p>then you rewrite <code>Us_cover</code></p>
 
 #### [ Johan Commelin (Nov 09 2018 at 15:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20mismatch%20error/near/147376455):
-Ok
+<p>Ok</p>
 
 #### [ Kenny Lau (Nov 09 2018 at 15:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20mismatch%20error/near/147376463):
-so now it says `x \in set.bUnion _`
+<p>so now it says <code>x \in set.bUnion _</code></p>
 
 #### [ Johan Commelin (Nov 09 2018 at 15:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20mismatch%20error/near/147376471):
-~~Make that an `x`~~
+<p><del>Make that an <code>x</code></del></p>
 
 #### [ Kenny Lau (Nov 09 2018 at 15:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20mismatch%20error/near/147376502):
-then `set.mem_bUnion_iff` or something should give you something useful
+<p>then <code>set.mem_bUnion_iff</code> or something should give you something useful</p>
 
 #### [ Johan Commelin (Nov 09 2018 at 15:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20mismatch%20error/near/147376505):
-Now I want to extract a `Ui` that contains `x`
+<p>Now I want to extract a <code>Ui</code> that contains <code>x</code></p>
 
 #### [ Johan Commelin (Nov 09 2018 at 15:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20mismatch%20error/near/147376520):
-Aah, let me try to find that one.
+<p>Aah, let me try to find that one.</p>
 
 #### [ Johan Commelin (Nov 09 2018 at 15:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20mismatch%20error/near/147376595):
-Except that it is a `supr` instead of a `bUnion`.
+<p>Except that it is a <code>supr</code> instead of a <code>bUnion</code>.</p>
 
 #### [ Kenny Lau (Nov 09 2018 at 15:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20mismatch%20error/near/147376607):
-aren't they defeq?
+<p>aren't they defeq?</p>
 
 #### [ Johan Commelin (Nov 09 2018 at 15:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20mismatch%20error/near/147376616):
-There should be a `lattice.mem_supr_iff`.
+<p>There should be a <code>lattice.mem_supr_iff</code>.</p>
 
 #### [ Johan Commelin (Nov 09 2018 at 15:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20mismatch%20error/near/147376618):
-Aah, probably yes. I'll try.
+<p>Aah, probably yes. I'll try.</p>
 
 #### [ Kenny Lau (Nov 09 2018 at 15:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20mismatch%20error/near/147376619):
-you can't be the member of just any supremum
+<p>you can't be the member of just any supremum</p>
 
 #### [ Johan Commelin (Nov 09 2018 at 16:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20mismatch%20error/near/147376886):
-Yay! First use of `erw` in my Lean-life. Context is now
-```lean
-X : Type u,
-_inst_1 : topological_space X,
-U V : opens X,
-i : V ⟶ U,
-Us : covering_family U,
-Us_cover : U = ⨆ (u : over U) (H : u ∈ Us), u.left,
-x : X,
-hx : x ∈ V.val,
-this :
-  ∃ (x_1 : order_dual (opens X)),
-    x_1 ∈ {a : opens X | ∃ (i : over U), a = (λ (u : over U), ⨆ (H : u ∈ Us), u.left) i} ∧ x ∈ x_1.val
-⊢ x ∈ (⨆ (Ui : over U) (H : Ui ∈ Us), ((over.comap i).obj Ui).left).val
-```
+<p>Yay! First use of <code>erw</code> in my Lean-life. Context is now</p>
+<div class="codehilite"><pre><span></span><span class="n">X</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">,</span>
+<span class="bp">_</span><span class="n">inst_1</span> <span class="o">:</span> <span class="n">topological_space</span> <span class="n">X</span><span class="o">,</span>
+<span class="n">U</span> <span class="n">V</span> <span class="o">:</span> <span class="n">opens</span> <span class="n">X</span><span class="o">,</span>
+<span class="n">i</span> <span class="o">:</span> <span class="n">V</span> <span class="err">⟶</span> <span class="n">U</span><span class="o">,</span>
+<span class="n">Us</span> <span class="o">:</span> <span class="n">covering_family</span> <span class="n">U</span><span class="o">,</span>
+<span class="n">Us_cover</span> <span class="o">:</span> <span class="n">U</span> <span class="bp">=</span> <span class="err">⨆</span> <span class="o">(</span><span class="n">u</span> <span class="o">:</span> <span class="n">over</span> <span class="n">U</span><span class="o">)</span> <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="n">u</span> <span class="err">∈</span> <span class="n">Us</span><span class="o">),</span> <span class="n">u</span><span class="bp">.</span><span class="n">left</span><span class="o">,</span>
+<span class="n">x</span> <span class="o">:</span> <span class="n">X</span><span class="o">,</span>
+<span class="n">hx</span> <span class="o">:</span> <span class="n">x</span> <span class="err">∈</span> <span class="n">V</span><span class="bp">.</span><span class="n">val</span><span class="o">,</span>
+<span class="n">this</span> <span class="o">:</span>
+  <span class="bp">∃</span> <span class="o">(</span><span class="n">x_1</span> <span class="o">:</span> <span class="n">order_dual</span> <span class="o">(</span><span class="n">opens</span> <span class="n">X</span><span class="o">)),</span>
+    <span class="n">x_1</span> <span class="err">∈</span> <span class="o">{</span><span class="n">a</span> <span class="o">:</span> <span class="n">opens</span> <span class="n">X</span> <span class="bp">|</span> <span class="bp">∃</span> <span class="o">(</span><span class="n">i</span> <span class="o">:</span> <span class="n">over</span> <span class="n">U</span><span class="o">),</span> <span class="n">a</span> <span class="bp">=</span> <span class="o">(</span><span class="bp">λ</span> <span class="o">(</span><span class="n">u</span> <span class="o">:</span> <span class="n">over</span> <span class="n">U</span><span class="o">),</span> <span class="err">⨆</span> <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="n">u</span> <span class="err">∈</span> <span class="n">Us</span><span class="o">),</span> <span class="n">u</span><span class="bp">.</span><span class="n">left</span><span class="o">)</span> <span class="n">i</span><span class="o">}</span> <span class="bp">∧</span> <span class="n">x</span> <span class="err">∈</span> <span class="n">x_1</span><span class="bp">.</span><span class="n">val</span>
+<span class="err">⊢</span> <span class="n">x</span> <span class="err">∈</span> <span class="o">(</span><span class="err">⨆</span> <span class="o">(</span><span class="n">Ui</span> <span class="o">:</span> <span class="n">over</span> <span class="n">U</span><span class="o">)</span> <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="n">Ui</span> <span class="err">∈</span> <span class="n">Us</span><span class="o">),</span> <span class="o">((</span><span class="n">over</span><span class="bp">.</span><span class="n">comap</span> <span class="n">i</span><span class="o">)</span><span class="bp">.</span><span class="n">obj</span> <span class="n">Ui</span><span class="o">)</span><span class="bp">.</span><span class="n">left</span><span class="o">)</span><span class="bp">.</span><span class="n">val</span>
+</pre></div>
 
 #### [ Johan Commelin (Nov 09 2018 at 16:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20mismatch%20error/near/147376921):
-That looks encouraging, right? Especially that `order_dual` that is leaking through.
+<p>That looks encouraging, right? Especially that <code>order_dual</code> that is leaking through.</p>
 
 #### [ Johan Commelin (Nov 09 2018 at 16:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20mismatch%20error/near/147377202):
-Ok, need to go. But now I think I can complete this. Thanks a lot!
+<p>Ok, need to go. But now I think I can complete this. Thanks a lot!</p>
 
 
 {% endraw %}

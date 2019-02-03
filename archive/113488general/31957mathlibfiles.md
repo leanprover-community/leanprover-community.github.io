@@ -12,52 +12,51 @@ permalink: archive/113488general/31957mathlibfiles.html
 
 {% raw %}
 #### [ Patrick Massot (Dec 18 2018 at 14:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20files/near/152106884):
-@**Mario Carneiro** and @**Johannes Hölzl** Would you be open to a PR reorganizing files in the analysis part of mathlib? There are huge files with a strange import graph. I would like to create new sub-folders  an move stuff around so that it get easier to guess what is in what file
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> and <span class="user-mention" data-user-id="110294">@Johannes Hölzl</span> Would you be open to a PR reorganizing files in the analysis part of mathlib? There are huge files with a strange import graph. I would like to create new sub-folders  an move stuff around so that it get easier to guess what is in what file</p>
 
 #### [ Mario Carneiro (Dec 18 2018 at 14:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20files/near/152106974):
-Do you know what you want to do specifically?
+<p>Do you know what you want to do specifically?</p>
 
 #### [ Patrick Massot (Dec 18 2018 at 14:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20files/near/152107218):
-I'd like to have a list of folders inside analysis that looks like topological_space, uniform_spaces, metric_spaces, topological_structures, normed_spaces. In particular moving topological_structures down in the import graph (ie I don't want it to be imported by so many files)
+<p>I'd like to have a list of folders inside analysis that looks like topological_space, uniform_spaces, metric_spaces, topological_structures, normed_spaces. In particular moving topological_structures down in the import graph (ie I don't want it to be imported by so many files)</p>
 
 #### [ Patrick Massot (Dec 18 2018 at 14:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20files/near/152107321):
-The current graph looks approximately like https://www.yworks.com/yed-live/?file=https://gist.githubusercontent.com/PatrickMassot/05234c6c375bfd588c346f0dab9b626a/raw/topology
+<p>The current graph looks approximately like <a href="https://www.yworks.com/yed-live/?file=https://gist.githubusercontent.com/PatrickMassot/05234c6c375bfd588c346f0dab9b626a/raw/topology" target="_blank" title="https://www.yworks.com/yed-live/?file=https://gist.githubusercontent.com/PatrickMassot/05234c6c375bfd588c346f0dab9b626a/raw/topology">https://www.yworks.com/yed-live/?file=https://gist.githubusercontent.com/PatrickMassot/05234c6c375bfd588c346f0dab9b626a/raw/topology</a></p>
 
 #### [ Patrick Massot (Dec 18 2018 at 14:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20files/near/152107345):
-(I removed a couple of redundant edges, and created the thing by hand, so there may be mistakes)
+<p>(I removed a couple of redundant edges, and created the thing by hand, so there may be mistakes)</p>
 
 #### [ Patrick Massot (Dec 18 2018 at 14:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20files/near/152107442):
-Of course it would be much easier to reorganize stuff after merging Sébastien's topology PRs
+<p>Of course it would be much easier to reorganize stuff after merging Sébastien's topology PRs</p>
 
 #### [ Johannes Hölzl (Dec 18 2018 at 15:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20files/near/152109554):
-It looks to me that most of theses files depend on topological structures?! Is there no edge from topological structures to metric space (or maybe complex...) 
-I don't know if splitting up these files into multiple files will help. Some of this stuff is interdependent, forcing it into a hierarchy may be hard.
+<p>It looks to me that most of theses files depend on topological structures?! Is there no edge from topological structures to metric space (or maybe complex...) <br>
+I don't know if splitting up these files into multiple files will help. Some of this stuff is interdependent, forcing it into a hierarchy may be hard.</p>
 
 #### [ Patrick Massot (Dec 18 2018 at 15:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20files/near/152109636):
-For instance, completion depends on topological structures because we complete groups and rings, but we could have the dependency the other way around, it would make more mathematical sense
+<p>For instance, completion depends on topological structures because we complete groups and rings, but we could have the dependency the other way around, it would make more mathematical sense</p>
 
 #### [ Johannes Hölzl (Dec 18 2018 at 15:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20files/near/152109673):
-How would topological structures depend on completion of groups and rings?
+<p>How would topological structures depend on completion of groups and rings?</p>
 
 #### [ Patrick Massot (Dec 18 2018 at 15:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20files/near/152109821):
-We could have a folder `topological_structures` with files `topological_groups`, `topological_rings`, `normed_spaces`. Each file would contain the relevant completed structures
+<p>We could have a folder <code>topological_structures</code> with files <code>topological_groups</code>, <code>topological_rings</code>, <code>normed_spaces</code>. Each file would contain the relevant completed structures</p>
 
 #### [ Patrick Massot (Dec 18 2018 at 15:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20files/near/152109848):
-Mathematically, the construction of the completion of a uniform space doesn't need anything from algebra
+<p>Mathematically, the construction of the completion of a uniform space doesn't need anything from algebra</p>
 
 #### [ Patrick Massot (Dec 18 2018 at 15:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20files/near/152109859):
-It is a fundamental construction that is then applied to topological structures
+<p>It is a fundamental construction that is then applied to topological structures</p>
 
 #### [ Johannes Hölzl (Dec 18 2018 at 15:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20files/near/152110224):
-`topological_structures` are used everywhere. The completion operation is a special one. I don't see why we should have the completion at a lower place than topological structures
+<p><code>topological_structures</code> are used everywhere. The completion operation is a special one. I don't see why we should have the completion at a lower place than topological structures</p>
 
 #### [ Patrick Massot (Dec 18 2018 at 15:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20files/near/152110272):
-If you are worried that completions get imported everywhere then we can have files topological_group_completion etc inside the topological_structure folder
+<p>If you are worried that completions get imported everywhere then we can have files topological_group_completion etc inside the topological_structure folder</p>
 
 #### [ Patrick Massot (Dec 20 2018 at 22:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20files/near/152286325):
-I just tried to move files around in the analysis folder, without splitting or joining any file. I get:
-```
-analysis
+<p>I just tried to move files around in the analysis folder, without splitting or joining any file. I get:</p>
+<div class="codehilite"><pre><span></span>analysis
 ├── complex.lean
 ├── ennreal.lean
 ├── exponential.lean
@@ -92,287 +91,289 @@ analysis
 └── uniform_space
     ├── completion.lean
     └── default.lean
-```
-Note that I didn't increase the depth, only gathered stuff. My next move would be to split topological algebra into `group` and `ring`, and then `group_completion` and `ring_completion`, as well as splitting `uniform_space/completion` into manageable files. Is there any hope to get something like this merged?
+</pre></div>
+
+
+<p>Note that I didn't increase the depth, only gathered stuff. My next move would be to split topological algebra into <code>group</code> and <code>ring</code>, and then <code>group_completion</code> and <code>ring_completion</code>, as well as splitting <code>uniform_space/completion</code> into manageable files. Is there any hope to get something like this merged?</p>
 
 #### [ Patrick Massot (Dec 20 2018 at 22:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20files/near/152286444):
-Note also that Lean inserts `default` automatically, so importing the definition of topological space is done by `import analysis.topological_space`
+<p>Note also that Lean inserts <code>default</code> automatically, so importing the definition of topological space is done by <code>import analysis.topological_space</code></p>
 
 #### [ Patrick Massot (Dec 20 2018 at 22:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20files/near/152286538):
-There are still some mess at the root of `analysis` above, but it's still a start
+<p>There are still some mess at the root of <code>analysis</code> above, but it's still a start</p>
 
 #### [ Patrick Massot (Dec 20 2018 at 22:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20files/near/152286719):
-I should say I'm ready to redo this work after PRs with Sébastien and Jeremy get merged (it's very easy to change imports using VScode "replace in files")
+<p>I should say I'm ready to redo this work after PRs with Sébastien and Jeremy get merged (it's very easy to change imports using VScode "replace in files")</p>
 
 #### [ Patrick Massot (Dec 20 2018 at 22:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20files/near/152286947):
-I would also update the documentation of course. I think it would be really nice to have a general cleanup and documentation effort before the Amsterdam workshop
+<p>I would also update the documentation of course. I think it would be really nice to have a general cleanup and documentation effort before the Amsterdam workshop</p>
 
 #### [ Scott Morrison (Dec 20 2018 at 22:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20files/near/152287198):
-This looks appealing!
+<p>This looks appealing!</p>
 
 #### [ Mario Carneiro (Dec 20 2018 at 22:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20files/near/152287836):
-what's the difference between `continuity` and `continuous_map`? Also where's basic topology gone
+<p>what's the difference between <code>continuity</code> and <code>continuous_map</code>? Also where's basic topology gone</p>
 
 #### [ Reid Barton (Dec 20 2018 at 22:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20files/near/152287896):
-`continuous_map` is what Johannes renamed my file on the compact-open topology on mapping spaces
+<p><code>continuous_map</code> is what Johannes renamed my file on the compact-open topology on mapping spaces</p>
 
 #### [ Patrick Massot (Dec 20 2018 at 22:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20files/near/152287906):
-First question: compare https://github.com/leanprover/mathlib/blob/master/analysis/topology/continuity.lean and https://github.com/leanprover/mathlib/blob/master/analysis/topology/continuous_map.lean
+<p>First question: compare <a href="https://github.com/leanprover/mathlib/blob/master/analysis/topology/continuity.lean" target="_blank" title="https://github.com/leanprover/mathlib/blob/master/analysis/topology/continuity.lean">https://github.com/leanprover/mathlib/blob/master/analysis/topology/continuity.lean</a> and <a href="https://github.com/leanprover/mathlib/blob/master/analysis/topology/continuous_map.lean" target="_blank" title="https://github.com/leanprover/mathlib/blob/master/analysis/topology/continuous_map.lean">https://github.com/leanprover/mathlib/blob/master/analysis/topology/continuous_map.lean</a></p>
 
 #### [ Patrick Massot (Dec 20 2018 at 22:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20files/near/152287916):
-(it's already there)
+<p>(it's already there)</p>
 
 #### [ Patrick Massot (Dec 20 2018 at 22:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20files/near/152287968):
-Basic topology is in `topological_space/default.lean`
+<p>Basic topology is in <code>topological_space/default.lean</code></p>
 
 #### [ Mario Carneiro (Dec 20 2018 at 22:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20files/near/152287987):
-I'm not sure that's a good answer... just because it's what's there doesn't mean it's good, especially in a thread on reorganization
+<p>I'm not sure that's a good answer... just because it's what's there doesn't mean it's good, especially in a thread on reorganization</p>
 
 #### [ Patrick Massot (Dec 20 2018 at 22:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20files/near/152287999):
-Oh sure, the above is the first step, moving files around
+<p>Oh sure, the above is the first step, moving files around</p>
 
 #### [ Patrick Massot (Dec 20 2018 at 22:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20files/near/152288053):
-Then will come split and merge
+<p>Then will come split and merge</p>
 
 #### [ Mario Carneiro (Dec 20 2018 at 22:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20files/near/152288069):
-I don't like the idea of putting basic stuff in a `default.lean`, these files are usually the supremum of their folders' contents
+<p>I don't like the idea of putting basic stuff in a <code>default.lean</code>, these files are usually the supremum of their folders' contents</p>
 
 #### [ Mario Carneiro (Dec 20 2018 at 22:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20files/near/152288095):
-because `import folder.default` = `import folder`
+<p>because <code>import folder.default</code> = <code>import folder</code></p>
 
 #### [ Patrick Massot (Dec 20 2018 at 22:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20files/near/152288115):
-I think both semantics make sense, and it avoids long names
+<p>I think both semantics make sense, and it avoids long names</p>
 
 #### [ Mario Carneiro (Dec 20 2018 at 22:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20files/near/152288121):
-the convention is to put basic stuff in a `basic.lean`
+<p>the convention is to put basic stuff in a <code>basic.lean</code></p>
 
 #### [ Patrick Massot (Dec 20 2018 at 22:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20files/near/152288173):
-this would be very easy to do
+<p>this would be very easy to do</p>
 
 #### [ Patrick Massot (Dec 20 2018 at 22:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20files/near/152290014):
-It seems a reorganization could be merged, so I'll wait for the big topology merges and then try something
+<p>It seems a reorganization could be merged, so I'll wait for the big topology merges and then try something</p>
 
 #### [ Jan-David Salchow (Dec 21 2018 at 20:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20files/near/152351499):
-I like it! Have you considered moving topology out of analysis though?
+<p>I like it! Have you considered moving topology out of analysis though?</p>
 
 #### [ Patrick Massot (Dec 21 2018 at 20:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20files/near/152354230):
-:slight_smile: of course this was my first reaction. But I don't want to fight here...
+<p><span class="emoji emoji-1f642" title="slight smile">:slight_smile:</span> of course this was my first reaction. But I don't want to fight here...</p>
 
 #### [ Jan-David Salchow (Dec 21 2018 at 22:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20files/near/152360300):
-Interesting. Is there a rationale for keeping it in there?
+<p>Interesting. Is there a rationale for keeping it in there?</p>
 
 #### [ Patrick Massot (Jan 15 2019 at 20:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20files/near/155198452):
-I'm doing the file reorganization for analysis. In the end I think that the separation between topology and analysis doesn't look good. The split is pretty much arbitrary, and files about specialized topics like the compact-open topology end up at the same level as folders like `uniform_space` and `metric_space`. It looks a bit weird
+<p>I'm doing the file reorganization for analysis. In the end I think that the separation between topology and analysis doesn't look good. The split is pretty much arbitrary, and files about specialized topics like the compact-open topology end up at the same level as folders like <code>uniform_space</code> and <code>metric_space</code>. It looks a bit weird</p>
 
 #### [ Patrick Massot (Jan 15 2019 at 20:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20files/near/155198530):
-and the instances folder doesn't know where to go
+<p>and the instances folder doesn't know where to go</p>
 
 #### [ Patrick Massot (Jan 15 2019 at 20:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20files/near/155198555):
-I think I'll PR something a bit closer to my original proposal
+<p>I think I'll PR something a bit closer to my original proposal</p>
 
 #### [ Mario Carneiro (Jan 15 2019 at 20:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20files/near/155198789):
-there is no rule that a folder must have only files or only folders in it; in fact I would expect that specialized topics end up in loose files alongside folders where the theory is more developed. `data` is like that
+<p>there is no rule that a folder must have only files or only folders in it; in fact I would expect that specialized topics end up in loose files alongside folders where the theory is more developed. <code>data</code> is like that</p>
 
 #### [ Mario Carneiro (Jan 15 2019 at 20:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20files/near/155198804):
-so I don't see a problem with `topology/uniform_space/` being sibling to `topology/compact_open.lean`
+<p>so I don't see a problem with <code>topology/uniform_space/</code> being sibling to <code>topology/compact_open.lean</code></p>
 
 #### [ Patrick Massot (Jan 15 2019 at 20:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20files/near/155198836):
-I have a commit strictly implementing (the move only part) of the proposal. Now I'm trying something slightly different. We'll see what looks best
+<p>I have a commit strictly implementing (the move only part) of the proposal. Now I'm trying something slightly different. We'll see what looks best</p>
 
 #### [ Kevin Buzzard (Jan 15 2019 at 21:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20files/near/155199564):
-Let me remark again that for 25 years I had no idea that topology was a subset of analysis.
+<p>Let me remark again that for 25 years I had no idea that topology was a subset of analysis.</p>
 
 #### [ Patrick Massot (Jan 15 2019 at 21:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20files/near/155199744):
-But then where is analysis starting?
+<p>But then where is analysis starting?</p>
 
 #### [ Patrick Massot (Jan 15 2019 at 21:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20files/near/155199808):
-Of course I can also rename analysis to topology. But soon we'll have derivative, and it's not really topology either (unless you include differential topology in the same folder)
+<p>Of course I can also rename analysis to topology. But soon we'll have derivative, and it's not really topology either (unless you include differential topology in the same folder)</p>
 
 #### [ Kevin Buzzard (Jan 15 2019 at 21:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20files/near/155199911):
-Maybe I should leave these questions to the topologist :-)
+<p>Maybe I should leave these questions to the topologist :-)</p>
 
 #### [ Mario Carneiro (Jan 15 2019 at 21:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20files/near/155199940):
-aha, deriv is definitely analysis
+<p>aha, deriv is definitely analysis</p>
 
 #### [ Mario Carneiro (Jan 15 2019 at 21:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20files/near/155199944):
-so it's nonempty
+<p>so it's nonempty</p>
 
 #### [ Patrick Massot (Jan 15 2019 at 21:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20files/near/155199946):
-I PR'ed
+<p>I PR'ed</p>
 
 #### [ Mario Carneiro (Jan 15 2019 at 21:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20files/near/155199960):
-unless deriv is calculus...
+<p>unless deriv is calculus...</p>
 
 #### [ Patrick Massot (Jan 15 2019 at 21:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20files/near/155199989):
-It is indeed calculus
+<p>It is indeed calculus</p>
 
 #### [ Patrick Massot (Jan 15 2019 at 21:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20files/near/155199999):
-This is the name of that file in my differential topology repository
+<p>This is the name of that file in my differential topology repository</p>
 
 #### [ Mario Carneiro (Jan 15 2019 at 21:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20files/near/155200087):
-but integrals are also calculus and I don't know where to draw the line from measure theory
+<p>but integrals are also calculus and I don't know where to draw the line from measure theory</p>
 
 #### [ Patrick Massot (Jan 15 2019 at 21:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20files/near/155200131):
-in French we have "calcul différentiel" including derivatives and "calcul intégral"
+<p>in French we have "calcul différentiel" including derivatives and "calcul intégral"</p>
 
 #### [ Patrick Massot (Jan 15 2019 at 21:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20files/near/155200149):
-but elementary courses are about "real analysis", and involve both
+<p>but elementary courses are about "real analysis", and involve both</p>
 
 #### [ Reid Barton (Jan 15 2019 at 21:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20files/near/155200161):
-```quote
-files about specialized topics like the compact-open topology end up at the same level as folders like `uniform_space` and `metric_space`.
-```
-I guess this is because we have TOPOLOGY, the top-level classification, and topology as opposed to metric spaces
+<blockquote>
+<p>files about specialized topics like the compact-open topology end up at the same level as folders like <code>uniform_space</code> and <code>metric_space</code>.</p>
+</blockquote>
+<p>I guess this is because we have TOPOLOGY, the top-level classification, and topology as opposed to metric spaces</p>
 
 #### [ Patrick Massot (Jan 15 2019 at 21:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20files/near/155200188):
-We could also follow Johannes, and have only one mathlib file
+<p>We could also follow Johannes, and have only one mathlib file</p>
 
 #### [ Patrick Massot (Jan 15 2019 at 21:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20files/near/155200219):
-https://github.com/leanprover/mathlib/pull/598
+<p><a href="https://github.com/leanprover/mathlib/pull/598" target="_blank" title="https://github.com/leanprover/mathlib/pull/598">https://github.com/leanprover/mathlib/pull/598</a></p>
 
 #### [ Mario Carneiro (Jan 15 2019 at 21:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20files/near/155200432):
-wait, so this PR is still putting everything in `analysis/`?
+<p>wait, so this PR is still putting everything in <code>analysis/</code>?</p>
 
 #### [ Mario Carneiro (Jan 15 2019 at 21:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20files/near/155200524):
-we could have `topology/basic/` for separating topology and TOPOLOGY
+<p>we could have <code>topology/basic/</code> for separating topology and TOPOLOGY</p>
 
 #### [ Reid Barton (Jan 15 2019 at 21:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20files/near/155200926):
-Or `topology.topology` or even `topology.topological_space`
+<p>Or <code>topology.topology</code> or even <code>topology.topological_space</code></p>
 
 #### [ Reid Barton (Jan 15 2019 at 21:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20files/near/155201233):
-or `general_topology.topology`
+<p>or <code>general_topology.topology</code></p>
 
 #### [ Patrick Massot (Jan 15 2019 at 21:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20files/near/155202935):
-what do you mean "everything in analysis"?
+<p>what do you mean "everything in analysis"?</p>
 
 #### [ Patrick Massot (Jan 15 2019 at 21:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20files/near/155203005):
-Travis seems to be confused by old oleans...
+<p>Travis seems to be confused by old oleans...</p>
 
 #### [ Patrick Massot (Jan 15 2019 at 21:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20files/near/155203573):
-I'm sorry I don't understand what Reid and you suggest
+<p>I'm sorry I don't understand what Reid and you suggest</p>
 
 #### [ Patrick Massot (Jan 15 2019 at 21:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20files/near/155203587):
-I can also rename `analysis` to `topology`
+<p>I can also rename <code>analysis</code> to <code>topology</code></p>
 
 #### [ Mario Carneiro (Jan 15 2019 at 21:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20files/near/155203601):
-I think topology and analysis should be separate folders
+<p>I think topology and analysis should be separate folders</p>
 
 #### [ Mario Carneiro (Jan 15 2019 at 21:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20files/near/155203635):
-I'm not sure why this is in any way strange
+<p>I'm not sure why this is in any way strange</p>
 
 #### [ Patrick Massot (Jan 15 2019 at 21:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20files/near/155203695):
-That's not the question. The question is how do you choose which files go into which folder
+<p>That's not the question. The question is how do you choose which files go into which folder</p>
 
 #### [ Mario Carneiro (Jan 15 2019 at 21:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20files/near/155203705):
-depends on the file...
+<p>depends on the file...</p>
 
 #### [ Patrick Massot (Jan 15 2019 at 21:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20files/near/155203754):
-Do you like https://github.com/leanprover/mathlib/tree/ede7943feb0c5a8fa6ea481c8d08adf49104d55e/src ?
+<p>Do you like <a href="https://github.com/leanprover/mathlib/tree/ede7943feb0c5a8fa6ea481c8d08adf49104d55e/src" target="_blank" title="https://github.com/leanprover/mathlib/tree/ede7943feb0c5a8fa6ea481c8d08adf49104d55e/src">https://github.com/leanprover/mathlib/tree/ede7943feb0c5a8fa6ea481c8d08adf49104d55e/src</a> ?</p>
 
 #### [ Mario Carneiro (Jan 15 2019 at 22:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20files/near/155203828):
-I think `metric_space` and `normed_space` can go in analysis
+<p>I think <code>metric_space</code> and <code>normed_space</code> can go in analysis</p>
 
 #### [ Mario Carneiro (Jan 15 2019 at 22:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20files/near/155203852):
-I realize it's a border case
+<p>I realize it's a border case</p>
 
 #### [ Mario Carneiro (Jan 15 2019 at 22:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20files/near/155203903):
-I prefer the name `topology`  to `general_topology` for the top level folder
+<p>I prefer the name <code>topology</code>  to <code>general_topology</code> for the top level folder</p>
 
 #### [ Mario Carneiro (Jan 15 2019 at 22:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20files/near/155203938):
-unless there are any plans for `specific_topology` folders at the top level, it's a meaningless distinction which just makes names longer
+<p>unless there are any plans for <code>specific_topology</code> folders at the top level, it's a meaningless distinction which just makes names longer</p>
 
 #### [ Patrick Massot (Jan 15 2019 at 22:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20files/near/155203948):
-It's much easier to exclude metric spaces if we call it general topology
+<p>It's much easier to exclude metric spaces if we call it general topology</p>
 
 #### [ Mario Carneiro (Jan 15 2019 at 22:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20files/near/155204076):
-well it can still mean general topology, I am just objecting to the extra letters
+<p>well it can still mean general topology, I am just objecting to the extra letters</p>
 
 #### [ Mario Carneiro (Jan 15 2019 at 22:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20files/near/155204154):
-In lean 2 there were package .md files for all the subfolders, we could bring that back
+<p>In lean 2 there were package .md files for all the subfolders, we could bring that back</p>
 
 #### [ Reid Barton (Jan 15 2019 at 22:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20files/near/155204190):
-As a maintainer for the topology section of mathlib I volunteer to decide which things are or are not topology
+<p>As a maintainer for the topology section of mathlib I volunteer to decide which things are or are not topology</p>
 
 #### [ Patrick Massot (Jan 15 2019 at 22:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20files/near/155204197):
-Great!
+<p>Great!</p>
 
 #### [ Patrick Massot (Jan 15 2019 at 22:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20files/near/155204223):
-I wanted to ask about this new maintainer list: does it mean you have push access?
+<p>I wanted to ask about this new maintainer list: does it mean you have push access?</p>
 
 #### [ Mario Carneiro (Jan 15 2019 at 22:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20files/near/155204233):
-not yet
+<p>not yet</p>
 
 #### [ Reid Barton (Jan 15 2019 at 22:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20files/near/155204255):
-(My plan is just to follow the MSC)
+<p>(My plan is just to follow the MSC)</p>
 
 #### [ Mario Carneiro (Jan 15 2019 at 22:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20files/near/155204262):
-Leo has to act to make that happen
+<p>Leo has to act to make that happen</p>
 
 #### [ Patrick Massot (Jan 15 2019 at 22:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20files/near/155204348):
-I thought I was elected the documentation dictator, will I get push access?
+<p>I thought I was elected the documentation dictator, will I get push access?</p>
 
 #### [ Patrick Massot (Jan 15 2019 at 22:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20files/near/155204718):
-Reid, could you tell us what the file organization would look like then?
+<p>Reid, could you tell us what the file organization would look like then?</p>
 
 #### [ Patrick Massot (Jan 15 2019 at 22:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20files/near/155204783):
-I can confirm I can build from scratch here, and Travis is confused
+<p>I can confirm I can build from scratch here, and Travis is confused</p>
 
 #### [ Reid Barton (Jan 15 2019 at 22:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20files/near/155205083):
-As a first approximation, I would suggest moving all of `analysis` to `topology` except for `exponential.lean`, `normed_space` and `specific_limits.lean`, leaving the directory structure intact
+<p>As a first approximation, I would suggest moving all of <code>analysis</code> to <code>topology</code> except for <code>exponential.lean</code>, <code>normed_space</code> and <code>specific_limits.lean</code>, leaving the directory structure intact</p>
 
 #### [ Reid Barton (Jan 15 2019 at 22:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20files/near/155205106):
-That doesn't leave much in `analysis` but I think it's just because we don't have much analysis yet.
+<p>That doesn't leave much in <code>analysis</code> but I think it's just because we don't have much analysis yet.</p>
 
 #### [ Patrick Massot (Jan 15 2019 at 22:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20files/near/155205175):
-Isn't this what I had in my first commit?
+<p>Isn't this what I had in my first commit?</p>
 
 #### [ Reid Barton (Jan 15 2019 at 22:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20files/near/155205231):
-Let me check
+<p>Let me check</p>
 
 #### [ Reid Barton (Jan 15 2019 at 22:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20files/near/155205298):
-As far as the analysis/topology split is concerned, it's exactly the same. (I didn't peek first!)
+<p>As far as the analysis/topology split is concerned, it's exactly the same. (I didn't peek first!)</p>
 
 #### [ Reid Barton (Jan 15 2019 at 22:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20files/near/155205407):
-So I would just suggest bringing back the `topological_space` subdirectory and renaming the top-level directory to `topology` (with the understanding that it really *means* general topology).
+<p>So I would just suggest bringing back the <code>topological_space</code> subdirectory and renaming the top-level directory to <code>topology</code> (with the understanding that it really <em>means</em> general topology).</p>
 
 #### [ Reid Barton (Jan 15 2019 at 22:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20files/near/155205452):
-Oh, except for the `instances` directory
+<p>Oh, except for the <code>instances</code> directory</p>
 
 #### [ Patrick Massot (Jan 15 2019 at 22:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20files/near/155205479):
-Where would you put those?
+<p>Where would you put those?</p>
 
 #### [ Reid Barton (Jan 15 2019 at 22:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20files/near/155205482):
-I guess this is a bit awkward, because some of these are also normed spaces. Hmm
+<p>I guess this is a bit awkward, because some of these are also normed spaces. Hmm</p>
 
 #### [ Patrick Massot (Jan 15 2019 at 22:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20files/near/155205495):
-yes, that's where I started doubting again
+<p>yes, that's where I started doubting again</p>
 
 #### [ Mario Carneiro (Jan 15 2019 at 22:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20files/near/155205991):
-I like keeping `analysis.real` etc where they are
+<p>I like keeping <code>analysis.real</code> etc where they are</p>
 
 #### [ Mario Carneiro (Jan 15 2019 at 22:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20files/near/155206015):
-unless there is a reason to split the file up into topology and analysis stuff
+<p>unless there is a reason to split the file up into topology and analysis stuff</p>
 
 #### [ Reid Barton (Jan 15 2019 at 22:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20files/near/155206097):
-Actually it turns out there are no instances related to normed spaces in any of those files. So the whole directory could move to `topology`
+<p>Actually it turns out there are no instances related to normed spaces in any of those files. So the whole directory could move to <code>topology</code></p>
 
 #### [ Mario Carneiro (Jan 15 2019 at 22:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20files/near/155206180):
-I'm okay with that
+<p>I'm okay with that</p>
 
 #### [ Reid Barton (Jan 15 2019 at 22:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20files/near/155206254):
-The question will be when we define $$L^p$$ spaces and so on which are normed spaces and therefore also have a topology, what do we do. I think we can just stick everything related to those in the `analysis` directory though.
+<p>The question will be when we define <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mi>L</mi><mi>p</mi></msup></mrow><annotation encoding="application/x-tex">L^p</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.68333em;vertical-align:0em;"></span><span class="base"><span class="mord"><span class="mord mathit">L</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.664392em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathit mtight">p</span></span></span></span></span></span></span></span></span></span></span> spaces and so on which are normed spaces and therefore also have a topology, what do we do. I think we can just stick everything related to those in the <code>analysis</code> directory though.</p>
 
 #### [ Mario Carneiro (Jan 15 2019 at 22:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20files/near/155206275):
-I agree, that sounds like analysis to me
+<p>I agree, that sounds like analysis to me</p>
 
 #### [ Mario Carneiro (Jan 15 2019 at 22:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20files/near/155206299):
-the whole construction of the space will be an analysis thing anyway
+<p>the whole construction of the space will be an analysis thing anyway</p>
 
 #### [ Jeremy Avigad (Jan 16 2019 at 03:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20files/near/155222805):
-All this sounds good to me. I agree with Mario that `topology` is better than `general_topology`.
+<p>All this sounds good to me. I agree with Mario that <code>topology</code> is better than <code>general_topology</code>.</p>
 
 #### [ Patrick Massot (Jan 16 2019 at 09:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20files/near/155237245):
-I just renamed general_topology to topology, and moved instances there. Is everybody happy?
+<p>I just renamed general_topology to topology, and moved instances there. Is everybody happy?</p>
 
 
 {% endraw %}

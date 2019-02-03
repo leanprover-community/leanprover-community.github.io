@@ -12,7 +12,7 @@ permalink: archive/113488general/98991algebraictranscendentnumbers.html
 
 {% raw %}
 #### [ Kenny Lau (Mar 24 2018 at 13:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algebraic/transcendent%20numbers/near/124150419):
-!
+<p>!</p>
 
 
 {% endraw %}

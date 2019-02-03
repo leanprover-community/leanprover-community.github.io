@@ -12,10 +12,10 @@ permalink: archive/116395maths/10967Leftadjointoffunctorsbetweenorders.html
 
 {% raw %}
 #### [ Kenny Lau (Apr 27 2018 at 20:55)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Left%20adjoint%20of%20functors%20between%20orders/near/125787589):
-So, the forgetful functor from the category of partially ordered sets to the category of pre-ordered sets has a left adjoint
+<p>So, the forgetful functor from the category of partially ordered sets to the category of pre-ordered sets has a left adjoint</p>
 
 #### [ Kenny Lau (Apr 27 2018 at 20:55)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Left%20adjoint%20of%20functors%20between%20orders/near/125787593):
-Are there similar adjoints?
+<p>Are there similar adjoints?</p>
 
 
 {% endraw %}

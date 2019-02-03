@@ -12,19 +12,19 @@ permalink: archive/116395maths/10574notationforfinitefreemodules.html
 
 {% raw %}
 #### [ Kevin Buzzard (Aug 22 2018 at 12:29)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/notation%20for%20finite%20free%20modules/near/132570684):
-Some students here have developed the basic theory of free modules of finite rank over a ring (which later becomes a commutative ring and then a field). One issue I have with their work is that they are still using some placeholder notation for the fundamental construction of $$R^n$$, the free rank $$n$$ module over the ring $$R$$. What should the function which takes a ring `R` and a natural `n` and returns the `R`-module `R^n` be called? Any suggestions?
+<p>Some students here have developed the basic theory of free modules of finite rank over a ring (which later becomes a commutative ring and then a field). One issue I have with their work is that they are still using some placeholder notation for the fundamental construction of <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mi>R</mi><mi>n</mi></msup></mrow><annotation encoding="application/x-tex">R^n</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.68333em;vertical-align:0em;"></span><span class="base"><span class="mord"><span class="mord mathit" style="margin-right:0.00773em;">R</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.664392em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathit mtight">n</span></span></span></span></span></span></span></span></span></span></span>, the free rank <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.43056em;"></span><span class="strut bottom" style="height:0.43056em;vertical-align:0em;"></span><span class="base"><span class="mord mathit">n</span></span></span></span> module over the ring <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>R</mi></mrow><annotation encoding="application/x-tex">R</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.68333em;vertical-align:0em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.00773em;">R</span></span></span></span>. What should the function which takes a ring <code>R</code> and a natural <code>n</code> and returns the <code>R</code>-module <code>R^n</code> be called? Any suggestions?</p>
 
 #### [ Reid Barton (Aug 22 2018 at 16:19)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/notation%20for%20finite%20free%20modules/near/132580671):
-I guess there are two questions: name, and notation
+<p>I guess there are two questions: name, and notation</p>
 
 #### [ Reid Barton (Aug 22 2018 at 16:20)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/notation%20for%20finite%20free%20modules/near/132580689):
-For notation, assuming we can't use `R^n`, how about `R^⊕n`?
+<p>For notation, assuming we can't use <code>R^n</code>, how about <code>R^⊕n</code>?</p>
 
 #### [ Johan Commelin (Aug 22 2018 at 16:25)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/notation%20for%20finite%20free%20modules/near/132581065):
-Why can't we use `R^n`? As for the name, how about `finite_free_module R n`?
+<p>Why can't we use <code>R^n</code>? As for the name, how about <code>finite_free_module R n</code>?</p>
 
 #### [ Reid Barton (Aug 22 2018 at 16:34)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/notation%20for%20finite%20free%20modules/near/132581638):
-Maybe we can use `R^n`, but in that case I assumed there was no choice to be made :)
+<p>Maybe we can use <code>R^n</code>, but in that case I assumed there was no choice to be made :)</p>
 
 
 {% endraw %}

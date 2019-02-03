@@ -12,145 +12,144 @@ permalink: archive/113489newmembers/70126CoqsProgramtactic.html
 
 {% raw %}
 #### [ Wojciech Nawrocki (Dec 16 2018 at 18:18)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coq%27s%20Program%20tactic/near/151888312):
-Is there something akin to Coq's [Program](https://coq.inria.fr/refman/addendum/program.html) tactic in Lean? I thought that the equation compiler is basically that, but it seems to fail in the case when it should generate an equality at the type level. In my example:
-```lean
--- type-level list
-inductive InList: list ℕ → ℕ → Type
-| Z: ∀ {L n}, InList (n::L) n
-| S: ∀ {L n n'}, InList L n → InList (n'::L) n
+<p>Is there something akin to Coq's <a href="https://coq.inria.fr/refman/addendum/program.html" target="_blank" title="https://coq.inria.fr/refman/addendum/program.html">Program</a> tactic in Lean? I thought that the equation compiler is basically that, but it seems to fail in the case when it should generate an equality at the type level. In my example:</p>
+<div class="codehilite"><pre><span></span><span class="c1">-- type-level list</span>
+<span class="kn">inductive</span> <span class="n">InList</span><span class="o">:</span> <span class="n">list</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="kt">Type</span>
+<span class="bp">|</span> <span class="n">Z</span><span class="o">:</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">L</span> <span class="n">n</span><span class="o">},</span> <span class="n">InList</span> <span class="o">(</span><span class="n">n</span><span class="bp">::</span><span class="n">L</span><span class="o">)</span> <span class="n">n</span>
+<span class="bp">|</span> <span class="n">S</span><span class="o">:</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">L</span> <span class="n">n</span> <span class="n">n&#39;</span><span class="o">},</span> <span class="n">InList</span> <span class="n">L</span> <span class="n">n</span> <span class="bp">→</span> <span class="n">InList</span> <span class="o">(</span><span class="n">n&#39;</span><span class="bp">::</span><span class="n">L</span><span class="o">)</span> <span class="n">n</span>
 
--- type of functions that map the list L to natural numbers
-def ListMap (L) := ∀ {n}, InList L n → ℕ
+<span class="c1">-- type of functions that map the list L to natural numbers</span>
+<span class="n">def</span> <span class="n">ListMap</span> <span class="o">(</span><span class="n">L</span><span class="o">)</span> <span class="o">:=</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">n</span><span class="o">},</span> <span class="n">InList</span> <span class="n">L</span> <span class="n">n</span> <span class="bp">→</span> <span class="bp">ℕ</span>
 
-def id_map {L}: ListMap L := λ n (v: InList L n), n
+<span class="n">def</span> <span class="n">id_map</span> <span class="o">{</span><span class="n">L</span><span class="o">}:</span> <span class="n">ListMap</span> <span class="n">L</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">n</span> <span class="o">(</span><span class="n">v</span><span class="o">:</span> <span class="n">InList</span> <span class="n">L</span> <span class="n">n</span><span class="o">),</span> <span class="n">n</span>
 
--- extends m with n
-def extend_map {L} (n: ℕ) (m: ListMap L): ListMap (n::L)
-:= λ n' (v: InList (n::L) n'),
-  match v with
-  | InList.Z := sorry -- i would like to synthesize n = n' here
-  | InList.S := sorry
-  end
-```
-the `match` fails with
-```lean
-type mismatch at application
-  _match InList.Z
-term
-  InList.Z
-has type
-  InList (?m_1 :: ?m_2) ?m_1
-but is expected to have type
-  InList (n :: L) n'
-```
+<span class="c1">-- extends m with n</span>
+<span class="n">def</span> <span class="n">extend_map</span> <span class="o">{</span><span class="n">L</span><span class="o">}</span> <span class="o">(</span><span class="n">n</span><span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">m</span><span class="o">:</span> <span class="n">ListMap</span> <span class="n">L</span><span class="o">):</span> <span class="n">ListMap</span> <span class="o">(</span><span class="n">n</span><span class="bp">::</span><span class="n">L</span><span class="o">)</span>
+<span class="o">:=</span> <span class="bp">λ</span> <span class="n">n&#39;</span> <span class="o">(</span><span class="n">v</span><span class="o">:</span> <span class="n">InList</span> <span class="o">(</span><span class="n">n</span><span class="bp">::</span><span class="n">L</span><span class="o">)</span> <span class="n">n&#39;</span><span class="o">),</span>
+  <span class="k">match</span> <span class="n">v</span> <span class="k">with</span>
+  <span class="bp">|</span> <span class="n">InList</span><span class="bp">.</span><span class="n">Z</span> <span class="o">:=</span> <span class="n">sorry</span> <span class="c1">-- i would like to synthesize n = n&#39; here</span>
+  <span class="bp">|</span> <span class="n">InList</span><span class="bp">.</span><span class="n">S</span> <span class="o">:=</span> <span class="n">sorry</span>
+  <span class="kn">end</span>
+</pre></div>
+
+
+<p>the <code>match</code> fails with</p>
+<div class="codehilite"><pre><span></span><span class="n">type</span> <span class="n">mismatch</span> <span class="n">at</span> <span class="n">application</span>
+  <span class="bp">_</span><span class="n">match</span> <span class="n">InList</span><span class="bp">.</span><span class="n">Z</span>
+<span class="n">term</span>
+  <span class="n">InList</span><span class="bp">.</span><span class="n">Z</span>
+<span class="n">has</span> <span class="n">type</span>
+  <span class="n">InList</span> <span class="o">(</span><span class="err">?</span><span class="n">m_1</span> <span class="bp">::</span> <span class="err">?</span><span class="n">m_2</span><span class="o">)</span> <span class="err">?</span><span class="n">m_1</span>
+<span class="n">but</span> <span class="n">is</span> <span class="n">expected</span> <span class="n">to</span> <span class="k">have</span> <span class="n">type</span>
+  <span class="n">InList</span> <span class="o">(</span><span class="n">n</span> <span class="bp">::</span> <span class="n">L</span><span class="o">)</span> <span class="n">n&#39;</span>
+</pre></div>
 
 #### [ Kenny Lau (Dec 16 2018 at 18:27)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coq%27s%20Program%20tactic/near/151888604):
-```lean
--- type-level list
-inductive InList: list ℕ → ℕ → Type
-| Z: ∀ {L n}, InList (n::L) n
-| S: ∀ {L n n'}, InList L n → InList (n'::L) n
+<div class="codehilite"><pre><span></span><span class="c1">-- type-level list</span>
+<span class="kn">inductive</span> <span class="n">InList</span><span class="o">:</span> <span class="n">list</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="kt">Type</span>
+<span class="bp">|</span> <span class="n">Z</span><span class="o">:</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">L</span> <span class="n">n</span><span class="o">},</span> <span class="n">InList</span> <span class="o">(</span><span class="n">n</span><span class="bp">::</span><span class="n">L</span><span class="o">)</span> <span class="n">n</span>
+<span class="bp">|</span> <span class="n">S</span><span class="o">:</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">L</span> <span class="n">n</span> <span class="n">n&#39;</span><span class="o">},</span> <span class="n">InList</span> <span class="n">L</span> <span class="n">n</span> <span class="bp">→</span> <span class="n">InList</span> <span class="o">(</span><span class="n">n&#39;</span><span class="bp">::</span><span class="n">L</span><span class="o">)</span> <span class="n">n</span>
 
--- type of functions that map the list L to natural numbers
-def ListMap (L) := ∀ {n}, InList L n → ℕ
+<span class="c1">-- type of functions that map the list L to natural numbers</span>
+<span class="n">def</span> <span class="n">ListMap</span> <span class="o">(</span><span class="n">L</span><span class="o">)</span> <span class="o">:=</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">n</span><span class="o">},</span> <span class="n">InList</span> <span class="n">L</span> <span class="n">n</span> <span class="bp">→</span> <span class="bp">ℕ</span>
 
-def id_map {L}: ListMap L := λ n (v: InList L n), n
+<span class="n">def</span> <span class="n">id_map</span> <span class="o">{</span><span class="n">L</span><span class="o">}:</span> <span class="n">ListMap</span> <span class="n">L</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">n</span> <span class="o">(</span><span class="n">v</span><span class="o">:</span> <span class="n">InList</span> <span class="n">L</span> <span class="n">n</span><span class="o">),</span> <span class="n">n</span>
 
--- extends m with n
-def extend_map {L} (n: ℕ) (m: ListMap L): ListMap (n::L)
-:= λ n' (v: InList (n::L) n'),
-  match n, n', v with
-  | n, n', InList.Z := have n = n' := rfl, sorry
-  | n, n', InList.S h := sorry
-  end
-```
+<span class="c1">-- extends m with n</span>
+<span class="n">def</span> <span class="n">extend_map</span> <span class="o">{</span><span class="n">L</span><span class="o">}</span> <span class="o">(</span><span class="n">n</span><span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">m</span><span class="o">:</span> <span class="n">ListMap</span> <span class="n">L</span><span class="o">):</span> <span class="n">ListMap</span> <span class="o">(</span><span class="n">n</span><span class="bp">::</span><span class="n">L</span><span class="o">)</span>
+<span class="o">:=</span> <span class="bp">λ</span> <span class="n">n&#39;</span> <span class="o">(</span><span class="n">v</span><span class="o">:</span> <span class="n">InList</span> <span class="o">(</span><span class="n">n</span><span class="bp">::</span><span class="n">L</span><span class="o">)</span> <span class="n">n&#39;</span><span class="o">),</span>
+  <span class="k">match</span> <span class="n">n</span><span class="o">,</span> <span class="n">n&#39;</span><span class="o">,</span> <span class="n">v</span> <span class="k">with</span>
+  <span class="bp">|</span> <span class="n">n</span><span class="o">,</span> <span class="n">n&#39;</span><span class="o">,</span> <span class="n">InList</span><span class="bp">.</span><span class="n">Z</span> <span class="o">:=</span> <span class="k">have</span> <span class="n">n</span> <span class="bp">=</span> <span class="n">n&#39;</span> <span class="o">:=</span> <span class="n">rfl</span><span class="o">,</span> <span class="n">sorry</span>
+  <span class="bp">|</span> <span class="n">n</span><span class="o">,</span> <span class="n">n&#39;</span><span class="o">,</span> <span class="n">InList</span><span class="bp">.</span><span class="n">S</span> <span class="n">h</span> <span class="o">:=</span> <span class="n">sorry</span>
+  <span class="kn">end</span>
+</pre></div>
 
 #### [ Wojciech Nawrocki (Dec 16 2018 at 18:37)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coq%27s%20Program%20tactic/near/151889015):
-Thank you, I was hoping it could be done automatically, but this is fairly concise :)
+<p>Thank you, I was hoping it could be done automatically, but this is fairly concise :)</p>
 
 #### [ Kenny Lau (Dec 16 2018 at 18:40)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coq%27s%20Program%20tactic/near/151889146):
-no, it is done automatically, `have n = n' := rfl` is just demonstrating it
+<p>no, it is done automatically, <code>have n = n' := rfl</code> is just demonstrating it</p>
 
 #### [ Kenny Lau (Dec 16 2018 at 18:40)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coq%27s%20Program%20tactic/near/151889151):
-if you put an underscore to replace `sorry` you will see the lemma being `n = n`
+<p>if you put an underscore to replace <code>sorry</code> you will see the lemma being <code>n = n</code></p>
 
 #### [ Wojciech Nawrocki (Dec 16 2018 at 18:44)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coq%27s%20Program%20tactic/near/151889297):
-Oh indeed, so it seems the compiler will only equate variables which are being matched rather than everything that `v` in `match v with` depends on.
+<p>Oh indeed, so it seems the compiler will only equate variables which are being matched rather than everything that <code>v</code> in <code>match v with</code> depends on.</p>
 
 #### [ Kenny Lau (Dec 16 2018 at 18:46)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coq%27s%20Program%20tactic/near/151889365):
-right
+<p>right</p>
 
 #### [ Wojciech Nawrocki (Dec 16 2018 at 21:32)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coq%27s%20Program%20tactic/near/151895563):
-Hm no that's not right, it generalizes the matched variable and the state I get in
-```lean
-  match n, n', v with
-  | _, _, InList.Z := begin
-     -- state here
-  end
-  | n, n', (InList.S h) := n
-  end
-```
-is 
-```lean
-L : list ℕ,
-n : ℕ,
-m : ListMap L,
-n' : ℕ,
-v : InList (n :: L) n',
-_match : Π (_a _a_1 : ℕ), InList (_a :: L) _a_1 → ℕ,
-_x : ℕ
-⊢ ℕ
-```
-where `n` and `n'` are not equal
+<p>Hm no that's not right, it generalizes the matched variable and the state I get in</p>
+<div class="codehilite"><pre><span></span>  <span class="k">match</span> <span class="n">n</span><span class="o">,</span> <span class="n">n&#39;</span><span class="o">,</span> <span class="n">v</span> <span class="k">with</span>
+  <span class="bp">|</span> <span class="bp">_</span><span class="o">,</span> <span class="bp">_</span><span class="o">,</span> <span class="n">InList</span><span class="bp">.</span><span class="n">Z</span> <span class="o">:=</span> <span class="k">begin</span>
+     <span class="c1">-- state here</span>
+  <span class="kn">end</span>
+  <span class="bp">|</span> <span class="n">n</span><span class="o">,</span> <span class="n">n&#39;</span><span class="o">,</span> <span class="o">(</span><span class="n">InList</span><span class="bp">.</span><span class="n">S</span> <span class="n">h</span><span class="o">)</span> <span class="o">:=</span> <span class="n">n</span>
+  <span class="kn">end</span>
+</pre></div>
+
+
+<p>is </p>
+<div class="codehilite"><pre><span></span><span class="n">L</span> <span class="o">:</span> <span class="n">list</span> <span class="bp">ℕ</span><span class="o">,</span>
+<span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span>
+<span class="n">m</span> <span class="o">:</span> <span class="n">ListMap</span> <span class="n">L</span><span class="o">,</span>
+<span class="n">n&#39;</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span>
+<span class="n">v</span> <span class="o">:</span> <span class="n">InList</span> <span class="o">(</span><span class="n">n</span> <span class="bp">::</span> <span class="n">L</span><span class="o">)</span> <span class="n">n&#39;</span><span class="o">,</span>
+<span class="bp">_</span><span class="n">match</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">(</span><span class="bp">_</span><span class="n">a</span> <span class="bp">_</span><span class="n">a_1</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">),</span> <span class="n">InList</span> <span class="o">(</span><span class="bp">_</span><span class="n">a</span> <span class="bp">::</span> <span class="n">L</span><span class="o">)</span> <span class="bp">_</span><span class="n">a_1</span> <span class="bp">→</span> <span class="bp">ℕ</span><span class="o">,</span>
+<span class="bp">_</span><span class="n">x</span> <span class="o">:</span> <span class="bp">ℕ</span>
+<span class="err">⊢</span> <span class="bp">ℕ</span>
+</pre></div>
+
+
+<p>where <code>n</code> and <code>n'</code> are not equal</p>
 
 #### [ Chris Hughes (Dec 16 2018 at 21:37)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coq%27s%20Program%20tactic/near/151895778):
-In this state `n` and `n` have both effectively been replaced with `_x`, it just hasn't cleared the old `n` and `n'`
+<p>In this state <code>n</code> and <code>n</code> have both effectively been replaced with <code>_x</code>, it just hasn't cleared the old <code>n</code> and <code>n'</code></p>
 
 #### [ Wojciech Nawrocki (Dec 16 2018 at 21:42)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coq%27s%20Program%20tactic/near/151896024):
-The example posted here is a bit simplified to make sense without context, but basically I need the `n` and `n'` to be equal in the type of `v`, since my obligation for the return value is that they match, and for that I need the "old" values to be `_x` so that they can be substituted within `v`.
+<p>The example posted here is a bit simplified to make sense without context, but basically I need the <code>n</code> and <code>n'</code> to be equal in the type of <code>v</code>, since my obligation for the return value is that they match, and for that I need the "old" values to be <code>_x</code> so that they can be substituted within <code>v</code>.</p>
 
 #### [ Chris Hughes (Dec 16 2018 at 21:45)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coq%27s%20Program%20tactic/near/151896140):
-Can you not use `InList.Z` instead of `v`. `v` isn't a variable any more, since you're dealing with the case `v = InList.Z`
+<p>Can you not use <code>InList.Z</code> instead of <code>v</code>. <code>v</code> isn't a variable any more, since you're dealing with the case <code>v = InList.Z</code></p>
 
 #### [ Wojciech Nawrocki (Dec 16 2018 at 21:54)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coq%27s%20Program%20tactic/near/151896583):
-Sorry, I oversimplified again. The return type is dependent on `n` and needs to be a value given as an argument to `extend_map`. A fuller example:
-```lean
--- type-level list
-inductive InList: list ℕ → ℕ → Type
-| Z: ∀ {L n}, InList (n::L) n
-| S: ∀ {L n n'}, InList L n → InList (n'::L) n
+<p>Sorry, I oversimplified again. The return type is dependent on <code>n</code> and needs to be a value given as an argument to <code>extend_map</code>. A fuller example:</p>
+<div class="codehilite"><pre><span></span><span class="c1">-- type-level list</span>
+<span class="kn">inductive</span> <span class="n">InList</span><span class="o">:</span> <span class="n">list</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="kt">Type</span>
+<span class="bp">|</span> <span class="n">Z</span><span class="o">:</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">L</span> <span class="n">n</span><span class="o">},</span> <span class="n">InList</span> <span class="o">(</span><span class="n">n</span><span class="bp">::</span><span class="n">L</span><span class="o">)</span> <span class="n">n</span>
+<span class="bp">|</span> <span class="n">S</span><span class="o">:</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">L</span> <span class="n">n</span> <span class="n">n&#39;</span><span class="o">},</span> <span class="n">InList</span> <span class="n">L</span> <span class="n">n</span> <span class="bp">→</span> <span class="n">InList</span> <span class="o">(</span><span class="n">n&#39;</span><span class="bp">::</span><span class="n">L</span><span class="o">)</span> <span class="n">n</span>
 
-inductive Foo: ∀ n: ℕ, Type
-| A: ∀ n, Foo n
-| B: Foo 1
-| C: Foo 2
+<span class="kn">inductive</span> <span class="n">Foo</span><span class="o">:</span> <span class="bp">∀</span> <span class="n">n</span><span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span> <span class="kt">Type</span>
+<span class="bp">|</span> <span class="n">A</span><span class="o">:</span> <span class="bp">∀</span> <span class="n">n</span><span class="o">,</span> <span class="n">Foo</span> <span class="n">n</span>
+<span class="bp">|</span> <span class="n">B</span><span class="o">:</span> <span class="n">Foo</span> <span class="mi">1</span>
+<span class="bp">|</span> <span class="n">C</span><span class="o">:</span> <span class="n">Foo</span> <span class="mi">2</span>
 
--- type of functions that map the list L to dependent `Foo`s in the list
-def ListMap (L) := ∀ {n}, InList L n → Foo n
+<span class="c1">-- type of functions that map the list L to dependent `Foo`s in the list</span>
+<span class="n">def</span> <span class="n">ListMap</span> <span class="o">(</span><span class="n">L</span><span class="o">)</span> <span class="o">:=</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">n</span><span class="o">},</span> <span class="n">InList</span> <span class="n">L</span> <span class="n">n</span> <span class="bp">→</span> <span class="n">Foo</span> <span class="n">n</span>
 
-def id_map {L}: ListMap L := λ n (v: InList L n), Foo.A n
+<span class="n">def</span> <span class="n">id_map</span> <span class="o">{</span><span class="n">L</span><span class="o">}:</span> <span class="n">ListMap</span> <span class="n">L</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">n</span> <span class="o">(</span><span class="n">v</span><span class="o">:</span> <span class="n">InList</span> <span class="n">L</span> <span class="n">n</span><span class="o">),</span> <span class="n">Foo</span><span class="bp">.</span><span class="n">A</span> <span class="n">n</span>
 
--- extends m with e
-def extend_map {L n} (e: Foo n) (m: ListMap L): ListMap (n::L)
-:= λ n' (v: InList (n::L) n'),
-  match n, n', v with
-  | _, _, InList.Z := _ -- needs to be e and have type `Foo n`, but Lean generalizes to type `Foo _x`
-  | n, n', (InList.S h) := sorry
-  end
-```
+<span class="c1">-- extends m with e</span>
+<span class="n">def</span> <span class="n">extend_map</span> <span class="o">{</span><span class="n">L</span> <span class="n">n</span><span class="o">}</span> <span class="o">(</span><span class="n">e</span><span class="o">:</span> <span class="n">Foo</span> <span class="n">n</span><span class="o">)</span> <span class="o">(</span><span class="n">m</span><span class="o">:</span> <span class="n">ListMap</span> <span class="n">L</span><span class="o">):</span> <span class="n">ListMap</span> <span class="o">(</span><span class="n">n</span><span class="bp">::</span><span class="n">L</span><span class="o">)</span>
+<span class="o">:=</span> <span class="bp">λ</span> <span class="n">n&#39;</span> <span class="o">(</span><span class="n">v</span><span class="o">:</span> <span class="n">InList</span> <span class="o">(</span><span class="n">n</span><span class="bp">::</span><span class="n">L</span><span class="o">)</span> <span class="n">n&#39;</span><span class="o">),</span>
+  <span class="k">match</span> <span class="n">n</span><span class="o">,</span> <span class="n">n&#39;</span><span class="o">,</span> <span class="n">v</span> <span class="k">with</span>
+  <span class="bp">|</span> <span class="bp">_</span><span class="o">,</span> <span class="bp">_</span><span class="o">,</span> <span class="n">InList</span><span class="bp">.</span><span class="n">Z</span> <span class="o">:=</span> <span class="bp">_</span> <span class="c1">-- needs to be e and have type `Foo n`, but Lean generalizes to type `Foo _x`</span>
+  <span class="bp">|</span> <span class="n">n</span><span class="o">,</span> <span class="n">n&#39;</span><span class="o">,</span> <span class="o">(</span><span class="n">InList</span><span class="bp">.</span><span class="n">S</span> <span class="n">h</span><span class="o">)</span> <span class="o">:=</span> <span class="n">sorry</span>
+  <span class="kn">end</span>
+</pre></div>
 
 #### [ Chris Hughes (Dec 16 2018 at 22:03)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coq%27s%20Program%20tactic/near/151896987):
-```lean
-def extend_map {L n} (e: Foo n) (m: ListMap L): ListMap (n::L)
-:= λ n' (v: InList (n::L) n'),
-  match n, n', v, e with
-  | _, _, InList.Z := id -- needs to be e and have type `Foo n`, but Lean generalizes to type `Foo _x`
-  | n, n', (InList.S h) := sorry
-  end
-```
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">extend_map</span> <span class="o">{</span><span class="n">L</span> <span class="n">n</span><span class="o">}</span> <span class="o">(</span><span class="n">e</span><span class="o">:</span> <span class="n">Foo</span> <span class="n">n</span><span class="o">)</span> <span class="o">(</span><span class="n">m</span><span class="o">:</span> <span class="n">ListMap</span> <span class="n">L</span><span class="o">):</span> <span class="n">ListMap</span> <span class="o">(</span><span class="n">n</span><span class="bp">::</span><span class="n">L</span><span class="o">)</span>
+<span class="o">:=</span> <span class="bp">λ</span> <span class="n">n&#39;</span> <span class="o">(</span><span class="n">v</span><span class="o">:</span> <span class="n">InList</span> <span class="o">(</span><span class="n">n</span><span class="bp">::</span><span class="n">L</span><span class="o">)</span> <span class="n">n&#39;</span><span class="o">),</span>
+  <span class="k">match</span> <span class="n">n</span><span class="o">,</span> <span class="n">n&#39;</span><span class="o">,</span> <span class="n">v</span><span class="o">,</span> <span class="n">e</span> <span class="k">with</span>
+  <span class="bp">|</span> <span class="bp">_</span><span class="o">,</span> <span class="bp">_</span><span class="o">,</span> <span class="n">InList</span><span class="bp">.</span><span class="n">Z</span> <span class="o">:=</span> <span class="n">id</span> <span class="c1">-- needs to be e and have type `Foo n`, but Lean generalizes to type `Foo _x`</span>
+  <span class="bp">|</span> <span class="n">n</span><span class="o">,</span> <span class="n">n&#39;</span><span class="o">,</span> <span class="o">(</span><span class="n">InList</span><span class="bp">.</span><span class="n">S</span> <span class="n">h</span><span class="o">)</span> <span class="o">:=</span> <span class="n">sorry</span>
+  <span class="kn">end</span>
+</pre></div>
 
 #### [ Wojciech Nawrocki (Dec 16 2018 at 22:21)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coq%27s%20Program%20tactic/near/151897653):
-Hm that seems to work 🧙, thanks!
+<p>Hm that seems to work 🧙, thanks!</p>
 
 
 {% endraw %}

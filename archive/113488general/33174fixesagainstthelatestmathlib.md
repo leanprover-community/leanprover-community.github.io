@@ -12,25 +12,25 @@ permalink: archive/113488general/33174fixesagainstthelatestmathlib.html
 
 {% raw %}
 #### [ Kenny Lau (Apr 08 2018 at 15:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/fixes%20against%20the%20latest%20mathlib/near/124799280):
-now there is a global `^` called `pow`, and now the type of `n` will not be inferred from `f^n` (you need to manually state that `n` is of type `nat`). In that case, `pow` unfolds to `monoid.pow`, which can be unfolded as before the latest version.
+<p>now there is a global <code>^</code> called <code>pow</code>, and now the type of <code>n</code> will not be inferred from <code>f^n</code> (you need to manually state that <code>n</code> is of type <code>nat</code>). In that case, <code>pow</code> unfolds to <code>monoid.pow</code>, which can be unfolded as before the latest version.</p>
 
 #### [ Kevin Buzzard (Apr 08 2018 at 15:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/fixes%20against%20the%20latest%20mathlib/near/124799512):
-Are you talking about the nightly from the 6th?
+<p>Are you talking about the nightly from the 6th?</p>
 
 #### [ Kenny Lau (Apr 08 2018 at 15:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/fixes%20against%20the%20latest%20mathlib/near/124799513):
-right
+<p>right</p>
 
 #### [ Chris Hughes (Apr 08 2018 at 16:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/fixes%20against%20the%20latest%20mathlib/near/124800387):
-So no more nat.pow?
+<p>So no more nat.pow?</p>
 
 #### [ Kenny Lau (Apr 08 2018 at 16:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/fixes%20against%20the%20latest%20mathlib/near/124800392):
-I have not tested, but I believe Lean figures out whether you mean `monoid.pow` or `nat.pow`
+<p>I have not tested, but I believe Lean figures out whether you mean <code>monoid.pow</code> or <code>nat.pow</code></p>
 
 #### [ Kenny Lau (Apr 08 2018 at 16:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/fixes%20against%20the%20latest%20mathlib/near/124800393):
-depending on the first argument
+<p>depending on the first argument</p>
 
 #### [ Chris Hughes (Apr 08 2018 at 19:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/fixes%20against%20the%20latest%20mathlib/near/124804713):
-Getting rid of `local  infix ` ^ ` := monoid.pow` seems to help, so it uses `has_pow.pow` which is definitionally equal, but has rw lemmas.
+<p>Getting rid of <code>local  infix </code> ^ <code> := monoid.pow</code> seems to help, so it uses <code>has_pow.pow</code> which is definitionally equal, but has rw lemmas.</p>
 
 
 {% endraw %}

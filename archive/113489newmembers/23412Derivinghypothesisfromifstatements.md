@@ -12,341 +12,334 @@ permalink: archive/113489newmembers/23412Derivinghypothesisfromifstatements.html
 
 {% raw %}
 #### [ Tobias Grosser (Oct 02 2018 at 20:55)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135056007):
-Hi, I am currently cleaning up my gaussian elimination proof. At one point I defined the following functions:
-```lean
-def fin_first {n m} (i : fin (n + m)) {h: i.val < n}: fin (n) :=
-⟨i.1, begin apply h end⟩
+<p>Hi, I am currently cleaning up my gaussian elimination proof. At one point I defined the following functions:</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">fin_first</span> <span class="o">{</span><span class="n">n</span> <span class="n">m</span><span class="o">}</span> <span class="o">(</span><span class="n">i</span> <span class="o">:</span> <span class="n">fin</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="n">m</span><span class="o">))</span> <span class="o">{</span><span class="n">h</span><span class="o">:</span> <span class="n">i</span><span class="bp">.</span><span class="n">val</span> <span class="bp">&lt;</span> <span class="n">n</span><span class="o">}:</span> <span class="n">fin</span> <span class="o">(</span><span class="n">n</span><span class="o">)</span> <span class="o">:=</span>
+<span class="bp">⟨</span><span class="n">i</span><span class="bp">.</span><span class="mi">1</span><span class="o">,</span> <span class="k">begin</span> <span class="n">apply</span> <span class="n">h</span> <span class="kn">end</span><span class="bp">⟩</span>
 
-def fin_second {n m} (i : fin (n + m)) {h: i.val >= n}: fin (m) :=
-⟨i.1 - n, begin sorry end⟩
+<span class="n">def</span> <span class="n">fin_second</span> <span class="o">{</span><span class="n">n</span> <span class="n">m</span><span class="o">}</span> <span class="o">(</span><span class="n">i</span> <span class="o">:</span> <span class="n">fin</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="n">m</span><span class="o">))</span> <span class="o">{</span><span class="n">h</span><span class="o">:</span> <span class="n">i</span><span class="bp">.</span><span class="n">val</span> <span class="bp">&gt;=</span> <span class="n">n</span><span class="o">}:</span> <span class="n">fin</span> <span class="o">(</span><span class="n">m</span><span class="o">)</span> <span class="o">:=</span>
+<span class="bp">⟨</span><span class="n">i</span><span class="bp">.</span><span class="mi">1</span> <span class="bp">-</span> <span class="n">n</span><span class="o">,</span> <span class="k">begin</span> <span class="n">sorry</span> <span class="kn">end</span><span class="bp">⟩</span>
 
-def block_mx {m_down m_up n_left n_right: nat} :
-  matrix (fin m_up) (fin n_left) α →
-  matrix (fin m_up) (fin n_right) α →
-  matrix (fin m_down) (fin n_left) α →
-  matrix (fin m_down) (fin n_right) α →
-  matrix (fin (m_up + m_down)) (fin (n_left + n_right)) α
-| up_left up_right down_left down_right := 
-λ i j,
- if i.val < m_up
- then 
-    if j.val < n_left
-    then
-      up_left (fin_first i) (fin_first j)
-    else
-      up_right (fin_first i) (fin_second j)
-  else
-   if j.val < n_left
-    then
-      down_left (fin_second i)  (fin_first j)
-    else
-      down_right (fin_second i) (fin_second j)
-``` app
+<span class="n">def</span> <span class="n">block_mx</span> <span class="o">{</span><span class="n">m_down</span> <span class="n">m_up</span> <span class="n">n_left</span> <span class="n">n_right</span><span class="o">:</span> <span class="n">nat</span><span class="o">}</span> <span class="o">:</span>
+  <span class="n">matrix</span> <span class="o">(</span><span class="n">fin</span> <span class="n">m_up</span><span class="o">)</span> <span class="o">(</span><span class="n">fin</span> <span class="n">n_left</span><span class="o">)</span> <span class="n">α</span> <span class="bp">→</span>
+  <span class="n">matrix</span> <span class="o">(</span><span class="n">fin</span> <span class="n">m_up</span><span class="o">)</span> <span class="o">(</span><span class="n">fin</span> <span class="n">n_right</span><span class="o">)</span> <span class="n">α</span> <span class="bp">→</span>
+  <span class="n">matrix</span> <span class="o">(</span><span class="n">fin</span> <span class="n">m_down</span><span class="o">)</span> <span class="o">(</span><span class="n">fin</span> <span class="n">n_left</span><span class="o">)</span> <span class="n">α</span> <span class="bp">→</span>
+  <span class="n">matrix</span> <span class="o">(</span><span class="n">fin</span> <span class="n">m_down</span><span class="o">)</span> <span class="o">(</span><span class="n">fin</span> <span class="n">n_right</span><span class="o">)</span> <span class="n">α</span> <span class="bp">→</span>
+  <span class="n">matrix</span> <span class="o">(</span><span class="n">fin</span> <span class="o">(</span><span class="n">m_up</span> <span class="bp">+</span> <span class="n">m_down</span><span class="o">))</span> <span class="o">(</span><span class="n">fin</span> <span class="o">(</span><span class="n">n_left</span> <span class="bp">+</span> <span class="n">n_right</span><span class="o">))</span> <span class="n">α</span>
+<span class="bp">|</span> <span class="n">up_left</span> <span class="n">up_right</span> <span class="n">down_left</span> <span class="n">down_right</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="n">i</span> <span class="n">j</span><span class="o">,</span>
+ <span class="k">if</span> <span class="n">i</span><span class="bp">.</span><span class="n">val</span> <span class="bp">&lt;</span> <span class="n">m_up</span>
+ <span class="k">then</span>
+    <span class="k">if</span> <span class="n">j</span><span class="bp">.</span><span class="n">val</span> <span class="bp">&lt;</span> <span class="n">n_left</span>
+    <span class="k">then</span>
+      <span class="n">up_left</span> <span class="o">(</span><span class="n">fin_first</span> <span class="n">i</span><span class="o">)</span> <span class="o">(</span><span class="n">fin_first</span> <span class="n">j</span><span class="o">)</span>
+    <span class="k">else</span>
+      <span class="n">up_right</span> <span class="o">(</span><span class="n">fin_first</span> <span class="n">i</span><span class="o">)</span> <span class="o">(</span><span class="n">fin_second</span> <span class="n">j</span><span class="o">)</span>
+  <span class="k">else</span>
+   <span class="k">if</span> <span class="n">j</span><span class="bp">.</span><span class="n">val</span> <span class="bp">&lt;</span> <span class="n">n_left</span>
+    <span class="k">then</span>
+      <span class="n">down_left</span> <span class="o">(</span><span class="n">fin_second</span> <span class="n">i</span><span class="o">)</span>  <span class="o">(</span><span class="n">fin_first</span> <span class="n">j</span><span class="o">)</span>
+    <span class="k">else</span>
+      <span class="n">down_right</span> <span class="o">(</span><span class="n">fin_second</span> <span class="n">i</span><span class="o">)</span> <span class="o">(</span><span class="n">fin_second</span> <span class="n">j</span><span class="o">)</span>
+<span class="bp">```</span> <span class="n">app</span>
 
-Whenever I apply fin_first and fin_second, I would like to make the hypothesis "h" available based on the information in the if-condition.
+<span class="n">Whenever</span> <span class="n">I</span> <span class="n">apply</span> <span class="n">fin_first</span> <span class="n">and</span> <span class="n">fin_second</span><span class="o">,</span> <span class="n">I</span> <span class="n">would</span> <span class="n">like</span> <span class="n">to</span> <span class="n">make</span> <span class="n">the</span> <span class="kn">hypothesis</span> <span class="s2">&quot;h&quot;</span> <span class="n">available</span> <span class="n">based</span> <span class="n">on</span> <span class="n">the</span> <span class="n">information</span> <span class="k">in</span> <span class="n">the</span> <span class="k">if</span><span class="bp">-</span><span class="n">condition</span><span class="bp">.</span>
+</pre></div>
 
 #### [ Tobias Grosser (Oct 02 2018 at 20:56)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135056162):
-I feel this is a super trivial question, but I did not find a good example googling for it. Can somebody throw me the right keywords / reference?
+<p>I feel this is a super trivial question, but I did not find a good example googling for it. Can somebody throw me the right keywords / reference?</p>
 
 #### [ Rob Lewis (Oct 02 2018 at 20:59)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135056304):
-If you write `if h :  j.val < n_left then _ else _` you'll get local hypotheses with the right types in the placeholders.
+<p>If you write <code>if h :  j.val &lt; n_left then _ else _</code> you'll get local hypotheses with the right types in the placeholders.</p>
 
 #### [ Tobias Grosser (Oct 02 2018 at 21:00)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135056328):
-```lean
-test.lean:25:29: error
+<div class="codehilite"><pre><span></span><span class="n">test</span><span class="bp">.</span><span class="n">lean</span><span class="o">:</span><span class="mi">25</span><span class="o">:</span><span class="mi">29</span><span class="o">:</span> <span class="n">error</span>
 
-don't know how to synthesize placeholder
-context:
-α : Type,
-m_down m_up n_left n_right : ℕ,
-block_mx :
-  matrix (fin m_up) (fin n_left) α →
-  matrix (fin m_up) (fin n_right) α →
-  matrix (fin m_down) (fin n_left) α →
-  matrix (fin m_down) (fin n_right) α → matrix (fin (m_up + m_down)) (fin (n_left + n_right)) α,
-up_left : matrix (fin m_up) (fin n_left) α,
-up_right : matrix (fin m_up) (fin n_right) α,
-down_left : matrix (fin m_down) (fin n_left) α,
-down_right : matrix (fin m_down) (fin n_right) α,
-i : fin (m_up + m_down),
-j : fin (n_left + n_right),
-h : j.val < n_left
-⊢ j.val < n_left
-```
+<span class="n">don&#39;t</span> <span class="n">know</span> <span class="n">how</span> <span class="n">to</span> <span class="n">synthesize</span> <span class="n">placeholder</span>
+<span class="kn">context</span><span class="o">:</span>
+<span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">,</span>
+<span class="n">m_down</span> <span class="n">m_up</span> <span class="n">n_left</span> <span class="n">n_right</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span>
+<span class="n">block_mx</span> <span class="o">:</span>
+  <span class="n">matrix</span> <span class="o">(</span><span class="n">fin</span> <span class="n">m_up</span><span class="o">)</span> <span class="o">(</span><span class="n">fin</span> <span class="n">n_left</span><span class="o">)</span> <span class="n">α</span> <span class="bp">→</span>
+  <span class="n">matrix</span> <span class="o">(</span><span class="n">fin</span> <span class="n">m_up</span><span class="o">)</span> <span class="o">(</span><span class="n">fin</span> <span class="n">n_right</span><span class="o">)</span> <span class="n">α</span> <span class="bp">→</span>
+  <span class="n">matrix</span> <span class="o">(</span><span class="n">fin</span> <span class="n">m_down</span><span class="o">)</span> <span class="o">(</span><span class="n">fin</span> <span class="n">n_left</span><span class="o">)</span> <span class="n">α</span> <span class="bp">→</span>
+  <span class="n">matrix</span> <span class="o">(</span><span class="n">fin</span> <span class="n">m_down</span><span class="o">)</span> <span class="o">(</span><span class="n">fin</span> <span class="n">n_right</span><span class="o">)</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">matrix</span> <span class="o">(</span><span class="n">fin</span> <span class="o">(</span><span class="n">m_up</span> <span class="bp">+</span> <span class="n">m_down</span><span class="o">))</span> <span class="o">(</span><span class="n">fin</span> <span class="o">(</span><span class="n">n_left</span> <span class="bp">+</span> <span class="n">n_right</span><span class="o">))</span> <span class="n">α</span><span class="o">,</span>
+<span class="n">up_left</span> <span class="o">:</span> <span class="n">matrix</span> <span class="o">(</span><span class="n">fin</span> <span class="n">m_up</span><span class="o">)</span> <span class="o">(</span><span class="n">fin</span> <span class="n">n_left</span><span class="o">)</span> <span class="n">α</span><span class="o">,</span>
+<span class="n">up_right</span> <span class="o">:</span> <span class="n">matrix</span> <span class="o">(</span><span class="n">fin</span> <span class="n">m_up</span><span class="o">)</span> <span class="o">(</span><span class="n">fin</span> <span class="n">n_right</span><span class="o">)</span> <span class="n">α</span><span class="o">,</span>
+<span class="n">down_left</span> <span class="o">:</span> <span class="n">matrix</span> <span class="o">(</span><span class="n">fin</span> <span class="n">m_down</span><span class="o">)</span> <span class="o">(</span><span class="n">fin</span> <span class="n">n_left</span><span class="o">)</span> <span class="n">α</span><span class="o">,</span>
+<span class="n">down_right</span> <span class="o">:</span> <span class="n">matrix</span> <span class="o">(</span><span class="n">fin</span> <span class="n">m_down</span><span class="o">)</span> <span class="o">(</span><span class="n">fin</span> <span class="n">n_right</span><span class="o">)</span> <span class="n">α</span><span class="o">,</span>
+<span class="n">i</span> <span class="o">:</span> <span class="n">fin</span> <span class="o">(</span><span class="n">m_up</span> <span class="bp">+</span> <span class="n">m_down</span><span class="o">),</span>
+<span class="n">j</span> <span class="o">:</span> <span class="n">fin</span> <span class="o">(</span><span class="n">n_left</span> <span class="bp">+</span> <span class="n">n_right</span><span class="o">),</span>
+<span class="n">h</span> <span class="o">:</span> <span class="n">j</span><span class="bp">.</span><span class="n">val</span> <span class="bp">&lt;</span> <span class="n">n_left</span>
+<span class="err">⊢</span> <span class="n">j</span><span class="bp">.</span><span class="n">val</span> <span class="bp">&lt;</span> <span class="n">n_left</span>
+</pre></div>
 
 #### [ Tobias Grosser (Oct 02 2018 at 21:00)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135056374):
-I seem to be so close.
+<p>I seem to be so close.</p>
 
 #### [ Tobias Grosser (Oct 02 2018 at 21:00)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135056407):
-I would hope lean picks this from the context. But it does not seem to do so.
+<p>I would hope lean picks this from the context. But it does not seem to do so.</p>
 
 #### [ Patrick Massot (Oct 02 2018 at 21:01)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135056461):
-https://leanprover.github.io/theorem_proving_in_lean/type_classes.html?highlight=dite#decidable-propositions
+<p><a href="https://leanprover.github.io/theorem_proving_in_lean/type_classes.html?highlight=dite#decidable-propositions" target="_blank" title="https://leanprover.github.io/theorem_proving_in_lean/type_classes.html?highlight=dite#decidable-propositions">https://leanprover.github.io/theorem_proving_in_lean/type_classes.html?highlight=dite#decidable-propositions</a></p>
 
 #### [ Rob Lewis (Oct 02 2018 at 21:01)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135056479):
-You want Lean to fill in those arguments automatically when it finds them in the local context?
+<p>You want Lean to fill in those arguments automatically when it finds them in the local context?</p>
 
 #### [ Rob Lewis (Oct 02 2018 at 21:02)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135056539):
-You can write `def fin_first {n m} (i : fin (n + m)) {h: i.val < n . assumption}: fin (n)`
+<p>You can write <code>def fin_first {n m} (i : fin (n + m)) {h: i.val &lt; n . assumption}: fin (n)</code></p>
 
 #### [ Rob Lewis (Oct 02 2018 at 21:02)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135056555):
-(I think that's the right syntax, don't have Lean open right this second to check.)
+<p>(I think that's the right syntax, don't have Lean open right this second to check.)</p>
 
 #### [ Patrick Massot (Oct 02 2018 at 21:02)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135056569):
-binders in `def fin_first {n m} (i : fin (n + m)) {h: i.val < n}: fin (n)` are a bit strange, how `h` could be inferred from the explicit arguments?
+<p>binders in <code>def fin_first {n m} (i : fin (n + m)) {h: i.val &lt; n}: fin (n)</code> are a bit strange, how <code>h</code> could be inferred from the explicit arguments?</p>
 
 #### [ Tobias Grosser (Oct 02 2018 at 21:03)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135056585):
-I have no idea what I am doing here.
+<p>I have no idea what I am doing here.</p>
 
 #### [ Patrick Massot (Oct 02 2018 at 21:03)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135056588):
-Of course Rob's solution should work in your use case
+<p>Of course Rob's solution should work in your use case</p>
 
 #### [ Tobias Grosser (Oct 02 2018 at 21:03)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135056601):
-I hoped "{" and "}" would create a "free" argument
+<p>I hoped "{" and "}" would create a "free" argument</p>
 
 #### [ Tobias Grosser (Oct 02 2018 at 21:03)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135056610):
-Which would be filled in if available in the local context.
+<p>Which would be filled in if available in the local context.</p>
 
 #### [ Tobias Grosser (Oct 02 2018 at 21:04)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135056664):
-Rob suggested to use "assumption", right?
+<p>Rob suggested to use "assumption", right?</p>
 
 #### [ Tobias Grosser (Oct 02 2018 at 21:04)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135056695):
-This gives:
-```lean
-test.lean:7:52: error
+<p>This gives:</p>
+<div class="codehilite"><pre><span></span><span class="n">test</span><span class="bp">.</span><span class="n">lean</span><span class="o">:</span><span class="mi">7</span><span class="o">:</span><span class="mi">52</span><span class="o">:</span> <span class="n">error</span>
 
-invalid declaration, '}' expected
-test.lean:7:55: error
+<span class="n">invalid</span> <span class="n">declaration</span><span class="o">,</span> <span class="err">&#39;</span><span class="o">}</span><span class="err">&#39;</span> <span class="n">expected</span>
+<span class="n">test</span><span class="bp">.</span><span class="n">lean</span><span class="o">:</span><span class="mi">7</span><span class="o">:</span><span class="mi">55</span><span class="o">:</span> <span class="n">error</span>
 
-command expected
-```
+<span class="n">command</span> <span class="n">expected</span>
+</pre></div>
 
 #### [ Tobias Grosser (Oct 02 2018 at 21:05)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135056704):
-Will  ook for assumption in the lean doc
+<p>Will  ook for assumption in the lean doc</p>
 
 #### [ Rob Lewis (Oct 02 2018 at 21:05)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135056711):
-{ } creates implicit arguments. They're arguments that can be filled in completely from other arguments, basically. Lean won't automatically search your local context for matches, because (1) there could be tons of stuff in the context, and (2) there could be multiple matches there.
+<p>{ } creates implicit arguments. They're arguments that can be filled in completely from other arguments, basically. Lean won't automatically search your local context for matches, because (1) there could be tons of stuff in the context, and (2) there could be multiple matches there.</p>
 
 #### [ Tobias Grosser (Oct 02 2018 at 21:06)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135056784):
-I see. How do I tell lean which matches I want? Should I use ! to make the parameters explicit and then provide the ones needed explicitly?
+<p>I see. How do I tell lean which matches I want? Should I use ! to make the parameters explicit and then provide the ones needed explicitly?</p>
 
 #### [ Rob Lewis (Oct 02 2018 at 21:06)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135056795):
-Here's the correct syntax for using auto parameters like my suggestion:
-```lean
-def f (n : ℕ) (h : n > 1 . tactic.assumption) : true := trivial
+<p>Here's the correct syntax for using auto parameters like my suggestion:</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">f</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">&gt;</span> <span class="mi">1</span> <span class="bp">.</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">assumption</span><span class="o">)</span> <span class="o">:</span> <span class="n">true</span> <span class="o">:=</span> <span class="n">trivial</span>
 
-example (n : ℕ) : true :=
-if h : n > 1 then f n else trivial
-```
+<span class="kn">example</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">true</span> <span class="o">:=</span>
+<span class="k">if</span> <span class="n">h</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">&gt;</span> <span class="mi">1</span> <span class="k">then</span> <span class="n">f</span> <span class="n">n</span> <span class="k">else</span> <span class="n">trivial</span>
+</pre></div>
 
 #### [ Rob Lewis (Oct 02 2018 at 21:08)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135056932):
-With auto parameters, you give a tactic that will be executed to fill in that argument. So using `tactic.assumption` with an auto param will try to find something in the context that will work.
+<p>With auto parameters, you give a tactic that will be executed to fill in that argument. So using <code>tactic.assumption</code> with an auto param will try to find something in the context that will work.</p>
 
 #### [ Rob Lewis (Oct 02 2018 at 21:10)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135057019):
-```quote
-I see. How do I tell lean which matches I want? Should I use ! to make the parameters explicit and then provide the ones needed explicitly?
-```
-I'm not sure exactly what you mean. It's usually clear in a signature which arguments are inferrable from others, assuming the declaration is fully applied. The custom is to make as much implicit as you can.
+<blockquote>
+<p>I see. How do I tell lean which matches I want? Should I use ! to make the parameters explicit and then provide the ones needed explicitly?</p>
+</blockquote>
+<p>I'm not sure exactly what you mean. It's usually clear in a signature which arguments are inferrable from others, assuming the declaration is fully applied. The custom is to make as much implicit as you can.</p>
 
 #### [ Rob Lewis (Oct 02 2018 at 21:10)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135057088):
-There's no ! syntax anymore, that was only in Lean 2. But you can use placeholders `_` to ask the elaborator to fill in explicit arguments.
+<p>There's no ! syntax anymore, that was only in Lean 2. But you can use placeholders <code>_</code> to ask the elaborator to fill in explicit arguments.</p>
 
 #### [ Tobias Grosser (Oct 02 2018 at 21:13)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135057250):
-Great.
+<p>Great.</p>
 
 #### [ Tobias Grosser (Oct 02 2018 at 21:13)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135057251):
-I got this working.
+<p>I got this working.</p>
 
 #### [ Tobias Grosser (Oct 02 2018 at 21:14)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135057301):
-I previously used "{}" around the assumption tactic, but I need to use "()"
+<p>I previously used "{}" around the assumption tactic, but I need to use "()"</p>
 
 #### [ Rob Lewis (Oct 02 2018 at 21:15)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135057335):
-Great! Sorry, I should have checked before I wrote it with {}, heh.
+<p>Great! Sorry, I should have checked before I wrote it with {}, heh.</p>
 
 #### [ Tobias Grosser (Oct 02 2018 at 21:16)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135057408):
-These seem to be really basic questions, but I have now only a last issue.
+<p>These seem to be really basic questions, but I have now only a last issue.</p>
 
 #### [ Tobias Grosser (Oct 02 2018 at 21:16)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135057411):
-h_j : ¬j.val < n_left
-⊢ j.val ≥ n_left
+<p>h_j : ¬j.val &lt; n_left<br>
+⊢ j.val ≥ n_left</p>
 
 #### [ Tobias Grosser (Oct 02 2018 at 21:16)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135057416):
-Is what I see in the else branch.
+<p>Is what I see in the else branch.</p>
 
 #### [ Tobias Grosser (Oct 02 2018 at 21:16)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135057421):
-This seems to be an obvious rewrite.
+<p>This seems to be an obvious rewrite.</p>
 
 #### [ Tobias Grosser (Oct 02 2018 at 21:16)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135057431):
-Unfortunately, I don't understand where I would even insert my tactic to do the rewrite.
+<p>Unfortunately, I don't understand where I would even insert my tactic to do the rewrite.</p>
 
 #### [ Rob Lewis (Oct 02 2018 at 21:16)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135057433):
-`le_of_not_gt`
+<p><code>le_of_not_gt</code></p>
 
 #### [ Patrick Massot (Oct 02 2018 at 21:17)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135057443):
-No you need a lemma here
+<p>No you need a lemma here</p>
 
 #### [ Patrick Massot (Oct 02 2018 at 21:17)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135057446):
-Yes, that lemma
+<p>Yes, that lemma</p>
 
 #### [ Rob Lewis (Oct 02 2018 at 21:17)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135057473):
-Are you using the auto param trick? Because I see that this might complicate things a bit.
+<p>Are you using the auto param trick? Because I see that this might complicate things a bit.</p>
 
 #### [ Tobias Grosser (Oct 02 2018 at 21:19)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135057563):
-I currently write "up_right (fin_first i) (fin_second j (begin rw of_not_gt at h_j end))"
+<p>I currently write "up_right (fin_first i) (fin_second j (begin rw of_not_gt at h_j end))"</p>
 
 #### [ Tobias Grosser (Oct 02 2018 at 21:19)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135057567):
-```lean
-up_right (fin_first i) (fin_second j (begin rw of_not_gt at h_j end))
-```
+<div class="codehilite"><pre><span></span><span class="n">up_right</span> <span class="o">(</span><span class="n">fin_first</span> <span class="n">i</span><span class="o">)</span> <span class="o">(</span><span class="n">fin_second</span> <span class="n">j</span> <span class="o">(</span><span class="k">begin</span> <span class="n">rw</span> <span class="n">of_not_gt</span> <span class="n">at</span> <span class="n">h_j</span> <span class="kn">end</span><span class="o">))</span>
+</pre></div>
 
 #### [ Tobias Grosser (Oct 02 2018 at 21:20)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135057621):
-Which seems to not type-check even syntactically.
+<p>Which seems to not type-check even syntactically.</p>
 
 #### [ Tobias Grosser (Oct 02 2018 at 21:20)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135057635):
-I feel I mix proofs and normal programs beyond what is reasonable.
+<p>I feel I mix proofs and normal programs beyond what is reasonable.</p>
 
 #### [ Tobias Grosser (Oct 02 2018 at 21:22)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135057762):
-Also, as a lemma I seem to need "ge_of_not_lt", but I can fix this.
+<p>Also, as a lemma I seem to need "ge_of_not_lt", but I can fix this.</p>
 
 #### [ Patrick Massot (Oct 02 2018 at 21:23)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135057808):
-```lean
-meta def tobias : tactic unit :=
-`[apply le_of_not_gt,  assumption] <|>  `[assumption]
+<div class="codehilite"><pre><span></span><span class="n">meta</span> <span class="n">def</span> <span class="n">tobias</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
+<span class="bp">`</span><span class="o">[</span><span class="n">apply</span> <span class="n">le_of_not_gt</span><span class="o">,</span>  <span class="n">assumption</span><span class="o">]</span> <span class="bp">&lt;|&gt;</span>  <span class="bp">`</span><span class="o">[</span><span class="n">assumption</span><span class="o">]</span>
 
-def f (n : ℕ) (h : n ≤ 1 . tobias) : true := trivial
+<span class="n">def</span> <span class="n">f</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">≤</span> <span class="mi">1</span> <span class="bp">.</span> <span class="n">tobias</span><span class="o">)</span> <span class="o">:</span> <span class="n">true</span> <span class="o">:=</span> <span class="n">trivial</span>
 
-example (n : ℕ) : true :=
-if h : ¬ n > 1 then f n else trivial
+<span class="kn">example</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">true</span> <span class="o">:=</span>
+<span class="k">if</span> <span class="n">h</span> <span class="o">:</span> <span class="bp">¬</span> <span class="n">n</span> <span class="bp">&gt;</span> <span class="mi">1</span> <span class="k">then</span> <span class="n">f</span> <span class="n">n</span> <span class="k">else</span> <span class="n">trivial</span>
 
-example (n : ℕ) : true :=
-if h :  n ≤ 1 then f n else trivial
-```
+<span class="kn">example</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">true</span> <span class="o">:=</span>
+<span class="k">if</span> <span class="n">h</span> <span class="o">:</span>  <span class="n">n</span> <span class="bp">≤</span> <span class="mi">1</span> <span class="k">then</span> <span class="n">f</span> <span class="n">n</span> <span class="k">else</span> <span class="n">trivial</span>
+</pre></div>
 
 #### [ Rob Lewis (Oct 02 2018 at 21:24)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135057878):
-Haha, you beat me to it, I just wrote almost exactly the same thing.
+<p>Haha, you beat me to it, I just wrote almost exactly the same thing.</p>
 
 #### [ Patrick Massot (Oct 02 2018 at 21:24)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135057900):
-And my daughter tried to help you
+<p>And my daughter tried to help you</p>
 
 #### [ Tobias Grosser (Oct 02 2018 at 21:25)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135057932):
-This is very much appreciated!
+<p>This is very much appreciated!</p>
 
 #### [ Tobias Grosser (Oct 02 2018 at 21:25)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135057944):
-The full family working on lean!
+<p>The full family working on lean!</p>
 
 #### [ Tobias Grosser (Oct 02 2018 at 21:25)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135057963):
-What I understand is that I can only provide tactics at function definition, not at the call-site.
+<p>What I understand is that I can only provide tactics at function definition, not at the call-site.</p>
 
 #### [ Rob Lewis (Oct 02 2018 at 21:26)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135058030):
-Oh, you can certainly provide them at the call site too.
+<p>Oh, you can certainly provide them at the call site too.</p>
 
 #### [ Tobias Grosser (Oct 02 2018 at 21:26)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135058039):
-In this case, I could just change the hypothesis of fin_second to what I want.
+<p>In this case, I could just change the hypothesis of fin_second to what I want.</p>
 
 #### [ Tobias Grosser (Oct 02 2018 at 21:26)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135058056):
-I tried to avoid this, as I felt the hypothesis that I stated is more canonical.
+<p>I tried to avoid this, as I felt the hypothesis that I stated is more canonical.</p>
 
 #### [ Tobias Grosser (Oct 02 2018 at 21:26)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135058066):
-Cool so how would I add them to the call site?
+<p>Cool so how would I add them to the call site?</p>
 
 #### [ Patrick Massot (Oct 02 2018 at 21:27)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135058097):
-I meant my daughter tried to help Rob winning the race
+<p>I meant my daughter tried to help Rob winning the race</p>
 
 #### [ Rob Lewis (Oct 02 2018 at 21:27)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135058115):
-If you make the inequality hypotheses to `fin_first` and `fin_second` explicit arguments, using `(h : i.val < n)`, then you can apply it using `fin_first i (by assumption)`.
+<p>If you make the inequality hypotheses to <code>fin_first</code> and <code>fin_second</code> explicit arguments, using <code>(h : i.val &lt; n)</code>, then you can apply it using <code>fin_first i (by assumption)</code>.</p>
 
 #### [ Rob Lewis (Oct 02 2018 at 21:28)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135058182):
-Or `by tobias` in this case.
+<p>Or <code>by tobias</code> in this case.</p>
 
 #### [ Patrick Massot (Oct 02 2018 at 21:30)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135058314):
-More seriously, the basics of implicit arguments goes like this: say you have a lemma (or function) with arguments `(f : a -> b) (hf : continuous f)`. Then having `hf` forces the value of `f`, so you can mark `f` as implicit by changing the declaration to `{f : a -> b} (hf : continuous f)`. This was you can provide only `hf` when applying the lemma and Lean will figure out `f`. In your case Lean had no hope to figure out `h` from other arguments so you need to keep it explicit, or use auto-param like in Rob's solution.
+<p>More seriously, the basics of implicit arguments goes like this: say you have a lemma (or function) with arguments <code>(f : a -&gt; b) (hf : continuous f)</code>. Then having <code>hf</code> forces the value of <code>f</code>, so you can mark <code>f</code> as implicit by changing the declaration to <code>{f : a -&gt; b} (hf : continuous f)</code>. This was you can provide only <code>hf</code> when applying the lemma and Lean will figure out <code>f</code>. In your case Lean had no hope to figure out <code>h</code> from other arguments so you need to keep it explicit, or use auto-param like in Rob's solution.</p>
 
 #### [ Tobias Grosser (Oct 02 2018 at 21:33)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135058479):
-I see.
+<p>I see.</p>
 
 #### [ Tobias Grosser (Oct 02 2018 at 21:33)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135058485):
-Got it.
+<p>Got it.</p>
 
 #### [ Tobias Grosser (Oct 02 2018 at 21:33)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135058505):
-I can now successfully forward the hypothesis.
+<p>I can now successfully forward the hypothesis.</p>
 
 #### [ Tobias Grosser (Oct 02 2018 at 21:33)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135058510):
-Thanks again, I learned sth new.
+<p>Thanks again, I learned sth new.</p>
 
 #### [ Tobias Grosser (Oct 02 2018 at 21:34)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135058568):
-For completeness, this is how my code looks like:
+<p>For completeness, this is how my code looks like:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">ring_theory</span><span class="bp">.</span><span class="n">matrix</span>
 
-```lean
-import ring_theory.matrix
+<span class="kn">variables</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">{</span><span class="n">n</span> <span class="n">m</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">[</span><span class="n">fintype</span> <span class="n">n</span><span class="o">]</span> <span class="o">[</span><span class="n">fintype</span> <span class="n">m</span><span class="o">]</span>
 
-variables {α : Type} {n m : Type} [fintype n] [fintype m]
+<span class="n">local</span> <span class="kn">infixl</span> <span class="bp">`</span> <span class="bp">*</span><span class="err">ₘ</span> <span class="bp">`</span> <span class="o">:</span> <span class="mi">70</span> <span class="o">:=</span> <span class="n">matrix</span><span class="bp">.</span><span class="n">mul</span>
 
-local infixl ` *ₘ ` : 70 := matrix.mul
+<span class="n">def</span> <span class="n">fin_first</span> <span class="o">{</span><span class="n">n</span> <span class="n">m</span><span class="o">}</span> <span class="o">(</span><span class="n">i</span> <span class="o">:</span> <span class="n">fin</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="n">m</span><span class="o">))</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">i</span><span class="bp">.</span><span class="n">val</span> <span class="bp">&lt;</span> <span class="n">n</span> <span class="o">):</span> <span class="n">fin</span> <span class="o">(</span><span class="n">n</span><span class="o">)</span> <span class="o">:=</span>
+<span class="bp">⟨</span><span class="n">i</span><span class="bp">.</span><span class="mi">1</span><span class="o">,</span> <span class="k">begin</span> <span class="n">apply</span> <span class="n">h</span> <span class="kn">end</span><span class="bp">⟩</span>
 
-def fin_first {n m} (i : fin (n + m)) (h : i.val < n ): fin (n) :=
-⟨i.1, begin apply h end⟩
+<span class="n">def</span> <span class="n">fin_second</span> <span class="o">{</span><span class="n">n</span> <span class="n">m</span><span class="o">}</span> <span class="o">(</span><span class="n">i</span> <span class="o">:</span> <span class="n">fin</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="n">m</span><span class="o">))</span> <span class="o">(</span><span class="n">h</span><span class="o">:</span> <span class="n">i</span><span class="bp">.</span><span class="n">val</span> <span class="bp">&gt;=</span> <span class="n">n</span><span class="o">):</span> <span class="n">fin</span> <span class="o">(</span><span class="n">m</span><span class="o">)</span> <span class="o">:=</span>
+<span class="bp">⟨</span><span class="n">i</span><span class="bp">.</span><span class="mi">1</span> <span class="bp">-</span> <span class="n">n</span><span class="o">,</span> <span class="n">sorry</span><span class="bp">⟩</span>
 
-def fin_second {n m} (i : fin (n + m)) (h: i.val >= n): fin (m) :=
-⟨i.1 - n, sorry⟩
-
-def block_mx {m_down m_up n_left n_right: nat} :
-  matrix (fin m_up) (fin n_left) α →
-  matrix (fin m_up) (fin n_right) α →
-  matrix (fin m_down) (fin n_left) α →
-  matrix (fin m_down) (fin n_right) α →
-  matrix (fin (m_up + m_down)) (fin (n_left + n_right)) α
-| up_left up_right down_left down_right := 
-λ i j,
- if h_i: i.val < m_up
- then 
-    if h_j: j.val < n_left
-    then
-      up_left (fin_first i (by assumption)) (fin_first j (by assumption))
-    else
-      up_right (fin_first i (by assumption)) (fin_second j (by apply le_of_not_gt; assumption))
-  else
-   if h_j: j.val < n_left
-    then
-      down_left (fin_second i (by apply le_of_not_gt; assumption))  (fin_first j (by assumption))
-    else
-      down_right (fin_second i (by apply le_of_not_gt; assumption)) (fin_second j (by apply le_of_not_gt; assumption))
-```
+<span class="n">def</span> <span class="n">block_mx</span> <span class="o">{</span><span class="n">m_down</span> <span class="n">m_up</span> <span class="n">n_left</span> <span class="n">n_right</span><span class="o">:</span> <span class="n">nat</span><span class="o">}</span> <span class="o">:</span>
+  <span class="n">matrix</span> <span class="o">(</span><span class="n">fin</span> <span class="n">m_up</span><span class="o">)</span> <span class="o">(</span><span class="n">fin</span> <span class="n">n_left</span><span class="o">)</span> <span class="n">α</span> <span class="bp">→</span>
+  <span class="n">matrix</span> <span class="o">(</span><span class="n">fin</span> <span class="n">m_up</span><span class="o">)</span> <span class="o">(</span><span class="n">fin</span> <span class="n">n_right</span><span class="o">)</span> <span class="n">α</span> <span class="bp">→</span>
+  <span class="n">matrix</span> <span class="o">(</span><span class="n">fin</span> <span class="n">m_down</span><span class="o">)</span> <span class="o">(</span><span class="n">fin</span> <span class="n">n_left</span><span class="o">)</span> <span class="n">α</span> <span class="bp">→</span>
+  <span class="n">matrix</span> <span class="o">(</span><span class="n">fin</span> <span class="n">m_down</span><span class="o">)</span> <span class="o">(</span><span class="n">fin</span> <span class="n">n_right</span><span class="o">)</span> <span class="n">α</span> <span class="bp">→</span>
+  <span class="n">matrix</span> <span class="o">(</span><span class="n">fin</span> <span class="o">(</span><span class="n">m_up</span> <span class="bp">+</span> <span class="n">m_down</span><span class="o">))</span> <span class="o">(</span><span class="n">fin</span> <span class="o">(</span><span class="n">n_left</span> <span class="bp">+</span> <span class="n">n_right</span><span class="o">))</span> <span class="n">α</span>
+<span class="bp">|</span> <span class="n">up_left</span> <span class="n">up_right</span> <span class="n">down_left</span> <span class="n">down_right</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="n">i</span> <span class="n">j</span><span class="o">,</span>
+ <span class="k">if</span> <span class="n">h_i</span><span class="o">:</span> <span class="n">i</span><span class="bp">.</span><span class="n">val</span> <span class="bp">&lt;</span> <span class="n">m_up</span>
+ <span class="k">then</span>
+    <span class="k">if</span> <span class="n">h_j</span><span class="o">:</span> <span class="n">j</span><span class="bp">.</span><span class="n">val</span> <span class="bp">&lt;</span> <span class="n">n_left</span>
+    <span class="k">then</span>
+      <span class="n">up_left</span> <span class="o">(</span><span class="n">fin_first</span> <span class="n">i</span> <span class="o">(</span><span class="k">by</span> <span class="n">assumption</span><span class="o">))</span> <span class="o">(</span><span class="n">fin_first</span> <span class="n">j</span> <span class="o">(</span><span class="k">by</span> <span class="n">assumption</span><span class="o">))</span>
+    <span class="k">else</span>
+      <span class="n">up_right</span> <span class="o">(</span><span class="n">fin_first</span> <span class="n">i</span> <span class="o">(</span><span class="k">by</span> <span class="n">assumption</span><span class="o">))</span> <span class="o">(</span><span class="n">fin_second</span> <span class="n">j</span> <span class="o">(</span><span class="k">by</span> <span class="n">apply</span> <span class="n">le_of_not_gt</span><span class="bp">;</span> <span class="n">assumption</span><span class="o">))</span>
+  <span class="k">else</span>
+   <span class="k">if</span> <span class="n">h_j</span><span class="o">:</span> <span class="n">j</span><span class="bp">.</span><span class="n">val</span> <span class="bp">&lt;</span> <span class="n">n_left</span>
+    <span class="k">then</span>
+      <span class="n">down_left</span> <span class="o">(</span><span class="n">fin_second</span> <span class="n">i</span> <span class="o">(</span><span class="k">by</span> <span class="n">apply</span> <span class="n">le_of_not_gt</span><span class="bp">;</span> <span class="n">assumption</span><span class="o">))</span>  <span class="o">(</span><span class="n">fin_first</span> <span class="n">j</span> <span class="o">(</span><span class="k">by</span> <span class="n">assumption</span><span class="o">))</span>
+    <span class="k">else</span>
+      <span class="n">down_right</span> <span class="o">(</span><span class="n">fin_second</span> <span class="n">i</span> <span class="o">(</span><span class="k">by</span> <span class="n">apply</span> <span class="n">le_of_not_gt</span><span class="bp">;</span> <span class="n">assumption</span><span class="o">))</span> <span class="o">(</span><span class="n">fin_second</span> <span class="n">j</span> <span class="o">(</span><span class="k">by</span> <span class="n">apply</span> <span class="n">le_of_not_gt</span><span class="bp">;</span> <span class="n">assumption</span><span class="o">))</span>
+</pre></div>
 
 #### [ Rob Lewis (Oct 02 2018 at 21:34)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135058597):
-It's not that common to use auto params, but this is actually a pretty good application. `linarith` would be a reasonable auto param too if it handled negations of inequalities.
+<p>It's not that common to use auto params, but this is actually a pretty good application. <code>linarith</code> would be a reasonable auto param too if it handled negations of inequalities.</p>
 
 #### [ Patrick Massot (Oct 02 2018 at 21:35)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135058621):
-I can feel the approximate SMT solver temptation here
+<p>I can feel the approximate SMT solver temptation here</p>
 
 #### [ Tobias Grosser (Oct 02 2018 at 21:35)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135058629):
-:D
+<p>:D</p>
 
 #### [ Patrick Massot (Oct 02 2018 at 21:35)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135058649):
-https://leanprover.zulipchat.com/#narrow/stream/113488-general/subject/linarith.20.26.20nat/near/134919571
+<p><a href="#narrow/stream/113488-general/subject/linarith.20.26.20nat/near/134919571" title="#narrow/stream/113488-general/subject/linarith.20.26.20nat/near/134919571">https://leanprover.zulipchat.com/#narrow/stream/113488-general/subject/linarith.20.26.20nat/near/134919571</a></p>
 
 #### [ Tobias Grosser (Oct 02 2018 at 21:35)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135058650):
-I certainly would like to explore more powerful linarithmetic tactics here. But this is a separate discussion.
+<p>I certainly would like to explore more powerful linarithmetic tactics here. But this is a separate discussion.</p>
 
 #### [ Tobias Grosser (Oct 02 2018 at 21:36)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135058720):
-I know, we have a solver for full Presburger arithmetic based on dual simplex. Eventually, this is what I would like to understand if we can make it work in lean.
+<p>I know, we have a solver for full Presburger arithmetic based on dual simplex. Eventually, this is what I would like to understand if we can make it work in lean.</p>
 
 #### [ Rob Lewis (Oct 02 2018 at 22:19)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135061274):
-```quote
-I can feel the approximate SMT solver temptation here
-```
-https://github.com/leanprover/mathlib/pull/384
+<blockquote>
+<p>I can feel the approximate SMT solver temptation here</p>
+</blockquote>
+<p><a href="https://github.com/leanprover/mathlib/pull/384" target="_blank" title="https://github.com/leanprover/mathlib/pull/384">https://github.com/leanprover/mathlib/pull/384</a></p>
 
 #### [ Tobias Grosser (Oct 03 2018 at 09:55)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135087439):
-Amazing. This got even merged already. Will try to use it.
+<p>Amazing. This got even merged already. Will try to use it.</p>
 
 #### [ Tobias Grosser (Oct 03 2018 at 09:59)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135087599):
-I fact, i tried to use it already and it did not work. Thought I need to dig deeper, but then I found this in the tactic description:  "In particular, it will not work on nat."
+<p>I fact, i tried to use it already and it did not work. Thought I need to dig deeper, but then I found this in the tactic description:  "In particular, it will not work on nat."</p>
 
 #### [ Tobias Grosser (Oct 03 2018 at 10:00)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135087622):
-Seems that's a problem in my case. Any reason why it would not work?
+<p>Seems that's a problem in my case. Any reason why it would not work?</p>
 
 #### [ Rob Lewis (Oct 03 2018 at 10:59)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Deriving%20hypothesis%20from%20if%20statements/near/135089959):
-Oops, I guess the description is outdated. It will work on `nat`, but it isn't complete (it's just doing Fourier Motzkin elimination). It also doesn't know about nat subtraction, which could be a problem in your case.
+<p>Oops, I guess the description is outdated. It will work on <code>nat</code>, but it isn't complete (it's just doing Fourier Motzkin elimination). It also doesn't know about nat subtraction, which could be a problem in your case.</p>
 
 
 {% endraw %}

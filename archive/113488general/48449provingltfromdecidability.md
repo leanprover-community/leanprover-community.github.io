@@ -12,549 +12,536 @@ permalink: archive/113488general/48449provingltfromdecidability.html
 
 {% raw %}
 #### [ Adam Kurkiewicz (Apr 05 2018 at 10:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661129):
-I'd like to show the following lemma:
-
-```
-def  big_not_zero (a : nat) (P : 1  < a) : a ≠  0  :=
-λ Pp : a =  0, have olt0 : 1  <  0, from eq.subst Pp P,
+<p>I'd like to show the following lemma:</p>
+<div class="codehilite"><pre><span></span>def  big_not_zero (a : nat) (P : 1  &lt; a) : a ≠  0  :=
+λ Pp : a =  0, have olt0 : 1  &lt;  0, from eq.subst Pp P,
 false.elim (nat.decidable_lt 1  0)
-```
+</pre></div>
 
-Concretely, I'd like to get a proof of false from `nat.decidable_lt 1 0`. But I don't understand how to use decidabilty in lean.
+
+<p>Concretely, I'd like to get a proof of false from <code>nat.decidable_lt 1 0</code>. But I don't understand how to use decidabilty in lean.</p>
 
 #### [ Kevin Buzzard (Apr 05 2018 at 10:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661254):
-`example : 1  <  0  → false := dec_trivial`
+<p><code>example : 1  &lt;  0  → false := dec_trivial</code></p>
 
 #### [ Kevin Buzzard (Apr 05 2018 at 10:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661257):
-I'm not saying these things are easy to use though :-)
+<p>I'm not saying these things are easy to use though :-)</p>
 
 #### [ Kevin Buzzard (Apr 05 2018 at 10:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661312):
-```
-def  big_not_zero (a : nat) (P : 1  < a) : a ≠  0  :=
-λ Pp : a =  0, have olt0 : 1  <  0, from eq.subst Pp P,
-(show  1  <  0  → false, by exact dec_trivial) olt0
-```
+<div class="codehilite"><pre><span></span>def  big_not_zero (a : nat) (P : 1  &lt; a) : a ≠  0  :=
+λ Pp : a =  0, have olt0 : 1  &lt;  0, from eq.subst Pp P,
+(show  1  &lt;  0  → false, by exact dec_trivial) olt0
+</pre></div>
 
 #### [ Kevin Buzzard (Apr 05 2018 at 10:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661314):
-and as you can see, I'm certainly no master of them myself.
+<p>and as you can see, I'm certainly no master of them myself.</p>
 
 #### [ Kenny Lau (Apr 05 2018 at 10:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661362):
-```
-def big_not_zero (a : nat) (P : 1 < a) : a ≠ 0 :=
+<div class="codehilite"><pre><span></span>def big_not_zero (a : nat) (P : 1 &lt; a) : a ≠ 0 :=
 λ h, nat.not_lt_zero 1 $ h ▸ P
+</pre></div>
 
 #### [ Kenny Lau (Apr 05 2018 at 10:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661363):
-\> implying I'm a master of them
+<p>\&gt; implying I'm a master of them</p>
 
 #### [ Kevin Buzzard (Apr 05 2018 at 10:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661364):
-:-)
+<p>:-)</p>
 
 #### [ Adam Kurkiewicz (Apr 05 2018 at 10:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661365):
-Thank you! What is `exact`?
+<p>Thank you! What is <code>exact</code>?</p>
 
 #### [ Kevin Buzzard (Apr 05 2018 at 10:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661370):
-`by` puts me into tactic mode
+<p><code>by</code> puts me into tactic mode</p>
 
 #### [ Kevin Buzzard (Apr 05 2018 at 10:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661371):
-`exact` is a tactic
+<p><code>exact</code> is a tactic</p>
 
 #### [ Kenny Lau (Apr 05 2018 at 10:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661372):
-@**Adam Kurkiewicz** just do `from dec_trivial` instead of `by exact dec_trivial`
+<p><span class="user-mention" data-user-id="111040">@Adam Kurkiewicz</span> just do <code>from dec_trivial</code> instead of <code>by exact dec_trivial</code></p>
 
 #### [ Kenny Lau (Apr 05 2018 at 10:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661373):
-there's no need to go into tactic mode
+<p>there's no need to go into tactic mode</p>
 
 #### [ Kevin Buzzard (Apr 05 2018 at 10:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661374):
-I have trouble getting out of tactic mode
+<p>I have trouble getting out of tactic mode</p>
 
 #### [ Adam Kurkiewicz (Apr 05 2018 at 10:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661415):
-@**Kenny Lau** not working ` exact tactic failed, type mismatch, given expression has type `
+<p><span class="user-mention" data-user-id="110064">@Kenny Lau</span> not working <code> exact tactic failed, type mismatch, given expression has type </code></p>
 
 #### [ Kevin Buzzard (Apr 05 2018 at 10:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661418):
-```
-def  big_not_zero (a : nat) (P : 1  < a) : a ≠  0  :=
-λ Pp : a =  0, have olt0 : 1  <  0, from eq.subst Pp P,
-(show  1  <  0  → false, from dec_trivial) olt0
-```
+<div class="codehilite"><pre><span></span>def  big_not_zero (a : nat) (P : 1  &lt; a) : a ≠  0  :=
+λ Pp : a =  0, have olt0 : 1  &lt;  0, from eq.subst Pp P,
+(show  1  &lt;  0  → false, from dec_trivial) olt0
+</pre></div>
 
 #### [ Kevin Buzzard (Apr 05 2018 at 10:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661421):
-works for me
+<p>works for me</p>
 
 #### [ Adam Kurkiewicz (Apr 05 2018 at 10:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661422):
-nevermind, that works.
+<p>nevermind, that works.</p>
 
 #### [ Adam Kurkiewicz (Apr 05 2018 at 10:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661436):
-I'm surprised this is not working
-
-
-```
-def  big_not_zero (a : nat) (P : 1  < a) : a ≠  0  :=
-λ Pp : a =  0, have olt0 : 1  <  0, from eq.subst Pp P,
+<p>I'm surprised this is not working</p>
+<div class="codehilite"><pre><span></span>def  big_not_zero (a : nat) (P : 1  &lt; a) : a ≠  0  :=
+λ Pp : a =  0, have olt0 : 1  &lt;  0, from eq.subst Pp P,
 dec_trivial olt0
-```
+</pre></div>
 
 #### [ Kevin Buzzard (Apr 05 2018 at 10:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661438):
-```
-def  big_not_zero (a : nat) (P : 1  < a) : a ≠  0  :=
+<div class="codehilite"><pre><span></span>def  big_not_zero (a : nat) (P : 1  &lt; a) : a ≠  0  :=
 begin
 intro H,
 rw H at P,
 revert P,
 exact dec_trivial
 end
-```
+</pre></div>
 
 #### [ Kevin Buzzard (Apr 05 2018 at 10:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661439):
-aah
+<p>aah</p>
 
 #### [ Kevin Buzzard (Apr 05 2018 at 10:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661441):
-tactic mode
+<p>tactic mode</p>
 
 #### [ Kevin Buzzard (Apr 05 2018 at 10:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661481):
-makes it all look so easy
+<p>makes it all look so easy</p>
 
 #### [ Kenny Lau (Apr 05 2018 at 10:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661486):
-```quote
-I'm surprised this is not working
-```
-
-```
-def  big_not_zero (a : nat) (P : 1  < a) : a ≠  0  :=
-λ Pp : a =  0, have olt0 : 1  <  0, from eq.subst Pp P,
+<blockquote>
+<p>I'm surprised this is not working</p>
+</blockquote>
+<div class="codehilite"><pre><span></span>def  big_not_zero (a : nat) (P : 1  &lt; a) : a ≠  0  :=
+λ Pp : a =  0, have olt0 : 1  &lt;  0, from eq.subst Pp P,
 dec_trivial olt0
-```
-`dec_trivial` takes no argument
+</pre></div>
+
+
+<p><code>dec_trivial</code> takes no argument</p>
 
 #### [ Adam Kurkiewicz (Apr 05 2018 at 10:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661492):
-@**Kevin Buzzard**  Where did you learn tactic mode from? last few chapters of lean tutorial?
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span>  Where did you learn tactic mode from? last few chapters of lean tutorial?</p>
 
 #### [ Kevin Buzzard (Apr 05 2018 at 10:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661494):
-Tactic mode chapter
+<p>Tactic mode chapter</p>
 
 #### [ Kevin Buzzard (Apr 05 2018 at 10:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661499):
-I have no idea why TPIL spends so long teaching people term mode
+<p>I have no idea why TPIL spends so long teaching people term mode</p>
 
 #### [ Adam Kurkiewicz (Apr 05 2018 at 10:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661500):
-Fair enough, I didn't last that long :D
+<p>Fair enough, I didn't last that long :D</p>
 
 #### [ Kevin Buzzard (Apr 05 2018 at 10:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661501):
-For a beginner tactic mode is the bomb
+<p>For a beginner tactic mode is the bomb</p>
 
 #### [ Kevin Buzzard (Apr 05 2018 at 10:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661504):
-you can see what you're doing at all times
+<p>you can see what you're doing at all times</p>
 
 #### [ Kevin Buzzard (Apr 05 2018 at 10:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661544):
-what the goal is, what the hypotheses are
+<p>what the goal is, what the hypotheses are</p>
 
 #### [ Kevin Buzzard (Apr 05 2018 at 10:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661547):
-and you can try simp on every line in case it does the job
+<p>and you can try simp on every line in case it does the job</p>
 
 #### [ Adam Kurkiewicz (Apr 05 2018 at 10:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661550):
-I like term mode, at least I have an illusion I understand what's going on :)
+<p>I like term mode, at least I have an illusion I understand what's going on :)</p>
 
 #### [ Kevin Buzzard (Apr 05 2018 at 10:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661553):
-you have far more powerful tools available to you in tactic mode
+<p>you have far more powerful tools available to you in tactic mode</p>
 
 #### [ Kevin Buzzard (Apr 05 2018 at 10:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661555):
-and then later on you can start figuring out what the tools are doing
+<p>and then later on you can start figuring out what the tools are doing</p>
 
 #### [ Kevin Buzzard (Apr 05 2018 at 10:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661556):
-and how they're doing it
+<p>and how they're doing it</p>
 
 #### [ Kevin Buzzard (Apr 05 2018 at 10:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661564):
-You say "I don't understand decidability or how to use it"
+<p>You say "I don't understand decidability or how to use it"</p>
 
 #### [ Kevin Buzzard (Apr 05 2018 at 10:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661565):
-I say "dec_trivial invokes a great tactic"
+<p>I say "dec_trivial invokes a great tactic"</p>
 
 #### [ Kevin Buzzard (Apr 05 2018 at 10:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661605):
-so your problems are solved in the short term
+<p>so your problems are solved in the short term</p>
 
 #### [ Kevin Buzzard (Apr 05 2018 at 10:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661612):
-and then in the longer term you can start wondering about what it's doing and how it's doing it
+<p>and then in the longer term you can start wondering about what it's doing and how it's doing it</p>
 
 #### [ Kevin Buzzard (Apr 05 2018 at 10:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661619):
-My method is more robust than Kenny's
+<p>My method is more robust than Kenny's</p>
 
 #### [ Kenny Lau (Apr 05 2018 at 10:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661621):
-```quote
-My method is more robust than Kenny's
-```
-yeah right
+<blockquote>
+<p>My method is more robust than Kenny's</p>
+</blockquote>
+<p>yeah right</p>
 
 #### [ Kevin Buzzard (Apr 05 2018 at 10:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661626):
-because his solution relies on you knowing that there's a theorem in the library
+<p>because his solution relies on you knowing that there's a theorem in the library</p>
 
 #### [ Kevin Buzzard (Apr 05 2018 at 10:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661629):
-called ` nat.not_lt_zero `
+<p>called <code> nat.not_lt_zero </code></p>
 
 #### [ Kenny Lau (Apr 05 2018 at 10:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661632):
-implying one shouldn't know about theorems in the library
+<p>implying one shouldn't know about theorems in the library</p>
 
 #### [ Kevin Buzzard (Apr 05 2018 at 10:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661634):
-whereas mine just relies on you being aware that stuff like this is decidable and there's a tactic which does it
+<p>whereas mine just relies on you being aware that stuff like this is decidable and there's a tactic which does it</p>
 
 #### [ Kevin Buzzard (Apr 05 2018 at 10:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661636):
-I am saying mine is more robust.
+<p>I am saying mine is more robust.</p>
 
 #### [ Kevin Buzzard (Apr 05 2018 at 10:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661639):
-I am not saying anything about whether it's a good idea to know the library
+<p>I am not saying anything about whether it's a good idea to know the library</p>
 
 #### [ Kevin Buzzard (Apr 05 2018 at 10:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661680):
-What if tomorrow Adam wants to prove `2<1->false`?
+<p>What if tomorrow Adam wants to prove <code>2&lt;1-&gt;false</code>?</p>
 
 #### [ Kevin Buzzard (Apr 05 2018 at 10:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661689):
-We all know it's decidable
+<p>We all know it's decidable</p>
 
 #### [ Kevin Buzzard (Apr 05 2018 at 10:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661695):
-and you and I know we can use no_confusion or all sorts of other tricks
+<p>and you and I know we can use no_confusion or all sorts of other tricks</p>
 
 #### [ Kevin Buzzard (Apr 05 2018 at 10:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661698):
-but `dec_trivial` just does the job
+<p>but <code>dec_trivial</code> just does the job</p>
 
 #### [ Kenny Lau (Apr 05 2018 at 10:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661700):
-```
-def big_not_zero' (a : nat) (P : 1 < a) : a ≠ 0 :=
-λ h, (show ¬1 < 0, from dec_trivial) (h ▸ P)
+<div class="codehilite"><pre><span></span>def big_not_zero&#39; (a : nat) (P : 1 &lt; a) : a ≠ 0 :=
+λ h, (show ¬1 &lt; 0, from dec_trivial) (h ▸ P)
+</pre></div>
 
 #### [ Kenny Lau (Apr 05 2018 at 10:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661701):
-satisfied?
+<p>satisfied?</p>
 
 #### [ Adam Kurkiewicz (Apr 05 2018 at 10:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661745):
-It's good advice Kevin, I'll learn the tactic mode.
+<p>It's good advice Kevin, I'll learn the tactic mode.</p>
 
 #### [ Kenny Lau (Apr 05 2018 at 10:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661748):
-alright
+<p>alright</p>
 
 #### [ Kevin Buzzard (Apr 05 2018 at 10:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661753):
-I think you should start with tactic mode and move on to term mode later.
+<p>I think you should start with tactic mode and move on to term mode later.</p>
 
 #### [ Kevin Buzzard (Apr 05 2018 at 10:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661754):
-It's what they do in Software Foundations
+<p>It's what they do in Software Foundations</p>
 
 #### [ Kevin Buzzard (Apr 05 2018 at 10:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661757):
-and it's what I'm doing in the book I'm writing on doing maths in Lean
+<p>and it's what I'm doing in the book I'm writing on doing maths in Lean</p>
 
 #### [ Kevin Buzzard (Apr 05 2018 at 10:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661765):
-but this is because my book is targetting mathematicians who have no idea what this lambda business is all about
+<p>but this is because my book is targetting mathematicians who have no idea what this lambda business is all about</p>
 
 #### [ Kevin Buzzard (Apr 05 2018 at 10:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661766):
-because typically they will know no functional programming
+<p>because typically they will know no functional programming</p>
 
 #### [ Kenny Lau (Apr 05 2018 at 10:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661767):
-let's replace matlab with haskell
+<p>let's replace matlab with haskell</p>
 
 #### [ Kevin Buzzard (Apr 05 2018 at 10:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661768):
-They do that next door
+<p>They do that next door</p>
 
 #### [ Kevin Buzzard (Apr 05 2018 at 10:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661770):
-in the computing department
+<p>in the computing department</p>
 
 #### [ Kenny Lau (Apr 05 2018 at 10:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661771):
-great
+<p>great</p>
 
 #### [ Kenny Lau (Apr 05 2018 at 10:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661772):
-see you
+<p>see you</p>
 
 #### [ Kenny Lau (Apr 05 2018 at 10:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661773):
-:P
+<p>:P</p>
 
 #### [ Kevin Buzzard (Apr 05 2018 at 10:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661812):
-in the computing department?
+<p>in the computing department?</p>
 
 #### [ Kenny Lau (Apr 05 2018 at 10:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661813):
-right
+<p>right</p>
 
 #### [ Kevin Buzzard (Apr 05 2018 at 10:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661814):
-Remember I'm on the curriculum review committee!
+<p>Remember I'm on the curriculum review committee!</p>
 
 #### [ Kevin Buzzard (Apr 05 2018 at 10:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661815):
-But I don't think I can push for Haskell for mathematicians
+<p>But I don't think I can push for Haskell for mathematicians</p>
 
 #### [ Kevin Buzzard (Apr 05 2018 at 10:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661819):
-I am currently pushing for Python
+<p>I am currently pushing for Python</p>
 
 #### [ Kenny Lau (Apr 05 2018 at 10:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661820):
-i'm just kidding
+<p>i'm just kidding</p>
 
 #### [ Kenny Lau (Apr 05 2018 at 10:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661822):
-but python is already there
+<p>but python is already there</p>
 
 #### [ Kevin Buzzard (Apr 05 2018 at 10:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661823):
-but not maths in python
+<p>but not maths in python</p>
 
 #### [ Kevin Buzzard (Apr 05 2018 at 10:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661825):
-just general python
+<p>just general python</p>
 
 #### [ Kevin Buzzard (Apr 05 2018 at 10:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661828):
-i.e. teach them classes etc
+<p>i.e. teach them classes etc</p>
 
 #### [ Kenny Lau (Apr 05 2018 at 10:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661833):
-OOP python is the worst lol
+<p>OOP python is the worst lol</p>
 
 #### [ Kevin Buzzard (Apr 05 2018 at 10:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661834):
-oh
+<p>oh</p>
 
 #### [ Kenny Lau (Apr 05 2018 at 10:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661835):
-use java for OOP
+<p>use java for OOP</p>
 
 #### [ Kevin Buzzard (Apr 05 2018 at 10:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661837):
-oh
+<p>oh</p>
 
 #### [ Kenny Lau (Apr 05 2018 at 10:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661840):
-oh
+<p>oh</p>
 
 #### [ Kenny Lau (Apr 05 2018 at 10:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661841):
-pee
+<p>pee</p>
 
 #### [ Kevin Buzzard (Apr 05 2018 at 10:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661843):
-Should I push for java?
+<p>Should I push for java?</p>
 
 #### [ Kevin Buzzard (Apr 05 2018 at 10:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661848):
-Why would a mathematician want to learn java?
+<p>Why would a mathematician want to learn java?</p>
 
 #### [ Kenny Lau (Apr 05 2018 at 10:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661849):
-heh
+<p>heh</p>
 
 #### [ Kevin Buzzard (Apr 05 2018 at 10:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661850):
-I think we should just teach them tactic mode ;-)
+<p>I think we should just teach them tactic mode ;-)</p>
 
 #### [ Kenny Lau (Apr 05 2018 at 10:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661851):
-push for lean
+<p>push for lean</p>
 
 #### [ Kenny Lau (Apr 05 2018 at 10:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661890):
-problem solved
+<p>problem solved</p>
 
 #### [ Kevin Buzzard (Apr 05 2018 at 10:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661891):
-I think that some of them might want to compute something at some point
+<p>I think that some of them might want to compute something at some point</p>
 
 #### [ Kevin Buzzard (Apr 05 2018 at 10:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661892):
-maybe they do that in the applied maths parts or something
+<p>maybe they do that in the applied maths parts or something</p>
 
 #### [ Kevin Buzzard (Apr 05 2018 at 10:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661893):
-I have no idea what they do there
+<p>I have no idea what they do there</p>
 
 #### [ Kevin Buzzard (Apr 05 2018 at 10:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661895):
-but I don't think it's theorems
+<p>but I don't think it's theorems</p>
 
 #### [ Johannes Hölzl (Apr 05 2018 at 10:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661899):
-Of couse
+<p>Of couse</p>
 
 #### [ Johannes Hölzl (Apr 05 2018 at 10:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661905):
-(deleted)
+<p>(deleted)</p>
 
 #### [ Kevin Buzzard (Apr 05 2018 at 10:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661906):
-I think they figure out what f(10) is if they know some differential equation satisfied by f, and also they know f(0)
+<p>I think they figure out what f(10) is if they know some differential equation satisfied by f, and also they know f(0)</p>
 
 #### [ Kenny Lau (Apr 05 2018 at 10:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124661907):
-@**Johannes Hölzl** wrong chat
+<p><span class="user-mention" data-user-id="110294">@Johannes Hölzl</span> wrong chat</p>
 
 #### [ Adam Kurkiewicz (Apr 05 2018 at 10:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124662069):
-@**Kevin Buzzard** I'd say teaching OOP is a bad idea. OOP is kind of dying at the moment anyway -- very few new languages actually have rich OOP features (rust, golang), and even in python very little new stuff gets written using OOP.
-
-We've got a great new guy at Glasgow, who's teaching first year programming in python. He uses jupyter notebooks and shows applications of computation to multiple different problems (simulating fireworks, solving Travelling Salesman, etc.). I've done a guest lecture on Nim this year (https://github.com/picrin/nim_game/tree/master/lab_material/lab17_student_material).
-
-I think that's a more productive use of student's time than teaching them OOP.
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> I'd say teaching OOP is a bad idea. OOP is kind of dying at the moment anyway -- very few new languages actually have rich OOP features (rust, golang), and even in python very little new stuff gets written using OOP.</p>
+<p>We've got a great new guy at Glasgow, who's teaching first year programming in python. He uses jupyter notebooks and shows applications of computation to multiple different problems (simulating fireworks, solving Travelling Salesman, etc.). I've done a guest lecture on Nim this year (<a href="https://github.com/picrin/nim_game/tree/master/lab_material/lab17_student_material" target="_blank" title="https://github.com/picrin/nim_game/tree/master/lab_material/lab17_student_material">https://github.com/picrin/nim_game/tree/master/lab_material/lab17_student_material</a>).</p>
+<p>I think that's a more productive use of student's time than teaching them OOP.</p>
 
 #### [ Kenny Lau (Apr 05 2018 at 10:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124662070):
-I insisted to not use jupyter
+<p>I insisted to not use jupyter</p>
 
 #### [ Kenny Lau (Apr 05 2018 at 10:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124662074):
-even in the exam :P
+<p>even in the exam :P</p>
 
 #### [ Kenny Lau (Apr 05 2018 at 10:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124662077):
-`python -m pip install numpy`
+<p><code>python -m pip install numpy</code></p>
 
 #### [ Kevin Buzzard (Apr 05 2018 at 10:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124662120):
-So I am in the maths department at Imperial College London and we're having a top-to-bottom curriculum review, and amongst the things that can change is that we can completely rethink what we teach to the undergraduates in terms of programming.
+<p>So I am in the maths department at Imperial College London and we're having a top-to-bottom curriculum review, and amongst the things that can change is that we can completely rethink what we teach to the undergraduates in terms of programming.</p>
 
 #### [ Kevin Buzzard (Apr 05 2018 at 10:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124662121):
-So I am definitely genuinely interested in hearing people's opinions.
+<p>So I am definitely genuinely interested in hearing people's opinions.</p>
 
 #### [ Kevin Buzzard (Apr 05 2018 at 10:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124662123):
-However we are definitely focussed on what mathematicians should need to know
+<p>However we are definitely focussed on what mathematicians should need to know</p>
 
 #### [ Kevin Buzzard (Apr 05 2018 at 10:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124662131):
-in the sense of "what people who employ mathematicians want them to know"
+<p>in the sense of "what people who employ mathematicians want them to know"</p>
 
 #### [ Adam Kurkiewicz (Apr 05 2018 at 10:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124662133):
-You'd obviously want to modify the content a little bit to make it more mathsy,  but I think coding up an optimal algorithm to play Nim is definitely a worthy thing to teach first year mathematicians.
+<p>You'd obviously want to modify the content a little bit to make it more mathsy,  but I think coding up an optimal algorithm to play Nim is definitely a worthy thing to teach first year mathematicians.</p>
 
 #### [ Kevin Buzzard (Apr 05 2018 at 10:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124662136):
-Your link doesn't work btw
+<p>Your link doesn't work btw</p>
 
 #### [ Adam Kurkiewicz (Apr 05 2018 at 10:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124662189):
-Ah, it's hidden from students cause it has solutions :D. one moment
+<p>Ah, it's hidden from students cause it has solutions :D. one moment</p>
 
 #### [ Kevin Buzzard (Apr 05 2018 at 10:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124662191):
-don't worry
+<p>don't worry</p>
 
 #### [ Kevin Buzzard (Apr 05 2018 at 10:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124662192):
-I don't want to disrupt
+<p>I don't want to disrupt</p>
 
 #### [ Adam Kurkiewicz (Apr 05 2018 at 10:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124662360):
-That's the task statement: [lab17-3.html](/user_uploads/3121/US_PO9-qzNBOQE1P_W4cNQ1C/lab17-3.html) 
-
-There are ~7 specific python template files, which walk them through a solution, and they have to implement each one.
-
-Each file gets automatically checked using something called "CMS", I believe stands  for "Contest Management System". Checking uses a regular test suite.
+<p>That's the task statement: <a href="/user_uploads/3121/US_PO9-qzNBOQE1P_W4cNQ1C/lab17-3.html" target="_blank" title="lab17-3.html">lab17-3.html</a> </p>
+<p>There are ~7 specific python template files, which walk them through a solution, and they have to implement each one.</p>
+<p>Each file gets automatically checked using something called "CMS", I believe stands  for "Contest Management System". Checking uses a regular test suite.</p>
 
 #### [ Adam Kurkiewicz (Apr 05 2018 at 10:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124662415):
-Happy to share everything if you'd like, but at the moment I'm tethering and the internet is a bit slow.
+<p>Happy to share everything if you'd like, but at the moment I'm tethering and the internet is a bit slow.</p>
 
 #### [ Kevin Buzzard (Apr 05 2018 at 10:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124662419):
-honestly don't worry
+<p>honestly don't worry</p>
 
 #### [ Kevin Buzzard (Apr 05 2018 at 10:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124662424):
-I can imagine what is there
+<p>I can imagine what is there</p>
 
 #### [ Kevin Buzzard (Apr 05 2018 at 10:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124662429):
-I always imagine stuff like nim as being in the `recreational mathematics` box
+<p>I always imagine stuff like nim as being in the <code>recreational mathematics</code> box</p>
 
 #### [ Kevin Buzzard (Apr 05 2018 at 10:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124662430):
-i.e. stuff they do outside of regular maths
+<p>i.e. stuff they do outside of regular maths</p>
 
 #### [ Kevin Buzzard (Apr 05 2018 at 10:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124662469):
-but I am not 100% sure whether I have this in the right box
+<p>but I am not 100% sure whether I have this in the right box</p>
 
 #### [ Kevin Buzzard (Apr 05 2018 at 10:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124662479):
-python has `^` -- do you let them use this or force them to code their own?
+<p>python has <code>^</code> -- do you let them use this or force them to code their own?</p>
 
 #### [ Adam Kurkiewicz (Apr 05 2018 at 10:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124662645):
-I let them use that after they've learned how it works.
+<p>I let them use that after they've learned how it works.</p>
 
 #### [ Kevin Buzzard (Apr 05 2018 at 10:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124662704):
-Just the opposite of what I did with my kids
+<p>Just the opposite of what I did with my kids</p>
 
 #### [ Kevin Buzzard (Apr 05 2018 at 10:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124662708):
-I asked them how to compute powers in python and let them be completely confused for 15 minutes
+<p>I asked them how to compute powers in python and let them be completely confused for 15 minutes</p>
 
 #### [ Adam Kurkiewicz (Apr 05 2018 at 10:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124662709):
-it's generally a problem with teaching python, it has everything and students sometimes just solve things with one-liners, without ever understanding it.
+<p>it's generally a problem with teaching python, it has everything and students sometimes just solve things with one-liners, without ever understanding it.</p>
 
 #### [ Kevin Buzzard (Apr 05 2018 at 10:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124662713):
-just like tactic mode ;-)
+<p>just like tactic mode ;-)</p>
 
 #### [ Kenny Lau (Apr 05 2018 at 10:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124662721):
-I don't normally use `numpy` and `sympy` :P
+<p>I don't normally use <code>numpy</code> and <code>sympy</code> :P</p>
 
 #### [ Kevin Buzzard (Apr 05 2018 at 10:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124662725):
-Kenny, what do we teach the 1st years?
+<p>Kenny, what do we teach the 1st years?</p>
 
 #### [ Kevin Buzzard (Apr 05 2018 at 10:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124662726):
-Currently
+<p>Currently</p>
 
 #### [ Kevin Buzzard (Apr 05 2018 at 10:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124662729):
-Do they import a lot of libraries?
+<p>Do they import a lot of libraries?</p>
 
 #### [ Kevin Buzzard (Apr 05 2018 at 10:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124662731):
-`scipy`?
+<p><code>scipy</code>?</p>
 
 #### [ Kenny Lau (Apr 05 2018 at 10:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124662770):
-`numpy` and `sympy`
+<p><code>numpy</code> and <code>sympy</code></p>
 
 #### [ Kenny Lau (Apr 05 2018 at 10:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124662771):
-I thought you're the head of curiculum reform
+<p>I thought you're the head of curiculum reform</p>
 
 #### [ Kenny Lau (Apr 05 2018 at 10:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124662775):
-curriculum
+<p>curriculum</p>
 
 #### [ Kenny Lau (Apr 05 2018 at 10:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124662776):
-words
+<p>words</p>
 
 #### [ Kevin Buzzard (Apr 05 2018 at 11:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124662841):
-I'm just on the committee
+<p>I'm just on the committee</p>
 
 #### [ Kevin Buzzard (Apr 05 2018 at 11:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124662843):
-my job is to decide what to do in the future
+<p>my job is to decide what to do in the future</p>
 
 #### [ Kenny Lau (Apr 05 2018 at 11:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124662844):
-well you're the acting head of the department
+<p>well you're the acting head of the department</p>
 
 #### [ Kevin Buzzard (Apr 05 2018 at 11:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124662846):
-I don't want to pollute my understanding by knowing what we currently do
+<p>I don't want to pollute my understanding by knowing what we currently do</p>
 
 #### [ Kevin Buzzard (Apr 05 2018 at 11:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124662857):
-Maybe I should go and fill in forms :-/
+<p>Maybe I should go and fill in forms :-/</p>
 
 #### [ Kenny Lau (Apr 05 2018 at 11:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124662900):
-how many goddam forms do you have
+<p>how many goddam forms do you have</p>
 
 #### [ Kevin Buzzard (Apr 05 2018 at 11:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124662901):
-they come in at a rate faster than I can fill them in
+<p>they come in at a rate faster than I can fill them in</p>
 
 #### [ Kenny Lau (Apr 05 2018 at 11:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124662903):
-what are those forms
+<p>what are those forms</p>
 
 #### [ Kevin Buzzard (Apr 05 2018 at 11:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124662912):
-I had to do a risk assessment form for Ana because she's pregnant. 6 pages of questions such as how much radioactive material there was in the department etc. Life is great when you're a manager.
+<p>I had to do a risk assessment form for Ana because she's pregnant. 6 pages of questions such as how much radioactive material there was in the department etc. Life is great when you're a manager.</p>
 
 #### [ Kevin Buzzard (Apr 05 2018 at 11:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124662949):
-OK I'm going to fill in more right now
+<p>OK I'm going to fill in more right now</p>
 
 #### [ Kenny Lau (Apr 05 2018 at 11:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124662952):
-life is always great
+<p>life is always great</p>
 
 #### [ Andrew Ashworth (Apr 05 2018 at 11:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124664028):
-I think between python, R, and Matlab, that's quite enough for a maths student... in a way I'm a little sad you can't get by without just pen, paper, and coffee pot
+<p>I think between python, R, and Matlab, that's quite enough for a maths student... in a way I'm a little sad you can't get by without just pen, paper, and coffee pot</p>
 
 #### [ Patrick Massot (Apr 05 2018 at 21:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124686378):
-```quote
-@**Kevin Buzzard** I'd say teaching OOP is a bad idea. OOP is kind of dying at the moment anyway -- very few new languages actually have rich OOP features (rust, golang), and even in python very little new stuff gets written using OOP.
-
-We've got a great new guy at Glasgow, who's teaching first year programming in python. He uses jupyter notebooks and shows applications of computation to multiple different problems (simulating fireworks, solving Travelling Salesman, etc.). I've done a guest lecture on Nim this year (https://github.com/picrin/nim_game/tree/master/lab_material/lab17_student_material).
-
-I think that's a more productive use of student's time than teaching them OOP.
-```
-What is this crazyness? Where did you see OOP dying?
+<blockquote>
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> I'd say teaching OOP is a bad idea. OOP is kind of dying at the moment anyway -- very few new languages actually have rich OOP features (rust, golang), and even in python very little new stuff gets written using OOP.</p>
+<p>We've got a great new guy at Glasgow, who's teaching first year programming in python. He uses jupyter notebooks and shows applications of computation to multiple different problems (simulating fireworks, solving Travelling Salesman, etc.). I've done a guest lecture on Nim this year (<a href="https://github.com/picrin/nim_game/tree/master/lab_material/lab17_student_material" target="_blank" title="https://github.com/picrin/nim_game/tree/master/lab_material/lab17_student_material">https://github.com/picrin/nim_game/tree/master/lab_material/lab17_student_material</a>).</p>
+<p>I think that's a more productive use of student's time than teaching them OOP.</p>
+</blockquote>
+<p>What is this crazyness? Where did you see OOP dying?</p>
 
 #### [ Patrick Massot (Apr 05 2018 at 21:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124686392):
-I guess  this is what Haskell people say?
+<p>I guess  this is what Haskell people say?</p>
 
 #### [ Patrick Massot (Apr 05 2018 at 21:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124686402):
-But what about the real world?
+<p>But what about the real world?</p>
 
 #### [ Moses Schönfinkel (Apr 05 2018 at 21:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124686651):
-OOP is definitely not dying in the industry.
+<p>OOP is definitely not dying in the industry.</p>
 
 #### [ Patrick Massot (Apr 05 2018 at 21:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124686878):
-Yes, this very much sounds like functional programming academic fantasy
+<p>Yes, this very much sounds like functional programming academic fantasy</p>
 
 #### [ Sebastian Ullrich (Apr 05 2018 at 21:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124686972):
-To say that OOP is dying is certainly hyperbole, but none of the languages mentioned are particularly functional...
+<p>To say that OOP is dying is certainly hyperbole, but none of the languages mentioned are particularly functional...</p>
 
 #### [ Moses Schönfinkel (Apr 05 2018 at 22:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124687127):
-Go doesn't even have generics, speaking of modern design...
+<p>Go doesn't even have generics, speaking of modern design...</p>
 
 #### [ Patrick Massot (Apr 05 2018 at 22:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124687187):
-Go certainly looks awful
+<p>Go certainly looks awful</p>
 
 #### [ Patrick Massot (Apr 05 2018 at 22:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124687309):
-I never saw Rust but the wikipedia page features quite a occurrences of Haskell and ML
+<p>I never saw Rust but the wikipedia page features quite a occurrences of Haskell and ML</p>
 
 #### [ Patrick Massot (Apr 05 2018 at 22:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124687600):
-Let's discuss something more productive: @**Sebastian Ullrich** am I correct in thinking that the nightly download link on  https://leanprover.github.io/download/ is no longer relevant and should not be used anymore?
+<p>Let's discuss something more productive: <span class="user-mention" data-user-id="110024">@Sebastian Ullrich</span> am I correct in thinking that the nightly download link on  <a href="https://leanprover.github.io/download/" target="_blank" title="https://leanprover.github.io/download/">https://leanprover.github.io/download/</a> is no longer relevant and should not be used anymore?</p>
 
 #### [ Chris Hughes (Apr 05 2018 at 22:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124687691):
-```quote
-Let's discuss something more productive: @**Sebastian Ullrich** am I correct in thinking that the nightly download link on  https://leanprover.github.io/download/ is no longer relevant and should not be used anymore?
-```
-Is there a new download link. It took me ages to update lean today, because MSYS didn't know where my c compiler was, and neither did I.
+<blockquote>
+<p>Let's discuss something more productive: <span class="user-mention" data-user-id="110024">@Sebastian Ullrich</span> am I correct in thinking that the nightly download link on  <a href="https://leanprover.github.io/download/" target="_blank" title="https://leanprover.github.io/download/">https://leanprover.github.io/download/</a> is no longer relevant and should not be used anymore?</p>
+</blockquote>
+<p>Is there a new download link. It took me ages to update lean today, because MSYS didn't know where my c compiler was, and neither did I.</p>
 
 #### [ Patrick Massot (Apr 05 2018 at 22:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124687706):
-https://github.com/leanprover/lean-nightly/releases
+<p><a href="https://github.com/leanprover/lean-nightly/releases" target="_blank" title="https://github.com/leanprover/lean-nightly/releases">https://github.com/leanprover/lean-nightly/releases</a></p>
 
 #### [ Patrick Massot (Apr 05 2018 at 22:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124687752):
-You need to compare with https://github.com/leanprover/mathlib/blob/master/leanpkg.toml#L4
+<p>You need to compare with <a href="https://github.com/leanprover/mathlib/blob/master/leanpkg.toml#L4" target="_blank" title="https://github.com/leanprover/mathlib/blob/master/leanpkg.toml#L4">https://github.com/leanprover/mathlib/blob/master/leanpkg.toml#L4</a></p>
 
 #### [ Patrick Massot (Apr 05 2018 at 22:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124687757):
-(my understanding is it's not yet more automatic, but this is already great progress)
+<p>(my understanding is it's not yet more automatic, but this is already great progress)</p>
 
 #### [ Sebastian Ullrich (Apr 05 2018 at 22:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124687777):
-@**Patrick Massot** Correct. We're still waiting on AppVeyor enabling cron builds for us before we can make it official
+<p><span class="user-mention" data-user-id="110031">@Patrick Massot</span> Correct. We're still waiting on AppVeyor enabling cron builds for us before we can make it official</p>
 
 #### [ Patrick Massot (Apr 05 2018 at 22:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20%20lt%20from%20decidability/near/124687820):
-Thanks
+<p>Thanks</p>
 
 
 {% endraw %}

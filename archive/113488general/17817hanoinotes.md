@@ -12,7 +12,7 @@ permalink: archive/113488general/17817hanoinotes.html
 
 {% raw %}
 #### [ Patrick Massot (Jun 10 2018 at 09:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hanoi%20notes/near/127848724):
-I found a secret gem: https://hanoifabs.files.wordpress.com/2018/05/slides.pdf
+<p>I found a secret gem: <a href="https://hanoifabs.files.wordpress.com/2018/05/slides.pdf" target="_blank" title="https://hanoifabs.files.wordpress.com/2018/05/slides.pdf">https://hanoifabs.files.wordpress.com/2018/05/slides.pdf</a></p>
 
 
 {% endraw %}

@@ -12,64 +12,63 @@ permalink: archive/113488general/29242Graphssubtypessetsfintypes.html
 
 {% raw %}
 #### [ Pablo Le Hénaff (Jun 15 2018 at 15:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Graphs%2C%20subtypes%2C%20sets%2C%20fintypes/near/128121007):
-Hello hello
-I would like to formalize some theorems of graph theory, but before going any further I would like to get the basis of the implementation right.
-I did do some work representing the edges as a set, but I didn't feel it was the most natural ways to do it. I tried another approach using the binary edge relation between vertices and lots of coercions from sets to subtypes, but it had me write lots of instances which I don't find particularily aesthetic. Here is a piece of code which is right but doesn't seem to carry the best design choices that could be made. What do you think ? :)
-```lean
-import data.set
-open set
+<p>Hello hello<br>
+I would like to formalize some theorems of graph theory, but before going any further I would like to get the basis of the implementation right.<br>
+I did do some work representing the edges as a set, but I didn't feel it was the most natural ways to do it. I tried another approach using the binary edge relation between vertices and lots of coercions from sets to subtypes, but it had me write lots of instances which I don't find particularily aesthetic. Here is a piece of code which is right but doesn't seem to carry the best design choices that could be made. What do you think ? :)</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">set</span>
+<span class="kn">open</span> <span class="n">set</span>
 
--- so my goal is to define graphs
--- I find the best way to implement them is as a structure with a set of vertices and a binary relation on those vertices
--- I like the coercion from sets to subtypes, but it looks like it makes things a little complicated with the little experience I have (see below)
-constants {V : Type} (vertices : set V) (edge : vertices → vertices → Prop)
+<span class="c1">-- so my goal is to define graphs</span>
+<span class="c1">-- I find the best way to implement them is as a structure with a set of vertices and a binary relation on those vertices</span>
+<span class="c1">-- I like the coercion from sets to subtypes, but it looks like it makes things a little complicated with the little experience I have (see below)</span>
+<span class="kn">constants</span> <span class="o">{</span><span class="n">V</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">(</span><span class="n">vertices</span> <span class="o">:</span> <span class="n">set</span> <span class="n">V</span><span class="o">)</span> <span class="o">(</span><span class="n">edge</span> <span class="o">:</span> <span class="n">vertices</span> <span class="bp">→</span> <span class="n">vertices</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">)</span>
 
--- this is an extra convenient definition to allow the creation of "set edges" below
-def edges : set (vertices × vertices) := λ⟨v₁,v₂⟩, edge v₁ v₂
+<span class="c1">-- this is an extra convenient definition to allow the creation of &quot;set edges&quot; below</span>
+<span class="n">def</span> <span class="n">edges</span> <span class="o">:</span> <span class="n">set</span> <span class="o">(</span><span class="n">vertices</span> <span class="bp">×</span> <span class="n">vertices</span><span class="o">)</span> <span class="o">:=</span> <span class="bp">λ⟨</span><span class="n">v₁</span><span class="o">,</span><span class="n">v₂</span><span class="bp">⟩</span><span class="o">,</span> <span class="n">edge</span> <span class="n">v₁</span> <span class="n">v₂</span>
 
--- I would like to reason on the edge binary relation rather than on the set of edges, that's why I suppose edge is a decidable rel
-instance [H : decidable_rel edge] : decidable_pred edges := λ⟨v₁,v₂⟩, H v₁ v₂
+<span class="c1">-- I would like to reason on the edge binary relation rather than on the set of edges, that&#39;s why I suppose edge is a decidable rel</span>
+<span class="kn">instance</span> <span class="o">[</span><span class="n">H</span> <span class="o">:</span> <span class="n">decidable_rel</span> <span class="n">edge</span><span class="o">]</span> <span class="o">:</span> <span class="n">decidable_pred</span> <span class="n">edges</span> <span class="o">:=</span> <span class="bp">λ⟨</span><span class="n">v₁</span><span class="o">,</span><span class="n">v₂</span><span class="bp">⟩</span><span class="o">,</span> <span class="n">H</span> <span class="n">v₁</span> <span class="n">v₂</span>
 
--- set of edges whose tip is v ∈ vertices
--- used to define the "in-degree" of vertex v
--- in_edges has type "set edges" because I find it convenient, maybe it's not the best to do (too many coercions ?)
-def in_edges (v : vertices) : set edges := let ⟨v,hv⟩ := v in λ⟨⟨_,⟨b,hb⟩⟩, _⟩, b = v
+<span class="c1">-- set of edges whose tip is v ∈ vertices</span>
+<span class="c1">-- used to define the &quot;in-degree&quot; of vertex v</span>
+<span class="c1">-- in_edges has type &quot;set edges&quot; because I find it convenient, maybe it&#39;s not the best to do (too many coercions ?)</span>
+<span class="n">def</span> <span class="n">in_edges</span> <span class="o">(</span><span class="n">v</span> <span class="o">:</span> <span class="n">vertices</span><span class="o">)</span> <span class="o">:</span> <span class="n">set</span> <span class="n">edges</span> <span class="o">:=</span> <span class="k">let</span> <span class="bp">⟨</span><span class="n">v</span><span class="o">,</span><span class="n">hv</span><span class="bp">⟩</span> <span class="o">:=</span> <span class="n">v</span> <span class="k">in</span> <span class="bp">λ⟨⟨_</span><span class="o">,</span><span class="bp">⟨</span><span class="n">b</span><span class="o">,</span><span class="n">hb</span><span class="bp">⟩⟩</span><span class="o">,</span> <span class="bp">_⟩</span><span class="o">,</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">v</span>
 
--- I need to use noncomputable because in_edges is a set whose base type is a subtype and
--- I only assume decidable_eq on V
--- but there exists subtype.decidable_eq...
-#check subtype.decidable_eq
+<span class="c1">-- I need to use noncomputable because in_edges is a set whose base type is a subtype and</span>
+<span class="c1">-- I only assume decidable_eq on V</span>
+<span class="c1">-- but there exists subtype.decidable_eq...</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="n">subtype</span><span class="bp">.</span><span class="n">decidable_eq</span>
 
-noncomputable instance [H : decidable_eq V] {v : vertices} : decidable_pred (in_edges v) := let ⟨v,hv⟩ := v in λ⟨⟨⟨a, ha⟩,⟨b,hb⟩⟩, _⟩, H b v
-noncomputable instance {v : vertices} [fintype vertices] [decidable_rel edge] [decidable_eq V] : fintype (in_edges v) := @set_fintype _ (set_fintype _) _ _
+<span class="n">noncomputable</span> <span class="kn">instance</span> <span class="o">[</span><span class="n">H</span> <span class="o">:</span> <span class="n">decidable_eq</span> <span class="n">V</span><span class="o">]</span> <span class="o">{</span><span class="n">v</span> <span class="o">:</span> <span class="n">vertices</span><span class="o">}</span> <span class="o">:</span> <span class="n">decidable_pred</span> <span class="o">(</span><span class="n">in_edges</span> <span class="n">v</span><span class="o">)</span> <span class="o">:=</span> <span class="k">let</span> <span class="bp">⟨</span><span class="n">v</span><span class="o">,</span><span class="n">hv</span><span class="bp">⟩</span> <span class="o">:=</span> <span class="n">v</span> <span class="k">in</span> <span class="bp">λ⟨⟨⟨</span><span class="n">a</span><span class="o">,</span> <span class="n">ha</span><span class="bp">⟩</span><span class="o">,</span><span class="bp">⟨</span><span class="n">b</span><span class="o">,</span><span class="n">hb</span><span class="bp">⟩⟩</span><span class="o">,</span> <span class="bp">_⟩</span><span class="o">,</span> <span class="n">H</span> <span class="n">b</span> <span class="n">v</span>
+<span class="n">noncomputable</span> <span class="kn">instance</span> <span class="o">{</span><span class="n">v</span> <span class="o">:</span> <span class="n">vertices</span><span class="o">}</span> <span class="o">[</span><span class="n">fintype</span> <span class="n">vertices</span><span class="o">]</span> <span class="o">[</span><span class="n">decidable_rel</span> <span class="n">edge</span><span class="o">]</span> <span class="o">[</span><span class="n">decidable_eq</span> <span class="n">V</span><span class="o">]</span> <span class="o">:</span> <span class="n">fintype</span> <span class="o">(</span><span class="n">in_edges</span> <span class="n">v</span><span class="o">)</span> <span class="o">:=</span> <span class="bp">@</span><span class="n">set_fintype</span> <span class="bp">_</span> <span class="o">(</span><span class="n">set_fintype</span> <span class="bp">_</span><span class="o">)</span> <span class="bp">_</span> <span class="bp">_</span>
 
-variables [fintype vertices] [decidable_eq V] [decidable_rel edge]
+<span class="kn">variables</span> <span class="o">[</span><span class="n">fintype</span> <span class="n">vertices</span><span class="o">]</span> <span class="o">[</span><span class="n">decidable_eq</span> <span class="n">V</span><span class="o">]</span> <span class="o">[</span><span class="n">decidable_rel</span> <span class="n">edge</span><span class="o">]</span>
 
--- now I want to define some stuff on finite graphs and prove some lemmas
--- for instance, the sum of the in_degrees of all the vertices is equal to fintype.card edges
--- which I did prove, but with another unpleasant setup
-noncomputable def in_degree (v : vertices) := finset.card (in_edges v).to_finset
--- this doesn't work without the extra instances above
--- I would like instances to be inferred out-of-the-box but I didn't succeed
-```
+<span class="c1">-- now I want to define some stuff on finite graphs and prove some lemmas</span>
+<span class="c1">-- for instance, the sum of the in_degrees of all the vertices is equal to fintype.card edges</span>
+<span class="c1">-- which I did prove, but with another unpleasant setup</span>
+<span class="n">noncomputable</span> <span class="n">def</span> <span class="n">in_degree</span> <span class="o">(</span><span class="n">v</span> <span class="o">:</span> <span class="n">vertices</span><span class="o">)</span> <span class="o">:=</span> <span class="n">finset</span><span class="bp">.</span><span class="n">card</span> <span class="o">(</span><span class="n">in_edges</span> <span class="n">v</span><span class="o">)</span><span class="bp">.</span><span class="n">to_finset</span>
+<span class="c1">-- this doesn&#39;t work without the extra instances above</span>
+<span class="c1">-- I would like instances to be inferred out-of-the-box but I didn&#39;t succeed</span>
+</pre></div>
 
 #### [ Mario Carneiro (Jun 15 2018 at 15:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Graphs%2C%20subtypes%2C%20sets%2C%20fintypes/near/128121155):
-I think you are misusing `constants` here - this is equivalent to `axiom` in lean, while I think you mean something more like `variables` or `parameters`
+<p>I think you are misusing <code>constants</code> here - this is equivalent to <code>axiom</code> in lean, while I think you mean something more like <code>variables</code> or <code>parameters</code></p>
 
 #### [ Pablo Le Hénaff (Jun 15 2018 at 16:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Graphs%2C%20subtypes%2C%20sets%2C%20fintypes/near/128121326):
-Probably ! My initial script involved the definition of a graph structure and then a graph as a variable. The "constants" part was just to make it shorter, should be "variables" then.
+<p>Probably ! My initial script involved the definition of a graph structure and then a graph as a variable. The "constants" part was just to make it shorter, should be "variables" then.</p>
 
 #### [ Mario Carneiro (Jun 15 2018 at 16:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Graphs%2C%20subtypes%2C%20sets%2C%20fintypes/near/128121338):
-For the theory of possibly infinite graphs, I recommend using a type alpha of vertices and a binary relation E for the edges. In this context it does not differ substantially with order theory
+<p>For the theory of possibly infinite graphs, I recommend using a type alpha of vertices and a binary relation E for the edges. In this context it does not differ substantially with order theory</p>
 
 #### [ Pablo Le Hénaff (Jun 15 2018 at 16:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Graphs%2C%20subtypes%2C%20sets%2C%20fintypes/near/128121400):
-But then, how would you describe a subset of the vertices, for instance a clique ?
+<p>But then, how would you describe a subset of the vertices, for instance a clique ?</p>
 
 #### [ Mario Carneiro (Jun 15 2018 at 16:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Graphs%2C%20subtypes%2C%20sets%2C%20fintypes/near/128121450):
-the subset itself can just be a `set A`
+<p>the subset itself can just be a <code>set A</code></p>
 
 #### [ Mario Carneiro (Jun 15 2018 at 16:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Graphs%2C%20subtypes%2C%20sets%2C%20fintypes/near/128121456):
-but if you want to talk about the induced subgraph you can use `subtype`
+<p>but if you want to talk about the induced subgraph you can use <code>subtype</code></p>
 
 
 {% endraw %}

@@ -12,49 +12,48 @@ permalink: archive/113488general/42445Nantestalkvideo.html
 
 {% raw %}
 #### [ Patrick Massot (Jan 18 2019 at 12:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Nantes%20talk%20video/near/156362257):
-The maths department in Nantes uploaded the video of the Lean talk I gave in November at http://media.math.sciences.univ-nantes.fr/fr/node/801 It's in French and the most interesting part was also in my Amsterdam talk, but it could still be useful for people who intend to give talks presenting Lean to mathematicians.
+<p>The maths department in Nantes uploaded the video of the Lean talk I gave in November at <a href="http://media.math.sciences.univ-nantes.fr/fr/node/801" target="_blank" title="http://media.math.sciences.univ-nantes.fr/fr/node/801">http://media.math.sciences.univ-nantes.fr/fr/node/801</a> It's in French and the most interesting part was also in my Amsterdam talk, but it could still be useful for people who intend to give talks presenting Lean to mathematicians.</p>
 
 #### [ Kevin Buzzard (Jan 18 2019 at 13:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Nantes%20talk%20video/near/156363763):
-Thanks a lot for posting this Patrick. I hope to be finding myself in this sort of position many times in the future.
+<p>Thanks a lot for posting this Patrick. I hope to be finding myself in this sort of position many times in the future.</p>
 
 #### [ Kevin Buzzard (Jan 18 2019 at 18:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Nantes%20talk%20video/near/156386051):
-I'm watching this video now. After you typed `split` in the function proof, how did you get `{ sorry}` x 2 to appear instantly?
+<p>I'm watching this video now. After you typed <code>split</code> in the function proof, how did you get <code>{ sorry}</code> x 2 to appear instantly?</p>
 
 #### [ Patrick Massot (Jan 18 2019 at 18:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Nantes%20talk%20video/near/156386271):
-User code snippet
+<p>User code snippet</p>
 
 #### [ Patrick Massot (Jan 18 2019 at 18:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Nantes%20talk%20video/near/156386293):
-In my `~/.config/Code/User/snippets/lean.json` I see:
+<p>In my <code>~/.config/Code/User/snippets/lean.json</code> I see:</p>
 
 #### [ Patrick Massot (Jan 18 2019 at 18:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Nantes%20talk%20video/near/156386309):
-```json
-"Split": {
-        "prefix": "split",
-        "body": [
-		  "split,",
-		  "{ $0",
-		  "  sorry },",
-		  "{ ",
-		  "  sorry },"
-        ],
-        "description": "Split tactic"
-        },
-```
+<div class="codehilite"><pre><span></span><span class="s2">&quot;Split&quot;</span><span class="err">:</span> <span class="p">{</span>
+        <span class="nt">&quot;prefix&quot;</span><span class="p">:</span> <span class="s2">&quot;split&quot;</span><span class="p">,</span>
+        <span class="nt">&quot;body&quot;</span><span class="p">:</span> <span class="p">[</span>
+          <span class="s2">&quot;split,&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;{ $0&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;  sorry },&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;{ &quot;</span><span class="p">,</span>
+          <span class="s2">&quot;  sorry },&quot;</span>
+        <span class="p">],</span>
+        <span class="nt">&quot;description&quot;</span><span class="p">:</span> <span class="s2">&quot;Split tactic&quot;</span>
+        <span class="p">}</span><span class="err">,</span>
+</pre></div>
 
 #### [ Patrick Massot (Jan 18 2019 at 18:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Nantes%20talk%20video/near/156386380):
-Do you understand enough French to understand me, or are following only through Lean?
+<p>Do you understand enough French to understand me, or are following only through Lean?</p>
 
 #### [ Johan Commelin (Jan 18 2019 at 18:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Nantes%20talk%20video/near/156386670):
-Kevin gave math talks in French!
+<p>Kevin gave math talks in French!</p>
 
 #### [ Kevin Buzzard (Jan 18 2019 at 19:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Nantes%20talk%20video/near/156387286):
-My French is good enough to understand what you're saying. The camera is off now though -- in your group theory proof I can't see the first four or five characters of every line in the VS Code.
+<p>My French is good enough to understand what you're saying. The camera is off now though -- in your group theory proof I can't see the first four or five characters of every line in the VS Code.</p>
 
 #### [ Patrick Massot (Jan 18 2019 at 19:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Nantes%20talk%20video/near/156387316):
-I forgot, you can talk about "une groupe"!
+<p>I forgot, you can talk about "une groupe"!</p>
 
 #### [ Kevin Buzzard (Jan 18 2019 at 19:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Nantes%20talk%20video/near/156387422):
-:-/
+<p>:-/</p>
 
 
 {% endraw %}

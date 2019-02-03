@@ -12,16 +12,15 @@ permalink: archive/113488general/83037equalityofproofs.html
 
 {% raw %}
 #### [ Reid Barton (Apr 28 2018 at 04:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20of%20proofs/near/125803504):
-Is this lemma true and what is it (or should it be) called?
-```lean
-lemma hpropext {p q : Prop} (a : p) (b : q) : a == b := sorry
-```
+<p>Is this lemma true and what is it (or should it be) called?</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">hpropext</span> <span class="o">{</span><span class="n">p</span> <span class="n">q</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">}</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">p</span><span class="o">)</span> <span class="o">(</span><span class="n">b</span> <span class="o">:</span> <span class="n">q</span><span class="o">)</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">==</span> <span class="n">b</span> <span class="o">:=</span> <span class="n">sorry</span>
+</pre></div>
 
 #### [ Reid Barton (Apr 28 2018 at 04:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20of%20proofs/near/125803608):
-`proof_irrel` is the non-heterogeneous version
+<p><code>proof_irrel</code> is the non-heterogeneous version</p>
 
 #### [ Reid Barton (Apr 28 2018 at 04:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20of%20proofs/near/125803658):
-OK, I managed to prove it
+<p>OK, I managed to prove it</p>
 
 
 {% endraw %}

@@ -12,80 +12,81 @@ permalink: archive/113488general/01184libaryinitalgebragroup.html
 
 {% raw %}
 #### [ Kenny Lau (Apr 22 2018 at 01:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/libary/init/algebra/group/near/125509188):
-L165:
-```lean
-/- αdditive "sister" structures.
-```
-alpha-dditive??
+<p>L165:</p>
+<div class="codehilite"><pre><span></span><span class="c">/-</span><span class="cm"> αdditive &quot;sister&quot; structures.</span>
+</pre></div>
+
+
+<p>alpha-dditive??</p>
 
 #### [ Kenny Lau (Apr 22 2018 at 01:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/libary/init/algebra/group/near/125509229):
-is that an easter egg
+<p>is that an easter egg</p>
 
 #### [ Mario Carneiro (Apr 22 2018 at 01:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/libary/init/algebra/group/near/125509785):
-I tried to PR that almost a year ago and of course it was rejected
+<p>I tried to PR that almost a year ago and of course it was rejected</p>
 
 #### [ Kenny Lau (Apr 22 2018 at 01:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/libary/init/algebra/group/near/125509787):
-lol
+<p>lol</p>
 
 #### [ Kenny Lau (Apr 22 2018 at 01:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/libary/init/algebra/group/near/125509788):
-what was the reason
+<p>what was the reason</p>
 
 #### [ Mario Carneiro (Apr 22 2018 at 01:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/libary/init/algebra/group/near/125509835):
-Leo doesn't want to hear about tiny changes
+<p>Leo doesn't want to hear about tiny changes</p>
 
 #### [ Kevin Buzzard (Apr 22 2018 at 01:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/libary/init/algebra/group/near/125509877):
-that one must be hard to review or something
+<p>that one must be hard to review or something</p>
 
 #### [ Patrick Massot (Apr 22 2018 at 01:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/libary/init/algebra/group/near/125509879):
-That one was provocation
+<p>That one was provocation</p>
 
 #### [ Mario Carneiro (Apr 22 2018 at 01:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/libary/init/algebra/group/near/125509880):
-It's not an easter egg, it's a bad find-replace job when we moved from using `A B C` to `α β γ` for types
+<p>It's not an easter egg, it's a bad find-replace job when we moved from using <code>A B C</code> to <code>α β γ</code> for types</p>
 
 #### [ Kevin Buzzard (Apr 22 2018 at 01:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/libary/init/algebra/group/near/125509881):
-it's a pretty spectacular bad find-replace job!
+<p>it's a pretty spectacular bad find-replace job!</p>
 
 #### [ Patrick Massot (Apr 22 2018 at 01:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/libary/init/algebra/group/near/125509887):
-We'll need to be much more careful when we'll to the `s/α/G/g` in all group theory files
+<p>We'll need to be much more careful when we'll to the <code>s/α/G/g</code> in all group theory files</p>
 
 #### [ Kevin Buzzard (Apr 22 2018 at 01:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/libary/init/algebra/group/near/125509888):
-Did they change every A to an alpha and then change 100 alpha's back to A's?
+<p>Did they change every A to an alpha and then change 100 alpha's back to A's?</p>
 
 #### [ Kevin Buzzard (Apr 22 2018 at 01:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/libary/init/algebra/group/near/125509927):
-put it in the pile for the one time patch
+<p>put it in the pile for the one time patch</p>
 
 #### [ Mario Carneiro (Apr 22 2018 at 01:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/libary/init/algebra/group/near/125509930):
-an easter egg would be replacing `A` with a capital alpha
+<p>an easter egg would be replacing <code>A</code> with a capital alpha</p>
 
 #### [ Patrick Massot (Apr 22 2018 at 01:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/libary/init/algebra/group/near/125509980):
-`variables (Α : Type) (A : Type)`
+<p><code>variables (Α : Type) (A : Type)</code></p>
 
 #### [ Patrick Massot (Apr 22 2018 at 01:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/libary/init/algebra/group/near/125509981):
-Yeah!
+<p>Yeah!</p>
 
 #### [ Patrick Massot (Apr 22 2018 at 01:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/libary/init/algebra/group/near/125509983):
-Lean doesn't complain
+<p>Lean doesn't complain</p>
 
 #### [ Mario Carneiro (Apr 22 2018 at 01:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/libary/init/algebra/group/near/125509984):
-no, that's shadowing
+<p>no, that's shadowing</p>
 
 #### [ Mario Carneiro (Apr 22 2018 at 01:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/libary/init/algebra/group/near/125509986):
-but universe shadowing is disallowed for some reason...
+<p>but universe shadowing is disallowed for some reason...</p>
 
 #### [ Patrick Massot (Apr 22 2018 at 01:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/libary/init/algebra/group/near/125509991):
-No, I the first one wasn't a capital alpha Lean would complain
+<p>No, I the first one wasn't a capital alpha Lean would complain</p>
 
 #### [ Mario Carneiro (Apr 22 2018 at 01:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/libary/init/algebra/group/near/125510030):
-I stand corrected
+<p>I stand corrected</p>
 
 #### [ Patrick Massot (Apr 22 2018 at 01:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/libary/init/algebra/group/near/125510031):
-Anyway, I should be sleeping
+<p>Anyway, I should be sleeping</p>
 
 #### [ Patrick Massot (Apr 22 2018 at 01:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/libary/init/algebra/group/near/125510041):
-See you!
+<p>See you!</p>
 
 #### [ Kenny Lau (Apr 22 2018 at 01:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/libary/init/algebra/group/near/125510125):
-I just woke up
+<p>I just woke up</p>
 
 
 {% endraw %}

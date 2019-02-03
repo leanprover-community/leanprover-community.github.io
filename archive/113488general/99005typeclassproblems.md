@@ -12,848 +12,828 @@ permalink: archive/113488general/99005typeclassproblems.html
 
 {% raw %}
 #### [ Kenny Lau (Jun 16 2018 at 00:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128143681):
-This loop is breaking everything
-```lean
-[class_instances] (25) ?x_99 : out_param (field ?x_97) := @field_extension.to_field ?x_101 ?x_102 ?x_103 ?x_104
-[class_instances] (26) ?x_104 : @field_extension ?x_101 ?x_102 ?x_103 := @algebraic_field_extension.to_field_extension ?x_105 ?x_106 ?x_107 ?x_108
-[class_instances] (27) ?x_108 : @algebraic_field_extension ?x_105 ?x_106 ?x_107 := @algebraic_closure.to_algebraic_field_extension ?x_109 ?x_110 ?x_111 ?x_112
-```
+<p>This loop is breaking everything</p>
+<div class="codehilite"><pre><span></span><span class="o">[</span><span class="n">class_instances</span><span class="o">]</span> <span class="o">(</span><span class="mi">25</span><span class="o">)</span> <span class="err">?</span><span class="n">x_99</span> <span class="o">:</span> <span class="n">out_param</span> <span class="o">(</span><span class="n">field</span> <span class="err">?</span><span class="n">x_97</span><span class="o">)</span> <span class="o">:=</span> <span class="bp">@</span><span class="n">field_extension</span><span class="bp">.</span><span class="n">to_field</span> <span class="err">?</span><span class="n">x_101</span> <span class="err">?</span><span class="n">x_102</span> <span class="err">?</span><span class="n">x_103</span> <span class="err">?</span><span class="n">x_104</span>
+<span class="o">[</span><span class="n">class_instances</span><span class="o">]</span> <span class="o">(</span><span class="mi">26</span><span class="o">)</span> <span class="err">?</span><span class="n">x_104</span> <span class="o">:</span> <span class="bp">@</span><span class="n">field_extension</span> <span class="err">?</span><span class="n">x_101</span> <span class="err">?</span><span class="n">x_102</span> <span class="err">?</span><span class="n">x_103</span> <span class="o">:=</span> <span class="bp">@</span><span class="n">algebraic_field_extension</span><span class="bp">.</span><span class="n">to_field_extension</span> <span class="err">?</span><span class="n">x_105</span> <span class="err">?</span><span class="n">x_106</span> <span class="err">?</span><span class="n">x_107</span> <span class="err">?</span><span class="n">x_108</span>
+<span class="o">[</span><span class="n">class_instances</span><span class="o">]</span> <span class="o">(</span><span class="mi">27</span><span class="o">)</span> <span class="err">?</span><span class="n">x_108</span> <span class="o">:</span> <span class="bp">@</span><span class="n">algebraic_field_extension</span> <span class="err">?</span><span class="n">x_105</span> <span class="err">?</span><span class="n">x_106</span> <span class="err">?</span><span class="n">x_107</span> <span class="o">:=</span> <span class="bp">@</span><span class="n">algebraic_closure</span><span class="bp">.</span><span class="n">to_algebraic_field_extension</span> <span class="err">?</span><span class="n">x_109</span> <span class="err">?</span><span class="n">x_110</span> <span class="err">?</span><span class="n">x_111</span> <span class="err">?</span><span class="n">x_112</span>
+</pre></div>
 
 #### [ Kenny Lau (Jun 16 2018 at 00:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128143694):
-```lean
-class alg_closed_field (α : Type*) extends field α :=
-(alg_closed : ∀ f : polynomial α, f.deg > 1 → ∃ x, f.eval α α x = 0)
+<div class="codehilite"><pre><span></span><span class="n">class</span> <span class="n">alg_closed_field</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="kn">extends</span> <span class="n">field</span> <span class="n">α</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">alg_closed</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">f</span> <span class="o">:</span> <span class="n">polynomial</span> <span class="n">α</span><span class="o">,</span> <span class="n">f</span><span class="bp">.</span><span class="n">deg</span> <span class="bp">&gt;</span> <span class="mi">1</span> <span class="bp">→</span> <span class="bp">∃</span> <span class="n">x</span><span class="o">,</span> <span class="n">f</span><span class="bp">.</span><span class="kn">eval</span> <span class="n">α</span> <span class="n">α</span> <span class="n">x</span> <span class="bp">=</span> <span class="mi">0</span><span class="o">)</span>
 
-class field_extension (α : out_param $ Type*) (β : Type*)
-  [out_param $ field α] extends field β :=
-(f : α → β) [hom : is_ring_hom f]
+<span class="n">class</span> <span class="n">field_extension</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="n">out_param</span> <span class="err">$</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">(</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span>
+  <span class="o">[</span><span class="n">out_param</span> <span class="err">$</span> <span class="n">field</span> <span class="n">α</span><span class="o">]</span> <span class="kn">extends</span> <span class="n">field</span> <span class="n">β</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span> <span class="o">[</span><span class="n">hom</span> <span class="o">:</span> <span class="n">is_ring_hom</span> <span class="n">f</span><span class="o">]</span>
 
-instance field_extension.to_is_ring_hom (α : Type*) (β : Type*)
-  [field α] [field_extension α β] : is_ring_hom (field_extension.f β) :=
-field_extension.hom β
+<span class="kn">instance</span> <span class="n">field_extension</span><span class="bp">.</span><span class="n">to_is_ring_hom</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">(</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span>
+  <span class="o">[</span><span class="n">field</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">field_extension</span> <span class="n">α</span> <span class="n">β</span><span class="o">]</span> <span class="o">:</span> <span class="n">is_ring_hom</span> <span class="o">(</span><span class="n">field_extension</span><span class="bp">.</span><span class="n">f</span> <span class="n">β</span><span class="o">)</span> <span class="o">:=</span>
+<span class="n">field_extension</span><span class="bp">.</span><span class="n">hom</span> <span class="n">β</span>
 
-instance field_extension.to_algebra (α : Type*) (β : Type*)
-  [field α] [field_extension α β] : algebra α β :=
-{ f := field_extension.f β }
+<span class="kn">instance</span> <span class="n">field_extension</span><span class="bp">.</span><span class="n">to_algebra</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">(</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span>
+  <span class="o">[</span><span class="n">field</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">field_extension</span> <span class="n">α</span> <span class="n">β</span><span class="o">]</span> <span class="o">:</span> <span class="n">algebra</span> <span class="n">α</span> <span class="n">β</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">f</span> <span class="o">:=</span> <span class="n">field_extension</span><span class="bp">.</span><span class="n">f</span> <span class="n">β</span> <span class="o">}</span>
 
-class algebraic_field_extension (α : out_param $ Type*) (β : Type*)
-  [out_param $ field α] extends field_extension α β :=
-(algebraic : ∀ x : β, ∃ f : polynomial α, f.eval α β x = 0)
+<span class="n">class</span> <span class="n">algebraic_field_extension</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="n">out_param</span> <span class="err">$</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">(</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span>
+  <span class="o">[</span><span class="n">out_param</span> <span class="err">$</span> <span class="n">field</span> <span class="n">α</span><span class="o">]</span> <span class="kn">extends</span> <span class="n">field_extension</span> <span class="n">α</span> <span class="n">β</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">algebraic</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span> <span class="o">:</span> <span class="n">β</span><span class="o">,</span> <span class="bp">∃</span> <span class="n">f</span> <span class="o">:</span> <span class="n">polynomial</span> <span class="n">α</span><span class="o">,</span> <span class="n">f</span><span class="bp">.</span><span class="kn">eval</span> <span class="n">α</span> <span class="n">β</span> <span class="n">x</span> <span class="bp">=</span> <span class="mi">0</span><span class="o">)</span>
 
-set_option old_structure_cmd true
+<span class="kn">set_option</span> <span class="n">old_structure_cmd</span> <span class="n">true</span>
 
-class algebraic_closure (α : out_param $ Type*) (β : Type*)
-  [out_param $ field α] extends alg_closed_field β, algebraic_field_extension α β
+<span class="n">class</span> <span class="n">algebraic_closure</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="n">out_param</span> <span class="err">$</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">(</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span>
+  <span class="o">[</span><span class="n">out_param</span> <span class="err">$</span> <span class="n">field</span> <span class="n">α</span><span class="o">]</span> <span class="kn">extends</span> <span class="n">alg_closed_field</span> <span class="n">β</span><span class="o">,</span> <span class="n">algebraic_field_extension</span> <span class="n">α</span> <span class="n">β</span>
 
-set_option old_structure_cmd false
-```
+<span class="kn">set_option</span> <span class="n">old_structure_cmd</span> <span class="n">false</span>
+</pre></div>
 
 #### [ Kenny Lau (Jun 16 2018 at 00:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128143821):
-I'm not very good at dealing with typeclasses
+<p>I'm not very good at dealing with typeclasses</p>
 
 #### [ Kenny Lau (Jun 16 2018 at 00:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128144488):
-somehow the same setting with `ring` instead of `field` doesn't cause this problem:
-```lean
-class algebra (R : out_param Type*) (A : Type*)
-  [out_param $ comm_ring R] extends comm_ring A :=
-(f : R → A) [hom : is_ring_hom f]
-```
-This doesn't cause any loops
+<p>somehow the same setting with <code>ring</code> instead of <code>field</code> doesn't cause this problem:</p>
+<div class="codehilite"><pre><span></span><span class="n">class</span> <span class="n">algebra</span> <span class="o">(</span><span class="n">R</span> <span class="o">:</span> <span class="n">out_param</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">(</span><span class="n">A</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span>
+  <span class="o">[</span><span class="n">out_param</span> <span class="err">$</span> <span class="n">comm_ring</span> <span class="n">R</span><span class="o">]</span> <span class="kn">extends</span> <span class="n">comm_ring</span> <span class="n">A</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">R</span> <span class="bp">→</span> <span class="n">A</span><span class="o">)</span> <span class="o">[</span><span class="n">hom</span> <span class="o">:</span> <span class="n">is_ring_hom</span> <span class="n">f</span><span class="o">]</span>
+</pre></div>
+
+
+<p>This doesn't cause any loops</p>
 
 #### [ Kenny Lau (Jun 16 2018 at 00:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128144728):
-solution:
-```lean
-class is_alg_closed_field (α : Type*) [field α] : Prop :=
-(alg_closed : ∀ f : polynomial α, f.deg > 1 → ∃ x, f.eval α α x = 0)
+<p>solution:</p>
+<div class="codehilite"><pre><span></span><span class="n">class</span> <span class="n">is_alg_closed_field</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">[</span><span class="n">field</span> <span class="n">α</span><span class="o">]</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">alg_closed</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">f</span> <span class="o">:</span> <span class="n">polynomial</span> <span class="n">α</span><span class="o">,</span> <span class="n">f</span><span class="bp">.</span><span class="n">deg</span> <span class="bp">&gt;</span> <span class="mi">1</span> <span class="bp">→</span> <span class="bp">∃</span> <span class="n">x</span><span class="o">,</span> <span class="n">f</span><span class="bp">.</span><span class="kn">eval</span> <span class="n">α</span> <span class="n">α</span> <span class="n">x</span> <span class="bp">=</span> <span class="mi">0</span><span class="o">)</span>
 
-class field_extension (α : out_param $ Type*) (β : Type*)
-  [out_param $ field α] extends field β :=
-(f : α → β) [hom : is_ring_hom f]
+<span class="n">class</span> <span class="n">field_extension</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="n">out_param</span> <span class="err">$</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">(</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span>
+  <span class="o">[</span><span class="n">out_param</span> <span class="err">$</span> <span class="n">field</span> <span class="n">α</span><span class="o">]</span> <span class="kn">extends</span> <span class="n">field</span> <span class="n">β</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span> <span class="o">[</span><span class="n">hom</span> <span class="o">:</span> <span class="n">is_ring_hom</span> <span class="n">f</span><span class="o">]</span>
 
-instance field_extension.to_is_ring_hom (α : Type*) (β : Type*)
-  [field α] [field_extension α β] : is_ring_hom (field_extension.f β) :=
-field_extension.hom β
+<span class="kn">instance</span> <span class="n">field_extension</span><span class="bp">.</span><span class="n">to_is_ring_hom</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">(</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span>
+  <span class="o">[</span><span class="n">field</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">field_extension</span> <span class="n">α</span> <span class="n">β</span><span class="o">]</span> <span class="o">:</span> <span class="n">is_ring_hom</span> <span class="o">(</span><span class="n">field_extension</span><span class="bp">.</span><span class="n">f</span> <span class="n">β</span><span class="o">)</span> <span class="o">:=</span>
+<span class="n">field_extension</span><span class="bp">.</span><span class="n">hom</span> <span class="n">β</span>
 
-instance field_extension.to_algebra (α : Type*) (β : Type*)
-  [field α] [field_extension α β] : algebra α β :=
-{ f := field_extension.f β }
+<span class="kn">instance</span> <span class="n">field_extension</span><span class="bp">.</span><span class="n">to_algebra</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">(</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span>
+  <span class="o">[</span><span class="n">field</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">field_extension</span> <span class="n">α</span> <span class="n">β</span><span class="o">]</span> <span class="o">:</span> <span class="n">algebra</span> <span class="n">α</span> <span class="n">β</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">f</span> <span class="o">:=</span> <span class="n">field_extension</span><span class="bp">.</span><span class="n">f</span> <span class="n">β</span> <span class="o">}</span>
 
-class is_algebraic_field_extension (α : out_param $ Type*) (β : Type*)
-  [out_param $ field α] [field_extension α β] : Prop :=
-(algebraic : ∀ x : β, ∃ f : polynomial α, f.eval α β x = 0)
+<span class="n">class</span> <span class="n">is_algebraic_field_extension</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="n">out_param</span> <span class="err">$</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">(</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span>
+  <span class="o">[</span><span class="n">out_param</span> <span class="err">$</span> <span class="n">field</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">field_extension</span> <span class="n">α</span> <span class="n">β</span><span class="o">]</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">algebraic</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span> <span class="o">:</span> <span class="n">β</span><span class="o">,</span> <span class="bp">∃</span> <span class="n">f</span> <span class="o">:</span> <span class="n">polynomial</span> <span class="n">α</span><span class="o">,</span> <span class="n">f</span><span class="bp">.</span><span class="kn">eval</span> <span class="n">α</span> <span class="n">β</span> <span class="n">x</span> <span class="bp">=</span> <span class="mi">0</span><span class="o">)</span>
 
-class is_algebraic_closure (α : out_param $ Type*) (β : Type*)
-  [field α] [field_extension α β]
-  extends is_alg_closed_field β, is_algebraic_field_extension α β : Prop
-```
+<span class="n">class</span> <span class="n">is_algebraic_closure</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="n">out_param</span> <span class="err">$</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">(</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span>
+  <span class="o">[</span><span class="n">field</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">field_extension</span> <span class="n">α</span> <span class="n">β</span><span class="o">]</span>
+  <span class="kn">extends</span> <span class="n">is_alg_closed_field</span> <span class="n">β</span><span class="o">,</span> <span class="n">is_algebraic_field_extension</span> <span class="n">α</span> <span class="n">β</span> <span class="o">:</span> <span class="kt">Prop</span>
+</pre></div>
 
 #### [ Kenny Lau (Jun 16 2018 at 00:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128144742):
-TLDR: change `algebraic_field_extension` (not `Prop`) to `is_algebraic_field_extension` (`Prop`) etc
+<p>TLDR: change <code>algebraic_field_extension</code> (not <code>Prop</code>) to <code>is_algebraic_field_extension</code> (<code>Prop</code>) etc</p>
 
 #### [ Kenny Lau (Jun 16 2018 at 00:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128144825):
-update: it is not true that the `algebra` causes no problem
+<p>update: it is not true that the <code>algebra</code> causes no problem</p>
 
 #### [ Mario Carneiro (Jun 16 2018 at 00:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128144857):
-> `out_param (field ?x_97)`
-
-not the first time I've seen this today
+<blockquote>
+<p><code>out_param (field ?x_97)</code></p>
+</blockquote>
+<p>not the first time I've seen this today</p>
 
 #### [ Kenny Lau (Jun 16 2018 at 00:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128144919):
-but `module` seems to be doing fine
+<p>but <code>module</code> seems to be doing fine</p>
 
 #### [ Mario Carneiro (Jun 16 2018 at 00:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128144929):
-What caused this typeclass search? You never want to find arbitrary fields
+<p>What caused this typeclass search? You never want to find arbitrary fields</p>
 
 #### [ Kenny Lau (Jun 16 2018 at 00:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128144937):
-what stops `ring.to_module` and `class module ... [ring _]` from forming a loop?
+<p>what stops <code>ring.to_module</code> and <code>class module ... [ring _]</code> from forming a loop?</p>
 
 #### [ Kenny Lau (Jun 16 2018 at 00:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128145013):
-```quote
-What caused this typeclass search? You never want to find arbitrary fields
-```
-I have something involving rings and no fields at all. The searcher wants to know that it has addition. Somehow it got to fields, and then it started the loop
+<blockquote>
+<p>What caused this typeclass search? You never want to find arbitrary fields</p>
+</blockquote>
+<p>I have something involving rings and no fields at all. The searcher wants to know that it has addition. Somehow it got to fields, and then it started the loop</p>
 
 #### [ Mario Carneiro (Jun 16 2018 at 00:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128145033):
-I don't mean just `field ?`, but also `ring ?` and other such things
+<p>I don't mean just <code>field ?</code>, but also <code>ring ?</code> and other such things</p>
 
 #### [ Mario Carneiro (Jun 16 2018 at 00:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128145047):
-the bad sign is a class on a metavar
+<p>the bad sign is a class on a metavar</p>
 
 #### [ Kenny Lau (Jun 16 2018 at 00:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128145075):
-```lean
-[class_instances]  class-instance resolution trace
-[class_instances] (0) ?x_0 : has_zero α := @pi.has_zero ?x_1 ?x_2 ?x_3
-failed is_def_eq
-[class_instances] (0) ?x_0 : has_zero α := cardinal.has_zero
-failed is_def_eq
-[class_instances] (0) ?x_0 : has_zero α := @finsupp.has_zero ?x_4 ?x_5 ?x_6
-failed is_def_eq
-[class_instances] (0) ?x_0 : has_zero α := @multiset.has_zero ?x_7
-failed is_def_eq
-[class_instances] (0) ?x_0 : has_zero α := unsigned.has_zero
-failed is_def_eq
-[class_instances] (0) ?x_0 : has_zero α := @fin.has_zero ?x_8
-failed is_def_eq
-[class_instances] (0) ?x_0 : has_zero α := int.has_zero
-failed is_def_eq
-[class_instances] (0) ?x_0 : has_zero α := nat.has_zero
-failed is_def_eq
-[class_instances] (0) ?x_0 : has_zero α := @no_zero_divisors.to_has_zero ?x_9 ?x_10
-[class_instances] (1) ?x_10 : no_zero_divisors α := @domain.to_no_zero_divisors ?x_11 ?x_12
-[class_instances] (2) ?x_12 : domain α := @linear_nonneg_ring.to_domain ?x_13 ?x_14
-[class_instances] (2) ?x_12 : domain α := @to_domain ?x_13 ?x_14
-[class_instances] (3) ?x_14 : linear_ordered_ring α := @linear_nonneg_ring.to_linear_ordered_ring ?x_15 ?x_16
-[class_instances] (3) ?x_14 : linear_ordered_ring α := @linear_ordered_field.to_linear_ordered_ring ?x_15 ?x_16
-[class_instances] (4) ?x_16 : linear_ordered_field α := @discrete_linear_ordered_field.to_linear_ordered_field ?x_17 ?x_18
-[class_instances] (3) ?x_14 : linear_ordered_ring α := @linear_ordered_comm_ring.to_linear_ordered_ring ?x_15 ?x_16
-[class_instances] (4) ?x_16 : linear_ordered_comm_ring α := @decidable_linear_ordered_comm_ring.to_linear_ordered_comm_ring ?x_17 ?x_18
-[class_instances] (5) ?x_18 : decidable_linear_ordered_comm_ring α := @linear_nonneg_ring.to_decidable_linear_ordered_comm_ring ?x_19 ?x_20 ?x_21 ?x_22
-[class_instances] (5) ?x_18 : decidable_linear_ordered_comm_ring α := int.decidable_linear_ordered_comm_ring
-failed is_def_eq
-[class_instances] (5) ?x_18 : decidable_linear_ordered_comm_ring α := @discrete_linear_ordered_field.to_decidable_linear_ordered_comm_ring ?x_19 ?x_20
-[class_instances] (2) ?x_12 : domain α := @division_ring.to_domain ?x_13 ?x_14
-[class_instances] (3) ?x_14 : division_ring α := @field.to_division_ring ?x_15 ?x_16
-[class_instances] (4) ?x_16 : field α := @field_extension.to_field ?x_17 ?x_18 ?x_19 ?x_20
-[class_instances] (5) ?x_20 : @field_extension ?x_17 α ?x_19 := @algebraic_field_extension.to_field_extension ?x_21 ?x_22 ?x_23 ?x_24
-[class_instances] (6) ?x_24 : @algebraic_field_extension ?x_21 α ?x_23 := @algebraic_closure.to_algebraic_field_extension ?x_25 ?x_26 ?x_27 ?x_28
-[class_instances] (7) ?x_27 : field ?x_25 := @field_extension.to_field ?x_29 ?x_30 ?x_31 ?x_32
-[class_instances] (8) ?x_32 : @field_extension ?x_29 ?x_30 ?x_31 := @algebraic_field_extension.to_field_extension ?x_33 ?x_34 ?x_35 ?x_36
-[class_instances] (9) ?x_36 : @algebraic_field_extension ?x_33 ?x_34 ?x_35 := @algebraic_closure.to_algebraic_field_extension ?x_37 ?x_38 ?x_39 ?x_40
-[class_instances] (10) ?x_39 : field ?x_37 := @field_extension.to_field ?x_41 ?x_42 ?x_43 ?x_44
-```
+<div class="codehilite"><pre><span></span><span class="o">[</span><span class="n">class_instances</span><span class="o">]</span>  <span class="n">class</span><span class="bp">-</span><span class="kn">instance</span> <span class="n">resolution</span> <span class="n">trace</span>
+<span class="o">[</span><span class="n">class_instances</span><span class="o">]</span> <span class="o">(</span><span class="mi">0</span><span class="o">)</span> <span class="err">?</span><span class="n">x_0</span> <span class="o">:</span> <span class="n">has_zero</span> <span class="n">α</span> <span class="o">:=</span> <span class="bp">@</span><span class="n">pi</span><span class="bp">.</span><span class="n">has_zero</span> <span class="err">?</span><span class="n">x_1</span> <span class="err">?</span><span class="n">x_2</span> <span class="err">?</span><span class="n">x_3</span>
+<span class="n">failed</span> <span class="n">is_def_eq</span>
+<span class="o">[</span><span class="n">class_instances</span><span class="o">]</span> <span class="o">(</span><span class="mi">0</span><span class="o">)</span> <span class="err">?</span><span class="n">x_0</span> <span class="o">:</span> <span class="n">has_zero</span> <span class="n">α</span> <span class="o">:=</span> <span class="n">cardinal</span><span class="bp">.</span><span class="n">has_zero</span>
+<span class="n">failed</span> <span class="n">is_def_eq</span>
+<span class="o">[</span><span class="n">class_instances</span><span class="o">]</span> <span class="o">(</span><span class="mi">0</span><span class="o">)</span> <span class="err">?</span><span class="n">x_0</span> <span class="o">:</span> <span class="n">has_zero</span> <span class="n">α</span> <span class="o">:=</span> <span class="bp">@</span><span class="n">finsupp</span><span class="bp">.</span><span class="n">has_zero</span> <span class="err">?</span><span class="n">x_4</span> <span class="err">?</span><span class="n">x_5</span> <span class="err">?</span><span class="n">x_6</span>
+<span class="n">failed</span> <span class="n">is_def_eq</span>
+<span class="o">[</span><span class="n">class_instances</span><span class="o">]</span> <span class="o">(</span><span class="mi">0</span><span class="o">)</span> <span class="err">?</span><span class="n">x_0</span> <span class="o">:</span> <span class="n">has_zero</span> <span class="n">α</span> <span class="o">:=</span> <span class="bp">@</span><span class="n">multiset</span><span class="bp">.</span><span class="n">has_zero</span> <span class="err">?</span><span class="n">x_7</span>
+<span class="n">failed</span> <span class="n">is_def_eq</span>
+<span class="o">[</span><span class="n">class_instances</span><span class="o">]</span> <span class="o">(</span><span class="mi">0</span><span class="o">)</span> <span class="err">?</span><span class="n">x_0</span> <span class="o">:</span> <span class="n">has_zero</span> <span class="n">α</span> <span class="o">:=</span> <span class="n">unsigned</span><span class="bp">.</span><span class="n">has_zero</span>
+<span class="n">failed</span> <span class="n">is_def_eq</span>
+<span class="o">[</span><span class="n">class_instances</span><span class="o">]</span> <span class="o">(</span><span class="mi">0</span><span class="o">)</span> <span class="err">?</span><span class="n">x_0</span> <span class="o">:</span> <span class="n">has_zero</span> <span class="n">α</span> <span class="o">:=</span> <span class="bp">@</span><span class="n">fin</span><span class="bp">.</span><span class="n">has_zero</span> <span class="err">?</span><span class="n">x_8</span>
+<span class="n">failed</span> <span class="n">is_def_eq</span>
+<span class="o">[</span><span class="n">class_instances</span><span class="o">]</span> <span class="o">(</span><span class="mi">0</span><span class="o">)</span> <span class="err">?</span><span class="n">x_0</span> <span class="o">:</span> <span class="n">has_zero</span> <span class="n">α</span> <span class="o">:=</span> <span class="n">int</span><span class="bp">.</span><span class="n">has_zero</span>
+<span class="n">failed</span> <span class="n">is_def_eq</span>
+<span class="o">[</span><span class="n">class_instances</span><span class="o">]</span> <span class="o">(</span><span class="mi">0</span><span class="o">)</span> <span class="err">?</span><span class="n">x_0</span> <span class="o">:</span> <span class="n">has_zero</span> <span class="n">α</span> <span class="o">:=</span> <span class="n">nat</span><span class="bp">.</span><span class="n">has_zero</span>
+<span class="n">failed</span> <span class="n">is_def_eq</span>
+<span class="o">[</span><span class="n">class_instances</span><span class="o">]</span> <span class="o">(</span><span class="mi">0</span><span class="o">)</span> <span class="err">?</span><span class="n">x_0</span> <span class="o">:</span> <span class="n">has_zero</span> <span class="n">α</span> <span class="o">:=</span> <span class="bp">@</span><span class="n">no_zero_divisors</span><span class="bp">.</span><span class="n">to_has_zero</span> <span class="err">?</span><span class="n">x_9</span> <span class="err">?</span><span class="n">x_10</span>
+<span class="o">[</span><span class="n">class_instances</span><span class="o">]</span> <span class="o">(</span><span class="mi">1</span><span class="o">)</span> <span class="err">?</span><span class="n">x_10</span> <span class="o">:</span> <span class="n">no_zero_divisors</span> <span class="n">α</span> <span class="o">:=</span> <span class="bp">@</span><span class="n">domain</span><span class="bp">.</span><span class="n">to_no_zero_divisors</span> <span class="err">?</span><span class="n">x_11</span> <span class="err">?</span><span class="n">x_12</span>
+<span class="o">[</span><span class="n">class_instances</span><span class="o">]</span> <span class="o">(</span><span class="mi">2</span><span class="o">)</span> <span class="err">?</span><span class="n">x_12</span> <span class="o">:</span> <span class="n">domain</span> <span class="n">α</span> <span class="o">:=</span> <span class="bp">@</span><span class="n">linear_nonneg_ring</span><span class="bp">.</span><span class="n">to_domain</span> <span class="err">?</span><span class="n">x_13</span> <span class="err">?</span><span class="n">x_14</span>
+<span class="o">[</span><span class="n">class_instances</span><span class="o">]</span> <span class="o">(</span><span class="mi">2</span><span class="o">)</span> <span class="err">?</span><span class="n">x_12</span> <span class="o">:</span> <span class="n">domain</span> <span class="n">α</span> <span class="o">:=</span> <span class="bp">@</span><span class="n">to_domain</span> <span class="err">?</span><span class="n">x_13</span> <span class="err">?</span><span class="n">x_14</span>
+<span class="o">[</span><span class="n">class_instances</span><span class="o">]</span> <span class="o">(</span><span class="mi">3</span><span class="o">)</span> <span class="err">?</span><span class="n">x_14</span> <span class="o">:</span> <span class="n">linear_ordered_ring</span> <span class="n">α</span> <span class="o">:=</span> <span class="bp">@</span><span class="n">linear_nonneg_ring</span><span class="bp">.</span><span class="n">to_linear_ordered_ring</span> <span class="err">?</span><span class="n">x_15</span> <span class="err">?</span><span class="n">x_16</span>
+<span class="o">[</span><span class="n">class_instances</span><span class="o">]</span> <span class="o">(</span><span class="mi">3</span><span class="o">)</span> <span class="err">?</span><span class="n">x_14</span> <span class="o">:</span> <span class="n">linear_ordered_ring</span> <span class="n">α</span> <span class="o">:=</span> <span class="bp">@</span><span class="n">linear_ordered_field</span><span class="bp">.</span><span class="n">to_linear_ordered_ring</span> <span class="err">?</span><span class="n">x_15</span> <span class="err">?</span><span class="n">x_16</span>
+<span class="o">[</span><span class="n">class_instances</span><span class="o">]</span> <span class="o">(</span><span class="mi">4</span><span class="o">)</span> <span class="err">?</span><span class="n">x_16</span> <span class="o">:</span> <span class="n">linear_ordered_field</span> <span class="n">α</span> <span class="o">:=</span> <span class="bp">@</span><span class="n">discrete_linear_ordered_field</span><span class="bp">.</span><span class="n">to_linear_ordered_field</span> <span class="err">?</span><span class="n">x_17</span> <span class="err">?</span><span class="n">x_18</span>
+<span class="o">[</span><span class="n">class_instances</span><span class="o">]</span> <span class="o">(</span><span class="mi">3</span><span class="o">)</span> <span class="err">?</span><span class="n">x_14</span> <span class="o">:</span> <span class="n">linear_ordered_ring</span> <span class="n">α</span> <span class="o">:=</span> <span class="bp">@</span><span class="n">linear_ordered_comm_ring</span><span class="bp">.</span><span class="n">to_linear_ordered_ring</span> <span class="err">?</span><span class="n">x_15</span> <span class="err">?</span><span class="n">x_16</span>
+<span class="o">[</span><span class="n">class_instances</span><span class="o">]</span> <span class="o">(</span><span class="mi">4</span><span class="o">)</span> <span class="err">?</span><span class="n">x_16</span> <span class="o">:</span> <span class="n">linear_ordered_comm_ring</span> <span class="n">α</span> <span class="o">:=</span> <span class="bp">@</span><span class="n">decidable_linear_ordered_comm_ring</span><span class="bp">.</span><span class="n">to_linear_ordered_comm_ring</span> <span class="err">?</span><span class="n">x_17</span> <span class="err">?</span><span class="n">x_18</span>
+<span class="o">[</span><span class="n">class_instances</span><span class="o">]</span> <span class="o">(</span><span class="mi">5</span><span class="o">)</span> <span class="err">?</span><span class="n">x_18</span> <span class="o">:</span> <span class="n">decidable_linear_ordered_comm_ring</span> <span class="n">α</span> <span class="o">:=</span> <span class="bp">@</span><span class="n">linear_nonneg_ring</span><span class="bp">.</span><span class="n">to_decidable_linear_ordered_comm_ring</span> <span class="err">?</span><span class="n">x_19</span> <span class="err">?</span><span class="n">x_20</span> <span class="err">?</span><span class="n">x_21</span> <span class="err">?</span><span class="n">x_22</span>
+<span class="o">[</span><span class="n">class_instances</span><span class="o">]</span> <span class="o">(</span><span class="mi">5</span><span class="o">)</span> <span class="err">?</span><span class="n">x_18</span> <span class="o">:</span> <span class="n">decidable_linear_ordered_comm_ring</span> <span class="n">α</span> <span class="o">:=</span> <span class="n">int</span><span class="bp">.</span><span class="n">decidable_linear_ordered_comm_ring</span>
+<span class="n">failed</span> <span class="n">is_def_eq</span>
+<span class="o">[</span><span class="n">class_instances</span><span class="o">]</span> <span class="o">(</span><span class="mi">5</span><span class="o">)</span> <span class="err">?</span><span class="n">x_18</span> <span class="o">:</span> <span class="n">decidable_linear_ordered_comm_ring</span> <span class="n">α</span> <span class="o">:=</span> <span class="bp">@</span><span class="n">discrete_linear_ordered_field</span><span class="bp">.</span><span class="n">to_decidable_linear_ordered_comm_ring</span> <span class="err">?</span><span class="n">x_19</span> <span class="err">?</span><span class="n">x_20</span>
+<span class="o">[</span><span class="n">class_instances</span><span class="o">]</span> <span class="o">(</span><span class="mi">2</span><span class="o">)</span> <span class="err">?</span><span class="n">x_12</span> <span class="o">:</span> <span class="n">domain</span> <span class="n">α</span> <span class="o">:=</span> <span class="bp">@</span><span class="n">division_ring</span><span class="bp">.</span><span class="n">to_domain</span> <span class="err">?</span><span class="n">x_13</span> <span class="err">?</span><span class="n">x_14</span>
+<span class="o">[</span><span class="n">class_instances</span><span class="o">]</span> <span class="o">(</span><span class="mi">3</span><span class="o">)</span> <span class="err">?</span><span class="n">x_14</span> <span class="o">:</span> <span class="n">division_ring</span> <span class="n">α</span> <span class="o">:=</span> <span class="bp">@</span><span class="n">field</span><span class="bp">.</span><span class="n">to_division_ring</span> <span class="err">?</span><span class="n">x_15</span> <span class="err">?</span><span class="n">x_16</span>
+<span class="o">[</span><span class="n">class_instances</span><span class="o">]</span> <span class="o">(</span><span class="mi">4</span><span class="o">)</span> <span class="err">?</span><span class="n">x_16</span> <span class="o">:</span> <span class="n">field</span> <span class="n">α</span> <span class="o">:=</span> <span class="bp">@</span><span class="n">field_extension</span><span class="bp">.</span><span class="n">to_field</span> <span class="err">?</span><span class="n">x_17</span> <span class="err">?</span><span class="n">x_18</span> <span class="err">?</span><span class="n">x_19</span> <span class="err">?</span><span class="n">x_20</span>
+<span class="o">[</span><span class="n">class_instances</span><span class="o">]</span> <span class="o">(</span><span class="mi">5</span><span class="o">)</span> <span class="err">?</span><span class="n">x_20</span> <span class="o">:</span> <span class="bp">@</span><span class="n">field_extension</span> <span class="err">?</span><span class="n">x_17</span> <span class="n">α</span> <span class="err">?</span><span class="n">x_19</span> <span class="o">:=</span> <span class="bp">@</span><span class="n">algebraic_field_extension</span><span class="bp">.</span><span class="n">to_field_extension</span> <span class="err">?</span><span class="n">x_21</span> <span class="err">?</span><span class="n">x_22</span> <span class="err">?</span><span class="n">x_23</span> <span class="err">?</span><span class="n">x_24</span>
+<span class="o">[</span><span class="n">class_instances</span><span class="o">]</span> <span class="o">(</span><span class="mi">6</span><span class="o">)</span> <span class="err">?</span><span class="n">x_24</span> <span class="o">:</span> <span class="bp">@</span><span class="n">algebraic_field_extension</span> <span class="err">?</span><span class="n">x_21</span> <span class="n">α</span> <span class="err">?</span><span class="n">x_23</span> <span class="o">:=</span> <span class="bp">@</span><span class="n">algebraic_closure</span><span class="bp">.</span><span class="n">to_algebraic_field_extension</span> <span class="err">?</span><span class="n">x_25</span> <span class="err">?</span><span class="n">x_26</span> <span class="err">?</span><span class="n">x_27</span> <span class="err">?</span><span class="n">x_28</span>
+<span class="o">[</span><span class="n">class_instances</span><span class="o">]</span> <span class="o">(</span><span class="mi">7</span><span class="o">)</span> <span class="err">?</span><span class="n">x_27</span> <span class="o">:</span> <span class="n">field</span> <span class="err">?</span><span class="n">x_25</span> <span class="o">:=</span> <span class="bp">@</span><span class="n">field_extension</span><span class="bp">.</span><span class="n">to_field</span> <span class="err">?</span><span class="n">x_29</span> <span class="err">?</span><span class="n">x_30</span> <span class="err">?</span><span class="n">x_31</span> <span class="err">?</span><span class="n">x_32</span>
+<span class="o">[</span><span class="n">class_instances</span><span class="o">]</span> <span class="o">(</span><span class="mi">8</span><span class="o">)</span> <span class="err">?</span><span class="n">x_32</span> <span class="o">:</span> <span class="bp">@</span><span class="n">field_extension</span> <span class="err">?</span><span class="n">x_29</span> <span class="err">?</span><span class="n">x_30</span> <span class="err">?</span><span class="n">x_31</span> <span class="o">:=</span> <span class="bp">@</span><span class="n">algebraic_field_extension</span><span class="bp">.</span><span class="n">to_field_extension</span> <span class="err">?</span><span class="n">x_33</span> <span class="err">?</span><span class="n">x_34</span> <span class="err">?</span><span class="n">x_35</span> <span class="err">?</span><span class="n">x_36</span>
+<span class="o">[</span><span class="n">class_instances</span><span class="o">]</span> <span class="o">(</span><span class="mi">9</span><span class="o">)</span> <span class="err">?</span><span class="n">x_36</span> <span class="o">:</span> <span class="bp">@</span><span class="n">algebraic_field_extension</span> <span class="err">?</span><span class="n">x_33</span> <span class="err">?</span><span class="n">x_34</span> <span class="err">?</span><span class="n">x_35</span> <span class="o">:=</span> <span class="bp">@</span><span class="n">algebraic_closure</span><span class="bp">.</span><span class="n">to_algebraic_field_extension</span> <span class="err">?</span><span class="n">x_37</span> <span class="err">?</span><span class="n">x_38</span> <span class="err">?</span><span class="n">x_39</span> <span class="err">?</span><span class="n">x_40</span>
+<span class="o">[</span><span class="n">class_instances</span><span class="o">]</span> <span class="o">(</span><span class="mi">10</span><span class="o">)</span> <span class="err">?</span><span class="n">x_39</span> <span class="o">:</span> <span class="n">field</span> <span class="err">?</span><span class="n">x_37</span> <span class="o">:=</span> <span class="bp">@</span><span class="n">field_extension</span><span class="bp">.</span><span class="n">to_field</span> <span class="err">?</span><span class="n">x_41</span> <span class="err">?</span><span class="n">x_42</span> <span class="err">?</span><span class="n">x_43</span> <span class="err">?</span><span class="n">x_44</span>
+</pre></div>
 
 #### [ Kenny Lau (Jun 16 2018 at 00:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128145120):
-loop the last 3 lines
+<p>loop the last 3 lines</p>
 
 #### [ Mario Carneiro (Jun 16 2018 at 00:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128145133):
-`field_extension.to_field`
+<p><code>field_extension.to_field</code></p>
 
 #### [ Mario Carneiro (Jun 16 2018 at 00:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128145134):
-kill it
+<p>kill it</p>
 
 #### [ Kenny Lau (Jun 16 2018 at 00:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128145145):
-```lean
-class field_extension (α : out_param $ Type*) (β : Type*)
-  [out_param $ field α] extends field β :=
-(f : α → β) [hom : is_ring_hom f]
-```
+<div class="codehilite"><pre><span></span><span class="n">class</span> <span class="n">field_extension</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="n">out_param</span> <span class="err">$</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">(</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span>
+  <span class="o">[</span><span class="n">out_param</span> <span class="err">$</span> <span class="n">field</span> <span class="n">α</span><span class="o">]</span> <span class="kn">extends</span> <span class="n">field</span> <span class="n">β</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span> <span class="o">[</span><span class="n">hom</span> <span class="o">:</span> <span class="n">is_ring_hom</span> <span class="n">f</span><span class="o">]</span>
+</pre></div>
 
 #### [ Kenny Lau (Jun 16 2018 at 00:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128145161):
-```lean
-class algebra (R : out_param Type*) (A : Type*)
-  [out_param $ comm_ring R] extends comm_ring A :=
-(f : R → A) [hom : is_ring_hom f]
-```
+<div class="codehilite"><pre><span></span><span class="n">class</span> <span class="n">algebra</span> <span class="o">(</span><span class="n">R</span> <span class="o">:</span> <span class="n">out_param</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">(</span><span class="n">A</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span>
+  <span class="o">[</span><span class="n">out_param</span> <span class="err">$</span> <span class="n">comm_ring</span> <span class="n">R</span><span class="o">]</span> <span class="kn">extends</span> <span class="n">comm_ring</span> <span class="n">A</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">R</span> <span class="bp">→</span> <span class="n">A</span><span class="o">)</span> <span class="o">[</span><span class="n">hom</span> <span class="o">:</span> <span class="n">is_ring_hom</span> <span class="n">f</span><span class="o">]</span>
+</pre></div>
 
 #### [ Kenny Lau (Jun 16 2018 at 00:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128145162):
-```lean
-class module (α : out_param $ Type u) (β : Type v) [out_param $ ring α]
-  extends has_scalar α β, add_comm_group β :=
-(smul_add : ∀r (x y : β), r • (x + y) = r • x + r • y)
-(add_smul : ∀r s (x : β), (r + s) • x = r • x + s • x)
-(mul_smul : ∀r s (x : β), (r * s) • x = r • s • x)
-(one_smul : ∀x : β, (1 : α) • x = x)
-```
+<div class="codehilite"><pre><span></span><span class="n">class</span> <span class="n">module</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="n">out_param</span> <span class="err">$</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">(</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">)</span> <span class="o">[</span><span class="n">out_param</span> <span class="err">$</span> <span class="n">ring</span> <span class="n">α</span><span class="o">]</span>
+  <span class="kn">extends</span> <span class="n">has_scalar</span> <span class="n">α</span> <span class="n">β</span><span class="o">,</span> <span class="n">add_comm_group</span> <span class="n">β</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">smul_add</span> <span class="o">:</span> <span class="bp">∀</span><span class="n">r</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">β</span><span class="o">),</span> <span class="n">r</span> <span class="err">•</span> <span class="o">(</span><span class="n">x</span> <span class="bp">+</span> <span class="n">y</span><span class="o">)</span> <span class="bp">=</span> <span class="n">r</span> <span class="err">•</span> <span class="n">x</span> <span class="bp">+</span> <span class="n">r</span> <span class="err">•</span> <span class="n">y</span><span class="o">)</span>
+<span class="o">(</span><span class="n">add_smul</span> <span class="o">:</span> <span class="bp">∀</span><span class="n">r</span> <span class="n">s</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">β</span><span class="o">),</span> <span class="o">(</span><span class="n">r</span> <span class="bp">+</span> <span class="n">s</span><span class="o">)</span> <span class="err">•</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">r</span> <span class="err">•</span> <span class="n">x</span> <span class="bp">+</span> <span class="n">s</span> <span class="err">•</span> <span class="n">x</span><span class="o">)</span>
+<span class="o">(</span><span class="n">mul_smul</span> <span class="o">:</span> <span class="bp">∀</span><span class="n">r</span> <span class="n">s</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">β</span><span class="o">),</span> <span class="o">(</span><span class="n">r</span> <span class="bp">*</span> <span class="n">s</span><span class="o">)</span> <span class="err">•</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">r</span> <span class="err">•</span> <span class="n">s</span> <span class="err">•</span> <span class="n">x</span><span class="o">)</span>
+<span class="o">(</span><span class="n">one_smul</span> <span class="o">:</span> <span class="bp">∀</span><span class="n">x</span> <span class="o">:</span> <span class="n">β</span><span class="o">,</span> <span class="o">(</span><span class="mi">1</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="err">•</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">x</span><span class="o">)</span>
+</pre></div>
 
 #### [ Kenny Lau (Jun 16 2018 at 00:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128145165):
-(not that `algebra` is not causing problem)
+<p>(not that <code>algebra</code> is not causing problem)</p>
 
 #### [ Kenny Lau (Jun 16 2018 at 00:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128145204):
-why does `module` have no problem
+<p>why does <code>module</code> have no problem</p>
 
 #### [ Kenny Lau (Jun 16 2018 at 00:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128145313):
-@**Mario Carneiro** what should I replace it with?
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> what should I replace it with?</p>
 
 #### [ Kenny Lau (Jun 16 2018 at 00:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128145315):
-I see
+<p>I see</p>
 
 #### [ Kenny Lau (Jun 16 2018 at 01:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128147101):
-```lean
-class subring (α : Type*) [comm_ring α] (S : set α) : Prop :=
-(add_mem : ∀ {x y}, x ∈ S → y ∈ S → x + y ∈ S)
-(neg_mem : ∀ {x}, x ∈ S → -x ∈ S)
-(mul_mem : ∀ {x y}, x ∈ S → y ∈ S → x * y ∈ S)
-(one_mem : (1:α) ∈ S)
+<div class="codehilite"><pre><span></span><span class="n">class</span> <span class="n">subring</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">S</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">add_mem</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">x</span> <span class="n">y</span><span class="o">},</span> <span class="n">x</span> <span class="err">∈</span> <span class="n">S</span> <span class="bp">→</span> <span class="n">y</span> <span class="err">∈</span> <span class="n">S</span> <span class="bp">→</span> <span class="n">x</span> <span class="bp">+</span> <span class="n">y</span> <span class="err">∈</span> <span class="n">S</span><span class="o">)</span>
+<span class="o">(</span><span class="n">neg_mem</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">x</span><span class="o">},</span> <span class="n">x</span> <span class="err">∈</span> <span class="n">S</span> <span class="bp">→</span> <span class="bp">-</span><span class="n">x</span> <span class="err">∈</span> <span class="n">S</span><span class="o">)</span>
+<span class="o">(</span><span class="n">mul_mem</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">x</span> <span class="n">y</span><span class="o">},</span> <span class="n">x</span> <span class="err">∈</span> <span class="n">S</span> <span class="bp">→</span> <span class="n">y</span> <span class="err">∈</span> <span class="n">S</span> <span class="bp">→</span> <span class="n">x</span> <span class="bp">*</span> <span class="n">y</span> <span class="err">∈</span> <span class="n">S</span><span class="o">)</span>
+<span class="o">(</span><span class="n">one_mem</span> <span class="o">:</span> <span class="o">(</span><span class="mi">1</span><span class="o">:</span><span class="n">α</span><span class="o">)</span> <span class="err">∈</span> <span class="n">S</span><span class="o">)</span>
 
-open subring
+<span class="kn">open</span> <span class="n">subring</span>
 
-instance subring.to_comm_ring (α : Type*) [comm_ring α] (S : set α) [subring α S] : comm_ring S :=
-{ add            := λ ⟨x, hx⟩ ⟨y, hy⟩, ⟨x + y, add_mem hx hy⟩,
-  add_assoc      := λ ⟨x, hx⟩ ⟨y, hy⟩ ⟨z, hz⟩, subtype.eq $ add_assoc x y z,
-  zero           := ⟨0, eq.subst (add_neg_self (1:α)) $ add_mem (one_mem S) $ neg_mem $ one_mem S⟩,
-  zero_add       := λ ⟨x, hx⟩, subtype.eq $ zero_add x,
-  add_zero       := λ ⟨x, hx⟩, subtype.eq $ add_zero x,
-  neg            := λ ⟨x, hx⟩, ⟨-x, neg_mem hx⟩,
-  add_left_neg   := λ ⟨x, hx⟩, subtype.eq $ add_left_neg x,
-  add_comm       := λ ⟨x, hx⟩ ⟨y, hy⟩, subtype.eq $ add_comm x y,
-  mul            := λ ⟨x, hx⟩ ⟨y, hy⟩, ⟨x * y, mul_mem hx hy⟩,
-  mul_assoc      := λ ⟨x, hx⟩ ⟨y, hy⟩ ⟨z, hz⟩, subtype.eq $ mul_assoc x y z,
-  one            := ⟨1, one_mem S⟩,
-  one_mul        := λ ⟨x, hx⟩, subtype.eq $ one_mul x,
-  mul_one        := λ ⟨x, hx⟩, subtype.eq $ mul_one x,
-  left_distrib   := λ ⟨x, hx⟩ ⟨y, hy⟩ ⟨z, hz⟩, subtype.eq $ left_distrib x y z,
-  right_distrib  := λ ⟨x, hx⟩ ⟨y, hy⟩ ⟨z, hz⟩, subtype.eq $ right_distrib x y z,
-  mul_comm       := λ ⟨x, hx⟩ ⟨y, hy⟩, subtype.eq $ mul_comm x y }
-```
+<span class="kn">instance</span> <span class="n">subring</span><span class="bp">.</span><span class="n">to_comm_ring</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">S</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span><span class="o">)</span> <span class="o">[</span><span class="n">subring</span> <span class="n">α</span> <span class="n">S</span><span class="o">]</span> <span class="o">:</span> <span class="n">comm_ring</span> <span class="n">S</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">add</span>            <span class="o">:=</span> <span class="bp">λ</span> <span class="bp">⟨</span><span class="n">x</span><span class="o">,</span> <span class="n">hx</span><span class="bp">⟩</span> <span class="bp">⟨</span><span class="n">y</span><span class="o">,</span> <span class="n">hy</span><span class="bp">⟩</span><span class="o">,</span> <span class="bp">⟨</span><span class="n">x</span> <span class="bp">+</span> <span class="n">y</span><span class="o">,</span> <span class="n">add_mem</span> <span class="n">hx</span> <span class="n">hy</span><span class="bp">⟩</span><span class="o">,</span>
+  <span class="n">add_assoc</span>      <span class="o">:=</span> <span class="bp">λ</span> <span class="bp">⟨</span><span class="n">x</span><span class="o">,</span> <span class="n">hx</span><span class="bp">⟩</span> <span class="bp">⟨</span><span class="n">y</span><span class="o">,</span> <span class="n">hy</span><span class="bp">⟩</span> <span class="bp">⟨</span><span class="n">z</span><span class="o">,</span> <span class="n">hz</span><span class="bp">⟩</span><span class="o">,</span> <span class="n">subtype</span><span class="bp">.</span><span class="n">eq</span> <span class="err">$</span> <span class="n">add_assoc</span> <span class="n">x</span> <span class="n">y</span> <span class="n">z</span><span class="o">,</span>
+  <span class="n">zero</span>           <span class="o">:=</span> <span class="bp">⟨</span><span class="mi">0</span><span class="o">,</span> <span class="n">eq</span><span class="bp">.</span><span class="n">subst</span> <span class="o">(</span><span class="n">add_neg_self</span> <span class="o">(</span><span class="mi">1</span><span class="o">:</span><span class="n">α</span><span class="o">))</span> <span class="err">$</span> <span class="n">add_mem</span> <span class="o">(</span><span class="n">one_mem</span> <span class="n">S</span><span class="o">)</span> <span class="err">$</span> <span class="n">neg_mem</span> <span class="err">$</span> <span class="n">one_mem</span> <span class="n">S</span><span class="bp">⟩</span><span class="o">,</span>
+  <span class="n">zero_add</span>       <span class="o">:=</span> <span class="bp">λ</span> <span class="bp">⟨</span><span class="n">x</span><span class="o">,</span> <span class="n">hx</span><span class="bp">⟩</span><span class="o">,</span> <span class="n">subtype</span><span class="bp">.</span><span class="n">eq</span> <span class="err">$</span> <span class="n">zero_add</span> <span class="n">x</span><span class="o">,</span>
+  <span class="n">add_zero</span>       <span class="o">:=</span> <span class="bp">λ</span> <span class="bp">⟨</span><span class="n">x</span><span class="o">,</span> <span class="n">hx</span><span class="bp">⟩</span><span class="o">,</span> <span class="n">subtype</span><span class="bp">.</span><span class="n">eq</span> <span class="err">$</span> <span class="n">add_zero</span> <span class="n">x</span><span class="o">,</span>
+  <span class="n">neg</span>            <span class="o">:=</span> <span class="bp">λ</span> <span class="bp">⟨</span><span class="n">x</span><span class="o">,</span> <span class="n">hx</span><span class="bp">⟩</span><span class="o">,</span> <span class="bp">⟨-</span><span class="n">x</span><span class="o">,</span> <span class="n">neg_mem</span> <span class="n">hx</span><span class="bp">⟩</span><span class="o">,</span>
+  <span class="n">add_left_neg</span>   <span class="o">:=</span> <span class="bp">λ</span> <span class="bp">⟨</span><span class="n">x</span><span class="o">,</span> <span class="n">hx</span><span class="bp">⟩</span><span class="o">,</span> <span class="n">subtype</span><span class="bp">.</span><span class="n">eq</span> <span class="err">$</span> <span class="n">add_left_neg</span> <span class="n">x</span><span class="o">,</span>
+  <span class="n">add_comm</span>       <span class="o">:=</span> <span class="bp">λ</span> <span class="bp">⟨</span><span class="n">x</span><span class="o">,</span> <span class="n">hx</span><span class="bp">⟩</span> <span class="bp">⟨</span><span class="n">y</span><span class="o">,</span> <span class="n">hy</span><span class="bp">⟩</span><span class="o">,</span> <span class="n">subtype</span><span class="bp">.</span><span class="n">eq</span> <span class="err">$</span> <span class="n">add_comm</span> <span class="n">x</span> <span class="n">y</span><span class="o">,</span>
+  <span class="n">mul</span>            <span class="o">:=</span> <span class="bp">λ</span> <span class="bp">⟨</span><span class="n">x</span><span class="o">,</span> <span class="n">hx</span><span class="bp">⟩</span> <span class="bp">⟨</span><span class="n">y</span><span class="o">,</span> <span class="n">hy</span><span class="bp">⟩</span><span class="o">,</span> <span class="bp">⟨</span><span class="n">x</span> <span class="bp">*</span> <span class="n">y</span><span class="o">,</span> <span class="n">mul_mem</span> <span class="n">hx</span> <span class="n">hy</span><span class="bp">⟩</span><span class="o">,</span>
+  <span class="n">mul_assoc</span>      <span class="o">:=</span> <span class="bp">λ</span> <span class="bp">⟨</span><span class="n">x</span><span class="o">,</span> <span class="n">hx</span><span class="bp">⟩</span> <span class="bp">⟨</span><span class="n">y</span><span class="o">,</span> <span class="n">hy</span><span class="bp">⟩</span> <span class="bp">⟨</span><span class="n">z</span><span class="o">,</span> <span class="n">hz</span><span class="bp">⟩</span><span class="o">,</span> <span class="n">subtype</span><span class="bp">.</span><span class="n">eq</span> <span class="err">$</span> <span class="n">mul_assoc</span> <span class="n">x</span> <span class="n">y</span> <span class="n">z</span><span class="o">,</span>
+  <span class="n">one</span>            <span class="o">:=</span> <span class="bp">⟨</span><span class="mi">1</span><span class="o">,</span> <span class="n">one_mem</span> <span class="n">S</span><span class="bp">⟩</span><span class="o">,</span>
+  <span class="n">one_mul</span>        <span class="o">:=</span> <span class="bp">λ</span> <span class="bp">⟨</span><span class="n">x</span><span class="o">,</span> <span class="n">hx</span><span class="bp">⟩</span><span class="o">,</span> <span class="n">subtype</span><span class="bp">.</span><span class="n">eq</span> <span class="err">$</span> <span class="n">one_mul</span> <span class="n">x</span><span class="o">,</span>
+  <span class="n">mul_one</span>        <span class="o">:=</span> <span class="bp">λ</span> <span class="bp">⟨</span><span class="n">x</span><span class="o">,</span> <span class="n">hx</span><span class="bp">⟩</span><span class="o">,</span> <span class="n">subtype</span><span class="bp">.</span><span class="n">eq</span> <span class="err">$</span> <span class="n">mul_one</span> <span class="n">x</span><span class="o">,</span>
+  <span class="n">left_distrib</span>   <span class="o">:=</span> <span class="bp">λ</span> <span class="bp">⟨</span><span class="n">x</span><span class="o">,</span> <span class="n">hx</span><span class="bp">⟩</span> <span class="bp">⟨</span><span class="n">y</span><span class="o">,</span> <span class="n">hy</span><span class="bp">⟩</span> <span class="bp">⟨</span><span class="n">z</span><span class="o">,</span> <span class="n">hz</span><span class="bp">⟩</span><span class="o">,</span> <span class="n">subtype</span><span class="bp">.</span><span class="n">eq</span> <span class="err">$</span> <span class="n">left_distrib</span> <span class="n">x</span> <span class="n">y</span> <span class="n">z</span><span class="o">,</span>
+  <span class="n">right_distrib</span>  <span class="o">:=</span> <span class="bp">λ</span> <span class="bp">⟨</span><span class="n">x</span><span class="o">,</span> <span class="n">hx</span><span class="bp">⟩</span> <span class="bp">⟨</span><span class="n">y</span><span class="o">,</span> <span class="n">hy</span><span class="bp">⟩</span> <span class="bp">⟨</span><span class="n">z</span><span class="o">,</span> <span class="n">hz</span><span class="bp">⟩</span><span class="o">,</span> <span class="n">subtype</span><span class="bp">.</span><span class="n">eq</span> <span class="err">$</span> <span class="n">right_distrib</span> <span class="n">x</span> <span class="n">y</span> <span class="n">z</span><span class="o">,</span>
+  <span class="n">mul_comm</span>       <span class="o">:=</span> <span class="bp">λ</span> <span class="bp">⟨</span><span class="n">x</span><span class="o">,</span> <span class="n">hx</span><span class="bp">⟩</span> <span class="bp">⟨</span><span class="n">y</span><span class="o">,</span> <span class="n">hy</span><span class="bp">⟩</span><span class="o">,</span> <span class="n">subtype</span><span class="bp">.</span><span class="n">eq</span> <span class="err">$</span> <span class="n">mul_comm</span> <span class="n">x</span> <span class="n">y</span> <span class="o">}</span>
+</pre></div>
 
 #### [ Kenny Lau (Jun 16 2018 at 01:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128147109):
-will this `instance` cause problems?
+<p>will this <code>instance</code> cause problems?</p>
 
 #### [ Kenny Lau (Jun 16 2018 at 01:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128147157):
-if so, what should I replace it with?
+<p>if so, what should I replace it with?</p>
 
 #### [ Kenny Lau (Jun 16 2018 at 03:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128150369):
-adding `by letI := subring.to_comm_ring _ S` to every definition and theorem is not very feasible
+<p>adding <code>by letI := subring.to_comm_ring _ S</code> to every definition and theorem is not very feasible</p>
 
 #### [ Kenny Lau (Jun 16 2018 at 03:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128150378):
-and is wasting me a lot of time
+<p>and is wasting me a lot of time</p>
 
 #### [ Kenny Lau (Jun 16 2018 at 03:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128150382):
-but as soon as I make it an instance, everything crashes
+<p>but as soon as I make it an instance, everything crashes</p>
 
 #### [ Kenny Lau (Jun 16 2018 at 11:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128162502):
-what is this
+<p>what is this</p>
 
 #### [ Kenny Lau (Jun 16 2018 at 11:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128162503):
-```lean
-def Hausdorff_abelianization (G : Type*) [t : topological_group G] : Type* :=
-@left_cosets (abelianization G) _ (closure {1})
-  (by apply_instance)
-```
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">Hausdorff_abelianization</span> <span class="o">(</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">[</span><span class="n">t</span> <span class="o">:</span> <span class="n">topological_group</span> <span class="n">G</span><span class="o">]</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span> <span class="o">:=</span>
+<span class="bp">@</span><span class="n">left_cosets</span> <span class="o">(</span><span class="n">abelianization</span> <span class="n">G</span><span class="o">)</span> <span class="bp">_</span> <span class="o">(</span><span class="n">closure</span> <span class="o">{</span><span class="mi">1</span><span class="o">})</span>
+  <span class="o">(</span><span class="k">by</span> <span class="n">apply_instance</span><span class="o">)</span>
+</pre></div>
 
 #### [ Kenny Lau (Jun 16 2018 at 11:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128162544):
-```lean
-[class_instances] (0) ?x_60 : topological_group G := t
-failed is_def_eq
-```
+<div class="codehilite"><pre><span></span><span class="o">[</span><span class="n">class_instances</span><span class="o">]</span> <span class="o">(</span><span class="mi">0</span><span class="o">)</span> <span class="err">?</span><span class="n">x_60</span> <span class="o">:</span> <span class="n">topological_group</span> <span class="n">G</span> <span class="o">:=</span> <span class="n">t</span>
+<span class="n">failed</span> <span class="n">is_def_eq</span>
+</pre></div>
 
 #### [ Kenny Lau (Jun 16 2018 at 11:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128162755):
-Lean, they *are* the same
+<p>Lean, they <em>are</em> the same</p>
 
 #### [ Kenny Lau (Jun 16 2018 at 13:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128165992):
-if `subring.to_comm_ring` causes problems then why doesn't `subtype.group` cause problems?
+<p>if <code>subring.to_comm_ring</code> causes problems then why doesn't <code>subtype.group</code> cause problems?</p>
 
 #### [ Kenny Lau (Jun 16 2018 at 15:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128168992):
-```quote
-@**Patrick Massot** @**Sebastian Ullrich** @**Mario Carneiro** it can be avoided by using universes instead of `Type*`
-```
-https://leanprover.zulipchat.com/#narrow/stream/113488-general/subject/unfolding.20notation.20in.20theorem.20vs.20def.2Finstance/near/128167978
+<blockquote>
+<p><span class="user-mention" data-user-id="110031">@Patrick Massot</span> <span class="user-mention" data-user-id="110024">@Sebastian Ullrich</span> <span class="user-mention" data-user-id="110049">@Mario Carneiro</span> it can be avoided by using universes instead of <code>Type*</code></p>
+</blockquote>
+<p><a href="#narrow/stream/113488-general/subject/unfolding.20notation.20in.20theorem.20vs.20def.2Finstance/near/128167978" title="#narrow/stream/113488-general/subject/unfolding.20notation.20in.20theorem.20vs.20def.2Finstance/near/128167978">https://leanprover.zulipchat.com/#narrow/stream/113488-general/subject/unfolding.20notation.20in.20theorem.20vs.20def.2Finstance/near/128167978</a></p>
 
 #### [ Kenny Lau (Jun 16 2018 at 15:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128168993):
-oh and of ***course*** the same trick applies to this case
+<p>oh and of <strong><em>course</em></strong> the same trick applies to this case</p>
 
 #### [ Kenny Lau (Jun 16 2018 at 15:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128168994):
-there's no loop any more
+<p>there's no loop any more</p>
 
 #### [ Kenny Lau (Jun 16 2018 at 15:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128168995):
-once I use `Type u` instead of `Type*`
+<p>once I use <code>Type u</code> instead of <code>Type*</code></p>
 
 #### [ Kenny Lau (Jun 16 2018 at 15:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128169044):
-```quote
-Lean, they *are* the same
-```
-https://leanprover.zulipchat.com/#narrow/stream/113488-general/subject/typeclass.20problems/near/128162755
+<blockquote>
+<p>Lean, they <em>are</em> the same</p>
+</blockquote>
+<p><a href="#narrow/stream/113488-general/subject/typeclass.20problems/near/128162755" title="#narrow/stream/113488-general/subject/typeclass.20problems/near/128162755">https://leanprover.zulipchat.com/#narrow/stream/113488-general/subject/typeclass.20problems/near/128162755</a></p>
 
 #### [ Kenny Lau (Jun 16 2018 at 15:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128169046):
-ditto
+<p>ditto</p>
 
 #### [ Kenny Lau (Jun 16 2018 at 19:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128174540):
-Is this a good instance?
-```lean
-def Hausdorff_abelianization.setoid (G : Type u)
-  [topological_group G] : setoid G :=
-left_rel (closure (commutator_subgroup G set.univ))
-```
+<p>Is this a good instance?</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">Hausdorff_abelianization</span><span class="bp">.</span><span class="n">setoid</span> <span class="o">(</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span>
+  <span class="o">[</span><span class="n">topological_group</span> <span class="n">G</span><span class="o">]</span> <span class="o">:</span> <span class="n">setoid</span> <span class="n">G</span> <span class="o">:=</span>
+<span class="n">left_rel</span> <span class="o">(</span><span class="n">closure</span> <span class="o">(</span><span class="n">commutator_subgroup</span> <span class="n">G</span> <span class="n">set</span><span class="bp">.</span><span class="n">univ</span><span class="o">))</span>
+</pre></div>
 
 #### [ Mario Carneiro (Jun 16 2018 at 19:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128174678):
-A local instance maybe
+<p>A local instance maybe</p>
 
 #### [ Mario Carneiro (Jun 16 2018 at 19:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128174679):
-it looks a bit domain specific
+<p>it looks a bit domain specific</p>
 
 #### [ Kenny Lau (Jun 16 2018 at 19:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128174680):
-domain specific?
+<p>domain specific?</p>
 
 #### [ Mario Carneiro (Jun 16 2018 at 19:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128174681):
-is there a reason that should be the canonical equivalence on any top group?
+<p>is there a reason that should be the canonical equivalence on any top group?</p>
 
 #### [ Kenny Lau (Jun 16 2018 at 19:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128174686):
-it's the functor from TopGrp to AbelianHasudorffTopGrp
+<p>it's the functor from TopGrp to AbelianHasudorffTopGrp</p>
 
 #### [ Johan Commelin (Jun 16 2018 at 19:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128174688):
-Kenny, for every topological group G, there should be at most 1 instance of `setoid G`.
+<p>Kenny, for every topological group G, there should be at most 1 instance of <code>setoid G</code>.</p>
 
 #### [ Kenny Lau (Jun 16 2018 at 19:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128174689):
-I see
+<p>I see</p>
 
 #### [ Kenny Lau (Jun 16 2018 at 19:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128174690):
-ok this isn't canonical then
+<p>ok this isn't canonical then</p>
 
 #### [ Johan Commelin (Jun 16 2018 at 19:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128174737):
-So you should probably not make this an instance. But possibly define AbHausTopGrp, and make it an instance of that...
+<p>So you should probably not make this an instance. But possibly define AbHausTopGrp, and make it an instance of that...</p>
 
 #### [ Kenny Lau (Jun 16 2018 at 19:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128174743):
-I'm glad I didn't switch the first two words of the name of the category... :D
+<p>I'm glad I didn't switch the first two words of the name of the category... :D</p>
 
 #### [ Johan Commelin (Jun 16 2018 at 19:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128174782):
-I don't get what would be wrong with that? ... Am I overly naive, and missing a joke?
+<p>I don't get what would be wrong with that? ... Am I overly naive, and missing a joke?</p>
 
 #### [ Kenny Lau (Jun 16 2018 at 19:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128174789):
-it sounds similar to a rude word in german
+<p>it sounds similar to a rude word in german</p>
 
 #### [ Johan Commelin (Jun 16 2018 at 19:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128174830):
-Ach so, ich muss noch viel Deutsch üben. Und ich kenn kein unhöfliche Worten.
+<p>Ach so, ich muss noch viel Deutsch üben. Und ich kenn kein unhöfliche Worten.</p>
 
 #### [ Kenny Lau (Jun 16 2018 at 19:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128174838):
-"Hau ab" means "piss off"
+<p>"Hau ab" means "piss off"</p>
 
 #### [ Johan Commelin (Jun 16 2018 at 19:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128174879):
-Wunderbar
+<p>Wunderbar</p>
 
 #### [ Kenny Lau (Jun 18 2018 at 00:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128218541):
-[2018-06-17-2.png](/user_uploads/3121/THVijpQP7DblIbSyWC9G2hGx/2018-06-17-2.png)
+<p><a href="/user_uploads/3121/THVijpQP7DblIbSyWC9G2hGx/2018-06-17-2.png" target="_blank" title="2018-06-17-2.png">2018-06-17-2.png</a></p>
+<div class="message_inline_image"><a href="/user_uploads/3121/THVijpQP7DblIbSyWC9G2hGx/2018-06-17-2.png" target="_blank" title="2018-06-17-2.png"><img src="/user_uploads/3121/THVijpQP7DblIbSyWC9G2hGx/2018-06-17-2.png"></a></div>
 
 #### [ Kenny Lau (Jun 18 2018 at 00:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128218546):
-when I turn `trace.class_instances` on, there's nothing peculiar, except the `has_sizeof` thing getting pretty long
+<p>when I turn <code>trace.class_instances</code> on, there's nothing peculiar, except the <code>has_sizeof</code> thing getting pretty long</p>
 
 #### [ Kenny Lau (Jun 18 2018 at 00:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128218550):
-that option is not really helpful in my experience
+<p>that option is not really helpful in my experience</p>
 
 #### [ Kenny Lau (Jun 18 2018 at 00:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128218552):
-@**Mario Carneiro**
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span></p>
 
 #### [ Kenny Lau (Jun 18 2018 at 00:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128219542):
-oh and the depth of the class instance search never went to 6
+<p>oh and the depth of the class instance search never went to 6</p>
 
 #### [ Kenny Lau (Jun 18 2018 at 00:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128219604):
-and I don't think `cogroup.base_change_left` is the problem, after looking at the trace
+<p>and I don't think <code>cogroup.base_change_left</code> is the problem, after looking at the trace</p>
 
 #### [ Kenny Lau (Jun 18 2018 at 00:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128219700):
-it's here: https://github.com/kckennylau/local-langlands-abelian/blob/master/src/torus.lean#L136
+<p>it's here: <a href="https://github.com/kckennylau/local-langlands-abelian/blob/master/src/torus.lean#L136" target="_blank" title="https://github.com/kckennylau/local-langlands-abelian/blob/master/src/torus.lean#L136">https://github.com/kckennylau/local-langlands-abelian/blob/master/src/torus.lean#L136</a></p>
 
 #### [ Simon Hudon (Jun 18 2018 at 00:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128219741):
-Why does it need an instance of `has_sizeof`?
+<p>Why does it need an instance of <code>has_sizeof</code>?</p>
 
 #### [ Kenny Lau (Jun 18 2018 at 00:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128219742):
-no idea
+<p>no idea</p>
 
 #### [ Kenny Lau (Jun 18 2018 at 00:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128219743):
-to build a structure, I think?
+<p>to build a structure, I think?</p>
 
 #### [ Kenny Lau (Jun 18 2018 at 00:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128219748):
-Please help me, my deadline is in like 12 hours
+<p>Please help me, my deadline is in like 12 hours</p>
 
 #### [ Simon Hudon (Jun 18 2018 at 00:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128219751):
-Your screenshot is not telling me much. If you comment one field declaration at a time, when does it stop failing?
+<p>Your screenshot is not telling me much. If you comment one field declaration at a time, when does it stop failing?</p>
 
 #### [ Kenny Lau (Jun 18 2018 at 00:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128219752):
-as soon as I remove the last field
+<p>as soon as I remove the last field</p>
 
 #### [ Kenny Lau (Jun 18 2018 at 01:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128219907):
-@**Simon Hudon** is there other information I can provide?
+<p><span class="user-mention" data-user-id="110026">@Simon Hudon</span> is there other information I can provide?</p>
 
 #### [ Simon Hudon (Jun 18 2018 at 01:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128219909):
-I think your project needs mathlib
+<p>I think your project needs mathlib</p>
 
 #### [ Simon Hudon (Jun 18 2018 at 01:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128219910):
-I'm building it on my machine to have a closer look
+<p>I'm building it on my machine to have a closer look</p>
 
 #### [ Kenny Lau (Jun 18 2018 at 01:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128219911):
-thank you very much
+<p>thank you very much</p>
 
 #### [ Kenny Lau (Jun 18 2018 at 01:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128219912):
-yes, it does require mathlib
+<p>yes, it does require mathlib</p>
 
 #### [ Simon Hudon (Jun 18 2018 at 01:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128219951):
-Is it possible you did not commit the latest version of `leanpkg.toml`? (I don't need it, I can fix it but in general, that makes things smoother for people trying your project)
+<p>Is it possible you did not commit the latest version of <code>leanpkg.toml</code>? (I don't need it, I can fix it but in general, that makes things smoother for people trying your project)</p>
 
 #### [ Kenny Lau (Jun 18 2018 at 01:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128219960):
-oh I didn't really set it up
+<p>oh I didn't really set it up</p>
 
 #### [ Simon Hudon (Jun 18 2018 at 01:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128219961):
-Ah ok. Just to be sure, do you use Lean 3.4.1 and the latest mathlib?
+<p>Ah ok. Just to be sure, do you use Lean 3.4.1 and the latest mathlib?</p>
 
 #### [ Kenny Lau (Jun 18 2018 at 01:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128219999):
-yes
+<p>yes</p>
 
 #### [ Kenny Lau (Jun 18 2018 at 01:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128220051):
-ok not exactly the latest
+<p>ok not exactly the latest</p>
 
 #### [ Kenny Lau (Jun 18 2018 at 01:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128220052):
-i'm on mathlib commit fe590ca272a41bb321a13be505964e78cad1e731
+<p>i'm on mathlib commit fe590ca272a41bb321a13be505964e78cad1e731</p>
 
 #### [ Kenny Lau (Jun 18 2018 at 01:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128220055):
-third from latest
+<p>third from latest</p>
 
 #### [ Simon Hudon (Jun 18 2018 at 01:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128220966):
-In this expression `(tensor_a F split.S T)` you get into trouble because `split.S` is a set but a type is expected. If you replace it with `subtype split.S`, type is required to have a `comm_ring` instance which you only have for `T`
+<p>In this expression <code>(tensor_a F split.S T)</code> you get into trouble because <code>split.S</code> is a set but a type is expected. If you replace it with <code>subtype split.S</code>, type is required to have a <code>comm_ring</code> instance which you only have for <code>T</code></p>
 
 #### [ Kenny Lau (Jun 18 2018 at 01:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128220967):
-:o
+<p>:o</p>
 
 #### [ Kenny Lau (Jun 18 2018 at 01:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128220968):
-thanks
+<p>thanks</p>
 
 #### [ Kenny Lau (Jun 18 2018 at 01:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128220970):
-do you have a fix?
+<p>do you have a fix?</p>
 
 #### [ Simon Hudon (Jun 18 2018 at 01:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221062):
-No, it really depends on what you're trying to do. If you actually want `subtype split.S`, you'd need to add `[comm_ring (subtype split.S)]` to the local instances which would get hairy because `split` is a field. Maybe replacing `split.S` with `T` would suit your purpose, in which case, the fit is perfect because you already have a `comm_ring T` instance
+<p>No, it really depends on what you're trying to do. If you actually want <code>subtype split.S</code>, you'd need to add <code>[comm_ring (subtype split.S)]</code> to the local instances which would get hairy because <code>split</code> is a field. Maybe replacing <code>split.S</code> with <code>T</code> would suit your purpose, in which case, the fit is perfect because you already have a <code>comm_ring T</code> instance</p>
 
 #### [ Kenny Lau (Jun 18 2018 at 01:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221064):
-I can't just change my deifnition like that?
+<p>I can't just change my deifnition like that?</p>
 
 #### [ Simon Hudon (Jun 18 2018 at 01:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221065):
-Which one?
+<p>Which one?</p>
 
 #### [ Kenny Lau (Jun 18 2018 at 01:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221070):
-replacing `split.S` with `T`?
+<p>replacing <code>split.S</code> with <code>T</code>?</p>
 
 #### [ Simon Hudon (Jun 18 2018 at 01:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221072):
-That might work. I haven't tried it but that would fix that particular problem
+<p>That might work. I haven't tried it but that would fix that particular problem</p>
 
 #### [ Kenny Lau (Jun 18 2018 at 01:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221074):
-I mean, it would be a wrong definition
+<p>I mean, it would be a wrong definition</p>
 
 #### [ Simon Hudon (Jun 18 2018 at 01:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221116):
-What would be the right definition?
+<p>What would be the right definition?</p>
 
 #### [ Kenny Lau (Jun 18 2018 at 01:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221117):
-`split.S` as it is
+<p><code>split.S</code> as it is</p>
 
 #### [ Simon Hudon (Jun 18 2018 at 01:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221121):
-That would be nonsense: that's not type correct.
+<p>That would be nonsense: that's not type correct.</p>
 
 #### [ Simon Hudon (Jun 18 2018 at 01:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221129):
-Unless your `tensor_a` definition is wrong and it should take a set there, not a type
+<p>Unless your <code>tensor_a</code> definition is wrong and it should take a set there, not a type</p>
 
 #### [ Kenny Lau (Jun 18 2018 at 01:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221130):
-I'm coercing a set to a type
+<p>I'm coercing a set to a type</p>
 
 #### [ Kenny Lau (Jun 18 2018 at 01:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221134):
-it's done automatically
+<p>it's done automatically</p>
 
 #### [ Kenny Lau (Jun 18 2018 at 01:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221135):
-I do it every time
+<p>I do it every time</p>
 
 #### [ Simon Hudon (Jun 18 2018 at 01:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221186):
-Right but that type is then expected to be a commutative ring. I'm not sure how that can be proved automatically
+<p>Right but that type is then expected to be a commutative ring. I'm not sure how that can be proved automatically</p>
 
 #### [ Kenny Lau (Jun 18 2018 at 01:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221190):
-I have a working version above it, one can trace class instance
+<p>I have a working version above it, one can trace class instance</p>
 
 #### [ Kenny Lau (Jun 18 2018 at 01:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221228):
-I think it will go through subfield -> field -> comm_ring
+<p>I think it will go through subfield -&gt; field -&gt; comm_ring</p>
 
 #### [ Simon Hudon (Jun 18 2018 at 01:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221235):
-How do you prove that it's a subfield?
+<p>How do you prove that it's a subfield?</p>
 
 #### [ Kenny Lau (Jun 18 2018 at 01:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221237):
-```lean
-instance finite_Galois_intermediate_extension.to_subfield
-```
+<div class="codehilite"><pre><span></span><span class="kn">instance</span> <span class="n">finite_Galois_intermediate_extension</span><span class="bp">.</span><span class="n">to_subfield</span>
+</pre></div>
 
 #### [ Kenny Lau (Jun 18 2018 at 01:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221239):
-L132 of field_extensions.lean
+<p>L132 of field_extensions.lean</p>
 
 #### [ Kenny Lau (Jun 18 2018 at 01:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221248):
-right, I just realized, there should be no problem, because there's a working version right above it!
+<p>right, I just realized, there should be no problem, because there's a working version right above it!</p>
 
 #### [ Simon Hudon (Jun 18 2018 at 01:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221291):
-Which line?
+<p>Which line?</p>
 
 #### [ Kenny Lau (Jun 18 2018 at 01:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221292):
-The `#check` one
+<p>The <code>#check</code> one</p>
 
 #### [ Kenny Lau (Jun 18 2018 at 01:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221293):
-L139
+<p>L139</p>
 
 #### [ Kenny Lau (Jun 18 2018 at 01:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221301):
-oops
+<p>oops</p>
 
 #### [ Kenny Lau (Jun 18 2018 at 01:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221302):
-L123
+<p>L123</p>
 
 #### [ Kenny Lau (Jun 18 2018 at 01:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221303):
-https://github.com/kckennylau/local-langlands-abelian/blob/master/src/torus.lean#L123
+<p><a href="https://github.com/kckennylau/local-langlands-abelian/blob/master/src/torus.lean#L123" target="_blank" title="https://github.com/kckennylau/local-langlands-abelian/blob/master/src/torus.lean#L123">https://github.com/kckennylau/local-langlands-abelian/blob/master/src/torus.lean#L123</a></p>
 
 #### [ Kenny Lau (Jun 18 2018 at 01:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221304):
-```lean
-#check λ (F : Type u) [field F]
-  (AC : Type v) [field AC] [is_alg_closed_field AC]
-  [field_extension F AC] [is_algebraic_closure F AC]
-  (T : Type w) [comm_ring T] [algebra F T] [cogroup F T]
-(split : finite_Galois_intermediate_extension F AC)
-(rank : ℕ),
-@cogroup_iso split.S _ (tensor_a F split.S T)
-  (tensor_a.comm_ring _ _ _)
-  (base_change_left F split.S T)
-  (GL₁ⁿ split.S rank) _ _
-  (cogroup.base_change_left F split.S T)
-  (GL₁ⁿ.cogroup _ _)
-```
+<div class="codehilite"><pre><span></span><span class="bp">#</span><span class="kn">check</span> <span class="bp">λ</span> <span class="o">(</span><span class="n">F</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">[</span><span class="n">field</span> <span class="n">F</span><span class="o">]</span>
+  <span class="o">(</span><span class="n">AC</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">)</span> <span class="o">[</span><span class="n">field</span> <span class="n">AC</span><span class="o">]</span> <span class="o">[</span><span class="n">is_alg_closed_field</span> <span class="n">AC</span><span class="o">]</span>
+  <span class="o">[</span><span class="n">field_extension</span> <span class="n">F</span> <span class="n">AC</span><span class="o">]</span> <span class="o">[</span><span class="n">is_algebraic_closure</span> <span class="n">F</span> <span class="n">AC</span><span class="o">]</span>
+  <span class="o">(</span><span class="n">T</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">w</span><span class="o">)</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">T</span><span class="o">]</span> <span class="o">[</span><span class="n">algebra</span> <span class="n">F</span> <span class="n">T</span><span class="o">]</span> <span class="o">[</span><span class="n">cogroup</span> <span class="n">F</span> <span class="n">T</span><span class="o">]</span>
+<span class="o">(</span><span class="n">split</span> <span class="o">:</span> <span class="n">finite_Galois_intermediate_extension</span> <span class="n">F</span> <span class="n">AC</span><span class="o">)</span>
+<span class="o">(</span><span class="n">rank</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">),</span>
+<span class="bp">@</span><span class="n">cogroup_iso</span> <span class="n">split</span><span class="bp">.</span><span class="n">S</span> <span class="bp">_</span> <span class="o">(</span><span class="n">tensor_a</span> <span class="n">F</span> <span class="n">split</span><span class="bp">.</span><span class="n">S</span> <span class="n">T</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">tensor_a</span><span class="bp">.</span><span class="n">comm_ring</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">base_change_left</span> <span class="n">F</span> <span class="n">split</span><span class="bp">.</span><span class="n">S</span> <span class="n">T</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">GL₁ⁿ</span> <span class="n">split</span><span class="bp">.</span><span class="n">S</span> <span class="n">rank</span><span class="o">)</span> <span class="bp">_</span> <span class="bp">_</span>
+  <span class="o">(</span><span class="n">cogroup</span><span class="bp">.</span><span class="n">base_change_left</span> <span class="n">F</span> <span class="n">split</span><span class="bp">.</span><span class="n">S</span> <span class="n">T</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">GL₁ⁿ</span><span class="bp">.</span><span class="n">cogroup</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">)</span>
+</pre></div>
 
 #### [ Simon Hudon (Jun 18 2018 at 01:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221344):
-If I change that `check` into a `def`:
-
-```lean
-def foo := λ (F : Type u) [field F]
-  (AC : Type v) [field AC] [is_alg_closed_field AC]
-  [field_extension F AC] [is_algebraic_closure F AC]
-  (T : Type w) [comm_ring T] [algebra F T] [cogroup F T]
-(split : finite_Galois_intermediate_extension F AC)
-(rank : ℕ),
-@cogroup_iso split.S _ (tensor_a F split.S T)
-  (tensor_a.comm_ring _ _ _)
-  (base_change_left F split.S T)
-  (GL₁ⁿ split.S rank) _ _
-  (cogroup.base_change_left F split.S T)
-  (GL₁ⁿ.cogroup _ _)
-```
+<p>If I change that <code>check</code> into a <code>def</code>:</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">foo</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="o">(</span><span class="n">F</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">[</span><span class="n">field</span> <span class="n">F</span><span class="o">]</span>
+  <span class="o">(</span><span class="n">AC</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">)</span> <span class="o">[</span><span class="n">field</span> <span class="n">AC</span><span class="o">]</span> <span class="o">[</span><span class="n">is_alg_closed_field</span> <span class="n">AC</span><span class="o">]</span>
+  <span class="o">[</span><span class="n">field_extension</span> <span class="n">F</span> <span class="n">AC</span><span class="o">]</span> <span class="o">[</span><span class="n">is_algebraic_closure</span> <span class="n">F</span> <span class="n">AC</span><span class="o">]</span>
+  <span class="o">(</span><span class="n">T</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">w</span><span class="o">)</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">T</span><span class="o">]</span> <span class="o">[</span><span class="n">algebra</span> <span class="n">F</span> <span class="n">T</span><span class="o">]</span> <span class="o">[</span><span class="n">cogroup</span> <span class="n">F</span> <span class="n">T</span><span class="o">]</span>
+<span class="o">(</span><span class="n">split</span> <span class="o">:</span> <span class="n">finite_Galois_intermediate_extension</span> <span class="n">F</span> <span class="n">AC</span><span class="o">)</span>
+<span class="o">(</span><span class="n">rank</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">),</span>
+<span class="bp">@</span><span class="n">cogroup_iso</span> <span class="n">split</span><span class="bp">.</span><span class="n">S</span> <span class="bp">_</span> <span class="o">(</span><span class="n">tensor_a</span> <span class="n">F</span> <span class="n">split</span><span class="bp">.</span><span class="n">S</span> <span class="n">T</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">tensor_a</span><span class="bp">.</span><span class="n">comm_ring</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">base_change_left</span> <span class="n">F</span> <span class="n">split</span><span class="bp">.</span><span class="n">S</span> <span class="n">T</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">GL₁ⁿ</span> <span class="n">split</span><span class="bp">.</span><span class="n">S</span> <span class="n">rank</span><span class="o">)</span> <span class="bp">_</span> <span class="bp">_</span>
+  <span class="o">(</span><span class="n">cogroup</span><span class="bp">.</span><span class="n">base_change_left</span> <span class="n">F</span> <span class="n">split</span><span class="bp">.</span><span class="n">S</span> <span class="n">T</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">GL₁ⁿ</span><span class="bp">.</span><span class="n">cogroup</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">)</span>
+</pre></div>
 
 #### [ Simon Hudon (Jun 18 2018 at 01:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221345):
-I get I lot of errors
+<p>I get I lot of errors</p>
 
 #### [ Kenny Lau (Jun 18 2018 at 01:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221352):
-curious
+<p>curious</p>
 
 #### [ Simon Hudon (Jun 18 2018 at 01:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221354):
-[Screen-Shot-2018-06-17-at-7.57.01-PM.png](/user_uploads/3121/K4n0zheF40urE2YaifViOPKA/Screen-Shot-2018-06-17-at-7.57.01-PM.png)
+<p><a href="/user_uploads/3121/K4n0zheF40urE2YaifViOPKA/Screen-Shot-2018-06-17-at-7.57.01-PM.png" target="_blank" title="Screen-Shot-2018-06-17-at-7.57.01-PM.png">Screen-Shot-2018-06-17-at-7.57.01-PM.png</a></p>
+<div class="message_inline_image"><a href="/user_uploads/3121/K4n0zheF40urE2YaifViOPKA/Screen-Shot-2018-06-17-at-7.57.01-PM.png" target="_blank" title="Screen-Shot-2018-06-17-at-7.57.01-PM.png"><img src="/user_uploads/3121/K4n0zheF40urE2YaifViOPKA/Screen-Shot-2018-06-17-at-7.57.01-PM.png"></a></div>
 
 #### [ Simon Hudon (Jun 18 2018 at 01:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221356):
-I think you're asking a lot of type class inference
+<p>I think you're asking a lot of type class inference</p>
 
 #### [ Kenny Lau (Jun 18 2018 at 01:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221395):
-heh...
+<p>heh...</p>
 
 #### [ Kenny Lau (Jun 18 2018 at 01:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221397):
-how about I move them before the colon
+<p>how about I move them before the colon</p>
 
 #### [ Kenny Lau (Jun 18 2018 at 01:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221398):
-```lean
-def foo (F : Type u) [field F]
-  (AC : Type v) [field AC] [is_alg_closed_field AC]
-  [field_extension F AC] [is_algebraic_closure F AC]
-  (T : Type w) [comm_ring T] [algebra F T] [cogroup F T]
-(split : finite_Galois_intermediate_extension F AC)
-(rank : ℕ) :=
-@cogroup_iso split.S _ (tensor_a F split.S T)
-  (tensor_a.comm_ring _ _ _)
-  (base_change_left F split.S T)
-  (GL₁ⁿ split.S rank) _ _
-  (cogroup.base_change_left F split.S T)
-  (GL₁ⁿ.cogroup _ _)
-```
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">foo</span> <span class="o">(</span><span class="n">F</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">[</span><span class="n">field</span> <span class="n">F</span><span class="o">]</span>
+  <span class="o">(</span><span class="n">AC</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">)</span> <span class="o">[</span><span class="n">field</span> <span class="n">AC</span><span class="o">]</span> <span class="o">[</span><span class="n">is_alg_closed_field</span> <span class="n">AC</span><span class="o">]</span>
+  <span class="o">[</span><span class="n">field_extension</span> <span class="n">F</span> <span class="n">AC</span><span class="o">]</span> <span class="o">[</span><span class="n">is_algebraic_closure</span> <span class="n">F</span> <span class="n">AC</span><span class="o">]</span>
+  <span class="o">(</span><span class="n">T</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">w</span><span class="o">)</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">T</span><span class="o">]</span> <span class="o">[</span><span class="n">algebra</span> <span class="n">F</span> <span class="n">T</span><span class="o">]</span> <span class="o">[</span><span class="n">cogroup</span> <span class="n">F</span> <span class="n">T</span><span class="o">]</span>
+<span class="o">(</span><span class="n">split</span> <span class="o">:</span> <span class="n">finite_Galois_intermediate_extension</span> <span class="n">F</span> <span class="n">AC</span><span class="o">)</span>
+<span class="o">(</span><span class="n">rank</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:=</span>
+<span class="bp">@</span><span class="n">cogroup_iso</span> <span class="n">split</span><span class="bp">.</span><span class="n">S</span> <span class="bp">_</span> <span class="o">(</span><span class="n">tensor_a</span> <span class="n">F</span> <span class="n">split</span><span class="bp">.</span><span class="n">S</span> <span class="n">T</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">tensor_a</span><span class="bp">.</span><span class="n">comm_ring</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">base_change_left</span> <span class="n">F</span> <span class="n">split</span><span class="bp">.</span><span class="n">S</span> <span class="n">T</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">GL₁ⁿ</span> <span class="n">split</span><span class="bp">.</span><span class="n">S</span> <span class="n">rank</span><span class="o">)</span> <span class="bp">_</span> <span class="bp">_</span>
+  <span class="o">(</span><span class="n">cogroup</span><span class="bp">.</span><span class="n">base_change_left</span> <span class="n">F</span> <span class="n">split</span><span class="bp">.</span><span class="n">S</span> <span class="n">T</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">GL₁ⁿ</span><span class="bp">.</span><span class="n">cogroup</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">)</span>
+</pre></div>
 
 #### [ Kenny Lau (Jun 18 2018 at 01:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221399):
-no errors!
+<p>no errors!</p>
 
 #### [ Kenny Lau (Jun 18 2018 at 01:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221404):
-also I looked at the trace as I said before
+<p>also I looked at the trace as I said before</p>
 
 #### [ Simon Hudon (Jun 18 2018 at 01:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221407):
-You're right, I didn't do it well
+<p>You're right, I didn't do it well</p>
 
 #### [ Kenny Lau (Jun 18 2018 at 01:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221408):
-there is no issue with the typeclass inferences
+<p>there is no issue with the typeclass inferences</p>
 
 #### [ Kenny Lau (Jun 18 2018 at 01:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221409):
-and the max depth is 5
+<p>and the max depth is 5</p>
 
 #### [ Kenny Lau (Jun 18 2018 at 01:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221412):
-there should not be any error
+<p>there should not be any error</p>
 
 #### [ Simon Hudon (Jun 18 2018 at 02:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221463):
-Try:
-
-```lean
-structure torus (F : Type u) [field F]
-  (AC : Type v) [field AC] [is_alg_closed_field AC]
-  [field_extension F AC] [is_algebraic_closure F AC]
-  (T : Type w) [comm_ring T] [algebra F T] [cogroup F T] :=
-(split : finite_Galois_intermediate_extension F AC)
-(rank : ℕ)
-(splits : foo F AC T split rank)
-```
+<p>Try:</p>
+<div class="codehilite"><pre><span></span><span class="kn">structure</span> <span class="n">torus</span> <span class="o">(</span><span class="n">F</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">[</span><span class="n">field</span> <span class="n">F</span><span class="o">]</span>
+  <span class="o">(</span><span class="n">AC</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">)</span> <span class="o">[</span><span class="n">field</span> <span class="n">AC</span><span class="o">]</span> <span class="o">[</span><span class="n">is_alg_closed_field</span> <span class="n">AC</span><span class="o">]</span>
+  <span class="o">[</span><span class="n">field_extension</span> <span class="n">F</span> <span class="n">AC</span><span class="o">]</span> <span class="o">[</span><span class="n">is_algebraic_closure</span> <span class="n">F</span> <span class="n">AC</span><span class="o">]</span>
+  <span class="o">(</span><span class="n">T</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">w</span><span class="o">)</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">T</span><span class="o">]</span> <span class="o">[</span><span class="n">algebra</span> <span class="n">F</span> <span class="n">T</span><span class="o">]</span> <span class="o">[</span><span class="n">cogroup</span> <span class="n">F</span> <span class="n">T</span><span class="o">]</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">split</span> <span class="o">:</span> <span class="n">finite_Galois_intermediate_extension</span> <span class="n">F</span> <span class="n">AC</span><span class="o">)</span>
+<span class="o">(</span><span class="n">rank</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span>
+<span class="o">(</span><span class="n">splits</span> <span class="o">:</span> <span class="n">foo</span> <span class="n">F</span> <span class="n">AC</span> <span class="n">T</span> <span class="n">split</span> <span class="n">rank</span><span class="o">)</span>
+</pre></div>
 
 #### [ Kenny Lau (Jun 18 2018 at 02:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221471):
-what the actual
+<p>what the actual</p>
 
 #### [ Kenny Lau (Jun 18 2018 at 02:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221475):
-@**Mario Carneiro** you need to see this
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> you need to see this</p>
 
 #### [ Kenny Lau (Jun 18 2018 at 02:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221518):
-@**Simon Hudon** what do you think
+<p><span class="user-mention" data-user-id="110026">@Simon Hudon</span> what do you think</p>
 
 #### [ Simon Hudon (Jun 18 2018 at 02:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221525):
-I'm not actually sure why the other one wouldn't work. In general, there's nothing wrong with breaking down your definitions into smaller pieces though
+<p>I'm not actually sure why the other one wouldn't work. In general, there's nothing wrong with breaking down your definitions into smaller pieces though</p>
 
 #### [ Kenny Lau (Jun 18 2018 at 02:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221567):
-I see
+<p>I see</p>
 
 #### [ Kenny Lau (Jun 18 2018 at 02:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221763):
-@**Simon Hudon** how should I break this loop?
+<p><span class="user-mention" data-user-id="110026">@Simon Hudon</span> how should I break this loop?</p>
 
 #### [ Kenny Lau (Jun 18 2018 at 02:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221764):
-```lean
-[class_instances] (5) ?x_31 : field AC := _inst_6
-failed is_def_eq
-[class_instances] (5) ?x_31 : field AC := @subfield.to_field ?x_34 ?x_35 ?x_36 ?x_37
-failed is_def_eq
-[class_instances] (5) ?x_31 : field AC := @topological_field.to_field ?x_38 ?x_39
-[class_instances] (5) ?x_31 : field AC := @linear_ordered_field.to_field ?x_34 ?x_35
-[class_instances] (6) ?x_35 : linear_ordered_field AC := @discrete_linear_ordered_field.to_linear_ordered_field ?x_36 ?x_37
-[class_instances] (7) ?x_37 : discrete_linear_ordered_field AC := rat.discrete_linear_ordered_field
-failed is_def_eq
-[class_instances] (5) ?x_31 : field AC := @discrete_field.to_field ?x_34 ?x_35
-[class_instances] (6) ?x_35 : discrete_field AC := rat.field_rat
-failed is_def_eq
-[class_instances] (6) ?x_35 : discrete_field AC := @discrete_linear_ordered_field.to_discrete_field ?x_36 ?x_37
-[class_instances] (7) ?x_37 : discrete_linear_ordered_field AC := rat.discrete_linear_ordered_field
-failed is_def_eq
-[class_instances] (5) ?x_30 : field ?x_28 := @subfield.to_field ?x_34 ?x_35 ?x_36 ?x_37
-[class_instances] (6) ?x_35 : field ?x_34 := _inst_7
-[class_instances] (6) ?x_37 : @subfield AC _inst_7 ?x_36 := @finite_Galois_intermediate_extension.to_subfield ?x_38 ?x_39 ?x_40 ?x_41 ?x_42 ?x_43 ?x_44 ?x_45
-[class_instances] (7) ?x_39 : field ?x_38 := _inst_7
-[class_instances] (7) ?x_41 : field AC := _inst_7
-[class_instances] (7) ?x_42 : @is_alg_closed_field AC _inst_7 := _inst_8
-[class_instances] (7) ?x_43 : @field_extension AC AC _inst_7 _inst_7 := _inst_9
-failed is_def_eq
-[class_instances] (7) ?x_43 : @field_extension AC AC _inst_7 _inst_7 := @is_intermediate_field.to_field_extension' ?x_46 ?x_47 ?x_48 ?x_49 ?x_50 ?x_51 ?x_52
-failed is_def_eq
-[class_instances] (7) ?x_43 : @field_extension AC AC _inst_7 _inst_7 := @is_intermediate_field.to_field_extension ?x_53 ?x_54 ?x_55 ?x_56 ?x_57 ?x_58 ?x_59
-failed is_def_eq
-[class_instances] (7) ?x_42 : @is_alg_closed_field AC _inst_7 := @is_algebraic_closure.to_is_alg_closed_field ?x_46 ?x_47 ?x_48 ?x_49 ?x_50 ?x_51
-[class_instances] (8) ?x_48 : field ?x_46 := _inst_7
-[class_instances] (8) ?x_49 : field AC := _inst_7
-[class_instances] (8) ?x_50 : @field_extension AC AC _inst_7 _inst_7 := _inst_9
-failed is_def_eq
-[class_instances] (8) ?x_50 : @field_extension AC AC _inst_7 _inst_7 := @is_intermediate_field.to_field_extension' ?x_52 ?x_53 ?x_54 ?x_55 ?x_56 ?x_57 ?x_58
-failed is_def_eq
-[class_instances] (8) ?x_50 : @field_extension AC AC _inst_7 _inst_7 := @is_intermediate_field.to_field_extension ?x_59 ?x_60 ?x_61 ?x_62 ?x_63 ?x_64 ?x_65
-failed is_def_eq
-```
+<div class="codehilite"><pre><span></span><span class="o">[</span><span class="n">class_instances</span><span class="o">]</span> <span class="o">(</span><span class="mi">5</span><span class="o">)</span> <span class="err">?</span><span class="n">x_31</span> <span class="o">:</span> <span class="n">field</span> <span class="n">AC</span> <span class="o">:=</span> <span class="bp">_</span><span class="n">inst_6</span>
+<span class="n">failed</span> <span class="n">is_def_eq</span>
+<span class="o">[</span><span class="n">class_instances</span><span class="o">]</span> <span class="o">(</span><span class="mi">5</span><span class="o">)</span> <span class="err">?</span><span class="n">x_31</span> <span class="o">:</span> <span class="n">field</span> <span class="n">AC</span> <span class="o">:=</span> <span class="bp">@</span><span class="n">subfield</span><span class="bp">.</span><span class="n">to_field</span> <span class="err">?</span><span class="n">x_34</span> <span class="err">?</span><span class="n">x_35</span> <span class="err">?</span><span class="n">x_36</span> <span class="err">?</span><span class="n">x_37</span>
+<span class="n">failed</span> <span class="n">is_def_eq</span>
+<span class="o">[</span><span class="n">class_instances</span><span class="o">]</span> <span class="o">(</span><span class="mi">5</span><span class="o">)</span> <span class="err">?</span><span class="n">x_31</span> <span class="o">:</span> <span class="n">field</span> <span class="n">AC</span> <span class="o">:=</span> <span class="bp">@</span><span class="n">topological_field</span><span class="bp">.</span><span class="n">to_field</span> <span class="err">?</span><span class="n">x_38</span> <span class="err">?</span><span class="n">x_39</span>
+<span class="o">[</span><span class="n">class_instances</span><span class="o">]</span> <span class="o">(</span><span class="mi">5</span><span class="o">)</span> <span class="err">?</span><span class="n">x_31</span> <span class="o">:</span> <span class="n">field</span> <span class="n">AC</span> <span class="o">:=</span> <span class="bp">@</span><span class="n">linear_ordered_field</span><span class="bp">.</span><span class="n">to_field</span> <span class="err">?</span><span class="n">x_34</span> <span class="err">?</span><span class="n">x_35</span>
+<span class="o">[</span><span class="n">class_instances</span><span class="o">]</span> <span class="o">(</span><span class="mi">6</span><span class="o">)</span> <span class="err">?</span><span class="n">x_35</span> <span class="o">:</span> <span class="n">linear_ordered_field</span> <span class="n">AC</span> <span class="o">:=</span> <span class="bp">@</span><span class="n">discrete_linear_ordered_field</span><span class="bp">.</span><span class="n">to_linear_ordered_field</span> <span class="err">?</span><span class="n">x_36</span> <span class="err">?</span><span class="n">x_37</span>
+<span class="o">[</span><span class="n">class_instances</span><span class="o">]</span> <span class="o">(</span><span class="mi">7</span><span class="o">)</span> <span class="err">?</span><span class="n">x_37</span> <span class="o">:</span> <span class="n">discrete_linear_ordered_field</span> <span class="n">AC</span> <span class="o">:=</span> <span class="n">rat</span><span class="bp">.</span><span class="n">discrete_linear_ordered_field</span>
+<span class="n">failed</span> <span class="n">is_def_eq</span>
+<span class="o">[</span><span class="n">class_instances</span><span class="o">]</span> <span class="o">(</span><span class="mi">5</span><span class="o">)</span> <span class="err">?</span><span class="n">x_31</span> <span class="o">:</span> <span class="n">field</span> <span class="n">AC</span> <span class="o">:=</span> <span class="bp">@</span><span class="n">discrete_field</span><span class="bp">.</span><span class="n">to_field</span> <span class="err">?</span><span class="n">x_34</span> <span class="err">?</span><span class="n">x_35</span>
+<span class="o">[</span><span class="n">class_instances</span><span class="o">]</span> <span class="o">(</span><span class="mi">6</span><span class="o">)</span> <span class="err">?</span><span class="n">x_35</span> <span class="o">:</span> <span class="n">discrete_field</span> <span class="n">AC</span> <span class="o">:=</span> <span class="n">rat</span><span class="bp">.</span><span class="n">field_rat</span>
+<span class="n">failed</span> <span class="n">is_def_eq</span>
+<span class="o">[</span><span class="n">class_instances</span><span class="o">]</span> <span class="o">(</span><span class="mi">6</span><span class="o">)</span> <span class="err">?</span><span class="n">x_35</span> <span class="o">:</span> <span class="n">discrete_field</span> <span class="n">AC</span> <span class="o">:=</span> <span class="bp">@</span><span class="n">discrete_linear_ordered_field</span><span class="bp">.</span><span class="n">to_discrete_field</span> <span class="err">?</span><span class="n">x_36</span> <span class="err">?</span><span class="n">x_37</span>
+<span class="o">[</span><span class="n">class_instances</span><span class="o">]</span> <span class="o">(</span><span class="mi">7</span><span class="o">)</span> <span class="err">?</span><span class="n">x_37</span> <span class="o">:</span> <span class="n">discrete_linear_ordered_field</span> <span class="n">AC</span> <span class="o">:=</span> <span class="n">rat</span><span class="bp">.</span><span class="n">discrete_linear_ordered_field</span>
+<span class="n">failed</span> <span class="n">is_def_eq</span>
+<span class="o">[</span><span class="n">class_instances</span><span class="o">]</span> <span class="o">(</span><span class="mi">5</span><span class="o">)</span> <span class="err">?</span><span class="n">x_30</span> <span class="o">:</span> <span class="n">field</span> <span class="err">?</span><span class="n">x_28</span> <span class="o">:=</span> <span class="bp">@</span><span class="n">subfield</span><span class="bp">.</span><span class="n">to_field</span> <span class="err">?</span><span class="n">x_34</span> <span class="err">?</span><span class="n">x_35</span> <span class="err">?</span><span class="n">x_36</span> <span class="err">?</span><span class="n">x_37</span>
+<span class="o">[</span><span class="n">class_instances</span><span class="o">]</span> <span class="o">(</span><span class="mi">6</span><span class="o">)</span> <span class="err">?</span><span class="n">x_35</span> <span class="o">:</span> <span class="n">field</span> <span class="err">?</span><span class="n">x_34</span> <span class="o">:=</span> <span class="bp">_</span><span class="n">inst_7</span>
+<span class="o">[</span><span class="n">class_instances</span><span class="o">]</span> <span class="o">(</span><span class="mi">6</span><span class="o">)</span> <span class="err">?</span><span class="n">x_37</span> <span class="o">:</span> <span class="bp">@</span><span class="n">subfield</span> <span class="n">AC</span> <span class="bp">_</span><span class="n">inst_7</span> <span class="err">?</span><span class="n">x_36</span> <span class="o">:=</span> <span class="bp">@</span><span class="n">finite_Galois_intermediate_extension</span><span class="bp">.</span><span class="n">to_subfield</span> <span class="err">?</span><span class="n">x_38</span> <span class="err">?</span><span class="n">x_39</span> <span class="err">?</span><span class="n">x_40</span> <span class="err">?</span><span class="n">x_41</span> <span class="err">?</span><span class="n">x_42</span> <span class="err">?</span><span class="n">x_43</span> <span class="err">?</span><span class="n">x_44</span> <span class="err">?</span><span class="n">x_45</span>
+<span class="o">[</span><span class="n">class_instances</span><span class="o">]</span> <span class="o">(</span><span class="mi">7</span><span class="o">)</span> <span class="err">?</span><span class="n">x_39</span> <span class="o">:</span> <span class="n">field</span> <span class="err">?</span><span class="n">x_38</span> <span class="o">:=</span> <span class="bp">_</span><span class="n">inst_7</span>
+<span class="o">[</span><span class="n">class_instances</span><span class="o">]</span> <span class="o">(</span><span class="mi">7</span><span class="o">)</span> <span class="err">?</span><span class="n">x_41</span> <span class="o">:</span> <span class="n">field</span> <span class="n">AC</span> <span class="o">:=</span> <span class="bp">_</span><span class="n">inst_7</span>
+<span class="o">[</span><span class="n">class_instances</span><span class="o">]</span> <span class="o">(</span><span class="mi">7</span><span class="o">)</span> <span class="err">?</span><span class="n">x_42</span> <span class="o">:</span> <span class="bp">@</span><span class="n">is_alg_closed_field</span> <span class="n">AC</span> <span class="bp">_</span><span class="n">inst_7</span> <span class="o">:=</span> <span class="bp">_</span><span class="n">inst_8</span>
+<span class="o">[</span><span class="n">class_instances</span><span class="o">]</span> <span class="o">(</span><span class="mi">7</span><span class="o">)</span> <span class="err">?</span><span class="n">x_43</span> <span class="o">:</span> <span class="bp">@</span><span class="n">field_extension</span> <span class="n">AC</span> <span class="n">AC</span> <span class="bp">_</span><span class="n">inst_7</span> <span class="bp">_</span><span class="n">inst_7</span> <span class="o">:=</span> <span class="bp">_</span><span class="n">inst_9</span>
+<span class="n">failed</span> <span class="n">is_def_eq</span>
+<span class="o">[</span><span class="n">class_instances</span><span class="o">]</span> <span class="o">(</span><span class="mi">7</span><span class="o">)</span> <span class="err">?</span><span class="n">x_43</span> <span class="o">:</span> <span class="bp">@</span><span class="n">field_extension</span> <span class="n">AC</span> <span class="n">AC</span> <span class="bp">_</span><span class="n">inst_7</span> <span class="bp">_</span><span class="n">inst_7</span> <span class="o">:=</span> <span class="bp">@</span><span class="n">is_intermediate_field</span><span class="bp">.</span><span class="n">to_field_extension&#39;</span> <span class="err">?</span><span class="n">x_46</span> <span class="err">?</span><span class="n">x_47</span> <span class="err">?</span><span class="n">x_48</span> <span class="err">?</span><span class="n">x_49</span> <span class="err">?</span><span class="n">x_50</span> <span class="err">?</span><span class="n">x_51</span> <span class="err">?</span><span class="n">x_52</span>
+<span class="n">failed</span> <span class="n">is_def_eq</span>
+<span class="o">[</span><span class="n">class_instances</span><span class="o">]</span> <span class="o">(</span><span class="mi">7</span><span class="o">)</span> <span class="err">?</span><span class="n">x_43</span> <span class="o">:</span> <span class="bp">@</span><span class="n">field_extension</span> <span class="n">AC</span> <span class="n">AC</span> <span class="bp">_</span><span class="n">inst_7</span> <span class="bp">_</span><span class="n">inst_7</span> <span class="o">:=</span> <span class="bp">@</span><span class="n">is_intermediate_field</span><span class="bp">.</span><span class="n">to_field_extension</span> <span class="err">?</span><span class="n">x_53</span> <span class="err">?</span><span class="n">x_54</span> <span class="err">?</span><span class="n">x_55</span> <span class="err">?</span><span class="n">x_56</span> <span class="err">?</span><span class="n">x_57</span> <span class="err">?</span><span class="n">x_58</span> <span class="err">?</span><span class="n">x_59</span>
+<span class="n">failed</span> <span class="n">is_def_eq</span>
+<span class="o">[</span><span class="n">class_instances</span><span class="o">]</span> <span class="o">(</span><span class="mi">7</span><span class="o">)</span> <span class="err">?</span><span class="n">x_42</span> <span class="o">:</span> <span class="bp">@</span><span class="n">is_alg_closed_field</span> <span class="n">AC</span> <span class="bp">_</span><span class="n">inst_7</span> <span class="o">:=</span> <span class="bp">@</span><span class="n">is_algebraic_closure</span><span class="bp">.</span><span class="n">to_is_alg_closed_field</span> <span class="err">?</span><span class="n">x_46</span> <span class="err">?</span><span class="n">x_47</span> <span class="err">?</span><span class="n">x_48</span> <span class="err">?</span><span class="n">x_49</span> <span class="err">?</span><span class="n">x_50</span> <span class="err">?</span><span class="n">x_51</span>
+<span class="o">[</span><span class="n">class_instances</span><span class="o">]</span> <span class="o">(</span><span class="mi">8</span><span class="o">)</span> <span class="err">?</span><span class="n">x_48</span> <span class="o">:</span> <span class="n">field</span> <span class="err">?</span><span class="n">x_46</span> <span class="o">:=</span> <span class="bp">_</span><span class="n">inst_7</span>
+<span class="o">[</span><span class="n">class_instances</span><span class="o">]</span> <span class="o">(</span><span class="mi">8</span><span class="o">)</span> <span class="err">?</span><span class="n">x_49</span> <span class="o">:</span> <span class="n">field</span> <span class="n">AC</span> <span class="o">:=</span> <span class="bp">_</span><span class="n">inst_7</span>
+<span class="o">[</span><span class="n">class_instances</span><span class="o">]</span> <span class="o">(</span><span class="mi">8</span><span class="o">)</span> <span class="err">?</span><span class="n">x_50</span> <span class="o">:</span> <span class="bp">@</span><span class="n">field_extension</span> <span class="n">AC</span> <span class="n">AC</span> <span class="bp">_</span><span class="n">inst_7</span> <span class="bp">_</span><span class="n">inst_7</span> <span class="o">:=</span> <span class="bp">_</span><span class="n">inst_9</span>
+<span class="n">failed</span> <span class="n">is_def_eq</span>
+<span class="o">[</span><span class="n">class_instances</span><span class="o">]</span> <span class="o">(</span><span class="mi">8</span><span class="o">)</span> <span class="err">?</span><span class="n">x_50</span> <span class="o">:</span> <span class="bp">@</span><span class="n">field_extension</span> <span class="n">AC</span> <span class="n">AC</span> <span class="bp">_</span><span class="n">inst_7</span> <span class="bp">_</span><span class="n">inst_7</span> <span class="o">:=</span> <span class="bp">@</span><span class="n">is_intermediate_field</span><span class="bp">.</span><span class="n">to_field_extension&#39;</span> <span class="err">?</span><span class="n">x_52</span> <span class="err">?</span><span class="n">x_53</span> <span class="err">?</span><span class="n">x_54</span> <span class="err">?</span><span class="n">x_55</span> <span class="err">?</span><span class="n">x_56</span> <span class="err">?</span><span class="n">x_57</span> <span class="err">?</span><span class="n">x_58</span>
+<span class="n">failed</span> <span class="n">is_def_eq</span>
+<span class="o">[</span><span class="n">class_instances</span><span class="o">]</span> <span class="o">(</span><span class="mi">8</span><span class="o">)</span> <span class="err">?</span><span class="n">x_50</span> <span class="o">:</span> <span class="bp">@</span><span class="n">field_extension</span> <span class="n">AC</span> <span class="n">AC</span> <span class="bp">_</span><span class="n">inst_7</span> <span class="bp">_</span><span class="n">inst_7</span> <span class="o">:=</span> <span class="bp">@</span><span class="n">is_intermediate_field</span><span class="bp">.</span><span class="n">to_field_extension</span> <span class="err">?</span><span class="n">x_59</span> <span class="err">?</span><span class="n">x_60</span> <span class="err">?</span><span class="n">x_61</span> <span class="err">?</span><span class="n">x_62</span> <span class="err">?</span><span class="n">x_63</span> <span class="err">?</span><span class="n">x_64</span> <span class="err">?</span><span class="n">x_65</span>
+<span class="n">failed</span> <span class="n">is_def_eq</span>
+</pre></div>
 
 #### [ Simon Hudon (Jun 18 2018 at 02:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221823):
-There seems to be a circular dependency between your instances. You should try to guarantee that something decreases (syntactically) whenever you apply an instance. For example, `instance [decidable_eq a] : decidable_eq (list a) := ... ` is such an instance. It is about `list a` and all the instances it relies on involve simpler expressions.
+<p>There seems to be a circular dependency between your instances. You should try to guarantee that something decreases (syntactically) whenever you apply an instance. For example, <code>instance [decidable_eq a] : decidable_eq (list a) := ... </code> is such an instance. It is about <code>list a</code> and all the instances it relies on involve simpler expressions.</p>
 
 #### [ Kenny Lau (Jun 18 2018 at 02:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221863):
-sorry but could you explain what you mean by decreasing?
+<p>sorry but could you explain what you mean by decreasing?</p>
 
 #### [ Simon Hudon (Jun 18 2018 at 02:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221918):
-If you compare `a` and `list a` (one is a type in an assumed instance, the other, in the head of the instance) `list a` is a more complex expression than `a`. That means that if I look for an instance of `decidable_eq (list a)` and I apply the above instance, I'm decreasing the size of my problem so I'm getting closer to a solution. If every instance decreases the size of the problem, you can't search forever. (just like with structural recursion)
+<p>If you compare <code>a</code> and <code>list a</code> (one is a type in an assumed instance, the other, in the head of the instance) <code>list a</code> is a more complex expression than <code>a</code>. That means that if I look for an instance of <code>decidable_eq (list a)</code> and I apply the above instance, I'm decreasing the size of my problem so I'm getting closer to a solution. If every instance decreases the size of the problem, you can't search forever. (just like with structural recursion)</p>
 
 #### [ Kenny Lau (Jun 18 2018 at 02:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221973):
-hmm... but there are times at which I would need to infer simpler instances from complex instances?
+<p>hmm... but there are times at which I would need to infer simpler instances from complex instances?</p>
 
 #### [ Simon Hudon (Jun 18 2018 at 02:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221980):
-like `field` from `discrete_linear_ordered_field`?
+<p>like <code>field</code> from <code>discrete_linear_ordered_field</code>?</p>
 
 #### [ Kenny Lau (Jun 18 2018 at 02:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221981):
-sure
+<p>sure</p>
 
 #### [ Kenny Lau (Jun 18 2018 at 02:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221982):
-or sometimes I need to infer a single instance from like 10 instances
+<p>or sometimes I need to infer a single instance from like 10 instances</p>
 
 #### [ Kenny Lau (Jun 18 2018 at 02:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128221984):
-do you have general workarounds?
+<p>do you have general workarounds?</p>
 
 #### [ Simon Hudon (Jun 18 2018 at 02:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128222030):
-A single instance from 10 instances is not a problem as long as each instance is smaller than the initial one
+<p>A single instance from 10 instances is not a problem as long as each instance is smaller than the initial one</p>
 
 #### [ Kenny Lau (Jun 18 2018 at 02:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128222031):
-hmm I still don't know how to judge whether two instances are smaller
+<p>hmm I still don't know how to judge whether two instances are smaller</p>
 
 #### [ Simon Hudon (Jun 18 2018 at 02:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128222032):
-In the case of `discrete_linear_ordered_field`, does it not `extend` `field`?
+<p>In the case of <code>discrete_linear_ordered_field</code>, does it not <code>extend</code> <code>field</code>?</p>
 
 #### [ Kenny Lau (Jun 18 2018 at 02:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128222034):
-I mean, your examples are quite obvious
+<p>I mean, your examples are quite obvious</p>
 
 #### [ Kenny Lau (Jun 18 2018 at 02:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128222036):
-yes it does
+<p>yes it does</p>
 
 #### [ Kenny Lau (Jun 18 2018 at 02:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128222077):
-I think
+<p>I think</p>
 
 #### [ Simon Hudon (Jun 18 2018 at 02:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128222081):
-That should be enough, no? You don't need an instance on top of that
+<p>That should be enough, no? You don't need an instance on top of that</p>
 
 #### [ Kenny Lau (Jun 18 2018 at 02:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128222082):
-this is a bad instance then?
-```lean
-instance subring.to_comm_ring (α : Type u) [comm_ring α] (S : set α) [subring α S] : comm_ring S :=
-```
+<p>this is a bad instance then?</p>
+<div class="codehilite"><pre><span></span><span class="kn">instance</span> <span class="n">subring</span><span class="bp">.</span><span class="n">to_comm_ring</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">S</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span><span class="o">)</span> <span class="o">[</span><span class="n">subring</span> <span class="n">α</span> <span class="n">S</span><span class="o">]</span> <span class="o">:</span> <span class="n">comm_ring</span> <span class="n">S</span> <span class="o">:=</span>
+</pre></div>
 
 #### [ Simon Hudon (Jun 18 2018 at 02:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128222085):
-You can compare by counting the number of symbols and operators in each types.
+<p>You can compare by counting the number of symbols and operators in each types.</p>
 
 #### [ Kenny Lau (Jun 18 2018 at 02:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128222096):
-that instance doesn't seem to be causing much problem though
+<p>that instance doesn't seem to be causing much problem though</p>
 
 #### [ Kenny Lau (Jun 18 2018 at 02:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128222098):
-I guess it's because it requires `subring`
+<p>I guess it's because it requires <code>subring</code></p>
 
 #### [ Kenny Lau (Jun 18 2018 at 02:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128222143):
-This seems to be the problem:
-```lean
-instance finite_Galois_intermediate_extension.to_subfield
-  (F : Type u) [field F]
-  (AC : Type v) [field AC] [is_alg_closed_field AC]
-  [field_extension F AC] [is_algebraic_closure F AC]
-  (E : finite_Galois_intermediate_extension F AC) :
-  subfield _ E.S :=
-by apply_instance
-```
+<p>This seems to be the problem:</p>
+<div class="codehilite"><pre><span></span><span class="kn">instance</span> <span class="n">finite_Galois_intermediate_extension</span><span class="bp">.</span><span class="n">to_subfield</span>
+  <span class="o">(</span><span class="n">F</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">[</span><span class="n">field</span> <span class="n">F</span><span class="o">]</span>
+  <span class="o">(</span><span class="n">AC</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">)</span> <span class="o">[</span><span class="n">field</span> <span class="n">AC</span><span class="o">]</span> <span class="o">[</span><span class="n">is_alg_closed_field</span> <span class="n">AC</span><span class="o">]</span>
+  <span class="o">[</span><span class="n">field_extension</span> <span class="n">F</span> <span class="n">AC</span><span class="o">]</span> <span class="o">[</span><span class="n">is_algebraic_closure</span> <span class="n">F</span> <span class="n">AC</span><span class="o">]</span>
+  <span class="o">(</span><span class="n">E</span> <span class="o">:</span> <span class="n">finite_Galois_intermediate_extension</span> <span class="n">F</span> <span class="n">AC</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">subfield</span> <span class="bp">_</span> <span class="n">E</span><span class="bp">.</span><span class="n">S</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">apply_instance</span>
+</pre></div>
 
 #### [ Simon Hudon (Jun 18 2018 at 02:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128222144):
-`subring` is actually what I find problematic in it
+<p><code>subring</code> is actually what I find problematic in it</p>
 
 #### [ Kenny Lau (Jun 18 2018 at 02:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128222148):
-because I have an instance from subfield to field
+<p>because I have an instance from subfield to field</p>
 
 #### [ Kenny Lau (Jun 18 2018 at 02:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128222151):
-```quote
-`subring` is actually what I find problematic in it
-```
-how so?
+<blockquote>
+<p><code>subring</code> is actually what I find problematic in it</p>
+</blockquote>
+<p>how so?</p>
 
 #### [ Simon Hudon (Jun 18 2018 at 02:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128222192):
-there are invisible operators: `comm_ring S` is actually `comm_ring (subtype S)` which is more complex than `comm_ring a`. However `subring a (subtype S)` is more complex than `comm_ring (subtype S)`
+<p>there are invisible operators: <code>comm_ring S</code> is actually <code>comm_ring (subtype S)</code> which is more complex than <code>comm_ring a</code>. However <code>subring a (subtype S)</code> is more complex than <code>comm_ring (subtype S)</code></p>
 
 #### [ Kenny Lau (Jun 18 2018 at 02:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128222193):
-nah it's `subring a S`
+<p>nah it's <code>subring a S</code></p>
 
 #### [ Kenny Lau (Jun 18 2018 at 02:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128222194):
-there is no coercion there
+<p>there is no coercion there</p>
 
 #### [ Simon Hudon (Jun 18 2018 at 02:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128222199):
-It might actually fly then
+<p>It might actually fly then</p>
 
 #### [ Simon Hudon (Jun 18 2018 at 02:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128222201):
-Lean is actually more tolerant than what I'm used to and I'm not sure if that's a good thing or if it's just handing you enough rope to hang yourself with
+<p>Lean is actually more tolerant than what I'm used to and I'm not sure if that's a good thing or if it's just handing you enough rope to hang yourself with</p>
 
 #### [ Kenny Lau (Jun 18 2018 at 02:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128222258):
-this should be the problem
+<p>this should be the problem</p>
 
 #### [ Kenny Lau (Jun 18 2018 at 02:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128222259):
-```lean
-[class_instances] (5) ?x_30 : field ?x_28 := @subfield.to_field ?x_34 ?x_35 ?x_36 ?x_37
-[class_instances] (6) ?x_35 : field ?x_34 := _inst_7
-[class_instances] (6) ?x_37 : @subfield AC _inst_7 ?x_36 := @finite_Galois_intermediate_extension.to_subfield ?x_38 ?x_39 ?x_40 ?x_41 ?x_42 ?x_43 ?x_44 ?x_45
-[class_instances] (7) ?x_39 : field ?x_38 := _inst_7
-[class_instances] (7) ?x_41 : field AC := _inst_7
-[class_instances] (7) ?x_42 : @is_alg_closed_field AC _inst_7 := _inst_8
-
-```
+<div class="codehilite"><pre><span></span><span class="o">[</span><span class="n">class_instances</span><span class="o">]</span> <span class="o">(</span><span class="mi">5</span><span class="o">)</span> <span class="err">?</span><span class="n">x_30</span> <span class="o">:</span> <span class="n">field</span> <span class="err">?</span><span class="n">x_28</span> <span class="o">:=</span> <span class="bp">@</span><span class="n">subfield</span><span class="bp">.</span><span class="n">to_field</span> <span class="err">?</span><span class="n">x_34</span> <span class="err">?</span><span class="n">x_35</span> <span class="err">?</span><span class="n">x_36</span> <span class="err">?</span><span class="n">x_37</span>
+<span class="o">[</span><span class="n">class_instances</span><span class="o">]</span> <span class="o">(</span><span class="mi">6</span><span class="o">)</span> <span class="err">?</span><span class="n">x_35</span> <span class="o">:</span> <span class="n">field</span> <span class="err">?</span><span class="n">x_34</span> <span class="o">:=</span> <span class="bp">_</span><span class="n">inst_7</span>
+<span class="o">[</span><span class="n">class_instances</span><span class="o">]</span> <span class="o">(</span><span class="mi">6</span><span class="o">)</span> <span class="err">?</span><span class="n">x_37</span> <span class="o">:</span> <span class="bp">@</span><span class="n">subfield</span> <span class="n">AC</span> <span class="bp">_</span><span class="n">inst_7</span> <span class="err">?</span><span class="n">x_36</span> <span class="o">:=</span> <span class="bp">@</span><span class="n">finite_Galois_intermediate_extension</span><span class="bp">.</span><span class="n">to_subfield</span> <span class="err">?</span><span class="n">x_38</span> <span class="err">?</span><span class="n">x_39</span> <span class="err">?</span><span class="n">x_40</span> <span class="err">?</span><span class="n">x_41</span> <span class="err">?</span><span class="n">x_42</span> <span class="err">?</span><span class="n">x_43</span> <span class="err">?</span><span class="n">x_44</span> <span class="err">?</span><span class="n">x_45</span>
+<span class="o">[</span><span class="n">class_instances</span><span class="o">]</span> <span class="o">(</span><span class="mi">7</span><span class="o">)</span> <span class="err">?</span><span class="n">x_39</span> <span class="o">:</span> <span class="n">field</span> <span class="err">?</span><span class="n">x_38</span> <span class="o">:=</span> <span class="bp">_</span><span class="n">inst_7</span>
+<span class="o">[</span><span class="n">class_instances</span><span class="o">]</span> <span class="o">(</span><span class="mi">7</span><span class="o">)</span> <span class="err">?</span><span class="n">x_41</span> <span class="o">:</span> <span class="n">field</span> <span class="n">AC</span> <span class="o">:=</span> <span class="bp">_</span><span class="n">inst_7</span>
+<span class="o">[</span><span class="n">class_instances</span><span class="o">]</span> <span class="o">(</span><span class="mi">7</span><span class="o">)</span> <span class="err">?</span><span class="n">x_42</span> <span class="o">:</span> <span class="bp">@</span><span class="n">is_alg_closed_field</span> <span class="n">AC</span> <span class="bp">_</span><span class="n">inst_7</span> <span class="o">:=</span> <span class="bp">_</span><span class="n">inst_8</span>
+</pre></div>
 
 #### [ Kenny Lau (Jun 18 2018 at 02:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128222298):
-right, subfield.to_field is the problem
+<p>right, subfield.to_field is the problem</p>
 
 #### [ Simon Hudon (Jun 18 2018 at 02:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128222299):
-You can try commenting one instance at a time until the problem disappears
+<p>You can try commenting one instance at a time until the problem disappears</p>
 
 #### [ Simon Hudon (Jun 18 2018 at 02:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128222302):
-cool
+<p>cool</p>
 
 #### [ Kenny Lau (Jun 18 2018 at 02:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128222303):
-that isn't how it works
+<p>that isn't how it works</p>
 
 #### [ Kenny Lau (Jun 18 2018 at 02:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128222306):
-if I comment one instance out, a million lines of code will break
+<p>if I comment one instance out, a million lines of code will break</p>
 
 #### [ Kenny Lau (Jun 18 2018 at 02:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128222355):
-@**Simon Hudon** a million things depend on `subfield.to_field` though...
+<p><span class="user-mention" data-user-id="110026">@Simon Hudon</span> a million things depend on <code>subfield.to_field</code> though...</p>
 
 #### [ Kenny Lau (Jun 18 2018 at 02:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128222357):
-this is a huge abyss
+<p>this is a huge abyss</p>
 
 #### [ Simon Hudon (Jun 18 2018 at 02:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128222358):
-does `subfield` extend `field`?
+<p>does <code>subfield</code> extend <code>field</code>?</p>
 
 #### [ Kenny Lau (Jun 18 2018 at 02:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128222360):
-no
+<p>no</p>
 
 #### [ Simon Hudon (Jun 18 2018 at 02:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128222361):
-Why not?
+<p>Why not?</p>
 
 #### [ Kenny Lau (Jun 18 2018 at 02:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128222364):
-just as `is_subgroup` does not extend `group`
+<p>just as <code>is_subgroup</code> does not extend <code>group</code></p>
 
 #### [ Kenny Lau (Jun 18 2018 at 02:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128222368):
-and as I say this sentence
+<p>and as I say this sentence</p>
 
 #### [ Kenny Lau (Jun 18 2018 at 02:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128222370):
-why doesn't that cause problems?
+<p>why doesn't that cause problems?</p>
 
 #### [ Simon Hudon (Jun 18 2018 at 02:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128222373):
-I'm not intimate enough with the algebraic hierarchy to know
+<p>I'm not intimate enough with the algebraic hierarchy to know</p>
 
 #### [ Kenny Lau (Jun 18 2018 at 02:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128222415):
-```lean
-#check @subtype.group
-/-
-subtype.group : Π {α : Type u_1} [_inst_1 : group α] {s : set α} [_inst_2 : is_subgroup s], group ↥s
--/
-```
+<div class="codehilite"><pre><span></span><span class="bp">#</span><span class="kn">check</span> <span class="bp">@</span><span class="n">subtype</span><span class="bp">.</span><span class="n">group</span>
+<span class="c">/-</span><span class="cm"></span>
+<span class="cm">subtype.group : Π {α : Type u_1} [_inst_1 : group α] {s : set α} [_inst_2 : is_subgroup s], group ↥s</span>
+<span class="cm">-/</span>
+</pre></div>
 
 #### [ Simon Hudon (Jun 18 2018 at 02:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128222425):
-Actually, because there's no coercion, that's not that big of a deal. A different instance must be worse
+<p>Actually, because there's no coercion, that's not that big of a deal. A different instance must be worse</p>
 
 #### [ Kenny Lau (Jun 18 2018 at 02:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128222427):
-hmm
+<p>hmm</p>
 
 #### [ Kenny Lau (Jun 18 2018 at 02:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128222428):
-this is a huge mess
+<p>this is a huge mess</p>
 
 #### [ Simon Hudon (Jun 18 2018 at 02:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128222472):
-Yeah, that's a problem with this way of doing type classes. You can't understand each instance in isolation
+<p>Yeah, that's a problem with this way of doing type classes. You can't understand each instance in isolation</p>
 
 #### [ Kenny Lau (Jun 18 2018 at 02:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128222566):
-I think depth first search is not very good
+<p>I think depth first search is not very good</p>
 
 #### [ Kevin Buzzard (Jun 18 2018 at 09:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128234704):
-Kenny remember as a last resort you can just override the type class system and give it the instances yourself. I used to do this all the time when I got stuck on (much easier) stuff.
+<p>Kenny remember as a last resort you can just override the type class system and give it the instances yourself. I used to do this all the time when I got stuck on (much easier) stuff.</p>
 
 
 {% endraw %}

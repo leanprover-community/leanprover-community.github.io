@@ -12,152 +12,146 @@ permalink: archive/113488general/93837CharacterencodingofVM.html
 
 {% raw %}
 #### [ Keeley Hoek (Aug 13 2018 at 15:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Character%20encoding%20of%20VM/near/132047636):
-Does anyone know the internal character encoding of strings after a to_char_buffer? It seems to not be UTF-8.
+<p>Does anyone know the internal character encoding of strings after a to_char_buffer? It seems to not be UTF-8.</p>
 
 #### [ Simon Hudon (Aug 13 2018 at 15:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Character%20encoding%20of%20VM/near/132047850):
-`init.data.string.basic` says that it is
+<p><code>init.data.string.basic</code> says that it is</p>
 
 #### [ Sebastian Ullrich (Aug 13 2018 at 18:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Character%20encoding%20of%20VM/near/132056801):
-`char` is a Unicode code point, so a `char_buffer` is not encoded at all
+<p><code>char</code> is a Unicode code point, so a <code>char_buffer</code> is not encoded at all</p>
 
 #### [ Keeley Hoek (Aug 16 2018 at 18:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Character%20encoding%20of%20VM/near/132250034):
-I think there is a serious problem in fs_write() in vm_io.cpp in the frozen final version of Lean 3.
-
-Inside, there is a static_cast to <unsigned char>, which is just wrong when the passed char_buffer has some multibyte unicode characters.
-
-The effect is that nonsense is written by io.fs.write when a char_buffer containing a character such as "𝟙" is passed. e.g. when you execute the following lean program the single byte 0xD9 is written.
-
-````
-def write_file (fn : string) (cnts : string) (mode := io.mode.write) : io unit := do
+<p>I think there is a serious problem in fs_write() in vm_io.cpp in the frozen final version of Lean 3.</p>
+<p>Inside, there is a static_cast to &lt;unsigned char&gt;, which is just wrong when the passed char_buffer has some multibyte unicode characters.</p>
+<p>The effect is that nonsense is written by io.fs.write when a char_buffer containing a character such as "𝟙" is passed. e.g. when you execute the following lean program the single byte 0xD9 is written.</p>
+<div class="codehilite"><pre><span></span>def write_file (fn : string) (cnts : string) (mode := io.mode.write) : io unit := do
 h ← io.mk_file_handle fn io.mode.write,
 io.fs.write h cnts.to_char_buffer,
 io.fs.close h
 
 def main : io unit := do
-  write_file "test.txt" "𝟙" 
-````
-I'm sure the fix won't be a big deal. Does anyone know of a workaround in the meantime?
+  write_file &quot;test.txt&quot; &quot;𝟙&quot;
+</pre></div>
+
+
+<p>I'm sure the fix won't be a big deal. Does anyone know of a workaround in the meantime?</p>
 
 #### [ Sebastian Ullrich (Aug 16 2018 at 18:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Character%20encoding%20of%20VM/near/132250668):
-Hmm, perhaps a `char_buffer` is supposed to be encoded in UTF-8 then after all. In that case, the bug is in `buffer.append_string`, which you could reimplement to do proper UTF-8 encoding
+<p>Hmm, perhaps a <code>char_buffer</code> is supposed to be encoded in UTF-8 then after all. In that case, the bug is in <code>buffer.append_string</code>, which you could reimplement to do proper UTF-8 encoding</p>
 
 #### [ Keeley Hoek (Aug 16 2018 at 18:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Character%20encoding%20of%20VM/near/132251650):
-It looks to me like every time the vm needs to turn an honest std::string into a list of chars it does a utf8_decode (on purpose) to make sure a "char" is a single unicode character, so because char_buffer = buffer char I think that would be breaking the rules!
+<p>It looks to me like every time the vm needs to turn an honest std::string into a list of chars it does a utf8_decode (on purpose) to make sure a "char" is a single unicode character, so because char_buffer = buffer char I think that would be breaking the rules!</p>
 
 #### [ Keeley Hoek (Aug 16 2018 at 18:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Character%20encoding%20of%20VM/near/132251818):
-I would expect that fs_write should call some variant of push_unicode_scalar which pushes char into the temporary buffer it is building. Do you think it'd be okay if I made it do that?
+<p>I would expect that fs_write should call some variant of push_unicode_scalar which pushes char into the temporary buffer it is building. Do you think it'd be okay if I made it do that?</p>
 
 #### [ Sebastian Ullrich (Aug 16 2018 at 19:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Character%20encoding%20of%20VM/near/132252378):
-Do you really want to change the Lean binary instead of fixing the issue in Lean code? This also won't work for `fs_read` since reading a fixed amount of bytes does not necessarily result in a correctly terminated UTF-8 string.
+<p>Do you really want to change the Lean binary instead of fixing the issue in Lean code? This also won't work for <code>fs_read</code> since reading a fixed amount of bytes does not necessarily result in a correctly terminated UTF-8 string.</p>
 
 #### [ Keeley Hoek (Aug 16 2018 at 19:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Character%20encoding%20of%20VM/near/132252969):
-I suppose you are right. But certainly the current behaviour is broken. It seems that there is some confusion as to whether a `char_buffer` should morally be a buffer of characters of text, or of bytes. Much effort is currently gone to to ensure that a `char` is a text-character, so that things like string.length can be the length of the underlying list of chars, etc.
-
-I suppose in an ideal world io.fs.write would produce a `buffer byte`, and io.fs.read should return such a buffer (of course the latter of these actually happens currently, but everything is still called a `char`). And there would be `char_buffer.decode` or something.
-
-One can only dream!
+<p>I suppose you are right. But certainly the current behaviour is broken. It seems that there is some confusion as to whether a <code>char_buffer</code> should morally be a buffer of characters of text, or of bytes. Much effort is currently gone to to ensure that a <code>char</code> is a text-character, so that things like string.length can be the length of the underlying list of chars, etc.</p>
+<p>I suppose in an ideal world io.fs.write would produce a <code>buffer byte</code>, and io.fs.read should return such a buffer (of course the latter of these actually happens currently, but everything is still called a <code>char</code>). And there would be <code>char_buffer.decode</code> or something.</p>
+<p>One can only dream!</p>
 
 #### [ Sebastian Ullrich (Aug 16 2018 at 21:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Character%20encoding%20of%20VM/near/132259214):
-Yes, it should look pretty much like this in Lean 4 :)
+<p>Yes, it should look pretty much like this in Lean 4 :)</p>
 
 #### [ Keeley Hoek (Nov 23 2018 at 13:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Character%20encoding%20of%20VM/near/148225244):
-Hi again @**Sebastian Ullrich**  sorry to resurrect this thread
-At the original time of this thread I implemented the UTF-8 decoding you suggested, and we began to use it:
-https://github.com/khoek/lean-tidy/blob/1fb088df379285f1d9cd303b129331f60c097fd9/src/tidy/lib/utf8.lean#L17
-However we found that the decoder was slowing down the tactic it was part of (part of the visualizer for `rewrite_search`, so we just dropped labels altogether
-
-However, now coming back to caching work for lean I'm having to serialize very large buffers of unicode characters to disk, to preserve the symbols in the names typed in various files, and the slowness has reared its head once again; encoding and saving an 11mb character buffer to disk takes under 1 second if I let lean corrupt it when writing normally, or more than five minutes (I didn't let it finish) if I map the UTF-8 decoder over it. Moreover, it's not the decoder implementation being slow---just asking that each `char` be replaced by its `nat` value as a string via mapping `char.val` over it (and trying to be efficient, appending each resulting `char` one-at-a-time and not doing list joins) takes this long too.
-
-In comparison, parsing such a buffer into the `expr` it represents takes milliseconds.
-
-This makes me very sad---would you at all consider merging a patch to lean which by default transcodes UTF-8 characters when reading and writing, when the file stream was opened in non-binary mode? The patch is under 100 lines. We address your `fs_read` problem above by reading the UTF-8 characters, making the length argument a number of UTF-8 characters, not just bytes (and again, this would only be in non-binary mode).
+<p>Hi again <span class="user-mention" data-user-id="110024">@Sebastian Ullrich</span>  sorry to resurrect this thread<br>
+At the original time of this thread I implemented the UTF-8 decoding you suggested, and we began to use it:<br>
+<a href="https://github.com/khoek/lean-tidy/blob/1fb088df379285f1d9cd303b129331f60c097fd9/src/tidy/lib/utf8.lean#L17" target="_blank" title="https://github.com/khoek/lean-tidy/blob/1fb088df379285f1d9cd303b129331f60c097fd9/src/tidy/lib/utf8.lean#L17">https://github.com/khoek/lean-tidy/blob/1fb088df379285f1d9cd303b129331f60c097fd9/src/tidy/lib/utf8.lean#L17</a><br>
+However we found that the decoder was slowing down the tactic it was part of (part of the visualizer for <code>rewrite_search</code>, so we just dropped labels altogether</p>
+<p>However, now coming back to caching work for lean I'm having to serialize very large buffers of unicode characters to disk, to preserve the symbols in the names typed in various files, and the slowness has reared its head once again; encoding and saving an 11mb character buffer to disk takes under 1 second if I let lean corrupt it when writing normally, or more than five minutes (I didn't let it finish) if I map the UTF-8 decoder over it. Moreover, it's not the decoder implementation being slow---just asking that each <code>char</code> be replaced by its <code>nat</code> value as a string via mapping <code>char.val</code> over it (and trying to be efficient, appending each resulting <code>char</code> one-at-a-time and not doing list joins) takes this long too.</p>
+<p>In comparison, parsing such a buffer into the <code>expr</code> it represents takes milliseconds.</p>
+<p>This makes me very sad---would you at all consider merging a patch to lean which by default transcodes UTF-8 characters when reading and writing, when the file stream was opened in non-binary mode? The patch is under 100 lines. We address your <code>fs_read</code> problem above by reading the UTF-8 characters, making the length argument a number of UTF-8 characters, not just bytes (and again, this would only be in non-binary mode).</p>
 
 #### [ Sebastian Ullrich (Nov 23 2018 at 13:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Character%20encoding%20of%20VM/near/148226040):
-I see. Do you have the patch somewhere?
+<p>I see. Do you have the patch somewhere?</p>
 
 #### [ Keeley Hoek (Nov 23 2018 at 14:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Character%20encoding%20of%20VM/near/148228670):
-I'll extract a nice commit for you
+<p>I'll extract a nice commit for you</p>
 
 #### [ Keeley Hoek (Nov 24 2018 at 08:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Character%20encoding%20of%20VM/near/148267458):
-@**Sebastian Ullrich** Sorry about the delay, here you go:
-https://github.com/khoek/klean/commit/7d7abf9064297cd34186fad4a043fb7229bed9e8
-I've stress-tested the read/write io calls on 100mb of utf8 nonsense, and everything was reproduced correctly without crashing
+<p><span class="user-mention" data-user-id="110024">@Sebastian Ullrich</span> Sorry about the delay, here you go:<br>
+<a href="https://github.com/khoek/klean/commit/7d7abf9064297cd34186fad4a043fb7229bed9e8" target="_blank" title="https://github.com/khoek/klean/commit/7d7abf9064297cd34186fad4a043fb7229bed9e8">https://github.com/khoek/klean/commit/7d7abf9064297cd34186fad4a043fb7229bed9e8</a><br>
+I've stress-tested the read/write io calls on 100mb of utf8 nonsense, and everything was reproduced correctly without crashing</p>
 
 #### [ Scott Morrison (Nov 24 2018 at 09:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Character%20encoding%20of%20VM/near/148267991):
-Exciting! (especially if you know what comes next :-)
+<p>Exciting! (especially if you know what comes next :-)</p>
 
 #### [ Keeley Hoek (Nov 26 2018 at 12:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Character%20encoding%20of%20VM/near/148362422):
-@**Sebastian Ullrich** Sorry to keep bugging you
-I have a tiny little puzzle you might be interested in. If you clone https://github.com/khoek/leandemo-for-sebastian and run `lean --make test.lean` (a program which just reads the accompanying file in the repo into memory) lean will finish executing essentially instantly.
-On the other hand, try opening up `test.lean` in vscode. I observe a multiple-second pause when lean reads in the file in "interactive mode". Why could this discrepancy be happening?
+<p><span class="user-mention" data-user-id="110024">@Sebastian Ullrich</span> Sorry to keep bugging you<br>
+I have a tiny little puzzle you might be interested in. If you clone <a href="https://github.com/khoek/leandemo-for-sebastian" target="_blank" title="https://github.com/khoek/leandemo-for-sebastian">https://github.com/khoek/leandemo-for-sebastian</a> and run <code>lean --make test.lean</code> (a program which just reads the accompanying file in the repo into memory) lean will finish executing essentially instantly.<br>
+On the other hand, try opening up <code>test.lean</code> in vscode. I observe a multiple-second pause when lean reads in the file in "interactive mode". Why could this discrepancy be happening?</p>
 
 #### [ Keeley Hoek (Nov 26 2018 at 12:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Character%20encoding%20of%20VM/near/148362472):
-I measure less than 100ms in the first case
+<p>I measure less than 100ms in the first case</p>
 
 #### [ Sebastian Ullrich (Nov 26 2018 at 12:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Character%20encoding%20of%20VM/near/148362685):
-Are you sure it's actually rebuilding the file?
-```
-$ time lean +3.4.1 test.lean
+<p>Are you sure it's actually rebuilding the file?</p>
+<div class="codehilite"><pre><span></span>$ time lean +3.4.1 test.lean
 running
 done
 0.93user 0.58system 0:04.35elapsed 34%CPU (0avgtext+0avgdata 176204maxresident)k
 0inputs+200outputs (77major+66430minor)pagefaults 0swaps
-```
+</pre></div>
 
 #### [ Patrick Massot (Nov 26 2018 at 13:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Character%20encoding%20of%20VM/near/148362744):
-Did you have any olean floating around Keeley?
+<p>Did you have any olean floating around Keeley?</p>
 
 #### [ Keeley Hoek (Nov 26 2018 at 13:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Character%20encoding%20of%20VM/near/148362996):
-I got embarrassed for a second, but I don't think its an olean problem
-What does "rebuilding" mean Sebastian?
-But on my computer at the terminal I get
-````
-running
+<p>I got embarrassed for a second, but I don't think its an olean problem<br>
+What does "rebuilding" mean Sebastian?<br>
+But on my computer at the terminal I get</p>
+<div class="codehilite"><pre><span></span>running
 /home/khoek/code/lean/leandemo-for-sebastian/test.lean: parsing at line 145803226
 done
 
-real	0m0.876s
-user	0m0.774s
-sys	0m0.100s
-````
-(I made it print the number of bytes `5803226` read in there)
-But in vscode I can comfortably count one-thousand-and-one one-thousand-and-two after I perturb the file
-And if you make the file bigger (more MB) then it takes longer, too
+real    0m0.876s
+user    0m0.774s
+sys 0m0.100s
+</pre></div>
+
+
+<p>(I made it print the number of bytes <code>5803226</code> read in there)<br>
+But in vscode I can comfortably count one-thousand-and-one one-thousand-and-two after I perturb the file<br>
+And if you make the file bigger (more MB) then it takes longer, too</p>
 
 #### [ Keeley Hoek (Nov 26 2018 at 13:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Character%20encoding%20of%20VM/near/148363371):
-copy-and-pasting the contents of the `test.dat` file a few times to get the file size up to 87mb, at the terminal it takes 1.967seconds to run, while in vscode it is more than 10
+<p>copy-and-pasting the contents of the <code>test.dat</code> file a few times to get the file size up to 87mb, at the terminal it takes 1.967seconds to run, while in vscode it is more than 10</p>
 
 #### [ Sebastian Ullrich (Nov 26 2018 at 14:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Character%20encoding%20of%20VM/near/148367812):
-@**Keeley Hoek** What do you get if you use `--server` like this?
-```
-echo '{"seq_num": 0, "command": "sync", "file_name": "test.lean"}' | time lean +3.4.1 --server
-```
-For me, it's about as fast after the first run (i.e. after the file cache is hot, probably)
+<p><span class="user-mention" data-user-id="110111">@Keeley Hoek</span> What do you get if you use <code>--server</code> like this?</p>
+<div class="codehilite"><pre><span></span>echo &#39;{&quot;seq_num&quot;: 0, &quot;command&quot;: &quot;sync&quot;, &quot;file_name&quot;: &quot;test.lean&quot;}&#39; | time lean +3.4.1 --server
+</pre></div>
+
+
+<p>For me, it's about as fast after the first run (i.e. after the file cache is hot, probably)</p>
 
 #### [ Keeley Hoek (Nov 26 2018 at 14:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Character%20encoding%20of%20VM/near/148368092):
-When I run that it starts/finishes really quick without printing `running` and `done`, so I don't think its actually running
-I made sure to delete the olean file
+<p>When I run that it starts/finishes really quick without printing <code>running</code> and <code>done</code>, so I don't think its actually running<br>
+I made sure to delete the olean file</p>
 
 #### [ Sebastian Ullrich (Nov 26 2018 at 15:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Character%20encoding%20of%20VM/near/148368796):
-Ah, you should probably use `-j0` to force it into serial mode. I don't even remember half of these things.
+<p>Ah, you should probably use <code>-j0</code> to force it into serial mode. I don't even remember half of these things.</p>
 
 #### [ Keeley Hoek (Nov 26 2018 at 15:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Character%20encoding%20of%20VM/near/148369274):
-Yep that worked
+<p>Yep that worked</p>
 
 #### [ Keeley Hoek (Nov 26 2018 at 15:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Character%20encoding%20of%20VM/near/148369357):
-14.14 seconds for the file in my repository (now updated, I made it way bigger)
-2.348 from the terminal
+<p>14.14 seconds for the file in my repository (now updated, I made it way bigger)<br>
+2.348 from the terminal</p>
 
 #### [ Sebastian Ullrich (Dec 09 2018 at 22:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Character%20encoding%20of%20VM/near/151237681):
-```quote
-@**Sebastian Ullrich** Sorry about the delay, here you go:
-https://github.com/khoek/klean/commit/7d7abf9064297cd34186fad4a043fb7229bed9e8
-I've stress-tested the read/write io calls on 100mb of utf8 nonsense, and everything was reproduced correctly without crashing
-```
- merged
+<blockquote>
+<p><span class="user-mention" data-user-id="110024">@Sebastian Ullrich</span> Sorry about the delay, here you go:<br>
+<a href="https://github.com/khoek/klean/commit/7d7abf9064297cd34186fad4a043fb7229bed9e8" target="_blank" title="https://github.com/khoek/klean/commit/7d7abf9064297cd34186fad4a043fb7229bed9e8">https://github.com/khoek/klean/commit/7d7abf9064297cd34186fad4a043fb7229bed9e8</a><br>
+I've stress-tested the read/write io calls on 100mb of utf8 nonsense, and everything was reproduced correctly without crashing</p>
+</blockquote>
+<p>merged</p>
 
 #### [ Scott Morrison (Dec 10 2018 at 13:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Character%20encoding%20of%20VM/near/151268884):
-@**Keeley Hoek** did you see this?
+<p><span class="user-mention" data-user-id="110111">@Keeley Hoek</span> did you see this?</p>
 
 
 {% endraw %}

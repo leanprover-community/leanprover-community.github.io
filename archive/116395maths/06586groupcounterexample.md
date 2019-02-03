@@ -12,33 +12,27 @@ permalink: archive/116395maths/06586groupcounterexample.html
 
 {% raw %}
 #### [ Kevin Buzzard (Nov 23 2018 at 08:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/group%20counterexample/near/148214352):
-Q1 part (i) on the 2nd year group theory sheet at Imperial (where $$G$$ is a group throughout) is "True or false : If we can find elements $$g$$, $$h$$ in $$G$$ such that $$gh = hg$$ then $$G$$ is abelian."
+<p>Q1 part (i) on the 2nd year group theory sheet at Imperial (where <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>G</mi></mrow><annotation encoding="application/x-tex">G</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.68333em;vertical-align:0em;"></span><span class="base"><span class="mord mathit">G</span></span></span></span> is a group throughout) is "True or false : If we can find elements <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>g</mi></mrow><annotation encoding="application/x-tex">g</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.43056em;"></span><span class="strut bottom" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.03588em;">g</span></span></span></span>, <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>h</mi></mrow><annotation encoding="application/x-tex">h</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.69444em;"></span><span class="strut bottom" style="height:0.69444em;vertical-align:0em;"></span><span class="base"><span class="mord mathit">h</span></span></span></span> in <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>G</mi></mrow><annotation encoding="application/x-tex">G</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.68333em;vertical-align:0em;"></span><span class="base"><span class="mord mathit">G</span></span></span></span> such that <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>g</mi><mi>h</mi><mo>=</mo><mi>h</mi><mi>g</mi></mrow><annotation encoding="application/x-tex">gh = hg</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.69444em;"></span><span class="strut bottom" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.03588em;">g</span><span class="mord mathit">h</span><span class="mrel">=</span><span class="mord mathit">h</span><span class="mord mathit" style="margin-right:0.03588em;">g</span></span></span></span> then <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>G</mi></mrow><annotation encoding="application/x-tex">G</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.68333em;vertical-align:0em;"></span><span class="base"><span class="mord mathit">G</span></span></span></span> is abelian."</p>
+<p>So this is false, and <span class="user-mention" data-user-id="118107">@Amelia Livingston</span> and I were thinking about this question at Xena today. I wanted to formalise the question as closely as possible to the example sheet, so I wanted to write something like</p>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">q1p1</span> <span class="o">:</span> <span class="bp">¬</span> <span class="o">(</span><span class="bp">∀</span> <span class="o">(</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">[</span><span class="n">group</span> <span class="n">G</span><span class="o">],</span> <span class="o">(</span><span class="bp">∃</span> <span class="n">g</span> <span class="n">h</span> <span class="o">:</span> <span class="n">G</span><span class="o">,</span> <span class="n">g</span> <span class="bp">*</span> <span class="n">h</span> <span class="bp">=</span> <span class="n">h</span> <span class="bp">*</span> <span class="n">g</span><span class="o">)</span> <span class="bp">→</span> <span class="n">is_abelian</span> <span class="n">G</span><span class="o">)</span> <span class="o">:=</span> <span class="n">sorry</span>
+</pre></div>
 
-So this is false, and @**Amelia Livingston** and I were thinking about this question at Xena today. I wanted to formalise the question as closely as possible to the example sheet, so I wanted to write something like
 
-```lean
-theorem q1p1 : ¬ (∀ (G : Type*) [group G], (∃ g h : G, g * h = h * g) → is_abelian G) := sorry
-```
+<p>You have to put the negation at the front of everything, so <code>group J</code> is after the colon and Lean doesn't know what <code>*</code> is. So version 2, which typechecks, is</p>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">q1p1</span> <span class="o">:</span> <span class="bp">¬</span> <span class="o">(</span><span class="bp">∀</span> <span class="o">(</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">[</span><span class="n">group</span> <span class="n">G</span><span class="o">],</span> <span class="k">by</span> <span class="n">exactI</span> <span class="o">(</span><span class="bp">∃</span> <span class="n">g</span> <span class="n">h</span> <span class="o">:</span> <span class="n">G</span><span class="o">,</span> <span class="n">g</span> <span class="bp">*</span> <span class="n">h</span> <span class="bp">=</span> <span class="n">h</span> <span class="bp">*</span> <span class="n">g</span><span class="o">)</span> <span class="bp">→</span> <span class="n">is_abelian</span> <span class="n">G</span><span class="o">)</span> <span class="o">:=</span>
+</pre></div>
 
-You have to put the negation at the front of everything, so `group J` is after the colon and Lean doesn't know what `*` is. So version 2, which typechecks, is
 
-```lean
-theorem q1p1 : ¬ (∀ (G : Type*) [group G], by exactI (∃ g h : G, g * h = h * g) → is_abelian G) :=
-```
+<p>But then we run into universe issues in the proof:</p>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">q1p1</span> <span class="o">:</span> <span class="bp">¬</span> <span class="o">(</span><span class="bp">∀</span> <span class="o">(</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">[</span><span class="n">group</span> <span class="n">G</span><span class="o">],</span> <span class="k">by</span> <span class="n">exactI</span> <span class="o">(</span><span class="bp">∃</span> <span class="n">g</span> <span class="n">h</span> <span class="o">:</span> <span class="n">G</span><span class="o">,</span> <span class="n">g</span> <span class="bp">*</span> <span class="n">h</span> <span class="bp">=</span> <span class="n">h</span> <span class="bp">*</span> <span class="n">g</span><span class="o">)</span> <span class="bp">→</span> <span class="n">is_abelian</span> <span class="n">G</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">intro</span> <span class="n">H</span>
+  <span class="n">replace</span> <span class="n">H</span> <span class="o">:=</span> <span class="n">H</span> <span class="o">(</span><span class="n">perm</span> <span class="o">(</span><span class="n">fin</span> <span class="mi">3</span><span class="o">)),</span> <span class="c1">-- fails</span>
+</pre></div>
 
-But then we run into universe issues in the proof:
 
-```lean
-theorem q1p1 : ¬ (∀ (G : Type*) [group G], by exactI (∃ g h : G, g * h = h * g) → is_abelian G) :=
-begin
-  intro H
-  replace H := H (perm (fin 3)), -- fails
-```
-
-The error is
-
-```
-type mismatch at application
+<p>The error is</p>
+<div class="codehilite"><pre><span></span>type mismatch at application
   H (perm (fin 3))
 term
   perm (fin 3)
@@ -46,39 +40,40 @@ has type
   Type : Type 1
 but is expected to have type
   Type u_1 : Type (u_1+1)
-```
+</pre></div>
 
-I guess I understand that we can't do much about the `by exactI` stuff, but why can't Lean resolve my universe metavariable? Am I accidentally claiming that there are counterexamples in every universe?
+
+<p>I guess I understand that we can't do much about the <code>by exactI</code> stuff, but why can't Lean resolve my universe metavariable? Am I accidentally claiming that there are counterexamples in every universe?</p>
 
 #### [ Johan Commelin (Nov 23 2018 at 09:01)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/group%20counterexample/near/148214469):
-Yes you are
+<p>Yes you are</p>
 
 #### [ Johan Commelin (Nov 23 2018 at 09:01)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/group%20counterexample/near/148214477):
-Take `G : Type` instead of `Type*`. I think that will help
+<p>Take <code>G : Type</code> instead of <code>Type*</code>. I think that will help</p>
 
 #### [ Kevin Buzzard (Nov 23 2018 at 09:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/group%20counterexample/near/148216373):
-But isn't that cheating?
+<p>But isn't that cheating?</p>
 
 #### [ Kevin Buzzard (Nov 23 2018 at 09:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/group%20counterexample/near/148216392):
-How do I formalise the statement that it is not true that for all groups in all universes, some stupid thing holds
+<p>How do I formalise the statement that it is not true that for all groups in all universes, some stupid thing holds</p>
 
 #### [ Kevin Buzzard (Nov 23 2018 at 09:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/group%20counterexample/near/148216435):
-I want the quantifier in the not
+<p>I want the quantifier in the not</p>
 
 #### [ Kevin Buzzard (Nov 23 2018 at 09:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/group%20counterexample/near/148216437):
-The universe quantifier
+<p>The universe quantifier</p>
 
 #### [ Mario Carneiro (Nov 23 2018 at 10:08)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/group%20counterexample/near/148217061):
-impossible
+<p>impossible</p>
 
 #### [ Mario Carneiro (Nov 23 2018 at 10:08)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/group%20counterexample/near/148217069):
-that's existential quantification over universes
+<p>that's existential quantification over universes</p>
 
 #### [ Mario Carneiro (Nov 23 2018 at 10:09)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/group%20counterexample/near/148217081):
-What you can do instead is show a counterexample in a particular universe, which of course implies the existential that you can't write
+<p>What you can do instead is show a counterexample in a particular universe, which of course implies the existential that you can't write</p>
 
 #### [ Kevin Buzzard (Nov 23 2018 at 10:16)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/group%20counterexample/near/148217369):
-So do I have to use `ulift` to get `replace H := H (perm (fin 3))` working? I've never used `ulift` before.
+<p>So do I have to use <code>ulift</code> to get <code>replace H := H (perm (fin 3))</code> working? I've never used <code>ulift</code> before.</p>
 
 
 {% endraw %}

@@ -12,42 +12,42 @@ permalink: archive/113488general/10515stringltdoesntmatchitsspec.html
 
 {% raw %}
 #### [ Mario Carneiro (Jun 21 2018 at 00:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/string_lt%20doesn%27t%20match%20its%20spec/near/128386824):
-@**Gabriel Ebner** @**Sebastian Ullrich** I started trying to prove that `string.lt` is a total order, and then I discovered it's not true:
-```
-#eval to_bool ([1, 2] < [2, 1]) -- tt
-#eval to_bool ([2, 1] < [1, 2]) -- tt
-```
-Surely this is a bug?
+<p><span class="user-mention" data-user-id="110043">@Gabriel Ebner</span> <span class="user-mention" data-user-id="110024">@Sebastian Ullrich</span> I started trying to prove that <code>string.lt</code> is a total order, and then I discovered it's not true:</p>
+<div class="codehilite"><pre><span></span>#eval to_bool ([1, 2] &lt; [2, 1]) -- tt
+#eval to_bool ([2, 1] &lt; [1, 2]) -- tt
+</pre></div>
+
+
+<p>Surely this is a bug?</p>
 
 #### [ Mario Carneiro (Jun 21 2018 at 00:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/string_lt%20doesn%27t%20match%20its%20spec/near/128386901):
-Even worse, it behaves differently (correctly) on actual strings:
-```
-#eval to_bool ("ab" < "ba") -- tt
-#eval to_bool ("ba" < "ab") -- ff
-#reduce to_bool ("ba" < "ab") -- tt
-example : "ba" < "ab" := dec_trivial
-```
+<p>Even worse, it behaves differently (correctly) on actual strings:</p>
+<div class="codehilite"><pre><span></span>#eval to_bool (&quot;ab&quot; &lt; &quot;ba&quot;) -- tt
+#eval to_bool (&quot;ba&quot; &lt; &quot;ab&quot;) -- ff
+#reduce to_bool (&quot;ba&quot; &lt; &quot;ab&quot;) -- tt
+example : &quot;ba&quot; &lt; &quot;ab&quot; := dec_trivial
+</pre></div>
 
 #### [ Sebastian Ullrich (Jun 21 2018 at 02:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/string_lt%20doesn%27t%20match%20its%20spec/near/128392824):
-[oops](https://github.com/leanprover/lean/blob/a4aae537fe771ee92d746d4a2be1e73c543e48b9/library/init/data/list/basic.lean#L278)
+<p><a href="https://github.com/leanprover/lean/blob/a4aae537fe771ee92d746d4a2be1e73c543e48b9/library/init/data/list/basic.lean#L278" target="_blank" title="https://github.com/leanprover/lean/blob/a4aae537fe771ee92d746d4a2be1e73c543e48b9/library/init/data/list/basic.lean#L278">oops</a></p>
 
 #### [ Mario Carneiro (Jun 21 2018 at 03:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/string_lt%20doesn%27t%20match%20its%20spec/near/128393318):
-I'm using this in mathlib:
-```
-inductive lex (r : α → α → Prop) : list α → list α → Prop
+<p>I'm using this in mathlib:</p>
+<div class="codehilite"><pre><span></span>inductive lex (r : α → α → Prop) : list α → list α → Prop
 | nil {} {a l} : lex [] (a :: l)
 | cons {a l₁ l₂} (h : lex l₁ l₂) : lex (a :: l₁) (a :: l₂)
 | rel {a₁ l₁ a₂ l₂} (h : r a₁ a₂) : lex (a₁ :: l₁) (a₂ :: l₂)
-```
-Feel free to poach
+</pre></div>
+
+
+<p>Feel free to poach</p>
 
 #### [ Sebastian Ullrich (Jun 21 2018 at 03:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/string_lt%20doesn%27t%20match%20its%20spec/near/128393382):
-Right, an inductive definition is certainly nicer here
+<p>Right, an inductive definition is certainly nicer here</p>
 
 #### [ Mario Carneiro (Jun 21 2018 at 03:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/string_lt%20doesn%27t%20match%20its%20spec/near/128393430):
-here's the decidability proof, although it needs rejiggering for core:
-```
-instance decidable_rel [decidable_eq α] (r : α → α → Prop)
+<p>here's the decidability proof, although it needs rejiggering for core:</p>
+<div class="codehilite"><pre><span></span>instance decidable_rel [decidable_eq α] (r : α → α → Prop)
   [decidable_rel r] : decidable_rel (lex r)
 | l₁ [] := is_false $ λ h, by cases h
 | [] (b::l₂) := is_true lex.nil
@@ -61,7 +61,7 @@ instance decidable_rel [decidable_eq α] (r : α → α → Prop)
     { exact or.inr ⟨rfl, h⟩ },
     { exact or.inl h } }
 end
-```
+</pre></div>
 
 
 {% endraw %}

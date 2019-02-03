@@ -12,67 +12,70 @@ permalink: archive/113488general/21702tactictypeclassinstance.html
 
 {% raw %}
 #### [ petercommand (Jan 09 2019 at 09:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20type%20class%20instance/near/154708014):
-```
-meta def opt_fst (a: tactic unit) (b: tactic unit) : tactic unit := (a >> b) <|> b
-```
-I am trying to define a tactic combinator, but it seems that I cannot use it like this:
-```
-opt_fst { symmetry } { symmetry }
-```
-and I am getting errors like
-```
-failed to synthesize type class instance for
+<div class="codehilite"><pre><span></span>meta def opt_fst (a: tactic unit) (b: tactic unit) : tactic unit := (a &gt;&gt; b) &lt;|&gt; b
+</pre></div>
+
+
+<p>I am trying to define a tactic combinator, but it seems that I cannot use it like this:</p>
+<div class="codehilite"><pre><span></span>opt_fst { symmetry } { symmetry }
+</pre></div>
+
+
+<p>and I am getting errors like</p>
+<div class="codehilite"><pre><span></span>failed to synthesize type class instance for
 |- has_emptyc (tactic unit)
-```
-Am I doing something wrong here?
+</pre></div>
+
+
+<p>Am I doing something wrong here?</p>
 
 #### [ petercommand (Jan 09 2019 at 09:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20type%20class%20instance/near/154708130):
-I want the tactic to accept begin...end blocks or {...} blocks
+<p>I want the tactic to accept begin...end blocks or {...} blocks</p>
 
 #### [ Sebastian Ullrich (Jan 09 2019 at 09:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20type%20class%20instance/near/154708169):
-You'll want your parameters to have type `itactic` (for "interactive tactic"). Try searching for itactic in core or mathlib for examples.
+<p>You'll want your parameters to have type <code>itactic</code> (for "interactive tactic"). Try searching for itactic in core or mathlib for examples.</p>
 
 #### [ Rob Lewis (Jan 09 2019 at 09:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20type%20class%20instance/near/154708213):
-`meta def tactic.interactive.opt_fst (a: tactic.interactive.itactic) (b: tactic.interactive.itactic) : tactic unit := (a >> b) <|> b`
+<p><code>meta def tactic.interactive.opt_fst (a: tactic.interactive.itactic) (b: tactic.interactive.itactic) : tactic unit := (a &gt;&gt; b) &lt;|&gt; b</code></p>
 
 #### [ petercommand (Jan 09 2019 at 09:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20type%20class%20instance/near/154708254):
-Isn't ```tactic.interactive.itactic``` defined as ```tactic unit```?
+<p>Isn't <code>tactic.interactive.itactic</code> defined as <code>tactic unit</code>?</p>
 
 #### [ Sebastian Ullrich (Jan 09 2019 at 09:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20type%20class%20instance/near/154708297):
-Yes, but it's special-cased in the tactic block parser
+<p>Yes, but it's special-cased in the tactic block parser</p>
 
 #### [ petercommand (Jan 09 2019 at 09:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20type%20class%20instance/near/154708301):
-Ah
+<p>Ah</p>
 
 #### [ petercommand (Jan 09 2019 at 09:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20type%20class%20instance/near/154708303):
-Hmm..I am still getting the same error
+<p>Hmm..I am still getting the same error</p>
 
 #### [ Gabriel Ebner (Jan 09 2019 at 09:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20type%20class%20instance/near/154708334):
-You need to call it inside `begin..end`: `begin opt_fst {} {} end`
+<p>You need to call it inside <code>begin..end</code>: <code>begin opt_fst {} {} end</code></p>
 
 #### [ petercommand (Jan 09 2019 at 09:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20type%20class%20instance/near/154708347):
-do I have to prefix the name of the tactic with ```tactic.interactive.```?
+<p>do I have to prefix the name of the tactic with <code>tactic.interactive.</code>?</p>
 
 #### [ Gabriel Ebner (Jan 09 2019 at 09:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20type%20class%20instance/near/154708385):
-No.
+<p>No.</p>
 
 #### [ Sebastian Ullrich (Jan 09 2019 at 09:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20type%20class%20instance/near/154708394):
-(if you're in `tactic.interactive`, which your definition should be)
+<p>(if you're in <code>tactic.interactive</code>, which your definition should be)</p>
 
 #### [ petercommand (Jan 09 2019 at 09:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20type%20class%20instance/near/154708400):
-after changing the name of the tactic, it worked..
+<p>after changing the name of the tactic, it worked..</p>
 
 #### [ Rob Lewis (Jan 09 2019 at 09:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20type%20class%20instance/near/154708416):
-The tactic should be named `tactic.interactive.whatever`. You don't need to write the `tactic.interactive` part when you use it.
+<p>The tactic should be named <code>tactic.interactive.whatever</code>. You don't need to write the <code>tactic.interactive</code> part when you use it.</p>
 
 #### [ petercommand (Jan 09 2019 at 09:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20type%20class%20instance/near/154708478):
-```quote
-The tactic should be named `tactic.interactive.whatever`. You don't need to write the `tactic.interactive` part when you use it.
-```
-Hmm..seems that this is also hardcoded
+<blockquote>
+<p>The tactic should be named <code>tactic.interactive.whatever</code>. You don't need to write the <code>tactic.interactive</code> part when you use it.</p>
+</blockquote>
+<p>Hmm..seems that this is also hardcoded</p>
 
 #### [ petercommand (Jan 09 2019 at 09:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20type%20class%20instance/near/154708504):
-Thanks!
+<p>Thanks!</p>
 
 
 {% endraw %}

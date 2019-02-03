@@ -12,29 +12,28 @@ permalink: archive/113488general/06640sowhatiseqrec.html
 
 {% raw %}
 #### [ Kenny Lau (Apr 16 2018 at 06:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/so%20what%20is%20eq.rec%3F/near/125134272):
-I'm stuck in this state:
-```
-A : orbits G X,
+<p>I'm stuck in this state:</p>
+<div class="codehilite"><pre><span></span>A : orbits G X,
 x : X,
 hx : ⟦x⟧ = A,
 z : ↥(stab G X ↑⟨x, hx⟩)
 ⊢ ((eq.rec ⟨⟨x, rfl ⟦x⟧⟩, z⟩ hx).fst).val = x
+</pre></div>
 
 #### [ Kenny Lau (Apr 16 2018 at 06:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/so%20what%20is%20eq.rec%3F/near/125134273):
-I don't see any way to destruct `eq.rec`
+<p>I don't see any way to destruct <code>eq.rec</code></p>
 
 #### [ Kenny Lau (Apr 16 2018 at 06:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/so%20what%20is%20eq.rec%3F/near/125134275):
-`⟨⟨x, rfl ⟦x⟧⟩, z⟩` is subtype inside sigma
+<p><code>⟨⟨x, rfl ⟦x⟧⟩, z⟩</code> is subtype inside sigma</p>
 
 #### [ Mario Carneiro (Apr 16 2018 at 06:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/so%20what%20is%20eq.rec%3F/near/125134314):
-`pp.all`?
+<p><code>pp.all</code>?</p>
 
 #### [ Mario Carneiro (Apr 16 2018 at 06:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/so%20what%20is%20eq.rec%3F/near/125134321):
-You should probably `subst A`
+<p>You should probably <code>subst A</code></p>
 
 #### [ Kenny Lau (Apr 16 2018 at 06:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/so%20what%20is%20eq.rec%3F/near/125134322):
-```
-@eq.{v+1} X
+<div class="codehilite"><pre><span></span>@eq.{v+1} X
     (@subtype.val.{v+1} X
        (λ (x : X),
           @eq.{v+1} (@quotient.{v+1} X (@group_action.orbit_rel.{u v} G _inst_1 X _inst_2))
@@ -191,28 +190,28 @@ You should probably `subst A`
                                               (@quotient.mk.{v+1} X (@group_action.orbit_rel.{u v} G _inst_1 X _inst_2)
                                                  x_1)
                                               (@quotien
+</pre></div>
 
 #### [ Kenny Lau (Apr 16 2018 at 06:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/so%20what%20is%20eq.rec%3F/near/125134323):
-lol too long
+<p>lol too long</p>
 
 #### [ Kenny Lau (Apr 16 2018 at 06:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/so%20what%20is%20eq.rec%3F/near/125134365):
-oh, lol, `subst` did the job
+<p>oh, lol, <code>subst</code> did the job</p>
 
 #### [ Kenny Lau (Apr 16 2018 at 06:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/so%20what%20is%20eq.rec%3F/near/125134366):
-how does it work?
+<p>how does it work?</p>
 
 #### [ Mario Carneiro (Apr 16 2018 at 06:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/so%20what%20is%20eq.rec%3F/near/125134368):
-You have an equality assumption `[[x]] = A`, and a bunch of complicated stuff that depends on it
+<p>You have an equality assumption <code>[[x]] = A</code>, and a bunch of complicated stuff that depends on it</p>
 
 #### [ Mario Carneiro (Apr 16 2018 at 06:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/so%20what%20is%20eq.rec%3F/near/125134372):
-to reduce an `eq.rec` you need the major premise to become `refl` somehow
+<p>to reduce an <code>eq.rec</code> you need the major premise to become <code>refl</code> somehow</p>
 
 #### [ Mario Carneiro (Apr 16 2018 at 06:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/so%20what%20is%20eq.rec%3F/near/125134375):
-that usually means finding the appropriate equality in the context and generalizing it until one side is a variable, and then `subst`, which is to say use `eq.rec` in the proof term
+<p>that usually means finding the appropriate equality in the context and generalizing it until one side is a variable, and then <code>subst</code>, which is to say use <code>eq.rec</code> in the proof term</p>
 
 #### [ Kenny Lau (Apr 16 2018 at 06:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/so%20what%20is%20eq.rec%3F/near/125134465):
-```
-eq.rec ⟨⟨x, rfl ⟦x⟧⟩, z⟩ hx = ⟨⟨x, hx⟩, z⟩
+<div class="codehilite"><pre><span></span>eq.rec ⟨⟨x, rfl ⟦x⟧⟩, z⟩ hx = ⟨⟨x, hx⟩, z⟩
 
 is cleared by:
 
@@ -229,15 +228,16 @@ is cleared by:
                ⟨⟦snd_fst_val⟧, ⟨⟨snd_fst_val, eq.refl ⟦snd_fst_val⟧⟩, z⟩⟩)).snd)))
    snd_fst_property
    snd_snd)
+</pre></div>
 
 #### [ Kenny Lau (Apr 16 2018 at 06:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/so%20what%20is%20eq.rec%3F/near/125134466):
-I `print`ed to look at the proof term
+<p>I <code>print</code>ed to look at the proof term</p>
 
 #### [ Kenny Lau (Apr 16 2018 at 06:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/so%20what%20is%20eq.rec%3F/near/125134505):
-so maybe `drec` would have worked?
+<p>so maybe <code>drec</code> would have worked?</p>
 
 #### [ Mario Carneiro (Apr 16 2018 at 06:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/so%20what%20is%20eq.rec%3F/near/125134506):
-I guess it uses `eq.drec` since you also need to replace `hx` in the term with `eq.refl`, but it's not necessary provided you generalize `hx` by proof irrelevance
+<p>I guess it uses <code>eq.drec</code> since you also need to replace <code>hx</code> in the term with <code>eq.refl</code>, but it's not necessary provided you generalize <code>hx</code> by proof irrelevance</p>
 
 
 {% endraw %}

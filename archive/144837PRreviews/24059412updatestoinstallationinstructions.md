@@ -12,7 +12,7 @@ permalink: archive/144837PRreviews/24059412updatestoinstallationinstructions.htm
 
 {% raw %}
 #### [ Scott Morrison (Oct 10 2018 at 12:09)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23412%20updates%20to%20installation%20instructions/near/135531362):
-A few improvements, and pointers to the installation videos. This is pure documentation, and I think can be merged.
+<p>A few improvements, and pointers to the installation videos. This is pure documentation, and I think can be merged.</p>
 
 
 {% endraw %}

@@ -12,142 +12,142 @@ permalink: archive/113488general/56063createalias.html
 
 {% raw %}
 #### [ Zesen Qian (Aug 17 2018 at 17:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/create%20alias/near/132309111):
-How can I create an alias to anther declaration? Say, in my namespace `foo` I want to create a `true` such that users can see `foo.true` and the prover treats it equally to `true` from core.
+<p>How can I create an alias to anther declaration? Say, in my namespace <code>foo</code> I want to create a <code>true</code> such that users can see <code>foo.true</code> and the prover treats it equally to <code>true</code> from core.</p>
 
 #### [ Mario Carneiro (Aug 17 2018 at 17:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/create%20alias/near/132309539):
-equally is hard, but there are a few ways to get close
+<p>equally is hard, but there are a few ways to get close</p>
 
 #### [ Zesen Qian (Aug 17 2018 at 17:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/create%20alias/near/132309551):
-right now I'm thinking about `def` with `attribute [reducible]`
+<p>right now I'm thinking about <code>def</code> with <code>attribute [reducible]</code></p>
 
 #### [ Mario Carneiro (Aug 17 2018 at 17:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/create%20alias/near/132309556):
-`@[reducible] def` makes `rw` and `simp` see through the definition, as well as typeclass inference
+<p><code>@[reducible] def</code> makes <code>rw</code> and <code>simp</code> see through the definition, as well as typeclass inference</p>
 
 #### [ Zesen Qian (Aug 17 2018 at 17:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/create%20alias/near/132309559):
-I guess that should work, but really I'm looking for shorter path.
+<p>I guess that should work, but really I'm looking for shorter path.</p>
 
 #### [ Mario Carneiro (Aug 17 2018 at 17:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/create%20alias/near/132309566):
-`abbreviation` does something similar with kernel reduction, I'm not sure exactly
+<p><code>abbreviation</code> does something similar with kernel reduction, I'm not sure exactly</p>
 
 #### [ Mario Carneiro (Aug 17 2018 at 17:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/create%20alias/near/132309572):
-what do you mean "shorter path"?
+<p>what do you mean "shorter path"?</p>
 
 #### [ Zesen Qian (Aug 17 2018 at 17:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/create%20alias/near/132309578):
-I mean, less characters to type.
+<p>I mean, less characters to type.</p>
 
 #### [ Zesen Qian (Aug 17 2018 at 17:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/create%20alias/near/132309584):
-alias true = true would be the best.
+<p>alias true = true would be the best.</p>
 
 #### [ Mario Carneiro (Aug 17 2018 at 17:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/create%20alias/near/132309623):
-mathlib has an `alias` tactic, but it doesn't set `reducible`
+<p>mathlib has an <code>alias</code> tactic, but it doesn't set <code>reducible</code></p>
 
 #### [ Mario Carneiro (Aug 17 2018 at 17:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/create%20alias/near/132309646):
-what's wrong with just `def true := true`?
+<p>what's wrong with just <code>def true := true</code>?</p>
 
 #### [ Chris Hughes (Aug 17 2018 at 17:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/create%20alias/near/132309652):
-`notation`?
+<p><code>notation</code>?</p>
 
 #### [ Mario Carneiro (Aug 17 2018 at 17:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/create%20alias/near/132309684):
-also, what is your use case? I wrote `alias` to support alias constructions but it doesn't get much use since I specifically try to avoid aliases
+<p>also, what is your use case? I wrote <code>alias</code> to support alias constructions but it doesn't get much use since I specifically try to avoid aliases</p>
 
 #### [ Zesen Qian (Aug 17 2018 at 17:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/create%20alias/near/132309741):
-I need something in my namespace that's definitionally equal to `true`
+<p>I need something in my namespace that's definitionally equal to <code>true</code></p>
 
 #### [ Zesen Qian (Aug 17 2018 at 17:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/create%20alias/near/132309775):
-@**Chris Hughes** I haven't used notation before, can you give an example?
+<p><span class="user-mention" data-user-id="110044">@Chris Hughes</span> I haven't used notation before, can you give an example?</p>
 
 #### [ Mario Carneiro (Aug 17 2018 at 17:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/create%20alias/near/132309783):
-`def true := true` is the easiest way to accomplish that
+<p><code>def true := true</code> is the easiest way to accomplish that</p>
 
 #### [ Mario Carneiro (Aug 17 2018 at 17:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/create%20alias/near/132309796):
-``notation `true'` := true``
+<p><code>notation `true'` := true</code></p>
 
 #### [ Mario Carneiro (Aug 17 2018 at 17:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/create%20alias/near/132309850):
-but notation is not a def
+<p>but notation is not a def</p>
 
 #### [ Mario Carneiro (Aug 17 2018 at 17:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/create%20alias/near/132309857):
-so there will be no `foo.true'` that way
+<p>so there will be no <code>foo.true'</code> that way</p>
 
 #### [ Zesen Qian (Aug 17 2018 at 17:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/create%20alias/near/132309863):
-yeah, I realize that.
+<p>yeah, I realize that.</p>
 
 #### [ Zesen Qian (Aug 17 2018 at 17:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/create%20alias/near/132309876):
-ok, so the best way is `reducible` `def`.
+<p>ok, so the best way is <code>reducible</code> <code>def</code>.</p>
 
 #### [ Mario Carneiro (Aug 17 2018 at 17:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/create%20alias/near/132309877):
-but you still haven't said why you need this
+<p>but you still haven't said why you need this</p>
 
 #### [ Zesen Qian (Aug 17 2018 at 17:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/create%20alias/near/132309894):
-I'm doing some metaprogramming. A proof given by SMT solvers is mapped to a proof in lean.
+<p>I'm doing some metaprogramming. A proof given by SMT solvers is mapped to a proof in lean.</p>
 
 #### [ Zesen Qian (Aug 17 2018 at 17:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/create%20alias/near/132309899):
-so a `true` in source proof mapped to `true` in lean.
+<p>so a <code>true</code> in source proof mapped to <code>true</code> in lean.</p>
 
 #### [ Mario Carneiro (Aug 17 2018 at 17:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/create%20alias/near/132309904):
-then just map to the real `true`
+<p>then just map to the real <code>true</code></p>
 
 #### [ Zesen Qian (Aug 17 2018 at 17:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/create%20alias/near/132309912):
-I have a file containing all stuff that source proofs will refer.
+<p>I have a file containing all stuff that source proofs will refer.</p>
 
 #### [ Zesen Qian (Aug 17 2018 at 17:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/create%20alias/near/132309960):
-so I don't need to write the mapping myself. The meta program will look it up itself.
+<p>so I don't need to write the mapping myself. The meta program will look it up itself.</p>
 
 #### [ Mario Carneiro (Aug 17 2018 at 17:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/create%20alias/near/132309992):
-but then your output statements will just be needlessly encoded with reducible defs
+<p>but then your output statements will just be needlessly encoded with reducible defs</p>
 
 #### [ Mario Carneiro (Aug 17 2018 at 17:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/create%20alias/near/132310001):
-you are writing the mapping just by giving these defs
+<p>you are writing the mapping just by giving these defs</p>
 
 #### [ Zesen Qian (Aug 17 2018 at 17:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/create%20alias/near/132310021):
-yeah, but that's not big problem, no one is gonna read the proof as long as it's correct.
+<p>yeah, but that's not big problem, no one is gonna read the proof as long as it's correct.</p>
 
 #### [ Zesen Qian (Aug 17 2018 at 17:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/create%20alias/near/132310024):
-machine generated proofs are never intended for people.
+<p>machine generated proofs are never intended for people.</p>
 
 #### [ Mario Carneiro (Aug 17 2018 at 17:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/create%20alias/near/132310070):
-heh, you would be surprised
+<p>heh, you would be surprised</p>
 
 #### [ Zesen Qian (Aug 17 2018 at 17:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/create%20alias/near/132310081):
-I hope I will never be suprised.
+<p>I hope I will never be suprised.</p>
 
 #### [ Zesen Qian (Aug 17 2018 at 17:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/create%20alias/near/132310090):
-anyway, I'm going `reducible` `def`s.
+<p>anyway, I'm going <code>reducible</code> <code>def</code>s.</p>
 
 #### [ Mario Carneiro (Aug 17 2018 at 17:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/create%20alias/near/132310128):
-I don't think there is any point in using reducible here though. if it's in the proof term it's in the proof term
+<p>I don't think there is any point in using reducible here though. if it's in the proof term it's in the proof term</p>
 
 #### [ Zesen Qian (Aug 17 2018 at 17:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/create%20alias/near/132310183):
-I don't know what you meant.
+<p>I don't know what you meant.</p>
 
 #### [ Mario Carneiro (Aug 17 2018 at 17:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/create%20alias/near/132310184):
-you aren't using it with rw or anything so it won't be unfolded
+<p>you aren't using it with rw or anything so it won't be unfolded</p>
 
 #### [ Mario Carneiro (Aug 17 2018 at 17:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/create%20alias/near/132310330):
-if you put together a proof using these variant definitions, it will make no difference to the type-correctness as long as it's defeq, and a regular def accomplishes that
+<p>if you put together a proof using these variant definitions, it will make no difference to the type-correctness as long as it's defeq, and a regular def accomplishes that</p>
 
 #### [ Zesen Qian (Aug 17 2018 at 17:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/create%20alias/near/132310459):
-I think you are right.
+<p>I think you are right.</p>
 
 #### [ Zesen Qian (Aug 17 2018 at 17:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/create%20alias/near/132310460):
-I can now get it work without reducible, but I will see it can keep working.
+<p>I can now get it work without reducible, but I will see it can keep working.</p>
 
 #### [ Zesen Qian (Aug 17 2018 at 17:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/create%20alias/near/132310466):
-yeah, but I'm thinking about if the user provides me with the "real" `true`.
+<p>yeah, but I'm thinking about if the user provides me with the "real" <code>true</code>.</p>
 
 #### [ Zesen Qian (Aug 17 2018 at 17:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/create%20alias/near/132310486):
-and when a proof depends on the definitional equality between these two `true`, will that still work?
+<p>and when a proof depends on the definitional equality between these two <code>true</code>, will that still work?</p>
 
 #### [ Mario Carneiro (Aug 17 2018 at 17:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/create%20alias/near/132310563):
-yes, that's what defeq does
+<p>yes, that's what defeq does</p>
 
 #### [ Zesen Qian (Aug 17 2018 at 17:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/create%20alias/near/132310571):
-ok then!
+<p>ok then!</p>
 
 #### [ Mario Carneiro (Aug 17 2018 at 17:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/create%20alias/near/132310576):
-you can replace `true` with `true'` anywhere in the proof with no changes
+<p>you can replace <code>true</code> with <code>true'</code> anywhere in the proof with no changes</p>
 
 #### [ Zesen Qian (Aug 17 2018 at 17:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/create%20alias/near/132310605):
-ok. I guess I overlooked lean's ability of identifying equalities.
+<p>ok. I guess I overlooked lean's ability of identifying equalities.</p>
 
 
 {% endraw %}

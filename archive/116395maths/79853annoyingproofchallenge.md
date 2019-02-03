@@ -12,88 +12,83 @@ permalink: archive/116395maths/79853annoyingproofchallenge.html
 
 {% raw %}
 #### [ Chris Hughes (Dec 01 2018 at 22:49)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/annoying%20proof%20challenge/near/150698181):
-Is there a nice way to prove this?
-```lean
-example {a b : with_bot ℕ} (h : a + b = 1) : a = 0 ∨ b = 0
-```
+<p>Is there a nice way to prove this?</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">{</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">with_bot</span> <span class="bp">ℕ</span><span class="o">}</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">+</span> <span class="n">b</span> <span class="bp">=</span> <span class="mi">1</span><span class="o">)</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">=</span> <span class="mi">0</span> <span class="bp">∨</span> <span class="n">b</span> <span class="bp">=</span> <span class="mi">0</span>
+</pre></div>
 
 #### [ Kenny Lau (Dec 01 2018 at 22:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/annoying%20proof%20challenge/near/150698441):
-```lean
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">algebra</span><span class="bp">.</span><span class="n">ordered_group</span> <span class="n">data</span><span class="bp">.</span><span class="n">nat</span><span class="bp">.</span><span class="n">basic</span>
 
-import algebra.ordered_group data.nat.basic
-
-example : ∀ {a b : with_bot ℕ}, a + b = 1 → a = 0 ∨ b = 0
-| (some a) (some 0) H := or.inr rfl
-| (some a) (some (b+1)) H := or.inl $ (add_eq_zero_iff.1 (nat.succ_inj $ option.some.inj H)).1.symm ▸ 
-```
+<span class="kn">example</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">with_bot</span> <span class="bp">ℕ</span><span class="o">},</span> <span class="n">a</span> <span class="bp">+</span> <span class="n">b</span> <span class="bp">=</span> <span class="mi">1</span> <span class="bp">→</span> <span class="n">a</span> <span class="bp">=</span> <span class="mi">0</span> <span class="bp">∨</span> <span class="n">b</span> <span class="bp">=</span> <span class="mi">0</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">some</span> <span class="n">a</span><span class="o">)</span> <span class="o">(</span><span class="n">some</span> <span class="mi">0</span><span class="o">)</span> <span class="n">H</span> <span class="o">:=</span> <span class="n">or</span><span class="bp">.</span><span class="n">inr</span> <span class="n">rfl</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">some</span> <span class="n">a</span><span class="o">)</span> <span class="o">(</span><span class="n">some</span> <span class="o">(</span><span class="n">b</span><span class="bp">+</span><span class="mi">1</span><span class="o">))</span> <span class="n">H</span> <span class="o">:=</span> <span class="n">or</span><span class="bp">.</span><span class="n">inl</span> <span class="err">$</span> <span class="o">(</span><span class="n">add_eq_zero_iff</span><span class="bp">.</span><span class="mi">1</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">succ_inj</span> <span class="err">$</span> <span class="n">option</span><span class="bp">.</span><span class="n">some</span><span class="bp">.</span><span class="n">inj</span> <span class="n">H</span><span class="o">))</span><span class="bp">.</span><span class="mi">1</span><span class="bp">.</span><span class="n">symm</span> <span class="bp">▸</span>
+</pre></div>
 
 #### [ Kenny Lau (Dec 01 2018 at 22:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/annoying%20proof%20challenge/near/150698444):
-@**Chris Hughes**
+<p><span class="user-mention" data-user-id="110044">@Chris Hughes</span></p>
 
 #### [ Kevin Buzzard (Dec 01 2018 at 23:01)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/annoying%20proof%20challenge/near/150698524):
-Didn't your mother tell you never to end a sentence with a `▸`?
+<p>Didn't your mother tell you never to end a sentence with a <code>▸</code>?</p>
 
 #### [ Chris Hughes (Dec 01 2018 at 23:03)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/annoying%20proof%20challenge/near/150698586):
-Maybe it's some super duper eta reduction.
+<p>Maybe it's some super duper eta reduction.</p>
 
 #### [ Kenny Lau (Dec 01 2018 at 23:04)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/annoying%20proof%20challenge/near/150698638):
-oops it's supposed to end in `rfl`
+<p>oops it's supposed to end in <code>rfl</code></p>
 
 #### [ Kenny Lau (Dec 01 2018 at 23:04)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/annoying%20proof%20challenge/near/150698639):
-```lean
-import algebra.ordered_group data.nat.basic
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">algebra</span><span class="bp">.</span><span class="n">ordered_group</span> <span class="n">data</span><span class="bp">.</span><span class="n">nat</span><span class="bp">.</span><span class="n">basic</span>
 
-example : ∀ {a b : with_bot ℕ}, a + b = 1 → a = 0 ∨ b = 0
-| (some a) (some 0) H := or.inr rfl
-| (some a) (some (b+1)) H := or.inl $ (add_eq_zero_iff.1 (nat.succ_inj $ option.some.inj H)).1.symm ▸ rfl
-```
+<span class="kn">example</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">with_bot</span> <span class="bp">ℕ</span><span class="o">},</span> <span class="n">a</span> <span class="bp">+</span> <span class="n">b</span> <span class="bp">=</span> <span class="mi">1</span> <span class="bp">→</span> <span class="n">a</span> <span class="bp">=</span> <span class="mi">0</span> <span class="bp">∨</span> <span class="n">b</span> <span class="bp">=</span> <span class="mi">0</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">some</span> <span class="n">a</span><span class="o">)</span> <span class="o">(</span><span class="n">some</span> <span class="mi">0</span><span class="o">)</span> <span class="n">H</span> <span class="o">:=</span> <span class="n">or</span><span class="bp">.</span><span class="n">inr</span> <span class="n">rfl</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">some</span> <span class="n">a</span><span class="o">)</span> <span class="o">(</span><span class="n">some</span> <span class="o">(</span><span class="n">b</span><span class="bp">+</span><span class="mi">1</span><span class="o">))</span> <span class="n">H</span> <span class="o">:=</span> <span class="n">or</span><span class="bp">.</span><span class="n">inl</span> <span class="err">$</span> <span class="o">(</span><span class="n">add_eq_zero_iff</span><span class="bp">.</span><span class="mi">1</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">succ_inj</span> <span class="err">$</span> <span class="n">option</span><span class="bp">.</span><span class="n">some</span><span class="bp">.</span><span class="n">inj</span> <span class="n">H</span><span class="o">))</span><span class="bp">.</span><span class="mi">1</span><span class="bp">.</span><span class="n">symm</span> <span class="bp">▸</span> <span class="n">rfl</span>
+</pre></div>
 
 #### [ Kevin Buzzard (Dec 01 2018 at 23:05)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/annoying%20proof%20challenge/near/150698647):
-oh that works better :-)
+<p>oh that works better :-)</p>
 
 #### [ Kevin Buzzard (Dec 01 2018 at 23:06)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/annoying%20proof%20challenge/near/150698701):
-What does the equation compiler actually *do* to decide that it can ignore the `none` cases? I mean, what does it try?
+<p>What does the equation compiler actually <em>do</em> to decide that it can ignore the <code>none</code> cases? I mean, what does it try?</p>
 
 #### [ Kenny Lau (Dec 01 2018 at 23:07)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/annoying%20proof%20challenge/near/150698712):
-```lean
-import algebra.ordered_group data.nat.basic
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">algebra</span><span class="bp">.</span><span class="n">ordered_group</span> <span class="n">data</span><span class="bp">.</span><span class="n">nat</span><span class="bp">.</span><span class="n">basic</span>
 
-theorem test : ∀ {a b : with_bot ℕ}, a + b = 1 → a = 0 ∨ b = 0
-| (some a) (some 0) H := or.inr rfl
-| (some a) (some (b+1)) H := or.inl $ (add_eq_zero_iff.1 (nat.succ_inj $ option.some.inj H)).1.symm ▸ rfl
+<span class="kn">theorem</span> <span class="n">test</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">with_bot</span> <span class="bp">ℕ</span><span class="o">},</span> <span class="n">a</span> <span class="bp">+</span> <span class="n">b</span> <span class="bp">=</span> <span class="mi">1</span> <span class="bp">→</span> <span class="n">a</span> <span class="bp">=</span> <span class="mi">0</span> <span class="bp">∨</span> <span class="n">b</span> <span class="bp">=</span> <span class="mi">0</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">some</span> <span class="n">a</span><span class="o">)</span> <span class="o">(</span><span class="n">some</span> <span class="mi">0</span><span class="o">)</span> <span class="n">H</span> <span class="o">:=</span> <span class="n">or</span><span class="bp">.</span><span class="n">inr</span> <span class="n">rfl</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">some</span> <span class="n">a</span><span class="o">)</span> <span class="o">(</span><span class="n">some</span> <span class="o">(</span><span class="n">b</span><span class="bp">+</span><span class="mi">1</span><span class="o">))</span> <span class="n">H</span> <span class="o">:=</span> <span class="n">or</span><span class="bp">.</span><span class="n">inl</span> <span class="err">$</span> <span class="o">(</span><span class="n">add_eq_zero_iff</span><span class="bp">.</span><span class="mi">1</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">succ_inj</span> <span class="err">$</span> <span class="n">option</span><span class="bp">.</span><span class="n">some</span><span class="bp">.</span><span class="n">inj</span> <span class="n">H</span><span class="o">))</span><span class="bp">.</span><span class="mi">1</span><span class="bp">.</span><span class="n">symm</span> <span class="bp">▸</span> <span class="n">rfl</span>
 
-#print test
-/-
-theorem test : ∀ {a b : with_bot ℕ}, a + b = 1 → a = 0 ∨ b = 0 :=
-λ {a b : with_bot ℕ} (a_1 : a + b = 1),
-  option.cases_on a
-    (λ (a : none + b = 1),
-       option.cases_on b
-         (λ (a : none + none = 1),
-            eq.dcases_on a (λ (a_1 : some 1 = none), option.no_confusion a_1) (eq.refl 1) (heq.refl a))
-         (λ (b : ℕ) (a : none + some b = 1),
-            eq.dcases_on a (λ (a_1 : some 1 = none), option.no_confusion a_1) (eq.refl 1) (heq.refl a))
-         a)
-    (λ (a : ℕ) (a_1 : some a + b = 1),
-       option.cases_on b
-         (λ (a_1 : some a + none = 1),
-            eq.dcases_on a_1 (λ (a_2 : some 1 = none), option.no_confusion a_2) (eq.refl 1) (heq.refl a_1))
-         (λ (b : ℕ) (a_1 : some a + some b = 1),
-            nat.cases_on b (λ (a_1 : some a + some 0 = 1), id_rhs (some a = 0 ∨ some 0 = 0) (or.inr rfl))
-              (λ (b : ℕ) (a_1 : some a + some (nat.succ b) = 1),
-                 id_rhs (some a = 0 ∨ some (b + 1) = 0)
-                   (or.inl (eq.symm ((add_eq_zero_iff.mp (nat.succ_inj (option.some.inj a_1))).left) ▸ rfl)))
-              a_1)
-         a_1)
-    a_1
--/
-```
+<span class="bp">#</span><span class="kn">print</span> <span class="n">test</span>
+<span class="c">/-</span><span class="cm"></span>
+<span class="cm">theorem test : ∀ {a b : with_bot ℕ}, a + b = 1 → a = 0 ∨ b = 0 :=</span>
+<span class="cm">λ {a b : with_bot ℕ} (a_1 : a + b = 1),</span>
+<span class="cm">  option.cases_on a</span>
+<span class="cm">    (λ (a : none + b = 1),</span>
+<span class="cm">       option.cases_on b</span>
+<span class="cm">         (λ (a : none + none = 1),</span>
+<span class="cm">            eq.dcases_on a (λ (a_1 : some 1 = none), option.no_confusion a_1) (eq.refl 1) (heq.refl a))</span>
+<span class="cm">         (λ (b : ℕ) (a : none + some b = 1),</span>
+<span class="cm">            eq.dcases_on a (λ (a_1 : some 1 = none), option.no_confusion a_1) (eq.refl 1) (heq.refl a))</span>
+<span class="cm">         a)</span>
+<span class="cm">    (λ (a : ℕ) (a_1 : some a + b = 1),</span>
+<span class="cm">       option.cases_on b</span>
+<span class="cm">         (λ (a_1 : some a + none = 1),</span>
+<span class="cm">            eq.dcases_on a_1 (λ (a_2 : some 1 = none), option.no_confusion a_2) (eq.refl 1) (heq.refl a_1))</span>
+<span class="cm">         (λ (b : ℕ) (a_1 : some a + some b = 1),</span>
+<span class="cm">            nat.cases_on b (λ (a_1 : some a + some 0 = 1), id_rhs (some a = 0 ∨ some 0 = 0) (or.inr rfl))</span>
+<span class="cm">              (λ (b : ℕ) (a_1 : some a + some (nat.succ b) = 1),</span>
+<span class="cm">                 id_rhs (some a = 0 ∨ some (b + 1) = 0)</span>
+<span class="cm">                   (or.inl (eq.symm ((add_eq_zero_iff.mp (nat.succ_inj (option.some.inj a_1))).left) ▸ rfl)))</span>
+<span class="cm">              a_1)</span>
+<span class="cm">         a_1)</span>
+<span class="cm">    a_1</span>
+<span class="cm">-/</span>
+</pre></div>
 
 #### [ Kenny Lau (Dec 01 2018 at 23:07)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/annoying%20proof%20challenge/near/150698713):
-it does `option.no_confusion`
+<p>it does <code>option.no_confusion</code></p>
 
 #### [ Kevin Buzzard (Dec 01 2018 at 23:09)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/annoying%20proof%20challenge/near/150698763):
-`option.no_confusion` is such a great name for a function. I might get it on a t-shirt.
+<p><code>option.no_confusion</code> is such a great name for a function. I might get it on a t-shirt.</p>
 
 
 {% endraw %}

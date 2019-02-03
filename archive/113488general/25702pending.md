@@ -12,7 +12,7 @@ permalink: archive/113488general/25702pending.html
 
 {% raw %}
 #### [ Kenny Lau (Nov 07 2018 at 23:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/pending/near/147260995):
-What does pending (`pending/default.lean`) do?
+<p>What does pending (<code>pending/default.lean</code>) do?</p>
 
 
 {% endraw %}

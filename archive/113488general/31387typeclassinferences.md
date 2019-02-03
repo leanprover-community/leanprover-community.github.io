@@ -12,68 +12,68 @@ permalink: archive/113488general/31387typeclassinferences.html
 
 {% raw %}
 #### [ Kenny Lau (Apr 06 2018 at 01:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20inferences/near/124695237):
-https://github.com/kckennylau/Lean/blob/master/enough_injectives.lean#L72
-In L72 of this, I needed to type `@linear_map R M (Hom_R_Q_div_Z R) _ _ (Hom_R_Q_div_Z.module R)`, i.e. I needed to manually provide the proof term `Hom_R_Q_div_Z.module R` that `Hom_R_Q_div_Z R` is a module, despite it being attributed as `instance`. Why is this the case?
+<p><a href="https://github.com/kckennylau/Lean/blob/master/enough_injectives.lean#L72" target="_blank" title="https://github.com/kckennylau/Lean/blob/master/enough_injectives.lean#L72">https://github.com/kckennylau/Lean/blob/master/enough_injectives.lean#L72</a><br>
+In L72 of this, I needed to type <code>@linear_map R M (Hom_R_Q_div_Z R) _ _ (Hom_R_Q_div_Z.module R)</code>, i.e. I needed to manually provide the proof term <code>Hom_R_Q_div_Z.module R</code> that <code>Hom_R_Q_div_Z R</code> is a module, despite it being attributed as <code>instance</code>. Why is this the case?</p>
 
 #### [ Scott Morrison (Apr 06 2018 at 01:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20inferences/near/124695367):
-When faced with this problem, I often try to write an example beforehand, which hopefully should summon the instance via `by apply_instance`, and see if I can get that working.
+<p>When faced with this problem, I often try to write an example beforehand, which hopefully should summon the instance via <code>by apply_instance</code>, and see if I can get that working.</p>
 
 #### [ Scott Morrison (Apr 06 2018 at 01:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20inferences/near/124695372):
-If I can't I start worrying about universe levels, which in my experience is a very common cause of typeclass inference failing.
+<p>If I can't I start worrying about universe levels, which in my experience is a very common cause of typeclass inference failing.</p>
 
 #### [ Scott Morrison (Apr 06 2018 at 01:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20inferences/near/124695410):
-(I haven't actually looked at your example.)
+<p>(I haven't actually looked at your example.)</p>
 
 #### [ Scott Morrison (Apr 06 2018 at 01:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20inferences/near/124695678):
-Having quickly looked at your example, I'd suggest trying to restrict to the case where the ring and the module live in the same universe.
+<p>Having quickly looked at your example, I'd suggest trying to restrict to the case where the ring and the module live in the same universe.</p>
 
 #### [ Kenny Lau (Apr 06 2018 at 01:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20inferences/near/124695682):
-hmm, would that break generality?
+<p>hmm, would that break generality?</p>
 
 #### [ Kenny Lau (Apr 06 2018 at 01:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20inferences/near/124695722):
-`linear_map` accepts three universes
+<p><code>linear_map</code> accepts three universes</p>
 
 #### [ Scott Morrison (Apr 06 2018 at 01:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20inferences/near/124695723):
-Yeah... but that's maybe dangerous as well.
+<p>Yeah... but that's maybe dangerous as well.</p>
 
 #### [ Kenny Lau (Apr 06 2018 at 01:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20inferences/near/124695729):
-so other universes don't have enough injectives lol
+<p>so other universes don't have enough injectives lol</p>
 
 #### [ Scott Morrison (Apr 06 2018 at 01:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20inferences/near/124695730):
-at least check if this solves the inference problem
+<p>at least check if this solves the inference problem</p>
 
 #### [ Scott Morrison (Apr 06 2018 at 01:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20inferences/near/124695735):
-If it doesn't then it's irrelevant. If it does, it's probably time to consult Mario for advice.
+<p>If it doesn't then it's irrelevant. If it does, it's probably time to consult Mario for advice.</p>
 
 #### [ Scott Morrison (Apr 06 2018 at 01:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20inferences/near/124695736):
-(One can always `ulift` when you don't have enough universe polymorphism, and sometimes this is the better option.)
+<p>(One can always <code>ulift</code> when you don't have enough universe polymorphism, and sometimes this is the better option.)</p>
 
 #### [ Kenny Lau (Apr 06 2018 at 01:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20inferences/near/124695738):
-it doesn't
+<p>it doesn't</p>
 
 #### [ Scott Morrison (Apr 06 2018 at 01:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20inferences/near/124695782):
-Oh well!
+<p>Oh well!</p>
 
 #### [ Scott Morrison (Apr 06 2018 at 01:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20inferences/near/124695794):
-try replacing the points where you explicitly provide the instances with `by apply_instance`, and then set `pp.all`
+<p>try replacing the points where you explicitly provide the instances with <code>by apply_instance</code>, and then set <code>pp.all</code></p>
 
 #### [ Kenny Lau (Apr 06 2018 at 01:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20inferences/near/124695869):
-wait what
+<p>wait what</p>
 
 #### [ Kenny Lau (Apr 06 2018 at 01:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20inferences/near/124695981):
-@**Scott Morrison** once I removed L67-69, everything worked
+<p><span class="user-mention" data-user-id="110087">@Scott Morrison</span> once I removed L67-69, everything worked</p>
 
 #### [ Kenny Lau (Apr 06 2018 at 01:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20inferences/near/124695982):
-except the fact that i of course need those lines
+<p>except the fact that i of course need those lines</p>
 
 #### [ Kenny Lau (Apr 06 2018 at 02:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20inferences/near/124697691):
-@**Mario Carneiro** any idea? In [here](https://github.com/kckennylau/Lean/blob/master/enough_injectives.lean#L72), I need ` Hom_R_Q_div_Z.module R ` to tell Lean that ` Hom_R_Q_div_Z R ` is a module, but once I remove L67-69, it is no longer necessary
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> any idea? In <a href="https://github.com/kckennylau/Lean/blob/master/enough_injectives.lean#L72" target="_blank" title="https://github.com/kckennylau/Lean/blob/master/enough_injectives.lean#L72">here</a>, I need <code> Hom_R_Q_div_Z.module R </code> to tell Lean that <code> Hom_R_Q_div_Z R </code> is a module, but once I remove L67-69, it is no longer necessary</p>
 
 #### [ Kenny Lau (Apr 06 2018 at 02:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20inferences/near/124697743):
-I suspect it is because of the ` injective.to_module `
+<p>I suspect it is because of the <code> injective.to_module </code></p>
 
 #### [ Kenny Lau (Apr 06 2018 at 02:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20inferences/near/124697747):
-interfering with the typeclass resolutions
+<p>interfering with the typeclass resolutions</p>
 
 
 {% endraw %}

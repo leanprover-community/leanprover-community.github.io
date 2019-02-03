@@ -12,1043 +12,1037 @@ permalink: archive/113488general/18651canonicallyidentifyingtwotypes.html
 
 {% raw %}
 #### [ Kevin Buzzard (Apr 27 2018 at 11:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125765228):
-How can I beef up "equiv" into "canonical isomorphism"?
+<p>How can I beef up "equiv" into "canonical isomorphism"?</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 11:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125765384):
-I think that's my question.
+<p>I think that's my question.</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 11:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125765424):
-I will formulate something a bit more precise in a sec.
+<p>I will formulate something a bit more precise in a sec.</p>
 
 #### [ Mario Carneiro (Apr 27 2018 at 11:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125765431):
-Q1: what does that mean? Is "isomorphism" sufficient?
+<p>Q1: what does that mean? Is "isomorphism" sufficient?</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 12:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125768206):
-The proof of `funext` uses quot.sound
+<p>The proof of <code>funext</code> uses quot.sound</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 12:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125768208):
-but if we restrict to two types in the same universe
+<p>but if we restrict to two types in the same universe</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 12:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125768222):
-```lean
-  ∀ {α : Sort u} {β : α → Sort u} {f₁ f₂ : Π (x : α), β x},
-    (∀ (x : α), f₁ x = f₂ x) → f₁ = f₂
-```
+<div class="codehilite"><pre><span></span>  <span class="bp">∀</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="n">Sort</span> <span class="n">u</span><span class="o">}</span> <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">Sort</span> <span class="n">u</span><span class="o">}</span> <span class="o">{</span><span class="n">f₁</span> <span class="n">f₂</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">),</span> <span class="n">β</span> <span class="n">x</span><span class="o">},</span>
+    <span class="o">(</span><span class="bp">∀</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">),</span> <span class="n">f₁</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">f₂</span> <span class="n">x</span><span class="o">)</span> <span class="bp">→</span> <span class="n">f₁</span> <span class="bp">=</span> <span class="n">f₂</span>
+</pre></div>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 12:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125768229):
-so a slightly weaker result
+<p>so a slightly weaker result</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 12:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125768230):
-can one prove this without quot.sound?
+<p>can one prove this without quot.sound?</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 12:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125768288):
-I'm trying to work out what a mathematician means when they say that two objects are "canonically isomorphic".
+<p>I'm trying to work out what a mathematician means when they say that two objects are "canonically isomorphic".</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 12:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125768292):
-To coin a phrase, it's like pornography.
+<p>To coin a phrase, it's like pornography.</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 12:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125768294):
-You know it when you see it.
+<p>You know it when you see it.</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 12:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125768300):
-I have not yet found a formulation that I like in dependent type theory.
+<p>I have not yet found a formulation that I like in dependent type theory.</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 12:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125768308):
-and I think that this is an underlying source of some of my frustrations in trying to do mathematics in Lean.
+<p>and I think that this is an underlying source of some of my frustrations in trying to do mathematics in Lean.</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 12:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125768310):
-Here's a probably much easier question:
+<p>Here's a probably much easier question:</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 12:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125768312):
-what's the inverse of funext called?
+<p>what's the inverse of funext called?</p>
 
 #### [ Kenny Lau (Apr 27 2018 at 12:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125768335):
-`congr_fun`
+<p><code>congr_fun</code></p>
 
 #### [ Kenny Lau (Apr 27 2018 at 12:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125768354):
-wait, inverse not converse
+<p>wait, inverse not converse</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 12:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125768366):
-that's what I wanted
+<p>that's what I wanted</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 12:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125768367):
-no axioms
+<p>no axioms</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 12:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125768368):
-different universes
+<p>different universes</p>
 
 #### [ Kenny Lau (Apr 27 2018 at 12:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125768378):
-inverse?
+<p>inverse?</p>
 
 #### [ Kenny Lau (Apr 27 2018 at 12:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125768380):
-not A implies not B?
+<p>not A implies not B?</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 12:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125768381):
-Is it possible to express the notion that two types are "the same" without ever mentioning any terms?
+<p>Is it possible to express the notion that two types are "the same" without ever mentioning any terms?</p>
 
 #### [ Kenny Lau (Apr 27 2018 at 12:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125768383):
-`==`
+<p><code>==</code></p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 12:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125768388):
-Kenny you answered my question
+<p>Kenny you answered my question</p>
 
 #### [ Kenny Lau (Apr 27 2018 at 12:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125768435):
-inverse is `mt \o congr_fun` :P
+<p>inverse is <code>mt \o congr_fun</code> :P</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 12:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125768436):
-Here are two notions of being "close to each other in type theory", which in my mind are both certainly implied by being "the same".
+<p>Here are two notions of being "close to each other in type theory", which in my mind are both certainly implied by being "the same".</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 12:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125768448):
-```lean
-universe zfc
---#print extfun_app
+<div class="codehilite"><pre><span></span><span class="kn">universe</span> <span class="n">zfc</span>
+<span class="c1">--#print extfun_app</span>
 
--- Here is a notion from dependent type theory.
-/-- `α ≃ β` is the type of functions from `α → β` with a two-sided inverse. -/
-variables {α β : Type zfc}
+<span class="c1">-- Here is a notion from dependent type theory.</span>
+<span class="c">/-</span><span class="cm">- `α ≃ β` is the type of functions from `α → β` with a two-sided inverse. -/</span>
+<span class="kn">variables</span> <span class="o">{</span><span class="n">α</span> <span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">zfc</span><span class="o">}</span>
 
-structure equiv (α : Type zfc) (β : Type zfc) :=
-(to_fun    : α → β)
-(inv_fun   : β → α)
-(left_inv  : function.left_inverse inv_fun to_fun)
-(right_inv : function.right_inverse inv_fun to_fun)
+<span class="kn">structure</span> <span class="n">equiv</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">zfc</span><span class="o">)</span> <span class="o">(</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">zfc</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">to_fun</span>    <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span>
+<span class="o">(</span><span class="n">inv_fun</span>   <span class="o">:</span> <span class="n">β</span> <span class="bp">→</span> <span class="n">α</span><span class="o">)</span>
+<span class="o">(</span><span class="n">left_inv</span>  <span class="o">:</span> <span class="n">function</span><span class="bp">.</span><span class="n">left_inverse</span> <span class="n">inv_fun</span> <span class="n">to_fun</span><span class="o">)</span>
+<span class="o">(</span><span class="n">right_inv</span> <span class="o">:</span> <span class="n">function</span><span class="bp">.</span><span class="n">right_inverse</span> <span class="n">inv_fun</span> <span class="n">to_fun</span><span class="o">)</span>
 
 
-variable (to_fun : α → β)
-variable (inv_fun : β → α)
+<span class="kn">variable</span> <span class="o">(</span><span class="n">to_fun</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span>
+<span class="kn">variable</span> <span class="o">(</span><span class="n">inv_fun</span> <span class="o">:</span> <span class="n">β</span> <span class="bp">→</span> <span class="n">α</span><span class="o">)</span>
 
-#reduce function.left_inverse inv_fun to_fun 
--- ∀ (x : α), to_fun (inv_fun x) = x
--- note round brackets -- explicitly demand the term
+<span class="bp">#</span><span class="n">reduce</span> <span class="n">function</span><span class="bp">.</span><span class="n">left_inverse</span> <span class="n">inv_fun</span> <span class="n">to_fun</span>
+<span class="c1">-- ∀ (x : α), to_fun (inv_fun x) = x</span>
+<span class="c1">-- note round brackets -- explicitly demand the term</span>
 
-#reduce function.right_inverse inv_fun to_fun
--- ∀ (x : β), to_fun (inv_fun x) = x
--- note round brackets -- explicitly demand the term
+<span class="bp">#</span><span class="n">reduce</span> <span class="n">function</span><span class="bp">.</span><span class="n">right_inverse</span> <span class="n">inv_fun</span> <span class="n">to_fun</span>
+<span class="c1">-- ∀ (x : β), to_fun (inv_fun x) = x</span>
+<span class="c1">-- note round brackets -- explicitly demand the term</span>
 
--- Here is a notion from category theory, translated into dependent type theory.
-/-- The notion of being isomorphic in a category  -/
-structure isom (α : Type zfc) (β : Type zfc) :=
-(to_fun : α → β)
-(inv_fun : β → α)
-(left_inv : inv_fun ∘ to_fun = id)
-(right_inv : to_fun ∘ inv_fun = id)
-```
+<span class="c1">-- Here is a notion from category theory, translated into dependent type theory.</span>
+<span class="c">/-</span><span class="cm">- The notion of being isomorphic in a category  -/</span>
+<span class="kn">structure</span> <span class="n">isom</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">zfc</span><span class="o">)</span> <span class="o">(</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">zfc</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">to_fun</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span>
+<span class="o">(</span><span class="n">inv_fun</span> <span class="o">:</span> <span class="n">β</span> <span class="bp">→</span> <span class="n">α</span><span class="o">)</span>
+<span class="o">(</span><span class="n">left_inv</span> <span class="o">:</span> <span class="n">inv_fun</span> <span class="err">∘</span> <span class="n">to_fun</span> <span class="bp">=</span> <span class="n">id</span><span class="o">)</span>
+<span class="o">(</span><span class="n">right_inv</span> <span class="o">:</span> <span class="n">to_fun</span> <span class="err">∘</span> <span class="n">inv_fun</span> <span class="bp">=</span> <span class="n">id</span><span class="o">)</span>
+</pre></div>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 12:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125768450):
-I have stuck to one universe
+<p>I have stuck to one universe</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 12:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125768463):
-because I am a traditionalist
+<p>because I am a traditionalist</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 12:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125768494):
-Why does Lean prefer `equiv` (which is in core Lean) to `isom`?
+<p>Why does Lean prefer <code>equiv</code> (which is in core Lean) to <code>isom</code>?</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 12:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125768495):
-Is `isom` in there somewhere?
+<p>Is <code>isom</code> in there somewhere?</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 12:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125768496):
-These structures are canonically isomorphic, but I don't know the definition of canonically isomorphic
+<p>These structures are canonically isomorphic, but I don't know the definition of canonically isomorphic</p>
 
 #### [ Kenny Lau (Apr 27 2018 at 12:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125768502):
-because `equiv` is more usable
+<p>because <code>equiv</code> is more usable</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 12:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125768503):
-but in dependent type theory the only way I know to construct bijective maps between them is using quot.sound
+<p>but in dependent type theory the only way I know to construct bijective maps between them is using quot.sound</p>
 
 #### [ Kenny Lau (Apr 27 2018 at 12:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125768504):
-Just look at my proof in the other thread
+<p>Just look at my proof in the other thread</p>
 
 #### [ Kenny Lau (Apr 27 2018 at 12:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125768505):
-before and after changing composition equality
+<p>before and after changing composition equality</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 12:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125768508):
-Is it just universally true that equiv is better than isom?
+<p>Is it just universally true that equiv is better than isom?</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 12:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125768548):
-I don't know what other thread you're talking about.
+<p>I don't know what other thread you're talking about.</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 12:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125768549):
-But I would genuinely be interested to know.
+<p>But I would genuinely be interested to know.</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 12:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125768552):
-My memory is not what it was.
+<p>My memory is not what it was.</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 12:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125768576):
-Anyway, I was wondering whether if one stuck to one universe, whether the restricted funext, which sounds to me like it could logically be a strictly weaker assertion, could be proved without the axiom.
+<p>Anyway, I was wondering whether if one stuck to one universe, whether the restricted funext, which sounds to me like it could logically be a strictly weaker assertion, could be proved without the axiom.</p>
 
 #### [ Kenny Lau (Apr 27 2018 at 12:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125768619):
-https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proof.20of.20the.20five.20lemma
+<p><a href="#narrow/stream/113488-general/topic/proof.20of.20the.20five.20lemma" title="#narrow/stream/113488-general/topic/proof.20of.20the.20five.20lemma">https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proof.20of.20the.20five.20lemma</a></p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 12:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125768685):
-Mario, I ultimately want to formalise some possibly specialised notion of being canonically isomorphic, which I can use to do amazing rewrites which a mathematician does all the time but which I find difficult to do in dependent type theory. My problem in dependent type theory is that I sometimes run into terms which are not definitionally equal, but which are "only" canonically isomorphic.
+<p>Mario, I ultimately want to formalise some possibly specialised notion of being canonically isomorphic, which I can use to do amazing rewrites which a mathematician does all the time but which I find difficult to do in dependent type theory. My problem in dependent type theory is that I sometimes run into terms which are not definitionally equal, but which are "only" canonically isomorphic.</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 12:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125768686):
-Because I am facing quite a tedious job otherwise
+<p>Because I am facing quite a tedious job otherwise</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 12:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125768742):
-I think I want to make a new structure which is more useful to me than definitional equivalence.
+<p>I think I want to make a new structure which is more useful to me than definitional equivalence.</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 12:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125768743):
-It is not Lean's `=` because I want it to apply to terms of different types.
+<p>It is not Lean's <code>=</code> because I want it to apply to terms of different types.</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 12:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125768788):
-and I am quite happy to restrict to objects within one universe
+<p>and I am quite happy to restrict to objects within one universe</p>
 
 #### [ Kenny Lau (Apr 27 2018 at 12:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125768795):
-why don't you just quotient everything with equiv
+<p>why don't you just quotient everything with equiv</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 12:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125768899):
-Wow, props can be equal : `@eq` is defined on `Sort u_1`
+<p>Wow, props can be equal : <code>@eq</code> is defined on <code>Sort u_1</code></p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 12:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125768902):
-Is that concept used?
+<p>Is that concept used?</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 12:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125768904):
-being canonically isomorphic only applies to types.
+<p>being canonically isomorphic only applies to types.</p>
 
 #### [ Kenny Lau (Apr 27 2018 at 12:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125768943):
-```quote
-Is that concept used?
-```
-a lot
+<blockquote>
+<p>Is that concept used?</p>
+</blockquote>
+<p>a lot</p>
 
 #### [ Kenny Lau (Apr 27 2018 at 12:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125768944):
-but mostly in `simp`
+<p>but mostly in <code>simp</code></p>
 
 #### [ Kenny Lau (Apr 27 2018 at 12:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125768945):
-`simp` rewrites Props
+<p><code>simp</code> rewrites Props</p>
 
 #### [ Kenny Lau (Apr 27 2018 at 12:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125768948):
-using `propext`
+<p>using <code>propext</code></p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 12:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125769002):
-Is this in Lean or mathlib:
+<p>Is this in Lean or mathlib:</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 12:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125769003):
-`instance group_of_equiv [group α] (H : equiv α β) : group β := sorry`
+<p><code>instance group_of_equiv [group α] (H : equiv α β) : group β := sorry</code></p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 12:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125769014):
-If alpha and beta are canonically isomorphic, then any group structure on alpha trivially gives you a group structure on beta, any mathematician knows that.
+<p>If alpha and beta are canonically isomorphic, then any group structure on alpha trivially gives you a group structure on beta, any mathematician knows that.</p>
 
 #### [ Scott Morrison (Apr 27 2018 at 12:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125769069):
-I am slowly coming around to the opinion that "canonical" as used by mathematicans doesn't actually mean much, but is instead code for "we both know what is going on, and I'm just confirming that you one you have in mind is probably the one I have in mind too".
+<p>I am slowly coming around to the opinion that "canonical" as used by mathematicans doesn't actually mean much, but is instead code for "we both know what is going on, and I'm just confirming that you one you have in mind is probably the one I have in mind too".</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 12:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125769113):
-`instance set_equiv_of_equiv (H : equiv α β) : equiv (set α) (set β) := sorry`
+<p><code>instance set_equiv_of_equiv (H : equiv α β) : equiv (set α) (set β) := sorry</code></p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 12:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125769114):
-doesn't typecheck
+<p>doesn't typecheck</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 12:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125769115):
-`equiv` is not a class
+<p><code>equiv</code> is not a class</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 12:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125769125):
-but if `\a` and `\b` are canonically isomorphic, then so are their power sets -- any mathematician knows that.
+<p>but if <code>\a</code> and <code>\b</code> are canonically isomorphic, then so are their power sets -- any mathematician knows that.</p>
 
 #### [ Scott Morrison (Apr 27 2018 at 13:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125769131):
-We could make `equiv` a class, and have the convention that we'll only even make instances that "every mathematician knows is the right one".
+<p>We could make <code>equiv</code> a class, and have the convention that we'll only even make instances that "every mathematician knows is the right one".</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 13:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125769182):
-But do I want to restrict myself like that?
+<p>But do I want to restrict myself like that?</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 13:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125769184):
-I am not sure
+<p>I am not sure</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 13:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125769185):
-There are two abelian groups which show up in the Langlands Philosophy
+<p>There are two abelian groups which show up in the Langlands Philosophy</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 13:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125769188):
-And the Langlands Philosophy says that they are canonically isomorphic
+<p>And the Langlands Philosophy says that they are canonically isomorphic</p>
 
 #### [ Scott Morrison (Apr 27 2018 at 13:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125769195):
-Well... an isomorphism from `a` to `b` gives an isomorphism from `2^a` to `2^b`, sure. If you bless one as canonical, I guess that blesses the result as canonical too.
+<p>Well... an isomorphism from <code>a</code> to <code>b</code> gives an isomorphism from <code>2^a</code> to <code>2^b</code>, sure. If you bless one as canonical, I guess that blesses the result as canonical too.</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 13:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125769198):
-In fact, more generally there are two non-abelian groups which show up and Langlands conjectures that they are canonically isomorphic, and this is one of the reasons that we call it philosophy sometimes -- it is not quite mathematics.
+<p>In fact, more generally there are two non-abelian groups which show up and Langlands conjectures that they are canonically isomorphic, and this is one of the reasons that we call it philosophy sometimes -- it is not quite mathematics.</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 13:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125769202):
-But back to the abelian groups
+<p>But back to the abelian groups</p>
 
 #### [ Scott Morrison (Apr 27 2018 at 13:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125769206):
-But by that do you just mean that there's a particularly interesting/sensible isomorphism between them, and the point is not to say "these are isomorphic", but "this is an isomorphism between ..."?
+<p>But by that do you just mean that there's a particularly interesting/sensible isomorphism between them, and the point is not to say "these are isomorphic", but "this is an isomorphism between ..."?</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 13:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125769246):
-Mathematicians have written down not just one, but two canonical isomorphisms between these groups!
+<p>Mathematicians have written down not just one, but two canonical isomorphisms between these groups!</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 13:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125769247):
-And they're different!
+<p>And they're different!</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 13:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125769249):
-One is called "global class field theory normalised so that uniformisers become identified with geometric Frobenius"
+<p>One is called "global class field theory normalised so that uniformisers become identified with geometric Frobenius"</p>
 
 #### [ Scott Morrison (Apr 27 2018 at 13:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125769255):
-So what does canonical mean here? (I am not really confident in my skepticism of the word "canonical". I am happy to come back to the fold if the story is good.)
+<p>So what does canonical mean here? (I am not really confident in my skepticism of the word "canonical". I am happy to come back to the fold if the story is good.)</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 13:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125769256):
-and the other is called "global class field theory normalised so that uniformisers become identified with arithmetic Frobenius"
+<p>and the other is called "global class field theory normalised so that uniformisers become identified with arithmetic Frobenius"</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 13:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125769260):
-The two canonical isomorphisms between the groups are related. If we write the group law multiplicatively, as is standard,
+<p>The two canonical isomorphisms between the groups are related. If we write the group law multiplicatively, as is standard,</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 13:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125769261):
-then if one of them is f(x)=y
+<p>then if one of them is f(x)=y</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 13:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125769263):
-the other is f(x)=1/y
+<p>the other is f(x)=1/y</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 13:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125769303):
-and mathematicians choose at random which one to use
+<p>and mathematicians choose at random which one to use</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 13:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125769305):
-and some even sometimes forget to say which one
+<p>and some even sometimes forget to say which one</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 13:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125769308):
-perhaps because the one they used was the most common one when the paper was written
+<p>perhaps because the one they used was the most common one when the paper was written</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 13:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125769321):
-So I am pretty sure I want to allow myself more than one canonical isomorphism between two objects
+<p>So I am pretty sure I want to allow myself more than one canonical isomorphism between two objects</p>
 
 #### [ Johan Commelin (Apr 27 2018 at 13:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125769721):
-So, here is Kevin's remark in a down to earth example: every abelian group has a canonical automorphism, and in fact, it has two of those: the identity, and the map `a \mapsto -a`.
+<p>So, here is Kevin's remark in a down to earth example: every abelian group has a canonical automorphism, and in fact, it has two of those: the identity, and the map <code>a \mapsto -a</code>.</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 13:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125769731):
-@**Kenny Lau** -- you wrote my function! Many thanks!
+<p><span class="user-mention" data-user-id="110064">@Kenny Lau</span> -- you wrote my function! Many thanks!</p>
 
 #### [ Johan Commelin (Apr 27 2018 at 13:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125769733):
-Of course, in the case of automorphisms, we agree that `id` is slightly more canonical then the -1 map
+<p>Of course, in the case of automorphisms, we agree that <code>id</code> is slightly more canonical then the -1 map</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 13:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125769777):
-But these were two different groups
+<p>But these were two different groups</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 13:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125769778):
-and this has caused confusion in the mathematical community
+<p>and this has caused confusion in the mathematical community</p>
 
 #### [ Johan Commelin (Apr 27 2018 at 13:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125769779):
-Exactly
+<p>Exactly</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 13:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125769781):
-I think that's interesting.
+<p>I think that's interesting.</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 13:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125769782):
-Nowadays people are careful to state which of the normalisations they are using
+<p>Nowadays people are careful to state which of the normalisations they are using</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 13:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125769789):
-and unfortunately, and perhaps counter-intuitively, it can sometimes be a little tricky to figure out how to translate the statements of theorems proved using one convention into the analogous statements about the same objects had we used the other convention in the paper.
+<p>and unfortunately, and perhaps counter-intuitively, it can sometimes be a little tricky to figure out how to translate the statements of theorems proved using one convention into the analogous statements about the same objects had we used the other convention in the paper.</p>
 
 #### [ Johan Commelin (Apr 27 2018 at 13:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125769790):
-But Kevin, if we go for the restricted version of canonical first. The one that Scott suggested. That would already be incredibly helpful, right?
+<p>But Kevin, if we go for the restricted version of canonical first. The one that Scott suggested. That would already be incredibly helpful, right?</p>
 
 #### [ Kenny Lau (Apr 27 2018 at 13:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125769831):
-```quote
-@**Kenny Lau** -- you wrote my function! Many thanks!
-```
-which function?
+<blockquote>
+<p><span class="user-mention" data-user-id="110064">@Kenny Lau</span> -- you wrote my function! Many thanks!</p>
+</blockquote>
+<p>which function?</p>
 
 #### [ Johan Commelin (Apr 27 2018 at 13:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125769835):
-If there is one 'blessed' isomorphism, it can be traced through al sorts of constructions, and induce 'blessed' equivalences/isomorphism between other objects
+<p>If there is one 'blessed' isomorphism, it can be traced through al sorts of constructions, and induce 'blessed' equivalences/isomorphism between other objects</p>
 
 #### [ Johan Commelin (Apr 27 2018 at 13:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125769837):
-Like with power sets, or group structures, etc...
+<p>Like with power sets, or group structures, etc...</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 13:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125769838):
-```quote
-But by that do you just mean that there's a particularly interesting/sensible isomorphism between them, and the point is not to say "these are isomorphic", but "this is an isomorphism between ..."?
-```
-I am quite happy to state the isomorphism. But what I want from it is a huge quota of free constructions and proofs.
+<blockquote>
+<p>But by that do you just mean that there's a particularly interesting/sensible isomorphism between them, and the point is not to say "these are isomorphic", but "this is an isomorphism between ..."?</p>
+</blockquote>
+<p>I am quite happy to state the isomorphism. But what I want from it is a huge quota of free constructions and proofs.</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 13:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125769894):
-I want `canonical_isomorphism` to extend (possibly a restricted universe version of) `equiv`
+<p>I want <code>canonical_isomorphism</code> to extend (possibly a restricted universe version of) <code>equiv</code></p>
 
 #### [ Johan Commelin (Apr 27 2018 at 13:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125769898):
-At the Lean wizards: Kevin is pointing out an incredibly important thing. As in, it is a difference in kind, not just a difference in degree.
+<p>At the Lean wizards: Kevin is pointing out an incredibly important thing. As in, it is a difference in kind, not just a difference in degree.</p>
 
 #### [ Johan Commelin (Apr 27 2018 at 13:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125769901):
-It will give super-linear improvements in the de Bruijn factor.
+<p>It will give super-linear improvements in the de Bruijn factor.</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 13:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125769922):
-and I want functions like
+<p>and I want functions like</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 13:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125769942):
-```lean
-instance group_of_equiv [group α] (H : canonically_isomorphic α β) : group β := sorry
-```
+<div class="codehilite"><pre><span></span><span class="kn">instance</span> <span class="n">group_of_equiv</span> <span class="o">[</span><span class="n">group</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="n">canonically_isomorphic</span> <span class="n">α</span> <span class="n">β</span><span class="o">)</span> <span class="o">:</span> <span class="n">group</span> <span class="n">β</span> <span class="o">:=</span> <span class="n">sorry</span>
+</pre></div>
 
 #### [ Kenny Lau (Apr 27 2018 at 13:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125769947):
-transport of structure
+<p>transport of structure</p>
 
 #### [ Kenny Lau (Apr 27 2018 at 13:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125769951):
-@**Mario Carneiro** maybe you could automate this?
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> maybe you could automate this?</p>
 
 #### [ Johan Commelin (Apr 27 2018 at 13:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125769952):
-I personally feel (but I'm a novice) that this is one of the big road blocks for formalisation of a lot of maths in the algebraic geometry corner
+<p>I personally feel (but I'm a novice) that this is one of the big road blocks for formalisation of a lot of maths in the algebraic geometry corner</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 13:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125769959):
-I have this big Pokemon to kill
+<p>I have this big Pokemon to kill</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 13:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125769960):
-called proof that an affine scheme is a scheme
+<p>called proof that an affine scheme is a scheme</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 13:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125769962):
-and it is now in its final stage
+<p>and it is now in its final stage</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 13:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125769967):
-and I want to destroy it with a one liner like this
+<p>and I want to destroy it with a one liner like this</p>
 
 #### [ Chris Hughes (Apr 27 2018 at 13:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125769968):
-What happened to Kenny's idea of quotienting by isomorphism?
+<p>What happened to Kenny's idea of quotienting by isomorphism?</p>
 
 #### [ Kenny Lau (Apr 27 2018 at 13:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125769969):
-Chris Hughes appears
+<p>Chris Hughes appears</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 13:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125770009):
-I don't know how to implement that
+<p>I don't know how to implement that</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 13:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125770012):
-Did you see my "three lemma" Chris?
+<p>Did you see my "three lemma" Chris?</p>
 
 #### [ Johan Commelin (Apr 27 2018 at 13:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125770014):
-What exactly does Kenny mean by "quotienting by isomorphism"?
+<p>What exactly does Kenny mean by "quotienting by isomorphism"?</p>
 
 #### [ Johan Commelin (Apr 27 2018 at 13:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125770016):
-Because that might be to crude...
+<p>Because that might be to crude...</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 13:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125770017):
-I want to prove that if `A -> B -> C` is exact and we are given isomorphisms `A -> A'` and `B -> B'` and `C -> C'`
+<p>I want to prove that if <code>A -&gt; B -&gt; C</code> is exact and we are given isomorphisms <code>A -&gt; A'</code> and <code>B -&gt; B'</code> and <code>C -&gt; C'</code></p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 13:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125770027):
-then there is a completely obvious new exact sequence `A' -> B' -> C'`
+<p>then there is a completely obvious new exact sequence <code>A' -&gt; B' -&gt; C'</code></p>
 
 #### [ Kenny Lau (Apr 27 2018 at 13:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125770029):
-I already proved it
+<p>I already proved it</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 13:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125770030):
-I know
+<p>I know</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 13:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125770034):
-but i don't want you to spend 70 lines proving it
+<p>but i don't want you to spend 70 lines proving it</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 13:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125770037):
-I want to to agree with me that it is obvious
+<p>I want to to agree with me that it is obvious</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 13:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125770038):
-and hence is only worth one line
+<p>and hence is only worth one line</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 13:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125770086):
-because a mathematician is capable of replacing `B` with the canonically isomorphic `B'` in one line
+<p>because a mathematician is capable of replacing <code>B</code> with the canonically isomorphic <code>B'</code> in one line</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 13:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125770090):
-so I can prove the theorem in 3 lines
+<p>so I can prove the theorem in 3 lines</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 13:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125770092):
-and I don't see anything wrong with my proof
+<p>and I don't see anything wrong with my proof</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 13:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125770095):
-at every stage the next line is "do the obvious thing"
+<p>at every stage the next line is "do the obvious thing"</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 13:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125770106):
-```quote
-but i don't want you to spend 70 lines proving it
-```
-... by which I mean
+<blockquote>
+<p>but i don't want you to spend 70 lines proving it</p>
+</blockquote>
+<p>... by which I mean</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 13:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125770108):
-thank you very much Kenny for proving the result for me
+<p>thank you very much Kenny for proving the result for me</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 13:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125770112):
-and don't you think it's interesting that it took 70 lines
+<p>and don't you think it's interesting that it took 70 lines</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 13:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125770117):
-but for the purposes of this thread I want 3 lines
+<p>but for the purposes of this thread I want 3 lines</p>
 
 #### [ Kenny Lau (Apr 27 2018 at 13:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125770160):
-lol
+<p>lol</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 13:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125770163):
-I want to `rw [H : canonically_isomorphic A A']`
+<p>I want to <code>rw [H : canonically_isomorphic A A']</code></p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 13:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125770164):
-and then you can guess the rest
+<p>and then you can guess the rest</p>
 
 #### [ Johan Commelin (Apr 27 2018 at 13:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125770166):
-`[...] := by repeat {transport_de_structure}`
+<p><code>[...] := by repeat {transport_de_structure}</code></p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 13:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125770173):
-This is exactly another one of those concepts which I have been interested in all my life but have only really now found the language to talk about them in
+<p>This is exactly another one of those concepts which I have been interested in all my life but have only really now found the language to talk about them in</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 13:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125770225):
-and perhaps this is very difficult to do in dependent type theory
+<p>and perhaps this is very difficult to do in dependent type theory</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 13:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125770229):
-because replacing `f A` with `f A'` can be quite complicated in general
+<p>because replacing <code>f A</code> with <code>f A'</code> can be quite complicated in general</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 13:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125770232):
-but the point is that `A` and `A'` are *mathematical objects*
+<p>but the point is that <code>A</code> and <code>A'</code> are <em>mathematical objects</em></p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 13:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125770235):
-not these stupid general types
+<p>not these stupid general types</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 13:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125770246):
-and so what I am hoping is that for a possibly restricted class of types there is some powerful relation on them
+<p>and so what I am hoping is that for a possibly restricted class of types there is some powerful relation on them</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 13:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125770285):
-called "canonically isomorphic"
+<p>called "canonically isomorphic"</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 13:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125770291):
-which you construct with functions in both directions, proofs that the composites are the identity either way (as in equiv not isom), and a little bit of extra magic
+<p>which you construct with functions in both directions, proofs that the composites are the identity either way (as in equiv not isom), and a little bit of extra magic</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 13:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125770294):
-possibly
+<p>possibly</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 13:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125770300):
-and then for hopefully a class of types including the kind of types showing up in mathematics
+<p>and then for hopefully a class of types including the kind of types showing up in mathematics</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 13:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125770348):
-a lot of stuff can be moved around painlessly, substituting one type for a canonically isomorphic one.
+<p>a lot of stuff can be moved around painlessly, substituting one type for a canonically isomorphic one.</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 13:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125770352):
-So who fancies proving `equiv A B -> scheme A -> scheme B`
+<p>So who fancies proving <code>equiv A B -&gt; scheme A -&gt; scheme B</code></p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 13:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125770366):
-Wait, for what generality is this true?
+<p>Wait, for what generality is this true?</p>
 
 #### [ Johan Commelin (Apr 27 2018 at 13:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125770369):
-Hmmm, Kevin, I think there are two things at play
+<p>Hmmm, Kevin, I think there are two things at play</p>
 
 #### [ Johan Commelin (Apr 27 2018 at 13:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125770417):
-There is functoriality, and transport de structure
+<p>There is functoriality, and transport de structure</p>
 
 #### [ Johan Commelin (Apr 27 2018 at 13:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125770419):
-and they are related, but slightly different
+<p>and they are related, but slightly different</p>
 
 #### [ Johan Commelin (Apr 27 2018 at 13:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125770423):
-I don't know exactly how to explain the difference
+<p>I don't know exactly how to explain the difference</p>
 
 #### [ Johan Commelin (Apr 27 2018 at 13:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125770428):
-(And maybe they actually are not)
+<p>(And maybe they actually are not)</p>
 
 #### [ Chris Hughes (Apr 27 2018 at 13:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125770430):
-Is this totally disgusting?
-```lean
-structure isom (G H : Σ α : Type*, group α) :=
-(f : G.1 ≃ H.1)
-(to_fun_hom : @is_group_hom _ _ G.2 H.2 f.to_fun)
-(inv_fun_hom : @is_group_hom _ _ H.2 G.2 f.inv_fun)
+<p>Is this totally disgusting?</p>
+<div class="codehilite"><pre><span></span><span class="kn">structure</span> <span class="n">isom</span> <span class="o">(</span><span class="n">G</span> <span class="n">H</span> <span class="o">:</span> <span class="err">Σ</span> <span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">,</span> <span class="n">group</span> <span class="n">α</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">G</span><span class="bp">.</span><span class="mi">1</span> <span class="err">≃</span> <span class="n">H</span><span class="bp">.</span><span class="mi">1</span><span class="o">)</span>
+<span class="o">(</span><span class="n">to_fun_hom</span> <span class="o">:</span> <span class="bp">@</span><span class="n">is_group_hom</span> <span class="bp">_</span> <span class="bp">_</span> <span class="n">G</span><span class="bp">.</span><span class="mi">2</span> <span class="n">H</span><span class="bp">.</span><span class="mi">2</span> <span class="n">f</span><span class="bp">.</span><span class="n">to_fun</span><span class="o">)</span>
+<span class="o">(</span><span class="n">inv_fun_hom</span> <span class="o">:</span> <span class="bp">@</span><span class="n">is_group_hom</span> <span class="bp">_</span> <span class="bp">_</span> <span class="n">H</span><span class="bp">.</span><span class="mi">2</span> <span class="n">G</span><span class="bp">.</span><span class="mi">2</span> <span class="n">f</span><span class="bp">.</span><span class="n">inv_fun</span><span class="o">)</span>
 
-def is_isom (G H : Σ α : Type*, group α) := nonempty (isom G H)
-```
+<span class="n">def</span> <span class="n">is_isom</span> <span class="o">(</span><span class="n">G</span> <span class="n">H</span> <span class="o">:</span> <span class="err">Σ</span> <span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">,</span> <span class="n">group</span> <span class="n">α</span><span class="o">)</span> <span class="o">:=</span> <span class="n">nonempty</span> <span class="o">(</span><span class="n">isom</span> <span class="n">G</span> <span class="n">H</span><span class="o">)</span>
+</pre></div>
 
 #### [ Scott Morrison (Apr 27 2018 at 13:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125770537):
-Really you want to prove `equiv A B -> equiv (scheme A) (scheme B)`.
+<p>Really you want to prove <code>equiv A B -&gt; equiv (scheme A) (scheme B)</code>.</p>
 
 #### [ Johan Commelin (Apr 27 2018 at 13:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125770539):
-Chris, but what does it do?
+<p>Chris, but what does it do?</p>
 
 #### [ Scott Morrison (Apr 27 2018 at 13:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125770580):
-Or even better: `scheme` is an endofunctor of the category of types and equivalences.
+<p>Or even better: <code>scheme</code> is an endofunctor of the category of types and equivalences.</p>
 
 #### [ Johan Commelin (Apr 27 2018 at 13:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125770581):
-Isn't that too general? You need some ring structures flying around, right?
+<p>Isn't that too general? You need some ring structures flying around, right?</p>
 
 #### [ Scott Morrison (Apr 27 2018 at 13:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125770633):
-I'm not sure what you mean, Johan. How would rings come into the picture? We're just doing abstract nonsense with types here.
+<p>I'm not sure what you mean, Johan. How would rings come into the picture? We're just doing abstract nonsense with types here.</p>
 
 #### [ Chris Hughes (Apr 27 2018 at 13:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125770638):
-If you quotient then you can rw. That's the idea. But it might be completely useless.
+<p>If you quotient then you can rw. That's the idea. But it might be completely useless.</p>
 
 #### [ Johan Commelin (Apr 27 2018 at 13:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125770639):
-Scott, never mind, you are right
+<p>Scott, never mind, you are right</p>
 
 #### [ Johan Commelin (Apr 27 2018 at 13:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125770686):
-Ok, so then we want your proposed theorem to come for free. Does that make sense?
+<p>Ok, so then we want your proposed theorem to come for free. Does that make sense?</p>
 
 #### [ Johan Commelin (Apr 27 2018 at 13:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125770688):
-And then, if we have an actual equivalence between A and B, we get an equivalence between (scheme A) and (scheme B) for free
+<p>And then, if we have an actual equivalence between A and B, we get an equivalence between (scheme A) and (scheme B) for free</p>
 
 #### [ Johan Commelin (Apr 27 2018 at 13:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125770702):
-And I guess it comes for free for all endofunctors, and endofunctors compose
+<p>And I guess it comes for free for all endofunctors, and endofunctors compose</p>
 
 #### [ Johan Commelin (Apr 27 2018 at 13:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125770708):
-So we might need to mark lots of definitions with [endofunctor]
+<p>So we might need to mark lots of definitions with [endofunctor]</p>
 
 #### [ Johan Commelin (Apr 27 2018 at 13:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125770751):
-And maybe then we are happy?
+<p>And maybe then we are happy?</p>
 
 #### [ Scott Morrison (Apr 27 2018 at 13:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125770752):
-So... which functions `F : Type × ... × Type → Type` extend to endofunctors of `Equiv` (the category of types and equivalences)?
+<p>So... which functions <code>F : Type × ... × Type → Type</code> extend to endofunctors of <code>Equiv</code> (the category of types and equivalences)?</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 13:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125770754):
-```lean
-import data.equiv 
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">equiv</span>
 
-theorem over_optimistic (F : Type → Type) (α β : Type) (H : equiv α β) :
-equiv (F α) (F β) := sorry
-```
+<span class="kn">theorem</span> <span class="n">over_optimistic</span> <span class="o">(</span><span class="n">F</span> <span class="o">:</span> <span class="kt">Type</span> <span class="bp">→</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">(</span><span class="n">α</span> <span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="n">equiv</span> <span class="n">α</span> <span class="n">β</span><span class="o">)</span> <span class="o">:</span>
+<span class="n">equiv</span> <span class="o">(</span><span class="n">F</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">F</span> <span class="n">β</span><span class="o">)</span> <span class="o">:=</span> <span class="n">sorry</span>
+</pre></div>
 
 #### [ Scott Morrison (Apr 27 2018 at 13:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125770755):
-Most things I can think of...
+<p>Most things I can think of...</p>
 
 #### [ Kenny Lau (Apr 27 2018 at 13:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125770758):
-```quote
-Is this totally disgusting?
-```lean
-structure isom (G H : Σ α : Type*, group α) :=
-(f : G.1 ≃ H.1)
-(to_fun_hom : @is_group_hom _ _ G.2 H.2 f.to_fun)
-(inv_fun_hom : @is_group_hom _ _ H.2 G.2 f.inv_fun)
+<blockquote>
+<p>Is this totally disgusting?</p>
+<div class="codehilite"><pre><span></span><span class="kn">structure</span> <span class="n">isom</span> <span class="o">(</span><span class="n">G</span> <span class="n">H</span> <span class="o">:</span> <span class="err">Σ</span> <span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">,</span> <span class="n">group</span> <span class="n">α</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">G</span><span class="bp">.</span><span class="mi">1</span> <span class="err">≃</span> <span class="n">H</span><span class="bp">.</span><span class="mi">1</span><span class="o">)</span>
+<span class="o">(</span><span class="n">to_fun_hom</span> <span class="o">:</span> <span class="bp">@</span><span class="n">is_group_hom</span> <span class="bp">_</span> <span class="bp">_</span> <span class="n">G</span><span class="bp">.</span><span class="mi">2</span> <span class="n">H</span><span class="bp">.</span><span class="mi">2</span> <span class="n">f</span><span class="bp">.</span><span class="n">to_fun</span><span class="o">)</span>
+<span class="o">(</span><span class="n">inv_fun_hom</span> <span class="o">:</span> <span class="bp">@</span><span class="n">is_group_hom</span> <span class="bp">_</span> <span class="bp">_</span> <span class="n">H</span><span class="bp">.</span><span class="mi">2</span> <span class="n">G</span><span class="bp">.</span><span class="mi">2</span> <span class="n">f</span><span class="bp">.</span><span class="n">inv_fun</span><span class="o">)</span>
 
-def is_isom (G H : Σ α : Type*, group α) := nonempty (isom G H)
-```
-```
-the last parameter is redundant
+<span class="n">def</span> <span class="n">is_isom</span> <span class="o">(</span><span class="n">G</span> <span class="n">H</span> <span class="o">:</span> <span class="err">Σ</span> <span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">,</span> <span class="n">group</span> <span class="n">α</span><span class="o">)</span> <span class="o">:=</span> <span class="n">nonempty</span> <span class="o">(</span><span class="n">isom</span> <span class="n">G</span> <span class="n">H</span><span class="o">)</span>
+</pre></div>
+
+
+</blockquote>
+<p>the last parameter is redundant</p>
 
 #### [ Kenny Lau (Apr 27 2018 at 13:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125770760):
-proof: exercise for M1P2
+<p>proof: exercise for M1P2</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 13:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125770764):
-Chris -- I know it can be done! My point is that I should not be wasting my time having to do it!
+<p>Chris -- I know it can be done! My point is that I should not be wasting my time having to do it!</p>
 
 #### [ Scott Morrison (Apr 27 2018 at 13:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125770830):
-I need someone who actually groks type theory to give a counterexample to Kevin's `over_optimistic`. :-)
+<p>I need someone who actually groks type theory to give a counterexample to Kevin's <code>over_optimistic</code>. :-)</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 13:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125770836):
-So my `over_optimistic` question is a question for the CS people. Presumably that is not provable. I am very unfussed about you using any of Lean's axioms here. Is
+<p>So my <code>over_optimistic</code> question is a question for the CS people. Presumably that is not provable. I am very unfussed about you using any of Lean's axioms here. Is</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 13:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125770840):
-...yeah what Scott said
+<p>...yeah what Scott said</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 13:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125770845):
-The thing is that for the types I am most interested in when I am doing mathematics
+<p>The thing is that for the types I am most interested in when I am doing mathematics</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 13:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125770847):
-like groups and rings
+<p>like groups and rings</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 13:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125770851):
-the proof is "it's trivial"
+<p>the proof is "it's trivial"</p>
 
 #### [ Scott Morrison (Apr 27 2018 at 13:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125770891):
-(and lists and manifolds and braided monoidal categories)
+<p>(and lists and manifolds and braided monoidal categories)</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 13:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125770892):
-exactly
+<p>exactly</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 13:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125770897):
-I have run into a ridiculous issue in my schemes code and Kenny has dug me out of a hole with 70 lines of code which no human should have to write
+<p>I have run into a ridiculous issue in my schemes code and Kenny has dug me out of a hole with 70 lines of code which no human should have to write</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 13:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125770902):
-and indeed no mention is made of the argument in the stacks project
+<p>and indeed no mention is made of the argument in the stacks project</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 13:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125770903):
-which is written in ZFC
+<p>which is written in ZFC</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 13:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125770905):
-This is an area where translation to DTT seems hard
+<p>This is an area where translation to DTT seems hard</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 13:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125770949):
-currently
+<p>currently</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 13:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125770951):
-I have some "canonically isomorphic" objects
+<p>I have some "canonically isomorphic" objects</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 13:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125770954):
-and whilst I don't know what that means
+<p>and whilst I don't know what that means</p>
 
 #### [ Johan Commelin (Apr 27 2018 at 13:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125770961):
-Hmmmz where is `left_inverse` defined again?
+<p>Hmmmz where is <code>left_inverse</code> defined again?</p>
 
 #### [ Scott Morrison (Apr 27 2018 at 13:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125770962):
-I fear that someone is about to come along and say: "HoTT!"
+<p>I fear that someone is about to come along and say: "HoTT!"</p>
 
 #### [ Johan Commelin (Apr 27 2018 at 13:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125770966):
-Yes, I was about to do that
+<p>Yes, I was about to do that</p>
 
 #### [ Johan Commelin (Apr 27 2018 at 13:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125770974):
-For 30 minutes I had the urge to say that I think this is *exactly* what Voevodsky tried to solve. His answer was HoTT
+<p>For 30 minutes I had the urge to say that I think this is <em>exactly</em> what Voevodsky tried to solve. His answer was HoTT</p>
 
 #### [ Scott Morrison (Apr 27 2018 at 13:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125770976):
-Voevodsky said things like: "the point is you can actually say what you mean by transport of structure"...
+<p>Voevodsky said things like: "the point is you can actually say what you mean by transport of structure"...</p>
 
 #### [ Kenny Lau (Apr 27 2018 at 14:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125771023):
-```quote
-Hmmmz where is `left_inverse` defined again?
-```
-ctrl shift f
+<blockquote>
+<p>Hmmmz where is <code>left_inverse</code> defined again?</p>
+</blockquote>
+<p>ctrl shift f</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 14:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125771039):
-I do know that from the fact that they are all canonically isomorphic that I can prove all the hypotheses in Kenny's theorem
+<p>I do know that from the fact that they are all canonically isomorphic that I can prove all the hypotheses in Kenny's theorem</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 14:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125771040):
-Kenny has taken the problem down one level
+<p>Kenny has taken the problem down one level</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 14:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125771041):
-there is a really weird part of the argument actually, which is worth mentioning here and is evidence to suggest that I am living in a dream world.
+<p>there is a really weird part of the argument actually, which is worth mentioning here and is evidence to suggest that I am living in a dream world.</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 14:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125771042):
-I have B canonically isomorphic to B' (I have the maps)
+<p>I have B canonically isomorphic to B' (I have the maps)</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 14:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125771043):
-I have A canonically isomorphic to A' (in the sense that I have a structure which is an approximation to such a thing, and will do for now)
+<p>I have A canonically isomorphic to A' (in the sense that I have a structure which is an approximation to such a thing, and will do for now)</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 14:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125771044):
-but the proofs are going to be really tedious
+<p>but the proofs are going to be really tedious</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 14:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125771048):
-and I can prove that the diagram commutes
+<p>and I can prove that the diagram commutes</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 14:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125771087):
-my chat is being garbled
+<p>my chat is being garbled</p>
 
 #### [ Scott Morrison (Apr 27 2018 at 14:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125771098):
-(So which bits are by Kenny, and which by "Kevin"? :-)
+<p>(So which bits are by Kenny, and which by "Kevin"? :-)</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 14:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125771103):
-but one of the arguments that it commutes is : ring hom x is the same as ring hom x' because they're both the unique ring hom
+<p>but one of the arguments that it commutes is : ring hom x is the same as ring hom x' because they're both the unique ring hom</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 14:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125771104):
-and similarly ring hom y = ring hom y'
+<p>and similarly ring hom y = ring hom y'</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 14:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125771111):
-and now we deduce that group hom x+y equals group hom x'+y'
+<p>and now we deduce that group hom x+y equals group hom x'+y'</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 14:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125771114):
-not from the universal property itself, in some sense
+<p>not from the universal property itself, in some sense</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 14:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125771116):
-well, from some shadow of the universal property applied to +
+<p>well, from some shadow of the universal property applied to +</p>
 
 #### [ Scott Morrison (Apr 27 2018 at 14:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125771226):
-Does anyone know how things like `@[derive decidable_eq]` work?
+<p>Does anyone know how things like <code>@[derive decidable_eq]</code> work?</p>
 
 #### [ Scott Morrison (Apr 27 2018 at 14:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125771235):
-Perhaps we can have `@[derive transportable]`, so when you write
+<p>Perhaps we can have <code>@[derive transportable]</code>, so when you write</p>
 
 #### [ Scott Morrison (Apr 27 2018 at 14:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125771245):
-````
-@[derive transportable]
+<div class="codehilite"><pre><span></span>@[derive transportable]
 structure Scheme (a : Type) := ...
-````
+</pre></div>
 
 #### [ Scott Morrison (Apr 27 2018 at 14:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125771290):
-we automatically get an instance of `transportable Scheme`, which just means Scheme is functorial w.r.t equiv.
+<p>we automatically get an instance of <code>transportable Scheme</code>, which just means Scheme is functorial w.r.t equiv.</p>
 
 #### [ Johan Commelin (Apr 27 2018 at 14:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125771300):
-That was what I was hinting at with the [endofunctor] annotations
+<p>That was what I was hinting at with the [endofunctor] annotations</p>
 
 #### [ Johan Commelin (Apr 27 2018 at 14:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125771303):
-But: I don't know lean...
+<p>But: I don't know lean...</p>
 
 #### [ Scott Morrison (Apr 27 2018 at 14:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125771306):
-ah, I see!
+<p>ah, I see!</p>
 
 #### [ Scott Morrison (Apr 27 2018 at 14:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125771310):
-Good suggestion. :-)
+<p>Good suggestion. :-)</p>
 
 #### [ Johan Commelin (Apr 27 2018 at 14:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125771311):
-Well, your suggestion is clearly more fleshed out.
+<p>Well, your suggestion is clearly more fleshed out.</p>
 
 #### [ Sebastian Ullrich (Apr 27 2018 at 14:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125771358):
-@**Scott Morrison** Take a look at https://github.com/leanprover/lean/blob/f59c2f0ef59fdc1833b6ead6adca721123bd7932/library/init/meta/derive.lean#L19-L22
+<p><span class="user-mention" data-user-id="110524">@Scott Morrison</span> Take a look at <a href="https://github.com/leanprover/lean/blob/f59c2f0ef59fdc1833b6ead6adca721123bd7932/library/init/meta/derive.lean#L19-L22" target="_blank" title="https://github.com/leanprover/lean/blob/f59c2f0ef59fdc1833b6ead6adca721123bd7932/library/init/meta/derive.lean#L19-L22">https://github.com/leanprover/lean/blob/f59c2f0ef59fdc1833b6ead6adca721123bd7932/library/init/meta/derive.lean#L19-L22</a></p>
 
 #### [ Johan Commelin (Apr 27 2018 at 14:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125771419):
-```quote
-we automatically get an instance of `transportable Scheme`, which just means Scheme is functorial w.r.t equiv.
-```
-In other words, that `over_optimistic Scheme` is a theorem, right?
+<blockquote>
+<p>we automatically get an instance of <code>transportable Scheme</code>, which just means Scheme is functorial w.r.t equiv.</p>
+</blockquote>
+<p>In other words, that <code>over_optimistic Scheme</code> is a theorem, right?</p>
 
 #### [ Scott Morrison (Apr 27 2018 at 14:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125771433):
-Well, even more than just `over_optimistic Scheme`.
+<p>Well, even more than just <code>over_optimistic Scheme</code>.</p>
 
 #### [ Scott Morrison (Apr 27 2018 at 14:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125771479):
-We want to know that the `equiv`s  you get at the `Scheme` level compose in the same way they did on the original types.
+<p>We want to know that the <code>equiv</code>s  you get at the <code>Scheme</code> level compose in the same way they did on the original types.</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 14:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125771491):
-So let's not jump the gun -- can you prove if A equiv B then a ring on A gives a ring on B?
+<p>So let's not jump the gun -- can you prove if A equiv B then a ring on A gives a ring on B?</p>
 
 #### [ Kenny Lau (Apr 27 2018 at 14:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125771503):
-in 70 lines?
+<p>in 70 lines?</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 14:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125771507):
-:-)
+<p>:-)</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 14:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125771513):
-Kenny I'm sure you could do it in ten
+<p>Kenny I'm sure you could do it in ten</p>
 
 #### [ Scott Morrison (Apr 27 2018 at 14:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125771516):
-Sure we can do it on `ring`, or any given example. (Or rather: Kenny can :-)
+<p>Sure we can do it on <code>ring</code>, or any given example. (Or rather: Kenny can :-)</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 14:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125771559):
-I mean
+<p>I mean</p>
 
 #### [ Scott Morrison (Apr 27 2018 at 14:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125771560):
-but it seems rather likely that the computer can do it too, by looking at the structure fields, and working out where the parameter types appear, and plugging appropriate copies of the equivalence or its inverse everywhere.
+<p>but it seems rather likely that the computer can do it too, by looking at the structure fields, and working out where the parameter types appear, and plugging appropriate copies of the equivalence or its inverse everywhere.</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 14:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125771565):
-right
+<p>right</p>
 
 #### [ Scott Morrison (Apr 27 2018 at 14:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125771569):
-For many simple types (list, ring, ...) this is certainly going to work.
+<p>For many simple types (list, ring, ...) this is certainly going to work.</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 14:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125771573):
-I mean "prove it without ploughing through the axioms"
+<p>I mean "prove it without ploughing through the axioms"</p>
 
 #### [ Scott Morrison (Apr 27 2018 at 14:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125771584):
-You mean ploughing through the axioms of "ring"?
+<p>You mean ploughing through the axioms of "ring"?</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 14:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125771586):
-yes, I want a one-line proof
+<p>yes, I want a one-line proof</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 14:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125771624):
-that if A equiv B then a ring structure on A gives one on B
+<p>that if A equiv B then a ring structure on A gives one on B</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 14:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125771629):
-does that exist?
+<p>does that exist?</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 14:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125771631):
-Could it be a tactic?
+<p>Could it be a tactic?</p>
 
 #### [ Scott Morrison (Apr 27 2018 at 14:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125771632):
-No, I think in general there just isn't a one-line proof, that would work unchanged if your substituted ring for group.
+<p>No, I think in general there just isn't a one-line proof, that would work unchanged if your substituted ring for group.</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 14:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125771633):
-Is it already a theorem?
+<p>Is it already a theorem?</p>
 
 #### [ Scott Morrison (Apr 27 2018 at 14:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125771634):
-but yes, it can easily be a tactic
+<p>but yes, it can easily be a tactic</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 14:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125771636):
-and the tactic would sometimes fail?
+<p>and the tactic would sometimes fail?</p>
 
 #### [ Scott Morrison (Apr 27 2018 at 14:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125771637):
-and it can be one that's easy to use: just add @[derive transportable] in front of every structure.
+<p>and it can be one that's easy to use: just add @[derive transportable] in front of every structure.</p>
 
 #### [ Scott Morrison (Apr 27 2018 at 14:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125771643):
-and yes, conceivably it might sometime fail, but I don't see where yet
+<p>and yes, conceivably it might sometime fail, but I don't see where yet</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 14:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125771644):
-I have no understanding at all the moment anyone says `transportable`
+<p>I have no understanding at all the moment anyone says <code>transportable</code></p>
 
 #### [ Scott Morrison (Apr 27 2018 at 14:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125771653):
-(In fact, I'm really upset that I don't see where it might fail. I'll buy anyone a beer who explains a counterexample to Kevin's `over_optimistic` :-)
+<p>(In fact, I'm really upset that I don't see where it might fail. I'll buy anyone a beer who explains a counterexample to Kevin's <code>over_optimistic</code> :-)</p>
 
 #### [ Scott Morrison (Apr 27 2018 at 14:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125771654):
-Sorry, I made up the word `transportable` just now.
+<p>Sorry, I made up the word <code>transportable</code> just now.</p>
 
 #### [ Kenny Lau (Apr 27 2018 at 14:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125771695):
-heh?
+<p>heh?</p>
 
 #### [ Kenny Lau (Apr 27 2018 at 14:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125771702):
-I mean, f can send int to empty and nat to unit
+<p>I mean, f can send int to empty and nat to unit</p>
 
 #### [ Scott Morrison (Apr 27 2018 at 14:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125771703):
-@**Kevin Buzzard**, do you understand what I mean by "the category of types and equivalences"?
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span>, do you understand what I mean by "the category of types and equivalences"?</p>
 
 #### [ Kenny Lau (Apr 27 2018 at 14:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125771706):
-so int and nat are equivalent but empty and unit are not
+<p>so int and nat are equivalent but empty and unit are not</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 14:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125771709):
-not yet
+<p>not yet</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 14:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125771711):
-Maybe I do understand
+<p>Maybe I do understand</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 14:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125771712):
-Are the objects all in one universe?
+<p>Are the objects all in one universe?</p>
 
 #### [ Scott Morrison (Apr 27 2018 at 14:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125771719):
-But Kenny, how would you actually construct such an `f` in Lean?
+<p>But Kenny, how would you actually construct such an <code>f</code> in Lean?</p>
 
 #### [ Johan Commelin (Apr 27 2018 at 14:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125771721):
-@**Scott Morrison** Just write down the definition of `structure transportable (F : Type* \to Type*)`
+<p><span class="user-mention" data-user-id="110524">@Scott Morrison</span> Just write down the definition of <code>structure transportable (F : Type* \to Type*)</code></p>
 
 #### [ Johan Commelin (Apr 27 2018 at 14:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125771725):
-/me has never written a structure in Lean before, otherwise he would do it
+<p>/me has never written a structure in Lean before, otherwise he would do it</p>
 
 #### [ Johan Commelin (Apr 27 2018 at 14:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125771726):
-Or should it be a class?
+<p>Or should it be a class?</p>
 
 #### [ Johan Commelin (Apr 27 2018 at 14:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125771767):
-So that `@[derive]` will automagically create instances of that class
+<p>So that <code>@[derive]</code> will automagically create instances of that class</p>
 
 #### [ Johan Commelin (Apr 27 2018 at 14:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125771784):
-/me goes back to TPIL
+<p>/me goes back to TPIL</p>
 
 #### [ Scott Morrison (Apr 27 2018 at 14:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125771827):
-````
-class transportable (f : Type u → Type u) := 
+<div class="codehilite"><pre><span></span>class transportable (f : Type u → Type u) :=
 (on_equiv : Π {α β : Type u} (e : equiv α β), equiv (f α) (f β))
 (on_refl  : Π (α : Type u), on_equiv (equiv.refl α) = equiv.refl (f α))
 (on_trans : Π {α β γ : Type u} (d : equiv α β) (e : equiv β γ), on_equiv (equiv.trans d e) = equiv.trans (on_equiv d) (on_equiv e))
-````
+</pre></div>
 
 #### [ Scott Morrison (Apr 27 2018 at 14:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125771839):
-and I claim that @**Simon Hudon** knows how to implement @[derive transportable] for many type constructors. :-)
+<p>and I claim that <span class="user-mention" data-user-id="110026">@Simon Hudon</span> knows how to implement @[derive transportable] for many type constructors. :-)</p>
 
 #### [ Johan Commelin (Apr 27 2018 at 14:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125771889):
-Yes, that would be very cool
+<p>Yes, that would be very cool</p>
 
 #### [ Scott Morrison (Apr 27 2018 at 14:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125771933):
-@**Kevin Buzzard**, this is just saying we have a category which I'll call `Equiv`, whose objects are `Type u` for some universe `u`, and the homs between `\a` and `\b` are just `equiv \a \b`. Then a function  `f : Type u -> Type u` is "transportable" exactly if it extends to a functor `Equiv \to Equiv` (i.e. `f` is what that functor does on objects).
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span>, this is just saying we have a category which I'll call <code>Equiv</code>, whose objects are <code>Type u</code> for some universe <code>u</code>, and the homs between <code>\a</code> and <code>\b</code> are just <code>equiv \a \b</code>. Then a function  <code>f : Type u -&gt; Type u</code> is "transportable" exactly if it extends to a functor <code>Equiv \to Equiv</code> (i.e. <code>f</code> is what that functor does on objects).</p>
 
 #### [ Johan Commelin (Apr 27 2018 at 14:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125771950):
-Can we have different universes?
+<p>Can we have different universes?</p>
 
 #### [ Scott Morrison (Apr 27 2018 at 14:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125771951):
-sure.
+<p>sure.</p>
 
 #### [ Johan Commelin (Apr 27 2018 at 14:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125771952):
-In other words, `f` need not be "strictly endo"
+<p>In other words, <code>f</code> need not be "strictly endo"</p>
 
 #### [ Scott Morrison (Apr 27 2018 at 14:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125771964):
-(It's important that all the universes in classes are visible in the class parameters, but here they would be visible in the parameter `f : Type u -> Type v`.)
+<p>(It's important that all the universes in classes are visible in the class parameters, but here they would be visible in the parameter <code>f : Type u -&gt; Type v</code>.)</p>
 
 #### [ Scott Morrison (Apr 27 2018 at 14:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125772036):
-@**Kevin Buzzard**  --- I'm not at all sure if this is useful. It may be saying simple things in complicated ways, that don't actually solve your problems. But perhaps it does. (And if it does, I'm guessing automatically generating instances of `transportable` could be achieved within a few days (/weeks if Simon doesn't want to help :-)).
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span>  --- I'm not at all sure if this is useful. It may be saying simple things in complicated ways, that don't actually solve your problems. But perhaps it does. (And if it does, I'm guessing automatically generating instances of <code>transportable</code> could be achieved within a few days (/weeks if Simon doesn't want to help :-)).</p>
 
 #### [ Johan Commelin (Apr 27 2018 at 14:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125772091):
-```quote
-```lean
-instance group_of_equiv [group α] (H : canonically_isomorphic α β) : group β := sorry
-```
-```
-It would solve things like this, if I'm not mistaken
+<blockquote>
+<div class="codehilite"><pre><span></span><span class="kn">instance</span> <span class="n">group_of_equiv</span> <span class="o">[</span><span class="n">group</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="n">canonically_isomorphic</span> <span class="n">α</span> <span class="n">β</span><span class="o">)</span> <span class="o">:</span> <span class="n">group</span> <span class="n">β</span> <span class="o">:=</span> <span class="n">sorry</span>
+</pre></div>
+
+
+</blockquote>
+<p>It would solve things like this, if I'm not mistaken</p>
 
 #### [ Simon Hudon (Apr 27 2018 at 14:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125772095):
-```quote
-and I claim that @**Simon Hudon** knows how to implement @[derive transportable] for many type constructors. :-)
-```
-Do you have a proof of that?
+<blockquote>
+<p>and I claim that <span class="user-mention" data-user-id="110026">@Simon Hudon</span> knows how to implement @[derive transportable] for many type constructors. :-)</p>
+</blockquote>
+<p>Do you have a proof of that?</p>
 
 #### [ Johan Commelin (Apr 27 2018 at 14:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125772098):
-Yes, you are working on it
+<p>Yes, you are working on it</p>
 
 #### [ Scott Morrison (Apr 27 2018 at 14:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125772141):
-:-)
+<p>:-)</p>
 
 #### [ Johan Commelin (Apr 27 2018 at 14:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125772144):
-And it seems that you get a beer if you can prove that you can't do it in one go...
+<p>And it seems that you get a beer if you can prove that you can't do it in one go...</p>
 
 #### [ Scott Morrison (Apr 27 2018 at 14:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125772149):
-(Sorry, I don't mean to say things like this to pressure you into doing things. Just to express my gratitude for all your recent help! No good deed goes unpunished...)
+<p>(Sorry, I don't mean to say things like this to pressure you into doing things. Just to express my gratitude for all your recent help! No good deed goes unpunished...)</p>
 
 #### [ Johan Commelin (Apr 27 2018 at 14:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125772211):
-Learning how to write tactics and such is on my todo list
+<p>Learning how to write tactics and such is on my todo list</p>
 
 #### [ Johan Commelin (Apr 27 2018 at 14:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125772214):
-But I first need to get two papers out of the door...
+<p>But I first need to get two papers out of the door...</p>
 
 #### [ Simon Hudon (Apr 27 2018 at 14:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125772215):
-(Haha! No worries! Can people hear us when we whisper in here?)
+<p>(Haha! No worries! Can people hear us when we whisper in here?)</p>
 
 #### [ Simon Hudon (Apr 27 2018 at 14:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125772225):
-Yeah and writing tutorials about it is on mine
+<p>Yeah and writing tutorials about it is on mine</p>
 
 #### [ Simon Hudon (Apr 27 2018 at 14:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125772269):
-I can look into it. I still don't know much about `derive` but I need to understand it for `traversable`. I can kill two birds with one stone
+<p>I can look into it. I still don't know much about <code>derive</code> but I need to understand it for <code>traversable</code>. I can kill two birds with one stone</p>
 
 #### [ Chris Hughes (Apr 27 2018 at 14:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125772286):
-Would it help to make everything isomorphic to a type a type class, and then prove things about the class of isomorphic types? Might be completely stupid.
+<p>Would it help to make everything isomorphic to a type a type class, and then prove things about the class of isomorphic types? Might be completely stupid.</p>
 
 #### [ Johan Commelin (Apr 27 2018 at 14:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125772496):
-Well, you loose track of different isomorphisms between the same to types
+<p>Well, you loose track of different isomorphisms between the same to types</p>
 
 #### [ Johan Commelin (Apr 27 2018 at 14:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125772500):
-And that will create trouble down the road, I guess
+<p>And that will create trouble down the road, I guess</p>
 
 #### [ Simon Hudon (Apr 27 2018 at 15:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125773177):
-Type classes are really better when instances are unique. Lean does not enforce that idea but conceptually, if the type class is not unique, the instance is an implicit argument everywhere but the exact choice of instance makes a big difference.
+<p>Type classes are really better when instances are unique. Lean does not enforce that idea but conceptually, if the type class is not unique, the instance is an implicit argument everywhere but the exact choice of instance makes a big difference.</p>
 
 #### [ Simon Hudon (Apr 27 2018 at 15:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125773186):
-It's like you're omitting a central piece of information every time
+<p>It's like you're omitting a central piece of information every time</p>
 
 #### [ Johan Commelin (Apr 27 2018 at 15:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125773189):
-But for Scott's proposal, that would be the case, right?
+<p>But for Scott's proposal, that would be the case, right?</p>
 
 #### [ Simon Hudon (Apr 27 2018 at 15:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125773404):
-You mean the instance would be unique?
+<p>You mean the instance would be unique?</p>
 
 #### [ Johan Commelin (Apr 27 2018 at 15:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125773683):
-I think so
+<p>I think so</p>
 
 #### [ Johan Commelin (Apr 27 2018 at 15:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125773687):
-You derive an instance, right.
+<p>You derive an instance, right.</p>
 
 #### [ Johan Commelin (Apr 27 2018 at 15:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125773694):
-So there is only one of them. And people just shouldn't define additional instances
+<p>So there is only one of them. And people just shouldn't define additional instances</p>
 
 #### [ Simon Hudon (Apr 27 2018 at 15:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125773760):
-What if other instances could be useful?
+<p>What if other instances could be useful?</p>
 
 #### [ Simon Hudon (Apr 27 2018 at 15:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125773770):
-Sorry, I'm kind of jumping in the middle here so I'm missing some context
+<p>Sorry, I'm kind of jumping in the middle here so I'm missing some context</p>
 
 #### [ Johan Commelin (Apr 27 2018 at 15:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125773771):
-Hmm, we only want to use the fact that the class is inhabited
+<p>Hmm, we only want to use the fact that the class is inhabited</p>
 
 #### [ Johan Commelin (Apr 27 2018 at 15:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125773775):
-Ok, so this is the thing
+<p>Ok, so this is the thing</p>
 
 #### [ Simon Hudon (Apr 27 2018 at 15:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125773782):
-Is it meant to be used with type constructors like `list`?
+<p>Is it meant to be used with type constructors like <code>list</code>?</p>
 
 #### [ Johan Commelin (Apr 27 2018 at 15:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125773783):
-Say you have two types. `A` and `B`
+<p>Say you have two types. <code>A</code> and <code>B</code></p>
 
 #### [ Johan Commelin (Apr 27 2018 at 15:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125773790):
-and you know that `A` is a group. You also know `equiv A B`
+<p>and you know that <code>A</code> is a group. You also know <code>equiv A B</code></p>
 
 #### [ Johan Commelin (Apr 27 2018 at 15:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125773794):
-Then we would like to know that `B` is also a group.
+<p>Then we would like to know that <code>B</code> is also a group.</p>
 
 #### [ Johan Commelin (Apr 27 2018 at 15:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125773799):
-And we want Lean to do this for us.
+<p>And we want Lean to do this for us.</p>
 
 #### [ Johan Commelin (Apr 27 2018 at 15:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125773858):
-So, after lots of discussions, Scott came up with a strategy.
+<p>So, after lots of discussions, Scott came up with a strategy.</p>
 
 #### [ Johan Commelin (Apr 27 2018 at 15:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125773864):
-We define a class `transportable` (or some other name, but mathematicians know this fact as "transport of structure")
+<p>We define a class <code>transportable</code> (or some other name, but mathematicians know this fact as "transport of structure")</p>
 
 #### [ Johan Commelin (Apr 27 2018 at 15:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125773868):
-And we tag lots of definitions with `@[derive transportable]`
+<p>And we tag lots of definitions with <code>@[derive transportable]</code></p>
 
 #### [ Johan Commelin (Apr 27 2018 at 15:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125773873):
-And then, MAGIC!
+<p>And then, MAGIC!</p>
 
 #### [ Johan Commelin (Apr 27 2018 at 15:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125773886):
-In particular, you can only derive transportable for things of type `Type u \to Type v`
+<p>In particular, you can only derive transportable for things of type <code>Type u \to Type v</code></p>
 
 #### [ Simon Hudon (Apr 27 2018 at 15:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125773944):
-In this case, that would be `group`, right?
+<p>In this case, that would be <code>group</code>, right?</p>
 
 #### [ Johan Commelin (Apr 27 2018 at 15:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125773947):
-And if `f` and `g` are two things that are `transportable`, then we want `(f,g)` to also be transportable, by some fact that we hope *you* can prove
+<p>And if <code>f</code> and <code>g</code> are two things that are <code>transportable</code>, then we want <code>(f,g)</code> to also be transportable, by some fact that we hope <em>you</em> can prove</p>
 
 #### [ Johan Commelin (Apr 27 2018 at 15:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125773955):
-Right, `group`, `ring` etc should be examples
+<p>Right, <code>group</code>, <code>ring</code> etc should be examples</p>
 
 #### [ Simon Hudon (Apr 27 2018 at 15:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125773969):
-I see, I see. That actually seems like a good use of classes
+<p>I see, I see. That actually seems like a good use of classes</p>
 
 #### [ Johan Commelin (Apr 27 2018 at 15:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125773978):
-and if something is defined as a `structure`, hopefully we can also derive this from how its built.
+<p>and if something is defined as a <code>structure</code>, hopefully we can also derive this from how its built.</p>
 
 #### [ Simon Hudon (Apr 27 2018 at 15:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125773986):
-I'll look into doing that. If I could have a use case, that would help a lot
+<p>I'll look into doing that. If I could have a use case, that would help a lot</p>
 
 #### [ Johan Commelin (Apr 27 2018 at 15:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125774035):
-And so we only need some really basic things where we actually *prove* that we have an instance. The rest is done by `derive` and *us* putting annotations in mathlib.
+<p>And so we only need some really basic things where we actually <em>prove</em> that we have an instance. The rest is done by <code>derive</code> and <em>us</em> putting annotations in mathlib.</p>
 
 #### [ Johan Commelin (Apr 27 2018 at 15:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125774046):
-@**Scott Morrison** Is that a faithful representation of your ideas?
+<p><span class="user-mention" data-user-id="110524">@Scott Morrison</span> Is that a faithful representation of your ideas?</p>
 
 #### [ Johan Commelin (Apr 27 2018 at 15:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125774143):
-@**Simon Hudon** The use case is that Kevin is now facing a goal that would follow from this (and probably tomorrow he has another dozen). A mathematician would spend at most 3 words to "prove" such a fact. Kenny needed 70 lines to prove this particular goal of Kevin. But a variant of that goal can pop up any time.
+<p><span class="user-mention" data-user-id="110026">@Simon Hudon</span> The use case is that Kevin is now facing a goal that would follow from this (and probably tomorrow he has another dozen). A mathematician would spend at most 3 words to "prove" such a fact. Kenny needed 70 lines to prove this particular goal of Kevin. But a variant of that goal can pop up any time.</p>
 
 #### [ Scott Morrison (Apr 27 2018 at 15:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125774155):
-Here's a mockup of what we want:
-````
-class canonical_equiv (α : Sort*) (β : Sort*) extends equiv α β.
+<p>Here's a mockup of what we want:</p>
+<div class="codehilite"><pre><span></span>class canonical_equiv (α : Sort*) (β : Sort*) extends equiv α β.
 
-class transportable (f : Type u → Type u) := 
+class transportable (f : Type u → Type u) :=
 (on_equiv : Π {α β : Type u} (e : equiv α β), equiv (f α) (f β))
 (on_refl  : Π (α : Type u), on_equiv (equiv.refl α) = equiv.refl (f α))
 (on_trans : Π {α β γ : Type u} (d : equiv α β) (e : equiv β γ), on_equiv (equiv.trans d e) = equiv.trans (on_equiv d) (on_equiv e))
@@ -1057,2363 +1051,2331 @@ class transportable (f : Type u → Type u) :=
 
 def group.transportable : transportable group := sorry
 instance group.transport {α β : Type u} [R : group α] [e : canonical_equiv α β] : group β := (@transportable.on_equiv group group.transportable _ _ e.to_equiv).to_fun R
-````
+</pre></div>
 
 #### [ Scott Morrison (Apr 27 2018 at 15:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125774206):
-The challenge is to implement the command `initialize_transport` (sounds like Star Trek! :-)
+<p>The challenge is to implement the command <code>initialize_transport</code> (sounds like Star Trek! :-)</p>
 
 #### [ Scott Morrison (Apr 27 2018 at 15:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125774254):
-It will need to inspect its argument, which will be something like `ring` or `list`, and create an instance of `transportable ring` or `transportable list`, etc.
+<p>It will need to inspect its argument, which will be something like <code>ring</code> or <code>list</code>, and create an instance of <code>transportable ring</code> or <code>transportable list</code>, etc.</p>
 
 #### [ Scott Morrison (Apr 27 2018 at 15:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125774269):
-(i.e. fill in the `sorry` above)
+<p>(i.e. fill in the <code>sorry</code> above)</p>
 
 #### [ Scott Morrison (Apr 27 2018 at 15:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125774306):
-The final step of `initialize_transport` is trivial: just emit the final instance declaration above.
+<p>The final step of <code>initialize_transport</code> is trivial: just emit the final instance declaration above.</p>
 
 #### [ Johan Commelin (Apr 27 2018 at 15:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125774314):
-Right, so `initialize_transport` (or `derive_transportable`) would look at `group` and say, oh, I know how to transport `mul` and `inv` and `one` from `A` to `B`
+<p>Right, so <code>initialize_transport</code> (or <code>derive_transportable</code>) would look at <code>group</code> and say, oh, I know how to transport <code>mul</code> and <code>inv</code> and <code>one</code> from <code>A</code> to <code>B</code></p>
 
 #### [ Scott Morrison (Apr 27 2018 at 15:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125774315):
-Exactly.
+<p>Exactly.</p>
 
 #### [ Johan Commelin (Apr 27 2018 at 15:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125774323):
-Because those are just functions... and someone told me how to do that
+<p>Because those are just functions... and someone told me how to do that</p>
 
 #### [ Scott Morrison (Apr 27 2018 at 15:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125774325):
-I don't have a strong sense of how hard that it. :-)
+<p>I don't have a strong sense of how hard that it. :-)</p>
 
 #### [ Simon Hudon (Apr 27 2018 at 15:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125774327):
-Nice idea :)
+<p>Nice idea :)</p>
 
 #### [ Simon Hudon (Apr 27 2018 at 15:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125774336):
-I think keep it as my treat today between writing sessions
+<p>I think keep it as my treat today between writing sessions</p>
 
 #### [ Scott Morrison (Apr 27 2018 at 15:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125774337):
-But basically the thing you hand to `initialize_transport` will usually just be some inductive type
+<p>But basically the thing you hand to <code>initialize_transport</code> will usually just be some inductive type</p>
 
 #### [ Johan Commelin (Apr 27 2018 at 15:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125774338):
-And then there are the axioms, and it should be able to transport their proof as well...
+<p>And then there are the axioms, and it should be able to transport their proof as well...</p>
 
 #### [ Scott Morrison (Apr 27 2018 at 15:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125774379):
-(e.g. a structure)
+<p>(e.g. a structure)</p>
 
 #### [ Johan Commelin (Apr 27 2018 at 15:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125774383):
-And now you want to "inductively" deduce that almost everything a mathematician like Kevin would define is an example of `transportable`
+<p>And now you want to "inductively" deduce that almost everything a mathematician like Kevin would define is an example of <code>transportable</code></p>
 
 #### [ Scott Morrison (Apr 27 2018 at 15:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125774407):
-Yes: more advanced versions of `initialize_transport` will probably do some induction: notice that internal features have already been provided with instance of transportable, and make sure of that.
+<p>Yes: more advanced versions of <code>initialize_transport</code> will probably do some induction: notice that internal features have already been provided with instance of transportable, and make sure of that.</p>
 
 #### [ Scott Morrison (Apr 27 2018 at 15:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125774420):
-I should sleep, but I'll try to think of examples of wanting to do that while I sleep. :-)
+<p>I should sleep, but I'll try to think of examples of wanting to do that while I sleep. :-)</p>
 
 #### [ Simon Hudon (Apr 27 2018 at 15:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125774470):
-Awesome! That sounds like sweet dreams
+<p>Awesome! That sounds like sweet dreams</p>
 
 #### [ Johan Commelin (Apr 27 2018 at 15:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125775365):
-Here are some more basics. But I think you already got the idea.
-```lean
-import data.equiv
+<p>Here are some more basics. But I think you already got the idea.</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">equiv</span>
 
-universes u v w
+<span class="n">universes</span> <span class="n">u</span> <span class="n">v</span> <span class="n">w</span>
 
-class transportable (f : Type u → Type v) :=
-(on_equiv : Π {α β : Type u} (e : equiv α β), equiv (f α) (f β))
-(on_refl  : Π (α : Type u), on_equiv (equiv.refl α) = equiv.refl (f α))
-(on_trans : Π {α β γ : Type u} (d : equiv α β) (e : equiv β γ), on_equiv (equiv.trans d e) = equiv.trans (on_equiv d) (on_equiv e))
+<span class="n">class</span> <span class="n">transportable</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span> <span class="bp">→</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">on_equiv</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">{</span><span class="n">α</span> <span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">(</span><span class="n">e</span> <span class="o">:</span> <span class="n">equiv</span> <span class="n">α</span> <span class="n">β</span><span class="o">),</span> <span class="n">equiv</span> <span class="o">(</span><span class="n">f</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="n">β</span><span class="o">))</span>
+<span class="o">(</span><span class="n">on_refl</span>  <span class="o">:</span> <span class="bp">Π</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">),</span> <span class="n">on_equiv</span> <span class="o">(</span><span class="n">equiv</span><span class="bp">.</span><span class="n">refl</span> <span class="n">α</span><span class="o">)</span> <span class="bp">=</span> <span class="n">equiv</span><span class="bp">.</span><span class="n">refl</span> <span class="o">(</span><span class="n">f</span> <span class="n">α</span><span class="o">))</span>
+<span class="o">(</span><span class="n">on_trans</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">{</span><span class="n">α</span> <span class="n">β</span> <span class="n">γ</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">(</span><span class="n">d</span> <span class="o">:</span> <span class="n">equiv</span> <span class="n">α</span> <span class="n">β</span><span class="o">)</span> <span class="o">(</span><span class="n">e</span> <span class="o">:</span> <span class="n">equiv</span> <span class="n">β</span> <span class="n">γ</span><span class="o">),</span> <span class="n">on_equiv</span> <span class="o">(</span><span class="n">equiv</span><span class="bp">.</span><span class="n">trans</span> <span class="n">d</span> <span class="n">e</span><span class="o">)</span> <span class="bp">=</span> <span class="n">equiv</span><span class="bp">.</span><span class="n">trans</span> <span class="o">(</span><span class="n">on_equiv</span> <span class="n">d</span><span class="o">)</span> <span class="o">(</span><span class="n">on_equiv</span> <span class="n">e</span><span class="o">))</span>
 
--- Our goal is an automagic proof of the following
-theorem group.transportable : transportable group := sorry
+<span class="c1">-- Our goal is an automagic proof of the following</span>
+<span class="kn">theorem</span> <span class="n">group</span><span class="bp">.</span><span class="n">transportable</span> <span class="o">:</span> <span class="n">transportable</span> <span class="n">group</span> <span class="o">:=</span> <span class="n">sorry</span>
 
--- These we might need to define and prove by hand
-def Const : Type u → Type v := λ α, punit
-def Fun : Type u → Type v → Type (max u v) := λ α β, α → β
-def Prod : Type u → Type v → Type (max u v) := λ α β, α × β
-def Swap : Type u → Type v → Type (max u v) := λ α β, β × α
+<span class="c1">-- These we might need to define and prove by hand</span>
+<span class="n">def</span> <span class="n">Const</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span> <span class="bp">→</span> <span class="kt">Type</span> <span class="n">v</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">α</span><span class="o">,</span> <span class="n">punit</span>
+<span class="n">def</span> <span class="n">Fun</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span> <span class="bp">→</span> <span class="kt">Type</span> <span class="n">v</span> <span class="bp">→</span> <span class="kt">Type</span> <span class="o">(</span><span class="n">max</span> <span class="n">u</span> <span class="n">v</span><span class="o">)</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">α</span> <span class="n">β</span><span class="o">,</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span>
+<span class="n">def</span> <span class="n">Prod</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span> <span class="bp">→</span> <span class="kt">Type</span> <span class="n">v</span> <span class="bp">→</span> <span class="kt">Type</span> <span class="o">(</span><span class="n">max</span> <span class="n">u</span> <span class="n">v</span><span class="o">)</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">α</span> <span class="n">β</span><span class="o">,</span> <span class="n">α</span> <span class="bp">×</span> <span class="n">β</span>
+<span class="n">def</span> <span class="n">Swap</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span> <span class="bp">→</span> <span class="kt">Type</span> <span class="n">v</span> <span class="bp">→</span> <span class="kt">Type</span> <span class="o">(</span><span class="n">max</span> <span class="n">u</span> <span class="n">v</span><span class="o">)</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">α</span> <span class="n">β</span><span class="o">,</span> <span class="n">β</span> <span class="bp">×</span> <span class="n">α</span>
 
-lemma Const.transportable (α : Type u) : (transportable Const) := sorry
-lemma Fun.transportable (α : Type u) : (transportable (Fun α)) := sorry
-lemma Prod.transportable (α : Type u) : (transportable (Prod α)) := sorry
-lemma Swap.transportable (α : Type u) : (transportable (Swap α)) := sorry
+<span class="kn">lemma</span> <span class="n">Const</span><span class="bp">.</span><span class="n">transportable</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">transportable</span> <span class="n">Const</span><span class="o">)</span> <span class="o">:=</span> <span class="n">sorry</span>
+<span class="kn">lemma</span> <span class="n">Fun</span><span class="bp">.</span><span class="n">transportable</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">transportable</span> <span class="o">(</span><span class="n">Fun</span> <span class="n">α</span><span class="o">))</span> <span class="o">:=</span> <span class="n">sorry</span>
+<span class="kn">lemma</span> <span class="n">Prod</span><span class="bp">.</span><span class="n">transportable</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">transportable</span> <span class="o">(</span><span class="n">Prod</span> <span class="n">α</span><span class="o">))</span> <span class="o">:=</span> <span class="n">sorry</span>
+<span class="kn">lemma</span> <span class="n">Swap</span><span class="bp">.</span><span class="n">transportable</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">transportable</span> <span class="o">(</span><span class="n">Swap</span> <span class="n">α</span><span class="o">))</span> <span class="o">:=</span> <span class="n">sorry</span>
 
 
--- And then we can define
-def Hom1 (α : Type u) : Type v → Type (max u v) := λ β, α → β
-def Hom2 (β : Type v) : Type u → Type (max u v) := λ α, α → β
-def Aut : Type u → Type u := λ α, α → α
+<span class="c1">-- And then we can define</span>
+<span class="n">def</span> <span class="n">Hom1</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span> <span class="bp">→</span> <span class="kt">Type</span> <span class="o">(</span><span class="n">max</span> <span class="n">u</span> <span class="n">v</span><span class="o">)</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">β</span><span class="o">,</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span>
+<span class="n">def</span> <span class="n">Hom2</span> <span class="o">(</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span> <span class="bp">→</span> <span class="kt">Type</span> <span class="o">(</span><span class="n">max</span> <span class="n">u</span> <span class="n">v</span><span class="o">)</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">α</span><span class="o">,</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span>
+<span class="n">def</span> <span class="n">Aut</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span> <span class="bp">→</span> <span class="kt">Type</span> <span class="n">u</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">α</span><span class="o">,</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">α</span>
 
--- And hopefully automagically derive
-lemma Hom1.transportable (α : Type u) : (transportable (Hom1 α)) := sorry
-lemma Hom2.transportable (β : Type v) : (transportable (Hom1 β)) := sorry
-lemma Aut.transportable (α : Type u) : (transportable Aut) := sorry
+<span class="c1">-- And hopefully automagically derive</span>
+<span class="kn">lemma</span> <span class="n">Hom1</span><span class="bp">.</span><span class="n">transportable</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">transportable</span> <span class="o">(</span><span class="n">Hom1</span> <span class="n">α</span><span class="o">))</span> <span class="o">:=</span> <span class="n">sorry</span>
+<span class="kn">lemma</span> <span class="n">Hom2</span><span class="bp">.</span><span class="n">transportable</span> <span class="o">(</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">transportable</span> <span class="o">(</span><span class="n">Hom1</span> <span class="n">β</span><span class="o">))</span> <span class="o">:=</span> <span class="n">sorry</span>
+<span class="kn">lemma</span> <span class="n">Aut</span><span class="bp">.</span><span class="n">transportable</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">transportable</span> <span class="n">Aut</span><span class="o">)</span> <span class="o">:=</span> <span class="n">sorry</span>
 
--- If we have all these in place...
--- A bit of magic might actually be able to derive `group.transportable` on line 11.
--- After all, a group just is a type plus some functions... and we can now transport functions.
-```
+<span class="c1">-- If we have all these in place...</span>
+<span class="c1">-- A bit of magic might actually be able to derive `group.transportable` on line 11.</span>
+<span class="c1">-- After all, a group just is a type plus some functions... and we can now transport functions.</span>
+</pre></div>
 
 #### [ Johan Commelin (Apr 27 2018 at 15:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125775387):
-Aah, and to prove the axioms for the transported functions, we need to be able to transport propositions
+<p>Aah, and to prove the axioms for the transported functions, we need to be able to transport propositions</p>
 
 #### [ Simon Hudon (Apr 27 2018 at 16:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125775647):
-Thanks! Transporting propositions shouldn't be too hard. I have a few ideas on how to do it
+<p>Thanks! Transporting propositions shouldn't be too hard. I have a few ideas on how to do it</p>
 
 #### [ Simon Hudon (Apr 27 2018 at 16:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125775719):
-With my recent popularity, maybe I should cash in on this new market: [IMG_8067.jpeg](/user_uploads/3121/boyZ4T9BeLmq-lWnSs0tiqdb/IMG_8067.jpeg)
+<p>With my recent popularity, maybe I should cash in on this new market: <a href="/user_uploads/3121/boyZ4T9BeLmq-lWnSs0tiqdb/IMG_8067.jpeg" target="_blank" title="IMG_8067.jpeg">IMG_8067.jpeg</a></p>
+<div class="message_inline_image"><a href="/user_uploads/3121/boyZ4T9BeLmq-lWnSs0tiqdb/IMG_8067.jpeg" target="_blank" title="IMG_8067.jpeg"><img src="/user_uploads/3121/boyZ4T9BeLmq-lWnSs0tiqdb/IMG_8067.jpeg"></a></div>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 17:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125779148):
-I have proved the fundamental theorem of `has_mul`
+<p>I have proved the fundamental theorem of <code>has_mul</code></p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 17:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125779150):
-What a great way to spend a day.
+<p>What a great way to spend a day.</p>
 
 #### [ Kenny Lau (Apr 27 2018 at 17:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125779199):
-what is that theorem?
+<p>what is that theorem?</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 17:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125779205):
-```lean
-universe zfc_u 
-variables {α β : Type zfc_u}
+<div class="codehilite"><pre><span></span><span class="kn">universe</span> <span class="n">zfc_u</span>
+<span class="kn">variables</span> <span class="o">{</span><span class="n">α</span> <span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">zfc_u</span><span class="o">}</span>
 
--- ideas around the concept of α being canonically isomorphic to β
+<span class="c1">-- ideas around the concept of α being canonically isomorphic to β</span>
 
-namespace zfc 
+<span class="kn">namespace</span> <span class="n">zfc</span>
 
--- mod of equiv so I can save typing
-structure equiv' (α : Type zfc_u) (β : Type zfc_u) :=
-(i    : α → β)
-(j    : β → α)
-(ij : ∀ (x : α), j (i x) = x)
-(ji  : ∀ (y : β), i (j y) = y)
+<span class="c1">-- mod of equiv so I can save typing</span>
+<span class="kn">structure</span> <span class="n">equiv&#39;</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">zfc_u</span><span class="o">)</span> <span class="o">(</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">zfc_u</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">i</span>    <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span>
+<span class="o">(</span><span class="n">j</span>    <span class="o">:</span> <span class="n">β</span> <span class="bp">→</span> <span class="n">α</span><span class="o">)</span>
+<span class="o">(</span><span class="n">ij</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">),</span> <span class="n">j</span> <span class="o">(</span><span class="n">i</span> <span class="n">x</span><span class="o">)</span> <span class="bp">=</span> <span class="n">x</span><span class="o">)</span>
+<span class="o">(</span><span class="n">ji</span>  <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">y</span> <span class="o">:</span> <span class="n">β</span><span class="o">),</span> <span class="n">i</span> <span class="o">(</span><span class="n">j</span> <span class="n">y</span><span class="o">)</span> <span class="bp">=</span> <span class="n">y</span><span class="o">)</span>
 
--- it's equiv to equiv, it is absolutely fundamental for the notion of canonical isomorphism, and I like
--- the notation better because it gets everywhere.
+<span class="c1">-- it&#39;s equiv to equiv, it is absolutely fundamental for the notion of canonical isomorphism, and I like</span>
+<span class="c1">-- the notation better because it gets everywhere.</span>
 
---#print has_mul
---@[class]
---structure has_mul : Type u → Type u
---fields:
---has_mul.mul : Π {α : Type u} [c : has_mul α], α → α → α
+<span class="c1">--#print has_mul</span>
+<span class="c1">--@[class]</span>
+<span class="c1">--structure has_mul : Type u → Type u</span>
+<span class="c1">--fields:</span>
+<span class="c1">--has_mul.mul : Π {α : Type u} [c : has_mul α], α → α → α</span>
 
--- Fundamental theorem of has_mul
+<span class="c1">-- Fundamental theorem of has_mul</span>
 
---#print prefix has_mul -- stuff
---set_option pp.notation false
-definition equiv_mul {α β : Type zfc_u} : equiv' α β → equiv' (has_mul α) (has_mul β) := λ E,
-{ i :=  λ αmul,⟨λ b1 b2, E.i (@has_mul.mul α αmul (E.j b1) (E.j b2))⟩,
-  j := λ βmul,⟨λ a1 a2, E.j (@has_mul.mul β βmul (E.i a1) (E.i a2))⟩, -- didn't I just write that?
-                                                                      -- should we introduce E-dual?
-  ij := λ f, begin 
-    cases f, -- aargh why do I struggle
-    suffices :  (λ (a1 a2 : α), E.j (E.i (f (E.j (E.i a1)) (E.j (E.i a2))))) = (λ a1 a2, f a1 a2),
-      by rw this,
-    funext,
-    simp [E.ij,E.ji], -- got there in the end
-  end,
-  ji := -- I can't even do this in term mode so I just copy out the entire tactic mode proof again.
- λ g, begin 
-    cases g, -- aargh why do I struggle
-    suffices :  (λ (b1 b2 : β), E.i (E.j (g (E.i (E.j b1)) (E.i (E.j b2))))) = (λ b1 b2, g b1 b2),
-      by rw this,
-    funext,
-    simp [E.ij,E.ji], -- got there in the end
-  end, -- didn't I just write that?
-}
-
-```
+<span class="c1">--#print prefix has_mul -- stuff</span>
+<span class="c1">--set_option pp.notation false</span>
+<span class="kn">definition</span> <span class="n">equiv_mul</span> <span class="o">{</span><span class="n">α</span> <span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">zfc_u</span><span class="o">}</span> <span class="o">:</span> <span class="n">equiv&#39;</span> <span class="n">α</span> <span class="n">β</span> <span class="bp">→</span> <span class="n">equiv&#39;</span> <span class="o">(</span><span class="n">has_mul</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">has_mul</span> <span class="n">β</span><span class="o">)</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">E</span><span class="o">,</span>
+<span class="o">{</span> <span class="n">i</span> <span class="o">:=</span>  <span class="bp">λ</span> <span class="n">αmul</span><span class="o">,</span><span class="bp">⟨λ</span> <span class="n">b1</span> <span class="n">b2</span><span class="o">,</span> <span class="n">E</span><span class="bp">.</span><span class="n">i</span> <span class="o">(</span><span class="bp">@</span><span class="n">has_mul</span><span class="bp">.</span><span class="n">mul</span> <span class="n">α</span> <span class="n">αmul</span> <span class="o">(</span><span class="n">E</span><span class="bp">.</span><span class="n">j</span> <span class="n">b1</span><span class="o">)</span> <span class="o">(</span><span class="n">E</span><span class="bp">.</span><span class="n">j</span> <span class="n">b2</span><span class="o">))</span><span class="bp">⟩</span><span class="o">,</span>
+  <span class="n">j</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">βmul</span><span class="o">,</span><span class="bp">⟨λ</span> <span class="n">a1</span> <span class="n">a2</span><span class="o">,</span> <span class="n">E</span><span class="bp">.</span><span class="n">j</span> <span class="o">(</span><span class="bp">@</span><span class="n">has_mul</span><span class="bp">.</span><span class="n">mul</span> <span class="n">β</span> <span class="n">βmul</span> <span class="o">(</span><span class="n">E</span><span class="bp">.</span><span class="n">i</span> <span class="n">a1</span><span class="o">)</span> <span class="o">(</span><span class="n">E</span><span class="bp">.</span><span class="n">i</span> <span class="n">a2</span><span class="o">))</span><span class="bp">⟩</span><span class="o">,</span> <span class="c1">-- didn&#39;t I just write that?</span>
+                                                                      <span class="c1">-- should we introduce E-dual?</span>
+  <span class="n">ij</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">f</span><span class="o">,</span> <span class="k">begin</span>
+    <span class="n">cases</span> <span class="n">f</span><span class="o">,</span> <span class="c1">-- aargh why do I struggle</span>
+    <span class="n">suffices</span> <span class="o">:</span>  <span class="o">(</span><span class="bp">λ</span> <span class="o">(</span><span class="n">a1</span> <span class="n">a2</span> <span class="o">:</span> <span class="n">α</span><span class="o">),</span> <span class="n">E</span><span class="bp">.</span><span class="n">j</span> <span class="o">(</span><span class="n">E</span><span class="bp">.</span><span class="n">i</span> <span class="o">(</span><span class="n">f</span> <span class="o">(</span><span class="n">E</span><span class="bp">.</span><span class="n">j</span> <span class="o">(</span><span class="n">E</span><span class="bp">.</span><span class="n">i</span> <span class="n">a1</span><span class="o">))</span> <span class="o">(</span><span class="n">E</span><span class="bp">.</span><span class="n">j</span> <span class="o">(</span><span class="n">E</span><span class="bp">.</span><span class="n">i</span> <span class="n">a2</span><span class="o">)))))</span> <span class="bp">=</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">a1</span> <span class="n">a2</span><span class="o">,</span> <span class="n">f</span> <span class="n">a1</span> <span class="n">a2</span><span class="o">),</span>
+      <span class="k">by</span> <span class="n">rw</span> <span class="n">this</span><span class="o">,</span>
+    <span class="n">funext</span><span class="o">,</span>
+    <span class="n">simp</span> <span class="o">[</span><span class="n">E</span><span class="bp">.</span><span class="n">ij</span><span class="o">,</span><span class="n">E</span><span class="bp">.</span><span class="n">ji</span><span class="o">],</span> <span class="c1">-- got there in the end</span>
+  <span class="kn">end</span><span class="o">,</span>
+  <span class="n">ji</span> <span class="o">:=</span> <span class="c1">-- I can&#39;t even do this in term mode so I just copy out the entire tactic mode proof again.</span>
+ <span class="bp">λ</span> <span class="n">g</span><span class="o">,</span> <span class="k">begin</span>
+    <span class="n">cases</span> <span class="n">g</span><span class="o">,</span> <span class="c1">-- aargh why do I struggle</span>
+    <span class="n">suffices</span> <span class="o">:</span>  <span class="o">(</span><span class="bp">λ</span> <span class="o">(</span><span class="n">b1</span> <span class="n">b2</span> <span class="o">:</span> <span class="n">β</span><span class="o">),</span> <span class="n">E</span><span class="bp">.</span><span class="n">i</span> <span class="o">(</span><span class="n">E</span><span class="bp">.</span><span class="n">j</span> <span class="o">(</span><span class="n">g</span> <span class="o">(</span><span class="n">E</span><span class="bp">.</span><span class="n">i</span> <span class="o">(</span><span class="n">E</span><span class="bp">.</span><span class="n">j</span> <span class="n">b1</span><span class="o">))</span> <span class="o">(</span><span class="n">E</span><span class="bp">.</span><span class="n">i</span> <span class="o">(</span><span class="n">E</span><span class="bp">.</span><span class="n">j</span> <span class="n">b2</span><span class="o">)))))</span> <span class="bp">=</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">b1</span> <span class="n">b2</span><span class="o">,</span> <span class="n">g</span> <span class="n">b1</span> <span class="n">b2</span><span class="o">),</span>
+      <span class="k">by</span> <span class="n">rw</span> <span class="n">this</span><span class="o">,</span>
+    <span class="n">funext</span><span class="o">,</span>
+    <span class="n">simp</span> <span class="o">[</span><span class="n">E</span><span class="bp">.</span><span class="n">ij</span><span class="o">,</span><span class="n">E</span><span class="bp">.</span><span class="n">ji</span><span class="o">],</span> <span class="c1">-- got there in the end</span>
+  <span class="kn">end</span><span class="o">,</span> <span class="c1">-- didn&#39;t I just write that?</span>
+<span class="o">}</span>
+</pre></div>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 17:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125779217):
-it is `equiv_mul`
+<p>it is <code>equiv_mul</code></p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 17:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125779219):
-but it would be happily renamed
+<p>but it would be happily renamed</p>
 
 #### [ Kenny Lau (Apr 27 2018 at 17:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125779251):
-that's quite interesting
+<p>that's quite interesting</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 17:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125779255):
-@**Simon Hudon** Can you see that I repeat every line of code twice?
+<p><span class="user-mention" data-user-id="110026">@Simon Hudon</span> Can you see that I repeat every line of code twice?</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 17:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125779259):
-I have this vague idea that this is not best practice
+<p>I have this vague idea that this is not best practice</p>
 
 #### [ Simon Hudon (Apr 27 2018 at 17:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125779350):
-No, you're right. I think this should and could be derived automatically.
+<p>No, you're right. I think this should and could be derived automatically.</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 17:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125779523):
-```quote
-Would it help to make everything isomorphic to a type a type class, and then prove things about the class of isomorphic types? Might be completely stupid.
-```
-I am just catching up with chat. I've been trying to work out some of these proofs by hand.
+<blockquote>
+<p>Would it help to make everything isomorphic to a type a type class, and then prove things about the class of isomorphic types? Might be completely stupid.</p>
+</blockquote>
+<p>I am just catching up with chat. I've been trying to work out some of these proofs by hand.</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 17:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125779529):
-That sounds like a really cool idea though
+<p>That sounds like a really cool idea though</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 17:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125779575):
-By the way -- the reason I did `has_mul` is that there is another type class which I am targetting.
+<p>By the way -- the reason I did <code>has_mul</code> is that there is another type class which I am targetting.</p>
 
 #### [ Kenny Lau (Apr 27 2018 at 17:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125779576):
-```quote
-```quote
-Would it help to make everything isomorphic to a type a type class, and then prove things about the class of isomorphic types? Might be completely stupid.
-```
-I am just catching up with chat. I've been trying to work out some of these proofs by hand.
-```
-it's called cardinal
+<blockquote>
+<blockquote>
+<p>Would it help to make everything isomorphic to a type a type class, and then prove things about the class of isomorphic types? Might be completely stupid.</p>
+</blockquote>
+<p>I am just catching up with chat. I've been trying to work out some of these proofs by hand.</p>
+</blockquote>
+<p>it's called cardinal</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 17:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125779586):
-:-)
+<p>:-)</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 17:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125779603):
-Is `cardinal` a far more useful object than I had realised?
+<p>Is <code>cardinal</code> a far more useful object than I had realised?</p>
 
 #### [ Kenny Lau (Apr 27 2018 at 17:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125779608):
-no
+<p>no</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 17:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125779610):
-:-)
+<p>:-)</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 17:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125779618):
-Kenny can you prove the fundamental theorem of ring?
+<p>Kenny can you prove the fundamental theorem of ring?</p>
 
 #### [ Kenny Lau (Apr 27 2018 at 17:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125779624):
-I can, but I won't
+<p>I can, but I won't</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 17:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125779628):
-how many lines would it take you
+<p>how many lines would it take you</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 17:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125779631):
-the fundamental theorem of ring is a trivial result
+<p>the fundamental theorem of ring is a trivial result</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 17:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125779653):
-I wanna build a tactic :-)
+<p>I wanna build a tactic :-)</p>
 
 #### [ Kenny Lau (Apr 27 2018 at 17:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125779672):
-a ring has many structures, you know
+<p>a ring has many structures, you know</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 17:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125779687):
-yeah and you solve them all with the same tactic
+<p>yeah and you solve them all with the same tactic</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 17:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125780187):
-rofl
+<p>rofl</p>
 
 #### [ Kenny Lau (Apr 27 2018 at 17:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125780189):
-```lean
-import data.equiv
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">equiv</span>
 
-def transport_ring {α β : Type*} [ring α] (f : α ≃ β) : ring β :=
-{ add := λ x y, f (f.symm x + f.symm y),
-  zero := f 0,
-  neg := λ x, f (-f.symm x),
-  mul := λ x y, f (f.symm x * f.symm y),
-  one := f 1,
-  add_assoc := λ x y z, by simp; from add_assoc _ _ _,
-  zero_add := λ x, by simp; from (equiv.apply_eq_iff_eq_inverse_apply _ _ _).2 (zero_add _),
-  add_zero := λ x, by simp; from (equiv.apply_eq_iff_eq_inverse_apply _ _ _).2 (add_zero _),
-  add_left_neg := λ x, by simp; from add_left_neg _,
-  add_comm := λ x y, by simp; from add_comm _ _,
-  mul_assoc := λ x y z, by simp; from mul_assoc _ _ _,
-  one_mul := λ x, by simp; from (equiv.apply_eq_iff_eq_inverse_apply _ _ _).2 (one_mul _),
-  mul_one := λ x, by simp; from (equiv.apply_eq_iff_eq_inverse_apply _ _ _).2 (mul_one _),
-  left_distrib := λ x y z, by simp; from left_distrib _ _ _,
-  right_distrib := λ x y z, by simp; from right_distrib _ _ _, }
-```
+<span class="n">def</span> <span class="n">transport_ring</span> <span class="o">{</span><span class="n">α</span> <span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">ring</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="err">≃</span> <span class="n">β</span><span class="o">)</span> <span class="o">:</span> <span class="n">ring</span> <span class="n">β</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">add</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">x</span> <span class="n">y</span><span class="o">,</span> <span class="n">f</span> <span class="o">(</span><span class="n">f</span><span class="bp">.</span><span class="n">symm</span> <span class="n">x</span> <span class="bp">+</span> <span class="n">f</span><span class="bp">.</span><span class="n">symm</span> <span class="n">y</span><span class="o">),</span>
+  <span class="n">zero</span> <span class="o">:=</span> <span class="n">f</span> <span class="mi">0</span><span class="o">,</span>
+  <span class="n">neg</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="n">f</span> <span class="o">(</span><span class="bp">-</span><span class="n">f</span><span class="bp">.</span><span class="n">symm</span> <span class="n">x</span><span class="o">),</span>
+  <span class="n">mul</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">x</span> <span class="n">y</span><span class="o">,</span> <span class="n">f</span> <span class="o">(</span><span class="n">f</span><span class="bp">.</span><span class="n">symm</span> <span class="n">x</span> <span class="bp">*</span> <span class="n">f</span><span class="bp">.</span><span class="n">symm</span> <span class="n">y</span><span class="o">),</span>
+  <span class="n">one</span> <span class="o">:=</span> <span class="n">f</span> <span class="mi">1</span><span class="o">,</span>
+  <span class="n">add_assoc</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">x</span> <span class="n">y</span> <span class="n">z</span><span class="o">,</span> <span class="k">by</span> <span class="n">simp</span><span class="bp">;</span> <span class="k">from</span> <span class="n">add_assoc</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">,</span>
+  <span class="n">zero_add</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="k">by</span> <span class="n">simp</span><span class="bp">;</span> <span class="k">from</span> <span class="o">(</span><span class="n">equiv</span><span class="bp">.</span><span class="n">apply_eq_iff_eq_inverse_apply</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">)</span><span class="bp">.</span><span class="mi">2</span> <span class="o">(</span><span class="n">zero_add</span> <span class="bp">_</span><span class="o">),</span>
+  <span class="n">add_zero</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="k">by</span> <span class="n">simp</span><span class="bp">;</span> <span class="k">from</span> <span class="o">(</span><span class="n">equiv</span><span class="bp">.</span><span class="n">apply_eq_iff_eq_inverse_apply</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">)</span><span class="bp">.</span><span class="mi">2</span> <span class="o">(</span><span class="n">add_zero</span> <span class="bp">_</span><span class="o">),</span>
+  <span class="n">add_left_neg</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="k">by</span> <span class="n">simp</span><span class="bp">;</span> <span class="k">from</span> <span class="n">add_left_neg</span> <span class="bp">_</span><span class="o">,</span>
+  <span class="n">add_comm</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">x</span> <span class="n">y</span><span class="o">,</span> <span class="k">by</span> <span class="n">simp</span><span class="bp">;</span> <span class="k">from</span> <span class="n">add_comm</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">,</span>
+  <span class="n">mul_assoc</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">x</span> <span class="n">y</span> <span class="n">z</span><span class="o">,</span> <span class="k">by</span> <span class="n">simp</span><span class="bp">;</span> <span class="k">from</span> <span class="n">mul_assoc</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">,</span>
+  <span class="n">one_mul</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="k">by</span> <span class="n">simp</span><span class="bp">;</span> <span class="k">from</span> <span class="o">(</span><span class="n">equiv</span><span class="bp">.</span><span class="n">apply_eq_iff_eq_inverse_apply</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">)</span><span class="bp">.</span><span class="mi">2</span> <span class="o">(</span><span class="n">one_mul</span> <span class="bp">_</span><span class="o">),</span>
+  <span class="n">mul_one</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="k">by</span> <span class="n">simp</span><span class="bp">;</span> <span class="k">from</span> <span class="o">(</span><span class="n">equiv</span><span class="bp">.</span><span class="n">apply_eq_iff_eq_inverse_apply</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">)</span><span class="bp">.</span><span class="mi">2</span> <span class="o">(</span><span class="n">mul_one</span> <span class="bp">_</span><span class="o">),</span>
+  <span class="n">left_distrib</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">x</span> <span class="n">y</span> <span class="n">z</span><span class="o">,</span> <span class="k">by</span> <span class="n">simp</span><span class="bp">;</span> <span class="k">from</span> <span class="n">left_distrib</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">,</span>
+  <span class="n">right_distrib</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">x</span> <span class="n">y</span> <span class="n">z</span><span class="o">,</span> <span class="k">by</span> <span class="n">simp</span><span class="bp">;</span> <span class="k">from</span> <span class="n">right_distrib</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">,</span> <span class="o">}</span>
+</pre></div>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 17:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125780193):
-I have proved the fundamental theorem of mul
+<p>I have proved the fundamental theorem of mul</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 17:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125780198):
-and now I have to prove the fundamental theorem of add
+<p>and now I have to prove the fundamental theorem of add</p>
 
 #### [ Kenny Lau (Apr 27 2018 at 17:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125780201):
-why would I do that
+<p>why would I do that</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 17:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125780202):
-but add is canonically isomorphic to mul
+<p>but add is canonically isomorphic to mul</p>
 
 #### [ Kenny Lau (Apr 27 2018 at 17:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125780203):
-I just said I won't
+<p>I just said I won't</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 17:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125780204):
-I am doing it
+<p>I am doing it</p>
 
 #### [ Kenny Lau (Apr 27 2018 at 17:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125780209):
-done 10 mins
+<p>done 10 mins</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 17:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125780212):
-I just do a regular expression substitution
+<p>I just do a regular expression substitution</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 17:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125780213):
-and I have the fundamental theorem of add
+<p>and I have the fundamental theorem of add</p>
 
 #### [ Kenny Lau (Apr 27 2018 at 17:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125780215):
-you win
+<p>you win</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 17:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125780217):
-but I would rather have a tactic
+<p>but I would rather have a tactic</p>
 
 #### [ Kenny Lau (Apr 27 2018 at 17:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125780310):
-```lean
-import data.equiv
-def why_would_one {α} : has_add α ≃ has_mul α :=
-{ to_fun := λ ⟨f⟩, ⟨f⟩,
-  inv_fun := λ ⟨f⟩, ⟨f⟩,
-  left_inv := λ ⟨f⟩, rfl,
-  right_inv := λ ⟨f⟩, rfl }
-```
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">equiv</span>
+<span class="n">def</span> <span class="n">why_would_one</span> <span class="o">{</span><span class="n">α</span><span class="o">}</span> <span class="o">:</span> <span class="n">has_add</span> <span class="n">α</span> <span class="err">≃</span> <span class="n">has_mul</span> <span class="n">α</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">to_fun</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="bp">⟨</span><span class="n">f</span><span class="bp">⟩</span><span class="o">,</span> <span class="bp">⟨</span><span class="n">f</span><span class="bp">⟩</span><span class="o">,</span>
+  <span class="n">inv_fun</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="bp">⟨</span><span class="n">f</span><span class="bp">⟩</span><span class="o">,</span> <span class="bp">⟨</span><span class="n">f</span><span class="bp">⟩</span><span class="o">,</span>
+  <span class="n">left_inv</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="bp">⟨</span><span class="n">f</span><span class="bp">⟩</span><span class="o">,</span> <span class="n">rfl</span><span class="o">,</span>
+  <span class="n">right_inv</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="bp">⟨</span><span class="n">f</span><span class="bp">⟩</span><span class="o">,</span> <span class="n">rfl</span> <span class="o">}</span>
+</pre></div>
 
 #### [ Patrick Massot (Apr 27 2018 at 17:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125780411):
-It reminds me of the situation with https://github.com/PatrickMassot/lean-differential-topology/commit/f47348abf8515e23bd485683d8b351c7fd89c70f#diff-bbdfb4d2f4b405102cb35c772afdd2cc which was automated into https://github.com/leanprover/mathlib/blob/master/algebra/pi_instances.lean#L56
+<p>It reminds me of the situation with <a href="https://github.com/PatrickMassot/lean-differential-topology/commit/f47348abf8515e23bd485683d8b351c7fd89c70f#diff-bbdfb4d2f4b405102cb35c772afdd2cc" target="_blank" title="https://github.com/PatrickMassot/lean-differential-topology/commit/f47348abf8515e23bd485683d8b351c7fd89c70f#diff-bbdfb4d2f4b405102cb35c772afdd2cc">https://github.com/PatrickMassot/lean-differential-topology/commit/f47348abf8515e23bd485683d8b351c7fd89c70f#diff-bbdfb4d2f4b405102cb35c772afdd2cc</a> which was automated into <a href="https://github.com/leanprover/mathlib/blob/master/algebra/pi_instances.lean#L56" target="_blank" title="https://github.com/leanprover/mathlib/blob/master/algebra/pi_instances.lean#L56">https://github.com/leanprover/mathlib/blob/master/algebra/pi_instances.lean#L56</a></p>
 
 #### [ Patrick Massot (Apr 27 2018 at 17:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125780413):
-So I'm pretty optimistic there will be a tactic
+<p>So I'm pretty optimistic there will be a tactic</p>
 
 #### [ Patrick Massot (Apr 27 2018 at 17:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125780457):
-What would be even better would be Simon getting tired of writing our tactics and writing tactic writing tutorials instead
+<p>What would be even better would be Simon getting tired of writing our tactics and writing tactic writing tutorials instead</p>
 
 #### [ Kenny Lau (Apr 27 2018 at 17:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125780460):
-aha
+<p>aha</p>
 
 #### [ Kenny Lau (Apr 27 2018 at 17:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125780466):
-Give a man a fish, and you feed him for a day; show him how to catch fish, and you feed him for a lifetime.
+<p>Give a man a fish, and you feed him for a day; show him how to catch fish, and you feed him for a lifetime.</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 17:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125780685):
-I made an instance
+<p>I made an instance</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 17:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125780692):
-```lean
-definition mul_is_add {α : Type zfc_u} : equiv' (has_mul α) (has_add α) :=
-{ i := λ ⟨mul⟩,⟨mul⟩,
-  j := λ ⟨mul⟩,⟨mul⟩,
-  ij := λ ⟨x⟩,begin -- *sigh*
-    constructor,
-  end ,
-  ji := λ ⟨z⟩, by constructor
-}
-
-```
+<div class="codehilite"><pre><span></span><span class="kn">definition</span> <span class="n">mul_is_add</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">zfc_u</span><span class="o">}</span> <span class="o">:</span> <span class="n">equiv&#39;</span> <span class="o">(</span><span class="n">has_mul</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">has_add</span> <span class="n">α</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">i</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="bp">⟨</span><span class="n">mul</span><span class="bp">⟩</span><span class="o">,</span><span class="bp">⟨</span><span class="n">mul</span><span class="bp">⟩</span><span class="o">,</span>
+  <span class="n">j</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="bp">⟨</span><span class="n">mul</span><span class="bp">⟩</span><span class="o">,</span><span class="bp">⟨</span><span class="n">mul</span><span class="bp">⟩</span><span class="o">,</span>
+  <span class="n">ij</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="bp">⟨</span><span class="n">x</span><span class="bp">⟩</span><span class="o">,</span><span class="k">begin</span> <span class="c1">-- *sigh*</span>
+    <span class="n">constructor</span><span class="o">,</span>
+  <span class="kn">end</span> <span class="o">,</span>
+  <span class="n">ji</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="bp">⟨</span><span class="n">z</span><span class="bp">⟩</span><span class="o">,</span> <span class="k">by</span> <span class="n">constructor</span>
+<span class="o">}</span>
+</pre></div>
 
 #### [ Kenny Lau (Apr 27 2018 at 17:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125780697):
-but that's what I just did
+<p>but that's what I just did</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 17:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125780700):
-I am behind
+<p>I am behind</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 18:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125780739):
-I am working it all out myself
+<p>I am working it all out myself</p>
 
 #### [ Kenny Lau (Apr 27 2018 at 18:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125780745):
-nice
+<p>nice</p>
 
 #### [ Sean Leather (Apr 27 2018 at 18:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125780753):
-```quote
-Give a man a fish, and you feed him for a day; show him how to catch fish, and you feed him for a lifetime.
-```
-Unless there is no body of water nearby...
+<blockquote>
+<p>Give a man a fish, and you feed him for a day; show him how to catch fish, and you feed him for a lifetime.</p>
+</blockquote>
+<p>Unless there is no body of water nearby...</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 18:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125780788):
-OK Kenny, well done on ring. My next challenge for you is `topological_field`
+<p>OK Kenny, well done on ring. My next challenge for you is <code>topological_field</code></p>
 
 #### [ Kenny Lau (Apr 27 2018 at 18:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125780794):
-nope.
+<p>nope.</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 18:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125780796):
-and it's a challenge to Simon as well
+<p>and it's a challenge to Simon as well</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 18:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125780910):
-```lean
-import data.equiv
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">equiv</span>
 
-def transport_ring {α β : Type} [topological_field α] (f : α ≃ β) : topological_field β := sorry
-```
+<span class="n">def</span> <span class="n">transport_ring</span> <span class="o">{</span><span class="n">α</span> <span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">[</span><span class="n">topological_field</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="err">≃</span> <span class="n">β</span><span class="o">)</span> <span class="o">:</span> <span class="n">topological_field</span> <span class="n">β</span> <span class="o">:=</span> <span class="n">sorry</span>
+</pre></div>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 18:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125780912):
-Who will win out of man and machine
+<p>Who will win out of man and machine</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 18:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125780962):
-and I am sitting here in ZFC and remarking that it is trivial
+<p>and I am sitting here in ZFC and remarking that it is trivial</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 18:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125781022):
-Aah Kenny I just saw your has_mul
+<p>Aah Kenny I just saw your has_mul</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 18:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125781063):
-well I proved the fundamental theorem of has_mul before
+<p>well I proved the fundamental theorem of has_mul before</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 18:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125781069):
-so can you now deduce the fundamental theorem of has_add?
+<p>so can you now deduce the fundamental theorem of has_add?</p>
 
 #### [ Andrew Ashworth (Apr 27 2018 at 18:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125781632):
-did you take a look at the `transfer` paper I linked way back? That's how in core lean they move proofs between `int` and `(a , b) : nat * nat`, which (and maybe I'm not understanding the details here very well) is your problem of transporting proofs between isomorphic types?
+<p>did you take a look at the <code>transfer</code> paper I linked way back? That's how in core lean they move proofs between <code>int</code> and <code>(a , b) : nat * nat</code>, which (and maybe I'm not understanding the details here very well) is your problem of transporting proofs between isomorphic types?</p>
 
 #### [ Andrew Ashworth (Apr 27 2018 at 18:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125781815):
-also as far as I can tell from my (limited) experience with hott; isomorphisms are just as hard to deal with as they are in dtt, there's no magic sauce rewriting. you can try reading https://github.com/cmu-phil/Spectral, which is a lean repository about the Serre spectral sequence
+<p>also as far as I can tell from my (limited) experience with hott; isomorphisms are just as hard to deal with as they are in dtt, there's no magic sauce rewriting. you can try reading <a href="https://github.com/cmu-phil/Spectral" target="_blank" title="https://github.com/cmu-phil/Spectral">https://github.com/cmu-phil/Spectral</a>, which is a lean repository about the Serre spectral sequence</p>
 
 #### [ Andrew Ashworth (Apr 27 2018 at 18:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125781820):
-I have no idea what a spectral sequence might be, but you can see that dealing with isomorphisms is no easier from reading the source code...
+<p>I have no idea what a spectral sequence might be, but you can see that dealing with isomorphisms is no easier from reading the source code...</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 18:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125781905):
-Kenny I thought of a much easier challenge for you
+<p>Kenny I thought of a much easier challenge for you</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 18:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125781906):
-https://github.com/kbuzzard/xena/tree/master/canonical_isomorphism
+<p><a href="https://github.com/kbuzzard/xena/tree/master/canonical_isomorphism" target="_blank" title="https://github.com/kbuzzard/xena/tree/master/canonical_isomorphism">https://github.com/kbuzzard/xena/tree/master/canonical_isomorphism</a></p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 18:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125781909):
-much less boring than topological fields
+<p>much less boring than topological fields</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 18:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125781965):
-can you define `mul_to_add` at the bottom?
+<p>can you define <code>mul_to_add</code> at the bottom?</p>
 
 #### [ Mario Carneiro (Apr 27 2018 at 18:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125781997):
-The `over_optimistic` theorem is a weak form of univalence. To see how they are related, just plug in `eq A` for the function `F`; then `A = A` is equiv to `A = B` and hence the latter is also inhabited. It is currently an open question whether this theorem is consistent with lean, but I believe it to be. (It is inconsistent with VM evaluation though.)
-
-The second part of this conversation has developed a plan for showing that even if you can't prove that all functions are functorial, you might be able to show that all definable functions are functorial by working in the metatheory (i.e. giving a tactic that produces the required term). It is not contradictory that it might be possible that all lean definable terms are functorial in an appropriate sense even if you can't prove it for *all* terms, as the internal theory understands the quantifier. So this is not a "proof or counterexample" kind of question.
-
-This topic is usually known in the type theory literature as "parametricity", and it is on my todo list for my paper.
+<p>The <code>over_optimistic</code> theorem is a weak form of univalence. To see how they are related, just plug in <code>eq A</code> for the function <code>F</code>; then <code>A = A</code> is equiv to <code>A = B</code> and hence the latter is also inhabited. It is currently an open question whether this theorem is consistent with lean, but I believe it to be. (It is inconsistent with VM evaluation though.)</p>
+<p>The second part of this conversation has developed a plan for showing that even if you can't prove that all functions are functorial, you might be able to show that all definable functions are functorial by working in the metatheory (i.e. giving a tactic that produces the required term). It is not contradictory that it might be possible that all lean definable terms are functorial in an appropriate sense even if you can't prove it for <em>all</em> terms, as the internal theory understands the quantifier. So this is not a "proof or counterexample" kind of question.</p>
+<p>This topic is usually known in the type theory literature as "parametricity", and it is on my todo list for my paper.</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 18:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125782104):
-`definition mul_to_add {α β : Type} : equiv' α β → equiv' (has_add α) (has_add β) := sorry`
+<p><code>definition mul_to_add {α β : Type} : equiv' α β → equiv' (has_add α) (has_add β) := sorry</code></p>
 
 #### [ Johan Commelin (Apr 27 2018 at 18:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125782105):
-Right, so we are kind of proposing a pragmatic approach to HoTT and univalence
+<p>Right, so we are kind of proposing a pragmatic approach to HoTT and univalence</p>
 
 #### [ Johan Commelin (Apr 27 2018 at 18:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125782114):
-Kevin, did you see Scott's proposal for a class + decorators?
+<p>Kevin, did you see Scott's proposal for a class + decorators?</p>
 
 #### [ Johan Commelin (Apr 27 2018 at 18:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125782122):
-I think you won't need to prove any of these "fundamental theorems" anymore, once we get that implemented
+<p>I think you won't need to prove any of these "fundamental theorems" anymore, once we get that implemented</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 18:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125782181):
-So in layman's terms, when can I expect a three-line proof of `exact_sequence A B C -> exact_sequence A' B' C'` which is just three rewrites?
+<p>So in layman's terms, when can I expect a three-line proof of <code>exact_sequence A B C -&gt; exact_sequence A' B' C'</code> which is just three rewrites?</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 18:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125782183):
-I would be very happy to work on such a thing
+<p>I would be very happy to work on such a thing</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 18:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125782184):
-because I really want it :-)
+<p>because I really want it :-)</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 18:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125782188):
-Can I incorporate Scott's proposal into my proofs somehow?
+<p>Can I incorporate Scott's proposal into my proofs somehow?</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 18:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125782195):
-Or is Scott's code purely for someone who is writing a tactic?
+<p>Or is Scott's code purely for someone who is writing a tactic?</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 18:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125782232):
-I just find these quite fun and satisfying to do by hand, and I feel like if I try to get really good at them
+<p>I just find these quite fun and satisfying to do by hand, and I feel like if I try to get really good at them</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 18:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125782238):
-then I might understand better how to write a tactic which is doing some of the job for me
+<p>then I might understand better how to write a tactic which is doing some of the job for me</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 18:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125782248):
-I would be very happy if anyone wanted to comment on https://github.com/kbuzzard/xena/blob/master/canonical_isomorphism/canonically_isomorphic.lean
+<p>I would be very happy if anyone wanted to comment on <a href="https://github.com/kbuzzard/xena/blob/master/canonical_isomorphism/canonically_isomorphic.lean" target="_blank" title="https://github.com/kbuzzard/xena/blob/master/canonical_isomorphism/canonically_isomorphic.lean">https://github.com/kbuzzard/xena/blob/master/canonical_isomorphism/canonically_isomorphic.lean</a></p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 18:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125782252):
-I would really like to get some canonical proofs.
+<p>I would really like to get some canonical proofs.</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 18:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125782255):
-Kenny can you beat any of mine?
+<p>Kenny can you beat any of mine?</p>
 
 #### [ Johan Commelin (Apr 27 2018 at 18:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125782394):
-@**Kevin Buzzard** No, we can't use Scott's proposal yet. The idea is that someone proves inductively the *universal* fundamental theorem for structures (or probably: inductive types). And then we only need to prove the fundamental theorem for some basic types and we will get all the others for free.
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> No, we can't use Scott's proposal yet. The idea is that someone proves inductively the <em>universal</em> fundamental theorem for structures (or probably: inductive types). And then we only need to prove the fundamental theorem for some basic types and we will get all the others for free.</p>
 
 #### [ Johan Commelin (Apr 27 2018 at 18:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125782443):
-And it seems like Simon thought this was interesting, and might try to implement it pretty soon.
+<p>And it seems like Simon thought this was interesting, and might try to implement it pretty soon.</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 18:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125782446):
-Can you formalise what you think the universal fundamental theorem is?
+<p>Can you formalise what you think the universal fundamental theorem is?</p>
 
 #### [ Johan Commelin (Apr 27 2018 at 18:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125782448):
-Hmm, I don't know enough lean yet.
+<p>Hmm, I don't know enough lean yet.</p>
 
 #### [ Johan Commelin (Apr 27 2018 at 18:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125782453):
-Actually, no.
+<p>Actually, no.</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 18:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125782457):
-Can @**Scott Morrison** or @**Mario Carneiro** ?
+<p>Can <span class="user-mention" data-user-id="110524">@Scott Morrison</span> or <span class="user-mention" data-user-id="110049">@Mario Carneiro</span> ?</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 18:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125782461):
-Is there some kind of conjecture we can make?
+<p>Is there some kind of conjecture we can make?</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 18:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125782462):
-and give a constructive proof?
+<p>and give a constructive proof?</p>
 
 #### [ Johan Commelin (Apr 27 2018 at 18:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125782464):
-@**Kevin Buzzard** The idea is that we "tag" every structure for which we want to prove it. And then actually Lean does it itself.
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> The idea is that we "tag" every structure for which we want to prove it. And then actually Lean does it itself.</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 18:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125782466):
-so like the type class inference machinery?
+<p>so like the type class inference machinery?</p>
 
 #### [ Johan Commelin (Apr 27 2018 at 18:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125782467):
-This is what the `@[derive transportable]` should do
+<p>This is what the <code>@[derive transportable]</code> should do</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 18:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125782510):
-so can one formulate some theorem which should be true for every...something...which is tagged with this tag?
+<p>so can one formulate some theorem which should be true for every...something...which is tagged with this tag?</p>
 
 #### [ Johan Commelin (Apr 27 2018 at 18:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125782511):
-Lean will see that you are defining some `structure` and for all its fields it already knows that they are transportable. And thus it proves a theorem for the new structure as well.
+<p>Lean will see that you are defining some <code>structure</code> and for all its fields it already knows that they are transportable. And thus it proves a theorem for the new structure as well.</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 18:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125782512):
-In Lean, I mean?
+<p>In Lean, I mean?</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 18:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125782514):
-What will the theorem be?
+<p>What will the theorem be?</p>
 
 #### [ Johan Commelin (Apr 27 2018 at 18:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125782516):
-Yes. That theorem is your `over_optimistic`
+<p>Yes. That theorem is your <code>over_optimistic</code></p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 18:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125782521):
-I see.
+<p>I see.</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 18:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125782526):
-And we should be able to prove it for all F tagged with some tag
+<p>And we should be able to prove it for all F tagged with some tag</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 18:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125782527):
-...automatically?
+<p>...automatically?</p>
 
 #### [ Johan Commelin (Apr 27 2018 at 18:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125782528):
-Well, not *we* but even Lean
+<p>Well, not <em>we</em> but even Lean</p>
 
 #### [ Johan Commelin (Apr 27 2018 at 18:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125782529):
-After we taught it the ultimate basics.
+<p>After we taught it the ultimate basics.</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 18:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125782530):
-and this would be...a tactic?
+<p>and this would be...a tactic?</p>
 
 #### [ Johan Commelin (Apr 27 2018 at 18:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125782572):
-@**Kevin Buzzard** Again, I'm not a meta-expert. But basically, it will be an automatically applied tactic.
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> Again, I'm not a meta-expert. But basically, it will be an automatically applied tactic.</p>
 
 #### [ Johan Commelin (Apr 27 2018 at 18:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125782573):
-This is what `derive` seems to do...
+<p>This is what <code>derive</code> seems to do...</p>
 
 #### [ Johan Commelin (Apr 27 2018 at 18:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125782580):
-But, I now I'm in waters that I don't really know
+<p>But, I now I'm in waters that I don't really know</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 18:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125782587):
-I have been fretting over what canonical isomorphism means for many years now
+<p>I have been fretting over what canonical isomorphism means for many years now</p>
 
 #### [ Johan Commelin (Apr 27 2018 at 18:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125782596):
-See also my snippet:
-https://leanprover.zulipchat.com/#narrow/stream/113488-general/subject/.22canonically.22.20identifying.20two.20types/near/125775365
+<p>See also my snippet:<br>
+<a href="#narrow/stream/113488-general/subject/.22canonically.22.20identifying.20two.20types/near/125775365" title="#narrow/stream/113488-general/subject/.22canonically.22.20identifying.20two.20types/near/125775365">https://leanprover.zulipchat.com/#narrow/stream/113488-general/subject/.22canonically.22.20identifying.20two.20types/near/125775365</a></p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 18:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125782646):
-https://mathoverflow.net/a/19663
+<p><a href="https://mathoverflow.net/a/19663" target="_blank" title="https://mathoverflow.net/a/19663">https://mathoverflow.net/a/19663</a></p>
 
 #### [ Kenny Lau (Apr 27 2018 at 18:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125782704):
-```quote
-Kenny can you beat any of mine?
-```
-https://github.com/kckennylau/Lean/blob/master/canonically_isomorphic.lean
+<blockquote>
+<p>Kenny can you beat any of mine?</p>
+</blockquote>
+<p><a href="https://github.com/kckennylau/Lean/blob/master/canonically_isomorphic.lean" target="_blank" title="https://github.com/kckennylau/Lean/blob/master/canonically_isomorphic.lean">https://github.com/kckennylau/Lean/blob/master/canonically_isomorphic.lean</a></p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 18:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125782724):
-So is this `transportable` class some completely well-known and well-studied class in type theory?
+<p>So is this <code>transportable</code> class some completely well-known and well-studied class in type theory?</p>
 
 #### [ Johan Commelin (Apr 27 2018 at 18:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125782965):
-I think at least in *homotopy* type theory
+<p>I think at least in <em>homotopy</em> type theory</p>
 
 #### [ Johan Commelin (Apr 27 2018 at 19:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125783111):
-I like your MO answer
+<p>I like your MO answer</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 19:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125783470):
-How do I reduce this goal
+<p>How do I reduce this goal</p>
+<div class="codehilite"><pre><span></span><span class="err">⊢</span> <span class="o">{</span><span class="n">to_fun</span> <span class="o">:=</span> <span class="n">A1</span><span class="o">,</span>
+     <span class="n">inv_fun</span> <span class="o">:=</span> <span class="n">A2</span><span class="o">,</span>
+     <span class="n">left_inv</span> <span class="o">:=</span> <span class="mi">3</span><span class="o">,</span>
+     <span class="n">right_inv</span> <span class="o">:=</span> <span class="n">A4</span><span class="o">}</span> <span class="bp">=</span>
+    <span class="o">{</span><span class="n">to_fun</span> <span class="o">:=</span> <span class="n">B1</span><span class="o">,</span> <span class="n">inv_fun</span> <span class="o">:=</span> <span class="n">B2</span><span class="o">,</span> <span class="n">left_inv</span> <span class="o">:=</span> <span class="n">B3</span><span class="o">,</span> <span class="n">right_inv</span> <span class="o">:=</span> <span class="n">B4</span><span class="o">}</span>
+</pre></div>
 
-```lean
-⊢ {to_fun := A1,
-     inv_fun := A2,
-     left_inv := 3,
-     right_inv := A4} =
-    {to_fun := B1, inv_fun := B2, left_inv := B3, right_inv := B4}
-```
-into the four goals `A1=B1`, `A2=B2` etc?
+
+<p>into the four goals <code>A1=B1</code>, <code>A2=B2</code> etc?</p>
 
 #### [ Kenny Lau (Apr 27 2018 at 19:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125783473):
-`congr`
+<p><code>congr</code></p>
 
 #### [ Patrick Massot (Apr 27 2018 at 19:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125783548):
-```quote
-So in layman's terms, when can I expect a three-line proof of `exact_sequence A B C -> exact_sequence A' B' C'` which is just three rewrites?
-```
-What I'm going to write is not what you are hoping for, and unrelated to the big dreams of general transport of structures
+<blockquote>
+<p>So in layman's terms, when can I expect a three-line proof of <code>exact_sequence A B C -&gt; exact_sequence A' B' C'</code> which is just three rewrites?</p>
+</blockquote>
+<p>What I'm going to write is not what you are hoping for, and unrelated to the big dreams of general transport of structures</p>
 
 #### [ Patrick Massot (Apr 27 2018 at 19:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125783550):
-But I still think it's useful
+<p>But I still think it's useful</p>
 
 #### [ Patrick Massot (Apr 27 2018 at 19:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125783589):
-I spend most of my Lean time being frustrated by obvious statements, and then see Mario prove them
+<p>I spend most of my Lean time being frustrated by obvious statements, and then see Mario prove them</p>
 
 #### [ Kenny Lau (Apr 27 2018 at 19:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125783597):
-```quote
-How do I reduce this goal
+<blockquote>
+<p>How do I reduce this goal</p>
+<div class="codehilite"><pre><span></span><span class="err">⊢</span> <span class="o">{</span><span class="n">to_fun</span> <span class="o">:=</span> <span class="n">A1</span><span class="o">,</span>
+     <span class="n">inv_fun</span> <span class="o">:=</span> <span class="n">A2</span><span class="o">,</span>
+     <span class="n">left_inv</span> <span class="o">:=</span> <span class="mi">3</span><span class="o">,</span>
+     <span class="n">right_inv</span> <span class="o">:=</span> <span class="n">A4</span><span class="o">}</span> <span class="bp">=</span>
+    <span class="o">{</span><span class="n">to_fun</span> <span class="o">:=</span> <span class="n">B1</span><span class="o">,</span> <span class="n">inv_fun</span> <span class="o">:=</span> <span class="n">B2</span><span class="o">,</span> <span class="n">left_inv</span> <span class="o">:=</span> <span class="n">B3</span><span class="o">,</span> <span class="n">right_inv</span> <span class="o">:=</span> <span class="n">B4</span><span class="o">}</span>
+</pre></div>
 
-```lean
-⊢ {to_fun := A1,
-     inv_fun := A2,
-     left_inv := 3,
-     right_inv := A4} =
-    {to_fun := B1, inv_fun := B2, left_inv := B3, right_inv := B4}
-```
-into the four goals `A1=B1`, `A2=B2` etc?
-```
-oh and that should be part of your interface
+
+<p>into the four goals <code>A1=B1</code>, <code>A2=B2</code> etc?</p>
+</blockquote>
+<p>oh and that should be part of your interface</p>
 
 #### [ Patrick Massot (Apr 27 2018 at 19:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125783603):
-In my experience, what happens is my mind refuses to decompose the statement and/or think about the proper setup
+<p>In my experience, what happens is my mind refuses to decompose the statement and/or think about the proper setup</p>
 
 #### [ Patrick Massot (Apr 27 2018 at 19:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125783609):
-Then Mario decomposes the problem into three or four lemmas and each of them is a one-liner
+<p>Then Mario decomposes the problem into three or four lemmas and each of them is a one-liner</p>
 
 #### [ Patrick Massot (Apr 27 2018 at 19:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125783626):
-So let me try a decomposition in your case
+<p>So let me try a decomposition in your case</p>
 
 #### [ Patrick Massot (Apr 27 2018 at 19:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125783679):
-I would define sequences of rings and maps between them (assuming we don't have an abelian categories lib right now).
+<p>I would define sequences of rings and maps between them (assuming we don't have an abelian categories lib right now).</p>
 
 #### [ Patrick Massot (Apr 27 2018 at 19:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125783698):
-And the corresponding maps, ie sequences of maps with all squares commuting
+<p>And the corresponding maps, ie sequences of maps with all squares commuting</p>
 
 #### [ Patrick Massot (Apr 27 2018 at 19:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125783713):
-Then define complexes as sequences where two consecutive maps compose to zero
+<p>Then define complexes as sequences where two consecutive maps compose to zero</p>
 
 #### [ Patrick Massot (Apr 27 2018 at 19:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125783772):
-prove isomorphic sequences have conjugated maps
+<p>prove isomorphic sequences have conjugated maps</p>
 
 #### [ Patrick Massot (Apr 27 2018 at 19:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125783774):
-deduce a sequence isomorphic to a complex is a complex
+<p>deduce a sequence isomorphic to a complex is a complex</p>
 
 #### [ Patrick Massot (Apr 27 2018 at 19:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125783775):
-define homology of complexes
+<p>define homology of complexes</p>
 
 #### [ Patrick Massot (Apr 27 2018 at 19:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125783782):
-define exact sequences as acyclic complexes
+<p>define exact sequences as acyclic complexes</p>
 
 #### [ Patrick Massot (Apr 27 2018 at 19:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125783788):
-prove isomorphic complexes have isomorphic homology
+<p>prove isomorphic complexes have isomorphic homology</p>
 
 #### [ Patrick Massot (Apr 27 2018 at 19:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125783798):
-deduce your lemma (and the version with n rings instead of only 3)
+<p>deduce your lemma (and the version with n rings instead of only 3)</p>
 
 #### [ Patrick Massot (Apr 27 2018 at 19:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125783804):
-I'm not saying the total number of lines will be 3
+<p>I'm not saying the total number of lines will be 3</p>
 
 #### [ Patrick Massot (Apr 27 2018 at 19:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125783846):
-But all those definitions and lemmas will be needed very soon anyway
+<p>But all those definitions and lemmas will be needed very soon anyway</p>
 
 #### [ Patrick Massot (Apr 27 2018 at 19:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125783853):
-(with more definitions of course, especially homotopy equivalences and quasi-iso)
+<p>(with more definitions of course, especially homotopy equivalences and quasi-iso)</p>
 
 #### [ Patrick Massot (Apr 27 2018 at 19:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125783920):
-You also want a lemma relating my definition of exact sequence to the direct one
+<p>You also want a lemma relating my definition of exact sequence to the direct one</p>
 
 #### [ Patrick Massot (Apr 27 2018 at 19:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125783929):
-So, the proof of your lemma wouldn't by three `rw` by three `apply` (or one `simp` maybe)
+<p>So, the proof of your lemma wouldn't by three <code>rw</code> by three <code>apply</code> (or one <code>simp</code> maybe)</p>
 
 #### [ Kenny Lau (Apr 27 2018 at 19:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125783955):
-```lean
-theorem equiv'.ext {α β : Type zfc_u} :
-  ∀ {e₁ e₂ : equiv' α β} (H : ∀ x, e₁.i x = e₂.i x), e₁ = e₂
-| ⟨i₁, j₁, ij₁, ji₁⟩ ⟨i₂, j₂, ij₂, ji₂⟩ H :=
-begin
-  congr, { funext, apply H },
-  simp at H,
-  funext x,
-  rw [← ji₁ x, ij₁, H, ij₂]
-end
-```
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">equiv&#39;</span><span class="bp">.</span><span class="n">ext</span> <span class="o">{</span><span class="n">α</span> <span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">zfc_u</span><span class="o">}</span> <span class="o">:</span>
+  <span class="bp">∀</span> <span class="o">{</span><span class="n">e₁</span> <span class="n">e₂</span> <span class="o">:</span> <span class="n">equiv&#39;</span> <span class="n">α</span> <span class="n">β</span><span class="o">}</span> <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span><span class="o">,</span> <span class="n">e₁</span><span class="bp">.</span><span class="n">i</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">e₂</span><span class="bp">.</span><span class="n">i</span> <span class="n">x</span><span class="o">),</span> <span class="n">e₁</span> <span class="bp">=</span> <span class="n">e₂</span>
+<span class="bp">|</span> <span class="bp">⟨</span><span class="n">i₁</span><span class="o">,</span> <span class="n">j₁</span><span class="o">,</span> <span class="n">ij₁</span><span class="o">,</span> <span class="n">ji₁</span><span class="bp">⟩</span> <span class="bp">⟨</span><span class="n">i₂</span><span class="o">,</span> <span class="n">j₂</span><span class="o">,</span> <span class="n">ij₂</span><span class="o">,</span> <span class="n">ji₂</span><span class="bp">⟩</span> <span class="n">H</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">congr</span><span class="o">,</span> <span class="o">{</span> <span class="n">funext</span><span class="o">,</span> <span class="n">apply</span> <span class="n">H</span> <span class="o">},</span>
+  <span class="n">simp</span> <span class="n">at</span> <span class="n">H</span><span class="o">,</span>
+  <span class="n">funext</span> <span class="n">x</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="o">[</span><span class="err">←</span> <span class="n">ji₁</span> <span class="n">x</span><span class="o">,</span> <span class="n">ij₁</span><span class="o">,</span> <span class="n">H</span><span class="o">,</span> <span class="n">ij₂</span><span class="o">]</span>
+<span class="kn">end</span>
+</pre></div>
 
 #### [ Kenny Lau (Apr 27 2018 at 19:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125783964):
-@**Kevin Buzzard**
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span></p>
 
 #### [ Johan Commelin (Apr 27 2018 at 19:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125784003):
-@**Kenny Lau** Sweet.
+<p><span class="user-mention" data-user-id="110064">@Kenny Lau</span> Sweet.</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 19:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125784017):
-I did Level 1 of Johan's level set!
+<p>I did Level 1 of Johan's level set!</p>
 
 #### [ Kenny Lau (Apr 27 2018 at 19:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125784020):
-what level set?
+<p>what level set?</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 19:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125784021):
-```lean
--- level 1
-lemma Const.transportable : (transportable Const) := { 
-  on_equiv := λ α β H,⟨λ _,punit.star,λ _,punit.star,λ α,begin cases α,simp end,λ α,begin cases α,simp end⟩,
-  --I was repeating myself in that last line.
-  on_refl := λ α,begin 
-  congr,
-  { funext s,cases s,refl},
-  { funext s,cases s,refl} -- I just wrote this
-  end,
-  on_trans := λ α β γ Hαβ Hβγ,by congr
-  }  
-```
+<div class="codehilite"><pre><span></span><span class="c1">-- level 1</span>
+<span class="kn">lemma</span> <span class="n">Const</span><span class="bp">.</span><span class="n">transportable</span> <span class="o">:</span> <span class="o">(</span><span class="n">transportable</span> <span class="n">Const</span><span class="o">)</span> <span class="o">:=</span> <span class="o">{</span>
+  <span class="n">on_equiv</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">α</span> <span class="n">β</span> <span class="n">H</span><span class="o">,</span><span class="bp">⟨λ</span> <span class="bp">_</span><span class="o">,</span><span class="n">punit</span><span class="bp">.</span><span class="n">star</span><span class="o">,</span><span class="bp">λ</span> <span class="bp">_</span><span class="o">,</span><span class="n">punit</span><span class="bp">.</span><span class="n">star</span><span class="o">,</span><span class="bp">λ</span> <span class="n">α</span><span class="o">,</span><span class="k">begin</span> <span class="n">cases</span> <span class="n">α</span><span class="o">,</span><span class="n">simp</span> <span class="kn">end</span><span class="o">,</span><span class="bp">λ</span> <span class="n">α</span><span class="o">,</span><span class="k">begin</span> <span class="n">cases</span> <span class="n">α</span><span class="o">,</span><span class="n">simp</span> <span class="kn">end</span><span class="bp">⟩</span><span class="o">,</span>
+  <span class="c1">--I was repeating myself in that last line.</span>
+  <span class="n">on_refl</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">α</span><span class="o">,</span><span class="k">begin</span>
+  <span class="n">congr</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">funext</span> <span class="n">s</span><span class="o">,</span><span class="n">cases</span> <span class="n">s</span><span class="o">,</span><span class="n">refl</span><span class="o">},</span>
+  <span class="o">{</span> <span class="n">funext</span> <span class="n">s</span><span class="o">,</span><span class="n">cases</span> <span class="n">s</span><span class="o">,</span><span class="n">refl</span><span class="o">}</span> <span class="c1">-- I just wrote this</span>
+  <span class="kn">end</span><span class="o">,</span>
+  <span class="n">on_trans</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">α</span> <span class="n">β</span> <span class="n">γ</span> <span class="n">Hαβ</span> <span class="n">Hβγ</span><span class="o">,</span><span class="k">by</span> <span class="n">congr</span>
+  <span class="o">}</span>
+</pre></div>
 
 #### [ Johan Commelin (Apr 27 2018 at 19:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125784073):
-@**Kenny Lau** 
-https://leanprover.zulipchat.com/#narrow/stream/113488-general/subject/.22canonically.22.20identifying.20two.20types/near/125775365
+<p><span class="user-mention" data-user-id="110064">@Kenny Lau</span> <br>
+<a href="#narrow/stream/113488-general/subject/.22canonically.22.20identifying.20two.20types/near/125775365" title="#narrow/stream/113488-general/subject/.22canonically.22.20identifying.20two.20types/near/125775365">https://leanprover.zulipchat.com/#narrow/stream/113488-general/subject/.22canonically.22.20identifying.20two.20types/near/125775365</a></p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 19:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125784079):
-Patrick I think your proof is very different to Kenny's
+<p>Patrick I think your proof is very different to Kenny's</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 19:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125784083):
-and I like it much better
+<p>and I like it much better</p>
 
 #### [ Kenny Lau (Apr 27 2018 at 19:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125784090):
-what is his proof?
+<p>what is his proof?</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 19:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125784095):
-and I think that perhaps when Mario said earlier that Kenny should "work on his long game", maybe he meant thinking like this
+<p>and I think that perhaps when Mario said earlier that Kenny should "work on his long game", maybe he meant thinking like this</p>
 
 #### [ Johan Commelin (Apr 27 2018 at 19:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125784104):
-Well, I think we ultimately should have Patrick's idea and Scott's proposal work together.
+<p>Well, I think we ultimately should have Patrick's idea and Scott's proposal work together.</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 19:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125784107):
-Kenny
+<p>Kenny</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 19:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125784109):
-I put the levels up on xena
+<p>I put the levels up on xena</p>
 
 #### [ Johan Commelin (Apr 27 2018 at 19:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125784161):
-In other words, a whole series of definitions, that are all tagged with `@[derive transport_of_structure]`
+<p>In other words, a whole series of definitions, that are all tagged with <code>@[derive transport_of_structure]</code></p>
 
 #### [ Johan Commelin (Apr 27 2018 at 19:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125784167):
-And then we get Kevin's requested lemma for free
+<p>And then we get Kevin's requested lemma for free</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 19:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125784240):
-@**Kenny Lau** https://github.com/kbuzzard/xena/tree/master/canonical_isomorphism
+<p><span class="user-mention" data-user-id="110064">@Kenny Lau</span> <a href="https://github.com/kbuzzard/xena/tree/master/canonical_isomorphism" target="_blank" title="https://github.com/kbuzzard/xena/tree/master/canonical_isomorphism">https://github.com/kbuzzard/xena/tree/master/canonical_isomorphism</a></p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 19:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125784241):
-I am one ahead of you
+<p>I am one ahead of you</p>
 
 #### [ Kenny Lau (Apr 27 2018 at 19:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125784242):
-thx
+<p>thx</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 19:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125784245):
-on the Johan challenge
+<p>on the Johan challenge</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 19:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125784262):
-https://github.com/kbuzzard/xena/blob/master/canonical_isomorphism/johan_challenge.lean
+<p><a href="https://github.com/kbuzzard/xena/blob/master/canonical_isomorphism/johan_challenge.lean" target="_blank" title="https://github.com/kbuzzard/xena/blob/master/canonical_isomorphism/johan_challenge.lean">https://github.com/kbuzzard/xena/blob/master/canonical_isomorphism/johan_challenge.lean</a></p>
 
 #### [ Kenny Lau (Apr 27 2018 at 19:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125784265):
-and then `derive` will work?
+<p>and then <code>derive</code> will work?</p>
 
 #### [ Kenny Lau (Apr 27 2018 at 19:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125784267):
-How does `derive` work?
+<p>How does <code>derive</code> work?</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 19:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125784271):
-we have to work at the start
+<p>we have to work at the start</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 19:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125784272):
-and then the machines take over
+<p>and then the machines take over</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 19:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125784313):
-and then I can have a three line proof of the three lemma
+<p>and then I can have a three line proof of the three lemma</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 19:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125784322):
-saying that if A -> B -> C is exact then A' -> B' -> C' is exact
+<p>saying that if A -&gt; B -&gt; C is exact then A' -&gt; B' -&gt; C' is exact</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 19:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125784326):
-all I have to do is prove some diagrams commute
+<p>all I have to do is prove some diagrams commute</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 19:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125784328):
-and say that some things are canonically isomorphic
+<p>and say that some things are canonically isomorphic</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 19:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125784330):
-which is obvious in ZFC
+<p>which is obvious in ZFC</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 19:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125784346):
-Mathematicians will not use this software unless they can do stuff that they find easy in maths, in Lean
+<p>Mathematicians will not use this software unless they can do stuff that they find easy in maths, in Lean</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 19:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125784350):
-and I thought that I enjoyed doing algebraic geometry in Lean
+<p>and I thought that I enjoyed doing algebraic geometry in Lean</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 19:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125784351):
-until I ran into this issue
+<p>until I ran into this issue</p>
 
 #### [ Kenny Lau (Apr 27 2018 at 19:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125784352):
-I mean, the mechanism behind `@[derive __]`
+<p>I mean, the mechanism behind <code>@[derive __]</code></p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 19:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125784397):
-Either Simon will write it
+<p>Either Simon will write it</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 19:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125784399):
-or Scott will write it
+<p>or Scott will write it</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 19:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125784400):
-or I will have to write it
+<p>or I will have to write it</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 19:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125784401):
-with their help
+<p>with their help</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 19:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125784403):
-or you can write it
+<p>or you can write it</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 19:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125784404):
-or Chris
+<p>or Chris</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 19:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125784414):
-Maybe it would be trivial for Mario, I have no idea
+<p>Maybe it would be trivial for Mario, I have no idea</p>
 
 #### [ Kenny Lau (Apr 27 2018 at 19:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125784416):
-you're this close from listing everyone's name
+<p>you're this close from listing everyone's name</p>
 
 #### [ Kenny Lau (Apr 27 2018 at 19:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125784419):
-this close.
+<p>this close.</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 19:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125784424):
-but I can certainly believe that the more easy levels we solve by hand
+<p>but I can certainly believe that the more easy levels we solve by hand</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 19:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125784430):
-the easier it will be to write the tactic
+<p>the easier it will be to write the tactic</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 19:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125784434):
-and I really like solving these levels
+<p>and I really like solving these levels</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 19:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125784438):
-they're even better then Zelda
+<p>they're even better then Zelda</p>
 
 #### [ Kenny Lau (Apr 27 2018 at 19:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125784445):
-```lean
-class transportable (f : Type u → Type v) :=
-(on_equiv : Π {α β : Type u} (e : equiv α β), equiv (f α) (f β))
-(on_refl  : Π (α : Type u), on_equiv (equiv.refl α) = equiv.refl (f α))
-(on_trans : Π {α β γ : Type u} (d : equiv α β) (e : equiv β γ), on_equiv (equiv.trans d e) = equiv.trans (on_equiv d) (on_equiv e))
-```
+<div class="codehilite"><pre><span></span><span class="n">class</span> <span class="n">transportable</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span> <span class="bp">→</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">on_equiv</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">{</span><span class="n">α</span> <span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">(</span><span class="n">e</span> <span class="o">:</span> <span class="n">equiv</span> <span class="n">α</span> <span class="n">β</span><span class="o">),</span> <span class="n">equiv</span> <span class="o">(</span><span class="n">f</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="n">β</span><span class="o">))</span>
+<span class="o">(</span><span class="n">on_refl</span>  <span class="o">:</span> <span class="bp">Π</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">),</span> <span class="n">on_equiv</span> <span class="o">(</span><span class="n">equiv</span><span class="bp">.</span><span class="n">refl</span> <span class="n">α</span><span class="o">)</span> <span class="bp">=</span> <span class="n">equiv</span><span class="bp">.</span><span class="n">refl</span> <span class="o">(</span><span class="n">f</span> <span class="n">α</span><span class="o">))</span>
+<span class="o">(</span><span class="n">on_trans</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">{</span><span class="n">α</span> <span class="n">β</span> <span class="n">γ</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">(</span><span class="n">d</span> <span class="o">:</span> <span class="n">equiv</span> <span class="n">α</span> <span class="n">β</span><span class="o">)</span> <span class="o">(</span><span class="n">e</span> <span class="o">:</span> <span class="n">equiv</span> <span class="n">β</span> <span class="n">γ</span><span class="o">),</span> <span class="n">on_equiv</span> <span class="o">(</span><span class="n">equiv</span><span class="bp">.</span><span class="n">trans</span> <span class="n">d</span> <span class="n">e</span><span class="o">)</span> <span class="bp">=</span> <span class="n">equiv</span><span class="bp">.</span><span class="n">trans</span> <span class="o">(</span><span class="n">on_equiv</span> <span class="n">d</span><span class="o">)</span> <span class="o">(</span><span class="n">on_equiv</span> <span class="n">e</span><span class="o">))</span>
+</pre></div>
 
 #### [ Kenny Lau (Apr 27 2018 at 19:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125784446):
-functor :D
+<p>functor :D</p>
 
 #### [ Kenny Lau (Apr 27 2018 at 19:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125784510):
-why no use symbol?
+<p>why no use symbol?</p>
 
 #### [ Johan Commelin (Apr 27 2018 at 19:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125784511):
-@**Kenny Lau** https://github.com/leanprover/lean/blob/f59c2f0ef59fdc1833b6ead6adca721123bd7932/library/init/meta/derive.lean#L19-L22
-and also L44-L45
+<p><span class="user-mention" data-user-id="110064">@Kenny Lau</span> <a href="https://github.com/leanprover/lean/blob/f59c2f0ef59fdc1833b6ead6adca721123bd7932/library/init/meta/derive.lean#L19-L22" target="_blank" title="https://github.com/leanprover/lean/blob/f59c2f0ef59fdc1833b6ead6adca721123bd7932/library/init/meta/derive.lean#L19-L22">https://github.com/leanprover/lean/blob/f59c2f0ef59fdc1833b6ead6adca721123bd7932/library/init/meta/derive.lean#L19-L22</a><br>
+and also L44-L45</p>
 
 #### [ Johan Commelin (Apr 27 2018 at 19:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125784584):
-@**Kenny Lau** It is indeed a functor, but only on equivalences. That is how Scott first defined it (informally). But I guess we might not want this def'n to depend on a category lib. The category lib probably wants to depend on transport of structure...
+<p><span class="user-mention" data-user-id="110064">@Kenny Lau</span> It is indeed a functor, but only on equivalences. That is how Scott first defined it (informally). But I guess we might not want this def'n to depend on a category lib. The category lib probably wants to depend on transport of structure...</p>
 
 #### [ Johan Commelin (Apr 27 2018 at 19:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125784596):
-By the way, I suggest a name for the tactic that proves transport of structure: `chuck_norris`
+<p>By the way, I suggest a name for the tactic that proves transport of structure: <code>chuck_norris</code></p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 19:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125784599):
-Kenny feel free to make the file a lot better
+<p>Kenny feel free to make the file a lot better</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 19:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125784606):
-+1 for `chuck_norris`
+<p>+1 for <code>chuck_norris</code></p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 19:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125784607):
-but I would be happy to hear alternatives
+<p>but I would be happy to hear alternatives</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 19:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125784613):
-One of the reasons people go on about `sledgehammer`
+<p>One of the reasons people go on about <code>sledgehammer</code></p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 19:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125784616):
-is that it has a really cool name
+<p>is that it has a really cool name</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 19:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125784617):
-and `crush` too
+<p>and <code>crush</code> too</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 19:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125784621):
-I would vote for any Pokemon move name
+<p>I would vote for any Pokemon move name</p>
 
 #### [ Kenny Lau (Apr 27 2018 at 19:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125784755):
-```lean
-lemma Const.transportable : (transportable Const) :=
-{ on_equiv := λ α β e, ⟨λ _, punit.star, λ _, punit.star, λ ⟨⟩, rfl , λ ⟨⟩, rfl⟩,
-  on_refl  := λ α, equiv.ext _ _ $ λ ⟨⟩, rfl,
-  on_trans := λ α β γ e1 e2, equiv.ext _ _ $ λ ⟨⟩, rfl }
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">Const</span><span class="bp">.</span><span class="n">transportable</span> <span class="o">:</span> <span class="o">(</span><span class="n">transportable</span> <span class="n">Const</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">on_equiv</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">α</span> <span class="n">β</span> <span class="n">e</span><span class="o">,</span> <span class="bp">⟨λ</span> <span class="bp">_</span><span class="o">,</span> <span class="n">punit</span><span class="bp">.</span><span class="n">star</span><span class="o">,</span> <span class="bp">λ</span> <span class="bp">_</span><span class="o">,</span> <span class="n">punit</span><span class="bp">.</span><span class="n">star</span><span class="o">,</span> <span class="bp">λ</span> <span class="bp">⟨⟩</span><span class="o">,</span> <span class="n">rfl</span> <span class="o">,</span> <span class="bp">λ</span> <span class="bp">⟨⟩</span><span class="o">,</span> <span class="n">rfl</span><span class="bp">⟩</span><span class="o">,</span>
+  <span class="n">on_refl</span>  <span class="o">:=</span> <span class="bp">λ</span> <span class="n">α</span><span class="o">,</span> <span class="n">equiv</span><span class="bp">.</span><span class="n">ext</span> <span class="bp">_</span> <span class="bp">_</span> <span class="err">$</span> <span class="bp">λ</span> <span class="bp">⟨⟩</span><span class="o">,</span> <span class="n">rfl</span><span class="o">,</span>
+  <span class="n">on_trans</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">α</span> <span class="n">β</span> <span class="n">γ</span> <span class="n">e1</span> <span class="n">e2</span><span class="o">,</span> <span class="n">equiv</span><span class="bp">.</span><span class="n">ext</span> <span class="bp">_</span> <span class="bp">_</span> <span class="err">$</span> <span class="bp">λ</span> <span class="bp">⟨⟩</span><span class="o">,</span> <span class="n">rfl</span> <span class="o">}</span>
 
-lemma Fun.transportable (α : Type u) : (transportable (Fun α)) :=
-{ on_equiv := λ β γ e, ⟨λ f x, e (f x), λ f x, e.symm (f x),
-    λ f, funext $ λ x, e.inverse_apply_apply (f x),
-    λ f, funext $ λ x, e.apply_inverse_apply (f x)⟩,
-  on_refl  := λ β, equiv.ext _ _ $ λ f, rfl,
-  on_trans := λ β γ δ e1 e2, equiv.ext _ _ $ λ f, rfl }
-```
+<span class="kn">lemma</span> <span class="n">Fun</span><span class="bp">.</span><span class="n">transportable</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">transportable</span> <span class="o">(</span><span class="n">Fun</span> <span class="n">α</span><span class="o">))</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">on_equiv</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">β</span> <span class="n">γ</span> <span class="n">e</span><span class="o">,</span> <span class="bp">⟨λ</span> <span class="n">f</span> <span class="n">x</span><span class="o">,</span> <span class="n">e</span> <span class="o">(</span><span class="n">f</span> <span class="n">x</span><span class="o">),</span> <span class="bp">λ</span> <span class="n">f</span> <span class="n">x</span><span class="o">,</span> <span class="n">e</span><span class="bp">.</span><span class="n">symm</span> <span class="o">(</span><span class="n">f</span> <span class="n">x</span><span class="o">),</span>
+    <span class="bp">λ</span> <span class="n">f</span><span class="o">,</span> <span class="n">funext</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="n">e</span><span class="bp">.</span><span class="n">inverse_apply_apply</span> <span class="o">(</span><span class="n">f</span> <span class="n">x</span><span class="o">),</span>
+    <span class="bp">λ</span> <span class="n">f</span><span class="o">,</span> <span class="n">funext</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="n">e</span><span class="bp">.</span><span class="n">apply_inverse_apply</span> <span class="o">(</span><span class="n">f</span> <span class="n">x</span><span class="o">)</span><span class="bp">⟩</span><span class="o">,</span>
+  <span class="n">on_refl</span>  <span class="o">:=</span> <span class="bp">λ</span> <span class="n">β</span><span class="o">,</span> <span class="n">equiv</span><span class="bp">.</span><span class="n">ext</span> <span class="bp">_</span> <span class="bp">_</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">f</span><span class="o">,</span> <span class="n">rfl</span><span class="o">,</span>
+  <span class="n">on_trans</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">β</span> <span class="n">γ</span> <span class="n">δ</span> <span class="n">e1</span> <span class="n">e2</span><span class="o">,</span> <span class="n">equiv</span><span class="bp">.</span><span class="n">ext</span> <span class="bp">_</span> <span class="bp">_</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">f</span><span class="o">,</span> <span class="n">rfl</span> <span class="o">}</span>
+</pre></div>
 
 #### [ Kenny Lau (Apr 27 2018 at 19:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125785025):
-```lean
-theorem prod.ext' {α β : Type*} {p q : α × β} (H1 : p.1 = q.1) (H2 : p.2 = q.2) : p = q :=
-prod.ext.2 ⟨H1, H2⟩
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">prod</span><span class="bp">.</span><span class="n">ext&#39;</span> <span class="o">{</span><span class="n">α</span> <span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">{</span><span class="n">p</span> <span class="n">q</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">×</span> <span class="n">β</span><span class="o">}</span> <span class="o">(</span><span class="n">H1</span> <span class="o">:</span> <span class="n">p</span><span class="bp">.</span><span class="mi">1</span> <span class="bp">=</span> <span class="n">q</span><span class="bp">.</span><span class="mi">1</span><span class="o">)</span> <span class="o">(</span><span class="n">H2</span> <span class="o">:</span> <span class="n">p</span><span class="bp">.</span><span class="mi">2</span> <span class="bp">=</span> <span class="n">q</span><span class="bp">.</span><span class="mi">2</span><span class="o">)</span> <span class="o">:</span> <span class="n">p</span> <span class="bp">=</span> <span class="n">q</span> <span class="o">:=</span>
+<span class="n">prod</span><span class="bp">.</span><span class="n">ext</span><span class="bp">.</span><span class="mi">2</span> <span class="bp">⟨</span><span class="n">H1</span><span class="o">,</span> <span class="n">H2</span><span class="bp">⟩</span>
 
-lemma Prod.transportable (α : Type u) : (transportable (Prod α)) :=
-{ on_equiv := λ β γ e, ⟨λ x, (x.1, e x.2), λ x, (x.1, e.symm x.2),
-    λ f, prod.ext' rfl $ e.inverse_apply_apply f.2,
-    λ f, prod.ext' rfl $ e.apply_inverse_apply f.2⟩,
-  on_refl  := λ β, equiv.ext _ _ $ λ x, prod.ext' rfl rfl,
-  on_trans := λ β γ δ e1 e2, equiv.ext _ _ $ λ f, rfl }
+<span class="kn">lemma</span> <span class="n">Prod</span><span class="bp">.</span><span class="n">transportable</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">transportable</span> <span class="o">(</span><span class="n">Prod</span> <span class="n">α</span><span class="o">))</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">on_equiv</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">β</span> <span class="n">γ</span> <span class="n">e</span><span class="o">,</span> <span class="bp">⟨λ</span> <span class="n">x</span><span class="o">,</span> <span class="o">(</span><span class="n">x</span><span class="bp">.</span><span class="mi">1</span><span class="o">,</span> <span class="n">e</span> <span class="n">x</span><span class="bp">.</span><span class="mi">2</span><span class="o">),</span> <span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="o">(</span><span class="n">x</span><span class="bp">.</span><span class="mi">1</span><span class="o">,</span> <span class="n">e</span><span class="bp">.</span><span class="n">symm</span> <span class="n">x</span><span class="bp">.</span><span class="mi">2</span><span class="o">),</span>
+    <span class="bp">λ</span> <span class="n">f</span><span class="o">,</span> <span class="n">prod</span><span class="bp">.</span><span class="n">ext&#39;</span> <span class="n">rfl</span> <span class="err">$</span> <span class="n">e</span><span class="bp">.</span><span class="n">inverse_apply_apply</span> <span class="n">f</span><span class="bp">.</span><span class="mi">2</span><span class="o">,</span>
+    <span class="bp">λ</span> <span class="n">f</span><span class="o">,</span> <span class="n">prod</span><span class="bp">.</span><span class="n">ext&#39;</span> <span class="n">rfl</span> <span class="err">$</span> <span class="n">e</span><span class="bp">.</span><span class="n">apply_inverse_apply</span> <span class="n">f</span><span class="bp">.</span><span class="mi">2</span><span class="bp">⟩</span><span class="o">,</span>
+  <span class="n">on_refl</span>  <span class="o">:=</span> <span class="bp">λ</span> <span class="n">β</span><span class="o">,</span> <span class="n">equiv</span><span class="bp">.</span><span class="n">ext</span> <span class="bp">_</span> <span class="bp">_</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="n">prod</span><span class="bp">.</span><span class="n">ext&#39;</span> <span class="n">rfl</span> <span class="n">rfl</span><span class="o">,</span>
+  <span class="n">on_trans</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">β</span> <span class="n">γ</span> <span class="n">δ</span> <span class="n">e1</span> <span class="n">e2</span><span class="o">,</span> <span class="n">equiv</span><span class="bp">.</span><span class="n">ext</span> <span class="bp">_</span> <span class="bp">_</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">f</span><span class="o">,</span> <span class="n">rfl</span> <span class="o">}</span>
 
-lemma Swap.transportable (α : Type u) : (transportable (Swap α)) :=
-{ on_equiv := λ β γ e, ⟨λ x, (e x.1, x.2), λ x, (e.symm x.1, x.2),
-    λ f, prod.ext' (e.inverse_apply_apply f.1) rfl,
-    λ f, prod.ext' (e.apply_inverse_apply f.1) rfl⟩,
-  on_refl  := λ β, equiv.ext _ _ $ λ x, prod.ext' rfl rfl,
-  on_trans := λ β γ δ e1 e2, equiv.ext _ _ $ λ f, rfl }
-```
+<span class="kn">lemma</span> <span class="n">Swap</span><span class="bp">.</span><span class="n">transportable</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">transportable</span> <span class="o">(</span><span class="n">Swap</span> <span class="n">α</span><span class="o">))</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">on_equiv</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">β</span> <span class="n">γ</span> <span class="n">e</span><span class="o">,</span> <span class="bp">⟨λ</span> <span class="n">x</span><span class="o">,</span> <span class="o">(</span><span class="n">e</span> <span class="n">x</span><span class="bp">.</span><span class="mi">1</span><span class="o">,</span> <span class="n">x</span><span class="bp">.</span><span class="mi">2</span><span class="o">),</span> <span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="o">(</span><span class="n">e</span><span class="bp">.</span><span class="n">symm</span> <span class="n">x</span><span class="bp">.</span><span class="mi">1</span><span class="o">,</span> <span class="n">x</span><span class="bp">.</span><span class="mi">2</span><span class="o">),</span>
+    <span class="bp">λ</span> <span class="n">f</span><span class="o">,</span> <span class="n">prod</span><span class="bp">.</span><span class="n">ext&#39;</span> <span class="o">(</span><span class="n">e</span><span class="bp">.</span><span class="n">inverse_apply_apply</span> <span class="n">f</span><span class="bp">.</span><span class="mi">1</span><span class="o">)</span> <span class="n">rfl</span><span class="o">,</span>
+    <span class="bp">λ</span> <span class="n">f</span><span class="o">,</span> <span class="n">prod</span><span class="bp">.</span><span class="n">ext&#39;</span> <span class="o">(</span><span class="n">e</span><span class="bp">.</span><span class="n">apply_inverse_apply</span> <span class="n">f</span><span class="bp">.</span><span class="mi">1</span><span class="o">)</span> <span class="n">rfl</span><span class="bp">⟩</span><span class="o">,</span>
+  <span class="n">on_refl</span>  <span class="o">:=</span> <span class="bp">λ</span> <span class="n">β</span><span class="o">,</span> <span class="n">equiv</span><span class="bp">.</span><span class="n">ext</span> <span class="bp">_</span> <span class="bp">_</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="n">prod</span><span class="bp">.</span><span class="n">ext&#39;</span> <span class="n">rfl</span> <span class="n">rfl</span><span class="o">,</span>
+  <span class="n">on_trans</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">β</span> <span class="n">γ</span> <span class="n">δ</span> <span class="n">e1</span> <span class="n">e2</span><span class="o">,</span> <span class="n">equiv</span><span class="bp">.</span><span class="n">ext</span> <span class="bp">_</span> <span class="bp">_</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">f</span><span class="o">,</span> <span class="n">rfl</span> <span class="o">}</span>
+</pre></div>
 
 #### [ Kenny Lau (Apr 27 2018 at 19:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125785027):
-@**Kevin Buzzard**
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span></p>
 
 #### [ Kenny Lau (Apr 27 2018 at 19:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125785091):
-```lean
-lemma Hom1.transportable (α : Type u) : (transportable (Hom1 α)) :=
-Fun.transportable α
-```
-?
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">Hom1</span><span class="bp">.</span><span class="n">transportable</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">transportable</span> <span class="o">(</span><span class="n">Hom1</span> <span class="n">α</span><span class="o">))</span> <span class="o">:=</span>
+<span class="n">Fun</span><span class="bp">.</span><span class="n">transportable</span> <span class="n">α</span>
+</pre></div>
+
+
+<p>?</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 19:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125785192):
-```lean
--- level 2
-lemma Fun.transportable (α : Type u) : (transportable (Fun α)) := {
-    on_equiv := λ β γ Hβγ,⟨
-        λ f a,Hβγ.to_fun (f a),
-        λ f a,Hβγ.inv_fun (f a),
-        λ f,by funext a;exact Hβγ.left_inv (f a),
-        λ g,by funext a;exact Hβγ.right_inv (g a) 
-    ⟩,
-    on_refl := λ β,by congr,
-    on_trans := λ β γ δ Hβγ Hγδ,by congr
-}
-```
+<div class="codehilite"><pre><span></span><span class="c1">-- level 2</span>
+<span class="kn">lemma</span> <span class="n">Fun</span><span class="bp">.</span><span class="n">transportable</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">transportable</span> <span class="o">(</span><span class="n">Fun</span> <span class="n">α</span><span class="o">))</span> <span class="o">:=</span> <span class="o">{</span>
+    <span class="n">on_equiv</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">β</span> <span class="n">γ</span> <span class="n">Hβγ</span><span class="o">,</span><span class="bp">⟨</span>
+        <span class="bp">λ</span> <span class="n">f</span> <span class="n">a</span><span class="o">,</span><span class="n">Hβγ</span><span class="bp">.</span><span class="n">to_fun</span> <span class="o">(</span><span class="n">f</span> <span class="n">a</span><span class="o">),</span>
+        <span class="bp">λ</span> <span class="n">f</span> <span class="n">a</span><span class="o">,</span><span class="n">Hβγ</span><span class="bp">.</span><span class="n">inv_fun</span> <span class="o">(</span><span class="n">f</span> <span class="n">a</span><span class="o">),</span>
+        <span class="bp">λ</span> <span class="n">f</span><span class="o">,</span><span class="k">by</span> <span class="n">funext</span> <span class="n">a</span><span class="bp">;</span><span class="n">exact</span> <span class="n">Hβγ</span><span class="bp">.</span><span class="n">left_inv</span> <span class="o">(</span><span class="n">f</span> <span class="n">a</span><span class="o">),</span>
+        <span class="bp">λ</span> <span class="n">g</span><span class="o">,</span><span class="k">by</span> <span class="n">funext</span> <span class="n">a</span><span class="bp">;</span><span class="n">exact</span> <span class="n">Hβγ</span><span class="bp">.</span><span class="n">right_inv</span> <span class="o">(</span><span class="n">g</span> <span class="n">a</span><span class="o">)</span>
+    <span class="bp">⟩</span><span class="o">,</span>
+    <span class="n">on_refl</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">β</span><span class="o">,</span><span class="k">by</span> <span class="n">congr</span><span class="o">,</span>
+    <span class="n">on_trans</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">β</span> <span class="n">γ</span> <span class="n">δ</span> <span class="n">Hβγ</span> <span class="n">Hγδ</span><span class="o">,</span><span class="k">by</span> <span class="n">congr</span>
+<span class="o">}</span>
+</pre></div>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 19:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125785196):
-I see you caught up :-)
+<p>I see you caught up :-)</p>
 
 #### [ Kenny Lau (Apr 27 2018 at 19:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125785199):
-I'm faster :P
+<p>I'm faster :P</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 19:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125785256):
-Kenny you repeat yourself in your code
+<p>Kenny you repeat yourself in your code</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 19:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125785259):
-you say most things twice
+<p>you say most things twice</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 19:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125785261):
-this means it is bad code, right?
+<p>this means it is bad code, right?</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 19:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125785263):
-Can you write better code?
+<p>Can you write better code?</p>
 
 #### [ Kenny Lau (Apr 27 2018 at 19:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125785264):
-let's see whether you can avoid repeating yourself lol
+<p>let's see whether you can avoid repeating yourself lol</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 19:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125785268):
-You know the dual of an equiv is an equiv
+<p>You know the dual of an equiv is an equiv</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 19:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125785278):
-I repeat myself IRL
+<p>I repeat myself IRL</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 20:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125785354):
-```quote
-I'm faster :P
-```
-Yes but you're working on my conjecture ;-)
+<blockquote>
+<p>I'm faster :P</p>
+</blockquote>
+<p>Yes but you're working on my conjecture ;-)</p>
 
 #### [ Kenny Lau (Apr 27 2018 at 20:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125785534):
-```lean
-lemma Hom1.transportable (α : Type u) : (transportable (Hom1 α)) :=
-Fun.transportable α
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">Hom1</span><span class="bp">.</span><span class="n">transportable</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">transportable</span> <span class="o">(</span><span class="n">Hom1</span> <span class="n">α</span><span class="o">))</span> <span class="o">:=</span>
+<span class="n">Fun</span><span class="bp">.</span><span class="n">transportable</span> <span class="n">α</span>
 
-lemma Hom2.transportable (β : Type v) : (transportable (Hom2 β)) :=
-{ on_equiv := λ α γ e, ⟨λ f x, f (e.symm x), λ f x, f (e x),
-    λ f, funext $ λ x, congr_arg f $ e.inverse_apply_apply x,
-    λ f, funext $ λ x, congr_arg f $ e.apply_inverse_apply x⟩,
-  on_refl  := λ β, equiv.ext _ _ $ λ f, rfl,
-  on_trans := λ β γ δ e1 e2, equiv.ext _ _ $ λ f, rfl }
+<span class="kn">lemma</span> <span class="n">Hom2</span><span class="bp">.</span><span class="n">transportable</span> <span class="o">(</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">transportable</span> <span class="o">(</span><span class="n">Hom2</span> <span class="n">β</span><span class="o">))</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">on_equiv</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">α</span> <span class="n">γ</span> <span class="n">e</span><span class="o">,</span> <span class="bp">⟨λ</span> <span class="n">f</span> <span class="n">x</span><span class="o">,</span> <span class="n">f</span> <span class="o">(</span><span class="n">e</span><span class="bp">.</span><span class="n">symm</span> <span class="n">x</span><span class="o">),</span> <span class="bp">λ</span> <span class="n">f</span> <span class="n">x</span><span class="o">,</span> <span class="n">f</span> <span class="o">(</span><span class="n">e</span> <span class="n">x</span><span class="o">),</span>
+    <span class="bp">λ</span> <span class="n">f</span><span class="o">,</span> <span class="n">funext</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="n">congr_arg</span> <span class="n">f</span> <span class="err">$</span> <span class="n">e</span><span class="bp">.</span><span class="n">inverse_apply_apply</span> <span class="n">x</span><span class="o">,</span>
+    <span class="bp">λ</span> <span class="n">f</span><span class="o">,</span> <span class="n">funext</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="n">congr_arg</span> <span class="n">f</span> <span class="err">$</span> <span class="n">e</span><span class="bp">.</span><span class="n">apply_inverse_apply</span> <span class="n">x</span><span class="bp">⟩</span><span class="o">,</span>
+  <span class="n">on_refl</span>  <span class="o">:=</span> <span class="bp">λ</span> <span class="n">β</span><span class="o">,</span> <span class="n">equiv</span><span class="bp">.</span><span class="n">ext</span> <span class="bp">_</span> <span class="bp">_</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">f</span><span class="o">,</span> <span class="n">rfl</span><span class="o">,</span>
+  <span class="n">on_trans</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">β</span> <span class="n">γ</span> <span class="n">δ</span> <span class="n">e1</span> <span class="n">e2</span><span class="o">,</span> <span class="n">equiv</span><span class="bp">.</span><span class="n">ext</span> <span class="bp">_</span> <span class="bp">_</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">f</span><span class="o">,</span> <span class="n">rfl</span> <span class="o">}</span>
 
-lemma Aut.transportable : (transportable Aut) :=
-{ on_equiv := λ α β e, ⟨λ f x, e (f (e.symm x)), λ f x, e.symm (f (e x)),
-    λ f, funext $ λ x, by simp,
-    λ f, funext $ λ x, by simp⟩,
-  on_refl  := λ α, equiv.ext _ _ $ λ f, funext $ λ x, rfl,
-  on_trans := λ α β γ e1 e2, equiv.ext _ _ $ λ f, funext $ λ x, rfl, }
-```
+<span class="kn">lemma</span> <span class="n">Aut</span><span class="bp">.</span><span class="n">transportable</span> <span class="o">:</span> <span class="o">(</span><span class="n">transportable</span> <span class="n">Aut</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">on_equiv</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">α</span> <span class="n">β</span> <span class="n">e</span><span class="o">,</span> <span class="bp">⟨λ</span> <span class="n">f</span> <span class="n">x</span><span class="o">,</span> <span class="n">e</span> <span class="o">(</span><span class="n">f</span> <span class="o">(</span><span class="n">e</span><span class="bp">.</span><span class="n">symm</span> <span class="n">x</span><span class="o">)),</span> <span class="bp">λ</span> <span class="n">f</span> <span class="n">x</span><span class="o">,</span> <span class="n">e</span><span class="bp">.</span><span class="n">symm</span> <span class="o">(</span><span class="n">f</span> <span class="o">(</span><span class="n">e</span> <span class="n">x</span><span class="o">)),</span>
+    <span class="bp">λ</span> <span class="n">f</span><span class="o">,</span> <span class="n">funext</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="k">by</span> <span class="n">simp</span><span class="o">,</span>
+    <span class="bp">λ</span> <span class="n">f</span><span class="o">,</span> <span class="n">funext</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="k">by</span> <span class="n">simp</span><span class="bp">⟩</span><span class="o">,</span>
+  <span class="n">on_refl</span>  <span class="o">:=</span> <span class="bp">λ</span> <span class="n">α</span><span class="o">,</span> <span class="n">equiv</span><span class="bp">.</span><span class="n">ext</span> <span class="bp">_</span> <span class="bp">_</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">f</span><span class="o">,</span> <span class="n">funext</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="n">rfl</span><span class="o">,</span>
+  <span class="n">on_trans</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">α</span> <span class="n">β</span> <span class="n">γ</span> <span class="n">e1</span> <span class="n">e2</span><span class="o">,</span> <span class="n">equiv</span><span class="bp">.</span><span class="n">ext</span> <span class="bp">_</span> <span class="bp">_</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">f</span><span class="o">,</span> <span class="n">funext</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="n">rfl</span><span class="o">,</span> <span class="o">}</span>
+</pre></div>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 20:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125785536):
-Kenny my proof of `Const.transportable.on_trans` is better than yours
+<p>Kenny my proof of <code>Const.transportable.on_trans</code> is better than yours</p>
 
 #### [ Kenny Lau (Apr 27 2018 at 20:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125785577):
-@**Kevin Buzzard** all done. now I can shorten my proof lol
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> all done. now I can shorten my proof lol</p>
 
 #### [ Kenny Lau (Apr 27 2018 at 20:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125785585):
-well
+<p>well</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 20:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125785587):
-`on_trans := λ α β γ Hαβ Hβγ,by congr`
+<p><code>on_trans := λ α β γ Hαβ Hβγ,by congr</code></p>
 
 #### [ Kenny Lau (Apr 27 2018 at 20:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125785589):
-I like term mode :P
+<p>I like term mode :P</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 20:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125785592):
-don't you lie to me
+<p>don't you lie to me</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 20:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125785593):
-you like golf
+<p>you like golf</p>
 
 #### [ Kenny Lau (Apr 27 2018 at 20:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125785595):
-lol
+<p>lol</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 20:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125785599):
-:-)
+<p>:-)</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 20:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125785704):
-in `Fun_transportable.on_equiv` you have `e.inverse_apply_apply (f x)`
+<p>in <code>Fun_transportable.on_equiv</code> you have <code>e.inverse_apply_apply (f x)</code></p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 20:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125785712):
-and I have `e.left_inv (f a)`
+<p>and I have <code>e.left_inv (f a)</code></p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 20:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125785733):
-which is better?
+<p>which is better?</p>
 
 #### [ Kenny Lau (Apr 27 2018 at 20:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125785854):
-they say `e.symm` and etc are more idiomatic
+<p>they say <code>e.symm</code> and etc are more idiomatic</p>
 
 #### [ Kenny Lau (Apr 27 2018 at 20:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125785871):
-because they are actually simp lemmas
+<p>because they are actually simp lemmas</p>
 
 #### [ Kenny Lau (Apr 27 2018 at 20:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125785877):
-so I can just replace it with `by simp` and outgolf you
+<p>so I can just replace it with <code>by simp</code> and outgolf you</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 20:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125785886):
-So I should switch to all this `apply_inverse_apply` stuff?
+<p>So I should switch to all this <code>apply_inverse_apply</code> stuff?</p>
 
 #### [ Kenny Lau (Apr 27 2018 at 20:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125785929):
-no, you should use `simp`
+<p>no, you should use <code>simp</code></p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 20:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125785930):
-And you use `coe_to_fun` to get the function directly?
+<p>And you use <code>coe_to_fun</code> to get the function directly?</p>
 
 #### [ Kenny Lau (Apr 27 2018 at 20:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125785934):
-yes
+<p>yes</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 20:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125786016):
-OK I pushed
+<p>OK I pushed</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 20:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125786025):
-https://github.com/kbuzzard/xena/blob/master/canonical_isomorphism/johan_challenge.lean
+<p><a href="https://github.com/kbuzzard/xena/blob/master/canonical_isomorphism/johan_challenge.lean" target="_blank" title="https://github.com/kbuzzard/xena/blob/master/canonical_isomorphism/johan_challenge.lean">https://github.com/kbuzzard/xena/blob/master/canonical_isomorphism/johan_challenge.lean</a></p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 20:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125786034):
-has levels 1 and 2 solved
+<p>has levels 1 and 2 solved</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 20:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125786043):
-and I'll now look at your other work Kenny
+<p>and I'll now look at your other work Kenny</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 20:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125786048):
-Let me know if you think the solutions can be improved @**Kenny Lau**
+<p>Let me know if you think the solutions can be improved <span class="user-mention" data-user-id="110064">@Kenny Lau</span></p>
 
 #### [ Kenny Lau (Apr 27 2018 at 20:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125786270):
-```lean
-import data.equiv
-#check equiv.refl 
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">equiv</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="n">equiv</span><span class="bp">.</span><span class="n">refl</span>
 
-universes u v w
+<span class="n">universes</span> <span class="n">u</span> <span class="n">v</span> <span class="n">w</span>
 
-class transportable (f : Type u → Type v) :=
-(on_equiv : Π {α β : Type u} (e : equiv α β), equiv (f α) (f β))
-(on_refl  : Π (α : Type u), on_equiv (equiv.refl α) = equiv.refl (f α))
-(on_trans : Π {α β γ : Type u} (d : equiv α β) (e : equiv β γ), on_equiv (equiv.trans d e) = equiv.trans (on_equiv d) (on_equiv e))
+<span class="n">class</span> <span class="n">transportable</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span> <span class="bp">→</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">on_equiv</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">{</span><span class="n">α</span> <span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">(</span><span class="n">e</span> <span class="o">:</span> <span class="n">equiv</span> <span class="n">α</span> <span class="n">β</span><span class="o">),</span> <span class="n">equiv</span> <span class="o">(</span><span class="n">f</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="n">β</span><span class="o">))</span>
+<span class="o">(</span><span class="n">on_refl</span>  <span class="o">:</span> <span class="bp">Π</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">),</span> <span class="n">on_equiv</span> <span class="o">(</span><span class="n">equiv</span><span class="bp">.</span><span class="n">refl</span> <span class="n">α</span><span class="o">)</span> <span class="bp">=</span> <span class="n">equiv</span><span class="bp">.</span><span class="n">refl</span> <span class="o">(</span><span class="n">f</span> <span class="n">α</span><span class="o">))</span>
+<span class="o">(</span><span class="n">on_trans</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">{</span><span class="n">α</span> <span class="n">β</span> <span class="n">γ</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">(</span><span class="n">d</span> <span class="o">:</span> <span class="n">equiv</span> <span class="n">α</span> <span class="n">β</span><span class="o">)</span> <span class="o">(</span><span class="n">e</span> <span class="o">:</span> <span class="n">equiv</span> <span class="n">β</span> <span class="n">γ</span><span class="o">),</span> <span class="n">on_equiv</span> <span class="o">(</span><span class="n">equiv</span><span class="bp">.</span><span class="n">trans</span> <span class="n">d</span> <span class="n">e</span><span class="o">)</span> <span class="bp">=</span> <span class="n">equiv</span><span class="bp">.</span><span class="n">trans</span> <span class="o">(</span><span class="n">on_equiv</span> <span class="n">d</span><span class="o">)</span> <span class="o">(</span><span class="n">on_equiv</span> <span class="n">e</span><span class="o">))</span>
 
--- Our goal is an automagic proof of the following (level 20)
-theorem group.transportable : transportable group := sorry
+<span class="c1">-- Our goal is an automagic proof of the following (level 20)</span>
+<span class="kn">theorem</span> <span class="n">group</span><span class="bp">.</span><span class="n">transportable</span> <span class="o">:</span> <span class="n">transportable</span> <span class="n">group</span> <span class="o">:=</span> <span class="n">sorry</span>
 
--- These we might need to define and prove by hand
-def Const : Type u → Type v := λ α, punit
-def Fun : Type u → Type v → Type (max u v) := λ α β, α → β
-def Prod : Type u → Type v → Type (max u v) := λ α β, α × β
-def Swap : Type u → Type v → Type (max u v) := λ α β, β × α
+<span class="c1">-- These we might need to define and prove by hand</span>
+<span class="n">def</span> <span class="n">Const</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span> <span class="bp">→</span> <span class="kt">Type</span> <span class="n">v</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">α</span><span class="o">,</span> <span class="n">punit</span>
+<span class="n">def</span> <span class="n">Fun</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span> <span class="bp">→</span> <span class="kt">Type</span> <span class="n">v</span> <span class="bp">→</span> <span class="kt">Type</span> <span class="o">(</span><span class="n">max</span> <span class="n">u</span> <span class="n">v</span><span class="o">)</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">α</span> <span class="n">β</span><span class="o">,</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span>
+<span class="n">def</span> <span class="n">Prod</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span> <span class="bp">→</span> <span class="kt">Type</span> <span class="n">v</span> <span class="bp">→</span> <span class="kt">Type</span> <span class="o">(</span><span class="n">max</span> <span class="n">u</span> <span class="n">v</span><span class="o">)</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">α</span> <span class="n">β</span><span class="o">,</span> <span class="n">α</span> <span class="bp">×</span> <span class="n">β</span>
+<span class="n">def</span> <span class="n">Swap</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span> <span class="bp">→</span> <span class="kt">Type</span> <span class="n">v</span> <span class="bp">→</span> <span class="kt">Type</span> <span class="o">(</span><span class="n">max</span> <span class="n">u</span> <span class="n">v</span><span class="o">)</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">α</span> <span class="n">β</span><span class="o">,</span> <span class="n">β</span> <span class="bp">×</span> <span class="n">α</span>
 
--- level 1
-lemma Const.transportable : (transportable Const) :=
-{ on_equiv := λ α β e, equiv.punit_equiv_punit,
-  on_refl  := λ α, equiv.ext _ _ $ λ ⟨⟩, rfl,
-  on_trans := λ α β γ e1 e2, equiv.ext _ _ $ λ ⟨⟩, rfl }
+<span class="c1">-- level 1</span>
+<span class="kn">lemma</span> <span class="n">Const</span><span class="bp">.</span><span class="n">transportable</span> <span class="o">:</span> <span class="o">(</span><span class="n">transportable</span> <span class="n">Const</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">on_equiv</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">α</span> <span class="n">β</span> <span class="n">e</span><span class="o">,</span> <span class="n">equiv</span><span class="bp">.</span><span class="n">punit_equiv_punit</span><span class="o">,</span>
+  <span class="n">on_refl</span>  <span class="o">:=</span> <span class="bp">λ</span> <span class="n">α</span><span class="o">,</span> <span class="n">equiv</span><span class="bp">.</span><span class="n">ext</span> <span class="bp">_</span> <span class="bp">_</span> <span class="err">$</span> <span class="bp">λ</span> <span class="bp">⟨⟩</span><span class="o">,</span> <span class="n">rfl</span><span class="o">,</span>
+  <span class="n">on_trans</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">α</span> <span class="n">β</span> <span class="n">γ</span> <span class="n">e1</span> <span class="n">e2</span><span class="o">,</span> <span class="n">equiv</span><span class="bp">.</span><span class="n">ext</span> <span class="bp">_</span> <span class="bp">_</span> <span class="err">$</span> <span class="bp">λ</span> <span class="bp">⟨⟩</span><span class="o">,</span> <span class="n">rfl</span> <span class="o">}</span>
 
-lemma Fun.transportable (α : Type u) : (transportable (Fun α)) :=
-{ on_equiv := λ β γ e, equiv.arrow_congr (equiv.refl α) e,
-  on_refl  := λ β, equiv.ext _ _ $ λ f, rfl,
-  on_trans := λ β γ δ e1 e2, equiv.ext _ _ $ λ f, funext $ λ x,
-    by cases e1; cases e2; refl }
+<span class="kn">lemma</span> <span class="n">Fun</span><span class="bp">.</span><span class="n">transportable</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">transportable</span> <span class="o">(</span><span class="n">Fun</span> <span class="n">α</span><span class="o">))</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">on_equiv</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">β</span> <span class="n">γ</span> <span class="n">e</span><span class="o">,</span> <span class="n">equiv</span><span class="bp">.</span><span class="n">arrow_congr</span> <span class="o">(</span><span class="n">equiv</span><span class="bp">.</span><span class="n">refl</span> <span class="n">α</span><span class="o">)</span> <span class="n">e</span><span class="o">,</span>
+  <span class="n">on_refl</span>  <span class="o">:=</span> <span class="bp">λ</span> <span class="n">β</span><span class="o">,</span> <span class="n">equiv</span><span class="bp">.</span><span class="n">ext</span> <span class="bp">_</span> <span class="bp">_</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">f</span><span class="o">,</span> <span class="n">rfl</span><span class="o">,</span>
+  <span class="n">on_trans</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">β</span> <span class="n">γ</span> <span class="n">δ</span> <span class="n">e1</span> <span class="n">e2</span><span class="o">,</span> <span class="n">equiv</span><span class="bp">.</span><span class="n">ext</span> <span class="bp">_</span> <span class="bp">_</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">f</span><span class="o">,</span> <span class="n">funext</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">x</span><span class="o">,</span>
+    <span class="k">by</span> <span class="n">cases</span> <span class="n">e1</span><span class="bp">;</span> <span class="n">cases</span> <span class="n">e2</span><span class="bp">;</span> <span class="n">refl</span> <span class="o">}</span>
 
-theorem prod.ext' {α β : Type*} {p q : α × β} (H1 : p.1 = q.1) (H2 : p.2 = q.2) : p = q :=
-prod.ext.2 ⟨H1, H2⟩
+<span class="kn">theorem</span> <span class="n">prod</span><span class="bp">.</span><span class="n">ext&#39;</span> <span class="o">{</span><span class="n">α</span> <span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">{</span><span class="n">p</span> <span class="n">q</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">×</span> <span class="n">β</span><span class="o">}</span> <span class="o">(</span><span class="n">H1</span> <span class="o">:</span> <span class="n">p</span><span class="bp">.</span><span class="mi">1</span> <span class="bp">=</span> <span class="n">q</span><span class="bp">.</span><span class="mi">1</span><span class="o">)</span> <span class="o">(</span><span class="n">H2</span> <span class="o">:</span> <span class="n">p</span><span class="bp">.</span><span class="mi">2</span> <span class="bp">=</span> <span class="n">q</span><span class="bp">.</span><span class="mi">2</span><span class="o">)</span> <span class="o">:</span> <span class="n">p</span> <span class="bp">=</span> <span class="n">q</span> <span class="o">:=</span>
+<span class="n">prod</span><span class="bp">.</span><span class="n">ext</span><span class="bp">.</span><span class="mi">2</span> <span class="bp">⟨</span><span class="n">H1</span><span class="o">,</span> <span class="n">H2</span><span class="bp">⟩</span>
 
-lemma Prod.transportable (α : Type u) : (transportable (Prod α)) :=
-{ on_equiv := λ β γ e, equiv.prod_congr (equiv.refl α) e,
-  on_refl  := λ β, equiv.ext _ _ $ λ ⟨x, y⟩, by simp,
-  on_trans := λ β γ δ e1 e2, equiv.ext _ _ $ λ ⟨x, y⟩, by simp }
+<span class="kn">lemma</span> <span class="n">Prod</span><span class="bp">.</span><span class="n">transportable</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">transportable</span> <span class="o">(</span><span class="n">Prod</span> <span class="n">α</span><span class="o">))</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">on_equiv</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">β</span> <span class="n">γ</span> <span class="n">e</span><span class="o">,</span> <span class="n">equiv</span><span class="bp">.</span><span class="n">prod_congr</span> <span class="o">(</span><span class="n">equiv</span><span class="bp">.</span><span class="n">refl</span> <span class="n">α</span><span class="o">)</span> <span class="n">e</span><span class="o">,</span>
+  <span class="n">on_refl</span>  <span class="o">:=</span> <span class="bp">λ</span> <span class="n">β</span><span class="o">,</span> <span class="n">equiv</span><span class="bp">.</span><span class="n">ext</span> <span class="bp">_</span> <span class="bp">_</span> <span class="err">$</span> <span class="bp">λ</span> <span class="bp">⟨</span><span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="bp">⟩</span><span class="o">,</span> <span class="k">by</span> <span class="n">simp</span><span class="o">,</span>
+  <span class="n">on_trans</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">β</span> <span class="n">γ</span> <span class="n">δ</span> <span class="n">e1</span> <span class="n">e2</span><span class="o">,</span> <span class="n">equiv</span><span class="bp">.</span><span class="n">ext</span> <span class="bp">_</span> <span class="bp">_</span> <span class="err">$</span> <span class="bp">λ</span> <span class="bp">⟨</span><span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="bp">⟩</span><span class="o">,</span> <span class="k">by</span> <span class="n">simp</span> <span class="o">}</span>
 
-lemma Swap.transportable (α : Type u) : (transportable (Swap α)) :=
-{ on_equiv := λ β γ e, equiv.prod_congr e (equiv.refl α),
-  on_refl  := λ β, equiv.ext _ _ $ λ ⟨x, y⟩, by simp,
-  on_trans := λ β γ δ e1 e2, equiv.ext _ _ $ λ ⟨x, y⟩, by simp }
+<span class="kn">lemma</span> <span class="n">Swap</span><span class="bp">.</span><span class="n">transportable</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">transportable</span> <span class="o">(</span><span class="n">Swap</span> <span class="n">α</span><span class="o">))</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">on_equiv</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">β</span> <span class="n">γ</span> <span class="n">e</span><span class="o">,</span> <span class="n">equiv</span><span class="bp">.</span><span class="n">prod_congr</span> <span class="n">e</span> <span class="o">(</span><span class="n">equiv</span><span class="bp">.</span><span class="n">refl</span> <span class="n">α</span><span class="o">),</span>
+  <span class="n">on_refl</span>  <span class="o">:=</span> <span class="bp">λ</span> <span class="n">β</span><span class="o">,</span> <span class="n">equiv</span><span class="bp">.</span><span class="n">ext</span> <span class="bp">_</span> <span class="bp">_</span> <span class="err">$</span> <span class="bp">λ</span> <span class="bp">⟨</span><span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="bp">⟩</span><span class="o">,</span> <span class="k">by</span> <span class="n">simp</span><span class="o">,</span>
+  <span class="n">on_trans</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">β</span> <span class="n">γ</span> <span class="n">δ</span> <span class="n">e1</span> <span class="n">e2</span><span class="o">,</span> <span class="n">equiv</span><span class="bp">.</span><span class="n">ext</span> <span class="bp">_</span> <span class="bp">_</span> <span class="err">$</span> <span class="bp">λ</span> <span class="bp">⟨</span><span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="bp">⟩</span><span class="o">,</span> <span class="k">by</span> <span class="n">simp</span> <span class="o">}</span>
 
--- And then we can define
-def Hom1 (α : Type u) : Type v → Type (max u v) := λ β, α → β
-def Hom2 (β : Type v) : Type u → Type (max u v) := λ α, α → β
-def Aut : Type u → Type u := λ α, α → α
+<span class="c1">-- And then we can define</span>
+<span class="n">def</span> <span class="n">Hom1</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span> <span class="bp">→</span> <span class="kt">Type</span> <span class="o">(</span><span class="n">max</span> <span class="n">u</span> <span class="n">v</span><span class="o">)</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">β</span><span class="o">,</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span>
+<span class="n">def</span> <span class="n">Hom2</span> <span class="o">(</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span> <span class="bp">→</span> <span class="kt">Type</span> <span class="o">(</span><span class="n">max</span> <span class="n">u</span> <span class="n">v</span><span class="o">)</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">α</span><span class="o">,</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span>
+<span class="n">def</span> <span class="n">Aut</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span> <span class="bp">→</span> <span class="kt">Type</span> <span class="n">u</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">α</span><span class="o">,</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">α</span>
 
--- And hopefully automagically derive
-lemma Hom1.transportable (α : Type u) : (transportable (Hom1 α)) :=
-Fun.transportable α
+<span class="c1">-- And hopefully automagically derive</span>
+<span class="kn">lemma</span> <span class="n">Hom1</span><span class="bp">.</span><span class="n">transportable</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">transportable</span> <span class="o">(</span><span class="n">Hom1</span> <span class="n">α</span><span class="o">))</span> <span class="o">:=</span>
+<span class="n">Fun</span><span class="bp">.</span><span class="n">transportable</span> <span class="n">α</span>
 
-lemma Hom2.transportable (β : Type v) : (transportable (Hom2 β)) :=
-{ on_equiv := λ α γ e, equiv.arrow_congr e (equiv.refl β),
-  on_refl  := λ β, equiv.ext _ _ $ λ f, rfl,
-  on_trans := λ β γ δ e1 e2, equiv.ext _ _ $ λ f, funext $ λ x,
-    by cases e1; cases e2; refl }
+<span class="kn">lemma</span> <span class="n">Hom2</span><span class="bp">.</span><span class="n">transportable</span> <span class="o">(</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">transportable</span> <span class="o">(</span><span class="n">Hom2</span> <span class="n">β</span><span class="o">))</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">on_equiv</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">α</span> <span class="n">γ</span> <span class="n">e</span><span class="o">,</span> <span class="n">equiv</span><span class="bp">.</span><span class="n">arrow_congr</span> <span class="n">e</span> <span class="o">(</span><span class="n">equiv</span><span class="bp">.</span><span class="n">refl</span> <span class="n">β</span><span class="o">),</span>
+  <span class="n">on_refl</span>  <span class="o">:=</span> <span class="bp">λ</span> <span class="n">β</span><span class="o">,</span> <span class="n">equiv</span><span class="bp">.</span><span class="n">ext</span> <span class="bp">_</span> <span class="bp">_</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">f</span><span class="o">,</span> <span class="n">rfl</span><span class="o">,</span>
+  <span class="n">on_trans</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">β</span> <span class="n">γ</span> <span class="n">δ</span> <span class="n">e1</span> <span class="n">e2</span><span class="o">,</span> <span class="n">equiv</span><span class="bp">.</span><span class="n">ext</span> <span class="bp">_</span> <span class="bp">_</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">f</span><span class="o">,</span> <span class="n">funext</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">x</span><span class="o">,</span>
+    <span class="k">by</span> <span class="n">cases</span> <span class="n">e1</span><span class="bp">;</span> <span class="n">cases</span> <span class="n">e2</span><span class="bp">;</span> <span class="n">refl</span> <span class="o">}</span>
 
-lemma Aut.transportable : (transportable Aut) :=
-{ on_equiv := λ α β e, equiv.arrow_congr e e,
-  on_refl  := λ α, equiv.ext _ _ $ λ f, funext $ λ x, rfl,
-  on_trans := λ α β γ e1 e2, equiv.ext _ _ $ λ f, funext $ λ x,
-    by cases e1; cases e2; refl }
+<span class="kn">lemma</span> <span class="n">Aut</span><span class="bp">.</span><span class="n">transportable</span> <span class="o">:</span> <span class="o">(</span><span class="n">transportable</span> <span class="n">Aut</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">on_equiv</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">α</span> <span class="n">β</span> <span class="n">e</span><span class="o">,</span> <span class="n">equiv</span><span class="bp">.</span><span class="n">arrow_congr</span> <span class="n">e</span> <span class="n">e</span><span class="o">,</span>
+  <span class="n">on_refl</span>  <span class="o">:=</span> <span class="bp">λ</span> <span class="n">α</span><span class="o">,</span> <span class="n">equiv</span><span class="bp">.</span><span class="n">ext</span> <span class="bp">_</span> <span class="bp">_</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">f</span><span class="o">,</span> <span class="n">funext</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="n">rfl</span><span class="o">,</span>
+  <span class="n">on_trans</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">α</span> <span class="n">β</span> <span class="n">γ</span> <span class="n">e1</span> <span class="n">e2</span><span class="o">,</span> <span class="n">equiv</span><span class="bp">.</span><span class="n">ext</span> <span class="bp">_</span> <span class="bp">_</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">f</span><span class="o">,</span> <span class="n">funext</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">x</span><span class="o">,</span>
+    <span class="k">by</span> <span class="n">cases</span> <span class="n">e1</span><span class="bp">;</span> <span class="n">cases</span> <span class="n">e2</span><span class="bp">;</span> <span class="n">refl</span> <span class="o">}</span>
 
--- If we have all these in place...
--- A bit of magic might actually be able to derive `group.transportable` on line 11.
--- After all, a group just is a type plus some functions... and we can now transport functions.
-```
+<span class="c1">-- If we have all these in place...</span>
+<span class="c1">-- A bit of magic might actually be able to derive `group.transportable` on line 11.</span>
+<span class="c1">-- After all, a group just is a type plus some functions... and we can now transport functions.</span>
+</pre></div>
 
 #### [ Kenny Lau (Apr 27 2018 at 20:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125786273):
-golfed
+<p>golfed</p>
 
 #### [ Kenny Lau (Apr 27 2018 at 20:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125786284):
-@**Kevin Buzzard**
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span></p>
 
 #### [ Kenny Lau (Apr 27 2018 at 20:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125786301):
-https://github.com/kckennylau/Lean/blob/master/johan_challenge.lean
+<p><a href="https://github.com/kckennylau/Lean/blob/master/johan_challenge.lean" target="_blank" title="https://github.com/kckennylau/Lean/blob/master/johan_challenge.lean">https://github.com/kckennylau/Lean/blob/master/johan_challenge.lean</a></p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 20:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125787049):
-This is looking good
+<p>This is looking good</p>
 
 #### [ Kenny Lau (Apr 27 2018 at 20:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125787068):
-unfortunately, they wrote a destructor for `equiv.prod_congr` but not `equiv.arrow_congr`
+<p>unfortunately, they wrote a destructor for <code>equiv.prod_congr</code> but not <code>equiv.arrow_congr</code></p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 20:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125787133):
-Wooah what is going on in that proof of `Prod.transportable.on_equiv`
+<p>Wooah what is going on in that proof of <code>Prod.transportable.on_equiv</code></p>
 
 #### [ Kenny Lau (Apr 27 2018 at 20:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125787138):
-that's the example of a good destructor
+<p>that's the example of a good destructor</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 20:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125787210):
-kenny you still didn't beat the boss
+<p>kenny you still didn't beat the boss</p>
 
 #### [ Kenny Lau (Apr 27 2018 at 20:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125787228):
-who is the boss?
+<p>who is the boss?</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 20:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125787429):
-@**Johan Commelin** Kenny did all your levels
+<p><span class="user-mention" data-user-id="112680">@Johan Commelin</span> Kenny did all your levels</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 20:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125787430):
-except for group
+<p>except for group</p>
 
 #### [ Kenny Lau (Apr 27 2018 at 20:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125787432):
-I thought `group` is to be automated lol
+<p>I thought <code>group</code> is to be automated lol</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 20:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125787439):
-https://github.com/kckennylau/Lean/blob/master/johan_challenge.lean
+<p><a href="https://github.com/kckennylau/Lean/blob/master/johan_challenge.lean" target="_blank" title="https://github.com/kckennylau/Lean/blob/master/johan_challenge.lean">https://github.com/kckennylau/Lean/blob/master/johan_challenge.lean</a></p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 20:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125787450):
-So I think that you were looking for destructors in `equiv.lean`
+<p>So I think that you were looking for destructors in <code>equiv.lean</code></p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 20:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125787454):
-which is a really good place to look for them
+<p>which is a really good place to look for them</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 20:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125787504):
-@**Simon Hudon** what is the next move?
+<p><span class="user-mention" data-user-id="110026">@Simon Hudon</span> what is the next move?</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 20:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125787520):
-Are these solutions in any way useful to help writing a general tactic which would prove `equiv a b -> equiv (topological_field a) (topological_field b)`?
+<p>Are these solutions in any way useful to help writing a general tactic which would prove <code>equiv a b -&gt; equiv (topological_field a) (topological_field b)</code>?</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 20:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125787526):
-What needs to be done next?
+<p>What needs to be done next?</p>
 
 #### [ Simon Hudon (Apr 27 2018 at 20:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125787601):
-I'm looking into automating those proofs. I'm keeping it for later tonight, when I've met my writing goals for the week
+<p>I'm looking into automating those proofs. I'm keeping it for later tonight, when I've met my writing goals for the week</p>
 
 #### [ Simon Hudon (Apr 27 2018 at 20:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125787647):
-I have a tactic, `refine_struct`, on the back burner which I might have to finish to facilitate this exercise
+<p>I have a tactic, <code>refine_struct</code>, on the back burner which I might have to finish to facilitate this exercise</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 20:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125787731):
-Simon is there anything I can do to help?
+<p>Simon is there anything I can do to help?</p>
 
 #### [ Simon Hudon (Apr 27 2018 at 21:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125787876):
-Thanks for offering. Are you thinking of something in particular?
+<p>Thanks for offering. Are you thinking of something in particular?</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 21:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125787888):
-I don't understand how https://leanprover.zulipchat.com/#narrow/stream/113488-general/subject/proof.20of.20the.20five.20lemma/near/125768238 fits into the picture
+<p>I don't understand how <a href="#narrow/stream/113488-general/subject/proof.20of.20the.20five.20lemma/near/125768238" title="#narrow/stream/113488-general/subject/proof.20of.20the.20five.20lemma/near/125768238">https://leanprover.zulipchat.com/#narrow/stream/113488-general/subject/proof.20of.20the.20five.20lemma/near/125768238</a> fits into the picture</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 21:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125787896):
-Simon I am just interested in the question and it's the weekend
+<p>Simon I am just interested in the question and it's the weekend</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 21:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125787907):
-I really enjoyed playing some of Johan's levels
+<p>I really enjoyed playing some of Johan's levels</p>
 
 #### [ Kenny Lau (Apr 27 2018 at 21:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125787910):
-I enjoyed outgolfing kevin :P
+<p>I enjoyed outgolfing kevin :P</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 21:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125787954):
-and I wondered if you might say something of the form "please give me a human proof of `foo.transportable`
+<p>and I wondered if you might say something of the form "please give me a human proof of <code>foo.transportable</code></p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 21:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125787958):
-because these proofs are all really easy to do
+<p>because these proofs are all really easy to do</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 21:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125787960):
-because Kenny has found a million tricks
+<p>because Kenny has found a million tricks</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 21:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125787970):
-so the two motivations for doing more levels are
+<p>so the two motivations for doing more levels are</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 21:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125787971):
-(1) it's fun
+<p>(1) it's fun</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 21:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125787980):
-(2) it might help you see patterns
+<p>(2) it might help you see patterns</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 21:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125787984):
-(3) it might be necessary to get the automation off the ground
+<p>(3) it might be necessary to get the automation off the ground</p>
 
 #### [ Simon Hudon (Apr 27 2018 at 21:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125788036):
-I don't know how much fun it would be but how do you feel about writing a few sentences on some of the tricks that Kenny found?
+<p>I don't know how much fun it would be but how do you feel about writing a few sentences on some of the tricks that Kenny found?</p>
 
 #### [ Simon Hudon (Apr 27 2018 at 21:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125788097):
-... or a minimal example for them
+<p>... or a minimal example for them</p>
 
 #### [ Johan Commelin (Apr 27 2018 at 21:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125788446):
-Ok, really cool
+<p>Ok, really cool</p>
 
 #### [ Johan Commelin (Apr 27 2018 at 21:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125788486):
-I knew that Hom1 would be easy, given Fun
+<p>I knew that Hom1 would be easy, given Fun</p>
 
 #### [ Johan Commelin (Apr 27 2018 at 21:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125788500):
-But currying should also help, right?
+<p>But currying should also help, right?</p>
 
 #### [ Johan Commelin (Apr 27 2018 at 21:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125788504):
-to express some of the lemmas in terms of others...
+<p>to express some of the lemmas in terms of others...</p>
 
 #### [ Johan Commelin (Apr 27 2018 at 21:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125788596):
-@**Kenny Lau** You did not dissappoint me (-;
+<p><span class="user-mention" data-user-id="110064">@Kenny Lau</span> You did not dissappoint me (-;</p>
 
 #### [ Kenny Lau (Apr 27 2018 at 21:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125788603):
-:D
+<p>:D</p>
 
 #### [ Johan Commelin (Apr 27 2018 at 21:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125788704):
-By the way, what do you think... `transportable` or `transport_of_structure` ?
+<p>By the way, what do you think... <code>transportable</code> or <code>transport_of_structure</code> ?</p>
 
 #### [ Johan Commelin (Apr 27 2018 at 21:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125788707):
-I think I actually prefer the latter...
+<p>I think I actually prefer the latter...</p>
 
 #### [ Johan Commelin (Apr 27 2018 at 21:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125788792):
-@**Kenny Lau** `Aut = Fun \circ Prod`. Doesn't that help?
+<p><span class="user-mention" data-user-id="110064">@Kenny Lau</span> <code>Aut = Fun \circ Prod</code>. Doesn't that help?</p>
 
 #### [ Johan Commelin (Apr 27 2018 at 21:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125788837):
-I hope it does... because that is how a mathematician would prove it...
+<p>I hope it does... because that is how a mathematician would prove it...</p>
 
 #### [ Johan Commelin (Apr 27 2018 at 21:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125788844):
-Aaah, so maybe here is "level 3": show that transportable stuff composes
+<p>Aaah, so maybe here is "level 3": show that transportable stuff composes</p>
 
 #### [ Johan Commelin (Apr 27 2018 at 21:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125788852):
-Lean is a nightmare on the machine that I am typing on.
+<p>Lean is a nightmare on the machine that I am typing on.</p>
 
 #### [ Johan Commelin (Apr 27 2018 at 21:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125788859):
-So I can't actually do anything myself (-;
+<p>So I can't actually do anything myself (-;</p>
 
 #### [ Patrick Massot (Apr 27 2018 at 21:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125788866):
-Have you compiled mathlib on this machine?
+<p>Have you compiled mathlib on this machine?</p>
 
 #### [ Johan Commelin (Apr 27 2018 at 21:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125788873):
-@**Kevin Buzzard** If you are looking for another small challenge, maybe show that if `f` and `g` are transportable, then so is `g \circ f`.
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> If you are looking for another small challenge, maybe show that if <code>f</code> and <code>g</code> are transportable, then so is <code>g \circ f</code>.</p>
 
 #### [ Johan Commelin (Apr 27 2018 at 21:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125788917):
-@**Patrick Massot** An old version... it took more then an hour and the machine was unusable and almost overheating.
+<p><span class="user-mention" data-user-id="110031">@Patrick Massot</span> An old version... it took more then an hour and the machine was unusable and almost overheating.</p>
 
 #### [ Kenny Lau (Apr 27 2018 at 21:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125788922):
-```quote
-@**Kenny Lau** `Aut = Fun \circ Prod`. Doesn't that help?
-```
-unfortunately the transitive destructor is not available :P
+<blockquote>
+<p><span class="user-mention" data-user-id="110064">@Kenny Lau</span> <code>Aut = Fun \circ Prod</code>. Doesn't that help?</p>
+</blockquote>
+<p>unfortunately the transitive destructor is not available :P</p>
 
 #### [ Johan Commelin (Apr 27 2018 at 21:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125788929):
-This is a Thinkpad X61: older than my kids...
+<p>This is a Thinkpad X61: older than my kids...</p>
 
 #### [ Kenny Lau (Apr 27 2018 at 21:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125788933):
-I might have to prove those destructors
+<p>I might have to prove those destructors</p>
 
 #### [ Johan Commelin (Apr 27 2018 at 21:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125788938):
-That sounds like it is useful
+<p>That sounds like it is useful</p>
 
 #### [ Kenny Lau (Apr 27 2018 at 21:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125789003):
-oh that isn't a transitive destructor though
+<p>oh that isn't a transitive destructor though</p>
 
 #### [ Kenny Lau (Apr 27 2018 at 21:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125789007):
-I mean, `@[trans]` won't work
+<p>I mean, <code>@[trans]</code> won't work</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 21:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125789226):
-here is a recent Lean tip -- occasionally get your file and give it a good shake
+<p>here is a recent Lean tip -- occasionally get your file and give it a good shake</p>
 
 #### [ Kenny Lau (Apr 27 2018 at 21:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125789235):
-@**Johan Commelin** how is Aut = Fun \o Prod?
+<p><span class="user-mention" data-user-id="112680">@Johan Commelin</span> how is Aut = Fun \o Prod?</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 21:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125789241):
-I think Gabriel changed the VS Code Lean extension
+<p>I think Gabriel changed the VS Code Lean extension</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 21:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125789244):
-so it only compiles parts of the file
+<p>so it only compiles parts of the file</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 21:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125789246):
-and sometimes it can get confused
+<p>and sometimes it can get confused</p>
 
 #### [ Kenny Lau (Apr 27 2018 at 21:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125789247):
-the compiler is very slow for me recently
+<p>the compiler is very slow for me recently</p>
 
 #### [ Kenny Lau (Apr 27 2018 at 21:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125789249):
-I often have to wait 10+ minutes before things compile
+<p>I often have to wait 10+ minutes before things compile</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 21:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125789250):
-and giving it a shake works well for me
+<p>and giving it a shake works well for me</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 21:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125789253):
-oh that's not good
+<p>oh that's not good</p>
 
 #### [ Johan Commelin (Apr 27 2018 at 21:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125789302):
-@**Kenny Lau** That was a bit of a brain-fart. Sorry
+<p><span class="user-mention" data-user-id="110064">@Kenny Lau</span> That was a bit of a brain-fart. Sorry</p>
 
 #### [ Kenny Lau (Apr 27 2018 at 21:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125789314):
-```lean
-local attribute [simp] transportable.on_refl transportable.on_trans
+<div class="codehilite"><pre><span></span><span class="n">local</span> <span class="n">attribute</span> <span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="n">transportable</span><span class="bp">.</span><span class="n">on_refl</span> <span class="n">transportable</span><span class="bp">.</span><span class="n">on_trans</span>
 
-def transportable.trans (f : Type u → Type v) (g : Type v → Type w)
-  [transportable f] [transportable g] : transportable (g ∘ f) :=
-{ on_equiv := λ α β e, show g (f α) ≃ g (f β), from transportable.on_equiv g (transportable.on_equiv f e),
-  on_refl  := λ α, by simp,
-  on_trans := λ α β γ e₁ e₂, by simp }
-```
+<span class="n">def</span> <span class="n">transportable</span><span class="bp">.</span><span class="n">trans</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span> <span class="bp">→</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">)</span> <span class="o">(</span><span class="n">g</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span> <span class="bp">→</span> <span class="kt">Type</span> <span class="n">w</span><span class="o">)</span>
+  <span class="o">[</span><span class="n">transportable</span> <span class="n">f</span><span class="o">]</span> <span class="o">[</span><span class="n">transportable</span> <span class="n">g</span><span class="o">]</span> <span class="o">:</span> <span class="n">transportable</span> <span class="o">(</span><span class="n">g</span> <span class="err">∘</span> <span class="n">f</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">on_equiv</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">α</span> <span class="n">β</span> <span class="n">e</span><span class="o">,</span> <span class="k">show</span> <span class="n">g</span> <span class="o">(</span><span class="n">f</span> <span class="n">α</span><span class="o">)</span> <span class="err">≃</span> <span class="n">g</span> <span class="o">(</span><span class="n">f</span> <span class="n">β</span><span class="o">),</span> <span class="k">from</span> <span class="n">transportable</span><span class="bp">.</span><span class="n">on_equiv</span> <span class="n">g</span> <span class="o">(</span><span class="n">transportable</span><span class="bp">.</span><span class="n">on_equiv</span> <span class="n">f</span> <span class="n">e</span><span class="o">),</span>
+  <span class="n">on_refl</span>  <span class="o">:=</span> <span class="bp">λ</span> <span class="n">α</span><span class="o">,</span> <span class="k">by</span> <span class="n">simp</span><span class="o">,</span>
+  <span class="n">on_trans</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">α</span> <span class="n">β</span> <span class="n">γ</span> <span class="n">e₁</span> <span class="n">e₂</span><span class="o">,</span> <span class="k">by</span> <span class="n">simp</span> <span class="o">}</span>
+</pre></div>
 
 #### [ Johan Commelin (Apr 27 2018 at 21:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125789315):
-Mi mas go slip nau. Gutpela wok olgeta! Lukim!
+<p>Mi mas go slip nau. Gutpela wok olgeta! Lukim!</p>
 
 #### [ Kenny Lau (Apr 27 2018 at 21:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125789317):
-I like my addition
+<p>I like my addition</p>
 
 #### [ Kenny Lau (Apr 27 2018 at 21:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125789318):
-https://github.com/kckennylau/Lean/blob/master/johan_challenge.lean
+<p><a href="https://github.com/kckennylau/Lean/blob/master/johan_challenge.lean" target="_blank" title="https://github.com/kckennylau/Lean/blob/master/johan_challenge.lean">https://github.com/kckennylau/Lean/blob/master/johan_challenge.lean</a></p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 21:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125789320):
-```quote
-I don't know how much fun it would be but how do you feel about writing a few sentences on some of the tricks that Kenny found?
-```
-I would love to do that.
+<blockquote>
+<p>I don't know how much fun it would be but how do you feel about writing a few sentences on some of the tricks that Kenny found?</p>
+</blockquote>
+<p>I would love to do that.</p>
 
 #### [ Kenny Lau (Apr 27 2018 at 21:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125789322):
-tok pisin :o
+<p>tok pisin :o</p>
 
 #### [ Johan Commelin (Apr 27 2018 at 21:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125789327):
-Em nau.
+<p>Em nau.</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 22:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125790151):
-Hey! `topological_ring _` is a `Prop` not a `Type`
+<p>Hey! <code>topological_ring _</code> is a <code>Prop</code> not a <code>Type</code></p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 22:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125790167):
-`theorem topological_ring.transportable : transportable topological_ring := sorry`
+<p><code>theorem topological_ring.transportable : transportable topological_ring := sorry</code></p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 22:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125790210):
-gives an error
+<p>gives an error</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 22:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125790214):
-```lean
-type mismatch at application
-  transportable topological_ring
-term
-  topological_ring
-has type
-  Π (α : Type ?) [_inst_1 : topological_space α] [_inst_2 : ring α], Prop : Type (?+1)
-but is expected to have type
-  Type ? → Type ? : Type (max (?+1) (?+1))
-```
+<div class="codehilite"><pre><span></span><span class="n">type</span> <span class="n">mismatch</span> <span class="n">at</span> <span class="n">application</span>
+  <span class="n">transportable</span> <span class="n">topological_ring</span>
+<span class="n">term</span>
+  <span class="n">topological_ring</span>
+<span class="n">has</span> <span class="n">type</span>
+  <span class="bp">Π</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="err">?</span><span class="o">)</span> <span class="o">[</span><span class="bp">_</span><span class="n">inst_1</span> <span class="o">:</span> <span class="n">topological_space</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="bp">_</span><span class="n">inst_2</span> <span class="o">:</span> <span class="n">ring</span> <span class="n">α</span><span class="o">],</span> <span class="kt">Prop</span> <span class="o">:</span> <span class="kt">Type</span> <span class="o">(</span><span class="err">?</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span>
+<span class="n">but</span> <span class="n">is</span> <span class="n">expected</span> <span class="n">to</span> <span class="k">have</span> <span class="n">type</span>
+  <span class="kt">Type</span> <span class="err">?</span> <span class="bp">→</span> <span class="kt">Type</span> <span class="err">?</span> <span class="o">:</span> <span class="kt">Type</span> <span class="o">(</span><span class="n">max</span> <span class="o">(</span><span class="err">?</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="o">(</span><span class="err">?</span><span class="bp">+</span><span class="mi">1</span><span class="o">))</span>
+</pre></div>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 22:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125790240):
-My new toy is broken
+<p>My new toy is broken</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 22:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125790251):
-`class transportable (f : Type u → Type v) :=`
+<p><code>class transportable (f : Type u → Type v) :=</code></p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 22:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125790311):
-it's not that it's a prop
+<p>it's not that it's a prop</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 22:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125790314):
-is the issue that it's not a function?
+<p>is the issue that it's not a function?</p>
 
 #### [ Kenny Lau (Apr 27 2018 at 22:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125790321):
-right
+<p>right</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 22:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125790331):
-but a topological ring is the same as a group
+<p>but a topological ring is the same as a group</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 22:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125790357):
-if I have a topological ring structure on X and a canonical isomorphism `X -> Y` then I want a topological ring structure on `Y`
+<p>if I have a topological ring structure on X and a canonical isomorphism <code>X -&gt; Y</code> then I want a topological ring structure on <code>Y</code></p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 22:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125790950):
-What is `theorem topological_ring.transportable ` ?
+<p>What is <code>theorem topological_ring.transportable </code> ?</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 22:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125791009):
-```lean
-import analysis.topology.topological_structures
-#check topological_ring
-```
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">analysis</span><span class="bp">.</span><span class="n">topology</span><span class="bp">.</span><span class="n">topological_structures</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="n">topological_ring</span>
+</pre></div>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 22:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125791026):
-this doesn't typecheck
+<p>this doesn't typecheck</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 22:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125791027):
-```lean
-theorem topological_ring.transportable : transportable
-  (λ R : (Σ (α : Type u), (topological_space α) × (ring α)) , 
-    @topological_ring R.fst (R.snd).1 (R.snd).2) := sorry
-```
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">topological_ring</span><span class="bp">.</span><span class="n">transportable</span> <span class="o">:</span> <span class="n">transportable</span>
+  <span class="o">(</span><span class="bp">λ</span> <span class="n">R</span> <span class="o">:</span> <span class="o">(</span><span class="err">Σ</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">),</span> <span class="o">(</span><span class="n">topological_space</span> <span class="n">α</span><span class="o">)</span> <span class="bp">×</span> <span class="o">(</span><span class="n">ring</span> <span class="n">α</span><span class="o">))</span> <span class="o">,</span>
+    <span class="bp">@</span><span class="n">topological_ring</span> <span class="n">R</span><span class="bp">.</span><span class="n">fst</span> <span class="o">(</span><span class="n">R</span><span class="bp">.</span><span class="n">snd</span><span class="o">)</span><span class="bp">.</span><span class="mi">1</span> <span class="o">(</span><span class="n">R</span><span class="bp">.</span><span class="n">snd</span><span class="o">)</span><span class="bp">.</span><span class="mi">2</span><span class="o">)</span> <span class="o">:=</span> <span class="n">sorry</span>
+</pre></div>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 22:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125791031):
-What am I doing wrong?
+<p>What am I doing wrong?</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 22:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125791039):
-Simon -- I was writing some goals in the docs
+<p>Simon -- I was writing some goals in the docs</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 22:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125791044):
-and transfer of a topological ring structure is one of the goals
+<p>and transfer of a topological ring structure is one of the goals</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 22:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125791207):
-we can write this
+<p>we can write this</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 22:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125791210):
-`def transport_ring {α β : Type} [topological_field α] (f : α ≃ β) : topological_field β := sorry`
+<p><code>def transport_ring {α β : Type} [topological_field α] (f : α ≃ β) : topological_field β := sorry</code></p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 22:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125791214):
-but I don't understand how to embed it in the `transportable` class
+<p>but I don't understand how to embed it in the <code>transportable</code> class</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 22:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125792177):
-Kenny you posted this earlier:
+<p>Kenny you posted this earlier:</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 22:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125792187):
-```lean
-import data.equiv
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">equiv</span>
 
-def transport_ring {α β : Type*} [ring α] (f : α ≃ β) : ring β :=
-{ add := λ x y, f (f.symm x + f.symm y),
-  zero := f 0,
-  neg := λ x, f (-f.symm x),
-  mul := λ x y, f (f.symm x * f.symm y),
-  one := f 1,
-  add_assoc := λ x y z, by simp; from add_assoc _ _ _,
-  zero_add := λ x, by simp; from (equiv.apply_eq_iff_eq_inverse_apply _ _ _).2 (zero_add _),
-  add_zero := λ x, by simp; from (equiv.apply_eq_iff_eq_inverse_apply _ _ _).2 (add_zero _),
-  add_left_neg := λ x, by simp; from add_left_neg _,
-  add_comm := λ x y, by simp; from add_comm _ _,
-  mul_assoc := λ x y z, by simp; from mul_assoc _ _ _,
-  one_mul := λ x, by simp; from (equiv.apply_eq_iff_eq_inverse_apply _ _ _).2 (one_mul _),
-  mul_one := λ x, by simp; from (equiv.apply_eq_iff_eq_inverse_apply _ _ _).2 (mul_one _),
-  left_distrib := λ x y z, by simp; from left_distrib _ _ _,
-  right_distrib := λ x y z, by simp; from right_distrib _ _ _, }
-```
+<span class="n">def</span> <span class="n">transport_ring</span> <span class="o">{</span><span class="n">α</span> <span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">ring</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="err">≃</span> <span class="n">β</span><span class="o">)</span> <span class="o">:</span> <span class="n">ring</span> <span class="n">β</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">add</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">x</span> <span class="n">y</span><span class="o">,</span> <span class="n">f</span> <span class="o">(</span><span class="n">f</span><span class="bp">.</span><span class="n">symm</span> <span class="n">x</span> <span class="bp">+</span> <span class="n">f</span><span class="bp">.</span><span class="n">symm</span> <span class="n">y</span><span class="o">),</span>
+  <span class="n">zero</span> <span class="o">:=</span> <span class="n">f</span> <span class="mi">0</span><span class="o">,</span>
+  <span class="n">neg</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="n">f</span> <span class="o">(</span><span class="bp">-</span><span class="n">f</span><span class="bp">.</span><span class="n">symm</span> <span class="n">x</span><span class="o">),</span>
+  <span class="n">mul</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">x</span> <span class="n">y</span><span class="o">,</span> <span class="n">f</span> <span class="o">(</span><span class="n">f</span><span class="bp">.</span><span class="n">symm</span> <span class="n">x</span> <span class="bp">*</span> <span class="n">f</span><span class="bp">.</span><span class="n">symm</span> <span class="n">y</span><span class="o">),</span>
+  <span class="n">one</span> <span class="o">:=</span> <span class="n">f</span> <span class="mi">1</span><span class="o">,</span>
+  <span class="n">add_assoc</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">x</span> <span class="n">y</span> <span class="n">z</span><span class="o">,</span> <span class="k">by</span> <span class="n">simp</span><span class="bp">;</span> <span class="k">from</span> <span class="n">add_assoc</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">,</span>
+  <span class="n">zero_add</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="k">by</span> <span class="n">simp</span><span class="bp">;</span> <span class="k">from</span> <span class="o">(</span><span class="n">equiv</span><span class="bp">.</span><span class="n">apply_eq_iff_eq_inverse_apply</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">)</span><span class="bp">.</span><span class="mi">2</span> <span class="o">(</span><span class="n">zero_add</span> <span class="bp">_</span><span class="o">),</span>
+  <span class="n">add_zero</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="k">by</span> <span class="n">simp</span><span class="bp">;</span> <span class="k">from</span> <span class="o">(</span><span class="n">equiv</span><span class="bp">.</span><span class="n">apply_eq_iff_eq_inverse_apply</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">)</span><span class="bp">.</span><span class="mi">2</span> <span class="o">(</span><span class="n">add_zero</span> <span class="bp">_</span><span class="o">),</span>
+  <span class="n">add_left_neg</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="k">by</span> <span class="n">simp</span><span class="bp">;</span> <span class="k">from</span> <span class="n">add_left_neg</span> <span class="bp">_</span><span class="o">,</span>
+  <span class="n">add_comm</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">x</span> <span class="n">y</span><span class="o">,</span> <span class="k">by</span> <span class="n">simp</span><span class="bp">;</span> <span class="k">from</span> <span class="n">add_comm</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">,</span>
+  <span class="n">mul_assoc</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">x</span> <span class="n">y</span> <span class="n">z</span><span class="o">,</span> <span class="k">by</span> <span class="n">simp</span><span class="bp">;</span> <span class="k">from</span> <span class="n">mul_assoc</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">,</span>
+  <span class="n">one_mul</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="k">by</span> <span class="n">simp</span><span class="bp">;</span> <span class="k">from</span> <span class="o">(</span><span class="n">equiv</span><span class="bp">.</span><span class="n">apply_eq_iff_eq_inverse_apply</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">)</span><span class="bp">.</span><span class="mi">2</span> <span class="o">(</span><span class="n">one_mul</span> <span class="bp">_</span><span class="o">),</span>
+  <span class="n">mul_one</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="k">by</span> <span class="n">simp</span><span class="bp">;</span> <span class="k">from</span> <span class="o">(</span><span class="n">equiv</span><span class="bp">.</span><span class="n">apply_eq_iff_eq_inverse_apply</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">)</span><span class="bp">.</span><span class="mi">2</span> <span class="o">(</span><span class="n">mul_one</span> <span class="bp">_</span><span class="o">),</span>
+  <span class="n">left_distrib</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">x</span> <span class="n">y</span> <span class="n">z</span><span class="o">,</span> <span class="k">by</span> <span class="n">simp</span><span class="bp">;</span> <span class="k">from</span> <span class="n">left_distrib</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">,</span>
+  <span class="n">right_distrib</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">x</span> <span class="n">y</span> <span class="n">z</span><span class="o">,</span> <span class="k">by</span> <span class="n">simp</span><span class="bp">;</span> <span class="k">from</span> <span class="n">right_distrib</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">,</span> <span class="o">}</span>
+</pre></div>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 22:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125792191):
-and if I change the top lines to
+<p>and if I change the top lines to</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 22:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125792208):
-```lean
-import data.equiv
-universes u v
-def transport_ring {α : Type u} {β : Type v} [ring α] (f : α ≃ β) : ring β :=
-```
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">equiv</span>
+<span class="n">universes</span> <span class="n">u</span> <span class="n">v</span>
+<span class="n">def</span> <span class="n">transport_ring</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">}</span> <span class="o">[</span><span class="n">ring</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="err">≃</span> <span class="n">β</span><span class="o">)</span> <span class="o">:</span> <span class="n">ring</span> <span class="n">β</span> <span class="o">:=</span>
+</pre></div>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 22:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125792210):
-then your code doesn't compile any more
+<p>then your code doesn't compile any more</p>
 
 #### [ Kenny Lau (Apr 27 2018 at 22:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125792257):
-this is interesting
+<p>this is interesting</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 22:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125792259):
-Are you only proving `transport_ring` for types in the same universe, and is this easier to do than the general case?
+<p>Are you only proving <code>transport_ring</code> for types in the same universe, and is this easier to do than the general case?</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 23:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125792706):
-```lean
-import data.equiv
-import analysis.topology.topological_structures
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">equiv</span>
+<span class="kn">import</span> <span class="n">analysis</span><span class="bp">.</span><span class="n">topology</span><span class="bp">.</span><span class="n">topological_structures</span>
 
-def transport_topological_ring {α β : Type} 
-  [topological_space α] [ring α] [topological_ring α] (f : α ≃ β) : @topological_ring β sorry sorry := sorry
-```
+<span class="n">def</span> <span class="n">transport_topological_ring</span> <span class="o">{</span><span class="n">α</span> <span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span>
+  <span class="o">[</span><span class="n">topological_space</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">ring</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">topological_ring</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="err">≃</span> <span class="n">β</span><span class="o">)</span> <span class="o">:</span> <span class="bp">@</span><span class="n">topological_ring</span> <span class="n">β</span> <span class="n">sorry</span> <span class="n">sorry</span> <span class="o">:=</span> <span class="n">sorry</span>
+</pre></div>
 
 #### [ Chris Hughes (Apr 27 2018 at 23:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125792744):
-I doesn't seem like it would be any easier in the same universe.
+<p>I doesn't seem like it would be any easier in the same universe.</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 23:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125792746):
-Least it typechecks
+<p>Least it typechecks</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 23:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125792751):
-I tried putting Kenny's proof into the same universe and there were still errors
+<p>I tried putting Kenny's proof into the same universe and there were still errors</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 23:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125792754):
-there are universe subtleties I don't understand
+<p>there are universe subtleties I don't understand</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 23:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125792796):
-Chris this is all your fault :-)
+<p>Chris this is all your fault :-)</p>
 
 #### [ Kevin Buzzard (Apr 27 2018 at 23:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125792804):
-You proved the lemma only for rings canonically isomorphic to the rings I wanted
+<p>You proved the lemma only for rings canonically isomorphic to the rings I wanted</p>
 
 #### [ Reid Barton (Apr 28 2018 at 00:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125795177):
-By adding more `transportable` classes for type constructors with multiple arguments, we could extend these ideas to situations where we have an isomorphism which respects some existing structure and we want to transport some additional structure (or property) across it. Here is a sketch of the idea: https://gist.github.com/rwbarton/d847ef6d1783f0d0859eb80de8327bad
+<p>By adding more <code>transportable</code> classes for type constructors with multiple arguments, we could extend these ideas to situations where we have an isomorphism which respects some existing structure and we want to transport some additional structure (or property) across it. Here is a sketch of the idea: <a href="https://gist.github.com/rwbarton/d847ef6d1783f0d0859eb80de8327bad" target="_blank" title="https://gist.github.com/rwbarton/d847ef6d1783f0d0859eb80de8327bad">https://gist.github.com/rwbarton/d847ef6d1783f0d0859eb80de8327bad</a></p>
 
 #### [ Reid Barton (Apr 28 2018 at 00:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125795238):
-The key point is the definition
-```lean
-def is_homeomorphism {α β : Type u} [tα : topological_space α] [tβ : topological_space β] (e : α ≃ β) :=
-tβ = transport topological_space e tα
-```
-which seems to be more fundamental than the category-style definition "continuous function with a continuous inverse", since the definition of `transport` does not even need the notion of continuous function.
+<p>The key point is the definition</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">is_homeomorphism</span> <span class="o">{</span><span class="n">α</span> <span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">[</span><span class="n">tα</span> <span class="o">:</span> <span class="n">topological_space</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">tβ</span> <span class="o">:</span> <span class="n">topological_space</span> <span class="n">β</span><span class="o">]</span> <span class="o">(</span><span class="n">e</span> <span class="o">:</span> <span class="n">α</span> <span class="err">≃</span> <span class="n">β</span><span class="o">)</span> <span class="o">:=</span>
+<span class="n">tβ</span> <span class="bp">=</span> <span class="n">transport</span> <span class="n">topological_space</span> <span class="n">e</span> <span class="n">tα</span>
+</pre></div>
+
+
+<p>which seems to be more fundamental than the category-style definition "continuous function with a continuous inverse", since the definition of <code>transport</code> does not even need the notion of continuous function.</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 00:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125795266):
-This proof does not work:
+<p>This proof does not work:</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 00:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125795307):
-```lean
-def Const : Type u → Type v := λ α, punit
-lemma Const.transportable : (transportable Const) :=
-{ on_equiv := λ α β e, equiv.punit_equiv_punit,
-  on_refl  := λ α, equiv.ext _ _ $ λ ⟨⟩, rfl,
-  on_trans := λ α β γ e1 e2, by congr}
-```
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">Const</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span> <span class="bp">→</span> <span class="kt">Type</span> <span class="n">v</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">α</span><span class="o">,</span> <span class="n">punit</span>
+<span class="kn">lemma</span> <span class="n">Const</span><span class="bp">.</span><span class="n">transportable</span> <span class="o">:</span> <span class="o">(</span><span class="n">transportable</span> <span class="n">Const</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">on_equiv</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">α</span> <span class="n">β</span> <span class="n">e</span><span class="o">,</span> <span class="n">equiv</span><span class="bp">.</span><span class="n">punit_equiv_punit</span><span class="o">,</span>
+  <span class="n">on_refl</span>  <span class="o">:=</span> <span class="bp">λ</span> <span class="n">α</span><span class="o">,</span> <span class="n">equiv</span><span class="bp">.</span><span class="n">ext</span> <span class="bp">_</span> <span class="bp">_</span> <span class="err">$</span> <span class="bp">λ</span> <span class="bp">⟨⟩</span><span class="o">,</span> <span class="n">rfl</span><span class="o">,</span>
+  <span class="n">on_trans</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">α</span> <span class="n">β</span> <span class="n">γ</span> <span class="n">e1</span> <span class="n">e2</span><span class="o">,</span> <span class="k">by</span> <span class="n">congr</span><span class="o">}</span>
+</pre></div>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 00:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125795310):
-but this proof works:
+<p>but this proof works:</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 00:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125795316):
-```lean
-def Const : Type u → Type v := λ α, punit
-lemma Const.transportable : (transportable Const) :=
-{ on_equiv := λ α β e, equiv.punit_equiv_punit,
-  on_refl  := λ α, equiv.ext _ _ $ λ ⟨⟩, rfl,
-  on_trans := λ α β γ e1 e2, equiv.ext _ _ $ λ ⟨⟩, rfl }
-```
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">Const</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span> <span class="bp">→</span> <span class="kt">Type</span> <span class="n">v</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">α</span><span class="o">,</span> <span class="n">punit</span>
+<span class="kn">lemma</span> <span class="n">Const</span><span class="bp">.</span><span class="n">transportable</span> <span class="o">:</span> <span class="o">(</span><span class="n">transportable</span> <span class="n">Const</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">on_equiv</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">α</span> <span class="n">β</span> <span class="n">e</span><span class="o">,</span> <span class="n">equiv</span><span class="bp">.</span><span class="n">punit_equiv_punit</span><span class="o">,</span>
+  <span class="n">on_refl</span>  <span class="o">:=</span> <span class="bp">λ</span> <span class="n">α</span><span class="o">,</span> <span class="n">equiv</span><span class="bp">.</span><span class="n">ext</span> <span class="bp">_</span> <span class="bp">_</span> <span class="err">$</span> <span class="bp">λ</span> <span class="bp">⟨⟩</span><span class="o">,</span> <span class="n">rfl</span><span class="o">,</span>
+  <span class="n">on_trans</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">α</span> <span class="n">β</span> <span class="n">γ</span> <span class="n">e1</span> <span class="n">e2</span><span class="o">,</span> <span class="n">equiv</span><span class="bp">.</span><span class="n">ext</span> <span class="bp">_</span> <span class="bp">_</span> <span class="err">$</span> <span class="bp">λ</span> <span class="bp">⟨⟩</span><span class="o">,</span> <span class="n">rfl</span> <span class="o">}</span>
+</pre></div>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 00:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125795325):
-and this proof works:
+<p>and this proof works:</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 00:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125795331):
-```lean
-def Const' : Type u → Type v := λ α, punit
-lemma Const'.transportable : (transportable Const) := { 
-  on_equiv := λ α β H,⟨λ _,punit.star,λ _,punit.star,λ ⟨⟩,rfl,λ ⟨⟩,rfl⟩,
-  on_refl := λ α, equiv.ext _ _ (λ ⟨⟩,rfl),
-  on_trans := λ α β γ Hαβ Hβγ,by congr
-  } 
-```
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">Const&#39;</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span> <span class="bp">→</span> <span class="kt">Type</span> <span class="n">v</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">α</span><span class="o">,</span> <span class="n">punit</span>
+<span class="kn">lemma</span> <span class="n">Const&#39;</span><span class="bp">.</span><span class="n">transportable</span> <span class="o">:</span> <span class="o">(</span><span class="n">transportable</span> <span class="n">Const</span><span class="o">)</span> <span class="o">:=</span> <span class="o">{</span>
+  <span class="n">on_equiv</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">α</span> <span class="n">β</span> <span class="n">H</span><span class="o">,</span><span class="bp">⟨λ</span> <span class="bp">_</span><span class="o">,</span><span class="n">punit</span><span class="bp">.</span><span class="n">star</span><span class="o">,</span><span class="bp">λ</span> <span class="bp">_</span><span class="o">,</span><span class="n">punit</span><span class="bp">.</span><span class="n">star</span><span class="o">,</span><span class="bp">λ</span> <span class="bp">⟨⟩</span><span class="o">,</span><span class="n">rfl</span><span class="o">,</span><span class="bp">λ</span> <span class="bp">⟨⟩</span><span class="o">,</span><span class="n">rfl</span><span class="bp">⟩</span><span class="o">,</span>
+  <span class="n">on_refl</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">α</span><span class="o">,</span> <span class="n">equiv</span><span class="bp">.</span><span class="n">ext</span> <span class="bp">_</span> <span class="bp">_</span> <span class="o">(</span><span class="bp">λ</span> <span class="bp">⟨⟩</span><span class="o">,</span><span class="n">rfl</span><span class="o">),</span>
+  <span class="n">on_trans</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">α</span> <span class="n">β</span> <span class="n">γ</span> <span class="n">Hαβ</span> <span class="n">Hβγ</span><span class="o">,</span><span class="k">by</span> <span class="n">congr</span>
+  <span class="o">}</span>
+</pre></div>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 00:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125795386):
-I am interested in the idea of filling in fields using tactics but I can only use `congr` if I set it up in a certain way
+<p>I am interested in the idea of filling in fields using tactics but I can only use <code>congr</code> if I set it up in a certain way</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 00:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125795472):
-```quote
-did you take a look at the `transfer` paper I linked way back? That's how in core lean they move proofs between `int` and `(a , b) : nat * nat`, which (and maybe I'm not understanding the details here very well) is your problem of transporting proofs between isomorphic types?
-```
-Can you remind me of the link?
+<blockquote>
+<p>did you take a look at the <code>transfer</code> paper I linked way back? That's how in core lean they move proofs between <code>int</code> and <code>(a , b) : nat * nat</code>, which (and maybe I'm not understanding the details here very well) is your problem of transporting proofs between isomorphic types?</p>
+</blockquote>
+<p>Can you remind me of the link?</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 00:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125795475):
-@**Andrew Ashworth**
+<p><span class="user-mention" data-user-id="110025">@Andrew Ashworth</span></p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 00:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125795476):
-My search skills are weak today
+<p>My search skills are weak today</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 00:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125795552):
-```quote
-The key point is the definition
-```lean
-def is_homeomorphism {α β : Type u} [tα : topological_space α] [tβ : topological_space β] (e : α ≃ β) :=
-tβ = transport topological_space e tα
-```
-which seems to be more fundamental than the category-style definition "continuous function with a continuous inverse", since the definition of `transport` does not even need the notion of continuous function.
-```
-At some point I am going to want more than just an equiv -- I will want that two canonical isomorphisms `equiv A A'` and `equiv B B'` commute with some given maps `A -> B` and `A' -> B'` which are both "defined naturally".
+<blockquote>
+<p>The key point is the definition</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">is_homeomorphism</span> <span class="o">{</span><span class="n">α</span> <span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">[</span><span class="n">tα</span> <span class="o">:</span> <span class="n">topological_space</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">tβ</span> <span class="o">:</span> <span class="n">topological_space</span> <span class="n">β</span><span class="o">]</span> <span class="o">(</span><span class="n">e</span> <span class="o">:</span> <span class="n">α</span> <span class="err">≃</span> <span class="n">β</span><span class="o">)</span> <span class="o">:=</span>
+<span class="n">tβ</span> <span class="bp">=</span> <span class="n">transport</span> <span class="n">topological_space</span> <span class="n">e</span> <span class="n">tα</span>
+</pre></div>
+
+
+<p>which seems to be more fundamental than the category-style definition "continuous function with a continuous inverse", since the definition of <code>transport</code> does not even need the notion of continuous function.</p>
+</blockquote>
+<p>At some point I am going to want more than just an equiv -- I will want that two canonical isomorphisms <code>equiv A A'</code> and <code>equiv B B'</code> commute with some given maps <code>A -&gt; B</code> and <code>A' -&gt; B'</code> which are both "defined naturally".</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 00:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125795611):
-For example Reid, I proved that if `D(g) sub D(f)` then not only is `f` a unit in `R[1/g]`, but the rings `R[1/g]` and `R[1/f][1/gbar]` were canonically isomorphic, where `gbar` is the image of `g` in `R[1/f]`
+<p>For example Reid, I proved that if <code>D(g) sub D(f)</code> then not only is <code>f</code> a unit in <code>R[1/g]</code>, but the rings <code>R[1/g]</code> and <code>R[1/f][1/gbar]</code> were canonically isomorphic, where <code>gbar</code> is the image of <code>g</code> in <code>R[1/f]</code></p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 00:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125795634):
-And by "prove that they're canonically isomorphic" I mean in practice that I proved that I could write down an isomorphism of R-algebras which was also the unique R-algebra homomorphism in either direction.
+<p>And by "prove that they're canonically isomorphic" I mean in practice that I proved that I could write down an isomorphism of R-algebras which was also the unique R-algebra homomorphism in either direction.</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 00:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125795640):
-and I am pretty sure that I don't need to prove any more "canonicalness" for my application to schemes.
+<p>and I am pretty sure that I don't need to prove any more "canonicalness" for my application to schemes.</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 00:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125795686):
-The idea is that `f : R` is now fixed
+<p>The idea is that <code>f : R</code> is now fixed</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 00:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125795695):
-and `g : { g : R // D(g) sub D(f) }` varies
+<p>and <code>g : { g : R // D(g) sub D(f) }</code> varies</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 00:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125795699):
-and `A g := R[1/g]`
+<p>and <code>A g := R[1/g]</code></p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 00:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125795702):
-and `A' g := R[1/f][1/gbar]`
+<p>and <code>A' g := R[1/f][1/gbar]</code></p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 00:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125795711):
-Does this fit into your "extra structure" idea?
+<p>Does this fit into your "extra structure" idea?</p>
 
 #### [ Reid Barton (Apr 28 2018 at 00:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125795894):
-`B` is `A g'` for another `g'`?
+<p><code>B</code> is <code>A g'</code> for another <code>g'</code>?</p>
 
 #### [ Reid Barton (Apr 28 2018 at 00:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125795909):
-Or something else entirely?
+<p>Or something else entirely?</p>
 
 #### [ Kenny Lau (Apr 28 2018 at 00:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125795971):
-I'm back
+<p>I'm back</p>
 
 #### [ Reid Barton (Apr 28 2018 at 00:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125796055):
-It sounds like you want to prove that your isomorphism between `R[1/g]` and `R[1/f][1/gbar]` is natural (in the category theory sense) when these two localization constructions are viewed as functors of something (R and/or g?), and that is probably not a purely formal fact that follows from transporting across "equalities". (On the other hand, it is probably a slightly less formal fact that follows easily from some universal property.)
+<p>It sounds like you want to prove that your isomorphism between <code>R[1/g]</code> and <code>R[1/f][1/gbar]</code> is natural (in the category theory sense) when these two localization constructions are viewed as functors of something (R and/or g?), and that is probably not a purely formal fact that follows from transporting across "equalities". (On the other hand, it is probably a slightly less formal fact that follows easily from some universal property.)</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 00:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125796240):
-docs
+<p>docs</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 00:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125796244):
-https://github.com/kbuzzard/xena/blob/master/canonical_isomorphism/canonical.md
+<p><a href="https://github.com/kbuzzard/xena/blob/master/canonical_isomorphism/canonical.md" target="_blank" title="https://github.com/kbuzzard/xena/blob/master/canonical_isomorphism/canonical.md">https://github.com/kbuzzard/xena/blob/master/canonical_isomorphism/canonical.md</a></p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 00:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125796245):
-permanlink
+<p>permanlink</p>
 
 #### [ Kenny Lau (Apr 28 2018 at 00:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125796294):
-speaking of which, it's almost a month since your last post in xena
+<p>speaking of which, it's almost a month since your last post in xena</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 00:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125796296):
-don't know how to do permalink
+<p>don't know how to do permalink</p>
 
 #### [ Kenny Lau (Apr 28 2018 at 00:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125796298):
-https://github.com/kbuzzard/xena/blob/e77228397ad21215a927f93d315edf3cbadbc567/canonical_isomorphism/canonical.md
+<p><a href="https://github.com/kbuzzard/xena/blob/e77228397ad21215a927f93d315edf3cbadbc567/canonical_isomorphism/canonical.md" target="_blank" title="https://github.com/kbuzzard/xena/blob/e77228397ad21215a927f93d315edf3cbadbc567/canonical_isomorphism/canonical.md">https://github.com/kbuzzard/xena/blob/e77228397ad21215a927f93d315edf3cbadbc567/canonical_isomorphism/canonical.md</a></p>
 
 #### [ Kenny Lau (Apr 28 2018 at 00:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125796299):
-there you go
+<p>there you go</p>
 
 #### [ Kenny Lau (Apr 28 2018 at 00:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125796303):
-try deleting the file :P
+<p>try deleting the file :P</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 00:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125796305):
-I want to focus on schemes Kenny, and I guess the situation is that it would be nice to resolve this canonical isomorphism issue before I go any further
+<p>I want to focus on schemes Kenny, and I guess the situation is that it would be nice to resolve this canonical isomorphism issue before I go any further</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 00:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125796313):
-I will probably blog about this though
+<p>I will probably blog about this though</p>
 
 #### [ Kenny Lau (Apr 28 2018 at 00:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125796317):
-should I write a guest post
+<p>should I write a guest post</p>
 
 #### [ Reid Barton (Apr 28 2018 at 00:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125796376):
-(You can click on the commit id near the right side of the blue bar, and then View)
+<p>(You can click on the commit id near the right side of the blue bar, and then View)</p>
 
 #### [ Reid Barton (Apr 28 2018 at 00:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125796713):
-Let me address the question at the end of those docs, since your "three lemma" was what prompted the gist I linked earlier.
-You could define a structure indexed on A B C that consists of abelian group structures on A B C and group homomorphisms f : A -> B and g : B -> C. The input to the "three lemma" is an isomorphism of such structures.
-The further structure would be exactness of the sequence, i.e., the equation ker g = im f; that's what you want to transport to the new sequence.
+<p>Let me address the question at the end of those docs, since your "three lemma" was what prompted the gist I linked earlier.<br>
+You could define a structure indexed on A B C that consists of abelian group structures on A B C and group homomorphisms f : A -&gt; B and g : B -&gt; C. The input to the "three lemma" is an isomorphism of such structures.<br>
+The further structure would be exactness of the sequence, i.e., the equation ker g = im f; that's what you want to transport to the new sequence.</p>
 
 #### [ Reid Barton (Apr 28 2018 at 00:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125796852):
-Simply transporting the combined structure of "being an exact sequence" across your isomorphisms A -> A', B -> B', C -> C' won't be enough, since you also need to know that the transported group structures and maps agree with your original ones.
+<p>Simply transporting the combined structure of "being an exact sequence" across your isomorphisms A -&gt; A', B -&gt; B', C -&gt; C' won't be enough, since you also need to know that the transported group structures and maps agree with your original ones.</p>
 
 #### [ Reid Barton (Apr 28 2018 at 00:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125796860):
-(for which you need precisely that the maps are group isomorphisms and the squares commute)
+<p>(for which you need precisely that the maps are group isomorphisms and the squares commute)</p>
 
 #### [ Reid Barton (Apr 28 2018 at 00:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125796932):
-I guess if you had lemmas to calculate the components of the transported structure, then that would be another way to do it.
+<p>I guess if you had lemmas to calculate the components of the transported structure, then that would be another way to do it.</p>
 
 #### [ Reid Barton (Apr 28 2018 at 00:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125797044):
-I need to make dinner but I'll try to produce some example code later
+<p>I need to make dinner but I'll try to produce some example code later</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 00:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125797105):
-I see! I find it much easier to understand this example.
+<p>I see! I find it much easier to understand this example.</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 00:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125797107):
-So one makes a new structure
+<p>So one makes a new structure</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 00:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125797113):
-and then attempts to transport it
+<p>and then attempts to transport it</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 00:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125797115):
-This sounds like a beautiful way of thinking about it.
+<p>This sounds like a beautiful way of thinking about it.</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 01:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125797487):
-Kenny you are welcome to write a guest post
+<p>Kenny you are welcome to write a guest post</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 01:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125797493):
-On whatever topic you like
+<p>On whatever topic you like</p>
 
 #### [ Andrew Ashworth (Apr 28 2018 at 01:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125798645):
-the transfer paper is here:  https://www21.in.tum.de/~kuncar/documents/huffman-kuncar-cpp2013.pdf
+<p>the transfer paper is here:  <a href="https://www21.in.tum.de/~kuncar/documents/huffman-kuncar-cpp2013.pdf" target="_blank" title="https://www21.in.tum.de/~kuncar/documents/huffman-kuncar-cpp2013.pdf">https://www21.in.tum.de/~kuncar/documents/huffman-kuncar-cpp2013.pdf</a></p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 01:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125798996):
-Thanks Andrew.
+<p>Thanks Andrew.</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 01:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125799001):
-Reid -- you probably know the full story anyway, but let me spell it out.
+<p>Reid -- you probably know the full story anyway, but let me spell it out.</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 01:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125799058):
-Chris proved a lemma saying that if `R` is a ring and `f1,f2,...,fn` are elements which generate the unit ideal, then the structure sheaf on Spec(R) satisfies the sheaf axiom with respect to the open cover D(f1),..,D(fn).
+<p>Chris proved a lemma saying that if <code>R</code> is a ring and <code>f1,f2,...,fn</code> are elements which generate the unit ideal, then the structure sheaf on Spec(R) satisfies the sheaf axiom with respect to the open cover D(f1),..,D(fn).</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 01:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125799065):
-Formally, as you know, this says that the canonical map from `R` to $$\Pi_i R[1/f_i]$$ is an injection,
+<p>Formally, as you know, this says that the canonical map from <code>R</code> to <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi mathvariant="normal">Π</mi><mi>i</mi></msub><mi>R</mi><mo>[</mo><mn>1</mn><mi mathvariant="normal">/</mi><msub><mi>f</mi><mi>i</mi></msub><mo>]</mo></mrow><annotation encoding="application/x-tex">\Pi_i R[1/f_i]</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.75em;"></span><span class="strut bottom" style="height:1em;vertical-align:-0.25em;"></span><span class="base"><span class="mord"><span class="mord mathrm">Π</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathit mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"></span></span></span></span></span><span class="mord mathit" style="margin-right:0.00773em;">R</span><span class="mopen">[</span><span class="mord mathrm">1</span><span class="mord mathrm">/</span><span class="mord"><span class="mord mathit" style="margin-right:0.10764em;">f</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:-0.10764em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathit mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"></span></span></span></span></span><span class="mclose">]</span></span></span></span> is an injection,</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 01:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125799110):
-with image equal to the kernel of the usual map $$\Pi_i R[1/f_i] \to \Pi_{i,j} R[1/f_if_j]$$
+<p>with image equal to the kernel of the usual map <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi mathvariant="normal">Π</mi><mi>i</mi></msub><mi>R</mi><mo>[</mo><mn>1</mn><mi mathvariant="normal">/</mi><msub><mi>f</mi><mi>i</mi></msub><mo>]</mo><mo>→</mo><msub><mi mathvariant="normal">Π</mi><mrow><mi>i</mi><mo separator="true">,</mo><mi>j</mi></mrow></msub><mi>R</mi><mo>[</mo><mn>1</mn><mi mathvariant="normal">/</mi><msub><mi>f</mi><mi>i</mi></msub><msub><mi>f</mi><mi>j</mi></msub><mo>]</mo></mrow><annotation encoding="application/x-tex">\Pi_i R[1/f_i] \to \Pi_{i,j} R[1/f_if_j]</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.75em;"></span><span class="strut bottom" style="height:1.036108em;vertical-align:-0.286108em;"></span><span class="base"><span class="mord"><span class="mord mathrm">Π</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathit mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"></span></span></span></span></span><span class="mord mathit" style="margin-right:0.00773em;">R</span><span class="mopen">[</span><span class="mord mathrm">1</span><span class="mord mathrm">/</span><span class="mord"><span class="mord mathit" style="margin-right:0.10764em;">f</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:-0.10764em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathit mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"></span></span></span></span></span><span class="mclose">]</span><span class="mrel">→</span><span class="mord"><span class="mord mathrm">Π</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.311664em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathit mtight">i</span><span class="mpunct mtight">,</span><span class="mord mathit mtight" style="margin-right:0.05724em;">j</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"></span></span></span></span></span><span class="mord mathit" style="margin-right:0.00773em;">R</span><span class="mopen">[</span><span class="mord mathrm">1</span><span class="mord mathrm">/</span><span class="mord"><span class="mord mathit" style="margin-right:0.10764em;">f</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:-0.10764em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathit mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"></span></span></span></span></span><span class="mord"><span class="mord mathit" style="margin-right:0.10764em;">f</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.311664em;"><span style="top:-2.5500000000000003em;margin-left:-0.10764em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathit mtight" style="margin-right:0.05724em;">j</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"></span></span></span></span></span><span class="mclose">]</span></span></span></span></p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 01:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125799118):
-and note that this latter map sends $$(s_i)_{i\in I}$$ to $$(s_i-s_j)_{i,j}$$
+<p>and note that this latter map sends <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>(</mo><msub><mi>s</mi><mi>i</mi></msub><msub><mo>)</mo><mrow><mi>i</mi><mo>∈</mo><mi>I</mi></mrow></msub></mrow><annotation encoding="application/x-tex">(s_i)_{i\in I}</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.75em;"></span><span class="strut bottom" style="height:1em;vertical-align:-0.25em;"></span><span class="base"><span class="mopen">(</span><span class="mord"><span class="mord mathit">s</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathit mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"></span></span></span></span></span><span class="mclose"><span class="mclose">)</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathit mtight">i</span><span class="mrel mtight">∈</span><span class="mord mathit mtight" style="margin-right:0.07847em;">I</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.17737em;"></span></span></span></span></span></span></span></span> to <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>(</mo><msub><mi>s</mi><mi>i</mi></msub><mo>−</mo><msub><mi>s</mi><mi>j</mi></msub><msub><mo>)</mo><mrow><mi>i</mi><mo separator="true">,</mo><mi>j</mi></mrow></msub></mrow><annotation encoding="application/x-tex">(s_i-s_j)_{i,j}</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.75em;"></span><span class="strut bottom" style="height:1.036108em;vertical-align:-0.286108em;"></span><span class="base"><span class="mopen">(</span><span class="mord"><span class="mord mathit">s</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathit mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"></span></span></span></span></span><span class="mbin">−</span><span class="mord"><span class="mord mathit">s</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.311664em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathit mtight" style="margin-right:0.05724em;">j</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"></span></span></span></span></span><span class="mclose"><span class="mclose">)</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.311664em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathit mtight">i</span><span class="mpunct mtight">,</span><span class="mord mathit mtight" style="margin-right:0.05724em;">j</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"></span></span></span></span></span></span></span></span></p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 01:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125799120):
-which is not a ring homomorphism
+<p>which is not a ring homomorphism</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 01:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125799128):
-but it is a difference of two such
+<p>but it is a difference of two such</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 01:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125799133):
-and hence the whole map is a group homomorphism
+<p>and hence the whole map is a group homomorphism</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 01:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125799137):
-Now I have done some abstract ring theory in Lean over the last few weeks, working on "an interface for localisation"
+<p>Now I have done some abstract ring theory in Lean over the last few weeks, working on "an interface for localisation"</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 01:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125799181):
-and I have now proved some technical lemma which says that if $$D(g)\subseteq D(f)$$ then $$R[1/g]$$ is canonically isomorphic to $$R[1/f][1/gbar]$$
+<p>and I have now proved some technical lemma which says that if <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>D</mi><mo>(</mo><mi>g</mi><mo>)</mo><mo>⊆</mo><mi>D</mi><mo>(</mo><mi>f</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">D(g)\subseteq D(f)</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.75em;"></span><span class="strut bottom" style="height:1em;vertical-align:-0.25em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.02778em;">D</span><span class="mopen">(</span><span class="mord mathit" style="margin-right:0.03588em;">g</span><span class="mclose">)</span><span class="mrel">⊆</span><span class="mord mathit" style="margin-right:0.02778em;">D</span><span class="mopen">(</span><span class="mord mathit" style="margin-right:0.10764em;">f</span><span class="mclose">)</span></span></span></span> then <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>R</mi><mo>[</mo><mn>1</mn><mi mathvariant="normal">/</mi><mi>g</mi><mo>]</mo></mrow><annotation encoding="application/x-tex">R[1/g]</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.75em;"></span><span class="strut bottom" style="height:1em;vertical-align:-0.25em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.00773em;">R</span><span class="mopen">[</span><span class="mord mathrm">1</span><span class="mord mathrm">/</span><span class="mord mathit" style="margin-right:0.03588em;">g</span><span class="mclose">]</span></span></span></span> is canonically isomorphic to <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>R</mi><mo>[</mo><mn>1</mn><mi mathvariant="normal">/</mi><mi>f</mi><mo>]</mo><mo>[</mo><mn>1</mn><mi mathvariant="normal">/</mi><mi>g</mi><mi>b</mi><mi>a</mi><mi>r</mi><mo>]</mo></mrow><annotation encoding="application/x-tex">R[1/f][1/gbar]</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.75em;"></span><span class="strut bottom" style="height:1em;vertical-align:-0.25em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.00773em;">R</span><span class="mopen">[</span><span class="mord mathrm">1</span><span class="mord mathrm">/</span><span class="mord mathit" style="margin-right:0.10764em;">f</span><span class="mclose">]</span><span class="mopen">[</span><span class="mord mathrm">1</span><span class="mord mathrm">/</span><span class="mord mathit" style="margin-right:0.03588em;">g</span><span class="mord mathit">b</span><span class="mord mathit">a</span><span class="mord mathit" style="margin-right:0.02778em;">r</span><span class="mclose">]</span></span></span></span></p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 01:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125799182):
-with $$gbar$$ the image of $$g$$
+<p>with <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>g</mi><mi>b</mi><mi>a</mi><mi>r</mi></mrow><annotation encoding="application/x-tex">gbar</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.69444em;"></span><span class="strut bottom" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.03588em;">g</span><span class="mord mathit">b</span><span class="mord mathit">a</span><span class="mord mathit" style="margin-right:0.02778em;">r</span></span></span></span> the image of <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>g</mi></mrow><annotation encoding="application/x-tex">g</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.43056em;"></span><span class="strut bottom" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.03588em;">g</span></span></span></span></p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 01:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125799191):
-and canonical isomorphism for me at this point means that we are given an element of `equiv` $$(R[1/g])$$ $$(R[1/f][1/gbar])$$
+<p>and canonical isomorphism for me at this point means that we are given an element of <code>equiv</code> <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>(</mo><mi>R</mi><mo>[</mo><mn>1</mn><mi mathvariant="normal">/</mi><mi>g</mi><mo>]</mo><mo>)</mo></mrow><annotation encoding="application/x-tex">(R[1/g])</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.75em;"></span><span class="strut bottom" style="height:1em;vertical-align:-0.25em;"></span><span class="base"><span class="mopen">(</span><span class="mord mathit" style="margin-right:0.00773em;">R</span><span class="mopen">[</span><span class="mord mathrm">1</span><span class="mord mathrm">/</span><span class="mord mathit" style="margin-right:0.03588em;">g</span><span class="mclose">]</span><span class="mclose">)</span></span></span></span> <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>(</mo><mi>R</mi><mo>[</mo><mn>1</mn><mi mathvariant="normal">/</mi><mi>f</mi><mo>]</mo><mo>[</mo><mn>1</mn><mi mathvariant="normal">/</mi><mi>g</mi><mi>b</mi><mi>a</mi><mi>r</mi><mo>]</mo><mo>)</mo></mrow><annotation encoding="application/x-tex">(R[1/f][1/gbar])</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.75em;"></span><span class="strut bottom" style="height:1em;vertical-align:-0.25em;"></span><span class="base"><span class="mopen">(</span><span class="mord mathit" style="margin-right:0.00773em;">R</span><span class="mopen">[</span><span class="mord mathrm">1</span><span class="mord mathrm">/</span><span class="mord mathit" style="margin-right:0.10764em;">f</span><span class="mclose">]</span><span class="mopen">[</span><span class="mord mathrm">1</span><span class="mord mathrm">/</span><span class="mord mathit" style="margin-right:0.03588em;">g</span><span class="mord mathit">b</span><span class="mord mathit">a</span><span class="mord mathit" style="margin-right:0.02778em;">r</span><span class="mclose">]</span><span class="mclose">)</span></span></span></span></p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 01:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125799193):
-(maths notation is better than Lean)
+<p>(maths notation is better than Lean)</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 01:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125799194):
-with the following wonderful properties:
+<p>with the following wonderful properties:</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 01:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125799236):
-1) the functions are ring homs (and hence ring isoms)
+<p>1) the functions are ring homs (and hence ring isoms)</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 01:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125799238):
-2) The only $$R$$-algebra hom from $$R[1/g]$$ to $$R[1/f][1/gbar]$$ is our given element.
+<p>2) The only <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>R</mi></mrow><annotation encoding="application/x-tex">R</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.68333em;vertical-align:0em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.00773em;">R</span></span></span></span>-algebra hom from <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>R</mi><mo>[</mo><mn>1</mn><mi mathvariant="normal">/</mi><mi>g</mi><mo>]</mo></mrow><annotation encoding="application/x-tex">R[1/g]</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.75em;"></span><span class="strut bottom" style="height:1em;vertical-align:-0.25em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.00773em;">R</span><span class="mopen">[</span><span class="mord mathrm">1</span><span class="mord mathrm">/</span><span class="mord mathit" style="margin-right:0.03588em;">g</span><span class="mclose">]</span></span></span></span> to <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>R</mi><mo>[</mo><mn>1</mn><mi mathvariant="normal">/</mi><mi>f</mi><mo>]</mo><mo>[</mo><mn>1</mn><mi mathvariant="normal">/</mi><mi>g</mi><mi>b</mi><mi>a</mi><mi>r</mi><mo>]</mo></mrow><annotation encoding="application/x-tex">R[1/f][1/gbar]</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.75em;"></span><span class="strut bottom" style="height:1em;vertical-align:-0.25em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.00773em;">R</span><span class="mopen">[</span><span class="mord mathrm">1</span><span class="mord mathrm">/</span><span class="mord mathit" style="margin-right:0.10764em;">f</span><span class="mclose">]</span><span class="mopen">[</span><span class="mord mathrm">1</span><span class="mord mathrm">/</span><span class="mord mathit" style="margin-right:0.03588em;">g</span><span class="mord mathit">b</span><span class="mord mathit">a</span><span class="mord mathit" style="margin-right:0.02778em;">r</span><span class="mclose">]</span></span></span></span> is our given element.</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 01:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125799246):
-I am _hoping_ that this is a good definition of "canonical isomorphism" here.
+<p>I am _hoping_ that this is a good definition of "canonical isomorphism" here.</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 01:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125799249):
-These are the facts which I isolated as important
+<p>These are the facts which I isolated as important</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 01:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125799250):
-I made a structure for each of them
+<p>I made a structure for each of them</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 02:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125799308):
-```lean
-structure R_alg_equiv {R : Type u} {α : Type v} {β : Type w} [comm_ring R] [comm
-_ring α] [comm_ring β]
-  (sα : R → α) (sβ : R → β) extends ring_equiv α β :=
-(R_alg_hom : sβ = to_fun ∘ sα)
-
-```
+<div class="codehilite"><pre><span></span><span class="kn">structure</span> <span class="n">R_alg_equiv</span> <span class="o">{</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">}</span> <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">w</span><span class="o">}</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">R</span><span class="o">]</span> <span class="o">[</span><span class="n">comm</span>
+<span class="bp">_</span><span class="n">ring</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">β</span><span class="o">]</span>
+  <span class="o">(</span><span class="n">sα</span> <span class="o">:</span> <span class="n">R</span> <span class="bp">→</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">sβ</span> <span class="o">:</span> <span class="n">R</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span> <span class="kn">extends</span> <span class="n">ring_equiv</span> <span class="n">α</span> <span class="n">β</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">R_alg_hom</span> <span class="o">:</span> <span class="n">sβ</span> <span class="bp">=</span> <span class="n">to_fun</span> <span class="err">∘</span> <span class="n">sα</span><span class="o">)</span>
+</pre></div>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 02:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125799360):
-```lean
-structure is_unique_R_alg_hom {R : Type u} {α : Type v} {β : Type w} [comm_ring R] [comm_ring α] [comm_ring β] 
-(sα : R → α) (sβ : R → β) (f : α → β) [is_ring_hom sα] [is_ring_hom sβ] [is_ring_hom f] : Prop :=
-(R_alg_hom : sβ = f ∘ sα)
-(is_unique : ∀ (g : α → β) [is_ring_hom g], sβ = g ∘ sα → g = f)
-
-```
+<div class="codehilite"><pre><span></span><span class="kn">structure</span> <span class="n">is_unique_R_alg_hom</span> <span class="o">{</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">}</span> <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">w</span><span class="o">}</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">R</span><span class="o">]</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">β</span><span class="o">]</span>
+<span class="o">(</span><span class="n">sα</span> <span class="o">:</span> <span class="n">R</span> <span class="bp">→</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">sβ</span> <span class="o">:</span> <span class="n">R</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span> <span class="o">[</span><span class="n">is_ring_hom</span> <span class="n">sα</span><span class="o">]</span> <span class="o">[</span><span class="n">is_ring_hom</span> <span class="n">sβ</span><span class="o">]</span> <span class="o">[</span><span class="n">is_ring_hom</span> <span class="n">f</span><span class="o">]</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">R_alg_hom</span> <span class="o">:</span> <span class="n">sβ</span> <span class="bp">=</span> <span class="n">f</span> <span class="err">∘</span> <span class="n">sα</span><span class="o">)</span>
+<span class="o">(</span><span class="n">is_unique</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">g</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span> <span class="o">[</span><span class="n">is_ring_hom</span> <span class="n">g</span><span class="o">],</span> <span class="n">sβ</span> <span class="bp">=</span> <span class="n">g</span> <span class="err">∘</span> <span class="n">sα</span> <span class="bp">→</span> <span class="n">g</span> <span class="bp">=</span> <span class="n">f</span><span class="o">)</span>
+</pre></div>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 02:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125799370):
-(NB it was `is_unique_R_alg_hom` which I noticed was not a `Prop` even though it could be -- I made it a Prop.)
+<p>(NB it was <code>is_unique_R_alg_hom</code> which I noticed was not a <code>Prop</code> even though it could be -- I made it a Prop.)</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 02:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125799381):
-I have lots of cunning ways of producing unique R-algebra homs
+<p>I have lots of cunning ways of producing unique R-algebra homs</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 02:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125799386):
-for example given a ring hom `R -> \beta` with the property that every element of a mult subset `S` gets sent to a unit
+<p>for example given a ring hom <code>R -&gt; \beta</code> with the property that every element of a mult subset <code>S</code> gets sent to a unit</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 02:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125799428):
-I have a unique `R`-alg com `R[1/S] -> beta`
+<p>I have a unique <code>R</code>-alg com <code>R[1/S] -&gt; beta</code></p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 02:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125799431):
-I am hoping that the ideas I already have will be enough to see me through
+<p>I am hoping that the ideas I already have will be enough to see me through</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 02:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125799440):
-so I am going to try and define the structures that we want to identify and then see if I can figure out what needs doing.
+<p>so I am going to try and define the structures that we want to identify and then see if I can figure out what needs doing.</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 02:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125799448):
-@**Kenny Lau** In short I am saying that your proof of exactness being preserved stinks
+<p><span class="user-mention" data-user-id="110064">@Kenny Lau</span> In short I am saying that your proof of exactness being preserved stinks</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 02:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125799454):
-and it would be better to have a proof which looks a whole lot more abstract
+<p>and it would be better to have a proof which looks a whole lot more abstract</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 02:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125799497):
-because then when next week I have to prove something ten times longer but just as trivial
+<p>because then when next week I have to prove something ten times longer but just as trivial</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 02:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125799500):
-we can get xena to do it for us
+<p>we can get xena to do it for us</p>
 
 #### [ Scott Morrison (Apr 28 2018 at 02:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125800546):
-Wow... a lot happened while I slept. :-)
+<p>Wow... a lot happened while I slept. :-)</p>
 
 #### [ Simon Hudon (Apr 28 2018 at 02:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125800763):
-Let this be a lesson to you: don't sleep
+<p>Let this be a lesson to you: don't sleep</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 02:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125801226):
-Does this look OK:
+<p>Does this look OK:</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 03:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125801228):
-```lean
-import data.equiv
--- recall the interface for equiv:
--- C : equiv α β;
--- the function is C, the function the other way is C.symm, which is also the equiv the other way
--- and the proofs are C.inverse_apply_apply and C.apply_inverse_apply
-universes u v w u' v' w'
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">equiv</span>
+<span class="c1">-- recall the interface for equiv:</span>
+<span class="c1">-- C : equiv α β;</span>
+<span class="c1">-- the function is C, the function the other way is C.symm, which is also the equiv the other way</span>
+<span class="c1">-- and the proofs are C.inverse_apply_apply and C.apply_inverse_apply</span>
+<span class="n">universes</span> <span class="n">u</span> <span class="n">v</span> <span class="n">w</span> <span class="n">u&#39;</span> <span class="n">v&#39;</span> <span class="n">w&#39;</span>
 
-open equiv 
+<span class="kn">open</span> <span class="n">equiv</span>
 
--- Scott's basic class.
-class transportable (f : Type u → Type v) :=
-(on_equiv : Π {α β : Type u} (e : equiv α β), equiv (f α) (f β))
-(on_refl  : Π (α : Type u), on_equiv (equiv.refl α) = equiv.refl (f α))
-(on_trans : Π {α β γ : Type u} (d : equiv α β) (e : equiv β γ), on_equiv (equiv.trans d e) = equiv.trans (on_equiv d) (on_equiv e))
+<span class="c1">-- Scott&#39;s basic class.</span>
+<span class="n">class</span> <span class="n">transportable</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span> <span class="bp">→</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">on_equiv</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">{</span><span class="n">α</span> <span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">(</span><span class="n">e</span> <span class="o">:</span> <span class="n">equiv</span> <span class="n">α</span> <span class="n">β</span><span class="o">),</span> <span class="n">equiv</span> <span class="o">(</span><span class="n">f</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="n">β</span><span class="o">))</span>
+<span class="o">(</span><span class="n">on_refl</span>  <span class="o">:</span> <span class="bp">Π</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">),</span> <span class="n">on_equiv</span> <span class="o">(</span><span class="n">equiv</span><span class="bp">.</span><span class="n">refl</span> <span class="n">α</span><span class="o">)</span> <span class="bp">=</span> <span class="n">equiv</span><span class="bp">.</span><span class="n">refl</span> <span class="o">(</span><span class="n">f</span> <span class="n">α</span><span class="o">))</span>
+<span class="o">(</span><span class="n">on_trans</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">{</span><span class="n">α</span> <span class="n">β</span> <span class="n">γ</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">(</span><span class="n">d</span> <span class="o">:</span> <span class="n">equiv</span> <span class="n">α</span> <span class="n">β</span><span class="o">)</span> <span class="o">(</span><span class="n">e</span> <span class="o">:</span> <span class="n">equiv</span> <span class="n">β</span> <span class="n">γ</span><span class="o">),</span> <span class="n">on_equiv</span> <span class="o">(</span><span class="n">equiv</span><span class="bp">.</span><span class="n">trans</span> <span class="n">d</span> <span class="n">e</span><span class="o">)</span> <span class="bp">=</span> <span class="n">equiv</span><span class="bp">.</span><span class="n">trans</span> <span class="o">(</span><span class="n">on_equiv</span> <span class="n">d</span><span class="o">)</span> <span class="o">(</span><span class="n">on_equiv</span> <span class="n">e</span><span class="o">))</span>
 
-variables 
-{α : Type u} {β : Type v} {γ : Type w} {α' : Type u'} {β' : Type v'} {γ' : Type w'}
+<span class="kn">variables</span>
+<span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">}</span> <span class="o">{</span><span class="n">γ</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">w</span><span class="o">}</span> <span class="o">{</span><span class="n">α&#39;</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u&#39;</span><span class="o">}</span> <span class="o">{</span><span class="n">β&#39;</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v&#39;</span><span class="o">}</span> <span class="o">{</span><span class="n">γ&#39;</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">w&#39;</span><span class="o">}</span>
 
-structure canonically_isomorphic_functions 
-(Cα : equiv α α') (Cβ : equiv β β') (f : α → β) (f' : α' → β') -- extends equiv α α', equiv β β'
-:= 
-(commutes : ∀ a : α, Cβ (f a) = f' (Cα a))
--- is there a better way to do this with "extends"?
+<span class="kn">structure</span> <span class="n">canonically_isomorphic_functions</span>
+<span class="o">(</span><span class="n">Cα</span> <span class="o">:</span> <span class="n">equiv</span> <span class="n">α</span> <span class="n">α&#39;</span><span class="o">)</span> <span class="o">(</span><span class="n">Cβ</span> <span class="o">:</span> <span class="n">equiv</span> <span class="n">β</span> <span class="n">β&#39;</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span> <span class="o">(</span><span class="n">f&#39;</span> <span class="o">:</span> <span class="n">α&#39;</span> <span class="bp">→</span> <span class="n">β&#39;</span><span class="o">)</span> <span class="c1">-- extends equiv α α&#39;, equiv β β&#39;</span>
+<span class="o">:=</span>
+<span class="o">(</span><span class="n">commutes</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">,</span> <span class="n">Cβ</span> <span class="o">(</span><span class="n">f</span> <span class="n">a</span><span class="o">)</span> <span class="bp">=</span> <span class="n">f&#39;</span> <span class="o">(</span><span class="n">Cα</span> <span class="n">a</span><span class="o">))</span>
+<span class="c1">-- is there a better way to do this with &quot;extends&quot;?</span>
 
--- Do I need an interface for this? Why can't I make this a simp lemma?
-theorem canonically_isomorphic_functions.diag_commutes
-(Cα : equiv α α') (Cβ : equiv β β') (f : α → β) (f' : α' → β')
-(C : canonically_isomorphic_functions Cα Cβ f f') : ∀ a : α, Cβ (f a) = f' (Cα a) := C.commutes 
+<span class="c1">-- Do I need an interface for this? Why can&#39;t I make this a simp lemma?</span>
+<span class="kn">theorem</span> <span class="n">canonically_isomorphic_functions</span><span class="bp">.</span><span class="n">diag_commutes</span>
+<span class="o">(</span><span class="n">Cα</span> <span class="o">:</span> <span class="n">equiv</span> <span class="n">α</span> <span class="n">α&#39;</span><span class="o">)</span> <span class="o">(</span><span class="n">Cβ</span> <span class="o">:</span> <span class="n">equiv</span> <span class="n">β</span> <span class="n">β&#39;</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span> <span class="o">(</span><span class="n">f&#39;</span> <span class="o">:</span> <span class="n">α&#39;</span> <span class="bp">→</span> <span class="n">β&#39;</span><span class="o">)</span>
+<span class="o">(</span><span class="n">C</span> <span class="o">:</span> <span class="n">canonically_isomorphic_functions</span> <span class="n">Cα</span> <span class="n">Cβ</span> <span class="n">f</span> <span class="n">f&#39;</span><span class="o">)</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">,</span> <span class="n">Cβ</span> <span class="o">(</span><span class="n">f</span> <span class="n">a</span><span class="o">)</span> <span class="bp">=</span> <span class="n">f&#39;</span> <span class="o">(</span><span class="n">Cα</span> <span class="n">a</span><span class="o">)</span> <span class="o">:=</span> <span class="n">C</span><span class="bp">.</span><span class="n">commutes</span>
 
-definition canonically_isomorphic_functions.refl :
-Π {α : Type u} {β : Type v} (f : α → β), canonically_isomorphic_functions 
-(equiv.refl α) (equiv.refl β) f f := λ α β f,⟨λ a, rfl⟩
+<span class="kn">definition</span> <span class="n">canonically_isomorphic_functions</span><span class="bp">.</span><span class="n">refl</span> <span class="o">:</span>
+<span class="bp">Π</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">}</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">),</span> <span class="n">canonically_isomorphic_functions</span>
+<span class="o">(</span><span class="n">equiv</span><span class="bp">.</span><span class="n">refl</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">equiv</span><span class="bp">.</span><span class="n">refl</span> <span class="n">β</span><span class="o">)</span> <span class="n">f</span> <span class="n">f</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">α</span> <span class="n">β</span> <span class="n">f</span><span class="o">,</span><span class="bp">⟨λ</span> <span class="n">a</span><span class="o">,</span> <span class="n">rfl</span><span class="bp">⟩</span>
 
-definition canonically_isomorphic_functions.symm :
-∀ (f : α → β) (f' : α' → β') (Cα : equiv α α') (Cβ : equiv β β'),
-canonically_isomorphic_functions Cα Cβ f f' → 
-canonically_isomorphic_functions Cα.symm Cβ.symm f' f := 
-λ f f' Cα Cβ Cf,⟨λ a',begin
-  suffices : Cβ.symm (f' (Cα (Cα.symm a'))) = f (Cα.symm a'),
-    by simpa using this,
-  suffices : Cβ.symm (Cβ (f (Cα.symm a'))) = f (Cα.symm a'),
-    by simpa [Cf.commutes (Cα.symm a')],
-  simp,
-end 
-⟩
+<span class="kn">definition</span> <span class="n">canonically_isomorphic_functions</span><span class="bp">.</span><span class="n">symm</span> <span class="o">:</span>
+<span class="bp">∀</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span> <span class="o">(</span><span class="n">f&#39;</span> <span class="o">:</span> <span class="n">α&#39;</span> <span class="bp">→</span> <span class="n">β&#39;</span><span class="o">)</span> <span class="o">(</span><span class="n">Cα</span> <span class="o">:</span> <span class="n">equiv</span> <span class="n">α</span> <span class="n">α&#39;</span><span class="o">)</span> <span class="o">(</span><span class="n">Cβ</span> <span class="o">:</span> <span class="n">equiv</span> <span class="n">β</span> <span class="n">β&#39;</span><span class="o">),</span>
+<span class="n">canonically_isomorphic_functions</span> <span class="n">Cα</span> <span class="n">Cβ</span> <span class="n">f</span> <span class="n">f&#39;</span> <span class="bp">→</span>
+<span class="n">canonically_isomorphic_functions</span> <span class="n">Cα</span><span class="bp">.</span><span class="n">symm</span> <span class="n">Cβ</span><span class="bp">.</span><span class="n">symm</span> <span class="n">f&#39;</span> <span class="n">f</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="n">f</span> <span class="n">f&#39;</span> <span class="n">Cα</span> <span class="n">Cβ</span> <span class="n">Cf</span><span class="o">,</span><span class="bp">⟨λ</span> <span class="n">a&#39;</span><span class="o">,</span><span class="k">begin</span>
+  <span class="n">suffices</span> <span class="o">:</span> <span class="n">Cβ</span><span class="bp">.</span><span class="n">symm</span> <span class="o">(</span><span class="n">f&#39;</span> <span class="o">(</span><span class="n">Cα</span> <span class="o">(</span><span class="n">Cα</span><span class="bp">.</span><span class="n">symm</span> <span class="n">a&#39;</span><span class="o">)))</span> <span class="bp">=</span> <span class="n">f</span> <span class="o">(</span><span class="n">Cα</span><span class="bp">.</span><span class="n">symm</span> <span class="n">a&#39;</span><span class="o">),</span>
+    <span class="k">by</span> <span class="n">simpa</span> <span class="kn">using</span> <span class="n">this</span><span class="o">,</span>
+  <span class="n">suffices</span> <span class="o">:</span> <span class="n">Cβ</span><span class="bp">.</span><span class="n">symm</span> <span class="o">(</span><span class="n">Cβ</span> <span class="o">(</span><span class="n">f</span> <span class="o">(</span><span class="n">Cα</span><span class="bp">.</span><span class="n">symm</span> <span class="n">a&#39;</span><span class="o">)))</span> <span class="bp">=</span> <span class="n">f</span> <span class="o">(</span><span class="n">Cα</span><span class="bp">.</span><span class="n">symm</span> <span class="n">a&#39;</span><span class="o">),</span>
+    <span class="k">by</span> <span class="n">simpa</span> <span class="o">[</span><span class="n">Cf</span><span class="bp">.</span><span class="n">commutes</span> <span class="o">(</span><span class="n">Cα</span><span class="bp">.</span><span class="n">symm</span> <span class="n">a&#39;</span><span class="o">)],</span>
+  <span class="n">simp</span><span class="o">,</span>
+<span class="kn">end</span>
+<span class="bp">⟩</span>
 
 
-definition canonically_isomorphic_functions.trans :
-∀ (f : α → β) (f' : α' → β') (g : β → γ) (g' : β' → γ') 
-(Cα : equiv α α') (Cβ : equiv β β') (Cγ : equiv γ γ'),
-canonically_isomorphic_functions Cα Cβ f f' → 
-canonically_isomorphic_functions Cβ Cγ g g' → 
-canonically_isomorphic_functions Cα Cγ (g ∘ f) (g' ∘ f') := 
-λ f f' g g' Cα Cβ Cγ Cf Cg,⟨λ a,begin
-  show Cγ (g (f a)) = g' (f' (Cα a)),
-  rw [Cg.commutes,Cf.commutes]
-end⟩
-```
+<span class="kn">definition</span> <span class="n">canonically_isomorphic_functions</span><span class="bp">.</span><span class="n">trans</span> <span class="o">:</span>
+<span class="bp">∀</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span> <span class="o">(</span><span class="n">f&#39;</span> <span class="o">:</span> <span class="n">α&#39;</span> <span class="bp">→</span> <span class="n">β&#39;</span><span class="o">)</span> <span class="o">(</span><span class="n">g</span> <span class="o">:</span> <span class="n">β</span> <span class="bp">→</span> <span class="n">γ</span><span class="o">)</span> <span class="o">(</span><span class="n">g&#39;</span> <span class="o">:</span> <span class="n">β&#39;</span> <span class="bp">→</span> <span class="n">γ&#39;</span><span class="o">)</span>
+<span class="o">(</span><span class="n">Cα</span> <span class="o">:</span> <span class="n">equiv</span> <span class="n">α</span> <span class="n">α&#39;</span><span class="o">)</span> <span class="o">(</span><span class="n">Cβ</span> <span class="o">:</span> <span class="n">equiv</span> <span class="n">β</span> <span class="n">β&#39;</span><span class="o">)</span> <span class="o">(</span><span class="n">Cγ</span> <span class="o">:</span> <span class="n">equiv</span> <span class="n">γ</span> <span class="n">γ&#39;</span><span class="o">),</span>
+<span class="n">canonically_isomorphic_functions</span> <span class="n">Cα</span> <span class="n">Cβ</span> <span class="n">f</span> <span class="n">f&#39;</span> <span class="bp">→</span>
+<span class="n">canonically_isomorphic_functions</span> <span class="n">Cβ</span> <span class="n">Cγ</span> <span class="n">g</span> <span class="n">g&#39;</span> <span class="bp">→</span>
+<span class="n">canonically_isomorphic_functions</span> <span class="n">Cα</span> <span class="n">Cγ</span> <span class="o">(</span><span class="n">g</span> <span class="err">∘</span> <span class="n">f</span><span class="o">)</span> <span class="o">(</span><span class="n">g&#39;</span> <span class="err">∘</span> <span class="n">f&#39;</span><span class="o">)</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="n">f</span> <span class="n">f&#39;</span> <span class="n">g</span> <span class="n">g&#39;</span> <span class="n">Cα</span> <span class="n">Cβ</span> <span class="n">Cγ</span> <span class="n">Cf</span> <span class="n">Cg</span><span class="o">,</span><span class="bp">⟨λ</span> <span class="n">a</span><span class="o">,</span><span class="k">begin</span>
+  <span class="k">show</span> <span class="n">Cγ</span> <span class="o">(</span><span class="n">g</span> <span class="o">(</span><span class="n">f</span> <span class="n">a</span><span class="o">))</span> <span class="bp">=</span> <span class="n">g&#39;</span> <span class="o">(</span><span class="n">f&#39;</span> <span class="o">(</span><span class="n">Cα</span> <span class="n">a</span><span class="o">)),</span>
+  <span class="n">rw</span> <span class="o">[</span><span class="n">Cg</span><span class="bp">.</span><span class="n">commutes</span><span class="o">,</span><span class="n">Cf</span><span class="bp">.</span><span class="n">commutes</span><span class="o">]</span>
+<span class="kn">end</span><span class="bp">⟩</span>
+</pre></div>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 03:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125801279):
-Scott, I was inspired by your structure
+<p>Scott, I was inspired by your structure</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 03:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125801280):
-Did you see the docs?
+<p>Did you see the docs?</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 03:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125801284):
-It's a summary of what happened
+<p>It's a summary of what happened</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 03:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125801299):
-@**Reid Barton** Can you fit these canonically isomorphic functions into your way of thinking?
+<p><span class="user-mention" data-user-id="110032">@Reid Barton</span> Can you fit these canonically isomorphic functions into your way of thinking?</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 03:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125801342):
-@**Scott Morrison** Johan expanded out your idea into a series of little definitions
+<p><span class="user-mention" data-user-id="110524">@Scott Morrison</span> Johan expanded out your idea into a series of little definitions</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 03:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125801345):
-And @**Kenny Lau** filled them all in
+<p>And <span class="user-mention" data-user-id="110064">@Kenny Lau</span> filled them all in</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 03:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125801346):
-https://github.com/kckennylau/Lean/blob/master/johan_challenge.lean
+<p><a href="https://github.com/kckennylau/Lean/blob/master/johan_challenge.lean" target="_blank" title="https://github.com/kckennylau/Lean/blob/master/johan_challenge.lean">https://github.com/kckennylau/Lean/blob/master/johan_challenge.lean</a></p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 03:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125801350):
-@**Reid Barton** wrote something I didn't understand yet:
+<p><span class="user-mention" data-user-id="110032">@Reid Barton</span> wrote something I didn't understand yet:</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 03:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125801351):
-https://gist.github.com/rwbarton/d847ef6d1783f0d0859eb80de8327bad
+<p><a href="https://gist.github.com/rwbarton/d847ef6d1783f0d0859eb80de8327bad" target="_blank" title="https://gist.github.com/rwbarton/d847ef6d1783f0d0859eb80de8327bad">https://gist.github.com/rwbarton/d847ef6d1783f0d0859eb80de8327bad</a></p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 03:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125801359):
-and I wrote some docs
+<p>and I wrote some docs</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 03:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125801360):
-https://github.com/kbuzzard/xena/blob/e77228397ad21215a927f93d315edf3cbadbc567/canonical_isomorphism/canonical.md
+<p><a href="https://github.com/kbuzzard/xena/blob/e77228397ad21215a927f93d315edf3cbadbc567/canonical_isomorphism/canonical.md" target="_blank" title="https://github.com/kbuzzard/xena/blob/e77228397ad21215a927f93d315edf3cbadbc567/canonical_isomorphism/canonical.md">https://github.com/kbuzzard/xena/blob/e77228397ad21215a927f93d315edf3cbadbc567/canonical_isomorphism/canonical.md</a></p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 03:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125801407):
-and now I am wondering about whether it's a good idea to think of the concept that a square with equivs down the sides commutes
+<p>and now I am wondering about whether it's a good idea to think of the concept that a square with equivs down the sides commutes</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 03:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125801411):
-as an equiv between the other two sides
+<p>as an equiv between the other two sides</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 03:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125801426):
-The definition doesn't seem to fit into your "transportable" yoga
+<p>The definition doesn't seem to fit into your "transportable" yoga</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 03:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125801480):
-and this
+<p>and this</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 03:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125801481):
-`theorem topological_ring.transportable : transportable topological_ring := sorry`
+<p><code>theorem topological_ring.transportable : transportable topological_ring := sorry</code></p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 03:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125801482):
-is a type mismatch
+<p>is a type mismatch</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 03:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125801490):
-but on the other hand I am pretty sure I want to transport topological rings
+<p>but on the other hand I am pretty sure I want to transport topological rings</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 03:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125801495):
-@**Simon Hudon** I wrote docs
+<p><span class="user-mention" data-user-id="110026">@Simon Hudon</span> I wrote docs</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 03:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125801497):
-Do you want me to add anything else?
+<p>Do you want me to add anything else?</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 03:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125801499):
-I am currently working on formalising a high-level proof of the exactness statement I want
+<p>I am currently working on formalising a high-level proof of the exactness statement I want</p>
 
 #### [ Reid Barton (Apr 28 2018 at 03:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125801605):
-I haven't really caught up on any of the recent discussion, but regarding the commutative square with two equivs $$e_A : A \to A'$$ and $$e_B : B \to B'$$, my current way of thinking about this is that transporting the structure of a map $$f : A \to B$$ along these two equivs produces a map $$A' \to B'$$ which will be given by the formula $$e_B \circ f \circ e_A^{-1}$$
+<p>I haven't really caught up on any of the recent discussion, but regarding the commutative square with two equivs <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>e</mi><mi>A</mi></msub><mo>:</mo><mi>A</mi><mo>→</mo><msup><mi>A</mi><mo mathvariant="normal">′</mo></msup></mrow><annotation encoding="application/x-tex">e_A : A \to A'</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.751892em;"></span><span class="strut bottom" style="height:0.901892em;vertical-align:-0.15em;"></span><span class="base"><span class="mord"><span class="mord mathit">e</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathit mtight">A</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"></span></span></span></span></span><span class="mrel">:</span><span class="mord mathit">A</span><span class="mrel">→</span><span class="mord"><span class="mord mathit">A</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.751892em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathrm mtight">′</span></span></span></span></span></span></span></span></span></span></span></span> and <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>e</mi><mi>B</mi></msub><mo>:</mo><mi>B</mi><mo>→</mo><msup><mi>B</mi><mo mathvariant="normal">′</mo></msup></mrow><annotation encoding="application/x-tex">e_B : B \to B'</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.751892em;"></span><span class="strut bottom" style="height:0.901892em;vertical-align:-0.15em;"></span><span class="base"><span class="mord"><span class="mord mathit">e</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathit mtight" style="margin-right:0.05017em;">B</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"></span></span></span></span></span><span class="mrel">:</span><span class="mord mathit" style="margin-right:0.05017em;">B</span><span class="mrel">→</span><span class="mord"><span class="mord mathit" style="margin-right:0.05017em;">B</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.751892em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathrm mtight">′</span></span></span></span></span></span></span></span></span></span></span></span>, my current way of thinking about this is that transporting the structure of a map <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>f</mi><mo>:</mo><mi>A</mi><mo>→</mo><mi>B</mi></mrow><annotation encoding="application/x-tex">f : A \to B</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.69444em;"></span><span class="strut bottom" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.10764em;">f</span><span class="mrel">:</span><span class="mord mathit">A</span><span class="mrel">→</span><span class="mord mathit" style="margin-right:0.05017em;">B</span></span></span></span> along these two equivs produces a map <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mi>A</mi><mo mathvariant="normal">′</mo></msup><mo>→</mo><msup><mi>B</mi><mo mathvariant="normal">′</mo></msup></mrow><annotation encoding="application/x-tex">A' \to B'</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.751892em;"></span><span class="strut bottom" style="height:0.751892em;vertical-align:0em;"></span><span class="base"><span class="mord"><span class="mord mathit">A</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.751892em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathrm mtight">′</span></span></span></span></span></span></span></span></span><span class="mrel">→</span><span class="mord"><span class="mord mathit" style="margin-right:0.05017em;">B</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.751892em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathrm mtight">′</span></span></span></span></span></span></span></span></span></span></span></span> which will be given by the formula <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>e</mi><mi>B</mi></msub><mo>∘</mo><mi>f</mi><mo>∘</mo><msubsup><mi>e</mi><mi>A</mi><mrow><mo>−</mo><mn>1</mn></mrow></msubsup></mrow><annotation encoding="application/x-tex">e_B \circ f \circ e_A^{-1}</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.854239em;"></span><span class="strut bottom" style="height:1.14777em;vertical-align:-0.293531em;"></span><span class="base"><span class="mord"><span class="mord mathit">e</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathit mtight" style="margin-right:0.05017em;">B</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"></span></span></span></span></span><span class="mbin">∘</span><span class="mord mathit" style="margin-right:0.10764em;">f</span><span class="mbin">∘</span><span class="mord"><span class="mord mathit">e</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.854239em;"><span style="top:-2.4064690000000004em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathit mtight">A</span></span></span><span style="top:-3.1031310000000003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">−</span><span class="mord mathrm mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.293531em;"></span></span></span></span></span></span></span></span></p>
 
 #### [ Reid Barton (Apr 28 2018 at 03:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125801610):
-and the condition that your square commutes can then be reinterpreted as saying that the bottom map is the map that you get by transporting the top map along the sides
+<p>and the condition that your square commutes can then be reinterpreted as saying that the bottom map is the map that you get by transporting the top map along the sides</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 03:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125801620):
-So is this a relation between $$f$$ and $$f'$$ like `equiv`?
+<p>So is this a relation between <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>f</mi></mrow><annotation encoding="application/x-tex">f</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.69444em;"></span><span class="strut bottom" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.10764em;">f</span></span></span></span> and <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mi>f</mi><mo mathvariant="normal">′</mo></msup></mrow><annotation encoding="application/x-tex">f'</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.751892em;"></span><span class="strut bottom" style="height:0.946332em;vertical-align:-0.19444em;"></span><span class="base"><span class="mord"><span class="mord mathit" style="margin-right:0.10764em;">f</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.751892em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathrm mtight">′</span></span></span></span></span></span></span></span></span></span></span></span> like <code>equiv</code>?</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 03:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125801622):
-Or is this a transportation of the structure?
+<p>Or is this a transportation of the structure?</p>
 
 #### [ Simon Hudon (Apr 28 2018 at 03:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125801623):
-@**Kevin Buzzard** Thanks! 
-
-```quote
-I am currently working on formalising a high-level proof of the exactness statement I want
-```
-That's a good idea. Maybe apologize everywhere you'd expect to derive a transferable instance
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> Thanks! </p>
+<blockquote>
+<p>I am currently working on formalising a high-level proof of the exactness statement I want</p>
+</blockquote>
+<p>That's a good idea. Maybe apologize everywhere you'd expect to derive a transferable instance</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 03:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125801661):
-Right
+<p>Right</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 03:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125801664):
-or admit defeat
+<p>or admit defeat</p>
 
 #### [ Reid Barton (Apr 28 2018 at 03:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125801665):
-Which in turn, is going to be the condition you need to know that the fact that you transported across the isomorphisms (like exactness) is actually about your original maps A' -> B' -> C'.
+<p>Which in turn, is going to be the condition you need to know that the fact that you transported across the isomorphisms (like exactness) is actually about your original maps A' -&gt; B' -&gt; C'.</p>
 
 #### [ Reid Barton (Apr 28 2018 at 04:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125803762):
-@**Kevin Buzzard** I finished writing up the proof of the "three lemma" from `transportable` instances/lemmas which could plausibly be autogenerated. It's still pretty gross and could probably use some refinement.
-https://gist.github.com/rwbarton/08924014ebc7b1cf68ec624989249aff
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> I finished writing up the proof of the "three lemma" from <code>transportable</code> instances/lemmas which could plausibly be autogenerated. It's still pretty gross and could probably use some refinement.<br>
+<a href="https://gist.github.com/rwbarton/08924014ebc7b1cf68ec624989249aff" target="_blank" title="https://gist.github.com/rwbarton/08924014ebc7b1cf68ec624989249aff">https://gist.github.com/rwbarton/08924014ebc7b1cf68ec624989249aff</a></p>
 
 #### [ Reid Barton (Apr 28 2018 at 05:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125804891):
-Updated version uses a simp attribute to handle all the goals at once
+<p>Updated version uses a simp attribute to handle all the goals at once</p>
 
 #### [ Reid Barton (Apr 28 2018 at 05:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125805096):
-@**Simon Hudon**, you might also be interested in the above--stuff defined as `magic` is what I would like to have autogenerated
+<p><span class="user-mention" data-user-id="110026">@Simon Hudon</span>, you might also be interested in the above--stuff defined as <code>magic</code> is what I would like to have autogenerated</p>
 
 #### [ Johan Commelin (Apr 28 2018 at 05:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125805104):
-```quote
-By adding more `transportable` classes for type constructors with multiple arguments, we could extend these ideas to situations where we have an isomorphism which respects some existing structure and we want to transport some additional structure (or property) across it. Here is a sketch of the idea: https://gist.github.com/rwbarton/d847ef6d1783f0d0859eb80de8327bad
-```
-I want some emphasis on this remark by Reid.
+<blockquote>
+<p>By adding more <code>transportable</code> classes for type constructors with multiple arguments, we could extend these ideas to situations where we have an isomorphism which respects some existing structure and we want to transport some additional structure (or property) across it. Here is a sketch of the idea: <a href="https://gist.github.com/rwbarton/d847ef6d1783f0d0859eb80de8327bad" target="_blank" title="https://gist.github.com/rwbarton/d847ef6d1783f0d0859eb80de8327bad">https://gist.github.com/rwbarton/d847ef6d1783f0d0859eb80de8327bad</a></p>
+</blockquote>
+<p>I want some emphasis on this remark by Reid.</p>
 
 #### [ Johan Commelin (Apr 28 2018 at 05:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125805143):
-This is very important. And our current proposal does not fit...
+<p>This is very important. And our current proposal does not fit...</p>
 
 #### [ Johan Commelin (Apr 28 2018 at 05:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125805146):
-So, how about this: Every time we define/prove a coercion, we also derive `transportable2` in the other direction.
+<p>So, how about this: Every time we define/prove a coercion, we also derive <code>transportable2</code> in the other direction.</p>
 
 #### [ Johan Commelin (Apr 28 2018 at 05:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125805153):
-Which means, if you have two `int` that are equal, and one of them came from a `nat`, then the other one came from the same `nat`
+<p>Which means, if you have two <code>int</code> that are equal, and one of them came from a <code>nat</code>, then the other one came from the same <code>nat</code></p>
 
 #### [ Johan Commelin (Apr 28 2018 at 05:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125805210):
-But also, if you have a `ring R` that is group-isomorphic to some `group G`, then you get a ring structure on `G` for free, and the underlying group structure of this new ring structure is exactly the group structure on `G` that you started with.
+<p>But also, if you have a <code>ring R</code> that is group-isomorphic to some <code>group G</code>, then you get a ring structure on <code>G</code> for free, and the underlying group structure of this new ring structure is exactly the group structure on <code>G</code> that you started with.</p>
 
 #### [ Johan Commelin (Apr 28 2018 at 05:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125805211):
-I think coercions exactly determine where transport of structure applies.
+<p>I think coercions exactly determine where transport of structure applies.</p>
 
 #### [ Johan Commelin (Apr 28 2018 at 05:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125805440):
-@**Reid Barton** Is what I'm saying canonically isomorphic to your remarks? I.e., did I transport the structure of your remarks?
+<p><span class="user-mention" data-user-id="110032">@Reid Barton</span> Is what I'm saying canonically isomorphic to your remarks? I.e., did I transport the structure of your remarks?</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 06:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125806580):
-So I pushed my work on "canonically isomorphic functions" between canonically isomorphic types
+<p>So I pushed my work on "canonically isomorphic functions" between canonically isomorphic types</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 06:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125806581):
-https://github.com/kbuzzard/xena/blob/master/canonical_isomorphism/sheaf_canonical.lean
+<p><a href="https://github.com/kbuzzard/xena/blob/master/canonical_isomorphism/sheaf_canonical.lean" target="_blank" title="https://github.com/kbuzzard/xena/blob/master/canonical_isomorphism/sheaf_canonical.lean">https://github.com/kbuzzard/xena/blob/master/canonical_isomorphism/sheaf_canonical.lean</a></p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 06:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125806594):
-Let me state what I think the state of things is
+<p>Let me state what I think the state of things is</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 06:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125806595):
-We had an idea about defining a class called transportable
+<p>We had an idea about defining a class called transportable</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 06:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125806597):
-and I want to define a structure called a canonical isomorphism
+<p>and I want to define a structure called a canonical isomorphism</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 06:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125806598):
-which doesn't have to be the maths one
+<p>which doesn't have to be the maths one</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 06:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125806638):
-but it has to be good enough to deal the mortal blow to the final boss in affine schemes.
+<p>but it has to be good enough to deal the mortal blow to the final boss in affine schemes.</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 06:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125806648):
-Transportable originally ate a function `Type -> Type` or perhaps `Type u -> Type v` depending on what mood people were in. Because this is a CS thing I suppose we will end up with `Type u -> Type v`
+<p>Transportable originally ate a function <code>Type -&gt; Type</code> or perhaps <code>Type u -&gt; Type v</code> depending on what mood people were in. Because this is a CS thing I suppose we will end up with <code>Type u -&gt; Type v</code></p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 06:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125806649):
-But now we want it to eat more
+<p>But now we want it to eat more</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 06:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125806690):
-for example we want it to eat the instance of the type class resolution system which sends a ring to an additive group
+<p>for example we want it to eat the instance of the type class resolution system which sends a ring to an additive group</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 06:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125806699):
-and spit out a theorem that says that if a equiv a' then the square commutes up to definitional equality.
+<p>and spit out a theorem that says that if a equiv a' then the square commutes up to definitional equality.</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 06:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125806700):
-by which I mean Lean definitional equality, ideally.
+<p>by which I mean Lean definitional equality, ideally.</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 06:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125806742):
-the square goes from ring a to ring a' on the top, from group a to group a' on the bottom, and the maps down are coming from the type class inference system
+<p>the square goes from ring a to ring a' on the top, from group a to group a' on the bottom, and the maps down are coming from the type class inference system</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 06:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125806745):
-So which instances of type class inference will commute with equiv in this way?
+<p>So which instances of type class inference will commute with equiv in this way?</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 06:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125806802):
-Can we not _assume_ that if alpha is a type which happens to have both a group structure and a ring structure then the group structure associated to the ring structure is the one which the type class inference system would associate to the ring structure?
+<p>Can we not _assume_ that if alpha is a type which happens to have both a group structure and a ring structure then the group structure associated to the ring structure is the one which the type class inference system would associate to the ring structure?</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 06:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125806803):
-Because if this is not the case then the Diamond is nigh, right?
+<p>Because if this is not the case then the Diamond is nigh, right?</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 06:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125806843):
-So this would seem like the correct theorem to prove
+<p>So this would seem like the correct theorem to prove</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 06:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125806848):
-Oh I have a question @**Johan Commelin** !
+<p>Oh I have a question <span class="user-mention" data-user-id="112680">@Johan Commelin</span> !</p>
 
 #### [ Reid Barton (Apr 28 2018 at 06:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125806849):
-Kevin, I'm not sure how helpful this remark will be, but your `canonically_isomorphic_functions Cα Cβ f f'` is in my setup `f' = transport2 (→) Cα Cβ f`
+<p>Kevin, I'm not sure how helpful this remark will be, but your <code>canonically_isomorphic_functions Cα Cβ f f'</code> is in my setup <code>f' = transport2 (→) Cα Cβ f</code></p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 06:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125806850):
-Do you know those WIP docs?
+<p>Do you know those WIP docs?</p>
 
 #### [ Andrew Ashworth (Apr 28 2018 at 06:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125806852):
-a tactic that takes two types, a function relating the two, and from Prop (input 1) return Prop (input 2), is that what people are discussing?
+<p>a tactic that takes two types, a function relating the two, and from Prop (input 1) return Prop (input 2), is that what people are discussing?</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 06:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125806853):
-Mario gave me an example of a way to break the type class resolution system in a really annoying way
+<p>Mario gave me an example of a way to break the type class resolution system in a really annoying way</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 06:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125806858):
-What happens if you try and prove that those maps are all canonical?
+<p>What happens if you try and prove that those maps are all canonical?</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 06:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125806861):
-Does that make any sense?
+<p>Does that make any sense?</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 06:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125806863):
-Reid, I am sure you are thinking about it in a better way than me
+<p>Reid, I am sure you are thinking about it in a better way than me</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 06:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125806865):
-and I am absolutely convinved that we should get this as abstract as possible
+<p>and I am absolutely convinved that we should get this as abstract as possible</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 06:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125806866):
-thanks for the pointer!
+<p>thanks for the pointer!</p>
 
 #### [ Johan Commelin (Apr 28 2018 at 06:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125806904):
-@**Andrew Ashworth** Yes, more or less.
+<p><span class="user-mention" data-user-id="110025">@Andrew Ashworth</span> Yes, more or less.</p>
 
 #### [ Reid Barton (Apr 28 2018 at 06:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125806908):
-@**Johan Commelin**, I'm not sure what you mean by coercion. Are you talking about `has_coe`?
+<p><span class="user-mention" data-user-id="112680">@Johan Commelin</span>, I'm not sure what you mean by coercion. Are you talking about <code>has_coe</code>?</p>
 
 #### [ Johan Commelin (Apr 28 2018 at 06:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125806909):
-@**Andrew Ashworth** The basic example. Given `a b : Type`, `equiv a b` and also `[group a]` we want to automagically have `group b`
+<p><span class="user-mention" data-user-id="110025">@Andrew Ashworth</span> The basic example. Given <code>a b : Type</code>, <code>equiv a b</code> and also <code>[group a]</code> we want to automagically have <code>group b</code></p>
 
 #### [ Andrew Ashworth (Apr 28 2018 at 06:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125806915):
-i'll mention again the transfer tactic in core lean that produces `int` from `pairs of nat`, and the paper that describes it is linked earlier... unless i'm totally off-base
+<p>i'll mention again the transfer tactic in core lean that produces <code>int</code> from <code>pairs of nat</code>, and the paper that describes it is linked earlier... unless i'm totally off-base</p>
 
 #### [ Johan Commelin (Apr 28 2018 at 06:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125806917):
-@**Reid Barton** I'm still a novice. But I guess that is what I mean.
+<p><span class="user-mention" data-user-id="110032">@Reid Barton</span> I'm still a novice. But I guess that is what I mean.</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 06:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125806918):
-https://github.com/kbuzzard/mathlib/blob/WIP_docs/docs/WIPs/type_class_inference.md
+<p><a href="https://github.com/kbuzzard/mathlib/blob/WIP_docs/docs/WIPs/type_class_inference.md" target="_blank" title="https://github.com/kbuzzard/mathlib/blob/WIP_docs/docs/WIPs/type_class_inference.md">https://github.com/kbuzzard/mathlib/blob/WIP_docs/docs/WIPs/type_class_inference.md</a></p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 06:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125806958):
-In the "to be tidied" section
+<p>In the "to be tidied" section</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 06:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125806960):
-there is Mario busting the type class inference system
+<p>there is Mario busting the type class inference system</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 06:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125806962):
-following an idea of mine
+<p>following an idea of mine</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 06:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125806963):
-trying to find a fairly explicit example of how it can bust
+<p>trying to find a fairly explicit example of how it can bust</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 06:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125806966):
-because two natural numbers are equal but the proof is not "rfl"
+<p>because two natural numbers are equal but the proof is not "rfl"</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 06:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125807014):
-The type class system breaks quite badly if you find two different ways of getting from A to B
+<p>The type class system breaks quite badly if you find two different ways of getting from A to B</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 06:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125807015):
-On the other hand I am pretty sure that I want to allow more than one canonical isomorphism between two objects
+<p>On the other hand I am pretty sure that I want to allow more than one canonical isomorphism between two objects</p>
 
 #### [ Andrew Ashworth (Apr 28 2018 at 06:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125807021):
-transfer in action: constructing an efficient representation of `int` from the pre-int pair of nat... https://github.com/leanprover/lean/blob/master/library/init/data/int/basic.lean
+<p>transfer in action: constructing an efficient representation of <code>int</code> from the pre-int pair of nat... <a href="https://github.com/leanprover/lean/blob/master/library/init/data/int/basic.lean" target="_blank" title="https://github.com/leanprover/lean/blob/master/library/init/data/int/basic.lean">https://github.com/leanprover/lean/blob/master/library/init/data/int/basic.lean</a></p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 06:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125807022):
-For example I think I want the sum of two canonical isomorphisms from a group to a group to be a canonical isomorphism
+<p>For example I think I want the sum of two canonical isomorphisms from a group to a group to be a canonical isomorphism</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 06:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125807024):
-I know int.basic pretty well
+<p>I know int.basic pretty well</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 06:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125807025):
-What does this have to do with anything?
+<p>What does this have to do with anything?</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 06:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125807026):
-I understand the int typeclass
+<p>I understand the int typeclass</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 06:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125807066):
-and you are saying that int canonically bijects with nat + nat?
+<p>and you are saying that int canonically bijects with nat + nat?</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 06:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125807067):
-I would say that that bijection is not canonical
+<p>I would say that that bijection is not canonical</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 06:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125807068):
-It's a junk theorem I think
+<p>It's a junk theorem I think</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 06:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125807069):
-In a parallel universe int was constructed as a quotient type on nat x nat
+<p>In a parallel universe int was constructed as a quotient type on nat x nat</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 06:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125807072):
-or one day Leo changes int to this
+<p>or one day Leo changes int to this</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 06:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125807075):
-and nobody notices
+<p>and nobody notices</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 06:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125807076):
-because maybe we all use the int interface
+<p>because maybe we all use the int interface</p>
 
 #### [ Andrew Ashworth (Apr 28 2018 at 06:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125807079):
-isn't that the tactic machinery you're interested in, however?
+<p>isn't that the tactic machinery you're interested in, however?</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 06:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125807080):
-Evidence that that bijection is not canonical is that it does not behave well with respect to arithmetic operations like +
+<p>Evidence that that bijection is not canonical is that it does not behave well with respect to arithmetic operations like +</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 06:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125807081):
-Oh -- I see
+<p>Oh -- I see</p>
 
 #### [ Johan Commelin (Apr 28 2018 at 06:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125807084):
-@**Kevin Buzzard** Concerning Mario's example. Basically, you prove that `nat \times nat` has a ring structure, and then coerce by taking the sum. But the sum is not a ring homomorphism... Is that what is going on?
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> Concerning Mario's example. Basically, you prove that <code>nat \times nat</code> has a ring structure, and then coerce by taking the sum. But the sum is not a ring homomorphism... Is that what is going on?</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 06:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125807085):
-I'm afraid my eyes glaze over whenever I see tactic machinery
+<p>I'm afraid my eyes glaze over whenever I see tactic machinery</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 06:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125807123):
-I don't understand it at all
+<p>I don't understand it at all</p>
 
 #### [ Reid Barton (Apr 28 2018 at 06:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125807133):
-It actually is using `nat \times nat`.
+<p>It actually is using <code>nat \times nat</code>.</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 06:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125807134):
-@**Johan Commelin** no multiplication is involved
+<p><span class="user-mention" data-user-id="112680">@Johan Commelin</span> no multiplication is involved</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 06:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125807151):
-no multiplication of nats at least
+<p>no multiplication of nats at least</p>
 
 #### [ Kenny Lau (Apr 28 2018 at 06:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125807153):
-```quote
-because maybe we all use the int interface
-```
-nope. lots of things in mathlib use the definition of int
+<blockquote>
+<p>because maybe we all use the int interface</p>
+</blockquote>
+<p>nope. lots of things in mathlib use the definition of int</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 06:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125807156):
-Johan -- the only canonical thing you are allowed to do with nats is add them up in Mario's example
+<p>Johan -- the only canonical thing you are allowed to do with nats is add them up in Mario's example</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 06:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125807157):
-So there's a type which carries a nat
+<p>So there's a type which carries a nat</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 06:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125807194):
-and one which carries two nats
+<p>and one which carries two nats</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 06:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125807197):
-and the type class inference system will take you from the two nat guys to the one nat guys by just adding up their two nats
+<p>and the type class inference system will take you from the two nat guys to the one nat guys by just adding up their two nats</p>
 
 #### [ Johan Commelin (Apr 28 2018 at 06:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125807198):
-Ah, sorry, brainfarting again
+<p>Ah, sorry, brainfarting again</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 06:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125807202):
-But there is also this product construction
+<p>But there is also this product construction</p>
 
 #### [ Reid Barton (Apr 28 2018 at 06:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125807203):
-Er, to clarify, the `int` transfer stuff (which I don't know anything about) uses `nat \times nat`
+<p>Er, to clarify, the <code>int</code> transfer stuff (which I don't know anything about) uses <code>nat \times nat</code></p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 06:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125807209):
-and you just add up the nats
+<p>and you just add up the nats</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 06:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125807214):
-so now there's two ways of getting from a pair `(a,b)` of two-nat guys
+<p>so now there's two ways of getting from a pair <code>(a,b)</code> of two-nat guys</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 06:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125807215):
-to one one-nat guy
+<p>to one one-nat guy</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 06:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125807256):
-and `(r+s)+(t+u)` is not definitionally equal to `(r+t)+(s+u)`
+<p>and <code>(r+s)+(t+u)</code> is not definitionally equal to <code>(r+t)+(s+u)</code></p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 06:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125807257):
-you need a proof by induction for that
+<p>you need a proof by induction for that</p>
 
 #### [ Johan Commelin (Apr 28 2018 at 06:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125807259):
-Right, that's what is going on
+<p>Right, that's what is going on</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 06:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125807264):
-and then rw stops working
+<p>and then rw stops working</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 06:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125807268):
-because rw keeps track of the exact definitions of the instances
+<p>because rw keeps track of the exact definitions of the instances</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 06:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125807269):
-no
+<p>no</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 06:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125807270):
-the types keep track
+<p>the types keep track</p>
 
 #### [ Johan Commelin (Apr 28 2018 at 06:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125807271):
-@**Andrew Ashworth** Which lines should we look at, to see transfer in action, in int/basic.lean
+<p><span class="user-mention" data-user-id="110025">@Andrew Ashworth</span> Which lines should we look at, to see transfer in action, in int/basic.lean</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 06:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125807273):
-and rw looks at the types
+<p>and rw looks at the types</p>
 
 #### [ Andrew Ashworth (Apr 28 2018 at 06:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125807315):
-@**Johan Commelin** line 399 proves the integers form a ring
+<p><span class="user-mention" data-user-id="112680">@Johan Commelin</span> line 399 proves the integers form a ring</p>
 
 #### [ Andrew Ashworth (Apr 28 2018 at 06:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125807324):
-the setup starts at line 269
+<p>the setup starts at line 269</p>
 
 #### [ Johan Commelin (Apr 28 2018 at 06:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125807367):
-I have the instinctive feeling that this is related, but somewhat different from what we are discussing.
+<p>I have the instinctive feeling that this is related, but somewhat different from what we are discussing.</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 06:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125807370):
-I guess I understand much less of this part of int.nat than I remembered
+<p>I guess I understand much less of this part of int.nat than I remembered</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 06:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125807375):
-what is all this rel stuff?
+<p>what is all this rel stuff?</p>
 
 #### [ Johan Commelin (Apr 28 2018 at 06:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125807378):
-But maybe I don't get what this part of the file is trying to prove
+<p>But maybe I don't get what this part of the file is trying to prove</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 06:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125807437):
-I see.
+<p>I see.</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 06:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125807439):
-`rel_int_nat_nat (z : int)`
+<p><code>rel_int_nat_nat (z : int)</code></p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 06:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125807442):
-is the set of pairs (a,b) in nat x nat
+<p>is the set of pairs (a,b) in nat x nat</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 06:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125807446):
-such that a - b = z
+<p>such that a - b = z</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 06:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125807447):
-so it's the equivalence class
+<p>so it's the equivalence class</p>
 
 #### [ Johan Commelin (Apr 28 2018 at 06:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125807486):
-@**Andrew Ashworth** Are you saying: there is a ring structure on a quotient of `nat \times nat` and there is a bijection between `Z` and this quotient. And this is how we transfer the ring structure onto `Z`
+<p><span class="user-mention" data-user-id="110025">@Andrew Ashworth</span> Are you saying: there is a ring structure on a quotient of <code>nat \times nat</code> and there is a bijection between <code>Z</code> and this quotient. And this is how we transfer the ring structure onto <code>Z</code></p>
 
 #### [ Johan Commelin (Apr 28 2018 at 06:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125807487):
-Is that what is going on?
+<p>Is that what is going on?</p>
 
 #### [ Johan Commelin (Apr 28 2018 at 06:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125807489):
-I think it is. And if so, that is a perfect example.
+<p>I think it is. And if so, that is a perfect example.</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 06:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125807490):
-So there's all this rel stuff
+<p>So there's all this rel stuff</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 06:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125807492):
-and suddenly there are some transfer tactics and it's all over.
+<p>and suddenly there are some transfer tactics and it's all over.</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 06:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125807493):
-Who wrote that stuff?
+<p>Who wrote that stuff?</p>
 
 #### [ Andrew Ashworth (Apr 28 2018 at 06:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125807494):
-johannes hoezl
+<p>johannes hoezl</p>
 
 #### [ Johan Commelin (Apr 28 2018 at 06:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125807499):
-```quote
-Who wrote that stuff?
-```
-`git blame`
+<blockquote>
+<p>Who wrote that stuff?</p>
+</blockquote>
+<p><code>git blame</code></p>
 
 #### [ Johan Commelin (Apr 28 2018 at 06:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125807501):
-https://github.com/leanprover/lean/blame/f59c2f0ef59fdc1833b6ead6adca721123bd7932/library/init/data/int/basic.lean#L393
+<p><a href="https://github.com/leanprover/lean/blame/f59c2f0ef59fdc1833b6ead6adca721123bd7932/library/init/data/int/basic.lean#L393" target="_blank" title="https://github.com/leanprover/lean/blame/f59c2f0ef59fdc1833b6ead6adca721123bd7932/library/init/data/int/basic.lean#L393">https://github.com/leanprover/lean/blame/f59c2f0ef59fdc1833b6ead6adca721123bd7932/library/init/data/int/basic.lean#L393</a></p>
 
 #### [ Johan Commelin (Apr 28 2018 at 06:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125807543):
-Andrew, so now, we want to abstract this notion of transfer, and automatically derive it for lots of structures, given equivalences between types.
+<p>Andrew, so now, we want to abstract this notion of transfer, and automatically derive it for lots of structures, given equivalences between types.</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 06:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125807544):
-I see
+<p>I see</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 06:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125807545):
-Maybe he has something to say about what it means to be canonically isomorphic.
+<p>Maybe he has something to say about what it means to be canonically isomorphic.</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 06:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125807546):
-Johannes introduced the transfer method
+<p>Johannes introduced the transfer method</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 06:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125807594):
-Scott introduced this class with this cool `transportable` name and I've spent some time over the last 24 hours (I should probably sleep at some point) creating instances of this class and moving them around.
+<p>Scott introduced this class with this cool <code>transportable</code> name and I've spent some time over the last 24 hours (I should probably sleep at some point) creating instances of this class and moving them around.</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 06:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125807597):
-What started me off was Johan's list of levels
+<p>What started me off was Johan's list of levels</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 06:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125807600):
-If we have a more general idea
+<p>If we have a more general idea</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 06:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125807601):
-do we have another game to play?
+<p>do we have another game to play?</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 06:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125807647):
-Johan -- here's how to catch an instance of the type class resolution system
+<p>Johan -- here's how to catch an instance of the type class resolution system</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 06:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125807648):
-```
-theorem T {α : Type u} [ring α] : add_group α := by apply_instance 
+<div class="codehilite"><pre><span></span>theorem T {α : Type u} [ring α] : add_group α := by apply_instance
 #print T
-```
+</pre></div>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 06:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125807654):
-`apply_instance` is a tactic which tries to solve things by type class inference
+<p><code>apply_instance</code> is a tactic which tries to solve things by type class inference</p>
 
 #### [ Johan Commelin (Apr 28 2018 at 06:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125807659):
-Ok, let me think about how that might be useful
+<p>Ok, let me think about how that might be useful</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 07:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125807683):
-Unfortunately I don't think we have an instance of `transportable add_group` yet
+<p>Unfortunately I don't think we have an instance of <code>transportable add_group</code> yet</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 07:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125807701):
-Kenny wrote the ring one
+<p>Kenny wrote the ring one</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 07:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125807702):
-and one could copy
+<p>and one could copy</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 07:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125807706):
-These maps are in general forgetful functors
+<p>These maps are in general forgetful functors</p>
 
 #### [ Reid Barton (Apr 28 2018 at 07:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125807707):
-I think you would just delete all the lines which don't appear in `add_group`, yeah.
+<p>I think you would just delete all the lines which don't appear in <code>add_group</code>, yeah.</p>
 
 #### [ Reid Barton (Apr 28 2018 at 07:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125807708):
-Then I guess your square involving forgetful functors and transported equivalences ought to commute definitionally
+<p>Then I guess your square involving forgetful functors and transported equivalences ought to commute definitionally</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 07:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125807716):
-```
-@[instance, priority 100]
+<div class="codehilite"><pre><span></span>@[instance, priority 100]
 def add_comm_group.to_add_group : Π (α : Type u) [s : add_comm_group α], add_group α :=
 λ (α : Type u) [s : add_comm_group α],
   {add := add_comm_group.add s,
@@ -3423,1682 +3385,1659 @@ def add_comm_group.to_add_group : Π (α : Type u) [s : add_comm_group α], add_
    add_zero := _,
    neg := add_comm_group.neg s,
    add_left_neg := _}
-```
+</pre></div>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 07:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125807717):
-I am sure it will
+<p>I am sure it will</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 07:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125807758):
-A different class of instance is the following:
+<p>A different class of instance is the following:</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 07:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125807771):
-Wait
+<p>Wait</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 07:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125807772):
-this fails:
+<p>this fails:</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 07:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125807803):
-```lean
-theorem T {α : Type u} {β : Type v} [group α] [group β] :
-group α × β := by apply_instance 
-```
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">T</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">}</span> <span class="o">[</span><span class="n">group</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">group</span> <span class="n">β</span><span class="o">]</span> <span class="o">:</span>
+<span class="n">group</span> <span class="n">α</span> <span class="bp">×</span> <span class="n">β</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">apply_instance</span>
+</pre></div>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 07:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125807814):
-I was assuming "product of groups is a group" would be there
+<p>I was assuming "product of groups is a group" would be there</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 07:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125807815):
-Maybe it's in mathlib
+<p>Maybe it's in mathlib</p>
 
 #### [ Reid Barton (Apr 28 2018 at 07:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125807912):
-I think you're talking about instances like
-```lean
-instance blah [ring t] : some_other_thing t := ...
-```
+<p>I think you're talking about instances like</p>
+<div class="codehilite"><pre><span></span><span class="kn">instance</span> <span class="n">blah</span> <span class="o">[</span><span class="n">ring</span> <span class="n">t</span><span class="o">]</span> <span class="o">:</span> <span class="n">some_other_thing</span> <span class="n">t</span> <span class="o">:=</span> <span class="bp">...</span>
+</pre></div>
 
 #### [ Reid Barton (Apr 28 2018 at 07:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125807968):
-Which is essentially just some arbitrary user-defined function `ring t \to some_other_thing t`
+<p>Which is essentially just some arbitrary user-defined function <code>ring t \to some_other_thing t</code></p>
 
 #### [ Reid Barton (Apr 28 2018 at 07:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125808150):
-So now your question from earlier becomes whether an arbitrary function of type `Π α : Type, ring α → add_comm_group α` will commute with the equivalences `ring α ≃ ring β`, `add_comm_group α ≃ add_comm_group β` obtained by transportation of structure along an equivalence `α ≃ β`.  The answer is (probably) that it is true for every function you can define in Lean, but you can't prove it as a theorem within Lean that applies to an arbitrary function. This is parametricity again
+<p>So now your question from earlier becomes whether an arbitrary function of type <code>Π α : Type, ring α → add_comm_group α</code> will commute with the equivalences <code>ring α ≃ ring β</code>, <code>add_comm_group α ≃ add_comm_group β</code> obtained by transportation of structure along an equivalence <code>α ≃ β</code>.  The answer is (probably) that it is true for every function you can define in Lean, but you can't prove it as a theorem within Lean that applies to an arbitrary function. This is parametricity again</p>
 
 #### [ Johan Commelin (Apr 28 2018 at 07:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125808311):
-Ok, and now we need some magic to automaticlly prove it for every function that we define.
+<p>Ok, and now we need some magic to automaticlly prove it for every function that we define.</p>
 
 #### [ Johan Commelin (Apr 28 2018 at 07:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125808314):
-And then we don't care that we can't prove it for arbitrary functions. And we don't have to repeat ourselves in dozens of tiny variations.
+<p>And then we don't care that we can't prove it for arbitrary functions. And we don't have to repeat ourselves in dozens of tiny variations.</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 07:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125808358):
-Here's an instance for "product of groups is a group"
+<p>Here's an instance for "product of groups is a group"</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 07:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125808359):
-```lean
-definition prod_group (G : Type u) (H : Type v) [HG : group G] [HH : group H] : group (G × H) :=
-{ mul := λ ⟨g1,h1⟩ ⟨g2,h2⟩, ⟨g1 * g2,h1 * h2⟩,
-  mul_assoc := λ ⟨g1,h1⟩ ⟨g2,h2⟩ ⟨g3,h3⟩,prod.ext.2 ⟨mul_assoc _ _ _,mul_assoc _ _ _⟩, 
-  one := ⟨HG.one,HH.one⟩,
-  one_mul := λ ⟨g,h⟩, prod.ext.2 ⟨one_mul _,one_mul _⟩,
-  mul_one := λ ⟨g,h⟩, prod.ext.2 ⟨mul_one _,mul_one _⟩,
-  inv := λ ⟨g,h⟩, ⟨group.inv g,group.inv h⟩,--begin end,--λ ⟨g,h⟩, ⟨HG.inv g,HH.inv h⟩,
-  mul_left_inv := λ ⟨g,h⟩, prod.ext.2 ⟨mul_left_inv g,mul_left_inv h⟩
-}
-```
+<div class="codehilite"><pre><span></span><span class="kn">definition</span> <span class="n">prod_group</span> <span class="o">(</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">)</span> <span class="o">[</span><span class="n">HG</span> <span class="o">:</span> <span class="n">group</span> <span class="n">G</span><span class="o">]</span> <span class="o">[</span><span class="n">HH</span> <span class="o">:</span> <span class="n">group</span> <span class="n">H</span><span class="o">]</span> <span class="o">:</span> <span class="n">group</span> <span class="o">(</span><span class="n">G</span> <span class="bp">×</span> <span class="n">H</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">mul</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="bp">⟨</span><span class="n">g1</span><span class="o">,</span><span class="n">h1</span><span class="bp">⟩</span> <span class="bp">⟨</span><span class="n">g2</span><span class="o">,</span><span class="n">h2</span><span class="bp">⟩</span><span class="o">,</span> <span class="bp">⟨</span><span class="n">g1</span> <span class="bp">*</span> <span class="n">g2</span><span class="o">,</span><span class="n">h1</span> <span class="bp">*</span> <span class="n">h2</span><span class="bp">⟩</span><span class="o">,</span>
+  <span class="n">mul_assoc</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="bp">⟨</span><span class="n">g1</span><span class="o">,</span><span class="n">h1</span><span class="bp">⟩</span> <span class="bp">⟨</span><span class="n">g2</span><span class="o">,</span><span class="n">h2</span><span class="bp">⟩</span> <span class="bp">⟨</span><span class="n">g3</span><span class="o">,</span><span class="n">h3</span><span class="bp">⟩</span><span class="o">,</span><span class="n">prod</span><span class="bp">.</span><span class="n">ext</span><span class="bp">.</span><span class="mi">2</span> <span class="bp">⟨</span><span class="n">mul_assoc</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">,</span><span class="n">mul_assoc</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_⟩</span><span class="o">,</span>
+  <span class="n">one</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="n">HG</span><span class="bp">.</span><span class="n">one</span><span class="o">,</span><span class="n">HH</span><span class="bp">.</span><span class="n">one</span><span class="bp">⟩</span><span class="o">,</span>
+  <span class="n">one_mul</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="bp">⟨</span><span class="n">g</span><span class="o">,</span><span class="n">h</span><span class="bp">⟩</span><span class="o">,</span> <span class="n">prod</span><span class="bp">.</span><span class="n">ext</span><span class="bp">.</span><span class="mi">2</span> <span class="bp">⟨</span><span class="n">one_mul</span> <span class="bp">_</span><span class="o">,</span><span class="n">one_mul</span> <span class="bp">_⟩</span><span class="o">,</span>
+  <span class="n">mul_one</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="bp">⟨</span><span class="n">g</span><span class="o">,</span><span class="n">h</span><span class="bp">⟩</span><span class="o">,</span> <span class="n">prod</span><span class="bp">.</span><span class="n">ext</span><span class="bp">.</span><span class="mi">2</span> <span class="bp">⟨</span><span class="n">mul_one</span> <span class="bp">_</span><span class="o">,</span><span class="n">mul_one</span> <span class="bp">_⟩</span><span class="o">,</span>
+  <span class="n">inv</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="bp">⟨</span><span class="n">g</span><span class="o">,</span><span class="n">h</span><span class="bp">⟩</span><span class="o">,</span> <span class="bp">⟨</span><span class="n">group</span><span class="bp">.</span><span class="n">inv</span> <span class="n">g</span><span class="o">,</span><span class="n">group</span><span class="bp">.</span><span class="n">inv</span> <span class="n">h</span><span class="bp">⟩</span><span class="o">,</span><span class="c1">--begin end,--λ ⟨g,h⟩, ⟨HG.inv g,HH.inv h⟩,</span>
+  <span class="n">mul_left_inv</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="bp">⟨</span><span class="n">g</span><span class="o">,</span><span class="n">h</span><span class="bp">⟩</span><span class="o">,</span> <span class="n">prod</span><span class="bp">.</span><span class="n">ext</span><span class="bp">.</span><span class="mi">2</span> <span class="bp">⟨</span><span class="n">mul_left_inv</span> <span class="n">g</span><span class="o">,</span><span class="n">mul_left_inv</span> <span class="n">h</span><span class="bp">⟩</span>
+<span class="o">}</span>
+</pre></div>
 
 #### [ Reid Barton (Apr 28 2018 at 07:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125808360):
-Yes, though it doesn't sound very easy, because the meta-level argument is some induction over the definition of the function, and I'm not sure whether a tactic even has access to the syntactic definition of a function
+<p>Yes, though it doesn't sound very easy, because the meta-level argument is some induction over the definition of the function, and I'm not sure whether a tactic even has access to the syntactic definition of a function</p>
 
 #### [ Reid Barton (Apr 28 2018 at 07:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125808365):
-Maybe Mario could comment when he reappears
+<p>Maybe Mario could comment when he reappears</p>
 
 #### [ Johan Commelin (Apr 28 2018 at 07:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125808463):
-```quote
-I'm not sure whether a tactic even has access to the syntactic definition of a function
-```
-Right. This is the important question. If one of the Lean experts could help out, that would be awesome.
+<blockquote>
+<p>I'm not sure whether a tactic even has access to the syntactic definition of a function</p>
+</blockquote>
+<p>Right. This is the important question. If one of the Lean experts could help out, that would be awesome.</p>
 
 #### [ Scott Morrison (Apr 28 2018 at 07:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125808787):
-Yes, in the tactic world we can look at the syntactic definitions of things.
+<p>Yes, in the tactic world we can look at the syntactic definitions of things.</p>
 
 #### [ Scott Morrison (Apr 28 2018 at 07:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125808826):
-It's all just `expr`s.
+<p>It's all just <code>expr</code>s.</p>
 
 #### [ Mario Carneiro (Apr 28 2018 at 10:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125813008):
-Geez, you guys work too fast. I was going to say as a followup to my last post that parametricity is not as simple as `transportable`, and it seems like you are already running into its limitations. The problem is that it only works for unary type operators `Type u -> Type v`, but for the induction to work you need a parametricity statement for many different sorts of higher order type operators. For example, a `Type -> Type -> Type` operator is parametric if whenever `A ~= A'` and `B ~= B'` then `F A B ~= F A B`. A `(Type -> Type) -> Type` operator is parametric if whenever `F` and `F'` are such that `A ~= A'` implies `F A ~= F' A'`, then `G F ~= G F'`.
-
-There is some recursive definition of parametric that goes over the type of the higher-order functor, but you can't even define this recursion in lean since `Type` is not inductively generated by the Pi type and other stuff. But you can define tactics that produce such definitions, and tactics that prove that everything you care about satisfy its appropriate parametricity theorem. This is what "Theorems for free!" is about.
+<p>Geez, you guys work too fast. I was going to say as a followup to my last post that parametricity is not as simple as <code>transportable</code>, and it seems like you are already running into its limitations. The problem is that it only works for unary type operators <code>Type u -&gt; Type v</code>, but for the induction to work you need a parametricity statement for many different sorts of higher order type operators. For example, a <code>Type -&gt; Type -&gt; Type</code> operator is parametric if whenever <code>A ~= A'</code> and <code>B ~= B'</code> then <code>F A B ~= F A B</code>. A <code>(Type -&gt; Type) -&gt; Type</code> operator is parametric if whenever <code>F</code> and <code>F'</code> are such that <code>A ~= A'</code> implies <code>F A ~= F' A'</code>, then <code>G F ~= G F'</code>.</p>
+<p>There is some recursive definition of parametric that goes over the type of the higher-order functor, but you can't even define this recursion in lean since <code>Type</code> is not inductively generated by the Pi type and other stuff. But you can define tactics that produce such definitions, and tactics that prove that everything you care about satisfy its appropriate parametricity theorem. This is what "Theorems for free!" is about.</p>
 
 #### [ Mario Carneiro (Apr 28 2018 at 10:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125813265):
-Also, in the presence of `choice` parametricity fails, so it's not actually true that all lean-definable terms are parametric. For example, given choice you have that everything is decidable, in particular type equality, so you can make definitions like `if x = nat then nat else empty` which is nonempty on `nat` and empty on `int` even though `nat ~= int`.
+<p>Also, in the presence of <code>choice</code> parametricity fails, so it's not actually true that all lean-definable terms are parametric. For example, given choice you have that everything is decidable, in particular type equality, so you can make definitions like <code>if x = nat then nat else empty</code> which is nonempty on <code>nat</code> and empty on <code>int</code> even though <code>nat ~= int</code>.</p>
 
 #### [ Mario Carneiro (Apr 28 2018 at 10:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125813314):
-Or at least, that would be a counterexample if you knew `nat != int`. This comes back to the possible consistency of `A ~= B -> A = B`; assuming it's consistent with lean `nat != int` is not provable, although there are certainly models of lean which refute `nat = int`.
+<p>Or at least, that would be a counterexample if you knew <code>nat != int</code>. This comes back to the possible consistency of <code>A ~= B -&gt; A = B</code>; assuming it's consistent with lean <code>nat != int</code> is not provable, although there are certainly models of lean which refute <code>nat = int</code>.</p>
 
 #### [ Johan Commelin (Apr 28 2018 at 15:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125819688):
-@**Scott Morrison** There you have your counterexample.
+<p><span class="user-mention" data-user-id="110524">@Scott Morrison</span> There you have your counterexample.</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 15:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125820700):
-I am not interested in weird questions about whether int is equal to nat.
+<p>I am not interested in weird questions about whether int is equal to nat.</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 15:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125820703):
-It seems to me that a canonical isomorphism is a pair of things
+<p>It seems to me that a canonical isomorphism is a pair of things</p>
 
 #### [ Kenny Lau (Apr 28 2018 at 15:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125820705):
-I don't remember anyone asking your opinion :P
+<p>I don't remember anyone asking your opinion :P</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 15:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125820706):
-firstly an equiv
+<p>firstly an equiv</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 15:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125820707):
-:-)
+<p>:-)</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 15:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125820710):
-and secondly a promise
+<p>and secondly a promise</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 15:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125820714):
-and the promise is that you promise not to do stuff which isn't respected by the equiv
+<p>and the promise is that you promise not to do stuff which isn't respected by the equiv</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 15:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125820716):
-And in ZFC this promise is brushed under the carpet and there is a gentleman's agreement
+<p>And in ZFC this promise is brushed under the carpet and there is a gentleman's agreement</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 15:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125820756):
-and all good mathematicians are aware of the agreement
+<p>and all good mathematicians are aware of the agreement</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 15:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125820760):
-But in dependent type theory we have a bunch of uncultured computer scientists
+<p>But in dependent type theory we have a bunch of uncultured computer scientists</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 15:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125820761):
-who don't know our gentlemanly ways
+<p>who don't know our gentlemanly ways</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 15:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125820763):
-and they are asking to see more details of the promise
+<p>and they are asking to see more details of the promise</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 15:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125820764):
-and what is worse
+<p>and what is worse</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 15:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125820768):
-they are demanding that we keep our promises.
+<p>they are demanding that we keep our promises.</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 15:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125820772):
-They are not buying the argument that we are gentlemen who keep our promises
+<p>They are not buying the argument that we are gentlemen who keep our promises</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 15:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125820773):
-they want to see proof
+<p>they want to see proof</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 15:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125820777):
-so now it is the mathematician's job to give them that proof.
+<p>so now it is the mathematician's job to give them that proof.</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 15:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125820819):
-There is a wonderful story which goes back to a paper by Dick Gross in the early 1990s which was crucial in Wiles' original proof of Fermat's Last Theorem
+<p>There is a wonderful story which goes back to a paper by Dick Gross in the early 1990s which was crucial in Wiles' original proof of Fermat's Last Theorem</p>
 
 #### [ Kenny Lau (Apr 28 2018 at 15:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125820820):
-```quote
-But in dependent type theory we have a bunch of uncultured computer scientists
-```
-right. you just said this in front of a bunch of computer scientists.
+<blockquote>
+<p>But in dependent type theory we have a bunch of uncultured computer scientists</p>
+</blockquote>
+<p>right. you just said this in front of a bunch of computer scientists.</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 15:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125820823):
-Kenny: my provocative language is intentional
+<p>Kenny: my provocative language is intentional</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 15:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125820829):
-I am trying to isolate what I believe is an important issue
+<p>I am trying to isolate what I believe is an important issue</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 15:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125820831):
-and I am using provocative language in an attempt to explain it and to get people interested in it.
+<p>and I am using provocative language in an attempt to explain it and to get people interested in it.</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 15:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125820832):
-The story is that Dick Gross needed to analyse two cohomology groups
+<p>The story is that Dick Gross needed to analyse two cohomology groups</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 15:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125820872):
-and these cohomology groups were coming from two completely different cohomology theories
+<p>and these cohomology groups were coming from two completely different cohomology theories</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 15:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125820874):
-but someone had written down a map between them which was completely natural and depended on no choices
+<p>but someone had written down a map between them which was completely natural and depended on no choices</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 15:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125820876):
-and they had proved that this map was an isomorphism
+<p>and they had proved that this map was an isomorphism</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 15:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125820877):
-and had asserted that it was a canonical isomorphism
+<p>and had asserted that it was a canonical isomorphism</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 15:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125820879):
-and we all believed them
+<p>and we all believed them</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 15:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125820885):
-And Dick Gross needed to use some extra structure on these cohomology theories
+<p>And Dick Gross needed to use some extra structure on these cohomology theories</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 15:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125820887):
-each of the cohomology theories came with a bunch of linear maps called Hecke operators
+<p>each of the cohomology theories came with a bunch of linear maps called Hecke operators</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 15:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125820890):
-which are completely canonically defined operators
+<p>which are completely canonically defined operators</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 16:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125820941):
-and Gross asserted without proof that the canonical isomorphism identified the canonically-defined actions of the Hecke operators on each of the theories
+<p>and Gross asserted without proof that the canonical isomorphism identified the canonically-defined actions of the Hecke operators on each of the theories</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 16:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125820943):
-and the referee was Jean-Pierre Serre
+<p>and the referee was Jean-Pierre Serre</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 16:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125820944):
-and he caught this
+<p>and he caught this</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 16:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125820945):
-and he demanded that Gross prove it
+<p>and he demanded that Gross prove it</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 16:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125820948):
-and this would have held up publication of this important paper for probably quite some time
+<p>and this would have held up publication of this important paper for probably quite some time</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 16:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125820949):
-so Gross said no
+<p>so Gross said no</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 16:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125820958):
-and instead he wrote in the introduction to his paper that his theorem depended on unchecked compatibilities between canonically defined operators on canonically isomorphic objects
+<p>and instead he wrote in the introduction to his paper that his theorem depended on unchecked compatibilities between canonically defined operators on canonically isomorphic objects</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 16:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125820999):
-And Brian Conrad got a student of his to work out the details and the student wrote an entire PhD thesis checking that the diagrams did indeed commute
+<p>And Brian Conrad got a student of his to work out the details and the student wrote an entire PhD thesis checking that the diagrams did indeed commute</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 16:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125821000):
-because the proof was by no means formal
+<p>because the proof was by no means formal</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 16:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125821001):
-and I am now wondering
+<p>and I am now wondering</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 16:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125821002):
-whether actually
+<p>whether actually</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 16:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125821005):
-one could write a tactic to prove that theorem
+<p>one could write a tactic to prove that theorem</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 16:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125821006):
-That would be an extraordinary project
+<p>That would be an extraordinary project</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 16:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125821009):
-because that would be a computer not only checking the main result of a Stanford student's PhD thesis
+<p>because that would be a computer not only checking the main result of a Stanford student's PhD thesis</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 16:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125821013):
-it would be a computer program which automatically generated the main result of a Stanford student's PhD thesis.
+<p>it would be a computer program which automatically generated the main result of a Stanford student's PhD thesis.</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 16:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125821014):
-A _mathematics_ student.
+<p>A _mathematics_ student.</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 16:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125821053):
-And the reason a tactic might be able to prove this
+<p>And the reason a tactic might be able to prove this</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 16:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125821054):
-would be that when you prove that various maps are isomorphisms
+<p>would be that when you prove that various maps are isomorphisms</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 16:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125821055):
-you don't just say "they are canonical"
+<p>you don't just say "they are canonical"</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 16:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125821056):
-you write down what you mean, properly
+<p>you write down what you mean, properly</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 16:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125821063):
-and then you check that all the operations that you do respect the canonical maps
+<p>and then you check that all the operations that you do respect the canonical maps</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 16:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125822241):
-OK so here is a challenge to the mathematics / computer science community:
+<p>OK so here is a challenge to the mathematics / computer science community:</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 16:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125822282):
-write a tactic which proves that Gross' canonically defined Hecke operators on his canonically isomorphic spaces all match up with each other
+<p>write a tactic which proves that Gross' canonically defined Hecke operators on his canonically isomorphic spaces all match up with each other</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 16:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125822286):
-That sounds like a really fun project
+<p>That sounds like a really fun project</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 16:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125822290):
-because it will need a mix of genuinely deep mathematics
+<p>because it will need a mix of genuinely deep mathematics</p>
 
 #### [ Kenny Lau (Apr 28 2018 at 16:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125822291):
-for M1R?
+<p>for M1R?</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 16:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125822292):
-and clever programming
+<p>and clever programming</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 16:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125822293):
-Kenny, that would be a great first year project :-)
+<p>Kenny, that would be a great first year project :-)</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 16:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125822295):
-It would be an even better PhD project.
+<p>It would be an even better PhD project.</p>
 
 #### [ Simon Hudon (Apr 28 2018 at 19:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125826517):
-```quote
-```quote
-But in dependent type theory we have a bunch of uncultured computer scientists
-```
-right. you just said this in front of a bunch of computer scientists.
-```
-I'm not sure if it's that I'm too uncultured to be insulted but it feels like Kevin paid the CS / formal methods community a beautiful compliment
+<blockquote>
+<blockquote>
+<p>But in dependent type theory we have a bunch of uncultured computer scientists</p>
+</blockquote>
+<p>right. you just said this in front of a bunch of computer scientists.</p>
+</blockquote>
+<p>I'm not sure if it's that I'm too uncultured to be insulted but it feels like Kevin paid the CS / formal methods community a beautiful compliment</p>
 
 #### [ Johan Commelin (Apr 28 2018 at 20:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125827355):
-@**Kevin Buzzard** I love this story!
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> I love this story!</p>
 
 #### [ Johan Commelin (Apr 28 2018 at 20:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125827363):
-Is this story only oral folklore? Or is there some written version (besides what you just wrote down in the chat)? I would love to be able to point others towards this story
+<p>Is this story only oral folklore? Or is there some written version (besides what you just wrote down in the chat)? I would love to be able to point others towards this story</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 23:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125831766):
-just google for Bryden Cais' PhD thesis
+<p>just google for Bryden Cais' PhD thesis</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 23:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125831768):
-I think it would be an absolutely monumental challenge to get a computer to prove it
+<p>I think it would be an absolutely monumental challenge to get a computer to prove it</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 23:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125831809):
-but anyone who tried would probably learn a lot about what a mathematician means when they say something is canonical
+<p>but anyone who tried would probably learn a lot about what a mathematician means when they say something is canonical</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 23:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125831813):
-Bryden is in AZ now
+<p>Bryden is in AZ now</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 23:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125831822):
-and go from there to Dick Gross' paper
+<p>and go from there to Dick Gross' paper</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 23:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125831862):
-and see the explanation about the unchecked compatibilities, a throw-away "well this is not 100% rigorous" admission in a paper which a few years later was to play a fundamental role in Wiles' proof of Fermat's Last Theorem.
+<p>and see the explanation about the unchecked compatibilities, a throw-away "well this is not 100% rigorous" admission in a paper which a few years later was to play a fundamental role in Wiles' proof of Fermat's Last Theorem.</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 23:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125831863):
-And mathematicans worried not one jot
+<p>And mathematicans worried not one jot</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 23:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125831864):
-See Wiles' FLT paper and verify it references Gross' paper.
+<p>See Wiles' FLT paper and verify it references Gross' paper.</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 23:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125831872):
-perhaps because one day we knew a computer would come along and check the details.
+<p>perhaps because one day we knew a computer would come along and check the details.</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 23:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125831918):
-I bet Taylor-Wiles (the paper that fills in the gap) references the paper too.
+<p>I bet Taylor-Wiles (the paper that fills in the gap) references the paper too.</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 23:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125831926):
-Absolutely wonderful.
+<p>Absolutely wonderful.</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 23:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125831927):
-I just checked.
+<p>I just checked.</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 23:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125831928):
-http://www.math.ias.edu/~rtaylor/hecke.pdf
+<p><a href="http://www.math.ias.edu/~rtaylor/hecke.pdf" target="_blank" title="http://www.math.ias.edu/~rtaylor/hecke.pdf">http://www.math.ias.edu/~rtaylor/hecke.pdf</a></p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 23:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125831931):
-Seminal paper by Taylor and Wiles filling in the gap in Wiles' proof of Fermat's Last Theorem.
+<p>Seminal paper by Taylor and Wiles filling in the gap in Wiles' proof of Fermat's Last Theorem.</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 23:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125831933):
-Theorem: We fill in a gap.
+<p>Theorem: We fill in a gap.</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 23:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125831935):
-Footnote: WARNING : paper contains gap
+<p>Footnote: WARNING : paper contains gap</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 23:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125831980):
-but we're not worried about that one
+<p>but we're not worried about that one</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 23:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125831986):
-And there was me thinking we were doing ZFC
+<p>And there was me thinking we were doing ZFC</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 23:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125831987):
-When did we stop?
+<p>When did we stop?</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 23:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125832031):
-Bryden Cais thesis 2007, 12 years after FLT proved.
+<p>Bryden Cais thesis 2007, 12 years after FLT proved.</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 23:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125832033):
-You know what, I am pretty sure that the experts knew that there was a way around Gross' problems.
+<p>You know what, I am pretty sure that the experts knew that there was a way around Gross' problems.</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 23:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125832036):
-So probably nobody made a fuss
+<p>So probably nobody made a fuss</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 23:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125832040):
-they only occurred in certain "higher weight" situations
+<p>they only occurred in certain "higher weight" situations</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 23:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125832042):
-and the applications to FLT may not need that level of generality
+<p>and the applications to FLT may not need that level of generality</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 23:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125832043):
-but I'm not sure you'll find a published explanation of this
+<p>but I'm not sure you'll find a published explanation of this</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 23:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125832083):
-I'll ask Conrad whether he thinks his student proved Fermat's Last Theorem
+<p>I'll ask Conrad whether he thinks his student proved Fermat's Last Theorem</p>
 
 #### [ Scott Morrison (Apr 29 2018 at 00:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125834143):
-@**Johan Commelin** ,
-```quote
-@**Scott Morrison** There you have your counterexample.
-```
-I haven't quite caught up on this thread, but does this mean that "in the presence of `choice` I owe @**Mario Carneiro**  a beer"? Ok, I'll honour that anyway.
+<p><span class="user-mention" data-user-id="112680">@Johan Commelin</span> ,</p>
+<blockquote>
+<p><span class="user-mention" data-user-id="110524">@Scott Morrison</span> There you have your counterexample.</p>
+</blockquote>
+<p>I haven't quite caught up on this thread, but does this mean that "in the presence of <code>choice</code> I owe <span class="user-mention" data-user-id="110049">@Mario Carneiro</span>  a beer"? Ok, I'll honour that anyway.</p>
 
 #### [ Reid Barton (Apr 29 2018 at 04:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125839073):
-Do we have parametricity for things which are not `noncomputable`?
+<p>Do we have parametricity for things which are not <code>noncomputable</code>?</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 04:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125839370):
-I will remark that the thing I want to prove is functorial, is noncomputable.
+<p>I will remark that the thing I want to prove is functorial, is noncomputable.</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 04:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125839420):
-attempting to make it computable would not be a question I was that interested in
+<p>attempting to make it computable would not be a question I was that interested in</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 04:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125839421):
-but I am unsure as to whether or not it can be done. This goes back to the old question of how to represent the functions on a standard open in an affine scheme
+<p>but I am unsure as to whether or not it can be done. This goes back to the old question of how to represent the functions on a standard open in an affine scheme</p>
 
 #### [ Johan Commelin (Apr 29 2018 at 09:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125846328):
-@**Scott Morrison** I guess so... you didn't post any formal requirements, and I am not a judge (-;
+<p><span class="user-mention" data-user-id="110524">@Scott Morrison</span> I guess so... you didn't post any formal requirements, and I am not a judge (-;</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 15:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125854648):
-Church numerals are kind of cool
+<p>Church numerals are kind of cool</p>
 
 #### [ Kenny Lau (Apr 29 2018 at 15:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125854656):
-what is that message related to?
+<p>what is that message related to?</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 15:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125854697):
-https://github.com/kbuzzard/xena/blob/06476597bd53a111bb3060d2d583e04c972d5204/canonical_isomorphism/church_blog_questions.lean
+<p><a href="https://github.com/kbuzzard/xena/blob/06476597bd53a111bb3060d2d583e04c972d5204/canonical_isomorphism/church_blog_questions.lean" target="_blank" title="https://github.com/kbuzzard/xena/blob/06476597bd53a111bb3060d2d583e04c972d5204/canonical_isomorphism/church_blog_questions.lean">https://github.com/kbuzzard/xena/blob/06476597bd53a111bb3060d2d583e04c972d5204/canonical_isomorphism/church_blog_questions.lean</a></p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 15:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125854698):
-Kenny, there are some more challenges for you
+<p>Kenny, there are some more challenges for you</p>
 
 #### [ Kenny Lau (Apr 29 2018 at 15:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125854699):
-nice, i love challenges
+<p>nice, i love challenges</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 15:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125854700):
-I'm sure you won't have much trouble with succ, add and mul
+<p>I'm sure you won't have much trouble with succ, add and mul</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 15:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125854701):
-do you know how to do pow?
+<p>do you know how to do pow?</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 15:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125854702):
-And what about Ackermann?
+<p>And what about Ackermann?</p>
 
 #### [ Kenny Lau (Apr 29 2018 at 15:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125854707):
-oh i thought you were talking about those proofs in your file
+<p>oh i thought you were talking about those proofs in your file</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 15:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125854708):
-And can you prove the equiv?
+<p>And can you prove the equiv?</p>
 
 #### [ Kenny Lau (Apr 29 2018 at 15:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125854709):
-they aren't equivalent
+<p>they aren't equivalent</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 15:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125854710):
-The link I just posted is to a file with some sorries
+<p>The link I just posted is to a file with some sorries</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 15:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125854711):
-but I can fill in some of the sorries
+<p>but I can fill in some of the sorries</p>
 
 #### [ Kenny Lau (Apr 29 2018 at 15:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125854712):
-they aren't provable
+<p>they aren't provable</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 15:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125854713):
-stop
+<p>stop</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 15:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125854714):
-some are provable because I proved them
+<p>some are provable because I proved them</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 15:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125854715):
-you need to look at the file
+<p>you need to look at the file</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 15:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125854752):
-for each sorry in the file, either fill it in, or tell me confidently that it cannot be filled in
+<p>for each sorry in the file, either fill it in, or tell me confidently that it cannot be filled in</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 15:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125854755):
-that's your challenge
+<p>that's your challenge</p>
 
 #### [ Kenny Lau (Apr 29 2018 at 15:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125854756):
-ok
+<p>ok</p>
 
 #### [ Kenny Lau (Apr 29 2018 at 15:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125854757):
-I saw the word blog :D
+<p>I saw the word blog :D</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 15:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125854758):
-yes, I am going to write another blog post
+<p>yes, I am going to write another blog post</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 15:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125854760):
-talking of blog posts
+<p>talking of blog posts</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 15:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125854761):
-I have a file which is both beautiful and disgusting
+<p>I have a file which is both beautiful and disgusting</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 15:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125854767):
-beautiful because all the proofs are really uncluttered
+<p>beautiful because all the proofs are really uncluttered</p>
 
 #### [ Kenny Lau (Apr 29 2018 at 15:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125854768):
-that tone in `KB doesn't understand` though lmao
+<p>that tone in <code>KB doesn't understand</code> though lmao</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 15:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125854769):
-disgusting because I use constants
+<p>disgusting because I use constants</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 15:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125854814):
-Kenny -- is nat some inductive type which is somehow canonically associated to the Pi type of church numerals?
+<p>Kenny -- is nat some inductive type which is somehow canonically associated to the Pi type of church numerals?</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 15:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125854815):
-look at my definition of `to_nat`
+<p>look at my definition of <code>to_nat</code></p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 15:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125854816):
-it takes all the ingredients of nat exactly once, and nothing more
+<p>it takes all the ingredients of nat exactly once, and nothing more</p>
 
 #### [ Kenny Lau (Apr 29 2018 at 15:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125854821):
-sure, `Π X : Type, (X → X) → X → X` is the Church encoding of the type `nat`
+<p>sure, <code>Π X : Type, (X → X) → X → X</code> is the Church encoding of the type <code>nat</code></p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 15:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125854822):
-I don't know what that means
+<p>I don't know what that means</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 15:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125854823):
-which types have a church encoding?
+<p>which types have a church encoding?</p>
 
 #### [ Kenny Lau (Apr 29 2018 at 15:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125854824):
-inductive types I guess
+<p>inductive types I guess</p>
 
 #### [ Kenny Lau (Apr 29 2018 at 15:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125854825):
-not very sure
+<p>not very sure</p>
 
 #### [ Kenny Lau (Apr 29 2018 at 15:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125854826):
-maybe pi types as well
+<p>maybe pi types as well</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 15:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125854865):
-so you cannot formalise the assertion you just made?
+<p>so you cannot formalise the assertion you just made?</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 15:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125854866):
-You are making some informal statement?
+<p>You are making some informal statement?</p>
 
 #### [ Kenny Lau (Apr 29 2018 at 15:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125854867):
-I don't know everything about church encoding
+<p>I don't know everything about church encoding</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 15:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125854868):
-but is there some rigorous statement that an expert can make?
+<p>but is there some rigorous statement that an expert can make?</p>
 
 #### [ Kenny Lau (Apr 29 2018 at 15:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125854869):
-I believe so
+<p>I believe so</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 15:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125854870):
-"church encoding" has a formal definition?
+<p>"church encoding" has a formal definition?</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 15:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125854876):
-What is the church encoding of a scheme?
+<p>What is the church encoding of a scheme?</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 15:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125854877):
-what is the church encoding of int as defined in Lean?
+<p>what is the church encoding of int as defined in Lean?</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 15:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125854878):
-what is the church encoding of list?
+<p>what is the church encoding of list?</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 15:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125854879):
-what is the church encoding of bool?
+<p>what is the church encoding of bool?</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 15:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125854880):
-what is the church encoding of false?
+<p>what is the church encoding of false?</p>
 
 #### [ Kenny Lau (Apr 29 2018 at 15:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125854881):
-```quote
-what is the church encoding of bool?
-```
-`X -> X -> X` :P
+<blockquote>
+<p>what is the church encoding of bool?</p>
+</blockquote>
+<p><code>X -&gt; X -&gt; X</code> :P</p>
 
 #### [ Kenny Lau (Apr 29 2018 at 15:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125854918):
-```quote
-what is the church encoding of false?
-```
-`X`
+<blockquote>
+<p>what is the church encoding of false?</p>
+</blockquote>
+<p><code>X</code></p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 15:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125854921):
-Does the church encoding of anything just have one type X?
+<p>Does the church encoding of anything just have one type X?</p>
 
 #### [ Kenny Lau (Apr 29 2018 at 15:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125854922):
-```quote
-Does the church encoding of anything just have one type X?
-```
-didn't I just answer that question
+<blockquote>
+<p>Does the church encoding of anything just have one type X?</p>
+</blockquote>
+<p>didn't I just answer that question</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 15:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125854923):
-No
+<p>No</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 15:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125854924):
-you only answered it for bool and false
+<p>you only answered it for bool and false</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 15:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125854930):
-and nat
+<p>and nat</p>
 
 #### [ Kenny Lau (Apr 29 2018 at 15:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125854931):
-what do you mean by one type X?
+<p>what do you mean by one type X?</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 15:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125854932):
-I mean that all your answers so far (for nat, bool and false) only had one letter in
+<p>I mean that all your answers so far (for nat, bool and false) only had one letter in</p>
 
 #### [ Kenny Lau (Apr 29 2018 at 15:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125854972):
-oh, I misunderstood "anything"
+<p>oh, I misunderstood "anything"</p>
 
 #### [ Kenny Lau (Apr 29 2018 at 15:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125854973):
-english ~
+<p>english ~</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 15:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125855019):
-did you do ack yet?
+<p>did you do ack yet?</p>
 
 #### [ Kenny Lau (Apr 29 2018 at 15:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125855020):
-I've been searching church encoding online
+<p>I've been searching church encoding online</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 15:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125855021):
-here's a much easier
+<p>here's a much easier</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 15:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125855022):
-one
+<p>one</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 15:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125855023):
-`pred`
+<p><code>pred</code></p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 15:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125855028):
-The untyped lambda calculus is so last year
+<p>The untyped lambda calculus is so last year</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 15:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125855030):
-I want to know how it works in Lean
+<p>I want to know how it works in Lean</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 15:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125855068):
-although these questions might not be good for this thread, because did you say that it was not true that nat was equiv to church nat?
+<p>although these questions might not be good for this thread, because did you say that it was not true that nat was equiv to church nat?</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 15:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125855071):
-or not provable?
+<p>or not provable?</p>
 
 #### [ Kenny Lau (Apr 29 2018 at 15:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125855072):
-if your functions are computable, then I believe they will represent some natural number
+<p>if your functions are computable, then I believe they will represent some natural number</p>
 
 #### [ Kenny Lau (Apr 29 2018 at 15:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125855075):
-but noncomputable functions are permitted in Lean, breaking the equivalence
+<p>but noncomputable functions are permitted in Lean, breaking the equivalence</p>
 
 #### [ Kenny Lau (Apr 29 2018 at 15:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125855076):
-(but I can't give you any example :P)
+<p>(but I can't give you any example :P)</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 15:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125855124):
-So one can write down a `noncomputable` church nat which is provably not in the image of `of_nat`?
+<p>So one can write down a <code>noncomputable</code> church nat which is provably not in the image of <code>of_nat</code>?</p>
 
 #### [ Kenny Lau (Apr 29 2018 at 15:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125855127):
-I don't know
+<p>I don't know</p>
 
 #### [ Kenny Lau (Apr 29 2018 at 15:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125855128):
-maybe you can write something like `if X == int then _ else _`
+<p>maybe you can write something like <code>if X == int then _ else _</code></p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 15:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125855129):
-well maybe it won't come up in the mechanics exam
+<p>well maybe it won't come up in the mechanics exam</p>
 
 #### [ Kenny Lau (Apr 29 2018 at 15:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125855130):
-...
+<p>...</p>
 
 #### [ Kenny Lau (Apr 29 2018 at 15:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125855214):
-```quote
-what is the church encoding of list?
-```
-`list A = X -> (A -> X -> X) -> X` I guess. can't find anything online
+<blockquote>
+<p>what is the church encoding of list?</p>
+</blockquote>
+<p><code>list A = X -&gt; (A -&gt; X -&gt; X) -&gt; X</code> I guess. can't find anything online</p>
 
 #### [ Kenny Lau (Apr 29 2018 at 15:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125855302):
-```quote
-what is the church encoding of int as defined in Lean?
-```
-`nat -> nat -> X`, I guess
+<blockquote>
+<p>what is the church encoding of int as defined in Lean?</p>
+</blockquote>
+<p><code>nat -&gt; nat -&gt; X</code>, I guess</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 15:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125855303):
-that doesn't look like something that Church would like
+<p>that doesn't look like something that Church would like</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 15:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125855304):
-it has something in which isn't X
+<p>it has something in which isn't X</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 15:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125855309):
-or -> or ()
+<p>or -&gt; or ()</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 15:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125855311):
-Is it OK?
+<p>Is it OK?</p>
 
 #### [ Kenny Lau (Apr 29 2018 at 15:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125855313):
-but `list` isn't a type
+<p>but <code>list</code> isn't a type</p>
 
 #### [ Kenny Lau (Apr 29 2018 at 15:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125855314):
-`list` is a function from types to types
+<p><code>list</code> is a function from types to types</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 15:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125855315):
-I see
+<p>I see</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 15:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125855317):
-I thought those were types too ;-)
+<p>I thought those were types too ;-)</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 15:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125855354):
-https://github.com/kbuzzard/xena/blob/master/canonical_isomorphism/church_blog_questions.lean
+<p><a href="https://github.com/kbuzzard/xena/blob/master/canonical_isomorphism/church_blog_questions.lean" target="_blank" title="https://github.com/kbuzzard/xena/blob/master/canonical_isomorphism/church_blog_questions.lean">https://github.com/kbuzzard/xena/blob/master/canonical_isomorphism/church_blog_questions.lean</a></p>
 
 #### [ Kenny Lau (Apr 29 2018 at 15:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125855356):
-```lean
-#check list
---list : Type u_1 → Type u_1
-```
+<div class="codehilite"><pre><span></span><span class="bp">#</span><span class="kn">check</span> <span class="n">list</span>
+<span class="c1">--list : Type u_1 → Type u_1</span>
+</pre></div>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 15:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125855358):
-I slightly updated the church numerals file
+<p>I slightly updated the church numerals file</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 15:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125855359):
-I am a bit unclear about what is provable and what isn't.
+<p>I am a bit unclear about what is provable and what isn't.</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 15:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125855364):
-I also have a file with some solutions in
+<p>I also have a file with some solutions in</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 15:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125855370):
-and the only reason I did not push it
+<p>and the only reason I did not push it</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 15:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125855372):
-is because the definition of `pow` on church nats is so beautiful that I wanted to let you find it if you hadn't seen it already
+<p>is because the definition of <code>pow</code> on church nats is so beautiful that I wanted to let you find it if you hadn't seen it already</p>
 
 #### [ Kenny Lau (Apr 29 2018 at 15:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125856002):
-interesting
+<p>interesting</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 16:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125856248):
-I am finally trying to write down a "canonical isomorphism" proof of the result I need to apply Chris' Lemma to the affine scheme boss
+<p>I am finally trying to write down a "canonical isomorphism" proof of the result I need to apply Chris' Lemma to the affine scheme boss</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 16:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125856249):
-Does this structure already have a name?
+<p>Does this structure already have a name?</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 16:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125856250):
-```lean
-structure is_unique_ring_hom {α : Type v} {β : Type w} [ring α] [ring β] (f : α → β) [is_ring_hom f] : Prop :=
-(is_unique : ∀ (g : α → β) [is_ring_hom g], g = f)
-```
+<div class="codehilite"><pre><span></span><span class="kn">structure</span> <span class="n">is_unique_ring_hom</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">}</span> <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">w</span><span class="o">}</span> <span class="o">[</span><span class="n">ring</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">ring</span> <span class="n">β</span><span class="o">]</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span> <span class="o">[</span><span class="n">is_ring_hom</span> <span class="n">f</span><span class="o">]</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">is_unique</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">g</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span> <span class="o">[</span><span class="n">is_ring_hom</span> <span class="n">g</span><span class="o">],</span> <span class="n">g</span> <span class="bp">=</span> <span class="n">f</span><span class="o">)</span>
+</pre></div>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 16:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125856294):
-```lean
-class is_ring_hom {α : Type u} {β : Type v} [ring α] [ring β] (f : α → β) : Prop :=
-(map_add : ∀ {x y}, f (x + y) = f x + f y)
-(map_mul : ∀ {x y}, f (x * y) = f x * f y)
-(map_one : f 1 = 1)
-```
+<div class="codehilite"><pre><span></span><span class="n">class</span> <span class="n">is_ring_hom</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">}</span> <span class="o">[</span><span class="n">ring</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">ring</span> <span class="n">β</span><span class="o">]</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">map_add</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">x</span> <span class="n">y</span><span class="o">},</span> <span class="n">f</span> <span class="o">(</span><span class="n">x</span> <span class="bp">+</span> <span class="n">y</span><span class="o">)</span> <span class="bp">=</span> <span class="n">f</span> <span class="n">x</span> <span class="bp">+</span> <span class="n">f</span> <span class="n">y</span><span class="o">)</span>
+<span class="o">(</span><span class="n">map_mul</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">x</span> <span class="n">y</span><span class="o">},</span> <span class="n">f</span> <span class="o">(</span><span class="n">x</span> <span class="bp">*</span> <span class="n">y</span><span class="o">)</span> <span class="bp">=</span> <span class="n">f</span> <span class="n">x</span> <span class="bp">*</span> <span class="n">f</span> <span class="n">y</span><span class="o">)</span>
+<span class="o">(</span><span class="n">map_one</span> <span class="o">:</span> <span class="n">f</span> <span class="mi">1</span> <span class="bp">=</span> <span class="mi">1</span><span class="o">)</span>
+</pre></div>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 16:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125856305):
-(sorry, I was half rings and half commutative rings)
+<p>(sorry, I was half rings and half commutative rings)</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 16:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125856306):
-(I am all rings now)
+<p>(I am all rings now)</p>
 
 #### [ Kenny Lau (Apr 29 2018 at 16:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125856635):
-I don't think it has a name
+<p>I don't think it has a name</p>
 
 #### [ Kenny Lau (Apr 29 2018 at 17:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125858145):
-https://github.com/kckennylau/Lean/blob/master/church_blog_questions.lean
+<p><a href="https://github.com/kckennylau/Lean/blob/master/church_blog_questions.lean" target="_blank" title="https://github.com/kckennylau/Lean/blob/master/church_blog_questions.lean">https://github.com/kckennylau/Lean/blob/master/church_blog_questions.lean</a></p>
 
 #### [ Kenny Lau (Apr 29 2018 at 17:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125858173):
-@**Kevin Buzzard** I don't think Ack can be done
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> I don't think Ack can be done</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 17:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125858640):
-What is your opinion of the other `sorry`s?
+<p>What is your opinion of the other <code>sorry</code>s?</p>
 
 #### [ Kenny Lau (Apr 29 2018 at 17:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125858642):
-can't be done
+<p>can't be done</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 17:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125858654):
-Are there any for which you feel that you can convince me rigorously that they can't be done?
+<p>Are there any for which you feel that you can convince me rigorously that they can't be done?</p>
 
 #### [ Kenny Lau (Apr 29 2018 at 17:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125858655):
-the last one, I think
+<p>the last one, I think</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 17:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125858697):
-`theorem is_it_true (X : Type) (f : X → X) (x : X) : f x = x := sorry`
+<p><code>theorem is_it_true (X : Type) (f : X → X) (x : X) : f x = x := sorry</code></p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 17:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125858700):
-that theorem looks really appealing to me
+<p>that theorem looks really appealing to me</p>
 
 #### [ Kenny Lau (Apr 29 2018 at 17:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125858703):
-I think you want `f : \Pi X : Type, X \to X`
+<p>I think you want <code>f : \Pi X : Type, X \to X</code></p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 18:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125859158):
-```lean
--- bad church numeral
-local attribute [instance] classical.prop_decidable
-noncomputable definition satan (X : Type) (f : X → X) (x : X) := dite (X = ℕ) (λ H,begin show X,rw H,rw H at x,exact x end) (λ _,f x)
-#check (satan : chℕ) -- 1 everywhere apart from nat, where it's zero
+<div class="codehilite"><pre><span></span><span class="c1">-- bad church numeral</span>
+<span class="n">local</span> <span class="n">attribute</span> <span class="o">[</span><span class="kn">instance</span><span class="o">]</span> <span class="n">classical</span><span class="bp">.</span><span class="n">prop_decidable</span>
+<span class="n">noncomputable</span> <span class="kn">definition</span> <span class="n">satan</span> <span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">X</span> <span class="bp">→</span> <span class="n">X</span><span class="o">)</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">X</span><span class="o">)</span> <span class="o">:=</span> <span class="n">dite</span> <span class="o">(</span><span class="n">X</span> <span class="bp">=</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">H</span><span class="o">,</span><span class="k">begin</span> <span class="k">show</span> <span class="n">X</span><span class="o">,</span><span class="n">rw</span> <span class="n">H</span><span class="o">,</span><span class="n">rw</span> <span class="n">H</span> <span class="n">at</span> <span class="n">x</span><span class="o">,</span><span class="n">exact</span> <span class="n">x</span> <span class="kn">end</span><span class="o">)</span> <span class="o">(</span><span class="bp">λ</span> <span class="bp">_</span><span class="o">,</span><span class="n">f</span> <span class="n">x</span><span class="o">)</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="o">(</span><span class="n">satan</span> <span class="o">:</span> <span class="n">chℕ</span><span class="o">)</span> <span class="c1">-- 1 everywhere apart from nat, where it&#39;s zero</span>
 
-theorem satan_is_bad : of_nat (to_nat satan) = satan → false :=
-begin
-intro H,
-have H2 : (of_nat (to_nat satan)) bool bnot tt = satan bool bnot tt := by rw H,
--- now what?
-sorry
-end 
-```
+<span class="kn">theorem</span> <span class="n">satan_is_bad</span> <span class="o">:</span> <span class="n">of_nat</span> <span class="o">(</span><span class="n">to_nat</span> <span class="n">satan</span><span class="o">)</span> <span class="bp">=</span> <span class="n">satan</span> <span class="bp">→</span> <span class="n">false</span> <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="n">intro</span> <span class="n">H</span><span class="o">,</span>
+<span class="k">have</span> <span class="n">H2</span> <span class="o">:</span> <span class="o">(</span><span class="n">of_nat</span> <span class="o">(</span><span class="n">to_nat</span> <span class="n">satan</span><span class="o">))</span> <span class="n">bool</span> <span class="n">bnot</span> <span class="n">tt</span> <span class="bp">=</span> <span class="n">satan</span> <span class="n">bool</span> <span class="n">bnot</span> <span class="n">tt</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">rw</span> <span class="n">H</span><span class="o">,</span>
+<span class="c1">-- now what?</span>
+<span class="n">sorry</span>
+<span class="kn">end</span>
+</pre></div>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 18:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125859159):
-Trying to write down a counterexample
+<p>Trying to write down a counterexample</p>
 
 #### [ Kenny Lau (Apr 29 2018 at 18:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125859165):
-aha, I used `==` and I failed
+<p>aha, I used <code>==</code> and I failed</p>
 
 #### [ Kenny Lau (Apr 29 2018 at 18:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125859169):
-turns out you need `=` instead
+<p>turns out you need <code>=</code> instead</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 18:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125859170):
-well, it typechecks
+<p>well, it typechecks</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 18:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125859171):
-but it's not over yet
+<p>but it's not over yet</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 18:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125859172):
-unless you see that it's over
+<p>unless you see that it's over</p>
 
 #### [ Kenny Lau (Apr 29 2018 at 18:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125859211):
-so what is your thought and why are you stuck?
+<p>so what is your thought and why are you stuck?</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 18:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125860599):
-well presumably now I have to prove things like bool ne nat
+<p>well presumably now I have to prove things like bool ne nat</p>
 
 #### [ Kenny Lau (Apr 29 2018 at 18:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125860603):
-oh I thought you can just feed in `bool` to both sides
+<p>oh I thought you can just feed in <code>bool</code> to both sides</p>
 
 #### [ Kenny Lau (Apr 29 2018 at 18:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125860604):
-and have one side give `ff` and the other side give `tt`
+<p>and have one side give <code>ff</code> and the other side give <code>tt</code></p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 19:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125860693):
-```lean
-theorem satan_is_bad : of_nat (to_nat satan) = satan → false :=
-begin
-intro H,
-have H2 : (of_nat (to_nat satan)) bool bnot tt = satan bool bnot tt := by rw H,
-unfold to_nat at H2,
-unfold satan at H2,
-simp at H2,
-change tt = _ at H2,
--- H2 : tt = dite (bool = ℕ) (λ (H : bool = ℕ), eq.mpr _ (eq.mp _ tt)) (λ (_x : ¬bool = ℕ), ff)
--- now what?
-sorry
-end 
-```
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">satan_is_bad</span> <span class="o">:</span> <span class="n">of_nat</span> <span class="o">(</span><span class="n">to_nat</span> <span class="n">satan</span><span class="o">)</span> <span class="bp">=</span> <span class="n">satan</span> <span class="bp">→</span> <span class="n">false</span> <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="n">intro</span> <span class="n">H</span><span class="o">,</span>
+<span class="k">have</span> <span class="n">H2</span> <span class="o">:</span> <span class="o">(</span><span class="n">of_nat</span> <span class="o">(</span><span class="n">to_nat</span> <span class="n">satan</span><span class="o">))</span> <span class="n">bool</span> <span class="n">bnot</span> <span class="n">tt</span> <span class="bp">=</span> <span class="n">satan</span> <span class="n">bool</span> <span class="n">bnot</span> <span class="n">tt</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">rw</span> <span class="n">H</span><span class="o">,</span>
+<span class="n">unfold</span> <span class="n">to_nat</span> <span class="n">at</span> <span class="n">H2</span><span class="o">,</span>
+<span class="n">unfold</span> <span class="n">satan</span> <span class="n">at</span> <span class="n">H2</span><span class="o">,</span>
+<span class="n">simp</span> <span class="n">at</span> <span class="n">H2</span><span class="o">,</span>
+<span class="n">change</span> <span class="n">tt</span> <span class="bp">=</span> <span class="bp">_</span> <span class="n">at</span> <span class="n">H2</span><span class="o">,</span>
+<span class="c1">-- H2 : tt = dite (bool = ℕ) (λ (H : bool = ℕ), eq.mpr _ (eq.mp _ tt)) (λ (_x : ¬bool = ℕ), ff)</span>
+<span class="c1">-- now what?</span>
+<span class="n">sorry</span>
+<span class="kn">end</span>
+</pre></div>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 19:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125860695):
-if only I had a good destructor for dite
+<p>if only I had a good destructor for dite</p>
 
 #### [ Kenny Lau (Apr 29 2018 at 19:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125860700):
-oh, you need to prove that `bool` and `nat` are not equal lol
+<p>oh, you need to prove that <code>bool</code> and <code>nat</code> are not equal lol</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 19:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125860701):
-exactly
+<p>exactly</p>
 
 #### [ Kenny Lau (Apr 29 2018 at 19:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125860741):
-cardinality :rolling_on_the_floor_laughing:
+<p>cardinality <span class="emoji emoji-1f923" title="rolling on the floor laughing">:rolling_on_the_floor_laughing:</span></p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 19:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125860751):
-```lean
-theorem satan_is_bad : of_nat (to_nat satan) = satan → false :=
-begin
-intro H,
-have H2 : (of_nat (to_nat satan)) bool bnot tt = satan bool bnot tt := by rw H,
-unfold to_nat at H2,
-unfold satan at H2,
-simp at H2,
-change tt = _ at H2,
-suffices : ¬ (bool = ℕ),
-simp [this] at H2,assumption,
--- ⊢ ¬bool = ℕ
-sorry
-end 
-```
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">satan_is_bad</span> <span class="o">:</span> <span class="n">of_nat</span> <span class="o">(</span><span class="n">to_nat</span> <span class="n">satan</span><span class="o">)</span> <span class="bp">=</span> <span class="n">satan</span> <span class="bp">→</span> <span class="n">false</span> <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="n">intro</span> <span class="n">H</span><span class="o">,</span>
+<span class="k">have</span> <span class="n">H2</span> <span class="o">:</span> <span class="o">(</span><span class="n">of_nat</span> <span class="o">(</span><span class="n">to_nat</span> <span class="n">satan</span><span class="o">))</span> <span class="n">bool</span> <span class="n">bnot</span> <span class="n">tt</span> <span class="bp">=</span> <span class="n">satan</span> <span class="n">bool</span> <span class="n">bnot</span> <span class="n">tt</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">rw</span> <span class="n">H</span><span class="o">,</span>
+<span class="n">unfold</span> <span class="n">to_nat</span> <span class="n">at</span> <span class="n">H2</span><span class="o">,</span>
+<span class="n">unfold</span> <span class="n">satan</span> <span class="n">at</span> <span class="n">H2</span><span class="o">,</span>
+<span class="n">simp</span> <span class="n">at</span> <span class="n">H2</span><span class="o">,</span>
+<span class="n">change</span> <span class="n">tt</span> <span class="bp">=</span> <span class="bp">_</span> <span class="n">at</span> <span class="n">H2</span><span class="o">,</span>
+<span class="n">suffices</span> <span class="o">:</span> <span class="bp">¬</span> <span class="o">(</span><span class="n">bool</span> <span class="bp">=</span> <span class="bp">ℕ</span><span class="o">),</span>
+<span class="n">simp</span> <span class="o">[</span><span class="n">this</span><span class="o">]</span> <span class="n">at</span> <span class="n">H2</span><span class="o">,</span><span class="n">assumption</span><span class="o">,</span>
+<span class="c1">-- ⊢ ¬bool = ℕ</span>
+<span class="n">sorry</span>
+<span class="kn">end</span>
+</pre></div>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 19:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125860752):
-Indeed it's the only problem left
+<p>Indeed it's the only problem left</p>
 
 #### [ Kenny Lau (Apr 29 2018 at 19:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125860753):
-if they're equal then their cardinality is equal
+<p>if they're equal then their cardinality is equal</p>
 
 #### [ Kenny Lau (Apr 29 2018 at 19:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125860754):
-but bool is finite
+<p>but bool is finite</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 19:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125860756):
-can you do it?
+<p>can you do it?</p>
 
 #### [ Kenny Lau (Apr 29 2018 at 19:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125860795):
-heh...
+<p>heh...</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 19:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125860798):
-`example : ¬bool = ℕ := sorry`
+<p><code>example : ¬bool = ℕ := sorry</code></p>
 
 #### [ Kenny Lau (Apr 29 2018 at 19:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125860850):
-tactic mode slows things down
+<p>tactic mode slows things down</p>
 
 #### [ Reid Barton (Apr 29 2018 at 19:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125861579):
-It would be a lot easier if you changed `bool` to `empty`
+<p>It would be a lot easier if you changed <code>bool</code> to <code>empty</code></p>
 
 #### [ Kenny Lau (Apr 29 2018 at 19:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125861595):
-hmm
+<p>hmm</p>
 
 #### [ Kenny Lau (Apr 29 2018 at 19:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125861598):
-maybe we should use `false` instead
+<p>maybe we should use <code>false</code> instead</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 20:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125862258):
-the proof crucially uses "this map X -> X is not this other map"
+<p>the proof crucially uses "this map X -&gt; X is not this other map"</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 20:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125862261):
-so I can't see how we can use empty or false :-/
+<p>so I can't see how we can use empty or false :-/</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 20:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125862304):
-but we can use any type which is provably not \N and which provably has a map which is not the identity map
+<p>but we can use any type which is provably not \N and which provably has a map which is not the identity map</p>
 
 #### [ Reid Barton (Apr 29 2018 at 20:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125862356):
-Oh I see, sorry
+<p>Oh I see, sorry</p>
 
 #### [ Kenny Lau (Apr 29 2018 at 20:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125862365):
-I have never proved that two types are not the same
+<p>I have never proved that two types are not the same</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 20:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125862409):
-I think there is some notion of finite and infinite, and it will be known that bool is finite and nat is infinite
+<p>I think there is some notion of finite and infinite, and it will be known that bool is finite and nat is infinite</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 20:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125862410):
-of course a = b implies a equiv b
+<p>of course a = b implies a equiv b</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 20:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125862415):
-by rw
+<p>by rw</p>
 
 #### [ Kenny Lau (Apr 29 2018 at 20:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125862416):
-```quote
-by rw
-```
-**by `eq.rec_on`**
+<blockquote>
+<p>by rw</p>
+</blockquote>
+<p><strong>by <code>eq.rec_on</code></strong></p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 20:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125862427):
-that's what I said
+<p>that's what I said</p>
 
 #### [ Kenny Lau (Apr 29 2018 at 20:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125862429):
-:P
+<p>:P</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 20:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125862430):
-:-)
+<p>:-)</p>
 
 #### [ Reid Barton (Apr 29 2018 at 20:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125862640):
-As a further step, you could try adding the "free theorem" for the type `Π X : Type, (X → X) → X → X` as a field of your church numerals and then see if you can prove `of_nat (to_nat c) = c`
+<p>As a further step, you could try adding the "free theorem" for the type <code>Π X : Type, (X → X) → X → X</code> as a field of your church numerals and then see if you can prove <code>of_nat (to_nat c) = c</code></p>
 
 #### [ Chris Hughes (Apr 29 2018 at 20:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125863436):
-```lean
-import data.set.finite
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">set</span><span class="bp">.</span><span class="n">finite</span>
 
-example : bool ≠ ℕ := λ h, 
-by haveI : fintype ℕ := eq.rec_on h (by apply_instance);
-exact set.not_injective_nat_fintype @nat.succ_inj
-```
+<span class="kn">example</span> <span class="o">:</span> <span class="n">bool</span> <span class="bp">≠</span> <span class="bp">ℕ</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">h</span><span class="o">,</span>
+<span class="k">by</span> <span class="n">haveI</span> <span class="o">:</span> <span class="n">fintype</span> <span class="bp">ℕ</span> <span class="o">:=</span> <span class="n">eq</span><span class="bp">.</span><span class="n">rec_on</span> <span class="n">h</span> <span class="o">(</span><span class="k">by</span> <span class="n">apply_instance</span><span class="o">)</span><span class="bp">;</span>
+<span class="n">exact</span> <span class="n">set</span><span class="bp">.</span><span class="n">not_injective_nat_fintype</span> <span class="bp">@</span><span class="n">nat</span><span class="bp">.</span><span class="n">succ_inj</span>
+</pre></div>
 
 #### [ Kenny Lau (Apr 29 2018 at 20:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125863443):
-lol
+<p>lol</p>
 
 #### [ Chris Hughes (Apr 29 2018 at 20:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125863503):
-Not very often you get to use `eq.rec_on` for something that's not a prop.
+<p>Not very often you get to use <code>eq.rec_on</code> for something that's not a prop.</p>
 
 #### [ Kenny Lau (Apr 29 2018 at 20:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125863505):
-it is a prop
+<p>it is a prop</p>
 
 #### [ Chris Hughes (Apr 29 2018 at 20:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125863554):
-`fintype` isn't
+<p><code>fintype</code> isn't</p>
 
 #### [ Kenny Lau (Apr 29 2018 at 20:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125863556):
-oh, I misunderstood
+<p>oh, I misunderstood</p>
 
 #### [ Kenny Lau (Apr 29 2018 at 20:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125863558):
-your proof makes me laugh for some reason
+<p>your proof makes me laugh for some reason</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 20:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125863615):
-```lean
-theorem satan_is_bad : of_nat (to_nat satan) = satan → false :=
-begin
-intro H,
-have H2 : (of_nat (to_nat satan)) bool bnot tt = satan bool bnot tt := by rw H,
-unfold to_nat at H2,
-unfold satan at H2,
-simp at H2,
-change tt = _ at H2,
-suffices : ¬ (bool = ℕ),
-simp [this] at H2,assumption,
-exact bool_not_nat,
-end 
-```
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">satan_is_bad</span> <span class="o">:</span> <span class="n">of_nat</span> <span class="o">(</span><span class="n">to_nat</span> <span class="n">satan</span><span class="o">)</span> <span class="bp">=</span> <span class="n">satan</span> <span class="bp">→</span> <span class="n">false</span> <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="n">intro</span> <span class="n">H</span><span class="o">,</span>
+<span class="k">have</span> <span class="n">H2</span> <span class="o">:</span> <span class="o">(</span><span class="n">of_nat</span> <span class="o">(</span><span class="n">to_nat</span> <span class="n">satan</span><span class="o">))</span> <span class="n">bool</span> <span class="n">bnot</span> <span class="n">tt</span> <span class="bp">=</span> <span class="n">satan</span> <span class="n">bool</span> <span class="n">bnot</span> <span class="n">tt</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">rw</span> <span class="n">H</span><span class="o">,</span>
+<span class="n">unfold</span> <span class="n">to_nat</span> <span class="n">at</span> <span class="n">H2</span><span class="o">,</span>
+<span class="n">unfold</span> <span class="n">satan</span> <span class="n">at</span> <span class="n">H2</span><span class="o">,</span>
+<span class="n">simp</span> <span class="n">at</span> <span class="n">H2</span><span class="o">,</span>
+<span class="n">change</span> <span class="n">tt</span> <span class="bp">=</span> <span class="bp">_</span> <span class="n">at</span> <span class="n">H2</span><span class="o">,</span>
+<span class="n">suffices</span> <span class="o">:</span> <span class="bp">¬</span> <span class="o">(</span><span class="n">bool</span> <span class="bp">=</span> <span class="bp">ℕ</span><span class="o">),</span>
+<span class="n">simp</span> <span class="o">[</span><span class="n">this</span><span class="o">]</span> <span class="n">at</span> <span class="n">H2</span><span class="o">,</span><span class="n">assumption</span><span class="o">,</span>
+<span class="n">exact</span> <span class="n">bool_not_nat</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 20:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125863618):
-so it really is not provable
+<p>so it really is not provable</p>
 
 #### [ Kenny Lau (Apr 29 2018 at 20:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125863622):
-nice!
+<p>nice!</p>
 
 #### [ Chris Hughes (Apr 29 2018 at 20:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125863668):
-What's satan?
+<p>What's satan?</p>
 
 #### [ Kenny Lau (Apr 29 2018 at 20:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125863675):
-```lean
-noncomputable definition satan (X : Type) (f : X → X) (x : X) := dite (X = ℕ) (λ H,begin show X,rw H,rw H at x,exact x end) (λ _,f x)
-```
+<div class="codehilite"><pre><span></span><span class="n">noncomputable</span> <span class="kn">definition</span> <span class="n">satan</span> <span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">X</span> <span class="bp">→</span> <span class="n">X</span><span class="o">)</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">X</span><span class="o">)</span> <span class="o">:=</span> <span class="n">dite</span> <span class="o">(</span><span class="n">X</span> <span class="bp">=</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">H</span><span class="o">,</span><span class="k">begin</span> <span class="k">show</span> <span class="n">X</span><span class="o">,</span><span class="n">rw</span> <span class="n">H</span><span class="o">,</span><span class="n">rw</span> <span class="n">H</span> <span class="n">at</span> <span class="n">x</span><span class="o">,</span><span class="n">exact</span> <span class="n">x</span> <span class="kn">end</span><span class="o">)</span> <span class="o">(</span><span class="bp">λ</span> <span class="bp">_</span><span class="o">,</span><span class="n">f</span> <span class="n">x</span><span class="o">)</span>
+</pre></div>
 
 #### [ Chris Hughes (Apr 29 2018 at 20:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125863766):
-What's `of_nat`?
+<p>What's <code>of_nat</code>?</p>
 
 #### [ Kenny Lau (Apr 29 2018 at 20:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125863768):
-https://github.com/kbuzzard/xena/blob/master/canonical_isomorphism/church_blog_questions.lean
+<p><a href="https://github.com/kbuzzard/xena/blob/master/canonical_isomorphism/church_blog_questions.lean" target="_blank" title="https://github.com/kbuzzard/xena/blob/master/canonical_isomorphism/church_blog_questions.lean">https://github.com/kbuzzard/xena/blob/master/canonical_isomorphism/church_blog_questions.lean</a></p>
 
 #### [ Chris Hughes (Apr 29 2018 at 21:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125863920):
-What's the purpose of church nats?
+<p>What's the purpose of church nats?</p>
 
 #### [ Kenny Lau (Apr 29 2018 at 21:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125863925):
-to defeat satan
+<p>to defeat satan</p>
 
 #### [ Kenny Lau (Apr 29 2018 at 21:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125863926):
-well church numerals is an essential part of lambda calculus
+<p>well church numerals is an essential part of lambda calculus</p>
 
 #### [ Chris Hughes (Apr 29 2018 at 21:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125864023):
-Am i doing something wrong
-```lean
---KB can't do this one. Is it unprovable? If so, move definition of to_nat much further down.
-example (m : chℕ) : to_nat (succ m) = nat.succ (to_nat m) := rfl
-```
+<p>Am i doing something wrong</p>
+<div class="codehilite"><pre><span></span><span class="c1">--KB can&#39;t do this one. Is it unprovable? If so, move definition of to_nat much further down.</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">m</span> <span class="o">:</span> <span class="n">chℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">to_nat</span> <span class="o">(</span><span class="n">succ</span> <span class="n">m</span><span class="o">)</span> <span class="bp">=</span> <span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="o">(</span><span class="n">to_nat</span> <span class="n">m</span><span class="o">)</span> <span class="o">:=</span> <span class="n">rfl</span>
+</pre></div>
 
 #### [ Kenny Lau (Apr 29 2018 at 21:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125864024):
-I also used `rfl` lol
+<p>I also used <code>rfl</code> lol</p>
 
 #### [ Chris Hughes (Apr 29 2018 at 21:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125864232):
-Is this cheating?
-```lean
-def add : chℕ → chℕ → chℕ := λ a b, of_nat (to_nat a + to_nat b)
-```
+<p>Is this cheating?</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">add</span> <span class="o">:</span> <span class="n">chℕ</span> <span class="bp">→</span> <span class="n">chℕ</span> <span class="bp">→</span> <span class="n">chℕ</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">a</span> <span class="n">b</span><span class="o">,</span> <span class="n">of_nat</span> <span class="o">(</span><span class="n">to_nat</span> <span class="n">a</span> <span class="bp">+</span> <span class="n">to_nat</span> <span class="n">b</span><span class="o">)</span>
+</pre></div>
 
 #### [ Kenny Lau (Apr 29 2018 at 21:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125864240):
-yes it is
+<p>yes it is</p>
 
 #### [ Chris Hughes (Apr 29 2018 at 21:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125864756):
-Stuck on add_succ
+<p>Stuck on add_succ</p>
 
 #### [ Kenny Lau (Apr 29 2018 at 21:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125864757):
-you can do it
+<p>you can do it</p>
 
 #### [ Chris Hughes (Apr 29 2018 at 21:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125864775):
-Is it even true? There are loads of chnats that aren't constructed from naturals.
+<p>Is it even true? There are loads of chnats that aren't constructed from naturals.</p>
 
 #### [ Kenny Lau (Apr 29 2018 at 21:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125864776):
-it is true
+<p>it is true</p>
 
 #### [ Chris Hughes (Apr 29 2018 at 21:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125864913):
-Are you sure `add_succ` is true? `succ_add` certainly is. I think it's the wrong approach to try to prove that.
+<p>Are you sure <code>add_succ</code> is true? <code>succ_add</code> certainly is. I think it's the wrong approach to try to prove that.</p>
 
 #### [ Kenny Lau (Apr 29 2018 at 21:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125864952):
-depends on your definition of add
+<p>depends on your definition of add</p>
 
 #### [ Chris Hughes (Apr 29 2018 at 21:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125865010):
-` λ a b X f, (a X f) ∘ (b X f)`
+<p><code> λ a b X f, (a X f) ∘ (b X f)</code></p>
 
 #### [ Kenny Lau (Apr 29 2018 at 21:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125865013):
-then destruct `a`
+<p>then destruct <code>a</code></p>
 
 #### [ Chris Hughes (Apr 29 2018 at 21:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125865054):
-I proved of_nat_add without it, so I'm okay.
+<p>I proved of_nat_add without it, so I'm okay.</p>
 
 #### [ Chris Hughes (Apr 29 2018 at 21:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125865060):
-I ended up with this
-```
-m n : chℕ,
+<p>I ended up with this</p>
+<div class="codehilite"><pre><span></span>m n : chℕ,
 X : Type,
 f : X → X,
 x : X
 ⊢ m X f (f (n X f x)) = f (m X f (n X f x))
-```
+</pre></div>
 
 #### [ Kenny Lau (Apr 29 2018 at 21:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125865063):
-what is the theorem?
+<p>what is the theorem?</p>
 
 #### [ Chris Hughes (Apr 29 2018 at 21:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125865243):
- m + succ n = succ (m + n)
+<p>m + succ n = succ (m + n)</p>
 
 #### [ Kenny Lau (Apr 29 2018 at 21:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125865246):
-oh...
+<p>oh...</p>
 
 #### [ Kenny Lau (Apr 29 2018 at 21:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125865249):
-sorry
+<p>sorry</p>
 
 #### [ Kenny Lau (Apr 29 2018 at 21:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125865253):
-I thought it was one of the questions from the file and then I reflexively answered that it's true
+<p>I thought it was one of the questions from the file and then I reflexively answered that it's true</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 22:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125865379):
-Apparently defining pred is interesting
+<p>Apparently defining pred is interesting</p>
 
 #### [ Chris Hughes (Apr 29 2018 at 22:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125865486):
-pretty sure `add_comm` isn't true. all you need is two functions whose composition doesn't commute surely?
+<p>pretty sure <code>add_comm</code> isn't true. all you need is two functions whose composition doesn't commute surely?</p>
 
 #### [ Chris Hughes (Apr 29 2018 at 22:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125865785):
-Just disproved `add_comm`
+<p>Just disproved <code>add_comm</code></p>
 
 #### [ Kenny Lau (Apr 29 2018 at 22:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125865788):
-nice!
+<p>nice!</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 22:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125865903):
-the problem is that a church numeral has to be defined on every type
+<p>the problem is that a church numeral has to be defined on every type</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 22:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125865910):
-If you were to specialise to one specific type X then they won't commute
+<p>If you were to specialise to one specific type X then they won't commute</p>
 
 #### [ Kenny Lau (Apr 29 2018 at 22:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125865915):
-the problem is that noncomputable functions exist
+<p>the problem is that noncomputable functions exist</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 22:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125865916):
-right
+<p>right</p>
 
 #### [ Kenny Lau (Apr 29 2018 at 22:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125865922):
-now I haven't even started dinner and you have already finished it
+<p>now I haven't even started dinner and you have already finished it</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 22:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125865924):
-also right
+<p>also right</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 22:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125865927):
-but I have a lot of tidying up to do
+<p>but I have a lot of tidying up to do</p>
 
 #### [ Kenny Lau (Apr 29 2018 at 22:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125865967):
-heh
+<p>heh</p>
 
 #### [ Chris Hughes (Apr 29 2018 at 22:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125866020):
-```quote
-the problem is that a church numeral has to be defined on every type
-If you were to specialise to one specific type X then they won't commute
-```
-What do you mean?
+<blockquote>
+<p>the problem is that a church numeral has to be defined on every type<br>
+If you were to specialise to one specific type X then they won't commute</p>
+</blockquote>
+<p>What do you mean?</p>
 
 #### [ Chris Hughes (Apr 29 2018 at 22:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125866185):
-I fixed has_pow `instance : has_pow chℕ chℕ := ⟨pow⟩`
+<p>I fixed has_pow <code>instance : has_pow chℕ chℕ := ⟨pow⟩</code></p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 22:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125866347):
-I mean that you can't say "I can think of a type X and two functions f and g which don't commute, so done", because a church numeral is defined on all types
+<p>I mean that you can't say "I can think of a type X and two functions f and g which don't commute, so done", because a church numeral is defined on all types</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 22:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125866350):
-But of course if you do the trick I did then this gets round it, at a cost of making the function noncomputable
+<p>But of course if you do the trick I did then this gets round it, at a cost of making the function noncomputable</p>
 
 #### [ Chris Hughes (Apr 29 2018 at 22:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125866405):
-You can.
-```lean
-lemma not_add_comm : ∃ a b : chℕ, a + b ≠ b + a := 
-⟨λ X f x, dite (ℕ = X) (λ h, eq.rec_on h (nat.succ (eq.rec_on h.symm x : ℕ))) (λ _, x),
-λ X f x, dite (ℕ = X) (λ h, eq.rec_on h (2 * (eq.rec_on h.symm x : ℕ))) (λ _, x),
-λ h,
-begin
-  have := congr_fun h ℕ,
-  have := congr_fun this id,
-  have := congr_fun this 0,
-  simp [has_add.add, add] at this,
-  exact absurd this dec_trivial,
-end⟩
-```
-Are you saying that the definition is not correct?
+<p>You can.</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">not_add_comm</span> <span class="o">:</span> <span class="bp">∃</span> <span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">chℕ</span><span class="o">,</span> <span class="n">a</span> <span class="bp">+</span> <span class="n">b</span> <span class="bp">≠</span> <span class="n">b</span> <span class="bp">+</span> <span class="n">a</span> <span class="o">:=</span>
+<span class="bp">⟨λ</span> <span class="n">X</span> <span class="n">f</span> <span class="n">x</span><span class="o">,</span> <span class="n">dite</span> <span class="o">(</span><span class="bp">ℕ</span> <span class="bp">=</span> <span class="n">X</span><span class="o">)</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">h</span><span class="o">,</span> <span class="n">eq</span><span class="bp">.</span><span class="n">rec_on</span> <span class="n">h</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="o">(</span><span class="n">eq</span><span class="bp">.</span><span class="n">rec_on</span> <span class="n">h</span><span class="bp">.</span><span class="n">symm</span> <span class="n">x</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)))</span> <span class="o">(</span><span class="bp">λ</span> <span class="bp">_</span><span class="o">,</span> <span class="n">x</span><span class="o">),</span>
+<span class="bp">λ</span> <span class="n">X</span> <span class="n">f</span> <span class="n">x</span><span class="o">,</span> <span class="n">dite</span> <span class="o">(</span><span class="bp">ℕ</span> <span class="bp">=</span> <span class="n">X</span><span class="o">)</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">h</span><span class="o">,</span> <span class="n">eq</span><span class="bp">.</span><span class="n">rec_on</span> <span class="n">h</span> <span class="o">(</span><span class="mi">2</span> <span class="bp">*</span> <span class="o">(</span><span class="n">eq</span><span class="bp">.</span><span class="n">rec_on</span> <span class="n">h</span><span class="bp">.</span><span class="n">symm</span> <span class="n">x</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)))</span> <span class="o">(</span><span class="bp">λ</span> <span class="bp">_</span><span class="o">,</span> <span class="n">x</span><span class="o">),</span>
+<span class="bp">λ</span> <span class="n">h</span><span class="o">,</span>
+<span class="k">begin</span>
+  <span class="k">have</span> <span class="o">:=</span> <span class="n">congr_fun</span> <span class="n">h</span> <span class="bp">ℕ</span><span class="o">,</span>
+  <span class="k">have</span> <span class="o">:=</span> <span class="n">congr_fun</span> <span class="n">this</span> <span class="n">id</span><span class="o">,</span>
+  <span class="k">have</span> <span class="o">:=</span> <span class="n">congr_fun</span> <span class="n">this</span> <span class="mi">0</span><span class="o">,</span>
+  <span class="n">simp</span> <span class="o">[</span><span class="n">has_add</span><span class="bp">.</span><span class="n">add</span><span class="o">,</span> <span class="n">add</span><span class="o">]</span> <span class="n">at</span> <span class="n">this</span><span class="o">,</span>
+  <span class="n">exact</span> <span class="n">absurd</span> <span class="n">this</span> <span class="n">dec_trivial</span><span class="o">,</span>
+<span class="kn">end</span><span class="bp">⟩</span>
+</pre></div>
+
+
+<p>Are you saying that the definition is not correct?</p>
 
 #### [ Chris Hughes (Apr 29 2018 at 22:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125866797):
-Or maybe my definition of add is incorrect.
+<p>Or maybe my definition of add is incorrect.</p>
 
 #### [ Chris Hughes (Apr 29 2018 at 23:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125867627):
-I disproved `free_chnat` as well
-```lean
-theorem free_chnat : ¬∀ (A B : Type), ∀ f : A → B, 
-∀ r : chℕ, ∀ a : A, r (A → B) (λ g, f) f a = r (A → B) (λ g, g) f a 
- := λ h, begin
- let r : chℕ := (λ X f x, dite ((ℕ → ℕ) = X) (λ h, eq.rec_on h 
-    (let f : (ℕ → ℕ) → (ℕ → ℕ) := eq.rec_on h.symm f in 
-    ite (f = id) id nat.succ)) (λ _, x)),
-  have := (h ℕ ℕ id r 8),
-  have h₁ : (λ (g : ℕ → ℕ), id) ≠ id := λ h, absurd (congr_fun (congr_fun h nat.succ) 0) dec_trivial,
-  have h₂ : (λ (g : ℕ → ℕ), g) = id := rfl,
-  simp [r, id, h₁, h₂] at this,
-  exact absurd this dec_trivial,
-end
-```
+<p>I disproved <code>free_chnat</code> as well</p>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">free_chnat</span> <span class="o">:</span> <span class="bp">¬∀</span> <span class="o">(</span><span class="n">A</span> <span class="n">B</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">),</span> <span class="bp">∀</span> <span class="n">f</span> <span class="o">:</span> <span class="n">A</span> <span class="bp">→</span> <span class="n">B</span><span class="o">,</span>
+<span class="bp">∀</span> <span class="n">r</span> <span class="o">:</span> <span class="n">chℕ</span><span class="o">,</span> <span class="bp">∀</span> <span class="n">a</span> <span class="o">:</span> <span class="n">A</span><span class="o">,</span> <span class="n">r</span> <span class="o">(</span><span class="n">A</span> <span class="bp">→</span> <span class="n">B</span><span class="o">)</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">g</span><span class="o">,</span> <span class="n">f</span><span class="o">)</span> <span class="n">f</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">r</span> <span class="o">(</span><span class="n">A</span> <span class="bp">→</span> <span class="n">B</span><span class="o">)</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">g</span><span class="o">,</span> <span class="n">g</span><span class="o">)</span> <span class="n">f</span> <span class="n">a</span>
+ <span class="o">:=</span> <span class="bp">λ</span> <span class="n">h</span><span class="o">,</span> <span class="k">begin</span>
+ <span class="k">let</span> <span class="n">r</span> <span class="o">:</span> <span class="n">chℕ</span> <span class="o">:=</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">X</span> <span class="n">f</span> <span class="n">x</span><span class="o">,</span> <span class="n">dite</span> <span class="o">((</span><span class="bp">ℕ</span> <span class="bp">→</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="bp">=</span> <span class="n">X</span><span class="o">)</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">h</span><span class="o">,</span> <span class="n">eq</span><span class="bp">.</span><span class="n">rec_on</span> <span class="n">h</span>
+    <span class="o">(</span><span class="k">let</span> <span class="n">f</span> <span class="o">:</span> <span class="o">(</span><span class="bp">ℕ</span> <span class="bp">→</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="bp">→</span> <span class="o">(</span><span class="bp">ℕ</span> <span class="bp">→</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:=</span> <span class="n">eq</span><span class="bp">.</span><span class="n">rec_on</span> <span class="n">h</span><span class="bp">.</span><span class="n">symm</span> <span class="n">f</span> <span class="k">in</span>
+    <span class="n">ite</span> <span class="o">(</span><span class="n">f</span> <span class="bp">=</span> <span class="n">id</span><span class="o">)</span> <span class="n">id</span> <span class="n">nat</span><span class="bp">.</span><span class="n">succ</span><span class="o">))</span> <span class="o">(</span><span class="bp">λ</span> <span class="bp">_</span><span class="o">,</span> <span class="n">x</span><span class="o">)),</span>
+  <span class="k">have</span> <span class="o">:=</span> <span class="o">(</span><span class="n">h</span> <span class="bp">ℕ</span> <span class="bp">ℕ</span> <span class="n">id</span> <span class="n">r</span> <span class="mi">8</span><span class="o">),</span>
+  <span class="k">have</span> <span class="n">h₁</span> <span class="o">:</span> <span class="o">(</span><span class="bp">λ</span> <span class="o">(</span><span class="n">g</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="bp">ℕ</span><span class="o">),</span> <span class="n">id</span><span class="o">)</span> <span class="bp">≠</span> <span class="n">id</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">h</span><span class="o">,</span> <span class="n">absurd</span> <span class="o">(</span><span class="n">congr_fun</span> <span class="o">(</span><span class="n">congr_fun</span> <span class="n">h</span> <span class="n">nat</span><span class="bp">.</span><span class="n">succ</span><span class="o">)</span> <span class="mi">0</span><span class="o">)</span> <span class="n">dec_trivial</span><span class="o">,</span>
+  <span class="k">have</span> <span class="n">h₂</span> <span class="o">:</span> <span class="o">(</span><span class="bp">λ</span> <span class="o">(</span><span class="n">g</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="bp">ℕ</span><span class="o">),</span> <span class="n">g</span><span class="o">)</span> <span class="bp">=</span> <span class="n">id</span> <span class="o">:=</span> <span class="n">rfl</span><span class="o">,</span>
+  <span class="n">simp</span> <span class="o">[</span><span class="n">r</span><span class="o">,</span> <span class="n">id</span><span class="o">,</span> <span class="n">h₁</span><span class="o">,</span> <span class="n">h₂</span><span class="o">]</span> <span class="n">at</span> <span class="n">this</span><span class="o">,</span>
+  <span class="n">exact</span> <span class="n">absurd</span> <span class="n">this</span> <span class="n">dec_trivial</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 23:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125867731):
-yes, those free theorems aren't very good are they
+<p>yes, those free theorems aren't very good are they</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 23:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125867733):
-I would ask for my money back
+<p>I would ask for my money back</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 23:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125867740):
-The free theorem for `Pi X, X` is: for all X, for all f : X -> X, for all x : X, f x = x :-)
+<p>The free theorem for <code>Pi X, X</code> is: for all X, for all f : X -&gt; X, for all x : X, f x = x :-)</p>
 
 #### [ Chris Hughes (Apr 29 2018 at 23:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125867742):
-Is it because we're defining church numerals as something bigger than those that can be constructed from nats?
+<p>Is it because we're defining church numerals as something bigger than those that can be constructed from nats?</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 23:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125867746):
-I think constructively it's very difficult to tell the difference between church numerals and numerals
+<p>I think constructively it's very difficult to tell the difference between church numerals and numerals</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 23:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125867785):
-you have to use this dite trick and make it noncomputable
+<p>you have to use this dite trick and make it noncomputable</p>
 
 #### [ Chris Hughes (Apr 29 2018 at 23:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125867790):
-Probably. But that doesn't make the lemmas true. It just makes them undisprovable
+<p>Probably. But that doesn't make the lemmas true. It just makes them undisprovable</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 23:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125867798):
-I think that in some other logics they might be provable
+<p>I think that in some other logics they might be provable</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 23:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125867799):
-I am certainly not an expert in these variants of the lambda calculus
+<p>I am certainly not an expert in these variants of the lambda calculus</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 23:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125867837):
-Chris I have been failing to apply your lemma :-)
+<p>Chris I have been failing to apply your lemma :-)</p>
 
 #### [ Chris Hughes (Apr 29 2018 at 23:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125867845):
-The 00EJ?
+<p>The 00EJ?</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 23:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125867846):
-yes
+<p>yes</p>
 
 #### [ Chris Hughes (Apr 29 2018 at 23:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125867849):
-Because of the isomorphism problem?
+<p>Because of the isomorphism problem?</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 23:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125867856):
-I have some situation with a bunch of types each of which are canonically isomorphic to your types that you proved something about
+<p>I have some situation with a bunch of types each of which are canonically isomorphic to your types that you proved something about</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 23:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125867858):
-but I have got distracted
+<p>but I have got distracted</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 23:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125867867):
-and am trying to write quite a high-level proof which mirrors how I actually think about the question
+<p>and am trying to write quite a high-level proof which mirrors how I actually think about the question</p>
 
 #### [ Chris Hughes (Apr 29 2018 at 23:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125867920):
-Did the tactics session get anywhere?
+<p>Did the tactics session get anywhere?</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 23:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125867966):
-There was a preliminary idea about how to model the notion of being canonically isomorphic
+<p>There was a preliminary idea about how to model the notion of being canonically isomorphic</p>
 
 #### [ Chris Hughes (Apr 29 2018 at 23:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125867967):
-To make tactics that prove it's a ring?
+<p>To make tactics that prove it's a ring?</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 23:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125867968):
-but then we realised that it wasn't strong enough
+<p>but then we realised that it wasn't strong enough</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 23:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125867980):
-and I am now trying to write down some abstract ideas at a high level to see if I can make any sense out of them
+<p>and I am now trying to write down some abstract ideas at a high level to see if I can make any sense out of them</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 23:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125867989):
-It seems to me that when a mathematician says that two things are canonically isomorphic they are making a promise
+<p>It seems to me that when a mathematician says that two things are canonically isomorphic they are making a promise</p>
 
 #### [ Chris Hughes (Apr 29 2018 at 23:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125867990):
-I don't understand how it could have been someone's PhD project to prove a result still held for an isomorphic thing
+<p>I don't understand how it could have been someone's PhD project to prove a result still held for an isomorphic thing</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 23:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125867993):
-the project did something else
+<p>the project did something else</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 23:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125868035):
-but this came out in the wash
+<p>but this came out in the wash</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 23:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125868040):
-But the problem was hard
+<p>But the problem was hard</p>
 
 #### [ Chris Hughes (Apr 29 2018 at 23:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125868041):
-I see.
+<p>I see.</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 23:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125868042):
-Here was the problem.
+<p>Here was the problem.</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 23:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125868045):
-We have two finite-dimensional vector spaces V and W
+<p>We have two finite-dimensional vector spaces V and W</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 23:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125868048):
-and we have two linear maps T : V -> V and T' : W -> W
+<p>and we have two linear maps T : V -&gt; V and T' : W -&gt; W</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 23:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125868053):
-and T and T' are both defined "by using the same sort of ideas"
+<p>and T and T' are both defined "by using the same sort of ideas"</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 23:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125868059):
-but on two different spaces
+<p>but on two different spaces</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 23:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125868069):
-and then there's a theorem that there's a "canonical isomorphism" phi from V to W
+<p>and then there's a theorem that there's a "canonical isomorphism" phi from V to W</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 23:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125868070):
-which means "an isomorphism which somehow dropped out really nicely"
+<p>which means "an isomorphism which somehow dropped out really nicely"</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 23:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125868112):
-and what Dick Gross used without proof was that phi (T v) = T' (phi v)
+<p>and what Dick Gross used without proof was that phi (T v) = T' (phi v)</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 23:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125868117):
-for all v
+<p>for all v</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 23:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125868120):
-and his proof was not a formal one
+<p>and his proof was not a formal one</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 23:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125868122):
-his proof was "this must be true because that's surely how it works"
+<p>his proof was "this must be true because that's surely how it works"</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 23:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125868124):
-"because everything is canonical"
+<p>"because everything is canonical"</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 23:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125868133):
-V and W were two different cohomology theories attached to the same space
+<p>V and W were two different cohomology theories attached to the same space</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 23:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125868143):
-and T and T' were defined using some other spaces (the same other spaces for T and T')
+<p>and T and T' were defined using some other spaces (the same other spaces for T and T')</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 23:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125868187):
-e.g. maps between spaces often induce maps between cohomology theories
+<p>e.g. maps between spaces often induce maps between cohomology theories</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 23:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125868188):
-but it was just a case of making sure that all the diagrams commuted
+<p>but it was just a case of making sure that all the diagrams commuted</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 23:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125868195):
-and some of the definition were done using very abstract algebra and the diagrams were difficult to chase
+<p>and some of the definition were done using very abstract algebra and the diagrams were difficult to chase</p>
 
 #### [ Simon Hudon (Apr 29 2018 at 23:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125868198):
-Short digression:
-
-I'm working on deriving `transportable`. Do you guys have a preference between making such instances lemmas (i.e. you can't unfold them) or definitions?
+<p>Short digression:</p>
+<p>I'm working on deriving <code>transportable</code>. Do you guys have a preference between making such instances lemmas (i.e. you can't unfold them) or definitions?</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 23:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125868201):
-that's an interesting question Simon
+<p>that's an interesting question Simon</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 23:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125868243):
-transportable is what we can transfer equiv over, right?
+<p>transportable is what we can transfer equiv over, right?</p>
 
 #### [ Simon Hudon (Apr 29 2018 at 23:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125868246):
-Exactly
+<p>Exactly</p>
 
 #### [ Simon Hudon (Apr 29 2018 at 23:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125868250):
-Here's the class:
-
-```
-class transportable (f : Type u → Type v) :=
+<p>Here's the class:</p>
+<div class="codehilite"><pre><span></span>class transportable (f : Type u → Type v) :=
 (on_equiv : Π {α β : Type u} (e : equiv α β), equiv (f α) (f β))
 (on_refl  : Π (α : Type u), on_equiv (equiv.refl α) = equiv.refl (f α))
 (on_trans : Π {α β γ : Type u} (d : equiv α β) (e : equiv β γ), on_equiv (equiv.trans d e) = equiv.trans (on_equiv d) (on_equiv e))
-```
+</pre></div>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 23:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125868260):
-I guess if I had a group on X and an equiv from X to Y I'd definitely like to be able to get at the induced group on Y
+<p>I guess if I had a group on X and an equiv from X to Y I'd definitely like to be able to get at the induced group on Y</p>
 
 #### [ Simon Hudon (Apr 29 2018 at 23:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125868302):
-Ah very good. Right now, the instances I'm generating are kind of messy. I'll try to structure them so that you can look into them then
+<p>Ah very good. Right now, the instances I'm generating are kind of messy. I'll try to structure them so that you can look into them then</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 23:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125868306):
-but that might be a different question
+<p>but that might be a different question</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 23:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125868317):
-I am not sure I can give a definitive answer to your question
+<p>I am not sure I can give a definitive answer to your question</p>
 
 #### [ Simon Hudon (Apr 29 2018 at 23:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125868319):
-If I don't structure them but I make them definitions, you still benefit from defeq
+<p>If I don't structure them but I make them definitions, you still benefit from defeq</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 23:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125868375):
-My impression was that for theoretical reasons some people wanted things more general than maps between types to be transportable
+<p>My impression was that for theoretical reasons some people wanted things more general than maps between types to be transportable</p>
 
 #### [ Simon Hudon (Apr 29 2018 at 23:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125868378):
-You mean like groups, rings, etc?
+<p>You mean like groups, rings, etc?</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 23:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125868427):
-I think the issue raised was that if X and Y were equiv and then X got a group structure, then Y would get a group structure, but if then X got a ring structure on top of that, which induced the group structure, then one would want to push over both the ring structure on Y and the proof that the ring structure on Y reduced to the group structure
+<p>I think the issue raised was that if X and Y were equiv and then X got a group structure, then Y would get a group structure, but if then X got a ring structure on top of that, which induced the group structure, then one would want to push over both the ring structure on Y and the proof that the ring structure on Y reduced to the group structure</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 23:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125868428):
-But I am not too worried about this at the minute. We might just want to try a prototype at the minute
+<p>But I am not too worried about this at the minute. We might just want to try a prototype at the minute</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 23:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125868429):
-to see if we can get anything working
+<p>to see if we can get anything working</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 23:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125868438):
-I have thought about this a certain amount today. If X and Y have extra structure, e.g. if they're both rings, then there is ring_equiv, which equiv + assumption that the maps are ring isomorphisms
+<p>I have thought about this a certain amount today. If X and Y have extra structure, e.g. if they're both rings, then there is ring_equiv, which equiv + assumption that the maps are ring isomorphisms</p>
 
 #### [ Simon Hudon (Apr 29 2018 at 23:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125868440):
-Cool. I'm going to push it on a repo on Github before making a PR for mathlib. This way you can play with it and tell me what you need
+<p>Cool. I'm going to push it on a repo on Github before making a PR for mathlib. This way you can play with it and tell me what you need</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 23:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125868481):
-And if two things are ring-equiv then you can get some more theorems
+<p>And if two things are ring-equiv then you can get some more theorems</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 23:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125868482):
-e.g. if something is a module for one ring then it becomes a module for the other ring
+<p>e.g. if something is a module for one ring then it becomes a module for the other ring</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 23:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125868485):
-That would not be true if the rings were just equiv
+<p>That would not be true if the rings were just equiv</p>
 
 #### [ Simon Hudon (Apr 29 2018 at 23:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125868492):
-That's going to be interesting. I'll have to think on how to do that
+<p>That's going to be interesting. I'll have to think on how to do that</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 23:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125868493):
-So some wise people made some comments about this earlier
+<p>So some wise people made some comments about this earlier</p>
 
 #### [ Simon Hudon (Apr 29 2018 at 23:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125868496):
-```quote
-That would not be true if the rings were just equiv
-```
-Does that mean ring-equiv also asserts that the ring operations respect the underlying isomorphism?
+<blockquote>
+<p>That would not be true if the rings were just equiv</p>
+</blockquote>
+<p>Does that mean ring-equiv also asserts that the ring operations respect the underlying isomorphism?</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 23:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125868536):
-right
+<p>right</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 23:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125868539):
-If X is a ring
+<p>If X is a ring</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 23:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125868540):
-then this means in practice that you have add and mul and neg and one and zero
+<p>then this means in practice that you have add and mul and neg and one and zero</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 23:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125868541):
-and all of those transfer
+<p>and all of those transfer</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 23:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125868542):
-so if you have an equiv X = Y
+<p>so if you have an equiv X = Y</p>
 
 #### [ Simon Hudon (Apr 29 2018 at 23:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125868543):
-Right and you need access to their definitions
+<p>Right and you need access to their definitions</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 23:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125868549):
-then you can transfer them all over from X to Y
+<p>then you can transfer them all over from X to Y</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 23:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125868552):
-On the other hand if X and Y are already rings
+<p>On the other hand if X and Y are already rings</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 23:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125868553):
-and you decide that there's a canonical isomorphism between them
+<p>and you decide that there's a canonical isomorphism between them</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 23:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125868555):
-then you're going to have to prove that the add mul neg etc all transfer over from one to the other
+<p>then you're going to have to prove that the add mul neg etc all transfer over from one to the other</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 23:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125868556):
-and once you've done that, you have a better class of equiv which is specifically for rings
+<p>and once you've done that, you have a better class of equiv which is specifically for rings</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 23:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125868596):
-and you can prove more theorems with it
+<p>and you can prove more theorems with it</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 23:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125868604):
-each of which is trivial to a mathematician
+<p>each of which is trivial to a mathematician</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 23:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125868610):
-such as "oh look, M is a free R-module and R is isomorphic to S so M is now a free S-module"
+<p>such as "oh look, M is a free R-module and R is isomorphic to S so M is now a free S-module"</p>
 
 #### [ Kevin Buzzard (Apr 30 2018 at 00:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125868661):
-or "M is a Noetherian Cohen-Macauley R-module which is R-generated by these three elements and R is isomorphic to S so now M is a Noetherian Cohen-Macauley S-module which is S-generated by these three elements"
+<p>or "M is a Noetherian Cohen-Macauley R-module which is R-generated by these three elements and R is isomorphic to S so now M is a Noetherian Cohen-Macauley S-module which is S-generated by these three elements"</p>
 
 #### [ Kevin Buzzard (Apr 30 2018 at 00:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125868662):
-and the definition of Cohen-Macauley is pretty complicated
+<p>and the definition of Cohen-Macauley is pretty complicated</p>
 
 #### [ Kevin Buzzard (Apr 30 2018 at 00:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125868663):
-but it complies with the unwritten promise
+<p>but it complies with the unwritten promise</p>
 
 #### [ Kevin Buzzard (Apr 30 2018 at 00:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125868667):
-which is that it only depends on the underlying ring up to ring-isomorphism
+<p>which is that it only depends on the underlying ring up to ring-isomorphism</p>
 
 #### [ Kevin Buzzard (Apr 30 2018 at 00:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125868678):
-It seems to me that mathematicians have got a really good intuitive feeling for these promises
+<p>It seems to me that mathematicians have got a really good intuitive feeling for these promises</p>
 
 #### [ Simon Hudon (Apr 30 2018 at 00:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125868728):
-Nice
+<p>Nice</p>
 
 #### [ Simon Hudon (Apr 30 2018 at 00:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125868774):
-Given a structure like group or ring, if you derive `transportable` it gives automatically the isomorphism between the properties of the structures whenever you have an isomorphism between two types
+<p>Given a structure like group or ring, if you derive <code>transportable</code> it gives automatically the isomorphism between the properties of the structures whenever you have an isomorphism between two types</p>
 
 #### [ Simon Hudon (Apr 30 2018 at 00:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125868815):
-I'm getting close to a complete derivation and it works with group so far. It will be fun to see you try it with other structures
+<p>I'm getting close to a complete derivation and it works with group so far. It will be fun to see you try it with other structures</p>
 
 #### [ Mario Carneiro (Apr 30 2018 at 04:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125874746):
-```quote
-The free theorem for `Pi X, X` is: for all X, for all f : X -> X, for all x : X, f x = x :-)
-```
-That's not correct. You need to quantify over polymorphic functions: for all f : (\forall X, X -> X), for all X, for all x : X, f X x = x
+<blockquote>
+<p>The free theorem for <code>Pi X, X</code> is: for all X, for all f : X -&gt; X, for all x : X, f x = x :-)</p>
+</blockquote>
+<p>That's not correct. You need to quantify over polymorphic functions: for all f : (\forall X, X -&gt; X), for all X, for all x : X, f X x = x</p>
 
 #### [ Mario Carneiro (Apr 30 2018 at 04:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125874930):
-As Kenny and others have noted, the definition of chN is not correct in dependent type theories like lean because there are additional polymorphic functions that are not parametric. However, you can repair the church nat construction by taking a subtype to enforce that the polymorphic functions are functorial. For example, church unit is:
-```
-def ch_unit := { f : ∀ X : Type, X → X // ∀ (X Y) (g : X → Y) x, f Y (g x) = g (f X x) }
-```
-Can you see the correct condition for church nat?
+<p>As Kenny and others have noted, the definition of chN is not correct in dependent type theories like lean because there are additional polymorphic functions that are not parametric. However, you can repair the church nat construction by taking a subtype to enforce that the polymorphic functions are functorial. For example, church unit is:</p>
+<div class="codehilite"><pre><span></span>def ch_unit := { f : ∀ X : Type, X → X // ∀ (X Y) (g : X → Y) x, f Y (g x) = g (f X x) }
+</pre></div>
+
+
+<p>Can you see the correct condition for church nat?</p>
 
 #### [ Mario Carneiro (Apr 30 2018 at 04:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125874995):
-By the way, to generate the type of a church encoding, the idea is just look at the recursor for the inductive type. For example, ignoring dependencies in the motive, the type of nat.rec is `∀ C, C → (C → C) → ℕ → C`, so if you move the `ℕ → `to the beginning this is exactly the canonical map from N to chN (and the remainder `∀ C, C → (C → C) → C` is chN itself). (The ordering of the two arguments is not important, and only reflects that `zero` is the first constructor and `succ` is the second.)
+<p>By the way, to generate the type of a church encoding, the idea is just look at the recursor for the inductive type. For example, ignoring dependencies in the motive, the type of nat.rec is <code>∀ C, C → (C → C) → ℕ → C</code>, so if you move the <code>ℕ → </code>to the beginning this is exactly the canonical map from N to chN (and the remainder <code>∀ C, C → (C → C) → C</code> is chN itself). (The ordering of the two arguments is not important, and only reflects that <code>zero</code> is the first constructor and <code>succ</code> is the second.)</p>
 
 #### [ Reid Barton (Apr 30 2018 at 04:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125875260):
-@**Simon Hudon**, did you see https://gist.github.com/rwbarton/08924014ebc7b1cf68ec624989249aff?
+<p><span class="user-mention" data-user-id="110026">@Simon Hudon</span>, did you see <a href="https://gist.github.com/rwbarton/08924014ebc7b1cf68ec624989249aff" target="_blank" title="https://gist.github.com/rwbarton/08924014ebc7b1cf68ec624989249aff">https://gist.github.com/rwbarton/08924014ebc7b1cf68ec624989249aff</a>?</p>
 
 #### [ Reid Barton (Apr 30 2018 at 04:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125875554):
-I'm thinking now that having a `class` is problematic because the type of the transport function depends on the parameters of the structure in a way that I don't think can be encoded in a `class` declaration. Plus I don't see any real advantage to having the class anyways. Rather we could just generate definitions `group.transport`, `ring.transport` etc.
+<p>I'm thinking now that having a <code>class</code> is problematic because the type of the transport function depends on the parameters of the structure in a way that I don't think can be encoded in a <code>class</code> declaration. Plus I don't see any real advantage to having the class anyways. Rather we could just generate definitions <code>group.transport</code>, <code>ring.transport</code> etc.</p>
 
 #### [ Simon Hudon (Apr 30 2018 at 04:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125875922):
-I don't think I see your point
+<p>I don't think I see your point</p>
 
 #### [ Reid Barton (Apr 30 2018 at 04:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125875971):
-My two messages above are unrelated to each other
+<p>My two messages above are unrelated to each other</p>
 
 #### [ Reid Barton (Apr 30 2018 at 04:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125875978):
-so I'm not sure what the point that you don't see is :simple_smile:
+<p>so I'm not sure what the point that you don't see is <span class="emoji emoji-1f642" title="simple smile">:simple_smile:</span></p>
 
 #### [ Reid Barton (Apr 30 2018 at 04:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125876020):
-The gist is supposed to be an example of what we want to have autogenerated: everything defined by `magic`
+<p>The gist is supposed to be an example of what we want to have autogenerated: everything defined by <code>magic</code></p>
 
 #### [ Reid Barton (Apr 30 2018 at 04:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125876032):
-But making `group.transportable` be an instance of a class is unnecessary and in general awkward (my gist already contains three classes, and if there are dependencies between the parameters of a structure then things get even more complicated)
+<p>But making <code>group.transportable</code> be an instance of a class is unnecessary and in general awkward (my gist already contains three classes, and if there are dependencies between the parameters of a structure then things get even more complicated)</p>
 
 #### [ Simon Hudon (Apr 30 2018 at 04:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125876229):
-Does your gist illustrate the awkwardness that you're referring to?
+<p>Does your gist illustrate the awkwardness that you're referring to?</p>
 
 #### [ Reid Barton (Apr 30 2018 at 04:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125876246):
-To the extent that I already had to define three separate classes `transportable`, `transportable2`, `transportable3`
+<p>To the extent that I already had to define three separate classes <code>transportable</code>, <code>transportable2</code>, <code>transportable3</code></p>
 
 #### [ Reid Barton (Apr 30 2018 at 04:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125876252):
-It doesn't illustrate what happens when there are dependencies between arguments
+<p>It doesn't illustrate what happens when there are dependencies between arguments</p>
 
 #### [ Simon Hudon (Apr 30 2018 at 04:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125876298):
-But if you don't make them classes you still need to define records, no?
+<p>But if you don't make them classes you still need to define records, no?</p>
 
 #### [ Reid Barton (Apr 30 2018 at 04:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125876311):
-Well the instance called `group.transportable` is only really used as `transport group`, so `transport group` can just be named `group.transport` and no need for a structure.
+<p>Well the instance called <code>group.transportable</code> is only really used as <code>transport group</code>, so <code>transport group</code> can just be named <code>group.transport</code> and no need for a structure.</p>
 
 #### [ Reid Barton (Apr 30 2018 at 04:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125876352):
-If we need the `on_refl` and `on_trans` fields then they can be called `group.transport_on_refl` or something
+<p>If we need the <code>on_refl</code> and <code>on_trans</code> fields then they can be called <code>group.transport_on_refl</code> or something</p>
 
 #### [ Reid Barton (Apr 30 2018 at 05:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125876409):
-By analogy, there's no class that contains all the `.rec` functions which are defined for inductive types
+<p>By analogy, there's no class that contains all the <code>.rec</code> functions which are defined for inductive types</p>
 
 #### [ Simon Hudon (Apr 30 2018 at 05:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125876510):
-I see that you're arguing against the necessity. I don't see any issue with using a class nonetheless. And the upside of having one is that it allows you to generalize lemmas or definitions. It might be that, as you seem to suggest, there's no ground breaking theorems about those classes. It can still allow you to reduce the boilerplate code
+<p>I see that you're arguing against the necessity. I don't see any issue with using a class nonetheless. And the upside of having one is that it allows you to generalize lemmas or definitions. It might be that, as you seem to suggest, there's no ground breaking theorems about those classes. It can still allow you to reduce the boilerplate code</p>
 
 #### [ Reid Barton (Apr 30 2018 at 05:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125876762):
-Well at a minimum, you'd need one class per number of type arguments, unless there is a clever way to express `transportable2` in terms of `transportable` twice.
+<p>Well at a minimum, you'd need one class per number of type arguments, unless there is a clever way to express <code>transportable2</code> in terms of <code>transportable</code> twice.</p>
 
 #### [ Reid Barton (Apr 30 2018 at 05:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125876766):
-I'm not entirely sure what should happen when there are dependencies between arguments. https://gist.github.com/rwbarton/d847ef6d1783f0d0859eb80de8327bad shows one possibility. Here `t1_space` has two arguments, a type `α` and a topology on `α`. Since the second argument is not a type, there is no equivalence in that position.
+<p>I'm not entirely sure what should happen when there are dependencies between arguments. <a href="https://gist.github.com/rwbarton/d847ef6d1783f0d0859eb80de8327bad" target="_blank" title="https://gist.github.com/rwbarton/d847ef6d1783f0d0859eb80de8327bad">https://gist.github.com/rwbarton/d847ef6d1783f0d0859eb80de8327bad</a> shows one possibility. Here <code>t1_space</code> has two arguments, a type <code>α</code> and a topology on <code>α</code>. Since the second argument is not a type, there is no equivalence in that position.</p>
 
 #### [ Simon Hudon (Apr 30 2018 at 05:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125877059):
-Having three separate classes does not seem like much of a problem to me. But you can probably equate `transportable2 f` to `transportable (uncurry f)`, that way, you can use some of the same definitions for both. And for dependent arguments, if it's more trouble than it's worth, you may have a more ad hoc approach (without classes) for those cases.
+<p>Having three separate classes does not seem like much of a problem to me. But you can probably equate <code>transportable2 f</code> to <code>transportable (uncurry f)</code>, that way, you can use some of the same definitions for both. And for dependent arguments, if it's more trouble than it's worth, you may have a more ad hoc approach (without classes) for those cases.</p>
 
 #### [ Mario Carneiro (Apr 30 2018 at 07:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125880638):
-The range of possible `transportable` classes is unbounded, not just because of things like `transportable2` for other values of 2 but also because of higher order functors like `(Type -> Type) -> Type`, and Pi types like `\forall A, group A -> Type`. If a tactic generated the transportable theorem for a functor, it would need to select the theorem statement from an unbounded class of statements, namely the "free theorems"
+<p>The range of possible <code>transportable</code> classes is unbounded, not just because of things like <code>transportable2</code> for other values of 2 but also because of higher order functors like <code>(Type -&gt; Type) -&gt; Type</code>, and Pi types like <code>\forall A, group A -&gt; Type</code>. If a tactic generated the transportable theorem for a functor, it would need to select the theorem statement from an unbounded class of statements, namely the "free theorems"</p>
 
 #### [ Mario Carneiro (Apr 30 2018 at 07:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125880688):
-You can express `transportable2` in a more modular way, by generalizing `equiv`. Define an `~=` relation on (many) types by induction as follows: If `x y : Type` then `x ~= y` means `equiv x y` (i.e. the usual sense), and if `f g : A -> B` then `f ~= g` iff `\forall x y, x ~= y -> f x ~= g y`. Then `transportable x` means `x ~= x`. This generalizes `transportable2` and `transportable3`, and also yields transportable for `F : (Type -> Type) -> Type`, asserting that if `f ~= g` at `Type -> Type` then `F f ~= F g`.
+<p>You can express <code>transportable2</code> in a more modular way, by generalizing <code>equiv</code>. Define an <code>~=</code> relation on (many) types by induction as follows: If <code>x y : Type</code> then <code>x ~= y</code> means <code>equiv x y</code> (i.e. the usual sense), and if <code>f g : A -&gt; B</code> then <code>f ~= g</code> iff <code>\forall x y, x ~= y -&gt; f x ~= g y</code>. Then <code>transportable x</code> means <code>x ~= x</code>. This generalizes <code>transportable2</code> and <code>transportable3</code>, and also yields transportable for <code>F : (Type -&gt; Type) -&gt; Type</code>, asserting that if <code>f ~= g</code> at <code>Type -&gt; Type</code> then <code>F f ~= F g</code>.</p>
 
 #### [ Kevin Buzzard (Apr 30 2018 at 08:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125881912):
-```quote
-As Kenny and others have noted, the definition of chN is not correct in dependent type theories like lean because there are additional polymorphic functions that are not parametric. However, you can repair the church nat construction by taking a subtype to enforce that the polymorphic functions are functorial.
-```
-You have put the "free theorem" in with the definition! It really is free now :-)
+<blockquote>
+<p>As Kenny and others have noted, the definition of chN is not correct in dependent type theories like lean because there are additional polymorphic functions that are not parametric. However, you can repair the church nat construction by taking a subtype to enforce that the polymorphic functions are functorial.</p>
+</blockquote>
+<p>You have put the "free theorem" in with the definition! It really is free now :-)</p>
 
 #### [ Kevin Buzzard (Apr 30 2018 at 08:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125881965):
-If you demand that a church numeral is functorial, then the naturals are a universal object because they are freely generated by `x : X` (zero) and `f : X -> X` (succ), so any church numeral will be determined by its behaviour on the universal object, with proof by a trivial diagram chase.
+<p>If you demand that a church numeral is functorial, then the naturals are a universal object because they are freely generated by <code>x : X</code> (zero) and <code>f : X -&gt; X</code> (succ), so any church numeral will be determined by its behaviour on the universal object, with proof by a trivial diagram chase.</p>
 
 #### [ Kevin Buzzard (Apr 30 2018 at 08:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125881967):
-And so a church numeral is uniquely determined by what it does on nat, which is precisely the missing theorem for proving the equiv between church nat and nat
+<p>And so a church numeral is uniquely determined by what it does on nat, which is precisely the missing theorem for proving the equiv between church nat and nat</p>
 
 #### [ Kevin Buzzard (Apr 30 2018 at 08:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125882007):
-A follow-up to the paper should be "Dependent type theory : extra conditions for free"
+<p>A follow-up to the paper should be "Dependent type theory : extra conditions for free"</p>
 
 #### [ Kevin Buzzard (Apr 30 2018 at 08:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125882009):
-doesn't sound as marketable
+<p>doesn't sound as marketable</p>
 
 #### [ Kevin Buzzard (Apr 30 2018 at 08:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125882053):
-Initially I had thought that church numerals were just some stupid trick for encoding nat. I hadn't until now realised that they were a literal translation of the inductive definition of nat into another language.
+<p>Initially I had thought that church numerals were just some stupid trick for encoding nat. I hadn't until now realised that they were a literal translation of the inductive definition of nat into another language.</p>
 
 #### [ Kevin Buzzard (Apr 30 2018 at 08:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125882071):
-But I hadn't got the translation quite right -- I was using the definition I found in Software Foundations. Maybe they are the translation into some other flavour of theory e.g. some lambda calculus thing
+<p>But I hadn't got the translation quite right -- I was using the definition I found in Software Foundations. Maybe they are the translation into some other flavour of theory e.g. some lambda calculus thing</p>
 
 #### [ Kevin Buzzard (Apr 30 2018 at 08:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125882116):
-So satan was bad after all -- he shouldn't really be allowed to be a church nat because he's not functorial enough.
+<p>So satan was bad after all -- he shouldn't really be allowed to be a church nat because he's not functorial enough.</p>
 
 #### [ Kevin Buzzard (May 01 2018 at 21:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125958209):
-Some more church nat puzzles
+<p>Some more church nat puzzles</p>
 
 #### [ Kevin Buzzard (May 01 2018 at 21:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125958215):
-```lean
-def chℕ := Π X : Type, (X → X) → X → X
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">chℕ</span> <span class="o">:=</span> <span class="bp">Π</span> <span class="n">X</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">,</span> <span class="o">(</span><span class="n">X</span> <span class="bp">→</span> <span class="n">X</span><span class="o">)</span> <span class="bp">→</span> <span class="n">X</span> <span class="bp">→</span> <span class="n">X</span>
 
-namespace chnat 
+<span class="kn">namespace</span> <span class="n">chnat</span>
 
-open nat
+<span class="kn">open</span> <span class="n">nat</span>
 
-definition to_nat : chℕ → ℕ := λ m, m ℕ nat.succ 0 
+<span class="kn">definition</span> <span class="n">to_nat</span> <span class="o">:</span> <span class="n">chℕ</span> <span class="bp">→</span> <span class="bp">ℕ</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">m</span><span class="o">,</span> <span class="n">m</span> <span class="bp">ℕ</span> <span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="mi">0</span>
 
-def of_nat : ℕ → chℕ 
-| (zero) := λ X f x, x
-| (succ n) := λ X f x, f (of_nat n X f x) -- f (f^n x)
+<span class="n">def</span> <span class="n">of_nat</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="n">chℕ</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">zero</span><span class="o">)</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">X</span> <span class="n">f</span> <span class="n">x</span><span class="o">,</span> <span class="n">x</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">succ</span> <span class="n">n</span><span class="o">)</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">X</span> <span class="n">f</span> <span class="n">x</span><span class="o">,</span> <span class="n">f</span> <span class="o">(</span><span class="n">of_nat</span> <span class="n">n</span> <span class="n">X</span> <span class="n">f</span> <span class="n">x</span><span class="o">)</span> <span class="c1">-- f (f^n x)</span>
 
-definition of_nat' : ℕ → chℕ 
-| 0 := λ X f x, x
-| (n + 1) := λ X f x, of_nat' n X f (f x) -- f^n (f x)
+<span class="kn">definition</span> <span class="n">of_nat&#39;</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="n">chℕ</span>
+<span class="bp">|</span> <span class="mi">0</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">X</span> <span class="n">f</span> <span class="n">x</span><span class="o">,</span> <span class="n">x</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">X</span> <span class="n">f</span> <span class="n">x</span><span class="o">,</span> <span class="n">of_nat&#39;</span> <span class="n">n</span> <span class="n">X</span> <span class="n">f</span> <span class="o">(</span><span class="n">f</span> <span class="n">x</span><span class="o">)</span> <span class="c1">-- f^n (f x)</span>
 
-theorem nat_of_chnat_of_nat (n : ℕ) : to_nat (of_nat n) = n := sorry
-theorem nat_of_chnat_of_nat' (n : ℕ) : to_nat (of_nat' n) = n := sorry
-theorem of_nat'_is_of_nat (n : ℕ) : of_nat n = of_nat' n := sorry 
+<span class="kn">theorem</span> <span class="n">nat_of_chnat_of_nat</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">to_nat</span> <span class="o">(</span><span class="n">of_nat</span> <span class="n">n</span><span class="o">)</span> <span class="bp">=</span> <span class="n">n</span> <span class="o">:=</span> <span class="n">sorry</span>
+<span class="kn">theorem</span> <span class="n">nat_of_chnat_of_nat&#39;</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">to_nat</span> <span class="o">(</span><span class="n">of_nat&#39;</span> <span class="n">n</span><span class="o">)</span> <span class="bp">=</span> <span class="n">n</span> <span class="o">:=</span> <span class="n">sorry</span>
+<span class="kn">theorem</span> <span class="n">of_nat&#39;_is_of_nat</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">of_nat</span> <span class="n">n</span> <span class="bp">=</span> <span class="n">of_nat&#39;</span> <span class="n">n</span> <span class="o">:=</span> <span class="n">sorry</span>
 
-end chnat
-```
+<span class="kn">end</span> <span class="n">chnat</span>
+</pre></div>
 
 #### [ Kevin Buzzard (May 01 2018 at 21:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/125958222):
-I haven't proved all of them, I expected them all to be true.
+<p>I haven't proved all of them, I expected them all to be true.</p>
 
 #### [ Kevin Buzzard (May 10 2018 at 12:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/126359013):
-The typeclass `is_group_hom` (in `algebra/group.lean` in mathlib) transports across a lot of structure
+<p>The typeclass <code>is_group_hom</code> (in <code>algebra/group.lean</code> in mathlib) transports across a lot of structure</p>
 
 #### [ Kevin Buzzard (May 10 2018 at 12:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/126359063):
-For example, `equiv.Pi_congr_right` says that if (F i) and (G i) biject for all i, then Pi i, F i bijects with Pi i, G i
+<p>For example, <code>equiv.Pi_congr_right</code> says that if (F i) and (G i) biject for all i, then Pi i, F i bijects with Pi i, G i</p>
 
 #### [ Kevin Buzzard (May 10 2018 at 12:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/126359070):
-but if the bijections are all group homs then the product bijection is also a group hom
+<p>but if the bijections are all group homs then the product bijection is also a group hom</p>
 
 #### [ Kevin Buzzard (May 10 2018 at 12:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/126359073):
-and the proof is idea-free
+<p>and the proof is idea-free</p>
 
 #### [ Kevin Buzzard (May 10 2018 at 12:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/126359117):
-so instead of having to write my own instance for this (which I just did)
+<p>so instead of having to write my own instance for this (which I just did)</p>
 
 #### [ Kevin Buzzard (May 10 2018 at 12:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/126359133):
-```lean
-instance is_add_group_hom.equiv.Pi_congr_right {γ : Type u} {F : γ → Type u} {G : γ → Type u} [∀ i, add_group (F i)]
-[∀ i, add_group (G i)] (H : ∀ i : γ, F i ≃ G i) [∀ i, is_add_group_hom (H i)] :
- is_add_group_hom (equiv.Pi_congr_right H) := ⟨λ a b, funext $ λ i, 
- show H i ((a i) + (b i)) = H i (a i) + H i (b i),
-```
+<div class="codehilite"><pre><span></span><span class="kn">instance</span> <span class="n">is_add_group_hom</span><span class="bp">.</span><span class="n">equiv</span><span class="bp">.</span><span class="n">Pi_congr_right</span> <span class="o">{</span><span class="n">γ</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">{</span><span class="n">F</span> <span class="o">:</span> <span class="n">γ</span> <span class="bp">→</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">{</span><span class="n">G</span> <span class="o">:</span> <span class="n">γ</span> <span class="bp">→</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">[</span><span class="bp">∀</span> <span class="n">i</span><span class="o">,</span> <span class="n">add_group</span> <span class="o">(</span><span class="n">F</span> <span class="n">i</span><span class="o">)]</span>
+<span class="o">[</span><span class="bp">∀</span> <span class="n">i</span><span class="o">,</span> <span class="n">add_group</span> <span class="o">(</span><span class="n">G</span> <span class="n">i</span><span class="o">)]</span> <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">i</span> <span class="o">:</span> <span class="n">γ</span><span class="o">,</span> <span class="n">F</span> <span class="n">i</span> <span class="err">≃</span> <span class="n">G</span> <span class="n">i</span><span class="o">)</span> <span class="o">[</span><span class="bp">∀</span> <span class="n">i</span><span class="o">,</span> <span class="n">is_add_group_hom</span> <span class="o">(</span><span class="n">H</span> <span class="n">i</span><span class="o">)]</span> <span class="o">:</span>
+ <span class="n">is_add_group_hom</span> <span class="o">(</span><span class="n">equiv</span><span class="bp">.</span><span class="n">Pi_congr_right</span> <span class="n">H</span><span class="o">)</span> <span class="o">:=</span> <span class="bp">⟨λ</span> <span class="n">a</span> <span class="n">b</span><span class="o">,</span> <span class="n">funext</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">i</span><span class="o">,</span>
+ <span class="k">show</span> <span class="n">H</span> <span class="n">i</span> <span class="o">((</span><span class="n">a</span> <span class="n">i</span><span class="o">)</span> <span class="bp">+</span> <span class="o">(</span><span class="n">b</span> <span class="n">i</span><span class="o">))</span> <span class="bp">=</span> <span class="n">H</span> <span class="n">i</span> <span class="o">(</span><span class="n">a</span> <span class="n">i</span><span class="o">)</span> <span class="bp">+</span> <span class="n">H</span> <span class="n">i</span> <span class="o">(</span><span class="n">b</span> <span class="n">i</span><span class="o">),</span>
+</pre></div>
 
 #### [ Kevin Buzzard (May 10 2018 at 12:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/126359135):
-(OK so it was additive group homs, which is a slightly different typeclass)
+<p>(OK so it was additive group homs, which is a slightly different typeclass)</p>
 
 #### [ Kevin Buzzard (May 10 2018 at 12:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/126359143):
-this should surely have been auto-generated for me when the type class inference system realised I needed it. Right?
+<p>this should surely have been auto-generated for me when the type class inference system realised I needed it. Right?</p>
 
 #### [ Kevin Buzzard (May 10 2018 at 12:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/126359150):
-Similarly, given
+<p>Similarly, given</p>
 
 #### [ Kevin Buzzard (May 10 2018 at 12:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/126359187):
-```lean
-definition Pi_lift_map₁ {γ : Type u} {F : γ → Type u} {G : γ → Type u} 
-  (H : ∀ i : γ, F i → G i) : (Π i, F i) → Π i, G i := λ Fi i, H i (Fi i)
-```
+<div class="codehilite"><pre><span></span><span class="kn">definition</span> <span class="n">Pi_lift_map₁</span> <span class="o">{</span><span class="n">γ</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">{</span><span class="n">F</span> <span class="o">:</span> <span class="n">γ</span> <span class="bp">→</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">{</span><span class="n">G</span> <span class="o">:</span> <span class="n">γ</span> <span class="bp">→</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span>
+  <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">i</span> <span class="o">:</span> <span class="n">γ</span><span class="o">,</span> <span class="n">F</span> <span class="n">i</span> <span class="bp">→</span> <span class="n">G</span> <span class="n">i</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="bp">Π</span> <span class="n">i</span><span class="o">,</span> <span class="n">F</span> <span class="n">i</span><span class="o">)</span> <span class="bp">→</span> <span class="bp">Π</span> <span class="n">i</span><span class="o">,</span> <span class="n">G</span> <span class="n">i</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">Fi</span> <span class="n">i</span><span class="o">,</span> <span class="n">H</span> <span class="n">i</span> <span class="o">(</span><span class="n">Fi</span> <span class="n">i</span><span class="o">)</span>
+</pre></div>
 
 #### [ Kevin Buzzard (May 10 2018 at 12:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/126359192):
-I should get a free instance of "all the H i are group homs implies their product is"
+<p>I should get a free instance of "all the H i are group homs implies their product is"</p>
 
 #### [ Kenny Lau (May 10 2018 at 12:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/126359252):
-that's the UMP of product right
+<p>that's the UMP of product right</p>
 
 #### [ Kevin Buzzard (May 10 2018 at 12:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/126359306):
-Pi_lift_map2 is the UMP of product
+<p>Pi_lift_map2 is the UMP of product</p>
 
 #### [ Mario Carneiro (May 10 2018 at 12:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/126359317):
-This is not exactly trivial. It's conceivable it falls out of the `Pi_instance` tactic stuff, but you do have to make use of some lemmas and funext in appropriate places
+<p>This is not exactly trivial. It's conceivable it falls out of the <code>Pi_instance</code> tactic stuff, but you do have to make use of some lemmas and funext in appropriate places</p>
 
 #### [ Kevin Buzzard (May 10 2018 at 12:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/126359366):
-I would like to make Lean behave more like a mathematician
+<p>I would like to make Lean behave more like a mathematician</p>
 
 #### [ Kevin Buzzard (May 10 2018 at 12:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/126359369):
-and mathematicians know that the function one is easy
+<p>and mathematicians know that the function one is easy</p>
 
 #### [ Kevin Buzzard (May 10 2018 at 12:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/126359371):
-and they instantly deduce the equiv one
+<p>and they instantly deduce the equiv one</p>
 
 #### [ Mario Carneiro (May 10 2018 at 12:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/126359372):
-I can see `simp` being able to do this one with some hints
+<p>I can see <code>simp</code> being able to do this one with some hints</p>
 
 #### [ Mario Carneiro (May 10 2018 at 12:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/126359376):
-the equiv one is literally the same theorem though
+<p>the equiv one is literally the same theorem though</p>
 
 #### [ Kevin Buzzard (May 10 2018 at 12:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/126359382):
-There's a meta-hint for this sort of thing
+<p>There's a meta-hint for this sort of thing</p>
 
 #### [ Mario Carneiro (May 10 2018 at 12:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/126359384):
-that is trivial even by lean's standards
+<p>that is trivial even by lean's standards</p>
 
 #### [ Kevin Buzzard (May 10 2018 at 12:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/126359385):
-"To prove axiom X for the product, use axiom X on the factors"
+<p>"To prove axiom X for the product, use axiom X on the factors"</p>
 
 #### [ Kevin Buzzard (May 10 2018 at 12:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/126359388):
-I agree it's the same theorem, that's why it has the same proof
+<p>I agree it's the same theorem, that's why it has the same proof</p>
 
 #### [ Kevin Buzzard (May 10 2018 at 12:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/126359391):
-but you told me to write it twice
+<p>but you told me to write it twice</p>
 
 #### [ Kevin Buzzard (May 10 2018 at 12:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/126359392):
-because you said Lean needs to be told it twice
+<p>because you said Lean needs to be told it twice</p>
 
 #### [ Kevin Buzzard (May 10 2018 at 12:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/126359393):
-Right?
+<p>Right?</p>
 
 #### [ Mario Carneiro (May 10 2018 at 12:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/126359394):
-you should apply the theorem, not prove it twice
+<p>you should apply the theorem, not prove it twice</p>
 
 #### [ Kevin Buzzard (May 10 2018 at 12:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/126359445):
-heh
+<p>heh</p>
 
 #### [ Mario Carneiro (May 10 2018 at 12:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/126359447):
-def X := proof, def Y := X
+<p>def X := proof, def Y := X</p>
 
 #### [ Kevin Buzzard (May 10 2018 at 12:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/126359507):
-ha ha
+<p>ha ha</p>
 
 #### [ Kevin Buzzard (May 10 2018 at 12:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/126359509):
-proof `is_add_group_hom.Pi_lift H` fails
+<p>proof <code>is_add_group_hom.Pi_lift H</code> fails</p>
 
 #### [ Kevin Buzzard (May 10 2018 at 12:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/126359510):
-proof `is_add_group_hom.Pi_lift (λ i, H i)` succeeds
+<p>proof <code>is_add_group_hom.Pi_lift (λ i, H i)</code> succeeds</p>
 
 #### [ Kevin Buzzard (May 10 2018 at 12:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/126359518):
-Lean knows it's looking for something of a certain type lam i, map
+<p>Lean knows it's looking for something of a certain type lam i, map</p>
 
 #### [ Kevin Buzzard (May 10 2018 at 12:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/126359519):
-and H i is an equiv which coerces to map
+<p>and H i is an equiv which coerces to map</p>
 
 #### [ Kevin Buzzard (May 10 2018 at 12:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/126359520):
-but it's not smart enough to do it without the i
+<p>but it's not smart enough to do it without the i</p>
 
 #### [ Mario Carneiro (May 10 2018 at 13:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/126360142):
-what about `is_add_group_hom.Pi_lift _`?
+<p>what about <code>is_add_group_hom.Pi_lift _</code>?</p>
 
 #### [ Kevin Buzzard (May 10 2018 at 15:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/126365134):
-nope
+<p>nope</p>
 
 #### [ Kevin Buzzard (Oct 08 2018 at 11:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22canonically%22%20identifying%20two%20types/near/135390412):
-Ooh look, this is back in the days when I used to post one paragraph as ten one-sentence posts.
-
-I finally got around to making this an issue.
-
-https://github.com/leanprover/mathlib/issues/408
+<p>Ooh look, this is back in the days when I used to post one paragraph as ten one-sentence posts.</p>
+<p>I finally got around to making this an issue.</p>
+<p><a href="https://github.com/leanprover/mathlib/issues/408" target="_blank" title="https://github.com/leanprover/mathlib/issues/408">https://github.com/leanprover/mathlib/issues/408</a></p>
 
 
 {% endraw %}

@@ -12,46 +12,46 @@ permalink: archive/113489newmembers/50376Inductivedefinitions.html
 
 {% raw %}
 #### [ Ken Roe (Aug 28 2018 at 18:06)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Inductive%20definitions/near/132926297):
-I see a number of comments in my code that a definition of the form:
-```lean
-inductive allFirsts {t1} {t2} : list t1 → list (t1 × t2) → Prop
- | AFNil : allFirsts list.nil list.nil
- | AFCons : ∀ fx fy r r', allFirsts r r' → allFirsts (fx::r) ((fx,fy)::r')
-```
-can be rewritten as:
-```lean
-allFirsts l1 l2 <-> l2.map prod.fst = l1
-```
+<p>I see a number of comments in my code that a definition of the form:</p>
+<div class="codehilite"><pre><span></span><span class="kn">inductive</span> <span class="n">allFirsts</span> <span class="o">{</span><span class="n">t1</span><span class="o">}</span> <span class="o">{</span><span class="n">t2</span><span class="o">}</span> <span class="o">:</span> <span class="n">list</span> <span class="n">t1</span> <span class="bp">→</span> <span class="n">list</span> <span class="o">(</span><span class="n">t1</span> <span class="bp">×</span> <span class="n">t2</span><span class="o">)</span> <span class="bp">→</span> <span class="kt">Prop</span>
+ <span class="bp">|</span> <span class="n">AFNil</span> <span class="o">:</span> <span class="n">allFirsts</span> <span class="n">list</span><span class="bp">.</span><span class="n">nil</span> <span class="n">list</span><span class="bp">.</span><span class="n">nil</span>
+ <span class="bp">|</span> <span class="n">AFCons</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">fx</span> <span class="n">fy</span> <span class="n">r</span> <span class="n">r&#39;</span><span class="o">,</span> <span class="n">allFirsts</span> <span class="n">r</span> <span class="n">r&#39;</span> <span class="bp">→</span> <span class="n">allFirsts</span> <span class="o">(</span><span class="n">fx</span><span class="bp">::</span><span class="n">r</span><span class="o">)</span> <span class="o">((</span><span class="n">fx</span><span class="o">,</span><span class="n">fy</span><span class="o">)</span><span class="bp">::</span><span class="n">r&#39;</span><span class="o">)</span>
+</pre></div>
 
-The second form is not a complete definition.  How can I use this form as a definition?
+
+<p>can be rewritten as:</p>
+<div class="codehilite"><pre><span></span><span class="n">allFirsts</span> <span class="n">l1</span> <span class="n">l2</span> <span class="bp">&lt;-&gt;</span> <span class="n">l2</span><span class="bp">.</span><span class="n">map</span> <span class="n">prod</span><span class="bp">.</span><span class="n">fst</span> <span class="bp">=</span> <span class="n">l1</span>
+</pre></div>
+
+
+<p>The second form is not a complete definition.  How can I use this form as a definition?</p>
 
 #### [ Chris Hughes (Aug 28 2018 at 18:11)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Inductive%20definitions/near/132926525):
-`def allFirsts {t1 t2} (l1 : list t1) (l2 : list (t1 × t2)) : Prop := l2.map prod.fst = l1`
+<p><code>def allFirsts {t1 t2} (l1 : list t1) (l2 : list (t1 × t2)) : Prop := l2.map prod.fst = l1</code></p>
 
 #### [ Kevin Buzzard (Aug 28 2018 at 18:20)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Inductive%20definitions/near/132926967):
-```lean
-import tactic.interactive
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">interactive</span>
 
-inductive allFirsts {t1} {t2} : list t1 → list (t1 × t2) → Prop
- | AFNil : allFirsts list.nil list.nil
- | AFCons : ∀ fx fy r r', allFirsts r r' → allFirsts (fx::r) ((fx,fy)::r')
+<span class="kn">inductive</span> <span class="n">allFirsts</span> <span class="o">{</span><span class="n">t1</span><span class="o">}</span> <span class="o">{</span><span class="n">t2</span><span class="o">}</span> <span class="o">:</span> <span class="n">list</span> <span class="n">t1</span> <span class="bp">→</span> <span class="n">list</span> <span class="o">(</span><span class="n">t1</span> <span class="bp">×</span> <span class="n">t2</span><span class="o">)</span> <span class="bp">→</span> <span class="kt">Prop</span>
+ <span class="bp">|</span> <span class="n">AFNil</span> <span class="o">:</span> <span class="n">allFirsts</span> <span class="n">list</span><span class="bp">.</span><span class="n">nil</span> <span class="n">list</span><span class="bp">.</span><span class="n">nil</span>
+ <span class="bp">|</span> <span class="n">AFCons</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">fx</span> <span class="n">fy</span> <span class="n">r</span> <span class="n">r&#39;</span><span class="o">,</span> <span class="n">allFirsts</span> <span class="n">r</span> <span class="n">r&#39;</span> <span class="bp">→</span> <span class="n">allFirsts</span> <span class="o">(</span><span class="n">fx</span><span class="bp">::</span><span class="n">r</span><span class="o">)</span> <span class="o">((</span><span class="n">fx</span><span class="o">,</span><span class="n">fy</span><span class="o">)</span><span class="bp">::</span><span class="n">r&#39;</span><span class="o">)</span>
 
-example {t1 t2} (l1 : list t1) (l2 : list (t1 × t2)) :
-allFirsts l1 l2 <-> l2.map prod.fst = l1 :=
-begin
-  split,
-    intro H,
-    induction H,
-    refl,
-    simpa,
-  intro H,
-  induction H,
-  induction l2 with f12 l2,
-  exact allFirsts.AFNil,
-  cases f12 with f1 f2,
-  refine allFirsts.AFCons _ _ _ _ l2_ih,
-end
-```
+<span class="kn">example</span> <span class="o">{</span><span class="n">t1</span> <span class="n">t2</span><span class="o">}</span> <span class="o">(</span><span class="n">l1</span> <span class="o">:</span> <span class="n">list</span> <span class="n">t1</span><span class="o">)</span> <span class="o">(</span><span class="n">l2</span> <span class="o">:</span> <span class="n">list</span> <span class="o">(</span><span class="n">t1</span> <span class="bp">×</span> <span class="n">t2</span><span class="o">))</span> <span class="o">:</span>
+<span class="n">allFirsts</span> <span class="n">l1</span> <span class="n">l2</span> <span class="bp">&lt;-&gt;</span> <span class="n">l2</span><span class="bp">.</span><span class="n">map</span> <span class="n">prod</span><span class="bp">.</span><span class="n">fst</span> <span class="bp">=</span> <span class="n">l1</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">split</span><span class="o">,</span>
+    <span class="n">intro</span> <span class="n">H</span><span class="o">,</span>
+    <span class="n">induction</span> <span class="n">H</span><span class="o">,</span>
+    <span class="n">refl</span><span class="o">,</span>
+    <span class="n">simpa</span><span class="o">,</span>
+  <span class="n">intro</span> <span class="n">H</span><span class="o">,</span>
+  <span class="n">induction</span> <span class="n">H</span><span class="o">,</span>
+  <span class="n">induction</span> <span class="n">l2</span> <span class="k">with</span> <span class="n">f12</span> <span class="n">l2</span><span class="o">,</span>
+  <span class="n">exact</span> <span class="n">allFirsts</span><span class="bp">.</span><span class="n">AFNil</span><span class="o">,</span>
+  <span class="n">cases</span> <span class="n">f12</span> <span class="k">with</span> <span class="n">f1</span> <span class="n">f2</span><span class="o">,</span>
+  <span class="n">refine</span> <span class="n">allFirsts</span><span class="bp">.</span><span class="n">AFCons</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="n">l2_ih</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
 
 
 {% endraw %}

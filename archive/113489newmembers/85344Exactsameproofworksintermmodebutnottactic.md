@@ -12,73 +12,77 @@ permalink: archive/113489newmembers/85344Exactsameproofworksintermmodebutnottact
 
 {% raw %}
 #### [ Abhimanyu Pallavi Sudhir (Nov 16 2018 at 20:05)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Exact%20same%20proof%20works%20in%20term%20mode%20but%20not%20tactic/near/147838170):
-This works:
-```lean
-import data.real.basic
-lemma DUH : abs (2 : ℝ) = (2 : ℝ) := abs_of_pos two_pos
-```
-This works:
-```lean
-import data.real.basic
-lemma DUH : abs (2 : ℝ) = (2 : ℝ) := begin apply abs_of_pos, exact two_pos end
-```
-This doesn't work:
-```lean
-import data.real.basic
-lemma DUH : abs (2 : ℝ) = (2 : ℝ) := begin apply abs_of_pos (two_pos) end
-```
-This doesn't work:
-```lean
-import data.real.basic
-lemma DUH : abs (2 : ℝ) = (2 : ℝ) := begin apply @abs_of_pos _ _ 2 (two_pos) end
-```
-This works:
-```lean
-lemma DUH : abs (2 : ℝ) = (2 : ℝ) := begin rw abs_of_pos, exact two_pos end
-```
-This doesn't work:
-```lean
-lemma DUH : abs (2 : ℝ) = (2 : ℝ) := begin rw abs_of_pos (two_pos) end
-```
-Why? What's going on?
+<p>This works:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">real</span><span class="bp">.</span><span class="n">basic</span>
+<span class="kn">lemma</span> <span class="n">DUH</span> <span class="o">:</span> <span class="n">abs</span> <span class="o">(</span><span class="mi">2</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="mi">2</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">:=</span> <span class="n">abs_of_pos</span> <span class="n">two_pos</span>
+</pre></div>
+
+
+<p>This works:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">real</span><span class="bp">.</span><span class="n">basic</span>
+<span class="kn">lemma</span> <span class="n">DUH</span> <span class="o">:</span> <span class="n">abs</span> <span class="o">(</span><span class="mi">2</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="mi">2</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">:=</span> <span class="k">begin</span> <span class="n">apply</span> <span class="n">abs_of_pos</span><span class="o">,</span> <span class="n">exact</span> <span class="n">two_pos</span> <span class="kn">end</span>
+</pre></div>
+
+
+<p>This doesn't work:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">real</span><span class="bp">.</span><span class="n">basic</span>
+<span class="kn">lemma</span> <span class="n">DUH</span> <span class="o">:</span> <span class="n">abs</span> <span class="o">(</span><span class="mi">2</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="mi">2</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">:=</span> <span class="k">begin</span> <span class="n">apply</span> <span class="n">abs_of_pos</span> <span class="o">(</span><span class="n">two_pos</span><span class="o">)</span> <span class="kn">end</span>
+</pre></div>
+
+
+<p>This doesn't work:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">real</span><span class="bp">.</span><span class="n">basic</span>
+<span class="kn">lemma</span> <span class="n">DUH</span> <span class="o">:</span> <span class="n">abs</span> <span class="o">(</span><span class="mi">2</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="mi">2</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">:=</span> <span class="k">begin</span> <span class="n">apply</span> <span class="bp">@</span><span class="n">abs_of_pos</span> <span class="bp">_</span> <span class="bp">_</span> <span class="mi">2</span> <span class="o">(</span><span class="n">two_pos</span><span class="o">)</span> <span class="kn">end</span>
+</pre></div>
+
+
+<p>This works:</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">DUH</span> <span class="o">:</span> <span class="n">abs</span> <span class="o">(</span><span class="mi">2</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="mi">2</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">:=</span> <span class="k">begin</span> <span class="n">rw</span> <span class="n">abs_of_pos</span><span class="o">,</span> <span class="n">exact</span> <span class="n">two_pos</span> <span class="kn">end</span>
+</pre></div>
+
+
+<p>This doesn't work:</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">DUH</span> <span class="o">:</span> <span class="n">abs</span> <span class="o">(</span><span class="mi">2</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="mi">2</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">:=</span> <span class="k">begin</span> <span class="n">rw</span> <span class="n">abs_of_pos</span> <span class="o">(</span><span class="n">two_pos</span><span class="o">)</span> <span class="kn">end</span>
+</pre></div>
+
+
+<p>Why? What's going on?</p>
 
 #### [ Abhimanyu Pallavi Sudhir (Nov 16 2018 at 20:07)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Exact%20same%20proof%20works%20in%20term%20mode%20but%20not%20tactic/near/147838350):
-Oh, and this works: 
-
-```lean
-import data.real.basic
-lemma DUH : abs (2 : ℝ) = (2 : ℝ) := begin exact abs_of_pos (two_pos) end
-```
+<p>Oh, and this works: </p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">real</span><span class="bp">.</span><span class="n">basic</span>
+<span class="kn">lemma</span> <span class="n">DUH</span> <span class="o">:</span> <span class="n">abs</span> <span class="o">(</span><span class="mi">2</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="mi">2</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">:=</span> <span class="k">begin</span> <span class="n">exact</span> <span class="n">abs_of_pos</span> <span class="o">(</span><span class="n">two_pos</span><span class="o">)</span> <span class="kn">end</span>
+</pre></div>
 
 #### [ Abhimanyu Pallavi Sudhir (Nov 16 2018 at 20:09)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Exact%20same%20proof%20works%20in%20term%20mode%20but%20not%20tactic/near/147838487):
-I can understand there may be some "metavariables make things weird" explanation for `exact` working where `apply` doesn't, but I really don't get why the two rewrites have different results.
+<p>I can understand there may be some "metavariables make things weird" explanation for <code>exact</code> working where <code>apply</code> doesn't, but I really don't get why the two rewrites have different results.</p>
 
 #### [ Patrick Massot (Nov 16 2018 at 20:27)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Exact%20same%20proof%20works%20in%20term%20mode%20but%20not%20tactic/near/147839688):
-This all about elaboration
+<p>This all about elaboration</p>
 
 #### [ Patrick Massot (Nov 16 2018 at 20:28)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Exact%20same%20proof%20works%20in%20term%20mode%20but%20not%20tactic/near/147839772):
-The elaborator needs to guess the type of 2 in 2 > 0 (which is the statement of `two_pos`). When it tries to do that too early this fails
+<p>The elaborator needs to guess the type of 2 in 2 &gt; 0 (which is the statement of <code>two_pos</code>). When it tries to do that too early this fails</p>
 
 #### [ Patrick Massot (Nov 16 2018 at 20:28)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Exact%20same%20proof%20works%20in%20term%20mode%20but%20not%20tactic/near/147839801):
-You could probably save all attempts by type ascribing this two_pos using `(two_pos : (2 : R) > 0)`
+<p>You could probably save all attempts by type ascribing this two_pos using <code>(two_pos : (2 : R) &gt; 0)</code></p>
 
 #### [ Abhimanyu Pallavi Sudhir (Nov 16 2018 at 20:29)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Exact%20same%20proof%20works%20in%20term%20mode%20but%20not%20tactic/near/147839856):
-Ah yes, it seems `apply @abs_of_pos ℝ _ 2 (two_pos)` works too.
+<p>Ah yes, it seems <code>apply @abs_of_pos ℝ _ 2 (two_pos)</code> works too.</p>
 
 #### [ Abhimanyu Pallavi Sudhir (Nov 16 2018 at 20:31)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Exact%20same%20proof%20works%20in%20term%20mode%20but%20not%20tactic/near/147839979):
-But how does that explain `exact` working where `apply` doesn't?
+<p>But how does that explain <code>exact</code> working where <code>apply</code> doesn't?</p>
 
 #### [ Mario Carneiro (Nov 16 2018 at 20:31)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Exact%20same%20proof%20works%20in%20term%20mode%20but%20not%20tactic/near/147840032):
-apply needs to guess how many pis the result type has
+<p>apply needs to guess how many pis the result type has</p>
 
 #### [ Mario Carneiro (Nov 16 2018 at 20:32)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Exact%20same%20proof%20works%20in%20term%20mode%20but%20not%20tactic/near/147840095):
-`apply x` is basically the same as `refine x _ _ _` where the number of underscores depends on the type of `x`
+<p><code>apply x</code> is basically the same as <code>refine x _ _ _</code> where the number of underscores depends on the type of <code>x</code></p>
 
 #### [ Mario Carneiro (Nov 16 2018 at 20:33)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Exact%20same%20proof%20works%20in%20term%20mode%20but%20not%20tactic/near/147840125):
-This means that when elaborating `x` we don't know what type it is yet, while with `refine` or `exact` we know the type of `x` is the type of the goal
+<p>This means that when elaborating <code>x</code> we don't know what type it is yet, while with <code>refine</code> or <code>exact</code> we know the type of <code>x</code> is the type of the goal</p>
 
 #### [ Abhimanyu Pallavi Sudhir (Nov 16 2018 at 20:35)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Exact%20same%20proof%20works%20in%20term%20mode%20but%20not%20tactic/near/147840325):
-That makes sense. Thanks.
+<p>That makes sense. Thanks.</p>
 
 
 {% endraw %}

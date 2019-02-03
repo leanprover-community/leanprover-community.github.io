@@ -12,17 +12,17 @@ permalink: archive/113489newmembers/56407subtypevspsigma.html
 
 {% raw %}
 #### [ Sebastian Zimmer (Oct 14 2018 at 20:07)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/subtype%20vs%20psigma/near/135787450):
-What is the difference between `{a:α // p a}` and `Σ' a, P a`?
-It seems like they are both a dependent pair.
+<p>What is the difference between <code>{a:α // p a}</code> and <code>Σ' a, P a</code>?<br>
+It seems like they are both a dependent pair.</p>
 
 #### [ Chris Hughes (Oct 14 2018 at 20:08)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/subtype%20vs%20psigma/near/135787505):
-`psigma` is a less restrictive definition than `subtype`, because the second element does not have to be a proof, but for subtypes it does.
+<p><code>psigma</code> is a less restrictive definition than <code>subtype</code>, because the second element does not have to be a proof, but for subtypes it does.</p>
 
 #### [ Sebastian Zimmer (Oct 14 2018 at 20:09)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/subtype%20vs%20psigma/near/135787529):
-So in the case where the second element is a proof, which one would you recommend using?
+<p>So in the case where the second element is a proof, which one would you recommend using?</p>
 
 #### [ Chris Hughes (Oct 14 2018 at 20:10)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/subtype%20vs%20psigma/near/135787578):
-Definitely `subtype`. Subtypes have the extensionality rule, that two elements are equal iff the first of the pair is equal, which is very handy.
+<p>Definitely <code>subtype</code>. Subtypes have the extensionality rule, that two elements are equal iff the first of the pair is equal, which is very handy.</p>
 
 
 {% endraw %}

@@ -12,137 +12,135 @@ permalink: archive/113489newmembers/17253orderisowoes.html
 
 {% raw %}
 #### [ Bryan Gin-ge Chen (Oct 10 2018 at 03:55)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/order_iso%20woes/near/135512696):
-I'm trying to generalize [this function](https://github.com/leanprover-community/mathlib/blob/tutorials/order/partitions.lean#L366) (there's a typo, that should be a def not a lemma; nonetheless it works...). I want to prove that an `order_iso`gives rise to a `galois_insertion` but I'm stuck on what seems to me to be simple:
-```lean
-import order.galois_connection order.order_iso
+<p>I'm trying to generalize <a href="https://github.com/leanprover-community/mathlib/blob/tutorials/order/partitions.lean#L366" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/tutorials/order/partitions.lean#L366">this function</a> (there's a typo, that should be a def not a lemma; nonetheless it works...). I want to prove that an <code>order_iso</code>gives rise to a <code>galois_insertion</code> but I'm stuck on what seems to me to be simple:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">order</span><span class="bp">.</span><span class="n">galois_connection</span> <span class="n">order</span><span class="bp">.</span><span class="n">order_iso</span>
 
-namespace order_iso
-variables {β : Type*} {γ : Type*} [preorder β] [preorder γ] 
-{r : β → β → Prop} {s : γ → γ → Prop} (oi : order_iso r s)
+<span class="kn">namespace</span> <span class="n">order_iso</span>
+<span class="kn">variables</span> <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">{</span><span class="n">γ</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">preorder</span> <span class="n">β</span><span class="o">]</span> <span class="o">[</span><span class="n">preorder</span> <span class="n">γ</span><span class="o">]</span>
+<span class="o">{</span><span class="n">r</span> <span class="o">:</span> <span class="n">β</span> <span class="bp">→</span> <span class="n">β</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">}</span> <span class="o">{</span><span class="n">s</span> <span class="o">:</span> <span class="n">γ</span> <span class="bp">→</span> <span class="n">γ</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">}</span> <span class="o">(</span><span class="n">oi</span> <span class="o">:</span> <span class="n">order_iso</span> <span class="n">r</span> <span class="n">s</span><span class="o">)</span>
 
-set_option pp.implicit true
+<span class="kn">set_option</span> <span class="n">pp</span><span class="bp">.</span><span class="n">implicit</span> <span class="n">true</span>
 
-theorem to_galois_connection :
-  galois_connection (oi.to_fun) (oi.inv_fun) :=
-by unfold galois_connection;
-exact λ {b g}, calc (oi.to_fun b) ≤ g ↔ 
-  (oi.to_fun b) ≤ (oi.to_fun (oi.inv_fun g)) : by rw oi.right_inv
-... ↔ b ≤ (oi.inv_fun g) : by { -- rw oi.ord 
-  have : r b (oi.inv_fun g) ↔
-    s (oi.to_fun b) (oi.to_fun (oi.inv_fun g)) := (@order_iso.ord β γ r s oi b (oi.inv_fun g)),
-  change oi.to_fun b ≤ oi.to_fun (oi.inv_fun g) ↔ b ≤ oi.inv_fun g,
-  sorry }
+<span class="kn">theorem</span> <span class="n">to_galois_connection</span> <span class="o">:</span>
+  <span class="n">galois_connection</span> <span class="o">(</span><span class="n">oi</span><span class="bp">.</span><span class="n">to_fun</span><span class="o">)</span> <span class="o">(</span><span class="n">oi</span><span class="bp">.</span><span class="n">inv_fun</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">unfold</span> <span class="n">galois_connection</span><span class="bp">;</span>
+<span class="n">exact</span> <span class="bp">λ</span> <span class="o">{</span><span class="n">b</span> <span class="n">g</span><span class="o">},</span> <span class="k">calc</span> <span class="o">(</span><span class="n">oi</span><span class="bp">.</span><span class="n">to_fun</span> <span class="n">b</span><span class="o">)</span> <span class="bp">≤</span> <span class="n">g</span> <span class="bp">↔</span>
+  <span class="o">(</span><span class="n">oi</span><span class="bp">.</span><span class="n">to_fun</span> <span class="n">b</span><span class="o">)</span> <span class="bp">≤</span> <span class="o">(</span><span class="n">oi</span><span class="bp">.</span><span class="n">to_fun</span> <span class="o">(</span><span class="n">oi</span><span class="bp">.</span><span class="n">inv_fun</span> <span class="n">g</span><span class="o">))</span> <span class="o">:</span> <span class="k">by</span> <span class="n">rw</span> <span class="n">oi</span><span class="bp">.</span><span class="n">right_inv</span>
+<span class="bp">...</span> <span class="bp">↔</span> <span class="n">b</span> <span class="bp">≤</span> <span class="o">(</span><span class="n">oi</span><span class="bp">.</span><span class="n">inv_fun</span> <span class="n">g</span><span class="o">)</span> <span class="o">:</span> <span class="k">by</span> <span class="o">{</span> <span class="c1">-- rw oi.ord</span>
+  <span class="k">have</span> <span class="o">:</span> <span class="n">r</span> <span class="n">b</span> <span class="o">(</span><span class="n">oi</span><span class="bp">.</span><span class="n">inv_fun</span> <span class="n">g</span><span class="o">)</span> <span class="bp">↔</span>
+    <span class="n">s</span> <span class="o">(</span><span class="n">oi</span><span class="bp">.</span><span class="n">to_fun</span> <span class="n">b</span><span class="o">)</span> <span class="o">(</span><span class="n">oi</span><span class="bp">.</span><span class="n">to_fun</span> <span class="o">(</span><span class="n">oi</span><span class="bp">.</span><span class="n">inv_fun</span> <span class="n">g</span><span class="o">))</span> <span class="o">:=</span> <span class="o">(</span><span class="bp">@</span><span class="n">order_iso</span><span class="bp">.</span><span class="n">ord</span> <span class="n">β</span> <span class="n">γ</span> <span class="n">r</span> <span class="n">s</span> <span class="n">oi</span> <span class="n">b</span> <span class="o">(</span><span class="n">oi</span><span class="bp">.</span><span class="n">inv_fun</span> <span class="n">g</span><span class="o">)),</span>
+  <span class="n">change</span> <span class="n">oi</span><span class="bp">.</span><span class="n">to_fun</span> <span class="n">b</span> <span class="bp">≤</span> <span class="n">oi</span><span class="bp">.</span><span class="n">to_fun</span> <span class="o">(</span><span class="n">oi</span><span class="bp">.</span><span class="n">inv_fun</span> <span class="n">g</span><span class="o">)</span> <span class="bp">↔</span> <span class="n">b</span> <span class="bp">≤</span> <span class="n">oi</span><span class="bp">.</span><span class="n">inv_fun</span> <span class="n">g</span><span class="o">,</span>
+  <span class="n">sorry</span> <span class="o">}</span>
 
-protected def to_galois_insertion [preorder β] [preorder γ] : @galois_insertion β γ _ _
-  (oi.to_fun) (oi.inv_fun) :=
-{ choice := λ b h, oi.to_fun b,
-  gc := to_galois_connection oi,
-  le_l_u := λ g, le_of_eq (oi.right_inv g).symm,
-  choice_eq := λ b h, rfl }
+<span class="kn">protected</span> <span class="n">def</span> <span class="n">to_galois_insertion</span> <span class="o">[</span><span class="n">preorder</span> <span class="n">β</span><span class="o">]</span> <span class="o">[</span><span class="n">preorder</span> <span class="n">γ</span><span class="o">]</span> <span class="o">:</span> <span class="bp">@</span><span class="n">galois_insertion</span> <span class="n">β</span> <span class="n">γ</span> <span class="bp">_</span> <span class="bp">_</span>
+  <span class="o">(</span><span class="n">oi</span><span class="bp">.</span><span class="n">to_fun</span><span class="o">)</span> <span class="o">(</span><span class="n">oi</span><span class="bp">.</span><span class="n">inv_fun</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">choice</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">b</span> <span class="n">h</span><span class="o">,</span> <span class="n">oi</span><span class="bp">.</span><span class="n">to_fun</span> <span class="n">b</span><span class="o">,</span>
+  <span class="n">gc</span> <span class="o">:=</span> <span class="n">to_galois_connection</span> <span class="n">oi</span><span class="o">,</span>
+  <span class="n">le_l_u</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">g</span><span class="o">,</span> <span class="n">le_of_eq</span> <span class="o">(</span><span class="n">oi</span><span class="bp">.</span><span class="n">right_inv</span> <span class="n">g</span><span class="o">)</span><span class="bp">.</span><span class="n">symm</span><span class="o">,</span>
+  <span class="n">choice_eq</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">b</span> <span class="n">h</span><span class="o">,</span> <span class="n">rfl</span> <span class="o">}</span>
 
-end order_iso
-```
-In the tactic state near where I gave up, the only difference I see between the goal and `this` is that the goal uses ≤ and `this` uses `r` and `s`.
+<span class="kn">end</span> <span class="n">order_iso</span>
+</pre></div>
+
+
+<p>In the tactic state near where I gave up, the only difference I see between the goal and <code>this</code> is that the goal uses ≤ and <code>this</code> uses <code>r</code> and <code>s</code>.</p>
 
 #### [ Kevin Buzzard (Oct 10 2018 at 08:22)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/order_iso%20woes/near/135521752):
-This is a job for @**Kenny Lau**
+<p>This is a job for <span class="user-mention" data-user-id="110064">@Kenny Lau</span></p>
 
 #### [ Mario Carneiro (Oct 10 2018 at 08:25)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/order_iso%20woes/near/135521873):
-You should be able to use function coercion instead of `to_fun` and `inv_fun` everywhere
+<p>You should be able to use function coercion instead of <code>to_fun</code> and <code>inv_fun</code> everywhere</p>
 
 #### [ Kenny Lau (Oct 10 2018 at 09:56)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/order_iso%20woes/near/135525340):
-This is ridiculous.
+<p>This is ridiculous.</p>
 
 #### [ Kenny Lau (Oct 10 2018 at 09:56)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/order_iso%20woes/near/135525381):
-```lean
-variables {β : Type*} {γ : Type*} [preorder β] [preorder γ]
-{r : β → β → Prop} {s : γ → γ → Prop} (oi : order_iso r s)
-```
+<div class="codehilite"><pre><span></span><span class="kn">variables</span> <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">{</span><span class="n">γ</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">preorder</span> <span class="n">β</span><span class="o">]</span> <span class="o">[</span><span class="n">preorder</span> <span class="n">γ</span><span class="o">]</span>
+<span class="o">{</span><span class="n">r</span> <span class="o">:</span> <span class="n">β</span> <span class="bp">→</span> <span class="n">β</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">}</span> <span class="o">{</span><span class="n">s</span> <span class="o">:</span> <span class="n">γ</span> <span class="bp">→</span> <span class="n">γ</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">}</span> <span class="o">(</span><span class="n">oi</span> <span class="o">:</span> <span class="n">order_iso</span> <span class="n">r</span> <span class="n">s</span><span class="o">)</span>
+</pre></div>
 
 #### [ Kenny Lau (Oct 10 2018 at 09:56)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/order_iso%20woes/near/135525382):
-game: spot the error
+<p>game: spot the error</p>
 
 #### [ Mario Carneiro (Oct 10 2018 at 09:58)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/order_iso%20woes/near/135525444):
-no error?
+<p>no error?</p>
 
 #### [ Kenny Lau (Oct 10 2018 at 10:01)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/order_iso%20woes/near/135525621):
-even Mario missed it
+<p>even Mario missed it</p>
 
 #### [ Kenny Lau (Oct 10 2018 at 10:01)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/order_iso%20woes/near/135525626):
-the correct declaration should be
-```lean
-variables {β : Type*} {γ : Type*} [preorder β] [preorder γ]
-(oi : @order_iso β γ (≤) (≤))
-```
+<p>the correct declaration should be</p>
+<div class="codehilite"><pre><span></span><span class="kn">variables</span> <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">{</span><span class="n">γ</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">preorder</span> <span class="n">β</span><span class="o">]</span> <span class="o">[</span><span class="n">preorder</span> <span class="n">γ</span><span class="o">]</span>
+<span class="o">(</span><span class="n">oi</span> <span class="o">:</span> <span class="bp">@</span><span class="n">order_iso</span> <span class="n">β</span> <span class="n">γ</span> <span class="o">(</span><span class="bp">≤</span><span class="o">)</span> <span class="o">(</span><span class="bp">≤</span><span class="o">))</span>
+</pre></div>
 
 #### [ Johan Commelin (Oct 10 2018 at 10:04)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/order_iso%20woes/near/135525779):
-In particular, this means that `order_iso` is not what we want it to be.
+<p>In particular, this means that <code>order_iso</code> is not what we want it to be.</p>
 
 #### [ Kenny Lau (Oct 10 2018 at 10:04)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/order_iso%20woes/near/135525786):
-```lean
-import order.galois_connection order.order_iso
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">order</span><span class="bp">.</span><span class="n">galois_connection</span> <span class="n">order</span><span class="bp">.</span><span class="n">order_iso</span>
 
-namespace order_iso
-variables {β : Type*} {γ : Type*} [preorder β] [preorder γ]
-(oi : @order_iso β γ (≤) (≤))
+<span class="kn">namespace</span> <span class="n">order_iso</span>
+<span class="kn">variables</span> <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">{</span><span class="n">γ</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">preorder</span> <span class="n">β</span><span class="o">]</span> <span class="o">[</span><span class="n">preorder</span> <span class="n">γ</span><span class="o">]</span>
+<span class="o">(</span><span class="n">oi</span> <span class="o">:</span> <span class="bp">@</span><span class="n">order_iso</span> <span class="n">β</span> <span class="n">γ</span> <span class="o">(</span><span class="bp">≤</span><span class="o">)</span> <span class="o">(</span><span class="bp">≤</span><span class="o">))</span>
 
-theorem to_galois_connection : galois_connection oi oi.symm :=
-λ b g, by rw [ord' oi, apply_inverse_apply]
+<span class="kn">theorem</span> <span class="n">to_galois_connection</span> <span class="o">:</span> <span class="n">galois_connection</span> <span class="n">oi</span> <span class="n">oi</span><span class="bp">.</span><span class="n">symm</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="n">b</span> <span class="n">g</span><span class="o">,</span> <span class="k">by</span> <span class="n">rw</span> <span class="o">[</span><span class="n">ord&#39;</span> <span class="n">oi</span><span class="o">,</span> <span class="n">apply_inverse_apply</span><span class="o">]</span>
 
-protected def to_galois_insertion :
-  @galois_insertion β γ _ _ oi oi.symm :=
-{ choice := λ b h, oi b,
-  gc := to_galois_connection oi,
-  le_l_u := λ g, le_of_eq (oi.right_inv g).symm,
-  choice_eq := λ b h, rfl }
+<span class="kn">protected</span> <span class="n">def</span> <span class="n">to_galois_insertion</span> <span class="o">:</span>
+  <span class="bp">@</span><span class="n">galois_insertion</span> <span class="n">β</span> <span class="n">γ</span> <span class="bp">_</span> <span class="bp">_</span> <span class="n">oi</span> <span class="n">oi</span><span class="bp">.</span><span class="n">symm</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">choice</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">b</span> <span class="n">h</span><span class="o">,</span> <span class="n">oi</span> <span class="n">b</span><span class="o">,</span>
+  <span class="n">gc</span> <span class="o">:=</span> <span class="n">to_galois_connection</span> <span class="n">oi</span><span class="o">,</span>
+  <span class="n">le_l_u</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">g</span><span class="o">,</span> <span class="n">le_of_eq</span> <span class="o">(</span><span class="n">oi</span><span class="bp">.</span><span class="n">right_inv</span> <span class="n">g</span><span class="o">)</span><span class="bp">.</span><span class="n">symm</span><span class="o">,</span>
+  <span class="n">choice_eq</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">b</span> <span class="n">h</span><span class="o">,</span> <span class="n">rfl</span> <span class="o">}</span>
 
-end order_iso
-```
+<span class="kn">end</span> <span class="n">order_iso</span>
+</pre></div>
 
 #### [ Kenny Lau (Oct 10 2018 at 10:05)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/order_iso%20woes/near/135525822):
-@**Mario Carneiro** how many of this error do you think are in mathlib?
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> how many of this error do you think are in mathlib?</p>
 
 #### [ Mario Carneiro (Oct 10 2018 at 10:06)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/order_iso%20woes/near/135525870):
-Oh, I missed the context
+<p>Oh, I missed the context</p>
 
 #### [ Mario Carneiro (Oct 10 2018 at 10:06)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/order_iso%20woes/near/135525877):
-I thought you meant those variables don't typecheck
+<p>I thought you meant those variables don't typecheck</p>
 
 #### [ Mario Carneiro (Oct 10 2018 at 10:07)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/order_iso%20woes/near/135525899):
-are you saying that this is in mathlib?
+<p>are you saying that this is in mathlib?</p>
 
 #### [ Mario Carneiro (Oct 10 2018 at 10:08)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/order_iso%20woes/near/135525974):
-I guess there is a tension here between `order_iso`, which works with explicit relations, and `galois_connection`, which works with types with a `preorder` instance
+<p>I guess there is a tension here between <code>order_iso</code>, which works with explicit relations, and <code>galois_connection</code>, which works with types with a <code>preorder</code> instance</p>
 
 #### [ Kenny Lau (Oct 10 2018 at 10:09)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/order_iso%20woes/near/135525988):
-I'm saying that there are errors like this in mathlib
+<p>I'm saying that there are errors like this in mathlib</p>
 
 #### [ Mario Carneiro (Oct 10 2018 at 10:09)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/order_iso%20woes/near/135526005):
-I'm sure there are, but someone has to notice them first
+<p>I'm sure there are, but someone has to notice them first</p>
 
 #### [ Mario Carneiro (Oct 10 2018 at 10:09)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/order_iso%20woes/near/135526012):
-if no one notices them then they aren't doing anyone harm
+<p>if no one notices them then they aren't doing anyone harm</p>
 
 #### [ Johan Commelin (Oct 10 2018 at 10:10)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/order_iso%20woes/near/135526075):
-```quote
-if no one notices them then they aren't doing anyone harm
-```
-Except that you might think you have formalised something, but it turns out to be something else.
+<blockquote>
+<p>if no one notices them then they aren't doing anyone harm</p>
+</blockquote>
+<p>Except that you might think you have formalised something, but it turns out to be something else.</p>
 
 #### [ Mario Carneiro (Oct 10 2018 at 10:10)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/order_iso%20woes/near/135526085):
-that's where the fun is
+<p>that's where the fun is</p>
 
 #### [ Johan Commelin (Oct 10 2018 at 10:10)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/order_iso%20woes/near/135526089):
-Isn't this exactly related to https://leanprover.zulipchat.com/#narrow/stream/113488-general/subject/stacks.20project.20.2F.20schemes/near/123090992
+<p>Isn't this exactly related to <a href="#narrow/stream/113488-general/subject/stacks.20project.20.2F.20schemes/near/123090992" title="#narrow/stream/113488-general/subject/stacks.20project.20.2F.20schemes/near/123090992">https://leanprover.zulipchat.com/#narrow/stream/113488-general/subject/stacks.20project.20.2F.20schemes/near/123090992</a></p>
 
 #### [ Kevin Buzzard (Oct 10 2018 at 11:20)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/order_iso%20woes/near/135529045):
-@**Kenny Lau** , now all the people who bothered to click and investigate are in on the joke, can you paste one line of explanation for those of us that are so busy preparing 1st year lectures that we don't even understand the issue at hand here and would hence prefer it if your comments were less cryptic?
+<p><span class="user-mention" data-user-id="110064">@Kenny Lau</span> , now all the people who bothered to click and investigate are in on the joke, can you paste one line of explanation for those of us that are so busy preparing 1st year lectures that we don't even understand the issue at hand here and would hence prefer it if your comments were less cryptic?</p>
 
 #### [ Kenny Lau (Oct 10 2018 at 12:07)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/order_iso%20woes/near/135531256):
-@**Kevin Buzzard** basically there are two orders on each type when there should only be one order
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> basically there are two orders on each type when there should only be one order</p>
 
 #### [ Bryan Gin-ge Chen (Oct 10 2018 at 15:40)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/order_iso%20woes/near/135541695):
-Thanks Kenny! I'm glad it turned out to be something simple.
+<p>Thanks Kenny! I'm glad it turned out to be something simple.</p>
 
 
 {% endraw %}

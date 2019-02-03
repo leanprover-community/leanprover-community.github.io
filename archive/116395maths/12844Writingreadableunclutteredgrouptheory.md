@@ -12,551 +12,538 @@ permalink: archive/116395maths/12844Writingreadableunclutteredgrouptheory.html
 
 {% raw %}
 #### [ Kevin Buzzard (Apr 28 2018 at 07:39)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125808670):
-I noticed that the definition of a group in Lean was one more axiom than it could be
+<p>I noticed that the definition of a group in Lean was one more axiom than it could be</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 07:40)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125808710):
-you can prove `mul_one` from the other axioms
+<p>you can prove <code>mul_one</code> from the other axioms</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 07:40)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125808713):
-This may well have been talked about before
+<p>This may well have been talked about before</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 07:40)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125808714):
-But I thought I'd write a blog post on this
+<p>But I thought I'd write a blog post on this</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 07:40)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125808715):
-and I wanted to talk about the proof of `mul_one` (which goes via `mul_left_cancel`)
+<p>and I wanted to talk about the proof of <code>mul_one</code> (which goes via <code>mul_left_cancel</code>)</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 07:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125808719):
-for Lean-groups-without-`mul_one`
+<p>for Lean-groups-without-<code>mul_one</code></p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 07:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125808721):
-But I could not make the arguments look beautiful
+<p>But I could not make the arguments look beautiful</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 07:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125808723):
-This is kind of OK
+<p>This is kind of OK</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 07:42)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125808724):
-```lean
-lemma gripe.mul_left_cancel {G : Type} [has_mul G] [has_one G] [has_inv G] [gripe G]
-: ∀ (a b c : G), a * b = a * c → b = c :=
-begin
-  intros a b c Habac,
-  exact calc b = 1 * b : (one_mul b).symm
-           ... = (a⁻¹ * a) * b : by rw [←gripe.mul_left_inv a]
-           ... = a⁻¹ * (a * b) : mul_assoc _ _ _
-           ... = a⁻¹ * (a * c) : by rw Habac
--- ... = c : by simp only [mul_assoc,one_mul,mul_left_inv] -- fails
-           ... = (a⁻¹ * a) * c : (gripe.mul_assoc _ _ _).symm
-           ... = 1 * c : by rw [gripe.mul_left_inv a]
-           ... = c : one_mul _
-end
-```
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">gripe</span><span class="bp">.</span><span class="n">mul_left_cancel</span> <span class="o">{</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">[</span><span class="n">has_mul</span> <span class="n">G</span><span class="o">]</span> <span class="o">[</span><span class="n">has_one</span> <span class="n">G</span><span class="o">]</span> <span class="o">[</span><span class="n">has_inv</span> <span class="n">G</span><span class="o">]</span> <span class="o">[</span><span class="n">gripe</span> <span class="n">G</span><span class="o">]</span>
+<span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="n">G</span><span class="o">),</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">c</span> <span class="bp">→</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">c</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">intros</span> <span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="n">Habac</span><span class="o">,</span>
+  <span class="n">exact</span> <span class="k">calc</span> <span class="n">b</span> <span class="bp">=</span> <span class="mi">1</span> <span class="bp">*</span> <span class="n">b</span> <span class="o">:</span> <span class="o">(</span><span class="n">one_mul</span> <span class="n">b</span><span class="o">)</span><span class="bp">.</span><span class="n">symm</span>
+           <span class="bp">...</span> <span class="bp">=</span> <span class="o">(</span><span class="n">a</span><span class="bp">⁻¹</span> <span class="bp">*</span> <span class="n">a</span><span class="o">)</span> <span class="bp">*</span> <span class="n">b</span> <span class="o">:</span> <span class="k">by</span> <span class="n">rw</span> <span class="o">[</span><span class="err">←</span><span class="n">gripe</span><span class="bp">.</span><span class="n">mul_left_inv</span> <span class="n">a</span><span class="o">]</span>
+           <span class="bp">...</span> <span class="bp">=</span> <span class="n">a</span><span class="bp">⁻¹</span> <span class="bp">*</span> <span class="o">(</span><span class="n">a</span> <span class="bp">*</span> <span class="n">b</span><span class="o">)</span> <span class="o">:</span> <span class="n">mul_assoc</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span>
+           <span class="bp">...</span> <span class="bp">=</span> <span class="n">a</span><span class="bp">⁻¹</span> <span class="bp">*</span> <span class="o">(</span><span class="n">a</span> <span class="bp">*</span> <span class="n">c</span><span class="o">)</span> <span class="o">:</span> <span class="k">by</span> <span class="n">rw</span> <span class="n">Habac</span>
+<span class="c1">-- ... = c : by simp only [mul_assoc,one_mul,mul_left_inv] -- fails</span>
+           <span class="bp">...</span> <span class="bp">=</span> <span class="o">(</span><span class="n">a</span><span class="bp">⁻¹</span> <span class="bp">*</span> <span class="n">a</span><span class="o">)</span> <span class="bp">*</span> <span class="n">c</span> <span class="o">:</span> <span class="o">(</span><span class="n">gripe</span><span class="bp">.</span><span class="n">mul_assoc</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">)</span><span class="bp">.</span><span class="n">symm</span>
+           <span class="bp">...</span> <span class="bp">=</span> <span class="mi">1</span> <span class="bp">*</span> <span class="n">c</span> <span class="o">:</span> <span class="k">by</span> <span class="n">rw</span> <span class="o">[</span><span class="n">gripe</span><span class="bp">.</span><span class="n">mul_left_inv</span> <span class="n">a</span><span class="o">]</span>
+           <span class="bp">...</span> <span class="bp">=</span> <span class="n">c</span> <span class="o">:</span> <span class="n">one_mul</span> <span class="bp">_</span>
+<span class="kn">end</span>
+</pre></div>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 07:42)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125808776):
-although all this `has_mul` stuff is both really cluttering things up and not actually telling us the one useful thing about it, which is that it is a map alpha -> alpha -> alpha
+<p>although all this <code>has_mul</code> stuff is both really cluttering things up and not actually telling us the one useful thing about it, which is that it is a map alpha -&gt; alpha -&gt; alpha</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 07:43)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125808784):
-I made a type for that
+<p>I made a type for that</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 07:43)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125808785):
-```lean
-class gripe (G : Type) [has_mul G] [has_one G] [has_inv G] :=
-(mul_assoc : ∀ (a b c : G), a * b * c = a * (b * c))
-(one_mul : ∀ (a : G), 1 * a = a)
-(mul_left_inv : ∀ (a : G), a⁻¹ * a = 1)
-```
+<div class="codehilite"><pre><span></span><span class="n">class</span> <span class="n">gripe</span> <span class="o">(</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">has_mul</span> <span class="n">G</span><span class="o">]</span> <span class="o">[</span><span class="n">has_one</span> <span class="n">G</span><span class="o">]</span> <span class="o">[</span><span class="n">has_inv</span> <span class="n">G</span><span class="o">]</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">mul_assoc</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="n">G</span><span class="o">),</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">b</span> <span class="bp">*</span> <span class="n">c</span> <span class="bp">=</span> <span class="n">a</span> <span class="bp">*</span> <span class="o">(</span><span class="n">b</span> <span class="bp">*</span> <span class="n">c</span><span class="o">))</span>
+<span class="o">(</span><span class="n">one_mul</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">G</span><span class="o">),</span> <span class="mi">1</span> <span class="bp">*</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">a</span><span class="o">)</span>
+<span class="o">(</span><span class="n">mul_left_inv</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">G</span><span class="o">),</span> <span class="n">a</span><span class="bp">⁻¹</span> <span class="bp">*</span> <span class="n">a</span> <span class="bp">=</span> <span class="mi">1</span><span class="o">)</span>
+</pre></div>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 07:44)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125808828):
-But got a bit sick about still having to say we have a `has_mul`. On the other hand I really want the notation.
+<p>But got a bit sick about still having to say we have a <code>has_mul</code>. On the other hand I really want the notation.</p>
 
 #### [ Reid Barton (Apr 28 2018 at 07:45)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125808836):
-can you use `extends` instead of those extra parameters to the class? I've never used it myself but I see it in the algebraic classes
+<p>can you use <code>extends</code> instead of those extra parameters to the class? I've never used it myself but I see it in the algebraic classes</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 07:45)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125808837):
-Other complains about that calc proof is that I need to give too many hint, I seem to have to mention the type's name (gripe) randomly and I can only sometimes get away with `_`s, and why do I even have to put them at all?
+<p>Other complains about that calc proof is that I need to give too many hint, I seem to have to mention the type's name (gripe) randomly and I can only sometimes get away with <code>_</code>s, and why do I even have to put them at all?</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 07:45)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125808843):
-I tried without the structure
+<p>I tried without the structure</p>
 
 #### [ Kenny Lau (Apr 28 2018 at 07:45)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125808845):
-```quote
-This may well have been talked about before
-```
-https://gitter.im/leanprover_public/Lobby?at=59fd723d976e63937e268f50
+<blockquote>
+<p>This may well have been talked about before</p>
+</blockquote>
+<p><a href="https://gitter.im/leanprover_public/Lobby?at=59fd723d976e63937e268f50" target="_blank" title="https://gitter.im/leanprover_public/Lobby?at=59fd723d976e63937e268f50">https://gitter.im/leanprover_public/Lobby?at=59fd723d976e63937e268f50</a></p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 07:46)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125808888):
-```lean
-lemma mul_left_cancel' {G : Type} [has_mul G] [has_one G] [has_inv G]
-(mul_assoc : ∀ (a b c : G), a * b * c = a * (b * c))
-(one_mul : ∀ (a : G), 1 * a = a)
-(mul_left_inv : ∀ (a : G), a⁻¹ * a = 1)
-: ∀ (a b c : G), a * b = a * c → b = c :=
-begin
-  intros a b c Habac,
-  exact calc b = 1 * b : (one_mul _).symm
-           ... = (a⁻¹ * a) * b : by rw [mul_left_inv]
-           ... = a⁻¹ * (a * b) : mul_assoc _ _ _ -- why not just mul_assoc?
-           ... = a⁻¹ * (a * c) : by rw Habac
--- ... = c : by simp only [mul_assoc,one_mul,mul_left_inv] -- fails
-           ... = (a⁻¹ * a) * c : (mul_assoc _ _ _).symm
-           ... = 1 * c : by rw [mul_left_inv]
-           ... = c : one_mul _ -- why the _ ?
-end
-```
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">mul_left_cancel&#39;</span> <span class="o">{</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">[</span><span class="n">has_mul</span> <span class="n">G</span><span class="o">]</span> <span class="o">[</span><span class="n">has_one</span> <span class="n">G</span><span class="o">]</span> <span class="o">[</span><span class="n">has_inv</span> <span class="n">G</span><span class="o">]</span>
+<span class="o">(</span><span class="n">mul_assoc</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="n">G</span><span class="o">),</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">b</span> <span class="bp">*</span> <span class="n">c</span> <span class="bp">=</span> <span class="n">a</span> <span class="bp">*</span> <span class="o">(</span><span class="n">b</span> <span class="bp">*</span> <span class="n">c</span><span class="o">))</span>
+<span class="o">(</span><span class="n">one_mul</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">G</span><span class="o">),</span> <span class="mi">1</span> <span class="bp">*</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">a</span><span class="o">)</span>
+<span class="o">(</span><span class="n">mul_left_inv</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">G</span><span class="o">),</span> <span class="n">a</span><span class="bp">⁻¹</span> <span class="bp">*</span> <span class="n">a</span> <span class="bp">=</span> <span class="mi">1</span><span class="o">)</span>
+<span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="n">G</span><span class="o">),</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">c</span> <span class="bp">→</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">c</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">intros</span> <span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="n">Habac</span><span class="o">,</span>
+  <span class="n">exact</span> <span class="k">calc</span> <span class="n">b</span> <span class="bp">=</span> <span class="mi">1</span> <span class="bp">*</span> <span class="n">b</span> <span class="o">:</span> <span class="o">(</span><span class="n">one_mul</span> <span class="bp">_</span><span class="o">)</span><span class="bp">.</span><span class="n">symm</span>
+           <span class="bp">...</span> <span class="bp">=</span> <span class="o">(</span><span class="n">a</span><span class="bp">⁻¹</span> <span class="bp">*</span> <span class="n">a</span><span class="o">)</span> <span class="bp">*</span> <span class="n">b</span> <span class="o">:</span> <span class="k">by</span> <span class="n">rw</span> <span class="o">[</span><span class="n">mul_left_inv</span><span class="o">]</span>
+           <span class="bp">...</span> <span class="bp">=</span> <span class="n">a</span><span class="bp">⁻¹</span> <span class="bp">*</span> <span class="o">(</span><span class="n">a</span> <span class="bp">*</span> <span class="n">b</span><span class="o">)</span> <span class="o">:</span> <span class="n">mul_assoc</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="c1">-- why not just mul_assoc?</span>
+           <span class="bp">...</span> <span class="bp">=</span> <span class="n">a</span><span class="bp">⁻¹</span> <span class="bp">*</span> <span class="o">(</span><span class="n">a</span> <span class="bp">*</span> <span class="n">c</span><span class="o">)</span> <span class="o">:</span> <span class="k">by</span> <span class="n">rw</span> <span class="n">Habac</span>
+<span class="c1">-- ... = c : by simp only [mul_assoc,one_mul,mul_left_inv] -- fails</span>
+           <span class="bp">...</span> <span class="bp">=</span> <span class="o">(</span><span class="n">a</span><span class="bp">⁻¹</span> <span class="bp">*</span> <span class="n">a</span><span class="o">)</span> <span class="bp">*</span> <span class="n">c</span> <span class="o">:</span> <span class="o">(</span><span class="n">mul_assoc</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">)</span><span class="bp">.</span><span class="n">symm</span>
+           <span class="bp">...</span> <span class="bp">=</span> <span class="mi">1</span> <span class="bp">*</span> <span class="n">c</span> <span class="o">:</span> <span class="k">by</span> <span class="n">rw</span> <span class="o">[</span><span class="n">mul_left_inv</span><span class="o">]</span>
+           <span class="bp">...</span> <span class="bp">=</span> <span class="n">c</span> <span class="o">:</span> <span class="n">one_mul</span> <span class="bp">_</span> <span class="c1">-- why the _ ?</span>
+<span class="kn">end</span>
+</pre></div>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 07:48)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125808938):
-and that seemed to go better, but then
+<p>and that seemed to go better, but then</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 07:48)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125808940):
-```lean
-theorem mul_one' {G : Type} [has_mul G] [has_one G] [has_inv G]
-(mul_assoc : ∀ (a b c : G), a * b * c = a * (b * c))
-(one_mul : ∀ (a : G), 1 * a = a)
-(mul_left_inv : ∀ (a : G), a⁻¹ * a = 1)
-: ∀ (a : G), a * 1 = a :=
-begin
-intro a,
- apply (mul_left_cancel' mul_assoc one_mul mul_left_inv a⁻¹ _ _), -- aargh 
- rw [←mul_assoc,mul_left_inv,one_mul],
-end 
-
-```
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">mul_one&#39;</span> <span class="o">{</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">[</span><span class="n">has_mul</span> <span class="n">G</span><span class="o">]</span> <span class="o">[</span><span class="n">has_one</span> <span class="n">G</span><span class="o">]</span> <span class="o">[</span><span class="n">has_inv</span> <span class="n">G</span><span class="o">]</span>
+<span class="o">(</span><span class="n">mul_assoc</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="n">G</span><span class="o">),</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">b</span> <span class="bp">*</span> <span class="n">c</span> <span class="bp">=</span> <span class="n">a</span> <span class="bp">*</span> <span class="o">(</span><span class="n">b</span> <span class="bp">*</span> <span class="n">c</span><span class="o">))</span>
+<span class="o">(</span><span class="n">one_mul</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">G</span><span class="o">),</span> <span class="mi">1</span> <span class="bp">*</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">a</span><span class="o">)</span>
+<span class="o">(</span><span class="n">mul_left_inv</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">G</span><span class="o">),</span> <span class="n">a</span><span class="bp">⁻¹</span> <span class="bp">*</span> <span class="n">a</span> <span class="bp">=</span> <span class="mi">1</span><span class="o">)</span>
+<span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">G</span><span class="o">),</span> <span class="n">a</span> <span class="bp">*</span> <span class="mi">1</span> <span class="bp">=</span> <span class="n">a</span> <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="n">intro</span> <span class="n">a</span><span class="o">,</span>
+ <span class="n">apply</span> <span class="o">(</span><span class="n">mul_left_cancel&#39;</span> <span class="n">mul_assoc</span> <span class="n">one_mul</span> <span class="n">mul_left_inv</span> <span class="n">a</span><span class="bp">⁻¹</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">),</span> <span class="c1">-- aargh</span>
+ <span class="n">rw</span> <span class="o">[</span><span class="err">←</span><span class="n">mul_assoc</span><span class="o">,</span><span class="n">mul_left_inv</span><span class="o">,</span><span class="n">one_mul</span><span class="o">],</span>
+<span class="kn">end</span>
+</pre></div>
 
 #### [ Kenny Lau (Apr 28 2018 at 07:48)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125808942):
-@**Kevin Buzzard** edit > change title
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> edit &gt; change title</p>
 
 #### [ Reid Barton (Apr 28 2018 at 07:48)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125808943):
-Oh, I guess you are complaining about `has_mul` being opaque to the reader wherever it appears, not that you had to write it twice?
+<p>Oh, I guess you are complaining about <code>has_mul</code> being opaque to the reader wherever it appears, not that you had to write it twice?</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 07:49)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125808948):
-I couldn't apply the theorem I proved without carrying around all the axioms.
+<p>I couldn't apply the theorem I proved without carrying around all the axioms.</p>
 
 #### [ Kenny Lau (Apr 28 2018 at 07:49)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125808949):
-wrong thread
+<p>wrong thread</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 07:49)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125808952):
-I want to write a blog post which looks good and works in Lean and proves clearly that one of the axioms of a group follows from the others
+<p>I want to write a blog post which looks good and works in Lean and proves clearly that one of the axioms of a group follows from the others</p>
 
 #### [ Kenny Lau (Apr 28 2018 at 07:49)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125808953):
-god
+<p>god</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 07:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125808991):
-but I really want the kids to understand that they can also do some of their group theory example sheets in Lean
+<p>but I really want the kids to understand that they can also do some of their group theory example sheets in Lean</p>
 
 #### [ Kenny Lau (Apr 28 2018 at 07:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125808995):
-whatever
+<p>whatever</p>
 
 #### [ Reid Barton (Apr 28 2018 at 07:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125808998):
-How do you feel about using `variables` instead?
+<p>How do you feel about using <code>variables</code> instead?</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 07:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125808999):
-can I move this?
+<p>can I move this?</p>
 
 #### [ Kenny Lau (Apr 28 2018 at 07:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125809007):
-@**Scott Morrison** sorry, had to move your messages as well; could you move your messages back to "notations in category theory"?
+<p><span class="user-mention" data-user-id="110524">@Scott Morrison</span> sorry, had to move your messages as well; could you move your messages back to "notations in category theory"?</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 07:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125809008):
-Sorry
+<p>Sorry</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 07:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125809010):
-The stupidity of all the has_one has_mul stuff
+<p>The stupidity of all the has_one has_mul stuff</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 07:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125809049):
-is that these typeclasses have notation attached to them
+<p>is that these typeclasses have notation attached to them</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 07:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125809050):
-and you want to use the notation
+<p>and you want to use the notation</p>
 
 #### [ Reid Barton (Apr 28 2018 at 07:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125809051):
-```lean
-variable {G : Type}
-variable (mul : G → G → G)
-variable (one : G)
-variable (inv : G → G)
+<div class="codehilite"><pre><span></span><span class="kn">variable</span> <span class="o">{</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span>
+<span class="kn">variable</span> <span class="o">(</span><span class="n">mul</span> <span class="o">:</span> <span class="n">G</span> <span class="bp">→</span> <span class="n">G</span> <span class="bp">→</span> <span class="n">G</span><span class="o">)</span>
+<span class="kn">variable</span> <span class="o">(</span><span class="n">one</span> <span class="o">:</span> <span class="n">G</span><span class="o">)</span>
+<span class="kn">variable</span> <span class="o">(</span><span class="n">inv</span> <span class="o">:</span> <span class="n">G</span> <span class="bp">→</span> <span class="n">G</span><span class="o">)</span>
 
-local notation a `*` b := mul a b
-local notation 1 := one
-local notation a `⁻¹` := inv a
+<span class="n">local</span> <span class="kn">notation</span> <span class="n">a</span> <span class="bp">`*`</span> <span class="n">b</span> <span class="o">:=</span> <span class="n">mul</span> <span class="n">a</span> <span class="n">b</span>
+<span class="n">local</span> <span class="kn">notation</span> <span class="mi">1</span> <span class="o">:=</span> <span class="n">one</span>
+<span class="n">local</span> <span class="kn">notation</span> <span class="n">a</span> <span class="bp">`⁻¹`</span> <span class="o">:=</span> <span class="n">inv</span> <span class="n">a</span>
 
-variable (mul_assoc : ∀ (a b c : G), a * b * c = a * (b * c))
-variable (one_mul : ∀ (a : G), 1 * a = a)
-variable (mul_left_inv : ∀ (a : G), a⁻¹ * a = 1)
+<span class="kn">variable</span> <span class="o">(</span><span class="n">mul_assoc</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="n">G</span><span class="o">),</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">b</span> <span class="bp">*</span> <span class="n">c</span> <span class="bp">=</span> <span class="n">a</span> <span class="bp">*</span> <span class="o">(</span><span class="n">b</span> <span class="bp">*</span> <span class="n">c</span><span class="o">))</span>
+<span class="kn">variable</span> <span class="o">(</span><span class="n">one_mul</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">G</span><span class="o">),</span> <span class="mi">1</span> <span class="bp">*</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">a</span><span class="o">)</span>
+<span class="kn">variable</span> <span class="o">(</span><span class="n">mul_left_inv</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">G</span><span class="o">),</span> <span class="n">a</span><span class="bp">⁻¹</span> <span class="bp">*</span> <span class="n">a</span> <span class="bp">=</span> <span class="mi">1</span><span class="o">)</span>
 
-lemma mul_left_cancel' : ∀ (a b c : G), a * b = a * c → b = c :=
-```
+<span class="kn">lemma</span> <span class="n">mul_left_cancel&#39;</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="n">G</span><span class="o">),</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">c</span> <span class="bp">→</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">c</span> <span class="o">:=</span>
+</pre></div>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 07:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125809053):
-Maybe instead of local notation I can use instances
+<p>Maybe instead of local notation I can use instances</p>
 
 #### [ Reid Barton (Apr 28 2018 at 08:00)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125809250):
-oh, I forgot `variables` don't get along well with tactics
+<p>oh, I forgot <code>variables</code> don't get along well with tactics</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 17:36)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125823314):
-I am just going to bite the bullet and implement it in 5 different ways and see which one is best
+<p>I am just going to bite the bullet and implement it in 5 different ways and see which one is best</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 17:37)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125823316):
-`class has_group_notation (G : Type) extends has_mul G, has_one G, has_inv G`
+<p><code>class has_group_notation (G : Type) extends has_mul G, has_one G, has_inv G</code></p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 17:37)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125823322):
-Does that class exist @**Mario Carneiro** ?
+<p>Does that class exist <span class="user-mention" data-user-id="110049">@Mario Carneiro</span> ?</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 17:37)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125823328):
-It seems to come with free and painless type class inference
+<p>It seems to come with free and painless type class inference</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 17:39)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125823374):
-I had not appreciated how that barrage of classes in `core.lean` was actually just a barrage of notation. Each typeclass corresponds to precisely one piece of notation. I had not realised this before!
+<p>I had not appreciated how that barrage of classes in <code>core.lean</code> was actually just a barrage of notation. Each typeclass corresponds to precisely one piece of notation. I had not realised this before!</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 17:40)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125823419):
-I don't really understand notation and don't use any in my schemes work.
+<p>I don't really understand notation and don't use any in my schemes work.</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 17:40)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125823422):
-actually I think I suddenly understand it a whole lot better
+<p>actually I think I suddenly understand it a whole lot better</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 17:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125823427):
-my class corresponds to a finite set of notations.
+<p>my class corresponds to a finite set of notations.</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 17:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125823661):
-```lean
-class group' (G : Type) extends has_group_notation G :=
-(mul_assoc : ∀ (a b c : G), a * b * c = a * (b * c))
-(one_mul : ∀ (a : G), 1 * a = a)
-(mul_left_inv : ∀ (a : G), a⁻¹ * a = 1)
-
-```
+<div class="codehilite"><pre><span></span><span class="n">class</span> <span class="n">group&#39;</span> <span class="o">(</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="kn">extends</span> <span class="n">has_group_notation</span> <span class="n">G</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">mul_assoc</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="n">G</span><span class="o">),</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">b</span> <span class="bp">*</span> <span class="n">c</span> <span class="bp">=</span> <span class="n">a</span> <span class="bp">*</span> <span class="o">(</span><span class="n">b</span> <span class="bp">*</span> <span class="n">c</span><span class="o">))</span>
+<span class="o">(</span><span class="n">one_mul</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">G</span><span class="o">),</span> <span class="mi">1</span> <span class="bp">*</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">a</span><span class="o">)</span>
+<span class="o">(</span><span class="n">mul_left_inv</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">G</span><span class="o">),</span> <span class="n">a</span><span class="bp">⁻¹</span> <span class="bp">*</span> <span class="n">a</span> <span class="bp">=</span> <span class="mi">1</span><span class="o">)</span>
+</pre></div>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 17:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125823664):
-@**Reid Barton**
+<p><span class="user-mention" data-user-id="110032">@Reid Barton</span></p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 17:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125823665):
-That's the way to get rid of all that continually carrying around `[has_add]`
+<p>That's the way to get rid of all that continually carrying around <code>[has_add]</code></p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 17:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125823670):
-```lean
-lemma group'.mul_left_cancel {G : Type} [group' G]
-: ∀ (a b c : G), a * b = a * c → b = c := sorry
-```
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">group&#39;</span><span class="bp">.</span><span class="n">mul_left_cancel</span> <span class="o">{</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">[</span><span class="n">group&#39;</span> <span class="n">G</span><span class="o">]</span>
+<span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="n">G</span><span class="o">),</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">c</span> <span class="bp">→</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">c</span> <span class="o">:=</span> <span class="n">sorry</span>
+</pre></div>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 17:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125823671):
-This thread is about making the proof that one of the axioms of a group as defined by Lean follows from all of the others
+<p>This thread is about making the proof that one of the axioms of a group as defined by Lean follows from all of the others</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 17:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125823711):
-look as nice and uncluttered as possible
+<p>look as nice and uncluttered as possible</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 17:53)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125823727):
-The strat is : first prove `mul_left_cancel` (without using `mul_one` of course), and then deduce `mul_one`. I know there are other strategies but that's the strategy I'd like to showcase in Lean
+<p>The strat is : first prove <code>mul_left_cancel</code> (without using <code>mul_one</code> of course), and then deduce <code>mul_one</code>. I know there are other strategies but that's the strategy I'd like to showcase in Lean</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 17:53)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125823728):
-so I can show the undergraduates one way of revising for their upcoming group theory exam
+<p>so I can show the undergraduates one way of revising for their upcoming group theory exam</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 17:54)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125823743):
-I want to show them that using Lean to do abstract basic chase stuff around stuff in group theory is really easy in Lean
+<p>I want to show them that using Lean to do abstract basic chase stuff around stuff in group theory is really easy in Lean</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 17:54)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125823771):
-I'll blog about it but I need to get it as nice looking as possible first
+<p>I'll blog about it but I need to get it as nice looking as possible first</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 18:42)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125824936):
-https://gist.github.com/kbuzzard/2adf2b42a9ea23dabc2eb26a1a4b20fb
+<p><a href="https://gist.github.com/kbuzzard/2adf2b42a9ea23dabc2eb26a1a4b20fb" target="_blank" title="https://gist.github.com/kbuzzard/2adf2b42a9ea23dabc2eb26a1a4b20fb">https://gist.github.com/kbuzzard/2adf2b42a9ea23dabc2eb26a1a4b20fb</a></p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 18:42)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125824937):
-My efforts using classes
+<p>My efforts using classes</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 18:43)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125824938):
-I had to keep writing the class name
+<p>I had to keep writing the class name</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 18:43)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125824943):
-and the calc proof needed a lot of blanks
+<p>and the calc proof needed a lot of blanks</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 18:43)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125824944):
-How could this be improved?
+<p>How could this be improved?</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 18:44)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125824984):
-I am going to try other ways of setting this up to see pros and cons
+<p>I am going to try other ways of setting this up to see pros and cons</p>
 
 #### [ Kenny Lau (Apr 28 2018 at 18:44)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125824987):
-Change
-```lean
-(mul_assoc : ∀ (a b c : G), a * b * c = a * (b * c))
-```
-to
-```lean
-(mul_assoc : ∀ {a b c : G}, a * b * c = a * (b * c))
-```
+<p>Change</p>
+<div class="codehilite"><pre><span></span><span class="o">(</span><span class="n">mul_assoc</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="n">G</span><span class="o">),</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">b</span> <span class="bp">*</span> <span class="n">c</span> <span class="bp">=</span> <span class="n">a</span> <span class="bp">*</span> <span class="o">(</span><span class="n">b</span> <span class="bp">*</span> <span class="n">c</span><span class="o">))</span>
+</pre></div>
+
+
+<p>to</p>
+<div class="codehilite"><pre><span></span><span class="o">(</span><span class="n">mul_assoc</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="n">G</span><span class="o">},</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">b</span> <span class="bp">*</span> <span class="n">c</span> <span class="bp">=</span> <span class="n">a</span> <span class="bp">*</span> <span class="o">(</span><span class="n">b</span> <span class="bp">*</span> <span class="n">c</span><span class="o">))</span>
+</pre></div>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 19:12)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125825665):
-Do you think that's right?
+<p>Do you think that's right?</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 19:12)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125825667):
-I changed it for the constants example
+<p>I changed it for the constants example</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 19:12)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125825668):
-and my tactic proof got worse
+<p>and my tactic proof got worse</p>
 
 #### [ Kenny Lau (Apr 28 2018 at 19:13)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125825669):
-if you change it then you don't need to put underscores
+<p>if you change it then you don't need to put underscores</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 19:13)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125825674):
-I'll show you you're wrong
+<p>I'll show you you're wrong</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 19:14)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125825716):
-https://github.com/kbuzzard/xena/blob/master/canonical_isomorphism/group_axioms_constants.lean
+<p><a href="https://github.com/kbuzzard/xena/blob/master/canonical_isomorphism/group_axioms_constants.lean" target="_blank" title="https://github.com/kbuzzard/xena/blob/master/canonical_isomorphism/group_axioms_constants.lean">https://github.com/kbuzzard/xena/blob/master/canonical_isomorphism/group_axioms_constants.lean</a></p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 19:14)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125825718):
-But maybe you can fix it :-)
+<p>But maybe you can fix it :-)</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 19:14)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125825720):
-there is a point in tactic mode where I needed underscores :-(
+<p>there is a point in tactic mode where I needed underscores :-(</p>
 
 #### [ Kenny Lau (Apr 28 2018 at 19:15)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125825723):
-where?
+<p>where?</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 19:15)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125825729):
-https://github.com/kbuzzard/xena/blob/master/canonical_isomorphism/group_axioms_class.lean
+<p><a href="https://github.com/kbuzzard/xena/blob/master/canonical_isomorphism/group_axioms_class.lean" target="_blank" title="https://github.com/kbuzzard/xena/blob/master/canonical_isomorphism/group_axioms_class.lean">https://github.com/kbuzzard/xena/blob/master/canonical_isomorphism/group_axioms_class.lean</a></p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 19:15)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125825730):
-not there
+<p>not there</p>
 
 #### [ Kenny Lau (Apr 28 2018 at 19:15)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125825732):
-so where am I wrong?
+<p>so where am I wrong?</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 19:15)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125825733):
-https://github.com/kbuzzard/xena/blob/48ce83d8bc9782a08ee852d126e784f696086846/canonical_isomorphism/group_axioms_constants.lean#L48
+<p><a href="https://github.com/kbuzzard/xena/blob/48ce83d8bc9782a08ee852d126e784f696086846/canonical_isomorphism/group_axioms_constants.lean#L48" target="_blank" title="https://github.com/kbuzzard/xena/blob/48ce83d8bc9782a08ee852d126e784f696086846/canonical_isomorphism/group_axioms_constants.lean#L48">https://github.com/kbuzzard/xena/blob/48ce83d8bc9782a08ee852d126e784f696086846/canonical_isomorphism/group_axioms_constants.lean#L48</a></p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 19:15)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125825734):
-there
+<p>there</p>
 
 #### [ Reid Barton (Apr 28 2018 at 19:16)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125825775):
-In the calc proof, if you just begin every justification with `by rw`, you can make it quite uniform (at least in this case)
-```lean
-  exact calc b = 1 * b         : by rw group'.one_mul
-           ... = (a⁻¹ * a) * b : by rw group'.mul_left_inv
-           ... = a⁻¹ * (a * b) : by rw group'.mul_assoc
-           ... = a⁻¹ * (a * c) : by rw Habac
-           ... = (a⁻¹ * a) * c : by rw group'.mul_assoc
-           ... = 1 * c         : by rw group'.mul_left_inv
-           ... = c             : by rw group'.one_mul
-```
+<p>In the calc proof, if you just begin every justification with <code>by rw</code>, you can make it quite uniform (at least in this case)</p>
+<div class="codehilite"><pre><span></span>  <span class="n">exact</span> <span class="k">calc</span> <span class="n">b</span> <span class="bp">=</span> <span class="mi">1</span> <span class="bp">*</span> <span class="n">b</span>         <span class="o">:</span> <span class="k">by</span> <span class="n">rw</span> <span class="n">group&#39;</span><span class="bp">.</span><span class="n">one_mul</span>
+           <span class="bp">...</span> <span class="bp">=</span> <span class="o">(</span><span class="n">a</span><span class="bp">⁻¹</span> <span class="bp">*</span> <span class="n">a</span><span class="o">)</span> <span class="bp">*</span> <span class="n">b</span> <span class="o">:</span> <span class="k">by</span> <span class="n">rw</span> <span class="n">group&#39;</span><span class="bp">.</span><span class="n">mul_left_inv</span>
+           <span class="bp">...</span> <span class="bp">=</span> <span class="n">a</span><span class="bp">⁻¹</span> <span class="bp">*</span> <span class="o">(</span><span class="n">a</span> <span class="bp">*</span> <span class="n">b</span><span class="o">)</span> <span class="o">:</span> <span class="k">by</span> <span class="n">rw</span> <span class="n">group&#39;</span><span class="bp">.</span><span class="n">mul_assoc</span>
+           <span class="bp">...</span> <span class="bp">=</span> <span class="n">a</span><span class="bp">⁻¹</span> <span class="bp">*</span> <span class="o">(</span><span class="n">a</span> <span class="bp">*</span> <span class="n">c</span><span class="o">)</span> <span class="o">:</span> <span class="k">by</span> <span class="n">rw</span> <span class="n">Habac</span>
+           <span class="bp">...</span> <span class="bp">=</span> <span class="o">(</span><span class="n">a</span><span class="bp">⁻¹</span> <span class="bp">*</span> <span class="n">a</span><span class="o">)</span> <span class="bp">*</span> <span class="n">c</span> <span class="o">:</span> <span class="k">by</span> <span class="n">rw</span> <span class="n">group&#39;</span><span class="bp">.</span><span class="n">mul_assoc</span>
+           <span class="bp">...</span> <span class="bp">=</span> <span class="mi">1</span> <span class="bp">*</span> <span class="n">c</span>         <span class="o">:</span> <span class="k">by</span> <span class="n">rw</span> <span class="n">group&#39;</span><span class="bp">.</span><span class="n">mul_left_inv</span>
+           <span class="bp">...</span> <span class="bp">=</span> <span class="n">c</span>             <span class="o">:</span> <span class="k">by</span> <span class="n">rw</span> <span class="n">group&#39;</span><span class="bp">.</span><span class="n">one_mul</span>
+</pre></div>
 
 #### [ Kenny Lau (Apr 28 2018 at 19:16)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125825776):
-Change
-```lean
-lemma mul_left_cancel : ∀ {a b c : G}, a * b = a * c → b = c := 
-```
-to
-```lean
-lemma mul_left_cancel : ∀ (a) {b c : G}, a * b = a * c → b = c := 
-```
+<p>Change</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">mul_left_cancel</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="n">G</span><span class="o">},</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">c</span> <span class="bp">→</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">c</span> <span class="o">:=</span>
+</pre></div>
+
+
+<p>to</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">mul_left_cancel</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">a</span><span class="o">)</span> <span class="o">{</span><span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="n">G</span><span class="o">},</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">c</span> <span class="bp">→</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">c</span> <span class="o">:=</span>
+</pre></div>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 19:17)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125825781):
-do you feel that this change is actually justified rather than it being an attempt to sort out a problem?
+<p>do you feel that this change is actually justified rather than it being an attempt to sort out a problem?</p>
 
 #### [ Kenny Lau (Apr 28 2018 at 19:17)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125825782):
-yes, because `a` could not be infered from the final type `b = c`
+<p>yes, because <code>a</code> could not be infered from the final type <code>b = c</code></p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 19:17)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125825783):
-yes
+<p>yes</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 19:17)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125825784):
-I wondered if that was a reasonable justification for the change
+<p>I wondered if that was a reasonable justification for the change</p>
 
 #### [ Chris Hughes (Apr 28 2018 at 19:18)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125825823):
-It can be inferred from the hypothesis though.
+<p>It can be inferred from the hypothesis though.</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 19:18)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125825824):
-exactly
+<p>exactly</p>
 
 #### [ Kenny Lau (Apr 28 2018 at 19:18)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125825825):
-well if you don't want to change it you can state the hypothesis explicitly using `have`
+<p>well if you don't want to change it you can state the hypothesis explicitly using <code>have</code></p>
 
 #### [ Reid Barton (Apr 28 2018 at 19:18)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125825826):
-> ... = (a⁻¹ * a) * b : by rw [mul_left_inv] -- why does that line even work? I believe it should fail. Is it a bug?
-
-I was puzzled by this too up until quite recently. The reason it works is that `rw` does not rewrite the left hand side to the right hand side as one might think. Rather, it rewrites the desired equality `1 * b = (a⁻¹ * a) * b` to whatever it becomes after the rewrite, and that rewrite might occur on either side.
+<blockquote>
+<p>... = (a⁻¹ * a) * b : by rw [mul_left_inv] -- why does that line even work? I believe it should fail. Is it a bug?</p>
+</blockquote>
+<p>I was puzzled by this too up until quite recently. The reason it works is that <code>rw</code> does not rewrite the left hand side to the right hand side as one might think. Rather, it rewrites the desired equality <code>1 * b = (a⁻¹ * a) * b</code> to whatever it becomes after the rewrite, and that rewrite might occur on either side.</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 19:18)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125825827):
-so Kenny based on your logic what are the forms of the other axioms that I should be using?
+<p>so Kenny based on your logic what are the forms of the other axioms that I should be using?</p>
 
 #### [ Reid Barton (Apr 28 2018 at 19:19)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125825833):
-Then because the rewritten goal is of the form `a = a`, it gets solved by `rfl` automatically
+<p>Then because the rewritten goal is of the form <code>a = a</code>, it gets solved by <code>rfl</code> automatically</p>
 
 #### [ Kenny Lau (Apr 28 2018 at 19:19)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125825834):
-@**Kevin Buzzard** maybe don't make `a` explicit afterall, lol
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> maybe don't make <code>a</code> explicit afterall, lol</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 19:19)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125825835):
-:-)
+<p>:-)</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 19:21)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125825887):
-I don't quite know what I am looking for here. I guess what is going on is that different conventions produce different results which may or may not have slight annoyances
+<p>I don't quite know what I am looking for here. I guess what is going on is that different conventions produce different results which may or may not have slight annoyances</p>
 
 #### [ Reid Barton (Apr 28 2018 at 19:21)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125825888):
-Also if you use `by rw` on every line of the calc proof, then it doesn't matter whether you make the arguments of the axioms explicit or not
+<p>Also if you use <code>by rw</code> on every line of the calc proof, then it doesn't matter whether you make the arguments of the axioms explicit or not</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 19:24)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125825980):
-Kenny in none of the standard typeclasses do I see variables in axioms being introduced with `{}`. I am imagining there is a good reason for this
+<p>Kenny in none of the standard typeclasses do I see variables in axioms being introduced with <code>{}</code>. I am imagining there is a good reason for this</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 19:25)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125825987):
-Letting them all be `{}` announces that you're 100 percent convinced that unification will save you
+<p>Letting them all be <code>{}</code> announces that you're 100 percent convinced that unification will save you</p>
 
 #### [ Kenny Lau (Apr 28 2018 at 19:25)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125825988):
-well they have interface like
-```lean
-class semigroup (α : Type u) extends has_mul α :=
-(mul_assoc : ∀ a b c : α, a * b * c = a * (b * c))
+<p>well they have interface like</p>
+<div class="codehilite"><pre><span></span><span class="n">class</span> <span class="n">semigroup</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="kn">extends</span> <span class="n">has_mul</span> <span class="n">α</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">mul_assoc</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="n">α</span><span class="o">,</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">b</span> <span class="bp">*</span> <span class="n">c</span> <span class="bp">=</span> <span class="n">a</span> <span class="bp">*</span> <span class="o">(</span><span class="n">b</span> <span class="bp">*</span> <span class="n">c</span><span class="o">))</span>
 
-lemma mul_assoc [semigroup α] : ∀ a b c : α, a * b * c = a * (b * c) :=
-semigroup.mul_assoc
-```
+<span class="kn">lemma</span> <span class="n">mul_assoc</span> <span class="o">[</span><span class="n">semigroup</span> <span class="n">α</span><span class="o">]</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="n">α</span><span class="o">,</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">b</span> <span class="bp">*</span> <span class="n">c</span> <span class="bp">=</span> <span class="n">a</span> <span class="bp">*</span> <span class="o">(</span><span class="n">b</span> <span class="bp">*</span> <span class="n">c</span><span class="o">)</span> <span class="o">:=</span>
+<span class="n">semigroup</span><span class="bp">.</span><span class="n">mul_assoc</span>
+</pre></div>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 19:25)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125825989):
-but letting them all be `()` does not mean you're giving up home
+<p>but letting them all be <code>()</code> does not mean you're giving up home</p>
 
 #### [ Kenny Lau (Apr 28 2018 at 19:25)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125825990):
-oh wait
+<p>oh wait</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 19:25)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125825991):
-because other things might fill in the gaps later
+<p>because other things might fill in the gaps later</p>
 
 #### [ Kenny Lau (Apr 28 2018 at 19:25)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125825992):
-right, you still need `_` for `mul_assoc` lol
+<p>right, you still need <code>_</code> for <code>mul_assoc</code> lol</p>
 
 #### [ Kenny Lau (Apr 28 2018 at 19:26)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125826031):
-so maybe change back to `()` and use Reid's approach
+<p>so maybe change back to <code>()</code> and use Reid's approach</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 19:26)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125826032):
-Sometimes I did
+<p>Sometimes I did</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 19:26)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125826033):
-sometimes I didn't
+<p>sometimes I didn't</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 19:26)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125826040):
-Oh I make the interface!
+<p>Oh I make the interface!</p>
 
 #### [ Kenny Lau (Apr 28 2018 at 19:27)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125826053):
-I'm saying, the interface in the library still uses explicit variables
+<p>I'm saying, the interface in the library still uses explicit variables</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 19:28)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125826096):
-`exact calc b = 1 * b         : by rw group'.one_mul` -- that "shouldn't work" either
+<p><code>exact calc b = 1 * b         : by rw group'.one_mul</code> -- that "shouldn't work" either</p>
 
 #### [ Kenny Lau (Apr 28 2018 at 19:28)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125826097):
-why not?
+<p>why not?</p>
 
 #### [ Kenny Lau (Apr 28 2018 at 19:28)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125826100):
-the goal is `b = 1 * b`
+<p>the goal is <code>b = 1 * b</code></p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 19:29)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125826105):
-Oh I see
+<p>Oh I see</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 19:29)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125826106):
-of course
+<p>of course</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 19:29)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125826107):
-Kenny do you understand why that bug is not a bug?
+<p>Kenny do you understand why that bug is not a bug?</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 19:30)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125826149):
-line 33
+<p>line 33</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 19:30)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125826164):
-Oh I now understand
+<p>Oh I now understand</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 19:30)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125826165):
-I should think of what the rw actually does
+<p>I should think of what the rw actually does</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 19:30)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125826166):
-not what I want it to do
+<p>not what I want it to do</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 19:32)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125826218):
-```lean
-lemma mul_left_cancel : ∀ {a b c : G}, a * b = a * c → b = c := 
-begin
-  intros a b c Habac,
-  exact calc b = 1 * b         : by rw one_mul
-           ... = (a⁻¹ * a) * b : by rw mul_left_inv
-           ... = a⁻¹ * (a * b) : by rw mul_assoc
-           ... = a⁻¹ * (a * c) : by rw Habac
-           ... = (a⁻¹ * a) * c : by rw mul_assoc
-           ... = 1 * c         : by rw mul_left_inv
-           ... = c : one_mul
-end
-```
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">mul_left_cancel</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="n">G</span><span class="o">},</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">c</span> <span class="bp">→</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">c</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">intros</span> <span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="n">Habac</span><span class="o">,</span>
+  <span class="n">exact</span> <span class="k">calc</span> <span class="n">b</span> <span class="bp">=</span> <span class="mi">1</span> <span class="bp">*</span> <span class="n">b</span>         <span class="o">:</span> <span class="k">by</span> <span class="n">rw</span> <span class="n">one_mul</span>
+           <span class="bp">...</span> <span class="bp">=</span> <span class="o">(</span><span class="n">a</span><span class="bp">⁻¹</span> <span class="bp">*</span> <span class="n">a</span><span class="o">)</span> <span class="bp">*</span> <span class="n">b</span> <span class="o">:</span> <span class="k">by</span> <span class="n">rw</span> <span class="n">mul_left_inv</span>
+           <span class="bp">...</span> <span class="bp">=</span> <span class="n">a</span><span class="bp">⁻¹</span> <span class="bp">*</span> <span class="o">(</span><span class="n">a</span> <span class="bp">*</span> <span class="n">b</span><span class="o">)</span> <span class="o">:</span> <span class="k">by</span> <span class="n">rw</span> <span class="n">mul_assoc</span>
+           <span class="bp">...</span> <span class="bp">=</span> <span class="n">a</span><span class="bp">⁻¹</span> <span class="bp">*</span> <span class="o">(</span><span class="n">a</span> <span class="bp">*</span> <span class="n">c</span><span class="o">)</span> <span class="o">:</span> <span class="k">by</span> <span class="n">rw</span> <span class="n">Habac</span>
+           <span class="bp">...</span> <span class="bp">=</span> <span class="o">(</span><span class="n">a</span><span class="bp">⁻¹</span> <span class="bp">*</span> <span class="n">a</span><span class="o">)</span> <span class="bp">*</span> <span class="n">c</span> <span class="o">:</span> <span class="k">by</span> <span class="n">rw</span> <span class="n">mul_assoc</span>
+           <span class="bp">...</span> <span class="bp">=</span> <span class="mi">1</span> <span class="bp">*</span> <span class="n">c</span>         <span class="o">:</span> <span class="k">by</span> <span class="n">rw</span> <span class="n">mul_left_inv</span>
+           <span class="bp">...</span> <span class="bp">=</span> <span class="n">c</span> <span class="o">:</span> <span class="n">one_mul</span>
+<span class="kn">end</span>
+</pre></div>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 19:32)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125826221):
-Yes that's really nice
+<p>Yes that's really nice</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 19:32)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125826224):
-That's just how a mathematician would explain it
+<p>That's just how a mathematician would explain it</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 19:33)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125826228):
-"apply this axiom"
+<p>"apply this axiom"</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 19:33)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125826233):
-"I don't care which way"
+<p>"I don't care which way"</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 19:33)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125826234):
-"the obvious way"
+<p>"the obvious way"</p>
 
 #### [ Kenny Lau (Apr 28 2018 at 19:33)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125826236):
-I'm sure you can have fewer lines lol
+<p>I'm sure you can have fewer lines lol</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 19:33)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125826237):
-of course
+<p>of course</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 19:34)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125826253):
-but this is the raw beauty which you see here
+<p>but this is the raw beauty which you see here</p>
 
 #### [ Kenny Lau (Apr 28 2018 at 19:34)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125826280):
-and then your `begin intros exact` kind of defeat the purpose of entering tactic mode
+<p>and then your <code>begin intros exact</code> kind of defeat the purpose of entering tactic mode</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 19:34)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125826282):
-ha ha you are exactly right
+<p>ha ha you are exactly right</p>
 
 #### [ Reid Barton (Apr 28 2018 at 19:35)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125826292):
-I wasn't sure whether to comment about the intros line, haha
+<p>I wasn't sure whether to comment about the intros line, haha</p>
 
 #### [ Kenny Lau (Apr 28 2018 at 19:35)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125826294):
-comment about them.
+<p>comment about them.</p>
 
 #### [ Kenny Lau (Apr 28 2018 at 19:40)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125826451):
-@**Kevin Buzzard** I just finished writing a file without ever entering tactic mode
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> I just finished writing a file without ever entering tactic mode</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 22:47)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125831048):
-All the rewrites fail in the below
+<p>All the rewrites fail in the below</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 22:47)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125831051):
-```lean
-class has_group_notation (G : Type) extends has_mul G, has_one G, has_inv G
+<div class="codehilite"><pre><span></span><span class="n">class</span> <span class="n">has_group_notation</span> <span class="o">(</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="kn">extends</span> <span class="n">has_mul</span> <span class="n">G</span><span class="o">,</span> <span class="n">has_one</span> <span class="n">G</span><span class="o">,</span> <span class="n">has_inv</span> <span class="n">G</span>
 
-structure group' (G : Type) extends has_group_notation G :=
-(mul_assoc : ∀ (a b c : G), a * b * c = a * (b * c))
-(one_mul : ∀ (a : G), 1 * a = a)
-(mul_left_inv : ∀ (a : G), a⁻¹ * a = 1)
+<span class="kn">structure</span> <span class="n">group&#39;</span> <span class="o">(</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="kn">extends</span> <span class="n">has_group_notation</span> <span class="n">G</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">mul_assoc</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="n">G</span><span class="o">),</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">b</span> <span class="bp">*</span> <span class="n">c</span> <span class="bp">=</span> <span class="n">a</span> <span class="bp">*</span> <span class="o">(</span><span class="n">b</span> <span class="bp">*</span> <span class="n">c</span><span class="o">))</span>
+<span class="o">(</span><span class="n">one_mul</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">G</span><span class="o">),</span> <span class="mi">1</span> <span class="bp">*</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">a</span><span class="o">)</span>
+<span class="o">(</span><span class="n">mul_left_inv</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">G</span><span class="o">),</span> <span class="n">a</span><span class="bp">⁻¹</span> <span class="bp">*</span> <span class="n">a</span> <span class="bp">=</span> <span class="mi">1</span><span class="o">)</span>
 
-variables {G : Type} (group'.G : group' G) [has_group_notation G]  
--- variables (H : Type) [has_mul H] [has_one H] [has_inv H]
+<span class="kn">variables</span> <span class="o">{</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">(</span><span class="n">group&#39;</span><span class="bp">.</span><span class="n">G</span> <span class="o">:</span> <span class="n">group&#39;</span> <span class="n">G</span><span class="o">)</span> <span class="o">[</span><span class="n">has_group_notation</span> <span class="n">G</span><span class="o">]</span>
+<span class="c1">-- variables (H : Type) [has_mul H] [has_one H] [has_inv H]</span>
 
--- We prove left_mul_cancel for group'
+<span class="c1">-- We prove left_mul_cancel for group&#39;</span>
 
-lemma group'.mul_left_cancel : ∀ (a b c : G), a * b = a * c → b = c := 
-λ a b c Habac,
- calc b = 1 * b         : by rw one_mul
-    ... = (a⁻¹ * a) * b : by rw mul_left_inv
-    ... = a⁻¹ * (a * b) : by rw mul_assoc
-    ... = a⁻¹ * (a * c) : by rw Habac
-    ... = (a⁻¹ * a) * c : by rw mul_assoc
-    ... = 1 * c         : by rw mul_left_inv
-                ... = c : by rw one_mul
-```
+<span class="kn">lemma</span> <span class="n">group&#39;</span><span class="bp">.</span><span class="n">mul_left_cancel</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="n">G</span><span class="o">),</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">c</span> <span class="bp">→</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">c</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="n">Habac</span><span class="o">,</span>
+ <span class="k">calc</span> <span class="n">b</span> <span class="bp">=</span> <span class="mi">1</span> <span class="bp">*</span> <span class="n">b</span>         <span class="o">:</span> <span class="k">by</span> <span class="n">rw</span> <span class="n">one_mul</span>
+    <span class="bp">...</span> <span class="bp">=</span> <span class="o">(</span><span class="n">a</span><span class="bp">⁻¹</span> <span class="bp">*</span> <span class="n">a</span><span class="o">)</span> <span class="bp">*</span> <span class="n">b</span> <span class="o">:</span> <span class="k">by</span> <span class="n">rw</span> <span class="n">mul_left_inv</span>
+    <span class="bp">...</span> <span class="bp">=</span> <span class="n">a</span><span class="bp">⁻¹</span> <span class="bp">*</span> <span class="o">(</span><span class="n">a</span> <span class="bp">*</span> <span class="n">b</span><span class="o">)</span> <span class="o">:</span> <span class="k">by</span> <span class="n">rw</span> <span class="n">mul_assoc</span>
+    <span class="bp">...</span> <span class="bp">=</span> <span class="n">a</span><span class="bp">⁻¹</span> <span class="bp">*</span> <span class="o">(</span><span class="n">a</span> <span class="bp">*</span> <span class="n">c</span><span class="o">)</span> <span class="o">:</span> <span class="k">by</span> <span class="n">rw</span> <span class="n">Habac</span>
+    <span class="bp">...</span> <span class="bp">=</span> <span class="o">(</span><span class="n">a</span><span class="bp">⁻¹</span> <span class="bp">*</span> <span class="n">a</span><span class="o">)</span> <span class="bp">*</span> <span class="n">c</span> <span class="o">:</span> <span class="k">by</span> <span class="n">rw</span> <span class="n">mul_assoc</span>
+    <span class="bp">...</span> <span class="bp">=</span> <span class="mi">1</span> <span class="bp">*</span> <span class="n">c</span>         <span class="o">:</span> <span class="k">by</span> <span class="n">rw</span> <span class="n">mul_left_inv</span>
+                <span class="bp">...</span> <span class="bp">=</span> <span class="n">c</span> <span class="o">:</span> <span class="k">by</span> <span class="n">rw</span> <span class="n">one_mul</span>
+</pre></div>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 22:47)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125831052):
-I am using a structure
+<p>I am using a structure</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 22:47)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125831053):
-I don't understand the error messages
+<p>I don't understand the error messages</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 22:47)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125831054):
-First is
+<p>First is</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 22:47)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125831055):
-```
-rewrite tactic failed, did not find instance of the pattern in the target expression
+<div class="codehilite"><pre><span></span>rewrite tactic failed, did not find instance of the pattern in the target expression
   1 * ?m_3
 state:
 G : Type,
@@ -564,149 +551,145 @@ _inst_1 : has_group_notation G,
 a b c : G,
 Habac : a * b = a * c
 ⊢ b = 1 * b
-```
+</pre></div>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 22:48)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125831094):
-I am unimpressed with Lean's instance-finding abilities here
+<p>I am unimpressed with Lean's instance-finding abilities here</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 22:48)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125831095):
-what am i missing?
+<p>what am i missing?</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 22:48)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125831099):
-I wondered how changing a class to astructure changed things
+<p>I wondered how changing a class to astructure changed things</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 22:49)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125831106):
-I think all notation as a notational typeclass works great in these sorts of situations
+<p>I think all notation as a notational typeclass works great in these sorts of situations</p>
 
 #### [ Kenny Lau (Apr 28 2018 at 22:49)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125831107):
-Lean only finds classes, not structures
+<p>Lean only finds classes, not structures</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 22:49)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125831109):
-it's clear what it's doing
+<p>it's clear what it's doing</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 22:49)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125831110):
-and it's doing nothing more
+<p>and it's doing nothing more</p>
 
 #### [ Kenny Lau (Apr 28 2018 at 22:49)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125831111):
-the structure isnt even in the hypotheses
+<p>the structure isnt even in the hypotheses</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 22:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125831154):
-I don't understand
+<p>I don't understand</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 22:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125831158):
-I will take notation off
+<p>I will take notation off</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 22:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125831160):
-and put pp.all on
+<p>and put pp.all on</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 22:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125831161):
-am I missing something simple?
+<p>am I missing something simple?</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 22:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125831166):
-kenny can you fix it?
+<p>kenny can you fix it?</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 22:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125831171):
-that might help me understand
+<p>that might help me understand</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 22:55)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125831267):
-Look at this beautiful proof
+<p>Look at this beautiful proof</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 22:55)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125831273):
-```lean
-lemma mul_left_cancel' {G : Type} [has_mul G] [has_one G] [has_inv G]
-(mul_assoc : ∀ (a b c : G), a * b * c = a * (b * c))
-(one_mul : ∀ (a : G), 1 * a = a)
-(mul_left_inv : ∀ (a : G), a⁻¹ * a = 1)
-: ∀ (a b c : G), a * b = a * c → b = c :=
-λ a b c Habac,
- calc b = 1 * b         : by rw one_mul
-    ... = (a⁻¹ * a) * b : by rw mul_left_inv
-    ... = a⁻¹ * (a * b) : by rw mul_assoc
-    ... = a⁻¹ * (a * c) : by rw Habac
-    ... = (a⁻¹ * a) * c : by rw mul_assoc
-    ... = 1 * c         : by rw mul_left_inv
-    ... = c             : by rw one_mul
-```
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">mul_left_cancel&#39;</span> <span class="o">{</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">[</span><span class="n">has_mul</span> <span class="n">G</span><span class="o">]</span> <span class="o">[</span><span class="n">has_one</span> <span class="n">G</span><span class="o">]</span> <span class="o">[</span><span class="n">has_inv</span> <span class="n">G</span><span class="o">]</span>
+<span class="o">(</span><span class="n">mul_assoc</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="n">G</span><span class="o">),</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">b</span> <span class="bp">*</span> <span class="n">c</span> <span class="bp">=</span> <span class="n">a</span> <span class="bp">*</span> <span class="o">(</span><span class="n">b</span> <span class="bp">*</span> <span class="n">c</span><span class="o">))</span>
+<span class="o">(</span><span class="n">one_mul</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">G</span><span class="o">),</span> <span class="mi">1</span> <span class="bp">*</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">a</span><span class="o">)</span>
+<span class="o">(</span><span class="n">mul_left_inv</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">G</span><span class="o">),</span> <span class="n">a</span><span class="bp">⁻¹</span> <span class="bp">*</span> <span class="n">a</span> <span class="bp">=</span> <span class="mi">1</span><span class="o">)</span>
+<span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="n">G</span><span class="o">),</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">c</span> <span class="bp">→</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">c</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="n">Habac</span><span class="o">,</span>
+ <span class="k">calc</span> <span class="n">b</span> <span class="bp">=</span> <span class="mi">1</span> <span class="bp">*</span> <span class="n">b</span>         <span class="o">:</span> <span class="k">by</span> <span class="n">rw</span> <span class="n">one_mul</span>
+    <span class="bp">...</span> <span class="bp">=</span> <span class="o">(</span><span class="n">a</span><span class="bp">⁻¹</span> <span class="bp">*</span> <span class="n">a</span><span class="o">)</span> <span class="bp">*</span> <span class="n">b</span> <span class="o">:</span> <span class="k">by</span> <span class="n">rw</span> <span class="n">mul_left_inv</span>
+    <span class="bp">...</span> <span class="bp">=</span> <span class="n">a</span><span class="bp">⁻¹</span> <span class="bp">*</span> <span class="o">(</span><span class="n">a</span> <span class="bp">*</span> <span class="n">b</span><span class="o">)</span> <span class="o">:</span> <span class="k">by</span> <span class="n">rw</span> <span class="n">mul_assoc</span>
+    <span class="bp">...</span> <span class="bp">=</span> <span class="n">a</span><span class="bp">⁻¹</span> <span class="bp">*</span> <span class="o">(</span><span class="n">a</span> <span class="bp">*</span> <span class="n">c</span><span class="o">)</span> <span class="o">:</span> <span class="k">by</span> <span class="n">rw</span> <span class="n">Habac</span>
+    <span class="bp">...</span> <span class="bp">=</span> <span class="o">(</span><span class="n">a</span><span class="bp">⁻¹</span> <span class="bp">*</span> <span class="n">a</span><span class="o">)</span> <span class="bp">*</span> <span class="n">c</span> <span class="o">:</span> <span class="k">by</span> <span class="n">rw</span> <span class="n">mul_assoc</span>
+    <span class="bp">...</span> <span class="bp">=</span> <span class="mi">1</span> <span class="bp">*</span> <span class="n">c</span>         <span class="o">:</span> <span class="k">by</span> <span class="n">rw</span> <span class="n">mul_left_inv</span>
+    <span class="bp">...</span> <span class="bp">=</span> <span class="n">c</span>             <span class="o">:</span> <span class="k">by</span> <span class="n">rw</span> <span class="n">one_mul</span>
+</pre></div>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 22:55)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125831281):
-Can you show me how to make a proof which is just as beautiful, but using a class or structure?
+<p>Can you show me how to make a proof which is just as beautiful, but using a class or structure?</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 22:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125831329):
-I am getting sick of carrying the axioms around with me
+<p>I am getting sick of carrying the axioms around with me</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 22:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125831368):
-I have packaged up all the notation in a typeclass
+<p>I have packaged up all the notation in a typeclass</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 22:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125831369):
-but I want to package all the group axioms up as well
+<p>but I want to package all the group axioms up as well</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 22:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125831379):
-The typeclass system is perfect for notation.
+<p>The typeclass system is perfect for notation.</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 22:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125831381):
-There is very little risk of a diamond :-)
+<p>There is very little risk of a diamond :-)</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 23:00)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125831406):
-I want to package everything away but keep the proof beautiful
+<p>I want to package everything away but keep the proof beautiful</p>
 
 #### [ Kevin Buzzard (Apr 28 2018 at 23:00)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125831438):
-and once I have managed that, I think I am done.
+<p>and once I have managed that, I think I am done.</p>
 
 #### [ Chris Hughes (Apr 28 2018 at 23:03)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125831505):
-Why aren't you just using the `group` typeclass?
+<p>Why aren't you just using the <code>group</code> typeclass?</p>
 
 #### [ Mario Carneiro (Apr 28 2018 at 23:21)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125831988):
-The `has_group_notation` class has been discussed in some of Jeremy's explorations, called `group_struct`, but it's not needed in mathlib as it is now
+<p>The <code>has_group_notation</code> class has been discussed in some of Jeremy's explorations, called <code>group_struct</code>, but it's not needed in mathlib as it is now</p>
 
 #### [ Mario Carneiro (Apr 28 2018 at 23:25)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125832087):
-The standard way to show that an axiom is redundant is to have an auxiliary constructor for `group` that doesn't have the redundant axioms
+<p>The standard way to show that an axiom is redundant is to have an auxiliary constructor for <code>group</code> that doesn't have the redundant axioms</p>
 
 #### [ Chris Hughes (Apr 28 2018 at 23:32)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125832272):
-Is this better?
-```lean
+<p>Is this better?</p>
+<div class="codehilite"><pre><span></span><span class="n">class</span> <span class="n">has_group_notation</span> <span class="o">(</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="kn">extends</span> <span class="n">has_mul</span> <span class="n">G</span><span class="o">,</span> <span class="n">has_one</span> <span class="n">G</span><span class="o">,</span> <span class="n">has_inv</span> <span class="n">G</span>
 
-class has_group_notation (G : Type) extends has_mul G, has_one G, has_inv G
+<span class="n">class</span> <span class="n">group&#39;</span> <span class="o">(</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="kn">extends</span> <span class="n">has_group_notation</span> <span class="n">G</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">mul_assoc&#39;</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="n">G</span><span class="o">),</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">b</span> <span class="bp">*</span> <span class="n">c</span> <span class="bp">=</span> <span class="n">a</span> <span class="bp">*</span> <span class="o">(</span><span class="n">b</span> <span class="bp">*</span> <span class="n">c</span><span class="o">))</span>
+<span class="o">(</span><span class="n">one_mul&#39;</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">G</span><span class="o">),</span> <span class="mi">1</span> <span class="bp">*</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">a</span><span class="o">)</span>
+<span class="o">(</span><span class="n">mul_left_inv&#39;</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">G</span><span class="o">),</span> <span class="n">a</span><span class="bp">⁻¹</span> <span class="bp">*</span> <span class="n">a</span> <span class="bp">=</span> <span class="mi">1</span><span class="o">)</span>
 
-class group' (G : Type) extends has_group_notation G :=
-(mul_assoc' : ∀ (a b c : G), a * b * c = a * (b * c))
-(one_mul' : ∀ (a : G), 1 * a = a)
-(mul_left_inv' : ∀ (a : G), a⁻¹ * a = 1)
+<span class="kn">variables</span> <span class="o">{</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">[</span><span class="n">group&#39;</span> <span class="n">G</span><span class="o">]</span>
+<span class="kn">open</span> <span class="n">group&#39;</span>
+<span class="c1">-- variables (H : Type) [has_mul H] [has_one H] [has_inv H]</span>
 
-variables {G : Type} [group' G]
-open group'
--- variables (H : Type) [has_mul H] [has_one H] [has_inv H]
+<span class="c1">-- We prove left_mul_cancel for group&#39;</span>
 
--- We prove left_mul_cancel for group'
-
-lemma group'.mul_left_cancel : ∀ (a b c : G), a * b = a * c → b = c :=
-λ a b c Habac,
- calc b = 1 * b         : by rw one_mul' b
-    ... = (a⁻¹ * a) * b : by rw mul_left_inv'
-    ... = a⁻¹ * (a * b) : by rw mul_assoc'
-    ... = a⁻¹ * (a * c) : by rw Habac
-    ... = (a⁻¹ * a) * c : by rw mul_assoc'
-    ... = 1 * c         : by rw mul_left_inv'
-                ... = c : by rw one_mul'
-```
+<span class="kn">lemma</span> <span class="n">group&#39;</span><span class="bp">.</span><span class="n">mul_left_cancel</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="n">G</span><span class="o">),</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">c</span> <span class="bp">→</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">c</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="n">Habac</span><span class="o">,</span>
+ <span class="k">calc</span> <span class="n">b</span> <span class="bp">=</span> <span class="mi">1</span> <span class="bp">*</span> <span class="n">b</span>         <span class="o">:</span> <span class="k">by</span> <span class="n">rw</span> <span class="n">one_mul&#39;</span> <span class="n">b</span>
+    <span class="bp">...</span> <span class="bp">=</span> <span class="o">(</span><span class="n">a</span><span class="bp">⁻¹</span> <span class="bp">*</span> <span class="n">a</span><span class="o">)</span> <span class="bp">*</span> <span class="n">b</span> <span class="o">:</span> <span class="k">by</span> <span class="n">rw</span> <span class="n">mul_left_inv&#39;</span>
+    <span class="bp">...</span> <span class="bp">=</span> <span class="n">a</span><span class="bp">⁻¹</span> <span class="bp">*</span> <span class="o">(</span><span class="n">a</span> <span class="bp">*</span> <span class="n">b</span><span class="o">)</span> <span class="o">:</span> <span class="k">by</span> <span class="n">rw</span> <span class="n">mul_assoc&#39;</span>
+    <span class="bp">...</span> <span class="bp">=</span> <span class="n">a</span><span class="bp">⁻¹</span> <span class="bp">*</span> <span class="o">(</span><span class="n">a</span> <span class="bp">*</span> <span class="n">c</span><span class="o">)</span> <span class="o">:</span> <span class="k">by</span> <span class="n">rw</span> <span class="n">Habac</span>
+    <span class="bp">...</span> <span class="bp">=</span> <span class="o">(</span><span class="n">a</span><span class="bp">⁻¹</span> <span class="bp">*</span> <span class="n">a</span><span class="o">)</span> <span class="bp">*</span> <span class="n">c</span> <span class="o">:</span> <span class="k">by</span> <span class="n">rw</span> <span class="n">mul_assoc&#39;</span>
+    <span class="bp">...</span> <span class="bp">=</span> <span class="mi">1</span> <span class="bp">*</span> <span class="n">c</span>         <span class="o">:</span> <span class="k">by</span> <span class="n">rw</span> <span class="n">mul_left_inv&#39;</span>
+                <span class="bp">...</span> <span class="bp">=</span> <span class="n">c</span> <span class="o">:</span> <span class="k">by</span> <span class="n">rw</span> <span class="n">one_mul&#39;</span>
+</pre></div>
 
 #### [ Chris Hughes (Apr 28 2018 at 23:33)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125832280):
-You had two `has_group_notation` instances, one from `group'` and another one
+<p>You had two <code>has_group_notation</code> instances, one from <code>group'</code> and another one</p>
 
 #### [ Kenny Lau (Apr 28 2018 at 23:33)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125832281):
-Just use a namespace and drop the fucking primes
+<p>Just use a namespace and drop the fucking primes</p>
 
 #### [ Chris Hughes (Apr 28 2018 at 23:33)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125832284):
-one mul is global
+<p>one mul is global</p>
 
 #### [ Kenny Lau (Apr 28 2018 at 23:34)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125832322):
-protected
+<p>protected</p>
 
 #### [ Chris Hughes (Apr 28 2018 at 23:34)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125832326):
-but it doesn't know which `one_mul` I mean.
+<p>but it doesn't know which <code>one_mul</code> I mean.</p>
 
 #### [ Mario Carneiro (Apr 28 2018 at 23:54)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125832826):
-```
-def group.mk' {α : Type*} [semigroup α] [has_one α] [has_inv α]
+<div class="codehilite"><pre><span></span>def group.mk&#39; {α : Type*} [semigroup α] [has_one α] [has_inv α]
   (one_mul : ∀ (a : α), 1 * a = a)
   (mul_left_inv : ∀ (a : α), a⁻¹ * a = 1) : group α :=
 have ∀ a : α, a * a = a → a = 1, from λ a h,
@@ -723,70 +706,69 @@ have ∀ a : α, a * a⁻¹ = 1, from
   mul_one := λ a, show a * 1 = a,
     by rw [← mul_left_inv a, ← mul_assoc, this, one_mul],
   ..‹semigroup α›, ..‹has_one α›, ..‹has_inv α› }
-```
+</pre></div>
 
 #### [ Scott Morrison (Apr 29 2018 at 00:54)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125834341):
-This is a common problem in making definitions --- do you go for maximal axioms (so that you don't need lots of lemmas later, and the big results follow easily from the definitions), or minimal axioms (so instances are easy to construct)? Often, the right solution in Lean is to go for maximal axioms with alternate constructors that require minimal axioms.
+<p>This is a common problem in making definitions --- do you go for maximal axioms (so that you don't need lots of lemmas later, and the big results follow easily from the definitions), or minimal axioms (so instances are easy to construct)? Often, the right solution in Lean is to go for maximal axioms with alternate constructors that require minimal axioms.</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 02:38)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125836997):
-```quote
-The standard way to show that an axiom is redundant is to have an auxiliary constructor for `group` that doesn't have the redundant axioms
-```
-Yes but these are mathematicians with no functional programming background and I think they would prefer to see something which looks like an honest proof (never mention the axiom, then prove it) rather than wrapping anything in a complicated structure.
+<blockquote>
+<p>The standard way to show that an axiom is redundant is to have an auxiliary constructor for <code>group</code> that doesn't have the redundant axioms</p>
+</blockquote>
+<p>Yes but these are mathematicians with no functional programming background and I think they would prefer to see something which looks like an honest proof (never mention the axiom, then prove it) rather than wrapping anything in a complicated structure.</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 02:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125837057):
-Mario your proof is in some sense canonical, but I prefer mine for pedagogical reasons.
+<p>Mario your proof is in some sense canonical, but I prefer mine for pedagogical reasons.</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 04:27)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125839656):
-```quote
-Just use a namespace and drop the fucking primes
-```
-Kenny can you do it? Namespaces seem to lead to overloading anyway.
+<blockquote>
+<p>Just use a namespace and drop the fucking primes</p>
+</blockquote>
+<p>Kenny can you do it? Namespaces seem to lead to overloading anyway.</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 04:28)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125839695):
-I am reluctant to prime the axioms
+<p>I am reluctant to prime the axioms</p>
 
 #### [ Kevin Buzzard (Apr 29 2018 at 04:28)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125839696):
-but maybe I have to
+<p>but maybe I have to</p>
 
 #### [ Mario Carneiro (Apr 29 2018 at 05:18)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125840944):
-> something which looks like an honest proof (never mention the axiom, then prove it)
-
-I'm confused. Isn't that pretty much exactly what my proof does? I start with a semigroup with a one and inv, and the left_inv and one_mul axioms, and derive mul_one. There is no funny business at all, or complicated structures, it's literally just proving one statement from another, and then wrapping it up in a `group`. The proof part could also be factored out like so:
-```
-section
+<blockquote>
+<p>something which looks like an honest proof (never mention the axiom, then prove it)</p>
+</blockquote>
+<p>I'm confused. Isn't that pretty much exactly what my proof does? I start with a semigroup with a one and inv, and the left_inv and one_mul axioms, and derive mul_one. There is no funny business at all, or complicated structures, it's literally just proving one statement from another, and then wrapping it up in a <code>group</code>. The proof part could also be factored out like so:</p>
+<div class="codehilite"><pre><span></span>section
 parameters {α : Type*} [semigroup α] [has_one α] [has_inv α]
   (one_mul : ∀ (a : α), 1 * a = a)
   (mul_left_inv : ∀ (a : α), a⁻¹ * a = 1)
 include one_mul mul_left_inv
 
-theorem group.mk'_aux1 {a : α} (h : a * a = a) : a = 1 :=
+theorem group.mk&#39;_aux1 {a : α} (h : a * a = a) : a = 1 :=
 calc a = a⁻¹ * a * a : by simp [mul_left_inv, one_mul]
    ... = a⁻¹ * a : by rw [mul_assoc, h]
    ... = 1 : mul_left_inv _
 
-theorem group.mk'_aux2 (a : α) : a * a⁻¹ = 1 :=
-group.mk'_aux1 $ calc
+theorem group.mk&#39;_aux2 (a : α) : a * a⁻¹ = 1 :=
+group.mk&#39;_aux1 $ calc
   a * a⁻¹ * (a * a⁻¹)
       = a * (a⁻¹ * a) * a⁻¹ : by simp [mul_assoc]
   ... = a * a⁻¹ : by rw mul_left_inv; simp [mul_assoc, one_mul]
 
-theorem group.mk'_aux3 (a : α) : a * 1 = a :=
-by rw [← mul_left_inv a, ← mul_assoc, group.mk'_aux2, one_mul]
+theorem group.mk&#39;_aux3 (a : α) : a * 1 = a :=
+by rw [← mul_left_inv a, ← mul_assoc, group.mk&#39;_aux2, one_mul]
 
-def group.mk' : group α :=
+def group.mk&#39; : group α :=
 { one_mul := one_mul,
   mul_left_inv := mul_left_inv,
-  mul_one := group.mk'_aux3,
+  mul_one := group.mk&#39;_aux3,
   ..‹semigroup α›, ..‹has_one α›, ..‹has_inv α› }
 
 end
-```
+</pre></div>
 
 #### [ Mario Carneiro (Apr 29 2018 at 05:45)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125841574):
-Another way to present a proof like this is via an auxiliary class like your `gripe`, like so:
-```
-class gripe (α : Type*) extends semigroup α, has_one α, has_inv α :=
+<p>Another way to present a proof like this is via an auxiliary class like your <code>gripe</code>, like so:</p>
+<div class="codehilite"><pre><span></span>class gripe (α : Type*) extends semigroup α, has_one α, has_inv α :=
 (one_mul : ∀ (a : α), 1 * a = a)
 (mul_left_inv : ∀ (a : α), a⁻¹ * a = 1)
 
@@ -816,10 +798,10 @@ instance (α) [gripe α] : group α :=
   ..gripe.to_has_inv α }
 
 end gripe
-```
+</pre></div>
 
 #### [ Kevin Buzzard (May 02 2018 at 19:47)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/126004737):
-Here's how it ended up. https://xenaproject.wordpress.com/2018/04/30/group-theory-revision/
+<p>Here's how it ended up. <a href="https://xenaproject.wordpress.com/2018/04/30/group-theory-revision/" target="_blank" title="https://xenaproject.wordpress.com/2018/04/30/group-theory-revision/">https://xenaproject.wordpress.com/2018/04/30/group-theory-revision/</a></p>
 
 
 {% endraw %}

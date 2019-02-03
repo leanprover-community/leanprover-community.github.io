@@ -12,231 +12,223 @@ permalink: archive/113488general/24153tidybug.html
 
 {% raw %}
 #### [ Patrick Massot (Oct 02 2018 at 22:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tidy%20bug/near/135060203):
-Can someone try
-```lean
-import tactic.tidy
+<p>Can someone try</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">tidy</span>
 
-example (X Y : Type) (f : X → Y) (h : ∀ y : Y, ∃ x : X, f(x) = y) : 
-  (∃ g : Y → X, f ∘ g = id) :=
-begin
-  cases classical.axiom_of_choice h with g H,
-  tidy,
- end
-```
+<span class="kn">example</span> <span class="o">(</span><span class="n">X</span> <span class="n">Y</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">X</span> <span class="bp">→</span> <span class="n">Y</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">y</span> <span class="o">:</span> <span class="n">Y</span><span class="o">,</span> <span class="bp">∃</span> <span class="n">x</span> <span class="o">:</span> <span class="n">X</span><span class="o">,</span> <span class="n">f</span><span class="o">(</span><span class="n">x</span><span class="o">)</span> <span class="bp">=</span> <span class="n">y</span><span class="o">)</span> <span class="o">:</span>
+  <span class="o">(</span><span class="bp">∃</span> <span class="n">g</span> <span class="o">:</span> <span class="n">Y</span> <span class="bp">→</span> <span class="n">X</span><span class="o">,</span> <span class="n">f</span> <span class="err">∘</span> <span class="n">g</span> <span class="bp">=</span> <span class="n">id</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">cases</span> <span class="n">classical</span><span class="bp">.</span><span class="n">axiom_of_choice</span> <span class="n">h</span> <span class="k">with</span> <span class="n">g</span> <span class="n">H</span><span class="o">,</span>
+  <span class="n">tidy</span><span class="o">,</span>
+ <span class="kn">end</span>
+</pre></div>
 
 #### [ Patrick Massot (Oct 02 2018 at 22:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tidy%20bug/near/135060275):
-Here it says `no goals` after `tidy` but red-squiggle `example` with ``type mismatch at application  g a term  a has type  Y_1 but is expected to have type   Y types contain aliased name(s): Y remark: the tactic `dedup` can be used to rename aliases``
+<p>Here it says <code>no goals</code> after <code>tidy</code> but red-squiggle <code>example</code> with <code>type mismatch at application  g a term  a has type  Y_1 but is expected to have type   Y types contain aliased name(s): Y remark: the tactic `dedup` can be used to rename aliases</code></p>
 
 #### [ Bryan Gin-ge Chen (Oct 02 2018 at 22:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tidy%20bug/near/135060435):
-```quote
-Here it says `no goals` after `tidy` but red-squiggle `example` with ``type mismatch at application  g a term  a has type  Y_1 but is expected to have type   Y types contain aliased name(s): Y remark: the tactic `dedup` can be used to rename aliases``
-```
-I get the same.
+<blockquote>
+<p>Here it says <code>no goals</code> after <code>tidy</code> but red-squiggle <code>example</code> with <code>type mismatch at application  g a term  a has type  Y_1 but is expected to have type   Y types contain aliased name(s): Y remark: the tactic `dedup` can be used to rename aliases</code></p>
+</blockquote>
+<p>I get the same.</p>
 
 #### [ Patrick Massot (Oct 02 2018 at 22:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tidy%20bug/near/135060519):
-Let's wait for @**Scott Morrison|110087** to wake up, or finish lunch, or whatever it's time to do in Australia
+<p>Let's wait for <span class="user-mention" data-user-id="110087">@Scott Morrison</span> to wake up, or finish lunch, or whatever it's time to do in Australia</p>
 
 #### [ Bryan Gin-ge Chen (Oct 02 2018 at 22:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tidy%20bug/near/135060631):
-Here's the trace:
-```lean
-/- `tidy` says -/ 
-dsimp at *, 
-fsplit, 
-work_on_goal 0 { intros a }, 
-work_on_goal 1 { ext1, dsimp at *, solve_by_elim }
-```
+<p>Here's the trace:</p>
+<div class="codehilite"><pre><span></span><span class="c">/-</span><span class="cm"> `tidy` says -/</span>
+<span class="n">dsimp</span> <span class="n">at</span> <span class="bp">*</span><span class="o">,</span>
+<span class="n">fsplit</span><span class="o">,</span>
+<span class="n">work_on_goal</span> <span class="mi">0</span> <span class="o">{</span> <span class="n">intros</span> <span class="n">a</span> <span class="o">},</span>
+<span class="n">work_on_goal</span> <span class="mi">1</span> <span class="o">{</span> <span class="n">ext1</span><span class="o">,</span> <span class="n">dsimp</span> <span class="n">at</span> <span class="bp">*</span><span class="o">,</span> <span class="n">solve_by_elim</span> <span class="o">}</span>
+</pre></div>
 
 #### [ Patrick Massot (Oct 02 2018 at 22:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tidy%20bug/near/135060646):
-I'm working on that demo file we discussed earlier, trying to see what general purpose automation can do what. The problem with magic is it's somewhat unpredictable. It seems `finish` is pretty powerful in those example, but I'd like to understand when `tidy` or `tauto` actually also work (or even work better)
+<p>I'm working on that demo file we discussed earlier, trying to see what general purpose automation can do what. The problem with magic is it's somewhat unpredictable. It seems <code>finish</code> is pretty powerful in those example, but I'd like to understand when <code>tidy</code> or <code>tauto</code> actually also work (or even work better)</p>
 
 #### [ Patrick Massot (Oct 02 2018 at 22:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tidy%20bug/near/135060745):
-Good idea Bryan!
+<p>Good idea Bryan!</p>
 
 #### [ Bryan Gin-ge Chen (Oct 02 2018 at 22:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tidy%20bug/near/135060767):
-Not sure if I misunderstand the meaning of the trace, but throwing it in as a proof fails at the first `dsimp`
+<p>Not sure if I misunderstand the meaning of the trace, but throwing it in as a proof fails at the first <code>dsimp</code></p>
 
 #### [ Patrick Massot (Oct 02 2018 at 22:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tidy%20bug/near/135060783):
-It's very strange to follow, it seems hopeless and then `solve_by_elim` pretends to get rid of all meta-vars and do the job
+<p>It's very strange to follow, it seems hopeless and then <code>solve_by_elim</code> pretends to get rid of all meta-vars and do the job</p>
 
 #### [ Patrick Massot (Oct 02 2018 at 22:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tidy%20bug/near/135060810):
-here I get exactly the same result as with tidy itself
+<p>here I get exactly the same result as with tidy itself</p>
 
 #### [ Patrick Massot (Oct 02 2018 at 22:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tidy%20bug/near/135060834):
-google says Scott may be sleeping
+<p>google says Scott may be sleeping</p>
 
 #### [ Bryan Gin-ge Chen (Oct 02 2018 at 22:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tidy%20bug/near/135060897):
-I see this:
-```lean
-import tactic.tidy
-example (X Y : Type) (f : X → Y) (h : ∀ y : Y, ∃ x : X, f(x) = y) :
-  (∃ g : Y → X, f ∘ g = id) :=
-begin
-dsimp at *,  -- squiggly line under dsimp
-/- Tactic State
-X Y : Type,
-f : X → Y,
-h : ∀ (y : Y), ∃ (x : X), f x = y
-⊢ ∃ (g : Y → X), f ∘ g = id
-scratch.lean:14:0: error
-dsimplify tactic failed to simplify
-state:
-⊢ ∀ (X Y : Type) (f : X → Y), (∀ (y : Y), ∃ (x : X), f x = y) → (∃ (g : Y → X), f ∘ g = id) -/
-fsplit,
-work_on_goal 0 { intros a },
-work_on_goal 1 { ext1, dsimp at *, solve_by_elim }
-end
-```
+<p>I see this:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">tidy</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">X</span> <span class="n">Y</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">X</span> <span class="bp">→</span> <span class="n">Y</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">y</span> <span class="o">:</span> <span class="n">Y</span><span class="o">,</span> <span class="bp">∃</span> <span class="n">x</span> <span class="o">:</span> <span class="n">X</span><span class="o">,</span> <span class="n">f</span><span class="o">(</span><span class="n">x</span><span class="o">)</span> <span class="bp">=</span> <span class="n">y</span><span class="o">)</span> <span class="o">:</span>
+  <span class="o">(</span><span class="bp">∃</span> <span class="n">g</span> <span class="o">:</span> <span class="n">Y</span> <span class="bp">→</span> <span class="n">X</span><span class="o">,</span> <span class="n">f</span> <span class="err">∘</span> <span class="n">g</span> <span class="bp">=</span> <span class="n">id</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="n">dsimp</span> <span class="n">at</span> <span class="bp">*</span><span class="o">,</span>  <span class="c1">-- squiggly line under dsimp</span>
+<span class="c">/-</span><span class="cm"> Tactic State</span>
+<span class="cm">X Y : Type,</span>
+<span class="cm">f : X → Y,</span>
+<span class="cm">h : ∀ (y : Y), ∃ (x : X), f x = y</span>
+<span class="cm">⊢ ∃ (g : Y → X), f ∘ g = id</span>
+<span class="cm">scratch.lean:14:0: error</span>
+<span class="cm">dsimplify tactic failed to simplify</span>
+<span class="cm">state:</span>
+<span class="cm">⊢ ∀ (X Y : Type) (f : X → Y), (∀ (y : Y), ∃ (x : X), f x = y) → (∃ (g : Y → X), f ∘ g = id) -/</span>
+<span class="n">fsplit</span><span class="o">,</span>
+<span class="n">work_on_goal</span> <span class="mi">0</span> <span class="o">{</span> <span class="n">intros</span> <span class="n">a</span> <span class="o">},</span>
+<span class="n">work_on_goal</span> <span class="mi">1</span> <span class="o">{</span> <span class="n">ext1</span><span class="o">,</span> <span class="n">dsimp</span> <span class="n">at</span> <span class="bp">*</span><span class="o">,</span> <span class="n">solve_by_elim</span> <span class="o">}</span>
+<span class="kn">end</span>
+</pre></div>
 
 #### [ Patrick Massot (Oct 02 2018 at 22:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tidy%20bug/near/135060910):
-you erased too much
+<p>you erased too much</p>
 
 #### [ Patrick Massot (Oct 02 2018 at 22:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tidy%20bug/near/135060915):
-the choice idea is required
+<p>the choice idea is required</p>
 
 #### [ Bryan Gin-ge Chen (Oct 02 2018 at 22:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tidy%20bug/near/135060932):
-Oops!
+<p>Oops!</p>
 
 #### [ Bryan Gin-ge Chen (Oct 02 2018 at 22:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tidy%20bug/near/135061725):
-Yes, now I see the same.  
-
-Nothing seems strange with the intermediate tactic states. Is there a way to use the `discharger` option for `solve_by_elim` to make it spit out what it's doing at each stage?
+<p>Yes, now I see the same.  </p>
+<p>Nothing seems strange with the intermediate tactic states. Is there a way to use the <code>discharger</code> option for <code>solve_by_elim</code> to make it spit out what it's doing at each stage?</p>
 
 #### [ Patrick Massot (Oct 02 2018 at 22:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tidy%20bug/near/135061835):
-How is it possible that none of our general purpose weapon can kill
-```lean
-example (X Y : Type) (f : X → Y) (g : Y → X) (h : f ∘ g = id ) (y : Y) : f (g y) = y 
-```
+<p>How is it possible that none of our general purpose weapon can kill</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">X</span> <span class="n">Y</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">X</span> <span class="bp">→</span> <span class="n">Y</span><span class="o">)</span> <span class="o">(</span><span class="n">g</span> <span class="o">:</span> <span class="n">Y</span> <span class="bp">→</span> <span class="n">X</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">f</span> <span class="err">∘</span> <span class="n">g</span> <span class="bp">=</span> <span class="n">id</span> <span class="o">)</span> <span class="o">(</span><span class="n">y</span> <span class="o">:</span> <span class="n">Y</span><span class="o">)</span> <span class="o">:</span> <span class="n">f</span> <span class="o">(</span><span class="n">g</span> <span class="n">y</span><span class="o">)</span> <span class="bp">=</span> <span class="n">y</span>
+</pre></div>
 
 #### [ Kenny Lau (Oct 02 2018 at 22:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tidy%20bug/near/135061909):
-I don't use weapons :P
-```lean
-example (X Y : Type) (f : X → Y) (g : Y → X) (h : f ∘ g = id ) (y : Y) : f (g y) = y := congr_fun h y
-```
+<p>I don't use weapons :P</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">X</span> <span class="n">Y</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">X</span> <span class="bp">→</span> <span class="n">Y</span><span class="o">)</span> <span class="o">(</span><span class="n">g</span> <span class="o">:</span> <span class="n">Y</span> <span class="bp">→</span> <span class="n">X</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">f</span> <span class="err">∘</span> <span class="n">g</span> <span class="bp">=</span> <span class="n">id</span> <span class="o">)</span> <span class="o">(</span><span class="n">y</span> <span class="o">:</span> <span class="n">Y</span><span class="o">)</span> <span class="o">:</span> <span class="n">f</span> <span class="o">(</span><span class="n">g</span> <span class="n">y</span><span class="o">)</span> <span class="bp">=</span> <span class="n">y</span> <span class="o">:=</span> <span class="n">congr_fun</span> <span class="n">h</span> <span class="n">y</span>
+</pre></div>
 
 #### [ Patrick Massot (Oct 02 2018 at 22:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tidy%20bug/near/135061953):
-Kenny, this is exactly what I did at https://github.com/PatrickMassot/lean-scratchpad/blob/master/src/demo.lean#L60 but I'm trying to rewrite this file using automation, for comparison
+<p>Kenny, this is exactly what I did at <a href="https://github.com/PatrickMassot/lean-scratchpad/blob/master/src/demo.lean#L60" target="_blank" title="https://github.com/PatrickMassot/lean-scratchpad/blob/master/src/demo.lean#L60">https://github.com/PatrickMassot/lean-scratchpad/blob/master/src/demo.lean#L60</a> but I'm trying to rewrite this file using automation, for comparison</p>
 
 #### [ Patrick Massot (Oct 02 2018 at 22:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tidy%20bug/near/135062010):
-I guess this is again because tactic writers don't like function equalities, especially with compositions
+<p>I guess this is again because tactic writers don't like function equalities, especially with compositions</p>
 
 #### [ Bryan Gin-ge Chen (Oct 02 2018 at 22:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tidy%20bug/near/135062015):
-Replacing `solve_by_elim` with `apply_assumption` gives the same strange behavior.
+<p>Replacing <code>solve_by_elim</code> with <code>apply_assumption</code> gives the same strange behavior.</p>
 
 #### [ Rob Lewis (Oct 02 2018 at 22:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tidy%20bug/near/135062022):
-Higher order reasoning is hard!
+<p>Higher order reasoning is hard!</p>
 
 #### [ Patrick Massot (Oct 02 2018 at 22:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tidy%20bug/near/135062062):
-`finish` and its friends could try to turn each function equality assumption into a forall
+<p><code>finish</code> and its friends could try to turn each function equality assumption into a forall</p>
 
 #### [ Patrick Massot (Oct 02 2018 at 22:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tidy%20bug/near/135062136):
-```lean
-example (X Y : Type) (f : X → Y) (g : Y → X) (h : ∀ z, (f ∘ g) z = id z) (y : Y):
-  f (g y) = y :=
-by finish
-```
-does work
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">X</span> <span class="n">Y</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">X</span> <span class="bp">→</span> <span class="n">Y</span><span class="o">)</span> <span class="o">(</span><span class="n">g</span> <span class="o">:</span> <span class="n">Y</span> <span class="bp">→</span> <span class="n">X</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">z</span><span class="o">,</span> <span class="o">(</span><span class="n">f</span> <span class="err">∘</span> <span class="n">g</span><span class="o">)</span> <span class="n">z</span> <span class="bp">=</span> <span class="n">id</span> <span class="n">z</span><span class="o">)</span> <span class="o">(</span><span class="n">y</span> <span class="o">:</span> <span class="n">Y</span><span class="o">):</span>
+  <span class="n">f</span> <span class="o">(</span><span class="n">g</span> <span class="n">y</span><span class="o">)</span> <span class="bp">=</span> <span class="n">y</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">finish</span>
+</pre></div>
+
+
+<p>does work</p>
 
 #### [ Patrick Massot (Oct 02 2018 at 22:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tidy%20bug/near/135062179):
-Of course rewriting `h` like this is the most un-mathematical thing you could see
+<p>Of course rewriting <code>h</code> like this is the most un-mathematical thing you could see</p>
 
 #### [ Kenny Lau (Oct 02 2018 at 22:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tidy%20bug/near/135062206):
-```quote
-`finish` and its friends
-```
+<blockquote>
+<p><code>finish</code> and its friends</p>
+</blockquote>
 
 #### [ Patrick Massot (Oct 02 2018 at 22:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tidy%20bug/near/135062395):
-its friends are `tauto` and `tidy`
+<p>its friends are <code>tauto</code> and <code>tidy</code></p>
 
 #### [ Bryan Gin-ge Chen (Oct 02 2018 at 22:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tidy%20bug/near/135062619):
-Could it be that there's something strange happening with `work_on_goal`? The following works:
-```lean
-import tactic.tidy
-example (X Y : Type) (f : X → Y) (h : ∀ y : Y, ∃ x : X, f(x) = y) :
-  (∃ g : Y → X, f ∘ g = id) :=
-begin
-  cases classical.axiom_of_choice h with g H,
-  dsimp at *,
-  fsplit,
-  { exact g },
-  { ext1, 
-  dsimp at *,
-  apply_assumption }
-end
-```
+<p>Could it be that there's something strange happening with <code>work_on_goal</code>? The following works:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">tidy</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">X</span> <span class="n">Y</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">X</span> <span class="bp">→</span> <span class="n">Y</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">y</span> <span class="o">:</span> <span class="n">Y</span><span class="o">,</span> <span class="bp">∃</span> <span class="n">x</span> <span class="o">:</span> <span class="n">X</span><span class="o">,</span> <span class="n">f</span><span class="o">(</span><span class="n">x</span><span class="o">)</span> <span class="bp">=</span> <span class="n">y</span><span class="o">)</span> <span class="o">:</span>
+  <span class="o">(</span><span class="bp">∃</span> <span class="n">g</span> <span class="o">:</span> <span class="n">Y</span> <span class="bp">→</span> <span class="n">X</span><span class="o">,</span> <span class="n">f</span> <span class="err">∘</span> <span class="n">g</span> <span class="bp">=</span> <span class="n">id</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">cases</span> <span class="n">classical</span><span class="bp">.</span><span class="n">axiom_of_choice</span> <span class="n">h</span> <span class="k">with</span> <span class="n">g</span> <span class="n">H</span><span class="o">,</span>
+  <span class="n">dsimp</span> <span class="n">at</span> <span class="bp">*</span><span class="o">,</span>
+  <span class="n">fsplit</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">exact</span> <span class="n">g</span> <span class="o">},</span>
+  <span class="o">{</span> <span class="n">ext1</span><span class="o">,</span>
+  <span class="n">dsimp</span> <span class="n">at</span> <span class="bp">*</span><span class="o">,</span>
+  <span class="n">apply_assumption</span> <span class="o">}</span>
+<span class="kn">end</span>
+</pre></div>
 
 #### [ Bryan Gin-ge Chen (Oct 02 2018 at 22:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tidy%20bug/near/135062701):
-Compare this, which gives the same `no goals` + weird error as the initial `tidy` call:
-```lean
-import tactic.tidy
-example (X Y : Type) (f : X → Y) (h : ∀ y : Y, ∃ x : X, f(x) = y) :
-  (∃ g : Y → X, f ∘ g = id) :=
-begin
-  cases classical.axiom_of_choice h with g H,
-  dsimp at *,
-  fsplit,
-  --{ exact g },
-  work_on_goal 1 { ext1,
-  dsimp at *,
-  apply_assumption }
-end
-```
+<p>Compare this, which gives the same <code>no goals</code> + weird error as the initial <code>tidy</code> call:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">tidy</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">X</span> <span class="n">Y</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">X</span> <span class="bp">→</span> <span class="n">Y</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">y</span> <span class="o">:</span> <span class="n">Y</span><span class="o">,</span> <span class="bp">∃</span> <span class="n">x</span> <span class="o">:</span> <span class="n">X</span><span class="o">,</span> <span class="n">f</span><span class="o">(</span><span class="n">x</span><span class="o">)</span> <span class="bp">=</span> <span class="n">y</span><span class="o">)</span> <span class="o">:</span>
+  <span class="o">(</span><span class="bp">∃</span> <span class="n">g</span> <span class="o">:</span> <span class="n">Y</span> <span class="bp">→</span> <span class="n">X</span><span class="o">,</span> <span class="n">f</span> <span class="err">∘</span> <span class="n">g</span> <span class="bp">=</span> <span class="n">id</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">cases</span> <span class="n">classical</span><span class="bp">.</span><span class="n">axiom_of_choice</span> <span class="n">h</span> <span class="k">with</span> <span class="n">g</span> <span class="n">H</span><span class="o">,</span>
+  <span class="n">dsimp</span> <span class="n">at</span> <span class="bp">*</span><span class="o">,</span>
+  <span class="n">fsplit</span><span class="o">,</span>
+  <span class="c1">--{ exact g },</span>
+  <span class="n">work_on_goal</span> <span class="mi">1</span> <span class="o">{</span> <span class="n">ext1</span><span class="o">,</span>
+  <span class="n">dsimp</span> <span class="n">at</span> <span class="bp">*</span><span class="o">,</span>
+  <span class="n">apply_assumption</span> <span class="o">}</span>
+<span class="kn">end</span>
+</pre></div>
 
 #### [ Patrick Massot (Oct 02 2018 at 22:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tidy%20bug/near/135062782):
-interesting
+<p>interesting</p>
 
 #### [ Patrick Massot (Oct 02 2018 at 22:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tidy%20bug/near/135062942):
-Even better:
-```clean
- example (X Y : Type) (f : X → Y) (h : ∀ y : Y, ∃ x : X, f(x) = y) :
-  (∃ g : Y → X, f ∘ g = id) :=
-begin
-  cases classical.axiom_of_choice h with g H,
-  dsimp at *,
-  fsplit,
-  { exact g },
-  work_on_goal 0 { ext1,
-  dsimp at *,
-  apply_assumption }
-end
-```
-works!
+<p>Even better:</p>
+<div class="codehilite"><pre><span></span><span class="w"> </span><span class="n">example</span><span class="w"> </span><span class="p">(</span><span class="n">X</span><span class="w"> </span><span class="n">Y</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Type</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="n">f</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">X</span><span class="w"> </span><span class="err">→</span><span class="w"> </span><span class="n">Y</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="n">h</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="err">∀</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Y</span><span class="p">,</span><span class="w"> </span><span class="err">∃</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">X</span><span class="p">,</span><span class="w"> </span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">y</span><span class="p">)</span><span class="w"> </span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="p">(</span><span class="err">∃</span><span class="w"> </span><span class="n">g</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">Y</span><span class="w"> </span><span class="err">→</span><span class="w"> </span><span class="n">X</span><span class="p">,</span><span class="w"> </span><span class="n">f</span><span class="w"> </span><span class="err">∘</span><span class="w"> </span><span class="n">g</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"></span>
+<span class="n">begin</span><span class="w"></span>
+<span class="w">  </span><span class="n">cases</span><span class="w"> </span><span class="n">classical.axiom_of_choice</span><span class="w"> </span><span class="n">h</span><span class="w"> </span><span class="k">with</span><span class="w"> </span><span class="n">g</span><span class="w"> </span><span class="n">H</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="n">dsimp</span><span class="w"> </span><span class="n">at</span><span class="w"> </span><span class="o">*</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="n">fsplit</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="p">{</span><span class="w"> </span><span class="n">exact</span><span class="w"> </span><span class="n">g</span><span class="w"> </span><span class="p">},</span><span class="w"></span>
+<span class="w">  </span><span class="n">work_on_goal</span><span class="mi"> 0</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">ext1</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="n">dsimp</span><span class="w"> </span><span class="n">at</span><span class="w"> </span><span class="o">*</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="n">apply_assumption</span><span class="w"> </span><span class="p">}</span><span class="w"></span>
+<span class="n">end</span><span class="w"></span>
+</pre></div>
+
+
+<p>works!</p>
 
 #### [ Patrick Massot (Oct 02 2018 at 22:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tidy%20bug/near/135063047):
-but actually this is getting far away from what tidy suggested
+<p>but actually this is getting far away from what tidy suggested</p>
 
 #### [ Bryan Gin-ge Chen (Oct 02 2018 at 22:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tidy%20bug/near/135063189):
-[Here's](https://github.com/leanprover/mathlib/blob/decb0302869ac70069ba26708367e460695683cb/tactic/chain.lean#L44) `work_on_goal`. If I had to guess, there's something wrong in here, possibly in handling what happens if a goal gets solved.
+<p><a href="https://github.com/leanprover/mathlib/blob/decb0302869ac70069ba26708367e460695683cb/tactic/chain.lean#L44" target="_blank" title="https://github.com/leanprover/mathlib/blob/decb0302869ac70069ba26708367e460695683cb/tactic/chain.lean#L44">Here's</a> <code>work_on_goal</code>. If I had to guess, there's something wrong in here, possibly in handling what happens if a goal gets solved.</p>
 
 #### [ Bryan Gin-ge Chen (Oct 02 2018 at 23:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tidy%20bug/near/135065300):
-I think the problem is that when `apply_assumption` kills off a goal, it does not return properly to `work_on_goal`. Then lean thinks it has finished, but in reality there are more goals that `work_on_goal` just temporarily deleted. There are no issues when `exact g` finishes a goal inside `work_on_goal`, so there's something going on with this particular interaction.
+<p>I think the problem is that when <code>apply_assumption</code> kills off a goal, it does not return properly to <code>work_on_goal</code>. Then lean thinks it has finished, but in reality there are more goals that <code>work_on_goal</code> just temporarily deleted. There are no issues when <code>exact g</code> finishes a goal inside <code>work_on_goal</code>, so there's something going on with this particular interaction.</p>
 
 #### [ Bryan Gin-ge Chen (Oct 02 2018 at 23:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tidy%20bug/near/135065407):
-`apply_assumption` is [here](https://github.com/leanprover/mathlib/blob/c2df6b1f3f62575649dbe128a2c5fc9e2de26ffb/tactic/basic.lean#L422), but it's too monad-y for me to make sense of at the moment.
+<p><code>apply_assumption</code> is <a href="https://github.com/leanprover/mathlib/blob/c2df6b1f3f62575649dbe128a2c5fc9e2de26ffb/tactic/basic.lean#L422" target="_blank" title="https://github.com/leanprover/mathlib/blob/c2df6b1f3f62575649dbe128a2c5fc9e2de26ffb/tactic/basic.lean#L422">here</a>, but it's too monad-y for me to make sense of at the moment.</p>
 
 #### [ Simon Hudon (Oct 02 2018 at 23:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tidy%20bug/near/135065867):
-What problem are you looking for?
+<p>What problem are you looking for?</p>
 
 #### [ Bryan Gin-ge Chen (Oct 03 2018 at 00:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tidy%20bug/near/135066963):
-Patrick started this thread with [an example](https://leanprover.zulipchat.com/#narrow/stream/113488-general/subject/tidy.20bug/near/135060203) where `tidy` leaves the tactic state with `no goals` but there is a strange error.
-
-I'm proposing that the root cause of this is due to `apply_assumption` not returning properly to `work_on_goal`.
+<p>Patrick started this thread with <a href="#narrow/stream/113488-general/subject/tidy.20bug/near/135060203" title="#narrow/stream/113488-general/subject/tidy.20bug/near/135060203">an example</a> where <code>tidy</code> leaves the tactic state with <code>no goals</code> but there is a strange error.</p>
+<p>I'm proposing that the root cause of this is due to <code>apply_assumption</code> not returning properly to <code>work_on_goal</code>.</p>
 
 #### [ Scott Morrison (Oct 03 2018 at 00:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tidy%20bug/near/135067028):
-Thanks for these bug reports. I probably won't have a chance to work on it until the weekend.
+<p>Thanks for these bug reports. I probably won't have a chance to work on it until the weekend.</p>
 
 #### [ Kenny Lau (Oct 03 2018 at 00:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tidy%20bug/near/135068289):
-```lean
-import tactic.interactive
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">interactive</span>
 
-example (X Y : Type) (f : X → Y) (g : Y → X) (h : ∀ z, (f ∘ g) z = id z) (y : Y):
-  f (g y) = y := by tauto
-```
+<span class="kn">example</span> <span class="o">(</span><span class="n">X</span> <span class="n">Y</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">X</span> <span class="bp">→</span> <span class="n">Y</span><span class="o">)</span> <span class="o">(</span><span class="n">g</span> <span class="o">:</span> <span class="n">Y</span> <span class="bp">→</span> <span class="n">X</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">z</span><span class="o">,</span> <span class="o">(</span><span class="n">f</span> <span class="err">∘</span> <span class="n">g</span><span class="o">)</span> <span class="n">z</span> <span class="bp">=</span> <span class="n">id</span> <span class="n">z</span><span class="o">)</span> <span class="o">(</span><span class="n">y</span> <span class="o">:</span> <span class="n">Y</span><span class="o">):</span>
+  <span class="n">f</span> <span class="o">(</span><span class="n">g</span> <span class="n">y</span><span class="o">)</span> <span class="bp">=</span> <span class="n">y</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">tauto</span>
+</pre></div>
 
 #### [ Kenny Lau (Oct 03 2018 at 00:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tidy%20bug/near/135068292):
-@**Patrick Massot**
+<p><span class="user-mention" data-user-id="110031">@Patrick Massot</span></p>
 
 #### [ Patrick Massot (Oct 03 2018 at 09:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tidy%20bug/near/135085753):
-Thanks Kenny, but this is the version I don't want, because `h` is stated un-mathematically
+<p>Thanks Kenny, but this is the version I don't want, because <code>h</code> is stated un-mathematically</p>
 
 
 {% endraw %}

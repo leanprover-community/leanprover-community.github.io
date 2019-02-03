@@ -12,92 +12,89 @@ permalink: archive/113488general/47494deletingvariables.html
 
 {% raw %}
 #### [ Reid Barton (Jun 03 2018 at 03:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deleting%20variables/near/127485299):
-Is it possible to delete something that has been declared using `variables`? (I want to "upgrade" an instance variable to a class which extends the original one.)
+<p>Is it possible to delete something that has been declared using <code>variables</code>? (I want to "upgrade" an instance variable to a class which extends the original one.)</p>
 
 #### [ Kenny Lau (Jun 03 2018 at 03:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deleting%20variables/near/127485300):
-no
+<p>no</p>
 
 #### [ Simon Hudon (Jun 03 2018 at 03:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deleting%20variables/near/127485309):
-Can you show me concretely what you're going for?
+<p>Can you show me concretely what you're going for?</p>
 
 #### [ Reid Barton (Jun 03 2018 at 03:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deleting%20variables/near/127485402):
-My actual example involves my own classes, but something like
-```lean
-section
-variables {α : Type} [monoid α]
+<p>My actual example involves my own classes, but something like</p>
+<div class="codehilite"><pre><span></span><span class="kn">section</span>
+<span class="kn">variables</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">[</span><span class="n">monoid</span> <span class="n">α</span><span class="o">]</span>
 
-/- other definitions that don't require the group structure... -/
+<span class="c">/-</span><span class="cm"> other definitions that don&#39;t require the group structure... -/</span>
 
-variables [group α]
+<span class="kn">variables</span> <span class="o">[</span><span class="n">group</span> <span class="n">α</span><span class="o">]</span>
 
-def g : α → α := λ x, x * x⁻¹
-example (x : α) : g x = (1 : α) := by simp [g]
-   
-end
-```
+<span class="n">def</span> <span class="n">g</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">α</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="n">x</span> <span class="bp">*</span> <span class="n">x</span><span class="bp">⁻¹</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">g</span> <span class="n">x</span> <span class="bp">=</span> <span class="o">(</span><span class="mi">1</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">g</span><span class="o">]</span>
+
+<span class="kn">end</span>
+</pre></div>
 
 #### [ Reid Barton (Jun 03 2018 at 03:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deleting%20variables/near/127485439):
-I can just put the earlier definitions in their own section which has the `monoid` variable
+<p>I can just put the earlier definitions in their own section which has the <code>monoid</code> variable</p>
 
 #### [ Reid Barton (Jun 03 2018 at 03:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deleting%20variables/near/127485452):
-but I was hoping for something more convenient
+<p>but I was hoping for something more convenient</p>
 
 #### [ Simon Hudon (Jun 03 2018 at 03:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deleting%20variables/near/127485457):
-Ah I see! Your best bet I think is to end your section and start it just before the `group` variable
+<p>Ah I see! Your best bet I think is to end your section and start it just before the <code>group</code> variable</p>
 
 #### [ Simon Hudon (Jun 03 2018 at 03:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deleting%20variables/near/127485460):
-What is the inconvenient in doing that?
+<p>What is the inconvenient in doing that?</p>
 
 #### [ Reid Barton (Jun 03 2018 at 03:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deleting%20variables/near/127485469):
-Not really very inconvenient, just a few extra lines of `section`/`end`
+<p>Not really very inconvenient, just a few extra lines of <code>section</code>/<code>end</code></p>
 
 #### [ Simon Hudon (Jun 03 2018 at 03:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deleting%20variables/near/127485519):
-One downside I can see is if you have other variables declared in the first section that you want to keep in the rest of the section
+<p>One downside I can see is if you have other variables declared in the first section that you want to keep in the rest of the section</p>
 
 #### [ Simon Hudon (Jun 03 2018 at 03:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deleting%20variables/near/127485562):
-In that case, I would do this:
-
-```
-section
-variables {α : Type} 
+<p>In that case, I would do this:</p>
+<div class="codehilite"><pre><span></span>section
+variables {α : Type}
 section
 variables [monoid α]
 
-/- other definitions that don't require the group structure... -/
+/- other definitions that don&#39;t require the group structure... -/
 end
 variables [group α]
 end
-```
+</pre></div>
 
 #### [ Simon Hudon (Jun 03 2018 at 03:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deleting%20variables/near/127485613):
-Actually, if you don't do anything, what error do you get?
+<p>Actually, if you don't do anything, what error do you get?</p>
 
 #### [ Reid Barton (Jun 03 2018 at 04:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deleting%20variables/near/127485719):
-There I got an error which arose because `*` was using the monoid instance and `\-1` was using the group instance
+<p>There I got an error which arose because <code>*</code> was using the monoid instance and <code>\-1</code> was using the group instance</p>
 
 #### [ Simon Hudon (Jun 03 2018 at 04:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deleting%20variables/near/127485732):
-Ah, ok, I thought maybe it would go through the group by default
+<p>Ah, ok, I thought maybe it would go through the group by default</p>
 
 #### [ Mario Carneiro (Jun 03 2018 at 04:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deleting%20variables/near/127485734):
-well it's still a problem to have redundant typeclasses on a def
+<p>well it's still a problem to have redundant typeclasses on a def</p>
 
 #### [ Simon Hudon (Jun 03 2018 at 04:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deleting%20variables/near/127485815):
-Why?
+<p>Why?</p>
 
 #### [ Mario Carneiro (Jun 03 2018 at 04:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deleting%20variables/near/127485832):
-in the theorem itself, it's a problem since they aren't the same structure, in uses it's a nuisance to have a redundant assumption
+<p>in the theorem itself, it's a problem since they aren't the same structure, in uses it's a nuisance to have a redundant assumption</p>
 
 #### [ Simon Hudon (Jun 03 2018 at 04:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deleting%20variables/near/127485882):
-Right in theorems I know the issues. With defs, I can't see it will be a nuisance down the line but not how that definition would be invalid
+<p>Right in theorems I know the issues. With defs, I can't see it will be a nuisance down the line but not how that definition would be invalid</p>
 
 #### [ Mario Carneiro (Jun 03 2018 at 04:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deleting%20variables/near/127486403):
-It won't be invalid. Often things like duplicate typeclass hypotheses will go unnoticed for a long time because they aren't really visibly different
+<p>It won't be invalid. Often things like duplicate typeclass hypotheses will go unnoticed for a long time because they aren't really visibly different</p>
 
 #### [ Mario Carneiro (Jun 03 2018 at 04:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deleting%20variables/near/127486404):
-unless you use `@thm` and notice two underscores in place of one
+<p>unless you use <code>@thm</code> and notice two underscores in place of one</p>
 
 #### [ Simon Hudon (Jun 03 2018 at 04:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deleting%20variables/near/127486500):
-It would be nice to have warnings for that kind of stuff. Actually, more warnings in general would be nice
+<p>It would be nice to have warnings for that kind of stuff. Actually, more warnings in general would be nice</p>
 
 
 {% endraw %}

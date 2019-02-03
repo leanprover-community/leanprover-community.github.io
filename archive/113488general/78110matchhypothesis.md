@@ -12,275 +12,266 @@ permalink: archive/113488general/78110matchhypothesis.html
 
 {% raw %}
 #### [ Alexander Bentkamp (Sep 12 2018 at 14:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/match%20hypothesis/near/133796312):
-Hi, 
+<p>Hi, </p>
+<p>I hope you can help me with the following issue:</p>
+<p>I have this defintion containing a proof obligation:</p>
+<div class="codehilite"><pre><span></span>  <span class="n">def</span> <span class="n">clip_tensor_index2</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">{</span><span class="n">ds₁</span> <span class="o">:</span> <span class="n">list</span> <span class="bp">ℕ</span><span class="o">}</span> <span class="o">(</span><span class="n">ds₂</span> <span class="o">:</span> <span class="n">list</span> <span class="bp">ℕ</span><span class="o">),</span> <span class="n">tensor_index</span> <span class="o">(</span><span class="n">zipdims</span> <span class="n">ds₂</span> <span class="n">ds₁</span><span class="o">)</span> <span class="bp">→</span> <span class="n">option</span> <span class="o">(</span><span class="n">tensor_index</span> <span class="n">ds₂</span><span class="o">)</span>
+  <span class="bp">|</span> <span class="n">ds₁</span> <span class="n">ds₂</span> <span class="bp">⟨</span><span class="n">is</span><span class="o">,</span> <span class="n">h</span><span class="bp">⟩</span> <span class="o">:=</span> <span class="k">match</span> <span class="n">clip_tensor_index_list</span> <span class="n">ds₂</span> <span class="n">is</span> <span class="k">with</span>
+  <span class="bp">|</span> <span class="n">none</span> <span class="o">:=</span> <span class="n">none</span>
+  <span class="bp">|</span> <span class="n">some</span> <span class="n">js</span> <span class="o">:=</span> <span class="n">some</span> <span class="bp">⟨</span> <span class="n">js</span> <span class="o">,</span> <span class="n">clip_tensor_index_list_correct</span> <span class="n">ds₂</span> <span class="n">is</span> <span class="n">js</span> <span class="n">sorry</span><span class="bp">⟩</span>
+  <span class="kn">end</span>
+</pre></div>
 
-I hope you can help me with the following issue:
 
-I have this defintion containing a proof obligation:
-```lean
-  def clip_tensor_index2 : Π {ds₁ : list ℕ} (ds₂ : list ℕ), tensor_index (zipdims ds₂ ds₁) → option (tensor_index ds₂)
-  | ds₁ ds₂ ⟨is, h⟩ := match clip_tensor_index_list ds₂ is with
-  | none := none
-  | some js := some ⟨ js , clip_tensor_index_list_correct ds₂ is js sorry⟩ 
-  end
-```
-Where I put `sorry`, I need to prove that `clip_tensor_index_list ds₂ is = some js`, which should be obvious since I matched `clip_tensor_index_list ds₂ is` with `some js`. How can I do this?
-
-@**Rob Lewis**  helped me out with this solution using tactics:
-```
-  def clip_tensor_index2 : Π {ds₁ : list ℕ} (ds₂ : list ℕ), tensor_index (zipdims ds₂ ds₁) → option (tensor_index ds₂)
-  | ds₁ ds₂ ⟨is, h⟩ := 
-  begin 
+<p>Where I put <code>sorry</code>, I need to prove that <code>clip_tensor_index_list ds₂ is = some js</code>, which should be obvious since I matched <code>clip_tensor_index_list ds₂ is</code> with <code>some js</code>. How can I do this?</p>
+<p><span class="user-mention" data-user-id="110596">@Rob Lewis</span>  helped me out with this solution using tactics:</p>
+<div class="codehilite"><pre><span></span>  def clip_tensor_index2 : Π {ds₁ : list ℕ} (ds₂ : list ℕ), tensor_index (zipdims ds₂ ds₁) → option (tensor_index ds₂)
+  | ds₁ ds₂ ⟨is, h⟩ :=
+  begin
     cases h1 : clip_tensor_index_list ds₂ is with js,
     exact none,
-    exact some ⟨ js , clip_tensor_index_list_correct ds₂ is js h1 ⟩ 
+    exact some ⟨ js , clip_tensor_index_list_correct ds₂ is js h1 ⟩
   end
-```
-This works, but I am curious if I could avoid using tactics inside a definition.
+</pre></div>
+
+
+<p>This works, but I am curious if I could avoid using tactics inside a definition.</p>
 
 #### [ Kevin Buzzard (Sep 12 2018 at 15:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/match%20hypothesis/near/133798275):
-If the thing you're matching on (`clip_tensor_index_list ds₂ is`) is an inductive type T then you could use `T.rec` (it looks like `option.rec` in your case)
+<p>If the thing you're matching on (<code>clip_tensor_index_list ds₂ is</code>) is an inductive type T then you could use <code>T.rec</code> (it looks like <code>option.rec</code> in your case)</p>
 
 #### [ Alexander Bentkamp (Sep 13 2018 at 10:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/match%20hypothesis/near/133869597):
-Yes, `clip_tensor_index_list ds₂ is` is of type `option`. However, with `option.rec`, I still have the same issue. Where you see the `sorry` below, I need to provide a proof of `clip_tensor_index_list ds₂ is = some js`. How can I get it?
-```lean 
-  def clip_tensor_index2 : Π {ds₁ : list ℕ} (ds₂ : list ℕ), tensor_index (zipdims ds₂ ds₁) → option (tensor_index ds₂)
-  | ds₁ ds₂ ⟨is, h⟩ := 
-  option.rec none (λjs, some ⟨ js , clip_tensor_index_list_correct ds₂ is js sorry ⟩) (clip_tensor_index_list ds₂ is)
-```
+<p>Yes, <code>clip_tensor_index_list ds₂ is</code> is of type <code>option</code>. However, with <code>option.rec</code>, I still have the same issue. Where you see the <code>sorry</code> below, I need to provide a proof of <code>clip_tensor_index_list ds₂ is = some js</code>. How can I get it?</p>
+<div class="codehilite"><pre><span></span>  <span class="n">def</span> <span class="n">clip_tensor_index2</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">{</span><span class="n">ds₁</span> <span class="o">:</span> <span class="n">list</span> <span class="bp">ℕ</span><span class="o">}</span> <span class="o">(</span><span class="n">ds₂</span> <span class="o">:</span> <span class="n">list</span> <span class="bp">ℕ</span><span class="o">),</span> <span class="n">tensor_index</span> <span class="o">(</span><span class="n">zipdims</span> <span class="n">ds₂</span> <span class="n">ds₁</span><span class="o">)</span> <span class="bp">→</span> <span class="n">option</span> <span class="o">(</span><span class="n">tensor_index</span> <span class="n">ds₂</span><span class="o">)</span>
+  <span class="bp">|</span> <span class="n">ds₁</span> <span class="n">ds₂</span> <span class="bp">⟨</span><span class="n">is</span><span class="o">,</span> <span class="n">h</span><span class="bp">⟩</span> <span class="o">:=</span>
+  <span class="n">option</span><span class="bp">.</span><span class="n">rec</span> <span class="n">none</span> <span class="o">(</span><span class="bp">λ</span><span class="n">js</span><span class="o">,</span> <span class="n">some</span> <span class="bp">⟨</span> <span class="n">js</span> <span class="o">,</span> <span class="n">clip_tensor_index_list_correct</span> <span class="n">ds₂</span> <span class="n">is</span> <span class="n">js</span> <span class="n">sorry</span> <span class="bp">⟩</span><span class="o">)</span> <span class="o">(</span><span class="n">clip_tensor_index_list</span> <span class="n">ds₂</span> <span class="n">is</span><span class="o">)</span>
+</pre></div>
 
 #### [ Kevin Buzzard (Sep 13 2018 at 10:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/match%20hypothesis/near/133870081):
-I see: I was too quick. This has come up before and I can't remember the answer :-(
+<p>I see: I was too quick. This has come up before and I can't remember the answer :-(</p>
 
 #### [ Kevin Buzzard (Sep 13 2018 at 10:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/match%20hypothesis/near/133870103):
-Of course you could look at the proof term generated by the tactic version and see how Lean did it ;-)
+<p>Of course you could look at the proof term generated by the tactic version and see how Lean did it ;-)</p>
 
 #### [ Kevin Buzzard (Sep 13 2018 at 10:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/match%20hypothesis/near/133870338):
-MWE:
-
-```lean
-definition f (b : bool) : {x : bool // x = tt} :=
-begin
-  cases h : b with x y,
-  { -- h : b = ff
-    exact ⟨tt,rfl⟩,
-  },
-  { -- h : b = tt and I will now use h
-    exact ⟨b,h⟩
-  }
-end
-```
+<p>MWE:</p>
+<div class="codehilite"><pre><span></span><span class="kn">definition</span> <span class="n">f</span> <span class="o">(</span><span class="n">b</span> <span class="o">:</span> <span class="n">bool</span><span class="o">)</span> <span class="o">:</span> <span class="o">{</span><span class="n">x</span> <span class="o">:</span> <span class="n">bool</span> <span class="bp">//</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">tt</span><span class="o">}</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">cases</span> <span class="n">h</span> <span class="o">:</span> <span class="n">b</span> <span class="k">with</span> <span class="n">x</span> <span class="n">y</span><span class="o">,</span>
+  <span class="o">{</span> <span class="c1">-- h : b = ff</span>
+    <span class="n">exact</span> <span class="bp">⟨</span><span class="n">tt</span><span class="o">,</span><span class="n">rfl</span><span class="bp">⟩</span><span class="o">,</span>
+  <span class="o">},</span>
+  <span class="o">{</span> <span class="c1">-- h : b = tt and I will now use h</span>
+    <span class="n">exact</span> <span class="bp">⟨</span><span class="n">b</span><span class="o">,</span><span class="n">h</span><span class="bp">⟩</span>
+  <span class="o">}</span>
+<span class="kn">end</span>
+</pre></div>
 
 #### [ Kevin Buzzard (Sep 13 2018 at 10:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/match%20hypothesis/near/133870367):
-and `#print f` tells me that Lean used `bool.cases_on`
+<p>and <code>#print f</code> tells me that Lean used <code>bool.cases_on</code></p>
 
 #### [ Rob Lewis (Sep 13 2018 at 10:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/match%20hypothesis/near/133870592):
-Like I told you yesterday, I'm sure there's a way to make `match` handle this, but I can't remember. Here's a workaround in term mode, by giving a motive to the recursor explicitly. I suspect that the tactic version is doing basically this under the hood.
-```lean
-definition f (b : bool) : {x : bool // x = tt} :=
-@bool.rec_on (λ b', b = b' → {x : bool // x = tt}) b (λ _, ⟨tt, rfl⟩) (λ h, ⟨b, h⟩) rfl
-```
+<p>Like I told you yesterday, I'm sure there's a way to make <code>match</code> handle this, but I can't remember. Here's a workaround in term mode, by giving a motive to the recursor explicitly. I suspect that the tactic version is doing basically this under the hood.</p>
+<div class="codehilite"><pre><span></span><span class="kn">definition</span> <span class="n">f</span> <span class="o">(</span><span class="n">b</span> <span class="o">:</span> <span class="n">bool</span><span class="o">)</span> <span class="o">:</span> <span class="o">{</span><span class="n">x</span> <span class="o">:</span> <span class="n">bool</span> <span class="bp">//</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">tt</span><span class="o">}</span> <span class="o">:=</span>
+<span class="bp">@</span><span class="n">bool</span><span class="bp">.</span><span class="n">rec_on</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">b&#39;</span><span class="o">,</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">b&#39;</span> <span class="bp">→</span> <span class="o">{</span><span class="n">x</span> <span class="o">:</span> <span class="n">bool</span> <span class="bp">//</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">tt</span><span class="o">})</span> <span class="n">b</span> <span class="o">(</span><span class="bp">λ</span> <span class="bp">_</span><span class="o">,</span> <span class="bp">⟨</span><span class="n">tt</span><span class="o">,</span> <span class="n">rfl</span><span class="bp">⟩</span><span class="o">)</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">h</span><span class="o">,</span> <span class="bp">⟨</span><span class="n">b</span><span class="o">,</span> <span class="n">h</span><span class="bp">⟩</span><span class="o">)</span> <span class="n">rfl</span>
+</pre></div>
 
 #### [ Kevin Buzzard (Sep 13 2018 at 10:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/match%20hypothesis/near/133870647):
-right, that's what the term looks like in my bool example. The trick is a cleverly-chosen motive.
+<p>right, that's what the term looks like in my bool example. The trick is a cleverly-chosen motive.</p>
 
 #### [ Kenny Lau (Sep 13 2018 at 11:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/match%20hypothesis/near/133871740):
-```lean
-definition f' : Π b₁ b₂ : bool, b₁ = b₂ → {x : bool // x = tt}
-| b tt H := ⟨b, H⟩
-| b ff H := ⟨tt, rfl⟩
-```
+<div class="codehilite"><pre><span></span><span class="kn">definition</span> <span class="n">f&#39;</span> <span class="o">:</span> <span class="bp">Π</span> <span class="n">b₁</span> <span class="n">b₂</span> <span class="o">:</span> <span class="n">bool</span><span class="o">,</span> <span class="n">b₁</span> <span class="bp">=</span> <span class="n">b₂</span> <span class="bp">→</span> <span class="o">{</span><span class="n">x</span> <span class="o">:</span> <span class="n">bool</span> <span class="bp">//</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">tt</span><span class="o">}</span>
+<span class="bp">|</span> <span class="n">b</span> <span class="n">tt</span> <span class="n">H</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="n">b</span><span class="o">,</span> <span class="n">H</span><span class="bp">⟩</span>
+<span class="bp">|</span> <span class="n">b</span> <span class="n">ff</span> <span class="n">H</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="n">tt</span><span class="o">,</span> <span class="n">rfl</span><span class="bp">⟩</span>
+</pre></div>
 
 #### [ Kenny Lau (Sep 13 2018 at 11:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/match%20hypothesis/near/133871743):
-@**Kevin Buzzard** is this the answer to your question?
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> is this the answer to your question?</p>
 
 #### [ Kevin Buzzard (Sep 13 2018 at 11:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/match%20hypothesis/near/133871755):
-right
+<p>right</p>
 
 #### [ Kevin Buzzard (Sep 13 2018 at 11:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/match%20hypothesis/near/133871766):
-so you are defining an auxiliary `f'` using pattern matching
+<p>so you are defining an auxiliary <code>f'</code> using pattern matching</p>
 
 #### [ Kevin Buzzard (Sep 13 2018 at 11:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/match%20hypothesis/near/133871768):
-and then you can define f using f'
+<p>and then you can define f using f'</p>
 
 #### [ Kenny Lau (Sep 13 2018 at 11:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/match%20hypothesis/near/133871811):
-wait, I think I have another answer
+<p>wait, I think I have another answer</p>
 
 #### [ Kevin Buzzard (Sep 13 2018 at 11:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/match%20hypothesis/near/133871818):
-I had a look at that `tail` / `vector` example in TPIL and they also used an auxiliary function, but then they did something cleverer and got the equation compiler to do it
+<p>I had a look at that <code>tail</code> / <code>vector</code> example in TPIL and they also used an auxiliary function, but then they did something cleverer and got the equation compiler to do it</p>
 
 #### [ Kevin Buzzard (Sep 13 2018 at 11:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/match%20hypothesis/near/133871830):
-https://leanprover.github.io/theorem_proving_in_lean/induction_and_recursion.html#dependent-pattern-matching
+<p><a href="https://leanprover.github.io/theorem_proving_in_lean/induction_and_recursion.html#dependent-pattern-matching" target="_blank" title="https://leanprover.github.io/theorem_proving_in_lean/induction_and_recursion.html#dependent-pattern-matching">https://leanprover.github.io/theorem_proving_in_lean/induction_and_recursion.html#dependent-pattern-matching</a></p>
 
 #### [ Kenny Lau (Sep 13 2018 at 11:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/match%20hypothesis/near/133871840):
-```lean
-definition f' : nat → nat
-| 0 := _
-| k@(n+1) := let K := k in _
-/-
-f' : ℕ → ℕ,
-n : ℕ,
-K : ℕ := n + 1
-⊢ ℕ
--/
-```
+<div class="codehilite"><pre><span></span><span class="kn">definition</span> <span class="n">f&#39;</span> <span class="o">:</span> <span class="n">nat</span> <span class="bp">→</span> <span class="n">nat</span>
+<span class="bp">|</span> <span class="mi">0</span> <span class="o">:=</span> <span class="bp">_</span>
+<span class="bp">|</span> <span class="n">k</span><span class="bp">@</span><span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="o">:=</span> <span class="k">let</span> <span class="n">K</span> <span class="o">:=</span> <span class="n">k</span> <span class="k">in</span> <span class="bp">_</span>
+<span class="c">/-</span><span class="cm"></span>
+<span class="cm">f&#39; : ℕ → ℕ,</span>
+<span class="cm">n : ℕ,</span>
+<span class="cm">K : ℕ := n + 1</span>
+<span class="cm">⊢ ℕ</span>
+<span class="cm">-/</span>
+</pre></div>
 
 #### [ Kenny Lau (Sep 13 2018 at 11:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/match%20hypothesis/near/133871841):
-this is the answer you seek
+<p>this is the answer you seek</p>
 
 #### [ Kenny Lau (Sep 13 2018 at 11:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/match%20hypothesis/near/133871888):
-```lean
-definition f' : bool → {x : bool // x = tt}
-| b@tt := ⟨b, rfl⟩
-| ff := ⟨tt, rfl⟩
-```
+<div class="codehilite"><pre><span></span><span class="kn">definition</span> <span class="n">f&#39;</span> <span class="o">:</span> <span class="n">bool</span> <span class="bp">→</span> <span class="o">{</span><span class="n">x</span> <span class="o">:</span> <span class="n">bool</span> <span class="bp">//</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">tt</span><span class="o">}</span>
+<span class="bp">|</span> <span class="n">b</span><span class="bp">@</span><span class="n">tt</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="n">b</span><span class="o">,</span> <span class="n">rfl</span><span class="bp">⟩</span>
+<span class="bp">|</span> <span class="n">ff</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="n">tt</span><span class="o">,</span> <span class="n">rfl</span><span class="bp">⟩</span>
+</pre></div>
 
 #### [ Kevin Buzzard (Sep 13 2018 at 11:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/match%20hypothesis/near/133871893):
-excellent, thanks Kenny. @**Alexander Bentkamp** hopefully this is enough hints :-)
+<p>excellent, thanks Kenny. <span class="user-mention" data-user-id="129120">@Alexander Bentkamp</span> hopefully this is enough hints :-)</p>
 
 #### [ Patrick Massot (Sep 13 2018 at 11:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/match%20hypothesis/near/133872520):
-I have no idea what you are talking about, and yet it seems interesting. What the point of that definition of `f'`? Clearly `example : f' = (λ x, ⟨tt, rfl⟩) := by  ext x ; cases x; refl`
+<p>I have no idea what you are talking about, and yet it seems interesting. What the point of that definition of <code>f'</code>? Clearly <code>example : f' = (λ x, ⟨tt, rfl⟩) := by  ext x ; cases x; refl</code></p>
 
 #### [ Patrick Massot (Sep 13 2018 at 11:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/match%20hypothesis/near/133872524):
-So, what are you trying to do?
+<p>So, what are you trying to do?</p>
 
 #### [ Kenny Lau (Sep 13 2018 at 11:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/match%20hypothesis/near/133872592):
-honestly, nobody knows what we're trying to do unless OP provides an MWE
+<p>honestly, nobody knows what we're trying to do unless OP provides an MWE</p>
 
 #### [ Alexander Bentkamp (Sep 13 2018 at 11:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/match%20hypothesis/near/133873156):
-Hi, thanks for all the answers. I am trying to apply what you wrote to my situation, but I am still having trouble.
-
-What's an MWE?
+<p>Hi, thanks for all the answers. I am trying to apply what you wrote to my situation, but I am still having trouble.</p>
+<p>What's an MWE?</p>
 
 #### [ Keeley Hoek (Sep 13 2018 at 11:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/match%20hypothesis/near/133873162):
-Minimum working example
+<p>Minimum working example</p>
 
 #### [ Alexander Bentkamp (Sep 13 2018 at 11:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/match%20hypothesis/near/133873179):
-Oh, ok. I'll try to come up with something.
+<p>Oh, ok. I'll try to come up with something.</p>
 
 #### [ Kevin Buzzard (Sep 13 2018 at 11:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/match%20hypothesis/near/133873602):
-Patrick my definition is too minimal. The OP just wants to define a function on `option A` by matching, and when defining its value at `x := some y` he needs the proof that `x = some y` to define the value.
+<p>Patrick my definition is too minimal. The OP just wants to define a function on <code>option A</code> by matching, and when defining its value at <code>x := some y</code> he needs the proof that <code>x = some y</code> to define the value.</p>
 
 #### [ Kevin Buzzard (Sep 13 2018 at 11:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/match%20hypothesis/near/133873615):
-@**Alexander Bentkamp** the reason your original post didn't get much attention is because we can't just cut and paste your code into a blank lean session, so someone had to figure out what you were actually asking.
+<p><span class="user-mention" data-user-id="129120">@Alexander Bentkamp</span> the reason your original post didn't get much attention is because we can't just cut and paste your code into a blank lean session, so someone had to figure out what you were actually asking.</p>
 
 #### [ Alexander Bentkamp (Sep 13 2018 at 11:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/match%20hypothesis/near/133873672):
-Oh, I feel like my post is getting a lot of attention :)
-I almost finished the MWE...
+<p>Oh, I feel like my post is getting a lot of attention :)<br>
+I almost finished the MWE...</p>
 
 #### [ Alexander Bentkamp (Sep 13 2018 at 12:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/match%20hypothesis/near/133873823):
-Here it is:
-```lean
-    def clip : list ℕ → option (list ℕ) := sorry
+<p>Here it is:</p>
+<div class="codehilite"><pre><span></span>    <span class="n">def</span> <span class="n">clip</span> <span class="o">:</span> <span class="n">list</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="n">option</span> <span class="o">(</span><span class="n">list</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:=</span> <span class="n">sorry</span>
 
-    def p : list ℕ → list ℕ → bool := sorry
+    <span class="n">def</span> <span class="n">p</span> <span class="o">:</span> <span class="n">list</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="n">list</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="n">bool</span> <span class="o">:=</span> <span class="n">sorry</span>
 
-    lemma clip_correct (is js : list ℕ) (h : clip is = some js) : p is js := sorry
+    <span class="kn">lemma</span> <span class="n">clip_correct</span> <span class="o">(</span><span class="n">is</span> <span class="n">js</span> <span class="o">:</span> <span class="n">list</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">clip</span> <span class="n">is</span> <span class="bp">=</span> <span class="n">some</span> <span class="n">js</span><span class="o">)</span> <span class="o">:</span> <span class="n">p</span> <span class="n">is</span> <span class="n">js</span> <span class="o">:=</span> <span class="n">sorry</span>
 
-    def lookup (is : list ℕ) : option { js : list ℕ // p is js} :=
-    match (clip is) with
-    | none := none
-    | some js := some ⟨ js, clip_correct is js _ ⟩
-    end
-```
-The last underscore would need a proof that `clip is = some js`.
+    <span class="n">def</span> <span class="n">lookup</span> <span class="o">(</span><span class="n">is</span> <span class="o">:</span> <span class="n">list</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">option</span> <span class="o">{</span> <span class="n">js</span> <span class="o">:</span> <span class="n">list</span> <span class="bp">ℕ</span> <span class="bp">//</span> <span class="n">p</span> <span class="n">is</span> <span class="n">js</span><span class="o">}</span> <span class="o">:=</span>
+    <span class="k">match</span> <span class="o">(</span><span class="n">clip</span> <span class="n">is</span><span class="o">)</span> <span class="k">with</span>
+    <span class="bp">|</span> <span class="n">none</span> <span class="o">:=</span> <span class="n">none</span>
+    <span class="bp">|</span> <span class="n">some</span> <span class="n">js</span> <span class="o">:=</span> <span class="n">some</span> <span class="bp">⟨</span> <span class="n">js</span><span class="o">,</span> <span class="n">clip_correct</span> <span class="n">is</span> <span class="n">js</span> <span class="bp">_</span> <span class="bp">⟩</span>
+    <span class="kn">end</span>
+</pre></div>
+
+
+<p>The last underscore would need a proof that <code>clip is = some js</code>.</p>
 
 #### [ Alexander Bentkamp (Sep 13 2018 at 12:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/match%20hypothesis/near/133874241):
-If I follow @**Kevin Buzzard** 's advise, i.e. I use tactic mode to generate a working definition and use #print to view it, then I get this:
-```lean
-def lookup : Π (is : list ℕ), option {js // ↥(p is js)} :=
-λ (is : list ℕ),
-  (λ (_x : option (list ℕ)) (h1 : clip is = _x),
-     option.cases_on _x (λ (h1 : clip is = none), none) (λ (js : list ℕ) (h1 : clip is = some js), some ⟨js, _⟩)
-       h1)
-    (clip is)
-    _
-```
+<p>If I follow <span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> 's advise, i.e. I use tactic mode to generate a working definition and use #print to view it, then I get this:</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">lookup</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">(</span><span class="n">is</span> <span class="o">:</span> <span class="n">list</span> <span class="bp">ℕ</span><span class="o">),</span> <span class="n">option</span> <span class="o">{</span><span class="n">js</span> <span class="bp">//</span> <span class="err">↥</span><span class="o">(</span><span class="n">p</span> <span class="n">is</span> <span class="n">js</span><span class="o">)}</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="o">(</span><span class="n">is</span> <span class="o">:</span> <span class="n">list</span> <span class="bp">ℕ</span><span class="o">),</span>
+  <span class="o">(</span><span class="bp">λ</span> <span class="o">(</span><span class="bp">_</span><span class="n">x</span> <span class="o">:</span> <span class="n">option</span> <span class="o">(</span><span class="n">list</span> <span class="bp">ℕ</span><span class="o">))</span> <span class="o">(</span><span class="n">h1</span> <span class="o">:</span> <span class="n">clip</span> <span class="n">is</span> <span class="bp">=</span> <span class="bp">_</span><span class="n">x</span><span class="o">),</span>
+     <span class="n">option</span><span class="bp">.</span><span class="n">cases_on</span> <span class="bp">_</span><span class="n">x</span> <span class="o">(</span><span class="bp">λ</span> <span class="o">(</span><span class="n">h1</span> <span class="o">:</span> <span class="n">clip</span> <span class="n">is</span> <span class="bp">=</span> <span class="n">none</span><span class="o">),</span> <span class="n">none</span><span class="o">)</span> <span class="o">(</span><span class="bp">λ</span> <span class="o">(</span><span class="n">js</span> <span class="o">:</span> <span class="n">list</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">h1</span> <span class="o">:</span> <span class="n">clip</span> <span class="n">is</span> <span class="bp">=</span> <span class="n">some</span> <span class="n">js</span><span class="o">),</span> <span class="n">some</span> <span class="bp">⟨</span><span class="n">js</span><span class="o">,</span> <span class="bp">_⟩</span><span class="o">)</span>
+       <span class="n">h1</span><span class="o">)</span>
+    <span class="o">(</span><span class="n">clip</span> <span class="n">is</span><span class="o">)</span>
+    <span class="bp">_</span>
+</pre></div>
 
-But if I copy paste this into the editor, I get 
-```
-invalid 'option.cases_on' application, elaborator has special support for this kind of application (it is handled as an "eliminator"), but the expected type must be known
-```
-What type needs to be known?
+
+<p>But if I copy paste this into the editor, I get </p>
+<div class="codehilite"><pre><span></span>invalid &#39;option.cases_on&#39; application, elaborator has special support for this kind of application (it is handled as an &quot;eliminator&quot;), but the expected type must be known
+</pre></div>
+
+
+<p>What type needs to be known?</p>
 
 #### [ Kenny Lau (Sep 13 2018 at 12:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/match%20hypothesis/near/133875506):
-```lean
-def clip : list ℕ → option (list ℕ) := sorry
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">clip</span> <span class="o">:</span> <span class="n">list</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="n">option</span> <span class="o">(</span><span class="n">list</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:=</span> <span class="n">sorry</span>
 
-def p : list ℕ → list ℕ → bool := sorry
+<span class="n">def</span> <span class="n">p</span> <span class="o">:</span> <span class="n">list</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="n">list</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="n">bool</span> <span class="o">:=</span> <span class="n">sorry</span>
 
-lemma clip_correct (is js : list ℕ) (h : clip is = some js) : p is js := sorry
+<span class="kn">lemma</span> <span class="n">clip_correct</span> <span class="o">(</span><span class="n">is</span> <span class="n">js</span> <span class="o">:</span> <span class="n">list</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">clip</span> <span class="n">is</span> <span class="bp">=</span> <span class="n">some</span> <span class="n">js</span><span class="o">)</span> <span class="o">:</span> <span class="n">p</span> <span class="n">is</span> <span class="n">js</span> <span class="o">:=</span> <span class="n">sorry</span>
 
-def lookup_aux : Π (is : list ℕ) (cis : option (list ℕ)), clip is = cis → option { js : list ℕ // p is js}
-| is none H := none
-| is (some js) H := some ⟨js, clip_correct _ _ H⟩
+<span class="n">def</span> <span class="n">lookup_aux</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">(</span><span class="n">is</span> <span class="o">:</span> <span class="n">list</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">cis</span> <span class="o">:</span> <span class="n">option</span> <span class="o">(</span><span class="n">list</span> <span class="bp">ℕ</span><span class="o">)),</span> <span class="n">clip</span> <span class="n">is</span> <span class="bp">=</span> <span class="n">cis</span> <span class="bp">→</span> <span class="n">option</span> <span class="o">{</span> <span class="n">js</span> <span class="o">:</span> <span class="n">list</span> <span class="bp">ℕ</span> <span class="bp">//</span> <span class="n">p</span> <span class="n">is</span> <span class="n">js</span><span class="o">}</span>
+<span class="bp">|</span> <span class="n">is</span> <span class="n">none</span> <span class="n">H</span> <span class="o">:=</span> <span class="n">none</span>
+<span class="bp">|</span> <span class="n">is</span> <span class="o">(</span><span class="n">some</span> <span class="n">js</span><span class="o">)</span> <span class="n">H</span> <span class="o">:=</span> <span class="n">some</span> <span class="bp">⟨</span><span class="n">js</span><span class="o">,</span> <span class="n">clip_correct</span> <span class="bp">_</span> <span class="bp">_</span> <span class="n">H</span><span class="bp">⟩</span>
 
-def lookup (is : list ℕ) : option { js : list ℕ // p is js} :=
-lookup_aux _ _ rfl
-```
+<span class="n">def</span> <span class="n">lookup</span> <span class="o">(</span><span class="n">is</span> <span class="o">:</span> <span class="n">list</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">option</span> <span class="o">{</span> <span class="n">js</span> <span class="o">:</span> <span class="n">list</span> <span class="bp">ℕ</span> <span class="bp">//</span> <span class="n">p</span> <span class="n">is</span> <span class="n">js</span><span class="o">}</span> <span class="o">:=</span>
+<span class="n">lookup_aux</span> <span class="bp">_</span> <span class="bp">_</span> <span class="n">rfl</span>
+</pre></div>
 
 #### [ Kevin Buzzard (Sep 13 2018 at 12:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/match%20hypothesis/near/133875547):
-my guess is that it's the type of of the lambda which you're evaluating at `clip is`
+<p>my guess is that it's the type of of the lambda which you're evaluating at <code>clip is</code></p>
 
 #### [ Kevin Buzzard (Sep 13 2018 at 12:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/match%20hypothesis/near/133875555):
-So Kenny's solution is via the auxiliary function trick which is mentioned in TPIL
+<p>So Kenny's solution is via the auxiliary function trick which is mentioned in TPIL</p>
 
 #### [ Rob Lewis (Sep 13 2018 at 12:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/match%20hypothesis/near/133875645):
-The elaborator isn't able to infer the motive for `cases_on`. If you don't want to use an aux declaration, you can give the motive manually, but personally I think the tactic version is cleaner than all of these.
-```lean
-def lookup' (is : list ℕ) : option { js : list ℕ // p is js} :=
-@option.cases_on _ (λ i, clip is = i → option { js : list ℕ // p is js}) (clip is) 
-  (λ _, none) 
-  (λ js h, some ⟨js, clip_correct is js h⟩) 
-  rfl
+<p>The elaborator isn't able to infer the motive for <code>cases_on</code>. If you don't want to use an aux declaration, you can give the motive manually, but personally I think the tactic version is cleaner than all of these.</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">lookup&#39;</span> <span class="o">(</span><span class="n">is</span> <span class="o">:</span> <span class="n">list</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">option</span> <span class="o">{</span> <span class="n">js</span> <span class="o">:</span> <span class="n">list</span> <span class="bp">ℕ</span> <span class="bp">//</span> <span class="n">p</span> <span class="n">is</span> <span class="n">js</span><span class="o">}</span> <span class="o">:=</span>
+<span class="bp">@</span><span class="n">option</span><span class="bp">.</span><span class="n">cases_on</span> <span class="bp">_</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">i</span><span class="o">,</span> <span class="n">clip</span> <span class="n">is</span> <span class="bp">=</span> <span class="n">i</span> <span class="bp">→</span> <span class="n">option</span> <span class="o">{</span> <span class="n">js</span> <span class="o">:</span> <span class="n">list</span> <span class="bp">ℕ</span> <span class="bp">//</span> <span class="n">p</span> <span class="n">is</span> <span class="n">js</span><span class="o">})</span> <span class="o">(</span><span class="n">clip</span> <span class="n">is</span><span class="o">)</span>
+  <span class="o">(</span><span class="bp">λ</span> <span class="bp">_</span><span class="o">,</span> <span class="n">none</span><span class="o">)</span>
+  <span class="o">(</span><span class="bp">λ</span> <span class="n">js</span> <span class="n">h</span><span class="o">,</span> <span class="n">some</span> <span class="bp">⟨</span><span class="n">js</span><span class="o">,</span> <span class="n">clip_correct</span> <span class="n">is</span> <span class="n">js</span> <span class="n">h</span><span class="bp">⟩</span><span class="o">)</span>
+  <span class="n">rfl</span>
 
-def lookup'' (is : list ℕ) : option { js : list ℕ // p is js} :=
-have ∀ {i}, clip is = i → option { js : list ℕ // p is js}, from λ i, 
-match i with
-| none := λ _, none
-| some js := λ h, some ⟨ js, clip_correct is js h ⟩
-end,
-this rfl
-```
+<span class="n">def</span> <span class="n">lookup&#39;&#39;</span> <span class="o">(</span><span class="n">is</span> <span class="o">:</span> <span class="n">list</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">option</span> <span class="o">{</span> <span class="n">js</span> <span class="o">:</span> <span class="n">list</span> <span class="bp">ℕ</span> <span class="bp">//</span> <span class="n">p</span> <span class="n">is</span> <span class="n">js</span><span class="o">}</span> <span class="o">:=</span>
+<span class="k">have</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">i</span><span class="o">},</span> <span class="n">clip</span> <span class="n">is</span> <span class="bp">=</span> <span class="n">i</span> <span class="bp">→</span> <span class="n">option</span> <span class="o">{</span> <span class="n">js</span> <span class="o">:</span> <span class="n">list</span> <span class="bp">ℕ</span> <span class="bp">//</span> <span class="n">p</span> <span class="n">is</span> <span class="n">js</span><span class="o">},</span> <span class="k">from</span> <span class="bp">λ</span> <span class="n">i</span><span class="o">,</span>
+<span class="k">match</span> <span class="n">i</span> <span class="k">with</span>
+<span class="bp">|</span> <span class="n">none</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="bp">_</span><span class="o">,</span> <span class="n">none</span>
+<span class="bp">|</span> <span class="n">some</span> <span class="n">js</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">h</span><span class="o">,</span> <span class="n">some</span> <span class="bp">⟨</span> <span class="n">js</span><span class="o">,</span> <span class="n">clip_correct</span> <span class="n">is</span> <span class="n">js</span> <span class="n">h</span> <span class="bp">⟩</span>
+<span class="kn">end</span><span class="o">,</span>
+<span class="n">this</span> <span class="n">rfl</span>
+</pre></div>
 
 #### [ Alexander Bentkamp (Sep 13 2018 at 13:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/match%20hypothesis/near/133877252):
-Ok, I guess you are right. I'll stick to the tactic version. Anyway, good to know how the other options look like. Thanks!
+<p>Ok, I guess you are right. I'll stick to the tactic version. Anyway, good to know how the other options look like. Thanks!</p>
 
 #### [ Johannes Hölzl (Sep 14 2018 at 00:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/match%20hypothesis/near/133918080):
-@**Alexander Bentkamp**  for this concrete example you can use the following solution: 
-```lean
-def lookup (is : list ℕ) : option { js : list ℕ // p is js} :=
-match clip is, clip_correct is with
-| none, h := none
-| some js, h := some ⟨ js, h _ rfl ⟩
-end
-```
-The trick is to put the `clip_correct` into the parameters to `match`, with enough instantiations that `clip is` is found in it. But Rob is right, for more complicated things tactics will be easier.
+<p><span class="user-mention" data-user-id="129120">@Alexander Bentkamp</span>  for this concrete example you can use the following solution: </p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">lookup</span> <span class="o">(</span><span class="n">is</span> <span class="o">:</span> <span class="n">list</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">option</span> <span class="o">{</span> <span class="n">js</span> <span class="o">:</span> <span class="n">list</span> <span class="bp">ℕ</span> <span class="bp">//</span> <span class="n">p</span> <span class="n">is</span> <span class="n">js</span><span class="o">}</span> <span class="o">:=</span>
+<span class="k">match</span> <span class="n">clip</span> <span class="n">is</span><span class="o">,</span> <span class="n">clip_correct</span> <span class="n">is</span> <span class="k">with</span>
+<span class="bp">|</span> <span class="n">none</span><span class="o">,</span> <span class="n">h</span> <span class="o">:=</span> <span class="n">none</span>
+<span class="bp">|</span> <span class="n">some</span> <span class="n">js</span><span class="o">,</span> <span class="n">h</span> <span class="o">:=</span> <span class="n">some</span> <span class="bp">⟨</span> <span class="n">js</span><span class="o">,</span> <span class="n">h</span> <span class="bp">_</span> <span class="n">rfl</span> <span class="bp">⟩</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>The trick is to put the <code>clip_correct</code> into the parameters to <code>match</code>, with enough instantiations that <code>clip is</code> is found in it. But Rob is right, for more complicated things tactics will be easier.</p>
 
 #### [ Kenny Lau (Sep 14 2018 at 01:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/match%20hypothesis/near/133919060):
-interesting!
+<p>interesting!</p>
 
 #### [ Mario Carneiro (Sep 14 2018 at 01:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/match%20hypothesis/near/133919298):
-By the way, Rob's last match example can also be written using the (rarely used) "return" argument of match (i.e. `match stuff : type with` syntax):
-```lean
-def lookup (is : list ℕ) : option { js : list ℕ // p is js} :=
-match _, rfl : ∀ i, clip is = i → option { js : list ℕ // p is js} with
-| none,    _ := none
-| some js, h := some ⟨ js, clip_correct is js h ⟩
-end
-```
+<p>By the way, Rob's last match example can also be written using the (rarely used) "return" argument of match (i.e. <code>match stuff : type with</code> syntax):</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">lookup</span> <span class="o">(</span><span class="n">is</span> <span class="o">:</span> <span class="n">list</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">option</span> <span class="o">{</span> <span class="n">js</span> <span class="o">:</span> <span class="n">list</span> <span class="bp">ℕ</span> <span class="bp">//</span> <span class="n">p</span> <span class="n">is</span> <span class="n">js</span><span class="o">}</span> <span class="o">:=</span>
+<span class="k">match</span> <span class="bp">_</span><span class="o">,</span> <span class="n">rfl</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">i</span><span class="o">,</span> <span class="n">clip</span> <span class="n">is</span> <span class="bp">=</span> <span class="n">i</span> <span class="bp">→</span> <span class="n">option</span> <span class="o">{</span> <span class="n">js</span> <span class="o">:</span> <span class="n">list</span> <span class="bp">ℕ</span> <span class="bp">//</span> <span class="n">p</span> <span class="n">is</span> <span class="n">js</span><span class="o">}</span> <span class="k">with</span>
+<span class="bp">|</span> <span class="n">none</span><span class="o">,</span>    <span class="bp">_</span> <span class="o">:=</span> <span class="n">none</span>
+<span class="bp">|</span> <span class="n">some</span> <span class="n">js</span><span class="o">,</span> <span class="n">h</span> <span class="o">:=</span> <span class="n">some</span> <span class="bp">⟨</span> <span class="n">js</span><span class="o">,</span> <span class="n">clip_correct</span> <span class="n">is</span> <span class="n">js</span> <span class="n">h</span> <span class="bp">⟩</span>
+<span class="kn">end</span>
+</pre></div>
 
 #### [ Kenny Lau (Sep 14 2018 at 01:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/match%20hypothesis/near/133919453):
-wow
+<p>wow</p>
 
 #### [ Kenny Lau (Sep 14 2018 at 01:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/match%20hypothesis/near/133919461):
-this is amazing
+<p>this is amazing</p>
 
 #### [ Kenny Lau (Sep 14 2018 at 01:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/match%20hypothesis/near/133919463):
-I learn something new every day
+<p>I learn something new every day</p>
 
 #### [ Alexander Bentkamp (Sep 14 2018 at 11:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/match%20hypothesis/near/133941546):
-cool! I went for Johannes's solution now.
+<p>cool! I went for Johannes's solution now.</p>
 
 
 {% endraw %}

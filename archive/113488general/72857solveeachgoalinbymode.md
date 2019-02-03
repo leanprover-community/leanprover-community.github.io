@@ -12,47 +12,46 @@ permalink: archive/113488general/72857solveeachgoalinbymode.html
 
 {% raw %}
 #### [ Kenny Lau (Apr 19 2018 at 14:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/solve%20each%20goal%20in%20%22by%22%20mode/near/125302926):
-In `by` mode, i.e. `by xxx; yyy; zzz`, is there a way to not apply the tactics to every goal?
+<p>In <code>by</code> mode, i.e. <code>by xxx; yyy; zzz</code>, is there a way to not apply the tactics to every goal?</p>
 
 #### [ Mario Carneiro (Apr 19 2018 at 14:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/solve%20each%20goal%20in%20%22by%22%20mode/near/125302994):
-you can use seq_focus, i.e. `xxx; [yyy, zzz]`, or use a big tactic block `by { xxx, yyy, zzz }`
+<p>you can use seq_focus, i.e. <code>xxx; [yyy, zzz]</code>, or use a big tactic block <code>by { xxx, yyy, zzz }</code></p>
 
 #### [ Kenny Lau (Apr 19 2018 at 14:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/solve%20each%20goal%20in%20%22by%22%20mode/near/125302996):
-aha
+<p>aha</p>
 
 #### [ Kenny Lau (Apr 19 2018 at 14:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/solve%20each%20goal%20in%20%22by%22%20mode/near/125302998):
-I was trying `focus [yyy, zzz]` but it failed
+<p>I was trying <code>focus [yyy, zzz]</code> but it failed</p>
 
 #### [ Kenny Lau (Apr 19 2018 at 14:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/solve%20each%20goal%20in%20%22by%22%20mode/near/125303002):
-turns out you don't say `focus`
+<p>turns out you don't say <code>focus</code></p>
 
 #### [ Kenny Lau (Apr 19 2018 at 14:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/solve%20each%20goal%20in%20%22by%22%20mode/near/125303011):
-how would you write this?
-```
-by simp [reduce.step, h] at H; cases L; injections;
+<p>how would you write this?</p>
+<div class="codehilite"><pre><span></span>by simp [reduce.step, h] at H; cases L; injections;
     [cc, { rw ← h_2, from list.suffix_append _ _ } ]
+</pre></div>
 
 #### [ Mario Carneiro (Apr 19 2018 at 14:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/solve%20each%20goal%20in%20%22by%22%20mode/near/125303082):
-```
-begin
+<div class="codehilite"><pre><span></span>begin
   simp [reduce.step, h] at H,
   cases L; injections, {cc},
   rw ← h_2,
   exact list.suffix_append _ _
 end
-```
+</pre></div>
 
 #### [ Kenny Lau (Apr 19 2018 at 14:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/solve%20each%20goal%20in%20%22by%22%20mode/near/125303125):
-but it's three lines longer, lol
+<p>but it's three lines longer, lol</p>
 
 #### [ Kenny Lau (Apr 19 2018 at 14:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/solve%20each%20goal%20in%20%22by%22%20mode/near/125303133):
-four lines longer. i can't count
+<p>four lines longer. i can't count</p>
 
 #### [ Mario Carneiro (Apr 19 2018 at 14:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/solve%20each%20goal%20in%20%22by%22%20mode/near/125303142):
-If you have to represent complicated control flow, you probably shouldn't be using `by`
+<p>If you have to represent complicated control flow, you probably shouldn't be using <code>by</code></p>
 
 #### [ Mario Carneiro (Apr 19 2018 at 14:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/solve%20each%20goal%20in%20%22by%22%20mode/near/125303150):
-at some point it's saving lines by just deleting newlines
+<p>at some point it's saving lines by just deleting newlines</p>
 
 
 {% endraw %}

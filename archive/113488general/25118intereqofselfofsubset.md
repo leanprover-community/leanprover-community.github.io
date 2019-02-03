@@ -12,14 +12,13 @@ permalink: archive/113488general/25118intereqofselfofsubset.html
 
 {% raw %}
 #### [ Reid Barton (Dec 22 2018 at 06:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inter_eq_of_self_of_subset/near/152376322):
-Should these lemmas from `data.set.basic` be simp lemmas? I was surprised when `simp` didn't solve these statements automatically.
-```lean
-theorem inter_eq_self_of_subset_left {s t : set α} (h : s ⊆ t) : s ∩ t = s :=
-by finish [subset_def, ext_iff, iff_def]
+<p>Should these lemmas from <code>data.set.basic</code> be simp lemmas? I was surprised when <code>simp</code> didn't solve these statements automatically.</p>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">inter_eq_self_of_subset_left</span> <span class="o">{</span><span class="n">s</span> <span class="n">t</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span><span class="o">}</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">s</span> <span class="err">⊆</span> <span class="n">t</span><span class="o">)</span> <span class="o">:</span> <span class="n">s</span> <span class="err">∩</span> <span class="n">t</span> <span class="bp">=</span> <span class="n">s</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">finish</span> <span class="o">[</span><span class="n">subset_def</span><span class="o">,</span> <span class="n">ext_iff</span><span class="o">,</span> <span class="n">iff_def</span><span class="o">]</span>
 
-theorem inter_eq_self_of_subset_right {s t : set α} (h : t ⊆ s) : s ∩ t = t :=
-by finish [subset_def, ext_iff, iff_def]
-```
+<span class="kn">theorem</span> <span class="n">inter_eq_self_of_subset_right</span> <span class="o">{</span><span class="n">s</span> <span class="n">t</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span><span class="o">}</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">t</span> <span class="err">⊆</span> <span class="n">s</span><span class="o">)</span> <span class="o">:</span> <span class="n">s</span> <span class="err">∩</span> <span class="n">t</span> <span class="bp">=</span> <span class="n">t</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">finish</span> <span class="o">[</span><span class="n">subset_def</span><span class="o">,</span> <span class="n">ext_iff</span><span class="o">,</span> <span class="n">iff_def</span><span class="o">]</span>
+</pre></div>
 
 
 {% endraw %}

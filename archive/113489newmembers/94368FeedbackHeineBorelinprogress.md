@@ -12,213 +12,207 @@ permalink: archive/113489newmembers/94368FeedbackHeineBorelinprogress.html
 
 {% raw %}
 #### [ Guillermo Barajas Ayuso (Sep 16 2018 at 01:43)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Feedback%20%28Heine%20Borel%20in%20progress%29/near/134030478):
-Hi, I have uploaded some code in the link  https://github.com/ImperialCollegeLondon/xena-UROP-2018/blob/master/src/Topology/Heine-Borel%20(incomplete) , I'll leave it here in case you want to give me some feedback. Thank you for your time! :-)
+<p>Hi, I have uploaded some code in the link  <a href="https://github.com/ImperialCollegeLondon/xena-UROP-2018/blob/master/src/Topology/Heine-Borel%20(incomplete)" target="_blank" title="https://github.com/ImperialCollegeLondon/xena-UROP-2018/blob/master/src/Topology/Heine-Borel%20(incomplete)">https://github.com/ImperialCollegeLondon/xena-UROP-2018/blob/master/src/Topology/Heine-Borel%20(incomplete)</a> , I'll leave it here in case you want to give me some feedback. Thank you for your time! :-)</p>
 
 #### [ Kevin Buzzard (Sep 16 2018 at 10:03)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Feedback%20%28Heine%20Borel%20in%20progress%29/near/134045098):
-```lean
-theorem for_all_not_all {α : Type u} (P Q R: α → Prop):
-(∀ x (H : R x), ¬ (P x ∧ Q x)) ↔  ∀ x (H : R x), P x → ¬ Q x := 
-⟨λ Hnand x Hx, not_and.mp $ Hnand x Hx, λ Hton x Hx, not_and.mpr $ Hton x Hx⟩
-```
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">for_all_not_all</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">(</span><span class="n">P</span> <span class="n">Q</span> <span class="n">R</span><span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">):</span>
+<span class="o">(</span><span class="bp">∀</span> <span class="n">x</span> <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="n">R</span> <span class="n">x</span><span class="o">),</span> <span class="bp">¬</span> <span class="o">(</span><span class="n">P</span> <span class="n">x</span> <span class="bp">∧</span> <span class="n">Q</span> <span class="n">x</span><span class="o">))</span> <span class="bp">↔</span>  <span class="bp">∀</span> <span class="n">x</span> <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="n">R</span> <span class="n">x</span><span class="o">),</span> <span class="n">P</span> <span class="n">x</span> <span class="bp">→</span> <span class="bp">¬</span> <span class="n">Q</span> <span class="n">x</span> <span class="o">:=</span>
+<span class="bp">⟨λ</span> <span class="n">Hnand</span> <span class="n">x</span> <span class="n">Hx</span><span class="o">,</span> <span class="n">not_and</span><span class="bp">.</span><span class="n">mp</span> <span class="err">$</span> <span class="n">Hnand</span> <span class="n">x</span> <span class="n">Hx</span><span class="o">,</span> <span class="bp">λ</span> <span class="n">Hton</span> <span class="n">x</span> <span class="n">Hx</span><span class="o">,</span> <span class="n">not_and</span><span class="bp">.</span><span class="n">mpr</span> <span class="err">$</span> <span class="n">Hton</span> <span class="n">x</span> <span class="n">Hx</span><span class="bp">⟩</span>
+</pre></div>
 
-Mathlib would prefer that kind of style to your tactic proof. I always suspect that such results are either in mathlib already or easily deducible. Looking at the proof I feel like it's one of those ones which could be shortened with some magic use of function.comp like in https://xenaproject.wordpress.com/2018/05/19/function-composition/ . 
 
-Oh wait -- 
+<p>Mathlib would prefer that kind of style to your tactic proof. I always suspect that such results are either in mathlib already or easily deducible. Looking at the proof I feel like it's one of those ones which could be shortened with some magic use of function.comp like in <a href="https://xenaproject.wordpress.com/2018/05/19/function-composition/" target="_blank" title="https://xenaproject.wordpress.com/2018/05/19/function-composition/">https://xenaproject.wordpress.com/2018/05/19/function-composition/</a> . </p>
+<p>Oh wait -- </p>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">for_all_not_all</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">(</span><span class="n">P</span> <span class="n">Q</span> <span class="n">R</span><span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">):</span>
+<span class="o">(</span><span class="bp">∀</span> <span class="n">x</span> <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="n">R</span> <span class="n">x</span><span class="o">),</span> <span class="bp">¬</span> <span class="o">(</span><span class="n">P</span> <span class="n">x</span> <span class="bp">∧</span> <span class="n">Q</span> <span class="n">x</span><span class="o">))</span> <span class="bp">↔</span>  <span class="bp">∀</span> <span class="n">x</span> <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="n">R</span> <span class="n">x</span><span class="o">),</span> <span class="n">P</span> <span class="n">x</span> <span class="bp">→</span> <span class="bp">¬</span> <span class="n">Q</span> <span class="n">x</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">not_and</span><span class="o">]</span>
+</pre></div>
 
-```lean
-theorem for_all_not_all {α : Type u} (P Q R: α → Prop):
-(∀ x (H : R x), ¬ (P x ∧ Q x)) ↔  ∀ x (H : R x), P x → ¬ Q x := by simp [not_and]
-```
-```
+
+<div class="codehilite"><pre><span></span>
+</pre></div>
 
 #### [ Kevin Buzzard (Sep 16 2018 at 10:06)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Feedback%20%28Heine%20Borel%20in%20progress%29/near/134045185):
-The simp proof -- the proof takes 50% longer to process but the parser takes far less time parsing :-) End result is that both versions run in about the same time.
+<p>The simp proof -- the proof takes 50% longer to process but the parser takes far less time parsing :-) End result is that both versions run in about the same time.</p>
 
 #### [ Kevin Buzzard (Sep 16 2018 at 10:10)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Feedback%20%28Heine%20Borel%20in%20progress%29/near/134045233):
-I have an error at line 431 by the way, and there are 6 sorrys. Do you need help filling them in?
+<p>I have an error at line 431 by the way, and there are 6 sorrys. Do you need help filling them in?</p>
 
 #### [ Kevin Buzzard (Sep 16 2018 at 11:01)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Feedback%20%28Heine%20Borel%20in%20progress%29/near/134046514):
-Re the argument on line 431: there is already `nat.lt_pow_self`. 
-
-```lean
-theorem le_pow (n : ℕ) : (n : ℝ) ≤ (2 : ℝ) ^ n :=
-begin
-  show (n : ℝ) ≤ ((2 : ℕ) : ℝ) ^ n,
-  rw ←nat.cast_pow,
-  rw nat.cast_le,
-  exact le_of_lt (nat.lt_pow_self (dec_trivial) n),
-end
-```
+<p>Re the argument on line 431: there is already <code>nat.lt_pow_self</code>. </p>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">le_pow</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="bp">≤</span> <span class="o">(</span><span class="mi">2</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="err">^</span> <span class="n">n</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="k">show</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="bp">≤</span> <span class="o">((</span><span class="mi">2</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="err">^</span> <span class="n">n</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="err">←</span><span class="n">nat</span><span class="bp">.</span><span class="n">cast_pow</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="n">nat</span><span class="bp">.</span><span class="n">cast_le</span><span class="o">,</span>
+  <span class="n">exact</span> <span class="n">le_of_lt</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">lt_pow_self</span> <span class="o">(</span><span class="n">dec_trivial</span><span class="o">)</span> <span class="n">n</span><span class="o">),</span>
+<span class="kn">end</span>
+</pre></div>
 
 #### [ Kevin Buzzard (Sep 16 2018 at 11:06)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Feedback%20%28Heine%20Borel%20in%20progress%29/near/134046673):
-`notation ⟦a,b] := closed_interval a b `
-
-This is a hilarious idea. Does it work? Re-using notation which is already used is a dangerous game, but given that as far as I know in Lean every use of `]` in notation comes with an `[` too, so avoiding the `[` in this case gives you better leeway.
+<p><code>notation ⟦a,b] := closed_interval a b </code></p>
+<p>This is a hilarious idea. Does it work? Re-using notation which is already used is a dangerous game, but given that as far as I know in Lean every use of <code>]</code> in notation comes with an <code>[</code> too, so avoiding the <code>[</code> in this case gives you better leeway.</p>
 
 #### [ Kevin Buzzard (Sep 16 2018 at 12:01)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Feedback%20%28Heine%20Borel%20in%20progress%29/near/134048119):
-`theorem le_ε_to_le (Hle_ε : ∀ ε > 0, a ≤ b + ε) : a ≤ b := sorry` These things are really annoying if they're not there already. @**Kenny Lau** how is one supposed to prove stuff like this?
+<p><code>theorem le_ε_to_le (Hle_ε : ∀ ε &gt; 0, a ≤ b + ε) : a ≤ b := sorry</code> These things are really annoying if they're not there already. <span class="user-mention" data-user-id="110064">@Kenny Lau</span> how is one supposed to prove stuff like this?</p>
 
 #### [ Kevin Buzzard (Sep 16 2018 at 12:24)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Feedback%20%28Heine%20Borel%20in%20progress%29/near/134048714):
-```lean
-theorem le_ε_to_le (Hle_ε : ∀ ε > 0, a ≤ b + ε) : a ≤ b :=
-le_of_not_gt $ λ H, begin
-  have H2 := Hle_ε ((a - b) / 2) _,
-    revert H2, -- because it makes the rewriting easier
-    rw [←(mul_le_mul_right (show (2 : ℝ) > 0, by norm_num)),add_mul,
-    div_mul_cancel _ (show (2 : ℝ) ≠ 0, by norm_num),
-   (show b * 2 + (a - b) = a + b, by ring),
-    mul_two,add_le_add_iff_left],
-    exact not_le_of_gt H,
-  apply div_pos _ (show (0 : ℝ) < 2, by norm_num),
-  exact sub_pos_of_lt H
-end
-```
-This time last year there was no `norm_num` and no `ring` -- imagine how hard it was doing M1F example sheets!
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">le_ε_to_le</span> <span class="o">(</span><span class="n">Hle_ε</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">ε</span> <span class="bp">&gt;</span> <span class="mi">0</span><span class="o">,</span> <span class="n">a</span> <span class="bp">≤</span> <span class="n">b</span> <span class="bp">+</span> <span class="n">ε</span><span class="o">)</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">≤</span> <span class="n">b</span> <span class="o">:=</span>
+<span class="n">le_of_not_gt</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">H</span><span class="o">,</span> <span class="k">begin</span>
+  <span class="k">have</span> <span class="n">H2</span> <span class="o">:=</span> <span class="n">Hle_ε</span> <span class="o">((</span><span class="n">a</span> <span class="bp">-</span> <span class="n">b</span><span class="o">)</span> <span class="bp">/</span> <span class="mi">2</span><span class="o">)</span> <span class="bp">_</span><span class="o">,</span>
+    <span class="n">revert</span> <span class="n">H2</span><span class="o">,</span> <span class="c1">-- because it makes the rewriting easier</span>
+    <span class="n">rw</span> <span class="o">[</span><span class="err">←</span><span class="o">(</span><span class="n">mul_le_mul_right</span> <span class="o">(</span><span class="k">show</span> <span class="o">(</span><span class="mi">2</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="bp">&gt;</span> <span class="mi">0</span><span class="o">,</span> <span class="k">by</span> <span class="n">norm_num</span><span class="o">)),</span><span class="n">add_mul</span><span class="o">,</span>
+    <span class="n">div_mul_cancel</span> <span class="bp">_</span> <span class="o">(</span><span class="k">show</span> <span class="o">(</span><span class="mi">2</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="bp">≠</span> <span class="mi">0</span><span class="o">,</span> <span class="k">by</span> <span class="n">norm_num</span><span class="o">),</span>
+   <span class="o">(</span><span class="k">show</span> <span class="n">b</span> <span class="bp">*</span> <span class="mi">2</span> <span class="bp">+</span> <span class="o">(</span><span class="n">a</span> <span class="bp">-</span> <span class="n">b</span><span class="o">)</span> <span class="bp">=</span> <span class="n">a</span> <span class="bp">+</span> <span class="n">b</span><span class="o">,</span> <span class="k">by</span> <span class="n">ring</span><span class="o">),</span>
+    <span class="n">mul_two</span><span class="o">,</span><span class="n">add_le_add_iff_left</span><span class="o">],</span>
+    <span class="n">exact</span> <span class="n">not_le_of_gt</span> <span class="n">H</span><span class="o">,</span>
+  <span class="n">apply</span> <span class="n">div_pos</span> <span class="bp">_</span> <span class="o">(</span><span class="k">show</span> <span class="o">(</span><span class="mi">0</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="bp">&lt;</span> <span class="mi">2</span><span class="o">,</span> <span class="k">by</span> <span class="n">norm_num</span><span class="o">),</span>
+  <span class="n">exact</span> <span class="n">sub_pos_of_lt</span> <span class="n">H</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>This time last year there was no <code>norm_num</code> and no <code>ring</code> -- imagine how hard it was doing M1F example sheets!</p>
 
 #### [ Kenny Lau (Sep 16 2018 at 12:27)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Feedback%20%28Heine%20Borel%20in%20progress%29/near/134048768):
-```lean
-theorem le_ε_to_le {α : Type*} [linear_ordered_field α] {a b : α}
-  (Hle_ε : ∀ ε > 0, a ≤ b + ε) : a ≤ b :=
-le_of_not_lt $ λ H, not_lt_of_le (Hle_ε ((a-b)/2) (half_pos $ sub_pos_of_lt H)) $
-calc  b+(a-b)/2
-    < b+(a-b) : add_lt_add_left (half_lt_self (sub_pos_of_lt H)) _
-... = a : add_sub_cancel'_right b a
-```
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">le_ε_to_le</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">linear_ordered_field</span> <span class="n">α</span><span class="o">]</span> <span class="o">{</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">α</span><span class="o">}</span>
+  <span class="o">(</span><span class="n">Hle_ε</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">ε</span> <span class="bp">&gt;</span> <span class="mi">0</span><span class="o">,</span> <span class="n">a</span> <span class="bp">≤</span> <span class="n">b</span> <span class="bp">+</span> <span class="n">ε</span><span class="o">)</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">≤</span> <span class="n">b</span> <span class="o">:=</span>
+<span class="n">le_of_not_lt</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">H</span><span class="o">,</span> <span class="n">not_lt_of_le</span> <span class="o">(</span><span class="n">Hle_ε</span> <span class="o">((</span><span class="n">a</span><span class="bp">-</span><span class="n">b</span><span class="o">)</span><span class="bp">/</span><span class="mi">2</span><span class="o">)</span> <span class="o">(</span><span class="n">half_pos</span> <span class="err">$</span> <span class="n">sub_pos_of_lt</span> <span class="n">H</span><span class="o">))</span> <span class="err">$</span>
+<span class="k">calc</span>  <span class="n">b</span><span class="bp">+</span><span class="o">(</span><span class="n">a</span><span class="bp">-</span><span class="n">b</span><span class="o">)</span><span class="bp">/</span><span class="mi">2</span>
+    <span class="bp">&lt;</span> <span class="n">b</span><span class="bp">+</span><span class="o">(</span><span class="n">a</span><span class="bp">-</span><span class="n">b</span><span class="o">)</span> <span class="o">:</span> <span class="n">add_lt_add_left</span> <span class="o">(</span><span class="n">half_lt_self</span> <span class="o">(</span><span class="n">sub_pos_of_lt</span> <span class="n">H</span><span class="o">))</span> <span class="bp">_</span>
+<span class="bp">...</span> <span class="bp">=</span> <span class="n">a</span> <span class="o">:</span> <span class="n">add_sub_cancel&#39;_right</span> <span class="n">b</span> <span class="n">a</span>
+</pre></div>
 
 #### [ Kevin Buzzard (Sep 16 2018 at 12:28)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Feedback%20%28Heine%20Borel%20in%20progress%29/near/134048808):
-```lean
-theorem between_shorter (H1 : b ≤ c) (H2 : c ≤ a) (H3 : b ≤ d) (H4 : d ≤ a) : 
-abs (c - d) ≤ abs (a - b) :=
-begin
-  rw abs_of_nonneg (sub_nonneg_of_le $ le_trans H1 H2),
-  rw abs_le, split,
-    rw neg_sub,
-    exact _root_.sub_le_sub H1 H4,
-    exact _root_.sub_le_sub H2 H3,
-end
-```
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">between_shorter</span> <span class="o">(</span><span class="n">H1</span> <span class="o">:</span> <span class="n">b</span> <span class="bp">≤</span> <span class="n">c</span><span class="o">)</span> <span class="o">(</span><span class="n">H2</span> <span class="o">:</span> <span class="n">c</span> <span class="bp">≤</span> <span class="n">a</span><span class="o">)</span> <span class="o">(</span><span class="n">H3</span> <span class="o">:</span> <span class="n">b</span> <span class="bp">≤</span> <span class="n">d</span><span class="o">)</span> <span class="o">(</span><span class="n">H4</span> <span class="o">:</span> <span class="n">d</span> <span class="bp">≤</span> <span class="n">a</span><span class="o">)</span> <span class="o">:</span>
+<span class="n">abs</span> <span class="o">(</span><span class="n">c</span> <span class="bp">-</span> <span class="n">d</span><span class="o">)</span> <span class="bp">≤</span> <span class="n">abs</span> <span class="o">(</span><span class="n">a</span> <span class="bp">-</span> <span class="n">b</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">rw</span> <span class="n">abs_of_nonneg</span> <span class="o">(</span><span class="n">sub_nonneg_of_le</span> <span class="err">$</span> <span class="n">le_trans</span> <span class="n">H1</span> <span class="n">H2</span><span class="o">),</span>
+  <span class="n">rw</span> <span class="n">abs_le</span><span class="o">,</span> <span class="n">split</span><span class="o">,</span>
+    <span class="n">rw</span> <span class="n">neg_sub</span><span class="o">,</span>
+    <span class="n">exact</span> <span class="bp">_</span><span class="n">root_</span><span class="bp">.</span><span class="n">sub_le_sub</span> <span class="n">H1</span> <span class="n">H4</span><span class="o">,</span>
+    <span class="n">exact</span> <span class="bp">_</span><span class="n">root_</span><span class="bp">.</span><span class="n">sub_le_sub</span> <span class="n">H2</span> <span class="n">H3</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
 
-This one wasn't too bad -- proof felt natural.
+
+<p>This one wasn't too bad -- proof felt natural.</p>
 
 #### [ Kenny Lau (Sep 16 2018 at 12:36)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Feedback%20%28Heine%20Borel%20in%20progress%29/near/134049053):
-```lean
-theorem between_shorter {α : Type*} [decidable_linear_ordered_comm_group α] {a b c d : α}
-  (H1 : b ≤ c) (H2 : c ≤ a) (H3 : b ≤ d) (H4 : d ≤ a) :
-  abs (c - d) ≤ abs (a - b) :=
-calc  abs (c - d)
-    ≤ a - b : abs_sub_le_iff.2 ⟨sub_le_sub H2 H3, sub_le_sub H4 H1⟩
-... = abs (a - b) : (abs_of_nonneg $ sub_nonneg_of_le $ le_trans H1 H2).symm
-```
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">between_shorter</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">decidable_linear_ordered_comm_group</span> <span class="n">α</span><span class="o">]</span> <span class="o">{</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="n">d</span> <span class="o">:</span> <span class="n">α</span><span class="o">}</span>
+  <span class="o">(</span><span class="n">H1</span> <span class="o">:</span> <span class="n">b</span> <span class="bp">≤</span> <span class="n">c</span><span class="o">)</span> <span class="o">(</span><span class="n">H2</span> <span class="o">:</span> <span class="n">c</span> <span class="bp">≤</span> <span class="n">a</span><span class="o">)</span> <span class="o">(</span><span class="n">H3</span> <span class="o">:</span> <span class="n">b</span> <span class="bp">≤</span> <span class="n">d</span><span class="o">)</span> <span class="o">(</span><span class="n">H4</span> <span class="o">:</span> <span class="n">d</span> <span class="bp">≤</span> <span class="n">a</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">abs</span> <span class="o">(</span><span class="n">c</span> <span class="bp">-</span> <span class="n">d</span><span class="o">)</span> <span class="bp">≤</span> <span class="n">abs</span> <span class="o">(</span><span class="n">a</span> <span class="bp">-</span> <span class="n">b</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">calc</span>  <span class="n">abs</span> <span class="o">(</span><span class="n">c</span> <span class="bp">-</span> <span class="n">d</span><span class="o">)</span>
+    <span class="bp">≤</span> <span class="n">a</span> <span class="bp">-</span> <span class="n">b</span> <span class="o">:</span> <span class="n">abs_sub_le_iff</span><span class="bp">.</span><span class="mi">2</span> <span class="bp">⟨</span><span class="n">sub_le_sub</span> <span class="n">H2</span> <span class="n">H3</span><span class="o">,</span> <span class="n">sub_le_sub</span> <span class="n">H4</span> <span class="n">H1</span><span class="bp">⟩</span>
+<span class="bp">...</span> <span class="bp">=</span> <span class="n">abs</span> <span class="o">(</span><span class="n">a</span> <span class="bp">-</span> <span class="n">b</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">abs_of_nonneg</span> <span class="err">$</span> <span class="n">sub_nonneg_of_le</span> <span class="err">$</span> <span class="n">le_trans</span> <span class="n">H1</span> <span class="n">H2</span><span class="o">)</span><span class="bp">.</span><span class="n">symm</span>
+</pre></div>
 
 #### [ Kevin Buzzard (Sep 16 2018 at 12:36)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Feedback%20%28Heine%20Borel%20in%20progress%29/near/134049054):
-```lean
-lemma half_le_self (H : 0 ≤ a) : a / 2 ≤ a := begin
-  rw div_le_iff (show (2 : ℝ) > 0, by norm_num),
-  rw mul_two,
-  rwa le_add_iff_nonneg_left,
-end
-```
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">half_le_self</span> <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">≤</span> <span class="n">a</span><span class="o">)</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">/</span> <span class="mi">2</span> <span class="bp">≤</span> <span class="n">a</span> <span class="o">:=</span> <span class="k">begin</span>
+  <span class="n">rw</span> <span class="n">div_le_iff</span> <span class="o">(</span><span class="k">show</span> <span class="o">(</span><span class="mi">2</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="bp">&gt;</span> <span class="mi">0</span><span class="o">,</span> <span class="k">by</span> <span class="n">norm_num</span><span class="o">),</span>
+  <span class="n">rw</span> <span class="n">mul_two</span><span class="o">,</span>
+  <span class="n">rwa</span> <span class="n">le_add_iff_nonneg_left</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
 
 #### [ Kenny Lau (Sep 16 2018 at 12:44)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Feedback%20%28Heine%20Borel%20in%20progress%29/near/134049259):
-```lean
-lemma half_le_self {α : Type*} [linear_ordered_field α] {a : α}
-  (H : 0 ≤ a) : a / 2 ≤ a :=
-div_le_of_le_mul two_pos $ (two_mul a).symm ▸ le_add_of_nonneg_left H
-```
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">half_le_self</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">linear_ordered_field</span> <span class="n">α</span><span class="o">]</span> <span class="o">{</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">}</span>
+  <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">≤</span> <span class="n">a</span><span class="o">)</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">/</span> <span class="mi">2</span> <span class="bp">≤</span> <span class="n">a</span> <span class="o">:=</span>
+<span class="n">div_le_of_le_mul</span> <span class="n">two_pos</span> <span class="err">$</span> <span class="o">(</span><span class="n">two_mul</span> <span class="n">a</span><span class="o">)</span><span class="bp">.</span><span class="n">symm</span> <span class="bp">▸</span> <span class="n">le_add_of_nonneg_left</span> <span class="n">H</span>
+</pre></div>
 
 #### [ Kevin Buzzard (Sep 16 2018 at 12:49)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Feedback%20%28Heine%20Borel%20in%20progress%29/near/134049371):
-Should there be training or exercises or something for people who need stuff like this?
+<p>Should there be training or exercises or something for people who need stuff like this?</p>
 
 #### [ Rob Lewis (Sep 16 2018 at 13:36)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Feedback%20%28Heine%20Borel%20in%20progress%29/near/134050573):
-```lean
-import tactic.linarith
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">linarith</span>
 
-lemma half_le_self {α : Type*} [linear_ordered_field α] {a : α}
-  (H : 0 ≤ a) : a / 2 ≤ a :=
-by linarith
+<span class="kn">lemma</span> <span class="n">half_le_self</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">linear_ordered_field</span> <span class="n">α</span><span class="o">]</span> <span class="o">{</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">}</span>
+  <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">≤</span> <span class="n">a</span><span class="o">)</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">/</span> <span class="mi">2</span> <span class="bp">≤</span> <span class="n">a</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">linarith</span>
 
-theorem between_shorter {α : Type*} [decidable_linear_ordered_comm_ring α] {a b c d : α}
-  (H1 : b ≤ c) (H2 : c ≤ a) (H3 : b ≤ d) (H4 : d ≤ a) :
-  abs (c - d) ≤ abs (a - b) :=
-by unfold abs max; split_ifs; linarith
-```
+<span class="kn">theorem</span> <span class="n">between_shorter</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">decidable_linear_ordered_comm_ring</span> <span class="n">α</span><span class="o">]</span> <span class="o">{</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="n">d</span> <span class="o">:</span> <span class="n">α</span><span class="o">}</span>
+  <span class="o">(</span><span class="n">H1</span> <span class="o">:</span> <span class="n">b</span> <span class="bp">≤</span> <span class="n">c</span><span class="o">)</span> <span class="o">(</span><span class="n">H2</span> <span class="o">:</span> <span class="n">c</span> <span class="bp">≤</span> <span class="n">a</span><span class="o">)</span> <span class="o">(</span><span class="n">H3</span> <span class="o">:</span> <span class="n">b</span> <span class="bp">≤</span> <span class="n">d</span><span class="o">)</span> <span class="o">(</span><span class="n">H4</span> <span class="o">:</span> <span class="n">d</span> <span class="bp">≤</span> <span class="n">a</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">abs</span> <span class="o">(</span><span class="n">c</span> <span class="bp">-</span> <span class="n">d</span><span class="o">)</span> <span class="bp">≤</span> <span class="n">abs</span> <span class="o">(</span><span class="n">a</span> <span class="bp">-</span> <span class="n">b</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">unfold</span> <span class="n">abs</span> <span class="n">max</span><span class="bp">;</span> <span class="n">split_ifs</span><span class="bp">;</span> <span class="n">linarith</span>
+</pre></div>
 
 #### [ Kevin Buzzard (Sep 16 2018 at 13:49)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Feedback%20%28Heine%20Borel%20in%20progress%29/near/134050865):
-...or maybe even a tactic!
+<p>...or maybe even a tactic!</p>
 
 #### [ Scott Morrison (Sep 16 2018 at 13:49)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Feedback%20%28Heine%20Borel%20in%20progress%29/near/134050868):
-Next we make a wrapper for linarith that unfolds stuff that is secretly arithmetic. :-)
+<p>Next we make a wrapper for linarith that unfolds stuff that is secretly arithmetic. :-)</p>
 
 #### [ Kevin Buzzard (Sep 16 2018 at 13:58)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Feedback%20%28Heine%20Borel%20in%20progress%29/near/134051134):
-```quote
-```lean
-    < b+(a-b) : [blah]
-... = a : add_sub_cancel'_right b a
-```
-```
-Kenny -- you misspelt "by ring". 
+<blockquote>
+<div class="codehilite"><pre><span></span>    <span class="bp">&lt;</span> <span class="n">b</span><span class="bp">+</span><span class="o">(</span><span class="n">a</span><span class="bp">-</span><span class="n">b</span><span class="o">)</span> <span class="o">:</span> <span class="o">[</span><span class="n">blah</span><span class="o">]</span>
+<span class="bp">...</span> <span class="bp">=</span> <span class="n">a</span> <span class="o">:</span> <span class="n">add_sub_cancel&#39;_right</span> <span class="n">b</span> <span class="n">a</span>
+</pre></div>
 
-Why should mathematican end users have to know that the triviality `b + (a - b) = a` is called `add_sub_cancel'_right`? Surely we should just be able to write something which generates this proof for us, and then internally replaces what we wrote with this add_sub_cancel' nonsense?  I'm assuming that using `ring` to do this is not recommended because it might take about 10 times as long. It's all well and good people writing clever tactics which solve all goals of this nature, but then we end up in this situation where people are encouraged not to use them and instead get an encyclopedic knowledge of all this `add_sub_cancel'_right` nonsense, or learn how to look it up. I guess what I'm asking for is a tactic which does `by ring` but only takes a long time the first time -- like Scott's `tidy` trick. Can this be done in other cases somehow?
+
+</blockquote>
+<p>Kenny -- you misspelt "by ring". </p>
+<p>Why should mathematican end users have to know that the triviality <code>b + (a - b) = a</code> is called <code>add_sub_cancel'_right</code>? Surely we should just be able to write something which generates this proof for us, and then internally replaces what we wrote with this add_sub_cancel' nonsense?  I'm assuming that using <code>ring</code> to do this is not recommended because it might take about 10 times as long. It's all well and good people writing clever tactics which solve all goals of this nature, but then we end up in this situation where people are encouraged not to use them and instead get an encyclopedic knowledge of all this <code>add_sub_cancel'_right</code> nonsense, or learn how to look it up. I guess what I'm asking for is a tactic which does <code>by ring</code> but only takes a long time the first time -- like Scott's <code>tidy</code> trick. Can this be done in other cases somehow?</p>
 
 #### [ Kevin Buzzard (Sep 16 2018 at 14:00)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Feedback%20%28Heine%20Borel%20in%20progress%29/near/134051186):
-@**Guillermo Barajas Ayuso** -- `linarith` is a brand new tactic which Rob wrote. You might find it useful in other situations.
+<p><span class="user-mention" data-user-id="120690">@Guillermo Barajas Ayuso</span> -- <code>linarith</code> is a brand new tactic which Rob wrote. You might find it useful in other situations.</p>
 
 #### [ Kenny Lau (Sep 16 2018 at 14:28)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Feedback%20%28Heine%20Borel%20in%20progress%29/near/134051860):
-@**Rob Lewis** re `between_shorter`, my version works for objects without multiplication
+<p><span class="user-mention" data-user-id="110596">@Rob Lewis</span> re <code>between_shorter</code>, my version works for objects without multiplication</p>
 
 #### [ Rob Lewis (Sep 16 2018 at 14:33)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Feedback%20%28Heine%20Borel%20in%20progress%29/near/134051971):
-```quote
-Can this be done in other cases somehow?
-```
-It can in principle. But things like `ring` often don't try to produce short or pretty output, because it's way harder to write something that does that and works generally. And the output will probably still look messy on anything more complicated than that basic example.
+<blockquote>
+<p>Can this be done in other cases somehow?</p>
+</blockquote>
+<p>It can in principle. But things like <code>ring</code> often don't try to produce short or pretty output, because it's way harder to write something that does that and works generally. And the output will probably still look messy on anything more complicated than that basic example.</p>
 
 #### [ Rob Lewis (Sep 16 2018 at 14:37)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Feedback%20%28Heine%20Borel%20in%20progress%29/near/134052060):
-I wouldn't expect `ring` to be unreasonably slow for examples like that, either.
+<p>I wouldn't expect <code>ring</code> to be unreasonably slow for examples like that, either.</p>
 
 #### [ Scott Morrison (Sep 16 2018 at 15:05)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Feedback%20%28Heine%20Borel%20in%20progress%29/near/134052895):
-Hi @**Rob Lewis**, in the interest in making `linarith` even easier to use, what would you think of having it automatically try `exfalso` if the goal doesn't look like linear arithmetic?
+<p>Hi <span class="user-mention" data-user-id="110596">@Rob Lewis</span>, in the interest in making <code>linarith</code> even easier to use, what would you think of having it automatically try <code>exfalso</code> if the goal doesn't look like linear arithmetic?</p>
 
 #### [ Scott Morrison (Sep 16 2018 at 15:06)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Feedback%20%28Heine%20Borel%20in%20progress%29/near/134052931):
-It's of course possible to achieve this by: `linarith <|> (exfalso >> linarith)`, but I worry that this is inefficient.
+<p>It's of course possible to achieve this by: <code>linarith &lt;|&gt; (exfalso &gt;&gt; linarith)</code>, but I worry that this is inefficient.</p>
 
 #### [ Scott Morrison (Sep 16 2018 at 15:06)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Feedback%20%28Heine%20Borel%20in%20progress%29/near/134052956):
-(Actually maybe it isn't --- if the goal is something else, linarith I guess fails before doing any work already...)
+<p>(Actually maybe it isn't --- if the goal is something else, linarith I guess fails before doing any work already...)</p>
 
 #### [ Rob Lewis (Sep 16 2018 at 15:10)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Feedback%20%28Heine%20Borel%20in%20progress%29/near/134053111):
-That's completely reasonable. I actually thought it did that already, but apparently I added a check for a `false` goal.
+<p>That's completely reasonable. I actually thought it did that already, but apparently I added a check for a <code>false</code> goal.</p>
 
 #### [ Rob Lewis (Sep 16 2018 at 15:11)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Feedback%20%28Heine%20Borel%20in%20progress%29/near/134053146):
-If there are no inequality hypotheses, it'll fail immediately. If there are hypotheses it can work with, it will try, but failure is a lot quicker than success.
+<p>If there are no inequality hypotheses, it'll fail immediately. If there are hypotheses it can work with, it will try, but failure is a lot quicker than success.</p>
 
 #### [ Rob Lewis (Sep 16 2018 at 15:13)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Feedback%20%28Heine%20Borel%20in%20progress%29/near/134053210):
-I'll add a config option for trying to prove arbitrary goals by `exfalso`.
+<p>I'll add a config option for trying to prove arbitrary goals by <code>exfalso</code>.</p>
 
 #### [ Keeley Hoek (Sep 16 2018 at 15:42)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Feedback%20%28Heine%20Borel%20in%20progress%29/near/134054291):
-This sort of follows-up what Kevin was saying before: it seems to me that it'd be really great if Lean had a facility for tactics to opt-in to cache what they did on invocation, not just in the interactive lean session (memoizing there), but statically in a file in the repository.
+<p>This sort of follows-up what Kevin was saying before: it seems to me that it'd be really great if Lean had a facility for tactics to opt-in to cache what they did on invocation, not just in the interactive lean session (memoizing there), but statically in a file in the repository.</p>
 
 #### [ Keeley Hoek (Sep 16 2018 at 15:42)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Feedback%20%28Heine%20Borel%20in%20progress%29/near/134054292):
-The (my?) dream is that mathlib (or just mathematics) could be filled with tactic proofs which call shiny-new maybe-expensive tactics which do all of your dirty-work for you in one line (e.g `by super_ring`), without any detrimental performance impact; if you change the first line of a file, the expensive tactic proofs in the file below instantly recompile; and if you change the statement of a lemma the cached proof will just silently fail to typecheck and the tactic proof will be re-run. mathlib can be distributed with these cache-files, or they could just be built the first time mathlib is built, and everyone is happy.
+<p>The (my?) dream is that mathlib (or just mathematics) could be filled with tactic proofs which call shiny-new maybe-expensive tactics which do all of your dirty-work for you in one line (e.g <code>by super_ring</code>), without any detrimental performance impact; if you change the first line of a file, the expensive tactic proofs in the file below instantly recompile; and if you change the statement of a lemma the cached proof will just silently fail to typecheck and the tactic proof will be re-run. mathlib can be distributed with these cache-files, or they could just be built the first time mathlib is built, and everyone is happy.</p>
 
 #### [ Keeley Hoek (Sep 16 2018 at 15:42)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Feedback%20%28Heine%20Borel%20in%20progress%29/near/134054295):
-Instead it seems like in many places people have to steer clear of the "big guns", or at least only use them to get a term/tactic-mode proof which they will replace them with. To me, this seems just like a manual way of doing the same sort of static caching, but the tools which helped generate your easy proof (e.g. `ring` → `add_sub_cancel'_right`) are lost forever (and don't auto-fix your proof when you e.g. tinker with your lemma).
+<p>Instead it seems like in many places people have to steer clear of the "big guns", or at least only use them to get a term/tactic-mode proof which they will replace them with. To me, this seems just like a manual way of doing the same sort of static caching, but the tools which helped generate your easy proof (e.g. <code>ring</code> → <code>add_sub_cancel'_right</code>) are lost forever (and don't auto-fix your proof when you e.g. tinker with your lemma).</p>
 
 #### [ Patrick Massot (Sep 16 2018 at 17:35)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Feedback%20%28Heine%20Borel%20in%20progress%29/near/134058680):
-```quote
-```quote
-```lean
-    < b+(a-b) : [blah]
-... = a : add_sub_cancel'_right b a
-```
-```
-Kenny -- you misspelt "by ring". 
-```
-Or "by abel"
+<blockquote>
+<blockquote>
+<div class="codehilite"><pre><span></span>    <span class="bp">&lt;</span> <span class="n">b</span><span class="bp">+</span><span class="o">(</span><span class="n">a</span><span class="bp">-</span><span class="n">b</span><span class="o">)</span> <span class="o">:</span> <span class="o">[</span><span class="n">blah</span><span class="o">]</span>
+<span class="bp">...</span> <span class="bp">=</span> <span class="n">a</span> <span class="o">:</span> <span class="n">add_sub_cancel&#39;_right</span> <span class="n">b</span> <span class="n">a</span>
+</pre></div>
+
+
+</blockquote>
+<p>Kenny -- you misspelt "by ring". </p>
+</blockquote>
+<p>Or "by abel"</p>
 
 #### [ Kevin Buzzard (Sep 17 2018 at 16:38)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Feedback%20%28Heine%20Borel%20in%20progress%29/near/134104742):
-Or even `by simp`. Grr. What is the point of this `abel` tactic? I still haven't found an example which `simp` can't do.
+<p>Or even <code>by simp</code>. Grr. What is the point of this <code>abel</code> tactic? I still haven't found an example which <code>simp</code> can't do.</p>
 
 #### [ Patrick Massot (Sep 17 2018 at 17:03)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Feedback%20%28Heine%20Borel%20in%20progress%29/near/134106299):
-Hopefully `abel` is a step towards the `module` tactic which should be more useful
+<p>Hopefully <code>abel</code> is a step towards the <code>module</code> tactic which should be more useful</p>
 
 
 {% endraw %}

@@ -12,40 +12,39 @@ permalink: archive/113488general/72590Fromfieldstosets.html
 
 {% raw %}
 #### [ Anthony Bordg (Oct 04 2018 at 23:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/From%20fields%20to%20sets/near/135217336):
-Hello,
-
-is there an easy way to get the underlying set of a (discrete) field ?
-Thanks
+<p>Hello,</p>
+<p>is there an easy way to get the underlying set of a (discrete) field ?<br>
+Thanks</p>
 
 #### [ Simon Hudon (Oct 04 2018 at 23:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/From%20fields%20to%20sets/near/135217489):
-If you have `field α`, `set.univ α` is the underlying set.
+<p>If you have <code>field α</code>, <code>set.univ α</code> is the underlying set.</p>
 
 #### [ Anthony Bordg (Oct 04 2018 at 23:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/From%20fields%20to%20sets/near/135217940):
-```quote
-If you have `field α`, `set.univ α` is the underlying set.
-```
-Great! Thank you Simon.
+<blockquote>
+<p>If you have <code>field α</code>, <code>set.univ α</code> is the underlying set.</p>
+</blockquote>
+<p>Great! Thank you Simon.</p>
 
 #### [ Simon Hudon (Oct 04 2018 at 23:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/From%20fields%20to%20sets/near/135217959):
-:+1:
+<p><span class="emoji emoji-1f44d" title="+1">:+1:</span></p>
 
 #### [ Simon Hudon (Oct 04 2018 at 23:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/From%20fields%20to%20sets/near/135218041):
-What do you use it for? Typically, I don't see that set used much because the type does most of the work on its own
+<p>What do you use it for? Typically, I don't see that set used much because the type does most of the work on its own</p>
 
 #### [ Mario Carneiro (Oct 04 2018 at 23:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/From%20fields%20to%20sets/near/135218290):
-I think maybe you just want `α`?
+<p>I think maybe you just want <code>α</code>?</p>
 
 #### [ Mario Carneiro (Oct 04 2018 at 23:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/From%20fields%20to%20sets/near/135218339):
-It's not an "underlying set", it's an "underlying type"
+<p>It's not an "underlying set", it's an "underlying type"</p>
 
 #### [ Mario Carneiro (Oct 04 2018 at 23:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/From%20fields%20to%20sets/near/135218382):
-and there is no underlying about it because we define "a field on α" rather than just "a field", so α is the carrier
+<p>and there is no underlying about it because we define "a field on α" rather than just "a field", so α is the carrier</p>
 
 #### [ Anthony Bordg (Oct 04 2018 at 23:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/From%20fields%20to%20sets/near/135219190):
-```quote
-What do you use it for? Typically, I don't see that set used much because the type does most of the work on its own
-```
-You're right, I realized that I don't need it. :+1:
+<blockquote>
+<p>What do you use it for? Typically, I don't see that set used much because the type does most of the work on its own</p>
+</blockquote>
+<p>You're right, I realized that I don't need it. <span class="emoji emoji-1f44d" title="+1">:+1:</span></p>
 
 
 {% endraw %}

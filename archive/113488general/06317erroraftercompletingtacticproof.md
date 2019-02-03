@@ -12,80 +12,80 @@ permalink: archive/113488general/06317erroraftercompletingtacticproof.html
 
 {% raw %}
 #### [ Johan Commelin (Nov 17 2018 at 07:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/error%20after%20completing%20tactic%20proof/near/147866833):
-```lean
-type mismatch at application
-  F.map (i ≫ functor.preimage f j) s
-term
-  s
-has type
-  ((functor.id (presheaf X)).obj F_1).obj U₁_1
-but is expected to have type
-  F.obj U₁
-types contain aliased name(s): U₁ F
-remark: the tactic `dedup` can be used to rename aliases
-```
-I have tried inserting `dedup` in several places, but it doesn't help. My `s` remains to have type `((functor.id (presheaf X)).obj F).obj U₁` in the goal window, which is defeq to `F.obj U₁`.
+<div class="codehilite"><pre><span></span><span class="n">type</span> <span class="n">mismatch</span> <span class="n">at</span> <span class="n">application</span>
+  <span class="n">F</span><span class="bp">.</span><span class="n">map</span> <span class="o">(</span><span class="n">i</span> <span class="err">≫</span> <span class="n">functor</span><span class="bp">.</span><span class="n">preimage</span> <span class="n">f</span> <span class="n">j</span><span class="o">)</span> <span class="n">s</span>
+<span class="n">term</span>
+  <span class="n">s</span>
+<span class="n">has</span> <span class="n">type</span>
+  <span class="o">((</span><span class="n">functor</span><span class="bp">.</span><span class="n">id</span> <span class="o">(</span><span class="n">presheaf</span> <span class="n">X</span><span class="o">))</span><span class="bp">.</span><span class="n">obj</span> <span class="n">F_1</span><span class="o">)</span><span class="bp">.</span><span class="n">obj</span> <span class="n">U₁_1</span>
+<span class="n">but</span> <span class="n">is</span> <span class="n">expected</span> <span class="n">to</span> <span class="k">have</span> <span class="n">type</span>
+  <span class="n">F</span><span class="bp">.</span><span class="n">obj</span> <span class="n">U₁</span>
+<span class="n">types</span> <span class="n">contain</span> <span class="n">aliased</span> <span class="n">name</span><span class="o">(</span><span class="n">s</span><span class="o">):</span> <span class="n">U₁</span> <span class="n">F</span>
+<span class="n">remark</span><span class="o">:</span> <span class="n">the</span> <span class="n">tactic</span> <span class="bp">`</span><span class="n">dedup</span><span class="bp">`</span> <span class="n">can</span> <span class="n">be</span> <span class="n">used</span> <span class="n">to</span> <span class="n">rename</span> <span class="n">aliases</span>
+</pre></div>
+
+
+<p>I have tried inserting <code>dedup</code> in several places, but it doesn't help. My <code>s</code> remains to have type <code>((functor.id (presheaf X)).obj F).obj U₁</code> in the goal window, which is defeq to <code>F.obj U₁</code>.</p>
 
 #### [ Scott Morrison (Nov 17 2018 at 08:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/error%20after%20completing%20tactic%20proof/near/147867786):
-Oh, I've had this one before. The error message is completely misleading...
+<p>Oh, I've had this one before. The error message is completely misleading...</p>
 
 #### [ Scott Morrison (Nov 17 2018 at 08:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/error%20after%20completing%20tactic%20proof/near/147867790):
-Check that you haven't somehow used `_root_.functor` somewhere that should have been `category_theory.functor`?
+<p>Check that you haven't somehow used <code>_root_.functor</code> somewhere that should have been <code>category_theory.functor</code>?</p>
 
 #### [ Scott Morrison (Nov 17 2018 at 08:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/error%20after%20completing%20tactic%20proof/near/147867793):
-I don't remember if that was it or not.
+<p>I don't remember if that was it or not.</p>
 
 #### [ Johan Commelin (Nov 17 2018 at 08:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/error%20after%20completing%20tactic%20proof/near/147868427):
-Hmm, that sounds like a very crazy error. I'll see if I can find it.
+<p>Hmm, that sounds like a very crazy error. I'll see if I can find it.</p>
 
 #### [ Johan Commelin (Nov 17 2018 at 08:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/error%20after%20completing%20tactic%20proof/near/147868475):
-Do you spot anything suspicious in
-```lean
-def counit.is_iso [fully_faithful f] : is_iso (counit f) :=
-{ inv :=
-  { app := λ (F : _ ⥤ _),
-    { app := λ U s,
-      { app := λ V i, (F.map $ f.preimage i : F.obj U → F.obj V) s,
-        naturality' := λ V₁ V₂ i,
-        begin
-          ext j,
-          have := (congr $ F.map_comp (f.preimage j) i) (rfl : s = _),
-          dsimp at *,
-          erw ← this,
-          congr,
-          apply f.injectivity,
-          erw f.map_comp,
-          tidy {trace_result := tt},
-        end },
-      naturality' := λ U₁ U₂ i,
-      begin
-        ext s V j,
-        have := (congr $ F.map_comp i (f.preimage j)) (rfl : _ = _),
-        dsimp at *,
-        erw ← this,
-        congr,
-        apply f.injectivity,
-        erw f.map_comp,
-        tidy {trace_result := tt},
-      end },
-    naturality' := λ F G α,
-    begin
-      ext U s V j,
-      have := (congr $ α.naturality (f.op.preimage j)) rfl,
-      tidy {trace_result := tt},
-    end } }
-```
+<p>Do you spot anything suspicious in</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">counit</span><span class="bp">.</span><span class="n">is_iso</span> <span class="o">[</span><span class="n">fully_faithful</span> <span class="n">f</span><span class="o">]</span> <span class="o">:</span> <span class="n">is_iso</span> <span class="o">(</span><span class="n">counit</span> <span class="n">f</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">inv</span> <span class="o">:=</span>
+  <span class="o">{</span> <span class="n">app</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="o">(</span><span class="n">F</span> <span class="o">:</span> <span class="bp">_</span> <span class="err">⥤</span> <span class="bp">_</span><span class="o">),</span>
+    <span class="o">{</span> <span class="n">app</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">U</span> <span class="n">s</span><span class="o">,</span>
+      <span class="o">{</span> <span class="n">app</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">V</span> <span class="n">i</span><span class="o">,</span> <span class="o">(</span><span class="n">F</span><span class="bp">.</span><span class="n">map</span> <span class="err">$</span> <span class="n">f</span><span class="bp">.</span><span class="n">preimage</span> <span class="n">i</span> <span class="o">:</span> <span class="n">F</span><span class="bp">.</span><span class="n">obj</span> <span class="n">U</span> <span class="bp">→</span> <span class="n">F</span><span class="bp">.</span><span class="n">obj</span> <span class="n">V</span><span class="o">)</span> <span class="n">s</span><span class="o">,</span>
+        <span class="n">naturality&#39;</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">V₁</span> <span class="n">V₂</span> <span class="n">i</span><span class="o">,</span>
+        <span class="k">begin</span>
+          <span class="n">ext</span> <span class="n">j</span><span class="o">,</span>
+          <span class="k">have</span> <span class="o">:=</span> <span class="o">(</span><span class="n">congr</span> <span class="err">$</span> <span class="n">F</span><span class="bp">.</span><span class="n">map_comp</span> <span class="o">(</span><span class="n">f</span><span class="bp">.</span><span class="n">preimage</span> <span class="n">j</span><span class="o">)</span> <span class="n">i</span><span class="o">)</span> <span class="o">(</span><span class="n">rfl</span> <span class="o">:</span> <span class="n">s</span> <span class="bp">=</span> <span class="bp">_</span><span class="o">),</span>
+          <span class="n">dsimp</span> <span class="n">at</span> <span class="bp">*</span><span class="o">,</span>
+          <span class="n">erw</span> <span class="err">←</span> <span class="n">this</span><span class="o">,</span>
+          <span class="n">congr</span><span class="o">,</span>
+          <span class="n">apply</span> <span class="n">f</span><span class="bp">.</span><span class="n">injectivity</span><span class="o">,</span>
+          <span class="n">erw</span> <span class="n">f</span><span class="bp">.</span><span class="n">map_comp</span><span class="o">,</span>
+          <span class="n">tidy</span> <span class="o">{</span><span class="n">trace_result</span> <span class="o">:=</span> <span class="n">tt</span><span class="o">},</span>
+        <span class="kn">end</span> <span class="o">},</span>
+      <span class="n">naturality&#39;</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">U₁</span> <span class="n">U₂</span> <span class="n">i</span><span class="o">,</span>
+      <span class="k">begin</span>
+        <span class="n">ext</span> <span class="n">s</span> <span class="n">V</span> <span class="n">j</span><span class="o">,</span>
+        <span class="k">have</span> <span class="o">:=</span> <span class="o">(</span><span class="n">congr</span> <span class="err">$</span> <span class="n">F</span><span class="bp">.</span><span class="n">map_comp</span> <span class="n">i</span> <span class="o">(</span><span class="n">f</span><span class="bp">.</span><span class="n">preimage</span> <span class="n">j</span><span class="o">))</span> <span class="o">(</span><span class="n">rfl</span> <span class="o">:</span> <span class="bp">_</span> <span class="bp">=</span> <span class="bp">_</span><span class="o">),</span>
+        <span class="n">dsimp</span> <span class="n">at</span> <span class="bp">*</span><span class="o">,</span>
+        <span class="n">erw</span> <span class="err">←</span> <span class="n">this</span><span class="o">,</span>
+        <span class="n">congr</span><span class="o">,</span>
+        <span class="n">apply</span> <span class="n">f</span><span class="bp">.</span><span class="n">injectivity</span><span class="o">,</span>
+        <span class="n">erw</span> <span class="n">f</span><span class="bp">.</span><span class="n">map_comp</span><span class="o">,</span>
+        <span class="n">tidy</span> <span class="o">{</span><span class="n">trace_result</span> <span class="o">:=</span> <span class="n">tt</span><span class="o">},</span>
+      <span class="kn">end</span> <span class="o">},</span>
+    <span class="n">naturality&#39;</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">F</span> <span class="n">G</span> <span class="n">α</span><span class="o">,</span>
+    <span class="k">begin</span>
+      <span class="n">ext</span> <span class="n">U</span> <span class="n">s</span> <span class="n">V</span> <span class="n">j</span><span class="o">,</span>
+      <span class="k">have</span> <span class="o">:=</span> <span class="o">(</span><span class="n">congr</span> <span class="err">$</span> <span class="n">α</span><span class="bp">.</span><span class="n">naturality</span> <span class="o">(</span><span class="n">f</span><span class="bp">.</span><span class="n">op</span><span class="bp">.</span><span class="n">preimage</span> <span class="n">j</span><span class="o">))</span> <span class="n">rfl</span><span class="o">,</span>
+      <span class="n">tidy</span> <span class="o">{</span><span class="n">trace_result</span> <span class="o">:=</span> <span class="n">tt</span><span class="o">},</span>
+    <span class="kn">end</span> <span class="o">}</span> <span class="o">}</span>
+</pre></div>
 
 #### [ Johan Commelin (Nov 17 2018 at 11:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/error%20after%20completing%20tactic%20proof/near/147872942):
-@**Scott Morrison|110087** In my case it was talking about `f.preimage` while that should have been `f.op.preimage`.
-I think we should have stronger barriers between categories and their opposites. Because now stuff is silently identified, and then all of a sudden it bites you 20 lines later.
+<p><span class="user-mention" data-user-id="110087">@Scott Morrison</span> In my case it was talking about <code>f.preimage</code> while that should have been <code>f.op.preimage</code>.<br>
+I think we should have stronger barriers between categories and their opposites. Because now stuff is silently identified, and then all of a sudden it bites you 20 lines later.</p>
 
 #### [ Johan Commelin (Nov 17 2018 at 11:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/error%20after%20completing%20tactic%20proof/near/147873601):
-Hmm, no, that wasn't the issue... it reappeared...
+<p>Hmm, no, that wasn't the issue... it reappeared...</p>
 
 #### [ Johan Commelin (Nov 17 2018 at 12:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/error%20after%20completing%20tactic%20proof/near/147873776):
-I pushed an update to the `sheaf` branch. The trouble is with this def: https://github.com/leanprover-community/mathlib/blob/sheaf/category_theory/sheaf.lean#L241
-If any of the experts would want to take a look, I would be very grateful.
+<p>I pushed an update to the <code>sheaf</code> branch. The trouble is with this def: <a href="https://github.com/leanprover-community/mathlib/blob/sheaf/category_theory/sheaf.lean#L241" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/sheaf/category_theory/sheaf.lean#L241">https://github.com/leanprover-community/mathlib/blob/sheaf/category_theory/sheaf.lean#L241</a><br>
+If any of the experts would want to take a look, I would be very grateful.</p>
 
 
 {% endraw %}

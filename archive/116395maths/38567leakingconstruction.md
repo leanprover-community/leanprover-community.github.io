@@ -12,104 +12,110 @@ permalink: archive/116395maths/38567leakingconstruction.html
 
 {% raw %}
 #### [ Patrick Massot (Sep 09 2018 at 21:46)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/leaking%20construction/near/133622397):
-Sometimes I see things like: `quot.lift (λ (a₁ : cau_seq ℚ abs), quotient.lift (has_lt.lt a₁) _ ε) _` in my tactic state when playing with real numbers. It looks like internal details of the constructions are leaking. What does it mean? Can I avoid that?
+<p>Sometimes I see things like: <code>quot.lift (λ (a₁ : cau_seq ℚ abs), quotient.lift (has_lt.lt a₁) _ ε) _</code> in my tactic state when playing with real numbers. It looks like internal details of the constructions are leaking. What does it mean? Can I avoid that?</p>
 
 #### [ Mario Carneiro (Sep 09 2018 at 21:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/leaking%20construction/near/133622571):
-how are you "playing"?
+<p>how are you "playing"?</p>
 
 #### [ Mario Carneiro (Sep 09 2018 at 21:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/leaking%20construction/near/133622577):
-if you unfold stuff you can see this
+<p>if you unfold stuff you can see this</p>
 
 #### [ Patrick Massot (Sep 09 2018 at 21:54)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/leaking%20construction/near/133622621):
-More precisely, I have:
-```lean
-α : Type u_2,
-_inst_1 : metric_space α,
-β : Type u_3,
-u : β → α,
-f : filter β,
-ε : ℝ,
-this : ball a ε ∈ (map u f).sets
-```
-If I do `have:= mem_map.2 this` then the new this is the horror
-```lean
-quot.lift (λ (a₁ : cau_seq ℚ abs), quotient.lift (has_lt.lt a₁) _ ε) _ ∈   (map (λ (y : α), dist y a) (map u f)).sets
-```
-but I can do instead `have : {b | u b ∈ ball a ε} ∈ f.sets := mem_map.2 this,` and Lean won't unfold it
+<p>More precisely, I have:</p>
+<div class="codehilite"><pre><span></span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u_2</span><span class="o">,</span>
+<span class="bp">_</span><span class="n">inst_1</span> <span class="o">:</span> <span class="n">metric_space</span> <span class="n">α</span><span class="o">,</span>
+<span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u_3</span><span class="o">,</span>
+<span class="n">u</span> <span class="o">:</span> <span class="n">β</span> <span class="bp">→</span> <span class="n">α</span><span class="o">,</span>
+<span class="n">f</span> <span class="o">:</span> <span class="n">filter</span> <span class="n">β</span><span class="o">,</span>
+<span class="n">ε</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">,</span>
+<span class="n">this</span> <span class="o">:</span> <span class="n">ball</span> <span class="n">a</span> <span class="n">ε</span> <span class="err">∈</span> <span class="o">(</span><span class="n">map</span> <span class="n">u</span> <span class="n">f</span><span class="o">)</span><span class="bp">.</span><span class="n">sets</span>
+</pre></div>
+
+
+<p>If I do <code>have:= mem_map.2 this</code> then the new this is the horror</p>
+<div class="codehilite"><pre><span></span><span class="n">quot</span><span class="bp">.</span><span class="n">lift</span> <span class="o">(</span><span class="bp">λ</span> <span class="o">(</span><span class="n">a₁</span> <span class="o">:</span> <span class="n">cau_seq</span> <span class="n">ℚ</span> <span class="n">abs</span><span class="o">),</span> <span class="n">quotient</span><span class="bp">.</span><span class="n">lift</span> <span class="o">(</span><span class="n">has_lt</span><span class="bp">.</span><span class="n">lt</span> <span class="n">a₁</span><span class="o">)</span> <span class="bp">_</span> <span class="n">ε</span><span class="o">)</span> <span class="bp">_</span> <span class="err">∈</span>   <span class="o">(</span><span class="n">map</span> <span class="o">(</span><span class="bp">λ</span> <span class="o">(</span><span class="n">y</span> <span class="o">:</span> <span class="n">α</span><span class="o">),</span> <span class="n">dist</span> <span class="n">y</span> <span class="n">a</span><span class="o">)</span> <span class="o">(</span><span class="n">map</span> <span class="n">u</span> <span class="n">f</span><span class="o">))</span><span class="bp">.</span><span class="n">sets</span>
+</pre></div>
+
+
+<p>but I can do instead <code>have : {b | u b ∈ ball a ε} ∈ f.sets := mem_map.2 this,</code> and Lean won't unfold it</p>
 
 #### [ Mario Carneiro (Sep 09 2018 at 21:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/leaking%20construction/near/133622685):
-You are going the wrong way
+<p>You are going the wrong way</p>
 
 #### [ Mario Carneiro (Sep 09 2018 at 21:57)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/leaking%20construction/near/133622686):
-use `mem_map.1 this`
+<p>use <code>mem_map.1 this</code></p>
 
 #### [ Mario Carneiro (Sep 09 2018 at 21:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/leaking%20construction/near/133622735):
-(it works because the two sides are defeq so it doesn't really matter if you apply it, but then the matching goes crazy)
+<p>(it works because the two sides are defeq so it doesn't really matter if you apply it, but then the matching goes crazy)</p>
 
 #### [ Patrick Massot (Sep 09 2018 at 21:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/leaking%20construction/near/133622736):
-oh
+<p>oh</p>
 
 #### [ Patrick Massot (Sep 09 2018 at 21:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/leaking%20construction/near/133622737):
-weird
+<p>weird</p>
 
 #### [ Patrick Massot (Sep 09 2018 at 21:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/leaking%20construction/near/133622751):
-That's biconditional in action: try one direction at random and, if Lean is willing to apply it, never look back
+<p>That's biconditional in action: try one direction at random and, if Lean is willing to apply it, never look back</p>
 
 #### [ Mario Carneiro (Sep 09 2018 at 21:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/leaking%20construction/near/133622752):
-notice that you have another `map` in the result
+<p>notice that you have another <code>map</code> in the result</p>
 
 #### [ Mario Carneiro (Sep 09 2018 at 21:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/leaking%20construction/near/133622755):
-`(map (λ (y : α), dist y a) (map u f)).sets`
+<p><code>(map (λ (y : α), dist y a) (map u f)).sets</code></p>
 
 #### [ Patrick Massot (Sep 09 2018 at 21:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/leaking%20construction/near/133622757):
-true
+<p>true</p>
 
 #### [ Mario Carneiro (Sep 09 2018 at 22:00)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/leaking%20construction/near/133622809):
-so it tried to figure out how to read `ball a ε` as `{x | m x ∈ t}` for some `m, t` and chaos ensues
+<p>so it tried to figure out how to read <code>ball a ε</code> as <code>{x | m x ∈ t}</code> for some <code>m, t</code> and chaos ensues</p>
 
 #### [ Patrick Massot (Sep 09 2018 at 22:01)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/leaking%20construction/near/133622819):
-That's wonderful. In the proof I posted earlier:
-```lean
-example (u : ℕ → α) (a : α) : tendsto u at_top (nhds a) ↔ 
-  ∀ ε > 0, ∃ (N : ℕ), ∀ {n}, n ≥ N → dist (u n) a < ε :=
-⟨λ H ε εpos, mem_at_top_sets.1 $ mem_map.2 $ H (ball_mem_nhds _ εpos),
- λ H s s_nhd, let ⟨ε, εpos, sub⟩ := mem_nhds_iff_metric.1 s_nhd in
-   let ⟨N, H'⟩ := H ε εpos in mem_at_top_sets.2 ⟨N, λ n nN, 
-   sub $ mem_ball.2 $ H' nN⟩⟩
-```
-There is a `$ mem_map.2 $ `. You can change 2 into 1, it still works. Then you can remove that bit entirely and it still works!
+<p>That's wonderful. In the proof I posted earlier:</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">u</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">tendsto</span> <span class="n">u</span> <span class="n">at_top</span> <span class="o">(</span><span class="n">nhds</span> <span class="n">a</span><span class="o">)</span> <span class="bp">↔</span>
+  <span class="bp">∀</span> <span class="n">ε</span> <span class="bp">&gt;</span> <span class="mi">0</span><span class="o">,</span> <span class="bp">∃</span> <span class="o">(</span><span class="n">N</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">),</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">n</span><span class="o">},</span> <span class="n">n</span> <span class="bp">≥</span> <span class="n">N</span> <span class="bp">→</span> <span class="n">dist</span> <span class="o">(</span><span class="n">u</span> <span class="n">n</span><span class="o">)</span> <span class="n">a</span> <span class="bp">&lt;</span> <span class="n">ε</span> <span class="o">:=</span>
+<span class="bp">⟨λ</span> <span class="n">H</span> <span class="n">ε</span> <span class="n">εpos</span><span class="o">,</span> <span class="n">mem_at_top_sets</span><span class="bp">.</span><span class="mi">1</span> <span class="err">$</span> <span class="n">mem_map</span><span class="bp">.</span><span class="mi">2</span> <span class="err">$</span> <span class="n">H</span> <span class="o">(</span><span class="n">ball_mem_nhds</span> <span class="bp">_</span> <span class="n">εpos</span><span class="o">),</span>
+ <span class="bp">λ</span> <span class="n">H</span> <span class="n">s</span> <span class="n">s_nhd</span><span class="o">,</span> <span class="k">let</span> <span class="bp">⟨</span><span class="n">ε</span><span class="o">,</span> <span class="n">εpos</span><span class="o">,</span> <span class="n">sub</span><span class="bp">⟩</span> <span class="o">:=</span> <span class="n">mem_nhds_iff_metric</span><span class="bp">.</span><span class="mi">1</span> <span class="n">s_nhd</span> <span class="k">in</span>
+   <span class="k">let</span> <span class="bp">⟨</span><span class="n">N</span><span class="o">,</span> <span class="n">H&#39;</span><span class="bp">⟩</span> <span class="o">:=</span> <span class="n">H</span> <span class="n">ε</span> <span class="n">εpos</span> <span class="k">in</span> <span class="n">mem_at_top_sets</span><span class="bp">.</span><span class="mi">2</span> <span class="bp">⟨</span><span class="n">N</span><span class="o">,</span> <span class="bp">λ</span> <span class="n">n</span> <span class="n">nN</span><span class="o">,</span>
+   <span class="n">sub</span> <span class="err">$</span> <span class="n">mem_ball</span><span class="bp">.</span><span class="mi">2</span> <span class="err">$</span> <span class="n">H&#39;</span> <span class="n">nN</span><span class="bp">⟩⟩</span>
+</pre></div>
+
+
+<p>There is a <code>$ mem_map.2 $ </code>. You can change 2 into 1, it still works. Then you can remove that bit entirely and it still works!</p>
 
 #### [ Mario Carneiro (Sep 09 2018 at 22:01)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/leaking%20construction/near/133622825):
-because the proof is `rfl`
+<p>because the proof is <code>rfl</code></p>
 
 #### [ Patrick Massot (Sep 09 2018 at 22:01)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/leaking%20construction/near/133622827):
-Yeah, I understand
+<p>Yeah, I understand</p>
 
 #### [ Johannes Hölzl (Sep 10 2018 at 04:08)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/leaking%20construction/near/133633334):
-`simp` can do this:
-```lean
-lemma tendsto_at_top_nhds_metric [metric_space α] {f : ℕ → α} {a : α} :
-  tendsto f at_top (nhds a) ↔ (∀ε>0, ∃N, ∀n≥N, dist (f n) a < ε) :=
-by simp [tendsto_infi, tendsto_principal, nhds_eq_metric]
-```
-The trick is to unfold `nhds_eq_metric` and rhen focus on the right side: An infimum is equal to a quantifier around the `tendsto`, until it reaches `principal`, then it is reduced to membership in `at_top`.
-Other examples
-```lean
-lemma tendsto_at_top_at_top {f : ℕ → ℕ} :
-  tendsto f at_top at_top ↔ (∀M, ∃N, ∀n≥N, M ≤ f n) :=
-by conv { to_lhs, congr, skip, skip, rw [at_top] }; simp [tendsto_infi, tendsto_principal]
-```
-or
-```lean
-lemma tendsto_nhds_metric_nhds_metric [metric_space α] [metric_space β]
-  {f : α → β} {a : α} {b : β}:
-  tendsto f (nhds a) (nhds b) ↔ (∀ε>0, ∃δ>0, ∀x, dist x a < δ → dist (f x) b < ε) :=
-begin
-  conv { to_lhs, congr, skip, skip, rw [nhds_eq_metric] },
-  simp [tendsto_infi, tendsto_principal, mem_nhds_iff_metric, set.subset_def]
-end
-```
-Here the annoying part is that we need to focus on the right `nhds` or `at_top`.
+<p><code>simp</code> can do this:</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">tendsto_at_top_nhds_metric</span> <span class="o">[</span><span class="n">metric_space</span> <span class="n">α</span><span class="o">]</span> <span class="o">{</span><span class="n">f</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="n">α</span><span class="o">}</span> <span class="o">{</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">}</span> <span class="o">:</span>
+  <span class="n">tendsto</span> <span class="n">f</span> <span class="n">at_top</span> <span class="o">(</span><span class="n">nhds</span> <span class="n">a</span><span class="o">)</span> <span class="bp">↔</span> <span class="o">(</span><span class="bp">∀</span><span class="n">ε</span><span class="bp">&gt;</span><span class="mi">0</span><span class="o">,</span> <span class="bp">∃</span><span class="n">N</span><span class="o">,</span> <span class="bp">∀</span><span class="n">n</span><span class="bp">≥</span><span class="n">N</span><span class="o">,</span> <span class="n">dist</span> <span class="o">(</span><span class="n">f</span> <span class="n">n</span><span class="o">)</span> <span class="n">a</span> <span class="bp">&lt;</span> <span class="n">ε</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">tendsto_infi</span><span class="o">,</span> <span class="n">tendsto_principal</span><span class="o">,</span> <span class="n">nhds_eq_metric</span><span class="o">]</span>
+</pre></div>
+
+
+<p>The trick is to unfold <code>nhds_eq_metric</code> and rhen focus on the right side: An infimum is equal to a quantifier around the <code>tendsto</code>, until it reaches <code>principal</code>, then it is reduced to membership in <code>at_top</code>.<br>
+Other examples</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">tendsto_at_top_at_top</span> <span class="o">{</span><span class="n">f</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="bp">ℕ</span><span class="o">}</span> <span class="o">:</span>
+  <span class="n">tendsto</span> <span class="n">f</span> <span class="n">at_top</span> <span class="n">at_top</span> <span class="bp">↔</span> <span class="o">(</span><span class="bp">∀</span><span class="n">M</span><span class="o">,</span> <span class="bp">∃</span><span class="n">N</span><span class="o">,</span> <span class="bp">∀</span><span class="n">n</span><span class="bp">≥</span><span class="n">N</span><span class="o">,</span> <span class="n">M</span> <span class="bp">≤</span> <span class="n">f</span> <span class="n">n</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">conv</span> <span class="o">{</span> <span class="n">to_lhs</span><span class="o">,</span> <span class="n">congr</span><span class="o">,</span> <span class="n">skip</span><span class="o">,</span> <span class="n">skip</span><span class="o">,</span> <span class="n">rw</span> <span class="o">[</span><span class="n">at_top</span><span class="o">]</span> <span class="o">}</span><span class="bp">;</span> <span class="n">simp</span> <span class="o">[</span><span class="n">tendsto_infi</span><span class="o">,</span> <span class="n">tendsto_principal</span><span class="o">]</span>
+</pre></div>
+
+
+<p>or</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">tendsto_nhds_metric_nhds_metric</span> <span class="o">[</span><span class="n">metric_space</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">metric_space</span> <span class="n">β</span><span class="o">]</span>
+  <span class="o">{</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">}</span> <span class="o">{</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">}</span> <span class="o">{</span><span class="n">b</span> <span class="o">:</span> <span class="n">β</span><span class="o">}:</span>
+  <span class="n">tendsto</span> <span class="n">f</span> <span class="o">(</span><span class="n">nhds</span> <span class="n">a</span><span class="o">)</span> <span class="o">(</span><span class="n">nhds</span> <span class="n">b</span><span class="o">)</span> <span class="bp">↔</span> <span class="o">(</span><span class="bp">∀</span><span class="n">ε</span><span class="bp">&gt;</span><span class="mi">0</span><span class="o">,</span> <span class="bp">∃</span><span class="n">δ</span><span class="bp">&gt;</span><span class="mi">0</span><span class="o">,</span> <span class="bp">∀</span><span class="n">x</span><span class="o">,</span> <span class="n">dist</span> <span class="n">x</span> <span class="n">a</span> <span class="bp">&lt;</span> <span class="n">δ</span> <span class="bp">→</span> <span class="n">dist</span> <span class="o">(</span><span class="n">f</span> <span class="n">x</span><span class="o">)</span> <span class="n">b</span> <span class="bp">&lt;</span> <span class="n">ε</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">conv</span> <span class="o">{</span> <span class="n">to_lhs</span><span class="o">,</span> <span class="n">congr</span><span class="o">,</span> <span class="n">skip</span><span class="o">,</span> <span class="n">skip</span><span class="o">,</span> <span class="n">rw</span> <span class="o">[</span><span class="n">nhds_eq_metric</span><span class="o">]</span> <span class="o">},</span>
+  <span class="n">simp</span> <span class="o">[</span><span class="n">tendsto_infi</span><span class="o">,</span> <span class="n">tendsto_principal</span><span class="o">,</span> <span class="n">mem_nhds_iff_metric</span><span class="o">,</span> <span class="n">set</span><span class="bp">.</span><span class="n">subset_def</span><span class="o">]</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>Here the annoying part is that we need to focus on the right <code>nhds</code> or <code>at_top</code>.</p>
 
 
 {% endraw %}

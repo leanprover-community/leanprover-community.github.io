@@ -12,94 +12,91 @@ permalink: archive/113488general/76625simpcanonize.html
 
 {% raw %}
 #### [ Simon Hudon (Jan 22 2019 at 18:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20canonize/near/156622369):
-I'm trying to get rid of some simp loops and I just realized that there is a part of it I don't understand and it seems to be getting into a loop. Here is the trace that Lean prints for it:
+<p>I'm trying to get rid of some simp loops and I just realized that there is a part of it I don't understand and it seems to be getting into a loop. Here is the trace that Lean prints for it:</p>
+<div class="codehilite"><pre><span></span>[simplify.canonize]
+category_theory.types
+==&gt;
+category_theory.types
+[simplify.canonize]
+category_theory.types
+==&gt;
+category_theory.types
+[simplify.canonize]
+_inst_2
+==&gt;
+_inst_2
+[simplify.canonize]
+category_theory.types
+==&gt;
+category_theory.types
+[simplify.canonize]
+category_theory.types
+==&gt;
+category_theory.types
+[simplify.canonize]
+_inst_2
+==&gt;
+_inst_2
+</pre></div>
 
-```
-[simplify.canonize] 
-category_theory.types
-==>
-category_theory.types
-[simplify.canonize] 
-category_theory.types
-==>
-category_theory.types
-[simplify.canonize] 
-_inst_2
-==>
-_inst_2
-[simplify.canonize] 
-category_theory.types
-==>
-category_theory.types
-[simplify.canonize] 
-category_theory.types
-==>
-category_theory.types
-[simplify.canonize] 
-_inst_2
-==>
-_inst_2
-```
 
-How do I prevent it from looping? I tried `simp [-category_theory.types]` and it doesn't work.
+<p>How do I prevent it from looping? I tried <code>simp [-category_theory.types]</code> and it doesn't work.</p>
 
 #### [ Johan Commelin (Jan 22 2019 at 18:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20canonize/near/156622930):
-But `category_theory.types` isn't even marked as `[simp]`. How come the simplifier is using it?
+<p>But <code>category_theory.types</code> isn't even marked as <code>[simp]</code>. How come the simplifier is using it?</p>
 
 #### [ Simon Hudon (Jan 22 2019 at 19:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20canonize/near/156627682):
-I am puzzled too. My tentative answer is that it comes from the `canonize` phase of `simp` which I did not know of. It seems like a phase where class instances are reduced but I can't say more. @**Sebastian Ullrich**, would you care to enlighten us?
+<p>I am puzzled too. My tentative answer is that it comes from the <code>canonize</code> phase of <code>simp</code> which I did not know of. It seems like a phase where class instances are reduced but I can't say more. <span class="user-mention" data-user-id="110024">@Sebastian Ullrich</span>, would you care to enlighten us?</p>
 
 #### [ Simon Hudon (Jan 22 2019 at 21:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20canonize/near/156638222):
-Update: using `set_option trace.debug.dsimplify true` and using `dsimp` instead of `simp`, I managed to find the offender which was unrelated to `canonize`
+<p>Update: using <code>set_option trace.debug.dsimplify true</code> and using <code>dsimp</code> instead of <code>simp</code>, I managed to find the offender which was unrelated to <code>canonize</code></p>
 
 #### [ Mario Carneiro (Jan 22 2019 at 23:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20canonize/near/156643964):
-MWE
+<p>MWE</p>
 
 #### [ Simon Hudon (Jan 23 2019 at 00:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20canonize/near/156649250):
-```lean
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">category</span>
+<span class="kn">import</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">types</span>
 
-import category_theory.category
-import category_theory.types
+<span class="n">universes</span> <span class="n">u</span>
 
-universes u
+<span class="n">class</span> <span class="n">comonad</span> <span class="o">(</span><span class="n">w</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span> <span class="bp">→</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span>
+<span class="kn">extends</span> <span class="n">functor</span> <span class="n">w</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">extract</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">{</span><span class="n">α</span><span class="o">},</span> <span class="n">w</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">α</span><span class="o">)</span>
+<span class="o">(</span><span class="n">extend</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">{</span><span class="n">α</span> <span class="n">β</span><span class="o">},</span> <span class="o">(</span><span class="n">w</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span> <span class="bp">→</span> <span class="n">w</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">w</span> <span class="n">β</span><span class="o">)</span>
 
-class comonad (w : Type u → Type u)
-extends functor w :=
-(extract : Π {α}, w α → α)
-(extend : Π {α β}, (w α → β) → w α → w β)
+<span class="n">def</span> <span class="n">Cokleisli</span> <span class="o">(</span><span class="n">m</span><span class="o">)</span> <span class="o">[</span><span class="n">comonad</span><span class="bp">.</span><span class="o">{</span><span class="n">u</span><span class="o">}</span> <span class="n">m</span><span class="o">]</span> <span class="o">:=</span> <span class="kt">Type</span> <span class="n">u</span>
 
-def Cokleisli (m) [comonad.{u} m] := Type u
+<span class="kn">open</span> <span class="n">category_theory</span> <span class="n">comonad</span>
+<span class="kn">instance</span> <span class="o">{</span><span class="n">m</span><span class="o">}</span> <span class="o">[</span><span class="n">comonad</span><span class="bp">.</span><span class="o">{</span><span class="n">u</span><span class="o">}</span> <span class="n">m</span><span class="o">]</span> <span class="o">:</span> <span class="n">category</span><span class="bp">.</span><span class="o">{</span><span class="n">u</span><span class="o">}</span> <span class="o">(</span><span class="n">Cokleisli</span> <span class="n">m</span><span class="o">)</span> <span class="o">:=</span> <span class="n">sorry</span>
 
-open category_theory comonad
-instance {m} [comonad.{u} m] : category.{u} (Cokleisli m) := sorry
+<span class="n">def</span> <span class="n">copipe</span> <span class="o">{</span><span class="n">w</span> <span class="n">α</span> <span class="n">β</span> <span class="n">γ</span><span class="o">}</span> <span class="o">[</span><span class="n">comonad</span> <span class="n">w</span><span class="o">]</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">w</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span> <span class="o">(</span><span class="n">g</span> <span class="o">:</span> <span class="n">w</span> <span class="n">β</span> <span class="bp">→</span> <span class="n">γ</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">w</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">γ</span><span class="o">)</span> <span class="o">:=</span>
+<span class="n">g</span> <span class="err">∘</span> <span class="n">extend</span> <span class="n">f</span>
 
-def copipe {w α β γ} [comonad w] (f : w α → β) (g : w β → γ) : (w α → γ) :=
-g ∘ extend f
+<span class="kn">infix</span> <span class="bp">`</span> <span class="bp">=&gt;=</span> <span class="bp">`</span><span class="o">:</span><span class="mi">55</span> <span class="o">:=</span> <span class="n">copipe</span>
 
-infix ` =>= `:55 := copipe
+<span class="kn">instance</span> <span class="n">Cokleisli</span><span class="bp">.</span><span class="n">category</span> <span class="o">{</span><span class="n">m</span><span class="o">}</span> <span class="o">[</span><span class="n">comonad</span> <span class="n">m</span><span class="o">]</span> <span class="o">:</span> <span class="n">category</span> <span class="o">(</span><span class="n">Cokleisli</span><span class="bp">.</span><span class="o">{</span><span class="n">u</span><span class="o">}</span> <span class="n">m</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">hom</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">α</span> <span class="n">β</span><span class="o">,</span> <span class="n">m</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">,</span>
+  <span class="n">id</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">α</span><span class="o">,</span> <span class="n">extract</span><span class="o">,</span>
+  <span class="n">comp</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">X</span> <span class="n">Y</span> <span class="n">Z</span> <span class="n">f</span> <span class="n">g</span><span class="o">,</span> <span class="n">f</span> <span class="bp">=&gt;=</span> <span class="n">g</span><span class="o">,</span>
+  <span class="n">id_comp&#39;</span> <span class="o">:=</span> <span class="n">sorry</span><span class="o">,</span>
+  <span class="n">comp_id&#39;</span> <span class="o">:=</span> <span class="n">sorry</span><span class="o">,</span>
+  <span class="n">assoc&#39;</span> <span class="o">:=</span> <span class="n">sorry</span> <span class="o">}</span>
 
-instance Cokleisli.category {m} [comonad m] : category (Cokleisli.{u} m) :=
-{ hom := λ α β, m α → β,
-  id := λ α, extract,
-  comp := λ X Y Z f g, f =>= g,
-  id_comp' := sorry,
-  comp_id' := sorry,
-  assoc' := sorry }
+<span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="kn">lemma</span> <span class="n">Cokleisli</span><span class="bp">.</span><span class="n">comp_def</span> <span class="o">{</span><span class="n">m</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span> <span class="bp">→</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">comonad</span> <span class="n">m</span><span class="o">]</span> <span class="o">(</span><span class="n">α</span> <span class="n">β</span> <span class="n">γ</span> <span class="o">:</span> <span class="n">Cokleisli</span> <span class="n">m</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">xs</span> <span class="o">:</span> <span class="n">α</span> <span class="err">⟶</span> <span class="n">β</span><span class="o">)</span> <span class="o">(</span><span class="n">ys</span> <span class="o">:</span> <span class="n">β</span> <span class="err">⟶</span> <span class="n">γ</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">xs</span> <span class="err">≫</span> <span class="n">ys</span> <span class="bp">=</span> <span class="n">xs</span> <span class="bp">=&gt;=</span> <span class="n">ys</span> <span class="o">:=</span> <span class="n">sorry</span>
 
-@[simp] lemma Cokleisli.comp_def {m : Type* → Type*} [comonad m] (α β γ : Cokleisli m)
-  (xs : α ⟶ β) (ys : β ⟶ γ) :
-  xs ≫ ys = xs =>= ys := sorry
+<span class="kn">variables</span> <span class="o">{</span><span class="n">α</span> <span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span>
 
-variables {α β : Type u}
-
-example {m} [comonad m] (f : α ⟶ m α) (g : m α ⟶ α) : f ≫ g = 𝟙 _ :=
-by { simp, }
--- deep recursion was detected at 'expression replacer' (potential
--- solution: increase stack space in your system)
-```
+<span class="kn">example</span> <span class="o">{</span><span class="n">m</span><span class="o">}</span> <span class="o">[</span><span class="n">comonad</span> <span class="n">m</span><span class="o">]</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="err">⟶</span> <span class="n">m</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">g</span> <span class="o">:</span> <span class="n">m</span> <span class="n">α</span> <span class="err">⟶</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">f</span> <span class="err">≫</span> <span class="n">g</span> <span class="bp">=</span> <span class="mi">𝟙</span> <span class="bp">_</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="o">{</span> <span class="n">simp</span><span class="o">,</span> <span class="o">}</span>
+<span class="c1">-- deep recursion was detected at &#39;expression replacer&#39; (potential</span>
+<span class="c1">-- solution: increase stack space in your system)</span>
+</pre></div>
 
 #### [ Simon Hudon (Jan 23 2019 at 00:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20canonize/near/156649296):
-If you comment out `Cokleisli.comp_def`, the error disappears
+<p>If you comment out <code>Cokleisli.comp_def</code>, the error disappears</p>
 
 
 {% endraw %}

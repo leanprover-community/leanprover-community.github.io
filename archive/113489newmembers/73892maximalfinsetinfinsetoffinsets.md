@@ -12,120 +12,120 @@ permalink: archive/113489newmembers/73892maximalfinsetinfinsetoffinsets.html
 
 {% raw %}
 #### [ Bryan Gin-ge Chen (Sep 13 2018 at 20:36)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/maximal%20finset%20in%20finset%20of%20finsets/near/133904539):
-Excuse the weird title. I'm trying to prove that a finset of subsets of a finset must contain an element of largest size, without relying on classical choice:
-```lean
-lemma not_empty_has_max_size {E : finset α} {F : finset (finset α)} :
-F ⊆ powerset E → F ≠ ∅ → ∃ x ∈ F, ∀ g ∈ F, card g ≤ card x := sorry
-```
-Here's my attempt so far, which seems to have taken me down a strange path:
-```lean
-import data.finset
+<p>Excuse the weird title. I'm trying to prove that a finset of subsets of a finset must contain an element of largest size, without relying on classical choice:</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">not_empty_has_max_size</span> <span class="o">{</span><span class="n">E</span> <span class="o">:</span> <span class="n">finset</span> <span class="n">α</span><span class="o">}</span> <span class="o">{</span><span class="n">F</span> <span class="o">:</span> <span class="n">finset</span> <span class="o">(</span><span class="n">finset</span> <span class="n">α</span><span class="o">)}</span> <span class="o">:</span>
+<span class="n">F</span> <span class="err">⊆</span> <span class="n">powerset</span> <span class="n">E</span> <span class="bp">→</span> <span class="n">F</span> <span class="bp">≠</span> <span class="err">∅</span> <span class="bp">→</span> <span class="bp">∃</span> <span class="n">x</span> <span class="err">∈</span> <span class="n">F</span><span class="o">,</span> <span class="bp">∀</span> <span class="n">g</span> <span class="err">∈</span> <span class="n">F</span><span class="o">,</span> <span class="n">card</span> <span class="n">g</span> <span class="bp">≤</span> <span class="n">card</span> <span class="n">x</span> <span class="o">:=</span> <span class="n">sorry</span>
+</pre></div>
 
-variable α:Type*
-variable [decidable_eq α]
 
-open finset
+<p>Here's my attempt so far, which seems to have taken me down a strange path:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">finset</span>
 
-lemma finset.card_one_eq {E : finset α} : card E = 1 ↔ ∃ a, E = finset.singleton a :=
-begin
-  have h : _ := @multiset.card_eq_one α E.val,
-  unfold card,
-  rw [iff_congr h, exists_congr],
-  intro a,
-  rw [←singleton_val, val_inj],
-  refl
-end
+<span class="kn">variable</span> <span class="n">α</span><span class="o">:</span><span class="kt">Type</span><span class="bp">*</span>
+<span class="kn">variable</span> <span class="o">[</span><span class="n">decidable_eq</span> <span class="n">α</span><span class="o">]</span>
 
-lemma powerset_empty : powerset (∅ : finset α) = finset.singleton ∅ := rfl
+<span class="kn">open</span> <span class="n">finset</span>
 
-lemma subset_singleton {F : finset (finset α)} :
-F ⊆ finset.singleton (∅:finset α) ↔
-F = ∅ ∨ F = finset.singleton ∅ :=
-begin
-  split,
-  intro h,
-  by_cases h1 : F = ∅,
-  exact or.inl h1,
-  have : F = finset.singleton ∅ := begin
-    sorry
-  end,
-  sorry,
-  intro h,
-  exact or.elim h (begin
-    intro h1,
-    rw h1,
-    simp
-  end) (begin
-    intro h1,
-    rw h1,
-    simp
-  end)
-end
+<span class="kn">lemma</span> <span class="n">finset</span><span class="bp">.</span><span class="n">card_one_eq</span> <span class="o">{</span><span class="n">E</span> <span class="o">:</span> <span class="n">finset</span> <span class="n">α</span><span class="o">}</span> <span class="o">:</span> <span class="n">card</span> <span class="n">E</span> <span class="bp">=</span> <span class="mi">1</span> <span class="bp">↔</span> <span class="bp">∃</span> <span class="n">a</span><span class="o">,</span> <span class="n">E</span> <span class="bp">=</span> <span class="n">finset</span><span class="bp">.</span><span class="n">singleton</span> <span class="n">a</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="k">have</span> <span class="n">h</span> <span class="o">:</span> <span class="bp">_</span> <span class="o">:=</span> <span class="bp">@</span><span class="n">multiset</span><span class="bp">.</span><span class="n">card_eq_one</span> <span class="n">α</span> <span class="n">E</span><span class="bp">.</span><span class="n">val</span><span class="o">,</span>
+  <span class="n">unfold</span> <span class="n">card</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="o">[</span><span class="n">iff_congr</span> <span class="n">h</span><span class="o">,</span> <span class="n">exists_congr</span><span class="o">],</span>
+  <span class="n">intro</span> <span class="n">a</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="o">[</span><span class="err">←</span><span class="n">singleton_val</span><span class="o">,</span> <span class="n">val_inj</span><span class="o">],</span>
+  <span class="n">refl</span>
+<span class="kn">end</span>
 
-lemma not_empty_has_max_size {E : finset α} {F : finset (finset α)} :
-F ⊆ powerset E → F ≠ ∅ → ∃ x ∈ F, ∀ g ∈ F, card g ≤ card x :=
-begin
-  intros FPE Fne,
-  induction E using finset.induction with a E ha hE,
-  rw [powerset_empty, subset_singleton] at FPE,
-  exact or.elim FPE (by contradiction) begin
-    intro h,
-    exact exists.intro ∅ begin
-      rw h,
-      exact exists.intro (mem_singleton_self ∅) (begin
-        intros g hg,
-        rw mem_singleton at hg,
-        rw hg
-      end)
-    end
-  end,
-  by_cases hh1 : F ⊆ powerset E,
-  exact hE hh1,
-  sorry
-end
-```
-I'm hoping someone can point me in a smarter direction. Thanks as always!
+<span class="kn">lemma</span> <span class="n">powerset_empty</span> <span class="o">:</span> <span class="n">powerset</span> <span class="o">(</span><span class="err">∅</span> <span class="o">:</span> <span class="n">finset</span> <span class="n">α</span><span class="o">)</span> <span class="bp">=</span> <span class="n">finset</span><span class="bp">.</span><span class="n">singleton</span> <span class="err">∅</span> <span class="o">:=</span> <span class="n">rfl</span>
+
+<span class="kn">lemma</span> <span class="n">subset_singleton</span> <span class="o">{</span><span class="n">F</span> <span class="o">:</span> <span class="n">finset</span> <span class="o">(</span><span class="n">finset</span> <span class="n">α</span><span class="o">)}</span> <span class="o">:</span>
+<span class="n">F</span> <span class="err">⊆</span> <span class="n">finset</span><span class="bp">.</span><span class="n">singleton</span> <span class="o">(</span><span class="err">∅</span><span class="o">:</span><span class="n">finset</span> <span class="n">α</span><span class="o">)</span> <span class="bp">↔</span>
+<span class="n">F</span> <span class="bp">=</span> <span class="err">∅</span> <span class="bp">∨</span> <span class="n">F</span> <span class="bp">=</span> <span class="n">finset</span><span class="bp">.</span><span class="n">singleton</span> <span class="err">∅</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">split</span><span class="o">,</span>
+  <span class="n">intro</span> <span class="n">h</span><span class="o">,</span>
+  <span class="n">by_cases</span> <span class="n">h1</span> <span class="o">:</span> <span class="n">F</span> <span class="bp">=</span> <span class="err">∅</span><span class="o">,</span>
+  <span class="n">exact</span> <span class="n">or</span><span class="bp">.</span><span class="n">inl</span> <span class="n">h1</span><span class="o">,</span>
+  <span class="k">have</span> <span class="o">:</span> <span class="n">F</span> <span class="bp">=</span> <span class="n">finset</span><span class="bp">.</span><span class="n">singleton</span> <span class="err">∅</span> <span class="o">:=</span> <span class="k">begin</span>
+    <span class="n">sorry</span>
+  <span class="kn">end</span><span class="o">,</span>
+  <span class="n">sorry</span><span class="o">,</span>
+  <span class="n">intro</span> <span class="n">h</span><span class="o">,</span>
+  <span class="n">exact</span> <span class="n">or</span><span class="bp">.</span><span class="n">elim</span> <span class="n">h</span> <span class="o">(</span><span class="k">begin</span>
+    <span class="n">intro</span> <span class="n">h1</span><span class="o">,</span>
+    <span class="n">rw</span> <span class="n">h1</span><span class="o">,</span>
+    <span class="n">simp</span>
+  <span class="kn">end</span><span class="o">)</span> <span class="o">(</span><span class="k">begin</span>
+    <span class="n">intro</span> <span class="n">h1</span><span class="o">,</span>
+    <span class="n">rw</span> <span class="n">h1</span><span class="o">,</span>
+    <span class="n">simp</span>
+  <span class="kn">end</span><span class="o">)</span>
+<span class="kn">end</span>
+
+<span class="kn">lemma</span> <span class="n">not_empty_has_max_size</span> <span class="o">{</span><span class="n">E</span> <span class="o">:</span> <span class="n">finset</span> <span class="n">α</span><span class="o">}</span> <span class="o">{</span><span class="n">F</span> <span class="o">:</span> <span class="n">finset</span> <span class="o">(</span><span class="n">finset</span> <span class="n">α</span><span class="o">)}</span> <span class="o">:</span>
+<span class="n">F</span> <span class="err">⊆</span> <span class="n">powerset</span> <span class="n">E</span> <span class="bp">→</span> <span class="n">F</span> <span class="bp">≠</span> <span class="err">∅</span> <span class="bp">→</span> <span class="bp">∃</span> <span class="n">x</span> <span class="err">∈</span> <span class="n">F</span><span class="o">,</span> <span class="bp">∀</span> <span class="n">g</span> <span class="err">∈</span> <span class="n">F</span><span class="o">,</span> <span class="n">card</span> <span class="n">g</span> <span class="bp">≤</span> <span class="n">card</span> <span class="n">x</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">intros</span> <span class="n">FPE</span> <span class="n">Fne</span><span class="o">,</span>
+  <span class="n">induction</span> <span class="n">E</span> <span class="kn">using</span> <span class="n">finset</span><span class="bp">.</span><span class="n">induction</span> <span class="k">with</span> <span class="n">a</span> <span class="n">E</span> <span class="n">ha</span> <span class="n">hE</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="o">[</span><span class="n">powerset_empty</span><span class="o">,</span> <span class="n">subset_singleton</span><span class="o">]</span> <span class="n">at</span> <span class="n">FPE</span><span class="o">,</span>
+  <span class="n">exact</span> <span class="n">or</span><span class="bp">.</span><span class="n">elim</span> <span class="n">FPE</span> <span class="o">(</span><span class="k">by</span> <span class="n">contradiction</span><span class="o">)</span> <span class="k">begin</span>
+    <span class="n">intro</span> <span class="n">h</span><span class="o">,</span>
+    <span class="n">exact</span> <span class="n">exists</span><span class="bp">.</span><span class="n">intro</span> <span class="err">∅</span> <span class="k">begin</span>
+      <span class="n">rw</span> <span class="n">h</span><span class="o">,</span>
+      <span class="n">exact</span> <span class="n">exists</span><span class="bp">.</span><span class="n">intro</span> <span class="o">(</span><span class="n">mem_singleton_self</span> <span class="err">∅</span><span class="o">)</span> <span class="o">(</span><span class="k">begin</span>
+        <span class="n">intros</span> <span class="n">g</span> <span class="n">hg</span><span class="o">,</span>
+        <span class="n">rw</span> <span class="n">mem_singleton</span> <span class="n">at</span> <span class="n">hg</span><span class="o">,</span>
+        <span class="n">rw</span> <span class="n">hg</span>
+      <span class="kn">end</span><span class="o">)</span>
+    <span class="kn">end</span>
+  <span class="kn">end</span><span class="o">,</span>
+  <span class="n">by_cases</span> <span class="n">hh1</span> <span class="o">:</span> <span class="n">F</span> <span class="err">⊆</span> <span class="n">powerset</span> <span class="n">E</span><span class="o">,</span>
+  <span class="n">exact</span> <span class="n">hE</span> <span class="n">hh1</span><span class="o">,</span>
+  <span class="n">sorry</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>I'm hoping someone can point me in a smarter direction. Thanks as always!</p>
 
 #### [ Reid Barton (Sep 13 2018 at 20:39)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/maximal%20finset%20in%20finset%20of%20finsets/near/133904686):
-Doesn't every finset of finsets contain an element of largest size, regardless of `E` and the associated condition?
+<p>Doesn't every finset of finsets contain an element of largest size, regardless of <code>E</code> and the associated condition?</p>
 
 #### [ Bryan Gin-ge Chen (Sep 13 2018 at 20:41)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/maximal%20finset%20in%20finset%20of%20finsets/near/133904800):
-Maybe, I got worried that without having some kind of bound on the size of the finsets I wouldn't be able to prove it without choice.
+<p>Maybe, I got worried that without having some kind of bound on the size of the finsets I wouldn't be able to prove it without choice.</p>
 
 #### [ Kevin Buzzard (Sep 13 2018 at 20:44)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/maximal%20finset%20in%20finset%20of%20finsets/near/133905022):
-just use finset.map (I'm assuming this exists!) on finset.card to get a finset of nats and then take the max and work your way back?
+<p>just use finset.map (I'm assuming this exists!) on finset.card to get a finset of nats and then take the max and work your way back?</p>
 
 #### [ Reid Barton (Sep 13 2018 at 20:45)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/maximal%20finset%20in%20finset%20of%20finsets/near/133905060):
-A finset is basically a list, and you could write a program that takes a list of lists and returns one of the maximum length, so there should be no trouble proving it constructively.
+<p>A finset is basically a list, and you could write a program that takes a list of lists and returns one of the maximum length, so there should be no trouble proving it constructively.</p>
 
 #### [ Reid Barton (Sep 13 2018 at 20:47)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/maximal%20finset%20in%20finset%20of%20finsets/near/133905178):
-Yeah, I was looking for a function on finset which is max after applying a function, but I guess since nat has decidable equality you can use `finset.map` in this case.
+<p>Yeah, I was looking for a function on finset which is max after applying a function, but I guess since nat has decidable equality you can use <code>finset.map</code> in this case.</p>
 
 #### [ Reid Barton (Sep 13 2018 at 20:47)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/maximal%20finset%20in%20finset%20of%20finsets/near/133905214):
-Sorry, not `finset.map` but `finset.image`.
+<p>Sorry, not <code>finset.map</code> but <code>finset.image</code>.</p>
 
 #### [ Chris Hughes (Sep 13 2018 at 20:48)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/maximal%20finset%20in%20finset%20of%20finsets/near/133905271):
-```lean
-lemma not_empty_has_max_size {E : finset α} {F : finset (finset α)} :
-F ⊆ powerset E → F ≠ ∅ → ∃ x ∈ F, ∀ g ∈ F, card g ≤ card x := 
-λ _ h, let ⟨n, hn⟩ := (max_of_ne_empty (mt image_eq_empty.1 h) : ∃ a, a ∈ finset.max (F.image card)) in
-let ⟨x, hx₁, hx₂⟩ := mem_image.1 (mem_of_max hn) in 
-⟨x, hx₁, hx₂.symm ▸ λ g hg, le_max_of_mem (mem_image.2 ⟨g, hg, rfl⟩) hn⟩
-```
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">not_empty_has_max_size</span> <span class="o">{</span><span class="n">E</span> <span class="o">:</span> <span class="n">finset</span> <span class="n">α</span><span class="o">}</span> <span class="o">{</span><span class="n">F</span> <span class="o">:</span> <span class="n">finset</span> <span class="o">(</span><span class="n">finset</span> <span class="n">α</span><span class="o">)}</span> <span class="o">:</span>
+<span class="n">F</span> <span class="err">⊆</span> <span class="n">powerset</span> <span class="n">E</span> <span class="bp">→</span> <span class="n">F</span> <span class="bp">≠</span> <span class="err">∅</span> <span class="bp">→</span> <span class="bp">∃</span> <span class="n">x</span> <span class="err">∈</span> <span class="n">F</span><span class="o">,</span> <span class="bp">∀</span> <span class="n">g</span> <span class="err">∈</span> <span class="n">F</span><span class="o">,</span> <span class="n">card</span> <span class="n">g</span> <span class="bp">≤</span> <span class="n">card</span> <span class="n">x</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="bp">_</span> <span class="n">h</span><span class="o">,</span> <span class="k">let</span> <span class="bp">⟨</span><span class="n">n</span><span class="o">,</span> <span class="n">hn</span><span class="bp">⟩</span> <span class="o">:=</span> <span class="o">(</span><span class="n">max_of_ne_empty</span> <span class="o">(</span><span class="n">mt</span> <span class="n">image_eq_empty</span><span class="bp">.</span><span class="mi">1</span> <span class="n">h</span><span class="o">)</span> <span class="o">:</span> <span class="bp">∃</span> <span class="n">a</span><span class="o">,</span> <span class="n">a</span> <span class="err">∈</span> <span class="n">finset</span><span class="bp">.</span><span class="n">max</span> <span class="o">(</span><span class="n">F</span><span class="bp">.</span><span class="n">image</span> <span class="n">card</span><span class="o">))</span> <span class="k">in</span>
+<span class="k">let</span> <span class="bp">⟨</span><span class="n">x</span><span class="o">,</span> <span class="n">hx₁</span><span class="o">,</span> <span class="n">hx₂</span><span class="bp">⟩</span> <span class="o">:=</span> <span class="n">mem_image</span><span class="bp">.</span><span class="mi">1</span> <span class="o">(</span><span class="n">mem_of_max</span> <span class="n">hn</span><span class="o">)</span> <span class="k">in</span>
+<span class="bp">⟨</span><span class="n">x</span><span class="o">,</span> <span class="n">hx₁</span><span class="o">,</span> <span class="n">hx₂</span><span class="bp">.</span><span class="n">symm</span> <span class="bp">▸</span> <span class="bp">λ</span> <span class="n">g</span> <span class="n">hg</span><span class="o">,</span> <span class="n">le_max_of_mem</span> <span class="o">(</span><span class="n">mem_image</span><span class="bp">.</span><span class="mi">2</span> <span class="bp">⟨</span><span class="n">g</span><span class="o">,</span> <span class="n">hg</span><span class="o">,</span> <span class="n">rfl</span><span class="bp">⟩</span><span class="o">)</span> <span class="n">hn</span><span class="bp">⟩</span>
+</pre></div>
 
 #### [ Bryan Gin-ge Chen (Sep 13 2018 at 20:48)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/maximal%20finset%20in%20finset%20of%20finsets/near/133905289):
-Wow, thanks!
+<p>Wow, thanks!</p>
 
 #### [ Mario Carneiro (Sep 13 2018 at 20:49)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/maximal%20finset%20in%20finset%20of%20finsets/near/133905350):
-That uses decidable_eq, doesn't it?
+<p>That uses decidable_eq, doesn't it?</p>
 
 #### [ Kevin Buzzard (Sep 13 2018 at 20:50)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/maximal%20finset%20in%20finset%20of%20finsets/near/133905394):
-rofl
+<p>rofl</p>
 
 #### [ Mario Carneiro (Sep 13 2018 at 20:50)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/maximal%20finset%20in%20finset%20of%20finsets/near/133905407):
-My suggestion:
-```
-import data.finset
+<p>My suggestion:</p>
+<div class="codehilite"><pre><span></span>import data.finset
 
 section
 variables {α : Type*} (r : α → α → Prop) [is_preorder α r]
@@ -135,126 +135,126 @@ theorem list_zorn : ∀ l : list α, l ≠ [] → ∃ a ∈ l, ∀ b, a ≼ b �
 theorem finset_zorn : ∀ s : finset α, s ≠ ∅ → ∃ a ∈ s, ∀ b, a ≼ b → b ≼ a := sorry
 
 end
-```
+</pre></div>
 
 #### [ Bryan Gin-ge Chen (Sep 13 2018 at 20:50)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/maximal%20finset%20in%20finset%20of%20finsets/near/133905415):
-I would have never thought of using finset.image. And yes, decidable_eq is allowed.
+<p>I would have never thought of using finset.image. And yes, decidable_eq is allowed.</p>
 
 #### [ Mario Carneiro (Sep 13 2018 at 20:50)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/maximal%20finset%20in%20finset%20of%20finsets/near/133905436):
-here the relation is `card s <= card t` on finsets
+<p>here the relation is <code>card s &lt;= card t</code> on finsets</p>
 
 #### [ Kenny Lau (Sep 13 2018 at 20:51)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/maximal%20finset%20in%20finset%20of%20finsets/near/133905447):
-```quote
-```lean
-lemma not_empty_has_max_size {E : finset α} {F : finset (finset α)} :
-F ⊆ powerset E → F ≠ ∅ → ∃ x ∈ F, ∀ g ∈ F, card g ≤ card x := 
-λ _ h, let ⟨n, hn⟩ := (max_of_ne_empty (mt image_eq_empty.1 h) : ∃ a, a ∈ finset.max (F.image card)) in
-let ⟨x, hx₁, hx₂⟩ := mem_image.1 (mem_of_max hn) in 
-⟨x, hx₁, hx₂.symm ▸ λ g hg, le_max_of_mem (mem_image.2 ⟨g, hg, rfl⟩) hn⟩
-```
-```
-what is the role of E in your theorem?
+<blockquote>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">not_empty_has_max_size</span> <span class="o">{</span><span class="n">E</span> <span class="o">:</span> <span class="n">finset</span> <span class="n">α</span><span class="o">}</span> <span class="o">{</span><span class="n">F</span> <span class="o">:</span> <span class="n">finset</span> <span class="o">(</span><span class="n">finset</span> <span class="n">α</span><span class="o">)}</span> <span class="o">:</span>
+<span class="n">F</span> <span class="err">⊆</span> <span class="n">powerset</span> <span class="n">E</span> <span class="bp">→</span> <span class="n">F</span> <span class="bp">≠</span> <span class="err">∅</span> <span class="bp">→</span> <span class="bp">∃</span> <span class="n">x</span> <span class="err">∈</span> <span class="n">F</span><span class="o">,</span> <span class="bp">∀</span> <span class="n">g</span> <span class="err">∈</span> <span class="n">F</span><span class="o">,</span> <span class="n">card</span> <span class="n">g</span> <span class="bp">≤</span> <span class="n">card</span> <span class="n">x</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="bp">_</span> <span class="n">h</span><span class="o">,</span> <span class="k">let</span> <span class="bp">⟨</span><span class="n">n</span><span class="o">,</span> <span class="n">hn</span><span class="bp">⟩</span> <span class="o">:=</span> <span class="o">(</span><span class="n">max_of_ne_empty</span> <span class="o">(</span><span class="n">mt</span> <span class="n">image_eq_empty</span><span class="bp">.</span><span class="mi">1</span> <span class="n">h</span><span class="o">)</span> <span class="o">:</span> <span class="bp">∃</span> <span class="n">a</span><span class="o">,</span> <span class="n">a</span> <span class="err">∈</span> <span class="n">finset</span><span class="bp">.</span><span class="n">max</span> <span class="o">(</span><span class="n">F</span><span class="bp">.</span><span class="n">image</span> <span class="n">card</span><span class="o">))</span> <span class="k">in</span>
+<span class="k">let</span> <span class="bp">⟨</span><span class="n">x</span><span class="o">,</span> <span class="n">hx₁</span><span class="o">,</span> <span class="n">hx₂</span><span class="bp">⟩</span> <span class="o">:=</span> <span class="n">mem_image</span><span class="bp">.</span><span class="mi">1</span> <span class="o">(</span><span class="n">mem_of_max</span> <span class="n">hn</span><span class="o">)</span> <span class="k">in</span>
+<span class="bp">⟨</span><span class="n">x</span><span class="o">,</span> <span class="n">hx₁</span><span class="o">,</span> <span class="n">hx₂</span><span class="bp">.</span><span class="n">symm</span> <span class="bp">▸</span> <span class="bp">λ</span> <span class="n">g</span> <span class="n">hg</span><span class="o">,</span> <span class="n">le_max_of_mem</span> <span class="o">(</span><span class="n">mem_image</span><span class="bp">.</span><span class="mi">2</span> <span class="bp">⟨</span><span class="n">g</span><span class="o">,</span> <span class="n">hg</span><span class="o">,</span> <span class="n">rfl</span><span class="bp">⟩</span><span class="o">)</span> <span class="n">hn</span><span class="bp">⟩</span>
+</pre></div>
+
+
+</blockquote>
+<p>what is the role of E in your theorem?</p>
 
 #### [ Kevin Buzzard (Sep 13 2018 at 20:51)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/maximal%20finset%20in%20finset%20of%20finsets/near/133905450):
-you can just prove this using the zorn in mathlib
+<p>you can just prove this using the zorn in mathlib</p>
 
 #### [ Mario Carneiro (Sep 13 2018 at 20:51)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/maximal%20finset%20in%20finset%20of%20finsets/near/133905467):
-of course, but this (1) doesn't use nonconstructive axioms and (2) doesn't need the chain condition
+<p>of course, but this (1) doesn't use nonconstructive axioms and (2) doesn't need the chain condition</p>
 
 #### [ Bryan Gin-ge Chen (Sep 13 2018 at 20:52)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/maximal%20finset%20in%20finset%20of%20finsets/near/133905518):
-If E is unnecessary here all the better. In the "application", it's the ground set of a matroid.
+<p>If E is unnecessary here all the better. In the "application", it's the ground set of a matroid.</p>
 
 #### [ Reid Barton (Sep 13 2018 at 20:52)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/maximal%20finset%20in%20finset%20of%20finsets/near/133905536):
-`decidable_eq nat` doesn't use axioms either
+<p><code>decidable_eq nat</code> doesn't use axioms either</p>
 
 #### [ Mario Carneiro (Sep 13 2018 at 20:53)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/maximal%20finset%20in%20finset%20of%20finsets/near/133905569):
-yes, but the theorem can be proven constructively without that assumption
+<p>yes, but the theorem can be proven constructively without that assumption</p>
 
 #### [ Reid Barton (Sep 13 2018 at 20:53)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/maximal%20finset%20in%20finset%20of%20finsets/near/133905579):
-Yeah, the max/min stuff should be on multisets.
+<p>Yeah, the max/min stuff should be on multisets.</p>
 
 #### [ Mario Carneiro (Sep 13 2018 at 20:54)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/maximal%20finset%20in%20finset%20of%20finsets/near/133905596):
-Unfortunately, here max/min don't work directly since it's not a poset
+<p>Unfortunately, here max/min don't work directly since it's not a poset</p>
 
 #### [ Kenny Lau (Sep 13 2018 at 20:54)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/maximal%20finset%20in%20finset%20of%20finsets/near/133905633):
-you can have zorn on a set (i.e. type) S as long as you have a choice function on P(P(S))\{{}}, right
+<p>you can have zorn on a set (i.e. type) S as long as you have a choice function on P(P(S))\{{}}, right</p>
 
 #### [ Mario Carneiro (Sep 13 2018 at 20:54)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/maximal%20finset%20in%20finset%20of%20finsets/near/133905662):
-yes, but we don't have that here and I claim it's still provable
+<p>yes, but we don't have that here and I claim it's still provable</p>
 
 #### [ Kenny Lau (Sep 13 2018 at 20:55)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/maximal%20finset%20in%20finset%20of%20finsets/near/133905694):
-sure
+<p>sure</p>
 
 #### [ Reid Barton (Sep 13 2018 at 20:55)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/maximal%20finset%20in%20finset%20of%20finsets/near/133905726):
-I mean we should just define `max` for a set in the same style as `prod`, in terms of `max` on multiset, and nat is already a decidable linear whatever so there would be no problem there.
-```lean
-protected def prod [comm_monoid β] (s : finset α) (f : α → β) : β := (s.1.map f).prod
-```
+<p>I mean we should just define <code>max</code> for a set in the same style as <code>prod</code>, in terms of <code>max</code> on multiset, and nat is already a decidable linear whatever so there would be no problem there.</p>
+<div class="codehilite"><pre><span></span><span class="kn">protected</span> <span class="n">def</span> <span class="n">prod</span> <span class="o">[</span><span class="n">comm_monoid</span> <span class="n">β</span><span class="o">]</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">finset</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span> <span class="o">:</span> <span class="n">β</span> <span class="o">:=</span> <span class="o">(</span><span class="n">s</span><span class="bp">.</span><span class="mi">1</span><span class="bp">.</span><span class="n">map</span> <span class="n">f</span><span class="o">)</span><span class="bp">.</span><span class="n">prod</span>
+</pre></div>
 
 #### [ Mario Carneiro (Sep 13 2018 at 20:56)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/maximal%20finset%20in%20finset%20of%20finsets/near/133905781):
-what is this about `nat`? I don't see it in the question
+<p>what is this about <code>nat</code>? I don't see it in the question</p>
 
 #### [ Reid Barton (Sep 13 2018 at 20:56)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/maximal%20finset%20in%20finset%20of%20finsets/near/133905798):
-`nat` is the codomain of `finset.card` (I assume)
+<p><code>nat</code> is the codomain of <code>finset.card</code> (I assume)</p>
 
 #### [ Mario Carneiro (Sep 13 2018 at 20:57)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/maximal%20finset%20in%20finset%20of%20finsets/near/133905829):
-sure but that doesn't really matter; we are doing the choosing on `finset A` which is not decidable (unless you assume so)
+<p>sure but that doesn't really matter; we are doing the choosing on <code>finset A</code> which is not decidable (unless you assume so)</p>
 
 #### [ Mario Carneiro (Sep 13 2018 at 20:58)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/maximal%20finset%20in%20finset%20of%20finsets/near/133905887):
-all that decidability of nat gives you is decidability of the relation `≼` given by `s ≼ t ↔ card s ≤ card t`
+<p>all that decidability of nat gives you is decidability of the relation <code>≼</code> given by <code>s ≼ t ↔ card s ≤ card t</code></p>
 
 #### [ Kenny Lau (Sep 13 2018 at 20:58)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/maximal%20finset%20in%20finset%20of%20finsets/near/133905902):
-I guess Kevin ran away from all this decidable nonsense :P
+<p>I guess Kevin ran away from all this decidable nonsense :P</p>
 
 #### [ Reid Barton (Sep 13 2018 at 20:59)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/maximal%20finset%20in%20finset%20of%20finsets/near/133905936):
-I'm a bit confused.
-All I am saying is that the original thing should be a direct conclusion of some lemma about `max` of a `multiset nat`, applied to `F.1.map finset.card`.
+<p>I'm a bit confused.<br>
+All I am saying is that the original thing should be a direct conclusion of some lemma about <code>max</code> of a <code>multiset nat</code>, applied to <code>F.1.map finset.card</code>.</p>
 
 #### [ Reid Barton (Sep 13 2018 at 21:00)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/maximal%20finset%20in%20finset%20of%20finsets/near/133906034):
-That lemma being the analogue for multisets of `finset.max_of_ne_empty` and `finset.le_max_of_mem`
+<p>That lemma being the analogue for multisets of <code>finset.max_of_ne_empty</code> and <code>finset.le_max_of_mem</code></p>
 
 #### [ Reid Barton (Sep 13 2018 at 21:03)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/maximal%20finset%20in%20finset%20of%20finsets/near/133906232):
-But I guess maybe `decidable_linear_order` is stronger than `decidable_eq` anyways, so it doesn't really matter.
+<p>But I guess maybe <code>decidable_linear_order</code> is stronger than <code>decidable_eq</code> anyways, so it doesn't really matter.</p>
 
 #### [ Mario Carneiro (Sep 13 2018 at 21:07)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/maximal%20finset%20in%20finset%20of%20finsets/near/133906443):
-the point is this isn't a question about decidable linear orders, but decidable preorders. Lack of uniqueness of the maximum makes it hard to define a function like `max` directly
+<p>the point is this isn't a question about decidable linear orders, but decidable preorders. Lack of uniqueness of the maximum makes it hard to define a function like <code>max</code> directly</p>
 
 #### [ Reid Barton (Sep 13 2018 at 21:08)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/maximal%20finset%20in%20finset%20of%20finsets/near/133906534):
-You mean something like a "pre-total order"?
+<p>You mean something like a "pre-total order"?</p>
 
 #### [ Mario Carneiro (Sep 13 2018 at 21:13)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/maximal%20finset%20in%20finset%20of%20finsets/near/133906805):
-`is_total_preorder` exists in core btw
+<p><code>is_total_preorder</code> exists in core btw</p>
 
 #### [ Mario Carneiro (Sep 13 2018 at 21:13)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/maximal%20finset%20in%20finset%20of%20finsets/near/133906808):
-but totality is not needed
+<p>but totality is not needed</p>
 
 #### [ Reid Barton (Sep 13 2018 at 21:14)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/maximal%20finset%20in%20finset%20of%20finsets/near/133906861):
-Finding the maximum value of a function on a finite set is a pretty standard thing to do. Of course there might not be a unique element of the set which maximizes the function, but the maximum value of the function is still well-defined. And often you only need some statement about the existence of a maximizing element.
-It's not very obvious how you're supposed to get this from only the ability to take the maximum element of a finite set (in a totally ordered type).
+<p>Finding the maximum value of a function on a finite set is a pretty standard thing to do. Of course there might not be a unique element of the set which maximizes the function, but the maximum value of the function is still well-defined. And often you only need some statement about the existence of a maximizing element.<br>
+It's not very obvious how you're supposed to get this from only the ability to take the maximum element of a finite set (in a totally ordered type).</p>
 
 #### [ Mario Carneiro (Sep 13 2018 at 21:15)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/maximal%20finset%20in%20finset%20of%20finsets/near/133906917):
-like kenny and chris have shown, you can take the image of the finset and get the maximum
+<p>like kenny and chris have shown, you can take the image of the finset and get the maximum</p>
 
 #### [ Mario Carneiro (Sep 13 2018 at 21:16)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/maximal%20finset%20in%20finset%20of%20finsets/near/133906965):
-unless you care about  constructivity and then you have to prove it from scratch
+<p>unless you care about  constructivity and then you have to prove it from scratch</p>
 
 #### [ Mario Carneiro (Sep 13 2018 at 21:17)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/maximal%20finset%20in%20finset%20of%20finsets/near/133906991):
-that works in any total preorder
+<p>that works in any total preorder</p>
 
 #### [ Mario Carneiro (Sep 13 2018 at 21:17)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/maximal%20finset%20in%20finset%20of%20finsets/near/133907005):
-in a partial order, I don't see any easy way to get it except zorn's lemma
+<p>in a partial order, I don't see any easy way to get it except zorn's lemma</p>
 
 #### [ Kenny Lau (Sep 13 2018 at 21:22)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/maximal%20finset%20in%20finset%20of%20finsets/near/133907255):
-```quote
-like kenny and chris have shown, you can take the image of the finset and get the maximum
-```
-I don't think I did anything
+<blockquote>
+<p>like kenny and chris have shown, you can take the image of the finset and get the maximum</p>
+</blockquote>
+<p>I don't think I did anything</p>
 
 #### [ Bryan Gin-ge Chen (Sep 13 2018 at 21:23)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/maximal%20finset%20in%20finset%20of%20finsets/near/133907303):
-I care a little bit about constructivity, but maybe I'll see how far I can get with Chris's solution first.
+<p>I care a little bit about constructivity, but maybe I'll see how far I can get with Chris's solution first.</p>
 
 #### [ Mario Carneiro (Sep 13 2018 at 21:56)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/maximal%20finset%20in%20finset%20of%20finsets/near/133909339):
-oops, I didn't see that you just quoted chris's solution
+<p>oops, I didn't see that you just quoted chris's solution</p>
 
 
 {% endraw %}

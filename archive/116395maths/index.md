@@ -10,19 +10,49 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [What's new in Lean maths?](62892WhatsnewinLeanmaths.html) (72 messages, latest: Jan 23 2019 at 12:43)
+* [card](81595card.html) (9 messages, latest: Feb 03 2019 at 12:23)
 
-* [Splitting topology](64252Splittingtopology.html) (9 messages, latest: Jan 22 2019 at 23:23)
+* [digits](07525digits.html) (15 messages, latest: Feb 02 2019 at 15:31)
+
+* [linarith failure](87044linarithfailure.html) (94 messages, latest: Feb 01 2019 at 17:01)
+
+* [groups acting on sets](00627groupsactingonsets.html) (6 messages, latest: Jan 31 2019 at 17:20)
+
+* [What's new in Lean maths?](62892WhatsnewinLeanmaths.html) (84 messages, latest: Jan 30 2019 at 13:14)
+
+* [modules](57882modules.html) (7 messages, latest: Jan 30 2019 at 09:07)
+
+* [last digit challenge](66889lastdigitchallenge.html) (15 messages, latest: Jan 30 2019 at 00:52)
+
+* [Limits of product](74089Limitsofproduct.html) (15 messages, latest: Jan 29 2019 at 23:34)
+
+* [sheaves and sites](44395sheavesandsites.html) (584 messages, latest: Jan 29 2019 at 21:13)
+
+* [nonlinarith](25383nonlinarith.html) (22 messages, latest: Jan 29 2019 at 08:44)
+
+* [adjunctions](53187adjunctions.html) (119 messages, latest: Jan 28 2019 at 20:45)
+
+* [adding negative reals](76722addingnegativereals.html) (12 messages, latest: Jan 28 2019 at 17:58)
+
+* [adding positive reals](35794addingpositivereals.html) (64 messages, latest: Jan 28 2019 at 14:34)
+
+* [power series](15161powerseries.html) (17 messages, latest: Jan 26 2019 at 19:16)
+
+* [Taking the Stacks Project formalisation forward](89037TakingtheStacksProjectformalisationforward.html) (119 messages, latest: Jan 26 2019 at 16:13)
+
+* [algebraic closure construction](91939algebraicclosureconstruction.html) (12 messages, latest: Jan 24 2019 at 19:19)
+
+* [is_ring_hom left multiplication](48648isringhomleftmultiplication.html) (3 messages, latest: Jan 24 2019 at 11:36)
+
+* [finset.max for nonempty sets](00990finsetmaxfornonemptysets.html) (22 messages, latest: Jan 24 2019 at 08:13)
+
+* [Splitting topology](64252Splittingtopology.html) (12 messages, latest: Jan 23 2019 at 17:14)
 
 * [multiplicative finsupp](00370multiplicativefinsupp.html) (20 messages, latest: Jan 22 2019 at 17:03)
-
-* [adjunctions](53187adjunctions.html) (116 messages, latest: Jan 22 2019 at 16:00)
 
 * [Long Stone-Cech](72538LongStoneCech.html) (7 messages, latest: Jan 22 2019 at 13:20)
 
 * [int.cast is unique](12504intcastisunique.html) (10 messages, latest: Jan 21 2019 at 16:23)
-
-* [sheaves and sites](44395sheavesandsites.html) (569 messages, latest: Jan 20 2019 at 21:02)
 
 * [Zero of really small](18776Zeroofreallysmall.html) (13 messages, latest: Jan 19 2019 at 23:31)
 
@@ -39,8 +69,6 @@ permalink: archive/116395maths/index.html
 * [norm_num weirdness](48256normnumweirdness.html) (34 messages, latest: Jan 18 2019 at 11:57)
 
 * [classification of finite simple groups](89771classificationoffinitesimplegroups.html) (24 messages, latest: Jan 18 2019 at 00:03)
-
-* [linarith failure](87044linarithfailure.html) (30 messages, latest: Jan 17 2019 at 23:24)
 
 * [Perfectoid spaces](04805Perfectoidspaces.html) (2628 messages, latest: Jan 17 2019 at 16:56)
 
@@ -205,8 +233,6 @@ permalink: archive/116395maths/index.html
 * [comm_ring.closure](74503commringclosure.html) (62 messages, latest: Oct 28 2018 at 11:29)
 
 * [with_top "diamonds"](57602withtopdiamonds.html) (5 messages, latest: Oct 27 2018 at 13:22)
-
-* [Taking the Stacks Project formalisation forward](89037TakingtheStacksProjectformalisationforward.html) (114 messages, latest: Oct 23 2018 at 18:22)
 
 * [yoneda](02913yoneda.html) (276 messages, latest: Oct 23 2018 at 10:57)
 

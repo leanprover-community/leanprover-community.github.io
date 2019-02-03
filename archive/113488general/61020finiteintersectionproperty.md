@@ -12,55 +12,54 @@ permalink: archive/113488general/61020finiteintersectionproperty.html
 
 {% raw %}
 #### [ Kenny Lau (Nov 27 2018 at 23:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20intersection%20property/near/148672762):
-Does Lean know that a space is compact iff it has the finite intersection property?
+<p>Does Lean know that a space is compact iff it has the finite intersection property?</p>
 
 #### [ Johannes Hölzl (Nov 27 2018 at 23:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20intersection%20property/near/148673442):
-No this is missing, but I think it is related to the ultrafilter property?!
+<p>No this is missing, but I think it is related to the ultrafilter property?!</p>
 
 #### [ Johannes Hölzl (Nov 27 2018 at 23:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20intersection%20property/near/148673666):
-Sorry it was the other way round. But I guess FIP and `compact_iff_finite_subcover` are easy to relate
+<p>Sorry it was the other way round. But I guess FIP and <code>compact_iff_finite_subcover</code> are easy to relate</p>
 
 #### [ Kenny Lau (Nov 28 2018 at 02:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20intersection%20property/near/148682619):
-```lean
-import analysis.topology.topological_space
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">analysis</span><span class="bp">.</span><span class="n">topology</span><span class="bp">.</span><span class="n">topological_space</span>
 
-universe u
+<span class="kn">universe</span> <span class="n">u</span>
 
-variables {α : Type u} [topological_space α] {S : set α}
+<span class="kn">variables</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">[</span><span class="n">topological_space</span> <span class="n">α</span><span class="o">]</span> <span class="o">{</span><span class="n">S</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span><span class="o">}</span>
 
-theorem compact_iff_fip : compact S ↔
-  ∀ T, (∀ t ∈ T, is_closed t) →
-    (∀ s ⊆ T, set.finite s → ∃ x, x ∈ S ∩ ⋂₀ s) →
-    ∃ x, x ∈ S ∩ ⋂₀ T :=
-begin
-  classical, split,
-  { intros hcs T ht1 ht2, by_contra ht3,
-    simp only [not_exists, set.mem_inter_iff, not_and,
-      (set.mem_compl_iff _ _).symm, set.compl_sInter, set.compl_image] at ht3,
-    have : ∀ t ∈ set.compl ⁻¹' T, is_open t,
-      from λ t ht, set.compl_compl t ▸ ht1 (-t) ht,
-    rcases compact_elim_finite_subcover hcs this ht3 with ⟨c, hc1, hc2, hc3⟩,
-    rcases ht2 (set.compl '' c) (set.image_subset_iff.2 hc1) (set.finite_image _ hc2) with ⟨x, hx1, hx2⟩,
-    rcases set.mem_sUnion.1 (hc3 hx1) with ⟨t, htc, hxt⟩,
-    exact hx2 (-t) (set.mem_image_of_mem _ htc) hxt },
-  { intro H, rw compact_iff_finite_subcover, intros c hc1 hc2, by_contra hc3,
-    simp only [not_exists, not_and, set.not_subset,
-      (set.mem_compl_iff _ _).symm, set.compl_sUnion] at hc3,
-    have : ∀ t ∈ set.compl ⁻¹' c, is_closed t,
-      from λ t ht, hc1 (-t) ht,
-    have hc4 : ∀ s, s ⊆ set.compl ⁻¹' c → set.finite s → ∃ x, x ∈ S ∩ ⋂₀ s,
-    { intros s hs1 hs2,
-      have := hc3 _ (set.image_subset_iff.2 hs1) (set.finite_image _ hs2),
-      rwa set.compl_compl_image at this },
-    rcases H (set.compl ⁻¹' c) this hc4 with ⟨x, hxs, hx⟩,
-    rcases set.mem_sUnion.1 (hc2 hxs) with ⟨t, htc, hxt⟩,
-    rw ← set.compl_image at hx,
-    exact hx _ (set.mem_image_of_mem _ htc) hxt }
-end
-```
+<span class="kn">theorem</span> <span class="n">compact_iff_fip</span> <span class="o">:</span> <span class="n">compact</span> <span class="n">S</span> <span class="bp">↔</span>
+  <span class="bp">∀</span> <span class="n">T</span><span class="o">,</span> <span class="o">(</span><span class="bp">∀</span> <span class="n">t</span> <span class="err">∈</span> <span class="n">T</span><span class="o">,</span> <span class="n">is_closed</span> <span class="n">t</span><span class="o">)</span> <span class="bp">→</span>
+    <span class="o">(</span><span class="bp">∀</span> <span class="n">s</span> <span class="err">⊆</span> <span class="n">T</span><span class="o">,</span> <span class="n">set</span><span class="bp">.</span><span class="n">finite</span> <span class="n">s</span> <span class="bp">→</span> <span class="bp">∃</span> <span class="n">x</span><span class="o">,</span> <span class="n">x</span> <span class="err">∈</span> <span class="n">S</span> <span class="err">∩</span> <span class="err">⋂₀</span> <span class="n">s</span><span class="o">)</span> <span class="bp">→</span>
+    <span class="bp">∃</span> <span class="n">x</span><span class="o">,</span> <span class="n">x</span> <span class="err">∈</span> <span class="n">S</span> <span class="err">∩</span> <span class="err">⋂₀</span> <span class="n">T</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">classical</span><span class="o">,</span> <span class="n">split</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">intros</span> <span class="n">hcs</span> <span class="n">T</span> <span class="n">ht1</span> <span class="n">ht2</span><span class="o">,</span> <span class="n">by_contra</span> <span class="n">ht3</span><span class="o">,</span>
+    <span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">not_exists</span><span class="o">,</span> <span class="n">set</span><span class="bp">.</span><span class="n">mem_inter_iff</span><span class="o">,</span> <span class="n">not_and</span><span class="o">,</span>
+      <span class="o">(</span><span class="n">set</span><span class="bp">.</span><span class="n">mem_compl_iff</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">)</span><span class="bp">.</span><span class="n">symm</span><span class="o">,</span> <span class="n">set</span><span class="bp">.</span><span class="n">compl_sInter</span><span class="o">,</span> <span class="n">set</span><span class="bp">.</span><span class="n">compl_image</span><span class="o">]</span> <span class="n">at</span> <span class="n">ht3</span><span class="o">,</span>
+    <span class="k">have</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">t</span> <span class="err">∈</span> <span class="n">set</span><span class="bp">.</span><span class="n">compl</span> <span class="bp">⁻¹</span><span class="err">&#39;</span> <span class="n">T</span><span class="o">,</span> <span class="n">is_open</span> <span class="n">t</span><span class="o">,</span>
+      <span class="k">from</span> <span class="bp">λ</span> <span class="n">t</span> <span class="n">ht</span><span class="o">,</span> <span class="n">set</span><span class="bp">.</span><span class="n">compl_compl</span> <span class="n">t</span> <span class="bp">▸</span> <span class="n">ht1</span> <span class="o">(</span><span class="bp">-</span><span class="n">t</span><span class="o">)</span> <span class="n">ht</span><span class="o">,</span>
+    <span class="n">rcases</span> <span class="n">compact_elim_finite_subcover</span> <span class="n">hcs</span> <span class="n">this</span> <span class="n">ht3</span> <span class="k">with</span> <span class="bp">⟨</span><span class="n">c</span><span class="o">,</span> <span class="n">hc1</span><span class="o">,</span> <span class="n">hc2</span><span class="o">,</span> <span class="n">hc3</span><span class="bp">⟩</span><span class="o">,</span>
+    <span class="n">rcases</span> <span class="n">ht2</span> <span class="o">(</span><span class="n">set</span><span class="bp">.</span><span class="n">compl</span> <span class="err">&#39;&#39;</span> <span class="n">c</span><span class="o">)</span> <span class="o">(</span><span class="n">set</span><span class="bp">.</span><span class="n">image_subset_iff</span><span class="bp">.</span><span class="mi">2</span> <span class="n">hc1</span><span class="o">)</span> <span class="o">(</span><span class="n">set</span><span class="bp">.</span><span class="n">finite_image</span> <span class="bp">_</span> <span class="n">hc2</span><span class="o">)</span> <span class="k">with</span> <span class="bp">⟨</span><span class="n">x</span><span class="o">,</span> <span class="n">hx1</span><span class="o">,</span> <span class="n">hx2</span><span class="bp">⟩</span><span class="o">,</span>
+    <span class="n">rcases</span> <span class="n">set</span><span class="bp">.</span><span class="n">mem_sUnion</span><span class="bp">.</span><span class="mi">1</span> <span class="o">(</span><span class="n">hc3</span> <span class="n">hx1</span><span class="o">)</span> <span class="k">with</span> <span class="bp">⟨</span><span class="n">t</span><span class="o">,</span> <span class="n">htc</span><span class="o">,</span> <span class="n">hxt</span><span class="bp">⟩</span><span class="o">,</span>
+    <span class="n">exact</span> <span class="n">hx2</span> <span class="o">(</span><span class="bp">-</span><span class="n">t</span><span class="o">)</span> <span class="o">(</span><span class="n">set</span><span class="bp">.</span><span class="n">mem_image_of_mem</span> <span class="bp">_</span> <span class="n">htc</span><span class="o">)</span> <span class="n">hxt</span> <span class="o">},</span>
+  <span class="o">{</span> <span class="n">intro</span> <span class="n">H</span><span class="o">,</span> <span class="n">rw</span> <span class="n">compact_iff_finite_subcover</span><span class="o">,</span> <span class="n">intros</span> <span class="n">c</span> <span class="n">hc1</span> <span class="n">hc2</span><span class="o">,</span> <span class="n">by_contra</span> <span class="n">hc3</span><span class="o">,</span>
+    <span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">not_exists</span><span class="o">,</span> <span class="n">not_and</span><span class="o">,</span> <span class="n">set</span><span class="bp">.</span><span class="n">not_subset</span><span class="o">,</span>
+      <span class="o">(</span><span class="n">set</span><span class="bp">.</span><span class="n">mem_compl_iff</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">)</span><span class="bp">.</span><span class="n">symm</span><span class="o">,</span> <span class="n">set</span><span class="bp">.</span><span class="n">compl_sUnion</span><span class="o">]</span> <span class="n">at</span> <span class="n">hc3</span><span class="o">,</span>
+    <span class="k">have</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">t</span> <span class="err">∈</span> <span class="n">set</span><span class="bp">.</span><span class="n">compl</span> <span class="bp">⁻¹</span><span class="err">&#39;</span> <span class="n">c</span><span class="o">,</span> <span class="n">is_closed</span> <span class="n">t</span><span class="o">,</span>
+      <span class="k">from</span> <span class="bp">λ</span> <span class="n">t</span> <span class="n">ht</span><span class="o">,</span> <span class="n">hc1</span> <span class="o">(</span><span class="bp">-</span><span class="n">t</span><span class="o">)</span> <span class="n">ht</span><span class="o">,</span>
+    <span class="k">have</span> <span class="n">hc4</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">s</span><span class="o">,</span> <span class="n">s</span> <span class="err">⊆</span> <span class="n">set</span><span class="bp">.</span><span class="n">compl</span> <span class="bp">⁻¹</span><span class="err">&#39;</span> <span class="n">c</span> <span class="bp">→</span> <span class="n">set</span><span class="bp">.</span><span class="n">finite</span> <span class="n">s</span> <span class="bp">→</span> <span class="bp">∃</span> <span class="n">x</span><span class="o">,</span> <span class="n">x</span> <span class="err">∈</span> <span class="n">S</span> <span class="err">∩</span> <span class="err">⋂₀</span> <span class="n">s</span><span class="o">,</span>
+    <span class="o">{</span> <span class="n">intros</span> <span class="n">s</span> <span class="n">hs1</span> <span class="n">hs2</span><span class="o">,</span>
+      <span class="k">have</span> <span class="o">:=</span> <span class="n">hc3</span> <span class="bp">_</span> <span class="o">(</span><span class="n">set</span><span class="bp">.</span><span class="n">image_subset_iff</span><span class="bp">.</span><span class="mi">2</span> <span class="n">hs1</span><span class="o">)</span> <span class="o">(</span><span class="n">set</span><span class="bp">.</span><span class="n">finite_image</span> <span class="bp">_</span> <span class="n">hs2</span><span class="o">),</span>
+      <span class="n">rwa</span> <span class="n">set</span><span class="bp">.</span><span class="n">compl_compl_image</span> <span class="n">at</span> <span class="n">this</span> <span class="o">},</span>
+    <span class="n">rcases</span> <span class="n">H</span> <span class="o">(</span><span class="n">set</span><span class="bp">.</span><span class="n">compl</span> <span class="bp">⁻¹</span><span class="err">&#39;</span> <span class="n">c</span><span class="o">)</span> <span class="n">this</span> <span class="n">hc4</span> <span class="k">with</span> <span class="bp">⟨</span><span class="n">x</span><span class="o">,</span> <span class="n">hxs</span><span class="o">,</span> <span class="n">hx</span><span class="bp">⟩</span><span class="o">,</span>
+    <span class="n">rcases</span> <span class="n">set</span><span class="bp">.</span><span class="n">mem_sUnion</span><span class="bp">.</span><span class="mi">1</span> <span class="o">(</span><span class="n">hc2</span> <span class="n">hxs</span><span class="o">)</span> <span class="k">with</span> <span class="bp">⟨</span><span class="n">t</span><span class="o">,</span> <span class="n">htc</span><span class="o">,</span> <span class="n">hxt</span><span class="bp">⟩</span><span class="o">,</span>
+    <span class="n">rw</span> <span class="err">←</span> <span class="n">set</span><span class="bp">.</span><span class="n">compl_image</span> <span class="n">at</span> <span class="n">hx</span><span class="o">,</span>
+    <span class="n">exact</span> <span class="n">hx</span> <span class="bp">_</span> <span class="o">(</span><span class="n">set</span><span class="bp">.</span><span class="n">mem_image_of_mem</span> <span class="bp">_</span> <span class="n">htc</span><span class="o">)</span> <span class="n">hxt</span> <span class="o">}</span>
+<span class="kn">end</span>
+</pre></div>
 
 #### [ Kenny Lau (Nov 28 2018 at 02:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20intersection%20property/near/148682623):
-that was easier than I thought
+<p>that was easier than I thought</p>
 
 
 {% endraw %}

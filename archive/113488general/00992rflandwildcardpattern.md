@@ -12,246 +12,243 @@ permalink: archive/113488general/00992rflandwildcardpattern.html
 
 {% raw %}
 #### [ Patrick Massot (Jun 08 2018 at 15:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127771996):
-Have a look at https://github.com/kbuzzard/lean-perfectoid-spaces/blob/b1e6489145be504e64a009226c6811bfd84a5070/src/valuations.lean#L143-L151:
-```lean
-theorem mul_assoc : ∀ (x y z : option α), mul (mul x y) z = mul x (mul y z)
-| (some x) (some y) (some z) := congr_arg some $ _root_.mul_assoc x y z
-| (some _) (some _) none     := rfl
-| (some _) none     (some z) := rfl
-| (some _) none     none     := rfl
-| none     (some _) (some z) := rfl
-| none     (some _) none     := rfl
-| none     none     (some z) := rfl
-| none none none := rfl
-```
-What would be a way to compress this down to three lines?  Replacing lines 3 to N by `|_ _ _ := rfl` doesn' work.
+<p>Have a look at <a href="https://github.com/kbuzzard/lean-perfectoid-spaces/blob/b1e6489145be504e64a009226c6811bfd84a5070/src/valuations.lean#L143-L151" target="_blank" title="https://github.com/kbuzzard/lean-perfectoid-spaces/blob/b1e6489145be504e64a009226c6811bfd84a5070/src/valuations.lean#L143-L151">https://github.com/kbuzzard/lean-perfectoid-spaces/blob/b1e6489145be504e64a009226c6811bfd84a5070/src/valuations.lean#L143-L151</a>:</p>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">mul_assoc</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="n">z</span> <span class="o">:</span> <span class="n">option</span> <span class="n">α</span><span class="o">),</span> <span class="n">mul</span> <span class="o">(</span><span class="n">mul</span> <span class="n">x</span> <span class="n">y</span><span class="o">)</span> <span class="n">z</span> <span class="bp">=</span> <span class="n">mul</span> <span class="n">x</span> <span class="o">(</span><span class="n">mul</span> <span class="n">y</span> <span class="n">z</span><span class="o">)</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">some</span> <span class="n">x</span><span class="o">)</span> <span class="o">(</span><span class="n">some</span> <span class="n">y</span><span class="o">)</span> <span class="o">(</span><span class="n">some</span> <span class="n">z</span><span class="o">)</span> <span class="o">:=</span> <span class="n">congr_arg</span> <span class="n">some</span> <span class="err">$</span> <span class="bp">_</span><span class="n">root_</span><span class="bp">.</span><span class="n">mul_assoc</span> <span class="n">x</span> <span class="n">y</span> <span class="n">z</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">some</span> <span class="bp">_</span><span class="o">)</span> <span class="o">(</span><span class="n">some</span> <span class="bp">_</span><span class="o">)</span> <span class="n">none</span>     <span class="o">:=</span> <span class="n">rfl</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">some</span> <span class="bp">_</span><span class="o">)</span> <span class="n">none</span>     <span class="o">(</span><span class="n">some</span> <span class="n">z</span><span class="o">)</span> <span class="o">:=</span> <span class="n">rfl</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">some</span> <span class="bp">_</span><span class="o">)</span> <span class="n">none</span>     <span class="n">none</span>     <span class="o">:=</span> <span class="n">rfl</span>
+<span class="bp">|</span> <span class="n">none</span>     <span class="o">(</span><span class="n">some</span> <span class="bp">_</span><span class="o">)</span> <span class="o">(</span><span class="n">some</span> <span class="n">z</span><span class="o">)</span> <span class="o">:=</span> <span class="n">rfl</span>
+<span class="bp">|</span> <span class="n">none</span>     <span class="o">(</span><span class="n">some</span> <span class="bp">_</span><span class="o">)</span> <span class="n">none</span>     <span class="o">:=</span> <span class="n">rfl</span>
+<span class="bp">|</span> <span class="n">none</span>     <span class="n">none</span>     <span class="o">(</span><span class="n">some</span> <span class="n">z</span><span class="o">)</span> <span class="o">:=</span> <span class="n">rfl</span>
+<span class="bp">|</span> <span class="n">none</span> <span class="n">none</span> <span class="n">none</span> <span class="o">:=</span> <span class="n">rfl</span>
+</pre></div>
+
+
+<p>What would be a way to compress this down to three lines?  Replacing lines 3 to N by <code>|_ _ _ := rfl</code> doesn' work.</p>
 
 #### [ Simon Hudon (Jun 08 2018 at 15:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127772157):
-I would try something like:
-
-```lean
-theorem mul_assoc : ∀ (x y z : option α), mul (mul x y) z = mul x (mul y z) :=
-by { intros, casesm* option _ ; (apply congr_arg some (_root_.mul_assoc x y z) <|> refl)) }
-```
+<p>I would try something like:</p>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">mul_assoc</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="n">z</span> <span class="o">:</span> <span class="n">option</span> <span class="n">α</span><span class="o">),</span> <span class="n">mul</span> <span class="o">(</span><span class="n">mul</span> <span class="n">x</span> <span class="n">y</span><span class="o">)</span> <span class="n">z</span> <span class="bp">=</span> <span class="n">mul</span> <span class="n">x</span> <span class="o">(</span><span class="n">mul</span> <span class="n">y</span> <span class="n">z</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="o">{</span> <span class="n">intros</span><span class="o">,</span> <span class="n">casesm</span><span class="bp">*</span> <span class="n">option</span> <span class="bp">_</span> <span class="bp">;</span> <span class="o">(</span><span class="n">apply</span> <span class="n">congr_arg</span> <span class="n">some</span> <span class="o">(</span><span class="bp">_</span><span class="n">root_</span><span class="bp">.</span><span class="n">mul_assoc</span> <span class="n">x</span> <span class="n">y</span> <span class="n">z</span><span class="o">)</span> <span class="bp">&lt;|&gt;</span> <span class="n">refl</span><span class="o">))</span> <span class="o">}</span>
+</pre></div>
 
 #### [ Simon Hudon (Jun 08 2018 at 15:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127772285):
-Maybe this would be clearer and faster:
-
-```lean
-theorem mul_assoc : ∀ (x y z : option α), mul (mul x y) z = mul x (mul y z) :=
-by { intros, casesm* option _, 
-     { exact congr_arg some (_root_.mul_assoc x y z) }, 
-     all_goals { exact rfl } }
-```
+<p>Maybe this would be clearer and faster:</p>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">mul_assoc</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="n">z</span> <span class="o">:</span> <span class="n">option</span> <span class="n">α</span><span class="o">),</span> <span class="n">mul</span> <span class="o">(</span><span class="n">mul</span> <span class="n">x</span> <span class="n">y</span><span class="o">)</span> <span class="n">z</span> <span class="bp">=</span> <span class="n">mul</span> <span class="n">x</span> <span class="o">(</span><span class="n">mul</span> <span class="n">y</span> <span class="n">z</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="o">{</span> <span class="n">intros</span><span class="o">,</span> <span class="n">casesm</span><span class="bp">*</span> <span class="n">option</span> <span class="bp">_</span><span class="o">,</span>
+     <span class="o">{</span> <span class="n">exact</span> <span class="n">congr_arg</span> <span class="n">some</span> <span class="o">(</span><span class="bp">_</span><span class="n">root_</span><span class="bp">.</span><span class="n">mul_assoc</span> <span class="n">x</span> <span class="n">y</span> <span class="n">z</span><span class="o">)</span> <span class="o">},</span>
+     <span class="n">all_goals</span> <span class="o">{</span> <span class="n">exact</span> <span class="n">rfl</span> <span class="o">}</span> <span class="o">}</span>
+</pre></div>
 
 #### [ Patrick Massot (Jun 08 2018 at 16:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127774966):
-Thanks. You need to try `rfl` first or replace names by wildcards since `x`, `y`, `z` are defined only in one case
+<p>Thanks. You need to try <code>rfl</code> first or replace names by wildcards since <code>x</code>, <code>y</code>, <code>z</code> are defined only in one case</p>
 
 #### [ Patrick Massot (Jun 08 2018 at 16:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127774970):
-```lean
-theorem mul_assoc : ∀ (x y z : option α), mul (mul x y) z = mul x (mul y z) :=
-by { intros, casesm* option _,
-     all_goals { exact congr_arg some (_root_.mul_assoc _ _ _) <|>  exact rfl } }
-```
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">mul_assoc</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="n">z</span> <span class="o">:</span> <span class="n">option</span> <span class="n">α</span><span class="o">),</span> <span class="n">mul</span> <span class="o">(</span><span class="n">mul</span> <span class="n">x</span> <span class="n">y</span><span class="o">)</span> <span class="n">z</span> <span class="bp">=</span> <span class="n">mul</span> <span class="n">x</span> <span class="o">(</span><span class="n">mul</span> <span class="n">y</span> <span class="n">z</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="o">{</span> <span class="n">intros</span><span class="o">,</span> <span class="n">casesm</span><span class="bp">*</span> <span class="n">option</span> <span class="bp">_</span><span class="o">,</span>
+     <span class="n">all_goals</span> <span class="o">{</span> <span class="n">exact</span> <span class="n">congr_arg</span> <span class="n">some</span> <span class="o">(</span><span class="bp">_</span><span class="n">root_</span><span class="bp">.</span><span class="n">mul_assoc</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">)</span> <span class="bp">&lt;|&gt;</span>  <span class="n">exact</span> <span class="n">rfl</span> <span class="o">}</span> <span class="o">}</span>
+</pre></div>
 
 #### [ Johan Commelin (Jun 08 2018 at 16:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127775025):
-Isn't the correct answer to your initial question `obviously`?
+<p>Isn't the correct answer to your initial question <code>obviously</code>?</p>
 
 #### [ Patrick Massot (Jun 08 2018 at 16:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127775053):
-Ok, it's time for some tactic lecture. How to you get Lean to see the name of the theorem we are proving is `mul_assoc` and there are three variables in order to use this information instead of explicitly writing `_root_.mul_assoc _ _ _`? Then you can do a bunch of other proofs with the same tactic
+<p>Ok, it's time for some tactic lecture. How to you get Lean to see the name of the theorem we are proving is <code>mul_assoc</code> and there are three variables in order to use this information instead of explicitly writing <code>_root_.mul_assoc _ _ _</code>? Then you can do a bunch of other proofs with the same tactic</p>
 
 #### [ Patrick Massot (Jun 08 2018 at 16:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127775095):
-I don't think we have `obviously` yet. But indeed it would be the correct answer
+<p>I don't think we have <code>obviously</code> yet. But indeed it would be the correct answer</p>
 
 #### [ Patrick Massot (Jun 08 2018 at 16:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127775102):
-Maybe we can add Scott's repo as a dependency
+<p>Maybe we can add Scott's repo as a dependency</p>
 
 #### [ Johan Commelin (Jun 08 2018 at 16:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127775105):
-Exactly.
+<p>Exactly.</p>
 
 #### [ Johan Commelin (Jun 08 2018 at 16:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127775112):
-But I think it requires adding lots of attribute through mathlib.
+<p>But I think it requires adding lots of attribute through mathlib.</p>
 
 #### [ Johan Commelin (Jun 08 2018 at 16:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127775113):
-So it might not go as smoothly as we hope.
+<p>So it might not go as smoothly as we hope.</p>
 
 #### [ Johan Commelin (Jun 08 2018 at 16:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127775144):
-His library is not orthogonal to mathlib, so it won't be an easy PR, I guess.
+<p>His library is not orthogonal to mathlib, so it won't be an easy PR, I guess.</p>
 
 #### [ Patrick Massot (Jun 08 2018 at 16:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127775194):
-I don't think it's true
+<p>I don't think it's true</p>
 
 #### [ Simon Hudon (Jun 08 2018 at 16:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127775202):
-My pull request has not been merged yet but if you want to use my branch the code would end up very similar to your indexed product.
+<p>My pull request has not been merged yet but if you want to use my branch the code would end up very similar to your indexed product.</p>
 
 #### [ Johan Commelin (Jun 08 2018 at 16:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127775278):
-@**Patrick Massot** I would love to be proved wrong. But what I've seen so far, is that you need to put a lot of attributes at a lot of definitions. And then afterwards life becomes easy.
+<p><span class="user-mention" data-user-id="110031">@Patrick Massot</span> I would love to be proved wrong. But what I've seen so far, is that you need to put a lot of attributes at a lot of definitions. And then afterwards life becomes easy.</p>
 
 #### [ Patrick Massot (Jun 08 2018 at 16:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127775330):
-At least you can add lean-tidy to the project and then `import tidy.tidy` and get access to `obviously`. Then it doesn't prove this lemma
+<p>At least you can add lean-tidy to the project and then <code>import tidy.tidy</code> and get access to <code>obviously</code>. Then it doesn't prove this lemma</p>
 
 #### [ Patrick Massot (Jun 08 2018 at 16:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127775340):
-Simon I don't understand what you wrote
+<p>Simon I don't understand what you wrote</p>
 
 #### [ Johan Commelin (Jun 08 2018 at 16:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127775402):
-```quote
-At least you can add lean-tidy to the project and then `import tidy.tidy` and get access to `obviously`. Then it doesn't prove this lemma
-```
-Right... but your point is that it might still prove other lemma's?
+<blockquote>
+<p>At least you can add lean-tidy to the project and then <code>import tidy.tidy</code> and get access to <code>obviously</code>. Then it doesn't prove this lemma</p>
+</blockquote>
+<p>Right... but your point is that it might still prove other lemma's?</p>
 
 #### [ Patrick Massot (Jun 08 2018 at 16:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127775419):
-I hope so
+<p>I hope so</p>
 
 #### [ Patrick Massot (Jun 08 2018 at 16:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127775434):
-Let's see what time is it in Australia.
+<p>Let's see what time is it in Australia.</p>
 
 #### [ Simon Hudon (Jun 08 2018 at 16:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127775439):
-I made a pull request with `refine_struct` that would be useful here. It hasn't been merged yet but you can still use it.
+<p>I made a pull request with <code>refine_struct</code> that would be useful here. It hasn't been merged yet but you can still use it.</p>
 
 #### [ Patrick Massot (Jun 08 2018 at 16:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127775487):
-@**Scott Morrison** We currently have this proof:
-```lean
-theorem mul_assoc : ∀ (x y z : option α), mul (mul x y) z = mul x (mul y z) :=
-by { intros, casesm* option _,
-      all_goals { exact congr_arg some (_root_.mul_assoc _ _ _) <|>  refl } }
-```
-Question: should this be killed by one of your magic tactics?
+<p><span class="user-mention" data-user-id="110087">@Scott Morrison</span> We currently have this proof:</p>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">mul_assoc</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="n">z</span> <span class="o">:</span> <span class="n">option</span> <span class="n">α</span><span class="o">),</span> <span class="n">mul</span> <span class="o">(</span><span class="n">mul</span> <span class="n">x</span> <span class="n">y</span><span class="o">)</span> <span class="n">z</span> <span class="bp">=</span> <span class="n">mul</span> <span class="n">x</span> <span class="o">(</span><span class="n">mul</span> <span class="n">y</span> <span class="n">z</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="o">{</span> <span class="n">intros</span><span class="o">,</span> <span class="n">casesm</span><span class="bp">*</span> <span class="n">option</span> <span class="bp">_</span><span class="o">,</span>
+      <span class="n">all_goals</span> <span class="o">{</span> <span class="n">exact</span> <span class="n">congr_arg</span> <span class="n">some</span> <span class="o">(</span><span class="bp">_</span><span class="n">root_</span><span class="bp">.</span><span class="n">mul_assoc</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">)</span> <span class="bp">&lt;|&gt;</span>  <span class="n">refl</span> <span class="o">}</span> <span class="o">}</span>
+</pre></div>
+
+
+<p>Question: should this be killed by one of your magic tactics?</p>
 
 #### [ Patrick Massot (Jun 08 2018 at 16:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127775493):
-Simon: But the question at hand has no structure to refine
+<p>Simon: But the question at hand has no structure to refine</p>
 
 #### [ Simon Hudon (Jun 08 2018 at 16:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127775587):
-Aren't you building up to a monoid or semigroup?
+<p>Aren't you building up to a monoid or semigroup?</p>
 
 #### [ Patrick Massot (Jun 08 2018 at 16:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127775601):
-True
+<p>True</p>
 
 #### [ Patrick Massot (Jun 08 2018 at 16:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127775607):
-I don't know what I was thinking
+<p>I don't know what I was thinking</p>
 
 #### [ Simon Hudon (Jun 08 2018 at 16:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127775614):
-You may be able to have only one proof for the whole instance
+<p>You may be able to have only one proof for the whole instance</p>
 
 #### [ Patrick Massot (Jun 08 2018 at 16:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127775662):
-I was carelessly browsing code in lean-perfectoid and saw this lemma with seven stupid lines and focussed on it. But of course its only use is in an instance later.
+<p>I was carelessly browsing code in lean-perfectoid and saw this lemma with seven stupid lines and focussed on it. But of course its only use is in an instance later.</p>
 
 #### [ Simon Hudon (Jun 08 2018 at 16:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127775784):
-That's a pretty common mindset for me. That's actually a fun part of doing engineering: some days I don't feel smart so I can do some mindless tasks until I feel inspired again. The downside is that I don't consider much contexts while doing that so I end up improving the minutia of solutions that should just scrapped altogether
+<p>That's a pretty common mindset for me. That's actually a fun part of doing engineering: some days I don't feel smart so I can do some mindless tasks until I feel inspired again. The downside is that I don't consider much contexts while doing that so I end up improving the minutia of solutions that should just scrapped altogether</p>
 
 #### [ Patrick Massot (Jun 08 2018 at 16:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127775861):
-It's a bit annoying that this PR is not merged because it's content is scattered among several files, so it's not immediate to incorporate it into another project
+<p>It's a bit annoying that this PR is not merged because it's content is scattered among several files, so it's not immediate to incorporate it into another project</p>
 
 #### [ Simon Hudon (Jun 08 2018 at 16:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127775950):
-What you can do is link to my repo in your toml file
+<p>What you can do is link to my repo in your toml file</p>
 
 #### [ Simon Hudon (Jun 08 2018 at 16:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127775976):
-I may have to update that branch first but I can do that right now
+<p>I may have to update that branch first but I can do that right now</p>
 
 #### [ Patrick Massot (Jun 08 2018 at 16:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127776127):
-That may be a good solution if @**Mario Carneiro** and @**Johannes Hölzl** need more time to review your PR, because the Perfectoid project will need a lot of instances of algebraic objects.
+<p>That may be a good solution if <span class="user-mention" data-user-id="110049">@Mario Carneiro</span> and <span class="user-mention" data-user-id="110294">@Johannes Hölzl</span> need more time to review your PR, because the Perfectoid project will need a lot of instances of algebraic objects.</p>
 
 #### [ Simon Hudon (Jun 08 2018 at 17:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127777679):
-It's ready when you are.
+<p>It's ready when you are.</p>
 
 #### [ Patrick Massot (Jun 08 2018 at 17:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127779269):
-After doing `field ← get_current_field,` how would you replace `whatever.something` with `_root_.something` inside `field` so that I can later use it in the relevant version of `derive_field`?
+<p>After doing <code>field ← get_current_field,</code> how would you replace <code>whatever.something</code> with <code>_root_.something</code> inside <code>field</code> so that I can later use it in the relevant version of <code>derive_field</code>?</p>
 
 #### [ Simon Hudon (Jun 08 2018 at 17:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127779369):
-Is `whatever` something like `semigroup`?
+<p>Is <code>whatever</code> something like <code>semigroup</code>?</p>
 
 #### [ Patrick Massot (Jun 08 2018 at 18:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127779372):
-yes
+<p>yes</p>
 
 #### [ Simon Hudon (Jun 08 2018 at 18:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127779429):
-Why do you need to strip it away?
+<p>Why do you need to strip it away?</p>
 
 #### [ Patrick Massot (Jun 08 2018 at 18:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127779454):
-because it doesn't work otherwise
+<p>because it doesn't work otherwise</p>
 
 #### [ Patrick Massot (Jun 08 2018 at 18:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127779456):
-see the handcrafted proof above
+<p>see the handcrafted proof above</p>
 
 #### [ Simon Hudon (Jun 08 2018 at 18:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127779538):
-Do you have an instance of `semigroup` for `α`?
+<p>Do you have an instance of <code>semigroup</code> for <code>α</code>?</p>
 
 #### [ Patrick Massot (Jun 08 2018 at 18:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127779562):
-`linear_ordered_comm_group` actually
+<p><code>linear_ordered_comm_group</code> actually</p>
 
 #### [ Patrick Massot (Jun 08 2018 at 18:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127779564):
-and the goal is to build `linear_ordered_comm_monoid (option α)`
+<p>and the goal is to build <code>linear_ordered_comm_monoid (option α)</code></p>
 
 #### [ Patrick Massot (Jun 08 2018 at 18:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127779611):
-but `to_string field` turns out to be `comm_monoid.mul_assoc` here
+<p>but <code>to_string field</code> turns out to be <code>comm_monoid.mul_assoc</code> here</p>
 
 #### [ Patrick Massot (Jun 08 2018 at 18:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127779616):
-but the proof then needs `_root_.mul_assoc`
+<p>but the proof then needs <code>_root_.mul_assoc</code></p>
 
 #### [ Simon Hudon (Jun 08 2018 at 18:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127779821):
-I find it odd: the types are very similar. Can you give me the error you get when your proof fails?
+<p>I find it odd: the types are very similar. Can you give me the error you get when your proof fails?</p>
 
 #### [ Simon Hudon (Jun 08 2018 at 18:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127779827):
-(It is possible to do what you ask but I think we're better off taking a different approach)
+<p>(It is possible to do what you ask but I think we're better off taking a different approach)</p>
 
 #### [ Patrick Massot (Jun 08 2018 at 18:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127780142):
-I minimized to 
-```lean
-import algebra.pi_instances
+<p>I minimized to </p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">algebra</span><span class="bp">.</span><span class="n">pi_instances</span>
 
-class linear_ordered_comm_group (α : Type)
-    extends comm_group α, linear_order α :=
-(mul_le_mul_left : ∀ {a b : α}, a ≤ b → ∀ c : α, c * a ≤ c * b)
+<span class="n">class</span> <span class="n">linear_ordered_comm_group</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span>
+    <span class="kn">extends</span> <span class="n">comm_group</span> <span class="n">α</span><span class="o">,</span> <span class="n">linear_order</span> <span class="n">α</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">mul_le_mul_left</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">α</span><span class="o">},</span> <span class="n">a</span> <span class="bp">≤</span> <span class="n">b</span> <span class="bp">→</span> <span class="bp">∀</span> <span class="n">c</span> <span class="o">:</span> <span class="n">α</span><span class="o">,</span> <span class="n">c</span> <span class="bp">*</span> <span class="n">a</span> <span class="bp">≤</span> <span class="n">c</span> <span class="bp">*</span> <span class="n">b</span><span class="o">)</span>
 
-class linear_ordered_comm_monoid (α : Type)
-    extends comm_monoid α, linear_order α :=
-(mul_le_mul_left : ∀ {a b : α}, a ≤ b → ∀ c : α, c * a ≤ c * b)
+<span class="n">class</span> <span class="n">linear_ordered_comm_monoid</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span>
+    <span class="kn">extends</span> <span class="n">comm_monoid</span> <span class="n">α</span><span class="o">,</span> <span class="n">linear_order</span> <span class="n">α</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">mul_le_mul_left</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">α</span><span class="o">},</span> <span class="n">a</span> <span class="bp">≤</span> <span class="n">b</span> <span class="bp">→</span> <span class="bp">∀</span> <span class="n">c</span> <span class="o">:</span> <span class="n">α</span><span class="o">,</span> <span class="n">c</span> <span class="bp">*</span> <span class="n">a</span> <span class="bp">≤</span> <span class="n">c</span> <span class="bp">*</span> <span class="n">b</span><span class="o">)</span>
 
-variables {α : Type} [linear_ordered_comm_group α] 
+<span class="kn">variables</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">[</span><span class="n">linear_ordered_comm_group</span> <span class="n">α</span><span class="o">]</span>
 
 
-def mul : option α → option α → option α
-| (some x) (some y) := some (x * y)
-| _        _        := none
+<span class="n">def</span> <span class="n">mul</span> <span class="o">:</span> <span class="n">option</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">option</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">option</span> <span class="n">α</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">some</span> <span class="n">x</span><span class="o">)</span> <span class="o">(</span><span class="n">some</span> <span class="n">y</span><span class="o">)</span> <span class="o">:=</span> <span class="n">some</span> <span class="o">(</span><span class="n">x</span> <span class="bp">*</span> <span class="n">y</span><span class="o">)</span>
+<span class="bp">|</span> <span class="bp">_</span>        <span class="bp">_</span>        <span class="o">:=</span> <span class="n">none</span>
 
-def one : option α := some 1
+<span class="n">def</span> <span class="n">one</span> <span class="o">:</span> <span class="n">option</span> <span class="n">α</span> <span class="o">:=</span> <span class="n">some</span> <span class="mi">1</span>
 
-def le : option α → option α → Prop
-| (some x) (some y) := x ≤ y
-| (some _) none     := false
-| none     _        := true
+<span class="n">def</span> <span class="n">le</span> <span class="o">:</span> <span class="n">option</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">option</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Prop</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">some</span> <span class="n">x</span><span class="o">)</span> <span class="o">(</span><span class="n">some</span> <span class="n">y</span><span class="o">)</span> <span class="o">:=</span> <span class="n">x</span> <span class="bp">≤</span> <span class="n">y</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">some</span> <span class="bp">_</span><span class="o">)</span> <span class="n">none</span>     <span class="o">:=</span> <span class="n">false</span>
+<span class="bp">|</span> <span class="n">none</span>     <span class="bp">_</span>        <span class="o">:=</span> <span class="n">true</span>
 
-instance : linear_ordered_comm_monoid (option α) :=
-by refine_struct { mul := mul, one := one, le := le, .. }; { tactic.derive_field_option }
-```
-The game is to add `derive_field_option` to `algebra.pi_instances` (from your branch of course) to make it work
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">linear_ordered_comm_monoid</span> <span class="o">(</span><span class="n">option</span> <span class="n">α</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">refine_struct</span> <span class="o">{</span> <span class="n">mul</span> <span class="o">:=</span> <span class="n">mul</span><span class="o">,</span> <span class="n">one</span> <span class="o">:=</span> <span class="n">one</span><span class="o">,</span> <span class="n">le</span> <span class="o">:=</span> <span class="n">le</span><span class="o">,</span> <span class="bp">..</span> <span class="o">}</span><span class="bp">;</span> <span class="o">{</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">derive_field_option</span> <span class="o">}</span>
+</pre></div>
+
+
+<p>The game is to add <code>derive_field_option</code> to <code>algebra.pi_instances</code> (from your branch of course) to make it work</p>
 
 #### [ Patrick Massot (Jun 08 2018 at 18:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127780175):
-Again, this is not crucial, Kenny did it by hand, I'm only trying to slowly learn tactic writing for specialized automation
+<p>Again, this is not crucial, Kenny did it by hand, I'm only trying to slowly learn tactic writing for specialized automation</p>
 
 #### [ Simon Hudon (Jun 08 2018 at 18:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127780177):
-Nice :) I'm going to play a bit :D
+<p>Nice :) I'm going to play a bit :D</p>
 
 #### [ Patrick Massot (Jun 08 2018 at 18:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127780228):
-I should go and take care of my family (I'm not even talking about the work I should have been doing)
+<p>I should go and take care of my family (I'm not even talking about the work I should have been doing)</p>
 
 #### [ Simon Hudon (Jun 08 2018 at 18:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127780239):
-Ah family! They keep interrupting math, don't they? :D
+<p>Ah family! They keep interrupting math, don't they? :D</p>
 
 #### [ Patrick Massot (Jun 08 2018 at 18:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127780314):
-The version which doesn't work is:
-```lean
-meta def derive_field_option : tactic unit :=
-do b ← target >>= is_prop,
-  if b then do
-     field ← get_current_field,
-     trace (to_string field),
-     intros,
-     `[casesm* option _],
-     `[all_goals { exact congr_arg some (field _ _ _) <|> exact rfl }]
-  else do skip
-```
+<p>The version which doesn't work is:</p>
+<div class="codehilite"><pre><span></span><span class="n">meta</span> <span class="n">def</span> <span class="n">derive_field_option</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
+<span class="n">do</span> <span class="n">b</span> <span class="err">←</span> <span class="n">target</span> <span class="bp">&gt;&gt;=</span> <span class="n">is_prop</span><span class="o">,</span>
+  <span class="k">if</span> <span class="n">b</span> <span class="k">then</span> <span class="n">do</span>
+     <span class="n">field</span> <span class="err">←</span> <span class="n">get_current_field</span><span class="o">,</span>
+     <span class="n">trace</span> <span class="o">(</span><span class="n">to_string</span> <span class="n">field</span><span class="o">),</span>
+     <span class="n">intros</span><span class="o">,</span>
+     <span class="bp">`</span><span class="o">[</span><span class="n">casesm</span><span class="bp">*</span> <span class="n">option</span> <span class="bp">_</span><span class="o">],</span>
+     <span class="bp">`</span><span class="o">[</span><span class="n">all_goals</span> <span class="o">{</span> <span class="n">exact</span> <span class="n">congr_arg</span> <span class="n">some</span> <span class="o">(</span><span class="n">field</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">)</span> <span class="bp">&lt;|&gt;</span> <span class="n">exact</span> <span class="n">rfl</span> <span class="o">}]</span>
+  <span class="k">else</span> <span class="n">do</span> <span class="n">skip</span>
+</pre></div>
 
 #### [ Scott Morrison (Jun 11 2018 at 10:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20and%20wildcard%20pattern/near/127888806):
-Just arrived back from underwater. I've starred the proof you asked about, @Patrick, and will try out `obviously`. I suspect it requires more case bashing (on `option`) than obviously is by default willing to do.
+<p>Just arrived back from underwater. I've starred the proof you asked about, @Patrick, and will try out <code>obviously</code>. I suspect it requires more case bashing (on <code>option</code>) than obviously is by default willing to do.</p>
 
 
 {% endraw %}
