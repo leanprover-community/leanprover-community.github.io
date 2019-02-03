@@ -10,7 +10,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [card](81595card.html) (9 messages, latest: Feb 03 2019 at 12:23)
+* [card](81595card.html) (12 messages, latest: Feb 03 2019 at 20:44)
 
 * [digits](07525digits.html) (15 messages, latest: Feb 02 2019 at 15:31)
 
@@ -732,3 +732,5 @@ permalink: archive/116395maths/index.html
 
 * [hello](47413hello.html) (30 messages, latest: Apr 01 2018 at 16:37)
 
+
+{% include archive_update.html %}

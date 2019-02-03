@@ -19,6 +19,7 @@ json_root = Path("./_json")
 md_root = Path("archive")
 md_index = Path("index.md")
 html_root = Path("archive")
+last_updated_path = Path("_includes/archive_update.html")
 site_url = "https://leanprover-community.github.io/"
 stream_blacklist = ['rss', 'travis', 'announce']
 
@@ -63,6 +64,11 @@ def request_all(request):
     response['messages'] = msgs 
     return response
 
+def write_last_updated():
+    f = open(last_updated_path, 'w+')
+    f.write('<p>Last updated: {} UTC</p>'.format(datetime.utcfromtimestamp(time.time()).strftime('%b %d %Y at %H:%M %z')))
+    f.close()
+
 def populate_all():
     streams = safe_request(client.get_streams, [])['streams']
     ind = []
@@ -89,6 +95,7 @@ def populate_all():
         ind.append(nind)
     out = open_outfile(json_root, Path('stream_index.json'), 'w')
     json.dump(ind, out, ensure_ascii = False)
+    write_last_updated()
     out.close()
 
 ## Display
@@ -113,7 +120,7 @@ def write_topic(messages, stream_name, stream_id, topic_name, outfile):
         outfile.write(format_message(name, date, msg, link))
         outfile.write('\n\n')
 
-def write_topic_index(s): #(stream_name, topics):
+def write_topic_index(s):
     directory = md_root / Path(sanitize_stream(s['name'], s['id']))
     outfile = open_outfile(directory, md_index, 'w+')
     header = ("---\nlayout: page\ntitle: Lean Prover Zulip Chat Archive\npermalink: {2}/{1}/index.html\n---\n\n" + 
@@ -131,6 +138,7 @@ def write_topic_index(s): #(stream_name, topics):
             datetime.fromtimestamp(s['topic_data'][t['name']]['latest_date']).strftime('%b %d %Y at %H:%M'),
             '' if s['topic_data'][t['name']]['size'] == 1 else 's'
         ))
+    outfile.write('\n{% include archive_update.html %}')
     outfile.close()
 
 def write_stream_index(streams):
@@ -142,6 +150,7 @@ def write_stream_index(streams):
             sanitize_stream(s['name'], s['id']), 
             len(s['topics']),
             '' if len(s['topics']) == 1 else 's'))
+    outfile.write('\n{% include archive_update.html %}')
     outfile.close()
 
 def format_topic_header(stream, topic_name):

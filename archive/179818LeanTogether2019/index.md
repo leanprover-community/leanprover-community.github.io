@@ -72,3 +72,5 @@ permalink: archive/179818LeanTogether2019/index.html
 
 * [Further mathlib maintainers](36093Furthermathlibmaintainers.html) (5 messages, latest: Jan 05 2019 at 12:51)
 
+
+{% include archive_update.html %}

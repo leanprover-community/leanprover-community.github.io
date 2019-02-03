@@ -209,7 +209,16 @@ permalink: archive/113488general/45931IndexingZulip.html
 <p>(Also, I sorted the stream index page by number of topics, which should be about as stable and easier than number of messages.)</p>
 
 #### [ Rob Lewis (Feb 03 2019 at 18:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Indexing%20Zulip/near/157477309):
-<p>Also, I should check how Zulip sanitizes html. What happens if I write &lt;img src="this.png"&gt; ?</p>
+<p>Also, I should check how Zulip sanitizes html. What happens if I write &lt;img src="this.png"&gt; ? (Exactly what should happen, good.)</p>
+
+#### [ Sebastian Ullrich (Feb 03 2019 at 18:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Indexing%20Zulip/near/157477480):
+<p><span class="user-mention" data-user-id="110596">@Rob Lewis</span> Does <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base" target="_blank" title="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base"><code>&lt;base&gt;</code></a> help?</p>
+
+#### [ Rob Lewis (Feb 03 2019 at 19:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Indexing%20Zulip/near/157477558):
+<p>Oh, yes, that should help a lot!</p>
+
+#### [ Rob Lewis (Feb 03 2019 at 19:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Indexing%20Zulip/near/157478873):
+<p>Alright, I think it's looking good.</p>
 
 
 {% endraw %}

@@ -20,3 +20,5 @@ permalink: archive/index.html
 
 * [kbb](141825kbb/index.html) (13 topics)
 
+
+{% include archive_update.html %}
