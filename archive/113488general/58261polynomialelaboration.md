@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/58261polynomialelaboration.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [polynomial elaboration](58261polynomialelaboration.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [polynomial elaboration](https://leanprover-community.github.io/archive/113488general/58261polynomialelaboration.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Jan 29 2019 at 01:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/polynomial%20elaboration/near/157068793):
 <p>So why is polynomial elaboration slow and what can we do about it?</p>

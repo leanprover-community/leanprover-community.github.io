@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/08327darraytypechangingupdate.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [`d_array` type changing update](08327darraytypechangingupdate.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [`d_array` type changing update](https://leanprover-community.github.io/archive/113488general/08327darraytypechangingupdate.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Simon Hudon (Apr 26 2018 at 05:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60d_array%60%20type%20changing%20update/near/125705649):
 <p>In <code>data.array.basic</code>, there's an optimized mutation function:</p>

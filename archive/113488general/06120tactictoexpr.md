@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/06120tactictoexpr.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [tactic.to_expr](06120tactictoexpr.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [tactic.to_expr](https://leanprover-community.github.io/archive/113488general/06120tactictoexpr.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Edward Ayers (Dec 11 2018 at 18:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic.to_expr/near/151462345):
 <p>How can I get <code>tactic.to_expr</code> to not apply metavariables to implicit arguments? That is;</p>

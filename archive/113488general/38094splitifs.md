@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/38094splitifs.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [split_ifs](38094splitifs.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [split_ifs](https://leanprover-community.github.io/archive/113488general/38094splitifs.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Scott Morrison (Jun 04 2018 at 11:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/split_ifs/near/127536409):
 <p><span class="user-mention" data-user-id="110043">@Gabriel Ebner</span>, could we have <code>split_ifs</code> fail if there are no ifs to split? It's a trivial change, as in <a href="https://github.com/leanprover/mathlib/compare/master...semorrison:split_ifs?expand=1" target="_blank" title="https://github.com/leanprover/mathlib/compare/master...semorrison:split_ifs?expand=1">https://github.com/leanprover/mathlib/compare/master...semorrison:split_ifs?expand=1</a>.</p>

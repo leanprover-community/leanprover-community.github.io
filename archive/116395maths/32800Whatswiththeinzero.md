@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/32800Whatswiththeinzero.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [What's with the `_` in `zero_`?](32800Whatswiththeinzero.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [What's with the `_` in `zero_`?](https://leanprover-community.github.io/archive/116395maths/32800Whatswiththeinzero.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Oct 07 2018 at 01:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/What%27s%20with%20the%20%60_%60%20in%20%60zero_%60%3F/near/135330352):
 <p>I've seen this in a few places now:</p>

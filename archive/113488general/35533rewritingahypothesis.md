@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/35533rewritingahypothesis.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [rewriting a hypothesis](35533rewritingahypothesis.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [rewriting a hypothesis](https://leanprover-community.github.io/archive/113488general/35533rewritingahypothesis.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Johan Commelin (Apr 24 2018 at 09:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewriting%20a%20hypothesis/near/125608657):
 <p>This belongs in its own topic.<br>

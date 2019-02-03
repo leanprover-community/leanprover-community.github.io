@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/09702Completelatticeredundantparameter.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [Complete lattice redundant parameter](09702Completelatticeredundantparameter.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [Complete lattice redundant parameter](https://leanprover-community.github.io/archive/113488general/09702Completelatticeredundantparameter.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Mar 31 2018 at 08:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Complete%20lattice%20redundant%20parameter/near/124445675):
 <p>Isn't bot and top provable from supremum and infimum, respectively?</p>

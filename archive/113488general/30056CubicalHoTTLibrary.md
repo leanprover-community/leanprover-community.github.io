@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/30056CubicalHoTTLibrary.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [Cubical HoTT Library](30056CubicalHoTTLibrary.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [Cubical HoTT Library](https://leanprover-community.github.io/archive/113488general/30056CubicalHoTTLibrary.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Namdak Tonpa (Jan 07 2019 at 12:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Cubical%20HoTT%20Library/near/154560608):
 <p>Greetings to everybody! TWIMC, Ground Zero, cubical base library embedded into Lean 3.4.1: <a href="https://github.com/groupoid/lean" target="_blank" title="https://github.com/groupoid/lean">https://github.com/groupoid/lean</a></p>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/70079autoderivingdecidable.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [auto deriving decidable](70079autoderivingdecidable.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [auto deriving decidable](https://leanprover-community.github.io/archive/113488general/70079autoderivingdecidable.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Zesen Qian (Jun 20 2018 at 19:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/auto%20deriving%20decidable/near/128374348):
 <p>Is there some way to derive decidable instance from a inductive definition?</p>

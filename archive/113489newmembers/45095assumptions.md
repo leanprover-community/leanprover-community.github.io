@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/45095assumptions.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [assumptions](45095assumptions.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [assumptions](https://leanprover-community.github.io/archive/113489newmembers/45095assumptions.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Geoffrey Yeung (Jan 21 2019 at 21:11)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/assumptions/near/156558856):
 <p>is there something similar to <code>meta def assumptions : tactic unit := `[ repeat { assumption } ]</code> somewhere in the library?</p>

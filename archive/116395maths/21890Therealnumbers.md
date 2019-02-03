@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/21890Therealnumbers.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [The real numbers](21890Therealnumbers.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [The real numbers](https://leanprover-community.github.io/archive/116395maths/21890Therealnumbers.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (May 31 2018 at 00:07)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/The%20real%20numbers/near/127331937):
 <p>How are our real numbers getting along? Do we have the definition of a differentiable function yet, and of its derivative?</p>

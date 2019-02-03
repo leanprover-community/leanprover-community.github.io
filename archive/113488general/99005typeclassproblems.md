@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/99005typeclassproblems.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [typeclass problems](99005typeclassproblems.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [typeclass problems](https://leanprover-community.github.io/archive/113488general/99005typeclassproblems.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Jun 16 2018 at 00:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20problems/near/128143681):
 <p>This loop is breaking everything</p>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/01465Howtogetaquickoverviewofwhatsproved.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [How to get a quick overview of what's proved?](01465Howtogetaquickoverviewofwhatsproved.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [How to get a quick overview of what's proved?](https://leanprover-community.github.io/archive/113489newmembers/01465Howtogetaquickoverviewofwhatsproved.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Joseph Corneli (Jul 23 2018 at 14:27)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20get%20a%20quick%20overview%20of%20what%27s%20proved%3F/near/130145533):
 <p>Hi, I'm new to Lean.  Specifically, I'm working my way through Chapter 3 of  "Theorem Proving in Lean" at the moment, having also installed mathlib and and the <a href="https://github.com/ImperialCollegeLondon/xena-UROP-2018" target="_blank" title="https://github.com/ImperialCollegeLondon/xena-UROP-2018">xena-UROP-2018</a> work in progress.  Is there an efficient and meaningful way to get an overview of what has been proved in Lean to date?   I've run <code>find ./ | xargs grep "theorem"</code> in the <code>mathlib</code> directory, and adding a <code>grep -c "."</code> tells me roughly how many theorems have been proved, but the data is otherwise a bit hard to navigate.  It occurs to me that perhaps this question is most conveniently asked relative to some extrinsic knowledge base or bases, though something intrinsic, like the <a href="http://fcgp.sourceforge.net/" target="_blank" title="http://fcgp.sourceforge.net/">pictures of the Linux Kernel</a>, would also be interesting.   In addition to studying the TPiL book,  it's also nice to learn by reading the source.  I look forward to getting to the point where I can contribute!</p>

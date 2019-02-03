@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/19335module.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [module](19335module.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [module](https://leanprover-community.github.io/archive/116395maths/19335module.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Johan Commelin (Nov 23 2018 at 13:49)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/module/near/148227117):
 <p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> Shouldn't this be flipped, for consistency with <code>comp</code> and <code>llcomp</code>?</p>

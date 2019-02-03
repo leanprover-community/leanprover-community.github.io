@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/38425isleftidrwmystery.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [is_left_id rw mystery](38425isleftidrwmystery.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [is_left_id rw mystery](https://leanprover-community.github.io/archive/113488general/38425isleftidrwmystery.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Patrick Massot (Apr 23 2018 at 16:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is_left_id%20rw%20mystery/near/125570810):
 <div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">(</span><span class="n">op</span> <span class="n">nil</span> <span class="n">a</span><span class="o">)</span> <span class="o">[</span><span class="n">is_left_id</span> <span class="n">R</span> <span class="n">op</span> <span class="n">nil</span><span class="o">]</span> <span class="o">:</span> <span class="n">op</span> <span class="n">nil</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">a</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">rw</span> <span class="n">is_left_id</span><span class="bp">.</span><span class="n">left_id</span>

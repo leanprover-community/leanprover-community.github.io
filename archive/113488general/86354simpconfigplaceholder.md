@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/86354simpconfigplaceholder.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [simp_config placeholder](86354simpconfigplaceholder.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [simp_config placeholder](https://leanprover-community.github.io/archive/113488general/86354simpconfigplaceholder.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Sean Leather (Oct 01 2018 at 09:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp_config%20placeholder/near/134955856):
 <p>I just discovered this by accident:</p>

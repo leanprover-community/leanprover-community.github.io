@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/40789tokens.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [tokens](40789tokens.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [tokens](https://leanprover-community.github.io/archive/113488general/40789tokens.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Scott Morrison (Oct 08 2018 at 08:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tokens/near/135382507):
 <p>Does anyone know where the list of "registered tokens" is?</p>

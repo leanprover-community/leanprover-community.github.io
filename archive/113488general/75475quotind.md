@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/75475quotind.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [quot.ind](75475quotind.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [quot.ind](https://leanprover-community.github.io/archive/113488general/75475quotind.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Aug 01 2018 at 12:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quot.ind/near/130704193):
 <p>Am I right in thinking that <code>quot.ind</code> is logically equivalent to <code>function.surjective (quot.mk r)</code>? It's simply the universal property of a surjection. I am never 100% sure about these things because of computability or constructability or efficiency or whatever, but, assuming I've not made a slip, why do the CS guys choose <code>quot.ind</code> over the surjection statement? If beta were allowed to take values in Type then there would be some constructivity issues I guess, but because it's Prop aren't they exactly the same? Is it simply that <code>quot.ind</code> turns out to be more useful than the surjectivity statement in practice or is there something else going on?</p>

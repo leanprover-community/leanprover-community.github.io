@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/83055noaxioms.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [no axioms](83055noaxioms.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [no axioms](https://leanprover-community.github.io/archive/113488general/83055noaxioms.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Apr 28 2018 at 11:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/no%20axioms/near/125814400):
 <div class="codehilite"><pre><span></span><span class="kn">inductive</span> <span class="n">tower</span> <span class="o">:</span> <span class="n">set</span> <span class="o">(</span><span class="n">set</span> <span class="o">(</span><span class="n">set</span> <span class="n">α</span><span class="o">))</span>

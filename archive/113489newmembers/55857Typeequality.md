@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/55857Typeequality.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [Type equality](55857Typeequality.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [Type equality](https://leanprover-community.github.io/archive/113489newmembers/55857Typeequality.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Keeley Hoek (Nov 11 2018 at 14:46)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Type%20equality/near/147478097):
 <p>Is it possible to decide whether two types are equal?</p>

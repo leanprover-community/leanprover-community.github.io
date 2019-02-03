@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/74274Basicfinitegroups.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [Basic finite groups](74274Basicfinitegroups.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [Basic finite groups](https://leanprover-community.github.io/archive/116395maths/74274Basicfinitegroups.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Jul 27 2018 at 06:24)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Basic%20finite%20groups/near/130387854):
 <p>Do we have the symmetry group of order n!?</p>

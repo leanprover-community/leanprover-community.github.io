@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/23087boundedexistsdecidable.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [bounded exists decidable](23087boundedexistsdecidable.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [bounded exists decidable](https://leanprover-community.github.io/archive/113488general/23087boundedexistsdecidable.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Apr 23 2018 at 14:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bounded%20exists%20decidable/near/125567139):
 <div class="codehilite"><pre><span></span><span class="kn">instance</span> <span class="n">nat</span><span class="bp">.</span><span class="n">decidable_bexists_lt</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">nat</span><span class="o">)</span> <span class="o">(</span><span class="n">P</span> <span class="o">:</span> <span class="bp">Π</span> <span class="n">k</span> <span class="bp">&lt;</span> <span class="n">n</span><span class="o">,</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">:</span>

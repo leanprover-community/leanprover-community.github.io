@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/37571Simplequestionaboutonlinetutorialexample.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [Simple question about online tutorial example](37571Simplequestionaboutonlinetutorialexample.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [Simple question about online tutorial example](https://leanprover-community.github.io/archive/113488general/37571Simplequestionaboutonlinetutorialexample.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ M. Andrew Moshier (May 20 2018 at 06:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Simple%20question%20about%20online%20tutorial%20example/near/126819103):
 <p>The following from the online Lean tutorial (Lean 2) doesn't work as is in Lean 3. I figured out that I needed to change underscores in the tutorial into inaccessibles in the mutual theorem. Fine. But I still don't see how to prove <code>not_odd_zero</code>.</p>

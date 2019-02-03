@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/48864Deligneonunivalence.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [Deligne on univalence](48864Deligneonunivalence.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [Deligne on univalence](https://leanprover-community.github.io/archive/113488general/48864Deligneonunivalence.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Johan Commelin (Sep 09 2018 at 19:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Deligne%20on%20univalence/near/133618998):
 <p><a href="http://www.math.ias.edu/calendar/event/138368/1536679800/1536683400" target="_blank" title="http://www.math.ias.edu/calendar/event/138368/1536679800/1536683400">http://www.math.ias.edu/calendar/event/138368/1536679800/1536683400</a></p>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/47957awholenewerror.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [a whole new error](47957awholenewerror.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [a whole new error](https://leanprover-community.github.io/archive/113488general/47957awholenewerror.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Apr 21 2018 at 08:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/a%20whole%20new%20error/near/125483415):
 <div class="codehilite"><pre><span></span><span class="n">invalid</span> <span class="n">pattern</span><span class="o">,</span> <span class="err">&#39;</span><span class="n">choice</span> <span class="o">(</span><span class="n">frozen_name</span> <span class="n">multiset</span><span class="bp">.</span><span class="n">cons</span><span class="o">)</span> <span class="o">(</span><span class="n">frozen_name</span> <span class="n">list</span><span class="bp">.</span><span class="n">cons</span><span class="o">)</span><span class="err">&#39;</span> <span class="n">is</span> <span class="n">overloaded</span><span class="o">,</span> <span class="n">and</span> <span class="n">this</span> <span class="n">kind</span> <span class="n">of</span> <span class="n">overloading</span> <span class="n">is</span> <span class="n">not</span> <span class="n">currently</span> <span class="n">supported</span> <span class="k">in</span> <span class="n">patterns</span>

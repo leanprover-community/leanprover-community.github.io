@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/46161coercionandtoosimp.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [coercion and too simp](46161coercionandtoosimp.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [coercion and too simp](https://leanprover-community.github.io/archive/113488general/46161coercionandtoosimp.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Sean Leather (Jun 07 2018 at 10:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/coercion%20and%20too%20simp/near/127703649):
 <p>I keep running into the problem of <code>simp</code> reducing something to <code>p = ff</code> when I really want <code>¬↥p</code>. I then end up doing a <code>rw</code> explicitly, which is a pain. Is there any way to work around this issue with <code>simp</code>?</p>

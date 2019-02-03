@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/40322Rookiequestion.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [Rookie question](40322Rookiequestion.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [Rookie question](https://leanprover-community.github.io/archive/113488general/40322Rookiequestion.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Frank Mobler (May 22 2018 at 07:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Rookie%20question/near/126907865):
 <p>I'm stumped proving <code>example {V : Type}{n : V} : n ∈ ({n} : set V)</code>. Please without tactics first. I want to see how to construct proof terms explicitly for types like this.</p>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/28061Modulerefactor.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [Module refactor](28061Modulerefactor.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [Module refactor](https://leanprover-community.github.io/archive/113488general/28061Modulerefactor.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Jan 08 2019 at 15:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Module%20refactor/near/154648106):
 <p><a href="https://github.com/leanprover-community/mathlib/tree/module-refactor" target="_blank" title="https://github.com/leanprover-community/mathlib/tree/module-refactor">I have refactored modules in order to make it possible for a module to be based on two rings.</a> However, there is a small part in analysis/normed_space written by <span class="user-mention" data-user-id="110031">@Patrick Massot</span> and <span class="user-mention" data-user-id="110294">@Johannes Hölzl</span> which I do not know how to fix. I would be grateful if they could kindly offer their assistance.</p>

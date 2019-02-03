@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/88782declaringstructures.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [declaring structures](88782declaringstructures.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [declaring structures](https://leanprover-community.github.io/archive/113488general/88782declaringstructures.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Jakob von Raumer (Mar 10 2018 at 16:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/declaring%20structures/near/123537345):
 <p>Can I declare structures in the meta lang?</p>

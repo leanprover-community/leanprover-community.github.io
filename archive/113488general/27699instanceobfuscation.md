@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/27699instanceobfuscation.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [instance obfuscation](27699instanceobfuscation.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [instance obfuscation](https://leanprover-community.github.io/archive/113488general/27699instanceobfuscation.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Simon Hudon (Jan 30 2019 at 18:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/instance%20obfuscation/near/157203765):
 <p>Every now and then, I use <code>rw</code> and I get a type class resolution problem as a side condition. If I work with <code>traversable</code>, I get <code>traversable (λ x, t x)</code> as a side condition while <code>traversable t</code> is in my context. Is there a way to avoid that? Also, is there a reason why type class resolution does not perform eta reduction first?</p>

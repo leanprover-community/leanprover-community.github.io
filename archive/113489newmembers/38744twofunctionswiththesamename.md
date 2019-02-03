@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/38744twofunctionswiththesamename.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [two functions with the same name](38744twofunctionswiththesamename.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [two functions with the same name](https://leanprover-community.github.io/archive/113489newmembers/38744twofunctionswiththesamename.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Ali Sever (Aug 10 2018 at 12:22)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/two%20functions%20with%20the%20same%20name/near/131229114):
 <p>Is there a reason why lean doesn't let me make two functions with the same name? Even if they take different arguments?</p>

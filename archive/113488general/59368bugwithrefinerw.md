@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/59368bugwithrefinerw.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [bug with refine + rw](59368bugwithrefinerw.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [bug with refine + rw](https://leanprover-community.github.io/archive/113488general/59368bugwithrefinerw.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Dec 18 2018 at 09:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bug%20with%20refine%20%2B%20rw/near/152093977):
 <div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="o">(</span><span class="mi">0</span> <span class="bp">=</span> <span class="mi">0</span> <span class="bp">→</span> <span class="mi">0</span> <span class="bp">=</span> <span class="mi">1</span><span class="o">)</span> <span class="bp">→</span> <span class="n">true</span><span class="o">)</span> <span class="o">:</span> <span class="n">true</span> <span class="o">:=</span>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/70963Simplifyingnestedlambdaexpressions.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [Simplifying nested lambda expressions](70963Simplifyingnestedlambdaexpressions.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [Simplifying nested lambda expressions](https://leanprover-community.github.io/archive/113488general/70963Simplifyingnestedlambdaexpressions.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Ken Roe (Jan 12 2019 at 01:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Simplifying%20nested%20lambda%20expressions/near/154958159):
 <p>It appears that "simp" is not completely robust.  How do I get the following simplification to work?</p>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/144837PRreviews/17703536algebraovercommring.html
 ---
 
-## Stream: [PR reviews](index.html)
-### Topic: [#536 algebra over comm_ring](17703536algebraovercommring.html)
+## Stream: [PR reviews](https://leanprover-community.github.io/archive/144837PRreviews/index.html)
+### Topic: [#536 algebra over comm_ring](https://leanprover-community.github.io/archive/144837PRreviews/17703536algebraovercommring.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Jan 10 2019 at 12:13)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23536%20algebra%20over%20comm_ring/near/154831785):
 <p>Changed the target to <code>ring</code> not <code>comm_ring</code>.</p>

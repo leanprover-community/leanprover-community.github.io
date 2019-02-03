@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/82287simplistmapid.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [simp list.map id](82287simplistmapid.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [simp list.map id](https://leanprover-community.github.io/archive/113488general/82287simplistmapid.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Sean Leather (Sep 28 2018 at 10:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20list.map%20id/near/134810749):
 <p>Interesting that <code>simp</code> doesn't solve <code>list.map (λ t, t) l = l</code>.</p>

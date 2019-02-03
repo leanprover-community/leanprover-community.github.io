@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/58833computationalreflectionin3lines.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [computational reflection in 3 lines](58833computationalreflectionin3lines.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [computational reflection in 3 lines](https://leanprover-community.github.io/archive/113488general/58833computationalreflectionin3lines.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Mario Carneiro (Jun 25 2018 at 11:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computational%20reflection%20in%203%20lines/near/128590733):
 <p>I managed to write a mini <code>norm_num</code> using computational reflection in only a few basic tactics:</p>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/22304notationthatdoesnothing.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [notation that does nothing](22304notationthatdoesnothing.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [notation that does nothing](https://leanprover-community.github.io/archive/113488general/22304notationthatdoesnothing.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Johan Commelin (Nov 21 2018 at 13:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notation%20that%20does%20nothing/near/148107367):
 <p>I want something like this:</p>

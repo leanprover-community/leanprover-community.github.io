@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/88373simpdisplaymode.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [simp display mode](88373simpdisplaymode.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [simp display mode](https://leanprover-community.github.io/archive/113489newmembers/88373simpdisplaymode.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Andreas Swerdlow (Aug 06 2018 at 12:30)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/simp%20display%20mode/near/130969966):
 <p>Is there some way of getting lean to show what lemmas simp used in a particular line? I added an include in my file and suddenly a lot of my simps don't do what they used to. I want to be able to see which lemmas it is now having problems with.</p>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/49648foundationsofmathematics.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [foundations of mathematics](49648foundationsofmathematics.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [foundations of mathematics](https://leanprover-community.github.io/archive/116395maths/49648foundationsofmathematics.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Apr 10 2018 at 10:20)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/foundations%20of%20mathematics/near/124875861):
 <p>I spent some time over the last couple of days learning about Voevodsky's work in type theory. I found this paper <a href="https://arxiv.org/abs/1711.01477" target="_blank" title="https://arxiv.org/abs/1711.01477">https://arxiv.org/abs/1711.01477</a> by Dan Grayson quite illuminating.</p>

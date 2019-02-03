@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/91713Buildinglean2.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [Building lean2](91713Buildinglean2.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [Building lean2](https://leanprover-community.github.io/archive/113488general/91713Buildinglean2.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Ali Caglayan (Aug 01 2018 at 23:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Building%20lean2/near/130742054):
 <p>Is anyone able to build lean2 on their machine? I've tried twice already and its always failed. I am currently trying a third time. I am building on Ubuntu bionic</p>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/60254eraseduplicates.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [erase_duplicates](60254eraseduplicates.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [erase_duplicates](https://leanprover-community.github.io/archive/113489newmembers/60254eraseduplicates.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Keeley Hoek (Nov 24 2018 at 08:54)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/erase_duplicates/near/148267520):
 <p>Does mathlib have a function which erases list duplicates?</p>

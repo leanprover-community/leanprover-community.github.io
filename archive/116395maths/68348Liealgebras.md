@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/68348Liealgebras.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [Lie algebras](68348Liealgebras.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [Lie algebras](https://leanprover-community.github.io/archive/116395maths/68348Liealgebras.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Johan Commelin (Jun 13 2018 at 10:43)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Lie%20algebras/near/127997275):
 <p>I am completely stuck on the sorried definition. Is this just to ambitious at the moment?</p>

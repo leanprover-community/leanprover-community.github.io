@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/10407binarychoiceclass.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [binary choice class](10407binarychoiceclass.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [binary choice class](https://leanprover-community.github.io/archive/116395maths/10407binarychoiceclass.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Sean Leather (May 23 2018 at 11:21)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/binary%20choice%20class/near/126968229):
 <p>Any thoughts (e.g. name and possible location in mathlib) on this class and instances? It's useful for the <code>finset</code> <code>max</code>/<code>min</code> stuff.</p>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/64309DijkstrasalgorithminLean.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [Dijkstra's algorithm in Lean](64309DijkstrasalgorithminLean.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [Dijkstra's algorithm in Lean](https://leanprover-community.github.io/archive/113488general/64309DijkstrasalgorithminLean.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Dec 08 2018 at 17:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Dijkstra%27s%20algorithm%20in%20Lean/near/151183263):
 <p>One of my children was explaining Dijkstra's algorithm to me -- they are far more computer-sciency than I am. After some conversation I decided that they might be saying this:</p>

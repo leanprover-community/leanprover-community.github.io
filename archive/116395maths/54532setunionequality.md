@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/54532setunionequality.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [set union equality](54532setunionequality.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [set union equality](https://leanprover-community.github.io/archive/116395maths/54532setunionequality.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Apr 25 2018 at 20:00)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/set%20union%20equality/near/125683378):
 <p><code>example (X : Type) (R : Type) (D : R → set X) (γ : Type) (f : γ → R) :

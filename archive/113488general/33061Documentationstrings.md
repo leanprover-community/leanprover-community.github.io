@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/33061Documentationstrings.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [Documentation strings](33061Documentationstrings.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [Documentation strings](https://leanprover-community.github.io/archive/113488general/33061Documentationstrings.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Joe Hendrix (Aug 06 2018 at 22:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Documentation%20strings/near/131003087):
 <p>Is there a convention in Lean for attaching documentation to specific declarations as in Haddock or Javadoc?</p>

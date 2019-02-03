@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/12722zeroinsubring.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [zero in subring](12722zeroinsubring.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [zero in subring](https://leanprover-community.github.io/archive/116395maths/12722zeroinsubring.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Patrick Massot (Sep 18 2018 at 17:13)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/zero%20in%20subring/near/134172339):
 <p>I just added to the perfectoid project:</p>

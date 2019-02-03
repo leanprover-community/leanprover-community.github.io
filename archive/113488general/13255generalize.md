@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/13255generalize.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [generalize](13255generalize.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [generalize](https://leanprover-community.github.io/archive/113488general/13255generalize.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Apr 19 2018 at 11:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize/near/125297691):
 <p>Could someone build a tactic that allows us to generalize at hypotheses?</p>

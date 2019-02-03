@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/83865infixnotationprecedence.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [infix notation precedence](83865infixnotationprecedence.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [infix notation precedence](https://leanprover-community.github.io/archive/113488general/83865infixnotationprecedence.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Sean Leather (Jun 07 2018 at 15:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/infix%20notation%20precedence/near/127717979):
 <p>I want something that is effectively equivalent to this:</p>

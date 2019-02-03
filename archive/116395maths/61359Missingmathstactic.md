@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/61359Missingmathstactic.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [Missing maths tactic?](61359Missingmathstactic.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [Missing maths tactic?](https://leanprover-community.github.io/archive/116395maths/61359Missingmathstactic.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Nov 23 2018 at 22:39)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Missing%20maths%20tactic%3F/near/148250605):
 <p><code>example (a b c d : ℤ) (H : a - b = c * d) : b - a = c * (-d) := by simp [H] -- fails</code>.</p>

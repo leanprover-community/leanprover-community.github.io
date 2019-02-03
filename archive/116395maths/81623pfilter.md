@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/81623pfilter.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [pfilter](81623pfilter.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [pfilter](https://leanprover-community.github.io/archive/116395maths/81623pfilter.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Johannes Hölzl (Nov 08 2018 at 10:33)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/pfilter/near/147287895):
 <p>@Mario</p>

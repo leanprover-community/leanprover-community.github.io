@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/80721Whatsnewinmathlib.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [What's new in mathlib](80721Whatsnewinmathlib.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [What's new in mathlib](https://leanprover-community.github.io/archive/113488general/80721Whatsnewinmathlib.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Johan Commelin (Oct 02 2018 at 16:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%27s%20new%20in%20mathlib/near/135038239):
 <p>There is a thread in the <code>#maths</code> stream: <a href="#narrow/stream/116395-maths/subject/What's.20new.20in.20Lean.20maths.3F" title="#narrow/stream/116395-maths/subject/What's.20new.20in.20Lean.20maths.3F">https://leanprover.zulipchat.com/#narrow/stream/116395-maths/subject/What's.20new.20in.20Lean.20maths.3F</a><br>

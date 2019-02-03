@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/70542intcoenatmulisntnatcastmul.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [int.coe_nat_mul isn't nat.cast_mul](70542intcoenatmulisntnatcastmul.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [int.coe_nat_mul isn't nat.cast_mul](https://leanprover-community.github.io/archive/116395maths/70542intcoenatmulisntnatcastmul.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Aug 01 2018 at 00:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/int.coe_nat_mul%20isn%27t%20nat.cast_mul/near/130677240):
 <div class="codehilite"><pre><span></span><span class="bp">#</span><span class="kn">check</span> <span class="bp">@</span><span class="n">int</span><span class="bp">.</span><span class="n">coe_nat_mul</span> <span class="c1">-- int.coe_nat_mul : ∀ (m n : ℕ), ↑(m * n) = ↑m * ↑n -- this is in ℤ</span>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/73983Magicdotinplaceofproof.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [Magic dot in place of proof?](73983Magicdotinplaceofproof.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [Magic dot in place of proof?](https://leanprover-community.github.io/archive/113489newmembers/73983Magicdotinplaceofproof.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Mark Dickinson (Nov 05 2018 at 22:50)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Magic%20dot%20in%20place%20of%20proof%3F/near/146826913):
 <p>Looking through the standard library, I see this in <code>basic.lean</code>:</p>

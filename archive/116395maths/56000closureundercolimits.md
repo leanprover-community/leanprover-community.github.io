@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/56000closureundercolimits.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [closure under colimits](56000closureundercolimits.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [closure under colimits](https://leanprover-community.github.io/archive/116395maths/56000closureundercolimits.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Reid Barton (Dec 08 2018 at 06:53)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/closure%20under%20colimits/near/151163961):
 <p>Suppose C is a <code>category.{u v}</code> that <code>has_colimits</code> and I have a family A_i of objects of C indexed by a <code>Type v</code>. I also have (let's say for simplicity) a fixed J which is a <code>small_category.{v}</code>. I want to construct the closure of the objects A_i under colimits of shape J, as a new family also indexed on a <code>Type v</code>. Is it possible?</p>

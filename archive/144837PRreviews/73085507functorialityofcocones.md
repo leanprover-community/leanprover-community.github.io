@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/144837PRreviews/73085507functorialityofcocones.html
 ---
 
-## Stream: [PR reviews](index.html)
-### Topic: [#507 functoriality of (co)cones](73085507functorialityofcocones.html)
+## Stream: [PR reviews](https://leanprover-community.github.io/archive/144837PRreviews/index.html)
+### Topic: [#507 functoriality of (co)cones](https://leanprover-community.github.io/archive/144837PRreviews/73085507functorialityofcocones.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Johan Commelin (Dec 03 2018 at 12:51)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23507%20functoriality%20of%20%28co%29cones/near/150766258):
 <p>I just created PR <a href="https://github.com/leanprover/mathlib/issues/507" target="_blank" title="https://github.com/leanprover/mathlib/issues/507">#507</a>. This is something that I wanted to have for my work with presheaves. I don't know if I should expand things. Maybe it's better to keep things small. Feedback appreciated!</p>

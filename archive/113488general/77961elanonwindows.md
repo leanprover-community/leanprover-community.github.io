@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/77961elanonwindows.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [elan on windows](77961elanonwindows.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [elan on windows](https://leanprover-community.github.io/archive/113488general/77961elanonwindows.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Scott Morrison (Sep 26 2018 at 07:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elan%20on%20windows/near/134647268):
 <p><span class="user-mention" data-user-id="110024">@Sebastian Ullrich</span>,</p>

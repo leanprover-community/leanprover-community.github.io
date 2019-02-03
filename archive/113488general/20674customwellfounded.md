@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/20674customwellfounded.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [custom well-founded](20674customwellfounded.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [custom well-founded](https://leanprover-community.github.io/archive/113488general/20674customwellfounded.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Apr 19 2018 at 07:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/custom%20well-founded/near/125289818):
 <div class="codehilite"><pre><span></span><span class="kn">inductive</span> <span class="n">red</span><span class="bp">.</span><span class="n">step</span> <span class="o">:</span> <span class="n">list</span> <span class="o">(</span><span class="n">α</span> <span class="bp">×</span> <span class="n">bool</span><span class="o">)</span> <span class="bp">→</span> <span class="n">list</span> <span class="o">(</span><span class="n">α</span> <span class="bp">×</span> <span class="n">bool</span><span class="o">)</span> <span class="bp">→</span> <span class="kt">Prop</span>

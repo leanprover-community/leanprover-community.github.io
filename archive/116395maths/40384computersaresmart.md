@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/40384computersaresmart.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [computers are smart??](40384computersaresmart.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [computers are smart??](https://leanprover-community.github.io/archive/116395maths/40384computersaresmart.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Reid Barton (Jun 04 2018 at 17:08)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/computers%20are%20smart%3F%3F/near/127549305):
 <p>So I was going along constructing coequalizers in Top, like you do. A coequalizer is a kind of quotient, so I needed to prove that if <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>Z</mi></mrow><annotation encoding="application/x-tex">Z</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.68333em;vertical-align:0em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.07153em;">Z</span></span></span></span> is the quotient of <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>Y</mi></mrow><annotation encoding="application/x-tex">Y</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.68333em;vertical-align:0em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.22222em;">Y</span></span></span></span> by a relation, then the quotient map <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>Y</mi><mo>→</mo><mi>Z</mi></mrow><annotation encoding="application/x-tex">Y \to Z</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.68333em;vertical-align:0em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.22222em;">Y</span><span class="mrel">→</span><span class="mord mathit" style="margin-right:0.07153em;">Z</span></span></span></span> is continuous, so that it's a morphism in Top.<br>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/76230withoutlossofadvertisement.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [without loss of advertisement](76230withoutlossofadvertisement.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [without loss of advertisement](https://leanprover-community.github.io/archive/113488general/76230withoutlossofadvertisement.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Patrick Massot (Apr 21 2018 at 13:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/without%20loss%20of%20advertisement/near/125491146):
 <p>Let me share my joy of using <span class="user-mention" data-user-id="110026">@Simon Hudon</span> recent contributions (not yet merged, see <a href="https://github.com/PatrickMassot/mathlib/tree/wlog_ext" target="_blank" title="https://github.com/PatrickMassot/mathlib/tree/wlog_ext">https://github.com/PatrickMassot/mathlib/tree/wlog_ext</a> for a version including both relevant PR if you want to play with it).</p>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/78526decidingifreflwouldwork.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [deciding if `refl` would work](78526decidingifreflwouldwork.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [deciding if `refl` would work](https://leanprover-community.github.io/archive/113488general/78526decidingifreflwouldwork.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Scott Morrison (Apr 22 2018 at 13:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deciding%20if%20%60refl%60%20would%20work/near/125526321):
 <p>I have <code>lhs rhs : expr</code>, and I would like to know, if the goal were to be <code>lhs = rhs</code>,  whether or not <code>refl</code> would succeed. I could temporarily make the goal actually <code>lhs = rhs</code>, and try <code>refl</code>, but I'm wondering if it can be done directly.</p>

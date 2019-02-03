@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/53478naturalnumberhell.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [natural number hell](53478naturalnumberhell.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [natural number hell](https://leanprover-community.github.io/archive/113488general/53478naturalnumberhell.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Patrick Massot (May 15 2018 at 09:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/natural%20number%20hell/near/126580412):
 <p>I want to use <code>big.map</code> once I have the <code>map</code></p>

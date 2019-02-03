@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/77831gettingconfusedbyabstract.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [getting confused by 'abstract'](77831gettingconfusedbyabstract.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [getting confused by 'abstract'](https://leanprover-community.github.io/archive/113488general/77831gettingconfusedbyabstract.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Scott Morrison (Jun 16 2018 at 12:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/getting%20confused%20by%20%27abstract%27/near/128164505):
 <p>I'm really confused by <code>abstract</code>. I've used it successfully in the past, but tonight it just won't do anything for me.  Can anyone see what's wrong with this:</p>

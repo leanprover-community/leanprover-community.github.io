@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/79342assumptionsinbigoperators.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [assumptions in big_operators](79342assumptionsinbigoperators.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [assumptions in big_operators](https://leanprover-community.github.io/archive/113488general/79342assumptionsinbigoperators.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Johan Commelin (Oct 02 2018 at 15:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/assumptions%20in%20big_operators/near/135034421):
 <p>I was browsing through big_operators and found:</p>

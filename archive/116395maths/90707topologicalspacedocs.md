@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/90707topologicalspacedocs.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [topological space docs](90707topologicalspacedocs.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [topological space docs](https://leanprover-community.github.io/archive/116395maths/90707topologicalspacedocs.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Apr 14 2018 at 23:09)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/topological%20space%20docs/near/125088079):
 <p>Ok so after a ropey start (see my heq thread earlier) I made it through the <code>topological_space.lean</code> file today and wrote some docs on it: <a href="https://github.com/kbuzzard/mathlib/blob/docs-topspaces/docs/theories/topological_spaces.md" target="_blank" title="https://github.com/kbuzzard/mathlib/blob/docs-topspaces/docs/theories/topological_spaces.md">https://github.com/kbuzzard/mathlib/blob/docs-topspaces/docs/theories/topological_spaces.md</a> . I needed to read this file for my work on schemes -- in particular I had to finally understand what a filter was and what they had to do with topological spaces.</p>

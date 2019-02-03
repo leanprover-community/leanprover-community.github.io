@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/93323Iaccidentallychangedacorefile.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [I accidentally changed a core file](93323Iaccidentallychangedacorefile.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [I accidentally changed a core file](https://leanprover-community.github.io/archive/113488general/93323Iaccidentallychangedacorefile.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Sep 06 2018 at 16:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/I%20accidentally%20changed%20a%20core%20file/near/133444111):
 <p>I accidentally changed a core file and everything is now shit. I honestly don't know what to do.</p>

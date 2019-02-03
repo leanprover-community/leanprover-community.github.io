@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/99039Tacticasmacro.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [Tactic as macro](99039Tacticasmacro.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [Tactic as macro](https://leanprover-community.github.io/archive/113488general/99039Tacticasmacro.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Nima (Apr 24 2018 at 16:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Tactic%20as%20macro/near/125622203):
 <p>Is there anyway I can define a tactic (or something local to a proof) that does a fixed number of steps, so I would not need to repeat the whole thing multiple times? For example, a tactic or local definition name <code>finish_it</code> that does the following:</p>

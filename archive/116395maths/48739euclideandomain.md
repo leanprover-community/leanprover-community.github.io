@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/48739euclideandomain.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [euclidean domain](48739euclideandomain.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [euclidean domain](https://leanprover-community.github.io/archive/116395maths/48739euclideandomain.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Johan Commelin (Nov 15 2018 at 14:53)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/euclidean%20domain/near/147742225):
 <p>Euclidean domains are extending integral domains, but the entire file doesn't use this. We could just as well extend <code>comm_ring</code>. <span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> Do you know if every <em>Euclidean ring</em> is automatically an integral domain?</p>

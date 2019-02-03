@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/10802namingforsubsingletons.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [naming for subsingletons](10802namingforsubsingletons.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [naming for subsingletons](https://leanprover-community.github.io/archive/113488general/10802namingforsubsingletons.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Reid Barton (Aug 23 2018 at 18:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/naming%20for%20subsingletons/near/132646423):
 <p>Does mathlib have a naming convention for types which are subsingletons? <code>is_*</code> suggests a Prop</p>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/48283stuckongeneralisingfinsupptomodule.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [stuck on generalising finsupp.to_module](48283stuckongeneralisingfinsupptomodule.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [stuck on generalising finsupp.to_module](https://leanprover-community.github.io/archive/116395maths/48283stuckongeneralisingfinsupptomodule.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Johan Commelin (May 28 2018 at 13:35)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/stuck%20on%20generalising%20finsupp.to_module/near/127201824):
 <p>I really don't see why I'm getting stuck here. See the two comment lines just after the first <code>sorry</code>.</p>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/49854Lambdacalculus.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [Lambda calculus](49854Lambdacalculus.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [Lambda calculus](https://leanprover-community.github.io/archive/113488general/49854Lambdacalculus.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Alexander Bentkamp (Dec 17 2018 at 12:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lambda%20calculus/near/152020148):
 <p>Hello,<br>

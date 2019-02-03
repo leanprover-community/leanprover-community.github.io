@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/85855poormanshintdatabase.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [poor man's hint database](85855poormanshintdatabase.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [poor man's hint database](https://leanprover-community.github.io/archive/113488general/85855poormanshintdatabase.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Moses Schönfinkel (Nov 19 2018 at 09:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/poor%20man%27s%20hint%20database/near/147951801):
 <p>Is there a way to simulate Coq's hint database? For example, I often find myself writing <code>simp [x₁, x₂, x₃, x₄]</code>, which I would like to replace with <code>simp [x_lemmas]</code> where <code>x_lemmas</code> is a sort of a "hint database" for lack of better term. (Do note that I don't want to designate <code>xₙ</code> to be simp lemmas.)</p>

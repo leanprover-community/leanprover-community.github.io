@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/179818LeanTogether2019/51967MetaprogrammingTutorial.html
 ---
 
-## Stream: [Lean Together 2019](index.html)
-### Topic: [Metaprogramming Tutorial](51967MetaprogrammingTutorial.html)
+## Stream: [Lean Together 2019](https://leanprover-community.github.io/archive/179818LeanTogether2019/index.html)
+### Topic: [Metaprogramming Tutorial](https://leanprover-community.github.io/archive/179818LeanTogether2019/51967MetaprogrammingTutorial.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Simon Hudon (Jan 10 2019 at 17:58)](https://leanprover.zulipchat.com/#narrow/stream/179818-Lean%20Together%202019/topic/Metaprogramming%20Tutorial/near/154853961):
 <p>Here is the source file I built up during the tutorial yesterday:<br>

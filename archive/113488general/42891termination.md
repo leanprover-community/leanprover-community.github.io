@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/42891termination.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [termination](42891termination.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [termination](https://leanprover-community.github.io/archive/113488general/42891termination.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ petercommand (Nov 23 2018 at 03:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/termination/near/148203856):
 <p><a href="https://gist.github.com/petercommand/91e72613af95bde16baadf484abd1368" target="_blank" title="https://gist.github.com/petercommand/91e72613af95bde16baadf484abd1368">https://gist.github.com/petercommand/91e72613af95bde16baadf484abd1368</a><br>

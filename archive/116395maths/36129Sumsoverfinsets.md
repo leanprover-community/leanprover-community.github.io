@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/36129Sumsoverfinsets.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [Sums over finsets](36129Sumsoverfinsets.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [Sums over finsets](https://leanprover-community.github.io/archive/116395maths/36129Sumsoverfinsets.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Johan Commelin (May 22 2018 at 16:09)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Sums%20over%20finsets/near/126924811):
 <p>I'm stuck on the following triviality</p>

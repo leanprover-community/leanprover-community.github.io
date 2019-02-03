@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/144837PRreviews/94461SmallandstraightforwardPRs.html
 ---
 
-## Stream: [PR reviews](index.html)
-### Topic: [Small and straightforward PRs](94461SmallandstraightforwardPRs.html)
+## Stream: [PR reviews](https://leanprover-community.github.io/archive/144837PRreviews/index.html)
+### Topic: [Small and straightforward PRs](https://leanprover-community.github.io/archive/144837PRreviews/94461SmallandstraightforwardPRs.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Johan Commelin (Dec 20 2018 at 09:16)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/Small%20and%20straightforward%20PRs/near/152240964):
 <p><a href="https://github.com/leanprover/mathlib/issues/531" target="_blank" title="https://github.com/leanprover/mathlib/issues/531">#531</a> — <em>feat(data/int/basic) int.cast is ring hom</em> [changes 1 file, +4 lines]<br>

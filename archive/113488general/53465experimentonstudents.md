@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/53465experimentonstudents.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [experiment on students](53465experimentonstudents.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [experiment on students](https://leanprover-community.github.io/archive/113488general/53465experimentonstudents.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Patrick Massot (Jun 04 2018 at 17:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/experiment%20on%20students/near/127550815):
 <p>Like Kevin, I decided to jump the gun and teach students how to write crappy Lean code like professional mathematicians. This morning I showed Lean to the head of the Maths-CS double major program at Orsay. She was very excited and I will probably get about twenty first year undergraduate students to experiment on during the spring semester next year.</p>

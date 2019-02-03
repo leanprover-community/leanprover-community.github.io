@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/60592computablemin.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [computable_min](60592computablemin.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [computable_min](https://leanprover-community.github.io/archive/113488general/60592computablemin.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Jul 28 2018 at 17:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computable_min/near/130473379):
 <p>I think we should have a typeclass <code>computable_min</code></p>

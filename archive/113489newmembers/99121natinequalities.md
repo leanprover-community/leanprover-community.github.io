@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/99121natinequalities.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [nat inequalities](99121natinequalities.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [nat inequalities](https://leanprover-community.github.io/archive/113489newmembers/99121natinequalities.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Scott Olson (Sep 25 2018 at 14:30)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/nat%20inequalities/near/134592941):
 <p>What is the most efficient way to solve situations like this? I get a bit lost in all the details of lt, le, negations, and symmetries...</p>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/00627groupsactingonsets.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [groups acting on sets](00627groupsactingonsets.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [groups acting on sets](https://leanprover-community.github.io/archive/116395maths/00627groupsactingonsets.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Jan 31 2019 at 16:42)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/groups%20acting%20on%20sets/near/157280679):
 <p>Did we ever get groups acting on sets? [or even monoids acting on sets?]. The reason I ask is that I just tried to define groups acting on abelian groups and I realised I can't use <code>*</code> because the action is <code>G -&gt; M -&gt; M</code>. Has a decision been made about notation for groups acting on anything other than themselves?</p>

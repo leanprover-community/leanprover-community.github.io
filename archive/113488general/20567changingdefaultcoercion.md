@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/20567changingdefaultcoercion.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [changing default coercion](20567changingdefaultcoercion.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [changing default coercion](https://leanprover-community.github.io/archive/113488general/20567changingdefaultcoercion.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Chris Hughes (Apr 20 2018 at 18:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/changing%20default%20coercion/near/125456190):
 <p>I've just defined the integers mod n, and since they are a <code>comm_ring</code> there is a default coercion from <code>int</code>. However rather than using the default coercion, it would be nicer to have <code>quotient.mk</code> as the coercion. Is there a way to change this?</p>

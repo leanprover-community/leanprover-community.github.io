@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/30944Binomialtheorem.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [Binomial theorem](30944Binomialtheorem.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [Binomial theorem](https://leanprover-community.github.io/archive/116395maths/30944Binomialtheorem.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Nicholas Scheel (Jun 08 2018 at 21:07)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Binomial%20theorem/near/127788179):
 <p>Hey! I proved the binomial theorem, if anyone finds it interesting its in a gist here: <a href="https://gist.github.com/MonoidMusician/ad43301ee3b4e71c0e1c3d440c6898c5" target="_blank" title="https://gist.github.com/MonoidMusician/ad43301ee3b4e71c0e1c3d440c6898c5">https://gist.github.com/MonoidMusician/ad43301ee3b4e71c0e1c3d440c6898c5</a></p>

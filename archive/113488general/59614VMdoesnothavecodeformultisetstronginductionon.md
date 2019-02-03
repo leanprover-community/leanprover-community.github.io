@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/59614VMdoesnothavecodeformultisetstronginductionon.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [VM does not have code for 'multiset.strong_induction_on'](59614VMdoesnothavecodeformultisetstronginductionon.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [VM does not have code for 'multiset.strong_induction_on'](https://leanprover-community.github.io/archive/113488general/59614VMdoesnothavecodeformultisetstronginductionon.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Jul 08 2018 at 20:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/VM%20does%20not%20have%20code%20for%20%27multiset.strong_induction_on%27/near/129309672):
 <p>What's happening here? I'm defining a map from <code>multiset nat</code> to <code>nat</code> :</p>

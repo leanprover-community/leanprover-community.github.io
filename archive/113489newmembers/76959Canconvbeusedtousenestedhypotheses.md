@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/76959Canconvbeusedtousenestedhypotheses.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [Can conv be used to use nested hypotheses?](76959Canconvbeusedtousenestedhypotheses.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [Can conv be used to use nested hypotheses?](https://leanprover-community.github.io/archive/113489newmembers/76959Canconvbeusedtousenestedhypotheses.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Abhimanyu Pallavi Sudhir (Dec 04 2018 at 23:27)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Can%20conv%20be%20used%20to%20use%20nested%20hypotheses%3F/near/150884801):
 <p>The situation is as follows: I have a proof of:</p>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/90057Floatingpointarithmetic.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [Floating point arithmetic](90057Floatingpointarithmetic.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [Floating point arithmetic](https://leanprover-community.github.io/archive/113488general/90057Floatingpointarithmetic.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Scott Morrison (Apr 13 2018 at 01:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Floating%20point%20arithmetic/near/125010724):
 <p>A student here has a lovely suggestion for a simple application of machine learning to automation. I’d love to try implementing it with her, but quickly realised that we’d need to do floating point arithmetic (just some gradient descent problems, so essentially inverting numerical matrices).</p>

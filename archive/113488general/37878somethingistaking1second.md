@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/37878somethingistaking1second.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [something is taking 1 second](37878somethingistaking1second.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [something is taking 1 second](https://leanprover-community.github.io/archive/113488general/37878somethingistaking1second.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Jul 23 2018 at 15:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/something%20is%20taking%201%20second/near/130147638):
 <div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">linear_algebra</span><span class="bp">.</span><span class="n">multivariate_polynomial</span>

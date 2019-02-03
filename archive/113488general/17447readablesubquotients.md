@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/17447readablesubquotients.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [readable subquotients](17447readablesubquotients.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [readable subquotients](https://leanprover-community.github.io/archive/113488general/17447readablesubquotients.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Johan Commelin (Oct 01 2018 at 15:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/readable%20subquotients/near/134968883):
 <p>So, let me return to my original question.</p>

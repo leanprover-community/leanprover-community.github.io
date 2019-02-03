@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/93453nonexhaustiveformeta.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [non-exhaustive for meta](93453nonexhaustiveformeta.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [non-exhaustive for meta](https://leanprover-community.github.io/archive/113488general/93453nonexhaustiveformeta.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Zesen Qian (Jul 09 2018 at 22:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/non-exhaustive%20for%20meta/near/129371844):
 <p>If we allow non-termination at meta level, shouldn't we also allow non-exhaustive match?</p>

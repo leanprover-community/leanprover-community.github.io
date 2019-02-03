@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/16178oppositecategory.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [opposite category](16178oppositecategory.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [opposite category](https://leanprover-community.github.io/archive/116395maths/16178oppositecategory.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Reid Barton (Nov 05 2018 at 13:37)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/opposite%20category/near/146792371):
 <blockquote>

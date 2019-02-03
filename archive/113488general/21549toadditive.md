@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/21549toadditive.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [to_additive](21549toadditive.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [to_additive](https://leanprover-community.github.io/archive/113488general/21549toadditive.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Patrick Massot (Oct 10 2018 at 16:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/to_additive/near/135545903):
 <p>Is there any hope <code>to_additive</code> could be improved to avoid things like <a href="https://github.com/leanprover/mathlib/blob/2594f48f20392f84b0743eb0867c030913eca627/group_theory/quotient_group.lean#L40-L47" target="_blank" title="https://github.com/leanprover/mathlib/blob/2594f48f20392f84b0743eb0867c030913eca627/group_theory/quotient_group.lean#L40-L47">https://github.com/leanprover/mathlib/blob/2594f48f20392f84b0743eb0867c030913eca627/group_theory/quotient_group.lean#L40-L47</a>?</p>

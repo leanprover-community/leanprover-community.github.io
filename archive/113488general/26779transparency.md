@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/26779transparency.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [transparency](26779transparency.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [transparency](https://leanprover-community.github.io/archive/113488general/26779transparency.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Edward Ayers (Aug 21 2018 at 14:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/transparency/near/132514588):
 <p>In <code>tactic.meta</code> there is a definition called <code>transparency</code>:</p>

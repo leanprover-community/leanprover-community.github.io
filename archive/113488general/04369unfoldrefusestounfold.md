@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/04369unfoldrefusestounfold.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [`unfold` refuses to unfold](04369unfoldrefusestounfold.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [`unfold` refuses to unfold](https://leanprover-community.github.io/archive/113488general/04369unfoldrefusestounfold.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Arseniy Alekseyev (May 12 2018 at 21:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60unfold%60%20refuses%20to%20unfold/near/126471033):
 <p>Here <code>t2_to_t1</code> is fully applied to a constructor, but lean still refuses to unfold/reduce. How so?</p>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/33035oldstructurecmdinstructureliterals.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [old_structure_cmd in structure literals](33035oldstructurecmdinstructureliterals.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [old_structure_cmd in structure literals](https://leanprover-community.github.io/archive/113488general/33035oldstructurecmdinstructureliterals.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Mario Carneiro (Nov 05 2018 at 21:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/old_structure_cmd%20in%20structure%20literals/near/146821394):
 <p>Here's a strange discovery:</p>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/47494deletingvariables.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [deleting variables](47494deletingvariables.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [deleting variables](https://leanprover-community.github.io/archive/113488general/47494deletingvariables.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Reid Barton (Jun 03 2018 at 03:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deleting%20variables/near/127485299):
 <p>Is it possible to delete something that has been declared using <code>variables</code>? (I want to "upgrade" an instance variable to a class which extends the original one.)</p>

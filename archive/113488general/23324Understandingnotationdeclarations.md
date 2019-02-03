@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/23324Understandingnotationdeclarations.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [Understanding notation declarations](23324Understandingnotationdeclarations.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [Understanding notation declarations](https://leanprover-community.github.io/archive/113488general/23324Understandingnotationdeclarations.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Brendan Seamas Murphy (Mar 04 2018 at 03:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Understanding%20notation%20declarations/near/123248290):
 <p>Hi all! I'm kind of confused about how notation works. I have a setup like this:</p>

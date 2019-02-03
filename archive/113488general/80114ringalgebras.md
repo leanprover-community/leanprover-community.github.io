@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/80114ringalgebras.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [ring algebras](80114ringalgebras.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [ring algebras](https://leanprover-community.github.io/archive/113488general/80114ringalgebras.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Sep 04 2018 at 10:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/ring%20algebras/near/133299335):
 <p>This problem has come up several times in this year, and I decided it's time to face it instead of to avoid it. This is the definition of an algebra over a commutative ring:</p>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/83688syntax.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [syntax](83688syntax.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [syntax](https://leanprover-community.github.io/archive/113488general/83688syntax.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Reid Barton (Jun 04 2018 at 15:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/syntax/near/127544480):
 <p>Fun fact: <code>notation</code> applies even in <code>namespace</code> commands, so if you write <code>notation `foo` := bar</code> and then <code>namespace foo</code> it means <code>namespace bar</code></p>

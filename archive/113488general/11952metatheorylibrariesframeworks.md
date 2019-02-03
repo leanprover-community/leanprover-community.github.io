@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/11952metatheorylibrariesframeworks.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [metatheory libraries/frameworks](11952metatheorylibrariesframeworks.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [metatheory libraries/frameworks](https://leanprover-community.github.io/archive/113488general/11952metatheorylibrariesframeworks.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Brendan Zabarauskas (May 17 2018 at 06:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/metatheory%20libraries/frameworks/near/126680432):
 <p>Hello, I was wondering if anybody was working on libraries/frameworks for making defining metatheory stuff in Lean easier. I'm thinking like LN for Coq: <a href="http://www.chargueraud.org/softs/ln/" target="_blank" title="http://www.chargueraud.org/softs/ln/">http://www.chargueraud.org/softs/ln/</a> - Context is that I'd like to prove some properties about my language Pikelet. See this issue: <a href="https://github.com/brendanzab/pikelet/issues/39" target="_blank" title="https://github.com/brendanzab/pikelet/issues/39">https://github.com/brendanzab/pikelet/issues/39</a></p>

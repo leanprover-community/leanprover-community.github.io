@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/19144intorder.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [int order](19144intorder.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [int order](https://leanprover-community.github.io/archive/113488general/19144intorder.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Patrick Massot (Sep 13 2018 at 16:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/int%20order/near/133888086):
 <p>Why is most of <a href="https://github.com/leanprover/mathlib/blob/master/data/int/order.lean" target="_blank" title="https://github.com/leanprover/mathlib/blob/master/data/int/order.lean">https://github.com/leanprover/mathlib/blob/master/data/int/order.lean</a> commented out? Do we have these theorems elsewhere?</p>

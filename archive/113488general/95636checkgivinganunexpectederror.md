@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/95636checkgivinganunexpectederror.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [#check giving an unexpected error](95636checkgivinganunexpectederror.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [#check giving an unexpected error](https://leanprover-community.github.io/archive/113488general/95636checkgivinganunexpectederror.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ M. Andrew Moshier (Apr 27 2018 at 08:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%23check%20giving%20an%20unexpected%20error/near/125761013):
 <p>This example illustrates behavior I am not able to explain. #check gives expected answers for sub-expressions, but not for <code>G.arr A B</code> unless I explicitly decorate <code>G.arr</code> with its type. But the example shows that #check already correctly inferred the type.</p>

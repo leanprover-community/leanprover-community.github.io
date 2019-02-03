@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/56858orderofzmodn.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [order of zmod n](56858orderofzmodn.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [order of zmod n](https://leanprover-community.github.io/archive/116395maths/56858orderofzmodn.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Guy Leroy (Aug 02 2018 at 12:40)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/order%20of%20zmod%20n/near/130770849):
 <p>Hi, I'm trying to find the order of zmod n.<br>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/43765typeclassissues.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [type class issues](43765typeclassissues.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [type class issues](https://leanprover-community.github.io/archive/113488general/43765typeclassissues.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Johan Commelin (Nov 14 2018 at 20:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20issues/near/147694692):
 <p>This is amazing: <a href="https://gist.githubusercontent.com/jcommelin/8736c28a8e74f3d478b1c2b7737fa513/raw/d655018af064ef75572afb17d2ffb7d051c500c0/crazy_type_class_error.lean" target="_blank" title="https://gist.githubusercontent.com/jcommelin/8736c28a8e74f3d478b1c2b7737fa513/raw/d655018af064ef75572afb17d2ffb7d051c500c0/crazy_type_class_error.lean">https://gist.githubusercontent.com/jcommelin/8736c28a8e74f3d478b1c2b7737fa513/raw/d655018af064ef75572afb17d2ffb7d051c500c0/crazy_type_class_error.lean</a><br>

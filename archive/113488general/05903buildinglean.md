@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/05903buildinglean.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [building lean](05903buildinglean.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [building lean](https://leanprover-community.github.io/archive/113488general/05903buildinglean.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Scott Morrison (Apr 04 2018 at 06:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/building%20lean/near/124608405):
 <p>I've just updated the OS X command line tools, I get a million warnings when trying to build Lean:</p>

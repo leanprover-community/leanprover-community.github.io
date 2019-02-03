@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/63156DependentlyTypedFoldsforNestedDataTypes.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [Dependently Typed Folds for Nested Data Types](63156DependentlyTypedFoldsforNestedDataTypes.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [Dependently Typed Folds for Nested Data Types](https://leanprover-community.github.io/archive/113488general/63156DependentlyTypedFoldsforNestedDataTypes.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Sean Leather (Jul 05 2018 at 15:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Dependently%20Typed%20Folds%20for%20Nested%20Data%20Types/near/129137513):
 <p><span class="user-mention" data-user-id="110024">@Sebastian Ullrich</span> <a href="#narrow/stream/113488-general/subject/cases/near/126323093" title="#narrow/stream/113488-general/subject/cases/near/126323093">wrote</a>:</p>

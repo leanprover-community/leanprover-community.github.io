@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/29368ConstructionofAlgebraicClosure.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [Construction of Algebraic Closure](29368ConstructionofAlgebraicClosure.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [Construction of Algebraic Closure](https://leanprover-community.github.io/archive/116395maths/29368ConstructionofAlgebraicClosure.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (May 29 2018 at 20:03)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Construction%20of%20Algebraic%20Closure/near/127264707):
 <p>I saw many constructions of the algebraic closure of a field <strong>k</strong> using direct limit, but I have a different construction in mind:<br>

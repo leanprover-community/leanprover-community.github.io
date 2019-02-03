@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/56392Usingrewritetosimplifyaboundvariableexpression.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [Using rewrite to simplify a bound variable expression](56392Usingrewritetosimplifyaboundvariableexpression.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [Using rewrite to simplify a bound variable expression](https://leanprover-community.github.io/archive/113489newmembers/56392Usingrewritetosimplifyaboundvariableexpression.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Ken Roe (Aug 06 2018 at 02:36)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20rewrite%20to%20simplify%20a%20bound%20variable%20expression/near/130950190):
 <div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">fsimp3</span> <span class="o">{</span> <span class="n">x</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="o">}</span> <span class="o">:</span> <span class="n">x</span><span class="bp">=</span><span class="mi">0</span> <span class="bp">→</span> <span class="n">f</span> <span class="n">x</span> <span class="bp">=</span> <span class="mi">1</span> <span class="o">:=</span>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/39139Unabletounfold.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [Unable to unfold](39139Unabletounfold.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [Unable to unfold](https://leanprover-community.github.io/archive/113489newmembers/39139Unabletounfold.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ AHan (Nov 02 2018 at 05:24)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Unable%20to%20unfold/near/136968269):
 <p>I'm trying to prove the prime field addition that I defined is correct,  but somehow I can't unfold the equation...<br>

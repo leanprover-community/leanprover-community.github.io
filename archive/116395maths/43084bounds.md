@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/43084bounds.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [bounds](43084bounds.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [bounds](https://leanprover-community.github.io/archive/116395maths/43084bounds.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Nov 17 2018 at 12:23)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bounds/near/147874320):
 <p>This is more of a funny story than anything else.</p>

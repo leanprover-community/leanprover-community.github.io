@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/73693groupone.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [group.one?](73693groupone.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [group.one?](https://leanprover-community.github.io/archive/113488general/73693groupone.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Sep 02 2018 at 08:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/group.one%3F/near/133204605):
 <p>This is the definition of <code>group</code>:</p>

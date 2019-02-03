@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/08397Canonicalstructures.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [Canonical structures](08397Canonicalstructures.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [Canonical structures](https://leanprover-community.github.io/archive/113488general/08397Canonicalstructures.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Sullivan (Oct 09 2018 at 18:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Canonical%20structures/near/135481621):
 <p>Will there be, or is there, an analog of Coq's "canonical structures", complementary to typeclasses, in Lean? </p>

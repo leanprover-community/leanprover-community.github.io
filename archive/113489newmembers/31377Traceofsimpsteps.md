@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/31377Traceofsimpsteps.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [Trace of "simp" steps](31377Traceofsimpsteps.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [Trace of "simp" steps](https://leanprover-community.github.io/archive/113489newmembers/31377Traceofsimpsteps.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Ken Roe (Jul 25 2018 at 22:24)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Trace%20of%20%22simp%22%20steps/near/130300149):
 <p>I applied "simp" to a complex hypothesis and got an unexpected result.  Is there a way to get a trace of the steps taken by simp?</p>

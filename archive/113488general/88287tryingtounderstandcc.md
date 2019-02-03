@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/88287tryingtounderstandcc.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [trying to understand cc](88287tryingtounderstandcc.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [trying to understand cc](https://leanprover-community.github.io/archive/113488general/88287tryingtounderstandcc.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Johan Commelin (Apr 24 2018 at 06:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trying%20to%20understand%20cc/near/125602905):
 <p>I had hoped this would work:</p>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/04670obtain.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [obtain](04670obtain.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [obtain](https://leanprover-community.github.io/archive/113488general/04670obtain.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Johan Commelin (Nov 09 2018 at 05:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/obtain/near/147351059):
 <p>I just realised there is <code>obtain</code>:<br>

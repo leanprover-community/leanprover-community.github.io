@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/35668filteredcolimits.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [filtered colimits](35668filteredcolimits.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [filtered colimits](https://leanprover-community.github.io/archive/116395maths/35668filteredcolimits.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Reid Barton (Dec 21 2018 at 21:13)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/filtered%20colimits/near/152355333):
 <p>Has anyone been working with filtered colimits? Perhaps <span class="user-mention" data-user-id="132858">@Ramon Fernandez Mir</span> <span class="user-mention" data-user-id="110038">@Kevin Buzzard</span>?</p>

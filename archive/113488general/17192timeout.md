@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/17192timeout.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [timeout](17192timeout.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [timeout](https://leanprover-community.github.io/archive/113488general/17192timeout.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Nov 08 2018 at 22:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/timeout/near/147329792):
 <div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">is_noetherian_ring_mv_polynomial_fin</span> <span class="o">{</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">}</span>

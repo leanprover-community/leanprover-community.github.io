@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/70396Provefalsefromnottrue.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [Prove false from not true?](70396Provefalsefromnottrue.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [Prove false from not true?](https://leanprover-community.github.io/archive/113489newmembers/70396Provefalsefromnottrue.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Abhimanyu Pallavi Sudhir (Oct 05 2018 at 23:37)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Prove%20false%20from%20not%20true%3F/near/135283394):
 <p>Hi, I have an elementary question -- I'm proving something, and am down to having the proved statement "¬true", and the goal is "false". Is there a quick way to finish this?</p>

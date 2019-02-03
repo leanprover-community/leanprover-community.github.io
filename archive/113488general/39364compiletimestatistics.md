@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/39364compiletimestatistics.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [compile time statistics](39364compiletimestatistics.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [compile time statistics](https://leanprover-community.github.io/archive/113488general/39364compiletimestatistics.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Sep 24 2018 at 07:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/compile%20time%20statistics/near/134506913):
 <p>Can we get some data on how long it takes for <em>each</em> file to compile?</p>

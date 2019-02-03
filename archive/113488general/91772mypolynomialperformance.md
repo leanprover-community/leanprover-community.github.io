@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/91772mypolynomialperformance.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [my_polynomial performance](91772mypolynomialperformance.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [my_polynomial performance](https://leanprover-community.github.io/archive/113488general/91772mypolynomialperformance.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Reid Barton (Nov 17 2018 at 20:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/my_polynomial%20performance/near/147887874):
 <p>I tried proving that the polynomial ring functor is left adjoint to the forgetful functor CommRing -&gt; Set but I gave up because doing anything with <code>mv_polynomial</code> was so slow. <span class="user-mention" data-user-id="110064">@Kenny Lau</span> you were having similar problems with <code>mv_polynomial</code> right?<br>

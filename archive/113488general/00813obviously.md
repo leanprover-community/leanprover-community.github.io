@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/00813obviously.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [obviously](00813obviously.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [obviously](https://leanprover-community.github.io/archive/113488general/00813obviously.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Reid Barton (Aug 23 2018 at 05:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/obviously/near/132615425):
 <p><span class="user-mention" data-user-id="110087">@Scott Morrison</span> How can I recover the old behavior of <code>obviously</code> which did not trace the steps it took?<br>

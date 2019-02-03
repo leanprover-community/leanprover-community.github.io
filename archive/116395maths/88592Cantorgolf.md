@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/88592Cantorgolf.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [Cantor golf](88592Cantorgolf.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [Cantor golf](https://leanprover-community.github.io/archive/116395maths/88592Cantorgolf.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Dec 12 2018 at 17:42)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Cantor%20golf/near/151537525):
 <p>1) Is there a very short proof of this in Lean / mathlib?</p>

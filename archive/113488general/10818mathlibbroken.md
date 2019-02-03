@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/10818mathlibbroken.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [mathlib broken?](10818mathlibbroken.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [mathlib broken?](https://leanprover-community.github.io/archive/113488general/10818mathlibbroken.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Scott Morrison (Apr 04 2018 at 01:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20broken%3F/near/124599682):
 <p>Actually, it seems like the problem is just in mathlib.</p>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/71999generalizeproofs.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [generalize_proofs](71999generalizeproofs.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [generalize_proofs](https://leanprover-community.github.io/archive/113488general/71999generalizeproofs.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Reid Barton (Dec 01 2018 at 01:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize_proofs/near/148900772):
 <p>Does <code>generalize_proofs</code> ever work?</p>

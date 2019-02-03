@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/48677combiningclasses.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [combining classes](48677combiningclasses.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [combining classes](https://leanprover-community.github.io/archive/113488general/48677combiningclasses.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Reid Barton (Dec 13 2018 at 05:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/combining%20classes/near/151584488):
 <p>If I have <code>class C t extends A t, B t.</code> I guess it doesn't mean that anything which is an instance of <code>A</code> and <code>B</code> is automatically an instance of <code>C</code>? Does it make sense to write an instance for <code>C</code> to make that true?</p>

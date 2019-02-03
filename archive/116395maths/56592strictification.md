@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/56592strictification.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [strictification](56592strictification.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [strictification](https://leanprover-community.github.io/archive/116395maths/56592strictification.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Reid Barton (May 26 2018 at 21:15)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/strictification/near/127137722):
 <p>If <code>α</code> is a type, then as <span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> describes near <a href="#narrow/stream/116395-maths/subject/affine.20schemes.20are.20schemes/near/126963972" title="#narrow/stream/116395-maths/subject/affine.20schemes.20are.20schemes/near/126963972">https://leanprover.zulipchat.com/#narrow/stream/116395-maths/subject/affine.20schemes.20are.20schemes/near/126963972</a>, we can interpret <code>α</code> as a groupoid whose objects are the "inhabitants of α up to defeq" and whose morphisms are propositional equalities, that is, the morphisms from <code>a</code> to <code>b</code> are the inhabitants of <code>a = b</code> (and so a morphism from <code>a</code> to <code>b</code> is unique if it exists, by proof irrelevance).<br>

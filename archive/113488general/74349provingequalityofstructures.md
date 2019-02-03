@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/74349provingequalityofstructures.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [proving equality of structures](74349provingequalityofstructures.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [proving equality of structures](https://leanprover-community.github.io/archive/113488general/74349provingequalityofstructures.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Reid Barton (May 16 2018 at 15:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proving%20equality%20of%20structures/near/126644596):
 <p>Is there a tactic or something that's like <code>apply subtype.eq</code>, but works for a general structure? Or do I have to write down the equality lemma manually?</p>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/99706Idealhasmem.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [Ideal has_mem](99706Idealhasmem.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [Ideal has_mem](https://leanprover-community.github.io/archive/113488general/99706Idealhasmem.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ AHan (Nov 30 2018 at 11:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Ideal%20has_mem/near/148853358):
 <p>I don't get why <code>test₁</code> type checked but <code>test₂</code> will result in deterministic timeout...?</p>

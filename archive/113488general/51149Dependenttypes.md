@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/51149Dependenttypes.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [Dependent types](51149Dependenttypes.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [Dependent types](https://leanprover-community.github.io/archive/113488general/51149Dependenttypes.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Sebastien Gouezel (Jan 31 2019 at 20:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Dependent%20types/near/157300084):
 <p>Suppose that I have two natural numbers <code>n</code> and <code>m</code>, and a proof that they are equal <code>h : n = m</code>. I have essentially never needed dependent types, but here I really have to deal with them and define the identity map from <code>fin n</code> to <code>fin m</code>. Can someone help with this? (I am in tactic mode, if that matters).</p>

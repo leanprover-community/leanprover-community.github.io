@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/17594Supvssup.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [Sup vs sup](17594Supvssup.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [Sup vs sup](https://leanprover-community.github.io/archive/113488general/17594Supvssup.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Johan Commelin (Dec 06 2018 at 06:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Sup%20vs%20sup/near/150984986):
 <p>Is there something in mathlib expressing compatibility between <code>Sup</code> and <code>sup</code> for complete lattices?<br>

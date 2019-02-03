@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/25763Whycantrwlookinsidelambdaexpressions.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [Why can't `rw` look inside lambda expressions?](25763Whycantrwlookinsidelambdaexpressions.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [Why can't `rw` look inside lambda expressions?](https://leanprover-community.github.io/archive/113488general/25763Whycantrwlookinsidelambdaexpressions.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Johan Commelin (Jul 24 2018 at 15:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Why%20can%27t%20%60rw%60%20look%20inside%20lambda%20expressions%3F/near/130212033):
 <p>I often find myself trying to do a rewrite, and then it fails miserably while it shouldn't. Suppose I have a <code>finset.sum univ (\lam x, f(x + x))</code> in my goal, and I know that <code>f</code> is a group hom. Then I want to rewrite that <code>f(x + x)</code> to <code>f(x) + f(x)</code>. But Lean always complains. So I have to do a little dance with <code>rw show [relevant part goes here]</code>, which feels clumsy. What am I doing wrong?</p>

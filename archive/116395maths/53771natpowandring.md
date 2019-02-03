@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/53771natpowandring.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [nat.pow and ring](53771natpowandring.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [nat.pow and ring](https://leanprover-community.github.io/archive/116395maths/53771natpowandring.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Jun 09 2018 at 03:19)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/nat.pow%20and%20ring/near/127802027):
 <div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">ring</span>

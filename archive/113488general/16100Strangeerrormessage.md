@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/16100Strangeerrormessage.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [Strange error message](16100Strangeerrormessage.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [Strange error message](https://leanprover-community.github.io/archive/113488general/16100Strangeerrormessage.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Patrick Massot (Apr 24 2018 at 22:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Strange%20error%20message/near/125639855):
 <p><code>code generation failed, VM does not have code for 'classical.choice'</code> seems to be Lean trying to tell me to stop considering examples and go back to work</p>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/97741troublerunningleanonmac.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [trouble running lean on mac](97741troublerunningleanonmac.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [trouble running lean on mac](https://leanprover-community.github.io/archive/113489newmembers/97741troublerunningleanonmac.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Yuhan Du (Aug 13 2018 at 13:00)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/trouble%20running%20lean%20on%20mac/near/132038880):
 <div class="codehilite"><pre><span></span>dyn3218-19:bin apple$ ls

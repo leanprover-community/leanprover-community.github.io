@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/69430longmultiplicationinLean.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [long multiplication in Lean](69430longmultiplicationinLean.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [long multiplication in Lean](https://leanprover-community.github.io/archive/113488general/69430longmultiplicationinLean.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Jan 12 2019 at 13:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/long%20multiplication%20in%20Lean/near/154983199):
 <p><code>nat</code> is great for proving things, but is computationally inefficient because it uses O(n) memory to store the natural number n:</p>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/61650congrtactic.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [congr tactic](61650congrtactic.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [congr tactic](https://leanprover-community.github.io/archive/113488general/61650congrtactic.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Sean Leather (Mar 01 2018 at 14:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/congr%20tactic/near/123137699):
 <p>How do I know when to use the <code>congr</code> tactic? It's not in the Lean reference. Are there any good examples? I should've <a href="https://gitter.im/leanprover_public/Lobby?at=5a8d2134c3c5f8b90de5020b" target="_blank" title="https://gitter.im/leanprover_public/Lobby?at=5a8d2134c3c5f8b90de5020b">learned</a> already, but I'm slow. <span class="emoji emoji-1f642" title="simple smile">:simple_smile:</span></p>

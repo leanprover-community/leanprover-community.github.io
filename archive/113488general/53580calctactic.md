@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/53580calctactic.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [calc tactic](53580calctactic.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [calc tactic](https://leanprover-community.github.io/archive/113488general/53580calctactic.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Mario Carneiro (Jan 02 2019 at 15:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/calc%20tactic/near/154178076):
 <p>I just noticed that <code>calc</code> is an interactive tactic which somehow unfolds to <code>exact calc</code> by magic</p>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/85635Bayestheoremfuturedirections.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [Bayes theorem + future directions](85635Bayestheoremfuturedirections.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [Bayes theorem + future directions](https://leanprover-community.github.io/archive/116395maths/85635Bayestheoremfuturedirections.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Koundinya Vajjha (Dec 21 2018 at 06:21)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Bayes%20theorem%20%2B%20future%20directions/near/152309690):
 <p>hello,</p>

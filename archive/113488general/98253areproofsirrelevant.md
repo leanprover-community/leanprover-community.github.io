@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/98253areproofsirrelevant.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [are proofs irrelevant?](98253areproofsirrelevant.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [are proofs irrelevant?](https://leanprover-community.github.io/archive/113488general/98253areproofsirrelevant.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Jun 15 2018 at 16:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/are%20proofs%20irrelevant%3F/near/128121844):
 <p>(working example, far from minimal, sorry for that)<br>

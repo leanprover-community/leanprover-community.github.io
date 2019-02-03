@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/52941fromfinsettoset.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [from finset to set](52941fromfinsettoset.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [from finset to set](https://leanprover-community.github.io/archive/113488general/52941fromfinsettoset.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Johan Commelin (May 08 2018 at 11:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/from%20finset%20to%20set/near/126256617):
 <p>I can't find a way to go from <code>finset</code> to <code>set</code> in the <code>finset.lean</code> file. How do I do this?</p>

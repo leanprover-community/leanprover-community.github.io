@@ -4,7 +4,7 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/179818LeanTogether2019/index.html
 ---
 
-## Stream: [Lean Together 2019](index.html)
+## Stream: [Lean Together 2019](https://leanprover-community.github.io/archive/179818LeanTogether2019/index.html)
 
 ---
 

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/18586Whendoesdectrivialfailfordecidableandtrueprops.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [When does dec_trivial fail for decidable and true props?](18586Whendoesdectrivialfailfordecidableandtrueprops.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [When does dec_trivial fail for decidable and true props?](https://leanprover-community.github.io/archive/113488general/18586Whendoesdectrivialfailfordecidableandtrueprops.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Seul Baek (Nov 11 2018 at 18:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/When%20does%20dec_trivial%20fail%20for%20decidable%20and%20true%20props%3F/near/147484281):
 <p>I'm encountering cases where I have a decidable prop <code>p</code> that is also true (which I know because the decidability proof term <code>t : decidable p</code> evaluates to <code>is_true ...</code> when checked with the vm) but <code>exact dec_trivial</code> fails to discharge the goal, with the message </p>

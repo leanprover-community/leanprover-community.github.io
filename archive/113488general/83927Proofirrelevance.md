@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/83927Proofirrelevance.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [Proof irrelevance](83927Proofirrelevance.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [Proof irrelevance](https://leanprover-community.github.io/archive/113488general/83927Proofirrelevance.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Patrick Massot (Dec 13 2018 at 18:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Proof%20irrelevance/near/151624464):
 <p>Does anyone know whether <a href="https://hal.inria.fr/hal-01859964" target="_blank" title="https://hal.inria.fr/hal-01859964">https://hal.inria.fr/hal-01859964</a> is something Lean should care about? It's a paper about "Definitional Proof-Irrelevance without K" which explicitly mentions Lean's type theory.</p>

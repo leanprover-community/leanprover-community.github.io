@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/00990finsetmaxfornonemptysets.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [finset.max for nonempty sets](00990finsetmaxfornonemptysets.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [finset.max for nonempty sets](https://leanprover-community.github.io/archive/116395maths/00990finsetmaxfornonemptysets.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Jan 23 2019 at 20:29)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finset.max%20for%20nonempty%20sets/near/156716988):
 <p>I've been trying to use <code>finset.max</code> and it's a bit annoying in all my use cases because it takes in an arbitrary finset X and returns an option X (to deal with the case where the finset is empty). It would be very easy to write a variant which takes a non-empty finset and returns its max, and I find myself wanting this variant. What should I call it?</p>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/67902structureequalityfromparts.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [structure equality from parts](67902structureequalityfromparts.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [structure equality from parts](https://leanprover-community.github.io/archive/113488general/67902structureequalityfromparts.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Nicholas Scheel (Mar 21 2018 at 23:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/structure%20equality%20from%20parts/near/124033267):
 <p>Hi, I'm totally new here, I've spent about a day with Lean so far.</p>

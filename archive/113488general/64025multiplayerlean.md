@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/64025multiplayerlean.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [multiplayer lean](64025multiplayerlean.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [multiplayer lean](https://leanprover-community.github.io/archive/113488general/64025multiplayerlean.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Nov 29 2018 at 21:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/multiplayer%20lean/near/148818374):
 <p>At Xena today about six people collaborated in CoCalc using mathlib, and they made dihedral groups! <span class="user-mention" data-user-id="118107">@Amelia Livingston</span> <span class="user-mention" data-user-id="110064">@Kenny Lau</span> <span class="user-mention" data-user-id="132889">@Jean Lo</span> <span class="user-mention" data-user-id="110044">@Chris Hughes</span> <span class="user-mention" data-user-id="132603">@Calle Sönne</span> <span class="user-mention" data-user-id="132893">@Ken Lee</span> together wrote the below. It was <em>really funny</em> watching it happen, not least at the beginning when people kept changing the definition of multiplication and/or inverse because it wasn't quite right, whilst other people were trying to prove things about these functions at the same time. Once it stabilised things worked quite well. They also implemented <a href="https://xenaproject.wordpress.com/2018/04/30/group-theory-revision/" target="_blank" title="https://xenaproject.wordpress.com/2018/04/30/group-theory-revision/">https://xenaproject.wordpress.com/2018/04/30/group-theory-revision/</a> . It's still going, although several of the contributors have left now; they're proving stuff like how dihedral groups aren't abelian etc.</p>

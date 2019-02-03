@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/46395homeomorphisms.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [homeomorphisms](46395homeomorphisms.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [homeomorphisms](https://leanprover-community.github.io/archive/116395maths/46395homeomorphisms.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Reid Barton (Jun 01 2018 at 20:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/homeomorphisms/near/127431536):
 <p><span class="user-mention" data-user-id="110031">@Patrick Massot</span>, did you have a definition of homeomorphisms somewhere?</p>

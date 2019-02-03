@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/13864semilattices.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [semilattices](13864semilattices.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [semilattices](https://leanprover-community.github.io/archive/113488general/13864semilattices.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Simon Hudon (Apr 20 2018 at 19:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/semilattices/near/125457488):
 <p>I'm looking for a kind of semilattice with a bottom, and I'd like to be able to take the limit of a monotonically increasing series. Does it exist, is it in <code>mathlib</code> and what is it called?</p>

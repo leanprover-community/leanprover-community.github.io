@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/88621galoiscorrespondences.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [galois correspondences](88621galoiscorrespondences.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [galois correspondences](https://leanprover-community.github.io/archive/113488general/88621galoiscorrespondences.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Johan Commelin (Nov 17 2018 at 07:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/galois%20correspondences/near/147866625):
 <p>Do we already have the Galois correspondence for <code>set.map</code> and <code>set.comap</code> (aka, <code>range</code> and <code>preimage</code>)?<br>

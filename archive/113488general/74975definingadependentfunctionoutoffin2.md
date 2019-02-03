@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/74975definingadependentfunctionoutoffin2.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [defining a dependent function out of `fin 2`](74975definingadependentfunctionoutoffin2.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [defining a dependent function out of `fin 2`](https://leanprover-community.github.io/archive/113488general/74975definingadependentfunctionoutoffin2.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Scott Morrison (Sep 16 2018 at 06:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/defining%20a%20dependent%20function%20out%20of%20%60fin%202%60/near/134038733):
 <p>I'm stuck on something basic to do with <code>fin n</code>.</p>

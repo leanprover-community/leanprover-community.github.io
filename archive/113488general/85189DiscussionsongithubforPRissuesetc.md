@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/85189DiscussionsongithubforPRissuesetc.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [Discussions on github for PR, issues etc](85189DiscussionsongithubforPRissuesetc.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [Discussions on github for PR, issues etc](https://leanprover-community.github.io/archive/113488general/85189DiscussionsongithubforPRissuesetc.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Johannes Hölzl (Sep 15 2018 at 18:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Discussions%20on%20github%20for%20PR%2C%20issues%20etc/near/134018441):
 <p>I think there are a lot of discussions at Zulip, which result in a PR. But often the discussion is missing in the pull request description. I have a hard time to follow all the discussions on Zulip, so I'm often missing why a parch in a PR is done in the specific way. Is it possible to have the discussions witch are PR specific on github itself?</p>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/27115listfromktol.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [list from k to l](27115listfromktol.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [list from k to l](https://leanprover-community.github.io/archive/113488general/27115listfromktol.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Patrick Massot (Apr 17 2018 at 12:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/list%20from%20k%20to%20l/near/125191252):
 <p>Is there a built-in way to generate the list of natural numbers from k to l? I can use <code>def myrange (k n : ℕ) := list.map (λ i, i + k) (list.range $ n-k+1)</code> but I'd like to know if this is already in</p>

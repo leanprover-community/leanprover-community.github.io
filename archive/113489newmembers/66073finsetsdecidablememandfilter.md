@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/66073finsetsdecidablememandfilter.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [finsets, decidable_mem, and filter](66073finsetsdecidablememandfilter.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [finsets, decidable_mem, and filter](https://leanprover-community.github.io/archive/113489newmembers/66073finsetsdecidablememandfilter.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Bryan Gin-ge Chen (Sep 11 2018 at 06:04)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/finsets%2C%20decidable_mem%2C%20and%20filter/near/133708032):
 <p>I have a filter on a finset (of finsets) that I want to construct and for some reason I'm stubbornly trying to do it constructively. Here's a stripped down version of what I have (which is part of some stuff on matroids):</p>

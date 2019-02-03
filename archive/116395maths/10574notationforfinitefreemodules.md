@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/10574notationforfinitefreemodules.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [notation for finite free modules](10574notationforfinitefreemodules.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [notation for finite free modules](https://leanprover-community.github.io/archive/116395maths/10574notationforfinitefreemodules.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Aug 22 2018 at 12:29)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/notation%20for%20finite%20free%20modules/near/132570684):
 <p>Some students here have developed the basic theory of free modules of finite rank over a ring (which later becomes a commutative ring and then a field). One issue I have with their work is that they are still using some placeholder notation for the fundamental construction of <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mi>R</mi><mi>n</mi></msup></mrow><annotation encoding="application/x-tex">R^n</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.68333em;vertical-align:0em;"></span><span class="base"><span class="mord"><span class="mord mathit" style="margin-right:0.00773em;">R</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.664392em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathit mtight">n</span></span></span></span></span></span></span></span></span></span></span>, the free rank <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.43056em;"></span><span class="strut bottom" style="height:0.43056em;vertical-align:0em;"></span><span class="base"><span class="mord mathit">n</span></span></span></span> module over the ring <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>R</mi></mrow><annotation encoding="application/x-tex">R</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.68333em;vertical-align:0em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.00773em;">R</span></span></span></span>. What should the function which takes a ring <code>R</code> and a natural <code>n</code> and returns the <code>R</code>-module <code>R^n</code> be called? Any suggestions?</p>

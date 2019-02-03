@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/34982etaforstructures.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [eta for structures](34982etaforstructures.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [eta for structures](https://leanprover-community.github.io/archive/113488general/34982etaforstructures.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Reid Barton (Aug 01 2018 at 20:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/eta%20for%20structures/near/130734097):
 <p>Is definitional eta for structures something we are likely to get at some point?</p>

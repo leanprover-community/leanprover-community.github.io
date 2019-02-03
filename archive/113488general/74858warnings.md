@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/74858warnings.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [warnings](74858warnings.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [warnings](https://leanprover-community.github.io/archive/113488general/74858warnings.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Reid Barton (Dec 27 2018 at 18:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/warnings/near/152612059):
 <p>There isn't any way to suppress all warnings or specific warnings from lean, is there?</p>

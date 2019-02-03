@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/50376Inductivedefinitions.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [Inductive definitions](50376Inductivedefinitions.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [Inductive definitions](https://leanprover-community.github.io/archive/113489newmembers/50376Inductivedefinitions.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Ken Roe (Aug 28 2018 at 18:06)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Inductive%20definitions/near/132926297):
 <p>I see a number of comments in my code that a definition of the form:</p>

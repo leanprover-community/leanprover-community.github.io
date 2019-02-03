@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/92357finsetofsubtypefromfilter.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [finset of subtype from filter](92357finsetofsubtypefromfilter.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [finset of subtype from filter](https://leanprover-community.github.io/archive/113489newmembers/92357finsetofsubtypefromfilter.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Bryan Gin-ge Chen (Sep 25 2018 at 08:40)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/finset%20of%20subtype%20from%20filter/near/134577961):
 <p>I don't have a good feeling for how to manipulate subtypes. How do I do this?</p>

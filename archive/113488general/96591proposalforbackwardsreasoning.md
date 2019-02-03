@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/96591proposalforbackwardsreasoning.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [proposal for `backwards_reasoning`](96591proposalforbackwardsreasoning.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [proposal for `backwards_reasoning`](https://leanprover-community.github.io/archive/113488general/96591proposalforbackwardsreasoning.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Scott Morrison (Oct 08 2018 at 08:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proposal%20for%20%60backwards_reasoning%60/near/135383465):
 <p>I'd like to propose an interactive partner for <code>solve_by_elim</code>. The idea is that it will be a tool for applying "backwards reasoning" (i.e. applying lemmas against the goal).</p>

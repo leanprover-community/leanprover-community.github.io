@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/85628CategorytheoryPR.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [Category theory PR](85628CategorytheoryPR.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [Category theory PR](https://leanprover-community.github.io/archive/113488general/85628CategorytheoryPR.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Scott Morrison (Aug 07 2018 at 07:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Category%20theory%20PR/near/131024775):
 <p>Hi <span class="user-mention" data-user-id="110049">@Mario Carneiro</span>, I didn’t understand your suggestion to use “<code>functor.id</code> (protected)”. What is “protected”?</p>

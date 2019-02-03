@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/179818LeanTogether2019/30286derivativeAPI.html
 ---
 
-## Stream: [Lean Together 2019](index.html)
-### Topic: [derivative API](30286derivativeAPI.html)
+## Stream: [Lean Together 2019](https://leanprover-community.github.io/archive/179818LeanTogether2019/index.html)
+### Topic: [derivative API](https://leanprover-community.github.io/archive/179818LeanTogether2019/30286derivativeAPI.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Jan 09 2019 at 10:30)](https://leanprover.zulipchat.com/#narrow/stream/179818-Lean%20Together%202019/topic/derivative%20API/near/154710820):
 <p><span class="user-mention" data-user-id="110172">@Assia Mahboubi</span> and <span class="user-mention" data-user-id="110193">@Cyril Cohen</span> both were concerned about a stylistic issue which came up in Mario's live coding session. We were looking at differentiating bounded linear maps, but my understanding of the issue (which is generally poor) is that it would apply equally if we were just talking about differentiating functions <code>f: ℝ → ℝ</code>. So say <code>f</code> and <code>g</code> are functions from the reals to the reals. Let's define <code>V</code> to be the type of these functions.</p>

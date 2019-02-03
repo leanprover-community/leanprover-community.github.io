@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/35860categorytheorydocumentation.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [category theory documentation](35860categorytheorydocumentation.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [category theory documentation](https://leanprover-community.github.io/archive/116395maths/35860categorytheorydocumentation.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Simon Hudon (Jan 01 2019 at 17:03)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category%20theory%20documentation/near/154133811):
 <p>Is there a transcript of the rationale behind the design decisions of the category theory part? Specifically, I'd like to know what were the pros and cons of defining <code>category</code> as a type class versus as a structure.</p>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/20749leanisprettysweet.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [lean is pretty sweet](20749leanisprettysweet.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [lean is pretty sweet](https://leanprover-community.github.io/archive/113488general/20749leanisprettysweet.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Andrew Ashworth (Mar 14 2018 at 01:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20is%20pretty%20sweet/near/123678987):
 <p>i went back to doing some programming in fsharp since its the only mixed-paradigm language with any traction, and i really miss lean</p>

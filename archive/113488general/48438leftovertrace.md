@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/48438leftovertrace.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [leftover trace?](48438leftovertrace.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [leftover trace?](https://leanprover-community.github.io/archive/113488general/48438leftovertrace.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Patrick Massot (Sep 29 2018 at 22:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leftover%20trace%3F/near/134895750):
 <p>When I build mathlib, I see:</p>

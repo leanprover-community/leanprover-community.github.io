@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/35992stacksprojectschemes.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [stacks project / schemes](35992stacksprojectschemes.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [stacks project / schemes](https://leanprover-community.github.io/archive/113488general/35992stacksprojectschemes.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Feb 28 2018 at 10:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/stacks%20project%20/%20schemes/near/123081857):
 <p>Thought this was worth its own topic because we all know there are people here who are less interested in the maths side of things. Here's an update.</p>

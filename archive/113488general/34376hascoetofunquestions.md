@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/34376hascoetofunquestions.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [has_coe_to_fun questions](34376hascoetofunquestions.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [has_coe_to_fun questions](https://leanprover-community.github.io/archive/113488general/34376hascoetofunquestions.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Oct 31 2018 at 16:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/has_coe_to_fun%20questions/near/136859792):
 <p>1) What's going on here?</p>

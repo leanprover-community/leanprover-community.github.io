@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/86357Frozenlocalinstance.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [Frozen local instance](86357Frozenlocalinstance.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [Frozen local instance](https://leanprover-community.github.io/archive/113488general/86357Frozenlocalinstance.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Moses Schönfinkel (Mar 12 2018 at 09:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Frozen%20local%20instance/near/123599507):
 <p>What is going on in scenarios where Lean tells me <code>failed to revert 'c', it is a frozen local instance</code> and then I magically fix everything by calling <code>tactic.unfreeze_local_instances</code>?</p>

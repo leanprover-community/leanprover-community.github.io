@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/08397leanpkgdependenciesonbranches.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [leanpkg dependencies on branches](08397leanpkgdependenciesonbranches.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [leanpkg dependencies on branches](https://leanprover-community.github.io/archive/113488general/08397leanpkgdependenciesonbranches.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Scott Morrison (May 13 2018 at 13:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leanpkg%20dependencies%20on%20branches/near/126495443):
 <p>I'd like to add a leanpkg dependency to a non-master branch of a github. Does anyone know how to do this?</p>

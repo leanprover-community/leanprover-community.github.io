@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/60942Leanassertionviolation.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [Lean assertion violation](60942Leanassertionviolation.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [Lean assertion violation](https://leanprover-community.github.io/archive/113488general/60942Leanassertionviolation.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Mar 05 2018 at 10:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20assertion%20violation/near/123293256):
 <div class="codehilite"><pre><span></span>universes u v

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/53646DeMorgansProof.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [De Morgan's Proof](53646DeMorgansProof.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [De Morgan's Proof](https://leanprover-community.github.io/archive/113488general/53646DeMorgansProof.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Stephanie Wang (Dec 13 2018 at 22:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/De%20Morgan%27s%20Proof/near/151734970):
 <p>I'm new to Lean, can someone help me out with this proof of this version of De Morgan's Law? I'm having trouble coming up with the forward proof</p>

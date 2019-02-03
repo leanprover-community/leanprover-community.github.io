@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/99459itetermgolf.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [ite term golf](99459itetermgolf.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [ite term golf](https://leanprover-community.github.io/archive/113488general/99459itetermgolf.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Andrew Ashworth (May 27 2018 at 09:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/ite%20term%20golf/near/127155648):
 <p>Suppose I need to prove <code>ite (x = y) tt ff = tt → x = y</code> and <code>x = y → ite (x = y) tt ff = tt</code>. Is there a succint way to do this in term mode? (I know <code>simp</code> and <code>split_ifs</code> is amazing here, but I'd like to do inversion by hand if possible)</p>

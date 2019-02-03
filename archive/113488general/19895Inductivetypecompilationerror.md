@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/19895Inductivetypecompilationerror.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [Inductive type compilation error](19895Inductivetypecompilationerror.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [Inductive type compilation error](https://leanprover-community.github.io/archive/113488general/19895Inductivetypecompilationerror.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Jesse Michael Han (Feb 02 2019 at 06:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Inductive%20type%20compilation%20error/near/157408201):
 <p>What's up with the following error? The presence of the <code>complete_boolean_algebra</code> instance in the following code</p>

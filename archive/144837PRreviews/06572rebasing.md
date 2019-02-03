@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/144837PRreviews/06572rebasing.html
 ---
 
-## Stream: [PR reviews](index.html)
-### Topic: [rebasing](06572rebasing.html)
+## Stream: [PR reviews](https://leanprover-community.github.io/archive/144837PRreviews/index.html)
+### Topic: [rebasing](https://leanprover-community.github.io/archive/144837PRreviews/06572rebasing.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Scott Morrison (Nov 13 2018 at 23:49)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/rebasing/near/147631335):
 <p>Hi <span class="user-mention" data-user-id="110032">@Reid Barton</span>, <span class="user-mention" data-user-id="112680">@Johan Commelin</span>. I'm about to rebase <code>limits-others-new</code>. This is going to leave <code>adjunctions</code> and <code>sheaf</code> in a strange position.</p>

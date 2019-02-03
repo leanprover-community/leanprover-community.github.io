@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/64685Normalsubmonoids.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [Normal submonoids](64685Normalsubmonoids.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [Normal submonoids](https://leanprover-community.github.io/archive/116395maths/64685Normalsubmonoids.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Mario Carneiro (Aug 10 2018 at 12:43)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Normal%20submonoids/near/131229964):
 <p>Are these a thing? The natural definition of normal subgroup extends to the monoid case as <code>a + b \in S -&gt; b + a \in S</code></p>

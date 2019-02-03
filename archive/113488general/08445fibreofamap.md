@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/08445fibreofamap.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [fibre of a map](08445fibreofamap.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [fibre of a map](https://leanprover-community.github.io/archive/113488general/08445fibreofamap.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Apr 16 2018 at 09:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/fibre%20of%20a%20map/near/125139016):
 <p>I wish we have preimage of a point, whatever its use is</p>

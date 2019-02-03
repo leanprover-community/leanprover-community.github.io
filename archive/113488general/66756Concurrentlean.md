@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/66756Concurrentlean.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [Concurrent lean](66756Concurrentlean.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [Concurrent lean](https://leanprover-community.github.io/archive/113488general/66756Concurrentlean.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Mario Carneiro (Mar 28 2018 at 03:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Concurrent%20lean/near/124299642):
 <p>I've been thinking about what appropriate concurrency primitives can be used in pure lean. <span class="user-mention" data-user-id="110043">@Gabriel Ebner</span> Do you see any problems with modeling <code>task</code> in lean (being the same as <code>thunk</code>)? It's not clear why this needs to be <code>meta</code>.</p>

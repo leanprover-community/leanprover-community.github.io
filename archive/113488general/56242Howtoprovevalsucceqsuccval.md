@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/56242Howtoprovevalsucceqsuccval.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [How to prove val_succ_eq_succ_val](56242Howtoprovevalsucceqsuccval.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [How to prove val_succ_eq_succ_val](https://leanprover-community.github.io/archive/113488general/56242Howtoprovevalsucceqsuccval.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Johan Commelin (May 15 2018 at 15:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/How%20to%20prove%20val_succ_eq_succ_val/near/126591309):
 <p>This feels almost defeq to me. But I am stumped how to prove this:</p>

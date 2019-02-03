@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/96433Tactictonotactic.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [Tactic to no tactic](96433Tactictonotactic.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [Tactic to no tactic](https://leanprover-community.github.io/archive/113488general/96433Tactictonotactic.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Nima (Apr 21 2018 at 05:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Tactic%20to%20no%20tactic/near/125479107):
 <p>Is there an easy way to re-write the last function without using tactic?</p>

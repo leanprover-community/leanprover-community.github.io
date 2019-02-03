@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/31149naivenormnum.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [naive norm-num](31149naivenormnum.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [naive norm-num](https://leanprover-community.github.io/archive/116395maths/31149naivenormnum.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Sep 11 2018 at 16:15)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/naive%20norm-num/near/133735274):
 <p>Chris Hughes sent me a message in June containing a very cool naive <code>norm_num</code>. I found learning about a naive <code>ring</code> very interesting, and <code>ring</code> and <code>norm_num</code> are two tactics which mathematicians can't live without, so without his permission, here is the message he sent me in full:</p>

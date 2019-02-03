@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/50863transfinitecompositions.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [transfinite compositions](50863transfinitecompositions.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [transfinite compositions](https://leanprover-community.github.io/archive/116395maths/50863transfinitecompositions.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Reid Barton (Sep 17 2018 at 23:34)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/transfinite%20compositions/near/134128023):
 <p>Suppose P is a complete lattice. I can define an increasing sequence of finite length in P either as a subtype of a function type or as an inductive type, as shown below.</p>

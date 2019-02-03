@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/51122futureunbundledclasshierarchy.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [future unbundled class hierarchy](51122futureunbundledclasshierarchy.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [future unbundled class hierarchy](https://leanprover-community.github.io/archive/113488general/51122futureunbundledclasshierarchy.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Jul 15 2018 at 13:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/future%20unbundled%20class%20hierarchy/near/129698387):
 <p>Sebastian Ullrich said (in the multiset thread)</p>

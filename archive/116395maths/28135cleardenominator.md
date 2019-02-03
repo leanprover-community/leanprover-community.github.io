@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/28135cleardenominator.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [clear_denominator](28135cleardenominator.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [clear_denominator](https://leanprover-community.github.io/archive/116395maths/28135cleardenominator.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Patrick Massot (May 30 2018 at 13:54)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/clear_denominator/near/127303903):
 <p>Let's start a new thread about this</p>

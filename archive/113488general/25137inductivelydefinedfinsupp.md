@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/25137inductivelydefinedfinsupp.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [inductively-defined finsupp?](25137inductivelydefinedfinsupp.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [inductively-defined finsupp?](https://leanprover-community.github.io/archive/113488general/25137inductivelydefinedfinsupp.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Mar 29 2018 at 14:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inductively-defined%20finsupp%3F/near/124364521):
 <p>Can we define finsupp A B inductively as a set of the type (A -&gt; B)?</p>

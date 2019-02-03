@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/23907basicstruggles.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [basic struggles](23907basicstruggles.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [basic struggles](https://leanprover-community.github.io/archive/113488general/23907basicstruggles.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Johan Commelin (Aug 07 2018 at 07:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/basic%20struggles/near/131024386):
 <p>I find myself struggling with things that are extremely math-trivial. If I have a goal of the form <code>a = b</code>, how do I turn that into <code>a * c = b * c</code>? (Assume that <code>a b c : R</code> and <code>[comm_ring R]</code>.)</p>

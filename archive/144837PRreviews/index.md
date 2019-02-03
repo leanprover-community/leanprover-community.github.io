@@ -4,7 +4,7 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/144837PRreviews/index.html
 ---
 
-## Stream: [PR reviews](index.html)
+## Stream: [PR reviews](https://leanprover-community.github.io/archive/144837PRreviews/index.html)
 
 ---
 

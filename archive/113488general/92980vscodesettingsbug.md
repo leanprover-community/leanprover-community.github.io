@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/92980vscodesettingsbug.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [vscode settings bug](92980vscodesettingsbug.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [vscode settings bug](https://leanprover-community.github.io/archive/113488general/92980vscodesettingsbug.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Keeley Hoek (Aug 13 2018 at 16:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/vscode%20settings%20bug/near/132051901):
 <p>There is a bug in the vscode plugin where in the "User Settings" panel the default settings for numerical constants like "lean.memoryLimit" are given in inverted commas (e.g. "4096"), when they actually shouldn't be.</p>

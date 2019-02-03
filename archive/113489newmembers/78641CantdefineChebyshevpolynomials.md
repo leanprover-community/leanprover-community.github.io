@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/78641CantdefineChebyshevpolynomials.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [Can't define Chebyshev polynomials](78641CantdefineChebyshevpolynomials.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [Can't define Chebyshev polynomials](https://leanprover-community.github.io/archive/113489newmembers/78641CantdefineChebyshevpolynomials.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Abhimanyu Pallavi Sudhir (Jan 12 2019 at 18:34)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Can%27t%20define%20Chebyshev%20polynomials/near/154992565):
 <p>Why doesn't this work?</p>

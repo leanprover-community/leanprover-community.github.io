@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/48938optiontroubles.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [option troubles](48938optiontroubles.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [option troubles](https://leanprover-community.github.io/archive/113488general/48938optiontroubles.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Johan Commelin (Oct 09 2018 at 20:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/option%20troubles/near/135487811):
 <p>I have <code>x : option X</code>, and <code>h : x ≠ none</code>. How do I turn this into a <code>y : X</code> such that <code>x = some y</code>? I want to use <code>option.get</code> and <code>option.is_some</code>. But I can't figure out how to use <code>h</code>.</p>

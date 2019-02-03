@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/48648isringhomleftmultiplication.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [is_ring_hom left multiplication](48648isringhomleftmultiplication.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [is_ring_hom left multiplication](https://leanprover-community.github.io/archive/116395maths/48648isringhomleftmultiplication.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Casper Putz (Jan 24 2019 at 11:07)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/is_ring_hom%20left%20multiplication/near/156761435):
 <p>Is the statement that left (or right) mulitiplication by an element of a ring is a ring homomorphism in mathlib?</p>

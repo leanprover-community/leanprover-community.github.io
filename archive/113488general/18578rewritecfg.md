@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/18578rewritecfg.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [rewrite_cfg](18578rewritecfg.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [rewrite_cfg](https://leanprover-community.github.io/archive/113488general/18578rewritecfg.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Patrick Massot (Sep 21 2018 at 11:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite_cfg/near/134366830):
 <p>Recently Johannes wrote <code>rwa [htop] {occs := occurrences.pos [2]}</code> and I suddenly became aware of the rewrite tactic configuration options. Is it only me who missed this? I don't see anything about this in TPIL or the reference manual. I searched a bit and found: <a href="https://github.com/leanprover/lean/blob/master/library/init/meta/rewrite_tactic.lean#L11" target="_blank" title="https://github.com/leanprover/lean/blob/master/library/init/meta/rewrite_tactic.lean#L11">https://github.com/leanprover/lean/blob/master/library/init/meta/rewrite_tactic.lean#L11</a> and <a href="https://github.com/leanprover/lean/blob/master/library/init/meta/occurrences.lean" target="_blank" title="https://github.com/leanprover/lean/blob/master/library/init/meta/occurrences.lean">https://github.com/leanprover/lean/blob/master/library/init/meta/occurrences.lean</a>. So in case some terms appear several times, you can tell <code>rw</code> where you want to rewrite: everywhere (this is the default), only at a list of positions, everywhere except at a list of positions. There are two other parameters. <code>symm</code> presumably has to do with backward rewriting. Does it mean everything backward? Or try backward if forward doesn't work? We can experiment if nobody knows. And the last parameter is <code>md</code> which seem related to reducibility stuff.</p>

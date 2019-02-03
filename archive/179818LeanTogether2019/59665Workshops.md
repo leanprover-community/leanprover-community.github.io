@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/179818LeanTogether2019/59665Workshops.html
 ---
 
-## Stream: [Lean Together 2019](index.html)
-### Topic: [Workshops](59665Workshops.html)
+## Stream: [Lean Together 2019](https://leanprover-community.github.io/archive/179818LeanTogether2019/index.html)
+### Topic: [Workshops](https://leanprover-community.github.io/archive/179818LeanTogether2019/59665Workshops.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Rob Lewis (Jan 08 2019 at 16:19)](https://leanprover.zulipchat.com/#narrow/stream/179818-Lean%20Together%202019/topic/Workshops/near/154651219):
 <p>There have been a number of future workshops and conferences advertised during this one. Here's a running list:<br>

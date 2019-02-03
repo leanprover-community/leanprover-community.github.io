@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/64217addcommgrouptactic.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [add_comm_group tactic](64217addcommgrouptactic.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [add_comm_group tactic](https://leanprover-community.github.io/archive/116395maths/64217addcommgrouptactic.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Patrick Massot (Aug 08 2018 at 19:09)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/add_comm_group%20tactic/near/131120526):
 <p>Could we get a scaled down <code>ring</code> tactic handling <code>add_comm_group</code>? My current goal is <code>φ (x', y') - φ (x, y) =   φ (x', y₁) - φ (x, y₁) + (φ (x', y') - φ (x', y₁) - (φ (x, y') - φ (x, y₁))) + (φ (x₁, y') - φ (x₁, y)) + (φ (x, y') - φ (x, y) - (φ (x₁, y') - φ (x₁, y)))</code> and I can't face proving it by hand</p>

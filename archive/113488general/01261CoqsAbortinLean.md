@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/01261CoqsAbortinLean.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [Coq's Abort in Lean](01261CoqsAbortinLean.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [Coq's Abort in Lean](https://leanprover-community.github.io/archive/113488general/01261CoqsAbortinLean.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Sullivan (Oct 08 2018 at 16:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Coq%27s%20Abort%20in%20Lean/near/135406580):
 <p>What is Lean's equivalent of Abort in Coq?</p>

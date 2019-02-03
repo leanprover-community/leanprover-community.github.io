@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/17253orderisowoes.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [order_iso woes](17253orderisowoes.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [order_iso woes](https://leanprover-community.github.io/archive/113489newmembers/17253orderisowoes.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Bryan Gin-ge Chen (Oct 10 2018 at 03:55)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/order_iso%20woes/near/135512696):
 <p>I'm trying to generalize <a href="https://github.com/leanprover-community/mathlib/blob/tutorials/order/partitions.lean#L366" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/tutorials/order/partitions.lean#L366">this function</a> (there's a typo, that should be a def not a lemma; nonetheless it works...). I want to prove that an <code>order_iso</code>gives rise to a <code>galois_insertion</code> but I'm stuck on what seems to me to be simple:</p>

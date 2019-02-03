@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/84306undead.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [undead](84306undead.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [undead](https://leanprover-community.github.io/archive/113488general/84306undead.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Aug 23 2018 at 12:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132629895):
 <p>"Undead" is a game from [Simon Tatham's portable puzzle collection] (<a href="https://www.chiark.greenend.org.uk/~sgtatham/puzzles/" target="_blank" title="https://www.chiark.greenend.org.uk/~sgtatham/puzzles/">https://www.chiark.greenend.org.uk/~sgtatham/puzzles/</a>). These games are perfect information one player puzzle games, and often solving a level completely (for me at least, in most of these games) involves finding a constructive proof that there is precisely one solution to the level. I'm probably going to supervise a masters project this coming academic year on games like this, so I thought it was about time I understood what I could do with them in Lean.</p>

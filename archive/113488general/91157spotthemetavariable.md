@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/91157spotthemetavariable.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [spot the metavariable](91157spotthemetavariable.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [spot the metavariable](https://leanprover-community.github.io/archive/113488general/91157spotthemetavariable.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Apr 09 2018 at 01:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/spot%20the%20metavariable/near/124814424):
 <div class="codehilite"><pre><span></span><span class="bp">#</span><span class="kn">print</span> <span class="n">false</span><span class="bp">.</span><span class="n">rec</span> <span class="c1">-- protected eliminator false.rec : Π (C : Sort l), false → C</span>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/61444Compactopentopology.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [Compact-open topology](61444Compactopentopology.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [Compact-open topology](https://leanprover-community.github.io/archive/116395maths/61444Compactopentopology.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Patrick Massot (Sep 24 2018 at 22:28)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Compact-open%20topology/near/134554654):
 <p>I see <span class="user-mention" data-user-id="110294">@Johannes Hölzl</span>  merged <a href="https://github.com/leanprover/mathlib/pull/368" target="_blank" title="https://github.com/leanprover/mathlib/pull/368">https://github.com/leanprover/mathlib/pull/368</a> before Reid answered my comments. Was this done on purpose?</p>

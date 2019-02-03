@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/43391kernelsofhomomorphisms.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [kernels of homomorphisms](43391kernelsofhomomorphisms.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [kernels of homomorphisms](https://leanprover-community.github.io/archive/113488general/43391kernelsofhomomorphisms.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Johan Commelin (Apr 23 2018 at 20:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/kernels%20of%20homomorphisms/near/125580755):
 <p>Ok, I'm making my feet wet with a first attempt at formalising something. I want to say write down the assumption im(f) = ker(g), where f and g are group homomorphisms. I guess im(f) will be something like <code>f ' A.univ</code>. I tried to find kernels in <code>algebra.group</code> but did not find anything. Are kernels somewhere else?</p>

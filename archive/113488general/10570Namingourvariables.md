@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/10570Namingourvariables.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [Naming our variables](10570Namingourvariables.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [Naming our variables](https://leanprover-community.github.io/archive/113488general/10570Namingourvariables.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Apr 07 2018 at 00:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Naming%20our%20variables/near/124741274):
 <blockquote>

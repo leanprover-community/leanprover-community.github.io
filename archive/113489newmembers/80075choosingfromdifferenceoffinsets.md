@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/80075choosingfromdifferenceoffinsets.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [choosing from difference of finsets](80075choosingfromdifferenceoffinsets.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [choosing from difference of finsets](https://leanprover-community.github.io/archive/113489newmembers/80075choosingfromdifferenceoffinsets.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Bryan Gin-ge Chen (Sep 09 2018 at 19:57)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/choosing%20from%20difference%20of%20finsets/near/133619465):
 <p>Here's my "Tactic State":</p>

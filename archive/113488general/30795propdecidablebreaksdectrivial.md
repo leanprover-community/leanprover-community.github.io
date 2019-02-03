@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/30795propdecidablebreaksdectrivial.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [prop_decidable breaks dec_trivial?](30795propdecidablebreaksdectrivial.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [prop_decidable breaks dec_trivial?](https://leanprover-community.github.io/archive/113488general/30795propdecidablebreaksdectrivial.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Jul 26 2018 at 17:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/prop_decidable%20breaks%20dec_trivial%3F/near/130351758):
 <div class="codehilite"><pre><span></span><span class="n">local</span> <span class="n">attribute</span> <span class="o">[</span><span class="kn">instance</span><span class="o">]</span> <span class="n">classical</span><span class="bp">.</span><span class="n">prop_decidable</span>

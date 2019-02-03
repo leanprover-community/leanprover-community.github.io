@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/81309Dagstuhl.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [Dagstuhl](81309Dagstuhl.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [Dagstuhl](https://leanprover-community.github.io/archive/113488general/81309Dagstuhl.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Patrick Massot (Aug 20 2018 at 23:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Dagstuhl/near/132481772):
 <p>So, how is the Dagstuhl meeting going on?</p>

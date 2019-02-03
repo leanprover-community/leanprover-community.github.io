@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/38732monadicmerge.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [monadic merge](38732monadicmerge.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [monadic merge](https://leanprover-community.github.io/archive/113488general/38732monadicmerge.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Patrick Massot (Mar 20 2018 at 23:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/monadic%20merge/near/123983991):
 <p>The monad refactoring PR was merged! Congratulations <span class="user-mention" data-user-id="110024">@Sebastian Ullrich</span> !</p>

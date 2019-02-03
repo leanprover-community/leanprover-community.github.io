@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/51801monoandacmonointhenursery.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [mono and ac_mono in the nursery](51801monoandacmonointhenursery.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [mono and ac_mono in the nursery](https://leanprover-community.github.io/archive/113488general/51801monoandacmonointhenursery.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Simon Hudon (Aug 22 2018 at 19:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mono%20and%20ac_mono%20in%20the%20nursery/near/132589831):
 <p>My <code>mono</code> and <code>ac_mono</code> are, I believe, ready for use. I have put them in the nursery <a href="https://github.com/leanprover-community/mathlib-nursery" target="_blank" title="https://github.com/leanprover-community/mathlib-nursery">https://github.com/leanprover-community/mathlib-nursery</a> so that people can try them out as I get them merged into mathlib.</p>

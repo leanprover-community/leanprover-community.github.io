@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/40322easyinmathsunionquestion.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [easy-in-maths union question](40322easyinmathsunionquestion.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [easy-in-maths union question](https://leanprover-community.github.io/archive/113488general/40322easyinmathsunionquestion.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Apr 17 2018 at 15:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/easy-in-maths%20union%20question/near/125196178):
 <div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">set</span>

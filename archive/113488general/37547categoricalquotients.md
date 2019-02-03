@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/37547categoricalquotients.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [categorical quotients](37547categoricalquotients.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [categorical quotients](https://leanprover-community.github.io/archive/113488general/37547categoricalquotients.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Scott Morrison (Apr 30 2018 at 01:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/categorical%20quotients/near/125870843):
 <p>Is everyone ready for a new puzzle about how to formalise things mathematicians use without thinking about? :-)</p>

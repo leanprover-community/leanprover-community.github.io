@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/35408existsiissodumb.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [`existsi` is so dumb](35408existsiissodumb.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [`existsi` is so dumb](https://leanprover-community.github.io/archive/113488general/35408existsiissodumb.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Nov 19 2018 at 13:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60existsi%60%20is%20so%20dumb/near/147962582):
 <p>I often really feel like the <code>existsi</code> tactic is slacking off. It is always moaning that it doesn't know the type of what I suggest, even though it knows exactly the type it is expecting to get. And now this!</p>

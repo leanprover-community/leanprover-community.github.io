@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/52974whatdoesmean.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [what does . mean?](52974whatdoesmean.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [what does . mean?](https://leanprover-community.github.io/archive/113488general/52974whatdoesmean.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Apr 16 2018 at 03:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/what%20does%20.%20mean%3F/near/125129469):
 <div class="codehilite"><pre><span></span>type mismatch at application

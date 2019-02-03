@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/08589resetI.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [resetI](08589resetI.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [resetI](https://leanprover-community.github.io/archive/113488general/08589resetI.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Simon Hudon (Apr 11 2018 at 02:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/resetI/near/124910648):
 <p>Is there any reason <code>resetI</code> wouldn't work in the latest nightly? I have a very short proof with <code>intro ; resetI</code> in it and I get:</p>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/03929ExpectedTypeinmatch.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [Expected Type in match](03929ExpectedTypeinmatch.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [Expected Type in match](https://leanprover-community.github.io/archive/113488general/03929ExpectedTypeinmatch.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Nima (Apr 21 2018 at 08:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Expected%20Type%20in%20match/near/125483132):
 <p>Is there anyway to <strong>explicitly</strong> tell lean the expected type of <code>match</code>, so I would not receive the following error:</p>

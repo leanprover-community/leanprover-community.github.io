@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/11415uniformity.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [uniformity](11415uniformity.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [uniformity](https://leanprover-community.github.io/archive/113489newmembers/11415uniformity.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Oct 21 2018 at 19:28)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/uniformity/near/136221947):
 <p>Let's say <code>s</code> is an open set. Is <code>{ p | p.1 in s iff p.2 in s }</code> in the uniformity?</p>

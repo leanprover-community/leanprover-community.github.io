@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/17341Hausdorffcompletion.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [Hausdorff completion](17341Hausdorffcompletion.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [Hausdorff completion](https://leanprover-community.github.io/archive/116395maths/17341Hausdorffcompletion.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Patrick Massot (Jul 11 2018 at 11:49)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Hausdorff%20completion/near/129461026):
 <p><span class="user-mention" data-user-id="110294">@Johannes Hölzl</span> around <a href="https://github.com/leanprover/mathlib/blob/master/analysis/topology/uniform_space.lean#L1102" target="_blank" title="https://github.com/leanprover/mathlib/blob/master/analysis/topology/uniform_space.lean#L1102">https://github.com/leanprover/mathlib/blob/master/analysis/topology/uniform_space.lean#L1102</a>, is there any reason why you didn't push to the Hausdorff completion? Is the idea that users should easily combine stuff in this section with the <a href="https://github.com/leanprover/mathlib/blob/master/analysis/topology/uniform_space.lean#L928" target="_blank" title="https://github.com/leanprover/mathlib/blob/master/analysis/topology/uniform_space.lean#L928">https://github.com/leanprover/mathlib/blob/master/analysis/topology/uniform_space.lean#L928</a> section? Or did you intend to continue this?</p>

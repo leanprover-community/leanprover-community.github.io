@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/25435ltvsle.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [lt vs le](25435ltvsle.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [lt vs le](https://leanprover-community.github.io/archive/113488general/25435ltvsle.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Apr 29 2018 at 19:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lt%20vs%20le/near/125861139):
 <p>eh... can I define a partial order / any order using lt instead of le?</p>

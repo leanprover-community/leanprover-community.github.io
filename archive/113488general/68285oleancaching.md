@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/68285oleancaching.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [olean caching](68285oleancaching.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [olean caching](https://leanprover-community.github.io/archive/113488general/68285oleancaching.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Simon Hudon (Oct 07 2018 at 23:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/olean%20caching/near/135366355):
 <p>I just created a PR to get <code>git</code> to preserve your <code>olean</code> files and restore them when you switch branches. I'd like to know if it works for people. Please let me know if you try it and if it helps.</p>

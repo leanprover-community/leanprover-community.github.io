@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/28546provingtrivialfactsabouttypes.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [proving trivial facts about types](28546provingtrivialfactsabouttypes.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [proving trivial facts about types](https://leanprover-community.github.io/archive/113489newmembers/28546provingtrivialfactsabouttypes.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Joseph Corneli (Jan 24 2019 at 14:57)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/proving%20trivial%20facts%20about%20types/near/156773638):
 <p>I can <code>#check ff</code> but can I <em>prove</em> ff : bool or similar facts?</p>

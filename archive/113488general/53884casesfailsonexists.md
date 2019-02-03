@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/53884casesfailsonexists.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [cases fails on exists](53884casesfailsonexists.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [cases fails on exists](https://leanprover-community.github.io/archive/113488general/53884casesfailsonexists.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Nima (Apr 21 2018 at 09:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cases%20fails%20on%20exists/near/125485520):
 <p>Can you explain this error message (it happens when I say <code>cases hm with aa bb</code>, but <code>by_cases number.has_min α with hm</code> works perfectly fine):</p>

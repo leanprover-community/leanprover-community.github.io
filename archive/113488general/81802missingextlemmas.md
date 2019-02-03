@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/81802missingextlemmas.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [missing ext lemmas?](81802missingextlemmas.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [missing ext lemmas?](https://leanprover-community.github.io/archive/113488general/81802missingextlemmas.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Johan Commelin (Oct 03 2018 at 10:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20ext%20lemmas%3F/near/135088491):
 <p>How many of the following should be marked with <code>@[extensionality]</code>?</p>

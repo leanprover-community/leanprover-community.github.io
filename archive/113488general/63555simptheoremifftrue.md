@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/63555simptheoremifftrue.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [simp theorem iff true](63555simptheoremifftrue.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [simp theorem iff true](https://leanprover-community.github.io/archive/113488general/63555simptheoremifftrue.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Sean Leather (May 18 2018 at 13:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20theorem%20iff%20true/near/126744334):
 <p>What's the difference in <code>simp</code> behavior (if any) between these two theorems for <code>p : Prop</code>? Is one or the other preferable?</p>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/39509declarationlinter.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [declaration linter](39509declarationlinter.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [declaration linter](https://leanprover-community.github.io/archive/113488general/39509declarationlinter.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Reid Barton (Oct 19 2018 at 18:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/declaration%20linter/near/136122617):
 <p>I wrote a "declaration linter" that processes each declaration and checks for things that look dodgy.<br>

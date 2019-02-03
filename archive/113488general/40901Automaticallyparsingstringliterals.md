@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/40901Automaticallyparsingstringliterals.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [Automatically parsing string literals](40901Automaticallyparsingstringliterals.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [Automatically parsing string literals](https://leanprover-community.github.io/archive/113488general/40901Automaticallyparsingstringliterals.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Joe Hendrix (Dec 12 2018 at 01:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Automatically%20parsing%20string%20literals/near/151491800):
 <p>I have a type A and a partial function <code>parseA : string -&gt; except string A</code>, is there an easy way to get Lean to automatically call <code>parseA</code> parser when I have a literal <code>("foo" : A)</code>? If <code>parseA "foo"</code> returns <code>except.ok r</code> then I'd like <code>r</code> to be used, and if it fails I'd like Lean to report the error.<br>

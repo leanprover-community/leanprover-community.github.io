@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/42069inductionoverconstrainedstructure.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [induction over constrained structure](42069inductionoverconstrainedstructure.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [induction over constrained structure](https://leanprover-community.github.io/archive/113489newmembers/42069inductionoverconstrainedstructure.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Gavid Liebnich (Nov 13 2018 at 13:41)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/induction%20over%20constrained%20structure/near/147588184):
 <p>I am slightly stuck on a proof, could anyone point me in the right direction? The tl;dr is that I have a structure <code>X</code> holding <code>n</code> and a proof that <code>h : 0 &lt; n</code>. However, <code>h</code> makes it impossible to do induction on <code>n</code>, because my inductive hypotheses requires me to construct a new <code>X</code> such that <code>h</code> holds, which is untrue for an arbitrary <code>n</code>.</p>

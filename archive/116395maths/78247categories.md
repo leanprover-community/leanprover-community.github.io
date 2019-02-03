@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/78247categories.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [categories](78247categories.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [categories](https://leanprover-community.github.io/archive/116395maths/78247categories.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Reid Barton (Sep 05 2018 at 16:43)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/categories/near/133380177):
 <p>This new functor arrow doesn't seem to have an abbreviation in emacs.<br>

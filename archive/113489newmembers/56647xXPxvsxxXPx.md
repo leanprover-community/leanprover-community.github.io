@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/56647xXPxvsxxXPx.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [∃ x ∈ X, P x vs. ∃ x, x ∈  X ∧ P x](56647xXPxvsxxXPx.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [∃ x ∈ X, P x vs. ∃ x, x ∈  X ∧ P x](https://leanprover-community.github.io/archive/113489newmembers/56647xXPxvsxxXPx.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Bryan Gin-ge Chen (Sep 22 2018 at 15:56)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%E2%88%83%20x%20%E2%88%88%20X%2C%20P%20x%20vs.%20%E2%88%83%20x%2C%20x%20%E2%88%88%20%20X%20%E2%88%A7%20P%20x/near/134438550):
 <p>Up to now I've been using <code>∃ x ∈ X, P x</code> in theorem statements (or also e.g. <code>∃ X ⊆  Y, Q X</code>) (where X : finset a and a has decidable_eq) without really thinking about it. First of all, they look like what I'm used to, and second of all, I've been able to get things to work with them up to now. In lean, they translate to <code>∃ x, ∃ (h : x ∈ X), P x</code> and <code>∃ X, ∃ (H : X ⊆ Y), Q X</code>, and I've just been mindlessly using extra layers of <code>exists.elim</code> / <code>exists.intro</code> to deal with the <code>h</code>'s and <code>H</code>'s in proofs.</p>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/89366precompiledmathlib.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [precompiled mathlib](89366precompiledmathlib.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [precompiled mathlib](https://leanprover-community.github.io/archive/113488general/89366precompiledmathlib.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Johan Commelin (Apr 20 2018 at 15:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/precompiled%20mathlib/near/125449071):
 <blockquote>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/16752Howtoparsethisexample.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [How to parse this example?](16752Howtoparsethisexample.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [How to parse this example?](https://leanprover-community.github.io/archive/116395maths/16752Howtoparsethisexample.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ None proffered (Aug 07 2018 at 20:11)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/How%20to%20parse%20this%20example%3F/near/131060242):
 <p>How to parse this example?</p>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/89394Writingrationals.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [Writing rationals](89394Writingrationals.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [Writing rationals](https://leanprover-community.github.io/archive/113489newmembers/89394Writingrationals.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Abhimanyu Pallavi Sudhir (Oct 17 2018 at 18:42)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Writing%20rationals/near/135984699):
 <p>How can I rewrite a known rational <code>r : \Q</code> in the form <code>rat.mk (...) (...)</code>?</p>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/59434simplefieldtheory.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [simple field theory](59434simplefieldtheory.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [simple field theory](https://leanprover-community.github.io/archive/116395maths/59434simplefieldtheory.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Joey van Langen (Dec 04 2018 at 15:42)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/simple%20field%20theory/near/150851783):
 <p>I would like to work on some simple results about fields to contribute to the math library. Results that seem achievable are: field extensions and their degree, splitting fields, the existence and uniqueness of finite fields, maybe some galois theory. Is anyone working in this direction? If so, what has already been done?</p>

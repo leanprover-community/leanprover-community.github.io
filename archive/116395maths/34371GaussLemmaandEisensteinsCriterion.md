@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/34371GaussLemmaandEisensteinsCriterion.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [Gauss Lemma and Eisenstein's Criterion](34371GaussLemmaandEisensteinsCriterion.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [Gauss Lemma and Eisenstein's Criterion](https://leanprover-community.github.io/archive/116395maths/34371GaussLemmaandEisensteinsCriterion.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Aditya Agarwal (Nov 13 2018 at 01:02)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Gauss%20Lemma%20and%20Eisenstein%27s%20Criterion/near/147559555):
 <p>Is anyone working on Gauss Lemma and Eisenstein's Criterion or are they present in mathlib?</p>

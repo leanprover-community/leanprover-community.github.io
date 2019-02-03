@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/14623tfaebug.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [tfae bug](14623tfaebug.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [tfae bug](https://leanprover-community.github.io/archive/113488general/14623tfaebug.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Patrick Massot (Oct 05 2018 at 08:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tfae%20bug/near/135238104):
 <p>Minimized from the open maps thread:</p>

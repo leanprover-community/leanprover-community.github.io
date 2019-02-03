@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/01990hornerpolynomials.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [horner polynomials](01990hornerpolynomials.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [horner polynomials](https://leanprover-community.github.io/archive/116395maths/01990hornerpolynomials.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Chris Hughes (Nov 29 2018 at 20:10)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/horner%20polynomials/near/148810007):
 <p>I remember <span class="user-mention" data-user-id="110294">@Johannes Hölzl</span>  saying something in Orsay about having an interface for polynomials in horner form? What exactly did he mean by this? Is something like this worth having, and is it worth proving the equation lemmas for this, and proving it in a semiring? It does make some proofs easier.</p>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/76997projectorpackage.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [project or package](76997projectorpackage.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [project or package](https://leanprover-community.github.io/archive/113488general/76997projectorpackage.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Oct 13 2018 at 11:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/project%20or%20package/near/135725749):
 <p>I've just realised that in some of my docs I use the words "project" and "package" interchangeably when talking about "a directory with a <code>leanpkg.toml</code> file in it". Are the words interchangeable? If not, which one should I be using?</p>

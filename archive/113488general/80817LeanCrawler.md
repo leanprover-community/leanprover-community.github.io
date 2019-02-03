@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/80817LeanCrawler.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [Lean Crawler](80817LeanCrawler.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [Lean Crawler](https://leanprover-community.github.io/archive/113488general/80817LeanCrawler.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Patrick Massot (Aug 27 2018 at 21:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20Crawler/near/132877252):
 <p>Yesterday I release the preliminary hacky version of my Lean library crawler at <a href="https://github.com/leanprover-community/leancrawler" target="_blank" title="https://github.com/leanprover-community/leancrawler">https://github.com/leanprover-community/leancrawler</a>. It's in the community organization so don't hesitate to request push access if you want to make it much better</p>

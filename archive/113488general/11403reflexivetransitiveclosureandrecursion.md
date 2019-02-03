@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/11403reflexivetransitiveclosureandrecursion.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [reflexive-transitive closure and recursion](11403reflexivetransitiveclosureandrecursion.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [reflexive-transitive closure and recursion](https://leanprover-community.github.io/archive/113488general/11403reflexivetransitiveclosureandrecursion.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Shachar Itzhaky (Jun 12 2018 at 17:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/reflexive-transitive%20closure%20and%20recursion/near/127960102):
 <p>Lean has a transitive closure but I want a reflexive-transitive one. So I wrote the following definition:</p>

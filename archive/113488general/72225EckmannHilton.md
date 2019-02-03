@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/72225EckmannHilton.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [Eckmann–Hilton](72225EckmannHilton.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [Eckmann–Hilton](https://leanprover-community.github.io/archive/113488general/72225EckmannHilton.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Johan Commelin (Sep 07 2018 at 10:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Eckmann%E2%80%93Hilton/near/133496192):
 <p>Today I thought it was a good idea to stretch the type class system a bit. In fact, I ended up not using it at all <span class="emoji emoji-1f923" title="rolling on the floor laughing">:rolling_on_the_floor_laughing:</span><br>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/36914howdoestacticringwork.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [how does tactic.ring work?](36914howdoestacticringwork.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [how does tactic.ring work?](https://leanprover-community.github.io/archive/116395maths/36914howdoestacticringwork.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Johan Commelin (Jun 13 2018 at 12:02)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/how%20does%20tactic.ring%20work%3F/near/128000315):
 <p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> Re 2: Because <code>znum</code> is a fast (but somewhat "unmathematical") implementation of <code>int</code>.</p>

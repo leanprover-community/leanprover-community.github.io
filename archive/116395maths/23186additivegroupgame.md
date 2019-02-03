@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/23186additivegroupgame.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [additive group game](23186additivegroupgame.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [additive group game](https://leanprover-community.github.io/archive/116395maths/23186additivegroupgame.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Apr 28 2018 at 03:56)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20game/near/125802827):
 <p>The additive group <code>add_group</code> in Lean is defined in core Lean, which means it's hard to change. The definition is this:</p>

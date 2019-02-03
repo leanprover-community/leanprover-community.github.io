@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/80390somethingisweird.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [`some`thing is weird](80390somethingisweird.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [`some`thing is weird](https://leanprover-community.github.io/archive/113489newmembers/80390somethingisweird.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Abhimanyu Pallavi Sudhir (Nov 21 2018 at 16:35)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%60some%60thing%20is%20weird/near/148117675):
 <p>I've been looking at the <code>classical.lean</code> file, and <code>p_implies_uv</code> strikes me as a very odd theorem. You have a proposition <code>p</code>, and you have two propositions, <code>u</code> which is <code>some</code> proposition such that it is true or <code>p</code> is true, and <code>v</code> which is <code>some</code> proposition such that it is false or <code>p</code> is true.  </p>

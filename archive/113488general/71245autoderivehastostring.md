@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/71245autoderivehastostring.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [auto derive has_to_string](71245autoderivehastostring.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [auto derive has_to_string](https://leanprover-community.github.io/archive/113488general/71245autoderivehastostring.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Zesen Qian (Jul 21 2018 at 22:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/auto%20derive%20has_to_string/near/130069413):
 <p>RT, something like this in lean?</p>

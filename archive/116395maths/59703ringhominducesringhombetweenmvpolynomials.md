@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/59703ringhominducesringhombetweenmvpolynomials.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [ring hom induces ring hom between mv_polynomials](59703ringhominducesringhombetweenmvpolynomials.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [ring hom induces ring hom between mv_polynomials](https://leanprover-community.github.io/archive/116395maths/59703ringhominducesringhombetweenmvpolynomials.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Johan Commelin (Jul 24 2018 at 12:43)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20hom%20induces%20ring%20hom%20between%20mv_polynomials/near/130203646):
 <p>I am stuck.</p>

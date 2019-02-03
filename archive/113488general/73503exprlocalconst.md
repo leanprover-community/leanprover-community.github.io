@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/73503exprlocalconst.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [expr.local_const](73503exprlocalconst.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [expr.local_const](https://leanprover-community.github.io/archive/113488general/73503exprlocalconst.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Jakob von Raumer (Apr 17 2018 at 16:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/expr.local_const/near/125198966):
 <p>What's the difference between the first two arguments to <code>expr.local_const</code>?</p>

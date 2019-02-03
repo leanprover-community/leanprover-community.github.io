@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/52683unexpectedlylong.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [unexpectedly long](52683unexpectedlylong.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [unexpectedly long](https://leanprover-community.github.io/archive/113488general/52683unexpectedlylong.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Sep 28 2018 at 16:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpectedly%20long/near/134828020):
 <div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">finset</span>

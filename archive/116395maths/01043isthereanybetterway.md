@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/01043isthereanybetterway.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [is there any better way?](01043isthereanybetterway.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [is there any better way?](https://leanprover-community.github.io/archive/116395maths/01043isthereanybetterway.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Truong Nguyen (Sep 03 2018 at 19:36)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/is%20there%20any%20better%20way%3F/near/133271618):
 <p>Hi Everybody,<br>

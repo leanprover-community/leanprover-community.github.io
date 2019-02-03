@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/55685realpowers.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [real powers](55685realpowers.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [real powers](https://leanprover-community.github.io/archive/116395maths/55685realpowers.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Chris Hughes (Nov 04 2018 at 16:27)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/real%20powers/near/137159650):
 <p>If we did <code>has_pow real real</code>, what would <code>(-1)^(1/3)</code> be?</p>

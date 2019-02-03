@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/29167ContinuousFunctionsPreserveLimits.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [Continuous Functions Preserve Limits](29167ContinuousFunctionsPreserveLimits.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [Continuous Functions Preserve Limits](https://leanprover-community.github.io/archive/116395maths/29167ContinuousFunctionsPreserveLimits.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Rohan Mitta (Sep 26 2018 at 14:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Continuous%20Functions%20Preserve%20Limits/near/134671259):
 <p>Is this in mathlib (or anything like this)? </p>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/54550unfreezelocalinstances.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [unfreeze_local_instances](54550unfreezelocalinstances.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [unfreeze_local_instances](https://leanprover-community.github.io/archive/113488general/54550unfreezelocalinstances.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Patrick Massot (Feb 27 2018 at 14:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unfreeze_local_instances/near/123043264):
 <p>Should we reply to <a href="https://github.com/leanprover/lean/issues/1920#issuecomment-368691909" target="_blank" title="https://github.com/leanprover/lean/issues/1920#issuecomment-368691909">https://github.com/leanprover/lean/issues/1920#issuecomment-368691909</a> ? I'd like someone to thank Leo, but I'm not sure what would upset him more (I could thank him myself, but discovering some new Lean user could be upsetting).</p>

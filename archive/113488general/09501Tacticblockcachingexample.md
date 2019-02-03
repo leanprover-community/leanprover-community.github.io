@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/09501Tacticblockcachingexample.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [Tactic block caching example](09501Tacticblockcachingexample.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [Tactic block caching example](https://leanprover-community.github.io/archive/113488general/09501Tacticblockcachingexample.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Keeley Hoek (Feb 02 2019 at 09:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Tactic%20block%20caching%20example/near/157414492):
 <p>Hey everyone, first day back (after a whiiile) and I finally put together an example for the tactic-block caching stuff that people can try out. All you have to do is clone <a href="https://github.com/khoek/leancache-example.git" target="_blank" title="https://github.com/khoek/leancache-example.git">https://github.com/khoek/leancache-example.git</a> (and make sure you have elan), and examine the <code>somemaths-xxx.lean</code> file in <code>src</code>. The files in there are shamelessly stolen from <code>lean-category-theory</code> and has a few statements which take a full 1- or 2-seconds to recompile normally (at least on my machine). You can turn caching on and off in the file by including <code>tactic.tcache.enable</code> (as stated there), as well as clear the cache and/or turn on some tracing to compare the performance with and without caching the proofs.</p>

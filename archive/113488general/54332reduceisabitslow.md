@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/54332reduceisabitslow.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [#reduce is a bit slow?](54332reduceisabitslow.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [#reduce is a bit slow?](https://leanprover-community.github.io/archive/113488general/54332reduceisabitslow.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Arseniy Alekseyev (Jul 17 2018 at 02:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%23reduce%20is%20a%20bit%20slow%3F/near/129783924):
 <p>These reductions work a bit slow for me:</p>

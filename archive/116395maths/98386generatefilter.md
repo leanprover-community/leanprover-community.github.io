@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/98386generatefilter.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [generate filter](98386generatefilter.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [generate filter](https://leanprover-community.github.io/archive/116395maths/98386generatefilter.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Apr 28 2018 at 06:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/generate%20filter/near/125807430):
 <div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">generate</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span><span class="n">set</span> <span class="o">(</span><span class="n">set</span> <span class="n">α</span><span class="o">))</span> <span class="o">:</span> <span class="n">filter</span> <span class="n">α</span> <span class="o">:=</span>

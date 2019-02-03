@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/05743tacticforunfoldingdefinition.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [tactic for unfolding definition](05743tacticforunfoldingdefinition.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [tactic for unfolding definition](https://leanprover-community.github.io/archive/113488general/05743tacticforunfoldingdefinition.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Mar 15 2018 at 20:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20for%20unfolding%20definition/near/123764614):
 <p>If I've defined <code>def A := B</code> and my goal / hypothesis contains A, how do I replace A with B?</p>

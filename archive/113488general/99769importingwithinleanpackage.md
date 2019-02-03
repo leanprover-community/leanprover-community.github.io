@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/99769importingwithinleanpackage.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [importing within lean package](99769importingwithinleanpackage.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [importing within lean package](https://leanprover-community.github.io/archive/113488general/99769importingwithinleanpackage.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Chris Hughes (Mar 24 2018 at 21:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/importing%20within%20lean%20package/near/124161392):
 <p>So I've tried to download <span class="user-mention" data-user-id="110064">@Kenny Lau</span> and <span class="user-mention" data-user-id="110038">@Kevin Buzzard</span>'s stacks project library, but none of the imports are currently working, I get the following message</p>

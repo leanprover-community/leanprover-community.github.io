@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/85476updatingthenthelementofalist.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [updating the nth element of a list](85476updatingthenthelementofalist.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [updating the nth element of a list](https://leanprover-community.github.io/archive/113488general/85476updatingthenthelementofalist.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Scott Morrison (Nov 30 2018 at 02:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/updating%20the%20nth%20element%20of%20a%20list/near/148832961):
 <p>Do we have something equivalent to</p>

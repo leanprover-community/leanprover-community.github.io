@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/96918rewritingclassoperations.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [rewriting class operations](96918rewritingclassoperations.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [rewriting class operations](https://leanprover-community.github.io/archive/113488general/96918rewritingclassoperations.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Reid Barton (Jun 05 2018 at 16:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewriting%20class%20operations/near/127602788):
 <p>I have this instance:</p>

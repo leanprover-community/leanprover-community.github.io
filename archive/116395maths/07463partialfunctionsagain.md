@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/07463partialfunctionsagain.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [partial functions again](07463partialfunctionsagain.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [partial functions again](https://leanprover-community.github.io/archive/116395maths/07463partialfunctionsagain.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Patrick Massot (Sep 04 2018 at 21:31)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/partial%20functions%20again/near/133331307):
 <p>With the recent merges from my so-called differential topology repository to mathlib, the next target in this direction is the definition of derivatives (Fréchet derivative if you insist on this terminology). It is very easy to say that a function defined on a whole normed vector space is differentiable at some point a: <a href="https://github.com/PatrickMassot/lean-differential-topology/blob/master/src/calculus.lean#L17" target="_blank" title="https://github.com/PatrickMassot/lean-differential-topology/blob/master/src/calculus.lean#L17">https://github.com/PatrickMassot/lean-differential-topology/blob/master/src/calculus.lean#L17</a> But of course we want derivatives of functions defined on a subset of a normed space, at least allowing an open set. I can clearly try to adapt the definition, but I'd be happy to read any advice.</p>

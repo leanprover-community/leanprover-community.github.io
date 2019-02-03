@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/06147underhandedlean.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [underhanded lean](06147underhandedlean.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [underhanded lean](https://leanprover-community.github.io/archive/113488general/06147underhandedlean.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Mario Carneiro (Dec 27 2018 at 02:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/underhanded%20lean/near/152579911):
 <p>wow, I didn't expect this to work:</p>

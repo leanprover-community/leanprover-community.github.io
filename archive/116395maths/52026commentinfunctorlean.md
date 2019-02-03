@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/52026commentinfunctorlean.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [comment in functor.lean](52026commentinfunctorlean.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [comment in functor.lean](https://leanprover-community.github.io/archive/116395maths/52026commentinfunctorlean.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Johan Commelin (Dec 22 2018 at 07:42)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/comment%20in%20functor.lean/near/152378512):
 <p>Do I understand correctly that this comment is no longer accurate?<br>

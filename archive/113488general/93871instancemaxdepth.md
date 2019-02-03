@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/93871instancemaxdepth.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [instance_max_depth](93871instancemaxdepth.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [instance_max_depth](https://leanprover-community.github.io/archive/113488general/93871instancemaxdepth.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Sebastien Gouezel (Nov 10 2018 at 17:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/instance_max_depth/near/147440040):
 <p>I am really proud of me :) Just encountered the famous message <code>maximum class-instance resolution depth has been reached</code>. And indeed it worked by increasing it to 38. I can't really figure out why, however, since this looks like a trivial instance to me:</p>

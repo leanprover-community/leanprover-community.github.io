@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/28764algebraoveraring.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [algebra over a ring](28764algebraoveraring.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [algebra over a ring](https://leanprover-community.github.io/archive/113488general/28764algebraoveraring.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Dec 08 2018 at 21:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algebra%20over%20a%20ring/near/151193725):
 <p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> Can we do algebra over a ring now? Can we prove that every ring is an Z-algebra? every abelian group is a Z-module?</p>

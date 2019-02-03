@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/15802functionextensionalityandtransports.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [function extensionality and transports](15802functionextensionalityandtransports.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [function extensionality and transports](https://leanprover-community.github.io/archive/113489newmembers/15802functionextensionalityandtransports.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Edward Ayers (Aug 08 2018 at 20:40)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/function%20extensionality%20and%20transports/near/131125621):
 <div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">my_ext</span>

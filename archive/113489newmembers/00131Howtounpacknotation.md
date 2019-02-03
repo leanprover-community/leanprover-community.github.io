@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/00131Howtounpacknotation.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [How to "unpack" notation?](00131Howtounpacknotation.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [How to "unpack" notation?](https://leanprover-community.github.io/archive/113489newmembers/00131Howtounpacknotation.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Abhimanyu Pallavi Sudhir (Oct 14 2018 at 18:31)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20%22unpack%22%20notation%3F/near/135784139):
 <p>How can I "unpack" notation like <code>∉</code>, <code>∩</code>, etc.? I want to convert a proposition of the form <code>x ∉ S</code> to <code>x ∈ S → false</code>. Is this possible just definitionally or do I need to apply some lemma?</p>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/64106deeplyunhappywithcoercions.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [deeply unhappy with coercions](64106deeplyunhappywithcoercions.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [deeply unhappy with coercions](https://leanprover-community.github.io/archive/113488general/64106deeplyunhappywithcoercions.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Scott Morrison (Oct 25 2018 at 00:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deeply%20unhappy%20with%20coercions/near/136441426):
 <p>We've tried using coercions throughout the <code>category_theory/</code> development within mathlib, so that one can write <code>F X</code> for a functor applied to an object, and <code>a X</code> for a natural transformation applied to an object.</p>

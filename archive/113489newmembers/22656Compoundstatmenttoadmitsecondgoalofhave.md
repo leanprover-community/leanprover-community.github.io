@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/22656Compoundstatmenttoadmitsecondgoalofhave.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [Compound statment to admit second goal of have](22656Compoundstatmenttoadmitsecondgoalofhave.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [Compound statment to admit second goal of have](https://leanprover-community.github.io/archive/113489newmembers/22656Compoundstatmenttoadmitsecondgoalofhave.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Ken Roe (Jul 21 2018 at 18:38)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Compound%20statment%20to%20admit%20second%20goal%20of%20have/near/130061451):
 <p>I tried the following to do a "have" and admit the second goal.  What is the correct syntax:</p>

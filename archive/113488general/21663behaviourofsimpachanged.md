@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/21663behaviourofsimpachanged.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [behaviour of simpa changed](21663behaviourofsimpachanged.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [behaviour of simpa changed](https://leanprover-community.github.io/archive/113488general/21663behaviourofsimpachanged.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Chris Hughes (Sep 05 2018 at 11:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/behaviour%20of%20simpa%20changed/near/133365192):
 <p>A few of my proofs have broken since the recent changes to <code>simpa</code>. For example this one.</p>

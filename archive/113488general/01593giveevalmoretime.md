@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/01593giveevalmoretime.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [give #eval more time](01593giveevalmoretime.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [give #eval more time](https://leanprover-community.github.io/archive/113488general/01593giveevalmoretime.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Chris Hughes (Sep 09 2018 at 17:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/give%20%23eval%20more%20time/near/133615259):
 <p>Is there a way to give <code>#eval</code> more time before a deterministic timeout?</p>

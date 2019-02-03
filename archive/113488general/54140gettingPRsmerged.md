@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/54140gettingPRsmerged.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [getting PRs merged](54140gettingPRsmerged.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [getting PRs merged](https://leanprover-community.github.io/archive/113488general/54140gettingPRsmerged.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Johan Commelin (Dec 17 2018 at 14:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/getting%20PRs%20merged/near/152025635):
 <p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> <span class="user-mention" data-user-id="110294">@Johannes Hölzl</span> Is there anything we can do so that a bunch of PRs get merged before the Christmas break? Merging these PRs would mean that we can spend our Christmas holidays on interesting maths stuff, instead of boring parties with food and fire crackers...</p>

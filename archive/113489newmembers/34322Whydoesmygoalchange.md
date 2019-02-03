@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/34322Whydoesmygoalchange.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [Why does my goal change?](34322Whydoesmygoalchange.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [Why does my goal change?](https://leanprover-community.github.io/archive/113489newmembers/34322Whydoesmygoalchange.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Ali Sever (Aug 04 2018 at 12:03)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Why%20does%20my%20goal%20change%3F/near/130885232):
 <p>After using <code>constructor</code> my goal was <code>?m_1 ∉ A</code>. Then I used <code>cases h with p hp</code>, and my goal became <code>?m_1[_] ∉ A</code>. What does that mean, and why does it even happen?</p>

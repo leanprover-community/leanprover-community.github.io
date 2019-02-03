@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/46145provingsimpleinductivetypesaredecidablyequal.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [proving simple inductive types are decidably equal](46145provingsimpleinductivetypesaredecidablyequal.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [proving simple inductive types are decidably equal](https://leanprover-community.github.io/archive/113489newmembers/46145provingsimpleinductivetypesaredecidablyequal.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Edward Ayers (Nov 06 2018 at 16:08)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/proving%20simple%20inductive%20types%20are%20decidably%20equal/near/146870382):
 <p>Suppose I make</p>

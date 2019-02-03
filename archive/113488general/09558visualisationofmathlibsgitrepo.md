@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/09558visualisationofmathlibsgitrepo.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [visualisation of mathlib's git repo](09558visualisationofmathlibsgitrepo.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [visualisation of mathlib's git repo](https://leanprover-community.github.io/archive/113488general/09558visualisationofmathlibsgitrepo.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Johan Commelin (Oct 13 2018 at 15:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/visualisation%20of%20mathlib%27s%20git%20repo/near/135731598):
 <p>Just for the heck of it I uploaded a gource visualisation of the development of mathlib's git repo:<br>

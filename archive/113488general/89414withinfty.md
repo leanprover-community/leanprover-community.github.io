@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/89414withinfty.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [with_infty](89414withinfty.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [with_infty](https://leanprover-community.github.io/archive/113488general/89414withinfty.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Johan Commelin (Oct 08 2018 at 09:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/with_infty/near/135383943):
 <p>I am looking at Sebastien's PR for emetric spaces. And I'm wondering, we have <code>with_top</code>, <code>with_bot</code> and <code>with_zero</code>. Would it make sense to have <code>with_infty</code>, or is it not worth it?</p>

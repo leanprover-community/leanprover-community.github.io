@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/24048proofhelp.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [proof help](24048proofhelp.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [proof help](https://leanprover-community.github.io/archive/113488general/24048proofhelp.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Scott Morrison (Oct 03 2018 at 08:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proof%20help/near/135084627):
 <p>How does one prove <code>1 = n + 1 - n</code>, without getting your hands dirty? Do we have anything that can help with <code>nat.sub</code>?</p>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/97540statementlinter.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [statement linter](97540statementlinter.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [statement linter](https://leanprover-community.github.io/archive/113488general/97540statementlinter.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Patrick Massot (Jul 26 2018 at 00:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/statement%20linter/near/130305793):
 <p>I have a new challenge in the same style as the <code>print_names</code> command, but harder. We all know how to produce the list of everything defined in the current Lean file. Now we want to filter the result, keeping only lemmas or theorems whose input contains two instances for the same type class. For instance, running this command in <a href="https://github.com/leanprover/mathlib/blob/master/analysis/topology/continuity.lean" target="_blank" title="https://github.com/leanprover/mathlib/blob/master/analysis/topology/continuity.lean">https://github.com/leanprover/mathlib/blob/master/analysis/topology/continuity.lean</a> must return (among others) <code>is_closed_diagonal</code> since:</p>

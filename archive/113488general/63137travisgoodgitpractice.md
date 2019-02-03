@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/63137travisgoodgitpractice.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [travis / good git practice](63137travisgoodgitpractice.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [travis / good git practice](https://leanprover-community.github.io/archive/113488general/63137travisgoodgitpractice.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Sep 12 2018 at 13:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/travis%20/%20good%20git%20practice/near/133791639):
 <p>I am trying to use all this git/github/community mathlib infrastructure maturely now.</p>

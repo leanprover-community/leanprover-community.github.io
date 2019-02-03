@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/77548homeos.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [homeos](77548homeos.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [homeos](https://leanprover-community.github.io/archive/116395maths/77548homeos.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Patrick Massot (Sep 20 2018 at 22:01)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/homeos/near/134333294):
 <p><span class="user-mention" data-user-id="110524">@Scott Morrison</span> For the perfectoid project I had to get back to my old <a href="https://github.com/PatrickMassot/lean-differential-topology/blob/master/src/homeos.lean" target="_blank" title="https://github.com/PatrickMassot/lean-differential-topology/blob/master/src/homeos.lean">https://github.com/PatrickMassot/lean-differential-topology/blob/master/src/homeos.lean</a> defining homeomorphisms. But now we have the category Top in mathlib, and isomorphisms. Can I throw away my file and use the category theory stuff? How would that work?</p>

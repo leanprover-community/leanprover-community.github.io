@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/84699Heisenbug.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [Heisenbug](84699Heisenbug.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [Heisenbug](https://leanprover-community.github.io/archive/113488general/84699Heisenbug.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Scott Morrison (Aug 26 2018 at 16:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Heisenbug/near/132789693):
 <p>I just found a Heisenbug: a proof that doesn't typecheck correctly, but if you add <code>tactic.result &gt;&gt;= tactic.trace</code> at the end, it does!</p>

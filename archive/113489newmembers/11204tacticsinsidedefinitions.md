@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/11204tacticsinsidedefinitions.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [tactics inside definitions](11204tacticsinsidedefinitions.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [tactics inside definitions](https://leanprover-community.github.io/archive/113489newmembers/11204tacticsinsidedefinitions.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Bryan Gin-ge Chen (Oct 15 2018 at 00:47)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/tactics%20inside%20definitions/near/135796356):
 <p><span class="user-mention" data-user-id="110064">@Kenny Lau</span> <a href="https://github.com/leanprover/mathlib/pull/421#discussion_r225011707" target="_blank" title="https://github.com/leanprover/mathlib/pull/421#discussion_r225011707">said</a>:</p>

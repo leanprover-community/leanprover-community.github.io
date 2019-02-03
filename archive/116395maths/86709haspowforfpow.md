@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/86709haspowforfpow.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [has_pow for fpow](86709haspowforfpow.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [has_pow for fpow](https://leanprover-community.github.io/archive/116395maths/86709haspowforfpow.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Chris Hughes (Nov 03 2018 at 13:42)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/has_pow%20for%20fpow/near/137112179):
 <p>There's no <code>has_pow</code> instance for integer powers in a field, there's just <code>fpow</code>. Is there a reason why the notation isn't used for <code>fpow</code>?</p>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/11441isuserleanpkgpathfalse.html
 ---
 
-## Stream: [general](index.html)
-### Topic: ["is_user_leanpkg_path": false](11441isuserleanpkgpathfalse.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: ["is_user_leanpkg_path": false](https://leanprover-community.github.io/archive/113488general/11441isuserleanpkgpathfalse.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Nov 28 2018 at 18:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22is_user_leanpkg_path%22%3A%20false/near/148726964):
 <p><code>lean --path</code>. If I run it on my home machine I get <code>"is_user_leanpkg_path": true,</code> and if I run it in CoCalc I get <code>"is_user_leanpkg_path": false,</code>. What does this variable even mean? I am having trouble with paths in CoCalc and am trying to debug.</p>

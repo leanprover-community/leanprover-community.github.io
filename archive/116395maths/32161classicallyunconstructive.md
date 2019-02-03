@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/32161classicallyunconstructive.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [classically unconstructive](32161classicallyunconstructive.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [classically unconstructive](https://leanprover-community.github.io/archive/116395maths/32161classicallyunconstructive.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Sean Leather (Jul 18 2018 at 08:09)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/classically%20unconstructive/near/129853896):
 <p><a href="#narrow/stream/116395-maths/subject/.C2.AC.20(2.20.E2.88.A3.205)/near/129830258" title="#narrow/stream/116395-maths/subject/.C2.AC.20(2.20.E2.88.A3.205)/near/129830258">Johan Commelin</a>:</p>

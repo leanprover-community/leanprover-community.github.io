@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/63608euclideandomainsPR.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [euclidean domains PR](63608euclideandomainsPR.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [euclidean domains PR](https://leanprover-community.github.io/archive/113488general/63608euclideandomainsPR.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Scott Morrison (Apr 05 2018 at 01:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/euclidean%20domains%20PR/near/124646289):
 <p>I think <a href="https://github.com/leanprover/mathlib/pull/78" target="_blank" title="https://github.com/leanprover/mathlib/pull/78">https://github.com/leanprover/mathlib/pull/78</a> is at this point waiting either to be merged or for further comments.</p>

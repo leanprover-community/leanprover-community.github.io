@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/13913abcconjecture.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [abc conjecture](13913abcconjecture.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [abc conjecture](https://leanprover-community.github.io/archive/113488general/13913abcconjecture.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Patrick Massot (Oct 07 2018 at 10:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/abc%20conjecture/near/135343888):
 <blockquote>

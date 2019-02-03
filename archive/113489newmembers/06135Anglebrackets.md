@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/06135Anglebrackets.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [Angle brackets](06135Anglebrackets.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [Angle brackets](https://leanprover-community.github.io/archive/113489newmembers/06135Anglebrackets.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Robert Spencer (Feb 01 2019 at 17:20)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Angle%20brackets/near/157364494):
 <p>Are <code>(| ... |)</code> and <code>⟨ ... ⟩</code> meant to be treated identically by lean?</p>

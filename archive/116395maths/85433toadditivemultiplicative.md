@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/85433toadditivemultiplicative.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [to_additive multiplicative](85433toadditivemultiplicative.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [to_additive multiplicative](https://leanprover-community.github.io/archive/116395maths/85433toadditivemultiplicative.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Patrick Massot (Oct 09 2018 at 15:42)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/to_additive%20multiplicative/near/135470227):
 <p>This is again a question about the machinery allowing to transfer stuff from multiplicative monoids/groups to additive. I'm trying to get a version of <a href="https://github.com/leanprover/mathlib/blob/master/group_theory/submonoid.lean#L112-L142" target="_blank" title="https://github.com/leanprover/mathlib/blob/master/group_theory/submonoid.lean#L112-L142">https://github.com/leanprover/mathlib/blob/master/group_theory/submonoid.lean#L112-L142</a> for groups. I tried:</p>

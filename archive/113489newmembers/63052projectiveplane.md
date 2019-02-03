@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/63052projectiveplane.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [projective plane](63052projectiveplane.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [projective plane](https://leanprover-community.github.io/archive/113489newmembers/63052projectiveplane.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Jenny Mason (Oct 18 2018 at 16:33)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/projective%20plane/near/136047252):
 <p>Hi I am new to lean and was wondering if anyone could suggest how I would go about constructing the 2 dim projective plane.</p>

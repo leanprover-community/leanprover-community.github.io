@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/17208pygments.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [pygments](17208pygments.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [pygments](https://leanprover-community.github.io/archive/113488general/17208pygments.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Andrew Ashworth (Feb 26 2018 at 17:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/pygments/near/123002866):
 <p>my understanding was zulip uses an old version of pygments, and that the lean pygments update was never merged to begin with</p>

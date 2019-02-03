@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/93396leanwebsite.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [lean website](93396leanwebsite.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [lean website](https://leanprover-community.github.io/archive/113488general/93396leanwebsite.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Jakob von Raumer (May 01 2018 at 18:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20website/near/125950535):
 <p>Is <a href="http://github.io" target="_blank" title="http://github.io">github.io</a> down?</p>

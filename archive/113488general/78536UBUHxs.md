@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/78536UBUHxs.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [λ (⟨U,BU,Hx,s⟩](78536UBUHxs.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [λ (⟨U,BU,Hx,s⟩](https://leanprover-community.github.io/archive/113488general/78536UBUHxs.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (May 18 2018 at 11:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%CE%BB%20%28%E2%9F%A8U%2CBU%2CHx%2Cs%E2%9F%A9/near/126741686):
 <p>In the middle of defining a big structure, I have <code>(λ (a : X), sorry)</code>, where X is some explicit structure which takes four...erm...inputs or whatever they're called. Everything typechecks fine. The moment I replace <code>(λ (a : X), sorry)</code> with <code>(λ (⟨U,BU,Hx,s⟩ : X),sorry)</code> I get three errors on the <code>⟨</code> (and plenty more errors too) -- <code>invalid binder, identifier expected</code>, <code>invalid match/convoy expression, expected type is not known</code> and <code>invalid type ascription, term has type

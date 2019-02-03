@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/144837PRreviews/89535480Yonedafixes.html
 ---
 
-## Stream: [PR reviews](index.html)
-### Topic: [#480 Yoneda fixes](89535480Yonedafixes.html)
+## Stream: [PR reviews](https://leanprover-community.github.io/archive/144837PRreviews/index.html)
+### Topic: [#480 Yoneda fixes](https://leanprover-community.github.io/archive/144837PRreviews/89535480Yonedafixes.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Scott Morrison (Nov 28 2018 at 04:29)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23480%20Yoneda%20fixes/near/148686856):
 <p>Travis seems to be screwing something up with <a href="https://github.com/leanprover/mathlib/pull/480" target="_blank" title="https://github.com/leanprover/mathlib/pull/480">https://github.com/leanprover/mathlib/pull/480</a>. It’s complaining about invalid imports in files that aren’t even in this PR anymore. <span class="user-mention" data-user-id="110049">@Mario Carneiro</span>, are you able to reset it somehow?</p>

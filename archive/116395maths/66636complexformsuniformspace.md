@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/66636complexformsuniformspace.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [complex forms uniform space](66636complexformsuniformspace.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [complex forms uniform space](https://leanprover-community.github.io/archive/116395maths/66636complexformsuniformspace.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Oct 05 2018 at 00:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/complex%20forms%20uniform%20space/near/135222007):
 <div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">analysis</span><span class="bp">.</span><span class="n">real</span> <span class="n">analysis</span><span class="bp">.</span><span class="n">complex</span>

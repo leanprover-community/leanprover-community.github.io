@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/05825ordersonproducts.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [orders on products](05825ordersonproducts.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [orders on products](https://leanprover-community.github.io/archive/113489newmembers/05825ordersonproducts.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Alistair Tucker (Dec 08 2018 at 20:06)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/orders%20on%20products/near/151190056):
 <p>I want definitions like</p>

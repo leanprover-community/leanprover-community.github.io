@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/79105extensionality.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [extensionality](79105extensionality.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [extensionality](https://leanprover-community.github.io/archive/113488general/79105extensionality.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (May 27 2018 at 17:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/extensionality/near/127167357):
 <p>Now that we have the <code>ext</code> tactic, let's get started tagging every theorem with <code>@[extensionality]</code> :D</p>

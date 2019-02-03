@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/16807traviscaching.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [travis caching](16807traviscaching.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [travis caching](https://leanprover-community.github.io/archive/116395maths/16807traviscaching.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Andrew Ashworth (Jun 02 2018 at 04:43)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/travis%20caching/near/127449713):
 <blockquote>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/91356primeinringtheoryassociatedlean.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [prime in `ring_theory/associated.lean`](91356primeinringtheoryassociatedlean.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [prime in `ring_theory/associated.lean`](https://leanprover-community.github.io/archive/113488general/91356primeinringtheoryassociatedlean.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Scott Morrison (Nov 23 2018 at 01:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/prime%20in%20%60ring_theory/associated.lean%60/near/148200980):
 <p><code>ring_theory/associated.lean</code> defines </p>

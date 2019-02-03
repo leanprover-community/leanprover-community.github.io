@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/144837PRreviews/78740topicnames.html
 ---
 
-## Stream: [PR reviews](index.html)
-### Topic: [topic names](78740topicnames.html)
+## Stream: [PR reviews](https://leanprover-community.github.io/archive/144837PRreviews/index.html)
+### Topic: [topic names](https://leanprover-community.github.io/archive/144837PRreviews/78740topicnames.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Johan Commelin (Oct 07 2018 at 13:36)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/topic%20names/near/135349506):
 <p>Can we have slightly more descriptive topic names please? Currently they are just hash-number, and they actually link to issues of the <code>lean</code> repo instead of <code>mathlib</code>...</p>

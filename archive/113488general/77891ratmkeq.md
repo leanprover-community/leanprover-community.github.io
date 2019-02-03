@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/77891ratmkeq.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [rat.mk_eq](77891ratmkeq.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [rat.mk_eq](https://leanprover-community.github.io/archive/113488general/77891ratmkeq.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Apr 25 2018 at 16:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rat.mk_eq/near/125675114):
 <div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">mk_eq</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="n">d</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">}</span> <span class="o">(</span><span class="n">hb</span> <span class="o">:</span> <span class="n">b</span> <span class="bp">≠</span> <span class="mi">0</span><span class="o">)</span> <span class="o">(</span><span class="n">hd</span> <span class="o">:</span> <span class="n">d</span> <span class="bp">≠</span> <span class="mi">0</span><span class="o">),</span>

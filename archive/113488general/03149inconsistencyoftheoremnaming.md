@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/03149inconsistencyoftheoremnaming.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [inconsistency of theorem naming](03149inconsistencyoftheoremnaming.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [inconsistency of theorem naming](https://leanprover-community.github.io/archive/113488general/03149inconsistencyoftheoremnaming.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Jul 27 2018 at 09:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inconsistency%20of%20theorem%20naming/near/130393117):
 <div class="codehilite"><pre><span></span><span class="bp">#</span><span class="kn">check</span> <span class="n">list</span><span class="bp">.</span><span class="n">index_of_nth_le</span> <span class="bp">_</span>

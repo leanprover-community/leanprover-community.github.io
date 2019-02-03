@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/55955nestedcases.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [nested cases](55955nestedcases.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [nested cases](https://leanprover-community.github.io/archive/113488general/55955nestedcases.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Reid Barton (Feb 26 2018 at 17:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nested%20cases/near/123003168):
 <p>Is there a more convenient way to unpack the components of a conclusion of the form <code>∃ x y, p x ∧ q y ∧ r x y</code> in a tactics block than using multiple <code>cases</code> tactics?</p>

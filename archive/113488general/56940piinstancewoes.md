@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/56940piinstancewoes.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [pi_instance woes](56940piinstancewoes.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [pi_instance woes](https://leanprover-community.github.io/archive/113488general/56940piinstancewoes.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Jun 14 2018 at 19:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/pi_instance%20woes/near/128076746):
 <p>A product of topological groups is a topological group.</p>

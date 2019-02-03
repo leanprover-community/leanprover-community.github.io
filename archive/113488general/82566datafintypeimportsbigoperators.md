@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/82566datafintypeimportsbigoperators.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [data.fintype imports big_operators](82566datafintypeimportsbigoperators.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [data.fintype imports big_operators](https://leanprover-community.github.io/archive/113488general/82566datafintypeimportsbigoperators.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Johan Commelin (Oct 02 2018 at 15:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/data.fintype%20imports%20big_operators/near/135034142):
 <p>Is this good? I would assume that <code>data/fintype.lean</code> is pretty basic. Is it ok that this imports <code>algebra.big_operators</code>?</p>

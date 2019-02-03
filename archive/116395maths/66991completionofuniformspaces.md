@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/66991completionofuniformspaces.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [completion of uniform spaces](66991completionofuniformspaces.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [completion of uniform spaces](https://leanprover-community.github.io/archive/116395maths/66991completionofuniformspaces.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Patrick Massot (Jun 25 2018 at 21:08)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/completion%20of%20uniform%20spaces/near/128617201):
 <p>The perfectoid projects crucially needs completions of topological rings. I can see mathlib already has a lot about <a href="https://github.com/leanprover/mathlib/blob/master/analysis/topology/uniform_space.lean#L1102" target="_blank" title="https://github.com/leanprover/mathlib/blob/master/analysis/topology/uniform_space.lean#L1102">completion of uniform spaces</a> but I also remember the definition of real numbers was changed by <span class="user-mention" data-user-id="110049">@Mario Carneiro</span>. Is there anything we should know before doing completions of topological rings?</p>

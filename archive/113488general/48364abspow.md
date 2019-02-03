@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/48364abspow.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [abs_pow](48364abspow.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [abs_pow](https://leanprover-community.github.io/archive/113488general/48364abspow.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (May 03 2018 at 00:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/abs_pow/near/126016992):
 <div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">abs_pow</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">decidable_linear_ordered_comm_ring</span> <span class="n">α</span><span class="o">]</span>

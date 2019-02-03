@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/36524matrixupdates.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [matrix updates](36524matrixupdates.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [matrix updates](https://leanprover-community.github.io/archive/116395maths/36524matrixupdates.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Sean Leather (Sep 11 2018 at 10:21)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/matrix%20updates/near/133716760):
 <p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> I worked a bit on matrices on the side. I don't know if you'll be happy with the differences with <a href="https://github.com/leanprover/mathlib/pull/334" target="_blank" title="https://github.com/leanprover/mathlib/pull/334">#334</a>, so I PR'd <a href="https://github.com/leanprover-community/mathlib/pull/2" target="_blank" title="https://github.com/leanprover-community/mathlib/pull/2">#2</a> to your branch on <code>leanprover-community/mathlib</code>. Let me know what you think.</p>

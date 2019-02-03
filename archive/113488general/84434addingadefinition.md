@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/84434addingadefinition.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [adding a definition](84434addingadefinition.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [adding a definition](https://leanprover-community.github.io/archive/113488general/84434addingadefinition.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Keeley Hoek (Sep 14 2018 at 10:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/adding%20a%20definition/near/133939240):
 <p>I'd like implement a <code>[user_command]</code> which adds a definition to the environment at the place where the <code>[user_command]</code> is executed. Of course, there is <code>environment.add</code>, but I have to build a <code>declaration</code> and in particular pass a <code>name</code>. This won't act the same way as writing <code>def blah : type = foo ...</code> on that line because the latter will have a "full name" <code>me.my_namespace.blah</code> if this all goes on inside <code>namespace me.my_namespace</code>. Is there a way to fix this: either to get the current namespace, or to make a declaration as if it happened using a <code>def</code>?</p>

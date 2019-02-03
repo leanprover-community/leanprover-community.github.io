@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/84622hascoeoffunction.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [has_coe of function](84622hascoeoffunction.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [has_coe of function](https://leanprover-community.github.io/archive/113488general/84622hascoeoffunction.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Sean Leather (Aug 08 2018 at 16:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/has_coe%20of%20function/near/131112779):
 <p>Are there any problems with a coercion of a function?</p>

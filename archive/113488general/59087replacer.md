@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/59087replacer.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [replacer](59087replacer.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [replacer](https://leanprover-community.github.io/archive/113488general/59087replacer.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Mario Carneiro (Sep 11 2018 at 02:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/replacer/near/133700764):
 <p>By the suggestion of Simon, I've extended <code>replacer</code> to support parameters in its type. That is, you can define a replaceable definition <code>foo : A -&gt; tactic B</code> where you have arbitrary input and output, rather than just <code>tactic unit</code>. Incidentally, implementing this required my first attempt at meta-metaprogramming, since the defined tactics are written programmatically.</p>

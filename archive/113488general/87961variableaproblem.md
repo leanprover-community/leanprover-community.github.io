@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/87961variableaproblem.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [variable a problem](87961variableaproblem.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [variable a problem](https://leanprover-community.github.io/archive/113488general/87961variableaproblem.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Mar 08 2018 at 22:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/variable%20a%20problem/near/123463049):
 <p>This is presumably well-known but it has just bitten one of my undergraduates. They wrote <code>have Ht2 : (a &lt; nat.succ t) → (nat.succ t &lt; c) → (a &lt; c),</code> in the middle of a tactic proof, with a,t,c nats, and get a type mismatch error: <code>term a has type  nat.succ t &lt; c : Prop</code>. Chris tells me that this is because you can't use <code>have</code> in a tactic proof with an implies sign and a variable <code>a</code>. That sounds like a bug to me. Is it officially not a bug though?</p>

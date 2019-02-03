@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/08179LeanassignmentfromKenny.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [Lean assignment from Kenny](08179LeanassignmentfromKenny.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [Lean assignment from Kenny](https://leanprover-community.github.io/archive/113488general/08179LeanassignmentfromKenny.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Jul 30 2018 at 11:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20assignment%20from%20Kenny/near/130567187):
 <p>(optional) assignment for the people here who are too bored:<br>

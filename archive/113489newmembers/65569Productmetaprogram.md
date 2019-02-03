@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/65569Productmetaprogram.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [Product meta program](65569Productmetaprogram.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [Product meta program](https://leanprover-community.github.io/archive/113489newmembers/65569Productmetaprogram.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Ken Roe (Jul 29 2018 at 20:48)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Product%20meta%20program/near/130535258):
 <p>Here is a simple meta program to simplify a product expression.  It does not seem to match anything.  Can someone explain what is happening?</p>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/62365filterpfiternotp.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [filter p + fiter not p](62365filterpfiternotp.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [filter p + fiter not p](https://leanprover-community.github.io/archive/116395maths/62365filterpfiternotp.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Aug 15 2018 at 20:08)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/filter%20p%20%2B%20fiter%20not%20p/near/132190025):
 <div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">multiset</span>

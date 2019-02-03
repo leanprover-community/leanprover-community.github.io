@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/37715simptauto.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [simp, tauto](37715simptauto.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [simp, tauto](https://leanprover-community.github.io/archive/113488general/37715simptauto.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Sean Leather (May 31 2018 at 13:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%2C%20tauto/near/127356880):
 <p>So close and yet so far:</p>

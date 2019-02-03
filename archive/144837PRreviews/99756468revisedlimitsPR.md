@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/144837PRreviews/99756468revisedlimitsPR.html
 ---
 
-## Stream: [PR reviews](index.html)
-### Topic: [#468 revised limits PR](99756468revisedlimitsPR.html)
+## Stream: [PR reviews](https://leanprover-community.github.io/archive/144837PRreviews/index.html)
+### Topic: [#468 revised limits PR](https://leanprover-community.github.io/archive/144837PRreviews/99756468revisedlimitsPR.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Scott Morrison (Nov 09 2018 at 04:51)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23468%20revised%20limits%20PR/near/147348952):
 <p>Is this the biggest PR so far? Adds +3,634 lines.</p>

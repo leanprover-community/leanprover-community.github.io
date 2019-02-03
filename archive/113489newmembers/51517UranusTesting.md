@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/51517UranusTesting.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [Uranus Testing](51517UranusTesting.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [Uranus Testing](https://leanprover-community.github.io/archive/113489newmembers/51517UranusTesting.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Jan 05 2019 at 10:25)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Uranus%20Testing/near/154466208):
 <p>Welcome <span class="user-mention" data-user-id="197930">@Uranus Testing</span> in UTC+7 (Russia, Mongolia, Christmas Island, Cambodia, Central Kalimantan, Java, Sumatra, West Kalimantan, Laos, Thailand, Vietnam)</p>

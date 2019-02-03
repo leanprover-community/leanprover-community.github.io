@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/25920structureequality.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [structure equality](25920structureequality.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [structure equality](https://leanprover-community.github.io/archive/113488general/25920structureequality.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Patrick Massot (Jul 06 2018 at 20:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/structure%20equality/near/129218426):
 <p>How do we prove equality of two terms whose type is a structure mixing data and Prop? I would like to prove each data holding field matches. I thought this has something to do with <code>no_confusion</code> but I can't get it to work.</p>

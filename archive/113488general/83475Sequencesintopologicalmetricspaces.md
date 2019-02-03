@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/83475Sequencesintopologicalmetricspaces.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [Sequences in topological/metric spaces](83475Sequencesintopologicalmetricspaces.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [Sequences in topological/metric spaces](https://leanprover-community.github.io/archive/113488general/83475Sequencesintopologicalmetricspaces.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Rohan Mitta (Sep 07 2018 at 21:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Sequences%20in%20topological/metric%20spaces/near/133532026):
 <p>Hi, </p>

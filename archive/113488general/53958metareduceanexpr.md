@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/53958metareduceanexpr.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [[meta] reduce an expr](53958metareduceanexpr.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [[meta] reduce an expr](https://leanprover-community.github.io/archive/113488general/53958metareduceanexpr.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Zesen Qian (Aug 11 2018 at 22:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%5Bmeta%5D%20reduce%20an%20expr/near/131968299):
 <p>So I have an <code>expr</code> of the form <code>not a</code>, can I evaluate this expr further? because <code>not</code> is defined as <code>\lam a, (a -&gt; false)</code>.</p>

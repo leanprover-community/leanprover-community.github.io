@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/52075noobquestions.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [noob question(s)](52075noobquestions.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [noob question(s)](https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Wojciech Nawrocki (Nov 20 2018 at 01:46)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/148007940):
 <p>What's the command to make Lean automatically derive <code>decidable_eq</code> for some custom inductive type?</p>

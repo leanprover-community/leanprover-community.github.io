@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/82464meetinopensX.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [meet in opens X](82464meetinopensX.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [meet in opens X](https://leanprover-community.github.io/archive/113488general/82464meetinopensX.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Johan Commelin (Nov 10 2018 at 19:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/meet%20in%20opens%20X/near/147442296):
 <p>If I have <code>U V : opens X</code>, then <code>(U ⊓ V).val</code> is not defeq to <code>U.val ∩ V.val</code>. Can this be fixed while still using the galois insertion to define the lattice structure on <code>opens X</code>?</p>

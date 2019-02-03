@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/144837PRreviews/43082538opposites.html
 ---
 
-## Stream: [PR reviews](index.html)
-### Topic: [#538 opposites](43082538opposites.html)
+## Stream: [PR reviews](https://leanprover-community.github.io/archive/144837PRreviews/index.html)
+### Topic: [#538 opposites](https://leanprover-community.github.io/archive/144837PRreviews/43082538opposites.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Dec 20 2018 at 03:28)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23538%20opposites/near/152229118):
 <p>maybe someone can write a tactic!</p>

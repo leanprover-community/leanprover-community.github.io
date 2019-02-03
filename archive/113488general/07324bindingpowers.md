@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/07324bindingpowers.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [binding powers](07324bindingpowers.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [binding powers](https://leanprover-community.github.io/archive/113488general/07324bindingpowers.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Jan 26 2019 at 04:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/binding%20powers/near/156905008):
 <p>What's the right way to declare a <code>notation</code> for <code>a ^[b] c</code>? what should the binding powers of <code>^[</code> and <code>]</code> be?</p>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/91232usingwlog.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [using wlog](91232usingwlog.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [using wlog](https://leanprover-community.github.io/archive/113488general/91232usingwlog.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Chris Hughes (Mar 08 2018 at 19:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/using%20wlog/near/123456203):
 <p>Just been trying out the new wlog tactic. Is there a way to name the automatically generated hypotheses?</p>

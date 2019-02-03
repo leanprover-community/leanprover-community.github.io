@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/99781simprules.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [simp rules](99781simprules.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [simp rules](https://leanprover-community.github.io/archive/113488general/99781simprules.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Sebastien Gouezel (Dec 04 2018 at 21:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20rules/near/150877417):
 <p>I see there are many things that I would like to add as simp rules. For instance <code>le_refl</code>. And all de Morgan's rules that take a <code>not</code> and push it inside logical connectives, to get to some kind of a normal form, like <code>theorem not_or_distrib : ¬ (a ∨ b) ↔ ¬ a ∧ ¬ b</code>. Are there good reasons not to do it?</p>

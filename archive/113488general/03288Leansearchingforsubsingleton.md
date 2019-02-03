@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/03288Leansearchingforsubsingleton.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [Lean searching for subsingleton?](03288Leansearchingforsubsingleton.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [Lean searching for subsingleton?](https://leanprover-community.github.io/archive/113488general/03288Leansearchingforsubsingleton.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Nov 09 2018 at 21:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20searching%20for%20subsingleton%3F/near/147398515):
 <p><a href="https://gist.github.com/kckennylau/2b5890b44f2f66196254a50e9fd6fa96#file-subsingleton-L727" target="_blank" title="https://gist.github.com/kckennylau/2b5890b44f2f66196254a50e9fd6fa96#file-subsingleton-L727">https://gist.github.com/kckennylau/2b5890b44f2f66196254a50e9fd6fa96#file-subsingleton-L727</a><br>

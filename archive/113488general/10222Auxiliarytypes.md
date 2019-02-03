@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/10222Auxiliarytypes.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [Auxiliary types](10222Auxiliarytypes.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [Auxiliary types](https://leanprover-community.github.io/archive/113488general/10222Auxiliarytypes.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Dec 12 2018 at 00:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Auxiliary%20types/near/151490448):
 <p>I've been thinking about auxiliary types. Types like <code>additive</code> and <code>multiplicative</code>. Types that help the type-class inference system do its job. Interestingly I don't see a wide use of auxiliary types. I understand that one of the inconveniences is that sometimes you want to refer to elements of the original type, and transferring between the real type and the auxiliary type might prove a bit troublesome. What are your thoughts on auxiliary types?</p>

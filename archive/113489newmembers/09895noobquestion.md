@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/09895noobquestion.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [noob question](09895noobquestion.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [noob question](https://leanprover-community.github.io/archive/113489newmembers/09895noobquestion.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Wojciech Nawrocki (Sep 04 2018 at 17:02)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question/near/133315850):
 <p>Hello! Very new to Lean and logic in general;  i'm interested in how i can find the function names that i might need for various deduction steps (e.g. <code>and.intro</code>), since the std/maths library sections of "theorem proving in lean" are empty <span class="emoji emoji-1f627" title="anguished">:anguished:</span> in particular, i want to go from <code>¬p → false</code> to <code>p</code></p>

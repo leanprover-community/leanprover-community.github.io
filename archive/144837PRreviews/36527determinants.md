@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/144837PRreviews/36527determinants.html
 ---
 
-## Stream: [PR reviews](index.html)
-### Topic: [determinants](36527determinants.html)
+## Stream: [PR reviews](https://leanprover-community.github.io/archive/144837PRreviews/index.html)
+### Topic: [determinants](https://leanprover-community.github.io/archive/144837PRreviews/36527determinants.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Chris Hughes (Oct 07 2018 at 18:16)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/determinants/near/135357675):
 <p>I did some tidying on the determinants PR. I got rid of all the relics of <code>Sym</code> that weren't actually used for determinants - It's now only a 130 line Pr, versus 481. I also made the proofs hopefully more readable, if longer. Result is here <a href="https://github.com/leanprover/mathlib/compare/master...dorhinj:determinants2?expand=1" target="_blank" title="https://github.com/leanprover/mathlib/compare/master...dorhinj:determinants2?expand=1">https://github.com/leanprover/mathlib/compare/master...dorhinj:determinants2?expand=1</a></p>

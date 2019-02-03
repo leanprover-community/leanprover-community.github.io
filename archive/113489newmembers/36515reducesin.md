@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/36515reducesin.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [reduce sin](36515reducesin.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [reduce sin](https://leanprover-community.github.io/archive/113489newmembers/36515reducesin.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Joseph Corneli (Jan 30 2019 at 16:03)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/reduce%20sin/near/157193193):
 <div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">complex</span><span class="bp">.</span><span class="n">exponential</span> <span class="n">analysis</span><span class="bp">.</span><span class="n">exponential</span>

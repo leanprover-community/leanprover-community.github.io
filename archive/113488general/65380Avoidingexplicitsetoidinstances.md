@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/65380Avoidingexplicitsetoidinstances.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [Avoiding explicit setoid instances](65380Avoidingexplicitsetoidinstances.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [Avoiding explicit setoid instances](https://leanprover-community.github.io/archive/113488general/65380Avoidingexplicitsetoidinstances.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Chris Hughes (Jun 04 2018 at 20:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Avoiding%20explicit%20setoid%20instances/near/127558107):
 <p>Below is my proof that quotient by a normal subgroup is a group. I can't do it without giving explicit setoid instances everywhere. Using <code>haveI</code> at the beginning of the proof just gives me the error that inferred and synthesized instances are not definitionally equal. Also, in my <code>begin</code> <code>end</code> tactics blocks, I have to use <code>assume</code> within tactics blocks, otherwise my goal is just a metavariable. Is there a way of doing this nicely?</p>

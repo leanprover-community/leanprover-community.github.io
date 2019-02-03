@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/26603maxminoflist.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [max/min of list](26603maxminoflist.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [max/min of list](https://leanprover-community.github.io/archive/113488general/26603maxminoflist.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (May 01 2018 at 12:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/max/min%20of%20list/near/125938032):
 <p>maybe you'll find this useful:</p>

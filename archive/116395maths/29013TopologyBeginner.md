@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/29013TopologyBeginner.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [Topology - Beginner](29013TopologyBeginner.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [Topology - Beginner](https://leanprover-community.github.io/archive/116395maths/29013TopologyBeginner.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Luca Gerolla (Jul 05 2018 at 21:35)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Topology%20-%20Beginner/near/129159440):
 <p>Hello, I am a beginner and I am trying to define a path (in particular a path from <code>x</code> to <code>y</code> on a topological space).<br>

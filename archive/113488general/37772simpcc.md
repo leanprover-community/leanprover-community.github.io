@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/37772simpcc.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [simp, cc](37772simpcc.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [simp, cc](https://leanprover-community.github.io/archive/113488general/37772simpcc.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Pablo Le Hénaff (Jun 06 2018 at 16:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%2C%20cc/near/127657772):
 <p>Hello everyone, I am an intern at VU Amsterdam, working under the supervision of Johannes (who is abroad now).<br>

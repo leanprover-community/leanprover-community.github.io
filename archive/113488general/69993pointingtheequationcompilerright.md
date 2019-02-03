@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/69993pointingtheequationcompilerright.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [pointing the equation compiler right](69993pointingtheequationcompilerright.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [pointing the equation compiler right](https://leanprover-community.github.io/archive/113488general/69993pointingtheequationcompilerright.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ James Wood (May 13 2018 at 13:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/pointing%20the%20equation%20compiler%20right/near/126495867):
 <p>Hi, I'm new to Lean. I'm trying to write the following, but termination checking fails for <code>weaken_term</code> in the second recursive call for <code>app</code> and the recursive call for <code>lam</code>. Each time, the reported problem is that <code>m</code> does not decrease, but that should be irrelevant because the induction is on the term. How can I give Lean this hint? Or is the Lean termination checker not sufficiently Foetus-like, so I have to do something else?</p>

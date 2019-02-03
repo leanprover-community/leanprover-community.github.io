@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/32457evaluatingproofs.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [evaluating proofs?](32457evaluatingproofs.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [evaluating proofs?](https://leanprover-community.github.io/archive/113488general/32457evaluatingproofs.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Dec 12 2018 at 02:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/evaluating%20proofs%3F/near/151495074):
 <p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> I think you said that it is possible to evaluate proofs... do you have an example? can we also break proof irrelevance? maybe have an unsound but computable <code>non-classical.some</code>?</p>

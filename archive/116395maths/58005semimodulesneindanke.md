@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/58005semimodulesneindanke.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [semimodules nein danke](58005semimodulesneindanke.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [semimodules nein danke](https://leanprover-community.github.io/archive/116395maths/58005semimodulesneindanke.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Sep 13 2018 at 23:34)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/semimodules%20nein%20danke/near/133914925):
 <div class="codehilite"><pre><span></span>tactic.mk_instance failed to generate instance for

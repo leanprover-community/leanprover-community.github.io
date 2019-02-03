@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/65806continuousclass.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [continuous class](65806continuousclass.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [continuous class](https://leanprover-community.github.io/archive/116395maths/65806continuousclass.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Patrick Massot (Jul 30 2018 at 01:02)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous%20class/near/130544108):
 <p>Should we turn <code>continuous</code> into a class <code>is_continuous</code> like we did for group homorphisms? I spent quite a lot of time explicitly invoking lemmas that could be handled by type class inference. Same question for uniform continuity.</p>

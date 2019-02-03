@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/17362equationlemmasandsimp.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [equation lemmas and simp](17362equationlemmasandsimp.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [equation lemmas and simp](https://leanprover-community.github.io/archive/113488general/17362equationlemmasandsimp.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Sean Leather (Mar 01 2018 at 08:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equation%20lemmas%20and%20simp/near/123126635):
 <p>What is the effect of putting <code>@[simp]</code> on a <code>def</code> defined with pattern-matching equations? Does it annotate the equation lemmas with <code>@[simp]</code>?</p>

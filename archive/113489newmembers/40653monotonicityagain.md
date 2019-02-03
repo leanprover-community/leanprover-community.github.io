@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/40653monotonicityagain.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [monotonicity again](40653monotonicityagain.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [monotonicity again](https://leanprover-community.github.io/archive/113489newmembers/40653monotonicityagain.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Simon Hudon (Aug 04 2018 at 05:56)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/monotonicity%20again/near/130874956):
 <p>I just gave another shot to implementing <code>mono</code> and <code>ac_mono</code> (for reasoning with monotonicity with and without considerations for associativity / commutativity). For those who would like to use those, I'd love to hear if it's useful as it is. I have written a lot of examples, I hope it will be informative.</p>

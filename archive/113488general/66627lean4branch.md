@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/66627lean4branch.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [lean 4 branch](66627lean4branch.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [lean 4 branch](https://leanprover-community.github.io/archive/113488general/66627lean4branch.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Mario Carneiro (Apr 11 2018 at 04:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%204%20branch/near/124913759):
 <p>For those who are interested: Leo just added a bunch of commits to a new lean 4 branch, primarily just removing lean 3 cruft, and you can see a taste of what it means for the size of corelib.</p>

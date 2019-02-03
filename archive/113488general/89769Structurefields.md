@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/89769Structurefields.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [Structure fields](89769Structurefields.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [Structure fields](https://leanprover-community.github.io/archive/113488general/89769Structurefields.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Sebastien Gouezel (Nov 07 2018 at 16:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Structure%20fields/near/146965379):
 <p>Is there a quick way to unfold something defined in a class? Let me be more specific. The product of metric spaces starts with</p>

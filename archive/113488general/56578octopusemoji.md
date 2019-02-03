@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/56578octopusemoji.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [octopus emoji](56578octopusemoji.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [octopus emoji](https://leanprover-community.github.io/archive/113488general/56578octopusemoji.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Sean Leather (Apr 10 2018 at 10:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/octopus%20emoji/near/124875291):
 <p>What do you use <span class="emoji emoji-1f419" title="octopus">:octopus:</span> for? I'm struggling to understand it, and <a href="https://www.google.com/search?q=octopus+emoji" target="_blank" title="https://www.google.com/search?q=octopus+emoji">searching</a> doesn't clarify much.</p>

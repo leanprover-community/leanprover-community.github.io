@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/00401Areallinductivetypesenumerable.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [Are all inductive types enumerable?](00401Areallinductivetypesenumerable.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [Are all inductive types enumerable?](https://leanprover-community.github.io/archive/113488general/00401Areallinductivetypesenumerable.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Aug 01 2018 at 08:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Are%20all%20inductive%20types%20enumerable%3F/near/130696713):
 <p>Are all inductive types enumerable?</p>

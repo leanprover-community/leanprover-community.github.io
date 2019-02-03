@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/39323Computationallyirrelevantproofs.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [Computationally irrelevant proofs](39323Computationallyirrelevantproofs.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [Computationally irrelevant proofs](https://leanprover-community.github.io/archive/113488general/39323Computationallyirrelevantproofs.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ AHan (Jan 04 2019 at 19:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Computationally%20irrelevant%20proofs/near/154428282):
 <p>Is there any tactics for handling program containing computationally irrelevant proof?<br>

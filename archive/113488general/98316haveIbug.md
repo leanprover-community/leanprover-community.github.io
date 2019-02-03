@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/98316haveIbug.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [haveI bug](98316haveIbug.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [haveI bug](https://leanprover-community.github.io/archive/113488general/98316haveIbug.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Chris Hughes (Sep 12 2018 at 18:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/haveI%20bug/near/133810460):
 <p>There's a bug in <code>haveI</code> when the type is not given, but can be inferred, and the user has more than one goal.<br>

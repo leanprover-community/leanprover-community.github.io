@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/52136slashesinleanpkgpath.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [slashes in leanpkg.path](52136slashesinleanpkgpath.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [slashes in leanpkg.path](https://leanprover-community.github.io/archive/113488general/52136slashesinleanpkgpath.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Jul 06 2018 at 18:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/slashes%20in%20leanpkg.path/near/129212544):
 <p>What does leanpkg.path look like on windows? I have about 20 minutes to get mathlib up and running on a win7 machine with no admin access and hence no git (apparently!). Are they <code>/</code> or <code>\</code>, and one or two?</p>

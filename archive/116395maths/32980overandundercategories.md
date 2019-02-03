@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/32980overandundercategories.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [over and under categories](32980overandundercategories.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [over and under categories](https://leanprover-community.github.io/archive/116395maths/32980overandundercategories.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Johan Commelin (Dec 17 2018 at 04:49)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/over%20and%20under%20categories/near/151910153):
 <p>Over and under categories show up all over the place (notably covers and structure maps can use over categories, and algebras can use under categories). I've written the definitions and a bunch of simp lemmas in <a href="https://github.com/leanprover-community/mathlib/blob/over_under/category_theory/comma.lean#L195" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/over_under/category_theory/comma.lean#L195">https://github.com/leanprover-community/mathlib/blob/over_under/category_theory/comma.lean#L195</a><br>

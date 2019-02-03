@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/86303helpwithtravis.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [help with travis](86303helpwithtravis.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [help with travis](https://leanprover-community.github.io/archive/113488general/86303helpwithtravis.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Scott Morrison (Oct 14 2018 at 21:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/help%20with%20travis/near/135790347):
 <p>Hmm, a strange error:</p>

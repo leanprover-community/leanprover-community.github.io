@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/968692variablesfunctions.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [2 variables functions](968692variablesfunctions.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [2 variables functions](https://leanprover-community.github.io/archive/116395maths/968692variablesfunctions.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Patrick Massot (Dec 15 2018 at 22:37)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/2%20variables%20functions/near/151852102):
 <p>Is it evil to do something like:</p>

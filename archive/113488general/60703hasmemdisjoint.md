@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/60703hasmemdisjoint.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [has_mem disjoint](60703hasmemdisjoint.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [has_mem disjoint](https://leanprover-community.github.io/archive/113488general/60703hasmemdisjoint.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Sean Leather (Oct 02 2018 at 08:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/has_mem%20disjoint/near/135017185):
 <p>Currently, there is this definition in <code>data/list/basic.lean</code>:</p>

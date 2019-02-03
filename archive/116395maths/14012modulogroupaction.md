@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/14012modulogroupaction.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [modulo group action](14012modulogroupaction.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [modulo group action](https://leanprover-community.github.io/archive/116395maths/14012modulogroupaction.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Patrick Massot (Sep 13 2018 at 21:23)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/modulo%20group%20action/near/133907297):
 <p>Do I understand correctly that we have a file defining group action and a file defining left and right cosets in a group, but no link between those? And we don't have G\X if G acts on X?</p>

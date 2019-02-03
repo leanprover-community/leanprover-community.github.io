@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/81209PolynomialFunctors.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [Polynomial Functors](81209PolynomialFunctors.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [Polynomial Functors](https://leanprover-community.github.io/archive/113488general/81209PolynomialFunctors.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Feb 26 2018 at 18:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Polynomial%20Functors/near/123006369):
 <p>Can someone remind me why have I got a 429 page pdf about polynomial functors open on my desktop?</p>

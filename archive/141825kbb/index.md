@@ -4,7 +4,7 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/141825kbb/index.html
 ---
 
-## Stream: [kbb](index.html)
+## Stream: [kbb](https://leanprover-community.github.io/archive/141825kbb/index.html)
 
 ---
 

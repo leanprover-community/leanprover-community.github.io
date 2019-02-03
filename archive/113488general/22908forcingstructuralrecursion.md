@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/22908forcingstructuralrecursion.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [forcing structural recursion](22908forcingstructuralrecursion.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [forcing structural recursion](https://leanprover-community.github.io/archive/113488general/22908forcingstructuralrecursion.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Simon Hudon (Feb 28 2018 at 00:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/forcing%20structural%20recursion/near/123064431):
 <p>I have a mutually inductive type of tree (which is not a type family) and I'm trying to define a recursive function on it but the termination checker seems to default to well founded recursion while it should be clear that structural recursion works. Is there a way to nudge Lean in the right direction?</p>

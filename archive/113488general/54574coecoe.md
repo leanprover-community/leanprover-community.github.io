@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/54574coecoe.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [coe_coe](54574coecoe.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [coe_coe](https://leanprover-community.github.io/archive/113488general/54574coecoe.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Chris Hughes (May 01 2018 at 21:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/coe_coe/near/125958400):
 <p>Just noticed the lemma <code>coe_coe</code>, which is tagged as <code>simp</code>, does this mean I need to be careful about tagging lemmas that make a double coercion into a single coercion with simp?</p>

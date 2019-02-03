@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/88224tacticdebug.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [tactic debug](88224tacticdebug.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [tactic debug](https://leanprover-community.github.io/archive/113488general/88224tacticdebug.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Patrick Massot (May 31 2018 at 22:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20debug/near/127382538):
 <p>Is there anything like a Lean debugger which would allow me to execute tactics line by line and inspect the values of variables? Or should I add trace commands after every lines in Simon's tactics to hope to understand how they work?</p>

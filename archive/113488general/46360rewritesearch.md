@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/46360rewritesearch.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [rewrite_search](46360rewritesearch.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [rewrite_search](https://leanprover-community.github.io/archive/113488general/46360rewritesearch.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Scott Morrison (Nov 10 2018 at 07:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite_search/near/147422501):
 <p>Hi <span class="user-mention" data-user-id="110111">@Keeley Hoek</span>, I think I'm getting <code>"XXX" is not a valid rewrite lemma!</code> errors which I shouldn't be. I think in this case the problem is you need to unfold a step before the lemma looks right. Can we make <code>rewrite_search</code> more forgiving?</p>

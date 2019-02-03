@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/54886functorialitytactic.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [functoriality tactic](54886functorialitytactic.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [functoriality tactic](https://leanprover-community.github.io/archive/113488general/54886functorialitytactic.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Reid Barton (Sep 08 2018 at 00:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/functoriality%20tactic/near/133540754):
 <p>I wonder how hard it would be to write a tactic which takes an expression which is supposed to be the object mapping part of a functor, and tries to guess the morphism mapping part.</p>

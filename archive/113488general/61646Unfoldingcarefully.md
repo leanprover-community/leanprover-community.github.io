@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/61646Unfoldingcarefully.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [Unfolding carefully](61646Unfoldingcarefully.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [Unfolding carefully](https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Moses Schönfinkel (Apr 11 2018 at 11:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124924517):
 <p>Suppose I have the following goal <code>f a = c (f (d a))</code>. What I am looking to do is to <code>unfold1 f</code> but only on the left hand side. Currently I do <code>generalize hack : f (d a) = x, unfold1 f, rw &lt;- hack</code>. Apart from the fact that it's a hack, the <code>generalize</code> takes a couple of seconds to execute. I tried using <code>conv { to_lhs ... }</code> but <code>unfold1</code> is not an option in conv (and simp fails with deterministic timeout). a) Why on Earth is <code>generalize</code> so slow in this case - is it because <code>c</code> is some horrible dependently typed function with explicit well founded termination proofs? b) Is there a nicer trick to invoke <code>unfold1</code> on left hand side only?</p>

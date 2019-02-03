@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/66318rcaseswithhypothesis.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [rcases with hypothesis](66318rcaseswithhypothesis.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [rcases with hypothesis](https://leanprover-community.github.io/archive/113488general/66318rcaseswithhypothesis.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Reid Barton (Nov 28 2018 at 02:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rcases%20with%20hypothesis/near/148681049):
 <p>Looks like <code>rcases</code> doesn't support the <code>cases h : e</code> syntax... would this be difficult to support?</p>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/63254unreachablecode.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [unreachable code](63254unreachablecode.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [unreachable code](https://leanprover-community.github.io/archive/113488general/63254unreachablecode.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Dec 12 2018 at 01:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unreachable%20code/near/151491054):
 <p>sometimes <code>_</code> causes "unreachable code" error. it is quite clear that they won't fix it, so I'm not here to "feed the fed horse". Rather, I think I've found a temporary fix by just replacing <code>_</code> with <code>by skip</code> or any tactic mode thing at all</p>

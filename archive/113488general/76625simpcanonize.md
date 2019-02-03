@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/76625simpcanonize.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [simp canonize](76625simpcanonize.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [simp canonize](https://leanprover-community.github.io/archive/113488general/76625simpcanonize.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Simon Hudon (Jan 22 2019 at 18:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20canonize/near/156622369):
 <p>I'm trying to get rid of some simp loops and I just realized that there is a part of it I don't understand and it seems to be getting into a loop. Here is the trace that Lean prints for it:</p>

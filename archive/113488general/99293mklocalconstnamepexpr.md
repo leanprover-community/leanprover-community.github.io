@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/99293mklocalconstnamepexpr.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [mk_local_const : name -> pexpr?](99293mklocalconstnamepexpr.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [mk_local_const : name -> pexpr?](https://leanprover-community.github.io/archive/113488general/99293mklocalconstnamepexpr.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Zesen Qian (Jul 09 2018 at 23:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mk_local_const%20%3A%20name%20-%3E%20pexpr%3F/near/129374884):
 <p>Is there such a function that give a <code>pexpr</code> of local constant from the variable name? I can just call <code>expr.local_const</code>, but the constructor is kind of complex and not so much documentation, also I don't think it's the way to go.</p>

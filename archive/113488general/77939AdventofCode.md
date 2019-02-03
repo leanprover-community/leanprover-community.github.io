@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/77939AdventofCode.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [Advent of Code](77939AdventofCode.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [Advent of Code](https://leanprover-community.github.io/archive/113488general/77939AdventofCode.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Edward Ayers (Dec 01 2018 at 14:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Advent%20of%20Code/near/150682850):
 <p><a href="http://adventofcode.com" target="_blank" title="http://adventofcode.com">adventofcode.com</a> in Lean?</p>

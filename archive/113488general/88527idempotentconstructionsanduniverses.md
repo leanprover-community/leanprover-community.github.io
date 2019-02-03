@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/88527idempotentconstructionsanduniverses.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [idempotent constructions and universes](88527idempotentconstructionsanduniverses.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [idempotent constructions and universes](https://leanprover-community.github.io/archive/113488general/88527idempotentconstructionsanduniverses.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Johan Commelin (Oct 12 2018 at 14:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/idempotent%20constructions%20and%20universes/near/135671325):
 <p>I think there might be general theory behind this. I will just start with an example:<br>

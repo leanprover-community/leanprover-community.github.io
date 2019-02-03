@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/93722PatternMatchingorInductiononLattice.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [Pattern Matching or Induction on Lattice?](93722PatternMatchingorInductiononLattice.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [Pattern Matching or Induction on Lattice?](https://leanprover-community.github.io/archive/113489newmembers/93722PatternMatchingorInductiononLattice.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ AHan (Nov 29 2018 at 07:45)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Pattern%20Matching%20or%20Induction%20on%20Lattice%3F/near/148769128):
 <p>If I have a type which is an instance of lattice, how can I pattern match or do induction on it?<br>

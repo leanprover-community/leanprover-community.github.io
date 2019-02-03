@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/25823Provingn2notequal2.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [Proving n^2 not equal 2](25823Provingn2notequal2.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [Proving n^2 not equal 2](https://leanprover-community.github.io/archive/113489newmembers/25823Provingn2notequal2.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Yuhan Du (Aug 31 2018 at 18:01)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proving%20n%5E2%20not%20equal%202/near/133132228):
 <p>I am trying to prove the statement that <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mi>n</mi><mn>2</mn></msup><mo>≠</mo><mn>2</mn></mrow><annotation encoding="application/x-tex">n^2 \neq 2</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.8141079999999999em;"></span><span class="strut bottom" style="height:1.029108em;vertical-align:-0.215em;"></span><span class="base"><span class="mord"><span class="mord mathit">n</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathrm mtight">2</span></span></span></span></span></span></span></span><span class="mrel">≠</span><span class="mord mathrm">2</span></span></span></span></p>

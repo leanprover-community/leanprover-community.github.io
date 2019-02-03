@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/15929proveppwithoutclassical.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [prove ¬(p ↔ ¬p) without classical](15929proveppwithoutclassical.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [prove ¬(p ↔ ¬p) without classical](https://leanprover-community.github.io/archive/113489newmembers/15929proveppwithoutclassical.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Andrew Skiba (Aug 31 2018 at 09:07)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/prove%20%C2%AC%28p%20%E2%86%94%20%C2%ACp%29%20without%20classical/near/133107905):
 <p>The examples at the end of chapter 3 of tutorial "Theorem proving in Lean" are very easy, except the one in subj. If I try to construct it as is, I have to construct false from two functions, which I can get by <a href="http://iff.mp" target="_blank" title="http://iff.mp">iff.mp</a> and iff.mpr - but I have no objects to apply these functions. I found propext constant, which allowed me to convert iff to an equality of p = ¬p, but I don't see how to prove (p = ¬p) → false. In Idris language such proofs are built by "impossible" keyword, but I cannot find anything similar in Lean. Am I missing something basic?</p>

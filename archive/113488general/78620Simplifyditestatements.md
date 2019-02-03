@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/78620Simplifyditestatements.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [Simplify dite statements](78620Simplifyditestatements.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [Simplify dite statements](https://leanprover-community.github.io/archive/113488general/78620Simplifyditestatements.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Rob Lewis (Aug 10 2018 at 14:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Simplify%20dite%20statements/near/131233579):
 <p>I've noticed the following:</p>

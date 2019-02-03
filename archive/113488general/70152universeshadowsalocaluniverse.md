@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/70152universeshadowsalocaluniverse.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [universe shadows a local universe](70152universeshadowsalocaluniverse.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [universe shadows a local universe](https://leanprover-community.github.io/archive/113488general/70152universeshadowsalocaluniverse.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Sean Leather (May 17 2018 at 08:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20shadows%20a%20local%20universe/near/126684147):
 <p>In a file with only this:</p>

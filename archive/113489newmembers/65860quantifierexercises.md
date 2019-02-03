@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/65860quantifierexercises.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [quantifier exercises](65860quantifierexercises.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [quantifier exercises](https://leanprover-community.github.io/archive/113489newmembers/65860quantifierexercises.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Olli (Sep 08 2018 at 11:10)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/quantifier%20exercises/near/133561165):
 <p>could I get a hint how to make progress here:</p>

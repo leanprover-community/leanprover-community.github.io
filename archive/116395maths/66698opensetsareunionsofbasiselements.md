@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/66698opensetsareunionsofbasiselements.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [open sets are unions of basis elements](66698opensetsareunionsofbasiselements.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [open sets are unions of basis elements](https://leanprover-community.github.io/archive/116395maths/66698opensetsareunionsofbasiselements.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (May 13 2018 at 13:30)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/open%20sets%20are%20unions%20of%20basis%20elements/near/126495112):
 <div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">analysis</span><span class="bp">.</span><span class="n">topology</span><span class="bp">.</span><span class="n">topological_space</span>

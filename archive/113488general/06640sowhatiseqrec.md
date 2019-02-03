@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/06640sowhatiseqrec.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [so what is eq.rec?](06640sowhatiseqrec.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [so what is eq.rec?](https://leanprover-community.github.io/archive/113488general/06640sowhatiseqrec.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Apr 16 2018 at 06:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/so%20what%20is%20eq.rec%3F/near/125134272):
 <p>I'm stuck in this state:</p>

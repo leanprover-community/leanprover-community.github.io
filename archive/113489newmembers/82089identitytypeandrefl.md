@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/82089identitytypeandrefl.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [identity type and refl](82089identitytypeandrefl.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [identity type and refl](https://leanprover-community.github.io/archive/113489newmembers/82089identitytypeandrefl.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Shaun Steenkamp (Nov 13 2018 at 16:46)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/identity%20type%20and%20refl/near/147599492):
 <p>Is it possible to pattern match on the refl constructor of the identity type (eq.refl) in Lean similar to what one can do in Agda? I tried defining one by pattern matching but it didn't seem to work.</p>

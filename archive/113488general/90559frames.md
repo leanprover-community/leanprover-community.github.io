@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/90559frames.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [frames](90559frames.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [frames](https://leanprover-community.github.io/archive/113488general/90559frames.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Johan Commelin (Oct 10 2018 at 20:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/frames/near/135559182):
 <p>Are frames in mathlib? <a href="https://ncatlab.org/nlab/show/frame" target="_blank" title="https://ncatlab.org/nlab/show/frame">https://ncatlab.org/nlab/show/frame</a></p>

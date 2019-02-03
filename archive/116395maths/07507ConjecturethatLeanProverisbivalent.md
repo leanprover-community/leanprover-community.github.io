@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/07507ConjecturethatLeanProverisbivalent.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [Conjecture that Lean Prover is bivalent](07507ConjecturethatLeanProverisbivalent.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [Conjecture that Lean Prover is bivalent](https://leanprover-community.github.io/archive/116395maths/07507ConjecturethatLeanProverisbivalent.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ None proffered (Aug 07 2018 at 19:12)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Conjecture%20that%20Lean%20Prover%20is%20bivalent/near/131056615):
 <p>Please send me axioms and rules of inference for Lean power at info@cec-services dot com for evaluation using our Meth8/VL4 modal model logic checker. Thank you.</p>

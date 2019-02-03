@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/63146testingtactics.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [testing tactics](63146testingtactics.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [testing tactics](https://leanprover-community.github.io/archive/113488general/63146testingtactics.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Scott Morrison (Mar 16 2018 at 11:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/testing%20tactics/near/123790056):
 <p>I have a <code>meta def T : expr → tactic expr := ...</code> that I've written that isn't behaving properly, and I want to do some debugging. Inside the definition there are some <code>trace</code> statements that explain to me what's going on --- I just need a convenient way to invoke my tactic. Suppose I have some other <code>def f := ...</code>, and I want to invoke <code>T</code> on <code>f</code>. What do I do?</p>

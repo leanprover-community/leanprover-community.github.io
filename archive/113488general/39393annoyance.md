@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/39393annoyance.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [$ annoyance](39393annoyance.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [$ annoyance](https://leanprover-community.github.io/archive/113488general/39393annoyance.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (May 17 2018 at 20:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%24%20annoyance/near/126710552):
 <div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">set</span>

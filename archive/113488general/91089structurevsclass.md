@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/91089structurevsclass.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [structure vs class](91089structurevsclass.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [structure vs class](https://leanprover-community.github.io/archive/113488general/91089structurevsclass.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Apr 02 2018 at 06:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/structure%20vs%20class/near/124512218):
 <p>The age-old question: when to use <code>structure</code> and when to use <code>class</code>?</p>

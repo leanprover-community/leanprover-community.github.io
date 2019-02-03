@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/95720unicode.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [unicode](95720unicode.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [unicode](https://leanprover-community.github.io/archive/113488general/95720unicode.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Mar 31 2018 at 07:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unicode/near/124443168):
 <p>Does every symbol have a non-unicode equivalent?</p>

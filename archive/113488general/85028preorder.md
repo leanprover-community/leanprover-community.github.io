@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/85028preorder.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [preorder](85028preorder.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [preorder](https://leanprover-community.github.io/archive/113488general/85028preorder.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Sep 03 2018 at 11:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/preorder/near/133250860):
 <div class="codehilite"><pre><span></span><span class="n">class</span> <span class="n">preorder</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="kn">extends</span> <span class="n">has_le</span> <span class="n">α</span><span class="o">,</span> <span class="n">has_lt</span> <span class="n">α</span> <span class="o">:=</span>

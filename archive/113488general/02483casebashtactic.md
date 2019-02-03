@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/02483casebashtactic.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [case bash tactic](02483casebashtactic.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [case bash tactic](https://leanprover-community.github.io/archive/113488general/02483casebashtactic.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Johan Commelin (Oct 19 2018 at 20:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/case%20bash%20tactic/near/136128666):
 <p><span class="user-mention" data-user-id="110087">@Scott Morrison</span> I incorrectly assumed that your <code>case_bash</code> tactic was related to the <code>fin</code>-bashing tactic. Nevertheless I wonder if there is place for a mechanism as follows:</p>

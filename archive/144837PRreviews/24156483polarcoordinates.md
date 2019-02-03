@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/144837PRreviews/24156483polarcoordinates.html
 ---
 
-## Stream: [PR reviews](index.html)
-### Topic: [#483 polar coordinates](24156483polarcoordinates.html)
+## Stream: [PR reviews](https://leanprover-community.github.io/archive/144837PRreviews/index.html)
+### Topic: [#483 polar coordinates](https://leanprover-community.github.io/archive/144837PRreviews/24156483polarcoordinates.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Nov 17 2018 at 18:46)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23483%20polar%20coordinates/near/147885598):
 <p>I proved some basic stuff in my undergraduate course, e.g. using polar coordinates to prove that a non-zero complex number has exactly n n'th roots if n&gt;=1 (I am still a bit confused as to why n&gt;=1 comes up so often in maths and so rarely in computer science; maybe we count stuff more). Anyway, <span class="user-mention" data-user-id="130500">@Abhimanyu Pallavi Sudhir</span> has written up some of this stuff in Lean, including polar coordinates, which I guess didn't seem to be there before.</p>

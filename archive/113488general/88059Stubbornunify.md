@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/88059Stubbornunify.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [Stubborn unify](88059Stubbornunify.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [Stubborn unify](https://leanprover-community.github.io/archive/113488general/88059Stubbornunify.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Keeley Hoek (Sep 21 2018 at 13:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Stubborn%20unify/near/134372143):
 <p>I've been experimenting with some of the <code>tactic.*</code> namespace, which I'm admittedly pretty scared of since some of it seems like magic. In trying to accomplish my nefarious goals, I'm running into quite a wall with <code>unify</code> and friends. It's seeming more and more like <code>unify</code> is more stubborn (an idiot?) than I first thought; for example, the following happens when I try to <code>unify</code> two metavar-containing types (which I think is sensible?)</p>

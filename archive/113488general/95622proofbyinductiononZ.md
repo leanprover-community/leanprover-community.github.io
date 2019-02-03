@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/95622proofbyinductiononZ.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [proof by induction on Z](95622proofbyinductiononZ.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [proof by induction on Z](https://leanprover-community.github.io/archive/113488general/95622proofbyinductiononZ.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Johan Commelin (Dec 09 2018 at 20:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proof%20by%20induction%20on%20Z/near/151232278):
 <p>Why is a thing like this not possible?</p>

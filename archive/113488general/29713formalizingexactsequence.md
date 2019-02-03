@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/29713formalizingexactsequence.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [formalizing exact sequence](29713formalizingexactsequence.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [formalizing exact sequence](https://leanprover-community.github.io/archive/113488general/29713formalizingexactsequence.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Mar 27 2018 at 16:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/formalizing%20exact%20sequence/near/124273688):
 <p>How would you formalize exact sequences in Lean? Let's say they are R-modules for a commutative ring R.<br>

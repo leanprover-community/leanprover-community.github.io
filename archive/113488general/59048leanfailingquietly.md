@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/59048leanfailingquietly.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [lean failing quietly](59048leanfailingquietly.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [lean failing quietly](https://leanprover-community.github.io/archive/113488general/59048leanfailingquietly.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Mar 06 2018 at 23:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20failing%20quietly/near/123370593):
 <p>Lean has got worse and worse recently, at least for me. I am sorely tempted to just check out a version from a week or two ago and compile that and use it instead. I have a largeish file open (350 lines) and after Lean: Restart in VS Code I get the orange "compiling" lines and then they just disappear, there are no red failure lines, nothing in lean messages, and lean isn't running any more in the sense that none of my <code>#check</code>s are underlined in green.</p>

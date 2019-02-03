@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/74219Multipleusesofexistsi.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [Multiple uses of existsi](74219Multipleusesofexistsi.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [Multiple uses of existsi](https://leanprover-community.github.io/archive/113489newmembers/74219Multipleusesofexistsi.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Calle Sönne (Nov 20 2018 at 15:36)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Multiple%20uses%20of%20existsi/near/148043024):
 <p>I have the following goal:</p>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/85116weirdclasserror.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [weird class error](85116weirdclasserror.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [weird class error](https://leanprover-community.github.io/archive/113488general/85116weirdclasserror.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Reid Barton (Dec 07 2018 at 03:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/weird%20class%20error/near/151060003):
 <div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">limits</span><span class="bp">.</span><span class="n">limits</span>

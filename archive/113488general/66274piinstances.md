@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/66274piinstances.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [pi instances](66274piinstances.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [pi instances](https://leanprover-community.github.io/archive/113488general/66274piinstances.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Patrick Massot (Mar 12 2018 at 09:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/pi%20instances/near/123598593):
 <p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> and <span class="user-mention" data-user-id="110294">@Johannes Hölzl</span> could you have a look at the wonderful tactics that <span class="user-mention" data-user-id="110026">@Simon Hudon</span> wrote for me in <a href="https://github.com/PatrickMassot/lean-differential-topology/blob/master/src/indexed_product.lean" target="_blank" title="https://github.com/PatrickMassot/lean-differential-topology/blob/master/src/indexed_product.lean">https://github.com/PatrickMassot/lean-differential-topology/blob/master/src/indexed_product.lean</a> and tell me whether this is suitable for mathlib? Remember the mathematical goals is to have instances of algebraic structures for Pi products of groups, rings, modules etc. and the Lean goal is to avoids writing tons of lines like <a href="https://github.com/PatrickMassot/lean-differential-topology/blob/f47348abf8515e23bd485683d8b351c7fd89c70f/src/indexed_product.lean#L92" target="_blank" title="https://github.com/PatrickMassot/lean-differential-topology/blob/f47348abf8515e23bd485683d8b351c7fd89c70f/src/indexed_product.lean#L92">https://github.com/PatrickMassot/lean-differential-topology/blob/f47348abf8515e23bd485683d8b351c7fd89c70f/src/indexed_product.lean#L92</a></p>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/55375additivegrouphoms.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [additive group homs](55375additivegrouphoms.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [additive group homs](https://leanprover-community.github.io/archive/116395maths/55375additivegrouphoms.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Johan Commelin (May 23 2018 at 20:36)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/additive%20group%20homs/near/126990085):
 <p>This has come up before. I need additive group homs. I can duplicate Patrick's work on group homs, but I also saw <code>@[to_additive finsupp.sum_map_range_index]</code> in <code>data/finsupp.lean</code>. Can someone explain to me how that magic works? Would it be enough to sprinkle some <code>@[to_additive ...]</code>'s into <code>algebra/group.lean</code> to have everything work?</p>

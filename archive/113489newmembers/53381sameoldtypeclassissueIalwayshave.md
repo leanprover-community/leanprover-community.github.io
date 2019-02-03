@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/53381sameoldtypeclassissueIalwayshave.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [same old typeclass issue I always have](53381sameoldtypeclassissueIalwayshave.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [same old typeclass issue I always have](https://leanprover-community.github.io/archive/113489newmembers/53381sameoldtypeclassissueIalwayshave.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Oct 08 2018 at 15:09)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/same%20old%20typeclass%20issue%20I%20always%20have/near/135401453):
 <p>I really should write these down at some point; I'm always having to ask. I still can't quite control <code>haveI</code> <code>exactI</code> etc.</p>

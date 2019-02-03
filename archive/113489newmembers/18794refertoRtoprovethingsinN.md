@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/18794refertoRtoprovethingsinN.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [refer to R to prove things in N?](18794refertoRtoprovethingsinN.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [refer to R to prove things in N?](https://leanprover-community.github.io/archive/113489newmembers/18794refertoRtoprovethingsinN.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Abhimanyu Pallavi Sudhir (Oct 12 2018 at 00:38)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/refer%20to%20R%20to%20prove%20things%20in%20N%3F/near/135640902):
 <p>I'm proving that there is no natural number such that 2n = 1. One way of doing this would be to point out that multiplication by a non-zero constant is injective, and that multiplication in R generalises multiplication in N, and since we already have 2*(1/2) = 1, this would imply n = 1/2, which is not a natural number.</p>

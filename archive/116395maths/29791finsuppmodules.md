@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/29791finsuppmodules.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [finsupp modules](29791finsuppmodules.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [finsupp modules](https://leanprover-community.github.io/archive/116395maths/29791finsuppmodules.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Johan Commelin (Nov 22 2018 at 03:15)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finsupp%20modules/near/148149210):
 <p>I think the module part of finsupp is broken. For example in</p>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/49562reduceXYfails.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [#reduce "X"++"Y" fails](49562reduceXYfails.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [#reduce "X"++"Y" fails](https://leanprover-community.github.io/archive/113488general/49562reduceXYfails.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Sullivan (Sep 03 2018 at 16:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%23reduce%20%22X%22%2B%2B%22Y%22%20fails/near/133264218):
 <p>Evaluating this expression in Lean (VSCode is what I'm using) hangs for a while then reports deep recursion detected, increase stack space. Not very undergraduate-student-friendly. Bug or feature?</p>

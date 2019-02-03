@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/28727simpasrw.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [simp as rw](28727simpasrw.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [simp as rw](https://leanprover-community.github.io/archive/113488general/28727simpasrw.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Ali Sever (Sep 15 2018 at 00:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20as%20rw/near/133984046):
 <p>Recently I have come across many cases where rw cannot rewrite the thing I need it to. Usually simp can do the trick, but I know it's bad practice to not close a goal after using simp. I was wondering if it's ok to use <code>simp only</code> and not close a goal?<br>

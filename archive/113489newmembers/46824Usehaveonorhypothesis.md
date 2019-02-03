@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/46824Usehaveonorhypothesis.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [Use "have" on "or" hypothesis](46824Usehaveonorhypothesis.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [Use "have" on "or" hypothesis](https://leanprover-community.github.io/archive/113489newmembers/46824Usehaveonorhypothesis.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Abhimanyu Pallavi Sudhir (Oct 06 2018 at 19:09)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Use%20%22have%22%20on%20%22or%22%20hypothesis/near/135318782):
 <p>If we had a hypothesis "HX: ∀x : nat, x ^ 2 - 3 * x + 2 = 0" and wanted to prove "false", we could do so by writing "have H3 := HX 3," and then revert and do norm_num.</p>

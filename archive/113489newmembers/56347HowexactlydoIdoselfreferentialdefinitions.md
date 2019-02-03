@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/56347HowexactlydoIdoselfreferentialdefinitions.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [How exactly do I do self-referential definitions?](56347HowexactlydoIdoselfreferentialdefinitions.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [How exactly do I do self-referential definitions?](https://leanprover-community.github.io/archive/113489newmembers/56347HowexactlydoIdoselfreferentialdefinitions.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Abhimanyu Pallavi Sudhir (Oct 14 2018 at 22:34)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20exactly%20do%20I%20do%20self-referential%20definitions%3F/near/135792425):
 <p>I'm trying to define a relation R such that <code>for all x, x R (x + 1)</code> and <code>transitive R</code>. Now I know I could probably do this inductively, but I don't want to (because I want the method to apply even if I had, e.g. <code>symmetric R</code>). My instinct was to use a non-constructive definition, like this (I know this is nonsense,  but it's just a sketch of what I want to do):</p>

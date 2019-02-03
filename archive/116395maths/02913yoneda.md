@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/02913yoneda.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [yoneda](02913yoneda.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [yoneda](https://leanprover-community.github.io/archive/116395maths/02913yoneda.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Johan Commelin (Oct 18 2018 at 12:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/yoneda/near/136033284):
 <p><span class="user-mention" data-user-id="110524">@Scott Morrison</span> Is there a reason why <code>yoneda</code> takes the category as explicit argument? Now we have to write <code>yoneda C X</code> instead of just <code>yoneda X</code>.</p>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/85907Botsforzulip.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [Bots for zulip?](85907Botsforzulip.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [Bots for zulip?](https://leanprover-community.github.io/archive/113488general/85907Botsforzulip.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Moses Schönfinkel (Mar 20 2018 at 23:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Bots%20for%20zulip%3F/near/123984503):
 <p>Is it possible to have bots listening to Zulip channels?</p>

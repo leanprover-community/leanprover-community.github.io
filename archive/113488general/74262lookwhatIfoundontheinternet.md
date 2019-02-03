@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/74262lookwhatIfoundontheinternet.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [look what I found on the internet](74262lookwhatIfoundontheinternet.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [look what I found on the internet](https://leanprover-community.github.io/archive/113488general/74262lookwhatIfoundontheinternet.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Johan Commelin (Sep 11 2018 at 20:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/look%20what%20I%20found%20on%20the%20internet/near/133750937):
 <p><a href="https://mathematicswithoutapologies.wordpress.com/2018/09/11/guest-post-by-kevin-buzzard/" target="_blank" title="https://mathematicswithoutapologies.wordpress.com/2018/09/11/guest-post-by-kevin-buzzard/">https://mathematicswithoutapologies.wordpress.com/2018/09/11/guest-post-by-kevin-buzzard/</a></p>

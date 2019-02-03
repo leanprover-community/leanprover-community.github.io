@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/69812Ismathlibbrokencurrentlyno.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [Is mathlib broken currently? (no)](69812Ismathlibbrokencurrentlyno.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [Is mathlib broken currently? (no)](https://leanprover-community.github.io/archive/116395maths/69812Ismathlibbrokencurrentlyno.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Sep 06 2018 at 00:13)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Is%20mathlib%20broken%20currently%3F%20%28no%29/near/133406331):
 <div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">ring_theory</span><span class="bp">.</span><span class="n">ideals</span>

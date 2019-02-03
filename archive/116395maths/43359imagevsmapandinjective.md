@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/43359imagevsmapandinjective.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [image vs map and injective](43359imagevsmapandinjective.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [image vs map and injective](https://leanprover-community.github.io/archive/116395maths/43359imagevsmapandinjective.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Sean Leather (Jun 22 2018 at 09:21)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/image%20vs%20map%20and%20injective/near/128459841):
 <p>In <code>data.finset</code>, <code>finset.map</code> is defined as mapping an <code>embedding</code> or an injective function over a <code>finset</code>, and <code>finset.image</code> is mapping a function over a <code>finset</code>. Other mathlib components (e.g <code>set</code>, <code>multiset</code>, <code>list</code>, <code>array</code>, etc.) do not make this distinction using this naming scheme.</p>

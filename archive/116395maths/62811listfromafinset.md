@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/62811listfromafinset.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [list from a finset](62811listfromafinset.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [list from a finset](https://leanprover-community.github.io/archive/116395maths/62811listfromafinset.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Sean Leather (Apr 13 2018 at 14:37)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/list%20from%20a%20finset/near/125032331):
 <p>Is there a way to get a <code>list</code> from a <code>finset</code> without using <code>finset.sort</code> or writing my own recursive function on <code>finset</code>?</p>

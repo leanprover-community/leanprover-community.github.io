@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/41867bugwithtypeclasses.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [bug with typeclasses](41867bugwithtypeclasses.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [bug with typeclasses](https://leanprover-community.github.io/archive/113488general/41867bugwithtypeclasses.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Mar 07 2018 at 20:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bug%20with%20typeclasses/near/123411400):
 <p>Forgive me for not minimizing:</p>

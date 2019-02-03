@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/19949issubtypeinjective.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [is "subtype" injective?](19949issubtypeinjective.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [is "subtype" injective?](https://leanprover-community.github.io/archive/113489newmembers/19949issubtypeinjective.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Sep 13 2018 at 21:32)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/is%20%22subtype%22%20injective%3F/near/133907830):
 <p>if {x // p x} = {x // q x}, then is it true that p = q?</p>

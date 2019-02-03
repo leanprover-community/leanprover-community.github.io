@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/20910completions.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [completions](20910completions.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [completions](https://leanprover-community.github.io/archive/113489newmembers/20910completions.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Edward Ayers (Aug 07 2018 at 22:19)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/completions/near/131066750):
 <p>Hi gang where can I get a list of available completions for lean? Eg \all -&gt; forall symbol etc. vscode doesn't give me a list when I type <code>\</code>. Also what is the best way to ask questions that have likely come up before?</p>

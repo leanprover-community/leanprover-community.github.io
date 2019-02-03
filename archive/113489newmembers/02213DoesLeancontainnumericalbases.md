@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/02213DoesLeancontainnumericalbases.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [Does Lean contain numerical bases?](02213DoesLeancontainnumericalbases.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [Does Lean contain numerical bases?](https://leanprover-community.github.io/archive/113489newmembers/02213DoesLeancontainnumericalbases.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Abhimanyu Pallavi Sudhir (Nov 10 2018 at 00:23)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Does%20Lean%20contain%20numerical%20bases%3F/near/147407947):
 <p>Specifically, I want a way to extract the base-n digits of a number as a list. Does this already exist?</p>

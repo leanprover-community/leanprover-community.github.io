@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/96545pdividespCkfor0kp.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [p divides pCk for 0<k<p](96545pdividespCkfor0kp.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [p divides pCk for 0<k<p](https://leanprover-community.github.io/archive/113488general/96545pdividespCkfor0kp.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Oct 14 2018 at 19:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/p%20divides%20pCk%20for%200%3Ck%3Cp/near/135785763):
 <p>Do we have this already?</p>

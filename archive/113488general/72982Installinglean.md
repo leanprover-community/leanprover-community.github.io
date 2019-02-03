@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/72982Installinglean.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [Installing lean](72982Installinglean.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [Installing lean](https://leanprover-community.github.io/archive/113488general/72982Installinglean.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Guillermo Barajas Ayuso (Jul 02 2018 at 20:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Installing%20lean/near/128979128):
 <p>Hi guys I'm trying to install lean in my laptop and the following message was displayed when I tried to evaluate 1+1:</p>

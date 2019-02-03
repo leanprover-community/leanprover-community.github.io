@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/80411potentialprojects.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [potential projects](80411potentialprojects.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [potential projects](https://leanprover-community.github.io/archive/113488general/80411potentialprojects.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Scott Morrison (Aug 28 2018 at 17:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/potential%20projects/near/132925636):
 <p>At our Orsay meeting we just wrote a list of interesting-but-not-impossible projects for formalisation in Lean.</p>

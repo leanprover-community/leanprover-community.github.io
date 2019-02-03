@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/73800HowshouldIPR.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [How should I PR?](73800HowshouldIPR.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [How should I PR?](https://leanprover-community.github.io/archive/113488general/73800HowshouldIPR.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Sep 01 2018 at 22:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/How%20should%20I%20PR%3F/near/133189632):
 <p>I think I have been using the wrong method, so maybe I should unlearn what I have learnt. The main problem is that one never PR's a single independent file, i.e. often there are files in mathlib that need to be changed. How should I make sure that the changes will compile fine? Should I have another branch of mathlib locally?</p>

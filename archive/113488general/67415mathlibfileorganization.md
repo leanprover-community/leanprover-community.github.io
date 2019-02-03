@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/67415mathlibfileorganization.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [mathlib file organization](67415mathlibfileorganization.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [mathlib file organization](https://leanprover-community.github.io/archive/113488general/67415mathlibfileorganization.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Sean Leather (Jun 01 2018 at 10:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20file%20organization/near/127406142):
 <p>For those interested in the file organization of mathlib, I've written up a <a href="https://github.com/leanprover/mathlib/issues/148" target="_blank" title="https://github.com/leanprover/mathlib/issues/148">proposal</a> for a small change that, I think, will improve things a bit. Feedback welcome!</p>

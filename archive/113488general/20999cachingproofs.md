@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/20999cachingproofs.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [caching proofs](20999cachingproofs.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [caching proofs](https://leanprover-community.github.io/archive/113488general/20999cachingproofs.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Scott Morrison (Sep 18 2018 at 09:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/caching%20proofs/near/134150227):
 <p>So I'm moving it here.</p>

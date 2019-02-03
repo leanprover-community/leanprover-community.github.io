@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/84538intmod.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [int.mod](84538intmod.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [int.mod](https://leanprover-community.github.io/archive/113489newmembers/84538intmod.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ petercommand (Nov 01 2018 at 08:47)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/int.mod/near/136906477):
 <p>Trying to prove <code>int.mod (int.of_nat a_1) ↑p &lt; ↑p</code> in lean, but I wasn't able to unfold int.mod.</p>

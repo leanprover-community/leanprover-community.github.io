@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/55167tacticringfeaturerequests.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [tactic.ring feature requests](55167tacticringfeaturerequests.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [tactic.ring feature requests](https://leanprover-community.github.io/archive/113488general/55167tacticringfeaturerequests.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Mar 29 2018 at 14:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic.ring%20feature%20requests/near/124364059):
 <div class="codehilite"><pre><span></span>import tactic.ring

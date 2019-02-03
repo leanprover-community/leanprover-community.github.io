@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/50225characterisationofreals.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [characterisation of reals](50225characterisationofreals.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [characterisation of reals](https://leanprover-community.github.io/archive/116395maths/50225characterisationofreals.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Nov 17 2018 at 09:32)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/characterisation%20of%20reals/near/147869830):
 <div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">algebra</span><span class="bp">.</span><span class="n">archimedean</span>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/79962windowsnightlylinkbroken.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [windows nightly link broken](79962windowsnightlylinkbroken.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [windows nightly link broken](https://leanprover-community.github.io/archive/113488general/79962windowsnightlylinkbroken.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Mar 08 2018 at 22:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/windows%20nightly%20link%20broken/near/123463240):
 <p><a href="https://ci.appveyor.com/api/projects/leodemoura/lean/artifacts/build/lean-nightly-windows.zip?branch=master" target="_blank" title="https://ci.appveyor.com/api/projects/leodemoura/lean/artifacts/build/lean-nightly-windows.zip?branch=master">https://ci.appveyor.com/api/projects/leodemoura/lean/artifacts/build/lean-nightly-windows.zip?branch=master</a> (the usual link to lean nightly windows) doesn't work currently -- I mean the link doens't work, rather than the zip file not compiling.</p>

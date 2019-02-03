@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/62075elabaseliminator.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [elab_as_eliminator](62075elabaseliminator.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [elab_as_eliminator](https://leanprover-community.github.io/archive/113488general/62075elabaseliminator.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Reid Barton (Jun 27 2018 at 23:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elab_as_eliminator/near/128740170):
 <p>Is there an explanation of what <code>elab_as_eliminator</code> actually does somewhere? I once tried reading the source, but wasn't enlightened.<br>

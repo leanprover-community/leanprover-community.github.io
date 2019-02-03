@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/93837CharacterencodingofVM.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [Character encoding of VM](93837CharacterencodingofVM.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [Character encoding of VM](https://leanprover-community.github.io/archive/113488general/93837CharacterencodingofVM.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Keeley Hoek (Aug 13 2018 at 15:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Character%20encoding%20of%20VM/near/132047636):
 <p>Does anyone know the internal character encoding of strings after a to_char_buffer? It seems to not be UTF-8.</p>

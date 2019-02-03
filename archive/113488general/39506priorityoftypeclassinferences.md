@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/39506priorityoftypeclassinferences.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [priority of typeclass inferences](39506priorityoftypeclassinferences.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [priority of typeclass inferences](https://leanprover-community.github.io/archive/113488general/39506priorityoftypeclassinferences.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Apr 21 2018 at 01:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/priority%20of%20typeclass%20inferences/near/125473385):
 <p>If I proved <code>A.to_B</code> and <code>A.to_C</code> and <code>B.to_D</code> and <code>C.to_D</code>, when I want to coerce <code>A</code> to <code>D</code>, how does Lean judge which path to use?</p>

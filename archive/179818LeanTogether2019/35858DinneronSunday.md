@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/179818LeanTogether2019/35858DinneronSunday.html
 ---
 
-## Stream: [Lean Together 2019](index.html)
-### Topic: [Dinner on Sunday](35858DinneronSunday.html)
+## Stream: [Lean Together 2019](https://leanprover-community.github.io/archive/179818LeanTogether2019/index.html)
+### Topic: [Dinner on Sunday](https://leanprover-community.github.io/archive/179818LeanTogether2019/35858DinneronSunday.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Gabriel Ebner (Jan 06 2019 at 18:22)](https://leanprover.zulipchat.com/#narrow/stream/179818-Lean%20Together%202019/topic/Dinner%20on%20Sunday/near/154523689):
 <p>So, who would like to meet up for dinner?  Jeremy suggested <a href="https://deveranda.nl/" target="_blank" title="https://deveranda.nl/">https://deveranda.nl/</a> in the other topic.  Since everybody seems to be heading to de Hortus afterwards, how about something more in the center?  Yesterday we saw a nice Indonesian place: <a href="http://www.restaurantdesa.com/" target="_blank" title="http://www.restaurantdesa.com/">http://www.restaurantdesa.com/</a></p>

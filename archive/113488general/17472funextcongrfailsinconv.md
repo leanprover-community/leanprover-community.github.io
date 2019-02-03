@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/17472funextcongrfailsinconv.html
 ---
 
-## Stream: [general](index.html)
-### Topic: ["funext, congr" fails in conv](17472funextcongrfailsinconv.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: ["funext, congr" fails in conv](https://leanprover-community.github.io/archive/113488general/17472funextcongrfailsinconv.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Sep 10 2018 at 10:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22funext%2C%20congr%22%20fails%20in%20conv/near/133645086):
 <div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">finset</span> <span class="n">algebra</span><span class="bp">.</span><span class="n">big_operators</span>

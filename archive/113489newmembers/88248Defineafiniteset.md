@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/88248Defineafiniteset.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [Define a finite set](88248Defineafiniteset.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [Define a finite set](https://leanprover-community.github.io/archive/113489newmembers/88248Defineafiniteset.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Abhimanyu Pallavi Sudhir (Oct 15 2018 at 01:38)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Define%20a%20finite%20set/near/135797911):
 <p>How do I define a finite set only giving information of its cardinality? I'd like to define something like this:</p>

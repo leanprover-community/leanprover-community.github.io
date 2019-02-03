@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/144837PRreviews/96488463removingcoercionsfromcategorytheory.html
 ---
 
-## Stream: [PR reviews](index.html)
-### Topic: [#463 removing coercions from category_theory/](96488463removingcoercionsfromcategorytheory.html)
+## Stream: [PR reviews](https://leanprover-community.github.io/archive/144837PRreviews/index.html)
+### Topic: [#463 removing coercions from category_theory/](https://leanprover-community.github.io/archive/144837PRreviews/96488463removingcoercionsfromcategorytheory.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Scott Morrison (Nov 07 2018 at 10:55)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23463%20removing%20coercions%20from%20category_theory//near/146929906):
 <p>For your consideration, <span class="user-mention" data-user-id="110049">@Mario Carneiro</span>, <span class="user-mention" data-user-id="110294">@Johannes Hölzl</span>, <span class="user-mention" data-user-id="112680">@Johan Commelin</span>, <span class="user-mention" data-user-id="110032">@Reid Barton</span>, <span class="user-mention" data-user-id="128547">@Michael Jendrusch</span>.</p>

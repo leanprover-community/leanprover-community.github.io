@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/99843Multiplicationbyninanadditivecommutativegroup.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [Multiplication by n in an additive commutative group](99843Multiplicationbyninanadditivecommutativegroup.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [Multiplication by n in an additive commutative group](https://leanprover-community.github.io/archive/116395maths/99843Multiplicationbyninanadditivecommutativegroup.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Johan Commelin (May 14 2018 at 12:35)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Multiplication%20by%20n%20in%20an%20additive%20commutative%20group/near/126531796):
 <p>Is this somewhere in mathlib?</p>

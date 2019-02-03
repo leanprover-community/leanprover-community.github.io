@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/78605arrayinduction.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [array induction](78605arrayinduction.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [array induction](https://leanprover-community.github.io/archive/113488general/78605arrayinduction.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Sean Leather (Aug 14 2018 at 10:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/array%20induction/near/132096387):
 <p>Given a theorem statement involving an <code>array</code>, what might I use in the proof where I would normally use induction if the <code>array</code> were instead a <code>list</code>?</p>

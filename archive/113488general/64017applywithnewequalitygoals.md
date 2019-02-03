@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/64017applywithnewequalitygoals.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [apply with new equality goals](64017applywithnewequalitygoals.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [apply with new equality goals](https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Reid Barton (Apr 23 2018 at 09:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125558382):
 <p>Is there a tactic which works like <code>apply f</code> except that, if unifying the goal with the result type of <code>f</code> fails, it introduces new goals stating that the terms which don't unify are equal?<br>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/29660leanpkgtakesforeveronWindows.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [leanpkg takes forever on Windows](29660leanpkgtakesforeveronWindows.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [leanpkg takes forever on Windows](https://leanprover-community.github.io/archive/113488general/29660leanpkgtakesforeveronWindows.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Jul 19 2018 at 17:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leanpkg%20takes%20forever%20on%20Windows/near/129937135):
 <p>I just typed <code>leanpkg init</code> on Windows, and it sat there for around a minute before saying "you meant <code>leanpkg init name_of_package</code> so please start again". I just typed <code>leanpkg init my_package</code> and in the time it took me to write this the Windows machine still hasn't finished mulling over this command. I've seen this several times before on Windows. What's going on?</p>

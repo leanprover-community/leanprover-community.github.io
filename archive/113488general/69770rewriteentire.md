@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/69770rewriteentire.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [rewrite entire](69770rewriteentire.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [rewrite entire](https://leanprover-community.github.io/archive/113488general/69770rewriteentire.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Scott Morrison (Mar 14 2018 at 01:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20entire/near/123679200):
 <p>Hi all, this is a follow-up to my difficulties with the <code>occs</code> configuration for <code>rw</code>. I'm still not there writing a "please find _all_ the possible rewrites" function.</p>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/63880lemmasurprisinglynotprovedbyrfl.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [lemma surprisingly not proved by rfl](63880lemmasurprisinglynotprovedbyrfl.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [lemma surprisingly not proved by rfl](https://leanprover-community.github.io/archive/113488general/63880lemmasurprisinglynotprovedbyrfl.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Chris Hughes (Jul 02 2018 at 17:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lemma%20surprisingly%20not%20proved%20by%20rfl/near/128969240):
 <p>Is there a shorter way to prove this and why isn't <code>rfl</code> working? Is it because the type of the lhs is <code>with_bot ℕ</code> and the rhs is <code>option ℕ</code>? (The types are defeq)</p>

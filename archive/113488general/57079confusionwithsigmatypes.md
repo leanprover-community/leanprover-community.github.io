@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/57079confusionwithsigmatypes.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [confusion with sigma types](57079confusionwithsigmatypes.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [confusion with sigma types](https://leanprover-community.github.io/archive/113488general/57079confusionwithsigmatypes.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Scott Morrison (Sep 22 2018 at 05:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/confusion%20with%20sigma%20types/near/134419058):
 <p>Oops... oversimplified my example.</p>

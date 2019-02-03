@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/141825kbb/59003generators.html
 ---
 
-## Stream: [kbb](index.html)
-### Topic: [generators](59003generators.html)
+## Stream: [kbb](https://leanprover-community.github.io/archive/141825kbb/index.html)
+### Topic: [generators](https://leanprover-community.github.io/archive/141825kbb/59003generators.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Patrick Massot (Sep 12 2018 at 21:20)](https://leanprover.zulipchat.com/#narrow/stream/141825-kbb/topic/generators/near/133838138):
 <p>I just saw Kenny's work on generating SL2Z. It looks impressive</p>

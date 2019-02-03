@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/99007Floatingpoint.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [Floating point](99007Floatingpoint.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [Floating point](https://leanprover-community.github.io/archive/113488general/99007Floatingpoint.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Ben Sherman (May 21 2018 at 22:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Floating%20point/near/126891715):
 <p>Does Lean have any support for floating point? Just for computation, not necessarily reasoning?</p>

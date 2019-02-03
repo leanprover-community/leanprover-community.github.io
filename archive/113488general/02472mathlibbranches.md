@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/02472mathlibbranches.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [mathlib branches](02472mathlibbranches.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [mathlib branches](https://leanprover-community.github.io/archive/113488general/02472mathlibbranches.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Scott Morrison (Jun 20 2018 at 03:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20branches/near/128338643):
 <p>What's the plan with branches for <code>mathlib</code>? We seem to have gone back and forth between using <code>master</code> and using <code>lean-3.4.1</code>. I'd just gone to the effort of creating <code>lean-3.4.1</code> branches in all my repos, and making them the default, so that <code>leanpkg upgrade</code> would successfully pull new changes from <code>mathlib</code>, but now it seems we've going back to using <code>master</code>.</p>

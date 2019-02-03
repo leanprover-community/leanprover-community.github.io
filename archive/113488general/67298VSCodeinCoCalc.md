@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/67298VSCodeinCoCalc.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [VS Code in CoCalc!](67298VSCodeinCoCalc.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [VS Code in CoCalc!](https://leanprover-community.github.io/archive/113488general/67298VSCodeinCoCalc.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Nov 06 2018 at 00:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/VS%20Code%20in%20CoCalc%21/near/146831167):
 <p><a href="http://blog.sagemath.com/cocalc/2018/11/05/x11.html" target="_blank" title="http://blog.sagemath.com/cocalc/2018/11/05/x11.html">http://blog.sagemath.com/cocalc/2018/11/05/x11.html</a></p>

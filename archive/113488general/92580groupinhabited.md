@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/92580groupinhabited.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [group.inhabited](92580groupinhabited.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [group.inhabited](https://leanprover-community.github.io/archive/113488general/92580groupinhabited.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Apr 21 2018 at 03:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/group.inhabited/near/125476491):
 <p>Should we show that every group is inhabited? Should we generalize it to has_one and has_zero? Which one will ring choose?</p>

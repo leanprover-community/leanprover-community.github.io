@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/08268noncomputabletheorem.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [noncomputable theorem](08268noncomputabletheorem.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [noncomputable theorem](https://leanprover-community.github.io/archive/113488general/08268noncomputabletheorem.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Reid Barton (Oct 19 2018 at 18:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/noncomputable%20theorem/near/136123067):
 <p>Is there any sense in writing <code>noncomputable theorem</code>, as in mathlib <code>logic.basic</code> lines 516-519?</p>

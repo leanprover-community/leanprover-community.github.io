@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/144837PRreviews/61216396squeezesimp.html
 ---
 
-## Stream: [PR reviews](index.html)
-### Topic: [#396 squeeze_simp](61216396squeezesimp.html)
+## Stream: [PR reviews](https://leanprover-community.github.io/archive/144837PRreviews/index.html)
+### Topic: [#396 squeeze_simp](https://leanprover-community.github.io/archive/144837PRreviews/61216396squeezesimp.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Oct 07 2018 at 16:24)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23396%20squeeze_simp/near/135353930):
 <p><a href="https://github.com/leanprover/mathlib/issues/396" target="_blank" title="https://github.com/leanprover/mathlib/issues/396">#396</a></p>

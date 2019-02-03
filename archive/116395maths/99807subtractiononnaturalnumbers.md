@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/99807subtractiononnaturalnumbers.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [subtraction on natural numbers](99807subtractiononnaturalnumbers.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [subtraction on natural numbers](https://leanprover-community.github.io/archive/116395maths/99807subtractiononnaturalnumbers.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Simon Hudon (Apr 11 2018 at 04:15)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/subtraction%20on%20natural%20numbers/near/124913490):
 <p>Is there a name and notation to distinguish between subtraction on natural numbers and subtraction on integers? This is for my dissertation rather than a Lean proof</p>

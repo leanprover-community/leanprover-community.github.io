@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/15266emacstipfilladapt.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [emacs tip: filladapt](15266emacstipfilladapt.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [emacs tip: filladapt](https://leanprover-community.github.io/archive/113489newmembers/15266emacstipfilladapt.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Joseph Corneli (Aug 07 2018 at 12:46)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/emacs%20tip%3A%20filladapt/near/131036154):
 <p>I had run into an <a href="https://github.com/leanprover/lean-mode/issues/7" target="_blank" title="https://github.com/leanprover/lean-mode/issues/7">issue</a> with filling block comments in lean-mode.</p>

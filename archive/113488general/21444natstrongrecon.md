@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/21444natstrongrecon.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [nat.strong_rec_on](21444natstrongrecon.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [nat.strong_rec_on](https://leanprover-community.github.io/archive/113488general/21444natstrongrecon.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Sep 14 2018 at 19:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nat.strong_rec_on/near/133965949):
 <p>Can we make this <code>@[elab_as_eliminator]</code>?</p>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/70493Unexpectedoccurenceofrecursivefuntion.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [Unexpected occurence of recursive funtion](70493Unexpectedoccurenceofrecursivefuntion.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [Unexpected occurence of recursive funtion](https://leanprover-community.github.io/archive/113488general/70493Unexpectedoccurenceofrecursivefuntion.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Minchao Wu (Jul 08 2018 at 16:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unexpected%20occurence%20of%20recursive%20funtion/near/129302165):
 <p>Hi friends, I'm wondering what's the right way to let Lean accept recursive calls with list.map?<br>

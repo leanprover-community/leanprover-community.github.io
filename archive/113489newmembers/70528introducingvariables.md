@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/70528introducingvariables.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [introducing variables](70528introducingvariables.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [introducing variables](https://leanprover-community.github.io/archive/113489newmembers/70528introducingvariables.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Ali Sever (Jul 19 2018 at 23:06)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/introducing%20variables/near/129956826):
 <p>If I have a Prop that says <code>∃ a b c, p</code>, whats the quickest way of introducing a b c and p? In tactic mode, I have to use <code>cases</code> three times to obtain all of them.</p>

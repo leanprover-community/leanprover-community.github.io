@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/62456typeclassinferencewithparameters.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [type class inference with parameters](62456typeclassinferencewithparameters.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [type class inference with parameters](https://leanprover-community.github.io/archive/113488general/62456typeclassinferencewithparameters.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Floris van Doorn (Nov 07 2018 at 17:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20inference%20with%20parameters/near/146970992):
 <p>Is there a way to tell type class inference to "use the current parameter"? In the following code, the <code>apply_instance</code> fails, because the argument of type <code>decidable_eq A</code> is a metavariable, and I want Lean to use the parameter.</p>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/80921Dirichletconvolution.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [Dirichlet convolution](80921Dirichletconvolution.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [Dirichlet convolution](https://leanprover-community.github.io/archive/116395maths/80921Dirichletconvolution.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Elliott Macneil (Aug 15 2018 at 17:43)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Dirichlet%20convolution/near/132182031):
 <p>I'm trying to define the Dirichlet convolution on two arithmetic functions f,g but I'm having difficulty with writing the following sum in Lean.</p>

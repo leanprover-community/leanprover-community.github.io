@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/72368WhyisissubfieldnotaProp.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [Why is is_subfield not a Prop?](72368WhyisissubfieldnotaProp.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [Why is is_subfield not a Prop?](https://leanprover-community.github.io/archive/113489newmembers/72368WhyisissubfieldnotaProp.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Abhimanyu Pallavi Sudhir (Jan 12 2019 at 16:08)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Why%20is%20is_subfield%20not%20a%20Prop%3F/near/154987213):
 <p>I want to define</p>

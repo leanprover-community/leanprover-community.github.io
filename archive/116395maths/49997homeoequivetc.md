@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/49997homeoequivetc.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [homeo equiv etc.](49997homeoequivetc.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [homeo equiv etc.](https://leanprover-community.github.io/archive/116395maths/49997homeoequivetc.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Patrick Massot (Apr 03 2018 at 23:08)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/homeo%20equiv%20etc./near/124593811):
 <p>A more specific version of <a href="#narrow/stream/113488-general/subject/structure.20vs.20class/near/124574243" title="#narrow/stream/113488-general/subject/structure.20vs.20class/near/124574243">https://leanprover.zulipchat.com/#narrow/stream/113488-general/subject/structure.20vs.20class/near/124574243</a> (it may be easier to understand my problem by looking at code) is <a href="https://github.com/PatrickMassot/lean-scratchpad/blob/master/src/support.lean#L188" target="_blank" title="https://github.com/PatrickMassot/lean-scratchpad/blob/master/src/support.lean#L188">https://github.com/PatrickMassot/lean-scratchpad/blob/master/src/support.lean#L188</a> where I'm clearly very stupidly trying to Lean some trivial lemma. I'm completely tangled in coercions and type classes</p>

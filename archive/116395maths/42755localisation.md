@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/42755localisation.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [localisation](42755localisation.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [localisation](https://leanprover-community.github.io/archive/116395maths/42755localisation.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Johan Commelin (Nov 23 2018 at 21:33)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/localisation/near/148248534):
 <p><span class="user-mention" data-user-id="110064">@Kenny Lau</span> Did you have a proof somewhere that if you localise a ring at <code>S</code>, then <code>S</code> maps to <code>units</code> of the localisation?</p>

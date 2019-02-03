@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/59310Perfectfield.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [Perfect field](59310Perfectfield.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [Perfect field](https://leanprover-community.github.io/archive/116395maths/59310Perfectfield.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Oct 17 2018 at 10:26)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Perfect%20field/near/135957480):
 <p>Currently this is my definition:</p>

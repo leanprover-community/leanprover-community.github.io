@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/14275showisslow.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [show is slow](14275showisslow.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [show is slow](https://leanprover-community.github.io/archive/113488general/14275showisslow.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Aug 04 2018 at 13:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/show%20is%20slow/near/130888169):
 <div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">real</span><span class="bp">.</span><span class="n">basic</span>

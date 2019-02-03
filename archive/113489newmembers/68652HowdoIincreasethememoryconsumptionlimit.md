@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/68652HowdoIincreasethememoryconsumptionlimit.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [How do I increase the memory consumption limit?](68652HowdoIincreasethememoryconsumptionlimit.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [How do I increase the memory consumption limit?](https://leanprover-community.github.io/archive/113489newmembers/68652HowdoIincreasethememoryconsumptionlimit.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Abhimanyu Pallavi Sudhir (Nov 11 2018 at 14:14)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20do%20I%20increase%20the%20memory%20consumption%20limit%3F/near/147477161):
 <p>I keep getting "excessive memory consumption" errors in Lean. How can I increase the memory consumption limit? Presumably this is a Lean setting, right?</p>

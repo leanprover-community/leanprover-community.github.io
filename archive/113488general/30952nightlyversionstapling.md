@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/30952nightlyversionstapling.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [nightly version stapling](30952nightlyversionstapling.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [nightly version stapling](https://leanprover-community.github.io/archive/113488general/30952nightlyversionstapling.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Sebastian Ullrich (Mar 04 2018 at 19:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nightly%20version%20stapling/near/123270930):
 <p>sneak peek: <a href="https://github.com/leanprover/lean-nightly/releases" target="_blank" title="https://github.com/leanprover/lean-nightly/releases">https://github.com/leanprover/lean-nightly/releases</a></p>

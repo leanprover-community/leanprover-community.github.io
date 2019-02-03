@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/54109mkstructureinstance.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [mk_structure_instance](54109mkstructureinstance.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [mk_structure_instance](https://leanprover-community.github.io/archive/113488general/54109mkstructureinstance.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Keeley Hoek (Nov 12 2018 at 08:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mk_structure_instance/near/147509507):
 <p>What does the <code>sources</code> field of the <code>structure_instance_info</code> structure (for passing to <code>mk_structure_instance</code>) do?</p>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/94825custominduction.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [custom induction](94825custominduction.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [custom induction](https://leanprover-community.github.io/archive/113488general/94825custominduction.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Sep 12 2018 at 10:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/custom%20induction/near/133786062):
 <p>Can we tag our induction lemmas and have the tactic <code>induction</code> recognize it? Maybe create a new tactic <code>induction'</code>?</p>

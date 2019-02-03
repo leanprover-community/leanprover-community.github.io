@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/55645nattostring.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [nat to string?](55645nattostring.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [nat to string?](https://leanprover-community.github.io/archive/113488general/55645nattostring.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Scott Morrison (Apr 10 2018 at 01:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nat%20to%20string%3F/near/124861127):
 <p>How to I get a string from a nat?</p>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/81718levelimax.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [level.imax](81718levelimax.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [level.imax](https://leanprover-community.github.io/archive/113488general/81718levelimax.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Sean Leather (Jul 16 2018 at 08:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/level.imax/near/129734584):
 <p>What is <code>level.imax</code>?</p>

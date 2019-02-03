@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/21301Hopcroftisspeaking.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [Hopcroft is speaking!](21301Hopcroftisspeaking.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [Hopcroft is speaking!](https://leanprover-community.github.io/archive/113488general/21301Hopcroftisspeaking.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Sep 24 2018 at 09:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Hopcroft%20is%20speaking%21/near/134509660):
 <p>Hopcroft is speaking!</p>

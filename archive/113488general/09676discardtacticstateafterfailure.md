@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/09676discardtacticstateafterfailure.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [discard tactic_state after failure?](09676discardtacticstateafterfailure.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [discard tactic_state after failure?](https://leanprover-community.github.io/archive/113488general/09676discardtacticstateafterfailure.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Scott Morrison (Oct 03 2018 at 11:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/discard%20tactic_state%20after%20failure%3F/near/135090187):
 <p>Is there an existing tactic that runs a tactic, then restores the original tactic_state if it fails?</p>

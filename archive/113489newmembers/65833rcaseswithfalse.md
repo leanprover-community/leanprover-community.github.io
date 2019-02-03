@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/65833rcaseswithfalse.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [rcases with false](65833rcaseswithfalse.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [rcases with false](https://leanprover-community.github.io/archive/113489newmembers/65833rcaseswithfalse.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Oct 02 2018 at 20:57)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/rcases%20with%20false/near/135056202):
 <p>Can I do <code>rcases</code> on <code>p \or false</code> and end up with one state where we know <code>p</code>?</p>

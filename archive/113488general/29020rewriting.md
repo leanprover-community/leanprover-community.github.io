@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/29020rewriting.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [rewriting](29020rewriting.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [rewriting](https://leanprover-community.github.io/archive/113488general/29020rewriting.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Pablo Le Hénaff (Jun 08 2018 at 16:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewriting/near/127773629):
 <p>Hey again,<br>

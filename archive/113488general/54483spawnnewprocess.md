@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/54483spawnnewprocess.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [spawn new process](54483spawnnewprocess.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [spawn new process](https://leanprover-community.github.io/archive/113488general/54483spawnnewprocess.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Moses Schönfinkel (Mar 02 2018 at 22:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/spawn%20new%20process/near/123202790):
 <p>Would it be at all possible for a lean tactic to spawn a new process? For example call <code>coqtop</code>? If so, any recommendation as to what file to take a look at? (I don't suppose it's documented.)</p>

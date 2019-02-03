@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/74503commringclosure.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [comm_ring.closure](74503commringclosure.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [comm_ring.closure](https://leanprover-community.github.io/archive/116395maths/74503commringclosure.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Patrick Massot (Oct 09 2018 at 22:16)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/comm_ring.closure/near/135495590):
 <p><span class="user-mention" data-user-id="110064">@Kenny Lau</span> Do you secretely have <code>comm_ring.closure</code> with a <code>subring</code> instance somewhere in your repositories?</p>

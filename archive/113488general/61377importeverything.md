@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/61377importeverything.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [import everything](61377importeverything.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [import everything](https://leanprover-community.github.io/archive/113488general/61377importeverything.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Feb 01 2019 at 23:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/import%20everything/near/157389923):
 <p>should / do we have a test file that imports every file?</p>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/52942exactthis.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [exact this](52942exactthis.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [exact this](https://leanprover-community.github.io/archive/113488general/52942exactthis.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Patrick Massot (Jul 26 2018 at 00:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/exact%20this/near/130305391):
 <p>Today I came across several instance of <code>have := stuff, exact this</code> closing a goal where <code>exact stuff</code> doesn't. I guess this is yet another elaboration subtlety, but I'd like to know if there is a nicer way to do this in one tactic.</p>

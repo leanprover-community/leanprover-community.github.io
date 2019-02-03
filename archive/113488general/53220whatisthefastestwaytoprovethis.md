@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/53220whatisthefastestwaytoprovethis.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [what is the fastest way to prove this](53220whatisthefastestwaytoprovethis.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [what is the fastest way to prove this](https://leanprover-community.github.io/archive/113488general/53220whatisthefastestwaytoprovethis.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Apr 25 2018 at 17:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/what%20is%20the%20fastest%20way%20to%20prove%20this/near/125675713):
 <div class="codehilite"><pre><span></span><span class="n">p</span> <span class="n">q</span> <span class="n">t</span> <span class="o">:</span> <span class="bp">ℕ+</span><span class="o">,</span>

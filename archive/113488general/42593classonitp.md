@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/42593classonitp.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [class on itp](42593classonitp.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [class on itp](https://leanprover-community.github.io/archive/113488general/42593classonitp.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Jeremy Avigad (Oct 14 2018 at 16:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/class%20on%20itp/near/135780395):
 <p>Hey, check out the flyer I made up for an Interactive Theorem Proving class I am teaching next semester: <a href="http://www.andrew.cmu.edu/user/avigad/itp/" target="_blank" title="http://www.andrew.cmu.edu/user/avigad/itp/">http://www.andrew.cmu.edu/user/avigad/itp/</a>. Comments are welcome. The course schedule goes live next week and I'll circulate it then. <br>

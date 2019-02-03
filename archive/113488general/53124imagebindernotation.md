@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/53124imagebindernotation.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [image binder notation](53124imagebindernotation.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [image binder notation](https://leanprover-community.github.io/archive/113488general/53124imagebindernotation.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Nov 07 2018 at 07:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/image%20binder%20notation/near/146921016):
 <p>Should we have binder notation for <code>set.image</code>?</p>

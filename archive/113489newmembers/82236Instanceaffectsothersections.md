@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/82236Instanceaffectsothersections.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [Instance affects other sections](82236Instanceaffectsothersections.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [Instance affects other sections](https://leanprover-community.github.io/archive/113489newmembers/82236Instanceaffectsothersections.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ AHan (Jan 01 2019 at 13:34)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Instance%20affects%20other%20sections/near/154128043):
 <div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">finsupp</span>

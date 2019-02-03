@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/39173avoidwritingsomesimprfllemmas.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [avoid writing (some?) simp-rfl lemmas](39173avoidwritingsomesimprfllemmas.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [avoid writing (some?) simp-rfl lemmas](https://leanprover-community.github.io/archive/113488general/39173avoidwritingsomesimprfllemmas.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Johan Commelin (Nov 27 2018 at 09:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/avoid%20writing%20%28some%3F%29%20simp-rfl%20lemmas/near/148623451):
 <p>I've brought this up before, but I'dd really hope that there is a way to get rid of blocks like this:</p>

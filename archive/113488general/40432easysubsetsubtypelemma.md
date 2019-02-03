@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/40432easysubsetsubtypelemma.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [easy subset/subtype lemma](40432easysubsetsubtypelemma.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [easy subset/subtype lemma](https://leanprover-community.github.io/archive/113488general/40432easysubsetsubtypelemma.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Jul 16 2018 at 16:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/easy%20subset/subtype%20lemma/near/129752088):
 <p>I've reduced my goal to</p>

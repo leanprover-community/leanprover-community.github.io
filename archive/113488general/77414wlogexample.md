@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/77414wlogexample.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [wlog example](77414wlogexample.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [wlog example](https://leanprover-community.github.io/archive/113488general/77414wlogexample.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Simon Hudon (Apr 02 2018 at 17:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/wlog%20example/near/124531148):
 <p>What about: </p>

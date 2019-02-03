@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/43035errorinterrupted.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [error: interrupted](43035errorinterrupted.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [error: interrupted](https://leanprover-community.github.io/archive/113488general/43035errorinterrupted.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Reid Barton (Jun 02 2018 at 02:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/error%3A%20interrupted/near/127445373):
 <p>Does anyone know why this often happens when using jump-to-definition? (I'm in emacs if it matters.)</p>

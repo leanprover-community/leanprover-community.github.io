@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/49265typeclassinferencenotes.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [type class inference notes](49265typeclassinferencenotes.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [type class inference notes](https://leanprover-community.github.io/archive/113488general/49265typeclassinferencenotes.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Apr 17 2018 at 23:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20inference%20notes/near/125217163):
 <p>I'm writing some currently sketchy docs on type class inference (because if I don't then in 1 month's time I'll be back here asking to be reminded of <code>letI</code> again). Would I be right in thinking that one could think about the type class inference system as (amongst other things) a big directed graph, with classes as vertices, and with a directed edge from <code>C1</code> to <code>C2</code> iff type class inference gives you a way of getting a structure of type <code>C2</code> from one of type <code>C1</code>? I'm aware that it's more complex than this, basically because the system works for families so you could in theory envisage type class inference showing that if <code>X</code> has structure  <code>C1</code> then <code>X × X × bool</code> has structure <code>C2</code>, but amongst other things is it reasonable to think about this graph? And then the condition I want to put on this graph is that any two routes from <code>C</code> to <code>D</code> have to be definitionally equal as functions; in particular I could have a directed edge from <code>C</code> to <code>D</code> and one from <code>D</code> to <code>C</code> but the composite both ways had better be the identity function, and basically I am suggesting that somewhere there is a category with at most one morphism between any two objects. Is this an oversimplification?</p>

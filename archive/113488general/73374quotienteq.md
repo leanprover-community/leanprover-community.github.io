@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/73374quotienteq.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [quotient.eq](73374quotienteq.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [quotient.eq](https://leanprover-community.github.io/archive/113488general/73374quotienteq.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Patrick Massot (Dec 15 2018 at 19:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotient.eq/near/151846739):
 <p>We have </p>

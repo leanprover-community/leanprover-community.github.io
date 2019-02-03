@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/28527bytecode.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [bytecode?](28527bytecode.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [bytecode?](https://leanprover-community.github.io/archive/113488general/28527bytecode.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Sebastien Gouezel (Oct 17 2018 at 22:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bytecode%3F/near/135998701):
 <p>In a file with <code>noncomputable theory</code>, I get the trace message</p>

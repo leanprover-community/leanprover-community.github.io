@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/76465LeantoZ3.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [Lean to Z3](76465LeantoZ3.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [Lean to Z3](https://leanprover-community.github.io/archive/113489newmembers/76465LeantoZ3.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ gao (Oct 29 2018 at 07:46)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Lean%20to%20Z3/near/136687904):
 <p>Recently I read the presention “From Lean to Z3”，I want to ask some questions，has lean integrated Z3 so far？</p>

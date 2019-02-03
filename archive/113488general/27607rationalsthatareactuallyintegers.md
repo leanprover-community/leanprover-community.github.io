@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/27607rationalsthatareactuallyintegers.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [rationals that are actually integers](27607rationalsthatareactuallyintegers.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [rationals that are actually integers](https://leanprover-community.github.io/archive/113488general/27607rationalsthatareactuallyintegers.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Johan Commelin (Aug 08 2018 at 19:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rationals%20that%20are%20actually%20integers/near/131122581):
 <p>By some elaborate method I have defined a polynomial with coefficients in <code>rat</code>. Now there is a math theorem (which I hope to turn into a Lean theorem) that says that my polynomial actually has coefficients in <code>int</code>. But this is not at all clear from the definition. What is the best way to turn my polynomial into something with integral coefficients?<br>

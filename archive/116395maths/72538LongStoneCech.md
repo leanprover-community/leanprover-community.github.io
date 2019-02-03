@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/72538LongStoneCech.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [Long Stone-Cech](72538LongStoneCech.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [Long Stone-Cech](https://leanprover-community.github.io/archive/116395maths/72538LongStoneCech.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Patrick Massot (Jan 22 2019 at 12:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Long%20Stone-Cech/near/156598228):
 <p><span class="user-mention" data-user-id="110032">@Reid Barton</span> <a href="https://github.com/leanprover/mathlib/blob/master/src/topology/stone_cech.lean#L253" target="_blank" title="https://github.com/leanprover/mathlib/blob/master/src/topology/stone_cech.lean#L253">https://github.com/leanprover/mathlib/blob/master/src/topology/stone_cech.lean#L253</a> takes forever to elaborate. Do you care if I change it to:</p>

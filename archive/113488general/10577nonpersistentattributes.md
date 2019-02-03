@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/10577nonpersistentattributes.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [non-persistent attributes](10577nonpersistentattributes.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [non-persistent attributes](https://leanprover-community.github.io/archive/113488general/10577nonpersistentattributes.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Simon Hudon (Jan 26 2019 at 23:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/non-persistent%20attributes/near/156944210):
 <p>I'm trying to set an attribute inside a proof script and as soon as the proof is done, the attribute seems to disappear. Is this the desired behavior? Is there a way to make the attribute persistent?</p>

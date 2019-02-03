@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/69965weirdstructure.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [weird structure](69965weirdstructure.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [weird structure](https://leanprover-community.github.io/archive/113488general/69965weirdstructure.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Jan 30 2019 at 21:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/weird%20structure/near/157219004):
 <p>What's a structure that is <code>add_comm_monoid + semigroup + mul_zero_class + distrib</code>?</p>

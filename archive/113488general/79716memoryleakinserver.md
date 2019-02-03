@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/79716memoryleakinserver.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [memory leak in server?](79716memoryleakinserver.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [memory leak in server?](https://leanprover-community.github.io/archive/113488general/79716memoryleakinserver.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Feb 27 2018 at 00:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/memory%20leak%20in%20server%3F/near/123017339):
 <div class="codehilite"><pre><span></span>invalid import: data.set.basic

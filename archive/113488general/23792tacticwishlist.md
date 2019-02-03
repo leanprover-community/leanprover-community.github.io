@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/23792tacticwishlist.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [tactic wishlist](23792tacticwishlist.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [tactic wishlist](https://leanprover-community.github.io/archive/113488general/23792tacticwishlist.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Koundinya Vajjha (Feb 01 2019 at 13:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20wishlist/near/157348532):
 <p>Not sure if there's something like this in another stream - apologies if there is.  What tactics would you like to see written? (By tactics I also include broader metaprogramming constructs, not necessarily those which you would use to discharge proof obligations.)</p>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/144837PRreviews/74189658multiplicationofsubmodules.html
 ---
 
-## Stream: [PR reviews](index.html)
-### Topic: [#658 multiplication of submodules](74189658multiplicationofsubmodules.html)
+## Stream: [PR reviews](https://leanprover-community.github.io/archive/144837PRreviews/index.html)
+### Topic: [#658 multiplication of submodules](https://leanprover-community.github.io/archive/144837PRreviews/74189658multiplicationofsubmodules.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Jan 31 2019 at 23:09)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23658%20multiplication%20of%20submodules/near/157311435):
 <p><span class="user-mention" data-user-id="110026">@Simon Hudon</span> what does it mean that you assigned this PR to <span class="user-mention" data-user-id="110044">@Chris Hughes</span> ?</p>

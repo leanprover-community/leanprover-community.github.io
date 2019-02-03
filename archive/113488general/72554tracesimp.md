@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/72554tracesimp.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [trace simp!](72554tracesimp.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [trace simp!](https://leanprover-community.github.io/archive/113488general/72554tracesimp.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Oct 03 2018 at 22:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trace%20simp%21/near/135133359):
 <p>can we trace simp!?</p>

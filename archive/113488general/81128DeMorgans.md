@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/81128DeMorgans.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [De Morgan's](81128DeMorgans.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [De Morgan's](https://leanprover-community.github.io/archive/113488general/81128DeMorgans.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Ken Lee (Oct 23 2018 at 00:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/De%20Morgan%27s/near/136299566):
 <p>Just proved <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="normal">¬</mi><mo>(</mo><mi>P</mi><mo>∨</mo><mi>Q</mi><mo>)</mo><mspace width="0.277778em"></mspace><mo>⟺</mo><mspace width="0.277778em"></mspace><mi mathvariant="normal">¬</mi><mi>P</mi><mo>∧</mo><mi mathvariant="normal">¬</mi><mi>Q</mi></mrow><annotation encoding="application/x-tex">\neg (P \lor Q ) \iff \neg P \land \neg Q</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.75em;"></span><span class="strut bottom" style="height:1em;vertical-align:-0.25em;"></span><span class="base"><span class="mord mathrm">¬</span><span class="mopen">(</span><span class="mord mathit" style="margin-right:0.13889em;">P</span><span class="mbin">∨</span><span class="mord mathit">Q</span><span class="mclose">)</span><span class="mrel"><span class="mspace thickspace"></span><span class="mrel">⟺</span></span><span class="mord mathrm"><span class="mspace thickspace"></span><span class="mord mathrm">¬</span></span><span class="mord mathit" style="margin-right:0.13889em;">P</span><span class="mbin">∧</span><span class="mord mathrm">¬</span><span class="mord mathit">Q</span></span></span></span> and <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="normal">¬</mi><mi>P</mi><mo>∨</mo><mi mathvariant="normal">¬</mi><mi>Q</mi><mo>→</mo><mi mathvariant="normal">¬</mi><mo>(</mo><mi>P</mi><mo>∧</mo><mi>Q</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">\neg P \lor \neg Q \to \neg (P \land Q)</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.75em;"></span><span class="strut bottom" style="height:1em;vertical-align:-0.25em;"></span><span class="base"><span class="mord mathrm">¬</span><span class="mord mathit" style="margin-right:0.13889em;">P</span><span class="mbin">∨</span><span class="mord mathrm">¬</span><span class="mord mathit">Q</span><span class="mrel">→</span><span class="mord mathrm">¬</span><span class="mopen">(</span><span class="mord mathit" style="margin-right:0.13889em;">P</span><span class="mbin">∧</span><span class="mord mathit">Q</span><span class="mclose">)</span></span></span></span> in Lean. I don't see why the converse would require classical logic though. Can someone please explain?</p>

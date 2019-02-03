@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/17620associationlistsfinmap.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [association lists, finmap](17620associationlistsfinmap.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [association lists, finmap](https://leanprover-community.github.io/archive/113488general/17620associationlistsfinmap.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Sean Leather (Sep 20 2018 at 08:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/association%20lists%2C%20finmap/near/134290992):
 <p>As some people know, I've been working on association lists and finite maps for mathlib (<a href="https://github.com/spl/lean-finmap" target="_blank" title="https://github.com/spl/lean-finmap">https://github.com/spl/lean-finmap</a>). Mario has decided he wants to get it into mathlib soon, so he has started rewriting it in his own fashion (<a href="https://github.com/leanprover-community/mathlib/tree/finmap" target="_blank" title="https://github.com/leanprover-community/mathlib/tree/finmap">https://github.com/leanprover-community/mathlib/tree/finmap</a>). I wanted to open up the discussion to get feedback from anyone else who might be interested.</p>

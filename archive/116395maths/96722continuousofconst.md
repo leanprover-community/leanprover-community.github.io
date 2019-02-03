@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/96722continuousofconst.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [continuous_of_const](96722continuousofconst.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [continuous_of_const](https://leanprover-community.github.io/archive/116395maths/96722continuousofconst.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Patrick Massot (Dec 17 2018 at 11:34)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/continuous_of_const/near/152017837):
 <p>This is very much related to my question in the <a href="#narrow/stream/113488-general/subject/Empty.20or.20not.20empty/near/152017713" title="#narrow/stream/113488-general/subject/Empty.20or.20not.20empty/near/152017713">https://leanprover.zulipchat.com/#narrow/stream/113488-general/subject/Empty.20or.20not.20empty/near/152017713</a>, but has some (tiny) math content. Can anyone golf the following ridiculous lemma?</p>

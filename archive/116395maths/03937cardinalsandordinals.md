@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/03937cardinalsandordinals.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [cardinals and ordinals](03937cardinalsandordinals.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [cardinals and ordinals](https://leanprover-community.github.io/archive/116395maths/03937cardinalsandordinals.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Aug 22 2018 at 16:21)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cardinals%20and%20ordinals/near/132580778):
 <p>In lean they are not sets? i.e. <code>set_theory/zfc.lean</code> and <code>set_theory/cardinal.lean</code> are independent?</p>

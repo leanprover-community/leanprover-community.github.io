@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/39072orelsenontermination.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [orelse nontermination](39072orelsenontermination.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [orelse nontermination](https://leanprover-community.github.io/archive/113488general/39072orelsenontermination.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Seul Baek (Dec 26 2018 at 06:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/orelse%20nontermination/near/152538868):
 <div class="codehilite"><pre><span></span>meta def foo : tactic unit :=

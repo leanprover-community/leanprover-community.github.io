@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/54221associativity.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [associativity](54221associativity.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [associativity](https://leanprover-community.github.io/archive/113488general/54221associativity.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Simon Hudon (Jul 30 2018 at 04:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/associativity/near/130552015):
 <p>I'm writing a tactic about associativity and I'm inferring the associativity of the operators that appear in an expression. It turns out that this is the bottleneck of my script: building an instance of <code>is_associative</code> takes hundreds of ms. Is there a faster way to do it?</p>

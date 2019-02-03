@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/87089oddzetavaluesirrational.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [odd zeta values irrational](87089oddzetavaluesirrational.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [odd zeta values irrational](https://leanprover-community.github.io/archive/113488general/87089oddzetavaluesirrational.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Mar 08 2018 at 10:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/odd%20zeta%20values%20irrational/near/123436696):
 <p><a href="https://arxiv.org/abs/1802.09410" target="_blank" title="https://arxiv.org/abs/1802.09410">https://arxiv.org/abs/1802.09410</a> just popped up on ArXiv today. Needs prime number theorem as input but proves something which people have been wondering about for centuries. First proof was about a decade ago and used a lot of machinery; this one only uses prime number theorem and some combinatorics (and a bunch of good ideas).</p>

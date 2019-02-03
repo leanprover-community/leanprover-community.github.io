@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/58432headreduction.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [head reduction](58432headreduction.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [head reduction](https://leanprover-community.github.io/archive/113488general/58432headreduction.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Floris van Doorn (Oct 23 2018 at 17:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/head%20reduction/near/136343289):
 <p>Is there a way to do head reduction on a term until the head changes? So I want to do something very similar to <code>whnf</code>, except I want to stop reducing as soon as the head changes.<br>

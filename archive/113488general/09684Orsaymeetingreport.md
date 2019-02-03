@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/09684Orsaymeetingreport.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [Orsay meeting report](09684Orsaymeetingreport.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [Orsay meeting report](https://leanprover-community.github.io/archive/113488general/09684Orsaymeetingreport.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Patrick Massot (Aug 30 2018 at 15:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Orsay%20meeting%20report/near/133061127):
 <p>We had a Lean user meeting in Laboratoire de Mathématiques d'Orsay on August 27-29th. Participants were <br>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/15619implementationissues.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [implementation issues](15619implementationissues.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [implementation issues](https://leanprover-community.github.io/archive/113488general/15619implementationissues.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Sep 11 2018 at 00:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implementation%20issues/near/133692574):
 <p>Implementation issues occasionally have knock-on effects. For example the coercion <code>of_nat</code> from <code>nat</code> to <code>int</code> is not a generic coercion from <code>nat</code> to a monoid with 0 and 1, and as a consequence all of the standard coercion lemmas like <code>\u(a+b)=\u a+\u b</code> have to be proved for <code>of_nat</code>separately, giving us <code>int.coe_nat_add</code> as well as <code>nat.cast_add</code>.</p>

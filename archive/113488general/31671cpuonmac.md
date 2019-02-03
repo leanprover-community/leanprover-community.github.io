@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/31671cpuonmac.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [cpu on mac](31671cpuonmac.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [cpu on mac](https://leanprover-community.github.io/archive/113488general/31671cpuonmac.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Yulia Zaplatina (Aug 13 2018 at 11:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cpu%20on%20mac/near/132034358):
 <p>Anyone had an issue with lean using &gt; 95% cpu on mac?</p>

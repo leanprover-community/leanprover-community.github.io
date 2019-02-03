@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/44395sheavesandsites.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [sheaves and sites](44395sheavesandsites.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [sheaves and sites](https://leanprover-community.github.io/archive/116395maths/44395sheavesandsites.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Johan Commelin (Nov 08 2018 at 14:34)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sheaves%20and%20sites/near/147299236):
 <p>Lol, I'm quite sure that the definition of <code>coverage</code> is wrong. I should demand that the collection of covers contains the singletons <code>{id : U ⟶ U}</code> for every <code>U : X</code>.</p>

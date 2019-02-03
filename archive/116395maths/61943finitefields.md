@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/61943finitefields.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [finite fields](61943finitefields.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [finite fields](https://leanprover-community.github.io/archive/116395maths/61943finitefields.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Joey van Langen (Jan 09 2019 at 16:09)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finite%20fields/near/154730425):
 <p>I'm going to do some works concerning finite fields. (number of elements, existence and uniqueness)<br>

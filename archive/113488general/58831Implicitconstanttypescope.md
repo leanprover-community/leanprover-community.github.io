@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/58831Implicitconstanttypescope.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [Implicit constant-type scope](58831Implicitconstanttypescope.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [Implicit constant-type scope](https://leanprover-community.github.io/archive/113488general/58831Implicitconstanttypescope.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Moses Schönfinkel (Mar 14 2018 at 13:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Implicit%20constant-type%20scope/near/123699670):
 <p>Is there a way to tell lean that every numeric constant (a'la <code>1</code> <code>42</code>) I use in &lt;some scope&gt; is actually from <code>Z</code> rather than <code>N</code> or am I stuck with <code>(0 : Z)</code>? (Coq has <code>Open Scope ZScope</code> command that lets me do this sort of thing.)</p>

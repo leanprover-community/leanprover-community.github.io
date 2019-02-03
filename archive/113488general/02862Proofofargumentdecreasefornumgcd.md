@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/02862Proofofargumentdecreasefornumgcd.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [Proof of argument decrease for num.gcd](02862Proofofargumentdecreasefornumgcd.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [Proof of argument decrease for num.gcd](https://leanprover-community.github.io/archive/113488general/02862Proofofargumentdecreasefornumgcd.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Seul Baek (Jun 07 2018 at 15:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Proof%20of%20argument%20decrease%20for%20num.gcd/near/127717897):
 <p>I'm trying to define <code>gcd</code> for <code>num</code>. I've already defined <code>num.mod</code> and proved related lemmas (which you can check at <a href="https://github.com/skbaek/qelim/blob/master/src/common/num.lean" target="_blank" title="https://github.com/skbaek/qelim/blob/master/src/common/num.lean">https://github.com/skbaek/qelim/blob/master/src/common/num.lean</a>), and here's my first attempt using those preliminary definitions :</p>

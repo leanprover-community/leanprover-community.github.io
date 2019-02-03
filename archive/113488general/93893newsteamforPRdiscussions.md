@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/93893newsteamforPRdiscussions.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [new steam for PR discussions](93893newsteamforPRdiscussions.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [new steam for PR discussions](https://leanprover-community.github.io/archive/113488general/93893newsteamforPRdiscussions.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Scott Morrison (Oct 07 2018 at 12:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20steam%20for%20PR%20discussions/near/135347475):
 <p>I've just created a new stream, after a brief discussion with Mario, for discussion of current PRs.</p>

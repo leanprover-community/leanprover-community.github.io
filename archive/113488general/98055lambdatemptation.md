@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/98055lambdatemptation.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [lambda temptation](98055lambdatemptation.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [lambda temptation](https://leanprover-community.github.io/archive/113488general/98055lambdatemptation.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Patrick Massot (Apr 24 2018 at 23:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lambda%20temptation/near/125641452):
 <p>Do I get kicked out of this forum by CS people if I use</p>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/90695noetherianmodules.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [noetherian modules](90695noetherianmodules.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [noetherian modules](https://leanprover-community.github.io/archive/116395maths/90695noetherianmodules.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Johan Commelin (Aug 31 2018 at 13:32)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/noetherian%20modules/near/133118514):
 <p>What are the next steps for noetherian modules?<br>

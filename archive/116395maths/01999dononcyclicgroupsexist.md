@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/01999dononcyclicgroupsexist.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [do non-cyclic groups exist?](01999dononcyclicgroupsexist.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [do non-cyclic groups exist?](https://leanprover-community.github.io/archive/116395maths/01999dononcyclicgroupsexist.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Nov 05 2018 at 18:47)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/do%20non-cyclic%20groups%20exist%3F/near/146811479):
 <div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">group_theory</span><span class="bp">.</span><span class="n">order_of_element</span>

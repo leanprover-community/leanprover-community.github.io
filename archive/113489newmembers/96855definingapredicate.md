@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/96855definingapredicate.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [defining a predicate](96855definingapredicate.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [defining a predicate](https://leanprover-community.github.io/archive/113489newmembers/96855definingapredicate.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Patrick Thomas (Nov 26 2018 at 05:54)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20a%20predicate/near/148346494):
 <p>Hi,</p>

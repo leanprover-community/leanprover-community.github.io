@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/65709anotherCPPpaper.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [another CPP paper](65709anotherCPPpaper.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [another CPP paper](https://leanprover-community.github.io/archive/113488general/65709anotherCPPpaper.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Mario Carneiro (Oct 22 2018 at 05:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/another%20CPP%20paper/near/136242945):
 <p>Hi all, I wanted to share my own submission in CPP this year, which just made it on arXiv: <a href="https://arxiv.org/abs/1810.08380" target="_blank" title="https://arxiv.org/abs/1810.08380">Formalizing computability theory via partial recursive functions</a></p>

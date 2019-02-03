@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/61969universepolymorphicversionofempty.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [universe polymorphic version of empty?](61969universepolymorphicversionofempty.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [universe polymorphic version of empty?](https://leanprover-community.github.io/archive/113488general/61969universepolymorphicversionofempty.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Zesen Qian (Jul 05 2018 at 21:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20polymorphic%20version%20of%20empty%3F/near/129158168):
 <p>RT? The current empty is at Type 0</p>

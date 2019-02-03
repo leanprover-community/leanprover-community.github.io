@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/52230tacticforapplyingatappropriateassumptions.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [tactic for applying at appropriate assumptions](52230tacticforapplyingatappropriateassumptions.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [tactic for applying at appropriate assumptions](https://leanprover-community.github.io/archive/113488general/52230tacticforapplyingatappropriateassumptions.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Sean Leather (May 03 2018 at 10:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20for%20applying%20at%20appropriate%20assumptions/near/126035144):
 <p>I've got a theorem:</p>

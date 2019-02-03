@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/54841haltingproblem.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [halting problem](54841haltingproblem.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [halting problem](https://leanprover-community.github.io/archive/116395maths/54841haltingproblem.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (May 23 2018 at 09:25)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/halting%20problem/near/126964377):
 <p><a href="https://github.com/leanprover/mathlib/commit/d62bf5605ec8971d446a01af40abf9183447cb42#diff-6650f7dae83be3a52c8eb036a23d7b26R175" target="_blank" title="https://github.com/leanprover/mathlib/commit/d62bf5605ec8971d446a01af40abf9183447cb42#diff-6650f7dae83be3a52c8eb036a23d7b26R175">https://github.com/leanprover/mathlib/commit/d62bf5605ec8971d446a01af40abf9183447cb42#diff-6650f7dae83be3a52c8eb036a23d7b26R175</a></p>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/89018algorithmsinthetacticmonad.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [algorithms in the tactic monad](89018algorithmsinthetacticmonad.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [algorithms in the tactic monad](https://leanprover-community.github.io/archive/113488general/89018algorithmsinthetacticmonad.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Scott Morrison (Sep 09 2018 at 05:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algorithms%20in%20the%20tactic%20monad/near/133593072):
 <p>I need some remedial help with functional programming. </p>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/91992referencemanualaftermathlibmove.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [reference manual after mathlib move](91992referencemanualaftermathlibmove.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [reference manual after mathlib move](https://leanprover-community.github.io/archive/113488general/91992referencemanualaftermathlibmove.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Feb 02 2019 at 17:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/reference%20manual%20after%20mathlib%20move/near/157428522):
 <p>I don't really understand how all this project moving really works (mathlib moved to leanprover-community, and inspired by this Patrick moved the perfectoid project there too). It just occurred to me that perhaps the reference manual needed updating, because in section 1.4.3</p>

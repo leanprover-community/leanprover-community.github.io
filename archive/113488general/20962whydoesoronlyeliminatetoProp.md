@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/20962whydoesoronlyeliminatetoProp.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [why does or only eliminate to Prop?](20962whydoesoronlyeliminatetoProp.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [why does or only eliminate to Prop?](https://leanprover-community.github.io/archive/113488general/20962whydoesoronlyeliminatetoProp.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Mar 22 2018 at 15:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/why%20does%20or%20only%20eliminate%20to%20Prop%3F/near/124063589):
 <p>I just noticed this. Chris Hughes wrote a proof for me, but in my application of his proof I have a function from <code>fin n</code> to <code>nat</code>, and he has implemented his proof using a function from <code>nat</code> to <code>nat</code> which he only ever evaluates at numbers less than <code>n</code>. Given my function from <code>fin n</code> to <code>nat</code> I hence need to come up with a function from <code>nat</code> to <code>nat</code> which extends it and I thought I'd just define it using <code>or.elim (decidable.em (i&lt;n))</code> but this won't work because the target can't be <code>nat</code>.</p>

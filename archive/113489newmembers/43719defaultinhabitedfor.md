@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/43719defaultinhabitedfor.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [default / inhabited for ℚ, ℝ, ℂ](43719defaultinhabitedfor.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [default / inhabited for ℚ, ℝ, ℂ](https://leanprover-community.github.io/archive/113489newmembers/43719defaultinhabitedfor.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Bryan Gin-ge Chen (Aug 13 2018 at 22:32)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/default%20/%20inhabited%20for%20%E2%84%9A%2C%20%E2%84%9D%2C%20%E2%84%82/near/132070075):
 <p>I'm going through <a href="https://leanprover.github.io/theorem_proving_in_lean/type_classes.html#type-classes-and-instances" target="_blank" title="https://leanprover.github.io/theorem_proving_in_lean/type_classes.html#type-classes-and-instances">TPIL's chapter on typeclasses</a> and while messing around tried the following:</p>

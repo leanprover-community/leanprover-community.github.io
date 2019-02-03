@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/24264groupequivleftcosetstimessubgroup.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [group_equiv_left_cosets_times_subgroup](24264groupequivleftcosetstimessubgroup.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [group_equiv_left_cosets_times_subgroup](https://leanprover-community.github.io/archive/113488general/24264groupequivleftcosetstimessubgroup.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Apr 16 2018 at 10:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/group_equiv_left_cosets_times_subgroup/near/125140026):
 <div class="codehilite"><pre><span></span>import data.equiv group_theory.coset

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/13549Accesibilityoflexicalorderoflists.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [Accesibility of lexical order of lists](13549Accesibilityoflexicalorderoflists.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [Accesibility of lexical order of lists](https://leanprover-community.github.io/archive/113489newmembers/13549Accesibilityoflexicalorderoflists.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ AHan (Nov 27 2018 at 16:19)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Accesibility%20of%20lexical%20order%20of%20lists/near/148644364):
 <p>I've seen there are proofs for accessibility and well-founded for lexical order of product<br>

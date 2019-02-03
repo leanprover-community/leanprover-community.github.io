@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/16953SMTIntegration.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [SMT Integration](16953SMTIntegration.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [SMT Integration](https://leanprover-community.github.io/archive/113488general/16953SMTIntegration.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Wojciech Nawrocki (Jan 25 2019 at 20:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/SMT%20Integration/near/156879205):
 <p>What's the status of integrating SMT solvers with Lean? There are some references to it in the documentation, (e.g. <a href="https://leanprover.github.io/reference/tactics.html#the-smt-state" target="_blank" title="https://leanprover.github.io/reference/tactics.html#the-smt-state">https://leanprover.github.io/reference/tactics.html#the-smt-state</a>) but all are empty. It would be nice to have some automatic solving.</p>

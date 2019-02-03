@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/14331simpequalityandinstances.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [simp, equality, and instances](14331simpequalityandinstances.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [simp, equality, and instances](https://leanprover-community.github.io/archive/113489newmembers/14331simpequalityandinstances.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Simon Winwood (Sep 25 2018 at 00:29)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/simp%2C%20equality%2C%20and%20instances/near/134561065):
 <p>Hi, I am trying to prove that list intersection with a singleton list is essentially a filter, and get this sub-goal:</p>

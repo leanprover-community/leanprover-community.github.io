@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/31957mathlibfiles.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [mathlib files](31957mathlibfiles.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [mathlib files](https://leanprover-community.github.io/archive/113488general/31957mathlibfiles.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Patrick Massot (Dec 18 2018 at 14:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20files/near/152106884):
 <p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> and <span class="user-mention" data-user-id="110294">@Johannes Hölzl</span> Would you be open to a PR reorganizing files in the analysis part of mathlib? There are huge files with a strange import graph. I would like to create new sub-folders  an move stuff around so that it get easier to guess what is in what file</p>

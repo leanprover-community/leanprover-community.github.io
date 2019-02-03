@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/81138smallchangesinnatandorderedgroupsinequalities.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [small changes in nat and ordered groups inequalities](81138smallchangesinnatandorderedgroupsinequalities.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [small changes in nat and ordered groups inequalities](https://leanprover-community.github.io/archive/116395maths/81138smallchangesinnatandorderedgroupsinequalities.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Adam Kurkiewicz (Apr 07 2018 at 13:43)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/small%20changes%20in%20nat%20and%20ordered%20groups%20inequalities/near/124761510):
 <p>Proposal 1.</p>

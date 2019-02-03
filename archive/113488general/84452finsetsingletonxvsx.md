@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/84452finsetsingletonxvsx.html
 ---
 
-## Stream: [general](index.html)
-### Topic: ["finset.singleton x" vs "{x}"](84452finsetsingletonxvsx.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: ["finset.singleton x" vs "{x}"](https://leanprover-community.github.io/archive/113488general/84452finsetsingletonxvsx.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Sep 28 2018 at 17:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22finset.singleton%20x%22%20vs%20%22%7Bx%7D%22/near/134833971):
 <p>there are two ways to write the same finset. there's a simp lemma converting the latter to the former. however there are also many lemmas written using the latter instead of the former. so what is the standard?</p>

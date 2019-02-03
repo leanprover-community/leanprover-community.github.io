@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/96716inductionbug.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [induction bug](96716inductionbug.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [induction bug](https://leanprover-community.github.io/archive/113488general/96716inductionbug.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Nov 20 2018 at 23:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/induction%20bug/near/148074216):
 <div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">wtf</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">(</span><span class="n">C</span> <span class="o">:</span> <span class="n">multiset</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">(</span><span class="n">r</span><span class="o">)</span> <span class="o">:</span> <span class="n">C</span> <span class="n">r</span> <span class="o">:=</span>

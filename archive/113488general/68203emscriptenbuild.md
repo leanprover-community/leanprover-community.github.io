@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/68203emscriptenbuild.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [emscripten build](68203emscriptenbuild.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [emscripten build](https://leanprover-community.github.io/archive/113488general/68203emscriptenbuild.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Sebastian Ullrich (Apr 30 2018 at 12:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/emscripten%20build/near/125887589):
 <p>I see the emscripten situation is as stellar as ever :| .<br>

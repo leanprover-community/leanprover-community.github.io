@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/79405Mutualrecursioonmadness.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [Mutual recursioon madness](79405Mutualrecursioonmadness.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [Mutual recursioon madness](https://leanprover-community.github.io/archive/113489newmembers/79405Mutualrecursioonmadness.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Ken Roe (Jul 25 2018 at 04:20)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Mutual%20recursioon%20madness/near/130250392):
 <p>How do I complete the following theorem:</p>

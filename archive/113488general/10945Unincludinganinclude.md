@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/10945Unincludinganinclude.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [Un-including an include](10945Unincludinganinclude.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [Un-including an include](https://leanprover-community.github.io/archive/113488general/10945Unincludinganinclude.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Keeley Hoek (Sep 29 2018 at 12:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Un-including%20an%20include/near/134878195):
 <p>If <code>include blah</code> occurs in my current namespace, is there a way to make a special definition which doesn't take <code>blah</code> as an argument?</p>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/11831defsyntax.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [def syntax](11831defsyntax.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [def syntax](https://leanprover-community.github.io/archive/113489newmembers/11831defsyntax.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Alexandru-Andrei Bosinta (Nov 21 2018 at 21:04)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/def%20syntax/near/148134203):
 <p>Is there a way to make a definition with a condition that is not decidable? I need something like </p>

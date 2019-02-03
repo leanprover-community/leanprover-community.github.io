@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/06317erroraftercompletingtacticproof.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [error after completing tactic proof](06317erroraftercompletingtacticproof.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [error after completing tactic proof](https://leanprover-community.github.io/archive/113488general/06317erroraftercompletingtacticproof.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Johan Commelin (Nov 17 2018 at 07:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/error%20after%20completing%20tactic%20proof/near/147866833):
 <div class="codehilite"><pre><span></span><span class="n">type</span> <span class="n">mismatch</span> <span class="n">at</span> <span class="n">application</span>

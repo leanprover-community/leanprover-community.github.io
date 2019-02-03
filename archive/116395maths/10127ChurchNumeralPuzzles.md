@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/10127ChurchNumeralPuzzles.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [Church Numeral Puzzles](10127ChurchNumeralPuzzles.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [Church Numeral Puzzles](https://leanprover-community.github.io/archive/116395maths/10127ChurchNumeralPuzzles.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (May 02 2018 at 21:55)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Church%20Numeral%20Puzzles/near/126010843):
 <p>I am trying to understand church numerals by writing a collection of basic theorems about them.</p>

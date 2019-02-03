@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/82902easyfinitesetquestion.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [easy finite set question](82902easyfinitesetquestion.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [easy finite set question](https://leanprover-community.github.io/archive/113488general/82902easyfinitesetquestion.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Apr 15 2018 at 04:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/easy%20finite%20set%20question/near/125096226):
 <div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">set</span>

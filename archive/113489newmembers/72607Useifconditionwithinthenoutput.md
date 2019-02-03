@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/72607Useifconditionwithinthenoutput.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [Use "if" condition within "then" output](72607Useifconditionwithinthenoutput.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [Use "if" condition within "then" output](https://leanprover-community.github.io/archive/113489newmembers/72607Useifconditionwithinthenoutput.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Abhimanyu Pallavi Sudhir (Nov 28 2018 at 23:41)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Use%20%22if%22%20condition%20within%20%22then%22%20output/near/148749574):
 <p>I'm trying to write something like this:</p>

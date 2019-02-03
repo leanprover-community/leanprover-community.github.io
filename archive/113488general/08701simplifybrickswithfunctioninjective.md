@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/08701simplifybrickswithfunctioninjective.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [simplify bricks with function.injective](08701simplifybrickswithfunctioninjective.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [simplify bricks with function.injective](https://leanprover-community.github.io/archive/113488general/08701simplifybrickswithfunctioninjective.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Sep 10 2018 at 08:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simplify%20bricks%20with%20function.injective/near/133641530):
 <div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">α</span> <span class="n">β</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span> <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="n">function</span><span class="bp">.</span><span class="n">injective</span> <span class="n">f</span><span class="o">)</span> <span class="o">:</span> <span class="n">false</span> <span class="o">:=</span>

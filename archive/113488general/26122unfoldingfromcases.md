@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/26122unfoldingfromcases.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [unfolding from cases](26122unfoldingfromcases.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [unfolding from cases](https://leanprover-community.github.io/archive/113488general/26122unfoldingfromcases.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Reid Barton (Nov 28 2018 at 15:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unfolding%20from%20cases/near/148714917):
 <div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">x</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="o">:=</span> <span class="mi">1</span> <span class="bp">+</span> <span class="mi">1</span> <span class="bp">+</span> <span class="mi">1</span> <span class="bp">+</span> <span class="mi">1</span>

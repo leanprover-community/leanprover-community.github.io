@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/93018monoidalcategories.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [monoidal categories](93018monoidalcategories.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [monoidal categories](https://leanprover-community.github.io/archive/116395maths/93018monoidalcategories.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Scott Morrison (Nov 07 2018 at 04:24)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/monoidal%20categories/near/146915123):
 <p><span class="user-mention" data-user-id="128547">@Michael Jendrusch</span> has recently started work on monoidal categories again. (Yay!)</p>

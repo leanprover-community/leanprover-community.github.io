@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/11881overlappingcasesandwellfoundedness.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [overlapping cases and well-foundedness](11881overlappingcasesandwellfoundedness.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [overlapping cases and well-foundedness](https://leanprover-community.github.io/archive/113489newmembers/11881overlappingcasesandwellfoundedness.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Mark Dickinson (Oct 21 2018 at 19:05)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/overlapping%20cases%20and%20well-foundedness/near/136220983):
 <p>I'm trying to define a simple <code>ℕ → ℕ → ℕ</code> function using well-founded recursion. At top-level, I'm splitting on cases, and those cases overlap:</p>

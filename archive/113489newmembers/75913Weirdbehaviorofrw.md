@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/75913Weirdbehaviorofrw.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [Weird behavior of rw?](75913Weirdbehaviorofrw.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [Weird behavior of rw?](https://leanprover-community.github.io/archive/113489newmembers/75913Weirdbehaviorofrw.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Sebastian Zimmer (Sep 29 2018 at 19:48)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Weird%20behavior%20of%20rw%3F/near/134890495):
 <p>I'm trying to shorten the following proof:</p>

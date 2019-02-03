@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/28850howtoproveoffindsimpletheorem.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [how to prove of find simple theorem](28850howtoproveoffindsimpletheorem.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [how to prove of find simple theorem](https://leanprover-community.github.io/archive/116395maths/28850howtoproveoffindsimpletheorem.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Truong Nguyen (Aug 10 2018 at 19:54)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/how%20to%20prove%20of%20find%20simple%20theorem/near/131837673):
 <p>Hi everyone, I am a new user, my question is maybe too simple. Please make it lear for me.<br>

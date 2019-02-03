@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/06254SpacemacsLeanLayer.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [Spacemacs Lean Layer](06254SpacemacsLeanLayer.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [Spacemacs Lean Layer](https://leanprover-community.github.io/archive/113488general/06254SpacemacsLeanLayer.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Robert Kornacki (Oct 05 2018 at 05:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Spacemacs%20Lean%20Layer/near/135231987):
 <p>Recently I just quickly put together a Spacemacs layer for lean which pretty much just rebinds lean-mode to be as expected for the Spacemacs vim crowd. Thought it'd be worth sharing for anyone else who's a Spacemacs user <a href="https://github.com/robkorn/spacemacs-lean-layer" target="_blank" title="https://github.com/robkorn/spacemacs-lean-layer">https://github.com/robkorn/spacemacs-lean-layer</a></p>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/53658namingofbinarypropertieswithleftandright.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [naming of binary properties with left and right](53658namingofbinarypropertieswithleftandright.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [naming of binary properties with left and right](https://leanprover-community.github.io/archive/116395maths/53658namingofbinarypropertieswithleftandright.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Sean Leather (Apr 26 2018 at 11:40)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/naming%20of%20binary%20properties%20with%20left%20and%20right/near/125715828):
 <p><span class="user-mention" data-user-id="110044">@Chris Hughes</span> updated his <code>finset.disjoint</code> PR with a <a href="https://github.com/leanprover/mathlib/commit/009ff9b" target="_blank" title="https://github.com/leanprover/mathlib/commit/009ff9b">change</a> to rename the following:</p>

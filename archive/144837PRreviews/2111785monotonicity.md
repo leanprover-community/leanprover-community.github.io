@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/144837PRreviews/2111785monotonicity.html
 ---
 
-## Stream: [PR reviews](index.html)
-### Topic: [#85 monotonicity](2111785monotonicity.html)
+## Stream: [PR reviews](https://leanprover-community.github.io/archive/144837PRreviews/index.html)
+### Topic: [#85 monotonicity](https://leanprover-community.github.io/archive/144837PRreviews/2111785monotonicity.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Simon Hudon (Oct 07 2018 at 20:52)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%2385%20monotonicity/near/135362082):
 <p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> <span class="user-mention" data-user-id="110294">@Johannes Hölzl</span>: what is missing on this PR?</p>

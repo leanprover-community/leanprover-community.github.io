@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/23272mustliveinsameuniverse.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [must live in same universe](23272mustliveinsameuniverse.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [must live in same universe](https://leanprover-community.github.io/archive/113488general/23272mustliveinsameuniverse.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Reid Barton (Jul 17 2018 at 05:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/must%20live%20in%20same%20universe/near/129790411):
 <p>Any insight into this error?</p>

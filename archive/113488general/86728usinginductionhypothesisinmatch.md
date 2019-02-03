@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/86728usinginductionhypothesisinmatch.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [using induction hypothesis in match](86728usinginductionhypothesisinmatch.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [using induction hypothesis in match](https://leanprover-community.github.io/archive/113488general/86728usinginductionhypothesisinmatch.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Chris Hughes (Jan 27 2019 at 21:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/using%20induction%20hypothesis%20in%20match/near/156987200):
 <p>Why does the second one work but not the first?</p>

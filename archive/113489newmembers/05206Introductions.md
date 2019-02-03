@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/05206Introductions.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [Introductions](05206Introductions.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [Introductions](https://leanprover-community.github.io/archive/113489newmembers/05206Introductions.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Xita Meyers (Sep 06 2018 at 14:48)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Introductions/near/133439634):
 <p>Hello, I have never asked a public question on Zulip before, and in order for me to get used to doing so, I have been ordered by <span class="user-mention" data-user-id="110064">@Kenny Lau</span>  to state the following in order to introduce myself: </p>

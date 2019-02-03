@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/00258Beklemishevsworms.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [Beklemishev's worms](00258Beklemishevsworms.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [Beklemishev's worms](https://leanprover-community.github.io/archive/113488general/00258Beklemishevsworms.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Dec 31 2018 at 13:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Beklemishev%27s%20worms/near/154084805):
 <div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">next_aux</span> <span class="o">(</span><span class="n">N</span> <span class="o">:</span> <span class="n">nat</span><span class="o">)</span> <span class="o">:</span> <span class="n">list</span> <span class="n">nat</span> <span class="bp">-&gt;</span> <span class="n">nat</span>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/36914howdoestacticringwork.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [how does tactic.ring work?](36914howdoestacticringwork.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [how does tactic.ring work?](https://leanprover-community.github.io/archive/113488general/36914howdoestacticringwork.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Jun 11 2018 at 10:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20does%20tactic.ring%20work%3F/near/127888870):
 <p>I have read through programming in Lean a couple of times and now wonder if it's time I started reading something else. I decided to read the ring tactic (not least because it failed to prove something relatively simple the last time I tried to use it and I'd rather fix it myself than pester Mario, not that I have any idea about how far I need to go before I am anywhere close to being able to fix it).</p>

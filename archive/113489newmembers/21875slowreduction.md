@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/21875slowreduction.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [slow reduction](21875slowreduction.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [slow reduction](https://leanprover-community.github.io/archive/113489newmembers/21875slowreduction.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Scott Olson (Sep 28 2018 at 02:26)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/slow%20reduction/near/134782780):
 <p>I have a <code>#reduce</code> that's leading to "(deterministic) timeout" and I'm wondering what I can do to find out what's taking so long. Can I <code>#reduce</code> step-by-step?</p>

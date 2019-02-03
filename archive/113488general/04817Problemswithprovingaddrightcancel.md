@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/04817Problemswithprovingaddrightcancel.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [Problems with proving add_right_cancel](04817Problemswithprovingaddrightcancel.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [Problems with proving add_right_cancel](https://leanprover-community.github.io/archive/113488general/04817Problemswithprovingaddrightcancel.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Lyle Kopnicky (Nov 28 2018 at 21:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Problems%20with%20proving%20add_right_cancel/near/148741055):
 <p>Hi folks, I'm a beginner at lean and I was trying my hand at proving one of the arithmetic identities, <code>add_right_cancel</code>. Here's my attempt (please note this is done within a hidden namespace so it does not conflict with the usual definition):</p>

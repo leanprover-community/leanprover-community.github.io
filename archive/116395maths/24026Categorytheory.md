@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/24026Categorytheory.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [Category theory](24026Categorytheory.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [Category theory](https://leanprover-community.github.io/archive/116395maths/24026Categorytheory.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Apr 01 2018 at 23:38)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Category%20theory/near/124502143):
 <p><a href="https://github.com/kckennylau/category-theory/blob/master/src/adjunction_examples.lean" target="_blank" title="https://github.com/kckennylau/category-theory/blob/master/src/adjunction_examples.lean">https://github.com/kckennylau/category-theory/blob/master/src/adjunction_examples.lean</a></p>

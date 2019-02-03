@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/40095finsetsubsetunion.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [finset.subset_union_*](40095finsetsubsetunion.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [finset.subset_union_*](https://leanprover-community.github.io/archive/113489newmembers/40095finsetsubsetunion.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Bryan Gin-ge Chen (Sep 16 2018 at 06:41)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/finset.subset_union_%2A/near/134038959):
 <p>Is there a reason why <code>finset.subset_union_left</code> and <code>finset.subset_union_right</code>have implicit arguments <code>{s₁ s₂ : finset α}</code> and the corresponding <code>set.</code> theorems have explicit arguments <code>(s t : set α)</code>?</p>

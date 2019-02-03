@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/73720failedtoadddeclaration.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [failed to add declaration](73720failedtoadddeclaration.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [failed to add declaration](https://leanprover-community.github.io/archive/113488general/73720failedtoadddeclaration.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Keeley Hoek (Sep 15 2018 at 14:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/failed%20to%20add%20declaration/near/134011400):
 <p>Has anyone ever seen the error <code>failed to add declaration 'xxxx.my_defn' to environment, type has metavariables</code> while writing a tactic?</p>

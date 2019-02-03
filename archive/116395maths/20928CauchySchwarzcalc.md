@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/20928CauchySchwarzcalc.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [Cauchy-Schwarz calc](20928CauchySchwarzcalc.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [Cauchy-Schwarz calc](https://leanprover-community.github.io/archive/116395maths/20928CauchySchwarzcalc.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Patrick Massot (May 29 2018 at 23:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Cauchy-Schwarz%20calc/near/127276213):
 <p>Sometimes when someone new comes here to ask maths questions, I wonder if we have a new mathematician interested in Lean. So I googled <span class="user-mention" data-user-id="117987">@Patrick Stevens</span>  and found <a href="https://www.patrickstevens.co.uk/cauchy-schwarz-proof/" target="_blank" title="https://www.patrickstevens.co.uk/cauchy-schwarz-proof/">https://www.patrickstevens.co.uk/cauchy-schwarz-proof/</a></p>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/83026internshipatOracleLabs.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [internship at Oracle Labs](83026internshipatOracleLabs.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [internship at Oracle Labs](https://leanprover-community.github.io/archive/113488general/83026internshipatOracleLabs.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Jeremy Avigad (Nov 28 2018 at 16:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/internship%20at%20Oracle%20Labs/near/148718363):
 <p>I just posted this message on the Lean-user mailing list:</p>

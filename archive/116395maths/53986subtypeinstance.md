@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/53986subtypeinstance.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [subtype instance](53986subtypeinstance.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [subtype instance](https://leanprover-community.github.io/archive/116395maths/53986subtypeinstance.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Patrick Massot (Aug 19 2018 at 22:29)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/subtype%20instance/near/132419278):
 <p>In PR <a href="https://github.com/leanprover/mathlib/pull/261" target="_blank" title="https://github.com/leanprover/mathlib/pull/261">#261</a> coming from the perfectoid project, Johan defined subrings and subfields and proved they are rings and fields respectively. The proofs were of course extremely similar to the case of monoids and groups. So I exploited^Wencouraged Simon to write a new tactic built on top of <code>refine_struct</code> in the spirit of <code>pi_instance</code>. The result is  <a href="https://github.com/leanprover/mathlib/pull/267" target="_blank" title="https://github.com/leanprover/mathlib/pull/267">#267</a>. Of course any comment is welcome, but I'd be particularly interested in trying to answer question about how <a href="https://github.com/leanprover/mathlib/pull/267/files#diff-040c2692bc712ca8fface6e4aa45ce62R31" target="_blank" title="https://github.com/leanprover/mathlib/pull/267/files#diff-040c2692bc712ca8fface6e4aa45ce62R31">this tactic</a> works, since I managed to fool myself into believing I mostly understand it and should write a tutorial about it.</p>

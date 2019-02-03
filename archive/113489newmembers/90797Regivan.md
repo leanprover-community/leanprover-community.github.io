@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/90797Regivan.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [Regivan](90797Regivan.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [Regivan](https://leanprover-community.github.io/archive/113489newmembers/90797Regivan.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Regivan Santiago (Feb 28 2018 at 12:50)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Regivan/near/123086826):
 <p>Hello</p>

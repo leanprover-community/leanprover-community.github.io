@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/86914moduleandlatticesandetc.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [module and lattices and etc](86914moduleandlatticesandetc.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [module and lattices and etc](https://leanprover-community.github.io/archive/113488general/86914moduleandlatticesandetc.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Nov 06 2018 at 12:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20and%20lattices%20and%20etc/near/146859692):
 <div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">module_of_module_of_ring_hom</span> <span class="o">{</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">[</span><span class="n">ring</span> <span class="n">R</span><span class="o">]</span>

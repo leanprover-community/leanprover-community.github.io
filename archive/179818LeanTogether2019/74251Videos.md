@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/179818LeanTogether2019/74251Videos.html
 ---
 
-## Stream: [Lean Together 2019](index.html)
-### Topic: [Videos](74251Videos.html)
+## Stream: [Lean Together 2019](https://leanprover-community.github.io/archive/179818LeanTogether2019/index.html)
+### Topic: [Videos](https://leanprover-community.github.io/archive/179818LeanTogether2019/74251Videos.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Rob Lewis (Jan 07 2019 at 09:32)](https://leanprover.zulipchat.com/#narrow/stream/179818-Lean%20Together%202019/topic/Videos/near/154553849):
 <p>Videos of the lectures will be available here: <a href="https://lean-forward.github.io/lean-together/2019/#videos" target="_blank" title="https://lean-forward.github.io/lean-together/2019/#videos">https://lean-forward.github.io/lean-together/2019/#videos</a><br>

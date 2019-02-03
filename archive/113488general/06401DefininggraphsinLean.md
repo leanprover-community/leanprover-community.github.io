@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/06401DefininggraphsinLean.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [Defining graphs in Lean](06401DefininggraphsinLean.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [Defining graphs in Lean](https://leanprover-community.github.io/archive/113488general/06401DefininggraphsinLean.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Hoang Le Truong (Jul 10 2018 at 11:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Defining%20graphs%20in%20Lean/near/129399957):
 <p>I definite a function on the certain domain as follow</p>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/47376freegroup.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [free group](47376freegroup.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [free group](https://leanprover-community.github.io/archive/116395maths/47376freegroup.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Apr 01 2018 at 18:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/free%20group/near/124494694):
 <p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span>  here's my old version of free group <a href="https://github.com/kckennylau/Lean/blob/c6eac863b23d58d40deaab62489f6069f860407e/free_group.lean" target="_blank" title="https://github.com/kckennylau/Lean/blob/c6eac863b23d58d40deaab62489f6069f860407e/free_group.lean">https://github.com/kckennylau/Lean/blob/c6eac863b23d58d40deaab62489f6069f860407e/free_group.lean</a></p>

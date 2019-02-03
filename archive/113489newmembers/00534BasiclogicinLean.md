@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/00534BasiclogicinLean.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [Basic logic in Lean.](00534BasiclogicinLean.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [Basic logic in Lean.](https://leanprover-community.github.io/archive/113489newmembers/00534BasiclogicinLean.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Oct 08 2018 at 15:50)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Basic%20logic%20in%20Lean./near/135404145):
 <p>There has been some discussion about Q4 of my first M1F example sheet. The question and my solution are <a href="https://github.com/kbuzzard/xena/tree/master/M1F/problem_bank/PB0104" target="_blank" title="https://github.com/kbuzzard/xena/tree/master/M1F/problem_bank/PB0104">here</a> . My solution from this time last year is <a href="https://github.com/kbuzzard/xena/blob/a61d6db673ae8ab2672cbf6522894f743b08a6e6/M1F/2017-18/Example_Sheet_01/Questions_02_to_4/M1F_sheet01_solutions02_to_04.lean#L60" target="_blank" title="https://github.com/kbuzzard/xena/blob/a61d6db673ae8ab2672cbf6522894f743b08a6e6/M1F/2017-18/Example_Sheet_01/Questions_02_to_4/M1F_sheet01_solutions02_to_04.lean#L60">here</a> and is completely different. <span class="user-mention" data-user-id="110044">@Chris Hughes</span> and <span class="user-mention" data-user-id="110064">@Kenny Lau</span>  -- did you ever attempt to do M1F sheet 1 Q4 in Lean this time last year?</p>

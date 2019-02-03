@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/66487TypevsType.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [Type* vs Type _](66487TypevsType.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [Type* vs Type _](https://leanprover-community.github.io/archive/113488general/66487TypevsType.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Patrick Massot (Apr 26 2018 at 13:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%2A%20vs%20Type%20_/near/125719177):
 <p>What's the difference between <code>(a: Type*)</code> and <code>(a: Type _)</code>?</p>

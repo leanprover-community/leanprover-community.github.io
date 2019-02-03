@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/80127linarithnat.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [linarith nat](80127linarithnat.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [linarith nat](https://leanprover-community.github.io/archive/113488general/80127linarithnat.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Patrick Massot (Dec 23 2018 at 17:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/linarith%20nat/near/152434102):
 <p>Is it part of the known limitations of <code>linarith</code> that I can't do better than</p>

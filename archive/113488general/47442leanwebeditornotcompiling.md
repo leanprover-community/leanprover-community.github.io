@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/47442leanwebeditornotcompiling.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [lean-web-editor not compiling?](47442leanwebeditornotcompiling.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [lean-web-editor not compiling?](https://leanprover-community.github.io/archive/113488general/47442leanwebeditornotcompiling.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Scott Morrison (Apr 03 2018 at 01:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean-web-editor%20not%20compiling%3F/near/124551978):
 <p><span class="user-mention" data-user-id="110043">@Gabriel Ebner</span>, I'm trying to build the lean-web-editor from scratch, and running into a problem.</p>

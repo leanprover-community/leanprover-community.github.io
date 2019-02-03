@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/26286induction.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [induction](26286induction.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [induction](https://leanprover-community.github.io/archive/113488general/26286induction.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Johan Commelin (Jul 23 2018 at 14:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/induction/near/130145340):
 <p>Occasionally I find myself having the goal <code>\forall n, P n</code> that I want to prove by induction. But (as a mathematician) I always allow myself to use <code>P m</code> for all <code>m &lt; n</code> in the induction step. So I would like to rewrite my initial goal into <code>\forall n m, m &lt; n \to P m</code>. Is a statement like that already in mathlib?</p>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/39394leanpkgdoesnotwork.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [leanpkg does not work](39394leanpkgdoesnotwork.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [leanpkg does not work](https://leanprover-community.github.io/archive/113488general/39394leanpkgdoesnotwork.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Blair Shi (Jul 10 2018 at 20:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leanpkg%20does%20not%20work/near/129424899):
 <p>after git clone Xena-UROP-2018 from GitHub, I want to do <code>leanpkg upgrade</code> but it failed and post many error:</p>

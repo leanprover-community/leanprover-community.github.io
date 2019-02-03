@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/98059constructingexprlam.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [constructing expr.lam](98059constructingexprlam.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [constructing expr.lam](https://leanprover-community.github.io/archive/113488general/98059constructingexprlam.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Scott Morrison (Sep 09 2018 at 10:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/constructing%20expr.lam/near/133600290):
 <p>How do I construct <code>expr.lam</code> terms? In particular, I have  an expression <code>e_1</code> that already has a <code>var n</code> inside it, and another <code>e_2</code>, and I want to construct the <code>expr</code> representing <code>lam x, e_1 = e_2</code>.</p>

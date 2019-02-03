@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/88618doesleanknow.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [does lean know?](88618doesleanknow.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [does lean know?](https://leanprover-community.github.io/archive/113488general/88618doesleanknow.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Sean Leather (Mar 01 2018 at 10:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/does%20lean%20know%3F/near/123130945):
 <p>Is this in the standard library or mathlib?</p>

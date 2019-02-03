@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/35579Defaultargumentswithtypeparameter.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [Default arguments with type parameter](35579Defaultargumentswithtypeparameter.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [Default arguments with type parameter](https://leanprover-community.github.io/archive/113488general/35579Defaultargumentswithtypeparameter.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Keeley Hoek (Aug 18 2018 at 12:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Default%20arguments%20with%20type%20parameter/near/132355082):
 <p>I've got a (honest, in-a-program) function</p>

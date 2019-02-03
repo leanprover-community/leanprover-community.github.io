@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/66314normnumquestionandcomment.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [norm_num question and comment](66314normnumquestionandcomment.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [norm_num question and comment](https://leanprover-community.github.io/archive/116395maths/66314normnumquestionandcomment.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Aug 13 2018 at 22:30)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/norm_num%20question%20and%20comment/near/132069983):
 <div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">real</span><span class="bp">.</span><span class="n">basic</span>

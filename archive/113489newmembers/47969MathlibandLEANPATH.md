@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/47969MathlibandLEANPATH.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [Mathlib and LEAN_PATH](47969MathlibandLEANPATH.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [Mathlib and LEAN_PATH](https://leanprover-community.github.io/archive/113489newmembers/47969MathlibandLEANPATH.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Jean Lo (Jan 31 2019 at 21:12)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Mathlib%20and%20LEAN_PATH/near/157302484):
 <p>I'm sure I'm missing something really obvious here, but I haven't been able to figure it out:</p>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/72682orderofsimplemmas.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [order of simp lemmas](72682orderofsimplemmas.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [order of simp lemmas](https://leanprover-community.github.io/archive/113488general/72682orderofsimplemmas.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Sebastien Gouezel (Nov 25 2018 at 17:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/order%20of%20simp%20lemmas/near/148324441):
 <p>There are in <code>data/set/basic.lean</code> the following two simp lemmas, in this order:</p>

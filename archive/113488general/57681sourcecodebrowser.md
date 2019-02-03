@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/57681sourcecodebrowser.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [source code browser](57681sourcecodebrowser.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [source code browser](https://leanprover-community.github.io/archive/113488general/57681sourcecodebrowser.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Johan Commelin (Sep 03 2018 at 09:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/source%20code%20browser/near/133246061):
 <p>Is there some way to easily turn a repo of Lean files into a hyperlinked bunch of HTML files? If we want to showcase some code to mathematicians, we should take into account that they have never heard of git or github before. Also, on github you can't click on an imported file, or a token, to go somewhere else. And we can't expect people who want to read some source files to install VScode before they are able to really use it.</p>

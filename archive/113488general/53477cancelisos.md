@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/53477cancelisos.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [cancel isos](53477cancelisos.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [cancel isos](https://leanprover-community.github.io/archive/113488general/53477cancelisos.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Reid Barton (Aug 23 2018 at 06:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cancel%20isos/near/132617646):
 <p><span class="user-mention" data-user-id="110087">@Scott Morrison</span> Somehow, <code>cancel_epi</code> with <code>f = ↑i</code> (<code>i : x ≅ y</code>) doesn't work any more.<br>

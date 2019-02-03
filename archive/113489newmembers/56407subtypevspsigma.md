@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/56407subtypevspsigma.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [subtype vs psigma](56407subtypevspsigma.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [subtype vs psigma](https://leanprover-community.github.io/archive/113489newmembers/56407subtypevspsigma.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Sebastian Zimmer (Oct 14 2018 at 20:07)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/subtype%20vs%20psigma/near/135787450):
 <p>What is the difference between <code>{a:α // p a}</code> and <code>Σ' a, P a</code>?<br>

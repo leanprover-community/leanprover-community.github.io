@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/45420metamutualdeferrors.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [meta mutual def errors](45420metamutualdeferrors.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [meta mutual def errors](https://leanprover-community.github.io/archive/113488general/45420metamutualdeferrors.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Mario Carneiro (Aug 24 2018 at 15:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/meta%20mutual%20def%20errors/near/132697613):
 <p>Does anyone know the source of this error? I get <code>unexpected error, failed to generate equational lemmas in the front-end</code> even though it's a meta def so it shouldn't have equations</p>

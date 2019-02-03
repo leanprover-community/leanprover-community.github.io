@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/27561Recursorsfordegreeinequalities.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [Recursors for degree inequalities](27561Recursorsfordegreeinequalities.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [Recursors for degree inequalities](https://leanprover-community.github.io/archive/116395maths/27561Recursorsfordegreeinequalities.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Chris Hughes (Nov 19 2018 at 04:10)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Recursors%20for%20degree%20inequalities/near/147942053):
 <p>Today I wrote two proofs of the following lemma, about nonconstant polynomials. They illustrate a use of recursive propositions. For the second proof, I defined <code>nonconstant</code> as a recursive Proposition, instead of <code>degree p &gt; 0</code>, and it was a much easier proof that didn't have any of the faffing around with degree. Is this sort of stuff worth having in the library. I'm experimenting with finding a useful recursor for <code>degree p &lt; degree q</code>.</p>

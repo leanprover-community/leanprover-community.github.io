@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/91108Differencebetweenconstantandaxioms.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [Difference between constant and axioms](91108Differencebetweenconstantandaxioms.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [Difference between constant and axioms](https://leanprover-community.github.io/archive/113489newmembers/91108Differencebetweenconstantandaxioms.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Abhimanyu Pallavi Sudhir (Dec 31 2018 at 07:38)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Difference%20between%20constant%20and%20axioms/near/154074362):
 <p>I just noticed that <code>propext</code> is defined as a constant:</p>

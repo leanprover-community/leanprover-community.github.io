@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/21143newbieprooffromassumptionofinductivelydefinedprop.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [newbie: proof from assumption of inductively defined prop](21143newbieprooffromassumptionofinductivelydefinedprop.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [newbie: proof from assumption of inductively defined prop](https://leanprover-community.github.io/archive/113489newmembers/21143newbieprooffromassumptionofinductivelydefinedprop.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Oct 17 2018 at 20:04)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/newbie%3A%20proof%20from%20assumption%20of%20inductively%20defined%20prop/near/135989819):
 <p>[moving to <code>new members</code> stream]. You could prove that <code>ev n</code> was decidable, and then use <code>dec_trivial</code> to decide it.</p>

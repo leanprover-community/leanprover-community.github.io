@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/83722ordistriboverandgolf.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [or distrib over and golf](83722ordistriboverandgolf.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [or distrib over and golf](https://leanprover-community.github.io/archive/113488general/83722ordistriboverandgolf.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Oct 18 2018 at 21:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/or%20distrib%20over%20and%20golf/near/136067247):
 <p>A student just asked me this:</p>

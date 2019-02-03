@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/01137sumiteoverfin.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [sum ite over fin](01137sumiteoverfin.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [sum ite over fin](https://leanprover-community.github.io/archive/113488general/01137sumiteoverfin.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Johan Commelin (Sep 07 2018 at 15:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/sum%20ite%20over%20fin/near/133512435):
 <p>How do I kill off this one?</p>

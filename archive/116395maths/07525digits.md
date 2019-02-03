@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/07525digits.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [digits](07525digits.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [digits](https://leanprover-community.github.io/archive/116395maths/07525digits.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Feb 02 2019 at 10:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/digits/near/157416565):
 <p>The students at Imperial do random maths in Lean. I run a puzzle-solving club where we look at recreational questions involving things such as digit sums of integers. In my 1st year exam last year there is a question about decimal expansions, where we needed to know for example that <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>7</mn><mn>1</mn><mi mathvariant="normal">/</mi><mn>1</mn><mn>0</mn><mn>0</mn></mrow><annotation encoding="application/x-tex">71/100</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.75em;"></span><span class="strut bottom" style="height:1em;vertical-align:-0.25em;"></span><span class="base"><span class="mord mathrm">7</span><span class="mord mathrm">1</span><span class="mord mathrm">/</span><span class="mord mathrm">1</span><span class="mord mathrm">0</span><span class="mord mathrm">0</span></span></span></span> had no 8's in its decimal expansion. As far as I know there is no way of getting the $$n$$th decimal digit of a natural, or the $$n$$th digit after the decimal point of a real number, in mathlib. I need this stuff now (for example to formalise the questions and solutions on last year's M1F paper). Is this sort of nonsense the sort of thing which should go into mathlib or should I just make my own little library? I don't mind either way, it just occurs to me that whilst I am clear in my opinions that most undergraduate level pure maths is a very natural target for mathlib (indeed I think that the more undergraduate level pure maths is in mathlib, the more pure mathematicians will take Lean seriously), I am less clear about this fringe stuff. It's easy to write (indeed I've written it) but I now don't quite know what to do with it.</p>

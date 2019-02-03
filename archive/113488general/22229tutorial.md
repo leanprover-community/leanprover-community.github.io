@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/22229tutorial.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [tutorial](22229tutorial.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [tutorial](https://leanprover-community.github.io/archive/113488general/22229tutorial.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Johan Commelin (Oct 04 2018 at 08:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tutorial/near/135155789):
 <p><span class="user-mention" data-user-id="110031">@Patrick Massot</span> Would you mind pushing your demo to a new <code>tutorial</code> branch on community fork? Maybe as <code>docs/tutorial/demo.lean</code>.</p>

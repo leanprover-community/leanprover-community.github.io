@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/29201zeroring.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [zero ring](29201zeroring.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [zero ring](https://leanprover-community.github.io/archive/116395maths/29201zeroring.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Sep 09 2018 at 16:56)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/zero%20ring/near/133613106):
 <p>I'm working with polynomials and the zero ring is constantly a special case. There is a class <code>nonzero_comm_ring</code> extending comm_ring with the proposition that <code>0 \ne 1</code>, and several of Chris' results on polynomials need this as a hypothesis (for example the fact that degree of <code>X</code> is 1, and every corollary of this). Of course everything is true (and trivial) for the zero ring, but often the proofs need to be separate because of this. Because of the constructor for <code>nonzero_comm_ring</code> I am coming around to the idea to be splitting on <code>(0 : R) = 1</code> for lemmas which are true in the case R=0 but where the proof in the non-zero case is far from working for the zero ring.</p>

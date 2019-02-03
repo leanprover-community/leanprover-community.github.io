@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/34848notationscoping.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [notation scoping](34848notationscoping.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [notation scoping](https://leanprover-community.github.io/archive/113488general/34848notationscoping.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Sebastian Ullrich (May 28 2018 at 09:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notation%20scoping/near/127193572):
 <p><a href="#narrow/stream/113488-general/subject/local.20notation.20for.20fin.20(n.2B1)/near/127041848" title="#narrow/stream/113488-general/subject/local.20notation.20for.20fin.20(n.2B1)/near/127041848">https://leanprover.zulipchat.com/#narrow/stream/113488-general/subject/local.20notation.20for.20fin.20(n.2B1)/near/127041848</a></p>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/35751transportforever.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [transport forever](35751transportforever.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [transport forever](https://leanprover-community.github.io/archive/116395maths/35751transportforever.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Patrick Massot (Oct 10 2018 at 17:10)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/transport%20forever/near/135547994):
 <p>Today I tried to setup transport of structure along equiv, since <span class="user-mention" data-user-id="110049">@Mario Carneiro</span> wanted to see (part of) what we would like to be automated. It can be seen at <a href="https://gist.github.com/PatrickMassot/9c5246efe8d1fd4f26c21cbf2ac99ff8" target="_blank" title="https://gist.github.com/PatrickMassot/9c5246efe8d1fd4f26c21cbf2ac99ff8">https://gist.github.com/PatrickMassot/9c5246efe8d1fd4f26c21cbf2ac99ff8</a> First I'd like to know if the beginning looks reasonnable. The answer is almost certainly not since I'm stuck when I try to go to rings at the bottom. This file is autonomous, it should fail reliably with any recentish version of mathlib.</p>

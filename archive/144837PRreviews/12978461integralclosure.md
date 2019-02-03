@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/144837PRreviews/12978461integralclosure.html
 ---
 
-## Stream: [PR reviews](index.html)
-### Topic: [#461 integral closure](12978461integralclosure.html)
+## Stream: [PR reviews](https://leanprover-community.github.io/archive/144837PRreviews/index.html)
+### Topic: [#461 integral closure](https://leanprover-community.github.io/archive/144837PRreviews/12978461integralclosure.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Nov 10 2018 at 23:01)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23461%20integral%20closure/near/147449667):
 <p><span class="user-mention" data-user-id="110294">@Johannes Hölzl</span> I've finished adding content to my PR, you can review it now</p>

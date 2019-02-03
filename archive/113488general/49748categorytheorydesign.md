@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/49748categorytheorydesign.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [category theory design](49748categorytheorydesign.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [category theory design](https://leanprover-community.github.io/archive/113488general/49748categorytheorydesign.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Scott Morrison (Aug 12 2018 at 15:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/category%20theory%20design/near/131997040):
 <p>I spent some time this afternoon trying out three different implementations of products/equalizers/pullbacks. If anyone has a moment to have a look at them, I'd very much appreciate it. It's all in &lt;<a href="https://github.com/semorrison/lean-category-theory-pr/blob/limits/src/categories/universal/default.lean" target="_blank" title="https://github.com/semorrison/lean-category-theory-pr/blob/limits/src/categories/universal/default.lean">https://github.com/semorrison/lean-category-theory-pr/blob/limits/src/categories/universal/default.lean</a>&gt;.</p>

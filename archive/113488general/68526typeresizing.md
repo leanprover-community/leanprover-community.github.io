@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/68526typeresizing.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [type resizing](68526typeresizing.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [type resizing](https://leanprover-community.github.io/archive/113488general/68526typeresizing.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Reid Barton (Jun 01 2018 at 18:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20resizing/near/127424550):
 <p>Suppose I have a type <code>α : Type (u+1)</code> and I know <code>∃ β : Type u, nonempty (β ≃ α)</code>. Is there a "canonical" (= without choice, I guess?) way to obtain a type <code>α' : Type u</code> and an equivalence <code>α ≃ α'</code>?</p>

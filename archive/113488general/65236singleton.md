@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/65236singleton.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [singleton](65236singleton.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [singleton](https://leanprover-community.github.io/archive/113488general/65236singleton.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Scott Morrison (Aug 12 2018 at 04:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/singleton/near/131976871):
 <p>Am I just missing a <code>singleton</code> class, the pushout of <code>inhabited</code> and <code>subsingleton</code>? Am I meant to define my own?</p>

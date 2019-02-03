@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/22286LeanatICL.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [Lean at ICL](22286LeanatICL.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [Lean at ICL](https://leanprover-community.github.io/archive/113488general/22286LeanatICL.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Adam Kurkiewicz (Nov 14 2018 at 21:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20at%20ICL/near/147695759):
 <p>Hey guys, I'm in London tomorrow to apply for a US visa. I should be free after about 16:00. Is the lean club at ICL still going strong? Can I come? What's the address? When do people start showing up?</p>

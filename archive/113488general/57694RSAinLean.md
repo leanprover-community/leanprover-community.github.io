@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/57694RSAinLean.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [RSA in Lean](57694RSAinLean.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [RSA in Lean](https://leanprover-community.github.io/archive/113488general/57694RSAinLean.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Johan Commelin (Sep 12 2018 at 10:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/RSA%20in%20Lean/near/133784575):
 <p>I have to give a talk for high school students. Topic: cryptography.<br>

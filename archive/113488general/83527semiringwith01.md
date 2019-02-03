@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/83527semiringwith01.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [semiring with 0 ≠ 1](83527semiringwith01.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [semiring with 0 ≠ 1](https://leanprover-community.github.io/archive/113488general/83527semiringwith01.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Chris Hughes (May 12 2018 at 10:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/semiring%20with%200%20%E2%89%A0%201/near/126453723):
 <p>Is there a type class for a semiring with <code>0 ≠ 1</code>?</p>

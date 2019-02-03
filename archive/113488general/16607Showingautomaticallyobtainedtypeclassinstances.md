@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/16607Showingautomaticallyobtainedtypeclassinstances.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [Showing automatically obtained typeclass instances](16607Showingautomaticallyobtainedtypeclassinstances.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [Showing automatically obtained typeclass instances](https://leanprover-community.github.io/archive/113488general/16607Showingautomaticallyobtainedtypeclassinstances.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Seul Baek (May 29 2018 at 01:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Showing%20automatically%20obtained%20typeclass%20instances/near/127225600):
 <p>Is it possible to show which instance Lean is using when it successfully performs a typeclass inference? </p>

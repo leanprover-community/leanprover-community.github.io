@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/65968LeostalkinOxford.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [Leo's talk in Oxford](65968LeostalkinOxford.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [Leo's talk in Oxford](https://leanprover-community.github.io/archive/113488general/65968LeostalkinOxford.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Jul 07 2018 at 00:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Leo%27s%20talk%20in%20Oxford/near/129228419):
 <p><a href="https://easychair.org/smart-program/FLoC2018/FM-2018-07-16.html" target="_blank" title="https://easychair.org/smart-program/FLoC2018/FM-2018-07-16.html">https://easychair.org/smart-program/FLoC2018/FM-2018-07-16.html</a></p>

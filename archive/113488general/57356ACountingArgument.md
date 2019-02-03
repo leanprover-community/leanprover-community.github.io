@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/57356ACountingArgument.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [A Counting Argument](57356ACountingArgument.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [A Counting Argument](https://leanprover-community.github.io/archive/113488general/57356ACountingArgument.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Ken Lee (Feb 03 2019 at 10:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/A%20Counting%20Argument/near/157461356):
 <p>I am trying to prove: </p>

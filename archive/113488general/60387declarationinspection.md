@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/60387declarationinspection.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [declaration inspection](60387declarationinspection.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [declaration inspection](https://leanprover-community.github.io/archive/113488general/60387declarationinspection.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Patrick Massot (Aug 15 2018 at 18:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/declaration%20inspection/near/132184814):
 <p>I'm still trying to discover what a Lean file can reveal about itself. I found <a href="https://github.com/leanprover/lean/blob/master/library/init/meta/environment.lean" target="_blank" title="https://github.com/leanprover/lean/blob/master/library/init/meta/environment.lean">https://github.com/leanprover/lean/blob/master/library/init/meta/environment.lean</a> and <a href="https://github.com/leanprover/lean/blob/master/library/init/meta/declaration.lean" target="_blank" title="https://github.com/leanprover/lean/blob/master/library/init/meta/declaration.lean">https://github.com/leanprover/lean/blob/master/library/init/meta/declaration.lean</a> but there still very basic questions I can't answer. Say I have an environment and a declaration name. I can distinguish a lemma/theorem from a definition or constant (although I'm not sure what's the difference between definition and constant). But how can I distinguish between <code>def</code>, <code>class</code>, <code>instance</code>, <code>structure</code>, <code>inductive</code>? I saw the series of functions around <a href="https://github.com/leanprover/lean/blob/master/library/init/meta/environment.lean#L47" target="_blank" title="https://github.com/leanprover/lean/blob/master/library/init/meta/environment.lean#L47">https://github.com/leanprover/lean/blob/master/library/init/meta/environment.lean#L47</a> but trying them on examples only confuses me.</p>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/60330localrecursivefunction.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [local recursive function](60330localrecursivefunction.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [local recursive function](https://leanprover-community.github.io/archive/113488general/60330localrecursivefunction.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Reid Barton (Sep 14 2018 at 17:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/local%20recursive%20function/near/133958735):
 <p>Can you define a recursive function with a <code>let</code> inside a <code>do</code> block (in a <code>meta</code> definition)?</p>

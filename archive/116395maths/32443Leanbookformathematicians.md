@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/32443Leanbookformathematicians.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [Lean book for mathematicians](32443Leanbookformathematicians.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [Lean book for mathematicians](https://leanprover-community.github.io/archive/116395maths/32443Leanbookformathematicians.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (May 30 2018 at 15:31)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Lean%20book%20for%20mathematicians/near/127307658):
 <p>I'm writing a book for mathematicians who want to learn Lean.</p>

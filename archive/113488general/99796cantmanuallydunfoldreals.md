@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/99796cantmanuallydunfoldreals.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [can't manually `dunfold` reals](99796cantmanuallydunfoldreals.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [can't manually `dunfold` reals](https://leanprover-community.github.io/archive/113488general/99796cantmanuallydunfoldreals.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Nov 21 2018 at 12:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/can%27t%20manually%20%60dunfold%60%20reals/near/148102409):
 <div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">real</span><span class="bp">.</span><span class="n">basic</span>

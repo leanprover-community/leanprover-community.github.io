@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/54459exponentials.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [exponentials](54459exponentials.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [exponentials](https://leanprover-community.github.io/archive/116395maths/54459exponentials.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Apr 27 2018 at 16:06)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/exponentials/near/125775813):
 <p><span class="user-mention" data-user-id="110044">@Chris Hughes</span> what happened to your PR's about exp?</p>

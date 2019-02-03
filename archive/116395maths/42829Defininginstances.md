@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/42829Defininginstances.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [Defining instances](42829Defininginstances.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [Defining instances](https://leanprover-community.github.io/archive/116395maths/42829Defininginstances.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Sebastien Gouezel (Oct 13 2018 at 18:11)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Defining%20instances/near/135736954):
 <p>I am trying to define an instance of a normed space starting from a norm satisfying the right axioms, but I would need some help. Here is the situation:</p>

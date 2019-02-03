@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/74298filters.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [filters](74298filters.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [filters](https://leanprover-community.github.io/archive/113488general/74298filters.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Rohan Mitta (Sep 05 2018 at 16:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filters/near/133377621):
 <p>Hi,</p>

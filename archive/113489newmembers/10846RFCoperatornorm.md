@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/10846RFCoperatornorm.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [RFC: operator norm](10846RFCoperatornorm.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [RFC: operator norm](https://leanprover-community.github.io/archive/113489newmembers/10846RFCoperatornorm.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Jan-David Salchow (Dec 28 2018 at 23:36)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/RFC%3A%20operator%20norm/near/152676704):
 <p>I've been playing with the space of bounded linear maps between normed space, see <a href="https://github.com/jdsalchow/mathlib/blob/calculus/analysis/functional/operator_norm.lean" target="_blank" title="https://github.com/jdsalchow/mathlib/blob/calculus/analysis/functional/operator_norm.lean">https://github.com/jdsalchow/mathlib/blob/calculus/analysis/functional/operator_norm.lean</a></p>

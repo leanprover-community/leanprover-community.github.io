@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/42973moreintnatmoansandgolfplea.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [more int nat moans and golf plea](42973moreintnatmoansandgolfplea.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [more int nat moans and golf plea](https://leanprover-community.github.io/archive/116395maths/42973moreintnatmoansandgolfplea.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Sep 28 2018 at 10:02)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/more%20int%20nat%20moans%20and%20golf%20plea/near/134808309):
 <div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">(</span><span class="n">h1</span> <span class="o">:</span> <span class="n">nat</span><span class="bp">.</span><span class="n">coprime</span> <span class="o">(</span><span class="n">int</span><span class="bp">.</span><span class="n">nat_abs</span> <span class="n">x</span><span class="o">)</span> <span class="o">(</span><span class="n">int</span><span class="bp">.</span><span class="n">nat_abs</span> <span class="n">y</span><span class="o">))</span> <span class="o">(</span><span class="n">h2</span> <span class="o">:</span> <span class="n">x</span> <span class="err">^</span> <span class="mi">2</span> <span class="bp">+</span> <span class="mi">3</span> <span class="bp">*</span> <span class="n">y</span> <span class="err">^</span> <span class="mi">2</span> <span class="bp">=</span> <span class="mi">4</span><span class="o">)</span> <span class="o">:</span>

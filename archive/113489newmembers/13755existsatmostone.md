@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/13755existsatmostone.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [exists at most one](13755existsatmostone.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [exists at most one](https://leanprover-community.github.io/archive/113489newmembers/13755existsatmostone.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Ali Sever (Jul 25 2018 at 15:14)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/exists%20at%20most%20one/near/130274521):
 <p>I want to state <code>p a b → ∃ (at most one) c, q c</code>, and if such <code>c</code> exists, I want <code>f a b = c</code>.  Is there a smart/efficient way to do this?</p>

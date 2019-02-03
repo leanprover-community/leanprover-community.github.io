@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/46061installingmathlibglobally.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [installing mathlib globally](46061installingmathlibglobally.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [installing mathlib globally](https://leanprover-community.github.io/archive/113488general/46061installingmathlibglobally.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Jun 25 2018 at 18:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/installing%20mathlib%20globally/near/128610501):
 <p>Cocalc want to install one mathlib globally. I think Sebastian Ullrich once told me that there was no documentation for <code>leanpkg.path</code> because this was not a file that an end user was ever supposed to mess with. I am assuming <code>builtin_path</code> points to where the core lean library is. I am assuming that there's no file with the same name in Lean and mathlib, so I guess in theory they could do the slightly horrible-sounding thing of dumping all of mathlib in the core lean directory. But actually I am a bit confused about what is really reading leanpkg.path. Oh -- is this something the lean plugin does in VS Code?</p>

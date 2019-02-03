@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/28136Theorems.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [Theorems](28136Theorems.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [Theorems](https://leanprover-community.github.io/archive/113488general/28136Theorems.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Guillermo Barajas Ayuso (Aug 04 2018 at 17:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Theorems/near/130894817):
 <p>Hi guys do you know how types can somehow be theorems? E.g. strong_indefinite_description in classical.</p>

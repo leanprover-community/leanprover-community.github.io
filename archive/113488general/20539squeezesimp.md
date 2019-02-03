@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/20539squeezesimp.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [squeeze_simp](20539squeezesimp.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [squeeze_simp](https://leanprover-community.github.io/archive/113488general/20539squeezesimp.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Johan Commelin (Oct 08 2018 at 15:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/squeeze_simp/near/135401004):
 <p><span class="user-mention" data-user-id="110026">@Simon Hudon</span> To what extend do you think <code>sed</code> and <code>lean</code> could cooperate to automatically turn every <code>simp</code> into a <code>squeeze_simp</code>, and then every <code>squeeze_simp</code> into a <code>simp only</code>? Can we automate Kenny?</p>

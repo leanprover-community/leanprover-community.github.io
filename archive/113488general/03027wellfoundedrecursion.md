@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/03027wellfoundedrecursion.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [well_founded recursion](03027wellfoundedrecursion.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [well_founded recursion](https://leanprover-community.github.io/archive/113488general/03027wellfoundedrecursion.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ petercommand (Dec 16 2018 at 11:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/well_founded%20recursion/near/151874709):
 <p>Given that a relation <code>R : a -&gt; a -&gt; Prop</code> satisfies <code>{ f : stream a // forall n, R (f (n + 1)) (f n)} -&gt; false</code>, is it possible to get <code>well_founded R</code>?</p>

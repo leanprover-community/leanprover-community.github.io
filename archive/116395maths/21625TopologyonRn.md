@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/21625TopologyonRn.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [Topology on R^n](21625TopologyonRn.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [Topology on R^n](https://leanprover-community.github.io/archive/116395maths/21625TopologyonRn.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Johan Commelin (May 14 2018 at 10:39)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Topology%20on%20R%5En/near/126528202):
 <p>I have the following code</p>

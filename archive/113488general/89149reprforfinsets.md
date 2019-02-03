@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/89149reprforfinsets.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [repr for finsets](89149reprforfinsets.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [repr for finsets](https://leanprover-community.github.io/archive/113488general/89149reprforfinsets.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Pablo Le Hénaff (Jun 20 2018 at 16:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/repr%20for%20finsets/near/128364636):
 <p>Is there a way to define a has_repr instance for finsets ?</p>

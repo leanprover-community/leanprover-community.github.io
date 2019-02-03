@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/68777Dependentlytypedproof.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [Dependently typed proof](68777Dependentlytypedproof.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [Dependently typed proof](https://leanprover-community.github.io/archive/113488general/68777Dependentlytypedproof.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Frantisek Silvasi (Feb 27 2018 at 11:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Dependently%20typed%20proof/near/123038173):
 <p>I don't suppose this sorry is provable - how does one convince Lean that whatever it is that I am mapping over comes from the list being mapped over? I can show that: <code>x ∈ filter P xs -&gt; P x</code>, but I can't tell map <code>x ∈ filter P xs</code>, even though it's "obvious". This is a toy version of what I am trying to do:</p>

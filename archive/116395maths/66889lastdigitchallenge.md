@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/66889lastdigitchallenge.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [last digit challenge](66889lastdigitchallenge.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [last digit challenge](https://leanprover-community.github.io/archive/116395maths/66889lastdigitchallenge.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Jan 29 2019 at 23:31)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/last%20digit%20challenge/near/157144680):
 <p>Ali asked me about digits of nats (in base 10) today and I'm writing a little API for him, but this is a pain: </p>

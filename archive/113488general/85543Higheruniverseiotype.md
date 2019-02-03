@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/85543Higheruniverseiotype.html
 ---
 
-## Stream: [general](index.html)
-### Topic: ["Higher universe" io type](85543Higheruniverseiotype.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: ["Higher universe" io type](https://leanprover-community.github.io/archive/113488general/85543Higheruniverseiotype.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Keeley Hoek (Aug 10 2018 at 16:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22Higher%20universe%22%20io%20type/near/131240824):
 <p>Consider the following silly lean program:</p>

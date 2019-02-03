@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/14789Decomposinghypotheses.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [Decomposing hypotheses](14789Decomposinghypotheses.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [Decomposing hypotheses](https://leanprover-community.github.io/archive/113489newmembers/14789Decomposinghypotheses.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Ken Roe (Jul 25 2018 at 18:46)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Decomposing%20hypotheses/near/130287397):
 <div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">test_split</span> <span class="o">{</span> <span class="n">P</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">}</span> <span class="o">{</span> <span class="n">Q</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">}</span> <span class="o">{</span> <span class="n">R</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">}</span> <span class="o">{</span> <span class="n">S</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">}</span> <span class="o">:</span>

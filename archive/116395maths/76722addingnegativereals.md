@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/76722addingnegativereals.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [adding negative reals](76722addingnegativereals.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [adding negative reals](https://leanprover-community.github.io/archive/116395maths/76722addingnegativereals.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Joseph Corneli (Jan 28 2019 at 17:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/adding%20negative%20reals/near/157039274):
 <p>After the successes with <a href="#narrow/stream/116395-maths/topic/adding.20positive.20reals" title="#narrow/stream/116395-maths/topic/adding.20positive.20reals">adding positive reals</a> I thought I would try negative reals.  But I'm now running into trouble.  It was all looking nice up until the end.</p>

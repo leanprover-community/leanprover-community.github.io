@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/75954normalize.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [normalize](75954normalize.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [normalize](https://leanprover-community.github.io/archive/113488general/75954normalize.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Feb 01 2019 at 13:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/normalize/near/157348940):
 <p>Ok this situation is quite complicated here and I'm not sure I understand the whole situation (an import graph would be quite beneficial).</p>

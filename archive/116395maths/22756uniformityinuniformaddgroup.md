@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/22756uniformityinuniformaddgroup.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [uniformity in uniform add group](22756uniformityinuniformaddgroup.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [uniformity in uniform add group](https://leanprover-community.github.io/archive/116395maths/22756uniformityinuniformaddgroup.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Patrick Massot (Dec 19 2018 at 21:12)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/uniformity%20in%20uniform%20add%20group/near/152209408):
 <p>I guess this question is mostly for <span class="user-mention" data-user-id="110294">@Johannes Hölzl</span>, but everyone is welcome to participate. Remember that, given an additive group structure and a uniform structure on a type <code>a</code>, the Prop-valued class <code>uniform_add_group a</code> states that substraction is uniformly continuous. The key lemma about such groups is <a href="https://github.com/leanprover/mathlib/blob/master/analysis/topology/topological_structures.lean#L343" target="_blank" title="https://github.com/leanprover/mathlib/blob/master/analysis/topology/topological_structures.lean#L343">https://github.com/leanprover/mathlib/blob/master/analysis/topology/topological_structures.lean#L343</a> stating <code>uniformity = comap (λx:α×α, x.2 - x.1) (nhds (0:α))</code>. The key technical ingredient is:</p>

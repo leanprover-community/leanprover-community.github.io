@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/74089Limitsofproduct.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [Limits of product](74089Limitsofproduct.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [Limits of product](https://leanprover-community.github.io/archive/116395maths/74089Limitsofproduct.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Patrick Massot (Jan 29 2019 at 22:54)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Limits%20of%20product/near/157141992):
 <p>I think we should create a stream "Lean for teaching". This message is a follow up to the conversation around <a href="https://github.com/ImperialCollegeLondon/M1P1-lean" target="_blank" title="https://github.com/ImperialCollegeLondon/M1P1-lean">https://github.com/ImperialCollegeLondon/M1P1-lean</a>. The question is: can we write the product rule for limits of sequence in the literate style that we want for writing a bilingual math/Lean elementary analysis textbook. I think Kevin's rule of sticking to the proofs taught at Imperial is a bit too rigid. I think we can still draw inspiration from the mathlib thousands-of-lemmas-style.</p>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/26581puniteqpunit.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [punit_eq_punit](26581puniteqpunit.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [punit_eq_punit](https://leanprover-community.github.io/archive/113488general/26581puniteqpunit.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Reid Barton (Apr 23 2018 at 05:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/punit_eq_punit/near/125550617):
 <p>This definition (from <code>library/init/data/punit.lean</code>) is less general than probably intended because <code>()</code> is (apparently) built-in notation for <code>unit.star</code> only, and so the full inferred type is actually <code>punit_eq_punit : ∀ (a : punit.{1}), @eq.{1} punit.{1} a unit.star</code>.</p>

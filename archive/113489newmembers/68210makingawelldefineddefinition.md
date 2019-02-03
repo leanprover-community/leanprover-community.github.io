@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/68210makingawelldefineddefinition.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [making a well-defined definition](68210makingawelldefineddefinition.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [making a well-defined definition](https://leanprover-community.github.io/archive/113489newmembers/68210makingawelldefineddefinition.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Ali Sever (Aug 05 2018 at 10:13)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/making%20a%20well-defined%20definition/near/130922260):
 <p>I have two sets <code>A B</code> and I want to define <code>f A B = g A b</code>(another set) for some <code>b ∈ B</code>.  I have the fact that <code>∃ b, b ∈ B</code>, but I'm not allowed to use Exists.dcases_on. Also, how/when do I prove this is well-defined and doesn't depend on the choice of <code>b</code>?</p>

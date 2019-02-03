@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/32921moreproblemswithcoercions.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [more problems with coercions](32921moreproblemswithcoercions.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [more problems with coercions](https://leanprover-community.github.io/archive/113488general/32921moreproblemswithcoercions.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Scott Morrison (Aug 06 2018 at 07:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20problems%20with%20coercions/near/130958740):
 <p>So... I've been trying to implement <span class="user-mention" data-user-id="110049">@Mario Carneiro</span>'s suggestion that I define the coercion allowing <code>F X</code> for a functor <code>F</code> on an object <code>X</code>, and define a @[simp] lemma unfolding the coercion.</p>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/41600orderonfilter.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [order on filter](41600orderonfilter.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [order on filter](https://leanprover-community.github.io/archive/113489newmembers/41600orderonfilter.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Oct 09 2018 at 20:36)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/order%20on%20filter/near/135489142):
 <p>Why is the order on filter reverse inclusion instead of just inclusion?</p>

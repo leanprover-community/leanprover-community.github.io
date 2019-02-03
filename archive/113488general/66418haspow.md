@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/66418haspow.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [has_pow](66418haspow.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [has_pow](https://leanprover-community.github.io/archive/113488general/66418haspow.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Andrew Ashworth (Mar 31 2018 at 09:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/has_pow/near/124446352):
 <p>what's the impact of the new has_pow typeclass being an out_param?</p>

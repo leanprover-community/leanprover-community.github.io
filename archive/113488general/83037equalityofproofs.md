@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/83037equalityofproofs.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [equality of proofs](83037equalityofproofs.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [equality of proofs](https://leanprover-community.github.io/archive/113488general/83037equalityofproofs.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Reid Barton (Apr 28 2018 at 04:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20of%20proofs/near/125803504):
 <p>Is this lemma true and what is it (or should it be) called?</p>

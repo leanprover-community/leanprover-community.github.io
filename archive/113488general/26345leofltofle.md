@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/26345leofltofle.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [le_of_lt_of_le](26345leofltofle.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [le_of_lt_of_le](https://leanprover-community.github.io/archive/113488general/26345leofltofle.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Chris Hughes (Apr 25 2018 at 23:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/le_of_lt_of_le/near/125693526):
 <p>Should we prove <code>le_of_lt_of_le</code> so this stuff works?</p>

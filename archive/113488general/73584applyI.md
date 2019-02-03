@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/73584applyI.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [applyI](73584applyI.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [applyI](https://leanprover-community.github.io/archive/113488general/73584applyI.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Reid Barton (Sep 07 2018 at 10:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/applyI/near/133495991):
 <p>Is there a variant on apply or refine which turns <code>[...]</code> arguments which couldn't be solved into new goals?</p>

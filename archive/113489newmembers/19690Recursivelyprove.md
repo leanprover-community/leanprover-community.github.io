@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/19690Recursivelyprove.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [Recursively prove](19690Recursivelyprove.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [Recursively prove](https://leanprover-community.github.io/archive/113489newmembers/19690Recursivelyprove.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ AHan (Nov 03 2018 at 09:19)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Recursively%20prove/near/137105029):
 <p>Sorry, this might seems to be stupid, but I just can't figure out how to prove the problem inductively....</p>

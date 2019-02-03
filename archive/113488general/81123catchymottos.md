@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/81123catchymottos.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [catchy mottos](81123catchymottos.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [catchy mottos](https://leanprover-community.github.io/archive/113488general/81123catchymottos.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Sean Leather (Apr 19 2018 at 15:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/catchy%20mottos/near/125306623):
 <p><a href="#narrow/stream/113488-general/subject/free.20group/near/125306484" title="#narrow/stream/113488-general/subject/free.20group/near/125306484">https://leanprover.zulipchat.com/#narrow/stream/113488-general/subject/free.20group/near/125306484</a> :</p>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/42802howisOOPdoingintherealworld.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [how is OOP doing in the "real world"](42802howisOOPdoingintherealworld.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [how is OOP doing in the "real world"](https://leanprover-community.github.io/archive/113488general/42802howisOOPdoingintherealworld.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Adam Kurkiewicz (Apr 06 2018 at 16:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20is%20OOP%20doing%20in%20the%20%22real%20world%22/near/124721653):
 <p><span class="user-mention" data-user-id="110027">@Moses Schönfinkel</span>  <span class="user-mention" data-user-id="110031">@Patrick Massot</span> <span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> </p>

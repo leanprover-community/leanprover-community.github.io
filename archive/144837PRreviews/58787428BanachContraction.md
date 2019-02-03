@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/144837PRreviews/58787428BanachContraction.html
 ---
 
-## Stream: [PR reviews](index.html)
-### Topic: [#428 Banach Contraction](58787428BanachContraction.html)
+## Stream: [PR reviews](https://leanprover-community.github.io/archive/144837PRreviews/index.html)
+### Topic: [#428 Banach Contraction](https://leanprover-community.github.io/archive/144837PRreviews/58787428BanachContraction.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Johan Commelin (Dec 11 2018 at 16:18)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23428%20Banach%20Contraction/near/151452941):
 <p>PR by <span class="user-mention" data-user-id="120559">@Rohan Mitta</span>.</p>

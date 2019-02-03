@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/39478ProgrammingLanguageFoundationsinAgda.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [Programming Language Foundations in Agda](39478ProgrammingLanguageFoundationsinAgda.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [Programming Language Foundations in Agda](https://leanprover-community.github.io/archive/113488general/39478ProgrammingLanguageFoundationsinAgda.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Sean Leather (Jul 20 2018 at 08:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Programming%20Language%20Foundations%20in%20Agda/near/129979672):
 <p>I got an email that <a href="http://homepages.inf.ed.ac.uk/wadler/" target="_blank" title="http://homepages.inf.ed.ac.uk/wadler/">Phil Wadler</a> is giving a talk at Utrecht University. Here's the introduction:</p>

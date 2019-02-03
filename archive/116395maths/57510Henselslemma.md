@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/57510Henselslemma.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [Hensel's lemma](57510Henselslemma.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [Hensel's lemma](https://leanprover-community.github.io/archive/116395maths/57510Henselslemma.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Johan Commelin (Sep 11 2018 at 19:40)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Hensel%27s%20lemma/near/133747941):
 <p><span class="user-mention" data-user-id="110596">@Rob Lewis</span> has PR'd Hensel's lemma for the p-adics! <span class="emoji emoji-1f389" title="tada">:tada:</span> <span class="emoji emoji-1f419" title="octopus">:octopus:</span> <span class="emoji emoji-1f4aa" title="muscle">:muscle:</span><br>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/99262Ismathlibbroken.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [Is mathlib broken?](99262Ismathlibbroken.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [Is mathlib broken?](https://leanprover-community.github.io/archive/113488general/99262Ismathlibbroken.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Mar 05 2018 at 09:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Is%20mathlib%20broken%3F/near/123292498):
 <p>I do not expect mathlib to be working 24/7 but I am wondering if it currently broken for everyone or just me. I have problems in prod.lean with <code>prod.mk.eta</code> on line 21 -- <code>invalid definition, a declaration named 'prod.mk.eta' has already been declared</code></p>

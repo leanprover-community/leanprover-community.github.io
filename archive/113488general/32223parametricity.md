@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/32223parametricity.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [parametricity](32223parametricity.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [parametricity](https://leanprover-community.github.io/archive/113488general/32223parametricity.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Cyril Cohen (Nov 11 2018 at 20:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/parametricity/near/147487744):
 <p>Hi, <span class="user-mention" data-user-id="110294">@Johannes Hölzl</span> <span class="user-mention" data-user-id="110049">@Mario Carneiro</span> <span class="user-mention" data-user-id="110596">@Rob Lewis</span>,<br>

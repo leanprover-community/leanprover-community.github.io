@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/15006openset.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [open_set](15006openset.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [open_set](https://leanprover-community.github.io/archive/116395maths/15006openset.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Reid Barton (Oct 09 2018 at 20:44)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/open_set/near/135489758):
 <p><span class="user-mention" data-user-id="110087">@Scott Morrison</span> I'm curious why you reversed the direction of the arrows of <code>open_set</code>. I would rather put the contravariant-ness in the notion of (pre)sheaf.</p>

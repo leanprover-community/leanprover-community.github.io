@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/43990orderedcommmonoid.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [ordered_comm_monoid](43990orderedcommmonoid.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [ordered_comm_monoid](https://leanprover-community.github.io/archive/113488general/43990orderedcommmonoid.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Johan Commelin (Sep 29 2018 at 19:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/ordered_comm_monoid/near/134890643):
 <p>Why is <code>ordered_comm_monoid</code> additive? I thought <code>{x : real | x ≥ 1}</code> is a really nice ordered commutative monoid...</p>

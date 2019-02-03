@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/55527whyisthishappening.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [why is this happening](55527whyisthishappening.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [why is this happening](https://leanprover-community.github.io/archive/113488general/55527whyisthishappening.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Koundinya Vajjha (Jan 16 2019 at 22:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/why%20is%20this%20happening/near/155291582):
 <div class="codehilite"><pre><span></span><span class="kn">open</span> <span class="n">tactic</span> <span class="n">expr</span>

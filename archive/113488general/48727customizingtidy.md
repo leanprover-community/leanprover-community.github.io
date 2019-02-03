@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/48727customizingtidy.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [customizing tidy](48727customizingtidy.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [customizing tidy](https://leanprover-community.github.io/archive/113488general/48727customizingtidy.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Reid Barton (Jun 03 2018 at 16:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/customizing%20tidy/near/127504066):
 <p><span class="user-mention" data-user-id="110087">@Scott Morrison</span> I used your <code>tidy</code> tactic to automatically generate a bunch of continuity proofs that I was formerly writing out manually like</p>

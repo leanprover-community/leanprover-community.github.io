@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/74562sigmapsigma.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [sigma/psigma](74562sigmapsigma.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [sigma/psigma](https://leanprover-community.github.io/archive/113489newmembers/74562sigmapsigma.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ petercommand (Nov 03 2018 at 16:15)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/sigma/psigma/near/137116492):
 <p>What's the reason for having types like sigma/psigma, sum/psum at the same time?</p>

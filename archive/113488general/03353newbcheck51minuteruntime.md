@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/03353newbcheck51minuteruntime.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [newb,  "#check 5" 1 minute runtime?](03353newbcheck51minuteruntime.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [newb,  "#check 5" 1 minute runtime?](https://leanprover-community.github.io/archive/113488general/03353newbcheck51minuteruntime.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ drocta (May 31 2018 at 22:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/newb%2C%20%20%22%23check%205%22%201%20minute%20runtime%3F/near/127381913):
 <p>First, sorry if this is not the correct place for me to seek help for this. I haven't used zulip before and couldn't find a page with the rules to follow for this specific chat. (Should I have put this in an existing topic?)<br>

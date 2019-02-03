@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/10733listofmathlibtargets.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [list of mathlib targets](10733listofmathlibtargets.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [list of mathlib targets](https://leanprover-community.github.io/archive/116395maths/10733listofmathlibtargets.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Aug 25 2018 at 13:48)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/list%20of%20mathlib%20targets/near/132746533):
 <p>Over the next couple of days I'm going to have a good look at the perfectoid project from a "bottom up" perspective and try and get a coherent idea of some easy targets for mathlib. For example (although not directly related to the perfectoid project) I would imagine it would be relatively easy to define PID's now and prove that Euclidean domains are PID's and that PID's are UFD's. My feeling is that achievable goals like this should be on some sort of informal list somewhere. Once the p-adic numbers get accepted then defining the adeles of a number field should also be on this list (and if people aren't happy with a definition being on the list then I can propose a random simple theorem about adeles, but for me a definition is fine). Where should such a list live? I remember once, when I was thinking about formalising my graduate course of earlier this year, I thought about formalising the adeles and I made it an issue in mathlib, but now I realise that probably there is a huge list of little things which I'd like to see in mathlib (several of which I'll probably end up doing myself) and I don't think it's sane to have an issue for each of them.</p>

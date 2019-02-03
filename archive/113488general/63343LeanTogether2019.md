@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/63343LeanTogether2019.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [Lean Together 2019](63343LeanTogether2019.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [Lean Together 2019](https://leanprover-community.github.io/archive/113488general/63343LeanTogether2019.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Rob Lewis (Jul 04 2018 at 14:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20Together%202019/near/129082918):
 <p>Hi everyone! <span class="user-mention" data-user-id="110294">@Johannes Hölzl</span>  and I are organizing a Lean workshop in Amsterdam, Jan 7-11 2019. <a href="https://lean-forward.github.io/lean-together/2019/" target="_blank" title="https://lean-forward.github.io/lean-together/2019/">https://lean-forward.github.io/lean-together/2019/</a> The meeting will also be a "kickoff" for Jasmin Blanchette's new project, Lean Forward: <a href="https://lean-forward.github.io/" target="_blank" title="https://lean-forward.github.io/">https://lean-forward.github.io/</a></p>

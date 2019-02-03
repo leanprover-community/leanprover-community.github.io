@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/98442mulandaddtypeclasshierarchies.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [mul and add type class hierarchies](98442mulandaddtypeclasshierarchies.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [mul and add type class hierarchies](https://leanprover-community.github.io/archive/113488general/98442mulandaddtypeclasshierarchies.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Sean Leather (Oct 04 2018 at 09:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mul%20and%20add%20type%20class%20hierarchies/near/135157838):
 <p>I'm curious why we have two nearly duplicate type class hierarchies – multiplicative and additive – in Lean. It seems like it would be better to have the type classes be parameterized by the binary operator instead of inheriting the operator. I suppose there are technical/practical problems here which led to the current design.</p>

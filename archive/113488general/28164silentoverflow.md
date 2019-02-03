@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/28164silentoverflow.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [silent overflow](28164silentoverflow.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [silent overflow](https://leanprover-community.github.io/archive/113488general/28164silentoverflow.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Apr 09 2018 at 18:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/silent%20overflow/near/124842273):
 <div class="codehilite"><pre><span></span><span class="bp">#</span><span class="kn">check</span> <span class="n">id</span> <span class="c1">-- all seems fine</span>

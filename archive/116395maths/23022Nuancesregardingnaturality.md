@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/23022Nuancesregardingnaturality.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [Nuances regarding naturality](23022Nuancesregardingnaturality.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [Nuances regarding naturality](https://leanprover-community.github.io/archive/116395maths/23022Nuancesregardingnaturality.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Oct 05 2018 at 18:56)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Nuances%20regarding%20naturality/near/135266364):
 <p><a href="https://mathoverflow.net/questions/244131/nuances-regarding-naturality?noredirect=1&amp;lq=1" target="_blank" title="https://mathoverflow.net/questions/244131/nuances-regarding-naturality?noredirect=1&amp;lq=1">https://mathoverflow.net/questions/244131/nuances-regarding-naturality?noredirect=1&amp;lq=1</a></p>

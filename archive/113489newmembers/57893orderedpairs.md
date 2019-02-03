@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/57893orderedpairs.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [ordered pairs](57893orderedpairs.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [ordered pairs](https://leanprover-community.github.io/archive/113489newmembers/57893orderedpairs.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Abhimanyu Pallavi Sudhir (Oct 19 2018 at 00:53)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ordered%20pairs/near/136077221):
 <p>I'm defining a subset of the Cartesian product of two types, specifically: </p>

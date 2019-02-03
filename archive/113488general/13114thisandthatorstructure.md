@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/13114thisandthatorstructure.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [this and that, or structure?](13114thisandthatorstructure.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [this and that, or structure?](https://leanprover-community.github.io/archive/113488general/13114thisandthatorstructure.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Apr 20 2018 at 10:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/this%20and%20that%2C%20or%20structure%3F/near/125377318):
 <p>I notice that in our schemes work, Kenny and I independently defined the concept of an open immersion between topological spaces.</p>

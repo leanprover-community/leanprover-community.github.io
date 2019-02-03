@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/04275zulipinternalservererror.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [zulip internal server error](04275zulipinternalservererror.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [zulip internal server error](https://leanprover-community.github.io/archive/113488general/04275zulipinternalservererror.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Sean Leather (Jun 05 2018 at 09:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/zulip%20internal%20server%20error/near/127585986):
 <p>Cute.</p>

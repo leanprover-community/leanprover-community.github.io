@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/35794addingpositivereals.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [adding positive reals](35794addingpositivereals.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [adding positive reals](https://leanprover-community.github.io/archive/116395maths/35794addingpositivereals.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Joseph Corneli (Jan 26 2019 at 19:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/adding%20positive%20reals/near/156936354):
 <div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">nzreal</span> <span class="o">:=</span> <span class="o">{</span><span class="n">r</span> <span class="o">:</span> <span class="n">ℝ</span> <span class="bp">//</span> <span class="n">r</span> <span class="bp">≠</span> <span class="mi">0</span><span class="o">}</span>

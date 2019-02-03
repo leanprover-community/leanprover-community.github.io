@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/05051generalizeintermmode.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [generalize in term mode](05051generalizeintermmode.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [generalize in term mode](https://leanprover-community.github.io/archive/113488general/05051generalizeintermmode.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Apr 21 2018 at 17:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/generalize%20in%20term%20mode/near/125497304):
 <div class="codehilite"><pre><span></span><span class="bp">@</span><span class="o">[</span><span class="n">elab_as_eliminator</span><span class="o">]</span> <span class="n">def</span> <span class="n">generalize</span>

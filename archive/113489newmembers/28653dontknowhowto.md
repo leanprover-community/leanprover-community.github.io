@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/28653dontknowhowto.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [don't know how to](28653dontknowhowto.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [don't know how to](https://leanprover-community.github.io/archive/113489newmembers/28653dontknowhowto.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Etienne Laurin (Aug 04 2018 at 00:21)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/don%27t%20know%20how%20to/near/130864937):
 <p>Hi! I'm a C++ developer in Dublin. I'm trying to learn Lean by doing some exercises.</p>

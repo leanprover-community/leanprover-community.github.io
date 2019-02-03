@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/81795Whattopologicalspacesdowehave.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [What topological spaces do we have?](81795Whattopologicalspacesdowehave.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [What topological spaces do we have?](https://leanprover-community.github.io/archive/113488general/81795Whattopologicalspacesdowehave.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Mar 28 2018 at 00:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20topological%20spaces%20do%20we%20have%3F/near/124293562):
 <p>I'm aware that this place does not value examples, just abstract theorems, but do we have R^n? C^n? S^n? D^n?</p>

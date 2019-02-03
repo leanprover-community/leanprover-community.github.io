@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/54876rwcantmatchthis.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [rw can't match this](54876rwcantmatchthis.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [rw can't match this](https://leanprover-community.github.io/archive/113488general/54876rwcantmatchthis.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Mar 15 2018 at 21:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20can%27t%20match%20this/near/123765206):
 <div class="codehilite"><pre><span></span>@has_mem.mem.{u u} α α

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/94038equalityoffunctionswithboundedfinitedecideabledomains.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [equality of functions with bounded finite decideable domains](94038equalityoffunctionswithboundedfinitedecideabledomains.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [equality of functions with bounded finite decideable domains](https://leanprover-community.github.io/archive/113488general/94038equalityoffunctionswithboundedfinitedecideabledomains.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Gavid Liebnich (Nov 20 2018 at 12:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20of%20functions%20with%20bounded%20finite%20decideable%20domains/near/148032872):
 <p>Is <code>eq_of_yield</code> provable? Do I need to lose computability with functional extensionality? </p>

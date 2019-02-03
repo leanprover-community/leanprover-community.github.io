@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/08893listoftactics.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [list of tactics](08893listoftactics.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [list of tactics](https://leanprover-community.github.io/archive/113488general/08893listoftactics.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Jakob von Raumer (Mar 20 2018 at 16:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/list%20of%20tactics/near/123967762):
 <p>Is there a tactic that allows me to give a list of tactics where each one solves one goal?</p>

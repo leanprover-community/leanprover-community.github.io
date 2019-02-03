@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/56373fundamentalsystemofneighborhoods.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [fundamental system of neighborhoods](56373fundamentalsystemofneighborhoods.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [fundamental system of neighborhoods](https://leanprover-community.github.io/archive/116395maths/56373fundamentalsystemofneighborhoods.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Johan Commelin (Oct 04 2018 at 13:24)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/fundamental%20system%20of%20neighborhoods/near/135166983):
 <p>Do we have the notion of a <em>fundamental system of neighborhoods of 0</em> for topological groups?</p>

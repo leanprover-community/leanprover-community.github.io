@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/70241contraposfinalwithouttactics.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [contrapos_final without tactics?](70241contraposfinalwithouttactics.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [contrapos_final without tactics?](https://leanprover-community.github.io/archive/113489newmembers/70241contraposfinalwithouttactics.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Joseph Corneli (Jan 23 2019 at 17:56)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/contrapos_final%20without%20tactics%3F/near/156704881):
 <p>I'm looking at <a href="https://github.com/kbuzzard/xena/blob/master/lean_together/contrapos_final.lean" target="_blank" title="https://github.com/kbuzzard/xena/blob/master/lean_together/contrapos_final.lean">https://github.com/kbuzzard/xena/blob/master/lean_together/contrapos_final.lean</a></p>

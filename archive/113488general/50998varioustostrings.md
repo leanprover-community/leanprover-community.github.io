@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/50998varioustostrings.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [various to_strings](50998varioustostrings.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [various to_strings](https://leanprover-community.github.io/archive/113488general/50998varioustostrings.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Edward Ayers (Oct 01 2018 at 13:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/various%20to_strings/near/134964035):
 <p>Hi all, when should I use the following typeclasses to display information?<br>

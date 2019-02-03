@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/50798Usingsufficesintactic.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [Using suffices in tactic](50798Usingsufficesintactic.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [Using suffices in tactic](https://leanprover-community.github.io/archive/113489newmembers/50798Usingsufficesintactic.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Ken Roe (Jul 29 2018 at 07:21)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20suffices%20in%20tactic/near/130509641):
 <div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">testit</span> <span class="o">(</span><span class="n">f</span><span class="o">:</span><span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">s</span><span class="o">:</span><span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span>

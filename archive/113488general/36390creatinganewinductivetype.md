@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/36390creatinganewinductivetype.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [creating a new inductive type](36390creatinganewinductivetype.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [creating a new inductive type](https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Mar 16 2018 at 23:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123817890):
 <p>What happens to the underlying system when a new inductive type <code>X</code> is created in Lean? A new axiom seems to appear, namely the eliminator for the type -- <code>X.rec</code>. Is that right? A new axiom appears? Is that the only new axiom that appears, and all of the other stuff I see when I type <code>#print prefix X</code> is always deducible from <code>X.rec</code>? I see that occasionally other stuff is used, like <code>and</code> or <code>eq.rec</code> or propext. Is it possible to list exactly which functions are used when creating these new facts? I am trying to get to the bottom of the difference between equality and definitional equality and I think one main difference is these random axioms that seem to appear every time to create a new type.</p>

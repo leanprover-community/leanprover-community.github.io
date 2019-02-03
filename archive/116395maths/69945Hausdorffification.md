@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/69945Hausdorffification.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [Hausdorffification](69945Hausdorffification.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [Hausdorffification](https://leanprover-community.github.io/archive/116395maths/69945Hausdorffification.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Oct 18 2018 at 09:53)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Hausdorffification/near/136026443):
 <div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">analysis</span><span class="bp">.</span><span class="n">topology</span><span class="bp">.</span><span class="n">continuity</span>

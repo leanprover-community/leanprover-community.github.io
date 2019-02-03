@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/78762substandlocalconstantexpression.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [subst and local constant expression](78762substandlocalconstantexpression.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [subst and local constant expression](https://leanprover-community.github.io/archive/113488general/78762substandlocalconstantexpression.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Sean Leather (Feb 27 2018 at 10:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subst%20and%20local%20constant%20expression/near/123034490):
 <p>Why does <code>subst</code> need its expression argument to be a local constant? I would like to be able to do something like <code>subst &lt;expr&gt;</code> with an arbitrary <code>&lt;expr&gt;</code>, but this results in:</p>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/96064divisionandnumerals.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [division and numerals](96064divisionandnumerals.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [division and numerals](https://leanprover-community.github.io/archive/113488general/96064divisionandnumerals.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Dec 14 2018 at 19:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/division%20and%20numerals/near/151792143):
 <div class="codehilite"><pre><span></span><span class="c1">-- example : 2 ∣ 4 := ⟨2, rfl⟩ -- fails</span>

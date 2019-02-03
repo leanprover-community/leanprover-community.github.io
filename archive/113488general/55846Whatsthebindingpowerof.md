@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/55846Whatsthebindingpowerof.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [What's the binding power of →?](55846Whatsthebindingpowerof.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [What's the binding power of →?](https://leanprover-community.github.io/archive/113488general/55846Whatsthebindingpowerof.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Mar 13 2018 at 15:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%27s%20the%20binding%20power%20of%20%E2%86%92%3F/near/123657373):
 <p><code>#print notation →</code> doesn't tell me, presumably because it's not notation. I was trying to verify without looking at the source code that <code>P ∧ Q → R</code> was indeed parsed as <code>(P ∧ Q) → R</code>.</p>

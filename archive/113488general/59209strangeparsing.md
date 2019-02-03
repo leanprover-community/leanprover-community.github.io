@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/59209strangeparsing.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [strange parsing](59209strangeparsing.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [strange parsing](https://leanprover-community.github.io/archive/113488general/59209strangeparsing.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Mario Carneiro (May 19 2018 at 06:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/strange%20parsing/near/126782270):
 <p>I just discovered that this parses:</p>

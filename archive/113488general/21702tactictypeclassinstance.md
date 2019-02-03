@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/21702tactictypeclassinstance.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [tactic type class instance](21702tactictypeclassinstance.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [tactic type class instance](https://leanprover-community.github.io/archive/113488general/21702tactictypeclassinstance.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ petercommand (Jan 09 2019 at 09:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20type%20class%20instance/near/154708014):
 <div class="codehilite"><pre><span></span>meta def opt_fst (a: tactic unit) (b: tactic unit) : tactic unit := (a &gt;&gt; b) &lt;|&gt; b

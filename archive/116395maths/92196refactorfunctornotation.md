@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/92196refactorfunctornotation.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [refactor functor notation](92196refactorfunctornotation.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [refactor functor notation](https://leanprover-community.github.io/archive/116395maths/92196refactorfunctornotation.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Johan Commelin (Jan 17 2019 at 18:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/refactor%20functor%20notation/near/155354489):
 <p>Has anyone started the big functor notation search and replace?</p>

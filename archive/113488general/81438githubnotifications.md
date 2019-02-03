@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/81438githubnotifications.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [github notifications](81438githubnotifications.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [github notifications](https://leanprover-community.github.io/archive/113488general/81438githubnotifications.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Sean Leather (Feb 28 2018 at 07:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/github%20notifications/near/123077197):
 <p>Does anyone (with the right repository permissions) want to create streams and bots for GitHub notifications from <a href="https://github.com/leanprover/lean" target="_blank" title="https://github.com/leanprover/lean">https://github.com/leanprover/lean</a> and <a href="https://github.com/leanprover/mathlib" target="_blank" title="https://github.com/leanprover/mathlib">https://github.com/leanprover/mathlib</a> ?</p>

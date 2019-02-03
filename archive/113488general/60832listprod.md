@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/60832listprod.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [list.prod](60832listprod.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [list.prod](https://leanprover-community.github.io/archive/113488general/60832listprod.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Jun 20 2018 at 01:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/list.prod/near/128334739):
 <p>Was there any point in time where <code>list.prod [t]</code> was definitionally equivalent to <code>t * 1</code>?</p>

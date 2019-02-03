@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/07195GCDforidealsfractionalfield.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [GCD for ideals, fractional field](07195GCDforidealsfractionalfield.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [GCD for ideals, fractional field](https://leanprover-community.github.io/archive/113489newmembers/07195GCDforidealsfractionalfield.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Jan 29 2019 at 08:30)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/GCD%20for%20ideals%2C%20fractional%20field/near/157086615):
 <p>Localisation is there but I don't know if anyone specifically put the field of fractions there. What does one want? Just the statement that if you localise an integral domain at 0 then you get a field?</p>

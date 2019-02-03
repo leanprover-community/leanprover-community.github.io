@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/91354changeof.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [change of ^](91354changeof.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [change of ^](https://leanprover-community.github.io/archive/113488general/91354changeof.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Apr 06 2018 at 14:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/change%20of%20%5E/near/124717957):
 <p>Are there any general tips for how to fix up files which no longer compile because of changes to <code>^</code>? I have files which start <code>local  infix ` ^ ` := monoid.pow</code>, and for x and y in a comm_semiring <code> (x + y) ^ 0 = x ^ 0 * y ^ 0</code> used to be solved by simp and now does not seem to be.</p>

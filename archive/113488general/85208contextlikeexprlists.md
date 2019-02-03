@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/85208contextlikeexprlists.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [context like expr lists?](85208contextlikeexprlists.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [context like expr lists?](https://leanprover-community.github.io/archive/113488general/85208contextlikeexprlists.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Jakob von Raumer (Mar 13 2018 at 14:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/context%20like%20expr%20lists%3F/near/123654389):
 <p>How do I construct a list of expressions where later entries can depend on earlier ones? Like <code>(A : Sort u) (a : A)</code> as a minimal example... Do I have to use local constants?</p>

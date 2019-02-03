@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/31512ringrequireslinearorder.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [ring requires linear order](31512ringrequireslinearorder.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [ring requires linear order](https://leanprover-community.github.io/archive/116395maths/31512ringrequireslinearorder.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Chris Hughes (Dec 02 2018 at 02:42)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20requires%20linear%20order/near/150704740):
 <p>Is this a non-trivial upgrade? The support for division in ring only works on ordered fields.</p>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/99336notationinstructures.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [notation in structures](99336notationinstructures.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [notation in structures](https://leanprover-community.github.io/archive/113488general/99336notationinstructures.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Johan Commelin (Jan 22 2019 at 13:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notation%20in%20structures/near/156598822):
 <p>Can someone explain me how notation in structures works? Simon changed the definition of a category to:</p>

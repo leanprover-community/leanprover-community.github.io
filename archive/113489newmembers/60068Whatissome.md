@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/60068Whatissome.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [What is `some`?](60068Whatissome.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [What is `some`?](https://leanprover-community.github.io/archive/113489newmembers/60068Whatissome.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Abhimanyu Pallavi Sudhir (Oct 14 2018 at 21:50)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/What%20is%20%60some%60%3F/near/135790900):
 <p>I'm learning non-constructive definitions from <em><a href="https://leanprover.github.io/introduction_to_lean/introduction_to_lean.pdf" target="_blank" title="https://leanprover.github.io/introduction_to_lean/introduction_to_lean.pdf">An Introduction to Lean</a></em> (p. 25) and the command <code>some h</code> is used -- what does it mean?</p>

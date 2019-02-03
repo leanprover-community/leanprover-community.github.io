@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/73938bicategories.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [bicategories](73938bicategories.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [bicategories](https://leanprover-community.github.io/archive/116395maths/73938bicategories.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Reid Barton (Oct 10 2018 at 00:00)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bicategories/near/135502092):
 <p><span class="user-mention" data-user-id="110087">@Scott Morrison</span> have you by any chance done or thought about formalizing bicategories?</p>

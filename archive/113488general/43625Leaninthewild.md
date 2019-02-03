@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/43625Leaninthewild.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [Lean in the wild](43625Leaninthewild.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [Lean in the wild](https://leanprover-community.github.io/archive/113488general/43625Leaninthewild.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Johannes Hölzl (Nov 29 2018 at 09:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20in%20the%20wild/near/148772776):
 <p>Its always interesting to find unexpected Lean theories: <a href="https://github.com/levjj/esverify-theory/" target="_blank" title="https://github.com/levjj/esverify-theory/">https://github.com/levjj/esverify-theory/</a><br>

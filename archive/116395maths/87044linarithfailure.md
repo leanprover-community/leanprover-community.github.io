@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/87044linarithfailure.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [linarith failure](87044linarithfailure.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [linarith failure](https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Jan 17 2019 at 20:47)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/155363230):
 <p>I've started doing basic analysis in Lean with the undergraduates and I'm really using <code>linarith</code> a lot, it's really handy for this sort of thing. I was trying to prove that 1/n tended to zero using it, and I ran into this: </p>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/21598Precedenceoffunctionapplication.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [Precedence of function application](21598Precedenceoffunctionapplication.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [Precedence of function application](https://leanprover-community.github.io/archive/113488general/21598Precedenceoffunctionapplication.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Joe Hendrix (Aug 08 2018 at 00:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Precedence%20of%20function%20application/near/131073950):
 <p>Can notation bind tighter than function application?  e.g. For an operator <code>^</code> make <code>f x ^ y</code> parse as <code>f (x ^ y)</code>?</p>

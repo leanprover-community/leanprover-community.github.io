@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/41934diamondproblem.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [diamond problem](41934diamondproblem.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [diamond problem](https://leanprover-community.github.io/archive/113488general/41934diamondproblem.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Sean Leather (Sep 06 2018 at 11:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/diamond%20problem/near/133430283):
 <p>I'm not sure if this is an instance of the type class diamond problem, but what do you do when you have <code>has_add</code> from <code>add_comm_monoid</code> and need <code>has_add</code> from <code>distrib</code>, given that you have <code>[add_comm_monoid α] [distrib α]</code>? One solution seems to be to use <code>[semiring α]</code> instead, but that seems to me to add unnecessary constraints, since <code>semiring</code> also extends <code>monoid</code> and <code>mul_zero_class</code>. I'm guessing there is another, better way.</p>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/65555simplificationofite.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [simplification of ite](65555simplificationofite.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [simplification of ite](https://leanprover-community.github.io/archive/113489newmembers/65555simplificationofite.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Ken Roe (Aug 11 2018 at 22:09)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/simplification%20of%20ite/near/131967259):
 <p>How do I complete the following theorem:</p>

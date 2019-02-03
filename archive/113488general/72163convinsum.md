@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/72163convinsum.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [conv in sum](72163convinsum.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [conv in sum](https://leanprover-community.github.io/archive/113488general/72163convinsum.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Morenikeji Neri (Aug 01 2018 at 17:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20in%20sum/near/130723162):
 <p>I would like to show</p>

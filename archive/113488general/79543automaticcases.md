@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/79543automaticcases.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [automatic cases](79543automaticcases.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [automatic cases](https://leanprover-community.github.io/archive/113488general/79543automaticcases.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Jul 28 2018 at 10:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automatic%20cases/near/130457556):
 <p>Can we have a tactic that does <code>cases</code> on the argument of <code>XX.rec</code> or <code>XX.rec_on</code>?</p>

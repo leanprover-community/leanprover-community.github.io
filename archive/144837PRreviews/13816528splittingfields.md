@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/144837PRreviews/13816528splittingfields.html
 ---
 
-## Stream: [PR reviews](index.html)
-### Topic: [#528 splitting fields](13816528splittingfields.html)
+## Stream: [PR reviews](https://leanprover-community.github.io/archive/144837PRreviews/index.html)
+### Topic: [#528 splitting fields](https://leanprover-community.github.io/archive/144837PRreviews/13816528splittingfields.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Johan Commelin (Jan 16 2019 at 13:07)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23528%20splitting%20fields/near/155248382):
 <p><span class="user-mention" data-user-id="110044">@Chris Hughes</span> Something seems wrong... there are lots of binary blobs in the PR now...</p>

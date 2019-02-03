@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/10228etaforrecords.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [eta for records](10228etaforrecords.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [eta for records](https://leanprover-community.github.io/archive/113488general/10228etaforrecords.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Johan Commelin (Jan 09 2019 at 08:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/eta%20for%20records/near/154705125):
 <p>(<span class="emoji emoji-26a0" title="warning">:warning:</span> I'm a mathematician who is about to use some terminology he doesn't understand.)<br>

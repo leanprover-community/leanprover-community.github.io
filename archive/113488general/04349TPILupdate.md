@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/04349TPILupdate.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [TPIL update](04349TPILupdate.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [TPIL update](https://leanprover-community.github.io/archive/113488general/04349TPILupdate.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Patrick Massot (May 02 2018 at 23:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/TPIL%20update/near/126015047):
 <p><span class="emoji emoji-1f389" title="tada">:tada:</span> Jeremy updated TPIL to Lean 3.4.1! <span class="emoji emoji-1f389" title="tada">:tada:</span></p>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/75371PolynomialsoverafieldarenotquiteEuclideaninlean.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [Polynomials over a field are not quite Euclidean in lean](75371PolynomialsoverafieldarenotquiteEuclideaninlean.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [Polynomials over a field are not quite Euclidean in lean](https://leanprover-community.github.io/archive/116395maths/75371PolynomialsoverafieldarenotquiteEuclideaninlean.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Chris Hughes (May 28 2018 at 11:16)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Polynomials%20over%20a%20field%20are%20not%20quite%20Euclidean%20in%20lean/near/127196752):
 <p>I've been trying to prove polynomials over a field are a Euclidean domain. The only trouble is, they do not meet the axioms if I use degree as valuation since for two constant polynomials, degree (a % b) =  degree b. Does anyone have experience doing this in any other theorem prover and can recommend a sensible solution. The most obvious is to define<code>new_degree 0 = 0</code>, and <code>new_degree p = degree p + 1</code> for <code>p ≠ 0</code>. Is this the best option?</p>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/57903inductionontwomultisets.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [induction on two multisets](57903inductionontwomultisets.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [induction on two multisets](https://leanprover-community.github.io/archive/113488general/57903inductionontwomultisets.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Jul 11 2018 at 09:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/induction%20on%20two%20multisets/near/129456296):
 <p>I am trying to define a function <code>multiset nat -&gt; multiset nat -&gt; nat</code>, by induction. If I have two multisets <code>C</code> and <code>L</code> and if I know the value of the function on all the pairs <code>(C-{x},L)</code>(with <code>x</code> in <code>C</code>)  and <code>(C,L-{y})</code> (with <code>y</code> in <code>L</code>) then I have a formula which will give me the value at <code>(C,L)</code>. The formula is not symmetric in <code>C</code> and <code>L</code>. The tool which the API gives me is</p>

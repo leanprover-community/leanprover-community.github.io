@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/24577idleequivquestion.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [idle equiv question](24577idleequivquestion.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [idle equiv question](https://leanprover-community.github.io/archive/113488general/24577idleequivquestion.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Apr 28 2018 at 23:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/idle%20equiv%20question/near/125831713):
 <div class="codehilite"><pre><span></span><span class="n">universes</span> <span class="n">u</span> <span class="n">v</span>

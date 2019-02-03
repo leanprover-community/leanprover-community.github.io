@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/98209convergentsequencesarebounded.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [convergent sequences are bounded](98209convergentsequencesarebounded.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [convergent sequences are bounded](https://leanprover-community.github.io/archive/116395maths/98209convergentsequencesarebounded.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Jan 18 2019 at 19:23)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/convergent%20sequences%20are%20bounded/near/156388362):
 <p>How do I prove that a convergent sequence is bounded in Lean, in a way which is comprehensible to undergraduates? Say a_n tends to L. Setting epsilon=1 I know that for n&gt;=N I have |a_n|&lt;=|L|+1 by the triangle inequality. Now I need to let B be the max of |l|+1 and |a_n| for n&lt;N (and then |a_n|&lt;=B for all n). Mathematicians would say this was "trivial" so ideally I'd like to use as much automation as possible.</p>

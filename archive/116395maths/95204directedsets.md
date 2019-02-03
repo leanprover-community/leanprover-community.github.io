@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/95204directedsets.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [directed sets](95204directedsets.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [directed sets](https://leanprover-community.github.io/archive/116395maths/95204directedsets.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Scott Morrison (Sep 01 2018 at 12:11)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/directed%20sets/near/133171891):
 <p>I was expecting to find a type <code>[directed α]</code>, to go along with <code>preorder</code>, <code>partial_order</code>, etc. Instead I can only find these:</p>

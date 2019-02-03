@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/18235naming.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [naming](18235naming.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [naming](https://leanprover-community.github.io/archive/113488general/18235naming.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Reid Barton (Sep 09 2018 at 16:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/naming/near/133613270):
 <p>So I have a bunch of standard math terminology which contains a variable (a regular cardinal <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>κ</mi></mrow><annotation encoding="application/x-tex">\kappa</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.43056em;"></span><span class="strut bottom" style="height:0.43056em;vertical-align:0em;"></span><span class="base"><span class="mord mathit">κ</span></span></span></span>) in the middle of the term. For example:</p>

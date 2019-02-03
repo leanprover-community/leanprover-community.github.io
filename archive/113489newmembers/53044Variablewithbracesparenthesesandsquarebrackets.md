@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/53044Variablewithbracesparenthesesandsquarebrackets.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [Variable with braces, parentheses and  square brackets](53044Variablewithbracesparenthesesandsquarebrackets.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [Variable with braces, parentheses and  square brackets](https://leanprover-community.github.io/archive/113489newmembers/53044Variablewithbracesparenthesesandsquarebrackets.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ AHan (Nov 08 2018 at 07:23)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Variable%20with%20braces%2C%20parentheses%20and%20%20square%20brackets/near/147280537):
 <p>The below code works.<br>

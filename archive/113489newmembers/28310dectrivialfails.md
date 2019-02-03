@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/28310dectrivialfails.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [dec_trivial fails](28310dectrivialfails.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [dec_trivial fails](https://leanprover-community.github.io/archive/113489newmembers/28310dectrivialfails.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Oct 30 2018 at 21:52)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/dec_trivial%20fails/near/136806175):
 <div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">rat</span>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/80479leanpkgartifactstoragelocation.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [leanpkg artifact storage location](80479leanpkgartifactstoragelocation.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [leanpkg artifact storage location](https://leanprover-community.github.io/archive/113488general/80479leanpkgartifactstoragelocation.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Keeley Hoek (Aug 01 2018 at 18:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leanpkg%20artifact%20storage%20location/near/130723831):
 <p>Hi there! Does anyone know of a particular reason why leanpkg copies dependencies into a "_target" directory in the project folder, as opposed to keeping a directory of artifacts in your home directory (e.g. like maven does)? It'd certainly avoid unnecessarily compiling mathlib multiple times when playing around with little projects.</p>

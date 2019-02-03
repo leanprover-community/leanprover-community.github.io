@@ -4,11 +4,13 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/index.html
 ---
 
-## Stream: [general](index.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
 
 ---
 
 ### Topics:
+
+* [Indexing Zulip](45931IndexingZulip.html) (63 messages, latest: Feb 03 2019 at 18:53)
 
 * [subst](25330subst.html) (24 messages, latest: Feb 03 2019 at 16:44)
 
@@ -103,8 +105,6 @@ permalink: archive/113488general/index.html
 * [cheap Windows install](22596cheapWindowsinstall.html) (13 messages, latest: Jan 24 2019 at 10:52)
 
 * [lean hangs](79634leanhangs.html) (3 messages, latest: Jan 24 2019 at 09:46)
-
-* [Indexing Zulip](45931IndexingZulip.html) (57 messages, latest: Jan 24 2019 at 02:03)
 
 * [cast woes](88074castwoes.html) (43 messages, latest: Jan 24 2019 at 00:53)
 

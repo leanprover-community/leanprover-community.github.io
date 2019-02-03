@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/88074castwoes.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [cast woes](88074castwoes.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [cast woes](https://leanprover-community.github.io/archive/113488general/88074castwoes.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (May 25 2018 at 12:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cast%20woes/near/127073963):
 <div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">int</span><span class="bp">.</span><span class="n">basic</span> <span class="n">data</span><span class="bp">.</span><span class="n">nat</span><span class="bp">.</span><span class="n">cast</span>

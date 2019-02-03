@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/12456decidability.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [decidability](12456decidability.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [decidability](https://leanprover-community.github.io/archive/116395maths/12456decidability.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Sebastien Gouezel (Nov 17 2018 at 17:00)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/decidability/near/147882267):
 <p>tldr; why do we have <code>linear_order</code> and <code>decidable_linear_order</code>?</p>

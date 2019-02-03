@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/40911classvsdefagain.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [class vs def again](40911classvsdefagain.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [class vs def again](https://leanprover-community.github.io/archive/116395maths/40911classvsdefagain.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Patrick Massot (Jul 16 2018 at 23:10)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/class%20vs%20def%20again/near/129776099):
 <p>Variation on a well-known theme: should uniform continuity of a map <code>f</code> between uniform spaces <code>a</code> and <code>b</code> be a <code>def</code> or a <code>class</code>? Or should we bundle <code>f</code> and its uniform continuity?  Currently we have a <code>def</code> and no bundling. As usual, this is all convenient to prove properties of individual maps, or compositions of two such maps. Now let's get functorial. I want to promote each such <code>f</code> to a map between the respective Hausdorff completions of <code>a</code> and <code>b</code>.  Of course in math this would be called <code>completion_lift f</code>. This currently doesn't make sense in mathlib, we need a term <code>h : uniform_continuous f</code>. So we could write <code>completion_lift f h</code>. But <code>f</code> can be inferred from <code>h</code>, so common sense dictates it should be an implicit argument, and we end up with <code>completion_lift h</code>. And it looks <em>weird</em>. And it gets worse when stating and proving properties of <code>completion_lift</code>, especially functoriality that should read <code>completion_lift f' ∘ f = (completion_lift f') ∘ completion_lift f </code> but actually reads <code>completion_lift (uniform_continuous.comp h h') = (completion_lift h') ∘ completion_lift h</code>.</p>

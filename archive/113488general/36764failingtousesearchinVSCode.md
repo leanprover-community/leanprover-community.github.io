@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/36764failingtousesearchinVSCode.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [failing to use search in VS Code](36764failingtousesearchinVSCode.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [failing to use search in VS Code](https://leanprover-community.github.io/archive/113488general/36764failingtousesearchinVSCode.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (May 03 2018 at 12:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/failing%20to%20use%20search%20in%20VS%20Code/near/126038688):
 <p>I don't know how to search properly in VS Code. I am just doing something really stupid. I'm writing a new file, I have no imports at all, I type <code>[group G]</code> and it works, I type <code>[is_group_hom f]</code> and it doesn't. I know that <code>is_group_hom</code> is there somewhere. Here's my workflow:</p>

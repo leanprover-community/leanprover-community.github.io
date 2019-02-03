@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/31826whatdoesmeanhere.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [what does . mean here?](31826whatdoesmeanhere.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [what does . mean here?](https://leanprover-community.github.io/archive/113489newmembers/31826whatdoesmeanhere.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Bryan Gin-ge Chen (Aug 30 2018 at 16:26)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/what%20does%20.%20mean%20here%3F/near/133063613):
 <p>I copied this from <a href="https://github.com/leanprover/lean/blob/master/library/init/data/nat/basic.lean#L84" target="_blank" title="https://github.com/leanprover/lean/blob/master/library/init/data/nat/basic.lean#L84">library/init/data/nat/basic.lean</a>.</p>

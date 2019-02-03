@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/99350rwfeature.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [rw feature](99350rwfeature.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [rw feature](https://leanprover-community.github.io/archive/113488general/99350rwfeature.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Aug 23 2018 at 11:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20feature/near/132628472):
 <div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">b</span><span class="o">)</span> <span class="o">(</span><span class="n">H2</span> <span class="o">:</span> <span class="o">(</span><span class="n">a</span> <span class="bp">=</span> <span class="n">b</span><span class="o">)</span> <span class="bp">→</span> <span class="o">(</span><span class="n">a</span> <span class="bp">=</span> <span class="n">c</span><span class="o">))</span> <span class="o">:</span> <span class="n">c</span> <span class="bp">=</span> <span class="n">b</span> <span class="o">:=</span>

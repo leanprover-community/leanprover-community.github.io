@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/25923hottinjection.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [hott injection](25923hottinjection.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [hott injection](https://leanprover-community.github.io/archive/113488general/25923hottinjection.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Jakob von Raumer (Oct 22 2018 at 23:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hott%20injection/near/136298806):
 <p>what is the hott-safe replacement for <code>injection</code>? Say I have <code>e : sum.inl a = sum.inr b</code> in the context and want to solve the goal by pointing out that contradiction...</p>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/02078ultimatetactic.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [ultimate tactic](02078ultimatetactic.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [ultimate tactic](https://leanprover-community.github.io/archive/113488general/02078ultimatetactic.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Patrick Massot (Feb 27 2018 at 19:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/ultimate%20tactic/near/123052910):
 <p>I found the ultimate Lean tactic: <a href="https://stacks.math.columbia.edu/tag/05SG" target="_blank" title="https://stacks.math.columbia.edu/tag/05SG">https://stacks.math.columbia.edu/tag/05SG</a></p>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/58202unification.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [unification](58202unification.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [unification](https://leanprover-community.github.io/archive/113488general/58202unification.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Jan 25 2019 at 09:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unification/near/156838225):
 <div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">a</span> <span class="err">∈</span> <span class="o">{</span><span class="n">x</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">|</span> <span class="n">x</span> <span class="bp">≤</span> <span class="n">a</span><span class="o">}</span> <span class="o">:=</span> <span class="n">le_refl</span> <span class="bp">_</span> <span class="c1">-- fails</span>

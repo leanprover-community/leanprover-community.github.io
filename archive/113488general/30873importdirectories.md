@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/30873importdirectories.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [import directories](30873importdirectories.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [import directories](https://leanprover-community.github.io/archive/113488general/30873importdirectories.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Sep 26 2018 at 16:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/import%20directories/near/134678473):
 <p>I want to get custom imports (i.e. stuff in <code>xenalib</code>) working in cocalc. Here are some dumb questions. Say I have a Lean file whose first line is an import.</p>

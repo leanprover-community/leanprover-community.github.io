@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/25036golfchallenge.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [golf challenge](25036golfchallenge.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [golf challenge](https://leanprover-community.github.io/archive/113488general/25036golfchallenge.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Jan 29 2019 at 10:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/golf%20challenge/near/157091599):
 <div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">equiv</span><span class="bp">.</span><span class="n">basic</span> <span class="n">data</span><span class="bp">.</span><span class="n">polynomial</span> <span class="n">linear_algebra</span><span class="bp">.</span><span class="n">multivariate_polynomial</span>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/71749functiontopitype.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [function to pi type](71749functiontopitype.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [function to pi type](https://leanprover-community.github.io/archive/113488general/71749functiontopitype.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Johan Commelin (May 23 2018 at 10:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/function%20to%20pi%20type/near/126967340):
 <p>Newbie alert! I can't find anything in PIL or TPIL on how to construct a function to a Pi type. If I have <code>Y : I \to Type</code> and <code>f : \Pi i, X \to Y i</code>, how do I turn this into <code>X \to (\Pi i, Y i)</code>?</p>

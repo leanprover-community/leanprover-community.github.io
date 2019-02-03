@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/08479maxofsubsequence.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [max of subsequence](08479maxofsubsequence.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [max of subsequence](https://leanprover-community.github.io/archive/113488general/08479maxofsubsequence.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Andrew Ashworth (Feb 27 2018 at 01:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/max%20of%20subsequence/near/123019419):
 <p>is there a concise way, if I have <code>f : nat -&gt; rat</code>, to obtain the maximum of the sequence as it ranges from 0..N?</p>

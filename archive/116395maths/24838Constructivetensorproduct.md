@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/24838Constructivetensorproduct.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [Constructive tensor product](24838Constructivetensorproduct.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [Constructive tensor product](https://leanprover-community.github.io/archive/116395maths/24838Constructivetensorproduct.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Jul 25 2018 at 03:26)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Constructive%20tensor%20product/near/130248625):
 <p><a href="https://github.com/kckennylau/Lean/blob/master/constructive_tensor_product.lean" target="_blank" title="https://github.com/kckennylau/Lean/blob/master/constructive_tensor_product.lean">https://github.com/kckennylau/Lean/blob/master/constructive_tensor_product.lean</a></p>

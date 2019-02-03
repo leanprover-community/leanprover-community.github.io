@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/47376freegroup.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [free group](47376freegroup.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [free group](https://leanprover-community.github.io/archive/113488general/47376freegroup.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Apr 01 2018 at 01:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/free%20group/near/124469539):
 <p>I have constructed the free group of a set here: <a href="https://github.com/kckennylau/Lean/blob/master/free_group.lean" target="_blank" title="https://github.com/kckennylau/Lean/blob/master/free_group.lean">https://github.com/kckennylau/Lean/blob/master/free_group.lean</a></p>

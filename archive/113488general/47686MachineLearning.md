@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/47686MachineLearning.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [Machine Learning](47686MachineLearning.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [Machine Learning](https://leanprover-community.github.io/archive/113488general/47686MachineLearning.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Simon Hudon (Mar 31 2018 at 21:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Machine%20Learning/near/124463630):
 <p><span class="user-mention" data-user-id="110025">@Andrew Ashworth</span> Let's switch threads</p>

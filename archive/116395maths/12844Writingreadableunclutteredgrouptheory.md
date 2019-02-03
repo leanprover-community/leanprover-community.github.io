@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/12844Writingreadableunclutteredgrouptheory.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [Writing readable uncluttered group theory](12844Writingreadableunclutteredgrouptheory.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [Writing readable uncluttered group theory](https://leanprover-community.github.io/archive/116395maths/12844Writingreadableunclutteredgrouptheory.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Apr 28 2018 at 07:39)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Writing%20readable%20uncluttered%20group%20theory/near/125808670):
 <p>I noticed that the definition of a group in Lean was one more axiom than it could be</p>

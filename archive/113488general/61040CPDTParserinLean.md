@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/61040CPDTParserinLean.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [CPDT Parser in Lean](61040CPDTParserinLean.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [CPDT Parser in Lean](https://leanprover-community.github.io/archive/113488general/61040CPDTParserinLean.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Jun 09 2018 at 16:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/CPDT%20Parser%20in%20Lean/near/127822804):
 <p>My son got interested in parsers and I'm trying to understand them better by implementing the simple parser at the beginning of Certified Programming with Dependent Types. But actually I find making these inductive types quite hard -- in my area of expertise we don't really ever use complicated inductive structures like the ones showing up in these parsers. Here's an example of one I'm struggling with: in Coq it's</p>

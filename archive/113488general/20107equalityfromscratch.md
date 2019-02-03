@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/20107equalityfromscratch.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [equality from scratch](20107equalityfromscratch.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [equality from scratch](https://leanprover-community.github.io/archive/113488general/20107equalityfromscratch.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Adam Kurkiewicz (Aug 07 2018 at 12:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equality%20from%20scratch/near/131035424):
 <p>While looking at Kevin's <a href="https://xenaproject.wordpress.com/2017/10/31/building-the-non-negative-integers-from-scratch/" target="_blank" title="https://xenaproject.wordpress.com/2017/10/31/building-the-non-negative-integers-from-scratch/">great blog post</a> about unsigned integers from scratch I thought to push myself a little bit and I've tried to do them <em>even more</em> from scratch, by giving up the existing <code>eq</code> or <code>=</code>.</p>

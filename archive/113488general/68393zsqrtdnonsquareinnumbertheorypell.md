@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/68393zsqrtdnonsquareinnumbertheorypell.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [zsqrtd.nonsquare in number_theory/pell](68393zsqrtdnonsquareinnumbertheorypell.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [zsqrtd.nonsquare in number_theory/pell](https://leanprover-community.github.io/archive/113488general/68393zsqrtdnonsquareinnumbertheorypell.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (May 27 2018 at 13:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/zsqrtd.nonsquare%20in%20number_theory/pell/near/127162105):
 <p>This should be a <code>Prop</code> <span class="user-mention" data-user-id="110049">@Mario Carneiro</span></p>

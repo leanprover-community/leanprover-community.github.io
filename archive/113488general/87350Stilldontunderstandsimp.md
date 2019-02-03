@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/87350Stilldontunderstandsimp.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [Still don't understand simp](87350Stilldontunderstandsimp.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [Still don't understand simp](https://leanprover-community.github.io/archive/113488general/87350Stilldontunderstandsimp.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Jul 27 2018 at 22:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Still%20don%27t%20understand%20simp/near/130435282):
 <p>I still don't understand simp. I tried</p>

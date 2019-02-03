@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/16371modifiedinductiononnat.html
 ---
 
-## Stream: [general](index.html)
-### Topic: ["modified" induction on nat](16371modifiedinductiononnat.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: ["modified" induction on nat](https://leanprover-community.github.io/archive/113488general/16371modifiedinductiononnat.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Nov 18 2018 at 14:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%22modified%22%20induction%20on%20nat/near/147917777):
 <p>I am doing the homework I set my students. I seem to often want "induction on n &gt;= 1" and in this question I even want "induction starting at n = 2". I have a family of propositions <code>P n</code> for <code>n : nat</code>, which are true for n &gt;= 2 (and this can be proved by induction on n&gt;=2), and I also have the hypothesis <code>Hn2 : n &gt;= 2</code>. Currently (in tactic mode) I write</p>

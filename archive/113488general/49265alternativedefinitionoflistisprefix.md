@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/49265alternativedefinitionoflistisprefix.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [alternative definition of list.is_prefix](49265alternativedefinitionoflistisprefix.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [alternative definition of list.is_prefix](https://leanprover-community.github.io/archive/113488general/49265alternativedefinitionoflistisprefix.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Apr 19 2018 at 05:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/alternative%20definition%20of%20list.is_prefix/near/125285727):
 <p>Could we have a subtype instead of an existential here, as the data is lost in the latter?</p>

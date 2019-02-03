@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/04154datalistbasictoobig.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [data/list/basic too big?](04154datalistbasictoobig.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [data/list/basic too big?](https://leanprover-community.github.io/archive/113488general/04154datalistbasictoobig.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Scott Morrison (Jun 22 2018 at 01:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/data/list/basic%20too%20big%3F/near/128444963):
 <p>Is this output from travis:</p>

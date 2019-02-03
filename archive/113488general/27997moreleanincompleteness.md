@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/27997moreleanincompleteness.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [more lean incompleteness](27997moreleanincompleteness.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [more lean incompleteness](https://leanprover-community.github.io/archive/113488general/27997moreleanincompleteness.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Mario Carneiro (Apr 04 2018 at 07:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20lean%20incompleteness/near/124609074):
 <p><span class="user-mention" data-user-id="110043">@Gabriel Ebner</span> I found another place where I lie in the paper compared to lean's actual behavior:</p>

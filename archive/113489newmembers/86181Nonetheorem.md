@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/86181Nonetheorem.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [None theorem](86181Nonetheorem.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [None theorem](https://leanprover-community.github.io/archive/113489newmembers/86181Nonetheorem.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Ken Roe (Sep 01 2018 at 20:09)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/None%20theorem/near/133185891):
 <p>Does someone know what tactic to use to prove the following:</p>

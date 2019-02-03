@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/36268Triangularparentinstances.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [Triangular parent instances](36268Triangularparentinstances.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [Triangular parent instances](https://leanprover-community.github.io/archive/113488general/36268Triangularparentinstances.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Nicholas Scheel (Dec 16 2018 at 05:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Triangular%20parent%20instances/near/151864665):
 <p>Is there any way to work around this error?</p>

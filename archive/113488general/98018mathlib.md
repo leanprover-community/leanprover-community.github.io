@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/98018mathlib.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [mathlib](98018mathlib.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [mathlib](https://leanprover-community.github.io/archive/113488general/98018mathlib.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Scott Morrison (Apr 10 2018 at 07:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib/near/124871039):
 <p>Is it strange that we have <code>monoid.pow</code> and <code>gpow</code> (for groups)? Can we make these more uniform?</p>

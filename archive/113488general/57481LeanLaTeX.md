@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/57481LeanLaTeX.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [Lean + LaTeX?](57481LeanLaTeX.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [Lean + LaTeX?](https://leanprover-community.github.io/archive/113488general/57481LeanLaTeX.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Jan 23 2019 at 12:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20%2B%20LaTeX%3F/near/156681378):
 <p>I've been reading work of Lamport about structured proofs.  Here's an extract from <a href="https://github.com/ImperialCollegeLondon/M1P1-lean/blob/master/src/limits.lean" target="_blank" title="https://github.com/ImperialCollegeLondon/M1P1-lean/blob/master/src/limits.lean">https://github.com/ImperialCollegeLondon/M1P1-lean/blob/master/src/limits.lean</a> :</p>

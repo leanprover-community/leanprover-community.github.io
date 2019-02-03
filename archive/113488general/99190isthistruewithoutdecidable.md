@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/99190isthistruewithoutdecidable.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [is this true without decidable](99190isthistruewithoutdecidable.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [is this true without decidable](https://leanprover-community.github.io/archive/113488general/99190isthistruewithoutdecidable.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Johan Commelin (Sep 07 2018 at 15:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is%20this%20true%20without%20decidable/near/133509753):
 <div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">ring</span> <span class="n">R</span><span class="o">]</span> <span class="o">(</span><span class="n">i</span> <span class="n">j</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">hnat</span> <span class="o">:</span> <span class="n">i</span> <span class="bp">≠</span> <span class="n">j</span><span class="o">)</span>

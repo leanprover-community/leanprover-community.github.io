@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/00113leaninternals.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [lean internals](00113leaninternals.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [lean internals](https://leanprover-community.github.io/archive/113488general/00113leaninternals.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ VinothKumar Raman (Mar 13 2018 at 16:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20internals/near/123659092):
 <p>Is there any good reference to learn how to elaborate implicit arguments to a coc like core? Like how lean does? I am trying to build a coc like language<br>

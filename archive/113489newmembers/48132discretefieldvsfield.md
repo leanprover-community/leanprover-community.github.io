@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/48132discretefieldvsfield.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [discrete_field vs field](48132discretefieldvsfield.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [discrete_field vs field](https://leanprover-community.github.io/archive/113489newmembers/48132discretefieldvsfield.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Dec 17 2018 at 13:49)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/discrete_field%20vs%20field/near/152024360):
 <p>Is the idiom to not use <code>field</code> at all?</p>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/23264noobquestionaboutcardinal.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [noob question about cardinal](23264noobquestionaboutcardinal.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [noob question about cardinal](https://leanprover-community.github.io/archive/113489newmembers/23264noobquestionaboutcardinal.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Sep 13 2018 at 11:04)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%20about%20cardinal/near/133871212):
 <div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">set_theory</span><span class="bp">.</span><span class="n">cardinal</span>

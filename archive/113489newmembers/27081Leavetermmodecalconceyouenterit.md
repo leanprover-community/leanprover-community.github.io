@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/27081Leavetermmodecalconceyouenterit.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [Leave term mode/calc once you enter it?](27081Leavetermmodecalconceyouenterit.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [Leave term mode/calc once you enter it?](https://leanprover-community.github.io/archive/113489newmembers/27081Leavetermmodecalconceyouenterit.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Abhimanyu Pallavi Sudhir (Oct 11 2018 at 14:22)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Leave%20term%20mode/calc%20once%20you%20enter%20it%3F/near/135604247):
 <p>Part of my proof involved calc, but now I want to return to tactic mode to complete my proof. How do I do this?</p>

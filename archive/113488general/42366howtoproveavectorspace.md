@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/42366howtoproveavectorspace.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [how to prove a vector space](42366howtoproveavectorspace.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [how to prove a vector space](https://leanprover-community.github.io/archive/113488general/42366howtoproveavectorspace.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Blair Shi (Aug 13 2018 at 12:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20prove%20a%20vector%20space/near/132037240):
 <p>I want to prove <code>vector_space F (has_space n F)</code>and I have proved <code>module F (has_space n F)</code></p>

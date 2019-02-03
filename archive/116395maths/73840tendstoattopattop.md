@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/73840tendstoattopattop.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [tendsto at_top at_top](73840tendstoattopattop.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [tendsto at_top at_top](https://leanprover-community.github.io/archive/116395maths/73840tendstoattopattop.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Chris Hughes (Nov 30 2018 at 00:11)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/tendsto%20at_top%20at_top/near/148827429):
 <p>I'm trying to work out how filters work. Is the following true/easy to prove. Which is the better way to state that a function goes to infinity.</p>

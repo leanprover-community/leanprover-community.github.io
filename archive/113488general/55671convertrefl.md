@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/55671convertrefl.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [convert, refl](55671convertrefl.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [convert, refl](https://leanprover-community.github.io/archive/113488general/55671convertrefl.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Reid Barton (Nov 27 2018 at 16:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/convert%2C%20refl/near/148646168):
 <p>This is a new one for me--<code>convert</code> left a goal which I could close with <code>refl</code></p>

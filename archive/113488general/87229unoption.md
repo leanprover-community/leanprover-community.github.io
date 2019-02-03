@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/87229unoption.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [unoption](87229unoption.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [unoption](https://leanprover-community.github.io/archive/113488general/87229unoption.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Jul 19 2018 at 20:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unoption/near/129948591):
 <p>What is the function which takes <code>a : option X</code> and a proof that <code>a</code> isn't <code>none</code> and returns the x such that <code>a = some x</code> called? I can write it -- but I suspect someone else already thought of it...</p>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/144837PRreviews/58383495multiplicity.html
 ---
 
-## Stream: [PR reviews](index.html)
-### Topic: [#495 multiplicity](58383495multiplicity.html)
+## Stream: [PR reviews](https://leanprover-community.github.io/archive/144837PRreviews/index.html)
+### Topic: [#495 multiplicity](https://leanprover-community.github.io/archive/144837PRreviews/58383495multiplicity.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Chris Hughes (Nov 29 2018 at 20:18)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23495%20multiplicity/near/148810765):
 <p><code>multiplicity</code> requires a decidable dvd argument currently. However there are applications where we don't have decidable dvd in general but we do for particular elements, in particular, for multiplicities of roots of polynomials over a comm ring, it is decidable whether or not <code>X - C a</code> divides a polynomial but not easily in general - the divisor needs to be monic. What's the best way of dealing with this?</p>

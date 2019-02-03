@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/38477imageofcomplement.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [image of complement](38477imageofcomplement.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [image of complement](https://leanprover-community.github.io/archive/113488general/38477imageofcomplement.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Patrick Massot (Mar 13 2018 at 15:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/image%20of%20complement/near/123655801):
 <p>Do we have <code>{α : Type*} {β : Type*} (f : α ≃ β) (s : set α) : f '' -s = -(f '' s)</code> in mathlib?</p>

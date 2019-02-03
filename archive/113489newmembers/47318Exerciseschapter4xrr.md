@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/47318Exerciseschapter4xrr.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [Exercises chapter 4 - α → (( ∀ x: α, r ) ↔ r)](47318Exerciseschapter4xrr.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [Exercises chapter 4 - α → (( ∀ x: α, r ) ↔ r)](https://leanprover-community.github.io/archive/113489newmembers/47318Exerciseschapter4xrr.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Carlesso Diego (Dec 04 2018 at 11:40)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Exercises%20chapter%204%20-%20%CE%B1%20%E2%86%92%20%28%28%20%E2%88%80%20x%3A%20%CE%B1%2C%20r%20%29%20%E2%86%94%20r%29/near/150837580):
 <p>Hello! First time I write here! I'm trying to learn Lean step by step following the online tutorial "theorem proving in Lean" doing as many exercises as I can. <br>

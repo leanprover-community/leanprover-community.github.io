@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/09959equivsubsingleton.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [equiv_subsingleton](09959equivsubsingleton.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [equiv_subsingleton](https://leanprover-community.github.io/archive/113488general/09959equivsubsingleton.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Johan Commelin (Jan 14 2019 at 15:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equiv_subsingleton/near/155086021):
 <p>I couldn't find this in mathlib. Is this considered useful enough to include?</p>

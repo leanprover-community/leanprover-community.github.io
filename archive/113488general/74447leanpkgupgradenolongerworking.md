@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/74447leanpkgupgradenolongerworking.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [`leanpkg upgrade` no longer working?](74447leanpkgupgradenolongerworking.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [`leanpkg upgrade` no longer working?](https://leanprover-community.github.io/archive/113488general/74447leanpkgupgradenolongerworking.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Scott Morrison (Jun 03 2018 at 15:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60leanpkg%20upgrade%60%20no%20longer%20working%3F/near/127502598):
 <p>Since I've switched all my repositories to have <code>lean_version = "3.4.1"</code> in the <code>leanpkg.toml</code> file, it seems that <code>leanpkg upgrade</code> no longer has any effect: that is, commits to downstream repositories aren't pulled.</p>

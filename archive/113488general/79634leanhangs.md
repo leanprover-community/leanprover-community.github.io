@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/79634leanhangs.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [lean hangs](79634leanhangs.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [lean hangs](https://leanprover-community.github.io/archive/113488general/79634leanhangs.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Floris van Doorn (Jan 24 2019 at 01:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20hangs/near/156737206):
 <p>I don't know if there is any place for bug reports for Lean 3, but Lean will hang on these two lines (and start to slowly fill up your memory): </p>

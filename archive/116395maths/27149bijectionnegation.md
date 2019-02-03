@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/27149bijectionnegation.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [bijection negation](27149bijectionnegation.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [bijection negation](https://leanprover-community.github.io/archive/116395maths/27149bijectionnegation.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Sean Leather (May 17 2018 at 14:21)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bijection%20negation/near/126694854):
 <p>Is there a property like <code>∀ ⦃a₁ a₂⦄, f a₁ ≠ f a₂ → a₁ ≠ a₂</code> for a <code>bijective f</code>?</p>

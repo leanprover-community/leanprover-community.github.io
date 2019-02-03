@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/13508HappybirthdayKevin.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [Happy birthday, Kevin!](13508HappybirthdayKevin.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [Happy birthday, Kevin!](https://leanprover-community.github.io/archive/113488general/13508HappybirthdayKevin.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Scott Morrison (Sep 21 2018 at 01:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Happy%20birthday%2C%20Kevin%21/near/134343927):
 <p><a href="https://github.com/semorrison/kbb" target="_blank" title="https://github.com/semorrison/kbb">https://github.com/semorrison/kbb</a></p>

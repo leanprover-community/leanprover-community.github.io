@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/88851supeqmax.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [sup_eq_max](88851supeqmax.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [sup_eq_max](https://leanprover-community.github.io/archive/113488general/88851supeqmax.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Chris Hughes (Jul 06 2018 at 14:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/sup_eq_max/near/129199027):
 <p>Is there a nice way to state the lemma <code>a ⊔ b = max a b</code>, in general, for when <code>sup</code> is not derived from <code>max</code> such as on <code>with_bot</code>, or do I just have to prove it for <code>with_bot</code></p>

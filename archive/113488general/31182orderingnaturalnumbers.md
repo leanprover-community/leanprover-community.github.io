@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/31182orderingnaturalnumbers.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [ordering natural numbers](31182orderingnaturalnumbers.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [ordering natural numbers](https://leanprover-community.github.io/archive/113488general/31182orderingnaturalnumbers.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Adam Kurkiewicz (Apr 05 2018 at 13:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/ordering%20natural%20numbers/near/124667719):
 <p>It appears that lean can't synthesize what appears to be a natural order on natural numbers, and neither can I.</p>

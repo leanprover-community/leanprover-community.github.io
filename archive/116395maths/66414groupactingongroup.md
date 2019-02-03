@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/66414groupactingongroup.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [group acting on group](66414groupactingongroup.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [group acting on group](https://leanprover-community.github.io/archive/116395maths/66414groupactingongroup.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Apr 09 2018 at 15:05)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/group%20acting%20on%20group/near/124835829):
 <p>Do we have a name for a group acting on another group that is compatible with the group structure?</p>

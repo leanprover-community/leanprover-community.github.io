@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/26591palindromes.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [palindromes](26591palindromes.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [palindromes](https://leanprover-community.github.io/archive/113488general/26591palindromes.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Apr 03 2018 at 22:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/palindromes/near/124591860):
 <p>For recreational reasons I was interested in working with lists which were palindromes, i.e. lists <code>G</code> satisfying <code>G = list.reverse G</code>. I wanted to prove a bunch of stuff about these things but I couldn't prove anything by induction because lists don't decompose like that. I wanted to write a general <code>G</code> of length 2 or more as <code>G=[head G] ++ middle G ++ [head G]</code> and have a recursor of the form <code>C [] -&gt; C [x] -&gt; forall palindromes H, C H -&gt; C ([a] ++ H ++ [a]) -&gt; forall palindromes G, C G</code></p>

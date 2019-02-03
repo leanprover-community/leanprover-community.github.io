@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/52657beginnerequalityquestion.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [beginner equality question](52657beginnerequalityquestion.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [beginner equality question](https://leanprover-community.github.io/archive/113488general/52657beginnerequalityquestion.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ dan pittman (Jun 26 2018 at 21:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/beginner%20equality%20question/near/128673907):
 <p>I'm attempting to assert whether two elements of a list are equal, and then act on that assertion in an <code>if-then-else</code> manner, but for my <code>x = y</code> assertion, there is no <code>decidable</code> instance. Perhaps there's a different approach I ought to be taking?</p>

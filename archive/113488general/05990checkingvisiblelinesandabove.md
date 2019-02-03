@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/05990checkingvisiblelinesandabove.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [checking visible lines and above](05990checkingvisiblelinesandabove.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [checking visible lines and above](https://leanprover-community.github.io/archive/113488general/05990checkingvisiblelinesandabove.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Jul 11 2018 at 16:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/checking%20visible%20lines%20and%20above/near/129473320):
 <p>Whilst the VS Code option "checking visible lines and above" is probably a useful mode to be in if you're working on a large file, for my users it causes more problems than it solves. I know how to change it to "checking visible files", but every time I open a new folder it changes back. Is there a way to globally change the default once and for all?</p>

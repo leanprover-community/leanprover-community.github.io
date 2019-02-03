@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/27128finddatanecessaryforinstances.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [find data necessary for instances](27128finddatanecessaryforinstances.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [find data necessary for instances](https://leanprover-community.github.io/archive/113488general/27128finddatanecessaryforinstances.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Joey van Langen (Jan 09 2019 at 09:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/find%20data%20necessary%20for%20instances/near/154708830):
 <p>Is there an easy way to find which fields should be provided when defining an instance?<br>

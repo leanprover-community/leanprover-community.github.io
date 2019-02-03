@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/42057listnotation.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [list notation](42057listnotation.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [list notation](https://leanprover-community.github.io/archive/113488general/42057listnotation.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Jason Dagit (Aug 23 2018 at 19:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/list%20notation/near/132651314):
 <p>I saw this snippet in the tutorial in the "inductive types" section:</p>

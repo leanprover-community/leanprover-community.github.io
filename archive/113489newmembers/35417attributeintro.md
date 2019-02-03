@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/35417attributeintro.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [attribute [intro]](35417attributeintro.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [attribute [intro]](https://leanprover-community.github.io/archive/113489newmembers/35417attributeintro.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Oct 19 2018 at 02:01)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/attribute%20%5Bintro%5D/near/136080016):
 <p>What does this attribute do? I saw it here:</p>

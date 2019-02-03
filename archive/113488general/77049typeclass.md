@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/77049typeclass.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [typeclass](77049typeclass.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [typeclass](https://leanprover-community.github.io/archive/113488general/77049typeclass.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Mar 15 2018 at 19:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass/near/123761005):
 <p>why does this have no problem:</p>

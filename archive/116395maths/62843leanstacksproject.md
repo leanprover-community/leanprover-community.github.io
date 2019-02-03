@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/62843leanstacksproject.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [lean-stacks-project](62843leanstacksproject.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [lean-stacks-project](https://leanprover-community.github.io/archive/116395maths/62843leanstacksproject.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Bryan Gin-ge Chen (Aug 30 2018 at 21:46)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/lean-stacks-project/near/133081672):
 <p>I noticed some updates to lean-stacks-project today. In case this helps, I wanted to share a fork I played with a few weeks ago where I also tried to update it to work with more recent mathlib commits. See the testing branch <a href="https://github.com/bryangingechen/lean-stacks-project/tree/testing" target="_blank" title="https://github.com/bryangingechen/lean-stacks-project/tree/testing">here</a> which builds successfullly with mathlib at commit <code>b267edc</code> (from July 16-17).  Here's the relevant page of the mathlib <a href="https://github.com/leanprover/mathlib/commits/master?after=86c955eb424b70b493aa5b9594a91a0a14ba462d+139" target="_blank" title="https://github.com/leanprover/mathlib/commits/master?after=86c955eb424b70b493aa5b9594a91a0a14ba462d+139">commit history</a> for reference.</p>

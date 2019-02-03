@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/44342Definitionwithimplicittypes.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [Definition with implicit types](44342Definitionwithimplicittypes.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [Definition with implicit types](https://leanprover-community.github.io/archive/113489newmembers/44342Definitionwithimplicittypes.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Ken Roe (Jul 11 2018 at 00:17)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Definition%20with%20implicit%20types/near/129437343):
 <p>Can someone correct the syntax for this definition:</p>

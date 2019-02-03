@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/62391Norder0and1.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [N, order, 0 and 1](62391Norder0and1.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [N, order, 0 and 1](https://leanprover-community.github.io/archive/113488general/62391Norder0and1.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Ned Summers (Aug 18 2018 at 19:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/N%2C%20order%2C%200%20and%201/near/132369398):
 <p>Hey, I'm trying to prove the seemingly very simple</p>

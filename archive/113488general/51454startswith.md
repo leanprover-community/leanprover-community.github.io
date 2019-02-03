@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/51454startswith.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [startswith](51454startswith.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [startswith](https://leanprover-community.github.io/archive/113488general/51454startswith.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Patrick Massot (Jan 04 2019 at 15:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/startswith/near/154412396):
 <p>Do we have something like <code>string.startswith : string -&gt; string -&gt; bool</code> somewhere?</p>

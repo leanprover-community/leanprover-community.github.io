@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/50212rfllemmas.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [rfl lemmas](50212rfllemmas.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [rfl lemmas](https://leanprover-community.github.io/archive/113488general/50212rfllemmas.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Sep 05 2018 at 20:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20lemmas/near/133394916):
 <p>how important are rfl-simp-lemmas being rfl?</p>

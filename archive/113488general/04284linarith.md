@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/04284linarith.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [linarith](04284linarith.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [linarith](https://leanprover-community.github.io/archive/113488general/04284linarith.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Johan Commelin (Nov 21 2018 at 09:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/linarith/near/148096612):
 <p>Shouldn't <code>linarith</code> be able to take care of this?</p>

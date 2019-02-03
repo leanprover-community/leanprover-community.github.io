@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/39883Appliedstatistics.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [Applied statistics](39883Appliedstatistics.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [Applied statistics](https://leanprover-community.github.io/archive/113488general/39883Appliedstatistics.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Simon Hudon (Jul 06 2018 at 01:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Applied%20statistics/near/129172046):
 <p>I haven't done any statistics in a while. Can someone point me to a formula I can use to calculate the probability that <code>x ≤ y</code> if both are normally distributed random variables?</p>

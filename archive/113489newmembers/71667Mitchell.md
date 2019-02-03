@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/71667Mitchell.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [Mitchell](71667Mitchell.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [Mitchell](https://leanprover-community.github.io/archive/113489newmembers/71667Mitchell.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Patrick Massot (Mar 06 2018 at 11:39)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Mitchell/near/123344776):
 <p>Hi <span class="user-mention" data-user-email="u5796267@anu.edu.au" data-user-id="110504">@Mitchell Rowett</span> ! How is your group theory going?</p>

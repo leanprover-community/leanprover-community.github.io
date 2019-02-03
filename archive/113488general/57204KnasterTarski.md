@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/57204KnasterTarski.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [Knaster-Tarski](57204KnasterTarski.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [Knaster-Tarski](https://leanprover-community.github.io/archive/113488general/57204KnasterTarski.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Mar 29 2018 at 06:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Knaster-Tarski/near/124351778):
 <p><a href="https://github.com/kckennylau/Lean/blob/master/Knaster-Tarski.lean" target="_blank" title="https://github.com/kckennylau/Lean/blob/master/Knaster-Tarski.lean">https://github.com/kckennylau/Lean/blob/master/Knaster-Tarski.lean</a><br>

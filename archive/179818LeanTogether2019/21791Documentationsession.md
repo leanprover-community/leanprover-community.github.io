@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/179818LeanTogether2019/21791Documentationsession.html
 ---
 
-## Stream: [Lean Together 2019](index.html)
-### Topic: [Documentation session](21791Documentationsession.html)
+## Stream: [Lean Together 2019](https://leanprover-community.github.io/archive/179818LeanTogether2019/index.html)
+### Topic: [Documentation session](https://leanprover-community.github.io/archive/179818LeanTogether2019/21791Documentationsession.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Johan Commelin (Jan 11 2019 at 13:51)](https://leanprover.zulipchat.com/#narrow/stream/179818-Lean%20Together%202019/topic/Documentation%20session/near/154914851):
 <p>Could someone please post a short summary of the topic session on documentation?</p>

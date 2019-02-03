@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/42410Passlocalhypothesestotactic.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [Pass local hypotheses to tactic](42410Passlocalhypothesestotactic.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [Pass local hypotheses to tactic](https://leanprover-community.github.io/archive/113488general/42410Passlocalhypothesestotactic.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Abhimanyu Pallavi Sudhir (Jan 24 2019 at 19:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Pass%20local%20hypotheses%20to%20tactic/near/156794252):
 <p>Is this how I make a tactic that requires a local hypothesis (represented variously by <code>p</code>, <code>e</code>, and <code>H1</code>)?</p>

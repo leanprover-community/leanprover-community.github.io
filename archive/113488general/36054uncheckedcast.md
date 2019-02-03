@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/36054uncheckedcast.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [unchecked cast](36054uncheckedcast.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [unchecked cast](https://leanprover-community.github.io/archive/113488general/36054uncheckedcast.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Sep 15 2018 at 11:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unchecked%20cast/near/134005017):
 <div class="codehilite"><pre><span></span><span class="bp">#</span><span class="kn">eval</span> <span class="bp">@</span><span class="n">unchecked_cast</span> <span class="n">int</span> <span class="n">nat</span> <span class="o">(</span><span class="bp">-</span><span class="mi">3</span><span class="o">)</span> <span class="c1">-- 2147483645</span>

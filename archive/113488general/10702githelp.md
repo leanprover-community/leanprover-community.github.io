@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/10702githelp.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [git help](10702githelp.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [git help](https://leanprover-community.github.io/archive/113488general/10702githelp.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Scott Morrison (Apr 11 2018 at 12:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/git%20help/near/124926688):
 <p>Sorry to have to ask about mundane things like how to use git, but... Say that I've got a fork of mathlib that is borked in some way (in my case, I merged in a commit from master, that Mario shortly thereafter deleted, but I have a branch that includes it).</p>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/57821equationlemmaugliness.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [equation lemma ugliness](57821equationlemmaugliness.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [equation lemma ugliness](https://leanprover-community.github.io/archive/113488general/57821equationlemmaugliness.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Jun 13 2018 at 00:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equation%20lemma%20ugliness/near/127977206):
 <div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">poly</span> <span class="o">:=</span> <span class="n">list</span> <span class="bp">ℤ</span>

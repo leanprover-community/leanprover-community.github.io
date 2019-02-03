@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/79129whatiswrongwithHoTT.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [what is wrong with HoTT](79129whatiswrongwithHoTT.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [what is wrong with HoTT](https://leanprover-community.github.io/archive/113488general/79129whatiswrongwithHoTT.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Johan Commelin (Oct 05 2018 at 18:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/what%20is%20wrong%20with%20HoTT/near/135265404):
 <p>Let me start by saying that I really don't want to start a flamewar. I am just very uneducated.<br>

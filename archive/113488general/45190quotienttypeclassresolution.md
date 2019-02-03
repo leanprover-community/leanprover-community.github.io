@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/45190quotienttypeclassresolution.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [quotient typeclass resolution](45190quotienttypeclassresolution.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [quotient typeclass resolution](https://leanprover-community.github.io/archive/113488general/45190quotienttypeclassresolution.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Apr 17 2018 at 07:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotient%20typeclass%20resolution/near/125182192):
 <p>here is a working example:</p>

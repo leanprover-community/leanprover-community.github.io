@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/58233Shouldmeasurablespacebeaclass.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [Should measurable_space be a class?](58233Shouldmeasurablespacebeaclass.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [Should measurable_space be a class?](https://leanprover-community.github.io/archive/113488general/58233Shouldmeasurablespacebeaclass.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Nov 29 2018 at 01:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Should%20measurable_space%20be%20a%20class%3F/near/148754678):
 <p>I believe there are often situations where you have two measures on the same set, and two measurable spaces. An example would be Borel-measurable vs Lebesgue-measurable.</p>

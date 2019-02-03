@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/84049parsingtechnology.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [parsing technology](84049parsingtechnology.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [parsing technology](https://leanprover-community.github.io/archive/113488general/84049parsingtechnology.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Assia Mahboubi (Jun 08 2018 at 14:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/parsing%20technology/near/127768347):
 <p>Hi there, can someone help me finding the code of Lean's parser and/or its documentation?</p>

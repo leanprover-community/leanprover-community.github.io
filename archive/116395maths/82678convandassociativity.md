@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/82678convandassociativity.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [conv and associativity](82678convandassociativity.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [conv and associativity](https://leanprover-community.github.io/archive/116395maths/82678convandassociativity.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Scott Morrison (Nov 13 2018 at 10:22)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/conv%20and%20associativity/near/147579358):
 <p>If any category theorists have recently been fighting with associativity, they might like the new <code>conv</code> tactic I just wrote:</p>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/85526characteristicoffields.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [characteristic of fields](85526characteristicoffields.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [characteristic of fields](https://leanprover-community.github.io/archive/113488general/85526characteristicoffields.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Oct 16 2018 at 20:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/characteristic%20of%20fields/near/135921382):
 <p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> <span class="user-mention" data-user-id="112680">@Johan Commelin</span> <span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> how should we define the <code>char</code> of a field?</p>

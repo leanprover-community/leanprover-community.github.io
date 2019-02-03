@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/60452reflvrfl.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [refl v rfl](60452reflvrfl.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [refl v rfl](https://leanprover-community.github.io/archive/113488general/60452reflvrfl.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Nov 26 2018 at 18:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/refl%20v%20rfl/near/148383637):
 <p>I've always had it in the back of my mind that <code>refl</code> was slightly more general than <code>rfl</code>, because the tactic works with anything tagged <code>@[refl]</code>. But I've been trying to write a blog post about equality and I ran into this -- <code>rfl</code> working but <code>refl</code> not working.</p>

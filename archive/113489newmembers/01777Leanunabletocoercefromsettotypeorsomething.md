@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/01777Leanunabletocoercefromsettotypeorsomething.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [Lean unable to coerce from set to type (or something)](01777Leanunabletocoercefromsettotypeorsomething.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [Lean unable to coerce from set to type (or something)](https://leanprover-community.github.io/archive/113489newmembers/01777Leanunabletocoercefromsettotypeorsomething.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Abhimanyu Pallavi Sudhir (Nov 01 2018 at 12:30)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Lean%20unable%20to%20coerce%20from%20set%20to%20type%20%28or%20something%29/near/136915550):
 <p>(approximately M)WE:</p>

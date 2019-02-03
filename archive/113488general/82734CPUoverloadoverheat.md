@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/82734CPUoverloadoverheat.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [CPU overload+overheat](82734CPUoverloadoverheat.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [CPU overload+overheat](https://leanprover-community.github.io/archive/113488general/82734CPUoverloadoverheat.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Sep 07 2018 at 12:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/CPU%20overload%2Boverheat/near/133502597):
 <p><a href="/user_uploads/3121/f0u1jdEuMaYzxZ0Yyr0oAuvs/2018-09-07.png" target="_blank" title="2018-09-07.png">2018-09-07.png</a><br>

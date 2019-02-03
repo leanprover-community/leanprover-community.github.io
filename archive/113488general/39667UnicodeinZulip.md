@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/39667UnicodeinZulip.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [Unicode in Zulip](39667UnicodeinZulip.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [Unicode in Zulip](https://leanprover-community.github.io/archive/113488general/39667UnicodeinZulip.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Johan Commelin (Apr 11 2018 at 20:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unicode%20in%20Zulip/near/124944729):
 <p>Quick question: how do I comfortably input unicode in Zulip? So far I have used copy-paste to write alphas and betas. In VS code these are magically replaced with unicode... in the rest of my life TeX does this for me. How do I get them here?</p>

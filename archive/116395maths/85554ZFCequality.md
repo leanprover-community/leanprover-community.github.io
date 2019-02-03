@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/85554ZFCequality.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [ZFC equality](85554ZFCequality.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [ZFC equality](https://leanprover-community.github.io/archive/116395maths/85554ZFCequality.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (May 28 2018 at 11:31)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ZFC%20equality/near/127197270):
 <p>There were a couple of times in the schemes project when I really had to think "beyond ZFC" -- I had to write down a map, and there were two ways of doing it, and in ZFC they were the <em>literally the same way</em> but in Lean they were different. In this example I just chose a random Lean route to model my ZFC thoughts and it got me in to real trouble later.</p>

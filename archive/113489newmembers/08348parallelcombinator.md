@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/08348parallelcombinator.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [parallel combinator](08348parallelcombinator.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [parallel combinator](https://leanprover-community.github.io/archive/113489newmembers/08348parallelcombinator.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Olli (Sep 13 2018 at 13:05)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/parallel%20combinator/near/133876440):
 <p>is there a way to use the <code>exact</code> tactic with the parallel tactic combinator:</p>

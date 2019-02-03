@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/91816dotnotationconfusion.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [dot notation confusion](91816dotnotationconfusion.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [dot notation confusion](https://leanprover-community.github.io/archive/113488general/91816dotnotationconfusion.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Feb 01 2019 at 10:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dot%20notation%20confusion/near/157341136):
 <p>I have always been confused about dot notation. I don't use it as much as other people, because I don't understand it as well as other people. I've read <a href="https://github.com/PatrickMassot/mathlib/blob/e5aad2e4e0964c7624183efdb534878b6a06bbb5/docs/extras/structures.md#about-the-namespace-shortcut" target="_blank" title="https://github.com/PatrickMassot/mathlib/blob/e5aad2e4e0964c7624183efdb534878b6a06bbb5/docs/extras/structures.md#about-the-namespace-shortcut">Patrick's notes</a> on this and TPIL but I think there's more to it.</p>

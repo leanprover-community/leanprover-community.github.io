@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/34354tacticexprininteractivemode.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [`tactic expr` in interactive mode](34354tacticexprininteractivemode.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [`tactic expr` in interactive mode](https://leanprover-community.github.io/archive/113488general/34354tacticexprininteractivemode.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Scott Morrison (Aug 02 2018 at 16:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60tactic%20expr%60%20in%20interactive%20mode/near/130780443):
 <p>Say I have a <code>tactic expr</code>. If I'm in interactive mode, how do I invoke it and assign the result to a named hypothesis?</p>

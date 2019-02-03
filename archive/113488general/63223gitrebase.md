@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/63223gitrebase.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [git rebase](63223gitrebase.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [git rebase](https://leanprover-community.github.io/archive/113488general/63223gitrebase.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Scott Morrison (Sep 10 2018 at 15:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/git%20rebase/near/133660217):
 <p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span>, if you're interested in a quick tutorial on <code>git rebase</code>, let me know. I finally worked out how to do it (with some help from Johannes) at Orsay. You might in the end find it easier than what you just went through! <a href="/user_uploads/3121/N0ltaWQLM-4x4MmnvZVlAmvW/Screenshot-2018-09-10-23.30.11.png" target="_blank" title="Screenshot-2018-09-10-23.30.11.png">Screenshot-2018-09-10-23.30.11.png</a></p>

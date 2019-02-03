@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/86268helpmefindlemmas.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [help me find lemmas](86268helpmefindlemmas.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [help me find lemmas](https://leanprover-community.github.io/archive/113489newmembers/86268helpmefindlemmas.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Scott Morrison (Nov 24 2018 at 01:39)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20me%20find%20lemmas/near/148255862):
 <p>Surely these are somewhere?</p>

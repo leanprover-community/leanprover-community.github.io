@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/56373everypartialordercanbeorderembeddedintoapowerset.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [every partial order can be order-embedded into a powerset](56373everypartialordercanbeorderembeddedintoapowerset.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [every partial order can be order-embedded into a powerset](https://leanprover-community.github.io/archive/116395maths/56373everypartialordercanbeorderembeddedintoapowerset.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Apr 27 2018 at 18:07)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/every%20partial%20order%20can%20be%20order-embedded%20into%20a%20powerset/near/125781096):
 <div class="codehilite"><pre><span></span><span class="kn">section</span>

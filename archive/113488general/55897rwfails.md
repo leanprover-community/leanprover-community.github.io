@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/55897rwfails.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [rw fails](55897rwfails.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [rw fails](https://leanprover-community.github.io/archive/113488general/55897rwfails.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Nov 24 2018 at 19:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20fails/near/148286611):
 <p>What have I done wrong here?</p>

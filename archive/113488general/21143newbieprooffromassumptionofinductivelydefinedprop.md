@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/21143newbieprooffromassumptionofinductivelydefinedprop.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [newbie: proof from assumption of inductively defined prop](21143newbieprooffromassumptionofinductivelydefinedprop.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [newbie: proof from assumption of inductively defined prop](https://leanprover-community.github.io/archive/113488general/21143newbieprooffromassumptionofinductivelydefinedprop.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Sullivan (Oct 17 2018 at 19:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/newbie%3A%20proof%20from%20assumption%20of%20inductively%20defined%20prop/near/135988274):
 <p>Given a typical definition of an evenness property ...</p>

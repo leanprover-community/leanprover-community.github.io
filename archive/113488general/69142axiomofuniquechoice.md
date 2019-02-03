@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/69142axiomofuniquechoice.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [axiom of unique choice](69142axiomofuniquechoice.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [axiom of unique choice](https://leanprover-community.github.io/archive/113488general/69142axiomofuniquechoice.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Scott Morrison (Mar 06 2018 at 18:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/axiom%20of%20unique%20choice/near/123358619):
 <p>Can I define a <code>def unique_choice {α} {P : α → Prop} (s : subsingleton {a // P a}) (e : ∃ a, P a) : {a // P a} := sorry</code> without using classical choice? Or does Lean’s type theory not allow even this?</p>

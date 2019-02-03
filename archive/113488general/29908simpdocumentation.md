@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/29908simpdocumentation.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [simp documentation](29908simpdocumentation.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [simp documentation](https://leanprover-community.github.io/archive/113488general/29908simpdocumentation.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Simon Hudon (Mar 15 2018 at 01:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20documentation/near/123728672):
 <p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> I'm having a look at your recent PR. In "When it is unadvisable to use simp", why not use <code>show</code> instead of <code>suffices</code>?</p>

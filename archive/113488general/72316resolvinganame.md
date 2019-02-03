@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/72316resolvinganame.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [resolving a name](72316resolvinganame.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [resolving a name](https://leanprover-community.github.io/archive/113488general/72316resolvinganame.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Keeley Hoek (Sep 11 2018 at 09:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/resolving%20a%20name/near/133714444):
 <p>Say I've got <code>n : name</code>, which I get passed, but would like to be of type <code>my_type</code>.  I know I can use <code>t &lt;- infer_type n</code> to get the type of the identifier pointed to by <code>n</code>, and then can use an if to guard against the type being wrong. But I'd really like to do more and "cast" <code>n</code> to type <code>my_type</code>, getting some <code>inst : my_type</code> from <code>n</code>.  Would anyone be able to point me to a nice/any facility for doing this? (I've grepped for <code>cast</code> without success, is <code>mk_app</code> what I'm looking for?)</p>

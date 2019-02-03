@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/18193extensions.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [extensions](18193extensions.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [extensions](https://leanprover-community.github.io/archive/116395maths/18193extensions.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Patrick Massot (Jul 16 2018 at 21:49)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/extensions/near/129772133):
 <p><span class="user-mention" data-user-id="110294">@Johannes Hölzl</span>  At <a href="https://github.com/leanprover/mathlib/blob/master/analysis/topology/continuity.lean#L841-L843" target="_blank" title="https://github.com/leanprover/mathlib/blob/master/analysis/topology/continuity.lean#L841-L843">https://github.com/leanprover/mathlib/blob/master/analysis/topology/continuity.lean#L841-L843</a> do we really need that <code>[inhabited γ]</code>? It forces lots of other inhabited assumptions that seem unnecessary from a mathematical point of view. If γ is not inhabited then there shouldn't be that many <code>f : α → γ</code> to care about</p>

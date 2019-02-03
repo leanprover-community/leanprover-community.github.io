@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/26544inspectingreduce.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [inspecting #reduce](26544inspectingreduce.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [inspecting #reduce](https://leanprover-community.github.io/archive/113488general/26544inspectingreduce.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Moses Schönfinkel (Jun 07 2018 at 12:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inspecting%20%23reduce/near/127709156):
 <p>Is there a <code>set_option</code> of sorts to see what steps <code>#reduce</code> is going through to debug a <em>(deterministic) timeout</em>?</p>

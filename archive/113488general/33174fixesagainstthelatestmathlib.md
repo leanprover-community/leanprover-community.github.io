@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/33174fixesagainstthelatestmathlib.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [fixes against the latest mathlib](33174fixesagainstthelatestmathlib.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [fixes against the latest mathlib](https://leanprover-community.github.io/archive/113488general/33174fixesagainstthelatestmathlib.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Apr 08 2018 at 15:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/fixes%20against%20the%20latest%20mathlib/near/124799280):
 <p>now there is a global <code>^</code> called <code>pow</code>, and now the type of <code>n</code> will not be inferred from <code>f^n</code> (you need to manually state that <code>n</code> is of type <code>nat</code>). In that case, <code>pow</code> unfolds to <code>monoid.pow</code>, which can be unfolded as before the latest version.</p>

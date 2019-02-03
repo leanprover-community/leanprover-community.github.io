@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/03733releases.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [releases](03733releases.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [releases](https://leanprover-community.github.io/archive/113488general/03733releases.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Patrick Massot (Mar 05 2018 at 19:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/releases/near/123313063):
 <p>Is there anything like a Lean release policy? It seems to me quite a bit happened since Lean 3.3.0 and I don't see any indication that some new release is coming.</p>

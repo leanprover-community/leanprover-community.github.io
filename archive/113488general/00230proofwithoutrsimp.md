@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/00230proofwithoutrsimp.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [proof without rsimp](00230proofwithoutrsimp.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [proof without rsimp](https://leanprover-community.github.io/archive/113488general/00230proofwithoutrsimp.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Sean Leather (Jul 16 2018 at 16:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proof%20without%20rsimp/near/129752082):
 <p>Any suggestion on how to prove this? <code>rsimp</code> works, but I'm guessing there's a better way.</p>

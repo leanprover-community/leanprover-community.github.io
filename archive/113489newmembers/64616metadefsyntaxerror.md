@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/64616metadefsyntaxerror.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [meta def syntax error](64616metadefsyntaxerror.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [meta def syntax error](https://leanprover-community.github.io/archive/113489newmembers/64616metadefsyntaxerror.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Ken Roe (Jul 18 2018 at 04:00)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/meta%20def%20syntax%20error/near/129846795):
 <p>I was trying out the example from the Lean meta programming paper.  However their example gives a syntax error:</p>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/30148typeclassinferencefail.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [type class inference fail](30148typeclassinferencefail.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [type class inference fail](https://leanprover-community.github.io/archive/113488general/30148typeclassinferencefail.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Johan Commelin (Jun 08 2018 at 09:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20inference%20fail/near/127760290):
 <div class="codehilite"><pre><span></span><span class="n">don&#39;t</span> <span class="n">know</span> <span class="n">how</span> <span class="n">to</span> <span class="n">synthesize</span> <span class="n">placeholder</span>

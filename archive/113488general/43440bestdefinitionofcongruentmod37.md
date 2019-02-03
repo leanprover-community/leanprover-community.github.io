@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/43440bestdefinitionofcongruentmod37.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [best definition of "congruent mod 37"](43440bestdefinitionofcongruentmod37.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [best definition of "congruent mod 37"](https://leanprover-community.github.io/archive/113488general/43440bestdefinitionofcongruentmod37.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Aug 25 2018 at 11:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/best%20definition%20of%20%22congruent%20mod%2037%22/near/132741889):
 <div class="codehilite"><pre><span></span><span class="kn">definition</span> <span class="n">r1</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">:=</span> <span class="bp">∃</span> <span class="n">k</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">,</span> <span class="n">a</span> <span class="bp">-</span> <span class="n">b</span> <span class="bp">=</span> <span class="mi">37</span> <span class="bp">*</span> <span class="n">k</span>

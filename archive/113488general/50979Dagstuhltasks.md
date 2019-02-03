@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/50979Dagstuhltasks.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [Dagstuhl tasks](50979Dagstuhltasks.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [Dagstuhl tasks](https://leanprover-community.github.io/archive/113488general/50979Dagstuhltasks.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Neil Strickland (Oct 17 2018 at 12:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Dagstuhl%20tasks/near/135961777):
 <p>Some of you will have seen my post on Mathoverflow (<a href="https://mathoverflow.net/q/311159" target="_blank" title="https://mathoverflow.net/q/311159">https://mathoverflow.net/q/311159</a>) where I described some tasks that I would like to see formalised for expository purposes, with extensive annotation.  I have carried out two of the tasks, and attempted to write useful annotations,  as shown on these pages:</p>

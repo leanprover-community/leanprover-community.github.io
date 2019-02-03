@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/75896syntaxsurprises.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [syntax surprises](75896syntaxsurprises.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [syntax surprises](https://leanprover-community.github.io/archive/113488general/75896syntaxsurprises.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Sebastian Ullrich (Jun 19 2018 at 13:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/syntax%20surprises/near/128299157):
 <p>The Lean 4 parser only understands <code>prelude</code>, <code>import</code>, and <code>theory</code> so far, but I've already learned something surprising: <code>noncomputable theory</code> can be used anywhere in a file (also, multiple times)</p>

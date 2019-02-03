@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/64678setsnottypesnatandintagain.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [sets not types? nat and int again](64678setsnottypesnatandintagain.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [sets not types? nat and int again](https://leanprover-community.github.io/archive/113488general/64678setsnottypesnatandintagain.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Sep 27 2018 at 09:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/sets%20not%20types%3F%20nat%20and%20int%20again/near/134728630):
 <p>John Harrison suggests a return to set theory in this talk : <a href="http://aitp-conference.org/2018/slides/JH.pdf" target="_blank" title="http://aitp-conference.org/2018/slides/JH.pdf">http://aitp-conference.org/2018/slides/JH.pdf</a> . Some of what he said rings very true. I told a bunch of beginners over the summer to go and formalise some number theory, but the constant battle with coercions from nat to int to rat made everything far harder than it should be. One thing which particularly should be stressed was that I found on more than one occasion that mathematicians were <em>really surprised</em> that <code>5 / 2 = 2</code> for nat or int. This is very counter to the approach of "normal" mathematical software (sage etc) which in 99% of cases just makes a rational even if the inputs were integers. </p>

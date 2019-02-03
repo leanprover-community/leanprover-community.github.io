@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/03603Whydoesntexistsintrogiveerrforwitnessofwrongtype.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [Why doesn't exists.intro give err for witness of wrong type](03603Whydoesntexistsintrogiveerrforwitnessofwrongtype.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [Why doesn't exists.intro give err for witness of wrong type](https://leanprover-community.github.io/archive/113489newmembers/03603Whydoesntexistsintrogiveerrforwitnessofwrongtype.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Sullivan (Oct 19 2018 at 16:31)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Why%20doesn%27t%20exists.intro%20give%20err%20for%20witness%20of%20wrong%20type/near/136115096):
 <p>Here's a proof that 7 is even. Why does exists.intro accept 3.5 as an argument, given that m is declared to be of type nat?</p>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/89771classificationoffinitesimplegroups.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [classification of finite simple groups](89771classificationoffinitesimplegroups.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [classification of finite simple groups](https://leanprover-community.github.io/archive/116395maths/89771classificationoffinitesimplegroups.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Scott Morrison (Sep 22 2018 at 08:13)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/classification%20of%20finite%20simple%20groups/near/134424165):
 <p>I made a very preliminary start on the statement of the classification of finite simple groups.</p>

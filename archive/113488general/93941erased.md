@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/93941erased.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [erased](93941erased.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [erased](https://leanprover-community.github.io/archive/113488general/93941erased.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Mario Carneiro (Apr 05 2018 at 19:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/erased/near/124681873):
 <p><span class="user-mention" data-user-id="110043">@Gabriel Ebner</span> What would be the best way to define the following type:</p>

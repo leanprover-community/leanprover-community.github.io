@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/63641Freshvariablescausingtrouble.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [Fresh variables causing trouble](63641Freshvariablescausingtrouble.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [Fresh variables causing trouble](https://leanprover-community.github.io/archive/113489newmembers/63641Freshvariablescausingtrouble.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Jack Crawford (Oct 24 2018 at 06:32)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Fresh%20variables%20causing%20trouble/near/136386136):
 <p>I'm in a bit of a pickle right now trying to deal with one of those messy <code>__mlocal__fresh__1234_56789</code> variables.</p>

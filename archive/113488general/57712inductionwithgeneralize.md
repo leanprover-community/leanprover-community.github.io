@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/57712inductionwithgeneralize.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [induction with generalize](57712inductionwithgeneralize.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [induction with generalize](https://leanprover-community.github.io/archive/113488general/57712inductionwithgeneralize.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Sarah Mameche (Nov 16 2018 at 23:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/induction%20with%20generalize/near/147851332):
 <p>Hi, I want to do induction over the following predicate <code>types</code>:</p>

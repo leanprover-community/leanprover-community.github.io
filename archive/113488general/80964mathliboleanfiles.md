@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/80964mathliboleanfiles.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [mathlib olean files](80964mathliboleanfiles.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [mathlib olean files](https://leanprover-community.github.io/archive/113488general/80964mathliboleanfiles.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Jan 22 2019 at 19:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20olean%20files/near/156626057):
 <p>I just upgraded to Lean 3.4.2 and mathlib master. I've got everything compiling. <span class="user-mention" data-user-id="110044">@Chris Hughes</span>  and <span class="user-mention" data-user-id="110064">@Kenny Lau</span> I know it's a pain for you to compile mathlib sometimes. Here is a link: <a href="http://wwwf.imperial.ac.uk/~buzzard/xena/mathlib.tar" target="_blank" title="http://wwwf.imperial.ac.uk/~buzzard/xena/mathlib.tar">mathlib.tar</a>  . I packed up mathlib (including all the .olean files) into a "tarball" (using POSIX tar so file timestamps should be to the nearest nanosecond or whatever). Q1 : can you untar this file back into a mathlib directory? And Q2: if you can, what are the timestamps like? For me, if I look in <code>src/topology</code> then I see <code>basic.lean</code> was created at 16:12 today and <code>basic.olean</code> at 16:49, so Lean knows that I didn't edit <code>basic.lean</code>after I created <code>basic.olean</code>. I took the tarball and untarred it on another unix computer and the timestamps survived. If by the time these files get to you the timestamps of <code>basic.lean</code> and <code>basic.olean</code> are "the time it is now", then the experiment has failed (do files have timestamps in Windows? I know nothing!) because Lean might decide it's time to recompile basic.lean anyway. But if the times are different then maybe this saves you some time compiling mathlib.</p>

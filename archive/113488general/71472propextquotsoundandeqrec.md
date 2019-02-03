@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/71472propextquotsoundandeqrec.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [propext, quot.sound and eq.rec](71472propextquotsoundandeqrec.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [propext, quot.sound and eq.rec](https://leanprover-community.github.io/archive/113488general/71472propextquotsoundandeqrec.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Chris Hughes (Oct 09 2018 at 13:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/propext%2C%20quot.sound%20and%20eq.rec/near/135462261):
 <p>Is every <code>nat</code> defined using <code>propext</code>, <code>quot.sound</code> and <code>eq.rec</code> but without choice guaranteed to reduce to <code>succ $ succ $ succ ... zero</code>?</p>

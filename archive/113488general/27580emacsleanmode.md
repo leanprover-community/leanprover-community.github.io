@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/27580emacsleanmode.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [emacs lean-mode](27580emacsleanmode.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [emacs lean-mode](https://leanprover-community.github.io/archive/113488general/27580emacsleanmode.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Feb 27 2018 at 23:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/emacs%20lean-mode/near/123062251):
 <p>I am going to switch to using emacs for writing lean files for a while; I am now competent with VS Code and sort of believe it to be a better end user experience than emacs. The reason I'm switching to emacs is because there is a risk that it will be the best option for some of my undergraduates in October. I think that I can offer them (via cocalc) blisteringly fast Lean plus group editing of files etc, except that they will have to use emacs.</p>

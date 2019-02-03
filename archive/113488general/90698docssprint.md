@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/90698docssprint.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [docs sprint](90698docssprint.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [docs sprint](https://leanprover-community.github.io/archive/113488general/90698docssprint.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Patrick Massot (Aug 10 2018 at 22:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/docs%20sprint/near/131844734):
 <p>There have been several additions to mathlib recently, many people asking what is there, and Mario's talk giving an overview. I think it's a good time to put some energy into that <code>docs</code> directory. Let's try out new community fork on this: <a href="https://github.com/leanprover-community/mathlib/commit/cc1f2c6a2a2c00c833d28023a63f9670f175d74d" target="_blank" title="https://github.com/leanprover-community/mathlib/commit/cc1f2c6a2a2c00c833d28023a63f9670f175d74d">https://github.com/leanprover-community/mathlib/commit/cc1f2c6a2a2c00c833d28023a63f9670f175d74d</a> is a starting point. Note that I added links to several files which existed but were not reachable from the README. I also added new files in theory, but they don't contain much yet.</p>

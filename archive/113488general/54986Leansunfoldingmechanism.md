@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/54986Leansunfoldingmechanism.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [Lean’s unfolding mechanism](54986Leansunfoldingmechanism.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [Lean’s unfolding mechanism](https://leanprover-community.github.io/archive/113488general/54986Leansunfoldingmechanism.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Sarah Mameche (May 07 2018 at 17:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%E2%80%99s%20unfolding%20mechanism/near/126219226):
 <p>Hi there, </p>

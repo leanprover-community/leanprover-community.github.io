@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/88094bertactic.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [über-tactic](88094bertactic.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [über-tactic](https://leanprover-community.github.io/archive/113488general/88094bertactic.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Patrick Massot (Oct 03 2018 at 14:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%C3%BCber-tactic/near/135098666):
 <p>I'm trying to automate my demo file, for comparison. Is there any reason not to try to write a monster tactic trying all automation we have (except speed reason)? Something like:</p>

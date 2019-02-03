@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/67365constructivezerology.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [constructive zerology](67365constructivezerology.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [constructive zerology](https://leanprover-community.github.io/archive/116395maths/67365constructivezerology.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Patrick Massot (Jul 17 2018 at 16:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/constructive%20zerology/near/129817429):
 <p><span class="user-mention" data-user-id="110064">@Kenny Lau</span> I have a question for you. Do you have a proof without <code>decidable</code> or <code>classical</code> of:</p>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/53187adjunctions.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [adjunctions](53187adjunctions.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [adjunctions](https://leanprover-community.github.io/archive/116395maths/53187adjunctions.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Johan Commelin (Nov 07 2018 at 15:49)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/adjunctions/near/146960106):
 <p>I feel like it is time we get adjoint functors. We now have <code>map</code> and <code>comap</code> for over-categories. They form an adjoint pair, and this would allow us to prove useful stuff. Has anyone given thought to implementing adjunctions in Lean? Are there any traps that should be avoided?</p>

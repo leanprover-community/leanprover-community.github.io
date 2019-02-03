@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/24585productsofgroups.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [products of groups?](24585productsofgroups.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [products of groups?](https://leanprover-community.github.io/archive/116395maths/24585productsofgroups.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Scott Morrison (Jun 25 2018 at 04:22)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/products%20of%20groups%3F/near/128578863):
 <p>Do we have instances that provide (pairwise) products of groups in mathlib? I know about <code>pi_instances</code> for indexed products, but can't find anything for the pairwise case.</p>

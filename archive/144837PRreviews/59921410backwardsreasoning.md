@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/144837PRreviews/59921410backwardsreasoning.html
 ---
 
-## Stream: [PR reviews](index.html)
-### Topic: [#410 backwards reasoning](59921410backwardsreasoning.html)
+## Stream: [PR reviews](https://leanprover-community.github.io/archive/144837PRreviews/index.html)
+### Topic: [#410 backwards reasoning](https://leanprover-community.github.io/archive/144837PRreviews/59921410backwardsreasoning.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Scott Morrison (Oct 10 2018 at 07:41)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23410%20backwards%20reasoning/near/135520408):
 <p>I've just made a <code>[WIP]</code> pull request for the backwards reasoning tactic which has been discussed in &lt;<a href="#narrow/stream/113488-general/topic/proposal.20for.20.60backwards_reasoning.60" title="#narrow/stream/113488-general/topic/proposal.20for.20.60backwards_reasoning.60">https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/proposal.20for.20.60backwards_reasoning.60</a>&gt;.</p>

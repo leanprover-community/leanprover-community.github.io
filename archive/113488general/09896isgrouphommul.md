@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/09896isgrouphommul.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [is_group_hom.mul](09896isgrouphommul.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [is_group_hom.mul](https://leanprover-community.github.io/archive/113488general/09896isgrouphommul.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Apr 12 2018 at 07:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is_group_hom.mul/near/124970058):
 <p>This is what <code>is_group_hom.mul</code> looked like on <a href="https://github.com/leanprover/mathlib/blob/22e671c5ed5fd1b891fb73aa10c9425d1c6cfd3d/algebra/group.lean#L493" target="_blank" title="https://github.com/leanprover/mathlib/blob/22e671c5ed5fd1b891fb73aa10c9425d1c6cfd3d/algebra/group.lean#L493">Apr 5</a>:</p>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/45931IndexingZulip.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [Indexing Zulip](45931IndexingZulip.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [Indexing Zulip](https://leanprover-community.github.io/archive/113488general/45931IndexingZulip.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Rob Lewis (Jan 20 2019 at 22:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Indexing%20Zulip/near/156498766):
 <p>At the meeting in Amsterdam, someone raised the question of archiving the Zulip chat and making it accessible to search engines. It's hard to find answers to Lean questions online right now. You have to register and search here specifically. </p>
@@ -192,6 +192,24 @@ permalink: archive/113488general/45931IndexingZulip.html
 
 #### [ Mario Carneiro (Jan 24 2019 at 02:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Indexing%20Zulip/near/156739585):
 <p>How about number of messages? That should be pretty stable</p>
+
+#### [ Rob Lewis (Feb 03 2019 at 18:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Indexing%20Zulip/near/157476726):
+<p>I spent a bit more time today playing with this. It turns out, letting Zulip process the markdown solves some of the problems from before. No more formatting problems when people forget closing backticks, automatic linkification, quote formatting is more uniform.</p>
+
+#### [ Rob Lewis (Feb 03 2019 at 18:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Indexing%20Zulip/near/157476741):
+<p>One problem that gets introduced is that links to other Zulip posts are broken.</p>
+
+#### [ Rob Lewis (Feb 03 2019 at 18:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Indexing%20Zulip/near/157476744):
+<p>It returns them as relative links.</p>
+
+#### [ Rob Lewis (Feb 03 2019 at 18:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Indexing%20Zulip/near/157476808):
+<p>My impression is it's a net gain, but I don't have a good idea for solving the link issue. Check it out again and see if anything else looks funny: <a href="https://leanprover-community.github.io/archive/" target="_blank" title="https://leanprover-community.github.io/archive/">https://leanprover-community.github.io/archive/</a></p>
+
+#### [ Rob Lewis (Feb 03 2019 at 18:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Indexing%20Zulip/near/157476825):
+<p>(Also, I sorted the stream index page by number of topics, which should be about as stable and easier than number of messages.)</p>
+
+#### [ Rob Lewis (Feb 03 2019 at 18:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Indexing%20Zulip/near/157477309):
+<p>Also, I should check how Zulip sanitizes html. What happens if I write &lt;img src="this.png"&gt; ?</p>
 
 
 {% endraw %}

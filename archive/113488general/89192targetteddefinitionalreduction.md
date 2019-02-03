@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/89192targetteddefinitionalreduction.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [targetted definitional reduction](89192targetteddefinitionalreduction.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [targetted definitional reduction](https://leanprover-community.github.io/archive/113488general/89192targetteddefinitionalreduction.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (May 29 2018 at 13:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/targetted%20definitional%20reduction/near/127246965):
 <p>The history of this question is the following: I had a complicated goal which could be reduced using a definitional unfolding which for some reason wasn't happening -- "unfold" wouldn't work</p>

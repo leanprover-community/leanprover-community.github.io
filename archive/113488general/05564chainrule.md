@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/05564chainrule.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [chain rule](05564chainrule.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [chain rule](https://leanprover-community.github.io/archive/113488general/05564chainrule.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Patrick Massot (Feb 28 2018 at 14:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/chain%20rule/near/123090490):
 <p>I have this chain rule proof in <a href="https://github.com/PatrickMassot/lean-differential-topology/blob/master/src/calculus.lean" target="_blank" title="https://github.com/PatrickMassot/lean-differential-topology/blob/master/src/calculus.lean">https://github.com/PatrickMassot/lean-differential-topology/blob/master/src/calculus.lean</a> which 100 lines long. And <span class="user-mention" data-user-email="assia.mahboubi@inria.fr" data-user-id="110172">@Assia Mahboubi</span> tells me <a href="https://github.com/math-comp/analysis/blob/6b36593f4a6a612212163b25c6bad3522c7fa679/derive.v#L494" target="_blank" title="https://github.com/math-comp/analysis/blob/6b36593f4a6a612212163b25c6bad3522c7fa679/derive.v#L494">https://github.com/math-comp/analysis/blob/6b36593f4a6a612212163b25c6bad3522c7fa679/derive.v#L494</a></p>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/36954singletonunique.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [singleton / unique](36954singletonunique.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [singleton / unique](https://leanprover-community.github.io/archive/113488general/36954singletonunique.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Johan Commelin (Jan 18 2019 at 07:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/singleton%20/%20unique/near/156348116):
 <p>It has been remarked before that we need a class that is <code>nonempty</code> + <code>subsingleton</code>. I guess the canonical name would be <code>singleton</code>. How would people want to define it?</p>

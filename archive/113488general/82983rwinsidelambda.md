@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/82983rwinsidelambda.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [rw inside lambda](82983rwinsidelambda.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [rw inside lambda](https://leanprover-community.github.io/archive/113488general/82983rwinsidelambda.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Sep 09 2018 at 23:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20inside%20lambda/near/133624964):
 <p>from my experience, <code>simp</code> can change things inside lambda, but <code>rw</code> cannot. Is there a way to bypass this and let <code>rw</code> change inside lambda?</p>

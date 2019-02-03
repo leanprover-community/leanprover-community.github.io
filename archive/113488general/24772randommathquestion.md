@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/24772randommathquestion.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [random math question](24772randommathquestion.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [random math question](https://leanprover-community.github.io/archive/113488general/24772randommathquestion.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Andrew Ashworth (Mar 31 2018 at 20:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/random%20math%20question/near/124462875):
 <p>so, seeing as how there are many mathematicians here, can anyone recommend a textbook on algebraic topology? I'd like to be able to read <a href="https://arxiv.org/pdf/1802.04443.pdf" target="_blank" title="https://arxiv.org/pdf/1802.04443.pdf">https://arxiv.org/pdf/1802.04443.pdf</a></p>

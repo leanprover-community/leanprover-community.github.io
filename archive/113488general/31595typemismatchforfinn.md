@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/31595typemismatchforfinn.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [type mismatch for fin n](31595typemismatchforfinn.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [type mismatch for fin n](https://leanprover-community.github.io/archive/113488general/31595typemismatchforfinn.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Mar 11 2018 at 20:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20mismatch%20for%20fin%20n/near/123579325):
 <p>I am surprised that this doesn't typecheck:</p>

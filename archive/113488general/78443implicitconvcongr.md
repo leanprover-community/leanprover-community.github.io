@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/78443implicitconvcongr.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [implicit conv congr](78443implicitconvcongr.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [implicit conv congr](https://leanprover-community.github.io/archive/113488general/78443implicitconvcongr.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Patrick Massot (Oct 06 2018 at 18:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20conv%20congr/near/135318034):
 <p>In conv mode, is there a version of <code>congr</code>/<code>skip</code> which allow traverse implicit arguments?</p>

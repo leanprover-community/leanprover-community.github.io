@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/25068quadraticreciprocity.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [quadratic reciprocity](25068quadraticreciprocity.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [quadratic reciprocity](https://leanprover-community.github.io/archive/113488general/25068quadraticreciprocity.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Oct 10 2018 at 22:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quadratic%20reciprocity/near/135565742):
 <p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> do you feel like <code>quadratic_reciprocity.lean</code> has too many long theorems?</p>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/10190spacemacslayer.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [spacemacs layer](10190spacemacslayer.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [spacemacs layer](https://leanprover-community.github.io/archive/113489newmembers/10190spacemacslayer.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Jared Corduan (Jul 23 2018 at 23:27)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/spacemacs%20layer/near/130175116):
 <p>Has anyone here made a spacemacs layer for lean that they would be willing to share?  I'm a long time vim user who has just started reading about spacemacs &amp; emacs last week in order to use lean.  I found <a href="https://github.com/jroesch/layer-lean" target="_blank" title="https://github.com/jroesch/layer-lean">https://github.com/jroesch/layer-lean</a>, but I couldn't get it to work.  I'm probably just making silly errors since I'm still unfamiliar with spacemacs.  I'll keep reading the documentation until I figure it out, but if anyone can speed me along that would be much appreciated.</p>

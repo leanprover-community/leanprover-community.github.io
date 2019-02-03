@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/43640examplexyxxyyxysorry.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [`example {x y : ℕ} : x + x = y + y → x = y := sorry`](43640examplexyxxyyxysorry.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [`example {x y : ℕ} : x + x = y + y → x = y := sorry`](https://leanprover-community.github.io/archive/113488general/43640examplexyxxyyxysorry.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Apr 05 2018 at 21:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60example%20%7Bx%20y%20%3A%20%E2%84%95%7D%20%3A%20x%20%2B%20x%20%3D%20y%20%2B%20y%20%E2%86%92%20x%20%3D%20y%20%3A%3D%20sorry%60/near/124685151):
 <p>How about this one? <code>example {x y : ℕ} : x + x = y + y → x = y := sorry</code>.  I ended up proving another lemma <code>x + x = x * 2</code> and then rewrote twice and used <code>nat.mul_div_cancel</code>.  I thought <code>x + x = x * 2</code><br>

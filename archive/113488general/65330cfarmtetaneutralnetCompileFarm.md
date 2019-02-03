@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/65330cfarmtetaneutralnetCompileFarm.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [cfarm.tetaneutral.net - Compile Farm](65330cfarmtetaneutralnetCompileFarm.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [cfarm.tetaneutral.net - Compile Farm](https://leanprover-community.github.io/archive/113488general/65330cfarmtetaneutralnetCompileFarm.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Oct 09 2018 at 20:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cfarm.tetaneutral.net%20-%20Compile%20Farm/near/135489637):
 <p><span class="user-mention" data-user-id="122318">@Tobias Grosser</span> I have an account now. How do I use it?</p>

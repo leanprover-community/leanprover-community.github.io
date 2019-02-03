@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/67390quadraticreciprocitygraph.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [quadratic reciprocity graph](67390quadraticreciprocitygraph.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [quadratic reciprocity graph](https://leanprover-community.github.io/archive/113488general/67390quadraticreciprocitygraph.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Sep 16 2018 at 17:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quadratic%20reciprocity%20graph/near/134058821):
 <p>Chris just sent me a text file of all the theorems used in his proof of quadratic reciprocity</p>

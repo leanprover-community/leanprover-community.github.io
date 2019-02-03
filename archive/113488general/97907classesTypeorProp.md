@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/97907classesTypeorProp.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [classes Type or Prop](97907classesTypeorProp.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [classes Type or Prop](https://leanprover-community.github.io/archive/113488general/97907classesTypeorProp.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Reid Barton (Apr 27 2018 at 00:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/classes%20Type%20or%20Prop/near/125747081):
 <p>Is there any particular reason not to make <code>t2_space</code> and similar classes a Prop?</p>

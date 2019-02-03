@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/31387M1FP65syntacticentailmentexercise.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [(M1F/P65) syntactic entailment exercise](31387M1FP65syntacticentailmentexercise.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [(M1F/P65) syntactic entailment exercise](https://leanprover-community.github.io/archive/113488general/31387M1FP65syntacticentailmentexercise.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Oct 22 2018 at 12:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%28M1F/P65%29%20syntactic%20entailment%20exercise/near/136257251):
 <p>At Imperial in the 3rd year logic course M3P65 they're doing first order propositional logic, soundness and completeness etc. In a guest M1F lecture (my course) John Britnell went through some of this stuff with the first years, and the last question on his problem sheet was a real stinker. <span class="user-mention" data-user-id="130500">@Abhimanyu Pallavi Sudhir</span> <a href="https://math.stackexchange.com/questions/2962525/derive-simple-logical-laws-in-a-structure-with-not-and-implies" target="_blank" title="https://math.stackexchange.com/questions/2962525/derive-simple-logical-laws-in-a-structure-with-not-and-implies">asked about it on math SE</a> and got what looks like a couple of nice answers. I'd like the stufents to check those answers in Lean but I'd like to make it as easy as possible for them, by setting up the underlying infrastructure, so they have easy access to the axioms, and only the axioms. </p>

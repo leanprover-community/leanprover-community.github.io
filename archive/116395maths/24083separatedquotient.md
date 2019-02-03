@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/24083separatedquotient.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [separated quotient](24083separatedquotient.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [separated quotient](https://leanprover-community.github.io/archive/116395maths/24083separatedquotient.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Patrick Massot (Sep 30 2018 at 22:18)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/separated%20quotient/near/134934490):
 <p><span class="user-mention" data-user-id="110294">@Johannes Hölzl</span> why <a href="https://github.com/leanprover-community/mathlib/blob/completions/analysis/topology/completion.lean#L185" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/completions/analysis/topology/completion.lean#L185">https://github.com/leanprover-community/mathlib/blob/completions/analysis/topology/completion.lean#L185</a> is not an instance?</p>

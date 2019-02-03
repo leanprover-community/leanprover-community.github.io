@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/83621structures.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [structures](83621structures.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [structures](https://leanprover-community.github.io/archive/113488general/83621structures.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Mar 08 2018 at 20:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/structures/near/123459639):
 <p>When I was building the complexes, I think I tried to make them a field all in one go, and there were problems which perhaps were something to do with neg or sub. <span class="user-mention" data-user-email="di.gama@gmail.com" data-user-id="110049">@Mario Carneiro</span> showed me how to fix these problems by showing first that the complexes were an additive group and then only afterwards that they were a field. But I cannot remember what the problems were. Can anyone here guess? Was it something to do with defining sub or neg myself vs letting the system somehow do it for me? I now cannot really imagine how the system would do it for me.</p>

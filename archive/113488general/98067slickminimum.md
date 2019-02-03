@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/98067slickminimum.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [slick minimum](98067slickminimum.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [slick minimum](https://leanprover-community.github.io/archive/113488general/98067slickminimum.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Keeley Hoek (Sep 13 2018 at 16:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/slick%20minimum/near/133887877):
 <p>Is there a slick mathlib way to get the minimum/maximum element of a list given a <code>has_lt</code> on that list?</p>

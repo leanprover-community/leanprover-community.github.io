@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/44550Projectionaftermkstructure.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [Projection after mk-structure](44550Projectionaftermkstructure.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [Projection after mk-structure](https://leanprover-community.github.io/archive/113488general/44550Projectionaftermkstructure.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Keeley Hoek (Sep 16 2018 at 18:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Projection%20after%20mk-structure/near/134060550):
 <p>Say I've got a function <code>mk_struct</code> which takes some arguments and produces something of type <code>struct</code>. The function <code>mk_struct</code> needn't be the <code>struct.mk</code> constructor---maybe it takes some arguments, proves some stuff about them, and then packages it all up by calling the constructor <code>struct.mk</code> (the point is that the arguments of <code>mk_struct</code> can be totally different).</p>

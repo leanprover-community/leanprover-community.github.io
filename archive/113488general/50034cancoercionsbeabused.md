@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/50034cancoercionsbeabused.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [can coercions be abused?](50034cancoercionsbeabused.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [can coercions be abused?](https://leanprover-community.github.io/archive/113488general/50034cancoercionsbeabused.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Edward Ayers (Sep 24 2018 at 11:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/can%20coercions%20be%20abused%3F/near/134514643):
 <p>I've added some questionable coercions to a lean file I am working on:</p>

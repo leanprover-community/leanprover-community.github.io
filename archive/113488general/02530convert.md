@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/02530convert.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [convert](02530convert.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [convert](https://leanprover-community.github.io/archive/113488general/02530convert.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (May 31 2018 at 03:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/convert/near/127339342):
 <p>maybe <code>convert</code> can automatically <code>apply_instance</code>?</p>

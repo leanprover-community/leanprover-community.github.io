@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/45571generalizingpadicval.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [generalizing padic_val](45571generalizingpadicval.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [generalizing padic_val](https://leanprover-community.github.io/archive/116395maths/45571generalizingpadicval.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Chris Hughes (Nov 19 2018 at 09:48)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/generalizing%20padic_val/near/147952749):
 <p>In my proof of FTA, I need the highest power of a polynomial that divides another polynomial. Should <code>padic_val</code> be generalized to do this. What's the correct generality for this function?</p>

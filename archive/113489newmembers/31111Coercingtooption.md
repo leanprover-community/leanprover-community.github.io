@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/31111Coercingtooption.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [Coercing to option](31111Coercingtooption.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [Coercing to option](https://leanprover-community.github.io/archive/113489newmembers/31111Coercingtooption.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Abhimanyu Pallavi Sudhir (Jan 15 2019 at 22:14)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coercing%20to%20option/near/155204948):
 <p>Where can I find lemmas about coercing to option (e.g. <code>ℕ</code> to <code>option ℕ</code>)? I want basic things like <code>↑(n - m) = ↑n - ↑m</code>.</p>

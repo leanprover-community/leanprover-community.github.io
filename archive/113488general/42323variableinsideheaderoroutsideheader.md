@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/42323variableinsideheaderoroutsideheader.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [variable inside header or outside header](42323variableinsideheaderoroutsideheader.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [variable inside header or outside header](https://leanprover-community.github.io/archive/113488general/42323variableinsideheaderoroutsideheader.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Jul 25 2018 at 04:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/variable%20inside%20header%20or%20outside%20header/near/130250391):
 <div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">algebra</span><span class="bp">.</span><span class="n">module</span>

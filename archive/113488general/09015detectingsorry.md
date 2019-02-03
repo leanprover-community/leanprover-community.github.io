@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/09015detectingsorry.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [detecting sorry](09015detectingsorry.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [detecting sorry](https://leanprover-community.github.io/archive/113488general/09015detectingsorry.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Mar 02 2018 at 11:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/detecting%20sorry/near/123177763):
 <p>I am assuming that the following should be easy, or at least possible.</p>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/73892maximalfinsetinfinsetoffinsets.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [maximal finset in finset of finsets](73892maximalfinsetinfinsetoffinsets.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [maximal finset in finset of finsets](https://leanprover-community.github.io/archive/113489newmembers/73892maximalfinsetinfinsetoffinsets.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Bryan Gin-ge Chen (Sep 13 2018 at 20:36)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/maximal%20finset%20in%20finset%20of%20finsets/near/133904539):
 <p>Excuse the weird title. I'm trying to prove that a finset of subsets of a finset must contain an element of largest size, without relying on classical choice:</p>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/20463uniformaddgroupvstopologicaladdgroup.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [uniform_add_group vs topological_add_group](20463uniformaddgroupvstopologicaladdgroup.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [uniform_add_group vs topological_add_group](https://leanprover-community.github.io/archive/113488general/20463uniformaddgroupvstopologicaladdgroup.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Nov 01 2018 at 01:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/uniform_add_group%20vs%20topological_add_group/near/136891308):
 <p>We know that a topological additive abelian group is a uniform additive group, and that a uniform additive group is a topological additive group</p>

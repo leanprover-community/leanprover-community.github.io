@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/37173newbehaviourofext.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [new behaviour of ext?](37173newbehaviourofext.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [new behaviour of ext?](https://leanprover-community.github.io/archive/113488general/37173newbehaviourofext.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Scott Morrison (Sep 12 2018 at 05:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/new%20behaviour%20of%20ext%3F/near/133776231):
 <p>Hi <span class="user-mention" data-user-id="110026">@Simon Hudon</span>, did the behaviour of ext just change? I'm finding the hypotheses of my ext lemmas being added as goals in a different order than previously.</p>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/40042Cauchysequences.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [Cauchy sequences](40042Cauchysequences.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [Cauchy sequences](https://leanprover-community.github.io/archive/116395maths/40042Cauchysequences.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Sebastien Gouezel (Oct 20 2018 at 17:37)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Cauchy%20sequences/near/136173276):
 <p>If I understand correctly, for now, in mathlib, there are Cauchy filters, and a notion named <code>cau_seq</code> but defined on rings and with respect to some absolute value, but not the classical notion of Cauchy sequence in metric spaces (which is simply <code>cauchy (at_top.map u)</code> where <code>u</code> is a sequence from ℕ to some metric or even uniform space). And neither is the fact that a metric space is complete iff every Cauchy sequence converges, right?</p>

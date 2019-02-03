@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/73070isomorphisms.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [isomorphisms](73070isomorphisms.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [isomorphisms](https://leanprover-community.github.io/archive/113488general/73070isomorphisms.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Dec 19 2018 at 09:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/isomorphisms/near/152166179):
 <p>If I want to define <code>ring_equiv</code> and <code>group_equiv</code> and etc (I don't have any more examples at the moment), where should I put them?</p>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/53481Guessingthetype.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [Guessing the type](53481Guessingthetype.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [Guessing the type](https://leanprover-community.github.io/archive/113488general/53481Guessingthetype.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Alexandru-Andrei Bosinta (Nov 21 2018 at 19:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Guessing%20the%20type/near/148130635):
 <div class="codehilite"><pre><span></span>import data.rat

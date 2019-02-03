@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/67981quotients.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [quotients](67981quotients.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [quotients](https://leanprover-community.github.io/archive/113488general/67981quotients.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Patrick Massot (Jul 15 2018 at 12:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129697433):
 <p>I still don't know much about quotients in Lean. I have the goal <code>{x : completion α × completion α | (g x.1, g x.2) ∈ r} ∈ uniformity.sets</code>. And <code>completion α</code> is the quotient of something, and <code>g</code> is induced by <code>h</code> defined before quotienting. So I'd like to rewrite the left hand side as the image under <code>lam y, (quotient.mk y.1,  quotient.mk y.2)</code> of the obvious set where  <code>(g x.1, g x.2)</code> becomes <code>(h y.1, h y.2)</code>. How can I do that? Should I do that?</p>

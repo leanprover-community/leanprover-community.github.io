@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/23433instances.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [instances](23433instances.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [instances](https://leanprover-community.github.io/archive/113488general/23433instances.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Jakob von Raumer (Oct 20 2018 at 12:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/instances/near/136163177):
 <p>Can someone explain this?</p>

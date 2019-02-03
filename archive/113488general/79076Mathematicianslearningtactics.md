@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/79076Mathematicianslearningtactics.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [Mathematicians learning tactics](79076Mathematicianslearningtactics.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [Mathematicians learning tactics](https://leanprover-community.github.io/archive/113488general/79076Mathematicianslearningtactics.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (May 30 2018 at 19:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Mathematicians%20learning%20tactics/near/127318046):
 <div class="codehilite"><pre><span></span><span class="kn">instance</span> <span class="o">:</span> <span class="n">comm_monoid</span> <span class="bp">ℕ+</span> <span class="o">:=</span>

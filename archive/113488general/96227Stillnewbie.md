@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/96227Stillnewbie.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [Still newbie](96227Stillnewbie.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [Still newbie](https://leanprover-community.github.io/archive/113488general/96227Stillnewbie.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Patrick Massot (May 09 2018 at 18:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Still%20newbie/near/126322049):
 <p>Aaaarg. It's been almost six month now. And I still waste time because I think Lean will accept to prove non sense such as</p>

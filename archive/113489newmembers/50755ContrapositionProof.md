@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/50755ContrapositionProof.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [Contraposition Proof](50755ContrapositionProof.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [Contraposition Proof](https://leanprover-community.github.io/archive/113489newmembers/50755ContrapositionProof.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Cameron Crossman (Dec 04 2018 at 00:36)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Contraposition%20Proof/near/150809932):
 <p>I am a new user and I am just getting my bearings with the platform.  Would someone be able to walk me through a proof of Contraposition written in Lean? (p → q) → (¬q → ¬p). Much appreciated!  I know the general steps but am getting confused about how to translate that into Lean.<br>

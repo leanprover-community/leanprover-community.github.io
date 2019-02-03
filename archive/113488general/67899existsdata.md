@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/67899existsdata.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [exists data](67899existsdata.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [exists data](https://leanprover-community.github.io/archive/113488general/67899existsdata.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Johan Commelin (Dec 24 2018 at 06:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/exists%20data/near/152455922):
 <p>Is there a clean way to avoid the <code>, true</code> in this condition?</p>

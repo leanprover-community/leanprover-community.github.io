@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/74045unsafecastsinmetaland.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [unsafe casts in meta land?](74045unsafecastsinmetaland.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [unsafe casts in meta land?](https://leanprover-community.github.io/archive/113489newmembers/74045unsafecastsinmetaland.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Scott Morrison (Jan 04 2019 at 06:03)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/unsafe%20casts%20in%20meta%20land%3F/near/154389422):
 <p>In a meta function, is there some way to do "unsafe casts"?</p>

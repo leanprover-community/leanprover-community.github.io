@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/97723modulerefactoring.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [module refactoring](97723modulerefactoring.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [module refactoring](https://leanprover-community.github.io/archive/113488general/97723modulerefactoring.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Mario Carneiro (Sep 21 2018 at 08:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/module%20refactoring/near/134359525):
 <p>I'm a bit late for my birthday deadline, but I have enough of the refactoring done that I'm ready to get feedback on it. See <a href="https://github.com/leanprover/mathlib/compare/master...leanprover-community:module" target="_blank" title="https://github.com/leanprover/mathlib/compare/master...leanprover-community:module">leanprover-community/module</a>. Remarks:</p>

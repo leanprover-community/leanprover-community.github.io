@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/48775hasmemnotation.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [has_mem notation](48775hasmemnotation.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [has_mem notation](https://leanprover-community.github.io/archive/113488general/48775hasmemnotation.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Johan Commelin (Jan 14 2019 at 11:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/has_mem%20notation/near/155075639):
 <p>Does anyone know how to fix this notation hack?</p>

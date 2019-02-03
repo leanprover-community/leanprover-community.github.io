@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/37530KevinSullivanUVaCS.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [Kevin Sullivan, UVa CS](37530KevinSullivanUVaCS.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [Kevin Sullivan, UVa CS](https://leanprover-community.github.io/archive/113489newmembers/37530KevinSullivanUVaCS.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Sullivan (Aug 02 2018 at 18:56)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Kevin%20Sullivan%2C%20UVa%20CS/near/130789420):
 <p>Hi everyone, Happy to find this forum. I'm Kevin Sullivan, University of Virginia CS. I've been using Coq, and now Lean, and also Dafny, in teach graduate and undergraduate students, for several years. I'm ramping up the role of Lean. I haven't been a Lean dev, and so am likely to have some questions, concerns, comments, etc. about aspects of Lean that impinge on pedagogy. Very best wishes and thanks to all. --Kevin</p>

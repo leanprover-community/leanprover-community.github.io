@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/01949minimumoffiniteset.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [minimum of finite set](01949minimumoffiniteset.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [minimum of finite set](https://leanprover-community.github.io/archive/113488general/01949minimumoffiniteset.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Reid Barton (May 06 2018 at 04:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/minimum%20of%20finite%20set/near/126161321):
 <p>I have a <code>finset</code> of rationals which I know is nonempty. How do I find its minimum element?</p>

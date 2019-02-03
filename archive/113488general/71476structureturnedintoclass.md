@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/71476structureturnedintoclass.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [structure turned into class](71476structureturnedintoclass.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [structure turned into class](https://leanprover-community.github.io/archive/113488general/71476structureturnedintoclass.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Patrick Massot (Apr 08 2018 at 22:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/structure%20turned%20into%20class/near/124809321):
 <p>In <code>topological_space.lean</code>, I see:</p>

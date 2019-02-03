@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/42165limitofaseriesofsets.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [limit of a series of sets](42165limitofaseriesofsets.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [limit of a series of sets](https://leanprover-community.github.io/archive/113488general/42165limitofaseriesofsets.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Simon Hudon (Apr 06 2018 at 07:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/limit%20of%20a%20series%20of%20sets/near/124704503):
 <p>I have an infinite series of sets that each include their successor and such that each is non-empty. How do I prove that the intersection of all sets is also non-empty?</p>

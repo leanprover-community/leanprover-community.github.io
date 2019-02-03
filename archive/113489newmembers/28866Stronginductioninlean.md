@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/28866Stronginductioninlean.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [Strong induction in lean](28866Stronginductioninlean.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [Strong induction in lean](https://leanprover-community.github.io/archive/113489newmembers/28866Stronginductioninlean.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Calle Sönne (Nov 19 2018 at 17:14)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Strong%20induction%20in%20lean/near/147975900):
 <p>I want to prove strong induction in lean but Im having a hard time writing it out. Is it possible to do and-statements of variable length in lean? Something like this is what I want to do in lean:</p>

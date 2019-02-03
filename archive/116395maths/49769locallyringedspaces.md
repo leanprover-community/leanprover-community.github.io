@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/49769locallyringedspaces.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [locally ringed spaces](49769locallyringedspaces.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [locally ringed spaces](https://leanprover-community.github.io/archive/116395maths/49769locallyringedspaces.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Scott Morrison (Sep 01 2018 at 11:45)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/locally%20ringed%20spaces/near/133171105):
 <p>In <a href="https://github.com/semorrison/lean-category-theory/blob/master/src/category_theory/locally_ringed.lean" target="_blank" title="https://github.com/semorrison/lean-category-theory/blob/master/src/category_theory/locally_ringed.lean"><code>lean-category-theory</code></a> I've added a definition of <code>locally_ringed_space</code>.</p>

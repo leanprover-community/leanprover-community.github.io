@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/22256coolpaperonreification.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [cool paper on reification](22256coolpaperonreification.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [cool paper on reification](https://leanprover-community.github.io/archive/113488general/22256coolpaperonreification.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Andrew Ashworth (Jun 03 2018 at 04:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cool%20paper%20on%20reification/near/127486086):
 <p>just in case anybody else is interested in proofs by reflection: <a href="https://people.csail.mit.edu/jgross/personal-website/papers/2018-reification-by-parametricity-itp-draft.pdf" target="_blank" title="https://people.csail.mit.edu/jgross/personal-website/papers/2018-reification-by-parametricity-itp-draft.pdf">https://people.csail.mit.edu/jgross/personal-website/papers/2018-reification-by-parametricity-itp-draft.pdf</a></p>

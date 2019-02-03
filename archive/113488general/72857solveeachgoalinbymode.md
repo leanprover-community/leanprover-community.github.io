@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/72857solveeachgoalinbymode.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [solve each goal in "by" mode](72857solveeachgoalinbymode.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [solve each goal in "by" mode](https://leanprover-community.github.io/archive/113488general/72857solveeachgoalinbymode.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Apr 19 2018 at 14:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/solve%20each%20goal%20in%20%22by%22%20mode/near/125302926):
 <p>In <code>by</code> mode, i.e. <code>by xxx; yyy; zzz</code>, is there a way to not apply the tactics to every goal?</p>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/03459convexample.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [conv example](03459convexample.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [conv example](https://leanprover-community.github.io/archive/113488general/03459convexample.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Mar 13 2018 at 12:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conv%20example/near/123651407):
 <p>I was trying to write an example to illustrate the power of <code>conv</code>, by finding an example where the entire goal was difficult to work with because it contained implicit proofs. I realised that there were two things I didn't understand properly. Here's some code.</p>

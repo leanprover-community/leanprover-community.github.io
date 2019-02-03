@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/48331isthischoicecomputable.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [is this choice computable?](48331isthischoicecomputable.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [is this choice computable?](https://leanprover-community.github.io/archive/113488general/48331isthischoicecomputable.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Sep 04 2018 at 14:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/is%20this%20choice%20computable%3F/near/133307935):
 <p>Can the two <code>sorry</code>s be filled in?</p>

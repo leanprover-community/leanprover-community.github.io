@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/16734typeclasstracedump.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [type class trace dump](16734typeclasstracedump.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [type class trace dump](https://leanprover-community.github.io/archive/113488general/16734typeclasstracedump.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Johan Commelin (Aug 07 2018 at 08:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20trace%20dump/near/131025671):
 <p>Is this expected behaviour?</p>

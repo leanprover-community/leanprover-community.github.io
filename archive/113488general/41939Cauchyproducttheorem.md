@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/41939Cauchyproducttheorem.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [Cauchy product theorem](41939Cauchyproducttheorem.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [Cauchy product theorem](https://leanprover-community.github.io/archive/113488general/41939Cauchyproducttheorem.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Apr 27 2018 at 14:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Cauchy%20product%20theorem/near/125771651):
 <p>doesn't seem to be in Lean</p>

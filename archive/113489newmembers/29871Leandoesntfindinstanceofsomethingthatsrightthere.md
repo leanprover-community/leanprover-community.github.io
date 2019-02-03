@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/29871Leandoesntfindinstanceofsomethingthatsrightthere.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [Lean doesn't find instance of something that's right there](29871Leandoesntfindinstanceofsomethingthatsrightthere.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [Lean doesn't find instance of something that's right there](https://leanprover-community.github.io/archive/113489newmembers/29871Leandoesntfindinstanceofsomethingthatsrightthere.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Abhimanyu Pallavi Sudhir (Oct 16 2018 at 00:38)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Lean%20doesn%27t%20find%20instance%20of%20something%20that%27s%20right%20there/near/135863594):
 <p>Weird problem -- I have my goal, which is <code>(x ⋆ y) → (y ⋆ z) → (x ⋆ z)</code> (for some operation <code>⋆</code>) and I have a hypothesis <code>Hxy : x = y</code>. But when I try <code>rw Hxy,</code> Lean tells me:</p>

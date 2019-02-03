@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/03089leanprovercommunity.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [leanprover-community](03089leanprovercommunity.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [leanprover-community](https://leanprover-community.github.io/archive/113488general/03089leanprovercommunity.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Reid Barton (Sep 25 2018 at 03:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leanprover-community/near/134567131):
 <p>I don't seem to have write access to leanprover-community/mathlib; could someone add me?</p>

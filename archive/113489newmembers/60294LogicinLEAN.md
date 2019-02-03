@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/60294LogicinLEAN.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [Logic in LEAN](60294LogicinLEAN.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [Logic in LEAN](https://leanprover-community.github.io/archive/113489newmembers/60294LogicinLEAN.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Sean G McCain (Nov 01 2018 at 23:59)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Logic%20in%20LEAN/near/136955882):
 <p>Is someone able to send me a private message regarding first order logic in LEAN? I am working a homework that requires it and it is difficult, for LEAN is very new to me.</p>

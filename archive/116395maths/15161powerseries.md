@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/15161powerseries.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [power series](15161powerseries.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [power series](https://leanprover-community.github.io/archive/116395maths/15161powerseries.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Reid Barton (Jan 26 2019 at 00:26)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/power%20series/near/156894024):
 <p>Has anyone built formal power series yet?</p>

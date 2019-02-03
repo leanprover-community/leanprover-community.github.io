@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/42283intersections.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [intersections](42283intersections.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [intersections](https://leanprover-community.github.io/archive/113488general/42283intersections.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Patrick Massot (Jul 03 2018 at 17:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/intersections/near/129031496):
 <p>Do we have a better way to do</p>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/97486trolledbyundergrad.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [trolled by undergrad](97486trolledbyundergrad.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [trolled by undergrad](https://leanprover-community.github.io/archive/113488general/97486trolledbyundergrad.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Jul 20 2018 at 20:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trolled%20by%20undergrad/near/130014811):
 <p>It took me 20 minutes to diagnose this deterministic time-out:</p>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/31797centreofpartialorderclosedundersupremum.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [centre of partial order closed under supremum?](31797centreofpartialorderclosedundersupremum.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [centre of partial order closed under supremum?](https://leanprover-community.github.io/archive/116395maths/31797centreofpartialorderclosedundersupremum.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Apr 28 2018 at 17:43)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/centre%20of%20partial%20order%20closed%20under%20supremum%3F/near/125823474):
 <p>Let (P, &lt;=) be a partially ordered set.</p>

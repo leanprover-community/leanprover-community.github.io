@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/31387typeclassinferences.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [typeclass inferences](31387typeclassinferences.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [typeclass inferences](https://leanprover-community.github.io/archive/113488general/31387typeclassinferences.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Apr 06 2018 at 01:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20inferences/near/124695237):
 <p><a href="https://github.com/kckennylau/Lean/blob/master/enough_injectives.lean#L72" target="_blank" title="https://github.com/kckennylau/Lean/blob/master/enough_injectives.lean#L72">https://github.com/kckennylau/Lean/blob/master/enough_injectives.lean#L72</a><br>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/96945quotientmodulebreakage.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [quotient_module breakage](96945quotientmodulebreakage.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [quotient_module breakage](https://leanprover-community.github.io/archive/116395maths/96945quotientmodulebreakage.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Sep 20 2018 at 20:01)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/quotient_module%20breakage/near/134325716):
 <div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">set</span><span class="bp">.</span><span class="n">basic</span>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/89510addingtosomeoneelsesPR.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [adding to someone else's PR](89510addingtosomeoneelsesPR.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [adding to someone else's PR](https://leanprover-community.github.io/archive/113488general/89510addingtosomeoneelsesPR.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (May 16 2018 at 22:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/adding%20to%20someone%20else%27s%20PR/near/126664340):
 <p>I have proved that the structure sheaf on an affine scheme is a sheaf of sets. I now need to prove it's a sheaf of commutative rings and we will have our first examples of schemes. However I need a little more transport of structure. In particular I need that the direct limit of commutative rings is a commutative ring. I asked Kenny if he'd done this and he said that he did a big direct limit PR recently but he only did rings, not commutative rings.</p>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/90140inductiveoccurrenceunderatypeconstructor.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [inductive occurrence under a type constructor](90140inductiveoccurrenceunderatypeconstructor.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [inductive occurrence under a type constructor](https://leanprover-community.github.io/archive/113488general/90140inductiveoccurrenceunderatypeconstructor.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Arseniy Alekseyev (Jul 18 2018 at 00:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inductive%20occurrence%20under%20a%20type%20constructor/near/129838639):
 <p>I've got a rose tree definition:</p>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/65864moreexprmunging.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [more expr munging](65864moreexprmunging.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [more expr munging](https://leanprover-community.github.io/archive/113488general/65864moreexprmunging.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Scott Morrison (Sep 09 2018 at 13:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20expr%20munging/near/133605425):
 <p>Say I have an <code>expr</code> representing an iterated <code>pi</code> type, which is finally an equation, something like <code>Π (a : ℕ) (b : ℕ), f a b = g (a + b)</code>. From that, I want to produce <code>f ?m_1 ?m_2</code>, where <code>?m_1</code> and <code>?m_2</code> are newly created metavariables of the appropriate types.</p>

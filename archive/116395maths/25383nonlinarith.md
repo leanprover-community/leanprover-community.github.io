@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/25383nonlinarith.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [nonlinarith](25383nonlinarith.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [nonlinarith](https://leanprover-community.github.io/archive/116395maths/25383nonlinarith.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Jan 29 2019 at 00:15)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/nonlinarith/near/157066131):
 <div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">real</span><span class="bp">.</span><span class="n">basic</span>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/42489metaprogrammingandstructureinheritance.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [metaprogramming and structure inheritance](42489metaprogrammingandstructureinheritance.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [metaprogramming and structure inheritance](https://leanprover-community.github.io/archive/113488general/42489metaprogrammingandstructureinheritance.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Simon Hudon (Mar 11 2018 at 22:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/metaprogramming%20and%20structure%20inheritance/near/123582486):
 <p>I'm trying to write a tactic that explores the inheritance structure. Given the name of a structure type, can I discover what are its ancestors?</p>

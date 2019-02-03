@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/13048substathyp.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [subst at hyp](13048substathyp.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [subst at hyp](https://leanprover-community.github.io/archive/113488general/13048substathyp.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Johan Commelin (Sep 07 2018 at 10:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subst%20at%20hyp/near/133497289):
 <p>Could we have <code>subst foobar at hyp</code> for substituting in the hypotheses of the local context? Currently I am using <code>repeat {rw foobar at hyp}</code> which feels a bit verbose...</p>

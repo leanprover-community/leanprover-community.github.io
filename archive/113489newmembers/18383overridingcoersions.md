@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/18383overridingcoersions.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [overriding coersions](18383overridingcoersions.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [overriding coersions](https://leanprover-community.github.io/archive/113489newmembers/18383overridingcoersions.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Keeley Hoek (Nov 10 2018 at 14:24)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/overriding%20coersions/near/147433140):
 <p>Is there a way to define a coercion which takes priority over another one? I tried <code>@[priority 10]</code> but it doesn't seem like it does anything to a <code>has_coe</code> instance (and I don't know what it should do in any case)</p>

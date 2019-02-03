@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/70244casesintermmode.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [cases in term mode](70244casesintermmode.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [cases in term mode](https://leanprover-community.github.io/archive/116395maths/70244casesintermmode.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Johan Commelin (May 01 2018 at 11:40)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cases%20in%20term%20mode/near/125937140):
 <p>I am trying to tell Lean what a path in a quiver is. How do I finish <code>is_a_path</code>?</p>

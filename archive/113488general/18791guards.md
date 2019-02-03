@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/18791guards.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [guards](18791guards.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [guards](https://leanprover-community.github.io/archive/113488general/18791guards.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Reid Barton (Jan 25 2019 at 16:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/guards/near/156858254):
 <p>There's no syntax for guards in pattern matching (as in <a href="https://www.haskell.org/onlinereport/haskell2010/haskellch3.html#x8-460003.13" target="_blank" title="https://www.haskell.org/onlinereport/haskell2010/haskellch3.html#x8-460003.13">https://www.haskell.org/onlinereport/haskell2010/haskellch3.html#x8-460003.13</a>), is there?</p>

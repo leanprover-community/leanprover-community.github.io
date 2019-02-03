@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/26709cardinality.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [cardinality](26709cardinality.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [cardinality](https://leanprover-community.github.io/archive/113489newmembers/26709cardinality.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Huyen Chau Nguyen (Jun 22 2018 at 09:59)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cardinality/near/128461029):
 <p>Hey guys, I want to ask about the cardinality of sets. I'm totally newbie to Lean so the questions might be trivial and silly. Still, I need your help. </p>

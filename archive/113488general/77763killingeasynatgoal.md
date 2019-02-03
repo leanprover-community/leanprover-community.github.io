@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/77763killingeasynatgoal.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [killing easy nat goal](77763killingeasynatgoal.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [killing easy nat goal](https://leanprover-community.github.io/archive/113488general/77763killingeasynatgoal.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Mar 20 2018 at 17:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/killing%20easy%20nat%20goal/near/123969731):
 <p>Faced with <code>∀ n, 2 * nat.succ (n) = nat.succ (2 * n + 1)</code> I find that simp or ring don't seem to be able to do it. Even <code>intro n, simp [nat.succ_eq_add_one,mul_add,one_add_one_eq_two]</code> doesn't work. I can use simp and then ring!</p>

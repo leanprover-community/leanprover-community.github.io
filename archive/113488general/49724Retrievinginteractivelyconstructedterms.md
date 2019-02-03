@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/49724Retrievinginteractivelyconstructedterms.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [Retrieving interactively constructed terms](49724Retrievinginteractivelyconstructedterms.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [Retrieving interactively constructed terms](https://leanprover-community.github.io/archive/113488general/49724Retrievinginteractivelyconstructedterms.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Seul Baek (Jun 15 2018 at 02:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Retrieving%20interactively%20constructed%20terms/near/128095723):
 <p>Suppose I'd like to construct a term of type <code>τ</code> interactively, so I use <code>e ← assert n '(τ)</code> and apply some further tactics to close off the goal. Now <code>e</code> is bound to a local constant, which is the expr of a term that has type <code>τ</code>.</p>

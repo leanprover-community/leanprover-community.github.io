@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/51083checkingimports.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [checking imports](51083checkingimports.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [checking imports](https://leanprover-community.github.io/archive/113488general/51083checkingimports.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Jakob von Raumer (Oct 10 2018 at 18:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/checking%20imports/near/135554082):
 <p>whenever I open vscode, lean seems to re-check all imported files... wasn't this better some time ago?</p>

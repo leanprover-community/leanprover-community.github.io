@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/04805notationquestion.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [notation question](04805notationquestion.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [notation question](https://leanprover-community.github.io/archive/113488general/04805notationquestion.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (May 06 2018 at 13:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notation%20question/near/126173744):
 <p>The following might be impossible in Lean but I thought I'd ask. It's just an issue with notation.</p>

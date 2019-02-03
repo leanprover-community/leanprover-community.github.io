@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/39139Constructinganiteexpressionwithout.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [Constructing an ite expression without %%](39139Constructinganiteexpressionwithout.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [Constructing an ite expression without %%](https://leanprover-community.github.io/archive/113489newmembers/39139Constructinganiteexpressionwithout.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Ken Roe (Jul 24 2018 at 03:10)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Constructing%20an%20ite%20expression%20without%20%25%25/near/130183355):
 <p>I entered the following code to construct an ite expression in a meta def:</p>

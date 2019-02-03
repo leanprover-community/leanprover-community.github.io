@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/03626request.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [request](03626request.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [request](https://leanprover-community.github.io/archive/113488general/03626request.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Scott Morrison (Oct 01 2018 at 15:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/request/near/134968732):
 <p>Hi <span class="user-mention" data-user-id="110294">@Johannes Hölzl</span>, <span class="user-mention" data-user-id="110049">@Mario Carneiro</span>, I'm hoping one of you can have a look at &lt;<a href="https://github.com/leanprover/mathlib/pull/382" target="_blank" title="https://github.com/leanprover/mathlib/pull/382">https://github.com/leanprover/mathlib/pull/382</a>&gt; for me. (It's a replacement for <a href="https://github.com/leanprover/mathlib/pull/324" target="_blank" title="https://github.com/leanprover/mathlib/pull/324">https://github.com/leanprover/mathlib/pull/324</a>, which has been up for a few weeks; I cleaned up the history and left the previous discussion at the old PR.)</p>

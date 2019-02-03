@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/08397Usingaddrightinj.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [Using @add_right_inj](08397Usingaddrightinj.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [Using @add_right_inj](https://leanprover-community.github.io/archive/113489newmembers/08397Usingaddrightinj.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Abhimanyu Pallavi Sudhir (Oct 13 2018 at 18:16)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20%40add_right_inj/near/135737105):
 <p>How many parameters do I need to specify to use <code>←@add_right_inj</code>? I'm trying to understand how to use tactics with implicit parameters, but can't seem to get it right. I keep getting <code>failed to synthesize type class instance</code></p>

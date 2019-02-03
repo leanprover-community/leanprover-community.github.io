@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/01274unfoldingnotationintheoremvsdefinstance.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [unfolding notation in theorem vs def/instance](01274unfoldingnotationintheoremvsdefinstance.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [unfolding notation in theorem vs def/instance](https://leanprover-community.github.io/archive/113488general/01274unfoldingnotationintheoremvsdefinstance.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (May 31 2018 at 04:35)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unfolding%20notation%20in%20theorem%20vs%20def/instance/near/127341302):
 <div class="codehilite"><pre><span></span><span class="kn">instance</span> <span class="n">pi</span><span class="bp">.</span><span class="n">comm_ring_i</span> <span class="o">{</span><span class="n">I</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">{</span><span class="n">f</span> <span class="o">:</span> <span class="n">I</span> <span class="bp">→</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="bp">∀</span> <span class="n">i</span><span class="o">,</span> <span class="n">semigroup</span> <span class="err">$</span> <span class="n">f</span> <span class="n">i</span><span class="o">]</span> <span class="o">:</span> <span class="n">semigroup</span> <span class="o">(</span><span class="bp">Π</span> <span class="n">i</span> <span class="o">:</span> <span class="n">I</span><span class="o">,</span> <span class="n">f</span> <span class="n">i</span><span class="o">)</span> <span class="o">:=</span>

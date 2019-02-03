@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/179818LeanTogether2019/88568Unificationhintspaper.html
 ---
 
-## Stream: [Lean Together 2019](index.html)
-### Topic: [Unification hints paper](88568Unificationhintspaper.html)
+## Stream: [Lean Together 2019](https://leanprover-community.github.io/archive/179818LeanTogether2019/index.html)
+### Topic: [Unification hints paper](https://leanprover-community.github.io/archive/179818LeanTogether2019/88568Unificationhintspaper.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ William Whistler (Jan 10 2019 at 17:01)](https://leanprover.zulipchat.com/#narrow/stream/179818-Lean%20Together%202019/topic/Unification%20hints%20paper/near/154848944):
 <p><a href="https://www.cs.unibo.it/~sacerdot/PAPERS/tphol09.pdf" target="_blank" title="https://www.cs.unibo.it/~sacerdot/PAPERS/tphol09.pdf">https://www.cs.unibo.it/~sacerdot/PAPERS/tphol09.pdf</a></p>

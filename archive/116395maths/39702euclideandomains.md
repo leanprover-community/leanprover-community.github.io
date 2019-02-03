@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/39702euclideandomains.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [euclidean domains](39702euclideandomains.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [euclidean domains](https://leanprover-community.github.io/archive/116395maths/39702euclideandomains.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Johan Commelin (Jul 20 2018 at 09:25)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/euclidean%20domains/near/129982059):
 <p>Currently, the definition of a Euclidean domain has the field</p>

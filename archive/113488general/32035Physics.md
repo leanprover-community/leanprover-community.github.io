@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/32035Physics.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [Physics?](32035Physics.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [Physics?](https://leanprover-community.github.io/archive/113488general/32035Physics.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Wojciech Nawrocki (Sep 27 2018 at 15:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Physics%3F/near/134742787):
 <p>Hey, I'm curious - are there any physicists here looking at formalising some of the vector algebra for quantum theory? I couldn't find anything related to e.g. Hilbert spaces.</p>

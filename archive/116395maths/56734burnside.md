@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/56734burnside.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [burnside!](56734burnside.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [burnside!](https://leanprover-community.github.io/archive/116395maths/56734burnside.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Apr 16 2018 at 07:03)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/burnside%21/near/125134940):
 <div class="codehilite"><pre><span></span>theorem burnside : nonempty ((Σ g, fixed G X g) ≃ (orbits G X × G)) :=

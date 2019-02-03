@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/83252nonemptyquotient.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [nonempty quotient](83252nonemptyquotient.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [nonempty quotient](https://leanprover-community.github.io/archive/113488general/83252nonemptyquotient.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Patrick Massot (Sep 30 2018 at 22:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nonempty%20quotient/near/134934075):
 <p>Do we already have something like:</p>

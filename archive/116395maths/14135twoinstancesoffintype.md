@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/14135twoinstancesoffintype.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [two instances of fintype](14135twoinstancesoffintype.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [two instances of fintype](https://leanprover-community.github.io/archive/116395maths/14135twoinstancesoffintype.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Casper Putz (Jan 18 2019 at 13:07)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/two%20instances%20of%20fintype/near/156362890):
 <p>Hi, I have the following code where I explicitely constructed an equivalence between two types <code>α</code> and <code>β → γ</code>, and all types are fintypes. I want to conclude that <code>α.card = γ.card ^ β.card</code> but I have a problem with instances. I would like to something like this:</p>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/48009leangolf.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [lean golf](48009leangolf.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [lean golf](https://leanprover-community.github.io/archive/113488general/48009leangolf.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Sean Leather (Feb 28 2018 at 14:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20golf/near/123089630):
 <p>Shortest proof of this?</p>

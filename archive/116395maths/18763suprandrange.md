@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/18763suprandrange.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [supr and range](18763suprandrange.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [supr and range](https://leanprover-community.github.io/archive/116395maths/18763suprandrange.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Sebastien Gouezel (Nov 13 2018 at 18:22)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/supr%20and%20range/near/147609120):
 <p>There are the following definitions in mathlib:</p>

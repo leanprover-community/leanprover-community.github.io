@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/20171rewriteoccs.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [rewrite occs](20171rewriteoccs.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [rewrite occs](https://leanprover-community.github.io/archive/113488general/20171rewriteoccs.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Scott Morrison (Mar 10 2018 at 22:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewrite%20occs/near/123546271):
 <p>Can anyone help me understand why the 2nd example in the following doesn't work?</p>

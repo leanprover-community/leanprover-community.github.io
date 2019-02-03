@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/91735isidealnegiff.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [is_ideal.neg_iff](91735isidealnegiff.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [is_ideal.neg_iff](https://leanprover-community.github.io/archive/116395maths/91735isidealnegiff.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Patrick Massot (Oct 06 2018 at 16:15)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/is_ideal.neg_iff/near/135313777):
 <div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">ring_theory</span><span class="bp">.</span><span class="n">ideals</span>

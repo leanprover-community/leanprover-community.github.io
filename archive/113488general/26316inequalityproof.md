@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/26316inequalityproof.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [inequality proof](26316inequalityproof.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [inequality proof](https://leanprover-community.github.io/archive/113488general/26316inequalityproof.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Sullivan (Sep 14 2018 at 16:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inequality%20proof/near/133955902):
 <p>What is the simplest exact proof term that proves ~0=1 (not zero equals one)?</p>

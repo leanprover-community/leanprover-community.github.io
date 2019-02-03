@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/144837PRreviews/80970392emetricspaces.html
 ---
 
-## Stream: [PR reviews](index.html)
-### Topic: [#392 emetric spaces](80970392emetricspaces.html)
+## Stream: [PR reviews](https://leanprover-community.github.io/archive/144837PRreviews/index.html)
+### Topic: [#392 emetric spaces](https://leanprover-community.github.io/archive/144837PRreviews/80970392emetricspaces.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Johan Commelin (Oct 08 2018 at 09:10)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23392%20emetric%20spaces/near/135384309):
 <p>I am wondering: <code>dist</code> of a metric space takes values in <code>ℝ</code>, while the <code>edist</code> of an emetric space takes values in <code>ennreal</code>. Should the latter maybe take values in <code>with_top ℝ</code>?</p>

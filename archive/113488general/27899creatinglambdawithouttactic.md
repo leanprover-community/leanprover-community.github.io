@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/27899creatinglambdawithouttactic.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [creating lambda without tactic](27899creatinglambdawithouttactic.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [creating lambda without tactic](https://leanprover-community.github.io/archive/113488general/27899creatinglambdawithouttactic.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Zesen Qian (Jul 30 2018 at 18:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20lambda%20without%20tactic/near/130588564):
 <p>meta programming problem: So I have a function body represented as <code>expr -&gt; expr</code>, which receives a reference to the argument, and return the body. Is it possible to abstract the argument away(that is, wrap it with a lambda) and get the anonymous function back as <code>expr</code>?</p>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/06334setext.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [setext](06334setext.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [setext](https://leanprover-community.github.io/archive/113488general/06334setext.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Patrick Massot (Apr 16 2018 at 18:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setext/near/125155122):
 <p>Core lib has a <code>funext</code> tactic which allows to replace <code>apply funext, intro x</code> by <code>funext x</code>. Would it be a good idea to copy the definition of this tactic to get a <code>setext</code> tactic?</p>

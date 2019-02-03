@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/50346leanmodecompany.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [lean-mode company](50346leanmodecompany.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [lean-mode company](https://leanprover-community.github.io/archive/113489newmembers/50346leanmodecompany.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ petercommand (Nov 15 2018 at 06:29)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/lean-mode%20company/near/147721970):
 <p>company-complete isn't working for me..(I can run M-x company-company, but nothing shows up). I am using lean mode + emacs</p>

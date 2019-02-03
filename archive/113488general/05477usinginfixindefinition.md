@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/05477usinginfixindefinition.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [using infix in definition](05477usinginfixindefinition.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [using infix in definition](https://leanprover-community.github.io/archive/113488general/05477usinginfixindefinition.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Minchao Wu (Mar 21 2018 at 11:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/using%20infix%20in%20definition/near/124004353):
 <p>I remember that in Lean 2 we could use <code>infix</code> inside a definition, referring  to the thing being defined.<br>

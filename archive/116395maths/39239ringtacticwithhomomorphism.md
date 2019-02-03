@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/39239ringtacticwithhomomorphism.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [ring tactic with homomorphism](39239ringtacticwithhomomorphism.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [ring tactic with homomorphism](https://leanprover-community.github.io/archive/116395maths/39239ringtacticwithhomomorphism.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Johan Commelin (Apr 30 2018 at 14:53)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20tactic%20with%20homomorphism/near/125892370):
 <p>Consider the following MWE</p>

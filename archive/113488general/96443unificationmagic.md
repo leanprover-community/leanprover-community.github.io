@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/96443unificationmagic.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [unification magic](96443unificationmagic.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [unification magic](https://leanprover-community.github.io/archive/113488general/96443unificationmagic.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Apr 23 2018 at 00:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unification%20magic/near/125543006):
 <p>I wrote a <code>noncomputable definition</code> which was an instance of a structure. The structure had 6 fields, and I was filling in the last one, which was a proof. The other 5 fields had already used a bunch of constructions. I was filling in this 6th field and I started by getting the syntax right and writing <code>_</code> for several things, including a function <code>_ : R -&gt; S</code> between two rings. Once I'd got the syntax correct and complete, Lean evaluated the term and to my surprise found no problems with it.  In particular I think it must have figured out which function I meant.</p>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/21641dependentcongrarg.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [dependent congr_arg?](21641dependentcongrarg.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [dependent congr_arg?](https://leanprover-community.github.io/archive/113488general/21641dependentcongrarg.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Apr 23 2018 at 18:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dependent%20congr_arg%3F/near/125575693):
 <p>I am assuming this is provable: <code>example (f : ℕ → ℕ) (g : ℕ → ℕ) (H1 : f = g) (H2 : f 0 = 0) (P : Π (h : ℕ → ℕ), h 0 = 0 → Type) : P f H2 = P g (H1 ▸ H2) := sorry</code></p>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/00033implicitargumentsandring.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [implicit arguments, and `ring`](00033implicitargumentsandring.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [implicit arguments, and `ring`](https://leanprover-community.github.io/archive/113488general/00033implicitargumentsandring.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Scott Morrison (Sep 29 2018 at 13:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20arguments%2C%20and%20%60ring%60/near/134878744):
 <p>Hi <span class="user-mention" data-user-id="110049">@Mario Carneiro</span>, I noticed an unfortunate feature of <code>ring</code>.</p>

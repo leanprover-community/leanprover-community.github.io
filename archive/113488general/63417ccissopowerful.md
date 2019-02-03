@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/63417ccissopowerful.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [cc is so powerful](63417ccissopowerful.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [cc is so powerful](https://leanprover-community.github.io/archive/113488general/63417ccissopowerful.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Apr 21 2018 at 15:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cc%20is%20so%20powerful/near/125493933):
 <p><code>cc</code> resolved the following:</p>

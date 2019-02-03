@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/46077ordinals.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [ordinals](46077ordinals.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [ordinals](https://leanprover-community.github.io/archive/116395maths/46077ordinals.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Reid Barton (Oct 04 2018 at 20:00)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ordinals/near/135205944):
 <p>If I am interested in sequences indexed by <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>{</mo><mspace width="0.16667em"></mspace><mi>α</mi><mo>∣</mo><mi>α</mi><mo>≤</mo><mi>γ</mi><mspace width="0.16667em"></mspace><mo>}</mo></mrow><annotation encoding="application/x-tex">\{\,\alpha \mid \alpha \le \gamma\,\}</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.75em;"></span><span class="strut bottom" style="height:1em;vertical-align:-0.25em;"></span><span class="base"><span class="mopen">{</span><span class="mord mathit"><span class="mspace thinspace"></span><span class="mord mathit" style="margin-right:0.0037em;">α</span></span><span class="mrel">∣</span><span class="mord mathit" style="margin-right:0.0037em;">α</span><span class="mrel">≤</span><span class="mord mathit" style="margin-right:0.05556em;">γ</span><span class="mclose"><span class="mspace thinspace"></span><span class="mclose">}</span></span></span></span></span> for varying ordinals <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>γ</mi></mrow><annotation encoding="application/x-tex">\gamma</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.43056em;"></span><span class="strut bottom" style="height:0.625em;vertical-align:-0.19444em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.05556em;">γ</span></span></span></span>, is it likely to be more convenient to just work with sequences indexed by arbitrary well-ordered sets?<br>

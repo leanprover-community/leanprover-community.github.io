@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/94368FeedbackHeineBorelinprogress.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [Feedback (Heine Borel in progress)](94368FeedbackHeineBorelinprogress.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [Feedback (Heine Borel in progress)](https://leanprover-community.github.io/archive/113489newmembers/94368FeedbackHeineBorelinprogress.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Guillermo Barajas Ayuso (Sep 16 2018 at 01:43)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Feedback%20%28Heine%20Borel%20in%20progress%29/near/134030478):
 <p>Hi, I have uploaded some code in the link  <a href="https://github.com/ImperialCollegeLondon/xena-UROP-2018/blob/master/src/Topology/Heine-Borel%20(incomplete)" target="_blank" title="https://github.com/ImperialCollegeLondon/xena-UROP-2018/blob/master/src/Topology/Heine-Borel%20(incomplete)">https://github.com/ImperialCollegeLondon/xena-UROP-2018/blob/master/src/Topology/Heine-Borel%20(incomplete)</a> , I'll leave it here in case you want to give me some feedback. Thank you for your time! :-)</p>

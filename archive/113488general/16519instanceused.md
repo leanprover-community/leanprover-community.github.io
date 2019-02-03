@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/16519instanceused.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [instance used](16519instanceused.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [instance used](https://leanprover-community.github.io/archive/113488general/16519instanceused.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ petercommand (Nov 18 2018 at 17:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/instance%20used/near/147922878):
 <p>is there some way to show which instance (of a class) is actually used in a definition? If I use <code>set_option trace.class_instances true</code>, it lists lots of possible instances, but I only want the actual instance used</p>

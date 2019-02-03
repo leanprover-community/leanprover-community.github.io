@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/30861bundledbases.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [bundled bases](30861bundledbases.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [bundled bases](https://leanprover-community.github.io/archive/116395maths/30861bundledbases.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Johan Commelin (Oct 17 2018 at 09:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundled%20bases/near/135955551):
 <p>I pushed the results of yesterdays painful efforts to <a href="https://github.com/leanprover-community/mathlib/blob/open_set/category_theory/examples/topological_spaces.lean" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/open_set/category_theory/examples/topological_spaces.lean">https://github.com/leanprover-community/mathlib/blob/open_set/category_theory/examples/topological_spaces.lean</a>. This wouldn't have been possible without the great help of <span class="user-mention" data-user-id="110294">@Johannes Hölzl</span> <br>

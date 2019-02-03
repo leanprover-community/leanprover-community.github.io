@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/30267morelimitstuff.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [more limit stuff](30267morelimitstuff.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [more limit stuff](https://leanprover-community.github.io/archive/116395maths/30267morelimitstuff.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Johan Commelin (Dec 17 2018 at 05:08)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/more%20limit%20stuff/near/151910753):
 <p>I've got the following lemmas</p>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/02093provingaa2a.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [proving a + a = 2* a](02093provingaa2a.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [proving a + a = 2* a](https://leanprover-community.github.io/archive/113489newmembers/02093provingaa2a.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Atze van der Ploeg (Jan 11 2019 at 11:53)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/proving%20a%20%2B%20a%20%3D%202%2A%20a/near/154909221):
 <p>I'm trying to prove the shocking lemma ∀ n : ℕ, n + n = 2*n , how do i tell lean to unfold the definition of *?</p>

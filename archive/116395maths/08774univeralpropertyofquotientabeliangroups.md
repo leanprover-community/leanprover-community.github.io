@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/08774univeralpropertyofquotientabeliangroups.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [univeral property of quotient abelian groups](08774univeralpropertyofquotientabeliangroups.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [univeral property of quotient abelian groups](https://leanprover-community.github.io/archive/116395maths/08774univeralpropertyofquotientabeliangroups.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Jul 19 2018 at 22:03)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/univeral%20property%20of%20quotient%20abelian%20groups/near/129953243):
 <p>I have a <code>comm_group G</code> and a subgroup <code>N</code>, which is the kernel of an <code>is_group_hom f : G -&gt; H</code>. I'd like a quotient group <code>G/N</code>, and an injective group homomorphism from <code>G/N</code> to <code>H</code>. The quotient has been made for general groups (in <code>group_theory.coset</code>) but not the injective hom as far as I can see, and also for modules over an arbitrary ring (with the injective hom), so I can either build the injection for general groups or I can persuade Lean that an abelian group is the same as a Z-module. Have either of these been done? Neither should be hard, but which to do?</p>

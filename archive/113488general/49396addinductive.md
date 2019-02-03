@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/49396addinductive.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [add_inductive](49396addinductive.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [add_inductive](https://leanprover-community.github.io/archive/113488general/49396addinductive.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Jakob von Raumer (Mar 21 2018 at 14:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/add_inductive/near/124010223):
 <p>Why does</p>

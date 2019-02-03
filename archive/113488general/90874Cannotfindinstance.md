@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/90874Cannotfindinstance.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [Cannot find instance](90874Cannotfindinstance.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [Cannot find instance](https://leanprover-community.github.io/archive/113488general/90874Cannotfindinstance.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ AHan (Dec 04 2018 at 07:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Cannot%20find%20instance/near/150826554):
 <p>In <code>mathlib/data/finsupp.lean</code> the instance <code>has_add</code> of <code>finsupp</code> structure was already proved,<br>

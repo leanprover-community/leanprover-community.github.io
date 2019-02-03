@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/144837PRreviews/09235510oppositecategories.html
 ---
 
-## Stream: [PR reviews](index.html)
-### Topic: [#510 opposite categories](09235510oppositecategories.html)
+## Stream: [PR reviews](https://leanprover-community.github.io/archive/144837PRreviews/index.html)
+### Topic: [#510 opposite categories](https://leanprover-community.github.io/archive/144837PRreviews/09235510oppositecategories.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Johan Commelin (Dec 20 2018 at 08:39)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23510%20opposite%20categories/near/152239436):
 <p><span class="user-mention" data-user-id="110087">@Scott Morrison</span> I saw you fixed some stuff, but Travis is still complaining... If you don't have time for this, just let me know, and I'll try to take a look.</p>

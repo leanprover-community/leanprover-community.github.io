@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/76545rcases.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [rcases?](76545rcases.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [rcases?](https://leanprover-community.github.io/archive/113488general/76545rcases.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Reid Barton (Sep 07 2018 at 12:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rcases%3F/near/133502924):
 <p>Is there a way to use <code>rcases</code> with <code>?</code> to get hints, or just <code>rintros</code>?</p>

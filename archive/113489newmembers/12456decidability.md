@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/12456decidability.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [decidability](12456decidability.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [decidability](https://leanprover-community.github.io/archive/113489newmembers/12456decidability.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Keeley Hoek (Nov 12 2018 at 12:55)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/decidability/near/147521031):
 <p>How can you ask lean to decide something which is decidable? e.g. <code>prime n</code></p>

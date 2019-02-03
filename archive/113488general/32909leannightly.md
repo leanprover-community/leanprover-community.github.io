@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/32909leannightly.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [lean-nightly](32909leannightly.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [lean-nightly](https://leanprover-community.github.io/archive/113488general/32909leannightly.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Simon Hudon (Feb 27 2018 at 10:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean-nightly/near/123035727):
 <p>Is there a way to find out which commit yielded the latest nightly build without installing it? I used to go by the list of commits and select the latest green button but I seem to be missing some</p>

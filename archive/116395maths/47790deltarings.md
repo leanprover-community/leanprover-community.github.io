@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/47790deltarings.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [delta rings](47790deltarings.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [delta rings](https://leanprover-community.github.io/archive/116395maths/47790deltarings.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Johan Commelin (Jul 20 2018 at 14:17)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/delta%20rings/near/129993188):
 <p>Fix a prime <code>p</code>.</p>

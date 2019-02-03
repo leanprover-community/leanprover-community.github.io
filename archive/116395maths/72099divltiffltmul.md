@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/72099divltiffltmul.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [div_lt_iff_lt_mul](72099divltiffltmul.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [div_lt_iff_lt_mul](https://leanprover-community.github.io/archive/116395maths/72099divltiffltmul.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Jan 15 2019 at 12:21)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/div_lt_iff_lt_mul/near/155161891):
 <p>I just wanted to get from <code>a&lt;b*c</code> to <code>a/c&lt;b</code> (on the real  numbers) with a hypothesis that <code>c&gt;0</code>. I was surprised to find that although all three of <code>div_lt_iff_lt_mul</code>, <code>lt_mul_of_div_lt</code> and <code>div_lt_of_lt_mul</code> were in Lean, they were in <code>data.int.basic</code> :-) and only applied to ints. This should be some general lemma about ordered monoids or some such thing, right? I might start doing what Chris always encourages me to do, which is to make a super-short PR, assuming that this is actually something missing from mathlib. But is it there and I missed it?</p>

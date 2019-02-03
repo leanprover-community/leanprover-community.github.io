@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/45033Sillyfunctiononthereals.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [Silly function on the reals](45033Sillyfunctiononthereals.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [Silly function on the reals](https://leanprover-community.github.io/archive/116395maths/45033Sillyfunctiononthereals.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Chris Hughes (Jul 28 2018 at 20:41)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Silly%20function%20on%20the%20reals/near/130481903):
 <p>I overheard people talking about this function the other day. Can anyone prove its existence?</p>

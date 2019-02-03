@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/24531guesstheerror.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [guess the error](24531guesstheerror.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [guess the error](https://leanprover-community.github.io/archive/113488general/24531guesstheerror.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Mar 29 2018 at 17:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/guess%20the%20error/near/124371146):
 <div class="codehilite"><pre><span></span>theorem  easy : let H : 0  &lt;  2  := dec_trivial in

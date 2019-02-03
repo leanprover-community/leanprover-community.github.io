@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/62484itacticinleanparser.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [itactic in lean.parser](62484itacticinleanparser.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [itactic in lean.parser](https://leanprover-community.github.io/archive/113488general/62484itacticinleanparser.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Keeley Hoek (Nov 22 2018 at 05:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/itactic%20in%20lean.parser/near/148152572):
 <p>Inside a <code>lean.parser</code> monad, I can for example read a <code>name</code> by</p>

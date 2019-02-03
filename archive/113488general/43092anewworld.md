@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/43092anewworld.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [a new world](43092anewworld.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [a new world](https://leanprover-community.github.io/archive/113488general/43092anewworld.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Scott Morrison (Mar 26 2018 at 02:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/a%20new%20world/near/124205495):
 <p>A student, to me earlier today: "I have been reading [some book], and to make sure I am really understanding it, I am implementing some of it in [a different interactive theorem prover]".</p>

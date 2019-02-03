@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/60371theoremAreaofCircle.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [theorem Area_of_Circle](60371theoremAreaofCircle.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [theorem Area_of_Circle](https://leanprover-community.github.io/archive/113489newmembers/60371theoremAreaofCircle.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Mii Nguyen (Nov 28 2018 at 16:41)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/theorem%20Area_of_Circle/near/148720034):
 <p>Hello. I'm My, a very new beginner of Lean user.  I come from Formal Abstract's group in Hanoi. Recently I try to formalize the theorem of  'Area of a circle'. So far I have</p>

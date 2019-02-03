@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/55612latticehomomorphisms.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [lattice homomorphisms](55612latticehomomorphisms.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [lattice homomorphisms](https://leanprover-community.github.io/archive/113488general/55612latticehomomorphisms.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Simon Hudon (Oct 05 2018 at 23:52)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lattice%20homomorphisms/near/135284232):
 <p>Is there such a thing as a lattice homomorphism in mathlib?</p>

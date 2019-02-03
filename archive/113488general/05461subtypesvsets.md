@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/05461subtypesvsets.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [subtypes v sets](05461subtypesvsets.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [subtypes v sets](https://leanprover-community.github.io/archive/113488general/05461subtypesvsets.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Mar 04 2018 at 01:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subtypes%20v%20sets/near/123245378):
 <p>I have <code>U : set alpha</code> and I want to make a Pi type which morally is <code>\Pi P : U, (some function of P)</code></p>

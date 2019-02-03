@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/36869linarithnat.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [linarith & nat](36869linarithnat.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [linarith & nat](https://leanprover-community.github.io/archive/113488general/36869linarithnat.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Reid Barton (Sep 30 2018 at 13:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/linarith%20%26%20nat/near/134918920):
 <p><span class="user-mention" data-user-id="110596">@Rob Lewis</span> I started remembering to use <code>linarith</code> to solve some easy goals like <code>f &lt; g -&gt; -f - -g &lt;= 0 -&gt; false</code>.<br>

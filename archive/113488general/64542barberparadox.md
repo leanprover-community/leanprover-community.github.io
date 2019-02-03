@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/64542barberparadox.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [barber paradox](64542barberparadox.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [barber paradox](https://leanprover-community.github.io/archive/113488general/64542barberparadox.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Cameron Crossman (Dec 11 2018 at 21:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/barber%20paradox/near/151478623):
 <p>Can someone please help me with the barber paradox proof in lean?</p>

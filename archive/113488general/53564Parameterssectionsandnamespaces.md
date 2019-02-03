@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/53564Parameterssectionsandnamespaces.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [Parameters, sections and namespaces](53564Parameterssectionsandnamespaces.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [Parameters, sections and namespaces](https://leanprover-community.github.io/archive/113488general/53564Parameterssectionsandnamespaces.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Mark Dickinson (Dec 28 2018 at 10:37)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Parameters%2C%20sections%20and%20namespaces/near/152645325):
 <p>I've just encountered the fact that parameters behave differently inside and outside namespaces, and was wondering whether anyone has either an explanation or a pointer to documentation. Here's a toy example (cut down from a real one):</p>

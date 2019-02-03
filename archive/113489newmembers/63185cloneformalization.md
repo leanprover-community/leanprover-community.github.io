@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/63185cloneformalization.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [clone formalization](63185cloneformalization.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [clone formalization](https://leanprover-community.github.io/archive/113489newmembers/63185cloneformalization.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Miroslav Olšák (Oct 23 2018 at 12:57)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/clone%20formalization/near/136329846):
 <p>Hello everybody, we tried a testing formalization of a simple proposition about clones in several ITP's for comparison. LEAN seems pretty nice so far. However, I believe that there should be a better approach to certain parts the proof (if we just knew LEAN better).<br>

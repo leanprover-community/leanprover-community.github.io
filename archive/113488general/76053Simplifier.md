@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/76053Simplifier.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [Simplifier](76053Simplifier.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [Simplifier](https://leanprover-community.github.io/archive/113488general/76053Simplifier.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Sebastien Gouezel (Oct 23 2018 at 11:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Simplifier/near/136326024):
 <p>I'm realizing I don't understand how the simplifier works. I have a complicated goal involving product spaces, and in the middle of this goal there is the expression <code>(f, x).fst</code>. When I apply <code>simp</code> to my goal, it does not reduce to <code>f</code>. To help simp, I wrote down an auxiliary statement exactly with the good types and elements <code>f</code> and <code>x</code>, but still it does not help <code>simp</code>. Even when I turn on <code>set_option pp.all true</code> I can't see what is wrong.<br>

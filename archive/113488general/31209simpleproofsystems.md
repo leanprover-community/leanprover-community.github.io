@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/31209simpleproofsystems.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [simple proof systems](31209simpleproofsystems.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [simple proof systems](https://leanprover-community.github.io/archive/113488general/31209simpleproofsystems.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Reid Barton (Oct 14 2018 at 04:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simple%20proof%20systems/near/135758238):
 <p>Sorry in advance for a rather vague question, hopefully I can make it clear what I'm looking for.<br>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/00690VSCodehoverissue.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [VS Code hover issue](00690VSCodehoverissue.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [VS Code hover issue](https://leanprover-community.github.io/archive/113488general/00690VSCodehoverissue.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Jan 12 2019 at 20:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/VS%20Code%20hover%20issue/near/154997129):
 <div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">A</span> <span class="n">C</span> <span class="n">D</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">(</span><span class="n">zzz</span> <span class="o">:</span> <span class="n">A</span> <span class="bp">→</span> <span class="n">C</span><span class="o">)</span> <span class="o">(</span><span class="n">g</span> <span class="o">:</span> <span class="n">C</span> <span class="bp">→</span> <span class="n">C</span> <span class="bp">→</span> <span class="n">D</span><span class="o">)</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">A</span><span class="o">)</span> <span class="o">:</span> <span class="n">D</span> <span class="o">:=</span>

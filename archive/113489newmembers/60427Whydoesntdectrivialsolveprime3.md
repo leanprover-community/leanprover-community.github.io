@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/60427Whydoesntdectrivialsolveprime3.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [Why doesn't dec_trivial solve `prime 3`?](60427Whydoesntdectrivialsolveprime3.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [Why doesn't dec_trivial solve `prime 3`?](https://leanprover-community.github.io/archive/113489newmembers/60427Whydoesntdectrivialsolveprime3.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Abhimanyu Pallavi Sudhir (Oct 24 2018 at 17:20)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Why%20doesn%27t%20dec_trivial%20solve%20%60prime%203%60%3F/near/136416609):
 <p>In <code>prime.lean</code>, the following statements are made:</p>

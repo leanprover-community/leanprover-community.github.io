@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/20267ProblemswiththeinstallationofmathlibLinux.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [Problems with the installation of mathlib (Linux)](20267ProblemswiththeinstallationofmathlibLinux.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [Problems with the installation of mathlib (Linux)](https://leanprover-community.github.io/archive/113488general/20267ProblemswiththeinstallationofmathlibLinux.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Bruno Bentzen (Oct 10 2018 at 05:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Problems%20with%20the%20installation%20of%20mathlib%20%28Linux%29/near/135515887):
 <p>Hello,</p>

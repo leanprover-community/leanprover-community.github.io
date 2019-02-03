@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/27671optionrecelim.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [option.rec.elim](27671optionrecelim.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [option.rec.elim](https://leanprover-community.github.io/archive/113488general/27671optionrecelim.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Jul 21 2018 at 14:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/option.rec.elim/near/130053317):
 <p>I don't want to prove the goal here, I want to prove an intermediate lemma: <code>∀ x : γ, option.map f (k x) = j x</code>. </p>

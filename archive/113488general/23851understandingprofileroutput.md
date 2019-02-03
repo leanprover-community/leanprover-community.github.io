@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/23851understandingprofileroutput.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [understanding profiler output](23851understandingprofileroutput.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [understanding profiler output](https://leanprover-community.github.io/archive/113488general/23851understandingprofileroutput.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (May 11 2018 at 09:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/understanding%20profiler%20output/near/126403538):
 <p>So I am 2/3 of the way through a pretty big proof which I am currently reluctant to break up into smaller pieces.</p>

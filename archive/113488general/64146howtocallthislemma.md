@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/64146howtocallthislemma.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [how to call this lemma](64146howtocallthislemma.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [how to call this lemma](https://leanprover-community.github.io/archive/113488general/64146howtocallthislemma.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Johan Commelin (Aug 07 2018 at 14:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20call%20this%20lemma/near/131039906):
 <div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">quux</span> <span class="o">{</span><span class="n">A</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">add_comm_group</span> <span class="n">A</span><span class="o">]</span> <span class="o">{</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">}</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">fin</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="bp">→</span> <span class="n">A</span><span class="o">)</span> <span class="o">:</span> <span class="n">sum</span> <span class="n">univ</span> <span class="n">f</span> <span class="bp">=</span> <span class="n">f</span> <span class="n">n</span> <span class="bp">+</span> <span class="n">sum</span> <span class="n">univ</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">i</span> <span class="o">:</span> <span class="n">fin</span> <span class="n">n</span><span class="o">,</span> <span class="n">f</span> <span class="n">i</span><span class="bp">.</span><span class="n">raise</span><span class="o">)</span> <span class="o">:=</span>

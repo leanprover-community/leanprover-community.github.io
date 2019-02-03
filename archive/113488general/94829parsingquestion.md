@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/94829parsingquestion.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [parsing question](94829parsingquestion.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [parsing question](https://leanprover-community.github.io/archive/113488general/94829parsingquestion.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Jan 19 2019 at 18:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/parsing%20question/near/156445528):
 <p>tl;dr: what are the binding powers of <code>Π  _ , _</code> and <code>→</code> in Lean's dependent type theory? Does this even make sense?</p>

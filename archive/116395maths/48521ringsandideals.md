@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/48521ringsandideals.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [rings and ideals](48521ringsandideals.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [rings and ideals](https://leanprover-community.github.io/archive/116395maths/48521ringsandideals.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Patrick Massot (Jul 21 2018 at 13:34)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/rings%20and%20ideals/near/130050846):
 <p><span class="user-mention" data-user-id="110064">@Kenny Lau</span> and <span class="user-mention" data-user-id="110044">@Chris Hughes</span> with the recent merge of <a href="https://github.com/leanprover/mathlib/pull/196" target="_blank" title="https://github.com/leanprover/mathlib/pull/196">PR196</a> how does current mathlib compare to <a href="https://github.com/leanprover/lean2/blob/master/library/theories/commutative_algebra/ideal.lean" target="_blank" title="https://github.com/leanprover/lean2/blob/master/library/theories/commutative_algebra/ideal.lean">Lean 2 lib</a>?</p>

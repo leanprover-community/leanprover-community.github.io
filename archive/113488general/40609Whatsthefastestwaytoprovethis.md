@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/40609Whatsthefastestwaytoprovethis.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [What's the fastest way to prove this?](40609Whatsthefastestwaytoprovethis.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [What's the fastest way to prove this?](https://leanprover-community.github.io/archive/113488general/40609Whatsthefastestwaytoprovethis.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (May 27 2018 at 02:27)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%27s%20the%20fastest%20way%20to%20prove%20this%3F/near/127145665):
 <div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">m</span> <span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span> <span class="n">m</span> <span class="bp">=</span> <span class="n">m</span> <span class="bp">*</span> <span class="n">n</span> <span class="bp">→</span> <span class="n">m</span> <span class="bp">=</span> <span class="mi">0</span> <span class="bp">∨</span> <span class="n">n</span> <span class="bp">=</span> <span class="mi">1</span> <span class="o">:=</span> <span class="n">sorry</span>

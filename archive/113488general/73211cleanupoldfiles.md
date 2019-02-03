@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/73211cleanupoldfiles.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [clean up old files](73211cleanupoldfiles.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [clean up old files](https://leanprover-community.github.io/archive/113488general/73211cleanupoldfiles.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Reid Barton (Jan 22 2019 at 15:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/clean%20up%20old%20files/near/156607187):
 <p>I wrote two Python scripts this morning to help with the transition of moving everything to <code>src/</code>. One deletes <code>.olean</code> files without a corresponding <code>.lean</code> file, the other deletes directory trees that contain no files.<br>

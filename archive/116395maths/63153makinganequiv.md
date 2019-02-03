@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/63153makinganequiv.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [making an equiv](63153makinganequiv.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [making an equiv](https://leanprover-community.github.io/archive/116395maths/63153makinganequiv.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Ali Sever (Sep 07 2018 at 21:21)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/making%20an%20equiv/near/133531588):
 <p>I have <code>f : α → α → α → α → α → α → Prop</code> that says <code>a ≠ b ∧ c ≠ b ∧ d ≠ e ∧ f ≠ e ∧ blah</code>. I have shown <code>f</code>is reflexive, symmetric and transitive (i.e. an equiv on α × α × α), but only when <code>a ≠ b ∧ c ≠ b</code>. Now I want to make the equiv classes, I'm having trouble with deciding what to do.<br>

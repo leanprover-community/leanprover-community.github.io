@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/66476tipforfillinginholes.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [tip for filling in holes](66476tipforfillinginholes.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [tip for filling in holes](https://leanprover-community.github.io/archive/113488general/66476tipforfillinginholes.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Apr 20 2018 at 12:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tip%20for%20filling%20in%20holes/near/125425455):
 <p>Sometimes in Lean you sit down to write a definition or a theorem, knowing that it will be really easy and fun. I was just in that situation. I need to write down some maps between localized rings and prove that they have some properties, but now I know that the localization interface is excellent and that pretty much every single one of my proofs will look like <code>name_of_function _ _ _ _ _</code>.</p>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/00411composingtactics.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [composing tactics](00411composingtactics.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [composing tactics](https://leanprover-community.github.io/archive/113488general/00411composingtactics.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Andrew Ashworth (Jun 02 2018 at 10:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/composing%20tactics/near/127458510):
 <p>Suppose I prove a goal using <code>by repeat {constructor}</code>. What is the syntax for creating a new def of type <code>tactic unit</code> that does the same thing? Do I have to drop down into using the non-interactive tactics?</p>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/98536reducible.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [@[reducible]](98536reducible.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [@[reducible]](https://leanprover-community.github.io/archive/113488general/98536reducible.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Apr 01 2018 at 12:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%40%5Breducible%5D/near/124484786):
 <p>When should I use <code>@[reducible] def</code> and when to just use <code>def</code>?</p>

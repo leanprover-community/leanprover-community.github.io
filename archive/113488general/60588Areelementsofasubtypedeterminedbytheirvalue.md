@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/60588Areelementsofasubtypedeterminedbytheirvalue.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [Are elements of a subtype determined by their value?](60588Areelementsofasubtypedeterminedbytheirvalue.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [Are elements of a subtype determined by their value?](https://leanprover-community.github.io/archive/113488general/60588Areelementsofasubtypedeterminedbytheirvalue.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Johan Commelin (May 22 2018 at 11:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Are%20elements%20of%20a%20subtype%20determined%20by%20their%20value%3F/near/126915156):
 <div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">order</span><span class="bp">.</span><span class="n">bounds</span> <span class="n">algebra</span><span class="bp">.</span><span class="n">ordered_group</span> <span class="n">analysis</span><span class="bp">.</span><span class="n">real</span> <span class="n">analysis</span><span class="bp">.</span><span class="n">topology</span><span class="bp">.</span><span class="n">infinite_sum</span>

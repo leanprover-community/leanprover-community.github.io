@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/84655wittvectors.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [witt vectors](84655wittvectors.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [witt vectors](https://leanprover-community.github.io/archive/116395maths/84655wittvectors.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Johan Commelin (Jul 24 2018 at 16:52)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/witt%20vectors/near/130216141):
 <p>Anyone interested in sharpening his teeth on polynomials is encouraged to look here: <a href="https://gist.github.com/jcommelin/77240367c2815ca0c45da188ba78be19" target="_blank" title="https://gist.github.com/jcommelin/77240367c2815ca0c45da188ba78be19">https://gist.github.com/jcommelin/77240367c2815ca0c45da188ba78be19</a></p>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/56247localnotationforfinn1.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [local notation for fin (n+1)](56247localnotationforfinn1.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [local notation for fin (n+1)](https://leanprover-community.github.io/archive/113488general/56247localnotationforfinn1.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Johan Commelin (May 24 2018 at 10:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/local%20notation%20for%20fin%20%28n%2B1%29/near/127019139):
 <p>How do I make the following work?</p>

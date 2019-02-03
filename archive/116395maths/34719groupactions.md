@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/34719groupactions.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [group actions](34719groupactions.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [group actions](https://leanprover-community.github.io/archive/116395maths/34719groupactions.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Reid Barton (May 01 2018 at 04:25)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/group%20actions/near/125925241):
 <p>Does mathlib know anything about group actions? Say just a group acting on a set?</p>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/53623metauniverses.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [meta + universes](53623metauniverses.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [meta + universes](https://leanprover-community.github.io/archive/113488general/53623metauniverses.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Reid Barton (Sep 14 2018 at 21:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/meta%20%2B%20universes/near/133974969):
 <p>Could/should <span class="emoji emoji-1f340" title="four leaf clover">:four_leaf_clover:</span> allow <code>meta</code> to break "universe safety", e.g., stick a field of type <code>Type</code> inside a structure declared to have type <code>Type</code>?</p>

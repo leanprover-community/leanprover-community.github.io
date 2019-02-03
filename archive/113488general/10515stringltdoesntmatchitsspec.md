@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/10515stringltdoesntmatchitsspec.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [string_lt doesn't match its spec](10515stringltdoesntmatchitsspec.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [string_lt doesn't match its spec](https://leanprover-community.github.io/archive/113488general/10515stringltdoesntmatchitsspec.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Mario Carneiro (Jun 21 2018 at 00:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/string_lt%20doesn%27t%20match%20its%20spec/near/128386824):
 <p><span class="user-mention" data-user-id="110043">@Gabriel Ebner</span> <span class="user-mention" data-user-id="110024">@Sebastian Ullrich</span> I started trying to prove that <code>string.lt</code> is a total order, and then I discovered it's not true:</p>

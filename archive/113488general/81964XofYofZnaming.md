@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/81964XofYofZnaming.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [X_of_Y_of_Z naming](81964XofYofZnaming.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [X_of_Y_of_Z naming](https://leanprover-community.github.io/archive/113488general/81964XofYofZnaming.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Apr 12 2018 at 00:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/X_of_Y_of_Z%20naming/near/124954801):
 <p>What theorem is called <code>X_of_Y_of_Z</code>? Is it <code>Y -&gt; Z -&gt; X</code> or <code>Z -&gt; Y -&gt; X</code> or even something else? Or are things more fluid than this?</p>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/67680proofofsomethingthatevalreducecomputes.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [proof of something that #eval / #reduce computes](67680proofofsomethingthatevalreducecomputes.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [proof of something that #eval / #reduce computes](https://leanprover-community.github.io/archive/113489newmembers/67680proofofsomethingthatevalreducecomputes.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Bryan Gin-ge Chen (Sep 21 2018 at 01:10)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/proof%20of%20something%20that%20%23eval%20/%20%23reduce%20computes/near/134343915):
 <p>If I have:</p>

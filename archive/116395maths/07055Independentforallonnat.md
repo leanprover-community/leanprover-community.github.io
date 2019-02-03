@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/07055Independentforallonnat.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [Independent forall on nat](07055Independentforallonnat.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [Independent forall on nat](https://leanprover-community.github.io/archive/116395maths/07055Independentforallonnat.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Chris Hughes (Aug 03 2018 at 22:11)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Independent%20forall%20on%20nat/near/130859554):
 <p>Are there any known independent propositions of the form <code>∀ x : ℕ, p x </code>, where <code>p</code> is a decidable predicate?</p>

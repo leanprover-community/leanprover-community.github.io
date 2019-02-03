@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/82097derivehandlers.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [derive handlers](82097derivehandlers.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [derive handlers](https://leanprover-community.github.io/archive/113488general/82097derivehandlers.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Simon Hudon (Aug 31 2018 at 22:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/derive%20handlers/near/133148060):
 <p>I'm writing a derive handler,  and while testing it on my third example, I get the following error:</p>

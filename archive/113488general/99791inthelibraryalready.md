@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/99791inthelibraryalready.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [in the library already?](99791inthelibraryalready.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [in the library already?](https://leanprover-community.github.io/archive/113488general/99791inthelibraryalready.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Scott Morrison (Aug 14 2018 at 01:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/in%20the%20library%20already%3F/near/132078222):
 <p>Is this in the library somewhere?</p>

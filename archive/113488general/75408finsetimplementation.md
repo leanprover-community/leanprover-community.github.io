@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/75408finsetimplementation.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [finset implementation](75408finsetimplementation.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [finset implementation](https://leanprover-community.github.io/archive/113488general/75408finsetimplementation.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Sep 08 2018 at 14:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset%20implementation/near/133565775):
 <p>What is the advantage of implementing <code>finset</code> as it is now, over implementing it as <code>multiset</code> quotient by extensionality?</p>

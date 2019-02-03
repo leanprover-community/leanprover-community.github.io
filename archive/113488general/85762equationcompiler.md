@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/85762equationcompiler.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [equation compiler](85762equationcompiler.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [equation compiler](https://leanprover-community.github.io/archive/113488general/85762equationcompiler.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Minchao Wu (Jul 24 2018 at 18:56)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equation%20compiler/near/130222550):
 <p>Hi friends, is there a way to fill up this underscore?</p>

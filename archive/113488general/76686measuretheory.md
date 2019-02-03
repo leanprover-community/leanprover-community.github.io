@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/76686measuretheory.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [measure theory](76686measuretheory.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [measure theory](https://leanprover-community.github.io/archive/113488general/76686measuretheory.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Mario Carneiro (Jul 19 2018 at 22:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/measure%20theory/near/129954535):
 <p>Hey, this is just an ad for the rather large commit I just put out. It doesn't add too much new stuff, instead it is doing what I do best, proving the same things other people did but better. :) It's focused primarily on the measure theory development, with the hope that I can bring down some of the compile times in that area. But there are some more substantive changes:</p>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/44791Definitionsforbindernotations.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [Definitions for binder notations](44791Definitionsforbindernotations.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [Definitions for binder notations](https://leanprover-community.github.io/archive/113488general/44791Definitionsforbindernotations.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Nov 24 2018 at 13:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Definitions%20for%20binder%20notations/near/148275473):
 <p>If I am a learner and I see <code>X ≃ Y</code> and I want to know what it means, I can type <code>#print notation ≃</code>. If I am a learner and I see <code>{x : ℝ | x &gt; 0}</code> and I type <code>#print {</code> I just get a confusing answer. I guess this also happens for <code>(</code> and <code>[</code>. Of course { and [ are defined in Lean somewhere -- but a beginner is unlikely to be able to find them. Finally, if I try and figure out what <code>Π</code> or <code>λ</code> mean, which to a beginner look as much like notation as <code>≃</code>, <code>#print notation</code> just tells me that actually these aren't notation at all. I was going to write some brief docs about this. What other symbols need to be covered? Oh -- <code>∃!</code> and <code>∃</code>. Hmm -- <code>∀</code> has no notation again, I'm surprised it's not defined to be Pi via a standard notation definition.</p>

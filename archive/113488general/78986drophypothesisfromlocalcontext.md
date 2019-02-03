@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/78986drophypothesisfromlocalcontext.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [drop hypothesis from local context](78986drophypothesisfromlocalcontext.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [drop hypothesis from local context](https://leanprover-community.github.io/archive/113488general/78986drophypothesisfromlocalcontext.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Johan Commelin (May 25 2018 at 13:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/drop%20hypothesis%20from%20local%20context/near/127077557):
 <p>Please remind me, which tactic removes hypotheses from the local context? Because I have used up some hyptheses, and I won't use them again, but the proof state is filling an entire screen.</p>

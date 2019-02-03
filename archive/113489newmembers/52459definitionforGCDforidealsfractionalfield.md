@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/52459definitionforGCDforidealsfractionalfield.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [definition for GCD for ideals, fractional field](52459definitionforGCDforidealsfractionalfield.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [definition for GCD for ideals, fractional field](https://leanprover-community.github.io/archive/113489newmembers/52459definitionforGCDforidealsfractionalfield.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Aditya Agarwal (Jan 29 2019 at 04:54)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/definition%20for%20GCD%20for%20ideals%2C%20fractional%20field/near/157078442):
 <p>Is the fractional field for an arbitrary integral domain defined anywhere in mathlib?<br>

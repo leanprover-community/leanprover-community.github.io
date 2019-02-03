@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/14768increasememoryconsumptionthreshold.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [increase memory consumption threshold](14768increasememoryconsumptionthreshold.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [increase memory consumption threshold](https://leanprover-community.github.io/archive/113488general/14768increasememoryconsumptionthreshold.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Aug 02 2018 at 16:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/increase%20memory%20consumption%20threshold/near/130780966):
 <p>Someone is trying to use Lean on a Win 7 machine here and we're constantly running into memory issues. Lean suggests "increase memory consumption threshold" -- is this something which is possible to do and which might actually work? It's a Windows 7 machine using <code>.olean</code> files which were built on Windows 10 :-/ but that's only because none of us are using Win7 so we can't make the .olean files for Win7.</p>

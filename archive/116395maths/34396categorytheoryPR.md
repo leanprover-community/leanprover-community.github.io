@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/34396categorytheoryPR.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [category theory PR](34396categorytheoryPR.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [category theory PR](https://leanprover-community.github.io/archive/116395maths/34396categorytheoryPR.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Scott Morrison (Jun 04 2018 at 05:54)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category%20theory%20PR/near/127526777):
 <p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span>, <span class="user-mention" data-user-id="110032">@Reid Barton</span>, <span class="user-mention" data-user-id="112680">@Johan Commelin</span>, the first cut of my category theory PR has just landed as <a href="https://github.com/leanprover/mathlib/pull/152" target="_blank" title="https://github.com/leanprover/mathlib/pull/152">https://github.com/leanprover/mathlib/pull/152</a>. Criticisms welcome!</p>

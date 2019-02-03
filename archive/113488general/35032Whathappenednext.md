@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/35032Whathappenednext.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [What happened next?](35032Whathappenednext.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [What happened next?](https://leanprover-community.github.io/archive/113488general/35032Whathappenednext.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Apr 04 2018 at 21:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20happened%20next%3F/near/124638598):
 <div class="codehilite"><pre><span></span>example (d : ℕ) (H : 1  =  2  * nat.succ d) : 1  =  2  * d +  2  :=

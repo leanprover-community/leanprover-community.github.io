@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/56977NewlyDownloaded.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [Newly Downloaded](56977NewlyDownloaded.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [Newly Downloaded](https://leanprover-community.github.io/archive/113488general/56977NewlyDownloaded.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Sean G McCain (Oct 31 2018 at 22:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Newly%20Downloaded/near/136883261):
 <p>I am using LEAN for a discrete math class. I just downloaded it for a project. Is there anything that I need to also download or is using the LEAN extension in Visual Studio all I need to get going?</p>

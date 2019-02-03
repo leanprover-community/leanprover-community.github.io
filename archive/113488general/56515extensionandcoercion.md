@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/56515extensionandcoercion.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [extension and coercion](56515extensionandcoercion.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [extension and coercion](https://leanprover-community.github.io/archive/113488general/56515extensionandcoercion.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Patrick Massot (Mar 13 2018 at 17:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/extension%20and%20coercion/near/123660814):
 <p>A long time ago, I wrote:</p>

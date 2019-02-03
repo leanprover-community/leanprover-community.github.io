@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/59403printlistname.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [print list name](59403printlistname.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [print list name](https://leanprover-community.github.io/archive/113488general/59403printlistname.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Johan Commelin (Aug 09 2018 at 09:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/print%20list%20name/near/131155695):
 <p>My first attempt at writing a tactic. I want a tactic that will <code>fail</code> by printing a list of tactics. I've copy-pasted code by Scott:</p>

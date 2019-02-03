@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/37897pathissues.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [path issues?](37897pathissues.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [path issues?](https://leanprover-community.github.io/archive/113488general/37897pathissues.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Jakob von Raumer (Mar 12 2018 at 13:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/path%20issues%3F/near/123606101):
 <p>I'm getting the following error whenever I run lean from the console instead of vscode:</p>

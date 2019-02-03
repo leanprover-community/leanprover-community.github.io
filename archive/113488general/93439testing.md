@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/93439testing.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [testing](93439testing.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [testing](https://leanprover-community.github.io/archive/113488general/93439testing.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Oct 31 2018 at 23:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/testing/near/136886579):
 <p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> do you get a ping?</p>

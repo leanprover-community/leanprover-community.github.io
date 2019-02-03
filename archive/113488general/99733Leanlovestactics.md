@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/99733Leanlovestactics.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [Lean loves tactics](99733Leanlovestactics.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [Lean loves tactics](https://leanprover-community.github.io/archive/113488general/99733Leanlovestactics.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Patrick Massot (Jun 26 2018 at 20:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20loves%20tactics/near/128672482):
 <p>Why?</p>

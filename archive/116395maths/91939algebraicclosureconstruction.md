@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/91939algebraicclosureconstruction.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [algebraic closure construction](91939algebraicclosureconstruction.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [algebraic closure construction](https://leanprover-community.github.io/archive/116395maths/91939algebraicclosureconstruction.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Chris Hughes (Jan 23 2019 at 21:27)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/algebraic%20closure%20construction/near/156722066):
 <p>So I'm trying out Tom Hales' construction of algebraic closure. The argument is to use zorn on this type ordered by subset, such that the inclusion map is a field hom.</p>

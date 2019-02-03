@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/57599errorexpectedtypeequalsgiventype.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [error: expected type equals given type](57599errorexpectedtypeequalsgiventype.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [error: expected type equals given type](https://leanprover-community.github.io/archive/113488general/57599errorexpectedtypeequalsgiventype.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Johan Commelin (Jan 15 2019 at 11:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/error%3A%20expected%20type%20equals%20given%20type/near/155160367):
 <p>A mystery:</p>

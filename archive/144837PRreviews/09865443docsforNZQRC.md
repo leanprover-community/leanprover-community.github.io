@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/144837PRreviews/09865443docsforNZQRC.html
 ---
 
-## Stream: [PR reviews](index.html)
-### Topic: [#443 docs for N -> Z -> Q -> R -> C](09865443docsforNZQRC.html)
+## Stream: [PR reviews](https://leanprover-community.github.io/archive/144837PRreviews/index.html)
+### Topic: [#443 docs for N -> Z -> Q -> R -> C](https://leanprover-community.github.io/archive/144837PRreviews/09865443docsforNZQRC.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Oct 27 2018 at 15:28)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23443%20docs%20for%20N%20-%3E%20Z%20-%3E%20Q%20-%3E%20R%20-%3E%20C/near/136607409):
 <p>Mathematicians find it frustrating when their goal is "obviously the same" as a hypothesis, except the hypothesis is about integers and the goal is about real numbers. These docs attempt to give some hints about how to deal with this, plus a slightly more in-depth discussion about what is going on for those who are interested. Comments are welcome.</p>

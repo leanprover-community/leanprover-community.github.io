@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/85011constructingproofsbyhand.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [constructing proofs by hand](85011constructingproofsbyhand.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [constructing proofs by hand](https://leanprover-community.github.io/archive/113488general/85011constructingproofsbyhand.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Scott Morrison (Apr 10 2018 at 05:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/constructing%20proofs%20by%20hand/near/124867540):
 <p>If I have <code>X Y Z : expr</code>, and a <code>P : expr</code> representing a proof that <code>X = Y</code>, how do I make the expression that says <code>(X = Z) = (Y = Z)</code>?</p>

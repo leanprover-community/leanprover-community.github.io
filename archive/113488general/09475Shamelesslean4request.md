@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/09475Shamelesslean4request.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [Shameless lean 4 request](09475Shamelesslean4request.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [Shameless lean 4 request](https://leanprover-community.github.io/archive/113488general/09475Shamelesslean4request.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Keeley Hoek (Nov 23 2018 at 02:17)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Shameless%20lean%204%20request/near/148202175):
 <p>In Lean 4 could we please please please have something like Haskell's <code>error</code>, just a pure function which takes a <code>string</code> or <code>format</code> or something and otherwise acts just like <code>sorry</code> (but gives no <code>sorry</code> used warnings). Of course, it would have to be meta.</p>

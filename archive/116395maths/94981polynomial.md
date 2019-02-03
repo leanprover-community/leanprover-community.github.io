@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/94981polynomial.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [polynomial](94981polynomial.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [polynomial](https://leanprover-community.github.io/archive/116395maths/94981polynomial.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Patrick Massot (Jul 19 2018 at 11:16)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/polynomial/near/129921310):
 <p>What's happening with polynomials? I see ce990c59d authored by Chris and merged by Johannes but PR171 is still open and active</p>

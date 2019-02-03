@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/31822pleaseminimizetacticchanges.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [please minimize tactic changes](31822pleaseminimizetacticchanges.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [please minimize tactic changes](https://leanprover-community.github.io/archive/113488general/31822pleaseminimizetacticchanges.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Feb 01 2019 at 12:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/please%20minimize%20tactic%20changes/near/157346599):
 <p>Please minimize tactic changes as it requires the recompiling of essentially the whole mathlib, so the cache is essentially useless, which would cause quite some inconvenience...</p>

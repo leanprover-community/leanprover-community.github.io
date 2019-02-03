@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/98683recname.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [rec_name](98683recname.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [rec_name](https://leanprover-community.github.io/archive/113488general/98683recname.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Jakob von Raumer (Mar 19 2018 at 14:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rec_name/near/123916531):
 <p>After adding an inductive type to the environment using <code>add_inductive</code>, I can use the <code>induction</code> tactic, but it doesn't return any useful case names... Can I solve this by defining <code>rec_name</code>?</p>

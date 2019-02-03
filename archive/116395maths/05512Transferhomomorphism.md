@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/05512Transferhomomorphism.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [Transfer homomorphism](05512Transferhomomorphism.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [Transfer homomorphism](https://leanprover-community.github.io/archive/116395maths/05512Transferhomomorphism.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Jun 15 2018 at 18:15)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Transfer%20homomorphism/near/128127678):
 <p>Let G be a group and H a subgroup of finite index. Then, pick a set-theoretic section s:G/H-&gt;G where G/H is the right cosets. Then, the transfer homomorphism G^ab -&gt; H^ab is defined by sending [[g]] to prod[x in G/H] s(x) g s(xg)^-1.</p>

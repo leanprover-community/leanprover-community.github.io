@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/90648masterbranchisbroken.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [master branch is broken](90648masterbranchisbroken.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [master branch is broken](https://leanprover-community.github.io/archive/113488general/90648masterbranchisbroken.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Scott Morrison (Oct 07 2018 at 08:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/master%20branch%20is%20broken/near/135340328):
 <p>Ugh, <code>master</code> is broken in mathlib.</p>

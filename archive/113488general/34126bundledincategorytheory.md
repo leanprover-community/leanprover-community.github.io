@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/34126bundledincategorytheory.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [bundled in category_theory](34126bundledincategorytheory.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [bundled in category_theory](https://leanprover-community.github.io/archive/113488general/34126bundledincategorytheory.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Sean Leather (Oct 04 2018 at 14:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bundled%20in%20category_theory/near/135174961):
 <p>I just discovered <code>bundled</code> in <code>category_theory.category</code>:</p>

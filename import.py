@@ -19,6 +19,7 @@ json_root = Path("./_json")
 md_root = Path("archive")
 md_index = Path("index.md")
 html_root = Path("archive")
+site_url = "https://leanprover-community.github.io/"
 stream_blacklist = ['rss', 'travis', 'announce']
 
 # config_file should point to a Zulip api config
@@ -71,7 +72,8 @@ def populate_all():
         nind = {'name': s['name'], 'id': s['stream_id'], 'topics': topics}
         tpmap = {}
         for t in topics:
-            out = open_outfile(json_root / Path(sanitize_stream(s['name'], s['stream_id'])), Path(sanitize_topic(t['name']) + '.json'), 'w')
+            out = open_outfile(json_root / Path(sanitize_stream(s['name'], s['stream_id'])), 
+                               Path(sanitize_topic(t['name']) + '.json'), 'w')
             request = {
                 'narrow': [{'operator': 'stream', 'operand': s['name']},
                            {'operator': 'topic', 'operand': t['name']}],
@@ -79,7 +81,8 @@ def populate_all():
                 'apply_markdown': True
             }
             m = request_all(request)
-            tpmap[t['name']] = {'size': len(m['messages']), 'latest_date':m['messages'][-1]['timestamp']}
+            tpmap[t['name']] = {'size': len(m['messages']), 
+                                'latest_date': m['messages'][-1]['timestamp']}
             json.dump(m, out, ensure_ascii=False)
             out.close()
         nind['topic_data'] = tpmap 
@@ -91,11 +94,15 @@ def populate_all():
 ## Display
 
 def structure_link(stream_id, stream_name, topic_name, post_id):
-    sanitized = urllib.parse.quote('{0}-{1}/topic/{2}/near/{3}'.format(stream_id, stream_name, topic_name, post_id))
+    sanitized = urllib.parse.quote(
+        '{0}-{1}/topic/{2}/near/{3}'.format(stream_id, stream_name, topic_name, post_id))
     return 'https://leanprover.zulipchat.com/#narrow/stream/' + sanitized
 
+def format_stream_url(stream_id, stream_name):
+    return site_url + str(html_root) + '/' + sanitize_stream(stream_name, stream_id)
+
 def format_message(name, date, msg, link):
-    return u'#### [{4} {0} ({1})]({3}):\n{2}'.format(name, date, msg, link, '') #'![Click to go to Zulip](../../assets/img/zulip2.png)')
+    return u'#### [{4} {0} ({1})]({3}):\n{2}'.format(name, date, msg, link, '') 
 
 def write_topic(messages, stream_name, stream_id, topic_name, outfile):
     for c in messages:
@@ -110,7 +117,11 @@ def write_topic_index(s): #(stream_name, topics):
     directory = md_root / Path(sanitize_stream(s['name'], s['id']))
     outfile = open_outfile(directory, md_index, 'w+')
     header = ("---\nlayout: page\ntitle: Lean Prover Zulip Chat Archive\npermalink: {2}/{1}/index.html\n---\n\n" + 
-            "## Stream: [{0}](index.html)\n\n---\n\n### Topics:\n\n").format(s['name'], sanitize_stream(s['name'], s['id']), html_root)
+            "## Stream: [{0}]({3}/index.html)\n\n---\n\n### Topics:\n\n").format(
+                s['name'], 
+                sanitize_stream(s['name'], s['id']), 
+                html_root, 
+                format_stream_url(s['id'], s['name']))
     outfile.write(header)
     for t in s['topics']:
         outfile.write("* [{0}]({1}.html) ({2} message{4}, latest: {3})\n\n".format(
@@ -135,7 +146,13 @@ def write_stream_index(streams):
 
 def format_topic_header(stream, topic_name):
     return ("---\nlayout: page\ntitle: Lean Prover Zulip Chat Archive \npermalink: {4}/{2}/{3}.html\n---\n\n" + 
-            "## Stream: [{0}](index.html)\n### Topic: [{1}]({3}.html)\n\n---\n\n").format(stream['name'], topic_name, sanitize_stream(stream['name'], stream['id']), sanitize_topic(topic_name), html_root)
+            '## Stream: [{0}]({5}/index.html)\n### Topic: [{1}]({5}/{3}.html)\n\n---\n\n<base href="https://leanprover.zulipchat.com">').format(
+                stream['name'],
+                topic_name, 
+                sanitize_stream(stream['name'], stream['id']), 
+                sanitize_topic(topic_name), 
+                html_root,
+                format_stream_url(stream['id'], stream['name']))
 
 def get_topic_and_write(stream, topic):
     json_path = json_root / Path(sanitize_stream(stream['name'], stream['id'])) / Path (sanitize_topic(topic['name']) + '.json')

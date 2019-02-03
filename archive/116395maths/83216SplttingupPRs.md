@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/83216SplttingupPRs.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [Spltting up PRs](83216SplttingupPRs.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [Spltting up PRs](https://leanprover-community.github.io/archive/116395maths/83216SplttingupPRs.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Chris Hughes (Dec 20 2018 at 07:06)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Spltting%20up%20PRs/near/152236233):
 <p>I've split up a few of my PRs into smaller chunks. This has the side effect of meaning that I have PRs open that depend on other PRs. Is this helpful?</p>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/04547LeanmathsinOrsay.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [Lean maths in Orsay](04547LeanmathsinOrsay.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [Lean maths in Orsay](https://leanprover-community.github.io/archive/113488general/04547LeanmathsinOrsay.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Patrick Massot (Jul 25 2018 at 10:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20maths%20in%20Orsay/near/130263048):
 <p>Hopefully, everybody potentially interested already knows, but I'd like to make sure nobody is surprisingly around, or surprisingly interested in pure math. There will be a small Lean mathematically inclined users meeting in Orsay (near Paris) on August 27th-29th. The main idea was to capture people who will be in <a href="https://www.dagstuhl.de/en/program/calendar/semhp/?semnr=18341" target="_blank" title="https://www.dagstuhl.de/en/program/calendar/semhp/?semnr=18341">Dagstuhl</a> on the preceding week but are usually on other continents. There will be Chris, Johan, Johannes, Kevin, Mario, Rob, Scott, and me. Hopefully we'll have fun with advanced math and Lean.</p>

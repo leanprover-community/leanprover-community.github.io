@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/62387spotthedifference.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [spot the difference](62387spotthedifference.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [spot the difference](https://leanprover-community.github.io/archive/113489newmembers/62387spotthedifference.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Jan 11 2019 at 13:28)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/spot%20the%20difference/near/154913709):
 <div class="codehilite"><pre><span></span><span class="n">invalid</span> <span class="n">type</span> <span class="n">ascription</span><span class="o">,</span> <span class="n">term</span> <span class="n">has</span> <span class="n">type</span>

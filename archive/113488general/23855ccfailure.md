@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/23855ccfailure.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [cc failure](23855ccfailure.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [cc failure](https://leanprover-community.github.io/archive/113488general/23855ccfailure.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Reid Barton (May 16 2018 at 19:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cc%20failure/near/126654388):
 <p>Is this a bug?</p>

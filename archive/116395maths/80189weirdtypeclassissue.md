@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/80189weirdtypeclassissue.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [weird type class issue](80189weirdtypeclassissue.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [weird type class issue](https://leanprover-community.github.io/archive/116395maths/80189weirdtypeclassissue.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Johan Commelin (Oct 18 2018 at 09:44)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/weird%20type%20class%20issue/near/136026131):
 <p>Consider this code:</p>

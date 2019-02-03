@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/82737grouphom.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [group_hom](82737grouphom.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [group_hom](https://leanprover-community.github.io/archive/116395maths/82737grouphom.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Chris Hughes (Dec 12 2018 at 07:17)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/group_hom/near/151505639):
 <p>Can we define <code>is_group_hom</code> to be <code>is_monoid_hom</code> and make it reducible? It would avoid cycles.</p>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/52204powpow.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [pow_pow](52204powpow.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [pow_pow](https://leanprover-community.github.io/archive/116395maths/52204powpow.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Nov 14 2018 at 14:29)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/pow_pow/near/147667339):
 <p>I just spent 60 seconds looking for <code>pow_pow : (a ^ b) ^ c = a ^ (b * c)</code> for a tactic mode rewrite, before I realised that it was actually called <code>←pow_mul</code>. I'm always a little worried when I see those <code>←</code> signs, it feels like I'm not going in the recommended direction. Is there a case for <code>pow_pow</code>?</p>

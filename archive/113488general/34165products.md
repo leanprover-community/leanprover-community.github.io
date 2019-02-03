@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/34165products.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [products](34165products.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [products](https://leanprover-community.github.io/archive/113488general/34165products.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Patrick Massot (Jul 30 2018 at 01:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/products/near/130544059):
 <p>If I have <code>(a b c : Type) (f : a → b) (g : a → c)</code>, do we have a name or notation for the function mapping <code>x</code> to <code>(f x, g x)</code>?</p>

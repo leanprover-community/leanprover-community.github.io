@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/68393elanonMacOSX.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [elan on MacOSX](68393elanonMacOSX.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [elan on MacOSX](https://leanprover-community.github.io/archive/113488general/68393elanonMacOSX.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Simon Hudon (Apr 15 2018 at 20:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elan%20on%20MacOSX/near/125118341):
 <p>I'm giving another try for elan and here is what happens when I install <code>nightly</code>:</p>

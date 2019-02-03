@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/00468OferGabberonformalproof.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [Ofer Gabber on formal proof](00468OferGabberonformalproof.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [Ofer Gabber on formal proof](https://leanprover-community.github.io/archive/113488general/00468OferGabberonformalproof.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Jan 17 2019 at 18:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Ofer%20Gabber%20on%20formal%20proof/near/155353065):
 <p>Ofer Gabber is an extremely precise pure mathematician, and has even been known to refuse to put his name on a paper containing joint work with others because he didn't 100% check all of the work of all of the other people. </p>

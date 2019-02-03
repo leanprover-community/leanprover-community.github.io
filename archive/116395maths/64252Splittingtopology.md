@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/64252Splittingtopology.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [Splitting topology](64252Splittingtopology.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [Splitting topology](https://leanprover-community.github.io/archive/116395maths/64252Splittingtopology.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Patrick Massot (Jan 22 2019 at 14:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Splitting%20topology/near/156605219):
 <p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> <span class="user-mention" data-user-id="110294">@Johannes Hölzl</span> <span class="user-mention" data-user-id="110032">@Reid Barton</span> I continued moving on the topology reorganization project. The next step was to split <code>topology.basic</code> and <code>topology.continuity</code> while gathering the basics of continuity and the basics of topological spaces. My current result is at <a href="https://github.com/leanprover-community/mathlib/tree/top_split" target="_blank" title="https://github.com/leanprover-community/mathlib/tree/top_split">https://github.com/leanprover-community/mathlib/tree/top_split</a> I need comments before moving on. My next step would be to reorganize uniform spaces and topological structures, still following the general scheme discussed in Amsterdam</p>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/56604tacticunfreezelocalinstances.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [tactic.unfreeze_local_instances](56604tacticunfreezelocalinstances.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [tactic.unfreeze_local_instances](https://leanprover-community.github.io/archive/113488general/56604tacticunfreezelocalinstances.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Oct 28 2018 at 22:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic.unfreeze_local_instances/near/136670895):
 <div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">analysis</span><span class="bp">.</span><span class="n">topology</span><span class="bp">.</span><span class="n">topological_space</span>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/98060idealrestatement.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [ideal restatement](98060idealrestatement.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [ideal restatement](https://leanprover-community.github.io/archive/116395maths/98060idealrestatement.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Patrick Massot (Sep 29 2018 at 16:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ideal%20restatement/near/134885438):
 <p>As often, I find myself moving stuff around without doing anything. I just wrote:</p>

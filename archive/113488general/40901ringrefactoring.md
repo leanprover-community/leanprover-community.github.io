@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/40901ringrefactoring.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [ring refactoring](40901ringrefactoring.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [ring refactoring](https://leanprover-community.github.io/archive/113488general/40901ringrefactoring.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Nov 10 2018 at 11:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/ring%20refactoring/near/147427723):
 <p>In the module refactoring, we turned <code>(N : set M) [is_submodule N]</code> into <code>(N: submodule R M)</code>, and we turned <code>(f : M -&gt; N) (hf : is_linear_map f)</code> into <code>(f : linear_map M N)</code>. And I found this very helpful.</p>

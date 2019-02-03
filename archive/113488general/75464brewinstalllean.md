@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/75464brewinstalllean.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [brew install lean](75464brewinstalllean.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [brew install lean](https://leanprover-community.github.io/archive/113488general/75464brewinstalllean.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Sean Leather (Sep 04 2018 at 20:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/brew%20install%20lean/near/133326846):
 <p>Has anybody tried <code>brew install lean</code> on macOS lately? I thought it had stagnated, but the <a href="https://formulae.brew.sh/formula/lean" target="_blank" title="https://formulae.brew.sh/formula/lean">formula</a> is actually up to date with v3.4.1. I just installed it and <code>lean --version</code> worked just fine. Haven't done anything else, yet.</p>

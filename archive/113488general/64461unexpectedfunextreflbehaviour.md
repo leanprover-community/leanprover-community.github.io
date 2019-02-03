@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/64461unexpectedfunextreflbehaviour.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [unexpected funext / refl behaviour](64461unexpectedfunextreflbehaviour.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [unexpected funext / refl behaviour](https://leanprover-community.github.io/archive/113488general/64461unexpectedfunextreflbehaviour.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Apr 11 2018 at 21:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20funext%20/%20refl%20behaviour/near/124946494):
 <div class="codehilite"><pre><span></span><span class="kn">set_option</span> <span class="n">pp</span><span class="bp">.</span><span class="n">universes</span> <span class="n">true</span> <span class="c1">-- might help</span>

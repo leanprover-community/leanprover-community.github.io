@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/77339livestreaming.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [live streaming](77339livestreaming.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [live streaming](https://leanprover-community.github.io/archive/113488general/77339livestreaming.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Reid Barton (Sep 08 2018 at 15:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/live%20streaming/near/133567651):
 <p>I'm going to try out this streaming thing: <a href="https://www.twitch.tv/colimit/" target="_blank" title="https://www.twitch.tv/colimit/">https://www.twitch.tv/colimit/</a><br>

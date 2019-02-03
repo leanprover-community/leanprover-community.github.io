@@ -4,7 +4,7 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/index.html
 ---
 
-## Stream: [maths](index.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
 
 ---
 

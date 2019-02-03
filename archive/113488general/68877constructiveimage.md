@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/68877constructiveimage.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [constructive image](68877constructiveimage.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [constructive image](https://leanprover-community.github.io/archive/113488general/68877constructiveimage.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Mar 27 2018 at 19:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/constructive%20image/near/124280837):
 <p>Maybe we should define the image of a map f:X-&gt;Y to be X quotient by the relation that x~y iff f(x)=f(y)</p>

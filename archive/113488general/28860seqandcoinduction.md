@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/28860seqandcoinduction.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [seq and coinduction](28860seqandcoinduction.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [seq and coinduction](https://leanprover-community.github.io/archive/113488general/28860seqandcoinduction.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Mar 27 2018 at 20:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/seq%20and%20coinduction/near/124283402):
 <p>I see this comment in <code>data.seq.seq</code>:</p>

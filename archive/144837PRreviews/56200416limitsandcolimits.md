@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/144837PRreviews/56200416limitsandcolimits.html
 ---
 
-## Stream: [PR reviews](index.html)
-### Topic: [#416 limits and colimits](56200416limitsandcolimits.html)
+## Stream: [PR reviews](https://leanprover-community.github.io/archive/144837PRreviews/index.html)
+### Topic: [#416 limits and colimits](https://leanprover-community.github.io/archive/144837PRreviews/56200416limitsandcolimits.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Scott Morrison (Oct 12 2018 at 11:47)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23416%20limits%20and%20colimits/near/135665324):
 <p>Okay, here is limits and colimits (just for general shapes, not all the useful special cases yet), with no dependency on new-fangled tactics.</p>

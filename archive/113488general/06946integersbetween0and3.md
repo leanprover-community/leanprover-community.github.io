@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/06946integersbetween0and3.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [integers between 0 and 3](06946integersbetween0and3.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [integers between 0 and 3](https://leanprover-community.github.io/archive/113488general/06946integersbetween0and3.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Oct 20 2018 at 11:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/integers%20between%200%20and%203/near/136162002):
 <p><code>example : ∀ (r : ℤ), r ≥ 0 → r &lt; 3 → r = 0 ∨ r = 1 ∨ r = 2 := dec_trivial</code> doesn't work for me. Is there any easy way of getting from <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>0</mn><mo>≤</mo><mi>r</mi><mo>&lt;</mo><mn>3</mn></mrow><annotation encoding="application/x-tex">0\leq r&lt;3</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.64444em;"></span><span class="strut bottom" style="height:0.78041em;vertical-align:-0.13597em;"></span><span class="base"><span class="mord mathrm">0</span><span class="mrel">≤</span><span class="mord mathit" style="margin-right:0.02778em;">r</span><span class="mrel">&lt;</span><span class="mord mathrm">3</span></span></span></span> (with <code>r : int</code>) to the three cases?</p>

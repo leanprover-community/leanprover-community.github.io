@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/10890Coopersalgorithm.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [Cooper's algorithm](10890Coopersalgorithm.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [Cooper's algorithm](https://leanprover-community.github.io/archive/113488general/10890Coopersalgorithm.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Seul Baek (May 20 2018 at 02:19)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Cooper%27s%20algorithm/near/126812643):
 <p>I've implemented Cooper's algorithm for linear integer arithmetic as a Lean tactic (<a href="https://github.com/skbaek/qelim" target="_blank" title="https://github.com/skbaek/qelim">https://github.com/skbaek/qelim</a>). It's still quite limited, but it should work for simple goals.</p>

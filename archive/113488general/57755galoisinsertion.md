@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/57755galoisinsertion.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [galois insertion](57755galoisinsertion.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [galois insertion](https://leanprover-community.github.io/archive/113488general/57755galoisinsertion.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Sep 25 2018 at 07:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/galois%20insertion/near/134575752):
 <div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">algebra</span><span class="bp">.</span><span class="n">archimedean</span>

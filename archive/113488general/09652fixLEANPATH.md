@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/09652fixLEANPATH.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [fix LEAN_PATH](09652fixLEANPATH.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [fix LEAN_PATH](https://leanprover-community.github.io/archive/113488general/09652fixLEANPATH.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ garySebastian (Apr 01 2018 at 00:58)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/fix%20LEAN_PATH/near/124468992):
 <p>I've tried to get lean to work on Xubuntu, macOS, and nixos; all three are having the same issue where importing anything (including standard), yields an error: "file standard not found in the LEAN_PATH". I've done a lot of looking around and can't find any relevant information on LEAN_PATH. I have lean in my system PATH. I'm not sure what it wants from me.</p>

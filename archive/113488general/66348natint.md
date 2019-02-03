@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/66348natint.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [nat = int](66348natint.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [nat = int](https://leanprover-community.github.io/archive/113488general/66348natint.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Oct 09 2018 at 21:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nat%20%3D%20int/near/135492419):
 <p>Is <code>nat = int</code> consistent with Lean?</p>

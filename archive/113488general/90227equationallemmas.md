@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/90227equationallemmas.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [equational lemmas](90227equationallemmas.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [equational lemmas](https://leanprover-community.github.io/archive/113488general/90227equationallemmas.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Simon Hudon (Jul 05 2018 at 01:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/equational%20lemmas/near/129109127):
 <p>when using <code>add_decl</code> to create a definition, is it possible to declare an accompanying equational lemma?</p>

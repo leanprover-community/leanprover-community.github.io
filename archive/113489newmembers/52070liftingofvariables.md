@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/52070liftingofvariables.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [%% lifting of variables](52070liftingofvariables.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [%% lifting of variables](https://leanprover-community.github.io/archive/113489newmembers/52070liftingofvariables.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Ken Roe (Jul 22 2018 at 14:08)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%25%25%20lifting%20of%20variables/near/130095457):
 <p>I've discovered that %% automatically lifts bound variables as shown in the following example:</p>

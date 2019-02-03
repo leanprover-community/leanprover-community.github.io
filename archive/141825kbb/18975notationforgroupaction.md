@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/141825kbb/18975notationforgroupaction.html
 ---
 
-## Stream: [kbb](index.html)
-### Topic: [notation for group action](18975notationforgroupaction.html)
+## Stream: [kbb](https://leanprover-community.github.io/archive/141825kbb/index.html)
+### Topic: [notation for group action](https://leanprover-community.github.io/archive/141825kbb/18975notationforgroupaction.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Johan Commelin (Sep 14 2018 at 07:01)](https://leanprover.zulipchat.com/#narrow/stream/141825-kbb/topic/notation%20for%20group%20action/near/133932189):
 <p>I think we should just group actions an instance of <code>has_smul</code>. What do others think?</p>

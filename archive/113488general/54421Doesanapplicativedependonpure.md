@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/54421Doesanapplicativedependonpure.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [Does an applicative depend on pure?](54421Doesanapplicativedependonpure.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [Does an applicative depend on pure?](https://leanprover-community.github.io/archive/113488general/54421Doesanapplicativedependonpure.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Mario Carneiro (Aug 10 2018 at 09:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Does%20an%20applicative%20depend%20on%20pure%3F/near/131222242):
 <p>A surprisingly hard problem: Prove or construct a counterexample to the following claim: If two (lawful) applicative structures on <code>F</code> have the same <code>seq</code> function, then they are equal.</p>

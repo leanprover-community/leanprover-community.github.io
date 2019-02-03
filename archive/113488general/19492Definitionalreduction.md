@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/19492Definitionalreduction.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [Definitional reduction](19492Definitionalreduction.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [Definitional reduction](https://leanprover-community.github.io/archive/113488general/19492Definitionalreduction.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Moses Schönfinkel (Jun 04 2018 at 09:14)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Definitional%20reduction/near/127532389):
 <p>If I can <code>#eval f a b</code> to <code>tt</code>, should I make sure that <code>example : f a b = tt</code>is <code>rfl</code>? In my case, <code>b = g a</code> and <code>g</code> seems to be naughty enough for Lean being to unwilling to expand everything. (<code>f a a = tt</code> is indeed <code>rfl</code>)</p>

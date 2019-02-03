@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/39790Noobmetaquestion.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [Noob meta question](39790Noobmetaquestion.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [Noob meta question](https://leanprover-community.github.io/archive/113488general/39790Noobmetaquestion.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Chris Hughes (Sep 11 2018 at 14:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Noob%20meta%20question/near/133727546):
 <p>What's the "correct" way to efficiently implement finitely supported functions in Lean meta. Currently I'm using <code>list (α × β)</code> as <code>α →₀ β</code>, but this seems totally wrong. By finitely supported, I mean functions for which I only care about the result for finitely many <code>α</code></p>

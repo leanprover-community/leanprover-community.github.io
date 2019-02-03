@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/83465setisacompletelattice.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [set is a complete lattice](83465setisacompletelattice.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [set is a complete lattice](https://leanprover-community.github.io/archive/113488general/83465setisacompletelattice.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Apr 13 2018 at 16:57)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/set%20is%20a%20complete%20lattice/near/125037337):
 <p>mathlib proof:</p>

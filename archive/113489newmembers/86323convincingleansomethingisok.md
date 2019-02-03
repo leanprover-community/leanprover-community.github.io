@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/86323convincingleansomethingisok.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [convincing lean something is ok](86323convincingleansomethingisok.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [convincing lean something is ok](https://leanprover-community.github.io/archive/113489newmembers/86323convincingleansomethingisok.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Ned Summers (Aug 20 2018 at 17:15)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/convincing%20lean%20something%20is%20ok/near/132461786):
 <p>I'm trying to construct a function <code>f :  a → b</code> (as part of an instance of a structure) with two types a and b and non-trivially I have that for some type c defined differently in fact <code>b=c</code> (and I can prove that if needed).  </p>

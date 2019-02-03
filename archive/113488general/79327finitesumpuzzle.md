@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/79327finitesumpuzzle.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [finite sum puzzle](79327finitesumpuzzle.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [finite sum puzzle](https://leanprover-community.github.io/archive/113488general/79327finitesumpuzzle.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Mar 30 2018 at 01:53)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finite%20sum%20puzzle/near/124390119):
 <div class="codehilite"><pre><span></span>import tactic.ring

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/75082solvebyelim.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [solve_by_elim](75082solvebyelim.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [solve_by_elim](https://leanprover-community.github.io/archive/113488general/75082solvebyelim.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Scott Morrison (Mar 09 2018 at 00:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/solve_by_elim/near/123468417):
 <p><span class="user-mention" data-user-email="simon.hudon@gmail.com" data-user-id="110026">@Simon Hudon</span>, the new solve_by_elim is really nice, and now I’d like it to do even more. I know that there is a mechanism to pass arbitrary assumptions, rather than using local context, and perhaps I should just use that.</p>

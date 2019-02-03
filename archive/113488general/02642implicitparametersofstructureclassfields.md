@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/02642implicitparametersofstructureclassfields.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [implicit parameters of structure/class fields](02642implicitparametersofstructureclassfields.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [implicit parameters of structure/class fields](https://leanprover-community.github.io/archive/113488general/02642implicitparametersofstructureclassfields.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Reid Barton (Nov 26 2018 at 16:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implicit%20parameters%20of%20structure/class%20fields/near/148375439):
 <p>Are the rules for the types of the field accessors (in particular, whether arguments are explicit or implicit) written out somewhere (not in C++)?</p>

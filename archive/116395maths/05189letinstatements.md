@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/05189letinstatements.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [let in statements](05189letinstatements.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [let in statements](https://leanprover-community.github.io/archive/116395maths/05189letinstatements.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Patrick Massot (Dec 19 2018 at 20:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/let%20in%20statements/near/152207819):
 <p>How does mathlib like using <code>let</code> in order to unclutter a statement, as in:</p>

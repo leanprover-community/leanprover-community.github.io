@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/22790powltpowofltgolf.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [pow_lt_pow_of_lt golf](22790powltpowofltgolf.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [pow_lt_pow_of_lt golf](https://leanprover-community.github.io/archive/116395maths/22790powltpowofltgolf.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Nov 14 2018 at 15:36)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/pow_lt_pow_of_lt%20golf/near/147671439):
 <div class="codehilite"><pre><span></span><span class="kn">variable</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="c1">-- or [linear_ordered_field]</span>

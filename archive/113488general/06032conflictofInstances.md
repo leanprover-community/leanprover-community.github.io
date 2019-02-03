@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/06032conflictofInstances.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [conflict of Instances](06032conflictofInstances.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [conflict of Instances](https://leanprover-community.github.io/archive/113488general/06032conflictofInstances.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ AHan (Dec 04 2018 at 04:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/conflict%20of%20Instances/near/150822083):
 <p>I wanted to prove the following function, but I've run into problems at the commented line<br>

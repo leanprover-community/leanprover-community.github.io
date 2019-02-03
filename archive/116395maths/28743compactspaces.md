@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/28743compactspaces.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [compact spaces](28743compactspaces.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [compact spaces](https://leanprover-community.github.io/archive/116395maths/28743compactspaces.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Reid Barton (Sep 22 2018 at 22:24)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/compact%20spaces/near/134451428):
 <p>I'm inclined to add the following class, following the naming scheme of <code>t2_space</code>, <code>separable_space</code>, etc.</p>

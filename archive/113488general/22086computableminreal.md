@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/22086computableminreal.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [computable min (real)](22086computableminreal.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [computable min (real)](https://leanprover-community.github.io/archive/113488general/22086computableminreal.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Mar 14 2018 at 13:08)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computable%20min%20%28real%29/near/123699788):
 <p>Do we have a computable function that gives the minimum of two real numbers?</p>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/84032Provinglemmawithoutdoingpatternmatching.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [Proving lemma without doing pattern matching](84032Provinglemmawithoutdoingpatternmatching.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [Proving lemma without doing pattern matching](https://leanprover-community.github.io/archive/113488general/84032Provinglemmawithoutdoingpatternmatching.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ petercommand (Jan 14 2019 at 16:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Proving%20lemma%20without%20doing%20pattern%20matching/near/155091905):
 <div class="codehilite"><pre><span></span>lemma eq.subst&#39; {α : Sort u} {a b : α} {P : Π (m: α), (m = a) ∨ (m = b) → Prop}

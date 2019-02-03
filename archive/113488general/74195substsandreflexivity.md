@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/74195substsandreflexivity.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [substs and reflexivity](74195substsandreflexivity.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [substs and reflexivity](https://leanprover-community.github.io/archive/113488general/74195substsandreflexivity.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Sean Leather (Aug 20 2018 at 10:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/substs%20and%20reflexivity/near/132442829):
 <p>It seems like <code>subst</code> solves a reflexive goal but <code>substs</code> does not. If I replace <code>subst p, subst q</code>with <code>substs p q</code>, I have to add <code>refl</code> to solve the goal.</p>

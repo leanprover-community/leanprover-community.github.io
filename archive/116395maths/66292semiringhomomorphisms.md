@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/66292semiringhomomorphisms.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [semiring homomorphisms](66292semiringhomomorphisms.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [semiring homomorphisms](https://leanprover-community.github.io/archive/116395maths/66292semiringhomomorphisms.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Johan Commelin (May 08 2018 at 07:39)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/semiring%20homomorphisms/near/126249853):
 <p>There is a class for ring homomorphisms: <a href="https://github.com/leanprover/mathlib/blob/7d1ab388bb097db5d631d11892e8f110e1f2e9cd/algebra/ring.lean#L60" target="_blank" title="https://github.com/leanprover/mathlib/blob/7d1ab388bb097db5d631d11892e8f110e1f2e9cd/algebra/ring.lean#L60">https://github.com/leanprover/mathlib/blob/7d1ab388bb097db5d631d11892e8f110e1f2e9cd/algebra/ring.lean#L60</a><br>

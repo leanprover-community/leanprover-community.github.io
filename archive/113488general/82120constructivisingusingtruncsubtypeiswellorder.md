@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/82120constructivisingusingtruncsubtypeiswellorder.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [constructivising using `trunc (subtype (is_well_order _))`](82120constructivisingusingtruncsubtypeiswellorder.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [constructivising using `trunc (subtype (is_well_order _))`](https://leanprover-community.github.io/archive/113488general/82120constructivisingusingtruncsubtypeiswellorder.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Nov 23 2018 at 03:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/constructivising%20using%20%60trunc%20%28subtype%20%28is_well_order%20_%29%29%60/near/148204645):
 <p>How many things can we constructivise with a <code>trunc (subtype (is_well_order _))</code> hypothesis? I'm sure we can make a truncated basis this way... Maybe if it can constructivise a lot of stuff, I would imagine making it as wide-used as <code>decidable_eq</code></p>

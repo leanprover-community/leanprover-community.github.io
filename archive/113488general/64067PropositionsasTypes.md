@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/64067PropositionsasTypes.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [Propositions as Types](64067PropositionsasTypes.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [Propositions as Types](https://leanprover-community.github.io/archive/113488general/64067PropositionsasTypes.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Lyle Kopnicky (Apr 16 2018 at 02:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Propositions%20as%20Types/near/125127870):
 <p>I'm not clear why the definition of <code>p1</code> below is not a type error. What can it possibly mean for <code>p1</code> to be a proof of a proof of a proposition?</p>

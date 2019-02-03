@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/71000TerenceTaosproofofHilbertsNullstellensatz.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [Terence Tao's proof of Hilbert's Nullstellensatz](71000TerenceTaosproofofHilbertsNullstellensatz.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [Terence Tao's proof of Hilbert's Nullstellensatz](https://leanprover-community.github.io/archive/116395maths/71000TerenceTaosproofofHilbertsNullstellensatz.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (May 15 2018 at 22:42)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Terence%20Tao%27s%20proof%20of%20Hilbert%27s%20Nullstellensatz/near/126611223):
 <p>In <a href="http://terrytao.wordpress.com/2007/11/26/hilberts-nullstellensatz/" target="_blank" title="http://terrytao.wordpress.com/2007/11/26/hilberts-nullstellensatz/">this post by Terence Tao</a>, he proved Hilbert's Nullstellensatz in a more elementary and computational manner. My question is: how constructive is this proof?</p>

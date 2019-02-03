@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/45872fsplitwithname.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [fsplit with name](45872fsplitwithname.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [fsplit with name](https://leanprover-community.github.io/archive/113488general/45872fsplitwithname.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Reid Barton (Nov 27 2018 at 16:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/fsplit%20with%20name/near/148645058):
 <p>I want to construct an <code>Exists</code> value where both parts are Props in tactic mode. Is there a convenient way to use something like <code>fsplit</code> to produce two subgoals but also to have the result of the first subgoal available as a hypothesis in the second subgoal?</p>

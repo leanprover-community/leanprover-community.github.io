@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/27708Algebraicclosureroadmap.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [Algebraic closure roadmap](27708Algebraicclosureroadmap.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [Algebraic closure roadmap](https://leanprover-community.github.io/archive/113488general/27708Algebraicclosureroadmap.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Oct 14 2018 at 17:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Algebraic%20closure%20roadmap/near/135781672):
 <p>I've created a roadmap for constructing an algebraic closure of a field: <a href="https://github.com/kckennylau/Lean/blob/master/algebraic-closure-roadmap.md" target="_blank" title="https://github.com/kckennylau/Lean/blob/master/algebraic-closure-roadmap.md">https://github.com/kckennylau/Lean/blob/master/algebraic-closure-roadmap.md</a></p>

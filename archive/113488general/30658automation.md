@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/30658automation.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [automation](30658automation.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [automation](https://leanprover-community.github.io/archive/113488general/30658automation.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Scott Morrison (Jun 05 2018 at 02:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automation/near/127574167):
 <p>I was just having a look at <span class="user-mention" data-user-id="110044">@Chris Hughes</span>'s nice PR for quotient groups.</p>

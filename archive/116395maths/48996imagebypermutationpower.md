@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/48996imagebypermutationpower.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [image by permutation power](48996imagebypermutationpower.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [image by permutation power](https://leanprover-community.github.io/archive/116395maths/48996imagebypermutationpower.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Patrick Massot (Apr 17 2018 at 11:02)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/image%20by%20permutation%20power/near/125188730):
 <div class="codehilite"><pre><span></span><span class="kn">variables</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">(</span><span class="n">g</span> <span class="o">:</span> <span class="n">perm</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">i</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">U</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span><span class="o">)</span>

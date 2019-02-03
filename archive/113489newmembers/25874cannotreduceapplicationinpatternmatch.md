@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/25874cannotreduceapplicationinpatternmatch.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [cannot reduce  application in pattern match](25874cannotreduceapplicationinpatternmatch.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [cannot reduce  application in pattern match](https://leanprover-community.github.io/archive/113489newmembers/25874cannotreduceapplicationinpatternmatch.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Shaun Steenkamp (Nov 14 2018 at 12:58)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cannot%20reduce%20%20application%20in%20pattern%20match/near/147663171):
 <p>I'm trying to fill in the <code>sorry</code> in the code below with <code>h x</code>. I expect this to work but it says that</p>

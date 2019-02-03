@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/48706summerschool.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [summer school](48706summerschool.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [summer school](https://leanprover-community.github.io/archive/113488general/48706summerschool.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Jeremy Avigad (Jan 28 2019 at 02:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/summer%20school/near/156996634):
 <p>Friends,</p>

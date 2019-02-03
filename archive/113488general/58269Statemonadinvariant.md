@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/58269Statemonadinvariant.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [State monad invariant](58269Statemonadinvariant.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [State monad invariant](https://leanprover-community.github.io/archive/113488general/58269Statemonadinvariant.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Nicholas Scheel (Jul 17 2018 at 16:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/State%20monad%20invariant/near/129815515):
 <p>I been wondering if there’s a way to encode invariants on monadic state computations in Lean, such that every update to the state must preserve those invariants? I haven’t actually make use of monads in a DTT language before, but it seems like a good way to verify systems.</p>

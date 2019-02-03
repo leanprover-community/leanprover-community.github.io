@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/30835symmetryofcongruencemod37.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [symmetry of congruence mod 37](30835symmetryofcongruencemod37.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [symmetry of congruence mod 37](https://leanprover-community.github.io/archive/113489newmembers/30835symmetryofcongruencemod37.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Nicholas Siedlaczek (Dec 06 2018 at 22:46)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/symmetry%20of%20congruence%20mod%2037/near/151046285):
 <p>I know what I am trying to achieve, however not sure about how to actually execute it in Lean.</p>

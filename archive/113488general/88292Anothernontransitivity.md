@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/88292Anothernontransitivity.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [Another non-transitivity](88292Anothernontransitivity.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [Another non-transitivity](https://leanprover-community.github.io/archive/113488general/88292Anothernontransitivity.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Mario Carneiro (Mar 02 2018 at 02:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Another%20non-transitivity/near/123163815):
 <p>While trying to prove that lean doesn't have any other sources of definitional non-transitivity besides K-like eliminators, I discovered another one, quotients of propositions:</p>

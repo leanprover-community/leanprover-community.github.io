@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/65068rflvsdectrivialforinequalityexample.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [rfl vs dec_trivial for inequality example](65068rflvsdectrivialforinequalityexample.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [rfl vs dec_trivial for inequality example](https://leanprover-community.github.io/archive/113489newmembers/65068rflvsdectrivialforinequalityexample.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Joseph Corneli (Jan 24 2019 at 12:49)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/rfl%20vs%20dec_trivial%20for%20inequality%20example/near/156766507):
 <p>This works:</p>

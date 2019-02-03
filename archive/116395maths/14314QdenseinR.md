@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/14314QdenseinR.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [Q dense in R](14314QdenseinR.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [Q dense in R](https://leanprover-community.github.io/archive/116395maths/14314QdenseinR.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Dec 28 2018 at 01:15)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Q%20dense%20in%20R/near/152627608):
 <p><code>theorem rationals_dense (x y : ℝ) (H : x &lt; y) : ∃ q : ℚ, x &lt; q ∧ (q : ℝ) &lt; y :=</code> Where is this now? I think it was explicitly there before the reals were refactored. Now there is <code>dense_embedding_of_rat</code> but then I have to work to get the statement I want.</p>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/20508patternmatching101.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [pattern matching 101](20508patternmatching101.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [pattern matching 101](https://leanprover-community.github.io/archive/113488general/20508patternmatching101.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Scott Morrison (Apr 25 2018 at 10:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/pattern%20matching%20101/near/125662292):
 <p>Easy question: how do I do pattern matching against values? Given <code>k : nat</code>, naively I could try writing</p>

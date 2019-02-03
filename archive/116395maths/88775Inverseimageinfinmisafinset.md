@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/88775Inverseimageinfinmisafinset.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [Inverse image in `fin m` is a `finset`](88775Inverseimageinfinmisafinset.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [Inverse image in `fin m` is a `finset`](https://leanprover-community.github.io/archive/116395maths/88775Inverseimageinfinmisafinset.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Johan Commelin (May 16 2018 at 16:32)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Inverse%20image%20in%20%60fin%20m%60%20is%20a%20%60finset%60/near/126647766):
 <p>The following code is (obviously) not typechecking. How do I make this work?</p>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/179818LeanTogether2019/90889analysissession.html
 ---
 
-## Stream: [Lean Together 2019](index.html)
-### Topic: [analysis session](90889analysissession.html)
+## Stream: [Lean Together 2019](https://leanprover-community.github.io/archive/179818LeanTogether2019/index.html)
+### Topic: [analysis session](https://leanprover-community.github.io/archive/179818LeanTogether2019/90889analysissession.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Jeremy Avigad (Jan 09 2019 at 14:59)](https://leanprover.zulipchat.com/#narrow/stream/179818-Lean%20Together%202019/topic/analysis%20session/near/154724961):
 <p>Friends, </p>

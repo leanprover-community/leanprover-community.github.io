@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/33072consoverload.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [cons overload](33072consoverload.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [cons overload](https://leanprover-community.github.io/archive/113488general/33072consoverload.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Apr 18 2018 at 11:51)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cons%20overload/near/125243066):
 <p>kinda annoyed by the fact that <code>list.cons</code> and <code>multiset.cons</code> both use <code>::</code></p>

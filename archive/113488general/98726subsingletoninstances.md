@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/98726subsingletoninstances.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [subsingleton instances](98726subsingletoninstances.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [subsingleton instances](https://leanprover-community.github.io/archive/113488general/98726subsingletoninstances.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Chris Hughes (Mar 03 2018 at 16:22)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subsingleton%20instances/near/123231023):
 <p>I'm struggling with the following proof</p>

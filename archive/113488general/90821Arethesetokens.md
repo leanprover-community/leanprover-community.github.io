@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/90821Arethesetokens.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [Are these tokens?](90821Arethesetokens.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [Are these tokens?](https://leanprover-community.github.io/archive/113488general/90821Arethesetokens.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Apr 01 2018 at 21:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Are%20these%20tokens%3F/near/124499064):
 <p>In VS Code, if I type <code>#check nat.</code>and then, with the cursor just to the right of the <code>.</code> I type Esc then ctrl-space (possibly more than once) then I get, I think, to see a list of things which the Lean VS Code plugin thinks might come next. In this particular case,  the list seems to naturally split into two types of things.</p>

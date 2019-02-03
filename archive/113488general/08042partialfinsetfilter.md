@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/08042partialfinsetfilter.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [partial finset.filter?](08042partialfinsetfilter.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [partial finset.filter?](https://leanprover-community.github.io/archive/113488general/08042partialfinsetfilter.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Sep 07 2018 at 09:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20finset.filter%3F/near/133493792):
 <p>Currently:</p>

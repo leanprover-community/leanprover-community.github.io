@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/37092ModernLaTeX.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [Modern LaTeX](37092ModernLaTeX.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [Modern LaTeX](https://leanprover-community.github.io/archive/113488general/37092ModernLaTeX.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Patrick Massot (Mar 17 2018 at 15:44)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Modern%20LaTeX/near/123843670):
 <p>I don't think it can be used as a preprocessor (that's an interesting question actually)</p>

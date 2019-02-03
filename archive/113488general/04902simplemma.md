@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/04902simplemma.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [simp lemma](04902simplemma.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [simp lemma](https://leanprover-community.github.io/archive/113488general/04902simplemma.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Sep 07 2018 at 11:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20lemma/near/133500344):
 <p>Should these two be simp lemmas?</p>

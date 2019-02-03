@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/22601calciff.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [calc iff](22601calciff.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [calc iff](https://leanprover-community.github.io/archive/113488general/22601calciff.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Patrick Massot (Dec 20 2018 at 10:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/calc%20iff/near/152244122):
 <p>Is there anything we can do to get something like</p>

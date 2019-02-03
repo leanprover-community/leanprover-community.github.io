@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/53290LUGFreiburg2018.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [LUG Freiburg 2018](53290LUGFreiburg2018.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [LUG Freiburg 2018](https://leanprover-community.github.io/archive/113488general/53290LUGFreiburg2018.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Johan Commelin (Sep 11 2018 at 09:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/LUG%20Freiburg%202018/near/133714386):
 <p>Hi everyone, I am organising a Lean User Group meeting in Freiburg (Germany). Dates: Monday 5 November – Wednesday 7 November.<br>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/00248multiset.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [multiset](00248multiset.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [multiset](https://leanprover-community.github.io/archive/113488general/00248multiset.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Jul 12 2018 at 10:02)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/multiset/near/129522842):
 <p><span class="user-mention" data-user-id="120469">@Ellen Arlt</span> and I are putting <code>multiset.lean</code> through its paces.</p>

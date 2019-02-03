@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/74151Problem210TheoremProvinginLean.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [Problem 2.10 "Theorem Proving in Lean"](74151Problem210TheoremProvinginLean.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [Problem 2.10 "Theorem Proving in Lean"](https://leanprover-community.github.io/archive/113489newmembers/74151Problem210TheoremProvinginLean.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Christopher Sumnicht (Jan 19 2019 at 02:31)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Problem%202.10%20%22Theorem%20Proving%20in%20Lean%22/near/156414053):
 <p>Hello, I hope this is the correct place to ask this. I was looking at the <a href="https://leanprover.github.io/theorem_proving_in_lean/dependent_type_theory.html#exercises" target="_blank" title="https://leanprover.github.io/theorem_proving_in_lean/dependent_type_theory.html#exercises">Theorem Proving in Lean book exercises in Chap 2</a> which asks to both add two vectors together and reverse a vector. I have the following questions: </p>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/86990letinstructure.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [let in structure](86990letinstructure.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [let in structure](https://leanprover-community.github.io/archive/113488general/86990letinstructure.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Jun 02 2018 at 05:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/let%20in%20structure/near/127451506):
 <div class="codehilite"><pre><span></span><span class="kn">structure</span> <span class="n">foo</span> <span class="o">:=</span>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/83619directedmap.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [directed map](83619directedmap.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [directed map](https://leanprover-community.github.io/archive/116395maths/83619directedmap.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Mario Carneiro (Nov 06 2018 at 06:58)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/directed%20map/near/146847285):
 <p>Does this concept look familiar to anyone?</p>

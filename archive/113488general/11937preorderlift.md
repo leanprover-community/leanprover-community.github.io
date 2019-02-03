@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/11937preorderlift.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [preorder.lift](11937preorderlift.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [preorder.lift](https://leanprover-community.github.io/archive/113488general/11937preorderlift.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Reid Barton (Nov 28 2018 at 21:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/preorder.lift/near/148741950):
 <p>I'm tempted to define <code>lt</code> explicitly in <code>preorder.lift</code> as <code>\lam x y, f x &lt; f y</code>. Does this seem like a terrible idea for any obvious reason?</p>

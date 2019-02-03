@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/56063createalias.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [create alias](56063createalias.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [create alias](https://leanprover-community.github.io/archive/113488general/56063createalias.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Zesen Qian (Aug 17 2018 at 17:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/create%20alias/near/132309111):
 <p>How can I create an alias to anther declaration? Say, in my namespace <code>foo</code> I want to create a <code>true</code> such that users can see <code>foo.true</code> and the prover treats it equally to <code>true</code> from core.</p>

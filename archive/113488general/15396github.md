@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/15396github.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [github](15396github.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [github](https://leanprover-community.github.io/archive/113488general/15396github.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Scott Morrison (Feb 01 2019 at 23:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/github/near/157391693):
 <p>What am I meant to do with old PRs, that I had pushed as branches on leanprover-community/mathlib?</p>

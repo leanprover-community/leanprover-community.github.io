@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/96631Simplequestionaboutsimp.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [Simple question about simp](96631Simplequestionaboutsimp.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [Simple question about simp](https://leanprover-community.github.io/archive/113489newmembers/96631Simplequestionaboutsimp.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Sullivan (Dec 11 2018 at 18:09)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Simple%20question%20about%20simp/near/151460730):
 <p>The behavior of simp depends on how the rules for computing function values are presented, in a way I don't quite understand. What follows are two ways of writing a list append function. The first case is verbose, as it lists rules for all four combinations of nil and non-nil values. The second is more concise and is the usual way one would see this function defined. Following the alternative implementations is part of a proof that a length function distributes over append. When the first definition of append is used, the simp in the last line of the proof fails, while if the second, simp succeeds. The expressions to be simplified are the same in both cases. Thanks for enlightening me as to why this is so. I know this is an easy one. --ks</p>

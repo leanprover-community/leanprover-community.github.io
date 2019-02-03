@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/71470Attributecachingimplementationdetails.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [Attribute caching implementation details](71470Attributecachingimplementationdetails.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [Attribute caching implementation details](https://leanprover-community.github.io/archive/113488general/71470Attributecachingimplementationdetails.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Keeley Hoek (Nov 08 2018 at 08:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Attribute%20caching%20implementation%20details/near/147281757):
 <p>(Warning: I don't know how lean being multithreaded works.)</p>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/88815simplicialcomplexesinlean.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [simplicial complexes in lean](88815simplicialcomplexesinlean.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [simplicial complexes in lean](https://leanprover-community.github.io/archive/116395maths/88815simplicialcomplexesinlean.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Johan Commelin (May 28 2018 at 14:13)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/simplicial%20complexes%20in%20lean/near/127203178):
 <p>Now we have simplicial complexes!</p>

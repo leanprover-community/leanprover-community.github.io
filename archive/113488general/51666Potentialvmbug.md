@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/51666Potentialvmbug.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [Potential vm bug](51666Potentialvmbug.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [Potential vm bug](https://leanprover-community.github.io/archive/113488general/51666Potentialvmbug.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Keeley Hoek (Aug 11 2018 at 13:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Potential%20vm%20bug/near/131950146):
 <p>The following code typechecks:</p>

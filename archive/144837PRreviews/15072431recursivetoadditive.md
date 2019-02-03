@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/144837PRreviews/15072431recursivetoadditive.html
 ---
 
-## Stream: [PR reviews](index.html)
-### Topic: [#431 recursive to_additive](15072431recursivetoadditive.html)
+## Stream: [PR reviews](https://leanprover-community.github.io/archive/144837PRreviews/index.html)
+### Topic: [#431 recursive to_additive](https://leanprover-community.github.io/archive/144837PRreviews/15072431recursivetoadditive.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Johannes Hölzl (Nov 05 2018 at 18:03)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23431%20recursive%20to_additive/near/146809006):
 <p><span class="user-mention" data-user-id="110026">@Simon Hudon</span>  this currently fails. Do you know why? Maybe we need a way to have recursive optional?</p>

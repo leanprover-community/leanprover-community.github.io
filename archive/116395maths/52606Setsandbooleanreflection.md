@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/52606Setsandbooleanreflection.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [Sets and boolean reflection](52606Setsandbooleanreflection.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [Sets and boolean reflection](https://leanprover-community.github.io/archive/116395maths/52606Setsandbooleanreflection.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Tobias Grosser (Sep 19 2018 at 20:18)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Sets%20and%20boolean%20reflection/near/134259292):
 <p>ssreflect has a pattern <code>[pick x in A | P] == Some x</code> (See: <a href="http://ssr.msr-inria.inria.fr/doc/ssreflect-1.5/Ssreflect.fintype.html" target="_blank" title="http://ssr.msr-inria.inria.fr/doc/ssreflect-1.5/Ssreflect.fintype.html">http://ssr.msr-inria.inria.fr/doc/ssreflect-1.5/Ssreflect.fintype.html</a>) which is used in a proof that I want to translate from COQ. <span class="user-mention" data-user-id="110294">@Johannes Hölzl</span> already showed me how to model other parts of ssreflect in pure lean. I wonder if there is a canonical way to express this pattern in lean?</p>

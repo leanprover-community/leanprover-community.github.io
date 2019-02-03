@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/91542UbuntupackageforLean.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [Ubuntu package for Lean?](91542UbuntupackageforLean.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [Ubuntu package for Lean?](https://leanprover-community.github.io/archive/113488general/91542UbuntupackageforLean.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Sep 02 2018 at 16:16)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Ubuntu%20package%20for%20Lean%3F/near/133216835):
 <p>How does that work? I could attempt to maintain it if it's only really a matter of making sure the set up runs on my 18.04 machine and accepting PRs from people who wanted to fix it on other versions of Ubuntu</p>

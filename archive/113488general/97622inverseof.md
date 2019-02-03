@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/97622inverseof.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [inverse of $](97622inverseof.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [inverse of $](https://leanprover-community.github.io/archive/113488general/97622inverseof.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Andrew Ashworth (May 28 2018 at 05:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/inverse%20of%20%24/near/127186287):
 <p>is there an inverse of <code>$</code>? (the backwards pipe operator<code>&lt;|</code>)  i.e. instead of <code>g (f x)</code> being written as <code>g $ f x</code> I'd like to write <code>f x &lt;| g</code></p>

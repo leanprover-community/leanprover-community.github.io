@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/87954topologicalspacestuff.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [topological space stuff](87954topologicalspacestuff.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [topological space stuff](https://leanprover-community.github.io/archive/116395maths/87954topologicalspacestuff.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (May 12 2018 at 16:02)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/topological%20space%20stuff/near/126462782):
 <p>I need some standard topological space arguments. Do we have homeomorphisms and/or open immersions in mathlib yet, and if not then where should I put them? Should a homeomorphism be an equiv or a bijection? (i.e. should I demand a map in the other direction?). I need that something homeomorphic to a compact space is compact -- another thing which a mathematician would not need to supply a proof of because "it's obvious".</p>

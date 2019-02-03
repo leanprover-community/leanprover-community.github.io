@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/79835Linearmapsandmodulehomomorphisms.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [Linear maps and module homomorphisms](79835Linearmapsandmodulehomomorphisms.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [Linear maps and module homomorphisms](https://leanprover-community.github.io/archive/116395maths/79835Linearmapsandmodulehomomorphisms.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Johan Commelin (May 08 2018 at 13:42)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Linear%20maps%20and%20module%20homomorphisms/near/126260883):
 <p>In <code>algebra/module.lean</code> on line 78 there is <code>structure is_linear_map</code>. I have two questions:<br>

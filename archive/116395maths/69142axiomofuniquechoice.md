@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/69142axiomofuniquechoice.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [axiom of unique choice](69142axiomofuniquechoice.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [axiom of unique choice](https://leanprover-community.github.io/archive/116395maths/69142axiomofuniquechoice.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Apr 17 2018 at 06:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/axiom%20of%20unique%20choice/near/125181778):
 <p>Is the axiom of unique choice strictly weaker than the axiom of choice? From what I know, ZF has axiom of unique choice</p>

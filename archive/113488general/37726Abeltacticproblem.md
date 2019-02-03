@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/37726Abeltacticproblem.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [Abel tactic problem](37726Abeltacticproblem.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [Abel tactic problem](https://leanprover-community.github.io/archive/113488general/37726Abeltacticproblem.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Neil Strickland (Jan 16 2019 at 11:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Abel%20tactic%20problem/near/155242485):
 <p>I tried the following:</p>

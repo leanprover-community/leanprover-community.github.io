@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/80665wlogtestsusesorry.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [wlog tests use sorry](80665wlogtestsusesorry.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [wlog tests use sorry](https://leanprover-community.github.io/archive/113488general/80665wlogtestsusesorry.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Scott Morrison (Mar 09 2018 at 21:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/wlog%20tests%20use%20sorry/near/123507100):
 <p><span class="user-mention" data-user-email="simon.hudon@gmail.com" data-user-id="110026">@Simon Hudon</span>, I noticed your tests for the <code>wlog</code> tactic contain sorries, and these cause warning messages when compiling mathlib. Perhaps this is worth fixing, so we can all have clean outputs.</p>

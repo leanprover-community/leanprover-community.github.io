@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/04462ringbugagain.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [ring bug again?](04462ringbugagain.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [ring bug again?](https://leanprover-community.github.io/archive/113488general/04462ringbugagain.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Patrick Massot (Jul 31 2018 at 15:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/ring%20bug%20again%3F/near/130644147):
 <div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">ring</span> <span class="n">α</span><span class="o">]</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">a&#39;</span> <span class="n">b&#39;</span> <span class="n">a₁</span> <span class="n">b₁</span> <span class="n">a₂</span> <span class="n">b₂</span> <span class="o">:</span> <span class="n">α</span><span class="o">,</span>

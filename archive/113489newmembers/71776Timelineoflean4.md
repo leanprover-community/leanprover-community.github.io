@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/71776Timelineoflean4.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [Timeline of lean 4?](71776Timelineoflean4.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [Timeline of lean 4?](https://leanprover-community.github.io/archive/113489newmembers/71776Timelineoflean4.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ HT (Jun 27 2018 at 15:41)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Timeline%20of%20lean%204%3F/near/128716259):
 <p>Hi, when would lean 4 's repo be public?</p>

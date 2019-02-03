@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/55735categorytheorydirectories.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [category theory directories](55735categorytheorydirectories.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [category theory directories](https://leanprover-community.github.io/archive/113488general/55735categorytheorydirectories.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Reid Barton (Aug 23 2018 at 00:25)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/category%20theory%20directories/near/132605394):
 <p><span class="user-mention" data-user-id="110087">@Scott Morrison</span>, would you accept PRs to <code>lean-category-theory</code> and <code>lean-category-theory-pr</code> which move everything from <code>categories/</code> to <code>category_theory/</code>?</p>

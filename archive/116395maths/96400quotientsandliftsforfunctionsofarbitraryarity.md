@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/96400quotientsandliftsforfunctionsofarbitraryarity.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [quotients and lifts for functions of arbitrary arity](96400quotientsandliftsforfunctionsofarbitraryarity.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [quotients and lifts for functions of arbitrary arity](https://leanprover-community.github.io/archive/116395maths/96400quotientsandliftsforfunctionsofarbitraryarity.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ William DeMeo (Dec 02 2018 at 05:31)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/quotients%20and%20lifts%20for%20functions%20of%20arbitrary%20arity/near/150709555):
 <p>I'm trying to learn how to implement general quotient structures.  Unfortunately, I've only been able to figure out how to lift unary operations.  How does one lift operations of arbitrary arity?</p>

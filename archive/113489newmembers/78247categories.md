@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/78247categories.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [categories](78247categories.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [categories](https://leanprover-community.github.io/archive/113489newmembers/78247categories.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Edward Ayers (Aug 08 2018 at 00:42)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/categories/near/131073671):
 <p>I made a silly .lean file for mathematical category theory.<br>

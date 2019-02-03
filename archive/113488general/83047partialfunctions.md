@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/83047partialfunctions.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [partial functions](83047partialfunctions.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [partial functions](https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Victor Porton (Jul 07 2018 at 17:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129261641):
 <p>Why this does not work?</p>

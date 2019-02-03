@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/23254Splittingfields.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [Splitting fields](23254Splittingfields.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [Splitting fields](https://leanprover-community.github.io/archive/116395maths/23254Splittingfields.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Chris Hughes (Dec 12 2018 at 17:16)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Splitting%20fields/near/151535820):
 <p>So I thought I'd revive the splitting fields branch on community mathlib. So far I've just updated it to work with current mathlib. This is my definition of splitting fields. It's a bit unusual to write a recursive function like this returning a Type; is this a good approach? Also my definition of <code>of_field</code> the embedding from the base field gives me the error <code>rec_fn_macro only allowed in meta definitions</code>. What is this?</p>

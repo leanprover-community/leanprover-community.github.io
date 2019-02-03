@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/79339profiling.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [profiling](79339profiling.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [profiling](https://leanprover-community.github.io/archive/113488general/79339profiling.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Simon Hudon (Mar 25 2018 at 20:34)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/profiling/near/124196289):
 <p>Am I correct to believe that <code>lean --make</code> and <code>lean --profile</code> are not meant to be used together? </p>

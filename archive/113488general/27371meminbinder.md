@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/27371meminbinder.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [mem in binder](27371meminbinder.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [mem in binder](https://leanprover-community.github.io/archive/113488general/27371meminbinder.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Patrick Massot (Jun 16 2018 at 00:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mem%20in%20binder/near/128145487):
 <p>I wrote the code <code>⨅ U ∈ nhd_zero R, principal {p : R×R | p.2 - p.1 ∈ U}</code> but now I realize I don't quite understand what's going on under the hood. The inf notation is defined by:</p>

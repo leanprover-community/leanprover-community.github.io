@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/85401openimmersions.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [open immersions](85401openimmersions.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [open immersions](https://leanprover-community.github.io/archive/116395maths/85401openimmersions.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Johan Commelin (Jan 03 2019 at 09:46)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/open%20immersions/near/154227749):
 <p>Do we have open immersions in mathlib? We have <code>embedding</code>, but do we also have open maps?</p>

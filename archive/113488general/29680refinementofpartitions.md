@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/29680refinementofpartitions.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [refinement of partitions](29680refinementofpartitions.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [refinement of partitions](https://leanprover-community.github.io/archive/113488general/29680refinementofpartitions.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Apr 18 2018 at 02:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/refinement%20of%20partitions/near/125224068):
 <p>what are the existing lemmas related to refinement of partitions, i.e. the idea that if there are two partitions of a list, then there is a partition that refines both?</p>

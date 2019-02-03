@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/94306Isabelle.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [Isabelle](94306Isabelle.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [Isabelle](https://leanprover-community.github.io/archive/116395maths/94306Isabelle.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Sebastien Gouezel (Aug 27 2018 at 09:00)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Isabelle/near/132841692):
 <p>I just wanted to thank <span class="user-mention" data-user-id="110294">@Johannes Hölzl</span>  for this in Isabelle:</p>

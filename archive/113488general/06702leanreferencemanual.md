@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/06702leanreferencemanual.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [lean reference manual](06702leanreferencemanual.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [lean reference manual](https://leanprover-community.github.io/archive/113488general/06702leanreferencemanual.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Patrick Massot (Feb 26 2018 at 22:18)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20reference%20manual/near/123013797):
 <p><span class="user-mention" data-user-email="sebasti@nullri.ch" data-user-id="110024">@Sebastian Ullrich</span> do you know if you should do something to get <a href="https://github.com/leanprover/reference/commit/53ecf0a3292c5d95066f9d7a79c339eb5618f610" target="_blank" title="https://github.com/leanprover/reference/commit/53ecf0a3292c5d95066f9d7a79c339eb5618f610">https://github.com/leanprover/reference/commit/53ecf0a3292c5d95066f9d7a79c339eb5618f610</a> released?</p>

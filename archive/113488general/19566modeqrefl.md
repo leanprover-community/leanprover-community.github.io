@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/19566modeqrefl.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [modeq.refl](19566modeqrefl.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [modeq.refl](https://leanprover-community.github.io/archive/113488general/19566modeqrefl.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Apr 30 2018 at 22:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/modeq.refl/near/125911585):
 <p><code>@[refl] protected theorem refl (a : ℕ) : a ≡ a [MOD n] := @rfl _ _</code></p>

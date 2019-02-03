@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/73586rwunderaunion.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [rw under a union](73586rwunderaunion.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [rw under a union](https://leanprover-community.github.io/archive/113488general/73586rwunderaunion.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (May 14 2018 at 21:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20a%20union/near/126553772):
 <div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">set</span>

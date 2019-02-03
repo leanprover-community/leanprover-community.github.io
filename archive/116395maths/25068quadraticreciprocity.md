@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/25068quadraticreciprocity.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [quadratic reciprocity](25068quadraticreciprocity.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [quadratic reciprocity](https://leanprover-community.github.io/archive/116395maths/25068quadraticreciprocity.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (May 01 2018 at 01:34)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/quadratic%20reciprocity/near/125919765):
 <p><span class="user-mention" data-user-id="110044">@Chris Hughes</span> Did you prove Fermat's Little Theorem <a href="https://en.wikipedia.org/wiki/Fermat%27s_little_theorem" target="_blank" title="https://en.wikipedia.org/wiki/Fermat%27s_little_theorem">https://en.wikipedia.org/wiki/Fermat%27s_little_theorem</a> in Lean? I am interested in proving Euler's Criterion <a href="https://en.wikipedia.org/wiki/Euler%27s_criterion" target="_blank" title="https://en.wikipedia.org/wiki/Euler%27s_criterion">https://en.wikipedia.org/wiki/Euler%27s_criterion</a> and Gauss' Lemma <a href="https://en.wikipedia.org/wiki/Gauss%27s_lemma_(number_theory)" target="_blank" title="https://en.wikipedia.org/wiki/Gauss%27s_lemma_(number_theory)">https://en.wikipedia.org/wiki/Gauss%27s_lemma_(number_theory)</a> in Lean, with a view to proving when -1 and +-2 are squares mod p (this is related to quadratic reciprocity).</p>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/38818leanpkgbreaksmymathlib.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [leanpkg breaks my mathlib](38818leanpkgbreaksmymathlib.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [leanpkg breaks my mathlib](https://leanprover-community.github.io/archive/113488general/38818leanpkgbreaksmymathlib.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Jul 10 2018 at 11:36)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leanpkg%20breaks%20my%20mathlib/near/129401172):
 <div class="codehilite"><pre><span></span>buzzard@bob:~/Lean/lean-projects/xena-UROP-2018$ more leanpkg.toml

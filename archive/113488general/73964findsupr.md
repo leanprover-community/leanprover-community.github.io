@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/73964findsupr.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [find supr](73964findsupr.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [find supr](https://leanprover-community.github.io/archive/113488general/73964findsupr.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Johan Commelin (Nov 09 2018 at 13:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/find%20supr/near/147368449):
 <p>I have found</p>

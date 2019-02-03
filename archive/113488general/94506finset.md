@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/94506finset.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [finset](94506finset.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [finset](https://leanprover-community.github.io/archive/113488general/94506finset.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Floris van Doorn (Nov 20 2018 at 23:12)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset/near/148072219):
 <p>Is the following result somewhere in mathlib? If not, are there results which make it less painful than proving it from scratch using lists?</p>

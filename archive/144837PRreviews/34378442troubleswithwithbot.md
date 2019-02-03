@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/144837PRreviews/34378442troubleswithwithbot.html
 ---
 
-## Stream: [PR reviews](index.html)
-### Topic: [#442 troubles with with_bot](34378442troubleswithwithbot.html)
+## Stream: [PR reviews](https://leanprover-community.github.io/archive/144837PRreviews/index.html)
+### Topic: [#442 troubles with with_bot](https://leanprover-community.github.io/archive/144837PRreviews/34378442troubleswithwithbot.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Nov 02 2018 at 09:29)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23442%20troubles%20with%20with_bot/near/136981444):
 <p>Is there anything wrong with this PR?</p>

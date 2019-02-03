@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/90300Howdoesleanwork.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [How does lean work?](90300Howdoesleanwork.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [How does lean work?](https://leanprover-community.github.io/archive/113488general/90300Howdoesleanwork.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Ali Caglayan (Aug 02 2018 at 02:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/How%20does%20lean%20work%3F/near/130749203):
 <p>I want to understand how lean works. I have tried playing with the command line however I can only compile lean files. I have played with the emacs mode and thats fine, however there is only one problem. I hate emacs. </p>

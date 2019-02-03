@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/38567leakingconstruction.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [leaking construction](38567leakingconstruction.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [leaking construction](https://leanprover-community.github.io/archive/116395maths/38567leakingconstruction.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Patrick Massot (Sep 09 2018 at 21:46)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/leaking%20construction/near/133622397):
 <p>Sometimes I see things like: <code>quot.lift (λ (a₁ : cau_seq ℚ abs), quotient.lift (has_lt.lt a₁) _ ε) _</code> in my tactic state when playing with real numbers. It looks like internal details of the constructions are leaking. What does it mean? Can I avoid that?</p>

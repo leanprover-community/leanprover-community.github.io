@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/144837PRreviews/96225422limitsinCommRing.html
 ---
 
-## Stream: [PR reviews](index.html)
-### Topic: [#422 limits in CommRing](96225422limitsinCommRing.html)
+## Stream: [PR reviews](https://leanprover-community.github.io/archive/144837PRreviews/index.html)
+### Topic: [#422 limits in CommRing](https://leanprover-community.github.io/archive/144837PRreviews/96225422limitsinCommRing.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Scott Morrison (Oct 15 2018 at 00:57)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23422%20limits%20in%20CommRing/near/135796679):
 <p><span class="user-mention" data-user-id="110031">@Patrick Massot</span>, I've started a WIP branch to construct products and equalizers in CommRing.</p>

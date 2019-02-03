@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/47634IMPORTANTNOTICEgithubandmathlib.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [IMPORTANT NOTICE: github and mathlib](47634IMPORTANTNOTICEgithubandmathlib.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [IMPORTANT NOTICE: github and mathlib](https://leanprover-community.github.io/archive/113488general/47634IMPORTANTNOTICEgithubandmathlib.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Simon Hudon (Jan 30 2019 at 23:32)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/IMPORTANT%20NOTICE%3A%20github%20and%20mathlib/near/157229265):
 <p>We are in the process of moving <code>mathlib</code> from <code>leanprover</code> to <code>leanprover-community</code>. We will be inviting all the current contributors of <code>mathlib</code> to this new location but only the current maintainers will have write access to the master branch. All other branches will be available to write to. Please look at you inboxes for an invitation (if you currently have access to <code>leanprover-community/mathlib</code>) and update your <code>leanpkg.toml</code> files to point to <code>leanprover-community/mathlib</code> instead of <code>leanprover/mathlib</code>.</p>

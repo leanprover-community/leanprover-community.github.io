@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/07922reflectbool.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [reflect bool](07922reflectbool.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [reflect bool](https://leanprover-community.github.io/archive/113488general/07922reflectbool.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Simon Hudon (Aug 03 2018 at 08:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/reflect%20bool/near/130821232):
 <p>I'm running the following code:</p>

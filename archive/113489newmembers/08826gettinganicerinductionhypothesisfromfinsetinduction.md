@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/08826gettinganicerinductionhypothesisfromfinsetinduction.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [getting a nicer induction hypothesis from finset.induction](08826gettinganicerinductionhypothesisfromfinsetinduction.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [getting a nicer induction hypothesis from finset.induction](https://leanprover-community.github.io/archive/113489newmembers/08826gettinganicerinductionhypothesisfromfinsetinduction.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Bryan Gin-ge Chen (Sep 24 2018 at 23:35)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/getting%20a%20nicer%20induction%20hypothesis%20from%20finset.induction/near/134558327):
 <p>I'm working on formalizing a proof where the idea is to induct on the size of <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>Y</mi><mo>∖</mo><mi>X</mi></mrow><annotation encoding="application/x-tex">Y \setminus X</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.75em;"></span><span class="strut bottom" style="height:1em;vertical-align:-0.25em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.22222em;">Y</span><span class="mbin">∖</span><span class="mord mathit" style="margin-right:0.07847em;">X</span></span></span></span> for two finsets <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>X</mi><mo separator="true">,</mo><mi>Y</mi></mrow><annotation encoding="application/x-tex">X, Y</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.8777699999999999em;vertical-align:-0.19444em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.07847em;">X</span><span class="mpunct">,</span><span class="mord mathit" style="margin-right:0.22222em;">Y</span></span></span></span>. I've currently set up something like the following:</p>

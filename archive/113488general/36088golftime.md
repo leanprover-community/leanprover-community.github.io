@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/36088golftime.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [golf time](36088golftime.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [golf time](https://leanprover-community.github.io/archive/113488general/36088golftime.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Reid Barton (May 11 2018 at 22:09)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/golf%20time/near/126431532):
 <div class="codehilite"><pre><span></span><span class="kn">open</span> <span class="n">finset</span>

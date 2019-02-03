@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/94495Separationstuff.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [Separation stuff](94495Separationstuff.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [Separation stuff](https://leanprover-community.github.io/archive/116395maths/94495Separationstuff.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Patrick Massot (Sep 19 2018 at 16:59)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Separation%20stuff/near/134237694):
 <p><span class="user-mention" data-user-id="110294">@Johannes Hölzl</span> I'm working on uniform spaces again, and I have a couple of question. </p>

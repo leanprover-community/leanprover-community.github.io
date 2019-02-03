@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/18776Zeroofreallysmall.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [Zero of really small](18776Zeroofreallysmall.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [Zero of really small](https://leanprover-community.github.io/archive/116395maths/18776Zeroofreallysmall.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Patrick Massot (Jan 19 2019 at 22:44)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Zero%20of%20really%20small/near/156453113):
 <p>Where do we find <code>lemma zero_of_abs_lt_all (x : ℝ) (h : ∀ ε, ε &gt; 0 → |x| &lt; ε) : x = 0</code>?</p>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/00534Howdidsimpprovemylemma.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [How did simp prove my lemma?](00534Howdidsimpprovemylemma.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [How did simp prove my lemma?](https://leanprover-community.github.io/archive/113488general/00534Howdidsimpprovemylemma.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Johan Commelin (Jul 31 2018 at 14:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/How%20did%20simp%20prove%20my%20lemma%3F/near/130640952):
 <div class="codehilite"><pre><span></span><span class="kn">set_option</span> <span class="n">trace</span><span class="bp">.</span><span class="n">simp_lemmas</span> <span class="n">true</span>

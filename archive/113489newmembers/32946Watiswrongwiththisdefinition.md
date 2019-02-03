@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/32946Watiswrongwiththisdefinition.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [Wat is wrong with this definition?](32946Watiswrongwiththisdefinition.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [Wat is wrong with this definition?](https://leanprover-community.github.io/archive/113489newmembers/32946Watiswrongwiththisdefinition.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Ken Roe (Jul 24 2018 at 16:20)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Wat%20is%20wrong%20with%20this%20definition%3F/near/130214027):
 <div class="codehilite"><pre><span></span><span class="kn">inductive</span> <span class="n">evv</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">-&gt;</span> <span class="kt">Prop</span>

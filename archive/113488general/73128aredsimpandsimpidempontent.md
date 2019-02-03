@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/73128aredsimpandsimpidempontent.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [are dsimp and simp idempontent?](73128aredsimpandsimpidempontent.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [are dsimp and simp idempontent?](https://leanprover-community.github.io/archive/113488general/73128aredsimpandsimpidempontent.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Apr 02 2018 at 15:00)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/are%20dsimp%20and%20simp%20idempontent%3F/near/124526028):
 <p>Are dsimp and simp idempontent?</p>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/74802VScodeextensiononmacOS.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [VScode extension on macOS](74802VScodeextensiononmacOS.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [VScode extension on macOS](https://leanprover-community.github.io/archive/113488general/74802VScodeextensiononmacOS.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Ryan Smith (Oct 04 2018 at 07:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/VScode%20extension%20on%20macOS/near/135152447):
 <p>Do you need to append your lean/bin directory onto $PATH and then launch vscode from the command line in order for the extension to locate lean on macOS?</p>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/50743autoparamininstance.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [autoparam in instance](50743autoparamininstance.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [autoparam in instance](https://leanprover-community.github.io/archive/113488general/50743autoparamininstance.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Patrick Massot (Dec 18 2018 at 12:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/autoparam%20in%20instance/near/152102423):
 <p>Is it possible to use autoparam in instances? I have a <code>is_add_group_hom</code> instance that never triggers, probably because is it contains a continuity assumption. The following doesn't seem to help:</p>

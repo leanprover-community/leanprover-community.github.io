@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/144837PRreviews/65805479equivalences.html
 ---
 
-## Stream: [PR reviews](index.html)
-### Topic: [#479 equivalences](65805479equivalences.html)
+## Stream: [PR reviews](https://leanprover-community.github.io/archive/144837PRreviews/index.html)
+### Topic: [#479 equivalences](https://leanprover-community.github.io/archive/144837PRreviews/65805479equivalences.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Scott Morrison (Nov 16 2018 at 04:17)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23479%20equivalences/near/147792343):
 <p>This one was overdue, and lurking in my other repository.</p>

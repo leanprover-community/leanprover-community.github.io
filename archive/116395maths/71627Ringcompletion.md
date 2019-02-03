@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/71627Ringcompletion.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [Ring completion](71627Ringcompletion.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [Ring completion](https://leanprover-community.github.io/archive/116395maths/71627Ringcompletion.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Patrick Massot (Dec 18 2018 at 15:16)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Ring%20completion/near/152110493):
 <p><span class="user-mention" data-user-id="110294">@Johannes Hölzl</span>  I think I just completed the topological ring completion project. Remember where we got stuck last time: we could define a ring structure on <code>completion a</code> assuming that <code>a</code> was a <em>separated</em> topological ring, see <a href="https://github.com/leanprover/mathlib/blob/master/analysis/topology/completion.lean#L1168" target="_blank" title="https://github.com/leanprover/mathlib/blob/master/analysis/topology/completion.lean#L1168">https://github.com/leanprover/mathlib/blob/master/analysis/topology/completion.lean#L1168</a>. We could also construct a ring structure on <code>quotient (separatation_setoid a)</code>, see <a href="https://github.com/leanprover/mathlib/blob/master/analysis/topology/quotient_topological_structures.lean#L204" target="_blank" title="https://github.com/leanprover/mathlib/blob/master/analysis/topology/quotient_topological_structures.lean#L204">https://github.com/leanprover/mathlib/blob/master/analysis/topology/quotient_topological_structures.lean#L204</a>. I did that by leveraging the algebraic quotient construction, using that the separation relation for uniform groups is the same as the left coset relation for the closure of zero. This meant fighting the system to use an equivalence relation equality to relate the quotients. Then I constructed <a href="https://github.com/leanprover/mathlib/blob/master/analysis/topology/completion.lean#L710-L711" target="_blank" title="https://github.com/leanprover/mathlib/blob/master/analysis/topology/completion.lean#L710-L711">https://github.com/leanprover/mathlib/blob/master/analysis/topology/completion.lean#L710-L711</a> <code>completion (quotient $ separatation_setoid a) ≃ completion α</code> which I hoped to use to glue the preceding two constructions and get a ring structure on <code>completion α</code>. But this meant fighting Lean again, for lack of transport of structure along this equiv.</p>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/79918notopic.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [(no topic)](79918notopic.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [(no topic)](https://leanprover-community.github.io/archive/113489newmembers/79918notopic.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Andrew Ashworth (Feb 26 2018 at 17:14)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%28no%20topic%29/near/123002439):
 <p>This message has no topic</p>

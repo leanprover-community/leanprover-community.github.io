@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/57882modules.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [modules](57882modules.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [modules](https://leanprover-community.github.io/archive/116395maths/57882modules.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Johan Commelin (Jan 30 2019 at 09:05)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/modules/near/157169541):
 <p>Can someone (<span class="user-mention" data-user-id="110049">@Mario Carneiro</span>, <span class="user-mention" data-user-id="110064">@Kenny Lau</span>) explain why exactly one needs <code>[add_comm_group M]</code> before being able to speak about <code>[module M]</code>?</p>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/04500subsetreflweirdness.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [subset refl weirdness](04500subsetreflweirdness.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [subset refl weirdness](https://leanprover-community.github.io/archive/113488general/04500subsetreflweirdness.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Reid Barton (May 04 2018 at 20:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subset%20refl%20weirdness/near/126108434):
 <p>Is this a bug?</p>

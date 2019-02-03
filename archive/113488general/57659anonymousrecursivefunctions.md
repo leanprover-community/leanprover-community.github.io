@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/57659anonymousrecursivefunctions.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [anonymous recursive functions](57659anonymousrecursivefunctions.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [anonymous recursive functions](https://leanprover-community.github.io/archive/113488general/57659anonymousrecursivefunctions.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Andrew Ashworth (Jun 17 2018 at 06:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/anonymous%20recursive%20functions/near/128191984):
 <p>is it possible to define an anonymous recursive function? so for I've been making auxiliary defs as needed, but I'm copying a development from coq that uses them a lot</p>

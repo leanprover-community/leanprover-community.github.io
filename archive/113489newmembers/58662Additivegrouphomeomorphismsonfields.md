@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/58662Additivegrouphomeomorphismsonfields.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [Additive group homeomorphisms on fields](58662Additivegrouphomeomorphismsonfields.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [Additive group homeomorphisms on fields](https://leanprover-community.github.io/archive/113489newmembers/58662Additivegrouphomeomorphismsonfields.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Abhimanyu Pallavi Sudhir (Jan 11 2019 at 11:16)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Additive%20group%20homeomorphisms%20on%20fields/near/154907204):
 <p>Since fields extend additive groups , I thought that something <code>hom_int_to_field</code> below should work:</p>

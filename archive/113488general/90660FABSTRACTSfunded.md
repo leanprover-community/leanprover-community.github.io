@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/90660FABSTRACTSfunded.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [FABSTRACTS funded](90660FABSTRACTSfunded.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [FABSTRACTS funded](https://leanprover-community.github.io/archive/113488general/90660FABSTRACTSfunded.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Mar 28 2018 at 17:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/FABSTRACTS%20funded/near/124325364):
 <p><a href="https://jiggerwit.wordpress.com/2018/03/28/formal-abstracts-in-mathematics/" target="_blank" title="https://jiggerwit.wordpress.com/2018/03/28/formal-abstracts-in-mathematics/">https://jiggerwit.wordpress.com/2018/03/28/formal-abstracts-in-mathematics/</a></p>

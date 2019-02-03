@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/13681Tacticwritingtutorial.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [Tactic writing tutorial](13681Tacticwritingtutorial.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [Tactic writing tutorial](https://leanprover-community.github.io/archive/113488general/13681Tacticwritingtutorial.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Patrick Massot (Dec 03 2018 at 09:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Tactic%20writing%20tutorial/near/150758082):
 <p>More and more people are writing tactics, and providing bits of explanations here, but I never remember. So I decided to use my last hope option: I tried to teach it. The result is at <a href="https://github.com/leanprover-community/mathlib/blob/tactic_tutorial/docs/extras/tactic_writing.md" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/tactic_tutorial/docs/extras/tactic_writing.md">https://github.com/leanprover-community/mathlib/blob/tactic_tutorial/docs/extras/tactic_writing.md</a> Not only I hope this will help me remember this stuff, but also I hope it will allow experts to clear my misconceptions. And of course it would be a nice extra if it could teach someone something useful, so I'd be interested to know if any tactic writing newbie can read it (I know Johan already read it, because he carefully monitors our community repository).</p>

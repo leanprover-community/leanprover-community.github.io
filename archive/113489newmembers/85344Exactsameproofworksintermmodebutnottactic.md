@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/85344Exactsameproofworksintermmodebutnottactic.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [Exact same proof works in term mode but not tactic](85344Exactsameproofworksintermmodebutnottactic.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [Exact same proof works in term mode but not tactic](https://leanprover-community.github.io/archive/113489newmembers/85344Exactsameproofworksintermmodebutnottactic.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Abhimanyu Pallavi Sudhir (Nov 16 2018 at 20:05)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Exact%20same%20proof%20works%20in%20term%20mode%20but%20not%20tactic/near/147838170):
 <p>This works:</p>

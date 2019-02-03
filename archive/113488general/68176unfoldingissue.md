@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/68176unfoldingissue.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [unfolding issue](68176unfoldingissue.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [unfolding issue](https://leanprover-community.github.io/archive/113488general/68176unfoldingissue.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (May 22 2018 at 23:40)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unfolding%20issue/near/126947033):
 <p><code>(presheaf_of_types_pullback_under_open_immersion {F := F, res := res, Hid := Hid, Hcomp := Hcomp} id _).res</code></p>

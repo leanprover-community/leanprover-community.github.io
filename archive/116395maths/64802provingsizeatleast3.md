@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/64802provingsizeatleast3.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [proving size at least 3](64802provingsizeatleast3.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [proving size at least 3](https://leanprover-community.github.io/archive/116395maths/64802provingsizeatleast3.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Aug 13 2018 at 12:35)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/proving%20size%20at%20least%203/near/132037729):
 <p>I would be interested in a relatively slick proof of either of the below examples:</p>

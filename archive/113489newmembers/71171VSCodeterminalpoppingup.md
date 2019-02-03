@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/71171VSCodeterminalpoppingup.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [VS Code terminal popping up](71171VSCodeterminalpoppingup.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [VS Code terminal popping up](https://leanprover-community.github.io/archive/113489newmembers/71171VSCodeterminalpoppingup.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Casper Putz (Jan 23 2019 at 21:28)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/VS%20Code%20terminal%20popping%20up/near/156722159):
 <p>When typing in VS Code I constantly have the terminal window popping up with all error messages. It makes it impossible to work... I had this problem before and cannot remember how to fix it. Does anybody know how to fix this?</p>

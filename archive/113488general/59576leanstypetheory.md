@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/59576leanstypetheory.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [lean's type theory](59576leanstypetheory.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [lean's type theory](https://leanprover-community.github.io/archive/113488general/59576leanstypetheory.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Mario Carneiro (Mar 17 2018 at 04:39)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%27s%20type%20theory/near/123826805):
 <p>Okay, I'm a bit embarrassed to release this in this very early form, but there's enough meat in it that it can be useful to others even before it's done. This will probably become a major part of my master's thesis. What you will find:</p>

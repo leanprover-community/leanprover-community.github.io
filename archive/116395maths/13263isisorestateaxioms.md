@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/13263isisorestateaxioms.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [is_iso restate_axioms](13263isisorestateaxioms.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [is_iso restate_axioms](https://leanprover-community.github.io/archive/116395maths/13263isisorestateaxioms.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Johan Commelin (Jan 14 2019 at 21:44)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/is_iso%20restate_axioms/near/155115408):
 <p><span class="user-mention" data-user-id="110087">@Scott Morrison</span> I don't know much about <code>restate_axiom</code>, but I think it has to be invoked on <code>is_iso</code>. Is that right?</p>

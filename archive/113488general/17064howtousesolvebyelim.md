@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/17064howtousesolvebyelim.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [how to use `solve_by_elim`](17064howtousesolvebyelim.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [how to use `solve_by_elim`](https://leanprover-community.github.io/archive/113488general/17064howtousesolvebyelim.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Chris Hughes (Aug 17 2018 at 18:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20use%20%60solve_by_elim%60/near/132313630):
 <p>What is the syntax for giving <code>solve_by_elim</code> a discharger. I tried <code>solve_by_elim `[cc] </code> like the docs suggest, but I couldn't get it to work.</p>

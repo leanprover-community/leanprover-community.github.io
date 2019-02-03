@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/25766Userdefinableoptions.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [User definable options](25766Userdefinableoptions.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [User definable options](https://leanprover-community.github.io/archive/113488general/25766Userdefinableoptions.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Joe Hendrix (Jan 12 2019 at 00:23)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/User%20definable%20options/near/154955190):
 <p>Is there a way that I can set user definable options that can be parsed by tactics?  I have some proofs that take a while to run, and I'd like to be able to have an option at the file or lean package level that let me configure whether they ran or not.  e.g., during interactive development I disable proofs I'm not actually working on, but in a regression test they are enabled.<br>

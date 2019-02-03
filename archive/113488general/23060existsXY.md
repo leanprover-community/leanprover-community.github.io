@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/23060existsXY.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [exists (X) (Y)](23060existsXY.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [exists (X) (Y)](https://leanprover-community.github.io/archive/113488general/23060existsXY.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (May 17 2018 at 19:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/exists%20%28X%29%20%28Y%29/near/126709974):
 <p><code>topological_space.is_topological_basis</code> has, as part of its definition, <code>∃ (t₃ : set α) (H : t₃ ∈ s), x ∈ t₃ ∧ ...</code>, that is, "there exists a set with some property such that..."</p>

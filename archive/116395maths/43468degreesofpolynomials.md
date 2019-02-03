@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/43468degreesofpolynomials.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [degrees of polynomials](43468degreesofpolynomials.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [degrees of polynomials](https://leanprover-community.github.io/archive/116395maths/43468degreesofpolynomials.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Sep 07 2018 at 13:46)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/degrees%20of%20polynomials/near/133505238):
 <p><span class="user-mention" data-user-id="110044">@Chris Hughes</span> told me a while ago that the degree of a polynomial is a bit of a nightmare, because the zero polynomial has degree -1 or -infinity or something, and these are not nats. It seems that he went with <code>degree</code> into <code>with_bot nat</code> and <code>nat_degree</code> into <code>nat</code> (with nat_degree of 0 being 0). I am now faced with goals like</p>

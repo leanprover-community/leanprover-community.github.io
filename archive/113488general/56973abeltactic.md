@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/56973abeltactic.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [abel tactic](56973abeltactic.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [abel tactic](https://leanprover-community.github.io/archive/113488general/56973abeltactic.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Mario Carneiro (Sep 10 2018 at 09:28)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/abel%20tactic/near/133643278):
 <p>Say hello to the <code>abel</code> tactic, which does the same thing as <code>ring</code> but for commutative additive monoids and commutative groups. It doesn't currently support <code>*</code> on rings, since it would require a bit more support for <code>nat.cast</code> and <code>int.cast</code> in <code>norm_num</code>, but otherwise it is full featured using <code>+</code>, <code>-</code>, and <code>add_monoid.smul</code>, <code>gsmul</code>.</p>

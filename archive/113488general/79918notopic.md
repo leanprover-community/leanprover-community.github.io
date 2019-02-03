@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/79918notopic.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [(no topic)](79918notopic.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [(no topic)](https://leanprover-community.github.io/archive/113488general/79918notopic.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Feb 26 2018 at 19:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%28no%20topic%29/near/123008190):
 <p>So general chatter goes in "archives" topic?</p>

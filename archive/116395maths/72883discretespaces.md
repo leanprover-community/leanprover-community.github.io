@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/72883discretespaces.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [discrete spaces](72883discretespaces.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [discrete spaces](https://leanprover-community.github.io/archive/116395maths/72883discretespaces.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Reid Barton (Oct 19 2018 at 01:01)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/discrete%20spaces/near/136077573):
 <blockquote>

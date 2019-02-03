@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/144837PRreviews/63394583moveeverythingintosrc.html
 ---
 
-## Stream: [PR reviews](index.html)
-### Topic: [#583 move everything into `src`](63394583moveeverythingintosrc.html)
+## Stream: [PR reviews](https://leanprover-community.github.io/archive/144837PRreviews/index.html)
+### Topic: [#583 move everything into `src`](https://leanprover-community.github.io/archive/144837PRreviews/63394583moveeverythingintosrc.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Patrick Massot (Jan 15 2019 at 09:15)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23583%20move%20everything%20into%20%60src%60/near/155153163):
 <p>What is the status of this PR? I think we should bite the bullet and make it happen. I'm waiting for it before implementing the topology part of <a href="https://github.com/leanprover/mathlib/issues/586" target="_blank" title="https://github.com/leanprover/mathlib/issues/586">https://github.com/leanprover/mathlib/issues/586</a> I'm willing to update the PR, but then it needs to be merged right away, otherwise it will have conflict at every single future commit</p>

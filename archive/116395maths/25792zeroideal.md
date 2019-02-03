@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/25792zeroideal.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [zero ideal](25792zeroideal.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [zero ideal](https://leanprover-community.github.io/archive/116395maths/25792zeroideal.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Patrick Massot (Dec 17 2018 at 15:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/zero%20ideal/near/152032669):
 <p>I lost the zero ideal during the module refactor. Does anyone know where it ended up?</p>

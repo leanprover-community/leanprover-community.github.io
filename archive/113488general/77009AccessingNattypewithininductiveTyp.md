@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/77009AccessingNattypewithininductiveTyp.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [Accessing Nat type within inductive Typ](77009AccessingNattypewithininductiveTyp.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [Accessing Nat type within inductive Typ](https://leanprover-community.github.io/archive/113488general/77009AccessingNattypewithininductiveTyp.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Cameron Crossman (Dec 13 2018 at 19:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Accessing%20Nat%20type%20within%20inductive%20Typ/near/151722800):
 <p>I have the following inductive definition<br>

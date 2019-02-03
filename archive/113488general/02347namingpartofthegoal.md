@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/02347namingpartofthegoal.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [naming part of the goal](02347namingpartofthegoal.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [naming part of the goal](https://leanprover-community.github.io/archive/113488general/02347namingpartofthegoal.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Reid Barton (Jan 01 2019 at 22:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/naming%20part%20of%20the%20goal/near/154143914):
 <p>I discovered a trick for referring to parts of the goal without having to write them out. For example, suppose your goal is to prove that some really complicated expression equals 0. You can give that expression a name <code>lhs</code> by writing</p>

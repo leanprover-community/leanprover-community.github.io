@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/59421defusingdot.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [def using dot](59421defusingdot.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [def using dot](https://leanprover-community.github.io/archive/113488general/59421defusingdot.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Chris Hughes (Apr 05 2018 at 18:31)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/def%20using%20dot/near/124678478):
 <p>How does this definition work? </p>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/63737LearningalgebraicgeometryhowcanIcontribute.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [Learning algebraic geometry; how can I contribute?](63737LearningalgebraicgeometryhowcanIcontribute.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [Learning algebraic geometry; how can I contribute?](https://leanprover-community.github.io/archive/113489newmembers/63737LearningalgebraicgeometryhowcanIcontribute.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Soham Chowdhury (Sep 02 2018 at 14:56)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Learning%20algebraic%20geometry%3B%20how%20can%20I%20contribute%3F/near/133214542):
 <p>Hi everyone! A friend sent me a link to <span class="user-mention" data-user-id="110038">@Kevin Buzzard</span>'s answer on the "What are perfectoid spaces?" MO question, which is how I got here. I'm learning algebraic geometry right now. More to the point, I have some experience using Agda and Idris (but not Lean).</p>

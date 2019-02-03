@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/71528ext1vsext1.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [ext1 vs ext : 1](71528ext1vsext1.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [ext1 vs ext : 1](https://leanprover-community.github.io/archive/113488general/71528ext1vsext1.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Patrick Massot (Sep 28 2018 at 21:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/ext1%20vs%20ext%20%3A%201/near/134847162):
 <p>Is there any difference between <code>ext1</code> and <code>ext : 1</code>?</p>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/35331leanpkg.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [leanpkg](35331leanpkg.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [leanpkg](https://leanprover-community.github.io/archive/113488general/35331leanpkg.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Simon Hudon (Feb 27 2018 at 02:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leanpkg/near/123021774):
 <p>It is possible to specify git branches in <code>leanpkg</code>?</p>

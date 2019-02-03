@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/144837PRreviews/78187473limitsandcolimits.html
 ---
 
-## Stream: [PR reviews](index.html)
-### Topic: [#473 limits and colimits](78187473limitsandcolimits.html)
+## Stream: [PR reviews](https://leanprover-community.github.io/archive/144837PRreviews/index.html)
+### Topic: [#473 limits and colimits](https://leanprover-community.github.io/archive/144837PRreviews/78187473limitsandcolimits.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Johan Commelin (Nov 19 2018 at 09:37)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23473%20limits%20and%20colimits/near/147952349):
 <p><span class="user-mention" data-user-id="110087">@Scott Morrison</span> has taken this PR through a couple of revisions, but I think it is quite solid and stable now. I've been stress testing it quite a bit on my <code>sheaf</code> branch, and I think it works well. Do others have any comments?</p>

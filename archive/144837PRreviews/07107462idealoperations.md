@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/144837PRreviews/07107462idealoperations.html
 ---
 
-## Stream: [PR reviews](index.html)
-### Topic: [#462 ideal operations](07107462idealoperations.html)
+## Stream: [PR reviews](https://leanprover-community.github.io/archive/144837PRreviews/index.html)
+### Topic: [#462 ideal operations](https://leanprover-community.github.io/archive/144837PRreviews/07107462idealoperations.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Nov 07 2018 at 13:29)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23462%20ideal%20operations/near/146936148):
 <p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> <span class="user-mention" data-user-id="110049">@Mario Carneiro</span> <code>pow</code> comes for free after I've proved semiring! :D</p>

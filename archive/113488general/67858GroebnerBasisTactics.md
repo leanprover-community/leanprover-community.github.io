@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/67858GroebnerBasisTactics.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [Groebner Basis Tactics](67858GroebnerBasisTactics.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [Groebner Basis Tactics](https://leanprover-community.github.io/archive/113488general/67858GroebnerBasisTactics.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Syx Pek (Sep 09 2018 at 23:26)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Groebner%20Basis%20Tactics/near/133625535):
 <p>Is there currently a way to do Groebner Basis in Lean?</p>

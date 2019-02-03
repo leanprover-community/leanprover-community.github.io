@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/54381inducedcoinduced.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [induced, coinduced, ...](54381inducedcoinduced.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [induced, coinduced, ...](https://leanprover-community.github.io/archive/116395maths/54381inducedcoinduced.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Jun 15 2018 at 13:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/induced%2C%20coinduced%2C%20.../near/128116033):
 <p>If I have a function f:A-&gt;B with a topology on B, are the following two topologies on A x A the same?<br>

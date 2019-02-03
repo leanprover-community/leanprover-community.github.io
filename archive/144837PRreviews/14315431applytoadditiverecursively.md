@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/144837PRreviews/14315431applytoadditiverecursively.html
 ---
 
-## Stream: [PR reviews](index.html)
-### Topic: [#431 apply `to_additive` recursively](14315431applytoadditiverecursively.html)
+## Stream: [PR reviews](https://leanprover-community.github.io/archive/144837PRreviews/index.html)
+### Topic: [#431 apply `to_additive` recursively](https://leanprover-community.github.io/archive/144837PRreviews/14315431applytoadditiverecursively.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Johan Commelin (Nov 30 2018 at 16:46)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23431%20apply%20%60to_additive%60%20recursively/near/148869284):
 <p><span class="user-mention" data-user-id="110026">@Simon Hudon</span> Somehow I missed this PR, but it looks awesome! Kudos <span class="emoji emoji-1f419" title="octopus">:octopus:</span> <span class="emoji emoji-1f389" title="tada">:tada:</span> <br>

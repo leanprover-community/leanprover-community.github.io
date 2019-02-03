@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/35057dictionarymaptypeordset.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [dictionary / map type: ordset](35057dictionarymaptypeordset.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [dictionary / map type: ordset](https://leanprover-community.github.io/archive/113488general/35057dictionarymaptypeordset.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Mario Carneiro (Dec 11 2018 at 19:49)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dictionary%20/%20map%20type%3A%20ordset/near/151471035):
 <p>I've been playing around with conventional programming in lean lately (thank you Advent of Code), and it has made me realize that our capabilities with finite maps is quite limited. Currently, we have:</p>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/52145submodulespan.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [submodule.span](52145submodulespan.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [submodule.span](https://leanprover-community.github.io/archive/113488general/52145submodulespan.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ petercommand (Nov 18 2018 at 04:42)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/submodule.span/near/147901978):
 <p>I am trying to understand submodule.span, why can the type of <code>Inf { p | s \sub p } </code> (set beta) be converted to <code>submodule \alpha \beta</code>? Thanks!</p>

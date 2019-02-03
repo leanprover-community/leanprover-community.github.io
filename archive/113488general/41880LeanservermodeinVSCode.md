@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/41880LeanservermodeinVSCode.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [Lean server mode in VS Code](41880LeanservermodeinVSCode.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [Lean server mode in VS Code](https://leanprover-community.github.io/archive/113488general/41880LeanservermodeinVSCode.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Moses Schönfinkel (Jan 23 2019 at 08:59)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20server%20mode%20in%20VS%20Code/near/156670777):
 <p>So a strange thing has just started happening to me - whenever I open a window in VS Code with an instance of lean server, it arbitrarily chooses between a mode that displays all messages at the same time + moving the cursor doesn't do anything, as everything is displayed and between the "interactive" mode, where cursor determines what messages and / or proof state is displayed. Anybody has encountered this - is there a way to force default? Am I going completely insane? (don't answer the latter).</p>

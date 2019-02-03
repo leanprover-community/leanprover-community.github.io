@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/91327producttopology.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [product topology](91327producttopology.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [product topology](https://leanprover-community.github.io/archive/116395maths/91327producttopology.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Rohan Mitta (Jul 24 2018 at 19:10)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/product%20topology/near/130223243):
 <p>Hi! I'm trying to define the product topology and am running into issues. I may have made a silly mistake somewhere, but it seems  to me that "I" should have type set (set (α × β)), but I get a type mismatch error. Any help would be greatly appreciated.</p>

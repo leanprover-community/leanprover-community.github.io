@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/57153mathlibnightly.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [mathlib nightly](57153mathlibnightly.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [mathlib nightly](https://leanprover-community.github.io/archive/113488general/57153mathlibnightly.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Mar 31 2018 at 07:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20nightly/near/124444305):
 <p>Is this possible? <span class="user-mention" data-user-id="110049">@Mario Carneiro</span> (or maybe I could host it myself?)</p>

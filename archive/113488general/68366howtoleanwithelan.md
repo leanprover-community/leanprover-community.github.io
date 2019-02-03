@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/68366howtoleanwithelan.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [howto lean with elan](68366howtoleanwithelan.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [howto lean with elan](https://leanprover-community.github.io/archive/113488general/68366howtoleanwithelan.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Johan Commelin (Apr 20 2018 at 14:03)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/howto%20lean%20with%20elan/near/125446301):
 <p><a href="https://gist.github.com/jcommelin/1d45a0ea7a84a87db8a28a12e93cac32" target="_blank" title="https://gist.github.com/jcommelin/1d45a0ea7a84a87db8a28a12e93cac32">https://gist.github.com/jcommelin/1d45a0ea7a84a87db8a28a12e93cac32</a><br>

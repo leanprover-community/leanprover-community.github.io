@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/30756monadrefactoring.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [monad refactoring](30756monadrefactoring.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [monad refactoring](https://leanprover-community.github.io/archive/113488general/30756monadrefactoring.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Patrick Massot (Mar 01 2018 at 08:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/monad%20refactoring/near/123127367):
 <p><span class="user-mention" data-user-email="sebasti@nullri.ch" data-user-id="110024">@Sebastian Ullrich</span> woke up with a lot of homework... Does anyone knows whether basic users like me will see any difference after merging this?</p>

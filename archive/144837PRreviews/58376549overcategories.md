@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/144837PRreviews/58376549overcategories.html
 ---
 
-## Stream: [PR reviews](index.html)
-### Topic: [#549 over categories](58376549overcategories.html)
+## Stream: [PR reviews](https://leanprover-community.github.io/archive/144837PRreviews/index.html)
+### Topic: [#549 over categories](https://leanprover-community.github.io/archive/144837PRreviews/58376549overcategories.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Scott Morrison (Dec 21 2018 at 11:36)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23549%20over%20categories/near/152321838):
 <p>Hi <span class="user-mention" data-user-id="112680">@Johan Commelin</span>, is it a good idea to define over and under categories in terms of comma categories?</p>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/70527prime617challenge.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [prime 617 challenge](70527prime617challenge.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [prime 617 challenge](https://leanprover-community.github.io/archive/116395maths/70527prime617challenge.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Jul 26 2018 at 19:21)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/prime%20617%20challenge/near/130359176):
 <div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">nat</span><span class="bp">.</span><span class="n">prime</span>

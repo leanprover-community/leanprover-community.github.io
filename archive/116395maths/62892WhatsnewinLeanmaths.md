@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/62892WhatsnewinLeanmaths.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [What's new in Lean maths?](62892WhatsnewinLeanmaths.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [What's new in Lean maths?](https://leanprover-community.github.io/archive/116395maths/62892WhatsnewinLeanmaths.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Sep 09 2018 at 13:31)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/What%27s%20new%20in%20Lean%20maths%3F/near/133605485):
 <p>This thread is for people to occasionally announce or flag code which they or others have written, which is publically available, finished / usable, and which might be of general use or interest to the lean community. I'm starting it because I find looking through mathlib commits confusing and time-consuming, and because there are things which are happening other than mathlib commits.</p>

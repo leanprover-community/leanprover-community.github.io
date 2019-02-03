@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/07323updatingKevinsinstallationinstructions.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [updating Kevin's installation instructions](07323updatingKevinsinstallationinstructions.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [updating Kevin's installation instructions](https://leanprover-community.github.io/archive/113488general/07323updatingKevinsinstallationinstructions.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Scott Morrison (Oct 06 2018 at 03:01)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/updating%20Kevin%27s%20installation%20instructions/near/135291857):
 <p>Hi <span class="user-mention" data-user-id="110038">@Kevin Buzzard</span>, I'm thinking that since <code>elan</code> has now arrived and is pretty good, we should update your blog post.</p>

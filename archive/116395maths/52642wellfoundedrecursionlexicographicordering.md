@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/52642wellfoundedrecursionlexicographicordering.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [well-founded recursion & lexicographic ordering ?](52642wellfoundedrecursionlexicographicordering.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [well-founded recursion & lexicographic ordering ?](https://leanprover-community.github.io/archive/116395maths/52642wellfoundedrecursionlexicographicordering.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Jack Crawford (Sep 14 2018 at 11:29)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/well-founded%20recursion%20%26%20lexicographic%20ordering%20%3F/near/133941390):
 <p>Hi, I have a pleb question about how Lean infers whether recursion is well-founded or not.<br>

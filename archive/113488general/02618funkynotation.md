@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/02618funkynotation.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [funky notation](02618funkynotation.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [funky notation](https://leanprover-community.github.io/archive/113488general/02618funkynotation.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Johan Commelin (Oct 04 2018 at 13:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/funky%20notation/near/135168245):
 <p>Is this doomed to fail?</p>

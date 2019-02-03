@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/56646fillinginanunderscore.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [filling in an underscore](56646fillinginanunderscore.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [filling in an underscore](https://leanprover-community.github.io/archive/113488general/56646fillinginanunderscore.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Mar 29 2018 at 19:11)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/filling%20in%20an%20underscore/near/124374909):
 <div class="codehilite"><pre><span></span>import data.fintype

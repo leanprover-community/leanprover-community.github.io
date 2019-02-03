@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/24753buildingextensionalitylemmasforstructures.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [building @[extensionality] lemmas for structures](24753buildingextensionalitylemmasforstructures.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [building @[extensionality] lemmas for structures](https://leanprover-community.github.io/archive/113488general/24753buildingextensionalitylemmasforstructures.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Scott Morrison (Aug 13 2018 at 15:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/building%20%40%5Bextensionality%5D%20lemmas%20for%20structures/near/132045472):
 <p>Hi <span class="user-mention" data-user-id="110026">@Simon Hudon</span>, I'm wondering if you've thought recently about building <code>@[extensionality]</code> lemmas for structures automatically. I know we had some discussion about this a long time ago (gitter?), and some attempts at a <code>congr_struct</code> tactic.</p>

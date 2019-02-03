@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/27016AssertViolation.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [Assert Violation](27016AssertViolation.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [Assert Violation](https://leanprover-community.github.io/archive/113488general/27016AssertViolation.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Namdak Tonpa (Jan 09 2019 at 10:38)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Assert%20Violation/near/154711246):
 <div class="codehilite"><pre><span></span>LEAN ASSERTION VIOLATION

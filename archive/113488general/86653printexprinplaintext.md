@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/86653printexprinplaintext.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [print `expr` in plaintext](86653printexprinplaintext.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [print `expr` in plaintext](https://leanprover-community.github.io/archive/113488general/86653printexprinplaintext.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Zesen Qian (Aug 12 2018 at 23:41)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/print%20%60expr%60%20in%20plaintext/near/132012147):
 <p>How to print an <code>expr</code> in a plaintext way? That is, represented as all constructors <code>app</code> <code>lam</code> <code>var</code>, etc..</p>

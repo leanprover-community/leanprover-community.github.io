@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/91225Zulipdiscipline.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [Zulip discipline](91225Zulipdiscipline.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [Zulip discipline](https://leanprover-community.github.io/archive/113488general/91225Zulipdiscipline.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Patrick Massot (Apr 01 2018 at 10:43)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Zulip%20discipline/near/124482781):
 <p>Although I have no time for doing Lean those days, I still try to roughly follow conversations here. I noticed that it becomes harder because we are returning to Gitter-like mess with interleaved conversations in one giant thread (mostly in "Fresh off the boat" for the last few days). I know I've also created some of this mess, but I think it would really help to try to be a tiny bit more disciplined.</p>

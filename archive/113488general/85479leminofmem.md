@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/85479leminofmem.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [le_min_of_mem](85479leminofmem.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [le_min_of_mem](https://leanprover-community.github.io/archive/113488general/85479leminofmem.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kenny Lau (Jul 28 2018 at 22:06)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/le_min_of_mem/near/130485616):
 <div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">le_min_of_mem</span> <span class="o">{</span><span class="n">s</span> <span class="o">:</span> <span class="n">finset</span> <span class="n">α</span><span class="o">}</span> <span class="o">{</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">α</span><span class="o">}</span> <span class="o">(</span><span class="n">h₁</span> <span class="o">:</span> <span class="n">b</span> <span class="err">∈</span> <span class="n">s</span><span class="o">)</span> <span class="o">(</span><span class="n">h₂</span> <span class="o">:</span> <span class="n">a</span> <span class="err">∈</span> <span class="n">s</span><span class="bp">.</span><span class="n">min</span><span class="o">)</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">≤</span> <span class="n">b</span> <span class="o">:=</span>

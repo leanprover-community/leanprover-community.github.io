@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/53591abbreviation.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [abbreviation](53591abbreviation.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [abbreviation](https://leanprover-community.github.io/archive/113488general/53591abbreviation.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Reid Barton (Dec 03 2018 at 03:46)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/abbreviation/near/150746902):
 <p>I don't suppose <code>abbreviation</code> is documented anywhere?</p>

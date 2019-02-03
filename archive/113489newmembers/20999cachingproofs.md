@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/20999cachingproofs.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [caching proofs](20999cachingproofs.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [caching proofs](https://leanprover-community.github.io/archive/113489newmembers/20999cachingproofs.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Johan Commelin (Sep 18 2018 at 09:14)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/caching%20proofs/near/134149890):
 <p>Re <span class="user-mention" data-user-id="110111">@Keeley Hoek</span>'s dream. ( <span class="emoji emoji-26a0" title="warning">:warning:</span> everything that follows should be taken with a fair amount of <span class="emoji emoji-1f340" title="four leaf clover">:four_leaf_clover:</span>)<br>

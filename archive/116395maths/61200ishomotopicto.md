@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/61200ishomotopicto.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [is_homotopic_to](61200ishomotopicto.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [is_homotopic_to](https://leanprover-community.github.io/archive/116395maths/61200ishomotopicto.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Aug 09 2018 at 12:39)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/is_homotopic_to/near/131163659):
 <p>I just saw this in <span class="user-mention" data-user-id="120726">@Luca Gerolla</span> 's code.</p>

@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/04281matrices.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [matrices](04281matrices.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [matrices](https://leanprover-community.github.io/archive/113488general/04281matrices.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Andrew Ashworth (Apr 08 2018 at 00:50)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/matrices/near/124777985):
 <p>any of the coq experts out there know what the most complete linalg / tensor package is out there for theorem provers? I'd like to look into what's out there for computing with complex matrices. quaternions would be cool too</p>

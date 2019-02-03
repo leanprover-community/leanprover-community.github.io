@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/28591instanceloop.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [instance loop?](28591instanceloop.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [instance loop?](https://leanprover-community.github.io/archive/113488general/28591instanceloop.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Reid Barton (Oct 22 2018 at 20:20)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/instance%20loop%3F/near/136284768):
 <p>I made an instance <code>instance normal_of_compact_t2 [topological_space α] [t2_space α] [compact_space α] : normal_space α</code> where <code>normal_space</code> extends <code>t2_space</code>. Apparently this was a bad idea because Lean now thinks that the way it should try to prove a space is T2 is to use <code>normal_space.to_t2_space</code> and use this instance to reduce the problem to showing the space is T2 and compact...</p>

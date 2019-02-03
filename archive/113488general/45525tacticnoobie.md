@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/45525tacticnoobie.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [tactic noobie](45525tacticnoobie.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [tactic noobie](https://leanprover-community.github.io/archive/113488general/45525tacticnoobie.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Johan Commelin (Sep 14 2018 at 13:54)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20noobie/near/133947182):
 <p>I'm taking a stab at the <code>tfae</code> tactic. This is what I have so far:</p>

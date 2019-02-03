@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/77274Awesomestuff.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [Awesome stuff](77274Awesomestuff.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [Awesome stuff](https://leanprover-community.github.io/archive/113488general/77274Awesomestuff.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Simon Hudon (Mar 08 2018 at 22:47)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Awesome%20stuff/near/123464026):
 <p>My mind was just blown by how useful <code>has_coe_to_fun</code> is. I constructed a morphism between applicative functors:</p>

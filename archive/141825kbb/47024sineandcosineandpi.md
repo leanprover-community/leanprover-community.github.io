@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/141825kbb/47024sineandcosineandpi.html
 ---
 
-## Stream: [kbb](index.html)
-### Topic: [sine and cosine and pi](47024sineandcosineandpi.html)
+## Stream: [kbb](https://leanprover-community.github.io/archive/141825kbb/index.html)
+### Topic: [sine and cosine and pi](https://leanprover-community.github.io/archive/141825kbb/47024sineandcosineandpi.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Chris Hughes (Sep 15 2018 at 13:34)](https://leanprover.zulipchat.com/#narrow/stream/141825-kbb/topic/sine%20and%20cosine%20and%20pi/near/134008790):
 <p>I've started working on sine and cosine. I have cleaned the proofs up until <code>exp (x + y)</code> and I'm currently working on things like <code>sin (x + y)</code>. I have no idea how to define pi however. <span class="user-mention" data-user-id="110049">@Mario Carneiro</span> what's the best way to do this?</p>

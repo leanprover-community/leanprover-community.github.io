@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/30312unorderedpairs.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [unordered pairs](30312unorderedpairs.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [unordered pairs](https://leanprover-community.github.io/archive/113488general/30312unorderedpairs.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Jul 05 2018 at 13:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unordered%20pairs/near/129131942):
 <p>TPIL explains how to construct unordered pairs of terms here: <a href="https://leanprover.github.io/theorem_proving_in_lean/axioms_and_computation.html#quotients" target="_blank" title="https://leanprover.github.io/theorem_proving_in_lean/axioms_and_computation.html#quotients">https://leanprover.github.io/theorem_proving_in_lean/axioms_and_computation.html#quotients</a> . But is this actually in Lean somewhere?</p>

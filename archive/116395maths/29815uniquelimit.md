@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/29815uniquelimit.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [unique limit](29815uniquelimit.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [unique limit](https://leanprover-community.github.io/archive/116395maths/29815uniquelimit.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Patrick Massot (Jan 19 2019 at 23:20)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/unique%20limit/near/156454309):
 <p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> I looked at <a href="https://github.com/ImperialCollegeLondon/M1P1-lean/blob/master/src/limits.lean" target="_blank" title="https://github.com/ImperialCollegeLondon/M1P1-lean/blob/master/src/limits.lean">https://github.com/ImperialCollegeLondon/M1P1-lean/blob/master/src/limits.lean</a> There is a comment saying you don't know how to use <code>wlog</code>. I think what you were looking for is:</p>

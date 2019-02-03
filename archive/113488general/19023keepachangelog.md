@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/19023keepachangelog.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [keep a changelog](19023keepachangelog.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [keep a changelog](https://leanprover-community.github.io/archive/113488general/19023keepachangelog.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Sean Leather (Jul 29 2018 at 15:13)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/keep%20a%20changelog/near/130523988):
 <p>I just discovered <a href="https://keepachangelog.com/" target="_blank" title="https://keepachangelog.com/">Keep a Changlog</a>, which reminded me of our <a href="#narrow/stream/113488-general/subject/mathlib.20branches/near/128358255" title="#narrow/stream/113488-general/subject/mathlib.20branches/near/128358255">previous discussions</a> on mathlib releases.</p>

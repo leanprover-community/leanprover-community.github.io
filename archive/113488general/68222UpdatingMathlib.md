@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/68222UpdatingMathlib.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [Updating Mathlib](68222UpdatingMathlib.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [Updating Mathlib](https://leanprover-community.github.io/archive/113488general/68222UpdatingMathlib.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Morenikeji Neri (Aug 10 2018 at 16:15)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Updating%20Mathlib/near/131239650):
 <p>I typed leanpkg upgrade on msys2 but my mathlib doesn't update. Help!</p>

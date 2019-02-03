@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/54424intcoenatmax.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [int.coe_nat_max](54424intcoenatmax.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [int.coe_nat_max](https://leanprover-community.github.io/archive/116395maths/54424intcoenatmax.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Sep 06 2018 at 19:13)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/int.coe_nat_max/near/133455883):
 <p>I don't <em>think</em> <code>int.coe_nat_max : {m n : ℕ} : (↑(max m n) : ℤ) = max m n</code> is in mathlib, and I needed it today. Kenny produced this proof:</p>

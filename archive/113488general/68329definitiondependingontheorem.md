@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/68329definitiondependingontheorem.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [definition depending on theorem](68329definitiondependingontheorem.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [definition depending on theorem](https://leanprover-community.github.io/archive/113488general/68329definitiondependingontheorem.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Johan Commelin (Oct 08 2018 at 08:30)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/definition%20depending%20on%20theorem/near/135382946):
 <p>For my Lean-talk I would like a good example of a definition that depends on a (non-trivial) theorem. I don't want to use perfectoid spaces because that is way too advanced. I want to use this thread to collect a list of cute examples.</p>

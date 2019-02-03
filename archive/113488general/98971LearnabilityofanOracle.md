@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/98971LearnabilityofanOracle.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [Learnability of an Oracle](98971LearnabilityofanOracle.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [Learnability of an Oracle](https://leanprover-community.github.io/archive/113488general/98971LearnabilityofanOracle.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Koundinya Vajjha (Jan 10 2019 at 19:55)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Learnability%20of%20an%20Oracle/near/154862245):
 <p>Say I have an oracle in my vicinity which answers well-formed queries I pose to it in some language <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>L</mi></mrow><annotation encoding="application/x-tex">L</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.68333em;vertical-align:0em;"></span><span class="base"><span class="mord mathit">L</span></span></span></span>. For my application, I am assuming it to be a proof-checker kernel. </p>

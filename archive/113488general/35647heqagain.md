@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/35647heqagain.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [heq again](35647heqagain.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [heq again](https://leanprover-community.github.io/archive/113488general/35647heqagain.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Reid Barton (Sep 10 2018 at 18:24)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/heq%20again/near/133673026):
 <p>Hmm, I wasn't expecting this to work.</p>

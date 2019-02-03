@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/89367naturalsinreals.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [naturals_in_reals](89367naturalsinreals.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [naturals_in_reals](https://leanprover-community.github.io/archive/113488general/89367naturalsinreals.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Guillermo Barajas Ayuso (Sep 11 2018 at 15:05)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/naturals_in_reals/near/133730371):
 <p>Hi guys, how would you express the natural numbers as a subtype of the reals?</p>

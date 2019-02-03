@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/08878fromtacticstoterms.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [from tactics to terms](08878fromtacticstoterms.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [from tactics to terms](https://leanprover-community.github.io/archive/113488general/08878fromtacticstoterms.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Johan Commelin (Aug 24 2018 at 09:48)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/from%20tactics%20to%20terms/near/132682307):
 <p>Even though I'm beginning to understand a bit of the <code>meta</code>-world, I still don't fully comprehend the tactic monad. For example: is it possible to extract a concrete term from a <code>begin ... end</code>-block?</p>

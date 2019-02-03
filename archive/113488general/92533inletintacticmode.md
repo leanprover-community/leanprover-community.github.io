@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/92533inletintacticmode.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [$ in let in tactic mode](92533inletintacticmode.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [$ in let in tactic mode](https://leanprover-community.github.io/archive/113488general/92533inletintacticmode.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (May 12 2018 at 19:45)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%24%20in%20let%20in%20tactic%20mode/near/126468511):
 <div class="codehilite"><pre><span></span><span class="kn">definition</span> <span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="o">:=</span>

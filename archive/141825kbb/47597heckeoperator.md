@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/141825kbb/47597heckeoperator.html
 ---
 
-## Stream: [kbb](index.html)
-### Topic: [hecke operator](47597heckeoperator.html)
+## Stream: [kbb](https://leanprover-community.github.io/archive/141825kbb/index.html)
+### Topic: [hecke operator](https://leanprover-community.github.io/archive/141825kbb/47597heckeoperator.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Johan Commelin (Sep 14 2018 at 18:32)](https://leanprover.zulipchat.com/#narrow/stream/141825-kbb/topic/hecke%20operator/near/133964447):
 <p>The next step would be to define <a href="https://en.wikipedia.org/wiki/Hecke_operator#Explicit_formula" target="_blank" title="https://en.wikipedia.org/wiki/Hecke_operator#Explicit_formula">https://en.wikipedia.org/wiki/Hecke_operator#Explicit_formula</a> on the subspace of <code>Petersson_weight k</code> functions on the upper half plane.</p>

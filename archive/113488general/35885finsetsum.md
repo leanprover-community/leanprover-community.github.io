@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/35885finsetsum.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [finset.sum](35885finsetsum.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [finset.sum](https://leanprover-community.github.io/archive/113488general/35885finsetsum.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Morenikeji Neri (Aug 06 2018 at 15:07)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/130977419):
 <p>I'm having some trouble proving this. Help would be much appreciated.<br>

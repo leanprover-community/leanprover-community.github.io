@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/02074exprpis.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [expr.pis](02074exprpis.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [expr.pis](https://leanprover-community.github.io/archive/113488general/02074exprpis.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Jakob von Raumer (Mar 14 2018 at 18:04)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/expr.pis/near/123711391):
 <p>Why doesn't <code>#reduce expr.pis [expr.local_const  ` A `A binder_info.default `(Sort 1)] `(Sort 1)</code>terminate?</p>

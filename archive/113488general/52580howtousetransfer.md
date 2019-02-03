@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/52580howtousetransfer.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [how to use transfer](52580howtousetransfer.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [how to use transfer](https://leanprover-community.github.io/archive/113488general/52580howtousetransfer.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Mario Carneiro (Oct 06 2018 at 07:21)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/how%20to%20use%20transfer/near/135299504):
 <p>Okay, here is a mockup use of <code>transfer</code>:</p>

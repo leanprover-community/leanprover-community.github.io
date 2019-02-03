@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113489newmembers/58886partialorderformatrix.html
 ---
 
-## Stream: [new members](index.html)
-### Topic: [partial order for matrix](58886partialorderformatrix.html)
+## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
+### Topic: [partial order for matrix](https://leanprover-community.github.io/archive/113489newmembers/58886partialorderformatrix.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Tobias Grosser (Sep 18 2018 at 21:02)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/partial%20order%20for%20matrix/near/134185883):
 <p>Dear all, as you know I just get up-to-speed on lean (and theorem proving) and don't do it fulltime for now. However, I picked as first toy-project to get started the extension of matrix as an instance of partial_order. (See <a href="https://github.com/tobig/lean-polyhedra/blob/master/src/polyhedra.lean" target="_blank" title="https://github.com/tobig/lean-polyhedra/blob/master/src/polyhedra.lean">https://github.com/tobig/lean-polyhedra/blob/master/src/polyhedra.lean</a>)</p>

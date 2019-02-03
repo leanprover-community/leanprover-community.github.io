@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/12961subtypeinstance.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [subtype_instance](12961subtypeinstance.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [subtype_instance](https://leanprover-community.github.io/archive/113488general/12961subtypeinstance.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Scott Morrison (Oct 15 2018 at 06:10)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subtype_instance/near/135805972):
 <p>I'm having trouble using <code>subtype_instance</code>.</p>

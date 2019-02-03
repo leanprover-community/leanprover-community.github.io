@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/04301roptionname.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [roption name](04301roptionname.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [roption name](https://leanprover-community.github.io/archive/113488general/04301roptionname.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Scott Olson (Nov 04 2018 at 11:29)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/roption%20name/near/137151183):
 <p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> What's the meaning behind the name of the type <code>roption</code>? Sorry if I'm missing something obvious :p</p>

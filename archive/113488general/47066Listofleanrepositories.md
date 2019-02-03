@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/47066Listofleanrepositories.html
 ---
 
-## Stream: [general](index.html)
-### Topic: [List of lean repositories](47066Listofleanrepositories.html)
+## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
+### Topic: [List of lean repositories](https://leanprover-community.github.io/archive/113488general/47066Listofleanrepositories.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Neil Strickland (Jan 08 2019 at 11:33)](https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/List%20of%20lean%20repositories/near/154635935):
 <p>At <a href="http://bim.shef.ac.uk/lean" target="_blank" title="http://bim.shef.ac.uk/lean">bim.shef.ac.uk/lean</a> I have placed a list of the 293 github repositories using Lean, which may be of interest.  I have code to update it automatically using the github API, and at some point I will schedule that to run regularly.  By hand I have divided the repositories into crude categories: maths, computer science, teaching, infrastructure, obsolete and scratch space.  There are various extensions that one could think of:<br>

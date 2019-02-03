@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/74041categorytheorynotations.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [category theory notations](74041categorytheorynotations.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [category theory notations](https://leanprover-community.github.io/archive/116395maths/74041categorytheorynotations.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Scott Morrison (Apr 28 2018 at 07:45)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category%20theory%20notations/near/125808846):
 <p>I am very-nearly-just-about ready with my category theory PR. I would like some help with notations, however.</p>

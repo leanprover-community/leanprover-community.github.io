@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/116395maths/45346equivanduniverses.html
 ---
 
-## Stream: [maths](index.html)
-### Topic: [equiv and universes](45346equivanduniverses.html)
+## Stream: [maths](https://leanprover-community.github.io/archive/116395maths/index.html)
+### Topic: [equiv and universes](https://leanprover-community.github.io/archive/116395maths/45346equivanduniverses.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Kevin Buzzard (Apr 29 2018 at 02:56)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/equiv%20and%20universes/near/125837442):
 <p>I am interested in beefing up equiv but I am only now coming to terms with how universes work and do not yet really understand how they affect the picture if at all</p>

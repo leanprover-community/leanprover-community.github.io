@@ -4,12 +4,12 @@ title: Lean Prover Zulip Chat Archive
 permalink: archive/144837PRreviews/63887593AdddefaultsetupforVSCode.html
 ---
 
-## Stream: [PR reviews](index.html)
-### Topic: [#593 Add default setup for VS Code](63887593AdddefaultsetupforVSCode.html)
+## Stream: [PR reviews](https://leanprover-community.github.io/archive/144837PRreviews/index.html)
+### Topic: [#593 Add default setup for VS Code](https://leanprover-community.github.io/archive/144837PRreviews/63887593AdddefaultsetupforVSCode.html)
 
 ---
 
-
+<base href="https://leanprover.zulipchat.com">
 {% raw %}
 #### [ Johannes Hölzl (Jan 14 2019 at 17:32)](https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23593%20Add%20default%20setup%20for%20VS%20Code/near/155096087):
 <p>I would like to propose to add a <code>.vscode/settings.json</code> file. <span class="user-mention" data-user-id="110043">@Gabriel Ebner</span> mentioned that this may be a problem if somebody uses this file for their own personal <code>mathlib</code> settings. Is anybody using it?</p>
