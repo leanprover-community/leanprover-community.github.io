@@ -62,5 +62,8 @@ permalink: archive/113489newmembers/06135Anglebrackets.html
 #### [ Patrick Massot (Feb 04 2019 at 08:54)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Angle%20brackets/near/157506093):
 <p>You don't need any fancy vimscript, <code>imap</code> is all you need</p>
 
+#### [ Kevin Buzzard (Feb 04 2019 at 11:33)](https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Angle%20brackets/near/157513531):
+<p>Saved by a fellow vimmer :-) There are all sorts of people around here :-)</p>
+
 
 {% endraw %}
