@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Lean + LaTeX?](57481LeanLaTeX.html) (50 messages, latest: Feb 04 2019 at 08:21)
+
 * [A Counting Argument](57356ACountingArgument.html) (30 messages, latest: Feb 04 2019 at 02:29)
 
 * [Indexing Zulip](45931IndexingZulip.html) (70 messages, latest: Feb 03 2019 at 23:01)
@@ -29,8 +31,6 @@ permalink: archive/113488general/index.html
 * [github](15396github.html) (12 messages, latest: Feb 01 2019 at 23:46)
 
 * [import everything](61377importeverything.html) (9 messages, latest: Feb 01 2019 at 23:10)
-
-* [Lean + LaTeX?](57481LeanLaTeX.html) (50 messages, latest: Feb 04 2019 at 08:21)
 
 * [tactic wishlist](23792tacticwishlist.html) (17 messages, latest: Feb 01 2019 at 21:43)
 

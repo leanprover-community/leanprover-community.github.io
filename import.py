@@ -172,7 +172,7 @@ def write_topic_index(s_name, s):
                 html_root, 
                 format_stream_url(s['id'], s_name))
     outfile.write(header)
-    for topic_name in s['topic_data']:
+    for topic_name in sorted(s['topic_data'], key=lambda tn: s['topic_data'][tn]['latest_date'], reverse=True): #s['topic_data']:
         t = s['topic_data'][topic_name]
         outfile.write("* [{0}]({1}.html) ({2} message{4}, latest: {3})\n\n".format(
             topic_name, 
@@ -238,5 +238,5 @@ def write_markdown():
             get_topic_and_write(s, streams[s], t)
 
 #populate_all()
-populate_incremental()
+#populate_incremental()
 write_markdown()

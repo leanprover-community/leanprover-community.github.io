@@ -10,9 +10,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Mathlib and LEAN_PATH](47969MathlibandLEANPATH.html) (63 messages, latest: Feb 02 2019 at 16:50)
-
 * [Angle brackets](06135Anglebrackets.html) (17 messages, latest: Feb 04 2019 at 08:54)
+
+* [Mathlib and LEAN_PATH](47969MathlibandLEANPATH.html) (63 messages, latest: Feb 02 2019 at 16:50)
 
 * [reduce sin](36515reducesin.html) (11 messages, latest: Jan 30 2019 at 19:57)
 
