@@ -177,8 +177,13 @@ def format_stream_url(stream_id, stream_name):
     return site_url + str(html_root) + '/' + sanitize_stream(stream_name, stream_id)
 
 # formats a single post
-def format_message(name, date, msg, link):
-    return u'#### [{4} {0} ({1})]({3}):\n{2}'.format(name, date, msg, link, '')
+def format_message(name, date, msg, link, anchor_name, anchor_url):
+    #return u'<a name="{4}"></a>\n #### [![view this post on Zulip]({5}/assets/img/zulip2.png)]({3}) [ {0} ({1})]({6}):\n{2}'.format(name, date, msg, link, anchor_name, site_url, anchor_url)
+    anchor = '<a name="{0}"></a>'.format(anchor_name)
+    zulip_link = '<a href="{0}" class="zl"><img src="{1}" alt="view this post on Zulip"></a>'.format(link, site_url+'assets/img/zulip2.png')
+    local_link = '<a href="{0}">{1} ({2})</a>'.format(anchor_url, name, date)
+    return '{0}\n<h4>{1} {2}:</h4>\n{3}'.format(anchor, zulip_link, local_link, msg)
+    #return u'<a name="{4}"></a>\n #### [![view this post on Zulip]({5}/assets/img/zulip2.png)]({3}) [ {0} ({1})]({6}):\n{2}'.format(name, date, msg, link, anchor_name, site_url, anchor_url)
 
 # writes the body of a topic page (ie, a list of messages)
 def write_topic(messages, stream_name, stream_id, topic_name, outfile):
@@ -187,7 +192,14 @@ def write_topic(messages, stream_name, stream_id, topic_name, outfile):
         date = datetime.fromtimestamp(c['timestamp']).strftime('%b %d %Y at %H:%M')
         msg = c['content']
         link = structure_link(stream_id, stream_name, topic_name, c['id'])
-        outfile.write(format_message(name, date, msg, link))
+        anchor_name = str(c['id'])
+        anchor_link = '{0}{4}/{1}/{2}.html#{3}'.format(
+            site_url,
+            sanitize_stream(stream_name, stream_id),
+            sanitize_topic(topic_name),
+            anchor_name,
+            html_root)
+        outfile.write(format_message(name, date, msg, link, anchor_name, anchor_link))
         outfile.write('\n\n')
 
 # writes an index page for a given stream, printing a list of the topics in that stream.
@@ -232,7 +244,7 @@ def write_stream_index(streams):
 # formats the header for a topic page.
 def format_topic_header(stream_name, stream_id, topic_name):
     return ("---\nlayout: page\ntitle: Lean Prover Zulip Chat Archive \npermalink: {4}/{2}/{3}.html\n---\n\n" +
-            '## Stream: [{0}]({5}/index.html)\n### Topic: [{1}]({5}/{3}.html)\n\n---\n\n<base href="https://leanprover.zulipchat.com">').format(
+            '<h2>Stream: <a href="{5}/index.html">{0}</a>\n<h3>Topic: <a href="{5}/{3}.html">{1}</a></h3>\n\n<hr>\n\n<base href="https://leanprover.zulipchat.com">').format(
                 stream_name,
                 topic_name,
                 sanitize_stream(stream_name, stream_id),
@@ -246,7 +258,7 @@ def get_topic_and_write(stream_name, stream, topic):
     f = json_path.open('r', encoding='utf-8')
     messages = json.load(f)
     f.close()
-    o = open_outfile(md_root / Path(sanitize_stream(stream_name, stream['id'])), Path(sanitize_topic(topic) + '.md'), 'w+')
+    o = open_outfile(md_root / Path(sanitize_stream(stream_name, stream['id'])), Path(sanitize_topic(topic) + '.html'), 'w+')
     o.write(format_topic_header(stream_name, stream['id'], topic))
     o.write('\n{% raw %}\n')
     write_topic(messages, stream_name, stream['id'], topic, o)
