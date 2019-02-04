@@ -12,26 +12,26 @@ permalink: archive/113488general/27699instanceobfuscation.html
 <base href="https://leanprover.zulipchat.com">
 {% raw %}
 <a name="157203765"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/instance%20obfuscation/near/157203765" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27699instanceobfuscation.html#157203765">Simon Hudon (Jan 30 2019 at 18:17)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/instance%20obfuscation/near/157203765" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27699instanceobfuscation.html#157203765">Simon Hudon (Jan 31 2019 at 04:17)</a>:</h4>
 <p>Every now and then, I use <code>rw</code> and I get a type class resolution problem as a side condition. If I work with <code>traversable</code>, I get <code>traversable (λ x, t x)</code> as a side condition while <code>traversable t</code> is in my context. Is there a way to avoid that? Also, is there a reason why type class resolution does not perform eta reduction first?</p>
 
 <a name="157204541"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/instance%20obfuscation/near/157204541" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27699instanceobfuscation.html#157204541">Chris Hughes (Jan 30 2019 at 18:28)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/instance%20obfuscation/near/157204541" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27699instanceobfuscation.html#157204541">Chris Hughes (Jan 31 2019 at 04:28)</a>:</h4>
 <p>Usually giving the <code>rw</code> enough information to work out the type is good enough. So do <code>rw @lemma α</code> for example.</p>
 
 <a name="157205673"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/instance%20obfuscation/near/157205673" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27699instanceobfuscation.html#157205673">Gabriel Ebner (Jan 30 2019 at 18:43)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/instance%20obfuscation/near/157205673" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27699instanceobfuscation.html#157205673">Gabriel Ebner (Jan 31 2019 at 04:43)</a>:</h4>
 <p>Is this a problem?  Instance search should transparently apply η:</p>
 <div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">{</span><span class="n">t</span><span class="o">}</span> <span class="o">[</span><span class="n">traversable</span> <span class="n">t</span><span class="o">]</span> <span class="o">:</span> <span class="n">traversable</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="n">t</span> <span class="n">x</span><span class="o">)</span> <span class="o">:=</span>
 <span class="n">infer_instance</span>
 </pre></div>
 
 <a name="157211145"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/instance%20obfuscation/near/157211145" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27699instanceobfuscation.html#157211145">Simon Hudon (Jan 30 2019 at 19:53)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/instance%20obfuscation/near/157211145" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27699instanceobfuscation.html#157211145">Simon Hudon (Jan 31 2019 at 05:53)</a>:</h4>
 <p>Oh, that's curious. Maybe <code>η</code> is not the problem then.</p>
 
 <a name="157211164"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/instance%20obfuscation/near/157211164" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27699instanceobfuscation.html#157211164">Simon Hudon (Jan 30 2019 at 19:53)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/instance%20obfuscation/near/157211164" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27699instanceobfuscation.html#157211164">Simon Hudon (Jan 31 2019 at 05:53)</a>:</h4>
 <p><span class="user-mention" data-user-id="110044">@Chris Hughes</span> Thanks, I will do that. I was hoping it wouldn't come done to it though</p>
 
 

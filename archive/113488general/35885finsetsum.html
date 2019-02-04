@@ -12,7 +12,7 @@ permalink: archive/113488general/35885finsetsum.html
 <base href="https://leanprover.zulipchat.com">
 {% raw %}
 <a name="130977419"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/130977419" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#130977419">Morenikeji Neri (Aug 06 2018 at 15:07)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/130977419" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#130977419">Morenikeji Neri (Aug 06 2018 at 23:07)</a>:</h4>
 <p>I'm having some trouble proving this. Help would be much appreciated.<br>
 <code>lean lemma sum_keji {α β : Type*} [add_comm_monoid α] {f : β → α}
   (s : finset β) (g : Π a ∈ s, β) (h₁ : ∀ a ha, f a + f (g a ha) = 0)
@@ -20,27 +20,27 @@ permalink: archive/113488general/35885finsetsum.html
   (h₃ : ∀ a ha, ∃ b hb, g b hb = a) : s.sum f = 0 := sorry </code></p>
 
 <a name="130979862"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/130979862" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#130979862">Mario Carneiro (Aug 06 2018 at 15:54)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/130979862" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#130979862">Mario Carneiro (Aug 06 2018 at 23:54)</a>:</h4>
 <p>I guess you should first prove <code>g a ha ∈ s</code> using the pigeonhole principle</p>
 
 <a name="130979907"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/130979907" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#130979907">Mario Carneiro (Aug 06 2018 at 15:55)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/130979907" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#130979907">Mario Carneiro (Aug 06 2018 at 23:55)</a>:</h4>
 <p>then the assumptions say that <code>g : s -&gt; s</code> is a bijection, so you can use <code>sum_bij</code> to shift things around and cancel using <code>h1</code></p>
 
 <a name="130979982"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/130979982" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#130979982">Mario Carneiro (Aug 06 2018 at 15:57)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/130979982" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#130979982">Mario Carneiro (Aug 06 2018 at 23:57)</a>:</h4>
 <p>Oh wait, you only have that it is an <code>add_comm_monoid</code>, that's not enough to conclude</p>
 
 <a name="130979991"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/130979991" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#130979991">Mario Carneiro (Aug 06 2018 at 15:57)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/130979991" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#130979991">Mario Carneiro (Aug 06 2018 at 23:57)</a>:</h4>
 <p>you will be able to prove <code>s.sum f + s.sum f = 0</code></p>
 
 <a name="130980256"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/130980256" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#130980256">Mario Carneiro (Aug 06 2018 at 16:01)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/130980256" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#130980256">Mario Carneiro (Aug 07 2018 at 00:01)</a>:</h4>
 <p>So for example if <code>α = Z/2Z</code>, <code>β=Z/3Z</code>, <code>s={0,1,2}</code>, <code>f a = 1</code> and <code>g n = n+1</code> then we have a counterexample</p>
 
 <a name="130982346"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/130982346" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#130982346">Morenikeji Neri (Aug 06 2018 at 16:37)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/130982346" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#130982346">Morenikeji Neri (Aug 07 2018 at 00:37)</a>:</h4>
 <p>sorry about that. I realized I missed out a few assumptions in the theorem.<br>
 It should read.</p>
 <p><code>lean lemma sum_keji {α β : Type*} [add_comm_monoid α] {f : β → α}
@@ -49,35 +49,35 @@ It should read.</p>
   (h₃ : ∀ a ha, ∃ b hb, g b hb = a) (h₄ : ∀ a ha, g a ha ∈ s) (h₅ : ∀ a ha, g (g a ha) (h₄ a ha) = a ) : s.sum f = 0 := sorry </code></p>
 
 <a name="130982614"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/130982614" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#130982614">Mario Carneiro (Aug 06 2018 at 16:40)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/130982614" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#130982614">Mario Carneiro (Aug 07 2018 at 00:40)</a>:</h4>
 <p>Oh I see, it's an involution</p>
 
 <a name="130982654"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/130982654" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#130982654">Mario Carneiro (Aug 06 2018 at 16:41)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/130982654" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#130982654">Mario Carneiro (Aug 07 2018 at 00:41)</a>:</h4>
 <p>You can prove this by complete induction on <code>s</code>. Just take out <code>a</code> and <code>g a ha</code> in one step of the induction</p>
 
 <a name="130982680"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/130982680" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#130982680">Chris Hughes (Aug 06 2018 at 16:41)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/130982680" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#130982680">Chris Hughes (Aug 07 2018 at 00:41)</a>:</h4>
 <p>Is there a short proof using lemmas?</p>
 
 <a name="130982691"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/130982691" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#130982691">Mario Carneiro (Aug 06 2018 at 16:41)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/130982691" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#130982691">Mario Carneiro (Aug 07 2018 at 00:41)</a>:</h4>
 <p>not with those hypotheses</p>
 
 <a name="130982711"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/130982711" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#130982711">Mario Carneiro (Aug 06 2018 at 16:42)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/130982711" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#130982711">Mario Carneiro (Aug 07 2018 at 00:42)</a>:</h4>
 <p>half of the work will be unpacking them</p>
 
 <a name="130982788"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/130982788" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#130982788">Mario Carneiro (Aug 06 2018 at 16:42)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/130982788" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#130982788">Mario Carneiro (Aug 07 2018 at 00:42)</a>:</h4>
 <p>I mean, the stuff about <code>sum</code> is there but most of the work is showing that the reduced <code>g</code> function is still an involution</p>
 
 <a name="130982854"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/130982854" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#130982854">Morenikeji Neri (Aug 06 2018 at 16:43)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/130982854" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#130982854">Morenikeji Neri (Aug 07 2018 at 00:43)</a>:</h4>
 <p>yep!</p>
 
 <a name="148271569"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148271569" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148271569">Scott Morrison (Nov 24 2018 at 11:15)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148271569" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148271569">Scott Morrison (Nov 24 2018 at 21:15)</a>:</h4>
 <p>Okay... after way too many inequalities (thanks, everyone!), I now have "the right" proof that $\sum_m \binom n m = 2^n$, based on reindexing sums and splitting off and joining single terms. This uses the following four lemmas:</p>
 <div class="codehilite"><pre><span></span>lemma finset.sum.interval_split_left (n m : ℕ) (h₁ : n &lt; m) (f : ℕ → β) :
 (interval n m).sum f = f n + (interval (n+1) m).sum f :=
@@ -96,370 +96,370 @@ lemma finset.sum.interval_reindex_right (k n m : ℕ) (f : ℕ → β) :
 <p>which I've proved (and some infrastructure for <code>interval</code>).</p>
 
 <a name="148271613"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148271613" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148271613">Scott Morrison (Nov 24 2018 at 11:16)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148271613" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148271613">Scott Morrison (Nov 24 2018 at 21:16)</a>:</h4>
 <p>The proofs still need a lot of golfing, but I think it's progress.</p>
 
 <a name="148271669"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148271669" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148271669">Scott Morrison (Nov 24 2018 at 11:18)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148271669" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148271669">Scott Morrison (Nov 24 2018 at 21:18)</a>:</h4>
 <p>I would like to write some tactics to help with this, so you can just write things like "reindex_sum +3" in tactic mode, and it will <code>conv</code> it's way to the first <code>(interval n m).sum f</code>, and replace it with <code>(interval (n+3) (m+3)).sum (\lambda x, f (x-3))</code>, etc.</p>
 
 <a name="148271672"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148271672" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148271672">Kevin Buzzard (Nov 24 2018 at 11:18)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148271672" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148271672">Kevin Buzzard (Nov 24 2018 at 21:18)</a>:</h4>
 <p>Now on to multinomial coefficients!</p>
 
 <a name="148271675"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148271675" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148271675">Scott Morrison (Nov 24 2018 at 11:19)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148271675" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148271675">Scott Morrison (Nov 24 2018 at 21:19)</a>:</h4>
 <p>I'd also like to write a <code>conv</code> tactic for rewriting inside the summand of a <code>finset.sum</code>, that gives you a hypothesis saying you're actually in the domain.</p>
 
 <a name="148271831"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148271831" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148271831">Scott Morrison (Nov 24 2018 at 11:24)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148271831" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148271831">Scott Morrison (Nov 24 2018 at 21:24)</a>:</h4>
 <p>If I'm going to clean this up for a PR, where should it go? In <code>big_operators.lean</code>? Or start a new file for summations over intervals in <code>nat</code>?</p>
 
 <a name="148271914"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148271914" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148271914">Mario Carneiro (Nov 24 2018 at 11:27)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148271914" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148271914">Mario Carneiro (Nov 24 2018 at 21:27)</a>:</h4>
 <p>I think a file for summations over intervals is appropriate</p>
 
 <a name="148271960"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148271960" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148271960">Mario Carneiro (Nov 24 2018 at 11:28)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148271960" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148271960">Mario Carneiro (Nov 24 2018 at 21:28)</a>:</h4>
 <p>I think the name should be <code>finset.Icc</code> though</p>
 
 <a name="148271964"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148271964" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148271964">Mario Carneiro (Nov 24 2018 at 11:28)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148271964" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148271964">Mario Carneiro (Nov 24 2018 at 21:28)</a>:</h4>
 <p>thiat gives us plenty of room for future variation</p>
 
 <a name="148271969"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148271969" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148271969">Mario Carneiro (Nov 24 2018 at 11:28)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148271969" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148271969">Mario Carneiro (Nov 24 2018 at 21:28)</a>:</h4>
 <p>er, <code>Ico</code>?</p>
 
 <a name="148271987"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148271987" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148271987">Scott Morrison (Nov 24 2018 at 11:29)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148271987" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148271987">Scott Morrison (Nov 24 2018 at 21:29)</a>:</h4>
 <p>does that stand for "interval closed open"?</p>
 
 <a name="148271989"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148271989" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148271989">Scott Morrison (Nov 24 2018 at 11:29)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148271989" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148271989">Scott Morrison (Nov 24 2018 at 21:29)</a>:</h4>
 <p>okay</p>
 
 <a name="148271995"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148271995" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148271995">Mario Carneiro (Nov 24 2018 at 11:29)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148271995" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148271995">Mario Carneiro (Nov 24 2018 at 21:29)</a>:</h4>
 <p>yeah, for compatibility with <code>set.Ico</code></p>
 
 <a name="148272044"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148272044" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148272044">Scott Morrison (Nov 24 2018 at 11:30)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148272044" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148272044">Scott Morrison (Nov 24 2018 at 21:30)</a>:</h4>
 <p>how about when I define <code>Ico</code> as a list/multiset/finset? Should those go in those three files, or in the file about summations over intervals?</p>
 
 <a name="148272047"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148272047" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148272047">Mario Carneiro (Nov 24 2018 at 11:30)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148272047" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148272047">Mario Carneiro (Nov 24 2018 at 21:30)</a>:</h4>
 <p>they can all be in the same file, I think</p>
 
 <a name="148272061"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148272061" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148272061">Scott Morrison (Nov 24 2018 at 11:31)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148272061" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148272061">Scott Morrison (Nov 24 2018 at 21:31)</a>:</h4>
 <p>excellent, that means I can safely use tactics :-)</p>
 
 <a name="148272065"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148272065" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148272065">Mario Carneiro (Nov 24 2018 at 11:31)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148272065" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148272065">Mario Carneiro (Nov 24 2018 at 21:31)</a>:</h4>
 <p>oh, you mean the definitions themselves</p>
 
 <a name="148272069"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148272069" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148272069">Scott Morrison (Nov 24 2018 at 11:31)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148272069" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148272069">Scott Morrison (Nov 24 2018 at 21:31)</a>:</h4>
 <p>yes...</p>
 
 <a name="148272071"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148272071" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148272071">Mario Carneiro (Nov 24 2018 at 11:31)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148272071" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148272071">Mario Carneiro (Nov 24 2018 at 21:31)</a>:</h4>
 <p>I guess they could go near <code>finset.range</code></p>
 
 <a name="148272079"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148272079" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148272079">Mario Carneiro (Nov 24 2018 at 11:31)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148272079" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148272079">Mario Carneiro (Nov 24 2018 at 21:31)</a>:</h4>
 <p>but the development should go in its own file</p>
 
 <a name="148272119"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148272119" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148272119">Mario Carneiro (Nov 24 2018 at 11:32)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148272119" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148272119">Mario Carneiro (Nov 24 2018 at 21:32)</a>:</h4>
 <p>especially stuff combining sums and these sets</p>
 
 <a name="148272126"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148272126" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148272126">Scott Morrison (Nov 24 2018 at 11:32)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148272126" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148272126">Scott Morrison (Nov 24 2018 at 21:32)</a>:</h4>
 <p>okay, that's what I've done so far --- in fact put them next to <code>list.range'</code>, <code>multiset.range</code>, and <code>finset.range</code>, and then the actual lemmas about dealing with <code>(Ico n m).sum</code> are in their own file.</p>
 
 <a name="148272130"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148272130" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148272130">Mario Carneiro (Nov 24 2018 at 11:32)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148272130" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148272130">Mario Carneiro (Nov 24 2018 at 21:32)</a>:</h4>
 <p>great</p>
 
 <a name="148272164"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148272164" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148272164">Scott Morrison (Nov 24 2018 at 11:33)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148272164" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148272164">Scott Morrison (Nov 24 2018 at 21:33)</a>:</h4>
 <p>a few lemmas about slicing and dicing intervals use <code>tidy</code> to blast through... those proofs will have to be rewritten if they are going to live in <code>finset.lean</code> or earlier.</p>
 
 <a name="148272167"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148272167" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148272167">Scott Morrison (Nov 24 2018 at 11:34)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148272167" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148272167">Scott Morrison (Nov 24 2018 at 21:34)</a>:</h4>
 <p>oh well...</p>
 
 <a name="148272211"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148272211" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148272211">Scott Morrison (Nov 24 2018 at 11:34)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148272211" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148272211">Scott Morrison (Nov 24 2018 at 21:34)</a>:</h4>
 <p>(Not having <code>work_on_goal</code> available will make me cry, as it means I'll actually have to restructure the proofs <code>tidy</code> outputs.)</p>
 
 <a name="148272241"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148272241" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148272241">Mario Carneiro (Nov 24 2018 at 11:36)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148272241" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148272241">Mario Carneiro (Nov 24 2018 at 21:36)</a>:</h4>
 <p>oh no, structured proof</p>
 
 <a name="148272346"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148272346" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148272346">Scott Morrison (Nov 24 2018 at 11:38)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148272346" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148272346">Scott Morrison (Nov 24 2018 at 21:38)</a>:</h4>
 <p>don't hold your breath :-) This PR is going to have some low-quality tactic proofs, that get the job done.</p>
 
 <a name="148272542"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148272542" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148272542">Scott Morrison (Nov 24 2018 at 11:45)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148272542" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148272542">Scott Morrison (Nov 24 2018 at 21:45)</a>:</h4>
 <p>On the subject, if anyone wants to suggest to me some nice examples of proofs that rely on re-indexing and slicing and dicing sums, please do!</p>
 
 <a name="148272764"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148272764" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148272764">Mario Carneiro (Nov 24 2018 at 11:52)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148272764" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148272764">Mario Carneiro (Nov 24 2018 at 21:52)</a>:</h4>
 <p>you should look at <code>exp_add</code></p>
 
 <a name="148272770"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148272770" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148272770">Mario Carneiro (Nov 24 2018 at 11:52)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148272770" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148272770">Mario Carneiro (Nov 24 2018 at 21:52)</a>:</h4>
 <p>and possibly quadratic reciprocity</p>
 
 <a name="148273678"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148273678" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148273678">Patrick Massot (Nov 24 2018 at 12:21)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148273678" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148273678">Patrick Massot (Nov 24 2018 at 22:21)</a>:</h4>
 <p>Seriously guys, what's wrong with you? What the fuck is this thread?</p>
 
 <a name="148273733"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148273733" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148273733">Patrick Massot (Nov 24 2018 at 12:23)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148273733" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148273733">Patrick Massot (Nov 24 2018 at 22:23)</a>:</h4>
 <p>I really think this proof assistant thing is going nowhere if we keep working like this, ignoring everything done by other people, including the ones who proved they can do much more than what we can currently do</p>
 
 <a name="148273831"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148273831" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148273831">Patrick Massot (Nov 24 2018 at 12:26)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148273831" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148273831">Patrick Massot (Nov 24 2018 at 22:26)</a>:</h4>
 <p>I've pointed out repeatedly the existence of mathcomp's bigop library. They figured out all the issues, and they use it in linear algebra, in calculus, in finite group theory... I said it would very important to try to port that library to mathlib. Nobody cared. I started trying to do it, nobody cared. I struggled with nat substraction so I gave up for now. Then suddenly Scott asks many nat substraction questions, and, guess what, he is doing big operators again.</p>
 
 <a name="148273841"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148273841" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148273841">Mario Carneiro (Nov 24 2018 at 12:27)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148273841" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148273841">Mario Carneiro (Nov 24 2018 at 22:27)</a>:</h4>
 <p>The point is to see if our new techniques help with the proofs</p>
 
 <a name="148273846"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148273846" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148273846">Patrick Massot (Nov 24 2018 at 12:27)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148273846" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148273846">Patrick Massot (Nov 24 2018 at 22:27)</a>:</h4>
 <p>I think the point is people thinking they are smarter than Gonthier and his friends</p>
 
 <a name="148273888"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148273888" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148273888">Mario Carneiro (Nov 24 2018 at 12:28)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148273888" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148273888">Mario Carneiro (Nov 24 2018 at 22:28)</a>:</h4>
 <p>if you get ahead of yourself writing theorems before the automation or appropriate structures and idioms come you get a load of unmaintainable hackery</p>
 
 <a name="148273891"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148273891" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148273891">Mario Carneiro (Nov 24 2018 at 12:28)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148273891" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148273891">Mario Carneiro (Nov 24 2018 at 22:28)</a>:</h4>
 <p>I'm afraid I can't read any of gonthier's proofs</p>
 
 <a name="148273892"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148273892" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148273892">Patrick Massot (Nov 24 2018 at 12:28)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148273892" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148273892">Patrick Massot (Nov 24 2018 at 22:28)</a>:</h4>
 <p>Then why don't you ask?</p>
 
 <a name="148273899"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148273899" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148273899">Mario Carneiro (Nov 24 2018 at 12:29)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148273899" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148273899">Mario Carneiro (Nov 24 2018 at 22:29)</a>:</h4>
 <p>I highly respect him and I know he has a method to the madness but ssreflect style is not something I want to teach</p>
 
 <a name="148273900"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148273900" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148273900">Patrick Massot (Nov 24 2018 at 12:29)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148273900" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148273900">Patrick Massot (Nov 24 2018 at 22:29)</a>:</h4>
 <p>We have Assia and Cyril who can read them, and explain everything</p>
 
 <a name="148273905"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148273905" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148273905">Patrick Massot (Nov 24 2018 at 12:29)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148273905" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148273905">Patrick Massot (Nov 24 2018 at 22:29)</a>:</h4>
 <p>And they are really puzzled by our attitude</p>
 
 <a name="148273906"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148273906" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148273906">Patrick Massot (Nov 24 2018 at 12:29)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148273906" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148273906">Patrick Massot (Nov 24 2018 at 22:29)</a>:</h4>
 <p>It has nothing to do with SSReflect crazyness</p>
 
 <a name="148273981"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148273981" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148273981">Patrick Massot (Nov 24 2018 at 12:30)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148273981" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148273981">Patrick Massot (Nov 24 2018 at 22:30)</a>:</h4>
 <p>They thought about what are the right data structures, how to formulate the right induction principles for big operators, in what order to prove stuff</p>
 
 <a name="148273983"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148273983" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148273983">Patrick Massot (Nov 24 2018 at 12:30)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148273983" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148273983">Patrick Massot (Nov 24 2018 at 22:30)</a>:</h4>
 <p>And it <em>works</em></p>
 
 <a name="148273995"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148273995" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148273995">Mario Carneiro (Nov 24 2018 at 12:31)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148273995" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148273995">Mario Carneiro (Nov 24 2018 at 22:31)</a>:</h4>
 <p>sure, that's valuable</p>
 
 <a name="148274000"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148274000" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148274000">Mario Carneiro (Nov 24 2018 at 12:31)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148274000" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148274000">Mario Carneiro (Nov 24 2018 at 22:31)</a>:</h4>
 <p>it's the reason I periodically bring up metamath here, because many of our new problems are old problems somewhere else</p>
 
 <a name="148274002"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148274002" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148274002">Mario Carneiro (Nov 24 2018 at 12:31)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148274002" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148274002">Mario Carneiro (Nov 24 2018 at 22:31)</a>:</h4>
 <p>but I can't help that my experience is in metamath, not coq</p>
 
 <a name="148274061"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148274061" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148274061">Mario Carneiro (Nov 24 2018 at 12:33)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148274061" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148274061">Mario Carneiro (Nov 24 2018 at 22:33)</a>:</h4>
 <p>to get good information about how to do stuff in coq we would need Assia or Cyril guiding the path, and they have better things to do</p>
 
 <a name="148274071"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148274071" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148274071">Patrick Massot (Nov 24 2018 at 12:33)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148274071" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148274071">Patrick Massot (Nov 24 2018 at 22:33)</a>:</h4>
 <p>What about letting them decide whether they have better things to do?</p>
 
 <a name="148274078"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148274078" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148274078">Patrick Massot (Nov 24 2018 at 12:33)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148274078" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148274078">Patrick Massot (Nov 24 2018 at 22:33)</a>:</h4>
 <p>They both repeatedly offered to help us understand what's in mathcomp</p>
 
 <a name="148274122"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148274122" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148274122">Mario Carneiro (Nov 24 2018 at 12:34)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148274122" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148274122">Mario Carneiro (Nov 24 2018 at 22:34)</a>:</h4>
 <p>of course, if they actually think that's a good idea I'm all ears, that's not a rejection at all</p>
 
 <a name="148274127"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148274127" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148274127">Mario Carneiro (Nov 24 2018 at 12:35)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148274127" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148274127">Mario Carneiro (Nov 24 2018 at 22:35)</a>:</h4>
 <p>but in my view it's one more idea on the table, which can be considered equally among others</p>
 
 <a name="148274133"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148274133" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148274133">Patrick Massot (Nov 24 2018 at 12:35)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148274133" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148274133">Patrick Massot (Nov 24 2018 at 22:35)</a>:</h4>
 <p>And what about trying to work together? <span class="user-mention" data-user-id="110087">@Scott Morrison</span> could you publicly write why you chose to restart from scratch instead of helping me in my attempt?</p>
 
 <a name="148274135"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148274135" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148274135">Mario Carneiro (Nov 24 2018 at 12:35)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148274135" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148274135">Mario Carneiro (Nov 24 2018 at 22:35)</a>:</h4>
 <p>I don't think we should blindly port any specific library</p>
 
 <a name="148274179"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148274179" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148274179">Patrick Massot (Nov 24 2018 at 12:36)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148274179" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148274179">Patrick Massot (Nov 24 2018 at 22:36)</a>:</h4>
 <p>I'm not saying we should blindly do anything. Quite the contrary, I'm suggesting to open our eyes to the existing stuff</p>
 
 <a name="148274182"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148274182" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148274182">Mario Carneiro (Nov 24 2018 at 12:36)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148274182" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148274182">Mario Carneiro (Nov 24 2018 at 22:36)</a>:</h4>
 <p>are you referring to the notation for filtered sums of nats?</p>
 
 <a name="148274195"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148274195" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148274195">Patrick Massot (Nov 24 2018 at 12:37)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148274195" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148274195">Patrick Massot (Nov 24 2018 at 22:37)</a>:</h4>
 <p>I don't think Lean would be there is Leo had the same attitude with existing software. And it doesn't mean Lean is "blindly ported"</p>
 
 <a name="148274243"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148274243" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148274243">Patrick Massot (Nov 24 2018 at 12:38)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148274243" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148274243">Patrick Massot (Nov 24 2018 at 22:38)</a>:</h4>
 <p>It's not only about notations, I proved many lemmas in <a href="https://github.com/PatrickMassot/bigop/blob/master/src/bigop.lean" target="_blank" title="https://github.com/PatrickMassot/bigop/blob/master/src/bigop.lean">https://github.com/PatrickMassot/bigop/blob/master/src/bigop.lean</a>. I know some stuff should be rethought, and everything could be improved, but why not starting there?</p>
 
 <a name="148274272"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148274272" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148274272">Mario Carneiro (Nov 24 2018 at 12:39)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148274272" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148274272">Mario Carneiro (Nov 24 2018 at 22:39)</a>:</h4>
 <p>one could ask the same of that approach... try it on <code>exp_sum</code>, try it on quadratic reciprocity, see if it helps</p>
 
 <a name="148274322"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148274322" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148274322">Mario Carneiro (Nov 24 2018 at 12:40)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148274322" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148274322">Mario Carneiro (Nov 24 2018 at 22:40)</a>:</h4>
 <p>this is not in any way a loaded question, it's a test bed for new ideas</p>
 
 <a name="148274332"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148274332" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148274332">Mario Carneiro (Nov 24 2018 at 12:40)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148274332" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148274332">Mario Carneiro (Nov 24 2018 at 22:40)</a>:</h4>
 <p>if it's a good approach, the proof will reflect that</p>
 
 <a name="148274352"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148274352" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148274352">Mario Carneiro (Nov 24 2018 at 12:41)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148274352" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148274352">Mario Carneiro (Nov 24 2018 at 22:41)</a>:</h4>
 <p>I don't know if scott's <code>Ico</code> will make things better than just using <code>range</code>, we need more data</p>
 
 <a name="148274361"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148274361" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148274361">Patrick Massot (Nov 24 2018 at 12:41)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148274361" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148274361">Patrick Massot (Nov 24 2018 at 22:41)</a>:</h4>
 <p>It's lunch time, and this conversation is going nowhere anyway. Bye</p>
 
 <a name="148275683"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148275683" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148275683">Kevin Buzzard (Nov 24 2018 at 13:23)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148275683" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148275683">Kevin Buzzard (Nov 24 2018 at 23:23)</a>:</h4>
 <p><span class="user-mention" data-user-id="110044">@Chris Hughes</span> do you have any comments on this? I remember a couple of times over the summer you saying you were having to battle with finite sums. What did you feel was missing from the library? Maybe it's time to compile a wishlist instead of all writing our own workarounds. Last year I wrote <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msubsup><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></msubsup><msub><mi>a</mi><mi>i</mi></msub><mo>=</mo><msubsup><mo>∑</mo><mrow><mi>j</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></msubsup><msub><mi>a</mi><mrow><mi>n</mi><mo>+</mo><mn>1</mn><mo>−</mo><mi>j</mi></mrow></msub></mrow><annotation encoding="application/x-tex">\sum_{i=1}^na_i=\sum_{j=1}^na_{n+1-j}</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.804292em;"></span><span class="strut bottom" style="height:1.24011em;vertical-align:-0.43581800000000004em;"></span><span class="base"><span class="mop"><span class="mop op-symbol small-op" style="position:relative;top:-0.0000050000000000050004em;">∑</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.804292em;"><span style="top:-2.40029em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathit mtight">i</span><span class="mrel mtight">=</span><span class="mord mathrm mtight">1</span></span></span></span><span style="top:-3.2029em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathit mtight">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.29971000000000003em;"></span></span></span></span></span><span class="mord"><span class="mord mathit">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathit mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"></span></span></span></span></span><span class="mrel">=</span><span class="mop"><span class="mop op-symbol small-op" style="position:relative;top:-0.0000050000000000050004em;">∑</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.804292em;"><span style="top:-2.40029em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathit mtight" style="margin-right:0.05724em;">j</span><span class="mrel mtight">=</span><span class="mord mathrm mtight">1</span></span></span></span><span style="top:-3.2029em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathit mtight">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.43581800000000004em;"></span></span></span></span></span><span class="mord"><span class="mord mathit">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.311664em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathit mtight">n</span><span class="mbin mtight">+</span><span class="mord mathrm mtight">1</span><span class="mbin mtight">−</span><span class="mord mathit mtight" style="margin-right:0.05724em;">j</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"></span></span></span></span></span></span></span></span> because I needed it for an example sheet question, and I remember it being a real pain.</p>
 
 <a name="148275731"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148275731" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148275731">Mario Carneiro (Nov 24 2018 at 13:25)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148275731" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148275731">Mario Carneiro (Nov 24 2018 at 23:25)</a>:</h4>
 <p>My impression of nat subtraction is it's best to avoid it appearing in lemmas to start with</p>
 
 <a name="148275732"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148275732" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148275732">Kevin Buzzard (Nov 24 2018 at 13:25)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148275732" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148275732">Kevin Buzzard (Nov 24 2018 at 23:25)</a>:</h4>
 <p>Well it's in my lemma :-/</p>
 
 <a name="148275737"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148275737" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148275737">Kevin Buzzard (Nov 24 2018 at 13:25)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148275737" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148275737">Kevin Buzzard (Nov 24 2018 at 23:25)</a>:</h4>
 <p>oh I see what you mean</p>
 
 <a name="148275776"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148275776" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148275776">Mario Carneiro (Nov 24 2018 at 13:26)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148275776" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148275776">Mario Carneiro (Nov 24 2018 at 23:26)</a>:</h4>
 <p>I wonder how much mileage you can get out of <code>finset.diag : finset (nat x nat) := {(0, n), ..., (n, 0)}</code></p>
 
 <a name="148275788"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148275788" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148275788">Kevin Buzzard (Nov 24 2018 at 13:26)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148275788" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148275788">Kevin Buzzard (Nov 24 2018 at 23:26)</a>:</h4>
 <p>you want me to prove that the function sending i to n+1-i is a bijection and then have some lemma about summing over a bijection, which actually might be in there already I guess. Is it?</p>
 
 <a name="148275794"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148275794" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148275794">Chris Hughes (Nov 24 2018 at 13:26)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148275794" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148275794">Chris Hughes (Nov 24 2018 at 23:26)</a>:</h4>
 <p>I want to be able to sum between integers and naturals, and also do non commutative products over arbitrary lists. I think Patrick's approach seems to unify all these things nicely.</p>
 
 <a name="148275801"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148275801" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148275801">Chris Hughes (Nov 24 2018 at 13:27)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148275801" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148275801">Chris Hughes (Nov 24 2018 at 23:27)</a>:</h4>
 <p><code>sum_bij</code> is the lemma</p>
 
 <a name="148275810"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148275810" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148275810">Mario Carneiro (Nov 24 2018 at 13:27)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148275810" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148275810">Mario Carneiro (Nov 24 2018 at 23:27)</a>:</h4>
 <blockquote>
 <p>the function sending i to n+1-i is</p>
 </blockquote>
 <p>nope, you said minus</p>
 
 <a name="148275854"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148275854" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148275854">Mario Carneiro (Nov 24 2018 at 13:28)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148275854" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148275854">Mario Carneiro (Nov 24 2018 at 23:28)</a>:</h4>
 <p>the goal is to state the whole theorem without using minus</p>
 
 <a name="148275855"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148275855" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148275855">Kevin Buzzard (Nov 24 2018 at 13:28)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148275855" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148275855">Kevin Buzzard (Nov 24 2018 at 23:28)</a>:</h4>
 <p>But I literally needed to prove that the sum of <code>F i</code> was equal to the sum of <code>F (n + 1 - i)</code></p>
 
 <a name="148275856"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148275856" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148275856">Mario Carneiro (Nov 24 2018 at 13:28)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148275856" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148275856">Mario Carneiro (Nov 24 2018 at 23:28)</a>:</h4>
 <p><code>finset.diag.map swap = finset.diag.reverse</code></p>
 
 <a name="148275859"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148275859" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148275859">Mario Carneiro (Nov 24 2018 at 13:28)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148275859" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148275859">Mario Carneiro (Nov 24 2018 at 23:28)</a>:</h4>
 <p>no minus</p>
 
 <a name="148275861"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148275861" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148275861">Mario Carneiro (Nov 24 2018 at 13:28)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148275861" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148275861">Mario Carneiro (Nov 24 2018 at 23:28)</a>:</h4>
 <p>and <code>swap</code> is a bijection, etc etc</p>
 
 <a name="148275873"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148275873" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148275873">Kevin Buzzard (Nov 24 2018 at 13:29)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148275873" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148275873">Kevin Buzzard (Nov 24 2018 at 23:29)</a>:</h4>
 <p>If I set as an example sheet question <code>binom n m = binom n (n - m)</code> you can't now avoid the minus. Are you suggesting that binom should take integer coefficients?</p>
 
 <a name="148275878"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148275878" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148275878">Mario Carneiro (Nov 24 2018 at 13:30)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148275878" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148275878">Mario Carneiro (Nov 24 2018 at 23:30)</a>:</h4>
 <p>if it's literally the input statement, then you should apply a lemma to get rid of it first, and work with that</p>
 
 <a name="148275924"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148275924" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148275924">Kevin Buzzard (Nov 24 2018 at 13:30)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148275924" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148275924">Kevin Buzzard (Nov 24 2018 at 23:30)</a>:</h4>
 <p>so what lemma gets me rid of <code>n - m</code> in my input statement? :-/</p>
 
 <a name="148275926"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148275926" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148275926">Mario Carneiro (Nov 24 2018 at 13:30)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148275926" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148275926">Mario Carneiro (Nov 24 2018 at 23:30)</a>:</h4>
 <p><code>binom n i = binom n j</code> when <code>i + j = n</code></p>
 
 <a name="148275927"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148275927" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148275927">Kevin Buzzard (Nov 24 2018 at 13:30)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148275927" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148275927">Kevin Buzzard (Nov 24 2018 at 23:30)</a>:</h4>
 <p><em>boggle</em></p>
 
 <a name="148275929"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148275929" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148275929">Mario Carneiro (Nov 24 2018 at 13:30)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148275929" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148275929">Mario Carneiro (Nov 24 2018 at 23:30)</a>:</h4>
 <p>aka <code>(i, j) in finset.diag</code></p>
 
 <a name="148275990"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148275990" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148275990">Mario Carneiro (Nov 24 2018 at 13:32)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148275990" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148275990">Mario Carneiro (Nov 24 2018 at 23:32)</a>:</h4>
 <p>inductions go through so much more smoothly when there is no break in the function</p>
 
 <a name="148275996"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148275996" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148275996">Kevin Buzzard (Nov 24 2018 at 13:32)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148275996" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148275996">Kevin Buzzard (Nov 24 2018 at 23:32)</a>:</h4>
 <p>My theorem isn't even true when <code>m &gt; n</code></p>
 
 <a name="148275999"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148275999" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148275999">Mario Carneiro (Nov 24 2018 at 13:33)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148275999" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148275999">Mario Carneiro (Nov 24 2018 at 23:33)</a>:</h4>
 <p>my theorem can't even have m &gt; n</p>
 
 <a name="148276005"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148276005" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148276005">Kevin Buzzard (Nov 24 2018 at 13:33)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148276005" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148276005">Kevin Buzzard (Nov 24 2018 at 23:33)</a>:</h4>
 <p>right</p>
 
 <a name="148276016"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148276016" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148276016">Mario Carneiro (Nov 24 2018 at 13:33)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148276016" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148276016">Mario Carneiro (Nov 24 2018 at 23:33)</a>:</h4>
 <p>of course you can substitute in <code>n</code> in that statement, and then it's an easy induction on i,j</p>
 
 <a name="148276062"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148276062" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148276062">Mario Carneiro (Nov 24 2018 at 13:34)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148276062" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148276062">Mario Carneiro (Nov 24 2018 at 23:34)</a>:</h4>
 <p>in general you might also want to generalize i,j and do induction on n, or something related</p>
 
 <a name="148276073"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148276073" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148276073">Kevin Buzzard (Nov 24 2018 at 13:35)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148276073" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148276073">Kevin Buzzard (Nov 24 2018 at 23:35)</a>:</h4>
 <p>So one way of proving <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>s</mi><mo>:</mo><mrow><mi mathvariant="double-struck">Z</mi></mrow><mo>:</mo><mo>=</mo><msubsup><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>0</mn></mrow><mrow><mn>2</mn><mi>n</mi><mo>+</mo><mn>1</mn></mrow></msubsup><mo>(</mo><mo>−</mo><mn>1</mn><msup><mo>)</mo><mi>i</mi></msup><mrow><mo fence="true">(</mo><mfrac linethickness="0px"><mrow><mn>2</mn><mi>n</mi><mo>+</mo><mn>1</mn></mrow><mrow><mi>i</mi></mrow></mfrac><mo fence="true">)</mo></mrow></mrow><annotation encoding="application/x-tex">s : \mathbb{Z} :=\sum_{i=0}^{2n+1}(-1)^i\binom{2n+1}{i}</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.954008em;"></span><span class="strut bottom" style="height:1.304018em;vertical-align:-0.35001em;"></span><span class="base"><span class="mord mathit">s</span><span class="mrel">:</span><span class="mord"><span class="mord mathbb">Z</span></span><span class="mrel">:</span><span class="mrel">=</span><span class="mop"><span class="mop op-symbol small-op" style="position:relative;top:-0.0000050000000000050004em;">∑</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.954008em;"><span style="top:-2.40029em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathit mtight">i</span><span class="mrel mtight">=</span><span class="mord mathrm mtight">0</span></span></span></span><span style="top:-3.2029em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathrm mtight">2</span><span class="mord mathit mtight">n</span><span class="mbin mtight">+</span><span class="mord mathrm mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.29971000000000003em;"></span></span></span></span></span><span class="mopen">(</span><span class="mord">−</span><span class="mord mathrm">1</span><span class="mclose"><span class="mclose">)</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.824664em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathit mtight">i</span></span></span></span></span></span></span></span><span class="mord"><span class="mopen delimcenter" style="top:0em;"><span class="delimsizing size1">(</span></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8951079999999999em;"><span style="top:-2.3550000000000004em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathit mtight">i</span></span></span></span><span style="top:-3.144em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathrm mtight">2</span><span class="mord mathit mtight">n</span><span class="mbin mtight">+</span><span class="mord mathrm mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"></span></span></span></span><span class="mclose delimcenter" style="top:0em;"><span class="delimsizing size1">)</span></span></span></span></span></span> is 0 is to set <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>j</mi><mo>=</mo><mn>2</mn><mi>n</mi><mo>+</mo><mn>1</mn><mo>−</mo><mi>i</mi></mrow><annotation encoding="application/x-tex">j=2n+1-i</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.65952em;"></span><span class="strut bottom" style="height:0.85396em;vertical-align:-0.19444em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.05724em;">j</span><span class="mrel">=</span><span class="mord mathrm">2</span><span class="mord mathit">n</span><span class="mbin">+</span><span class="mord mathrm">1</span><span class="mbin">−</span><span class="mord mathit">i</span></span></span></span> and note that this substitution proves that <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>s</mi><mo>=</mo><mo>−</mo><mi>s</mi></mrow><annotation encoding="application/x-tex">s=-s</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.58333em;"></span><span class="strut bottom" style="height:0.66666em;vertical-align:-0.08333em;"></span><span class="base"><span class="mord mathit">s</span><span class="mrel">=</span><span class="mord">−</span><span class="mord mathit">s</span></span></span></span>. You would do all this without any nat subtraction?</p>
 
 <a name="148287845"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148287845" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148287845">Scott Morrison (Nov 24 2018 at 20:08)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148287845" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148287845">Scott Morrison (Nov 25 2018 at 06:08)</a>:</h4>
 <blockquote>
 <p>@Scott Morrison could you publicly write why you chose to restart from scratch instead of helping me in my attempt?</p>
 </blockquote>
@@ -468,31 +468,31 @@ lemma finset.sum.interval_reindex_right (k n m : ℕ) (f : ℕ → β) :
 <p>Right now I need to go out for a while, but I'll look more closely at your repo soon. There is a lot there, and I see that working over <code>int</code> rather than <code>nat</code> index sets makes life easier. However I don't much like that you've "rolled your own" subsets built into your <code>bigop</code> notation, containing both a <code>list I</code> and an <code>I -&gt; Prop</code>, rather than using existing technology (e.g. <code>multiset</code>, and <code>filter</code>). I think it's best if we decouple as much as possible here.</p>
 
 <a name="148294592"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148294592" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148294592">Scott Morrison (Nov 25 2018 at 00:04)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148294592" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148294592">Scott Morrison (Nov 25 2018 at 10:04)</a>:</h4>
 <p><span class="user-mention" data-user-id="110031">@Patrick Massot</span>, moreover, I will attempt to read the big operators paper. :-)</p>
 
 <a name="148294612"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148294612" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148294612">Scott Morrison (Nov 25 2018 at 00:05)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148294612" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148294612">Scott Morrison (Nov 25 2018 at 10:05)</a>:</h4>
 <p>I see already that your <code>list I</code> and <code>I -&gt; Prop</code> is imitating what they do, although my limited understanding so far is that they do something more general than <code>list I</code>.</p>
 
 <a name="148294656"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148294656" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148294656">Patrick Massot (Nov 25 2018 at 00:07)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148294656" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148294656">Patrick Massot (Nov 25 2018 at 10:07)</a>:</h4>
 <p>I just came back from the hospital after some climbing session, so I didn't see your message earlier</p>
 
 <a name="148294663"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148294663" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148294663">Patrick Massot (Nov 25 2018 at 00:07)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148294663" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148294663">Patrick Massot (Nov 25 2018 at 10:07)</a>:</h4>
 <p>I'm sorry I was so upset this morning, but I'm really tired of these problems.</p>
 
 <a name="148294712"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148294712" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148294712">Patrick Massot (Nov 25 2018 at 00:08)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148294712" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148294712">Patrick Massot (Nov 25 2018 at 10:08)</a>:</h4>
 <p>I didn't "roll my own subset" rather using filter, everything is based on filter. The question is the interface question, and this is precisely the kind of question where I think it makes sense to have a look at what mathcomp successfully used</p>
 
 <a name="148294783"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148294783" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148294783">Patrick Massot (Nov 25 2018 at 00:11)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148294783" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148294783">Patrick Massot (Nov 25 2018 at 10:11)</a>:</h4>
 <p>I moved from nat to int mostly because of nat substraction hell, but also because sums indexed by integers do arise, for instance with Fourier series</p>
 
 <a name="148302363"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148302363" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148302363">Scott Morrison (Nov 25 2018 at 04:57)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148302363" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148302363">Scott Morrison (Nov 25 2018 at 14:57)</a>:</h4>
 <p>Okay, a few disorganised thoughts post bike-ride:<br>
 1) While I absolutely agree that we want "generic operation" big operations, I mostly wanted to explore writing useful tactics for manipulating big operations, and thought that testing this out more narrowly (just with <code>finset.sum</code> at first) would be helpful.</p>
 <p>2) The sort of tactics I have in mind are: <code>shift 5</code> (and <code>shift -2</code>, and <code>shift_left</code>, etc.), <code>split_first</code>, <code>split_at</code>, etc, and very importantly making it possible to <code>conv</code> your way inside the summand, and be given a hypothesis that you're in the domain, so you can perform appropriate conditional rewrites. There are many more tactics suitable for multivariable big operations, changing between int and nat, etc. (Does the Coq library provide tactic level support?)</p>
@@ -516,31 +516,31 @@ lemma finset.sum.interval_reindex_right (k n m : ℕ) (f : ℕ → β) :
 <p>(or something like that... )</p>
 
 <a name="148302414"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148302414" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148302414">Kenny Lau (Nov 25 2018 at 04:59)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148302414" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148302414">Kenny Lau (Nov 25 2018 at 14:59)</a>:</h4>
 <p>don't drive and derive...</p>
 
 <a name="148302765"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148302765" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148302765">Scott Morrison (Nov 25 2018 at 05:10)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148302765" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148302765">Scott Morrison (Nov 25 2018 at 15:10)</a>:</h4>
 <p>Also, if we're going to make some progress on big ops, I think it would be great if we can ask Assia and Cyril for some advice. I'd like to do a few experiments perhaps first (actually try writing some of the <code>conv</code> style tactics for manipulating sums, and seeing if it really is okay to index by carrier type), but maybe we could even schedule a skype call with whoever is interested so we can ask them some questions.</p>
 
 <a name="148314025"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148314025" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148314025">Patrick Massot (Nov 25 2018 at 11:40)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148314025" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148314025">Patrick Massot (Nov 25 2018 at 21:40)</a>:</h4>
 <p>Scott, I think you completely missed the point that we want to handle non-commutative operations</p>
 
 <a name="148314037"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148314037" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148314037">Patrick Massot (Nov 25 2018 at 11:41)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148314037" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148314037">Patrick Massot (Nov 25 2018 at 21:41)</a>:</h4>
 <p>Next, I think the list + predicate is there to handle the very common case of summing on a range of integers subjects to conditions, like "sum for n from 1 to N, with n odd"</p>
 
 <a name="148314038"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148314038" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148314038">Patrick Massot (Nov 25 2018 at 11:42)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148314038" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148314038">Patrick Massot (Nov 25 2018 at 21:42)</a>:</h4>
 <p>I'm not sure I understand what you'd like your tactic to do that a rewriting lemma couldn't</p>
 
 <a name="148335113"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148335113" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148335113">Scott Morrison (Nov 25 2018 at 23:35)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148335113" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148335113">Scott Morrison (Nov 26 2018 at 09:35)</a>:</h4>
 <p>I did miss the intention to also do noncommutative things. What do you have in mind? (And in any case, while we're writing prototypes, I'd prefer to work in simpler special cases, so I suspect I'll propose we ignore the noncommutative stuff for now anyway.)</p>
 
 <a name="148335286"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148335286" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148335286">Scott Morrison (Nov 25 2018 at 23:41)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148335286" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148335286">Scott Morrison (Nov 26 2018 at 09:41)</a>:</h4>
 <p>It might be good to at some point list all the things that conceivably could count as "big operations". Here's a sampling of things that could conceivably be in scope:</p>
 <ul>
 <li>sums, </li>
@@ -555,59 +555,59 @@ lemma finset.sum.interval_reindex_right (k n m : ℕ) (f : ℕ → β) :
 </ul>
 
 <a name="148335293"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148335293" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148335293">Scott Morrison (Nov 25 2018 at 23:42)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148335293" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148335293">Scott Morrison (Nov 26 2018 at 09:42)</a>:</h4>
 <p>But Patrick, why not just filter the list, if you want to sum over odd integers? I really don't understand why you want to carry around an "unapplied" filter.</p>
 
 <a name="148335464"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148335464" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148335464">Scott Morrison (Nov 25 2018 at 23:46)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148335464" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148335464">Scott Morrison (Nov 26 2018 at 09:46)</a>:</h4>
 <p>And I think my point stands, even if we're going to do noncommutative operations: a list is a bad way to model a ordered set. Using a list commits us to dealing with multiplicities, and I don't think that's what you intend.</p>
 
 <a name="148335685"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148335685" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148335685">Scott Morrison (Nov 25 2018 at 23:52)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148335685" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148335685">Scott Morrison (Nov 26 2018 at 09:52)</a>:</h4>
 <p>Regarding tactics: at the moment, rewriting inside the summand is a royal pain. As far as I can see, you need to use <code>rw sum_congr</code>, having carefully prepared the equation you want to rewrite along ahead of time in the form <code>\forall x \in t, f x  = g x</code>. <code>conv</code> completely fails to enter the summand giving you appropriate hypotheses, and this could easily be fixed.</p>
 
 <a name="148335754"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148335754" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148335754">Scott Morrison (Nov 25 2018 at 23:55)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148335754" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148335754">Scott Morrison (Nov 26 2018 at 09:55)</a>:</h4>
 <p>Going back to my "big list of big operations"... I think it would be a bad idea to try to write a framework so general it encompasses all of these.</p>
 
 <a name="148335806"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148335806" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148335806">Chris Hughes (Nov 25 2018 at 23:56)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148335806" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148335806">Chris Hughes (Nov 26 2018 at 09:56)</a>:</h4>
 <p>So for non commutative stuff, might it be better to use a finset with <code>linear_order</code> on the indexing type? I like that idea.</p>
 
 <a name="148335959"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148335959" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148335959">Scott Morrison (Nov 26 2018 at 00:00)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148335959" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148335959">Scott Morrison (Nov 26 2018 at 10:00)</a>:</h4>
 <p>It's possible. I'm not sure though how to make the commutative case a specialisation of the non-commutative case.</p>
 
 <a name="148335976"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148335976" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148335976">Scott Morrison (Nov 26 2018 at 00:01)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148335976" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148335976">Scott Morrison (Nov 26 2018 at 10:01)</a>:</h4>
 <p>Another possibility is to have the range of the big operation be a "list without duplicates" (a new type?), and then have extra lemmas that apply when the operation is known to be commutative, and that list comes from a finset.</p>
 
 <a name="148335979"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148335979" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148335979">Scott Morrison (Nov 26 2018 at 00:01)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148335979" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148335979">Scott Morrison (Nov 26 2018 at 10:01)</a>:</h4>
 <p>That design would mean lemmas proved about the noncommutative case would specialise.</p>
 
 <a name="148336031"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148336031" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148336031">Chris Hughes (Nov 26 2018 at 00:02)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148336031" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148336031">Chris Hughes (Nov 26 2018 at 10:02)</a>:</h4>
 <p>Are there any concrete examples of where a list with duplicates is annoying?</p>
 
 <a name="148336037"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148336037" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148336037">Chris Hughes (Nov 26 2018 at 00:03)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148336037" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148336037">Chris Hughes (Nov 26 2018 at 10:03)</a>:</h4>
 <p>I don't want to ask for that proof obligation without a good reason.</p>
 
 <a name="148336105"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148336105" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148336105">Scott Morrison (Nov 26 2018 at 00:05)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148336105" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148336105">Scott Morrison (Nov 26 2018 at 10:05)</a>:</h4>
 <p>I ... guess not.</p>
 
 <a name="148336148"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148336148" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148336148">Scott Morrison (Nov 26 2018 at 00:06)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148336148" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148336148">Scott Morrison (Nov 26 2018 at 10:06)</a>:</h4>
 <p>One problem is perhaps getting a list back out of a finset in the first place.</p>
 
 <a name="148336160"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148336160" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148336160">Scott Morrison (Nov 26 2018 at 00:07)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148336160" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148336160">Scott Morrison (Nov 26 2018 at 10:07)</a>:</h4>
 <p>I'm still unhappy about carrying along unapplied predicates, but I'm now open to the idea of using a list to represent the range.</p>
 
 <a name="148337035"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148337035" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148337035">Scott Morrison (Nov 26 2018 at 00:36)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148337035" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148337035">Scott Morrison (Nov 26 2018 at 10:36)</a>:</h4>
 <p>Just thinking out loud for a moment here: I wonder about really embracing the typeclass system here. What if we did big operations over arbitrary types A, and require an extra piece of evidence, possibly depending on the summand function <code>f : A -&gt; X</code> that the big operation makes sense. There could be lots of mechanisms here:</p>
 <ul>
 <li><code>[fintype A] [ordered A] [monoid X]</code> (summing over an ordered finite set)</li>
@@ -619,48 +619,48 @@ Could one prove enough of the needed lemmas in this ridiculous generality that i
 </ul>
 
 <a name="148337512"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148337512" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148337512">Chris Hughes (Nov 26 2018 at 00:52)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148337512" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148337512">Chris Hughes (Nov 26 2018 at 10:52)</a>:</h4>
 <p>distributivity of multiplication is true for lots of types of sums. Not sure how you'd state or prove that though. Unless you made a new class for more or less every lemma.</p>
 
 <a name="148345914"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148345914" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148345914">Johan Commelin (Nov 26 2018 at 05:37)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148345914" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148345914">Johan Commelin (Nov 26 2018 at 15:37)</a>:</h4>
 <p><span class="user-mention" data-user-id="110087">@Scott Morrison</span> I think that limits (in topology or category theory) are a completely different kind of big operators from the others. All the others have some sort of iterative or recursive aspect to them. (Btw, we could add tensor products to your big list.) For those iterative instances I think it will probably be very useful to also have <code>product L</code> if <code>L</code> is a list of matrices. So we do care about the non-commutative case, I think.<br>
 About tactics vs rewrites: I completely agree that it is crucial that we have slick rewriting of the summand, and currently this is a pain. I also agree with <span class="user-mention" data-user-id="110031">@Patrick Massot</span> That most of the "slicing and dicing" probably doesn't need tactics, but could be done with regular rewrite lemmas, because that doesn't touch the summand.<br>
 But making <code>conv</code> access the summand would be get you a major hooray from my side! I just recently reexperienced how awful it is, when I tried to prove that <code>boundary_boundary</code> lemma in the simplicial branch. You get nested sums over finsets, and manipulating them is a silly gamble where you just hope that <code>simp</code> and <code>erw</code> drill down far enough to make a bit of progress.</p>
 
 <a name="148351986"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148351986" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148351986">Scott Morrison (Nov 26 2018 at 08:49)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148351986" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148351986">Scott Morrison (Nov 26 2018 at 18:49)</a>:</h4>
 <p>The other tactic support I realised we can do is unrolling sums of "explicit length". Just like my <code>fin_cases</code> command, we can have a single tactic that takes for example $\sum_{n=k}^{k+3} f(n)$ and replaces it with $f(k) + f(k+1) + f(k+2) + f(k+3)$. This is quite a pain to achieve with pure rewriting, and is not so bad to automate in tactic mode.</p>
 
 <a name="148352070"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148352070" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148352070">Scott Morrison (Nov 26 2018 at 08:51)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148352070" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148352070">Scott Morrison (Nov 26 2018 at 18:51)</a>:</h4>
 <p>I'm not sure sure that limits (in category theory or in topology) are completely different big operators. If you just categorify your natural numbers as finite sets, a sum of natural numbers is just the colimit of the discrete diagram of those sets (and a product is just the colimit)! Nevertheless, I wasn't seriously suggested we do this --- in fact I was setting up a straw man to try to argue we should not go for maximum generality. :-)</p>
 
 <a name="148352123"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148352123" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148352123">Johan Commelin (Nov 26 2018 at 08:52)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148352123" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148352123">Johan Commelin (Nov 26 2018 at 18:52)</a>:</h4>
 <blockquote>
 <p>The other tactic support I realised we can do is unrolling sums of "explicit length". Just like my <code>fin_cases</code> command, we can have a single tactic that takes for example $\sum_{n=k}^{k+3} f(n)$ and replaces it with $f(k) + f(k+1) + f(k+2) + f(k+3)$. This is quite a pain to achieve with pure rewriting, and is not so bad to automate in tactic mode.</p>
 </blockquote>
 <p>I suppose this could be done with <code>repeat { rw split_last }, simp</code>.</p>
 
 <a name="148352148"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148352148" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148352148">Johan Commelin (Nov 26 2018 at 08:53)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148352148" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148352148">Johan Commelin (Nov 26 2018 at 18:53)</a>:</h4>
 <p>But I agree that an <code>unroll_bigop</code> tactic might make sense.</p>
 
 <a name="148352194"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148352194" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148352194">Scott Morrison (Nov 26 2018 at 08:54)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148352194" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148352194">Scott Morrison (Nov 26 2018 at 18:54)</a>:</h4>
 <p>I'm not quite convinced it's that easy, but perhaps I'm thinking about the <code>fin_cases</code> situation, which was quite a bit more painful.</p>
 
 <a name="148356624"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148356624" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148356624">Patrick Massot (Nov 26 2018 at 10:36)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148356624" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148356624">Patrick Massot (Nov 26 2018 at 20:36)</a>:</h4>
 <p>I agree it seems to make sense to drop the predicate part, at least until we see a need for it, although I'll try to ask Cyril and Assia before doing so. But non-commutative operators are crucial. I started this project because I wanted to do group theory. And I still hope that one day we will be able to handle differential forms as well.  Now that I think about it, I'm not sure I could find any big operator in one of my papers that uses a commutative operation.</p>
 
 <a name="148367393"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148367393" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148367393">Patrick Massot (Nov 26 2018 at 14:42)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148367393" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148367393">Patrick Massot (Nov 27 2018 at 00:42)</a>:</h4>
 <p>I worked on my bigop attempt today, reaching a new sorry-free equilibrium point. I did find a use for the predicate thing as a convenient way to prove stuff, keeping track of information.</p>
 
 <a name="148371544"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148371544" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148371544">Patrick Massot (Nov 26 2018 at 15:48)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset.sum/near/148371544" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35885finsetsum.html#148371544">Patrick Massot (Nov 27 2018 at 01:48)</a>:</h4>
 <p>Ok, I pushed <a href="https://github.com/leanprover-community/mathlib/tree/bigop" target="_blank" title="https://github.com/leanprover-community/mathlib/tree/bigop">https://github.com/leanprover-community/mathlib/tree/bigop</a> Any contributor is very welcome. In particular, cleaning up <a href="https://github.com/leanprover-community/mathlib/blob/bigop/pending_lemmas.lean" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/bigop/pending_lemmas.lean">https://github.com/leanprover-community/mathlib/blob/bigop/pending_lemmas.lean</a>  requires no big operators skills, only knowing mathlib (or searching efficiently), or being good at either list or nat vs int bashing.</p>
 
 

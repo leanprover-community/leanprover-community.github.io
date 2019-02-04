@@ -12,471 +12,471 @@ permalink: archive/116395maths/94921teachinguseofquotientsinLean.html
 <base href="https://leanprover.zulipchat.com">
 {% raw %}
 <a name="131184986"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131184986" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131184986">Kevin Buzzard (Aug 09 2018 at 19:03)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131184986" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131184986">Kevin Buzzard (Aug 10 2018 at 03:03)</a>:</h4>
 <p>I once found it hard to use quotients in Lean. I typically wanted to use quotients to define mathematical objects (like quotient rings) and the example (unordered pairs) in TPIL was a bit CSish for me. The first time I needed them was for localisation of rings and Kenny wrote everything for me. But I needed them more and more, and eventually I had to learn how they worked. I wrote code for the integers mod n, but at the time I didn't understand the type class inference system very well either, and the code was not great. <span class="user-mention" data-user-id="120726">@Luca Gerolla</span> needs to work with quotients for his work on the fundamental group and it occurred to me that I should revisit the work and tidy it up. One problem with integers mod n which I think could confuse beginners was a problem discussed here once, namely that it's hard to use type classes to put the equivalence relation of being congruent mod n onto Z, because that's one equivalence relation per n, and type class inference would rather there just be one equivalence relation on a type. The fix suggested to me at the time was to use a new version of Z for each integer, but having mulled this over for a while I decided that it added another layer of complexity which was unsuitable for the beginner. So I decided to choose everyone (except Johan)'s favourite integer 37, and just construct the integers mod 37 instead.</p>
 <p>I jump from tactic mode proofs to half-tactic half-term to full term mode proofs, depending on whether I'm trying to demonstrate something for the first time or just get things done. This code is supposed to be readable by learners who know a bit about Lean and are interested in decyphering all the <code>quotient.induction_on\2</code> stuff and want to see a relatively simple example. The code is here:</p>
 <p><a href="https://github.com/kbuzzard/xena/blob/master/xenalib/m1f/zmod37.lean" target="_blank" title="https://github.com/kbuzzard/xena/blob/master/xenalib/m1f/zmod37.lean">https://github.com/kbuzzard/xena/blob/master/xenalib/m1f/zmod37.lean</a></p>
 
 <a name="131185870"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131185870" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131185870">Patrick Massot (Aug 09 2018 at 19:20)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131185870" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131185870">Patrick Massot (Aug 10 2018 at 03:20)</a>:</h4>
 <p>Why do you define a setoid instance instead of having a def?</p>
 
 <a name="131186089"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131186089" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131186089">Mario Carneiro (Aug 09 2018 at 19:24)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131186089" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131186089">Mario Carneiro (Aug 10 2018 at 03:24)</a>:</h4>
 <p>I'm not seeing why 37 is better than n</p>
 
 <a name="131186102"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131186102" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131186102">Kevin Buzzard (Aug 09 2018 at 19:24)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131186102" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131186102">Kevin Buzzard (Aug 10 2018 at 03:24)</a>:</h4>
 <p>I want to give the same answer to both questions -- so I can use type class inference</p>
 
 <a name="131186108"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131186108" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131186108">Kevin Buzzard (Aug 09 2018 at 19:24)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131186108" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131186108">Kevin Buzzard (Aug 10 2018 at 03:24)</a>:</h4>
 <p>I wanted access to the \[[ notation etc</p>
 
 <a name="131186114"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131186114" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131186114">Mario Carneiro (Aug 09 2018 at 19:24)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131186114" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131186114">Mario Carneiro (Aug 10 2018 at 03:24)</a>:</h4>
 <p>make a notation for that</p>
 
 <a name="131186129"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131186129" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131186129">Kevin Buzzard (Aug 09 2018 at 19:24)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131186129" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131186129">Kevin Buzzard (Aug 10 2018 at 03:24)</a>:</h4>
 <p>I didn't want to make it harder. I wanted to show Luca how to do it</p>
 
 <a name="131186132"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131186132" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131186132">Kevin Buzzard (Aug 09 2018 at 19:25)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131186132" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131186132">Kevin Buzzard (Aug 10 2018 at 03:25)</a>:</h4>
 <p>That's the actual answer.</p>
 
 <a name="131186147"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131186147" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131186147">Kevin Buzzard (Aug 09 2018 at 19:25)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131186147" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131186147">Kevin Buzzard (Aug 10 2018 at 03:25)</a>:</h4>
 <p>I want <em>him</em> to use type class inference</p>
 
 <a name="131186235"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131186235" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131186235">Mario Carneiro (Aug 09 2018 at 19:26)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131186235" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131186235">Mario Carneiro (Aug 10 2018 at 03:26)</a>:</h4>
 <p>I think <code>setoid</code> is one of the more poorly thought out typeclasses</p>
 
 <a name="131186259"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131186259" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131186259">Chris Hughes (Aug 09 2018 at 19:27)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131186259" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131186259">Chris Hughes (Aug 10 2018 at 03:27)</a>:</h4>
 <p>Are we still going to be stuck with those things in lean4?</p>
 
 <a name="131186284"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131186284" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131186284">Mario Carneiro (Aug 09 2018 at 19:27)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131186284" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131186284">Mario Carneiro (Aug 10 2018 at 03:27)</a>:</h4>
 <p>no idea</p>
 
 <a name="131186302"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131186302" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131186302">Mario Carneiro (Aug 09 2018 at 19:28)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131186302" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131186302">Mario Carneiro (Aug 10 2018 at 03:28)</a>:</h4>
 <p>I think it should be called <code>has_equiv</code> and be tied to the <code>\approx</code> notation, but the <code>\[[</code> notation should be inferred by unification</p>
 
 <a name="131186335"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131186335" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131186335">Kenny Lau (Aug 09 2018 at 19:29)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131186335" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131186335">Kenny Lau (Aug 10 2018 at 03:29)</a>:</h4>
 <p>in lean4 we wouldn't have to worry about + and * being different things right</p>
 
 <a name="131186342"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131186342" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131186342">Mario Carneiro (Aug 09 2018 at 19:29)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131186342" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131186342">Mario Carneiro (Aug 10 2018 at 03:29)</a>:</h4>
 <p>that's a bit vague</p>
 
 <a name="131186375"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131186375" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131186375">Chris Hughes (Aug 09 2018 at 19:30)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131186375" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131186375">Chris Hughes (Aug 10 2018 at 03:30)</a>:</h4>
 <p>I think the idea is that we won't have both <code>add_group</code> and <code>group</code></p>
 
 <a name="131186403"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131186403" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131186403">Mario Carneiro (Aug 09 2018 at 19:30)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131186403" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131186403">Mario Carneiro (Aug 10 2018 at 03:30)</a>:</h4>
 <p>we won't have either</p>
 
 <a name="131186410"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131186410" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131186410">Kevin Buzzard (Aug 09 2018 at 19:30)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131186410" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131186410">Kevin Buzzard (Aug 10 2018 at 03:30)</a>:</h4>
 <blockquote>
 <p>I think <code>setoid</code> is one of the more poorly thought out typeclasses</p>
 </blockquote>
 <p>Sure, but I am teaching Lean 3.4.1 so I went with it.</p>
 
 <a name="131186413"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131186413" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131186413">Mario Carneiro (Aug 09 2018 at 19:30)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131186413" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131186413">Mario Carneiro (Aug 10 2018 at 03:30)</a>:</h4>
 <p>presumably that's moving to mathlib</p>
 
 <a name="131186424"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131186424" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131186424">Kevin Buzzard (Aug 09 2018 at 19:31)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131186424" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131186424">Kevin Buzzard (Aug 10 2018 at 03:31)</a>:</h4>
 <p>we could have <code>heartsuit_group</code></p>
 
 <a name="131186431"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131186431" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131186431">Kevin Buzzard (Aug 09 2018 at 19:31)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131186431" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131186431">Kevin Buzzard (Aug 10 2018 at 03:31)</a>:</h4>
 <p>the possibilities are endless</p>
 
 <a name="131186432"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131186432" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131186432">Mario Carneiro (Aug 09 2018 at 19:31)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131186432" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131186432">Mario Carneiro (Aug 10 2018 at 03:31)</a>:</h4>
 <p>my point is that it's not a great example if you are teaching typeclasses</p>
 
 <a name="131186593"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131186593" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131186593">Kevin Buzzard (Aug 09 2018 at 19:34)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131186593" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131186593">Kevin Buzzard (Aug 10 2018 at 03:34)</a>:</h4>
 <p>I'm not teaching typeclasses, I'm teaching Luca how to work with the quotient of the paths from x to x by the is_homotopic relation which he's shown is an equivalence relation. He now has to define a group structure on the quotient, and I looked at his code, and he defined the group law by using <code>quotient.out</code> to choose two random lifts, composed the paths, and went back down again. He was not using type class inference either, so it was <code>@quotient.out [insert proof of equiv reln here]</code> I needed to show him how to do it properly. I agree that the file doesn't do everything, but hopefully it does what it needs to do.</p>
 
 <a name="131186610"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131186610" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131186610">Kevin Buzzard (Aug 09 2018 at 19:35)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131186610" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131186610">Kevin Buzzard (Aug 10 2018 at 03:35)</a>:</h4>
 <p>It is also the file I wished I had when I was trying to figure out how to use quotients for the first time.</p>
 
 <a name="131186629"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131186629" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131186629">Mario Carneiro (Aug 09 2018 at 19:35)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131186629" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131186629">Mario Carneiro (Aug 10 2018 at 03:35)</a>:</h4>
 <p>maybe it should be</p>
 
 <a name="131186646"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131186646" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131186646">Mario Carneiro (Aug 09 2018 at 19:35)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131186646" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131186646">Mario Carneiro (Aug 10 2018 at 03:35)</a>:</h4>
 <p>rather than showing people Z/37Z, show them the fundamental group</p>
 
 <a name="131186686"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131186686" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131186686">Mario Carneiro (Aug 09 2018 at 19:36)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131186686" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131186686">Mario Carneiro (Aug 10 2018 at 03:36)</a>:</h4>
 <p>it's surely more interesting for students with more mathematical sophistication</p>
 
 <a name="131186824"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131186824" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131186824">Mario Carneiro (Aug 09 2018 at 19:39)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131186824" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131186824">Mario Carneiro (Aug 10 2018 at 03:39)</a>:</h4>
 <p>then prove the fundamental group of the circle is Z and PR it :D</p>
 
 <a name="131186893"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131186893" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131186893">Kevin Buzzard (Aug 09 2018 at 19:40)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131186893" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131186893">Kevin Buzzard (Aug 10 2018 at 03:40)</a>:</h4>
 <blockquote>
 <p>then prove the fundamental group of the circle is Z and PR it :D</p>
 </blockquote>
 <p>You mean do an _example_???</p>
 
 <a name="131186908"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131186908" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131186908">Kevin Buzzard (Aug 09 2018 at 19:40)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131186908" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131186908">Kevin Buzzard (Aug 10 2018 at 03:40)</a>:</h4>
 <p>Oh, is this just a way of proving that the definition is correct?</p>
 
 <a name="131186946"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131186946" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131186946">Kevin Buzzard (Aug 09 2018 at 19:41)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131186946" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131186946">Kevin Buzzard (Aug 10 2018 at 03:41)</a>:</h4>
 <p>The proof of pi_1(S^1)=Z I know involves constructing going via a triangulation and using some simplicial approximation theorem stuff</p>
 
 <a name="131186973"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131186973" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131186973">Kevin Buzzard (Aug 09 2018 at 19:41)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131186973" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131186973">Kevin Buzzard (Aug 10 2018 at 03:41)</a>:</h4>
 <p>it would not surprise me if there were a cute proof though</p>
 
 <a name="131186997"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131186997" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131186997">Mario Carneiro (Aug 09 2018 at 19:42)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131186997" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131186997">Mario Carneiro (Aug 10 2018 at 03:42)</a>:</h4>
 <p>that is not what I expected</p>
 
 <a name="131187011"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131187011" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131187011">Mario Carneiro (Aug 09 2018 at 19:42)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131187011" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131187011">Mario Carneiro (Aug 10 2018 at 03:42)</a>:</h4>
 <p>the proof I know uses covering maps and winding numbers</p>
 
 <a name="131187038"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131187038" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131187038">Johan Commelin (Aug 09 2018 at 19:43)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131187038" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131187038">Johan Commelin (Aug 10 2018 at 03:43)</a>:</h4>
 <p><code>S^1 = real/int</code>, and <code>real</code> is contractible. So <code>int</code> is the fundamental group.</p>
 
 <a name="131187047"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131187047" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131187047">Johan Commelin (Aug 09 2018 at 19:43)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131187047" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131187047">Johan Commelin (Aug 10 2018 at 03:43)</a>:</h4>
 <p>Now, how do we explain that to Lean?</p>
 
 <a name="131187054"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131187054" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131187054">Mario Carneiro (Aug 09 2018 at 19:43)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131187054" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131187054">Mario Carneiro (Aug 10 2018 at 03:43)</a>:</h4>
 <p>wait what</p>
 
 <a name="131187098"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131187098" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131187098">Mario Carneiro (Aug 09 2018 at 19:44)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131187098" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131187098">Mario Carneiro (Aug 10 2018 at 03:44)</a>:</h4>
 <p>how does that last step work?</p>
 
 <a name="131187132"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131187132" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131187132">Johan Commelin (Aug 09 2018 at 19:45)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131187132" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131187132">Johan Commelin (Aug 10 2018 at 03:45)</a>:</h4>
 <p>I guess you need to know that <code>S^1</code> is a <em>nice</em> space...</p>
 
 <a name="131187146"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131187146" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131187146">Mario Carneiro (Aug 09 2018 at 19:45)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131187146" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131187146">Mario Carneiro (Aug 10 2018 at 03:45)</a>:</h4>
 <p>I believe the first line, that's not hard to prove</p>
 
 <a name="131187147"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131187147" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131187147">Johan Commelin (Aug 09 2018 at 19:45)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131187147" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131187147">Johan Commelin (Aug 10 2018 at 03:45)</a>:</h4>
 <p>Where <em>nice</em> means locally compact and t2, or something similar.</p>
 
 <a name="131187170"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131187170" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131187170">Mario Carneiro (Aug 09 2018 at 19:45)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131187170" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131187170">Mario Carneiro (Aug 10 2018 at 03:45)</a>:</h4>
 <p>and you should get niceness that way</p>
 
 <a name="131187189"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131187189" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131187189">Johan Commelin (Aug 09 2018 at 19:46)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131187189" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131187189">Johan Commelin (Aug 10 2018 at 03:46)</a>:</h4>
 <p>And then you know that S^1 has a universal covering space, and you get a group structure on the fibre, which is exactly pi_1</p>
 
 <a name="131187203"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131187203" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131187203">Mario Carneiro (Aug 09 2018 at 19:47)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131187203" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131187203">Mario Carneiro (Aug 10 2018 at 03:47)</a>:</h4>
 <p>are you still elucidating your one line proof?</p>
 
 <a name="131187215"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131187215" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131187215">Johan Commelin (Aug 09 2018 at 19:47)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131187215" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131187215">Johan Commelin (Aug 10 2018 at 03:47)</a>:</h4>
 <p>Yes... I'm sorry.</p>
 
 <a name="131187223"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131187223" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131187223">Mario Carneiro (Aug 09 2018 at 19:47)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131187223" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131187223">Mario Carneiro (Aug 10 2018 at 03:47)</a>:</h4>
 <p>I'm trying to figure out how R is contractible plays into this</p>
 
 <a name="131187235"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131187235" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131187235">Johan Commelin (Aug 09 2018 at 19:48)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131187235" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131187235">Johan Commelin (Aug 10 2018 at 03:48)</a>:</h4>
 <p>Well, that is supposed to convince you that R is the universal covering space...</p>
 
 <a name="131187327"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131187327" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131187327">Johan Commelin (Aug 09 2018 at 19:49)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131187327" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131187327">Johan Commelin (Aug 10 2018 at 03:49)</a>:</h4>
 <p>We could prove a general lemma of the form <code>simply_connected X</code> implies <code>pi_1(X/G) = G</code></p>
 
 <a name="131187337"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131187337" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131187337">Mario Carneiro (Aug 09 2018 at 19:49)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131187337" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131187337">Mario Carneiro (Aug 10 2018 at 03:49)</a>:</h4>
 <p>oh so that's true in generality?</p>
 
 <a name="131187345"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131187345" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131187345">Johan Commelin (Aug 09 2018 at 19:49)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131187345" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131187345">Johan Commelin (Aug 10 2018 at 03:49)</a>:</h4>
 <p>If <code>X</code> is nice.</p>
 
 <a name="131187350"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131187350" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131187350">Johan Commelin (Aug 09 2018 at 19:49)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131187350" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131187350">Johan Commelin (Aug 10 2018 at 03:49)</a>:</h4>
 <p>Maybe even in general.</p>
 
 <a name="131187354"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131187354" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131187354">Mario Carneiro (Aug 09 2018 at 19:49)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131187354" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131187354">Mario Carneiro (Aug 10 2018 at 03:49)</a>:</h4>
 <p>G is discrete?</p>
 
 <a name="131187413"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131187413" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131187413">Mario Carneiro (Aug 09 2018 at 19:50)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131187413" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131187413">Mario Carneiro (Aug 10 2018 at 03:50)</a>:</h4>
 <p>i.e. pi_1(X/X) is not X</p>
 
 <a name="131187429"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131187429" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131187429">Johan Commelin (Aug 09 2018 at 19:50)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131187429" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131187429">Johan Commelin (Aug 10 2018 at 03:50)</a>:</h4>
 <p>True.</p>
 
 <a name="131187451"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131187451" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131187451">Mario Carneiro (Aug 09 2018 at 19:51)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131187451" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131187451">Mario Carneiro (Aug 10 2018 at 03:51)</a>:</h4>
 <p>to make X a covering map you need it to be locally like a quotient by a discrete space</p>
 
 <a name="131187456"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131187456" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131187456">Johan Commelin (Aug 09 2018 at 19:51)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131187456" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131187456">Johan Commelin (Aug 10 2018 at 03:51)</a>:</h4>
 <p>So there are some conditions. G needs to be discrete (topologically) and act freely on X, and the action must be continuous.</p>
 
 <a name="131187468"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131187468" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131187468">Johan Commelin (Aug 09 2018 at 19:51)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131187468" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131187468">Johan Commelin (Aug 10 2018 at 03:51)</a>:</h4>
 <p>So <code>G</code> is a discrete subgroup of <code>Aut_Top(X)</code>.</p>
 
 <a name="131187536"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131187536" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131187536">Mario Carneiro (Aug 09 2018 at 19:52)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131187536" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131187536">Mario Carneiro (Aug 10 2018 at 03:52)</a>:</h4>
 <p>which kind of quotient are we talking about here?</p>
 
 <a name="131187537"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131187537" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131187537">Johan Commelin (Aug 09 2018 at 19:52)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131187537" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131187537">Johan Commelin (Aug 10 2018 at 03:52)</a>:</h4>
 <p>But I haven't formalised this... so I don't know what I'm talking about.</p>
 
 <a name="131187557"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131187557" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131187557">Johan Commelin (Aug 09 2018 at 19:53)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131187557" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131187557">Johan Commelin (Aug 10 2018 at 03:53)</a>:</h4>
 <p>X/G as a set, with quotient topology, I think.</p>
 
 <a name="131187558"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131187558" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131187558">Mario Carneiro (Aug 09 2018 at 19:53)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131187558" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131187558">Mario Carneiro (Aug 10 2018 at 03:53)</a>:</h4>
 <p>If X is a topological group and G a discrete subgroup you get the other conditions</p>
 
 <a name="131187627"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131187627" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131187627">Mario Carneiro (Aug 09 2018 at 19:54)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131187627" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131187627">Mario Carneiro (Aug 10 2018 at 03:54)</a>:</h4>
 <p>R/Z as a set is garbage, that just identifies the points of Z in R making it a bouquet of circles</p>
 
 <a name="131187650"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131187650" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131187650">Johan Commelin (Aug 09 2018 at 19:54)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131187650" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131187650">Johan Commelin (Aug 10 2018 at 03:54)</a>:</h4>
 <p>Aah, sorry. I meant as group action of sets.</p>
 
 <a name="131187660"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131187660" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131187660">Kevin Buzzard (Aug 09 2018 at 19:55)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131187660" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131187660">Kevin Buzzard (Aug 10 2018 at 03:55)</a>:</h4>
 <p>this is the quotient of a group acting on a nice top space</p>
 
 <a name="131187664"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131187664" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131187664">Kevin Buzzard (Aug 09 2018 at 19:55)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131187664" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131187664">Kevin Buzzard (Aug 10 2018 at 03:55)</a>:</h4>
 <p>so the quotient space is the set of orbits</p>
 
 <a name="131187676"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131187676" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131187676">Kevin Buzzard (Aug 09 2018 at 19:55)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131187676" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131187676">Kevin Buzzard (Aug 10 2018 at 03:55)</a>:</h4>
 <p>An example is the quotient of a group by a subgroup</p>
 
 <a name="131187749"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131187749" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131187749">Kevin Buzzard (Aug 09 2018 at 19:57)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131187749" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131187749">Kevin Buzzard (Aug 10 2018 at 03:57)</a>:</h4>
 <p>but if <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="normal">Γ</mi></mrow><annotation encoding="application/x-tex">\Gamma</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.68333em;vertical-align:0em;"></span><span class="base"><span class="mord mathrm">Γ</span></span></span></span> is a subgroup of <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>S</mi><mi>L</mi><mo>(</mo><mn>2</mn><mo separator="true">,</mo><mrow><mi mathvariant="double-struck">Z</mi></mrow><mo>)</mo></mrow><annotation encoding="application/x-tex">SL(2,\mathbb{Z})</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.75em;"></span><span class="strut bottom" style="height:1em;vertical-align:-0.25em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.05764em;">S</span><span class="mord mathit">L</span><span class="mopen">(</span><span class="mord mathrm">2</span><span class="mpunct">,</span><span class="mord"><span class="mord mathbb">Z</span></span><span class="mclose">)</span></span></span></span> with no torsion (e.g. the elements congruent to the identity modulo <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>N</mi></mrow><annotation encoding="application/x-tex">N</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.68333em;vertical-align:0em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.10903em;">N</span></span></span></span> for any <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>N</mi><mo>&gt;</mo><mo>=</mo><mn>3</mn></mrow><annotation encoding="application/x-tex">N&gt;=3</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.72243em;vertical-align:-0.0391em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.10903em;">N</span><span class="mrel">&gt;</span><span class="mrel">=</span><span class="mord mathrm">3</span></span></span></span>) then <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="normal">Γ</mi></mrow><annotation encoding="application/x-tex">\Gamma</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.68333em;vertical-align:0em;"></span><span class="base"><span class="mord mathrm">Γ</span></span></span></span> acts on the upper half plane (which is nice and contractible) discretely, and the quotient is a non-compact Riemann surface with fundamental group <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="normal">Γ</mi></mrow><annotation encoding="application/x-tex">\Gamma</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.68333em;vertical-align:0em;"></span><span class="base"><span class="mord mathrm">Γ</span></span></span></span>.</p>
 
 <a name="131187808"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131187808" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131187808">Johan Commelin (Aug 09 2018 at 19:58)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131187808" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131187808">Johan Commelin (Aug 10 2018 at 03:58)</a>:</h4>
 <p>What would the definition of <code>S^1</code> be in Lean?</p>
 
 <a name="131187823"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131187823" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131187823">Kevin Buzzard (Aug 09 2018 at 19:58)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131187823" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131187823">Kevin Buzzard (Aug 10 2018 at 03:58)</a>:</h4>
 <p>You could certainly define it to be the closed subspace of R^2</p>
 
 <a name="131187837"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131187837" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131187837">Johan Commelin (Aug 09 2018 at 19:59)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131187837" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131187837">Johan Commelin (Aug 10 2018 at 03:59)</a>:</h4>
 <p>Right, that is maybe a more reasonable definition.</p>
 
 <a name="131187839"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131187839" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131187839">Mario Carneiro (Aug 09 2018 at 19:59)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131187839" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131187839">Mario Carneiro (Aug 10 2018 at 03:59)</a>:</h4>
 <p>that's my thought as well, it's true to the literature and also generalizes to using circles as... circles</p>
 
 <a name="131187840"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131187840" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131187840">Kevin Buzzard (Aug 09 2018 at 19:59)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131187840" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131187840">Kevin Buzzard (Aug 10 2018 at 03:59)</a>:</h4>
 <p>and IF WE EVER MANAGED TO GET THE EXPONENTIAL FUNCTION INTO MATHLIB then you could even prove it was R mod Z :-)</p>
 
 <a name="131187841"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131187841" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131187841">Johan Commelin (Aug 09 2018 at 19:59)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131187841" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131187841">Johan Commelin (Aug 10 2018 at 03:59)</a>:</h4>
 <p>And then identify it with the unit circle in C</p>
 
 <a name="131187845"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131187845" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131187845">Johan Commelin (Aug 09 2018 at 19:59)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131187845" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131187845">Johan Commelin (Aug 10 2018 at 03:59)</a>:</h4>
 <p>Right.</p>
 
 <a name="131187911"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131187911" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131187911">Kevin Buzzard (Aug 09 2018 at 20:00)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131187911" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131187911">Kevin Buzzard (Aug 10 2018 at 04:00)</a>:</h4>
 <p><a href="#narrow/stream/116395-maths/topic/Trivial.20things.20about.20convergent.20power.20series" title="#narrow/stream/116395-maths/topic/Trivial.20things.20about.20convergent.20power.20series">https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Trivial.20things.20about.20convergent.20power.20series</a></p>
 
 <a name="131187915"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131187915" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131187915">Johan Commelin (Aug 09 2018 at 20:00)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131187915" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131187915">Johan Commelin (Aug 10 2018 at 04:00)</a>:</h4>
 <p>Maybe exp should move to the community fork. Who knows if that would move it forward...</p>
 
 <a name="131187918"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131187918" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131187918">Mario Carneiro (Aug 09 2018 at 20:00)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131187918" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131187918">Mario Carneiro (Aug 10 2018 at 04:00)</a>:</h4>
 <p>pff, use rational trig and you don't need exp</p>
 
 <a name="131187926"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131187926" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131187926">Kevin Buzzard (Aug 09 2018 at 20:00)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131187926" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131187926">Kevin Buzzard (Aug 10 2018 at 04:00)</a>:</h4>
 <p>:-)</p>
 
 <a name="131187935"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131187935" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131187935">Kevin Buzzard (Aug 09 2018 at 20:00)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131187935" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131187935">Kevin Buzzard (Aug 10 2018 at 04:00)</a>:</h4>
 <p>Who needs to be complex when you can just be rational.</p>
 
 <a name="131187976"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131187976" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131187976">Mario Carneiro (Aug 09 2018 at 20:01)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131187976" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131187976">Mario Carneiro (Aug 10 2018 at 04:01)</a>:</h4>
 <p>that's actually a good idea Johan</p>
 
 <a name="131188024"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131188024" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131188024">Kevin Buzzard (Aug 09 2018 at 20:02)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131188024" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131188024">Kevin Buzzard (Aug 10 2018 at 04:02)</a>:</h4>
 <p>Or you could just come to the xena project, we use it freely over there :-)</p>
 
 <a name="131188035"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131188035" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131188035">Kevin Buzzard (Aug 09 2018 at 20:02)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131188035" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131188035">Kevin Buzzard (Aug 10 2018 at 04:02)</a>:</h4>
 <p>warning: not all code compiles</p>
 
 <a name="131188043"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131188043" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131188043">Mario Carneiro (Aug 09 2018 at 20:02)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131188043" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131188043">Mario Carneiro (Aug 10 2018 at 04:02)</a>:</h4>
 <p>which is why it is a good community fork project</p>
 
 <a name="131188061"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131188061" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131188061">Mario Carneiro (Aug 09 2018 at 20:03)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131188061" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131188061">Mario Carneiro (Aug 10 2018 at 04:03)</a>:</h4>
 <p>you are already using it but the PR needs more work</p>
 
 <a name="131188077"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131188077" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131188077">Mario Carneiro (Aug 09 2018 at 20:03)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131188077" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131188077">Mario Carneiro (Aug 10 2018 at 04:03)</a>:</h4>
 <p>or at least I need to spend more time on it</p>
 
 <a name="131188135"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131188135" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131188135">Kevin Buzzard (Aug 09 2018 at 20:04)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131188135" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131188135">Kevin Buzzard (Aug 10 2018 at 04:04)</a>:</h4>
 <p>I don't even know which PR it is any more. Is it in the binomial theorem one or the limits one?</p>
 
 <a name="131188145"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131188145" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131188145">Kevin Buzzard (Aug 09 2018 at 20:04)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131188145" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131188145">Kevin Buzzard (Aug 10 2018 at 04:04)</a>:</h4>
 <p>I can't find it in either</p>
 
 <a name="131188153"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131188153" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131188153">Mario Carneiro (Aug 09 2018 at 20:04)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131188153" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131188153">Mario Carneiro (Aug 10 2018 at 04:04)</a>:</h4>
 <p>surely it's not in the binomial theorem</p>
 
 <a name="131188155"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131188155" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131188155">Johan Commelin (Aug 09 2018 at 20:04)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131188155" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131188155">Johan Commelin (Aug 10 2018 at 04:04)</a>:</h4>
 <p>I think anyone can pull that branch into the community fork, right? (After we found it)</p>
 
 <a name="131188163"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131188163" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131188163">Mario Carneiro (Aug 09 2018 at 20:04)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131188163" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131188163">Mario Carneiro (Aug 10 2018 at 04:04)</a>:</h4>
 <p>yes</p>
 
 <a name="131188178"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131188178" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131188178">Kevin Buzzard (Aug 09 2018 at 20:05)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131188178" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131188178">Kevin Buzzard (Aug 10 2018 at 04:05)</a>:</h4>
 <p>I think he needed the binomial theorem to prove exp(x+y)=exp(x)exp(y)</p>
 
 <a name="131188188"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131188188" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131188188">Mario Carneiro (Aug 09 2018 at 20:05)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131188188" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131188188">Mario Carneiro (Aug 10 2018 at 04:05)</a>:</h4>
 <p>I suppose you do</p>
 
 <a name="131188262"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131188262" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131188262">Kevin Buzzard (Aug 09 2018 at 20:06)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131188262" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131188262">Kevin Buzzard (Aug 10 2018 at 04:06)</a>:</h4>
 <p>By the way, another random PR we use a lot at Imperial is Chris' zmod work. But I hear you didn't like pos_nat and I believe Chris is now re-doing everything with pnat and prime</p>
 
 <a name="131188285"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131188285" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131188285">Kevin Buzzard (Aug 09 2018 at 20:07)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131188285" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131188285">Kevin Buzzard (Aug 10 2018 at 04:07)</a>:</h4>
 <p>I can't find exp. Did he close it?</p>
 
 <a name="131188293"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131188293" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131188293">Kevin Buzzard (Aug 09 2018 at 20:07)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131188293" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131188293">Kevin Buzzard (Aug 10 2018 at 04:07)</a>:</h4>
 <p>No wonder it didn't get accepted :-)</p>
 
 <a name="131188299"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131188299" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131188299">Johan Commelin (Aug 09 2018 at 20:07)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131188299" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131188299">Johan Commelin (Aug 10 2018 at 04:07)</a>:</h4>
 <p><span class="user-mention" data-user-id="110044">@Chris Hughes</span> We need you (-;</p>
 
 <a name="131188322"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131188322" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131188322">Kevin Buzzard (Aug 09 2018 at 20:07)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131188322" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131188322">Kevin Buzzard (Aug 10 2018 at 04:07)</a>:</h4>
 <p>he's too busy helping all the other Imperial UGs while I'm on holiday :-)</p>
 
 <a name="131188323"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131188323" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131188323">Mario Carneiro (Aug 09 2018 at 20:08)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131188323" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131188323">Mario Carneiro (Aug 10 2018 at 04:08)</a>:</h4>
 <p><a href="https://github.com/leanprover/mathlib/pull/43" target="_blank" title="https://github.com/leanprover/mathlib/pull/43">https://github.com/leanprover/mathlib/pull/43</a></p>
 
 <a name="131188395"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131188395" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131188395">Johan Commelin (Aug 09 2018 at 20:09)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131188395" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131188395">Johan Commelin (Aug 10 2018 at 04:09)</a>:</h4>
 <p>branch is no longer there.</p>
 
 <a name="131188398"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131188398" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131188398">Johan Commelin (Aug 09 2018 at 20:09)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131188398" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131188398">Johan Commelin (Aug 10 2018 at 04:09)</a>:</h4>
 <p>So we will need to get the stuff out of Xena.</p>
 
 <a name="131188401"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131188401" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131188401">Kevin Buzzard (Aug 09 2018 at 20:09)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131188401" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131188401">Kevin Buzzard (Aug 10 2018 at 04:09)</a>:</h4>
 <p>so it looks like the ball's in Chris' court.</p>
 
 <a name="131188402"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131188402" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131188402">Mario Carneiro (Aug 09 2018 at 20:09)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131188402" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131188402">Mario Carneiro (Aug 10 2018 at 04:09)</a>:</h4>
 <p>no wait it's <a href="https://github.com/leanprover/mathlib/pull/41" target="_blank" title="https://github.com/leanprover/mathlib/pull/41">https://github.com/leanprover/mathlib/pull/41</a></p>
 
 <a name="131188414"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131188414" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131188414">Mario Carneiro (Aug 09 2018 at 20:09)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131188414" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131188414">Mario Carneiro (Aug 10 2018 at 04:09)</a>:</h4>
 <p>it says it is a PR from <code>unknown repository</code></p>
 
 <a name="131188466"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131188466" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131188466">Kevin Buzzard (Aug 09 2018 at 20:10)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131188466" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131188466">Kevin Buzzard (Aug 10 2018 at 04:10)</a>:</h4>
 <p>I'd be quite happy if he were to concentrate on zmod at the minute, we've all found this very helpful. There's a bunch of people doing number theory and group theory, some of whom use it.</p>
 
 <a name="131188467"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131188467" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131188467">Johan Commelin (Aug 09 2018 at 20:10)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131188467" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131188467">Johan Commelin (Aug 10 2018 at 04:10)</a>:</h4>
 <p>Which means that the repo was deleted from github, I think</p>
 
 <a name="131188476"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131188476" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131188476">Chris Hughes (Aug 09 2018 at 20:10)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131188476" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131188476">Chris Hughes (Aug 10 2018 at 04:10)</a>:</h4>
 <p>I think I deleted my fork of mathlib at some point when I was frustratedly trying to learn how to use git.</p>
 
 <a name="131188485"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131188485" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131188485">Kevin Buzzard (Aug 09 2018 at 20:10)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131188485" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131188485">Kevin Buzzard (Aug 10 2018 at 04:10)</a>:</h4>
 <p>They don't teach mathematicians git :-(</p>
 
 <a name="131188497"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131188497" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131188497">Johan Commelin (Aug 09 2018 at 20:11)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131188497" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131188497">Johan Commelin (Aug 10 2018 at 04:11)</a>:</h4>
 <p>Chapter 0 in your book is about git, right?</p>
 
 <a name="131188499"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131188499" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131188499">Mario Carneiro (Aug 09 2018 at 20:11)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131188499" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131188499">Mario Carneiro (Aug 10 2018 at 04:11)</a>:</h4>
 <p>I think those files should all be dumped in the community fork, and we can come back to it at some point</p>
 
 <a name="131188500"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131188500" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131188500">Kevin Buzzard (Aug 09 2018 at 20:11)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131188500" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131188500">Kevin Buzzard (Aug 10 2018 at 04:11)</a>:</h4>
 <p>I'm not competent to write it</p>
 
 <a name="131188509"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131188509" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131188509">Johan Commelin (Aug 09 2018 at 20:11)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131188509" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131188509">Johan Commelin (Aug 10 2018 at 04:11)</a>:</h4>
 <p>You could have a foreword by someone else... Mario for example</p>
 
 <a name="131188563"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131188563" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131188563">Mario Carneiro (Aug 09 2018 at 20:12)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131188563" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131188563">Mario Carneiro (Aug 10 2018 at 04:12)</a>:</h4>
 <p>Step 1: <a href="http://git-scm.com" target="_blank" title="http://git-scm.com">git-scm.com</a>, step 2: profit</p>
 
 <a name="131191018"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131191018" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131191018">Andrew Ashworth (Aug 09 2018 at 20:56)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131191018" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131191018">Andrew Ashworth (Aug 10 2018 at 04:56)</a>:</h4>
 <p>Install sourcetree while you're at it</p>
 
 <a name="131191048"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131191048" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131191048">Andrew Ashworth (Aug 09 2018 at 20:57)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131191048" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131191048">Andrew Ashworth (Aug 10 2018 at 04:57)</a>:</h4>
 <p>Nobody has time to remember all the magic git invocations, so a gui wrapper really helps</p>
 
 <a name="131197153"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131197153" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131197153">Patrick Massot (Aug 09 2018 at 23:04)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/teaching%20use%20of%20quotients%20in%20Lean/near/131197153" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94921teachinguseofquotientsinLean.html#131197153">Patrick Massot (Aug 10 2018 at 07:04)</a>:</h4>
 <p>I used to believe that. So I advised computer afraid colleagues to use source tree and, after many rescuing operations, I realized command line is much simpler. Because you don't have to know about all commands and options that are not written in your git cheat sheet.</p>
 
 

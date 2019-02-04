@@ -12,7 +12,7 @@ permalink: archive/113488general/74575Forwarddeclarations.html
 <base href="https://leanprover.zulipchat.com">
 {% raw %}
 <a name="131227150"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Forward%20declarations/near/131227150" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74575Forwarddeclarations.html#131227150">Keeley Hoek (Aug 10 2018 at 11:34)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Forward%20declarations/near/131227150" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74575Forwarddeclarations.html#131227150">Keeley Hoek (Aug 10 2018 at 19:34)</a>:</h4>
 <p>Is it possible to forward declare definitions in lean? I'd like to write something like</p>
 <div class="codehilite"><pre><span></span>structure some_data -- forward declare structure because lean can&#39;t look ahead
 
@@ -30,19 +30,19 @@ def some_data.mutate (my_data : some_data) : some_data := my_data.data_mutator m
 <p>If you can't I'm pretty sad. :( Has it ever been asked for?</p>
 
 <a name="131227260"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Forward%20declarations/near/131227260" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74575Forwarddeclarations.html#131227260">Scott Morrison (Aug 10 2018 at 11:36)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Forward%20declarations/near/131227260" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74575Forwarddeclarations.html#131227260">Scott Morrison (Aug 10 2018 at 19:36)</a>:</h4>
 <p>I'm not exactly sure what you're after yet, but "mutual defs" may be what you want, and I think are as close as you're going to get.</p>
 
 <a name="131227578"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Forward%20declarations/near/131227578" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74575Forwarddeclarations.html#131227578">Keeley Hoek (Aug 10 2018 at 11:43)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Forward%20declarations/near/131227578" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74575Forwarddeclarations.html#131227578">Keeley Hoek (Aug 10 2018 at 19:43)</a>:</h4>
 <p>I'm now all about mutual definitions!</p>
 
 <a name="131227588"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Forward%20declarations/near/131227588" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74575Forwarddeclarations.html#131227588">Mario Carneiro (Aug 10 2018 at 11:43)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Forward%20declarations/near/131227588" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74575Forwarddeclarations.html#131227588">Mario Carneiro (Aug 10 2018 at 19:43)</a>:</h4>
 <p>This sounds like an obvious source of unsoundness, so it's definitely by design that this isn't doable. I think you should explain in more detail what you are trying to do - there is likely a standard "functional" approach to your problem that does not require forward declaration.</p>
 
 <a name="131227747"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Forward%20declarations/near/131227747" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74575Forwarddeclarations.html#131227747">Mario Carneiro (Aug 10 2018 at 11:46)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Forward%20declarations/near/131227747" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74575Forwarddeclarations.html#131227747">Mario Carneiro (Aug 10 2018 at 19:46)</a>:</h4>
 <p>Rather than forward declaration, the structure can just refer to itself. Since this makes it recursive you have to define it with <code>inductive</code>:</p>
 <div class="codehilite"><pre><span></span>meta inductive some_data
 | mk (the_data : list nat)
@@ -53,42 +53,42 @@ def some_data.mutate (my_data : some_data) : some_data := my_data.data_mutator m
 <p>This has to be <code>meta</code>, though, because it <em>is</em> unsound</p>
 
 <a name="131227775"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Forward%20declarations/near/131227775" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74575Forwarddeclarations.html#131227775">Keeley Hoek (Aug 10 2018 at 11:47)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Forward%20declarations/near/131227775" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74575Forwarddeclarations.html#131227775">Keeley Hoek (Aug 10 2018 at 19:47)</a>:</h4>
 <p>Sure, this was just for programming in lean just like another functional language (i.e. with reckless abandon). Often functions invoke each other, for example. I was willing to sell my soul to the <code>meta</code>s :D</p>
 
 <a name="131227827"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Forward%20declarations/near/131227827" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74575Forwarddeclarations.html#131227827">Mario Carneiro (Aug 10 2018 at 11:48)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Forward%20declarations/near/131227827" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74575Forwarddeclarations.html#131227827">Mario Carneiro (Aug 10 2018 at 19:48)</a>:</h4>
 <p>here is the mutator:</p>
 <div class="codehilite"><pre><span></span>meta def some_data.mutate : some_data → some_data
 | ⟨d, m⟩ := m ⟨d, m⟩
 </pre></div>
 
 <a name="131227844"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Forward%20declarations/near/131227844" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74575Forwarddeclarations.html#131227844">Keeley Hoek (Aug 10 2018 at 11:48)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Forward%20declarations/near/131227844" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74575Forwarddeclarations.html#131227844">Keeley Hoek (Aug 10 2018 at 19:48)</a>:</h4>
 <p>cheers</p>
 
 <a name="131227848"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Forward%20declarations/near/131227848" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74575Forwarddeclarations.html#131227848">Kenny Lau (Aug 10 2018 at 11:48)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Forward%20declarations/near/131227848" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74575Forwarddeclarations.html#131227848">Kenny Lau (Aug 10 2018 at 19:48)</a>:</h4>
 <p>what does <code>meta</code> mean?</p>
 
 <a name="131227901"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Forward%20declarations/near/131227901" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74575Forwarddeclarations.html#131227901">Johan Commelin (Aug 10 2018 at 11:50)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Forward%20declarations/near/131227901" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74575Forwarddeclarations.html#131227901">Johan Commelin (Aug 10 2018 at 19:50)</a>:</h4>
 <p>Roughly that you are doing <em>raw</em> Lean. Without proof checking. So all tactics are written in <code>meta</code> land.</p>
 
 <a name="131227918"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Forward%20declarations/near/131227918" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74575Forwarddeclarations.html#131227918">Johan Commelin (Aug 10 2018 at 11:50)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Forward%20declarations/near/131227918" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74575Forwarddeclarations.html#131227918">Johan Commelin (Aug 10 2018 at 19:50)</a>:</h4>
 <p>But Mario can give you a definition that is a lot better.</p>
 
 <a name="131227919"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Forward%20declarations/near/131227919" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74575Forwarddeclarations.html#131227919">Mario Carneiro (Aug 10 2018 at 11:50)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Forward%20declarations/near/131227919" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74575Forwarddeclarations.html#131227919">Mario Carneiro (Aug 10 2018 at 19:50)</a>:</h4>
 <p>It turns off the safety</p>
 
 <a name="131227946"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Forward%20declarations/near/131227946" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74575Forwarddeclarations.html#131227946">Mario Carneiro (Aug 10 2018 at 11:51)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Forward%20declarations/near/131227946" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74575Forwarddeclarations.html#131227946">Mario Carneiro (Aug 10 2018 at 19:51)</a>:</h4>
 <p>you can do unbounded recursion and non-positive inductives and other unsound things, as well as being able to call meta constants that have a definition in C++</p>
 
 <a name="131227961"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Forward%20declarations/near/131227961" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74575Forwarddeclarations.html#131227961">Keeley Hoek (Aug 10 2018 at 11:51)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Forward%20declarations/near/131227961" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74575Forwarddeclarations.html#131227961">Keeley Hoek (Aug 10 2018 at 19:51)</a>:</h4>
 <p>Actually, how might I solve a related problem, like declaring (toy example):</p>
 <div class="codehilite"><pre><span></span>meta structure vertex :=
 ( color : string )
@@ -100,19 +100,19 @@ meta structure edge :=
 </pre></div>
 
 <a name="131227962"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Forward%20declarations/near/131227962" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74575Forwarddeclarations.html#131227962">Mario Carneiro (Aug 10 2018 at 11:51)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Forward%20declarations/near/131227962" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74575Forwarddeclarations.html#131227962">Mario Carneiro (Aug 10 2018 at 19:51)</a>:</h4>
 <p>mutual inductive</p>
 
 <a name="131228003"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Forward%20declarations/near/131228003" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74575Forwarddeclarations.html#131228003">Keeley Hoek (Aug 10 2018 at 11:52)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Forward%20declarations/near/131228003" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74575Forwarddeclarations.html#131228003">Keeley Hoek (Aug 10 2018 at 19:52)</a>:</h4>
 <p>(thanks again for the practically instant help)</p>
 
 <a name="131228007"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Forward%20declarations/near/131228007" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74575Forwarddeclarations.html#131228007">Keeley Hoek (Aug 10 2018 at 11:52)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Forward%20declarations/near/131228007" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74575Forwarddeclarations.html#131228007">Keeley Hoek (Aug 10 2018 at 19:52)</a>:</h4>
 <p>beat me!</p>
 
 <a name="131228035"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Forward%20declarations/near/131228035" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74575Forwarddeclarations.html#131228035">Mario Carneiro (Aug 10 2018 at 11:53)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Forward%20declarations/near/131228035" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74575Forwarddeclarations.html#131228035">Mario Carneiro (Aug 10 2018 at 19:53)</a>:</h4>
 <div class="codehilite"><pre><span></span>meta mutual inductive vertex, edge
 with vertex : Type
 | mk (color : string) (adj_list : list edge) : vertex
@@ -121,27 +121,27 @@ with edge : Type
 </pre></div>
 
 <a name="131228039"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Forward%20declarations/near/131228039" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74575Forwarddeclarations.html#131228039">Mario Carneiro (Aug 10 2018 at 11:53)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Forward%20declarations/near/131228039" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74575Forwarddeclarations.html#131228039">Mario Carneiro (Aug 10 2018 at 19:53)</a>:</h4>
 <p><code>end</code> is a keyword</p>
 
 <a name="131228161"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Forward%20declarations/near/131228161" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74575Forwarddeclarations.html#131228161">Mario Carneiro (Aug 10 2018 at 11:56)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Forward%20declarations/near/131228161" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74575Forwarddeclarations.html#131228161">Mario Carneiro (Aug 10 2018 at 19:56)</a>:</h4>
 <p>Note that these are dangerous even in pure programming lean, because the pointer structure has cycles and lean is reference counted</p>
 
 <a name="131229142"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Forward%20declarations/near/131229142" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74575Forwarddeclarations.html#131229142">Keeley Hoek (Aug 10 2018 at 12:23)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Forward%20declarations/near/131229142" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74575Forwarddeclarations.html#131229142">Keeley Hoek (Aug 10 2018 at 20:23)</a>:</h4>
 <p>(In principle) there are countermeasures against rc cycles though, right? Are you saying that lean isn't able to find them at the moment?---if so, appreciate the heads up. thanks again :)</p>
 
 <a name="131229209"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Forward%20declarations/near/131229209" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74575Forwarddeclarations.html#131229209">Mario Carneiro (Aug 10 2018 at 12:24)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Forward%20declarations/near/131229209" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74575Forwarddeclarations.html#131229209">Mario Carneiro (Aug 10 2018 at 20:24)</a>:</h4>
 <p>Well, lean is pretty explicitly designed to make rc cycles impossible as a result of the type system</p>
 
 <a name="131229223"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Forward%20declarations/near/131229223" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74575Forwarddeclarations.html#131229223">Mario Carneiro (Aug 10 2018 at 12:25)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Forward%20declarations/near/131229223" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74575Forwarddeclarations.html#131229223">Mario Carneiro (Aug 10 2018 at 20:25)</a>:</h4>
 <p>I don't know if it does something special for meta mutual inductives, but I doubt it</p>
 
 <a name="131229297"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Forward%20declarations/near/131229297" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74575Forwarddeclarations.html#131229297">Mario Carneiro (Aug 10 2018 at 12:27)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Forward%20declarations/near/131229297" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74575Forwarddeclarations.html#131229297">Mario Carneiro (Aug 10 2018 at 20:27)</a>:</h4>
 <p>the goal is to have a strong enough type system that lean can assume powerful things about your code. Functional stuff like common subexpression evaluation is one simple example</p>
 
 

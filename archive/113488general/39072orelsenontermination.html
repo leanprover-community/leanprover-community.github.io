@@ -12,7 +12,7 @@ permalink: archive/113488general/39072orelsenontermination.html
 <base href="https://leanprover.zulipchat.com">
 {% raw %}
 <a name="152538868"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/orelse%20nontermination/near/152538868" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/39072orelsenontermination.html#152538868">Seul Baek (Dec 26 2018 at 06:58)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/orelse%20nontermination/near/152538868" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/39072orelsenontermination.html#152538868">Seul Baek (Dec 26 2018 at 16:58)</a>:</h4>
 <div class="codehilite"><pre><span></span>meta def foo : tactic unit :=
 triv &lt;|&gt; foo
 
@@ -23,23 +23,23 @@ example : true := by foo
 <p>In this example I expected <code>foo</code> to behave just like <code>triv</code> since the right branch would never be used, but it times out. Is there a way to avoid this?</p>
 
 <a name="152540454"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/orelse%20nontermination/near/152540454" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/39072orelsenontermination.html#152540454">Mario Carneiro (Dec 26 2018 at 07:58)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/orelse%20nontermination/near/152540454" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/39072orelsenontermination.html#152540454">Mario Carneiro (Dec 26 2018 at 17:58)</a>:</h4>
 <p>you can eta expand <code>foo</code> on the right</p>
 
 <a name="152542912"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/orelse%20nontermination/near/152542912" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/39072orelsenontermination.html#152542912">Gabriel Ebner (Dec 26 2018 at 09:19)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/orelse%20nontermination/near/152542912" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/39072orelsenontermination.html#152542912">Gabriel Ebner (Dec 26 2018 at 19:19)</a>:</h4>
 <p>Another nice option is to use <code>local attribute [inline] interaction_monad_orelse</code>.</p>
 
 <a name="152550157"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/orelse%20nontermination/near/152550157" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/39072orelsenontermination.html#152550157">Seul Baek (Dec 26 2018 at 13:15)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/orelse%20nontermination/near/152550157" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/39072orelsenontermination.html#152550157">Seul Baek (Dec 26 2018 at 23:15)</a>:</h4>
 <p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span>  I thought you meant changing the body of <code>foo</code> to <code>triv &lt;|&gt; (λ s, foo s)</code>, but this still times out. Am I doing something wrong here?</p>
 
 <a name="152550222"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/orelse%20nontermination/near/152550222" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/39072orelsenontermination.html#152550222">Seul Baek (Dec 26 2018 at 13:17)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/orelse%20nontermination/near/152550222" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/39072orelsenontermination.html#152550222">Seul Baek (Dec 26 2018 at 23:17)</a>:</h4>
 <p><span class="user-mention" data-user-id="110043">@Gabriel Ebner</span>  That works. Thanks!</p>
 
 <a name="152569135"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/orelse%20nontermination/near/152569135" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/39072orelsenontermination.html#152569135">Mario Carneiro (Dec 26 2018 at 21:07)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/orelse%20nontermination/near/152569135" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/39072orelsenontermination.html#152569135">Mario Carneiro (Dec 27 2018 at 07:07)</a>:</h4>
 <p>actually I think you have to eta expand the definition of foo itself, i.e. <code>def foo | s := (triv &lt;|&gt; foo) s</code></p>
 
 

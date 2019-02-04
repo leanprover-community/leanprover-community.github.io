@@ -12,55 +12,55 @@ permalink: archive/113488general/19500elaborator.html
 <base href="https://leanprover.zulipchat.com">
 {% raw %}
 <a name="124491100"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491100" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124491100">Kevin Buzzard (Apr 01 2018 at 16:39)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491100" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124491100">Kevin Buzzard (Apr 02 2018 at 00:39)</a>:</h4>
 <p>Over the last few months I have been idly writing something called "from unicode to bytecode", which is some (still extremely incomplete) documentation as to how Lean turns a string of unicode characters (the input file) into bytecode. One reason it's incomplete currently is that I have no real idea what bytecode is. But when I started this project I had no idea what a scanner / parser / token / etc was either, so I'm definitely moving forwards.</p>
 
 <a name="124491140"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491140" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124491140">Kevin Buzzard (Apr 01 2018 at 16:40)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491140" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124491140">Kevin Buzzard (Apr 02 2018 at 00:40)</a>:</h4>
 <p>I am now trying to understand the elaborator better. Here is a very basic question.</p>
 
 <a name="124491183"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491183" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124491183">Kevin Buzzard (Apr 01 2018 at 16:42)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491183" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124491183">Kevin Buzzard (Apr 02 2018 at 00:42)</a>:</h4>
 <p>This works (by which I think I mean "Lean's kernel manages to fully parse and elaborate the string of characters and add a new term <code>easy</code> to the environment"):</p>
 
 <a name="124491186"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491186" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124491186">Kevin Buzzard (Apr 01 2018 at 16:42)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491186" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124491186">Kevin Buzzard (Apr 02 2018 at 00:42)</a>:</h4>
 <p><code>theorem  easy {i : ℕ} {n : ℕ} : i &lt; n → i &lt; nat.succ n :=  λ H, lt.trans H $ nat.lt_succ_self n</code></p>
 
 <a name="124491187"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491187" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124491187">Kevin Buzzard (Apr 01 2018 at 16:42)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491187" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124491187">Kevin Buzzard (Apr 02 2018 at 00:42)</a>:</h4>
 <p>If I replace the <code>n</code> with an underscore, it still works</p>
 
 <a name="124491188"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491188" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124491188">Kevin Buzzard (Apr 01 2018 at 16:42)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491188" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124491188">Kevin Buzzard (Apr 02 2018 at 00:42)</a>:</h4>
 <p><code>theorem  easy {i : ℕ} {n : ℕ} : i &lt; n → i &lt; nat.succ n :=  λ H, lt.trans H $ nat.lt_succ_self _</code></p>
 
 <a name="124491196"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491196" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124491196">Kevin Buzzard (Apr 01 2018 at 16:43)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491196" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124491196">Kevin Buzzard (Apr 02 2018 at 00:43)</a>:</h4>
 <p>Somehow Lean knows from the type of everything that it wants <code>nat.lt_succ_self _</code> to have type <code>n  &lt; nat.succ n</code> and hence it knows <code>_</code> should be <code>n</code></p>
 
 <a name="124491197"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491197" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124491197">Kevin Buzzard (Apr 01 2018 at 16:43)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491197" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124491197">Kevin Buzzard (Apr 02 2018 at 00:43)</a>:</h4>
 <p>But this doesn't work:</p>
 
 <a name="124491238"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491238" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124491238">Kevin Buzzard (Apr 01 2018 at 16:44)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491238" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124491238">Kevin Buzzard (Apr 02 2018 at 00:44)</a>:</h4>
 <p><code>theorem  easy {i : ℕ} {n : ℕ} : i &lt; n → i &lt; nat.succ n :=  λ H, lt.trans _ $ nat.lt_succ_self n</code></p>
 
 <a name="124491239"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491239" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124491239">Kevin Buzzard (Apr 01 2018 at 16:44)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491239" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124491239">Kevin Buzzard (Apr 02 2018 at 00:44)</a>:</h4>
 <p>Here Lean knows from type theory that it wants <code>_</code> to be a proof of <code>i &lt; n</code></p>
 
 <a name="124491245"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491245" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124491245">Kevin Buzzard (Apr 01 2018 at 16:45)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491245" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124491245">Kevin Buzzard (Apr 02 2018 at 00:45)</a>:</h4>
 <p>and even though <code>H : i &lt; n</code> is in the local context, it won't take it and insert it.</p>
 
 <a name="124491246"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491246" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124491246">Kevin Buzzard (Apr 01 2018 at 16:45)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491246" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124491246">Kevin Buzzard (Apr 02 2018 at 00:45)</a>:</h4>
 <p>We get an error which, if you don't understand magic, looks silly:</p>
 
 <a name="124491248"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491248" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124491248">Kevin Buzzard (Apr 01 2018 at 16:45)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491248" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124491248">Kevin Buzzard (Apr 02 2018 at 00:45)</a>:</h4>
 <div class="codehilite"><pre><span></span>don&#39;t know how to synthesize placeholder
 context:
 i n : ℕ,
@@ -69,147 +69,147 @@ H : i &lt; n
 </pre></div>
 
 <a name="124491289"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491289" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124491289">Kevin Buzzard (Apr 01 2018 at 16:46)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491289" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124491289">Kevin Buzzard (Apr 02 2018 at 00:46)</a>:</h4>
 <p>"Well, you knew how to synthesize <code>n</code> when that was in the local context..."</p>
 
 <a name="124491296"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491296" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124491296">Kevin Buzzard (Apr 01 2018 at 16:47)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491296" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124491296">Kevin Buzzard (Apr 02 2018 at 00:47)</a>:</h4>
 <p>I think that as a learner (as I still am, but I am thinking more about people who are like I was last October, i.e. complete beginners), you have to just trust some stuff to magic.</p>
 
 <a name="124491297"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491297" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124491297">Kevin Buzzard (Apr 01 2018 at 16:47)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491297" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124491297">Kevin Buzzard (Apr 02 2018 at 00:47)</a>:</h4>
 <p>You type "simp" and sometimes it works and sometimes it doesn't, but if it does, then you'll take it.</p>
 
 <a name="124491338"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491338" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124491338">Gabriel Ebner (Apr 01 2018 at 16:48)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491338" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124491338">Gabriel Ebner (Apr 02 2018 at 00:48)</a>:</h4>
 <p>Maybe your confusion comes from the fact that the two situations are in fact very different.  In the first one, Lean doesn't just guess and take a natural number from the local context.  The reason that the placeholder gets filled in is because <code>n</code> is <em>the only possible choice</em> if you want the theorem to type-check.</p>
 
 <a name="124491339"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491339" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124491339">Gabriel Ebner (Apr 01 2018 at 16:48)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491339" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124491339">Gabriel Ebner (Apr 02 2018 at 00:48)</a>:</h4>
 <p>In the second case, <em>any value</em> of type <code>i &lt; n</code> would work.</p>
 
 <a name="124491340"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491340" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124491340">Kevin Buzzard (Apr 01 2018 at 16:48)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491340" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124491340">Kevin Buzzard (Apr 02 2018 at 00:48)</a>:</h4>
 <p>I think that whilst initially this way of thinking -- "sometimes it just works by magic" -- is initially the only way to proceed.  But now I want to start understanding Lean properly and in particular I want to know exactly what I can expect the elaborator to do.</p>
 
 <a name="124491345"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491345" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124491345">Kevin Buzzard (Apr 01 2018 at 16:49)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491345" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124491345">Kevin Buzzard (Apr 02 2018 at 00:49)</a>:</h4>
 <p>Thanks Gabriel, I could see that the situations somehow felt different but you have very quickly got to the heart of the matter.</p>
 
 <a name="124491396"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491396" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124491396">Sebastian Ullrich (Apr 01 2018 at 16:51)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491396" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124491396">Sebastian Ullrich (Apr 02 2018 at 00:51)</a>:</h4>
 <p>In other words, the first placeholder can be solved by unification while type checking the right-hand side. The second one cannot.</p>
 
 <a name="124491445"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491445" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124491445">Kevin Buzzard (Apr 01 2018 at 16:53)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491445" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124491445">Kevin Buzzard (Apr 02 2018 at 00:53)</a>:</h4>
 <p>I think that the <code>_</code> (when it is representing <code>n</code>) gets filled in initially as something like <code>?m_1</code></p>
 
 <a name="124491451"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491451" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124491451">Kevin Buzzard (Apr 01 2018 at 16:53)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491451" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124491451">Kevin Buzzard (Apr 02 2018 at 00:53)</a>:</h4>
 <p>Oh it perhaps even initially gets filled in as <code>(?m_1 : nat)</code></p>
 
 <a name="124491492"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491492" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124491492">Kevin Buzzard (Apr 01 2018 at 16:55)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491492" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124491492">Kevin Buzzard (Apr 02 2018 at 00:55)</a>:</h4>
 <p>and then we have to solve <code>nat.lt_succ_self (?m_1 : nat) : n &lt; nat.succ n</code></p>
 
 <a name="124491499"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491499" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124491499">Kevin Buzzard (Apr 01 2018 at 16:55)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491499" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124491499">Kevin Buzzard (Apr 02 2018 at 00:55)</a>:</h4>
 <p>and we know the type of <code>nat.lt.succ_self</code> is <code>?m_1 &lt; nat.succ ?m_1</code></p>
 
 <a name="124491541"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491541" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124491541">Kevin Buzzard (Apr 01 2018 at 16:56)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491541" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124491541">Kevin Buzzard (Apr 02 2018 at 00:56)</a>:</h4>
 <p>and those two types really now have to be _equal_. I realise now I am slightly unsure what it means for two types to be equal. For example if <code>?m_1</code> was equal to <code>m</code> and it was a theorem that <code>m = n</code>, would these two types be equal?</p>
 
 <a name="124491542"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491542" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124491542">Gabriel Ebner (Apr 01 2018 at 16:56)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491542" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124491542">Gabriel Ebner (Apr 02 2018 at 00:56)</a>:</h4>
 <p>Pretty much in this order.  You essentially start with <code>?m_1: ?m_2</code> and <code>?m_2: Sort ?u_3</code> for the underscore. Then the elaborator wants to construct the application <code>nat.lt_succ_self ?m_1</code>, so it needs to make sure that the type of <code>?m_1</code> is <code>nat</code>, and you get the unification constraint <code>?m_2 =?= nat</code>.</p>
 
 <a name="124491547"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491547" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124491547">Kevin Buzzard (Apr 01 2018 at 16:57)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491547" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124491547">Kevin Buzzard (Apr 02 2018 at 00:57)</a>:</h4>
 <p>I have seen Mario writing these <code>=?=</code>s</p>
 
 <a name="124491548"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491548" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124491548">Gabriel Ebner (Apr 01 2018 at 16:57)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491548" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124491548">Gabriel Ebner (Apr 02 2018 at 00:57)</a>:</h4>
 <blockquote>
 <p>it was a theorem that m = n, would these two types be equal?</p>
 </blockquote>
 <p>No, only definitional equality is used in unification.</p>
 
 <a name="124491549"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491549" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124491549">Kevin Buzzard (Apr 01 2018 at 16:57)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491549" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124491549">Kevin Buzzard (Apr 02 2018 at 00:57)</a>:</h4>
 <p>And these types would be equal because of some theorem</p>
 
 <a name="124491551"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491551" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124491551">Gabriel Ebner (Apr 01 2018 at 16:57)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491551" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124491551">Gabriel Ebner (Apr 02 2018 at 00:57)</a>:</h4>
 <p><code>=?=</code> is just the notation for "should unify with"</p>
 
 <a name="124491552"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491552" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124491552">Kevin Buzzard (Apr 01 2018 at 16:57)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491552" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124491552">Kevin Buzzard (Apr 02 2018 at 00:57)</a>:</h4>
 <p>I could probably answer these questions myself now</p>
 
 <a name="124491587"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491587" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124491587">Gabriel Ebner (Apr 01 2018 at 16:58)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491587" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124491587">Gabriel Ebner (Apr 02 2018 at 00:58)</a>:</h4>
 <p>unification = assign the ?m_1, ..., ?m_n in such a way that the two sides are definitionally equal</p>
 
 <a name="124491593"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491593" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124491593">Kevin Buzzard (Apr 01 2018 at 16:58)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491593" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124491593">Kevin Buzzard (Apr 02 2018 at 00:58)</a>:</h4>
 <p>if I could get Lean to print out these <code>=?=</code> constraints myself.</p>
 
 <a name="124491595"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491595" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124491595">Kevin Buzzard (Apr 01 2018 at 16:58)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491595" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124491595">Kevin Buzzard (Apr 02 2018 at 00:58)</a>:</h4>
 <p>Is there some set_option I can turn on</p>
 
 <a name="124491596"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491596" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124491596">Kevin Buzzard (Apr 01 2018 at 16:58)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491596" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124491596">Kevin Buzzard (Apr 02 2018 at 00:58)</a>:</h4>
 <p>so I can just watch it all happening?</p>
 
 <a name="124491597"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491597" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124491597">Kevin Buzzard (Apr 01 2018 at 16:58)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491597" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124491597">Kevin Buzzard (Apr 02 2018 at 00:58)</a>:</h4>
 <p>I remember when I discovered set_option pp.all true and very quickly developed a much better understanding of what a term was</p>
 
 <a name="124491605"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491605" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124491605">Kevin Buzzard (Apr 01 2018 at 16:59)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491605" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124491605">Kevin Buzzard (Apr 02 2018 at 00:59)</a>:</h4>
 <p>and when I discovered various set_option things for simp and very quickly got a much better understanding of what simp di.</p>
 
 <a name="124491606"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491606" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124491606">Kevin Buzzard (Apr 01 2018 at 16:59)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491606" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124491606">Kevin Buzzard (Apr 02 2018 at 00:59)</a>:</h4>
 <p>did</p>
 
 <a name="124491607"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491607" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124491607">Gabriel Ebner (Apr 01 2018 at 16:59)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491607" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124491607">Gabriel Ebner (Apr 02 2018 at 00:59)</a>:</h4>
 <div class="codehilite"><pre><span></span><span class="kn">set_option</span> <span class="n">trace</span><span class="bp">.</span><span class="n">type_context</span><span class="bp">.</span><span class="n">is_def_eq</span> <span class="n">true</span>
 </pre></div>
 
 <a name="124491660"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491660" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124491660">Kevin Buzzard (Apr 01 2018 at 17:01)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491660" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124491660">Kevin Buzzard (Apr 02 2018 at 01:01)</a>:</h4>
 <p>oh gosh</p>
 
 <a name="124491661"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491661" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124491661">Kevin Buzzard (Apr 01 2018 at 17:01)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491661" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124491661">Kevin Buzzard (Apr 02 2018 at 01:01)</a>:</h4>
 <p>even when I fill in all the <code>_</code></p>
 
 <a name="124491662"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491662" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124491662">Kevin Buzzard (Apr 01 2018 at 17:01)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491662" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124491662">Kevin Buzzard (Apr 02 2018 at 01:01)</a>:</h4>
 <p>I still get outputs</p>
 
 <a name="124491702"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491702" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124491702">Kevin Buzzard (Apr 01 2018 at 17:02)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491702" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124491702">Kevin Buzzard (Apr 02 2018 at 01:02)</a>:</h4>
 <p>This must be because of <code>@</code></p>
 
 <a name="124491709"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491709" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124491709">Kevin Buzzard (Apr 01 2018 at 17:03)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491709" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124491709">Kevin Buzzard (Apr 02 2018 at 01:03)</a>:</h4>
 <p><code>theorem  easy {i : ℕ} {n : ℕ} : i &lt; n → i &lt; nat.succ n :=  λ H, lt.trans H $ nat.lt_succ_self n</code></p>
 
 <a name="124491712"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491712" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124491712">Gabriel Ebner (Apr 01 2018 at 17:03)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491712" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124491712">Gabriel Ebner (Apr 02 2018 at 01:03)</a>:</h4>
 <p>The output also includes all the unification you get for type-checking, even if there are no underscores.</p>
 
 <a name="124491713"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491713" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124491713">Kevin Buzzard (Apr 01 2018 at 17:03)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491713" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124491713">Kevin Buzzard (Apr 02 2018 at 01:03)</a>:</h4>
 <p>produces two bursts of excitement:</p>
 
 <a name="124491714"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491714" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124491714">Kevin Buzzard (Apr 01 2018 at 17:03)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491714" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124491714">Kevin Buzzard (Apr 02 2018 at 01:03)</a>:</h4>
 <div class="codehilite"><pre><span></span>[type_context.is_def_eq] ℕ =?= ?m_1 ... success  (approximate mode)
 [type_context.is_def_eq] ℕ =?= ?m_1 ... success  (approximate mode)
 [type_context.is_def_eq] ℕ =?= ?m_1 ... success  (approximate mode)
@@ -226,15 +226,15 @@ H : i &lt; n
 </pre></div>
 
 <a name="124491755"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491755" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124491755">Kevin Buzzard (Apr 01 2018 at 17:04)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491755" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124491755">Kevin Buzzard (Apr 02 2018 at 01:04)</a>:</h4>
 <p>and</p>
 
 <a name="124491757"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491757" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124491757">Gabriel Ebner (Apr 01 2018 at 17:04)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491757" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124491757">Gabriel Ebner (Apr 02 2018 at 01:04)</a>:</h4>
 <p>Yes, I'm not sure how much you can learn from the output.</p>
 
 <a name="124491758"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491758" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124491758">Kevin Buzzard (Apr 01 2018 at 17:04)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491758" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124491758">Kevin Buzzard (Apr 02 2018 at 01:04)</a>:</h4>
 <div class="codehilite"><pre><span></span>[type_context.is_def_eq] ?m_1 =?= i &lt; n ... success  (approximate mode)
 [type_context.is_def_eq] i &lt; nat.succ n =?= ?m_3 &lt; ?m_4 ... success  (approximate mode)
 [type_context.is_def_eq] partial_order.to_preorder ℕ =?= partial_order.to_preorder ℕ ... success  (approximate mode)
@@ -251,31 +251,31 @@ H : i &lt; n
 </pre></div>
 
 <a name="124491760"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491760" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124491760">Kevin Buzzard (Apr 01 2018 at 17:04)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491760" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124491760">Kevin Buzzard (Apr 02 2018 at 01:04)</a>:</h4>
 <p>In my current state I can probably learn quite a bit</p>
 
 <a name="124491810"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491810" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124491810">Kevin Buzzard (Apr 01 2018 at 17:06)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491810" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124491810">Kevin Buzzard (Apr 02 2018 at 01:06)</a>:</h4>
 <p>I think the guilty party is <code>lt.trans</code></p>
 
 <a name="124491811"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491811" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124491811">Kevin Buzzard (Apr 01 2018 at 17:06)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491811" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124491811">Kevin Buzzard (Apr 02 2018 at 01:06)</a>:</h4>
 <p>or, as it should really be known</p>
 
 <a name="124491813"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491813" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124491813">Kevin Buzzard (Apr 01 2018 at 17:06)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491813" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124491813">Kevin Buzzard (Apr 02 2018 at 01:06)</a>:</h4>
 <p>[rips mask off in Scooby-doo like manner]</p>
 
 <a name="124491815"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491815" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124491815">Kevin Buzzard (Apr 01 2018 at 17:06)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491815" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124491815">Kevin Buzzard (Apr 02 2018 at 01:06)</a>:</h4>
 <p><code>@lt_trans _ _ _ _ _</code></p>
 
 <a name="124491865"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491865" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124491865">Kevin Buzzard (Apr 01 2018 at 17:09)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491865" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124491865">Kevin Buzzard (Apr 02 2018 at 01:09)</a>:</h4>
 <p>Hmm</p>
 
 <a name="124491866"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491866" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124491866">Kevin Buzzard (Apr 01 2018 at 17:09)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491866" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124491866">Kevin Buzzard (Apr 02 2018 at 01:09)</a>:</h4>
 <div class="codehilite"><pre><span></span>definition  Npreorder : preorder ℕ :=  by apply_instance
 
 theorem  easy&#39; {i : ℕ} {n : ℕ} : i &lt; n → i &lt; nat.succ n :=
@@ -283,35 +283,35 @@ theorem  easy&#39; {i : ℕ} {n : ℕ} : i &lt; n → i &lt; nat.succ n :=
 </pre></div>
 
 <a name="124491911"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491911" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124491911">Kevin Buzzard (Apr 01 2018 at 17:10)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491911" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124491911">Kevin Buzzard (Apr 02 2018 at 01:10)</a>:</h4>
 <p>I still get a bunch of output from <code> set_option trace.type_context.is_def_eq true </code></p>
 
 <a name="124491913"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491913" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124491913">Kevin Buzzard (Apr 01 2018 at 17:10)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491913" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124491913">Kevin Buzzard (Apr 02 2018 at 01:10)</a>:</h4>
 <p>aargh it's the notation</p>
 
 <a name="124491958"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491958" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124491958">Kevin Buzzard (Apr 01 2018 at 17:12)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491958" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124491958">Kevin Buzzard (Apr 02 2018 at 01:12)</a>:</h4>
 <p><code> [type_context.is_def_eq] ?m_1 =?= n ... success  (approximate mode)</code></p>
 
 <a name="124491959"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491959" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124491959">Kevin Buzzard (Apr 01 2018 at 17:12)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491959" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124491959">Kevin Buzzard (Apr 02 2018 at 01:12)</a>:</h4>
 <p>Nice to see we're in "approximate mode"</p>
 
 <a name="124491960"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491960" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124491960">Kevin Buzzard (Apr 01 2018 at 17:12)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491960" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124491960">Kevin Buzzard (Apr 02 2018 at 01:12)</a>:</h4>
 <p>Doesn't fill me with confidence</p>
 
 <a name="124491965"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491965" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124491965">Gabriel Ebner (Apr 01 2018 at 17:13)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124491965" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124491965">Gabriel Ebner (Apr 02 2018 at 01:13)</a>:</h4>
 <p>Checking the equality of two terms without metavariables is a special case of unification.  That's also why it's called <code>is_def_eq</code>.  So whenever the elaborator makes sure that a term type-checks, it will produce unification constraints.</p>
 
 <a name="124492018"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124492018" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124492018">Kevin Buzzard (Apr 01 2018 at 17:15)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124492018" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124492018">Kevin Buzzard (Apr 02 2018 at 01:15)</a>:</h4>
 <p>Am I "being the elaborator" at the minute? So far I am up to</p>
 
 <a name="124492020"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124492020" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124492020">Kevin Buzzard (Apr 01 2018 at 17:15)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124492020" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124492020">Kevin Buzzard (Apr 02 2018 at 01:15)</a>:</h4>
 <div class="codehilite"><pre><span></span>definition  Npreorder : preorder ℕ :=  by apply_instance
 definition  Nhas_lt : has_lt ℕ :=  by apply_instance
 
@@ -320,71 +320,71 @@ theorem  easy&#39; {i : ℕ} {n : ℕ} : @has_lt.lt ℕ Nhas_lt i n →  @has_lt
 </pre></div>
 
 <a name="124492021"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124492021" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124492021">Kevin Buzzard (Apr 01 2018 at 17:15)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124492021" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124492021">Kevin Buzzard (Apr 02 2018 at 01:15)</a>:</h4>
 <p>I am having real trouble elaborating this any more.</p>
 
 <a name="124492068"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124492068" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124492068">Kevin Buzzard (Apr 01 2018 at 17:16)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124492068" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124492068">Kevin Buzzard (Apr 02 2018 at 01:16)</a>:</h4>
 <p>In fact I would go so far to say that this term can't be elaborated any more.</p>
 
 <a name="124492070"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124492070" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124492070">Kevin Buzzard (Apr 01 2018 at 17:16)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124492070" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124492070">Kevin Buzzard (Apr 02 2018 at 01:16)</a>:</h4>
 <p>although of course things could be unfolded.</p>
 
 <a name="124492081"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124492081" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124492081">Kevin Buzzard (Apr 01 2018 at 17:17)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124492081" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124492081">Kevin Buzzard (Apr 02 2018 at 01:17)</a>:</h4>
 <p>What does the unfolding? Is that still the elaborator? Does the elaborator have to think about the actual definition of the term <code>@has_lt.lt</code> or does it just check its type?</p>
 
 <a name="124492125"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124492125" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124492125">Kevin Buzzard (Apr 01 2018 at 17:18)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124492125" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124492125">Kevin Buzzard (Apr 02 2018 at 01:18)</a>:</h4>
 <p>I am not sure I care at all about the definition of <code>@has_lt.lt nat Nhas_lt</code>, all I need to know is that N is a preorder.</p>
 
 <a name="124492126"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124492126" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124492126">Gabriel Ebner (Apr 01 2018 at 17:18)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124492126" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124492126">Gabriel Ebner (Apr 02 2018 at 01:18)</a>:</h4>
 <p>If you need to unify <code>has_lt.lt a b c d</code> and <code>nat.lt c d</code>, then yes, the elaborator will unfold <code>has_lt.lt</code>.</p>
 
 <a name="124492128"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124492128" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124492128">Gabriel Ebner (Apr 01 2018 at 17:18)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124492128" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124492128">Gabriel Ebner (Apr 02 2018 at 01:18)</a>:</h4>
 <p>In this case, I don't think we unfold <code>has_lt.lt</code> anywhere.  (At least we don't need to.)</p>
 
 <a name="124492180"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124492180" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124492180">Gabriel Ebner (Apr 01 2018 at 17:20)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124492180" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124492180">Gabriel Ebner (Apr 02 2018 at 01:20)</a>:</h4>
 <p>The <code>easy'</code> theorem is still missing the domain of the lambda, if you want to write down a "fully elaborated" term.</p>
 
 <a name="124492235"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124492235" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124492235">Gabriel Ebner (Apr 01 2018 at 17:22)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124492235" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124492235">Gabriel Ebner (Apr 02 2018 at 01:22)</a>:</h4>
 <p>BTW, I believe it's a mistake to think of elaboration as "filling things in" (even though that may be literal meaning of the word).  From a big picture point of view elaboration is the translation of pre-expressions (which are close to what you write down) to type-correct terms in the core type theory.  Personally I think of a pre-expression more like a recipe that tells the elaborator to do what you want.</p>
 
 <a name="124492240"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124492240" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124492240">Kevin Buzzard (Apr 01 2018 at 17:22)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124492240" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124492240">Kevin Buzzard (Apr 02 2018 at 01:22)</a>:</h4>
 <p>Oh! Yes, I forgot about the lambda.</p>
 
 <a name="124492245"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124492245" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124492245">Kevin Buzzard (Apr 01 2018 at 17:22)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124492245" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124492245">Kevin Buzzard (Apr 02 2018 at 01:22)</a>:</h4>
 <p>So am I changing a <code>pexpr</code> to an <code>expr</code>?</p>
 
 <a name="124492248"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124492248" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124492248">Gabriel Ebner (Apr 01 2018 at 17:22)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124492248" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124492248">Gabriel Ebner (Apr 02 2018 at 01:22)</a>:</h4>
 <p>No, you're changing one <code>pexpr</code> into another <code>pexpr</code>.</p>
 
 <a name="124492254"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124492254" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124492254">Kevin Buzzard (Apr 01 2018 at 17:23)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124492254" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124492254">Kevin Buzzard (Apr 02 2018 at 01:23)</a>:</h4>
 <p>dammit I want an expr</p>
 
 <a name="124492259"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124492259" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124492259">Kevin Buzzard (Apr 01 2018 at 17:23)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124492259" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124492259">Kevin Buzzard (Apr 02 2018 at 01:23)</a>:</h4>
 <p>I read about them in the manual</p>
 
 <a name="124492267"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124492267" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124492267">Kevin Buzzard (Apr 01 2018 at 17:23)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124492267" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124492267">Kevin Buzzard (Apr 02 2018 at 01:23)</a>:</h4>
 <p>I am concerned that I might have more than one <code>&lt;=</code> on my <code>nat</code></p>
 
 <a name="124492279"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124492279" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124492279">Kevin Buzzard (Apr 01 2018 at 17:24)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124492279" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124492279">Kevin Buzzard (Apr 02 2018 at 01:24)</a>:</h4>
 <p><code>Npreorder</code> says that <code>nat</code> has the structure of a <code>preorder</code></p>
 
 <a name="124492310"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124492310" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124492310">Gabriel Ebner (Apr 01 2018 at 17:24)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124492310" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124492310">Gabriel Ebner (Apr 02 2018 at 01:24)</a>:</h4>
 <p>I guess as an exercise you could write down the proof of <code>easy</code> using the <code>expr</code> constructors:</p>
 <div class="codehilite"><pre><span></span><span class="kn">open</span> <span class="n">tactic</span> <span class="n">expr</span>
 <span class="kn">theorem</span> <span class="n">easy</span> <span class="o">{</span><span class="n">i</span> <span class="n">n</span><span class="o">}</span> <span class="o">:</span> <span class="n">i</span> <span class="bp">&lt;</span> <span class="n">n</span> <span class="bp">-&gt;</span> <span class="n">i</span> <span class="bp">&lt;</span> <span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">n</span> <span class="o">:=</span>
@@ -392,43 +392,43 @@ theorem  easy&#39; {i : ℕ} {n : ℕ} : @has_lt.lt ℕ Nhas_lt i n →  @has_lt
 </pre></div>
 
 <a name="124492323"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124492323" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124492323">Kevin Buzzard (Apr 01 2018 at 17:24)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124492323" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124492323">Kevin Buzzard (Apr 02 2018 at 01:24)</a>:</h4>
 <p>and the <code>&lt;</code> on it is I think called something like <code>Npreorder.lt</code></p>
 
 <a name="124492331"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124492331" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124492331">Kevin Buzzard (Apr 01 2018 at 17:25)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124492331" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124492331">Kevin Buzzard (Apr 02 2018 at 01:25)</a>:</h4>
 <p>but the <code>&lt;</code> I want is called <code>has_lt.lt</code></p>
 
 <a name="124492373"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124492373" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124492373">Kevin Buzzard (Apr 01 2018 at 17:26)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124492373" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124492373">Kevin Buzzard (Apr 02 2018 at 01:26)</a>:</h4>
 <p>Actually I don't even know what it's called</p>
 
 <a name="124492379"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124492379" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124492379">Gabriel Ebner (Apr 01 2018 at 17:26)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124492379" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124492379">Gabriel Ebner (Apr 02 2018 at 01:26)</a>:</h4>
 <p>Yes, they are many <code>lt</code>s on <code>nat</code> and they all mean the same in the end.  AFAICT you have <code>has_lt.lt</code> everywhere though, as you should.</p>
 
 <a name="124492380"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124492380" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124492380">Kevin Buzzard (Apr 01 2018 at 17:26)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124492380" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124492380">Kevin Buzzard (Apr 02 2018 at 01:26)</a>:</h4>
 <p>it's called <code>Nhas_lt</code> I guess</p>
 
 <a name="124492383"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124492383" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124492383">Kevin Buzzard (Apr 01 2018 at 17:26)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124492383" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124492383">Kevin Buzzard (Apr 02 2018 at 01:26)</a>:</h4>
 <p>I am not so sure about the <code>lt</code> coming from the preorder</p>
 
 <a name="124492391"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124492391" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124492391">Kevin Buzzard (Apr 01 2018 at 17:27)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124492391" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124492391">Kevin Buzzard (Apr 02 2018 at 01:27)</a>:</h4>
 <p>I used type class inference to define the preorder on <code>nat</code></p>
 
 <a name="124492433"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124492433" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124492433">Gabriel Ebner (Apr 01 2018 at 17:28)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124492433" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124492433">Gabriel Ebner (Apr 02 2018 at 01:28)</a>:</h4>
 <p>Ah, I understand now.  The question is about the relation between <code>Npreorder</code> and <code>Nhas_lt</code>: the terms <code>@preorder.to_has_lt nat Npreorder</code> and <code>Nhas_lt</code> are definitionally equal.  (And type-checking actually needs to verify this equality.)</p>
 
 <a name="124492439"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124492439" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124492439">Kevin Buzzard (Apr 01 2018 at 17:29)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124492439" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124492439">Kevin Buzzard (Apr 02 2018 at 01:29)</a>:</h4>
 <p>The more I elaborate, the greater the output of <code> set_option trace.type_context.is_def_eq true</code> becomes!</p>
 
 <a name="124492993"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124492993" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124492993">Kevin Buzzard (Apr 01 2018 at 17:51)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124492993" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124492993">Kevin Buzzard (Apr 02 2018 at 01:51)</a>:</h4>
 <blockquote>
 <p>I guess as an exercise you could write down the proof of <code>easy</code> using the <code>expr</code> constructors:</p>
 <div class="codehilite"><pre><span></span><span class="kn">open</span> <span class="n">tactic</span> <span class="n">expr</span>
@@ -441,113 +441,113 @@ theorem  easy&#39; {i : ℕ} {n : ℕ} : @has_lt.lt ℕ Nhas_lt i n →  @has_lt
 <p>Oh I like this comment. Thanks! I might start with something easier than <code>easy</code> but this looks like a fun game :-)</p>
 
 <a name="124493033"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124493033" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124493033">Kevin Buzzard (Apr 01 2018 at 17:52)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124493033" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124493033">Kevin Buzzard (Apr 02 2018 at 01:52)</a>:</h4>
 <p>I might well find it a challenge to prove <code>1 + 1 = 2</code> in this mode</p>
 
 <a name="124493239"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124493239" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124493239">Kevin Buzzard (Apr 01 2018 at 18:01)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124493239" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124493239">Kevin Buzzard (Apr 02 2018 at 02:01)</a>:</h4>
 <p>woo I made Prop</p>
 
 <a name="124493240"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124493240" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124493240">Kevin Buzzard (Apr 01 2018 at 18:01)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124493240" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124493240">Kevin Buzzard (Apr 02 2018 at 02:01)</a>:</h4>
 <p><code>meta  definition  prop : expr (ff) := expr.sort level.zero</code></p>
 
 <a name="124493279"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124493279" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124493279">Kevin Buzzard (Apr 01 2018 at 18:02)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124493279" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124493279">Kevin Buzzard (Apr 02 2018 at 02:02)</a>:</h4>
 <p>That's the proof that <code>expr</code> is inhabited</p>
 
 <a name="124493342"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124493342" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124493342">Sebastian Ullrich (Apr 01 2018 at 18:05)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124493342" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124493342">Sebastian Ullrich (Apr 02 2018 at 02:05)</a>:</h4>
 <p>Note that <code>expr ff = pexpr</code></p>
 
 <a name="124493495"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124493495" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124493495">Kevin Buzzard (Apr 01 2018 at 18:11)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124493495" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124493495">Kevin Buzzard (Apr 02 2018 at 02:11)</a>:</h4>
 <p>I just noticed that expr was demanding a bool so I gave it one</p>
 
 <a name="124493541"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124493541" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124493541">Kevin Buzzard (Apr 01 2018 at 18:13)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124493541" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124493541">Kevin Buzzard (Apr 02 2018 at 02:13)</a>:</h4>
 <p>Hmm, that's funny. <code>pexpr.lean</code> says <code> @[reducible]  meta  def  pexpr  := expr ff</code></p>
 
 <a name="124493545"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124493545" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124493545">Kevin Buzzard (Apr 01 2018 at 18:13)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124493545" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124493545">Kevin Buzzard (Apr 02 2018 at 02:13)</a>:</h4>
 <p>but <code>#print pexpr</code> says that it's <code> id_rhs Type (expr ff) </code></p>
 
 <a name="124493584"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124493584" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124493584">Kevin Buzzard (Apr 01 2018 at 18:14)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124493584" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124493584">Kevin Buzzard (Apr 02 2018 at 02:14)</a>:</h4>
 <p>rofl and <code>id_rhs</code> is an abbreviation. <span class="user-mention" data-user-id="110064">@Kenny Lau</span> here's when you should use reducible, apparently, and abbreviations too.</p>
 
 <a name="124493591"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124493591" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124493591">Kenny Lau (Apr 01 2018 at 18:15)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124493591" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124493591">Kenny Lau (Apr 02 2018 at 02:15)</a>:</h4>
 <p>so when exactly?</p>
 
 <a name="124494493"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124494493" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124494493">Kevin Buzzard (Apr 01 2018 at 18:50)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124494493" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124494493">Kevin Buzzard (Apr 02 2018 at 02:50)</a>:</h4>
 <p>Oh this is all much too hard. I don't know how to turn anything at all into an expr. How do I turn a nat into an expr? How do I turn a Prop into an expr? How do I turn a proof into an expr? How do I turn a Type into an expr? Oh -- are these questions too general?</p>
 
 <a name="124494496"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124494496" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124494496">Kevin Buzzard (Apr 01 2018 at 18:50)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124494496" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124494496">Kevin Buzzard (Apr 02 2018 at 02:50)</a>:</h4>
 <p>How do I turn a constructor into an expr? Is that a sensible question?</p>
 
 <a name="124494501"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124494501" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124494501">Kevin Buzzard (Apr 01 2018 at 18:51)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124494501" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124494501">Kevin Buzzard (Apr 02 2018 at 02:51)</a>:</h4>
 <p>How do I turn<code> nat.zero</code> into an expr?</p>
 
 <a name="124494542"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124494542" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124494542">Kevin Buzzard (Apr 01 2018 at 18:52)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124494542" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124494542">Kevin Buzzard (Apr 02 2018 at 02:52)</a>:</h4>
 <p>If <code>f : X -&gt; Y</code> and I have an expr <code>ex</code> representing the...name? <code>x : X</code> , how do I create an expr corresponding to <code>f x</code>?</p>
 
 <a name="124494550"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124494550" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124494550">Kevin Buzzard (Apr 01 2018 at 18:53)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124494550" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124494550">Kevin Buzzard (Apr 02 2018 at 02:53)</a>:</h4>
 <p>How do I turn <code>eq.refl</code> into an expr?</p>
 
 <a name="124494589"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124494589" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124494589">Kevin Buzzard (Apr 01 2018 at 18:54)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124494589" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124494589">Kevin Buzzard (Apr 02 2018 at 02:54)</a>:</h4>
 <p>This sort of exercise might be a really good bridge to the Programming In Lean book.</p>
 
 <a name="124494590"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124494590" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124494590">Kevin Buzzard (Apr 01 2018 at 18:54)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124494590" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124494590">Kevin Buzzard (Apr 02 2018 at 02:54)</a>:</h4>
 <p>All this expr stuff is introduced at the same time as everything else somehow</p>
 
 <a name="124494592"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124494592" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124494592">Kevin Buzzard (Apr 01 2018 at 18:54)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124494592" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124494592">Kevin Buzzard (Apr 02 2018 at 02:54)</a>:</h4>
 <p>Perhaps one can abstract it away first</p>
 
 <a name="124494598"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124494598" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124494598">Kevin Buzzard (Apr 01 2018 at 18:55)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124494598" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124494598">Kevin Buzzard (Apr 02 2018 at 02:55)</a>:</h4>
 <p>and think about making exprs from usual Lean terms rather than letting the elaborator do it</p>
 
 <a name="124494647"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124494647" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124494647">Kevin Buzzard (Apr 01 2018 at 18:58)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124494647" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124494647">Kevin Buzzard (Apr 02 2018 at 02:58)</a>:</h4>
 <p>Does the elaborator take a list of tokens and return an expr?</p>
 
 <a name="124494686"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124494686" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124494686">Kevin Buzzard (Apr 01 2018 at 18:58)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124494686" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124494686">Kevin Buzzard (Apr 02 2018 at 02:58)</a>:</h4>
 <p>I am still at the stage where I don't know if I have the words right</p>
 
 <a name="124494741"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124494741" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124494741">Kevin Buzzard (Apr 01 2018 at 19:00)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124494741" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124494741">Kevin Buzzard (Apr 02 2018 at 03:00)</a>:</h4>
 <p>I feel like this could be a cute blog post, explaining how to get from a string of unicode characters to an expr, even a really stupid string like <code>theorem  X : unit = unit := eq.refl unit</code></p>
 
 <a name="124494748"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124494748" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124494748">Kevin Buzzard (Apr 01 2018 at 19:01)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124494748" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124494748">Kevin Buzzard (Apr 02 2018 at 03:01)</a>:</h4>
 <p>I don't know how to turn this into an expr</p>
 
 <a name="124498667"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124498667" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124498667">Kevin Buzzard (Apr 01 2018 at 21:29)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124498667" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124498667">Kevin Buzzard (Apr 02 2018 at 05:29)</a>:</h4>
 <div class="codehilite"><pre><span></span>theorem  very_easy : unit = unit :=
 by  do to_expr ```(eq.refl unit) &gt;&gt;= exact
 </pre></div>
 
 <a name="124498669"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124498669" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124498669">Kevin Buzzard (Apr 01 2018 at 21:29)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124498669" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124498669">Kevin Buzzard (Apr 02 2018 at 05:29)</a>:</h4>
 <p>that's kind of a cheat because I didn't start <code> by do exact $ </code></p>
 
 <a name="124498712"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124498712" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124498712">Kevin Buzzard (Apr 01 2018 at 21:30)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124498712" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124498712">Kevin Buzzard (Apr 02 2018 at 05:30)</a>:</h4>
 <p>but all this stuff like <code>get_local</code> and <code>to_expr</code>, all these functions return <code>tactic</code> something.</p>
 
 <a name="124498724"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124498724" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124498724">Kevin Buzzard (Apr 01 2018 at 21:31)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/elaborator/near/124498724" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19500elaborator.html#124498724">Kevin Buzzard (Apr 02 2018 at 05:31)</a>:</h4>
 <p>Do I have to use the tactic monad?</p>
 
 

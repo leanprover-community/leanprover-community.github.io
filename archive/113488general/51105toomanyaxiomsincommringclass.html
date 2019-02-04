@@ -12,39 +12,39 @@ permalink: archive/113488general/51105toomanyaxiomsincommringclass.html
 <base href="https://leanprover.zulipchat.com">
 {% raw %}
 <a name="123389686"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123389686" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123389686">Kevin Buzzard (Mar 07 2018 at 09:55)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123389686" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123389686">Kevin Buzzard (Mar 07 2018 at 19:55)</a>:</h4>
 <p>I have to put a ring structure on a slightly complicated type (a subtype, consisting of functions with some properties). Every verification is going to be quite messy -- even defining zero and one will take some effort. So I really want to minimise the amount of stuff I want to prove. I am sure that Lean is asking me to do too much by default -- for example it wants a proof of add_comm, add_zero and zero_add, and the same story with multiplication and one. Of course I can deduce zero_add from add_zero once I've proved add_comm but in some sense I'm wondering why I am even being asked to do this, because this is true for every commutative ring. Is there a way of "fixing" this?</p>
 
 <a name="123389751"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123389751" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123389751">Mario Carneiro (Mar 07 2018 at 09:57)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123389751" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123389751">Mario Carneiro (Mar 07 2018 at 19:57)</a>:</h4>
 <p>The usual solution is to write a variant on <code>mk</code> that asserts only the properties you want to prove and proves the rest. This can be done generally for <code>comm_ring</code>, to provide several interfaces depending on which axioms you want.</p>
 
 <a name="123389795"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123389795" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123389795">Mario Carneiro (Mar 07 2018 at 09:58)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123389795" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123389795">Mario Carneiro (Mar 07 2018 at 19:58)</a>:</h4>
 <p>Warning: you can get into trouble if you do this for data fields, like we've discussed about deriving a topology from a metric</p>
 
 <a name="123389808"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123389808" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123389808">Kevin Buzzard (Mar 07 2018 at 09:59)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123389808" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123389808">Kevin Buzzard (Mar 07 2018 at 19:59)</a>:</h4>
 <p>Aah I see. So there's an argument for <code>comm_ring.mk'</code> which takes what I need and builds the rest. I remember seeing this in the construction of the rationals -- I think there are about 4 constructors in the end.</p>
 
 <a name="123389869"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123389869" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123389869">Kevin Buzzard (Mar 07 2018 at 10:00)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123389869" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123389869">Kevin Buzzard (Mar 07 2018 at 20:00)</a>:</h4>
 <p>Re: data fields. Once you have one and neg you can define zero ;-) so perhaps I should be careful here.</p>
 
 <a name="123389984"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123389984" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123389984">Mario Carneiro (Mar 07 2018 at 10:04)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123389984" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123389984">Mario Carneiro (Mar 07 2018 at 20:04)</a>:</h4>
 <p>If you want to derive zero or something else, one option is to have it be an optional argument, so that the user can still set up their desired choice of defeq equivalence class here</p>
 
 <a name="123389986"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123389986" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123389986">Mario Carneiro (Mar 07 2018 at 10:04)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123389986" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123389986">Mario Carneiro (Mar 07 2018 at 20:04)</a>:</h4>
 <p>that's what many structures do by default</p>
 
 <a name="123389991"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123389991" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123389991">Kevin Buzzard (Mar 07 2018 at 10:05)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123389991" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123389991">Kevin Buzzard (Mar 07 2018 at 20:05)</a>:</h4>
 <p>Oh, something annoying has happened.</p>
 
 <a name="123390000"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390000" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390000">Kevin Buzzard (Mar 07 2018 at 10:05)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390000" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390000">Kevin Buzzard (Mar 07 2018 at 20:05)</a>:</h4>
 <div class="codehilite"><pre><span></span>    Fring := λ U OU,{
       add := _,
       zero := _,
@@ -66,43 +66,43 @@ permalink: archive/113488general/51105toomanyaxiomsincommringclass.html
 </pre></div>
 
 <a name="123390004"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390004" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390004">Kevin Buzzard (Mar 07 2018 at 10:05)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390004" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390004">Kevin Buzzard (Mar 07 2018 at 20:05)</a>:</h4>
 <p>There's my set-up (I'm not going to do mk' right now, I'm going to prove it's a ring and see what happens)</p>
 
 <a name="123390010"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390010" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390010">Kevin Buzzard (Mar 07 2018 at 10:05)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390010" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390010">Kevin Buzzard (Mar 07 2018 at 20:05)</a>:</h4>
 <p>and I was expecting red underlines on all the _s</p>
 
 <a name="123390012"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390012" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390012">Kevin Buzzard (Mar 07 2018 at 10:05)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390012" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390012">Kevin Buzzard (Mar 07 2018 at 20:05)</a>:</h4>
 <p>but I only have one under add_assoc</p>
 
 <a name="123390015"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390015" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390015">Kevin Buzzard (Mar 07 2018 at 10:05)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390015" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390015">Kevin Buzzard (Mar 07 2018 at 20:05)</a>:</h4>
 <p>I mean on the _ of add_assoc</p>
 
 <a name="123390058"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390058" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390058">Kevin Buzzard (Mar 07 2018 at 10:06)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390058" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390058">Kevin Buzzard (Mar 07 2018 at 20:06)</a>:</h4>
 <p>Am I expected to remember that addition takes two inputs? I thought Lean was going to tell me that.</p>
 
 <a name="123390070"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390070" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390070">Mario Carneiro (Mar 07 2018 at 10:07)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390070" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390070">Mario Carneiro (Mar 07 2018 at 20:07)</a>:</h4>
 <p>Hm, I can probably explain why add_assoc specifically, but it's not all that relevant. They are all actually required, but lean won't be able to even contemplate the later stuff until you finish the early stuff</p>
 
 <a name="123390082"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390082" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390082">Kevin Buzzard (Mar 07 2018 at 10:07)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390082" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390082">Kevin Buzzard (Mar 07 2018 at 20:07)</a>:</h4>
 <p>add_assoc is telling me I have a type mismatch!</p>
 
 <a name="123390085"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390085" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390085">Mario Carneiro (Mar 07 2018 at 10:07)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390085" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390085">Mario Carneiro (Mar 07 2018 at 20:07)</a>:</h4>
 <p>with what?</p>
 
 <a name="123390126"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390126" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390126">Kevin Buzzard (Mar 07 2018 at 10:08)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390126" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390126">Kevin Buzzard (Mar 07 2018 at 20:08)</a>:</h4>
 <p>Wooah -- maybe type class inference is randomly doing stuff? How do I check that?</p>
 
 <a name="123390130"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390130" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390130">Kevin Buzzard (Mar 07 2018 at 10:08)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390130" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390130">Kevin Buzzard (Mar 07 2018 at 20:08)</a>:</h4>
 <div class="codehilite"><pre><span></span>type mismatch at field &#39;add_assoc&#39;
   ?m_1
 has type
@@ -138,171 +138,171 @@ but is expected to have type
 </pre></div>
 
 <a name="123390131"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390131" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390131">Kevin Buzzard (Mar 07 2018 at 10:08)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390131" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390131">Kevin Buzzard (Mar 07 2018 at 20:08)</a>:</h4>
 <p>So far I wrote nothing.</p>
 
 <a name="123390144"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390144" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390144">Mario Carneiro (Mar 07 2018 at 10:09)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390144" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390144">Mario Carneiro (Mar 07 2018 at 20:09)</a>:</h4>
 <p>what's all that about localizations? What's the theorem?</p>
 
 <a name="123390145"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390145" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390145">Kevin Buzzard (Mar 07 2018 at 10:09)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390145" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390145">Kevin Buzzard (Mar 07 2018 at 20:09)</a>:</h4>
 <p>What does that add even mean on the bottom line?</p>
 
 <a name="123390151"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390151" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390151">Kevin Buzzard (Mar 07 2018 at 10:09)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390151" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390151">Kevin Buzzard (Mar 07 2018 at 20:09)</a>:</h4>
 <p>The ?m_1 presumably means "you didn't tell me what add meant yet"</p>
 
 <a name="123390153"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390153" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390153">Mario Carneiro (Mar 07 2018 at 10:09)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390153" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390153">Mario Carneiro (Mar 07 2018 at 20:09)</a>:</h4>
 <p>it's <code>@has_add.add &lt;your type&gt; ?m_1 a b</code></p>
 
 <a name="123390154"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390154" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390154">Mario Carneiro (Mar 07 2018 at 10:09)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390154" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390154">Mario Carneiro (Mar 07 2018 at 20:09)</a>:</h4>
 <p>which prints as <code>a + b</code></p>
 
 <a name="123390158"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390158" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390158">Kevin Buzzard (Mar 07 2018 at 10:09)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390158" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390158">Kevin Buzzard (Mar 07 2018 at 20:09)</a>:</h4>
 <p>Oh I see it's just some pretty printer cuteness</p>
 
 <a name="123390208"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390208" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390208">Kevin Buzzard (Mar 07 2018 at 10:10)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390208" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390208">Kevin Buzzard (Mar 07 2018 at 20:10)</a>:</h4>
 <p>I told you my objects were complicated ;-)</p>
 
 <a name="123390210"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390210" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390210">Mario Carneiro (Mar 07 2018 at 10:10)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390210" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390210">Mario Carneiro (Mar 07 2018 at 20:10)</a>:</h4>
 <p>this is probably some artifact of structure <code>notation</code> command</p>
 
 <a name="123390213"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390213" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390213">Mario Carneiro (Mar 07 2018 at 10:10)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390213" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390213">Mario Carneiro (Mar 07 2018 at 20:10)</a>:</h4>
 <p>are you familiar with making defs for things?</p>
 
 <a name="123390216"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390216" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390216">Kevin Buzzard (Mar 07 2018 at 10:10)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390216" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390216">Kevin Buzzard (Mar 07 2018 at 20:10)</a>:</h4>
 <p>I have heard of <code>definition</code></p>
 
 <a name="123390223"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390223" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390223">Kevin Buzzard (Mar 07 2018 at 10:11)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390223" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390223">Kevin Buzzard (Mar 07 2018 at 20:11)</a>:</h4>
 <p>if that's what you mean</p>
 
 <a name="123390231"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390231" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390231">Mario Carneiro (Mar 07 2018 at 10:11)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390231" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390231">Mario Carneiro (Mar 07 2018 at 20:11)</a>:</h4>
 <p>I'm trying to understand why your goal is a mile long before you start the proof</p>
 
 <a name="123390234"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390234" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390234">Kevin Buzzard (Mar 07 2018 at 10:11)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390234" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390234">Kevin Buzzard (Mar 07 2018 at 20:11)</a>:</h4>
 <p>In brief, my objects are functions which are well-behaved locally</p>
 
 <a name="123390236"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390236" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390236">Mario Carneiro (Mar 07 2018 at 10:11)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390236" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390236">Mario Carneiro (Mar 07 2018 at 20:11)</a>:</h4>
 <p>you left out the statement of the theorem above</p>
 
 <a name="123390241"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390241" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390241">Kevin Buzzard (Mar 07 2018 at 10:12)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390241" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390241">Kevin Buzzard (Mar 07 2018 at 20:12)</a>:</h4>
 <p>I am defining a ring structure</p>
 
 <a name="123390276"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390276" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390276">Kevin Buzzard (Mar 07 2018 at 10:12)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390276" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390276">Kevin Buzzard (Mar 07 2018 at 20:12)</a>:</h4>
 <p>on a complex type</p>
 
 <a name="123390279"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390279" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390279">Mario Carneiro (Mar 07 2018 at 10:12)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390279" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390279">Mario Carneiro (Mar 07 2018 at 20:12)</a>:</h4>
 <p>on what?</p>
 
 <a name="123390288"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390288" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390288">Mario Carneiro (Mar 07 2018 at 10:12)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390288" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390288">Mario Carneiro (Mar 07 2018 at 20:12)</a>:</h4>
 <p>give the type a name</p>
 
 <a name="123390289"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390289" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390289">Kevin Buzzard (Mar 07 2018 at 10:12)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390289" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390289">Kevin Buzzard (Mar 07 2018 at 20:12)</a>:</h4>
 <p>It's a subtype of a pi type</p>
 
 <a name="123390297"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390297" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390297">Kevin Buzzard (Mar 07 2018 at 10:12)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390297" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390297">Kevin Buzzard (Mar 07 2018 at 20:12)</a>:</h4>
 <p>Here's a toy example</p>
 
 <a name="123390299"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390299" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390299">Mario Carneiro (Mar 07 2018 at 10:12)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390299" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390299">Mario Carneiro (Mar 07 2018 at 20:12)</a>:</h4>
 <p>do not prove an instance for a messy type</p>
 
 <a name="123390301"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390301" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390301">Kevin Buzzard (Mar 07 2018 at 10:12)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390301" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390301">Kevin Buzzard (Mar 07 2018 at 20:12)</a>:</h4>
 <p>I want to consider functions on a topological space which are "locally well-behaved"</p>
 
 <a name="123390303"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390303" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390303">Mario Carneiro (Mar 07 2018 at 10:12)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390303" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390303">Mario Carneiro (Mar 07 2018 at 20:12)</a>:</h4>
 <p>it will make typeclass inference cry</p>
 
 <a name="123390305"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390305" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390305">Kevin Buzzard (Mar 07 2018 at 10:13)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390305" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390305">Kevin Buzzard (Mar 07 2018 at 20:13)</a>:</h4>
 <p>I am not using type class inference at all</p>
 
 <a name="123390311"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390311" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390311">Kevin Buzzard (Mar 07 2018 at 10:13)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390311" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390311">Kevin Buzzard (Mar 07 2018 at 20:13)</a>:</h4>
 <p>I gave up on it</p>
 
 <a name="123390313"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390313" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390313">Mario Carneiro (Mar 07 2018 at 10:13)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390313" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390313">Mario Carneiro (Mar 07 2018 at 20:13)</a>:</h4>
 <p>I'm not talking about the mathematical specifics of the type</p>
 
 <a name="123390314"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390314" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390314">Kevin Buzzard (Mar 07 2018 at 10:13)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390314" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390314">Kevin Buzzard (Mar 07 2018 at 20:13)</a>:</h4>
 <p>I don't need it</p>
 
 <a name="123390320"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390320" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390320">Kevin Buzzard (Mar 07 2018 at 10:13)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390320" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390320">Kevin Buzzard (Mar 07 2018 at 20:13)</a>:</h4>
 <p>I don't understand what you are asking but I am certainly interested in what you are thinking</p>
 
 <a name="123390321"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390321" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390321">Mario Carneiro (Mar 07 2018 at 10:13)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390321" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390321">Mario Carneiro (Mar 07 2018 at 20:13)</a>:</h4>
 <p>what's the theorem? like paste the statement here</p>
 
 <a name="123390323"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390323" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390323">Kevin Buzzard (Mar 07 2018 at 10:13)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390323" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390323">Kevin Buzzard (Mar 07 2018 at 20:13)</a>:</h4>
 <p>There is no theorem</p>
 
 <a name="123390324"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390324" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390324">Kevin Buzzard (Mar 07 2018 at 10:13)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390324" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390324">Kevin Buzzard (Mar 07 2018 at 20:13)</a>:</h4>
 <p>I don't know why you keep asking this</p>
 
 <a name="123390326"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390326" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390326">Kevin Buzzard (Mar 07 2018 at 10:13)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390326" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390326">Kevin Buzzard (Mar 07 2018 at 20:13)</a>:</h4>
 <p>I am trying to put a ring structure on a type</p>
 
 <a name="123390368"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390368" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390368">Kevin Buzzard (Mar 07 2018 at 10:14)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390368" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390368">Kevin Buzzard (Mar 07 2018 at 20:14)</a>:</h4>
 <p>I am making a 1000 line definition</p>
 
 <a name="123390369"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390369" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390369">Mario Carneiro (Mar 07 2018 at 10:14)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390369" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390369">Mario Carneiro (Mar 07 2018 at 20:14)</a>:</h4>
 <p>yes that</p>
 
 <a name="123390372"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390372" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390372">Mario Carneiro (Mar 07 2018 at 10:14)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390372" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390372">Mario Carneiro (Mar 07 2018 at 20:14)</a>:</h4>
 <p>instance, def, theorem, it's all the same</p>
 
 <a name="123390373"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390373" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390373">Kevin Buzzard (Mar 07 2018 at 10:14)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390373" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390373">Kevin Buzzard (Mar 07 2018 at 20:14)</a>:</h4>
 <p>:-)</p>
 
 <a name="123390376"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390376" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390376">Kevin Buzzard (Mar 07 2018 at 10:14)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390376" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390376">Kevin Buzzard (Mar 07 2018 at 20:14)</a>:</h4>
 <p>My type is a subtype of a pi type</p>
 
 <a name="123390390"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390390" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390390">Kevin Buzzard (Mar 07 2018 at 10:15)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390390" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390390">Kevin Buzzard (Mar 07 2018 at 20:15)</a>:</h4>
 <p>and the details involve a lot of commutative algebra</p>
 
 <a name="123390398"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390398" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390398">Kevin Buzzard (Mar 07 2018 at 10:15)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390398" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390398">Kevin Buzzard (Mar 07 2018 at 20:15)</a>:</h4>
 <p>what exactly do you want to know about it?</p>
 
 <a name="123390403"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390403" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390403">Kevin Buzzard (Mar 07 2018 at 10:15)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390403" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390403">Kevin Buzzard (Mar 07 2018 at 20:15)</a>:</h4>
 <p>and I have a convoluted way of adding and multiplying two such things</p>
 
 <a name="123390451"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390451" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390451">Mario Carneiro (Mar 07 2018 at 10:16)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390451" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390451">Mario Carneiro (Mar 07 2018 at 20:16)</a>:</h4>
 <p>Okay, toy example:</p>
 <div class="codehilite"><pre><span></span>instance : ring {x // ∀ y, x is more awesome than y} :=
 sorry
@@ -319,15 +319,15 @@ sorry
 <p>good</p>
 
 <a name="123390471"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390471" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390471">Kevin Buzzard (Mar 07 2018 at 10:17)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390471" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390471">Kevin Buzzard (Mar 07 2018 at 20:17)</a>:</h4>
 <p>whatever is the difference?</p>
 
 <a name="123390472"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390472" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390472">Mario Carneiro (Mar 07 2018 at 10:17)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390472" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390472">Mario Carneiro (Mar 07 2018 at 20:17)</a>:</h4>
 <p>I am getting the sense you typed some big term after <code>ring</code></p>
 
 <a name="123390473"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390473" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390473">Kevin Buzzard (Mar 07 2018 at 10:18)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390473" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390473">Kevin Buzzard (Mar 07 2018 at 20:18)</a>:</h4>
 <div class="codehilite"><pre><span></span>definition structure_presheaf_of_rings_on_affine_scheme (R : Type*) [comm_ring R]
 : presheaf_of_rings (X R)
 := { PT := structure_presheaf_of_types_on_affine_scheme R,
@@ -354,127 +354,127 @@ sorry
 </pre></div>
 
 <a name="123390509"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390509" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390509">Kevin Buzzard (Mar 07 2018 at 10:18)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390509" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390509">Kevin Buzzard (Mar 07 2018 at 20:18)</a>:</h4>
 <p>I typed that</p>
 
 <a name="123390515"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390515" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390515">Kevin Buzzard (Mar 07 2018 at 10:18)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390515" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390515">Kevin Buzzard (Mar 07 2018 at 20:18)</a>:</h4>
 <p>I am right in the middle of a complex mathematical object</p>
 
 <a name="123390520"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390520" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390520">Kevin Buzzard (Mar 07 2018 at 10:18)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390520" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390520">Kevin Buzzard (Mar 07 2018 at 20:18)</a>:</h4>
 <p>and your simple example is too simple for me to currently make sense of</p>
 
 <a name="123390526"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390526" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390526">Mario Carneiro (Mar 07 2018 at 10:18)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390526" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390526">Mario Carneiro (Mar 07 2018 at 20:18)</a>:</h4>
 <p>In that case, you should probably define that <code>Fring</code> field in its own lemma</p>
 
 <a name="123390531"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390531" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390531">Kevin Buzzard (Mar 07 2018 at 10:19)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390531" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390531">Kevin Buzzard (Mar 07 2018 at 20:19)</a>:</h4>
 <p>Why does this make any difference?</p>
 
 <a name="123390538"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390538" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390538">Kevin Buzzard (Mar 07 2018 at 10:19)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390538" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390538">Kevin Buzzard (Mar 07 2018 at 20:19)</a>:</h4>
 <p>But of course I will do this now you tell me to</p>
 
 <a name="123390549"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390549" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390549">Mario Carneiro (Mar 07 2018 at 10:19)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390549" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390549">Mario Carneiro (Mar 07 2018 at 20:19)</a>:</h4>
 <p>My sense is that typeclass inference generally does poorly with inferring typeclasses on complicated things</p>
 
 <a name="123390553"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390553" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390553">Mario Carneiro (Mar 07 2018 at 10:20)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390553" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390553">Mario Carneiro (Mar 07 2018 at 20:20)</a>:</h4>
 <p>it needs to know when not to unfold</p>
 
 <a name="123390597"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390597" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390597">Mario Carneiro (Mar 07 2018 at 10:20)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390597" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390597">Mario Carneiro (Mar 07 2018 at 20:20)</a>:</h4>
 <p>and definitions are the best way to indicate this</p>
 
 <a name="123390599"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390599" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390599">Kevin Buzzard (Mar 07 2018 at 10:20)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390599" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390599">Kevin Buzzard (Mar 07 2018 at 20:20)</a>:</h4>
 <p>I am not ever using typeclass inference</p>
 
 <a name="123390602"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390602" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390602">Kevin Buzzard (Mar 07 2018 at 10:20)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390602" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390602">Kevin Buzzard (Mar 07 2018 at 20:20)</a>:</h4>
 <p>it causes me too much trouble</p>
 
 <a name="123390604"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390604" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390604">Mario Carneiro (Mar 07 2018 at 10:20)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390604" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390604">Mario Carneiro (Mar 07 2018 at 20:20)</a>:</h4>
 <p>you are, <em>inside the structure instance itself</em></p>
 
 <a name="123390607"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390607" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390607">Kevin Buzzard (Mar 07 2018 at 10:20)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390607" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390607">Kevin Buzzard (Mar 07 2018 at 20:20)</a>:</h4>
 <p>?</p>
 
 <a name="123390616"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390616" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390616">Mario Carneiro (Mar 07 2018 at 10:21)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390616" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390616">Mario Carneiro (Mar 07 2018 at 20:21)</a>:</h4>
 <p>because it's actually proven in stages, a semigroup plus some more stuff to make it a monoid, group, ring, then comm_ring</p>
 
 <a name="123390629"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390629" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390629">Kevin Buzzard (Mar 07 2018 at 10:21)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390629" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390629">Kevin Buzzard (Mar 07 2018 at 20:21)</a>:</h4>
 <p>this I knew</p>
 
 <a name="123390639"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390639" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390639">Kevin Buzzard (Mar 07 2018 at 10:21)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390639" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390639">Kevin Buzzard (Mar 07 2018 at 20:21)</a>:</h4>
 <p>But is this really typeclass inference?</p>
 
 <a name="123390641"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390641" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390641">Mario Carneiro (Mar 07 2018 at 10:21)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390641" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390641">Mario Carneiro (Mar 07 2018 at 20:21)</a>:</h4>
 <p>and after the initial stages, it uses the semigroup instance to find the <code>+</code> which is used in later proofs</p>
 
 <a name="123390643"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390643" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390643">Kevin Buzzard (Mar 07 2018 at 10:22)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390643" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390643">Kevin Buzzard (Mar 07 2018 at 20:22)</a>:</h4>
 <p>It's not just "comm_ring extends ring so let's just copy the fields"?</p>
 
 <a name="123390686"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390686" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390686">Mario Carneiro (Mar 07 2018 at 10:22)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390686" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390686">Mario Carneiro (Mar 07 2018 at 20:22)</a>:</h4>
 <p>Actually, that depends on whether it is using the old or new structure command</p>
 
 <a name="123390688"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390688" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390688">Kevin Buzzard (Mar 07 2018 at 10:22)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390688" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390688">Kevin Buzzard (Mar 07 2018 at 20:22)</a>:</h4>
 <p>:-)</p>
 
 <a name="123390690"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390690" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390690">Kevin Buzzard (Mar 07 2018 at 10:22)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390690" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390690">Kevin Buzzard (Mar 07 2018 at 20:22)</a>:</h4>
 <p>I am using the default structure command</p>
 
 <a name="123390692"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390692" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390692">Sebastian Ullrich (Mar 07 2018 at 10:22)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390692" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390692">Sebastian Ullrich (Mar 07 2018 at 20:22)</a>:</h4>
 <p>It looks like we don't do error recovery after that field type mismatch error. I could change that, but a smaller example would be nice :) .</p>
 
 <a name="123390699"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390699" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390699">Kevin Buzzard (Mar 07 2018 at 10:23)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390699" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390699">Kevin Buzzard (Mar 07 2018 at 20:23)</a>:</h4>
 <p>I feel like the definition of a ring is extremely small compared to the monster I am creating.</p>
 
 <a name="123390703"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390703" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390703">Sebastian Ullrich (Mar 07 2018 at 10:23)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390703" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390703">Sebastian Ullrich (Mar 07 2018 at 20:23)</a>:</h4>
 <p>Eh, I guess it shouldn't be hard to construct one by myself</p>
 
 <a name="123390747"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390747" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390747">Kevin Buzzard (Mar 07 2018 at 10:24)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390747" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390747">Kevin Buzzard (Mar 07 2018 at 20:24)</a>:</h4>
 <p>This is not a big deal at this point</p>
 
 <a name="123390748"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390748" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390748">Mario Carneiro (Mar 07 2018 at 10:24)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390748" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390748">Mario Carneiro (Mar 07 2018 at 20:24)</a>:</h4>
 <p>Even if it doesn't make a difference, I would recommend making this a definition and proving in stages simply for proof engineering reasons</p>
 
 <a name="123390750"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390750" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390750">Kevin Buzzard (Mar 07 2018 at 10:24)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390750" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390750">Kevin Buzzard (Mar 07 2018 at 20:24)</a>:</h4>
 <p>I see.</p>
 
 <a name="123390752"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390752" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390752">Mario Carneiro (Mar 07 2018 at 10:24)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390752" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390752">Mario Carneiro (Mar 07 2018 at 20:24)</a>:</h4>
 <p>you should try to keep your goal size down to something human readable</p>
 
 <a name="123390767"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390767" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390767">Kevin Buzzard (Mar 07 2018 at 10:25)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390767" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390767">Kevin Buzzard (Mar 07 2018 at 20:25)</a>:</h4>
 <p>I thought I'd fix things up with <code>add_assoc := sorry</code> for the time being</p>
 
 <a name="123390770"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390770" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390770">Kevin Buzzard (Mar 07 2018 at 10:25)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390770" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390770">Kevin Buzzard (Mar 07 2018 at 20:25)</a>:</h4>
 <p>I got</p>
 
 <a name="123390781"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390781" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390781">Kevin Buzzard (Mar 07 2018 at 10:26)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390781" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390781">Kevin Buzzard (Mar 07 2018 at 20:26)</a>:</h4>
 <div class="codehilite"><pre><span></span>type mismatch at field &#39;add_assoc&#39;
   sorry
 has type
@@ -489,338 +489,338 @@ has type
 </pre></div>
 
 <a name="123390811"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390811" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390811">Kevin Buzzard (Mar 07 2018 at 10:26)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390811" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390811">Kevin Buzzard (Mar 07 2018 at 20:26)</a>:</h4>
 <p>Wasn't expecting that!</p>
 
 <a name="123390821"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390821" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390821">Mario Carneiro (Mar 07 2018 at 10:26)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390821" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390821">Mario Carneiro (Mar 07 2018 at 20:26)</a>:</h4>
 <p>did you sorry the <code>add</code> field first?</p>
 
 <a name="123390824"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390824" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390824">Kevin Buzzard (Mar 07 2018 at 10:26)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390824" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390824">Kevin Buzzard (Mar 07 2018 at 20:26)</a>:</h4>
 <p>that fixes it</p>
 
 <a name="123390832"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390832" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390832">Kevin Buzzard (Mar 07 2018 at 10:27)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390832" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390832">Kevin Buzzard (Mar 07 2018 at 20:27)</a>:</h4>
 <p>Ok so here's a question</p>
 
 <a name="123390838"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390838" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390838">Kevin Buzzard (Mar 07 2018 at 10:27)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390838" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390838">Kevin Buzzard (Mar 07 2018 at 20:27)</a>:</h4>
 <p>First I have a red line under add_assoc.</p>
 
 <a name="123390840"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390840" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390840">Kevin Buzzard (Mar 07 2018 at 10:27)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390840" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390840">Kevin Buzzard (Mar 07 2018 at 20:27)</a>:</h4>
 <p>I can't fix it with a sorry</p>
 
 <a name="123390841"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390841" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390841">Kevin Buzzard (Mar 07 2018 at 10:27)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390841" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390841">Kevin Buzzard (Mar 07 2018 at 20:27)</a>:</h4>
 <p>I sorry the add and this fixes both.</p>
 
 <a name="123390842"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390842" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390842">Kevin Buzzard (Mar 07 2018 at 10:27)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390842" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390842">Kevin Buzzard (Mar 07 2018 at 20:27)</a>:</h4>
 <p>Q) Where does the new red line appear?</p>
 
 <a name="123390844"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390844" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390844">Kevin Buzzard (Mar 07 2018 at 10:27)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390844" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390844">Kevin Buzzard (Mar 07 2018 at 20:27)</a>:</h4>
 <p>And how do I fix it?</p>
 
 <a name="123390846"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390846" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390846">Kevin Buzzard (Mar 07 2018 at 10:27)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390846" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390846">Kevin Buzzard (Mar 07 2018 at 20:27)</a>:</h4>
 <p>A) zero_add</p>
 
 <a name="123390847"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390847" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390847">Kevin Buzzard (Mar 07 2018 at 10:27)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390847" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390847">Kevin Buzzard (Mar 07 2018 at 20:27)</a>:</h4>
 <p>I can fix it by sorrying the zero and zero_add.</p>
 
 <a name="123390849"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390849" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390849">Kevin Buzzard (Mar 07 2018 at 10:27)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390849" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390849">Kevin Buzzard (Mar 07 2018 at 20:27)</a>:</h4>
 <p>Now I have a type mismatch at add_left_neg</p>
 
 <a name="123390890"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390890" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390890">Kevin Buzzard (Mar 07 2018 at 10:28)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390890" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390890">Kevin Buzzard (Mar 07 2018 at 20:28)</a>:</h4>
 <p>I love the randomness of it all</p>
 
 <a name="123390891"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390891" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390891">Mario Carneiro (Mar 07 2018 at 10:28)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390891" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390891">Mario Carneiro (Mar 07 2018 at 20:28)</a>:</h4>
 <p>it's whack a mole, I know</p>
 
 <a name="123390898"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390898" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390898">Mario Carneiro (Mar 07 2018 at 10:28)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390898" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390898">Mario Carneiro (Mar 07 2018 at 20:28)</a>:</h4>
 <p>Here's how you can derive the answer: First, find the first nested structure that is not complete</p>
 
 <a name="123390904"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390904" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390904">Mario Carneiro (Mar 07 2018 at 10:29)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390904" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390904">Mario Carneiro (Mar 07 2018 at 20:29)</a>:</h4>
 <p>so in the original case, that's <code>semigroup</code></p>
 
 <a name="123390909"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390909" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390909">Mario Carneiro (Mar 07 2018 at 10:29)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390909" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390909">Mario Carneiro (Mar 07 2018 at 20:29)</a>:</h4>
 <p>next, find all fields that have nothing dependent on them</p>
 
 <a name="123390913"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390913" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390913">Kevin Buzzard (Mar 07 2018 at 10:29)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390913" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390913">Kevin Buzzard (Mar 07 2018 at 20:29)</a>:</h4>
 <p>ha ha, I sorried all the data fields and now I have <code>don't know how to synthesize placeholder</code> on every other field apart from add_left_neg. ???</p>
 
 <a name="123390916"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390916" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390916">Mario Carneiro (Mar 07 2018 at 10:29)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390916" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390916">Mario Carneiro (Mar 07 2018 at 20:29)</a>:</h4>
 <p>so in this case <code>add_assoc</code> because <code>add</code> has <code>add_assoc</code> depending on it</p>
 
 <a name="123390967"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390967" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390967">Mario Carneiro (Mar 07 2018 at 10:30)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390967" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390967">Mario Carneiro (Mar 07 2018 at 20:30)</a>:</h4>
 <p>when you sorry it out, it is considered complete and you get the next error, because of the error recovery issue Sebastian mentioned</p>
 
 <a name="123390980"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390980" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390980">Kevin Buzzard (Mar 07 2018 at 10:31)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390980" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390980">Kevin Buzzard (Mar 07 2018 at 20:31)</a>:</h4>
 <p>I have a grant deadline for Friday, I'd better go to work. Thanks for the comments. I will move the ring structure to a definition. Do I need to annotate the definition with reducible or irreducible or whatever?</p>
 
 <a name="123390981"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390981" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390981">Mario Carneiro (Mar 07 2018 at 10:31)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390981" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390981">Mario Carneiro (Mar 07 2018 at 20:31)</a>:</h4>
 <p>But if you sorry <code>add_assoc</code> without <code>add</code>, then I think the sorry macro gets into trouble because the type it needs to be has a metavariable in it</p>
 
 <a name="123390986"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390986" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390986">Mario Carneiro (Mar 07 2018 at 10:32)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123390986" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123390986">Mario Carneiro (Mar 07 2018 at 20:32)</a>:</h4>
 <p>no, the regular reducibility is fine</p>
 
 <a name="123391025"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123391025" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123391025">Kevin Buzzard (Mar 07 2018 at 10:32)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123391025" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123391025">Kevin Buzzard (Mar 07 2018 at 20:32)</a>:</h4>
 <p>I think I deserve another achievement for making sorry fail to find its own type</p>
 
 <a name="123391044"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123391044" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123391044">Kevin Buzzard (Mar 07 2018 at 10:33)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123391044" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123391044">Kevin Buzzard (Mar 07 2018 at 20:33)</a>:</h4>
 <p>Thanks to Kenny's hard work on localisation lemmas we nearly have schemes, although not in a way Assia would approve of, as when I have defined this ring structure we will have a definition but no way of constructing examples :-)</p>
 
 <a name="123391045"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123391045" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123391045">Kevin Buzzard (Mar 07 2018 at 10:33)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123391045" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123391045">Kevin Buzzard (Mar 07 2018 at 20:33)</a>:</h4>
 <p>I will then need to prove one more theorem and then we can have examples</p>
 
 <a name="123391085"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123391085" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123391085">Mario Carneiro (Mar 07 2018 at 10:34)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123391085" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123391085">Mario Carneiro (Mar 07 2018 at 20:34)</a>:</h4>
 <p>what's the most trivial scheme?</p>
 
 <a name="123391087"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123391087" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123391087">Kevin Buzzard (Mar 07 2018 at 10:34)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123391087" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123391087">Kevin Buzzard (Mar 07 2018 at 20:34)</a>:</h4>
 <p>Mario -- you always said that the test case for you was whether one could prove any lemmas about the object</p>
 
 <a name="123391088"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123391088" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123391088">Mario Carneiro (Mar 07 2018 at 10:34)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123391088" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123391088">Mario Carneiro (Mar 07 2018 at 20:34)</a>:</h4>
 <p>is a ring a scheme over itself?</p>
 
 <a name="123391091"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123391091" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123391091">Kevin Buzzard (Mar 07 2018 at 10:34)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123391091" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123391091">Kevin Buzzard (Mar 07 2018 at 20:34)</a>:</h4>
 <p>but I will work on Assia's comments first -- she wants to see examples first.</p>
 
 <a name="123391094"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123391094" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123391094">Kevin Buzzard (Mar 07 2018 at 10:34)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123391094" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123391094">Kevin Buzzard (Mar 07 2018 at 20:34)</a>:</h4>
 <p>The spectrum of a ring is an affine scheme</p>
 
 <a name="123391096"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123391096" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123391096">Kevin Buzzard (Mar 07 2018 at 10:34)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123391096" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123391096">Kevin Buzzard (Mar 07 2018 at 20:34)</a>:</h4>
 <p>and an affine scheme is a scheme</p>
 
 <a name="123391099"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123391099" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123391099">Mario Carneiro (Mar 07 2018 at 10:34)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123391099" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123391099">Mario Carneiro (Mar 07 2018 at 20:34)</a>:</h4>
 <p>voila</p>
 
 <a name="123391100"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123391100" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123391100">Mario Carneiro (Mar 07 2018 at 10:35)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123391100" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123391100">Mario Carneiro (Mar 07 2018 at 20:35)</a>:</h4>
 <p>do that</p>
 
 <a name="123391108"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123391108" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123391108">Kevin Buzzard (Mar 07 2018 at 10:35)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123391108" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123391108">Kevin Buzzard (Mar 07 2018 at 20:35)</a>:</h4>
 <p>but I will be able to define a scheme correctly in Lean</p>
 
 <a name="123391110"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123391110" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123391110">Kevin Buzzard (Mar 07 2018 at 10:35)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123391110" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123391110">Kevin Buzzard (Mar 07 2018 at 20:35)</a>:</h4>
 <p>without ever proving that an affine scheme is a scheme</p>
 
 <a name="123391111"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123391111" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123391111">Kevin Buzzard (Mar 07 2018 at 10:35)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123391111" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123391111">Kevin Buzzard (Mar 07 2018 at 20:35)</a>:</h4>
 <p>because a scheme is an object with property X that looks locally like an affine scheme</p>
 
 <a name="123391114"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123391114" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123391114">Kevin Buzzard (Mar 07 2018 at 10:35)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123391114" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123391114">Kevin Buzzard (Mar 07 2018 at 20:35)</a>:</h4>
 <p>and I did not prove that affine schemes have property X yet</p>
 
 <a name="123391155"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123391155" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123391155">Kevin Buzzard (Mar 07 2018 at 10:36)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123391155" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123391155">Kevin Buzzard (Mar 07 2018 at 20:36)</a>:</h4>
 <p>but one can formulate "I look locally like an affine scheme" without mentioning X</p>
 
 <a name="123391159"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123391159" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123391159">Kevin Buzzard (Mar 07 2018 at 10:36)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123391159" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123391159">Kevin Buzzard (Mar 07 2018 at 20:36)</a>:</h4>
 <p>so first I want the definition of a scheme</p>
 
 <a name="123391160"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123391160" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123391160">Kevin Buzzard (Mar 07 2018 at 10:36)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123391160" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123391160">Kevin Buzzard (Mar 07 2018 at 20:36)</a>:</h4>
 <p>and then I need to prove one more theorem</p>
 
 <a name="123391165"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123391165" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123391165">Mario Carneiro (Mar 07 2018 at 10:37)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123391165" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123391165">Mario Carneiro (Mar 07 2018 at 20:37)</a>:</h4>
 <p>I think you are not ready for assia's criterion yet</p>
 
 <a name="123391170"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123391170" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123391170">Kevin Buzzard (Mar 07 2018 at 10:37)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123391170" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123391170">Kevin Buzzard (Mar 07 2018 at 20:37)</a>:</h4>
 <p>Thanks for the definition comments.</p>
 
 <a name="123391171"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123391171" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123391171">Mario Carneiro (Mar 07 2018 at 10:37)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123391171" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123391171">Mario Carneiro (Mar 07 2018 at 20:37)</a>:</h4>
 <p>she talked about examples in situations where you already have the fundamental theorem of mystuffoids</p>
 
 <a name="123391176"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123391176" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123391176">Mario Carneiro (Mar 07 2018 at 10:37)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123391176" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123391176">Mario Carneiro (Mar 07 2018 at 20:37)</a>:</h4>
 <p>you are still in the definition crafting stage</p>
 
 <a name="123391177"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123391177" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123391177">Kevin Buzzard (Mar 07 2018 at 10:37)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123391177" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123391177">Kevin Buzzard (Mar 07 2018 at 20:37)</a>:</h4>
 <p>This is a fundamental issue</p>
 
 <a name="123391214"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123391214" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123391214">Kevin Buzzard (Mar 07 2018 at 10:38)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123391214" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123391214">Kevin Buzzard (Mar 07 2018 at 20:38)</a>:</h4>
 <p>which goes beyond Lean</p>
 
 <a name="123391220"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123391220" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123391220">Kevin Buzzard (Mar 07 2018 at 10:38)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123391220" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123391220">Kevin Buzzard (Mar 07 2018 at 20:38)</a>:</h4>
 <p>It's something I have found when lecturing</p>
 
 <a name="123391222"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123391222" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123391222">Kevin Buzzard (Mar 07 2018 at 10:38)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123391222" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123391222">Kevin Buzzard (Mar 07 2018 at 20:38)</a>:</h4>
 <p>You introduce a new concept in a lecture</p>
 
 <a name="123391224"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123391224" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123391224">Kevin Buzzard (Mar 07 2018 at 10:38)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123391224" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123391224">Kevin Buzzard (Mar 07 2018 at 20:38)</a>:</h4>
 <p>typically a new structure</p>
 
 <a name="123391226"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123391226" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123391226">Kevin Buzzard (Mar 07 2018 at 10:38)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123391226" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123391226">Kevin Buzzard (Mar 07 2018 at 20:38)</a>:</h4>
 <p>and then you want to do two things simultaneously:</p>
 
 <a name="123391227"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123391227" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123391227">Kevin Buzzard (Mar 07 2018 at 10:38)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123391227" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123391227">Kevin Buzzard (Mar 07 2018 at 20:38)</a>:</h4>
 <p>(1) give basic examples</p>
 
 <a name="123391232"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123391232" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123391232">Kevin Buzzard (Mar 07 2018 at 10:38)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123391232" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123391232">Kevin Buzzard (Mar 07 2018 at 20:38)</a>:</h4>
 <p>(2) prove basic lemmas (e.g. subsets, quotients,  products, whatever)</p>
 
 <a name="123391237"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123391237" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123391237">Kevin Buzzard (Mar 07 2018 at 10:39)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123391237" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123391237">Kevin Buzzard (Mar 07 2018 at 20:39)</a>:</h4>
 <p>(consequences of axioms)</p>
 
 <a name="123391241"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123391241" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123391241">Kevin Buzzard (Mar 07 2018 at 10:39)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123391241" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123391241">Kevin Buzzard (Mar 07 2018 at 20:39)</a>:</h4>
 <p>and whenever I do this in a lecture I never know whether to do (1) or (2) first</p>
 
 <a name="123391242"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123391242" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123391242">Kevin Buzzard (Mar 07 2018 at 10:39)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123391242" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123391242">Kevin Buzzard (Mar 07 2018 at 20:39)</a>:</h4>
 <p>because they are independent and both very important</p>
 
 <a name="123391245"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123391245" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123391245">Mario Carneiro (Mar 07 2018 at 10:39)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123391245" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123391245">Mario Carneiro (Mar 07 2018 at 20:39)</a>:</h4>
 <p>they are both important, of course. They are even closely related since (1) is basically stuff that implies X and (2) is stuff implied by X</p>
 
 <a name="123391246"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123391246" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123391246">Kevin Buzzard (Mar 07 2018 at 10:40)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123391246" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123391246">Kevin Buzzard (Mar 07 2018 at 20:40)</a>:</h4>
 <p>They are both "the first thing you should do after you defined the concept"</p>
 
 <a name="123391288"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123391288" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123391288">Kevin Buzzard (Mar 07 2018 at 10:40)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123391288" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123391288">Kevin Buzzard (Mar 07 2018 at 20:40)</a>:</h4>
 <p>Still, I should concentrate on defining the concept first. Cheers!</p>
 
 <a name="123391290"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123391290" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123391290">Mario Carneiro (Mar 07 2018 at 10:40)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123391290" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123391290">Mario Carneiro (Mar 07 2018 at 20:40)</a>:</h4>
 <p><span class="emoji emoji-1f44b" title="wave">:wave:</span></p>
 
 <a name="123391305"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123391305" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123391305">Kevin Buzzard (Mar 07 2018 at 10:41)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123391305" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123391305">Kevin Buzzard (Mar 07 2018 at 20:41)</a>:</h4>
 <p>Current state of things at <a href="https://github.com/kbuzzard/lean-stacks-project/blob/master/src/scheme.lean" target="_blank" title="https://github.com/kbuzzard/lean-stacks-project/blob/master/src/scheme.lean">https://github.com/kbuzzard/lean-stacks-project/blob/master/src/scheme.lean</a></p>
 
 <a name="123391348"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123391348" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123391348">Kevin Buzzard (Mar 07 2018 at 10:42)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123391348" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123391348">Kevin Buzzard (Mar 07 2018 at 20:42)</a>:</h4>
 <p>probably lines 268 - 305 should be moved into a definition, if my understanding of what you're saying is correct. OK I really am gone now.</p>
 
 <a name="123392619"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123392619" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123392619">Kevin Buzzard (Mar 07 2018 at 11:27)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123392619" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123392619">Kevin Buzzard (Mar 07 2018 at 21:27)</a>:</h4>
 <p>dammit I refactored into a definition and then started with <code>  add := λ f₁ f₂, ⟨_,_⟩,</code> and got an assertion violation. I am going to roll back a bit I think. Does anyone have any advice as to which version to pick?</p>
 
 <a name="123392672"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123392672" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123392672">Mario Carneiro (Mar 07 2018 at 11:29)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123392672" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123392672">Mario Carneiro (Mar 07 2018 at 21:29)</a>:</h4>
 <p>when I get an assertion violation in the middle of writing something, I try to finish writing it and see if it's okay once it is once again well-formed</p>
 
 <a name="123392781"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123392781" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123392781">Johannes Hölzl (Mar 07 2018 at 11:32)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123392781" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123392781">Johannes Hölzl (Mar 07 2018 at 21:32)</a>:</h4>
 <p><span class="user-mention" data-user-email="k.buzzard@imperial.ac.uk" data-user-id="110038">@Kevin Buzzard</span>  I think a simpler solution for you would be to first start defining the operations, i.e. <code>instance : has_add (Fring)</code>, ... do this for all the data. Then you see at least that this works. Then you proof stat it is a monoid, a group, a semiring etc. this allows you to have a clear overview what's happening.</p>
 
 <a name="123392795"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123392795" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123392795">Kevin Buzzard (Mar 07 2018 at 11:32)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123392795" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123392795">Kevin Buzzard (Mar 07 2018 at 21:32)</a>:</h4>
 <p>In maths we care about refactoring to a far lesser degree.</p>
 
 <a name="123392803"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123392803" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123392803">Kevin Buzzard (Mar 07 2018 at 11:33)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123392803" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123392803">Kevin Buzzard (Mar 07 2018 at 21:33)</a>:</h4>
 <p>I've seen lecturers write a proof and then in the middle stop and say "oh, hmm, Ok we will need this:" and then write "sublemma : ..." and just insert something in the middle, and then press on.</p>
 
 <a name="123392808"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123392808" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123392808">Kevin Buzzard (Mar 07 2018 at 11:33)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123392808" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123392808">Kevin Buzzard (Mar 07 2018 at 21:33)</a>:</h4>
 <p>Either that or just splurge through everything.</p>
 
 <a name="123392856"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123392856" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123392856">Kevin Buzzard (Mar 07 2018 at 11:34)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123392856" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123392856">Kevin Buzzard (Mar 07 2018 at 21:34)</a>:</h4>
 <p>And then we get "and as we see from the proof of Theorem B, X -&gt; Y" later on</p>
 
 <a name="123392859"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123392859" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123392859">Kevin Buzzard (Mar 07 2018 at 11:34)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123392859" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123392859">Kevin Buzzard (Mar 07 2018 at 21:34)</a>:</h4>
 <p>and everyone is fine with this</p>
 
 <a name="123392877"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123392877" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123392877">Kevin Buzzard (Mar 07 2018 at 11:35)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123392877" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123392877">Kevin Buzzard (Mar 07 2018 at 21:35)</a>:</h4>
 <p>PS I am not using instances at all. I wanted to completely avoid type class inference and also any coercions as much as possible, so I had a tight control over what was going on.</p>
 
 <a name="123393347"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123393347" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123393347">Kevin Buzzard (Mar 07 2018 at 11:51)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123393347" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123393347">Kevin Buzzard (Mar 07 2018 at 21:51)</a>:</h4>
 <p>Oh this is a really nice way of doing it. Thanks. My definitions are getting smaller and smaller, apparently this is what I should be aiming at.</p>
 
 <a name="123393512"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123393512" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123393512">Mario Carneiro (Mar 07 2018 at 11:56)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123393512" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123393512">Mario Carneiro (Mar 07 2018 at 21:56)</a>:</h4>
 <blockquote>
 <p>I've seen lecturers write a proof and then in the middle stop and say "oh, hmm, Ok we will need this:" and then write "sublemma : ..." and just insert something in the middle, and then press on.</p>
 </blockquote>
 <p>You should view this as analogous to writing a proof, then in the middle editing the statement, and returning to the proof. The fact that lectures are limited to a linear format is simply because of practical concerns of blackboard presentation, but we often think about things out of order like this. A lean script should not reflect these amendations themselves, so that at the end everything fits together.</p>
 
 <a name="123393622"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123393622" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123393622">Kevin Buzzard (Mar 07 2018 at 12:00)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123393622" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123393622">Kevin Buzzard (Mar 07 2018 at 22:00)</a>:</h4>
 <p>I added some of these comments to <a href="https://github.com/kbuzzard/mathlib/blob/master/docs/WIPs/structures.md" target="_blank" title="https://github.com/kbuzzard/mathlib/blob/master/docs/WIPs/structures.md">https://github.com/kbuzzard/mathlib/blob/master/docs/WIPs/structures.md</a></p>
 
 <a name="123393634"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123393634" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123393634">Kevin Buzzard (Mar 07 2018 at 12:01)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123393634" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123393634">Kevin Buzzard (Mar 07 2018 at 22:01)</a>:</h4>
 <p>Are you interested in a PR Mario? A lot of those WIPs are (a) works in progress and (b) already helpful for me in their current form.</p>
 
 <a name="123393638"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123393638" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123393638">Kevin Buzzard (Mar 07 2018 at 12:01)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123393638" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123393638">Kevin Buzzard (Mar 07 2018 at 22:01)</a>:</h4>
 <p>I am just letting them grow organically at this point rather than trying to tidy them.</p>
 
 <a name="123393643"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123393643" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123393643">Kevin Buzzard (Mar 07 2018 at 12:01)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123393643" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123393643">Kevin Buzzard (Mar 07 2018 at 22:01)</a>:</h4>
 <p>The advantage of a PR is that they become more visible to people. The disadvantage is that they become your problem.</p>
 
 <a name="123393645"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123393645" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123393645">Kevin Buzzard (Mar 07 2018 at 12:02)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123393645" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123393645">Kevin Buzzard (Mar 07 2018 at 22:02)</a>:</h4>
 <p>I am happy either way; a lot depends on how seriously you take that docs directory.</p>
 
 <a name="123393687"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123393687" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123393687">Kevin Buzzard (Mar 07 2018 at 12:02)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123393687" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123393687">Kevin Buzzard (Mar 07 2018 at 22:02)</a>:</h4>
 <p>My workflow now is much better now we're at zulip. If I have time I update my local docs. If I don't then I just star the messages and come back later.</p>
 
 <a name="123393693"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123393693" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123393693">Kevin Buzzard (Mar 07 2018 at 12:03)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123393693" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123393693">Kevin Buzzard (Mar 07 2018 at 22:03)</a>:</h4>
 <p>I'm talking about when people give me good advice which I would like to keep track of.</p>
 
 <a name="123394051"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123394051" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123394051">Kevin Buzzard (Mar 07 2018 at 12:15)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123394051" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123394051">Kevin Buzzard (Mar 07 2018 at 22:15)</a>:</h4>
 <p>o_O</p>
 
 <a name="123394054"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123394054" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123394054">Kevin Buzzard (Mar 07 2018 at 12:15)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123394054" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123394054">Kevin Buzzard (Mar 07 2018 at 22:15)</a>:</h4>
 <p>how clean is this:</p>
 
 <a name="123394057"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123394057" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123394057">Kevin Buzzard (Mar 07 2018 at 12:15)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123394057" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123394057">Kevin Buzzard (Mar 07 2018 at 22:15)</a>:</h4>
 <div class="codehilite"><pre><span></span>definition structure_presheaf_value_is_comm_ring {R : Type*} [comm_ring R] (U : set (X R)) (HU : is_open U)
 : comm_ring (structure_presheaf_value U HU)
 := {
@@ -844,73 +844,73 @@ has type
 </pre></div>
 
 <a name="123394059"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123394059" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123394059">Kevin Buzzard (Mar 07 2018 at 12:15)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123394059" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123394059">Kevin Buzzard (Mar 07 2018 at 22:15)</a>:</h4>
 <p>:-)</p>
 
 <a name="123394101"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123394101" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123394101">Kevin Buzzard (Mar 07 2018 at 12:16)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123394101" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123394101">Kevin Buzzard (Mar 07 2018 at 22:16)</a>:</h4>
 <p>My original proofs were worse</p>
 
 <a name="123394112"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123394112" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123394112">Kevin Buzzard (Mar 07 2018 at 12:17)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123394112" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123394112">Kevin Buzzard (Mar 07 2018 at 22:17)</a>:</h4>
 <p>but because I wrote <a href="https://github.com/kbuzzard/mathlib/blob/master/docs/WIPs/simp.md" target="_blank" title="https://github.com/kbuzzard/mathlib/blob/master/docs/WIPs/simp.md">https://github.com/kbuzzard/mathlib/blob/master/docs/WIPs/simp.md</a></p>
 
 <a name="123394122"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123394122" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123394122">Kevin Buzzard (Mar 07 2018 at 12:18)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123394122" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123394122">Kevin Buzzard (Mar 07 2018 at 22:18)</a>:</h4>
 <p>I remembered the "how to use simp better" thing -- i.e "if your proof looks like <code>funext (λ f,subtype.eq (funext (λ P,by simp)))</code></p>
 
 <a name="123394161"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123394161" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123394161">Kevin Buzzard (Mar 07 2018 at 12:18)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123394161" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123394161">Kevin Buzzard (Mar 07 2018 at 22:18)</a>:</h4>
 <p>then you might want to consider being more optimistic with when exactly you use simp"</p>
 
 <a name="123394226"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123394226" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123394226">Mario Carneiro (Mar 07 2018 at 12:21)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123394226" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123394226">Mario Carneiro (Mar 07 2018 at 22:21)</a>:</h4>
 <p>Why is there the messy thing with <code>(structure_presheaf_value_has_add U HU).add</code>? As it is currently, there should be no difficulty making this thing an instance, and then it will pick those fields up automatically</p>
 
 <a name="123394345"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123394345" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123394345">Mario Carneiro (Mar 07 2018 at 12:24)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123394345" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123394345">Mario Carneiro (Mar 07 2018 at 22:24)</a>:</h4>
 <p>even if you can't make them instances, you can use <code>..structure_presheaf_value_has_add U HU</code> etc to add the operations</p>
 
 <a name="123394770"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123394770" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123394770">Mario Carneiro (Mar 07 2018 at 12:37)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123394770" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123394770">Mario Carneiro (Mar 07 2018 at 22:37)</a>:</h4>
 <p>Re: PRs, I'm okay with docs of any kind. My recommendation is to try to write them with an authoritative locution style; I will let you know if you say false things. If you don't know something, leave it out, say you don't know in the doc, or ask about it here and then put in whatever you find out.</p>
 
 <a name="123395558"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123395558" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123395558">Kevin Buzzard (Mar 07 2018 at 13:07)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123395558" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123395558">Kevin Buzzard (Mar 07 2018 at 23:07)</a>:</h4>
 <p>Messy thing: I am not concerned with such issues at the minute. I am completely avoiding instances simply because writing all this code is taking my Lean understanding to a new level and I realised that I did not trust myself to do all the clever things instances could do for me, and I would occasionally have problems with instances, so I decided to never use them just to see what like would be like without them. The advantage of doing it my way is that I can take one look and understand what is happening. I am still a learner.</p>
 
 <a name="123395617"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123395617" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123395617">Kevin Buzzard (Mar 07 2018 at 13:09)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123395617" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123395617">Kevin Buzzard (Mar 07 2018 at 23:09)</a>:</h4>
 <p>I am always muddled about this .. thing. I forget the syntax, I never know whether it has to go at the beginning or the end or whether it doesn't matter, just stupid things which people your age only need to be told once but people my age need to have a reference for and basic examples of. I don't have the time right now to fart around with .. trying to make it work and as you can see from <a href="https://github.com/kbuzzard/mathlib/blob/master/docs/WIPs/structures.md" target="_blank" title="https://github.com/kbuzzard/mathlib/blob/master/docs/WIPs/structures.md">https://github.com/kbuzzard/mathlib/blob/master/docs/WIPs/structures.md</a> I have also not found the time to figure it out once and for all and then document it. I am afraid I need docs to work efficiently, and if stuff isn't documented properly then I shy away from it.</p>
 
 <a name="123396002"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123396002" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123396002">Sebastian Ullrich (Mar 07 2018 at 13:20)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123396002" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123396002">Sebastian Ullrich (Mar 07 2018 at 23:20)</a>:</h4>
 <p>Instead of declaring <code>mk'</code>s, the algebraic hierarchy could be amended with superclass defaults like</p>
 <div class="codehilite"><pre><span></span>class add_comm_monoid (α : Type u) extends add_monoid α, add_comm_semigroup α :=
 (add_zero := by simp [add_comm, zero_add])
 </pre></div>
 
 <a name="123396500"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123396500" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123396500">Mario Carneiro (Mar 07 2018 at 13:35)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123396500" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123396500">Mario Carneiro (Mar 07 2018 at 23:35)</a>:</h4>
 <p>that doesn't actually work right now tho</p>
 
 <a name="123396588"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123396588" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123396588">Sebastian Ullrich (Mar 07 2018 at 13:38)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123396588" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123396588">Sebastian Ullrich (Mar 07 2018 at 23:38)</a>:</h4>
 <p>It doesn't?</p>
 
 <a name="123397155"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123397155" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123397155">Mario Carneiro (Mar 07 2018 at 13:58)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123397155" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123397155">Mario Carneiro (Mar 07 2018 at 23:58)</a>:</h4>
 <p>nvm, I misread what you are doing there</p>
 
 <a name="123402113"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123402113" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123402113">Kevin Buzzard (Mar 07 2018 at 16:31)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123402113" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123402113">Kevin Buzzard (Mar 08 2018 at 02:31)</a>:</h4>
 <blockquote>
 <p>Why is there the messy thing with <code>(structure_presheaf_value_has_add U HU).add</code>? As it is currently, there should be no difficulty making this thing an instance, and then it will pick those fields up automatically</p>
 </blockquote>
 <p>My co-author got their hands on it and now it looks like this:</p>
 
 <a name="123402117"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123402117" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123402117">Kevin Buzzard (Mar 07 2018 at 16:31)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123402117" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123402117">Kevin Buzzard (Mar 08 2018 at 02:31)</a>:</h4>
 <div class="codehilite"><pre><span></span>definition structure_presheaf_value_is_comm_ring {R : Type*} [comm_ring R] (U : set (X R)) (HU : is_open U)
 : comm_ring (structure_presheaf_value U HU) :=
 by refine {
@@ -924,11 +924,11 @@ by refine {
 </pre></div>
 
 <a name="123404579"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123404579" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123404579">Scott Morrison (Mar 07 2018 at 17:39)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123404579" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123404579">Scott Morrison (Mar 08 2018 at 03:39)</a>:</h4>
 <p>I really like <span class="user-mention" data-user-email="sebasti@nullri.ch" data-user-id="110024">@Sebastian Ullrich</span>’s suggestion for putting in superclass defaults in the algebraic hierarchy, at least where they are “uncontroversial”. I didn’t even know you can do that.</p>
 
 <a name="123404588"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123404588" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123404588">Sebastian Ullrich (Mar 07 2018 at 17:39)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/too%20many%20axioms%20in%20comm_ring%20class/near/123404588" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51105toomanyaxiomsincommringclass.html#123404588">Sebastian Ullrich (Mar 08 2018 at 03:39)</a>:</h4>
 <p>It's not a very old feature :)</p>
 
 

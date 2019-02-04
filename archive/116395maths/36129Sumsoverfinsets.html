@@ -12,7 +12,7 @@ permalink: archive/116395maths/36129Sumsoverfinsets.html
 <base href="https://leanprover.zulipchat.com">
 {% raw %}
 <a name="126924811"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Sums%20over%20finsets/near/126924811" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/36129Sumsoverfinsets.html#126924811">Johan Commelin (May 22 2018 at 16:09)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Sums%20over%20finsets/near/126924811" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/36129Sumsoverfinsets.html#126924811">Johan Commelin (May 23 2018 at 00:09)</a>:</h4>
 <p>I'm stuck on the following triviality</p>
 <div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">sums</span> <span class="o">{</span><span class="n">m</span> <span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">}</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">fin</span> <span class="n">m</span> <span class="bp">→</span> <span class="n">fin</span> <span class="n">n</span><span class="o">)</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">fin</span> <span class="n">m</span> <span class="bp">→</span> <span class="bp">ℕ</span><span class="o">)</span>
 <span class="o">:</span> <span class="n">sum</span> <span class="n">univ</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">j</span> <span class="o">:</span> <span class="n">fin</span> <span class="n">n</span><span class="o">,</span> <span class="n">sum</span> <span class="o">(</span><span class="n">univ</span><span class="bp">.</span><span class="n">filter</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">i</span><span class="o">,</span> <span class="n">f</span> <span class="n">i</span> <span class="bp">=</span> <span class="n">j</span><span class="o">))</span> <span class="n">x</span><span class="o">)</span> <span class="bp">=</span> <span class="n">sum</span> <span class="n">univ</span> <span class="n">x</span>
@@ -23,19 +23,19 @@ permalink: archive/116395maths/36129Sumsoverfinsets.html
 <p>It looks like I might want to use <code>finset.sum_sigma</code> but I don't see how to get all the sigma's in place. And the unification magic doesn't do the job either.</p>
 
 <a name="126924898"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Sums%20over%20finsets/near/126924898" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/36129Sumsoverfinsets.html#126924898">Johan Commelin (May 22 2018 at 16:10)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Sums%20over%20finsets/near/126924898" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/36129Sumsoverfinsets.html#126924898">Johan Commelin (May 23 2018 at 00:10)</a>:</h4>
 <p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> <span class="user-mention" data-user-id="110044">@Chris Hughes</span>  I remember that you were also working on these kind of sum-rewritings about 2 months ago. Is this similar to what you did?</p>
 
 <a name="126925378"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Sums%20over%20finsets/near/126925378" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/36129Sumsoverfinsets.html#126925378">Johannes Hölzl (May 22 2018 at 16:18)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Sums%20over%20finsets/near/126925378" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/36129Sumsoverfinsets.html#126925378">Johannes Hölzl (May 23 2018 at 00:18)</a>:</h4>
 <p>you can use <code>finset.sum_bind</code> to combine both sum to a single one and then use extensionality that the combination of the index sets on the right is <code>univ</code>. Or use <code>finset.sum_subset</code>  which also uses some sort of extensionality.</p>
 
 <a name="126925926"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Sums%20over%20finsets/near/126925926" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/36129Sumsoverfinsets.html#126925926">Johan Commelin (May 22 2018 at 16:28)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Sums%20over%20finsets/near/126925926" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/36129Sumsoverfinsets.html#126925926">Johan Commelin (May 23 2018 at 00:28)</a>:</h4>
 <p>Ok, thanks!</p>
 
 <a name="126933905"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Sums%20over%20finsets/near/126933905" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/36129Sumsoverfinsets.html#126933905">Johan Commelin (May 22 2018 at 19:20)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Sums%20over%20finsets/near/126933905" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/36129Sumsoverfinsets.html#126933905">Johan Commelin (May 23 2018 at 03:20)</a>:</h4>
 <p>Ok, I proved the lemma using <code>bind</code> and <code>ext.2</code>. Thanks a lot!</p>
 
 

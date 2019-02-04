@@ -10,731 +10,731 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [sub_eq_sub_of_sub_eq_sub](35524subeqsubofsubeqsub.html) (29 messages, latest: Feb 04 2019 at 14:12)
+* [sub_eq_sub_of_sub_eq_sub](35524subeqsubofsubeqsub.html) (29 messages, latest: Feb 05 2019 at 00:12)
 
-* [floor_ring](74194floorring.html) (50 messages, latest: Feb 04 2019 at 12:19)
+* [floor_ring](74194floorring.html) (50 messages, latest: Feb 04 2019 at 22:19)
 
-* [linarith failure](87044linarithfailure.html) (109 messages, latest: Feb 04 2019 at 12:03)
+* [linarith failure](87044linarithfailure.html) (109 messages, latest: Feb 04 2019 at 22:03)
 
-* [card](81595card.html) (12 messages, latest: Feb 03 2019 at 20:44)
+* [card](81595card.html) (12 messages, latest: Feb 04 2019 at 06:44)
 
-* [digits](07525digits.html) (15 messages, latest: Feb 02 2019 at 15:31)
+* [digits](07525digits.html) (15 messages, latest: Feb 03 2019 at 01:31)
 
-* [groups acting on sets](00627groupsactingonsets.html) (6 messages, latest: Jan 31 2019 at 17:20)
+* [groups acting on sets](00627groupsactingonsets.html) (6 messages, latest: Feb 01 2019 at 03:20)
 
-* [What's new in Lean maths?](62892WhatsnewinLeanmaths.html) (84 messages, latest: Jan 30 2019 at 13:14)
+* [What's new in Lean maths?](62892WhatsnewinLeanmaths.html) (84 messages, latest: Jan 30 2019 at 23:14)
 
-* [modules](57882modules.html) (7 messages, latest: Jan 30 2019 at 09:07)
+* [modules](57882modules.html) (7 messages, latest: Jan 30 2019 at 19:07)
 
-* [last digit challenge](66889lastdigitchallenge.html) (15 messages, latest: Jan 30 2019 at 00:52)
+* [last digit challenge](66889lastdigitchallenge.html) (15 messages, latest: Jan 30 2019 at 10:52)
 
-* [Limits of product](74089Limitsofproduct.html) (15 messages, latest: Jan 29 2019 at 23:34)
+* [Limits of product](74089Limitsofproduct.html) (15 messages, latest: Jan 30 2019 at 09:34)
 
-* [sheaves and sites](44395sheavesandsites.html) (584 messages, latest: Jan 29 2019 at 21:13)
+* [sheaves and sites](44395sheavesandsites.html) (584 messages, latest: Jan 30 2019 at 07:13)
 
-* [nonlinarith](25383nonlinarith.html) (22 messages, latest: Jan 29 2019 at 08:44)
+* [nonlinarith](25383nonlinarith.html) (22 messages, latest: Jan 29 2019 at 18:44)
 
-* [adjunctions](53187adjunctions.html) (119 messages, latest: Jan 28 2019 at 20:45)
+* [adjunctions](53187adjunctions.html) (119 messages, latest: Jan 29 2019 at 06:45)
 
-* [adding negative reals](76722addingnegativereals.html) (12 messages, latest: Jan 28 2019 at 17:58)
+* [adding negative reals](76722addingnegativereals.html) (12 messages, latest: Jan 29 2019 at 03:58)
 
-* [adding positive reals](35794addingpositivereals.html) (64 messages, latest: Jan 28 2019 at 14:34)
+* [adding positive reals](35794addingpositivereals.html) (64 messages, latest: Jan 29 2019 at 00:34)
 
-* [power series](15161powerseries.html) (17 messages, latest: Jan 26 2019 at 19:16)
+* [power series](15161powerseries.html) (17 messages, latest: Jan 27 2019 at 05:16)
 
-* [Taking the Stacks Project formalisation forward](89037TakingtheStacksProjectformalisationforward.html) (119 messages, latest: Jan 26 2019 at 16:13)
+* [Taking the Stacks Project formalisation forward](89037TakingtheStacksProjectformalisationforward.html) (119 messages, latest: Jan 27 2019 at 02:13)
 
-* [algebraic closure construction](91939algebraicclosureconstruction.html) (12 messages, latest: Jan 24 2019 at 19:19)
+* [algebraic closure construction](91939algebraicclosureconstruction.html) (12 messages, latest: Jan 25 2019 at 05:19)
 
-* [is_ring_hom left multiplication](48648isringhomleftmultiplication.html) (3 messages, latest: Jan 24 2019 at 11:36)
+* [is_ring_hom left multiplication](48648isringhomleftmultiplication.html) (3 messages, latest: Jan 24 2019 at 21:36)
 
-* [finset.max for nonempty sets](00990finsetmaxfornonemptysets.html) (22 messages, latest: Jan 24 2019 at 08:13)
+* [finset.max for nonempty sets](00990finsetmaxfornonemptysets.html) (22 messages, latest: Jan 24 2019 at 18:13)
 
-* [Splitting topology](64252Splittingtopology.html) (12 messages, latest: Jan 23 2019 at 17:14)
+* [Splitting topology](64252Splittingtopology.html) (12 messages, latest: Jan 24 2019 at 03:14)
 
-* [multiplicative finsupp](00370multiplicativefinsupp.html) (20 messages, latest: Jan 22 2019 at 17:03)
+* [multiplicative finsupp](00370multiplicativefinsupp.html) (20 messages, latest: Jan 23 2019 at 03:03)
 
-* [Long Stone-Cech](72538LongStoneCech.html) (7 messages, latest: Jan 22 2019 at 13:20)
+* [Long Stone-Cech](72538LongStoneCech.html) (7 messages, latest: Jan 22 2019 at 23:20)
 
-* [int.cast is unique](12504intcastisunique.html) (10 messages, latest: Jan 21 2019 at 16:23)
+* [int.cast is unique](12504intcastisunique.html) (10 messages, latest: Jan 22 2019 at 02:23)
 
-* [Zero of really small](18776Zeroofreallysmall.html) (13 messages, latest: Jan 19 2019 at 23:31)
+* [Zero of really small](18776Zeroofreallysmall.html) (13 messages, latest: Jan 20 2019 at 09:31)
 
-* [unique limit](29815uniquelimit.html) (2 messages, latest: Jan 19 2019 at 23:22)
+* [unique limit](29815uniquelimit.html) (2 messages, latest: Jan 20 2019 at 09:22)
 
-* [limits 3.0](69860limits30.html) (22 messages, latest: Jan 19 2019 at 11:45)
+* [limits 3.0](69860limits30.html) (22 messages, latest: Jan 19 2019 at 21:45)
 
-* [refactor functor notation](92196refactorfunctornotation.html) (6 messages, latest: Jan 19 2019 at 01:26)
+* [refactor functor notation](92196refactorfunctornotation.html) (6 messages, latest: Jan 19 2019 at 11:26)
 
-* [convergent sequences are bounded](98209convergentsequencesarebounded.html) (81 messages, latest: Jan 18 2019 at 21:05)
+* [convergent sequences are bounded](98209convergentsequencesarebounded.html) (81 messages, latest: Jan 19 2019 at 07:05)
 
-* [two instances of fintype](14135twoinstancesoffintype.html) (3 messages, latest: Jan 18 2019 at 13:23)
+* [two instances of fintype](14135twoinstancesoffintype.html) (3 messages, latest: Jan 18 2019 at 23:23)
 
-* [norm_num weirdness](48256normnumweirdness.html) (34 messages, latest: Jan 18 2019 at 11:57)
+* [norm_num weirdness](48256normnumweirdness.html) (34 messages, latest: Jan 18 2019 at 21:57)
 
-* [classification of finite simple groups](89771classificationoffinitesimplegroups.html) (24 messages, latest: Jan 18 2019 at 00:03)
+* [classification of finite simple groups](89771classificationoffinitesimplegroups.html) (24 messages, latest: Jan 18 2019 at 10:03)
 
-* [Perfectoid spaces](04805Perfectoidspaces.html) (2628 messages, latest: Jan 17 2019 at 16:56)
+* [Perfectoid spaces](04805Perfectoidspaces.html) (2628 messages, latest: Jan 18 2019 at 02:56)
 
-* [cardinality of integers modulo n](62825cardinalityofintegersmodulon.html) (171 messages, latest: Jan 16 2019 at 12:13)
+* [cardinality of integers modulo n](62825cardinalityofintegersmodulon.html) (171 messages, latest: Jan 16 2019 at 22:13)
 
-* [div_lt_iff_lt_mul](72099divltiffltmul.html) (12 messages, latest: Jan 15 2019 at 13:24)
+* [div_lt_iff_lt_mul](72099divltiffltmul.html) (12 messages, latest: Jan 15 2019 at 23:24)
 
-* [is_iso restate_axioms](13263isisorestateaxioms.html) (2 messages, latest: Jan 14 2019 at 21:58)
+* [is_iso restate_axioms](13263isisorestateaxioms.html) (2 messages, latest: Jan 15 2019 at 07:58)
 
-* [kernels for ring homomorphisms](82657kernelsforringhomomorphisms.html) (8 messages, latest: Jan 14 2019 at 14:10)
+* [kernels for ring homomorphisms](82657kernelsforringhomomorphisms.html) (8 messages, latest: Jan 15 2019 at 00:10)
 
-* [finite fields](61943finitefields.html) (29 messages, latest: Jan 11 2019 at 17:00)
+* [finite fields](61943finitefields.html) (29 messages, latest: Jan 12 2019 at 03:00)
 
-* [is_noetherian_ring](67832isnoetherianring.html) (1 message, latest: Jan 11 2019 at 13:38)
+* [is_noetherian_ring](67832isnoetherianring.html) (1 message, latest: Jan 11 2019 at 23:38)
 
-* [Inverse image of the indicator function](03321Inverseimageoftheindicatorfunction.html) (15 messages, latest: Jan 10 2019 at 10:28)
+* [Inverse image of the indicator function](03321Inverseimageoftheindicatorfunction.html) (15 messages, latest: Jan 10 2019 at 20:28)
 
-* [open immersions](85401openimmersions.html) (2 messages, latest: Jan 03 2019 at 10:02)
+* [open immersions](85401openimmersions.html) (2 messages, latest: Jan 03 2019 at 20:02)
 
-* [category theory documentation](35860categorytheorydocumentation.html) (50 messages, latest: Jan 01 2019 at 21:47)
+* [category theory documentation](35860categorytheorydocumentation.html) (50 messages, latest: Jan 02 2019 at 07:47)
 
-* [Q dense in R](14314QdenseinR.html) (21 messages, latest: Dec 29 2018 at 11:01)
+* [Q dense in R](14314QdenseinR.html) (21 messages, latest: Dec 29 2018 at 21:01)
 
-* [Category theory](24026Categorytheory.html) (421 messages, latest: Dec 23 2018 at 20:05)
+* [Category theory](24026Categorytheory.html) (421 messages, latest: Dec 24 2018 at 06:05)
 
-* [comment in functor.lean](52026commentinfunctorlean.html) (3 messages, latest: Dec 22 2018 at 07:49)
+* [comment in functor.lean](52026commentinfunctorlean.html) (3 messages, latest: Dec 22 2018 at 17:49)
 
-* [filtered colimits](35668filteredcolimits.html) (6 messages, latest: Dec 21 2018 at 23:13)
+* [filtered colimits](35668filteredcolimits.html) (6 messages, latest: Dec 22 2018 at 09:13)
 
-* [limits 2.0](73251limits20.html) (450 messages, latest: Dec 21 2018 at 11:15)
+* [limits 2.0](73251limits20.html) (450 messages, latest: Dec 21 2018 at 21:15)
 
-* [Bayes theorem + future directions](85635Bayestheoremfuturedirections.html) (2 messages, latest: Dec 21 2018 at 06:28)
+* [Bayes theorem + future directions](85635Bayestheoremfuturedirections.html) (2 messages, latest: Dec 21 2018 at 16:28)
 
-* [uniform_continuous.continuous](02588uniformcontinuouscontinuous.html) (17 messages, latest: Dec 20 2018 at 10:56)
+* [uniform_continuous.continuous](02588uniformcontinuouscontinuous.html) (17 messages, latest: Dec 20 2018 at 20:56)
 
-* [Spltting up PRs](83216SplttingupPRs.html) (2 messages, latest: Dec 20 2018 at 07:07)
+* [Spltting up PRs](83216SplttingupPRs.html) (2 messages, latest: Dec 20 2018 at 17:07)
 
-* [let in statements](05189letinstatements.html) (4 messages, latest: Dec 19 2018 at 21:57)
+* [let in statements](05189letinstatements.html) (4 messages, latest: Dec 20 2018 at 07:57)
 
-* [uniformity in uniform add group](22756uniformityinuniformaddgroup.html) (1 message, latest: Dec 19 2018 at 21:12)
+* [uniformity in uniform add group](22756uniformityinuniformaddgroup.html) (1 message, latest: Dec 20 2018 at 07:12)
 
-* [over and under categories](32980overandundercategories.html) (8 messages, latest: Dec 19 2018 at 05:20)
+* [over and under categories](32980overandundercategories.html) (8 messages, latest: Dec 19 2018 at 15:20)
 
-* [Ring completion](71627Ringcompletion.html) (29 messages, latest: Dec 18 2018 at 18:34)
+* [Ring completion](71627Ringcompletion.html) (29 messages, latest: Dec 19 2018 at 04:34)
 
-* [zero ideal](25792zeroideal.html) (16 messages, latest: Dec 17 2018 at 16:03)
+* [zero ideal](25792zeroideal.html) (16 messages, latest: Dec 18 2018 at 02:03)
 
-* [Splitting fields](23254Splittingfields.html) (110 messages, latest: Dec 17 2018 at 15:58)
+* [Splitting fields](23254Splittingfields.html) (110 messages, latest: Dec 18 2018 at 01:58)
 
-* [continuous_of_const](96722continuousofconst.html) (14 messages, latest: Dec 17 2018 at 12:10)
+* [continuous_of_const](96722continuousofconst.html) (14 messages, latest: Dec 17 2018 at 22:10)
 
-* [more limit stuff](30267morelimitstuff.html) (6 messages, latest: Dec 17 2018 at 06:53)
+* [more limit stuff](30267morelimitstuff.html) (6 messages, latest: Dec 17 2018 at 16:53)
 
-* [2 variables functions](968692variablesfunctions.html) (7 messages, latest: Dec 16 2018 at 10:58)
+* [2 variables functions](968692variablesfunctions.html) (7 messages, latest: Dec 16 2018 at 20:58)
 
-* [topology](42046topology.html) (2 messages, latest: Dec 14 2018 at 08:13)
+* [topology](42046topology.html) (2 messages, latest: Dec 14 2018 at 18:13)
 
-* [simple field theory](59434simplefieldtheory.html) (19 messages, latest: Dec 12 2018 at 19:35)
+* [simple field theory](59434simplefieldtheory.html) (19 messages, latest: Dec 13 2018 at 05:35)
 
-* [Cantor golf](88592Cantorgolf.html) (14 messages, latest: Dec 12 2018 at 19:14)
+* [Cantor golf](88592Cantorgolf.html) (14 messages, latest: Dec 13 2018 at 05:14)
 
-* [group_hom](82737grouphom.html) (4 messages, latest: Dec 12 2018 at 09:40)
+* [group_hom](82737grouphom.html) (4 messages, latest: Dec 12 2018 at 19:40)
 
-* [closure under colimits](56000closureundercolimits.html) (4 messages, latest: Dec 08 2018 at 07:04)
+* [closure under colimits](56000closureundercolimits.html) (4 messages, latest: Dec 08 2018 at 17:04)
 
-* [weird Lean proofs](45845weirdLeanproofs.html) (16 messages, latest: Dec 03 2018 at 20:16)
+* [weird Lean proofs](45845weirdLeanproofs.html) (16 messages, latest: Dec 04 2018 at 06:16)
 
-* [quotients and lifts for functions of arbitrary arity](96400quotientsandliftsforfunctionsofarbitraryarity.html) (12 messages, latest: Dec 02 2018 at 18:07)
+* [quotients and lifts for functions of arbitrary arity](96400quotientsandliftsforfunctionsofarbitraryarity.html) (12 messages, latest: Dec 03 2018 at 04:07)
 
-* [ring requires linear order](31512ringrequireslinearorder.html) (2 messages, latest: Dec 02 2018 at 10:46)
+* [ring requires linear order](31512ringrequireslinearorder.html) (2 messages, latest: Dec 02 2018 at 20:46)
 
-* [annoying proof challenge](79853annoyingproofchallenge.html) (12 messages, latest: Dec 01 2018 at 23:09)
+* [annoying proof challenge](79853annoyingproofchallenge.html) (12 messages, latest: Dec 02 2018 at 09:09)
 
-* [computable functions of reals](99122computablefunctionsofreals.html) (12 messages, latest: Nov 30 2018 at 17:14)
+* [computable functions of reals](99122computablefunctionsofreals.html) (12 messages, latest: Dec 01 2018 at 03:14)
 
-* [horner polynomials](01990hornerpolynomials.html) (2 messages, latest: Nov 30 2018 at 10:01)
+* [horner polynomials](01990hornerpolynomials.html) (2 messages, latest: Nov 30 2018 at 20:01)
 
-* [tendsto at_top at_top](73840tendstoattopattop.html) (11 messages, latest: Nov 30 2018 at 08:47)
+* [tendsto at_top at_top](73840tendstoattopattop.html) (11 messages, latest: Nov 30 2018 at 18:47)
 
-* [Missing maths tactic?](61359Missingmathstactic.html) (64 messages, latest: Nov 25 2018 at 01:07)
+* [Missing maths tactic?](61359Missingmathstactic.html) (64 messages, latest: Nov 25 2018 at 11:07)
 
-* [database of groups](85259databaseofgroups.html) (18 messages, latest: Nov 24 2018 at 09:51)
+* [database of groups](85259databaseofgroups.html) (18 messages, latest: Nov 24 2018 at 19:51)
 
-* [localisation](42755localisation.html) (16 messages, latest: Nov 23 2018 at 21:54)
+* [localisation](42755localisation.html) (16 messages, latest: Nov 24 2018 at 07:54)
 
-* [simplicial complexes in lean](88815simplicialcomplexesinlean.html) (211 messages, latest: Nov 23 2018 at 21:31)
+* [simplicial complexes in lean](88815simplicialcomplexesinlean.html) (211 messages, latest: Nov 24 2018 at 07:31)
 
-* [module](19335module.html) (15 messages, latest: Nov 23 2018 at 18:23)
+* [module](19335module.html) (15 messages, latest: Nov 24 2018 at 04:23)
 
-* [generalizing padic_val](45571generalizingpadicval.html) (75 messages, latest: Nov 23 2018 at 15:03)
+* [generalizing padic_val](45571generalizingpadicval.html) (75 messages, latest: Nov 24 2018 at 01:03)
 
-* [group counterexample](06586groupcounterexample.html) (11 messages, latest: Nov 23 2018 at 10:16)
+* [group counterexample](06586groupcounterexample.html) (11 messages, latest: Nov 23 2018 at 20:16)
 
-* [Scalar multiplication not defined for functions](15301Scalarmultiplicationnotdefinedforfunctions.html) (5 messages, latest: Nov 22 2018 at 23:01)
+* [Scalar multiplication not defined for functions](15301Scalarmultiplicationnotdefinedforfunctions.html) (5 messages, latest: Nov 23 2018 at 09:01)
 
-* [is_linear_map](36244islinearmap.html) (21 messages, latest: Nov 22 2018 at 16:37)
+* [is_linear_map](36244islinearmap.html) (21 messages, latest: Nov 23 2018 at 02:37)
 
-* [Niels Henrik Module](49507NielsHenrikModule.html) (2 messages, latest: Nov 22 2018 at 04:11)
+* [Niels Henrik Module](49507NielsHenrikModule.html) (2 messages, latest: Nov 22 2018 at 14:11)
 
-* [finsupp modules](29791finsuppmodules.html) (1 message, latest: Nov 22 2018 at 03:15)
+* [finsupp modules](29791finsuppmodules.html) (1 message, latest: Nov 22 2018 at 13:15)
 
-* [(-1)^i](758631i.html) (2 messages, latest: Nov 21 2018 at 20:00)
+* [(-1)^i](758631i.html) (2 messages, latest: Nov 22 2018 at 06:00)
 
-* [binomial coefficients](90398binomialcoefficients.html) (41 messages, latest: Nov 19 2018 at 19:01)
+* [binomial coefficients](90398binomialcoefficients.html) (41 messages, latest: Nov 20 2018 at 05:01)
 
-* [Recursors for degree inequalities](27561Recursorsfordegreeinequalities.html) (8 messages, latest: Nov 19 2018 at 10:12)
+* [Recursors for degree inequalities](27561Recursorsfordegreeinequalities.html) (8 messages, latest: Nov 19 2018 at 20:12)
 
-* [norm_num and fact](46429normnumandfact.html) (3 messages, latest: Nov 18 2018 at 17:31)
+* [norm_num and fact](46429normnumandfact.html) (3 messages, latest: Nov 19 2018 at 03:31)
 
-* [should this be dec_trivial?](38132shouldthisbedectrivial.html) (19 messages, latest: Nov 18 2018 at 17:01)
+* [should this be dec_trivial?](38132shouldthisbedectrivial.html) (19 messages, latest: Nov 19 2018 at 03:01)
 
-* [decidability](12456decidability.html) (49 messages, latest: Nov 18 2018 at 00:59)
+* [decidability](12456decidability.html) (49 messages, latest: Nov 18 2018 at 10:59)
 
-* [bounds](43084bounds.html) (41 messages, latest: Nov 17 2018 at 15:49)
+* [bounds](43084bounds.html) (41 messages, latest: Nov 18 2018 at 01:49)
 
-* [characterisation of reals](50225characterisationofreals.html) (1 message, latest: Nov 17 2018 at 09:32)
+* [characterisation of reals](50225characterisationofreals.html) (1 message, latest: Nov 17 2018 at 19:32)
 
-* [euclidean domain](48739euclideandomain.html) (19 messages, latest: Nov 15 2018 at 19:41)
+* [euclidean domain](48739euclideandomain.html) (19 messages, latest: Nov 16 2018 at 05:41)
 
-* [div_pos_iff_mul_pos golf](06287divposiffmulposgolf.html) (66 messages, latest: Nov 15 2018 at 17:39)
+* [div_pos_iff_mul_pos golf](06287divposiffmulposgolf.html) (66 messages, latest: Nov 16 2018 at 03:39)
 
-* [R-Mod](35744RMod.html) (2 messages, latest: Nov 15 2018 at 06:28)
+* [R-Mod](35744RMod.html) (2 messages, latest: Nov 15 2018 at 16:28)
 
-* [pow_lt_pow_of_lt golf](22790powltpowofltgolf.html) (53 messages, latest: Nov 14 2018 at 17:26)
+* [pow_lt_pow_of_lt golf](22790powltpowofltgolf.html) (53 messages, latest: Nov 15 2018 at 03:26)
 
-* [pow_pow](52204powpow.html) (4 messages, latest: Nov 14 2018 at 14:34)
+* [pow_pow](52204powpow.html) (4 messages, latest: Nov 15 2018 at 00:34)
 
-* [supr and range](18763suprandrange.html) (10 messages, latest: Nov 14 2018 at 09:56)
+* [supr and range](18763suprandrange.html) (10 messages, latest: Nov 14 2018 at 19:56)
 
-* [conv and associativity](82678convandassociativity.html) (6 messages, latest: Nov 13 2018 at 14:09)
+* [conv and associativity](82678convandassociativity.html) (6 messages, latest: Nov 14 2018 at 00:09)
 
-* [Gauss Lemma and Eisenstein's Criterion](34371GaussLemmaandEisensteinsCriterion.html) (6 messages, latest: Nov 13 2018 at 09:16)
+* [Gauss Lemma and Eisenstein's Criterion](34371GaussLemmaandEisensteinsCriterion.html) (6 messages, latest: Nov 13 2018 at 19:16)
 
-* [t2_space](45170t2space.html) (11 messages, latest: Nov 11 2018 at 02:44)
+* [t2_space](45170t2space.html) (11 messages, latest: Nov 11 2018 at 12:44)
 
-* [monoidal categories](93018monoidalcategories.html) (109 messages, latest: Nov 10 2018 at 22:32)
+* [monoidal categories](93018monoidalcategories.html) (109 messages, latest: Nov 11 2018 at 08:32)
 
-* [multivariate analysis](36508multivariateanalysis.html) (117 messages, latest: Nov 09 2018 at 09:42)
+* [multivariate analysis](36508multivariateanalysis.html) (117 messages, latest: Nov 09 2018 at 19:42)
 
-* [sheafification](41566sheafification.html) (7 messages, latest: Nov 09 2018 at 05:31)
+* [sheafification](41566sheafification.html) (7 messages, latest: Nov 09 2018 at 15:31)
 
-* [do non-cyclic groups exist?](01999dononcyclicgroupsexist.html) (104 messages, latest: Nov 08 2018 at 22:06)
+* [do non-cyclic groups exist?](01999dononcyclicgroupsexist.html) (104 messages, latest: Nov 09 2018 at 08:06)
 
-* [parametricity](32223parametricity.html) (4 messages, latest: Nov 08 2018 at 11:57)
+* [parametricity](32223parametricity.html) (4 messages, latest: Nov 08 2018 at 21:57)
 
-* [pfilter](81623pfilter.html) (1 message, latest: Nov 08 2018 at 10:33)
+* [pfilter](81623pfilter.html) (1 message, latest: Nov 08 2018 at 20:33)
 
-* [semimodules nein danke](58005semimodulesneindanke.html) (113 messages, latest: Nov 08 2018 at 10:02)
+* [semimodules nein danke](58005semimodulesneindanke.html) (113 messages, latest: Nov 08 2018 at 20:02)
 
-* [directed map](83619directedmap.html) (14 messages, latest: Nov 06 2018 at 17:17)
+* [directed map](83619directedmap.html) (14 messages, latest: Nov 07 2018 at 03:17)
 
-* [opposite category](16178oppositecategory.html) (2 messages, latest: Nov 05 2018 at 13:45)
+* [opposite category](16178oppositecategory.html) (2 messages, latest: Nov 05 2018 at 23:45)
 
-* [Why isn't mathlib in `src`?](61085Whyisntmathlibinsrc.html) (8 messages, latest: Nov 04 2018 at 22:37)
+* [Why isn't mathlib in `src`?](61085Whyisntmathlibinsrc.html) (8 messages, latest: Nov 05 2018 at 08:37)
 
-* [real powers](55685realpowers.html) (115 messages, latest: Nov 04 2018 at 17:59)
+* [real powers](55685realpowers.html) (115 messages, latest: Nov 05 2018 at 03:59)
 
-* [subring vs submodule](75284subringvssubmodule.html) (3 messages, latest: Nov 03 2018 at 18:45)
+* [subring vs submodule](75284subringvssubmodule.html) (3 messages, latest: Nov 04 2018 at 04:45)
 
-* [has_pow for fpow](86709haspowforfpow.html) (2 messages, latest: Nov 03 2018 at 14:28)
+* [has_pow for fpow](86709haspowforfpow.html) (2 messages, latest: Nov 04 2018 at 00:28)
 
-* [comm_ring.closure](74503commringclosure.html) (62 messages, latest: Oct 28 2018 at 11:29)
+* [comm_ring.closure](74503commringclosure.html) (62 messages, latest: Oct 28 2018 at 21:29)
 
-* [with_top "diamonds"](57602withtopdiamonds.html) (5 messages, latest: Oct 27 2018 at 13:22)
+* [with_top "diamonds"](57602withtopdiamonds.html) (5 messages, latest: Oct 27 2018 at 22:22)
 
-* [yoneda](02913yoneda.html) (276 messages, latest: Oct 23 2018 at 10:57)
+* [yoneda](02913yoneda.html) (276 messages, latest: Oct 23 2018 at 19:57)
 
-* [Cauchy sequences](40042Cauchysequences.html) (43 messages, latest: Oct 22 2018 at 10:40)
+* [Cauchy sequences](40042Cauchysequences.html) (43 messages, latest: Oct 22 2018 at 19:40)
 
-* [transport forever](35751transportforever.html) (105 messages, latest: Oct 20 2018 at 11:47)
+* [transport forever](35751transportforever.html) (105 messages, latest: Oct 20 2018 at 20:47)
 
-* [closure operators](52413closureoperators.html) (1 message, latest: Oct 20 2018 at 03:56)
+* [closure operators](52413closureoperators.html) (1 message, latest: Oct 20 2018 at 12:56)
 
-* [discrete spaces](72883discretespaces.html) (4 messages, latest: Oct 19 2018 at 15:54)
+* [discrete spaces](72883discretespaces.html) (4 messages, latest: Oct 20 2018 at 00:54)
 
-* [weird type class issue](80189weirdtypeclassissue.html) (21 messages, latest: Oct 19 2018 at 14:22)
+* [weird type class issue](80189weirdtypeclassissue.html) (21 messages, latest: Oct 19 2018 at 23:22)
 
-* [ultrafilters](89474ultrafilters.html) (8 messages, latest: Oct 19 2018 at 09:17)
+* [ultrafilters](89474ultrafilters.html) (8 messages, latest: Oct 19 2018 at 18:17)
 
-* [Hausdorffification](69945Hausdorffification.html) (38 messages, latest: Oct 19 2018 at 08:58)
+* [Hausdorffification](69945Hausdorffification.html) (38 messages, latest: Oct 19 2018 at 17:58)
 
-* [bundled bases](30861bundledbases.html) (45 messages, latest: Oct 18 2018 at 16:36)
+* [bundled bases](30861bundledbases.html) (45 messages, latest: Oct 19 2018 at 01:36)
 
-* [Perfect field](59310Perfectfield.html) (6 messages, latest: Oct 17 2018 at 20:16)
+* [Perfect field](59310Perfectfield.html) (6 messages, latest: Oct 18 2018 at 05:16)
 
-* [extend presheaf from basis](71101extendpresheaffrombasis.html) (267 messages, latest: Oct 17 2018 at 10:49)
+* [extend presheaf from basis](71101extendpresheaffrombasis.html) (267 messages, latest: Oct 17 2018 at 19:49)
 
-* [Hausdorff completion](17341Hausdorffcompletion.html) (24 messages, latest: Oct 15 2018 at 19:50)
+* [Hausdorff completion](17341Hausdorffcompletion.html) (24 messages, latest: Oct 16 2018 at 04:50)
 
-* [How much of analysis is formalised?](00982Howmuchofanalysisisformalised.html) (38 messages, latest: Oct 14 2018 at 22:43)
+* [How much of analysis is formalised?](00982Howmuchofanalysisisformalised.html) (38 messages, latest: Oct 15 2018 at 07:43)
 
-* [(M1M1) Mathematical Methods in Lean](47427M1M1MathematicalMethodsinLean.html) (32 messages, latest: Oct 14 2018 at 15:22)
+* [(M1M1) Mathematical Methods in Lean](47427M1M1MathematicalMethodsinLean.html) (32 messages, latest: Oct 15 2018 at 00:22)
 
-* [Defining instances](42829Defininginstances.html) (22 messages, latest: Oct 13 2018 at 19:04)
+* [Defining instances](42829Defininginstances.html) (22 messages, latest: Oct 14 2018 at 04:04)
 
-* [infinitary logic](12844infinitarylogic.html) (1 message, latest: Oct 11 2018 at 21:51)
+* [infinitary logic](12844infinitarylogic.html) (1 message, latest: Oct 12 2018 at 06:51)
 
-* [top mul groups](88290topmulgroups.html) (18 messages, latest: Oct 11 2018 at 20:08)
+* [top mul groups](88290topmulgroups.html) (18 messages, latest: Oct 12 2018 at 05:08)
 
-* [bicategories](73938bicategories.html) (18 messages, latest: Oct 10 2018 at 11:59)
+* [bicategories](73938bicategories.html) (18 messages, latest: Oct 10 2018 at 20:59)
 
-* [maths  multivariate analysis](51897mathsmultivariateanalysis.html) (1 message, latest: Oct 10 2018 at 11:09)
+* [maths  multivariate analysis](51897mathsmultivariateanalysis.html) (1 message, latest: Oct 10 2018 at 20:09)
 
-* [open_set](15006openset.html) (6 messages, latest: Oct 10 2018 at 08:07)
+* [open_set](15006openset.html) (6 messages, latest: Oct 10 2018 at 17:07)
 
-* [to_additive multiplicative](85433toadditivemultiplicative.html) (2 messages, latest: Oct 09 2018 at 15:43)
+* [to_additive multiplicative](85433toadditivemultiplicative.html) (2 messages, latest: Oct 10 2018 at 00:43)
 
-* [What's with the `_` in `zero_`?](32800Whatswiththeinzero.html) (4 messages, latest: Oct 07 2018 at 09:43)
+* [What's with the `_` in `zero_`?](32800Whatswiththeinzero.html) (4 messages, latest: Oct 07 2018 at 18:43)
 
-* [is_ideal.neg_iff](91735isidealnegiff.html) (8 messages, latest: Oct 06 2018 at 16:37)
+* [is_ideal.neg_iff](91735isidealnegiff.html) (8 messages, latest: Oct 07 2018 at 00:37)
 
-* [Nuances regarding naturality](23022Nuancesregardingnaturality.html) (23 messages, latest: Oct 05 2018 at 21:14)
+* [Nuances regarding naturality](23022Nuancesregardingnaturality.html) (23 messages, latest: Oct 06 2018 at 05:14)
 
-* [complex forms uniform space](66636complexformsuniformspace.html) (47 messages, latest: Oct 05 2018 at 09:41)
+* [complex forms uniform space](66636complexformsuniformspace.html) (47 messages, latest: Oct 05 2018 at 17:41)
 
-* [ordinals](46077ordinals.html) (12 messages, latest: Oct 04 2018 at 20:59)
+* [ordinals](46077ordinals.html) (12 messages, latest: Oct 05 2018 at 04:59)
 
-* [fundamental system of neighborhoods](56373fundamentalsystemofneighborhoods.html) (53 messages, latest: Oct 04 2018 at 17:04)
+* [fundamental system of neighborhoods](56373fundamentalsystemofneighborhoods.html) (53 messages, latest: Oct 05 2018 at 01:04)
 
-* [separated quotient](24083separatedquotient.html) (117 messages, latest: Oct 04 2018 at 08:41)
+* [separated quotient](24083separatedquotient.html) (117 messages, latest: Oct 04 2018 at 16:41)
 
-* [finset sup](62466finsetsup.html) (35 messages, latest: Oct 03 2018 at 22:18)
+* [finset sup](62466finsetsup.html) (35 messages, latest: Oct 04 2018 at 06:18)
 
-* [Gaussian measure](54574Gaussianmeasure.html) (8 messages, latest: Oct 02 2018 at 20:46)
+* [Gaussian measure](54574Gaussianmeasure.html) (8 messages, latest: Oct 03 2018 at 04:46)
 
-* [circular imports in mathlib](90492circularimportsinmathlib.html) (1 message, latest: Oct 02 2018 at 15:58)
+* [circular imports in mathlib](90492circularimportsinmathlib.html) (1 message, latest: Oct 02 2018 at 23:58)
 
-* [Compact-open topology](61444Compactopentopology.html) (17 messages, latest: Oct 01 2018 at 14:51)
+* [Compact-open topology](61444Compactopentopology.html) (17 messages, latest: Oct 01 2018 at 22:51)
 
-* [Suggestions for maths/computing projects](34767Suggestionsformathscomputingprojects.html) (43 messages, latest: Sep 30 2018 at 17:11)
+* [Suggestions for maths/computing projects](34767Suggestionsformathscomputingprojects.html) (43 messages, latest: Oct 01 2018 at 01:11)
 
-* [more int nat moans and golf plea](42973moreintnatmoansandgolfplea.html) (150 messages, latest: Sep 30 2018 at 13:36)
+* [more int nat moans and golf plea](42973moreintnatmoansandgolfplea.html) (150 messages, latest: Sep 30 2018 at 21:36)
 
-* [complete_groups](70297completegroups.html) (31 messages, latest: Sep 30 2018 at 00:28)
+* [complete_groups](70297completegroups.html) (31 messages, latest: Sep 30 2018 at 08:28)
 
-* [ideal restatement](98060idealrestatement.html) (3 messages, latest: Sep 29 2018 at 17:02)
+* [ideal restatement](98060idealrestatement.html) (3 messages, latest: Sep 30 2018 at 01:02)
 
-* [perm vs sym](05431permvssym.html) (4 messages, latest: Sep 28 2018 at 16:04)
+* [perm vs sym](05431permvssym.html) (4 messages, latest: Sep 29 2018 at 00:04)
 
-* [Separation stuff](94495Separationstuff.html) (350 messages, latest: Sep 27 2018 at 10:58)
+* [Separation stuff](94495Separationstuff.html) (350 messages, latest: Sep 27 2018 at 18:58)
 
-* [Continuous Functions Preserve Limits](29167ContinuousFunctionsPreserveLimits.html) (46 messages, latest: Sep 26 2018 at 17:49)
+* [Continuous Functions Preserve Limits](29167ContinuousFunctionsPreserveLimits.html) (46 messages, latest: Sep 27 2018 at 01:49)
 
-* [Uniformly Continuous on Metric Spaces](20349UniformlyContinuousonMetricSpaces.html) (8 messages, latest: Sep 26 2018 at 15:17)
+* [Uniformly Continuous on Metric Spaces](20349UniformlyContinuousonMetricSpaces.html) (8 messages, latest: Sep 26 2018 at 23:17)
 
-* [compact spaces](28743compactspaces.html) (4 messages, latest: Sep 23 2018 at 00:32)
+* [compact spaces](28743compactspaces.html) (4 messages, latest: Sep 23 2018 at 08:32)
 
-* [Matroids in lean](31547Matroidsinlean.html) (4 messages, latest: Sep 21 2018 at 23:50)
+* [Matroids in lean](31547Matroidsinlean.html) (4 messages, latest: Sep 22 2018 at 07:50)
 
-* [homeos](77548homeos.html) (5 messages, latest: Sep 20 2018 at 22:12)
+* [homeos](77548homeos.html) (5 messages, latest: Sep 21 2018 at 06:12)
 
-* [quotient_module breakage](96945quotientmodulebreakage.html) (24 messages, latest: Sep 20 2018 at 21:39)
+* [quotient_module breakage](96945quotientmodulebreakage.html) (24 messages, latest: Sep 21 2018 at 05:39)
 
-* [Sets and boolean reflection](52606Setsandbooleanreflection.html) (7 messages, latest: Sep 19 2018 at 22:02)
+* [Sets and boolean reflection](52606Setsandbooleanreflection.html) (7 messages, latest: Sep 20 2018 at 06:02)
 
-* [physics attack](44924physicsattack.html) (26 messages, latest: Sep 19 2018 at 15:39)
+* [physics attack](44924physicsattack.html) (26 messages, latest: Sep 19 2018 at 23:39)
 
-* [zero in subring](12722zeroinsubring.html) (1 message, latest: Sep 18 2018 at 17:13)
+* [zero in subring](12722zeroinsubring.html) (1 message, latest: Sep 19 2018 at 01:13)
 
-* [transfinite compositions](50863transfinitecompositions.html) (14 messages, latest: Sep 18 2018 at 01:15)
+* [transfinite compositions](50863transfinitecompositions.html) (14 messages, latest: Sep 18 2018 at 09:15)
 
-* [well-founded recursion & lexicographic ordering ?](52642wellfoundedrecursionlexicographicordering.html) (7 messages, latest: Sep 14 2018 at 11:44)
+* [well-founded recursion & lexicographic ordering ?](52642wellfoundedrecursionlexicographicordering.html) (7 messages, latest: Sep 14 2018 at 19:44)
 
-* [modulo group action](14012modulogroupaction.html) (18 messages, latest: Sep 13 2018 at 22:27)
+* [modulo group action](14012modulogroupaction.html) (18 messages, latest: Sep 14 2018 at 06:27)
 
-* [connected categories](43130connectedcategories.html) (4 messages, latest: Sep 12 2018 at 19:43)
+* [connected categories](43130connectedcategories.html) (4 messages, latest: Sep 13 2018 at 03:43)
 
-* [zero ring](29201zeroring.html) (23 messages, latest: Sep 12 2018 at 19:10)
+* [zero ring](29201zeroring.html) (23 messages, latest: Sep 13 2018 at 03:10)
 
-* [Hensel's lemma](57510Henselslemma.html) (16 messages, latest: Sep 12 2018 at 11:09)
+* [Hensel's lemma](57510Henselslemma.html) (16 messages, latest: Sep 12 2018 at 19:09)
 
-* [matrix updates](36524matrixupdates.html) (8 messages, latest: Sep 12 2018 at 06:57)
+* [matrix updates](36524matrixupdates.html) (8 messages, latest: Sep 12 2018 at 14:57)
 
-* [naive norm-num](31149naivenormnum.html) (1 message, latest: Sep 11 2018 at 16:15)
+* [naive norm-num](31149naivenormnum.html) (1 message, latest: Sep 12 2018 at 00:15)
 
-* [f*X^n=0 -> f=0](66112fXn0f0.html) (64 messages, latest: Sep 11 2018 at 14:57)
+* [f*X^n=0 -> f=0](66112fXn0f0.html) (64 messages, latest: Sep 11 2018 at 22:57)
 
-* [categories](78247categories.html) (76 messages, latest: Sep 10 2018 at 04:40)
+* [categories](78247categories.html) (76 messages, latest: Sep 10 2018 at 12:40)
 
-* [leaking construction](38567leakingconstruction.html) (18 messages, latest: Sep 10 2018 at 04:08)
+* [leaking construction](38567leakingconstruction.html) (18 messages, latest: Sep 10 2018 at 12:08)
 
-* [regular cardinals](55460regularcardinals.html) (94 messages, latest: Sep 09 2018 at 23:34)
+* [regular cardinals](55460regularcardinals.html) (94 messages, latest: Sep 10 2018 at 07:34)
 
-* [making an equiv](63153makinganequiv.html) (21 messages, latest: Sep 09 2018 at 16:04)
+* [making an equiv](63153makinganequiv.html) (21 messages, latest: Sep 10 2018 at 00:04)
 
-* [degrees of polynomials](43468degreesofpolynomials.html) (3 messages, latest: Sep 07 2018 at 13:49)
+* [degrees of polynomials](43468degreesofpolynomials.html) (3 messages, latest: Sep 07 2018 at 21:49)
 
-* [int.coe_nat_max](54424intcoenatmax.html) (2 messages, latest: Sep 06 2018 at 19:28)
+* [int.coe_nat_max](54424intcoenatmax.html) (2 messages, latest: Sep 07 2018 at 03:28)
 
-* [Is mathlib broken currently? (no)](69812Ismathlibbrokencurrentlyno.html) (10 messages, latest: Sep 06 2018 at 11:03)
+* [Is mathlib broken currently? (no)](69812Ismathlibbrokencurrentlyno.html) (10 messages, latest: Sep 06 2018 at 19:03)
 
-* [isomorphism theorems](04578isomorphismtheorems.html) (143 messages, latest: Sep 05 2018 at 21:17)
+* [isomorphism theorems](04578isomorphismtheorems.html) (143 messages, latest: Sep 06 2018 at 05:17)
 
-* [noetherian modules](90695noetherianmodules.html) (86 messages, latest: Sep 05 2018 at 12:58)
+* [noetherian modules](90695noetherianmodules.html) (86 messages, latest: Sep 05 2018 at 20:58)
 
-* [partial functions again](07463partialfunctionsagain.html) (48 messages, latest: Sep 05 2018 at 09:20)
+* [partial functions again](07463partialfunctionsagain.html) (48 messages, latest: Sep 05 2018 at 17:20)
 
-* [limits notations](28754limitsnotations.html) (1 message, latest: Sep 04 2018 at 21:43)
+* [limits notations](28754limitsnotations.html) (1 message, latest: Sep 05 2018 at 05:43)
 
-* [topological groups](71870topologicalgroups.html) (1 message, latest: Sep 03 2018 at 22:23)
+* [topological groups](71870topologicalgroups.html) (1 message, latest: Sep 04 2018 at 06:23)
 
-* [is there any better way?](01043isthereanybetterway.html) (20 messages, latest: Sep 03 2018 at 21:01)
+* [is there any better way?](01043isthereanybetterway.html) (20 messages, latest: Sep 04 2018 at 05:01)
 
-* [how to use the pow_add theorem](13714howtousethepowaddtheorem.html) (22 messages, latest: Sep 03 2018 at 19:17)
+* [how to use the pow_add theorem](13714howtousethepowaddtheorem.html) (22 messages, latest: Sep 04 2018 at 03:17)
 
-* [UFD](40000UFD.html) (39 messages, latest: Sep 03 2018 at 06:15)
+* [UFD](40000UFD.html) (39 messages, latest: Sep 03 2018 at 14:15)
 
-* [`is_group_hom` a class?](95042isgrouphomaclass.html) (4 messages, latest: Sep 02 2018 at 20:16)
+* [`is_group_hom` a class?](95042isgrouphomaclass.html) (4 messages, latest: Sep 03 2018 at 04:16)
 
-* [additive quotient groups?](63939additivequotientgroups.html) (1 message, latest: Sep 01 2018 at 22:22)
+* [additive quotient groups?](63939additivequotientgroups.html) (1 message, latest: Sep 02 2018 at 06:22)
 
-* [GCD](94255GCD.html) (38 messages, latest: Sep 01 2018 at 21:06)
+* [GCD](94255GCD.html) (38 messages, latest: Sep 02 2018 at 05:06)
 
-* [locally ringed spaces](49769locallyringedspaces.html) (24 messages, latest: Sep 01 2018 at 13:53)
+* [locally ringed spaces](49769locallyringedspaces.html) (24 messages, latest: Sep 01 2018 at 21:53)
 
-* [directed sets](95204directedsets.html) (4 messages, latest: Sep 01 2018 at 13:14)
+* [directed sets](95204directedsets.html) (4 messages, latest: Sep 01 2018 at 21:14)
 
-* [how to prove of find simple theorem](28850howtoproveoffindsimpletheorem.html) (8 messages, latest: Aug 31 2018 at 22:35)
+* [how to prove of find simple theorem](28850howtoproveoffindsimpletheorem.html) (8 messages, latest: Sep 01 2018 at 06:35)
 
-* [lean-stacks-project](62843leanstacksproject.html) (2 messages, latest: Aug 30 2018 at 21:53)
+* [lean-stacks-project](62843leanstacksproject.html) (2 messages, latest: Aug 31 2018 at 05:53)
 
-* [0<=d<3 implies d=0,1,2](268440d3impliesd012.html) (26 messages, latest: Aug 30 2018 at 17:40)
+* [0<=d<3 implies d=0,1,2](268440d3impliesd012.html) (26 messages, latest: Aug 31 2018 at 01:40)
 
-* [Isabelle](94306Isabelle.html) (3 messages, latest: Aug 27 2018 at 12:01)
+* [Isabelle](94306Isabelle.html) (3 messages, latest: Aug 27 2018 at 20:01)
 
-* [list of mathlib targets](10733listofmathlibtargets.html) (62 messages, latest: Aug 26 2018 at 15:08)
+* [list of mathlib targets](10733listofmathlibtargets.html) (62 messages, latest: Aug 26 2018 at 23:08)
 
-* [Is every complete lattice compact?](84717Iseverycompletelatticecompact.html) (7 messages, latest: Aug 24 2018 at 09:16)
+* [Is every complete lattice compact?](84717Iseverycompletelatticecompact.html) (7 messages, latest: Aug 24 2018 at 17:16)
 
-* [cardinals and ordinals](03937cardinalsandordinals.html) (11 messages, latest: Aug 23 2018 at 00:33)
+* [cardinals and ordinals](03937cardinalsandordinals.html) (11 messages, latest: Aug 23 2018 at 08:33)
 
-* [Well founded](41530Wellfounded.html) (6 messages, latest: Aug 22 2018 at 20:24)
+* [Well founded](41530Wellfounded.html) (6 messages, latest: Aug 23 2018 at 04:24)
 
-* [notation for finite free modules](10574notationforfinitefreemodules.html) (5 messages, latest: Aug 22 2018 at 16:34)
+* [notation for finite free modules](10574notationforfinitefreemodules.html) (5 messages, latest: Aug 23 2018 at 00:34)
 
-* [analysis refactor](10715analysisrefactor.html) (26 messages, latest: Aug 22 2018 at 16:33)
+* [analysis refactor](10715analysisrefactor.html) (26 messages, latest: Aug 23 2018 at 00:33)
 
-* [subtype instance](53986subtypeinstance.html) (8 messages, latest: Aug 22 2018 at 07:25)
+* [subtype instance](53986subtypeinstance.html) (8 messages, latest: Aug 22 2018 at 15:25)
 
-* [filter p + fiter not p](62365filterpfiternotp.html) (49 messages, latest: Aug 22 2018 at 07:23)
+* [filter p + fiter not p](62365filterpfiternotp.html) (49 messages, latest: Aug 22 2018 at 15:23)
 
-* [avoiding subtype.eq](39810avoidingsubtypeeq.html) (19 messages, latest: Aug 21 2018 at 23:53)
+* [avoiding subtype.eq](39810avoidingsubtypeeq.html) (19 messages, latest: Aug 22 2018 at 07:53)
 
-* [homology](70927homology.html) (10 messages, latest: Aug 21 2018 at 22:34)
+* [homology](70927homology.html) (10 messages, latest: Aug 22 2018 at 06:34)
 
-* [monotonic isomorphism between finite sets](29305monotonicisomorphismbetweenfinitesets.html) (19 messages, latest: Aug 21 2018 at 14:39)
+* [monotonic isomorphism between finite sets](29305monotonicisomorphismbetweenfinitesets.html) (19 messages, latest: Aug 21 2018 at 22:39)
 
-* [topology generated by an order](28435topologygeneratedbyanorder.html) (13 messages, latest: Aug 16 2018 at 13:10)
+* [topology generated by an order](28435topologygeneratedbyanorder.html) (13 messages, latest: Aug 16 2018 at 21:10)
 
-* [Dirichlet convolution](80921Dirichletconvolution.html) (15 messages, latest: Aug 15 2018 at 20:37)
+* [Dirichlet convolution](80921Dirichletconvolution.html) (15 messages, latest: Aug 16 2018 at 04:37)
 
-* [compact subset of hausdorff space is closed](78039compactsubsetofhausdorffspaceisclosed.html) (41 messages, latest: Aug 15 2018 at 01:19)
+* [compact subset of hausdorff space is closed](78039compactsubsetofhausdorffspaceisclosed.html) (41 messages, latest: Aug 15 2018 at 09:19)
 
-* [proving size at least 3](64802provingsizeatleast3.html) (23 messages, latest: Aug 14 2018 at 21:46)
+* [proving size at least 3](64802provingsizeatleast3.html) (23 messages, latest: Aug 15 2018 at 05:46)
 
-* [does local increasing class instance depth break mathlib rul](96627doeslocalincreasingclassinstancedepthbreakmathlibrul.html) (2 messages, latest: Aug 13 2018 at 23:24)
+* [does local increasing class instance depth break mathlib rul](96627doeslocalincreasingclassinstancedepthbreakmathlibrul.html) (2 messages, latest: Aug 14 2018 at 07:24)
 
-* [norm_num question and comment](66314normnumquestionandcomment.html) (1 message, latest: Aug 13 2018 at 22:30)
+* [norm_num question and comment](66314normnumquestionandcomment.html) (1 message, latest: Aug 14 2018 at 06:30)
 
-* [Normal submonoids](64685Normalsubmonoids.html) (23 messages, latest: Aug 13 2018 at 12:46)
+* [Normal submonoids](64685Normalsubmonoids.html) (23 messages, latest: Aug 13 2018 at 20:46)
 
-* [divide by zero](82673dividebyzero.html) (3 messages, latest: Aug 11 2018 at 06:51)
+* [divide by zero](82673dividebyzero.html) (3 messages, latest: Aug 11 2018 at 14:51)
 
-* [teaching use of quotients in Lean](94921teachinguseofquotientsinLean.html) (115 messages, latest: Aug 09 2018 at 23:04)
+* [teaching use of quotients in Lean](94921teachinguseofquotientsinLean.html) (115 messages, latest: Aug 10 2018 at 07:04)
 
-* [computable division by non-zero real](85801computabledivisionbynonzeroreal.html) (69 messages, latest: Aug 09 2018 at 20:51)
+* [computable division by non-zero real](85801computabledivisionbynonzeroreal.html) (69 messages, latest: Aug 10 2018 at 04:51)
 
-* [is_homotopic_to](61200ishomotopicto.html) (11 messages, latest: Aug 09 2018 at 16:07)
+* [is_homotopic_to](61200ishomotopicto.html) (11 messages, latest: Aug 10 2018 at 00:07)
 
-* [reals are unique complete ordered field](87401realsareuniquecompleteorderedfield.html) (90 messages, latest: Aug 09 2018 at 15:26)
+* [reals are unique complete ordered field](87401realsareuniquecompleteorderedfield.html) (90 messages, latest: Aug 09 2018 at 23:26)
 
-* [add_comm_group tactic](64217addcommgrouptactic.html) (34 messages, latest: Aug 08 2018 at 23:38)
+* [add_comm_group tactic](64217addcommgrouptactic.html) (34 messages, latest: Aug 09 2018 at 07:38)
 
-* [d | a -> d | (a * b)?](31786dadab.html) (2 messages, latest: Aug 08 2018 at 18:38)
+* [d | a -> d | (a * b)?](31786dadab.html) (2 messages, latest: Aug 09 2018 at 02:38)
 
-* [witt vectors](84655wittvectors.html) (136 messages, latest: Aug 08 2018 at 15:42)
+* [witt vectors](84655wittvectors.html) (136 messages, latest: Aug 08 2018 at 23:42)
 
-* [filter disease](14085filterdisease.html) (29 messages, latest: Aug 08 2018 at 13:21)
+* [filter disease](14085filterdisease.html) (29 messages, latest: Aug 08 2018 at 21:21)
 
-* [finset with two elements](18749finsetwithtwoelements.html) (13 messages, latest: Aug 08 2018 at 12:25)
+* [finset with two elements](18749finsetwithtwoelements.html) (13 messages, latest: Aug 08 2018 at 20:25)
 
-* [How to parse this example?](16752Howtoparsethisexample.html) (6 messages, latest: Aug 08 2018 at 02:24)
+* [How to parse this example?](16752Howtoparsethisexample.html) (6 messages, latest: Aug 08 2018 at 10:24)
 
-* [Trivial things about convergent power series](50551Trivialthingsaboutconvergentpowerseries.html) (4 messages, latest: Aug 07 2018 at 22:25)
+* [Trivial things about convergent power series](50551Trivialthingsaboutconvergentpowerseries.html) (4 messages, latest: Aug 08 2018 at 06:25)
 
-* [things to formalise](92147thingstoformalise.html) (23 messages, latest: Aug 07 2018 at 22:25)
+* [things to formalise](92147thingstoformalise.html) (23 messages, latest: Aug 08 2018 at 06:25)
 
-* [Proving degree lemmas for polynomials](90767Provingdegreelemmasforpolynomials.html) (4 messages, latest: Aug 07 2018 at 22:09)
+* [Proving degree lemmas for polynomials](90767Provingdegreelemmasforpolynomials.html) (4 messages, latest: Aug 08 2018 at 06:09)
 
-* [Conjecture that Lean Prover is bivalent](07507ConjecturethatLeanProverisbivalent.html) (1 message, latest: Aug 07 2018 at 19:12)
+* [Conjecture that Lean Prover is bivalent](07507ConjecturethatLeanProverisbivalent.html) (1 message, latest: Aug 08 2018 at 03:12)
 
-* [ring hom induces ring hom between mv_polynomials](59703ringhominducesringhombetweenmvpolynomials.html) (130 messages, latest: Aug 07 2018 at 11:47)
+* [ring hom induces ring hom between mv_polynomials](59703ringhominducesringhombetweenmvpolynomials.html) (130 messages, latest: Aug 07 2018 at 19:47)
 
-* [↑(m * n) = ↑m * ↑n](87620mnmn.html) (20 messages, latest: Aug 06 2018 at 12:41)
+* [↑(m * n) = ↑m * ↑n](87620mnmn.html) (20 messages, latest: Aug 06 2018 at 20:41)
 
-* [partial functions on quotient](37821partialfunctionsonquotient.html) (15 messages, latest: Aug 05 2018 at 20:40)
+* [partial functions on quotient](37821partialfunctionsonquotient.html) (15 messages, latest: Aug 06 2018 at 04:40)
 
-* [lattice.le_sup_left' a.k.a. smileys in mathlib](68291latticelesupleftakasmileysinmathlib.html) (22 messages, latest: Aug 05 2018 at 15:02)
+* [lattice.le_sup_left' a.k.a. smileys in mathlib](68291latticelesupleftakasmileysinmathlib.html) (22 messages, latest: Aug 05 2018 at 23:02)
 
-* [Coercions N->Z->Q->R->C](17888CoercionsNZQRC.html) (82 messages, latest: Aug 04 2018 at 20:15)
+* [Coercions N->Z->Q->R->C](17888CoercionsNZQRC.html) (82 messages, latest: Aug 05 2018 at 04:15)
 
-* [¬ (2 ∣ 5)](9448425.html) (50 messages, latest: Aug 04 2018 at 08:44)
+* [¬ (2 ∣ 5)](9448425.html) (50 messages, latest: Aug 04 2018 at 16:44)
 
-* [Independent forall on nat](07055Independentforallonnat.html) (24 messages, latest: Aug 04 2018 at 00:35)
+* [Independent forall on nat](07055Independentforallonnat.html) (24 messages, latest: Aug 04 2018 at 08:35)
 
-* [order of zmod n](56858orderofzmodn.html) (17 messages, latest: Aug 02 2018 at 13:35)
+* [order of zmod n](56858orderofzmodn.html) (17 messages, latest: Aug 02 2018 at 21:35)
 
-* [sigma](30994sigma.html) (8 messages, latest: Aug 01 2018 at 17:53)
+* [sigma](30994sigma.html) (8 messages, latest: Aug 02 2018 at 01:53)
 
-* [ZMOD](05371ZMOD.html) (14 messages, latest: Aug 01 2018 at 13:01)
+* [ZMOD](05371ZMOD.html) (14 messages, latest: Aug 01 2018 at 21:01)
 
-* [int.coe_nat_mul isn't nat.cast_mul](70542intcoenatmulisntnatcastmul.html) (5 messages, latest: Aug 01 2018 at 03:33)
+* [int.coe_nat_mul isn't nat.cast_mul](70542intcoenatmulisntnatcastmul.html) (5 messages, latest: Aug 01 2018 at 11:33)
 
-* [continuous class](65806continuousclass.html) (12 messages, latest: Jul 30 2018 at 14:43)
+* [continuous class](65806continuousclass.html) (12 messages, latest: Jul 30 2018 at 22:43)
 
-* [Basic finite groups](74274Basicfinitegroups.html) (227 messages, latest: Jul 30 2018 at 09:42)
+* [Basic finite groups](74274Basicfinitegroups.html) (227 messages, latest: Jul 30 2018 at 17:42)
 
-* [Defining cyclic groups](66460Definingcyclicgroups.html) (31 messages, latest: Jul 29 2018 at 15:17)
+* [Defining cyclic groups](66460Definingcyclicgroups.html) (31 messages, latest: Jul 29 2018 at 23:17)
 
-* [Silly function on the reals](45033Sillyfunctiononthereals.html) (5 messages, latest: Jul 28 2018 at 21:13)
+* [Silly function on the reals](45033Sillyfunctiononthereals.html) (5 messages, latest: Jul 29 2018 at 05:13)
 
-* [trash](83523trash.html) (3 messages, latest: Jul 28 2018 at 20:42)
+* [trash](83523trash.html) (3 messages, latest: Jul 29 2018 at 04:42)
 
-* [prime 617 challenge](70527prime617challenge.html) (23 messages, latest: Jul 28 2018 at 09:57)
+* [prime 617 challenge](70527prime617challenge.html) (23 messages, latest: Jul 28 2018 at 17:57)
 
-* [Topology - Beginner](29013TopologyBeginner.html) (101 messages, latest: Jul 27 2018 at 17:02)
+* [Topology - Beginner](29013TopologyBeginner.html) (101 messages, latest: Jul 28 2018 at 01:02)
 
-* [category theory PR](34396categorytheoryPR.html) (17 messages, latest: Jul 26 2018 at 15:49)
+* [category theory PR](34396categorytheoryPR.html) (17 messages, latest: Jul 26 2018 at 23:49)
 
-* [Constructive tensor product](24838Constructivetensorproduct.html) (13 messages, latest: Jul 25 2018 at 20:26)
+* [Constructive tensor product](24838Constructivetensorproduct.html) (13 messages, latest: Jul 26 2018 at 04:26)
 
-* [products of Cauchy filters](64576productsofCauchyfilters.html) (44 messages, latest: Jul 25 2018 at 11:14)
+* [products of Cauchy filters](64576productsofCauchyfilters.html) (44 messages, latest: Jul 25 2018 at 19:14)
 
-* [product topology](91327producttopology.html) (18 messages, latest: Jul 25 2018 at 00:43)
+* [product topology](91327producttopology.html) (18 messages, latest: Jul 25 2018 at 08:43)
 
-* [delta rings](47790deltarings.html) (180 messages, latest: Jul 23 2018 at 19:25)
+* [delta rings](47790deltarings.html) (180 messages, latest: Jul 24 2018 at 03:25)
 
-* [canonical ring hom from int to R](96209canonicalringhomfrominttoR.html) (12 messages, latest: Jul 23 2018 at 10:51)
+* [canonical ring hom from int to R](96209canonicalringhomfrominttoR.html) (12 messages, latest: Jul 23 2018 at 18:51)
 
-* [rings and ideals](48521ringsandideals.html) (9 messages, latest: Jul 21 2018 at 20:05)
+* [rings and ideals](48521ringsandideals.html) (9 messages, latest: Jul 22 2018 at 04:05)
 
-* [euclidean domains](39702euclideandomains.html) (12 messages, latest: Jul 20 2018 at 15:14)
+* [euclidean domains](39702euclideandomains.html) (12 messages, latest: Jul 20 2018 at 23:14)
 
-* [univeral property of quotient abelian groups](08774univeralpropertyofquotientabeliangroups.html) (34 messages, latest: Jul 20 2018 at 13:03)
+* [univeral property of quotient abelian groups](08774univeralpropertyofquotientabeliangroups.html) (34 messages, latest: Jul 20 2018 at 21:03)
 
-* [universal properties again](46183universalpropertiesagain.html) (40 messages, latest: Jul 19 2018 at 23:14)
+* [universal properties again](46183universalpropertiesagain.html) (40 messages, latest: Jul 20 2018 at 07:14)
 
-* [polynomial](94981polynomial.html) (16 messages, latest: Jul 19 2018 at 18:29)
+* [polynomial](94981polynomial.html) (16 messages, latest: Jul 20 2018 at 02:29)
 
-* [class vs def again](40911classvsdefagain.html) (51 messages, latest: Jul 19 2018 at 16:40)
+* [class vs def again](40911classvsdefagain.html) (51 messages, latest: Jul 20 2018 at 00:40)
 
-* [algebra on subtypes](42731algebraonsubtypes.html) (29 messages, latest: Jul 19 2018 at 13:48)
+* [algebra on subtypes](42731algebraonsubtypes.html) (29 messages, latest: Jul 19 2018 at 21:48)
 
-* [classically unconstructive](32161classicallyunconstructive.html) (1 message, latest: Jul 18 2018 at 08:09)
+* [classically unconstructive](32161classicallyunconstructive.html) (1 message, latest: Jul 18 2018 at 16:09)
 
-* [constructive zerology](67365constructivezerology.html) (58 messages, latest: Jul 17 2018 at 22:14)
+* [constructive zerology](67365constructivezerology.html) (58 messages, latest: Jul 18 2018 at 06:14)
 
-* [extensions](18193extensions.html) (26 messages, latest: Jul 16 2018 at 22:26)
+* [extensions](18193extensions.html) (26 messages, latest: Jul 17 2018 at 06:26)
 
-* [quotient topology](39703quotienttopology.html) (2 messages, latest: Jul 16 2018 at 16:14)
+* [quotient topology](39703quotienttopology.html) (2 messages, latest: Jul 17 2018 at 00:14)
 
-* [Proof depending on n mod 2](52882Proofdependingonnmod2.html) (37 messages, latest: Jul 16 2018 at 14:53)
+* [Proof depending on n mod 2](52882Proofdependingonnmod2.html) (37 messages, latest: Jul 16 2018 at 22:53)
 
-* [trunc](32653trunc.html) (7 messages, latest: Jul 15 2018 at 22:39)
+* [trunc](32653trunc.html) (7 messages, latest: Jul 16 2018 at 06:39)
 
-* [uniform lemma](48141uniformlemma.html) (13 messages, latest: Jul 15 2018 at 19:55)
+* [uniform lemma](48141uniformlemma.html) (13 messages, latest: Jul 16 2018 at 03:55)
 
-* [Explicit `is_submodule`](03150Explicitissubmodule.html) (1 message, latest: Jul 15 2018 at 01:08)
+* [Explicit `is_submodule`](03150Explicitissubmodule.html) (1 message, latest: Jul 15 2018 at 09:08)
 
-* [basic complex number computations](65578basiccomplexnumbercomputations.html) (7 messages, latest: Jul 11 2018 at 17:33)
+* [basic complex number computations](65578basiccomplexnumbercomputations.html) (7 messages, latest: Jul 12 2018 at 01:33)
 
-* [additive group homs](55375additivegrouphoms.html) (184 messages, latest: Jul 10 2018 at 10:42)
+* [additive group homs](55375additivegrouphoms.html) (184 messages, latest: Jul 10 2018 at 18:42)
 
-* [`has_one` for `with_bot nat`](74056hasoneforwithbotnat.html) (1 message, latest: Jul 06 2018 at 19:38)
+* [`has_one` for `with_bot nat`](74056hasoneforwithbotnat.html) (1 message, latest: Jul 07 2018 at 03:38)
 
-* [atlases](73742atlases.html) (100 messages, latest: Jul 02 2018 at 11:48)
+* [atlases](73742atlases.html) (100 messages, latest: Jul 02 2018 at 19:48)
 
-* [completion of uniform spaces](66991completionofuniformspaces.html) (2 messages, latest: Jun 26 2018 at 02:16)
+* [completion of uniform spaces](66991completionofuniformspaces.html) (2 messages, latest: Jun 26 2018 at 10:16)
 
-* [products of groups?](24585productsofgroups.html) (5 messages, latest: Jun 25 2018 at 14:21)
+* [products of groups?](24585productsofgroups.html) (5 messages, latest: Jun 25 2018 at 22:21)
 
-* [image vs map and injective](43359imagevsmapandinjective.html) (13 messages, latest: Jun 25 2018 at 09:32)
+* [image vs map and injective](43359imagevsmapandinjective.html) (13 messages, latest: Jun 25 2018 at 17:32)
 
-* [vector spaces vs modules over a field](28918vectorspacesvsmodulesoverafield.html) (45 messages, latest: Jun 18 2018 at 20:53)
+* [vector spaces vs modules over a field](28918vectorspacesvsmodulesoverafield.html) (45 messages, latest: Jun 19 2018 at 04:53)
 
-* [filters inf inf](40788filtersinfinf.html) (43 messages, latest: Jun 17 2018 at 21:45)
+* [filters inf inf](40788filtersinfinf.html) (43 messages, latest: Jun 18 2018 at 05:45)
 
-* [Transfer homomorphism](05512Transferhomomorphism.html) (119 messages, latest: Jun 16 2018 at 12:24)
+* [Transfer homomorphism](05512Transferhomomorphism.html) (119 messages, latest: Jun 16 2018 at 20:24)
 
-* [induced, coinduced, ...](54381inducedcoinduced.html) (30 messages, latest: Jun 15 2018 at 15:06)
+* [induced, coinduced, ...](54381inducedcoinduced.html) (30 messages, latest: Jun 15 2018 at 23:06)
 
-* [Lie algebras](68348Liealgebras.html) (42 messages, latest: Jun 13 2018 at 12:11)
+* [Lie algebras](68348Liealgebras.html) (42 messages, latest: Jun 13 2018 at 20:11)
 
-* [how does tactic.ring work?](36914howdoestacticringwork.html) (4 messages, latest: Jun 13 2018 at 12:04)
+* [how does tactic.ring work?](36914howdoestacticringwork.html) (4 messages, latest: Jun 13 2018 at 20:04)
 
-* [Binomial theorem](30944Binomialtheorem.html) (11 messages, latest: Jun 11 2018 at 20:59)
+* [Binomial theorem](30944Binomialtheorem.html) (11 messages, latest: Jun 12 2018 at 04:59)
 
-* [nat.pow and ring](53771natpowandring.html) (14 messages, latest: Jun 09 2018 at 16:51)
+* [nat.pow and ring](53771natpowandring.html) (14 messages, latest: Jun 10 2018 at 00:51)
 
-* [Model for ZFC-I in python](84395ModelforZFCIinpython.html) (9 messages, latest: Jun 09 2018 at 00:39)
+* [Model for ZFC-I in python](84395ModelforZFCIinpython.html) (9 messages, latest: Jun 09 2018 at 08:39)
 
-* [subrings](72014subrings.html) (113 messages, latest: Jun 08 2018 at 19:00)
+* [subrings](72014subrings.html) (113 messages, latest: Jun 09 2018 at 03:00)
 
-* [computers are smart??](40384computersaresmart.html) (6 messages, latest: Jun 05 2018 at 13:53)
+* [computers are smart??](40384computersaresmart.html) (6 messages, latest: Jun 05 2018 at 21:53)
 
-* [The real numbers](21890Therealnumbers.html) (854 messages, latest: Jun 04 2018 at 01:03)
+* [The real numbers](21890Therealnumbers.html) (854 messages, latest: Jun 04 2018 at 09:03)
 
-* [travis caching](16807traviscaching.html) (2 messages, latest: Jun 02 2018 at 04:45)
+* [travis caching](16807traviscaching.html) (2 messages, latest: Jun 02 2018 at 12:45)
 
-* [homeomorphisms](46395homeomorphisms.html) (24 messages, latest: Jun 02 2018 at 00:27)
+* [homeomorphisms](46395homeomorphisms.html) (24 messages, latest: Jun 02 2018 at 08:27)
 
-* [Cauchy-Schwarz calc](20928CauchySchwarzcalc.html) (96 messages, latest: May 30 2018 at 21:14)
+* [Cauchy-Schwarz calc](20928CauchySchwarzcalc.html) (96 messages, latest: May 31 2018 at 05:14)
 
-* [Lean book for mathematicians](32443Leanbookformathematicians.html) (15 messages, latest: May 30 2018 at 16:47)
+* [Lean book for mathematicians](32443Leanbookformathematicians.html) (15 messages, latest: May 31 2018 at 00:47)
 
-* [clear_denominator](28135cleardenominator.html) (15 messages, latest: May 30 2018 at 15:14)
+* [clear_denominator](28135cleardenominator.html) (15 messages, latest: May 30 2018 at 23:14)
 
-* [Construction of Algebraic Closure](29368ConstructionofAlgebraicClosure.html) (53 messages, latest: May 29 2018 at 23:15)
+* [Construction of Algebraic Closure](29368ConstructionofAlgebraicClosure.html) (53 messages, latest: May 30 2018 at 07:15)
 
-* [LIVE CHAT: Structures for mathematicians](39678LIVECHATStructuresformathematicians.html) (702 messages, latest: May 29 2018 at 23:13)
+* [LIVE CHAT: Structures for mathematicians](39678LIVECHATStructuresformathematicians.html) (702 messages, latest: May 30 2018 at 07:13)
 
-* [ALEXANDRIA: Proof for the Working Mathematician](61848ALEXANDRIAProoffortheWorkingMathematician.html) (120 messages, latest: May 29 2018 at 13:46)
+* [ALEXANDRIA: Proof for the Working Mathematician](61848ALEXANDRIAProoffortheWorkingMathematician.html) (120 messages, latest: May 29 2018 at 21:46)
 
-* [ZFC equality](85554ZFCequality.html) (858 messages, latest: May 29 2018 at 11:39)
+* [ZFC equality](85554ZFCequality.html) (858 messages, latest: May 29 2018 at 19:39)
 
-* [should monotone be a class?](80156shouldmonotonebeaclass.html) (47 messages, latest: May 28 2018 at 23:34)
+* [should monotone be a class?](80156shouldmonotonebeaclass.html) (47 messages, latest: May 29 2018 at 07:34)
 
-* [Polynomials over a field are not quite Euclidean in lean](75371PolynomialsoverafieldarenotquiteEuclideaninlean.html) (23 messages, latest: May 28 2018 at 21:30)
+* [Polynomials over a field are not quite Euclidean in lean](75371PolynomialsoverafieldarenotquiteEuclideaninlean.html) (23 messages, latest: May 29 2018 at 05:30)
 
-* [`fin n \to T` vs `finsupp (fin n) T`](37885finntoTvsfinsuppfinnT.html) (9 messages, latest: May 28 2018 at 16:26)
+* [`fin n \to T` vs `finsupp (fin n) T`](37885finntoTvsfinsuppfinnT.html) (9 messages, latest: May 29 2018 at 00:26)
 
-* [affine schemes are schemes](97874affineschemesareschemes.html) (121 messages, latest: May 28 2018 at 14:04)
+* [affine schemes are schemes](97874affineschemesareschemes.html) (121 messages, latest: May 28 2018 at 22:04)
 
-* [stuck on generalising finsupp.to_module](48283stuckongeneralisingfinsupptomodule.html) (6 messages, latest: May 28 2018 at 13:52)
+* [stuck on generalising finsupp.to_module](48283stuckongeneralisingfinsupptomodule.html) (6 messages, latest: May 28 2018 at 21:52)
 
-* [minimum of finite set](01949minimumoffiniteset.html) (62 messages, latest: May 28 2018 at 12:54)
+* [minimum of finite set](01949minimumoffiniteset.html) (62 messages, latest: May 28 2018 at 20:54)
 
-* [are quotient groups in mathlib](29098arequotientgroupsinmathlib.html) (2 messages, latest: May 28 2018 at 12:47)
+* [are quotient groups in mathlib](29098arequotientgroupsinmathlib.html) (2 messages, latest: May 28 2018 at 20:47)
 
-* [bigop](05618bigop.html) (60 messages, latest: May 28 2018 at 12:04)
+* [bigop](05618bigop.html) (60 messages, latest: May 28 2018 at 20:04)
 
-* [valuations](54951valuations.html) (510 messages, latest: May 28 2018 at 08:40)
+* [valuations](54951valuations.html) (510 messages, latest: May 28 2018 at 16:40)
 
-* [nat and pnat](47306natandpnat.html) (203 messages, latest: May 28 2018 at 06:19)
+* [nat and pnat](47306natandpnat.html) (203 messages, latest: May 28 2018 at 14:19)
 
-* [Largest Square in the Fibonacci Sequence](81043LargestSquareintheFibonacciSequence.html) (717 messages, latest: May 28 2018 at 05:13)
+* [Largest Square in the Fibonacci Sequence](81043LargestSquareintheFibonacciSequence.html) (717 messages, latest: May 28 2018 at 13:13)
 
-* [reductions](84929reductions.html) (14 messages, latest: May 28 2018 at 00:42)
+* [reductions](84929reductions.html) (14 messages, latest: May 28 2018 at 08:42)
 
-* [ℤ[(1+√d)/2]](007291d2.html) (183 messages, latest: May 27 2018 at 19:00)
+* [ℤ[(1+√d)/2]](007291d2.html) (183 messages, latest: May 28 2018 at 03:00)
 
-* [strictification](56592strictification.html) (9 messages, latest: May 26 2018 at 22:37)
+* [strictification](56592strictification.html) (9 messages, latest: May 27 2018 at 06:37)
 
-* [continuous function to pi type](83644continuousfunctiontopitype.html) (67 messages, latest: May 23 2018 at 18:54)
+* [continuous function to pi type](83644continuousfunctiontopitype.html) (67 messages, latest: May 24 2018 at 02:54)
 
-* [halting problem](54841haltingproblem.html) (23 messages, latest: May 23 2018 at 16:48)
+* [halting problem](54841haltingproblem.html) (23 messages, latest: May 24 2018 at 00:48)
 
-* [topological space stuff](87954topologicalspacestuff.html) (39 messages, latest: May 23 2018 at 12:04)
+* [topological space stuff](87954topologicalspacestuff.html) (39 messages, latest: May 23 2018 at 20:04)
 
-* [binary choice class](10407binarychoiceclass.html) (1 message, latest: May 23 2018 at 11:21)
+* [binary choice class](10407binarychoiceclass.html) (1 message, latest: May 23 2018 at 19:21)
 
-* [Sums over finsets](36129Sumsoverfinsets.html) (5 messages, latest: May 22 2018 at 19:20)
+* [Sums over finsets](36129Sumsoverfinsets.html) (5 messages, latest: May 23 2018 at 03:20)
 
-* [bijection negation](27149bijectionnegation.html) (7 messages, latest: May 17 2018 at 14:30)
+* [bijection negation](27149bijectionnegation.html) (7 messages, latest: May 17 2018 at 22:30)
 
-* [Inverse image in `fin m` is a `finset`](88775Inverseimageinfinmisafinset.html) (72 messages, latest: May 16 2018 at 17:14)
+* [Inverse image in `fin m` is a `finset`](88775Inverseimageinfinmisafinset.html) (72 messages, latest: May 17 2018 at 01:14)
 
-* [Terence Tao's proof of Hilbert's Nullstellensatz](71000TerenceTaosproofofHilbertsNullstellensatz.html) (2 messages, latest: May 15 2018 at 22:51)
+* [Terence Tao's proof of Hilbert's Nullstellensatz](71000TerenceTaosproofofHilbertsNullstellensatz.html) (2 messages, latest: May 16 2018 at 06:51)
 
-* [Working with `fin n` (and `ite`?)](77646Workingwithfinnandite.html) (38 messages, latest: May 14 2018 at 21:06)
+* [Working with `fin n` (and `ite`?)](77646Workingwithfinnandite.html) (38 messages, latest: May 15 2018 at 05:06)
 
-* [Multiplication by n in an additive commutative group](99843Multiplicationbyninanadditivecommutativegroup.html) (4 messages, latest: May 14 2018 at 20:16)
+* [Multiplication by n in an additive commutative group](99843Multiplicationbyninanadditivecommutativegroup.html) (4 messages, latest: May 15 2018 at 04:16)
 
-* [Topology on R^n](21625TopologyonRn.html) (21 messages, latest: May 14 2018 at 12:02)
+* [Topology on R^n](21625TopologyonRn.html) (21 messages, latest: May 14 2018 at 20:02)
 
-* [open sets are unions of basis elements](66698opensetsareunionsofbasiselements.html) (55 messages, latest: May 13 2018 at 18:01)
+* [open sets are unions of basis elements](66698opensetsareunionsofbasiselements.html) (55 messages, latest: May 14 2018 at 02:01)
 
-* [is continuum hypothesis true in Lean?](73541iscontinuumhypothesistrueinLean.html) (30 messages, latest: May 12 2018 at 02:09)
+* [is continuum hypothesis true in Lean?](73541iscontinuumhypothesistrueinLean.html) (30 messages, latest: May 12 2018 at 10:09)
 
-* [Linear maps and module homomorphisms](79835Linearmapsandmodulehomomorphisms.html) (8 messages, latest: May 08 2018 at 13:54)
+* [Linear maps and module homomorphisms](79835Linearmapsandmodulehomomorphisms.html) (8 messages, latest: May 08 2018 at 21:54)
 
-* [Univariate polynomials](17392Univariatepolynomials.html) (151 messages, latest: May 08 2018 at 13:31)
+* [Univariate polynomials](17392Univariatepolynomials.html) (151 messages, latest: May 08 2018 at 21:31)
 
-* [semiring homomorphisms](66292semiringhomomorphisms.html) (24 messages, latest: May 08 2018 at 08:14)
+* [semiring homomorphisms](66292semiringhomomorphisms.html) (24 messages, latest: May 08 2018 at 16:14)
 
-* [Church Numeral Puzzles](10127ChurchNumeralPuzzles.html) (217 messages, latest: May 03 2018 at 17:34)
+* [Church Numeral Puzzles](10127ChurchNumeralPuzzles.html) (217 messages, latest: May 04 2018 at 01:34)
 
-* [Writing readable uncluttered group theory](12844Writingreadableunclutteredgrouptheory.html) (178 messages, latest: May 02 2018 at 19:47)
+* [Writing readable uncluttered group theory](12844Writingreadableunclutteredgrouptheory.html) (178 messages, latest: May 03 2018 at 03:47)
 
-* [quadratic reciprocity](25068quadraticreciprocity.html) (32 messages, latest: May 01 2018 at 18:11)
+* [quadratic reciprocity](25068quadraticreciprocity.html) (32 messages, latest: May 02 2018 at 02:11)
 
-* [quivers and diagrams](49995quiversanddiagrams.html) (31 messages, latest: May 01 2018 at 12:07)
+* [quivers and diagrams](49995quiversanddiagrams.html) (31 messages, latest: May 01 2018 at 20:07)
 
-* [cases in term mode](70244casesintermmode.html) (31 messages, latest: May 01 2018 at 11:57)
+* [cases in term mode](70244casesintermmode.html) (31 messages, latest: May 01 2018 at 19:57)
 
-* [group actions](34719groupactions.html) (4 messages, latest: May 01 2018 at 08:09)
+* [group actions](34719groupactions.html) (4 messages, latest: May 01 2018 at 16:09)
 
-* [ring tactic with homomorphism](39239ringtacticwithhomomorphism.html) (12 messages, latest: May 01 2018 at 02:05)
+* [ring tactic with homomorphism](39239ringtacticwithhomomorphism.html) (12 messages, latest: May 01 2018 at 10:05)
 
-* [property applies to all elements of list](34718propertyappliestoallelementsoflist.html) (5 messages, latest: Apr 30 2018 at 10:22)
+* [property applies to all elements of list](34718propertyappliestoallelementsoflist.html) (5 messages, latest: Apr 30 2018 at 18:22)
 
-* [naming of binary properties with left and right](53658namingofbinarypropertieswithleftandright.html) (5 messages, latest: Apr 30 2018 at 08:44)
+* [naming of binary properties with left and right](53658namingofbinarypropertieswithleftandright.html) (5 messages, latest: Apr 30 2018 at 16:44)
 
-* [equiv and universes](45346equivanduniverses.html) (8 messages, latest: Apr 29 2018 at 04:05)
+* [equiv and universes](45346equivanduniverses.html) (8 messages, latest: Apr 29 2018 at 12:05)
 
-* [centre of partial order closed under supremum?](31797centreofpartialorderclosedundersupremum.html) (4 messages, latest: Apr 28 2018 at 22:28)
+* [centre of partial order closed under supremum?](31797centreofpartialorderclosedundersupremum.html) (4 messages, latest: Apr 29 2018 at 06:28)
 
-* [category theory notations](74041categorytheorynotations.html) (47 messages, latest: Apr 28 2018 at 13:56)
+* [category theory notations](74041categorytheorynotations.html) (47 messages, latest: Apr 28 2018 at 21:56)
 
-* [strange theorem](21353strangetheorem.html) (5 messages, latest: Apr 28 2018 at 07:29)
+* [strange theorem](21353strangetheorem.html) (5 messages, latest: Apr 28 2018 at 15:29)
 
-* [generate filter](98386generatefilter.html) (8 messages, latest: Apr 28 2018 at 07:19)
+* [generate filter](98386generatefilter.html) (8 messages, latest: Apr 28 2018 at 15:19)
 
-* [When is -2 a square mod p?](68271Whenis2asquaremodp.html) (48 messages, latest: Apr 28 2018 at 06:19)
+* [When is -2 a square mod p?](68271Whenis2asquaremodp.html) (48 messages, latest: Apr 28 2018 at 14:19)
 
-* [additive group game](23186additivegroupgame.html) (16 messages, latest: Apr 28 2018 at 04:03)
+* [additive group game](23186additivegroupgame.html) (16 messages, latest: Apr 28 2018 at 12:03)
 
-* [Left adjoint of functors between orders](10967Leftadjointoffunctorsbetweenorders.html) (2 messages, latest: Apr 27 2018 at 20:55)
+* [Left adjoint of functors between orders](10967Leftadjointoffunctorsbetweenorders.html) (2 messages, latest: Apr 28 2018 at 04:55)
 
-* [every partial order can be order-embedded into a powerset](56373everypartialordercanbeorderembeddedintoapowerset.html) (9 messages, latest: Apr 27 2018 at 19:25)
+* [every partial order can be order-embedded into a powerset](56373everypartialordercanbeorderembeddedintoapowerset.html) (9 messages, latest: Apr 28 2018 at 03:25)
 
-* [exponentials](54459exponentials.html) (4 messages, latest: Apr 27 2018 at 17:41)
+* [exponentials](54459exponentials.html) (4 messages, latest: Apr 28 2018 at 01:41)
 
-* [promoting equiv](65770promotingequiv.html) (137 messages, latest: Apr 27 2018 at 09:54)
+* [promoting equiv](65770promotingequiv.html) (137 messages, latest: Apr 27 2018 at 17:54)
 
-* [set union equality](54532setunionequality.html) (109 messages, latest: Apr 27 2018 at 03:12)
+* [set union equality](54532setunionequality.html) (109 messages, latest: Apr 27 2018 at 11:12)
 
-* [building mathlib](71280buildingmathlib.html) (5 messages, latest: Apr 26 2018 at 11:13)
+* [building mathlib](71280buildingmathlib.html) (5 messages, latest: Apr 26 2018 at 19:13)
 
-* [xor is not associative](49506xorisnotassociative.html) (121 messages, latest: Apr 24 2018 at 18:03)
+* [xor is not associative](49506xorisnotassociative.html) (121 messages, latest: Apr 25 2018 at 02:03)
 
-* [list from a finset](62811listfromafinset.html) (47 messages, latest: Apr 19 2018 at 13:33)
+* [list from a finset](62811listfromafinset.html) (47 messages, latest: Apr 19 2018 at 21:33)
 
-* [image by permutation power](48996imagebypermutationpower.html) (105 messages, latest: Apr 17 2018 at 14:00)
+* [image by permutation power](48996imagebypermutationpower.html) (105 messages, latest: Apr 17 2018 at 22:00)
 
-* [axiom of unique choice](69142axiomofuniquechoice.html) (7 messages, latest: Apr 17 2018 at 09:45)
+* [axiom of unique choice](69142axiomofuniquechoice.html) (7 messages, latest: Apr 17 2018 at 17:45)
 
-* [new is_group_hom](56118newisgrouphom.html) (21 messages, latest: Apr 16 2018 at 17:30)
+* [new is_group_hom](56118newisgrouphom.html) (21 messages, latest: Apr 17 2018 at 01:30)
 
-* [burnside!](56734burnside.html) (13 messages, latest: Apr 16 2018 at 09:25)
+* [burnside!](56734burnside.html) (13 messages, latest: Apr 16 2018 at 17:25)
 
-* [topological space docs](90707topologicalspacedocs.html) (251 messages, latest: Apr 16 2018 at 09:04)
+* [topological space docs](90707topologicalspacedocs.html) (251 messages, latest: Apr 16 2018 at 17:04)
 
-* [subtraction on natural numbers](99807subtractiononnaturalnumbers.html) (26 messages, latest: Apr 11 2018 at 08:58)
+* [subtraction on natural numbers](99807subtractiononnaturalnumbers.html) (26 messages, latest: Apr 11 2018 at 16:58)
 
-* [foundations of mathematics](49648foundationsofmathematics.html) (258 messages, latest: Apr 11 2018 at 01:06)
+* [foundations of mathematics](49648foundationsofmathematics.html) (258 messages, latest: Apr 11 2018 at 09:06)
 
-* [group acting on group](66414groupactingongroup.html) (21 messages, latest: Apr 09 2018 at 15:29)
+* [group acting on group](66414groupactingongroup.html) (21 messages, latest: Apr 09 2018 at 23:29)
 
-* [small changes in nat and ordered groups inequalities](81138smallchangesinnatandorderedgroupsinequalities.html) (15 messages, latest: Apr 08 2018 at 09:54)
+* [small changes in nat and ordered groups inequalities](81138smallchangesinnatandorderedgroupsinequalities.html) (15 messages, latest: Apr 08 2018 at 17:54)
 
-* [easy proof of surjective_iff_injective](01478easyproofofsurjectiveiffinjective.html) (21 messages, latest: Apr 06 2018 at 23:01)
+* [easy proof of surjective_iff_injective](01478easyproofofsurjectiveiffinjective.html) (21 messages, latest: Apr 07 2018 at 07:01)
 
-* [homeo equiv etc.](49997homeoequivetc.html) (250 messages, latest: Apr 06 2018 at 12:46)
+* [homeo equiv etc.](49997homeoequivetc.html) (250 messages, latest: Apr 06 2018 at 20:46)
 
-* [polynomials](62584polynomials.html) (4 messages, latest: Apr 04 2018 at 11:09)
+* [polynomials](62584polynomials.html) (4 messages, latest: Apr 04 2018 at 19:09)
 
-* [free group](47376freegroup.html) (92 messages, latest: Apr 02 2018 at 07:00)
+* [free group](47376freegroup.html) (92 messages, latest: Apr 02 2018 at 15:00)
 
-* [Easy topological space question](03444Easytopologicalspacequestion.html) (18 messages, latest: Apr 02 2018 at 03:23)
+* [Easy topological space question](03444Easytopologicalspacequestion.html) (18 messages, latest: Apr 02 2018 at 11:23)
 
-* [hello](47413hello.html) (30 messages, latest: Apr 01 2018 at 16:37)
+* [hello](47413hello.html) (30 messages, latest: Apr 02 2018 at 00:37)
 
 
 {% include archive_update.html %}

@@ -12,7 +12,7 @@ permalink: archive/113488general/50034cancoercionsbeabused.html
 <base href="https://leanprover.zulipchat.com">
 {% raw %}
 <a name="134514643"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/can%20coercions%20be%20abused%3F/near/134514643" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50034cancoercionsbeabused.html#134514643">Edward Ayers (Sep 24 2018 at 11:09)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/can%20coercions%20be%20abused%3F/near/134514643" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50034cancoercionsbeabused.html#134514643">Edward Ayers (Sep 24 2018 at 19:09)</a>:</h4>
 <p>I've added some questionable coercions to a lean file I am working on:</p>
 <div class="codehilite"><pre><span></span><span class="kn">instance</span> <span class="o">[</span><span class="n">partial_order</span> <span class="n">α</span><span class="o">]</span> <span class="o">:</span> <span class="n">has_coe</span> <span class="o">(</span><span class="n">a</span> <span class="bp">=</span> <span class="n">b</span><span class="o">)</span> <span class="o">(</span><span class="n">a</span> <span class="bp">≤</span> <span class="n">b</span><span class="o">)</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="n">le_of_eq</span><span class="bp">⟩</span>
 <span class="kn">instance</span> <span class="o">:</span> <span class="n">has_coe</span> <span class="o">(</span><span class="n">a</span> <span class="bp">=</span> <span class="n">b</span><span class="o">)</span> <span class="o">(</span><span class="n">b</span> <span class="bp">=</span> <span class="n">a</span><span class="o">)</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="n">eq</span><span class="bp">.</span><span class="n">symm</span><span class="bp">⟩</span>
@@ -28,23 +28,23 @@ permalink: archive/113488general/50034cancoercionsbeabused.html
 Are there any pitfalls to this approach or is it good practice?</p>
 
 <a name="134514725"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/can%20coercions%20be%20abused%3F/near/134514725" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50034cancoercionsbeabused.html#134514725">Kenny Lau (Sep 24 2018 at 11:10)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/can%20coercions%20be%20abused%3F/near/134514725" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50034cancoercionsbeabused.html#134514725">Kenny Lau (Sep 24 2018 at 19:10)</a>:</h4>
 <p>wow</p>
 
 <a name="134514812"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/can%20coercions%20be%20abused%3F/near/134514812" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50034cancoercionsbeabused.html#134514812">Edward Ayers (Sep 24 2018 at 11:13)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/can%20coercions%20be%20abused%3F/near/134514812" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50034cancoercionsbeabused.html#134514812">Edward Ayers (Sep 24 2018 at 19:13)</a>:</h4>
 <p>In particular I am worried that stuff like <code>has_coe (a = b) (b = a)</code> will cause a loop of doom in the elaborator.</p>
 
 <a name="134514910"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/can%20coercions%20be%20abused%3F/near/134514910" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50034cancoercionsbeabused.html#134514910">Mario Carneiro (Sep 24 2018 at 11:15)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/can%20coercions%20be%20abused%3F/near/134514910" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50034cancoercionsbeabused.html#134514910">Mario Carneiro (Sep 24 2018 at 19:15)</a>:</h4>
 <p>it will</p>
 
 <a name="134514920"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/can%20coercions%20be%20abused%3F/near/134514920" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50034cancoercionsbeabused.html#134514920">Mario Carneiro (Sep 24 2018 at 11:15)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/can%20coercions%20be%20abused%3F/near/134514920" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50034cancoercionsbeabused.html#134514920">Mario Carneiro (Sep 24 2018 at 19:15)</a>:</h4>
 <p>you will probably get a timeout coercing <code>a = b</code> to <code>a = c</code></p>
 
 <a name="134514993"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/can%20coercions%20be%20abused%3F/near/134514993" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50034cancoercionsbeabused.html#134514993">Edward Ayers (Sep 24 2018 at 11:17)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/can%20coercions%20be%20abused%3F/near/134514993" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50034cancoercionsbeabused.html#134514993">Edward Ayers (Sep 24 2018 at 19:17)</a>:</h4>
 <div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">c</span><span class="o">)</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">b</span> <span class="o">:=</span> <span class="n">p</span>
 </pre></div>
 
@@ -52,36 +52,36 @@ Are there any pitfalls to this approach or is it good practice?</p>
 <p>doesn't loop forever with the above coercion. How can I get the bad behaviour?</p>
 
 <a name="134515063"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/can%20coercions%20be%20abused%3F/near/134515063" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50034cancoercionsbeabused.html#134515063">Mario Carneiro (Sep 24 2018 at 11:18)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/can%20coercions%20be%20abused%3F/near/134515063" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50034cancoercionsbeabused.html#134515063">Mario Carneiro (Sep 24 2018 at 19:18)</a>:</h4>
 <p>hm, not sure in that case. I will downgrade from "bad" to "highly suspicious"</p>
 
 <a name="134515081"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/can%20coercions%20be%20abused%3F/near/134515081" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50034cancoercionsbeabused.html#134515081">Edward Ayers (Sep 24 2018 at 11:19)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/can%20coercions%20be%20abused%3F/near/134515081" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50034cancoercionsbeabused.html#134515081">Edward Ayers (Sep 24 2018 at 19:19)</a>:</h4>
 <p>I will leave it in and keep coding and see if it explodes anywhere.</p>
 
 <a name="134515084"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/can%20coercions%20be%20abused%3F/near/134515084" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50034cancoercionsbeabused.html#134515084">Mario Carneiro (Sep 24 2018 at 11:19)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/can%20coercions%20be%20abused%3F/near/134515084" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50034cancoercionsbeabused.html#134515084">Mario Carneiro (Sep 24 2018 at 19:19)</a>:</h4>
 <p>seems reasonable</p>
 
 <a name="134515127"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/can%20coercions%20be%20abused%3F/near/134515127" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50034cancoercionsbeabused.html#134515127">Edward Ayers (Sep 24 2018 at 11:20)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/can%20coercions%20be%20abused%3F/near/134515127" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50034cancoercionsbeabused.html#134515127">Edward Ayers (Sep 24 2018 at 19:20)</a>:</h4>
 <p>It has saved me a lot of typing.</p>
 
 <a name="134515134"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/can%20coercions%20be%20abused%3F/near/134515134" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50034cancoercionsbeabused.html#134515134">Mario Carneiro (Sep 24 2018 at 11:20)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/can%20coercions%20be%20abused%3F/near/134515134" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50034cancoercionsbeabused.html#134515134">Mario Carneiro (Sep 24 2018 at 19:20)</a>:</h4>
 <p>I can believe it</p>
 
 <a name="134515368"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/can%20coercions%20be%20abused%3F/near/134515368" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50034cancoercionsbeabused.html#134515368">Patrick Massot (Sep 24 2018 at 11:26)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/can%20coercions%20be%20abused%3F/near/134515368" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50034cancoercionsbeabused.html#134515368">Patrick Massot (Sep 24 2018 at 19:26)</a>:</h4>
 <p>Ed, have you tried Simon's mono tactic, from <a href="https://github.com/leanprover-community/mathlib-nursery/blob/master/src/tactic/monotonicity/interactive.lean" target="_blank" title="https://github.com/leanprover-community/mathlib-nursery/blob/master/src/tactic/monotonicity/interactive.lean">https://github.com/leanprover-community/mathlib-nursery/blob/master/src/tactic/monotonicity/interactive.lean</a> (see also <a href="https://github.com/leanprover-community/mathlib-nursery/blob/master/docs/monotonicity.md" target="_blank" title="https://github.com/leanprover-community/mathlib-nursery/blob/master/docs/monotonicity.md">https://github.com/leanprover-community/mathlib-nursery/blob/master/docs/monotonicity.md</a>)</p>
 
 <a name="134515866"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/can%20coercions%20be%20abused%3F/near/134515866" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50034cancoercionsbeabused.html#134515866">Edward Ayers (Sep 24 2018 at 11:38)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/can%20coercions%20be%20abused%3F/near/134515866" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50034cancoercionsbeabused.html#134515866">Edward Ayers (Sep 24 2018 at 19:38)</a>:</h4>
 <p>That's a nice tactic. I am now thinking that it is bad practice to use coercions to do reasoning because your code now depends directly on the minutiae of how the elaborator works, which is somewhat opaque and subject to change. Whereas the tactics have well-defined behaviour and can be tuned.<br>
 However it is cool that the elaborator was able deal with my coercion abuse nicely. Are there any docs which specify precisely what the elaborator is doing when it looks for coercions?</p>
 
 <a name="134515882"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/can%20coercions%20be%20abused%3F/near/134515882" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50034cancoercionsbeabused.html#134515882">Patrick Massot (Sep 24 2018 at 11:39)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/can%20coercions%20be%20abused%3F/near/134515882" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50034cancoercionsbeabused.html#134515882">Patrick Massot (Sep 24 2018 at 19:39)</a>:</h4>
 <p>source code?</p>
 
 

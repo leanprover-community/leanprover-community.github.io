@@ -12,7 +12,7 @@ permalink: archive/113488general/44083simplifyproof.html
 <base href="https://leanprover.zulipchat.com">
 {% raw %}
 <a name="127646386"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simplify_proof/near/127646386" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/44083simplifyproof.html#127646386">Scott Morrison (Jun 06 2018 at 11:04)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simplify_proof/near/127646386" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/44083simplifyproof.html#127646386">Scott Morrison (Jun 06 2018 at 19:04)</a>:</h4>
 <p>At some point Mario told me how to write a "simplify_proof" tactic, but in my fiddling with it I seem to have lost the essential magic step where the new, simplified proof is actually installed in place of the original proof:</p>
 <div class="codehilite"><pre><span></span>open tactic
 meta def simplify_proof {α} (tac : tactic α) : tactic α :=
@@ -30,15 +30,15 @@ end
 </pre></div>
 
 <a name="127646390"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simplify_proof/near/127646390" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/44083simplifyproof.html#127646390">Scott Morrison (Jun 06 2018 at 11:04)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simplify_proof/near/127646390" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/44083simplifyproof.html#127646390">Scott Morrison (Jun 06 2018 at 19:04)</a>:</h4>
 <p>Or am I misunderstanding what this should do?</p>
 
 <a name="127646595"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simplify_proof/near/127646595" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/44083simplifyproof.html#127646595">Scott Morrison (Jun 06 2018 at 11:11)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simplify_proof/near/127646595" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/44083simplifyproof.html#127646595">Scott Morrison (Jun 06 2018 at 19:11)</a>:</h4>
 <p>Ah, got it! Somewhere along the way I put a spurious ' at the end of the <code>result.success</code> line, preventing the tactic from doing its time travel trick.</p>
 
 <a name="127646896"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simplify_proof/near/127646896" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/44083simplifyproof.html#127646896">Kevin Buzzard (Jun 06 2018 at 11:19)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simplify_proof/near/127646896" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/44083simplifyproof.html#127646896">Kevin Buzzard (Jun 06 2018 at 19:19)</a>:</h4>
 <p>I sometimes wonder what <code>simp</code> is doing, and I know that I can look, but I can never be bothered. I vaguely suspect there might be times where replacing a call to <code>simp</code> with a call to what it actually does might be better -- am I just living in a dream world do you think? (in the sense that it's unlikely to make any noticeable difference other than obfusctating my code?)</p>
 
 

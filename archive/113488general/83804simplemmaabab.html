@@ -12,7 +12,7 @@ permalink: archive/113488general/83804simplemmaabab.html
 <base href="https://leanprover.zulipchat.com">
 {% raw %}
 <a name="130945303"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20lemma%20%60a%20%2B%20%28b%20%2B%20-a%29%20%3D%20b%60%3F/near/130945303" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83804simplemmaabab.html#130945303">Kevin Buzzard (Aug 05 2018 at 23:55)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20lemma%20%60a%20%2B%20%28b%20%2B%20-a%29%20%3D%20b%60%3F/near/130945303" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83804simplemmaabab.html#130945303">Kevin Buzzard (Aug 06 2018 at 07:55)</a>:</h4>
 <p><span class="user-mention" data-user-id="120690">@Guillermo Barajas Ayuso</span> wanted</p>
 <div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">real</span><span class="bp">.</span><span class="n">basic</span>
 
@@ -35,82 +35,82 @@ permalink: archive/113488general/83804simplemmaabab.html
 <p>Should <code>a + (b + -a) = b</code> be a simp lemma? It's about time I got the hang of this stuff. It's passing all the rules of thumb I've picked up, but my rules of thumb are not yet watertight...</p>
 
 <a name="130945623"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20lemma%20%60a%20%2B%20%28b%20%2B%20-a%29%20%3D%20b%60%3F/near/130945623" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83804simplemmaabab.html#130945623">Patrick Massot (Aug 06 2018 at 00:07)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20lemma%20%60a%20%2B%20%28b%20%2B%20-a%29%20%3D%20b%60%3F/near/130945623" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83804simplemmaabab.html#130945623">Patrick Massot (Aug 06 2018 at 08:07)</a>:</h4>
 <p>It's funny, I came across the exact same problem yesterday. Don't forget you can also use <code>simp [-sub_eq_add_neg, ...]</code> to get rid of the annoying "simplification"</p>
 
 <a name="130945720"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20lemma%20%60a%20%2B%20%28b%20%2B%20-a%29%20%3D%20b%60%3F/near/130945720" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83804simplemmaabab.html#130945720">Mario Carneiro (Aug 06 2018 at 00:11)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20lemma%20%60a%20%2B%20%28b%20%2B%20-a%29%20%3D%20b%60%3F/near/130945720" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83804simplemmaabab.html#130945720">Mario Carneiro (Aug 06 2018 at 08:11)</a>:</h4>
 <p>I'm okay with adding this as a simp lemma, but it doesn't really fix the problem - you will also need lemmas for <code>a + (b + (c + -a))</code> and <code>a + (b + (-a + c))</code> and so on. The problem is that simp doesn't make any attempt to bring negatives together, so at best you can get lucky if they don't have so far to migrate</p>
 
 <a name="130945760"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20lemma%20%60a%20%2B%20%28b%20%2B%20-a%29%20%3D%20b%60%3F/near/130945760" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83804simplemmaabab.html#130945760">Mario Carneiro (Aug 06 2018 at 00:12)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20lemma%20%60a%20%2B%20%28b%20%2B%20-a%29%20%3D%20b%60%3F/near/130945760" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83804simplemmaabab.html#130945760">Mario Carneiro (Aug 06 2018 at 08:12)</a>:</h4>
 <p>This is in part what <code>ring</code> is for, and Jeremy suggested also focusing an <code>abel</code> type tactic focusing only on the additive stuff</p>
 
 <a name="130945763"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20lemma%20%60a%20%2B%20%28b%20%2B%20-a%29%20%3D%20b%60%3F/near/130945763" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83804simplemmaabab.html#130945763">Patrick Massot (Aug 06 2018 at 00:12)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20lemma%20%60a%20%2B%20%28b%20%2B%20-a%29%20%3D%20b%60%3F/near/130945763" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83804simplemmaabab.html#130945763">Patrick Massot (Aug 06 2018 at 08:12)</a>:</h4>
 <p>I also wanted to ask for a version of ring working in an abelian group</p>
 
 <a name="130945764"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20lemma%20%60a%20%2B%20%28b%20%2B%20-a%29%20%3D%20b%60%3F/near/130945764" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83804simplemmaabab.html#130945764">Kevin Buzzard (Aug 06 2018 at 00:13)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20lemma%20%60a%20%2B%20%28b%20%2B%20-a%29%20%3D%20b%60%3F/near/130945764" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83804simplemmaabab.html#130945764">Kevin Buzzard (Aug 06 2018 at 08:13)</a>:</h4>
 <p>removing <code>sub_eq_add_neg</code> stops Lean from simplifying <code>(1 - 1)</code> :-)</p>
 
 <a name="130945769"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20lemma%20%60a%20%2B%20%28b%20%2B%20-a%29%20%3D%20b%60%3F/near/130945769" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83804simplemmaabab.html#130945769">Mario Carneiro (Aug 06 2018 at 00:13)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20lemma%20%60a%20%2B%20%28b%20%2B%20-a%29%20%3D%20b%60%3F/near/130945769" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83804simplemmaabab.html#130945769">Mario Carneiro (Aug 06 2018 at 08:13)</a>:</h4>
 <p>I think <code>sub_eq_add_neg</code> is a bad choice of simp lemma, but I know why it's there - it limits the expressivity of input statements so you need fewer simp lemmas overall</p>
 
 <a name="130945809"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20lemma%20%60a%20%2B%20%28b%20%2B%20-a%29%20%3D%20b%60%3F/near/130945809" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83804simplemmaabab.html#130945809">Kevin Buzzard (Aug 06 2018 at 00:14)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20lemma%20%60a%20%2B%20%28b%20%2B%20-a%29%20%3D%20b%60%3F/near/130945809" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83804simplemmaabab.html#130945809">Kevin Buzzard (Aug 06 2018 at 08:14)</a>:</h4>
 <p>I thought that simp internally put things into some secret ordering using associativity and commutativity?</p>
 
 <a name="130945810"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20lemma%20%60a%20%2B%20%28b%20%2B%20-a%29%20%3D%20b%60%3F/near/130945810" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83804simplemmaabab.html#130945810">Mario Carneiro (Aug 06 2018 at 00:14)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20lemma%20%60a%20%2B%20%28b%20%2B%20-a%29%20%3D%20b%60%3F/near/130945810" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83804simplemmaabab.html#130945810">Mario Carneiro (Aug 06 2018 at 08:14)</a>:</h4>
 <p>of course if <code>sub_eq_add_neg</code> was not a simp lemma we would need <code>a - a = 0</code> to be a simp lemma</p>
 
 <a name="130945812"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20lemma%20%60a%20%2B%20%28b%20%2B%20-a%29%20%3D%20b%60%3F/near/130945812" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83804simplemmaabab.html#130945812">Patrick Massot (Aug 06 2018 at 00:14)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20lemma%20%60a%20%2B%20%28b%20%2B%20-a%29%20%3D%20b%60%3F/near/130945812" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83804simplemmaabab.html#130945812">Patrick Massot (Aug 06 2018 at 08:14)</a>:</h4>
 <p>Is this also part of what Johannes simplifier work is meant to address?</p>
 
 <a name="130945813"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20lemma%20%60a%20%2B%20%28b%20%2B%20-a%29%20%3D%20b%60%3F/near/130945813" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83804simplemmaabab.html#130945813">Mario Carneiro (Aug 06 2018 at 00:14)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20lemma%20%60a%20%2B%20%28b%20%2B%20-a%29%20%3D%20b%60%3F/near/130945813" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83804simplemmaabab.html#130945813">Mario Carneiro (Aug 06 2018 at 08:14)</a>:</h4>
 <p>it does, but that ordering does not put <code>a</code> and <code>-a</code> close together</p>
 
 <a name="130945815"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20lemma%20%60a%20%2B%20%28b%20%2B%20-a%29%20%3D%20b%60%3F/near/130945815" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83804simplemmaabab.html#130945815">Kevin Buzzard (Aug 06 2018 at 00:14)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20lemma%20%60a%20%2B%20%28b%20%2B%20-a%29%20%3D%20b%60%3F/near/130945815" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83804simplemmaabab.html#130945815">Kevin Buzzard (Aug 06 2018 at 08:14)</a>:</h4>
 <blockquote>
 <p>it does, but that ordering does not put <code>a</code> and <code>-a</code> close together</p>
 </blockquote>
 <p>Might I suggest a different secret ordering?</p>
 
 <a name="130945822"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20lemma%20%60a%20%2B%20%28b%20%2B%20-a%29%20%3D%20b%60%3F/near/130945822" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83804simplemmaabab.html#130945822">Mario Carneiro (Aug 06 2018 at 00:15)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20lemma%20%60a%20%2B%20%28b%20%2B%20-a%29%20%3D%20b%60%3F/near/130945822" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83804simplemmaabab.html#130945822">Mario Carneiro (Aug 06 2018 at 08:15)</a>:</h4>
 <p>this is an active area of research</p>
 
 <a name="130945824"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20lemma%20%60a%20%2B%20%28b%20%2B%20-a%29%20%3D%20b%60%3F/near/130945824" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83804simplemmaabab.html#130945824">Kevin Buzzard (Aug 06 2018 at 00:15)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20lemma%20%60a%20%2B%20%28b%20%2B%20-a%29%20%3D%20b%60%3F/near/130945824" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83804simplemmaabab.html#130945824">Kevin Buzzard (Aug 06 2018 at 08:15)</a>:</h4>
 <p>Oh wow</p>
 
 <a name="130945826"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20lemma%20%60a%20%2B%20%28b%20%2B%20-a%29%20%3D%20b%60%3F/near/130945826" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83804simplemmaabab.html#130945826">Kevin Buzzard (Aug 06 2018 at 00:15)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20lemma%20%60a%20%2B%20%28b%20%2B%20-a%29%20%3D%20b%60%3F/near/130945826" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83804simplemmaabab.html#130945826">Kevin Buzzard (Aug 06 2018 at 08:15)</a>:</h4>
 <p>How come humans are so good at it?</p>
 
 <a name="130945827"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20lemma%20%60a%20%2B%20%28b%20%2B%20-a%29%20%3D%20b%60%3F/near/130945827" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83804simplemmaabab.html#130945827">Mario Carneiro (Aug 06 2018 at 00:15)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20lemma%20%60a%20%2B%20%28b%20%2B%20-a%29%20%3D%20b%60%3F/near/130945827" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83804simplemmaabab.html#130945827">Mario Carneiro (Aug 06 2018 at 08:15)</a>:</h4>
 <p>because they use adaptive algorithms that pay attention to the right things</p>
 
 <a name="130945868"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20lemma%20%60a%20%2B%20%28b%20%2B%20-a%29%20%3D%20b%60%3F/near/130945868" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83804simplemmaabab.html#130945868">Mario Carneiro (Aug 06 2018 at 00:16)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20lemma%20%60a%20%2B%20%28b%20%2B%20-a%29%20%3D%20b%60%3F/near/130945868" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83804simplemmaabab.html#130945868">Mario Carneiro (Aug 06 2018 at 08:16)</a>:</h4>
 <p>and that's really hard and complicated</p>
 
 <a name="130945870"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20lemma%20%60a%20%2B%20%28b%20%2B%20-a%29%20%3D%20b%60%3F/near/130945870" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83804simplemmaabab.html#130945870">Mario Carneiro (Aug 06 2018 at 00:16)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20lemma%20%60a%20%2B%20%28b%20%2B%20-a%29%20%3D%20b%60%3F/near/130945870" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83804simplemmaabab.html#130945870">Mario Carneiro (Aug 06 2018 at 08:16)</a>:</h4>
 <p>keep in mind that <code>simp</code> is used in way more circumstances than doing algebra on commutative groups</p>
 
 <a name="130945878"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20lemma%20%60a%20%2B%20%28b%20%2B%20-a%29%20%3D%20b%60%3F/near/130945878" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83804simplemmaabab.html#130945878">Mario Carneiro (Aug 06 2018 at 00:17)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20lemma%20%60a%20%2B%20%28b%20%2B%20-a%29%20%3D%20b%60%3F/near/130945878" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83804simplemmaabab.html#130945878">Mario Carneiro (Aug 06 2018 at 08:17)</a>:</h4>
 <p>and you need to keep up performance in the other areas too</p>
 
 <a name="130945930"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20lemma%20%60a%20%2B%20%28b%20%2B%20-a%29%20%3D%20b%60%3F/near/130945930" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83804simplemmaabab.html#130945930">Mario Carneiro (Aug 06 2018 at 00:18)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20lemma%20%60a%20%2B%20%28b%20%2B%20-a%29%20%3D%20b%60%3F/near/130945930" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83804simplemmaabab.html#130945930">Mario Carneiro (Aug 06 2018 at 08:18)</a>:</h4>
 <p>I think Johannes was working on adding "simpprocs" to the simplifier, which would enable this kind of adaptivity. It would notice we are doing algebra and fire up the algebra module that knows to do cancellation and stuff</p>
 
 

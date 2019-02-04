@@ -12,23 +12,23 @@ permalink: archive/113488general/92424findgoal.html
 <base href="https://leanprover.zulipchat.com">
 {% raw %}
 <a name="125929630"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%23find%20goal/near/125929630" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/92424findgoal.html#125929630">Johan Commelin (May 01 2018 at 07:03)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%23find%20goal/near/125929630" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/92424findgoal.html#125929630">Johan Commelin (May 01 2018 at 15:03)</a>:</h4>
 <p>I occasionally find myself in the situation where I would like to know if there is a theorem that I can apply to the current goal (in tactic mode). It would be nice if I could run a tactic <code>find_goal</code> that does not change the proof state, but just prints messages of the theorems that I could apply. Is this reasonable?</p>
 
 <a name="125929697"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%23find%20goal/near/125929697" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/92424findgoal.html#125929697">Reid Barton (May 01 2018 at 07:05)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%23find%20goal/near/125929697" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/92424findgoal.html#125929697">Reid Barton (May 01 2018 at 15:05)</a>:</h4>
 <p>Interesting idea. But I bet there would be too many theorems that would always apply, like <code>eq.symm</code> or <code>iff.symm</code>. How to reject the uninteresting ones?</p>
 
 <a name="125929901"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%23find%20goal/near/125929901" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/92424findgoal.html#125929901">Mario Carneiro (May 01 2018 at 07:11)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%23find%20goal/near/125929901" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/92424findgoal.html#125929901">Mario Carneiro (May 01 2018 at 15:11)</a>:</h4>
 <p>An idea I have contemplated as a crude relevance filter is measuring the degree to which the target matches the theorem (i.e. how many exact symbol matches before it starts instantiating metavariables). This could be combined with a (harsh?) penalty for the number of new metavariables not in the goal</p>
 
 <a name="125929940"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%23find%20goal/near/125929940" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/92424findgoal.html#125929940">Mario Carneiro (May 01 2018 at 07:12)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%23find%20goal/near/125929940" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/92424findgoal.html#125929940">Mario Carneiro (May 01 2018 at 15:12)</a>:</h4>
 <p>But the only obvious way I see to implement this is literally to <code>try{apply T}</code> for all T in the environment, so it will be very slow</p>
 
 <a name="125931438"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%23find%20goal/near/125931438" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/92424findgoal.html#125931438">Kenny Lau (May 01 2018 at 08:10)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%23find%20goal/near/125931438" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/92424findgoal.html#125931438">Kenny Lau (May 01 2018 at 16:10)</a>:</h4>
 <p><span class="user-mention" data-user-id="112680">@Johan Commelin</span></p>
 <div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">find</span>
 

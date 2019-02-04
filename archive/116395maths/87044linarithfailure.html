@@ -12,7 +12,7 @@ permalink: archive/116395maths/87044linarithfailure.html
 <base href="https://leanprover.zulipchat.com">
 {% raw %}
 <a name="155363230"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/155363230" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#155363230">Kevin Buzzard (Jan 17 2019 at 20:47)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/155363230" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#155363230">Kevin Buzzard (Jan 18 2019 at 06:47)</a>:</h4>
 <p>I've started doing basic analysis in Lean with the undergraduates and I'm really using <code>linarith</code> a lot, it's really handy for this sort of thing. I was trying to prove that 1/n tended to zero using it, and I ran into this: </p>
 <div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">(</span><span class="n">h1</span> <span class="o">:</span> <span class="mi">1</span> <span class="bp">/</span> <span class="n">a</span> <span class="bp">&lt;</span> <span class="n">b</span><span class="o">)</span> <span class="o">(</span><span class="n">h2</span> <span class="o">:</span> <span class="n">b</span> <span class="bp">&lt;</span> <span class="n">c</span><span class="o">)</span> <span class="o">:</span> <span class="mi">1</span> <span class="bp">/</span> <span class="n">a</span> <span class="bp">&lt;</span> <span class="n">c</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">linarith</span> <span class="c1">-- fails</span>
 </pre></div>
@@ -21,47 +21,47 @@ permalink: archive/116395maths/87044linarithfailure.html
 <p>Is that a bug, or am I asking too much?</p>
 
 <a name="155363405"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/155363405" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#155363405">Mario Carneiro (Jan 17 2019 at 20:48)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/155363405" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#155363405">Mario Carneiro (Jan 18 2019 at 06:48)</a>:</h4>
 <p>that looks like a bug</p>
 
 <a name="155363437"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/155363437" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#155363437">Mario Carneiro (Jan 17 2019 at 20:49)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/155363437" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#155363437">Mario Carneiro (Jan 18 2019 at 06:49)</a>:</h4>
 <p>does <code>generalize : 1/a = x; linarith</code> work?</p>
 
 <a name="155363577"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/155363577" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#155363577">Rob Lewis (Jan 17 2019 at 20:50)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/155363577" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#155363577">Rob Lewis (Jan 18 2019 at 06:50)</a>:</h4>
 <p>Yeah, that should be within scope. I'm guessing it's still too aggressive about ignoring nonlinear things, instead of trying to work with the linear parts. I fixed something related a while back iirc, but maybe not enough.</p>
 
 <a name="155363825"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/155363825" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#155363825">Mario Carneiro (Jan 17 2019 at 20:54)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/155363825" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#155363825">Mario Carneiro (Jan 18 2019 at 06:54)</a>:</h4>
 <p><code>linarith h1 h2</code> should work if it's a filtering problem</p>
 
 <a name="155363832"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/155363832" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#155363832">Kevin Buzzard (Jan 17 2019 at 20:54)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/155363832" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#155363832">Kevin Buzzard (Jan 18 2019 at 06:54)</a>:</h4>
 <p>Yes, generalizing works.</p>
 
 <a name="155363853"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/155363853" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#155363853">Kevin Buzzard (Jan 17 2019 at 20:54)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/155363853" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#155363853">Kevin Buzzard (Jan 18 2019 at 06:54)</a>:</h4>
 <p><code>linarith</code> takes arguments??</p>
 
 <a name="155363871"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/155363871" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#155363871">Mario Carneiro (Jan 17 2019 at 20:54)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/155363871" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#155363871">Mario Carneiro (Jan 18 2019 at 06:54)</a>:</h4>
 <p>apparently (reading the src now)</p>
 
 <a name="155363877"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/155363877" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#155363877">Rob Lewis (Jan 17 2019 at 20:54)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/155363877" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#155363877">Rob Lewis (Jan 18 2019 at 06:54)</a>:</h4>
 <p>It might reject it at the parsing step though.</p>
 
 <a name="155363904"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/155363904" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#155363904">Rob Lewis (Jan 17 2019 at 20:55)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/155363904" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#155363904">Rob Lewis (Jan 18 2019 at 06:55)</a>:</h4>
 <p>I'll look into it soon.</p>
 
 <a name="155363935"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/155363935" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#155363935">Rob Lewis (Jan 17 2019 at 20:55)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/155363935" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#155363935">Rob Lewis (Jan 18 2019 at 06:55)</a>:</h4>
 <p>linarith takes arguments, in case you have lots of hypotheses and know which ones are contradictory.</p>
 
 <a name="155365130"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/155365130" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#155365130">Kevin Buzzard (Jan 17 2019 at 21:12)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/155365130" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#155365130">Kevin Buzzard (Jan 18 2019 at 07:12)</a>:</h4>
 <p>PS this was great:</p>
 <div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">:</span> <span class="n">abs</span> <span class="o">(</span><span class="n">x</span> <span class="bp">+</span> <span class="n">y</span><span class="o">)</span> <span class="bp">≤</span> <span class="n">abs</span> <span class="n">x</span> <span class="bp">+</span> <span class="n">abs</span> <span class="n">y</span> <span class="o">:=</span>
 <span class="k">begin</span>
@@ -74,79 +74,79 @@ permalink: archive/116395maths/87044linarithfailure.html
 </pre></div>
 
 <a name="155365202"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/155365202" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#155365202">Johan Commelin (Jan 17 2019 at 21:12)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/155365202" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#155365202">Johan Commelin (Jan 18 2019 at 07:12)</a>:</h4>
 <p>You can replace that <code>, repeat</code> with a <code>;</code></p>
 
 <a name="155365214"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/155365214" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#155365214">Johan Commelin (Jan 17 2019 at 21:12)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/155365214" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#155365214">Johan Commelin (Jan 18 2019 at 07:12)</a>:</h4>
 <p>But that's less readable</p>
 
 <a name="155365246"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/155365246" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#155365246">Patrick Massot (Jan 17 2019 at 21:13)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/155365246" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#155365246">Patrick Massot (Jan 18 2019 at 07:13)</a>:</h4>
 <p>It requires knowing what <code>;</code> does, but then it's readable</p>
 
 <a name="155366709"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/155366709" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#155366709">Rob Lewis (Jan 17 2019 at 21:34)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/155366709" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#155366709">Rob Lewis (Jan 18 2019 at 07:34)</a>:</h4>
 <p>This is buried a little deeper than I expected. It's a mistake in the part of <code>linarith</code> that normalizes non-integer coefficients (in <code>norm_hyp_aux</code> I think). I'll fix it, but not tonight.</p>
 
 <a name="155366787"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/155366787" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#155366787">Kevin Buzzard (Jan 17 2019 at 21:35)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/155366787" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#155366787">Kevin Buzzard (Jan 18 2019 at 07:35)</a>:</h4>
 <p>Thanks for chasing this up! I really want to let undergraduates see that doing basic analysis in Lean is really easy, the triangle inequality proof went down really well!</p>
 
 <a name="155366901"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/155366901" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#155366901">Patrick Massot (Jan 17 2019 at 21:37)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/155366901" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#155366901">Patrick Massot (Jan 18 2019 at 07:37)</a>:</h4>
 <p>I'm also very interested in this. Do you have files to share?</p>
 
 <a name="155366917"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/155366917" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#155366917">Kevin Buzzard (Jan 17 2019 at 21:37)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/155366917" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#155366917">Kevin Buzzard (Jan 18 2019 at 07:37)</a>:</h4>
 <p>I've only given one lecture so far and I've done barely anything.</p>
 
 <a name="155367083"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/155367083" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#155367083">Kevin Buzzard (Jan 17 2019 at 21:39)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/155367083" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#155367083">Kevin Buzzard (Jan 18 2019 at 07:39)</a>:</h4>
 <p><a href="https://github.com/ImperialCollegeLondon/M1P1-lean" target="_blank" title="https://github.com/ImperialCollegeLondon/M1P1-lean">https://github.com/ImperialCollegeLondon/M1P1-lean</a></p>
 
 <a name="155367161"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/155367161" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#155367161">Kevin Buzzard (Jan 17 2019 at 21:40)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/155367161" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#155367161">Kevin Buzzard (Jan 18 2019 at 07:40)</a>:</h4>
 <p>I proved a sequence has at most one limit; I used ring to prove things like e + e = 2 * e and Kenny was in the front row exploding.</p>
 
 <a name="155367175"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/155367175" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#155367175">Kevin Buzzard (Jan 17 2019 at 21:40)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/155367175" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#155367175">Kevin Buzzard (Jan 18 2019 at 07:40)</a>:</h4>
 <p>But I can't teach all the students the 100 lemmas each of which can be proved by ring</p>
 
 <a name="155367186"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/155367186" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#155367186">Kevin Buzzard (Jan 17 2019 at 21:40)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/155367186" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#155367186">Kevin Buzzard (Jan 18 2019 at 07:40)</a>:</h4>
 <p>I want to just teach them ring instead</p>
 
 <a name="155367420"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/155367420" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#155367420">Kevin Buzzard (Jan 17 2019 at 21:43)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/155367420" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#155367420">Kevin Buzzard (Jan 18 2019 at 07:43)</a>:</h4>
 <p>My plan is to track their lectures and prove the interesting theorems as they're proved in class.</p>
 
 <a name="155367472"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/155367472" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#155367472">Mario Carneiro (Jan 17 2019 at 21:44)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/155367472" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#155367472">Mario Carneiro (Jan 18 2019 at 07:44)</a>:</h4>
 <p>wow, you really jumped right in</p>
 
 <a name="155367509"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/155367509" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#155367509">Mario Carneiro (Jan 17 2019 at 21:44)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/155367509" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#155367509">Mario Carneiro (Jan 18 2019 at 07:44)</a>:</h4>
 <p>in the ITP class Jeremy and I are teaching we've barely got to what a <code>def</code> is, how <code>variable</code> and <code>section</code> work and so on</p>
 
 <a name="155367534"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/155367534" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#155367534">Kevin Buzzard (Jan 17 2019 at 21:45)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/155367534" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#155367534">Kevin Buzzard (Jan 18 2019 at 07:45)</a>:</h4>
 <p>I asked the lecturer. He said that he was going to assume that the reals were a complete archimedean field and develop everything from that.</p>
 
 <a name="155367547"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/155367547" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#155367547">Patrick Massot (Jan 17 2019 at 21:45)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/155367547" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#155367547">Patrick Massot (Jan 18 2019 at 07:45)</a>:</h4>
 <p>This is why we need mathematicians to teach proof assistants</p>
 
 <a name="155367632"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/155367632" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#155367632">Kevin Buzzard (Jan 17 2019 at 21:46)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/155367632" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#155367632">Kevin Buzzard (Jan 18 2019 at 07:46)</a>:</h4>
 <p>so my plan was to spend the term trying to prove the things he proved, but in Lean. I would imagine that many of them are in mathlib already, but I didn't even look at the definition of a sequence tending to a limit in case it used cofinite filters. Of course I used the epsilon / N definition, because that's what they're told.</p>
 
 <a name="156324714"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/156324714" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#156324714">Rob Lewis (Jan 17 2019 at 23:24)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/156324714" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#156324714">Rob Lewis (Jan 18 2019 at 09:24)</a>:</h4>
 <p>Never mind, I fixed it tonight. There could be some similar cases that this fix misses though.</p>
 
 <a name="156771005"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/156771005" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#156771005">Kevin Buzzard (Jan 24 2019 at 14:14)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/156771005" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#156771005">Kevin Buzzard (Jan 25 2019 at 00:14)</a>:</h4>
 <p>I have another linarith failure. The hypotheses involving <code>N</code> and <code>n</code> are irrelevant to the goal, and if you comment out the line with them in then linarith succeeds, but if you leave them in then it fails.</p>
 <div class="codehilite"><pre><span></span><span class="kn">example</span>
 <span class="o">(</span><span class="n">N</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">Hirrelevant</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">&gt;</span> <span class="n">N</span><span class="o">)</span> <span class="c1">-- comment out this line to fix</span>
@@ -160,15 +160,15 @@ permalink: archive/116395maths/87044linarithfailure.html
 </pre></div>
 
 <a name="156777566"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/156777566" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#156777566">Rob Lewis (Jan 24 2019 at 15:52)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/156777566" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#156777566">Rob Lewis (Jan 25 2019 at 01:52)</a>:</h4>
 <p>Yeah, I know what's going on here. <code>linarith</code> is actually "succeeding," but <code>Hirrelevant</code> convinced it it was working over <code>int</code> instead of <code>real</code>, so it builds the wrong proof of contradiction. I'm on it.</p>
 
 <a name="156777590"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/156777590" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#156777590">Rob Lewis (Jan 24 2019 at 15:52)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/156777590" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#156777590">Rob Lewis (Jan 25 2019 at 01:52)</a>:</h4>
 <p>In the meantime, you can help it out by calling <code>linarith {restrict_type := ℝ}</code> instead.</p>
 
 <a name="157057941"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157057941" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157057941">Kevin Buzzard (Jan 28 2019 at 22:13)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157057941" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157057941">Kevin Buzzard (Jan 29 2019 at 08:13)</a>:</h4>
 <p>Is this expected behaviour? </p>
 <div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">linarith</span>
 
@@ -194,19 +194,19 @@ permalink: archive/116395maths/87044linarithfailure.html
 <p>In practice I have some positive real <code>eps := (b - a) / 2</code> which is mentioned in several hypotheses  and the conclusion. I can close my goal with lots of <code>change</code> or <code>show</code> commands removing all the <code>eps</code>'s and then running <code>linarith</code> after, but my understanding of the internals of <code>linarith</code> is sufficiently poor that I don't know whether I should expect the tactic to handle these variables defined in terms of other variables or whether they're my problem.</p>
 
 <a name="157058260"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157058260" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157058260">Kevin Buzzard (Jan 28 2019 at 22:16)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157058260" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157058260">Kevin Buzzard (Jan 29 2019 at 08:16)</a>:</h4>
 <p>Aah, I can do <code>have Heps : eps = (b - a) / 2 := rfl, rw Heps at *</code> as a workaround :-) I don't know any other way of doing multiple substitutions at once.</p>
 
 <a name="157058397"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157058397" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157058397">Reid Barton (Jan 28 2019 at 22:18)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157058397" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157058397">Reid Barton (Jan 29 2019 at 08:18)</a>:</h4>
 <p>Do you need the <code>rw</code>? After all <code>eps = (b - a) / 2</code> is also a linear constraint</p>
 
 <a name="157058484"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157058484" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157058484">Kevin Buzzard (Jan 28 2019 at 22:19)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157058484" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157058484">Kevin Buzzard (Jan 29 2019 at 08:19)</a>:</h4>
 <p>Well spotted :-) Yes, it works fine in my (quite complicated) use case. Excellent trick!</p>
 
 <a name="157058742"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157058742" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157058742">Kevin Buzzard (Jan 28 2019 at 22:23)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157058742" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157058742">Kevin Buzzard (Jan 29 2019 at 08:23)</a>:</h4>
 <div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">linarith</span>
 
 <span class="kn">example</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">(</span><span class="n">b</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">&lt;</span> <span class="n">b</span><span class="o">)</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">&lt;</span> <span class="n">b</span> <span class="o">:=</span>
@@ -220,15 +220,15 @@ permalink: archive/116395maths/87044linarithfailure.html
 </pre></div>
 
 <a name="157058940"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157058940" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157058940">Kevin Buzzard (Jan 28 2019 at 22:25)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157058940" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157058940">Kevin Buzzard (Jan 29 2019 at 08:25)</a>:</h4>
 <p>It's funny that <code>c := b</code> shows up in my local context, but the hypothesis that c = b is apparently not in it. If the let were syntactic sugar, I wouldn't need the have, right? I'm not entirely sure what's going on here. Hmm, oh OK, maybe c is defined to be b, and Lean knows this but the fact isn't in the local context. I guess I'm showing my ignorance of how things really work here. I was hoping <code>unfold eps</code> would work in my case but it didn't.</p>
 
 <a name="157060217"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157060217" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157060217">Reid Barton (Jan 28 2019 at 22:42)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157060217" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157060217">Reid Barton (Jan 29 2019 at 08:42)</a>:</h4>
 <p>It seems like tactics like <code>rw</code> and <code>simp</code> sometimes "see through" let-bound variables, and I never understood exactly when or why</p>
 
 <a name="157060491"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157060491" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157060491">Rob Lewis (Jan 28 2019 at 22:45)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157060491" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157060491">Rob Lewis (Jan 29 2019 at 08:45)</a>:</h4>
 <blockquote>
 <p>maybe c is defined to be b</p>
 </blockquote>
@@ -239,35 +239,35 @@ permalink: archive/116395maths/87044linarithfailure.html
 <p>The information is in the type context, which is why you see <code>c : Z := b</code>. There's no term of type <code>c = b</code> until you add it manually. I don't think <code>linarith</code> should unfold <code>let</code> bindings, since they can be used to hide arbitrarily large terms. It's analogous to unfolding definitions (which <code>linarith</code> doesn't do and shouldn't do).</p>
 
 <a name="157061190"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157061190" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157061190">Kevin Buzzard (Jan 28 2019 at 22:56)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157061190" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157061190">Kevin Buzzard (Jan 29 2019 at 08:56)</a>:</h4>
 <p>Thanks for the clarification Rob. I didn't like my original solution (lots of 'change') but I'm happy to add the hypothesis that <code>c</code> equals its definition to the context and then let <code>linarith</code> take over. I have over 20 occurrences of <code>linarith</code> in <a href="https://github.com/ImperialCollegeLondon/M1P1-lean/blob/master/src/limits.lean" target="_blank" title="https://github.com/ImperialCollegeLondon/M1P1-lean/blob/master/src/limits.lean">https://github.com/ImperialCollegeLondon/M1P1-lean/blob/master/src/limits.lean</a> so far; it's an essential tactic for this sort of thing.</p>
 
 <a name="157061326"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157061326" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157061326">Patrick Massot (Jan 28 2019 at 22:58)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157061326" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157061326">Patrick Massot (Jan 29 2019 at 08:58)</a>:</h4>
 <p>Did you tried also using <code>mono</code>?</p>
 
 <a name="157061337"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157061337" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157061337">Kevin Buzzard (Jan 28 2019 at 22:59)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157061337" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157061337">Kevin Buzzard (Jan 29 2019 at 08:59)</a>:</h4>
 <p>I don't know what that does.</p>
 
 <a name="157061346"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157061346" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157061346">Kevin Buzzard (Jan 28 2019 at 22:59)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157061346" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157061346">Kevin Buzzard (Jan 29 2019 at 08:59)</a>:</h4>
 <p>Isn't it some disease in the US?</p>
 
 <a name="157061489"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157061489" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157061489">Patrick Massot (Jan 28 2019 at 23:01)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157061489" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157061489">Patrick Massot (Jan 29 2019 at 09:01)</a>:</h4>
 <p><a href="https://github.com/leanprover/mathlib/blob/master/docs/tactics.md#mono" target="_blank" title="https://github.com/leanprover/mathlib/blob/master/docs/tactics.md#mono">https://github.com/leanprover/mathlib/blob/master/docs/tactics.md#mono</a></p>
 
 <a name="157061576"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157061576" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157061576">Patrick Massot (Jan 28 2019 at 23:02)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157061576" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157061576">Patrick Massot (Jan 29 2019 at 09:02)</a>:</h4>
 <p>There is also <a href="https://github.com/leanprover/mathlib/blob/master/docs/tactics.md#apply_rules" target="_blank" title="https://github.com/leanprover/mathlib/blob/master/docs/tactics.md#apply_rules">https://github.com/leanprover/mathlib/blob/master/docs/tactics.md#apply_rules</a></p>
 
 <a name="157061835"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157061835" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157061835">Patrick Massot (Jan 28 2019 at 23:06)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157061835" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157061835">Patrick Massot (Jan 29 2019 at 09:06)</a>:</h4>
 <p>but apply_rules seems very slow</p>
 
 <a name="157061960"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157061960" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157061960">Patrick Massot (Jan 28 2019 at 23:08)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157061960" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157061960">Patrick Massot (Jan 29 2019 at 09:08)</a>:</h4>
 <p>You can try to stick the following into  your limits file:</p>
 <div class="codehilite"><pre><span></span><span class="c1">-- Next lemma could be either hidden of given a user-friendly proof</span>
 <span class="kn">lemma</span> <span class="n">zero_of_abs_lt_all</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">ε</span> <span class="bp">&gt;</span> <span class="mi">0</span><span class="o">,</span> <span class="bp">|</span><span class="n">x</span><span class="bp">|</span> <span class="bp">&lt;</span> <span class="n">ε</span><span class="o">)</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span>
@@ -316,31 +316,31 @@ permalink: archive/116395maths/87044linarithfailure.html
 </pre></div>
 
 <a name="157062049"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157062049" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157062049">Patrick Massot (Jan 28 2019 at 23:10)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157062049" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157062049">Patrick Massot (Jan 29 2019 at 09:10)</a>:</h4>
 <p>Note that you can put <code>triangle'</code> into the list of obvious inequalities and get all inequalities proved for free, but this would probably be cheating</p>
 
 <a name="157063086"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157063086" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157063086">Kevin Buzzard (Jan 28 2019 at 23:27)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157063086" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157063086">Kevin Buzzard (Jan 29 2019 at 09:27)</a>:</h4>
 <p>Can this do the product of limits is limit of product?</p>
 
 <a name="157063094"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157063094" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157063094">Kevin Buzzard (Jan 28 2019 at 23:27)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157063094" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157063094">Kevin Buzzard (Jan 29 2019 at 09:27)</a>:</h4>
 <p>That was horrible</p>
 
 <a name="157063115"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157063115" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157063115">Kevin Buzzard (Jan 28 2019 at 23:27)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157063115" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157063115">Kevin Buzzard (Jan 29 2019 at 09:27)</a>:</h4>
 <p><a href="https://github.com/ImperialCollegeLondon/M1P1-lean/blob/87f2b5b4dc741c5d44751678e37229c1964799e3/src/limits.lean#L299" target="_blank" title="https://github.com/ImperialCollegeLondon/M1P1-lean/blob/87f2b5b4dc741c5d44751678e37229c1964799e3/src/limits.lean#L299">https://github.com/ImperialCollegeLondon/M1P1-lean/blob/87f2b5b4dc741c5d44751678e37229c1964799e3/src/limits.lean#L299</a> That was where it started going wrong</p>
 
 <a name="157065227"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157065227" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157065227">Kevin Buzzard (Jan 29 2019 at 00:00)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157065227" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157065227">Kevin Buzzard (Jan 29 2019 at 10:00)</a>:</h4>
 <p><code>linarith</code> seems to know <code>add_lt_add</code> for the reals.</p>
 
 <a name="157067936"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157067936" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157067936">Kevin Buzzard (Jan 29 2019 at 00:45)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157067936" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157067936">Kevin Buzzard (Jan 29 2019 at 10:45)</a>:</h4>
 <p><a href="#narrow/stream/116395-maths/topic/nonlinarith/near/157067630" title="#narrow/stream/116395-maths/topic/nonlinarith/near/157067630">https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/nonlinarith/near/157067630</a> Got it, thanks to you and Reid.</p>
 
 <a name="157088858"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157088858" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157088858">Patrick Massot (Jan 29 2019 at 09:27)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157088858" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157088858">Patrick Massot (Jan 29 2019 at 19:27)</a>:</h4>
 <p>Actually I also don't like your <code>triangle'</code>. Remembering 10 versions of the triangle inequality is not how we teach this. You can do:</p>
 <div class="codehilite"><pre><span></span>  <span class="k">calc</span>
     <span class="bp">|</span><span class="n">l</span> <span class="bp">-</span> <span class="n">m</span><span class="bp">|</span> <span class="bp">=</span> <span class="bp">|</span><span class="o">(</span><span class="n">l</span> <span class="bp">-</span> <span class="n">a</span> <span class="n">N</span><span class="o">)</span> <span class="bp">+</span> <span class="o">(</span><span class="n">a</span> <span class="n">N</span> <span class="bp">-</span> <span class="n">m</span><span class="o">)</span><span class="bp">|</span> <span class="o">:</span> <span class="k">by</span> <span class="n">ring</span>
@@ -354,27 +354,27 @@ permalink: archive/116395maths/87044linarithfailure.html
 <p>where the only painful part is this <code>rw abs_sub</code>. I added <code>abs_add</code>, which is the regular triangle inequality for abs, to the <code>obvious_ineq</code> rules, but it's probably better to explicitly use it since it's a key part of the argument</p>
 
 <a name="157088863"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157088863" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157088863">Patrick Massot (Jan 29 2019 at 09:27)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157088863" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157088863">Patrick Massot (Jan 29 2019 at 19:27)</a>:</h4>
 <p>simply replace that <code>by obvious_ineq</code> with <code>abs_add _ _</code></p>
 
 <a name="157088922"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157088922" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157088922">Patrick Massot (Jan 29 2019 at 09:28)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157088922" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157088922">Patrick Massot (Jan 29 2019 at 19:28)</a>:</h4>
 <p>I'll do limits of products tonight if I have time, and if I'm not too depressed about trying to use Lean for teaching (my first lecture using Lean will be at the end of this afternoon)</p>
 
 <a name="157090831"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157090831" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157090831">Johan Commelin (Jan 29 2019 at 10:01)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157090831" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157090831">Johan Commelin (Jan 29 2019 at 20:01)</a>:</h4>
 <p>Good luck Patrick!</p>
 
 <a name="157090851"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157090851" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157090851">Johan Commelin (Jan 29 2019 at 10:01)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157090851" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157090851">Johan Commelin (Jan 29 2019 at 20:01)</a>:</h4>
 <p>And I really like your little tactics!</p>
 
 <a name="157104340"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157104340" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157104340">Jeremy Avigad (Jan 29 2019 at 14:26)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157104340" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157104340">Jeremy Avigad (Jan 30 2019 at 00:26)</a>:</h4>
 <p>A thought: it might be useful to have a tactic <code>set</code> that does what Kevin wants, i.e. a version of <code>let</code> that puts an equality in the context. For example, <code>set h : a = t</code> would create a new variable <code>a</code>, and put <code>h : a = t</code> into the context. Under the hood, <code>set</code> changes the goal <code>G</code> to <code>forall a, a = t -&gt; G</code>, and then introduces the hypotheses. It's a combination of noting <code>t = t</code>, reverting, generalizing, and introducing. (But maybe there is already a nice way to do this?)</p>
 
 <a name="157106342"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157106342" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157106342">Rob Lewis (Jan 29 2019 at 14:59)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157106342" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157106342">Rob Lewis (Jan 30 2019 at 00:59)</a>:</h4>
 <p>It seems more natural to use a <code>let</code> to do that. Why not preserve the definitional equality?</p>
 <div class="codehilite"><pre><span></span><span class="kn">open</span> <span class="n">tactic</span> <span class="n">lean</span><span class="bp">.</span><span class="n">parser</span> <span class="n">interactive</span> <span class="n">interactive</span><span class="bp">.</span><span class="n">types</span>
 
@@ -395,137 +395,137 @@ permalink: archive/116395maths/87044linarithfailure.html
 </pre></div>
 
 <a name="157108335"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157108335" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157108335">Jeremy Avigad (Jan 29 2019 at 15:27)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157108335" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157108335">Jeremy Avigad (Jan 30 2019 at 01:27)</a>:</h4>
 <p>Looks good to me!</p>
 
 <a name="157109507"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157109507" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157109507">Kevin Buzzard (Jan 29 2019 at 15:42)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157109507" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157109507">Kevin Buzzard (Jan 30 2019 at 01:42)</a>:</h4>
 <p>The syntax looks a bit funny, it looks like h has type n :-/</p>
 
 <a name="157109611"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157109611" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157109611">Rob Lewis (Jan 29 2019 at 15:43)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157109611" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157109611">Rob Lewis (Jan 30 2019 at 01:43)</a>:</h4>
 <p>It is unfortunately not analogous to <code>let h : n := x + y</code>. Better suggestion?</p>
 
 <a name="157109680"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157109680" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157109680">Kevin Buzzard (Jan 29 2019 at 15:44)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157109680" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157109680">Kevin Buzzard (Jan 30 2019 at 01:44)</a>:</h4>
 <p>I remember always being muddled by <code>generalize</code>...</p>
 
 <a name="157109722"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157109722" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157109722">Rob Lewis (Jan 29 2019 at 15:45)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157109722" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157109722">Rob Lewis (Jan 30 2019 at 01:45)</a>:</h4>
 <p><code>set n := x + y using h</code>?</p>
 
 <a name="157109742"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157109742" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157109742">Kevin Buzzard (Jan 29 2019 at 15:45)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157109742" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157109742">Kevin Buzzard (Jan 30 2019 at 01:45)</a>:</h4>
 <p>maybe that's better!</p>
 
 <a name="157109750"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157109750" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157109750">Kevin Buzzard (Jan 29 2019 at 15:45)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157109750" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157109750">Kevin Buzzard (Jan 30 2019 at 01:45)</a>:</h4>
 <p>cool little parser exercise to do now :-)</p>
 
 <a name="157110988"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157110988" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157110988">Johan Commelin (Jan 29 2019 at 16:03)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157110988" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157110988">Johan Commelin (Jan 30 2019 at 02:03)</a>:</h4>
 <p><code>set n := x + y with h</code> in analogy with <code>cases ... with</code> etc.<br>
 I think <code>using</code> will "use" one of your current hypotheses, or some expression (like in <code>simpa</code>),<br>
 whereas <code>with</code> gives names for new hypotheses.</p>
 
 <a name="157120730"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157120730" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157120730">Sebastien Gouezel (Jan 29 2019 at 18:18)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157120730" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157120730">Sebastien Gouezel (Jan 30 2019 at 04:18)</a>:</h4>
 <p>Is it possible to even get <code>let n := x + y with h</code>?</p>
 
 <a name="157131673"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157131673" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157131673">Patrick Massot (Jan 29 2019 at 20:41)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157131673" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157131673">Patrick Massot (Jan 30 2019 at 06:41)</a>:</h4>
 <p>In addition to syntax discussions, the question is whether this tactic should replace <code>x+y</code> by <code>n</code> everywhere, or only in the goal, or nowhere.</p>
 
 <a name="157131920"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157131920" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157131920">Johan Commelin (Jan 29 2019 at 20:44)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157131920" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157131920">Johan Commelin (Jan 30 2019 at 06:44)</a>:</h4>
 <p>In the example that Rob posted, associativity would prevent a naive replacement to yield <code>n+n+n = 5</code>, right? So then the replacement algorithm needs to know about associativity, and it becomes complicated.</p>
 
 <a name="157134524"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157134524" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157134524">Rob Lewis (Jan 29 2019 at 21:17)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157134524" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157134524">Rob Lewis (Jan 30 2019 at 07:17)</a>:</h4>
 <p>Yeah, the example doesn't illustrate this very well. Maybe a variant <code>set! n := x + y with h</code> could try <code>simp only [h.symm] at *</code> at the end. But I think it's better not to do this by default, to match the behavior of <code>let</code>.</p>
 
 <a name="157134602"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157134602" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157134602">Rob Lewis (Jan 29 2019 at 21:18)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157134602" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157134602">Rob Lewis (Jan 30 2019 at 07:18)</a>:</h4>
 <p><span class="user-mention" data-user-id="110050">@Sebastien Gouezel</span> <code>tactic.interactive.let</code> is defined in core, so I'm afraid not.</p>
 
 <a name="157346025"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157346025" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157346025">Rob Lewis (Feb 01 2019 at 12:18)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157346025" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157346025">Rob Lewis (Feb 01 2019 at 22:18)</a>:</h4>
 <p>I've added this. The basic syntax is <code>set n := x + y with h</code>. Alternatives: <code>set! n := x + y with h</code> will rewrite <code>x + y</code> to <code>n</code> everywhere it can. <code>set n := x + y with h⁻¹</code> will make the equality proof face the other direction.</p>
 
 <a name="157346068"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157346068" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157346068">Rob Lewis (Feb 01 2019 at 12:19)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157346068" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157346068">Rob Lewis (Feb 01 2019 at 22:19)</a>:</h4>
 <p>I ended up needing this tactic for something I was doing yesterday, heh. It also led me to another bug in <code>linarith</code>.</p>
 
 <a name="157346771"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157346771" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157346771">Mario Carneiro (Feb 01 2019 at 12:35)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157346771" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157346771">Mario Carneiro (Feb 01 2019 at 22:35)</a>:</h4>
 <p>how is this different from <code>let</code>?</p>
 
 <a name="157346836"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157346836" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157346836">Rob Lewis (Feb 01 2019 at 12:36)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157346836" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157346836">Rob Lewis (Feb 01 2019 at 22:36)</a>:</h4>
 <p>It adds a hypothesis that states the new definition propositionally.</p>
 
 <a name="157346840"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157346840" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157346840">Mario Carneiro (Feb 01 2019 at 12:36)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157346840" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157346840">Mario Carneiro (Feb 01 2019 at 22:36)</a>:</h4>
 <p>is it also a let?</p>
 
 <a name="157346844"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157346844" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157346844">Rob Lewis (Feb 01 2019 at 12:36)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157346844" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157346844">Rob Lewis (Feb 01 2019 at 22:36)</a>:</h4>
 <p>Yes.</p>
 
 <a name="157346868"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157346868" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157346868">Mario Carneiro (Feb 01 2019 at 12:37)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157346868" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157346868">Mario Carneiro (Feb 01 2019 at 22:37)</a>:</h4>
 <p>I think the <code>set n := x + y</code> variant may also be useful - no equality assumption, but <code>x + y</code> gets replaced by <code>n</code></p>
 
 <a name="157346928"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157346928" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157346928">Mario Carneiro (Feb 01 2019 at 12:38)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157346928" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157346928">Mario Carneiro (Feb 01 2019 at 22:38)</a>:</h4>
 <p>I think that <code>set!</code> should be the default behavior, I'm not sure where the <code>set</code> behavior is better</p>
 
 <a name="157346961"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157346961" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157346961">Mario Carneiro (Feb 01 2019 at 12:39)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157346961" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157346961">Mario Carneiro (Feb 01 2019 at 22:39)</a>:</h4>
 <p>also I suggest <code>&lt;- h</code> instead of <code>h⁻¹</code> for the reversed proof - we haven't used the inverse symbol for symmetry since lean 2</p>
 
 <a name="157347045"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157347045" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157347045">Kenny Lau (Feb 01 2019 at 12:41)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157347045" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157347045">Kenny Lau (Feb 01 2019 at 22:41)</a>:</h4>
 <p>Next time could we discuss the details before making changes to the mathlib in order to minimize changes to <code>tactic/interactive.lean</code>?</p>
 
 <a name="157347099"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157347099" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157347099">Rob Lewis (Feb 01 2019 at 12:42)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157347099" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157347099">Rob Lewis (Feb 01 2019 at 22:42)</a>:</h4>
 <p>I chose this as the default because <code>set!</code> sometimes reorders hypotheses, which is a little annoying if you don't care. It's not a big deal though, I can change it. Sure, the behavior without an equality hypothesis sounds good, as well as the notation.</p>
 
 <a name="157347114"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157347114" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157347114">Mario Carneiro (Feb 01 2019 at 12:43)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157347114" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157347114">Mario Carneiro (Feb 01 2019 at 22:43)</a>:</h4>
 <p>I hope that the changes can be obtained by <code>change</code> rather than <code>rw</code></p>
 
 <a name="157347134"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157347134" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157347134">Rob Lewis (Feb 01 2019 at 12:43)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157347134" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157347134">Rob Lewis (Feb 01 2019 at 22:43)</a>:</h4>
 <p><code>change at *</code> seems to have a bug, it fails completely.</p>
 
 <a name="157347140"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157347140" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157347140">Rob Lewis (Feb 01 2019 at 12:43)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157347140" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157347140">Rob Lewis (Feb 01 2019 at 22:43)</a>:</h4>
 <p>Or rather, it succeeds without doing anything.</p>
 
 <a name="157347202"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157347202" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157347202">Mario Carneiro (Feb 01 2019 at 12:44)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157347202" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157347202">Mario Carneiro (Feb 01 2019 at 22:44)</a>:</h4>
 <p>you have to do it somewhat manually with the noninteractive change</p>
 
 <a name="157347215"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157347215" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157347215">Mario Carneiro (Feb 01 2019 at 12:44)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157347215" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157347215">Mario Carneiro (Feb 01 2019 at 22:44)</a>:</h4>
 <p>you revert the relevant hypotheses then use <code>tactic.change</code></p>
 
 <a name="157347314"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157347314" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157347314">Rob Lewis (Feb 01 2019 at 12:46)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157347314" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157347314">Rob Lewis (Feb 01 2019 at 22:46)</a>:</h4>
 <p>I'll give it another shot. I tried this first, but it was behaving strangely.</p>
 
 <a name="157347319"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157347319" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157347319">Rob Lewis (Feb 01 2019 at 12:46)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157347319" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157347319">Rob Lewis (Feb 01 2019 at 22:46)</a>:</h4>
 <p>Gotta run, lunchtime.</p>
 
 <a name="157363142"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157363142" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157363142">Sebastien Gouezel (Feb 01 2019 at 17:01)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157363142" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157363142">Sebastien Gouezel (Feb 02 2019 at 03:01)</a>:</h4>
 <p><code>set</code>-related question, although indirectly. I have an element of <code>fin n</code> given by a complicated formula, to which I would like to give a name for clarity. <code>let x := complicated_expression</code> works fine, but it would even be more useful for me to give a name to the fields of <code>x</code> directly, i.e., to write <code>let ⟨i, hi⟩ := complicated_expression</code>. This does not work. I can define <code>x</code>, and then <code>let i := x.1, let hi := x.2</code>, but then the fact that <code>⟨i, hi⟩ = complicated_expression</code> is not refl, it requires a proof based for instance on <code>fin.ext_iff</code>. All this looks like useless plumbing to me. Is there a nice syntax to do this that I am unaware of?</p>
 
 <a name="157514110"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157514110" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157514110">Kevin Buzzard (Feb 04 2019 at 11:45)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157514110" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157514110">Kevin Buzzard (Feb 04 2019 at 21:45)</a>:</h4>
 <p>Sebastien's question above deserves some expert comment but perhaps it's not in the right thread. </p>
 <p>Independent of all this, here's an interesting session:</p>
 <div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">linarith</span>
@@ -548,62 +548,62 @@ whereas <code>with</code> gives names for new hypotheses.</p>
 <p>Anyway, of course I could just take the lame way out and restrict to <code>linear_ordered_comm_rings</code>, which ultimately I will surely end up doing, but I tried to work my way around this using <code>simp</code> and realised that I could not get the <code>discharger</code> argument to <code>linarith</code> working. Unfortunately my knowledge of meta lean is still sufficiently poor that I basically grind to a halt here when trying to debug why <code>{discharger := simp}</code> fails. Did I do something wrong or is there a bug?</p>
 
 <a name="157514312"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157514312" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157514312">Mario Carneiro (Feb 04 2019 at 11:49)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157514312" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157514312">Mario Carneiro (Feb 04 2019 at 21:49)</a>:</h4>
 <p>To sebastian's question: it is impossible to achieve exactly the defeqs that he would want. In general it is not possible to get <code>⟨i, hi⟩ = complicated_expression</code> to be defeq, unless <code>complicated_expression</code> has a particular form that allows reduction to a constructor</p>
 
 <a name="157514413"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157514413" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157514413">Mario Carneiro (Feb 04 2019 at 11:50)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157514413" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157514413">Mario Carneiro (Feb 04 2019 at 21:50)</a>:</h4>
 <p>However <code>rcases complicated_expression with ⟨i, hi⟩</code> will often achieve the desired result, provided you don't need to refer back to any more properties of <code>complicated_expression</code> after this point. (If you do, you can make sure to state them before the cases)</p>
 
 <a name="157514439"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157514439" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157514439">Kevin Buzzard (Feb 04 2019 at 11:51)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157514439" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157514439">Kevin Buzzard (Feb 04 2019 at 21:51)</a>:</h4>
 <p>Would <code>cases complicated_expression with i hi</code> be any different?</p>
 
 <a name="157514442"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157514442" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157514442">Mario Carneiro (Feb 04 2019 at 11:51)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157514442" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157514442">Mario Carneiro (Feb 04 2019 at 21:51)</a>:</h4>
 <p>no</p>
 
 <a name="157514452"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157514452" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157514452">Mario Carneiro (Feb 04 2019 at 11:51)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157514452" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157514452">Mario Carneiro (Feb 04 2019 at 21:51)</a>:</h4>
 <p>rcases just looks a bit closer to the other syntax</p>
 
 <a name="157514522"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157514522" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157514522">Mario Carneiro (Feb 04 2019 at 11:53)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157514522" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157514522">Mario Carneiro (Feb 04 2019 at 21:53)</a>:</h4>
 <p>does <code>abel</code> work on those goals?</p>
 
 <a name="157514577"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157514577" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157514577">Kevin Buzzard (Feb 04 2019 at 11:54)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157514577" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157514577">Kevin Buzzard (Feb 04 2019 at 21:54)</a>:</h4>
 <p>I'm going to move the <code>floor_ring</code> discussion elsewhere.</p>
 
 <a name="157514609"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157514609" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157514609">Kevin Buzzard (Feb 04 2019 at 11:54)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157514609" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157514609">Kevin Buzzard (Feb 04 2019 at 21:54)</a>:</h4>
 <p><code>abel</code> -&gt; <code>r + gsmul (-1) s ≤ r</code></p>
 
 <a name="157514643"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157514643" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157514643">Mario Carneiro (Feb 04 2019 at 11:55)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157514643" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157514643">Mario Carneiro (Feb 04 2019 at 21:55)</a>:</h4>
 <p>My bet is that there are noncomm linear ordered rings</p>
 
 <a name="157514722"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157514722" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157514722">Rob Lewis (Feb 04 2019 at 11:56)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157514722" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157514722">Rob Lewis (Feb 04 2019 at 21:56)</a>:</h4>
 <p>For the discharger question, use <code> `[simp] </code>instead.</p>
 
 <a name="157514948"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157514948" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157514948">Sebastien Gouezel (Feb 04 2019 at 12:01)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157514948" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157514948">Sebastien Gouezel (Feb 04 2019 at 22:01)</a>:</h4>
 <blockquote>
 <p>However <code>rcases complicated_expression with ⟨i, hi⟩</code> will often achieve the desired result, provided you don't need to refer back to any more properties of <code>complicated_expression</code> after this point. (If you do, you can make sure to state them before the cases)</p>
 </blockquote>
 <p>This is not an option in my case, I need to keep all information on <code>complicated_expression</code>. Fine, I'll go with my basic ugly (but working) solution, <code>let</code>ting the components separately and proving the equality.</p>
 
 <a name="157514966"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157514966" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157514966">Mario Carneiro (Feb 04 2019 at 12:01)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157514966" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157514966">Mario Carneiro (Feb 04 2019 at 22:01)</a>:</h4>
 <p>you should be able to get the equality on the components if you use <code>set</code></p>
 
 <a name="157515031"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157515031" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157515031">Sebastien Gouezel (Feb 04 2019 at 12:02)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157515031" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157515031">Sebastien Gouezel (Feb 04 2019 at 22:02)</a>:</h4>
 <p>To try this, I have to rebase on a recent mathlib version :)</p>
 
 <a name="157515051"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157515051" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157515051">Mario Carneiro (Feb 04 2019 at 12:03)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157515051" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87044linarithfailure.html#157515051">Mario Carneiro (Feb 04 2019 at 22:03)</a>:</h4>
 <blockquote>
 <p>I need to keep all information on complicated_expression.</p>
 </blockquote>

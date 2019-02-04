@@ -12,19 +12,19 @@ permalink: archive/113488general/10216recursingonmutualinductivetypes.html
 <base href="https://leanprover.zulipchat.com">
 {% raw %}
 <a name="127212172"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/recursing%20on%20mutual%20inductive%20types/near/127212172" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/10216recursingonmutualinductivetypes.html#127212172">Jakob von Raumer (May 28 2018 at 18:10)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/recursing%20on%20mutual%20inductive%20types/near/127212172" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/10216recursingonmutualinductivetypes.html#127212172">Jakob von Raumer (May 29 2018 at 02:10)</a>:</h4>
 <p>What's the best way to prove a theorem about a mutual type where the induction should use both types?</p>
 
 <a name="127212388"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/recursing%20on%20mutual%20inductive%20types/near/127212388" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/10216recursingonmutualinductivetypes.html#127212388">Jakob von Raumer (May 28 2018 at 18:17)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/recursing%20on%20mutual%20inductive%20types/near/127212388" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/10216recursingonmutualinductivetypes.html#127212388">Jakob von Raumer (May 29 2018 at 02:17)</a>:</h4>
 <p>I know that there is <code>mutual def</code> but that's really not good to work with when you're not into pattern matching but instead use tactics...</p>
 
 <a name="127212435"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/recursing%20on%20mutual%20inductive%20types/near/127212435" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/10216recursingonmutualinductivetypes.html#127212435">Jakob von Raumer (May 28 2018 at 18:18)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/recursing%20on%20mutual%20inductive%20types/near/127212435" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/10216recursingonmutualinductivetypes.html#127212435">Jakob von Raumer (May 29 2018 at 02:18)</a>:</h4>
 <p>There must be a recursion theorem somewhere that does what <code>mutual def</code> does, right?</p>
 
 <a name="127219962"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/recursing%20on%20mutual%20inductive%20types/near/127219962" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/10216recursingonmutualinductivetypes.html#127219962">Mario Carneiro (May 28 2018 at 22:19)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/recursing%20on%20mutual%20inductive%20types/near/127219962" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/10216recursingonmutualinductivetypes.html#127219962">Mario Carneiro (May 29 2018 at 06:19)</a>:</h4>
 <p>The usual approach is to use <code>mutual def</code>. Internally it is implemented by well founded recursion, so you can also do that yourself but the equation compiler does all the hard work. If you must do it manually (or if the default well founded recursion is not strong enough), you will probably want to state a custom induction principle, and prove it by unfolding the underlying <code>._mut_</code> type. Here's an example:</p>
 <div class="codehilite"><pre><span></span>mutual inductive even, odd
 with even : ℕ → Prop
@@ -54,19 +54,19 @@ end
 </pre></div>
 
 <a name="127224740"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/recursing%20on%20mutual%20inductive%20types/near/127224740" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/10216recursingonmutualinductivetypes.html#127224740">Jakob von Raumer (May 29 2018 at 01:09)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/recursing%20on%20mutual%20inductive%20types/near/127224740" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/10216recursingonmutualinductivetypes.html#127224740">Jakob von Raumer (May 29 2018 at 09:09)</a>:</h4>
 <p>Thanks for the example :)</p>
 
 <a name="127224789"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/recursing%20on%20mutual%20inductive%20types/near/127224789" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/10216recursingonmutualinductivetypes.html#127224789">Jakob von Raumer (May 29 2018 at 01:10)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/recursing%20on%20mutual%20inductive%20types/near/127224789" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/10216recursingonmutualinductivetypes.html#127224789">Jakob von Raumer (May 29 2018 at 09:10)</a>:</h4>
 <p>Too bad that the recursor you're proving there is not generated automatically</p>
 
 <a name="127225223"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/recursing%20on%20mutual%20inductive%20types/near/127225223" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/10216recursingonmutualinductivetypes.html#127225223">Mario Carneiro (May 29 2018 at 01:27)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/recursing%20on%20mutual%20inductive%20types/near/127225223" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/10216recursingonmutualinductivetypes.html#127225223">Mario Carneiro (May 29 2018 at 09:27)</a>:</h4>
 <p>I don't think we have a good story for what mutual induction principles look like in general</p>
 
 <a name="127225269"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/recursing%20on%20mutual%20inductive%20types/near/127225269" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/10216recursingonmutualinductivetypes.html#127225269">Mario Carneiro (May 29 2018 at 01:29)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/recursing%20on%20mutual%20inductive%20types/near/127225269" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/10216recursingonmutualinductivetypes.html#127225269">Mario Carneiro (May 29 2018 at 09:29)</a>:</h4>
 <p>There is some weak induction principle generated by default,</p>
 <div class="codehilite"><pre><span></span>#print even.rec
 -- protected def even.rec : ∀ (C : Π (a : ℕ), even a → Prop),
@@ -80,31 +80,31 @@ end
 <p>but as you can see they are non-mutual</p>
 
 <a name="127225277"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/recursing%20on%20mutual%20inductive%20types/near/127225277" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/10216recursingonmutualinductivetypes.html#127225277">Mario Carneiro (May 29 2018 at 01:29)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/recursing%20on%20mutual%20inductive%20types/near/127225277" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/10216recursingonmutualinductivetypes.html#127225277">Mario Carneiro (May 29 2018 at 09:29)</a>:</h4>
 <p>lean 4 will have mutual inductives built in the kernel, so this problem will have to be addressed</p>
 
 <a name="127259598"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/recursing%20on%20mutual%20inductive%20types/near/127259598" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/10216recursingonmutualinductivetypes.html#127259598">Jakob von Raumer (May 29 2018 at 18:10)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/recursing%20on%20mutual%20inductive%20types/near/127259598" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/10216recursingonmutualinductivetypes.html#127259598">Jakob von Raumer (May 30 2018 at 02:10)</a>:</h4>
 <p>I'm not sure how to best express the induction principle (using <code>and</code> seems a bit of a hack)</p>
 
 <a name="127259636"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/recursing%20on%20mutual%20inductive%20types/near/127259636" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/10216recursingonmutualinductivetypes.html#127259636">Jakob von Raumer (May 29 2018 at 18:11)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/recursing%20on%20mutual%20inductive%20types/near/127259636" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/10216recursingonmutualinductivetypes.html#127259636">Jakob von Raumer (May 30 2018 at 02:11)</a>:</h4>
 <p>What do you mean by "good story"? I don't have a reference at hand, but I'm pretty sure that problem is solved in theory</p>
 
 <a name="127259641"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/recursing%20on%20mutual%20inductive%20types/near/127259641" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/10216recursingonmutualinductivetypes.html#127259641">Sebastian Ullrich (May 29 2018 at 18:11)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/recursing%20on%20mutual%20inductive%20types/near/127259641" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/10216recursingonmutualinductivetypes.html#127259641">Sebastian Ullrich (May 30 2018 at 02:11)</a>:</h4>
 <p>That's how it's done in Isabelle, no? Except they have a nice meta and.</p>
 
 <a name="127268128"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/recursing%20on%20mutual%20inductive%20types/near/127268128" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/10216recursingonmutualinductivetypes.html#127268128">Jakob von Raumer (May 29 2018 at 21:09)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/recursing%20on%20mutual%20inductive%20types/near/127268128" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/10216recursingonmutualinductivetypes.html#127268128">Jakob von Raumer (May 30 2018 at 05:09)</a>:</h4>
 <p>One could argue that since we got propositions as types, Lean's normal and is at least as nice as Isabelles meta and <span class="emoji emoji-1f600" title="grinning">:grinning:</span></p>
 
 <a name="127268228"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/recursing%20on%20mutual%20inductive%20types/near/127268228" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/10216recursingonmutualinductivetypes.html#127268228">Mario Carneiro (May 29 2018 at 21:11)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/recursing%20on%20mutual%20inductive%20types/near/127268228" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/10216recursingonmutualinductivetypes.html#127268228">Mario Carneiro (May 30 2018 at 05:11)</a>:</h4>
 <p>there isn't really any dichotomy between ands in lean, so it's not a big problem. The one thing is that and only works on Props, while mutual inductions in general are mutual recursion, in which case you want a data type like <code>pprod</code></p>
 
 <a name="127268297"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/recursing%20on%20mutual%20inductive%20types/near/127268297" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/10216recursingonmutualinductivetypes.html#127268297">Jakob von Raumer (May 29 2018 at 21:12)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/recursing%20on%20mutual%20inductive%20types/near/127268297" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/10216recursingonmutualinductivetypes.html#127268297">Jakob von Raumer (May 30 2018 at 05:12)</a>:</h4>
 <p>Oh right... <code>pprod</code> then</p>
 
 

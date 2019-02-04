@@ -12,19 +12,19 @@ permalink: archive/113488general/65864moreexprmunging.html
 <base href="https://leanprover.zulipchat.com">
 {% raw %}
 <a name="133605425"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20expr%20munging/near/133605425" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65864moreexprmunging.html#133605425">Scott Morrison (Sep 09 2018 at 13:28)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20expr%20munging/near/133605425" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65864moreexprmunging.html#133605425">Scott Morrison (Sep 09 2018 at 21:28)</a>:</h4>
 <p>Say I have an <code>expr</code> representing an iterated <code>pi</code> type, which is finally an equation, something like <code>Π (a : ℕ) (b : ℕ), f a b = g (a + b)</code>. From that, I want to produce <code>f ?m_1 ?m_2</code>, where <code>?m_1</code> and <code>?m_2</code> are newly created metavariables of the appropriate types.</p>
 
 <a name="133605426"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20expr%20munging/near/133605426" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65864moreexprmunging.html#133605426">Scott Morrison (Sep 09 2018 at 13:28)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20expr%20munging/near/133605426" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65864moreexprmunging.html#133605426">Scott Morrison (Sep 09 2018 at 21:28)</a>:</h4>
 <p>Any suggestions?</p>
 
 <a name="133605484"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20expr%20munging/near/133605484" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65864moreexprmunging.html#133605484">Reid Barton (Sep 09 2018 at 13:31)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20expr%20munging/near/133605484" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65864moreexprmunging.html#133605484">Reid Barton (Sep 09 2018 at 21:31)</a>:</h4>
 <p>Are you guaranteed that the left hand side will be literally <code>&lt;something&gt; a b</code>, where <code>a</code> and <code>b</code> are the variables introduced by the Pis in order? Or could it be some arbitrary expression involving <code>a</code> and <code>b</code>?</p>
 
 <a name="133605574"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20expr%20munging/near/133605574" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65864moreexprmunging.html#133605574">Simon Hudon (Sep 09 2018 at 13:34)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20expr%20munging/near/133605574" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65864moreexprmunging.html#133605574">Simon Hudon (Sep 09 2018 at 21:34)</a>:</h4>
 <div class="codehilite"><pre><span></span><span class="n">meta</span> <span class="n">def</span> <span class="n">get_lhs</span> <span class="o">:</span> <span class="n">expr</span> <span class="bp">-&gt;</span> <span class="n">tactic</span> <span class="n">expr</span>
 <span class="bp">|</span> <span class="o">(</span><span class="n">expr</span><span class="bp">.</span><span class="n">pi</span> <span class="n">n</span> <span class="n">bi</span> <span class="n">d</span> <span class="n">b</span><span class="o">)</span> <span class="o">:=</span>
 <span class="n">do</span> <span class="n">v</span> <span class="bp">&lt;-</span> <span class="n">mk_local&#39;</span> <span class="n">n</span> <span class="n">bi</span> <span class="n">d</span><span class="o">,</span>
@@ -35,11 +35,11 @@ permalink: archive/113488general/65864moreexprmunging.html
 </pre></div>
 
 <a name="133605626"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20expr%20munging/near/133605626" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65864moreexprmunging.html#133605626">Reid Barton (Sep 09 2018 at 13:36)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20expr%20munging/near/133605626" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65864moreexprmunging.html#133605626">Reid Barton (Sep 09 2018 at 21:36)</a>:</h4>
 <p>Yes this strategy is what I was about to suggest. Peel off one outer Pi at a type, leaving a formula with a free variable, and then substitute a fresh metavariable or whatever else you want for that free variable</p>
 
 <a name="133605631"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20expr%20munging/near/133605631" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65864moreexprmunging.html#133605631">Simon Hudon (Sep 09 2018 at 13:37)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20expr%20munging/near/133605631" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65864moreexprmunging.html#133605631">Simon Hudon (Sep 09 2018 at 21:37)</a>:</h4>
 <p>Actually, we can be more direct:</p>
 <div class="codehilite"><pre><span></span><span class="n">meta</span> <span class="n">def</span> <span class="n">get_lhs</span> <span class="o">:</span> <span class="n">expr</span> <span class="bp">-&gt;</span> <span class="n">tactic</span> <span class="n">expr</span>
 <span class="bp">|</span> <span class="o">(</span><span class="n">expr</span><span class="bp">.</span><span class="n">pi</span> <span class="n">n</span> <span class="n">bi</span> <span class="n">d</span> <span class="n">b</span><span class="o">)</span> <span class="o">:=</span>
@@ -51,23 +51,23 @@ permalink: archive/113488general/65864moreexprmunging.html
 </pre></div>
 
 <a name="133605633"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20expr%20munging/near/133605633" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65864moreexprmunging.html#133605633">Scott Morrison (Sep 09 2018 at 13:37)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20expr%20munging/near/133605633" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65864moreexprmunging.html#133605633">Scott Morrison (Sep 09 2018 at 21:37)</a>:</h4>
 <p>(I'm doubly impressed, Simon, that your code often doesn't quite compile: there's a comma missing in that first one. :-)</p>
 
 <a name="133605674"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20expr%20munging/near/133605674" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65864moreexprmunging.html#133605674">Simon Hudon (Sep 09 2018 at 13:38)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20expr%20munging/near/133605674" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65864moreexprmunging.html#133605674">Simon Hudon (Sep 09 2018 at 21:38)</a>:</h4>
 <p>Where would be the fun if you didn't have to fix my mistakes?</p>
 
 <a name="133605935"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20expr%20munging/near/133605935" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65864moreexprmunging.html#133605935">Scott Morrison (Sep 09 2018 at 13:48)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20expr%20munging/near/133605935" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65864moreexprmunging.html#133605935">Scott Morrison (Sep 09 2018 at 21:48)</a>:</h4>
 <p>So I'm trying to do something a bit fancier here, and while <code>get_lhs</code> work as requested, really I want something more. :-)</p>
 
 <a name="133605958"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20expr%20munging/near/133605958" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65864moreexprmunging.html#133605958">Simon Hudon (Sep 09 2018 at 13:49)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20expr%20munging/near/133605958" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65864moreexprmunging.html#133605958">Simon Hudon (Sep 09 2018 at 21:49)</a>:</h4>
 <p>I'm listening (sort of)</p>
 
 <a name="133606018"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20expr%20munging/near/133606018" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65864moreexprmunging.html#133606018">Scott Morrison (Sep 09 2018 at 13:50)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20expr%20munging/near/133606018" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65864moreexprmunging.html#133606018">Scott Morrison (Sep 09 2018 at 21:50)</a>:</h4>
 <p>I had written:</p>
 <div class="codehilite"><pre><span></span>meta def substitutions&#39; : expr → bool → list expr →
   tactic (tactic (expr × expr × list expr))
@@ -84,71 +84,71 @@ permalink: archive/113488general/65864moreexprmunging.html
 </pre></div>
 
 <a name="133606035"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20expr%20munging/near/133606035" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65864moreexprmunging.html#133606035">Scott Morrison (Sep 09 2018 at 13:51)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20expr%20munging/near/133606035" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65864moreexprmunging.html#133606035">Scott Morrison (Sep 09 2018 at 21:51)</a>:</h4>
 <p>The idea being to return a tactic, which could be invoked multiple times, each time producing the pattern with "fresh" mvars.</p>
 
 <a name="133606043"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20expr%20munging/near/133606043" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65864moreexprmunging.html#133606043">Scott Morrison (Sep 09 2018 at 13:51)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20expr%20munging/near/133606043" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65864moreexprmunging.html#133606043">Scott Morrison (Sep 09 2018 at 21:51)</a>:</h4>
 <p>However it's ... still somewhat mysteriously ... not working in all cases. (Sorry this is far from a MWE.)</p>
 
 <a name="133606101"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20expr%20munging/near/133606101" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65864moreexprmunging.html#133606101">Reid Barton (Sep 09 2018 at 13:53)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20expr%20munging/near/133606101" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65864moreexprmunging.html#133606101">Reid Barton (Sep 09 2018 at 21:53)</a>:</h4>
 <p>Is this supposed to be more efficient than just invoking something like <code>get_lhs</code> repeatedly?</p>
 
 <a name="133606180"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20expr%20munging/near/133606180" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65864moreexprmunging.html#133606180">Scott Morrison (Sep 09 2018 at 13:54)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20expr%20munging/near/133606180" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65864moreexprmunging.html#133606180">Scott Morrison (Sep 09 2018 at 21:54)</a>:</h4>
 <p>Yeah, I guess so.</p>
 
 <a name="133606184"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20expr%20munging/near/133606184" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65864moreexprmunging.html#133606184">Scott Morrison (Sep 09 2018 at 13:54)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20expr%20munging/near/133606184" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65864moreexprmunging.html#133606184">Scott Morrison (Sep 09 2018 at 21:54)</a>:</h4>
 <p>But maybe I am needlessly complicating things. :-(</p>
 
 <a name="133606203"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20expr%20munging/near/133606203" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65864moreexprmunging.html#133606203">Simon Hudon (Sep 09 2018 at 13:55)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20expr%20munging/near/133606203" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65864moreexprmunging.html#133606203">Simon Hudon (Sep 09 2018 at 21:55)</a>:</h4>
 <p>I think you need to <code>reverse</code> <code>mvars</code></p>
 
 <a name="133606250"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20expr%20munging/near/133606250" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65864moreexprmunging.html#133606250">Reid Barton (Sep 09 2018 at 13:56)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20expr%20munging/near/133606250" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65864moreexprmunging.html#133606250">Reid Barton (Sep 09 2018 at 21:56)</a>:</h4>
 <p>It's probably about equally or less efficient because the representation of that <code>tactic</code> object in the VM is going to be basically the same as or a more complicated structure than the outer Pis of the original type.</p>
 
 <a name="133606328"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20expr%20munging/near/133606328" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65864moreexprmunging.html#133606328">Scott Morrison (Sep 09 2018 at 13:59)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20expr%20munging/near/133606328" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65864moreexprmunging.html#133606328">Scott Morrison (Sep 09 2018 at 21:59)</a>:</h4>
 <p>Hmm. I had tried (on a purely voodoo basis) reversing <code>mvars</code>, without apparent success. Let me go away on de-complicate for a bit. :-)</p>
 
 <a name="133606329"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20expr%20munging/near/133606329" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65864moreexprmunging.html#133606329">Scott Morrison (Sep 09 2018 at 13:59)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20expr%20munging/near/133606329" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65864moreexprmunging.html#133606329">Scott Morrison (Sep 09 2018 at 21:59)</a>:</h4>
 <p>Thanks for the help!</p>
 
 <a name="133606330"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20expr%20munging/near/133606330" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65864moreexprmunging.html#133606330">Simon Hudon (Sep 09 2018 at 13:59)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20expr%20munging/near/133606330" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65864moreexprmunging.html#133606330">Simon Hudon (Sep 09 2018 at 21:59)</a>:</h4>
 <p>After squinting at it for a while, I agree with <span class="user-mention" data-user-id="110032">@Reid Barton</span></p>
 
 <a name="133606428"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20expr%20munging/near/133606428" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65864moreexprmunging.html#133606428">Reid Barton (Sep 09 2018 at 14:02)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20expr%20munging/near/133606428" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65864moreexprmunging.html#133606428">Reid Barton (Sep 09 2018 at 22:02)</a>:</h4>
 <p>(Or at least, that would be true in the GHC runtime system, which is probably a terrible mental model for the Lean VM but the best one I have available.)</p>
 
 <a name="133606476"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20expr%20munging/near/133606476" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65864moreexprmunging.html#133606476">Simon Hudon (Sep 09 2018 at 14:04)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20expr%20munging/near/133606476" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65864moreexprmunging.html#133606476">Simon Hudon (Sep 09 2018 at 22:04)</a>:</h4>
 <p>My reasoning is that, for each bound variable, the expensive thing is <code>instantiate_var</code>, the number of which does not decrease in this approach</p>
 
 <a name="133606495"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20expr%20munging/near/133606495" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65864moreexprmunging.html#133606495">Reid Barton (Sep 09 2018 at 14:05)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20expr%20munging/near/133606495" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65864moreexprmunging.html#133606495">Reid Barton (Sep 09 2018 at 22:05)</a>:</h4>
 <p>Right, you only save the decomposition of the Pis.</p>
 
 <a name="133606593"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20expr%20munging/near/133606593" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65864moreexprmunging.html#133606593">Reid Barton (Sep 09 2018 at 14:08)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20expr%20munging/near/133606593" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65864moreexprmunging.html#133606593">Reid Barton (Sep 09 2018 at 22:08)</a>:</h4>
 <p>Which is cheap anyways, but to make things worse, you replace it by having to do an equal number of applications-of-variable-functions (the inner <code>tactic</code>which you build up).</p>
 
 <a name="133606693"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20expr%20munging/near/133606693" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65864moreexprmunging.html#133606693">Reid Barton (Sep 09 2018 at 14:11)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20expr%20munging/near/133606693" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65864moreexprmunging.html#133606693">Reid Barton (Sep 09 2018 at 22:11)</a>:</h4>
 <p>Oh wait, you implemented it in a way so that there is only one closure being built (<code>tac</code>), but still each invocation of <code>tac</code> has to process the list <code>types</code>, which has the same information as the outer Pis of the original expression.</p>
 
 <a name="133606774"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20expr%20munging/near/133606774" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65864moreexprmunging.html#133606774">Scott Morrison (Sep 09 2018 at 14:13)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20expr%20munging/near/133606774" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65864moreexprmunging.html#133606774">Scott Morrison (Sep 09 2018 at 22:13)</a>:</h4>
 <p>and, happily it all seems to work now!</p>
 
 <a name="133606776"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20expr%20munging/near/133606776" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65864moreexprmunging.html#133606776">Scott Morrison (Sep 09 2018 at 14:13)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20expr%20munging/near/133606776" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65864moreexprmunging.html#133606776">Scott Morrison (Sep 09 2018 at 22:13)</a>:</h4>
 <p>(or at least the "all" that I hoped to have done tonight!)</p>
 
 

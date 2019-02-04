@@ -12,24 +12,24 @@ permalink: archive/113488general/64017applywithnewequalitygoals.html
 <base href="https://leanprover.zulipchat.com">
 {% raw %}
 <a name="125558382"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125558382" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125558382">Reid Barton (Apr 23 2018 at 09:56)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125558382" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125558382">Reid Barton (Apr 23 2018 at 17:56)</a>:</h4>
 <p>Is there a tactic which works like <code>apply f</code> except that, if unifying the goal with the result type of <code>f</code> fails, it introduces new goals stating that the terms which don't unify are equal?<br>
 Example: I want to prove a statement like <code>f ⁻¹' (u ∩ v) = ∅</code>. Suppose I know I want to use <code>preimage_empty : f ⁻¹' ∅ = ∅</code>. I would like to obtain <code>u ∩ v = ∅</code> as a new goal without spelling it out explicitly (in a <code>have</code> or similar).</p>
 
 <a name="125558494"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125558494" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125558494">Mario Carneiro (Apr 23 2018 at 10:00)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125558494" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125558494">Mario Carneiro (Apr 23 2018 at 18:00)</a>:</h4>
 <p>An interesting idea. You can effectively get the result by <code>refine cast _ f</code> and then <code>congr</code></p>
 
 <a name="125558636"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125558636" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125558636">Patrick Massot (Apr 23 2018 at 10:04)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125558636" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125558636">Patrick Massot (Apr 23 2018 at 18:04)</a>:</h4>
 <p>I'm interested in this question but I don't understand the answer at all. <span class="user-mention" data-user-id="110032">@Reid Barton</span> do your have a MWE so that Mario (or you) could be more explicit about to do this?</p>
 
 <a name="125558645"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125558645" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125558645">Reid Barton (Apr 23 2018 at 10:05)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125558645" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125558645">Reid Barton (Apr 23 2018 at 18:05)</a>:</h4>
 <p>Let me try to cook one up and try out Mario's suggestion</p>
 
 <a name="125558848"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125558848" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125558848">Reid Barton (Apr 23 2018 at 10:11)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125558848" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125558848">Reid Barton (Apr 23 2018 at 18:11)</a>:</h4>
 <p>OK, here's an example:</p>
 <div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">set</span>
 <span class="kn">open</span> <span class="n">set</span>
@@ -49,103 +49,103 @@ Example: I want to prove a statement like <code>f ⁻¹' (u ∩ v) = ∅</code>.
 </pre></div>
 
 <a name="125558894"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125558894" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125558894">Mario Carneiro (Apr 23 2018 at 10:12)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125558894" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125558894">Mario Carneiro (Apr 23 2018 at 18:12)</a>:</h4>
 <p>If <code>p</code> has type <code>f ⁻¹' ∅ = ∅</code> and the goal is <code>f ⁻¹' (u ∩ v) = ∅</code>, then <code>refine cast _ p</code> will give the goal <code>(f ⁻¹' (u ∩ v) = ∅) = (f ⁻¹' ∅ = ∅)</code> and <code>congr</code> will skip all the same stuff to get to <code>u ∩ v = ∅</code>. Of course this has the usual <code>congr</code> caveats about going too far, but it seems like the right idea for Reid's problem</p>
 
 <a name="125558946"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125558946" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125558946">Reid Barton (Apr 23 2018 at 10:14)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125558946" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125558946">Reid Barton (Apr 23 2018 at 18:14)</a>:</h4>
 <p><code>refine cast _ preimage_empty</code> guessed to replace the wrong part, though, leaving <code>⊢ ?m_3 ⁻¹' ∅ = ∅ = (f ⁻¹' ({x} ∩ {y}) = ∅)</code></p>
 
 <a name="125559023"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125559023" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125559023">Mario Carneiro (Apr 23 2018 at 10:16)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125559023" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125559023">Mario Carneiro (Apr 23 2018 at 18:16)</a>:</h4>
 <p>no that's correct</p>
 
 <a name="125559026"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125559026" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125559026">Mario Carneiro (Apr 23 2018 at 10:16)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125559026" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125559026">Mario Carneiro (Apr 23 2018 at 18:16)</a>:</h4>
 <p>what happens after <code>congr</code>?</p>
 
 <a name="125559043"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125559043" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125559043">Reid Barton (Apr 23 2018 at 10:18)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125559043" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125559043">Reid Barton (Apr 23 2018 at 18:18)</a>:</h4>
 <p><code>congr</code> errors with "tactic failed, there are no goals to be solved" (even though there were 4 goals)</p>
 
 <a name="125559090"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125559090" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125559090">Mario Carneiro (Apr 23 2018 at 10:18)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125559090" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125559090">Mario Carneiro (Apr 23 2018 at 18:18)</a>:</h4>
 <p>what is the first goal?</p>
 
 <a name="125559104"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125559104" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125559104">Reid Barton (Apr 23 2018 at 10:19)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125559104" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125559104">Reid Barton (Apr 23 2018 at 18:19)</a>:</h4>
 <p>the goals are <code>⊢ Type ?</code>, <code>⊢ Type ?</code>, <code>⊢ ?m_1 → ?m_2</code>, and what I wrote above</p>
 
 <a name="125559106"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125559106" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125559106">Reid Barton (Apr 23 2018 at 10:19)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125559106" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125559106">Reid Barton (Apr 23 2018 at 18:19)</a>:</h4>
 <p>I assume they are describing the type of <code>?m_3</code></p>
 
 <a name="125559107"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125559107" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125559107">Mario Carneiro (Apr 23 2018 at 10:19)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125559107" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125559107">Mario Carneiro (Apr 23 2018 at 18:19)</a>:</h4>
 <p>yes</p>
 
 <a name="125559109"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125559109" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125559109">Mario Carneiro (Apr 23 2018 at 10:19)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125559109" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125559109">Mario Carneiro (Apr 23 2018 at 18:19)</a>:</h4>
 <p>You don't want to run <code>congr</code> on those goals</p>
 
 <a name="125559159"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125559159" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125559159">Mario Carneiro (Apr 23 2018 at 10:20)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125559159" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125559159">Mario Carneiro (Apr 23 2018 at 18:20)</a>:</h4>
 <p>you have to cycle through them or set up the refine right, I guess</p>
 
 <a name="125559169"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125559169" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125559169">Reid Barton (Apr 23 2018 at 10:20)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125559169" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125559169">Reid Barton (Apr 23 2018 at 18:20)</a>:</h4>
 <p>I'm confused though because I thought it was the <code>{x} ∩ {y}</code> part I wanted to replace</p>
 
 <a name="125559218"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125559218" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125559218">Mario Carneiro (Apr 23 2018 at 10:22)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125559218" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125559218">Mario Carneiro (Apr 23 2018 at 18:22)</a>:</h4>
 <p>The goal is to do it in two stages. The first stage replaces your goal with an equality between the "apply" theorem and the goal, and the second stage simplifies the equality by congruence until you just have the part(s) that aren't defeq</p>
 
 <a name="125559225"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125559225" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125559225">Mario Carneiro (Apr 23 2018 at 10:23)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125559225" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125559225">Mario Carneiro (Apr 23 2018 at 18:23)</a>:</h4>
 <p><code>cast</code> has the type <code>A = B -&gt; A -&gt; B</code>, so <code>cast _ p</code> where <code>p : A</code> yields the goal <code>A = B</code></p>
 
 <a name="125559234"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125559234" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125559234">Reid Barton (Apr 23 2018 at 10:23)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125559234" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125559234">Reid Barton (Apr 23 2018 at 18:23)</a>:</h4>
 <p>Oh I see</p>
 
 <a name="125559235"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125559235" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125559235">Reid Barton (Apr 23 2018 at 10:23)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125559235" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125559235">Reid Barton (Apr 23 2018 at 18:23)</a>:</h4>
 <p>I need to tell it to solve the third goal with <code>f</code></p>
 
 <a name="125559236"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125559236" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125559236">Mario Carneiro (Apr 23 2018 at 10:23)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125559236" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125559236">Mario Carneiro (Apr 23 2018 at 18:23)</a>:</h4>
 <p>You could also try specifying <code>f</code> for the sake of the example</p>
 
 <a name="125559276"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125559276" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125559276">Mario Carneiro (Apr 23 2018 at 10:24)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125559276" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125559276">Mario Carneiro (Apr 23 2018 at 18:24)</a>:</h4>
 <p>i.e. <code>refine cast _ (@preimage_empty _ _ f)</code></p>
 
 <a name="125559289"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125559289" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125559289">Reid Barton (Apr 23 2018 at 10:25)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125559289" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125559289">Reid Barton (Apr 23 2018 at 18:25)</a>:</h4>
 <p>I just did <code>exact β, exact α, exact f, congr,</code>, and that also works, and leaves me with <code>⊢ ∅ = {x} ∩ {y}</code> like I wanted</p>
 
 <a name="125559306"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125559306" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125559306">Reid Barton (Apr 23 2018 at 10:26)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125559306" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125559306">Reid Barton (Apr 23 2018 at 18:26)</a>:</h4>
 <p>Well, I would have preferred <code>⊢ {x} ∩ {y} = ∅</code> <span class="emoji emoji-1f642" title="simple smile">:simple_smile:</span></p>
 
 <a name="125559349"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125559349" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125559349">Mario Carneiro (Apr 23 2018 at 10:26)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125559349" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125559349">Mario Carneiro (Apr 23 2018 at 18:26)</a>:</h4>
 <p>I'm not sure if congr will automatically unify when it can, but that would fix these metavars without your intervention</p>
 
 <a name="125559353"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125559353" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125559353">Mario Carneiro (Apr 23 2018 at 10:26)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125559353" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125559353">Mario Carneiro (Apr 23 2018 at 18:26)</a>:</h4>
 <p>I think <code>eq.mp</code> and <code>eq.mpr</code> are the same as <code>cast</code> and allow you to get the orientation right</p>
 
 <a name="125559421"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125559421" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125559421">Reid Barton (Apr 23 2018 at 10:29)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125559421" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125559421">Reid Barton (Apr 23 2018 at 18:29)</a>:</h4>
 <p>Yes, <code>refine cast _ preimage_empty, swap 4, congr</code> also worked</p>
 
 <a name="125559424"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125559424" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125559424">Reid Barton (Apr 23 2018 at 10:29)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125559424" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125559424">Reid Barton (Apr 23 2018 at 18:29)</a>:</h4>
 <p>and <code>eq.mpr</code> eliminates the need for <code>symmetry</code></p>
 
 <a name="125559473"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125559473" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125559473">Reid Barton (Apr 23 2018 at 10:30)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125559473" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125559473">Reid Barton (Apr 23 2018 at 18:30)</a>:</h4>
 <p>Final version is to replace the last two lines with</p>
 <div class="codehilite"><pre><span></span>  <span class="n">refine</span> <span class="n">eq</span><span class="bp">.</span><span class="n">mpr</span> <span class="bp">_</span> <span class="n">preimage_empty</span><span class="o">,</span> <span class="n">swap</span> <span class="mi">4</span><span class="o">,</span> <span class="n">congr</span><span class="o">,</span>
 <span class="c1">-- ⊢ {x} ∩ {y} = ∅</span>
@@ -153,47 +153,47 @@ Example: I want to prove a statement like <code>f ⁻¹' (u ∩ v) = ∅</code>.
 </pre></div>
 
 <a name="125559482"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125559482" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125559482">Reid Barton (Apr 23 2018 at 10:31)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125559482" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125559482">Reid Barton (Apr 23 2018 at 18:31)</a>:</h4>
 <p>This is helpful, I haven't used congr before</p>
 
 <a name="125559542"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125559542" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125559542">Reid Barton (Apr 23 2018 at 10:33)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125559542" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125559542">Reid Barton (Apr 23 2018 at 18:33)</a>:</h4>
 <p>The <code>swap</code> business reminds me of those pairs of tactics which differ only in how the resulting goals get ordered; I guess <code>refine</code> has no such companion?</p>
 
 <a name="125559594"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125559594" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125559594">Mario Carneiro (Apr 23 2018 at 10:34)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125559594" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125559594">Mario Carneiro (Apr 23 2018 at 18:34)</a>:</h4>
 <p>no, it just creates all metavars in the order it finds them</p>
 
 <a name="125559606"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125559606" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125559606">Mario Carneiro (Apr 23 2018 at 10:35)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125559606" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125559606">Mario Carneiro (Apr 23 2018 at 18:35)</a>:</h4>
 <p>There is enough going on here that it would not be unreasonable to have a tactic for it. Keep in mind though that it's not like apply in that it can't guess how many args to apply</p>
 
 <a name="125559612"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125559612" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125559612">Patrick Massot (Apr 23 2018 at 10:36)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125559612" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125559612">Patrick Massot (Apr 23 2018 at 18:36)</a>:</h4>
 <p><span class="user-mention" data-user-id="110026">@Simon Hudon</span> we need you!</p>
 
 <a name="125559657"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125559657" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125559657">Mario Carneiro (Apr 23 2018 at 10:36)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125559657" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125559657">Mario Carneiro (Apr 23 2018 at 18:36)</a>:</h4>
 <p>if you don't get the args right your equality will be some statement like (\forall x. ...) = (f 0 = 0) and congr will not do anything useful</p>
 
 <a name="125559662"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125559662" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125559662">Reid Barton (Apr 23 2018 at 10:36)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125559662" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125559662">Reid Barton (Apr 23 2018 at 18:36)</a>:</h4>
 <p>Right, I realized as I was asking the question that I don't really know how <code>apply</code> figures out how many args to insert</p>
 
 <a name="125559679"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125559679" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125559679">Mario Carneiro (Apr 23 2018 at 10:38)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125559679" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125559679">Mario Carneiro (Apr 23 2018 at 18:38)</a>:</h4>
 <p>I think it just applies as many as it can, or maybe counts how many nested pi are in the theorem type vs the target type and applies the difference</p>
 
 <a name="125568801"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125568801" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125568801">Simon Hudon (Apr 23 2018 at 15:22)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125568801" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125568801">Simon Hudon (Apr 23 2018 at 23:22)</a>:</h4>
 <p><span class="user-mention" data-user-id="110031">@Patrick Massot</span> What would you imagine a tactic doing?</p>
 
 <a name="125568812"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125568812" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125568812">Patrick Massot (Apr 23 2018 at 15:23)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125568812" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125568812">Patrick Massot (Apr 23 2018 at 23:23)</a>:</h4>
 <p>Ideally, the first message of this thread</p>
 
 <a name="125572764"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125572764" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125572764">Simon Hudon (Apr 23 2018 at 17:01)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125572764" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125572764">Simon Hudon (Apr 24 2018 at 01:01)</a>:</h4>
 <p>Something like this?</p>
 <div class="codehilite"><pre><span></span>meta def bridge_gap (r : parse texpr) : parse (&quot;using&quot; *&gt; smallnat)? -&gt; tactic unit
 | none := refine ``(cast _ %%r) &gt;&gt; congr
@@ -204,27 +204,27 @@ Example: I want to prove a statement like <code>f ⁻¹' (u ∩ v) = ∅</code>.
 <p>This way you can do <code>bridge_gap rule using n</code> to limit the depth of <code>congr</code> or just <code>bridge_gap rule</code></p>
 
 <a name="125572815"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125572815" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125572815">Simon Hudon (Apr 23 2018 at 17:02)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125572815" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125572815">Simon Hudon (Apr 24 2018 at 01:02)</a>:</h4>
 <p>I'm not sure of the name though. Maybe something like <code>fit</code> or <code>adapt_to</code> would be better</p>
 
 <a name="125572849"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125572849" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125572849">Simon Hudon (Apr 23 2018 at 17:03)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125572849" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125572849">Simon Hudon (Apr 24 2018 at 01:03)</a>:</h4>
 <p>I don't get why you need <code>swap</code> though</p>
 
 <a name="125573226"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125573226" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125573226">Patrick Massot (Apr 23 2018 at 17:12)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125573226" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125573226">Patrick Massot (Apr 24 2018 at 01:12)</a>:</h4>
 <p>Can you do the example with it?</p>
 
 <a name="125573428"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125573428" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125573428">Simon Hudon (Apr 23 2018 at 17:17)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125573428" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125573428">Simon Hudon (Apr 24 2018 at 01:17)</a>:</h4>
 <p>I'm giving it a try. My computer is not helping today</p>
 
 <a name="125575245"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125575245" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125575245">Simon Hudon (Apr 23 2018 at 17:51)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125575245" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125575245">Simon Hudon (Apr 24 2018 at 01:51)</a>:</h4>
 <p>Ok I think I see why <code>swap</code> was necessary. Here's a proof and a tactic that work:</p>
 
 <a name="125575289"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125575289" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125575289">Simon Hudon (Apr 23 2018 at 17:52)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125575289" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125575289">Simon Hudon (Apr 24 2018 at 01:52)</a>:</h4>
 <div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">{</span><span class="n">f</span> <span class="o">:</span> <span class="n">β</span> <span class="bp">→</span> <span class="n">α</span><span class="o">}</span> <span class="o">{</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">α</span><span class="o">}</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">≠</span> <span class="n">y</span><span class="o">)</span> <span class="o">:</span> <span class="n">f</span> <span class="bp">⁻¹</span><span class="err">&#39;</span> <span class="o">{</span><span class="n">x</span><span class="o">}</span> <span class="err">∩</span> <span class="n">f</span> <span class="bp">⁻¹</span><span class="err">&#39;</span> <span class="o">{</span><span class="n">y</span><span class="o">}</span> <span class="bp">=</span> <span class="err">∅</span> <span class="o">:=</span>
 <span class="k">begin</span>
   <span class="k">have</span> <span class="o">:</span> <span class="o">{</span><span class="n">x</span><span class="o">}</span> <span class="err">∩</span> <span class="o">{</span><span class="n">y</span><span class="o">}</span> <span class="bp">=</span> <span class="o">(</span><span class="err">∅</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span><span class="o">)</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">simpa</span> <span class="kn">using</span> <span class="n">h</span><span class="o">,</span>
@@ -257,347 +257,347 @@ Example: I want to prove a statement like <code>f ⁻¹' (u ∩ v) = ∅</code>.
 </pre></div>
 
 <a name="125575597"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125575597" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125575597">Simon Hudon (Apr 23 2018 at 17:58)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125575597" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125575597">Simon Hudon (Apr 24 2018 at 01:58)</a>:</h4>
 <p>I added an option to allow <code>bridge_gap ← preimage_empty</code> but the parser doesn't seem to like it</p>
 
 <a name="125576655"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125576655" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125576655">Simon Hudon (Apr 23 2018 at 18:20)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125576655" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125576655">Simon Hudon (Apr 24 2018 at 02:20)</a>:</h4>
 <p>Ok, it's now working. I put it here <a href="https://gist.github.com/cipher1024/0d3328135367269cc35f74f43ecbb302" target="_blank" title="https://gist.github.com/cipher1024/0d3328135367269cc35f74f43ecbb302">https://gist.github.com/cipher1024/0d3328135367269cc35f74f43ecbb302</a> if you want to use it.</p>
 
 <a name="125576871"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125576871" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125576871">Patrick Massot (Apr 23 2018 at 18:24)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125576871" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125576871">Patrick Massot (Apr 24 2018 at 02:24)</a>:</h4>
 <p>Let's get to 20! (I mean 20, not 20!)</p>
 
 <a name="125576890"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125576890" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125576890">Mario Carneiro (Apr 23 2018 at 18:24)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125576890" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125576890">Mario Carneiro (Apr 24 2018 at 02:24)</a>:</h4>
 <p>noooo</p>
 
 <a name="125576902"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125576902" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125576902">Mario Carneiro (Apr 23 2018 at 18:25)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125576902" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125576902">Mario Carneiro (Apr 24 2018 at 02:25)</a>:</h4>
 <p>my backlog is so long...</p>
 
 <a name="125576905"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125576905" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125576905">Patrick Massot (Apr 23 2018 at 18:25)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125576905" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125576905">Patrick Massot (Apr 24 2018 at 02:25)</a>:</h4>
 <p>(deleted)</p>
 
 <a name="125576908"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125576908" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125576908">Kevin Buzzard (Apr 23 2018 at 18:25)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125576908" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125576908">Kevin Buzzard (Apr 24 2018 at 02:25)</a>:</h4>
 <p>He'll go hermit</p>
 
 <a name="125577105"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125577105" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125577105">Patrick Massot (Apr 23 2018 at 18:28)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125577105" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125577105">Patrick Massot (Apr 24 2018 at 02:28)</a>:</h4>
 <p>(deleted)</p>
 
 <a name="125577350"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125577350" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125577350">Simon Hudon (Apr 23 2018 at 18:34)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125577350" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125577350">Simon Hudon (Apr 24 2018 at 02:34)</a>:</h4>
 <blockquote>
 <p>Let's get to 20! (I mean 20, not 20!)</p>
 </blockquote>
 <p>20 what?</p>
 
 <a name="125577366"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125577366" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125577366">Patrick Massot (Apr 23 2018 at 18:35)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125577366" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125577366">Patrick Massot (Apr 24 2018 at 02:35)</a>:</h4>
 <p>20 opened PR to mathlib</p>
 
 <a name="125578498"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125578498" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125578498">Simon Hudon (Apr 23 2018 at 19:06)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125578498" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125578498">Simon Hudon (Apr 24 2018 at 03:06)</a>:</h4>
 <p>Ah! I didn't open a PR. I don't know if it's generally useful</p>
 
 <a name="125578578"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125578578" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125578578">Simon Hudon (Apr 23 2018 at 19:09)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125578578" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125578578">Simon Hudon (Apr 24 2018 at 03:09)</a>:</h4>
 <p>Or rather, I don't know if there's interest for this tactic to be in mathlib rather than in one particular project</p>
 
 <a name="125586345"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125586345" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125586345">Sebastien Gouezel (Apr 23 2018 at 22:16)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125586345" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125586345">Sebastien Gouezel (Apr 24 2018 at 06:16)</a>:</h4>
 <p>20 :)</p>
 
 <a name="125595892"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125595892" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125595892">Patrick Massot (Apr 24 2018 at 02:28)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125595892" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125595892">Patrick Massot (Apr 24 2018 at 10:28)</a>:</h4>
 <p><span class="user-mention" data-user-id="110026">@Simon Hudon</span>  Is this really a problem to have too many tactics in mathlib?</p>
 
 <a name="125596043"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125596043" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125596043">Simon Hudon (Apr 24 2018 at 02:33)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125596043" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125596043">Simon Hudon (Apr 24 2018 at 10:33)</a>:</h4>
 <p>I think it's good to prioritize the tactics that will have the most positive impact for the users of <code>mathlib</code>. On one hand, that makes better use of Mario's time and on the other hand, it minimizes the effort required to understand <code>mathlib</code>'s features</p>
 
 <a name="125596052"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125596052" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125596052">Patrick Massot (Apr 24 2018 at 02:33)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125596052" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125596052">Patrick Massot (Apr 24 2018 at 10:33)</a>:</h4>
 <p>I have a new idea for you (which would simplify my current work). Assume <code>(*) : R → R → R</code> and <code>[is_associative (*))]</code>. I have an expression like <code>(a₁*(a₂*a₃)*a₄)*((a₅*a₆)*a₇)</code> (maybe I'm in conv mode so I only see this expression). I'd like to write <code>simon_new_magic_trick 4 5</code> and get an expression where parentheses are rearranged so that I see <code>(a₄*a₅)</code> in the middle.</p>
 
 <a name="125596095"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125596095" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125596095">Patrick Massot (Apr 24 2018 at 02:34)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125596095" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125596095">Patrick Massot (Apr 24 2018 at 10:34)</a>:</h4>
 <p>And I'm going to sleep (2:33 am here)</p>
 
 <a name="125596180"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125596180" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125596180">Simon Hudon (Apr 24 2018 at 02:37)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125596180" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125596180">Simon Hudon (Apr 24 2018 at 10:37)</a>:</h4>
 <p>We can talk about it some more tomorrow. Do you want it as a preparation for something in particular (e.g. <code>rw</code>) or do you foresee using it in combination with multiple other tactics?</p>
 
 <a name="125596233"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125596233" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125596233">Simon Hudon (Apr 24 2018 at 02:38)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125596233" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125596233">Simon Hudon (Apr 24 2018 at 10:38)</a>:</h4>
 <p>As for syntax, I could think of calling it <code>ac_zoom a₄*a₅</code> (in case we want to consider commutativity too) in <code>conv</code> mode.</p>
 
 <a name="125596308"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125596308" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125596308">Andrew Ashworth (Apr 24 2018 at 02:40)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125596308" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125596308">Andrew Ashworth (Apr 24 2018 at 10:40)</a>:</h4>
 <p>that does seem useful. I guess the algebraic normalization functionality got put by the wayside for lean 4</p>
 
 <a name="125596313"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125596313" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125596313">Mario Carneiro (Apr 24 2018 at 02:40)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125596313" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125596313">Mario Carneiro (Apr 24 2018 at 10:40)</a>:</h4>
 <p>how about <code>ac_focus</code>? that sounds pretty neat</p>
 
 <a name="125596321"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125596321" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125596321">Andrew Ashworth (Apr 24 2018 at 02:41)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125596321" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125596321">Andrew Ashworth (Apr 24 2018 at 10:41)</a>:</h4>
 <p>more generally being able to rewrite declaratively with wildcards like <code>_</code> would be sweet</p>
 
 <a name="125596330"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125596330" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125596330">Simon Hudon (Apr 24 2018 at 02:41)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125596330" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125596330">Simon Hudon (Apr 24 2018 at 10:41)</a>:</h4>
 <blockquote>
 <p>I guess the algebraic normalization functionality got put by the wayside for lean 4</p>
 </blockquote>
 <p>What are you referring to?</p>
 
 <a name="125596372"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125596372" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125596372">Simon Hudon (Apr 24 2018 at 02:42)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125596372" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125596372">Simon Hudon (Apr 24 2018 at 10:42)</a>:</h4>
 <blockquote>
 <p>more generally being able to rewrite declaratively with wildcards like <code>_</code> would be sweet</p>
 </blockquote>
 <p>Can you elaborate a bit on what that would look like?</p>
 
 <a name="125596379"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125596379" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125596379">Mario Carneiro (Apr 24 2018 at 02:42)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125596379" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125596379">Mario Carneiro (Apr 24 2018 at 10:42)</a>:</h4>
 <p>Alternatively, the syntax could be an expression like <code>ac_zoom _*a₄*a₅</code> and this is ac-unified with the goal</p>
 
 <a name="125596441"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125596441" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125596441">Andrew Ashworth (Apr 24 2018 at 02:44)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125596441" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125596441">Andrew Ashworth (Apr 24 2018 at 10:44)</a>:</h4>
 <p>you have <code>(a1 * (a2 * (a3 * (a4 * (a5 * a6)))))</code>, you want <code>a1 * a2 * (a3 * a4) * a5 * a6</code>, hmm, maybe something like <code>mytactic _ * _ * (a3 * a4) * _ * _</code></p>
 
 <a name="125596444"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125596444" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125596444">Andrew Ashworth (Apr 24 2018 at 02:44)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125596444" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125596444">Andrew Ashworth (Apr 24 2018 at 10:44)</a>:</h4>
 <p>perhaps you could allow less <code>_</code> than variables and that would make the constraint search easier</p>
 
 <a name="125596455"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125596455" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125596455">Andrew Ashworth (Apr 24 2018 at 02:45)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125596455" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125596455">Andrew Ashworth (Apr 24 2018 at 10:45)</a>:</h4>
 <p>I remember hearing awhile back that there was going to be a lot of algebra machinery going in</p>
 
 <a name="125596459"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125596459" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125596459">Mario Carneiro (Apr 24 2018 at 02:45)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125596459" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125596459">Mario Carneiro (Apr 24 2018 at 10:45)</a>:</h4>
 <p>you could get by with only one <code>_</code> on left and right with assoc only, and just one <code>_</code> on left or right with ac</p>
 
 <a name="125596503"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125596503" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125596503">Mario Carneiro (Apr 24 2018 at 02:46)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125596503" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125596503">Mario Carneiro (Apr 24 2018 at 10:46)</a>:</h4>
 <p>if there are too many holes you can just fill them eagerly</p>
 
 <a name="125596506"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125596506" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125596506">Mario Carneiro (Apr 24 2018 at 02:46)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125596506" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125596506">Mario Carneiro (Apr 24 2018 at 10:46)</a>:</h4>
 <p>and fail if there aren't enough terms</p>
 
 <a name="125596511"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125596511" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125596511">Mario Carneiro (Apr 24 2018 at 02:47)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125596511" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125596511">Mario Carneiro (Apr 24 2018 at 10:47)</a>:</h4>
 <p>commutativity only reasoning seems trickier</p>
 
 <a name="125596583"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125596583" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125596583">Simon Hudon (Apr 24 2018 at 02:49)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125596583" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125596583">Simon Hudon (Apr 24 2018 at 10:49)</a>:</h4>
 <p>You mean without associativity? Why is it trickier?</p>
 
 <a name="125596671"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125596671" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125596671">Andrew Ashworth (Apr 24 2018 at 02:51)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125596671" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125596671">Andrew Ashworth (Apr 24 2018 at 10:51)</a>:</h4>
 <p>:( too bad floating point math is non-associative</p>
 
 <a name="125596776"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125596776" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125596776">Reid Barton (Apr 24 2018 at 02:54)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125596776" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125596776">Reid Barton (Apr 24 2018 at 10:54)</a>:</h4>
 <p><span class="user-mention" data-user-id="110026">@Simon Hudon</span> Thanks, this <code>bridge_gap</code> worked in my real project too.<br>
 Only I can't seem to get the ← feature to actually work (I tried <code>bridge_gap ←preimage_empty</code> with all combinations of space or no space around the arrow). But it works fine if I change ← to - for some reason.</p>
 
 <a name="125596793"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125596793" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125596793">Reid Barton (Apr 24 2018 at 02:54)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125596793" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125596793">Reid Barton (Apr 24 2018 at 10:54)</a>:</h4>
 <p>With ←, I get a parse error</p>
 
 <a name="125596811"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125596811" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125596811">Reid Barton (Apr 24 2018 at 02:55)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125596811" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125596811">Reid Barton (Apr 24 2018 at 10:55)</a>:</h4>
 <p>"error: expression expected", and then it continues in a confused state</p>
 
 <a name="125596814"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125596814" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125596814">Simon Hudon (Apr 24 2018 at 02:55)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125596814" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125596814">Simon Hudon (Apr 24 2018 at 10:55)</a>:</h4>
 <p>I had a hard time too with that notation. I don't understand why. It works fine with <code>rw</code>. Have you tried <code>&lt;-</code>? That worked better for me</p>
 
 <a name="125596825"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125596825" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125596825">Reid Barton (Apr 24 2018 at 02:55)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125596825" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125596825">Reid Barton (Apr 24 2018 at 10:55)</a>:</h4>
 <p>Yes, that works... something about the arrow</p>
 
 <a name="125596872"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125596872" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125596872">Simon Hudon (Apr 24 2018 at 02:56)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125596872" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125596872">Simon Hudon (Apr 24 2018 at 10:56)</a>:</h4>
 <p>I decided not to spend more time investigating that issue because <code>&lt;-</code> works. It's still annoying</p>
 
 <a name="125597061"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125597061" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125597061">Mario Carneiro (Apr 24 2018 at 03:02)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125597061" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125597061">Mario Carneiro (Apr 24 2018 at 11:02)</a>:</h4>
 <p>You have to use <code>tk "&lt;-"</code> instead of <code>tk "←"</code></p>
 
 <a name="125597070"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125597070" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125597070">Mario Carneiro (Apr 24 2018 at 03:03)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125597070" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125597070">Mario Carneiro (Apr 24 2018 at 11:03)</a>:</h4>
 <p>by some weird setup on lean's part, the token that lean knows as <code>&lt;-</code> is parsed from both <code>&lt;-</code> and <code>←</code></p>
 
 <a name="125597074"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125597074" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125597074">Mario Carneiro (Apr 24 2018 at 03:03)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125597074" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125597074">Mario Carneiro (Apr 24 2018 at 11:03)</a>:</h4>
 <p>so if you write <code>tk "←"</code> it doesn't work at all, and <code>tk "&lt;-"</code> works with both <code>&lt;-</code> and <code>←</code></p>
 
 <a name="125597075"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125597075" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125597075">Simon Hudon (Apr 24 2018 at 03:03)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125597075" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125597075">Simon Hudon (Apr 24 2018 at 11:03)</a>:</h4>
 <p>Ah! I bet that was a fun lesson for you to learn!</p>
 
 <a name="125597116"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125597116" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125597116">Simon Hudon (Apr 24 2018 at 03:04)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125597116" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125597116">Simon Hudon (Apr 24 2018 at 11:04)</a>:</h4>
 <p>Btw, can you think of a better name than <code>bridge_gap</code>?</p>
 
 <a name="125597120"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125597120" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125597120">Mario Carneiro (Apr 24 2018 at 03:04)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125597120" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125597120">Mario Carneiro (Apr 24 2018 at 11:04)</a>:</h4>
 <p>I expect this is in part because this is a built in notation (like the forward arrow for functions), since it shows up in <code>do</code> notation</p>
 
 <a name="125597133"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125597133" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125597133">Simon Hudon (Apr 24 2018 at 03:05)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125597133" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125597133">Simon Hudon (Apr 24 2018 at 11:05)</a>:</h4>
 <p>That makes sense. I'm actually glad that notation is built in</p>
 
 <a name="125597137"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125597137" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125597137">Mario Carneiro (Apr 24 2018 at 03:05)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125597137" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125597137">Mario Carneiro (Apr 24 2018 at 11:05)</a>:</h4>
 <p>Also I think that the polarity of <code>&lt;-</code> should be reversed</p>
 
 <a name="125597139"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125597139" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125597139">Mario Carneiro (Apr 24 2018 at 03:05)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125597139" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125597139">Mario Carneiro (Apr 24 2018 at 11:05)</a>:</h4>
 <p><code>eq.mpr</code> is the forward one</p>
 
 <a name="125597186"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125597186" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125597186">Mario Carneiro (Apr 24 2018 at 03:06)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125597186" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125597186">Mario Carneiro (Apr 24 2018 at 11:06)</a>:</h4>
 <p>I'm not, if I had my way all notation would be declared in lean</p>
 
 <a name="125597187"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125597187" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125597187">Mario Carneiro (Apr 24 2018 at 03:06)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125597187" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125597187">Mario Carneiro (Apr 24 2018 at 11:06)</a>:</h4>
 <p>maybe I'll get it in lean 4</p>
 
 <a name="125597189"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125597189" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125597189">Mario Carneiro (Apr 24 2018 at 03:07)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125597189" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125597189">Mario Carneiro (Apr 24 2018 at 11:07)</a>:</h4>
 <p>but it does seem like a really hard one to do generically</p>
 
 <a name="125597202"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125597202" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125597202">Mario Carneiro (Apr 24 2018 at 03:07)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125597202" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125597202">Mario Carneiro (Apr 24 2018 at 11:07)</a>:</h4>
 <p><code>convert</code>?</p>
 
 <a name="125597243"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125597243" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125597243">Simon Hudon (Apr 24 2018 at 03:08)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125597243" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125597243">Simon Hudon (Apr 24 2018 at 11:08)</a>:</h4>
 <p>That's a bit too close to <code>conv</code>, no?</p>
 
 <a name="125597245"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125597245" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125597245">Mario Carneiro (Apr 24 2018 at 03:08)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125597245" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125597245">Mario Carneiro (Apr 24 2018 at 11:08)</a>:</h4>
 <p>to be fair it's actually doing a very similar thing</p>
 
 <a name="125597248"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125597248" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125597248">Simon Hudon (Apr 24 2018 at 03:09)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125597248" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125597248">Simon Hudon (Apr 24 2018 at 11:09)</a>:</h4>
 <p>That's true</p>
 
 <a name="125597254"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125597254" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125597254">Andrew Ashworth (Apr 24 2018 at 03:09)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125597254" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125597254">Andrew Ashworth (Apr 24 2018 at 11:09)</a>:</h4>
 <p>every time i see <code>conv</code> i think it's talking about convolution</p>
 
 <a name="125597256"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125597256" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125597256">Simon Hudon (Apr 24 2018 at 03:09)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125597256" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125597256">Simon Hudon (Apr 24 2018 at 11:09)</a>:</h4>
 <p>Is it something you'd like to have in <code>mathlib</code> btw?</p>
 
 <a name="125597260"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125597260" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125597260">Mario Carneiro (Apr 24 2018 at 03:09)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125597260" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125597260">Mario Carneiro (Apr 24 2018 at 11:09)</a>:</h4>
 <p>little tactics like this are not a big deal</p>
 
 <a name="125597312"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125597312" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125597312">Mario Carneiro (Apr 24 2018 at 03:10)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125597312" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125597312">Mario Carneiro (Apr 24 2018 at 11:10)</a>:</h4>
 <p>go right ahead</p>
 
 <a name="125597315"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125597315" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125597315">Simon Hudon (Apr 24 2018 at 03:10)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125597315" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125597315">Simon Hudon (Apr 24 2018 at 11:10)</a>:</h4>
 <p>Cool</p>
 
 <a name="125597328"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125597328" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125597328">Mario Carneiro (Apr 24 2018 at 03:11)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125597328" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125597328">Mario Carneiro (Apr 24 2018 at 11:11)</a>:</h4>
 <p>I've been busy with my other obligations this past week, but I promise I'll finish updating mathlib and get on those PRs</p>
 
 <a name="125597577"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125597577" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125597577">Simon Hudon (Apr 24 2018 at 03:19)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125597577" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125597577">Simon Hudon (Apr 24 2018 at 11:19)</a>:</h4>
 <p>I think the amount of work you've put on <code>mathlib</code> is actually amazing. I think you shouldn't feel like you have to apologize</p>
 
 <a name="125605769"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125605769" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125605769">Sean Leather (Apr 24 2018 at 08:06)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125605769" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125605769">Sean Leather (Apr 24 2018 at 16:06)</a>:</h4>
 <p><a href="/user_uploads/3121/bGfjZkmMdvJegOrpJ6MnVKEB/22.png" target="_blank" title="22.png">22</a></p>
 <div class="message_inline_image"><a href="/user_uploads/3121/bGfjZkmMdvJegOrpJ6MnVKEB/22.png" target="_blank" title="22"><img src="/user_uploads/3121/bGfjZkmMdvJegOrpJ6MnVKEB/22.png"></a></div>
 
 <a name="125605781"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125605781" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125605781">Sean Leather (Apr 24 2018 at 08:07)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125605781" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125605781">Sean Leather (Apr 24 2018 at 16:07)</a>:</h4>
 <p>... for anyone keeping count.</p>
 
 <a name="125606413"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125606413" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125606413">Johan Commelin (Apr 24 2018 at 08:29)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125606413" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125606413">Johan Commelin (Apr 24 2018 at 16:29)</a>:</h4>
 <p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> wishing you luck. I just want to thank you for everything you're doing. Please don't feel any pressure from the game these guys are playing...</p>
 
 <a name="125606414"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125606414" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125606414">Johan Commelin (Apr 24 2018 at 08:29)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125606414" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125606414">Johan Commelin (Apr 24 2018 at 16:29)</a>:</h4>
 <p>/me wouldn't want another hermit</p>
 
 <a name="125606808"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125606808" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125606808">Sean Leather (Apr 24 2018 at 08:43)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125606808" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125606808">Sean Leather (Apr 24 2018 at 16:43)</a>:</h4>
 <p>I haven't followed the entire conversation, but, to be clear, I think the PR count should not be taken as a backlog waiting to be completed but rather as a sign of interest in the growth of mathlib.</p>
 
 <a name="125606862"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125606862" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125606862">Sean Leather (Apr 24 2018 at 08:44)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125606862" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125606862">Sean Leather (Apr 24 2018 at 16:44)</a>:</h4>
 <p>Personally, I have my own backlog of things I want to contribute, but I'm waiting (patiently, mind you) for stabilization of mathlib wrt Lean.</p>
 
 <a name="125609412"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125609412" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125609412">Kevin Buzzard (Apr 24 2018 at 10:03)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125609412" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125609412">Kevin Buzzard (Apr 24 2018 at 18:03)</a>:</h4>
 <p>I absolutely agree. I put in a couple of PR's for docs recently and once I did that I felt my job was done -- people can even see the docs if they want. There was no need at all to pester anyone to accept the PR's and I had plenty of other things to worry about. The fact that Lean doesn't keep changing at the minute is also really nice</p>
 
 <a name="125609414"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125609414" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125609414">Kevin Buzzard (Apr 24 2018 at 10:03)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125609414" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125609414">Kevin Buzzard (Apr 24 2018 at 18:03)</a>:</h4>
 <p>because I am not typing <code>leanpkg upgrade</code> all the time</p>
 
 <a name="125609417"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125609417" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125609417">Kevin Buzzard (Apr 24 2018 at 10:03)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125609417" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125609417">Kevin Buzzard (Apr 24 2018 at 18:03)</a>:</h4>
 <p>so if I really wanted something in mathlib that wasn't there yet, I could just edit the mathlib in <code>_target</code> in my project</p>
 
 <a name="125609536"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125609536" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125609536">Patrick Massot (Apr 24 2018 at 10:06)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125609536" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125609536">Patrick Massot (Apr 24 2018 at 18:06)</a>:</h4>
 <p>Yes, this is what I did in <a href="https://github.com/PatrickMassot/mathlib/tree/wlog_ext" target="_blank" title="https://github.com/PatrickMassot/mathlib/tree/wlog_ext">https://github.com/PatrickMassot/mathlib/tree/wlog_ext</a>  (which is upstream + 2 PR)</p>
 
 <a name="125616698"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125616698" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125616698">Scott Morrison (Apr 24 2018 at 13:48)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125616698" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125616698">Scott Morrison (Apr 24 2018 at 21:48)</a>:</h4>
 <p>I like <code>bridge_gap</code> (or whatever it ends up called). I had a primitive version that I was calling <code>its</code>. That is, I'd write <code>its X</code> as a generalised version of <code>exact X</code>, and I would be left with whatever goals were required to unify <code>X</code> with the actual goal.</p>
 
 <a name="125616701"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125616701" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125616701">Scott Morrison (Apr 24 2018 at 13:48)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125616701" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125616701">Scott Morrison (Apr 24 2018 at 21:48)</a>:</h4>
 <p>(of course, apostrophe man would probably complain)</p>
 
 <a name="125616706"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125616706" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125616706">Scott Morrison (Apr 24 2018 at 13:49)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125616706" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125616706">Scott Morrison (Apr 24 2018 at 21:49)</a>:</h4>
 <p>I'm certainly planning in discarding <code>its</code> in favour of this one once it's in mathlib.</p>
 
 <a name="125619917"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125619917" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125619917">Kevin Buzzard (Apr 24 2018 at 15:19)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125619917" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125619917">Kevin Buzzard (Apr 24 2018 at 23:19)</a>:</h4>
 <p>how about <code>itis</code>? Signed, Apostrophe man.</p>
 
 <a name="125620284"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125620284" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125620284">Simon Hudon (Apr 24 2018 at 15:29)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125620284" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125620284">Simon Hudon (Apr 24 2018 at 23:29)</a>:</h4>
 <p>What a cool super hero name :D</p>
 
 <a name="125620361"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125620361" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125620361">Simon Hudon (Apr 24 2018 at 15:31)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125620361" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125620361">Simon Hudon (Apr 24 2018 at 23:31)</a>:</h4>
 <p>I submitted as <code>convert</code>. I'm not sure why <code>itis</code> works.</p>
 
 <a name="125620365"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125620365" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125620365">Simon Hudon (Apr 24 2018 at 15:31)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125620365" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125620365">Simon Hudon (Apr 24 2018 at 23:31)</a>:</h4>
 <p>I'm wondering if <code>refine_congr</code> would be a good name.</p>
 
 <a name="125631877"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125631877" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125631877">Kenny Lau (Apr 24 2018 at 19:57)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125631877" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125631877">Kenny Lau (Apr 25 2018 at 03:57)</a>:</h4>
 <p><a href="/user_uploads/3121/QoX4a9GPQ88G78zBt2MfjLzX/2018-04-25.png" target="_blank" title="2018-04-25.png">23</a></p>
 <div class="message_inline_image"><a href="/user_uploads/3121/QoX4a9GPQ88G78zBt2MfjLzX/2018-04-25.png" target="_blank" title="23"><img src="/user_uploads/3121/QoX4a9GPQ88G78zBt2MfjLzX/2018-04-25.png"></a></div>
 
 <a name="125631910"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125631910" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125631910">Kenny Lau (Apr 24 2018 at 19:58)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125631910" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125631910">Kenny Lau (Apr 25 2018 at 03:58)</a>:</h4>
 <p>Now I need to sleep</p>
 
 <a name="125632009"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125632009" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125632009">Andrew Ashworth (Apr 24 2018 at 19:59)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20with%20new%20equality%20goals/near/125632009" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64017applywithnewequalitygoals.html#125632009">Andrew Ashworth (Apr 25 2018 at 03:59)</a>:</h4>
 <p>it would be less than 23 if you finished all your [WIPs] :)</p>
 
 

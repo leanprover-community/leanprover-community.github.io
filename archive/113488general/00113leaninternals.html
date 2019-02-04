@@ -12,233 +12,233 @@ permalink: archive/113488general/00113leaninternals.html
 <base href="https://leanprover.zulipchat.com">
 {% raw %}
 <a name="123659092"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20internals/near/123659092" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00113leaninternals.html#123659092">VinothKumar Raman (Mar 13 2018 at 16:31)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20internals/near/123659092" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00113leaninternals.html#123659092">VinothKumar Raman (Mar 14 2018 at 02:31)</a>:</h4>
 <p>Is there any good reference to learn how to elaborate implicit arguments to a coc like core? Like how lean does? I am trying to build a coc like language<br>
 <a href="http://godel.yellowflash.in/" target="_blank" title="http://godel.yellowflash.in/">http://godel.yellowflash.in/</a><br>
 I want to introduce implicit arguments, I have some idea in my head but I couldn't put it down clearly, Its mostly based on resolution in simple basic types. But I have a feeling that it won't work</p>
 
 <a name="123659153"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20internals/near/123659153" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00113leaninternals.html#123659153">VinothKumar Raman (Mar 13 2018 at 16:32)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20internals/near/123659153" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00113leaninternals.html#123659153">VinothKumar Raman (Mar 14 2018 at 02:32)</a>:</h4>
 <p>The idea is more like completely apply the explicit arguments and run unification of simple basic types to infer the missing arguments.</p>
 
 <a name="123660760"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20internals/near/123660760" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00113leaninternals.html#123660760">Andrew Ashworth (Mar 13 2018 at 17:16)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20internals/near/123660760" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00113leaninternals.html#123660760">Andrew Ashworth (Mar 14 2018 at 03:16)</a>:</h4>
 <p>is godel your effort?</p>
 
 <a name="123661404"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20internals/near/123661404" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00113leaninternals.html#123661404">Gabriel Ebner (Mar 13 2018 at 17:36)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20internals/near/123661404" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00113leaninternals.html#123661404">Gabriel Ebner (Mar 14 2018 at 03:36)</a>:</h4>
 <blockquote>
 <p>The idea is more like completely apply the explicit arguments and run unification of simple basic types to infer the missing arguments.</p>
 </blockquote>
 <p>This is almost exactly how Lean's elaborator works.  Essentially you keep around a unification state ("metavar_context", basically a partial assignment of metavariables to expressions).  Now you go recursively through the pre-expression (abstract syntax tree, without implicit arguments) and convert it to an expression.  For every application you fill in the implicit arguments as metavariables, and solve the appropriate unfication constraints so that the application type-checks.  At the end, hopefully all metavariables are filled in and you can instantiate all metavariables in the produced expression.</p>
 
 <a name="123661424"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20internals/near/123661424" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00113leaninternals.html#123661424">Gabriel Ebner (Mar 13 2018 at 17:37)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20internals/near/123661424" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00113leaninternals.html#123661424">Gabriel Ebner (Mar 14 2018 at 03:37)</a>:</h4>
 <p>Except that <code>unification of simple basic types</code> is more like first-order unification + several pages of heuristics.</p>
 
 <a name="123693401"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20internals/near/123693401" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00113leaninternals.html#123693401">VinothKumar Raman (Mar 14 2018 at 09:39)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20internals/near/123693401" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00113leaninternals.html#123693401">VinothKumar Raman (Mar 14 2018 at 19:39)</a>:</h4>
 <blockquote>
 <p>is godel your effort?</p>
 </blockquote>
 <p>Yea it is my effort. I read a bit about COC and built it</p>
 
 <a name="123693506"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20internals/near/123693506" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00113leaninternals.html#123693506">VinothKumar Raman (Mar 14 2018 at 09:43)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20internals/near/123693506" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00113leaninternals.html#123693506">VinothKumar Raman (Mar 14 2018 at 19:43)</a>:</h4>
 <p>I was reading a bit about the unification on COC. Some claim it <code>might</code> be undecidable. But it seem really possible to have implicit arguments and really decide on it right? I don't understand how it could be undecidable.</p>
 
 <a name="123693552"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20internals/near/123693552" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00113leaninternals.html#123693552">Mario Carneiro (Mar 14 2018 at 09:44)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20internals/near/123693552" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00113leaninternals.html#123693552">Mario Carneiro (Mar 14 2018 at 19:44)</a>:</h4>
 <p>Higher order unification is undecidable</p>
 
 <a name="123693553"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20internals/near/123693553" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00113leaninternals.html#123693553">VinothKumar Raman (Mar 14 2018 at 09:44)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20internals/near/123693553" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00113leaninternals.html#123693553">VinothKumar Raman (Mar 14 2018 at 19:44)</a>:</h4>
 <p>What kind of heuristics does lean use? Is it in general not decidable? Is there any reference to read about tha?</p>
 
 <a name="123693572"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20internals/near/123693572" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00113leaninternals.html#123693572">Mario Carneiro (Mar 14 2018 at 09:45)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20internals/near/123693572" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00113leaninternals.html#123693572">Mario Carneiro (Mar 14 2018 at 19:45)</a>:</h4>
 <p>Lean doesn't do full higher order unification, it uses a few simpler strategies and mostly sticks to first order unification</p>
 
 <a name="123693872"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20internals/near/123693872" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00113leaninternals.html#123693872">VinothKumar Raman (Mar 14 2018 at 09:54)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20internals/near/123693872" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00113leaninternals.html#123693872">VinothKumar Raman (Mar 14 2018 at 19:54)</a>:</h4>
 <p>So lean's type checking is guaranteed to terminate? I have a noob question, does making the type checking semi-decidable, affects the soundness in any way?</p>
 
 <a name="123694088"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20internals/near/123694088" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00113leaninternals.html#123694088">Mario Carneiro (Mar 14 2018 at 10:00)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20internals/near/123694088" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00113leaninternals.html#123694088">Mario Carneiro (Mar 14 2018 at 20:00)</a>:</h4>
 <p>Lean's typechecker is guaranteed to halt, but is not complete - some definitional equalities will not be discovered by the typechecker, and it is impossible for it to do so without becoming undecidable.</p>
 
 <a name="123694112"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20internals/near/123694112" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00113leaninternals.html#123694112">Mario Carneiro (Mar 14 2018 at 10:01)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20internals/near/123694112" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00113leaninternals.html#123694112">Mario Carneiro (Mar 14 2018 at 20:01)</a>:</h4>
 <p>The guarantee is of soundness only - if lean verifies a type derivation, then it is correct, but it may error on a correct type derivation</p>
 
 <a name="123694184"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20internals/near/123694184" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00113leaninternals.html#123694184">VinothKumar Raman (Mar 14 2018 at 10:02)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20internals/near/123694184" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00113leaninternals.html#123694184">VinothKumar Raman (Mar 14 2018 at 20:02)</a>:</h4>
 <p>So its also possible to take the alternate route to have soundness intact by doing a higher order unification, which might not halt but if it did its correct type derivation.</p>
 
 <a name="123694194"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20internals/near/123694194" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00113leaninternals.html#123694194">VinothKumar Raman (Mar 14 2018 at 10:03)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20internals/near/123694194" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00113leaninternals.html#123694194">VinothKumar Raman (Mar 14 2018 at 20:03)</a>:</h4>
 <p>Thanks, I would read about higher order unification, Is <code>Huet</code> algorithm the only one?</p>
 
 <a name="123694261"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20internals/near/123694261" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00113leaninternals.html#123694261">Mario Carneiro (Mar 14 2018 at 10:05)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20internals/near/123694261" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00113leaninternals.html#123694261">Mario Carneiro (Mar 14 2018 at 20:05)</a>:</h4>
 <p>Note that unification is irrelevant to type checking; there is no unifier in the kernel</p>
 
 <a name="123694309"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20internals/near/123694309" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00113leaninternals.html#123694309">Mario Carneiro (Mar 14 2018 at 10:06)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20internals/near/123694309" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00113leaninternals.html#123694309">Mario Carneiro (Mar 14 2018 at 20:06)</a>:</h4>
 <p>it is definitional equality itself that is undecidable, due to some complications with subsingleton elimination and proof irrelevance</p>
 
 <a name="123694328"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20internals/near/123694328" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00113leaninternals.html#123694328">VinothKumar Raman (Mar 14 2018 at 10:07)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20internals/near/123694328" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00113leaninternals.html#123694328">VinothKumar Raman (Mar 14 2018 at 20:07)</a>:</h4>
 <p>If the core language doesnt have the notion of <code>implicit</code> how do you know that certain arguments are marked implicit?</p>
 
 <a name="123694381"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20internals/near/123694381" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00113leaninternals.html#123694381">Mario Carneiro (Mar 14 2018 at 10:08)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20internals/near/123694381" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00113leaninternals.html#123694381">Mario Carneiro (Mar 14 2018 at 20:08)</a>:</h4>
 <p>The actual type of expressions <code>expr</code> has an annotation field on lambda and pi that marks implicitness, but the kernel ignores it</p>
 
 <a name="123694411"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20internals/near/123694411" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00113leaninternals.html#123694411">Mario Carneiro (Mar 14 2018 at 10:09)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20internals/near/123694411" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00113leaninternals.html#123694411">Mario Carneiro (Mar 14 2018 at 20:09)</a>:</h4>
 <p>unification and implicit parameters are all the domain of the elaborator, which is a giant untrusted piece of code</p>
 
 <a name="123694416"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20internals/near/123694416" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00113leaninternals.html#123694416">VinothKumar Raman (Mar 14 2018 at 10:09)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20internals/near/123694416" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00113leaninternals.html#123694416">VinothKumar Raman (Mar 14 2018 at 20:09)</a>:</h4>
 <p>Ah it makes sense. I have one more trivial question which I faced <br>
 How do you rewrite <code>definition x = y</code> where <code>x</code> is not annotated with type to some <code>(\x:A,Z)y</code>?</p>
 
 <a name="123694467"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20internals/near/123694467" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00113leaninternals.html#123694467">Mario Carneiro (Mar 14 2018 at 10:10)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20internals/near/123694467" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00113leaninternals.html#123694467">Mario Carneiro (Mar 14 2018 at 20:10)</a>:</h4>
 <p>I don't quite follow your notation</p>
 
 <a name="123694478"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20internals/near/123694478" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00113leaninternals.html#123694478">Mario Carneiro (Mar 14 2018 at 10:11)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20internals/near/123694478" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00113leaninternals.html#123694478">Mario Carneiro (Mar 14 2018 at 20:11)</a>:</h4>
 <p>are you asking how to infer the type of an expression <code>y</code>?</p>
 
 <a name="123694488"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20internals/near/123694488" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00113leaninternals.html#123694488">VinothKumar Raman (Mar 14 2018 at 10:11)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20internals/near/123694488" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00113leaninternals.html#123694488">VinothKumar Raman (Mar 14 2018 at 20:11)</a>:</h4>
 <p>so any <code>let x = y in z</code> can be rewritten to <code>(\lambda x, z) y</code> so definition is very similar to let right?</p>
 
 <a name="123694534"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20internals/near/123694534" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00113leaninternals.html#123694534">Mario Carneiro (Mar 14 2018 at 10:12)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20internals/near/123694534" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00113leaninternals.html#123694534">Mario Carneiro (Mar 14 2018 at 20:12)</a>:</h4>
 <p>a definition doesn't have a scope</p>
 
 <a name="123694536"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20internals/near/123694536" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00113leaninternals.html#123694536">Mario Carneiro (Mar 14 2018 at 10:12)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20internals/near/123694536" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00113leaninternals.html#123694536">Mario Carneiro (Mar 14 2018 at 20:12)</a>:</h4>
 <p>also <code>let</code> is not the same as a lambda application</p>
 
 <a name="123694538"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20internals/near/123694538" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00113leaninternals.html#123694538">VinothKumar Raman (Mar 14 2018 at 10:12)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20internals/near/123694538" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00113leaninternals.html#123694538">VinothKumar Raman (Mar 14 2018 at 20:12)</a>:</h4>
 <p>But how do you rewrite your definitions to core calculus with just lambda abstraction, when you dont have type annotation</p>
 
 <a name="123694546"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20internals/near/123694546" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00113leaninternals.html#123694546">Mario Carneiro (Mar 14 2018 at 10:12)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20internals/near/123694546" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00113leaninternals.html#123694546">Mario Carneiro (Mar 14 2018 at 20:12)</a>:</h4>
 <p>there is a type annotation</p>
 
 <a name="123694555"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20internals/near/123694555" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00113leaninternals.html#123694555">Mario Carneiro (Mar 14 2018 at 10:13)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20internals/near/123694555" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00113leaninternals.html#123694555">Mario Carneiro (Mar 14 2018 at 20:13)</a>:</h4>
 <p>the syntax is <code>let x : t := p in e</code></p>
 
 <a name="123694561"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20internals/near/123694561" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00113leaninternals.html#123694561">VinothKumar Raman (Mar 14 2018 at 10:13)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20internals/near/123694561" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00113leaninternals.html#123694561">VinothKumar Raman (Mar 14 2018 at 20:13)</a>:</h4>
 <p><code>definition x = y</code> is allowed right? Not just <code>definition x: z = y</code> right?</p>
 
 <a name="123694572"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20internals/near/123694572" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00113leaninternals.html#123694572">VinothKumar Raman (Mar 14 2018 at 10:13)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20internals/near/123694572" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00113leaninternals.html#123694572">VinothKumar Raman (Mar 14 2018 at 20:13)</a>:</h4>
 <p>That type annotation is not optional?</p>
 
 <a name="123694573"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20internals/near/123694573" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00113leaninternals.html#123694573">Mario Carneiro (Mar 14 2018 at 10:13)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20internals/near/123694573" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00113leaninternals.html#123694573">Mario Carneiro (Mar 14 2018 at 20:13)</a>:</h4>
 <p>no, it's only <code>def x : t := e</code>. If you leave out the <code>t</code> it is inferred and filled in</p>
 
 <a name="123694617"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20internals/near/123694617" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00113leaninternals.html#123694617">VinothKumar Raman (Mar 14 2018 at 10:14)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20internals/near/123694617" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00113leaninternals.html#123694617">VinothKumar Raman (Mar 14 2018 at 20:14)</a>:</h4>
 <p>So elaborator runs type checking before it turns to core calculus?</p>
 
 <a name="123694623"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20internals/near/123694623" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00113leaninternals.html#123694623">Mario Carneiro (Mar 14 2018 at 10:14)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20internals/near/123694623" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00113leaninternals.html#123694623">Mario Carneiro (Mar 14 2018 at 20:14)</a>:</h4>
 <p>Many type annotations are "optional" in the sense that you don't have to write them, but they are inserted by the elaborator</p>
 
 <a name="123694640"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20internals/near/123694640" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00113leaninternals.html#123694640">VinothKumar Raman (Mar 14 2018 at 10:15)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20internals/near/123694640" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00113leaninternals.html#123694640">VinothKumar Raman (Mar 14 2018 at 20:15)</a>:</h4>
 <p>I was thinking elaborator writes out a new lambda term in the core calculus and type checking is completely different step.</p>
 
 <a name="123694646"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20internals/near/123694646" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00113leaninternals.html#123694646">Mario Carneiro (Mar 14 2018 at 10:15)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20internals/near/123694646" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00113leaninternals.html#123694646">Mario Carneiro (Mar 14 2018 at 20:15)</a>:</h4>
 <p>the parser produces a <code>pexpr</code>, this is a representation that roughly follows the AST of the user's input, all missing type information is absent, and the elaborator inserts metavariables in the holes, performs unification, and results an <code>expr</code> that has all type information filled in</p>
 
 <a name="123694699"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20internals/near/123694699" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00113leaninternals.html#123694699">Mario Carneiro (Mar 14 2018 at 10:16)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20internals/near/123694699" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00113leaninternals.html#123694699">Mario Carneiro (Mar 14 2018 at 20:16)</a>:</h4>
 <p>After this is done, the expr is sent to the kernel where it is typechecked (again, since the elaborator also has a typechecker that does other stuff on the side)</p>
 
 <a name="123694710"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20internals/near/123694710" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00113leaninternals.html#123694710">VinothKumar Raman (Mar 14 2018 at 10:17)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20internals/near/123694710" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00113leaninternals.html#123694710">VinothKumar Raman (Mar 14 2018 at 20:17)</a>:</h4>
 <p>Its not very linear as I imagined it to be.</p>
 
 <a name="123694719"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20internals/near/123694719" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00113leaninternals.html#123694719">VinothKumar Raman (Mar 14 2018 at 10:17)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20internals/near/123694719" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00113leaninternals.html#123694719">VinothKumar Raman (Mar 14 2018 at 20:17)</a>:</h4>
 <p>I think I understand the complexity very well now after trying to implement one :)</p>
 
 <a name="123694756"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20internals/near/123694756" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00113leaninternals.html#123694756">Mario Carneiro (Mar 14 2018 at 10:18)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20internals/near/123694756" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00113leaninternals.html#123694756">Mario Carneiro (Mar 14 2018 at 20:18)</a>:</h4>
 <p>Writing an elaborator is no joke</p>
 
 <a name="123694770"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20internals/near/123694770" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00113leaninternals.html#123694770">VinothKumar Raman (Mar 14 2018 at 10:18)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20internals/near/123694770" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00113leaninternals.html#123694770">VinothKumar Raman (Mar 14 2018 at 20:18)</a>:</h4>
 <p>There is no concrete theory to it? Like lambda calculus substitution.</p>
 
 <a name="123694777"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20internals/near/123694777" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00113leaninternals.html#123694777">Mario Carneiro (Mar 14 2018 at 10:19)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20internals/near/123694777" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00113leaninternals.html#123694777">Mario Carneiro (Mar 14 2018 at 20:19)</a>:</h4>
 <p>That's what the kernel does</p>
 
 <a name="123694780"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20internals/near/123694780" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00113leaninternals.html#123694780">VinothKumar Raman (Mar 14 2018 at 10:19)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20internals/near/123694780" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00113leaninternals.html#123694780">VinothKumar Raman (Mar 14 2018 at 20:19)</a>:</h4>
 <p>Its very messy in lot of ways.</p>
 
 <a name="123694789"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20internals/near/123694789" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00113leaninternals.html#123694789">VinothKumar Raman (Mar 14 2018 at 10:19)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20internals/near/123694789" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00113leaninternals.html#123694789">VinothKumar Raman (Mar 14 2018 at 20:19)</a>:</h4>
 <p>I mean the elaborator doesnt have concrete theory?</p>
 
 <a name="123694835"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20internals/near/123694835" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00113leaninternals.html#123694835">Mario Carneiro (Mar 14 2018 at 10:20)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20internals/near/123694835" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00113leaninternals.html#123694835">Mario Carneiro (Mar 14 2018 at 20:20)</a>:</h4>
 <p>Parts of it do, I'm sure</p>
 
 <a name="123694851"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20internals/near/123694851" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00113leaninternals.html#123694851">Mario Carneiro (Mar 14 2018 at 10:20)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20internals/near/123694851" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00113leaninternals.html#123694851">Mario Carneiro (Mar 14 2018 at 20:20)</a>:</h4>
 <p>like the first order unification algorithm is pretty well understood at this point</p>
 
 <a name="123694863"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20internals/near/123694863" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00113leaninternals.html#123694863">VinothKumar Raman (Mar 14 2018 at 10:21)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20internals/near/123694863" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00113leaninternals.html#123694863">VinothKumar Raman (Mar 14 2018 at 20:21)</a>:</h4>
 <p>Yea, I tried implementing first order unification on simple basic types with <code>let</code> polymorphism once<br>
 <a href="https://github.com/yellowflash/hindley" target="_blank" title="https://github.com/yellowflash/hindley">https://github.com/yellowflash/hindley</a></p>
 
 <a name="123694864"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20internals/near/123694864" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00113leaninternals.html#123694864">Mario Carneiro (Mar 14 2018 at 10:21)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20internals/near/123694864" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00113leaninternals.html#123694864">Mario Carneiro (Mar 14 2018 at 20:21)</a>:</h4>
 <p>Most of the complication has to do with when to unfold definitions, I think</p>
 
 <a name="123694865"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20internals/near/123694865" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00113leaninternals.html#123694865">VinothKumar Raman (Mar 14 2018 at 10:21)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20internals/near/123694865" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00113leaninternals.html#123694865">VinothKumar Raman (Mar 14 2018 at 20:21)</a>:</h4>
 <p>Its was super clear</p>
 
 <a name="123694915"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20internals/near/123694915" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00113leaninternals.html#123694915">VinothKumar Raman (Mar 14 2018 at 10:22)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20internals/near/123694915" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00113leaninternals.html#123694915">VinothKumar Raman (Mar 14 2018 at 20:22)</a>:</h4>
 <p>But definitions are normalizing right? Which mean you could find normal form and unify them</p>
 
 <a name="123694916"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20internals/near/123694916" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00113leaninternals.html#123694916">Mario Carneiro (Mar 14 2018 at 10:22)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20internals/near/123694916" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00113leaninternals.html#123694916">Mario Carneiro (Mar 14 2018 at 20:22)</a>:</h4>
 <p>lol sure if you want to wait until the end of the universe</p>
 
 <a name="123694917"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20internals/near/123694917" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00113leaninternals.html#123694917">VinothKumar Raman (Mar 14 2018 at 10:22)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20internals/near/123694917" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00113leaninternals.html#123694917">VinothKumar Raman (Mar 14 2018 at 20:22)</a>:</h4>
 <p>Ah wait, I understand. It could go both directions on beta reduction</p>
 
 <a name="123694920"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20internals/near/123694920" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00113leaninternals.html#123694920">Mario Carneiro (Mar 14 2018 at 10:22)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20internals/near/123694920" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00113leaninternals.html#123694920">Mario Carneiro (Mar 14 2018 at 20:22)</a>:</h4>
 <p>DTT "terminates", but it's not remotely practical</p>
 
 <a name="123694929"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20internals/near/123694929" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00113leaninternals.html#123694929">Mario Carneiro (Mar 14 2018 at 10:23)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20internals/near/123694929" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00113leaninternals.html#123694929">Mario Carneiro (Mar 14 2018 at 20:23)</a>:</h4>
 <p>so there are lots of heuristics for when to unfold something</p>
 
 <a name="123695033"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20internals/near/123695033" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00113leaninternals.html#123695033">VinothKumar Raman (Mar 14 2018 at 10:26)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20internals/near/123695033" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00113leaninternals.html#123695033">VinothKumar Raman (Mar 14 2018 at 20:26)</a>:</h4>
 <p>Oh ok</p>
 
 

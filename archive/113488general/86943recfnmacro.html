@@ -12,7 +12,7 @@ permalink: archive/113488general/86943recfnmacro.html
 <base href="https://leanprover.zulipchat.com">
 {% raw %}
 <a name="126885006"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rec_fn_macro/near/126885006" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86943recfnmacro.html#126885006">Ben Sherman (May 21 2018 at 20:27)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rec_fn_macro/near/126885006" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86943recfnmacro.html#126885006">Ben Sherman (May 22 2018 at 04:27)</a>:</h4>
 <p>I just updated Lean from 3.3.0 to 3.4.1, and now when I write this code:</p>
 <div class="codehilite"><pre><span></span>axiom R : Type
 
@@ -29,23 +29,23 @@ def Bind : Sampler → (ℕ → Sampler) → Sampler
 <p>I get the error <code>rec_fn_macro only allowed in meta definitions</code> in the definition of <code>Bind</code>. Is this a bug? Should I submit it as a Github issue? Or do I just not understand what's going on?</p>
 
 <a name="126886035"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rec_fn_macro/near/126886035" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86943recfnmacro.html#126886035">Andrew Ashworth (May 21 2018 at 20:50)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rec_fn_macro/near/126886035" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86943recfnmacro.html#126886035">Andrew Ashworth (May 22 2018 at 04:50)</a>:</h4>
 <p>whether or not it's a bug, lean 3.4.1 is the last release in the 3xx series and only critical issues are going to be fixed</p>
 
 <a name="126886556"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rec_fn_macro/near/126886556" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86943recfnmacro.html#126886556">Andrew Ashworth (May 21 2018 at 21:01)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rec_fn_macro/near/126886556" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86943recfnmacro.html#126886556">Andrew Ashworth (May 22 2018 at 05:01)</a>:</h4>
 <p>if you change out <code>axiom R</code> for <code>variable R</code> do you get a more educational error message?</p>
 
 <a name="126886865"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rec_fn_macro/near/126886865" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86943recfnmacro.html#126886865">Andrew Ashworth (May 21 2018 at 21:07)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rec_fn_macro/near/126886865" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86943recfnmacro.html#126886865">Andrew Ashworth (May 22 2018 at 05:07)</a>:</h4>
 <p>This is some kind of universe problem, I bet</p>
 
 <a name="126887061"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rec_fn_macro/near/126887061" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86943recfnmacro.html#126887061">Andrew Ashworth (May 21 2018 at 21:11)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rec_fn_macro/near/126887061" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86943recfnmacro.html#126887061">Andrew Ashworth (May 22 2018 at 05:11)</a>:</h4>
 <p>maybe not. I just pasted it into my vscode and replaced <code>axiom R</code> with <code>variable R</code>. If you <code>#print</code> Sampler you get that the Sampler type is <code>Type u -&gt; Type u</code>. Your definition is type incorrect. Now I'm confused why it ever worked in <code>3.3.0</code>...</p>
 
 <a name="126887150"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rec_fn_macro/near/126887150" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86943recfnmacro.html#126887150">Andrew Ashworth (May 21 2018 at 21:13)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rec_fn_macro/near/126887150" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86943recfnmacro.html#126887150">Andrew Ashworth (May 22 2018 at 05:13)</a>:</h4>
 <div class="codehilite"><pre><span></span><span class="kn">inductive</span> <span class="n">Sampler</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u₁</span> <span class="bp">→</span> <span class="kt">Type</span> <span class="n">u₁</span>
 <span class="n">constructors</span><span class="o">:</span>
 <span class="n">Sampler</span><span class="bp">.</span><span class="n">Ret</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">(</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u₁</span><span class="o">),</span> <span class="n">Sampler</span> <span class="n">R</span>
@@ -53,31 +53,31 @@ def Bind : Sampler → (ℕ → Sampler) → Sampler
 </pre></div>
 
 <a name="126887244"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rec_fn_macro/near/126887244" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86943recfnmacro.html#126887244">Andrew Ashworth (May 21 2018 at 21:14)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rec_fn_macro/near/126887244" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86943recfnmacro.html#126887244">Andrew Ashworth (May 22 2018 at 05:14)</a>:</h4>
 <p>huh, interesting. The definition is correct if you use <code>axiom</code>...</p>
 
 <a name="126888047"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rec_fn_macro/near/126888047" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86943recfnmacro.html#126888047">Kevin Buzzard (May 21 2018 at 21:30)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rec_fn_macro/near/126888047" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86943recfnmacro.html#126888047">Kevin Buzzard (May 22 2018 at 05:30)</a>:</h4>
 <p>I guess a variable is something which, if mentioned in a definition, secretly appends itself as a "forall R : type" in front of definitions</p>
 
 <a name="126888052"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rec_fn_macro/near/126888052" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86943recfnmacro.html#126888052">Ben Sherman (May 21 2018 at 21:30)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rec_fn_macro/near/126888052" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86943recfnmacro.html#126888052">Ben Sherman (May 22 2018 at 05:30)</a>:</h4>
 <p>Yeah, if I switch to using a <code>variable</code> or a <code>parameter</code> in a section, the definition goes through fine. And I don't think <code>Sampler</code> becomes universe-polymorphic in any case</p>
 
 <a name="126888067"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rec_fn_macro/near/126888067" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86943recfnmacro.html#126888067">Kevin Buzzard (May 21 2018 at 21:30)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rec_fn_macro/near/126888067" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86943recfnmacro.html#126888067">Kevin Buzzard (May 22 2018 at 05:30)</a>:</h4>
 <p>whereas perhaps with an axiom this does not happen.</p>
 
 <a name="126888086"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rec_fn_macro/near/126888086" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86943recfnmacro.html#126888086">Kevin Buzzard (May 21 2018 at 21:31)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rec_fn_macro/near/126888086" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86943recfnmacro.html#126888086">Kevin Buzzard (May 22 2018 at 05:31)</a>:</h4>
 <p>But isn't the error with <code>Bind</code> simply because Lean can't prove that the definition "terminates"?</p>
 
 <a name="126888148"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rec_fn_macro/near/126888148" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86943recfnmacro.html#126888148">Kevin Buzzard (May 21 2018 at 21:32)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rec_fn_macro/near/126888148" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86943recfnmacro.html#126888148">Kevin Buzzard (May 22 2018 at 05:32)</a>:</h4>
 <p>cf the meta def of that 91 function in Programming In Lean, where the definition is OK but this is too hard for Lean to spot so you have to make it meta</p>
 
 <a name="126888224"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rec_fn_macro/near/126888224" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86943recfnmacro.html#126888224">Kevin Buzzard (May 21 2018 at 21:33)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rec_fn_macro/near/126888224" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86943recfnmacro.html#126888224">Kevin Buzzard (May 22 2018 at 05:33)</a>:</h4>
 <div class="codehilite"><pre><span></span><span class="kn">axiom</span> <span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span>
 <span class="kn">variable</span> <span class="n">S</span> <span class="o">:</span> <span class="kt">Type</span>
 
@@ -89,15 +89,15 @@ def Bind : Sampler → (ℕ → Sampler) → Sampler
 </pre></div>
 
 <a name="126888301"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rec_fn_macro/near/126888301" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86943recfnmacro.html#126888301">Kevin Buzzard (May 21 2018 at 21:35)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rec_fn_macro/near/126888301" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86943recfnmacro.html#126888301">Kevin Buzzard (May 22 2018 at 05:35)</a>:</h4>
 <p>The axiom makes a new constant, like <code>quotient.sound</code> or whatever -- when you mention quotient.sound you don't get random "forall quotient.sound" hypotheses appearing in theorems</p>
 
 <a name="126888317"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rec_fn_macro/near/126888317" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86943recfnmacro.html#126888317">Kevin Buzzard (May 21 2018 at 21:35)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rec_fn_macro/near/126888317" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86943recfnmacro.html#126888317">Kevin Buzzard (May 22 2018 at 05:35)</a>:</h4>
 <p>but the variable gets inserted. I guess you guys both know this.</p>
 
 <a name="126888389"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rec_fn_macro/near/126888389" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86943recfnmacro.html#126888389">Ben Sherman (May 21 2018 at 21:36)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rec_fn_macro/near/126888389" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86943recfnmacro.html#126888389">Ben Sherman (May 22 2018 at 05:36)</a>:</h4>
 <p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> No,  this is actually a primitive recursive definition:</p>
 <div class="codehilite"><pre><span></span>protected eliminator Sampler.rec : Π {real : Type} {C : Sampler real → Sort l},
   C (Sampler.Ret real) →
@@ -109,27 +109,27 @@ def Bind : Sampler → (ℕ → Sampler) → Sampler
 <p>Notice how the inductive hypothesis allows you to apply the continuation to any argument.</p>
 
 <a name="126888423"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rec_fn_macro/near/126888423" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86943recfnmacro.html#126888423">Kevin Buzzard (May 21 2018 at 21:37)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rec_fn_macro/near/126888423" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86943recfnmacro.html#126888423">Kevin Buzzard (May 22 2018 at 05:37)</a>:</h4>
 <p>I am suggesting that your definition of Bind relies on evaluating Bind elsewhere, does it not?</p>
 
 <a name="126888487"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rec_fn_macro/near/126888487" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86943recfnmacro.html#126888487">Kevin Buzzard (May 21 2018 at 21:38)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rec_fn_macro/near/126888487" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86943recfnmacro.html#126888487">Kevin Buzzard (May 22 2018 at 05:38)</a>:</h4>
 <p>And with the definition of nat, Lean can use some recursion principle to check that the definition is good.</p>
 
 <a name="126888566"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rec_fn_macro/near/126888566" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86943recfnmacro.html#126888566">Kevin Buzzard (May 21 2018 at 21:40)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rec_fn_macro/near/126888566" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86943recfnmacro.html#126888566">Kevin Buzzard (May 22 2018 at 05:40)</a>:</h4>
 <p>Presumably the error means "I find myself trying to prove that this definition of Bind has a decent recursor but I find myself trying to write some induction over functions, so I give up, make me meta so I don't have to worry about this sort of thing and can just be untrusted code"</p>
 
 <a name="126888576"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rec_fn_macro/near/126888576" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86943recfnmacro.html#126888576">Kevin Buzzard (May 21 2018 at 21:40)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rec_fn_macro/near/126888576" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86943recfnmacro.html#126888576">Kevin Buzzard (May 22 2018 at 05:40)</a>:</h4>
 <p>heh</p>
 
 <a name="126888586"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rec_fn_macro/near/126888586" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86943recfnmacro.html#126888586">Kevin Buzzard (May 21 2018 at 21:41)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rec_fn_macro/near/126888586" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86943recfnmacro.html#126888586">Kevin Buzzard (May 22 2018 at 05:41)</a>:</h4>
 <p>making the definition of Bind meta doesn't make the error go away :-)</p>
 
 <a name="126888735"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rec_fn_macro/near/126888735" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86943recfnmacro.html#126888735">Ben Sherman (May 21 2018 at 21:44)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rec_fn_macro/near/126888735" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86943recfnmacro.html#126888735">Ben Sherman (May 22 2018 at 05:44)</a>:</h4>
 <p>So the definition works if I apply the recursor directly:</p>
 <div class="codehilite"><pre><span></span>axiom real : Type
 
@@ -147,15 +147,15 @@ def Bind (x : Sampler) : (ℕ → Sampler) → Sampler
 <p>So, even though the definition is primitive recursive, it does look to be something to do with it failing in figuring out the recursion scheme.</p>
 
 <a name="126889923"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rec_fn_macro/near/126889923" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86943recfnmacro.html#126889923">Kevin Buzzard (May 21 2018 at 22:08)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rec_fn_macro/near/126889923" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86943recfnmacro.html#126889923">Kevin Buzzard (May 22 2018 at 06:08)</a>:</h4>
 <p>I am really confused by that recursor</p>
 
 <a name="126889945"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rec_fn_macro/near/126889945" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86943recfnmacro.html#126889945">Kevin Buzzard (May 21 2018 at 22:09)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rec_fn_macro/near/126889945" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86943recfnmacro.html#126889945">Kevin Buzzard (May 22 2018 at 06:09)</a>:</h4>
 <p><code>(Π (a_1 : R), C (a a_1))</code></p>
 
 <a name="126890135"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rec_fn_macro/near/126890135" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86943recfnmacro.html#126890135">Kevin Buzzard (May 21 2018 at 22:12)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rec_fn_macro/near/126890135" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86943recfnmacro.html#126890135">Kevin Buzzard (May 22 2018 at 06:12)</a>:</h4>
 <div class="codehilite"><pre><span></span><span class="kn">inductive</span> <span class="n">Sampler</span> <span class="o">:</span> <span class="kt">Type</span>
 <span class="bp">|</span> <span class="n">Ret</span> <span class="o">:</span> <span class="n">Sampler</span>
 <span class="bp">|</span> <span class="n">BindUniform</span> <span class="o">:</span> <span class="o">(</span><span class="bp">ℤ</span> <span class="bp">→</span> <span class="n">Sampler</span><span class="o">)</span> <span class="bp">→</span> <span class="n">Sampler</span>
@@ -168,55 +168,55 @@ def Bind (x : Sampler) : (ℕ → Sampler) → Sampler
 </pre></div>
 
 <a name="126890137"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rec_fn_macro/near/126890137" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86943recfnmacro.html#126890137">Kevin Buzzard (May 21 2018 at 22:12)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rec_fn_macro/near/126890137" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86943recfnmacro.html#126890137">Kevin Buzzard (May 22 2018 at 06:12)</a>:</h4>
 <p>That works fine</p>
 
 <a name="126890155"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rec_fn_macro/near/126890155" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86943recfnmacro.html#126890155">Kevin Buzzard (May 21 2018 at 22:13)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rec_fn_macro/near/126890155" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86943recfnmacro.html#126890155">Kevin Buzzard (May 22 2018 at 06:13)</a>:</h4>
 <p>replacing the constant with an explicit type</p>
 
 <a name="126890565"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rec_fn_macro/near/126890565" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86943recfnmacro.html#126890565">Kevin Buzzard (May 21 2018 at 22:22)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rec_fn_macro/near/126890565" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86943recfnmacro.html#126890565">Kevin Buzzard (May 22 2018 at 06:22)</a>:</h4>
 <p>The definition with rec_on looks a bit funny to me -- k doesn't seem to play a role</p>
 
 <a name="126890599"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rec_fn_macro/near/126890599" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86943recfnmacro.html#126890599">Kevin Buzzard (May 21 2018 at 22:23)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rec_fn_macro/near/126890599" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86943recfnmacro.html#126890599">Kevin Buzzard (May 22 2018 at 06:23)</a>:</h4>
 <p>oh I see</p>
 
 <a name="126890616"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rec_fn_macro/near/126890616" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86943recfnmacro.html#126890616">Kevin Buzzard (May 21 2018 at 22:23)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rec_fn_macro/near/126890616" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86943recfnmacro.html#126890616">Kevin Buzzard (May 22 2018 at 06:23)</a>:</h4>
 <p><code>ih x</code> is <code>Bind (k x)</code></p>
 
 <a name="126890620"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rec_fn_macro/near/126890620" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86943recfnmacro.html#126890620">Kevin Buzzard (May 21 2018 at 22:24)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rec_fn_macro/near/126890620" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86943recfnmacro.html#126890620">Kevin Buzzard (May 22 2018 at 06:24)</a>:</h4>
 <p>that's the role of <code>ih</code></p>
 
 <a name="126890770"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rec_fn_macro/near/126890770" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86943recfnmacro.html#126890770">Ben Sherman (May 21 2018 at 22:26)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rec_fn_macro/near/126890770" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86943recfnmacro.html#126890770">Ben Sherman (May 22 2018 at 06:26)</a>:</h4>
 <p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> Yes, exactly!</p>
 
 <a name="126890773"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rec_fn_macro/near/126890773" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86943recfnmacro.html#126890773">Kevin Buzzard (May 21 2018 at 22:27)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rec_fn_macro/near/126890773" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86943recfnmacro.html#126890773">Kevin Buzzard (May 22 2018 at 06:27)</a>:</h4>
 <p>so I finally understand the question :-)</p>
 
 <a name="126890852"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rec_fn_macro/near/126890852" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86943recfnmacro.html#126890852">Kevin Buzzard (May 21 2018 at 22:28)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rec_fn_macro/near/126890852" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86943recfnmacro.html#126890852">Kevin Buzzard (May 22 2018 at 06:28)</a>:</h4>
 <p>so it is a bit weird that it will work for a concrete type like the integers but won't work for the constant, or at least it's weird to me</p>
 
 <a name="126890872"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rec_fn_macro/near/126890872" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86943recfnmacro.html#126890872">Ben Sherman (May 21 2018 at 22:28)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rec_fn_macro/near/126890872" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86943recfnmacro.html#126890872">Ben Sherman (May 22 2018 at 06:28)</a>:</h4>
 <p>Right, and if you change from <code>axiom</code> to <code>parameter</code> or <code>variable</code>, it works again. So I'm thinking it's a bug.</p>
 
 <a name="126890895"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rec_fn_macro/near/126890895" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86943recfnmacro.html#126890895">Kevin Buzzard (May 21 2018 at 22:29)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rec_fn_macro/near/126890895" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86943recfnmacro.html#126890895">Kevin Buzzard (May 22 2018 at 06:29)</a>:</h4>
 <p>well, with variable you change the type</p>
 
 <a name="126890900"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rec_fn_macro/near/126890900" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86943recfnmacro.html#126890900">Kevin Buzzard (May 21 2018 at 22:29)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rec_fn_macro/near/126890900" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86943recfnmacro.html#126890900">Kevin Buzzard (May 22 2018 at 06:29)</a>:</h4>
 <p>so you have to fiddle with everything</p>
 
 <a name="147271354"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rec_fn_macro/near/147271354" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86943recfnmacro.html#147271354">Ben Sherman (Nov 08 2018 at 03:04)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rec_fn_macro/near/147271354" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86943recfnmacro.html#147271354">Ben Sherman (Nov 08 2018 at 13:04)</a>:</h4>
 <p>I'm having another issue with rec_fn_macro: I've reduced it to this bug this time:</p>
 <div class="codehilite"><pre><span></span>import analysis.real
 def foo : bool → list ℝ
@@ -237,15 +237,15 @@ Does anyone have any idea for how to get around this issue?<br>
 In my actual code, I'm getting a <code>rec_fn_macro</code> issue that appears nonlocally - it's failing for a definition that calls some other function <code>bar</code> that involves division on ℝ. If I redefine <code>bar</code> as <code>sorry</code>, there is no longer any issue. But it doesn't even help for me to mark <code>bar</code> as <code>irreducible</code>.</p>
 
 <a name="147271582"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rec_fn_macro/near/147271582" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86943recfnmacro.html#147271582">Mario Carneiro (Nov 08 2018 at 03:09)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rec_fn_macro/near/147271582" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86943recfnmacro.html#147271582">Mario Carneiro (Nov 08 2018 at 13:09)</a>:</h4>
 <p>I don't see the issue. This is certainly <code>noncomputable</code>, and that's the error you get if you don't mark it so. And it is failing to prove the recursion is well founded because the default well founded instance on bool has tt and ff incomparable, so you can't do any recursion.</p>
 
 <a name="147271643"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rec_fn_macro/near/147271643" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86943recfnmacro.html#147271643">Mario Carneiro (Nov 08 2018 at 03:10)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rec_fn_macro/near/147271643" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86943recfnmacro.html#147271643">Mario Carneiro (Nov 08 2018 at 13:10)</a>:</h4>
 <p>perhaps you have oversimplified your example?</p>
 
 <a name="147271849"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rec_fn_macro/near/147271849" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86943recfnmacro.html#147271849">Ben Sherman (Nov 08 2018 at 03:15)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rec_fn_macro/near/147271849" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86943recfnmacro.html#147271849">Ben Sherman (Nov 08 2018 at 13:15)</a>:</h4>
 <p>Thanks! I didn't know that details about the well-foundedness. Then I indeed oversimplified my example - originally it was nat. Let me backtrack with a revised example.</p>
 
 

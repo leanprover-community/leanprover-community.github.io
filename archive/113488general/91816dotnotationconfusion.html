@@ -12,7 +12,7 @@ permalink: archive/113488general/91816dotnotationconfusion.html
 <base href="https://leanprover.zulipchat.com">
 {% raw %}
 <a name="157341136"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dot%20notation%20confusion/near/157341136" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/91816dotnotationconfusion.html#157341136">Kevin Buzzard (Feb 01 2019 at 10:46)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dot%20notation%20confusion/near/157341136" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/91816dotnotationconfusion.html#157341136">Kevin Buzzard (Feb 01 2019 at 20:46)</a>:</h4>
 <p>I have always been confused about dot notation. I don't use it as much as other people, because I don't understand it as well as other people. I've read <a href="https://github.com/PatrickMassot/mathlib/blob/e5aad2e4e0964c7624183efdb534878b6a06bbb5/docs/extras/structures.md#about-the-namespace-shortcut" target="_blank" title="https://github.com/PatrickMassot/mathlib/blob/e5aad2e4e0964c7624183efdb534878b6a06bbb5/docs/extras/structures.md#about-the-namespace-shortcut">Patrick's notes</a> on this and TPIL but I think there's more to it.</p>
 <p>I understand that if I make a new structure <code>structure point (α : Type) := (x : α) (y : α)</code> then for <code>p : point</code> I can use <code>p.x</code> instead of <code>point.x p</code>. I also understand that if we make more functions in the structure's namespace like <code>point.blah</code> (which for simplicity takes as input one point and possibly some other stuff) then <code>p.blah</code> is shorthand for <code>point.blah p</code> (or perhaps <code>point.blah _ _ p</code> if the point happens not to be the first thing that <code>point.blah</code> eats). </p>
 <p>What threw me yesterday when working on the perfectoid project was that my proof that if <code>neg</code> was a continuous function on a topological ring then it was also a continuous function on a subring looked like this:</p>
@@ -37,123 +37,166 @@ permalink: archive/113488general/91816dotnotationconfusion.html
 <p>Confused in London.</p>
 
 <a name="157342303"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dot%20notation%20confusion/near/157342303" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/91816dotnotationconfusion.html#157342303">Sebastian Ullrich (Feb 01 2019 at 11:08)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dot%20notation%20confusion/near/157342303" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/91816dotnotationconfusion.html#157342303">Sebastian Ullrich (Feb 01 2019 at 21:08)</a>:</h4>
 <p>To spell it out, the full semantics of dot notation is, roughly, "if <code>e</code> is a <em>term</em> of type <code>t ...</code>, and there is a function <code>t.f</code>, then <code>e.f ...</code> is syntax sugar for <code>t.f ... e ...</code>, where <code>e</code> has been inserted as the argument for the first parameter of type <code>t ...</code>". <code>e</code> being a variable of a structure <code>s</code> and <code>s.f</code> being a projection is just a special case of that.</p>
 
 <a name="157342527"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dot%20notation%20confusion/near/157342527" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/91816dotnotationconfusion.html#157342527">Sebastian Ullrich (Feb 01 2019 at 11:13)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dot%20notation%20confusion/near/157342527" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/91816dotnotationconfusion.html#157342527">Sebastian Ullrich (Feb 01 2019 at 21:13)</a>:</h4>
 <p>Note that the <em>term</em> <code>continuous_subtype_val</code> has type <code>continuous subtyp.val</code>. The type you gave is the type of <code>@continuous_subtype_val</code>! So dot notation doesn't think "oh, this is a function", but "oh, this is a <code>continuous</code>"</p>
 
 <a name="157342530"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dot%20notation%20confusion/near/157342530" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/91816dotnotationconfusion.html#157342530">Mario Carneiro (Feb 01 2019 at 11:13)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dot%20notation%20confusion/near/157342530" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/91816dotnotationconfusion.html#157342530">Mario Carneiro (Feb 01 2019 at 21:13)</a>:</h4>
 <p>Originally, <code>continuous.comp</code> was called <code>continuous_comp</code>. It was renamed because it is "eligible" for projection notation like this</p>
 
 <a name="157342582"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dot%20notation%20confusion/near/157342582" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/91816dotnotationconfusion.html#157342582">Mario Carneiro (Feb 01 2019 at 11:14)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dot%20notation%20confusion/near/157342582" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/91816dotnotationconfusion.html#157342582">Mario Carneiro (Feb 01 2019 at 21:14)</a>:</h4>
 <p>You can't just call it <code>comp</code> because that overlaps with a million other things</p>
 
 <a name="157342712"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dot%20notation%20confusion/near/157342712" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/91816dotnotationconfusion.html#157342712">Mario Carneiro (Feb 01 2019 at 11:16)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dot%20notation%20confusion/near/157342712" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/91816dotnotationconfusion.html#157342712">Mario Carneiro (Feb 01 2019 at 21:16)</a>:</h4>
 <p>There is a danger in using non-structures with projection notation, because regular defs can be unfolded, and once they are unfolded they no longer have that name anymore (<code>continuous</code> in this case) so the projections won't find the namespace. In practice I haven't had too much issue with this unless you are solving some weird unification problem</p>
 
 <a name="157342733"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dot%20notation%20confusion/near/157342733" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/91816dotnotationconfusion.html#157342733">Mario Carneiro (Feb 01 2019 at 11:17)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dot%20notation%20confusion/near/157342733" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/91816dotnotationconfusion.html#157342733">Mario Carneiro (Feb 01 2019 at 21:17)</a>:</h4>
 <p>and in that case it's not too bad to just say <code>continuous.comp ...</code></p>
 
 <a name="157342952"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dot%20notation%20confusion/near/157342952" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/91816dotnotationconfusion.html#157342952">Kevin Buzzard (Feb 01 2019 at 11:21)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dot%20notation%20confusion/near/157342952" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/91816dotnotationconfusion.html#157342952">Kevin Buzzard (Feb 01 2019 at 21:21)</a>:</h4>
 <p><code>continuous.comp</code> was "eligible" because it took <code>continuous f</code> as an input. It seems to me that the real coincidence is that <code>continuous_subtype_val</code> has type <code>continuous ...</code> and every other input can be inferred.</p>
 
 <a name="157342968"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dot%20notation%20confusion/near/157342968" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/91816dotnotationconfusion.html#157342968">Mario Carneiro (Feb 01 2019 at 11:21)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dot%20notation%20confusion/near/157342968" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/91816dotnotationconfusion.html#157342968">Mario Carneiro (Feb 01 2019 at 21:21)</a>:</h4>
 <blockquote>
 <p>If continuous_subtype_val had happened to just take one explicit argument, which in a parallel universe it could have done, I am assuming that this trick would stop working.</p>
 </blockquote>
 <p>No, it would be written <code>(continuous_subtype_val _).comp</code> in that case</p>
 
 <a name="157343048"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dot%20notation%20confusion/near/157343048" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/91816dotnotationconfusion.html#157343048">Mario Carneiro (Feb 01 2019 at 11:22)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dot%20notation%20confusion/near/157343048" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/91816dotnotationconfusion.html#157343048">Mario Carneiro (Feb 01 2019 at 21:22)</a>:</h4>
 <p>it's not a coincidence that <code>continuous_subtype_val</code> returns a <code>continuous</code>; that's the whole point of the function, we are proving things are continuous. Possibly some hypotheses would be necessary but those can be dealt with as above</p>
 
 <a name="157343077"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dot%20notation%20confusion/near/157343077" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/91816dotnotationconfusion.html#157343077">Kevin Buzzard (Feb 01 2019 at 11:23)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dot%20notation%20confusion/near/157343077" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/91816dotnotationconfusion.html#157343077">Kevin Buzzard (Feb 01 2019 at 21:23)</a>:</h4>
 <p>Ok I think I now understand. Thanks to Sebastian and Mario as ever. Would I be right in thinking that the complete list of functions that aren't structures but which have an associated namespace is quite small? <code>continuous</code> being one. Or does this happen everywhere and I've just not noticed it yet (and this is the reason I underuse dot notation)?</p>
 
 <a name="157343078"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dot%20notation%20confusion/near/157343078" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/91816dotnotationconfusion.html#157343078">Mario Carneiro (Feb 01 2019 at 11:23)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dot%20notation%20confusion/near/157343078" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/91816dotnotationconfusion.html#157343078">Mario Carneiro (Feb 01 2019 at 21:23)</a>:</h4>
 <p>You can basically always use <code>continuous.comp</code> with projection notation, because the first argument will be a <code>continuous</code></p>
 
 <a name="157343128"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dot%20notation%20confusion/near/157343128" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/91816dotnotationconfusion.html#157343128">Kevin Buzzard (Feb 01 2019 at 11:24)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dot%20notation%20confusion/near/157343128" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/91816dotnotationconfusion.html#157343128">Kevin Buzzard (Feb 01 2019 at 21:24)</a>:</h4>
 <p>Oh!</p>
 
 <a name="157343148"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dot%20notation%20confusion/near/157343148" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/91816dotnotationconfusion.html#157343148">Kevin Buzzard (Feb 01 2019 at 11:24)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dot%20notation%20confusion/near/157343148" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/91816dotnotationconfusion.html#157343148">Kevin Buzzard (Feb 01 2019 at 21:24)</a>:</h4>
 <p>So in fact it's utterly commonplace and this is why Patrick spotted it so quickly</p>
 
 <a name="157343176"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dot%20notation%20confusion/near/157343176" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/91816dotnotationconfusion.html#157343176">Kevin Buzzard (Feb 01 2019 at 11:25)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dot%20notation%20confusion/near/157343176" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/91816dotnotationconfusion.html#157343176">Kevin Buzzard (Feb 01 2019 at 21:25)</a>:</h4>
 <p>You basically never write <code>continuous.comp</code> at all!</p>
 
 <a name="157343185"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dot%20notation%20confusion/near/157343185" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/91816dotnotationconfusion.html#157343185">Kevin Buzzard (Feb 01 2019 at 11:25)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dot%20notation%20confusion/near/157343185" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/91816dotnotationconfusion.html#157343185">Kevin Buzzard (Feb 01 2019 at 21:25)</a>:</h4>
 <p>It does hamper readability though</p>
 
 <a name="157343186"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dot%20notation%20confusion/near/157343186" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/91816dotnotationconfusion.html#157343186">Mario Carneiro (Feb 01 2019 at 11:25)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dot%20notation%20confusion/near/157343186" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/91816dotnotationconfusion.html#157343186">Mario Carneiro (Feb 01 2019 at 21:25)</a>:</h4>
 <p>it's a pretty simple and common trick, enough that I can't say how many times it's been used in mathlib. If a theorem about <code>foo</code> things has an argument of type <code>foo x</code>, you should consider calling it <code>foo.bar</code> instead of <code>foo_bar</code></p>
 
 <a name="157343237"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dot%20notation%20confusion/near/157343237" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/91816dotnotationconfusion.html#157343237">Kevin Buzzard (Feb 01 2019 at 11:26)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dot%20notation%20confusion/near/157343237" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/91816dotnotationconfusion.html#157343237">Kevin Buzzard (Feb 01 2019 at 21:26)</a>:</h4>
 <p>And now I understand why</p>
 
 <a name="157343238"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dot%20notation%20confusion/near/157343238" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/91816dotnotationconfusion.html#157343238">Mario Carneiro (Feb 01 2019 at 11:26)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dot%20notation%20confusion/near/157343238" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/91816dotnotationconfusion.html#157343238">Mario Carneiro (Feb 01 2019 at 21:26)</a>:</h4>
 <p>Personally I like having <code>.comp</code> as a sort of infix operator. If you turn your head and squint it looks like the <code>∘</code></p>
 
 <a name="157343241"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dot%20notation%20confusion/near/157343241" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/91816dotnotationconfusion.html#157343241">Kevin Buzzard (Feb 01 2019 at 11:26)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dot%20notation%20confusion/near/157343241" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/91816dotnotationconfusion.html#157343241">Kevin Buzzard (Feb 01 2019 at 21:26)</a>:</h4>
 <p>It's to maximise obfuscation :-)</p>
 
 <a name="157343249"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dot%20notation%20confusion/near/157343249" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/91816dotnotationconfusion.html#157343249">Kenny Lau (Feb 01 2019 at 11:27)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dot%20notation%20confusion/near/157343249" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/91816dotnotationconfusion.html#157343249">Kenny Lau (Feb 01 2019 at 21:27)</a>:</h4>
 <p>I can read it perfectly without any problem</p>
 
 <a name="157343257"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dot%20notation%20confusion/near/157343257" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/91816dotnotationconfusion.html#157343257">Kevin Buzzard (Feb 01 2019 at 11:27)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dot%20notation%20confusion/near/157343257" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/91816dotnotationconfusion.html#157343257">Kevin Buzzard (Feb 01 2019 at 21:27)</a>:</h4>
 <p>You should have called it <code>continuous.o</code></p>
 
 <a name="157343295"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dot%20notation%20confusion/near/157343295" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/91816dotnotationconfusion.html#157343295">Kevin Buzzard (Feb 01 2019 at 11:28)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dot%20notation%20confusion/near/157343295" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/91816dotnotationconfusion.html#157343295">Kevin Buzzard (Feb 01 2019 at 21:28)</a>:</h4>
 <p>Wait</p>
 
 <a name="157343322"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dot%20notation%20confusion/near/157343322" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/91816dotnotationconfusion.html#157343322">Mario Carneiro (Feb 01 2019 at 11:28)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dot%20notation%20confusion/near/157343322" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/91816dotnotationconfusion.html#157343322">Mario Carneiro (Feb 01 2019 at 21:28)</a>:</h4>
 <p>you are about to point out the order is wrong, I'm sure</p>
 
 <a name="157343328"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dot%20notation%20confusion/near/157343328" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/91816dotnotationconfusion.html#157343328">Kevin Buzzard (Feb 01 2019 at 11:28)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dot%20notation%20confusion/near/157343328" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/91816dotnotationconfusion.html#157343328">Kevin Buzzard (Feb 01 2019 at 21:28)</a>:</h4>
 <p>its inputs are in the...</p>
 
 <a name="157343329"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dot%20notation%20confusion/near/157343329" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/91816dotnotationconfusion.html#157343329">Kevin Buzzard (Feb 01 2019 at 11:28)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dot%20notation%20confusion/near/157343329" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/91816dotnotationconfusion.html#157343329">Kevin Buzzard (Feb 01 2019 at 21:28)</a>:</h4>
 <p>Yeah :-)</p>
 
 <a name="157343381"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dot%20notation%20confusion/near/157343381" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/91816dotnotationconfusion.html#157343381">Mario Carneiro (Feb 01 2019 at 11:29)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dot%20notation%20confusion/near/157343381" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/91816dotnotationconfusion.html#157343381">Mario Carneiro (Feb 01 2019 at 21:29)</a>:</h4>
 <p>not sure there is any big reason for that</p>
 
 <a name="157343442"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dot%20notation%20confusion/near/157343442" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/91816dotnotationconfusion.html#157343442">Mario Carneiro (Feb 01 2019 at 11:30)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dot%20notation%20confusion/near/157343442" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/91816dotnotationconfusion.html#157343442">Mario Carneiro (Feb 01 2019 at 21:30)</a>:</h4>
 <p>also not sure I care about it</p>
 
 <a name="157343490"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dot%20notation%20confusion/near/157343490" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/91816dotnotationconfusion.html#157343490">Mario Carneiro (Feb 01 2019 at 11:31)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dot%20notation%20confusion/near/157343490" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/91816dotnotationconfusion.html#157343490">Mario Carneiro (Feb 01 2019 at 21:31)</a>:</h4>
 <p>I will let Scott have his hobby horse</p>
 
 <a name="157344279"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dot%20notation%20confusion/near/157344279" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/91816dotnotationconfusion.html#157344279">Johan Commelin (Feb 01 2019 at 11:45)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dot%20notation%20confusion/near/157344279" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/91816dotnotationconfusion.html#157344279">Johan Commelin (Feb 01 2019 at 21:45)</a>:</h4>
 <p>I guess we can still define <code>continuous.o</code> with arguments in the right order...</p>
+
+<a name="157526413"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dot%20notation%20confusion/near/157526413" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/91816dotnotationconfusion.html#157526413">Kevin Buzzard (Feb 05 2019 at 01:31)</a>:</h4>
+<blockquote>
+<p>it's a pretty simple and common trick, enough that I can't say how many times it's been used in mathlib. If a theorem about <code>foo</code> things has an argument of type <code>foo x</code>, you should consider calling it <code>foo.bar</code> instead of <code>foo_bar</code></p>
+</blockquote>
+<p>The crucial point is that the function has as _input_ things of type <code>foo</code>, like <code>continuous.comp</code>, rather than just outputting things of type <code>foo</code> like <code>continuous_subtype_val</code>. Dots for the input, underscores for the output.</p>
+
+<a name="157530577"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dot%20notation%20confusion/near/157530577" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/91816dotnotationconfusion.html#157530577">Sebastien Gouezel (Feb 05 2019 at 02:26)</a>:</h4>
+<p>Cute example in #PR657</p>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">isometry_on</span><span class="bp">.</span><span class="n">uniform_embedding</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">isometry_on</span> <span class="n">f</span> <span class="n">univ</span><span class="o">)</span> <span class="o">:</span> <span class="n">uniform_embedding</span> <span class="n">f</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">emetric_isometry_on_iff_isometry_on</span><span class="bp">.</span><span class="mi">2</span> <span class="n">h</span><span class="o">)</span><span class="bp">.</span><span class="n">uniform_embedding</span>
+
+<span class="kn">lemma</span> <span class="n">isometry_on</span><span class="bp">.</span><span class="n">continuous</span>
+  <span class="o">(</span><span class="n">hf</span> <span class="o">:</span> <span class="n">isometry_on</span> <span class="n">f</span> <span class="n">univ</span><span class="o">)</span> <span class="o">:</span> <span class="n">continuous</span> <span class="n">f</span> <span class="o">:=</span>
+<span class="n">hf</span><span class="bp">.</span><span class="n">uniform_embedding</span><span class="bp">.</span><span class="n">embedding</span><span class="bp">.</span><span class="n">continuous</span>
+</pre></div>
+
+<a name="157531104"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dot%20notation%20confusion/near/157531104" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/91816dotnotationconfusion.html#157531104">Kevin Buzzard (Feb 05 2019 at 02:33)</a>:</h4>
+<p>So both the theorem and the lemma are in the <code>isometry_on</code> namespace and  have an input of type <code>isometry_on ...</code>, so dot notation is appropriate. </p>
+<p>I guess what happens in practice is that users of a particular theory instinctively know which functions this works for, and use it.  I guess we can also infer from this example that there are theorems <code>uniform_embedding.embedding : uniform_embedding f -&gt; embedding f</code> and <code>embedding.continuous : embedding f -&gt; continuous f</code>. I think understand this properly now; thanks for posting the example, it is very neat. The example shows that the concept seems to concatenate in good cases (when there's only one input, unlike <code>continuous.comp</code> which takes two).</p>
+
+<a name="157531508"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dot%20notation%20confusion/near/157531508" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/91816dotnotationconfusion.html#157531508">Mario Carneiro (Feb 05 2019 at 02:38)</a>:</h4>
+<p>well, like I said, it still works in the n-ary case, you just have to put parentheses</p>
+
+<a name="157531587"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dot%20notation%20confusion/near/157531587" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/91816dotnotationconfusion.html#157531587">Mario Carneiro (Feb 05 2019 at 02:39)</a>:</h4>
+<p>but this kind of "dot-chaining" is exactly what projections are great at. It's intentionally similar to method chaining in OO languages like Java</p>
+
+<a name="157538011"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dot%20notation%20confusion/near/157538011" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/91816dotnotationconfusion.html#157538011">Kevin Buzzard (Feb 05 2019 at 04:05)</a>:</h4>
+<p>What is a "projection"?</p>
+
+<a name="157538417"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dot%20notation%20confusion/near/157538417" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/91816dotnotationconfusion.html#157538417">Mario Carneiro (Feb 05 2019 at 04:11)</a>:</h4>
+<p><code>f.x</code> is called projection notation, <code>foo.x</code> is a projection on <code>f</code></p>
+
+<a name="157538436"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dot%20notation%20confusion/near/157538436" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/91816dotnotationconfusion.html#157538436">Mario Carneiro (Feb 05 2019 at 04:11)</a>:</h4>
+<p>in a structure, the fields are also called projections - the origin is the first and second projections of a pair</p>
 
 
 {% endraw %}

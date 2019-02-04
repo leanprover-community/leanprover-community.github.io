@@ -12,7 +12,7 @@ permalink: archive/144837PRreviews/29011486use.html
 <base href="https://leanprover.zulipchat.com">
 {% raw %}
 <a name="148369750"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23486%20use/near/148369750" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/29011486use.html#148369750">Rob Lewis (Nov 26 2018 at 15:23)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23486%20use/near/148369750" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/29011486use.html#148369750">Rob Lewis (Nov 27 2018 at 01:23)</a>:</h4>
 <p>Okay, I had a few moments to think about this. Here's a short solution using <code>fconstructor</code> that will handle multi-argument constructors and nested single-arg constructors together, like <span class="user-mention" data-user-id="110049">@Mario Carneiro</span> wanted. I'm not quite sure about the failure conditions though. This will fail if you give it too many arguments, which I think is correct. It will succeed if you give it too few arguments, potentially leaving you in the middle of a partially applied multi-arg constructor. Reasonable?</p>
 <div class="codehilite"><pre><span></span><span class="n">meta</span> <span class="n">def</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">use</span> <span class="o">:</span> <span class="n">list</span> <span class="n">pexpr</span> <span class="bp">→</span> <span class="n">tactic</span> <span class="n">unit</span>
 <span class="bp">|</span> <span class="o">[]</span> <span class="o">:=</span> <span class="n">skip</span>
@@ -41,174 +41,174 @@ permalink: archive/144837PRreviews/29011486use.html
 </pre></div>
 
 <a name="148369834"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23486%20use/near/148369834" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/29011486use.html#148369834">Mario Carneiro (Nov 26 2018 at 15:24)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23486%20use/near/148369834" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/29011486use.html#148369834">Mario Carneiro (Nov 27 2018 at 01:24)</a>:</h4>
 <p>I like this behavior</p>
 
 <a name="148369891"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23486%20use/near/148369891" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/29011486use.html#148369891">Rob Lewis (Nov 26 2018 at 15:25)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23486%20use/near/148369891" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/29011486use.html#148369891">Rob Lewis (Nov 27 2018 at 01:25)</a>:</h4>
 <p>Hmm, the interactive wrapper should probably start with a <code>focus1</code>, otherwise it will try to touch later goals if you give it too many arguments.</p>
 
 <a name="148370027"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23486%20use/near/148370027" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/29011486use.html#148370027">Mario Carneiro (Nov 26 2018 at 15:27)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23486%20use/near/148370027" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/29011486use.html#148370027">Mario Carneiro (Nov 27 2018 at 01:27)</a>:</h4>
 <p>why does it end with <code>try reflexivity</code>?</p>
 
 <a name="148370039"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23486%20use/near/148370039" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/29011486use.html#148370039">Patrick Massot (Nov 26 2018 at 15:28)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23486%20use/near/148370039" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/29011486use.html#148370039">Patrick Massot (Nov 27 2018 at 01:28)</a>:</h4>
 <p>Trying reflexivity is always good</p>
 
 <a name="148370097"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23486%20use/near/148370097" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/29011486use.html#148370097">Rob Lewis (Nov 26 2018 at 15:28)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23486%20use/near/148370097" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/29011486use.html#148370097">Rob Lewis (Nov 27 2018 at 01:28)</a>:</h4>
 <p>Because Patrick requested it in the original discussion and it doesn't really hurt.</p>
 
 <a name="148370104"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23486%20use/near/148370104" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/29011486use.html#148370104">Mario Carneiro (Nov 26 2018 at 15:28)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23486%20use/near/148370104" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/29011486use.html#148370104">Mario Carneiro (Nov 27 2018 at 01:28)</a>:</h4>
 <p>if it's just exploratory it should be <code>reflexivity reducible</code></p>
 
 <a name="148370112"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23486%20use/near/148370112" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/29011486use.html#148370112">Mario Carneiro (Nov 26 2018 at 15:28)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23486%20use/near/148370112" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/29011486use.html#148370112">Mario Carneiro (Nov 27 2018 at 01:28)</a>:</h4>
 <p>like in <code>rw</code></p>
 
 <a name="148370123"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23486%20use/near/148370123" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/29011486use.html#148370123">Patrick Massot (Nov 26 2018 at 15:28)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23486%20use/near/148370123" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/29011486use.html#148370123">Patrick Massot (Nov 27 2018 at 01:28)</a>:</h4>
 <p>What does this mean?</p>
 
 <a name="148370129"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23486%20use/near/148370129" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/29011486use.html#148370129">Rob Lewis (Nov 26 2018 at 15:28)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23486%20use/near/148370129" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/29011486use.html#148370129">Rob Lewis (Nov 27 2018 at 01:28)</a>:</h4>
 <p>Yeah, good point.</p>
 
 <a name="148370146"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23486%20use/near/148370146" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/29011486use.html#148370146">Mario Carneiro (Nov 26 2018 at 15:29)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23486%20use/near/148370146" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/29011486use.html#148370146">Mario Carneiro (Nov 27 2018 at 01:29)</a>:</h4>
 <p>that it won't try super hard when it's not appropriate</p>
 
 <a name="148370185"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23486%20use/near/148370185" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/29011486use.html#148370185">Patrick Massot (Nov 26 2018 at 15:29)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23486%20use/near/148370185" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/29011486use.html#148370185">Patrick Massot (Nov 27 2018 at 01:29)</a>:</h4>
 <p>Ok, let's see how proofs will break then</p>
 
 <a name="148370189"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23486%20use/near/148370189" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/29011486use.html#148370189">Patrick Massot (Nov 26 2018 at 15:29)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23486%20use/near/148370189" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/29011486use.html#148370189">Patrick Massot (Nov 27 2018 at 01:29)</a>:</h4>
 <p>(hopefully none)</p>
 
 <a name="148370241"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23486%20use/near/148370241" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/29011486use.html#148370241">Mario Carneiro (Nov 26 2018 at 15:30)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23486%20use/near/148370241" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/29011486use.html#148370241">Mario Carneiro (Nov 27 2018 at 01:30)</a>:</h4>
 <p>worst case you have to <code>use x; refl</code></p>
 
 <a name="148370276"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23486%20use/near/148370276" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/29011486use.html#148370276">Patrick Massot (Nov 26 2018 at 15:30)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23486%20use/near/148370276" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/29011486use.html#148370276">Patrick Massot (Nov 27 2018 at 01:30)</a>:</h4>
 <p>this is what I hoped to avoid, but it may be too costly</p>
 
 <a name="148370307"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23486%20use/near/148370307" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/29011486use.html#148370307">Mario Carneiro (Nov 26 2018 at 15:31)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23486%20use/near/148370307" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/29011486use.html#148370307">Mario Carneiro (Nov 27 2018 at 01:31)</a>:</h4>
 <p>plus <code>eq</code> is itself a single arg constructor, so can't you add more things to the <code>use</code> to trigger it?</p>
 
 <a name="148370346"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23486%20use/near/148370346" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/29011486use.html#148370346">Mario Carneiro (Nov 26 2018 at 15:32)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23486%20use/near/148370346" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/29011486use.html#148370346">Mario Carneiro (Nov 27 2018 at 01:32)</a>:</h4>
 <p>it's not clear to me that we always follow a <code>use</code> by a <code>refl</code> though</p>
 
 <a name="148370348"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23486%20use/near/148370348" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/29011486use.html#148370348">Rob Lewis (Nov 26 2018 at 15:32)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23486%20use/near/148370348" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/29011486use.html#148370348">Rob Lewis (Nov 27 2018 at 01:32)</a>:</h4>
 <p>The only example from the old discussion that breaks is this one, and it works if you add <code>rfl</code> to the use.</p>
 <div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">:</span> <span class="bp">∃</span> <span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">,</span> <span class="n">a</span> <span class="bp">+</span> <span class="n">b</span> <span class="bp">+</span> <span class="n">c</span> <span class="bp">=</span> <span class="mi">6</span> <span class="o">:=</span>
 <span class="k">by</span> <span class="n">use&#39;</span> <span class="o">[</span><span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="mi">3</span><span class="o">,</span> <span class="n">rfl</span><span class="o">]</span>
 </pre></div>
 
 <a name="148370408"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23486%20use/near/148370408" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/29011486use.html#148370408">Mario Carneiro (Nov 26 2018 at 15:32)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23486%20use/near/148370408" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/29011486use.html#148370408">Mario Carneiro (Nov 27 2018 at 01:32)</a>:</h4>
 <p>it seems like only somewhat contrived examples... like that one... have this characteristic</p>
 
 <a name="148370447"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23486%20use/near/148370447" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/29011486use.html#148370447">Patrick Massot (Nov 26 2018 at 15:33)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23486%20use/near/148370447" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/29011486use.html#148370447">Patrick Massot (Nov 27 2018 at 01:33)</a>:</h4>
 <p>I'd be happy to try without the strong reflexivity try</p>
 
 <a name="148370463"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23486%20use/near/148370463" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/29011486use.html#148370463">Mario Carneiro (Nov 26 2018 at 15:33)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23486%20use/near/148370463" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/29011486use.html#148370463">Mario Carneiro (Nov 27 2018 at 01:33)</a>:</h4>
 <p>usually it's like <code>\ex a b c, x = f a b c /\ properties of a, b,c</code></p>
 
 <a name="148370658"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23486%20use/near/148370658" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/29011486use.html#148370658">Mario Carneiro (Nov 26 2018 at 15:35)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23486%20use/near/148370658" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/29011486use.html#148370658">Mario Carneiro (Nov 27 2018 at 01:35)</a>:</h4>
 <p>I guess if the equality is the last thing it could still work, provided you don't want the properties as subgoals</p>
 
 <a name="148370743"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23486%20use/near/148370743" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/29011486use.html#148370743">Rob Lewis (Nov 26 2018 at 15:36)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23486%20use/near/148370743" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/29011486use.html#148370743">Rob Lewis (Nov 27 2018 at 01:36)</a>:</h4>
 <p>I don't think trying <code>reflexivity reducible</code> at the end hurts, and (maybe only very) occasionally it leads to some nice short proofs. But I'm not committed to keeping it.</p>
 
 <a name="148371039"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23486%20use/near/148371039" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/29011486use.html#148371039">Mario Carneiro (Nov 26 2018 at 15:40)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23486%20use/near/148371039" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/29011486use.html#148371039">Mario Carneiro (Nov 27 2018 at 01:40)</a>:</h4>
 <p>I think it's fine to keep, I just doubt it will help</p>
 
 <a name="148371145"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23486%20use/near/148371145" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/29011486use.html#148371145">Mario Carneiro (Nov 26 2018 at 15:42)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23486%20use/near/148371145" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/29011486use.html#148371145">Mario Carneiro (Nov 27 2018 at 01:42)</a>:</h4>
 <p>is there a low attempting version of <code>trivial</code>? I think finishing with some zero arg constructors, including <code>eq.refl</code> and <code>trivial</code>, could be very helpful in this context</p>
 
 <a name="148371172"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23486%20use/near/148371172" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/29011486use.html#148371172">Johan Commelin (Nov 26 2018 at 15:43)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23486%20use/near/148371172" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/29011486use.html#148371172">Johan Commelin (Nov 27 2018 at 01:43)</a>:</h4>
 <p>I think mathematicians find ending a proof with <code>refl</code> ugly. It would be nice if we could just write <code>.</code> instead of <code>rfl</code>/<code>refl</code>, that would be nice. But of course I'm whining about icing on the cake right now.</p>
 
 <a name="148371193"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23486%20use/near/148371193" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/29011486use.html#148371193">Johan Commelin (Nov 26 2018 at 15:43)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23486%20use/near/148371193" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/29011486use.html#148371193">Johan Commelin (Nov 27 2018 at 01:43)</a>:</h4>
 <p>And maybe <code>end</code> should always attempt to close all remaining goals by <code>refl</code> or some similar cheap automation.</p>
 
 <a name="148371205"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23486%20use/near/148371205" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/29011486use.html#148371205">Johan Commelin (Nov 26 2018 at 15:43)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23486%20use/near/148371205" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/29011486use.html#148371205">Johan Commelin (Nov 27 2018 at 01:43)</a>:</h4>
 <p>Then you can just stop proving after giving the essential ideas.</p>
 
 <a name="148371247"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23486%20use/near/148371247" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/29011486use.html#148371247">Rob Lewis (Nov 26 2018 at 15:44)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23486%20use/near/148371247" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/29011486use.html#148371247">Rob Lewis (Nov 27 2018 at 01:44)</a>:</h4>
 <p>Maybe we should define <code>triv'</code> that uses <code>exact reducible</code> instead of just <code>exact</code>?</p>
 
 <a name="148371279"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23486%20use/near/148371279" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/29011486use.html#148371279">Mario Carneiro (Nov 26 2018 at 15:44)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23486%20use/near/148371279" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/29011486use.html#148371279">Mario Carneiro (Nov 27 2018 at 01:44)</a>:</h4>
 <p>does <code>exact</code> have a reducibility setting?</p>
 
 <a name="148371295"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23486%20use/near/148371295" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/29011486use.html#148371295">Rob Lewis (Nov 26 2018 at 15:45)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23486%20use/near/148371295" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/29011486use.html#148371295">Rob Lewis (Nov 27 2018 at 01:45)</a>:</h4>
 <p>Yeah.</p>
 
 <a name="148371332"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23486%20use/near/148371332" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/29011486use.html#148371332">Mario Carneiro (Nov 26 2018 at 15:45)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23486%20use/near/148371332" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/29011486use.html#148371332">Mario Carneiro (Nov 27 2018 at 01:45)</a>:</h4>
 <p>that makes sense</p>
 
 <a name="148371347"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23486%20use/near/148371347" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/29011486use.html#148371347">Mario Carneiro (Nov 26 2018 at 15:45)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23486%20use/near/148371347" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/29011486use.html#148371347">Mario Carneiro (Nov 27 2018 at 01:45)</a>:</h4>
 <p>does <code>triv</code> exist? It should be an alias for <code>trivial</code></p>
 
 <a name="148371402"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23486%20use/near/148371402" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/29011486use.html#148371402">Mario Carneiro (Nov 26 2018 at 15:46)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23486%20use/near/148371402" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/29011486use.html#148371402">Mario Carneiro (Nov 27 2018 at 01:46)</a>:</h4>
 <p>if not we can nab it for ourselves</p>
 
 <a name="148371403"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23486%20use/near/148371403" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/29011486use.html#148371403">Rob Lewis (Nov 26 2018 at 15:46)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23486%20use/near/148371403" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/29011486use.html#148371403">Rob Lewis (Nov 27 2018 at 01:46)</a>:</h4>
 <p><code>tactic.triv</code> is in core.</p>
 
 <a name="148371417"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23486%20use/near/148371417" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/29011486use.html#148371417">Rob Lewis (Nov 26 2018 at 15:46)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23486%20use/near/148371417" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/29011486use.html#148371417">Rob Lewis (Nov 27 2018 at 01:46)</a>:</h4>
 <p><code>meta def triv : tactic unit := mk_const `trivial &gt;&gt;= exact</code></p>
 
 <a name="148371424"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23486%20use/near/148371424" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/29011486use.html#148371424">Mario Carneiro (Nov 26 2018 at 15:46)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23486%20use/near/148371424" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/29011486use.html#148371424">Mario Carneiro (Nov 27 2018 at 01:46)</a>:</h4>
 <p>no interactive though?</p>
 
 <a name="148371450"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23486%20use/near/148371450" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/29011486use.html#148371450">Rob Lewis (Nov 26 2018 at 15:47)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23486%20use/near/148371450" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/29011486use.html#148371450">Rob Lewis (Nov 27 2018 at 01:47)</a>:</h4>
 <p>Oh, no.</p>
 
 <a name="148371455"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23486%20use/near/148371455" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/29011486use.html#148371455">Mario Carneiro (Nov 26 2018 at 15:47)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23486%20use/near/148371455" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/29011486use.html#148371455">Mario Carneiro (Nov 27 2018 at 01:47)</a>:</h4>
 <p>boom</p>
 
 <a name="148371578"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23486%20use/near/148371578" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/29011486use.html#148371578">Rob Lewis (Nov 26 2018 at 15:49)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23486%20use/near/148371578" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/29011486use.html#148371578">Rob Lewis (Nov 27 2018 at 01:49)</a>:</h4>
 <p>Okay, so should we make <code>tactic.interactive.triv</code> a version of <code>tactic.interactive.trivial</code> that takes a reducibility parameter? Or make it explicitly the low cost one?</p>
 
 <a name="148371587"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23486%20use/near/148371587" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/29011486use.html#148371587">Rob Lewis (Nov 26 2018 at 15:49)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23486%20use/near/148371587" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/29011486use.html#148371587">Rob Lewis (Nov 27 2018 at 01:49)</a>:</h4>
 <p>That kind of makes sense, shorter name = don't try as hard.</p>
 
 <a name="148371710"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23486%20use/near/148371710" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/29011486use.html#148371710">Johan Commelin (Nov 26 2018 at 15:51)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23486%20use/near/148371710" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/29011486use.html#148371710">Johan Commelin (Nov 27 2018 at 01:51)</a>:</h4>
 <p>/me wonders what <code>trivia</code> will do <span class="emoji emoji-1f914" title="thinking">:thinking:</span></p>
 
 <a name="148371816"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23486%20use/near/148371816" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/29011486use.html#148371816">Rob Lewis (Nov 26 2018 at 15:53)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23486%20use/near/148371816" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/29011486use.html#148371816">Rob Lewis (Nov 27 2018 at 01:53)</a>:</h4>
 <p>BTW, a better version of <code>tactic.use</code>:</p>
 <div class="codehilite"><pre><span></span><span class="n">meta</span> <span class="n">def</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">use</span> <span class="o">(</span><span class="n">l</span> <span class="o">:</span> <span class="n">list</span> <span class="n">pexpr</span><span class="o">)</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
 <span class="n">focus1</span> <span class="err">$</span> <span class="n">l</span><span class="bp">.</span><span class="n">mmap&#39;</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">h</span><span class="o">,</span>
@@ -217,18 +217,18 @@ permalink: archive/144837PRreviews/29011486use.html
 </pre></div>
 
 <a name="148388302"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23486%20use/near/148388302" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/29011486use.html#148388302">Scott Morrison (Nov 26 2018 at 19:47)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23486%20use/near/148388302" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/29011486use.html#148388302">Scott Morrison (Nov 27 2018 at 05:47)</a>:</h4>
 <blockquote>
 <p>And maybe <code>end</code> should always attempt to close all remaining goals by <code>refl</code> or some similar cheap automation.</p>
 </blockquote>
 <p>You meant <code>obviously</code> there, didn't you?  :-)</p>
 
 <a name="148389884"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23486%20use/near/148389884" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/29011486use.html#148389884">Johan Commelin (Nov 26 2018 at 20:08)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23486%20use/near/148389884" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/29011486use.html#148389884">Johan Commelin (Nov 27 2018 at 06:08)</a>:</h4>
 <p>Well, <code>obviously</code> obviously isn't always cheap.</p>
 
 <a name="148625379"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23486%20use/near/148625379" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/29011486use.html#148625379">Rob Lewis (Nov 27 2018 at 09:59)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23486%20use/near/148625379" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/29011486use.html#148625379">Rob Lewis (Nov 27 2018 at 19:59)</a>:</h4>
 <p>I got distracted yesterday afternoon and just came back to this. The logic of that last version wasn't quite right when things were nested. This is better. <a href="https://github.com/leanprover/mathlib/pull/497" target="_blank" title="https://github.com/leanprover/mathlib/pull/497">https://github.com/leanprover/mathlib/pull/497</a></p>
 
 

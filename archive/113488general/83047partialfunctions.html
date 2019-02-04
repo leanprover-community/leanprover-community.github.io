@@ -12,49 +12,49 @@ permalink: archive/113488general/83047partialfunctions.html
 <base href="https://leanprover.zulipchat.com">
 {% raw %}
 <a name="129261641"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129261641" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129261641">Victor Porton (Jul 07 2018 at 17:43)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129261641" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129261641">Victor Porton (Jul 08 2018 at 01:43)</a>:</h4>
 <p>Why this does not work?</p>
 <p>-- Switch from a function on a subset to a function to option monad<br>
 def subfunc_to_option {α β: Type} {c: α → Prop} (f: {x:α // c x} → β) : α → option β :=<br>
 λ y: α, if c y then some (f (<a href="http://subtype.mk" target="_blank" title="http://subtype.mk">subtype.mk</a> y (arbitrary (c y) [true_inhabited (c y)]))) else none</p>
 
 <a name="129261658"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129261658" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129261658">Kenny Lau (Jul 07 2018 at 17:43)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129261658" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129261658">Kenny Lau (Jul 08 2018 at 01:43)</a>:</h4>
 <p>put [decidable_pred c] in the list of assumptions (before the colon)</p>
 
 <a name="129261720"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129261720" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129261720">Victor Porton (Jul 07 2018 at 17:45)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129261720" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129261720">Victor Porton (Jul 08 2018 at 01:45)</a>:</h4>
 <p>Kenny, I did what you say. Moreover <code>open classical</code> is already in effect. But it does not work now too</p>
 
 <a name="129262022"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129262022" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129262022">Chris Hughes (Jul 07 2018 at 17:53)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129262022" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129262022">Chris Hughes (Jul 08 2018 at 01:53)</a>:</h4>
 <div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">subfunc_to_option</span> <span class="o">{</span><span class="n">α</span> <span class="n">β</span><span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">{</span><span class="n">c</span><span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">}</span> <span class="o">[</span><span class="n">decidable_pred</span> <span class="n">c</span><span class="o">]</span>
 <span class="o">(</span><span class="n">f</span><span class="o">:</span> <span class="o">{</span><span class="n">x</span><span class="o">:</span><span class="n">α</span> <span class="bp">//</span> <span class="n">c</span> <span class="n">x</span><span class="o">}</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">option</span> <span class="n">β</span> <span class="o">:=</span>
 <span class="bp">λ</span> <span class="n">y</span><span class="o">:</span> <span class="n">α</span><span class="o">,</span> <span class="k">if</span> <span class="n">h</span> <span class="o">:</span> <span class="n">c</span> <span class="n">y</span> <span class="k">then</span> <span class="n">some</span> <span class="o">(</span><span class="n">f</span> <span class="o">(</span><span class="n">subtype</span><span class="bp">.</span><span class="n">mk</span> <span class="n">y</span> <span class="n">h</span><span class="o">))</span> <span class="k">else</span> <span class="n">none</span>
 </pre></div>
 
 <a name="129262116"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129262116" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129262116">Chris Hughes (Jul 07 2018 at 17:55)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129262116" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129262116">Chris Hughes (Jul 08 2018 at 01:55)</a>:</h4>
 <p><code>if h : c y</code> instead of <code>if c y</code> gives you access to the proof.</p>
 
 <a name="129262182"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129262182" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129262182">Victor Porton (Jul 07 2018 at 17:56)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129262182" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129262182">Victor Porton (Jul 08 2018 at 01:56)</a>:</h4>
 <p>Chris, Thanks it works now. But I am curious why my old code (with <code>arbitrary</code>) didn't work.</p>
 
 <a name="129262210"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129262210" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129262210">Chris Hughes (Jul 07 2018 at 17:57)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129262210" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129262210">Chris Hughes (Jul 08 2018 at 01:57)</a>:</h4>
 <p>Because there was no way of telling that the type <code>c y</code> was inhabited.</p>
 
 <a name="129262269"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129262269" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129262269">Chris Hughes (Jul 07 2018 at 17:59)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129262269" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129262269">Chris Hughes (Jul 08 2018 at 01:59)</a>:</h4>
 <p>It's actually very unusual to use <code>inhabited</code> on Props.</p>
 
 <a name="129262352"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129262352" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129262352">Chris Hughes (Jul 07 2018 at 18:00)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129262352" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129262352">Chris Hughes (Jul 08 2018 at 02:00)</a>:</h4>
 <p>Also <code>open classical</code> only opens the classical namespace, it doesn't give you decidability. You need <code>local attribute [instance] classical.prop_decidable</code> for that.</p>
 
 <a name="129262806"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129262806" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129262806">Victor Porton (Jul 07 2018 at 18:11)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129262806" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129262806">Victor Porton (Jul 08 2018 at 02:11)</a>:</h4>
 <p>I tried to synthesize the function in another direction. Now I know where is my error but don't know how to fix it:</p>
 <p>-- Switch from function to option monad to a function on a subset<br>
 def option_to_subfunc {α β: Type} (f: α → (option β)) :=<br>
@@ -64,7 +64,7 @@ match f y with<br>
 | none   := sorry</p>
 
 <a name="129262898"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129262898" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129262898">Chris Hughes (Jul 07 2018 at 18:15)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129262898" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129262898">Chris Hughes (Jul 08 2018 at 02:15)</a>:</h4>
 <p>You needed to give the type, and write <code>end</code> at the end of your <code>match</code></p>
 <div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">option_to_subfunc</span> <span class="o">{</span><span class="n">α</span> <span class="n">β</span><span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">(</span><span class="n">f</span><span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="o">(</span><span class="n">option</span> <span class="n">β</span><span class="o">))</span> <span class="o">:</span>
   <span class="o">{</span><span class="n">x</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">//</span> <span class="n">f</span> <span class="n">x</span> <span class="bp">≠</span> <span class="n">none</span><span class="o">}</span> <span class="bp">→</span> <span class="o">{</span><span class="n">x</span><span class="o">:</span><span class="n">α</span> <span class="bp">//</span> <span class="n">f</span> <span class="n">x</span> <span class="bp">≠</span> <span class="n">none</span><span class="o">}</span> <span class="o">:=</span>
@@ -76,35 +76,35 @@ match f y with<br>
 </pre></div>
 
 <a name="129262906"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129262906" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129262906">Johan Commelin (Jul 07 2018 at 18:15)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129262906" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129262906">Johan Commelin (Jul 08 2018 at 02:15)</a>:</h4>
 <p><span class="user-mention" data-user-id="119326">@Victor Porton</span> If you surround your code between three backticks, then it will be typeset in a codeblock. If you append "lean" to the first 3 backticks, then it will get highlighting!</p>
 
 <a name="129262950"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129262950" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129262950">Kevin Buzzard (Jul 07 2018 at 18:16)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129262950" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129262950">Kevin Buzzard (Jul 08 2018 at 02:16)</a>:</h4>
 <p>Again <code>f y</code> does not make sense because alpha is not equal to the subtype you are using. f wants an input of type alpha and you are feeding it <code>y</code>. Did you read about subtypes in Theorem in Lean?</p>
 
 <a name="129262952"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129262952" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129262952">Victor Porton (Jul 07 2018 at 18:16)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129262952" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129262952">Victor Porton (Jul 08 2018 at 02:16)</a>:</h4>
 <p><span class="user-mention" data-user-id="110044">@Chris Hughes</span> Your code does not validate. What I really wanted to ask is what to do instead of <code>sorry</code>. I am lost about this</p>
 
 <a name="129262957"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129262957" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129262957">Chris Hughes (Jul 07 2018 at 18:17)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129262957" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129262957">Chris Hughes (Jul 08 2018 at 02:17)</a>:</h4>
 <p>It does make sense because there's a coercion</p>
 
 <a name="129262963"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129262963" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129262963">Victor Porton (Jul 07 2018 at 18:17)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129262963" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129262963">Victor Porton (Jul 08 2018 at 02:17)</a>:</h4>
 <p>Yes, I knew that here there is a coercion</p>
 
 <a name="129262965"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129262965" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129262965">Kevin Buzzard (Jul 07 2018 at 18:17)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129262965" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129262965">Kevin Buzzard (Jul 08 2018 at 02:17)</a>:</h4>
 <p>Oh -- it does make sense in this context because there's a coercion!</p>
 
 <a name="129262967"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129262967" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129262967">Kevin Buzzard (Jul 07 2018 at 18:17)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129262967" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129262967">Kevin Buzzard (Jul 08 2018 at 02:17)</a>:</h4>
 <p>:-)</p>
 
 <a name="129263099"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129263099" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129263099">Chris Hughes (Jul 07 2018 at 18:21)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129263099" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129263099">Chris Hughes (Jul 08 2018 at 02:21)</a>:</h4>
 <p>In response to a question in (no topic) that should have been here.</p>
 <div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">option_to_subfunc</span> <span class="o">{</span><span class="n">α</span> <span class="n">β</span><span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">(</span><span class="n">f</span><span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="o">(</span><span class="n">option</span> <span class="n">β</span><span class="o">))</span> <span class="o">:</span>
   <span class="o">{</span><span class="n">x</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">//</span> <span class="n">f</span> <span class="n">x</span> <span class="bp">≠</span> <span class="n">none</span><span class="o">}</span> <span class="bp">→</span> <span class="o">{</span><span class="n">x</span><span class="o">:</span><span class="n">α</span> <span class="bp">//</span> <span class="n">f</span> <span class="n">x</span> <span class="bp">≠</span> <span class="n">none</span><span class="o">}</span> <span class="o">:=</span>
@@ -117,35 +117,35 @@ match f y with<br>
 </pre></div>
 
 <a name="129263253"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129263253" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129263253">Victor Porton (Jul 07 2018 at 18:25)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129263253" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129263253">Victor Porton (Jul 08 2018 at 02:25)</a>:</h4>
 <p><span class="user-mention" data-user-id="110044">@Chris Hughes</span>  1.  The values type of your <code>option_to_subfunc</code> is wrong; it should be <code>\beta</code> not <code>{x:α // f x ≠ none}</code>. 2. Do I understand correctly that the values in <code>have</code> are "ignored" (not included into the result) when building the value of the defined object? 3. What this elimination do? (I am a very novice and understand your code partially.)</p>
 
 <a name="129263319"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129263319" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129263319">Victor Porton (Jul 07 2018 at 18:26)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129263319" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129263319">Victor Porton (Jul 08 2018 at 02:26)</a>:</h4>
 <p><span class="user-mention" data-user-id="110044">@Chris Hughes</span> Sorry for a stupid question but I do not understand what <code>:=</code> after <code>have</code> means</p>
 
 <a name="129263329"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129263329" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129263329">Chris Hughes (Jul 07 2018 at 18:27)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129263329" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129263329">Chris Hughes (Jul 08 2018 at 02:27)</a>:</h4>
 <p>It's the same as <code>from</code></p>
 
 <a name="129263344"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129263344" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129263344">Victor Porton (Jul 07 2018 at 18:27)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129263344" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129263344">Victor Porton (Jul 08 2018 at 02:27)</a>:</h4>
 <p>I am trying to read your code</p>
 
 <a name="129263411"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129263411" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129263411">Victor Porton (Jul 07 2018 at 18:29)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129263411" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129263411">Victor Porton (Jul 08 2018 at 02:29)</a>:</h4>
 <p>Sorry, what is <code>λ hfy, y</code>?</p>
 
 <a name="129263412"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129263412" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129263412">Chris Hughes (Jul 07 2018 at 18:29)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129263412" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129263412">Chris Hughes (Jul 08 2018 at 02:29)</a>:</h4>
 <p>I put <code>hfy</code> after the <code>match</code> so I would have access to the fact that <code>f y ≠ none</code>. In the <code>none</code> cases <code>hfy</code> has type <code>none ≠ none</code> which is obviously false, so I can use <code>false.elim</code> to define the function</p>
 
 <a name="129263460"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129263460" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129263460">Chris Hughes (Jul 07 2018 at 18:30)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129263460" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129263460">Chris Hughes (Jul 08 2018 at 02:30)</a>:</h4>
 <p><code>hfy</code> is just a proof that <code>f y = none</code> or in the <code>some</code> case that <code>some ≠ none</code></p>
 
 <a name="129263520"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129263520" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129263520">Chris Hughes (Jul 07 2018 at 18:32)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129263520" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129263520">Chris Hughes (Jul 08 2018 at 02:32)</a>:</h4>
 <p>I think this is the function you want</p>
 <div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">option_to_subfunc</span> <span class="o">{</span><span class="n">α</span> <span class="n">β</span><span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">(</span><span class="n">f</span><span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="o">(</span><span class="n">option</span> <span class="n">β</span><span class="o">))</span> <span class="o">:</span>
   <span class="o">{</span><span class="n">x</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">//</span> <span class="n">f</span> <span class="n">x</span> <span class="bp">≠</span> <span class="n">none</span><span class="o">}</span> <span class="bp">→</span> <span class="n">β</span> <span class="o">:=</span>
@@ -158,75 +158,75 @@ match f y with<br>
 </pre></div>
 
 <a name="129263532"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129263532" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129263532">Victor Porton (Jul 07 2018 at 18:33)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129263532" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129263532">Victor Porton (Jul 08 2018 at 02:33)</a>:</h4>
 <p>what is <code>(hfy rfl).elim</code>?</p>
 
 <a name="129263533"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129263533" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129263533">Chris Hughes (Jul 07 2018 at 18:33)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129263533" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129263533">Chris Hughes (Jul 08 2018 at 02:33)</a>:</h4>
 <p><code>match f y, hfy with</code> means I now have to define a function with type <code>Π x : option β, x ≠ none → β </code></p>
 
 <a name="129263572"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129263572" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129263572">Chris Hughes (Jul 07 2018 at 18:34)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129263572" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129263572">Chris Hughes (Jul 08 2018 at 02:34)</a>:</h4>
 <p><code>hfy rfl</code> is a proof of <code>false</code></p>
 
 <a name="129263574"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129263574" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129263574">Chris Hughes (Jul 07 2018 at 18:34)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129263574" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129263574">Chris Hughes (Jul 08 2018 at 02:34)</a>:</h4>
 <p><code>(hfy rfl).elim</code> is another way of writing <code>false.elim (hfy rfl)</code>.</p>
 
 <a name="129263581"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129263581" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129263581">Victor Porton (Jul 07 2018 at 18:35)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129263581" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129263581">Victor Porton (Jul 08 2018 at 02:35)</a>:</h4>
 <p>I need to time to review all you wrote</p>
 
 <a name="129263582"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129263582" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129263582">Chris Hughes (Jul 07 2018 at 18:35)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129263582" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129263582">Chris Hughes (Jul 08 2018 at 02:35)</a>:</h4>
 <p><code>false.elim</code> is a function that gives you a term of any type given a proof of <code>false</code></p>
 
 <a name="129263706"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129263706" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129263706">Victor Porton (Jul 07 2018 at 18:39)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129263706" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129263706">Victor Porton (Jul 08 2018 at 02:39)</a>:</h4>
 <p>What I don't understand: Why is it <code>| some x := λ hfy, x</code> not <code>| some x := x</code>. It should be a value in <code>\b</code>, right? But <code>λ hfy, x</code> is a function and so it looks for me that it can't be in <code>\b</code></p>
 
 <a name="129263710"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129263710" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129263710">Victor Porton (Jul 07 2018 at 18:39)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129263710" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129263710">Victor Porton (Jul 08 2018 at 02:39)</a>:</h4>
 <p>err.. wrong</p>
 
 <a name="129263833"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129263833" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129263833">Chris Hughes (Jul 07 2018 at 18:43)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129263833" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129263833">Chris Hughes (Jul 08 2018 at 02:43)</a>:</h4>
 <p><code>match f y, hfy</code> with means I now have to define a function with type <code>Π x : option β, x ≠ none → β</code>, not <code>option β → β</code> any more.  Even though I'm not using the fact that <code>x  ≠ none</code> in the <code>some</code> case, I still have access to it.</p>
 
 <a name="129263923"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129263923" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129263923">Victor Porton (Jul 07 2018 at 18:46)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129263923" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129263923">Victor Porton (Jul 08 2018 at 02:46)</a>:</h4>
 <p>Hm, it is harder than I expected, I yet do not understand the details of this simple construct. I initially started to learn Lean to rewrite my English book in Lean. Now I suspect that it would take me too much time to master Lean. What is your advice: learn Lean or just to keep writing math in English?</p>
 
 <a name="129263975"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129263975" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129263975">Chris Hughes (Jul 07 2018 at 18:47)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129263975" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129263975">Chris Hughes (Jul 08 2018 at 02:47)</a>:</h4>
 <p>What field of maths is your book on?</p>
 
 <a name="129264037"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129264037" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129264037">Chris Hughes (Jul 07 2018 at 18:48)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129264037" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129264037">Chris Hughes (Jul 08 2018 at 02:48)</a>:</h4>
 <p>I think maybe a good way to think about the function is that the output of type <code>β</code> is the function of type <code>Π x : option β, x ≠ none → β</code> applied to <code>f y</code> and <code>hfy</code></p>
 
 <a name="129264039"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129264039" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129264039">Victor Porton (Jul 07 2018 at 18:48)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129264039" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129264039">Victor Porton (Jul 08 2018 at 02:48)</a>:</h4>
 <p><span class="user-mention" data-user-id="110044">@Chris Hughes</span> I discovered a new subfield of general topology (though some man expressed that he does not consider it a subfield of general topology). For example the formula $f\circ\mu \leq \nu\circ f$ means that $f$ is a continuous morphisms from $\mu$ to $\nu$.</p>
 
 <a name="129264095"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129264095" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129264095">Chris Hughes (Jul 07 2018 at 18:50)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129264095" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129264095">Chris Hughes (Jul 08 2018 at 02:50)</a>:</h4>
 <p>I don't really know much about topology (I'm a first year undergraduate). I think <span class="user-mention" data-user-id="110031">@Patrick Massot</span> and <span class="user-mention" data-user-id="110294">@Johannes Hölzl</span>  know about topology in lean.</p>
 
 <a name="129264096"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129264096" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129264096">Victor Porton (Jul 07 2018 at 18:50)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129264096" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129264096">Victor Porton (Jul 08 2018 at 02:50)</a>:</h4>
 <p>Honestly, I am somehow lost in your Lean discussion. I may re-read it again</p>
 
 <a name="129264123"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129264123" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129264123">Victor Porton (Jul 07 2018 at 18:51)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129264123" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129264123">Victor Porton (Jul 08 2018 at 02:51)</a>:</h4>
 <p><span class="user-mention" data-user-id="110044">@Chris Hughes</span> This does not matter, as I build my version of topology from scratch, without using the classical GT</p>
 
 <a name="129264230"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129264230" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129264230">Victor Porton (Jul 07 2018 at 18:54)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129264230" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129264230">Victor Porton (Jul 08 2018 at 02:54)</a>:</h4>
 <p>Is <code>match f y, hfy</code> the same as <code>match \&lt;f y, hfy\&gt;</code>?</p>
 
 <a name="129264474"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129264474" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129264474">Chris Hughes (Jul 07 2018 at 19:01)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129264474" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129264474">Chris Hughes (Jul 08 2018 at 03:01)</a>:</h4>
 <p>more or less</p>
 <div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">option_to_subfunc</span> <span class="o">{</span><span class="n">α</span> <span class="n">β</span><span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">(</span><span class="n">f</span><span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="o">(</span><span class="n">option</span> <span class="n">β</span><span class="o">))</span> <span class="o">:</span>
   <span class="o">{</span><span class="n">x</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">//</span> <span class="n">f</span> <span class="n">x</span> <span class="bp">≠</span> <span class="n">none</span><span class="o">}</span> <span class="bp">→</span> <span class="n">β</span> <span class="o">:=</span>
@@ -239,19 +239,19 @@ match f y with<br>
 </pre></div>
 
 <a name="129264557"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129264557" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129264557">Chris Hughes (Jul 07 2018 at 19:03)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129264557" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129264557">Chris Hughes (Jul 08 2018 at 03:03)</a>:</h4>
 <p>I think that might be more confusing though.</p>
 
 <a name="129264689"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129264689" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129264689">Victor Porton (Jul 07 2018 at 19:06)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129264689" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129264689">Victor Porton (Jul 08 2018 at 03:06)</a>:</h4>
 <p>It seems that I do (or almost do) understand your last ("more confusing") code. But why the "less confusing" code (which I don't understand) uses <code>some x := λ hfy, x</code> not <code>some x := x</code>?</p>
 
 <a name="129264699"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129264699" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129264699">Victor Porton (Jul 07 2018 at 19:06)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129264699" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129264699">Victor Porton (Jul 08 2018 at 03:06)</a>:</h4>
 <p>oh, it seems I got the idea</p>
 
 <a name="129264809"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129264809" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129264809">Victor Porton (Jul 07 2018 at 19:09)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129264809" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129264809">Victor Porton (Jul 08 2018 at 03:09)</a>:</h4>
 <p>I have yet a question. How does the following work?</p>
 <div class="codehilite"><pre><span></span><span class="k">match</span> <span class="n">f</span> <span class="n">y</span><span class="o">,</span> <span class="n">hfy</span> <span class="k">with</span>
 <span class="bp">|</span> <span class="n">some</span> <span class="n">x</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">hfy</span><span class="o">,</span> <span class="n">x</span>
@@ -263,23 +263,23 @@ match f y with<br>
 <p>We have two expressions in <code>match</code> arguments and just one in the math conditions. How do they match?</p>
 
 <a name="129265113"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129265113" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129265113">Chris Hughes (Jul 07 2018 at 19:16)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129265113" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129265113">Chris Hughes (Jul 08 2018 at 03:16)</a>:</h4>
 <p>I don't really understand enough about the equation compiler to answer the question properly.</p>
 
 <a name="129265139"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129265139" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129265139">Victor Porton (Jul 07 2018 at 19:17)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129265139" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129265139">Victor Porton (Jul 08 2018 at 03:17)</a>:</h4>
 <p><span class="user-mention" data-user-id="110044">@Chris Hughes</span> Anyway much thanks for your support. Also what does $\Sigma'$ mean? It has added apostrophe</p>
 
 <a name="129265189"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129265189" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129265189">Victor Porton (Jul 07 2018 at 19:18)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129265189" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129265189">Victor Porton (Jul 08 2018 at 03:18)</a>:</h4>
 <p>Now I "almost" understand. Thanks</p>
 
 <a name="129265206"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129265206" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129265206">Chris Hughes (Jul 07 2018 at 19:18)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129265206" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129265206">Chris Hughes (Jul 08 2018 at 03:18)</a>:</h4>
 <p>It's just like Sigma, except the constructors can be either proofs or data, whereas Sigma only takes data.</p>
 
 <a name="129265352"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129265352" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129265352">Chris Hughes (Jul 07 2018 at 19:22)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129265352" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129265352">Chris Hughes (Jul 08 2018 at 03:22)</a>:</h4>
 <p>This is perhaps a better way of writing the function</p>
 <div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">option_to_subfunc</span> <span class="o">{</span><span class="n">α</span> <span class="n">β</span><span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">(</span><span class="n">f</span><span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="o">(</span><span class="n">option</span> <span class="n">β</span><span class="o">))</span> <span class="o">:</span>
   <span class="o">{</span><span class="n">x</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">//</span> <span class="n">f</span> <span class="n">x</span> <span class="bp">≠</span> <span class="n">none</span><span class="o">}</span> <span class="bp">→</span> <span class="n">β</span> <span class="o">:=</span>
@@ -293,7 +293,7 @@ match f y with<br>
 </pre></div>
 
 <a name="129265357"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129265357" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129265357">Victor Porton (Jul 07 2018 at 19:23)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129265357" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129265357">Victor Porton (Jul 08 2018 at 03:23)</a>:</h4>
 <p><span class="user-mention" data-user-id="110044">@Chris Hughes</span> It gets better as I rewrote it more understandably</p>
 <div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">option_to_subfunc</span> <span class="o">{</span><span class="n">α</span> <span class="n">β</span><span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">(</span><span class="n">f</span><span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="o">(</span><span class="n">option</span> <span class="n">β</span><span class="o">))</span> <span class="o">:</span>
   <span class="o">{</span><span class="n">x</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">//</span> <span class="n">f</span> <span class="n">x</span> <span class="bp">≠</span> <span class="n">none</span><span class="o">}</span> <span class="bp">→</span> <span class="n">β</span> <span class="o">:=</span>
@@ -306,19 +306,19 @@ match f y with<br>
 </pre></div>
 
 <a name="129265405"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129265405" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129265405">Victor Porton (Jul 07 2018 at 19:24)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129265405" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129265405">Victor Porton (Jul 08 2018 at 03:24)</a>:</h4>
 <p>I don't understand your last code. For example, what is <code>property</code>?</p>
 
 <a name="129265438"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129265438" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129265438">Chris Hughes (Jul 07 2018 at 19:25)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129265438" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129265438">Chris Hughes (Jul 08 2018 at 03:25)</a>:</h4>
 <p>Another way of writing <code>y.2</code></p>
 
 <a name="129265498"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129265498" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129265498">Victor Porton (Jul 07 2018 at 19:26)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129265498" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129265498">Victor Porton (Jul 08 2018 at 03:26)</a>:</h4>
 <p>Why do you think the the second way is better?</p>
 
 <a name="129265655"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129265655" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129265655">Chris Hughes (Jul 07 2018 at 19:30)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129265655" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129265655">Chris Hughes (Jul 08 2018 at 03:30)</a>:</h4>
 <p>I had to try out a few things to get the first way to work. For example this didn't work. I don't really have a good reason why the second way is better other than that. </p>
 <div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">option_to_subfunc</span> <span class="o">{</span><span class="n">α</span> <span class="n">β</span><span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">(</span><span class="n">f</span><span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="o">(</span><span class="n">option</span> <span class="n">β</span><span class="o">))</span> <span class="o">:</span>
   <span class="o">{</span><span class="n">x</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">//</span> <span class="n">f</span> <span class="n">x</span> <span class="bp">≠</span> <span class="n">none</span><span class="o">}</span> <span class="bp">→</span> <span class="n">β</span> <span class="o">:=</span>
@@ -330,102 +330,102 @@ match f y with<br>
 </pre></div>
 
 <a name="129265731"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129265731" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129265731">Chris Hughes (Jul 07 2018 at 19:33)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129265731" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129265731">Chris Hughes (Jul 08 2018 at 03:33)</a>:</h4>
 <p>It's clearer what's going on, because in the first method, it's not obvious that hfy will have type <code>some x ≠ none</code> or <code>none ≠ none</code>, and not <code>f y ≠ none</code> in the match expression.</p>
 
 <a name="129266827"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129266827" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129266827">Mario Carneiro (Jul 07 2018 at 20:10)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129266827" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129266827">Mario Carneiro (Jul 08 2018 at 04:10)</a>:</h4>
 <p>In that last one, <code>y.2</code> has the type <code>f y.1 ≠ none</code>, so it is important that you write <code>f y.1</code> instead of <code>f (\u y)</code></p>
 
 <a name="129267274"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129267274" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129267274">Patrick Massot (Jul 07 2018 at 20:26)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129267274" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129267274">Patrick Massot (Jul 08 2018 at 04:26)</a>:</h4>
 <p>What about </p>
 <div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">option_to_subfunc</span> <span class="o">{</span><span class="n">α</span> <span class="n">β</span><span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">(</span><span class="n">f</span><span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="o">(</span><span class="n">option</span> <span class="n">β</span><span class="o">))</span> <span class="o">:</span>
   <span class="o">{</span><span class="n">x</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">//</span> <span class="n">option</span><span class="bp">.</span><span class="n">is_some</span> <span class="o">(</span><span class="n">f</span> <span class="n">x</span><span class="o">)}</span> <span class="bp">→</span> <span class="n">β</span> <span class="bp">|</span> <span class="bp">⟨</span><span class="n">x</span><span class="o">,</span> <span class="n">h</span><span class="bp">⟩</span> <span class="o">:=</span> <span class="n">option</span><span class="bp">.</span><span class="n">get</span> <span class="n">h</span>
 </pre></div>
 
 <a name="129267284"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129267284" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129267284">Chris Hughes (Jul 07 2018 at 20:27)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129267284" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129267284">Chris Hughes (Jul 08 2018 at 04:27)</a>:</h4>
 <p>I thought the function probably already existed, but I couldn't find it.</p>
 
 <a name="129267287"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129267287" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129267287">Patrick Massot (Jul 07 2018 at 20:27)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129267287" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129267287">Patrick Massot (Jul 08 2018 at 04:27)</a>:</h4>
 <p><code>option.is_some</code> is directly about what you care about instead of its negation</p>
 
 <a name="129267327"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129267327" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129267327">Patrick Massot (Jul 07 2018 at 20:28)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129267327" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129267327">Patrick Massot (Jul 08 2018 at 04:28)</a>:</h4>
 <p>I don't know if it already exists</p>
 
 <a name="129267409"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129267409" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129267409">Chris Hughes (Jul 07 2018 at 20:30)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129267409" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129267409">Chris Hughes (Jul 08 2018 at 04:30)</a>:</h4>
 <p>I think I saw it before, but I was thrown off by the fact <code>is_some</code> is <code>bool</code> rather than <code>Prop</code></p>
 
 <a name="129267412"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129267412" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129267412">Patrick Massot (Jul 07 2018 at 20:30)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129267412" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129267412">Patrick Massot (Jul 08 2018 at 04:30)</a>:</h4>
 <p>Oh, you mean <code>is_some</code> already existed.</p>
 
 <a name="129267418"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129267418" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129267418">Patrick Massot (Jul 07 2018 at 20:31)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129267418" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129267418">Patrick Massot (Jul 08 2018 at 04:31)</a>:</h4>
 <p>I thought you were referring to <code>option_to_subfunc</code></p>
 
 <a name="129267469"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129267469" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129267469">Chris Hughes (Jul 07 2018 at 20:32)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129267469" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129267469">Chris Hughes (Jul 08 2018 at 04:32)</a>:</h4>
 <p>I was referring to <code>option_to_subfunc</code> or things like it, and I saw <code>option.get</code> but I didn't like it because <code>is_some</code> is <code>bool</code></p>
 
 <a name="129270457"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129270457" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129270457">Victor Porton (Jul 07 2018 at 22:02)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129270457" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129270457">Victor Porton (Jul 08 2018 at 06:02)</a>:</h4>
 <p><span class="user-mention" data-user-id="110031">@Patrick Massot</span> What is this <code>|</code>?</p>
 
 <a name="129270466"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129270466" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129270466">Victor Porton (Jul 07 2018 at 22:03)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129270466" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129270466">Victor Porton (Jul 08 2018 at 06:03)</a>:</h4>
 <p><span class="user-mention" data-user-id="110031">@Patrick Massot</span> Oh, it is pattern matching, I got</p>
 
 <a name="129270785"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129270785" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129270785">Victor Porton (Jul 07 2018 at 22:12)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129270785" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129270785">Victor Porton (Jul 08 2018 at 06:12)</a>:</h4>
 <p>weird, I can't find <code>def option</code> in Lean library</p>
 
 <a name="129270788"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129270788" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129270788">Victor Porton (Jul 07 2018 at 22:12)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129270788" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129270788">Victor Porton (Jul 08 2018 at 06:12)</a>:</h4>
 <p>got: <code>inductive option</code></p>
 
 <a name="129270836"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129270836" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129270836">Victor Porton (Jul 07 2018 at 22:14)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129270836" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129270836">Victor Porton (Jul 08 2018 at 06:14)</a>:</h4>
 <p><span class="user-mention" data-user-id="110031">@Patrick Massot</span> Where is <code>option.get</code> defined?</p>
 
 <a name="129270857"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129270857" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129270857">Victor Porton (Jul 07 2018 at 22:15)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129270857" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129270857">Victor Porton (Jul 08 2018 at 06:15)</a>:</h4>
 <p>found: <code>basic.lean</code></p>
 
 <a name="129271074"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129271074" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129271074">Victor Porton (Jul 07 2018 at 22:22)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129271074" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129271074">Victor Porton (Jul 08 2018 at 06:22)</a>:</h4>
 <p>I also don't understand <code>(hfy rfl).elim</code>. Does it contain <code>hfy</code> applied to <code>rfl</code>? I would be not surprised if <code>rfl</code> were applied to an equality, but I see inequality applied to <code>rfl</code> what looks for me the "opposite" of what can be done. What is it?</p>
 
 <a name="129271212"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129271212" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129271212">Chris Hughes (Jul 07 2018 at 22:26)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129271212" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129271212">Chris Hughes (Jul 08 2018 at 06:26)</a>:</h4>
 <p><code>hfy</code> has type <code>none ≠ none</code> which is definitionally equal to <code>none = none → false</code>. <code>rfl</code> is a proof that <code>none = none</code> so <code>hfy rfl</code> has type <code>false</code></p>
 
 <a name="129273495"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129273495" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129273495">Victor Porton (Jul 07 2018 at 23:46)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129273495" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129273495">Victor Porton (Jul 08 2018 at 07:46)</a>:</h4>
 <p>How having a function <code>f</code> determine its domain?</p>
 
 <a name="129273497"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129273497" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129273497">Kenny Lau (Jul 07 2018 at 23:46)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129273497" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129273497">Kenny Lau (Jul 08 2018 at 07:46)</a>:</h4>
 <p>it's in the type of the function</p>
 
 <a name="129273512"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129273512" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129273512">Victor Porton (Jul 07 2018 at 23:47)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129273512" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129273512">Victor Porton (Jul 08 2018 at 07:47)</a>:</h4>
 <p><span class="user-mention" data-user-id="110064">@Kenny Lau</span> So use <code>match</code>?</p>
 
 <a name="129273518"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129273518" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129273518">Victor Porton (Jul 07 2018 at 23:47)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129273518" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129273518">Victor Porton (Jul 08 2018 at 07:47)</a>:</h4>
 <p>I have <code>f: (Σ c:α → Prop, {x:α // c x})</code> and want to get the <code>c</code></p>
 
 <a name="129273519"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129273519" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129273519">Kenny Lau (Jul 07 2018 at 23:48)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129273519" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129273519">Kenny Lau (Jul 08 2018 at 07:48)</a>:</h4>
 <p>I... don't think that's how this works</p>
 
 <a name="129273563"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129273563" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129273563">Victor Porton (Jul 07 2018 at 23:48)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129273563" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129273563">Victor Porton (Jul 08 2018 at 07:48)</a>:</h4>
 <p>What I try is like:</p>
 <div class="codehilite"><pre><span></span><span class="n">noncomputable</span> <span class="n">def</span> <span class="n">subfunc_to_option2</span> <span class="o">{</span><span class="n">α</span> <span class="n">β</span><span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="c1">--[decidable_pred c]</span>
 <span class="o">(</span><span class="n">f</span><span class="o">:</span> <span class="o">(</span><span class="err">Σ</span> <span class="n">c</span><span class="o">:</span><span class="n">α</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">,</span> <span class="o">{</span><span class="n">x</span><span class="o">:</span><span class="n">α</span> <span class="bp">//</span> <span class="n">c</span> <span class="n">x</span><span class="o">})</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">option</span> <span class="n">β</span> <span class="o">:=</span>
@@ -433,11 +433,11 @@ match f y with<br>
 </pre></div>
 
 <a name="129273670"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129273670" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129273670">Victor Porton (Jul 07 2018 at 23:52)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129273670" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129273670">Victor Porton (Jul 08 2018 at 07:52)</a>:</h4>
 <p>is this possible?</p>
 
 <a name="129274227"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129274227" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129274227">Victor Porton (Jul 08 2018 at 00:11)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129274227" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129274227">Victor Porton (Jul 08 2018 at 08:11)</a>:</h4>
 <p>This does not compile (types of sides equality in <code>inv1</code> do not match). How to fix the error?</p>
 <div class="codehilite"><pre><span></span><span class="n">local</span> <span class="n">attribute</span> <span class="o">[</span><span class="kn">instance</span><span class="o">]</span> <span class="n">classical</span><span class="bp">.</span><span class="n">prop_decidable</span>
 
@@ -454,34 +454,34 @@ match f y with<br>
 </pre></div>
 
 <a name="129274270"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129274270" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129274270">Chris Hughes (Jul 08 2018 at 00:12)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129274270" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129274270">Chris Hughes (Jul 08 2018 at 08:12)</a>:</h4>
 <p>I'm not sure what you're trying to do. I don't think the type of <code>f</code> is what you want it to be. You cannot do <code>f.1</code> because <code>f</code> is not a sigma type.</p>
 
 <a name="129274320"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129274320" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129274320">Victor Porton (Jul 08 2018 at 00:14)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129274320" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129274320">Victor Porton (Jul 08 2018 at 08:14)</a>:</h4>
 <p><span class="user-mention" data-user-id="110044">@Chris Hughes</span> I tried to eliminate <code>{c: α → Prop}</code> from my definition. I tried it for completeness, but probably the proper way to do it is using an implicit argument (as in your code) instead</p>
 
 <a name="129274321"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129274321" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129274321">Victor Porton (Jul 08 2018 at 00:14)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129274321" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129274321">Victor Porton (Jul 08 2018 at 08:14)</a>:</h4>
 <p><span class="user-mention" data-user-id="110044">@Chris Hughes</span> Note that the issue in my very last question was different</p>
 
 <a name="129274440"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129274440" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129274440">Victor Porton (Jul 08 2018 at 00:19)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129274440" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129274440">Victor Porton (Jul 08 2018 at 08:19)</a>:</h4>
 <p>Side question: I subscribed to desktop notifications for this chat, but I get no notifications. Will I receive the notifications, if I close the browser window?</p>
 
 <a name="129274488"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129274488" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129274488">Chris Hughes (Jul 08 2018 at 00:21)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129274488" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129274488">Chris Hughes (Jul 08 2018 at 08:21)</a>:</h4>
 <p>One way to fix the error is to use <code>==</code> instead of <code>=</code> which allows you to state equality when the types are different (your types are different, but they should be equal). This can be unwieldy however. Another way would be to prove that they are equal when applied to an argument, something like this</p>
 <div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">inv1</span> <span class="o">{</span><span class="n">α</span> <span class="n">β</span><span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">{</span><span class="n">c</span><span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">}</span> <span class="o">(</span><span class="n">f</span><span class="o">:</span> <span class="o">{</span><span class="n">x</span><span class="o">:</span><span class="n">α</span> <span class="bp">//</span> <span class="n">c</span> <span class="n">x</span><span class="o">}</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span> <span class="o">[</span><span class="n">decidable_pred</span> <span class="n">c</span><span class="o">]</span> <span class="o">:</span>
 <span class="bp">∀</span> <span class="n">y</span> <span class="o">:</span> <span class="o">{</span><span class="n">x</span> <span class="bp">//</span> <span class="n">c</span> <span class="n">x</span><span class="o">},</span> <span class="n">option_to_subfunc</span> <span class="o">(</span><span class="bp">@</span><span class="n">subfunc_to_option</span> <span class="n">α</span> <span class="n">β</span> <span class="n">c</span> <span class="bp">_</span> <span class="n">f</span><span class="o">)</span> <span class="bp">⟨</span><span class="n">y</span><span class="bp">.</span><span class="mi">1</span><span class="o">,</span> <span class="n">sorry</span><span class="bp">⟩</span> <span class="bp">=</span> <span class="n">f</span> <span class="n">y</span> <span class="o">:=</span> <span class="n">sorry</span>
 </pre></div>
 
 <a name="129274550"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129274550" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129274550">Victor Porton (Jul 08 2018 at 00:23)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129274550" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129274550">Victor Porton (Jul 08 2018 at 08:23)</a>:</h4>
 <p><span class="user-mention" data-user-id="110044">@Chris Hughes</span> "unwieldy"? What is particularly bad with <code>==</code>? the second way (to write <code>y</code> explicitly) seems even worse for me.</p>
 
 <a name="129274878"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129274878" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129274878">Victor Porton (Jul 08 2018 at 00:35)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129274878" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129274878">Victor Porton (Jul 08 2018 at 08:35)</a>:</h4>
 <p>Can the following be proved?</p>
 <div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">eq_xxx</span> <span class="o">(</span><span class="n">t</span><span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span><span class="o">:</span> <span class="n">t</span><span class="o">)</span> <span class="o">:=</span> <span class="o">(</span><span class="n">a</span><span class="bp">==</span><span class="n">b</span> <span class="bp">-&gt;</span> <span class="n">a</span><span class="bp">=</span><span class="n">b</span><span class="o">)</span>
 </pre></div>
@@ -490,15 +490,15 @@ match f y with<br>
 <p>(that is if values of the same type are <code>==</code> then they are <code>=</code>)</p>
 
 <a name="129275360"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129275360" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129275360">Chris Hughes (Jul 08 2018 at 00:55)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129275360" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129275360">Chris Hughes (Jul 08 2018 at 08:55)</a>:</h4>
 <p><code>eq_of_heq</code></p>
 
 <a name="129275452"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129275452" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129275452">Mario Carneiro (Jul 08 2018 at 00:58)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129275452" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129275452">Mario Carneiro (Jul 08 2018 at 08:58)</a>:</h4>
 <p><span class="user-mention" data-user-id="119326">@Victor Porton</span> You should receive notifications if you are directly addressed, like this</p>
 
 <a name="129275513"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129275513" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129275513">Victor Porton (Jul 08 2018 at 01:00)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129275513" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129275513">Victor Porton (Jul 08 2018 at 09:00)</a>:</h4>
 <p>hm, it looks now I am really stalled to fill the <code>sorry</code>ies in my source:</p>
 <div class="codehilite"><pre><span></span><span class="n">local</span> <span class="n">attribute</span> <span class="o">[</span><span class="kn">instance</span><span class="o">]</span> <span class="n">classical</span><span class="bp">.</span><span class="n">prop_decidable</span>
 
@@ -520,39 +520,39 @@ match f y with<br>
 <p>How to learn to use <code>==</code>? Maybe I should read Coq docs on this?</p>
 
 <a name="129275523"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129275523" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129275523">Mario Carneiro (Jul 08 2018 at 01:01)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129275523" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129275523">Mario Carneiro (Jul 08 2018 at 09:01)</a>:</h4>
 <p>To address the larger goal of the definitions you are making, I think you want to use <code>roption</code> (in <code>data.pfun</code>) and the isomorphism theorems between <code>roption</code> and <code>option</code>. A function <code>A -&gt; roption B</code> is the same as a partial function (from a subset of <code>A</code> to <code>B</code>)</p>
 
 <a name="129299190"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129299190" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129299190">Victor Porton (Jul 08 2018 at 15:16)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129299190" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129299190">Victor Porton (Jul 08 2018 at 23:16)</a>:</h4>
 <p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> First, how <code>roption</code> would be better for my purposes than <code>option</code>? My project uses classical logic. (However someone suggested me to mark which theorems need axiom of choice explicitly.) Now we have three isomorphic objects (and thus three isomorphisms): a partial function, <code>A-&gt;option B</code> and <code>A-&gt;roption B</code>. I do not see how it could be better than my initial idea.</p>
 
 <a name="129307057"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129307057" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129307057">Mario Carneiro (Jul 08 2018 at 19:01)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129307057" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129307057">Mario Carneiro (Jul 09 2018 at 03:01)</a>:</h4>
 <p>Because a function <code>A -&gt; roption B</code> <em>is</em> a "subfunc" as you call it. It is literally a pair of a domain and a partial function on that domain</p>
 
 <a name="129307117"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129307117" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129307117">Mario Carneiro (Jul 08 2018 at 19:02)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129307117" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129307117">Mario Carneiro (Jul 09 2018 at 03:02)</a>:</h4>
 <p>so you can leverage the proofs of isomorphism there to obtain an isomorphism from <code>A -&gt; option B</code> to a partial function</p>
 
 <a name="129307187"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129307187" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129307187">Victor Porton (Jul 08 2018 at 19:05)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129307187" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129307187">Victor Porton (Jul 09 2018 at 03:05)</a>:</h4>
 <p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> Either you don't understand me, or I do not understand you. The "subfunc" by definition is a function on a _subtype_ of <code>A</code>. But <code>A -&gt; roption B</code> is a function on the type <code>A</code>, not on its arbitrary subtype as I want. It may be isomorphic, but they are _not_ the same.</p>
 
 <a name="129307195"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129307195" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129307195">Mario Carneiro (Jul 08 2018 at 19:05)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129307195" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129307195">Mario Carneiro (Jul 09 2018 at 03:05)</a>:</h4>
 <p>The isomorphism is almost trivial though, unlike the one from option</p>
 
 <a name="129307237"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129307237" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129307237">Mario Carneiro (Jul 08 2018 at 19:06)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129307237" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129307237">Mario Carneiro (Jul 09 2018 at 03:06)</a>:</h4>
 <p>And furthermore there is already a definition which gives this isomorphism, <code>as_subtype</code></p>
 
 <a name="129307448"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129307448" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129307448">Victor Porton (Jul 08 2018 at 19:15)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129307448" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129307448">Victor Porton (Jul 09 2018 at 03:15)</a>:</h4>
 <p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> Thanks. As there is undocumented things like <code>==</code> which I may need for my Lean-related project, I prefer to lay it aside for an indefinite future. Moreover, I am going to lay aside abstract math research and get busy myself writing a free Python program (for an applied computer science, not abstract mathematics) now</p>
 
 <a name="129307457"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129307457" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129307457">Mario Carneiro (Jul 08 2018 at 19:15)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/partial%20functions/near/129307457" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83047partialfunctions.html#129307457">Mario Carneiro (Jul 09 2018 at 03:15)</a>:</h4>
 <p>It's not undocumented, but it's a pain to work with</p>
 
 

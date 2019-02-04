@@ -12,11 +12,11 @@ permalink: archive/113488general/50044nearlynoconfusion.html
 <base href="https://leanprover.zulipchat.com">
 {% raw %}
 <a name="124130895"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124130895" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124130895">Kevin Buzzard (Mar 24 2018 at 00:22)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124130895" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124130895">Kevin Buzzard (Mar 24 2018 at 10:22)</a>:</h4>
 <p>I spent some time with Chris at Xena last night trying to get to the bottom of <code>no_confusion</code>.  I seem to have a slightly simpler approach which gives what looks to me like everything we need for a proof of the idea that two nats are equal iff they were constructed using the same constructors in the same order.</p>
 
 <a name="124130903"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124130903" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124130903">Kevin Buzzard (Mar 24 2018 at 00:23)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124130903" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124130903">Kevin Buzzard (Mar 24 2018 at 10:23)</a>:</h4>
 <div class="codehilite"><pre><span></span>inductive  xnat
 | zero : xnat
 | succ : xnat → xnat
@@ -47,63 +47,63 @@ example : ¬ succ m = zero :=  λ H, xnat_no_confusion&#39; _ _ H
 </pre></div>
 
 <a name="124130959"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124130959" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124130959">Kevin Buzzard (Mar 24 2018 at 00:24)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124130959" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124130959">Kevin Buzzard (Mar 24 2018 at 10:24)</a>:</h4>
 <p>Here I prove injectivity of <code>xnat.succ</code> and also that <code>zero</code> is not a <code>succ</code> using an easier variant of the <code>no_confusion</code> / <code>no_confusion_type</code> strategy, where instead of carrying round a general sort <code>P</code> I just use the relevant props.</p>
 
 <a name="124130970"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124130970" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124130970">Kevin Buzzard (Mar 24 2018 at 00:25)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124130970" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124130970">Kevin Buzzard (Mar 24 2018 at 10:25)</a>:</h4>
 <p>Are there other applications of <code>no_confusion_type</code> lemmas which go beyond this sort of "instance of inductive type is uniquely determined by how it was constructed" sort of thing? Or am I missing something else? Why is this sort <code>P</code> used?</p>
 
 <a name="124131025"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124131025" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124131025">Kevin Buzzard (Mar 24 2018 at 00:27)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124131025" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124131025">Kevin Buzzard (Mar 24 2018 at 10:27)</a>:</h4>
 <p>I'm writing a blog post about all this <code>no_confusion</code> stuff and I was somehow expecting for this to come out in the wash but it didn't, so I need to think of something coherent to say about why the general sort P is involved before I post.</p>
 
 <a name="124131971"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124131971" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124131971">Andrew Ashworth (Mar 24 2018 at 00:56)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124131971" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124131971">Andrew Ashworth (Mar 24 2018 at 10:56)</a>:</h4>
 <p>was mcbride's paper on <code>no confusion</code> not helpful?</p>
 
 <a name="124132023"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124132023" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124132023">Kevin Buzzard (Mar 24 2018 at 00:58)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124132023" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124132023">Kevin Buzzard (Mar 24 2018 at 10:58)</a>:</h4>
 <p>I either don't know this paper, or I looked at it before and at the time it was too much for me. Having actually spent some time thinking about no_confusion_type now perhaps I can ask you for a link to this paper in the hope that I can get something from it?</p>
 
 <a name="124132027"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124132027" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124132027">Andrew Ashworth (Mar 24 2018 at 00:59)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124132027" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124132027">Andrew Ashworth (Mar 24 2018 at 10:59)</a>:</h4>
 <p><a href="https://pdfs.semanticscholar.org/d224/e96c59a81a471625faf87118b6299094e1e4.pdf" target="_blank" title="https://pdfs.semanticscholar.org/d224/e96c59a81a471625faf87118b6299094e1e4.pdf">https://pdfs.semanticscholar.org/d224/e96c59a81a471625faf87118b6299094e1e4.pdf</a> section 7.3</p>
 
 <a name="124132032"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124132032" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124132032">Andrew Ashworth (Mar 24 2018 at 00:59)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124132032" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124132032">Andrew Ashworth (Mar 24 2018 at 10:59)</a>:</h4>
 <p><a href="http://strictlypositive.org/thesis.pdf" target="_blank" title="http://strictlypositive.org/thesis.pdf">http://strictlypositive.org/thesis.pdf</a> page 136</p>
 
 <a name="124132207"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124132207" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124132207">Andrew Ashworth (Mar 24 2018 at 01:04)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124132207" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124132207">Andrew Ashworth (Mar 24 2018 at 11:04)</a>:</h4>
 <p>mcbride's phd thesis is definitely hard going</p>
 
 <a name="124132233"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124132233" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124132233">Andrew Ashworth (Mar 24 2018 at 01:06)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124132233" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124132233">Andrew Ashworth (Mar 24 2018 at 11:06)</a>:</h4>
 <p>i had to sit and stare at it for awhile, and i still don't fully understand it <span class="emoji emoji-1f605" title="sweat smile">:sweat_smile:</span></p>
 
 <a name="124132336"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124132336" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124132336">Kevin Buzzard (Mar 24 2018 at 01:08)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124132336" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124132336">Kevin Buzzard (Mar 24 2018 at 11:08)</a>:</h4>
 <p>Well I am not an expert but it seems to me that what McBride is defining on p136ff is what is implemented in Lean.</p>
 
 <a name="124132337"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124132337" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124132337">Kevin Buzzard (Mar 24 2018 at 01:08)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124132337" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124132337">Kevin Buzzard (Mar 24 2018 at 11:08)</a>:</h4>
 <p>Maybe I should just post my blog post. Hang on.</p>
 
 <a name="124132589"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124132589" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124132589">Mario Carneiro (Mar 24 2018 at 01:18)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124132589" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124132589">Mario Carneiro (Mar 24 2018 at 11:18)</a>:</h4>
 <p>I think the reason <code>no_confusion</code> uses a general sort instead of using the consequent <code>m = n</code> directly is because the number of conclusions varies with the constructors, so that for <code>list</code> it would be something like <code>cons a l = cons a' l' -&gt; a = a' /\ l = l'</code>, which is a bit less natural to define inductively since the 0-ary case gets special consideration, and it also relies on the definition <code>and</code> which may not be available yet. As it is defined normally <code>no_confusion</code> for an arbitrary type needs nothing except the basics of DTT, plus <code>eq</code> and <code>heq</code> (which comes up when there are dependencies, for example <code>sigma.mk a b = sigma.mk a' b' -&gt; a = a' /\ b == b'</code> where the latter equality involves <code>b : B a</code> and <code>b' : B a'</code> which are different types.</p>
 
 <a name="124132771"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124132771" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124132771">Kevin Buzzard (Mar 24 2018 at 01:25)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124132771" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124132771">Kevin Buzzard (Mar 24 2018 at 11:25)</a>:</h4>
 <p><a href="https://xenaproject.wordpress.com/2018/03/24/no-confusion-over-no_confusion/" target="_blank" title="https://xenaproject.wordpress.com/2018/03/24/no-confusion-over-no_confusion/">https://xenaproject.wordpress.com/2018/03/24/no-confusion-over-no_confusion/</a></p>
 
 <a name="124132788"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124132788" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124132788">Kevin Buzzard (Mar 24 2018 at 01:25)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124132788" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124132788">Kevin Buzzard (Mar 24 2018 at 11:25)</a>:</h4>
 <p>I'll perhaps add some comments about what you said above, later.</p>
 
 <a name="124133073"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124133073" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124133073">Mario Carneiro (Mar 24 2018 at 01:37)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124133073" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124133073">Mario Carneiro (Mar 24 2018 at 11:37)</a>:</h4>
 <p>Here's another interesting story to do with no_confusion:</p>
 <div class="codehilite"><pre><span></span>inductive {u} mystery : Sort u
 | A : mystery
@@ -139,11 +139,11 @@ theorem A_eq_B_attempt_1 : A = B := rfl --nope
 </pre></div>
 
 <a name="124133116"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124133116" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124133116">Mario Carneiro (Mar 24 2018 at 01:39)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124133116" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124133116">Mario Carneiro (Mar 24 2018 at 11:39)</a>:</h4>
 <p>The punch line is that <code>confused</code> is a type with two elements <code>A</code> and <code>B</code>, for which it is impossible to prove whether they are equal or not</p>
 
 <a name="124133271"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124133271" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124133271">Mario Carneiro (Mar 24 2018 at 01:45)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124133271" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124133271">Mario Carneiro (Mar 24 2018 at 11:45)</a>:</h4>
 <p>By the way in the blog post you could have defined <code>mytype_equal</code> like so:</p>
 <div class="codehilite"><pre><span></span>def  mytype_equal : mytype → mytype →  Prop
 | mytype.AA mytype.AA := true
@@ -156,31 +156,31 @@ theorem A_eq_B_attempt_1 : A = B := rfl --nope
 <p>Not sure if you were deliberately showing off other ways to construct it</p>
 
 <a name="124133419"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124133419" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124133419">Mario Carneiro (Mar 24 2018 at 01:51)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124133419" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124133419">Mario Carneiro (Mar 24 2018 at 11:51)</a>:</h4>
 <p>Re: the one-sided inverse, that approach actually does work in general, as a "partial projection". So for example you could define <code>head l : option A</code> when <code>l : list A</code>, to return <code>none</code> on the empty list and <code>a</code> on <code>a::l</code>. In general, you have an inductive type with several constructors, each of which has several arguments, and you can project each element of each constructor in an <code>option</code>, returning <code>none</code> if the wrong constructor is passed in and <code>some a</code> where <code>a</code> is the appropriate argument to the constructor otherwise. You can reconstruct the <code>cases_on</code> theorem using all these projections.</p>
 
 <a name="124133808"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124133808" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124133808">Kevin Buzzard (Mar 24 2018 at 02:05)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124133808" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124133808">Kevin Buzzard (Mar 24 2018 at 12:05)</a>:</h4>
 <p>Aah excellent, I will beef up the post tomorrow</p>
 
 <a name="124133809"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124133809" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124133809">Kevin Buzzard (Mar 24 2018 at 02:05)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124133809" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124133809">Kevin Buzzard (Mar 24 2018 at 12:05)</a>:</h4>
 <p>Thanks!</p>
 
 <a name="124155749"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124155749" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124155749">Kevin Buzzard (Mar 24 2018 at 17:30)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124155749" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124155749">Kevin Buzzard (Mar 25 2018 at 03:30)</a>:</h4>
 <p>PS Do you think I'm wasting my time trying to get to the bottom of things like this? I am currently thinking about getting to the bottom of something else I've always been confused by -- "using-well-founded" (the error you get when you try and define something by recursion but things are slightly too convoluted for the elaborator(?) to figure out that what you're doing will definitely terminate after a finite time). Currently the only way I know how to figure stuff out is to look at the source code and then work stuff out by experimenting. My plan, like the no-confusion post, would be to work out some simple examples, and basically write some docs and either PR them to mathlib docs or blog about them. But when Lean 4 comes is there every chance that everything I write about these sorts of "obscure" parts of Lean will be no longer relevant?</p>
 
 <a name="124155850"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124155850" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124155850">Kevin Buzzard (Mar 24 2018 at 17:34)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124155850" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124155850">Kevin Buzzard (Mar 25 2018 at 03:34)</a>:</h4>
 <p>I think I'm right in saying that using_well_founded is not mentioned in either the reference manual or TPIL (like no_confusion).</p>
 
 <a name="124156198"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124156198" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124156198">Kevin Buzzard (Mar 24 2018 at 17:49)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124156198" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124156198">Kevin Buzzard (Mar 25 2018 at 03:49)</a>:</h4>
 <p>Re : <code>mystery</code> -- why is it any different to <code>bool</code>? It clearly is:</p>
 
 <a name="124156199"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124156199" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124156199">Kevin Buzzard (Mar 24 2018 at 17:49)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124156199" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124156199">Kevin Buzzard (Mar 25 2018 at 03:49)</a>:</h4>
 <div class="codehilite"><pre><span></span>inductive {u} mystery : Sort u
 | A : mystery
 | B : mystery
@@ -195,15 +195,15 @@ inductive  bool&#39;
 </pre></div>
 
 <a name="124156251"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124156251" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124156251">Kevin Buzzard (Mar 24 2018 at 17:51)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124156251" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124156251">Kevin Buzzard (Mar 25 2018 at 03:51)</a>:</h4>
 <p>we get <code>bool'.no_confusion</code> but no <code>mystery.no_confusion</code>; and <code>bool.rec</code> eliminates to any Sort whereas <code>mystery.rec</code> only eliminates to <code>Prop</code>. Why is this?</p>
 
 <a name="124156307"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124156307" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124156307">Simon Hudon (Mar 24 2018 at 17:53)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124156307" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124156307">Simon Hudon (Mar 25 2018 at 03:53)</a>:</h4>
 <p>Because <code>mystery</code> can inhabit multiple types including <code>Prop</code> and when it does, it's a bit like <code>or</code>. If you could eliminate to anything other than <code>Prop</code>, you could affect the behavior of a program with just a proof</p>
 
 <a name="124156364"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124156364" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124156364">Simon Hudon (Mar 24 2018 at 17:55)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124156364" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124156364">Simon Hudon (Mar 25 2018 at 03:55)</a>:</h4>
 <p>for example:</p>
 <div class="codehilite"><pre><span></span>def prog : mystery.{0} -&gt; nat
  | A := 0
@@ -214,91 +214,91 @@ inductive  bool&#39;
 <p>wouldn't make sense because of proof irrelevance</p>
 
 <a name="124156746"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124156746" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124156746">Kevin Buzzard (Mar 24 2018 at 18:08)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124156746" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124156746">Kevin Buzzard (Mar 25 2018 at 04:08)</a>:</h4>
 <p>I see. The whole point is that mystery is allowed to be a Prop so everything is paranoid. You guys should get classical.</p>
 
 <a name="124156753"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124156753" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124156753">Andrew Ashworth (Mar 24 2018 at 18:09)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124156753" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124156753">Andrew Ashworth (Mar 25 2018 at 04:09)</a>:</h4>
 <p>it's not a waste of time. some version of well-founded recursion will be in lean 4</p>
 
 <a name="124156755"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124156755" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124156755">Andrew Ashworth (Mar 24 2018 at 18:09)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124156755" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124156755">Andrew Ashworth (Mar 25 2018 at 04:09)</a>:</h4>
 <p>what might change is the exact syntax / <code>using_well_founded</code>, so perhaps you could discuss doing it manually using <code>well_founded.fix</code></p>
 
 <a name="124156804"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124156804" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124156804">Kevin Buzzard (Mar 24 2018 at 18:10)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124156804" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124156804">Kevin Buzzard (Mar 25 2018 at 04:10)</a>:</h4>
 <p>I know even less about <code>well_founded.fix</code>.</p>
 
 <a name="124156818"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124156818" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124156818">Andrew Ashworth (Mar 24 2018 at 18:11)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124156818" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124156818">Andrew Ashworth (Mar 25 2018 at 04:11)</a>:</h4>
 <p>i don't know much either about the fixed points of functions, so i would avidly read your blog post :)</p>
 
 <a name="124156820"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124156820" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124156820">Andrew Ashworth (Mar 24 2018 at 18:11)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124156820" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124156820">Andrew Ashworth (Mar 25 2018 at 04:11)</a>:</h4>
 <p>it's a way of expressing well-founded induction</p>
 
 <a name="124156821"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124156821" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124156821">Kevin Buzzard (Mar 24 2018 at 18:11)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124156821" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124156821">Kevin Buzzard (Mar 25 2018 at 04:11)</a>:</h4>
 <p>You should use Coq, everything seems to be defined using Fixpoint there.</p>
 
 <a name="124156862"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124156862" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124156862">Kevin Buzzard (Mar 24 2018 at 18:12)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124156862" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124156862">Kevin Buzzard (Mar 25 2018 at 04:12)</a>:</h4>
 <p>Hey, I now realise I don't even understand Lean's definition of nat.div and I am supposed to be a  professor of number theory :-/</p>
 
 <a name="124156863"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124156863" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124156863">Kevin Buzzard (Mar 24 2018 at 18:13)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124156863" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124156863">Kevin Buzzard (Mar 25 2018 at 04:13)</a>:</h4>
 <p>Maybe this was mentioned in TPIL...</p>
 
 <a name="124156919"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124156919" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124156919">Kevin Buzzard (Mar 24 2018 at 18:15)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124156919" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124156919">Kevin Buzzard (Mar 25 2018 at 04:15)</a>:</h4>
 <p>Maybe it's time I read TPIL Chapter 8 again in fact.</p>
 
 <a name="124157073"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124157073" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124157073">Moses Schönfinkel (Mar 24 2018 at 18:21)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124157073" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124157073">Moses Schönfinkel (Mar 25 2018 at 04:21)</a>:</h4>
 <p>Coq just uses the keyword <code>Fixpoint</code> to express <code>Definition</code> that can recurse, there's not much difference from Lean's <code>def</code></p>
 
 <a name="124157175"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124157175" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124157175">Simon Hudon (Mar 24 2018 at 18:25)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124157175" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124157175">Simon Hudon (Mar 25 2018 at 04:25)</a>:</h4>
 <p>The big difference is that Lean takes care of well founded recursion for you</p>
 
 <a name="124157269"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124157269" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124157269">Andrew Ashworth (Mar 24 2018 at 18:29)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124157269" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124157269">Andrew Ashworth (Mar 25 2018 at 04:29)</a>:</h4>
 <p>regarding the div example in TPIL, I wish jeremy had pattern matched on y, it would have been clearer then IMO</p>
 
 <a name="124157270"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124157270" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124157270">Moses Schönfinkel (Mar 24 2018 at 18:29)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124157270" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124157270">Moses Schönfinkel (Mar 25 2018 at 04:29)</a>:</h4>
 <p>Except for when it doesn't and then you're stuck with quoted tactics and such :(.</p>
 
 <a name="124157271"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124157271" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124157271">Moses Schönfinkel (Mar 24 2018 at 18:29)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124157271" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124157271">Moses Schönfinkel (Mar 25 2018 at 04:29)</a>:</h4>
 <p>Coq has a better solution to provin gtermination.</p>
 
 <a name="124157332"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124157332" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124157332">Moses Schönfinkel (Mar 24 2018 at 18:31)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124157332" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124157332">Moses Schönfinkel (Mar 25 2018 at 04:31)</a>:</h4>
 <p>Not to mention that Coq can in some cases help you show your relation is well founded. Then you're left with proof of termination only.</p>
 
 <a name="124157333"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124157333" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124157333">Kevin Buzzard (Mar 24 2018 at 18:31)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124157333" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124157333">Kevin Buzzard (Mar 25 2018 at 04:31)</a>:</h4>
 <p>Right -- this is what I see with <code>using_well_founded</code> -- I am having to actually write a tactic (or know about the "`[" trick)</p>
 
 <a name="124157372"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124157372" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124157372">Kevin Buzzard (Mar 24 2018 at 18:32)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124157372" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124157372">Kevin Buzzard (Mar 25 2018 at 04:32)</a>:</h4>
 <p>I don't know whether as a mathematician I should care about this</p>
 
 <a name="124157373"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124157373" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124157373">Kevin Buzzard (Mar 24 2018 at 18:32)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124157373" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124157373">Kevin Buzzard (Mar 25 2018 at 04:32)</a>:</h4>
 <p>The reason I currently care is that I have been reading software foundations</p>
 
 <a name="124157376"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124157376" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124157376">Kevin Buzzard (Mar 24 2018 at 18:32)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124157376" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124157376">Kevin Buzzard (Mar 25 2018 at 04:32)</a>:</h4>
 <p>and I defined a positive integer as an inductive type using binary notation: three constructors <code>one</code>, <code>double x</code> and <code>double_and_then_add_one x</code></p>
 
 <a name="124157377"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124157377" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124157377">Kevin Buzzard (Mar 24 2018 at 18:33)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124157377" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124157377">Kevin Buzzard (Mar 25 2018 at 04:33)</a>:</h4>
 <p>and when I tried to define addition on these things, I have trouble doing (2x+1)+(2y+1)</p>
 
 <a name="124157440"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124157440" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124157440">Simon Hudon (Mar 24 2018 at 18:34)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124157440" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124157440">Simon Hudon (Mar 25 2018 at 04:34)</a>:</h4>
 <blockquote>
 <p>regarding the div example in TPIL, I wish jeremy had pattern matched on y, it would have been clearer then IMO</p>
 </blockquote>
@@ -307,91 +307,91 @@ inductive  bool&#39;
 <p>I believe <code>nat</code> has access to very little tactic machinery so they have to be frugal there.</p>
 
 <a name="124157564"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124157564" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124157564">Andrew Ashworth (Mar 24 2018 at 18:39)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124157564" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124157564">Andrew Ashworth (Mar 25 2018 at 04:39)</a>:</h4>
 <p>i think it's worth caring about using <code>well_founded.fix</code> by hand, just like <code>no_confusion</code></p>
 
 <a name="124157565"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124157565" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124157565">Andrew Ashworth (Mar 24 2018 at 18:39)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124157565" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124157565">Andrew Ashworth (Mar 25 2018 at 04:39)</a>:</h4>
 <p>it's applicable whenever you're doing complicated induction</p>
 
 <a name="124157664"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124157664" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124157664">Moses Schönfinkel (Mar 24 2018 at 18:42)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124157664" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124157664">Moses Schönfinkel (Mar 25 2018 at 04:42)</a>:</h4>
 <p>Coq just asks for proofs of well foundedness and termination (according some decreasing measure).</p>
 
 <a name="124157665"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124157665" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124157665">Kevin Buzzard (Mar 24 2018 at 18:42)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124157665" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124157665">Kevin Buzzard (Mar 25 2018 at 04:42)</a>:</h4>
 <p>Yes, as an end user I forget all about this "what is the actual state of Lean when this object is being made" stuff. For example with no_confusion I was thinking "why not just return a=a' and L=L'" for <code>list.no_confusion_type (a::L) (a'::L')</code></p>
 
 <a name="124157666"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124157666" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124157666">Moses Schönfinkel (Mar 24 2018 at 18:42)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124157666" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124157666">Moses Schönfinkel (Mar 25 2018 at 04:42)</a>:</h4>
 <p>Lean has this weird way of requiring tactics.</p>
 
 <a name="124157667"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124157667" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124157667">Kevin Buzzard (Mar 24 2018 at 18:42)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124157667" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124157667">Kevin Buzzard (Mar 25 2018 at 04:42)</a>:</h4>
 <p>and then Mario points out that <code>and</code> might not be defined at this point. Oops.</p>
 
 <a name="124157672"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124157672" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124157672">Kevin Buzzard (Mar 24 2018 at 18:43)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124157672" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124157672">Kevin Buzzard (Mar 25 2018 at 04:43)</a>:</h4>
 <p><span class="user-mention" data-user-id="110027">@Moses Schönfinkel</span> Is it only weird because you are used to the Coq way? i.e. are you saying "I don't like it because I know Coq and Lean is different", or "I don't like it because I know Coq and Lean is worse for this sort of thing"</p>
 
 <a name="124157879"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124157879" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124157879">Moses Schönfinkel (Mar 24 2018 at 18:51)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124157879" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124157879">Moses Schönfinkel (Mar 25 2018 at 04:51)</a>:</h4>
 <p>It's worse because you can barely see the state of what you're proving, given it's in a tactic monad. All your feedback is nested exceptions from within the quoted tactics block.</p>
 
 <a name="124157916"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124157916" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124157916">Moses Schönfinkel (Mar 24 2018 at 18:52)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124157916" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124157916">Moses Schönfinkel (Mar 25 2018 at 04:52)</a>:</h4>
 <p>In Coq those are first-class proofs.</p>
 
 <a name="124157976"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124157976" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124157976">Moses Schönfinkel (Mar 24 2018 at 18:54)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124157976" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124157976">Moses Schönfinkel (Mar 25 2018 at 04:54)</a>:</h4>
 <p>So instead of a type you need to find a term for, in Lean you're asked to provide tactics.</p>
 
 <a name="124158146"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124158146" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124158146">Andrew Ashworth (Mar 24 2018 at 19:00)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124158146" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124158146">Andrew Ashworth (Mar 25 2018 at 05:00)</a>:</h4>
 <p>yes, i agree, i always end up writing out everything using <code>well_founded.fix</code> just so it's easier to read</p>
 
 <a name="124158155"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124158155" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124158155">Andrew Ashworth (Mar 24 2018 at 19:01)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124158155" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124158155">Andrew Ashworth (Mar 25 2018 at 05:01)</a>:</h4>
 <p>i'm glad it's not just my poor Lean programming skills, haha</p>
 
 <a name="124158400"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124158400" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124158400">Kevin Buzzard (Mar 24 2018 at 19:11)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124158400" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124158400">Kevin Buzzard (Mar 25 2018 at 05:11)</a>:</h4>
 <p>Would defining addition on that binary type I mentioned above be easier in Coq? How hard is it in Lean?</p>
 
 <a name="124158441"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124158441" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124158441">Kevin Buzzard (Mar 24 2018 at 19:12)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124158441" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124158441">Kevin Buzzard (Mar 25 2018 at 05:12)</a>:</h4>
 <p>(the inductive type with constructors one, double and double_then_add_one)</p>
 
 <a name="124158546"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124158546" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124158546">Andrew Ashworth (Mar 24 2018 at 19:17)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124158546" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124158546">Andrew Ashworth (Mar 25 2018 at 05:17)</a>:</h4>
 <p>i remember doing that exercise and trying to solve it by defining a coercion to nat. the trouble is you can have an infinite sequence of <code>doub doub doub doub doub zero</code> and you need to normalize the expression before you can do so</p>
 
 <a name="124158589"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124158589" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124158589">Kevin Buzzard (Mar 24 2018 at 19:18)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124158589" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124158589">Kevin Buzzard (Mar 25 2018 at 05:18)</a>:</h4>
 <p>I decided that zero was a bad thing to have, I started at one</p>
 
 <a name="124158590"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124158590" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124158590">Kevin Buzzard (Mar 24 2018 at 19:18)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124158590" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124158590">Kevin Buzzard (Mar 25 2018 at 05:18)</a>:</h4>
 <p>then every positive integer is uniquely represented</p>
 
 <a name="124158592"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124158592" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124158592">Kevin Buzzard (Mar 24 2018 at 19:18)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124158592" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124158592">Kevin Buzzard (Mar 25 2018 at 05:18)</a>:</h4>
 <p>and there is no confusion</p>
 
 <a name="124158597"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124158597" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124158597">Andrew Ashworth (Mar 24 2018 at 19:19)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124158597" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124158597">Andrew Ashworth (Mar 25 2018 at 05:19)</a>:</h4>
 <p>that's cheating! haha</p>
 
 <a name="124158659"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124158659" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124158659">Andrew Ashworth (Mar 24 2018 at 19:21)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124158659" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124158659">Andrew Ashworth (Mar 25 2018 at 05:21)</a>:</h4>
 <p>the same problem arises in the construction of the integers, where the pair (1,0) is the same as (2,1), but you need some way to say they are equivalent</p>
 
 <a name="124158710"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124158710" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124158710">Moses Schönfinkel (Mar 24 2018 at 19:23)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124158710" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124158710">Moses Schönfinkel (Mar 25 2018 at 05:23)</a>:</h4>
 <p>I remember doing it in Coq, I am not sure if it would be at all more difficult to do in Lean.</p>
 
 <a name="124159648"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124159648" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124159648">Chris Hughes (Mar 24 2018 at 19:58)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124159648" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124159648">Chris Hughes (Mar 25 2018 at 05:58)</a>:</h4>
 <p>I solved the problem Kevin and Andrew were talking about.</p>
 <div class="codehilite"><pre><span></span><span class="kn">lemma</span>  <span class="n">sizeof_pos</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">n</span> <span class="o">:</span> <span class="n">pint</span><span class="o">,</span> <span class="mi">0</span>  <span class="bp">&lt;</span> <span class="n">pint</span><span class="bp">.</span><span class="n">sizeof</span> <span class="n">n</span>
 <span class="bp">|</span> <span class="n">one</span> <span class="o">:=</span> <span class="n">dec_trivial</span>
@@ -415,166 +415,166 @@ inductive  bool&#39;
 <p>The order of arguments in the final case matters, I think because in the default well-founded relation on <code>Σ' p : pint, pint</code> , <code>⟨one, padd2 n m⟩ ≺ ⟨da n, da m⟩</code> , but not necessarily <code>⟨padd2 n m, one⟩ ≺ ⟨da n, da m⟩</code> I'm not sure why it wanted me to prove <code>sizeof n</code> was pos however, but that was the goal that came up in the error message.</p>
 
 <a name="124162751"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124162751" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124162751">Mario Carneiro (Mar 24 2018 at 21:56)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124162751" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124162751">Mario Carneiro (Mar 25 2018 at 07:56)</a>:</h4>
 <p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> You should look at mathlib <code>num</code> type, which is binary naturals just as you are describing. You don't need wf recursion for any of the definitions</p>
 
 <a name="124163808"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124163808" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124163808">Andrew Ashworth (Mar 24 2018 at 22:33)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124163808" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124163808">Andrew Ashworth (Mar 25 2018 at 08:33)</a>:</h4>
 <p>yeah, iirc that exercise asks you to define <code>nat_to_bin</code> and <code>bin_to_nat</code>. Once you've proven there is a bijection between the binary naturals and the"traditional" naturals, you can use nat addition on the binary numbers</p>
 
 <a name="124163818"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124163818" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124163818">Andrew Ashworth (Mar 24 2018 at 22:33)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124163818" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124163818">Andrew Ashworth (Mar 25 2018 at 08:33)</a>:</h4>
 <p>this is hard to do if you don't have zero</p>
 
 <a name="124163981"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124163981" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124163981">Kevin Buzzard (Mar 24 2018 at 22:38)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124163981" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124163981">Kevin Buzzard (Mar 25 2018 at 08:38)</a>:</h4>
 <p>it's harder to do if you do have zero</p>
 
 <a name="124163982"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124163982" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124163982">Kevin Buzzard (Mar 24 2018 at 22:38)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124163982" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124163982">Kevin Buzzard (Mar 25 2018 at 08:38)</a>:</h4>
 <p>because double double double zero is zero</p>
 
 <a name="124163983"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124163983" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124163983">Kevin Buzzard (Mar 24 2018 at 22:38)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124163983" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124163983">Kevin Buzzard (Mar 25 2018 at 08:38)</a>:</h4>
 <p>so bijectivity fails much worse</p>
 
 <a name="124163994"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124163994" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124163994">Kenny Lau (Mar 24 2018 at 22:39)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124163994" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124163994">Kenny Lau (Mar 25 2018 at 08:39)</a>:</h4>
 <p>bijective binary to the rescue</p>
 
 <a name="124163995"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124163995" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124163995">Kenny Lau (Mar 24 2018 at 22:39)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124163995" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124163995">Kenny Lau (Mar 25 2018 at 08:39)</a>:</h4>
 <p>ok it's literally inside the name</p>
 
 <a name="124164046"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124164046" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124164046">Andrew Ashworth (Mar 24 2018 at 22:40)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124164046" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124164046">Andrew Ashworth (Mar 25 2018 at 08:40)</a>:</h4>
 <p>yeah, handling the <code>doub doub doub zero</code> case is the real trick to the problem</p>
 
 <a name="124164057"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124164057" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124164057">Kenny Lau (Mar 24 2018 at 22:41)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124164057" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124164057">Kenny Lau (Mar 25 2018 at 08:41)</a>:</h4>
 <p>or you can just surject to the naturals and quotient</p>
 
 <a name="124164058"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124164058" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124164058">Andrew Ashworth (Mar 24 2018 at 22:41)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124164058" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124164058">Andrew Ashworth (Mar 25 2018 at 08:41)</a>:</h4>
 <p>i solved it a long time ago, let me see if i can find my solution, maybe...</p>
 
 <a name="124164060"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124164060" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124164060">Kenny Lau (Mar 24 2018 at 22:41)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124164060" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124164060">Kenny Lau (Mar 25 2018 at 08:41)</a>:</h4>
 <p>literally a~b iff f(a)=f(b)</p>
 
 <a name="124164107"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124164107" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124164107">Kenny Lau (Mar 24 2018 at 22:42)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124164107" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124164107">Kenny Lau (Mar 25 2018 at 08:42)</a>:</h4>
 <p>(deleted)</p>
 
 <a name="124164118"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124164118" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124164118">Kevin Buzzard (Mar 24 2018 at 22:43)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124164118" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124164118">Kevin Buzzard (Mar 25 2018 at 08:43)</a>:</h4>
 <p>I only defined the map one way. Did it ask you for the other way later on?</p>
 
 <a name="124164156"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124164156" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124164156">Andrew Ashworth (Mar 24 2018 at 22:44)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124164156" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124164156">Andrew Ashworth (Mar 25 2018 at 08:44)</a>:</h4>
 <p>so, it seems they've made many of the exercises different / a little easier in the new edition</p>
 
 <a name="124164176"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124164176" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124164176">Andrew Ashworth (Mar 24 2018 at 22:45)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124164176" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124164176">Andrew Ashworth (Mar 25 2018 at 08:45)</a>:</h4>
 <p>the original problem was a 4 star advanced take you all day to complete if you're a learner hair-raiser</p>
 
 <a name="124164179"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124164179" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124164179">Andrew Ashworth (Mar 24 2018 at 22:45)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124164179" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124164179">Andrew Ashworth (Mar 25 2018 at 08:45)</a>:</h4>
 <p>at least it was for me</p>
 
 <a name="124164237"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124164237" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124164237">Andrew Ashworth (Mar 24 2018 at 22:47)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124164237" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124164237">Andrew Ashworth (Mar 25 2018 at 08:47)</a>:</h4>
 <p>which is why i remember some of the details about it</p>
 
 <a name="124164281"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124164281" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124164281">Kevin Buzzard (Mar 24 2018 at 22:48)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124164281" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124164281">Kevin Buzzard (Mar 25 2018 at 08:48)</a>:</h4>
 <p>They dumbed down for the kids?</p>
 
 <a name="124164293"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124164293" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124164293">Andrew Ashworth (Mar 24 2018 at 22:49)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124164293" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124164293">Andrew Ashworth (Mar 25 2018 at 08:49)</a>:</h4>
 <p>not too badly! and i agree with dumbing it down, it's an introductory text</p>
 
 <a name="124164348"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124164348" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124164348">Andrew Ashworth (Mar 24 2018 at 22:50)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124164348" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124164348">Andrew Ashworth (Mar 25 2018 at 08:50)</a>:</h4>
 <p>i can't imagine teaching yourself from the original software foundations without guidance or help</p>
 
 <a name="124164360"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124164360" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124164360">Andrew Ashworth (Mar 24 2018 at 22:50)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124164360" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124164360">Andrew Ashworth (Mar 25 2018 at 08:50)</a>:</h4>
 <p>i eventually found somebody's homework solutions online and figured out how to solve it</p>
 
 <a name="124164557"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124164557" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124164557">Andrew Ashworth (Mar 24 2018 at 22:57)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124164557" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124164557">Andrew Ashworth (Mar 25 2018 at 08:57)</a>:</h4>
 <p>ahh, yes</p>
 
 <a name="124164562"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124164562" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124164562">Andrew Ashworth (Mar 24 2018 at 22:57)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124164562" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124164562">Andrew Ashworth (Mar 25 2018 at 08:57)</a>:</h4>
 <p><a href="http://staff.ustc.edu.cn/~bjhua/courses/theory/2012/slides/lec1notes.html" target="_blank" title="http://staff.ustc.edu.cn/~bjhua/courses/theory/2012/slides/lec1notes.html">http://staff.ustc.edu.cn/~bjhua/courses/theory/2012/slides/lec1notes.html</a></p>
 
 <a name="124164617"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124164617" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124164617">Andrew Ashworth (Mar 24 2018 at 22:58)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124164617" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124164617">Andrew Ashworth (Mar 25 2018 at 08:58)</a>:</h4>
 <p>once you've normalized your binary number, then you can create a bijection, and life is good again</p>
 
 <a name="124169245"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124169245" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124169245">Andrew Ashworth (Mar 25 2018 at 01:36)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124169245" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124169245">Andrew Ashworth (Mar 25 2018 at 11:36)</a>:</h4>
 <blockquote>
 <p>literally a~b iff f(a)=f(b)</p>
 </blockquote>
 <p>if only i had known at the time. they didn't talk much about equivalence relations in engineering school</p>
 
 <a name="124169303"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124169303" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124169303">Andrew Ashworth (Mar 25 2018 at 01:39)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124169303" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124169303">Andrew Ashworth (Mar 25 2018 at 11:39)</a>:</h4>
 <p>and if SF had started talking about how <code>bin_to_nat</code> was onto but not one-to-one, I doubt many undergraduates would know what that really meant</p>
 
 <a name="124169359"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124169359" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124169359">Kevin Buzzard (Mar 25 2018 at 01:40)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124169359" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124169359">Kevin Buzzard (Mar 25 2018 at 11:40)</a>:</h4>
 <p>That's funny. I teach that to maths undergraduates in year 1 term 1. And equivalence relations.</p>
 
 <a name="124169369"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124169369" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124169369">Simon Hudon (Mar 25 2018 at 01:41)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124169369" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124169369">Simon Hudon (Mar 25 2018 at 11:41)</a>:</h4>
 <p>I remember learning that in first year of university too, in discrete math</p>
 
 <a name="124169410"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124169410" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124169410">Andrew Ashworth (Mar 25 2018 at 01:42)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124169410" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124169410">Andrew Ashworth (Mar 25 2018 at 11:42)</a>:</h4>
 <p>i never had to take discrete math, I was an electrical engineer</p>
 
 <a name="124169411"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124169411" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124169411">Simon Hudon (Mar 25 2018 at 01:42)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124169411" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124169411">Simon Hudon (Mar 25 2018 at 11:42)</a>:</h4>
 <p>(I did CS and not engineering though, if that makes a difference)</p>
 
 <a name="124169412"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124169412" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124169412">Andrew Ashworth (Mar 25 2018 at 01:42)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124169412" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124169412">Andrew Ashworth (Mar 25 2018 at 11:42)</a>:</h4>
 <p>instead there was a 2 semester sequence on fourier transforms</p>
 
 <a name="124169419"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124169419" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124169419">Andrew Ashworth (Mar 25 2018 at 01:43)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124169419" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124169419">Andrew Ashworth (Mar 25 2018 at 11:43)</a>:</h4>
 <p>where we basically learned very little theory and a lot of how to compute various integrals</p>
 
 <a name="124169421"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124169421" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124169421">Andrew Ashworth (Mar 25 2018 at 01:43)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124169421" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124169421">Andrew Ashworth (Mar 25 2018 at 11:43)</a>:</h4>
 <p>i may have mentioned this before but i have issues with how they teach math in engineering school :)</p>
 
 <a name="124169534"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124169534" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124169534">Simon Hudon (Mar 25 2018 at 01:47)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124169534" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124169534">Simon Hudon (Mar 25 2018 at 11:47)</a>:</h4>
 <p>It seems common that people who like math don't get enough of it in engineering school.</p>
 
 <a name="124169556"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124169556" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124169556">Andrew Ashworth (Mar 25 2018 at 01:48)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124169556" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124169556">Andrew Ashworth (Mar 25 2018 at 11:48)</a>:</h4>
 <p>yes, we get a lot of boring computation instead</p>
 
 <a name="124169584"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124169584" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124169584">Andrew Ashworth (Mar 25 2018 at 01:48)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124169584" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124169584">Andrew Ashworth (Mar 25 2018 at 11:48)</a>:</h4>
 <p>my linear algebra class was basically doing a lot of gauss-jordan elimination and calculating eigenvectors by hand</p>
 
 <a name="124169601"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124169601" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124169601">Andrew Ashworth (Mar 25 2018 at 01:49)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124169601" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124169601">Andrew Ashworth (Mar 25 2018 at 11:49)</a>:</h4>
 <p>which ends up being completely a waste of time since no working engineer would ever do these things without a computer</p>
 
 <a name="124169659"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124169659" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124169659">Simon Hudon (Mar 25 2018 at 01:50)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124169659" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124169659">Simon Hudon (Mar 25 2018 at 11:50)</a>:</h4>
 <p>Mine was like that too. I've never missed my calculator more than in that class</p>
 
 <a name="124169720"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124169720" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124169720">Simon Hudon (Mar 25 2018 at 01:52)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nearly%20no_confusion/near/124169720" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50044nearlynoconfusion.html#124169720">Simon Hudon (Mar 25 2018 at 11:52)</a>:</h4>
 <p>The follow up class was about numerical methods for linear algebra so I guess I should have been happy to do some implementation. I was not easy to satisfy I guess</p>
 
 

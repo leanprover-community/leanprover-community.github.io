@@ -12,7 +12,7 @@ permalink: archive/113488general/62456typeclassinferencewithparameters.html
 <base href="https://leanprover.zulipchat.com">
 {% raw %}
 <a name="146970992"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20inference%20with%20parameters/near/146970992" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62456typeclassinferencewithparameters.html#146970992">Floris van Doorn (Nov 07 2018 at 17:43)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20inference%20with%20parameters/near/146970992" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62456typeclassinferencewithparameters.html#146970992">Floris van Doorn (Nov 08 2018 at 03:43)</a>:</h4>
 <p>Is there a way to tell type class inference to "use the current parameter"? In the following code, the <code>apply_instance</code> fails, because the argument of type <code>decidable_eq A</code> is a metavariable, and I want Lean to use the parameter.</p>
 <div class="codehilite"><pre><span></span>section
 parameters {A : Type} {h : decidable_eq A}
@@ -28,23 +28,23 @@ end
 <p>(note: it is unacceptable in my actual application to let <code>X</code> depend on <code>h</code>)</p>
 
 <a name="146971329"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20inference%20with%20parameters/near/146971329" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62456typeclassinferencewithparameters.html#146971329">Simon Hudon (Nov 07 2018 at 17:47)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20inference%20with%20parameters/near/146971329" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62456typeclassinferencewithparameters.html#146971329">Simon Hudon (Nov 08 2018 at 03:47)</a>:</h4>
 <p>What if you use <code>[ ]</code> around the declaration of <code>h</code>?</p>
 
 <a name="146971982"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20inference%20with%20parameters/near/146971982" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62456typeclassinferencewithparameters.html#146971982">Floris van Doorn (Nov 07 2018 at 17:56)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20inference%20with%20parameters/near/146971982" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62456typeclassinferencewithparameters.html#146971982">Floris van Doorn (Nov 08 2018 at 03:56)</a>:</h4>
 <p>That works, but in my actual example <code>h</code> is not a type class parameter, but just some extra data to construct a <code>setoid</code>.</p>
 
 <a name="146972041"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20inference%20with%20parameters/near/146972041" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62456typeclassinferencewithparameters.html#146972041">Simon Hudon (Nov 07 2018 at 17:57)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20inference%20with%20parameters/near/146972041" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62456typeclassinferencewithparameters.html#146972041">Simon Hudon (Nov 08 2018 at 03:57)</a>:</h4>
 <p>You could do something like <code>by haveI := h; apply_instance</code>, replacing <code>h</code> with whatever you need it to be.</p>
 
 <a name="146972171"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20inference%20with%20parameters/near/146972171" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62456typeclassinferencewithparameters.html#146972171">Simon Hudon (Nov 07 2018 at 17:59)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20inference%20with%20parameters/near/146972171" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62456typeclassinferencewithparameters.html#146972171">Simon Hudon (Nov 08 2018 at 03:59)</a>:</h4>
 <p>(you need <code>mathlib</code> for <code>haveI</code> by the way, and to import <code>tactic</code>)</p>
 
 <a name="146972280"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20inference%20with%20parameters/near/146972280" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62456typeclassinferencewithparameters.html#146972280">Floris van Doorn (Nov 07 2018 at 18:00)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20inference%20with%20parameters/near/146972280" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62456typeclassinferencewithparameters.html#146972280">Floris van Doorn (Nov 08 2018 at 04:00)</a>:</h4>
 <p>this is a more faithful representation of my actual scenario:</p>
 <div class="codehilite"><pre><span></span>constant some_data (α : Type) : Type
 definition foo {α : Type} (h : some_data α) : setoid (α ⊕ α) := sorry
@@ -59,30 +59,30 @@ end
 </pre></div>
 
 <a name="146972375"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20inference%20with%20parameters/near/146972375" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62456typeclassinferencewithparameters.html#146972375">Floris van Doorn (Nov 07 2018 at 18:01)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20inference%20with%20parameters/near/146972375" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62456typeclassinferencewithparameters.html#146972375">Floris van Doorn (Nov 08 2018 at 04:01)</a>:</h4>
 <p>yes, that works, but is still a little annoying.</p>
 
 <a name="146972463"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20inference%20with%20parameters/near/146972463" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62456typeclassinferencewithparameters.html#146972463">Floris van Doorn (Nov 07 2018 at 18:02)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20inference%20with%20parameters/near/146972463" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62456typeclassinferencewithparameters.html#146972463">Floris van Doorn (Nov 08 2018 at 04:02)</a>:</h4>
 <p>I only have a problem with <code>quotient.mk</code>, so currently I just have something like <code>def my_quotient.mk := @quotient.mk _ setoid_X</code>, which is also a little annoying.</p>
 
 <a name="146972512"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20inference%20with%20parameters/near/146972512" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62456typeclassinferencewithparameters.html#146972512">Simon Hudon (Nov 07 2018 at 18:03)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20inference%20with%20parameters/near/146972512" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62456typeclassinferencewithparameters.html#146972512">Simon Hudon (Nov 08 2018 at 04:03)</a>:</h4>
 <p>There's been a couple of back-and-forth on the subject. Leo doesn't like to allow instances to be created on the fly but he still granted us a way to do it.</p>
 
 <a name="146972748"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20inference%20with%20parameters/near/146972748" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62456typeclassinferencewithparameters.html#146972748">Simon Hudon (Nov 07 2018 at 18:06)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20inference%20with%20parameters/near/146972748" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62456typeclassinferencewithparameters.html#146972748">Simon Hudon (Nov 08 2018 at 04:06)</a>:</h4>
 <p>Does it work if you replace <code>@quotient.mk _ setoid_X</code> with <code>by haveI := setoid_X; apply quotient.mk</code>?</p>
 
 <a name="146972896"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20inference%20with%20parameters/near/146972896" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62456typeclassinferencewithparameters.html#146972896">Floris van Doorn (Nov 07 2018 at 18:08)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20inference%20with%20parameters/near/146972896" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62456typeclassinferencewithparameters.html#146972896">Floris van Doorn (Nov 08 2018 at 04:08)</a>:</h4>
 <blockquote>
 <p>There's been a couple of back-and-forth on the subject. Leo doesn't like to allow instances to be created on the fly but he still granted us a way to do it.</p>
 </blockquote>
 <p>Yeah, I know, but I don't want to add instances on the fly, I just want that in that section I have an instance of type <code>setoid X</code>.</p>
 
 <a name="146973032"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20inference%20with%20parameters/near/146973032" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62456typeclassinferencewithparameters.html#146973032">Simon Hudon (Nov 07 2018 at 18:10)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20inference%20with%20parameters/near/146973032" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62456typeclassinferencewithparameters.html#146973032">Simon Hudon (Nov 08 2018 at 04:10)</a>:</h4>
 <p>I see. I mistook your issue. I think the problem is that your instance depend on stuff that can't be inferred. You may have to make <code>some_data</code> a class locally.</p>
 
 

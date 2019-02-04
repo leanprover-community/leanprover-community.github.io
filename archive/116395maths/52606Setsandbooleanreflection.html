@@ -12,27 +12,27 @@ permalink: archive/116395maths/52606Setsandbooleanreflection.html
 <base href="https://leanprover.zulipchat.com">
 {% raw %}
 <a name="134259292"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Sets%20and%20boolean%20reflection/near/134259292" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/52606Setsandbooleanreflection.html#134259292">Tobias Grosser (Sep 19 2018 at 20:18)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Sets%20and%20boolean%20reflection/near/134259292" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/52606Setsandbooleanreflection.html#134259292">Tobias Grosser (Sep 20 2018 at 04:18)</a>:</h4>
 <p>ssreflect has a pattern <code>[pick x in A | P] == Some x</code> (See: <a href="http://ssr.msr-inria.inria.fr/doc/ssreflect-1.5/Ssreflect.fintype.html" target="_blank" title="http://ssr.msr-inria.inria.fr/doc/ssreflect-1.5/Ssreflect.fintype.html">http://ssr.msr-inria.inria.fr/doc/ssreflect-1.5/Ssreflect.fintype.html</a>) which is used in a proof that I want to translate from COQ. <span class="user-mention" data-user-id="110294">@Johannes Hölzl</span> already showed me how to model other parts of ssreflect in pure lean. I wonder if there is a canonical way to express this pattern in lean?</p>
 
 <a name="134260318"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Sets%20and%20boolean%20reflection/near/134260318" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/52606Setsandbooleanreflection.html#134260318">Mario Carneiro (Sep 19 2018 at 20:33)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Sets%20and%20boolean%20reflection/near/134260318" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/52606Setsandbooleanreflection.html#134260318">Mario Carneiro (Sep 20 2018 at 04:33)</a>:</h4>
 <p>There is <code>classical.some</code>, although I'm surprised to say there is no option-returning version of this. I guess it hasn't been necessary</p>
 
 <a name="134260409"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Sets%20and%20boolean%20reflection/near/134260409" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/52606Setsandbooleanreflection.html#134260409">Mario Carneiro (Sep 19 2018 at 20:34)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Sets%20and%20boolean%20reflection/near/134260409" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/52606Setsandbooleanreflection.html#134260409">Mario Carneiro (Sep 20 2018 at 04:34)</a>:</h4>
 <p>The usual way we write it is to do <code>if h : \exists x, p x then classical.some h else default _</code></p>
 
 <a name="134260430"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Sets%20and%20boolean%20reflection/near/134260430" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/52606Setsandbooleanreflection.html#134260430">Mario Carneiro (Sep 19 2018 at 20:34)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Sets%20and%20boolean%20reflection/near/134260430" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/52606Setsandbooleanreflection.html#134260430">Mario Carneiro (Sep 20 2018 at 04:34)</a>:</h4>
 <p>where the branches are usually some more complicated expressions</p>
 
 <a name="134261730"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Sets%20and%20boolean%20reflection/near/134261730" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/52606Setsandbooleanreflection.html#134261730">Tobias Grosser (Sep 19 2018 at 20:56)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Sets%20and%20boolean%20reflection/near/134261730" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/52606Setsandbooleanreflection.html#134261730">Tobias Grosser (Sep 20 2018 at 04:56)</a>:</h4>
 <p>Thank you. Playing with it.</p>
 
 <a name="134265194"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Sets%20and%20boolean%20reflection/near/134265194" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/52606Setsandbooleanreflection.html#134265194">Tobias Grosser (Sep 19 2018 at 22:02)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Sets%20and%20boolean%20reflection/near/134265194" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/52606Setsandbooleanreflection.html#134265194">Tobias Grosser (Sep 20 2018 at 06:02)</a>:</h4>
 <p>This seems to not be as easy as I thought:</p>
 <div class="codehilite"><pre><span></span><span class="kn">set_option</span> <span class="n">class</span><span class="bp">.</span><span class="n">instance_max_depth</span> <span class="mi">200</span>
 <span class="n">def</span> <span class="n">Gaussian_elimination</span> <span class="o">[</span><span class="n">ordered_ring</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">decidable_eq</span> <span class="n">α</span><span class="o">]:</span>
@@ -51,7 +51,7 @@ permalink: archive/116395maths/52606Setsandbooleanreflection.html
 </pre></div>
 
 <a name="134265203"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Sets%20and%20boolean%20reflection/near/134265203" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/52606Setsandbooleanreflection.html#134265203">Tobias Grosser (Sep 19 2018 at 22:02)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Sets%20and%20boolean%20reflection/near/134265203" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/52606Setsandbooleanreflection.html#134265203">Tobias Grosser (Sep 20 2018 at 06:02)</a>:</h4>
 <p>This gives me an error <code>maximum class-instance resolution depth has been reached (the limit can be increased by setting option 'class.instance_max_depth') (the class-instance resolution trace can be visualized by setting option 'trace.class_instances')</code></p>
 
 

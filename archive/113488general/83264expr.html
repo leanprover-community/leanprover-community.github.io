@@ -12,99 +12,99 @@ permalink: archive/113488general/83264expr.html
 <base href="https://leanprover.zulipchat.com">
 {% raw %}
 <a name="133596936"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/expr/near/133596936" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83264expr.html#133596936">Scott Morrison (Sep 09 2018 at 08:14)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/expr/near/133596936" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83264expr.html#133596936">Scott Morrison (Sep 09 2018 at 16:14)</a>:</h4>
 <p>Does anyone know the behaviour of <code>meta constant expr.replace : expr → (expr → nat → option expr) → expr</code>?</p>
 
 <a name="133596945"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/expr/near/133596945" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83264expr.html#133596945">Scott Morrison (Sep 09 2018 at 08:15)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/expr/near/133596945" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83264expr.html#133596945">Scott Morrison (Sep 09 2018 at 16:15)</a>:</h4>
 <p>(I have an expression that has a single <code>mvar</code> somewhere in it; I would like to replace that with an <code>expr.var 0</code>.)</p>
 
 <a name="133597029"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/expr/near/133597029" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83264expr.html#133597029">Simon Hudon (Sep 09 2018 at 08:18)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/expr/near/133597029" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83264expr.html#133597029">Simon Hudon (Sep 09 2018 at 16:18)</a>:</h4>
 <p>You could try implementing it as <code>e.replace $ λ e' _, if e'.is_mvar then expr.var 0 else  none</code></p>
 
 <a name="133597036"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/expr/near/133597036" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83264expr.html#133597036">Simon Hudon (Sep 09 2018 at 08:19)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/expr/near/133597036" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83264expr.html#133597036">Simon Hudon (Sep 09 2018 at 16:19)</a>:</h4>
 <p>It might not work if <code>replace</code> does not proceed recursively but your attempt should help us decide what to do next.</p>
 
 <a name="133597037"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/expr/near/133597037" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83264expr.html#133597037">Mario Carneiro (Sep 09 2018 at 08:19)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/expr/near/133597037" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83264expr.html#133597037">Mario Carneiro (Sep 09 2018 at 16:19)</a>:</h4>
 <p>you should probably use the <code>n</code> variable though</p>
 
 <a name="133597038"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/expr/near/133597038" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83264expr.html#133597038">Mario Carneiro (Sep 09 2018 at 08:19)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/expr/near/133597038" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83264expr.html#133597038">Mario Carneiro (Sep 09 2018 at 16:19)</a>:</h4>
 <p><code>e.replace $ λ e' n, if e'.is_mvar then expr.var n else  none</code></p>
 
 <a name="133597079"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/expr/near/133597079" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83264expr.html#133597079">Simon Hudon (Sep 09 2018 at 08:20)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/expr/near/133597079" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83264expr.html#133597079">Simon Hudon (Sep 09 2018 at 16:20)</a>:</h4>
 <p>Ooooooh! Is that what it's for? That's so cool!</p>
 
 <a name="133597174"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/expr/near/133597174" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83264expr.html#133597174">Scott Morrison (Sep 09 2018 at 08:24)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/expr/near/133597174" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83264expr.html#133597174">Scott Morrison (Sep 09 2018 at 16:24)</a>:</h4>
 <p>Neat!</p>
 
 <a name="133597181"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/expr/near/133597181" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83264expr.html#133597181">Scott Morrison (Sep 09 2018 at 08:25)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/expr/near/133597181" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83264expr.html#133597181">Scott Morrison (Sep 09 2018 at 16:25)</a>:</h4>
 <p>Do you guys have an <code>expr.is_mvar</code> that I'm missing?</p>
 
 <a name="133597243"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/expr/near/133597243" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83264expr.html#133597243">Mario Carneiro (Sep 09 2018 at 08:27)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/expr/near/133597243" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83264expr.html#133597243">Mario Carneiro (Sep 09 2018 at 16:27)</a>:</h4>
 <p>no, looks like you will have to roll your own</p>
 
 <a name="133597254"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/expr/near/133597254" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83264expr.html#133597254">Simon Hudon (Sep 09 2018 at 08:27)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/expr/near/133597254" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83264expr.html#133597254">Simon Hudon (Sep 09 2018 at 16:27)</a>:</h4>
 <p>I thought it was in <code>mathlib</code></p>
 
 <a name="133597260"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/expr/near/133597260" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83264expr.html#133597260">Simon Hudon (Sep 09 2018 at 08:28)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/expr/near/133597260" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83264expr.html#133597260">Simon Hudon (Sep 09 2018 at 16:28)</a>:</h4>
 <p>Ah! In <code>tactic.basic</code>, there it is called <code>is_meta_var</code></p>
 
 <a name="133597304"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/expr/near/133597304" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83264expr.html#133597304">Scott Morrison (Sep 09 2018 at 08:28)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/expr/near/133597304" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83264expr.html#133597304">Scott Morrison (Sep 09 2018 at 16:28)</a>:</h4>
 <p>Thanks.</p>
 
 <a name="133597321"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/expr/near/133597321" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83264expr.html#133597321">Mario Carneiro (Sep 09 2018 at 08:29)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/expr/near/133597321" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83264expr.html#133597321">Mario Carneiro (Sep 09 2018 at 16:29)</a>:</h4>
 <p>should we be more regular in the naming there?</p>
 
 <a name="133597365"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/expr/near/133597365" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83264expr.html#133597365">Simon Hudon (Sep 09 2018 at 08:30)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/expr/near/133597365" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83264expr.html#133597365">Simon Hudon (Sep 09 2018 at 16:30)</a>:</h4>
 <p>Probably, yes</p>
 
 <a name="136182545"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/expr/near/136182545" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83264expr.html#136182545">Chris Hughes (Oct 20 2018 at 21:53)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/expr/near/136182545" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83264expr.html#136182545">Chris Hughes (Oct 21 2018 at 06:53)</a>:</h4>
 <p>Is there any documentation anywhere on what all the constructors to <code>expr</code> mean?</p>
 
 <a name="136183618"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/expr/near/136183618" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83264expr.html#136183618">Simon Hudon (Oct 20 2018 at 22:28)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/expr/near/136183618" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83264expr.html#136183618">Simon Hudon (Oct 21 2018 at 07:28)</a>:</h4>
 <p>Not that I know of. It would be worth writing. What do you want to know?</p>
 
 <a name="136186327"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/expr/near/136186327" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83264expr.html#136186327">Scott Morrison (Oct 20 2018 at 23:58)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/expr/near/136186327" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83264expr.html#136186327">Scott Morrison (Oct 21 2018 at 08:58)</a>:</h4>
 <p>I would love to have a paragraph on each. I have to re-remember the order of arguments to expr.pi every time I see it.</p>
 
 <a name="136187796"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/expr/near/136187796" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83264expr.html#136187796">Chris Hughes (Oct 21 2018 at 00:46)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/expr/near/136187796" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83264expr.html#136187796">Chris Hughes (Oct 21 2018 at 09:46)</a>:</h4>
 <p>Essentially what Scott's talking about. What each of the arguments to each constructor represents.</p>
 
 <a name="136187976"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/expr/near/136187976" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83264expr.html#136187976">Scott Morrison (Oct 21 2018 at 00:52)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/expr/near/136187976" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83264expr.html#136187976">Scott Morrison (Oct 21 2018 at 09:52)</a>:</h4>
 <p>Didn't Ed Ayers write this at some point? He had a draft of some docs on meta stuff, but I think it was never PR'd.</p>
 
 <a name="136199026"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/expr/near/136199026" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83264expr.html#136199026">Chris Hughes (Oct 21 2018 at 06:48)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/expr/near/136199026" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83264expr.html#136199026">Chris Hughes (Oct 21 2018 at 15:48)</a>:</h4>
 <p>Are <code>expr tt</code>s allowed to contain metavariables?</p>
 
 <a name="136204211"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/expr/near/136204211" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83264expr.html#136204211">Edward Ayers (Oct 21 2018 at 10:04)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/expr/near/136204211" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83264expr.html#136204211">Edward Ayers (Oct 21 2018 at 19:04)</a>:</h4>
 <p>yes</p>
 
 <a name="136204262"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/expr/near/136204262" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83264expr.html#136204262">Edward Ayers (Oct 21 2018 at 10:06)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/expr/near/136204262" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83264expr.html#136204262">Edward Ayers (Oct 21 2018 at 19:06)</a>:</h4>
 <p>as far as I understand, <code>expr tt</code> means that the expression has been typechecked and fully elaborated.</p>
 
 <a name="136204263"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/expr/near/136204263" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83264expr.html#136204263">Edward Ayers (Oct 21 2018 at 10:06)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/expr/near/136204263" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83264expr.html#136204263">Edward Ayers (Oct 21 2018 at 19:06)</a>:</h4>
 <div class="codehilite"><pre><span></span><span class="n">meta</span> <span class="kn">inductive</span> <span class="n">expr</span> <span class="o">(</span><span class="n">elaborated</span> <span class="o">:</span> <span class="n">bool</span> <span class="o">:=</span> <span class="n">tt</span><span class="o">)</span>
 <span class="c">/-</span><span class="cm"> A bound variable with a de-Bruijn index. -/</span>
 <span class="bp">|</span> <span class="n">var</span>      <span class="o">{}</span> <span class="o">:</span> <span class="n">nat</span> <span class="bp">→</span> <span class="n">expr</span>
@@ -133,67 +133,67 @@ permalink: archive/113488general/83264expr.html
 </pre></div>
 
 <a name="136204269"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/expr/near/136204269" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83264expr.html#136204269">Edward Ayers (Oct 21 2018 at 10:07)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/expr/near/136204269" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83264expr.html#136204269">Edward Ayers (Oct 21 2018 at 19:07)</a>:</h4>
 <p><span class="user-mention" data-user-id="110087">@Scott Morrison</span> yeah I should PR it at some point.</p>
 
 <a name="136204315"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/expr/near/136204315" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83264expr.html#136204315">Edward Ayers (Oct 21 2018 at 10:09)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/expr/near/136204315" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83264expr.html#136204315">Edward Ayers (Oct 21 2018 at 19:09)</a>:</h4>
 <p>I build Lean from source with extra docstrings.</p>
 
 <a name="136204675"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/expr/near/136204675" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83264expr.html#136204675">Edward Ayers (Oct 21 2018 at 10:22)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/expr/near/136204675" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83264expr.html#136204675">Edward Ayers (Oct 21 2018 at 19:22)</a>:</h4>
 <p><code>binder_info</code> is only used by the elaborator.</p>
 
 <a name="136219638"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/expr/near/136219638" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83264expr.html#136219638">Chris Hughes (Oct 21 2018 at 18:24)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/expr/near/136219638" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83264expr.html#136219638">Chris Hughes (Oct 22 2018 at 03:24)</a>:</h4>
 <p>Thanks for this.</p>
 
 <a name="136221625"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/expr/near/136221625" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83264expr.html#136221625">Chris Hughes (Oct 21 2018 at 19:20)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/expr/near/136221625" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83264expr.html#136221625">Chris Hughes (Oct 22 2018 at 04:20)</a>:</h4>
 <p>What does <code>tactic.generalize</code> do?</p>
 
 <a name="136224003"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/expr/near/136224003" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83264expr.html#136224003">Simon Hudon (Oct 21 2018 at 20:27)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/expr/near/136224003" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83264expr.html#136224003">Simon Hudon (Oct 22 2018 at 05:27)</a>:</h4>
 <p>If you have <code>⊢ x + 1 ≤ y + 2</code>, <code>generalize ``(y + 2) `z</code> will turn the goal into <code>⊢ x + 1 ≤ z</code></p>
 
 <a name="136224045"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/expr/near/136224045" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83264expr.html#136224045">Chris Hughes (Oct 21 2018 at 20:28)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/expr/near/136224045" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83264expr.html#136224045">Chris Hughes (Oct 22 2018 at 05:28)</a>:</h4>
 <p>Okay thanks.</p>
 
 <a name="136224062"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/expr/near/136224062" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83264expr.html#136224062">Simon Hudon (Oct 21 2018 at 20:29)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/expr/near/136224062" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83264expr.html#136224062">Simon Hudon (Oct 22 2018 at 05:29)</a>:</h4>
 <p>The interactive version offers more options like adding an assumption <code>h : y + 2 = z</code></p>
 
 <a name="136233210"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/expr/near/136233210" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83264expr.html#136233210">Mario Carneiro (Oct 22 2018 at 00:50)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/expr/near/136233210" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83264expr.html#136233210">Mario Carneiro (Oct 22 2018 at 09:50)</a>:</h4>
 <p><span class="user-mention" data-user-id="121918">@Edward Ayers</span> An <code>expr tt</code> may not actually have been typechecked, but it is presumed to at least have the structure to be typechecked</p>
 
 <a name="136254342"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/expr/near/136254342" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83264expr.html#136254342">Edward Ayers (Oct 22 2018 at 10:58)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/expr/near/136254342" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83264expr.html#136254342">Edward Ayers (Oct 22 2018 at 19:58)</a>:</h4>
 <p>Ok so does <code>expr tt</code> just mean that there are no placeholders?</p>
 
 <a name="136254555"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/expr/near/136254555" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83264expr.html#136254555">Gabriel Ebner (Oct 22 2018 at 11:02)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/expr/near/136254555" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83264expr.html#136254555">Gabriel Ebner (Oct 22 2018 at 20:02)</a>:</h4>
 <p>Well, technically yes since "placeholder" is the name used for the macro that represents the <code>_</code> syntactical form.  But both <code>expr ff</code> and <code>expr tt</code> can have metavariables.</p>
 
 <a name="136254645"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/expr/near/136254645" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83264expr.html#136254645">Gabriel Ebner (Oct 22 2018 at 11:04)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/expr/near/136254645" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83264expr.html#136254645">Gabriel Ebner (Oct 22 2018 at 20:04)</a>:</h4>
 <p>The big difference between <code>expr ff</code> and <code>expr tt</code> is whether implicit arguments are present.  For example the equality <code>x = x</code> is represented in <code>expr ff</code> as <code>app (app (const `eq _) x) x</code> while in <code>expr tt</code> it is represented as <code>app (app (app (const `eq _) t) x) x</code> (one more argument).</p>
 
 <a name="136255803"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/expr/near/136255803" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83264expr.html#136255803">Edward Ayers (Oct 22 2018 at 11:31)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/expr/near/136255803" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83264expr.html#136255803">Edward Ayers (Oct 22 2018 at 20:31)</a>:</h4>
 <p>What is the difference between <code>implicit</code> and <code>strict_implicit</code>?</p>
 
 <a name="136255844"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/expr/near/136255844" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83264expr.html#136255844">Edward Ayers (Oct 22 2018 at 11:32)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/expr/near/136255844" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83264expr.html#136255844">Edward Ayers (Oct 22 2018 at 20:32)</a>:</h4>
 <p>For <code>binder_info</code></p>
 
 <a name="136256137"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/expr/near/136256137" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83264expr.html#136256137">Gabriel Ebner (Oct 22 2018 at 11:38)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/expr/near/136256137" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83264expr.html#136256137">Gabriel Ebner (Oct 22 2018 at 20:38)</a>:</h4>
 <p><code>default</code> = <code>(x : α)</code>, <code>implicit</code> = <code>{x : α}</code>, <code>strict_implicit</code> = <code>⦃x : α⦄</code>, <code>inst_implicit</code> = <code>[x : α]</code>, I believe <code>aux_decl</code> is used as a tag for the <code>_match</code> hypotheses but I could be completely mistaken.</p>
 
 <a name="136256251"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/expr/near/136256251" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83264expr.html#136256251">Gabriel Ebner (Oct 22 2018 at 11:41)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/expr/near/136256251" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83264expr.html#136256251">Gabriel Ebner (Oct 22 2018 at 20:41)</a>:</h4>
 <p>The difference between <code>{}</code> and <code>⦃⦄</code> is how implicit arguments are treated that are <em>not</em> followed by explicit arguments.  <code>{}</code> arguments are applied eagerly, while <code>⦃⦄</code> arguments are left partially applied:</p>
 <div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">foo</span> <span class="o">{</span><span class="n">x</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">}</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="o">:=</span> <span class="n">x</span>
 <span class="n">def</span> <span class="n">bar</span> <span class="o">⦃</span><span class="n">x</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">⦄</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="o">:=</span> <span class="n">x</span>
@@ -202,53 +202,53 @@ permalink: archive/113488general/83264expr.html
 </pre></div>
 
 <a name="136256815"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/expr/near/136256815" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83264expr.html#136256815">Edward Ayers (Oct 22 2018 at 11:55)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/expr/near/136256815" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83264expr.html#136256815">Edward Ayers (Oct 22 2018 at 20:55)</a>:</h4>
 <p>In C++ it says that <code>aux_decl</code> is "used to mark local constants representing recursive functions<br>
         in recursive equations and <code>match</code> statements."</p>
 
 <a name="136256893"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/expr/near/136256893" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83264expr.html#136256893">Mario Carneiro (Oct 22 2018 at 11:57)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/expr/near/136256893" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83264expr.html#136256893">Mario Carneiro (Oct 22 2018 at 20:57)</a>:</h4>
 <p><code>aux_decl</code> is used for <code>_match</code>, <code>_fun_match</code>, <code>_let_match</code> and the self reference that appears in recursive pattern matching</p>
 
 <a name="136256937"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/expr/near/136256937" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83264expr.html#136256937">Mario Carneiro (Oct 22 2018 at 11:58)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/expr/near/136256937" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83264expr.html#136256937">Mario Carneiro (Oct 22 2018 at 20:58)</a>:</h4>
 <p>these are not real local constants, but rather trigger recursive compilation when used</p>
 
 <a name="136369830"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/expr/near/136369830" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83264expr.html#136369830">Chris Hughes (Oct 23 2018 at 23:50)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/expr/near/136369830" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83264expr.html#136369830">Chris Hughes (Oct 24 2018 at 08:50)</a>:</h4>
 <p>If <code>pexpr</code> and <code>expr</code> are more or less the exact same inductive type how are they different? Is it just because in practice we never define them from constructors ourselves and always use the inbuilt functions which treat <code>pexpr</code> and <code>expr</code> differently even though the type doesn't force them to?</p>
 
 <a name="136382261"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/expr/near/136382261" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83264expr.html#136382261">Floris van Doorn (Oct 24 2018 at 04:38)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/expr/near/136382261" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83264expr.html#136382261">Floris van Doorn (Oct 24 2018 at 13:38)</a>:</h4>
 <p>As Gabriel said above, the same term is represented differently as an <code>pexpr</code> than as an <code>expr</code>. Moreover, for both structures there are some constants such as <code>expr.mk_sorry</code>, <code>pexpr.mk_placeholder</code> and <code>pexpr.mk_explicit</code> which only exist in one of the two variants, but not the other. These are not represented by the inductive structure. But <code>mk_placeholder</code> and <code>mk_explicit</code> will be used (for example) by the tactic <code>to_expr</code>.</p>
 
 <a name="136660474"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/expr/near/136660474" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83264expr.html#136660474">Chris Hughes (Oct 28 2018 at 17:52)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/expr/near/136660474" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83264expr.html#136660474">Chris Hughes (Oct 29 2018 at 03:52)</a>:</h4>
 <p>Is there an easy way of printing an <code>expr</code> in terms of the constructors of <code>expr</code>?</p>
 
 <a name="136661109"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/expr/near/136661109" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83264expr.html#136661109">Rob Lewis (Oct 28 2018 at 18:07)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/expr/near/136661109" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83264expr.html#136661109">Rob Lewis (Oct 29 2018 at 04:07)</a>:</h4>
 <p><code>expr.to_raw_fmt</code></p>
 
 <a name="136661131"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/expr/near/136661131" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83264expr.html#136661131">Chris Hughes (Oct 28 2018 at 18:07)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/expr/near/136661131" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83264expr.html#136661131">Chris Hughes (Oct 29 2018 at 04:07)</a>:</h4>
 <p>Thanks</p>
 
 <a name="137160587"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/expr/near/137160587" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83264expr.html#137160587">Chris Hughes (Nov 04 2018 at 16:52)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/expr/near/137160587" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83264expr.html#137160587">Chris Hughes (Nov 05 2018 at 02:52)</a>:</h4>
 <p>If I'm writing a tactic and I have <code>e : expr</code>, which is a proof of equality, how would I do <code>rw e at *</code> say, or <code>simp [e] at *</code> as part of a tactic?</p>
 
 <a name="137178093"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/expr/near/137178093" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83264expr.html#137178093">Keeley Hoek (Nov 05 2018 at 01:55)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/expr/near/137178093" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83264expr.html#137178093">Keeley Hoek (Nov 05 2018 at 11:55)</a>:</h4>
 <p>You can <code>rw</code> another arbitrary <code>expr</code> using <code>rewrite_core</code>. I would have to read the <code>tactic.interactive.rw</code> definition to see how it replaces local hypotheses, too, but that's the idea.</p>
 <p>For <code>simp</code> you need to call <code>mk_simp_set</code> and then add your lemma to it. Then you need to pass that data to the built-in function <code>tactic.simplify</code>.</p>
 
 <a name="137181620"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/expr/near/137181620" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83264expr.html#137181620">Scott Morrison (Nov 05 2018 at 03:59)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/expr/near/137181620" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83264expr.html#137181620">Scott Morrison (Nov 05 2018 at 13:59)</a>:</h4>
 <p>often a cheap way to do these sorts of things is using tactic quotations, e.g. <code> `[simp at *] </code></p>
 
 <a name="137181673"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/expr/near/137181673" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83264expr.html#137181673">Scott Morrison (Nov 05 2018 at 04:00)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/expr/near/137181673" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83264expr.html#137181673">Scott Morrison (Nov 05 2018 at 14:00)</a>:</h4>
 <p>I'm guessing you can use antiquotations, and write something like <code> `[simp [%%e] at *]</code>.</p>
 
 

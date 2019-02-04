@@ -12,12 +12,12 @@ permalink: archive/113489newmembers/04628Inductivepropsyntax.html
 <base href="https://leanprover.zulipchat.com">
 {% raw %}
 <a name="133006097"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Inductive%20prop%20syntax/near/133006097" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/04628Inductivepropsyntax.html#133006097">cbailey (Aug 29 2018 at 18:06)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Inductive%20prop%20syntax/near/133006097" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/04628Inductivepropsyntax.html#133006097">cbailey (Aug 30 2018 at 02:06)</a>:</h4>
 <p>Hi, I was wondering if anyone can explain the inductive prop syntax in Lean a little bit; the definition of less_than_or_equal in basic.lean is written in a way that returns a partially applied function for the base case (|refl: less_than_or_equal a), but it doesn't visibly define behavior for that curried return function that would actually say when the prop is true. I noticed that if I #print less_than_or_equal, it comes back as the more familiar Coq style of |refl: forall (a: nat), less_than_or_equal a a, where you explicitly say this prop is true if the two elements are a and a, and the prop has the signature nat -&gt; nat -&gt; Prop without the named (a: nat) parameter. Does Lean default to using reflexivity as the truth condition for an inductively defined prop's base case, or is there something more important about the partially applied function that I'm missing?<br>
 Thanks!</p>
 
 <a name="133012820"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Inductive%20prop%20syntax/near/133012820" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/04628Inductivepropsyntax.html#133012820">Kevin Buzzard (Aug 29 2018 at 20:17)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Inductive%20prop%20syntax/near/133012820" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/04628Inductivepropsyntax.html#133012820">Kevin Buzzard (Aug 30 2018 at 04:17)</a>:</h4>
 <p>These aren't partially applied -- there's a trick. The definition is</p>
 <div class="codehilite"><pre><span></span><span class="kn">inductive</span> <span class="n">less_than_or_equal</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="kt">Prop</span>
 <span class="bp">|</span> <span class="n">refl</span> <span class="o">:</span> <span class="n">less_than_or_equal</span> <span class="n">a</span>
@@ -28,7 +28,7 @@ Thanks!</p>
 <p>but you see the <code>a</code> in the first line is left of the colon, so when you see <code>less_than_or_equal</code> on the second or third line you should read <code>less_than_or_equal a</code>. Now it all makes sense :-)</p>
 
 <a name="133062381"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Inductive%20prop%20syntax/near/133062381" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/04628Inductivepropsyntax.html#133062381">cbailey (Aug 30 2018 at 16:08)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Inductive%20prop%20syntax/near/133062381" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/04628Inductivepropsyntax.html#133062381">cbailey (Aug 31 2018 at 00:08)</a>:</h4>
 <p>Thank you! That makes sense.</p>
 
 

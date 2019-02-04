@@ -12,7 +12,7 @@ permalink: archive/113488general/51666Potentialvmbug.html
 <base href="https://leanprover.zulipchat.com">
 {% raw %}
 <a name="131950146"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Potential%20vm%20bug/near/131950146" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51666Potentialvmbug.html#131950146">Keeley Hoek (Aug 11 2018 at 13:10)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Potential%20vm%20bug/near/131950146" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51666Potentialvmbug.html#131950146">Keeley Hoek (Aug 11 2018 at 21:10)</a>:</h4>
 <p>The following code typechecks:</p>
 <div class="codehilite"><pre><span></span>meta def oopsie : list string → tactic (option string)
 | [] := none                          -- I&#39;m being naughty on this line
@@ -25,38 +25,38 @@ permalink: archive/113488general/51666Potentialvmbug.html
 <p>I don't understand why it should. If I inspect the output of the <code>#eval</code>, I see the output "failed". Have I found a bug in the VM?</p>
 
 <a name="131950892"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Potential%20vm%20bug/near/131950892" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51666Potentialvmbug.html#131950892">Edward Ayers (Aug 11 2018 at 13:32)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Potential%20vm%20bug/near/131950892" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51666Potentialvmbug.html#131950892">Edward Ayers (Aug 11 2018 at 21:32)</a>:</h4>
 <p>There is a coercion from <code>option </code> to <code>tactic</code> in <code>tactic.lean</code>:</p>
 <div class="codehilite"><pre><span></span><span class="n">meta</span> <span class="kn">instance</span> <span class="n">opt_to_tac</span> <span class="o">:</span> <span class="n">has_coe</span> <span class="o">(</span><span class="n">option</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">tactic</span> <span class="n">α</span><span class="o">)</span> <span class="o">:=</span>
 <span class="bp">⟨</span><span class="n">returnopt</span><span class="bp">⟩</span>
 </pre></div>
 
 <a name="131950909"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Potential%20vm%20bug/near/131950909" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51666Potentialvmbug.html#131950909">Edward Ayers (Aug 11 2018 at 13:33)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Potential%20vm%20bug/near/131950909" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51666Potentialvmbug.html#131950909">Edward Ayers (Aug 11 2018 at 21:33)</a>:</h4>
 <p>So your tactic will throw if you give it an empty list</p>
 
 <a name="131951022"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Potential%20vm%20bug/near/131951022" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51666Potentialvmbug.html#131951022">Keeley Hoek (Aug 11 2018 at 13:36)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Potential%20vm%20bug/near/131951022" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51666Potentialvmbug.html#131951022">Keeley Hoek (Aug 11 2018 at 21:36)</a>:</h4>
 <p>Ah, cheers!</p>
 
 <a name="131951093"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Potential%20vm%20bug/near/131951093" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51666Potentialvmbug.html#131951093">Edward Ayers (Aug 11 2018 at 13:38)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Potential%20vm%20bug/near/131951093" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51666Potentialvmbug.html#131951093">Edward Ayers (Aug 11 2018 at 21:38)</a>:</h4>
 <p>I only spotted this because I happen to be reading <code>tactic.lean</code> currently. Does anyone know if there is a way to discover what coercions are occurring in a given expression? Or a <code>#command</code> which will tell me coercions to a particular type?</p>
 
 <a name="131951679"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Potential%20vm%20bug/near/131951679" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51666Potentialvmbug.html#131951679">Edward Ayers (Aug 11 2018 at 13:55)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Potential%20vm%20bug/near/131951679" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51666Potentialvmbug.html#131951679">Edward Ayers (Aug 11 2018 at 21:55)</a>:</h4>
 <p>I can't figure out how to use<br>
 <code>set_option pp.coercions true</code></p>
 
 <a name="131960579"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Potential%20vm%20bug/near/131960579" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51666Potentialvmbug.html#131960579">Simon Hudon (Aug 11 2018 at 18:10)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Potential%20vm%20bug/near/131960579" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51666Potentialvmbug.html#131960579">Simon Hudon (Aug 12 2018 at 02:10)</a>:</h4>
 <blockquote>
 <p>I only spotted this because I happen to be reading tactic.lean currently.</p>
 </blockquote>
 <p>Good read! Don't spoil the ending though!</p>
 
 <a name="131960581"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Potential%20vm%20bug/near/131960581" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51666Potentialvmbug.html#131960581">Simon Hudon (Aug 11 2018 at 18:10)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Potential%20vm%20bug/near/131960581" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51666Potentialvmbug.html#131960581">Simon Hudon (Aug 12 2018 at 02:10)</a>:</h4>
 <blockquote>
 <p>Does anyone know if there is a way to discover what coercions are occurring in a given expression?</p>
 </blockquote>

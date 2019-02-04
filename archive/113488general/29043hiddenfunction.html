@@ -12,7 +12,7 @@ permalink: archive/113488general/29043hiddenfunction.html
 <base href="https://leanprover.zulipchat.com">
 {% raw %}
 <a name="151838238"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hidden%20function/near/151838238" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29043hiddenfunction.html#151838238">Mario Carneiro (Dec 15 2018 at 15:01)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hidden%20function/near/151838238" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29043hiddenfunction.html#151838238">Mario Carneiro (Dec 16 2018 at 01:01)</a>:</h4>
 <p>I just noticed a very clever trick that was used in a Coq development. We can define the following function:</p>
 <div class="codehilite"><pre><span></span><span class="bp">@</span><span class="o">[</span><span class="kn">reducible</span><span class="o">]</span> <span class="n">def</span> <span class="n">hidden</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="n">Sort</span><span class="bp">*</span><span class="o">}</span> <span class="o">{</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">}</span> <span class="o">:=</span> <span class="n">a</span>
 </pre></div>
@@ -21,7 +21,7 @@ permalink: archive/113488general/29043hiddenfunction.html
 <p>This obviously isn't a very ergonomic function to write directly, but it can be used in tactics that have to manipulate large proof states and display them to the user, without getting in the way of any automation. (I should investigate if this is an appropriate use of <code>abbreviation</code>.) For example, we could have a tactic <code>hide x</code> which <code>change</code>s the type of <code>x : T</code> to <code>x : @hidden _ T</code>. The zero arg version could just do this for all assumptions whose pp is above a certain length. The Coq example was using this when proving theorems about large programs, to hide the "rest" of the program when working one statement at a time.</p>
 
 <a name="151838734"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hidden%20function/near/151838734" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29043hiddenfunction.html#151838734">Mario Carneiro (Dec 15 2018 at 15:19)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hidden%20function/near/151838734" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29043hiddenfunction.html#151838734">Mario Carneiro (Dec 16 2018 at 01:19)</a>:</h4>
 <p>demo:</p>
 <div class="codehilite"><pre><span></span><span class="bp">@</span><span class="o">[</span><span class="kn">reducible</span><span class="o">]</span> <span class="n">def</span> <span class="n">hidden</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="n">Sort</span><span class="bp">*</span><span class="o">}</span> <span class="o">{</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">}</span> <span class="o">:=</span> <span class="n">a</span>
 
@@ -65,146 +65,146 @@ permalink: archive/113488general/29043hiddenfunction.html
 </pre></div>
 
 <a name="151839702"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hidden%20function/near/151839702" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29043hiddenfunction.html#151839702">Kevin Buzzard (Dec 15 2018 at 15:53)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hidden%20function/near/151839702" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29043hiddenfunction.html#151839702">Kevin Buzzard (Dec 16 2018 at 01:53)</a>:</h4>
 <p>that's pretty cool :-)</p>
 
 <a name="151841751"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hidden%20function/near/151841751" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29043hiddenfunction.html#151841751">Patrick Massot (Dec 15 2018 at 17:00)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hidden%20function/near/151841751" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29043hiddenfunction.html#151841751">Patrick Massot (Dec 16 2018 at 03:00)</a>:</h4>
 <p>It looks pretty cool. What is the exact meaning of the numeric parameter?</p>
 
 <a name="151841879"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hidden%20function/near/151841879" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29043hiddenfunction.html#151841879">Mario Carneiro (Dec 15 2018 at 17:05)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hidden%20function/near/151841879" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29043hiddenfunction.html#151841879">Mario Carneiro (Dec 16 2018 at 03:05)</a>:</h4>
 <p>it's the depth at which to start replacing subterms by <code>hidden</code></p>
 
 <a name="151841932"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hidden%20function/near/151841932" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29043hiddenfunction.html#151841932">Mario Carneiro (Dec 15 2018 at 17:06)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hidden%20function/near/151841932" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29043hiddenfunction.html#151841932">Mario Carneiro (Dec 16 2018 at 03:06)</a>:</h4>
 <p>so higher means less hidden</p>
 
 <a name="154049336"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hidden%20function/near/154049336" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29043hiddenfunction.html#154049336">Reid Barton (Dec 30 2018 at 17:10)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hidden%20function/near/154049336" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29043hiddenfunction.html#154049336">Reid Barton (Dec 31 2018 at 03:10)</a>:</h4>
 <p>Would it be possible to have a version which replaces proofs by <code>proof_of P</code>, where <code>@[reducible] def proof_of (P : Prop) {p : P} := p</code></p>
 
 <a name="154049346"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hidden%20function/near/154049346" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29043hiddenfunction.html#154049346">Reid Barton (Dec 30 2018 at 17:10)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hidden%20function/near/154049346" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29043hiddenfunction.html#154049346">Reid Barton (Dec 31 2018 at 03:10)</a>:</h4>
 <p>and then maybe add some notation for <code>proof_of P</code> to match <code>\f&lt;P\f&gt;</code></p>
 
 <a name="154049362"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hidden%20function/near/154049362" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29043hiddenfunction.html#154049362">Reid Barton (Dec 30 2018 at 17:11)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hidden%20function/near/154049362" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29043hiddenfunction.html#154049362">Reid Barton (Dec 31 2018 at 03:11)</a>:</h4>
 <p>I thought that some combination of <code>pp</code> options was supposed to do this already, but I never figured out how</p>
 
 <a name="154052011"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hidden%20function/near/154052011" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29043hiddenfunction.html#154052011">Mario Carneiro (Dec 30 2018 at 18:33)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hidden%20function/near/154052011" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29043hiddenfunction.html#154052011">Mario Carneiro (Dec 31 2018 at 04:33)</a>:</h4>
 <p>well, just replacing that on its own won't work since it's still a prop so it gets displayed as <code>_</code> anyway</p>
 
 <a name="154052013"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hidden%20function/near/154052013" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29043hiddenfunction.html#154052013">Reid Barton (Dec 30 2018 at 18:33)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hidden%20function/near/154052013" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29043hiddenfunction.html#154052013">Reid Barton (Dec 31 2018 at 04:33)</a>:</h4>
 <p>Oh dang</p>
 
 <a name="154052015"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hidden%20function/near/154052015" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29043hiddenfunction.html#154052015">Mario Carneiro (Dec 30 2018 at 18:33)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hidden%20function/near/154052015" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29043hiddenfunction.html#154052015">Mario Carneiro (Dec 31 2018 at 04:33)</a>:</h4>
 <p>but if you turn off <code>pp.proofs</code> then you can see it</p>
 
 <a name="154052068"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hidden%20function/near/154052068" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29043hiddenfunction.html#154052068">Mario Carneiro (Dec 30 2018 at 18:35)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hidden%20function/near/154052068" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29043hiddenfunction.html#154052068">Mario Carneiro (Dec 31 2018 at 04:35)</a>:</h4>
 <p>Then again, I think tactics can change options so you could have a tactic like <code>elide</code> that turns of <code>pp.proofs</code> at the same time as the replacement</p>
 
 <a name="154052069"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hidden%20function/near/154052069" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29043hiddenfunction.html#154052069">Reid Barton (Dec 30 2018 at 18:35)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hidden%20function/near/154052069" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29043hiddenfunction.html#154052069">Reid Barton (Dec 31 2018 at 04:35)</a>:</h4>
 <p>Oh, turn <em>off</em>? Okay, that's one thing that confused me</p>
 
 <a name="154052072"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hidden%20function/near/154052072" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29043hiddenfunction.html#154052072">Mario Carneiro (Dec 30 2018 at 18:35)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hidden%20function/near/154052072" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29043hiddenfunction.html#154052072">Mario Carneiro (Dec 31 2018 at 04:35)</a>:</h4>
 <p>oh that's a good point, I forget the polarity</p>
 
 <a name="154052111"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hidden%20function/near/154052111" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29043hiddenfunction.html#154052111">Kenny Lau (Dec 30 2018 at 18:36)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hidden%20function/near/154052111" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29043hiddenfunction.html#154052111">Kenny Lau (Dec 31 2018 at 04:36)</a>:</h4>
 <p>and what difference does <code>reducible</code> make?</p>
 
 <a name="154052114"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hidden%20function/near/154052114" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29043hiddenfunction.html#154052114">Reid Barton (Dec 30 2018 at 18:36)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hidden%20function/near/154052114" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29043hiddenfunction.html#154052114">Reid Barton (Dec 31 2018 at 04:36)</a>:</h4>
 <p>actually now I'm doubly confused</p>
 
 <a name="154052117"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hidden%20function/near/154052117" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29043hiddenfunction.html#154052117">Reid Barton (Dec 30 2018 at 18:36)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hidden%20function/near/154052117" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29043hiddenfunction.html#154052117">Reid Barton (Dec 31 2018 at 04:36)</a>:</h4>
 <p>By experiment, I find that <code>set_option pp.proofs true</code> will display proofs</p>
 
 <a name="154052118"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hidden%20function/near/154052118" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29043hiddenfunction.html#154052118">Mario Carneiro (Dec 30 2018 at 18:36)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hidden%20function/near/154052118" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29043hiddenfunction.html#154052118">Mario Carneiro (Dec 31 2018 at 04:36)</a>:</h4>
 <p>but that's the default?</p>
 
 <a name="154052119"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hidden%20function/near/154052119" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29043hiddenfunction.html#154052119">Reid Barton (Dec 30 2018 at 18:36)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hidden%20function/near/154052119" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29043hiddenfunction.html#154052119">Reid Barton (Dec 31 2018 at 04:36)</a>:</h4>
 <p>Yes</p>
 
 <a name="154052120"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hidden%20function/near/154052120" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29043hiddenfunction.html#154052120">Reid Barton (Dec 30 2018 at 18:37)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hidden%20function/near/154052120" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29043hiddenfunction.html#154052120">Reid Barton (Dec 31 2018 at 04:37)</a>:</h4>
 <p>That is what is confusing me</p>
 
 <a name="154052126"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hidden%20function/near/154052126" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29043hiddenfunction.html#154052126">Reid Barton (Dec 30 2018 at 18:37)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hidden%20function/near/154052126" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29043hiddenfunction.html#154052126">Reid Barton (Dec 31 2018 at 04:37)</a>:</h4>
 <p>At least, that's what the autocompletion menu claims is the default. But setting it to <code>true</code> still causes proofs to be printed, and <code>false</code> causes them to be elided (which they are by default)</p>
 
 <a name="154052128"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hidden%20function/near/154052128" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29043hiddenfunction.html#154052128">Mario Carneiro (Dec 30 2018 at 18:37)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hidden%20function/near/154052128" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29043hiddenfunction.html#154052128">Mario Carneiro (Dec 31 2018 at 04:37)</a>:</h4>
 <p>reducible doesn't matter much, but it makes these identity functions not interfere with other tactics</p>
 
 <a name="154052178"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hidden%20function/near/154052178" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29043hiddenfunction.html#154052178">Mario Carneiro (Dec 30 2018 at 18:38)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hidden%20function/near/154052178" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29043hiddenfunction.html#154052178">Mario Carneiro (Dec 31 2018 at 04:38)</a>:</h4>
 <p>also the option description is a bit interesting -</p>
 <blockquote>
 <p>(pretty printer) if set to false, the type will be displayed instead of the value for every proof appearing as an argument to a function</p>
 </blockquote>
 
 <a name="154052187"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hidden%20function/near/154052187" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29043hiddenfunction.html#154052187">Reid Barton (Dec 30 2018 at 18:39)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hidden%20function/near/154052187" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29043hiddenfunction.html#154052187">Reid Barton (Dec 31 2018 at 04:39)</a>:</h4>
 <p>Okay, that's where I saw it. I knew I'd seen it claimed somewhere that this feature already existed</p>
 
 <a name="154052246"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hidden%20function/near/154052246" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29043hiddenfunction.html#154052246">Reid Barton (Dec 30 2018 at 18:41)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hidden%20function/near/154052246" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29043hiddenfunction.html#154052246">Reid Barton (Dec 31 2018 at 04:41)</a>:</h4>
 <p>Maybe there are like... two options with the same name or something</p>
 
 <a name="154052297"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hidden%20function/near/154052297" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29043hiddenfunction.html#154052297">Mario Carneiro (Dec 30 2018 at 18:42)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hidden%20function/near/154052297" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29043hiddenfunction.html#154052297">Mario Carneiro (Dec 31 2018 at 04:42)</a>:</h4>
 <p>I think the description is outdated... it used to do that and I recall lobbying for the <code>_</code> behavior</p>
 
 <a name="154052301"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hidden%20function/near/154052301" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29043hiddenfunction.html#154052301">Mario Carneiro (Dec 30 2018 at 18:42)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hidden%20function/near/154052301" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29043hiddenfunction.html#154052301">Mario Carneiro (Dec 31 2018 at 04:42)</a>:</h4>
 <p>I'm not sure if the type display thing was removed or replaced</p>
 
 <a name="154052308"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hidden%20function/near/154052308" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29043hiddenfunction.html#154052308">Mario Carneiro (Dec 30 2018 at 18:43)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hidden%20function/near/154052308" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29043hiddenfunction.html#154052308">Mario Carneiro (Dec 31 2018 at 04:43)</a>:</h4>
 <p>at least in the original version it just put the type instead of the proof and it was really confusing because it wasn't typecorrect</p>
 
 <a name="154052357"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hidden%20function/near/154052357" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29043hiddenfunction.html#154052357">Mario Carneiro (Dec 30 2018 at 18:44)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hidden%20function/near/154052357" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29043hiddenfunction.html#154052357">Mario Carneiro (Dec 31 2018 at 04:44)</a>:</h4>
 <p>looking at the code, I see no evidence that it does anything other than put <code>_</code> in places, and only when <code>pp.proofs = false</code></p>
 
 <a name="154052437"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hidden%20function/near/154052437" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29043hiddenfunction.html#154052437">Reid Barton (Dec 30 2018 at 18:47)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hidden%20function/near/154052437" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29043hiddenfunction.html#154052437">Reid Barton (Dec 31 2018 at 04:47)</a>:</h4>
 <p>I see. That does sound confusing, if there was nothing distinguishing the types of proofs from actual terms</p>
 
 <a name="154052486"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hidden%20function/near/154052486" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29043hiddenfunction.html#154052486">Mario Carneiro (Dec 30 2018 at 18:49)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hidden%20function/near/154052486" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29043hiddenfunction.html#154052486">Mario Carneiro (Dec 31 2018 at 04:49)</a>:</h4>
 <p>but I still can't figure out how the default turns out to be <code>false</code>, the code says it's <code>true</code></p>
 
 <a name="154052595"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hidden%20function/near/154052595" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29043hiddenfunction.html#154052595">Kenny Lau (Dec 30 2018 at 18:53)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hidden%20function/near/154052595" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29043hiddenfunction.html#154052595">Kenny Lau (Dec 31 2018 at 04:53)</a>:</h4>
 <p>truth is an illusion</p>
 
 <a name="154052597"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hidden%20function/near/154052597" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29043hiddenfunction.html#154052597">Gabriel Ebner (Dec 30 2018 at 18:53)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hidden%20function/near/154052597" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29043hiddenfunction.html#154052597">Gabriel Ebner (Dec 31 2018 at 04:53)</a>:</h4>
 <p>There is no constant default: <span class="emoji emoji-263a" title="smile">:smile:</span> <a href="https://github.com/leanprover/lean/blob/30d883efef422facab3bf351d9fcff90c943298f/src/frontends/lean/pp.cpp#L1911-L1917" target="_blank" title="https://github.com/leanprover/lean/blob/30d883efef422facab3bf351d9fcff90c943298f/src/frontends/lean/pp.cpp#L1911-L1917">https://github.com/leanprover/lean/blob/30d883efef422facab3bf351d9fcff90c943298f/src/frontends/lean/pp.cpp#L1911-L1917</a></p>
 
 <a name="154052639"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hidden%20function/near/154052639" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29043hiddenfunction.html#154052639">Mario Carneiro (Dec 30 2018 at 18:54)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hidden%20function/near/154052639" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29043hiddenfunction.html#154052639">Mario Carneiro (Dec 31 2018 at 04:54)</a>:</h4>
 <p>wtf is that special case</p>
 
 <a name="154052649"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hidden%20function/near/154052649" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29043hiddenfunction.html#154052649">Mario Carneiro (Dec 30 2018 at 18:55)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hidden%20function/near/154052649" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29043hiddenfunction.html#154052649">Mario Carneiro (Dec 31 2018 at 04:55)</a>:</h4>
 <p>so sneaky</p>
 
 <a name="154052693"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hidden%20function/near/154052693" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29043hiddenfunction.html#154052693">Mario Carneiro (Dec 30 2018 at 18:56)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/hidden%20function/near/154052693" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29043hiddenfunction.html#154052693">Mario Carneiro (Dec 31 2018 at 04:56)</a>:</h4>
 <p>I guess this is so that <code>#print theorem</code> doesn't show <code>theorem thm : T := _</code> which would not be nice</p>
 
 

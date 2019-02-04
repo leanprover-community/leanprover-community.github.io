@@ -12,7 +12,7 @@ permalink: archive/113489newmembers/43083indirectrecursioncheck.html
 <base href="https://leanprover.zulipchat.com">
 {% raw %}
 <a name="134713724"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/indirect%20recursion%20check/near/134713724" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43083indirectrecursioncheck.html#134713724">Scott Olson (Sep 27 2018 at 03:03)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/indirect%20recursion%20check/near/134713724" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43083indirectrecursioncheck.html#134713724">Scott Olson (Sep 27 2018 at 11:03)</a>:</h4>
 <p>A while ago I was porting some code from Coq to Lean and it was going very well, but there was one definition that reduces to something like this:</p>
 <div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">foo</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="n">bool</span><span class="o">)</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">bool</span> <span class="o">:=</span>
     <span class="n">f</span> <span class="n">n</span>
@@ -26,19 +26,19 @@ permalink: archive/113489newmembers/43083indirectrecursioncheck.html
 <p>I get "unexpected occurrence of recursive function" on <code>bar</code>. Is there any way to make this kind of definition work, and prove termination? I'm actually kind of surprised it worked in Coq in the first place...</p>
 
 <a name="134713786"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/indirect%20recursion%20check/near/134713786" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43083indirectrecursioncheck.html#134713786">Scott Olson (Sep 27 2018 at 03:04)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/indirect%20recursion%20check/near/134713786" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43083indirectrecursioncheck.html#134713786">Scott Olson (Sep 27 2018 at 11:04)</a>:</h4>
 <p>Effectively, you need to prove that <code>foo</code> only calls <code>bar</code> with something smaller than <code>n+1</code>, which it does in this case. Maybe it's technically possible, but the equation compiler in particular doesn't support it?</p>
 
 <a name="134717621"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/indirect%20recursion%20check/near/134717621" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43083indirectrecursioncheck.html#134717621">Simon Hudon (Sep 27 2018 at 04:45)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/indirect%20recursion%20check/near/134717621" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43083indirectrecursioncheck.html#134717621">Simon Hudon (Sep 27 2018 at 12:45)</a>:</h4>
 <p>It this example, you can inline <code>foo</code> but I assume that's not an option with what you're working on ...</p>
 
 <a name="134717700"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/indirect%20recursion%20check/near/134717700" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43083indirectrecursioncheck.html#134717700">Simon Hudon (Sep 27 2018 at 04:47)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/indirect%20recursion%20check/near/134717700" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43083indirectrecursioncheck.html#134717700">Simon Hudon (Sep 27 2018 at 12:47)</a>:</h4>
 <p>Otherwise, you can make <code>foo</code> and <code>bar</code> into mutually recursive functions</p>
 
 <a name="134719571"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/indirect%20recursion%20check/near/134719571" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43083indirectrecursioncheck.html#134719571">Scott Olson (Sep 27 2018 at 05:43)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/indirect%20recursion%20check/near/134719571" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43083indirectrecursioncheck.html#134719571">Scott Olson (Sep 27 2018 at 13:43)</a>:</h4>
 <p>It is possible but inconvenient to inline <code>foo</code> in the real code. It turned out more convenient to use a different approach to defining <code>bar</code> entirely.</p>
 <p>When I try a mutually recursive approach, I still get the same "unexpected occurrence of recursive function" error (which comes from the pattern compiler, I assume):</p>
 <div class="codehilite"><pre><span></span><span class="n">mutual</span> <span class="n">def</span> <span class="n">foo</span><span class="o">,</span> <span class="n">bar</span>
@@ -50,23 +50,23 @@ permalink: archive/113489newmembers/43083indirectrecursioncheck.html
 </pre></div>
 
 <a name="134719682"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/indirect%20recursion%20check/near/134719682" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43083indirectrecursioncheck.html#134719682">Scott Olson (Sep 27 2018 at 05:46)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/indirect%20recursion%20check/near/134719682" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43083indirectrecursioncheck.html#134719682">Scott Olson (Sep 27 2018 at 13:46)</a>:</h4>
 <p>When I find the time, I'll look up the original Coq example again for comparison.</p>
 
 <a name="134719755"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/indirect%20recursion%20check/near/134719755" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43083indirectrecursioncheck.html#134719755">Mario Carneiro (Sep 27 2018 at 05:48)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/indirect%20recursion%20check/near/134719755" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43083indirectrecursioncheck.html#134719755">Mario Carneiro (Sep 27 2018 at 13:48)</a>:</h4>
 <p>the idea is to define <code>bar</code> and <code>foo bar</code> by mutual recursion</p>
 
 <a name="134719758"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/indirect%20recursion%20check/near/134719758" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43083indirectrecursioncheck.html#134719758">Mario Carneiro (Sep 27 2018 at 05:48)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/indirect%20recursion%20check/near/134719758" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43083indirectrecursioncheck.html#134719758">Mario Carneiro (Sep 27 2018 at 13:48)</a>:</h4>
 <p>so you wouldn't have that first parameter in <code>foo</code></p>
 
 <a name="134719838"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/indirect%20recursion%20check/near/134719838" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43083indirectrecursioncheck.html#134719838">Simon Hudon (Sep 27 2018 at 05:50)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/indirect%20recursion%20check/near/134719838" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43083indirectrecursioncheck.html#134719838">Simon Hudon (Sep 27 2018 at 13:50)</a>:</h4>
 <p>What Mario said</p>
 
 <a name="134720141"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/indirect%20recursion%20check/near/134720141" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43083indirectrecursioncheck.html#134720141">Simon Hudon (Sep 27 2018 at 05:59)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/indirect%20recursion%20check/near/134720141" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43083indirectrecursioncheck.html#134720141">Simon Hudon (Sep 27 2018 at 13:59)</a>:</h4>
 <p>So that would look like:</p>
 <div class="codehilite"><pre><span></span><span class="n">mutual</span> <span class="n">def</span> <span class="n">foo</span><span class="o">,</span> <span class="n">bar</span>
 <span class="k">with</span> <span class="n">foo</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="n">bool</span>
@@ -77,7 +77,7 @@ permalink: archive/113489newmembers/43083indirectrecursioncheck.html
 </pre></div>
 
 <a name="134720156"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/indirect%20recursion%20check/near/134720156" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43083indirectrecursioncheck.html#134720156">Scott Olson (Sep 27 2018 at 05:59)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/indirect%20recursion%20check/near/134720156" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43083indirectrecursioncheck.html#134720156">Scott Olson (Sep 27 2018 at 13:59)</a>:</h4>
 <p>Hmm, I suspect I still haven't fully understood, but here's my latest attempt:</p>
 <div class="codehilite"><pre><span></span><span class="c1">-- (To be clear this is elsewhere, can&#39;t be changed, inconvenient to inline.)</span>
 <span class="n">def</span> <span class="n">foo</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="n">bool</span><span class="o">)</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">bool</span> <span class="o">:=</span> <span class="n">f</span> <span class="n">n</span>
@@ -94,35 +94,35 @@ permalink: archive/113489newmembers/43083indirectrecursioncheck.html
 <p>Which has the same "unexpected occurrence of recursive function" message.</p>
 
 <a name="134720226"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/indirect%20recursion%20check/near/134720226" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43083indirectrecursioncheck.html#134720226">Mario Carneiro (Sep 27 2018 at 06:00)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/indirect%20recursion%20check/near/134720226" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43083indirectrecursioncheck.html#134720226">Mario Carneiro (Sep 27 2018 at 14:00)</a>:</h4>
 <p>that is trouble, because you need to know that <code>foo</code> doesn't look at future values of <code>bar</code></p>
 
 <a name="134720245"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/indirect%20recursion%20check/near/134720245" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43083indirectrecursioncheck.html#134720245">Scott Olson (Sep 27 2018 at 06:01)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/indirect%20recursion%20check/near/134720245" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43083indirectrecursioncheck.html#134720245">Scott Olson (Sep 27 2018 at 14:01)</a>:</h4>
 <p>Yeah, it's definitely fair for Lean to reject it. I think I'll come back to this thread when I've found the Coq example to compare with</p>
 
 <a name="134720292"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/indirect%20recursion%20check/near/134720292" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43083indirectrecursioncheck.html#134720292">Mario Carneiro (Sep 27 2018 at 06:02)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/indirect%20recursion%20check/near/134720292" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43083indirectrecursioncheck.html#134720292">Mario Carneiro (Sep 27 2018 at 14:02)</a>:</h4>
 <p>One option, used with things like <code>list.map</code>, is to use a theorem like <code>map_congr</code> to acquire an assumption that is needed for the recursion, or use a partial function like <code>list.pmap</code></p>
 
 <a name="134720313"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/indirect%20recursion%20check/near/134720313" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43083indirectrecursioncheck.html#134720313">Scott Olson (Sep 27 2018 at 06:03)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/indirect%20recursion%20check/near/134720313" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43083indirectrecursioncheck.html#134720313">Scott Olson (Sep 27 2018 at 14:03)</a>:</h4>
 <p>I <em>think</em> the difference is Coq allowed the code with an explicit termination proof, whereas Lean's equation compiler won't even touch it</p>
 
 <a name="134720318"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/indirect%20recursion%20check/near/134720318" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43083indirectrecursioncheck.html#134720318">Scott Olson (Sep 27 2018 at 06:03)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/indirect%20recursion%20check/near/134720318" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43083indirectrecursioncheck.html#134720318">Scott Olson (Sep 27 2018 at 14:03)</a>:</h4>
 <p>Unlike simpler examples where you just need to prove something is decreasing</p>
 
 <a name="134720321"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/indirect%20recursion%20check/near/134720321" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43083indirectrecursioncheck.html#134720321">Mario Carneiro (Sep 27 2018 at 06:03)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/indirect%20recursion%20check/near/134720321" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43083indirectrecursioncheck.html#134720321">Mario Carneiro (Sep 27 2018 at 14:03)</a>:</h4>
 <p>lean allows explicit termination proofs, but you have to thread the proof through in a kind of awkward way</p>
 
 <a name="134720365"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/indirect%20recursion%20check/near/134720365" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43083indirectrecursioncheck.html#134720365">Mario Carneiro (Sep 27 2018 at 06:04)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/indirect%20recursion%20check/near/134720365" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43083indirectrecursioncheck.html#134720365">Mario Carneiro (Sep 27 2018 at 14:04)</a>:</h4>
 <p>I would need a more concrete example to demonstrate</p>
 
 <a name="134720386"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/indirect%20recursion%20check/near/134720386" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43083indirectrecursioncheck.html#134720386">Scott Olson (Sep 27 2018 at 06:05)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/indirect%20recursion%20check/near/134720386" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43083indirectrecursioncheck.html#134720386">Scott Olson (Sep 27 2018 at 14:05)</a>:</h4>
 <p>I've got to head out for now but I'll come back to this with more details</p>
 
 

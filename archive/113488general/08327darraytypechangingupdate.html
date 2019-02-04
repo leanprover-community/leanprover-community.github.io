@@ -12,7 +12,7 @@ permalink: archive/113488general/08327darraytypechangingupdate.html
 <base href="https://leanprover.zulipchat.com">
 {% raw %}
 <a name="125705649"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60d_array%60%20type%20changing%20update/near/125705649" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08327darraytypechangingupdate.html#125705649">Simon Hudon (Apr 26 2018 at 05:46)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60d_array%60%20type%20changing%20update/near/125705649" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08327darraytypechangingupdate.html#125705649">Simon Hudon (Apr 26 2018 at 13:46)</a>:</h4>
 <p>In <code>data.array.basic</code>, there's an optimized mutation function:</p>
 <div class="codehilite"><pre><span></span>def foreach (a : d_array n α) (f : Π i : fin n, α i → α i) : d_array n α :=
 ...
@@ -28,63 +28,63 @@ permalink: archive/113488general/08327darraytypechangingupdate.html
 <p>Ultimately, I'm trying to implement <code>traversable</code> for array and I'd like it to not be too slow. If the required functions are not available, should I postpone submitting a traversable instance of array to <code>mathlib</code> until it can be done efficiently?</p>
 
 <a name="125706021"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60d_array%60%20type%20changing%20update/near/125706021" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08327darraytypechangingupdate.html#125706021">Mario Carneiro (Apr 26 2018 at 05:57)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60d_array%60%20type%20changing%20update/near/125706021" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08327darraytypechangingupdate.html#125706021">Mario Carneiro (Apr 26 2018 at 13:57)</a>:</h4>
 <p>No, it's an in-place update so the type has to stay fixed.</p>
 
 <a name="125706063"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60d_array%60%20type%20changing%20update/near/125706063" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08327darraytypechangingupdate.html#125706063">Simon Hudon (Apr 26 2018 at 05:58)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60d_array%60%20type%20changing%20update/near/125706063" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08327darraytypechangingupdate.html#125706063">Simon Hudon (Apr 26 2018 at 13:58)</a>:</h4>
 <p>Because the amount of memory allocated per element?</p>
 
 <a name="125706064"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60d_array%60%20type%20changing%20update/near/125706064" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08327darraytypechangingupdate.html#125706064">Mario Carneiro (Apr 26 2018 at 05:58)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60d_array%60%20type%20changing%20update/near/125706064" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08327darraytypechangingupdate.html#125706064">Mario Carneiro (Apr 26 2018 at 13:58)</a>:</h4>
 <p>It's conceivable that you could use an auxiliary array of sigma types (which would be erased on the vm side)</p>
 
 <a name="125706075"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60d_array%60%20type%20changing%20update/near/125706075" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08327darraytypechangingupdate.html#125706075">Mario Carneiro (Apr 26 2018 at 05:59)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60d_array%60%20type%20changing%20update/near/125706075" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08327darraytypechangingupdate.html#125706075">Mario Carneiro (Apr 26 2018 at 13:59)</a>:</h4>
 <p>It updates like this: [1, 2, 3] -&gt; [f 1, 2, 3] -&gt; [f 1, f 2, 3] -&gt; [f 1, f 2, f 3]</p>
 
 <a name="125706079"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60d_array%60%20type%20changing%20update/near/125706079" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08327darraytypechangingupdate.html#125706079">Mario Carneiro (Apr 26 2018 at 05:59)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60d_array%60%20type%20changing%20update/near/125706079" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08327darraytypechangingupdate.html#125706079">Mario Carneiro (Apr 26 2018 at 13:59)</a>:</h4>
 <p>Each update is performed on the same underlying data structure so that space isn't wasted</p>
 
 <a name="125706080"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60d_array%60%20type%20changing%20update/near/125706080" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08327darraytypechangingupdate.html#125706080">Simon Hudon (Apr 26 2018 at 05:59)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60d_array%60%20type%20changing%20update/near/125706080" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08327darraytypechangingupdate.html#125706080">Simon Hudon (Apr 26 2018 at 13:59)</a>:</h4>
 <p>Right but now, <code>array</code> is based on <code>d_array</code> where the type of elements depends on indices</p>
 
 <a name="125706126"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60d_array%60%20type%20changing%20update/near/125706126" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08327darraytypechangingupdate.html#125706126">Simon Hudon (Apr 26 2018 at 06:00)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60d_array%60%20type%20changing%20update/near/125706126" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08327darraytypechangingupdate.html#125706126">Simon Hudon (Apr 26 2018 at 14:00)</a>:</h4>
 <p>So the intermediate arrays are well-typed</p>
 
 <a name="125706138"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60d_array%60%20type%20changing%20update/near/125706138" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08327darraytypechangingupdate.html#125706138">Mario Carneiro (Apr 26 2018 at 06:01)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60d_array%60%20type%20changing%20update/near/125706138" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08327darraytypechangingupdate.html#125706138">Mario Carneiro (Apr 26 2018 at 14:01)</a>:</h4>
 <p>The core function doing the in place write is <code>array.write</code> and this function doesn't change the type of the argument</p>
 
 <a name="125706181"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60d_array%60%20type%20changing%20update/near/125706181" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08327darraytypechangingupdate.html#125706181">Mario Carneiro (Apr 26 2018 at 06:02)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60d_array%60%20type%20changing%20update/near/125706181" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08327darraytypechangingupdate.html#125706181">Mario Carneiro (Apr 26 2018 at 14:02)</a>:</h4>
 <p>oh wait, the comment says that <code>foreach</code> is also given a builtin impl</p>
 
 <a name="125706239"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60d_array%60%20type%20changing%20update/near/125706239" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08327darraytypechangingupdate.html#125706239">Mario Carneiro (Apr 26 2018 at 06:04)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60d_array%60%20type%20changing%20update/near/125706239" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08327darraytypechangingupdate.html#125706239">Mario Carneiro (Apr 26 2018 at 14:04)</a>:</h4>
 <p>Maybe you can get similar performance with <code>iterate</code> to build the new array?</p>
 
 <a name="125706298"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60d_array%60%20type%20changing%20update/near/125706298" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08327darraytypechangingupdate.html#125706298">Simon Hudon (Apr 26 2018 at 06:05)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60d_array%60%20type%20changing%20update/near/125706298" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08327darraytypechangingupdate.html#125706298">Simon Hudon (Apr 26 2018 at 14:05)</a>:</h4>
 <p>Actually, maybe I'm better off converting to list, traversing the list and converting back to array: if I'm executing within a monad like list that would mean duplicating the array a lot while the list would share its tail so it wouldn't be so bad.</p>
 
 <a name="125706300"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60d_array%60%20type%20changing%20update/near/125706300" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08327darraytypechangingupdate.html#125706300">Mario Carneiro (Apr 26 2018 at 06:05)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60d_array%60%20type%20changing%20update/near/125706300" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08327darraytypechangingupdate.html#125706300">Mario Carneiro (Apr 26 2018 at 14:05)</a>:</h4>
 <p>Actually I think <code>array.mk</code> is the most efficient option</p>
 
 <a name="125706344"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60d_array%60%20type%20changing%20update/near/125706344" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08327darraytypechangingupdate.html#125706344">Mario Carneiro (Apr 26 2018 at 06:06)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60d_array%60%20type%20changing%20update/near/125706344" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08327darraytypechangingupdate.html#125706344">Mario Carneiro (Apr 26 2018 at 14:06)</a>:</h4>
 <p>that will just evaluate the whole function at once to get the new elements</p>
 
 <a name="125706523"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60d_array%60%20type%20changing%20update/near/125706523" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08327darraytypechangingupdate.html#125706523">Simon Hudon (Apr 26 2018 at 06:10)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60d_array%60%20type%20changing%20update/near/125706523" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08327darraytypechangingupdate.html#125706523">Simon Hudon (Apr 26 2018 at 14:10)</a>:</h4>
 <p>I'm not sure how I could reconcile that with working within an applicative. I would have to store an accumulation of closures which does not sound good</p>
 
 <a name="125706533"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60d_array%60%20type%20changing%20update/near/125706533" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08327darraytypechangingupdate.html#125706533">Mario Carneiro (Apr 26 2018 at 06:11)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60d_array%60%20type%20changing%20update/near/125706533" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08327darraytypechangingupdate.html#125706533">Mario Carneiro (Apr 26 2018 at 14:11)</a>:</h4>
 <div class="codehilite"><pre><span></span>def d_array.map&#39;
   {n : nat} {α β : fin n → Type*}
   (a : d_array n α) (f : Π i : fin n, α i → β i) : d_array n β :=
@@ -100,23 +100,23 @@ permalink: archive/113488general/08327darraytypechangingupdate.html
 <p>Looks like it takes roughly linear time</p>
 
 <a name="125706583"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60d_array%60%20type%20changing%20update/near/125706583" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08327darraytypechangingupdate.html#125706583">Simon Hudon (Apr 26 2018 at 06:12)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60d_array%60%20type%20changing%20update/near/125706583" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08327darraytypechangingupdate.html#125706583">Simon Hudon (Apr 26 2018 at 14:12)</a>:</h4>
 <p>That looks good but it doesn't seem to address my comment</p>
 
 <a name="125706614"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60d_array%60%20type%20changing%20update/near/125706614" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08327darraytypechangingupdate.html#125706614">Mario Carneiro (Apr 26 2018 at 06:13)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60d_array%60%20type%20changing%20update/near/125706614" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08327darraytypechangingupdate.html#125706614">Mario Carneiro (Apr 26 2018 at 14:13)</a>:</h4>
 <p>It is important to realize that (unlike most constructors taking a function) <code>array.mk</code> does not store its argument function, it evaluates it and puts the result in an array</p>
 
 <a name="125706658"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60d_array%60%20type%20changing%20update/near/125706658" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08327darraytypechangingupdate.html#125706658">Mario Carneiro (Apr 26 2018 at 06:14)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60d_array%60%20type%20changing%20update/near/125706658" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08327darraytypechangingupdate.html#125706658">Mario Carneiro (Apr 26 2018 at 14:14)</a>:</h4>
 <p><code>array.mk f</code> is O(n), while <code>array'.mk f</code> would be O(1) if you wrote <code>array'</code> identically to <code>array</code></p>
 
 <a name="125706720"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60d_array%60%20type%20changing%20update/near/125706720" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08327darraytypechangingupdate.html#125706720">Mario Carneiro (Apr 26 2018 at 06:16)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60d_array%60%20type%20changing%20update/near/125706720" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08327darraytypechangingupdate.html#125706720">Mario Carneiro (Apr 26 2018 at 14:16)</a>:</h4>
 <p>and conversely, <code>a.read i</code> does not call the underlying function of <code>a</code></p>
 
 <a name="125706733"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60d_array%60%20type%20changing%20update/near/125706733" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08327darraytypechangingupdate.html#125706733">Mario Carneiro (Apr 26 2018 at 06:17)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60d_array%60%20type%20changing%20update/near/125706733" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08327darraytypechangingupdate.html#125706733">Mario Carneiro (Apr 26 2018 at 14:17)</a>:</h4>
 <div class="codehilite"><pre><span></span>#eval
   let f (a:fin 3) := trace (&quot;calling f &quot; ++ to_string a.1) a.1 in
   let a := d_array.mk f in
@@ -130,7 +130,7 @@ permalink: archive/113488general/08327darraytypechangingupdate.html
 </pre></div>
 
 <a name="125706833"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60d_array%60%20type%20changing%20update/near/125706833" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08327darraytypechangingupdate.html#125706833">Simon Hudon (Apr 26 2018 at 06:20)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60d_array%60%20type%20changing%20update/near/125706833" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08327darraytypechangingupdate.html#125706833">Simon Hudon (Apr 26 2018 at 14:20)</a>:</h4>
 <p>Right, that make sense but the reason I was talking about accumulating closures is that I'm thinking of  implementing the mutation by recursion because I have to combine applicative values:</p>
 <div class="codehilite"><pre><span></span>def traverse (g : α → f β) : Π n (a : array n α), f (fin n → β)
  | 0 a := -- ...
@@ -138,91 +138,91 @@ permalink: archive/113488general/08327darraytypechangingupdate.html
 </pre></div>
 
 <a name="125707001"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60d_array%60%20type%20changing%20update/near/125707001" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08327darraytypechangingupdate.html#125707001">Mario Carneiro (Apr 26 2018 at 06:27)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60d_array%60%20type%20changing%20update/near/125707001" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08327darraytypechangingupdate.html#125707001">Mario Carneiro (Apr 26 2018 at 14:27)</a>:</h4>
 <p>So you have a dependency between the different elements of the computation? Like calculating the first element affects the computation of the second</p>
 
 <a name="125707019"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60d_array%60%20type%20changing%20update/near/125707019" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08327darraytypechangingupdate.html#125707019">Simon Hudon (Apr 26 2018 at 06:28)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60d_array%60%20type%20changing%20update/near/125707019" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08327darraytypechangingupdate.html#125707019">Simon Hudon (Apr 26 2018 at 14:28)</a>:</h4>
 <p>It might. <code>f</code> is actually a parameter of which I only know that it's an applicative functor</p>
 
 <a name="125707043"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60d_array%60%20type%20changing%20update/near/125707043" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08327darraytypechangingupdate.html#125707043">Mario Carneiro (Apr 26 2018 at 06:28)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60d_array%60%20type%20changing%20update/near/125707043" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08327darraytypechangingupdate.html#125707043">Mario Carneiro (Apr 26 2018 at 14:28)</a>:</h4>
 <p>Do you have a default value for the array? This will be easier if you do</p>
 
 <a name="125707057"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60d_array%60%20type%20changing%20update/near/125707057" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08327darraytypechangingupdate.html#125707057">Simon Hudon (Apr 26 2018 at 06:30)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60d_array%60%20type%20changing%20update/near/125707057" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08327darraytypechangingupdate.html#125707057">Simon Hudon (Apr 26 2018 at 14:30)</a>:</h4>
 <p>Where would be the fun in "easy"? <span class="emoji emoji-1f61d" title="stuck out tongue closed eyes">:stuck_out_tongue_closed_eyes:</span>  I have no assumptions about either <code>α</code> or <code>β</code></p>
 
 <a name="125707105"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60d_array%60%20type%20changing%20update/near/125707105" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08327darraytypechangingupdate.html#125707105">Simon Hudon (Apr 26 2018 at 06:30)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60d_array%60%20type%20changing%20update/near/125707105" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08327darraytypechangingupdate.html#125707105">Simon Hudon (Apr 26 2018 at 14:30)</a>:</h4>
 <p>Except: they're from the same universe</p>
 
 <a name="125707117"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60d_array%60%20type%20changing%20update/near/125707117" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08327darraytypechangingupdate.html#125707117">Mario Carneiro (Apr 26 2018 at 06:31)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60d_array%60%20type%20changing%20update/near/125707117" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08327darraytypechangingupdate.html#125707117">Mario Carneiro (Apr 26 2018 at 14:31)</a>:</h4>
 <p>I think you should just do it semi-imperatively then, just call <code>read</code> and <code>push_back</code> and make sure you use the array linearly</p>
 
 <a name="125707160"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60d_array%60%20type%20changing%20update/near/125707160" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08327darraytypechangingupdate.html#125707160">Mario Carneiro (Apr 26 2018 at 06:32)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60d_array%60%20type%20changing%20update/near/125707160" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08327darraytypechangingupdate.html#125707160">Mario Carneiro (Apr 26 2018 at 14:32)</a>:</h4>
 <p>Do not do induction over the array size</p>
 
 <a name="125707165"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60d_array%60%20type%20changing%20update/near/125707165" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08327darraytypechangingupdate.html#125707165">Mario Carneiro (Apr 26 2018 at 06:32)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60d_array%60%20type%20changing%20update/near/125707165" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08327darraytypechangingupdate.html#125707165">Mario Carneiro (Apr 26 2018 at 14:32)</a>:</h4>
 <p>and accumulate an array, not a function to fin n</p>
 
 <a name="125707166"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60d_array%60%20type%20changing%20update/near/125707166" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08327darraytypechangingupdate.html#125707166">Simon Hudon (Apr 26 2018 at 06:33)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60d_array%60%20type%20changing%20update/near/125707166" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08327darraytypechangingupdate.html#125707166">Simon Hudon (Apr 26 2018 at 14:33)</a>:</h4>
 <p>You mean I should do induction on the index <code>i</code> and maintain <code>i &lt; n</code>?</p>
 
 <a name="125707213"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60d_array%60%20type%20changing%20update/near/125707213" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08327darraytypechangingupdate.html#125707213">Mario Carneiro (Apr 26 2018 at 06:34)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60d_array%60%20type%20changing%20update/near/125707213" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08327darraytypechangingupdate.html#125707213">Mario Carneiro (Apr 26 2018 at 14:34)</a>:</h4>
 <p>yes</p>
 
 <a name="125707214"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60d_array%60%20type%20changing%20update/near/125707214" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08327darraytypechangingupdate.html#125707214">Simon Hudon (Apr 26 2018 at 06:34)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60d_array%60%20type%20changing%20update/near/125707214" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08327darraytypechangingupdate.html#125707214">Simon Hudon (Apr 26 2018 at 14:34)</a>:</h4>
 <p>The fun thing about knowing next to nothing about <code>f</code> is that I can't guarantee that it is a linear computation: if it's a non-deterministic computation, it would screw up that assumption</p>
 
 <a name="125707217"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60d_array%60%20type%20changing%20update/near/125707217" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08327darraytypechangingupdate.html#125707217">Mario Carneiro (Apr 26 2018 at 06:34)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60d_array%60%20type%20changing%20update/near/125707217" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08327darraytypechangingupdate.html#125707217">Mario Carneiro (Apr 26 2018 at 14:34)</a>:</h4>
 <p>I have no mental model for applicative functors except as monads</p>
 
 <a name="125707232"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60d_array%60%20type%20changing%20update/near/125707232" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08327darraytypechangingupdate.html#125707232">Mario Carneiro (Apr 26 2018 at 06:35)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60d_array%60%20type%20changing%20update/near/125707232" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08327darraytypechangingupdate.html#125707232">Mario Carneiro (Apr 26 2018 at 14:35)</a>:</h4>
 <p>When I say linearly I mean in the "linear logic" sense, i.e.  use the variable once</p>
 
 <a name="125707248"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60d_array%60%20type%20changing%20update/near/125707248" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08327darraytypechangingupdate.html#125707248">Simon Hudon (Apr 26 2018 at 06:36)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60d_array%60%20type%20changing%20update/near/125707248" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08327darraytypechangingupdate.html#125707248">Simon Hudon (Apr 26 2018 at 14:36)</a>:</h4>
 <p>That's good enough. The only thing they add is asynchronous computations. But just think of the list monad. It's basically an unbounded backtracking device</p>
 
 <a name="125707276"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60d_array%60%20type%20changing%20update/near/125707276" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08327darraytypechangingupdate.html#125707276">Simon Hudon (Apr 26 2018 at 06:36)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60d_array%60%20type%20changing%20update/near/125707276" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08327darraytypechangingupdate.html#125707276">Simon Hudon (Apr 26 2018 at 14:36)</a>:</h4>
 <p>That means that at every branching point, I'd need a copy of the array</p>
 
 <a name="125707277"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60d_array%60%20type%20changing%20update/near/125707277" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08327darraytypechangingupdate.html#125707277">Mario Carneiro (Apr 26 2018 at 06:36)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60d_array%60%20type%20changing%20update/near/125707277" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08327darraytypechangingupdate.html#125707277">Mario Carneiro (Apr 26 2018 at 14:36)</a>:</h4>
 <p>Lean doesn't currently check this but you can test it by setting some option to hear whether an array write is destructive or not</p>
 
 <a name="125707285"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60d_array%60%20type%20changing%20update/near/125707285" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08327darraytypechangingupdate.html#125707285">Simon Hudon (Apr 26 2018 at 06:37)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60d_array%60%20type%20changing%20update/near/125707285" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08327darraytypechangingupdate.html#125707285">Simon Hudon (Apr 26 2018 at 14:37)</a>:</h4>
 <p>How does that work?</p>
 
 <a name="125707289"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60d_array%60%20type%20changing%20update/near/125707289" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08327darraytypechangingupdate.html#125707289">Mario Carneiro (Apr 26 2018 at 06:37)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60d_array%60%20type%20changing%20update/near/125707289" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08327darraytypechangingupdate.html#125707289">Mario Carneiro (Apr 26 2018 at 14:37)</a>:</h4>
 <p>Whenever you call <code>array.write</code> lean checks the reference counter to determine if it can do an in-place update</p>
 
 <a name="125707344"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60d_array%60%20type%20changing%20update/near/125707344" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08327darraytypechangingupdate.html#125707344">Simon Hudon (Apr 26 2018 at 06:39)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60d_array%60%20type%20changing%20update/near/125707344" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08327darraytypechangingupdate.html#125707344">Simon Hudon (Apr 26 2018 at 14:39)</a>:</h4>
 <p>But can I use that information to select a different algorithm?</p>
 
 <a name="125707489"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60d_array%60%20type%20changing%20update/near/125707489" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08327darraytypechangingupdate.html#125707489">Simon Hudon (Apr 26 2018 at 06:44)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60d_array%60%20type%20changing%20update/near/125707489" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08327darraytypechangingupdate.html#125707489">Simon Hudon (Apr 26 2018 at 14:44)</a>:</h4>
 <p>Maybe the best is accept the intermediate list. Maybe in Lean 4 we'll see custom rewrite rules for optimization. Then, maybe I can eliminate that intermediate list when the use is linear (or affine)</p>
 
 <a name="125707547"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60d_array%60%20type%20changing%20update/near/125707547" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08327darraytypechangingupdate.html#125707547">Mario Carneiro (Apr 26 2018 at 06:47)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60d_array%60%20type%20changing%20update/near/125707547" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08327darraytypechangingupdate.html#125707547">Mario Carneiro (Apr 26 2018 at 14:47)</a>:</h4>
 <p>The linear usage thing is a static analysis you can do on your code to try and preserve destructive writes when the use is actually linear, but since the check is done at run time it doesn't matter if you use it in a nonlinear context, it will just make copies and that's the right thing to do</p>
 
 <a name="125707783"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60d_array%60%20type%20changing%20update/near/125707783" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08327darraytypechangingupdate.html#125707783">Mario Carneiro (Apr 26 2018 at 06:56)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60d_array%60%20type%20changing%20update/near/125707783" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08327darraytypechangingupdate.html#125707783">Mario Carneiro (Apr 26 2018 at 14:56)</a>:</h4>
 <p>Does this work?</p>
 <div class="codehilite"><pre><span></span>universe u
 variables {α β : Type u} {f : Type u → Type u} [applicative f]
@@ -239,35 +239,35 @@ traverse.aux g n a n (le_refl _)
 </pre></div>
 
 <a name="125707829"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60d_array%60%20type%20changing%20update/near/125707829" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08327darraytypechangingupdate.html#125707829">Simon Hudon (Apr 26 2018 at 06:58)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60d_array%60%20type%20changing%20update/near/125707829" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08327darraytypechangingupdate.html#125707829">Simon Hudon (Apr 26 2018 at 14:58)</a>:</h4>
 <p>Nice! Thanks!</p>
 
 <a name="125707882"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60d_array%60%20type%20changing%20update/near/125707882" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08327darraytypechangingupdate.html#125707882">Simon Hudon (Apr 26 2018 at 07:00)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60d_array%60%20type%20changing%20update/near/125707882" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08327darraytypechangingupdate.html#125707882">Simon Hudon (Apr 26 2018 at 15:00)</a>:</h4>
 <p>I believe in backtracking computations, this will be pretty inefficient though. I'm wondering if the rarity of such monads is a good reason to accept that cost or if taking a small hit in the general case would be a worthy price to pay so that backtracking computations wouldn't be too slow</p>
 
 <a name="125708080"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60d_array%60%20type%20changing%20update/near/125708080" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08327darraytypechangingupdate.html#125708080">Mario Carneiro (Apr 26 2018 at 07:09)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60d_array%60%20type%20changing%20update/near/125708080" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08327darraytypechangingupdate.html#125708080">Mario Carneiro (Apr 26 2018 at 15:09)</a>:</h4>
 <p>For backtracking computations, you will end up using more of the <code>p</code> in the <code>p_array</code> data type that actually implements lean's <code>array</code> in C++. It has optimizations for precisely this use case, it's not just a block of memory</p>
 
 <a name="125708125"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60d_array%60%20type%20changing%20update/near/125708125" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08327darraytypechangingupdate.html#125708125">Mario Carneiro (Apr 26 2018 at 07:10)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60d_array%60%20type%20changing%20update/near/125708125" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08327darraytypechangingupdate.html#125708125">Mario Carneiro (Apr 26 2018 at 15:10)</a>:</h4>
 <p>I would argue that the lack of an actual C-like array data structure is a current failing of lean, but having a deluxe array type has its advantages</p>
 
 <a name="125708128"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60d_array%60%20type%20changing%20update/near/125708128" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08327darraytypechangingupdate.html#125708128">Mario Carneiro (Apr 26 2018 at 07:11)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60d_array%60%20type%20changing%20update/near/125708128" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08327darraytypechangingupdate.html#125708128">Mario Carneiro (Apr 26 2018 at 15:11)</a>:</h4>
 <p>(the <code>p</code> stands for <a href="https://en.wikipedia.org/wiki/Persistent_data_structure" target="_blank" title="https://en.wikipedia.org/wiki/Persistent_data_structure">persistent</a> btw)</p>
 
 <a name="125708187"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60d_array%60%20type%20changing%20update/near/125708187" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08327darraytypechangingupdate.html#125708187">Simon Hudon (Apr 26 2018 at 07:13)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60d_array%60%20type%20changing%20update/near/125708187" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08327darraytypechangingupdate.html#125708187">Simon Hudon (Apr 26 2018 at 15:13)</a>:</h4>
 <p>Oh! Interesting!</p>
 
 <a name="125708231"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60d_array%60%20type%20changing%20update/near/125708231" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08327darraytypechangingupdate.html#125708231">Simon Hudon (Apr 26 2018 at 07:14)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60d_array%60%20type%20changing%20update/near/125708231" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08327darraytypechangingupdate.html#125708231">Simon Hudon (Apr 26 2018 at 15:14)</a>:</h4>
 <p>I assume the kind of optimization you're talking about is to queue up updates until you get a read and only then do you actually perform them?</p>
 
 <a name="125708292"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60d_array%60%20type%20changing%20update/near/125708292" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08327darraytypechangingupdate.html#125708292">Mario Carneiro (Apr 26 2018 at 07:17)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60d_array%60%20type%20changing%20update/near/125708292" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08327darraytypechangingupdate.html#125708292">Mario Carneiro (Apr 26 2018 at 15:17)</a>:</h4>
 <p>Actually I'm not exactly sure, I haven't studied the implementation in detail. I think the updates are in chunks though, there is a "buffer" aspect to it as well which makes repeated <code>push_back</code> like I've done here not stupidly inefficient</p>
 
 

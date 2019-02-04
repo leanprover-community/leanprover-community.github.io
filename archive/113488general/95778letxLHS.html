@@ -12,84 +12,84 @@ permalink: archive/113488general/95778letxLHS.html
 <base href="https://leanprover.zulipchat.com">
 {% raw %}
 <a name="124756807"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/let%20x%20%3D%20LHS/near/124756807" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95778letxLHS.html#124756807">Kevin Buzzard (Apr 07 2018 at 10:18)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/let%20x%20%3D%20LHS/near/124756807" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95778letxLHS.html#124756807">Kevin Buzzard (Apr 07 2018 at 18:18)</a>:</h4>
 <p>As sometimes happens, my goal is currently <code>FPTB.res BU _ _ s = si i</code> and my proof that these two things are equal is going to involve showing that they're both the unique object with some property. I am in tactic mode. I need to hence feed both sides into a bunch of machinery (the proofs that each side has the property are quite different). The underscores are proofs. I want to write "now let x be the left hand side" just to make things easier to handle, but the proof terms are probably nightmares. I am hoping there's a cute one-liner which lets me do this, based on the fact that I sometimes use <code>to_lhs</code> in conv mode. But I don't think <code>to_lhs</code> exists in tactic mode.</p>
 
 <a name="124756812"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/let%20x%20%3D%20LHS/near/124756812" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95778letxLHS.html#124756812">Mario Carneiro (Apr 07 2018 at 10:19)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/let%20x%20%3D%20LHS/near/124756812" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95778letxLHS.html#124756812">Mario Carneiro (Apr 07 2018 at 18:19)</a>:</h4>
 <p>does <code>let x := FPTB.res BU _ _ s</code> work?</p>
 
 <a name="124756868"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/let%20x%20%3D%20LHS/near/124756868" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95778letxLHS.html#124756868">Mario Carneiro (Apr 07 2018 at 10:21)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/let%20x%20%3D%20LHS/near/124756868" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95778letxLHS.html#124756868">Mario Carneiro (Apr 07 2018 at 18:21)</a>:</h4>
 <p>Here's a cute one-liner: <code>show let x := _ in x = si i, intro x</code></p>
 
 <a name="124756914"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/let%20x%20%3D%20LHS/near/124756914" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95778letxLHS.html#124756914">Andrew Ashworth (Apr 07 2018 at 10:23)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/let%20x%20%3D%20LHS/near/124756914" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95778letxLHS.html#124756914">Andrew Ashworth (Apr 07 2018 at 18:23)</a>:</h4>
 <p>can you do the same sort of thing with generalize?</p>
 
 <a name="124756961"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/let%20x%20%3D%20LHS/near/124756961" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95778letxLHS.html#124756961">Andrew Ashworth (Apr 07 2018 at 10:25)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/let%20x%20%3D%20LHS/near/124756961" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95778letxLHS.html#124756961">Andrew Ashworth (Apr 07 2018 at 18:25)</a>:</h4>
 <p>i don't have lean on this computer so i can't check myself</p>
 
 <a name="124757001"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/let%20x%20%3D%20LHS/near/124757001" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95778letxLHS.html#124757001">Mario Carneiro (Apr 07 2018 at 10:26)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/let%20x%20%3D%20LHS/near/124757001" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95778letxLHS.html#124757001">Mario Carneiro (Apr 07 2018 at 18:26)</a>:</h4>
 <p>It's not a bad idea, but no, <code>generalize</code> does not introduce let binders, only regular variables</p>
 
 <a name="124757008"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/let%20x%20%3D%20LHS/near/124757008" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95778letxLHS.html#124757008">Mario Carneiro (Apr 07 2018 at 10:27)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/let%20x%20%3D%20LHS/near/124757008" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95778letxLHS.html#124757008">Mario Carneiro (Apr 07 2018 at 18:27)</a>:</h4>
 <p>The best part about <code>generalize</code> with <code>let</code> is that it doesn't suffer the same problems with type incorrectness as <code>generalize</code> itself, since the replacement is definitional</p>
 
 <a name="124757409"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/let%20x%20%3D%20LHS/near/124757409" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95778letxLHS.html#124757409">Kevin Buzzard (Apr 07 2018 at 10:45)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/let%20x%20%3D%20LHS/near/124757409" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95778letxLHS.html#124757409">Kevin Buzzard (Apr 07 2018 at 18:45)</a>:</h4>
 <blockquote>
 <p>does <code>let x := FPTB.res BU _ _ s</code> work?</p>
 </blockquote>
 <p>It works in the sense that no error appears, but all of a sudden I have 4 goals not 1.</p>
 
 <a name="124757449"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/let%20x%20%3D%20LHS/near/124757449" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95778letxLHS.html#124757449">Kevin Buzzard (Apr 07 2018 at 10:46)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/let%20x%20%3D%20LHS/near/124757449" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95778letxLHS.html#124757449">Kevin Buzzard (Apr 07 2018 at 18:46)</a>:</h4>
 <blockquote>
 <p>Here's a cute one-liner: <code>show let x := _ in x = si i, intro x</code></p>
 </blockquote>
 <p><code>show tactic failed</code></p>
 
 <a name="124757454"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/let%20x%20%3D%20LHS/near/124757454" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95778letxLHS.html#124757454">Kevin Buzzard (Apr 07 2018 at 10:47)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/let%20x%20%3D%20LHS/near/124757454" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95778letxLHS.html#124757454">Kevin Buzzard (Apr 07 2018 at 18:47)</a>:</h4>
 <p>and what if both sides had suppressed-proofs?</p>
 
 <a name="124757455"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/let%20x%20%3D%20LHS/near/124757455" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95778letxLHS.html#124757455">Kevin Buzzard (Apr 07 2018 at 10:47)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/let%20x%20%3D%20LHS/near/124757455" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95778letxLHS.html#124757455">Kevin Buzzard (Apr 07 2018 at 18:47)</a>:</h4>
 <p>This is hardly a serious issue, I mean I could turn proofs on and just copy what it said I guess...</p>
 
 <a name="124757456"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/let%20x%20%3D%20LHS/near/124757456" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95778letxLHS.html#124757456">Mario Carneiro (Apr 07 2018 at 10:47)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/let%20x%20%3D%20LHS/near/124757456" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95778letxLHS.html#124757456">Mario Carneiro (Apr 07 2018 at 18:47)</a>:</h4>
 <p>What order are the goals? <code>let x := FPTB.res BU _ _ s, show x = si i</code> should kill most of the auxiliary goals</p>
 
 <a name="124757495"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/let%20x%20%3D%20LHS/near/124757495" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95778letxLHS.html#124757495">Mario Carneiro (Apr 07 2018 at 10:48)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/let%20x%20%3D%20LHS/near/124757495" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95778letxLHS.html#124757495">Mario Carneiro (Apr 07 2018 at 18:48)</a>:</h4>
 <p>you should be able to do this by unification, no need to copy down those proofs</p>
 
 <a name="124757498"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/let%20x%20%3D%20LHS/near/124757498" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95778letxLHS.html#124757498">Mario Carneiro (Apr 07 2018 at 10:48)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/let%20x%20%3D%20LHS/near/124757498" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95778letxLHS.html#124757498">Mario Carneiro (Apr 07 2018 at 18:48)</a>:</h4>
 <p>does <code>change</code> give a better error message than <code>show</code> in the one-liner?</p>
 
 <a name="124757505"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/let%20x%20%3D%20LHS/near/124757505" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95778letxLHS.html#124757505">Kevin Buzzard (Apr 07 2018 at 10:49)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/let%20x%20%3D%20LHS/near/124757505" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95778letxLHS.html#124757505">Kevin Buzzard (Apr 07 2018 at 18:49)</a>:</h4>
 <p>wooah one of my proofs is cool</p>
 
 <a name="124757506"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/let%20x%20%3D%20LHS/near/124757506" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95778letxLHS.html#124757506">Kevin Buzzard (Apr 07 2018 at 10:49)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/let%20x%20%3D%20LHS/near/124757506" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95778letxLHS.html#124757506">Kevin Buzzard (Apr 07 2018 at 18:49)</a>:</h4>
 <p><code>sheaf_property._proof_6 U β Ui Hcover i</code></p>
 
 <a name="124757507"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/let%20x%20%3D%20LHS/near/124757507" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95778letxLHS.html#124757507">Kevin Buzzard (Apr 07 2018 at 10:49)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/let%20x%20%3D%20LHS/near/124757507" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95778letxLHS.html#124757507">Kevin Buzzard (Apr 07 2018 at 18:49)</a>:</h4>
 <blockquote>
 <p>you should be able to do this by unification, no need to copy down those proofs</p>
 </blockquote>
 <p>I like your way of thinking</p>
 
 <a name="124757596"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/let%20x%20%3D%20LHS/near/124757596" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95778letxLHS.html#124757596">Mario Carneiro (Apr 07 2018 at 10:52)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/let%20x%20%3D%20LHS/near/124757596" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95778letxLHS.html#124757596">Mario Carneiro (Apr 07 2018 at 18:52)</a>:</h4>
 <p>This seems to work in my mockup example:</p>
 <div class="codehilite"><pre><span></span>example (LHS RHS : nat) : LHS = RHS :=
 begin
@@ -98,182 +98,182 @@ end
 </pre></div>
 
 <a name="124757597"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/let%20x%20%3D%20LHS/near/124757597" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95778letxLHS.html#124757597">Kevin Buzzard (Apr 07 2018 at 10:53)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/let%20x%20%3D%20LHS/near/124757597" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95778letxLHS.html#124757597">Kevin Buzzard (Apr 07 2018 at 18:53)</a>:</h4>
 <p><code>change let x := _ in x = si i</code> -&gt; <code> don't know how to synthesize placeholder [some term involving all the proofs = si i]</code></p>
 
 <a name="124757642"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/let%20x%20%3D%20LHS/near/124757642" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95778letxLHS.html#124757642">Kevin Buzzard (Apr 07 2018 at 10:54)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/let%20x%20%3D%20LHS/near/124757642" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95778letxLHS.html#124757642">Kevin Buzzard (Apr 07 2018 at 18:54)</a>:</h4>
 <p><code>let x := FPTB.res BU _ _ s, show x = si i</code> -- this is the answer</p>
 
 <a name="124757643"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/let%20x%20%3D%20LHS/near/124757643" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95778letxLHS.html#124757643">Mario Carneiro (Apr 07 2018 at 10:54)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/let%20x%20%3D%20LHS/near/124757643" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95778letxLHS.html#124757643">Mario Carneiro (Apr 07 2018 at 18:54)</a>:</h4>
 <p>The whole definition of the <code>let</code> is optional since it is inferred by the <code>show</code></p>
 
 <a name="124757644"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/let%20x%20%3D%20LHS/near/124757644" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95778letxLHS.html#124757644">Kevin Buzzard (Apr 07 2018 at 10:54)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/let%20x%20%3D%20LHS/near/124757644" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95778letxLHS.html#124757644">Kevin Buzzard (Apr 07 2018 at 18:54)</a>:</h4>
 <p>Sorry so slow, one of my monitors just died, so it's like I'm back in 2015 with only one screen</p>
 
 <a name="124757650"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/let%20x%20%3D%20LHS/near/124757650" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95778letxLHS.html#124757650">Kevin Buzzard (Apr 07 2018 at 10:55)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/let%20x%20%3D%20LHS/near/124757650" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95778letxLHS.html#124757650">Kevin Buzzard (Apr 07 2018 at 18:55)</a>:</h4>
 <p>I might steal one of the kids' monitors, they're all still in bed</p>
 
 <a name="124757690"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/let%20x%20%3D%20LHS/near/124757690" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95778letxLHS.html#124757690">Kevin Buzzard (Apr 07 2018 at 10:56)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/let%20x%20%3D%20LHS/near/124757690" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95778letxLHS.html#124757690">Kevin Buzzard (Apr 07 2018 at 18:56)</a>:</h4>
 <p><code>let x := _, show x = si i</code> -- this is the best answer</p>
 
 <a name="124757691"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/let%20x%20%3D%20LHS/near/124757691" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95778letxLHS.html#124757691">Kevin Buzzard (Apr 07 2018 at 10:56)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/let%20x%20%3D%20LHS/near/124757691" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95778letxLHS.html#124757691">Kevin Buzzard (Apr 07 2018 at 18:56)</a>:</h4>
 <p>but it's a hack because what if the RHS had also been full of implicit proofs?</p>
 
 <a name="124757692"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/let%20x%20%3D%20LHS/near/124757692" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95778letxLHS.html#124757692">Kevin Buzzard (Apr 07 2018 at 10:56)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/let%20x%20%3D%20LHS/near/124757692" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95778letxLHS.html#124757692">Kevin Buzzard (Apr 07 2018 at 18:56)</a>:</h4>
 <p>but it'll do for now -- thanks :-)</p>
 
 <a name="124757693"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/let%20x%20%3D%20LHS/near/124757693" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95778letxLHS.html#124757693">Mario Carneiro (Apr 07 2018 at 10:56)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/let%20x%20%3D%20LHS/near/124757693" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95778letxLHS.html#124757693">Mario Carneiro (Apr 07 2018 at 18:56)</a>:</h4>
 <p>I bet even <code>let x, show x =  _</code> works</p>
 
 <a name="124757698"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/let%20x%20%3D%20LHS/near/124757698" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95778letxLHS.html#124757698">Kevin Buzzard (Apr 07 2018 at 10:57)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/let%20x%20%3D%20LHS/near/124757698" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95778letxLHS.html#124757698">Kevin Buzzard (Apr 07 2018 at 18:57)</a>:</h4>
 <p>Indeed it does.</p>
 
 <a name="124757699"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/let%20x%20%3D%20LHS/near/124757699" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95778letxLHS.html#124757699">Kevin Buzzard (Apr 07 2018 at 10:57)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/let%20x%20%3D%20LHS/near/124757699" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95778letxLHS.html#124757699">Kevin Buzzard (Apr 07 2018 at 18:57)</a>:</h4>
 <p><code>let x,</code></p>
 
 <a name="124757700"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/let%20x%20%3D%20LHS/near/124757700" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95778letxLHS.html#124757700">Kevin Buzzard (Apr 07 2018 at 10:57)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/let%20x%20%3D%20LHS/near/124757700" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95778letxLHS.html#124757700">Kevin Buzzard (Apr 07 2018 at 18:57)</a>:</h4>
 <p>wtf?</p>
 
 <a name="124757701"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/let%20x%20%3D%20LHS/near/124757701" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95778letxLHS.html#124757701">Mario Carneiro (Apr 07 2018 at 10:57)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/let%20x%20%3D%20LHS/near/124757701" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95778letxLHS.html#124757701">Mario Carneiro (Apr 07 2018 at 18:57)</a>:</h4>
 <p>All parts of a <code>let</code> or <code>have</code> are optional</p>
 
 <a name="124757702"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/let%20x%20%3D%20LHS/near/124757702" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95778letxLHS.html#124757702">Mario Carneiro (Apr 07 2018 at 10:58)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/let%20x%20%3D%20LHS/near/124757702" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95778letxLHS.html#124757702">Mario Carneiro (Apr 07 2018 at 18:58)</a>:</h4>
 <p>you can even just <code>have,</code></p>
 
 <a name="124757741"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/let%20x%20%3D%20LHS/near/124757741" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95778letxLHS.html#124757741">Kevin Buzzard (Apr 07 2018 at 10:58)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/let%20x%20%3D%20LHS/near/124757741" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95778letxLHS.html#124757741">Kevin Buzzard (Apr 07 2018 at 18:58)</a>:</h4>
 <p>It's the := being optional I didn't know about :-)</p>
 
 <a name="124757742"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/let%20x%20%3D%20LHS/near/124757742" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95778letxLHS.html#124757742">Mario Carneiro (Apr 07 2018 at 10:58)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/let%20x%20%3D%20LHS/near/124757742" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95778letxLHS.html#124757742">Mario Carneiro (Apr 07 2018 at 18:58)</a>:</h4>
 <p>I'm sure you are familiar with omitting <code>:=</code> in a <code>have x : property,</code> tactic</p>
 
 <a name="124757743"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/let%20x%20%3D%20LHS/near/124757743" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95778letxLHS.html#124757743">Kevin Buzzard (Apr 07 2018 at 10:59)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/let%20x%20%3D%20LHS/near/124757743" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95778letxLHS.html#124757743">Kevin Buzzard (Apr 07 2018 at 18:59)</a>:</h4>
 <p>I guess so</p>
 
 <a name="124757750"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/let%20x%20%3D%20LHS/near/124757750" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95778letxLHS.html#124757750">Kevin Buzzard (Apr 07 2018 at 10:59)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/let%20x%20%3D%20LHS/near/124757750" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95778letxLHS.html#124757750">Kevin Buzzard (Apr 07 2018 at 18:59)</a>:</h4>
 <p>thanks!</p>
 
 <a name="124757751"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/let%20x%20%3D%20LHS/near/124757751" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95778letxLHS.html#124757751">Mario Carneiro (Apr 07 2018 at 10:59)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/let%20x%20%3D%20LHS/near/124757751" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95778letxLHS.html#124757751">Mario Carneiro (Apr 07 2018 at 18:59)</a>:</h4>
 <p>Note that this only works in tactic mode, in term mode it's not so flexible</p>
 
 <a name="124757790"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/let%20x%20%3D%20LHS/near/124757790" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95778letxLHS.html#124757790">Kevin Buzzard (Apr 07 2018 at 11:00)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/let%20x%20%3D%20LHS/near/124757790" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95778letxLHS.html#124757790">Kevin Buzzard (Apr 07 2018 at 19:00)</a>:</h4>
 <p>I was tempted to go into conv mode and use to_lhs</p>
 
 <a name="124757794"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/let%20x%20%3D%20LHS/near/124757794" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95778letxLHS.html#124757794">Kevin Buzzard (Apr 07 2018 at 11:00)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/let%20x%20%3D%20LHS/near/124757794" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95778letxLHS.html#124757794">Kevin Buzzard (Apr 07 2018 at 19:00)</a>:</h4>
 <p>but was scared that if I had to do anything at all in conv mode then I would fail</p>
 
 <a name="124757795"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/let%20x%20%3D%20LHS/near/124757795" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95778letxLHS.html#124757795">Kevin Buzzard (Apr 07 2018 at 11:00)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/let%20x%20%3D%20LHS/near/124757795" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95778letxLHS.html#124757795">Kevin Buzzard (Apr 07 2018 at 19:00)</a>:</h4>
 <p>e.g. prove something</p>
 
 <a name="124757796"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/let%20x%20%3D%20LHS/near/124757796" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95778letxLHS.html#124757796">Kevin Buzzard (Apr 07 2018 at 11:00)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/let%20x%20%3D%20LHS/near/124757796" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95778letxLHS.html#124757796">Kevin Buzzard (Apr 07 2018 at 19:00)</a>:</h4>
 <p>This way is a much better way.</p>
 
 <a name="124757797"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/let%20x%20%3D%20LHS/near/124757797" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95778letxLHS.html#124757797">Mario Carneiro (Apr 07 2018 at 11:00)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/let%20x%20%3D%20LHS/near/124757797" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95778letxLHS.html#124757797">Mario Carneiro (Apr 07 2018 at 19:00)</a>:</h4>
 <p>Show is <em>super</em> useful, don't underestimate the power of unification with <code>_</code></p>
 
 <a name="124757806"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/let%20x%20%3D%20LHS/near/124757806" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95778letxLHS.html#124757806">Kevin Buzzard (Apr 07 2018 at 11:01)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/let%20x%20%3D%20LHS/near/124757806" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95778letxLHS.html#124757806">Kevin Buzzard (Apr 07 2018 at 19:01)</a>:</h4>
 <p>Yes, that was the insight.</p>
 
 <a name="124757845"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/let%20x%20%3D%20LHS/near/124757845" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95778letxLHS.html#124757845">Kevin Buzzard (Apr 07 2018 at 11:02)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/let%20x%20%3D%20LHS/near/124757845" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95778letxLHS.html#124757845">Kevin Buzzard (Apr 07 2018 at 19:02)</a>:</h4>
 <p>That I could use unification to fill in the holes.</p>
 
 <a name="124757846"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/let%20x%20%3D%20LHS/near/124757846" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95778letxLHS.html#124757846">Kevin Buzzard (Apr 07 2018 at 11:02)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/let%20x%20%3D%20LHS/near/124757846" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95778letxLHS.html#124757846">Kevin Buzzard (Apr 07 2018 at 19:02)</a>:</h4>
 <p>I just wanted to copy them</p>
 
 <a name="124757847"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/let%20x%20%3D%20LHS/near/124757847" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95778letxLHS.html#124757847">Sebastian Ullrich (Apr 07 2018 at 11:02)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/let%20x%20%3D%20LHS/near/124757847" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95778letxLHS.html#124757847">Sebastian Ullrich (Apr 07 2018 at 19:02)</a>:</h4>
 <p>Only thing missing is allowing metavariables instead of <code>_</code> that can be referenced afterwards :)</p>
 
 <a name="124757894"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/let%20x%20%3D%20LHS/near/124757894" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95778letxLHS.html#124757894">Mario Carneiro (Apr 07 2018 at 11:05)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/let%20x%20%3D%20LHS/near/124757894" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95778letxLHS.html#124757894">Mario Carneiro (Apr 07 2018 at 19:05)</a>:</h4>
 <p>You can still achieve most of this with unification</p>
 
 <a name="124757898"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/let%20x%20%3D%20LHS/near/124757898" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95778letxLHS.html#124757898">Kevin Buzzard (Apr 07 2018 at 11:05)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/let%20x%20%3D%20LHS/near/124757898" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95778letxLHS.html#124757898">Kevin Buzzard (Apr 07 2018 at 19:05)</a>:</h4>
 <p>Summary for casual readers: <code>let x, show x = _</code> works for me and answers the original question -- it lets <code>x</code> be the left hand side of a goal of the form <code>X = Y</code>. It looks powerful enough to work in great generality.</p>
 
 <a name="124757899"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/let%20x%20%3D%20LHS/near/124757899" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95778letxLHS.html#124757899">Mario Carneiro (Apr 07 2018 at 11:06)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/let%20x%20%3D%20LHS/near/124757899" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95778letxLHS.html#124757899">Mario Carneiro (Apr 07 2018 at 19:06)</a>:</h4>
 <p>Do you know why my <code>show let</code> solution failed? Looks like the type checking complained too early</p>
 
 <a name="124757985"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/let%20x%20%3D%20LHS/near/124757985" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95778letxLHS.html#124757985">Kevin Buzzard (Apr 07 2018 at 11:09)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/let%20x%20%3D%20LHS/near/124757985" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95778letxLHS.html#124757985">Kevin Buzzard (Apr 07 2018 at 19:09)</a>:</h4>
 <p>Hmm -- <code>change let x := _ in x = si i</code> actually gives <code> don't know how to synthesize placeholder; context = blah blah blah, ⊢ ?m_1</code></p>
 
 <a name="124758074"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/let%20x%20%3D%20LHS/near/124758074" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95778letxLHS.html#124758074">Sebastian Ullrich (Apr 07 2018 at 11:12)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/let%20x%20%3D%20LHS/near/124758074" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95778letxLHS.html#124758074">Sebastian Ullrich (Apr 07 2018 at 19:12)</a>:</h4>
 <p>I think <code>let</code> checking the value independent from the body is a feature</p>
 
 <a name="124758124"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/let%20x%20%3D%20LHS/near/124758124" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95778letxLHS.html#124758124">Mario Carneiro (Apr 07 2018 at 11:15)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/let%20x%20%3D%20LHS/near/124758124" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95778letxLHS.html#124758124">Mario Carneiro (Apr 07 2018 at 19:15)</a>:</h4>
 <p>fair enough - I forgot that <code>change</code> doesn't create metavariables but only unifies. <code>let x,</code> has the behavior I intended and also unifies properly in the <code>show</code> line, so I guess it's fine</p>
 
 <a name="124940592"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/let%20x%20%3D%20LHS/near/124940592" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95778letxLHS.html#124940592">Chris Hughes (Apr 11 2018 at 19:15)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/let%20x%20%3D%20LHS/near/124940592" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95778letxLHS.html#124940592">Chris Hughes (Apr 12 2018 at 03:15)</a>:</h4>
 <blockquote>
 <p>I bet even <code>let x, show x =  _</code> works</p>
 </blockquote>
 <p>Is there a version of this trick for term mode, when I want to rw something in a hypothesis and not my goal?</p>
 
 <a name="124944250"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/let%20x%20%3D%20LHS/near/124944250" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95778letxLHS.html#124944250">Mario Carneiro (Apr 11 2018 at 20:36)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/let%20x%20%3D%20LHS/near/124944250" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95778letxLHS.html#124944250">Mario Carneiro (Apr 12 2018 at 04:36)</a>:</h4>
 <p>You can rw in a hypothesis in term mode by using <code>eqn ▸ h</code> in place of <code>h</code> wherever it gets used. (You may need <code>eqn</code> or <code>eqn.symm</code> depending on orientation of the equation.)</p>
 
 <a name="124947124"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/let%20x%20%3D%20LHS/near/124947124" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95778letxLHS.html#124947124">Kevin Buzzard (Apr 11 2018 at 21:47)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/let%20x%20%3D%20LHS/near/124947124" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95778letxLHS.html#124947124">Kevin Buzzard (Apr 12 2018 at 05:47)</a>:</h4>
 <p>This came up with me specifically because I could not use rw because I only wanted to rewrite a certain term on the LHS, and it showed up on both sides.</p>
 
 <a name="124947190"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/let%20x%20%3D%20LHS/near/124947190" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95778letxLHS.html#124947190">Chris Hughes (Apr 11 2018 at 21:48)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/let%20x%20%3D%20LHS/near/124947190" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95778letxLHS.html#124947190">Chris Hughes (Apr 12 2018 at 05:48)</a>:</h4>
 <p>conv!</p>
 
 <a name="124947296"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/let%20x%20%3D%20LHS/near/124947296" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95778letxLHS.html#124947296">Kevin Buzzard (Apr 11 2018 at 21:50)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/let%20x%20%3D%20LHS/near/124947296" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95778letxLHS.html#124947296">Kevin Buzzard (Apr 12 2018 at 05:50)</a>:</h4>
 <p>Actually I am lying, I remember now, it was because there were suppressed proofs everywhere.</p>
 
 <a name="124947332"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/let%20x%20%3D%20LHS/near/124947332" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95778letxLHS.html#124947332">Kevin Buzzard (Apr 11 2018 at 21:51)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/let%20x%20%3D%20LHS/near/124947332" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95778letxLHS.html#124947332">Kevin Buzzard (Apr 12 2018 at 05:51)</a>:</h4>
 <p>Although in the unfolding carefully thread the issue is raised about what happens when conv mode doesn't have the tactics you want.</p>
 
 <a name="124947352"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/let%20x%20%3D%20LHS/near/124947352" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95778letxLHS.html#124947352">Kevin Buzzard (Apr 11 2018 at 21:51)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/let%20x%20%3D%20LHS/near/124947352" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95778letxLHS.html#124947352">Kevin Buzzard (Apr 12 2018 at 05:51)</a>:</h4>
 <p>Conversely, did you see the transitive trick?</p>
 
 <a name="124947516"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/let%20x%20%3D%20LHS/near/124947516" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95778letxLHS.html#124947516">Kevin Buzzard (Apr 11 2018 at 21:54)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/let%20x%20%3D%20LHS/near/124947516" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95778letxLHS.html#124947516">Kevin Buzzard (Apr 12 2018 at 05:54)</a>:</h4>
 <p>Maybe you can let <code>y := RHS</code>, then rewrite in the hypothesis to get <code>LHS = y</code> and then just rw on the hypothesis (<code>rw ... at H</code> works)</p>
 
 <a name="124947526"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/let%20x%20%3D%20LHS/near/124947526" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95778letxLHS.html#124947526">Kevin Buzzard (Apr 11 2018 at 21:54)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/let%20x%20%3D%20LHS/near/124947526" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95778letxLHS.html#124947526">Kevin Buzzard (Apr 12 2018 at 05:54)</a>:</h4>
 <p>(or the triangle business)</p>
 
 <a name="124947837"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/let%20x%20%3D%20LHS/near/124947837" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95778letxLHS.html#124947837">Patrick Massot (Apr 11 2018 at 22:01)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/let%20x%20%3D%20LHS/near/124947837" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95778letxLHS.html#124947837">Patrick Massot (Apr 12 2018 at 06:01)</a>:</h4>
 <p>All this discussion is probably worth a new tips and tricks file in <code>mathlib/docs/extras/</code></p>
 
 

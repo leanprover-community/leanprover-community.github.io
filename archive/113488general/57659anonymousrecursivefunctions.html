@@ -12,11 +12,11 @@ permalink: archive/113488general/57659anonymousrecursivefunctions.html
 <base href="https://leanprover.zulipchat.com">
 {% raw %}
 <a name="128191984"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/anonymous%20recursive%20functions/near/128191984" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57659anonymousrecursivefunctions.html#128191984">Andrew Ashworth (Jun 17 2018 at 06:31)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/anonymous%20recursive%20functions/near/128191984" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57659anonymousrecursivefunctions.html#128191984">Andrew Ashworth (Jun 17 2018 at 14:31)</a>:</h4>
 <p>is it possible to define an anonymous recursive function? so for I've been making auxiliary defs as needed, but I'm copying a development from coq that uses them a lot</p>
 
 <a name="128192028"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/anonymous%20recursive%20functions/near/128192028" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57659anonymousrecursivefunctions.html#128192028">Andrew Ashworth (Jun 17 2018 at 06:32)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/anonymous%20recursive%20functions/near/128192028" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57659anonymousrecursivefunctions.html#128192028">Andrew Ashworth (Jun 17 2018 at 14:32)</a>:</h4>
 <p>something like this from CPDT</p>
 <div class="codehilite"><pre><span></span><span class="kn">Definition</span> <span class="n">check_even</span> <span class="o">:</span> <span class="k">forall</span> <span class="n">n</span> <span class="o">:</span> <span class="kt">nat</span><span class="o">,</span> <span class="o">[</span><span class="n">isEven</span> <span class="n">n</span><span class="o">].</span>
   <span class="kn">Hint</span> <span class="n">Constructors</span> <span class="n">isEven</span><span class="o">.</span>
@@ -31,11 +31,11 @@ permalink: archive/113488general/57659anonymousrecursivefunctions.html
 </pre></div>
 
 <a name="128193830"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/anonymous%20recursive%20functions/near/128193830" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57659anonymousrecursivefunctions.html#128193830">Mario Carneiro (Jun 17 2018 at 07:46)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/anonymous%20recursive%20functions/near/128193830" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57659anonymousrecursivefunctions.html#128193830">Mario Carneiro (Jun 17 2018 at 15:46)</a>:</h4>
 <p>Unfortunately no, at least not in term mode. As a workaround you can use <code>induction</code>,  but the only way to get the full power of the equation compiler is to have an auxiliary def, and this is what I usually do.</p>
 
 <a name="128204616"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/anonymous%20recursive%20functions/near/128204616" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57659anonymousrecursivefunctions.html#128204616">Simon Hudon (Jun 17 2018 at 15:12)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/anonymous%20recursive%20functions/near/128204616" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57659anonymousrecursivefunctions.html#128204616">Simon Hudon (Jun 17 2018 at 23:12)</a>:</h4>
 <p>You could write </p>
 <div class="codehilite"><pre><span></span><span class="n">nat</span><span class="bp">.</span><span class="n">rec</span> <span class="n">Yes</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">f</span> <span class="n">n</span><span class="o">,</span> <span class="k">match</span> <span class="n">n</span> <span class="k">with</span>
                     <span class="bp">|</span> <span class="mi">0</span> <span class="o">:=</span> <span class="n">No</span>
@@ -44,7 +44,7 @@ permalink: archive/113488general/57659anonymousrecursivefunctions.html
 </pre></div>
 
 <a name="128211341"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/anonymous%20recursive%20functions/near/128211341" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57659anonymousrecursivefunctions.html#128211341">Mario Carneiro (Jun 17 2018 at 19:30)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/anonymous%20recursive%20functions/near/128211341" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57659anonymousrecursivefunctions.html#128211341">Mario Carneiro (Jun 18 2018 at 03:30)</a>:</h4>
 <p>There is also a somewhat hackish way. Did you ever wonder about those <code>_match</code> and <code>_let_match</code> variables in the context sometimes? Those are the same mechanism used to support recursive definitions using the equation compiler, and if you refer to them it will get compiled to a recursive function just like a recursive def. For example:</p>
 <div class="codehilite"><pre><span></span>def fib (n : ℕ) : ℕ :=
 match n with
@@ -68,11 +68,11 @@ end
 <p>fails unless you insert <code>by exact</code> on the last line.</p>
 
 <a name="128211656"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/anonymous%20recursive%20functions/near/128211656" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57659anonymousrecursivefunctions.html#128211656">Mario Carneiro (Jun 17 2018 at 19:42)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/anonymous%20recursive%20functions/near/128211656" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57659anonymousrecursivefunctions.html#128211656">Mario Carneiro (Jun 18 2018 at 03:42)</a>:</h4>
 <p>I guess the main reason this isn't already supported officially is because there is no obvious place in match notation to put the name of the defined function</p>
 
 <a name="128211859"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/anonymous%20recursive%20functions/near/128211859" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57659anonymousrecursivefunctions.html#128211859">Mario Carneiro (Jun 17 2018 at 19:51)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/anonymous%20recursive%20functions/near/128211859" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57659anonymousrecursivefunctions.html#128211859">Mario Carneiro (Jun 18 2018 at 03:51)</a>:</h4>
 <p>Examples of the other two match types:</p>
 <div class="codehilite"><pre><span></span>inductive tree : Type
 | mk : ∀ n, (fin n → tree) → tree
@@ -86,7 +86,7 @@ by exact Σ n, _let_match (t n)
 </pre></div>
 
 <a name="128211909"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/anonymous%20recursive%20functions/near/128211909" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57659anonymousrecursivefunctions.html#128211909">Simon Hudon (Jun 17 2018 at 19:53)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/anonymous%20recursive%20functions/near/128211909" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57659anonymousrecursivefunctions.html#128211909">Simon Hudon (Jun 18 2018 at 03:53)</a>:</h4>
 <p>Cool hack <span class="emoji emoji-1f601" title="grin">:grin:</span></p>
 
 

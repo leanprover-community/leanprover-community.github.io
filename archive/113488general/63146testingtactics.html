@@ -12,35 +12,35 @@ permalink: archive/113488general/63146testingtactics.html
 <base href="https://leanprover.zulipchat.com">
 {% raw %}
 <a name="123790056"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/testing%20tactics/near/123790056" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63146testingtactics.html#123790056">Scott Morrison (Mar 16 2018 at 11:06)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/testing%20tactics/near/123790056" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63146testingtactics.html#123790056">Scott Morrison (Mar 16 2018 at 21:06)</a>:</h4>
 <p>I have a <code>meta def T : expr → tactic expr := ...</code> that I've written that isn't behaving properly, and I want to do some debugging. Inside the definition there are some <code>trace</code> statements that explain to me what's going on --- I just need a convenient way to invoke my tactic. Suppose I have some other <code>def f := ...</code>, and I want to invoke <code>T</code> on <code>f</code>. What do I do?</p>
 
 <a name="123790062"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/testing%20tactics/near/123790062" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63146testingtactics.html#123790062">Scott Morrison (Mar 16 2018 at 11:06)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/testing%20tactics/near/123790062" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63146testingtactics.html#123790062">Scott Morrison (Mar 16 2018 at 21:06)</a>:</h4>
 <p>I'm hoping there's just something easy involving quotations that I don't know.</p>
 
 <a name="123790083"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/testing%20tactics/near/123790083" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63146testingtactics.html#123790083">Mario Carneiro (Mar 16 2018 at 11:07)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/testing%20tactics/near/123790083" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63146testingtactics.html#123790083">Mario Carneiro (Mar 16 2018 at 21:07)</a>:</h4>
 <p>Something like <code>to_expr `(f) &gt;&gt;= T</code> should work</p>
 
 <a name="123790135"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/testing%20tactics/near/123790135" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63146testingtactics.html#123790135">Scott Morrison (Mar 16 2018 at 11:09)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/testing%20tactics/near/123790135" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63146testingtactics.html#123790135">Scott Morrison (Mar 16 2018 at 21:09)</a>:</h4>
 <p><code>term `(f) has type reflected f but is expected to have type pexpr</code></p>
 
 <a name="123790137"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/testing%20tactics/near/123790137" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63146testingtactics.html#123790137">Mario Carneiro (Mar 16 2018 at 11:09)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/testing%20tactics/near/123790137" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63146testingtactics.html#123790137">Mario Carneiro (Mar 16 2018 at 21:09)</a>:</h4>
 <p>Actually, <code> `(f)</code> is already an <code>expr</code>, so <code>T `(f)</code> should work</p>
 
 <a name="123790146"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/testing%20tactics/near/123790146" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63146testingtactics.html#123790146">Scott Morrison (Mar 16 2018 at 11:09)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/testing%20tactics/near/123790146" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63146testingtactics.html#123790146">Scott Morrison (Mar 16 2018 at 21:09)</a>:</h4>
 <p><code> to_expr ``(f)</code> works, however</p>
 
 <a name="123790148"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/testing%20tactics/near/123790148" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63146testingtactics.html#123790148">Mario Carneiro (Mar 16 2018 at 11:09)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/testing%20tactics/near/123790148" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63146testingtactics.html#123790148">Mario Carneiro (Mar 16 2018 at 21:09)</a>:</h4>
 <p>You would use <code>to_expr</code> if you need to parse the expression at run time rather than parse time</p>
 
 <a name="123790199"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/testing%20tactics/near/123790199" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63146testingtactics.html#123790199">Scott Morrison (Mar 16 2018 at 11:10)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/testing%20tactics/near/123790199" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63146testingtactics.html#123790199">Scott Morrison (Mar 16 2018 at 21:10)</a>:</h4>
 <p>thanks!</p>
 
 

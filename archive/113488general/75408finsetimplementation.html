@@ -12,98 +12,98 @@ permalink: archive/113488general/75408finsetimplementation.html
 <base href="https://leanprover.zulipchat.com">
 {% raw %}
 <a name="133565775"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset%20implementation/near/133565775" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75408finsetimplementation.html#133565775">Kenny Lau (Sep 08 2018 at 14:04)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset%20implementation/near/133565775" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75408finsetimplementation.html#133565775">Kenny Lau (Sep 08 2018 at 22:04)</a>:</h4>
 <p>What is the advantage of implementing <code>finset</code> as it is now, over implementing it as <code>multiset</code> quotient by extensionality?</p>
 
 <a name="133566086"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset%20implementation/near/133566086" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75408finsetimplementation.html#133566086">Chris Hughes (Sep 08 2018 at 14:13)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset%20implementation/near/133566086" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75408finsetimplementation.html#133566086">Chris Hughes (Sep 08 2018 at 22:13)</a>:</h4>
 <p>I'm guessing efficiency of computation, but also perhaps some of the proofs are easier, since the functions are more or less identical to the multiset versions. Something like <code>finset.sum</code> is harder to implement with finsets as a quotient.</p>
 
 <a name="133575013"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset%20implementation/near/133575013" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75408finsetimplementation.html#133575013">Kenny Lau (Sep 08 2018 at 19:16)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset%20implementation/near/133575013" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75408finsetimplementation.html#133575013">Kenny Lau (Sep 09 2018 at 03:16)</a>:</h4>
 <p>But if we implement it as a quotient, then we can have <code>finset.union</code></p>
 
 <a name="133575019"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset%20implementation/near/133575019" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75408finsetimplementation.html#133575019">Chris Hughes (Sep 08 2018 at 19:17)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset%20implementation/near/133575019" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75408finsetimplementation.html#133575019">Chris Hughes (Sep 09 2018 at 03:17)</a>:</h4>
 <p>Without <code>decidable_eq</code> you mean? Hooray. On the downside we'll need <code>decidable_eq</code> for <code>finset.sum</code> and <code>finset.card</code></p>
 
 <a name="133586038"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset%20implementation/near/133586038" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75408finsetimplementation.html#133586038">Simon Hudon (Sep 09 2018 at 01:27)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset%20implementation/near/133586038" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75408finsetimplementation.html#133586038">Simon Hudon (Sep 09 2018 at 09:27)</a>:</h4>
 <p><span class="user-mention" data-user-id="110064">@Kenny Lau</span> I think both implementations can be valuable. Find a different name and then you can provide that new implementation.</p>
 
 <a name="133586041"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset%20implementation/near/133586041" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75408finsetimplementation.html#133586041">Kenny Lau (Sep 09 2018 at 01:27)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset%20implementation/near/133586041" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75408finsetimplementation.html#133586041">Kenny Lau (Sep 09 2018 at 09:27)</a>:</h4>
 <p>great</p>
 
 <a name="133586043"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset%20implementation/near/133586043" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75408finsetimplementation.html#133586043">Kenny Lau (Sep 09 2018 at 01:27)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset%20implementation/near/133586043" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75408finsetimplementation.html#133586043">Kenny Lau (Sep 09 2018 at 09:27)</a>:</h4>
 <p>could you help me think of a name?</p>
 
 <a name="133586089"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset%20implementation/near/133586089" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75408finsetimplementation.html#133586089">Simon Hudon (Sep 09 2018 at 01:28)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset%20implementation/near/133586089" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75408finsetimplementation.html#133586089">Simon Hudon (Sep 09 2018 at 09:28)</a>:</h4>
 <p>One benefit of <code>finset</code>'s current implementation is in writing programs that are meant to be executed. Keeping the list minimal is more economical on memory.</p>
 
 <a name="133586181"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset%20implementation/near/133586181" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75408finsetimplementation.html#133586181">Simon Hudon (Sep 09 2018 at 01:31)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset%20implementation/near/133586181" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75408finsetimplementation.html#133586181">Simon Hudon (Sep 09 2018 at 09:31)</a>:</h4>
 <p>The most obvious candidate would be <code>finset'</code> but I'm not sure that it's good. We could go with variations on <code>finset</code> (like <code>finite_set</code>) but I think that's more confusing than anything else. How about <code>no_eq.finset</code>?</p>
 
 <a name="133586195"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset%20implementation/near/133586195" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75408finsetimplementation.html#133586195">Simon Hudon (Sep 09 2018 at 01:31)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset%20implementation/near/133586195" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75408finsetimplementation.html#133586195">Simon Hudon (Sep 09 2018 at 09:31)</a>:</h4>
 <p>The other alternative would be to change the name of the current implementation to <code>compact.finset</code> or <code>minimal.finset</code> or <code>efficient.finset</code></p>
 
 <a name="133586247"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset%20implementation/near/133586247" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75408finsetimplementation.html#133586247">Simon Hudon (Sep 09 2018 at 01:33)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset%20implementation/near/133586247" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75408finsetimplementation.html#133586247">Simon Hudon (Sep 09 2018 at 09:33)</a>:</h4>
 <p>I like your idea. Your kind of implementation makes a set that is easier to use as a monad and as a traversable collection.</p>
 
 <a name="133586291"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset%20implementation/near/133586291" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75408finsetimplementation.html#133586291">Mario Carneiro (Sep 09 2018 at 01:34)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset%20implementation/near/133586291" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75408finsetimplementation.html#133586291">Mario Carneiro (Sep 09 2018 at 09:34)</a>:</h4>
 <p>I would suggest something like <code>qfinset</code> or <code>stacked_finset</code></p>
 
 <a name="133586293"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset%20implementation/near/133586293" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75408finsetimplementation.html#133586293">Mario Carneiro (Sep 09 2018 at 01:34)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset%20implementation/near/133586293" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75408finsetimplementation.html#133586293">Mario Carneiro (Sep 09 2018 at 09:34)</a>:</h4>
 <p>I'm not seeing where the gains are though</p>
 
 <a name="133586299"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset%20implementation/near/133586299" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75408finsetimplementation.html#133586299">Kevin Buzzard (Sep 09 2018 at 01:35)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset%20implementation/near/133586299" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75408finsetimplementation.html#133586299">Kevin Buzzard (Sep 09 2018 at 09:35)</a>:</h4>
 <p>you can have union without decidable equality :-)</p>
 
 <a name="133586300"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset%20implementation/near/133586300" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75408finsetimplementation.html#133586300">Mario Carneiro (Sep 09 2018 at 01:35)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset%20implementation/near/133586300" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75408finsetimplementation.html#133586300">Mario Carneiro (Sep 09 2018 at 09:35)</a>:</h4>
 <p>gain<em>s</em> plural</p>
 
 <a name="133586301"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset%20implementation/near/133586301" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75408finsetimplementation.html#133586301">Kevin Buzzard (Sep 09 2018 at 01:35)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset%20implementation/near/133586301" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75408finsetimplementation.html#133586301">Kevin Buzzard (Sep 09 2018 at 09:35)</a>:</h4>
 <p>:-)</p>
 
 <a name="133586340"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset%20implementation/near/133586340" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75408finsetimplementation.html#133586340">Kevin Buzzard (Sep 09 2018 at 01:36)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset%20implementation/near/133586340" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75408finsetimplementation.html#133586340">Kevin Buzzard (Sep 09 2018 at 09:36)</a>:</h4>
 <p>Presumably this means that the two definitions can't be proved to be equal without decidable equality?</p>
 
 <a name="133586342"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset%20implementation/near/133586342" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75408finsetimplementation.html#133586342">Mario Carneiro (Sep 09 2018 at 01:36)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset%20implementation/near/133586342" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75408finsetimplementation.html#133586342">Mario Carneiro (Sep 09 2018 at 09:36)</a>:</h4>
 <p>For the most part anything you can do with a stacked finset you can also do with a multiset</p>
 
 <a name="133586354"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset%20implementation/near/133586354" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75408finsetimplementation.html#133586354">Mario Carneiro (Sep 09 2018 at 01:37)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset%20implementation/near/133586354" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75408finsetimplementation.html#133586354">Mario Carneiro (Sep 09 2018 at 09:37)</a>:</h4>
 <p>There is a computable function <code>finset -&gt; qfinset</code> but the reverse is <code>erase_dup</code> which requires decidable eq</p>
 
 <a name="133586356"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset%20implementation/near/133586356" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75408finsetimplementation.html#133586356">Kevin Buzzard (Sep 09 2018 at 01:37)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset%20implementation/near/133586356" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75408finsetimplementation.html#133586356">Kevin Buzzard (Sep 09 2018 at 09:37)</a>:</h4>
 <p>gotcha</p>
 
 <a name="133586398"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset%20implementation/near/133586398" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75408finsetimplementation.html#133586398">Mario Carneiro (Sep 09 2018 at 01:38)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset%20implementation/near/133586398" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75408finsetimplementation.html#133586398">Mario Carneiro (Sep 09 2018 at 09:38)</a>:</h4>
 <p>But all these functions already exist, between <code>finset</code> and <code>multiset</code></p>
 
 <a name="133586470"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset%20implementation/near/133586470" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75408finsetimplementation.html#133586470">Simon Hudon (Sep 09 2018 at 01:41)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset%20implementation/near/133586470" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75408finsetimplementation.html#133586470">Simon Hudon (Sep 09 2018 at 09:41)</a>:</h4>
 <p>I can see three reasons for using stacked sets. </p>
 <p>1. you mean it to form a monad (or a similar kind of functor)<br>
 2. you need it to be traversable<br>
 3. you want to work with finite sets while using set equality directly without translating back and forth between set and multiset.</p>
 
 <a name="133586519"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset%20implementation/near/133586519" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75408finsetimplementation.html#133586519">Simon Hudon (Sep 09 2018 at 01:43)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset%20implementation/near/133586519" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75408finsetimplementation.html#133586519">Simon Hudon (Sep 09 2018 at 09:43)</a>:</h4>
 <p><code>qfinset</code> is then like <code>set</code>+ finiteness invariant, similarly to <code>multiset</code></p>
 
 

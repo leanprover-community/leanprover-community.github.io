@@ -12,7 +12,7 @@ permalink: archive/113488general/84306undead.html
 <base href="https://leanprover.zulipchat.com">
 {% raw %}
 <a name="132629895"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132629895" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132629895">Kevin Buzzard (Aug 23 2018 at 12:35)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132629895" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132629895">Kevin Buzzard (Aug 23 2018 at 20:35)</a>:</h4>
 <p>"Undead" is a game from [Simon Tatham's portable puzzle collection] (<a href="https://www.chiark.greenend.org.uk/~sgtatham/puzzles/" target="_blank" title="https://www.chiark.greenend.org.uk/~sgtatham/puzzles/">https://www.chiark.greenend.org.uk/~sgtatham/puzzles/</a>). These games are perfect information one player puzzle games, and often solving a level completely (for me at least, in most of these games) involves finding a constructive proof that there is precisely one solution to the level. I'm probably going to supervise a masters project this coming academic year on games like this, so I thought it was about time I understood what I could do with them in Lean.</p>
 <p>Here's a [pic of an undead level] (<a href="http://wwwf.imperial.ac.uk/~buzzard/xena/blog/undead_initial.png" target="_blank" title="http://wwwf.imperial.ac.uk/~buzzard/xena/blog/undead_initial.png">http://wwwf.imperial.ac.uk/~buzzard/xena/blog/undead_initial.png</a>). The diagonal lines in some squares are (two-sided) mirrors. The vacant squares need to be each filled with exactly one of a vampire, ghost or zombie. There are 9 vacant squares and we're told at the top that we need to fill them with three ghosts, three vampires and three zombies. The numbers around the outside of the board are the number of monsters you can see if you look into the board from where the number is, with the caveat that you can't see a ghost directly and you can't see a vampire through a mirror. So for example, the zero on the top row, second from the left, indicates that you can't see the monster in the top left hand corner through a mirror, so it must be a vampire, and the 3 at the left of the top row indicates that exactly one of the monsters in the first column is a ghost (because you can only see three of the four monsters in that column).</p>
 <div class="message_inline_image"><a href="http://wwwf.imperial.ac.uk/~buzzard/xena/blog/undead_initial.png" target="_blank" title="http://wwwf.imperial.ac.uk/~buzzard/xena/blog/undead_initial.png"><img src="https://uploads.zulipusercontent.net/92ef1384545d96f90cc96adcb994bdac8caeb2a5/687474703a2f2f777777662e696d70657269616c2e61632e756b2f7e62757a7a6172642f78656e612f626c6f672f756e646561645f696e697469616c2e706e67"></a></div><p>This sort of game is really easy to model in Lean; like mathematics, it seems to fit very gracefully into the language of dependent type theory. The nine empty squares can be thought of as 9 variables of type <code>square</code> (or type <code>monster</code> or whatever), the 16 numbers and three totals give 19 equations involving these variables, and the two main claims here are (1) that there's a solution to the equations and (2) it's unique.</p>
@@ -22,31 +22,31 @@ permalink: archive/113488general/84306undead.html
 <div class="message_inline_image"><a href="http://wwwf.imperial.ac.uk/~buzzard/xena/blog/undead.png" target="_blank" title="http://wwwf.imperial.ac.uk/~buzzard/xena/blog/undead.png"><img src="https://uploads.zulipusercontent.net/1d14fa6dc9bea88e32196efc36215e0269995eb3/687474703a2f2f777777662e696d70657269616c2e61632e756b2f7e62757a7a6172642f78656e612f626c6f672f756e646561642e706e67"></a></div><p>(and actually a little further because I worked out something about a7 after taking that screenshot). The search space initially has size 3^9, which is a bit big perhaps for Lean, but the lemmas I prove about the solution reduce the space to something like 2^7 * 3, which sounds a bit more reasonable. I think I'd now like to brute force it and get a proof that there's a unique solution, plus a description of the solution, but I'm not sure how to do that in Lean. I have these random facts like "variable a6 isn't a vampire" but I am not sure how to write the procedural code in Lean which will save me from generating a gazillion cases with a6 being a vampire. The issue is that I want to do cases on all 8 remaining variables at once, but for the variables where I've proved something I want to immediately eliminate all cases which contradict what I've proved. Am I making sense? I just want to solve the level now, in Lean, without running out of memory, and ideally I'd like to output the solution. I feel like I've done the lion's share of the work now but I've not quite finished.</p>
 
 <a name="132630343"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132630343" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132630343">Sean Leather (Aug 23 2018 at 12:47)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132630343" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132630343">Sean Leather (Aug 23 2018 at 20:47)</a>:</h4>
 <p><code>@[derive decidable_eq]</code></p>
 
 <a name="132630393"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132630393" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132630393">Kevin Buzzard (Aug 23 2018 at 12:48)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132630393" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132630393">Kevin Buzzard (Aug 23 2018 at 20:48)</a>:</h4>
 <p>Oh yeah that was it :-) I derived it myself :-) I think I'd find it easier to remember that if I understood what was going on there. Is this the same as <code>@[simp]</code>? It doesn't look like it.</p>
 
 <a name="132630465"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132630465" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132630465">Sean Leather (Aug 23 2018 at 12:50)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132630465" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132630465">Sean Leather (Aug 23 2018 at 20:50)</a>:</h4>
 <p><code>init/meta/derive.lean</code> says: “Attribute that can automatically derive typeclass instances.”</p>
 
 <a name="132630478"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132630478" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132630478">Sean Leather (Aug 23 2018 at 12:51)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132630478" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132630478">Sean Leather (Aug 23 2018 at 20:51)</a>:</h4>
 <p>Maybe that note will also help me remember the syntax. I don't use it very often, so I have to keep looking for it. But if I know that it's an attribute, I know it must be in <code>@[...]</code>.</p>
 
 <a name="132655747"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132655747" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132655747">Kevin Buzzard (Aug 23 2018 at 21:18)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132655747" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132655747">Kevin Buzzard (Aug 24 2018 at 05:18)</a>:</h4>
 <p>I'm working on square 7. After the line <code>  cases a₂;cases a₃;cases a₅;cases h₇;cases h₁₅,</code> in tactic mode, it's difficult for me to see what happened. Each of the a's has three possibilities, so after the three cases tactics there are now 27 goals. But for most of them (I think) there is a contradiction with assumptions h7 and h15, so after that entire line is processed we are back to one goal (unless I have misunderstood Lean's output). However I don't seem to be able to read off which of the cases we are in. Is there a trick for me to track which of the 27 branches survived?</p>
 
 <a name="132656912"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132656912" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132656912">Chris Hughes (Aug 23 2018 at 21:47)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132656912" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132656912">Chris Hughes (Aug 24 2018 at 05:47)</a>:</h4>
 <p>Prove it's equivalent to proving <code>∃! (a₁ ∈ [vampire, ghost]) (a₂ ∈ [ghost, zmobie]) ...</code> and use dec_trivial. You might have to guide simp a bit, and prove lemmas like <code>a ! = zombie iff a = vampire or a = ghost</code></p>
 
 <a name="132657067"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132657067" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132657067">Kevin Buzzard (Aug 23 2018 at 21:50)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132657067" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132657067">Kevin Buzzard (Aug 24 2018 at 05:50)</a>:</h4>
 <p>Actually I am now confused about whether I have even done what I think I've done. Is this a bug? What happens if you type this into a Lean file:</p>
 <div class="codehilite"><pre><span></span><span class="kn">inductive</span> <span class="n">square</span>
 <span class="bp">|</span> <span class="n">vampire</span> <span class="o">:</span> <span class="n">square</span>
@@ -65,7 +65,7 @@ permalink: archive/113488general/84306undead.html
 <p>and then put your cursor just after the end comma in the <code>cases a;cases b,</code> line? I expect to see 9 goals but I only see one. Typing "sorry" makes the next one appear :-) Typing a few sorries eventually sorts things out and then it's back to 9 goals.</p>
 
 <a name="132657172"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132657172" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132657172">Kevin Buzzard (Aug 23 2018 at 21:52)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132657172" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132657172">Kevin Buzzard (Aug 24 2018 at 05:52)</a>:</h4>
 <p>Even weirder:</p>
 <div class="codehilite"><pre><span></span><span class="kn">inductive</span> <span class="n">square</span>
 <span class="bp">|</span> <span class="n">vampire</span> <span class="o">:</span> <span class="n">square</span>
@@ -88,7 +88,7 @@ permalink: archive/113488general/84306undead.html
 </pre></div>
 
 <a name="132657277"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132657277" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132657277">Chris Hughes (Aug 23 2018 at 21:55)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132657277" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132657277">Chris Hughes (Aug 24 2018 at 05:55)</a>:</h4>
 <p>It seems to be being parsed as this</p>
 <div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">test</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="n">d</span> <span class="o">:</span> <span class="n">square</span><span class="o">)</span> <span class="o">:</span> <span class="n">false</span> <span class="o">:=</span>
 <span class="k">begin</span>
@@ -99,43 +99,43 @@ permalink: archive/113488general/84306undead.html
 </pre></div>
 
 <a name="132657330"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132657330" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132657330">Chris Hughes (Aug 23 2018 at 21:56)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132657330" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132657330">Chris Hughes (Aug 24 2018 at 05:56)</a>:</h4>
 <p>Actually not quite.</p>
 
 <a name="132657422"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132657422" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132657422">Gabriel Ebner (Aug 23 2018 at 21:58)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132657422" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132657422">Gabriel Ebner (Aug 24 2018 at 05:58)</a>:</h4>
 <p>I think the <code>;</code> just messes up the information on the current line.  If you put <code>skip,</code> on another line it shows the expected number of goals.</p>
 
 <a name="132657546"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132657546" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132657546">Gabriel Ebner (Aug 23 2018 at 22:00)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132657546" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132657546">Gabriel Ebner (Aug 24 2018 at 06:00)</a>:</h4>
 <p>Information about the goal is stored in a very unstructured form at the moment: essentially there is a function <code>tactic.save_info</code> which stores the corresponding string at a user-specified position (= line/column pair, and yes this can be almost anywhere..).</p>
 
 <a name="132657821"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132657821" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132657821">Kevin Buzzard (Aug 23 2018 at 22:07)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132657821" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132657821">Kevin Buzzard (Aug 24 2018 at 06:07)</a>:</h4>
 <p>If you put <code>skip</code> then on the line <em>before</em> the <code>skip</code> it displays correctly. So perhaps it's the second semicolon which is causing the confusion.</p>
 
 <a name="132657983"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132657983" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132657983">Gabriel Ebner (Aug 23 2018 at 22:10)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132657983" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132657983">Gabriel Ebner (Aug 24 2018 at 06:10)</a>:</h4>
 <p>Yes, the semicolon seems to break the goal output between the surrounding commas.  If you add a <code>skip,</code> then you add a comma which keeps the breakage away.</p>
 
 <a name="132660215"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132660215" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132660215">Patrick Massot (Aug 23 2018 at 22:55)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132660215" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132660215">Patrick Massot (Aug 24 2018 at 06:55)</a>:</h4>
 <p>I've noticed repeatedly that using semi-colon is very confusing in this way</p>
 
 <a name="132660271"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132660271" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132660271">Patrick Massot (Aug 23 2018 at 22:56)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132660271" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132660271">Patrick Massot (Aug 24 2018 at 06:56)</a>:</h4>
 <p>About the general problem, isn't something that could be handled entirely by the type class system? It looks like problem designed for solving using prolog.</p>
 
 <a name="132660854"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132660854" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132660854">Andrew Ashworth (Aug 23 2018 at 23:08)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132660854" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132660854">Andrew Ashworth (Aug 24 2018 at 07:08)</a>:</h4>
 <p>i believe sebastian solved the n-queens problem using type classes</p>
 
 <a name="132660967"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132660967" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132660967">Andrew Ashworth (Aug 23 2018 at 23:10)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132660967" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132660967">Andrew Ashworth (Aug 24 2018 at 07:10)</a>:</h4>
 <p>this is really an abuse of inference I think :)</p>
 
 <a name="132661039"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132661039" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132661039">Kevin Buzzard (Aug 23 2018 at 23:12)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132661039" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132661039">Kevin Buzzard (Aug 24 2018 at 07:12)</a>:</h4>
 <blockquote>
 <p>Prove it's equivalent to proving <code>∃! (a₁ ∈ [vampire, ghost]) (a₂ ∈ [ghost, zmobie]) ...</code> and use dec_trivial. You might have to guide simp a bit, and prove lemmas like <code>a ! = zombie iff a = vampire or a = ghost</code></p>
 </blockquote>
@@ -155,35 +155,35 @@ permalink: archive/113488general/84306undead.html
 <p>It looks pretty decidably trivial to me. How can I make this work?</p>
 
 <a name="132661087"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132661087" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132661087">Chris Hughes (Aug 23 2018 at 23:12)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132661087" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132661087">Chris Hughes (Aug 24 2018 at 07:12)</a>:</h4>
 <p>Prove fintype square</p>
 
 <a name="132661203"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132661203" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132661203">Kevin Buzzard (Aug 23 2018 at 23:15)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132661203" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132661203">Kevin Buzzard (Aug 24 2018 at 07:15)</a>:</h4>
 <p><code>@[derive fintype]</code>?</p>
 
 <a name="132661276"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132661276" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132661276">Kenny Lau (Aug 23 2018 at 23:17)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132661276" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132661276">Kenny Lau (Aug 24 2018 at 07:17)</a>:</h4>
 <p>look at my <code>three</code> elsewhere lol</p>
 
 <a name="132661277"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132661277" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132661277">Patrick Massot (Aug 23 2018 at 23:17)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132661277" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132661277">Patrick Massot (Aug 24 2018 at 07:17)</a>:</h4>
 <p>What is this derive? I see this from time to time but never know what it means</p>
 
 <a name="132661358"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132661358" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132661358">Kevin Buzzard (Aug 23 2018 at 23:19)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132661358" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132661358">Kevin Buzzard (Aug 24 2018 at 07:19)</a>:</h4>
 <p>What I wrote doesn't work.</p>
 
 <a name="132661371"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132661371" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132661371">Kevin Buzzard (Aug 23 2018 at 23:19)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132661371" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132661371">Kevin Buzzard (Aug 24 2018 at 07:19)</a>:</h4>
 <p><code>failed to find a derive handler for 'fintype'</code></p>
 
 <a name="132661688"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132661688" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132661688">Andrew Ashworth (Aug 23 2018 at 23:26)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132661688" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132661688">Andrew Ashworth (Aug 24 2018 at 07:26)</a>:</h4>
 <p>I believe the derive stuff is user-written extensions that add functionality to a type. like <code>@[derive decidable_eq]</code> adds an automatically generated instance saying that the type is decidable</p>
 
 <a name="132661874"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132661874" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132661874">Kevin Buzzard (Aug 23 2018 at 23:29)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132661874" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132661874">Kevin Buzzard (Aug 24 2018 at 07:29)</a>:</h4>
 <div class="codehilite"><pre><span></span><span class="kn">definition</span> <span class="n">finset_square</span> <span class="o">:</span> <span class="n">finset</span> <span class="n">square</span> <span class="o">:=</span>
 <span class="o">{</span> <span class="n">val</span> <span class="o">:=</span> <span class="o">[</span><span class="n">vampire</span><span class="o">,</span><span class="n">ghost</span><span class="o">,</span><span class="n">zombie</span><span class="o">],</span>
   <span class="n">nodup</span> <span class="o">:=</span> <span class="k">begin</span>
@@ -202,11 +202,11 @@ permalink: archive/113488general/84306undead.html
 <p>:-)</p>
 
 <a name="132661922"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132661922" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132661922">Kevin Buzzard (Aug 23 2018 at 23:30)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132661922" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132661922">Kevin Buzzard (Aug 24 2018 at 07:30)</a>:</h4>
 <p>I reckon that could be automated...</p>
 
 <a name="132661973"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132661973" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132661973">Kevin Buzzard (Aug 23 2018 at 23:31)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132661973" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132661973">Kevin Buzzard (Aug 24 2018 at 07:31)</a>:</h4>
 <div class="codehilite"><pre><span></span><span class="kn">instance</span> <span class="o">:</span> <span class="n">fintype</span> <span class="n">three</span> <span class="o">:=</span>
 <span class="o">{</span> <span class="n">elems</span> <span class="o">:=</span> <span class="o">{</span><span class="n">A</span><span class="o">,</span> <span class="n">B</span><span class="o">,</span> <span class="n">C</span><span class="o">},</span>
   <span class="n">complete</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="k">by</span> <span class="n">cases</span> <span class="n">x</span><span class="bp">;</span> <span class="n">simp</span> <span class="o">}</span>
@@ -216,7 +216,7 @@ permalink: archive/113488general/84306undead.html
 <p>Kenny's <code>three</code></p>
 
 <a name="132662313"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132662313" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132662313">Kevin Buzzard (Aug 23 2018 at 23:39)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132662313" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132662313">Kevin Buzzard (Aug 24 2018 at 07:39)</a>:</h4>
 <div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">fintype</span>
 
 <span class="bp">@</span><span class="o">[</span><span class="n">derive</span> <span class="n">decidable_eq</span><span class="o">]</span>
@@ -244,23 +244,23 @@ permalink: archive/113488general/84306undead.html
 </pre></div>
 
 <a name="132662380"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132662380" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132662380">Kenny Lau (Aug 23 2018 at 23:40)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132662380" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132662380">Kenny Lau (Aug 24 2018 at 07:40)</a>:</h4>
 <p>you need to import something iirc</p>
 
 <a name="132662383"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132662383" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132662383">Chris Hughes (Aug 23 2018 at 23:40)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132662383" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132662383">Chris Hughes (Aug 24 2018 at 07:40)</a>:</h4>
 <p><code>unfold exists_unique</code> first</p>
 
 <a name="132662611"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132662611" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132662611">Kevin Buzzard (Aug 23 2018 at 23:45)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132662611" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132662611">Kevin Buzzard (Aug 24 2018 at 07:45)</a>:</h4>
 <p>rofl I just tried it for the actual problem and I got this error: <a href="https://gist.github.com/kbuzzard/84dbdf0fab4b96148099f49ac4f1770e" target="_blank" title="https://gist.github.com/kbuzzard/84dbdf0fab4b96148099f49ac4f1770e">https://gist.github.com/kbuzzard/84dbdf0fab4b96148099f49ac4f1770e</a> . I think I've seen this before when you do exists_unique with multiple variables, it unfolds to something quite unwieldy.</p>
 
 <a name="132662675"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132662675" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132662675">Patrick Massot (Aug 23 2018 at 23:46)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132662675" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132662675">Patrick Massot (Aug 24 2018 at 07:46)</a>:</h4>
 <p>nice goal!</p>
 
 <a name="132662688"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132662688" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132662688">Kevin Buzzard (Aug 23 2018 at 23:46)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132662688" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132662688">Kevin Buzzard (Aug 24 2018 at 07:46)</a>:</h4>
 <div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">:</span> <span class="bp">∃!</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">),</span> <span class="n">a</span> <span class="bp">+</span> <span class="n">b</span> <span class="bp">+</span> <span class="n">c</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span>
 <span class="k">begin</span>
   <span class="n">unfold</span> <span class="n">exists_unique</span><span class="o">,</span>
@@ -282,51 +282,51 @@ permalink: archive/113488general/84306undead.html
 </pre></div>
 
 <a name="132662703"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132662703" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132662703">Kevin Buzzard (Aug 23 2018 at 23:47)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132662703" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132662703">Kevin Buzzard (Aug 24 2018 at 07:47)</a>:</h4>
 <p>Does it have to do that? Why not just "exists a b c, a + b + c = 0 and forall a' b' c', a' + b' + c' = 0 implies a=a' and b=b' and c=c'"?</p>
 
 <a name="132662959"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132662959" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132662959">Chris Hughes (Aug 23 2018 at 23:53)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132662959" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132662959">Chris Hughes (Aug 24 2018 at 07:53)</a>:</h4>
 <p>It's parsed as a load of nested <code>exists_uniques</code>. I imagine your definition is quite hard to write</p>
 
 <a name="132663069"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132663069" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132663069">Reid Barton (Aug 23 2018 at 23:55)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132663069" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132663069">Reid Barton (Aug 24 2018 at 07:55)</a>:</h4>
 <p>Wait, does it even mean the right thing then?</p>
 
 <a name="132663141"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132663141" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132663141">Reid Barton (Aug 23 2018 at 23:57)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132663141" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132663141">Reid Barton (Aug 24 2018 at 07:57)</a>:</h4>
 <p>Isn't this "there exists a unique a such that there exists a unique b such that ...", but maybe for some other a there's multiple b's which would work, and so there isn't actually a unique (a,b,c)</p>
 
 <a name="132663480"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132663480" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132663480">Reid Barton (Aug 24 2018 at 00:04)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132663480" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132663480">Reid Barton (Aug 24 2018 at 08:04)</a>:</h4>
 <p>Say <code>P x y</code> holds if and only if (x, y) is (1, 2) or (3, 4) or (3, 5). Then <code>∃! x y, P x y = ∃! x, ∃! y, P x y</code> is true because <code>∃! y, P x y</code> holds only for x = 1.</p>
 
 <a name="132663491"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132663491" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132663491">Reid Barton (Aug 24 2018 at 00:05)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132663491" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132663491">Reid Barton (Aug 24 2018 at 08:05)</a>:</h4>
 <p>But I'm sure what you really wanted is <code>∃! p, P p.1 p.2</code>.</p>
 
 <a name="132663542"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132663542" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132663542">Patrick Massot (Aug 24 2018 at 00:06)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132663542" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132663542">Patrick Massot (Aug 24 2018 at 08:06)</a>:</h4>
 <p>That's a pretty nasty trap</p>
 
 <a name="132663616"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132663616" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132663616">Sebastian Ullrich (Aug 24 2018 at 00:08)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132663616" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132663616">Sebastian Ullrich (Aug 24 2018 at 08:08)</a>:</h4>
 <p><em>makes note to remove this "feature" as soon as possible</em></p>
 
 <a name="132663779"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132663779" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132663779">Kevin Buzzard (Aug 24 2018 at 00:13)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132663779" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132663779">Kevin Buzzard (Aug 24 2018 at 08:13)</a>:</h4>
 <p>I think I once tried to prove exactly the goal above and decided at the end of it that it seemed to be an extremely roundabout way of saying the correct thing.</p>
 
 <a name="132663910"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132663910" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132663910">Kevin Buzzard (Aug 24 2018 at 00:17)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132663910" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132663910">Kevin Buzzard (Aug 24 2018 at 08:17)</a>:</h4>
 <p>I think it unfolds to something more complicated than what Reid is suggesting.</p>
 
 <a name="132663916"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132663916" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132663916">Kevin Buzzard (Aug 24 2018 at 00:17)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132663916" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132663916">Kevin Buzzard (Aug 24 2018 at 08:17)</a>:</h4>
 <p>In particular I'm suggesting that Chris' comment is oversimplifying the matter.</p>
 
 <a name="132663971"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132663971" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132663971">Kevin Buzzard (Aug 24 2018 at 00:18)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132663971" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132663971">Kevin Buzzard (Aug 24 2018 at 08:18)</a>:</h4>
 <p>Here's an example of an intermediate goal that you have to prove when proving the exists_unique statement above:</p>
 <div class="codehilite"><pre><span></span>y : ℕ,
 h : ∃ (x : ℕ), 0 + y + x = 0 ∧ ∀ (y_1 : ℕ), 0 + y + y_1 = 0 → y_1 = x
@@ -334,30 +334,30 @@ h : ∃ (x : ℕ), 0 + y + x = 0 ∧ ∀ (y_1 : ℕ), 0 + y + y_1 = 0 → y_1 = 
 </pre></div>
 
 <a name="132664036"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132664036" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132664036">Reid Barton (Aug 24 2018 at 00:20)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132664036" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132664036">Reid Barton (Aug 24 2018 at 08:20)</a>:</h4>
 <p>This is after you set a and b to 0, right?</p>
 
 <a name="132664041"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132664041" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132664041">Reid Barton (Aug 24 2018 at 00:21)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132664041" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132664041">Reid Barton (Aug 24 2018 at 08:21)</a>:</h4>
 <p>You shouldn't be given the <code>∀ (y_1 : ℕ), 0 + y + y_1 = 0 → y_1 = x</code> part of the hypothesis</p>
 
 <a name="132664053"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132664053" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132664053">Reid Barton (Aug 24 2018 at 00:21)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132664053" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132664053">Reid Barton (Aug 24 2018 at 08:21)</a>:</h4>
 <p>I think. Actually staring at this is making me confused.</p>
 
 <a name="132664101"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132664101" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132664101">Reid Barton (Aug 24 2018 at 00:22)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132664101" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132664101">Reid Barton (Aug 24 2018 at 08:22)</a>:</h4>
 <p>But in general, the way that Lean interprets <code>∃! x y, ...</code> is as <code>∃! x, ∃! y, ...</code>, right?</p>
 
 <a name="132664341"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132664341" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132664341">Mario Carneiro (Aug 24 2018 at 00:29)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132664341" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132664341">Mario Carneiro (Aug 24 2018 at 08:29)</a>:</h4>
 <blockquote>
 <p>Description: An alternate definition of double existential uniqueness (see 2eu4 2371). A mistake sometimes made in the literature is to use ∃!𝑥∃!𝑦 to mean "exactly one 𝑥 and exactly one 𝑦." (For example, see Proposition 7.53 of [TakeutiZaring] p. 53.) It turns out that this is actually a weaker assertion, as can be seen by expanding out the formal definitions. This theorem shows that the erroneous definition can be repaired by conjoining ∀𝑥∃* 𝑦𝜑 as an additional condition. The correct definition apparently has never been published. (∃* means "exists at most one.")</p>
 </blockquote>
 <p><a href="http://us.metamath.org/mpeuni/2eu5.html" target="_blank" title="http://us.metamath.org/mpeuni/2eu5.html">http://us.metamath.org/mpeuni/2eu5.html</a></p>
 
 <a name="132664344"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132664344" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132664344">Reid Barton (Aug 24 2018 at 00:29)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132664344" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132664344">Reid Barton (Aug 24 2018 at 08:29)</a>:</h4>
 <p>You want to prove (0, 0, 0) is the unique solution (let's say). Then you ought to be able to prove</p>
 <div class="codehilite"><pre><span></span><span class="n">y</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span>
 <span class="n">h</span> <span class="o">:</span> <span class="bp">∃</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">),</span> <span class="mi">0</span> <span class="bp">+</span> <span class="n">y</span> <span class="bp">+</span> <span class="n">x</span> <span class="bp">=</span> <span class="mi">0</span>
@@ -365,15 +365,15 @@ h : ∃ (x : ℕ), 0 + y + x = 0 ∧ ∀ (y_1 : ℕ), 0 + y + y_1 = 0 → y_1 = 
 </pre></div>
 
 <a name="132664437"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132664437" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132664437">Mario Carneiro (Aug 24 2018 at 00:31)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132664437" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132664437">Mario Carneiro (Aug 24 2018 at 08:31)</a>:</h4>
 <p>the simplest way to assert multiple existential uniqueness is to claim unique existence of a triple</p>
 
 <a name="132664553"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132664553" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132664553">Mario Carneiro (Aug 24 2018 at 00:34)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132664553" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132664553">Mario Carneiro (Aug 24 2018 at 08:34)</a>:</h4>
 <p>also: why are you using lean as a sat solver? It's not particularly smart for this</p>
 
 <a name="132665771"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132665771" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132665771">Kevin Buzzard (Aug 24 2018 at 01:07)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132665771" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132665771">Kevin Buzzard (Aug 24 2018 at 09:07)</a>:</h4>
 <p><span class="user-mention" data-user-id="110064">@Kenny Lau</span> you might like this challenge:</p>
 <div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">:</span>
 <span class="o">(</span><span class="bp">∃</span> <span class="n">m</span> <span class="n">n</span><span class="o">,</span> <span class="n">p</span> <span class="n">m</span> <span class="n">n</span> <span class="bp">∧</span> <span class="o">(</span><span class="bp">∀</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span> <span class="n">p</span> <span class="n">b</span> <span class="n">c</span> <span class="bp">→</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">m</span> <span class="bp">∧</span> <span class="n">c</span> <span class="bp">=</span> <span class="n">n</span><span class="o">))</span> <span class="bp">↔</span> <span class="bp">∃!</span> <span class="n">m</span> <span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span> <span class="n">p</span> <span class="n">m</span> <span class="n">n</span> <span class="o">:=</span> <span class="n">sorry</span>
@@ -384,35 +384,35 @@ h : ∃ (x : ℕ), 0 + y + x = 0 ∧ ∀ (y_1 : ℕ), 0 + y + y_1 = 0 → y_1 = 
 <p>I'm using Lean as a whatever-you-said because I'm trying to figure out what can and can't and should be done using Lean when it comes to puzzles like this.</p>
 
 <a name="132665962"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132665962" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132665962">Mario Carneiro (Aug 24 2018 at 01:12)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132665962" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132665962">Mario Carneiro (Aug 24 2018 at 09:12)</a>:</h4>
 <p>as Reid points out, as well as the quote I gave, that theorem is false</p>
 
 <a name="132666080"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132666080" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132666080">Reid Barton (Aug 24 2018 at 01:16)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132666080" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132666080">Reid Barton (Aug 24 2018 at 09:16)</a>:</h4>
 <p>There are other tools out there which are a better fit for these kinds of constraint satisfaction problems. One of which even shares an author with Lean.</p>
 
 <a name="132666081"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132666081" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132666081">Kevin Buzzard (Aug 24 2018 at 01:16)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132666081" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132666081">Kevin Buzzard (Aug 24 2018 at 09:16)</a>:</h4>
 <p>right, I just went back to it and figured that it couldn't possibly be provable.</p>
 
 <a name="132666088"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132666088" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132666088">Reid Barton (Aug 24 2018 at 01:16)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132666088" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132666088">Reid Barton (Aug 24 2018 at 09:16)</a>:</h4>
 <p>However, you can't beat the convenience of already knowing the input language.</p>
 
 <a name="132666093"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132666093" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132666093">Kevin Buzzard (Aug 24 2018 at 01:16)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132666093" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132666093">Kevin Buzzard (Aug 24 2018 at 09:16)</a>:</h4>
 <p>In which case I don't understand what this exists_unique even means.</p>
 
 <a name="132666142"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132666142" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132666142">Kevin Buzzard (Aug 24 2018 at 01:18)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132666142" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132666142">Kevin Buzzard (Aug 24 2018 at 09:18)</a>:</h4>
 <p>I could solve this undead puzzle in python just with some dull loop. I was trying to work out what Lean could offer me that python couldn't.</p>
 
 <a name="132666168"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132666168" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132666168">Kevin Buzzard (Aug 24 2018 at 01:19)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132666168" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132666168">Kevin Buzzard (Aug 24 2018 at 09:19)</a>:</h4>
 <p>So Lean really does do what Chris says? "There exists a unique x such that there exists a unique y such that..."? That's not what I would have guessed from the notation.</p>
 
 <a name="132666375"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132666375" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132666375">Mario Carneiro (Aug 24 2018 at 01:25)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132666375" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132666375">Mario Carneiro (Aug 24 2018 at 09:25)</a>:</h4>
 <div class="codehilite"><pre><span></span>example : ¬ ∀ (p : ℕ → ℕ → Prop),
   (∃ m n, p m n ∧ (∀ b c : ℕ, p b c → b = m ∧ c = n)) ↔ ∃! m n : ℕ, p m n :=
 λ H, begin
@@ -430,15 +430,15 @@ end
 </pre></div>
 
 <a name="132666391"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132666391" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132666391">Mario Carneiro (Aug 24 2018 at 01:25)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132666391" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132666391">Mario Carneiro (Aug 24 2018 at 09:25)</a>:</h4>
 <p>this is what all nested binders are unfolded to in lean</p>
 
 <a name="132666452"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132666452" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132666452">Mario Carneiro (Aug 24 2018 at 01:26)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132666452" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132666452">Mario Carneiro (Aug 24 2018 at 09:26)</a>:</h4>
 <p>in most cases it works brilliantly - forall, exists, indexed union, supremum, infinite sum... it is only exists unique which doesn't have a nice interpretation</p>
 
 <a name="132666531"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132666531" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132666531">Kevin Buzzard (Aug 24 2018 at 01:29)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132666531" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132666531">Kevin Buzzard (Aug 24 2018 at 09:29)</a>:</h4>
 <p>rofl</p>
 <div class="codehilite"><pre><span></span><span class="kn">definition</span> <span class="n">p</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:=</span> <span class="o">(</span><span class="n">a</span> <span class="bp">=</span> <span class="mi">1</span> <span class="bp">∧</span> <span class="n">b</span> <span class="bp">=</span> <span class="mi">1</span><span class="o">)</span> <span class="bp">∨</span> <span class="o">(</span><span class="n">a</span> <span class="bp">=</span> <span class="mi">2</span> <span class="bp">∧</span> <span class="n">b</span> <span class="bp">=</span> <span class="mi">3</span><span class="o">)</span> <span class="bp">∨</span> <span class="o">(</span><span class="n">a</span> <span class="bp">=</span> <span class="mi">2</span> <span class="bp">∧</span> <span class="n">b</span> <span class="bp">=</span> <span class="mi">4</span><span class="o">)</span>
 
@@ -474,62 +474,62 @@ end
 </pre></div>
 
 <a name="132666593"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132666593" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132666593">Kevin Buzzard (Aug 24 2018 at 01:30)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132666593" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132666593">Kevin Buzzard (Aug 24 2018 at 09:30)</a>:</h4>
 <p>I had no idea <code>∃!</code> meant that in Lean. That is for me a very surprising design decision. <code>∃! a b</code> doesn't even mean the same as <code>∃! b a</code>, right?</p>
 
 <a name="132666599"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132666599" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132666599">Mario Carneiro (Aug 24 2018 at 01:30)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132666599" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132666599">Mario Carneiro (Aug 24 2018 at 09:30)</a>:</h4>
 <p>no, they are not logically equivalent</p>
 
 <a name="132666608"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132666608" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132666608">Mario Carneiro (Aug 24 2018 at 01:30)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132666608" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132666608">Mario Carneiro (Aug 24 2018 at 09:30)</a>:</h4>
 <p>frankly the problem is that <code>∃!</code> is a shitty binder notation</p>
 
 <a name="132666610"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132666610" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132666610">Kevin Buzzard (Aug 24 2018 at 01:30)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132666610" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132666610">Kevin Buzzard (Aug 24 2018 at 09:30)</a>:</h4>
 <p>wo</p>
 
 <a name="132666611"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132666611" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132666611">Kevin Buzzard (Aug 24 2018 at 01:31)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132666611" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132666611">Kevin Buzzard (Aug 24 2018 at 09:31)</a>:</h4>
 <p>w</p>
 
 <a name="132666618"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132666618" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132666618">Mario Carneiro (Aug 24 2018 at 01:31)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132666618" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132666618">Mario Carneiro (Aug 24 2018 at 09:31)</a>:</h4>
 <p>it's not monotone</p>
 
 <a name="132666626"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132666626" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132666626">Kevin Buzzard (Aug 24 2018 at 01:31)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132666626" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132666626">Kevin Buzzard (Aug 24 2018 at 09:31)</a>:</h4>
 <p>So in fact the thing I'm trying to prove with this undead thing is not even formulated correctly.</p>
 
 <a name="132666669"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132666669" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132666669">Mario Carneiro (Aug 24 2018 at 01:32)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132666669" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132666669">Mario Carneiro (Aug 24 2018 at 09:32)</a>:</h4>
 <p>like I said, the easy way to say this without having to think much is to use exists unique in a pair type</p>
 
 <a name="132666698"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132666698" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132666698">Kevin Buzzard (Aug 24 2018 at 01:33)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132666698" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132666698">Kevin Buzzard (Aug 24 2018 at 09:33)</a>:</h4>
 <p>I don't care what Lean thinks <code>∃!</code> means. All I want to say is that there exists a unique 9-tuple with some property, and I've just realised that I'd better spell it out rather than using this terrifying notation.</p>
 
 <a name="132666757"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132666757" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132666757">Kevin Buzzard (Aug 24 2018 at 01:34)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132666757" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132666757">Kevin Buzzard (Aug 24 2018 at 09:34)</a>:</h4>
 <p>I wonder if any of the mathematicians here can find a mathematician who thinks <code>∃! a b, p a b</code> means anything other than what I suggested it meant above with that false lemma.</p>
 
 <a name="132666837"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132666837" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132666837">Kevin Buzzard (Aug 24 2018 at 01:36)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132666837" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132666837">Kevin Buzzard (Aug 24 2018 at 09:36)</a>:</h4>
 <p>I see. The reason this has happened is that Lean has one inbuilt system for dealing with multiple variables with one binder, and to put it bluntly it doesn't work with this one, so really perhaps a different system should be used for this one binder and that might be what Sebastian was saying. Maybe I've caught up at last.</p>
 
 <a name="132666999"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132666999" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132666999">Mario Carneiro (Aug 24 2018 at 01:41)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132666999" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132666999">Mario Carneiro (Aug 24 2018 at 09:41)</a>:</h4>
 <blockquote>
 <p>I wonder if any of the mathematicians here can find a mathematician who thinks ∃! a b, p a b means anything other than what I suggested it meant above with that false lemma.</p>
 </blockquote>
 <p>Most mathematicians think ∃! a b, p a b means what you wrote. They also think that ∃! a, ∃! b, p a b encodes this statement, and they are wrong</p>
 
 <a name="132667051"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132667051" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132667051">Mario Carneiro (Aug 24 2018 at 01:42)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132667051" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132667051">Mario Carneiro (Aug 24 2018 at 09:42)</a>:</h4>
 <p>it is obvious once you give it more than a cursory examination, but it's one of those things that often escapes notice</p>
 
 <a name="132667177"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132667177" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132667177">Kevin Buzzard (Aug 24 2018 at 01:46)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/undead/near/132667177" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84306undead.html#132667177">Kevin Buzzard (Aug 24 2018 at 09:46)</a>:</h4>
 <blockquote>
 <p>Most mathematicians think ∃! a b, p a b means what you wrote. They also think that ∃! a, ∃! b, p a b encodes this statement, and they are wrong</p>
 </blockquote>

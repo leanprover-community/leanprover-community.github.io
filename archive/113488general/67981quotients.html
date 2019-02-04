@@ -12,11 +12,11 @@ permalink: archive/113488general/67981quotients.html
 <base href="https://leanprover.zulipchat.com">
 {% raw %}
 <a name="129697433"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129697433" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129697433">Patrick Massot (Jul 15 2018 at 12:50)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129697433" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129697433">Patrick Massot (Jul 15 2018 at 20:50)</a>:</h4>
 <p>I still don't know much about quotients in Lean. I have the goal <code>{x : completion α × completion α | (g x.1, g x.2) ∈ r} ∈ uniformity.sets</code>. And <code>completion α</code> is the quotient of something, and <code>g</code> is induced by <code>h</code> defined before quotienting. So I'd like to rewrite the left hand side as the image under <code>lam y, (quotient.mk y.1,  quotient.mk y.2)</code> of the obvious set where  <code>(g x.1, g x.2)</code> becomes <code>(h y.1, h y.2)</code>. How can I do that? Should I do that?</p>
 
 <a name="129698784"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129698784" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129698784">Chris Hughes (Jul 15 2018 at 13:37)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129698784" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129698784">Chris Hughes (Jul 15 2018 at 21:37)</a>:</h4>
 <p>I proved it, but it's not pretty. I think there's a demand for more advanced versions of cases which can deal with quotients, bound variables, and things like turning <code>f : α → β × β</code> to <code>f₁ f₂ : α → β</code>.</p>
 <div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">set</span><span class="bp">.</span><span class="n">basic</span>
 <span class="kn">variables</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">s</span> <span class="o">:</span> <span class="n">setoid</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">g</span> <span class="o">:</span> <span class="n">quotient</span> <span class="n">s</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span> <span class="o">(</span><span class="n">r</span> <span class="o">:</span> <span class="n">set</span> <span class="o">(</span><span class="n">β</span> <span class="bp">×</span> <span class="n">β</span><span class="o">))</span>
@@ -33,31 +33,31 @@ permalink: archive/113488general/67981quotients.html
 </pre></div>
 
 <a name="129698842"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129698842" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129698842">Mario Carneiro (Jul 15 2018 at 13:39)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129698842" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129698842">Mario Carneiro (Jul 15 2018 at 21:39)</a>:</h4>
 <p><code>induction</code> for quotients is a feature I want in lean 4</p>
 
 <a name="129698851"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129698851" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129698851">Chris Hughes (Jul 15 2018 at 13:39)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129698851" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129698851">Chris Hughes (Jul 15 2018 at 21:39)</a>:</h4>
 <p>There's no reason why it can't be done in lean 3 is there?</p>
 
 <a name="129698890"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129698890" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129698890">Mario Carneiro (Jul 15 2018 at 13:40)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129698890" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129698890">Mario Carneiro (Jul 15 2018 at 21:40)</a>:</h4>
 <p>I'm not sure how replicable <code>induction</code> is</p>
 
 <a name="129698894"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129698894" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129698894">Chris Hughes (Jul 15 2018 at 13:40)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129698894" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129698894">Chris Hughes (Jul 15 2018 at 21:40)</a>:</h4>
 <p>Is it C++?</p>
 
 <a name="129698895"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129698895" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129698895">Mario Carneiro (Jul 15 2018 at 13:40)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129698895" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129698895">Mario Carneiro (Jul 15 2018 at 21:40)</a>:</h4>
 <p>mostly</p>
 
 <a name="129698897"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129698897" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129698897">Chris Hughes (Jul 15 2018 at 13:40)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129698897" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129698897">Chris Hughes (Jul 15 2018 at 21:40)</a>:</h4>
 <p>Isn't it just basically <code>revert, refine quotient.induction_on _ _, intros</code></p>
 
 <a name="129698941"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129698941" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129698941">Chris Hughes (Jul 15 2018 at 13:42)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129698941" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129698941">Chris Hughes (Jul 15 2018 at 21:42)</a>:</h4>
 <div class="codehilite"><pre><span></span><span class="n">meta</span> <span class="n">def</span> <span class="n">qindunction</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="n">parse</span> <span class="n">texpr</span><span class="o">)</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">parse</span> <span class="n">types</span><span class="bp">.</span><span class="n">using_ident</span><span class="o">)</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
 <span class="n">do</span> <span class="n">e</span> <span class="err">←</span> <span class="n">to_expr</span> <span class="n">p</span><span class="o">,</span>
 <span class="n">revert_kdependencies</span> <span class="n">e</span><span class="o">,</span>
@@ -67,99 +67,99 @@ permalink: archive/113488general/67981quotients.html
 </pre></div>
 
 <a name="129698945"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129698945" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129698945">Kevin Buzzard (Jul 15 2018 at 13:42)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129698945" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129698945">Kevin Buzzard (Jul 15 2018 at 21:42)</a>:</h4>
 <p>Here's a really dumb question about quotients. It seems to me that instead of using the quotient type one could just use an inductive type: the quotient of <code>X</code> by <code>r</code> could be <code>{x : set X // I am an equivalence class}</code> and the facts about quotients that don't come for free in type theory could be added as axioms about this subtype. Why is it not done this way?</p>
 
 <a name="129698949"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129698949" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129698949">Kevin Buzzard (Jul 15 2018 at 13:42)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129698949" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129698949">Kevin Buzzard (Jul 15 2018 at 21:42)</a>:</h4>
 <p>Then quotients would be easier to think about</p>
 
 <a name="129698951"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129698951" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129698951">Mario Carneiro (Jul 15 2018 at 13:42)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129698951" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129698951">Mario Carneiro (Jul 15 2018 at 21:42)</a>:</h4>
 <p>Sure, you can do that</p>
 
 <a name="129698953"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129698953" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129698953">Chris Hughes (Jul 15 2018 at 13:42)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129698953" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129698953">Chris Hughes (Jul 15 2018 at 21:42)</a>:</h4>
 <p>Computablity perhaps?</p>
 
 <a name="129698954"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129698954" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129698954">Mario Carneiro (Jul 15 2018 at 13:42)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129698954" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129698954">Mario Carneiro (Jul 15 2018 at 21:42)</a>:</h4>
 <p>some facts need the axiom of choice</p>
 
 <a name="129698955"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129698955" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129698955">Mario Carneiro (Jul 15 2018 at 13:42)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129698955" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129698955">Mario Carneiro (Jul 15 2018 at 21:42)</a>:</h4>
 <p>and it's not data when you do that</p>
 
 <a name="129698961"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129698961" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129698961">Chris Hughes (Jul 15 2018 at 13:43)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129698961" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129698961">Chris Hughes (Jul 15 2018 at 21:43)</a>:</h4>
 <p>It's very nice to have the definitional reduction of <code>quotient.lift</code></p>
 
 <a name="129698962"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129698962" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129698962">Mario Carneiro (Jul 15 2018 at 13:43)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129698962" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129698962">Mario Carneiro (Jul 15 2018 at 21:43)</a>:</h4>
 <p>You can't get that with any construction</p>
 
 <a name="129699003"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129699003" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129699003">Mario Carneiro (Jul 15 2018 at 13:44)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129699003" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129699003">Mario Carneiro (Jul 15 2018 at 21:44)</a>:</h4>
 <p>and that adds real power - <code>funext</code> is <em>proven using quotients</em></p>
 
 <a name="129699004"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129699004" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129699004">Patrick Massot (Jul 15 2018 at 13:44)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129699004" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129699004">Patrick Massot (Jul 15 2018 at 21:44)</a>:</h4>
 <p>Thank you very much Chris!</p>
 
 <a name="129699006"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129699006" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129699006">Patrick Massot (Jul 15 2018 at 13:44)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129699006" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129699006">Patrick Massot (Jul 15 2018 at 21:44)</a>:</h4>
 <p>I hope I'll be able to use that.</p>
 
 <a name="129699009"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129699009" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129699009">Mario Carneiro (Jul 15 2018 at 13:45)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129699009" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129699009">Mario Carneiro (Jul 15 2018 at 21:45)</a>:</h4>
 <p>In fact, I highly recommend reading the proof of <code>funext</code>. It's quite the mind bender</p>
 
 <a name="129699018"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129699018" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129699018">Patrick Massot (Jul 15 2018 at 13:45)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129699018" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129699018">Patrick Massot (Jul 15 2018 at 21:45)</a>:</h4>
 <p>This is explained in TPIL</p>
 
 <a name="129699021"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129699021" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129699021">Mario Carneiro (Jul 15 2018 at 13:45)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129699021" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129699021">Mario Carneiro (Jul 15 2018 at 21:45)</a>:</h4>
 <p>It's really not obvious why you can't use set-quotients to do the same proof</p>
 
 <a name="129699022"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129699022" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129699022">Kevin Buzzard (Jul 15 2018 at 13:45)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129699022" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129699022">Kevin Buzzard (Jul 15 2018 at 21:45)</a>:</h4>
 <p>oh my goodness Chris is posting meta code. How things move on! Two weeks ago he was asking me what a monad was.</p>
 
 <a name="129699068"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129699068" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129699068">Patrick Massot (Jul 15 2018 at 13:46)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129699068" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129699068">Patrick Massot (Jul 15 2018 at 21:46)</a>:</h4>
 <p>Kevin, I don't understand why you'd want this set-theoretic construction. I actually spend quite a lot of time explaining to my students that this construction is a lie. What matter about quotients are the axioms enforced in Lean.</p>
 
 <a name="129699086"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129699086" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129699086">Patrick Massot (Jul 15 2018 at 13:47)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129699086" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129699086">Patrick Massot (Jul 15 2018 at 21:47)</a>:</h4>
 <p>To me the set theoretic quotient is the same level of lie as the Kuratowski pair definition</p>
 
 <a name="129699088"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129699088" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129699088">Mario Carneiro (Jul 15 2018 at 13:47)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129699088" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129699088">Mario Carneiro (Jul 15 2018 at 21:47)</a>:</h4>
 <p>But an obvious question with that is why quotients and not other things?</p>
 
 <a name="129699127"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129699127" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129699127">Kevin Buzzard (Jul 15 2018 at 13:48)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129699127" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129699127">Kevin Buzzard (Jul 15 2018 at 21:48)</a>:</h4>
 <p>Oh that's an interesting comment Patrick. The truth of the matter was that I was watching a school play with one of my kids in, which turned out to be over three hours long, and so I spent most of the last 90 minutes thinking about other ways of doing quotients in my head in the dark</p>
 
 <a name="129699144"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129699144" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129699144">Patrick Massot (Jul 15 2018 at 13:49)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129699144" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129699144">Patrick Massot (Jul 15 2018 at 21:49)</a>:</h4>
 <p>Mario, I'm not sure what is "that" in your latest message</p>
 
 <a name="129699157"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129699157" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129699157">Mario Carneiro (Jul 15 2018 at 13:49)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129699157" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129699157">Mario Carneiro (Jul 15 2018 at 21:49)</a>:</h4>
 <p>Why do quotients get an axiomatic definition but, say, real numbers don't?</p>
 
 <a name="129699207"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129699207" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129699207">Mario Carneiro (Jul 15 2018 at 13:50)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129699207" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129699207">Mario Carneiro (Jul 15 2018 at 21:50)</a>:</h4>
 <p>is there a sense in which lean's type formers are "complete" with quotients but not without?</p>
 
 <a name="129699212"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129699212" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129699212">Patrick Massot (Jul 15 2018 at 13:51)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129699212" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129699212">Patrick Massot (Jul 15 2018 at 21:51)</a>:</h4>
 <p>I think most people in France teach the set-theoretic quotient and never explicitly say it's a lie. Students are expected to magically understand what really matters</p>
 
 <a name="129699213"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129699213" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129699213">Kevin Buzzard (Jul 15 2018 at 13:51)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129699213" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129699213">Kevin Buzzard (Jul 15 2018 at 21:51)</a>:</h4>
 <blockquote>
 <p>In fact, I highly recommend reading the proof of <code>funext</code>. It's quite the mind bender</p>
 </blockquote>
@@ -167,223 +167,223 @@ permalink: archive/113488general/67981quotients.html
 <p>I have been writing about "the three basic kinds of types", trying to explain them to mathematicians. All this came from my trying to figure out why there were three basic kinds of types at all -- inductive types and pi types sure, and now quotients -- why can't we just do them with inductive types? In some sense Patrick's comments are quite a good answer to this -- I am now thinking that the construction I've known all my working life is just a hack.</p>
 
 <a name="129699224"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129699224" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129699224">Mario Carneiro (Jul 15 2018 at 13:51)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129699224" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129699224">Mario Carneiro (Jul 15 2018 at 21:51)</a>:</h4>
 <p>That's actually a good question - why are quotients not an inductive type?</p>
 
 <a name="129699225"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129699225" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129699225">Patrick Massot (Jul 15 2018 at 13:52)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129699225" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129699225">Patrick Massot (Jul 15 2018 at 21:52)</a>:</h4>
 <p>and I think almost no university seriously teaches the construction of real numbers</p>
 
 <a name="129699267"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129699267" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129699267">Kevin Buzzard (Jul 15 2018 at 13:52)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129699267" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129699267">Kevin Buzzard (Jul 15 2018 at 21:52)</a>:</h4>
 <p>Quotients as sets of sets is the ZFC construction of the object which has the right universal property.</p>
 
 <a name="129699268"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129699268" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129699268">Mario Carneiro (Jul 15 2018 at 13:52)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129699268" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129699268">Mario Carneiro (Jul 15 2018 at 21:52)</a>:</h4>
 <p>HoTT has an interesting answer to this: they are a "higher inductive type"</p>
 
 <a name="129699270"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129699270" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129699270">Mario Carneiro (Jul 15 2018 at 13:52)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129699270" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129699270">Mario Carneiro (Jul 15 2018 at 21:52)</a>:</h4>
 <p>The point is that in type theory, set-quotients do not have the right universal property</p>
 
 <a name="129699274"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129699274" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129699274">Kevin Buzzard (Jul 15 2018 at 13:53)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129699274" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129699274">Kevin Buzzard (Jul 15 2018 at 21:53)</a>:</h4>
 <p>?</p>
 
 <a name="129699278"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129699278" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129699278">Mario Carneiro (Jul 15 2018 at 13:53)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129699278" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129699278">Mario Carneiro (Jul 15 2018 at 21:53)</a>:</h4>
 <p>They lack the computation rule</p>
 
 <a name="129699280"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129699280" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129699280">Kevin Buzzard (Jul 15 2018 at 13:53)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129699280" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129699280">Kevin Buzzard (Jul 15 2018 at 21:53)</a>:</h4>
 <p>which one is that?</p>
 
 <a name="129699281"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129699281" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129699281">Mario Carneiro (Jul 15 2018 at 13:53)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129699281" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129699281">Mario Carneiro (Jul 15 2018 at 21:53)</a>:</h4>
 <p><code>lift f (mk a) = f a</code></p>
 
 <a name="129699321"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129699321" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129699321">Chris Hughes (Jul 15 2018 at 13:54)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129699321" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129699321">Chris Hughes (Jul 15 2018 at 21:54)</a>:</h4>
 <p>It is true, but not <code>rfl</code></p>
 
 <a name="129699323"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129699323" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129699323">Kevin Buzzard (Jul 15 2018 at 13:54)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129699323" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129699323">Kevin Buzzard (Jul 15 2018 at 21:54)</a>:</h4>
 <p>"lack" :-)</p>
 
 <a name="129699325"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129699325" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129699325">Mario Carneiro (Jul 15 2018 at 13:54)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129699325" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129699325">Mario Carneiro (Jul 15 2018 at 21:54)</a>:</h4>
 <p>because in type theory <em>definitional equality matters</em></p>
 
 <a name="129699326"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129699326" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129699326">Kevin Buzzard (Jul 15 2018 at 13:54)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129699326" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129699326">Kevin Buzzard (Jul 15 2018 at 21:54)</a>:</h4>
 <p>Yes!</p>
 
 <a name="129699333"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129699333" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129699333">Kevin Buzzard (Jul 15 2018 at 13:55)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129699333" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129699333">Kevin Buzzard (Jul 15 2018 at 21:55)</a>:</h4>
 <p>I understand this much better than I did a few months ago. Perhaps this is obvious to CS people. I think it really needs to be spelt out to mathematicians.</p>
 
 <a name="129699334"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129699334" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129699334">Mario Carneiro (Jul 15 2018 at 13:55)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129699334" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129699334">Mario Carneiro (Jul 15 2018 at 21:55)</a>:</h4>
 <p>HoTT is of course all about exploring the nontrivial structure of equality, where definitional equality is the equalest equal</p>
 
 <a name="129699372"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129699372" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129699372">Kevin Buzzard (Jul 15 2018 at 13:56)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129699372" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129699372">Kevin Buzzard (Jul 15 2018 at 21:56)</a>:</h4>
 <p>All equalities are equal, but some are more equal than others.</p>
 
 <a name="129699375"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129699375" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129699375">Patrick Massot (Jul 15 2018 at 13:56)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129699375" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129699375">Patrick Massot (Jul 15 2018 at 21:56)</a>:</h4>
 <p>Kevin, did you read the first chapter of the HoTT book?</p>
 
 <a name="129699376"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129699376" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129699376">Kevin Buzzard (Jul 15 2018 at 13:56)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129699376" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129699376">Kevin Buzzard (Jul 15 2018 at 21:56)</a>:</h4>
 <p>no</p>
 
 <a name="129699377"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129699377" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129699377">Patrick Massot (Jul 15 2018 at 13:56)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129699377" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129699377">Patrick Massot (Jul 15 2018 at 21:56)</a>:</h4>
 <p>You should</p>
 
 <a name="129699380"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129699380" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129699380">Mario Carneiro (Jul 15 2018 at 13:56)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129699380" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129699380">Mario Carneiro (Jul 15 2018 at 21:56)</a>:</h4>
 <p>It's a really good intro to dependent type theory</p>
 
 <a name="129699381"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129699381" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129699381">Kevin Buzzard (Jul 15 2018 at 13:57)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129699381" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129699381">Kevin Buzzard (Jul 15 2018 at 21:57)</a>:</h4>
 <p>Thanks. I'm always looking for new things to read, even though reading is so 1990s</p>
 
 <a name="129699387"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129699387" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129699387">Kevin Buzzard (Jul 15 2018 at 13:57)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129699387" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129699387">Kevin Buzzard (Jul 15 2018 at 21:57)</a>:</h4>
 <p>My kids don't read anything.</p>
 
 <a name="129699390"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129699390" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129699390">Kevin Buzzard (Jul 15 2018 at 13:57)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129699390" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129699390">Kevin Buzzard (Jul 15 2018 at 21:57)</a>:</h4>
 <p>They just google</p>
 
 <a name="129699393"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129699393" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129699393">Mario Carneiro (Jul 15 2018 at 13:57)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129699393" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129699393">Mario Carneiro (Jul 15 2018 at 21:57)</a>:</h4>
 <p>Also you will find some decent material on HITs there</p>
 
 <a name="129699394"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129699394" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129699394">Patrick Massot (Jul 15 2018 at 13:57)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129699394" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129699394">Patrick Massot (Jul 15 2018 at 21:57)</a>:</h4>
 <p><a href="http://saunders.phil.cmu.edu/book/hott-online.pdf" target="_blank" title="http://saunders.phil.cmu.edu/book/hott-online.pdf">http://saunders.phil.cmu.edu/book/hott-online.pdf</a></p>
 
 <a name="129699395"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129699395" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129699395">Mario Carneiro (Jul 15 2018 at 13:57)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129699395" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129699395">Mario Carneiro (Jul 15 2018 at 21:57)</a>:</h4>
 <p>HoTT has some much more exotic HITs than quotients</p>
 
 <a name="129699437"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129699437" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129699437">Mario Carneiro (Jul 15 2018 at 13:58)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129699437" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129699437">Mario Carneiro (Jul 15 2018 at 21:58)</a>:</h4>
 <p>like "the circle" <code>S1</code>, which is "inductively generated" by <code>base : S1</code> and <code>loop : base = base</code></p>
 
 <a name="129699441"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129699441" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129699441">Mario Carneiro (Jul 15 2018 at 13:58)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129699441" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129699441">Mario Carneiro (Jul 15 2018 at 21:58)</a>:</h4>
 <p>In HoTT you can prove that <code>loop</code> is not <code>rfl</code></p>
 
 <a name="129699448"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129699448" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129699448">Kevin Buzzard (Jul 15 2018 at 13:59)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129699448" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129699448">Kevin Buzzard (Jul 15 2018 at 21:59)</a>:</h4>
 <p>In HoTT can you define the notion of a finite set? Can you use the axiom of choice?</p>
 
 <a name="129699451"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129699451" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129699451">Mario Carneiro (Jul 15 2018 at 14:00)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129699451" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129699451">Mario Carneiro (Jul 15 2018 at 22:00)</a>:</h4>
 <p>You can do pretty much everything in classical math</p>
 
 <a name="129699504"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129699504" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129699504">Mario Carneiro (Jul 15 2018 at 14:01)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129699504" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129699504">Mario Carneiro (Jul 15 2018 at 22:01)</a>:</h4>
 <p>You have to state the axiom of choice carefully to be consistent with univalence (lean's <code>choice</code> is not consistent with univalence), but it is a reasonable interpretation of ZFC-esque axiom of choice</p>
 
 <a name="129699511"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129699511" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129699511">Mario Carneiro (Jul 15 2018 at 14:01)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129699511" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129699511">Mario Carneiro (Jul 15 2018 at 22:01)</a>:</h4>
 <p>it's not provable though, it's an axiom</p>
 
 <a name="129699552"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129699552" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129699552">Mario Carneiro (Jul 15 2018 at 14:02)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129699552" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129699552">Mario Carneiro (Jul 15 2018 at 22:02)</a>:</h4>
 <p>there are more details in the HoTT book for how the axiom of choice works</p>
 
 <a name="129699553"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129699553" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129699553">Mario Carneiro (Jul 15 2018 at 14:03)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129699553" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129699553">Mario Carneiro (Jul 15 2018 at 22:03)</a>:</h4>
 <p>it uses the "propositional truncation" as a substitute for the <code>Prop</code> universe</p>
 
 <a name="129699558"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129699558" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129699558">Patrick Massot (Jul 15 2018 at 14:03)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129699558" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129699558">Patrick Massot (Jul 15 2018 at 22:03)</a>:</h4>
 <p>I was not referring to all this. I really mean Chapter one, about type theory, only slightly biased towards exotic stuff that will follow</p>
 
 <a name="129699602"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129699602" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129699602">Mario Carneiro (Jul 15 2018 at 14:04)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129699602" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129699602">Mario Carneiro (Jul 15 2018 at 22:04)</a>:</h4>
 <p>Yes, of course that's more advanced material and more HoTT-y stuff</p>
 
 <a name="129699604"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129699604" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129699604">Kevin Buzzard (Jul 15 2018 at 14:04)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129699604" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129699604">Kevin Buzzard (Jul 15 2018 at 22:04)</a>:</h4>
 <p>I know you weren't Patrick, but I mentioned to my old university set theory teacher that I was now doing type theory and he asked me if it was HoTT and if so then could I define a finite set (because he'd heard that it was problematic)</p>
 
 <a name="129699605"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129699605" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129699605">Kevin Buzzard (Jul 15 2018 at 14:04)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129699605" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129699605">Kevin Buzzard (Jul 15 2018 at 22:04)</a>:</h4>
 <p>and I told him that it wasn't and that I had no idea about his question</p>
 
 <a name="129699618"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129699618" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129699618">Mario Carneiro (Jul 15 2018 at 14:06)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129699618" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129699618">Mario Carneiro (Jul 15 2018 at 22:06)</a>:</h4>
 <p>If you are specifically interested in finite sets in HoTT, I've had a conversation with Floris on that exact topic (he's our resident expert)</p>
 
 <a name="129699658"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129699658" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129699658">Mario Carneiro (Jul 15 2018 at 14:06)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129699658" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129699658">Mario Carneiro (Jul 15 2018 at 22:06)</a>:</h4>
 <p>Constructively, there are a few variations on what "finite" means</p>
 
 <a name="129699660"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129699660" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129699660">Mario Carneiro (Jul 15 2018 at 14:06)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129699660" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129699660">Mario Carneiro (Jul 15 2018 at 22:06)</a>:</h4>
 <p>The simplest is something isomorphic to fin n</p>
 
 <a name="129699665"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129699665" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129699665">Mario Carneiro (Jul 15 2018 at 14:07)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129699665" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129699665">Mario Carneiro (Jul 15 2018 at 22:07)</a>:</h4>
 <p>If we call that one "finite", then "subfinite" means a subset of a finite set</p>
 
 <a name="129699667"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129699667" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129699667">Kevin Buzzard (Jul 15 2018 at 14:07)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129699667" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129699667">Kevin Buzzard (Jul 15 2018 at 22:07)</a>:</h4>
 <p>and equality is undecidable...</p>
 
 <a name="129699702"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129699702" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129699702">Mario Carneiro (Jul 15 2018 at 14:08)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129699702" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129699702">Mario Carneiro (Jul 15 2018 at 22:08)</a>:</h4>
 <p>and then there is an image of a finite set (I forget what this is called), and a subset of an image of a finite set</p>
 
 <a name="129699707"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129699707" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129699707">Kevin Buzzard (Jul 15 2018 at 14:08)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129699707" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129699707">Kevin Buzzard (Jul 15 2018 at 22:08)</a>:</h4>
 <p>If I assume AC and propext then all these are the same, right?</p>
 
 <a name="129699708"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129699708" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129699708">Patrick Massot (Jul 15 2018 at 14:09)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129699708" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129699708">Patrick Massot (Jul 15 2018 at 22:09)</a>:</h4>
 <p>Forget about HoTT Kevin, it's all constructive</p>
 
 <a name="129699713"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129699713" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129699713">Patrick Massot (Jul 15 2018 at 14:09)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129699713" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129699713">Patrick Massot (Jul 15 2018 at 22:09)</a>:</h4>
 <p>We have maths to do instead</p>
 
 <a name="129699717"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129699717" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129699717">Mario Carneiro (Jul 15 2018 at 14:09)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129699717" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129699717">Mario Carneiro (Jul 15 2018 at 22:09)</a>:</h4>
 <p>With LEM, you know that the subset is decidable so subfinite and finite are the same</p>
 
 <a name="129699753"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129699753" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129699753">Mario Carneiro (Jul 15 2018 at 14:10)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129699753" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129699753">Mario Carneiro (Jul 15 2018 at 22:10)</a>:</h4>
 <p>for images, I guess you can get a section out using AC so that becomes the same as finite too</p>
 
 <a name="129699764"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129699764" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129699764">Mario Carneiro (Jul 15 2018 at 14:10)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129699764" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129699764">Mario Carneiro (Jul 15 2018 at 22:10)</a>:</h4>
 <p>I don't think you need propext for anything</p>
 
 <a name="129699765"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129699765" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129699765">Mario Carneiro (Jul 15 2018 at 14:11)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129699765" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129699765">Mario Carneiro (Jul 15 2018 at 22:11)</a>:</h4>
 <p>Actually unique choice might be enough for the section thing, since it's a finite choice</p>
 
 <a name="129699782"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129699782" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129699782">Mario Carneiro (Jul 15 2018 at 14:11)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129699782" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129699782">Mario Carneiro (Jul 15 2018 at 22:11)</a>:</h4>
 <p>Oh yeah, there's another gradation: "isomorphic to fin n" or "merely isomorphic to fin n"</p>
 
 <a name="129699822"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129699822" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129699822">Mario Carneiro (Jul 15 2018 at 14:12)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129699822" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129699822">Mario Carneiro (Jul 15 2018 at 22:12)</a>:</h4>
 <p>where "merely" is a HoTT adjective meaning "in Prop" basically</p>
 
 <a name="129699825"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129699825" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129699825">Mario Carneiro (Jul 15 2018 at 14:12)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129699825" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129699825">Mario Carneiro (Jul 15 2018 at 22:12)</a>:</h4>
 <p>that's like the difference between "fintype" and "finite" in lean</p>
 
 <a name="129700080"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129700080" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129700080">Kevin Buzzard (Jul 15 2018 at 14:22)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129700080" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129700080">Kevin Buzzard (Jul 15 2018 at 22:22)</a>:</h4>
 <blockquote>
 <p>You can do pretty much everything in classical math</p>
 <p>Forget about HoTT Kevin, it's all constructive</p>
@@ -391,79 +391,79 @@ permalink: archive/113488general/67981quotients.html
 <p>?</p>
 
 <a name="129700138"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129700138" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129700138">Mario Carneiro (Jul 15 2018 at 14:24)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129700138" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129700138">Mario Carneiro (Jul 15 2018 at 22:24)</a>:</h4>
 <p>It's very constructivity-aware, even if there are some classical axioms that are admissible</p>
 
 <a name="129700141"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129700141" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129700141">Mario Carneiro (Jul 15 2018 at 14:25)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129700141" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129700141">Mario Carneiro (Jul 15 2018 at 22:25)</a>:</h4>
 <p>Lean's choice axiom is much more heavy handed</p>
 
 <a name="129700150"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129700150" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129700150">Mario Carneiro (Jul 15 2018 at 14:25)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129700150" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129700150">Mario Carneiro (Jul 15 2018 at 22:25)</a>:</h4>
 <p>It's comparable to the status of equality reflection as a type theory axiom</p>
 
 <a name="129700190"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129700190" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129700190">Mario Carneiro (Jul 15 2018 at 14:26)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129700190" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129700190">Mario Carneiro (Jul 15 2018 at 22:26)</a>:</h4>
 <p>lean doesn't have it, and as a result you have to do all these casts and things</p>
 
 <a name="129700193"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129700193" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129700193">Mario Carneiro (Jul 15 2018 at 14:26)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129700193" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129700193">Mario Carneiro (Jul 15 2018 at 22:26)</a>:</h4>
 <p>if you have equality reflection then it is much more like working in ZFC, where typing is just a provable property like any other</p>
 
 <a name="129700242"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129700242" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129700242">Mario Carneiro (Jul 15 2018 at 14:28)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129700242" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129700242">Mario Carneiro (Jul 15 2018 at 22:28)</a>:</h4>
 <p>So even though you can do everything in ZFC in lean, stuff that really doesn't respect types gets messy in lean</p>
 
 <a name="129700243"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129700243" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129700243">Mario Carneiro (Jul 15 2018 at 14:28)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129700243" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129700243">Mario Carneiro (Jul 15 2018 at 22:28)</a>:</h4>
 <p>(I don't know how helpful this is as an analogy)</p>
 
 <a name="129701773"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129701773" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129701773">Reid Barton (Jul 15 2018 at 15:20)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/129701773" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#129701773">Reid Barton (Jul 15 2018 at 23:20)</a>:</h4>
 <p>For inducting on quotients, isn't there <code>induction _ using quot.ind</code>?</p>
 
 <a name="134662694"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/134662694" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#134662694">Johan Commelin (Sep 26 2018 at 12:25)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/134662694" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#134662694">Johan Commelin (Sep 26 2018 at 20:25)</a>:</h4>
 <p>Currently there is <code>quotient_module.quotient</code> and <code>quotient_ring.quotient</code>. They are both defined in terms of <code>_root_.quotient</code>. To me it would make sense to define a <code>quotient_ring</code> as a <code>quotient_module</code> and then add the extra algebraic structure.</p>
 
 <a name="134662711"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/134662711" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#134662711">Johan Commelin (Sep 26 2018 at 12:25)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/134662711" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#134662711">Johan Commelin (Sep 26 2018 at 20:25)</a>:</h4>
 <p>Is there a reason why this is not a good idea?</p>
 
 <a name="134665140"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/134665140" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#134665140">Patrick Massot (Sep 26 2018 at 13:09)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/134665140" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#134665140">Patrick Massot (Sep 26 2018 at 21:09)</a>:</h4>
 <p>Mario is working on module quotient: <a href="https://www.twitch.tv/videos/314424360" target="_blank" title="https://www.twitch.tv/videos/314424360">https://www.twitch.tv/videos/314424360</a></p>
 
 <a name="134665214"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/134665214" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#134665214">Patrick Massot (Sep 26 2018 at 13:10)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/134665214" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#134665214">Patrick Massot (Sep 26 2018 at 21:10)</a>:</h4>
 <p>It's exactly how I imagined Mario doing Lean before meeting him in Orsay</p>
 
 <a name="134665218"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/134665218" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#134665218">Patrick Massot (Sep 26 2018 at 13:10)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/134665218" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#134665218">Patrick Massot (Sep 26 2018 at 21:10)</a>:</h4>
 <p>No, wait!</p>
 
 <a name="134665227"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/134665227" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#134665227">Patrick Massot (Sep 26 2018 at 13:10)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/134665227" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#134665227">Patrick Massot (Sep 26 2018 at 21:10)</a>:</h4>
 <p>It seems that first thing was actually a trailer for the Venom movie</p>
 
 <a name="134665228"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/134665228" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#134665228">Patrick Massot (Sep 26 2018 at 13:10)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/134665228" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#134665228">Patrick Massot (Sep 26 2018 at 21:10)</a>:</h4>
 <p>Now I can see emacs</p>
 
 <a name="134665632"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/134665632" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#134665632">Johan Commelin (Sep 26 2018 at 13:18)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/134665632" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#134665632">Johan Commelin (Sep 26 2018 at 21:18)</a>:</h4>
 <p>Too bad I'm on a train... I don't think they want me to stream twitch over the train wifi</p>
 
 <a name="134665660"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/134665660" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#134665660">Kevin Buzzard (Sep 26 2018 at 13:18)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/134665660" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#134665660">Kevin Buzzard (Sep 26 2018 at 21:18)</a>:</h4>
 <p>The Dutch have free WiFi on every train in the country and then just moan about how slow it is ;-)</p>
 
 <a name="134665783"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/134665783" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#134665783">Johan Commelin (Sep 26 2018 at 13:20)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/134665783" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#134665783">Johan Commelin (Sep 26 2018 at 21:20)</a>:</h4>
 <p>I'm in Germany now. But yes, there is pretty good wifi coverage on the high speed trains in NL, DE, and FR</p>
 
 <a name="134665798"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/134665798" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#134665798">Johan Commelin (Sep 26 2018 at 13:20)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/quotients/near/134665798" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67981quotients.html#134665798">Johan Commelin (Sep 26 2018 at 21:20)</a>:</h4>
 <p>I don't have experience with other countries</p>
 
 

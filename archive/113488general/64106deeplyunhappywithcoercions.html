@@ -12,23 +12,23 @@ permalink: archive/113488general/64106deeplyunhappywithcoercions.html
 <base href="https://leanprover.zulipchat.com">
 {% raw %}
 <a name="136441426"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deeply%20unhappy%20with%20coercions/near/136441426" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64106deeplyunhappywithcoercions.html#136441426">Scott Morrison (Oct 25 2018 at 00:43)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deeply%20unhappy%20with%20coercions/near/136441426" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64106deeplyunhappywithcoercions.html#136441426">Scott Morrison (Oct 25 2018 at 09:43)</a>:</h4>
 <p>We've tried using coercions throughout the <code>category_theory/</code> development within mathlib, so that one can write <code>F X</code> for a functor applied to an object, and <code>a X</code> for a natural transformation applied to an object.</p>
 
 <a name="136441491"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deeply%20unhappy%20with%20coercions/near/136441491" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64106deeplyunhappywithcoercions.html#136441491">Scott Morrison (Oct 25 2018 at 00:44)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deeply%20unhappy%20with%20coercions/near/136441491" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64106deeplyunhappywithcoercions.html#136441491">Scott Morrison (Oct 25 2018 at 09:44)</a>:</h4>
 <p>This causes a lot of problems. In particular coercions incorrectly applied, deep inside the enormous implicit arguments common in dependent type theory, cause <code>simp</code> and <code>rw</code> to often fail.</p>
 
 <a name="136441521"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deeply%20unhappy%20with%20coercions/near/136441521" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64106deeplyunhappywithcoercions.html#136441521">Scott Morrison (Oct 25 2018 at 00:45)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deeply%20unhappy%20with%20coercions/near/136441521" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64106deeplyunhappywithcoercions.html#136441521">Scott Morrison (Oct 25 2018 at 09:45)</a>:</h4>
 <p>I think I'm about ready to declare the experiment of using coercions a failure, and to rip them out  of the category_theory development for now.</p>
 
 <a name="136441610"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deeply%20unhappy%20with%20coercions/near/136441610" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64106deeplyunhappywithcoercions.html#136441610">Scott Morrison (Oct 25 2018 at 00:46)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deeply%20unhappy%20with%20coercions/near/136441610" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64106deeplyunhappywithcoercions.html#136441610">Scott Morrison (Oct 25 2018 at 09:46)</a>:</h4>
 <p>The time I have wasted diagnosing "why won't simp just do this" seems to far outweigh the value of not having to write <code>F.obj X</code> or <code>a.app X</code>.</p>
 
 <a name="136441741"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deeply%20unhappy%20with%20coercions/near/136441741" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64106deeplyunhappywithcoercions.html#136441741">Scott Morrison (Oct 25 2018 at 00:48)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deeply%20unhappy%20with%20coercions/near/136441741" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64106deeplyunhappywithcoercions.html#136441741">Scott Morrison (Oct 25 2018 at 09:48)</a>:</h4>
 <p>Just as a typical example:</p>
 <div class="codehilite"><pre><span></span>rewrite tactic failed, did not find instance of the pattern in the target expression
   ⇑α X ≫ ⇑(iso.symm α) X
@@ -45,19 +45,19 @@ X : J
 </pre></div>
 
 <a name="136441750"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deeply%20unhappy%20with%20coercions/near/136441750" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64106deeplyunhappywithcoercions.html#136441750">Scott Morrison (Oct 25 2018 at 00:48)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deeply%20unhappy%20with%20coercions/near/136441750" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64106deeplyunhappywithcoercions.html#136441750">Scott Morrison (Oct 25 2018 at 09:48)</a>:</h4>
 <p><code>erw</code> works fine, but <code>rw</code> and <code>simp</code> choke.</p>
 
 <a name="136441768"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deeply%20unhappy%20with%20coercions/near/136441768" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64106deeplyunhappywithcoercions.html#136441768">Chris Hughes (Oct 25 2018 at 00:49)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deeply%20unhappy%20with%20coercions/near/136441768" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64106deeplyunhappywithcoercions.html#136441768">Chris Hughes (Oct 25 2018 at 09:49)</a>:</h4>
 <p>Make a <code>simp</code> lemma that simplifies the double coercions?</p>
 
 <a name="136441979"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deeply%20unhappy%20with%20coercions/near/136441979" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64106deeplyunhappywithcoercions.html#136441979">Scott Morrison (Oct 25 2018 at 00:53)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deeply%20unhappy%20with%20coercions/near/136441979" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64106deeplyunhappywithcoercions.html#136441979">Scott Morrison (Oct 25 2018 at 09:53)</a>:</h4>
 <p>I mean, yes, I can try that. But diagnosing what the double coercion going on here actually is will take me more time than I ever would have spent in the entire history of working on mathlib writing out the explicit <code>.obj</code> and <code>.app</code> fields myself...</p>
 
 <a name="136447529"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deeply%20unhappy%20with%20coercions/near/136447529" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64106deeplyunhappywithcoercions.html#136447529">Scott Morrison (Oct 25 2018 at 02:47)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deeply%20unhappy%20with%20coercions/near/136447529" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64106deeplyunhappywithcoercions.html#136447529">Scott Morrison (Oct 25 2018 at 11:47)</a>:</h4>
 <p>And yet more examples, in the same proof, all caused by coercions.</p>
 <p>With tactic state:</p>
 <div class="codehilite"><pre><span></span>C : Type u,
@@ -75,11 +75,11 @@ X : J
 <p>Of course <code>simp</code> should work, by applying the <code>@[simp]</code> lemma <code>functor.map_id</code>. It doesn't, even though <code>rw functor.map_id</code> works fine. The reason of course is because the coercion to function types break <code>simp</code>, because it doesn't have congruence lemmas that let it reliably step inside dependent functions.</p>
 
 <a name="136447573"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deeply%20unhappy%20with%20coercions/near/136447573" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64106deeplyunhappywithcoercions.html#136447573">Scott Morrison (Oct 25 2018 at 02:48)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deeply%20unhappy%20with%20coercions/near/136447573" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64106deeplyunhappywithcoercions.html#136447573">Scott Morrison (Oct 25 2018 at 11:48)</a>:</h4>
 <p>You can see a similar thing if you instead try to <code>conv</code> your way in:</p>
 
 <a name="136447584"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deeply%20unhappy%20with%20coercions/near/136447584" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64106deeplyunhappywithcoercions.html#136447584">Scott Morrison (Oct 25 2018 at 02:48)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deeply%20unhappy%20with%20coercions/near/136447584" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64106deeplyunhappywithcoercions.html#136447584">Scott Morrison (Oct 25 2018 at 11:48)</a>:</h4>
 <p><code>conv {to_lhs, congr}</code> gets you to the state </p>
 <div class="codehilite"><pre><span></span>2 goals
 C : Type u,
@@ -104,27 +104,27 @@ X : J
 </pre></div>
 
 <a name="136447597"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deeply%20unhappy%20with%20coercions/near/136447597" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64106deeplyunhappywithcoercions.html#136447597">Scott Morrison (Oct 25 2018 at 02:49)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deeply%20unhappy%20with%20coercions/near/136447597" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64106deeplyunhappywithcoercions.html#136447597">Scott Morrison (Oct 25 2018 at 11:49)</a>:</h4>
 <p>but one further <code>congr</code> (which should step us inside the coercion), just says <code>congr tactic failed, unsupported congruence lemma</code>.</p>
 
 <a name="136447602"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deeply%20unhappy%20with%20coercions/near/136447602" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64106deeplyunhappywithcoercions.html#136447602">Scott Morrison (Oct 25 2018 at 02:49)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deeply%20unhappy%20with%20coercions/near/136447602" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64106deeplyunhappywithcoercions.html#136447602">Scott Morrison (Oct 25 2018 at 11:49)</a>:</h4>
 <p>On every front, coercions are just unpleasant.</p>
 
 <a name="136449146"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deeply%20unhappy%20with%20coercions/near/136449146" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64106deeplyunhappywithcoercions.html#136449146">Chris Hughes (Oct 25 2018 at 03:28)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deeply%20unhappy%20with%20coercions/near/136449146" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64106deeplyunhappywithcoercions.html#136449146">Chris Hughes (Oct 25 2018 at 12:28)</a>:</h4>
 <p>The dependent argument problem is a biggy. It might even be fixed by having a non-dependent <code>has_coe_to_fun</code> class, since most of them are non-dependent anyway.</p>
 
 <a name="136450130"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deeply%20unhappy%20with%20coercions/near/136450130" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64106deeplyunhappywithcoercions.html#136450130">Scott Morrison (Oct 25 2018 at 03:57)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deeply%20unhappy%20with%20coercions/near/136450130" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64106deeplyunhappywithcoercions.html#136450130">Scott Morrison (Oct 25 2018 at 12:57)</a>:</h4>
 <p>I think all my cases really are coercions to dependent function types.</p>
 
 <a name="136450426"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deeply%20unhappy%20with%20coercions/near/136450426" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64106deeplyunhappywithcoercions.html#136450426">Chris Hughes (Oct 25 2018 at 04:04)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deeply%20unhappy%20with%20coercions/near/136450426" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64106deeplyunhappywithcoercions.html#136450426">Chris Hughes (Oct 25 2018 at 13:04)</a>:</h4>
 <p>Won't it still break simp if you don't use <code>coe_to_fun</code> then?</p>
 
 <a name="136453416"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deeply%20unhappy%20with%20coercions/near/136453416" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64106deeplyunhappywithcoercions.html#136453416">Johan Commelin (Oct 25 2018 at 05:31)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deeply%20unhappy%20with%20coercions/near/136453416" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64106deeplyunhappywithcoercions.html#136453416">Johan Commelin (Oct 25 2018 at 14:31)</a>:</h4>
 <p><span class="user-mention" data-user-id="110087">@Scott Morrison</span> two reactions:</p>
 <ul>
 <li>Reading this makes me sad. It shows that we aren't there yet. I hope Lean 4 fixes this, maybe using the idea of Reid to have type-dependent notation.</li>
@@ -132,7 +132,7 @@ X : J
 </ul>
 
 <a name="136455046"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deeply%20unhappy%20with%20coercions/near/136455046" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64106deeplyunhappywithcoercions.html#136455046">Floris van Doorn (Oct 25 2018 at 06:24)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deeply%20unhappy%20with%20coercions/near/136455046" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64106deeplyunhappywithcoercions.html#136455046">Floris van Doorn (Oct 25 2018 at 15:24)</a>:</h4>
 <p>The coercion mechanism in Lean 3 was one of the major headaches/bottlenecks in porting the HoTT library from Lean 2 to Lean 3. In Lean 2, coercions worked much better. My two main complaints with the coercion mechanism in Lean 3 (neither of which was a problem in Lean 2):</p>
 <ul>
 <li>The  same complaint as Scott gave: it is super hard to make coercions reduce well. You need lemmas to rewrite the non-coercion function to the coercion (or the other way around), and you need to make sure that <em>all</em> simplification lemmas use the "normal form": either they all use coercions, or all use the underlying function explicitly.</li>
@@ -140,39 +140,39 @@ X : J
 </ul>
 
 <a name="136456991"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deeply%20unhappy%20with%20coercions/near/136456991" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64106deeplyunhappywithcoercions.html#136456991">Kevin Buzzard (Oct 25 2018 at 07:28)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deeply%20unhappy%20with%20coercions/near/136456991" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64106deeplyunhappywithcoercions.html#136456991">Kevin Buzzard (Oct 25 2018 at 16:28)</a>:</h4>
 <p>There is some sort of sociological side to all of this. As mathematicians we are <em>so used</em> to these coercions that the thought of some computer claiming that they can do all pure maths means that surely it must be smart enough to do the coercions too, like us. But of course we know they're there, and it is a <em>complete triviality</em> to write them ("if I write <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>F</mi><mo>(</mo><mi>X</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">F(X)</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.75em;"></span><span class="strut bottom" style="height:1em;vertical-align:-0.25em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.13889em;">F</span><span class="mopen">(</span><span class="mord mathit" style="margin-right:0.07847em;">X</span><span class="mclose">)</span></span></span></span> it's clearly the functor on objects; if I write <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>F</mi><mo>(</mo><mi>f</mi><mo>)</mo></mrow><annotation encoding="application/x-tex">F(f)</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.75em;"></span><span class="strut bottom" style="height:1em;vertical-align:-0.25em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.13889em;">F</span><span class="mopen">(</span><span class="mord mathit" style="margin-right:0.10764em;">f</span><span class="mclose">)</span></span></span></span> it's clearly the functor on morphisms, so I guess I could write <code>F.obj</code> easily, it's not as if I don't know which one I'm using"). This now raises the question -- if it's so easy, how come the computer can't do it? But if Scott has found an answer to this (and of course he may not have -- one can't rule out Mario just appearing and saying "do this trick and it'll be fine") then so be it. I know at all times if I'm applying my functor to an object or a morphism and I'm not scared of telling you, if you really want to know.</p>
 
 <a name="136479587"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deeply%20unhappy%20with%20coercions/near/136479587" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64106deeplyunhappywithcoercions.html#136479587">Reid Barton (Oct 25 2018 at 16:12)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deeply%20unhappy%20with%20coercions/near/136479587" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64106deeplyunhappywithcoercions.html#136479587">Reid Barton (Oct 26 2018 at 01:12)</a>:</h4>
 <p>I think I was one of the people asking for coercions in category theory. However, when I tried upgrading the mathlib dependency of my homotopy theory project to the version which uses coercions, I also found them to be much more of a hassle then they were worth. So, I'm actually glad to hear that Scott is of the same opinion.</p>
 
 <a name="136479710"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deeply%20unhappy%20with%20coercions/near/136479710" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64106deeplyunhappywithcoercions.html#136479710">Reid Barton (Oct 25 2018 at 16:14)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deeply%20unhappy%20with%20coercions/near/136479710" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64106deeplyunhappywithcoercions.html#136479710">Reid Barton (Oct 26 2018 at 01:14)</a>:</h4>
 <p>It really is the combination of the two points mentioned by Floris: <code>simp</code> really wants you to write the same thing in the same way every time, but coercions are not always conveniently available because of the way they interact with metavariables.</p>
 
 <a name="136479750"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deeply%20unhappy%20with%20coercions/near/136479750" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64106deeplyunhappywithcoercions.html#136479750">Reid Barton (Oct 25 2018 at 16:15)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deeply%20unhappy%20with%20coercions/near/136479750" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64106deeplyunhappywithcoercions.html#136479750">Reid Barton (Oct 26 2018 at 01:15)</a>:</h4>
 <p>On the plus side, I now have a better understanding of how to use <code>erw</code> :)</p>
 
 <a name="136534446"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deeply%20unhappy%20with%20coercions/near/136534446" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64106deeplyunhappywithcoercions.html#136534446">Scott Morrison (Oct 26 2018 at 11:01)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deeply%20unhappy%20with%20coercions/near/136534446" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64106deeplyunhappywithcoercions.html#136534446">Scott Morrison (Oct 26 2018 at 20:01)</a>:</h4>
 <p>So, ... <span class="user-mention" data-user-id="110049">@Mario Carneiro</span> and <span class="user-mention" data-user-id="110294">@Johannes Hölzl</span>, how would you feel about me exploring removing the coercions from <code>category_theory/</code>?</p>
 
 <a name="136535059"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deeply%20unhappy%20with%20coercions/near/136535059" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64106deeplyunhappywithcoercions.html#136535059">Johannes Hölzl (Oct 26 2018 at 11:16)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deeply%20unhappy%20with%20coercions/near/136535059" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64106deeplyunhappywithcoercions.html#136535059">Johannes Hölzl (Oct 26 2018 at 20:16)</a>:</h4>
 <p>I would prefer them to stay. But I can see why you want to remove them. In your original example <code>⇑↑α X ≫ ⇑↑(iso.symm α) X = ?m_1</code>, where does the coercion on <code>↑α</code> and <code>↑(iso.symm α)</code> come from?</p>
 
 <a name="136536337"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deeply%20unhappy%20with%20coercions/near/136536337" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64106deeplyunhappywithcoercions.html#136536337">Scott Morrison (Oct 26 2018 at 11:48)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deeply%20unhappy%20with%20coercions/near/136536337" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64106deeplyunhappywithcoercions.html#136536337">Scott Morrison (Oct 26 2018 at 20:48)</a>:</h4>
 <p>There are coercions there from isomorphisms to morphisms, and from natural transformations to the component function.</p>
 
 <a name="136536358"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deeply%20unhappy%20with%20coercions/near/136536358" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64106deeplyunhappywithcoercions.html#136536358">Scott Morrison (Oct 26 2018 at 11:49)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deeply%20unhappy%20with%20coercions/near/136536358" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64106deeplyunhappywithcoercions.html#136536358">Scott Morrison (Oct 26 2018 at 20:49)</a>:</h4>
 <p>That original example is not the complaint I should have started with. Adding yet more simp lemmas about certain classes of double coercions solves it.</p>
 
 <a name="136536525"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deeply%20unhappy%20with%20coercions/near/136536525" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64106deeplyunhappywithcoercions.html#136536525">Scott Morrison (Oct 26 2018 at 11:52)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deeply%20unhappy%20with%20coercions/near/136536525" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64106deeplyunhappywithcoercions.html#136536525">Scott Morrison (Oct 26 2018 at 20:52)</a>:</h4>
 <p>The real problems are:</p>
 <ul>
 <li>the presence of coercions to dependent function types significantly inhibits <code>simp</code> and <code>conv</code>, forcing us to construct long <code>rw</code> proofs by hand</li>
@@ -182,7 +182,7 @@ X : J
 </ul>
 
 <a name="136536535"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deeply%20unhappy%20with%20coercions/near/136536535" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64106deeplyunhappywithcoercions.html#136536535">Scott Morrison (Oct 26 2018 at 11:52)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deeply%20unhappy%20with%20coercions/near/136536535" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/64106deeplyunhappywithcoercions.html#136536535">Scott Morrison (Oct 26 2018 at 20:52)</a>:</h4>
 <p>In all, very unpleasant.</p>
 
 

@@ -12,11 +12,11 @@ permalink: archive/113488general/67584automaticsimplemmas.html
 <base href="https://leanprover.zulipchat.com">
 {% raw %}
 <a name="151823722"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automatic%20simp%20lemmas/near/151823722" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67584automaticsimplemmas.html#151823722">Reid Barton (Dec 15 2018 at 06:24)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automatic%20simp%20lemmas/near/151823722" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67584automaticsimplemmas.html#151823722">Reid Barton (Dec 15 2018 at 16:24)</a>:</h4>
 <p>We have a lot of simp lemmas in category theory that describe the action of functors, natural isomorphisms, etc. on various things. Johan has a few open PRs adding more of these lemmas (eg <a href="https://github.com/leanprover/mathlib/issues/503" target="_blank" title="https://github.com/leanprover/mathlib/issues/503">#503</a>, <a href="https://github.com/leanprover/mathlib/issues/505" target="_blank" title="https://github.com/leanprover/mathlib/issues/505">#505</a>) and they prompted me to try to understand how to describe these lemmas systematically.</p>
 
 <a name="151823896"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automatic%20simp%20lemmas/near/151823896" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67584automaticsimplemmas.html#151823896">Reid Barton (Dec 15 2018 at 06:30)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automatic%20simp%20lemmas/near/151823896" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67584automaticsimplemmas.html#151823896">Reid Barton (Dec 15 2018 at 16:30)</a>:</h4>
 <p>I think we can build these rfl lemmas by applying the following algorithm.</p>
 <ul>
 <li>Start with the result type <code>LHS = RHS</code>, where LHS is the thing being defined and RHS is its definition (this is what just putting <code>@[simp]</code> on the definition would do).</li>
@@ -27,74 +27,74 @@ permalink: archive/113488general/67584automaticsimplemmas.html
 </ul>
 
 <a name="151823958"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automatic%20simp%20lemmas/near/151823958" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67584automaticsimplemmas.html#151823958">Reid Barton (Dec 15 2018 at 06:33)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automatic%20simp%20lemmas/near/151823958" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67584automaticsimplemmas.html#151823958">Reid Barton (Dec 15 2018 at 16:33)</a>:</h4>
 <p><span class="user-mention" data-user-id="110026">@Simon Hudon</span>, I guess we discussed something along these lines at some point</p>
 
 <a name="151824107"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automatic%20simp%20lemmas/near/151824107" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67584automaticsimplemmas.html#151824107">Reid Barton (Dec 15 2018 at 06:38)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automatic%20simp%20lemmas/near/151824107" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67584automaticsimplemmas.html#151824107">Reid Barton (Dec 15 2018 at 16:38)</a>:</h4>
 <p>But now I have a pseudo-spec</p>
 
 <a name="151825251"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automatic%20simp%20lemmas/near/151825251" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67584automaticsimplemmas.html#151825251">Johan Commelin (Dec 15 2018 at 07:21)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automatic%20simp%20lemmas/near/151825251" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67584automaticsimplemmas.html#151825251">Johan Commelin (Dec 15 2018 at 17:21)</a>:</h4>
 <p>See also <a href="#narrow/stream/116395-maths/subject/sheaves.20and.20sites/near/148770849" title="#narrow/stream/116395-maths/subject/sheaves.20and.20sites/near/148770849">https://leanprover.zulipchat.com/#narrow/stream/116395-maths/subject/sheaves.20and.20sites/near/148770849</a> for something that might qualify as pre-semi-pseudo-spec.</p>
 
 <a name="151825291"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automatic%20simp%20lemmas/near/151825291" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67584automaticsimplemmas.html#151825291">Johan Commelin (Dec 15 2018 at 07:22)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automatic%20simp%20lemmas/near/151825291" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67584automaticsimplemmas.html#151825291">Johan Commelin (Dec 15 2018 at 17:22)</a>:</h4>
 <p>My PR's are the result of following Mario's creed "just go for it". But I definitely wouldn't mind if this was automated away.</p>
 
 <a name="151842594"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automatic%20simp%20lemmas/near/151842594" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67584automaticsimplemmas.html#151842594">Simon Hudon (Dec 15 2018 at 17:24)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automatic%20simp%20lemmas/near/151842594" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67584automaticsimplemmas.html#151842594">Simon Hudon (Dec 16 2018 at 03:24)</a>:</h4>
 <p>I remember this conversation. In my mind, that kind of feature might be about translating lemmas about specific definitions into lemmas referring to a type class instance.</p>
 
 <a name="151844113"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automatic%20simp%20lemmas/near/151844113" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67584automaticsimplemmas.html#151844113">Johan Commelin (Dec 15 2018 at 18:06)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automatic%20simp%20lemmas/near/151844113" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67584automaticsimplemmas.html#151844113">Johan Commelin (Dec 16 2018 at 04:06)</a>:</h4>
 <p><span class="user-mention" data-user-id="110026">@Simon Hudon</span> I'm not sure I understand what you mean. Is it close to what Reid wrote down, or do you want something (slightly) different?</p>
 
 <a name="151844463"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automatic%20simp%20lemmas/near/151844463" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67584automaticsimplemmas.html#151844463">Johan Commelin (Dec 15 2018 at 18:16)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automatic%20simp%20lemmas/near/151844463" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67584automaticsimplemmas.html#151844463">Johan Commelin (Dec 16 2018 at 04:16)</a>:</h4>
 <p>(deleted)</p>
 
 <a name="151846909"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automatic%20simp%20lemmas/near/151846909" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67584automaticsimplemmas.html#151846909">Simon Hudon (Dec 15 2018 at 19:38)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automatic%20simp%20lemmas/near/151846909" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67584automaticsimplemmas.html#151846909">Simon Hudon (Dec 16 2018 at 05:38)</a>:</h4>
 <p>Actually, I have a hard time remembering the details of that idea. I'll try to find the conversation again</p>
 
 <a name="151851104"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automatic%20simp%20lemmas/near/151851104" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67584automaticsimplemmas.html#151851104">Johan Commelin (Dec 15 2018 at 22:00)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automatic%20simp%20lemmas/near/151851104" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67584automaticsimplemmas.html#151851104">Johan Commelin (Dec 16 2018 at 08:00)</a>:</h4>
 <p><span class="user-mention" data-user-id="110026">@Simon Hudon</span> If you want a good showcase of what Reid and I mean, I think you should look at the file on comma categories: <a href="https://github.com/leanprover-community/mathlib/blob/over_under/category_theory/comma.lean" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/over_under/category_theory/comma.lean">https://github.com/leanprover-community/mathlib/blob/over_under/category_theory/comma.lean</a><br>
 I just started adding over categories to the mix (a special case of comma categories), and I'm restating all the simp lemmas. The signal-to-noise ratio is increasing rapidly.</p>
 
 <a name="151851170"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automatic%20simp%20lemmas/near/151851170" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67584automaticsimplemmas.html#151851170">Simon Hudon (Dec 15 2018 at 22:03)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automatic%20simp%20lemmas/near/151851170" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67584automaticsimplemmas.html#151851170">Simon Hudon (Dec 16 2018 at 08:03)</a>:</h4>
 <p>Ah yes! That's also what I was going for I think. The way I was generalizing it is that we want to unfold specific projections. I think I had an idea of which ones to unfold but I'd have to get back into that mindset</p>
 
 <a name="151851331"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automatic%20simp%20lemmas/near/151851331" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67584automaticsimplemmas.html#151851331">Simon Hudon (Dec 15 2018 at 22:08)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automatic%20simp%20lemmas/near/151851331" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67584automaticsimplemmas.html#151851331">Simon Hudon (Dec 16 2018 at 08:08)</a>:</h4>
 <p>The good news is that soon, I won't have to take care of finding an apartment and I will have only Lean and my dissertation to take care of.</p>
 
 <a name="152319775"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automatic%20simp%20lemmas/near/152319775" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67584automaticsimplemmas.html#152319775">Keeley Hoek (Dec 21 2018 at 10:54)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automatic%20simp%20lemmas/near/152319775" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67584automaticsimplemmas.html#152319775">Keeley Hoek (Dec 21 2018 at 20:54)</a>:</h4>
 <p>I'm sorry if I annoyingly keep coming on about this, but I have a command which does the constructor-half of this thing and has been tested on at least one (:D) category theory structure definition. It's called <code>rfl_lemma</code> (you use it on its own line like <code>rfl_lemma inverse_equivalence map</code>---which would tell you that an inverse equivalence of an equivalence has functor going the "forward way" equal to the functor going the "backward way" in the original equivalence), and is here:<br>
 <a href="https://github.com/semorrison/lean-tidy/blob/master/src/tidy/command/rfl_lemma.lean" target="_blank" title="https://github.com/semorrison/lean-tidy/blob/master/src/tidy/command/rfl_lemma.lean">https://github.com/semorrison/lean-tidy/blob/master/src/tidy/command/rfl_lemma.lean</a></p>
 <p>It took multiple iterations because it turned out that getting the types right for the lemma I needed to generate turned out to be really quite hard (at least for me). I can give some examples to elabourate this point if anyone is interested. Making it do this for every projection of a structure instead of just the specified one is trivial.</p>
 
 <a name="152319830"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automatic%20simp%20lemmas/near/152319830" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67584automaticsimplemmas.html#152319830">Keeley Hoek (Dec 21 2018 at 10:56)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automatic%20simp%20lemmas/near/152319830" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67584automaticsimplemmas.html#152319830">Keeley Hoek (Dec 21 2018 at 20:56)</a>:</h4>
 <p><code>rfl_lemma?</code> is meant to tell you what the code generated was, and <code>private rfl_lemma ...</code> makes a private definition.</p>
 
 <a name="152319847"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automatic%20simp%20lemmas/near/152319847" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67584automaticsimplemmas.html#152319847">Johan Commelin (Dec 21 2018 at 10:56)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automatic%20simp%20lemmas/near/152319847" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67584automaticsimplemmas.html#152319847">Johan Commelin (Dec 21 2018 at 20:56)</a>:</h4>
 <p>How much does this depend on the <code>lean-tidy</code> repo?</p>
 
 <a name="152319851"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automatic%20simp%20lemmas/near/152319851" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67584automaticsimplemmas.html#152319851">Johan Commelin (Dec 21 2018 at 10:56)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automatic%20simp%20lemmas/near/152319851" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67584automaticsimplemmas.html#152319851">Johan Commelin (Dec 21 2018 at 20:56)</a>:</h4>
 <p>Sounds cool btw!</p>
 
 <a name="152319864"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automatic%20simp%20lemmas/near/152319864" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67584automaticsimplemmas.html#152319864">Keeley Hoek (Dec 21 2018 at 10:57)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automatic%20simp%20lemmas/near/152319864" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67584automaticsimplemmas.html#152319864">Keeley Hoek (Dec 21 2018 at 20:57)</a>:</h4>
 <p>it depends on a few pieces of the <code>lib</code> folder in there, let me take a look</p>
 
 <a name="152319870"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automatic%20simp%20lemmas/near/152319870" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67584automaticsimplemmas.html#152319870">Sebastian Ullrich (Dec 21 2018 at 10:57)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automatic%20simp%20lemmas/near/152319870" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67584automaticsimplemmas.html#152319870">Sebastian Ullrich (Dec 21 2018 at 20:57)</a>:</h4>
 <div class="codehilite"><pre><span></span>tk &quot;private rfl_lemma&quot;
 </pre></div>
 
@@ -102,63 +102,63 @@ I just started adding over categories to the mix (a special case of comma catego
 <p>omg</p>
 
 <a name="152319928"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automatic%20simp%20lemmas/near/152319928" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67584automaticsimplemmas.html#152319928">Kevin Buzzard (Dec 21 2018 at 10:58)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automatic%20simp%20lemmas/near/152319928" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67584automaticsimplemmas.html#152319928">Kevin Buzzard (Dec 21 2018 at 20:58)</a>:</h4>
 <p>Is that pushing the definition of "token" a bit far or something?</p>
 
 <a name="152319930"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automatic%20simp%20lemmas/near/152319930" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67584automaticsimplemmas.html#152319930">Johan Commelin (Dec 21 2018 at 10:58)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automatic%20simp%20lemmas/near/152319930" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67584automaticsimplemmas.html#152319930">Johan Commelin (Dec 21 2018 at 20:58)</a>:</h4>
 <p>If it doesn't depend too much on <code>lean-tidy</code>, I'dd say: push it to a branch on the community repo. Then we can experiment with it.</p>
 
 <a name="152319955"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automatic%20simp%20lemmas/near/152319955" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67584automaticsimplemmas.html#152319955">Sebastian Ullrich (Dec 21 2018 at 10:59)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automatic%20simp%20lemmas/near/152319955" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67584automaticsimplemmas.html#152319955">Sebastian Ullrich (Dec 21 2018 at 20:59)</a>:</h4>
 <p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> It is, but I guess it actually works. Though, <span class="user-mention" data-user-id="110111">@Keeley Hoek</span>, have you taken a look at the <code>decl_meta_info</code> parameter?</p>
 
 <a name="152320028"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automatic%20simp%20lemmas/near/152320028" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67584automaticsimplemmas.html#152320028">Keeley Hoek (Dec 21 2018 at 11:00)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automatic%20simp%20lemmas/near/152320028" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67584automaticsimplemmas.html#152320028">Keeley Hoek (Dec 21 2018 at 21:00)</a>:</h4>
 <p>No I haven't Sebastian, and thanks, now I have an idea about what it's for :D</p>
 
 <a name="152320044"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automatic%20simp%20lemmas/near/152320044" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67584automaticsimplemmas.html#152320044">Sebastian Ullrich (Dec 21 2018 at 11:01)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automatic%20simp%20lemmas/near/152320044" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67584automaticsimplemmas.html#152320044">Sebastian Ullrich (Dec 21 2018 at 21:01)</a>:</h4>
 <p>Yeah, I don't think your current code would have worked anyway. There is no such registered token.</p>
 
 <a name="152320059"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automatic%20simp%20lemmas/near/152320059" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67584automaticsimplemmas.html#152320059">Keeley Hoek (Dec 21 2018 at 11:01)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automatic%20simp%20lemmas/near/152320059" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67584automaticsimplemmas.html#152320059">Keeley Hoek (Dec 21 2018 at 21:01)</a>:</h4>
 <p>The thing is, I'm pretty sure it did work! I'll try...</p>
 
 <a name="152320066"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automatic%20simp%20lemmas/near/152320066" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67584automaticsimplemmas.html#152320066">Keeley Hoek (Dec 21 2018 at 11:01)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automatic%20simp%20lemmas/near/152320066" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67584automaticsimplemmas.html#152320066">Keeley Hoek (Dec 21 2018 at 21:01)</a>:</h4>
 <p>also it was before I knew I could do stuff like parse a question mark after a token, so please forgive me... :D</p>
 
 <a name="152320116"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automatic%20simp%20lemmas/near/152320116" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67584automaticsimplemmas.html#152320116">Sebastian Ullrich (Dec 21 2018 at 11:02)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automatic%20simp%20lemmas/near/152320116" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67584automaticsimplemmas.html#152320116">Sebastian Ullrich (Dec 21 2018 at 21:02)</a>:</h4>
 <p>It will be parsed successfully, but it will still call the regular definition with <code>private := tt</code> in the meta info</p>
 
 <a name="152320210"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automatic%20simp%20lemmas/near/152320210" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67584automaticsimplemmas.html#152320210">Keeley Hoek (Dec 21 2018 at 11:04)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automatic%20simp%20lemmas/near/152320210" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67584automaticsimplemmas.html#152320210">Keeley Hoek (Dec 21 2018 at 21:04)</a>:</h4>
 <p>Unless you've run it and can prove I'm crazy, I just did and I'm quiiite confident a different one of those <code>user_command</code>s is being called depending on private or not</p>
 
 <a name="152320258"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automatic%20simp%20lemmas/near/152320258" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67584automaticsimplemmas.html#152320258">Keeley Hoek (Dec 21 2018 at 11:05)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automatic%20simp%20lemmas/near/152320258" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67584automaticsimplemmas.html#152320258">Keeley Hoek (Dec 21 2018 at 21:05)</a>:</h4>
 <p>Does it have something to do with the fact that for <code>user_command</code>s, unlike <code>user_notation</code>s, you don't need to reserve tokens for them to work?</p>
 
 <a name="152320261"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automatic%20simp%20lemmas/near/152320261" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67584automaticsimplemmas.html#152320261">Sebastian Ullrich (Dec 21 2018 at 11:05)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automatic%20simp%20lemmas/near/152320261" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67584automaticsimplemmas.html#152320261">Sebastian Ullrich (Dec 21 2018 at 21:05)</a>:</h4>
 <p>Right... oops</p>
 
 <a name="152320305"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automatic%20simp%20lemmas/near/152320305" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67584automaticsimplemmas.html#152320305">Keeley Hoek (Dec 21 2018 at 11:06)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automatic%20simp%20lemmas/near/152320305" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67584automaticsimplemmas.html#152320305">Keeley Hoek (Dec 21 2018 at 21:06)</a>:</h4>
 <p>:D</p>
 
 <a name="152320330"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automatic%20simp%20lemmas/near/152320330" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67584automaticsimplemmas.html#152320330">Keeley Hoek (Dec 21 2018 at 11:06)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automatic%20simp%20lemmas/near/152320330" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67584automaticsimplemmas.html#152320330">Keeley Hoek (Dec 21 2018 at 21:06)</a>:</h4>
 <p>But no reason not to fix it up so it works properly... cheers! (and I only need a single definition now, not <code>2^2</code>)</p>
 
 <a name="152320363"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automatic%20simp%20lemmas/near/152320363" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67584automaticsimplemmas.html#152320363">Keeley Hoek (Dec 21 2018 at 11:07)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automatic%20simp%20lemmas/near/152320363" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67584automaticsimplemmas.html#152320363">Keeley Hoek (Dec 21 2018 at 21:07)</a>:</h4>
 <p>BTW, here's a "live demo"</p>
 
 <a name="152320369"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automatic%20simp%20lemmas/near/152320369" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67584automaticsimplemmas.html#152320369">Keeley Hoek (Dec 21 2018 at 11:07)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automatic%20simp%20lemmas/near/152320369" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67584automaticsimplemmas.html#152320369">Keeley Hoek (Dec 21 2018 at 21:07)</a>:</h4>
 <p>(RE: the original post)</p>
 <div class="codehilite"><pre><span></span><span class="kn">structure</span> <span class="n">my_str</span> <span class="o">:=</span>
 <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span>
@@ -171,23 +171,23 @@ I just started adding over categories to the mix (a special case of comma catego
 </pre></div>
 
 <a name="152320457"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automatic%20simp%20lemmas/near/152320457" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67584automaticsimplemmas.html#152320457">Sebastian Ullrich (Dec 21 2018 at 11:09)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automatic%20simp%20lemmas/near/152320457" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67584automaticsimplemmas.html#152320457">Sebastian Ullrich (Dec 21 2018 at 21:09)</a>:</h4>
 <p>Nice. Any reason it's not an attribute?</p>
 
 <a name="152320555"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automatic%20simp%20lemmas/near/152320555" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67584automaticsimplemmas.html#152320555">Keeley Hoek (Dec 21 2018 at 11:11)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automatic%20simp%20lemmas/near/152320555" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67584automaticsimplemmas.html#152320555">Keeley Hoek (Dec 21 2018 at 21:11)</a>:</h4>
 <p>That's cool</p>
 
 <a name="152320641"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automatic%20simp%20lemmas/near/152320641" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67584automaticsimplemmas.html#152320641">Keeley Hoek (Dec 21 2018 at 11:13)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automatic%20simp%20lemmas/near/152320641" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67584automaticsimplemmas.html#152320641">Keeley Hoek (Dec 21 2018 at 21:13)</a>:</h4>
 <p><span class="user-mention" data-user-id="112680">@Johan Commelin</span> Based on the pieces of <code>lib</code> which have ended up in mathlib now, I just need the <code>lib.expr</code> support file. My only reluctance comes from the fact that I will have to check whether a few of the functions at the bottom of that file are already in mathlib---at the time it was less effort just to write them.</p>
 
 <a name="152320981"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automatic%20simp%20lemmas/near/152320981" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67584automaticsimplemmas.html#152320981">Keeley Hoek (Dec 21 2018 at 11:19)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automatic%20simp%20lemmas/near/152320981" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67584automaticsimplemmas.html#152320981">Keeley Hoek (Dec 21 2018 at 21:19)</a>:</h4>
 <p>One more thing if anyone doing maths actually uses it: it adds a prime to the projection name you supply, seeing if that works, before trying without. Hopefully that's convenient</p>
 
 <a name="152351507"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automatic%20simp%20lemmas/near/152351507" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67584automaticsimplemmas.html#152351507">Reid Barton (Dec 21 2018 at 20:08)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/automatic%20simp%20lemmas/near/152351507" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67584automaticsimplemmas.html#152351507">Reid Barton (Dec 22 2018 at 06:08)</a>:</h4>
 <p>The interface I had in mind was that you'd write something like <code>@[simp_fields] def a_cnstr ... := ...</code>, and it would automatically generate all of the appropriate lemmas.</p>
 
 

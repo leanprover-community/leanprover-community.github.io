@@ -12,15 +12,15 @@ permalink: archive/113488general/51637typeclassinferenceaftercolon.html
 <base href="https://leanprover.zulipchat.com">
 {% raw %}
 <a name="123577754"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20inference%20after%20colon/near/123577754" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51637typeclassinferenceaftercolon.html#123577754">Kevin Buzzard (Mar 11 2018 at 19:34)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20inference%20after%20colon/near/123577754" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51637typeclassinferenceaftercolon.html#123577754">Kevin Buzzard (Mar 12 2018 at 05:34)</a>:</h4>
 <p>In <code>example (α : Type) [comm_ring α] : ∀ x y z : α, x*(y+z)=x*y+x*z := mul_add</code>, type class inference enables us to use <code>mul_add</code>. Is it possible to move the colon to the left of the alpha though? Not that  I need to, it's just an idle question. If I try <code>example : ∀ (α : Type) [comm_ring α], ∀ x y z : α, x*(y+z)=x*y+x*z := mul_add</code> then Lean complains about not being able to find <code>has_add alpha</code> etc.</p>
 
 <a name="123577804"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20inference%20after%20colon/near/123577804" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51637typeclassinferenceaftercolon.html#123577804">Kevin Buzzard (Mar 11 2018 at 19:37)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20inference%20after%20colon/near/123577804" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51637typeclassinferenceaftercolon.html#123577804">Kevin Buzzard (Mar 12 2018 at 05:37)</a>:</h4>
 <p>A related question: is there ever a difference between <code>[comm_ring alpha]</code> and <code>[H : comm_ring alpha]</code> in terms of the type class inference system? Or between <code>[comm_ring alpha]</code> and <code>[_inst_1 : comm_ring alpha]</code>?</p>
 
 <a name="123578051"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20inference%20after%20colon/near/123578051" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51637typeclassinferenceaftercolon.html#123578051">Kevin Buzzard (Mar 11 2018 at 19:47)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20inference%20after%20colon/near/123578051" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51637typeclassinferenceaftercolon.html#123578051">Kevin Buzzard (Mar 12 2018 at 05:47)</a>:</h4>
 <p>And another type class subtlety. With</p>
 <div class="codehilite"><pre><span></span>structure foo (α : Type) :=
 (bar : α)
@@ -34,15 +34,15 @@ permalink: archive/113488general/51637typeclassinferenceaftercolon.html
 <p>both <code>foo.bar</code> and <code>foo.baz</code> are <code>Π {α : Type},...</code>. But if I change the structure to a class, <code>foo.bar</code> (but not <code>foo.baz</code>) magically changes to <code>Π (α : Type)...</code> (no longer implicit). It didn't have to be that way, right? That is presumably some design decision?</p>
 
 <a name="123579280"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20inference%20after%20colon/near/123579280" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51637typeclassinferenceaftercolon.html#123579280">Mario Carneiro (Mar 11 2018 at 20:36)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20inference%20after%20colon/near/123579280" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51637typeclassinferenceaftercolon.html#123579280">Mario Carneiro (Mar 12 2018 at 06:36)</a>:</h4>
 <p>The first issue is <a href="https://github.com/leanprover/lean/issues/1920" target="_blank" title="https://github.com/leanprover/lean/issues/1920">#1920</a>. You have to write <code>example : ∀ (α : Type) [comm_ring α], ∀ x y z : α, by exactI x*(y+z)=x*y+x*z</code> if you want to use any typeclass args right of the colon</p>
 
 <a name="123579286"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20inference%20after%20colon/near/123579286" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51637typeclassinferenceaftercolon.html#123579286">Kevin Buzzard (Mar 11 2018 at 20:37)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20inference%20after%20colon/near/123579286" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51637typeclassinferenceaftercolon.html#123579286">Kevin Buzzard (Mar 12 2018 at 06:37)</a>:</h4>
 <p>Aah -- this is exactly the change that caused you so much trouble!</p>
 
 <a name="123579327"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20inference%20after%20colon/near/123579327" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51637typeclassinferenceaftercolon.html#123579327">Mario Carneiro (Mar 11 2018 at 20:39)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20class%20inference%20after%20colon/near/123579327" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51637typeclassinferenceaftercolon.html#123579327">Mario Carneiro (Mar 12 2018 at 06:39)</a>:</h4>
 <p>The second issue is just the usual analysis of when to make arguments implicit. It's a design decision, of course, but it is reasonably predictable and well motivated</p>
 
 

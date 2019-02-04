@@ -12,7 +12,7 @@ permalink: archive/113488general/76625simpcanonize.html
 <base href="https://leanprover.zulipchat.com">
 {% raw %}
 <a name="156622369"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20canonize/near/156622369" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76625simpcanonize.html#156622369">Simon Hudon (Jan 22 2019 at 18:28)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20canonize/near/156622369" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76625simpcanonize.html#156622369">Simon Hudon (Jan 23 2019 at 04:28)</a>:</h4>
 <p>I'm trying to get rid of some simp loops and I just realized that there is a part of it I don't understand and it seems to be getting into a loop. Here is the trace that Lean prints for it:</p>
 <div class="codehilite"><pre><span></span>[simplify.canonize]
 category_theory.types
@@ -44,23 +44,23 @@ _inst_2
 <p>How do I prevent it from looping? I tried <code>simp [-category_theory.types]</code> and it doesn't work.</p>
 
 <a name="156622930"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20canonize/near/156622930" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76625simpcanonize.html#156622930">Johan Commelin (Jan 22 2019 at 18:36)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20canonize/near/156622930" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76625simpcanonize.html#156622930">Johan Commelin (Jan 23 2019 at 04:36)</a>:</h4>
 <p>But <code>category_theory.types</code> isn't even marked as <code>[simp]</code>. How come the simplifier is using it?</p>
 
 <a name="156627682"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20canonize/near/156627682" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76625simpcanonize.html#156627682">Simon Hudon (Jan 22 2019 at 19:36)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20canonize/near/156627682" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76625simpcanonize.html#156627682">Simon Hudon (Jan 23 2019 at 05:36)</a>:</h4>
 <p>I am puzzled too. My tentative answer is that it comes from the <code>canonize</code> phase of <code>simp</code> which I did not know of. It seems like a phase where class instances are reduced but I can't say more. <span class="user-mention" data-user-id="110024">@Sebastian Ullrich</span>, would you care to enlighten us?</p>
 
 <a name="156638222"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20canonize/near/156638222" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76625simpcanonize.html#156638222">Simon Hudon (Jan 22 2019 at 21:49)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20canonize/near/156638222" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76625simpcanonize.html#156638222">Simon Hudon (Jan 23 2019 at 07:49)</a>:</h4>
 <p>Update: using <code>set_option trace.debug.dsimplify true</code> and using <code>dsimp</code> instead of <code>simp</code>, I managed to find the offender which was unrelated to <code>canonize</code></p>
 
 <a name="156643964"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20canonize/near/156643964" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76625simpcanonize.html#156643964">Mario Carneiro (Jan 22 2019 at 23:01)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20canonize/near/156643964" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76625simpcanonize.html#156643964">Mario Carneiro (Jan 23 2019 at 09:01)</a>:</h4>
 <p>MWE</p>
 
 <a name="156649250"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20canonize/near/156649250" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76625simpcanonize.html#156649250">Simon Hudon (Jan 23 2019 at 00:21)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20canonize/near/156649250" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76625simpcanonize.html#156649250">Simon Hudon (Jan 23 2019 at 10:21)</a>:</h4>
 <div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">category</span>
 <span class="kn">import</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">types</span>
 
@@ -102,7 +102,7 @@ _inst_2
 </pre></div>
 
 <a name="156649296"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20canonize/near/156649296" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76625simpcanonize.html#156649296">Simon Hudon (Jan 23 2019 at 00:22)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20canonize/near/156649296" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/76625simpcanonize.html#156649296">Simon Hudon (Jan 23 2019 at 10:22)</a>:</h4>
 <p>If you comment out <code>Cokleisli.comp_def</code>, the error disappears</p>
 
 

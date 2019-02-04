@@ -12,15 +12,15 @@ permalink: archive/113488general/98059constructingexprlam.html
 <base href="https://leanprover.zulipchat.com">
 {% raw %}
 <a name="133600290"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/constructing%20expr.lam/near/133600290" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98059constructingexprlam.html#133600290">Scott Morrison (Sep 09 2018 at 10:28)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/constructing%20expr.lam/near/133600290" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98059constructingexprlam.html#133600290">Scott Morrison (Sep 09 2018 at 18:28)</a>:</h4>
 <p>How do I construct <code>expr.lam</code> terms? In particular, I have  an expression <code>e_1</code> that already has a <code>var n</code> inside it, and another <code>e_2</code>, and I want to construct the <code>expr</code> representing <code>lam x, e_1 = e_2</code>.</p>
 
 <a name="133600338"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/constructing%20expr.lam/near/133600338" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98059constructingexprlam.html#133600338">Scott Morrison (Sep 09 2018 at 10:29)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/constructing%20expr.lam/near/133600338" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98059constructingexprlam.html#133600338">Scott Morrison (Sep 09 2018 at 18:29)</a>:</h4>
 <p>I tried to use <code>to_expr ``(%%e_1 = %%e_2)</code>, but that chokes because <code>e_1</code> has a <code>var</code> inside it.</p>
 
 <a name="133600394"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/constructing%20expr.lam/near/133600394" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98059constructingexprlam.html#133600394">Simon Hudon (Sep 09 2018 at 10:31)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/constructing%20expr.lam/near/133600394" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98059constructingexprlam.html#133600394">Simon Hudon (Sep 09 2018 at 18:31)</a>:</h4>
 <p>It's kind of ugly but I recommend </p>
 <div class="codehilite"><pre><span></span><span class="n">feq</span> <span class="bp">&lt;-</span> <span class="n">mk_const</span> <span class="bp">`</span><span class="n">eq</span><span class="o">,</span>
 <span class="n">v</span> <span class="bp">&lt;-</span> <span class="n">mk_mvar</span><span class="o">,</span>
@@ -28,26 +28,26 @@ permalink: archive/113488general/98059constructingexprlam.html
 </pre></div>
 
 <a name="133600442"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/constructing%20expr.lam/near/133600442" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98059constructingexprlam.html#133600442">Simon Hudon (Sep 09 2018 at 10:33)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/constructing%20expr.lam/near/133600442" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98059constructingexprlam.html#133600442">Simon Hudon (Sep 09 2018 at 18:33)</a>:</h4>
 <p>the downside is that you're postponing type checking. If you don't want to postpone type checking, you have to take the long way around, instantiate your <code>var</code> with <code>local_const</code>, type check, then use <code>lambdas</code></p>
 
 <a name="133600976"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/constructing%20expr.lam/near/133600976" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98059constructingexprlam.html#133600976">Scott Morrison (Sep 09 2018 at 10:55)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/constructing%20expr.lam/near/133600976" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98059constructingexprlam.html#133600976">Scott Morrison (Sep 09 2018 at 18:55)</a>:</h4>
 <p>Ah, I see. Turning my <code>var</code> into a <code>local_const</code> is maybe not so bad, in any case. How does one construct the <code>expr.lam</code> then?</p>
 
 <a name="133601026"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/constructing%20expr.lam/near/133601026" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98059constructingexprlam.html#133601026">Simon Hudon (Sep 09 2018 at 10:57)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/constructing%20expr.lam/near/133601026" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98059constructingexprlam.html#133601026">Simon Hudon (Sep 09 2018 at 18:57)</a>:</h4>
 <div class="codehilite"><pre><span></span><span class="n">v</span> <span class="bp">&lt;-</span> <span class="n">mk_local_def</span> <span class="n">n</span> <span class="n">t</span><span class="o">,</span>
 <span class="n">e</span> <span class="bp">&lt;-</span> <span class="n">mk_app</span> <span class="bp">`</span><span class="n">eq</span> <span class="o">[</span><span class="n">e_1</span><span class="bp">.</span><span class="n">instantiate_var</span> <span class="n">v</span><span class="o">,</span> <span class="n">e_2</span><span class="o">],</span>
 <span class="n">lambdas</span> <span class="o">[</span><span class="n">v</span><span class="o">]</span> <span class="n">e</span><span class="o">,</span>
 </pre></div>
 
 <a name="133601300"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/constructing%20expr.lam/near/133601300" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98059constructingexprlam.html#133601300">Scott Morrison (Sep 09 2018 at 11:06)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/constructing%20expr.lam/near/133601300" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98059constructingexprlam.html#133601300">Scott Morrison (Sep 09 2018 at 19:06)</a>:</h4>
 <p>Thanks!</p>
 
 <a name="133601301"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/constructing%20expr.lam/near/133601301" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98059constructingexprlam.html#133601301">Simon Hudon (Sep 09 2018 at 11:06)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/constructing%20expr.lam/near/133601301" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98059constructingexprlam.html#133601301">Simon Hudon (Sep 09 2018 at 19:06)</a>:</h4>
 <p><span class="emoji emoji-1f44d" title="+1">:+1:</span></p>
 
 

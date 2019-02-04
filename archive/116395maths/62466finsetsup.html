@@ -12,19 +12,19 @@ permalink: archive/116395maths/62466finsetsup.html
 <base href="https://leanprover.zulipchat.com">
 {% raw %}
 <a name="135087348"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finset%20sup/near/135087348" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/62466finsetsup.html#135087348">Sebastien Gouezel (Oct 03 2018 at 09:52)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finset%20sup/near/135087348" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/62466finsetsup.html#135087348">Sebastien Gouezel (Oct 03 2018 at 17:52)</a>:</h4>
 <p>I can't find the lemma saying that, in a linear order (with bot, probably), the sup of a finset is <code>&lt; a</code> if all its elements are <code>&lt; a</code>(and <code>\bot &lt; a</code>). I guess it has to be somewhere, but there are so many files and so many different classes for orders. Some help would be most welcome!</p>
 
 <a name="135088713"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finset%20sup/near/135088713" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/62466finsetsup.html#135088713">Johannes Hölzl (Oct 03 2018 at 10:28)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finset%20sup/near/135088713" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/62466finsetsup.html#135088713">Johannes Hölzl (Oct 03 2018 at 18:28)</a>:</h4>
 <p>I don't think we have the variant for <code>&lt;</code>. There is <code>le_max_of_mem</code>, where <code>a ∈ s.max</code> states that there exist a maximum and it is <code>a</code>.</p>
 
 <a name="135088730"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finset%20sup/near/135088730" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/62466finsetsup.html#135088730">Johannes Hölzl (Oct 03 2018 at 10:29)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finset%20sup/near/135088730" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/62466finsetsup.html#135088730">Johannes Hölzl (Oct 03 2018 at 18:29)</a>:</h4>
 <p>when your order has a bottom element you can use <code>finset.sup_le</code></p>
 
 <a name="135090992"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finset%20sup/near/135090992" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/62466finsetsup.html#135090992">Sebastien Gouezel (Oct 03 2018 at 11:18)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finset%20sup/near/135090992" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/62466finsetsup.html#135090992">Sebastien Gouezel (Oct 03 2018 at 19:18)</a>:</h4>
 <p>I really need the version with <code>&lt;</code>. I think I am lost with the typeclass system. If I want to state my lemma, say, on <code>nnreal</code>, then everything works fine:</p>
 <div class="codehilite"><pre><span></span><span class="kn">variables</span> <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">{</span><span class="n">s</span> <span class="o">:</span> <span class="n">finset</span> <span class="n">β</span><span class="o">}</span> <span class="o">{</span><span class="n">f</span> <span class="o">:</span> <span class="n">β</span> <span class="bp">→</span> <span class="n">nnreal</span><span class="o">}</span>
 <span class="kn">lemma</span> <span class="n">sup_lt</span> <span class="o">{</span><span class="n">a</span> <span class="o">:</span> <span class="n">nnreal</span><span class="o">}</span> <span class="o">:</span> <span class="o">(</span><span class="err">⊥</span> <span class="bp">&lt;</span> <span class="n">a</span><span class="o">)</span> <span class="bp">→</span> <span class="o">(</span><span class="bp">∀</span><span class="n">b</span> <span class="err">∈</span> <span class="n">s</span><span class="o">,</span> <span class="n">f</span> <span class="n">b</span> <span class="bp">&lt;</span> <span class="n">a</span><span class="o">)</span> <span class="bp">→</span> <span class="n">s</span><span class="bp">.</span><span class="n">sup</span> <span class="n">f</span> <span class="bp">&lt;</span> <span class="n">a</span> <span class="o">:=</span>
@@ -54,11 +54,11 @@ permalink: archive/116395maths/62466finsetsup.html
 <p>Is there a good way to write this lemma?</p>
 
 <a name="135091562"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finset%20sup/near/135091562" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/62466finsetsup.html#135091562">Mario Carneiro (Oct 03 2018 at 11:31)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finset%20sup/near/135091562" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/62466finsetsup.html#135091562">Mario Carneiro (Oct 03 2018 at 19:31)</a>:</h4>
 <p>You could use <code>is_total α (≤)</code> as a mixin</p>
 
 <a name="135093300"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finset%20sup/near/135093300" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/62466finsetsup.html#135093300">Sebastien Gouezel (Oct 03 2018 at 12:13)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finset%20sup/near/135093300" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/62466finsetsup.html#135093300">Sebastien Gouezel (Oct 03 2018 at 20:13)</a>:</h4>
 <p>Got it, thanks!</p>
 <div class="codehilite"><pre><span></span><span class="kn">variables</span> <span class="o">{</span><span class="n">α</span> <span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">{</span><span class="n">s</span><span class="o">:</span> <span class="n">finset</span> <span class="n">β</span><span class="o">}</span> <span class="o">{</span><span class="n">f</span> <span class="o">:</span> <span class="n">β</span> <span class="bp">→</span> <span class="n">α</span><span class="o">}</span>
 <span class="kn">lemma</span> <span class="n">sup_lt</span> <span class="o">[</span><span class="n">semilattice_sup_bot</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">is_total</span> <span class="n">α</span> <span class="o">(</span><span class="bp">≤</span><span class="o">)]</span> <span class="o">{</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">}</span> <span class="o">:</span> <span class="o">(</span><span class="err">⊥</span> <span class="bp">&lt;</span> <span class="n">a</span><span class="o">)</span> <span class="bp">→</span> <span class="o">(</span><span class="bp">∀</span><span class="n">b</span> <span class="err">∈</span> <span class="n">q</span><span class="o">,</span> <span class="n">f</span> <span class="n">b</span> <span class="bp">&lt;</span> <span class="n">a</span><span class="o">)</span> <span class="bp">→</span> <span class="n">q</span><span class="bp">.</span><span class="n">sup</span> <span class="n">f</span> <span class="bp">&lt;</span> <span class="n">a</span> <span class="o">:=</span>
@@ -78,127 +78,127 @@ permalink: archive/116395maths/62466finsetsup.html
 (And I confirm I am 20 times more slow in Lean than Isabelle, but hopefully this will improve slightly over time :)</p>
 
 <a name="135096270"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finset%20sup/near/135096270" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/62466finsetsup.html#135096270">Kevin Buzzard (Oct 03 2018 at 13:24)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finset%20sup/near/135096270" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/62466finsetsup.html#135096270">Kevin Buzzard (Oct 03 2018 at 21:24)</a>:</h4>
 <p><span class="user-mention" data-user-id="110050">@Sebastien Gouezel</span> in the past you have done mathematics in Isabelle with "PhD student level" objects like Gromov-hyperbolic spaces. What attracted me to Lean was that I realised that there seemed to be no obstruction to doing pure mathematics with objects at this kind of level (e.g. we will have a definition of a perfectoid space soon and I'm sure we'll be able to prove basic lemmas about it). Is the same true of Isabelle? Disregarding the fact that Lean's maths library is no doubt much smaller than Isabelle's, are there any other reasons why one might prefer Isabelle to Lean when manipulating complex mathematical objects?</p>
 
 <a name="135096989"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finset%20sup/near/135096989" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/62466finsetsup.html#135096989">Sebastien Gouezel (Oct 03 2018 at 13:38)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finset%20sup/near/135096989" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/62466finsetsup.html#135096989">Sebastien Gouezel (Oct 03 2018 at 21:38)</a>:</h4>
 <p>There are very serious limitations in Isabelle. Doing perfectoids would be essentially impossible, I guess. For another example, I want to define the space of all compact metric spaces, put a distance on it (the so-called Gromov-Hausdorff distance), and then it makes sense to talk of the convergence of a sequence of compact metric spaces to a compact metric space, and put probability measures on the space of compact metric spaces, and so on. This is very common and useful in geometry and probability, but impossible to formalize in Isabelle, for lack of dependent types. My impression is that this will be perfectly doable in Lean. That's why I want to switch. But I miss a lot the automatisation level of Isabelle, which is way better than anything there is currently in Lean.</p>
 
 <a name="135097163"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finset%20sup/near/135097163" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/62466finsetsup.html#135097163">Sebastien Gouezel (Oct 03 2018 at 13:42)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finset%20sup/near/135097163" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/62466finsetsup.html#135097163">Sebastien Gouezel (Oct 03 2018 at 21:42)</a>:</h4>
 <p>An important feature of Isabelle I dream to have in Lean is the simprocs. When you call <code>simp</code>, if it detects some pattern then it will automatically apply some algorithms. For instance, if it detects some algebraic expression, then it will simplify it within reasonable bouds. If you have something like <code>a+ exp( b + c + d - b + c) - a</code> and you just apply <code>simp</code>, it will transform it to <code>exp (2 * c+d)</code>, without the need to call an additional tactic like <code>ring</code> or <code>abel</code> -- note that both <code>ring</code> and <code>abel</code> would fail on this simple example.</p>
 
 <a name="135097464"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finset%20sup/near/135097464" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/62466finsetsup.html#135097464">Mario Carneiro (Oct 03 2018 at 13:48)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finset%20sup/near/135097464" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/62466finsetsup.html#135097464">Mario Carneiro (Oct 03 2018 at 21:48)</a>:</h4>
 <p>I think <code>ring</code> will actually do that</p>
 
 <a name="135097473"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finset%20sup/near/135097473" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/62466finsetsup.html#135097473">Mario Carneiro (Oct 03 2018 at 13:48)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finset%20sup/near/135097473" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/62466finsetsup.html#135097473">Mario Carneiro (Oct 03 2018 at 21:48)</a>:</h4>
 <p>this is the "failure mode" of <code>ring</code></p>
 
 <a name="135097488"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finset%20sup/near/135097488" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/62466finsetsup.html#135097488">Sebastien Gouezel (Oct 03 2018 at 13:49)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finset%20sup/near/135097488" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/62466finsetsup.html#135097488">Sebastien Gouezel (Oct 03 2018 at 21:49)</a>:</h4>
 <p>Will it also simplify inside the exponential?</p>
 
 <a name="135097662"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finset%20sup/near/135097662" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/62466finsetsup.html#135097662">Johan Commelin (Oct 03 2018 at 13:52)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finset%20sup/near/135097662" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/62466finsetsup.html#135097662">Johan Commelin (Oct 03 2018 at 21:52)</a>:</h4>
 <p><span class="user-mention" data-user-id="110050">@Sebastien Gouezel</span> But there are not theoretical reasons to why this sort of thing couldn't happen in Lean, right? It is just a matter of Lean being very young compared to Isabelle. Is that right?</p>
 
 <a name="135097679"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finset%20sup/near/135097679" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/62466finsetsup.html#135097679">Patrick Massot (Oct 03 2018 at 13:52)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finset%20sup/near/135097679" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/62466finsetsup.html#135097679">Patrick Massot (Oct 03 2018 at 21:52)</a>:</h4>
 <p>It seems it's also easier to build automation without dependent type</p>
 
 <a name="135097699"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finset%20sup/near/135097699" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/62466finsetsup.html#135097699">Mario Carneiro (Oct 03 2018 at 13:53)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finset%20sup/near/135097699" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/62466finsetsup.html#135097699">Mario Carneiro (Oct 03 2018 at 21:53)</a>:</h4>
 <p>I think <span class="user-mention" data-user-id="110294">@Johannes Hölzl</span> was looking into simpprocs, not sure what progress has been made there</p>
 
 <a name="135097703"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finset%20sup/near/135097703" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/62466finsetsup.html#135097703">Johannes Hölzl (Oct 03 2018 at 13:53)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finset%20sup/near/135097703" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/62466finsetsup.html#135097703">Johannes Hölzl (Oct 03 2018 at 21:53)</a>:</h4>
 <p>no a lot yet</p>
 
 <a name="135097704"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finset%20sup/near/135097704" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/62466finsetsup.html#135097704">Johan Commelin (Oct 03 2018 at 13:53)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finset%20sup/near/135097704" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/62466finsetsup.html#135097704">Johan Commelin (Oct 03 2018 at 21:53)</a>:</h4>
 <blockquote>
 <p>It seems it's also easier to build automation without dependent type</p>
 </blockquote>
 <p>Ok, so maybe Lean has a theoretical disadvantage...</p>
 
 <a name="135098086"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finset%20sup/near/135098086" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/62466finsetsup.html#135098086">Sebastien Gouezel (Oct 03 2018 at 14:01)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finset%20sup/near/135098086" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/62466finsetsup.html#135098086">Sebastien Gouezel (Oct 03 2018 at 22:01)</a>:</h4>
 <blockquote>
 <p><span class="user-mention" data-user-id="110050">@Sebastien Gouezel</span> But there are not theoretical reasons to why this sort of thing couldn't happen in Lean, right? It is just a matter of Lean being very young compared to Isabelle. Is that right?</p>
 </blockquote>
 <p>I think so, yes. But to implement it you need to know the inner workings of simp, and I guess it is also very easy to run into performance issues.</p>
 
 <a name="135102923"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finset%20sup/near/135102923" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/62466finsetsup.html#135102923">Kevin Buzzard (Oct 03 2018 at 15:24)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finset%20sup/near/135102923" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/62466finsetsup.html#135102923">Kevin Buzzard (Oct 03 2018 at 23:24)</a>:</h4>
 <p>I dream of a future where we simply do not care about performance issues -- like in normal maths. You write it once, you compile it once, you forget about it and only come back to it when someone else changes something and your proof actually breaks.</p>
 
 <a name="135102950"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finset%20sup/near/135102950" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/62466finsetsup.html#135102950">Kevin Buzzard (Oct 03 2018 at 15:25)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finset%20sup/near/135102950" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/62466finsetsup.html#135102950">Kevin Buzzard (Oct 03 2018 at 23:25)</a>:</h4>
 <p>This is some sort of analogue of a mathematician proving a theorem and then publishing it and then everyone can use the result without having to wait for it to compile.</p>
 
 <a name="135103468"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finset%20sup/near/135103468" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/62466finsetsup.html#135103468">Mario Carneiro (Oct 03 2018 at 15:34)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finset%20sup/near/135103468" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/62466finsetsup.html#135103468">Mario Carneiro (Oct 03 2018 at 23:34)</a>:</h4>
 <p>Wait, are you saying that when you start working on a problem, you <em>don't</em> remind yourself what facts are known by proving them and the rest of basic maths from the axioms?</p>
 
 <a name="135103539"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finset%20sup/near/135103539" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/62466finsetsup.html#135103539">Mario Carneiro (Oct 03 2018 at 15:36)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finset%20sup/near/135103539" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/62466finsetsup.html#135103539">Mario Carneiro (Oct 03 2018 at 23:36)</a>:</h4>
 <p>I mean, who knows, maybe something you wrote today invalidates everything you have ever learned, how can you be sure unless you go over it all every day?</p>
 
 <a name="135104075"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finset%20sup/near/135104075" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/62466finsetsup.html#135104075">Kevin Buzzard (Oct 03 2018 at 15:44)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finset%20sup/near/135104075" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/62466finsetsup.html#135104075">Kevin Buzzard (Oct 03 2018 at 23:44)</a>:</h4>
 <p>Naah -- often we rely on random facts which we read on the internet and for which the proof term is currently unavailable or incomplete. One makes much faster progress this way!</p>
 
 <a name="135104095"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finset%20sup/near/135104095" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/62466finsetsup.html#135104095">Patrick Massot (Oct 03 2018 at 15:45)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finset%20sup/near/135104095" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/62466finsetsup.html#135104095">Patrick Massot (Oct 03 2018 at 23:45)</a>:</h4>
 <p>And this won't change until we get that module refactor</p>
 
 <a name="135104102"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finset%20sup/near/135104102" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/62466finsetsup.html#135104102">Kevin Buzzard (Oct 03 2018 at 15:45)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finset%20sup/near/135104102" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/62466finsetsup.html#135104102">Kevin Buzzard (Oct 03 2018 at 23:45)</a>:</h4>
 <p>We even sometimes rely on "facts" for which it turns out that there is no proof term at all!</p>
 
 <a name="135104153"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finset%20sup/near/135104153" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/62466finsetsup.html#135104153">Patrick Massot (Oct 03 2018 at 15:46)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finset%20sup/near/135104153" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/62466finsetsup.html#135104153">Patrick Massot (Oct 03 2018 at 23:46)</a>:</h4>
 <p>Waiting for Lean 4 is completely out of fashion now that we have this other fantasy</p>
 
 <a name="135114883"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finset%20sup/near/135114883" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/62466finsetsup.html#135114883">Jared Corduan (Oct 03 2018 at 18:25)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finset%20sup/near/135114883" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/62466finsetsup.html#135114883">Jared Corduan (Oct 04 2018 at 02:25)</a>:</h4>
 <p>some folks aren't afraid to assume GCH :)</p>
 
 <a name="135128633"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finset%20sup/near/135128633" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/62466finsetsup.html#135128633">Kevin Buzzard (Oct 03 2018 at 21:48)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finset%20sup/near/135128633" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/62466finsetsup.html#135128633">Kevin Buzzard (Oct 04 2018 at 05:48)</a>:</h4>
 <blockquote>
 <p>There are very serious limitations in Isabelle. [snip] ...but impossible to formalize in Isabelle, for lack of dependent types.</p>
 </blockquote>
 <p>What do people mean by Isabelle here? Are we talking about Isabelle-HOL or something? Can there be an Isabelle-DTT?</p>
 
 <a name="135128950"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finset%20sup/near/135128950" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/62466finsetsup.html#135128950">Kevin Buzzard (Oct 03 2018 at 21:54)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finset%20sup/near/135128950" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/62466finsetsup.html#135128950">Kevin Buzzard (Oct 04 2018 at 05:54)</a>:</h4>
 <blockquote>
 <p>But I miss a lot the automatisation level of Isabelle, which is way better than anything there is currently in Lean.</p>
 </blockquote>
 <p>We need a plan for this. I am not sure I would be capable of supervising an MSc student to write tactics for automation. Of course it should probably all wait for Lean 4. <span class="user-mention" data-user-id="110294">@Johannes Hölzl</span> will you be supervising any more MSc students in the near future?</p>
 
 <a name="135128967"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finset%20sup/near/135128967" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/62466finsetsup.html#135128967">Patrick Massot (Oct 03 2018 at 21:54)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finset%20sup/near/135128967" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/62466finsetsup.html#135128967">Patrick Massot (Oct 04 2018 at 05:54)</a>:</h4>
 <p>I'm not sure MSc is enough</p>
 
 <a name="135129210"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finset%20sup/near/135129210" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/62466finsetsup.html#135129210">Kevin Buzzard (Oct 03 2018 at 21:58)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finset%20sup/near/135129210" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/62466finsetsup.html#135129210">Kevin Buzzard (Oct 04 2018 at 05:58)</a>:</h4>
 <p>Is writing a bunch of killer automation in Lean a PhD project for a CS student? And would you be able to get a post-doc afterwards?</p>
 
 <a name="135129236"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finset%20sup/near/135129236" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/62466finsetsup.html#135129236">Patrick Massot (Oct 03 2018 at 21:59)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finset%20sup/near/135129236" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/62466finsetsup.html#135129236">Patrick Massot (Oct 04 2018 at 05:59)</a>:</h4>
 <p>It seems like Johannes, Rob and Jasmin are working on Lean automation and don't feel like this is MSc student level...</p>
 
 <a name="135129248"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finset%20sup/near/135129248" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/62466finsetsup.html#135129248">Patrick Massot (Oct 03 2018 at 21:59)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finset%20sup/near/135129248" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/62466finsetsup.html#135129248">Patrick Massot (Oct 04 2018 at 05:59)</a>:</h4>
 <p>It seems to be more like a ERC grant proposal project</p>
 
 <a name="135130316"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finset%20sup/near/135130316" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/62466finsetsup.html#135130316">Sebastien Gouezel (Oct 03 2018 at 22:17)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finset%20sup/near/135130316" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/62466finsetsup.html#135130316">Sebastien Gouezel (Oct 04 2018 at 06:17)</a>:</h4>
 <blockquote>
 <blockquote>
 <p>There are very serious limitations in Isabelle. [snip] ...but impossible to formalize in Isabelle, for lack of dependent types.</p>
@@ -208,7 +208,7 @@ permalink: archive/116395maths/62466finsetsup.html
 <p>Yes, I am talking about Isabelle/HOL.</p>
 
 <a name="135130413"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finset%20sup/near/135130413" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/62466finsetsup.html#135130413">Sebastien Gouezel (Oct 03 2018 at 22:18)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/finset%20sup/near/135130413" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/62466finsetsup.html#135130413">Sebastien Gouezel (Oct 04 2018 at 06:18)</a>:</h4>
 <p>You can develop any logic in Isabelle, this is a framework, in a sense. But Isabelle/HOL is the most developed (and usable, and used) instance.</p>
 
 

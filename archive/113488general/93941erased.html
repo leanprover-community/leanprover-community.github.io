@@ -12,7 +12,7 @@ permalink: archive/113488general/93941erased.html
 <base href="https://leanprover.zulipchat.com">
 {% raw %}
 <a name="124681873"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/erased/near/124681873" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93941erased.html#124681873">Mario Carneiro (Apr 05 2018 at 19:56)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/erased/near/124681873" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93941erased.html#124681873">Mario Carneiro (Apr 06 2018 at 03:56)</a>:</h4>
 <p><span class="user-mention" data-user-id="110043">@Gabriel Ebner</span> What would be the best way to define the following type:</p>
 <ul>
 <li><code>erased A</code> is a type with a computable function <code>A -&gt; erased A</code> and a noncomputable function <code>erased A -&gt; A</code></li>
@@ -21,7 +21,7 @@ permalink: archive/113488general/93941erased.html
 </ul>
 
 <a name="124681928"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/erased/near/124681928" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93941erased.html#124681928">Mario Carneiro (Apr 05 2018 at 19:56)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/erased/near/124681928" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93941erased.html#124681928">Mario Carneiro (Apr 06 2018 at 03:56)</a>:</h4>
 <p>Attempt 1:</p>
 <div class="codehilite"><pre><span></span>import data.set.basic data.equiv
 
@@ -49,7 +49,7 @@ end erased
 </pre></div>
 
 <a name="124682307"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/erased/near/124682307" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93941erased.html#124682307">Mario Carneiro (Apr 05 2018 at 20:05)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/erased/near/124682307" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93941erased.html#124682307">Mario Carneiro (Apr 06 2018 at 04:05)</a>:</h4>
 <p>The problem with this encoding is that <code>erased A</code> is essentially a <code>set A</code>, which is a <code>A -&gt; Prop</code>, which is stored as a closure returning a proof object. Thus it isn't fully erased, so it still causes its arguments to be evaluated:</p>
 <div class="codehilite"><pre><span></span>#eval erased.mk (2+2) -- (erased.mk 4)
 </pre></div>
@@ -58,39 +58,39 @@ end erased
 <p>Do you know why type families aren't erased like types are?</p>
 
 <a name="124682380"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/erased/near/124682380" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93941erased.html#124682380">Simon Hudon (Apr 05 2018 at 20:06)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/erased/near/124682380" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93941erased.html#124682380">Simon Hudon (Apr 06 2018 at 04:06)</a>:</h4>
 <p>Why not use <code>nonempty</code>?</p>
 
 <a name="124682407"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/erased/near/124682407" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93941erased.html#124682407">Mario Carneiro (Apr 05 2018 at 20:07)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/erased/near/124682407" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93941erased.html#124682407">Mario Carneiro (Apr 06 2018 at 04:07)</a>:</h4>
 <p>it's not noncomputably equivalent to <code>A</code></p>
 
 <a name="124682408"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/erased/near/124682408" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93941erased.html#124682408">Simon Hudon (Apr 05 2018 at 20:07)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/erased/near/124682408" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93941erased.html#124682408">Simon Hudon (Apr 06 2018 at 04:07)</a>:</h4>
 <p>I withdraw my question, I get it</p>
 
 <a name="124682469"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/erased/near/124682469" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93941erased.html#124682469">Mario Carneiro (Apr 05 2018 at 20:08)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/erased/near/124682469" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93941erased.html#124682469">Mario Carneiro (Apr 06 2018 at 04:08)</a>:</h4>
 <p>The goal is to have a piece of "data" that is actually erased but still exists from the lean modeling POV</p>
 
 <a name="124682497"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/erased/near/124682497" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93941erased.html#124682497">Simon Hudon (Apr 05 2018 at 20:09)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/erased/near/124682497" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93941erased.html#124682497">Simon Hudon (Apr 06 2018 at 04:09)</a>:</h4>
 <p>I see</p>
 
 <a name="124682565"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/erased/near/124682565" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93941erased.html#124682565">Gabriel Ebner (Apr 05 2018 at 20:10)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/erased/near/124682565" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93941erased.html#124682565">Gabriel Ebner (Apr 06 2018 at 04:10)</a>:</h4>
 <p>Wait, this no longer works?  Let me check.</p>
 
 <a name="124682890"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/erased/near/124682890" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93941erased.html#124682890">Gabriel Ebner (Apr 05 2018 at 20:16)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/erased/near/124682890" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93941erased.html#124682890">Gabriel Ebner (Apr 06 2018 at 04:16)</a>:</h4>
 <p>Mmmh, I can't reproduce this here.  The 2+2 computation is completely erased.  Let me upgrade Lean.</p>
 
 <a name="124683007"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/erased/near/124683007" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93941erased.html#124683007">Gabriel Ebner (Apr 05 2018 at 20:19)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/erased/near/124683007" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93941erased.html#124683007">Gabriel Ebner (Apr 06 2018 at 04:19)</a>:</h4>
 <p>Still can't reproduce.</p>
 
 <a name="124683060"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/erased/near/124683060" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93941erased.html#124683060">Mario Carneiro (Apr 05 2018 at 20:20)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/erased/near/124683060" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93941erased.html#124683060">Mario Carneiro (Apr 06 2018 at 04:20)</a>:</h4>
 <p>Actually that <code>#eval</code> doesn't work, lean complains about too few arguments since it's a closure which is waiting for an argument. This shows the closure creation:</p>
 <div class="codehilite"><pre><span></span>set_option trace.compiler.code_gen true
 def f := let x := erased.mk (2+2) in x
@@ -106,7 +106,7 @@ def f := let x := erased.mk (2+2) in x
 </pre></div>
 
 <a name="124683063"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/erased/near/124683063" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93941erased.html#124683063">Gabriel Ebner (Apr 05 2018 at 20:20)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/erased/near/124683063" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93941erased.html#124683063">Gabriel Ebner (Apr 06 2018 at 04:20)</a>:</h4>
 <p>What do you get with these changes (added <code>has_repr</code> and the <code>set_option</code>):</p>
 <div class="codehilite"><pre><span></span><span class="kn">set_option</span> <span class="n">trace</span><span class="bp">.</span><span class="n">compiler</span><span class="bp">.</span><span class="n">optimize_bytecode</span> <span class="n">true</span>
 
@@ -138,23 +138,23 @@ def f := let x := erased.mk (2+2) in x
 </pre></div>
 
 <a name="124683113"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/erased/near/124683113" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93941erased.html#124683113">Gabriel Ebner (Apr 05 2018 at 20:21)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/erased/near/124683113" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93941erased.html#124683113">Gabriel Ebner (Apr 06 2018 at 04:21)</a>:</h4>
 <p>Hmm, as a workaround you can use <code>have ..., from ..., ...</code> instead of let.</p>
 
 <a name="124683168"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/erased/near/124683168" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93941erased.html#124683168">Mario Carneiro (Apr 05 2018 at 20:22)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/erased/near/124683168" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93941erased.html#124683168">Mario Carneiro (Apr 06 2018 at 04:22)</a>:</h4>
 <p>Well, the let was just to force the closure creation out of tail call position</p>
 
 <a name="124683177"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/erased/near/124683177" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93941erased.html#124683177">Mario Carneiro (Apr 05 2018 at 20:23)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/erased/near/124683177" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93941erased.html#124683177">Mario Carneiro (Apr 06 2018 at 04:23)</a>:</h4>
 <p>if you use <code>have</code> instead it just adds an additional argument to the main function</p>
 
 <a name="124683278"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/erased/near/124683278" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93941erased.html#124683278">Gabriel Ebner (Apr 05 2018 at 20:25)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/erased/near/124683278" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93941erased.html#124683278">Gabriel Ebner (Apr 06 2018 at 04:25)</a>:</h4>
 <p>I think the problem is just that prop-erasure is not implemented for <code>let</code>, because nobody ever uses lets except for data.</p>
 
 <a name="124683920"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/erased/near/124683920" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93941erased.html#124683920">Mario Carneiro (Apr 05 2018 at 20:41)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/erased/near/124683920" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93941erased.html#124683920">Mario Carneiro (Apr 06 2018 at 04:41)</a>:</h4>
 <p>Hm, you can still clearly tell the difference between these two pieces of code:</p>
 <div class="codehilite"><pre><span></span>set_option trace.compiler.code_gen true
 #eval let x := 2 + 2 = 4 in x
@@ -165,11 +165,11 @@ def f := let x := erased.mk (2+2) in x
 <p>I'm glad to see that <code>2+2</code> is not evaluated anywhere in the generated code, but it is still creating a closure returning <code>#0</code> rather than <code>#0</code> itself</p>
 
 <a name="124684479"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/erased/near/124684479" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93941erased.html#124684479">Gabriel Ebner (Apr 05 2018 at 20:55)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/erased/near/124684479" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93941erased.html#124684479">Gabriel Ebner (Apr 06 2018 at 04:55)</a>:</h4>
 <p>Now I remember: we can't erase type families to <code>#0</code>.  We need to erase them to a function type, but I don't think such an erasure is implemented.  If <code>mk</code> is not inlined, then we actually compute <code>2+2</code> here.</p>
 
 <a name="124684551"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/erased/near/124684551" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93941erased.html#124684551">Mario Carneiro (Apr 05 2018 at 20:57)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/erased/near/124684551" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93941erased.html#124684551">Mario Carneiro (Apr 06 2018 at 04:57)</a>:</h4>
 <p>Here's attempt number 2, which tries to encode each element of erased A as a straight type:</p>
 <div class="codehilite"><pre><span></span>import set_theory.ordinal
 
@@ -214,19 +214,19 @@ end erased
 </pre></div>
 
 <a name="124684600"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/erased/near/124684600" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93941erased.html#124684600">Mario Carneiro (Apr 05 2018 at 20:58)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/erased/near/124684600" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93941erased.html#124684600">Mario Carneiro (Apr 06 2018 at 04:58)</a>:</h4>
 <p>Since you can't really (provably) distinguish types except by their cardinality, this approach is rather more involved</p>
 
 <a name="124684622"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/erased/near/124684622" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93941erased.html#124684622">Mario Carneiro (Apr 05 2018 at 20:59)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/erased/near/124684622" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93941erased.html#124684622">Mario Carneiro (Apr 06 2018 at 04:59)</a>:</h4>
 <p>It also requires a lot of inlining; I had to restate the definitions of <code>ordinal.type</code> and <code>ordinal.typein</code> so they would be inlined</p>
 
 <a name="124684756"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/erased/near/124684756" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93941erased.html#124684756">Gabriel Ebner (Apr 05 2018 at 21:02)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/erased/near/124684756" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93941erased.html#124684756">Gabriel Ebner (Apr 06 2018 at 05:02)</a>:</h4>
 <p>Anything that relies on inlining will have the closure problem.</p>
 
 <a name="124684912"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/erased/near/124684912" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93941erased.html#124684912">Mario Carneiro (Apr 05 2018 at 21:06)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/erased/near/124684912" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93941erased.html#124684912">Mario Carneiro (Apr 06 2018 at 05:06)</a>:</h4>
 <p>Not true:</p>
 <div class="codehilite"><pre><span></span>set_option trace.compiler.code_gen true
 def f := @erased.mk ℕ
@@ -237,7 +237,7 @@ def f := @erased.mk ℕ
 <p>Note that even though <code>f</code> is not inlined <code>2+2</code> is not evaluated</p>
 
 <a name="124684913"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/erased/near/124684913" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93941erased.html#124684913">Gabriel Ebner (Apr 05 2018 at 21:06)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/erased/near/124684913" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93941erased.html#124684913">Gabriel Ebner (Apr 06 2018 at 05:06)</a>:</h4>
 <p>If you're okay with a bit of extra ugliness, you can define an <code>erase</code> function in both versions:</p>
 <div class="codehilite"><pre><span></span><span class="bp">@</span><span class="o">[</span><span class="kn">inline</span><span class="o">]</span>
 <span class="n">def</span> <span class="n">erase</span> <span class="o">{</span><span class="n">α</span><span class="o">}</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">erased</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">erased</span> <span class="n">α</span> <span class="o">:=</span>
@@ -248,34 +248,34 @@ def f := @erased.mk ℕ
 </pre></div>
 
 <a name="124684994"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/erased/near/124684994" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93941erased.html#124684994">Gabriel Ebner (Apr 05 2018 at 21:08)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/erased/near/124684994" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93941erased.html#124684994">Gabriel Ebner (Apr 06 2018 at 05:08)</a>:</h4>
 <p>Mmh, I still get a call to <code>erased.mk</code> and <code>2+2</code>, but no call to <code>f</code> since it is (of course) inlined.</p>
 
 <a name="124685031"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/erased/near/124685031" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93941erased.html#124685031">Gabriel Ebner (Apr 05 2018 at 21:10)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/erased/near/124685031" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93941erased.html#124685031">Gabriel Ebner (Apr 06 2018 at 05:10)</a>:</h4>
 <p>You should set the <code>optimize_bytecode</code> option instead of <code>code_gen</code>, otherwise you miss out on all the optimizations.</p>
 
 <a name="124685258"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/erased/near/124685258" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93941erased.html#124685258">Mario Carneiro (Apr 05 2018 at 21:15)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/erased/near/124685258" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93941erased.html#124685258">Mario Carneiro (Apr 06 2018 at 05:15)</a>:</h4>
 <p>I'm confused: why does <code>erase</code> work? The argument count goes down, but it still returns <code>#0</code>. I thought you said type/proof lambdas can't be implemented as <code>#0</code>?</p>
 
 <a name="124685263"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/erased/near/124685263" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93941erased.html#124685263">Mario Carneiro (Apr 05 2018 at 21:15)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/erased/near/124685263" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93941erased.html#124685263">Mario Carneiro (Apr 06 2018 at 05:15)</a>:</h4>
 <div class="codehilite"><pre><span></span>set_option trace.compiler.optimize_bytecode true
 def f1 : erased ℕ := (erased.mk (2+2))
 def f2 : erased ℕ := (erased.mk (2+2)).erase
 </pre></div>
 
 <a name="124685972"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/erased/near/124685972" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93941erased.html#124685972">Gabriel Ebner (Apr 05 2018 at 21:32)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/erased/near/124685972" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93941erased.html#124685972">Gabriel Ebner (Apr 06 2018 at 05:32)</a>:</h4>
 <p>I'm a bit lost as well.  Apparently the <code>apply</code> operation is special-cased to also work on <code>#0</code>.</p>
 
 <a name="124686074"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/erased/near/124686074" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93941erased.html#124686074">Mario Carneiro (Apr 05 2018 at 21:35)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/erased/near/124686074" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93941erased.html#124686074">Mario Carneiro (Apr 06 2018 at 05:35)</a>:</h4>
 <p>That's why I would expect that type families should also compile as <code>#0</code> rather than <code>lam x, #0</code></p>
 
 <a name="124686214"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/erased/near/124686214" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93941erased.html#124686214">Gabriel Ebner (Apr 05 2018 at 21:38)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/erased/near/124686214" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93941erased.html#124686214">Gabriel Ebner (Apr 06 2018 at 05:38)</a>:</h4>
 <p>You know, type families are actually erased, it's just that subtypes aren't because they haven't been erased yet....:</p>
 <div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">f</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">set</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:=</span> <span class="n">x</span>
 <span class="n">def</span> <span class="n">g</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="o">{</span> <span class="n">s</span> <span class="o">:</span> <span class="n">set</span> <span class="bp">ℕ</span> <span class="bp">//</span> <span class="n">true</span> <span class="o">})</span> <span class="o">:=</span> <span class="n">x</span>

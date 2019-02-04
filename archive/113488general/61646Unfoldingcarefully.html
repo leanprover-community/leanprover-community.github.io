@@ -12,39 +12,39 @@ permalink: archive/113488general/61646Unfoldingcarefully.html
 <base href="https://leanprover.zulipchat.com">
 {% raw %}
 <a name="124924517"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124924517" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124924517">Moses Schönfinkel (Apr 11 2018 at 11:07)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124924517" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124924517">Moses Schönfinkel (Apr 11 2018 at 19:07)</a>:</h4>
 <p>Suppose I have the following goal <code>f a = c (f (d a))</code>. What I am looking to do is to <code>unfold1 f</code> but only on the left hand side. Currently I do <code>generalize hack : f (d a) = x, unfold1 f, rw &lt;- hack</code>. Apart from the fact that it's a hack, the <code>generalize</code> takes a couple of seconds to execute. I tried using <code>conv { to_lhs ... }</code> but <code>unfold1</code> is not an option in conv (and simp fails with deterministic timeout). a) Why on Earth is <code>generalize</code> so slow in this case - is it because <code>c</code> is some horrible dependently typed function with explicit well founded termination proofs? b) Is there a nicer trick to invoke <code>unfold1</code> on left hand side only?</p>
 
 <a name="124924577"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124924577" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124924577">Kenny Lau (Apr 11 2018 at 11:09)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124924577" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124924577">Kenny Lau (Apr 11 2018 at 19:09)</a>:</h4>
 <p>use <code>change</code>?</p>
 
 <a name="124924634"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124924634" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124924634">Moses Schönfinkel (Apr 11 2018 at 11:10)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124924634" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124924634">Moses Schönfinkel (Apr 11 2018 at 19:10)</a>:</h4>
 <p>that would involve me having to explicitly state the effect of unfolding if I understand your suggestion; right?</p>
 
 <a name="124932179"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124932179" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124932179">Simon Hudon (Apr 11 2018 at 15:28)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124932179" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124932179">Simon Hudon (Apr 11 2018 at 23:28)</a>:</h4>
 <p>What about using transitivity instead of generalize?</p>
 
 <a name="124933566"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124933566" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124933566">Moses Schönfinkel (Apr 11 2018 at 16:14)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124933566" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124933566">Moses Schönfinkel (Apr 12 2018 at 00:14)</a>:</h4>
 <p>ooh that is actually brilliant! what I ended up doing is something I'm ashamed of but it saves me 15 seconds on each recompile - I reformulated the lemma such that it contains a pre-generalized expression and an equality (which I will, of course, change now :P)</p>
 
 <a name="124933627"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124933627" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124933627">Simon Hudon (Apr 11 2018 at 16:16)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124933627" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124933627">Simon Hudon (Apr 12 2018 at 00:16)</a>:</h4>
 <p>Great! Glad to be of help! So, the way I use <code>transitivity</code> to protect parts of my formulas is to do <code>transitivity, blah, blah, refl</code></p>
 
 <a name="124933640"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124933640" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124933640">Moses Schönfinkel (Apr 11 2018 at 16:17)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124933640" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124933640">Moses Schönfinkel (Apr 12 2018 at 00:17)</a>:</h4>
 <p>Yeah I have never thought of that. Thanks a lot. I wish <code>conv</code> was a bit less constrained.</p>
 
 <a name="124933693"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124933693" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124933693">Moses Schönfinkel (Apr 11 2018 at 16:19)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124933693" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124933693">Moses Schönfinkel (Apr 12 2018 at 00:19)</a>:</h4>
 <p>if this worked, then <code>conv { to_lhs, dsimp1 f }</code> would be just fine for me - but <code>interactive.conv.*</code> only has a bunch of tactics for reasons I'm not sure I want to know about :P</p>
 
 <a name="124933694"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124933694" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124933694">Simon Hudon (Apr 11 2018 at 16:19)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124933694" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124933694">Simon Hudon (Apr 12 2018 at 00:19)</a>:</h4>
 <p>If you have something more specific that you want to use, let's say <code>g</code> instead of <code>=</code>, you can also make your own protection lemmas:</p>
 <div class="codehilite"><pre><span></span>lemma protect (x y : α) (z : β)
   (h : x = y)
@@ -56,181 +56,181 @@ permalink: archive/113488general/61646Unfoldingcarefully.html
 <p>This allows you to select exactly what part of the formula you want to rewrite when you expect something very specific. And <code>z</code> is protected.</p>
 
 <a name="124933756"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124933756" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124933756">Moses Schönfinkel (Apr 11 2018 at 16:20)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124933756" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124933756">Moses Schönfinkel (Apr 12 2018 at 00:20)</a>:</h4>
 <p>ah, right; this is basically the general version that I ended up doing, but I think the transitivity is such a neat hack :P</p>
 
 <a name="124933767"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124933767" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124933767">Simon Hudon (Apr 11 2018 at 16:20)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124933767" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124933767">Simon Hudon (Apr 12 2018 at 00:20)</a>:</h4>
 <blockquote>
 <p>if this worked, then <code>conv { to_lhs, dsimp1 f }</code> would be just fine for me - but <code>interactive.conv.*</code> only has a bunch of tactics for reasons I'm not sure I want to know about :P</p>
 </blockquote>
 <p>I think Coq is more targeted like that <code>rewrite h at 1,3</code>. I found I missed that at first but I'm not sure it makes for stable proofs</p>
 
 <a name="124933776"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124933776" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124933776">Moses Schönfinkel (Apr 11 2018 at 16:21)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124933776" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124933776">Moses Schönfinkel (Apr 12 2018 at 00:21)</a>:</h4>
 <p>yes, in Coq I can rewrite where I want</p>
 
 <a name="124933779"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124933779" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124933779">Moses Schönfinkel (Apr 11 2018 at 16:21)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124933779" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124933779">Moses Schönfinkel (Apr 12 2018 at 00:21)</a>:</h4>
 <p>I can also rewrite under binders</p>
 
 <a name="124933780"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124933780" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124933780">Moses Schönfinkel (Apr 11 2018 at 16:21)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124933780" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124933780">Moses Schönfinkel (Apr 12 2018 at 00:21)</a>:</h4>
 <p>(with setoid rewrites)</p>
 
 <a name="124933785"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124933785" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124933785">Moses Schönfinkel (Apr 11 2018 at 16:21)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124933785" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124933785">Moses Schönfinkel (Apr 12 2018 at 00:21)</a>:</h4>
 <p>in Lean I've only used <code>simp</code> to rewrite under binders, not sure how else it can be even done</p>
 
 <a name="124933788"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124933788" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124933788">Simon Hudon (Apr 11 2018 at 16:21)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124933788" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124933788">Simon Hudon (Apr 12 2018 at 00:21)</a>:</h4>
 <p><code>simp</code> helps there with binders and congruence lemmas but it's a bit less controlled</p>
 
 <a name="124933835"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124933835" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124933835">Simon Hudon (Apr 11 2018 at 16:22)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124933835" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124933835">Simon Hudon (Apr 12 2018 at 00:22)</a>:</h4>
 <p>... yeah, exactly</p>
 
 <a name="124933842"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124933842" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124933842">Moses Schönfinkel (Apr 11 2018 at 16:22)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124933842" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124933842">Moses Schönfinkel (Apr 12 2018 at 00:22)</a>:</h4>
 <p>stability of proofs has never been an issue for me, because, I, urm... write them once and then I... forget about them...</p>
 
 <a name="124933846"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124933846" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124933846">Moses Schönfinkel (Apr 11 2018 at 16:22)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124933846" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124933846">Moses Schönfinkel (Apr 12 2018 at 00:22)</a>:</h4>
 <p>I may need to try to write Coq in "industrial" settings :P</p>
 
 <a name="124933853"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124933853" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124933853">Simon Hudon (Apr 11 2018 at 16:23)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124933853" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124933853">Simon Hudon (Apr 12 2018 at 00:23)</a>:</h4>
 <p>Question: I've only used Coq as a noob so I never experienced scaling up proofs that uses the <code>at 1,3</code> notation. Do you find that your proofs breaks a lot when you do that?</p>
 
 <a name="124933855"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124933855" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124933855">Moses Schönfinkel (Apr 11 2018 at 16:23)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124933855" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124933855">Moses Schönfinkel (Apr 12 2018 at 00:23)</a>:</h4>
 <p>yes, they do</p>
 
 <a name="124933858"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124933858" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124933858">Moses Schönfinkel (Apr 11 2018 at 16:23)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124933858" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124933858">Moses Schönfinkel (Apr 12 2018 at 00:23)</a>:</h4>
 <p>it's the absolute worst thing one can do</p>
 
 <a name="124933923"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124933923" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124933923">Simon Hudon (Apr 11 2018 at 16:25)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124933923" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124933923">Simon Hudon (Apr 12 2018 at 00:25)</a>:</h4>
 <p>In my temporal logic tactics language, I have played with a tactic you call as <code>rw_using : f x = g x, { /- proof -/ }</code>. For some reason, I liked not clearing a temporary assumption.</p>
 
 <a name="124933971"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124933971" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124933971">Simon Hudon (Apr 11 2018 at 16:26)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124933971" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124933971">Simon Hudon (Apr 12 2018 at 00:26)</a>:</h4>
 <p>In temporal logic, that was doubly useful because the proof of equality was typically done in normal Lean logic</p>
 
 <a name="124933979"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124933979" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124933979">Simon Hudon (Apr 11 2018 at 16:27)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124933979" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124933979">Simon Hudon (Apr 12 2018 at 00:27)</a>:</h4>
 <p>Otherwise, I really haven't found a drop in replacement for that Coq notation</p>
 
 <a name="124933983"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124933983" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124933983">Moses Schönfinkel (Apr 11 2018 at 16:27)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124933983" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124933983">Moses Schönfinkel (Apr 12 2018 at 00:27)</a>:</h4>
 <p>I wish I understood exactly how <code>simp</code> works but I have never had the willpower to look at it</p>
 
 <a name="124934025"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124934025" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124934025">Moses Schönfinkel (Apr 11 2018 at 16:28)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124934025" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124934025">Moses Schönfinkel (Apr 12 2018 at 00:28)</a>:</h4>
 <p>I believe it's been modeled to resemble the Isabelle heuristics you get when you're within a single <code>theory</code> section thing</p>
 
 <a name="124934037"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124934037" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124934037">Moses Schönfinkel (Apr 11 2018 at 16:29)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124934037" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124934037">Moses Schönfinkel (Apr 12 2018 at 00:29)</a>:</h4>
 <p>where <code>theory</code> just aggregates a set of related constants, definitions, proofs, etc. and you abuse this implicit relation in automation</p>
 
 <a name="124934038"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124934038" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124934038">Simon Hudon (Apr 11 2018 at 16:29)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124934038" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124934038">Simon Hudon (Apr 12 2018 at 00:29)</a>:</h4>
 <p>I feel like I really don't understand what Isabelle does with any given proof. It's hard for me to understand that comparison</p>
 
 <a name="124934081"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124934081" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124934081">Moses Schönfinkel (Apr 11 2018 at 16:30)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124934081" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124934081">Moses Schönfinkel (Apr 12 2018 at 00:30)</a>:</h4>
 <p>you basically help guide automation in Isabelle by aggregating related stuff together in "theories", which is something like making a hint database in Coq</p>
 
 <a name="124934160"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124934160" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124934160">Moses Schönfinkel (Apr 11 2018 at 16:32)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124934160" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124934160">Moses Schönfinkel (Apr 12 2018 at 00:32)</a>:</h4>
 <p>(so like a beefy namespace that implicitly provides hints for automation)</p>
 
 <a name="124934166"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124934166" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124934166">Simon Hudon (Apr 11 2018 at 16:32)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124934166" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124934166">Simon Hudon (Apr 12 2018 at 00:32)</a>:</h4>
 <p>Ah I see. Does it make things clearer to use the theories or the databases?</p>
 
 <a name="124934172"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124934172" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124934172">Moses Schönfinkel (Apr 11 2018 at 16:33)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124934172" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124934172">Moses Schönfinkel (Apr 12 2018 at 00:33)</a>:</h4>
 <p>databases are less implicit so you have to go over the trouble of creating them</p>
 
 <a name="124934174"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124934174" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124934174">Moses Schönfinkel (Apr 11 2018 at 16:33)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124934174" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124934174">Moses Schönfinkel (Apr 12 2018 at 00:33)</a>:</h4>
 <p>so in Isabelle you get nice behaviour by default but it's less controlled because it's just "whatever you put in this theory"</p>
 
 <a name="124934230"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124934230" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124934230">Moses Schönfinkel (Apr 11 2018 at 16:34)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124934230" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124934230">Moses Schönfinkel (Apr 12 2018 at 00:34)</a>:</h4>
 <p>I think people with purely math background would have easier time using Isabelle, simply because you get nice implicit heuristic-guided behaviour out of the box (+ the Sledgehammer)</p>
 
 <a name="124934236"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124934236" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124934236">Moses Schönfinkel (Apr 11 2018 at 16:34)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124934236" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124934236">Moses Schönfinkel (Apr 12 2018 at 00:34)</a>:</h4>
 <p>if I understand Kevin correctly, he uses Lean because he wants dependent types</p>
 
 <a name="124934246"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124934246" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124934246">Moses Schönfinkel (Apr 11 2018 at 16:35)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124934246" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124934246">Moses Schönfinkel (Apr 12 2018 at 00:35)</a>:</h4>
 <p>(or I should say, he's not using Isabelle because he wants dependent types)</p>
 
 <a name="124934254"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124934254" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124934254">Moses Schönfinkel (Apr 11 2018 at 16:35)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124934254" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124934254">Moses Schönfinkel (Apr 12 2018 at 00:35)</a>:</h4>
 <p>and <code>simp</code> in Lean takes after Isabelle default simplifier, I believe</p>
 
 <a name="124934307"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124934307" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124934307">Simon Hudon (Apr 11 2018 at 16:36)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124934307" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124934307">Simon Hudon (Apr 12 2018 at 00:36)</a>:</h4>
 <p>Any chance that something like sledgehammer would work with dependent types? Or is it more of a matter of structuring databases like Isabelle?</p>
 
 <a name="124934321"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124934321" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124934321">Moses Schönfinkel (Apr 11 2018 at 16:37)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124934321" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124934321">Moses Schönfinkel (Apr 12 2018 at 00:37)</a>:</h4>
 <p>it would work, Sledgehammer is almost like an outside tool that ships proof obligations to SMT solvers and ATPs</p>
 
 <a name="124934329"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124934329" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124934329">Moses Schönfinkel (Apr 11 2018 at 16:37)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124934329" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124934329">Moses Schönfinkel (Apr 12 2018 at 00:37)</a>:</h4>
 <p>Sledgehammer is really the most unimpressive piece of Isabelle; it just tries to invoke every automating algorithm it can get its grabby mittens on</p>
 
 <a name="124934605"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124934605" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124934605">Sebastian Ullrich (Apr 11 2018 at 16:44)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124934605" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124934605">Sebastian Ullrich (Apr 12 2018 at 00:44)</a>:</h4>
 <p>That may be the understatement of the century</p>
 
 <a name="124934614"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124934614" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124934614">Moses Schönfinkel (Apr 11 2018 at 16:44)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124934614" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124934614">Moses Schönfinkel (Apr 12 2018 at 00:44)</a>:</h4>
 <p>:D</p>
 
 <a name="124934637"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124934637" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124934637">Sebastian Ullrich (Apr 11 2018 at 16:45)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124934637" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124934637">Sebastian Ullrich (Apr 12 2018 at 00:45)</a>:</h4>
 <p>Sledgehammer is the result of a multi-year research project that produced a good amount of papers <a href="http://www.cl.cam.ac.uk/~lp15/papers/Automation/" target="_blank" title="http://www.cl.cam.ac.uk/~lp15/papers/Automation/">http://www.cl.cam.ac.uk/~lp15/papers/Automation/</a></p>
 
 <a name="124934693"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124934693" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124934693">Sebastian Ullrich (Apr 11 2018 at 16:46)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124934693" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124934693">Sebastian Ullrich (Apr 12 2018 at 00:46)</a>:</h4>
 <p>The hard parts are relevance filtering of lemmas to pass to the external solver, and of course translating between HOL and FOL</p>
 
 <a name="124936062"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124936062" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124936062">Moses Schönfinkel (Apr 11 2018 at 17:21)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124936062" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124936062">Moses Schönfinkel (Apr 12 2018 at 01:21)</a>:</h4>
 <p>ok ok I will change it to 2 out of 10 on the scale of impressiveness, making it the second least impressive Isabelle feature right after its bundled development IDE <span class="emoji emoji-1f600" title="grinning">:grinning:</span></p>
 
 <a name="124947660"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124947660" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124947660">Kevin Buzzard (Apr 11 2018 at 21:57)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124947660" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124947660">Kevin Buzzard (Apr 12 2018 at 05:57)</a>:</h4>
 <p>I use Lean because when I had never heard of any theorem provers apart from Coq, and never used any at all, I watched a live stream of Tom Hales in Cambridge talking about (amongst other things) FAbstracts, and someone asked him which language he would be using, and he said "...Lean?" and I thought "OK that'll do for me"</p>
 
 <a name="124947669"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124947669" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124947669">Kevin Buzzard (Apr 11 2018 at 21:57)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124947669" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124947669">Kevin Buzzard (Apr 12 2018 at 05:57)</a>:</h4>
 <p>and I certainly didn't know what a dependent type was at that point</p>
 
 <a name="124947672"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124947672" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124947672">Kevin Buzzard (Apr 11 2018 at 21:57)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124947672" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124947672">Kevin Buzzard (Apr 12 2018 at 05:57)</a>:</h4>
 <p>I just decided to jump in</p>
 
 <a name="124947753"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124947753" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124947753">Kevin Buzzard (Apr 11 2018 at 21:59)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124947753" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124947753">Kevin Buzzard (Apr 12 2018 at 05:59)</a>:</h4>
 <blockquote>
 <p>I wish I understood exactly how <code>simp</code> works but I have never had the willpower to look at it</p>
 </blockquote>
 <p>I wish I understood more about how <code>simp</code> works but I learnt a couple of <code>set_option</code> options and wrote <a href="https://github.com/leanprover/mathlib/blob/master/docs/extras/simp.md" target="_blank" title="https://github.com/leanprover/mathlib/blob/master/docs/extras/simp.md">https://github.com/leanprover/mathlib/blob/master/docs/extras/simp.md</a></p>
 
 <a name="124947824"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124947824" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124947824">Kevin Buzzard (Apr 11 2018 at 22:00)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124947824" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124947824">Kevin Buzzard (Apr 12 2018 at 06:00)</a>:</h4>
 <p>Looking at the output of <code>set_option trace.simplify true</code> gave me some sort of idea about the absolute inanity of what simp was doing</p>
 
 <a name="124948004"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124948004" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124948004">Chris Hughes (Apr 11 2018 at 22:04)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124948004" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124948004">Chris Hughes (Apr 12 2018 at 06:04)</a>:</h4>
 <blockquote>
 <blockquote>
 <p>I wish I understood exactly how <code>simp</code> works but I have never had the willpower to look at it</p>
@@ -240,149 +240,149 @@ permalink: archive/113488general/61646Unfoldingcarefully.html
 <p>That bit at the end sounds interesting. Does that mean if I had <code>a + b ≡ c [MOD n]</code> and <code>h : a ≡ d [MOD n]</code> I could rewrite to get <code>a + d ≡ c [MOD n]</code>? How would that work with complicated examples, with lots of addition and multiplication?</p>
 
 <a name="124948228"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124948228" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124948228">Kevin Buzzard (Apr 11 2018 at 22:09)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124948228" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124948228">Kevin Buzzard (Apr 12 2018 at 06:09)</a>:</h4>
 <p>I have never used that MOD business so I'm not sure</p>
 
 <a name="124948232"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124948232" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124948232">Kevin Buzzard (Apr 11 2018 at 22:10)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124948232" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124948232">Kevin Buzzard (Apr 12 2018 at 06:10)</a>:</h4>
 <p>Oh, Gabriel said that</p>
 
 <a name="124948276"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124948276" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124948276">Kevin Buzzard (Apr 11 2018 at 22:10)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124948276" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124948276">Kevin Buzzard (Apr 12 2018 at 06:10)</a>:</h4>
 <p>I didn't understand it so I didn't use it</p>
 
 <a name="124948281"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124948281" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124948281">Kevin Buzzard (Apr 11 2018 at 22:10)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124948281" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124948281">Kevin Buzzard (Apr 12 2018 at 06:10)</a>:</h4>
 <p>[and you mean d + b = c of course]</p>
 
 <a name="124948297"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124948297" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124948297">Kevin Buzzard (Apr 11 2018 at 22:11)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124948297" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124948297">Kevin Buzzard (Apr 12 2018 at 06:11)</a>:</h4>
 <p>Aah but I do remember that this might work in calc mode.</p>
 
 <a name="124948305"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124948305" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124948305">Kevin Buzzard (Apr 11 2018 at 22:11)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124948305" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124948305">Kevin Buzzard (Apr 12 2018 at 06:11)</a>:</h4>
 <p>If your relation is tagged with trans then I think calc supports it</p>
 
 <a name="124948370"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124948370" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124948370">Chris Hughes (Apr 11 2018 at 22:12)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124948370" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124948370">Chris Hughes (Apr 12 2018 at 06:12)</a>:</h4>
 <p>Can I mix equality and an congruences in calc?</p>
 
 <a name="124948374"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124948374" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124948374">Kevin Buzzard (Apr 11 2018 at 22:12)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124948374" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124948374">Kevin Buzzard (Apr 12 2018 at 06:12)</a>:</h4>
 <p>I haven't ever seen this done</p>
 
 <a name="124948382"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124948382" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124948382">Kevin Buzzard (Apr 11 2018 at 22:12)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124948382" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124948382">Kevin Buzzard (Apr 12 2018 at 06:12)</a>:</h4>
 <p>I think that either in the reference manual or in TPIL they are pretty formal about what you can do with calc</p>
 
 <a name="124948467"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124948467" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124948467">Kevin Buzzard (Apr 11 2018 at 22:14)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124948467" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124948467">Kevin Buzzard (Apr 12 2018 at 06:14)</a>:</h4>
 <p><a href="https://leanprover.github.io/theorem_proving_in_lean/quantifiers_and_equality.html#calculational-proofs" target="_blank" title="https://leanprover.github.io/theorem_proving_in_lean/quantifiers_and_equality.html#calculational-proofs">https://leanprover.github.io/theorem_proving_in_lean/quantifiers_and_equality.html#calculational-proofs</a></p>
 
 <a name="124948471"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124948471" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124948471">Kevin Buzzard (Apr 11 2018 at 22:14)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124948471" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124948471">Kevin Buzzard (Apr 12 2018 at 06:14)</a>:</h4>
 <p>searching TPIL for calc doesn't find that</p>
 
 <a name="124948475"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124948475" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124948475">Kevin Buzzard (Apr 11 2018 at 22:15)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124948475" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124948475">Kevin Buzzard (Apr 12 2018 at 06:15)</a>:</h4>
 <p>so I always look at <a href="https://github.com/kbuzzard/mathlib/blob/WIP_docs/docs/WIPs/calc.md" target="_blank" title="https://github.com/kbuzzard/mathlib/blob/WIP_docs/docs/WIPs/calc.md">https://github.com/kbuzzard/mathlib/blob/WIP_docs/docs/WIPs/calc.md</a></p>
 
 <a name="124948494"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124948494" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124948494">Kevin Buzzard (Apr 11 2018 at 22:15)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124948494" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124948494">Kevin Buzzard (Apr 12 2018 at 06:15)</a>:</h4>
 <p>and indeed there is an example with different operators, = and &lt; and &lt;=</p>
 
 <a name="124948495"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124948495" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124948495">Patrick Massot (Apr 11 2018 at 22:15)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124948495" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124948495">Patrick Massot (Apr 12 2018 at 06:15)</a>:</h4>
 <blockquote>
 <p>searching TPIL for calc doesn't find that</p>
 </blockquote>
 <p>It does actually, but you don't recognize it</p>
 
 <a name="124948549"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124948549" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124948549">Patrick Massot (Apr 11 2018 at 22:16)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124948549" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124948549">Patrick Massot (Apr 12 2018 at 06:16)</a>:</h4>
 <p>3rd result</p>
 
 <a name="124948575"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124948575" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124948575">Patrick Massot (Apr 11 2018 at 22:17)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124948575" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124948575">Patrick Massot (Apr 12 2018 at 06:17)</a>:</h4>
 <p>I know this because I filled  a Sphinx bug report before understanding this <span class="emoji emoji-1f633" title="flushed">:flushed:</span></p>
 
 <a name="124948619"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124948619" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124948619">Kevin Buzzard (Apr 11 2018 at 22:18)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124948619" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124948619">Kevin Buzzard (Apr 12 2018 at 06:18)</a>:</h4>
 <p>Oh! So "It's somewhere in Chapter 4" is the best I get?</p>
 
 <a name="124948622"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124948622" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124948622">Patrick Massot (Apr 11 2018 at 22:18)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124948622" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124948622">Patrick Massot (Apr 12 2018 at 06:18)</a>:</h4>
 <p>yes</p>
 
 <a name="124948624"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124948624" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124948624">Kevin Buzzard (Apr 11 2018 at 22:18)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124948624" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124948624">Kevin Buzzard (Apr 12 2018 at 06:18)</a>:</h4>
 <p>"PS here's the first occurrence of the string Calc"</p>
 
 <a name="124948630"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124948630" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124948630">Kevin Buzzard (Apr 11 2018 at 22:18)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124948630" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124948630">Kevin Buzzard (Apr 12 2018 at 06:18)</a>:</h4>
 <p>"feel free to look and see if there are any others"</p>
 
 <a name="124948643"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124948643" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124948643">Patrick Massot (Apr 11 2018 at 22:19)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124948643" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124948643">Patrick Massot (Apr 12 2018 at 06:19)</a>:</h4>
 <p>Web pages of TPIL are too big</p>
 
 <a name="124948645"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124948645" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124948645">Patrick Massot (Apr 11 2018 at 22:19)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124948645" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124948645">Patrick Massot (Apr 12 2018 at 06:19)</a>:</h4>
 <p>from this point of view</p>
 
 <a name="124948653"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124948653" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124948653">Kevin Buzzard (Apr 11 2018 at 22:19)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124948653" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124948653">Kevin Buzzard (Apr 12 2018 at 06:19)</a>:</h4>
 <p>That's one interpretation</p>
 
 <a name="124948657"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124948657" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124948657">Kevin Buzzard (Apr 11 2018 at 22:19)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124948657" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124948657">Kevin Buzzard (Apr 12 2018 at 06:19)</a>:</h4>
 <p>Another is "search is crap"</p>
 
 <a name="124948662"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124948662" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124948662">Kevin Buzzard (Apr 11 2018 at 22:19)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124948662" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124948662">Kevin Buzzard (Apr 12 2018 at 06:19)</a>:</h4>
 <p>I know we've all been spoilt by Google...</p>
 
 <a name="124948720"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124948720" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124948720">Patrick Massot (Apr 11 2018 at 22:20)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124948720" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124948720">Patrick Massot (Apr 12 2018 at 06:20)</a>:</h4>
 <p>google would show you the same</p>
 
 <a name="124948722"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124948722" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124948722">Kevin Buzzard (Apr 11 2018 at 22:20)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124948722" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124948722">Kevin Buzzard (Apr 12 2018 at 06:20)</a>:</h4>
 <p>or maybe section 4.3 should be tagged calc</p>
 
 <a name="124948723"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124948723" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124948723">Kevin Buzzard (Apr 11 2018 at 22:20)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124948723" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124948723">Kevin Buzzard (Apr 12 2018 at 06:20)</a>:</h4>
 <p>and the search should prioritise tags</p>
 
 <a name="124948726"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124948726" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124948726">Patrick Massot (Apr 11 2018 at 22:20)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124948726" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124948726">Patrick Massot (Apr 12 2018 at 06:20)</a>:</h4>
 <p>one hit for this page, and not all occurences on the search result page</p>
 
 <a name="124948728"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124948728" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124948728">Kevin Buzzard (Apr 11 2018 at 22:20)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124948728" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124948728">Kevin Buzzard (Apr 12 2018 at 06:20)</a>:</h4>
 <p>is that possible in Sphinx?</p>
 
 <a name="124948737"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124948737" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124948737">Kevin Buzzard (Apr 11 2018 at 22:21)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124948737" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124948737">Kevin Buzzard (Apr 12 2018 at 06:21)</a>:</h4>
 <p>Google might have a better idea about moving the "right" answer to <a href="https://github.com/leanprover/lean/issues/1" target="_blank" title="https://github.com/leanprover/lean/issues/1">#1</a> in the list...</p>
 
 <a name="124948751"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124948751" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124948751">Chris Hughes (Apr 11 2018 at 22:21)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124948751" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124948751">Chris Hughes (Apr 12 2018 at 06:21)</a>:</h4>
 <blockquote>
 <p>Can I mix equality and an congruences in calc?</p>
 </blockquote>
 <p>I tried it and you can.</p>
 
 <a name="124948888"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124948888" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124948888">Patrick Massot (Apr 11 2018 at 22:24)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124948888" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124948888">Patrick Massot (Apr 12 2018 at 06:24)</a>:</h4>
 <p>Go to google and typein search bar: <code>site:https://leanprover.github.io/theorem_proving_in_lean/ calc</code></p>
 
 <a name="124948904"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124948904" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124948904">Patrick Massot (Apr 11 2018 at 22:24)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124948904" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124948904">Patrick Massot (Apr 12 2018 at 06:24)</a>:</h4>
 <p>Google is smarter than Sphynx</p>
 
 <a name="124948916"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124948916" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124948916">Kevin Buzzard (Apr 11 2018 at 22:25)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124948916" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124948916">Kevin Buzzard (Apr 12 2018 at 06:25)</a>:</h4>
 <blockquote>
 <p>Can I mix equality and an congruences in calc?</p>
 </blockquote>
@@ -390,11 +390,11 @@ permalink: archive/113488general/61646Unfoldingcarefully.html
 </code></p>
 
 <a name="124948919"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124948919" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124948919">Kevin Buzzard (Apr 11 2018 at 22:25)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124948919" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124948919">Kevin Buzzard (Apr 12 2018 at 06:25)</a>:</h4>
 <p>and lo and behold</p>
 
 <a name="124948923"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124948923" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124948923">Kevin Buzzard (Apr 11 2018 at 22:25)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124948923" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124948923">Kevin Buzzard (Apr 12 2018 at 06:25)</a>:</h4>
 <div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">nat</span><span class="bp">.</span><span class="n">modeq</span>
 <span class="kn">variables</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="n">d</span> <span class="n">m</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span>
 
@@ -405,67 +405,67 @@ permalink: archive/113488general/61646Unfoldingcarefully.html
 </pre></div>
 
 <a name="124948977"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124948977" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124948977">Kevin Buzzard (Apr 11 2018 at 22:26)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124948977" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124948977">Kevin Buzzard (Apr 12 2018 at 06:26)</a>:</h4>
 <p>Google is smarter than everything :-/</p>
 
 <a name="124948981"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124948981" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124948981">Chris Hughes (Apr 11 2018 at 22:26)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124948981" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124948981">Chris Hughes (Apr 12 2018 at 06:26)</a>:</h4>
 <p>what if I have two relations that are "co transitive" in the same sense that <code>le</code> and <code>lt</code> are. Can I make them work with calc?</p>
 
 <a name="124948986"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124948986" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124948986">Kevin Buzzard (Apr 11 2018 at 22:27)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124948986" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124948986">Kevin Buzzard (Apr 12 2018 at 06:27)</a>:</h4>
 <p>Right, e.g. a congruence mod 8 might imply a congruence mod 4</p>
 
 <a name="124949001"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124949001" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124949001">Kevin Buzzard (Apr 11 2018 at 22:27)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124949001" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124949001">Kevin Buzzard (Apr 12 2018 at 06:27)</a>:</h4>
 <p>I have no idea how Lean is doing the &lt; and &lt;= thing</p>
 
 <a name="124949002"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124949002" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124949002">Patrick Massot (Apr 11 2018 at 22:27)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124949002" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124949002">Patrick Massot (Apr 12 2018 at 06:27)</a>:</h4>
 <p>calc knowing about that would be pretty cool</p>
 
 <a name="124949003"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124949003" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124949003">Chris Hughes (Apr 11 2018 at 22:27)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124949003" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124949003">Chris Hughes (Apr 12 2018 at 06:27)</a>:</h4>
 <p>I thought that was a useless question, but obviously not.</p>
 
 <a name="124949008"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124949008" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124949008">Kevin Buzzard (Apr 11 2018 at 22:27)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124949008" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124949008">Kevin Buzzard (Apr 12 2018 at 06:27)</a>:</h4>
 <p>I know from experience that it will let you prove <code>a &lt; d</code> by writing <code>a &lt;= b &lt; c &lt;= d</code></p>
 
 <a name="124949012"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124949012" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124949012">Kevin Buzzard (Apr 11 2018 at 22:27)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124949012" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124949012">Kevin Buzzard (Apr 12 2018 at 06:27)</a>:</h4>
 <p>so it knows <code>lt_of_le_of_lt</code></p>
 
 <a name="124949014"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124949014" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124949014">Patrick Massot (Apr 11 2018 at 22:27)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124949014" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124949014">Patrick Massot (Apr 12 2018 at 06:27)</a>:</h4>
 <p>yes, this is already really cool</p>
 
 <a name="124949018"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124949018" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124949018">Kevin Buzzard (Apr 11 2018 at 22:27)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124949018" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124949018">Kevin Buzzard (Apr 12 2018 at 06:27)</a>:</h4>
 <p>but it wouldn't surprise me if this were hard wired in somehow</p>
 
 <a name="124949020"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124949020" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124949020">Kevin Buzzard (Apr 11 2018 at 22:27)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124949020" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124949020">Kevin Buzzard (Apr 12 2018 at 06:27)</a>:</h4>
 <p>as a common use case</p>
 
 <a name="124949055"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124949055" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124949055">Patrick Massot (Apr 11 2018 at 22:28)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124949055" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124949055">Patrick Massot (Apr 12 2018 at 06:28)</a>:</h4>
 <p>but I suspect this special case is hard-wired</p>
 
 <a name="124949064"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124949064" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124949064">Chris Hughes (Apr 11 2018 at 22:28)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124949064" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124949064">Chris Hughes (Apr 12 2018 at 06:28)</a>:</h4>
 <p><code>lt_of_lt_of_le</code> is tagged with trans. So it might just be a case of doing that.</p>
 
 <a name="124949138"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124949138" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124949138">Kevin Buzzard (Apr 11 2018 at 22:30)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124949138" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124949138">Kevin Buzzard (Apr 12 2018 at 06:30)</a>:</h4>
 <p>Oh well spotted!</p>
 
 <a name="124949150"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124949150" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124949150">Patrick Massot (Apr 11 2018 at 22:30)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124949150" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124949150">Patrick Massot (Apr 12 2018 at 06:30)</a>:</h4>
 <p>indeed</p>
 
 <a name="124949181"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124949181" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124949181">Chris Hughes (Apr 11 2018 at 22:31)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124949181" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124949181">Chris Hughes (Apr 12 2018 at 06:31)</a>:</h4>
 <div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">r</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="kt">Prop</span> <span class="o">:=</span> <span class="n">sorry</span>
 <span class="n">def</span> <span class="n">s</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="kt">Prop</span> <span class="o">:=</span> <span class="n">sorry</span>
 
@@ -481,15 +481,15 @@ permalink: archive/113488general/61646Unfoldingcarefully.html
 </pre></div>
 
 <a name="124949227"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124949227" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124949227">Chris Hughes (Apr 11 2018 at 22:32)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124949227" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124949227">Chris Hughes (Apr 12 2018 at 06:32)</a>:</h4>
 <p>That pasted from VScode without any extra spaces.</p>
 
 <a name="124949231"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124949231" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124949231">Patrick Massot (Apr 11 2018 at 22:32)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124949231" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124949231">Patrick Massot (Apr 12 2018 at 06:32)</a>:</h4>
 <p><span class="emoji emoji-1f62f" title="hushed">:hushed:</span></p>
 
 <a name="124949234"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124949234" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124949234">Kevin Buzzard (Apr 11 2018 at 22:33)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124949234" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124949234">Kevin Buzzard (Apr 12 2018 at 06:33)</a>:</h4>
 <div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">nat</span><span class="bp">.</span><span class="n">modeq</span>
 <span class="kn">variables</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="n">d</span> <span class="n">m</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span>
 
@@ -501,166 +501,166 @@ permalink: archive/113488general/61646Unfoldingcarefully.html
 </pre></div>
 
 <a name="124949241"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124949241" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124949241">Kevin Buzzard (Apr 11 2018 at 22:33)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124949241" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124949241">Kevin Buzzard (Apr 12 2018 at 06:33)</a>:</h4>
 <p>(deleted)</p>
 
 <a name="124949244"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124949244" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124949244">Kevin Buzzard (Apr 11 2018 at 22:33)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124949244" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124949244">Kevin Buzzard (Apr 12 2018 at 06:33)</a>:</h4>
 <p>so did that</p>
 
 <a name="124949257"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124949257" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124949257">Kevin Buzzard (Apr 11 2018 at 22:34)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124949257" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124949257">Kevin Buzzard (Apr 12 2018 at 06:34)</a>:</h4>
 <p>So it's really not hard coded in, there is some dark art with trans tags</p>
 
 <a name="124949301"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124949301" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124949301">Patrick Massot (Apr 11 2018 at 22:34)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124949301" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124949301">Patrick Massot (Apr 12 2018 at 06:34)</a>:</h4>
 <p>Let's keep that in Lean 4</p>
 
 <a name="124949304"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124949304" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124949304">Kevin Buzzard (Apr 11 2018 at 22:34)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124949304" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124949304">Kevin Buzzard (Apr 12 2018 at 06:34)</a>:</h4>
 <p>Conclusion in my example must be a = c mod 8 after second line</p>
 
 <a name="124949314"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124949314" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124949314">Kevin Buzzard (Apr 11 2018 at 22:35)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124949314" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124949314">Kevin Buzzard (Apr 12 2018 at 06:35)</a>:</h4>
 <p>it uses this:</p>
 
 <a name="124949316"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124949316" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124949316">Kevin Buzzard (Apr 11 2018 at 22:35)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124949316" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124949316">Kevin Buzzard (Apr 12 2018 at 06:35)</a>:</h4>
 <p><code>#check trans_rel_left -- ∀ (r : ?M_1 → ?M_1 → Prop), r ?M_2 ?M_3 → ?M_3 = ?M_4 → r ?M_2 ?M_4
 </code></p>
 
 <a name="124949323"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124949323" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124949323">Kevin Buzzard (Apr 11 2018 at 22:35)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124949323" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124949323">Kevin Buzzard (Apr 12 2018 at 06:35)</a>:</h4>
 <p>(I know because some messing around gave me some explicit error messages)</p>
 
 <a name="124949327"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124949327" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124949327">Kevin Buzzard (Apr 11 2018 at 22:35)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124949327" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124949327">Kevin Buzzard (Apr 12 2018 at 06:35)</a>:</h4>
 <p>and then it uses my trans-tagged theorem for 3rd line</p>
 
 <a name="124949380"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124949380" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124949380">Patrick Massot (Apr 11 2018 at 22:36)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124949380" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124949380">Patrick Massot (Apr 12 2018 at 06:36)</a>:</h4>
 <p>To the <code>docs/extras/calc</code>!</p>
 
 <a name="124949384"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124949384" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124949384">Kevin Buzzard (Apr 11 2018 at 22:36)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124949384" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124949384">Kevin Buzzard (Apr 12 2018 at 06:36)</a>:</h4>
 <p>Yes, this deserves to be better known</p>
 
 <a name="124949399"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124949399" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124949399">Kevin Buzzard (Apr 11 2018 at 22:37)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124949399" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124949399">Kevin Buzzard (Apr 12 2018 at 06:37)</a>:</h4>
 <p>I mean it's mentioned in TPIL but somehow it hadn't dawned on me how far you could push this</p>
 
 <a name="124949401"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124949401" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124949401">Chris Hughes (Apr 11 2018 at 22:37)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124949401" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124949401">Chris Hughes (Apr 12 2018 at 06:37)</a>:</h4>
 <p>So now I know the point of <code>@[trans]</code> and <code>@[refl]</code> but I'm still not sure why you would tag something <code>@[symm]</code></p>
 
 <a name="124949503"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124949503" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124949503">Kevin Buzzard (Apr 11 2018 at 22:39)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124949503" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124949503">Kevin Buzzard (Apr 12 2018 at 06:39)</a>:</h4>
 <p><a href="#narrow/stream/113488-general/topic/simp.20is.20amazing" title="#narrow/stream/113488-general/topic/simp.20is.20amazing">https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp.20is.20amazing</a></p>
 
 <a name="124949509"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124949509" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124949509">Kevin Buzzard (Apr 11 2018 at 22:39)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124949509" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124949509">Kevin Buzzard (Apr 12 2018 at 06:39)</a>:</h4>
 <p>Gabriel's comment is in that thread</p>
 
 <a name="124949511"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124949511" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124949511">Kevin Buzzard (Apr 11 2018 at 22:39)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124949511" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124949511">Kevin Buzzard (Apr 12 2018 at 06:39)</a>:</h4>
 <p>but I don't know any longer if it was about simp</p>
 
 <a name="124949557"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124949557" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124949557">Kevin Buzzard (Apr 11 2018 at 22:40)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124949557" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124949557">Kevin Buzzard (Apr 12 2018 at 06:40)</a>:</h4>
 <p>If you tag something symm then there's some tactic called symmetry which will work ;-)</p>
 
 <a name="124949669"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124949669" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124949669">Patrick Massot (Apr 11 2018 at 22:43)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124949669" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124949669">Patrick Massot (Apr 12 2018 at 06:43)</a>:</h4>
 <p>We need to formalize something using this calc power</p>
 
 <a name="124949671"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124949671" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124949671">Patrick Massot (Apr 11 2018 at 22:43)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124949671" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124949671">Patrick Massot (Apr 12 2018 at 06:43)</a>:</h4>
 <p>What about some version of Hensel's lemma?</p>
 
 <a name="124949678"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124949678" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124949678">Patrick Massot (Apr 11 2018 at 22:43)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124949678" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124949678">Patrick Massot (Apr 12 2018 at 06:43)</a>:</h4>
 <p>There should be chains of congruence modulo different stuff there</p>
 
 <a name="124949719"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124949719" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124949719">Patrick Massot (Apr 11 2018 at 22:44)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124949719" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124949719">Patrick Massot (Apr 12 2018 at 06:44)</a>:</h4>
 <p>And it may even be useful for perfectoids, who knows?</p>
 
 <a name="124949725"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124949725" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124949725">Kevin Buzzard (Apr 11 2018 at 22:44)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124949725" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124949725">Kevin Buzzard (Apr 12 2018 at 06:44)</a>:</h4>
 <p><code>theorem X (a b m : ℕ) (H : a ≡ b [MOD m]) : b ≡ a [MOD m] := by symmetry;assumption</code></p>
 
 <a name="124949738"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124949738" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124949738">Chris Hughes (Apr 11 2018 at 22:45)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124949738" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124949738">Chris Hughes (Apr 12 2018 at 06:45)</a>:</h4>
 <p><code>theorem X (a b m : ℕ) (H : a ≡ b [MOD m]) : b ≡ a [MOD m] := H.symm</code></p>
 
 <a name="124949739"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124949739" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124949739">Kevin Buzzard (Apr 11 2018 at 22:45)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124949739" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124949739">Kevin Buzzard (Apr 12 2018 at 06:45)</a>:</h4>
 <p>symmetry tactic replaces a hypothesis with another one if the fact that one implies the other is marked with symm</p>
 
 <a name="124949789"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124949789" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124949789">Chris Hughes (Apr 11 2018 at 22:46)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124949789" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124949789">Chris Hughes (Apr 12 2018 at 06:46)</a>:</h4>
 <p>I know what it does, but it seems fairly useless.</p>
 
 <a name="124949806"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124949806" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124949806">Kevin Buzzard (Apr 11 2018 at 22:47)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124949806" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124949806">Kevin Buzzard (Apr 12 2018 at 06:47)</a>:</h4>
 <p>Simon's cool use of transivity is above, and refl is used everywhere, but who knows what symmetry is for :-)</p>
 
 <a name="124949874"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124949874" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124949874">Chris Hughes (Apr 11 2018 at 22:48)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124949874" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124949874">Chris Hughes (Apr 12 2018 at 06:48)</a>:</h4>
 <blockquote>
 <p>Simon's cool use of transivity is above, and refl is used everywhere, but who knows what symmetry is for :-)</p>
 </blockquote>
 <p>What's Simon's cool use of transitivity?</p>
 
 <a name="124950966"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124950966" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124950966">Kevin Buzzard (Apr 11 2018 at 23:13)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124950966" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124950966">Kevin Buzzard (Apr 12 2018 at 07:13)</a>:</h4>
 <p>At the start of this thread</p>
 
 <a name="124953029"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124953029" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124953029">Kevin Buzzard (Apr 12 2018 at 00:03)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124953029" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124953029">Kevin Buzzard (Apr 12 2018 at 08:03)</a>:</h4>
 <blockquote>
 <p>To the <code>docs/extras/calc</code>!</p>
 </blockquote>
 <p><a href="https://github.com/kbuzzard/mathlib/blob/WIP_docs/docs/WIPs/calc.md" target="_blank" title="https://github.com/kbuzzard/mathlib/blob/WIP_docs/docs/WIPs/calc.md">https://github.com/kbuzzard/mathlib/blob/WIP_docs/docs/WIPs/calc.md</a></p>
 
 <a name="124953112"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124953112" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124953112">Chris Hughes (Apr 12 2018 at 00:05)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124953112" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124953112">Chris Hughes (Apr 12 2018 at 08:05)</a>:</h4>
 <p>Can I use calc if I haven't defined an infix for my relation?</p>
 
 <a name="124953180"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124953180" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124953180">Kevin Buzzard (Apr 12 2018 at 00:06)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124953180" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124953180">Kevin Buzzard (Apr 12 2018 at 08:06)</a>:</h4>
 <p>I don't know!</p>
 
 <a name="124953181"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124953181" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124953181">Kevin Buzzard (Apr 12 2018 at 00:06)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124953181" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124953181">Kevin Buzzard (Apr 12 2018 at 08:06)</a>:</h4>
 <p>As you can see I defined infixes for mine.</p>
 
 <a name="124953284"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124953284" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124953284">Kevin Buzzard (Apr 12 2018 at 00:09)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124953284" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124953284">Kevin Buzzard (Apr 12 2018 at 08:09)</a>:</h4>
 <p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> I wrote some calc docs (see link above) extending what is written in TPIL, together with some notes for things I struggled with myself after reading TPIL (e.g. I would sometimes get into a real mess with some syntax error or proof error manifesting itself as a red squiggle under a random <code>...</code>). Three questions:</p>
 
 <a name="124953288"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124953288" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124953288">Kevin Buzzard (Apr 12 2018 at 00:09)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124953288" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124953288">Kevin Buzzard (Apr 12 2018 at 08:09)</a>:</h4>
 <p>1) Shall I PR to mathlib?</p>
 
 <a name="124953293"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124953293" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124953293">Kevin Buzzard (Apr 12 2018 at 00:09)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124953293" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124953293">Kevin Buzzard (Apr 12 2018 at 08:09)</a>:</h4>
 <p>2) Chris asks if <code>calc</code> can be used with operators that aren't infix</p>
 
 <a name="124953362"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124953362" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124953362">Kevin Buzzard (Apr 12 2018 at 00:10)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124953362" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124953362">Kevin Buzzard (Apr 12 2018 at 08:10)</a>:</h4>
 <p>3) I made some guesses as to how calc works. In particular I note that <code>trans_rel_right</code> and <code>trans_rel_left</code> are not tagged <code>[trans]</code>. Are these special cases which are tried first?</p>
 
 <a name="124953417"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124953417" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124953417">Kevin Buzzard (Apr 12 2018 at 00:12)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124953417" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124953417">Kevin Buzzard (Apr 12 2018 at 08:12)</a>:</h4>
 <p>And an idle question -- would it be possible to break <code>calc</code> by proving e.g. <code>a &lt; b -&gt; b &lt; c -&gt; a &lt;= c</code> and tagging with <code>[trans]</code>?</p>
 
 <a name="124953555"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124953555" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124953555">Kevin Buzzard (Apr 12 2018 at 00:14)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124953555" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124953555">Kevin Buzzard (Apr 12 2018 at 08:14)</a>:</h4>
 <p>And <span class="user-mention" data-user-id="110031">@Patrick Massot</span> After Mario accepted my last mathlib PRs I just nuked the entire repo and forked it again (do you remember I had a bad commit history because I never branched?). Now I have a branch with my WIPs. I know I can google for how to do this but I'm sure you will know instantly -- what is the best way to just PR the calc.md file? Sorry to bother you.</p>
 
 <a name="124971220"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124971220" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124971220">Patrick Massot (Apr 12 2018 at 08:39)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124971220" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124971220">Patrick Massot (Apr 12 2018 at 16:39)</a>:</h4>
 <p>Since you have only one file to PR and don't care about keeping the history of this file, here the simplest route: copy that calc.md somewhere else (say /home/kevin/), then, inside mathlib,</p>
 <div class="codehilite"><pre><span></span>git checkout master
 git checkout -b docs-calc
@@ -678,56 +678,56 @@ git push
 <p>The last command will complain you should explicitly say to create an upstream branch. Copy-paste the suggested command (I never remember the syntax since git always helps me here).</p>
 
 <a name="124971277"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124971277" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124971277">Patrick Massot (Apr 12 2018 at 08:41)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124971277" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124971277">Patrick Massot (Apr 12 2018 at 16:41)</a>:</h4>
 <p>I forgot: don't forget to make sure your master is in sync with Mario's before <code>git check-out -b docs-calc</code></p>
 
 <a name="124971317"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124971317" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124971317">Patrick Massot (Apr 12 2018 at 08:42)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124971317" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124971317">Patrick Massot (Apr 12 2018 at 16:42)</a>:</h4>
 <p>assuming you followed conventional names, that would mean <code>git pull upstream master</code> after <code>git checkout master</code></p>
 
 <a name="124971318"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124971318" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124971318">Mario Carneiro (Apr 12 2018 at 08:42)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124971318" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124971318">Mario Carneiro (Apr 12 2018 at 16:42)</a>:</h4>
 <p>It's not a big problem if you PR off an old version of mathlib, since I usually rebase it on the current head when I merge the PR anyway</p>
 
 <a name="124971319"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124971319" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124971319">Mario Carneiro (Apr 12 2018 at 08:42)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124971319" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124971319">Mario Carneiro (Apr 12 2018 at 16:42)</a>:</h4>
 <p>unless there's a conflict of course</p>
 
 <a name="124971320"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124971320" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124971320">Mario Carneiro (Apr 12 2018 at 08:42)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124971320" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124971320">Mario Carneiro (Apr 12 2018 at 16:42)</a>:</h4>
 <p>but docs don't usually cause conflicts if they are new</p>
 
 <a name="124971369"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124971369" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124971369">Patrick Massot (Apr 12 2018 at 08:44)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124971369" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124971369">Patrick Massot (Apr 12 2018 at 16:44)</a>:</h4>
 <p>sure</p>
 
 <a name="124971371"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124971371" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124971371">Patrick Massot (Apr 12 2018 at 08:44)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124971371" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124971371">Patrick Massot (Apr 12 2018 at 16:44)</a>:</h4>
 <p>I'm only trying to explain good practice</p>
 
 <a name="124971558"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124971558" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124971558">Mario Carneiro (Apr 12 2018 at 08:51)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124971558" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124971558">Mario Carneiro (Apr 12 2018 at 16:51)</a>:</h4>
 <p>I agree with everything you said.</p>
 <p>I would add that if you intend to PR some addition, you should write it "in place", i.e. with the file located in mathlib where you want it to be, by first checking out <code>master</code> then checking out a new branch (i.e. the first two lines of Patrick's script), then making any modifications there.  Then any commits you make will branch from master nicely. If you need to set the work aside, you can just commit what you have to the branch and move to the current master or somewhere else, and come back to your PR when you are ready to resume work with <code>git checkout my-pr</code>.</p>
 
 <a name="124972034"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124972034" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124972034">Patrick Massot (Apr 12 2018 at 09:07)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124972034" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124972034">Patrick Massot (Apr 12 2018 at 17:07)</a>:</h4>
 <p>No -b in your last sentence</p>
 
 <a name="124972076"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124972076" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124972076">Patrick Massot (Apr 12 2018 at 09:08)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124972076" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124972076">Patrick Massot (Apr 12 2018 at 17:08)</a>:</h4>
 <p>Otherwise of course this is the correct way. I was explaining how to fix the mess.</p>
 
 <a name="124972188"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124972188" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124972188">Mario Carneiro (Apr 12 2018 at 09:12)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124972188" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124972188">Mario Carneiro (Apr 12 2018 at 17:12)</a>:</h4>
 <p>oops, typo (copy-o?)</p>
 
 <a name="124990989"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124990989" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124990989">Kevin Buzzard (Apr 12 2018 at 17:52)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124990989" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124990989">Kevin Buzzard (Apr 13 2018 at 01:52)</a>:</h4>
 <p>OK done. Thanks both for the advice. Mario -- it's a bit of a WIP because I guessed how the transitivity worked in calc mode. First I guessed that Lean went from <code>A op1 B op2 C op3 D</code> to <code>A op4 D</code> via "reading from left to right", i.e. first attempting to figure out how <code>A op1 B op2 C</code> can become <code>A op5 C</code> and then merging this with <code>C op3 D</code> (i.e. I don't know if it does anything clever like trying to merge two random consecutive theorems in the middle), and secondly I guessed that when trying to merge two ops to become another one it first uses rw if one is <code>=</code> and then tries lemmas tagged <code>trans</code> if neither op is <code>=</code>. These are just plain guesses.</p>
 
 <a name="124992197"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124992197" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124992197">Chris Hughes (Apr 12 2018 at 18:22)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124992197" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124992197">Chris Hughes (Apr 13 2018 at 02:22)</a>:</h4>
 <p>I did some testing and I don't think it tries to do anything clever with changing the order. <code>L2</code> doesn't work below, but the rest do. You can also state that three relations are transitive together.</p>
 <div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">r</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="kt">Prop</span> <span class="o">:=</span> <span class="n">sorry</span>
 <span class="n">def</span> <span class="n">s</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="kt">Prop</span> <span class="o">:=</span> <span class="n">sorry</span>
@@ -763,7 +763,7 @@ git push
 </pre></div>
 
 <a name="124993108"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124993108" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124993108">Kevin Buzzard (Apr 12 2018 at 18:45)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Unfolding%20carefully/near/124993108" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61646Unfoldingcarefully.html#124993108">Kevin Buzzard (Apr 13 2018 at 02:45)</a>:</h4>
 <p>Thanks for checking. That was one way of doing it. The other way is to read the source code, but I sort-of suspect (perhaps incorrectly) that it will be in C++ not Lean.</p>
 
 

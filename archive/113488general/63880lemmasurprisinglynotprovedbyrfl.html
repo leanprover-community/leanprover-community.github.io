@@ -12,7 +12,7 @@ permalink: archive/113488general/63880lemmasurprisinglynotprovedbyrfl.html
 <base href="https://leanprover.zulipchat.com">
 {% raw %}
 <a name="128969240"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lemma%20surprisingly%20not%20proved%20by%20rfl/near/128969240" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63880lemmasurprisinglynotprovedbyrfl.html#128969240">Chris Hughes (Jul 02 2018 at 17:13)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lemma%20surprisingly%20not%20proved%20by%20rfl/near/128969240" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63880lemmasurprisinglynotprovedbyrfl.html#128969240">Chris Hughes (Jul 03 2018 at 01:13)</a>:</h4>
 <p>Is there a shorter way to prove this and why isn't <code>rfl</code> working? Is it because the type of the lhs is <code>with_bot ℕ</code> and the rhs is <code>option ℕ</code>? (The types are defeq)</p>
 <div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">algebra</span><span class="bp">.</span><span class="n">ordered_group</span>
 
@@ -25,11 +25,11 @@ permalink: archive/113488general/63880lemmasurprisinglynotprovedbyrfl.html
 </pre></div>
 
 <a name="128970431"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lemma%20surprisingly%20not%20proved%20by%20rfl/near/128970431" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63880lemmasurprisinglynotprovedbyrfl.html#128970431">Chris Hughes (Jul 02 2018 at 17:32)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lemma%20surprisingly%20not%20proved%20by%20rfl/near/128970431" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63880lemmasurprisinglynotprovedbyrfl.html#128970431">Chris Hughes (Jul 03 2018 at 01:32)</a>:</h4>
 <p>Looked a little deeper and it seems <code>(0 : with_bot ℕ)</code> is defeq to <code>some (1 : multplicative ℕ)</code>. I feel like perhaps the fact that this lemma is not <code>rfl</code> means the definition ought to be changed.</p>
 
 <a name="128986937"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lemma%20surprisingly%20not%20proved%20by%20rfl/near/128986937" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63880lemmasurprisinglynotprovedbyrfl.html#128986937">Mario Carneiro (Jul 02 2018 at 22:56)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lemma%20surprisingly%20not%20proved%20by%20rfl/near/128986937" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63880lemmasurprisinglynotprovedbyrfl.html#128986937">Mario Carneiro (Jul 03 2018 at 06:56)</a>:</h4>
 <p>Oh, this is weird! It is in fact the case that <code>(0 : with_bot ℕ) = some 0</code>, but the tactics are very confused about it. Here's <code>simp</code> proving that they are different, and then the kernel says it's a wrong proof:</p>
 <div class="codehilite"><pre><span></span>example : (0 : with_bot ℕ) ≠ (some 0 : option ℕ) :=
 show some _ ≠ some 0, begin
@@ -38,15 +38,15 @@ end
 </pre></div>
 
 <a name="128986953"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lemma%20surprisingly%20not%20proved%20by%20rfl/near/128986953" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63880lemmasurprisinglynotprovedbyrfl.html#128986953">Mario Carneiro (Jul 02 2018 at 22:56)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lemma%20surprisingly%20not%20proved%20by%20rfl/near/128986953" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63880lemmasurprisinglynotprovedbyrfl.html#128986953">Mario Carneiro (Jul 03 2018 at 06:56)</a>:</h4>
 <p>I will add a lemma for it</p>
 
 <a name="128986995"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lemma%20surprisingly%20not%20proved%20by%20rfl/near/128986995" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63880lemmasurprisinglynotprovedbyrfl.html#128986995">Mario Carneiro (Jul 02 2018 at 22:57)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lemma%20surprisingly%20not%20proved%20by%20rfl/near/128986995" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63880lemmasurprisinglynotprovedbyrfl.html#128986995">Mario Carneiro (Jul 03 2018 at 06:57)</a>:</h4>
 <p>as a slight hack, you can instead prove it by <code>dec_trivial</code></p>
 
 <a name="128987480"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lemma%20surprisingly%20not%20proved%20by%20rfl/near/128987480" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63880lemmasurprisinglynotprovedbyrfl.html#128987480">Kevin Buzzard (Jul 02 2018 at 23:06)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lemma%20surprisingly%20not%20proved%20by%20rfl/near/128987480" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63880lemmasurprisinglynotprovedbyrfl.html#128987480">Kevin Buzzard (Jul 03 2018 at 07:06)</a>:</h4>
 <div class="codehilite"><pre><span></span>failed to synthesize type class instance for
 ⊢ has_zero (with_bot ℕ)
 </pre></div>
@@ -55,11 +55,11 @@ end
 <p>-- am I missing an import?</p>
 
 <a name="128987708"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lemma%20surprisingly%20not%20proved%20by%20rfl/near/128987708" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63880lemmasurprisinglynotprovedbyrfl.html#128987708">Mario Carneiro (Jul 02 2018 at 23:11)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lemma%20surprisingly%20not%20proved%20by%20rfl/near/128987708" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63880lemmasurprisinglynotprovedbyrfl.html#128987708">Mario Carneiro (Jul 03 2018 at 07:11)</a>:</h4>
 <p><code>algebra.ordered_group</code></p>
 
 <a name="128988232"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lemma%20surprisingly%20not%20proved%20by%20rfl/near/128988232" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63880lemmasurprisinglynotprovedbyrfl.html#128988232">Mario Carneiro (Jul 02 2018 at 23:23)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lemma%20surprisingly%20not%20proved%20by%20rfl/near/128988232" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63880lemmasurprisinglynotprovedbyrfl.html#128988232">Mario Carneiro (Jul 03 2018 at 07:23)</a>:</h4>
 <p><span class="user-mention" data-user-id="110024">@Sebastian Ullrich</span> Minimized:</p>
 <div class="codehilite"><pre><span></span>def nat2 := nat
 instance : has_one nat2 := ⟨(0 : ℕ)⟩
@@ -67,47 +67,47 @@ example : (0 : ℕ) ≠ (1 : nat2) := by simp
 </pre></div>
 
 <a name="128988318"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lemma%20surprisingly%20not%20proved%20by%20rfl/near/128988318" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63880lemmasurprisinglynotprovedbyrfl.html#128988318">Mario Carneiro (Jul 02 2018 at 23:24)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lemma%20surprisingly%20not%20proved%20by%20rfl/near/128988318" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63880lemmasurprisinglynotprovedbyrfl.html#128988318">Mario Carneiro (Jul 03 2018 at 07:24)</a>:</h4>
 <p>In this example <code>example : (0 : ℕ) = (1 : nat2) := rfl</code> also fails</p>
 
 <a name="128988873"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lemma%20surprisingly%20not%20proved%20by%20rfl/near/128988873" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63880lemmasurprisinglynotprovedbyrfl.html#128988873">Sebastian Ullrich (Jul 02 2018 at 23:36)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lemma%20surprisingly%20not%20proved%20by%20rfl/near/128988873" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63880lemmasurprisinglynotprovedbyrfl.html#128988873">Sebastian Ullrich (Jul 03 2018 at 07:36)</a>:</h4>
 <p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> Thanks, this seems to be an imprecise term pattern match at <a href="https://github.com/leanprover/lean/blob/master/src/library/type_context.cpp#L2906-L2907" target="_blank" title="https://github.com/leanprover/lean/blob/master/src/library/type_context.cpp#L2906-L2907">https://github.com/leanprover/lean/blob/master/src/library/type_context.cpp#L2906-L2907</a></p>
 
 <a name="128988933"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lemma%20surprisingly%20not%20proved%20by%20rfl/near/128988933" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63880lemmasurprisinglynotprovedbyrfl.html#128988933">Mario Carneiro (Jul 02 2018 at 23:37)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lemma%20surprisingly%20not%20proved%20by%20rfl/near/128988933" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63880lemmasurprisinglynotprovedbyrfl.html#128988933">Mario Carneiro (Jul 03 2018 at 07:37)</a>:</h4>
 <p>Ooh, that's a tricky one. I'd hate for you to have to do defeq checks constantly there out of paranoia for tricks like I showed...</p>
 
 <a name="128989538"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lemma%20surprisingly%20not%20proved%20by%20rfl/near/128989538" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63880lemmasurprisinglynotprovedbyrfl.html#128989538">Sebastian Ullrich (Jul 02 2018 at 23:49)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lemma%20surprisingly%20not%20proved%20by%20rfl/near/128989538" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63880lemmasurprisinglynotprovedbyrfl.html#128989538">Sebastian Ullrich (Jul 03 2018 at 07:49)</a>:</h4>
 <p>Yeah. It's probably not a good idea in general to declare instances on semireducible defs like <code>multiplicative</code>. Is it feasible to change that?</p>
 
 <a name="128989548"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lemma%20surprisingly%20not%20proved%20by%20rfl/near/128989548" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63880lemmasurprisinglynotprovedbyrfl.html#128989548">Mario Carneiro (Jul 02 2018 at 23:49)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lemma%20surprisingly%20not%20proved%20by%20rfl/near/128989548" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63880lemmasurprisinglynotprovedbyrfl.html#128989548">Mario Carneiro (Jul 03 2018 at 07:49)</a>:</h4>
 <p>Not really, I mean that is the point</p>
 
 <a name="128989559"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lemma%20surprisingly%20not%20proved%20by%20rfl/near/128989559" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63880lemmasurprisinglynotprovedbyrfl.html#128989559">Sebastian Ullrich (Jul 02 2018 at 23:49)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lemma%20surprisingly%20not%20proved%20by%20rfl/near/128989559" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63880lemmasurprisinglynotprovedbyrfl.html#128989559">Sebastian Ullrich (Jul 03 2018 at 07:49)</a>:</h4>
 <p>Sorry, I meant making it irreducible or a newtype.</p>
 
 <a name="128989625"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lemma%20surprisingly%20not%20proved%20by%20rfl/near/128989625" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63880lemmasurprisinglynotprovedbyrfl.html#128989625">Mario Carneiro (Jul 02 2018 at 23:50)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lemma%20surprisingly%20not%20proved%20by%20rfl/near/128989625" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63880lemmasurprisinglynotprovedbyrfl.html#128989625">Mario Carneiro (Jul 03 2018 at 07:50)</a>:</h4>
 <p>Probably not. An important aspect of the semireducible part is that you can prove multiplicative versions of additive theorems by defeq</p>
 
 <a name="128989657"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lemma%20surprisingly%20not%20proved%20by%20rfl/near/128989657" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63880lemmasurprisinglynotprovedbyrfl.html#128989657">Mario Carneiro (Jul 02 2018 at 23:51)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lemma%20surprisingly%20not%20proved%20by%20rfl/near/128989657" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63880lemmasurprisinglynotprovedbyrfl.html#128989657">Mario Carneiro (Jul 03 2018 at 07:51)</a>:</h4>
 <p>It's fine as long as it gives way to a sufficiently forceful "unfold", but I'm not sure irreducible will</p>
 
 <a name="128989728"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lemma%20surprisingly%20not%20proved%20by%20rfl/near/128989728" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63880lemmasurprisinglynotprovedbyrfl.html#128989728">Mario Carneiro (Jul 02 2018 at 23:52)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lemma%20surprisingly%20not%20proved%20by%20rfl/near/128989728" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63880lemmasurprisinglynotprovedbyrfl.html#128989728">Mario Carneiro (Jul 03 2018 at 07:52)</a>:</h4>
 <p>I would say that users should avoid having things of type <code>multiplicative A</code> in their goal at all</p>
 
 <a name="128989802"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lemma%20surprisingly%20not%20proved%20by%20rfl/near/128989802" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63880lemmasurprisinglynotprovedbyrfl.html#128989802">Mario Carneiro (Jul 02 2018 at 23:54)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lemma%20surprisingly%20not%20proved%20by%20rfl/near/128989802" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63880lemmasurprisinglynotprovedbyrfl.html#128989802">Mario Carneiro (Jul 03 2018 at 07:54)</a>:</h4>
 <p>so I think I will change the definition of the <code>with_bot</code> instance so that it unfolds directly rather than showing the multiplicative stuff</p>
 
 <a name="128992229"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lemma%20surprisingly%20not%20proved%20by%20rfl/near/128992229" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63880lemmasurprisinglynotprovedbyrfl.html#128992229">Mario Carneiro (Jul 03 2018 at 00:56)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lemma%20surprisingly%20not%20proved%20by%20rfl/near/128992229" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63880lemmasurprisinglynotprovedbyrfl.html#128992229">Mario Carneiro (Jul 03 2018 at 08:56)</a>:</h4>
 <p>fixed</p>
 
 

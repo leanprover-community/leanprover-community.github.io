@@ -12,16 +12,16 @@ permalink: archive/113488general/25766Userdefinableoptions.html
 <base href="https://leanprover.zulipchat.com">
 {% raw %}
 <a name="154955190"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/User%20definable%20options/near/154955190" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/25766Userdefinableoptions.html#154955190">Joe Hendrix (Jan 12 2019 at 00:23)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/User%20definable%20options/near/154955190" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/25766Userdefinableoptions.html#154955190">Joe Hendrix (Jan 12 2019 at 10:23)</a>:</h4>
 <p>Is there a way that I can set user definable options that can be parsed by tactics?  I have some proofs that take a while to run, and I'd like to be able to have an option at the file or lean package level that let me configure whether they ran or not.  e.g., during interactive development I disable proofs I'm not actually working on, but in a regression test they are enabled.<br>
 I noticed within a single run of the tactic monad, I can set custom option names (e.g., <code>set_options (opt.set_bool "enable_unsafe_tac" tt)</code>), but the value doesn't appear to show up in tactics farther down the file.  The set_option command also doesn't allow custom options.</p>
 
 <a name="154982882"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/User%20definable%20options/near/154982882" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/25766Userdefinableoptions.html#154982882">Sebastian Ullrich (Jan 12 2019 at 13:46)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/User%20definable%20options/near/154982882" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/25766Userdefinableoptions.html#154982882">Sebastian Ullrich (Jan 12 2019 at 23:46)</a>:</h4>
 <p><code>set_option</code> accepts only built-in options, but using the <code>set_options</code> primitive should work. Did you execute that code in a <code>run_command</code>?</p>
 
 <a name="156639542"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/User%20definable%20options/near/156639542" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/25766Userdefinableoptions.html#156639542">Joe Hendrix (Jan 22 2019 at 22:06)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/User%20definable%20options/near/156639542" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/25766Userdefinableoptions.html#156639542">Joe Hendrix (Jan 23 2019 at 08:06)</a>:</h4>
 <p>Sorry for the delay; I didn't see this until today.  Here's a sample script:</p>
 <div class="codehilite"><pre><span></span>open tactic
 
@@ -52,19 +52,19 @@ ff
 <p>So <code>set_options</code> works in the current command, but the option is forgotten in subsequent commands.</p>
 
 <a name="156642096"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/User%20definable%20options/near/156642096" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/25766Userdefinableoptions.html#156642096">Sebastian Ullrich (Jan 22 2019 at 22:39)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/User%20definable%20options/near/156642096" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/25766Userdefinableoptions.html#156642096">Sebastian Ullrich (Jan 23 2019 at 08:39)</a>:</h4>
 <p>Ah, that's too bad. You may want to fake the option with a custom attribute (which can be set globally or locally, but unset only locally). I'm not aware of a better solution.</p>
 
 <a name="156643580"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/User%20definable%20options/near/156643580" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/25766Userdefinableoptions.html#156643580">Joe Hendrix (Jan 22 2019 at 22:57)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/User%20definable%20options/near/156643580" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/25766Userdefinableoptions.html#156643580">Joe Hendrix (Jan 23 2019 at 08:57)</a>:</h4>
 <p>Thanks, that seems to work well.</p>
 
 <a name="156644445"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/User%20definable%20options/near/156644445" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/25766Userdefinableoptions.html#156644445">Mario Carneiro (Jan 22 2019 at 23:08)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/User%20definable%20options/near/156644445" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/25766Userdefinableoptions.html#156644445">Mario Carneiro (Jan 23 2019 at 09:08)</a>:</h4>
 <p>Is this improving in lean 4? More generally, it would be nice if there was a way to persist arbitrary data across different commands. Does everything have to go via adding defs to the environment?</p>
 
 <a name="156665743"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/User%20definable%20options/near/156665743" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/25766Userdefinableoptions.html#156665743">Joe Hendrix (Jan 23 2019 at 06:42)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/User%20definable%20options/near/156665743" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/25766Userdefinableoptions.html#156665743">Joe Hendrix (Jan 23 2019 at 16:42)</a>:</h4>
 <p>I could see use cases for persisting data, but I also think it's important that tactics could be run concurrently, and the results cached.  Given that goal, <code>set_options</code> behavior  doesn't seem to surprising.<br>
 In Haskell, you can define package level options and use them to define constants that can be checked at compile time (via CPP).  That's what I was hoping for here, so I could pass a flag to build or configure that controlled whether an axiom was allowed to be used.  The attribute trick doesn't seem too bad though.</p>
 

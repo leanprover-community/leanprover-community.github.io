@@ -12,137 +12,137 @@ permalink: archive/113488general/36390creatinganewinductivetype.html
 <base href="https://leanprover.zulipchat.com">
 {% raw %}
 <a name="123817890"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123817890" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123817890">Kevin Buzzard (Mar 16 2018 at 23:51)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123817890" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123817890">Kevin Buzzard (Mar 17 2018 at 09:51)</a>:</h4>
 <p>What happens to the underlying system when a new inductive type <code>X</code> is created in Lean? A new axiom seems to appear, namely the eliminator for the type -- <code>X.rec</code>. Is that right? A new axiom appears? Is that the only new axiom that appears, and all of the other stuff I see when I type <code>#print prefix X</code> is always deducible from <code>X.rec</code>? I see that occasionally other stuff is used, like <code>and</code> or <code>eq.rec</code> or propext. Is it possible to list exactly which functions are used when creating these new facts? I am trying to get to the bottom of the difference between equality and definitional equality and I think one main difference is these random axioms that seem to appear every time to create a new type.</p>
 
 <a name="123817958"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123817958" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123817958">Kevin Buzzard (Mar 16 2018 at 23:53)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123817958" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123817958">Kevin Buzzard (Mar 17 2018 at 09:53)</a>:</h4>
 <p>For example I think a+(b+c)=(a+b)+c for nats isn't a defeq, it's a theorem, and the reason seems to be that the proof uses induction on c, which uses nat.rec, which seems to be a way of proving that things are equal other than by definitional equality.</p>
 
 <a name="123817965"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123817965" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123817965">Kevin Buzzard (Mar 16 2018 at 23:53)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123817965" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123817965">Kevin Buzzard (Mar 17 2018 at 09:53)</a>:</h4>
 <p>Have I got all this sort-of straight?</p>
 
 <a name="123818103"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123818103" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123818103">Simon Hudon (Mar 16 2018 at 23:57)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123818103" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123818103">Simon Hudon (Mar 17 2018 at 09:57)</a>:</h4>
 <p>Something seems to be missing</p>
 
 <a name="123818155"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123818155" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123818155">Simon Hudon (Mar 16 2018 at 23:58)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123818155" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123818155">Simon Hudon (Mar 17 2018 at 09:58)</a>:</h4>
 <p>I think <code>a + succ b = succ (a + b)</code> is a definitional equality despite relying on rec</p>
 
 <a name="123818821"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123818821" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123818821">Kevin Buzzard (Mar 17 2018 at 00:17)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123818821" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123818821">Kevin Buzzard (Mar 17 2018 at 10:17)</a>:</h4>
 <p>Why does this rely on rec?</p>
 
 <a name="123818829"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123818829" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123818829">Kevin Buzzard (Mar 17 2018 at 00:17)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123818829" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123818829">Kevin Buzzard (Mar 17 2018 at 10:17)</a>:</h4>
 <p>Isn't it just the definition of addition?</p>
 
 <a name="123818876"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123818876" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123818876">Kevin Buzzard (Mar 17 2018 at 00:18)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123818876" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123818876">Kevin Buzzard (Mar 17 2018 at 10:18)</a>:</h4>
 <p>oh</p>
 
 <a name="123818886"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123818886" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123818886">Kevin Buzzard (Mar 17 2018 at 00:19)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123818886" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123818886">Kevin Buzzard (Mar 17 2018 at 10:19)</a>:</h4>
 <p><code>#print nat.add._main</code> was rather more complex than I had expected</p>
 
 <a name="123818959"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123818959" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123818959">Kevin Buzzard (Mar 17 2018 at 00:20)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123818959" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123818959">Kevin Buzzard (Mar 17 2018 at 10:20)</a>:</h4>
 <p>This is funny because the definition of <code>nat.add</code> in <code>core.lean</code> seems to be the standard one</p>
 
 <a name="123818963"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123818963" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123818963">Kevin Buzzard (Mar 17 2018 at 00:20)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123818963" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123818963">Kevin Buzzard (Mar 17 2018 at 10:20)</a>:</h4>
 <p>Oh it somehow relies on everything either being zero or a succ</p>
 
 <a name="123819077"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123819077" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123819077">Kevin Buzzard (Mar 17 2018 at 00:23)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123819077" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123819077">Kevin Buzzard (Mar 17 2018 at 10:23)</a>:</h4>
 <p>Somehow this is OK. We are defining <code>nat.add</code> using what might be called the equation compiler, and internally Lean has to make sense of this definition. Hmm. Maybe what is going on is that I don't understand the definition of defeq that Lean uses in practice.</p>
 
 <a name="123819159"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123819159" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123819159">Kevin Buzzard (Mar 17 2018 at 00:25)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123819159" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123819159">Kevin Buzzard (Mar 17 2018 at 10:25)</a>:</h4>
 <p>The definition of <code>nat.add_main</code> looks like a mess to me, but <code>nat.add.equations._eqn_2</code> is the assertion that <code>a+succ b = succ(a+b)</code>. The proof isn't rfl though.</p>
 
 <a name="123819164"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123819164" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123819164">Simon Hudon (Mar 17 2018 at 00:25)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123819164" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123819164">Simon Hudon (Mar 17 2018 at 10:25)</a>:</h4>
 <p>If you use <code>nat.rec f (succ n)</code> it looks to me like Lean treats it as definitionally equal to <code>f n</code></p>
 
 <a name="123819208"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123819208" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123819208">Kevin Buzzard (Mar 17 2018 at 00:26)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123819208" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123819208">Kevin Buzzard (Mar 17 2018 at 10:26)</a>:</h4>
 <p>Is this just some weirdness with nat though, because it's such a primitive object?</p>
 
 <a name="123819230"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123819230" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123819230">Simon Hudon (Mar 17 2018 at 00:27)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123819230" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123819230">Simon Hudon (Mar 17 2018 at 10:27)</a>:</h4>
 <blockquote>
 <p>The proof isn't rfl though.</p>
 </blockquote>
 <p>I don't think that equations get labelled as <code>rfl</code></p>
 
 <a name="123819316"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123819316" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123819316">Andrew Ashworth (Mar 17 2018 at 00:29)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123819316" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123819316">Andrew Ashworth (Mar 17 2018 at 10:29)</a>:</h4>
 <p>you'd think <code>rec</code> wouldn't be part of defeq but it's common in type theory settings to include delta reduction as part of it</p>
 
 <a name="123819329"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123819329" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123819329">Kevin Buzzard (Mar 17 2018 at 00:29)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123819329" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123819329">Kevin Buzzard (Mar 17 2018 at 10:29)</a>:</h4>
 <p>I just rolled my own nat and nat.add and the same happens, it's not something specific to nat</p>
 
 <a name="123819396"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123819396" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123819396">Kevin Buzzard (Mar 17 2018 at 00:31)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123819396" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123819396">Kevin Buzzard (Mar 17 2018 at 10:31)</a>:</h4>
 <p>Maybe this is iota reduction</p>
 
 <a name="123819400"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123819400" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123819400">Kevin Buzzard (Mar 17 2018 at 00:31)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123819400" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123819400">Kevin Buzzard (Mar 17 2018 at 10:31)</a>:</h4>
 <p>Why did you guys choose such weird names for all these reductions?</p>
 
 <a name="123819467"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123819467" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123819467">Andrew Ashworth (Mar 17 2018 at 00:33)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123819467" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123819467">Andrew Ashworth (Mar 17 2018 at 10:33)</a>:</h4>
 <p>most people regard alonzo church as a mathematician :)</p>
 
 <a name="123819516"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123819516" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123819516">Kevin Buzzard (Mar 17 2018 at 00:34)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123819516" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123819516">Kevin Buzzard (Mar 17 2018 at 10:34)</a>:</h4>
 <p>OK so I am going to say that the reason a + succ b = succ (a+b) is a defeq despite relying on nat.rec is that the entire definition of add relies on nat.rec, and nonetheless they're defeq because of iota reduction. I knew what none of this stuff meant a few months ago though so if this isn't right then I hope someone lets me know.</p>
 
 <a name="123819519"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123819519" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123819519">Simon Hudon (Mar 17 2018 at 00:34)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123819519" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123819519">Simon Hudon (Mar 17 2018 at 10:34)</a>:</h4>
 <p>Funny ... and they regard Turing as a sort of computer scientist. They pretty much did the same things</p>
 
 <a name="123819539"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123819539" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123819539">Simon Hudon (Mar 17 2018 at 00:35)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123819539" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123819539">Simon Hudon (Mar 17 2018 at 10:35)</a>:</h4>
 <blockquote>
 <p>you'd think <code>rec</code> wouldn't be part of defeq but it's common in type theory settings to include delta reduction as part of it</p>
 </blockquote>
 <p>Isn't delta reduction about definitions? If <code>rec</code> is a constant, it doesn't have a definition ... what am I missing?</p>
 
 <a name="123819601"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123819601" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123819601">Kevin Buzzard (Mar 17 2018 at 00:36)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123819601" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123819601">Kevin Buzzard (Mar 17 2018 at 10:36)</a>:</h4>
 <p>According to Wikipedia Church was a mathematician and logician, so maybe he was being a logician at that point</p>
 
 <a name="123819615"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123819615" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123819615">Simon Hudon (Mar 17 2018 at 00:37)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123819615" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123819615">Simon Hudon (Mar 17 2018 at 10:37)</a>:</h4>
 <p>Haha! Your honor is safe then!</p>
 
 <a name="123819618"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123819618" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123819618">Kevin Buzzard (Mar 17 2018 at 00:37)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123819618" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123819618">Kevin Buzzard (Mar 17 2018 at 10:37)</a>:</h4>
 <p>I am only going on the Lean reference manual, but delta reduction seems to say that if I define something without using matching then I can just substitute and I'm still defeq.</p>
 
 <a name="123819623"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123819623" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123819623">Simon Hudon (Mar 17 2018 at 00:37)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123819623" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123819623">Simon Hudon (Mar 17 2018 at 10:37)</a>:</h4>
 <p>Do mathematicians regard logicians in a similar way in which they regard philosophers?</p>
 
 <a name="123819624"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123819624" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123819624">Kevin Buzzard (Mar 17 2018 at 00:38)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123819624" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123819624">Kevin Buzzard (Mar 17 2018 at 10:38)</a>:</h4>
 <p>Using matching is implicitly using what seems to be called iota reduction</p>
 
 <a name="123819669"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123819669" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123819669">Simon Hudon (Mar 17 2018 at 00:38)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123819669" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123819669">Simon Hudon (Mar 17 2018 at 10:38)</a>:</h4>
 <p>That's what I'm going with as well</p>
 
 <a name="123819674"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123819674" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123819674">Kevin Buzzard (Mar 17 2018 at 00:38)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123819674" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123819674">Kevin Buzzard (Mar 17 2018 at 10:38)</a>:</h4>
 <p>No, philosophers aren't doing maths at all. Logicians are doing stuff which some people would say was maths but most maths departments don't have any</p>
 
 <a name="123819680"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123819680" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123819680">Andrew Ashworth (Mar 17 2018 at 00:38)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123819680" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123819680">Andrew Ashworth (Mar 17 2018 at 10:38)</a>:</h4>
 <blockquote>
 <blockquote>
 <p>you'd think <code>rec</code> wouldn't be part of defeq but it's common in type theory settings to include delta reduction as part of it</p>
@@ -152,124 +152,124 @@ permalink: archive/113488general/36390creatinganewinductivetype.html
 <p>i'd have to check. i make no guarantees on whatever i remember about the lambda calculus</p>
 
 <a name="123819693"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123819693" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123819693">Simon Hudon (Mar 17 2018 at 00:39)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123819693" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123819693">Simon Hudon (Mar 17 2018 at 10:39)</a>:</h4>
 <p>Let me compress the path for you: <a href="https://leanprover.github.io/reference/expressions.html#computation" target="_blank" title="https://leanprover.github.io/reference/expressions.html#computation">https://leanprover.github.io/reference/expressions.html#computation</a></p>
 
 <a name="123819710"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123819710" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123819710">Kevin Buzzard (Mar 17 2018 at 00:39)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123819710" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123819710">Kevin Buzzard (Mar 17 2018 at 10:39)</a>:</h4>
 <p>I was suggesting that you can't use delta reduction to prove a + succ b = succ (a + b) because the definition of + depends on how the inductive type inputs were born</p>
 
 <a name="123819773"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123819773" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123819773">Kevin Buzzard (Mar 17 2018 at 00:40)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123819773" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123819773">Kevin Buzzard (Mar 17 2018 at 10:40)</a>:</h4>
 <p>so I am not sure + is a "defined constant".</p>
 
 <a name="123819781"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123819781" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123819781">Kevin Buzzard (Mar 17 2018 at 00:40)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123819781" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123819781">Kevin Buzzard (Mar 17 2018 at 10:40)</a>:</h4>
 <p>However + does sound a lot like a function defined by recursion on an inductive type</p>
 
 <a name="123819796"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123819796" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123819796">Reid Barton (Mar 17 2018 at 00:41)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123819796" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123819796">Reid Barton (Mar 17 2018 at 10:41)</a>:</h4>
 <p><code>+</code> is a defined constant, its definition is going to be something like <code>nat.rec [...]</code> or possibly <code>lam a b, nat.rec [...]</code></p>
 
 <a name="123819797"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123819797" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123819797">Kevin Buzzard (Mar 17 2018 at 00:41)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123819797" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123819797">Kevin Buzzard (Mar 17 2018 at 10:41)</a>:</h4>
 <p>and a + succ b does sound a lot like the function "a +" being applied to an element given by an explicit constructor</p>
 
 <a name="123819803"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123819803" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123819803">Kevin Buzzard (Mar 17 2018 at 00:41)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123819803" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123819803">Kevin Buzzard (Mar 17 2018 at 10:41)</a>:</h4>
 <p>Oh!</p>
 
 <a name="123819850"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123819850" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123819850">Kevin Buzzard (Mar 17 2018 at 00:42)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123819850" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123819850">Kevin Buzzard (Mar 17 2018 at 10:42)</a>:</h4>
 <p>Right, this also makes sense.</p>
 
 <a name="123819859"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123819859" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123819859">Reid Barton (Mar 17 2018 at 00:42)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123819859" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123819859">Reid Barton (Mar 17 2018 at 10:42)</a>:</h4>
 <p>Then maybe (a) beta reduction(s) will apply to cancel the lambdas with the arguments, and then finally iota reduction will apply to <code>nat.rec</code>.</p>
 
 <a name="123819870"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123819870" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123819870">Reid Barton (Mar 17 2018 at 00:43)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123819870" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123819870">Reid Barton (Mar 17 2018 at 10:43)</a>:</h4>
 <p>(At least, this is my understanding without actually checking the definitions.)</p>
 
 <a name="123819871"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123819871" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123819871">Kevin Buzzard (Mar 17 2018 at 00:43)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123819871" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123819871">Kevin Buzzard (Mar 17 2018 at 10:43)</a>:</h4>
 <p>What is the point of iota-reduction then?</p>
 
 <a name="123819872"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123819872" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123819872">Simon Hudon (Mar 17 2018 at 00:43)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123819872" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123819872">Simon Hudon (Mar 17 2018 at 10:43)</a>:</h4>
 <p>That would be my thought as well. So the remaining question is: is iota reduction part of the def_eq definition?</p>
 
 <a name="123819875"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123819875" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123819875">Kevin Buzzard (Mar 17 2018 at 00:43)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123819875" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123819875">Kevin Buzzard (Mar 17 2018 at 10:43)</a>:</h4>
 <p><code>ι-reduction : When a function defined by recursion on an inductive type is applied to an element given by an explicit constructor, the result ι-reduces to the specified function value</code></p>
 
 <a name="123819877"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123819877" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123819877">Kevin Buzzard (Mar 17 2018 at 00:44)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123819877" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123819877">Kevin Buzzard (Mar 17 2018 at 10:44)</a>:</h4>
 <p>from the reference manual</p>
 
 <a name="123819920"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123819920" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123819920">Reid Barton (Mar 17 2018 at 00:44)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123819920" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123819920">Reid Barton (Mar 17 2018 at 10:44)</a>:</h4>
 <p>I think it's the rule that, after expanding the definition of <code>+</code> and then substituting the arguments, allows one to replace <code>nat.rec [...] (succ [...])</code> by something simpler.</p>
 
 <a name="123819923"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123819923" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123819923">Kevin Buzzard (Mar 17 2018 at 00:44)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123819923" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123819923">Kevin Buzzard (Mar 17 2018 at 10:44)</a>:</h4>
 <p>Oh so it only explicitly applies to the recursor?</p>
 
 <a name="123819924"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123819924" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123819924">Simon Hudon (Mar 17 2018 at 00:44)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123819924" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123819924">Simon Hudon (Mar 17 2018 at 10:44)</a>:</h4>
 <p>That sounds relevant doesn't it? I think here, "recursion" and "pattern matching" are synonymous</p>
 
 <a name="123819925"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123819925" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123819925">Reid Barton (Mar 17 2018 at 00:44)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123819925" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123819925">Reid Barton (Mar 17 2018 at 10:44)</a>:</h4>
 <p>And I think that has been paraphrased into a higher-level form in the lean documentation</p>
 
 <a name="123819928"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123819928" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123819928">Reid Barton (Mar 17 2018 at 00:45)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123819928" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123819928">Reid Barton (Mar 17 2018 at 10:45)</a>:</h4>
 <p>i.e. what Simon said.</p>
 
 <a name="123819938"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123819938" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123819938">Reid Barton (Mar 17 2018 at 00:45)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123819938" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123819938">Reid Barton (Mar 17 2018 at 10:45)</a>:</h4>
 <p>(But I've never encountered the phrase "iota reduction" outside the context of lean, so I am guessing a bit.)</p>
 
 <a name="123819941"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123819941" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123819941">Kevin Buzzard (Mar 17 2018 at 00:45)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123819941" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123819941">Kevin Buzzard (Mar 17 2018 at 10:45)</a>:</h4>
 <p>At the end of the day it all adds up to the same thing -- a + succ b = succ (a + b) is defeq despite relying on nat.rec</p>
 
 <a name="123819999"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123819999" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123819999">Kevin Buzzard (Mar 17 2018 at 00:47)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123819999" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123819999">Kevin Buzzard (Mar 17 2018 at 10:47)</a>:</h4>
 <p>Google led me to some pages about CIC:</p>
 
 <a name="123820002"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123820002" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123820002">Kevin Buzzard (Mar 17 2018 at 00:47)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123820002" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123820002">Kevin Buzzard (Mar 17 2018 at 10:47)</a>:</h4>
 <p>" A specific conversion rule is associated to the inductive objects in the environment. We shall give later on (section 4.5.4) the precise rules but it just says that a destructor applied to an object built from a constructor behaves as expected. This reduction is called iota-reduction and is more precisely studied in [103, 117]."</p>
 
 <a name="123820012"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123820012" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123820012">Kevin Buzzard (Mar 17 2018 at 00:47)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123820012" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123820012">Kevin Buzzard (Mar 17 2018 at 10:47)</a>:</h4>
 <p>This seems to say more explicitly that iota reduction is exactly how you prove that <code>blah.rec</code> is defeq to something else</p>
 
 <a name="123820089"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123820089" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123820089">Kevin Buzzard (Mar 17 2018 at 00:49)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123820089" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123820089">Kevin Buzzard (Mar 17 2018 at 10:49)</a>:</h4>
 <p>On the other hand, the manual doesn't seem to give a definition of "what Lean uses for defeq" other than observing that (a) it's not the actual definition of defeq (proof: Lean's defeq isn't transitive) and (b) I think they're saying it's decidable (and actual defeq isn't).</p>
 
 <a name="123820142"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123820142" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123820142">Kevin Buzzard (Mar 17 2018 at 00:50)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123820142" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123820142">Kevin Buzzard (Mar 17 2018 at 10:50)</a>:</h4>
 <p>So some of these reductions are from lambda calculus and iota reduction has just been tagged on afterwards as something coming from CIC it seems to me.</p>
 
 <a name="123820143"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123820143" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123820143">Andrew Ashworth (Mar 17 2018 at 00:50)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123820143" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123820143">Andrew Ashworth (Mar 17 2018 at 10:50)</a>:</h4>
 <p>yes, lean and coq are CIC + extras</p>
 
 <a name="123820144"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123820144" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123820144">Kevin Buzzard (Mar 17 2018 at 00:50)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123820144" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123820144">Kevin Buzzard (Mar 17 2018 at 10:50)</a>:</h4>
 <p>and we don't know what Lean is doing.</p>
 
 <a name="123820145"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123820145" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123820145">Reid Barton (Mar 17 2018 at 00:50)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123820145" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123820145">Reid Barton (Mar 17 2018 at 10:50)</a>:</h4>
 <p>Yes--specifically <code>blah.rec</code> applied to a constructor.<br>
 This will also go by names like "the elimination rule for the constructor"</p>
 
 <a name="123820214"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123820214" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123820214">Simon Hudon (Mar 17 2018 at 00:52)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123820214" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123820214">Simon Hudon (Mar 17 2018 at 10:52)</a>:</h4>
 <blockquote>
 <p>Yes--specifically <code>blah.rec</code> applied to a constructor.<br>
 This will also go by names like "the elimination rule for the constructor"</p>
@@ -277,53 +277,53 @@ This will also go by names like "the elimination rule for the constructor"</p>
 <p>I don't get what you're responding to</p>
 
 <a name="123820230"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123820230" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123820230">Reid Barton (Mar 17 2018 at 00:53)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123820230" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123820230">Reid Barton (Mar 17 2018 at 10:53)</a>:</h4>
 <p>To </p>
 <blockquote>
 <p>iota reduction is exactly how you prove that blah.rec is defeq to something else</p>
 </blockquote>
 
 <a name="123820232"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123820232" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123820232">Andrew Ashworth (Mar 17 2018 at 00:53)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123820232" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123820232">Andrew Ashworth (Mar 17 2018 at 10:53)</a>:</h4>
 <p>the extras that are added to CIC make defeq not transitive</p>
 
 <a name="123820296"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123820296" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123820296">Andrew Ashworth (Mar 17 2018 at 00:55)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123820296" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123820296">Andrew Ashworth (Mar 17 2018 at 10:55)</a>:</h4>
 <p>and it has something something to do with how you can go from an inductively defined proposition to a Type</p>
 
 <a name="123820300"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123820300" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123820300">Andrew Ashworth (Mar 17 2018 at 00:55)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123820300" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123820300">Andrew Ashworth (Mar 17 2018 at 10:55)</a>:</h4>
 <p>but we don't want to do without because classical reasoning is so convenient</p>
 
 <a name="123820304"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123820304" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123820304">Andrew Ashworth (Mar 17 2018 at 00:55)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123820304" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123820304">Andrew Ashworth (Mar 17 2018 at 10:55)</a>:</h4>
 <p>so little bits are stuck on here and there and we sort of politely ignore it</p>
 
 <a name="123820344"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123820344" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123820344">Andrew Ashworth (Mar 17 2018 at 00:56)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123820344" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123820344">Andrew Ashworth (Mar 17 2018 at 10:56)</a>:</h4>
 <p>is my terrible understanding of the base theory</p>
 
 <a name="123820351"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123820351" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123820351">Andrew Ashworth (Mar 17 2018 at 00:57)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123820351" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123820351">Andrew Ashworth (Mar 17 2018 at 10:57)</a>:</h4>
 <p>if you go completely constructive you get HoTT and you may then hop on voevodsky's bandwagon</p>
 
 <a name="123820406"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123820406" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123820406">Kevin Buzzard (Mar 17 2018 at 00:59)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123820406" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123820406">Kevin Buzzard (Mar 17 2018 at 10:59)</a>:</h4>
 <blockquote>
 <p>the extras that are added to CIC make defeq not transitive</p>
 </blockquote>
 <p>My reading of section 3.7 of the manual is that "true defeq" is transitive by definition, and "Lean defeq" is not.</p>
 
 <a name="123820407"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123820407" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123820407">Andrew Ashworth (Mar 17 2018 at 00:59)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123820407" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123820407">Andrew Ashworth (Mar 17 2018 at 10:59)</a>:</h4>
 <p>yup, that's my understanding as well</p>
 
 <a name="123820577"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123820577" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123820577">Kevin Buzzard (Mar 17 2018 at 01:04)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123820577" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123820577">Kevin Buzzard (Mar 17 2018 at 11:04)</a>:</h4>
 <p>So implicit in the reference manual is a description of two terms which have different weak head normal forms but which can be proved equal using rfl.</p>
 
 <a name="123820591"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123820591" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123820591">Kevin Buzzard (Mar 17 2018 at 01:05)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123820591" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123820591">Kevin Buzzard (Mar 17 2018 at 11:05)</a>:</h4>
 <div class="codehilite"><pre><span></span>def R (x y : unit) := false
 def accrec := @acc.rec unit R (λ_, unit) (λ _ a ih, ()) ()
 example (h) : accrec h = accrec (acc.intro _ (λ y, acc.inv h)) := rfl
@@ -342,91 +342,91 @@ end
 </pre></div>
 
 <a name="123820594"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123820594" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123820594">Kevin Buzzard (Mar 17 2018 at 01:05)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123820594" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123820594">Kevin Buzzard (Mar 17 2018 at 11:05)</a>:</h4>
 <p>rfl works, but if you reduce both terms to weak head normal form then you see they are different.</p>
 
 <a name="123820760"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123820760" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123820760">Kevin Buzzard (Mar 17 2018 at 01:11)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123820760" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123820760">Kevin Buzzard (Mar 17 2018 at 11:11)</a>:</h4>
 <p>So I am at a loss as to what Lean's definition of defeq is, but I understand it a lot better after this chat.</p>
 
 <a name="123820768"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123820768" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123820768">Kevin Buzzard (Mar 17 2018 at 01:11)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123820768" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123820768">Kevin Buzzard (Mar 17 2018 at 11:11)</a>:</h4>
 <p>Looking back at the proof of associativity of nat.add it's interesting to actually try and point at exactly what stops the argument being rfl.</p>
 
 <a name="123820807"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123820807" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123820807">Kevin Buzzard (Mar 17 2018 at 01:12)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123820807" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123820807">Kevin Buzzard (Mar 17 2018 at 11:12)</a>:</h4>
 <p>You prove it by induction on c; the zero case is rfl</p>
 
 <a name="123820815"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123820815" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123820815">Kevin Buzzard (Mar 17 2018 at 01:13)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123820815" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123820815">Kevin Buzzard (Mar 17 2018 at 11:13)</a>:</h4>
 <p>and the inductive step is a bunch of rfls up to <code>a+(b+c)=(a+b)+c -&gt; nat.succ (a+(b+c))=nat.succ((a+b)+c)</code></p>
 
 <a name="123820823"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123820823" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123820823">Kevin Buzzard (Mar 17 2018 at 01:13)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123820823" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123820823">Kevin Buzzard (Mar 17 2018 at 11:13)</a>:</h4>
 <p>but the inductive hypothesis isn't rfl, it's an assumption because we're using nat.rec</p>
 
 <a name="123820867"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123820867" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123820867">Kevin Buzzard (Mar 17 2018 at 01:14)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123820867" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123820867">Kevin Buzzard (Mar 17 2018 at 11:14)</a>:</h4>
 <p>and in particular we can't deduce associativity from this iota-reduction thing because even though c is either zero or a succ, in the succ case we need more than a case split, we need induction.</p>
 
 <a name="123820872"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123820872" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123820872">Kevin Buzzard (Mar 17 2018 at 01:15)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123820872" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123820872">Kevin Buzzard (Mar 17 2018 at 11:15)</a>:</h4>
 <p>It seems to me that it's this one point which stops associativity being defeq</p>
 
 <a name="123820994"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123820994" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123820994">Kevin Buzzard (Mar 17 2018 at 01:19)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123820994" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123820994">Kevin Buzzard (Mar 17 2018 at 11:19)</a>:</h4>
 <p>On the other hand you can chase this back to congr_arg and hence to eq.subst and eq.rec</p>
 
 <a name="123821066"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123821066" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123821066">Kevin Buzzard (Mar 17 2018 at 01:21)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123821066" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123821066">Kevin Buzzard (Mar 17 2018 at 11:21)</a>:</h4>
 <p>Somehow this is not relevant.</p>
 
 <a name="123821246"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123821246" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123821246">Reid Barton (Mar 17 2018 at 01:26)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123821246" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123821246">Reid Barton (Mar 17 2018 at 11:26)</a>:</h4>
 <p>More simply, you might consider the relationship between <code>(p.1, p.2)</code> and <code>p</code></p>
 
 <a name="123822140"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123822140" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123822140">Kevin Buzzard (Mar 17 2018 at 01:56)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123822140" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123822140">Kevin Buzzard (Mar 17 2018 at 11:56)</a>:</h4>
 <p>Also the coq page I was looking at seems to be saying that iota reduction says that a definition by cases can be reduced to its value for a given constructor when applied to a term constructed using this constructor.</p>
 
 <a name="123822158"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123822158" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123822158">Kevin Buzzard (Mar 17 2018 at 01:57)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123822158" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123822158">Kevin Buzzard (Mar 17 2018 at 11:57)</a>:</h4>
 <p>This seems to be weaker than what it says in the Lean reference manual, which seems to imply that general definitions by recursion (like the definition of nat.add) can be iota-reduced.</p>
 
 <a name="123822746"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123822746" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123822746">Kevin Buzzard (Mar 17 2018 at 02:16)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123822746" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123822746">Kevin Buzzard (Mar 17 2018 at 12:16)</a>:</h4>
 <p>So looking at what the manual says about inductive types, it seems that the answer to my original question is that what is added is the type, the constructors, and the recursor, and then everything else is worked out from this. And it also seems to say that iota reduction is fine for eliminating <code>X.rec</code>.</p>
 
 <a name="123822757"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123822757" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123822757">Kevin Buzzard (Mar 17 2018 at 02:17)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123822757" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123822757">Kevin Buzzard (Mar 17 2018 at 12:17)</a>:</h4>
 <p>For example I think <code>(a,b).1=a</code> is rfl</p>
 
 <a name="123822798"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123822798" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123822798">Kevin Buzzard (Mar 17 2018 at 02:18)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123822798" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123822798">Kevin Buzzard (Mar 17 2018 at 12:18)</a>:</h4>
 <p>but is <span class="user-mention" data-user-id="110032">@Reid Barton</span> suggesting that <code>p=(p.1,p.2)</code> is not? It doesn't seem to be.</p>
 
 <a name="123822800"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123822800" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123822800">Reid Barton (Mar 17 2018 at 02:18)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123822800" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123822800">Reid Barton (Mar 17 2018 at 12:18)</a>:</h4>
 <p>Yes and yes (the latter is not definitionally equal)</p>
 
 <a name="123822801"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123822801" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123822801">Kevin Buzzard (Mar 17 2018 at 02:18)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123822801" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123822801">Kevin Buzzard (Mar 17 2018 at 12:18)</a>:</h4>
 <p>Do you know Lean's definition of definitionally equal?</p>
 
 <a name="123822807"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123822807" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123822807">Reid Barton (Mar 17 2018 at 02:19)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123822807" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123822807">Reid Barton (Mar 17 2018 at 12:19)</a>:</h4>
 <p>Not really, no.</p>
 
 <a name="123823460"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123823460" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123823460">Reid Barton (Mar 17 2018 at 02:41)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123823460" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123823460">Reid Barton (Mar 17 2018 at 12:41)</a>:</h4>
 <p>I just have some bits of type theory knowledge cobbled together from various sources.</p>
 
 <a name="123825965"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123825965" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123825965">Mario Carneiro (Mar 17 2018 at 04:06)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123825965" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123825965">Mario Carneiro (Mar 17 2018 at 14:06)</a>:</h4>
 <p>Aah, you really should see this paper I'm working on</p>
 
 <a name="123825973"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123825973" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123825973">Mario Carneiro (Mar 17 2018 at 04:07)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/creating%20a%20new%20inductive%20type/near/123825973" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/36390creatinganewinductivetype.html#123825973">Mario Carneiro (Mar 17 2018 at 14:07)</a>:</h4>
 <p>I basically lay all of this out in precise (too precise, probably) detail</p>
 
 

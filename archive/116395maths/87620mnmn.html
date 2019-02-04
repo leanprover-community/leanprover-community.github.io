@@ -12,7 +12,7 @@ permalink: archive/116395maths/87620mnmn.html
 <base href="https://leanprover.zulipchat.com">
 {% raw %}
 <a name="130969577"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%E2%86%91%28m%20%2A%20n%29%20%3D%20%E2%86%91m%20%2A%20%E2%86%91n/near/130969577" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87620mnmn.html#130969577">Kevin Buzzard (Aug 06 2018 at 12:21)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%E2%86%91%28m%20%2A%20n%29%20%3D%20%E2%86%91m%20%2A%20%E2%86%91n/near/130969577" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87620mnmn.html#130969577">Kevin Buzzard (Aug 06 2018 at 20:21)</a>:</h4>
 <p>I remember struggling a lot with coercions when I was a beginner last year, and now I see my students struggling with them. Coming back to them now and thinking about them now I have more experience has really helped, because I understand far better what is going on and can answer many of my own questions now. </p>
 <p>Given that Lean holds the principle of good naming conventions in high regard, it's initially a bit surprising to see three (at least) conventions for the name of <code>↑(m * n) = ↑m * ↑n</code>, which is the statement of all three lemmas below:</p>
 <div class="codehilite"><pre><span></span><span class="bp">#</span><span class="kn">check</span> <span class="bp">@</span><span class="n">int</span><span class="bp">.</span><span class="n">coe_nat_mul</span> <span class="c1">-- coercion from nat to int</span>
@@ -35,83 +35,83 @@ permalink: archive/116395maths/87620mnmn.html
 <p>I don't really understand why we have all these naming conventions, but at the end of the day this workaround to discover the names has worked several times for me.</p>
 
 <a name="130969700"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%E2%86%91%28m%20%2A%20n%29%20%3D%20%E2%86%91m%20%2A%20%E2%86%91n/near/130969700" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87620mnmn.html#130969700">Patrick Massot (Aug 06 2018 at 12:24)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%E2%86%91%28m%20%2A%20n%29%20%3D%20%E2%86%91m%20%2A%20%E2%86%91n/near/130969700" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87620mnmn.html#130969700">Patrick Massot (Aug 06 2018 at 20:24)</a>:</h4>
 <p>Those days  I suffer a lot with coercions too. I think it's partly related to what Scott explained, with lemmas expecting the explicit conversion vs lemmas stated with coercions. But there is also lots of things like <code>(((x * y) : ℚ) : ℝ)</code> in my code, and this drives me crazy. I really don't want to see that <code>: ℚ</code> in the middle</p>
 
 <a name="130969712"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%E2%86%91%28m%20%2A%20n%29%20%3D%20%E2%86%91m%20%2A%20%E2%86%91n/near/130969712" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87620mnmn.html#130969712">Mario Carneiro (Aug 06 2018 at 12:25)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%E2%86%91%28m%20%2A%20n%29%20%3D%20%E2%86%91m%20%2A%20%E2%86%91n/near/130969712" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87620mnmn.html#130969712">Mario Carneiro (Aug 06 2018 at 20:25)</a>:</h4>
 <p>Regarding naming: the usual name for the coercion is <code>coe</code>. The name <code>cast</code> is used specifically for the universal map from an initial algebra, and unlike most coercions it is named for the source not the target because the target is generic</p>
 
 <a name="130969770"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%E2%86%91%28m%20%2A%20n%29%20%3D%20%E2%86%91m%20%2A%20%E2%86%91n/near/130969770" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87620mnmn.html#130969770">Kevin Buzzard (Aug 06 2018 at 12:26)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%E2%86%91%28m%20%2A%20n%29%20%3D%20%E2%86%91m%20%2A%20%E2%86%91n/near/130969770" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87620mnmn.html#130969770">Kevin Buzzard (Aug 06 2018 at 20:26)</a>:</h4>
 <p>When I wrote that above message I initially wrote <code>example (x y : ℚ) : ((x * y) : ℝ) = (x : ℝ) * (y : ℝ) := by simp</code> and it turned out that this was <code>rfl</code> :-)</p>
 
 <a name="130969780"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%E2%86%91%28m%20%2A%20n%29%20%3D%20%E2%86%91m%20%2A%20%E2%86%91n/near/130969780" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87620mnmn.html#130969780">Patrick Massot (Aug 06 2018 at 12:26)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%E2%86%91%28m%20%2A%20n%29%20%3D%20%E2%86%91m%20%2A%20%E2%86%91n/near/130969780" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87620mnmn.html#130969780">Patrick Massot (Aug 06 2018 at 20:26)</a>:</h4>
 <p>yes, because Lean decided to insert a coercion too early</p>
 
 <a name="130969788"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%E2%86%91%28m%20%2A%20n%29%20%3D%20%E2%86%91m%20%2A%20%E2%86%91n/near/130969788" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87620mnmn.html#130969788">Mario Carneiro (Aug 06 2018 at 12:27)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%E2%86%91%28m%20%2A%20n%29%20%3D%20%E2%86%91m%20%2A%20%E2%86%91n/near/130969788" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87620mnmn.html#130969788">Mario Carneiro (Aug 06 2018 at 20:27)</a>:</h4>
 <p>As for the namespace, it's usually in the namespace if the "later" notion, because this the namespace we happen to be in when doing the definition</p>
 
 <a name="130969793"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%E2%86%91%28m%20%2A%20n%29%20%3D%20%E2%86%91m%20%2A%20%E2%86%91n/near/130969793" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87620mnmn.html#130969793">Patrick Massot (Aug 06 2018 at 12:27)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%E2%86%91%28m%20%2A%20n%29%20%3D%20%E2%86%91m%20%2A%20%E2%86%91n/near/130969793" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87620mnmn.html#130969793">Patrick Massot (Aug 06 2018 at 20:27)</a>:</h4>
 <p>in that case it's fun, but in my case I don't have a multiplication on the bigger space</p>
 
 <a name="130969799"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%E2%86%91%28m%20%2A%20n%29%20%3D%20%E2%86%91m%20%2A%20%E2%86%91n/near/130969799" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87620mnmn.html#130969799">Mario Carneiro (Aug 06 2018 at 12:27)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%E2%86%91%28m%20%2A%20n%29%20%3D%20%E2%86%91m%20%2A%20%E2%86%91n/near/130969799" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87620mnmn.html#130969799">Mario Carneiro (Aug 06 2018 at 20:27)</a>:</h4>
 <p>you can avoid double ascription by putting up arrows in the appropriate places</p>
 
 <a name="130969854"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%E2%86%91%28m%20%2A%20n%29%20%3D%20%E2%86%91m%20%2A%20%E2%86%91n/near/130969854" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87620mnmn.html#130969854">Mario Carneiro (Aug 06 2018 at 12:28)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%E2%86%91%28m%20%2A%20n%29%20%3D%20%E2%86%91m%20%2A%20%E2%86%91n/near/130969854" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87620mnmn.html#130969854">Mario Carneiro (Aug 06 2018 at 20:28)</a>:</h4>
 <div class="codehilite"><pre><span></span>example (x y : ℚ) : (↑(x * y) : ℝ) = ↑x * ↑y := by simp
 </pre></div>
 
 <a name="130969871"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%E2%86%91%28m%20%2A%20n%29%20%3D%20%E2%86%91m%20%2A%20%E2%86%91n/near/130969871" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87620mnmn.html#130969871">Mario Carneiro (Aug 06 2018 at 12:28)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%E2%86%91%28m%20%2A%20n%29%20%3D%20%E2%86%91m%20%2A%20%E2%86%91n/near/130969871" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87620mnmn.html#130969871">Mario Carneiro (Aug 06 2018 at 20:28)</a>:</h4>
 <p>(the up arrows on the right are optional)</p>
 
 <a name="130969961"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%E2%86%91%28m%20%2A%20n%29%20%3D%20%E2%86%91m%20%2A%20%E2%86%91n/near/130969961" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87620mnmn.html#130969961">Guy Leroy (Aug 06 2018 at 12:30)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%E2%86%91%28m%20%2A%20n%29%20%3D%20%E2%86%91m%20%2A%20%E2%86%91n/near/130969961" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87620mnmn.html#130969961">Guy Leroy (Aug 06 2018 at 20:30)</a>:</h4>
 <p>If the goal has arrows, is there a set_option to see the source and target of the coercion?</p>
 
 <a name="130969969"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%E2%86%91%28m%20%2A%20n%29%20%3D%20%E2%86%91m%20%2A%20%E2%86%91n/near/130969969" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87620mnmn.html#130969969">Kenny Lau (Aug 06 2018 at 12:30)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%E2%86%91%28m%20%2A%20n%29%20%3D%20%E2%86%91m%20%2A%20%E2%86%91n/near/130969969" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87620mnmn.html#130969969">Kenny Lau (Aug 06 2018 at 20:30)</a>:</h4>
 <p><code>set_option pp.all true</code></p>
 
 <a name="130969985"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%E2%86%91%28m%20%2A%20n%29%20%3D%20%E2%86%91m%20%2A%20%E2%86%91n/near/130969985" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87620mnmn.html#130969985">Mario Carneiro (Aug 06 2018 at 12:31)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%E2%86%91%28m%20%2A%20n%29%20%3D%20%E2%86%91m%20%2A%20%E2%86%91n/near/130969985" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87620mnmn.html#130969985">Mario Carneiro (Aug 06 2018 at 20:31)</a>:</h4>
 <p>unfortunately no, the best you can do is <code>pp.notation false</code> and <code>pp.implicit true</code> but this shows a ton of other irrelevant info</p>
 
 <a name="130969993"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%E2%86%91%28m%20%2A%20n%29%20%3D%20%E2%86%91m%20%2A%20%E2%86%91n/near/130969993" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87620mnmn.html#130969993">Mario Carneiro (Aug 06 2018 at 12:31)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%E2%86%91%28m%20%2A%20n%29%20%3D%20%E2%86%91m%20%2A%20%E2%86%91n/near/130969993" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87620mnmn.html#130969993">Mario Carneiro (Aug 06 2018 at 20:31)</a>:</h4>
 <p>or <code>pp.all true</code> which shows even more irrelevant info</p>
 
 <a name="130969995"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%E2%86%91%28m%20%2A%20n%29%20%3D%20%E2%86%91m%20%2A%20%E2%86%91n/near/130969995" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87620mnmn.html#130969995">Guy Leroy (Aug 06 2018 at 12:31)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%E2%86%91%28m%20%2A%20n%29%20%3D%20%E2%86%91m%20%2A%20%E2%86%91n/near/130969995" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87620mnmn.html#130969995">Guy Leroy (Aug 06 2018 at 20:31)</a>:</h4>
 <p>Okay thanks</p>
 
 <a name="130970238"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%E2%86%91%28m%20%2A%20n%29%20%3D%20%E2%86%91m%20%2A%20%E2%86%91n/near/130970238" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87620mnmn.html#130970238">Kevin Buzzard (Aug 06 2018 at 12:36)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%E2%86%91%28m%20%2A%20n%29%20%3D%20%E2%86%91m%20%2A%20%E2%86%91n/near/130970238" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87620mnmn.html#130970238">Kevin Buzzard (Aug 06 2018 at 20:36)</a>:</h4>
 <p>I would strongly encourage <code>set_option pp.all true</code>. This shows how Lean is actually thinking about things, it shows far more information than you want, but the advantage is that it shows pretty much <em>all</em> the information, so all of a sudden you have a glimpse into the world of universes, type class inference, notation and everything else, all at once. I remember having one of those big clarifying experiences once when I set <code>pp.all true</code> on a relatively simple statement and then understood far more about what Lean was and how it worked.</p>
 
 <a name="130970261"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%E2%86%91%28m%20%2A%20n%29%20%3D%20%E2%86%91m%20%2A%20%E2%86%91n/near/130970261" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87620mnmn.html#130970261">Kenny Lau (Aug 06 2018 at 12:37)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%E2%86%91%28m%20%2A%20n%29%20%3D%20%E2%86%91m%20%2A%20%E2%86%91n/near/130970261" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87620mnmn.html#130970261">Kenny Lau (Aug 06 2018 at 20:37)</a>:</h4>
 <p>you need <code>set_option pp.universe true</code> for even more information right</p>
 
 <a name="130970264"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%E2%86%91%28m%20%2A%20n%29%20%3D%20%E2%86%91m%20%2A%20%E2%86%91n/near/130970264" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87620mnmn.html#130970264">Mario Carneiro (Aug 06 2018 at 12:37)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%E2%86%91%28m%20%2A%20n%29%20%3D%20%E2%86%91m%20%2A%20%E2%86%91n/near/130970264" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87620mnmn.html#130970264">Mario Carneiro (Aug 06 2018 at 20:37)</a>:</h4>
 <p><span class="user-mention" data-user-id="110024">@Sebastian Ullrich</span> Will Lean 4 have the ability to customize the pretty printer via tactics? For example if I wanted to implement <code>pp.coe_targets</code></p>
 
 <a name="130970364"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%E2%86%91%28m%20%2A%20n%29%20%3D%20%E2%86%91m%20%2A%20%E2%86%91n/near/130970364" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87620mnmn.html#130970364">Kevin Buzzard (Aug 06 2018 at 12:39)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%E2%86%91%28m%20%2A%20n%29%20%3D%20%E2%86%91m%20%2A%20%E2%86%91n/near/130970364" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87620mnmn.html#130970364">Kevin Buzzard (Aug 06 2018 at 20:39)</a>:</h4>
 <blockquote>
 <p><code>example (x y : ℚ) : (↑(x * y) : ℝ) = ↑x * ↑y := by simp</code></p>
 </blockquote>
 <p>What is going on here? Why is that not the same as <code> ((x * y) : ℝ)</code>? There's something simple I'm missing.</p>
 
 <a name="130970460"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%E2%86%91%28m%20%2A%20n%29%20%3D%20%E2%86%91m%20%2A%20%E2%86%91n/near/130970460" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87620mnmn.html#130970460">Mario Carneiro (Aug 06 2018 at 12:41)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%E2%86%91%28m%20%2A%20n%29%20%3D%20%E2%86%91m%20%2A%20%E2%86%91n/near/130970460" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/87620mnmn.html#130970460">Mario Carneiro (Aug 06 2018 at 20:41)</a>:</h4>
 <p>Coercions are always inserted as late as possible in elaboration, when something clearly has the wrong type. Since elaboration works from the outside in, this has the effect of pushing arrows to the tightest scope</p>
 
 

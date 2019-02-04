@@ -12,24 +12,24 @@ permalink: archive/113488general/22985rwunderlambda.html
 <base href="https://leanprover.zulipchat.com">
 {% raw %}
 <a name="126107890"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20lambda/near/126107890" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22985rwunderlambda.html#126107890">Reid Barton (May 04 2018 at 20:33)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20lambda/near/126107890" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22985rwunderlambda.html#126107890">Reid Barton (May 05 2018 at 04:33)</a>:</h4>
 <p><code>rw</code> refuses to perform rewrites inside a lambda, as far as I can tell. Is there a convenient way to do so?<br>
 For example, frequently my goal is of the form <code>∃ x, P x ∧ Q x</code> and I would like to rewrite it to <code>∃ x, P x ∧ Q' x</code> (where I know <code>Q x ↔ Q' x</code>).</p>
 
 <a name="126107975"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20lambda/near/126107975" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22985rwunderlambda.html#126107975">Simon Hudon (May 04 2018 at 20:35)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20lambda/near/126107975" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22985rwunderlambda.html#126107975">Simon Hudon (May 05 2018 at 04:35)</a>:</h4>
 <p>use <code>simp</code> instead of <code>rw</code> if you want to rewrite under lambda. If you don't want <code>simp</code> to use default <code>simp</code> rules, you can do <code>simp only [my_rule]</code></p>
 
 <a name="126108133"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20lambda/near/126108133" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22985rwunderlambda.html#126108133">Reid Barton (May 04 2018 at 20:39)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20lambda/near/126108133" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22985rwunderlambda.html#126108133">Reid Barton (May 05 2018 at 04:39)</a>:</h4>
 <p>Oops, I tried <code>simp only</code>, but I mixed up <code>.symm</code> and <code>.mpr</code> so it didn't appear to work. Thanks!</p>
 
 <a name="126109753"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20lambda/near/126109753" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22985rwunderlambda.html#126109753">Patrick Massot (May 04 2018 at 21:19)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20lambda/near/126109753" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22985rwunderlambda.html#126109753">Patrick Massot (May 05 2018 at 05:19)</a>:</h4>
 <p>See also <a href="https://github.com/leanprover/mathlib/blob/master/docs/extras/conv.md" target="_blank" title="https://github.com/leanprover/mathlib/blob/master/docs/extras/conv.md">https://github.com/leanprover/mathlib/blob/master/docs/extras/conv.md</a></p>
 
 <a name="126111096"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20lambda/near/126111096" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22985rwunderlambda.html#126111096">Reid Barton (May 04 2018 at 21:59)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20lambda/near/126111096" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22985rwunderlambda.html#126111096">Reid Barton (May 05 2018 at 05:59)</a>:</h4>
 <p>I couldn't work out how to do this with <code>conv</code>:</p>
 <div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="bp">∃</span> <span class="n">a</span> <span class="n">b</span><span class="o">,</span> <span class="n">a</span> <span class="bp">+</span> <span class="n">b</span> <span class="bp">=</span> <span class="mi">0</span><span class="o">)</span> <span class="o">:</span> <span class="bp">∃</span> <span class="n">a</span> <span class="n">b</span><span class="o">,</span> <span class="n">b</span> <span class="bp">+</span> <span class="n">a</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span>
 <span class="k">begin</span>
@@ -41,11 +41,11 @@ For example, frequently my goal is of the form <code>∃ x, P x ∧ Q x</code> a
 </pre></div>
 
 <a name="126111175"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20lambda/near/126111175" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22985rwunderlambda.html#126111175">Reid Barton (May 04 2018 at 22:00)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20lambda/near/126111175" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22985rwunderlambda.html#126111175">Reid Barton (May 05 2018 at 06:00)</a>:</h4>
 <p>I tried <code>congr, funext, congr</code> but I got an error that I didn't understand on the second <code>congr</code></p>
 
 <a name="126111358"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20lambda/near/126111358" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22985rwunderlambda.html#126111358">Simon Hudon (May 04 2018 at 22:05)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20lambda/near/126111358" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22985rwunderlambda.html#126111358">Simon Hudon (May 05 2018 at 06:05)</a>:</h4>
 <p>try:</p>
 <div class="codehilite"><pre><span></span>example : (∃ a b, a + b = 0) ↔ ∃ a b, b + a = 0 :=
 by conv in (_ + _) begin
@@ -54,11 +54,11 @@ end
 </pre></div>
 
 <a name="126111674"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20lambda/near/126111674" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22985rwunderlambda.html#126111674">Reid Barton (May 04 2018 at 22:13)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20lambda/near/126111674" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22985rwunderlambda.html#126111674">Reid Barton (May 05 2018 at 06:13)</a>:</h4>
 <p>ah, interesting</p>
 
 <a name="126112393"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20lambda/near/126112393" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22985rwunderlambda.html#126112393">Simon Hudon (May 04 2018 at 22:31)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20lambda/near/126112393" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22985rwunderlambda.html#126112393">Simon Hudon (May 05 2018 at 06:31)</a>:</h4>
 <p>This would also work, btw:</p>
 <div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="o">(</span><span class="bp">∃</span> <span class="n">a</span> <span class="n">b</span><span class="o">,</span> <span class="n">a</span> <span class="bp">+</span> <span class="n">b</span> <span class="bp">=</span> <span class="mi">0</span><span class="o">))</span> <span class="o">:</span> <span class="bp">∃</span> <span class="n">a</span> <span class="n">b</span><span class="o">,</span> <span class="n">b</span> <span class="bp">+</span> <span class="n">a</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span>
 <span class="k">begin</span>
@@ -69,7 +69,7 @@ end
 </pre></div>
 
 <a name="126115523"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20lambda/near/126115523" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22985rwunderlambda.html#126115523">Patrick Massot (May 04 2018 at 23:48)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rw%20under%20lambda/near/126115523" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22985rwunderlambda.html#126115523">Patrick Massot (May 05 2018 at 07:48)</a>:</h4>
 <p><code>conv in ( _ = _)</code> would also work, but I would be interested in seeing a solution without pattern matching. It seems we lack some navigation tactic (like <code>to_lhs</code>/<code>to_rhs</code>,  <code>congr</code>). <span class="user-mention" data-user-id="110043">@Gabriel Ebner</span>  <span class="user-mention" data-user-id="110049">@Mario Carneiro</span> any idea?</p>
 
 

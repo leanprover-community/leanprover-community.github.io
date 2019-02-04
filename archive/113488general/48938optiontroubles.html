@@ -12,20 +12,20 @@ permalink: archive/113488general/48938optiontroubles.html
 <base href="https://leanprover.zulipchat.com">
 {% raw %}
 <a name="135487811"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/option%20troubles/near/135487811" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48938optiontroubles.html#135487811">Johan Commelin (Oct 09 2018 at 20:14)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/option%20troubles/near/135487811" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48938optiontroubles.html#135487811">Johan Commelin (Oct 10 2018 at 05:14)</a>:</h4>
 <p>I have <code>x : option X</code>, and <code>h : x ≠ none</code>. How do I turn this into a <code>y : X</code> such that <code>x = some y</code>? I want to use <code>option.get</code> and <code>option.is_some</code>. But I can't figure out how to use <code>h</code>.</p>
 
 <a name="135487845"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/option%20troubles/near/135487845" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48938optiontroubles.html#135487845">Johan Commelin (Oct 09 2018 at 20:15)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/option%20troubles/near/135487845" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48938optiontroubles.html#135487845">Johan Commelin (Oct 10 2018 at 05:15)</a>:</h4>
 <div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">{</span><span class="n">X</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">option</span> <span class="n">X</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">≠</span> <span class="n">none</span><span class="o">)</span> <span class="o">:</span> <span class="n">X</span> <span class="o">:=</span> <span class="n">sorry</span>
 </pre></div>
 
 <a name="135487859"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/option%20troubles/near/135487859" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48938optiontroubles.html#135487859">Johan Commelin (Oct 09 2018 at 20:16)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/option%20troubles/near/135487859" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48938optiontroubles.html#135487859">Johan Commelin (Oct 10 2018 at 05:16)</a>:</h4>
 <p>Or something like that. I should probably not just return an <code>y : X</code>, but also the proof that <code>x = some y</code>.</p>
 
 <a name="135488210"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/option%20troubles/near/135488210" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48938optiontroubles.html#135488210">Chris Hughes (Oct 09 2018 at 20:22)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/option%20troubles/near/135488210" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48938optiontroubles.html#135488210">Chris Hughes (Oct 10 2018 at 05:22)</a>:</h4>
 <div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="n">Sort</span><span class="bp">*</span><span class="o">}</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">option</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">≠</span> <span class="n">none</span> <span class="bp">→</span> <span class="o">{</span><span class="n">y</span> <span class="bp">//</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">some</span> <span class="n">y</span><span class="o">}</span> <span class="o">:=</span>
 <span class="n">option</span><span class="bp">.</span><span class="n">rec_on</span> <span class="n">x</span> <span class="o">(</span><span class="n">absurd</span> <span class="n">rfl</span><span class="o">)</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">y</span> <span class="bp">_</span><span class="o">,</span> <span class="bp">⟨</span><span class="n">y</span><span class="o">,</span> <span class="n">rfl</span><span class="bp">⟩</span><span class="o">)</span>
 </pre></div>
@@ -34,15 +34,15 @@ permalink: archive/113488general/48938optiontroubles.html
 <p>There should be a lemma that says <code>is_some_iff_ne_none</code>, but it seems to be missing.</p>
 
 <a name="135488265"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/option%20troubles/near/135488265" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48938optiontroubles.html#135488265">Reid Barton (Oct 09 2018 at 20:23)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/option%20troubles/near/135488265" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48938optiontroubles.html#135488265">Reid Barton (Oct 10 2018 at 05:23)</a>:</h4>
 <p>Depending on the use, it might be more convenient to just do the <code>cases</code>, <code>absurd</code> at the usage site</p>
 
 <a name="135488560"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/option%20troubles/near/135488560" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48938optiontroubles.html#135488560">Johan Commelin (Oct 09 2018 at 20:28)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/option%20troubles/near/135488560" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48938optiontroubles.html#135488560">Johan Commelin (Oct 10 2018 at 05:28)</a>:</h4>
 <p>Thanks <span class="user-mention" data-user-id="110044">@Chris Hughes</span> and <span class="user-mention" data-user-id="110032">@Reid Barton</span> !</p>
 
 <a name="135488579"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/option%20troubles/near/135488579" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48938optiontroubles.html#135488579">Patrick Massot (Oct 09 2018 at 20:28)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/option%20troubles/near/135488579" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48938optiontroubles.html#135488579">Patrick Massot (Oct 10 2018 at 05:28)</a>:</h4>
 <p>as in </p>
 <div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">{</span><span class="n">X</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">option</span> <span class="n">X</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">≠</span> <span class="n">none</span><span class="o">)</span> <span class="o">:</span> <span class="o">{</span><span class="n">y</span> <span class="bp">//</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">some</span> <span class="n">y</span><span class="o">}</span> <span class="o">:=</span>
 <span class="k">begin</span>
@@ -53,11 +53,11 @@ permalink: archive/113488general/48938optiontroubles.html
 </pre></div>
 
 <a name="135489285"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/option%20troubles/near/135489285" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48938optiontroubles.html#135489285">Mario Carneiro (Oct 09 2018 at 20:38)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/option%20troubles/near/135489285" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48938optiontroubles.html#135489285">Mario Carneiro (Oct 10 2018 at 05:38)</a>:</h4>
 <p>there is <code>is_none_iff_eq_none</code>, but nothing connecting <code>is_some</code> and <code>is_none</code>. I guess we need a few more variants</p>
 
 <a name="135489316"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/option%20troubles/near/135489316" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48938optiontroubles.html#135489316">Mario Carneiro (Oct 09 2018 at 20:38)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/option%20troubles/near/135489316" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48938optiontroubles.html#135489316">Mario Carneiro (Oct 10 2018 at 05:38)</a>:</h4>
 <p>but the basic story is <code>option.get</code> is supposed to do this</p>
 
 

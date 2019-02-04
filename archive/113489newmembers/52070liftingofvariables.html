@@ -12,7 +12,7 @@ permalink: archive/113489newmembers/52070liftingofvariables.html
 <base href="https://leanprover.zulipchat.com">
 {% raw %}
 <a name="130095457"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%25%25%20lifting%20of%20variables/near/130095457" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52070liftingofvariables.html#130095457">Ken Roe (Jul 22 2018 at 14:08)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%25%25%20lifting%20of%20variables/near/130095457" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52070liftingofvariables.html#130095457">Ken Roe (Jul 22 2018 at 22:08)</a>:</h4>
 <p>I've discovered that %% automatically lifts bound variables as shown in the following example:</p>
 <div class="codehilite"><pre><span></span><span class="n">meta</span> <span class="n">def</span> <span class="n">test_dummy</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
 <span class="n">do</span> <span class="o">{</span>
@@ -36,7 +36,7 @@ permalink: archive/113489newmembers/52070liftingofvariables.html
 <p>Notice that the @var tt 1 in the "trace" has become (var 2).  Is there a way to prevent this lifting of variables?</p>
 
 <a name="130101029"></a>
-<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%25%25%20lifting%20of%20variables/near/130101029" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52070liftingofvariables.html#130101029">Simon Hudon (Jul 22 2018 at 16:45)</a>:</h4>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%25%25%20lifting%20of%20variables/near/130101029" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52070liftingofvariables.html#130101029">Simon Hudon (Jul 23 2018 at 00:45)</a>:</h4>
 <p>I recommend you not to use <code>var</code> directly because much of the Lean API assumes that your expressions are closed (not <code>var</code> without their binders). What you can do is:</p>
 <div class="codehilite"><pre><span></span><span class="n">do</span> <span class="n">my_var</span> <span class="bp">&lt;-</span> <span class="n">mk_local_def</span> <span class="bp">`</span><span class="n">my_var</span> <span class="bp">`</span><span class="o">(</span><span class="n">nat</span><span class="o">),</span>
    <span class="n">e</span> <span class="bp">&lt;-</span> <span class="n">to_expr</span> <span class="bp">``</span><span class="o">((</span><span class="bp">λ</span> <span class="o">(</span><span class="n">v</span><span class="o">:</span><span class="bp">ℕ</span><span class="o">),</span><span class="n">v</span><span class="bp">=</span><span class="err">%%</span><span class="n">my_var</span><span class="o">)</span> <span class="mi">3</span><span class="o">),</span>
