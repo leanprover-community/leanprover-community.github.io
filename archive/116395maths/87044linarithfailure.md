@@ -430,5 +430,51 @@ whereas <code>with</code> gives names for new hypotheses.</p>
 #### [ Sebastien Gouezel (Feb 01 2019 at 17:01)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157363142):
 <p><code>set</code>-related question, although indirectly. I have an element of <code>fin n</code> given by a complicated formula, to which I would like to give a name for clarity. <code>let x := complicated_expression</code> works fine, but it would even be more useful for me to give a name to the fields of <code>x</code> directly, i.e., to write <code>let ⟨i, hi⟩ := complicated_expression</code>. This does not work. I can define <code>x</code>, and then <code>let i := x.1, let hi := x.2</code>, but then the fact that <code>⟨i, hi⟩ = complicated_expression</code> is not refl, it requires a proof based for instance on <code>fin.ext_iff</code>. All this looks like useless plumbing to me. Is there a nice syntax to do this that I am unaware of?</p>
 
+#### [ Kevin Buzzard (Feb 04 2019 at 11:45)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157514110):
+<p>Sebastien's question above deserves some expert comment but perhaps it's not in the right thread. </p>
+<p>Independent of all this, here's an interesting session:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">linarith</span>
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">[</span><span class="n">linear_ordered_ring</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">r</span> <span class="n">s</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span>
+<span class="bp">-</span><span class="n">s</span> <span class="bp">+</span> <span class="o">(</span><span class="n">r</span> <span class="bp">-</span> <span class="o">(</span><span class="n">r</span> <span class="bp">-</span> <span class="n">s</span><span class="o">))</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">ring</span> <span class="c1">-- fails, I think because α is not commutative</span>
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">[</span><span class="n">linear_ordered_ring</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">r</span> <span class="n">s</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span>
+<span class="bp">-</span><span class="n">s</span> <span class="bp">+</span> <span class="o">(</span><span class="n">r</span> <span class="bp">-</span> <span class="o">(</span><span class="n">r</span> <span class="bp">-</span> <span class="n">s</span><span class="o">))</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">simp</span> <span class="c1">-- works</span>
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">[</span><span class="n">linear_ordered_ring</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">r</span> <span class="n">s</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">s</span> <span class="bp">≥</span> <span class="mi">0</span><span class="o">)</span> <span class="o">:</span>
+<span class="n">r</span> <span class="bp">-</span> <span class="n">s</span> <span class="bp">≤</span> <span class="n">r</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">linarith</span> <span class="c1">-- fails because of unsolved goal -s + (r - (r - s)) = 0</span>
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">[</span><span class="n">linear_ordered_ring</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">r</span> <span class="n">s</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">s</span> <span class="bp">≥</span> <span class="mi">0</span><span class="o">)</span> <span class="o">:</span>
+<span class="n">r</span> <span class="bp">-</span> <span class="n">s</span> <span class="bp">≤</span> <span class="n">r</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">linarith</span> <span class="o">{</span><span class="n">discharger</span> <span class="o">:=</span> <span class="n">simp</span><span class="o">}</span> <span class="c1">-- &quot;unknown identifier &#39;simp&#39;&quot;</span>
+</pre></div>
+
+
+<p>I have been building the theory of decimal expansions so that I can formalise last year's M1F final exam in Lean, and I was surprised to find that <code>linear_ordered_ring</code>s were not commutative! Does anyone know an example of a linearly ordered ring which is not commutative? It is not even entirely impossible that they are all commutative, although I've not thought about this; it's probably more likely that there are pathological examples. Is every linearly ordered floor ring commutative though?? Hmm, I seem to have wandered off topic myself.</p>
+<p>Anyway, of course I could just take the lame way out and restrict to <code>linear_ordered_comm_rings</code>, which ultimately I will surely end up doing, but I tried to work my way around this using <code>simp</code> and realised that I could not get the <code>discharger</code> argument to <code>linarith</code> working. Unfortunately my knowledge of meta lean is still sufficiently poor that I basically grind to a halt here when trying to debug why <code>{discharger := simp}</code> fails. Did I do something wrong or is there a bug?</p>
+
+#### [ Mario Carneiro (Feb 04 2019 at 11:49)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157514312):
+<p>To sebastian's question: it is impossible to achieve exactly the defeqs that he would want. In general it is not possible to get <code>⟨i, hi⟩ = complicated_expression</code> to be defeq, unless <code>complicated_expression</code> has a particular form that allows reduction to a constructor</p>
+
+#### [ Mario Carneiro (Feb 04 2019 at 11:50)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157514413):
+<p>However <code>rcases complicated_expression with ⟨i, hi⟩</code> will often achieve the desired result, provided you don't need to refer back to any more properties of <code>complicated_expression</code> after this point. (If you do, you can make sure to state them before the cases)</p>
+
+#### [ Kevin Buzzard (Feb 04 2019 at 11:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157514439):
+<p>Would <code>cases complicated_expression with i hi</code> be any different?</p>
+
+#### [ Mario Carneiro (Feb 04 2019 at 11:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157514442):
+<p>no</p>
+
+#### [ Mario Carneiro (Feb 04 2019 at 11:51)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157514452):
+<p>rcases just looks a bit closer to the other syntax</p>
+
+#### [ Mario Carneiro (Feb 04 2019 at 11:53)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157514522):
+<p>does <code>abel</code> work on those goals?</p>
+
+#### [ Kevin Buzzard (Feb 04 2019 at 11:54)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157514577):
+<p>I'm going to move the <code>floor_ring</code> discussion elsewhere.</p>
+
+#### [ Kevin Buzzard (Feb 04 2019 at 11:54)](https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/linarith%20failure/near/157514609):
+<p><code>abel</code> -&gt; <code>r + gsmul (-1) s ≤ r</code></p>
+
 
 {% endraw %}

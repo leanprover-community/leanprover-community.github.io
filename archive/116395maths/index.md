@@ -10,11 +10,11 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [linarith failure](87044linarithfailure.html) (103 messages, latest: Feb 04 2019 at 11:54)
+
 * [card](81595card.html) (12 messages, latest: Feb 03 2019 at 20:44)
 
 * [digits](07525digits.html) (15 messages, latest: Feb 02 2019 at 15:31)
-
-* [linarith failure](87044linarithfailure.html) (94 messages, latest: Feb 01 2019 at 17:01)
 
 * [groups acting on sets](00627groupsactingonsets.html) (6 messages, latest: Jan 31 2019 at 17:20)
 
