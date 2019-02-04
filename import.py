@@ -89,9 +89,14 @@ def separate_results(list):
             map[m['subject']].append(m)
     return map
 
+# Retrieves only new messages from Zulip, based on timestamps from the last update.
+# Raises an exception if there is no index at json_root/stream_index.json
 def populate_incremental():
     streams = safe_request(client.get_streams, [])['streams']
-    f = open(json_root / Path('stream_index.json'), 'r', encoding='utf-8')
+    stream_index = json_root / Path('stream_index.json')
+    if not stream_index.exists():
+        raise Exception('stream index does not exist at {}\nCannot update incrementally without an index.'.format(stream_index))
+    f = stream_index.open('r', encoding='utf-8')
     stream_index = json.load(f, encoding='utf-8')
     f.close()
     for s in (s for s in streams if s['name'] not in stream_blacklist):
@@ -109,7 +114,7 @@ def populate_incremental():
             topic_exists = p.exists()
             old = []
             if topic_exists:
-                f = open(p, 'r', encoding='utf-8')
+                f = p.open('r', encoding='utf-8')
                 old = json.load(f)
                 f.close()
             m = nm[t]
@@ -125,6 +130,7 @@ def populate_incremental():
     json.dump(stream_index, out, ensure_ascii = False)
     out.close()
 
+# Retrieves all messages from Zulip and builds a cache at json_root.
 def populate_all():
     streams = safe_request(client.get_streams, [])['streams']
     ind = {}
@@ -155,19 +161,26 @@ def populate_all():
     json.dump(js, out, ensure_ascii = False)
     out.close()
 
+
+
+
 ## Display
 
+# Create a link to a post on Zulip
 def structure_link(stream_id, stream_name, topic_name, post_id):
     sanitized = urllib.parse.quote(
         '{0}-{1}/topic/{2}/near/{3}'.format(stream_id, stream_name, topic_name, post_id))
     return 'https://leanprover.zulipchat.com/#narrow/stream/' + sanitized
 
+# absolute url of a stream directory
 def format_stream_url(stream_id, stream_name):
     return site_url + str(html_root) + '/' + sanitize_stream(stream_name, stream_id)
 
+# formats a single post
 def format_message(name, date, msg, link):
     return u'#### [{4} {0} ({1})]({3}):\n{2}'.format(name, date, msg, link, '')
 
+# writes the body of a topic page (ie, a list of messages)
 def write_topic(messages, stream_name, stream_id, topic_name, outfile):
     for c in messages:
         name = c['sender_full_name']
@@ -177,6 +190,8 @@ def write_topic(messages, stream_name, stream_id, topic_name, outfile):
         outfile.write(format_message(name, date, msg, link))
         outfile.write('\n\n')
 
+# writes an index page for a given stream, printing a list of the topics in that stream.
+# `s_name`: the name of the stream. `s`: a json object as described in the header
 def write_topic_index(s_name, s):
     directory = md_root / Path(sanitize_stream(s_name, s['id']))
     outfile = open_outfile(directory, md_index, 'w+')
@@ -199,6 +214,8 @@ def write_topic_index(s_name, s):
     outfile.write('\n{% include archive_update.html %}')
     outfile.close()
 
+# writes the index page listing all streams.
+# `streams`: a dict mapping stream names to stream json objects as described in the header.
 def write_stream_index(streams):
     outfile = (md_root / md_index).open('w+', encoding='utf-8')
     outfile.write("---\nlayout: page\ntitle: Lean Prover Zulip Chat Archive\npermalink: {}/index.html\n---\n\n---\n\n## Streams:\n\n".format(html_root))
@@ -212,6 +229,7 @@ def write_stream_index(streams):
     outfile.write('\n{% include archive_update.html %}')
     outfile.close()
 
+# formats the header for a topic page.
 def format_topic_header(stream_name, stream_id, topic_name):
     return ("---\nlayout: page\ntitle: Lean Prover Zulip Chat Archive \npermalink: {4}/{2}/{3}.html\n---\n\n" +
             '## Stream: [{0}]({5}/index.html)\n### Topic: [{1}]({5}/{3}.html)\n\n---\n\n<base href="https://leanprover.zulipchat.com">').format(
@@ -222,6 +240,7 @@ def format_topic_header(stream_name, stream_id, topic_name):
                 html_root,
                 format_stream_url(stream_id, stream_name))
 
+# writes a topic page.
 def get_topic_and_write(stream_name, stream, topic):
     json_path = json_root / Path(sanitize_stream(stream_name, stream['id'])) / Path (sanitize_topic(topic) + '.json')
     f = json_path.open('r', encoding='utf-8')
@@ -234,11 +253,13 @@ def get_topic_and_write(stream_name, stream, topic):
     o.write('\n{% endraw %}\n')
     o.close()
 
+# updates the "last updated" footer message to time `t`.
 def write_last_updated(t):
     f = last_updated_path.open('w+')
     f.write('<p>Last updated: {} UTC</p>'.format(t))
     f.close()
 
+# writes all markdown files to md_root, based on the archive at json_root.
 def write_markdown():
     f = (json_root / Path('stream_index.json')).open('r', encoding='utf-8')
     stream_info = json.load(f, encoding='utf-8')
@@ -252,14 +273,12 @@ def write_markdown():
         for t in streams[s]['topic_data']:
             get_topic_and_write(s, streams[s], t)
 
-#populate_all()
-#populate_incremental()
-#write_markdown()
-
+# resets the current repository to match origin/master
 def github_pull():
     print(subprocess.check_output(['git','fetch','origin','master']))
     print(subprocess.check_output(['git','reset','--hard','origin/master']))
 
+# commits changes in archive/ and pushes the current repository to origin/master
 def github_push():
     print(subprocess.check_output(['git','add','archive/*']))
     print(subprocess.check_output(['git','add','_includes/archive_update.html']))
@@ -272,7 +291,6 @@ parser.add_argument('-t', action='store_true', default=False, help='Make a clean
 parser.add_argument('-i', action='store_true', default=False, help='Incrementally update the json archive')
 parser.add_argument('-f', action='store_true', default=False, help='Pull from GitHub before updating. (Warning: could overwrite this script.)')
 parser.add_argument('-p', action='store_true', default=False, help='Push results to GitHub.')
-
 
 results = parser.parse_args()
 
